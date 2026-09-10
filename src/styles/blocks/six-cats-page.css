@@ -1,0 +1,590 @@
+/**
+ * @fileoverview Six Cats Club page — BEM styles
+ *
+ * Neon-accented dark cards with grain overlay, matching the
+ * Neon vs Atomic Black design system. Uses existing design tokens.
+ *
+ * @version 1.0.0
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PAGE ROOT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page {
+  --sc-accent: var(--neon-green, #39FF14);
+  --sc-accent-alt: var(--neon-cyan, #00F0FF);
+  --sc-card-bg: rgba(255, 255, 255, 0.04);
+  --sc-card-border: rgba(255, 255, 255, 0.08);
+  --sc-memorial-accent: var(--neon-pink, #FF10F0);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   WEBSITE LINK
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page__website-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid var(--sc-accent);
+  border-radius: var(--radius-md, 8px);
+  color: var(--sc-accent);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.six-cats-page__website-link:hover,
+.six-cats-page__website-link:focus-visible {
+  background-color: var(--sc-accent);
+  color: var(--color-atomic-black, #0F0F0F);
+}
+
+.six-cats-page__link-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   VISION & MISSION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page__vision-mission {
+  max-width: var(--content-width, 72rem);
+  margin: 0 auto;
+  padding: var(--section-gap, 3rem) var(--gutter, 1.5rem);
+}
+
+.six-cats-page__vm-card {
+  background: var(--sc-card-bg);
+  border: 1px solid var(--sc-card-border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 2rem;
+}
+
+.six-cats-page__vm-heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--sc-accent);
+}
+
+.six-cats-page__vm-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .six-cats-page__vm-pair {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.six-cats-page__vm-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.six-cats-page__vm-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sc-accent-alt);
+}
+
+.six-cats-page__vm-text {
+  color: var(--text-secondary, rgba(255, 255, 255, 0.75));
+  line-height: 1.7;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION HEADINGS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page__section-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: var(--content-width, 72rem);
+  margin: 0 auto 2rem;
+  padding: 0 var(--gutter, 1.5rem);
+  color: var(--text-primary, #FFFFFF);
+}
+
+.six-cats-page__heading-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--sc-accent);
+  flex-shrink: 0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CATS GRID
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page__cats {
+  max-width: var(--content-width, 72rem);
+  margin: 0 auto;
+  padding: var(--section-gap, 3rem) var(--gutter, 1.5rem);
+}
+
+.six-cats-page__cats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .six-cats-page__cats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .six-cats-page__cats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.six-cats-page__cat-card {
+  background: var(--sc-card-bg);
+  border: 1px solid var(--sc-card-border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.2s ease;
+}
+
+.six-cats-page__cat-card:hover {
+  border-color: var(--sc-accent);
+}
+
+.six-cats-page__cat-card--memorial {
+  border-color: rgba(255, 16, 240, 0.2);
+}
+
+.six-cats-page__cat-card--memorial:hover {
+  border-color: var(--sc-memorial-accent);
+}
+
+.six-cats-page__cat-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.six-cats-page__cat-name {
+  color: var(--sc-accent);
+}
+
+.six-cats-page__cat-nickname {
+  color: var(--text-tertiary, rgba(255, 255, 255, 0.5));
+}
+
+.six-cats-page__cat-role {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full, 999px);
+  background: rgba(57, 255, 20, 0.1);
+  color: var(--sc-accent);
+  align-self: flex-start;
+}
+
+.six-cats-page__cat-card--memorial .six-cats-page__cat-role {
+  background: rgba(255, 16, 240, 0.1);
+  color: var(--sc-memorial-accent);
+}
+
+.six-cats-page__cat-card--memorial .six-cats-page__cat-name {
+  color: var(--sc-memorial-accent);
+}
+
+.six-cats-page__cat-date {
+  color: var(--text-tertiary, rgba(255, 255, 255, 0.5));
+}
+
+.six-cats-page__cat-bio {
+  color: var(--text-secondary, rgba(255, 255, 255, 0.75));
+  line-height: 1.65;
+}
+
+/* ── Memorial toggle ── */
+
+.six-cats-page__memorial {
+  margin-top: 2rem;
+}
+
+.six-cats-page__memorial-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid rgba(255, 16, 240, 0.3);
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  color: var(--sc-memorial-accent);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 1.25rem;
+}
+
+.six-cats-page__memorial-toggle:hover,
+.six-cats-page__memorial-toggle:focus-visible {
+  background-color: rgba(255, 16, 240, 0.08);
+}
+
+.six-cats-page__memorial-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.six-cats-page__chevron {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GRADES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page__grades {
+  max-width: var(--content-width, 72rem);
+  margin: 0 auto;
+  padding: var(--section-gap, 3rem) var(--gutter, 1.5rem);
+}
+
+.six-cats-page__grades-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.six-cats-page__grade-card {
+  background: var(--sc-card-bg);
+  border: 1px solid var(--sc-card-border);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.six-cats-page__grade-card--expanded {
+  border-color: var(--sc-accent);
+}
+
+.six-cats-page__grade-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.six-cats-page__grade-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-md, 8px);
+  background: rgba(57, 255, 20, 0.1);
+  color: var(--sc-accent);
+  flex-shrink: 0;
+}
+
+.six-cats-page__grade-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.six-cats-page__grade-name {
+  color: var(--text-primary, #FFFFFF);
+}
+
+.six-cats-page__grade-tagline {
+  color: var(--text-tertiary, rgba(255, 255, 255, 0.5));
+}
+
+.six-cats-page__grade-desc {
+  padding: 0 1.5rem 1.5rem;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.75));
+  line-height: 1.65;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CULTIVATION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page__cultivation {
+  max-width: var(--content-width, 72rem);
+  margin: 0 auto;
+  padding: var(--section-gap, 3rem) var(--gutter, 1.5rem);
+}
+
+.six-cats-page__cultivation-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .six-cats-page__cultivation-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.six-cats-page__cultivation-card {
+  background: var(--sc-card-bg);
+  border: 1px solid var(--sc-card-border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.2s ease;
+}
+
+.six-cats-page__cultivation-card:hover {
+  border-color: var(--sc-accent-alt);
+}
+
+.six-cats-page__cultivation-icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--sc-accent-alt);
+}
+
+.six-cats-page__cultivation-title {
+  color: var(--text-primary, #FFFFFF);
+}
+
+.six-cats-page__cultivation-desc {
+  color: var(--text-secondary, rgba(255, 255, 255, 0.75));
+  line-height: 1.65;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HARVEST TIMELINE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page__harvest {
+  max-width: var(--content-width, 72rem);
+  margin: 0 auto;
+  padding: var(--section-gap, 3rem) var(--gutter, 1.5rem);
+}
+
+.six-cats-page__harvest-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.six-cats-page__harvest-timeline::before {
+  content: '';
+  position: absolute;
+  left: 1.25rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--sc-accent), var(--sc-accent-alt));
+  opacity: 0.3;
+}
+
+.six-cats-page__harvest-phase {
+  display: flex;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.six-cats-page__harvest-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  position: absolute;
+  left: -3rem;
+  top: 0;
+  width: 2.5rem;
+}
+
+.six-cats-page__harvest-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--sc-accent);
+  color: var(--color-atomic-black, #0F0F0F);
+}
+
+.six-cats-page__harvest-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--sc-accent);
+  margin-top: 0.25rem;
+}
+
+.six-cats-page__harvest-body {
+  background: var(--sc-card-bg);
+  border: 1px solid var(--sc-card-border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 1.25rem 1.5rem;
+  flex: 1;
+}
+
+.six-cats-page__harvest-title {
+  color: var(--sc-accent);
+  margin-bottom: 0.5rem;
+}
+
+.six-cats-page__harvest-text {
+  color: var(--text-secondary, rgba(255, 255, 255, 0.75));
+  line-height: 1.65;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PACKAGING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page__packaging {
+  max-width: var(--content-width, 72rem);
+  margin: 0 auto;
+  padding: var(--section-gap, 3rem) var(--gutter, 1.5rem);
+}
+
+.six-cats-page__packaging-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .six-cats-page__packaging-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.six-cats-page__packaging-card {
+  background: var(--sc-card-bg);
+  border: 1px solid var(--sc-card-border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.six-cats-page__packaging-icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--sc-accent);
+}
+
+.six-cats-page__packaging-title {
+  color: var(--text-primary, #FFFFFF);
+}
+
+.six-cats-page__packaging-text {
+  color: var(--text-secondary, rgba(255, 255, 255, 0.75));
+  line-height: 1.65;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   VALUES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.six-cats-page__values {
+  max-width: var(--content-width, 72rem);
+  margin: 0 auto;
+  padding: var(--section-gap, 3rem) var(--gutter, 1.5rem)
+    calc(var(--section-gap, 3rem) + 2rem);
+}
+
+.six-cats-page__values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .six-cats-page__values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .six-cats-page__values-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.six-cats-page__value-card {
+  background: var(--sc-card-bg);
+  border: 1px solid var(--sc-card-border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.2s ease;
+}
+
+.six-cats-page__value-card:hover {
+  border-color: var(--sc-accent);
+}
+
+.six-cats-page__value-title {
+  color: var(--sc-accent);
+}
+
+.six-cats-page__value-desc {
+  color: var(--text-secondary, rgba(255, 255, 255, 0.75));
+  line-height: 1.6;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LIGHT MODE OVERRIDES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+[data-theme="light"] .six-cats-page {
+  --sc-accent: #1a8f00;
+  --sc-accent-alt: #007a8f;
+  --sc-card-bg: rgba(0, 0, 0, 0.03);
+  --sc-card-border: rgba(0, 0, 0, 0.08);
+  --sc-memorial-accent: #b0008f;
+}
+
+[data-theme="light"] .six-cats-page__harvest-number {
+  color: #FFFFFF;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   REDUCED MOTION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (prefers-reduced-motion: reduce) {
+  .six-cats-page__cat-card,
+  .six-cats-page__cultivation-card,
+  .six-cats-page__value-card,
+  .six-cats-page__grade-card,
+  .six-cats-page__website-link,
+  .six-cats-page__memorial-toggle {
+    transition: none;
+  }
+}

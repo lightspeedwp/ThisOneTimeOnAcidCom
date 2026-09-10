@@ -1,0 +1,240 @@
+/* ============================================
+   MARKDOWN BASE — Shared structural styles
+   All 7 markdown themes (blog, content, portfolio, video, podcast, event, faq)
+   inherit from this base via CSS custom properties.
+
+   Required custom properties (set per theme via [data-md-theme]):
+     --md-accent          Neon accent color
+     --md-accent-text     Accessible text variant (for light mode)
+     --md-font-serif      Heading font family
+     --md-font-sans       Body font family
+     --md-font-mono       Code font family
+
+   Optional overrides (defaults provided):
+     --md-heading-color        Heading text color (default: neutral-900)
+     --md-heading-color-dark   Heading dark-mode color (default: neutral-50)
+     --md-h1-size              (default: --font-size--900)
+     --md-h2-size              (default: --font-size--700)
+     --md-h3-size              (default: --font-size--500)
+     --md-h4-size              (default: --font-size--400)
+     --md-h5-size              (default: --font-size--300)
+     --md-h6-size              (default: --font-size--200)
+     --md-h2-border            (default: 2px solid var(--md-accent))
+     --md-h2-pb                (default: 0.5rem)
+     --md-p-size               (default: --font-size--300)
+     --md-p-mb                 (default: 1.5rem)
+     --md-p-color              (default: neutral-700)
+     --md-p-color-dark         (default: neutral-300)
+
+   Created: T05 — memory reduction v2
+   ============================================ */
+
+/* ── Default custom property values ── */
+[data-md-theme] {
+  --md-heading-color: var(--wp--preset--color--neutral-900);
+  --md-heading-color-dark: var(--wp--preset--color--neutral-50);
+  --md-h1-size: var(--wp--preset--font-size--900);
+  --md-h2-size: var(--wp--preset--font-size--700);
+  --md-h3-size: var(--wp--preset--font-size--500);
+  --md-h4-size: var(--wp--preset--font-size--400);
+  --md-h5-size: var(--wp--preset--font-size--300);
+  --md-h6-size: var(--wp--preset--font-size--200);
+  --md-h2-border: 2px solid var(--md-accent);
+  --md-h2-pb: 0.5rem;
+  --md-p-size: var(--wp--preset--font-size--300);
+  --md-p-mb: 1.5rem;
+  --md-p-color: var(--wp--preset--color--neutral-700);
+  --md-p-color-dark: var(--wp--preset--color--neutral-300);
+}
+
+/* ── Headings ── */
+.md__h1,
+.md__h2,
+.md__h3,
+.md__h4,
+.md__h5,
+.md__h6 {
+  font-family: var(--md-font-serif);
+  color: var(--md-heading-color);
+  margin-bottom: 1rem;
+}
+
+.dark .md__h1,
+.dark .md__h2,
+.dark .md__h3,
+.dark .md__h4,
+.dark .md__h5,
+.dark .md__h6 {
+  color: var(--md-heading-color-dark);
+}
+
+.md__h1 { font-size: var(--md-h1-size); }
+.md__h2 {
+  font-size: var(--md-h2-size);
+  border-bottom: var(--md-h2-border);
+  padding-bottom: var(--md-h2-pb);
+}
+.md__h3 { font-size: var(--md-h3-size); }
+.md__h4 { font-size: var(--md-h4-size); }
+.md__h5 { font-size: var(--md-h5-size); }
+.md__h6 { font-size: var(--md-h6-size); }
+
+/* ── Paragraph & inline text ── */
+.md__p {
+  font-family: var(--md-font-sans);
+  font-size: var(--md-p-size);
+  line-height: 1.7;
+  margin-bottom: var(--md-p-mb);
+  color: var(--md-p-color);
+}
+
+.dark .md__p {
+  color: var(--md-p-color-dark);
+}
+
+/* ── Links ── */
+.md__link {
+  color: var(--md-accent);
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.md__link:hover {
+  opacity: 0.8;
+}
+
+/* ── Lists ── */
+.md__ul,
+.md__ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.md__ul li,
+.md__ol li {
+  margin-bottom: 0.5rem;
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.dark .md__ul li,
+.dark .md__ol li {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+.md__ul li::marker {
+  color: var(--md-accent);
+}
+
+.md__ol li::marker {
+  color: var(--md-accent);
+  font-weight: 700;
+}
+
+/* ── Task list / checklist ── */
+.md__checklist {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.md__checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.md__checklist input[type="checkbox"] {
+  accent-color: var(--md-accent);
+}
+
+/* ── Inline code ── */
+.md__code {
+  font-family: var(--md-font-mono);
+  font-size: 0.9em;
+  background: var(--wp--preset--color--neutral-100);
+  color: var(--md-accent);
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--wp--preset--border-radius--sm);
+}
+
+.dark .md__code {
+  background: var(--wp--preset--color--neutral-900);
+}
+
+/* ── Code block (pre) ── */
+.md__pre {
+  background: var(--wp--preset--color--neutral-100);
+  border: 1px solid var(--md-accent);
+  border-radius: var(--wp--preset--border-radius--md);
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.dark .md__pre {
+  background: var(--wp--preset--color--neutral-900);
+}
+
+.md__code-block {
+  font-family: var(--md-font-mono);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--neutral-800);
+}
+
+.dark .md__code-block {
+  color: var(--wp--preset--color--neutral-200);
+}
+
+/* ── Blockquote ── */
+.md__blockquote {
+  border-left: 4px solid var(--md-accent);
+  padding-left: 1.5rem;
+  margin-left: 0;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .md__blockquote {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ── Table ── */
+.md__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--wp--preset--color--neutral-200);
+}
+
+.dark .md__table {
+  border-color: var(--wp--preset--color--neutral-800);
+}
+
+.md__table th {
+  background: var(--md-accent);
+  color: var(--wp--preset--color--atomic-black);
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.md__table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--wp--preset--color--neutral-200);
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.dark .md__table td {
+  border-bottom-color: var(--wp--preset--color--neutral-800);
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* ── Horizontal rule ── */
+.md__hr {
+  border: none;
+  border-top: 2px solid var(--md-accent);
+  margin: 2rem 0;
+  opacity: 0.3;
+}

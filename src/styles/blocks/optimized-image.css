@@ -1,0 +1,25 @@
+/* ============================================
+   OPTIMIZED IMAGE COMPONENT
+   Progressive loading states for runtime-optimised images
+   ============================================ */
+
+.optimized-image {
+  display: block;
+  max-width: 100%;
+  /* height: auto is NOT set here — context-specific classes
+     (e.g. .blog-card__image, .portfolio-card__image) set
+     their own height/object-fit and must not be overridden */
+  transition: filter 300ms ease, opacity 300ms ease;
+}
+
+/* Blurred placeholder while canvas is processing */
+.optimized-image--loading {
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+/* Fallback state — original image loaded without optimisation */
+.optimized-image--fallback {
+  filter: none;
+  opacity: 1;
+}

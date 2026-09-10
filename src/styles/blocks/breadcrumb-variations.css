@@ -1,0 +1,60 @@
+/* Breadcrumb Variations (Block Lab Context) */
+
+.breadcrumbs ol {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 8px;
+  font-family: var(--wp--preset--font-family--body);
+  font-size: 0.875rem;
+}
+
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  content: '›';
+  margin-left: 8px;
+  color: var(--color-text-muted);
+}
+
+.breadcrumbs a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+  color: var(--color-neon-pink);
+}
+
+.breadcrumbs [aria-current="page"] {
+  color: var(--color-text-primary);
+}
+
+/* Slash Separator */
+.breadcrumbs.is-style-slash ol {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.breadcrumbs.is-style-slash li:not(:last-child)::after {
+  content: '/';
+  color: var(--color-neon-green);
+  opacity: 0.5;
+}
+
+/* Neon Glow */
+.breadcrumbs.is-style-neon a {
+  color: var(--color-neon-blue);
+  text-shadow: 0 0 10px rgba(31, 81, 255, 0.4);
+}
+
+.breadcrumbs.is-style-neon [aria-current="page"] {
+  color: var(--color-neon-pink);
+  text-shadow: 0 0 10px rgba(255, 16, 240, 0.4);
+}

@@ -1,0 +1,387 @@
+/* ==========================================================================
+   EBOOK RESPONSIVE — Reduced motion, breakpoints, fullscreen, floating btn
+   Extracted from ebook.css (T09)
+   ========================================================================== */
+
+/* ══════════════════════════════════════
+   REDUCED MOTION
+   ══════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .ebook-reader__flip-layer--forward,
+  .ebook-reader__flip-layer--backward {
+    animation-duration: 0.01ms;
+  }
+
+  .ebook-reader__nav-btn {
+    transition: none;
+  }
+
+  .ebook-reader__single-track {
+    transition: none !important;
+  }
+
+  .ebook-drawer {
+    transition: none;
+  }
+
+  .ebook-drawer__backdrop {
+    animation: none;
+  }
+
+  .ebook-drawer__item {
+    transition: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS — Legibility-First Typography
+   Each tier tunes font size, line-height, and padding so that
+   body text sits in the 45-75 character sweet-spot at every width.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Mobile Compact (320px – 419px) ──
+   Smallest phones. Tight padding, compact but still readable.
+   Single-page swipe mode. ~45-55 chars/line. */
+@media (min-width: 320px) and (max-width: 419px) {
+  .ebook-reader {
+    --ebook-body-size: 1.125rem;       /* 18px (up from 16px) */
+    --ebook-body-lh: 1.75;
+    --ebook-heading-size: 1.25rem;
+    --ebook-chapter-title-size: 1.5rem;
+    --ebook-cover-title-size: 2rem;
+    --ebook-cover-subtitle-size: 0.95rem;
+    --ebook-cover-author-size: 1.05rem;
+    --ebook-toc-title-size: 1.25rem;
+    --ebook-toc-item-size: 1.05rem;
+    --ebook-section-title-size: 1.25rem;
+    --ebook-chapter-number-size: 0.8rem;
+    --ebook-chapter-start-title-size: 1.5rem;
+    --ebook-chapter-start-subtitle-size: 1rem;
+    --ebook-part-label-size: 0.8rem;
+    --ebook-part-title-size: 1.625rem;
+    --ebook-part-subtitle-size: 0.95rem;
+    --ebook-epigraph-size: 1.1rem;
+    --ebook-epigraph-attr-size: 0.9rem;
+    --ebook-page-number-size: 0.75rem;
+    --ebook-page-pad-v: 1rem;
+    --ebook-page-pad-h: 1rem;
+    --ebook-meta-size: 0.8rem;
+    --ebook-chapter-heading-size: 0.725rem;
+    --ebook-blurb-size: 1.05rem;
+    --ebook-status-size: 0.725rem;
+    --ebook-back-title-size: 1.3rem;
+    --ebook-dedication-size: 1.1rem;
+  }
+
+  .ebook-reader__page-inner {
+    padding: 1rem;
+  }
+}
+
+/* ── 2. Mobile (420px – 767px) ──
+   Standard smartphones. Room for generous body text.
+   Single-page swipe mode. ~50-60 chars/line. */
+@media (min-width: 420px) and (max-width: 767px) {
+  .ebook-reader {
+    --ebook-body-size: 1.0625rem;      /* 17px (reduced from 20px) */
+    --ebook-body-lh: 1.65;
+    --ebook-heading-size: 1.1875rem;
+    --ebook-chapter-title-size: 1.4375rem;
+    --ebook-cover-title-size: 1.875rem;
+    --ebook-cover-subtitle-size: 0.9375rem;
+    --ebook-cover-author-size: 1rem;
+    --ebook-toc-title-size: 1.1875rem;
+    --ebook-toc-item-size: 1rem;
+    --ebook-section-title-size: 1.1875rem;
+    --ebook-chapter-number-size: 0.8125rem;
+    --ebook-chapter-start-title-size: 1.5rem;
+    --ebook-chapter-start-subtitle-size: 0.9875rem;
+    --ebook-part-label-size: 0.7875rem;
+    --ebook-part-title-size: 1.75rem;
+    --ebook-part-subtitle-size: 0.9375rem;
+    --ebook-epigraph-size: 1.0625rem;
+    --ebook-epigraph-attr-size: 0.9rem;
+    --ebook-page-number-size: 0.75rem;
+    --ebook-page-pad-v: 1.125rem;
+    --ebook-page-pad-h: 1.125rem;
+    --ebook-meta-size: 0.7875rem;
+    --ebook-chapter-heading-size: 0.75rem;
+    --ebook-blurb-size: 1rem;
+    --ebook-status-size: 0.675rem;
+    --ebook-back-title-size: 1.3125rem;
+    --ebook-dedication-size: 1.0625rem;
+  }
+
+  .ebook-reader__page-inner {
+    padding: 1rem;
+  }
+}
+
+/* ── 3. Tablet Portrait (768px – 1023px) ──
+   iPads in portrait. Full-width single page is very wide, so
+   constrain line-length with max-width on content for comfort.
+   Single-page swipe mode. ~55-70 chars/line via max-width. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ebook-reader {
+    --ebook-body-size: 1.1875rem;      /* 19px (reduced from 22px) */
+    --ebook-body-lh: 1.7;
+    --ebook-heading-size: 1.3125rem;
+    --ebook-chapter-title-size: 1.75rem;
+    --ebook-cover-title-size: 2.25rem;
+    --ebook-cover-subtitle-size: 1rem;
+    --ebook-cover-author-size: 1.125rem;
+    --ebook-toc-title-size: 1.3125rem;
+    --ebook-toc-item-size: 1.125rem;
+    --ebook-section-title-size: 1.3125rem;
+    --ebook-chapter-number-size: 0.875rem;
+    --ebook-chapter-start-title-size: 1.875rem;
+    --ebook-chapter-start-subtitle-size: 1.0625rem;
+    --ebook-part-label-size: 0.875rem;
+    --ebook-part-title-size: 2.125rem;
+    --ebook-part-subtitle-size: 1rem;
+    --ebook-epigraph-size: 1.1875rem;
+    --ebook-epigraph-attr-size: 0.9375rem;
+    --ebook-page-number-size: 0.8rem;
+    --ebook-page-pad-v: 1.5rem;
+    --ebook-page-pad-h: 2rem;
+    --ebook-meta-size: 0.8125rem;
+    --ebook-chapter-heading-size: 0.7875rem;
+    --ebook-blurb-size: 1.125rem;
+    --ebook-status-size: 0.75rem;
+    --ebook-back-title-size: 1.5rem;
+    --ebook-dedication-size: 1.1875rem;
+  }
+
+  .ebook-reader__page-inner {
+    padding: 1.5rem 2rem;
+  }
+
+  /* Constrain line length for optimal reading on wide single-page */
+  .ebook-page--chapter-content .ebook-reader__page-inner,
+  .ebook-page--foreword .ebook-reader__page-inner,
+  .ebook-page--afterword .ebook-reader__page-inner,
+  .ebook-page--about-author .ebook-reader__page-inner {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ebook-page--epigraph .ebook-page__epigraph-line {
+    max-width: 32rem;
+  }
+}
+
+/* ── 4. Tablet Landscape / Small Desktop (1024px – 1279px) ──
+   Two-page spread mode begins. Pages are ~half viewport, so
+   text must be smaller. Book is narrower here. ~50-60 chars/line. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .ebook-reader {
+    --ebook-body-size: 1.125rem;       /* 18px (up from 16px) */
+    --ebook-body-lh: 1.8;
+    --ebook-heading-size: 1.25rem;
+    --ebook-chapter-title-size: 1.5rem;
+    --ebook-cover-title-size: 2.25rem;
+    --ebook-cover-subtitle-size: 0.95rem;
+    --ebook-cover-author-size: 1.05rem;
+    --ebook-toc-title-size: 1.25rem;
+    --ebook-toc-item-size: 1.05rem;
+    --ebook-section-title-size: 1.25rem;
+    --ebook-chapter-number-size: 0.8rem;
+    --ebook-chapter-start-title-size: 1.5rem;
+    --ebook-chapter-start-subtitle-size: 1rem;
+    --ebook-part-label-size: 0.8rem;
+    --ebook-part-title-size: 2rem;
+    --ebook-part-subtitle-size: 0.95rem;
+    --ebook-epigraph-size: 1.1rem;
+    --ebook-epigraph-attr-size: 0.9rem;
+    --ebook-page-number-size: 0.75rem;
+    --ebook-page-pad-v: 1.5rem;
+    --ebook-page-pad-h: 1.5rem;
+    --ebook-meta-size: 0.8rem;
+    --ebook-chapter-heading-size: 0.725rem;
+    --ebook-blurb-size: 1.1rem;
+    --ebook-status-size: 0.725rem;
+    --ebook-back-title-size: 1.4rem;
+    --ebook-dedication-size: 1.125rem;
+  }
+
+  .ebook-reader__page-inner {
+    padding: 1.5rem;
+  }
+}
+
+/* ── 5. Desktop (1280px – 1439px) ──
+   Wider spread with more breathing room per page.
+   ~55-65 chars/line in each half-page. */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .ebook-reader {
+    --ebook-body-size: 1.0625rem;      /* 17px (reduced from 19px) */
+    --ebook-body-lh: 1.7;
+    --ebook-heading-size: 1.1875rem;
+    --ebook-chapter-title-size: 1.5625rem;
+    --ebook-cover-title-size: 2.375rem;
+    --ebook-cover-subtitle-size: 0.9375rem;
+    --ebook-cover-author-size: 1.0625rem;
+    --ebook-toc-title-size: 1.25rem;
+    --ebook-toc-item-size: 1rem;
+    --ebook-section-title-size: 1.25rem;
+    --ebook-chapter-number-size: 0.8125rem;
+    --ebook-chapter-start-title-size: 1.6875rem;
+    --ebook-chapter-start-subtitle-size: 1rem;
+    --ebook-part-label-size: 0.8125rem;
+    --ebook-part-title-size: 2.125rem;
+    --ebook-part-subtitle-size: 0.9375rem;
+    --ebook-epigraph-size: 1.0625rem;
+    --ebook-epigraph-attr-size: 0.875rem;
+    --ebook-page-number-size: 0.75rem;
+    --ebook-page-pad-v: 1.75rem;
+    --ebook-page-pad-h: 1.75rem;
+    --ebook-meta-size: 0.8125rem;
+    --ebook-chapter-heading-size: 0.725rem;
+    --ebook-blurb-size: 1rem;
+    --ebook-status-size: 0.7rem;
+    --ebook-back-title-size: 1.4375rem;
+    --ebook-dedication-size: 1.0625rem;
+  }
+
+  .ebook-reader__page-inner {
+    padding: 1.75rem;
+  }
+}
+
+/* ── 6. Large Desktop (1440px+) ──
+   Max-width reached. Spread at full 1400px book width,
+   each page ~700px — generous for comfortable reading.
+   ~60-75 chars/line. Optimal legibility. */
+@media (min-width: 1440px) {
+  .ebook-reader {
+    --ebook-body-size: 1.125rem;       /* 18px (reduced from 22px) */
+    --ebook-body-lh: 1.75;
+    --ebook-heading-size: 1.25rem;
+    --ebook-chapter-title-size: 1.625rem;
+    --ebook-cover-title-size: 2.75rem;
+    --ebook-cover-subtitle-size: 1rem;
+    --ebook-cover-author-size: 1.125rem;
+    --ebook-toc-title-size: 1.375rem;
+    --ebook-toc-item-size: 1.0625rem;
+    --ebook-section-title-size: 1.25rem;
+    --ebook-chapter-number-size: 0.875rem;
+    --ebook-chapter-start-title-size: 1.75rem;
+    --ebook-chapter-start-subtitle-size: 1.0625rem;
+    --ebook-part-label-size: 0.875rem;
+    --ebook-part-title-size: 2.25rem;
+    --ebook-part-subtitle-size: 1rem;
+    --ebook-epigraph-size: 1.125rem;
+    --ebook-epigraph-attr-size: 0.9375rem;
+    --ebook-page-number-size: 0.8rem;
+    --ebook-page-pad-v: 2.25rem;
+    --ebook-page-pad-h: 2.5rem;
+    --ebook-meta-size: 0.8125rem;
+    --ebook-chapter-heading-size: 0.775rem;
+    --ebook-blurb-size: 1.0625rem;
+    --ebook-status-size: 0.75rem;
+    --ebook-back-title-size: 1.5625rem;
+    --ebook-dedication-size: 1.125rem;
+  }
+
+  .ebook-reader__page-inner {
+    padding: 2.25rem 2.5rem;
+  }
+}
+
+/* ── Fullscreen Close Button ── */
+.ebook-reader__fullscreen-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.ebook-reader__fullscreen-close:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+.ebook-reader__fullscreen-close:focus-visible {
+  outline: 2px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════
+   MINIMAL MODE — Floating Settings Button
+   ══════════════════════════════════════ */
+
+.ebook-reader__floating-settings {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  
+  background: var(--wp--preset--color--neon-pink);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 4px 16px rgba(255, 16, 240, 0.4),
+    0 0 0 0 rgba(255, 16, 240, 0.4);
+  
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  animation: floatingPulse 3s ease-in-out infinite;
+}
+
+.ebook-reader__floating-settings:hover {
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 
+    0 6px 24px rgba(255, 16, 240, 0.6),
+    0 0 0 8px rgba(255, 16, 240, 0.2);
+}
+
+.ebook-reader__floating-settings:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-yellow);
+  outline-offset: 4px;
+}
+
+.dark .ebook-reader__floating-settings {
+  background: var(--wp--preset--color--neon-pink);
+  box-shadow: 
+    0 4px 20px rgba(255, 16, 240, 0.6),
+    0 0 40px rgba(255, 16, 240, 0.3);
+}
+
+@keyframes floatingPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.05);
+  }
+}
+
+@media (max-width: 767px) {
+  .ebook-reader__floating-settings {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+  }
+}

@@ -1,0 +1,96 @@
+/* ============================================
+   CONTENT ANIMATION TOKENS
+   Entrance fade-up, fade-in, sticky nav, parallax, reduced motion
+   Phase 2 — Content Expansion & Redesign
+   ============================================ */
+
+/* --- Entrance: Fade Up --- */
+@keyframes contentFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.entrance-fade-up {
+  animation: contentFadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.entrance-fade-up--delay-1 { animation-delay: 0.1s; }
+.entrance-fade-up--delay-2 { animation-delay: 0.2s; }
+.entrance-fade-up--delay-3 { animation-delay: 0.3s; }
+.entrance-fade-up--delay-4 { animation-delay: 0.4s; }
+.entrance-fade-up--delay-5 { animation-delay: 0.5s; }
+.entrance-fade-up--delay-6 { animation-delay: 0.6s; }
+
+/* --- Entrance: Fade In --- */
+@keyframes contentFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.entrance-fade-in {
+  animation: contentFadeIn 0.5s ease both;
+}
+
+.entrance-fade-in--delay-1 { animation-delay: 0.15s; }
+.entrance-fade-in--delay-2 { animation-delay: 0.3s; }
+.entrance-fade-in--delay-3 { animation-delay: 0.45s; }
+
+/* --- Sticky Nav Appear --- */
+@keyframes stickyNavAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sticky-nav-appear {
+  animation: stickyNavAppear 0.3s ease both;
+}
+
+/* --- Parallax Section (CSS-only parallax hint) --- */
+.parallax-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-section__bg {
+  position: absolute;
+  inset: -10% 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: -1;
+}
+
+/* Disable fixed attachment on mobile (performance) */
+@media (max-width: 768px) {
+  .parallax-section__bg {
+    background-attachment: scroll;
+    inset: 0;
+  }
+}
+
+/* --- Reduced Motion: Disable all content animations --- */
+@media (prefers-reduced-motion: reduce) {
+  .entrance-fade-up,
+  .entrance-fade-in,
+  .sticky-nav-appear {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .parallax-section__bg {
+    background-attachment: scroll;
+  }
+}

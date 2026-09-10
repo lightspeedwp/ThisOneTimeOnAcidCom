@@ -1,0 +1,1041 @@
+/* Dark Theme Variables - WCAG 2.2 AA/AAA Compliant */
+
+.dark, [data-theme="dark"] {
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SURFACE COLORS - Atomic Black & Dark Panels
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  /* Primary backgrounds - Deep blacks and dark grays */
+  --color-atomic-black: #0F0F0F;
+  --color-dark-charcoal: #12121A;
+  --color-dark-panel: #171722;
+  
+  --color-surface-base: #0F0F0F;
+  --color-surface-elevated: #1A1A1A;
+  --color-surface-hover: #242424;
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     TEXT COLORS - High Contrast for Readability
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  /* Primary text: #F6F2EB = 14.8:1 contrast (AAA) */
+  --color-text-light: #F6F2EB;
+  --color-text-primary: #FFFFFF;
+  
+  /* Secondary text: #CFC7BB = 10.2:1 contrast (AAA) */
+  --color-text-muted: #CFC7BB;
+  --color-text-secondary: #AAAAAA;
+  
+  /* Tertiary text: #9C9488 = 6.5:1 contrast (AA large, near AAA) */
+  --color-text-fine: #9C9488;
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NEON ACCENT COLORS - Full Brightness for Dark Mode
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  /* Neon Pink: Full brightness #FF3AAE */
+  --color-neon-pink: #FF3AAE;
+  
+  /* Neon Yellow: Full brightness #F4FF3C */
+  --color-neon-yellow: #F4FF3C;
+  
+  /* UV Violet: Full brightness #8A63FF */
+  --color-uv-violet: #8A63FF;
+  
+  /* Neon Green: Electric green #00FF85 */
+  --color-neon-green: #00FF85;
+  
+  /* Neon Cyan: Bright cyan #00D4FF */
+  --color-neon-cyan: #00D4FF;
+  
+  /* Neon Orange: Blazing orange #FF7A00 */
+  --color-neon-orange: #FF7A00;
+  
+  /* Hot Red: Pure red #FF0055 */
+  --color-hot-red: #FF0055;
+  
+  /* Royal Blue: Bright blue #4A90FF */
+  --color-royal-blue: #4A90FF;
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NEUTRAL PALETTE - Dark Mode Grays
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  --wp--preset--color--neutral-50: #1A1A1A;
+  --wp--preset--color--neutral-100: #242424;
+  --wp--preset--color--neutral-200: #2E2E2E;
+  --wp--preset--color--neutral-300: #383838;
+  --wp--preset--color--neutral-400: #525252;
+  --wp--preset--color--neutral-500: #737373;
+  --wp--preset--color--neutral-600: #A3A3A3;
+  --wp--preset--color--neutral-700: #D4D4D4;
+  --wp--preset--color--neutral-800: #E5E5E5;
+  --wp--preset--color--neutral-900: #F5F5F5;
+  
+  /* White and Black constants */
+  --wp--preset--color--white: #FFFFFF; /* Pure white for text in dark mode */
+  --wp--preset--color--black: #000000; /* Pure black */
+  --wp--preset--color--atomic-black: #0F0F0F;
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     BORDERS & DIVIDERS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  --color-border: #333333;
+  --color-divider: #222222;
+  --border: 1px solid #333333;
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SHADOWS - Deep shadows with neon glows
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.7);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.8);
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     EBOOK READER - Enhanced Contrast for Dark Mode
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  /* Page background: Lightened black for better contrast */
+  --ebook-page-bg: #1A1A1A;
+  
+  /* Body text: #F0F0F0 (9.5:1 on #1A1A1A = AAA) */
+  --ebook-text-primary: #F0F0F0;
+  
+  /* Headings: Pure white for maximum contrast */
+  --ebook-text-heading: #FFFFFF;
+  
+  /* Secondary text: #E0E0E0 (8.7:1 = AAA) */
+  --ebook-text-secondary: #E0E0E0;
+  
+  /* Muted text: #C0C0C0 (5.7:1 = AA) */
+  --ebook-text-muted: #C0C0C0;
+  
+  /* Page numbers: Subtle but visible */
+  --ebook-page-number-color: #A0A0A0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BODY BACKGROUND & GLOBAL STYLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark body,
+body.dark {
+  background-color: var(--color-atomic-black);
+  color: var(--color-text-light);
+}
+
+/* Full grain noise opacity in dark mode */
+.dark body::before,
+body.dark::before {
+  opacity: 0.03;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HEADER - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .header,
+body.dark .header {
+  background-color: rgba(15, 15, 15, 0.95);
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+}
+
+.dark .header__logo,
+body.dark .header__logo {
+  color: var(--color-text-light);
+}
+
+.dark .header__nav-link,
+body.dark .header__nav-link {
+  color: var(--color-text-light);
+}
+
+.dark .header__nav-link:hover,
+body.dark .header__nav-link:hover {
+  color: var(--color-neon-pink);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .footer,
+body.dark .footer {
+  background-color: var(--color-atomic-black);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.dark .footer__link,
+body.dark .footer__link {
+  color: var(--color-text-light);
+}
+
+.dark .footer__link:hover,
+body.dark .footer__link:hover {
+  color: var(--color-neon-yellow);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BUTTONS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .button,
+body.dark .button {
+  background-color: #1A1A1A;
+  color: #F6F2EB;
+  border: 1px solid #333333;
+}
+
+.dark .button:hover,
+body.dark .button:hover {
+  background-color: #242424;
+  border-color: #FF3AAE;
+}
+
+.dark .button--primary,
+body.dark .button--primary {
+  background: linear-gradient(135deg, #FF3AAE 0%, #8A63FF 100%);
+  color: #FFFFFF;
+  border: none;
+}
+
+.dark .button--primary:hover,
+body.dark .button--primary:hover {
+  background: linear-gradient(135deg, #FF4ABF 0%, #9B74FF 100%);
+  box-shadow: 0 8px 25px rgba(255, 58, 174, 0.4);
+}
+
+.dark .button--secondary,
+body.dark .button--secondary {
+  background: transparent;
+  color: #F6F2EB;
+  border: 1px solid #333333;
+}
+
+.dark .button--secondary:hover,
+body.dark .button--secondary:hover {
+  background: #242424;
+  border-color: #FF3AAE;
+  color: #FF3AAE;
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.2);
+}
+
+.dark .button--ghost,
+body.dark .button--ghost {
+  background: transparent;
+  color: #FF3AAE;
+  border: none;
+}
+
+.dark .button--ghost:hover,
+body.dark .button--ghost:hover {
+  background: rgba(255, 58, 174, 0.1);
+  color: #FF4ABF;
+}
+
+.dark .button--outline,
+body.dark .button--outline {
+  background: transparent;
+  color: #F6F2EB;
+  border: 2px solid #FF3AAE;
+}
+
+.dark .button--outline:hover,
+body.dark .button--outline:hover {
+  background: #FF3AAE;
+  color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(255, 58, 174, 0.4);
+}
+
+.dark .button:disabled,
+.dark .button--primary:disabled,
+.dark .button--secondary:disabled,
+.dark .button--ghost:disabled,
+.dark .button--outline:disabled,
+body.dark .button:disabled,
+body.dark .button--primary:disabled,
+body.dark .button--secondary:disabled,
+body.dark .button--ghost:disabled,
+body.dark .button--outline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CARDS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .card,
+body.dark .card {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark .card:hover,
+body.dark .card:hover {
+  border-color: #FF3AAE;
+  box-shadow: 0 0 20px rgba(255, 58, 174, 0.3);
+}
+
+.dark .card__title,
+body.dark .card__title {
+  color: #FFFFFF;
+}
+
+.dark .card__description,
+body.dark .card__description {
+  color: #CFC7BB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FORMS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark input,
+.dark textarea,
+.dark select,
+body.dark input,
+body.dark textarea,
+body.dark select {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus,
+body.dark input:focus,
+body.dark textarea:focus,
+body.dark select:focus {
+  border-color: #FF3AAE;
+  box-shadow: 0 0 0 2px rgba(255, 58, 174, 0.2);
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder,
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+  color: #9C9488;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LINKS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark a,
+body.dark a {
+  color: #FF3AAE;
+}
+
+.dark a:hover,
+body.dark a:hover {
+  color: #F4FF3C;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CODE BLOCKS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark pre,
+.dark code,
+body.dark pre,
+body.dark code {
+  background-color: #12121A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TABLES - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark table,
+body.dark table {
+  border-color: #333333;
+}
+
+.dark th,
+body.dark th {
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  border-color: #333333;
+}
+
+.dark td,
+body.dark td {
+  border-color: #333333;
+  color: #F6F2EB;
+}
+
+.dark tr:hover,
+body.dark tr:hover {
+  background-color: #242424;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCROLLBAR - Dark Mode Styling (Webkit)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark ::-webkit-scrollbar,
+body.dark ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.dark ::-webkit-scrollbar-track,
+body.dark ::-webkit-scrollbar-track {
+  background: #1A1A1A;
+}
+
+.dark ::-webkit-scrollbar-thumb,
+body.dark ::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 6px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover,
+body.dark ::-webkit-scrollbar-thumb:hover {
+  background: #FF3AAE;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SELECTION - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark ::selection,
+body.dark ::selection {
+  background-color: #FF3AAE;
+  color: #FFFFFF;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MODALS & OVERLAYS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .modal,
+.dark .overlay,
+body.dark .modal,
+body.dark .overlay {
+  background-color: rgba(15, 15, 15, 0.95);
+  border: 1px solid #333333;
+}
+
+.dark .modal__backdrop,
+body.dark .modal__backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BADGES & TAGS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .badge,
+.dark .tag,
+body.dark .badge,
+body.dark .tag {
+  background-color: #242424;
+  color: #F6F2EB;
+  border: 1px solid #333333;
+}
+
+.dark .badge--primary,
+.dark .tag--primary,
+body.dark .badge--primary,
+body.dark .tag--primary {
+  background-color: #FF3AAE;
+  color: #FFFFFF;
+  border-color: #FF3AAE;
+}
+
+.dark .badge--secondary,
+.dark .tag--secondary,
+body.dark .badge--secondary,
+body.dark .tag--secondary {
+  background-color: #8A63FF;
+  color: #FFFFFF;
+  border-color: #8A63FF;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ALERTS & NOTIFICATIONS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .alert,
+body.dark .alert {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark .alert--success,
+body.dark .alert--success {
+  background-color: #0A2A1A;
+  border-color: #00FF85;
+  color: #00FF85;
+}
+
+.dark .alert--warning,
+body.dark .alert--warning {
+  background-color: #2A2410;
+  border-color: #F4FF3C;
+  color: #F4FF3C;
+}
+
+.dark .alert--error,
+body.dark .alert--error {
+  background-color: #2A0A0A;
+  border-color: #FF0055;
+  color: #FF0055;
+}
+
+.dark .alert--info,
+body.dark .alert--info {
+  background-color: #0A1A2A;
+  border-color: #4A90FF;
+  color: #4A90FF;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BLOCKQUOTES - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark blockquote,
+body.dark blockquote {
+  border-left: 4px solid #FF3AAE;
+  background-color: #1A1A1A;
+  color: #CFC7BB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HEADINGS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6 {
+  color: #FFFFFF;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LISTS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark ul,
+.dark ol,
+body.dark ul,
+body.dark ol {
+  color: #F6F2EB;
+}
+
+.dark ul li::marker,
+body.dark ul li::marker {
+  color: #FF3AAE;
+}
+
+.dark ol li::marker,
+body.dark ol li::marker {
+  color: #F4FF3C;
+}
+
+.dark dl,
+body.dark dl {
+  color: #F6F2EB;
+}
+
+.dark dt,
+body.dark dt {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.dark dd,
+body.dark dd {
+  color: #CFC7BB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EMPHASIS & STRONG - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark strong,
+.dark b,
+body.dark strong,
+body.dark b {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.dark em,
+.dark i,
+body.dark em,
+body.dark i {
+  color: #F4FF3C;
+}
+
+.dark mark,
+body.dark mark {
+  background-color: rgba(244, 255, 60, 0.3);
+  color: #F4FF3C;
+  padding: 0.1em 0.3em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HORIZONTAL RULES - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark hr,
+body.dark hr {
+  border-color: #333333;
+  border-style: solid;
+  opacity: 1;
+}
+
+.dark hr.neon-divider,
+body.dark hr.neon-divider {
+  border-image: linear-gradient(90deg, #FF3AAE 0%, #8A63FF 50%, #00D4FF 100%) 1;
+  box-shadow: 0 0 8px rgba(255, 58, 174, 0.3);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BREADCRUMBS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .breadcrumbs,
+body.dark .breadcrumbs {
+  color: #CFC7BB;
+}
+
+.dark .breadcrumbs__link,
+body.dark .breadcrumbs__link {
+  color: #F6F2EB;
+}
+
+.dark .breadcrumbs__link:hover,
+body.dark .breadcrumbs__link:hover {
+  color: #FF3AAE;
+}
+
+.dark .breadcrumbs__separator,
+body.dark .breadcrumbs__separator {
+  color: #9C9488;
+}
+
+.dark .breadcrumbs__current,
+body.dark .breadcrumbs__current {
+  color: #FF3AAE;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PAGINATION - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .pagination,
+body.dark .pagination {
+  color: #F6F2EB;
+}
+
+.dark .pagination__link,
+body.dark .pagination__link {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark .pagination__link:hover,
+body.dark .pagination__link:hover {
+  background-color: #242424;
+  border-color: #FF3AAE;
+  color: #FF3AAE;
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.3);
+}
+
+.dark .pagination__link--active,
+body.dark .pagination__link--active {
+  background: linear-gradient(135deg, #FF3AAE 0%, #8A63FF 100%);
+  border-color: #FF3AAE;
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(255, 58, 174, 0.5);
+}
+
+.dark .pagination__link--disabled,
+body.dark .pagination__link--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TABS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .tabs,
+body.dark .tabs {
+  border-bottom: 1px solid #333333;
+}
+
+.dark .tabs__list,
+body.dark .tabs__list {
+  background-color: transparent;
+}
+
+.dark .tabs__button,
+body.dark .tabs__button {
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #CFC7BB;
+}
+
+.dark .tabs__button:hover,
+body.dark .tabs__button:hover {
+  color: #F6F2EB;
+  border-bottom-color: rgba(255, 58, 174, 0.3);
+}
+
+.dark .tabs__button--active,
+body.dark .tabs__button--active {
+  color: #FF3AAE;
+  border-bottom-color: #FF3AAE;
+  box-shadow: 0 2px 8px rgba(255, 58, 174, 0.3);
+}
+
+.dark .tabs__panel,
+body.dark .tabs__panel {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ACCORDION - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .accordion,
+body.dark .accordion {
+  border: 1px solid #333333;
+}
+
+.dark .accordion__item,
+body.dark .accordion__item {
+  border-bottom: 1px solid #333333;
+}
+
+.dark .accordion__header,
+body.dark .accordion__header {
+  background-color: #1A1A1A;
+  color: #F6F2EB;
+  border: none;
+}
+
+.dark .accordion__header:hover,
+body.dark .accordion__header:hover {
+  background-color: #242424;
+  color: #FF3AAE;
+}
+
+.dark .accordion__header--active,
+body.dark .accordion__header--active {
+  background-color: #242424;
+  color: #FF3AAE;
+  border-left: 3px solid #FF3AAE;
+}
+
+.dark .accordion__icon,
+body.dark .accordion__icon {
+  color: #CFC7BB;
+}
+
+.dark .accordion__header--active .accordion__icon,
+body.dark .accordion__header--active .accordion__icon {
+  color: #FF3AAE;
+}
+
+.dark .accordion__content,
+body.dark .accordion__content {
+  background-color: #0F0F0F;
+  color: #CFC7BB;
+  border-top: 1px solid #333333;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOOLTIPS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .tooltip,
+body.dark .tooltip {
+  background-color: #0F0F0F;
+  border: 1px solid #FF3AAE;
+  color: #F6F2EB;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 0 8px rgba(255, 58, 174, 0.3);
+}
+
+.dark .tooltip::before,
+body.dark .tooltip::before {
+  border-color: #FF3AAE transparent transparent transparent;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DROPDOWN MENUS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .dropdown,
+body.dark .dropdown {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.dark .dropdown__item,
+body.dark .dropdown__item {
+  color: #F6F2EB;
+  border-bottom: 1px solid #222222;
+}
+
+.dark .dropdown__item:hover,
+body.dark .dropdown__item:hover {
+  background-color: #242424;
+  color: #FF3AAE;
+}
+
+.dark .dropdown__item--active,
+body.dark .dropdown__item--active {
+  background-color: rgba(255, 58, 174, 0.1);
+  color: #FF3AAE;
+  border-left: 3px solid #FF3AAE;
+}
+
+.dark .dropdown__divider,
+body.dark .dropdown__divider {
+  border-color: #333333;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PROGRESS BARS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .progress,
+body.dark .progress {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+}
+
+.dark .progress__bar,
+body.dark .progress__bar {
+  background: linear-gradient(90deg, #FF3AAE 0%, #8A63FF 50%, #00D4FF 100%);
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.5);
+}
+
+.dark .progress__bar--success,
+body.dark .progress__bar--success {
+  background: linear-gradient(90deg, #00FF85 0%, #00D4FF 100%);
+  box-shadow: 0 0 12px rgba(0, 255, 133, 0.5);
+}
+
+.dark .progress__bar--warning,
+body.dark .progress__bar--warning {
+  background: linear-gradient(90deg, #F4FF3C 0%, #FF7A00 100%);
+  box-shadow: 0 0 12px rgba(244, 255, 60, 0.5);
+}
+
+.dark .progress__bar--error,
+body.dark .progress__bar--error {
+  background: linear-gradient(90deg, #FF0055 0%, #FF3AAE 100%);
+  box-shadow: 0 0 12px rgba(255, 0, 85, 0.5);
+}
+
+.dark .progress__label,
+body.dark .progress__label {
+  color: #F6F2EB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LOADING SPINNERS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .spinner,
+body.dark .spinner {
+  border-color: #333333;
+  border-top-color: #FF3AAE;
+}
+
+.dark .spinner--neon,
+body.dark .spinner--neon {
+  border-color: rgba(255, 58, 174, 0.2);
+  border-top-color: #FF3AAE;
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.5);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SKELETON LOADERS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .skeleton,
+body.dark .skeleton {
+  background: linear-gradient(90deg, #1A1A1A 0%, #242424 50%, #1A1A1A 100%);
+  background-size: 200% 100%;
+}
+
+.dark .skeleton--neon,
+body.dark .skeleton--neon {
+  background: linear-gradient(90deg, #1A1A1A 0%, rgba(255, 58, 174, 0.1) 50%, #1A1A1A 100%);
+  background-size: 200% 100%;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SEARCH - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .search,
+body.dark .search {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+}
+
+.dark .search__input,
+body.dark .search__input {
+  background-color: transparent;
+  border: none;
+  color: #F6F2EB;
+}
+
+.dark .search__input::placeholder,
+body.dark .search__input::placeholder {
+  color: #9C9488;
+}
+
+.dark .search__input:focus,
+body.dark .search__input:focus {
+  outline: none;
+}
+
+.dark .search:focus-within,
+body.dark .search:focus-within {
+  border-color: #FF3AAE;
+  box-shadow: 0 0 0 2px rgba(255, 58, 174, 0.2);
+}
+
+.dark .search__button,
+body.dark .search__button {
+  background-color: transparent;
+  color: #CFC7BB;
+  border: none;
+}
+
+.dark .search__button:hover,
+body.dark .search__button:hover {
+  color: #FF3AAE;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FILTERS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .filter,
+body.dark .filter {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark .filter:hover,
+body.dark .filter:hover {
+  background-color: #242424;
+  border-color: #FF3AAE;
+}
+
+.dark .filter--active,
+body.dark .filter--active {
+  background: linear-gradient(135deg, #FF3AAE 0%, #8A63FF 100%);
+  border-color: #FF3AAE;
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.4);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CHIPS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .chip,
+body.dark .chip {
+  background-color: #242424;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark .chip__close,
+body.dark .chip__close {
+  color: #CFC7BB;
+}
+
+.dark .chip__close:hover,
+body.dark .chip__close:hover {
+  color: #FF3AAE;
+  background-color: rgba(255, 58, 174, 0.1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SWITCHES & TOGGLES - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .switch,
+body.dark .switch {
+  background-color: #333333;
+}
+
+.dark .switch--checked,
+body.dark .switch--checked {
+  background: linear-gradient(135deg, #FF3AAE 0%, #8A63FF 100%);
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.4);
+}
+
+.dark .switch__thumb,
+body.dark .switch__thumb {
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CHECKBOXES & RADIOS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark input[type="checkbox"],
+.dark input[type="radio"],
+body.dark input[type="checkbox"],
+body.dark input[type="radio"] {
+  border: 2px solid #333333;
+  background-color: #1A1A1A;
+}
+
+.dark input[type="checkbox"]:checked,
+.dark input[type="radio"]:checked,
+body.dark input[type="checkbox"]:checked,
+body.dark input[type="radio"]:checked {
+  background-color: #FF3AAE;
+  border-color: #FF3AAE;
+  box-shadow: 0 0 8px rgba(255, 58, 174, 0.5);
+}
+
+.dark input[type="checkbox"]:focus,
+.dark input[type="radio"]:focus,
+body.dark input[type="checkbox"]:focus,
+body.dark input[type="radio"]:focus {
+  border-color: #FF3AAE;
+  box-shadow: 0 0 0 2px rgba(255, 58, 174, 0.2);
+}

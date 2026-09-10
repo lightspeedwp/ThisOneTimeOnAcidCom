@@ -1,0 +1,175 @@
+/* ============================================
+   PORTFOLIO FEEDBACK — Testimonial cards
+   Extracted from portfolio-detail-page.css (T12)
+   ============================================ */
+
+/* ── Portfolio Feedback Section ── */
+.portfolio-feedback-section {
+  padding: var(--wp--preset--spacing--fluid-lg) var(--wp--preset--spacing--section-horizontal);
+  background: linear-gradient(135deg,
+    rgba(255, 16, 240, 0.02) 0%,
+    rgba(190, 0, 254, 0.02) 50%,
+    transparent 100%
+  );
+}
+
+.dark .portfolio-feedback-section {
+  background: linear-gradient(135deg,
+    rgba(255, 16, 240, 0.05) 0%,
+    rgba(190, 0, 254, 0.04) 50%,
+    transparent 100%
+  );
+}
+
+/* V-03 fix: container inside feedback section needs zero padding
+   (was previously overridden with Tailwind p-[0px] in JSX) */
+.portfolio-feedback__container {
+  padding: 0;
+}
+
+/* V-06 fix: centred heading in feedback section — alignment lives in CSS, not in a utility class */
+.portfolio-feedback__heading {
+  text-align: center;
+}
+
+.portfolio-feedback__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+@media (min-width: 768px) {
+  .portfolio-feedback__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.portfolio-feedback__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-xs);
+  padding: var(--wp--preset--spacing--fluid-md);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  box-shadow: var(--wp--preset--shadow--card);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.portfolio-feedback__card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--wp--preset--shadow--card-hover);
+}
+
+.dark .portfolio-feedback__card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--wp--preset--color--neutral-800);
+}
+
+.dark .portfolio-feedback__card:hover {
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 15px rgba(255, 16, 240, 0.1);
+}
+
+.portfolio-feedback__card--featured {
+  border-color: rgba(255, 16, 240, 0.2);
+}
+
+.dark .portfolio-feedback__card--featured {
+  border-color: rgba(255, 16, 240, 0.35);
+  box-shadow: 0 0 10px rgba(255, 16, 240, 0.06);
+}
+
+.portfolio-feedback__quote-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--wp--preset--color--neutral-300);
+}
+
+.dark .portfolio-feedback__quote-icon {
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.portfolio-feedback__card--featured .portfolio-feedback__quote-icon {
+  color: var(--wp--preset--color--neon-pink-text);
+}
+
+.dark .portfolio-feedback__card--featured .portfolio-feedback__quote-icon {
+  color: var(--wp--preset--color--neon-pink);
+  filter: drop-shadow(0 0 4px rgba(255, 16, 240, 0.4));
+}
+
+.portfolio-feedback__quote {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--200);
+  line-height: 1.7;
+  color: var(--wp--preset--color--neutral-700);
+  flex: 1;
+}
+
+.dark .portfolio-feedback__quote {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+.portfolio-feedback__rating {
+  display: flex;
+  gap: 2px;
+}
+
+.portfolio-feedback__star {
+  width: 14px;
+  height: 14px;
+  color: var(--wp--preset--color--neutral-300);
+}
+
+.portfolio-feedback__star--filled {
+  color: var(--wp--preset--color--neon-yellow, #FFE500);
+  fill: var(--wp--preset--color--neon-yellow, #FFE500);
+}
+
+.dark .portfolio-feedback__star {
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.dark .portfolio-feedback__star--filled {
+  color: var(--wp--preset--color--neon-yellow, #FFE500);
+  fill: var(--wp--preset--color--neon-yellow, #FFE500);
+  filter: drop-shadow(0 0 3px rgba(255, 229, 0, 0.35));
+}
+
+.portfolio-feedback__author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: var(--wp--preset--spacing--fluid-xs);
+  border-top: 1px solid var(--border);
+}
+
+.portfolio-feedback__name {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--foreground);
+}
+
+.portfolio-feedback__meta {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .portfolio-feedback__meta {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.portfolio-feedback__view-all {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--wp--preset--spacing--fluid-md);
+}
+
+.portfolio-feedback__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-md);
+  margin-top: var(--wp--preset--spacing--fluid-lg);
+}

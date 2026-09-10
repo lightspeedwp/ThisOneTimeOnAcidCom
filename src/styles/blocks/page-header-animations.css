@@ -1,0 +1,115 @@
+/* ============================================
+   PAGE HEADER ANIMATIONS
+   Terminal Boot Sequence for non-HeroLayout pages
+   Version: 1.0.0 - Phase 1
+   Created: March 12, 2026
+   ============================================
+
+   This file provides animation utilities for pages that
+   use custom headers instead of HeroLayout component.
+   
+   Usage:
+   - Add .page-header--animated to header section
+   - Add .page-header__title--fade-in to h1
+   - Add .page-header__subtitle--fade-in to subtitle
+   - Add .btn--neon-pulse to CTA buttons
+   
+   ============================================ */
+
+/**
+ * Page Header Container - Terminal Boot Effect
+ * Apply to the main header section element
+ */
+.page-header--animated {
+  animation: terminalBoot 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/**
+ * Page Header Title - Fade In Up
+ * Apply to h1 element
+ */
+.page-header__title--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+  opacity: 0;
+}
+
+/**
+ * Page Header Subtitle - Fade In Up
+ * Apply to subtitle/description element
+ */
+.page-header__subtitle--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+  opacity: 0;
+}
+
+/**
+ * Page Header Description - Fade In Up
+ * Apply to longer description paragraphs
+ */
+.page-header__description--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+  opacity: 0;
+}
+
+/**
+ * Filter Buttons - Fade In Up
+ * Apply to filter/category button containers
+ */
+.page-filters--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+  opacity: 0;
+}
+
+/**
+ * Content Grid - Fade In Up
+ * Apply to main content grid container
+ */
+.page-content--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+  opacity: 0;
+}
+
+/**
+ * Holographic Title (Rainbow Shimmer)
+ * Apply to h1 for animated rainbow gradient effect
+ */
+.page-header__title--holographic {
+  background: linear-gradient(
+    90deg,
+    var(--wp--preset--color--neon-pink) 0%,
+    var(--wp--preset--color--neon-purple) 25%,
+    var(--wp--preset--color--neon-cyan) 50%,
+    var(--wp--preset--color--neon-yellow) 75%,
+    var(--wp--preset--color--neon-pink) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holographicShimmer 4s ease-in-out infinite;
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   WCAG 2.1 Level AAA Compliance
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-header--animated,
+  .page-header__title--fade-in,
+  .page-header__subtitle--fade-in,
+  .page-header__description--fade-in,
+  .page-filters--fade-in,
+  .page-content--fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .page-header__title--holographic {
+    /* Keep gradient but remove animation */
+    animation: none !important;
+    -webkit-text-fill-color: initial;
+    background: none;
+    color: var(--wp--preset--color--neon-pink);
+  }
+}

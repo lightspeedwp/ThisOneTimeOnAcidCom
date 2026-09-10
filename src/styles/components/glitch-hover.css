@@ -1,0 +1,38 @@
+.glitch-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-hover--active::before,
+.glitch-hover--active::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.glitch-hover--active::before {
+  color: var(--color-neon-pink);
+  animation: glitchBefore 0.3s steps(2) infinite;
+}
+
+.glitch-hover--active::after {
+  color: var(--wp--preset--color--neon-cyan, #00FFFF);
+  animation: glitchAfter 0.3s steps(2) infinite 0.1s;
+}
+
+/* Intensity variants */
+.glitch-hover--subtle::before  { opacity: 0.5; }
+.glitch-hover--subtle::after   { opacity: 0.5; }
+.glitch-hover--strong::before  { opacity: 1; }
+.glitch-hover--strong::after   { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-hover--active::before,
+  .glitch-hover--active::after {
+    display: none;
+  }
+}

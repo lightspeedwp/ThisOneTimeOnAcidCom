@@ -1,0 +1,308 @@
+/* ============================================
+   FAQ Section Block Styles
+   v3.0.0 - Two-column layout with sticker graphic
+   ============================================ */
+
+.faq-section {
+  padding-top: var(--wp--preset--spacing--fluid-lg);
+  padding-bottom: var(--wp--preset--spacing--fluid-lg);
+  padding-left: var(--wp--preset--spacing--fluid-md);
+  padding-right: var(--wp--preset--spacing--fluid-md);
+  max-width: var(--wp--preset--layout--wide);
+  margin: 0 auto;
+}
+
+/* ── Two-column layout: FAQ (left) + Sticker (right) ── */
+.faq-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-md);
+  align-items: center;
+  padding: var(--wp--preset--spacing--fluid-md);
+  border-radius: var(--wp--preset--border-radius--xl, 1.5rem);
+  background: linear-gradient(135deg,
+    rgba(190, 0, 254, 0.03) 0%,
+    rgba(31, 81, 255, 0.03) 50%,
+    rgba(57, 255, 20, 0.02) 100%
+  );
+}
+
+.faq-section--hero .faq-layout {
+  background: linear-gradient(135deg,
+    rgba(190, 0, 254, 0.08) 0%,
+    rgba(31, 81, 255, 0.08) 50%,
+    rgba(57, 255, 20, 0.05) 100%
+  );
+  border: 1px solid rgba(190, 0, 254, 0.15);
+}
+
+.dark .faq-layout {
+  background: linear-gradient(135deg,
+    rgba(190, 0, 254, 0.06) 0%,
+    rgba(31, 81, 255, 0.06) 50%,
+    rgba(57, 255, 20, 0.03) 100%
+  );
+}
+
+.dark .faq-section--hero .faq-layout {
+  background: linear-gradient(135deg,
+    rgba(190, 0, 254, 0.12) 0%,
+    rgba(31, 81, 255, 0.12) 50%,
+    rgba(57, 255, 20, 0.08) 100%
+  );
+  border: 1px solid rgba(190, 0, 254, 0.3);
+}
+
+@media (min-width: 1024px) {
+  .faq-layout {
+    flex-direction: row;
+    align-items: stretch;
+    gap: var(--wp--preset--spacing--fluid-lg);
+    padding: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+/* ── FAQ Card ── */
+.faq-card {
+  flex: 3;
+  min-width: 0;
+  background: var(--background);
+  border-radius: var(--wp--preset--border-radius--lg);
+  box-shadow: var(--wp--preset--shadow--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.dark .faq-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--wp--preset--color--neutral-800);
+  box-shadow: 0 0 15px rgba(190, 0, 254, 0.05);
+}
+
+.dark .faq-card:hover {
+  border-color: rgba(190, 0, 254, 0.3);
+  box-shadow: 0 0 25px rgba(190, 0, 254, 0.1);
+}
+
+/* ── Sticker Graphic Column ── */
+.faq-sticker {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .faq-sticker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 2;
+    min-width: 0;
+  }
+
+  .faq-section--hero .faq-sticker {
+    flex: 3; /* Equal width to card in hero mode */
+  }
+}
+
+.faq-sticker__image {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--wp--preset--border-radius--lg);
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  filter: saturate(1.1);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.faq-sticker:hover .faq-sticker__image {
+  transform: scale(1.03) rotate(1deg);
+  filter: saturate(1.25) brightness(1.05);
+}
+
+.faq-sticker__glow {
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(190, 0, 254, 0.15) 0%,
+    rgba(31, 81, 255, 0.1) 40%,
+    transparent 70%
+  );
+  z-index: 0;
+  filter: blur(30px);
+  transition: opacity 0.4s ease;
+}
+
+.dark .faq-sticker__glow {
+  background: radial-gradient(
+    circle,
+    rgba(190, 0, 254, 0.25) 0%,
+    rgba(31, 81, 255, 0.15) 40%,
+    transparent 70%
+  );
+}
+
+.faq-sticker:hover .faq-sticker__glow {
+  opacity: 1.3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-sticker:hover .faq-sticker__image {
+    transform: none;
+    filter: saturate(1.1);
+  }
+}
+
+/* ── FAQ Header ── */
+.faq-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--wp--preset--color--neutral-50);
+}
+
+.dark .faq-header {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.faq-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--foreground);
+}
+
+.faq-description {
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .faq-description {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ── FAQ Items ── */
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s ease;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+/* Neon left border on active/hover */
+.faq-item:hover {
+  background-color: var(--wp--preset--color--neutral-50);
+}
+
+.dark .faq-item:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.faq-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Left accent bar for active/hover state */
+.faq-button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--wp--preset--color--neon-purple);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.faq-button:hover::before,
+.faq-button[aria-expanded="true"]::before {
+  opacity: 1;
+}
+
+.faq-button:hover {
+  background-color: var(--wp--preset--color--neutral-50);
+}
+
+.dark .faq-button:hover {
+  background-color: rgba(190, 0, 254, 0.1);
+}
+
+.faq-button__text {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: var(--foreground);
+  transition: color 0.2s ease;
+}
+
+.faq-button:hover .faq-button__text,
+.faq-button[aria-expanded="true"] .faq-button__text {
+  color: var(--wp--preset--color--neon-purple);
+}
+
+.faq-button__icon {
+  flex-shrink: 0;
+  color: var(--wp--preset--color--neutral-400);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.faq-button:hover .faq-button__icon,
+.faq-button[aria-expanded="true"] .faq-button__icon {
+  color: var(--wp--preset--color--neon-purple);
+}
+
+.faq-button[aria-expanded="true"] .faq-button__icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  color: var(--wp--preset--color--neutral-500);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.dark .faq-answer {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.faq-answer-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  overflow: hidden;
+  transition: grid-template-rows 250ms ease, opacity 200ms ease;
+}
+
+.faq-answer-wrapper--open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faq-answer-wrapper > .faq-answer {
+  min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-answer-wrapper {
+    transition: none;
+  }
+}

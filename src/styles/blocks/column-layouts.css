@@ -1,0 +1,153 @@
+/* Column Layouts Block Styles */
+
+/* Common Grid System */
+.layout-grid {
+  display: grid;
+  width: 100%;
+}
+
+.layout-grid--cols-1 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .layout-grid--tablet-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .layout-grid--tablet-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout-grid--desktop-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .layout-grid--desktop-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .layout-grid--desktop-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1568px) {
+  .layout-grid--wide-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .layout-grid--wide-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1768px) {
+  .layout-grid--ultra-wide-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .layout-grid--ultra-wide-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 1800px) {
+  .layout-grid--xl-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .layout-grid--xl-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .layout-grid--xl-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 1920px) {
+  .layout-grid--full-hd-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .layout-grid--full-hd-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Ratios for Two Column Layout */
+@media (min-width: 1024px) {
+  .layout-grid--ratio-2-1 {
+    grid-template-columns: 2fr 1fr;
+  }
+  .layout-grid--ratio-1-2 {
+    grid-template-columns: 1fr 2fr;
+  }
+  .layout-grid--ratio-3-2 {
+    grid-template-columns: 3fr 2fr;
+  }
+  .layout-grid--ratio-2-3 {
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
+/* Alignments */
+.layout-align-top {
+  align-items: start;
+}
+
+.layout-align-center {
+  align-items: center;
+}
+
+.layout-align-bottom {
+  align-items: end;
+}
+
+.layout-align-stretch {
+  align-items: stretch;
+}
+
+/* Gap Utilities (using spacing presets) */
+.gap-fluid-3xl {
+  gap: var(--wp--preset--spacing--fluid-2xl); /* Fallback to largest avail if 3xl not defined, or define custom */
+}
+
+/* Layout Containers */
+.layout-container-content {
+  position: relative;
+  z-index: 10;
+}
+
+.layout-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.layout-section-bordered {
+  padding-top: 2rem;
+  border-top: 1px solid var(--wp--preset--color--neutral-100);
+  border-bottom: 1px solid var(--wp--preset--color--neutral-100);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.dark .layout-section-bordered {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.layout-section-bg-default {
+  background-color: var(--wp--preset--color--base);
+}
+
+.dark .layout-section-bg-default {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.layout-decorative-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Mobile Reverse Utility */
+@media (max-width: 767px) {
+  .layout-grid--reverse-mobile {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}

@@ -1,0 +1,63 @@
+/* ═══════════════════════════════════════════════
+   Color Copy Button Block Styles
+   v1.0.0 — Inline copy-to-clipboard button for color swatches
+   ═══════════════════════════════════════════════ */
+
+.color-copy-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--wp--preset--color--neutral-300);
+  border-radius: var(--wp--preset--border-radius--sm);
+  background: linear-gradient(135deg, var(--wp--preset--color--base), var(--wp--preset--color--neutral-50));
+  color: var(--wp--preset--color--neutral-700);
+  font-family: var(--wp--preset--font-family--brand-mono);
+  font-size: var(--wp--preset--font-size--50);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.dark .color-copy-button {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--wp--preset--color--neutral-200);
+}
+
+.color-copy-button:hover {
+  border-color: var(--wp--preset--color--neon-purple);
+  background: linear-gradient(135deg, rgba(190, 0, 254, 0.1), rgba(190, 0, 254, 0.05));
+  color: var(--wp--preset--color--neon-purple);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(190, 0, 254, 0.2);
+}
+
+.dark .color-copy-button:hover {
+  border-color: var(--wp--preset--color--neon-pink);
+  background: linear-gradient(135deg, rgba(255, 16, 240, 0.15), rgba(255, 16, 240, 0.08));
+  color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 15px rgba(255, 16, 240, 0.3);
+}
+
+.color-copy-button--copied {
+  border-color: var(--wp--preset--color--neon-green);
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.15), rgba(57, 255, 20, 0.08));
+  color: var(--wp--preset--color--neon-green);
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+}
+
+.dark .color-copy-button--copied {
+  border-color: var(--wp--preset--color--neon-green);
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.2), rgba(57, 255, 20, 0.1));
+  color: var(--wp--preset--color--neon-green);
+  box-shadow: 0 0 25px rgba(57, 255, 20, 0.5);
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .color-copy-button:hover {
+    transform: none;
+  }
+}

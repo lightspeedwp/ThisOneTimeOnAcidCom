@@ -1,0 +1,256 @@
+---
+title: "Tailwind Violations Audit"
+filename: "/prompts/modern-react-migration/02-tailwind-violations-audit.md"
+created: "2026-03-11"
+modified: "2026-03-11"
+version: "1.0.0"
+prompt_type: "sub-prompt"
+execution_order: 2
+estimated_duration: "30 minutes"
+related_reports: "/reports/2026-03-11-modern-react-migration/02-tailwind-violations-audit.md"
+---
+
+# Tailwind Violations Audit
+
+## 1. Objective
+
+Scan the entire codebase to identify and document **ALL instances of forbidden Tailwind utility class usage**. The project enforces a strict BEM architecture where Tailwind utilities are **completely forbidden**.
+
+---
+
+## 2. Scope
+
+**Files to audit:**
+- All `.tsx` files in `/components/`
+- All `.ts` files that might have className strings
+- All template files
+
+**What to look for:**
+- Tailwind utility classes in `className` attributes
+- Tailwind utilities in string literals
+- Dynamic className construction with Tailwind
+- Commented-out Tailwind classes (technical debt)
+
+---
+
+## 3. Audit Steps
+
+### Step 1: Search for Common Tailwind Patterns
+
+Run these searches across the codebase:
+
+```bash
+# Flex/Grid utilities
+grep -r "className.*flex" components/
+grep -r "className.*grid" components/
+grep -r "className.*inline" components/
+
+# Spacing utilities
+grep -r "className.*p-[0-9]" components/
+grep -r "className.*m-[0-9]" components/
+grep -r "className.*gap-[0-9]" components/
+
+# Typography utilities
+grep -r "className.*text-[a-z]" components/
+grep -r "className.*font-[a-z]" components/
+
+# Color utilities
+grep -r "className.*bg-[a-z]" components/
+grep -r "className.*text-[a-z]" components/
+
+# Layout utilities
+grep -r "className.*w-[0-9]" components/
+grep -r "className.*h-[0-9]" components/
+```
+
+### Step 2: Categorize Violations
+
+For each violation found, categorize by:
+
+**Critical (P0):**
+- User-facing components with Tailwind utilities
+- Navigation, header, footer components
+- Core layout components
+
+**High (P1):**
+- Content components (cards, blog posts, portfolio)
+- Form components
+- Modal/overlay components
+
+**Medium (P2):**
+- Dev tools pages
+- Admin-only components
+- Utility components
+
+**Low (P3):**
+- Commented-out code
+- Documentation examples
+- Test files
+
+### Step 3: Document Each Violation
+
+For each violation, record:
+1. **File path**
+2. **Line number**
+3. **Tailwind classes used**
+4. **Suggested BEM replacement**
+5. **Severity** (P0/P1/P2/P3)
+
+---
+
+## 4. Success Criteria
+
+This audit is complete when:
+
+- [ ] All `.tsx` files have been scanned
+- [ ] Every Tailwind utility usage is documented
+- [ ] Each violation has a suggested BEM replacement
+- [ ] Violations are categorized by severity
+- [ ] Statistics are compiled
+- [ ] Report is saved to `/reports/2026-03-11-modern-react-migration/02-tailwind-violations-audit.md`
+
+---
+
+## 5. Report Output
+
+**Location:** `/reports/2026-03-11-modern-react-migration/02-tailwind-violations-audit.md`
+
+**Required sections:**
+
+```markdown
+---
+title: "Tailwind Violations Audit Report"
+filename: "/reports/2026-03-11-modern-react-migration/02-tailwind-violations-audit.md"
+created: "2026-03-11"
+modified: "2026-03-11"
+version: "1.0.0"
+report_type: "audit"
+related_prompt: "/prompts/modern-react-migration/02-tailwind-violations-audit.md"
+status: "complete"
+---
+
+# Tailwind Violations Audit Report
+
+## Executive Summary
+
+**Status:** 🔴 VIOLATIONS FOUND | 🟢 NO VIOLATIONS  
+**Total Violations:** X  
+**Critical (P0):** Y  
+**Files Affected:** Z
+
+## Statistics
+
+| Metric | Count |
+|--------|-------|
+| Total files scanned | X |
+| Files with violations | Y |
+| Total violations | Z |
+| Critical (P0) | A |
+| High (P1) | B |
+| Medium (P2) | C |
+| Low (P3) | D |
+
+## Violations by Category
+
+### Critical (P0) - User-Facing Components
+
+#### Violation 1: Header Component
+**File:** `/components/common/Header.tsx`  
+**Line:** 45  
+**Tailwind Classes:** `flex items-center justify-between`  
+**BEM Replacement:** `.header__inner` (already exists in `/styles/blocks/header.css`)
+
+**Current Code:**
+```tsx
+<div className="flex items-center justify-between">
+```
+
+**Suggested Fix:**
+```tsx
+<div className="header__inner">
+```
+
+### High (P1) - Content Components
+
+[Continue for all violations...]
+
+## Breakdown by Tailwind Utility Type
+
+### Layout Utilities (flex, grid, etc.)
+- Total: X violations
+- Most common: `flex` (Y instances)
+
+### Spacing Utilities (p-*, m-*, gap-*)
+- Total: X violations
+- Most common: `p-4` (Y instances)
+
+### Typography Utilities (text-*, font-*)
+- Total: X violations
+- Most common: `text-center` (Y instances)
+
+## Recommendations
+
+1. **Immediate Action (P0):** Fix all critical violations in user-facing components
+2. **Short Term (P1):** Address high-priority content components
+3. **Long Term (P2-P3):** Clean up dev tools and commented code
+
+## Next Steps
+
+1. Review this report
+2. Create task list with all violations
+3. Prioritize by severity
+4. Begin systematic replacement with BEM classes
+
+---
+
+## Related Documentation
+
+**Generated By:** [Tailwind Violations Audit Prompt](../../prompts/modern-react-migration/02-tailwind-violations-audit.md)  
+**Related Guidelines:**  
+- [BEM Architecture](../../guidelines/css-architecture.md)
+- [Tailwind-to-BEM Mapping](../../guidelines/tailwind-to-bem-mapping.md) (created by prompt 03)
+```
+
+---
+
+## Common Tailwind Utilities to Search For
+
+### Layout
+- `flex`, `inline-flex`, `block`, `inline-block`, `grid`, `inline-grid`
+- `hidden`, `visible`, `invisible`
+- `relative`, `absolute`, `fixed`, `sticky`
+
+### Spacing
+- `p-*`, `px-*`, `py-*`, `pt-*`, `pr-*`, `pb-*`, `pl-*`
+- `m-*`, `mx-*`, `my-*`, `mt-*`, `mr-*`, `mb-*`, `ml-*`
+- `gap-*`, `space-x-*`, `space-y-*`
+
+### Sizing
+- `w-*`, `h-*`, `min-w-*`, `min-h-*`, `max-w-*`, `max-h-*`
+
+### Typography
+- `text-*` (sizes, colors, alignment)
+- `font-*` (weight, family)
+- `leading-*`, `tracking-*`
+
+### Colors
+- `bg-*`, `text-*`, `border-*`
+- Color modifiers: `hover:`, `focus:`, `active:`
+
+### Borders & Shadows
+- `border`, `border-*`, `rounded-*`
+- `shadow-*`
+
+---
+
+## Related Guidelines
+
+**BEM Architecture:**
+See [Guidelines.md](../../guidelines/Guidelines.md#critical-styling-rule---strict-bem-architecture) for BEM enforcement rules.
+
+**Bundler Constraints:**
+Tailwind utilities violate the strict BEM architecture required by this project.
+
+---
+
+**Last Updated:** March 11, 2026

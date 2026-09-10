@@ -1,0 +1,76 @@
+/* Read More Button Block Styles */
+.read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--wp--preset--color--neon-purple-text);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  background: rgba(190, 0, 254, 0.05);
+  border: 1px solid var(--wp--preset--color--neon-purple);
+  padding: clamp(0.5rem, 1.25vw, 0.75rem) clamp(0.875rem, 2.5vw, 1.25rem);
+  border-radius: var(--wp--preset--border-radius--full);
+  min-width: 120px;
+}
+
+.read-more-btn:hover {
+  background: var(--wp--preset--color--neon-purple);
+  color: #ffffff;
+  border-color: var(--wp--preset--color--neon-purple);
+  gap: 0.75rem; /* Expands gap on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(190, 0, 254, 0.3);
+}
+
+.read-more-btn:focus {
+  outline: 2px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 4px;
+}
+
+.read-more-btn__icon {
+  width: 1rem; /* w-4 */
+  height: 1rem; /* h-4 */
+  transition: transform 0.2s ease;
+}
+
+.read-more-btn:hover .read-more-btn__icon {
+  transform: translateX(4px);
+}
+
+/* ── Compact variant (blog cards with onClick handler) ── */
+.read-more-btn--compact {
+  font-size: 0.75rem;
+  padding: clamp(0.2rem, 0.75vw, 0.375rem) clamp(0.5rem, 1.5vw, 0.875rem);
+  min-width: auto;
+  gap: 0.35rem;
+}
+
+.read-more-btn--compact .read-more-btn__icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.read-more-btn--compact:hover {
+  gap: 0.5rem;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .read-more-btn,
+  .read-more-btn__icon {
+    transition: none;
+  }
+
+  .read-more-btn:hover {
+    transform: none;
+  }
+
+  .read-more-btn:hover .read-more-btn__icon {
+    transform: none;
+  }
+}

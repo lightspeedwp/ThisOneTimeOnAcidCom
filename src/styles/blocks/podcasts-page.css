@@ -1,0 +1,646 @@
+/* ============================================
+   PODCASTS - Archive + Detail pages
+   ============================================ */
+
+/* ── Archive ── */
+.podcasts-archive {
+  min-height: 60vh;
+}
+
+.podcasts-archive__header {
+  padding: var(--wp--preset--spacing--section-vertical) var(--wp--preset--spacing--section-horizontal);
+  text-align: center;
+  background: var(--wp--preset--color--neutral-50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.dark .podcasts-archive__header {
+  background: rgba(15, 15, 15, 0.5);
+}
+
+.podcasts-archive__count {
+  margin-bottom: 0;
+}
+
+.podcasts-archive__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+@media (min-width: 600px) {
+  .podcasts-archive__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .podcasts-archive__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .podcasts-archive__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+@media (min-width: 1800px) {
+  .podcasts-archive__grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}
+
+/* ── Podcast Card ── */
+.podcast-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  background: var(--wp--preset--color--base);
+  cursor: pointer;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.podcast-card:hover {
+  border-color: var(--wp--preset--color--neon-purple);
+  box-shadow: var(--wp--preset--shadow--card-hover);
+  transform: translateY(-3px);
+}
+
+.dark .podcast-card {
+  border-color: var(--wp--preset--color--neutral-800);
+  background: rgba(20, 20, 20, 0.6);
+}
+
+.dark .podcast-card:hover {
+  border-color: rgba(190, 0, 254, 0.5);
+  box-shadow: 0 0 24px rgba(190, 0, 254, 0.2);
+}
+
+.podcast-card__image-wrap {
+  position: relative;
+  aspect-ratio: var(--wp--preset--aspect-ratio--video);
+  overflow: hidden;
+}
+
+.podcast-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.podcast-card__play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.podcast-card:hover .podcast-card__play-overlay {
+  opacity: 1;
+}
+
+.podcast-card__play-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #ffffff;
+  filter: drop-shadow(0 0 12px rgba(255, 16, 240, 0.6));
+}
+
+.podcast-card__episode-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: var(--wp--preset--color--neon-pink);
+  color: #ffffff;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.podcast-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--wp--preset--spacing--fluid-sm);
+}
+
+.podcast-card__title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--300);
+  color: var(--foreground);
+}
+
+.podcast-card__excerpt {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .podcast-card__excerpt {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.podcast-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.podcast-card__category-chip {
+  padding: 2px 8px;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: var(--wp--preset--color--neutral-100);
+  font-size: 0.7rem;
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .podcast-card__category-chip {
+  background: var(--wp--preset--color--neutral-800);
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* ── Detail ── */
+.podcast-detail {
+  min-height: 60vh;
+}
+
+.podcast-detail__header {
+  padding: var(--wp--preset--spacing--section-vertical) var(--wp--preset--spacing--section-horizontal);
+  text-align: center;
+  background: var(--wp--preset--color--neutral-50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+.dark .podcast-detail__header {
+  background: rgba(15, 15, 15, 0.5);
+}
+
+.podcast-detail__cover {
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  box-shadow: var(--wp--preset--shadow--lg);
+}
+
+.dark .podcast-detail__cover {
+  box-shadow: 0 10px 40px rgba(190, 0, 254, 0.15);
+}
+
+.podcast-detail__cover img {
+  width: 100%;
+  height: auto;
+}
+
+.podcast-detail__meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  flex-wrap: wrap;
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .podcast-detail__meta {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.podcast-detail__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.podcast-detail__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--block-gap);
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: var(--wp--preset--spacing--fluid-lg) var(--wp--preset--spacing--section-horizontal);
+}
+
+.podcast-detail__content {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--200);
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.podcast-detail__content h1,
+.podcast-detail__content h2,
+.podcast-detail__content h3 {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  color: var(--foreground);
+}
+
+.podcast-detail__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.podcast-detail__tag {
+  padding: 6px 14px;
+  border: 1px solid var(--wp--preset--color--neutral-300);
+  border-radius: var(--wp--preset--border-radius--full);
+  background: transparent;
+  color: var(--wp--preset--color--neutral-600);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.podcast-detail__tag:hover {
+  border-color: var(--wp--preset--color--neon-purple);
+  color: var(--wp--preset--color--neon-purple-text);
+}
+
+.dark .podcast-detail__tag {
+  border-color: var(--wp--preset--color--neutral-700);
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.dark .podcast-detail__tag:hover {
+  border-color: var(--wp--preset--color--neon-purple);
+  color: var(--wp--preset--color--neon-purple);
+}
+
+.podcast-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--wp--preset--color--neon-pink);
+  border-radius: var(--wp--preset--border-radius--full);
+  background: transparent;
+  color: var(--wp--preset--color--neon-pink-text);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.podcast-detail__back:hover {
+  background: var(--wp--preset--color--neon-pink);
+  color: #ffffff;
+  box-shadow: var(--wp--preset--shadow--neon-pink);
+}
+
+.dark .podcast-detail__back {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+/* ── Audio Player (placeholder) ── */
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  padding: var(--wp--preset--spacing--fluid-sm);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  border-radius: var(--wp--preset--border-radius--lg);
+  background: var(--wp--preset--color--neutral-50);
+}
+
+.dark .audio-player {
+  border-color: var(--wp--preset--color--neutral-800);
+  background: rgba(20, 20, 20, 0.6);
+}
+
+.audio-player__play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: var(--wp--preset--gradient--cyberpunk);
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: box-shadow 200ms ease;
+}
+
+.audio-player__play-btn:hover {
+  box-shadow: var(--wp--preset--shadow--neon-pink);
+}
+
+.audio-player__progress {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.audio-player__bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--wp--preset--color--neutral-200);
+  overflow: hidden;
+}
+
+.dark .audio-player__bar {
+  background: var(--wp--preset--color--neutral-700);
+}
+
+.audio-player__bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 3px;
+  background: var(--wp--preset--gradient--cyberpunk);
+  transition: width 100ms linear;
+}
+
+.audio-player__time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ============================================
+   PODCAST RICH TEXT - "Soundwave Neon" theme
+   Warm orange/cyan palette with audio vibes
+   ============================================ */
+
+.podcast-rich-text h1 {
+  display: none;
+}
+
+.podcast-rich-text p {
+  margin-bottom: 1.5rem;
+}
+
+.podcast-rich-text strong {
+  color: var(--wp--preset--color--contrast);
+  font-weight: 700;
+}
+
+.dark .podcast-rich-text strong {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 200, 0, 0.3);
+}
+
+.podcast-rich-text em {
+  color: var(--wp--preset--color--neon-orange-text);
+  font-style: italic;
+}
+
+.dark .podcast-rich-text em {
+  color: var(--wp--preset--color--neon-orange);
+}
+
+/* Headings — cyberpunk gradient with soundwave underline */
+.podcast-rich-text h2 {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--600);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--wp--preset--color--contrast);
+  position: relative;
+  display: inline-block;
+}
+
+.dark .podcast-rich-text h2 {
+  color: #fff;
+  background: linear-gradient(to right, var(--wp--preset--color--neon-orange), var(--wp--preset--color--neon-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Soundwave bar under h2 */
+.podcast-rich-text h2::after {
+  content: '▁▃▅▇▅▃▁▃▅▇▅▃▁';
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--wp--preset--color--neon-cyan-text);
+  line-height: 1;
+}
+
+.dark .podcast-rich-text h2::after {
+  color: var(--wp--preset--color--neon-cyan);
+  text-shadow: 0 0 10px var(--wp--preset--color--neon-cyan);
+}
+
+.podcast-rich-text h3 {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--500);
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--wp--preset--color--neon-orange-text);
+}
+
+.dark .podcast-rich-text h3 {
+  color: var(--wp--preset--color--neon-orange);
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.4);
+}
+
+.podcast-rich-text h4 {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--400);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--wp--preset--color--contrast);
+  font-weight: 600;
+}
+
+.dark .podcast-rich-text h4 {
+  color: var(--wp--preset--color--neutral-200);
+}
+
+/* Lists — microphone bullet points */
+.podcast-rich-text ul,
+.podcast-rich-text ol {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.podcast-rich-text li {
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.podcast-rich-text ul li::before {
+  content: '🎙';
+  position: absolute;
+  left: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.podcast-rich-text ol {
+  counter-reset: podcast-counter;
+}
+
+.podcast-rich-text ol li {
+  counter-increment: podcast-counter;
+}
+
+.podcast-rich-text ol li::before {
+  content: counter(podcast-counter) ".";
+  position: absolute;
+  left: 0;
+  color: var(--wp--preset--color--neon-cyan-text);
+  font-weight: 700;
+  font-family: var(--wp--preset--font-family--brand-heading);
+}
+
+.dark .podcast-rich-text ol li::before {
+  color: var(--wp--preset--color--neon-cyan);
+  text-shadow: 0 0 5px var(--wp--preset--color--neon-cyan);
+}
+
+/* Links */
+.podcast-rich-text a {
+  color: var(--wp--preset--color--neon-cyan-text);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.podcast-rich-text a:hover {
+  border-bottom-color: var(--wp--preset--color--neon-cyan-text);
+}
+
+.dark .podcast-rich-text a {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .podcast-rich-text a:hover {
+  border-bottom-color: var(--wp--preset--color--neon-cyan);
+  text-shadow: 0 0 8px var(--wp--preset--color--neon-cyan);
+}
+
+/* Blockquotes — "speaker quote" style with double-bar left border */
+.podcast-rich-text blockquote {
+  border-width: 0 0 0 4px;
+  border-style: double;
+  border-color: var(--wp--preset--color--neon-orange);
+  padding: 1.5rem 2rem;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--wp--preset--color--neutral-600);
+  margin: 2.5rem 0;
+  background: linear-gradient(
+    to right,
+    rgba(255, 165, 0, 0.05),
+    transparent
+  );
+  border-radius: 0 1rem 1rem 0;
+  position: relative;
+}
+
+.podcast-rich-text blockquote::before {
+  content: '❝';
+  position: absolute;
+  top: -0.5rem;
+  left: 0.75rem;
+  font-size: 2rem;
+  color: var(--wp--preset--color--neon-orange-text);
+  line-height: 1;
+}
+
+.dark .podcast-rich-text blockquote::before {
+  color: var(--wp--preset--color--neon-orange);
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+}
+
+.dark .podcast-rich-text blockquote {
+  color: var(--wp--preset--color--neutral-300);
+  background: linear-gradient(
+    to right,
+    rgba(255, 165, 0, 0.08),
+    transparent
+  );
+  box-shadow: -5px 0 15px -5px rgba(255, 165, 0, 0.15);
+}
+
+/* Code */
+.podcast-rich-text code {
+  background-color: var(--wp--preset--color--neutral-200);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+  color: var(--wp--preset--color--neon-orange-text);
+}
+
+.dark .podcast-rich-text code {
+  background-color: var(--wp--preset--color--neutral-800);
+  color: var(--wp--preset--color--neon-orange);
+  border: 1px solid var(--wp--preset--color--neutral-700);
+}
+
+/* Category chip link */
+.podcast-detail__category-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: rgba(255, 16, 240, 0.1);
+  color: var(--wp--preset--color--neon-pink-text);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  cursor: pointer;
+  border: 1px solid var(--wp--preset--color--neon-pink);
+  transition: all 200ms ease;
+  text-decoration: none;
+}
+
+.podcast-detail__category-link:hover {
+  background: var(--wp--preset--color--neon-pink);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(255, 16, 240, 0.4);
+}
+
+.dark .podcast-detail__category-link {
+  background: rgba(255, 16, 240, 0.08);
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.dark .podcast-detail__category-link:hover {
+  background: var(--wp--preset--color--neon-pink);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 16, 240, 0.5);
+}
+
+/* Tags + Share footer container */
+.podcast-detail__footer {
+  padding-top: var(--wp--preset--spacing--fluid-lg);
+  border-top: 1px solid var(--border);
+}
+
+.dark .podcast-detail__footer {
+  border-image: linear-gradient(to right, var(--wp--preset--color--neon-orange), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-orange)) 1;
+}

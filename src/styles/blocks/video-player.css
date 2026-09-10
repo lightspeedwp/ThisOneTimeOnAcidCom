@@ -1,0 +1,216 @@
+/* Video Player Block Styles */
+.video-player {
+  position: relative;
+  width: 100%;
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  background-color: #000;
+  box-shadow: var(--wp--preset--shadow--lg);
+}
+
+.video-player:hover .video-player__controls {
+  opacity: 1;
+}
+
+/* Video Element */
+.video-player__element {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
+
+/* Controls Container */
+.video-player__controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  padding: 1rem 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+/* Progress Bar Container */
+.video-player__progress-container {
+  margin-bottom: 0.75rem;
+}
+
+/* Progress Bar */
+.video-player__progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  appearance: none;
+  margin-bottom: 0.5rem;
+}
+
+.video-player__progress::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--wp--preset--color--neon-pink);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.video-player__time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons Area */
+.video-player__buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.video-player__btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.video-player__btn:hover {
+  transform: scale(1.1);
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.video-player__btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Volume Control */
+.video-player__volume-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.video-player__volume {
+  width: 60px;
+  height: 4px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px;
+  appearance: none;
+}
+
+.video-player__volume::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Overlay Play Button */
+.video-player__overlay-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.video-player__play-icon {
+  width: 4rem;
+  height: 4rem;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+}
+
+.video-player__play-icon svg {
+  width: 2rem;
+  height: 2rem;
+  color: #fff;
+  margin-left: 0.25rem; /* optical alignment */
+}
+
+.video-player__overlay-btn:hover .video-player__play-icon {
+  background-color: var(--wp--preset--color--neon-pink);
+  border-color: var(--wp--preset--color--neon-pink);
+  transform: scale(1.1);
+}
+
+/* Title Overlay */
+.video-player__title-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+  pointer-events: none;
+}
+
+.video-player__title {
+  color: #fff;
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Helper for spacer */
+.video-player__spacer {
+  flex: 1;
+}
+
+/* ============================================
+   EMBED VARIANT (YouTube / Vimeo)
+   ============================================ */
+
+.video-player--embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.video-player__iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: var(--wp--preset--border-radius--lg);
+}
+
+.dark .video-player--embed {
+  box-shadow: var(--wp--preset--shadow--neon-md);
+}
+
+/* Lightbox variant — maximise space */
+.lightbox-video-wrapper .video-player--embed {
+  border-radius: 0;
+  max-height: 80vh;
+}
+
+.lightbox-video-wrapper .video-player__iframe {
+  border-radius: 0;
+}

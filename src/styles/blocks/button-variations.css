@@ -1,0 +1,101 @@
+/* Button Block Variations */
+
+.wp-block-button {
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.wp-block-button__link {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);
+  border-radius: var(--wp--preset--border-radius--full);
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.wp-block-button__link:hover {
+  border-color: var(--color-neon-pink);
+  box-shadow: 0 0 15px rgba(255, 16, 240, 0.4);
+  background: rgba(255, 16, 240, 0.1);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wp-block-button__link {
+    transition: none;
+  }
+  .wp-block-button__link:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Gradient */
+.wp-block-button__link.is-style-gradient {
+  background: linear-gradient(90deg, var(--color-neon-pink), var(--color-neon-blue));
+  border: none;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.wp-block-button__link.is-style-gradient:hover {
+  box-shadow: 0 4px 20px rgba(31, 81, 255, 0.5);
+  filter: brightness(1.1);
+}
+
+/* Outline */
+.wp-block-button.is-style-outline .wp-block-button__link {
+  background: transparent;
+  border: 2px solid var(--color-text-primary);
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link:hover {
+  background: var(--color-text-primary);
+  color: var(--color-atomic-black);
+  border-color: var(--color-text-primary);
+  box-shadow: none;
+}
+
+/* Brutalist */
+.wp-block-button__link.is-style-brutalist {
+  border-radius: 0;
+  font-family: var(--wp--preset--font-family--brand-heading);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--color-neon-yellow);
+  color: #000;
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  transform: none;
+}
+
+.wp-block-button__link.is-style-brutalist:hover {
+  transform: none;
+  box-shadow: 6px 6px 0 #000;
+  background: #fff;
+}
+
+.wp-block-button__link.is-style-brutalist:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Ghost */
+.wp-block-button__link.is-style-ghost {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: clamp(0.25rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
+}
+
+.wp-block-button__link.is-style-ghost:hover {
+  background: var(--color-surface-hover);
+  box-shadow: none;
+  transform: none;
+}

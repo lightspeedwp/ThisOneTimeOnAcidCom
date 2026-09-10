@@ -1,0 +1,133 @@
+/* ============================================
+   STYLE GUIDE BASE — Block, hero, section scaffolding
+   Extracted from style-guide-page.css (T10)
+   ============================================ */
+
+/* ── Block ── */
+.style-guide {
+  padding-top: var(--wp--preset--spacing--section-vertical);
+  padding-bottom: var(--wp--preset--spacing--section-vertical);
+  min-height: 100vh;
+  background-color: var(--wp--preset--color--base);
+  color: var(--wp--preset--color--contrast);
+}
+
+.dark .style-guide {
+  background-color: var(--wp--preset--color--atomic-black);
+  color: #fff;
+}
+
+/* ── Hero ── */
+.style-guide__hero {
+  text-align: center;
+  padding: var(--wp--preset--spacing--fluid-2xl) var(--wp--preset--spacing--section-horizontal);
+  margin-bottom: var(--wp--preset--spacing--fluid-xl);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--wp--preset--color--neutral-50);
+}
+
+.dark .style-guide__hero {
+  background-color: transparent;
+}
+
+.style-guide__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--wp--preset--gradient--cyberpunk);
+  opacity: 0.06;
+  z-index: 0;
+}
+
+.dark .style-guide__hero::before {
+  opacity: 0.12;
+}
+
+.style-guide__hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.style-guide__hero-badge {
+  display: inline-block;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--neon-pink-text);
+}
+
+.style-guide__hero-title {
+  font-family: var(--wp--preset--font-family--brand-title);
+}
+
+.style-guide__hero-subtitle {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  color: var(--wp--preset--color--neutral-500);
+  margin-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+.dark .style-guide__hero-subtitle {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.style-guide__hero-desc {
+  max-width: 44rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .style-guide__hero-desc {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ── Section ── */
+.style-guide__section {
+  max-width: var(--wp--preset--layout--wide);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--wp--preset--spacing--section-horizontal);
+  padding-right: var(--wp--preset--spacing--section-horizontal);
+  margin-bottom: var(--wp--preset--spacing--fluid-2xl);
+}
+
+.style-guide__section-header {
+  margin-bottom: var(--wp--preset--spacing--fluid-lg);
+  padding-bottom: var(--wp--preset--spacing--fluid-sm);
+  border-bottom: 2px solid var(--wp--preset--color--neutral-200);
+}
+
+.dark .style-guide__section-header {
+  border-bottom-color: var(--wp--preset--color--neutral-800);
+}
+
+.style-guide__section-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  margin-bottom: var(--wp--preset--spacing--fluid-xs);
+  color: var(--wp--preset--color--contrast);
+}
+
+.dark .style-guide__section-title {
+  color: #fff;
+}
+
+.style-guide__section-desc {
+  color: var(--wp--preset--color--neutral-600);
+  margin-bottom: 0;
+}
+
+.dark .style-guide__section-desc {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* Subsection titles that need top spacing */
+.style-guide__subsection-title {
+  margin-top: var(--wp--preset--spacing--fluid-lg);
+}

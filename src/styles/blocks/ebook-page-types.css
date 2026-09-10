@@ -1,0 +1,468 @@
+/* ==========================================================================
+   EBOOK PAGE TYPES — Cover, TOC, chapters, parts, dedication, etc.
+   Extracted from ebook.css (T09)
+   ========================================================================== */
+
+/* ══════════════════════════════════════
+   PAGE CONTENT TYPES
+   ══════════════════════════════════════ */
+
+/* ── Cover ── */
+.ebook-page--cover .ebook-reader__page-inner {
+  background: var(--wp--preset--color--neon-pink);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .ebook-page--cover .ebook-reader__page-inner {
+  background: var(--wp--preset--color--neon-pink);
+}
+
+.ebook-page--cover .ebook-page__title {
+  font-family: 'Vampiro One', 'Righteous', cursive;
+  font-size: var(--ebook-cover-title-size);
+  color: var(--wp--preset--color--neon-yellow);
+  text-shadow: 0 0 20px rgba(255, 229, 0, 0.6);
+  line-height: 1.2;
+  transform: rotate(-2deg);
+}
+
+.ebook-page--cover .ebook-page__subtitle {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-cover-subtitle-size);
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.05em;
+}
+
+.ebook-page--cover .ebook-page__author {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--ebook-cover-author-size);
+  color: var(--wp--preset--color--neon-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 12px rgba(255, 229, 0, 0.5);
+}
+
+.ebook-page--cover .ebook-page__status {
+  display: inline-block;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-status-size);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── Back Cover ── */
+.ebook-page--back-cover .ebook-reader__page-inner {
+  background: var(--wp--preset--color--neon-pink);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  padding: clamp(1.5rem, 1rem + 2vw, 3rem);
+}
+
+.dark .ebook-page--back-cover .ebook-reader__page-inner {
+  background: var(--wp--preset--color--neon-pink);
+}
+
+.ebook-page--back-cover .ebook-page__blurb {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-blurb-size);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.ebook-page--back-cover .ebook-page__title {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: var(--ebook-back-title-size);
+  color: var(--wp--preset--color--neon-yellow);
+  text-shadow: 0 0 12px rgba(255, 229, 0, 0.4);
+}
+
+/* ── Inside Front ── */
+.ebook-page--inside-front .ebook-reader__page-inner {
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 3rem;
+}
+
+.ebook-page--inside-front .ebook-page__meta-line {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-meta-size);
+  color: var(--wp--preset--color--neutral-400);
+  letter-spacing: 0.05em;
+}
+
+.dark .ebook-page--inside-front .ebook-page__meta-line {
+  color: var(--wp--preset--color--neutral-600);
+}
+
+/* ── Title Page ── */
+.ebook-page--title .ebook-reader__page-inner {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.ebook-page--title .ebook-page__title {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: var(--ebook-chapter-title-size);
+  color: var(--wp--preset--color--neon-pink-text);
+  line-height: 1.2;
+}
+
+.dark .ebook-page--title .ebook-page__title {
+  color: var(--wp--preset--color--neon-pink);
+  text-shadow: 0 0 16px rgba(255, 16, 240, 0.3);
+}
+
+.ebook-page--title .ebook-page__subtitle {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-chapter-start-subtitle-size);
+  color: var(--wp--preset--color--neutral-500);
+  font-style: italic;
+}
+
+.dark .ebook-page--title .ebook-page__subtitle {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.ebook-page--title .ebook-page__author {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--ebook-chapter-start-title-size);
+  color: var(--foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.dark .ebook-page--title .ebook-page__author {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+/* ── Dedication ── */
+.ebook-page--dedication .ebook-reader__page-inner {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.ebook-page--dedication .ebook-page__dedication-line {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--ebook-dedication-size);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .ebook-page--dedication .ebook-page__dedication-line {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ── Epigraph ── */
+.ebook-page--epigraph .ebook-reader__page-inner {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.ebook-page--epigraph .ebook-page__epigraph-line {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--ebook-epigraph-size);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--wp--preset--color--neutral-600);
+  max-width: 28rem;
+}
+
+.ebook-page--epigraph .ebook-page__epigraph-line:last-child {
+  font-style: normal;
+  font-size: var(--ebook-epigraph-attr-size);
+  color: var(--wp--preset--color--neon-pink-text);
+  margin-top: 0.25rem;
+}
+
+.dark .ebook-page--epigraph .ebook-page__epigraph-line {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.dark .ebook-page--epigraph .ebook-page__epigraph-line:last-child {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+/* ── TOC ── */
+.ebook-page--toc .ebook-reader__page-inner {
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.ebook-page--toc .ebook-page__toc-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--ebook-toc-title-size);
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.dark .ebook-page--toc .ebook-page__toc-title {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+.ebook-page__toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.35rem, 0.25rem + 0.25vw, 0.55rem);
+}
+
+.ebook-page__toc-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-toc-item-size);
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .ebook-page__toc-item {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.ebook-page__toc-number {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  color: var(--wp--preset--color--neon-pink-text);
+  min-width: 1.5rem;
+}
+
+.dark .ebook-page__toc-number {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.ebook-page__toc-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--wp--preset--color--neutral-300);
+  margin-bottom: 0.25em;
+}
+
+.dark .ebook-page__toc-dots {
+  border-color: var(--wp--preset--color--neutral-700);
+}
+
+/* TOC part label rows */
+.ebook-page__toc-part-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.85rem);
+  color: var(--wp--preset--color--neon-pink-text);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--wp--preset--color--neutral-200);
+  margin-top: 0.25rem;
+}
+
+.ebook-page__toc-part-label:first-child {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.dark .ebook-page__toc-part-label {
+  color: var(--wp--preset--color--neon-pink);
+  border-top-color: var(--wp--preset--color--neutral-800);
+}
+
+.ebook-page__toc-part-numeral {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  min-width: 1.5rem;
+  color: var(--wp--preset--color--neon-pink-text);
+}
+
+.dark .ebook-page__toc-part-numeral {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+/* TOC page numbers */
+.ebook-page__toc-page {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(0.65rem, 0.55rem + 0.25vw, 0.8rem);
+  color: var(--wp--preset--color--neutral-500);
+  min-width: 1.5rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.dark .ebook-page__toc-page {
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.ebook-page__toc-part-label .ebook-page__toc-page {
+  margin-left: auto;
+}
+
+/* ── Foreword / Afterword ── */
+.ebook-page--foreword .ebook-reader__page-inner,
+.ebook-page--afterword .ebook-reader__page-inner {
+  gap: clamp(0.6rem, 0.5rem + 0.35vw, 0.85rem);
+}
+
+.ebook-page--foreword .ebook-page__section-title,
+.ebook-page--afterword .ebook-page__section-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--ebook-section-title-size);
+  color: var(--foreground);
+  margin-bottom: 0.25rem;
+}
+
+.dark .ebook-page--foreword .ebook-page__section-title,
+.dark .ebook-page--afterword .ebook-page__section-title {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+/* ── Chapter Start ── */
+.ebook-page--chapter-start .ebook-reader__page-inner {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.ebook-page__chapter-number {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-chapter-number-size);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--wp--preset--color--neon-pink-text);
+}
+
+.dark .ebook-page__chapter-number {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.ebook-page--chapter-start .ebook-page__title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--ebook-chapter-start-title-size);
+  color: var(--foreground);
+  line-height: 1.2;
+}
+
+.dark .ebook-page--chapter-start .ebook-page__title {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+.ebook-page--chapter-start .ebook-page__subtitle {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-chapter-start-subtitle-size);
+  color: var(--wp--preset--color--neutral-500);
+  font-style: italic;
+  max-width: 28rem;
+  line-height: 1.5;
+}
+
+.dark .ebook-page--chapter-start .ebook-page__subtitle {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ── Part Title / Appendix Title ── */
+.ebook-page--part-title .ebook-reader__page-inner,
+.ebook-page--appendix-title .ebook-reader__page-inner {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  background: var(--wp--preset--color--atomic-black);
+}
+
+.dark .ebook-page--part-title .ebook-reader__page-inner,
+.dark .ebook-page--appendix-title .ebook-reader__page-inner {
+  background: var(--wp--preset--color--atomic-black);
+}
+
+.ebook-page__part-label {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-part-label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--wp--preset--color--neon-pink);
+  text-shadow: 0 0 16px rgba(255, 16, 240, 0.4);
+}
+
+.ebook-page--part-title .ebook-page__title,
+.ebook-page--appendix-title .ebook-page__title {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: var(--ebook-part-title-size);
+  color: var(--wp--preset--color--neon-yellow);
+  text-shadow: 0 0 20px rgba(255, 229, 0, 0.5);
+  line-height: 1.2;
+}
+
+.ebook-page--part-title .ebook-page__subtitle,
+.ebook-page--appendix-title .ebook-page__subtitle {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-part-subtitle-size);
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* ── Chapter Content ── */
+.ebook-page--chapter-content .ebook-reader__page-inner {
+  gap: clamp(0.4rem, 0.3rem + 0.2vw, 0.6rem);
+}
+
+.ebook-page__chapter-heading {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-chapter-heading-size);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.dark .ebook-page__chapter-heading {
+  color: var(--wp--preset--color--neutral-600);
+}
+
+/* ── Shared paragraph style (100% fluid) ── */
+.ebook-page__paragraph {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-body-size);
+  line-height: var(--ebook-body-lh);
+  color: var(--wp--preset--color--neutral-700);
+  margin-bottom: clamp(0.6rem, 0.5rem + 0.25vw, 0.8rem);
+}
+
+.ebook-page__paragraph:last-of-type {
+  margin-bottom: 0;
+}
+
+.dark .ebook-page__paragraph {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* ── About Author ── */
+.ebook-page--about-author .ebook-reader__page-inner {
+  gap: clamp(0.6rem, 0.5rem + 0.35vw, 0.85rem);
+}
+
+.ebook-page--about-author .ebook-page__section-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--ebook-section-title-size);
+  color: var(--foreground);
+  margin-bottom: 0.25rem;
+}
+
+.dark .ebook-page--about-author .ebook-page__section-title {
+  color: var(--wp--preset--color--neutral-100);
+}

@@ -1,0 +1,231 @@
+/* ==========================================================================
+   RESPONSIVE GRID SYSTEM — Universal Card Grid Layout
+   Consistent column counts and fluid gaps across all archive pages
+   ========================================================================== */
+
+/**
+ * UNIFIED RESPONSIVE GRID PATTERN
+ * 
+ * Breakpoint System:
+ * - Mobile: 1 column (320-599px)
+ * - Tablet: 2 columns (600-1023px)
+ * - Desktop Small: 3 columns (1024-1439px)
+ * - Desktop Wide: 4 columns (1440-1799px)
+ * - Ultra-wide: 5 columns (1800px+)
+ * 
+ * Fluid Block Gap Scaling:
+ * - Mobile: var(--wp--preset--spacing--fluid-md) ~32px
+ * - Tablet: var(--wp--preset--spacing--fluid-lg) ~40px
+ * - Desktop: var(--wp--preset--spacing--fluid-lg) ~40px
+ * - Wide: var(--wp--preset--spacing--fluid-xl) ~48px
+ * - Ultra-wide: var(--wp--preset--spacing--fluid-2xl) ~56px
+ * 
+ * Usage: Apply `.responsive-grid` class to any grid container
+ */
+
+/* ──────────────────────────────────────────────
+   BASE GRID — Mobile First (1 column)
+   ────────────────────────────────────────────── */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-md);
+  width: 100%;
+}
+
+/* ──────────────────────────────────────────────
+   TABLET — 2 Columns (600px+)
+   ────────────────────────────────────────────── */
+@media (min-width: 600px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+/* ──────────────────────────────────────────────
+   DESKTOP SMALL — 3 Columns (1024px+)
+   ────────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+/* ──────────────────────────────────────────────
+   DESKTOP WIDE — 4 Columns (1440px+)
+   ────────────────────────────────────────────── */
+@media (min-width: 1440px) {
+  .responsive-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+/* ──────────────────────────────────────────────
+   ULTRA-WIDE — 5 Columns (1800px+)
+   ────────────────────────────────────────────── */
+@media (min-width: 1800px) {
+  .responsive-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   GRID VARIANTS
+   ══════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────
+   3-Column Max Grid (Why Section — fixed 3 items)
+   ────────────────────────────────────────────── */
+.responsive-grid--max-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-md);
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .responsive-grid--max-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid--max-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .responsive-grid--max-3 {
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+@media (min-width: 1800px) {
+  .responsive-grid--max-3 {
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}
+
+/* ──────────────────────────────────────────────
+   6-Column Max Grid (Skills, Large Collections)
+   ────────────────────────────────────────────── */
+.responsive-grid--max-6 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-md);
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .responsive-grid--max-6 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid--max-6 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .responsive-grid--max-6 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+@media (min-width: 1800px) {
+  .responsive-grid--max-6 {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}
+
+@media (min-width: 1920px) {
+  .responsive-grid--max-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   HOMEPAGE SECTION VERTICAL SPACING
+   Consistent vertical rhythm for all card-based sections
+   ══════════════════════════════════════════════ */
+
+/**
+ * Standard section vertical padding
+ * Matches homepage section padding established in home-page.css
+ */
+.section-spacing {
+  padding-top: clamp(3rem, 1.5rem + 4vw, 5rem);
+  padding-bottom: clamp(3rem, 1.5rem + 4vw, 5rem);
+}
+
+/**
+ * Section vertical padding with header offset
+ * Adds 5rem (80px) to top padding for fixed header clearance
+ */
+.section-spacing--with-header {
+  padding-top: calc(5rem + clamp(3rem, 1.5rem + 4vw, 5rem));
+  padding-bottom: clamp(3rem, 1.5rem + 4vw, 5rem);
+}
+
+/**
+ * Section inner container with consistent block gap
+ * Creates vertical rhythm between section elements
+ */
+.section-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--block-gap);
+}
+
+/* ══════════════════════════════════════════════
+   ARCHIVE PAGE GRID WRAPPERS
+   Apply to portfolio, blog, videos, podcasts, stickers
+   ══════════════════════════════════════════════ */
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-md);
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .archive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .archive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .archive-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+@media (min-width: 1800px) {
+  .archive-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}

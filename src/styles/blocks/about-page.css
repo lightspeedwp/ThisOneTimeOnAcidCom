@@ -1,0 +1,641 @@
+/* About Page Styles */
+
+.about-page-container {
+  min-height: 100vh;
+  background-color: var(--wp--preset--color--base);
+  color: var(--wp--preset--color--contrast);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.dark .about-page-container {
+  background-color: var(--wp--preset--color--atomic-black);
+  color: #fff;
+}
+
+/* About Content — wrapper for all SectionCards between Hero and Footer */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  padding: var(--wp--preset--spacing--section-horizontal);
+  max-width: var(--wp--preset--layout--wide);
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+/* Section-scoped noise texture overlay for about content area */
+/* Uses an inline <svg> with feTurbulence in the DOM (AboutPage.tsx) */
+/* because url() in CSS triggers bundler module resolution via esm.sh. */
+.about-content__noise {
+  position: absolute;
+  inset: 0;
+  opacity: var(--noise-texture-opacity);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dark .about-content__noise {
+  opacity: var(--noise-texture-opacity-dark);
+}
+
+/* Ensure section cards sit above the noise layer */
+.about-content > .section-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Tighter section card spacing scoped to the About page */
+.about-content .section-card__content {
+  padding: var(--wp--preset--spacing--fluid-xl);
+}
+
+.about-content .section-card__inner {
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+/* About Loading State */
+.about-loading-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: calc(var(--wp--preset--spacing--section-vertical) + 5rem);
+  padding-bottom: var(--wp--preset--spacing--section-vertical);
+  padding-left: var(--wp--preset--spacing--section-horizontal);
+  padding-right: var(--wp--preset--spacing--section-horizontal);
+}
+
+.about-loading-wrapper {
+  width: 100%;
+  max-width: var(--wp--preset--layout--wide);
+}
+
+.about-loading-content {
+  margin: 0 auto;
+}
+
+.about-skeleton-stack {
+  display: grid;
+  gap: var(--wp--preset--spacing--fluid-lg);
+  margin-top: var(--wp--preset--spacing--fluid-xl);
+}
+
+.about-skeleton-card {
+  height: 200px;
+  background-color: var(--wp--preset--color--neutral-100);
+  border-radius: var(--wp--preset--border-radius--lg);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.dark .about-skeleton-card {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+/* Technical Card */
+.about-technical-card {
+  margin-top: var(--wp--preset--spacing--fluid-lg);
+  padding: var(--wp--preset--spacing--fluid-md);
+  background-color: var(--wp--preset--color--neutral-50);
+  border-radius: var(--wp--preset--border-radius--lg);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  backdrop-filter: blur(10px);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.dark .about-technical-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.about-technical-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--300);
+  font-weight: 600;
+  color: var(--wp--preset--color--neon-cyan-text);
+  margin-bottom: var(--wp--preset--spacing--fluid-sm);
+}
+
+.about-technical-divider {
+  height: 2px;
+  width: 3rem;
+  background: var(--wp--preset--gradient--toxic-lime);
+  margin-bottom: var(--wp--preset--spacing--fluid-sm);
+}
+
+.about-technical-description {
+  font-size: var(--wp--preset--font-size--200);
+  line-height: 1.6;
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.dark .about-technical-description {
+  color: var(--wp--preset--color--neutral-200);
+  opacity: 0.9;
+}
+
+/* Skills Responsive Grid — 1 col mobile, 2 col tablet portrait, 3 col tablet landscape, 4 col desktop */
+.about-skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--block-gap);
+  margin-top: var(--wp--preset--spacing--fluid-lg);
+}
+
+@media (min-width: 768px) {
+  .about-skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .about-skills-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1768px) {
+  .about-skills-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1920px) {
+  .about-skills-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+.about-skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--wp--preset--spacing--fluid-md);
+  background-color: var(--wp--preset--color--neutral-50);
+  border: 1px solid var(--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.dark .about-skill-item {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: var(--wp--preset--color--neutral-800);
+}
+
+.about-skill-item:hover {
+  transform: translateY(-5px);
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .about-skill-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ──────────────────────────────────────────────
+   Gradient Icon Wrappers
+   ────────────────────────────────────────────── */
+.about-skill-icon-wrap {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--wp--preset--border-radius--lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--wp--preset--spacing--fluid-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-skill-item:hover .about-skill-icon-wrap {
+  transform: scale(1.15);
+}
+
+.about-skill-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #fff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.dark .about-skill-icon {
+  color: #fff;
+}
+
+/* Gradient Variants — each complements its skill title */
+
+/* Color Theory: Pink → Purple */
+.about-skill-icon-wrap--pink-purple {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-purple));
+  box-shadow: 0 4px 15px rgba(255, 16, 240, 0.3);
+}
+
+.about-skill-item:hover .about-skill-icon-wrap--pink-purple {
+  box-shadow: 0 6px 25px rgba(255, 16, 240, 0.5);
+}
+
+/* Blending Mastery: Cyan → Blue */
+.about-skill-icon-wrap--cyan-blue {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-blue));
+  box-shadow: 0 4px 15px rgba(0, 247, 255, 0.3);
+}
+
+.about-skill-item:hover .about-skill-icon-wrap--cyan-blue {
+  box-shadow: 0 6px 25px rgba(0, 247, 255, 0.5);
+}
+
+/* Texture Work: Green → Yellow */
+.about-skill-icon-wrap--green-yellow {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-green), var(--wp--preset--color--neon-yellow));
+  box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3);
+}
+
+.about-skill-item:hover .about-skill-icon-wrap--green-yellow {
+  box-shadow: 0 6px 25px rgba(57, 255, 20, 0.5);
+}
+
+/* UV Techniques: Purple → Pink */
+.about-skill-icon-wrap--purple-pink {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-purple), var(--wp--preset--color--neon-pink));
+  box-shadow: 0 4px 15px rgba(190, 0, 254, 0.3);
+}
+
+.about-skill-item:hover .about-skill-icon-wrap--purple-pink {
+  box-shadow: 0 6px 25px rgba(190, 0, 254, 0.5);
+}
+
+/* Pigment Knowledge: Orange → Red */
+.about-skill-icon-wrap--orange-red {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-orange), var(--wp--preset--color--neon-red));
+  box-shadow: 0 4px 15px rgba(255, 95, 31, 0.3);
+}
+
+.about-skill-item:hover .about-skill-icon-wrap--orange-red {
+  box-shadow: 0 6px 25px rgba(255, 95, 31, 0.5);
+}
+
+/* Creative Design: Blue → Green */
+.about-skill-icon-wrap--blue-green {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-blue), var(--wp--preset--color--neon-green));
+  box-shadow: 0 4px 15px rgba(31, 81, 255, 0.3);
+}
+
+.about-skill-item:hover .about-skill-icon-wrap--blue-green {
+  box-shadow: 0 6px 25px rgba(31, 81, 255, 0.5);
+}
+
+/* Reduced motion: disable hover transforms */
+@media (prefers-reduced-motion: reduce) {
+  .about-skill-item:hover,
+  .about-skill-item:hover .about-skill-icon-wrap {
+    transform: none;
+  }
+}
+
+.about-skill-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--200);
+  font-weight: 600;
+  color: var(--wp--preset--color--neutral-900);
+}
+
+.dark .about-skill-title {
+  color: var(--wp--preset--color--neutral-200);
+}
+
+/* CTA Center */
+.about-cta-center {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--wp--preset--spacing--fluid-lg);
+}
+
+/* Decorative Orbs */
+.about-hero-orb-1,
+.about-hero-orb-2,
+.about-hero-orb-3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+  max-width: 50vw;
+  max-height: 50vw;
+}
+
+@media (min-width: 1024px) {
+  .about-hero-orb-1,
+  .about-hero-orb-2,
+  .about-hero-orb-3 {
+    filter: blur(80px);
+    opacity: 0.4;
+  }
+}
+
+.about-hero-orb-1 {
+  top: 5%;
+  right: 5%;
+  width: 200px;
+  height: 200px;
+  background: var(--wp--preset--color--neon-pink);
+  animation: float 8s ease-in-out infinite;
+}
+
+@media (min-width: 1024px) {
+  .about-hero-orb-1 {
+    top: 10%;
+    right: 10%;
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.about-hero-orb-2 {
+  bottom: 15%;
+  left: 5%;
+  width: 180px;
+  height: 180px;
+  background: var(--wp--preset--color--neon-blue);
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+@media (min-width: 1024px) {
+  .about-hero-orb-2 {
+    bottom: 20%;
+    left: 5%;
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.about-hero-orb-3 {
+  top: 35%;
+  left: 35%;
+  width: 150px;
+  height: 150px;
+  background: var(--wp--preset--color--neon-purple);
+  animation: pulse 6s ease-in-out infinite;
+}
+
+@media (min-width: 1024px) {
+  .about-hero-orb-3 {
+    top: 40%;
+    left: 40%;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* Animations moved to /styles/animations.css */
+
+/* Text Gradient Classes */
+.text-gradient-pink-rose {
+  background: linear-gradient(to right, rgb(236, 72, 153), rgb(244, 63, 94));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+.text-gradient-purple-violet {
+  background: linear-gradient(to right, rgb(168, 85, 247), rgb(139, 92, 246));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+.text-gradient-blue-cyan {
+  background: linear-gradient(to right, rgb(59, 130, 246), rgb(6, 182, 212));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+/* About Page Text Colors */
+.text-about-body {
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.dark .text-about-body {
+  color: var(--wp--preset--color--neutral-200);
+}
+
+.text-about-body-alt {
+  color: var(--wp--preset--color--neutral-800);
+}
+
+.dark .text-about-body-alt {
+  color: #fff;
+}
+
+/* ──────────────────────────────────────────────
+   About Landing — Phase 4 Redesign Sections
+   ────────────────────────────────────────────── */
+
+/* Chapter nav + content grid */
+.about-landing,
+.about-landing--fluid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-md);
+  max-width: var(--wp--preset--layout--full-hd);
+  margin-left: auto;
+  margin-right: auto;
+  /* Removed horizontal padding to fix double-padding with ContentSections */
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: var(--wp--preset--spacing--fluid-md);
+  padding-bottom: var(--wp--preset--spacing--section-vertical);
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1280px) {
+  .about-landing,
+  .about-landing--fluid {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+    padding-top: var(--wp--preset--spacing--fluid-xl);
+    /* Re-add padding only when sidebar is present to align with container */
+    padding-left: var(--wp--preset--spacing--section-horizontal);
+    padding-right: var(--wp--preset--spacing--section-horizontal);
+  }
+}
+
+@media (min-width: 1600px) {
+  .about-landing,
+  .about-landing--fluid {
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+.about-landing__nav {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .about-landing__nav {
+    display: block;
+    position: sticky;
+    top: 6rem;
+    align-self: start;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+  }
+}
+
+.about-landing__sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--block-gap);
+  min-width: 0;
+  width: 100%;
+}
+
+/* ── Mobile responsiveness: tighter spacing & contained content ── */
+
+/* Reduce vertical section padding on small screens within about-landing */
+@media (max-width: 767px) {
+  .about-landing .content-section {
+    padding-top: var(--wp--preset--spacing--fluid-md);
+    padding-bottom: var(--wp--preset--spacing--fluid-md);
+  }
+
+  .about-landing .content-section--callout {
+    padding-left: var(--wp--preset--spacing--fluid-sm);
+    padding-right: var(--wp--preset--spacing--fluid-sm);
+  }
+
+  /* Allow button text to wrap on narrow screens */
+  .about-landing .btn {
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Keep split layout stacked on mobile */
+  .about-landing .split-layout {
+    flex-direction: column;
+  }
+
+  /* Compact skills grid items on smallest screens */
+  .about-landing .about-skill-item {
+    padding: var(--wp--preset--spacing--fluid-sm);
+  }
+}
+
+/* Tablet (768px–1279px): cap content width for readability (no sidebar yet) */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .about-landing__sections {
+    max-width: var(--wp--preset--layout--content, 800px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Delay SplitContent side-by-side until 1024px within about-landing */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about-landing .split-layout {
+    flex-direction: column;
+  }
+}
+
+/* Mobile chapter nav — horizontal scroll */
+.about-landing__mobile-nav {
+  display: block;
+  position: sticky;
+  top: var(--header-height, 4rem);
+  z-index: 10;
+  background-color: var(--wp--preset--color--base);
+  border-bottom: 1px solid var(--border);
+  padding: var(--wp--preset--spacing--fluid-sm) var(--wp--preset--spacing--section-horizontal);
+  /* Use viewport units for safety since parent no longer has padding */
+  width: 100%;
+}
+
+.dark .about-landing__mobile-nav {
+  background-color: var(--wp--preset--color--atomic-black);
+}
+
+@media (min-width: 1280px) {
+  .about-landing__mobile-nav {
+    display: none;
+  }
+}
+
+/* ADHD bullets list */
+.about-adhd-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--wp--preset--spacing--fluid-sm) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.about-adhd-list__item {
+  position: relative;
+  padding-left: var(--wp--preset--spacing--fluid-md);
+  color: var(--wp--preset--color--neutral-800);
+}
+
+.dark .about-adhd-list__item {
+  color: var(--wp--preset--color--neutral-200);
+}
+
+.about-adhd-list__item::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--wp--preset--color--neon-green-text);
+}
+
+.dark .about-adhd-list__item::before {
+  color: var(--wp--preset--color--neon-green);
+}
+
+/* Bullied kid context paragraphs */
+.about-context-text {
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .about-context-text {
+  color: var(--color-text-light); /* #F6F2EB - 14.8:1 contrast (WCAG AAA) - FIXED */
+}
+
+/* Sub-heading inside ADHD section */
+.about-adhd-subheading {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--300);
+  font-weight: 600;
+  margin-top: var(--wp--preset--spacing--fluid-md);
+  margin-bottom: var(--wp--preset--spacing--fluid-sm);
+  color: var(--wp--preset--color--neon-green-text);
+}
+
+.dark .about-adhd-subheading {
+  color: var(--wp--preset--color--neon-green);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .about-landing .entrance-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

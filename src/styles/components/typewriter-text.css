@@ -1,0 +1,16 @@
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--color-neon-pink);
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  animation: cursorBlink 0.8s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-cursor {
+    animation: none;
+    opacity: 1;
+  }
+}

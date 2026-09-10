@@ -1,0 +1,507 @@
+/* ==========================================================================
+   HIDDEN ABOUT PAGE — Funky Neon Landing
+   The unlisted gateway to every chapter of Ash's story.
+   BEM Architecture. No Tailwind utilities.
+   ========================================================================== */
+
+/* ── Page Shell ── */
+.hidden-about {
+  min-height: 100vh;
+  background: var(--wp--preset--color--atomic-black);
+  color: var(--wp--preset--color--neutral-200);
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════
+   HERO
+   ══════════════════════════════════════ */
+
+.hidden-about__hero {
+  position: relative;
+  padding-top: calc(5rem + clamp(2rem, 1.5rem + 2vw, 4rem));
+  padding-bottom: clamp(3rem, 2rem + 3vw, 6rem);
+  text-align: center;
+  overflow: hidden;
+}
+
+.hidden-about__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 20%, rgba(255, 16, 240, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 70% 60%, rgba(0, 68, 255, 0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 80%, rgba(57, 255, 20, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hidden-about__hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.75rem, 0.5rem + 0.75vw, 1.5rem);
+}
+
+.hidden-about__greeting {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(0.75rem, 0.65rem + 0.3vw, 0.9rem);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--wp--preset--color--neon-green);
+  text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+  animation: hiddenAboutPulse 3s ease-in-out infinite alternate;
+}
+
+.hidden-about__title {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: clamp(2.5rem, 2rem + 3vw, 5rem);
+  line-height: 1.05;
+  background: linear-gradient(135deg,
+    var(--wp--preset--color--neon-pink) 0%,
+    var(--wp--preset--color--neon-yellow) 50%,
+    var(--wp--preset--color--neon-cyan) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hidden-about__subtitle {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.35rem);
+  max-width: 36rem;
+  line-height: 1.5;
+  /* Animated neon gradient — pink (About accent) + complements */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-pink-text),
+    var(--wp--preset--color--neon-purple-text),
+    var(--wp--preset--color--neon-pink-text)
+  );
+  background-size: 200% 200%;
+  animation: subtitle-gradient-flow 6s ease infinite;
+}
+
+.dark .hidden-about__subtitle {
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-purple),
+    var(--wp--preset--color--neon-cyan),
+    var(--wp--preset--color--neon-pink)
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hidden-about__subtitle {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+.hidden-about__description {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(0.85rem, 0.75rem + 0.35vw, 1rem);
+  color: var(--wp--preset--color--neutral-400);
+  max-width: 40rem;
+  line-height: 1.7;
+}
+
+@keyframes hiddenAboutPulse {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* subtitle-gradient-flow keyframes moved to /styles/animations.css for reusability */
+
+/* ══════════════════════════════════════
+   CONTENT CONTAINER
+   ══════════════════════════════════════ */
+
+.hidden-about__content {
+  max-width: var(--wp--preset--layout--wide);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 2rem + 3vw, 6rem);
+  padding-bottom: clamp(3rem, 2rem + 3vw, 6rem);
+}
+
+/* ══════════════════════════════════════
+   STORY SECTION
+   ══════════════════════════════════════ */
+
+.hidden-about__story {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hidden-about__story-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(1.25rem, 1rem + 0.75vw, 1.75rem);
+  color: var(--wp--preset--color--neon-pink);
+  text-shadow: 0 0 16px rgba(255, 16, 240, 0.25);
+  margin-bottom: clamp(1rem, 0.75rem + 0.5vw, 1.5rem);
+}
+
+.hidden-about__story-text {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(0.9rem, 0.8rem + 0.35vw, 1.05rem);
+  line-height: 1.8;
+  color: var(--wp--preset--color--neutral-300);
+  margin-bottom: clamp(0.75rem, 0.5rem + 0.5vw, 1.25rem);
+}
+
+.hidden-about__story-text:last-child {
+  margin-bottom: 0;
+}
+
+/* ══════════════════════════════════════
+   MEDIA SECTION — Podcast, Videos, Portfolio, Blog
+   ══════════════════════════════════════ */
+
+.hidden-about__media {
+  width: 100%;
+}
+
+.hidden-about__media-header {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 1rem + 1vw, 2.5rem);
+}
+
+.hidden-about__media-title {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2.5rem);
+  background: linear-gradient(90deg,
+    var(--wp--preset--color--neon-cyan),
+    var(--wp--preset--color--neon-blue)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hidden-about__media-subtitle {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.95rem);
+  color: var(--wp--preset--color--neutral-500);
+  margin-top: 0.5rem;
+}
+
+.hidden-about__media-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 0.75rem + 0.5vw, 1.5rem);
+}
+
+@media (min-width: 520px) {
+  .hidden-about__media-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hidden-about__media-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ── Media Card ── */
+.hidden-about__media-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(0.5rem, 0.4rem + 0.25vw, 0.75rem);
+  padding: clamp(1.25rem, 1rem + 0.75vw, 2rem);
+  border-radius: var(--wp--preset--border-radius--lg);
+  border: 1px solid var(--wp--preset--color--neutral-800);
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+}
+
+.hidden-about__media-card:hover {
+  transform: translateY(-2px);
+}
+
+.hidden-about__media-card:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 2px;
+}
+
+/* Accent border on hover per accent */
+.hidden-about__media-card--red:hover {
+  border-color: rgba(255, 40, 40, 0.5);
+  box-shadow: 0 0 24px rgba(255, 40, 40, 0.1);
+}
+.hidden-about__media-card--cyan:hover {
+  border-color: rgba(0, 255, 245, 0.5);
+  box-shadow: 0 0 24px rgba(0, 255, 245, 0.1);
+}
+.hidden-about__media-card--pink:hover {
+  border-color: rgba(255, 16, 240, 0.5);
+  box-shadow: 0 0 24px rgba(255, 16, 240, 0.1);
+}
+.hidden-about__media-card--orange:hover {
+  border-color: rgba(255, 140, 0, 0.5);
+  box-shadow: 0 0 24px rgba(255, 140, 0, 0.1);
+}
+
+.hidden-about__media-icon {
+  width: clamp(1.5rem, 1.25rem + 0.5vw, 2rem);
+  height: clamp(1.5rem, 1.25rem + 0.5vw, 2rem);
+}
+
+.hidden-about__media-card--red .hidden-about__media-icon {
+  color: var(--wp--preset--color--neon-red);
+}
+.hidden-about__media-card--cyan .hidden-about__media-icon {
+  color: var(--wp--preset--color--neon-cyan);
+}
+.hidden-about__media-card--pink .hidden-about__media-icon {
+  color: var(--wp--preset--color--neon-pink);
+}
+.hidden-about__media-card--orange .hidden-about__media-icon {
+  color: var(--wp--preset--color--neon-orange);
+}
+
+.hidden-about__media-label {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.15rem);
+  color: var(--wp--preset--color--neutral-100);
+}
+
+.hidden-about__media-tagline {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(0.7rem, 0.65rem + 0.15vw, 0.8rem);
+  color: var(--wp--preset--color--neutral-500);
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════
+   SOCIAL STRIP
+   ══════════════════════════════════════ */
+
+.hidden-about__social {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.75rem, 0.5rem + 0.5vw, 1.25rem);
+}
+
+.hidden-about__social-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.3rem);
+  color: var(--wp--preset--color--neutral-200);
+}
+
+/* ══════════════════════════════════════
+   SUBPAGES GRID — All 17 about sub-pages
+   ══════════════════════════════════════ */
+
+.hidden-about__subpages {
+  width: 100%;
+}
+
+.hidden-about__subpages-header {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 1rem + 1vw, 2.5rem);
+}
+
+.hidden-about__subpages-title {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2.5rem);
+  background: linear-gradient(90deg,
+    var(--wp--preset--color--neon-orange),
+    var(--wp--preset--color--neon-yellow)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hidden-about__subpages-subtitle {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.95rem);
+  color: var(--wp--preset--color--neutral-500);
+  margin-top: 0.5rem;
+}
+
+.hidden-about__subpages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.75rem, 0.5rem + 0.5vw, 1.25rem);
+}
+
+@media (min-width: 520px) {
+  .hidden-about__subpages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .hidden-about__subpages-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .hidden-about__subpages-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ── Subpage Card ── */
+.hidden-about__card {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.6rem, 0.5rem + 0.25vw, 0.85rem);
+  padding: clamp(0.85rem, 0.7rem + 0.4vw, 1.25rem);
+  border-radius: var(--wp--preset--border-radius--md);
+  border: 1px solid var(--wp--preset--color--neutral-800);
+  background: rgba(255, 255, 255, 0.015);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease, background 250ms ease;
+}
+
+.hidden-about__card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hidden-about__card:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 2px;
+}
+
+/* Accent glow on hover */
+.hidden-about__card--pink:hover { border-color: rgba(255, 16, 240, 0.45); box-shadow: 0 0 20px rgba(255, 16, 240, 0.08); }
+.hidden-about__card--blue:hover { border-color: rgba(0, 68, 255, 0.45); box-shadow: 0 0 20px rgba(0, 68, 255, 0.08); }
+.hidden-about__card--green:hover { border-color: rgba(57, 255, 20, 0.45); box-shadow: 0 0 20px rgba(57, 255, 20, 0.08); }
+.hidden-about__card--purple:hover { border-color: rgba(190, 0, 254, 0.45); box-shadow: 0 0 20px rgba(190, 0, 254, 0.08); }
+.hidden-about__card--cyan:hover { border-color: rgba(0, 255, 245, 0.45); box-shadow: 0 0 20px rgba(0, 255, 245, 0.08); }
+.hidden-about__card--orange:hover { border-color: rgba(255, 140, 0, 0.45); box-shadow: 0 0 20px rgba(255, 140, 0, 0.08); }
+.hidden-about__card--yellow:hover { border-color: rgba(255, 229, 0, 0.45); box-shadow: 0 0 20px rgba(255, 229, 0, 0.08); }
+.hidden-about__card--red:hover { border-color: rgba(255, 40, 40, 0.45); box-shadow: 0 0 20px rgba(255, 40, 40, 0.08); }
+
+/* ── Icon dot ── */
+.hidden-about__card-dot {
+  flex-shrink: 0;
+  width: clamp(2rem, 1.75rem + 0.5vw, 2.5rem);
+  height: clamp(2rem, 1.75rem + 0.5vw, 2.5rem);
+  border-radius: var(--wp--preset--border-radius--full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden-about__card-dot-icon {
+  width: clamp(0.9rem, 0.8rem + 0.25vw, 1.1rem);
+  height: clamp(0.9rem, 0.8rem + 0.25vw, 1.1rem);
+}
+
+/* Per-accent dot backgrounds + icon color */
+.hidden-about__card--pink .hidden-about__card-dot { background: rgba(255, 16, 240, 0.12); }
+.hidden-about__card--pink .hidden-about__card-dot-icon { color: var(--wp--preset--color--neon-pink); }
+.hidden-about__card--blue .hidden-about__card-dot { background: rgba(0, 68, 255, 0.12); }
+.hidden-about__card--blue .hidden-about__card-dot-icon { color: var(--wp--preset--color--neon-blue); }
+.hidden-about__card--green .hidden-about__card-dot { background: rgba(57, 255, 20, 0.12); }
+.hidden-about__card--green .hidden-about__card-dot-icon { color: var(--wp--preset--color--neon-green); }
+.hidden-about__card--purple .hidden-about__card-dot { background: rgba(190, 0, 254, 0.12); }
+.hidden-about__card--purple .hidden-about__card-dot-icon { color: var(--wp--preset--color--neon-purple); }
+.hidden-about__card--cyan .hidden-about__card-dot { background: rgba(0, 255, 245, 0.12); }
+.hidden-about__card--cyan .hidden-about__card-dot-icon { color: var(--wp--preset--color--neon-cyan); }
+.hidden-about__card--orange .hidden-about__card-dot { background: rgba(255, 140, 0, 0.12); }
+.hidden-about__card--orange .hidden-about__card-dot-icon { color: var(--wp--preset--color--neon-orange); }
+.hidden-about__card--yellow .hidden-about__card-dot { background: rgba(255, 229, 0, 0.12); }
+.hidden-about__card--yellow .hidden-about__card-dot-icon { color: var(--wp--preset--color--neon-yellow); }
+.hidden-about__card--red .hidden-about__card-dot { background: rgba(255, 40, 40, 0.12); }
+.hidden-about__card--red .hidden-about__card-dot-icon { color: var(--wp--preset--color--neon-red); }
+
+/* ── Card text ── */
+.hidden-about__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.hidden-about__card-label {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(0.85rem, 0.75rem + 0.3vw, 1rem);
+  color: var(--wp--preset--color--neutral-100);
+  line-height: 1.3;
+}
+
+.hidden-about__card-tagline {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(0.7rem, 0.6rem + 0.2vw, 0.8rem);
+  color: var(--wp--preset--color--neutral-500);
+  line-height: 1.4;
+}
+
+/* ══════════════════════════════════════
+   NOISE TEXTURE OVERLAY
+   ══════════════════════════════════════ */
+
+.hidden-about__noise {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+}
+
+.hidden-about > *:not(.hidden-about__noise) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════
+   DIVIDER
+   ══════════════════════════════════════ */
+
+.hidden-about__divider {
+  width: 100%;
+  max-width: 12rem;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--wp--preset--color--neon-pink),
+    transparent
+  );
+  opacity: 0.3;
+}
+
+/* ══════════════════════════════════════
+   REDUCED MOTION
+   ══════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .hidden-about__greeting {
+    animation: none;
+  }
+
+  .hidden-about__card,
+  .hidden-about__media-card {
+    transition: none;
+  }
+}

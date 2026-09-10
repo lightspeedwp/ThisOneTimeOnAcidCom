@@ -1,0 +1,139 @@
+/* 404 Page Styles */
+
+.not-found-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 5vw, 2rem);
+  background-color: var(--wp--preset--color--base);
+  /* Use Atomic Noise texture */
+  background-image: radial-gradient(circle at center, rgba(30, 30, 30, 0.05) 0%, transparent 70%);
+}
+
+.dark .not-found-page {
+  background-color: var(--wp--preset--color--atomic-black);
+  background-image: radial-gradient(circle at center, rgba(50, 50, 50, 0.2) 0%, transparent 70%);
+}
+
+.not-found-content {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.not-found-glitch-text {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: clamp(8rem, 20vw, 16rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--wp--preset--color--contrast);
+  position: relative;
+  /* Neon Gradient Text */
+  background: var(--wp--preset--gradient--hyperpop);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: glitch 3s infinite alternate;
+}
+
+.not-found-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--wp--preset--color--contrast);
+}
+
+.dark .not-found-title {
+  color: #fff;
+}
+
+.not-found-description {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  line-height: 1.6;
+  color: var(--wp--preset--color--neutral-600);
+  max-width: 600px;
+}
+
+.dark .not-found-description {
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.not-found-actions {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  align-items: stretch;
+  width: 100%;
+  max-width: 500px;
+}
+
+@media (min-width: 640px) {
+  .not-found-actions {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .not-found-actions button {
+    flex: 1;
+    max-width: 240px;
+  }
+}
+
+/* Button Icon Sizing */
+.not-found-actions button svg {
+  width: clamp(1.25rem, 2.5vw, 1.5rem);
+  height: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 639px) {
+  .not-found-glitch-text {
+    font-size: clamp(5rem, 15vw, 8rem);
+  }
+
+  .not-found-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .not-found-description {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+  }
+}
+
+/* Glitch Animation Keyframes */
+@keyframes glitch {
+  0% {
+    text-shadow: 3px 3px 0px var(--wp--preset--color--neon-pink), -3px -3px 0px var(--wp--preset--color--neon-blue);
+    transform: skew(0deg);
+  }
+  20% {
+    text-shadow: 3px -3px 0px var(--wp--preset--color--neon-pink), -3px 3px 0px var(--wp--preset--color--neon-blue);
+    transform: skew(-2deg);
+  }
+  40% {
+    text-shadow: -3px 3px 0px var(--wp--preset--color--neon-pink), 3px -3px 0px var(--wp--preset--color--neon-blue);
+    transform: skew(2deg);
+  }
+  60% {
+    text-shadow: 3px 3px 0px var(--wp--preset--color--neon-pink), -3px -3px 0px var(--wp--preset--color--neon-blue);
+    transform: skew(0deg);
+  }
+  80% {
+    text-shadow: 0px 0px 12px var(--wp--preset--color--neon-pink), 0px 0px 12px var(--wp--preset--color--neon-blue);
+    transform: skew(0deg);
+  }
+  100% {
+    text-shadow: 3px 3px 0px var(--wp--preset--color--neon-pink), -3px -3px 0px var(--wp--preset--color--neon-blue);
+    transform: skew(0deg);
+  }
+}

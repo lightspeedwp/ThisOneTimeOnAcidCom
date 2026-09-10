@@ -1,0 +1,392 @@
+/* ==========================================================================
+   EBOOK BASE — Reader shell, hero, views, page surface, page number
+   Extracted from ebook.css (T09)
+   ========================================================================== */
+
+/* ── Reader Shell ── */
+.ebook-reader {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--wp--preset--color--neutral-100);
+  display: flex;
+  flex-direction: column;
+  max-width: var(--wp--preset--layout--wide); /* 1440px cap */
+  margin: 0 auto;
+  width: 100%;
+
+  /* ── Font scale multiplier (controlled by JavaScript) ── */
+  --ebook-font-scale: 1;
+
+  /* ── Breakpoint-scoped typography custom properties ──
+     These get overridden per breakpoint further down.
+     Components reference these vars so font sizes adapt in one place.
+     Multiplied by --ebook-font-scale for user font size preference. */
+  --ebook-body-size: calc(1rem * var(--ebook-font-scale));
+  --ebook-body-lh: 1.6;
+  --ebook-heading-size: calc(1.125rem * var(--ebook-font-scale));
+  --ebook-chapter-title-size: calc(1.375rem * var(--ebook-font-scale));
+  --ebook-cover-title-size: calc(1.75rem * var(--ebook-font-scale));
+  --ebook-cover-subtitle-size: calc(0.875rem * var(--ebook-font-scale));
+  --ebook-cover-author-size: calc(0.95rem * var(--ebook-font-scale));
+  --ebook-toc-title-size: calc(1.125rem * var(--ebook-font-scale));
+  --ebook-toc-item-size: calc(0.95rem * var(--ebook-font-scale));
+  --ebook-section-title-size: calc(1.125rem * var(--ebook-font-scale));
+  --ebook-chapter-number-size: calc(0.75rem * var(--ebook-font-scale));
+  --ebook-chapter-start-title-size: calc(1.375rem * var(--ebook-font-scale));
+  --ebook-chapter-start-subtitle-size: calc(0.9rem * var(--ebook-font-scale));
+  --ebook-part-label-size: calc(0.75rem * var(--ebook-font-scale));
+  --ebook-part-title-size: calc(1.5rem * var(--ebook-font-scale));
+  --ebook-part-subtitle-size: calc(0.875rem * var(--ebook-font-scale));
+  --ebook-epigraph-size: calc(1rem * var(--ebook-font-scale));
+  --ebook-epigraph-attr-size: calc(0.825rem * var(--ebook-font-scale));
+  --ebook-page-number-size: calc(0.7rem * var(--ebook-font-scale));
+  --ebook-page-pad-v: 0.875rem;
+  --ebook-page-pad-h: 0.875rem;
+  --ebook-meta-size: calc(0.75rem * var(--ebook-font-scale));
+  --ebook-chapter-heading-size: calc(0.675rem * var(--ebook-font-scale));
+  --ebook-blurb-size: calc(0.95rem * var(--ebook-font-scale));
+  --ebook-status-size: calc(0.675rem * var(--ebook-font-scale));
+  --ebook-back-title-size: calc(1.2rem * var(--ebook-font-scale));
+  --ebook-dedication-size: calc(1rem * var(--ebook-font-scale));
+}
+
+.dark .ebook-reader {
+  background: var(--wp--preset--color--atomic-black);
+}
+
+/* ── Hero (slim header above the book) ── */
+.ebook-reader__hero {
+  padding-top: calc(5rem + clamp(0.5rem, 0.4rem + 0.5vw, 1rem));
+  padding-bottom: var(--wp--preset--spacing--fluid-sm);
+  text-align: center;
+}
+
+.ebook-reader__hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ══════════════════════════════════════
+   FULLSCREEN MODE - Hide Global Header
+   ══════════════════════════════════════ */
+
+body.ebook-fullscreen .header {
+  display: none !important;
+}
+
+body.ebook-fullscreen .ebook-reader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+body.ebook-fullscreen .ebook-reader__hero {
+  padding-top: var(--wp--preset--spacing--fluid-sm);
+}
+
+/* ══════════════════════════════════════
+   MINIMAL MODE - Hide Navigation Bar
+   ══════════════════════════════════════ */
+
+.ebook-reader--minimal .ebook-reader__nav {
+  display: none;
+}
+
+.ebook-reader--minimal .ebook-reader__progress {
+  display: none;
+}
+
+/* ══════════════════════════════════════
+   SINGLE-PAGE SWIPE MODE (< 1024px)
+   ══════════════════════════════════════ */
+
+.ebook-reader__single-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 0;
+  touch-action: pan-y pinch-zoom;
+}
+
+.ebook-reader__single-track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 300%;
+  left: -100%;
+  will-change: transform;
+}
+
+/* Smooth page transitions */
+.ebook-reader__single-track--animating {
+  transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ebook-reader__single-track--swiping {
+  transition: none;
+}
+
+.ebook-reader__single-page {
+  width: calc(100% / 3);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+/* Fade effect for inactive pages */
+.ebook-reader__single-page--prev,
+.ebook-reader__single-page--next {
+  opacity: 0.3;
+}
+
+/* ══════════════════════════════════════
+   PAGING EFFECTS (Fade & None)
+   ══════════════════════════════════════ */
+
+.ebook-reader__single-wrapper {
+  transition: opacity 300ms ease;
+}
+
+.ebook-reader__book-wrapper {
+  transition: opacity 300ms ease;
+}
+
+.ebook-reader--fading {
+  opacity: 0 !important;
+}
+
+.ebook-reader__single-page .ebook-reader__page-inner {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ── Swipe Zones (visual feedback) ── */
+.ebook-reader__swipe-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20%;
+  max-width: 80px;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.ebook-reader__swipe-zone--left {
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 20, 147, 0.1) 0%,
+    transparent 100%
+  );
+}
+
+.ebook-reader__swipe-zone--right {
+  right: 0;
+  background: linear-gradient(
+    270deg,
+    rgba(20, 255, 255, 0.1) 0%,
+    transparent 100%
+  );
+}
+
+.ebook-reader__swipe-zone--active {
+  opacity: 1;
+}
+
+/* Mobile-specific swipe zone adjustments */
+@media (max-width: 767px) {
+  .ebook-reader__swipe-zone {
+    width: 25%;
+    max-width: 100px;
+  }
+}
+
+/* ══════════════════════════════════════
+   SPREAD MODE — BOOK CONTAINER (>= 1024px)
+   ══════════════════════════════════════ */
+
+.ebook-reader__book-wrapper {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .ebook-reader__book-wrapper {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--wp--preset--spacing--fluid-sm);
+    width: 100%;
+  }
+}
+
+.ebook-reader__book {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  perspective: 2500px;
+  filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.15));
+}
+
+.dark .ebook-reader__book {
+  filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.5));
+}
+
+/* ── Spine visual ── */
+.ebook-reader__spine {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.15) 50%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  z-index: 20;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+.dark .ebook-reader__spine {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+}
+
+/* ══════════════════════════════════════
+   PAGE (shared styles — both modes)
+   ══════════════════════════════════════ */
+
+.ebook-reader__page {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.ebook-reader__page--left {
+  left: 0;
+  border-radius: var(--wp--preset--border-radius--md) 0 0 var(--wp--preset--border-radius--md);
+}
+
+.ebook-reader__page--right {
+  right: 0;
+  border-radius: 0 var(--wp--preset--border-radius--md) var(--wp--preset--border-radius--md) 0;
+}
+
+/* ── Page inner (padding & scroll) ── */
+.ebook-reader__page-inner {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(0.75rem, 0.5rem + 1.5vw, 2.5rem) clamp(0.75rem, 0.5rem + 2vw, 2.5rem);
+
+  /* Light mode: warm off-white paper */
+  background: #FAFAF7;
+  color: var(--wp--preset--color--neutral-800);
+}
+
+.dark .ebook-reader__page-inner {
+  background: var(--wp--preset--color--atomic-black);
+  color: var(--wp--preset--color--neutral-200);
+}
+
+/* Thin custom scrollbar for page content */
+.ebook-reader__page-inner::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ebook-reader__page-inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ebook-reader__page-inner::-webkit-scrollbar-thumb {
+  background: var(--wp--preset--color--neutral-300);
+  border-radius: 2px;
+}
+
+.dark .ebook-reader__page-inner::-webkit-scrollbar-thumb {
+  background: var(--wp--preset--color--neutral-700);
+}
+
+/* Inner shadow on the spine edge (spread mode only) */
+@media (min-width: 1024px) {
+  .ebook-reader__page--left .ebook-reader__page-inner {
+    box-shadow: inset -8px 0 16px -8px rgba(0, 0, 0, 0.06);
+  }
+
+  .ebook-reader__page--right .ebook-reader__page-inner {
+    box-shadow: inset 8px 0 16px -8px rgba(0, 0, 0, 0.06);
+  }
+
+  .dark .ebook-reader__page--left .ebook-reader__page-inner {
+    box-shadow: inset -8px 0 16px -8px rgba(255, 255, 255, 0.03);
+  }
+
+  .dark .ebook-reader__page--right .ebook-reader__page-inner {
+    box-shadow: inset 8px 0 16px -8px rgba(255, 255, 255, 0.03);
+  }
+}
+
+/* ── Page number ── */
+.ebook-reader__page-number {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  flex-shrink: 0;
+  padding: 0.5rem 0 0.25rem;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--ebook-page-number-size);
+  letter-spacing: 0.05em;
+  color: var(--wp--preset--color--neutral-400);
+  text-align: center;
+  background: #FAFAF7;
+}
+
+.dark .ebook-reader__page-number {
+  color: var(--wp--preset--color--neutral-600);
+  background: var(--wp--preset--color--atomic-black);
+}
+
+/* Page number background matches special page types */
+.ebook-page--cover .ebook-reader__page-number,
+.ebook-page--back-cover .ebook-reader__page-number {
+  background: var(--wp--preset--color--neon-pink);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.ebook-page--part-title .ebook-reader__page-number,
+.ebook-page--appendix-title .ebook-reader__page-number {
+  background: var(--wp--preset--color--atomic-black);
+  color: var(--wp--preset--color--neutral-600);
+}

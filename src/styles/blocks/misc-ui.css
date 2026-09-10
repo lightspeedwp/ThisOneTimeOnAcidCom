@@ -1,0 +1,544 @@
+/* Misc UI Styles (Atomic Black System) */
+
+/* --- CAROUSEL --- */
+.carousel {
+  position: relative;
+}
+
+.carousel-content {
+  overflow: hidden;
+}
+
+.carousel-viewport-horizontal {
+  display: flex;
+  margin-left: -1rem; /* -ml-4 */
+}
+
+.carousel-viewport-vertical {
+  display: flex;
+  flex-direction: column;
+  margin-top: -1rem; /* -mt-4 */
+  height: 100%;
+}
+
+.carousel-item {
+  min-width: 0;
+  flex: 0 0 100%;
+}
+
+.carousel-item-horizontal {
+  padding-left: 1rem; /* pl-4 */
+}
+
+.carousel-item-vertical {
+  padding-top: 1rem; /* pt-4 */
+}
+
+.carousel-btn {
+  position: absolute;
+  border-radius: var(--wp--preset--border-radius--full);
+  height: 2rem; /* size-8 */
+  width: 2rem;
+}
+
+.carousel-prev-horizontal {
+  left: -3rem; /* -left-12 */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-next-horizontal {
+  right: -3rem; /* -right-12 */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-prev-vertical {
+  top: -3rem; /* -top-12 */
+  left: 50%;
+  transform: translateX(-50%);
+  rotate: 90deg;
+}
+
+.carousel-next-vertical {
+  bottom: -3rem; /* -bottom-12 */
+  left: 50%;
+  transform: translateX(-50%);
+  rotate: 90deg;
+}
+
+/* --- SCROLL AREA --- */
+.scroll-area-root {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.scroll-area-viewport {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+}
+
+.scroll-area-scrollbar {
+  display: flex;
+  user-select: none;
+  touch-action: none;
+  padding: 1px;
+  background-color: var(--wp--preset--color--base);
+  transition: background-color 0.2s ease-out;
+}
+
+.scroll-area-scrollbar[data-orientation='vertical'] {
+  width: 0.625rem; /* w-2.5 */
+  border-left: 1px solid transparent;
+}
+
+.scroll-area-scrollbar[data-orientation='horizontal'] {
+  flex-direction: column;
+  height: 0.625rem; /* h-2.5 */
+  border-top: 1px solid transparent;
+}
+
+.scroll-area-scrollbar:hover {
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .scroll-area-scrollbar:hover {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.scroll-area-thumb {
+  flex: 1;
+  background-color: var(--wp--preset--color--neutral-300);
+  border-radius: var(--wp--preset--border-radius--full);
+  position: relative;
+}
+
+.dark .scroll-area-thumb {
+  background-color: var(--wp--preset--color--neutral-600);
+}
+
+/* --- BREADCRUMB --- */
+.breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem; /* gap-1.5 */
+  font-size: 0.875rem; /* text-sm */
+  color: var(--wp--preset--color--neutral-500);
+  word-break: break-word;
+}
+
+@media (min-width: 640px) {
+  .breadcrumb-list {
+    gap: 0.625rem; /* gap-2.5 */
+  }
+}
+
+.breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem; /* gap-1.5 */
+}
+
+.breadcrumb-link {
+  transition: color 0.2s;
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+  color: var(--wp--preset--color--contrast);
+}
+
+.dark .breadcrumb-link:hover {
+  color: #fff;
+}
+
+.breadcrumb-page {
+  font-weight: 400;
+  color: var(--wp--preset--color--contrast);
+}
+
+.dark .breadcrumb-page {
+  color: #fff;
+}
+
+.breadcrumb-separator {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-separator svg {
+  height: 0.875rem; /* size-3.5 */
+  width: 0.875rem;
+}
+
+.breadcrumb-ellipsis {
+  display: flex;
+  height: 2.25rem; /* size-9 */
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.breadcrumb-ellipsis svg {
+  height: 1rem; /* size-4 */
+  width: 1rem;
+}
+
+/* --- CALENDAR --- */
+.calendar {
+  padding: 0.75rem;
+}
+
+.calendar-months {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .calendar-months {
+    flex-direction: row;
+  }
+}
+
+.calendar-month {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.calendar-caption {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.25rem;
+  position: relative;
+  align-items: center;
+  width: 100%;
+}
+
+.calendar-caption-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.calendar-nav-button {
+  height: 1.75rem; /* size-7 */
+  width: 1.75rem;
+  background-color: transparent;
+  padding: 0;
+  opacity: 0.5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wp--preset--border-radius--md);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+}
+
+.dark .calendar-nav-button {
+  border-color: var(--wp--preset--color--neutral-800);
+}
+
+.calendar-nav-button:hover {
+  opacity: 1;
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .calendar-nav-button:hover {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.calendar-nav-icon {
+  height: 1rem; /* size-4 */
+  width: 1rem;
+}
+
+.calendar-nav-button-prev {
+  position: absolute;
+  left: 0.25rem;
+}
+
+.calendar-nav-button-next {
+  position: absolute;
+  right: 0.25rem;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-table td {
+  padding: 0;
+}
+
+.calendar-head-row {
+  display: flex;
+}
+
+.calendar-head-cell {
+  color: var(--wp--preset--color--neutral-500);
+  border-radius: var(--wp--preset--border-radius--md);
+  width: 2rem; /* w-8 */
+  font-weight: 400;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.calendar-row {
+  display: flex;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.calendar-cell {
+  position: relative;
+  padding: 0;
+  text-align: center;
+  font-size: 0.875rem;
+  width: 2rem; /* w-8 */
+  height: 2rem; /* h-8 */
+}
+
+.calendar-cell:has([aria-selected]) {
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .calendar-cell:has([aria-selected]) {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.calendar-cell:has([aria-selected].day-range-end) {
+  border-top-right-radius: var(--wp--preset--border-radius--md);
+  border-bottom-right-radius: var(--wp--preset--border-radius--md);
+}
+
+.calendar-day {
+  height: 2rem; /* size-8 */
+  width: 2rem;
+  padding: 0;
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wp--preset--border-radius--md);
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+}
+
+.calendar-day:hover:not([aria-selected]) {
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .calendar-day:hover:not([aria-selected]) {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.calendar-day-selected {
+  background-color: var(--wp--preset--color--neon-purple) !important;
+  color: #fff !important;
+}
+
+.calendar-day-today {
+  background-color: var(--wp--preset--color--neutral-100);
+  color: var(--wp--preset--color--contrast);
+}
+
+.dark .calendar-day-today {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.calendar-day-outside {
+  color: var(--wp--preset--color--neutral-400);
+  opacity: 0.5;
+}
+
+.calendar-day-disabled {
+  color: var(--wp--preset--color--neutral-400);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.calendar-day-range-middle {
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .calendar-day-range-middle {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.calendar-day-hidden {
+  visibility: hidden;
+}
+
+/* --- TOGGLE GROUP --- */
+.toggle-group {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--wp--preset--border-radius--md);
+}
+
+.toggle-group-item {
+  border-radius: 0;
+}
+
+.toggle-group-item:first-child {
+  border-top-left-radius: var(--wp--preset--border-radius--md);
+  border-bottom-left-radius: var(--wp--preset--border-radius--md);
+}
+
+.toggle-group-item:last-child {
+  border-top-right-radius: var(--wp--preset--border-radius--md);
+  border-bottom-right-radius: var(--wp--preset--border-radius--md);
+}
+
+.toggle-group[data-variant='outline'] {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.toggle-group-item[data-variant='outline'] {
+  border-left: 0;
+}
+
+/* --- COLLAPSIBLE --- */
+.collapsible {
+  width: 100%;
+}
+
+.collapsible-trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: var(--wp--preset--border-radius--md);
+  color: inherit;
+}
+
+.collapsible-trigger:hover {
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .collapsible-trigger:hover {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.collapsible-content {
+  overflow: hidden;
+  font-size: 0.875rem;
+}
+
+.collapsible-content[data-state='open'] {
+  animation: collapsible-down 0.2s ease-out;
+}
+
+.collapsible-content[data-state='closed'] {
+  animation: collapsible-up 0.2s ease-out;
+}
+
+@keyframes collapsible-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-collapsible-content-height); opacity: 1; }
+}
+
+@keyframes collapsible-up {
+  from { height: var(--radix-collapsible-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+
+/* --- INPUT OTP --- */
+.input-otp-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-otp-group:has(:disabled) {
+  opacity: 0.5;
+}
+
+.input-otp-slot {
+  position: relative;
+  display: flex;
+  height: 2.25rem; /* h-9 */
+  width: 2.25rem; /* w-9 */
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--wp--preset--color--neutral-200);
+  border-bottom: 1px solid var(--wp--preset--color--neutral-200);
+  border-right: 1px solid var(--wp--preset--color--neutral-200);
+  font-size: 0.875rem; /* text-sm */
+  transition: all 0.2s;
+}
+
+.input-otp-slot:disabled {
+  cursor: not-allowed;
+}
+
+.dark .input-otp-slot {
+  border-color: var(--wp--preset--color--neutral-800);
+}
+
+.input-otp-slot:first-child {
+  border-left: 1px solid var(--wp--preset--color--neutral-200);
+  border-top-left-radius: var(--wp--preset--border-radius--md);
+  border-bottom-left-radius: var(--wp--preset--border-radius--md);
+}
+
+.dark .input-otp-slot:first-child {
+  border-left-color: var(--wp--preset--color--neutral-800);
+}
+
+.input-otp-slot:last-child {
+  border-top-right-radius: var(--wp--preset--border-radius--md);
+  border-bottom-right-radius: var(--wp--preset--border-radius--md);
+}
+
+.input-otp-slot[data-active='true'] {
+  z-index: 10;
+  border-color: var(--wp--preset--color--neon-purple);
+  box-shadow: 0 0 0 1px var(--wp--preset--color--neon-purple);
+}
+
+.input-otp-caret-wrapper {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-otp-caret {
+  height: 1rem;
+  width: 1px;
+  background-color: var(--wp--preset--color--contrast);
+  animation: caret-blink 1s ease-out infinite;
+}
+
+.dark .input-otp-caret {
+  background-color: #fff;
+}
+
+@keyframes caret-blink {
+  0%, 70%, 100% { opacity: 1; }
+  20%, 50% { opacity: 0; }
+}
+
+.input-otp-separator {
+  margin: 0 0.25rem;
+}

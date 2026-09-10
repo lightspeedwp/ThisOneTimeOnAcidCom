@@ -1,0 +1,150 @@
+/* ═══════════════════════════════════════════════
+   Theme Toggle Block Styles — Neon Pink/Yellow
+   v4.2.0 — Maximum contrast fix (March 12, 2026)
+   ═══════════════════════════════════════════════
+   
+   FIXES:
+   - Neon pink border in light mode (was invisible black)
+   - Atomic black sun icon for maximum contrast (was neon yellow)
+   - Pink glow on white background for visibility
+   - Neon yellow appears on hover for brand consistency
+   ═══════════════════════════════════════════════ */
+
+/* ── Base Button ── */
+.theme-toggle {
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--wp--preset--color--neon-pink);  /* Neon pink border for visibility */
+  background-color: #FFFFFF;
+  color: #0F0F0F;  /* Dark text for contrast */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(255, 16, 240, 0.2), 0 0 12px rgba(255, 16, 240, 0.15);
+}
+
+/* ── Dark Mode Styling ── */
+.dark .theme-toggle {
+  background-color: rgba(15, 15, 15, 0.8);
+  border-color: rgba(255, 16, 240, 0.4);  /* Neon pink border */
+  color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 12px rgba(255, 16, 240, 0.2);
+}
+
+/* ── Hover States ── */
+.theme-toggle:hover {
+  transform: rotate(15deg) scale(1.05);
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 20px rgba(255, 16, 240, 0.3);
+}
+
+.dark .theme-toggle:hover {
+  border-color: var(--wp--preset--color--neon-yellow);
+  background-color: rgba(15, 15, 15, 0.95);
+  box-shadow: 
+    0 0 20px rgba(255, 16, 240, 0.4),
+    0 0 10px rgba(244, 255, 60, 0.3);
+}
+
+/* ── Focus State ── */
+.theme-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--wp--preset--color--neon-pink);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 2px;
+}
+
+.dark .theme-toggle:focus-visible {
+  outline-color: var(--wp--preset--color--neon-yellow);
+  box-shadow: 0 0 20px rgba(244, 255, 60, 0.5);
+}
+
+/* ── Icon Styling ── */
+.theme-toggle__icon {
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sun Icon (Light Mode) */
+.theme-toggle__icon--sun {
+  color: #0F0F0F;  /* Atomic black for maximum contrast on white */
+  filter: drop-shadow(0 0 2px rgba(15, 15, 15, 0.3));
+}
+
+.theme-toggle:hover .theme-toggle__icon--sun {
+  color: var(--wp--preset--color--neon-yellow);
+  filter: drop-shadow(0 0 8px var(--wp--preset--color--neon-yellow));
+  transform: rotate(45deg) scale(1.1);
+}
+
+/* Moon Icon (Dark Mode) */
+.theme-toggle__icon--moon {
+  color: var(--wp--preset--color--neon-pink);
+  filter: drop-shadow(0 0 4px var(--wp--preset--color--neon-pink));
+}
+
+.dark .theme-toggle:hover .theme-toggle__icon--moon {
+  color: var(--wp--preset--color--neon-yellow);
+  filter: drop-shadow(0 0 8px var(--wp--preset--color--neon-yellow));
+  transform: scale(1.1);
+}
+
+/* ── Active State ── */
+.theme-toggle:active {
+  transform: rotate(15deg) scale(0.95);
+}
+
+/* ── Screen Reader Only ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle,
+  .theme-toggle__icon {
+    transition: none !important;
+  }
+
+  .theme-toggle:hover {
+    transform: none;
+  }
+
+  .theme-toggle:hover .theme-toggle__icon--sun,
+  .dark .theme-toggle:hover .theme-toggle__icon--moon {
+    transform: none;
+  }
+}
+
+/* ── Mobile Adjustments ── */
+@media (max-width: 768px) {
+  .theme-toggle {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .theme-toggle__icon {
+    font-size: 18px;
+  }
+}

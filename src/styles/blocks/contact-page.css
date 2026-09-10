@@ -1,0 +1,349 @@
+/* Contact Page Styles */
+
+.contact-page-container {
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--wp--preset--color--base);
+  color: var(--wp--preset--color--contrast);
+  overflow: hidden;
+}
+
+.dark .contact-page-container {
+  background-color: var(--wp--preset--color--atomic-black);
+  color: #fff;
+}
+
+/* Legacy noise div — no longer needed, kept for backward compat */
+.contact-page-bg-noise {
+  display: none;
+}
+
+/* Background Elements */
+.contact-page-bg-orb-1,
+.contact-page-bg-orb-2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.contact-page-bg-orb-1 {
+  top: -10%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  background: var(--wp--preset--color--neon-purple);
+  animation: float 15s ease-in-out infinite;
+}
+
+.contact-page-bg-orb-2 {
+  bottom: -10%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: var(--wp--preset--color--neon-blue);
+  animation: float 12s ease-in-out infinite reverse;
+}
+
+/* Main Content */
+.contact-page-main {
+  position: relative;
+  z-index: 10;
+  max-width: var(--wp--preset--layout--wide);
+  margin: 0 auto;
+  /* Top: 80px (header) + 24-32px fluid padding */
+  padding-top: calc(5rem + clamp(1.5rem, 1.35rem + 0.714vw, 2rem));
+  /* Bottom: 24-32px fluid padding */
+  padding-bottom: clamp(1.5rem, 1.35rem + 0.714vw, 2rem);
+  padding-left: var(--wp--preset--spacing--section-horizontal);
+  padding-right: var(--wp--preset--spacing--section-horizontal);
+}
+
+/* Header */
+.contact-page-header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--fluid-2xl);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.text-contact-body {
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .text-contact-body {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* Grid Layout */
+.contact-page-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-2xl);
+  margin-bottom: var(--wp--preset--spacing--fluid-3xl);
+}
+
+@media (min-width: 1024px) {
+  .contact-page-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* Left Column - About */
+.contact-page-about {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.contact-page-quote {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--400);
+  font-style: italic;
+  font-weight: 500;
+  margin-bottom: var(--wp--preset--spacing--fluid-lg);
+  line-height: 1.4;
+}
+
+.contact-page-connect-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--300);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.text-contact-heading {
+  color: var(--wp--preset--color--neutral-800);
+}
+
+.dark .text-contact-heading {
+  color: #fff;
+}
+
+.contact-page-logo-container {
+  margin-top: auto;
+  padding-top: var(--wp--preset--spacing--fluid-lg);
+}
+
+.contact-page-logo {
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.contact-page-logo:hover {
+  transform: scale(1.05);
+}
+
+.contact-page-logo:focus-visible {
+  outline: 2px solid var(--wp--preset--color--neon-purple);
+  outline-offset: 4px;
+  border-radius: var(--wp--preset--border-radius--md);
+}
+
+/* Right Column - Form */
+.contact-page-form {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+}
+
+.dark .contact-page-form {
+  background: transparent;
+  border: none;
+}
+
+/* Form heading */
+.contact-page-form h2 {
+  padding: 0 var(--wp--preset--spacing--20);
+}
+
+/* Social Links Alignment */
+.contact-page-social-links {
+  justify-content: flex-start;
+}
+
+/* FAQ Inline in Left Column */
+.contact-page-faq-inline {
+  margin-top: var(--wp--preset--spacing--fluid-xl);
+}
+
+/* FAQ Full-Width — below the two-column grid */
+.contact-page-faq-fullwidth {
+  width: 100%;
+  margin-top: var(--wp--preset--spacing--fluid-2xl);
+}
+
+/* Contact Graphic */
+.contact-page-graphic {
+  margin-top: var(--wp--preset--spacing--fluid-lg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-page-graphic-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--wp--preset--border-radius--lg);
+}
+
+/* Separator */
+.contact-page-separator {
+  width: 100%;
+  margin-top: var(--wp--preset--spacing--fluid-2xl);
+  margin-bottom: var(--wp--preset--spacing--fluid-lg);
+  padding: 0 var(--wp--preset--spacing--20);
+}
+
+.contact-page-separator-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+}
+
+.dark .contact-page-separator-line {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+/* Bottom Footer Section */
+.contact-page-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-md);
+  padding-bottom: var(--wp--preset--spacing--fluid-lg);
+}
+
+@media (min-width: 768px) {
+  .contact-page-footer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.contact-page-footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .contact-page-footer-left {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.contact-page-copyright {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.contact-page-footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.contact-page-footer-link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--wp--preset--color--neutral-500);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-size: var(--wp--preset--font-size--100);
+  font-family: var(--wp--preset--font-family--brand-body);
+  white-space: nowrap;
+}
+
+.contact-page-footer-link:hover {
+  color: var(--wp--preset--color--neutral-900);
+}
+
+.dark .contact-page-footer-link:hover {
+  color: #fff;
+}
+
+.contact-page-footer-logo {
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.contact-page-footer-logo:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.contact-page-footer-logo:focus {
+  outline: 2px solid var(--wp--preset--color--neon-purple);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* Animation moved to /styles/animations.css */
+
+/* Batch 6 Migration Classes */
+
+/* Contact Page Decorative Orbs */
+.contact-decoration-1 {
+  position: absolute;
+  top: 25%; /* top-1/4 */
+  right: 25%; /* right-1/4 */
+  width: 6rem; /* w-24 */
+  height: 6rem; /* h-24 */
+  background: linear-gradient(to bottom right, rgb(251, 207, 232), rgb(221, 214, 254));
+  border-radius: var(--wp--preset--border-radius--full);
+  opacity: 0.1;
+  filter: blur(64px); /* blur-3xl */
+  transition: opacity 300ms ease;
+}
+
+.dark .contact-decoration-1 {
+  background: linear-gradient(to bottom right, rgb(219, 39, 119), rgb(147, 51, 234));
+  opacity: 0.2;
+}
+
+@media (min-width: 640px) {
+  .contact-decoration-1 {
+    width: 12rem; /* sm:w-48 */
+    height: 12rem; /* sm:h-48 */
+  }
+}
+
+.contact-decoration-2 {
+  position: absolute;
+  bottom: 25%; /* bottom-1/4 */
+  left: 25%; /* left-1/4 */
+  width: 8rem; /* w-32 */
+  height: 8rem; /* h-32 */
+  background: linear-gradient(to bottom right, rgb(233, 213, 255), rgb(186, 230, 253));
+  border-radius: var(--wp--preset--border-radius--full);
+  opacity: 0.1;
+  filter: blur(64px);
+  transition: opacity 300ms ease;
+}
+
+.dark .contact-decoration-2 {
+  background: linear-gradient(to bottom right, rgb(147, 51, 234), rgb(29, 78, 216));
+  opacity: 0.2;
+}
+
+@media (min-width: 640px) {
+  .contact-decoration-2 {
+    width: 16rem; /* sm:w-64 */
+    height: 16rem; /* sm:h-64 */
+  }
+}

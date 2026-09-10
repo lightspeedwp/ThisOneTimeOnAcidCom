@@ -1,0 +1,112 @@
+/* ============================================
+   BREADCRUMBS
+   BEM Architecture - Ash Shaw Makeup Portfolio
+   Version: 2.0.0 — Layout-level auto-breadcrumbs
+   ============================================ */
+
+/* ── Layout-level breadcrumbs container ──
+   Sits between Header and page content for consistent placement.
+   Max-width matches the site content container.                    */
+.layout-breadcrumbs {
+  width: 100%;
+  max-width: var(--wp--style--global--wide-size, 1440px);
+  margin: 0 auto;
+  padding: 0.5rem var(--wp--preset--spacing--fluid-md);
+}
+
+.layout-breadcrumbs__inner {
+  max-width: var(--wp--style--global--content-size, 800px);
+}
+
+.breadcrumbs {
+  padding: 0.25rem 0;
+}
+
+/* ── Centered / Hero variant ──
+   Used when breadcrumbs sit inside a hero section above a centered title.
+   Removes own vertical padding (parent gap handles spacing)
+   and centers the crumb list horizontally.                              */
+.breadcrumbs--centered {
+  padding: 0;
+}
+
+.breadcrumbs--centered .breadcrumbs__list {
+  justify-content: center;
+}
+
+.breadcrumbs__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbs__item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.breadcrumbs__separator {
+  width: 0.625rem;
+  height: 0.625rem;
+  color: var(--wp--preset--color--neutral-400);
+  flex-shrink: 0;
+}
+
+.dark .breadcrumbs__separator {
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.breadcrumbs__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: 0.8125rem;
+  color: var(--wp--preset--color--neon-purple-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs__link:hover {
+  color: var(--wp--preset--color--neon-pink-text);
+}
+
+.breadcrumbs__link:focus-visible {
+  outline: 2px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 2px;
+  border-radius: var(--wp--preset--border-radius--sm);
+}
+
+.dark .breadcrumbs__link {
+  color: var(--wp--preset--color--neon-purple);
+}
+
+.dark .breadcrumbs__link:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.breadcrumbs__text {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: 0.8125rem;
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.breadcrumbs__item--current .breadcrumbs__text {
+  color: var(--wp--preset--color--contrast);
+  font-weight: 500;
+}
+
+.dark .breadcrumbs__item--current .breadcrumbs__text {
+  color: var(--color-text-light); /* #F6F2EB - 14.8:1 contrast (WCAG AAA) - CRITICAL FIX - Current page MUST be visible */
+}
+
+.breadcrumbs__home-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+}

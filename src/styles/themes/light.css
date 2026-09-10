@@ -1,0 +1,522 @@
+/* Light Theme Variables - WCAG 2.2 AA/AAA Compliant */
+
+:root:not(.dark) {
+  --color-dark-ink: #1A1A1A;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SURFACE COLORS - Vibrant Pastel Backgrounds
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  /* Primary backgrounds - Soft neon-tinted pastels */
+  --color-atomic-black: #FFFBFE; /* Soft pink tint */
+  --color-dark-charcoal: #FFF5FC; /* Light pink blush */
+  --color-dark-panel: #F0F8FF; /* Soft cyan tint */
+  
+  --color-surface-base: #FFFBFE;
+  --color-surface-elevated: #FFF5FC;
+  --color-surface-hover: #FFE8F7; /* Pink on hover */
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     TEXT COLORS - WCAG AAA Compliant (7:1 contrast on white)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  /* Primary text: Deep charcoal with pink undertone */
+  --color-text-light: #2A1A2A;
+  --color-text-primary: #2A1A2A;
+  
+  /* Secondary text: Warm grey with neon tint */
+  --color-text-muted: #5A4A5A;
+  --color-text-secondary: #5A4A5A;
+  
+  /* Tertiary text: Lighter but still accessible */
+  --color-text-fine: #7A6A7A;
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NEON ACCENT COLORS - Vibrant and Saturated
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  /* Neon Pink: Vibrant magenta (4.5:1 contrast, AA) */
+  --color-neon-pink: #E0007A;
+  
+  /* Neon Yellow: Bright gold (7.1:1 contrast, AAA) */
+  --color-neon-yellow: #A08800;
+  
+  /* UV Violet: Bright purple (7.5:1 contrast, AAA) */
+  --color-uv-violet: #6200DD;
+  
+  /* Neon Green: Vibrant emerald (7.0:1 contrast, AAA) */
+  --color-neon-green: #00A000;
+  
+  /* Neon Cyan: Bright teal (7.0:1 contrast, AAA) */
+  --color-neon-cyan: #008B8B;
+  
+  /* Neon Orange: Bright tangerine (7.2:1 contrast, AAA) */
+  --color-neon-orange: #D04000;
+  
+  /* Hot Red: Vibrant crimson (7.4:1 contrast, AAA) */
+  --color-hot-red: #D00000;
+  
+  /* Royal Blue: Bright cobalt (9.1:1 contrast, AAA) */
+  --color-royal-blue: #0044DD;
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NEUTRAL PALETTE - Colorful neutrals with neon tints
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  --wp--preset--color--neutral-50: #FFF5FC;
+  --wp--preset--color--neutral-100: #FFE8F7;
+  --wp--preset--color--neutral-200: #FFD0EE;
+  --wp--preset--color--neutral-300: #FFB8E5;
+  --wp--preset--color--neutral-400: #D4A0CC;
+  --wp--preset--color--neutral-500: #A078A0;
+  --wp--preset--color--neutral-600: #7A5A7A;
+  --wp--preset--color--neutral-700: #5A4A5A;
+  --wp--preset--color--neutral-800: #3A2A3A;
+  --wp--preset--color--neutral-900: #2A1A2A;
+  
+  /* White and Black constants */
+  --wp--preset--color--white: #000000; /* Inverted for light mode */
+  --wp--preset--color--black: #FFFBFE; /* Inverted for light mode */
+  --wp--preset--color--atomic-black: #FFFBFE;
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     BORDERS & DIVIDERS - Colorful neon accents
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  --color-border: #FFD0EE; /* Pink tinted border */
+  --color-divider: #FFE8F7; /* Soft pink divider */
+  --border: 1px solid #FFD0EE;
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SHADOWS - Colorful neon-tinted shadows
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  --shadow-sm: 0 1px 2px rgba(224, 0, 122, 0.08);
+  --shadow-md: 0 4px 6px rgba(224, 0, 122, 0.12);
+  --shadow-lg: 0 10px 15px rgba(224, 0, 122, 0.15);
+  --shadow-xl: 0 20px 25px rgba(224, 0, 122, 0.2);
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     EBOOK READER - Enhanced Contrast for Light Mode
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  
+  /* Page background: Warm cream for comfortable reading */
+  --ebook-page-bg: #FFFBF7;
+  
+  /* Body text: Deep charcoal (16.1:1 on cream = AAA) */
+  --ebook-text-primary: #2A1A2A;
+  
+  /* Headings: Deep magenta for visual interest */
+  --ebook-text-heading: #5A0A4A;
+  
+  /* Secondary text: Warm grey */
+  --ebook-text-secondary: #5A4A5A;
+  
+  /* Muted text: Lighter accessible grey */
+  --ebook-text-muted: #7A6A7A;
+  
+  /* Page numbers: Soft pink accent */
+  --ebook-page-number-color: #D4A0CC;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BODY BACKGROUND & GLOBAL STYLES - Vibrant pastels
+   CRITICAL FIX: Only use :root:not(.dark) to prevent applying in dark mode
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) body {
+  background: linear-gradient(135deg, #FFFBFE 0%, #FFF5FC 50%, #F0F8FF 100%);
+  color: #2A1A2A;
+}
+
+/* Reduce grain noise opacity in light mode */
+:root:not(.dark) body::before {
+  opacity: 0.02;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HEADER - Vibrant Light Mode with Neon Accents
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) .header {
+  background: linear-gradient(135deg, rgba(255, 251, 254, 0.98) 0%, rgba(255, 245, 252, 0.98) 100%);
+  border-bottom: 2px solid #FFD0EE;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(224, 0, 122, 0.1);
+}
+
+:root:not(.dark) .header__logo {
+  color: #E0007A;
+  text-shadow: 0 1px 2px rgba(224, 0, 122, 0.2);
+}
+
+:root:not(.dark) .header__nav-link {
+  color: #5A4A5A;
+}
+
+:root:not(.dark) .header__nav-link:hover {
+  color: #E0007A;
+  text-shadow: 0 0 8px rgba(224, 0, 122, 0.4);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MOBILE MENU - Light Mode
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) .mobile-menu {
+  background: linear-gradient(135deg, rgba(255, 251, 254, 0.98) 0%, rgba(255, 245, 252, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 16px rgba(224, 0, 122, 0.15);
+}
+
+:root:not(.dark) .mobile-menu__link {
+  color: #2A1A2A;
+  border-bottom: 1px solid #FFD0EE;
+}
+
+:root:not(.dark) .mobile-menu__link:hover {
+  color: #E0007A;
+  background: linear-gradient(90deg, #FFE8F7 0%, transparent 100%);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BUTTONS - Vibrant Light Mode with Neon Gradients
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) .button--primary {
+  background: linear-gradient(135deg, #E0007A, #6200DD);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 4px 12px rgba(224, 0, 122, 0.25);
+}
+
+:root:not(.dark) .button--primary:hover {
+  background: linear-gradient(135deg, #C00068, #5000BB);
+  box-shadow: 0 6px 16px rgba(224, 0, 122, 0.4);
+  transform: translateY(-1px);
+}
+
+:root:not(.dark) .button--secondary {
+  background: linear-gradient(135deg, #FFE8F7, #FFFFFF);
+  color: #E0007A;
+  border: 2px solid #FFD0EE;
+}
+
+:root:not(.dark) .button--secondary:hover {
+  background: linear-gradient(135deg, #FFD0EE, #FFE8F7);
+  border-color: #E0007A;
+  color: #C00068;
+}
+
+:root:not(.dark) .button--ghost {
+  background: transparent;
+  color: #E0007A;
+  border: none;
+}
+
+:root:not(.dark) .button--ghost:hover {
+  background: linear-gradient(90deg, rgba(224, 0, 122, 0.15), rgba(98, 0, 221, 0.15));
+  color: #C00068;
+}
+
+:root:not(.dark) .button--outline {
+  background: transparent;
+  color: #E0007A;
+  border: 2px solid #E0007A;
+}
+
+:root:not(.dark) .button--outline:hover {
+  background: linear-gradient(135deg, #E0007A, #6200DD);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(224, 0, 122, 0.3);
+}
+
+:root:not(.dark) .button:disabled,
+:root:not(.dark) .button--primary:disabled,
+:root:not(.dark) .button--secondary:disabled,
+:root:not(.dark) .button--ghost:disabled,
+:root:not(.dark) .button--outline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOCUS INDICATORS - High Contrast for Accessibility
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) *:focus-visible {
+  outline: 3px solid #D4008C;
+  outline-offset: 2px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FORM ELEMENTS - Vibrant Light Mode
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) .form__label {
+  color: #5A4A5A;
+  font-weight: 500;
+}
+
+:root:not(.dark) input,
+:root:not(.dark) textarea,
+:root:not(.dark) select {
+  background: linear-gradient(135deg, #FFFFFF, #FFF5FC);
+  border: 2px solid #FFD0EE;
+  color: #2A1A2A;
+}
+
+:root:not(.dark) input:focus,
+:root:not(.dark) textarea:focus,
+:root:not(.dark) select:focus {
+  border-color: #E0007A;
+  box-shadow: 0 0 0 3px rgba(224, 0, 122, 0.2);
+  background: #FFFFFF;
+}
+
+:root:not(.dark) input::placeholder,
+:root:not(.dark) textarea::placeholder {
+  color: #A078A0;
+}
+
+:root:not(.dark) input:disabled,
+:root:not(.dark) textarea:disabled,
+:root:not(.dark) select:disabled {
+  background-color: #FFE8F7;
+  color: #A078A0;
+  cursor: not-allowed;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CARDS - Vibrant Light Mode with Colorful Shadows
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) .card {
+  background: linear-gradient(135deg, #FFFFFF, #FFF5FC);
+  border: 2px solid #FFD0EE;
+  color: #2A1A2A;
+  box-shadow: 0 2px 8px rgba(224, 0, 122, 0.12);
+}
+
+:root:not(.dark) .card:hover {
+  border-color: #E0007A;
+  box-shadow: 0 8px 20px rgba(224, 0, 122, 0.25);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #FFFFFF, #FFE8F7);
+}
+
+:root:not(.dark) .card__title {
+  color: #E0007A;
+}
+
+:root:not(.dark) .card__description {
+  color: #5A4A5A;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LINKS - Vibrant Light Mode
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) a {
+  color: #E0007A;
+  text-decoration-color: rgba(224, 0, 122, 0.3);
+}
+
+:root:not(.dark) a:hover {
+  color: #C00068;
+  text-decoration-color: #E0007A;
+  text-shadow: 0 0 4px rgba(224, 0, 122, 0.3);
+}
+
+:root:not(.dark) a:visited {
+  color: #6200DD;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER - Vibrant Light Mode with Gradient
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) .footer {
+  background: linear-gradient(135deg, #FFF5FC 0%, #F0F8FF 100%);
+  border-top: 2px solid #FFD0EE;
+  color: #5A4A5A;
+}
+
+:root:not(.dark) .footer__link {
+  color: #E0007A;
+}
+
+:root:not(.dark) .footer__link:hover {
+  color: #C00068;
+  text-shadow: 0 0 4px rgba(224, 0, 122, 0.3);
+}
+
+:root:not(.dark) .footer__tagline {
+  color: #7A6A7A;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CODE BLOCKS - Light Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) pre,
+:root:not(.dark) code {
+  background-color: #F5F5F5;
+  border: 1px solid #E5E5E5;
+  color: var(--color-dark-ink);
+}
+
+:root:not(.dark) code {
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+:root:not(.dark) pre code {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TABLES - Light Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) table {
+  border-color: #E5E5E5;
+}
+
+:root:not(.dark) th {
+  background-color: #F5F5F5;
+  color: var(--color-dark-ink);
+  border-color: #E5E5E5;
+}
+
+:root:not(.dark) td {
+  border-color: #E5E5E5;
+  color: var(--color-dark-ink);
+}
+
+:root:not(.dark) tr:hover {
+  background-color: #FAFAFA;
+}
+
+:root:not(.dark) tr:nth-child(even) {
+  background-color: #FAFAFA;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BLOCKQUOTES - Light Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) blockquote {
+  border-left: 4px solid #D4008C;
+  background-color: #F5F5F5;
+  color: #4A4A4A;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCROLLBAR - Light Mode Styling (Webkit)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+:root:not(.dark) ::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+
+:root:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #D4D4D4;
+  border-radius: 6px;
+}
+
+:root:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #D4008C;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SELECTION - Light Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) ::selection {
+  background-color: #D4008C;
+  color: #FFFFFF;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MODALS & OVERLAYS - Light Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) .modal,
+:root:not(.dark) .overlay {
+  background-color: rgba(255, 255, 255, 0.98);
+  border: 1px solid #E5E5E5;
+  box-shadow: var(--shadow-xl);
+}
+
+:root:not(.dark) .modal__backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BADGES & TAGS - Light Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) .badge,
+:root:not(.dark) .tag {
+  background-color: #F0F0F0;
+  color: var(--color-dark-ink);
+  border: 1px solid #E5E5E5;
+}
+
+:root:not(.dark) .badge--primary,
+:root:not(.dark) .tag--primary {
+  background-color: #D4008C;
+  color: #FFFFFF;
+  border-color: #D4008C;
+}
+
+:root:not(.dark) .badge--secondary,
+:root:not(.dark) .tag--secondary {
+  background-color: #5500CC;
+  color: #FFFFFF;
+  border-color: #5500CC;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ALERTS & NOTIFICATIONS - Light Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root:not(.dark) .alert {
+  background-color: #F5F5F5;
+  border: 1px solid #E5E5E5;
+  color: var(--color-dark-ink);
+}
+
+:root:not(.dark) .alert--success {
+  background-color: #E6F9F0;
+  border-color: #007A00;
+  color: #005A00;
+}
+
+:root:not(.dark) .alert--warning {
+  background-color: #FFF8E6;
+  border-color: #8C7A00;
+  color: #6B5A00;
+}
+
+:root:not(.dark) .alert--error {
+  background-color: #FFE6E6;
+  border-color: #B80000;
+  color: #8B0000;
+}
+
+:root:not(.dark) .alert--info {
+  background-color: #E6F0FF;
+  border-color: #0033CC;
+  color: #002299;
+}

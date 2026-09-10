@@ -1,0 +1,72 @@
+.terminal-boot-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9996;
+  overflow: hidden;
+}
+
+.terminal-boot-overlay__scanline {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-neon-pink),
+    transparent
+  );
+  opacity: 0.25;
+  animation: terminalScanSweep 1.2s linear forwards;
+}
+
+/* Terminal text reveal — clip-path wipe for key headings */
+@keyframes terminalReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0% 0 0);
+    opacity: 1;
+  }
+}
+
+/* Explicit utility classes */
+.heading--terminal-reveal {
+  animation: terminalReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.heading--terminal-reveal-delay-1 {
+  animation: terminalReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.heading--terminal-reveal-delay-2 {
+  animation: terminalReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+/* Auto-apply to h1 inside entrance-boot containers (Phase 1 pattern) */
+.entrance-boot h1 {
+  animation: terminalReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal-boot-overlay {
+    display: none;
+  }
+
+  .heading--terminal-reveal,
+  .heading--terminal-reveal-delay-1,
+  .heading--terminal-reveal-delay-2 {
+    animation: none;
+    clip-path: none;
+  }
+}

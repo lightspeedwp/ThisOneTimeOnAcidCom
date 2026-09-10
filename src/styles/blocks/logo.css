@@ -1,0 +1,74 @@
+/* Logo Block Styles */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo__image {
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+/* Sizes */
+.logo--sm .logo__image { width: 80px; }
+.logo--md .logo__image { width: 120px; }
+.logo--lg .logo__image { width: 160px; }
+.logo--xl .logo__image { width: 200px; }
+.logo--2xl .logo__image { width: 240px; }
+.logo--3xl .logo__image { width: 300px; }
+.logo--header .logo__image { width: 140px; } /* Custom for header */
+.logo--mobile-sm .logo__image { width: 100px; }
+
+@media (min-width: 1024px) {
+  .logo--header .logo__image { width: 180px; }
+}
+
+/* Light/Dark Mode Switching */
+.logo__image--light {
+  display: block;
+}
+
+.logo__image--dark {
+  display: none;
+}
+
+.dark .logo__image--light {
+  display: none;
+}
+
+.dark .logo__image--dark {
+  display: block;
+}
+
+/* Forced Dark Mode Override (for Footer etc) */
+.logo__image--force-visible {
+  display: block !important;
+}
+
+/* Text Styles inside SVG */
+.logo__text-brand {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-weight: 700;
+  font-size: 140px;
+  fill: #fff;
+}
+
+.logo__text-tagline {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: 0.4em;
+  fill: rgba(255, 255, 255, 0.8);
+}
+
+/* Light mode overrides for text if needed, 
+   but usually logo image is used in light mode 
+   and SVG is used in dark mode/footer */
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .logo__image {
+    transition: none;
+  }
+}

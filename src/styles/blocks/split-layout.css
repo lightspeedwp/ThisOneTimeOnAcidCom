@@ -1,0 +1,74 @@
+/* ==========================================================================
+   Split Layout Component
+   Mobile-first responsive image-text split layout
+   ========================================================================== */
+
+/* Base container - mobile stacks vertically (image first) */
+.split-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-lg);
+  width: 100%;
+}
+
+/* Image container */
+.split-layout__image {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.split-layout__image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--wp--preset--border-radius--lg);
+  box-shadow: var(--wp--preset--shadow--card);
+}
+
+/* Content container */
+.split-layout__content {
+  flex: 1;
+  min-width: 0; /* Prevent flex overflow */
+}
+
+/* ==========================================================================
+   Desktop: Side-by-side layout
+   ========================================================================== */
+@media (min-width: 768px) {
+  .split-layout {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+
+  /* Even split (50/50) */
+  .split-layout__image {
+    flex: 1;
+  }
+
+  .split-layout__content {
+    flex: 1;
+  }
+
+  /* Image emphasis (60/40) */
+  .split-layout--image-emphasis .split-layout__image {
+    flex: 1.5;
+  }
+
+  .split-layout--image-emphasis .split-layout__content {
+    flex: 1;
+  }
+
+  /* Right-side image (reverse order) */
+  .split-layout--right {
+    flex-direction: row-reverse;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .split-layout__image img {
+    transition: none;
+  }
+}

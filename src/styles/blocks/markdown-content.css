@@ -1,0 +1,25 @@
+/**
+ * Content Markdown Theme — Cyan accents + Ubuntu / Lora / Roboto Mono
+ * Used by: ContentSpecimensPage
+ * Refactored T07 — all structural styles now in markdown-base.css
+ */
+
+[data-md-theme="content"] {
+  --md-accent: var(--wp--preset--color--neon-cyan);
+  --md-accent-text: var(--wp--preset--color--neon-cyan-text);
+  --md-font-serif: var(--wp--preset--font-family--content-serif);
+  --md-font-sans: var(--wp--preset--font-family--content-sans);
+  --md-font-mono: var(--wp--preset--font-family--content-mono);
+  --md-heading-color: var(--wp--preset--color--neon-cyan-text);
+  --md-p-color: var(--foreground);
+  --md-p-size: 1rem;
+  --md-p-mb: 1rem;
+  --md-h1-size: 2.5rem;
+  --md-h2-size: 2rem;
+  --md-h3-size: 1.75rem;
+  --md-h4-size: 1.5rem;
+  --md-h5-size: 1.25rem;
+  --md-h6-size: 1.125rem;
+  --md-h2-border: none;
+  --md-h2-pb: 0;
+}

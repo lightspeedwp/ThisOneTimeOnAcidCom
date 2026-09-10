@@ -1,0 +1,303 @@
+/**
+ * Gear Page Styles — expanded with brands, wisdom, and CTA sections
+ * @version 2.0.0
+ */
+
+/* ── Hero ── */
+.gear-page__hero {
+  padding: var(--wp--preset--spacing--fluid-2xl) 0;
+  background-color: var(--wp--preset--color--atomic-black);
+  background-size: cover;
+  background-position: center;
+}
+
+/* ── Content ── */
+.gear-page__content {
+  padding-bottom: var(--wp--preset--spacing--fluid-xl);
+}
+
+/* ── Category grid ── */
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--wp--preset--spacing--fluid-xl);
+  padding: var(--wp--preset--spacing--fluid-xl);
+}
+
+.gear-category-card {
+  background: rgba(15, 15, 15, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--wp--preset--color--neutral-800);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--fluid-lg);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.gear-category-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--wp--preset--color--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.gear-category-header {
+  margin-bottom: var(--wp--preset--spacing--fluid-lg);
+  text-align: center;
+}
+
+.gear-category-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  background: rgba(0, 255, 255, 0.1);
+  border-radius: 50%;
+  margin-bottom: var(--wp--preset--spacing--fluid-sm);
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.gear-item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gear-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--wp--preset--spacing--fluid-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gear-item:last-child {
+  border-bottom: none;
+}
+
+.gear-item__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.gear-item__name {
+  font-weight: 600;
+  color: var(--wp--preset--color--white);
+}
+
+.gear-item__desc {
+  font-size: 0.85em;
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.gear-item__usage {
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--wp--preset--color--neon-green);
+  background: rgba(0, 255, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Section headers (shared) ── */
+.gear-page__section-title {
+  margin-bottom: var(--wp--preset--spacing--fluid-xs);
+}
+
+.gear-page__section-desc {
+  margin-bottom: var(--wp--preset--spacing--fluid-lg);
+  max-width: 640px;
+}
+
+/* ── Brands section ── */
+.gear-page__brands {
+  padding: var(--wp--preset--spacing--fluid-2xl) var(--wp--preset--spacing--fluid-xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gear-brands-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-lg);
+}
+
+@media (min-width: 600px) {
+  .gear-brands-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .gear-brands-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gear-brand-card {
+  background: rgba(15, 15, 15, 0.6);
+  border: 1px solid var(--wp--preset--color--neutral-800);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--fluid-lg);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.gear-brand-card:hover {
+  border-color: var(--wp--preset--color--neon-orange);
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.08);
+}
+
+.gear-brand-card__name {
+  color: var(--wp--preset--color--neon-orange);
+  margin-bottom: 2px;
+}
+
+.gear-brand-card__tagline {
+  color: var(--wp--preset--color--neutral-500);
+  font-style: italic;
+  font-size: 0.82rem;
+  margin-bottom: var(--wp--preset--spacing--fluid-sm);
+}
+
+.gear-brand-card__specialty {
+  color: var(--wp--preset--color--neutral-300);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+.gear-brand-card__featured {
+  color: var(--wp--preset--color--neutral-400);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding-top: var(--wp--preset--spacing--fluid-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.gear-brand-card__star {
+  color: var(--wp--preset--color--neon-yellow);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.gear-brand-card__link {
+  display: inline-block;
+  margin-top: var(--wp--preset--spacing--fluid-sm);
+  color: var(--wp--preset--color--neon-cyan);
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.gear-brand-card__link:hover {
+  color: var(--wp--preset--color--white);
+}
+
+/* ── Kit wisdom ── */
+.gear-page__wisdom {
+  padding: var(--wp--preset--spacing--fluid-2xl) var(--wp--preset--spacing--fluid-xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gear-wisdom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 720px;
+}
+
+.gear-wisdom-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: var(--wp--preset--spacing--fluid-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--wp--preset--color--neutral-300);
+  line-height: 1.6;
+}
+
+.gear-wisdom-item:last-child {
+  border-bottom: none;
+}
+
+.gear-wisdom-bullet {
+  color: var(--wp--preset--color--neon-cyan);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* ── Resources CTA ── */
+.gear-page__cta {
+  padding: var(--wp--preset--spacing--fluid-xl);
+}
+
+.gear-cta-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  background: rgba(0, 255, 65, 0.06);
+  border: 1px solid var(--wp--preset--color--neon-green);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--fluid-lg) var(--wp--preset--spacing--fluid-xl);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.gear-cta-card:hover {
+  background: rgba(0, 255, 65, 0.1);
+  transform: translateY(-2px);
+}
+
+.gear-cta-card__content {
+  flex: 1;
+}
+
+.gear-cta-card__title {
+  color: var(--wp--preset--color--neon-green);
+  margin-bottom: var(--wp--preset--spacing--fluid-xs);
+}
+
+.gear-cta-card__description {
+  color: var(--wp--preset--color--neutral-400);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 560px;
+}
+
+.gear-cta-card__arrow {
+  color: var(--wp--preset--color--neon-green);
+  margin-left: var(--wp--preset--spacing--fluid-md);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.gear-cta-card:hover .gear-cta-card__arrow {
+  transform: translateX(4px);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .gear-category-card,
+  .gear-brand-card,
+  .gear-cta-card {
+    transition: none;
+  }
+
+  .gear-category-card:hover,
+  .gear-brand-card:hover,
+  .gear-cta-card:hover {
+    transform: none;
+  }
+
+  .gear-cta-card:hover .gear-cta-card__arrow {
+    transform: none;
+  }
+}

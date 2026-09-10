@@ -1,0 +1,96 @@
+/* ==========================================================================
+   MANIFESTO PAGE — Neon vs Atomic Black Philosophy
+   Phase 5 Polish — strict BEM, no inline styles
+   ========================================================================== */
+
+.manifesto-page {
+  background: var(--wp--preset--color--atomic-black);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* ── Hero ── */
+.manifesto-page__hero {
+  padding-top: calc(5rem + clamp(1.5rem, 1.35rem + 0.714vw, 2rem));
+  padding-bottom: var(--wp--preset--spacing--fluid-lg);
+  text-align: center;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 0, 50, 0.06) 0%,
+      transparent 100%
+    );
+}
+
+.manifesto-page__hero-inner {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.manifesto-page__title {
+  margin-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+.manifesto-page__hero-desc {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--300);
+  color: var(--wp--preset--color--neutral-300);
+  max-width: 38rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* ── Section Scroll Container ── */
+.manifesto-scroll-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-xl);
+  padding: var(--wp--preset--spacing--fluid-xl) var(--wp--preset--spacing--section-horizontal);
+  max-width: var(--wp--preset--layout--wide);
+  margin: 0 auto;
+}
+
+/* Override content-section colors for dark manifesto page */
+.manifesto-page .content-section__title {
+  color: #fff;
+}
+
+.manifesto-page .content-section__subtitle {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* ── Manifesto Body Text ── */
+.manifesto-content {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--400);
+  line-height: 1.8;
+  color: var(--wp--preset--color--neutral-300);
+  font-weight: 300;
+}
+
+/* ── Footer Section ── */
+.manifesto-footer-section {
+  padding: var(--wp--preset--spacing--fluid-xl) var(--wp--preset--spacing--section-horizontal);
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  border-top: 1px solid var(--wp--preset--color--neutral-800);
+}
+
+/* Override pull-quote text color for manifesto context */
+.manifesto-page .pull-quote__text {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .manifesto-page .entrance-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

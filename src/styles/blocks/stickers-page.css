@@ -1,0 +1,536 @@
+/* ============================================
+   STICKERS GALLERY PAGE
+   Polaroid-framed neon sticker showcase
+   v2.0.0 — Light mode + search/filter/random
+   ============================================ */
+
+/* ── Page Shell ── */
+.stickers-page {
+  min-height: 100vh;
+  background: var(--wp--preset--color--neutral-50);
+}
+
+.dark .stickers-page {
+  background: var(--wp--preset--color--atomic-black);
+}
+
+/* ══════════════════════════════════════
+   HERO
+   ══════════════════════════════════════ */
+
+.stickers-page__hero {
+  padding-top: calc(5rem + clamp(1.5rem, 1.35rem + 0.714vw, 2rem));
+  padding-bottom: var(--wp--preset--spacing--fluid-lg);
+  text-align: center;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 16, 240, 0.04) 0%,
+      rgba(190, 0, 254, 0.03) 40%,
+      transparent 100%
+    );
+}
+
+.dark .stickers-page__hero {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 16, 240, 0.06) 0%,
+      rgba(190, 0, 254, 0.04) 40%,
+      transparent 100%
+    );
+}
+
+.stickers-page__hero-content {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+/* Badge pill */
+.stickers-page__hero-badge {
+  display: inline-block;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--wp--preset--color--neon-pink-text);
+  background: rgba(255, 16, 240, 0.06);
+  padding: 6px 18px;
+  border-radius: var(--wp--preset--border-radius--full);
+  border: 1px solid rgba(255, 16, 240, 0.15);
+}
+
+.dark .stickers-page__hero-badge {
+  background: rgba(255, 16, 240, 0.12);
+  border-color: rgba(255, 16, 240, 0.3);
+}
+
+/* Description */
+.stickers-page__hero-desc {
+  max-width: 38rem;
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .stickers-page__hero-desc {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ══════════════════════════════════════
+   CONTROLS BAR (search + chips + random)
+   ══════════════════════════════════════ */
+
+.stickers-page__controls {
+  max-width: var(--wp--preset--layout--wide);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  padding-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+/* ── Search Row ── */
+.stickers-page__search-row {
+  display: flex;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.stickers-page__search {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 400px;
+}
+
+.stickers-page__search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--wp--preset--color--neutral-400);
+  pointer-events: none;
+}
+
+.stickers-page__search-input {
+  width: 100%;
+  padding: 10px 16px 10px 44px;
+  border: 1px solid var(--wp--preset--color--neutral-300);
+  border-radius: var(--wp--preset--border-radius--full);
+  background: var(--wp--preset--color--base);
+  color: var(--foreground);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--200);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.stickers-page__search-input::placeholder {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.stickers-page__search-input:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 12px rgba(255, 16, 240, 0.18);
+}
+
+.dark .stickers-page__search-input {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--wp--preset--color--neutral-700);
+  color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .stickers-page__search-input::placeholder {
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .stickers-page__search-input:focus {
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 16px rgba(255, 16, 240, 0.35);
+}
+
+/* ── Random Button ── */
+.stickers-page__random-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid var(--wp--preset--color--neon-purple);
+  border-radius: var(--wp--preset--border-radius--full);
+  background: transparent;
+  color: var(--wp--preset--color--neon-purple-text);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  cursor: pointer;
+  transition: all 200ms ease;
+  white-space: nowrap;
+}
+
+.stickers-page__random-btn:hover {
+  background: rgba(190, 0, 254, 0.08);
+  box-shadow: 0 0 14px rgba(190, 0, 254, 0.2);
+}
+
+.stickers-page__random-btn:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 2px;
+}
+
+.dark .stickers-page__random-btn {
+  border-color: var(--wp--preset--color--neon-purple);
+  color: var(--wp--preset--color--neon-purple);
+}
+
+.dark .stickers-page__random-btn:hover {
+  background: rgba(190, 0, 254, 0.15);
+  box-shadow: 0 0 18px rgba(190, 0, 254, 0.35);
+}
+
+.stickers-page__random-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 400ms ease;
+}
+
+.stickers-page__random-btn:hover .stickers-page__random-icon {
+  transform: rotate(72deg);
+}
+
+/* ── Theme Chips Row ── */
+.stickers-page__themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.stickers-page__themes-label {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .stickers-page__themes-label {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.stickers-page__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border: 1px solid var(--wp--preset--color--neutral-300);
+  border-radius: var(--wp--preset--border-radius--full);
+  background: transparent;
+  color: var(--wp--preset--color--neutral-700);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  cursor: pointer;
+  transition: all 200ms ease;
+  white-space: nowrap;
+}
+
+.stickers-page__chip:hover {
+  border-color: var(--wp--preset--color--neon-purple);
+  color: var(--wp--preset--color--neon-purple-text);
+  box-shadow: 0 0 8px rgba(190, 0, 254, 0.12);
+}
+
+.stickers-page__chip:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 2px;
+}
+
+.stickers-page__chip--active {
+  background: var(--wp--preset--color--neon-purple);
+  border-color: var(--wp--preset--color--neon-purple);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(190, 0, 254, 0.25);
+  padding: 4px 12px;
+}
+
+.stickers-page__chip--active:hover {
+  background: #a800de;
+  border-color: #a800de;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(190, 0, 254, 0.35);
+}
+
+/* Dark mode chips */
+.dark .stickers-page__chip {
+  border-color: var(--wp--preset--color--neutral-700);
+  color: var(--wp--preset--color--neutral-300);
+}
+
+.dark .stickers-page__chip:hover {
+  border-color: var(--wp--preset--color--neon-purple);
+  color: var(--wp--preset--color--neon-purple);
+  box-shadow: 0 0 10px rgba(190, 0, 254, 0.25);
+}
+
+.dark .stickers-page__chip--active {
+  background: var(--wp--preset--color--neon-purple);
+  border-color: var(--wp--preset--color--neon-purple);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(190, 0, 254, 0.5);
+}
+
+.stickers-page__chip-count {
+  font-size: 0.75em;
+  opacity: 0.65;
+}
+
+/* ══════════════════════════════════════
+   GALLERY BODY
+   ══════════════════════════════════════ */
+
+.stickers-page__body {
+  max-width: var(--wp--preset--layout--wide);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal)
+    var(--wp--preset--spacing--section-vertical);
+}
+
+/* ── Count Badge ── */
+.stickers-page__count {
+  text-align: center;
+  color: var(--wp--preset--color--neutral-500);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  padding-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+.stickers-page__count-number {
+  color: var(--wp--preset--color--neon-pink-text);
+}
+
+/* ── Empty State ── */
+.stickers-page__empty {
+  text-align: center;
+  padding: var(--wp--preset--spacing--fluid-xl) 0;
+  color: var(--wp--preset--color--neutral-500);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--200);
+}
+
+.dark .stickers-page__empty {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ── Grid ── */
+.stickers-page__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+@media (min-width: 600px) {
+  .stickers-page__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .stickers-page__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .stickers-page__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+@media (min-width: 1800px) {
+  .stickers-page__grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}
+
+/* ══════════════════════════════════════
+   POLAROID CARD — LIGHT MODE (DEFAULT)
+   ══════════════════════════════════════ */
+
+.polaroid {
+  background: #ffffff;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 300ms ease, box-shadow 300ms ease, outline 200ms ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.polaroid:hover {
+  transform: translateY(-4px) rotate(-0.8deg);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.10),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  border-color: rgba(190, 0, 254, 0.15);
+}
+
+.polaroid:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 3px;
+  box-shadow: var(--wp--preset--shadow--neon-pink);
+}
+
+/* ── POLAROID — DARK MODE ── */
+.dark .polaroid {
+  background: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.04);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.35),
+    0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.dark .polaroid:hover {
+  border-color: rgba(255, 16, 240, 0.2);
+  box-shadow:
+    0 12px 40px rgba(255, 16, 240, 0.10),
+    0 4px 16px rgba(0, 0, 0, 0.30);
+}
+
+/* ── Image area ── */
+.polaroid__image-frame {
+  padding: 12px 12px 0;
+  background: inherit;
+}
+
+.polaroid__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 2px;
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .polaroid__image {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+/* ── Label ── */
+.polaroid__label {
+  padding: 10px 12px 14px;
+  text-align: center;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--neutral-600);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dark .polaroid__label {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ══════════════════════════════════════
+   RANDOM HIGHLIGHT GLOW
+   ══════════════════════════════════════ */
+
+.polaroid--highlighted {
+  animation: polaroid-glow 1.8s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes polaroid-glow {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(190, 0, 254, 0.6),
+      0 0 30px rgba(190, 0, 254, 0.4);
+    transform: scale(1.03);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(190, 0, 254, 0.25),
+      0 0 40px rgba(255, 16, 240, 0.3);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: scale(1);
+  }
+}
+
+.dark .polaroid--highlighted {
+  animation: polaroid-glow-dark 1.8s ease-out forwards;
+}
+
+@keyframes polaroid-glow-dark {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(255, 16, 240, 0.7),
+      0 0 40px rgba(255, 16, 240, 0.5);
+    transform: scale(1.03);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(255, 16, 240, 0.35),
+      0 0 50px rgba(190, 0, 254, 0.4);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow:
+      0 2px 12px rgba(0, 0, 0, 0.35),
+      0 0 1px rgba(255, 255, 255, 0.06);
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid:hover {
+    transform: none;
+  }
+
+  .polaroid--highlighted {
+    animation: none;
+    box-shadow:
+      0 0 0 3px var(--wp--preset--color--neon-purple),
+      0 0 16px rgba(190, 0, 254, 0.3);
+  }
+}
+
+/* Lightbox styles extracted to /styles/blocks/sticker-lightbox.css (T13) */
+
+/* ══════════════════════════════════════
+   RESPONSIVE CONTROLS
+   ══════════════════════════════════════ */
+
+@media (max-width: 580px) {
+  .stickers-page__search-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .stickers-page__search {
+    max-width: 100%;
+  }
+
+  .stickers-page__random-btn {
+    align-self: flex-start;
+  }
+}

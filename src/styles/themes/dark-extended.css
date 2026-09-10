@@ -1,0 +1,767 @@
+/* Dark Theme Extended Components - Part 2 */
+/* This file contains additional dark mode component styles */
+/* Import this after dark.css in your main stylesheet */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   IMAGES - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark img,
+body.dark img {
+  border-color: var(--color-border);
+}
+
+.dark img:hover,
+body.dark img:hover {
+  box-shadow: 0 0 20px rgba(255, 58, 174, 0.3);
+}
+
+.dark figure,
+body.dark figure {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface-elevated);
+}
+
+.dark figcaption,
+body.dark figcaption {
+  color: var(--color-text-muted);
+  background-color: var(--color-atomic-black);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SIDEBAR - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .sidebar,
+body.dark .sidebar {
+  background-color: var(--color-atomic-black);
+  border-right: 1px solid var(--color-border);
+}
+
+.dark .sidebar__header,
+body.dark .sidebar__header {
+  border-bottom: 1px solid var(--color-border);
+  color: var(--wp--preset--color--white);
+}
+
+.dark .sidebar__section,
+body.dark .sidebar__section {
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.dark .sidebar__link,
+body.dark .sidebar__link {
+  color: var(--color-text-muted);
+}
+
+.dark .sidebar__link:hover,
+body.dark .sidebar__link:hover {
+  color: var(--color-neon-pink);
+  background-color: rgba(255, 58, 174, 0.05);
+}
+
+.dark .sidebar__link--active,
+body.dark .sidebar__link--active {
+  color: var(--color-neon-pink);
+  background-color: rgba(255, 58, 174, 0.1);
+  border-left: 3px solid var(--color-neon-pink);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAVIGATION MENU - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .nav-menu,
+body.dark .nav-menu {
+  background-color: var(--color-atomic-black);
+  border: 1px solid var(--color-border);
+}
+
+.dark .nav-menu__item,
+body.dark .nav-menu__item {
+  color: var(--color-text-light);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.dark .nav-menu__item:hover,
+body.dark .nav-menu__item:hover {
+  background-color: var(--color-surface-elevated);
+  color: var(--color-neon-pink);
+}
+
+.dark .nav-menu__item--active,
+body.dark .nav-menu__item--active {
+  background-color: rgba(255, 58, 174, 0.1);
+  color: var(--color-neon-pink);
+  border-left: 4px solid var(--color-neon-pink);
+}
+
+.dark .nav-menu__icon,
+body.dark .nav-menu__icon {
+  color: #CFC7BB;
+}
+
+.dark .nav-menu__item--active .nav-menu__icon,
+body.dark .nav-menu__item--active .nav-menu__icon {
+  color: #FF3AAE;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MOBILE MENU - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .mobile-menu,
+body.dark .mobile-menu {
+  background-color: rgba(15, 15, 15, 0.98);
+  border-left: 1px solid #333333;
+  backdrop-filter: blur(10px);
+}
+
+.dark .mobile-menu__overlay,
+body.dark .mobile-menu__overlay {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.dark .mobile-menu__header,
+body.dark .mobile-menu__header {
+  border-bottom: 1px solid #333333;
+}
+
+.dark .mobile-menu__close,
+body.dark .mobile-menu__close {
+  color: #F6F2EB;
+  background-color: transparent;
+}
+
+.dark .mobile-menu__close:hover,
+body.dark .mobile-menu__close:hover {
+  color: #FF3AAE;
+  background-color: rgba(255, 58, 174, 0.1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOAST NOTIFICATIONS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .toast,
+body.dark .toast {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7), 0 0 12px rgba(255, 58, 174, 0.2);
+}
+
+.dark .toast--success,
+body.dark .toast--success {
+  border-left: 4px solid #00FF85;
+}
+
+.dark .toast--warning,
+body.dark .toast--warning {
+  border-left: 4px solid #F4FF3C;
+}
+
+.dark .toast--error,
+body.dark .toast--error {
+  border-left: 4px solid #FF0055;
+}
+
+.dark .toast--info,
+body.dark .toast--info {
+  border-left: 4px solid #4A90FF;
+}
+
+.dark .toast__close,
+body.dark .toast__close {
+  color: #CFC7BB;
+}
+
+.dark .toast__close:hover,
+body.dark .toast__close:hover {
+  color: #FF3AAE;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   STATUS INDICATORS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .status,
+body.dark .status {
+  border: 1px solid #333333;
+}
+
+.dark .status--online,
+body.dark .status--online {
+  background-color: #00FF85;
+  box-shadow: 0 0 8px rgba(0, 255, 133, 0.6);
+}
+
+.dark .status--offline,
+body.dark .status--offline {
+  background-color: #666666;
+}
+
+.dark .status--busy,
+body.dark .status--busy {
+  background-color: #FF0055;
+  box-shadow: 0 0 8px rgba(255, 0, 85, 0.6);
+}
+
+.dark .status--away,
+body.dark .status--away {
+  background-color: #F4FF3C;
+  box-shadow: 0 0 8px rgba(244, 255, 60, 0.6);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RATING STARS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .rating,
+body.dark .rating {
+  color: #333333;
+}
+
+.dark .rating__star,
+body.dark .rating__star {
+  color: #333333;
+}
+
+.dark .rating__star--filled,
+body.dark .rating__star--filled {
+  color: #F4FF3C;
+  text-shadow: 0 0 8px rgba(244, 255, 60, 0.5);
+}
+
+.dark .rating__star--half,
+body.dark .rating__star--half {
+  color: #F4FF3C;
+  text-shadow: 0 0 8px rgba(244, 255, 60, 0.5);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TIMELINE - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .timeline,
+body.dark .timeline {
+  border-left: 2px solid #333333;
+}
+
+.dark .timeline__item,
+body.dark .timeline__item {
+  position: relative;
+}
+
+.dark .timeline__marker,
+body.dark .timeline__marker {
+  background-color: #FF3AAE;
+  border: 3px solid #0F0F0F;
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.5);
+}
+
+.dark .timeline__content,
+body.dark .timeline__content {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark .timeline__title,
+body.dark .timeline__title {
+  color: #FFFFFF;
+}
+
+.dark .timeline__date,
+body.dark .timeline__date {
+  color: #9C9488;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TESTIMONIAL CARDS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .testimonial,
+body.dark .testimonial {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark .testimonial__quote,
+body.dark .testimonial__quote {
+  color: #F6F2EB;
+  border-left: 4px solid #FF3AAE;
+}
+
+.dark .testimonial__author,
+body.dark .testimonial__author {
+  color: #FFFFFF;
+}
+
+.dark .testimonial__role,
+body.dark .testimonial__role {
+  color: #CFC7BB;
+}
+
+.dark .testimonial__avatar,
+body.dark .testimonial__avatar {
+  border: 2px solid #FF3AAE;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   AUTHOR BIO - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .author-bio,
+body.dark .author-bio {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+}
+
+.dark .author-bio__avatar,
+body.dark .author-bio__avatar {
+  border: 3px solid #FF3AAE;
+  box-shadow: 0 0 16px rgba(255, 58, 174, 0.3);
+}
+
+.dark .author-bio__name,
+body.dark .author-bio__name {
+  color: #FFFFFF;
+}
+
+.dark .author-bio__title,
+body.dark .author-bio__title {
+  color: #F4FF3C;
+}
+
+.dark .author-bio__description,
+body.dark .author-bio__description {
+  color: #CFC7BB;
+}
+
+.dark .author-bio__link,
+body.dark .author-bio__link {
+  color: #FF3AAE;
+}
+
+.dark .author-bio__link:hover,
+body.dark .author-bio__link:hover {
+  color: #F4FF3C;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   COMMENT SECTION - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .comment,
+body.dark .comment {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  border-left: 3px solid #FF3AAE;
+}
+
+.dark .comment__header,
+body.dark .comment__header {
+  border-bottom: 1px solid #222222;
+}
+
+.dark .comment__author,
+body.dark .comment__author {
+  color: #FFFFFF;
+}
+
+.dark .comment__date,
+body.dark .comment__date {
+  color: #9C9488;
+}
+
+.dark .comment__body,
+body.dark .comment__body {
+  color: #F6F2EB;
+}
+
+.dark .comment__reply,
+body.dark .comment__reply {
+  color: #FF3AAE;
+}
+
+.dark .comment__reply:hover,
+body.dark .comment__reply:hover {
+  color: #F4FF3C;
+}
+
+.dark .comment--reply,
+body.dark .comment--reply {
+  background-color: #0F0F0F;
+  border-left-color: #8A63FF;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PRICING TABLE - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .pricing-card,
+body.dark .pricing-card {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+}
+
+.dark .pricing-card--featured,
+body.dark .pricing-card--featured {
+  border: 2px solid #FF3AAE;
+  box-shadow: 0 0 24px rgba(255, 58, 174, 0.3);
+}
+
+.dark .pricing-card__header,
+body.dark .pricing-card__header {
+  background: linear-gradient(135deg, #FF3AAE 0%, #8A63FF 100%);
+  color: #FFFFFF;
+}
+
+.dark .pricing-card__price,
+body.dark .pricing-card__price {
+  color: #FFFFFF;
+}
+
+.dark .pricing-card__feature,
+body.dark .pricing-card__feature {
+  color: #F6F2EB;
+  border-bottom: 1px solid #222222;
+}
+
+.dark .pricing-card__feature--disabled,
+body.dark .pricing-card__feature--disabled {
+  color: #666666;
+  text-decoration: line-through;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NEWSLETTER SIGNUP - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .newsletter,
+body.dark .newsletter {
+  background: linear-gradient(135deg, rgba(255, 58, 174, 0.1) 0%, rgba(138, 99, 255, 0.1) 100%);
+  border: 1px solid #333333;
+}
+
+.dark .newsletter__title,
+body.dark .newsletter__title {
+  color: #FFFFFF;
+}
+
+.dark .newsletter__description,
+body.dark .newsletter__description {
+  color: #CFC7BB;
+}
+
+.dark .newsletter__input,
+body.dark .newsletter__input {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark .newsletter__input:focus,
+body.dark .newsletter__input:focus {
+  border-color: #FF3AAE;
+  box-shadow: 0 0 0 2px rgba(255, 58, 174, 0.2);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CALL TO ACTION - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .cta,
+body.dark .cta {
+  background: linear-gradient(135deg, rgba(255, 58, 174, 0.15) 0%, rgba(138, 99, 255, 0.15) 100%);
+  border: 2px solid #FF3AAE;
+  box-shadow: 0 0 24px rgba(255, 58, 174, 0.3);
+}
+
+.dark .cta__title,
+body.dark .cta__title {
+  color: #FFFFFF;
+  text-shadow: 0 0 20px rgba(255, 58, 174, 0.5);
+}
+
+.dark .cta__description,
+body.dark .cta__description {
+  color: #F6F2EB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCROLL INDICATOR - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .scroll-indicator,
+body.dark .scroll-indicator {
+  background: linear-gradient(90deg, #FF3AAE 0%, #8A63FF 50%, #00D4FF 100%);
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.5);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BACK TO TOP BUTTON - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .back-to-top,
+body.dark .back-to-top {
+  background: linear-gradient(135deg, #FF3AAE 0%, #8A63FF 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), 0 0 16px rgba(255, 58, 174, 0.4);
+}
+
+.dark .back-to-top:hover,
+body.dark .back-to-top:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 58, 174, 0.6);
+  transform: translateY(-2px);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   COOKIE CONSENT - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .cookie-consent,
+body.dark .cookie-consent {
+  background-color: rgba(15, 15, 15, 0.98);
+  border-top: 1px solid #333333;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.dark .cookie-consent__text,
+body.dark .cookie-consent__text {
+  color: #F6F2EB;
+}
+
+.dark .cookie-consent__link,
+body.dark .cookie-consent__link {
+  color: #FF3AAE;
+}
+
+.dark .cookie-consent__link:hover,
+body.dark .cookie-consent__link:hover {
+  color: #F4FF3C;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LOADING OVERLAY - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .loading-overlay,
+body.dark .loading-overlay {
+  background-color: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(8px);
+}
+
+.dark .loading-overlay__message,
+body.dark .loading-overlay__message {
+  color: #F6F2EB;
+  text-shadow: 0 0 12px rgba(255, 58, 174, 0.3);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EMPTY STATE - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .empty-state,
+body.dark .empty-state {
+  background-color: #1A1A1A;
+  border: 2px dashed #333333;
+}
+
+.dark .empty-state__icon,
+body.dark .empty-state__icon {
+  color: #666666;
+}
+
+.dark .empty-state__title,
+body.dark .empty-state__title {
+  color: #FFFFFF;
+}
+
+.dark .empty-state__description,
+body.dark .empty-state__description {
+  color: #CFC7BB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ERROR PAGES (404, 500) - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .error-page,
+body.dark .error-page {
+  background-color: #0F0F0F;
+}
+
+.dark .error-page__code,
+body.dark .error-page__code {
+  background: linear-gradient(135deg, #FF3AAE 0%, #8A63FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 40px rgba(255, 58, 174, 0.5);
+}
+
+.dark .error-page__title,
+body.dark .error-page__title {
+  color: #FFFFFF;
+}
+
+.dark .error-page__description,
+body.dark .error-page__description {
+  color: #CFC7BB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GALLERY & LIGHTBOX - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .gallery,
+body.dark .gallery {
+  background-color: #0F0F0F;
+}
+
+.dark .gallery__item,
+body.dark .gallery__item {
+  border: 1px solid #333333;
+}
+
+.dark .gallery__item:hover,
+body.dark .gallery__item:hover {
+  border-color: #FF3AAE;
+  box-shadow: 0 0 24px rgba(255, 58, 174, 0.4);
+}
+
+.dark .lightbox,
+body.dark .lightbox {
+  background-color: rgba(0, 0, 0, 0.95);
+}
+
+.dark .lightbox__image,
+body.dark .lightbox__image {
+  border: 2px solid #333333;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+}
+
+.dark .lightbox__caption,
+body.dark .lightbox__caption {
+  background-color: rgba(15, 15, 15, 0.9);
+  color: #F6F2EB;
+  border-top: 1px solid #333333;
+}
+
+.dark .lightbox__close,
+body.dark .lightbox__close {
+  background-color: #1A1A1A;
+  color: #F6F2EB;
+  border: 1px solid #333333;
+}
+
+.dark .lightbox__close:hover,
+body.dark .lightbox__close:hover {
+  background-color: #FF3AAE;
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(255, 58, 174, 0.5);
+}
+
+.dark .lightbox__nav,
+body.dark .lightbox__nav {
+  background-color: rgba(26, 26, 26, 0.9);
+  color: #F6F2EB;
+  border: 1px solid #333333;
+}
+
+.dark .lightbox__nav:hover,
+body.dark .lightbox__nav:hover {
+  background-color: #FF3AAE;
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(255, 58, 174, 0.5);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   VIDEO & AUDIO CONTROLS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark video,
+.dark audio,
+body.dark video,
+body.dark audio {
+  border: 1px solid #333333;
+}
+
+.dark .video-controls,
+body.dark .video-controls {
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 15, 15, 0.95) 100%);
+}
+
+.dark .video-controls__button,
+body.dark .video-controls__button {
+  color: #F6F2EB;
+  background-color: transparent;
+}
+
+.dark .video-controls__button:hover,
+body.dark .video-controls__button:hover {
+  color: #FF3AAE;
+}
+
+.dark .video-controls__timeline,
+body.dark .video-controls__timeline {
+  background-color: #333333;
+}
+
+.dark .video-controls__progress,
+body.dark .video-controls__progress {
+  background: linear-gradient(90deg, #FF3AAE 0%, #8A63FF 100%);
+  box-shadow: 0 0 8px rgba(255, 58, 174, 0.5);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SOCIAL MEDIA BUTTONS - Dark Mode Styling
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .social-button,
+body.dark .social-button {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  color: #F6F2EB;
+}
+
+.dark .social-button:hover,
+body.dark .social-button:hover {
+  background-color: #242424;
+  border-color: #FF3AAE;
+  color: #FF3AAE;
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.3);
+}
+
+.dark .social-button--twitter:hover,
+body.dark .social-button--twitter:hover {
+  border-color: #00D4FF;
+  color: #00D4FF;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+}
+
+.dark .social-button--facebook:hover,
+body.dark .social-button--facebook:hover {
+  border-color: #4A90FF;
+  color: #4A90FF;
+  box-shadow: 0 0 12px rgba(74, 144, 255, 0.3);
+}
+
+.dark .social-button--instagram:hover,
+body.dark .social-button--instagram:hover {
+  border-color: #FF3AAE;
+  color: #FF3AAE;
+  box-shadow: 0 0 12px rgba(255, 58, 174, 0.3);
+}
+
+.dark .social-button--youtube:hover,
+body.dark .social-button--youtube:hover {
+  border-color: #FF0055;
+  color: #FF0055;
+  box-shadow: 0 0 12px rgba(255, 0, 85, 0.3);
+}

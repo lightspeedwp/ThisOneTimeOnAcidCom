@@ -1,0 +1,13 @@
+/**
+ * Event Markdown Theme — Orange accents + Raleway / Libre Baskerville / Courier Prime
+ * Used by: EventSpecimensPage
+ * Refactored T11 — all structural styles now in markdown-base.css
+ */
+
+[data-md-theme="event"] {
+  --md-accent: var(--wp--preset--color--neon-orange);
+  --md-accent-text: var(--wp--preset--color--neon-orange-text);
+  --md-font-serif: var(--wp--preset--font-family--event-serif);
+  --md-font-sans: var(--wp--preset--font-family--event-sans);
+  --md-font-mono: var(--wp--preset--font-family--event-mono);
+}

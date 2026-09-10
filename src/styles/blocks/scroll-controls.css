@@ -1,0 +1,147 @@
+/* Scroll Down Arrow */
+.scroll-down-arrow {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--wp--preset--z-index--10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Tablet: Increase bottom spacing to prevent button overlay */
+@media (max-width: 1023px) {
+  .scroll-down-arrow {
+    bottom: 12rem;
+  }
+}
+
+/* Mobile: Even more spacing to clear button and text */
+@media (max-width: 767px) {
+  .scroll-down-arrow {
+    bottom: 16rem;
+  }
+}
+
+/* Mobile Compact: Maximum spacing for very small screens */
+@media (max-width: 420px) {
+  .scroll-down-arrow {
+    bottom: 18rem;
+  }
+}
+
+.scroll-down-arrow__border {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dark .scroll-down-arrow__border {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.scroll-down-arrow:hover .scroll-down-arrow__border {
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: var(--wp--preset--shadow--neon-md);
+}
+
+.scroll-down-arrow__inner {
+  position: relative;
+  z-index: var(--wp--preset--z-index--10);
+  animation: bounce 2s infinite;
+  color: var(--foreground);
+}
+
+.scroll-down-arrow:hover .scroll-down-arrow__inner {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.scroll-down-arrow__icon {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.scroll-down-arrow__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--wp--preset--color--neon-pink);
+  opacity: 0;
+  z-index: 0;
+}
+
+.scroll-down-arrow:hover .scroll-down-arrow__pulse {
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Scroll To Top */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  background: var(--wp--preset--gradient--hyperpop);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50; /* Keep specific or use a low overlay index */
+  box-shadow: var(--wp--preset--shadow--card);
+  border: none;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUpFade 0.3s forwards;
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--wp--preset--shadow--neon-sm);
+}
+
+.scroll-to-top__icon {
+  color: #fff;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Animations moved to /styles/animations.css */
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-down-arrow,
+  .scroll-down-arrow__border,
+  .scroll-to-top {
+    transition: none;
+  }
+
+  .scroll-down-arrow__inner {
+    animation: none;
+  }
+
+  .scroll-down-arrow:hover .scroll-down-arrow__pulse {
+    animation: none;
+  }
+
+  .scroll-to-top {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .scroll-to-top:hover {
+    transform: none;
+  }
+}

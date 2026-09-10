@@ -1,0 +1,78 @@
+/* Rainbow Section Backgrounds for Home Page */
+
+/* 
+  Rainbow Sequence (Neon Mapping):
+  1. Red/Pink (Hero)
+  2. Orange (Why)
+  3. Yellow (Featured)
+  4. Green (Blog)
+  5. Cyan/Blue (Testimonials)
+  6. Purple/Indigo (Festival)
+  7. Violet/Pink (Instagram)
+  8. Red/Orange (UV)
+  9. Orange/Yellow (Footer)
+
+  Pre-computed from color-mix(in srgb, neonColor, white/black %)
+  to avoid color(srgb) parsing errors in build tooling.
+*/
+
+.home-page-layout {
+  /* Light Mode Backgrounds (3% neon tint on white) */
+  --bg-rainbow-1: #fff9f9; /* Hero - 3% neon-red */
+  --bg-rainbow-2: #fffaf8; /* Why - 3% neon-orange */
+  --bg-rainbow-3: #fffff7; /* Featured - 3% neon-yellow */
+  --bg-rainbow-4: #f9fff8; /* Blog - 3% neon-green */
+  --bg-rainbow-5: #f8faff; /* Testimonials - 3% neon-blue */
+  --bg-rainbow-6: #fdf7ff; /* Festival - 3% neon-purple */
+  --bg-rainbow-7: #fff8ff; /* Instagram - 3% neon-pink */
+  --bg-rainbow-8: #fff9f9; /* UV - 3% neon-red (loop) */
+  --bg-rainbow-9: #fffaf8; /* Footer - 3% neon-orange (loop) */
+}
+
+.dark .home-page-layout {
+  /* Dark Mode Backgrounds (10% neon tint on black) */
+  --bg-rainbow-1: #1a0505; /* Hero - 10% neon-red */
+  --bg-rainbow-2: #1a0a03; /* Why - 10% neon-orange */
+  --bg-rainbow-3: #1a1a00; /* Featured - 10% neon-yellow */
+  --bg-rainbow-4: #061a02; /* Blog - 10% neon-green */
+  --bg-rainbow-5: #03081a; /* Testimonials - 10% neon-blue */
+  --bg-rainbow-6: #130019; /* Festival - 10% neon-purple */
+  --bg-rainbow-7: #1a0218; /* Instagram - 10% neon-pink */
+  --bg-rainbow-8: #1a0505; /* UV - 10% neon-red (loop) */
+  --bg-rainbow-9: #1a0a03; /* Footer - 10% neon-orange (loop) */
+}
+
+/* Apply to Sections within Home Page Layout */
+/* Using !important to ensure override of component defaults without breaking component encapsulation */
+
+.home-page-layout .hero {
+  background-color: var(--bg-rainbow-1) !important;
+}
+
+.home-page-layout .why-section {
+  background-color: var(--bg-rainbow-2) !important;
+}
+
+.home-page-layout .featured-section {
+  background-color: var(--bg-rainbow-3) !important;
+}
+
+.home-page-layout .blog-preview {
+  background-color: var(--bg-rainbow-4) !important;
+}
+
+.home-page-layout .testimonials-section {
+  background-color: var(--bg-rainbow-5) !important;
+}
+
+.home-page-layout .festival-countdown {
+  background-color: var(--bg-rainbow-6) !important;
+}
+
+.home-page-layout .uv-makeup-section {
+  background-color: var(--bg-rainbow-7) !important;
+}
+
+.home-page-layout .footer {
+  background-color: var(--bg-rainbow-9) !important;
+}

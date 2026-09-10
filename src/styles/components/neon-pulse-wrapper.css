@@ -1,0 +1,15 @@
+.neon-pulse-wrapper {
+  display: inline-block;
+  animation: neonPulseWrapper var(--np-duration, 2s) ease-in-out infinite alternate;
+}
+
+.neon-pulse-wrapper--once {
+  animation-iteration-count: 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-pulse-wrapper {
+    animation: none;
+    filter: none;
+  }
+}

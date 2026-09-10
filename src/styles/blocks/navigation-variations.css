@@ -1,0 +1,50 @@
+/* Navigation Block Variations */
+
+.wp-block-navigation__container {
+  display: flex;
+  gap: var(--wp--preset--spacing--30);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wp-block-navigation-item__content {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-family: var(--wp--preset--font-family--heading);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+  display: inline-block;
+}
+
+.wp-block-navigation-item__content:hover {
+  color: var(--color-neon-pink);
+}
+
+/* Vertical */
+.wp-block-navigation.is-style-vertical .wp-block-navigation__container {
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+}
+
+/* Pills */
+.wp-block-navigation.is-style-pills .wp-block-navigation__container {
+  gap: var(--wp--preset--spacing--20);
+  flex-wrap: wrap;
+}
+
+.wp-block-navigation.is-style-pills .wp-block-navigation-item__content {
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  text-transform: none;
+}
+
+.wp-block-navigation.is-style-pills .wp-block-navigation-item__content.is-active,
+.wp-block-navigation.is-style-pills .wp-block-navigation-item__content:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
