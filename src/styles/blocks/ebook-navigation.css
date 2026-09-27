@@ -83,6 +83,14 @@
   border-radius: 0 var(--wp--preset--border-radius--md) var(--wp--preset--border-radius--md) 0;
 }
 
+/* ── prefers-reduced-motion: disable 3D flip animation ── */
+@media (prefers-reduced-motion: reduce) {
+  .ebook-reader__flip-layer--forward,
+  .ebook-reader__flip-layer--backward {
+    animation: none !important;
+  }
+}
+
 /* ══════════════════════════════════════
    CLICK ZONES (spread mode)
    ══════════════════════════════════════ */
@@ -129,8 +137,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(2.25rem, 2rem + 1vw, 2.75rem);
-  height: clamp(2.25rem, 2rem + 1vw, 2.75rem);
+  /* minimum 44px (2.75rem) at all viewports — WCAG 2.5.5 touch target */
+  width: clamp(2.75rem, 2rem + 1vw, 3rem);
+  height: clamp(2.75rem, 2rem + 1vw, 3rem);
   border-radius: var(--wp--preset--border-radius--full);
   border: 1px solid var(--wp--preset--color--neutral-300);
   background: var(--wp--preset--color--base);

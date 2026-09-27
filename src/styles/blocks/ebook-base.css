@@ -344,6 +344,38 @@ body.ebook-fullscreen .ebook-reader__hero {
   }
 }
 
+/* ── Hidden paragraph-height measurement probe ── */
+.ebook-reader__page-probe {
+  position: absolute !important;
+  top: -9999px !important;
+  left: 0;
+  right: 0;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: -1;
+  /* Inherit page-inner font + padding for accurate paragraph height measurement */
+}
+
+/* ── prefers-reduced-motion: disable CSS-driven animations ── */
+@media (prefers-reduced-motion: reduce) {
+  .ebook-reader__single-track--animating {
+    transition: none !important;
+  }
+  .ebook-reader__progress-fill {
+    transition: none !important;
+  }
+  .ebook-reader__single-page {
+    transition: none !important;
+  }
+  .ebook-reader__single-wrapper,
+  .ebook-reader__book-wrapper {
+    transition: none !important;
+  }
+}
+
 /* ── Page number ── */
 .ebook-reader__page-number {
   position: sticky;

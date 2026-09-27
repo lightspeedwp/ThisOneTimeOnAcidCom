@@ -11,4 +11,4 @@
  */
 
 export type { BookPageType, BookPage } from './ebook/types';
-export { bookPages } from '../../../utils/bookContentLoader';
+export { bookPages, rawBookPages, SPLITTABLE_TYPES } from '../../../utils/bookContentLoader';

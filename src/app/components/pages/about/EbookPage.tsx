@@ -13,12 +13,12 @@
  * Touch swipe, keyboard arrows, and button navigation all supported.
  *
  * @component EbookPage
- * @version 5.0.0 - Extracted PageContent, Drawer, Nav, helpers (T14)
+ * @version 6.0.0 - Dynamic height-based pagination, reduced motion, 44px touch targets
  */
 
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useState, useCallback, useRef } from 'react';
 import { X, SlidersHorizontal } from '@phosphor-icons/react';
-import { bookPages } from '../../../data/mock/pages/ebook-pages';
+import { bookPages, rawBookPages } from '../../../data/mock/pages/ebook-pages';
 import { ebookUI } from '../../../data/mock/ui/ebook';
 import { ebookBreadcrumbs } from '../../../data/mock/ui/breadcrumbs';
 import { setSEO, setSchema } from '../../../utils/seo';
@@ -41,13 +41,16 @@ import type { FontSizePreset, PagingEffect } from '../../../utils/ebookPreferenc
 import {
   SWIPE_THRESHOLD,
   SWIPE_ANGLE_MAX,
-  chapterIndex,
-  drawerGroups,
+  drawerGroups as staticDrawerGroups,
+  buildChapterIndex,
+  buildDrawerGroups,
   buildSpreads,
   pageToSpread,
   spreadToPage,
   useSpreadMode,
   pageTypeClass,
+  usePrefersReducedMotion,
+  useDynamicPagination,
 } from './ebook/ebookHelpers';
 import { PageContent } from './ebook/EbookPageContent';
 import { EbookDrawer } from './ebook/EbookDrawer';
@@ -67,11 +70,49 @@ import '../../../../styles/blocks/button.css';
 
 export function EbookPage() {
   var isSpreadMode = useSpreadMode();
+  var reducedMotion = usePrefersReducedMotion();
+
   var mainRefInit: HTMLElement | null = null;
   var mainRef = useRef(mainRefInit);
 
-  var spreads = React.useMemo(function () { return buildSpreads(bookPages); }, []);
-  var totalPages = bookPages.length;
+  /* ── Hidden probe div for paragraph height measurement ── */
+  var probeRefInit: HTMLDivElement | null = null;
+  var probeRef = useRef(probeRefInit);
+
+  /* ── Available content height (measured from single-wrapper via ResizeObserver) ── */
+  var [availableHeight, setAvailableHeight] = useState(0);
+
+  useLayoutEffect(function () {
+    var el = readerRef.current;
+    if (!el) return;
+    setAvailableHeight(el.clientHeight);
+    var obs = new ResizeObserver(function (entries) {
+      if (entries[0]) setAvailableHeight(entries[0].contentRect.height);
+    });
+    obs.observe(el);
+    return function () { obs.disconnect(); };
+  // Re-run when spread mode changes: single-wrapper mounts/unmounts
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSpreadMode]);
+
+  /* ── Font size state (needed early for useDynamicPagination dep) ── */
+  var [fontSize, setFontSize] = useState(function () { return readFontSize(); });
+
+  /* ── Dynamic pages: re-paginated via DOM probe once availableHeight is known ── */
+  var dynamicPages = useDynamicPagination(rawBookPages, probeRef.current, availableHeight, fontSize);
+
+  var totalPages = dynamicPages.length;
+
+  /* ── Chapter index and drawer groups derived from dynamic pages ── */
+  var dynamicChapterIndex = React.useMemo(function () {
+    return buildChapterIndex(dynamicPages);
+  }, [dynamicPages]);
+
+  var dynamicDrawerGroups = React.useMemo(function () {
+    return buildDrawerGroups(dynamicChapterIndex);
+  }, [dynamicChapterIndex]);
+
+  var spreads = React.useMemo(function () { return buildSpreads(dynamicPages); }, [dynamicPages]);
   var totalSpreads = spreads.length;
 
   /* ── Full Screen ── */
@@ -139,21 +180,32 @@ export function EbookPage() {
   }, [isFullScreen]);
 
   /* ── Primary state: single-page index (source of truth) ── */
-  var [currentPage, setCurrentPage] = useState(function () { return readSavedPage(totalPages - 1); });
+  // Use static bookPages.length for initial clamp — corrected by effect below
+  var [currentPage, setCurrentPage] = useState(function () { return readSavedPage(bookPages.length - 1); });
   var flipStateInit: 'idle' | 'forward' | 'backward' | 'fade' = 'idle';
   var [flipState, setFlipState] = useState(flipStateInit);
   var [swipeOffset, setSwipeOffset] = useState(0);
   var [isAnimating, setIsAnimating] = useState(false);
 
+  /* ── Clamp currentPage when dynamic pagination changes total page count ── */
+  useEffect(function () {
+    var max = dynamicPages.length - 1;
+    if (currentPage > max) {
+      setCurrentPage(max);
+    }
+  // Only re-run when page count changes, not every dynamicPages identity change
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dynamicPages.length]);
+
   /* ── Chapter drawer state ── */
   var [drawerOpen, setDrawerOpen] = useState(false);
 
-  /* ── Collapsed drawer groups state ── */
+  /* ── Collapsed drawer groups state (init from static groups — structure is stable) ── */
   var [collapsedGroups, setCollapsedGroups] = useState(function () {
     var initial: Record<string, boolean> = {};
-    for (var i = 0; i < drawerGroups.length; i++) {
-      if (drawerGroups[i].collapsible) {
-        initial[drawerGroups[i].id] = true;
+    for (var i = 0; i < staticDrawerGroups.length; i++) {
+      if (staticDrawerGroups[i].collapsible) {
+        initial[staticDrawerGroups[i].id] = true;
       }
     }
     return initial;
@@ -176,9 +228,6 @@ export function EbookPage() {
 
   /* ── Settings modal state ── */
   const [settingsOpen, setSettingsOpen] = useState(false);
-
-  /* ── Font size state ── */
-  const [fontSize, setFontSize] = useState(function () { return readFontSize(); });
 
   /* ── Minimal mode state ── */
   const [minimalMode, setMinimalMode] = useState(function () { return readMinimalMode(); });
@@ -270,15 +319,15 @@ export function EbookPage() {
     if (isAnimating) return;
     if (isSpreadMode) {
       if (!canGoForwardSpread || flipState !== 'idle') return;
-      
-      if (pagingEffect === '3d-flip') {
+
+      if (!reducedMotion && pagingEffect === '3d-flip') {
         setFlipState('forward');
         setTimeout(function () {
           const nextSpreadIdx = Math.min(currentSpread + 1, totalSpreads - 1);
           setCurrentPage(spreadToPage(nextSpreadIdx));
           setFlipState('idle');
         }, 600);
-      } else if (pagingEffect === 'fade') {
+      } else if (!reducedMotion && pagingEffect === 'fade') {
         setFlipState('fade');
         setIsAnimating(true);
         setTimeout(function () {
@@ -290,14 +339,13 @@ export function EbookPage() {
           }, 300);
         }, 300);
       } else {
-        // none or slide (fallback to none for spread)
         const nextSpreadIdx = Math.min(currentSpread + 1, totalSpreads - 1);
         setCurrentPage(spreadToPage(nextSpreadIdx));
       }
     } else {
       if (!canGoForwardSingle) return;
-      
-      if (pagingEffect === 'slide' || pagingEffect === '3d-flip') {
+
+      if (!reducedMotion && (pagingEffect === 'slide' || pagingEffect === '3d-flip')) {
         setIsAnimating(true);
         setSwipeOffset(-100);
         setTimeout(function () {
@@ -305,7 +353,7 @@ export function EbookPage() {
           setSwipeOffset(0);
           setIsAnimating(false);
         }, 400);
-      } else if (pagingEffect === 'fade') {
+      } else if (!reducedMotion && pagingEffect === 'fade') {
         setFlipState('fade');
         setIsAnimating(true);
         setTimeout(function () {
@@ -316,25 +364,24 @@ export function EbookPage() {
           }, 300);
         }, 300);
       } else {
-        // none
         setCurrentPage(function (p) { return Math.min(p + 1, totalPages - 1); });
       }
     }
-  }, [isSpreadMode, canGoForwardSpread, canGoForwardSingle, flipState, isAnimating, totalPages, currentSpread, totalSpreads, pagingEffect]);
+  }, [isSpreadMode, canGoForwardSpread, canGoForwardSingle, flipState, isAnimating, totalPages, currentSpread, totalSpreads, pagingEffect, reducedMotion]);
 
   const goBackward = useCallback(function () {
     if (isAnimating) return;
     if (isSpreadMode) {
       if (!canGoBackwardSpread || flipState !== 'idle') return;
-      
-      if (pagingEffect === '3d-flip') {
+
+      if (!reducedMotion && pagingEffect === '3d-flip') {
         setFlipState('backward');
         setTimeout(function () {
           const prevSpreadIdx = Math.max(currentSpread - 1, 0);
           setCurrentPage(spreadToPage(prevSpreadIdx));
           setFlipState('idle');
         }, 600);
-      } else if (pagingEffect === 'fade') {
+      } else if (!reducedMotion && pagingEffect === 'fade') {
         setFlipState('fade');
         setIsAnimating(true);
         setTimeout(function () {
@@ -351,8 +398,8 @@ export function EbookPage() {
       }
     } else {
       if (!canGoBackwardSingle) return;
-      
-      if (pagingEffect === 'slide' || pagingEffect === '3d-flip') {
+
+      if (!reducedMotion && (pagingEffect === 'slide' || pagingEffect === '3d-flip')) {
         setIsAnimating(true);
         setSwipeOffset(100);
         setTimeout(function () {
@@ -360,7 +407,7 @@ export function EbookPage() {
           setSwipeOffset(0);
           setIsAnimating(false);
         }, 400);
-      } else if (pagingEffect === 'fade') {
+      } else if (!reducedMotion && pagingEffect === 'fade') {
         setFlipState('fade');
         setIsAnimating(true);
         setTimeout(function () {
@@ -374,7 +421,7 @@ export function EbookPage() {
         setCurrentPage(function (p) { return Math.max(p - 1, 0); });
       }
     }
-  }, [isSpreadMode, canGoBackwardSpread, canGoBackwardSingle, flipState, isAnimating, currentSpread, pagingEffect]);
+  }, [isSpreadMode, canGoBackwardSpread, canGoBackwardSingle, flipState, isAnimating, currentSpread, pagingEffect, reducedMotion]);
 
   const handleFlipEnd = useCallback(function () {
     if (flipState === 'forward') {
@@ -471,7 +518,7 @@ export function EbookPage() {
       }
     }
 
-    if (isSwiping.current && !isSpreadMode && !isAnimating) {
+    if (isSwiping.current && !isSpreadMode && !isAnimating && !reducedMotion) {
       var percent = (dx / window.innerWidth) * 100;
       setSwipeOffset(Math.max(-50, Math.min(50, percent)));
 
@@ -486,7 +533,7 @@ export function EbookPage() {
         setRightSwipeActive(false);
       }
     }
-  }, [isSpreadMode, isAnimating]);
+  }, [isSpreadMode, isAnimating, reducedMotion]);
 
   const handleTouchEnd = useCallback(function (e: React.TouchEvent) {
     if (touchStartX.current === null || touchStartY.current === null) return;
@@ -554,7 +601,7 @@ export function EbookPage() {
       }
       return (currentSpread + 1) + ' / ' + totalSpreads;
     } else {
-      var currentPageData = bookPages[currentPage];
+      var currentPageData = dynamicPages[currentPage];
       if (currentPageData != null && currentPageData.pageNumber != null) {
         return 'Page ' + currentPageData.pageNumber;
       }
@@ -566,27 +613,27 @@ export function EbookPage() {
   const breadcrumbs = ebookBreadcrumbs();
 
   /* ── Single-page neighbours for peek effect ── */
-  const prevPage = currentPage > 0 ? bookPages[currentPage - 1] : null;
-  const nextPage = currentPage < totalPages - 1 ? bookPages[currentPage + 1] : null;
-  const activePage = bookPages[currentPage];
+  const prevPage = currentPage > 0 ? dynamicPages[currentPage - 1] : null;
+  const nextPage = currentPage < totalPages - 1 ? dynamicPages[currentPage + 1] : null;
+  const activePage = dynamicPages[currentPage];
 
   /* ── Current chapter index (for drawer active state) ── */
   const currentChapterIdx = React.useMemo(function () {
     var idx = -1;
-    for (var i = 0; i < chapterIndex.length; i++) {
-      if (chapterIndex[i].pageIndex <= currentPage) {
+    for (var i = 0; i < dynamicChapterIndex.length; i++) {
+      if (dynamicChapterIndex[i].pageIndex <= currentPage) {
         idx = i;
       } else {
         break;
       }
     }
     return idx;
-  }, [currentPage]);
+  }, [currentPage, dynamicChapterIndex]);
 
   /* ── Auto-expand group containing current chapter ── */
   useEffect(function () {
-    for (var g = 0; g < drawerGroups.length; g++) {
-      var group = drawerGroups[g];
+    for (var g = 0; g < dynamicDrawerGroups.length; g++) {
+      var group = dynamicDrawerGroups[g];
       if (!group.collapsible) continue;
       for (var e = 0; e < group.entries.length; e++) {
         if (group.entries[e].globalIdx === currentChapterIdx) {
@@ -610,7 +657,7 @@ export function EbookPage() {
         }
       }
     }
-  }, [currentChapterIdx]);
+  }, [currentChapterIdx, dynamicDrawerGroups]);
 
   // Derived disable flags
   const cannotGoBackward = !canGoBackwardSpread || flipState !== 'idle';
@@ -618,9 +665,11 @@ export function EbookPage() {
   const disableBackwardSingle = !canGoBackwardSingle || isAnimating;
   const disableForwardSingle = !canGoForwardSingle || isAnimating;
 
-  // Transition for single-page track
+  // Transition for single-page track — disabled entirely when reduced motion is preferred
   var singleTrackTransition = 'transform 200ms ease';
-  if (isAnimating) {
+  if (reducedMotion) {
+    singleTrackTransition = 'none';
+  } else if (isAnimating) {
     singleTrackTransition = 'transform 280ms cubic-bezier(0.4, 0, 0.2, 1)';
   } else if (swipeOffset !== 0) {
     singleTrackTransition = 'none';
@@ -635,6 +684,13 @@ export function EbookPage() {
       aria-label={ebookUI.readerAriaLabel}
       role="main"
     >
+      {/* ── Hidden paragraph-height measurement probe ── */}
+      <div
+        ref={probeRef}
+        className="ebook-reader__page-inner ebook-reader__page-probe"
+        aria-hidden="true"
+      />
+
       {/* ── Slim Hero ── */}
       {!isFullScreen && (
         <header className="ebook-reader__hero">
@@ -832,7 +888,7 @@ export function EbookPage() {
       <EbookDrawer
         drawerOpen={drawerOpen}
         onClose={function () { setDrawerOpen(false); }}
-        drawerGroups={drawerGroups}
+        drawerGroups={dynamicDrawerGroups}
         collapsedGroups={collapsedGroups}
         onToggleGroup={toggleDrawerGroup}
         onJumpToPage={jumpToPage}
@@ -853,7 +909,7 @@ export function EbookPage() {
         onMinimalModeToggle={function () { setMinimalMode(!minimalMode); }}
         onPagingEffectChange={setPagingEffect}
         progressPercent={progress * 100}
-        currentChapterTitle={chapterIndex[currentChapterIdx] != null ? chapterIndex[currentChapterIdx].label : undefined}
+        currentChapterTitle={dynamicChapterIndex[currentChapterIdx] != null ? dynamicChapterIndex[currentChapterIdx].label : undefined}
       />
 
       {/* ── Minimal Mode — Floating Settings Button ── */}

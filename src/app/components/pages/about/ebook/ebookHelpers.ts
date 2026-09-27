@@ -3,9 +3,9 @@
  * Extracted from EbookPage.tsx (T14).
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import type { BookPage } from '../../../../data/mock/pages/ebook-pages';
-import { bookPages } from '../../../../data/mock/pages/ebook-pages';
+import { bookPages, SPLITTABLE_TYPES } from '../../../../data/mock/pages/ebook-pages';
 import { ebookUI } from '../../../../data/mock/ui/ebook';
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -88,7 +88,7 @@ export interface DrawerGroup {
   entries: Array<{ entry: ChapterEntry; globalIdx: number }>;
 }
 
-export function buildDrawerGroups(): DrawerGroup[] {
+export function buildDrawerGroups(entries: ChapterEntry[]): DrawerGroup[] {
   var groups: DrawerGroup[] = [];
   var currentGroup: DrawerGroup = {
     id: 'front-matter',
@@ -97,8 +97,8 @@ export function buildDrawerGroups(): DrawerGroup[] {
     entries: [],
   };
 
-  for (var i = 0; i < chapterIndex.length; i++) {
-    var entry = chapterIndex[i];
+  for (var i = 0; i < entries.length; i++) {
+    var entry = entries[i];
 
     if (!entry.indent && entry.label.indexOf('Part ') === 0) {
       if (currentGroup.entries.length > 0) {
@@ -140,7 +140,7 @@ export function buildDrawerGroups(): DrawerGroup[] {
   return groups;
 }
 
-export var drawerGroups = buildDrawerGroups();
+export var drawerGroups = buildDrawerGroups(chapterIndex);
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SPREAD COMPUTATION
@@ -196,6 +196,136 @@ export function useSpreadMode(): boolean {
   }, []);
 
   return isSpread;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HOOK: usePrefersReducedMotion
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+export function usePrefersReducedMotion(): boolean {
+  var initVal = function () {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  };
+  var result = useState(initVal);
+  var prefersReduced = result[0];
+  var setPrefersReduced = result[1];
+
+  useEffect(function () {
+    var mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var handler = function (e: MediaQueryListEvent) { setPrefersReduced(e.matches); };
+    mql.addEventListener('change', handler);
+    return function () { mql.removeEventListener('change', handler); };
+  }, []);
+
+  return prefersReduced;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DYNAMIC PAGINATION — probe-based height splitting
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/** Approx gap between consecutive paragraphs inside a page, in CSS pixels */
+var PROBE_PARA_GAP = 16;
+
+/**
+ * Measures each paragraph of a splittable page in the given probe element and
+ * splits the page into screen-height chunks. Non-splittable pages pass through
+ * unchanged.
+ */
+function heightSplit(rawPages: BookPage[], probe: HTMLElement, availableHeight: number): BookPage[] {
+  var result: BookPage[] = [];
+
+  for (var i = 0; i < rawPages.length; i++) {
+    var page = rawPages[i];
+
+    if (!SPLITTABLE_TYPES.has(page.type) || !page.paragraphs || page.paragraphs.length === 0) {
+      result.push(page);
+      continue;
+    }
+
+    // Render each paragraph into the probe and record its rendered height
+    probe.innerHTML = '';
+    var paraHeights: number[] = [];
+    for (var j = 0; j < page.paragraphs.length; j++) {
+      var pEl = document.createElement('p');
+      pEl.className = 'ebook-page__paragraph';
+      pEl.textContent = page.paragraphs[j];
+      probe.appendChild(pEl);
+      paraHeights.push(pEl.offsetHeight);
+    }
+    probe.innerHTML = '';
+
+    // Accumulate paragraphs into chunks that fit within availableHeight
+    var currentParas: string[] = [];
+    var currentHeight = 0;
+    var chunkIdx = 0;
+
+    for (var k = 0; k < page.paragraphs.length; k++) {
+      var gap = currentParas.length > 0 ? PROBE_PARA_GAP : 0;
+      var ph = paraHeights[k] + gap;
+
+      if (currentParas.length > 0 && currentHeight + ph > availableHeight) {
+        result.push({
+          id: chunkIdx === 0 ? page.id : page.id + '-p' + (chunkIdx + 1),
+          type: page.type,
+          pageNumber: page.pageNumber,
+          chapter: page.chapter,
+          part: page.part,
+          title: page.title,
+          subtitle: page.subtitle,
+          paragraphs: currentParas,
+        });
+        currentParas = [page.paragraphs[k]];
+        currentHeight = paraHeights[k];
+        chunkIdx++;
+      } else {
+        currentParas.push(page.paragraphs[k]);
+        currentHeight += ph;
+      }
+    }
+
+    if (currentParas.length > 0) {
+      result.push({
+        id: chunkIdx === 0 ? page.id : page.id + '-p' + (chunkIdx + 1),
+        type: page.type,
+        pageNumber: page.pageNumber,
+        chapter: page.chapter,
+        part: page.part,
+        title: page.title,
+        subtitle: page.subtitle,
+        paragraphs: currentParas,
+      });
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Re-paginates `rawPages` based on actual paragraph heights measured against
+ * the DOM probe element. Falls back to the static `bookPages` until the probe
+ * is mounted and `availableHeight` is known. Re-runs whenever `availableHeight`
+ * or `fontSizeDep` changes (e.g. orientation flip, user font-size preference).
+ */
+export function useDynamicPagination(
+  rawPages: BookPage[],
+  probeEl: HTMLElement | null,
+  availableHeight: number,
+  fontSizeDep: string
+): BookPage[] {
+  var initState = function (): BookPage[] { return bookPages; };
+  var pagesState = useState<BookPage[]>(initState);
+  var pages = pagesState[0];
+  var setPages = pagesState[1];
+
+  useLayoutEffect(function () {
+    if (!probeEl || availableHeight <= 0) return;
+    var measured = heightSplit(rawPages, probeEl, availableHeight);
+    setPages(measured);
+  }, [rawPages, probeEl, availableHeight, fontSizeDep]);
+
+  return pages;
 }
 
 /** CSS class for page type */

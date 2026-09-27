@@ -374,7 +374,7 @@ function loadBookPages(): BookPage[] {
 }
 
 // Page types that can have their paragraphs split across multiple pages
-var SPLITTABLE_TYPES = new Set(['chapter-content', 'afterword', 'about-author', 'foreword', 'back-cover']);
+export var SPLITTABLE_TYPES = new Set(['chapter-content', 'afterword', 'about-author', 'foreword', 'back-cover']);
 
 /**
  * Splits pages whose paragraph count exceeds maxParas into multiple pages.
@@ -414,4 +414,5 @@ function maxParasForViewport(): number {
   return 6;
 }
 
-export var bookPages: BookPage[] = splitLargePages(loadBookPages(), maxParasForViewport());
+export var rawBookPages: BookPage[] = loadBookPages();
+export var bookPages: BookPage[] = splitLargePages(rawBookPages, maxParasForViewport());
