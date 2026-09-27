@@ -112,7 +112,7 @@
 
 /* Page Background: Warm white for comfortable reading */
 :root:not(.dark) .ebook-reader__page-inner,
-body:not(.dark) .ebook-reader__page-inner {
+:root:not(.dark) .ebook-reader__page-inner {
   background: #FAFAF7; /* Warm off-white */
   color: var(--color-surface-elevated, #1A1A1A); /* 16.1:1 contrast = AAA */
 }
@@ -121,9 +121,9 @@ body:not(.dark) .ebook-reader__page-inner {
 :root:not(.dark) .ebook-page__body,
 :root:not(.dark) .ebook-page__text,
 :root:not(.dark) .ebook-page p,
-body:not(.dark) .ebook-page__body,
-body:not(.dark) .ebook-page__text,
-body:not(.dark) .ebook-page p {
+:root:not(.dark) .ebook-page__body,
+:root:not(.dark) .ebook-page__text,
+:root:not(.dark) .ebook-page p {
   color: var(--color-surface-elevated, #1A1A1A); /* 16.1:1 = AAA */
 }
 
@@ -134,104 +134,104 @@ body:not(.dark) .ebook-page p {
 :root:not(.dark) .ebook-page h1,
 :root:not(.dark) .ebook-page h2,
 :root:not(.dark) .ebook-page h3,
-body:not(.dark) .ebook-page__title,
-body:not(.dark) .ebook-page__chapter-title,
-body:not(.dark) .ebook-page__section-title,
-body:not(.dark) .ebook-page h1,
-body:not(.dark) .ebook-page h2,
-body:not(.dark) .ebook-page h3 {
+:root:not(.dark) .ebook-page__title,
+:root:not(.dark) .ebook-page__chapter-title,
+:root:not(.dark) .ebook-page__section-title,
+:root:not(.dark) .ebook-page h1,
+:root:not(.dark) .ebook-page h2,
+:root:not(.dark) .ebook-page h3 {
   color: #000000; /* Pure black (21:1 = AAA+) */
 }
 
 /* Cover Page: Darkened neon colors for light mode */
 :root:not(.dark) .ebook-cover__title,
-body:not(.dark) .ebook-cover__title {
+:root:not(.dark) .ebook-cover__title {
   color: #8C7A00; /* Dark yellow (7.1:1 = AAA) */
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 :root:not(.dark) .ebook-cover__subtitle,
 :root:not(.dark) .ebook-cover__author,
-body:not(.dark) .ebook-cover__subtitle,
-body:not(.dark) .ebook-cover__author {
+:root:not(.dark) .ebook-cover__subtitle,
+:root:not(.dark) .ebook-cover__author {
   color: #2A2A2A; /* Near-black (13.5:1 = AAA) */
 }
 
 /* Chapter Start: Dark mode colors for light background */
 :root:not(.dark) .ebook-chapter-start__number,
-body:not(.dark) .ebook-chapter-start__number {
+:root:not(.dark) .ebook-chapter-start__number {
   color: #8C7A00; /* Dark yellow */
 }
 
 :root:not(.dark) .ebook-chapter-start__title,
-body:not(.dark) .ebook-chapter-start__title {
+:root:not(.dark) .ebook-chapter-start__title {
   color: #000000;
 }
 
 :root:not(.dark) .ebook-chapter-start__subtitle,
-body:not(.dark) .ebook-chapter-start__subtitle {
+:root:not(.dark) .ebook-chapter-start__subtitle {
   color: #3A3A3A; /* 11.7:1 = AAA */
 }
 
 /* Table of Contents: Dark colors for light mode */
 :root:not(.dark) .ebook-toc__title,
-body:not(.dark) .ebook-toc__title {
+:root:not(.dark) .ebook-toc__title {
   color: #000000;
 }
 
 :root:not(.dark) .ebook-toc__item,
-body:not(.dark) .ebook-toc__item {
+:root:not(.dark) .ebook-toc__item {
   color: #2A2A2A; /* 13.5:1 = AAA */
 }
 
 :root:not(.dark) .ebook-toc__item:hover,
-body:not(.dark) .ebook-toc__item:hover {
+:root:not(.dark) .ebook-toc__item:hover {
   color: #8C7A00; /* Dark yellow on hover */
   text-shadow: none;
 }
 
 :root:not(.dark) .ebook-toc__page-number,
-body:not(.dark) .ebook-toc__page-number {
+:root:not(.dark) .ebook-toc__page-number {
   color: #5A5A5A; /* 7.5:1 = AAA */
 }
 
 /* Part Title: Dark colors */
 :root:not(.dark) .ebook-part__label,
-body:not(.dark) .ebook-part__label {
+:root:not(.dark) .ebook-part__label {
   color: #8C7A00; /* Dark yellow */
 }
 
 :root:not(.dark) .ebook-part__title,
-body:not(.dark) .ebook-part__title {
+:root:not(.dark) .ebook-part__title {
   color: #000000;
 }
 
 :root:not(.dark) .ebook-part__subtitle,
-body:not(.dark) .ebook-part__subtitle {
+:root:not(.dark) .ebook-part__subtitle {
   color: #2A2A2A;
 }
 
 /* Epigraphs: Dark colors for light mode */
 :root:not(.dark) .ebook-epigraph__text,
-body:not(.dark) .ebook-epigraph__text {
+:root:not(.dark) .ebook-epigraph__text {
   color: #2A2A2A;
 }
 
 :root:not(.dark) .ebook-epigraph__attribution,
-body:not(.dark) .ebook-epigraph__attribution {
+:root:not(.dark) .ebook-epigraph__attribution {
   color: #4A4A4A; /* 9.7:1 = AAA */
 }
 
 /* Page Numbers: Subtle but visible */
 :root:not(.dark) .ebook-reader__page-number,
-body:not(.dark) .ebook-reader__page-number {
+:root:not(.dark) .ebook-reader__page-number {
   color: #8A8A8A; /* 4.6:1 = AA for small text */
   background: #FAFAF7;
 }
 
 /* Section Dividers */
 :root:not(.dark) .ebook-section__divider,
-body:not(.dark) .ebook-section__divider {
+:root:not(.dark) .ebook-section__divider {
   border-color: #D0D0D0;
 }
 
@@ -255,9 +255,9 @@ body:not(.dark) .ebook-section__divider {
   :root:not(.dark) .ebook-page__body,
   :root:not(.dark) .ebook-page__text,
   :root:not(.dark) .ebook-page p,
-  body:not(.dark) .ebook-page__body,
-  body:not(.dark) .ebook-page__text,
-  body:not(.dark) .ebook-page p {
+  :root:not(.dark) .ebook-page__body,
+  :root:not(.dark) .ebook-page__text,
+  :root:not(.dark) .ebook-page p {
     color: #000000; /* Pure black for mobile (21:1 = AAA+) */
   }
 }
@@ -287,21 +287,21 @@ body:not(.dark) .ebook-section__divider {
 
 /* Light Mode Navigation */
 :root:not(.dark) .ebook-reader__nav-btn,
-body:not(.dark) .ebook-reader__nav-btn {
+:root:not(.dark) .ebook-reader__nav-btn {
   background: #FFFFFF;
   color: var(--color-surface-elevated, #1A1A1A);
   border: 1px solid #D0D0D0;
 }
 
 :root:not(.dark) .ebook-reader__nav-btn:hover,
-body:not(.dark) .ebook-reader__nav-btn:hover {
+:root:not(.dark) .ebook-reader__nav-btn:hover {
   background: #F5F5F5;
   color: #000000;
   border-color: #8C7A00;
 }
 
 :root:not(.dark) .ebook-reader__nav-btn:disabled,
-body:not(.dark) .ebook-reader__nav-btn:disabled {
+:root:not(.dark) .ebook-reader__nav-btn:disabled {
   background: #F5F5F5;
   color: #A0A0A0;
   border-color: #E0E0E0;
@@ -336,30 +336,30 @@ body:not(.dark) .ebook-reader__nav-btn:disabled {
 }
 
 :root:not(.dark) .ebook-drawer,
-body:not(.dark) .ebook-drawer {
+:root:not(.dark) .ebook-drawer {
   background: #FFFFFF;
   border-left: 1px solid #D0D0D0;
 }
 
 :root:not(.dark) .ebook-drawer__title,
-body:not(.dark) .ebook-drawer__title {
+:root:not(.dark) .ebook-drawer__title {
   color: #000000;
   border-bottom: 1px solid #D0D0D0;
 }
 
 :root:not(.dark) .ebook-drawer__group-title,
-body:not(.dark) .ebook-drawer__group-title {
+:root:not(.dark) .ebook-drawer__group-title {
   color: var(--color-surface-elevated, #1A1A1A);
 }
 
 :root:not(.dark) .ebook-drawer__link,
-body:not(.dark) .ebook-drawer__link {
+:root:not(.dark) .ebook-drawer__link {
   color: #2A2A2A;
   border-bottom: 1px solid #E5E5E5;
 }
 
 :root:not(.dark) .ebook-drawer__link:hover,
-body:not(.dark) .ebook-drawer__link:hover {
+:root:not(.dark) .ebook-drawer__link:hover {
   color: #8C7A00;
   background: #F5F5F5;
 }
@@ -373,6 +373,6 @@ body:not(.dark) .ebook-drawer__link:hover {
 }
 
 :root:not(.dark) .ebook-reader,
-body:not(.dark) .ebook-reader {
+:root:not(.dark) .ebook-reader {
   background: #F5F5F5; /* Light neutral background */
 }
