@@ -1,7 +1,7 @@
 ---
 type: about-author
 pageNumber: 115
-title: About the author
+title: About the Author
 ---
 
 Ashley "Ash" Ward Shaw is a South African-born, Cape Town-based UV makeup artist, cyclist, WordPress agency founder, dancer, and self-described crazy Aquarian who loves life. He has been a hyperactive individual since childhood — whenever you see him he is moving and/or talking.

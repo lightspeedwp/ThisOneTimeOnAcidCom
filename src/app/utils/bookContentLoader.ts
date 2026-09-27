@@ -5,10 +5,10 @@
  *
  * File naming convention:
  *   00-front-matter/    - cover, title, dedication, epigraph, foreword
- *   01-part-1-*/        - part title + chapters (prefix number = reading order)
- *   02-part-2-*/
- *   03-part-3-*/
- *   04-part-4-*/
+ *   01-part-1-[n]/      - part title + chapters (prefix number = reading order)
+ *   02-part-2-[n]/
+ *   03-part-3-[n]/
+ *   04-part-4-[n]/
  *   05-back-matter/     - afterword, appendices, about-author, back-cover
  *
  * Chapter file frontmatter fields:
@@ -109,9 +109,16 @@ interface PartEntry {
 }
 
 var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+var PART_WORDS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
 var TOC_ITEMS_PER_PAGE = 11;
 
-function buildTocPages(parts: PartEntry[], startPageNumber: number): BookPage[] {
+interface BackMatterTocItem { title: string; page: number; isSection?: boolean; }
+
+function buildTocPages(
+  parts: PartEntry[],
+  startPageNumber: number,
+  backItems?: BackMatterTocItem[]
+): BookPage[] {
   var allEntries: Array<{ number: number; title: string; partLabel?: string; page?: number }> = [];
 
   for (var pi = 0; pi < parts.length; pi++) {
@@ -125,6 +132,18 @@ function buildTocPages(parts: PartEntry[], startPageNumber: number): BookPage[] 
     for (var ci = 0; ci < p.chapters.length; ci++) {
       var ch = p.chapters[ci];
       allEntries.push({ number: ch.chapter, title: ch.title, page: ch.startPage });
+    }
+  }
+
+  if (backItems && backItems.length > 0) {
+    for (var bmi = 0; bmi < backItems.length; bmi++) {
+      var bm = backItems[bmi];
+      allEntries.push({
+        number: 0,
+        title: bm.title,
+        partLabel: bm.isSection ? '\u2014' : '',
+        page: bm.page,
+      });
     }
   }
 
@@ -157,6 +176,7 @@ function loadBookPages(): BookPage[] {
   var backMatterPages: BookPage[] = [];
   var parts: PartEntry[] = [];
   var currentPart: PartEntry | null = null;
+  var backMatterTocItems: BackMatterTocItem[] = [];
 
   for (var idx = 0; idx < sortedPaths.length; idx++) {
     var path = sortedPaths[idx];
@@ -215,7 +235,7 @@ function loadBookPages(): BookPage[] {
         if (currentPart) parts.push(currentPart);
         currentPart = {
           part: meta.part || 0,
-          partTitle: 'Part ' + (ROMAN[( meta.part || 1) - 1] || meta.part) + ' - ' + (meta.title || ''),
+          partTitle: 'Part ' + (PART_WORDS[(meta.part || 1) - 1] || ROMAN[(meta.part || 1) - 1] || String(meta.part)) + ' \u2014 ' + (meta.title || '') + (meta.subtitle ? ' (' + meta.subtitle + ')' : ''),
           partSubtitle: meta.subtitle || '',
           partPageNumber: meta.pageNumber || 0,
           chapters: [],
@@ -283,6 +303,7 @@ function loadBookPages(): BookPage[] {
         break;
 
       case 'appendix-divider':
+        backMatterTocItems.push({ title: meta.title || 'Appendices', page: meta.pageNumber || 0, isSection: true });
         backMatterPages.push({
           id: 'appendix-divider',
           type: 'appendix-title',
@@ -293,6 +314,7 @@ function loadBookPages(): BookPage[] {
 
       case 'appendix': {
         var appId = meta.appendixId || 'x';
+        backMatterTocItems.push({ title: '  ' + (meta.title || ''), page: meta.pageNumber || 0 });
         backMatterPages.push({
           id: 'appendix-' + appId + '-title',
           type: 'appendix-title',
@@ -341,7 +363,7 @@ function loadBookPages(): BookPage[] {
   // preForeword ends with epigraph (pageNumber: 3).
   // TOC starts at pageNumber 4.
   var tocStartPage = 4;
-  var tocPages = buildTocPages(parts, tocStartPage);
+  var tocPages = buildTocPages(parts, tocStartPage, backMatterTocItems);
 
   return ([] as BookPage[])
     .concat(preForeword)
@@ -351,4 +373,45 @@ function loadBookPages(): BookPage[] {
     .concat(backMatterPages);
 }
 
-export var bookPages: BookPage[] = loadBookPages();
+// Page types that can have their paragraphs split across multiple pages
+var SPLITTABLE_TYPES = new Set(['chapter-content', 'afterword', 'about-author', 'foreword', 'back-cover']);
+
+/**
+ * Splits pages whose paragraph count exceeds maxParas into multiple pages.
+ * Called at load time with a viewport-responsive limit so pages never overflow.
+ */
+export function splitLargePages(pages: BookPage[], maxParas: number): BookPage[] {
+  var result: BookPage[] = [];
+  for (var i = 0; i < pages.length; i++) {
+    var page = pages[i];
+    if (!SPLITTABLE_TYPES.has(page.type) || !page.paragraphs || page.paragraphs.length <= maxParas) {
+      result.push(page);
+      continue;
+    }
+    var chunks = Math.ceil(page.paragraphs.length / maxParas);
+    for (var c = 0; c < chunks; c++) {
+      var slice = page.paragraphs.slice(c * maxParas, (c + 1) * maxParas);
+      result.push({
+        id: c === 0 ? page.id : page.id + '-p' + (c + 1),
+        type: page.type,
+        pageNumber: page.pageNumber,
+        chapter: page.chapter,
+        part: page.part,
+        title: page.title,
+        subtitle: page.subtitle,
+        paragraphs: slice,
+      });
+    }
+  }
+  return result;
+}
+
+function maxParasForViewport(): number {
+  if (typeof window === 'undefined') return 5;
+  var w = window.innerWidth;
+  if (w < 480) return 3;
+  if (w < 768) return 4;
+  return 6;
+}
+
+export var bookPages: BookPage[] = splitLargePages(loadBookPages(), maxParasForViewport());

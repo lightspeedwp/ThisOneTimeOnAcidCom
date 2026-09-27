@@ -44,7 +44,6 @@ export { AutoBreadcrumbs } from './AutoBreadcrumbs';
 
 export { ThemeProvider } from './ThemeProvider';
 export { ThemeSwitcher } from './ThemeSwitcher';
-export { ThemeToggle } from './ThemeToggle';
 export { ThemeToggleES5 } from './ThemeToggleES5';
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

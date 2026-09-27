@@ -77,6 +77,11 @@ body.ebook-fullscreen .header {
   display: none !important;
 }
 
+/* Hide site footer (including ThemeSwitcher) while the ebook reader is mounted */
+body.ebook-reading .footer {
+  display: none !important;
+}
+
 body.ebook-fullscreen .ebook-reader {
   position: fixed;
   top: 0;
@@ -167,8 +172,7 @@ body.ebook-fullscreen .ebook-reader__hero {
 
 .ebook-reader__single-page .ebook-reader__page-inner {
   flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
   border-radius: 0;
   box-shadow: none;
 }
@@ -302,10 +306,10 @@ body.ebook-fullscreen .ebook-reader__hero {
   border-radius: 0 var(--wp--preset--border-radius--md) var(--wp--preset--border-radius--md) 0;
 }
 
-/* ── Page inner (padding & scroll) ── */
+/* ── Page inner (no scroll — content is pre-paginated to fit) ── */
 .ebook-reader__page-inner {
   flex: 1;
-  overflow-y: auto;
+  overflow: hidden;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -319,24 +323,6 @@ body.ebook-fullscreen .ebook-reader__hero {
 .dark .ebook-reader__page-inner {
   background: var(--wp--preset--color--atomic-black);
   color: var(--wp--preset--color--neutral-200);
-}
-
-/* Thin custom scrollbar for page content */
-.ebook-reader__page-inner::-webkit-scrollbar {
-  width: 4px;
-}
-
-.ebook-reader__page-inner::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.ebook-reader__page-inner::-webkit-scrollbar-thumb {
-  background: var(--wp--preset--color--neutral-300);
-  border-radius: 2px;
-}
-
-.dark .ebook-reader__page-inner::-webkit-scrollbar-thumb {
-  background: var(--wp--preset--color--neutral-700);
 }
 
 /* Inner shadow on the spine edge (spread mode only) */

@@ -77,6 +77,14 @@ export function EbookPage() {
   /* ── Full Screen ── */
   var [isFullScreen, setIsFullScreen] = useState(false);
 
+  // Hide site footer while reader is mounted (removes legacy theme-switcher widget)
+  useEffect(function () {
+    document.body.classList.add('ebook-reading');
+    return function () {
+      document.body.classList.remove('ebook-reading');
+    };
+  }, []);
+
   useEffect(function () {
     if (isFullScreen) {
       document.body.classList.add('ebook-fullscreen');
