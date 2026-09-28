@@ -192,7 +192,7 @@ export var artistryPageData: ArtistryPageData = {
         year: '1999',
         title: 'The yellow suit',
         description:
-          'Found at a charity shop. First worn at Vortex 1999. Earned him the nickname "the Chicken Man." The beginning of standing out on purpose.',
+          "Found at a charity shop. First worn at Vortex 1999. Earned him the nickname 'the Chicken Man.' The beginning of standing out on purpose.",
       },
       {
         year: 'Early 2000s',
@@ -208,7 +208,7 @@ export var artistryPageData: ArtistryPageData = {
         year: 'Late 2000s',
         title: 'Brown & beige cow suit',
         description:
-          'Became known as "the Cow Man" for years. People at festivals STILL ask if he\u2019s the guy who used to dress as the cow man.',
+          "Became known as 'the Cow Man' for years. People at festivals STILL ask if he\u2019s the guy who used to dress as the cow man.",
       },
       {
         year: 'July 2019',

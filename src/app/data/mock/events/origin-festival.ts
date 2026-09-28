@@ -170,7 +170,7 @@ export const originFestival: Event = {
       highlights:
         'Left the festival on his birthday and someone gave him a happy birthday sash to wear. He cycled the whole way to Peregrine Farmstall in Grabouw wearing it \u2014 leaving on his birthday, it felt perfectly fitting to carry the celebration all the way down the road.',
       personalNote:
-        'Cycling away from Origin on my birthday wearing a happy birthday sash felt like the most "me" thing imaginable. The ride to Peregrine Farmstall in Grabouw was pure joy.',
+        "Cycling away from Origin on my birthday wearing a happy birthday sash felt like the most 'me' thing imaginable. The ride to Peregrine Farmstall in Grabouw was pure joy.",
       travel: {
         method: 'bicycle',
         description:

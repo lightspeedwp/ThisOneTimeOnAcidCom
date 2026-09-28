@@ -20,7 +20,7 @@ export var vortex: Event = {
   shortName: 'Vortex',
   tagline: 'Where it all began — twenty years of dancefloor evolution',
   description:
-    'Vortex Festival is a legendary South African psytrance gathering that has been running since the late 1990s. Known for its multiple editions per year (December, Easter, and occasional special events), Vortex represents the foundation of South Africa's outdoor psytrance culture. For Ash, Vortex is where everything started. His first festival experience in 1999 at age 21. The birthplace of Chicken Man, Cow Man, and every costumed character that led to UV face painting. December Vortex is a pilgrimage, a reunion, and a reminder that the dancefloor has been teaching him for over twenty years.',
+    "Vortex Festival is a legendary South African psytrance gathering that has been running since the late 1990s. Known for its multiple editions per year (December, Easter, and occasional special events), Vortex represents the foundation of South Africa's outdoor psytrance culture. For Ash, Vortex is where everything started. His first festival experience in 1999 at age 21. The birthplace of Chicken Man, Cow Man, and every costumed character that led to UV face painting. December Vortex is a pilgrimage, a reunion, and a reminder that the dancefloor has been teaching him for over twenty years.",
   type: 'festival',
   genre: ['psytrance', 'progressive', 'full-on', 'forest', 'darkpsy'],
   website: 'https://www.vortexfestival.co.za/',
@@ -152,7 +152,7 @@ export var vortex: Event = {
       role: 'First-time attendee',
       activities: ['Costumed character (yellow suit)'],
       highlights:
-        'The beginning. Ash's first psytrance festival. Age 21, wearing a bright yellow suit, standing on a dancefloor in the middle of nowhere South Africa. The moment that started everything. The strategy was simple: be the most visible person in the space. It worked.',
+        "The beginning. Ash's first psytrance festival. Age 21, wearing a bright yellow suit, standing on a dancefloor in the middle of nowhere South Africa. The moment that started everything. The strategy was simple: be the most visible person in the space. It worked.",
       personalNote:
         'December 1999. My first Vortex. My first psytrance festival. I wore a bright yellow suit because I wanted to be impossible to ignore. Twenty-five years later, I am still doing the same thing. Just with a paintbrush instead of a costume.',
     },
@@ -169,13 +169,13 @@ export var vortex: Event = {
       id: 'vortex-faq-1',
       question: 'What is Vortex Festival?',
       answer:
-        'Vortex Festival is a legendary South African psytrance gathering that has been running since the late 1990s. Known for multiple editions per year (December, Easter, and occasional special events), Vortex represents the foundation of South Africa's outdoor psytrance culture.',
+        "Vortex Festival is a legendary South African psytrance gathering that has been running since the late 1990s. Known for multiple editions per year (December, Easter, and occasional special events), Vortex represents the foundation of South Africa's outdoor psytrance culture.",
     },
     {
       id: 'vortex-faq-2',
       question: 'Why is Vortex so significant to Ash?',
       answer:
-        'Vortex is where it all began. Ash's first festival experience in December 1999 at age 21. The birthplace of Chicken Man, Cow Man, and twenty years of costumed visibility practice that eventually led to UV face painting. December Vortex is a pilgrimage, a reunion, and a reminder that the dancefloor has been teaching him for over two decades.',
+        "Vortex is where it all began. Ash's first festival experience in December 1999 at age 21. The birthplace of Chicken Man, Cow Man, and twenty years of costumed visibility practice that eventually led to UV face painting. December Vortex is a pilgrimage, a reunion, and a reminder that the dancefloor has been teaching him for over two decades.",
     },
     {
       id: 'vortex-faq-3',

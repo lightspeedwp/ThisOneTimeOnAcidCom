@@ -24,7 +24,7 @@ export var nationOfGondwana: Event = {
   shortName: 'NOG',
   tagline: 'Seven days of transformation in the German countryside',
   description:
-    'Nation of Gondwana (NOG) is one of Europe's premier transformational festivals, held annually near Berlin, Germany. With 10,000+ attendees, three stages running 24 hours, and a lineup spanning techno, house, progressive, and psytrance, NOG represents the peak of the European electronic music festival scene. The festival is known for its immaculate German infrastructure (clean toilets, abundant water, professional medical support) combined with a global psytrance community vibe. For Ash, NOG is the perfect synthesis of Berlin summer energy and international festival culture — close enough to his Berlin base to cycle there, large enough to paint hundreds of faces, and mature enough to support deep transformational experiences.',
+    "Nation of Gondwana (NOG) is one of Europe's premier transformational festivals, held annually near Berlin, Germany. With 10,000+ attendees, three stages running 24 hours, and a lineup spanning techno, house, progressive, and psytrance, NOG represents the peak of the European electronic music festival scene. The festival is known for its immaculate German infrastructure (clean toilets, abundant water, professional medical support) combined with a global psytrance community vibe. For Ash, NOG is the perfect synthesis of Berlin summer energy and international festival culture — close enough to his Berlin base to cycle there, large enough to paint hundreds of faces, and mature enough to support deep transformational experiences.",
   type: 'festival',
   genre: ['techno', 'house', 'psytrance', 'progressive', 'experimental'],
   website: 'https://www.pyonen.de/nog2026/en',
@@ -136,7 +136,7 @@ export var nationOfGondwana: Event = {
       id: 'nog-faq-1',
       question: 'What is Nation of Gondwana?',
       answer:
-        'Nation of Gondwana (NOG) is a seven-day transformational festival held annually near Berlin, Germany. With 10,000+ attendees, three stages running 24 hours, and a lineup spanning techno, house, progressive, and psytrance, it is one of Europe's premier electronic music gatherings.',
+        "Nation of Gondwana (NOG) is a seven-day transformational festival held annually near Berlin, Germany. With 10,000+ attendees, three stages running 24 hours, and a lineup spanning techno, house, progressive, and psytrance, it is one of Europe's premier electronic music gatherings.",
     },
     {
       id: 'nog-faq-2',

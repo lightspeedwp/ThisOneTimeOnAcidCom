@@ -419,7 +419,7 @@ Berlin gave me the paintbrush. The dancefloor gave me the canvas. And the art? T
 
 Psytrance festivals are extreme environments. We are talking about dust, heat, sweat, and non-stop movement for days. Whether I'm cycling to a gathering in South Africa or dancing in a Thai jungle, one truth remains: **I want to stomp, not touch up my face.**
 
-My "Neon vs Atomic Black" style needs to be crisp. Over the years, I've refined a "survival kit" routine that withstands the intensity of the trance floor.
+My "Neon vs Atomic Black" style needs to be crisp. Over the years, I've refined a 'survival kit" routine that withstands the intensity of the trance floor.
 
 ## 1. Prime Like Your Life Depends On It
 
@@ -527,7 +527,7 @@ UV makeup is the core of my identity. Whether I'm at the Jungle Experience in Ko
 
 ## What Makes Makeup UV-Reactive?
 
-It's science, baby! UV makeup contains fluorescent pigments that absorb UV light (blacklight) and instantly re-emit it. This is different from "glow-in-the-dark". UV makeup glows *instantly* and *intensely*.
+It's science, baby! UV makeup contains fluorescent pigments that absorb UV light (blacklight) and instantly re-emit it. This is different from 'glow-in-the-dark". UV makeup glows *instantly* and *intensely*.
 
 **My Kit Essentials:**
 *   Fluorescent pigments (DayGlo styles)
@@ -925,7 +925,7 @@ But the dancefloor itself never changes. It's still the place where ADHD brains 
 
 The South African outdoor trance scene in the early 2000s was a golden era. There is no other way to describe it.
 
-Alien Safari was the flagship party series — legendary sound systems set up in the Boland mountains outside Cape Town, the Stellenbosch winelands as backdrop, and a community that treated every gathering as sacred. Vortex was the spiritual calendar: Easter Vortex and December Vortex were the fixed points around which the entire year was organised. You didn't ask "are you going to Vortex?" — you asked "which campsite are you at?"
+Alien Safari was the flagship party series — legendary sound systems set up in the Boland mountains outside Cape Town, the Stellenbosch winelands as backdrop, and a community that treated every gathering as sacred. Vortex was the spiritual calendar: Easter Vortex and December Vortex were the fixed points around which the entire year was organised. You didn't ask 'are you going to Vortex?" — you asked "which campsite are you at?"
 
 The Cape Town mountain venues were extraordinary. Dance under the stars with the Table Mountain range visible on the horizon. The Boland backdrop, Western Cape summer, clear skies from October to March. At peak, there were two to four festivals per month. Every weekend was an option. The scene was intimate enough that everyone knew each other but large enough that you could always meet someone new.
 
@@ -988,11 +988,11 @@ The costume timeline tells the story of an identity being built without the owne
 
 **1999–2000: The yellow suit.** Chicken Man era. Vortex festivals in the Western Cape mountains, Alien Safari in the Boland hills. A twenty-year-old in a charity-shop suit dancing like nobody was watching — except everyone was. That was the point. The first taste of what it feels like to be the most visible person in the room.
 
-**2001–2003: The red suit.** Escalation era. If one loud suit works, try louder. The red suit said: I am here, I am not apologising, and I am going to dance for twelve hours straight. People started recognising me between festivals. "You're the suit guy." Identity was forming.
+**2001–2003: The red suit.** Escalation era. If one loud suit works, try louder. The red suit said: I am here, I am not apologising, and I am going to dance for twelve hours straight. People started recognising me between festivals. "You're the suit guy.' Identity was forming.
 
 **2003–2006: The white and black cow suit.** Character pivot. This wasn't just dressing up any more — this was becoming a character. The cow suit had a narrative. People didn't just notice me; they remembered me. They told stories about me to friends who hadn't been there.
 
-**2006–2010: The brown and beige cow suit.** "The Cow Man" identity fully cemented. At every festival, without fail, someone would shout across the dancefloor: "It's the Cow Man!" Years later, people at festivals would approach me: "Are you the guy who used to dress as a cow?" The recognition moments accumulated into something bigger than a costume — they became proof that standing out is a practice, not a talent.
+**2006–2010: The brown and beige cow suit.** "The Cow Man" identity fully cemented. At every festival, without fail, someone would shout across the dancefloor: "It's the Cow Man!' Years later, people at festivals would approach me: "Are you the guy who used to dress as a cow?" The recognition moments accumulated into something bigger than a costume — they became proof that standing out is a practice, not a talent.
 
 **2010–2018: Various themed outfits.** The evolution beyond a single character. Onesies, UV-reactive clothing, painted designs on fabric. The costumes were getting closer to the art that was coming — closer to the skin, closer to the body, closer to painting.
 
@@ -1090,13 +1090,13 @@ I came home knowing two things I hadn't known before: that the world is generous
     id: 'half-colours-2-oclock-club-provincial-champion',
     slug: 'half-colours-2-oclock-club-provincial-champion',
     title: 'Half colours and the 2 o\'clock club',
-    excerpt: 'While the classroom was a struggle, the sports field was where I thrived. By 1998 I was Western Province cross-country mountain bike champion. They called me the "2 o\'clock club" because at 2pm, when other kids stayed for after-school activities, I went home to train on my bicycle.',
+    excerpt: "While the classroom was a struggle, the sports field was where I thrived. By 1998 I was Western Province cross-country mountain bike champion. They called me the '2 o'clock club' because at 2pm, when other kids stayed for after-school activities, I went home to train on my bicycle.",
     content: `
 # Half Colours and the 2 O'Clock Club
 
 While the classroom was a struggle, the sports field was where I thrived. I started racing bicycles in 1994, age thirteen. My first provincial mountain bike race was in 1995. By 1997 I was representing the Western Province cross-country mountain bike team. I got my colours three years running: third in 1997, first in 1998 — Western Province champion — and third again in 1999.
 
-Paarl Boys High called me the "2 o\'clock club" because at 2pm, when other kids stay for after-school activities, I went home to train on my bicycle. I earned half colours at school for becoming provincial champion. I even created myself a cycling portfolio to try to get sponsorship — impressive results for a kid, even if sponsorship was difficult to secure.
+Paarl Boys High called me the "2 o\'clock club' because at 2pm, when other kids stay for after-school activities, I went home to train on my bicycle. I earned half colours at school for becoming provincial champion. I even created myself a cycling portfolio to try to get sponsorship — impressive results for a kid, even if sponsorship was difficult to secure.
 
 ## When the environment matches the wiring
 
@@ -1110,7 +1110,7 @@ I wasn\'t an average writer initially. With practice over my life, I\'ve become 
 
 I finished matric at age seventeen. When I look back at what I\'m most proud of from that time, it\'s the cycling. Not the academic results or the social status, but the decision to pursue something I was passionate about, the discipline to train while everyone else was socialising, and the entrepreneurial spirit to build a portfolio and chase sponsorship at an age when most kids are just trying to get through school.
 
-That thread — the self-directed, autonomous, "I\'ll figure it out myself" energy — never went away. It\'s the same thread that runs through LightSpeed, through the festival life, through the UV art practice, through the cycling pilgrimages to festivals decades later.
+That thread — the self-directed, autonomous, "I\'ll figure it out myself' energy — never went away. It\'s the same thread that runs through LightSpeed, through the festival life, through the UV art practice, through the cycling pilgrimages to festivals decades later.
 
 The bicycle was the first thing that matched the wiring. The dancefloor was the second. The paintbrush was the third. But they all share the same quality: they demand exactly what I have to give, and in return, they give me a place to be fully myself.
     `,
@@ -1253,7 +1253,7 @@ The evolution was clear in retrospect: dressing up, being seen, then creating. T
 
 The venue was a psytrance gathering somewhere deep in Berlin's industrial east, the kind of space where the concrete walls still remember the Cold War but the UV lights have turned them into something extraterrestrial. It was July 2019 — high summer, that golden stretch when Berlin barely gets dark and the city's energy is electric. The gathering had been running since the previous night. UV rigs lined the walls. Bass moved through the floor.
 
-Someone had a box of UV face paints. I don't remember whose they were. I picked one up — a green stick — and turned to the person next to me. "Can I try something?" The first strokes were tentative. Geometric lines across the cheekbones, dots along the jawline, swirling patterns radiating outward from the eyes. When they stepped under the blacklight, something ignited. The colours that had looked muted under the dim overhead lamps now screamed with life. Their face became a mask, a portal, something other. They looked at their reflection in a phone screen and their whole expression changed.
+Someone had a box of UV face paints. I don't remember whose they were. I picked one up — a green stick — and turned to the person next to me. 'Can I try something?" The first strokes were tentative. Geometric lines across the cheekbones, dots along the jawline, swirling patterns radiating outward from the eyes. When they stepped under the blacklight, something ignited. The colours that had looked muted under the dim overhead lamps now screamed with life. Their face became a mask, a portal, something other. They looked at their reflection in a phone screen and their whole expression changed.
 
 That was the moment. Not a gradual realisation but a thunderclap. Twenty years of dancefloor immersion — the costumes, the visibility, the obsession with how bodies and light interact in dark spaces — all of it had been building to this exact point. The difference between watching art and making art is the difference between standing on the shore and diving in. I had been on the shore my entire festival life. That night, I dove.
 
@@ -1369,7 +1369,7 @@ Rest well, Lucy. You were loved, and you are missed.
     content: `
 # This One Time on Acid… — Announcing the Book
 
-People love my stories. The kind you tell at 4am around a campfire when the music has stopped and the real conversations begin. The kind that start with "you won't believe this" and end with everyone nodding because they absolutely do believe it.
+People love my stories. The kind you tell at 4am around a campfire when the music has stopped and the real conversations begin. The kind that start with "you won't believe this' and end with everyone nodding because they absolutely do believe it.
 
 I've decided to write them down. Not just the stories, but the lessons embedded in them. The experiences that changed me, made me who I am, and why they impacted me so profoundly.
 
@@ -1664,7 +1664,7 @@ The same brain that rejected boredom in school was now rejecting the constraints
 
 ## The Decision
 
-"You never know if you're ready to start a business, but I knew that I didn't want to work at City Varsity for another year."
+"You never know if you're ready to start a business, but I knew that I didn't want to work at City Varsity for another year.'
 
 So I didn't.
 
@@ -1690,7 +1690,7 @@ I didn't know how to run a business. I didn't know how to find clients. I didn't
 
 I didn't know WordPress would become my core platform. I didn't know I'd end up specialising in WooCommerce. I didn't know I'd build a team of thirteen people across multiple continents.
 
-I didn't know I'd attend 20+ WordCamps across four continents. I didn't know I'd speak at WordCamp Europe 2025 in Basel. I didn't know I'd become known as "the crazy South African in the WordPress community."
+I didn't know I'd attend 20+ WordCamps across four continents. I didn't know I'd speak at WordCamp Europe 2025 in Basel. I didn't know I'd become known as 'the crazy South African in the WordPress community."
 
 But I knew I couldn't work for someone else. And that was enough to start.
 

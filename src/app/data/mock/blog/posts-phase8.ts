@@ -29,7 +29,7 @@ export var phase8BlogPosts: BlogPost[] = [
       '## Twenty years of preparation\n\n' +
       'From Vortex 1999 onwards, I spent twenty years standing out on dancefloors. The yellow suit. Chicken Man. Cow Man. Themed costumes that made me the most visible person in the space. I understood visibility. I understood energy. I understood how to read a crowd and match the vibe.\n\n' +
       'The paintbrush was just the tool I had been missing.\n\n' +
-      'Standing out in a costume is one thing — you are hiding behind fabric, behind a character. Painting someone else's face is different. You are transforming the person themselves. No hiding. The art is on them, part of them, inseparable from them.\n\n' +
+      "Standing out in a costume is one thing — you are hiding behind fabric, behind a character. Painting someone else's face is different. You are transforming the person themselves. No hiding. The art is on them, part of them, inseparable from them.\n\n" +
       '## The first face\n\n' +
       'I do not remember their name. I remember the feeling — the intuitive flow of choosing colours, the confidence of someone who had spent two decades reading dancefloor energy. The UV paints glowed under blacklight. The person looked in a mirror and smiled.\n\n' +
       'That smile told me everything.\n\n' +
@@ -83,7 +83,7 @@ export var phase8BlogPosts: BlogPost[] = [
       'Every year, from September to November, I relocate to Koh Phangan, Thailand. It is not a holiday. It is a strategic creative reset.\n\n' +
       'The island has become the third anchor point in my yearly cycle: Cape Town (home base), Berlin (May for techno season), Koh Phangan (Sep–Nov for training and recharge). Each location serves a purpose. Koh Phangan is where I rebuild the body and refuel the creative engine.\n\n' +
       '## Training season\n\n' +
-      'Muay Thai six days a week. Pad work, bag work, clinching, sparring. Swimming in the ocean. Cycling the island's hills. Triathlon training when the energy is right. The discipline is the point — not competition, not performance, but the practice itself.\n\n' +
+      "Muay Thai six days a week. Pad work, bag work, clinching, sparring. Swimming in the ocean. Cycling the island's hills. Triathlon training when the energy is right. The discipline is the point — not competition, not performance, but the practice itself.\n\n" +
       'Your body is your primary tool. Everything else — the art, the festivals, the business — depends on the physical foundation. Koh Phangan is where I honour that.\n\n' +
       '## Remote work and creative flow\n\n' +
       'LightSpeed runs remotely. The time difference with Cape Town is manageable. Mornings are for training. Afternoons are for client work, design systems, WordPress architecture. Evenings are for creative projects — UV art experiments, video editing, ebook writing.\n\n' +
@@ -139,7 +139,7 @@ export var phase8BlogPosts: BlogPost[] = [
       'When you are painting faces at a festival, speed matters. Not because you are rushing the art, but because every minute someone is sitting still with you is a minute they are missing the music. The dancefloor is a river — you cannot dam it. You have to flow with it.\n\n' +
       'Ambidextrous painting was not a party trick. It was a necessity.\n\n' +
       '## The genesis: Sisyphos, Berlin\n\n' +
-      'It started at Sisyphos in 2020. I was painting a geometric pattern on someone's face — symmetrical lines radiating from the third eye. My right hand was flying across the left side of their face, but when I switched to their right side, I had to awkwardly angle my wrist.\n\n' +
+      "It started at Sisyphos in 2020. I was painting a geometric pattern on someone's face — symmetrical lines radiating from the third eye. My right hand was flying across the left side of their face, but when I switched to their right side, I had to awkwardly angle my wrist.\n\n" +
       'The person could feel the difference. The lines were shakier. The confidence was not there.\n\n' +
       'That is when I realised: if I want to paint symmetrical designs at festival speed, I need both hands.\n\n' +
       '## The training: non-stop repetition\n\n' +
@@ -263,7 +263,7 @@ export var phase8BlogPosts: BlogPost[] = [
       'I bought 15 meters of battery-powered LED fairy lights. The kind people use for Christmas trees. I wrapped the entire bike frame, the wheels, the handlebars. Front to back, top to bottom. The bike became a glowing constellation.\n\n' +
       'The first time I cycled through Kreuzberg at night, people stopped and stared. Cars gave me a wide berth. I was the most visible thing on the road.\n\n' +
       '## The evolution: functional becomes iconic\n\n' +
-      'What started as practical safety gear became a signature. People started recognising the bike before they recognised me. Friends would text: "Just saw the fairy lights bike crossing Warschauer Brücke — where are you headed?"\n\n' +
+      "What started as practical safety gear became a signature. People started recognising the bike before they recognised me. Friends would text: 'Just saw the fairy lights bike crossing Warschauer Brücke — where are you headed?'\n\n" +
       'The bike became a beacon. A mobile landmark. A way of saying: I am here, I am moving, I am impossible to miss.\n\n' +
       '## The culture fit: Berlin loves weird functionality\n\n' +
       'Berlin rewards functional weirdness. A bike wrapped in fairy lights is not trying to be quirky — it is solving a problem (visibility) in a way that also happens to be beautiful. That is the Berlin aesthetic: form follows function, but make it glow.\n\n' +
@@ -1030,7 +1030,7 @@ export var phase8BlogPosts: BlogPost[] = [
       {
         id: 'blog-mentoring-q3',
         question: 'What advice do you have for companies considering internship programs?',
-        answer: 'Commit fully or do not do it. Half-hearted internships waste everyone's time. Pay interns fairly. Give them real work. Assign dedicated mentors. Build training time into schedules. Expect the first three months to be net-negative productivity. If you cannot commit to that, do not start. But if you can, the return is transformational.'
+        answer: "Commit fully or do not do it. Half-hearted internships waste everyone's time. Pay interns fairly. Give them real work. Assign dedicated mentors. Build training time into schedules. Expect the first three months to be net-negative productivity. If you cannot commit to that, do not start. But if you can, the return is transformational."
       }
     ]
   }

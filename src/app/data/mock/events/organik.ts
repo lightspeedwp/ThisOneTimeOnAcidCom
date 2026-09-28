@@ -142,7 +142,7 @@ export var organik: Event = {
       id: 'organik-faq-2',
       question: 'Why is Organik significant to Ash?',
       answer:
-        'Organik is the home crowd. It is where Cape Town psytrance heads who know Ash's work gather. Unlike international festivals where he is introducing the UV art, at Organik he is serving a community that has supported him from the beginning. It is about refinement, evolution, and continuity.',
+        "Organik is the home crowd. It is where Cape Town psytrance heads who know Ash's work gather. Unlike international festivals where he is introducing the UV art, at Organik he is serving a community that has supported him from the beginning. It is about refinement, evolution, and continuity.",
     },
     {
       id: 'organik-faq-3',
