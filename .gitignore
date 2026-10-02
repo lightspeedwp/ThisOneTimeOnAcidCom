@@ -78,3 +78,17 @@ test-results/
 # Temporary / linter caches
 .eslintcache
 .stylelintcache
+
+# Spec Kit / Gemini agent folders
+# Commands are safe to commit; protect everything else from credential leakage
+.gemini/*
+!.gemini/commands/
+!.gemini/settings.json
+!.gemini/GEMINI.md
+
+# Specify local state
+.specify/feature.json
+.specify/extensions/*/local-config.yml
+
+# Empty install subfolder (leftover from initial init)
+thisonetimeonacid/
