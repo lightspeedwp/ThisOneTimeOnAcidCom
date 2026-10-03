@@ -1,13 +1,189 @@
 /**
- * @fileoverview Accordion stub (unused – @radix-ui/react-accordion import removed
- *               to prevent async_hooks runtime errors via esm.sh)
+ * @fileoverview Accordion component for collapsible content sections
+ *
+ * Renders a list of expandable/collapsible sections with full keyboard
+ * navigation, ARIA attributes, and animated expand/collapse transitions.
+ * Supports single-item and multi-item open modes.
+ *
+ * @component Accordion
+ * @version 1.0.0
+ *
+ * @example
+ * <Accordion
+ *   items={[
+ *     { id: 'art', title: 'Art in ADHD', content: <p>Hyperfocus...</p> },
+ *     { id: 'biz', title: 'Business in ADHD', content: <p>Process obsession...</p> },
+ *   ]}
+ *   allowMultiple={false}
+ *   defaultOpen={['art']}
+ * />
+ *
+ * @accessibility
+ * - Full keyboard navigation: Arrow Up/Down, Enter/Space, Home, End
+ * - aria-expanded on triggers
+ * - aria-controls linking triggers to content panels
+ * - aria-labelledby linking panels to triggers
+ * - role="region" on content panels
+ * - prefers-reduced-motion: animations disabled
  */
 
-import * as React from "react";
+import React, { useState, useRef, useCallback } from 'react';
+import { CaretDown } from '@phosphor-icons/react';
 
-function Accordion({ children }: { children?: React.ReactNode }) { return <div>{children}</div>; }
-function AccordionItem({ children }: { children?: React.ReactNode }) { return <div>{children}</div>; }
-function AccordionTrigger({ children }: { children?: React.ReactNode }) { return <div>{children}</div>; }
-function AccordionContent({ children }: { children?: React.ReactNode }) { return <div>{children}</div>; }
+/**
+ * Single accordion item
+ */
+interface AccordionItem {
+  id: string;
+  title: string;
+  content: React.ReactNode;
+}
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+/**
+ * Props for the Accordion component
+ */
+interface AccordionProps {
+  /** Array of accordion items */
+  items: AccordionItem[];
+  /** Allow multiple items open simultaneously. Default: false */
+  allowMultiple?: boolean;
+  /** IDs of items open by default */
+  defaultOpen?: string[];
+}
+
+/**
+ * Accordion component — collapsible content sections with keyboard navigation
+ *
+ * `defaultOpen` seeds the open IDs only on mount and may open multiple panels
+ * even when `allowMultiple` is false. Without `allowMultiple`, opening a closed
+ * item closes the others; closing an open item can leave all items closed.
+ * Collapsed content stays mounted but is hidden.
+ */
+export function Accordion(props: AccordionProps) {
+  var items = props.items;
+  var allowMultiple = props.allowMultiple === true;
+  var defaultOpenIds = props.defaultOpen ? props.defaultOpen : [];
+
+  var openInit: string[] = defaultOpenIds;
+  var stateHook = useState(openInit);
+  var openItems = stateHook[0];
+  var setOpenItems = stateHook[1];
+
+  var triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  /** Return whether the item ID is in the current open state. */
+  var isOpen = useCallback(function (id: string): boolean {
+    for (var i = 0; i < openItems.length; i++) {
+      if (openItems[i] === id) return true;
+    }
+    return false;
+  }, [openItems]);
+
+  /**
+   * Toggle the item ID, preserving other open IDs only when closing an item
+   * or when multiple open items are allowed.
+   */
+  var toggleItem = useCallback(function (id: string) {
+    setOpenItems(function (prev) {
+      var wasOpen = false;
+      for (var i = 0; i < prev.length; i++) {
+        if (prev[i] === id) {
+          wasOpen = true;
+          break;
+        }
+      }
+
+      if (wasOpen) {
+        // Close it
+        var filtered: string[] = [];
+        for (var j = 0; j < prev.length; j++) {
+          if (prev[j] !== id) {
+            filtered.push(prev[j]);
+          }
+        }
+        return filtered;
+      } else {
+        // Open it
+        if (allowMultiple) {
+          return prev.concat([id]);
+        } else {
+          return [id];
+        }
+      }
+    });
+  }, [allowMultiple]);
+
+  /**
+   * Move focus from the trigger's zero-based item index with ArrowUp/ArrowDown
+   * (wrapping at either end), or to the first/last trigger with Home/End.
+   * Prevent the default action for these keys without changing open items.
+   * Ignore other keys and leave focus unchanged if the target ref is absent.
+   */
+  var handleKeyDown = useCallback(function (e: React.KeyboardEvent, index: number) {
+    var refs = triggerRefs.current as HTMLButtonElement[];
+    var lastIndex = items.length - 1;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      var nextIndex = index < lastIndex ? index + 1 : 0;
+      var nextEl = refs[nextIndex];
+      if (nextEl) nextEl.focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      var prevIndex = index > 0 ? index - 1 : lastIndex;
+      var prevEl = refs[prevIndex];
+      if (prevEl) prevEl.focus();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      var firstEl = refs[0];
+      if (firstEl) firstEl.focus();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      var lastEl = refs[lastIndex];
+      if (lastEl) lastEl.focus();
+    }
+  }, [items.length]);
+
+  return (
+    <div className="accordion">
+      {items.map(function (item, index) {
+        var itemOpen = isOpen(item.id);
+        var triggerId = 'accordion-trigger-' + item.id;
+        var contentId = 'accordion-content-' + item.id;
+        var contentClass = 'accordion__content' + (itemOpen ? ' accordion__content--open' : '');
+
+        return (
+          <div className="accordion__item" key={item.id}>
+            <button
+              type="button"
+              id={triggerId}
+              className="accordion__trigger"
+              aria-expanded={itemOpen}
+              aria-controls={contentId}
+              onClick={function () { toggleItem(item.id); }}
+              onKeyDown={function (e) { handleKeyDown(e, index); }}
+              ref={function (el) {
+                var refs = triggerRefs.current as HTMLButtonElement[];
+                refs[index] = el as HTMLButtonElement;
+              }}
+            >
+              <span>{item.title}</span>
+              <CaretDown className="accordion__icon" aria-hidden="true" />
+            </button>
+            <div
+              id={contentId}
+              className={contentClass}
+              role="region"
+              aria-labelledby={triggerId}
+              hidden={!itemOpen}
+            >
+              <div className="accordion__body">
+                {item.content}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}

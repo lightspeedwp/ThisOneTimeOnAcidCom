@@ -1,0 +1,7 @@
+{
+  "codeExecution": {
+    "allowedTools": [
+      "shell"
+    ]
+  }
+}
