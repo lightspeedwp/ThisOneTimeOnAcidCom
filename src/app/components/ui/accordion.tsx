@@ -53,6 +53,11 @@ interface AccordionProps {
 
 /**
  * Accordion component — collapsible content sections with keyboard navigation
+ *
+ * `defaultOpen` seeds the open IDs only on mount and may open multiple panels
+ * even when `allowMultiple` is false. Without `allowMultiple`, opening a closed
+ * item closes the others; closing an open item can leave all items closed.
+ * Collapsed content stays mounted but is hidden.
  */
 export function Accordion(props: AccordionProps) {
   var items = props.items;
@@ -66,6 +71,7 @@ export function Accordion(props: AccordionProps) {
 
   var triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
+  /** Return whether the item ID is in the current open state. */
   var isOpen = useCallback(function (id: string): boolean {
     for (var i = 0; i < openItems.length; i++) {
       if (openItems[i] === id) return true;
@@ -73,6 +79,10 @@ export function Accordion(props: AccordionProps) {
     return false;
   }, [openItems]);
 
+  /**
+   * Toggle the item ID, preserving other open IDs only when closing an item
+   * or when multiple open items are allowed.
+   */
   var toggleItem = useCallback(function (id: string) {
     setOpenItems(function (prev) {
       var wasOpen = false;
@@ -103,6 +113,12 @@ export function Accordion(props: AccordionProps) {
     });
   }, [allowMultiple]);
 
+  /**
+   * Move focus from the trigger's zero-based item index with ArrowUp/ArrowDown
+   * (wrapping at either end), or to the first/last trigger with Home/End.
+   * Prevent the default action for these keys without changing open items.
+   * Ignore other keys and leave focus unchanged if the target ref is absent.
+   */
   var handleKeyDown = useCallback(function (e: React.KeyboardEvent, index: number) {
     var refs = triggerRefs.current as HTMLButtonElement[];
     var lastIndex = items.length - 1;
