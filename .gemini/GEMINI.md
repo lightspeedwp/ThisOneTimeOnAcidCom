@@ -26,7 +26,7 @@ This is a React + Vite + TailwindCSS v4 web application. It uses TypeScript, Rad
 - Use TypeScript for all new code
 - Follow existing component patterns in `src/app`
 - Use Radix UI + shadcn/ui patterns for new components
-- Use TailwindCSS v4 utility classes for styling (import-based config, no `tailwind.config.js`)
+- Use semantic BEM classes from `styles/globals.css`; do not use Tailwind utilities or inline styles.
 - Use Motion for animations
 - Prefer named exports for components
 - Keep components focused and composable
