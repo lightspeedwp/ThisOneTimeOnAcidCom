@@ -160,6 +160,10 @@ _persist_feature_json() {
     fi
 }
 
+# Print shell-quoted assignments for repository, feature, and artifact paths.
+# Resolve the feature directory from SPECIFY_FEATURE_DIRECTORY or feature.json;
+# persist the environment override unless --no-persist or SPECIFY_FEATURE_NO_PERSIST
+# disables writes. Return 1 if the repository or feature context cannot be resolved.
 get_feature_paths() {
     # Read-only callers (e.g. check-prerequisites.sh --paths-only) pass
     # --no-persist so pure path resolution never writes .specify/feature.json,
@@ -242,6 +246,8 @@ has_jq() {
     command -v jq >/dev/null 2>&1
 }
 
+# Print the active integration's command separator ('.' or '-'), defaulting to '.'.
+# Accept an optional repository root and cache the result for that root.
 get_invoke_separator() {
     local repo_root="${1:-$(get_repo_root)}"
     if [[ "${_SPECIFY_INVOKE_SEPARATOR_CACHE_REPO_ROOT:-}" == "$repo_root" && -n "${_SPECIFY_INVOKE_SEPARATOR_CACHE_VALUE:-}" ]]; then
@@ -354,6 +360,8 @@ PY
     printf '%s\n' "$separator"
 }
 
+# Print a /speckit command using the active integration's separator.
+# Accept a command name (bare or prefixed) and an optional repository root.
 format_speckit_command() {
     local command_name="$1"
     local repo_root="${2:-$(get_repo_root)}"
@@ -402,9 +410,14 @@ json_escape() {
     done
 }
 
+# Print the label in $2 with a success/failure marker for the file path in $1.
 check_file() { [[ -f "$1" ]] && echo "  ✓ $2" || echo "  ✗ $2"; }
+# Print the label in $2 with a marker indicating whether $1 is a nonempty directory.
 check_dir() { [[ -d "$1" && -n $(ls -A "$1" 2>/dev/null) ]] && echo "  ✓ $2" || echo "  ✗ $2"; }
 
+# Print a usable Python 3 command, one argument per line; return 1 if none exists.
+# Prefer SPECKIT_PYTHON_EXECUTABLE (or legacy SPECKIT_PYTHON) when it supports
+# Python 3 and PyYAML, then try python3, python, and the Windows py launcher.
 _python3_command() {
     # SPECKIT_PYTHON_EXECUTABLE is the canonical override; SPECKIT_PYTHON is
     # kept as a deprecated fallback (still used by update-agent-context.sh).
@@ -427,6 +440,10 @@ _python3_command() {
     fi
 }
 
+# Print enabled extension IDs from the directory in $1, ordered by registry
+# priority then ID; include unregistered directories at the default priority.
+# Without Python, list directories only when no registry exists. Return 1 for
+# registry errors or 2 when a registry requires Python but none is available.
 _sorted_extension_ids() {
     local ext_dir="$1"
     local -a python_cmd=()
