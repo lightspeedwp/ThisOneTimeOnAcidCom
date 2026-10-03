@@ -64,7 +64,7 @@ export function Accordion(props: AccordionProps) {
   var openItems = stateHook[0];
   var setOpenItems = stateHook[1];
 
-  var triggerRefs = useRef([]);
+  var triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   var isOpen = useCallback(function (id: string): boolean {
     for (var i = 0; i < openItems.length; i++) {
