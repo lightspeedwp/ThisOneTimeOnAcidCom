@@ -52,7 +52,7 @@ ThisOneTimeOnAcidCom/
 - **Source**: everything in the repository (`src/`, `guidelines/`, `scripts/`, config files)
 - **Generated**: the `dist/` directory is the Vite production build output, deployed to Netlify — it is git-ignored and not part of source configuration
 
-The `netlify.toml` at `src/app/netlify.toml` defines the deployment configuration (build command, publish directory, headers, redirects).
+Netlify build settings (empty base directory, build command, `dist` publish directory) are configured in the Netlify dashboard. Because the base directory is the repository root, `src/app/netlify.toml` is **not** read during deploys. SPA routing is defined in a single place: the plain-text `public/_redirects` file, which Vite copies to `dist/_redirects`. Keep it a file, not a directory, and do not add a competing `[[redirects]]` rule elsewhere.
 
 ## Validation
 
