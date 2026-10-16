@@ -154,13 +154,14 @@ Use the appropriate branch prefix for your change:
 | Feature | `feat/` | `feat/add-gallery-filter` |
 | Bug fix | `fix/` | `fix/mobile-menu-overflow` |
 | Refactor | `refactor/` | `refactor/extract-card-component` |
+| Dependencies | `deps/` | `deps/git-hooks-add-lefthook` |
 
 ### 2. Making Changes
 
-1. Create a branch from `main` with the appropriate prefix
+1. Create a branch from `develop` (the default branch) with the appropriate prefix
 2. Read the relevant guidelines **before** coding
 3. Make your changes following the coding conventions above
-4. Run `pnpm build` to verify the build passes
+4. Run `npm run build` to verify the build passes
 
 ### 3. Pull Requests
 

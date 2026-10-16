@@ -1,0 +1,25 @@
+# Lefthook configuration for ThisOneTimeOnAcid
+# Runs local Git hooks to catch issues before they reach remote
+
+min_version: 1.5.3
+
+# Pre-commit: validate journal markdown structure on staged files
+pre-commit:
+  parallel: false
+  commands:
+    journal-validate:
+      glob: "content/journal/*.md"
+      run: pnpm run journal:validate
+      skip:
+        - merge
+        - rebase
+
+# Pre-push: build verification before pushing to remote
+pre-push:
+  parallel: false
+  commands:
+    build:
+      run: pnpm run build
+      skip:
+        - merge
+        - rebase
