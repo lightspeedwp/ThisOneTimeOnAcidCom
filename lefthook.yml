@@ -9,8 +9,7 @@ pre-commit:
   commands:
     journal-validate:
       glob: "content/journal/*.md"
-      run: npm run journal:validate
-      stage_fixed: true
+      run: pnpm run journal:validate
       skip:
         - merge
         - rebase
@@ -20,7 +19,7 @@ pre-push:
   parallel: false
   commands:
     build:
-      run: npm run build
+      run: pnpm run build
       skip:
         - merge
         - rebase

@@ -52,22 +52,21 @@ pnpm run journal:validate
 **What it checks:**
 - Markdown frontmatter validity (YAML structure)
 - Required fields (title, date, author)
-- Link integrity within the journal
 
-**Skip conditions:**
-- Only runs on staged `.md` files in `src/content/`
+**How it works:**
+- Scans all `.md` files in `content/journal/` regardless of which files are staged
 - Automatically skipped during `git merge` or `git rebase`
 
 **Example:**
 
 ```bash
 # Valid commit — passes
-git add src/content/post.md
+git add content/journal/post.md
 git commit -m "Add new post"
 # ✓ Pre-commit hook runs and passes
 
 # Invalid commit — fails
-git add src/content/broken.md  # Has malformed YAML
+git add content/journal/broken.md  # Has malformed YAML
 git commit -m "Add broken post"
 # ✗ Hook blocks commit, shows validation errors
 ```
