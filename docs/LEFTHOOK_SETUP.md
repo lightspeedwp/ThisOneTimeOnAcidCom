@@ -15,20 +15,20 @@ All hooks can be bypassed by git when needed (see **Bypassing Hooks** below).
 
 ### Automatic (Recommended)
 
-Lefthook installs automatically via npm's lifecycle script:
+Lefthook installs automatically via pnpm's lifecycle script:
 
 ```bash
-npm install
+pnpm install
 ```
 
-This runs `npm run postinstall`, which executes `lefthook install` and configures git hooks.
+This runs `pnpm run postinstall`, which executes `lefthook install` and configures git hooks.
 
 ### Manual Installation
 
 If the automatic installation doesn't create git hooks:
 
 ```bash
-npx lefthook install
+pnpm dlx lefthook install
 ```
 
 Verify hooks are installed:
@@ -43,10 +43,10 @@ You should see `pre-commit` and `pre-push` hook files.
 
 ### Pre-Commit: Journal Markdown Validation
 
-Runs when committing changes to `src/content/**/*.md`:
+Runs when committing changes to `content/journal/**/*.md`:
 
 ```bash
-npm run journal:validate
+pnpm run journal:validate
 ```
 
 **What it checks:**
@@ -74,10 +74,10 @@ git commit -m "Add broken post"
 
 ### Pre-Push: Production Build Verification
 
-Runs `npm run build` before pushing to remote:
+Runs `pnpm run build` before pushing to remote:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 **What it checks:**
@@ -167,37 +167,37 @@ git commit --no-verify -m "msg" && git push --no-verify
 
 4. **Manually run a hook to test:**
    ```bash
-   npx lefthook run pre-commit
+   pnpm dlx lefthook run pre-commit
    ```
 
 ### "Command Not Found" Error
 
-**Problem:** Pre-commit or pre-push fails with `npm: command not found` or `tsx: command not found`.
+**Problem:** Pre-commit or pre-push fails with `pnpm: command not found` or `tsx: command not found`.
 
 **Solution:** Ensure dependencies are installed:
 
 ```bash
-npm install
-npx lefthook install
+pnpm install
+pnpm dlx lefthook install
 ```
 
 If still failing, try running the validation manually:
 
 ```bash
-npm run journal:validate
-npm run build
+pnpm run journal:validate
+pnpm run build
 ```
 
 If manual run works but hook fails, reinstall lefthook:
 
 ```bash
 rm -rf .git/hooks/pre-commit .git/hooks/pre-push
-npx lefthook install
+pnpm dlx lefthook install
 ```
 
 ### Hook Runs but Validation Passes Locally, Fails in Hook
 
-**Problem:** `npm run journal:validate` passes in terminal but fails in pre-commit hook.
+**Problem:** `pnpm run journal:validate` passes in terminal but fails in pre-commit hook.
 
 **Likely cause:** Different working directory or environment.
 
@@ -210,14 +210,14 @@ npx lefthook install
 
 2. Run validation on staged files explicitly:
    ```bash
-   npm run journal:validate -- src/content/specific-file.md
+   pnpm run journal:validate -- content/journal/specific-file.md
    ```
 
-3. Clear npm cache:
+3. Clear pnpm cache:
    ```bash
-   npm cache clean --force
-   npm install
-   npx lefthook install
+   pnpm store prune
+   pnpm install
+   pnpm dlx lefthook install
    ```
 
 ### Build Hook Slow or Timing Out
@@ -228,7 +228,7 @@ npx lefthook install
 
 1. Run build locally to benchmark:
    ```bash
-   time npm run build
+   time pnpm run build
    ```
 
 2. If consistently slow, consider using `--no-verify` for feature branches and relying on CI for final validation
@@ -242,13 +242,13 @@ If Lefthook causes persistent issues and needs to be removed:
 ### 1. Uninstall Git Hooks
 
 ```bash
-npx lefthook uninstall
+pnpm dlx lefthook uninstall
 ```
 
 ### 2. Remove from Dependencies
 
 ```bash
-npm uninstall lefthook
+pnpm remove lefthook
 ```
 
 ### 3. Remove Configuration Files
@@ -262,7 +262,7 @@ rm -f lefthook.yml .lefthook-local.yml
 Remove the `postinstall` script from `package.json`:
 
 ```bash
-npm run postinstall  # command will no longer exist
+pnpm run postinstall  # command will no longer exist
 ```
 
 Edit `package.json` manually to remove the `postinstall` line if needed.
@@ -270,7 +270,7 @@ Edit `package.json` manually to remove the `postinstall` line if needed.
 ### 5. Verify Removal
 
 ```bash
-npx lefthook version  # should fail (command not found)
+pnpm dlx lefthook version  # should fail (command not found)
 ls -la .git/hooks/ | grep -c lefthook  # should return 0
 ```
 
@@ -363,8 +363,8 @@ Skip hook-based validation and run checks when you choose:
 git commit --no-verify -m "Work in progress"
 
 # Run validation on demand
-npm run journal:validate
-npm run build
+pnpm run journal:validate
+pnpm run build
 
 # When all pass, push
 git push
@@ -382,5 +382,5 @@ git push
 
 - **Lefthook docs:** https://lefthook.dev/
 - **Project guidelines:** [guidelines/Guidelines.md](../guidelines/Guidelines.md)
-- **Build script:** See `npm run build` in `package.json`
-- **Validation script:** See `npm run journal:validate` in `package.json`
+- **Build script:** See `pnpm run build` in `package.json`
+- **Validation script:** See `pnpm run journal:validate` in `package.json`
