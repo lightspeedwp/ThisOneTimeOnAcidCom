@@ -10,9 +10,9 @@
  * entries (no body text) suitable for pagination/listing pages.
  *
  * Usage:
- *   pnpm journal:parse                   parse + export JSON (default)
- *   pnpm journal:validate                validate only — no file output (CI)
- *   pnpm journal:parse --verbose         verbose per-file output
+ *   npm run journal:parse                   parse + export JSON (default)
+ *   npm run journal:validate                validate only — no file output (CI)
+ *   npm run journal:parse -- --verbose      verbose per-file output
  *
  * Exit codes:
  *   0 — success (or validate-only with no errors)
