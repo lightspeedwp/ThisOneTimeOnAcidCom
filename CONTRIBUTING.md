@@ -247,7 +247,7 @@ The full list, with evidence, is in [AGENTS.md § Unresolved decisions](AGENTS.m
 
 1. **Package manager:** confirm npm and decide what to do with the pnpm remnants.
 2. **Node.js version:** none is pinned. Confirm the intended runtime.
-3. **Netlify config:** `src/app/netlify.toml` is inactive. Decide whether to move it, delete it or change the base directory. Also confirm whether the SPA fallback in `public/_redirects/` (a directory, not a file) works.
+3. **Netlify config:** `src/app/netlify.toml` is inactive. Decide whether to move it, delete it or change the base directory.
 4. **BEM vs Tailwind:** the guidelines forbid Tailwind, but it is installed and loaded.
 5. **`import.meta.env`:** it is forbidden in the bundler table but recommended in Guidelines.md § 12, and still used in one component.
 6. **Quality gates:** there are no test, lint or typecheck scripts, and the guidelines reference scripts that do not exist.
