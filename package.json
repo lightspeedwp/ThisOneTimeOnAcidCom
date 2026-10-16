@@ -12,10 +12,12 @@
     "test": "npm run test:unit && npm run test:build && npm run test:e2e",
     "test:unit": "jest",
     "test:unit:watch": "jest --watch",
+    "test:unit:coverage": "jest --coverage",
     "test:build": "npm run build && bats tests/build.bats",
     "test:e2e": "playwright test",
     "test:e2e:debug": "playwright test --debug",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "validate:branch-name": "node scripts/validate-branch-name.js"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

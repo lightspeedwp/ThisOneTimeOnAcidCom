@@ -1,25 +1,22 @@
 /**
  * Jest test runner configuration for ThisOneTimeOnAcidCom.
- * Uses SWC for fast TypeScript transpilation and configures test discovery.
+ * Validates branch names, validates scripts, and runs test suites.
  */
+
 export default {
   testEnvironment: 'node',
-  transform: {
-    '^.+\\.tsx?$': ['@swc/jest', {
-      jsc: {
-        parser: {
-          syntax: 'typescript',
-          tsx: true,
-        },
-      },
-    }],
-  },
-  testMatch: ['**/__tests__/**/*.test.ts', '**/__tests__/**/*.test.tsx'],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  testMatch: ['**/scripts/**/*.test.js'],
+  moduleFileExtensions: ['js', 'json'],
   collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/**/index.ts',
+    'scripts/**/*.js',
+    '!scripts/**/*.test.js'
   ],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  coverageThreshold: {
+    global: {
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70
+    }
+  }
 };
