@@ -4,9 +4,9 @@ This is a code bundle for This One Time on Acid. The original project is availab
 
 ## Running the code
 
-Run `npm i` to install the dependencies.
+Run `pnpm install` to install the dependencies.
 
-Run `npm run dev` to start the development server.
+Run `pnpm dev` to start the development server.
 
 **A Retro 80s CLI Memoir with Neon Terminal Aesthetics**
 
@@ -62,7 +62,7 @@ Visit **`/dev/animations`** for an interactive showcase with:
 
 ### 1. Install Dependencies
 ```bash
-npm install
+pnpm install
 ```
 
 ### 2. Configure Environment
@@ -74,12 +74,12 @@ cp .env.example .env
 ### 3. Verify Build
 Run the verification script to check environment variables, links, and assets.
 ```bash
-npx ts-node scripts/verify-build.ts
+pnpm dlx ts-node scripts/verify-build.ts
 ```
 
 ### 4. Run Development Server
 ```bash
-npm run dev
+pnpm dev
 ```
 Access the app at `http://localhost:5173`.
 
