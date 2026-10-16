@@ -24,7 +24,7 @@ All authoritative design and development guidance lives in [`guidelines/`](guide
 
 ### Data system
 
-- **[src/app/data/README.md](src/app/data/README.md)** — centralised mock data. All content must come from `src/app/data/mock/` (written as `/data/mock` in the guidelines), never hardcoded.
+- **[src/app/data/README.md](src/app/data/README.md)** — centralised mock data. All UI content must come from `src/app/data/mock/` (written as `/data/mock` in the guidelines), never hardcoded. Editorial content (journal entries, articles, manuscript chapters) resides in `content/`.
 
 ### Spec Kit (spec-driven development)
 
@@ -195,7 +195,7 @@ These settings were read from the Netlify site configuration on 3 October 2026:
 | Build command | `npm run build` |
 | Publish directory | `dist` |
 
-Netlify reads `netlify.toml` only from the base directory, which is the repository root, and there is **no root `netlify.toml`**. So **`src/app/netlify.toml` is not the active deployment configuration**. Its `pnpm run build` command, `NODE_VERSION = "18"`, security headers, cache headers and SPA redirect are not applied by Netlify. The active build command and publish directory come from the site's UI settings.
+Netlify reads `netlify.toml` according to this order: package directory (if set in the UI) → base directory → repository root. The base directory is the repository root, and there is **no root `netlify.toml`**. Confirm whether the package-directory UI setting is configured. If the package directory is set to `src/app/`, then **`src/app/netlify.toml` may be active**. If not, then `src/app/netlify.toml` is not read. The active build command and publish directory come from the Netlify site's UI settings. Do not assume configuration inactivity without verifying the package-directory setting in Netlify's dashboard.
 
 The SPA fallback rule is in `public/_redirects/main.tsx`. Because `_redirects` is a directory rather than a plain file, Netlify may not pick that rule up. This is recorded for the owner and has not been changed.
 
@@ -220,7 +220,7 @@ These items come from repository evidence. They are recorded here, not resolved:
 6. **`import.meta.env`.** The bundler table in Guidelines.md says it is "Completely removed", but Guidelines.md § 12 (Console Logging Policy) recommends `if (import.meta.env.DEV)`, and `src/app/components/common/ThemeToggleES5.tsx` still uses it. Until this is resolved, follow the bundler table and do not use `import.meta.env`.
 7. **Missing quality scripts.** Guidelines.md § 9 cites `npm run type-check` and `npm run verify`, which do not exist. `tests/` has no runner script, and `tests/accordion.test.tsx` needs `jsdom`, which is not installed.
 8. **Journal script paths.** The journal scripts expect `journal-content/`, but content lives in `content/journal/`. Both scripts currently fail.
-9. **Root guidance placement.** Guidelines.md allows only `README.md`, `CHANGELOG.md` and `Attributions.md` in the root, yet the file at the root is `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` also exists. `AGENTS.md` and `CONTRIBUTING.md` sit at the root for agent and GitHub discoverability. Confirm this exception, or move the files and update the links.
+9. **Duplicate attribution files.** A root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. The root-file exception in Guidelines.md permits `AGENTS.md` and `CONTRIBUTING.md` for agent and GitHub discoverability; this exception is already acknowledged. Clarify whether only one attribution file should exist and which name is canonical.
 10. **Changelog location.** [guidelines/changelog.md](guidelines/changelog.md) puts the changelog at the root `CHANGELOG.md`, and that is the only changelog in the repository. There is no `src/app/CHANGELOG.md`. Confirm whether documentation-only changes need an entry (issue #2 carries the `meta:no-changelog` label).
 11. **Broken links in the guidelines.** `guidelines/README.md` and `guidelines/Guidelines.md` link to `../data/README.md`, which does not exist. The actual file is `src/app/data/README.md`. The guidelines were not changed here.
 12. **PostCSS configuration.** Vite discovers PostCSS configuration from the project root, so the root `postcss.config.mjs` (an empty config) is the likely active file. `src/app/postcss.config.js` references `autoprefixer`, which is not a dependency. Confirm, and decide whether to remove one of them.

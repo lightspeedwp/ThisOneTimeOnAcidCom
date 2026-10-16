@@ -190,7 +190,7 @@ Never replace existing images. Use `ImageWithFallback` (`src/app/components/figm
 | General documentation | `docs/` |
 | Build and utility scripts | `scripts/` |
 
-[Guidelines.md](guidelines/Guidelines.md) allows only `README.md`, `CHANGELOG.md` and `Attributions.md` as `.md` files in the root. `AGENTS.md` and `CONTRIBUTING.md` are at the root for agent and GitHub discoverability, but the owner has not yet confirmed this exception.
+[Guidelines.md](guidelines/Guidelines.md) permits an acknowledged exception: `AGENTS.md` and `CONTRIBUTING.md` are at the root for agent and GitHub discoverability, supplementing the canonical root files `README.md`, `CHANGELOG.md` and `ATTRIBUTIONS.md`.
 
 ## Contribution workflow
 
@@ -257,6 +257,6 @@ The full list, with evidence, is in [AGENTS.md § Unresolved decisions](AGENTS.m
 5. **`import.meta.env`:** it is forbidden in the bundler table but recommended in Guidelines.md § 12, and still used in one component.
 6. **Quality gates:** there are no test, lint or typecheck scripts, and the guidelines reference scripts that do not exist.
 7. **Journal scripts:** they expect `journal-content/`, but content is in `content/journal/`.
-8. **Root guidance placement:** confirm the root exception for `AGENTS.md` and `CONTRIBUTING.md`, and the `ATTRIBUTIONS.md` vs `Attributions.md` naming.
+8. **Duplicate attribution files:** a root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. Clarify which is canonical and whether both are needed.
 9. **PostCSS:** two config files exist. The root `postcss.config.mjs` is the likely active one.
 10. **Branch and PR conventions:** no template or prefix list is committed.
