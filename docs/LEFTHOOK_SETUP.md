@@ -316,6 +316,62 @@ View what hooks ran on your last commit/push:
 grep -E "pre-commit|pre-push" .lefthook/lefthook.log | tail -20
 ```
 
+## Rapid Iteration (Development Mode)
+
+When doing rapid development and frequent commits, you may want to skip hook validation:
+
+### Option 1: Skip Hooks Per Commit (Recommended)
+
+Use `--no-verify` for individual commits:
+
+```bash
+# Make changes and commit without validation
+git add .
+git commit --no-verify -m "WIP: feature work"
+
+# When ready, commit normally to re-enable validation
+git add .
+git commit -m "Feature complete"
+# ✓ Hooks run and validate
+```
+
+### Option 2: Disable Hooks Temporarily (Local Only)
+
+Create `.lefthook-local.yml` in the repo root (never commit this):
+
+```yaml
+# .lefthook-local.yml (local machine only, .gitignore'd)
+pre-commit:
+  skip: true
+
+pre-push:
+  skip: true
+```
+
+Re-enable by deleting the file:
+
+```bash
+rm .lefthook-local.yml
+```
+
+### Option 3: Run Validation Manually
+
+Skip hook-based validation and run checks when you choose:
+
+```bash
+# Commit without validation
+git commit --no-verify -m "Work in progress"
+
+# Run validation on demand
+npm run journal:validate
+npm run build
+
+# When all pass, push
+git push
+```
+
+**Note:** Skipping hooks is safe only when you run equivalent validation before pushing to `develop` or `main`.
+
 ## Performance Notes
 
 - **Pre-commit:** Runs only on changed `.md` files—typically < 500ms
