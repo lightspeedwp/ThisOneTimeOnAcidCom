@@ -13,6 +13,40 @@ const PORT = process.env.PORT || 3000;
 const DIST_DIR = path.join(__dirname, '../dist');
 
 /**
+ * Handle file read completion and send response with correct content type.
+ * @param {string} filePath - Path to the file being served
+ * @param {error} err - File read error if any
+ * @param {buffer} data - File contents
+ * @param {object} res - HTTP response object
+ */
+const handleFileRead = (filePath, err, data, res) => {
+  if (err) {
+    res.writeHead(500);
+    res.end('Server error');
+    return;
+  }
+
+  // Set appropriate content type
+  const ext = path.extname(filePath);
+  const contentTypes = {
+    '.html': 'text/html',
+    '.js': 'application/javascript',
+    '.css': 'text/css',
+    '.json': 'application/json',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.gif': 'image/gif',
+    '.svg': 'image/svg+xml',
+    '.woff': 'font/woff',
+    '.woff2': 'font/woff2',
+  };
+
+  const contentType = contentTypes[ext] || 'application/octet-stream';
+  res.writeHead(200, { 'Content-Type': contentType });
+  res.end(data);
+};
+
+/**
  * Handle HTTP requests: serve files from dist/ with SPA fallback.
  * @param {object} req - HTTP request object
  * @param {object} res - HTTP response object
@@ -39,37 +73,7 @@ const requestHandler = (req, res) => {
   }
 
   // Read and serve the file
-  /**
-   * Handle file read completion and send response with correct content type.
-   * @param {error} err - File read error if any
-   * @param {buffer} data - File contents
-   */
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
-      res.writeHead(500);
-      res.end('Server error');
-      return;
-    }
-
-    // Set appropriate content type
-    const ext = path.extname(filePath);
-    const contentTypes = {
-      '.html': 'text/html',
-      '.js': 'application/javascript',
-      '.css': 'text/css',
-      '.json': 'application/json',
-      '.png': 'image/png',
-      '.jpg': 'image/jpeg',
-      '.gif': 'image/gif',
-      '.svg': 'image/svg+xml',
-      '.woff': 'font/woff',
-      '.woff2': 'font/woff2',
-    };
-
-    const contentType = contentTypes[ext] || 'application/octet-stream';
-    res.writeHead(200, { 'Content-Type': contentType });
-    res.end(data);
-  });
+  fs.readFile(filePath, (err, data) => handleFileRead(filePath, err, data, res));
 };
 
 const server = http.createServer(requestHandler);
