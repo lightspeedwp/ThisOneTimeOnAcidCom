@@ -1,3 +1,7 @@
+/**
+ * Jest test runner configuration for ThisOneTimeOnAcidCom.
+ * Uses SWC for fast TypeScript transpilation and configures test discovery.
+ */
 export default {
   testEnvironment: 'node',
   transform: {

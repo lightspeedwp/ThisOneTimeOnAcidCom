@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+/**
+ * Test HTTP server for Playwright E2E tests.
+ * Serves the production build from dist/ with SPA fallback behavior.
+ * Simulates Netlify's _redirects rules locally for routing validation.
+ */
 
 const http = require('http');
 const fs = require('fs');

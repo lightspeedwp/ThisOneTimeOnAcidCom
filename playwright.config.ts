@@ -1,5 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
+/**
+ * Playwright configuration for E2E testing of ThisOneTimeOnAcidCom.
+ * Tests routing and SPA fallback behavior against the built production site.
+ * Includes multi-browser and responsive device coverage.
+ */
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
