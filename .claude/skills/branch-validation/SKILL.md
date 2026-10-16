@@ -92,16 +92,7 @@ Expected format: `type/scope-title`
 
 ### 2. Validate with Script
 
-When a validation script is available:
-
-```bash
-npm run validate:branch-name -- --branch <branch-name>
-```
-
-Expected output:
-```
-Branch 'feat/dark-mode-support' matches the repository branching strategy.
-```
+A validation script is planned but not yet available. This step will be enabled in a future release.
 
 ### 3. Manual Verification
 

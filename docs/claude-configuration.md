@@ -109,10 +109,9 @@ Agents are discovered automatically; invoke by name.
 
 Skills for common workflows:
 
-- `build/` — Production build validation
+- `validate/` — Dependency, build, and repository validation
+- `test/` — Test suite execution
 - `changelog/` — Changelog entry preparation
-- `validate-lint/` — Linting checks
-- `validate-tests/` — Test suite execution
 - `labeling/` — PR/issue labeling
 - `branch-validation/` — Branch name and policy checks
 
