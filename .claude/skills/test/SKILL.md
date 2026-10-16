@@ -15,69 +15,64 @@ Execute tests and validate test coverage for portfolio site functionality and qu
 
 ## Current Test Status
 
-**⚠️ Note:** No test runner is currently configured in `package.json`. The repository has no `test` script available.
+✅ **Test infrastructure is now available.** The following test suites are configured in `package.json`:
 
-When a test suite is established, this skill will support:
+- `npm run test` — Run all tests (unit, build, e2e)
+- `npm run test:unit` — Jest unit tests
+- `npm run test:build` — BATS build validation tests
+- `npm run test:e2e` — Playwright E2E tests
+- `npm run test:e2e:debug` — Playwright with debugging UI
+- `npm run test:e2e:ui` — Playwright with interactive UI
 
-## Planned Test Types
+This skill now supports:
 
-### Unit Tests
-- Component logic and hooks
-- Utility functions
-- Data transformations
+## Available Test Types
 
-### Integration Tests
-- Component interactions
-- Routing and navigation
-- Data flow and state management
+### Unit Tests (Jest)
+- **Location:** `src/__tests__/` and `*.test.ts` files
+- **Coverage:** Component logic, hooks, utility functions, data transformations
+- **Run:** `npm run test:unit` or `npm run test:unit:watch`
+
+### Build Validation (BATS)
+- **Location:** `tests/build.bats`
+- **Coverage:** Build process, artifact generation, asset integrity
+- **Validates:** _redirects file structure, CSS/JS assets, dist output correctness
+- **Run:** `npm run test:build` (includes full build)
 
 ### E2E Tests (Playwright)
-- User workflows
-- Navigation paths
-- Portfolio content display
-- Responsive behavior
-- Dark mode rendering
-
-### Content Tests
-- Link integrity validation
-- Image asset loading
-- Mock data correctness
-- Metadata completeness
+- **Location:** `e2e/routing.spec.ts`
+- **Coverage:** User workflows, navigation paths, portfolio content display
+- **Validates:** Route handling, SPA fallback, asset loading, responsive behavior
+- **Run:** `npm run test:e2e` (or with debug/UI options)
+- **Browsers:** Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari
+- **Routes tested:** 7 working journal routes + fallback behavior
 
 ## When to Use
 
-- **Before PR:** Run tests locally to validate changes
-- **On PR:** Automated test execution in CI
-- **Before Release:** Ensure no regressions
-- **After Dependency Update:** Validate compatibility
+- **Before PR:** Run `npm run test` locally to validate all tests pass
+- **During Development:** Use `npm run test:unit:watch` for rapid feedback
+- **Before Commit:** Run build validation `npm run test:build` to ensure dist artifacts are correct
+- **E2E Validation:** Run `npm run test:e2e` to verify routing and user workflows
+- **After Dependency Updates:** Run full test suite to validate compatibility
+- **On PR:** Automated test execution in CI validates the changes
 
-## Test Coverage Areas
+## Current Coverage
 
-- Core navigation and routing
-- Portfolio content display
-- Responsive layouts (mobile, tablet, desktop)
-- Dark mode implementation
-- Accessibility compliance
-- Performance thresholds
+✅ **Routing & SPA:** E2E tests for 7 working journal routes + fallback behavior  
+✅ **Build Output:** BATS tests verify _redirects file structure and asset generation  
+✅ **Asset Loading:** E2E tests validate CSS, JS, and image asset integrity  
+✅ **Responsive Design:** E2E tests cover mobile, tablet, and desktop viewports  
+✅ **Performance:** E2E benchmarks measure route load time and navigation speed
 
-## Test Strategy
+## Future Test Expansion
 
-Until a test suite is established:
+Planned additions to increase coverage:
 
-1. **Manual Testing** – Use browser for QA
-2. **Build Validation** – Use build skill to catch errors
-3. **Linting** – Use validation skill for code quality
-4. **Type Checking** – TypeScript compiler validates types
-
-## Future Implementation
-
-When tests are added:
-
-1. Define test scope and coverage goals
-2. Set up test runner (Vitest, Playwright, etc.)
-3. Create test structure and fixtures
-4. Add test scripts to package.json
-5. Integrate with CI/CD pipeline
+1. **Component unit tests** – Component logic and state management
+2. **Content validation** – Link integrity, image loading, mock data correctness
+3. **Accessibility tests** – WCAG compliance, keyboard navigation
+4. **Dark mode tests** – Light/dark theme rendering verification
+5. **Integration tests** – Component interactions and data flow
 
 ## Testing Resources
 

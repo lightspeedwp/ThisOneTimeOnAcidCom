@@ -190,5 +190,5 @@ The cloud environment resource allocation (CPU, memory, disk) is managed through
 ## References
 
 - [Claude Documentation: Cloud Environments](https://code.claude.com/docs/en/cloud-environments)
-- [ThisOneTimeOnAcidCom: Setup & Validation](../docs/claude-configuration.md)
-- [Project Guidelines](../guidelines/README.md)
+- [ThisOneTimeOnAcidCom: Setup & Validation](../../docs/claude-configuration.md)
+- [Project Guidelines](../../guidelines/README.md)

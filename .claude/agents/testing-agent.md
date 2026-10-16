@@ -42,9 +42,13 @@ Plan and execute testing strategy for portfolio site functionality, content inte
 
 ## Current State
 
-- No test suite configured in package.json
-- Playwright available but not yet integrated
-- Manual testing recommended until suite established
+✅ **Test Infrastructure Established**
+
+- **Unit Tests:** Jest configured with SWC transpiler (`npm run test:unit`)
+- **Build Tests:** BATS shell tests validate build process (`npm run test:build`)
+- **E2E Tests:** Playwright tests for routing and content (`npm run test:e2e`)
+- **Test Script:** Single `npm run test` runs all test suites
+- **Coverage:** Routing, SPA fallback, asset loading, responsive design
 
 ## Not In Scope
 

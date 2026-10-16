@@ -100,7 +100,7 @@ To add a new hook:
 
 - [Claude Code Documentation: Hooks](https://code.claude.com/docs/en/hooks)
 - [Settings Configuration](../settings.json)
-- [Cloud Environment Setup](.../cloud/README.md)
+- [Cloud Environment Setup](../cloud/README.md)
 - [Configuration Guide](../../docs/claude-configuration.md)
 
 ---

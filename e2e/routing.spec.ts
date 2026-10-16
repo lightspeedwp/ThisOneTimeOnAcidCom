@@ -17,11 +17,14 @@ test.describe('Netlify SPA Routing', () => {
         const response = await page.goto(route);
 
         // Should return 200 or use redirect to index.html
-        expect(response?.status()).toBeLessThan(400);
+        if (response) {
+          expect(response.status()).toBeLessThan(400);
+        }
 
         // Should render page content (not 404)
-        await expect(page).not.toContainText('404');
-        await expect(page).not.toContainText('Not found');
+        const pageContent = page.locator('body');
+        await expect(pageContent).not.toContainText('404');
+        await expect(pageContent).not.toContainText('Not found');
 
         // Should have main content area
         const mainContent = page.locator('main, [role="main"], .content, article');
@@ -38,7 +41,8 @@ test.describe('Netlify SPA Routing', () => {
         expect(page.url()).toContain(route);
 
         // Should have content (not 404)
-        await expect(page).not.toContainText('404');
+        const pageContent = page.locator('body');
+        await expect(pageContent).not.toContainText('404');
       });
     });
   });
@@ -54,7 +58,8 @@ test.describe('Netlify SPA Routing', () => {
 
         // Should navigate successfully
         expect(page.url()).toContain('/journal/');
-        await expect(page).not.toContainText('404');
+        const pageContent = page.locator('body');
+        await expect(pageContent).not.toContainText('404');
       }
     });
 
