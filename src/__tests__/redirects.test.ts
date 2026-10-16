@@ -1,3 +1,7 @@
+/**
+ * Unit tests for Netlify _redirects configuration.
+ * Validates file structure, content format, and SPA redirect rules.
+ */
 import { readFileSync, statSync } from 'fs';
 import { resolve } from 'path';
 

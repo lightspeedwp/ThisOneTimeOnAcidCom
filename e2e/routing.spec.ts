@@ -1,5 +1,12 @@
+/**
+ * E2E routing tests for ThisOneTimeOnAcidCom portfolio site.
+ * Validates Netlify SPA routing, fallback behavior, and cross-browser compatibility.
+ */
 import { test, expect } from '@playwright/test';
 
+/**
+ * Valid journal routes that should load successfully with SPA fallback.
+ */
 const WORKING_ROUTES = [
   '/journal',
   '/journal/dancefloor-belonging',

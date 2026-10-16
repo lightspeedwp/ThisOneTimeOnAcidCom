@@ -1,4 +1,6 @@
 #!/usr/bin/env bats
+# Build test suite for ThisOneTimeOnAcidCom.
+# Validates production build process, SPA routing configuration, and asset generation.
 
 setup_file() {
   export PROJECT_ROOT="$(cd "$(dirname "${BATS_TEST_FILENAME}")/.." && pwd)"
