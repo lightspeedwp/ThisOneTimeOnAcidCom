@@ -43,7 +43,7 @@ You should see `pre-commit` and `pre-push` hook files.
 
 ### Pre-Commit: Journal Markdown Validation
 
-Runs when committing changes to `content/journal/**/*.md`:
+Runs when committing staged files matching `content/journal/*.md`:
 
 ```bash
 pnpm run journal:validate
