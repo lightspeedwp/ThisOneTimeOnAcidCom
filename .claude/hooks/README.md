@@ -31,10 +31,14 @@ This directory contains hook definitions; executable scripts live in `scripts/cl
   "hooks": {
     "SessionStart": [
       {
-        "type": "command",
-        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/claude/validate.sh",
-        "timeout": 60,
-        "match_output": true
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/claude/validate.sh",
+            "timeout": 60,
+            "match_output": true
+          }
+        ]
       }
     ]
   }
@@ -62,10 +66,14 @@ If you want guards against:
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Bash",
-        "patterns": ["git push --force", "rm -rf", "git reset --hard"],
-        "type": "prompt",
-        "message": "This operation is destructive. Confirm before proceeding."
+        "hooks": [
+          {
+            "matcher": "Bash",
+            "patterns": ["git push --force", "rm -rf", "git reset --hard"],
+            "type": "prompt",
+            "message": "This operation is destructive. Confirm before proceeding."
+          }
+        ]
       }
     ]
   }
