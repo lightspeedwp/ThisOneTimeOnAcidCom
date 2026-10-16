@@ -12,7 +12,7 @@ pre-commit:
   parallel: false
   commands:
     journal-validate:
-      glob: "content/journal/**/*.md"
+      glob: "content/journal/*.md"
       run: npm run journal:validate
       stage_fixed: true
       skip:
