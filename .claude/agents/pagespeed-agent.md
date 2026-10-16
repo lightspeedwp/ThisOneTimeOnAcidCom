@@ -15,7 +15,7 @@ Monitor and analyze Core Web Vitals and performance metrics to ensure optimal po
 
 ## Scope for This Repository
 
-- Monitor Core Web Vitals (LCP, FID, CLS)
+- Monitor Core Web Vitals (LCP, INP, CLS)
 - Analyze Lighthouse performance scores
 - Guide performance optimization
 - Support performance debugging
@@ -34,7 +34,7 @@ Monitor and analyze Core Web Vitals and performance metrics to ensure optimal po
 ## Core Web Vitals
 
 - **LCP (Largest Contentful Paint)** – Target < 2.5s
-- **FID (First Input Delay)** – Target < 100ms
+- **INP (Interaction to Next Paint)** – Target < 200ms *(replaced FID in 2024)*
 - **CLS (Cumulative Layout Shift)** – Target < 0.1
 
 ## Performance Categories
