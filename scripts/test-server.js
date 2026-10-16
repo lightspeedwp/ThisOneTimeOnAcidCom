@@ -12,7 +12,12 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const DIST_DIR = path.join(__dirname, '../dist');
 
-const server = http.createServer((req, res) => {
+/**
+ * Handle HTTP requests: serve files from dist/ with SPA fallback.
+ * @param {object} req - HTTP request object
+ * @param {object} res - HTTP response object
+ */
+const requestHandler = (req, res) => {
   let filePath = path.join(DIST_DIR, req.url);
 
   // Normalize path and prevent directory traversal
@@ -34,6 +39,11 @@ const server = http.createServer((req, res) => {
   }
 
   // Read and serve the file
+  /**
+   * Handle file read completion and send response with correct content type.
+   * @param {error} err - File read error if any
+   * @param {buffer} data - File contents
+   */
   fs.readFile(filePath, (err, data) => {
     if (err) {
       res.writeHead(500);
@@ -60,8 +70,13 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': contentType });
     res.end(data);
   });
-});
+};
 
+const server = http.createServer(requestHandler);
+
+/**
+ * Start the test server and log connection details.
+ */
 server.listen(PORT, () => {
   console.log(`Test server running at http://localhost:${PORT}`);
   console.log(`Serving from: ${DIST_DIR}`);
