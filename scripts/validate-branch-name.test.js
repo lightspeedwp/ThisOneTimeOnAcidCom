@@ -3,11 +3,11 @@
  * Tests all 38 authorised types, forbidden prefixes, exemptions, and edge cases.
  */
 
-const {
+import {
   validateBranch,
   ValidationResult,
   AUTHORISED_TYPES
-} = require('./validate-branch-name');
+} from './validate-branch-name.js';
 
 describe('Branch Name Validation', () => {
   describe('Valid Branches - Standard Pattern', () => {
