@@ -76,9 +76,13 @@ The Netlify site settings, checked on 3 October 2026, are:
 - Build command: `npm run build`
 - Publish directory: `dist`
 
-Netlify only reads a `netlify.toml` in the base directory, and there is none at the root. As a result, `src/app/netlify.toml` is **not** applied: its Node 18 setting, headers and redirects have no effect. SPA routing is defined in the plain-text `public/_redirects` file, which Vite copies to `dist/_redirects` — keep it as a plain file, not a directory. Do not change deployment settings in a contribution unless the owner has asked for it.
+Netlify reads `netlify.toml` in this order: package directory (if set in the UI) → base directory → repository root. There is **no root `netlify.toml`**. Confirm whether the package-directory UI setting is configured:
+- If the package directory is set to `src/app/`, then `src/app/netlify.toml` **may be active**
+- If not configured (or set to root), then `src/app/netlify.toml` is not read
 
-**Note:** SPA routing configuration is tracked in [PR #15](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/15) (`public/_redirects` and `dist/_redirects` redirect-rule processing). That PR documents the Netlify deployment configuration and routing fix. Do not change deployment settings in a contribution unless the owner has asked for it.
+SPA routing is defined in the plain-text `public/_redirects` file, which Vite copies to `dist/_redirects` — keep it as a plain file, not a directory.
+
+**Note:** SPA routing configuration is tracked in [PR #15](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/15) (`public/_redirects` replacement and `dist/_redirects` redirect-rule processing). That PR documents the Netlify deployment configuration, routing fix and outstanding validation requirements. Do not change deployment settings in a contribution unless the owner has asked for it.
 
 ## Available scripts
 
@@ -198,7 +202,6 @@ Never replace existing images. Use `ImageWithFallback` (`src/app/components/figm
 
 The repository does not document a branch-prefix list. Issue #2 asks for the `docs/` prefix for documentation work, for example `docs/repository-agent-contributor-guidance`. Until the owner confirms the full convention, choose a prefix that describes the change and matches the linked issue. Branches starting with `dependabot/`, `deps/` or `renovate/` are reserved for dependency automation.
 
-<<<<<<< HEAD
 | Change Type | Branch Prefix | Example |
 |---|---|---|
 | Documentation | `docs/` | `docs/update-contributing` |
@@ -206,23 +209,15 @@ The repository does not document a branch-prefix list. Issue #2 asks for the `do
 | Bug fix | `fix/` | `fix/mobile-menu-overflow` |
 | Refactor | `refactor/` | `refactor/extract-card-component` |
 | Dependencies | `deps/` | `deps/git-hooks-add-lefthook` |
-=======
+
 ### 2. Making changes
->>>>>>> 3b3a8d1 (Complete documentation updates for ThisOneTimeOnAcidCom repository (6ac09402f2a450aa88b1021f))
 
 1. Create a branch from an up-to-date `develop` (the repository's default branch).
 2. Read the relevant guidelines **before** coding.
 3. Make your changes following the conventions above.
 4. Run the applicable checks from [Validation](#validation) and note the results.
 
-<<<<<<< HEAD
-1. Create a branch from `develop` (the default branch) with the appropriate prefix
-2. Read the relevant guidelines **before** coding
-3. Make your changes following the coding conventions above
-4. Run `npm run build` to verify the build passes
-=======
 ### 3. Pull requests
->>>>>>> 3b3a8d1 (Complete documentation updates for ThisOneTimeOnAcidCom repository (6ac09402f2a450aa88b1021f))
 
 - Write a clear description explaining what changed and why.
 - List the validation commands you ran and their results, including failures.
