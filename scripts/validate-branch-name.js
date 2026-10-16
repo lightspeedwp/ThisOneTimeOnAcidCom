@@ -6,7 +6,8 @@
  * Exit codes: 0=valid, 1=invalid, 2=execution error
  */
 
-const { execSync } = require('child_process');
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
 
 const AUTHORISED_TYPES = [
   'feat', 'fix', 'hotfix', 'release', 'refactor', 'chore', 'task',
@@ -219,7 +220,7 @@ function main() {
 }
 
 // Export for testing
-module.exports = {
+export {
   validateBranch,
   checkForbiddenPrefix,
   checkExemptions,
@@ -231,6 +232,7 @@ module.exports = {
   PATTERNS
 };
 
-if (require.main === module) {
+// Run main if this is the entry point
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main();
 }
