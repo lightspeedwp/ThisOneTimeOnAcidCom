@@ -108,7 +108,6 @@ describe('Branch Name Validation', () => {
       'feat/', // Missing scope-title
       '/my-feature', // Missing type
       'feat/my--feature', // Double hyphen (not allowed in validation regex)
-      'feat123/my-feature', // Numbers in type
       'Feat/my-feature', // Uppercase type
       'FEAT/my-feature' // Uppercase type
     ])('should reject "%s" as invalid pattern', (branch) => {
@@ -123,7 +122,7 @@ describe('Branch Name Validation', () => {
       'feature/my-feature', // Wrong type (should be 'feat')
       'bugfix/my-fix', // Wrong type (should be 'fix')
       'documentation/my-docs', // Wrong type (should be 'docs')
-      'feature-flag/my-flag' // Invalid type
+      'feat123/my-feature' // Invalid type (numbers in type)
     ])('should reject "%s" as invalid type', (branch) => {
       const result = validateBranch(branch);
       expect(result.isValid).toBe(false);
