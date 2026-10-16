@@ -88,9 +88,9 @@ These scripts are **defined** in [`package.json`](package.json) and have been va
 |---|---|---|---|
 | `dev` | `vite` | Start the Vite development server | ✅ Working |
 | `build` | `vite build` | Production build to `dist/` | ✅ Working |
-| `journal:parse` | `tsx scripts/parse-journal-markdown.ts` | Parse journal markdown into JSON | ⚠️ Broken (path) |
-| `journal:validate` | `tsx scripts/parse-journal-markdown.ts --validate-only` | Validate journal markdown without writing output | ⚠️ Broken (path) |
-| `journal:check-links` | `tsx scripts/check-journal-links.ts` | Check journal link integrity | ⚠️ Broken (path) |
+| `journal:parse` | `tsx scripts/parse-journal-markdown.ts` | Parse journal markdown into JSON | ✅ Working |
+| `journal:validate` | `tsx scripts/parse-journal-markdown.ts --validate-only` | Validate journal markdown without writing output | ✅ Working |
+| `journal:check-links` | `tsx scripts/check-journal-links.ts` | Check journal link integrity | ✅ Working |
 | `test` | `npm run test:unit && npm run test:build && npm run test:e2e` | Run all test suites (unit, build, e2e) | ⚠️ Partial |
 | `test:unit` | `jest` | Jest unit tests | ⚠️ Config issue |
 | `test:unit:watch` | `jest --watch` | Jest in watch mode | ⚠️ Config issue |
@@ -116,8 +116,9 @@ Run them with npm, for example `npm run build`.
 | `node --test tests/speckit.test.mjs` | ⚠️ 103 pass, 1 fail | Previously 93 pass, 11 fail. Improvement from lock file update. Single failure: template resolution precedence test |
 | `npm run test:unit` | ❌ Failed | Jest config: ESM import syntax error in `scripts/validate-branch-name.test.js`. Needs Jest ESM or CommonJS transpile configuration |
 | `npm run test:e2e` | ⚠️ Requires setup | Playwright browser not installed in agent environment; command structure valid |
-| `npm run journal:validate` | ❌ Failed (exit 2) | Scripts expect `journal-content/` directory; content is at `content/journal/` |
-| `npm run journal:check-links` | ❌ Failed | Same path mismatch as journal:validate |
+| `npm run journal:validate` | ✅ Passed | Validates 8 files successfully; paths fixed from `journal-content/` to `content/journal/` |
+| `npm run journal:check-links` | ✅ Passed | Checks 9 files, finds 2 internal links (valid), 0 external; all checks pass |
+| `npm run journal:parse` | ✅ Passed | Parses 8 files, exports JSON to `export/journal/`; wordcount and metadata extraction working |
 | Type-checking, linting, browser and accessibility checks | ℹ️ Not applicable | No npm scripts exist for these; manual review against guidelines is current practice |
 
 **When you change code, report which of these you actually ran. Never claim validation you did not perform.**
@@ -226,9 +227,8 @@ These items come from repository evidence. They are recorded here, not resolved:
 4. **BEM vs Tailwind.** The guidelines forbid Tailwind and say the migration is complete. However, `tailwindcss` and `@tailwindcss/vite` are dependencies, `vite.config.ts` loads the Tailwind plugin (with a comment saying it is required by Figma Make), `src/styles/globals.css`, `index.css` and `tailwind.css` import `tailwindcss`, and Guidelines.md § 2 still lists "Tailwind CSS V4 – Utility-first styling". Some components still contain utility-like class names. Follow BEM for new work, and do not remove Tailwind tooling without a decision.
 5. **`import.meta.env`.** The bundler table in Guidelines.md says it is "Completely removed", but Guidelines.md § 12 (Console Logging Policy) recommends `if (import.meta.env.DEV)`, and `src/app/components/common/ThemeToggleES5.tsx` still uses it. Until this is resolved, follow the bundler table and do not use `import.meta.env`.
 6. **Missing quality scripts.** Guidelines.md § 9 cites `npm run type-check` and `npm run verify`, which do not exist. `tests/` has no runner script, and `tests/accordion.test.tsx` needs `jsdom`, which is not installed.
-7. **Journal script paths.** The journal scripts expect `journal-content/`, but content lives in `content/journal/`. Both scripts currently fail.
-8. **Duplicate attribution files.** A root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. The root-file exception in Guidelines.md permits `AGENTS.md` and `CONTRIBUTING.md` for agent and GitHub discoverability; this exception is already acknowledged. Clarify whether only one attribution file should exist and which name is canonical.
-9. **Changelog location.** [guidelines/changelog.md](guidelines/changelog.md) puts the changelog at the root `CHANGELOG.md`, and that is the only changelog in the repository. There is no `src/app/CHANGELOG.md`. Confirm whether documentation-only changes need an entry (issue #2 carries the `meta:no-changelog` label).
-10. **Broken links in the guidelines.** `guidelines/README.md` and `guidelines/Guidelines.md` link to `../data/README.md`, which does not exist. The actual file is `src/app/data/README.md`. The guidelines were not changed here.
-11. **PostCSS configuration.** Vite discovers PostCSS configuration from the project root, so the root `postcss.config.mjs` (an empty config) is the likely active file. `src/app/postcss.config.js` references `autoprefixer`, which is not a dependency. Confirm, and decide whether to remove one of them.
-12. **Branch and PR conventions.** The repository has no pull request template and no documented branch-prefix list. The `docs/` prefix comes from issue #2. Confirm the conventions, or point to organisation-level templates.
+7. **Duplicate attribution files.** A root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. The root-file exception in Guidelines.md permits `AGENTS.md` and `CONTRIBUTING.md` for agent and GitHub discoverability; this exception is already acknowledged. Clarify whether only one attribution file should exist and which name is canonical.
+8. **Changelog location.** [guidelines/changelog.md](guidelines/changelog.md) puts the changelog at the root `CHANGELOG.md`, and that is the only changelog in the repository. There is no `src/app/CHANGELOG.md`. Confirm whether documentation-only changes need an entry (issue #2 carries the `meta:no-changelog` label).
+9. **Broken links in the guidelines.** `guidelines/README.md` and `guidelines/Guidelines.md` link to `../data/README.md`, which does not exist. The actual file is `src/app/data/README.md`. The guidelines were not changed here.
+10. **PostCSS configuration.** Vite discovers PostCSS configuration from the project root, so the root `postcss.config.mjs` (an empty config) is the likely active file. `src/app/postcss.config.js` references `autoprefixer`, which is not a dependency. Confirm, and decide whether to remove one of them.
+11. **Branch and PR conventions.** The repository has no pull request template and no documented branch-prefix list. The `docs/` prefix comes from issue #2. Confirm the conventions, or point to organisation-level templates.
