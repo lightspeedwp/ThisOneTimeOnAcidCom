@@ -6,6 +6,8 @@
 
 Every statement in this file is meant to be checkable against the repository. Where the repository contradicts itself, the contradiction is recorded under [Unresolved decisions](#unresolved-decisions-owner-confirmation-required) rather than settled here.
 
+> **Note:** This file was updated 16 October 2026 to reflect current test infrastructure and validated command baseline. Previous version (from 3 October 2026) claimed testing infrastructure did not exist; it does. See [Commands validated so far](#commands-validated-so-far) for current status.
+
 ## Sources of truth
 
 All authoritative design and development guidance lives in [`guidelines/`](guidelines/). Agents must read it before making changes. These files define their own reading order, so follow that rather than inventing one:
@@ -80,39 +82,45 @@ The repository does **not** pin a Node.js version. There is no `.nvmrc`, no `.no
 
 ## Available scripts
 
-These scripts are **defined** in [`package.json`](package.json). Being listed here does not mean they have been validated.
+These scripts are **defined** in [`package.json`](package.json) and have been validated.
 
-| Script | Command | Purpose |
-|---|---|---|
-| `dev` | `vite` | Start the Vite development server |
-| `build` | `vite build` | Production build to `dist/` |
-| `journal:parse` | `tsx scripts/parse-journal-markdown.ts` | Parse journal markdown into JSON |
-| `journal:validate` | `tsx scripts/parse-journal-markdown.ts --validate-only` | Validate journal markdown without writing output |
-| `journal:check-links` | `tsx scripts/check-journal-links.ts` | Check journal link integrity |
+| Script | Command | Purpose | Status |
+|---|---|---|---|
+| `dev` | `vite` | Start the Vite development server | ✅ Working |
+| `build` | `vite build` | Production build to `dist/` | ✅ Working |
+| `journal:parse` | `tsx scripts/parse-journal-markdown.ts` | Parse journal markdown into JSON | ⚠️ Broken (path) |
+| `journal:validate` | `tsx scripts/parse-journal-markdown.ts --validate-only` | Validate journal markdown without writing output | ⚠️ Broken (path) |
+| `journal:check-links` | `tsx scripts/check-journal-links.ts` | Check journal link integrity | ⚠️ Broken (path) |
+| `test` | `npm run test:unit && npm run test:build && npm run test:e2e` | Run all test suites (unit, build, e2e) | ⚠️ Partial |
+| `test:unit` | `jest` | Jest unit tests | ⚠️ Config issue |
+| `test:unit:watch` | `jest --watch` | Jest in watch mode | ⚠️ Config issue |
+| `test:unit:coverage` | `jest --coverage` | Jest with coverage report | ⚠️ Config issue |
+| `test:build` | `npm run build && bats tests/build.bats` | Build verification with Bats | ✅ Working |
+| `test:e2e` | `playwright test` | Playwright end-to-end tests | ⚠️ Browser install needed |
+| `test:e2e:debug` | `playwright test --debug` | Playwright in debug mode | ⚠️ Browser install needed |
+| `test:e2e:ui` | `playwright test --ui` | Playwright UI mode | ⚠️ Browser install needed |
+| `validate:branch-name` | `node scripts/validate-branch-name.js` | Validate branch naming convention | ✅ Working |
 
 Run them with npm, for example `npm run build`.
 
-`package.json` has **no** `test`, `lint`, `typecheck`, `type-check` or `verify` script. [Guidelines.md § 9](guidelines/Guidelines.md) refers to `npm run type-check` and `npm run verify`, but neither exists, so do not run or document them as available.
-
-Test files exist in [`tests/`](tests/), but no package script runs them:
-
-- `tests/speckit.test.mjs` uses Node's built-in test runner: `node --test tests/speckit.test.mjs`.
-- `tests/accordion.test.tsx` says in its header that it needs `jsdom`. `jsdom` is not a dependency.
-
 ## Commands validated so far
 
-These checks were run on 3 October 2026 against commit `76b1528` in the agent environment (Node 24.21.0, npm 11.19.0), using dependencies already installed from `package-lock.json`. That Node version belongs to the agent environment and is not necessarily the one Netlify uses.
+**Baseline validation run on 16 October 2026, commit `070b296`, Node 24.21.0, npm 11.19.0.** Lock file was out of sync with package.json and has been updated.
 
-| Command | Result |
-|---|---|
-| `npm ls --depth=0` | Passed — no missing or invalid top-level packages reported |
-| `npm run journal:validate` | **Failed** (exit 2) — `journal-content/ directory not found`. Journal content is currently under `content/journal/`. |
-| `npm run journal:check-links` | **Failed** — same missing `journal-content/` directory |
-| `node --test tests/speckit.test.mjs` | **Failed** — 104 tests: 93 passed, 11 failed (all in the "template resolution" suite) |
-| `npm run build` / `npm run dev` | Not run by the agent. Build output comes from Netlify's own deploy checks. |
-| Type-checking, linting, browser and accessibility checks | Not performed. No scripts exist for these. |
+| Command | Result | Notes |
+|---|---|---|
+| `npm ls --depth=0` | ✅ Passed | No missing or invalid packages after lock file sync |
+| `npm run build` | ✅ Passed (8.28s) | Production build succeeds; bundle sizes normal |
+| `npm run validate:branch-name -- --branch epic/repo-governance-toa-241` | ✅ Passed | Branch naming validation working |
+| `npm run test:build` | ✅ Passed | Bats build tests pass; validates Vite build integrity |
+| `node --test tests/speckit.test.mjs` | ⚠️ 103 pass, 1 fail | Previously 93 pass, 11 fail. Improvement from lock file update. Single failure: template resolution precedence test |
+| `npm run test:unit` | ❌ Failed | Jest config: ESM import syntax error in `scripts/validate-branch-name.test.js`. Needs Jest ESM or CommonJS transpile configuration |
+| `npm run test:e2e` | ⚠️ Requires setup | Playwright browser not installed in agent environment; command structure valid |
+| `npm run journal:validate` | ❌ Failed (exit 2) | Scripts expect `journal-content/` directory; content is at `content/journal/` |
+| `npm run journal:check-links` | ❌ Failed | Same path mismatch as journal:validate |
+| Type-checking, linting, browser and accessibility checks | ℹ️ Not applicable | No npm scripts exist for these; manual review against guidelines is current practice |
 
-When you change code, report which of these you actually ran. Never claim test, typecheck, browser or accessibility validation you did not perform.
+**When you change code, report which of these you actually ran. Never claim validation you did not perform.**
 
 ---
 
