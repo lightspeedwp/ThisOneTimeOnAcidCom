@@ -28,10 +28,10 @@ test.describe('Netlify SPA Routing', () => {
           expect(response.status()).toBeLessThan(400);
         }
 
-        // Should render page content (not 404)
+        // Should render page content (not 404 or "Post not found")
         const pageContent = page.locator('body');
         await expect(pageContent).not.toContainText('404');
-        await expect(pageContent).not.toContainText('Not found');
+        await expect(pageContent).not.toContainText(/not found/i);
 
         // Should have main content area
         const mainContent = page.locator('main, [role="main"], .content, article');

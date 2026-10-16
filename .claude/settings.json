@@ -9,10 +9,14 @@
   "hooks": {
     "SessionStart": [
       {
-        "type": "command",
-        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/claude/validate.sh",
-        "timeout": 60,
-        "match_output": true
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/claude/validate.sh",
+            "timeout": 60,
+            "match_output": true
+          }
+        ]
       }
     ]
   },

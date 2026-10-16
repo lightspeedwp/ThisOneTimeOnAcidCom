@@ -58,7 +58,8 @@ const requestHandler = (req, res) => {
 
   // Normalize path and prevent directory traversal
   filePath = path.normalize(filePath);
-  if (!filePath.startsWith(DIST_DIR)) {
+  const relativePath = path.relative(DIST_DIR, filePath);
+  if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
     res.writeHead(403);
     res.end('Forbidden');
     return;
