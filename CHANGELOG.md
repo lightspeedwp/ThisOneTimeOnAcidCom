@@ -9,6 +9,98 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+#### CodeRabbit Inheritance Configuration (CR-18)
+
+- **`.coderabbit.yml`**: Enabled `inheritance: true` to inherit shared CodeRabbit safeguards and configuration from central `lightspeedwp/coderabbit` repository
+- **`.coderabbit.yml`**: Local overrides preserved — `language: en-GB` and `reviews.profile: chill` remain project-specific
+- **`.coderabbit.yml`**: Corrected mock data path reference from `src/mockData/` to `src/app/data/mock/` to align with actual repository structure and path mapping conventions documented in AGENTS.md
+- **`.claude/` folder guidance**: Added CodeRabbit path instructions for Claude Code configuration directories:
+  - **`.claude/agents/`** — Agent specifications with frontmatter validation, tool access checks, and capability scoping
+  - **`.claude/skills/`** — Reusable skill definitions with SKILL.md structure, metadata, examples, and integration patterns
+  - **`.specify/`** — Spec Kit specification files with proper structure, section completeness, and cross-linking
+  - **`.gemini/`** — Gemini CLI command definitions for workflow orchestration and consistency
+- **Governance & documentation coverage**: Added CodeRabbit path instructions for critical governance files:
+  - **`AGENTS.md`** — Repository-wide AI conventions, tech stack inventory, bundler compatibility, protected files list
+  - **`CLAUDE.md`** — Organisation-wide governance policy, branch naming, PR templates, specification workflow
+  - **Test infrastructure guidance** (`tests/**/*` and `**/*.test.{ts,tsx}`):
+    - Clear test naming and Arrange-Act-Assert pattern enforcement
+    - Mock data sourcing from `src/app/data/mock/` only (never hardcoded)
+    - No flaky tests or execution order dependencies
+    - Bundler compatibility for test code
+    - Accessibility testing requirements
+    - Component and unit test isolation patterns
+
+#### Inheritance Configuration & Repository Scope
+
+- **`knowledge_base.code_guidelines.filePatterns`**: Set to empty array to exclude inherited WordPress-specific guidelines (block-plugin.md, block-theme.md) from applying to React code reviews. This prevents WordPress coding standards from interfering with React/TypeScript reviews while preserving other benefits of inherited configuration.
+
+#### Application Source Code Guidance (`src/` folder architecture)
+
+- **`src/app/components/**/*.tsx`** — React component review guidance:
+  - Semantic HTML with proper heading hierarchy
+  - WCAG 2.2 AA/AAA compliance (keyboard navigation, ARIA labels, focus management)
+  - BEM CSS semantics only (no inline styles or Tailwind utility classes)
+  - TypeScript best practices (no `any` types)
+  - Component organisation by type: `common/`, `pages/`, `layout/`, `ui/`, `sections/`, `template-parts/`, `figma/`
+  - Component documentation with `@fileoverview` and feature lists
+  - Bundler compatibility (no optional chaining, nullish coalescing, nested ternaries)
+  - Safe data access via router helpers: `grab()`, `arrayGet()`, `setProp()`
+  - Error boundaries and theme support patterns
+- **`src/app/data/**/*.ts`** — Mock data and data types:
+  - Data structure consistency and typing
+  - No credential or sensitive data exposure
+  - TypeScript interfaces in `src/app/data/types/`
+  - Clear organisation by feature/domain
+  - References to content locations (`content/` folder for editorial content)
+- **`src/app/hooks/*.ts`** — Custom React hooks:
+  - Clear hook naming with `use` prefix
+  - Proper dependency arrays (no memory leaks or stale closures)
+  - TypeScript typing for parameters and return values
+  - Single responsibility per hook
+  - Data access from `src/app/data/mock/` exclusively
+- **`src/app/utils/*.ts`** — Utility services:
+  - Clear service organisation with single responsibility
+  - Proper error handling and validation
+  - TypeScript interfaces and type safety
+  - No hardcoded configuration
+  - Browser API safety (SSR-compatible)
+  - Clean logging (no stray `console.log` in production code)
+- **`src/styles/**/*.css`** — BEM CSS architecture:
+  - Semantic BEM class naming: `.block__element--modifier`
+  - No inline styles or Tailwind utility classes
+  - Global styles in `globals.css`; block styles in `blocks/`; component-specific in `components/`
+  - CSS variable usage for design tokens and theme support
+  - Light/dark mode with CSS custom properties
+  - Animation performance (avoid over-animation)
+  - Media query organisation (mobile-first approach)
+- **`src/app/lib/*.tsx`** — Library and router utilities:
+  - Bundler-safe helper function patterns
+  - React Router v7 integration patterns
+  - Type safety in generic functions
+  - Critical utilities protection (changes scrutinised)
+- **`src/app/public/**/*`** — Static assets:
+  - No hardcoded credentials or sensitive data
+  - Asset optimisation and modern formats
+  - PWA manifest metadata
+  - Redirect rule correctness
+- **`public/**/*`** — Root-level static assets:
+  - Redirect rules and SPA fallback configuration
+  - Asset optimisation and modern formats
+  - No credential or sensitive data exposure
+- **`scripts/**/*.{ts,js}`** — Root-level build and utility scripts:
+  - Clear script purpose and documentation
+  - Node.js error handling and exit codes
+  - npm compatibility (not pnpm-specific)
+  - Safe file operations
+- **`src/app/scripts/**/*.{ts,js}`** — Application build and utility scripts:
+  - Clear script purpose and documentation
+  - Proper Node.js error handling
+  - No hardcoded paths
+  - npm compatibility (not pnpm-specific)
+  - Safe file operations with proper guards
+
+### Fixed
+
 #### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
 
 - **Comprehensive animation system** inspired by retro 80s CLI interfaces with 6 core animation types
