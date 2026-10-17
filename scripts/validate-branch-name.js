@@ -196,7 +196,12 @@ export function parseArgs(args) {
   if (args.includes('--branch')) {
     const index = args.indexOf('--branch');
     if (index + 1 < args.length) {
-      return { branchName: args[index + 1], error: null };
+      const operand = args[index + 1];
+      // Reject empty string or flag-like operands (starting with -)
+      if (!operand || operand.startsWith('-')) {
+        return { branchName: null, error: 'Error: --branch requires a non-empty value that is not a flag' };
+      }
+      return { branchName: operand, error: null };
     } else {
       return { branchName: null, error: 'Error: --branch requires a value' };
     }

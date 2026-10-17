@@ -475,5 +475,23 @@ describe('Main CLI functionality', () => {
       expect(result.branchName).toBe('feat/my-special_branch.name');
       expect(result.error).toBeNull();
     });
+
+    it('should reject empty string operand for --branch', () => {
+      const result = parseArgs(['--branch', '']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBe('Error: --branch requires a non-empty value that is not a flag');
+    });
+
+    it('should reject flag-like operand for --branch', () => {
+      const result = parseArgs(['--branch', '--json']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBe('Error: --branch requires a non-empty value that is not a flag');
+    });
+
+    it('should reject operand starting with dash for --branch', () => {
+      const result = parseArgs(['--branch', '-something']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBe('Error: --branch requires a non-empty value that is not a flag');
+    });
   });
 });

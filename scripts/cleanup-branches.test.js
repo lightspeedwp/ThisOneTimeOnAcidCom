@@ -938,7 +938,7 @@ describe('buildExcludeRegex branches', () => {
     expect(regex.test('demo')).toBe(true);
   });
 
-  it('buildExcludeRegex returns null for empty pattern', () => {
+  it('buildExcludeRegex keeps default patterns for empty excludePatterns', () => {
     // Simulate case where excludePatterns is empty string
     const emptyRegex = buildExcludeRegex({ excludePatterns: '' });
     // Should still include defaults
@@ -947,12 +947,17 @@ describe('buildExcludeRegex branches', () => {
 });
 
 describe('daysSince variations', () => {
-  it('daysSince with various date formats', () => {
-    const today = new Date().toISOString().split('T')[0];
-    const result = daysSince(today);
+  it('daysSince with today\'s date as date-only string returns 0 to 1 days', () => {
+    // Use fixed time: 2026-10-17 12:00:00 UTC
+    jest.useFakeTimers();
+    jest.setSystemTime(new Date('2026-10-17T12:00:00Z'));
+
+    const result = daysSince('2026-10-17');
     // When passed today's date string, should be between 0 and 1 day
     expect(result).toBeGreaterThanOrEqual(0);
     expect(result).toBeLessThan(1);
+
+    jest.useRealTimers();
   });
 
   it('daysSince with past dates', () => {
