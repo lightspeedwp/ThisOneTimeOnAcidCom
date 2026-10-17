@@ -1,0 +1,379 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://toa-media-library.local/schemas/catalogue-schema.json",
+  "title": "TOA Media Library Catalogue Schema",
+  "description": "JSON Schema defining the structure, validation rules and constraints for asset records in the TOA media library catalogue. Implements FR-006, FR-008 (non-invention), FR-015 (metadata completeness).",
+  "type": "object",
+  "definitions": {
+    "asset": {
+      "title": "Asset",
+      "description": "A single recoverable media item (image, vector, design file, branded material). See data-model.md § Asset for full specification.",
+      "type": "object",
+      "required": [
+        "asset_id",
+        "original_or_derivative",
+        "provenance",
+        "format",
+        "dimensions",
+        "print_suitable",
+        "recovery_status",
+        "recovery_method",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "asset_id": {
+          "title": "Asset ID",
+          "description": "Unique stable identifier, independent of storage provider. Must be globally unique within catalogue.",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "examples": ["asset_figma_hero_001", "asset_brand_logo_v2", "asset_archive_scan_ch3"]
+        },
+        "original_or_derivative": {
+          "title": "Original or Derivative",
+          "description": "Distinguishes originals from rendered/scaled derivatives (FR-003).",
+          "type": "string",
+          "enum": ["original", "derivative", "variant"],
+          "examples": ["original", "derivative"]
+        },
+        "provenance": {
+          "title": "Provenance",
+          "description": "Source tracking. Must be explicit; never fabricated. Mark unknown or unverifiable as 'unknown' per FR-008.",
+          "type": "string",
+          "minLength": 1,
+          "examples": [
+            "Figma file 'TOA Brand Guide', page 'Logos', exported 2026-10-17 via Figma Make",
+            "manual upload by Ash Shaw, 2026-10-16",
+            "archive scan of original scan files"
+          ]
+        },
+        "format": {
+          "title": "Format(s)",
+          "description": "File format(s); primary and secondary (e.g. original SVG + exported PNG). From FR-004, FR-006.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "SVG", "PNG", "JPEG", "PDF", "GIF", "WebP", "EPS", "AI", "TIFF", "BMP", "HEIC", "other"
+            ]
+          },
+          "minItems": 1,
+          "examples": [["SVG", "PNG"], ["PDF"], ["JPEG"]]
+        },
+        "dimensions": {
+          "title": "Dimensions",
+          "description": "Width × height with unit. Null if unknown. For print, include DPI metadata (FR-004).",
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["width", "height", "unit"],
+              "properties": {
+                "width": { "type": "number", "minimum": 1 },
+                "height": { "type": "number", "minimum": 1 },
+                "unit": {
+                  "type": "string",
+                  "enum": ["px", "in", "mm", "cm"]
+                },
+                "dpi": {
+                  "type": "number",
+                  "description": "Resolution for print assets (300 DPI minimum per Q2 resolution)",
+                  "minimum": 72,
+                  "examples": [72, 150, 300, 600]
+                },
+                "colour_space": {
+                  "type": "string",
+                  "enum": ["RGB", "CMYK", "Grayscale", "unknown"],
+                  "description": "For print assets, specify RGB or CMYK (FR-004, Q2 resolution)"
+                }
+              },
+              "additionalProperties": false
+            },
+            { "type": "null" }
+          ],
+          "examples": [
+            { "width": 1920, "height": 1080, "unit": "px" },
+            { "width": 8, "height": 10, "unit": "in", "dpi": 300, "colour_space": "CMYK" }
+          ]
+        },
+        "print_suitable": {
+          "title": "Print Suitable",
+          "description": "Boolean or null (unknown). Assesses print resolution (300 DPI minimum) and format compatibility (FR-004, Q2 resolution).",
+          "enum": [true, false, null],
+          "examples": [true, false, null]
+        },
+        "print_notes": {
+          "title": "Print Notes",
+          "description": "Freeform description of print requirements, constraints, or quality assessment.",
+          "type": ["string", "null"],
+          "examples": [
+            "Original 300 DPI TIFF, CMYK; suitable for full-colour print",
+            "Web PNG only; low resolution; not suitable for print",
+            "unknown — source unavailable"
+          ]
+        },
+        "usages": {
+          "title": "Usages",
+          "description": "Contexts where asset is or was used (e.g. 'website hero', 'book chapter 3', 'social media')",
+          "type": ["array", "null"],
+          "items": { "type": "string" },
+          "examples": [
+            ["website hero", "book chapter 1"],
+            ["social media thumbnail", "email header"]
+          ]
+        },
+        "alt_text": {
+          "title": "Alt Text",
+          "description": "Accessibility description; max 125 chars recommended. Mark 'unknown' or 'unrecoverable' if not found; never fabricated (FR-008).",
+          "type": ["string", "null"],
+          "maxLength": 250,
+          "examples": [
+            "TOA Media Library brand logo on white background",
+            "unknown"
+          ]
+        },
+        "caption": {
+          "title": "Caption",
+          "description": "Human-readable label; max 255 chars. Mark 'unknown' if unavailable.",
+          "type": ["string", "null"],
+          "maxLength": 255,
+          "examples": [
+            "TOA Brand Logo — Primary Mark",
+            "unknown"
+          ]
+        },
+        "credits": {
+          "title": "Credits",
+          "description": "Creator, artist, photographer, or source attribution. Mark 'unknown' or 'unrecoverable' if not found; NEVER fabricated (FR-008).",
+          "type": ["string", "null"],
+          "examples": [
+            "Design by Ash Shaw, 2024",
+            "Original artwork by Jane Doe; scanned from archive",
+            "unknown"
+          ]
+        },
+        "rights_notes": {
+          "title": "Rights Notes",
+          "description": "Licensing, usage restrictions, copyright, or verification status. Mark 'unknown' if unavailable; NEVER fabricated (FR-008).",
+          "type": ["string", "null"],
+          "examples": [
+            "Copyright 2024 ThisOneTimeOnAcid. All rights reserved.",
+            "Creative Commons Attribution 4.0 International (CC-BY-4.0)",
+            "unknown — rights holder not identified"
+          ]
+        },
+        "recovery_status": {
+          "title": "Recovery Status",
+          "description": "Outcome of recovery attempt. From data-model.md § recovery_status enum (FR-005, FR-015).",
+          "type": "string",
+          "enum": ["recovered", "partial_recovery", "manual_export_required", "unrecoverable"],
+          "examples": ["recovered", "partial_recovery"]
+        },
+        "recovery_notes": {
+          "title": "Recovery Notes",
+          "description": "Reason for partial or failed recovery; impact on catalogue/validation (FR-005).",
+          "type": ["string", "null"],
+          "examples": [
+            "Figma Make extraction succeeded but dimensions lost; verified manually",
+            "Source file not found; cannot recover"
+          ]
+        },
+        "recovery_method": {
+          "title": "Recovery Method",
+          "description": "How asset was obtained (FR-001, FR-005). From data-model.md § recovery_method enum.",
+          "type": "string",
+          "enum": ["figma_extraction", "manual_export", "archive_scan", "other"],
+          "examples": ["figma_extraction", "manual_export"]
+        },
+        "created_at": {
+          "title": "Created At",
+          "description": "ISO 8601 timestamp when asset was catalogued (not asset creation date).",
+          "type": "string",
+          "format": "date-time",
+          "examples": ["2026-10-17T14:30:00Z"]
+        },
+        "updated_at": {
+          "title": "Updated At",
+          "description": "ISO 8601 timestamp of last modification (metadata verification, correction, etc.)",
+          "type": "string",
+          "format": "date-time",
+          "examples": ["2026-10-17T16:45:00Z"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "assetRelationship": {
+      "title": "Asset Relationship",
+      "description": "Relationship between assets (original ↔ derivative, asset ↔ usage). See data-model.md § AssetRelationship.",
+      "type": "object",
+      "required": [
+        "source_asset_id",
+        "target_asset_id",
+        "relationship_type",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "source_asset_id": {
+          "title": "Source Asset ID",
+          "description": "Asset that is the origin or parent (must exist in Asset records).",
+          "type": "string",
+          "minLength": 1
+        },
+        "target_asset_id": {
+          "title": "Target Asset ID",
+          "description": "Asset that derives from or uses the source (must exist in Asset records; cannot equal source).",
+          "type": "string",
+          "minLength": 1
+        },
+        "relationship_type": {
+          "title": "Relationship Type",
+          "description": "Type of relationship between assets (FR-007).",
+          "type": "string",
+          "enum": ["derived_from", "variant_of", "used_in", "replaced_by"],
+          "examples": ["derived_from", "variant_of"]
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Additional context (e.g., 'scaled 50% for web', 'colour mode changed RGB→CMYK')",
+          "type": ["string", "null"],
+          "maxLength": 512
+        },
+        "verified": {
+          "title": "Verified",
+          "description": "Whether relationship has been validated or is inferred.",
+          "type": ["boolean", "null"],
+          "examples": [true, false, null]
+        },
+        "created_at": {
+          "title": "Created At",
+          "description": "ISO 8601 timestamp when relationship was recorded.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "title": "Updated At",
+          "description": "ISO 8601 timestamp of last modification.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "catalogueVersion": {
+      "title": "Catalogue Version",
+      "description": "Version of this schema and catalogue",
+      "type": "string",
+      "examples": ["1.0-phase1"]
+    },
+    "generatedAt": {
+      "title": "Generated At",
+      "description": "ISO 8601 timestamp of catalogue generation",
+      "type": "string",
+      "format": "date-time"
+    },
+    "assets": {
+      "title": "Assets",
+      "description": "Array of asset records",
+      "type": "array",
+      "items": { "$ref": "#/definitions/asset" }
+    },
+    "relationships": {
+      "title": "Relationships",
+      "description": "Array of asset relationships (original ↔ derivative, asset ↔ usage)",
+      "type": "array",
+      "items": { "$ref": "#/definitions/assetRelationship" }
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "catalogueVersion": "1.0-phase1",
+      "generatedAt": "2026-10-17T16:45:00Z",
+      "assets": [
+        {
+          "asset_id": "asset_figma_hero_001",
+          "original_or_derivative": "original",
+          "provenance": "Figma file 'TOA Brand Guide', page 'Logos', exported 2026-10-17 via Figma Make",
+          "format": ["SVG"],
+          "dimensions": {
+            "width": 1200,
+            "height": 630,
+            "unit": "px",
+            "dpi": 96,
+            "colour_space": "RGB"
+          },
+          "print_suitable": false,
+          "print_notes": "Screen resolution only (96 DPI); not suitable for print",
+          "usages": ["website hero", "social media"],
+          "alt_text": "TOA Media Library brand logo on white background",
+          "caption": "TOA Brand Logo — Primary Mark",
+          "credits": "Design by Ash Shaw, ThisOneTimeOnAcid, 2024",
+          "rights_notes": "Copyright 2024 ThisOneTimeOnAcid. All rights reserved.",
+          "recovery_status": "recovered",
+          "recovery_notes": null,
+          "recovery_method": "figma_extraction",
+          "created_at": "2026-10-17T14:30:00Z",
+          "updated_at": "2026-10-17T14:30:00Z"
+        },
+        {
+          "asset_id": "asset_figma_hero_001_png",
+          "original_or_derivative": "derivative",
+          "provenance": "PNG export from asset_figma_hero_001 (SVG original), created 2026-10-17",
+          "format": ["PNG"],
+          "dimensions": {
+            "width": 1200,
+            "height": 630,
+            "unit": "px",
+            "dpi": 96,
+            "colour_space": "RGB"
+          },
+          "print_suitable": false,
+          "print_notes": "Web PNG export; low resolution; not suitable for print",
+          "usages": ["website delivery", "social media"],
+          "alt_text": "TOA Media Library brand logo on white background (PNG export)",
+          "caption": "TOA Brand Logo — Web Export",
+          "credits": "Design by Ash Shaw, ThisOneTimeOnAcid; PNG export automated",
+          "rights_notes": "Copyright 2024 ThisOneTimeOnAcid. All rights reserved.",
+          "recovery_status": "recovered",
+          "recovery_notes": null,
+          "recovery_method": "figma_extraction",
+          "created_at": "2026-10-17T14:35:00Z",
+          "updated_at": "2026-10-17T14:35:00Z"
+        },
+        {
+          "asset_id": "asset_archive_scan_001",
+          "original_or_derivative": "original",
+          "provenance": "Original scan of archive file, provenance unknown; scanned 2026-10-15",
+          "format": ["JPEG"],
+          "dimensions": null,
+          "print_suitable": null,
+          "print_notes": "unknown — source resolution not verified",
+          "usages": null,
+          "alt_text": "unknown",
+          "caption": "unknown",
+          "credits": "unknown",
+          "rights_notes": "unknown — rights holder not identified",
+          "recovery_status": "partial_recovery",
+          "recovery_notes": "Archive scan recovered but dimensions and provenance unverifiable; marked for manual review before use",
+          "recovery_method": "archive_scan",
+          "created_at": "2026-10-15T10:00:00Z",
+          "updated_at": "2026-10-17T12:00:00Z"
+        }
+      ],
+      "relationships": [
+        {
+          "source_asset_id": "asset_figma_hero_001",
+          "target_asset_id": "asset_figma_hero_001_png",
+          "relationship_type": "derived_from",
+          "notes": "PNG export from SVG original; scaled to 1200×630 px for web",
+          "verified": true,
+          "created_at": "2026-10-17T14:35:00Z",
+          "updated_at": "2026-10-17T14:35:00Z"
+        }
+      ]
+    }
+  ]
+}
