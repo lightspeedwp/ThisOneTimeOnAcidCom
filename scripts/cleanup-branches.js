@@ -635,4 +635,12 @@ export {
   getRemoteBranches,
   writeMarkdownReport,
   writeJsonReport,
+  logTimestamp,
+  log,
+  logError,
+  getArg,
+  parseBool,
+  ensureReportDir,
+  validateEnvironment,
+  toPct,
 };
