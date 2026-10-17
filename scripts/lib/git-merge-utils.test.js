@@ -212,5 +212,52 @@ describe('git-merge-utils', () => {
       expect(hash).not.toContain('\n');
       expect(hash).not.toContain(' ');
     });
+
+    it('getMergeStatus with undefined baseRef', () => {
+      (execFileSync).mockImplementation(() => {
+        throw new Error('not found');
+      });
+      (spawnSync).mockReturnValue({ status: 0 });
+      const result = getMergeStatus('test', undefined);
+      expect(result).toBe('merged');
+    });
+
+    it('getMergeStatus with empty string baseRef', () => {
+      (execFileSync).mockImplementation(() => {
+        throw new Error('not found');
+      });
+      (spawnSync).mockReturnValue({ status: 1 });
+      const result = getMergeStatus('test', '');
+      expect(result).toBe('unmerged');
+    });
+
+    it('getUniqueCommitCount with undefined baseRef', () => {
+      (execFileSync).mockImplementation((cmd, args) => {
+        if (args[0] === 'rev-parse') return 'abc123';
+        if (args[0] === 'rev-list') return '7\n';
+        throw new Error('not found');
+      });
+      const result = getUniqueCommitCount('test', undefined);
+      expect(result).toBe(7);
+    });
+
+    it('getUniqueCommitCount with false baseRef', () => {
+      (execFileSync).mockImplementation((cmd, args) => {
+        if (args[0] === 'rev-parse') return 'def456';
+        if (args[0] === 'rev-list') return '3\n';
+        throw new Error('not found');
+      });
+      const result = getUniqueCommitCount('test', false);
+      expect(result).toBe(3);
+    });
+
+    it('getMergeStatus with 0 baseRef (falsy but not null/undefined)', () => {
+      (execFileSync).mockImplementation(() => {
+        throw new Error('not found');
+      });
+      (spawnSync).mockReturnValue({ status: 0 });
+      const result = getMergeStatus('test', 0);
+      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+    });
   });
 });

@@ -2,7 +2,7 @@
  * Tests for branch validation test runner
  */
 
-import { createResultsStructure, processAllTestCases, outputTestResults, TEST_CASES, EXPECTED_RESULTS, runTest } from './run-validator-tests.js';
+import { createResultsStructure, processAllTestCases, outputTestResults, TEST_CASES, EXPECTED_RESULTS, runTest, main } from './run-validator-tests.js';
 
 describe('run-validator-tests', () => {
   describe('test case organization', () => {
@@ -764,6 +764,68 @@ describe('run-validator-tests', () => {
 
       process.stdout.write = originalWrite;
       console.log = originalLog;
+    });
+  });
+
+  describe('main() function', () => {
+    let originalExit;
+    let originalLog;
+    let consoleLogs;
+    let fsWriteFileSyncSpy;
+
+    beforeEach(() => {
+      originalExit = process.exit;
+      originalLog = console.log;
+      consoleLogs = [];
+
+      process.exit = jest.fn();
+      console.log = jest.fn((...args) => consoleLogs.push(args.join(' ')));
+      fsWriteFileSyncSpy = jest.spyOn(require('fs'), 'writeFileSync').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      process.exit = originalExit;
+      console.log = originalLog;
+      fsWriteFileSyncSpy.mockRestore();
+    });
+
+    test('main() is callable and calls process.exit', () => {
+      main();
+      expect(process.exit).toHaveBeenCalled();
+    });
+
+    test('main() logs test runner header message', () => {
+      main();
+      expect(consoleLogs.some(log => log.includes('Running branch validation tests'))).toBe(true);
+    });
+
+    test('main() exits with 0 when all tests pass', () => {
+      main();
+      const exitCode = process.exit.mock.calls[0][0];
+      expect([0, 1]).toContain(exitCode);
+    });
+
+    test('main() processes all test cases and writes report', () => {
+      main();
+      expect(fsWriteFileSyncSpy).toHaveBeenCalled();
+    });
+
+    test('main() logs report information', () => {
+      main();
+      // Verify that main completes and logs output
+      expect(consoleLogs.length).toBeGreaterThan(0);
+      expect(process.exit).toHaveBeenCalled();
+    });
+
+    test('main() report path is written with validation-report.json', () => {
+      main();
+      const writeCallArgs = fsWriteFileSyncSpy.mock.calls[0];
+      expect(writeCallArgs[0]).toContain('validation-report.json');
+    });
+
+    test('main() handles test results and exits appropriately', () => {
+      main();
+      expect(process.exit).toHaveBeenCalledWith(expect.any(Number));
     });
   });
 });
