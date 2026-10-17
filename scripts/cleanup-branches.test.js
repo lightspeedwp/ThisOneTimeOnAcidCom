@@ -147,6 +147,17 @@ describe('categorizeBranch', () => {
       expect(result.reason).toBe(REASON_CODES.KEEP.dependabot);
     }
   });
+
+  it('defaults to KEEP for unclassified merge status', () => {
+    const result = categorizeBranch('feat/unclassified', {
+      lastCommitDate: '2025-01-01T00:00:00Z',
+      author: 'test@example.com',
+      mergeStatus: 'indeterminate', // or any status other than 'merged', 'unmerged', 'unknown'
+    });
+
+    expect(result.category).toBe('KEEP');
+    expect(result.reason).toBe('Unable to classify');
+  });
 });
 
 describe('getBranchType', () => {
@@ -180,28 +191,37 @@ describe('daysSince', () => {
 
 describe('buildExcludeRegex', () => {
   it('includes default patterns (release, hotfix)', () => {
-    const regex = buildExcludeRegex();
+    const regex = buildExcludeRegex({ excludePatterns: null, verbose: false });
 
     expect(regex.test('release/v1.0.0')).toBe(true);
     expect(regex.test('hotfix/critical-bug')).toBe(true);
   });
 
   it('adds custom patterns', () => {
-    // Mock global opts for this test
-    global.opts = {
-      excludePatterns: 'main|develop',
-      verbose: false,
-    };
-
-    // Note: In actual implementation, opts is module-scoped.
-    // This test documents expected behavior.
-    const source = `(release/.*|hotfix/.*|main|develop)`;
-    const regex = new RegExp(source);
+    const regex = buildExcludeRegex({ excludePatterns: 'main|develop', verbose: false });
 
     expect(regex.test('release/v1.0.0')).toBe(true);
     expect(regex.test('main')).toBe(true);
     expect(regex.test('develop')).toBe(true);
     expect(regex.test('feat/feature')).toBe(false);
+  });
+
+  it('filters empty patterns', () => {
+    const regex = buildExcludeRegex({ excludePatterns: 'main||develop|', verbose: false });
+
+    expect(regex.test('main')).toBe(true);
+    expect(regex.test('develop')).toBe(true);
+    expect(regex.test('feat/feature')).toBe(false);
+  });
+
+  it('handles invalid regex patterns', () => {
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+    const regex = buildExcludeRegex({ excludePatterns: '[invalid(', verbose: false });
+
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Invalid --excludePatterns regex'));
+    expect(regex.test('release/v1.0.0')).toBe(true);
+
+    consoleSpy.mockRestore();
   });
 });
 
@@ -404,6 +424,206 @@ describe('Safety safeguards', () => {
       // not by cleanup logic.
       expect(['DELETE', 'KEEP']).toContain(result.category);
     }
+  });
+});
+
+describe('Utility functions', () => {
+  it('formatBytes handles zero bytes', () => {
+    expect(formatBytes(0)).toBe('0 B');
+  });
+
+  it('formatBytes formats kilobytes', () => {
+    expect(formatBytes(1024)).toBe('1.00 KB');
+    expect(formatBytes(2048)).toBe('2.00 KB');
+  });
+
+  it('formatBytes formats megabytes', () => {
+    expect(formatBytes(1024 * 1024)).toBe('1.00 MB');
+    expect(formatBytes(1024 * 1024 * 5)).toBe('5.00 MB');
+  });
+
+  it('formatBytes caps at megabytes (no gigabyte formatting)', () => {
+    expect(formatBytes(1024 * 1024 * 1024)).toBe('1024.00 MB');
+    expect(formatBytes(1024 * 1024 * 1024 * 2)).toBe('2048.00 MB');
+  });
+
+  it('formatBytes handles fractional values', () => {
+    expect(formatBytes(1536)).toBe('1.50 KB');
+    expect(formatBytes(1024 * 1024 * 1.5)).toBe('1.50 MB');
+  });
+
+  it('estimateStorageFreedBytes calculates correctly', () => {
+    const result = estimateStorageFreedBytes(100);
+    expect(typeof result).toBe('number');
+    expect(result).toBeGreaterThan(0);
+  });
+
+  it('estimateStorageFreedBytes handles zero commits', () => {
+    const result = estimateStorageFreedBytes(0);
+    expect(result).toBe(0);
+  });
+});
+
+describe('Report formatting', () => {
+  it('writeMarkdownReport generates valid markdown with headers', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [
+      {
+        branch: 'old-feature',
+        reason: 'stale',
+        lastCommitDate: '2025-01-01T00:00:00Z',
+        author: 'bot@test.com',
+        hash: 'abc123',
+        age: 45,
+        type: 'feature',
+        commitCount: 5,
+        estimatedStorageBytes: 50000,
+      },
+    ];
+    const toPreserve = [
+      { branch: 'main', category: 'KEEP', reason: 'default_branch' },
+    ];
+    const errors = [];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeMarkdownReport(toDelete, toPreserve, errors, metrics, { reportDir: tempDir, inactiveDays: 30 });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    expect(content).toContain('Branch Cleanup Report');
+    expect(content).toContain('old-feature');
+    expect(content).toContain('main');
+
+    cleanupTempDir(tempDir);
+  });
+
+  it('writeMarkdownReport handles empty cleanup list', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [];
+    const toPreserve = [
+      { branch: 'main', category: 'KEEP', reason: 'default_branch' },
+      { branch: 'develop', category: 'KEEP', reason: 'protected_branch' },
+    ];
+    const errors = [];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeMarkdownReport(toDelete, toPreserve, errors, metrics, { reportDir: tempDir, inactiveDays: 30 });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    expect(content).toContain('No branches are eligible for deletion');
+    expect(content).toContain('main');
+
+    cleanupTempDir(tempDir);
+  });
+
+  it('writeMarkdownReport includes branches requiring discussion', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [
+      {
+        branch: 'old-feature',
+        reason: 'stale',
+        lastCommitDate: '2025-01-01T00:00:00Z',
+        author: 'bot@test.com',
+        hash: 'abc123',
+        age: 45,
+        type: 'feature',
+        commitCount: 5,
+        estimatedStorageBytes: 50000,
+      },
+    ];
+    const toPreserve = [
+      { branch: 'main', category: 'KEEP', reason: 'default_branch' },
+      { branch: 'ambiguous-branch', category: 'DISCUSS', reason: 'branch prefix unclear' },
+    ];
+    const errors = [];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeMarkdownReport(toDelete, toPreserve, errors, metrics, { reportDir: tempDir, inactiveDays: 30 });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    expect(content).toContain('Branches Requiring Discussion');
+    expect(content).toContain('ambiguous-branch');
+
+    cleanupTempDir(tempDir);
+  });
+
+  it('writeMarkdownReport includes errors encountered', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [];
+    const toPreserve = [
+      { branch: 'main', category: 'KEEP', reason: 'default_branch' },
+    ];
+    const errors = [
+      { branch: 'failed-branch', error: 'git command failed' },
+    ];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeMarkdownReport(toDelete, toPreserve, errors, metrics, { reportDir: tempDir, inactiveDays: 30 });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    expect(content).toContain('Errors Encountered');
+    expect(content).toContain('failed-branch');
+
+    cleanupTempDir(tempDir);
+  });
+
+  it('writeJsonReport generates valid JSON', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [
+      {
+        branch: 'old-feature',
+        reason: 'stale',
+        age: 45,
+        type: 'feature',
+        author: 'bot@test.com',
+        hash: 'abc123',
+        commitCount: 5,
+        estimatedStorageBytes: 50000,
+      },
+    ];
+    const toPreserve = [{ branch: 'main', category: 'KEEP', reason: 'default_branch' }];
+    const errors = [];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeJsonReport(toDelete, toPreserve, errors, metrics, { reportDir: tempDir, inactiveDays: 30 });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    const parsed = JSON.parse(content);
+
+    expect(parsed.timestamp).toEqual(expect.any(String));
+    expect(parsed.candidates).toHaveLength(1);
+    expect(parsed.retained).toHaveLength(1);
+    expect(parsed.summary.candidateCount).toBe(1);
+
+    cleanupTempDir(tempDir);
+  });
+
+  it('writeJsonReport includes errors in output', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [];
+    const toPreserve = [{ branch: 'main', category: 'KEEP', reason: 'default_branch' }];
+    const errors = [
+      { branch: 'failed-branch', error: 'merge status check failed' },
+      { branch: 'another-failed', error: 'commit count lookup failed' },
+    ];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeJsonReport(toDelete, toPreserve, errors, metrics, { reportDir: tempDir, inactiveDays: 30 });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    const parsed = JSON.parse(content);
+
+    expect(parsed.errors).toHaveLength(2);
+    expect(parsed.errors[0].branch).toBe('failed-branch');
+    expect(parsed.errors[0].error).toBe('merge status check failed');
+    expect(parsed.summary.errorCount).toBe(2);
+
+    cleanupTempDir(tempDir);
   });
 });
 
