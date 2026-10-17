@@ -291,7 +291,7 @@ These questions must be answered to resolve specification ambiguities that impac
 
 ### **Question 3: Boundaries Between Definition, Validation and Implementation Phases**
 
-**Context**: Six issues (TOA-277, TOA-278, TOA-279, TOA-280, TOA-282, TOA-8) address definition and validation. Four issues (TOA-283, TOA-284, TOA-285, TOA-286) address implementation. There is known overlap (e.g., TOA-277 "define schema" vs. TOA-283 "finalise schema"). Linear issue descriptions do not clarify blocker relationships; only "related" links exist.
+**Context**: Seven issues (TOA-276, TOA-277, TOA-278, TOA-279, TOA-280, TOA-282, TOA-8) address definition and validation. Four issues (TOA-283, TOA-284, TOA-285, TOA-286) address implementation. There is known overlap (e.g., TOA-277 "define schema" vs. TOA-283 "finalise schema"). Linear issue descriptions do not clarify blocker relationships; only "related" links exist.
 
 **What we need to know**: What is the intended sequence? Does TOA-283 (finalise schema) supersede TOA-277 (define schema), or are they distinct phases (first definition, then validation, then finalisation)? Are TOA-284/285/286 explicitly blocked until TOA-282/283 complete?
 

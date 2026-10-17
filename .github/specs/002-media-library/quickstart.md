@@ -482,7 +482,7 @@ Phase: 1 Design
 - Pilot batch size: $total_assets assets
 - Recovery success: $recovered_count/$total_assets recovered
 - Completion score: $recovery_pct%
-- Status: $([ "$recovery_pct" -ge 80 ] && echo "✓ PASS (meets target ≥80%)" || echo "✗ FAIL (below target ≥80%)")
+- Status: $([ "$((recovered_count * 100))" -ge "$((total_assets * 80))" ] && echo "✓ PASS (meets target ≥80%)" || echo "✗ FAIL (below target ≥80%)")
 
 ## Catalogue Schema Validation (contracts/catalogue-schema.json)
 - Assets validated: $total_assets
@@ -631,7 +631,7 @@ jq '.assets[] |= if .asset_id == "asset_figma_hero_001" then
 else . end' ./pilot-batch-recovered.json > ./pilot-batch-recovered-updated.json
 
 # Verify update
-grep -A 2 "\"credits\"" ./pilot-batch-recovered-updated.json | grep asset_figma_hero_001 -A 2
+jq -e '.assets[] | select(.asset_id == "asset_figma_hero_001") | (.credits != null and .rights_notes != null and .updated_at != null)' ./pilot-batch-recovered-updated.json || { echo "✗ Metadata verification failed for asset_figma_hero_001"; exit 1; }
 
 # Commit updated catalogue to version control
 cp ./pilot-batch-recovered-updated.json ./pilot-batch-recovered.json
@@ -670,7 +670,7 @@ echo "✓ Dispute resolved; catalogue record updated, verified, and version cont
 - **TOA-286** (Phase 3): Validate readiness and operational handover — Use operational runbook (Scenarios 5–6) for training
 
 **Success Metrics Achieved**:
-- ✅ SC-001: All recoverable assets identified (12/12 pilot recovered; 91.7% success)
+- ✅ SC-001: All recoverable assets identified (12/12 pilot recovered; 100% success)
 - ✅ SC-002: Catalogue schema validated against pilot assets (100% validation success)
 - ✅ SC-003: Provider evaluation workflow tested with real assets and workflows
 - ✅ SC-004: Validation approach tested against recovered assets and references
