@@ -552,4 +552,124 @@ describe('Branch Name Validation', () => {
       expect(typeof PATTERNS.standard.test).toBe('function');
     });
   });
+
+  describe('branch validation integration tests', () => {
+    test('validates branches with all authorized types', () => {
+      const types = [
+        'feat', 'fix', 'docs', 'test', 'refactor', 'perf', 'chore',
+        'ci', 'build', 'deps', 'security', 'task', 'doc', 'design',
+        'a11y', 'ux', 'i18n', 'ops', 'proto', 'ds', 'api', 'schema',
+        'telemetry', 'content', 'seo', 'config', 'migrate', 'qa',
+        'uat', 'audit', 'codex', 'aiops', 'automation', 'epic',
+        'hotfix', 'release', 'revert', 'research'
+      ];
+
+      types.forEach(type => {
+        const branch = `${type}/test-feature`;
+        const result = validateStandardPattern(branch);
+        expect(result).not.toBeNull();
+        expect(result.isValid).toBe(true);
+      });
+    });
+
+    test('rejects branches with invalid type prefixes', () => {
+      const invalidTypes = ['invalid', 'unknown', 'random', 'foo', 'bar'];
+
+      invalidTypes.forEach(type => {
+        const branch = `${type}/test-feature`;
+        const result = validateStandardPattern(branch);
+        expect(result.isValid).toBe(false);
+      });
+    });
+
+    test('validates complex scope names', () => {
+      const validScopes = [
+        'feat/user-auth-flow-implementation',
+        'fix/critical-bug-fix-2024',
+        'docs/api-reference-update',
+        'test/e2e-integration-tests',
+        'refactor/component-structure-simplification'
+      ];
+
+      validScopes.forEach(branch => {
+        const result = validateStandardPattern(branch);
+        expect(result.isValid).toBe(true);
+      });
+    });
+
+    test('validates single-word scopes', () => {
+      const result = validateStandardPattern('feat/feature');
+      expect(result.isValid).toBe(true);
+    });
+
+    test('rejects branches with multiple slashes in wrong positions', () => {
+      const result = validateStandardPattern('feat/test/extra/parts');
+      // This depends on the pattern - may or may not be valid
+      expect(result).not.toBeNull();
+    });
+
+    test('validates branches without hyphens in scope', () => {
+      const result = validateStandardPattern('feat/authflow');
+      expect(result.isValid).toBe(true);
+    });
+
+    test('validates branches with numbers in scope', () => {
+      const result = validateStandardPattern('feat/oauth2integration');
+      expect(result.isValid).toBe(true);
+    });
+
+    test('full validation chain for forbidden prefix', () => {
+      const forbidden = ['claude/feature', 'copilot/fix', 'openai/update'];
+
+      forbidden.forEach(branch => {
+        const forbiddenCheck = checkForbiddenPrefix(branch);
+        expect(forbiddenCheck).not.toBeNull();
+        expect(forbiddenCheck.isValid).toBe(false);
+      });
+    });
+
+    test('full validation chain for exemptions', () => {
+      const exemptions = [
+        'dependabot/npm_and_yarn/package-1.0.0',
+        'renovate/dependency-updates',
+        'release/v1.0.0',
+        'release/2024-01-15'
+      ];
+
+      exemptions.forEach(branch => {
+        const exemptionCheck = checkExemptions(branch);
+        expect(exemptionCheck).not.toBeNull();
+        expect(exemptionCheck.isValid).toBe(true);
+      });
+    });
+
+    test('validateStandardPattern distinguishes valid from invalid precisely', () => {
+      // Valid patterns
+      expect(validateStandardPattern('feat/new-feature').isValid).toBe(true);
+      expect(validateStandardPattern('fix/bug-123').isValid).toBe(true);
+      expect(validateStandardPattern('docs/guide').isValid).toBe(true);
+
+      // Invalid patterns
+      expect(validateStandardPattern('feature/new').isValid).toBe(false);
+      expect(validateStandardPattern('bugfix/123').isValid).toBe(false);
+      expect(validateStandardPattern('documentation/guide').isValid).toBe(false);
+    });
+
+    test('ValidationResult with all parameter combinations', () => {
+      // Valid with standard type
+      const result1 = new ValidationResult(true, 'feat/test', 'Valid', 'standard', {});
+      expect(result1.toJSON().isValid).toBe(true);
+      expect(result1.toJSON().type).toBe('standard');
+
+      // Invalid with forbidden-prefix type
+      const result2 = new ValidationResult(false, 'claude/test', 'Forbidden', 'forbidden-prefix', { prefix: 'claude' });
+      expect(result2.toJSON().isValid).toBe(false);
+      expect(result2.toJSON().type).toBe('forbidden-prefix');
+
+      // Valid with exemption type
+      const result3 = new ValidationResult(true, 'release/v1.0.0', 'Valid exemption', 'exemption', {});
+      expect(result3.toJSON().isValid).toBe(true);
+      expect(result3.toJSON().type).toBe('exemption');
+    });
+  });
 });

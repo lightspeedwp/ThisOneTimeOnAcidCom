@@ -950,3 +950,179 @@ describe('Storage calculation', () => {
     });
   });
 });
+
+describe('getMetrics branch coverage', () => {
+  it('calculates metrics with all fields present', () => {
+    const deleted = [
+      {
+        branch: 'feat/test1',
+        type: 'feat',
+        author: 'user@example.com',
+        commitCount: 5,
+        estimatedStorageBytes: 20480,
+      },
+      {
+        branch: 'fix/test2',
+        type: 'fix',
+        author: 'dev@example.com',
+        commitCount: 3,
+        estimatedStorageBytes: 12288,
+      },
+    ];
+    const preserved = [{ category: 'KEEP', branch: 'main' }];
+    const errors = [];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+
+    expect(metrics.successfulDeletes).toBe(2);
+    expect(metrics.failedDeletes).toBe(0);
+    expect(metrics.byType).toHaveProperty('feat');
+    expect(metrics.byType).toHaveProperty('fix');
+    expect(metrics.totalCommits).toBe(8);
+    expect(metrics.authorsAffected).toContain('user@example.com');
+  });
+
+  it('handles deleted branches with missing type', () => {
+    const deleted = [
+      {
+        branch: 'unknown/feature',
+        // type not provided
+        commitCount: 10,
+        estimatedStorageBytes: 40960,
+      },
+    ];
+    const preserved = [];
+    const errors = [];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+    expect(metrics.successfulDeletes).toBe(1);
+    expect(metrics.totalCommits).toBe(10);
+  });
+
+  it('handles branches with no commits', () => {
+    const deleted = [
+      {
+        branch: 'feat/empty',
+        type: 'feat',
+        // commitCount not provided
+        estimatedStorageBytes: 0,
+      },
+    ];
+    const preserved = [];
+    const errors = [];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+    expect(metrics.totalCommits).toBe(0);
+  });
+
+  it('handles branches without author', () => {
+    const deleted = [
+      {
+        branch: 'feat/test',
+        type: 'feat',
+        // author not provided
+        commitCount: 5,
+        estimatedStorageBytes: 20480,
+      },
+    ];
+    const preserved = [];
+    const errors = [];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+    expect(metrics.authorsAffected).toEqual([]);
+  });
+
+  it('calculates success rate with errors', () => {
+    const deleted = [
+      {
+        branch: 'feat/test',
+        type: 'feat',
+        commitCount: 1,
+        estimatedStorageBytes: 4096,
+      },
+    ];
+    const preserved = [];
+    const errors = [
+      { branch: 'error/branch', error: 'Test error' },
+    ];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+    expect(metrics.failedDeletes).toBe(1);
+    expect(metrics.successRate).not.toBe('0.00%');
+  });
+
+  it('calculates success rate with no errors', () => {
+    const deleted = [
+      {
+        branch: 'feat/test',
+        type: 'feat',
+        commitCount: 1,
+        estimatedStorageBytes: 4096,
+      },
+    ];
+    const preserved = [];
+    const errors = [];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+    expect(metrics.failedDeletes).toBe(0);
+    expect(metrics.successRate).toBe('100.00%');
+  });
+
+  it('formats storage in human-readable format', () => {
+    const deleted = [
+      {
+        branch: 'feat/large',
+        type: 'feat',
+        commitCount: 1000,
+        estimatedStorageBytes: 4096000,
+      },
+    ];
+    const preserved = [];
+    const errors = [];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+    expect(metrics.estimatedStorageHuman).toContain('MB');
+  });
+
+  it('builds byType correctly with multiple types', () => {
+    const deleted = [
+      { branch: 'feat/a', type: 'feat', commitCount: 1, estimatedStorageBytes: 4096 },
+      { branch: 'feat/b', type: 'feat', commitCount: 1, estimatedStorageBytes: 4096 },
+      { branch: 'fix/a', type: 'fix', commitCount: 1, estimatedStorageBytes: 4096 },
+      { branch: 'docs/a', type: 'docs', commitCount: 1, estimatedStorageBytes: 4096 },
+    ];
+    const preserved = [];
+    const errors = [];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+    expect(metrics.byType.feat).toBe(2);
+    expect(metrics.byType.fix).toBe(1);
+    expect(metrics.byType.docs).toBe(1);
+  });
+
+  it('calculates preserved:deleted ratio correctly', () => {
+    const deleted = [
+      { branch: 'feat/test', type: 'feat', commitCount: 1, estimatedStorageBytes: 4096 },
+    ];
+    const preserved = [
+      { branch: 'main', category: 'KEEP' },
+      { branch: 'release/v1', category: 'KEEP' },
+    ];
+    const errors = [];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+    expect(metrics.preservedDeletedRatio).toBe('2:1');
+  });
+
+  it('handles all preserved items being DISCUSS', () => {
+    const deleted = [];
+    const preserved = [
+      { branch: 'custom/branch', category: 'DISCUSS' },
+    ];
+    const errors = [];
+
+    const metrics = getMetrics(deleted, preserved, errors);
+    expect(metrics.successfulDeletes).toBe(0);
+    expect(metrics.preservedDeletedRatio).toBe('1:0');
+  });
+});

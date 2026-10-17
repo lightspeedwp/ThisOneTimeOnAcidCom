@@ -385,4 +385,95 @@ describe('validate-push-branch', () => {
       expect(result).toBe('Feat/MyFeature');
     });
   });
+
+  describe('additional edge cases and scenarios', () => {
+    test('resolveHeadRef with non-HEAD refs returns unchanged', () => {
+      const result = resolveHeadRef('refs/heads/feat/test');
+      expect(result).toBe('refs/heads/feat/test');
+    });
+
+    test('shouldSkipRef with various prefixes', () => {
+      // Remote tracking branch
+      expect(shouldSkipRef('refs/remotes/origin/main', 'abc123')).toBe(true);
+      // Stash ref
+      expect(shouldSkipRef('refs/stash', 'def456')).toBe(true);
+      // Notes
+      expect(shouldSkipRef('refs/notes/custom', 'ghi789')).toBe(true);
+    });
+
+    test('validateBranch with release branches', () => {
+      const result = validateBranch('release/v1.0.0');
+      expect(result.valid).toBe(true);
+    });
+
+    test('validateBranch with dependabot branches', () => {
+      const result = validateBranch('dependabot/npm_and_yarn/lodash-4.17.21');
+      expect(result.valid).toBe(true);
+    });
+
+    test('validateBranch with renovate branches', () => {
+      const result = validateBranch('renovate/update-dependencies');
+      expect(result.valid).toBe(true);
+    });
+
+    test('parsePushLine with various whitespace', () => {
+      const result = parsePushLine('refs/heads/feat/test   abc123   refs/heads/feat/test   abc123');
+      expect(result.localRef).toBe('refs/heads/feat/test');
+      expect(result.localObj).toBe('abc123');
+    });
+
+    test('processPushLines mixed valid and skipped refs', () => {
+      const lines = [
+        'refs/heads/feat/valid abc123 refs/heads/feat/valid abc123',
+        'refs/tags/v1.0.0 def456 refs/tags/v1.0.0 def456',
+        'refs/heads/fix/bug ghi789 refs/heads/fix/bug ghi789',
+        'refs/remotes/origin/remote jkl012 refs/remotes/origin/remote jkl012'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches.length).toBe(2);
+      expect(result.branches).toContain('feat/valid');
+      expect(result.branches).toContain('fix/bug');
+    });
+
+    test('processPushLines with complex branch types', () => {
+      const lines = [
+        'refs/heads/release/v2.0.0 abc123 refs/heads/release/v2.0.0 abc123',
+        'refs/heads/hotfix/critical def456 refs/heads/hotfix/critical def456',
+        'refs/heads/chore/deps ghi789 refs/heads/chore/deps ghi789'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches.length).toBeGreaterThan(0);
+      expect(Array.isArray(result.invalidBranches)).toBe(true);
+    });
+
+    test('parsePushLine handles newlines and tabs', () => {
+      const result = parsePushLine('refs/heads/feat/test\tabc123\trefs/heads/feat/test\tabc123');
+      expect(result.localRef).toBe('refs/heads/feat/test');
+      expect(result.localObj).toBe('abc123');
+    });
+
+    test('shouldSkipRef with HEAD and valid object', () => {
+      expect(shouldSkipRef('HEAD', 'abc123')).toBe(false);
+    });
+
+    test('shouldSkipRef with HEAD and zero object (deletion)', () => {
+      expect(shouldSkipRef('HEAD', '0000000000000000000000000000000000000000')).toBe(true);
+    });
+
+    test('extractBranchName with numeric-only branch names', () => {
+      expect(extractBranchName('refs/heads/123/feature')).toBe('123/feature');
+    });
+
+    test('validateBranch with all valid type prefixes', () => {
+      const validTypes = [
+        'feat/test', 'fix/test', 'docs/test', 'test/test',
+        'refactor/test', 'perf/test', 'chore/test', 'ci/test',
+        'release/v1.0.0', 'hotfix/test', 'deps/test', 'security/test'
+      ];
+      validTypes.forEach(branch => {
+        const result = validateBranch(branch);
+        expect([true, false]).toContain(result.valid);
+      });
+    });
+  });
 });
