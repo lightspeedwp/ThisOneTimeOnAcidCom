@@ -27,8 +27,8 @@ All entities are immutable once approved (GH-003 CODEOWNERS authority, R7.3 hard
 
 | Field | Type | Constraints | Notes |
 |-------|------|-------------|-------|
-| `decision_id` | string | SPEC-001–NODE-001 | Approved decisions only |
-| `category` | enum | SPEC, TEST, GH, PKG, NODE, STYLE | 9 values total |
+| `decision_id` | string | SPEC-001, TEST-001, TEST-002, GH-001, GH-002, GH-003, PKG-001, NODE-001, STYLE-001 | Approved decisions only |
+| `category` | enum | SPEC, TEST, GH, PKG, NODE, STYLE | 6 values total |
 | `status` | enum | ratified / pending | Must be ratified before implementation |
 | `owner` | string | @ashley | Central authority for all governance decisions |
 | `approval_date` | date | 2026-10-17 | Ratification date |
@@ -87,14 +87,14 @@ dist/                          [protected: false] Build output (gitignored)
 | `owner` | string | @ashley or system | Authority for enabling/disabling |
 
 **Workflow Categories**:
-- **Implementation** (8 total, always active):
+- **Implementation** (9 total, always active):
   - `lint.yml`, `tests.yml`, `documentation.yml`, `workflow-lint.yml`
   - `branch-name-validation.yml`, `changelog-unified.yml`, `labeling-unified.yml`, `pr-template-routing.yml`
   - **Plus Q2 clarification**: `locked-files-guard.yml` (moved from evaluation to implementation)
 
-- **Evaluation** (6 total, manual/opt-in):
+- **Evaluation** (5 total, manual/opt-in):
   - `validate-specifications.yml`, `claude-guard-tests.yml`, `ruleset-drift.yml`
-  - `ai-feedback-validation.yml`, `ai-feedback.yml`, and others
+  - `ai-feedback-validation.yml`, `ai-feedback.yml`
 
 - **Deferred** (3 total, decision pending):
   - `branch-validation-metrics-aggregator.yml`, `keep-pr-current.yml`, `label-drift-check.yml`
@@ -113,7 +113,7 @@ dist/                          [protected: false] Build output (gitignored)
 | `description` | string | max 200 chars | Label purpose |
 | `automation_rule` | string | branch prefix / workflow / manual | How label is assigned |
 
-**Families** (7 total, canonical in `.github/labels.yml`):
+**Families** (5 total, canonical in `.github/labels.yml`):
 - type:* (feature, bug, task, documentation, design, security)
 - status:* (needs-triage, in-progress, done, blocked)
 - priority:* (critical, high, normal, low)
@@ -179,7 +179,7 @@ dist/                          [protected: false] Build output (gitignored)
    - Enforced by: `labeling-unified.yml` (PR template routing)
 
 4. **Workflow Activation**: Only implementation workflows run by default; evaluation workflows require manual dispatch
-   - Default: `lint.yml`, `tests.yml`, `locked-files-guard.yml`, and 5 others
+   - Default: `lint.yml`, `tests.yml`, `locked-files-guard.yml`, and 6 others
    - Manual: `validate-specifications.yml`, `claude-guard-tests.yml`, etc.
 
 ### Path Uniqueness

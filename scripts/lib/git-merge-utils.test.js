@@ -72,7 +72,7 @@ describe('git-merge-utils', () => {
 
     it('should return unknown for invalid parameters', () => {
       const result = gitUtils.getMergeStatus('', '');
-      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+      expect(result).toBe('unknown');
     });
 
     it('should accept custom baseRef', () => {
@@ -97,7 +97,7 @@ describe('git-merge-utils', () => {
 
     it('should return unknown when git fails unexpectedly', () => {
       const result = gitUtils.getMergeStatus('', 'origin/invalid-base');
-      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+      expect(result).toBe('unknown');
     });
   });
 

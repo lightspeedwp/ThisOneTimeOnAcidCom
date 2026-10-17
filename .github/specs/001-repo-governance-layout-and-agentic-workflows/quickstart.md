@@ -18,10 +18,17 @@ This validation runbook provides step-by-step procedures to verify that reposito
 ## Prerequisites
 
 1. **Repository cloned and branch created**:
+   Run these commands in Bash and keep the same shell open through Cleanup. Review the initial status and note any existing edits before running scenarios.
    ```bash
-   git fetch origin develop
-   git checkout -B feat/test-governance-validation origin/develop
+   git status --short
+   validation_created_branch=''
+   validation_return_branch=$(git symbolic-ref --quiet --short HEAD) &&
+   validation_branch="feat/test-governance-validation-$(date -u +%Y%m%d%H%M%S)-$$" &&
+   git fetch origin develop &&
+   git checkout -b "$validation_branch" origin/develop &&
+   validation_created_branch="$validation_branch"
    ```
+   Continue only if branch creation succeeds. `-b` refuses to overwrite an existing branch.
 
 2. **Node.js 24 installed** (validate with `node --version`; expect v24.x.x)
 
@@ -49,7 +56,7 @@ This validation runbook provides step-by-step procedures to verify that reposito
 
 **Goal**: Verify branch naming convention is enforced and validated.
 
-**Setup**: You're on branch `feat/test-governance-validation`
+**Setup**: You're on the unique branch recorded in `$validation_created_branch`.
 
 **Test Commands**:
 
@@ -58,7 +65,7 @@ This validation runbook provides step-by-step procedures to verify that reposito
 npm run validate:branch-name
 
 # Expected output:
-# Branch 'feat/test-governance-validation' matches the repository branching strategy.
+# Branch 'feat/test-governance-validation-<timestamp>-<pid>' matches the repository branching strategy.
 # Exit code: 0 ✅
 
 # Test 1.2: Check branch type extraction
@@ -275,14 +282,18 @@ test ! -f tailwind.config.js && test ! -f tailwind.config.mjs && \
 
 # Test 6.3: Verify BEM naming in components (sample check)
 find src/components -name "*.tsx" -o -name "*.css" | head -5 | while read file; do
-  grep -q "className.*__\|data-test\|\.bem-" "$file" && \
+  grep -Eq "(className=[\"'][^\"']*|\\.)[a-z][a-z0-9-]*(__[a-z][a-z0-9-]*|--[a-z][a-z0-9-]*)" "$file" && \
     echo "✅ BEM patterns found in $file" || echo "⚠️  Check BEM usage in $file"
 done
 
 # Test 6.4: Linting enforces BEM
-npm run lint:js 2>&1 | grep -q "tailwind\|@apply" && \
-  echo "⚠️  Possible Tailwind usage detected by linter" || \
-  echo "✅ No Tailwind utilities detected by linter"
+lint_status=0
+npm run lint:js || lint_status=$?
+if [ "$lint_status" -eq 0 ]; then
+  echo "✅ JavaScript lint passed"
+else
+  echo "❌ JavaScript lint failed (exit status $lint_status)"
+fi
 ```
 
 **Validation Pass Criteria**:
@@ -346,16 +357,19 @@ echo "Total labels defined: $label_count (expected ~150+)"
 **Test Commands**:
 
 ```bash
-# Test 8.1: Count implementation workflows (should be 8)
+# Test 8.1: Count implementation workflows (should be 9)
 impl_count=$(ls -1 .github/workflows/lint.yml .github/workflows/tests.yml \
   .github/workflows/documentation.yml .github/workflows/workflow-lint.yml \
   .github/workflows/branch-name-validation.yml .github/workflows/changelog-unified.yml \
-  .github/workflows/labeling-unified.yml .github/workflows/pr-template-routing.yml 2>/dev/null | wc -l)
-echo "Implementation workflows present: $impl_count / 8"
+  .github/workflows/labeling-unified.yml .github/workflows/pr-template-routing.yml \
+  .github/workflows/locked-files-guard.yml 2>/dev/null | wc -l)
+echo "Implementation workflows present: $impl_count / 9"
 
 # Test 8.2: Validate workflow syntax
-for workflow in .github/workflows/*.yml; do
-  if grep -q "name:" "$workflow" && grep -q "on:" "$workflow"; then
+# The js-yaml CLI is installed by npm ci from the committed lockfile.
+for workflow in .github/workflows/*.yml .github/workflows/*.yaml; do
+  [ -f "$workflow" ] || continue
+  if ./node_modules/.bin/js-yaml "$workflow" > /dev/null; then
     echo "✅ Valid structure: $(basename "$workflow")"
   else
     echo "❌ Invalid structure: $(basename "$workflow")"
@@ -373,11 +387,11 @@ grep -q "CHANGELOG.md\|AGENTS.md\|guidelines/" .github/workflows/locked-files-gu
 ```
 
 **Validation Pass Criteria**:
-- ✅ All 8 implementation workflows present
+- ✅ All 9 implementation workflows present
 - ✅ All workflow files have valid YAML structure
 - ✅ locked-files-guard.yml present (Q2 clarification move to implementation)
 - ✅ Protected file paths correctly configured
-- ✅ Evaluation workflows (6) present but not auto-triggered
+- ✅ Evaluation workflows (5) present but not auto-triggered
 
 **References**: ci-cd-workflows.md (complete workflow contracts), data-model.md (GitHubActionsWorkflow entity)
 
@@ -400,8 +414,23 @@ grep -q "@ashley" .github/CODEOWNERS && \
 
 # Test 9.3: Verify protected paths listed
 echo "Checking CODEOWNERS for protected paths..."
-grep -q ".github/workflows/\|CHANGELOG.md\|AGENTS.md\|guidelines/" .github/CODEOWNERS && \
-  echo "✅ Protected paths in CODEOWNERS" || echo "⚠️  Verify protected path coverage"
+coverage_complete=true
+for protected_path in .github/workflows/ CHANGELOG.md AGENTS.md guidelines/; do
+  if awk -v path="$protected_path" '
+    ($1 == path || $1 == "/" path) && NF > 1 && $2 !~ /^#/ { found = 1 }
+    END { exit !found }
+  ' .github/CODEOWNERS; then
+    echo "✅ $protected_path in CODEOWNERS"
+  else
+    echo "⚠️  Missing CODEOWNERS entry for $protected_path"
+    coverage_complete=false
+  fi
+done
+if [ "$coverage_complete" = true ]; then
+  echo "✅ Protected path coverage complete"
+else
+  echo "⚠️  Verify protected path coverage"
+fi
 
 # Test 9.4: Check PR template files mention CODEOWNERS
 grep -r "CODEOWNERS" .github/PULL_REQUEST_TEMPLATE/ > /dev/null && \
@@ -473,15 +502,29 @@ echo "Specification documents: $doc_count files (expected 7+)"
 After validation completes, clean up test changes:
 
 ```bash
-# Revert any test file changes
-git restore .
+# Compare with the initial status; review unstaged and staged changes first.
+git status --short
+git diff
+git diff --cached
 
-# Return to develop branch
-git checkout develop
+# Add only tracked paths changed by validation scenarios to this array.
+validation_changed_files=()
+if [ "${#validation_changed_files[@]}" -gt 0 ]; then
+  # Select only scenario hunks; keep unrelated edits in the same files.
+  git restore --patch -- "${validation_changed_files[@]}"
+fi
 
-# Delete test branch (local only, or if never pushed)
-git branch -D feat/test-governance-validation
+# Return to the starting branch, then delete only the branch created above.
+if [ -n "${validation_created_branch:-}" ] &&
+   [ "$(git branch --show-current)" = "$validation_created_branch" ]; then
+  git checkout "$validation_return_branch" &&
+  git branch -d "$validation_created_branch"
+else
+  echo "⚠️  No matching validation branch recorded; skipping branch cleanup"
+fi
 ```
+
+Keep unrelated edits. Review staged and untracked files individually; do not delete them automatically. If `git branch -d` refuses because validation commits remain, inspect and preserve those commits before deciding how to remove the branch.
 
 ---
 

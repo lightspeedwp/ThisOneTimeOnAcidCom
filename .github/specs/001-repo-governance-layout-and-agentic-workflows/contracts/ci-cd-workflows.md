@@ -12,7 +12,7 @@ This document defines the interface contracts for all 17 GitHub Actions workflow
 
 ---
 
-## Implementation Workflows (8 — Always Active)
+## Implementation Workflows (9 — Always Active)
 
 ### lint.yml
 - **Trigger**: `push`, `pull_request`
@@ -103,14 +103,14 @@ This document defines the interface contracts for all 17 GitHub Actions workflow
 - **Outputs**: Protection status; override request workflow (if applicable)
 - **Blocking**: YES (must pass before PR merge)
 - **Enforces**: R1.3 (protected files), GH-003 (CODEOWNERS authority)
-- **Protected Paths**: `.github/workflows/`, `CHANGELOG.md`, `AGENTS.md`, `guidelines/`
+- **Protected Paths**: `.github/workflows/`, `CHANGELOG.md`, `AGENTS.md`, `guidelines/`, `.github/labels.yml`
 - **Failure Mode**: Blocks merge; comments with list of protected files modified
-- **Dependencies**: Runs after `branch-name-validation.yml` (knows branch is valid)
+- **Dependencies**: On `pull_request`, runs after `branch-name-validation.yml` (knows branch is valid). On `push`, has no branch-name-validation dependency because `branch-name-validation.yml` runs only on `pull_request`.
 - **Override Process**: Requires CODEOWNERS approval (@ashley) via GitHub review
 
 ---
 
-## Evaluation Workflows (6 — Manual/Opt-In)
+## Evaluation Workflows (5 — Manual/Opt-In)
 
 ### validate-specifications.yml
 - **Trigger**: `workflow_dispatch` (manual)
@@ -219,6 +219,7 @@ This document defines the interface contracts for all 17 GitHub Actions workflow
 ## Execution Order & Dependencies
 
 ```
+Pull request execution:
 Phase 1: Gate Workflows (Parallel, ~3 min)
   ├─ lint.yml
   ├─ tests.yml
@@ -226,7 +227,7 @@ Phase 1: Gate Workflows (Parallel, ~3 min)
   ├─ workflow-lint.yml
   └─ branch-name-validation.yml
 
-Phase 2: Protected File Validation (Sequential, requires Phase 1, ~1 min)
+Phase 2: Protected File Validation (after branch-name-validation.yml, ~1 min)
   └─ locked-files-guard.yml
 
 Phase 3: PR Routing & Metadata (Sequential, parallel safe, ~1 min)
@@ -236,6 +237,8 @@ Phase 3: PR Routing & Metadata (Sequential, parallel safe, ~1 min)
 ```
 
 Total expected CI time: 5–6 minutes for all implementation workflows on a typical PR.
+
+On `push`, `locked-files-guard.yml` has no dependency on `branch-name-validation.yml`, which runs only on `pull_request`.
 
 ---
 
@@ -303,10 +306,10 @@ Total expected CI time: 5–6 minutes for all implementation workflows on a typi
 
 ## Success Criteria
 
-✅ **All implementation workflows (8) pass on every PR to develop/main**  
+✅ **All implementation workflows (9) pass on every PR to develop/main**\
 ✅ **No manual override of workflow gates required for valid PRs**  
 ✅ **Protected file modifications require CODEOWNERS approval**  
-✅ **Evaluation workflows (6) available for manual dispatch with clear results**  
+✅ **Evaluation workflows (5) available for manual dispatch with clear results**\
 ✅ **Deferred workflows documented with decision gates for future enablement**  
 ✅ **Total CI execution time < 10 minutes for typical PR**  
 

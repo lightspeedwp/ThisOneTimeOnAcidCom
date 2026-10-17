@@ -72,6 +72,7 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Output**: Committed code changes; progress tracking; validation reports
 - **Tools**: All tools (Read, Write, Edit, Bash, Agent, Artifact, etc.)
 - **Permissions**: `file_write` (unrestricted), `file_read` (unrestricted), `git_write`, `github_api` (PR creation, comments)
+- **Protection Scope**: No host-side pre-write control is configured for these permissions. The planned `locked-files-guard.yml` and required CODEOWNERS review gate merges after writes and commits; they do not prevent local edits or commits. Protected-file changes must receive CODEOWNERS approval (@ashley) via PR review before merge.
 - **Budget**: 200k+ tokens/session (hard limit per Q3, variable by task complexity)
 - **Called From**: User manual invocation after `speckit-tasks`
 - **Validation**: Each task must pass validation; tests pass; no protected-file violations
@@ -266,7 +267,7 @@ All budgets subject to hard enforcement post-Q3 per R7.3.
 ✅ **All ~5 skills registered with working `/skill-name` invocation**  
 ✅ **Agent tool access validated against repository permissions**  
 ✅ **Budget enforcement mechanism documented (host-side, per TOA-271)**  
-✅ **No agent can modify protected files without CODEOWNERS approval**  
+✅ **Agent changes to protected files cannot merge without CODEOWNERS approval once the merge gate is implemented and required**\
 ✅ **Spec Kit workflow (specify → clarify → plan → tasks → implement) functional**  
 ✅ **Agent output validates against specification contracts**  
 
