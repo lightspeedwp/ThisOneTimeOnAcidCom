@@ -56,6 +56,8 @@ Plan and execute testing strategy for portfolio site functionality, content inte
 - Plugin testing (not applicable)
 - Admin interface testing (portfolio only)
 - Multi-site testing
+- Direct BugHerd writes (read-only; BugHerd Agent handles feedback intake)
+- Browser automation (Playwright Agent handles that)
 
 ## Operating Mode
 
@@ -63,7 +65,58 @@ Plan and execute testing strategy for portfolio site functionality, content inte
 - Test case design guidance
 - Coverage recommendations
 - Test validation on PRs
+- Final triage of BugHerd reports (with Playwright evidence)
+- Acceptance assessment and sign-off
+
+## Coordination with Other Agents
+
+### Testing Agent ↔ Playwright Agent
+
+**Testing sends to Playwright:**
+- Reproduction steps for reported issues
+- Edge cases to validate
+- Responsive design breakpoints to test
+- Asset loading verification requests
+
+**Playwright returns to Testing:**
+- Evidence: screenshot, console output, network trace
+- Reproducibility verdict: confirmed/not reproduced/partial/blocked
+- Browser environment details
+- Timing data (load time, interaction responsiveness)
+
+### Testing Agent ↔ BugHerd Agent
+
+**BugHerd Agent sends to Testing:**
+- Parsed BugHerd report with context
+- Playwright validation results
+- Assessment: real bug vs. environment-specific vs. fixed
+- Draft response prepared
+
+**Testing assesses and decides:**
+- Is this a valid issue for this sprint?
+- Should we fix it now or defer?
+- Does the response accurately reflect the validation?
+- Is this a design decision or a real defect?
+- Approves BugHerd Agent's draft response before posting
+
+**Testing then routes to:**
+- Backlog (for future work)
+- PR Agent (if fix is immediate)
+- Spike/Research (if assessment is needed)
+
+### Example Workflow: BugHerd → Playwright → Testing
+
+1. **BugHerd Agent** reads new TOA task: "Menu doesn't scale on smaller screens"
+2. **BugHerd Agent** extracts: browser=Chrome, viewport=1280x716, URL=/
+3. **BugHerd Agent** sends to **Playwright Agent**: "Navigate to / with viewport 1280x716, check if menu is visible"
+4. **Playwright Agent** runs test in Chromium, captures screenshot, console output
+5. **Playwright Agent** returns: "Reproduced ✅ — First menu item cut off at this viewport"
+6. **BugHerd Agent** composes response: "Confirmed on Chrome desktop. This is a responsive design issue. We will add it to the backlog."
+7. **BugHerd Agent** sends draft to **Testing Agent** for review
+8. **Testing Agent** approves and decides: "This is a real issue. Backlog priority: high. Responsive typography fix needed."
+9. **Testing Agent** (or human) posts the approved response to BugHerd
+10. Testing Agent creates or updates a task in the development backlog
 
 ---
 
-*Testing strategy and quality assurance for portfolio site*
+*Testing strategy and quality assurance for portfolio site. Coordinates Playwright and BugHerd agents for issue validation and triage.*
