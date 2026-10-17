@@ -73,7 +73,7 @@ async function main() {
         process.exit(2);
       }
 
-      const localRef = parts[0];
+      let localRef = parts[0];
       const localObj = parts[1];
       const remoteRef = parts[2];
       const remoteObj = parts[3];
@@ -82,6 +82,19 @@ async function main() {
       if (/^0+$/.test(localObj)) {
         // Branch deletion, skip validation
         continue;
+      }
+
+      // Resolve HEAD to symbolic branch before checking ref type
+      if (localRef === 'HEAD') {
+        try {
+          const symbolicRef = execSync('git symbolic-ref HEAD', {
+            encoding: 'utf-8'
+          }).trim();
+          localRef = symbolicRef;
+        } catch (e) {
+          // Detached HEAD state, skip validation
+          continue;
+        }
       }
 
       // Skip tags and other non-branch refs
