@@ -2,7 +2,7 @@
 /**
  * @fileoverview Journal markdown parser and JSON exporter.
  *
- * Reads all .md files from journal-content/, validates frontmatter against
+ * Reads all .md files from content/journal/, validates frontmatter against
  * the shared Zod schema, splits body on --- page breaks, and writes
  * structured JSON payloads to export/journal/.
  *
@@ -10,9 +10,9 @@
  * entries (no body text) suitable for pagination/listing pages.
  *
  * Usage:
- *   pnpm journal:parse                   parse + export JSON (default)
- *   pnpm journal:validate                validate only — no file output (CI)
- *   pnpm journal:parse --verbose         verbose per-file output
+ *   npm run journal:parse                   parse + export JSON (default)
+ *   npm run journal:validate                validate only — no file output (CI)
+ *   npm run journal:parse -- --verbose      verbose per-file output
  *
  * Exit codes:
  *   0 — success (or validate-only with no errors)
@@ -42,7 +42,7 @@ import {
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 var PROJECT_ROOT = join(__dirname, '..');
-var JOURNAL_DIR = join(PROJECT_ROOT, 'journal-content');
+var JOURNAL_DIR = join(PROJECT_ROOT, 'content', 'journal');
 var EXPORT_DIR = join(PROJECT_ROOT, 'export', 'journal');
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -148,7 +148,7 @@ function checkSlugUniqueness(
 
 function collectMarkdownFiles(dir: string): string[] {
   if (!existsSync(dir)) {
-    fail('journal-content/ directory not found: ' + dir);
+    fail('content/journal/ directory not found: ' + dir);
     process.exit(2);
   }
 
@@ -301,11 +301,11 @@ function main() {
   var files = collectMarkdownFiles(JOURNAL_DIR);
 
   if (files.length === 0) {
-    warn('No .md files found in journal-content/');
+    warn('No .md files found in content/journal/');
     process.exit(0);
   }
 
-  info('Found ' + files.length + ' file(s) in journal-content/\n');
+  info('Found ' + files.length + ' file(s) in content/journal/\n');
 
   var allErrors: ValidationError[] = [];
   var allWarnings: string[] = [];

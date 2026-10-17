@@ -1,0 +1,22 @@
+{
+  "model": "claude-sonnet-5-5",
+  "reasoning_effort": "medium",
+  "fast_mode": false,
+  "tools": {
+    "enable_bash": true,
+    "enable_file_operations": true,
+    "enable_browser": false,
+    "enable_git": true,
+    "enable_agents": true
+  },
+  "workspace": {
+    "auto_save": true,
+    "memory_enabled": false
+  },
+  "integrations": {
+    "github": {
+      "enabled": true
+    }
+  },
+  "notes": "Copy this to .claude/settings.local.json and customize for your environment. Do NOT commit settings.local.json."
+}

@@ -2,7 +2,7 @@
 /**
  * @fileoverview Journal markdown link integrity checker.
  *
- * Extracts all Markdown links from journal-content/*.md files and:
+ * Extracts all Markdown links from content/journal/*.md files and:
  *   - Validates internal links (starting with /) point to existing files
  *     or known route patterns within the project
  *   - Reports external links as informational (not errors — they can't be
@@ -10,9 +10,9 @@
  *   - Reports broken internal links as errors (exit code 1)
  *
  * Usage:
- *   pnpm journal:check-links                 check all links
- *   pnpm journal:check-links --verbose       show all links including valid ones
- *   pnpm journal:check-links --external      also fetch external URLs (slow)
+ *   npm run journal:check-links                 check all links
+ *   npm run journal:check-links -- --verbose    show all links including valid ones
+ *   npm run journal:check-links -- --external   also fetch external URLs (slow)
  *
  * Exit codes:
  *   0 — no broken internal links found
@@ -33,7 +33,7 @@ var __dirname = dirname(fileURLToPath(import.meta.url));
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 var PROJECT_ROOT = join(__dirname, '..');
-var JOURNAL_DIR = join(PROJECT_ROOT, 'journal-content');
+var JOURNAL_DIR = join(PROJECT_ROOT, 'content', 'journal');
 
 var args = process.argv.slice(2);
 var VERBOSE = args.includes('--verbose');
@@ -147,7 +147,7 @@ function resolveInternal(link: FoundLink): LinkResult {
   // Try resolving as a filesystem path from project root
   var absPath = urlBase.startsWith('/')
     ? join(PROJECT_ROOT, urlBase)
-    : join(PROJECT_ROOT, 'journal-content', urlBase);
+    : join(PROJECT_ROOT, 'content', 'journal', urlBase);
 
   if (existsSync(absPath)) {
     verbose('[' + link.text + '](' + url + ') — file exists');
@@ -203,7 +203,7 @@ function checkExternal(link: FoundLink): Promise<LinkResult> {
 
 function collectMarkdownFiles(dir: string): string[] {
   if (!existsSync(dir)) {
-    fail('journal-content/ directory not found: ' + dir);
+    fail('content/journal/ directory not found: ' + dir);
     process.exit(2);
   }
   return readdirSync(dir)
@@ -222,7 +222,7 @@ async function main() {
   var files = collectMarkdownFiles(JOURNAL_DIR);
 
   if (files.length === 0) {
-    warn('No .md files found in journal-content/');
+    warn('No .md files found in content/journal/');
     process.exit(0);
   }
 
