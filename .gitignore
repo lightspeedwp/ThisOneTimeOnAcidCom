@@ -9,6 +9,7 @@ dist/
 dist-ssr/
 build/
 out/
+/export/
 .netlify/
 *.tsbuildinfo
 
@@ -93,3 +94,4 @@ test-results/
 # Empty install subfolder (leftover from initial init)
 thisonetimeonacid/
 src/app/reports/comprehensive-hero-architecture/routing-fix-FINAL.md
+playwright-report/
