@@ -221,11 +221,11 @@ This specification defines a tailored, maintainable governance system for ThisOn
 - `changelog-unified.yml` — CHANGELOG format and protection validation  
 - `labeling-unified.yml` — Automatic PR label assignment based on branch prefix  
 - `pr-template-routing.yml` — PR template routing based on branch type  
+- `locked-files-guard.yml` — Detect modifications to protected files (CHANGELOG.md, AGENTS.md, guidelines/*, ATTRIBUTIONS.md)  
 
-**R6.2** — Evaluation Workflows (validation/audit, gating policy clarified)  
-- **Always enabled:** `locked-files-guard.yml` — Detect modifications to protected files (CLAUDE.md, AGENTS.md, guidelines/*)  
-- **Manual/opt-in:** `validate-specifications.yml` (Spec Kit regression), `claude-guard-tests.yml` (AI code quality), `ruleset-drift.yml` (branch protection changes), `ai-feedback-validation.yml` (AI feedback guardrails), `ai-feedback.yml` (feedback collection)  
-- Rationale: Pragmatic approach protecting critical governance files without adding CI overhead for evaluation-only workflows  
+**R6.2** — Evaluation Workflows (validation/audit, manual/opt-in)  
+- `validate-specifications.yml` (Spec Kit regression), `claude-guard-tests.yml` (AI code quality), `ruleset-drift.yml` (branch protection changes), `ai-feedback-validation.yml` (AI feedback guardrails), `ai-feedback.yml` (feedback collection)  
+- Rationale: Evaluation workflows run on-demand; developers dispatch manually when auditing code quality or validating against organizational rules  
 
 **R6.3** — Deferred Workflows (not yet enabled; requires owner decision per workflow)  
 - `branch-validation-metrics-aggregator.yml` — Aggregate branch validation metrics  
@@ -553,6 +553,7 @@ This specification defines a tailored, maintainable governance system for ThisOn
 ### Session 2026-10-17
 
 - Q1: What mechanism enforces bundler compatibility rules (forbidden syntax: optional chaining, nullish coalescing, etc.) before code merges? → A: Option A: Automated ESLint rule in CI gating PR merge (hard enforcement via `eslint-plugin-figma-make` or equivalent)
+- Q2: Does `locked-files-guard.yml` run on every PR automatically, or only on-demand/manual trigger? → A: Option A: Always enabled (implementation workflow — runs on every PR)
 - Q: Which evaluation workflows should run by default on every PR, and which should be manual or opt-in? → A: Option B: Only `locked-files-guard` runs by default; others are manual/opt-in (pragmatic approach protecting critical governance files without CI overhead)
 - Q: Should the specification mandate a specific agent/skill set, or document current inventory as subject to change? → A: Option B: Document current baseline (~18 agents, ~5 skills) as inventory of Oct 2026; allow evolution per TOA-264/TOA-265 (flexible; reflects reality that agents and skills are active tooling)
 - Q: What enforcement mechanism for agent/skill budgets? → A: Option A: Host-side enforcement (hard limit — execution stops at budget boundary, preventing cost surprises)
