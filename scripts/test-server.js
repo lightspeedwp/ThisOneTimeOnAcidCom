@@ -5,17 +5,24 @@
  * Simulates Netlify's _redirects rules locally for routing validation.
  */
 
-import { createServer, getDistDir } from './lib/test-server-utils.js';
+import http from 'http';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { createRequestHandler } from './lib/test-server-handler.js';
 
 const PORT = process.env.PORT || 3000;
-const server = createServer();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DIST_DIR = path.join(__dirname, '../dist');
+
+const requestHandler = createRequestHandler(DIST_DIR);
+const server = http.createServer(requestHandler);
 
 /**
  * Start the test server and log connection details.
  */
 server.listen(PORT, () => {
   console.log(`Test server running at http://localhost:${PORT}`);
-  console.log(`Serving from: ${getDistDir()}`);
+  console.log(`Serving from: ${DIST_DIR}`);
   console.log('SPA fallback enabled: all routes fall back to index.html');
 });
 

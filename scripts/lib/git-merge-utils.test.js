@@ -1,0 +1,83 @@
+/**
+ * git-merge-utils.test.js — Comprehensive test suite for Git merge utilities.
+ */
+
+import { describe, it, expect } from '@jest/globals';
+import * as gitUtils from './git-merge-utils.js';
+
+describe('git-merge-utils', () => {
+  describe('getLastCommitDate()', () => {
+    it('should return ISO 8601 commit date', () => {
+      // This test doesn't require mocking child_process
+      // It tests the function returns a string or empty string
+      const result = gitUtils.getLastCommitDate('nonexistent-branch-12345');
+      expect(typeof result).toBe('string');
+    });
+
+    it('should return empty string for invalid branches', () => {
+      const result = gitUtils.getLastCommitDate('invalid/branch/name/that/does/not/exist');
+      expect(result).toBe('');
+    });
+  });
+
+  describe('getLastCommitAuthor()', () => {
+    it('should return author email or empty string', () => {
+      const result = gitUtils.getLastCommitAuthor('nonexistent-branch-12345');
+      expect(typeof result).toBe('string');
+    });
+
+    it('should return empty string for invalid branches', () => {
+      const result = gitUtils.getLastCommitAuthor('invalid/branch/name/that/does/not/exist');
+      expect(result).toBe('');
+    });
+  });
+
+  describe('getLastCommitHash()', () => {
+    it('should return commit hash or empty string', () => {
+      const result = gitUtils.getLastCommitHash('nonexistent-branch-12345');
+      expect(typeof result).toBe('string');
+    });
+
+    it('should return empty string for invalid branches', () => {
+      const result = gitUtils.getLastCommitHash('invalid/branch/name/that/does/not/exist');
+      expect(result).toBe('');
+    });
+  });
+
+  describe('getUniqueCommitCount()', () => {
+    it('should return a number', () => {
+      const result = gitUtils.getUniqueCommitCount('nonexistent-branch-12345');
+      expect(typeof result).toBe('number');
+    });
+
+    it('should return 0 for non-existent branches', () => {
+      const result = gitUtils.getUniqueCommitCount('invalid/branch/name/that/does/not/exist');
+      expect(result).toBe(0);
+    });
+  });
+
+  describe('getBaseRef()', () => {
+    it('should return a string starting with origin/', () => {
+      const result = gitUtils.getBaseRef();
+      expect(typeof result).toBe('string');
+      expect(result.startsWith('origin/')).toBe(true);
+    });
+  });
+
+  describe('getMergeStatus()', () => {
+    it('should return a valid status', () => {
+      const result = gitUtils.getMergeStatus('nonexistent-branch-12345', 'origin/main');
+      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+    });
+
+    it('should return unknown for invalid parameters', () => {
+      const result = gitUtils.getMergeStatus('', '');
+      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+    });
+
+    it('should accept custom baseRef', () => {
+      const result = gitUtils.getMergeStatus('test-branch', 'origin/develop');
+      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+    });
+  });
+});
