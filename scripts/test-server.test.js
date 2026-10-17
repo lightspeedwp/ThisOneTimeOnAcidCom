@@ -221,16 +221,21 @@ describe('test-server', () => {
     });
 
     it('handles directory traversal attempts securely', () => {
+      const originalDistDir = getDistDir();
+      setDistDir('/srv/app/dist');
+
       const res = {
         writeHead: jest.fn(),
         end: jest.fn(),
       };
-      const req = { url: '/../../../etc/passwd' };
+      const req = { url: '/../../../../etc/passwd' };
 
       requestHandler(req, res);
 
       expect(res.writeHead).toHaveBeenCalledWith(403);
       expect(res.end).toHaveBeenCalledWith('Forbidden');
+
+      setDistDir(originalDistDir);
     });
 
     it('falls back to index.html for non-existent files (SPA mode)', () => {
