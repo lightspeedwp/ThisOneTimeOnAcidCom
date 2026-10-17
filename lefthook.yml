@@ -25,6 +25,7 @@ pre-push:
   commands:
     branch-validate:
       run: npm run validate:push-branch
+      use_stdin: true
       skip:
         - merge
         - rebase

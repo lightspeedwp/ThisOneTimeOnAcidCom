@@ -10,7 +10,7 @@
  * Exit codes: 0=all branches valid, 1=invalid branch found, 2=execution error
  */
 
-import { execSync } from 'child_process';
+import { execSync, execFileSync } from 'child_process';
 import { fileURLToPath, pathToFileURL } from 'url';
 import readline from 'readline';
 import path from 'path';
@@ -34,8 +34,9 @@ function extractBranchName(ref) {
  */
 function validateBranch(branch) {
   try {
-    execSync(
-      `node ${VALIDATION_SCRIPT} --branch "${branch}"`,
+    execFileSync(
+      process.execPath,
+      [VALIDATION_SCRIPT, '--branch', branch],
       { stdio: 'pipe', encoding: 'utf-8' }
     );
     return { valid: true };
@@ -77,8 +78,8 @@ async function main() {
       const remoteRef = parts[2];
       const remoteObj = parts[3];
 
-      // Skip deletion refs (they're indicated by all zeros for the remote object)
-      if (remoteObj === '0000000000000000000000000000000000000000') {
+      // Skip deletion refs (they're indicated by all zeros for the local object)
+      if (/^0+$/.test(localObj)) {
         // Branch deletion, skip validation
         continue;
       }
@@ -94,8 +95,9 @@ async function main() {
       if (!result.valid) {
         // Get more detailed output by running validation again for display
         try {
-          execSync(
-            `node ${VALIDATION_SCRIPT} --branch "${branch}"`,
+          execFileSync(
+            process.execPath,
+            [VALIDATION_SCRIPT, '--branch', branch],
             { stdio: 'inherit', encoding: 'utf-8' }
           );
         } catch (e) {
@@ -112,11 +114,17 @@ async function main() {
           encoding: 'utf-8'
         }).trim();
 
+        // Skip validation if in detached HEAD state
+        if (currentBranch === 'HEAD') {
+          process.exit(0);
+        }
+
         const result = validateBranch(currentBranch);
         if (!result.valid) {
           try {
-            execSync(
-              `node ${VALIDATION_SCRIPT} --branch "${currentBranch}"`,
+            execFileSync(
+              process.execPath,
+              [VALIDATION_SCRIPT, '--branch', currentBranch],
               { stdio: 'inherit', encoding: 'utf-8' }
             );
           } catch (e) {
