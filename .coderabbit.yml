@@ -87,7 +87,7 @@ reviews:
         - Clear test naming that describes what is being tested (descriptive case names)
         - Proper setup and teardown (avoid side effects, use isolated test data)
         - Alignment with Figma Make bundler compatibility (no forbidden patterns in tests)
-        - Mock data sourced from src/app/data/mock/ only (never hardcode test data)
+        - Mock data sourced from src/app/data/mock/ for UI content rendered by tests; test-local fixtures allowed for boundary/failure cases and mocked inputs
         - No flaky or non-deterministic tests (use fixtures, not live data)
         - Test coverage for critical paths and accessibility requirements
         - Clear documentation of test purpose and special setup requirements
@@ -100,7 +100,7 @@ reviews:
         - Clear test descriptions using Arrange-Act-Assert pattern
         - Proper mocking of external dependencies (data, API calls, browser APIs)
         - Accessibility testing where relevant (keyboard nav, ARIA attributes)
-        - Mock data from src/app/data/mock/ only
+        - Mock data from src/app/data/mock/ for rendered UI content; test-local fixtures allowed for boundary/failure cases and mocked dependencies
         - No tests that depend on execution order
         - Clear assertions that test one thing per test case
         - Performance considerations for component rendering tests
