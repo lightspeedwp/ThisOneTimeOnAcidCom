@@ -192,6 +192,41 @@ describe('daysSince', () => {
   });
 });
 
+describe('ensureReportDir', () => {
+  it('creates report directory if it does not exist', () => {
+    const { join } = require('path');
+    const os = require('os');
+    const tempDir = join(os.tmpdir(), `toa-report-test-${Date.now()}-${Math.random()}`);
+
+    // Ensure directory doesn't exist
+    if (fs.existsSync(tempDir)) {
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    }
+
+    // Import ensureReportDir through testing the behavior
+    // Since it's not exported, we test it indirectly through writeMarkdownReport
+    // with a non-existent directory
+    const toDelete = [];
+    const toPreserve = [{ branch: 'main', category: 'KEEP', reason: 'default' }];
+    const errors = [];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeMarkdownReport(toDelete, toPreserve, errors, metrics, {
+      reportDir: tempDir,
+      inactiveDays: 30
+    });
+
+    // Verify directory was created
+    expect(fs.existsSync(tempDir)).toBe(true);
+    expect(fs.existsSync(reportPath)).toBe(true);
+
+    // Cleanup
+    if (fs.existsSync(tempDir)) {
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    }
+  });
+});
+
 describe('buildExcludeRegex', () => {
   it('includes default patterns (release, hotfix)', () => {
     const regex = buildExcludeRegex({ excludePatterns: null, verbose: false });
@@ -235,6 +270,30 @@ describe('formatBytes', () => {
     expect(formatBytes(1024)).toMatch(/1\.\d+ KB/);
     expect(formatBytes(1024 * 1024)).toMatch(/1\.\d+ MB/);
   });
+
+  it('handles small byte values', () => {
+    expect(formatBytes(1)).toBe('1 B');
+    expect(formatBytes(10)).toBe('10 B');
+    expect(formatBytes(100)).toBe('100 B');
+  });
+
+  it('handles kilobyte range', () => {
+    expect(formatBytes(1024)).toMatch(/1\.\d+ KB/);
+    expect(formatBytes(10240)).toMatch(/10\.\d+ KB/);
+    expect(formatBytes(102400)).toMatch(/100\.\d+ KB/);
+  });
+
+  it('handles megabyte range', () => {
+    expect(formatBytes(1024 * 1024)).toMatch(/1\.\d+ MB/);
+    expect(formatBytes(10 * 1024 * 1024)).toMatch(/10\.\d+ MB/);
+  });
+
+  it('caps formatting at megabytes', () => {
+    const gigabytes = 1024 * 1024 * 1024;
+    const formatted = formatBytes(gigabytes);
+    expect(formatted).toMatch(/\d+\.\d+ MB/);
+    expect(formatted).not.toContain('GB');
+  });
 });
 
 describe('estimateStorageFreedBytes', () => {
@@ -245,6 +304,30 @@ describe('estimateStorageFreedBytes', () => {
 
   it('handles zero commits', () => {
     expect(estimateStorageFreedBytes(0)).toBe(0);
+  });
+});
+
+describe('ensureReportDir - existing directory', () => {
+  it('does not error when directory already exists', () => {
+    const tempDir = createTempReportDir();
+
+    // Directory already exists from createTempReportDir
+    expect(fs.existsSync(tempDir)).toBe(true);
+
+    // Call writeMarkdownReport again - should not error
+    const toDelete = [];
+    const toPreserve = [{ branch: 'main', category: 'KEEP', reason: 'default' }];
+    const errors = [];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeMarkdownReport(toDelete, toPreserve, errors, metrics, {
+      reportDir: tempDir,
+      inactiveDays: 30
+    });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+
+    cleanupTempDir(tempDir);
   });
 });
 
@@ -625,6 +708,63 @@ describe('Report formatting', () => {
     expect(parsed.errors[0].branch).toBe('failed-branch');
     expect(parsed.errors[0].error).toBe('merge status check failed');
     expect(parsed.summary.errorCount).toBe(2);
+
+    cleanupTempDir(tempDir);
+  });
+
+  it('writeJsonReport handles empty deletion list', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [];
+    const toPreserve = [
+      { branch: 'main', category: 'KEEP', reason: 'protected_branch' },
+    ];
+    const errors = [];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeJsonReport(toDelete, toPreserve, errors, metrics, { reportDir: tempDir, inactiveDays: 30 });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    const parsed = JSON.parse(content);
+    expect(parsed.candidates).toHaveLength(0);
+    expect(parsed.retained).toHaveLength(1);
+    expect(parsed.summary.candidateCount).toBe(0);
+    expect(parsed.summary.keptCount).toBe(1);
+
+    cleanupTempDir(tempDir);
+  });
+
+  it('writeJsonReport with mixed categories', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [
+      {
+        branch: 'old-feature',
+        reason: 'stale',
+        lastCommitDate: '2025-01-01T00:00:00Z',
+        author: 'bot@test.com',
+        hash: 'abc123',
+        age: 45,
+        type: 'feature',
+        commitCount: 5,
+        estimatedStorageBytes: 50000,
+      },
+    ];
+    const toPreserve = [
+      { branch: 'main', category: 'KEEP', reason: 'protected_branch' },
+      { branch: 'ambiguous', category: 'DISCUSS', reason: 'unclear status' },
+    ];
+    const errors = [];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeJsonReport(toDelete, toPreserve, errors, metrics, { reportDir: tempDir, inactiveDays: 30 });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    const parsed = JSON.parse(content);
+    expect(parsed.candidates).toHaveLength(1);
+    expect(parsed.retained).toHaveLength(2);
+    expect(parsed.summary.keptCount).toBe(1);
+    expect(parsed.summary.discussCount).toBe(1);
 
     cleanupTempDir(tempDir);
   });
