@@ -3,23 +3,33 @@
 
 min_version: 1.5.3
 
-# Pre-commit: validate journal markdown structure on staged files
+# Pre-commit: validate branch naming and journal markdown
 pre-commit:
   parallel: false
   commands:
+    branch-validate:
+      run: npm run validate:branch-name
+      skip:
+        - merge
+        - rebase
     journal-validate:
       glob: "content/journal/*.md"
-      run: pnpm run journal:validate
+      run: npm run journal:validate
       skip:
         - merge
         - rebase
 
-# Pre-push: build verification before pushing to remote
+# Pre-push: validate branch naming and build verification before pushing to remote
 pre-push:
   parallel: false
   commands:
+    branch-validate:
+      run: npm run validate:branch-name
+      skip:
+        - merge
+        - rebase
     build:
-      run: pnpm run build
+      run: npm run build
       skip:
         - merge
         - rebase
