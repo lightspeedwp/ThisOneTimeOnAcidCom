@@ -309,4 +309,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   });
 }
 
-export { runTest, createResultsStructure, processAllTestCases, outputTestResults, main, TEST_CASES, EXPECTED_RESULTS };
+export { runTest, createResultsStructure, processAllTestCases, outputTestResults, main, TEST_CASES, EXPECTED_RESULTS, getPaths };

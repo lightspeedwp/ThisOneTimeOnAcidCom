@@ -667,4 +667,36 @@ describe('validate-push-branch', () => {
       }
     });
   });
+
+  describe('main() pre-push hook entrypoint', () => {
+    let originalExit;
+    let consoleErrors;
+
+    beforeEach(() => {
+      originalExit = process.exit;
+      consoleErrors = [];
+
+      process.exit = jest.fn();
+      jest.spyOn(console, 'error').mockImplementation((msg) => consoleErrors.push(msg));
+      jest.spyOn(childProcess, 'execFileSync').mockImplementation(() => 'mocked output');
+    });
+
+    afterEach(() => {
+      process.exit = originalExit;
+      console.error.mockRestore();
+      childProcess.execFileSync.mockRestore();
+    });
+
+    test('main is an async function', () => {
+      expect(typeof main).toBe('function');
+      const result = main();
+      expect(result instanceof Promise).toBe(true);
+    });
+
+    test('main() returns a promise that resolves or rejects', async () => {
+      const mainPromise = main();
+      expect(mainPromise).toHaveProperty('then');
+      expect(mainPromise).toHaveProperty('catch');
+    });
+  });
 });

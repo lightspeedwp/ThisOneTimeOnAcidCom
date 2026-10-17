@@ -266,5 +266,6 @@ export {
   resolveHeadRef,
   getCurrentBranch,
   processPushLines,
-  main
+  main,
+  getValidationScript
 };

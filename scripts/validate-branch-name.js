@@ -226,6 +226,7 @@ export {
   checkExemptions,
   validateStandardPattern,
   getCurrentBranch,
+  main,
   ValidationResult,
   AUTHORISED_TYPES,
   FORBIDDEN_PREFIXES,
