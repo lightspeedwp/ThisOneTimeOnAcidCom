@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+#### CodeRabbit Inheritance Configuration (CR-18)
+
+- **`.coderabbit.yml`**: Enabled `inheritance: true` to inherit shared CodeRabbit safeguards and configuration from central `lightspeedwp/coderabbit` repository
+- **`.coderabbit.yml`**: Local overrides preserved — `language: en-GB` and `reviews.profile: chill` remain project-specific
+- **`.coderabbit.yml`**: Corrected mock data path reference from `src/mockData/` to `src/app/data/mock/` to align with actual repository structure and path mapping conventions documented in AGENTS.md
+
+### Fixed
+
 #### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
 
 - **Comprehensive animation system** inspired by retro 80s CLI interfaces with 6 core animation types
