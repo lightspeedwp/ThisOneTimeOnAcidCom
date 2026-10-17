@@ -187,9 +187,10 @@ This specification defines a tailored, maintainable governance system for ThisOn
 
 **R5.3** — CODEOWNERS & Branch Protection (GH-003 approved: Enable + protection)  
 - Create `.github/CODEOWNERS` file with code area ownership mapping  
-  - @ashley: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`  
-  - @ashley: governance-critical areas  
-  - Delegate component ownership to appropriate teams/individuals  
+  - @ashley defines all CODEOWNERS entries (maintains consistency and approval control)  
+  - @ashley: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`, governance-critical areas  
+  - Process: Team/component leads request CODEOWNERS changes via GitHub issue with rationale; @ashley reviews and updates  
+  - Rationale: Centralized authority prevents unauthorized ownership claims; issue tracking documents delegation decisions  
 - Enable branch protection on `main`:  
   - Require PR review (require CODEOWNERS review for protected paths)  
   - Require status checks to pass before merge  
@@ -554,6 +555,7 @@ This specification defines a tailored, maintainable governance system for ThisOn
 
 - Q1: What mechanism enforces bundler compatibility rules (forbidden syntax: optional chaining, nullish coalescing, etc.) before code merges? → A: Option A: Automated ESLint rule in CI gating PR merge (hard enforcement via `eslint-plugin-figma-make` or equivalent)
 - Q2: Does `locked-files-guard.yml` run on every PR automatically, or only on-demand/manual trigger? → A: Option A: Always enabled (implementation workflow — runs on every PR)
+- Q3: Who decides CODEOWNERS entries? → A: Option A: @ashley defines all CODEOWNERS entries; changes require issue + approval (maintains consistency and approval control)
 - Q: Which evaluation workflows should run by default on every PR, and which should be manual or opt-in? → A: Option B: Only `locked-files-guard` runs by default; others are manual/opt-in (pragmatic approach protecting critical governance files without CI overhead)
 - Q: Should the specification mandate a specific agent/skill set, or document current inventory as subject to change? → A: Option B: Document current baseline (~18 agents, ~5 skills) as inventory of Oct 2026; allow evolution per TOA-264/TOA-265 (flexible; reflects reality that agents and skills are active tooling)
 - Q: What enforcement mechanism for agent/skill budgets? → A: Option A: Host-side enforcement (hard limit — execution stops at budget boundary, preventing cost surprises)
