@@ -307,7 +307,7 @@ npm run test:e2e
 ## Document References
 
 - **Agent Definitions:** `.claude/agents/{testing,playwright,bugherd}-agent.md`
-- **Handoff Protocol:** `docs/agent-handoff-protocol.md` (this directory)
+- **Handoff Protocol:** `docs/AgentHandoffProtocol.md` (this directory)
 - **Test Configuration:** `playwright.config.ts`, `e2e/routing.spec.ts`
 - **Repository Guidelines:** `AGENTS.md`, `guidelines/`
 
