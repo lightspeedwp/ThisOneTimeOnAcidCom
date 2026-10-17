@@ -206,12 +206,14 @@ function createResultsStructure() {
 
 /**
  * Process all test cases and populate results.
- * Pure function for testing; does not perform I/O.
+ * Uses the case executor to validate branches and aggregate their results.
+ * The default executor launches child processes; tests can inject a stub.
  * @param {object} testCases - Test cases organized by category
  * @param {object} expectedResults - Expected result type for each category
+ * @param {typeof runTest} executeCase - Case executor, defaults to runTest
  * @returns {{results: object, categoryResults: object[]}}
  */
-function processAllTestCases(testCases, expectedResults) {
+function processAllTestCases(testCases, expectedResults, executeCase = runTest) {
   const results = createResultsStructure();
   const categoryResults = [];
 
@@ -226,7 +228,7 @@ function processAllTestCases(testCases, expectedResults) {
 
     for (const branch of branches) {
       results.summary.total++;
-      const testResult = runTest(branch, expectedType);
+      const testResult = executeCase(branch, expectedType);
       testResult.passed ? results.summary.passed++ : results.summary.failed++;
       results.details[category].cases.push({
         branch,

@@ -13,6 +13,7 @@ import {
   main
 } from './validate-push-branch.js';
 import { Readable } from 'stream';
+import childProcess from 'child_process';
 
 describe('validate-push-branch', () => {
 
@@ -161,6 +162,11 @@ describe('validate-push-branch', () => {
       expect(shouldSkipRef('refs/heads/feat/my-feature', 'abc123')).toBe(false);
       expect(shouldSkipRef('refs/heads/main', 'def456')).toBe(false);
     });
+
+    test('allows HEAD to be resolved unless it is a deletion', () => {
+      expect(shouldSkipRef('HEAD', 'abc123')).toBe(false);
+      expect(shouldSkipRef('HEAD', '0000000000000000000000000000000000000000')).toBe(true);
+    });
   });
 
   describe('resolveHeadRef', () => {
@@ -193,6 +199,25 @@ describe('validate-push-branch', () => {
   });
 
   describe('processPushLines', () => {
+    test('resolves and validates the current branch for a HEAD push', () => {
+      const currentBranch = 'feat/current-branch';
+      const symbolicRef = jest.spyOn(childProcess, 'execSync')
+        .mockReturnValue(`refs/heads/${currentBranch}\n`);
+
+      try {
+        const result = processPushLines([
+          'HEAD abc123 refs/heads/feat/remote-target def456'
+        ]);
+
+        expect(symbolicRef).toHaveBeenCalledWith('git symbolic-ref HEAD', { encoding: 'utf-8' });
+        expect(result.branches).toEqual([currentBranch]);
+        expect(result.hasInvalidBranch).toBe(false);
+        expect(result.invalidBranches).toEqual([]);
+      } finally {
+        symbolicRef.mockRestore();
+      }
+    });
+
     test('processes valid push lines', () => {
       const lines = [
         'refs/heads/feat/my-feature abc123 refs/heads/feat/my-feature abc123'

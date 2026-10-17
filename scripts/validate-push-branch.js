@@ -90,8 +90,8 @@ function shouldSkipRef(localRef, localObj) {
   if (/^0+$/.test(localObj)) {
     return true;
   }
-  // Skip tags and other non-branch refs
-  if (!localRef.startsWith('refs/heads/')) {
+  // Skip tags and other non-branch refs, allowing HEAD to be resolved later
+  if (localRef !== 'HEAD' && !localRef.startsWith('refs/heads/')) {
     return true;
   }
   return false;
@@ -135,7 +135,7 @@ function getCurrentBranch() {
 
 /**
  * Process a batch of pre-push input lines and validate branches.
- * Pure function for testing; does not perform I/O.
+ * Resolves HEAD with Git and validates each branch in a child process.
  * @param {string[]} lines - Array of pre-push input lines
  * @returns {{branches: string[], hasInvalidBranch: boolean, invalidBranches: string[]}}
  */

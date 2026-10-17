@@ -271,6 +271,17 @@ describe('run-validator-tests', () => {
   });
 
   describe('processAllTestCases', () => {
+    let executeCase;
+
+    beforeEach(() => {
+      executeCase = jest.fn((branch, expectedType) => ({
+        branch,
+        passed: true,
+        output: '',
+        exitCode: expectedType === 'invalid' ? 1 : 0
+      }));
+    });
+
     test('returns results and categoryResults objects', () => {
       const minimalTestCases = {
         'Test Category': ['feat/test']
@@ -279,7 +290,7 @@ describe('run-validator-tests', () => {
         'Test Category': 'valid'
       };
 
-      const result = processAllTestCases(minimalTestCases, minimalExpected);
+      const result = processAllTestCases(minimalTestCases, minimalExpected, executeCase);
       expect(result).toHaveProperty('results');
       expect(result).toHaveProperty('categoryResults');
     });
@@ -294,9 +305,10 @@ describe('run-validator-tests', () => {
         'Invalid Branches': 'invalid'
       };
 
-      const { results } = processAllTestCases(minimalTestCases, minimalExpected);
+      const { results } = processAllTestCases(minimalTestCases, minimalExpected, executeCase);
       expect(results.summary.total).toBe(3);
-      expect(results.summary.passed + results.summary.failed).toBe(3);
+      expect(results.summary.passed).toBe(3);
+      expect(results.summary.failed).toBe(0);
     });
 
     test('categorizes test results correctly', () => {
@@ -307,7 +319,7 @@ describe('run-validator-tests', () => {
         'Valid Test': 'valid'
       };
 
-      const { results } = processAllTestCases(minimalTestCases, minimalExpected);
+      const { results } = processAllTestCases(minimalTestCases, minimalExpected, executeCase);
       expect(results.details).toHaveProperty('Valid Test');
       expect(results.details['Valid Test'].cases.length).toBe(1);
     });
@@ -320,7 +332,7 @@ describe('run-validator-tests', () => {
         'Test Category': 'valid'
       };
 
-      const { results } = processAllTestCases(minimalTestCases, minimalExpected);
+      const { results } = processAllTestCases(minimalTestCases, minimalExpected, executeCase);
       expect(results.summary.byCategory).toHaveProperty('Test Category');
       expect(results.summary.byCategory['Test Category']).toHaveProperty('total');
       expect(results.summary.byCategory['Test Category']).toHaveProperty('passed');
@@ -328,7 +340,7 @@ describe('run-validator-tests', () => {
     });
 
     test('returns categoryResults array', () => {
-      const { categoryResults } = processAllTestCases(TEST_CASES, EXPECTED_RESULTS);
+      const { categoryResults } = processAllTestCases(TEST_CASES, EXPECTED_RESULTS, executeCase);
       expect(Array.isArray(categoryResults)).toBe(true);
       expect(categoryResults.length).toBeGreaterThan(0);
 
@@ -337,6 +349,37 @@ describe('run-validator-tests', () => {
         expect(cat).toHaveProperty('passed');
         expect(cat).toHaveProperty('total');
       });
+    });
+
+    test('passes cases to the executor and aggregates failed results', () => {
+      executeCase.mockReturnValueOnce({ passed: false, exitCode: 1 });
+      const { results, categoryResults } = processAllTestCases({
+        'Valid Test': ['feat/test'],
+        'Invalid Test': ['claude/bad']
+      }, {
+        'Valid Test': 'valid',
+        'Invalid Test': 'invalid'
+      }, executeCase);
+
+      expect(executeCase).toHaveBeenCalledTimes(2);
+      expect(executeCase).toHaveBeenNthCalledWith(1, 'feat/test', 'valid');
+      expect(executeCase).toHaveBeenNthCalledWith(2, 'claude/bad', 'invalid');
+      expect(results.summary).toEqual({
+        total: 2,
+        passed: 1,
+        failed: 1,
+        byCategory: {
+          'Valid Test': { total: 1, passed: 0, failed: 1 },
+          'Invalid Test': { total: 1, passed: 1, failed: 0 }
+        }
+      });
+      expect(results.details['Valid Test'].cases).toEqual([
+        { branch: 'feat/test', passed: false, exitCode: 1 }
+      ]);
+      expect(categoryResults).toEqual([
+        { category: 'Valid Test', passed: 0, total: 1 },
+        { category: 'Invalid Test', passed: 1, total: 1 }
+      ]);
     });
   });
 
