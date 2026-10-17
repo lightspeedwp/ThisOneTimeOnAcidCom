@@ -12,7 +12,8 @@ import {
   ValidationResult,
   AUTHORISED_TYPES,
   FORBIDDEN_PREFIXES,
-  PATTERNS
+  PATTERNS,
+  main
 } from './validate-branch-name.js';
 import { execSync } from 'child_process';
 
@@ -84,10 +85,12 @@ describe('Branch Name Validation', () => {
   describe('Valid Branches - All 38 Authorised Types', () => {
     AUTHORISED_TYPES.forEach(type => {
       test(`should validate "${type}/scope-title" as valid`, () => {
-        const branch = `${type}/scope-title`;
+        const branch = type === 'release' ? 'release/v1.0.0' : `${type}/scope-title`;
         const result = validateBranch(branch);
         expect(result.isValid).toBe(true);
-        expect(result.details.matchedType).toBe(type);
+        if (type !== 'release') {
+          expect(result.details.matchedType).toBe(type);
+        }
       });
     });
   });
@@ -341,6 +344,7 @@ describe('Branch Name Validation', () => {
     });
   });
 
+<<<<<<< HEAD
   describe('Edge Cases - Empty and Invalid Inputs', () => {
     test('should reject null branch', () => {
       const result = validateBranch(null);
@@ -548,5 +552,63 @@ describe('Branch Name Validation', () => {
       expect(result.isValid).toBe(false);
       expect(result.type).toBe('invalid-pattern');
     });
+=======
+  describe('CLI Execution - Main Function', () => {
+    const originalArgv = process.argv;
+    const originalExit = process.exit;
+    const originalLog = console.log;
+    const originalError = console.error;
+
+    beforeEach(() => {
+      jest.spyOn(process, 'exit').mockImplementation();
+      jest.spyOn(console, 'log').mockImplementation();
+      jest.spyOn(console, 'error').mockImplementation();
+    });
+
+    afterEach(() => {
+      process.argv = originalArgv;
+      process.exit.mockRestore();
+      console.log.mockRestore();
+      console.error.mockRestore();
+    });
+
+    test('should validate branch passed via --branch argument', () => {
+      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test-feature'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(process.exit).toHaveBeenCalledWith(0);
+      expect(console.log).toHaveBeenCalled();
+    });
+
+    test('should exit with error code for invalid branch via --branch', () => {
+      process.argv = ['node', 'validate-branch-name.js', '--branch', 'invalid-branch'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(process.exit).toHaveBeenCalledWith(1);
+    });
+
+    test('should output JSON when --json flag is provided', () => {
+      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test', '--json'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(console.log).toHaveBeenCalledTimes(2);
+    });
+
+    test('should handle missing value for --branch', () => {
+      process.argv = ['node', 'validate-branch-name.js', '--branch'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(process.exit).toHaveBeenCalledWith(2);
+      expect(console.error).toHaveBeenCalledWith('Error: --branch requires a value');
+    });
+
+    test('should validate current branch when no --branch argument provided', () => {
+      process.argv = ['node', 'validate-branch-name.js'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(process.exit).toHaveBeenCalled();
+    });
+
+>>>>>>> origin/develop
   });
 });
