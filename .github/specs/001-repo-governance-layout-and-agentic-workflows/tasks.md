@@ -118,39 +118,39 @@
 
 ### Implementation for WS-254
 
-- [ ] T018 [WS-254] Verify Spec Kit feature directory routing (.github/specs/ canonical)
+- [x] T018 [WS-254] Verify Spec Kit feature directory routing (.github/specs/ canonical)
   - Confirm `.specify/init-options.json` sets `specifyFeatureDirectory: ".github/specs/"`
   - Run Spec Kit setup to create a numbered feature directory (e.g., 002-test-feature)
   - Verify sequential numbering works correctly (001 exists, next is 002)
   - Document path resolution in `.specify/memory/spec-kit-routing.md`
-- [ ] T019 [WS-254] Create Spec Kit regression test suite in tests/speckit.test.mjs
+- [x] T019 [WS-254] Create Spec Kit regression test suite in tests/speckit.test.mjs
   - Document expected baseline: 103 pass, 1 fail (template resolution edge case)
   - Create test harness that runs create → plan → tasks pipeline
   - Verify no new test failures introduced by infrastructure changes
   - Add comment explaining known failure and approved deferral
   - Run `node --test tests/speckit.test.mjs` and confirm results match baseline
-- [ ] T020 [WS-254] Document Spec Kit path resolution for contributors
+- [x] T020 [WS-254] Document Spec Kit path resolution for contributors
   - Update `CONTRIBUTING.md` with "Using Spec Kit" section
   - Document the three phases: `/speckit-specify` → `/speckit-clarify` → `/speckit-plan` → `/speckit-tasks`
   - Link to `.github/specs/` as canonical location
   - Include example: "Create spec → Plan → Decompose tasks → Implement"
   - Link to `.specify/` configuration details
-- [ ] T021 [P] [WS-254] [TOA-255] Organize planning documents in `.github/specs/001-repo-governance-layout-and-agentic-workflows/`
+- [x] T021 [P] [WS-254] [TOA-255] Organize planning documents in `.github/specs/001-repo-governance-layout-and-agentic-workflows/`
   - Confirm structure: spec.md, plan.md, research.md, tasks.md (this file), checklists/, contracts/, data-model.md, quickstart.md
   - Ensure all Phase 0–1 outputs are in correct location
   - Create `CATALOG.md` indexing all specifications with status and links
   - Link CATALOG.md from `.github/README.md`
-- [ ] T022 [P] [WS-254] [TOA-256] Organize reports in `.github/reports/`
+- [x] T022 [P] [WS-254] [TOA-256] Organize reports in `.github/reports/`
   - Create directory structure: `.github/reports/{category}/` (e.g., `audit/`, `validation/`, `metrics/`)
   - Move any existing reports into appropriate categories
   - Create `.github/reports/README.md` indexing all reports
   - Document report naming convention: `{date}-{topic}.md` (e.g., `2026-10-17-path-inventory.md`)
-- [ ] T023 [P] [WS-254] [TOA-257] Segregate portable vs. repository-specific prompts
+- [x] T023 [P] [WS-254] [TOA-257] Segregate portable vs. repository-specific prompts
   - Audit `prompts/` directory for repository-specific prompts
   - Document which prompts are reusable (portable) vs. TOA-241-specific
   - Move TOA-241-specific prompts to `.github/prompts/` (if needed)
   - Create `prompts/README.md` explaining portable vs. specific distinction
-- [ ] T024 [P] [WS-254] [TOA-259] Organize task documents in `tasks/`
+- [x] T024 [P] [WS-254] [TOA-259] Organize task documents in `tasks/`
   - Confirm `tasks/task-list.md` is never deleted (protected file per AGENTS.md)
   - Create subdirectory structure: `tasks/governance/`, `tasks/features/`, etc.
   - Document task organization in `tasks/README.md`
