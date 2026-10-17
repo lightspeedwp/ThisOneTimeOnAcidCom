@@ -7,6 +7,9 @@ export default {
   testEnvironment: 'node',
   testMatch: ['**/scripts/**/*.test.js'],
   moduleFileExtensions: ['js', 'json'],
+  transform: {
+    '^.+\\.js$': ['@swc/jest'],
+  },
   collectCoverageFrom: [
     'scripts/**/*.js',
     '!scripts/**/*.test.js'
