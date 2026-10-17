@@ -1,6 +1,10 @@
 /**
  * Jest test runner configuration for ThisOneTimeOnAcidCom.
  * Validates branch names, validates scripts, and runs test suites.
+ *
+ * Module handling:
+ * - @swc/jest transforms ESM import/export syntax for Jest.
+ * - The current test:unit command does not run tests as native ESM.
  */
 
 export default {

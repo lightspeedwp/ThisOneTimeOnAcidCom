@@ -1,0 +1,32 @@
+labels: ['type:documentation', 'area:showcase']
+title: "[Show & Tell] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share your creations, findings, or interesting use cases with the community!
+  - type: textarea
+    id: title_description
+    attributes:
+      label: "What are you sharing?"
+      description: "Give a brief title and description of your project or finding"
+      placeholder: "I built... / I discovered... / I wrote..."
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: "Details"
+      description: "Provide more information about what you've created or discovered"
+      placeholder: "Here's how it works... / The key insight was..."
+  - type: textarea
+    id: links
+    attributes:
+      label: "Links and resources"
+      description: "Links to your project, blog post, code, etc."
+      placeholder: "GitHub: ... | Blog: ... | Live demo: ..."
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Additional notes"
+      description: "Any other context or thanks"
