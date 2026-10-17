@@ -341,6 +341,47 @@ describe('Branch Name Validation', () => {
     });
   });
 
+  describe('Edge Cases - Empty and Invalid Inputs', () => {
+    test('should reject null branch', () => {
+      const result = validateBranch(null);
+      expect(result.isValid).toBe(false);
+      expect(result.message).toContain('empty or invalid');
+    });
+
+    test('should reject undefined branch', () => {
+      const result = validateBranch(undefined);
+      expect(result.isValid).toBe(false);
+      expect(result.message).toContain('empty or invalid');
+    });
+
+    test('should reject empty string', () => {
+      const result = validateBranch('');
+      expect(result.isValid).toBe(false);
+      expect(result.message).toContain('empty or invalid');
+    });
+
+    test('should reject numeric branch', () => {
+      const result = validateBranch(123);
+      expect(result.isValid).toBe(false);
+      expect(result.message).toContain('empty or invalid');
+    });
+
+    test('should reject boolean branch', () => {
+      const result = validateBranch(true);
+      expect(result.isValid).toBe(false);
+    });
+
+    test('should reject object branch', () => {
+      const result = validateBranch({ branch: 'feat/test' });
+      expect(result.isValid).toBe(false);
+    });
+
+    test('should reject array branch', () => {
+      const result = validateBranch(['feat', 'test']);
+      expect(result.isValid).toBe(false);
+    });
+  });
+
   describe('Utility Functions - checkForbiddenPrefix', () => {
     test('should reject all forbidden prefixes', () => {
       for (const prefix of FORBIDDEN_PREFIXES) {
