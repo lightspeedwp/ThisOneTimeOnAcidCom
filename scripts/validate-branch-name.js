@@ -209,6 +209,12 @@ export function parseArgs(args) {
   return { branchName: null, error: null };
 }
 
+/**
+ * Validate the explicit --branch value or current Git branch and print the result.
+ * Include structured output when --json is supplied. Exit with 0 for a valid
+ * branch, 1 for an invalid branch, or 2 for argument or execution errors.
+ * @returns {void}
+ */
 function main() {
   try {
     const args = process.argv.slice(2);
