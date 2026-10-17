@@ -2,7 +2,7 @@
  * Tests for branch validation test runner
  */
 
-import { createResultsStructure, processAllTestCases, outputTestResults, TEST_CASES, EXPECTED_RESULTS } from './run-validator-tests.js';
+import { createResultsStructure, processAllTestCases, outputTestResults, TEST_CASES, EXPECTED_RESULTS, runTest } from './run-validator-tests.js';
 
 describe('run-validator-tests', () => {
   describe('test case organization', () => {
@@ -428,6 +428,75 @@ describe('run-validator-tests', () => {
 
       const summary = logs.find(log => log.includes('Success Rate'));
       expect(summary).toContain('75.0%');
+
+      console.log = originalLog;
+    });
+  });
+
+  describe('outputTestResults', () => {
+    test('outputs emoji indicators for each passed/failed test', () => {
+      const results = { summary: { total: 3, passed: 2, failed: 1 } };
+      const categoryResults = [{ category: 'Test', passed: 2, total: 3 }];
+
+      const logs = [];
+      const originalWrite = process.stdout.write;
+      process.stdout.write = jest.fn((...args) => {
+        logs.push(args[0]);
+      });
+
+      const originalLog = console.log;
+      console.log = jest.fn();
+
+      outputTestResults(results, categoryResults);
+
+      expect(logs.length).toBeGreaterThan(0);
+      const emojiOutput = logs.join('');
+      expect(emojiOutput).toContain('✅');
+
+      process.stdout.write = originalWrite;
+      console.log = originalLog;
+    });
+
+    test('outputs ❌ for failed tests', () => {
+      const results = { summary: { total: 3, passed: 1, failed: 2 } };
+      const categoryResults = [{ category: 'Test', passed: 1, total: 3 }];
+
+      const logs = [];
+      const originalWrite = process.stdout.write;
+      process.stdout.write = jest.fn((...args) => {
+        logs.push(args[0]);
+      });
+
+      const originalLog = console.log;
+      console.log = jest.fn();
+
+      outputTestResults(results, categoryResults);
+
+      const emojiOutput = logs.join('');
+      expect(emojiOutput).toContain('❌');
+
+      process.stdout.write = originalWrite;
+      console.log = originalLog;
+    });
+
+    test('outputs results for all categories', () => {
+      const results = {
+        summary: { total: 5, passed: 5, failed: 0 }
+      };
+      const categoryResults = [
+        { category: 'Valid', passed: 2, total: 2 },
+        { category: 'Invalid', passed: 3, total: 3 }
+      ];
+
+      const logs = [];
+      const originalLog = console.log;
+      console.log = jest.fn((...args) => {
+        logs.push(args.join(' '));
+      });
+
+      outputTestResults(results, categoryResults);
+
+      expect(logs.length).toBeGreaterThanOrEqual(4);
 
       console.log = originalLog;
     });
