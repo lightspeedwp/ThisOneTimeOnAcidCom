@@ -6,7 +6,7 @@
  * Records results to validation-report.json
  */
 
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import path from 'path';
@@ -153,14 +153,20 @@ const EXPECTED_RESULTS = {
 
 function runTest(branch, expectedType) {
   try {
-    const output = execSync(
-      `node ${path.join(__dirname, 'validate-branch-name.js')} --branch "${branch}"`,
+    const output = execFileSync(
+      process.execPath,
+      [path.join(__dirname, 'validate-branch-name.js'), '--branch', branch],
       { encoding: 'utf-8', stdio: 'pipe' }
     );
-    return { passed: true, output, exitCode: 0, branch };
+    return {
+      passed: expectedType === 'valid' || expectedType === 'exemption',
+      output,
+      exitCode: 0,
+      branch
+    };
   } catch (error) {
     return {
-      passed: expectedType === 'invalid',
+      passed: expectedType === 'invalid' && error.status === 1,
       output: error.stderr || error.message,
       exitCode: error.status,
       branch
