@@ -11,22 +11,34 @@ import { fileURLToPath } from 'url';
 import { createRequestHandler } from './lib/test-server-handler.js';
 
 const PORT = process.env.PORT || 3000;
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DIST_DIR = path.join(__dirname, '../dist');
-
-const requestHandler = createRequestHandler(DIST_DIR);
-const server = http.createServer(requestHandler);
 
 /**
- * Start the test server and log connection details.
+ * Start the test server.
+ *
+ * @param {number} [port=PORT] - Port to listen on
+ * @returns {http.Server} The created server instance
  */
-server.listen(PORT, () => {
-  console.log(`Test server running at http://localhost:${PORT}`);
-  console.log(`Serving from: ${DIST_DIR}`);
-  console.log('SPA fallback enabled: all routes fall back to index.html');
-});
+export function startServer(port = PORT) {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const DIST_DIR = path.join(__dirname, '../dist');
+  const requestHandler = createRequestHandler(DIST_DIR);
+  const server = http.createServer(requestHandler);
 
-process.on('SIGINT', () => {
-  console.log('Test server stopped');
-  process.exit(0);
-});
+  server.listen(port, () => {
+    console.log(`Test server running at http://localhost:${port}`);
+    console.log(`Serving from: ${DIST_DIR}`);
+    console.log('SPA fallback enabled: all routes fall back to index.html');
+  });
+
+  process.on('SIGINT', () => {
+    console.log('Test server stopped');
+    process.exit(0);
+  });
+
+  return server;
+}
+
+// Only start the server if this is the entry point
+if (import.meta.url === `file://${process.argv[1]}`) {
+  startServer();
+}

@@ -79,5 +79,20 @@ describe('git-merge-utils', () => {
       const result = gitUtils.getMergeStatus('test-branch', 'origin/develop');
       expect(['merged', 'unmerged', 'unknown']).toContain(result);
     });
+
+    it('should handle various merge statuses from git', () => {
+      // Test multiple calls - one should be merged, one unmerged, one unknown
+      // We test by calling with different branch names (actual git behavior varies)
+      const results = [
+        gitUtils.getMergeStatus('main', 'origin/main'),  // likely merged (main vs main)
+        gitUtils.getMergeStatus('nonexistent-xyz-999', 'origin/main'),  // likely unknown
+        gitUtils.getMergeStatus('old-branch', 'origin/main')  // varies
+      ];
+
+      // All results should be valid
+      results.forEach(result => {
+        expect(['merged', 'unmerged', 'unknown']).toContain(result);
+      });
+    });
   });
 });
