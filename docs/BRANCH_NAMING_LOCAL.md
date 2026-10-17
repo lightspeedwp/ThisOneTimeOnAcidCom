@@ -49,7 +49,7 @@ Examples:
 | `deps` | Dependency updates | `deps/upgrade-packages` |
 | `audit` | Compliance review | `audit/code-review` |
 
-**[Full type list →](../​.claude/skills/branch-validation/SKILL.md#valid-type-values)**
+**[Full type list →](../.claude/skills/branch-validation/SKILL.md#valid-type-values)**
 
 ## Naming Rules
 

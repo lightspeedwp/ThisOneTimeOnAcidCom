@@ -23,8 +23,8 @@ This guide covers using Git worktrees with Claude Code to work on multiple branc
 ### 1. Verify Git Worktree Support
 
 ```bash
-git worktree --version
-# Output: git worktree version X.Y.Z
+git --version
+# Output: git version X.Y.Z
 ```
 
 If the command fails, upgrade Git to 2.6+.
@@ -168,14 +168,16 @@ git worktree add --b proto/new-state-management ../.gitworktrees/experiment orig
 
 Each worktree has its own:
 - Working directory (separate from other worktrees)
-- Staged changes (git index)
+- Staged changes (git index per worktree, stored via `git rev-parse --git-path index`)
 - Untracked files
-- Local configuration (`.git/config` per worktree)
+- Local configuration
 
 Each worktree shares:
 - Object database (`.git/objects`)
-- Refs (branches, tags)
-- Hooks (`.git/hooks`)
+- Repository configuration (`.git/config` shared across worktrees)
+- Refs (branches, tags, shared by default)
+- Hooks (`.git/hooks` shared across worktrees)
+- Stash storage (by default, but can be isolated with worktree-specific setup)
 
 ### Git State Isolation
 
@@ -183,12 +185,13 @@ Each worktree maintains separate:
 - Current branch checkout
 - Uncommitted changes
 - Staged files
-- Git stash (per worktree)
+- Git index (per worktree; use `git rev-parse --git-path index` to locate it)
 
 Each worktree can read (but must not force-push):
 - All branches and tags
 - Commit history
 - Remote tracking branches
+- Shared stash storage (by default; use caution when multiple worktrees access stash)
 
 ### Naming Isolation
 
@@ -349,13 +352,15 @@ git worktree list
 echo ""
 echo "Validating each worktree..."
 
-for line in $(git worktree list | grep -v '.git' | awk '{print $1}'); do
-  echo "Checking $line..."
-  cd "$line"
-  git branch --show-current
-  node scripts/validate-branch-name.js
-  echo "✅ $line is valid"
-  cd -
+git worktree list --porcelain | awk '{print $1}' | while read worktree_path; do
+  if [ -n "$worktree_path" ]; then
+    echo "Checking $worktree_path..."
+    cd "$worktree_path" || continue
+    git branch --show-current
+    node scripts/validate-branch-name.js
+    echo "✅ $worktree_path is valid"
+    cd - > /dev/null || true
+  fi
 done
 
 echo ""
