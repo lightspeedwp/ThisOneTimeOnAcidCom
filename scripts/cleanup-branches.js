@@ -49,12 +49,15 @@ function log(level, message) {
 }
 
 /**
- * Write an error message to stdout and any supplied error detail to stderr
- * when verbose mode is enabled.
+ * Always write an error message to stdout. Write any supplied error detail
+ * to stderr only when verbose mode is enabled.
+ * @param {string} message - The error message
+ * @param {Error|string} [error] - Optional error detail
+ * @param {boolean} [verbose] - Whether to log error details (defaults to opts.verbose)
  */
-function logError(message, error) {
+function logError(message, error, verbose = opts.verbose) {
   log('error', message);
-  if (error && opts.verbose) {
+  if (error && verbose) {
     console.error(`    ${error.message || error}`);
   }
 }
@@ -64,13 +67,16 @@ function logError(message, error) {
 // ============================================================================
 
 /**
- * Read the first matching --name=value or --name argument from the command line.
+ * Read the first matching --name=value or --name argument from argv.
  * Return the value string, 'true' for a bare flag, or defaultValue if absent.
+ *
+ * @param {string[]} [argv=process.argv] - Argument list whose first two entries
+ *   (the executable and script paths) are ignored
  */
-function getArg(name, defaultValue) {
+function getArg(name, defaultValue, argv = process.argv) {
   const longFlag = `--${name}=`;
   const boolFlag = `--${name}`;
-  for (const arg of process.argv.slice(2)) {
+  for (const arg of argv.slice(2)) {
     if (arg.startsWith(longFlag)) {
       return arg.slice(longFlag.length);
     }
@@ -631,8 +637,14 @@ export {
   buildExcludeRegex,
   estimateStorageFreedBytes,
   formatBytes,
+  getArg,
   getMetrics,
   getRemoteBranches,
+  log,
+  logError,
+  logTimestamp,
+  parseBool,
+  toPct,
   writeMarkdownReport,
   writeJsonReport,
   // Internal utilities exported for testing
