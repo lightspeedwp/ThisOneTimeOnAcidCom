@@ -151,6 +151,12 @@ const EXPECTED_RESULTS = {
   'Edge Cases - Numbers': 'valid'
 };
 
+/**
+ * Run a single branch name validation test.
+ * @param {string} branch - The branch name to validate
+ * @param {string} expectedType - Expected result type: 'valid', 'invalid', or 'exemption'
+ * @returns {{passed: boolean, output: string, exitCode: number, branch: string}} Test result
+ */
 function runTest(branch, expectedType) {
   try {
     const output = execFileSync(
@@ -174,6 +180,9 @@ function runTest(branch, expectedType) {
   }
 }
 
+/**
+ * Main test runner: execute all test cases and write results report.
+ */
 function main() {
   const results = {
     timestamp: new Date().toISOString(),
