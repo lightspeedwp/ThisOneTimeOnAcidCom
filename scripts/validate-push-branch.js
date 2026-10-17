@@ -16,8 +16,15 @@ import readline from 'readline';
 import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const VALIDATION_SCRIPT = path.join(__dirname, 'validate-branch-name.js');
+
+let _validationScript;
+function getValidationScript() {
+  if (!_validationScript) {
+    const __dirname = path.dirname(__filename);
+    _validationScript = path.join(__dirname, 'validate-branch-name.js');
+  }
+  return _validationScript;
+}
 
 /**
  * Extract branch name from a Git ref (e.g., refs/heads/main -> main).
@@ -40,7 +47,7 @@ function validateBranch(branch) {
   try {
     execFileSync(
       process.execPath,
-      [VALIDATION_SCRIPT, '--branch', branch],
+      [getValidationScript(), '--branch', branch],
       { stdio: 'pipe', encoding: 'utf-8' }
     );
     return { valid: true };
@@ -115,7 +122,7 @@ async function main() {
         try {
           execFileSync(
             process.execPath,
-            [VALIDATION_SCRIPT, '--branch', branch],
+            [getValidationScript(), '--branch', branch],
             { stdio: 'inherit', encoding: 'utf-8' }
           );
         } catch (e) {
@@ -142,7 +149,7 @@ async function main() {
           try {
             execFileSync(
               process.execPath,
-              [VALIDATION_SCRIPT, '--branch', currentBranch],
+              [getValidationScript(), '--branch', currentBranch],
               { stdio: 'inherit', encoding: 'utf-8' }
             );
           } catch (e) {
@@ -170,4 +177,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   });
 }
 
-export { extractBranchName, validateBranch };
+export { extractBranchName, validateBranch, main };

@@ -11,8 +11,14 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import path from 'path';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PROJECT_ROOT = path.dirname(__dirname);
+let _scriptDir, _projectRoot;
+function getPaths() {
+  if (!_scriptDir) {
+    _scriptDir = path.dirname(fileURLToPath(import.meta.url));
+    _projectRoot = path.dirname(_scriptDir);
+  }
+  return { _scriptDir, _projectRoot };
+}
 
 // Test cases extracted from validate-branch-name.test.js
 const TEST_CASES = {
@@ -159,9 +165,10 @@ const EXPECTED_RESULTS = {
  */
 function runTest(branch, expectedType) {
   try {
+    const { _scriptDir } = getPaths();
     const output = execFileSync(
       process.execPath,
-      [path.join(__dirname, 'validate-branch-name.js'), '--branch', branch],
+      [path.join(_scriptDir, 'validate-branch-name.js'), '--branch', branch],
       { encoding: 'utf-8', stdio: 'pipe' }
     );
     return {
@@ -241,11 +248,19 @@ function main() {
   console.log(`  Success Rate: ${((results.summary.passed / results.summary.total) * 100).toFixed(1)}%\n`);
 
   // Write report
-  const reportPath = path.join(PROJECT_ROOT, 'validation-report.json');
+  const { _projectRoot } = getPaths();
+  const reportPath = path.join(_projectRoot, 'validation-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(results, null, 2));
   console.log(`📄 Full report: ${reportPath}`);
 
   process.exit(results.summary.failed > 0 ? 1 : 0);
 }
 
-main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch(error => {
+    console.error(`Fatal error: ${error.message}`);
+    process.exit(2);
+  });
+}
+
+export { runTest, main };
