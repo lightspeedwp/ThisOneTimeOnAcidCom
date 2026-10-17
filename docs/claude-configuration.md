@@ -193,7 +193,7 @@ Or add specific validation events (journal content, changelog format, etc.):
         "hooks": [
           {
             "type": "command",
-            "command": "scripts/claude/validate.sh",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/claude/validate.sh",
             "timeout": 60,
             "match_output": true
           }
@@ -340,7 +340,7 @@ rm -rf scripts/claude/
 rm docs/claude-configuration.md
 git add .
 git commit -m "Remove Claude configuration"
-# To undo the removal commit later: git revert HEAD
+# To undo the removal commit later: git revert <commit-hash>
 ```
 
 ### Disable Specific Features
