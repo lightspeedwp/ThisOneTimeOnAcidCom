@@ -1,0 +1,629 @@
+{
+  "timestamp": "2026-10-17T04:11:47.663Z",
+  "summary": {
+    "total": 97,
+    "passed": 97,
+    "failed": 0,
+    "byCategory": {
+      "Valid Branches - Standard Pattern": {
+        "passed": 37,
+        "failed": 0,
+        "total": 37
+      },
+      "Valid Branches - Complex Titles": {
+        "passed": 13,
+        "failed": 0,
+        "total": 13
+      },
+      "Valid Exemptions - Dependabot": {
+        "passed": 4,
+        "failed": 0,
+        "total": 4
+      },
+      "Valid Exemptions - Renovate": {
+        "passed": 3,
+        "failed": 0,
+        "total": 3
+      },
+      "Valid Exemptions - Release Semantic": {
+        "passed": 6,
+        "failed": 0,
+        "total": 6
+      },
+      "Valid Exemptions - Release Date-based": {
+        "passed": 3,
+        "failed": 0,
+        "total": 3
+      },
+      "Invalid Branches - Forbidden Prefixes": {
+        "passed": 3,
+        "failed": 0,
+        "total": 3
+      },
+      "Invalid Branches - Pattern Violations": {
+        "passed": 12,
+        "failed": 0,
+        "total": 12
+      },
+      "Invalid Branches - Invalid Type": {
+        "passed": 4,
+        "failed": 0,
+        "total": 4
+      },
+      "Edge Cases - Special Characters": {
+        "passed": 8,
+        "failed": 0,
+        "total": 8
+      },
+      "Edge Cases - Numbers": {
+        "passed": 4,
+        "failed": 0,
+        "total": 4
+      }
+    }
+  },
+  "details": {
+    "Valid Branches - Standard Pattern": {
+      "expected": "valid",
+      "cases": [
+        {
+          "branch": "feat/user-dashboard",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "fix/navigation-menu",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "docs/api-reference",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "test/e2e-flow",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "refactor/hook-consolidation",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "perf/image-loading",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "chore/dependency-updates",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "content/chapter-one-revisions",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "fix/typo-chapter-five",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "a11y/form-labels",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "design/button-component",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "ci/github-actions",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "build/vite-config",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "security/xss-vulnerability",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "hotfix/critical-bug",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "task/auth-refactor",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "doc/readme-typo",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "revert/pr-2345-merge",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "research/performance-benchmarks",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "ux/form-validation",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "i18n/german-translation",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "ops/database-migration",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "audit/code-review",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "codex/auto-documentation",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "aiops/model-monitoring",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "automation/issue-routing",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "epic/platform-modernisation",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "proto/new-caching",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "ds/component-library",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "api/rest-endpoints",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "schema/user-model",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "telemetry/event-tracking",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "seo/meta-tags",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "config/environment-vars",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "migrate/user-table",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "qa/test-automation",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "uat/staging-validation",
+          "passed": true,
+          "exitCode": 0
+        }
+      ],
+      "passed": 37,
+      "failed": 0
+    },
+    "Valid Branches - Complex Titles": {
+      "expected": "valid",
+      "cases": [
+        {
+          "branch": "feat/user-dashboard-v2-dark-mode",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "fix/bug-2024-regression",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "feat/a-feature",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "content/chapter-two-final-edit",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "content/chapter-three-fact-check",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "feat/author-bio-section",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "feat/glossary-terms",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "feat/bibliography-index",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "fix/broken-reference-link",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "fix/formatting-inconsistency",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "docs/content-style-guide",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "docs/editing-workflow",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "docs/github-workflow",
+          "passed": true,
+          "exitCode": 0
+        }
+      ],
+      "passed": 13,
+      "failed": 0
+    },
+    "Valid Exemptions - Dependabot": {
+      "expected": "exemption",
+      "cases": [
+        {
+          "branch": "dependabot/npm_and_yarn/my-package-1.0.0",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "dependabot/bundler/my-gem-2.0.0",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "dependabot/docker/my-image",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "dependabot/github-actions/setup-node",
+          "passed": true,
+          "exitCode": 0
+        }
+      ],
+      "passed": 4,
+      "failed": 0
+    },
+    "Valid Exemptions - Renovate": {
+      "expected": "exemption",
+      "cases": [
+        {
+          "branch": "renovate/my-package",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "renovate/pin-dependencies",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "renovate/bump-minor-versions",
+          "passed": true,
+          "exitCode": 0
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    "Valid Exemptions - Release Semantic": {
+      "expected": "exemption",
+      "cases": [
+        {
+          "branch": "release/v1.0.0",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "release/v1.2.3",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "release/v2.0.0-beta.1",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "release/v1.0.0-alpha",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "release/v3.1.0-rc.2",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "release/v0.0.1",
+          "passed": true,
+          "exitCode": 0
+        }
+      ],
+      "passed": 6,
+      "failed": 0
+    },
+    "Valid Exemptions - Release Date-based": {
+      "expected": "exemption",
+      "cases": [
+        {
+          "branch": "release/2025-01-15",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "release/2024-12-25",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "release/2026-10-16",
+          "passed": true,
+          "exitCode": 0
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    "Invalid Branches - Forbidden Prefixes": {
+      "expected": "invalid",
+      "cases": [
+        {
+          "branch": "claude/my-feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "copilot/fix-bug",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "openai/new-model",
+          "passed": true,
+          "exitCode": 1
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    "Invalid Branches - Pattern Violations": {
+      "expected": "invalid",
+      "cases": [
+        {
+          "branch": "my-feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat my-feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat_my-feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/MyFeature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my_feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my@feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "/my-feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my--feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "Feat/my-feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "FEAT/my-feature",
+          "passed": true,
+          "exitCode": 1
+        }
+      ],
+      "passed": 12,
+      "failed": 0
+    },
+    "Invalid Branches - Invalid Type": {
+      "expected": "invalid",
+      "cases": [
+        {
+          "branch": "feature/my-feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "bugfix/my-fix",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "documentation/my-docs",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat123/my-feature",
+          "passed": true,
+          "exitCode": 1
+        }
+      ],
+      "passed": 4,
+      "failed": 0
+    },
+    "Edge Cases - Special Characters": {
+      "expected": "invalid",
+      "cases": [
+        {
+          "branch": "feat/my@feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my#feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my$feature",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "feat/my%feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my&feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my*feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my!feature",
+          "passed": true,
+          "exitCode": 1
+        },
+        {
+          "branch": "feat/my?feature",
+          "passed": true,
+          "exitCode": 1
+        }
+      ],
+      "passed": 8,
+      "failed": 0
+    },
+    "Edge Cases - Numbers": {
+      "expected": "valid",
+      "cases": [
+        {
+          "branch": "feat/user-v2",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "fix/bug-2024-regression",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "release/v1.0.0",
+          "passed": true,
+          "exitCode": 0
+        },
+        {
+          "branch": "content/chapter-5-revisions",
+          "passed": true,
+          "exitCode": 0
+        }
+      ],
+      "passed": 4,
+      "failed": 0
+    }
+  }
+}
