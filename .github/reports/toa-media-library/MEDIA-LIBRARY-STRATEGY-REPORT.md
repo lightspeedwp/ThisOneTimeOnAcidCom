@@ -402,6 +402,8 @@ Book Publishing Exports (high-quality derivatives)
 
 **GitHub + Netlify (Approved)** for Phase 1 migration:
 
+> **Note:** This decision (approved 17 October 2026) supersedes the original audit recommendation for Cloudinary, prioritizing zero-cost operation and full portability over hosted platform convenience. The Cloudinary analysis in Section 1 remains available for future reference if scaling or UX requirements change.
+
 1. **Cost-Optimised:** Zero additional expense; leverages existing Netlify subscription
 2. **Portability:** 100% vendor lock-in free; plain files + Git history
 3. **Audit Trail:** All assets version-controlled; full Git history + blame available

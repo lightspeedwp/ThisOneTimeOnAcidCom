@@ -73,7 +73,7 @@ A **phased media-library strategy** with:
 
 ## Next Steps
 
-1. **Approve decisions** (storage, catalogue, credits, export workflow)
+1. **Approve pending decisions** (catalogue, credits, export workflow)
 2. **Kick off TOA-280** (Figma extraction pilot)
 3. **Prepare TOA-8** (asset recovery and visual validation)
 4. **Design TOA-277** (finalize catalogue schema)

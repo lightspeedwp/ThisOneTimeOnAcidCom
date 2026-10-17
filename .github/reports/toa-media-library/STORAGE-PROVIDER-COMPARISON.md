@@ -21,7 +21,7 @@ Industry-standard media management platform with visual upload interface, automa
 | **Book Quality Exports** | ⭐⭐⭐⭐ | API can export high-res variants; batch export feasible |
 | **Portability** | ⭐⭐⭐ | API exports feasible; some vendor lock-in to URL schemes |
 | **Original Preservation** | ⭐⭐⭐⭐ | Stores originals; generates derivatives on-demand |
-| **Cost** | ⭐⭐⭐⭐ | Free tier: 25K API calls/mo (credits-based); Pro: $99/mo (625K credits/mo) |
+| **Cost** | ⭐⭐⭐⭐ | Free tier: 25K API calls/mo (25 credits/mo); Plus: $99/mo (225K credits/mo) |
 | **Access Control** | ⭐⭐⭐⭐ | Token-based, signed URLs, role-based dashboard access |
 | **Integration Difficulty** | Easy | React SDK; environment config + reference mapping |
 
@@ -262,7 +262,7 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 - Deploy to Netlify; CDN serves optimized variants
 - If scaling requires provider change, export assets and migrate to Cloudinary/AWS
 
-**Note:** Original audit recommended Cloudinary for UX and automation. This decision prioritises cost and portability over visual upload interface.
+**Approval note (17 October 2026):** The original audit recommended Cloudinary ($99/mo) for UX and automation. This decision supersedes that recommendation, prioritising zero-cost operation and full portability over hosted platform convenience. Cloudinary analysis in Section 1 remains available for future reference if scaling or UX requirements change.
 
 ---
 
