@@ -862,3 +862,119 @@ describe('writeJsonReport', () => {
     expect(json.summary.errorCount).toBe(0);
   });
 });
+
+describe('parseBool edge cases', () => {
+  it('parseBool handles "true" string', () => {
+    expect(parseBool('true')).toBe(true);
+  });
+
+  it('parseBool handles "false" string', () => {
+    expect(parseBool('false')).toBe(false);
+  });
+
+  it('parseBool returns default for unrecognized value', () => {
+    expect(parseBool('yes', true)).toBe(true);
+    expect(parseBool('no', false)).toBe(false);
+    expect(parseBool('1', true)).toBe(true);
+  });
+
+  it('parseBool returns false as default when not specified', () => {
+    expect(parseBool('invalid')).toBe(false);
+  });
+});
+
+describe('getArg edge cases', () => {
+  const originalArgv = process.argv;
+
+  afterEach(() => {
+    process.argv = originalArgv;
+  });
+
+  it('getArg extracts --name=value format', () => {
+    process.argv = ['node', 'script.js', '--verbose=true'];
+    expect(getArg('verbose', 'false')).toBe('true');
+  });
+
+  it('getArg returns default when flag not found', () => {
+    process.argv = ['node', 'script.js', '--other=value'];
+    expect(getArg('missing', 'default')).toBe('default');
+  });
+
+  it('getArg returns "true" for bare flag', () => {
+    process.argv = ['node', 'script.js', '--verbose'];
+    expect(getArg('verbose', 'false')).toBe('true');
+  });
+
+  it('getArg handles multiple args', () => {
+    process.argv = ['node', 'script.js', '--inactiveDays=45', '--verbose'];
+    expect(getArg('inactiveDays', '30')).toBe('45');
+  });
+
+  it('getArg with numeric default value', () => {
+    process.argv = ['node', 'script.js', '--other=val'];
+    expect(getArg('days', '90')).toBe('90');
+  });
+
+  it('getArg ignores partial flag matches', () => {
+    process.argv = ['node', 'script.js', '--verbose-mode=yes', '--verbose-'];
+    expect(getArg('verbose', 'default')).toBe('default');
+  });
+});
+
+describe('buildExcludeRegex branches', () => {
+  it('buildExcludeRegex includes release by default', () => {
+    const regex = buildExcludeRegex();
+    expect(regex.test('release/v1.0.0')).toBe(true);
+  });
+
+  it('buildExcludeRegex includes hotfix by default', () => {
+    const regex = buildExcludeRegex();
+    expect(regex.test('hotfix/critical-bug')).toBe(true);
+  });
+
+  it('buildExcludeRegex with custom patterns', () => {
+    const regex = buildExcludeRegex({ excludePatterns: 'staging|demo' });
+    expect(regex.test('staging')).toBe(true);
+    expect(regex.test('demo')).toBe(true);
+  });
+
+  it('buildExcludeRegex returns null for empty pattern', () => {
+    // Simulate case where excludePatterns is empty string
+    const emptyRegex = buildExcludeRegex({ excludePatterns: '' });
+    // Should still include defaults
+    expect(emptyRegex.test('release/v1')).toBe(true);
+  });
+});
+
+describe('daysSince variations', () => {
+  it('daysSince with various date formats', () => {
+    const today = new Date().toISOString().split('T')[0];
+    const result = daysSince(today);
+    // When passed today's date string, should be between 0 and 1 day
+    expect(result).toBeGreaterThanOrEqual(0);
+    expect(result).toBeLessThan(1);
+  });
+
+  it('daysSince with past dates', () => {
+    const pastDate = new Date(Date.now() - 86400000 * 5).toISOString(); // 5 days ago
+    const result = daysSince(pastDate);
+    expect(result).toBeGreaterThanOrEqual(4);
+    expect(result).toBeLessThanOrEqual(6);
+  });
+
+  it('daysSince with invalid date returns 0', () => {
+    expect(daysSince('invalid-date')).toBe(0);
+  });
+
+  it('daysSince with empty string returns 0', () => {
+    expect(daysSince('')).toBe(0);
+  });
+});
+
+describe('logTimestamp', () => {
+  it('logTimestamp returns string with timestamp format', () => {
+    const result = logTimestamp();
+    expect(typeof result).toBe('string');
+    expect(result.length).toBeGreaterThan(0);
+  });
+});

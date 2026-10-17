@@ -10,7 +10,8 @@ import {
   getCurrentBranch,
   checkForbiddenPrefix,
   checkExemptions,
-  validateStandardPattern
+  validateStandardPattern,
+  parseArgs
 } from './validate-branch-name.js';
 
 describe('Branch Name Validation', () => {
@@ -442,5 +443,37 @@ describe('Main CLI functionality', () => {
     expect(json.branch).toBe('feat/test');
     expect(json.type).toBe('valid');
     expect(json.details.detail).toBe('info');
+  });
+
+  describe('parseArgs', () => {
+    it('should extract branch name when --branch flag is present', () => {
+      const result = parseArgs(['--branch', 'feat/test-feature']);
+      expect(result.branchName).toBe('feat/test-feature');
+      expect(result.error).toBeNull();
+    });
+
+    it('should return error when --branch flag has no value', () => {
+      const result = parseArgs(['--branch']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBe('Error: --branch requires a value');
+    });
+
+    it('should return null when --branch flag is not present', () => {
+      const result = parseArgs(['--json', '--other']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBeNull();
+    });
+
+    it('should handle empty args array', () => {
+      const result = parseArgs([]);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBeNull();
+    });
+
+    it('should extract branch name with special characters', () => {
+      const result = parseArgs(['--branch', 'feat/my-special_branch.name']);
+      expect(result.branchName).toBe('feat/my-special_branch.name');
+      expect(result.error).toBeNull();
+    });
   });
 });

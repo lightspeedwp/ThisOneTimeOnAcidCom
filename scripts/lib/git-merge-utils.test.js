@@ -127,5 +127,46 @@ describe('git-merge-utils', () => {
       expect(typeof count).toBe('number');
       expect(count).toBeGreaterThanOrEqual(0);
     });
+
+    it('should handle different baseRef values', () => {
+      const count1 = gitUtils.getUniqueCommitCount('test-branch', 'origin/develop');
+      const count2 = gitUtils.getUniqueCommitCount('test-branch', 'origin/master');
+      expect(typeof count1).toBe('number');
+      expect(typeof count2).toBe('number');
+    });
   });
+
+  describe('getLastCommitDate edge cases', () => {
+    it('should handle multiple branches', () => {
+      const date1 = gitUtils.getLastCommitDate('main');
+      const date2 = gitUtils.getLastCommitDate('develop');
+      const date3 = gitUtils.getLastCommitDate('invalid-xyz');
+      expect(typeof date1).toBe('string');
+      expect(typeof date2).toBe('string');
+      expect(typeof date3).toBe('string');
+    });
+
+    it('should return consistent format when date exists', () => {
+      const date = gitUtils.getLastCommitDate('main');
+      expect(typeof date).toBe('string');
+      if (date.length > 0) {
+        expect(/^\d{4}-\d{2}-\d{2}/.test(date)).toBe(true);
+      }
+    });
+  });
+
+  describe('getMergeStatus variations', () => {
+    it('should handle different baseRef options', () => {
+      const result1 = gitUtils.getMergeStatus('feature-a', 'origin/develop');
+      const result2 = gitUtils.getMergeStatus('feature-a', 'origin/master');
+      expect(['merged', 'unmerged', 'unknown']).toContain(result1);
+      expect(['merged', 'unmerged', 'unknown']).toContain(result2);
+    });
+
+    it('should work when baseRef is not provided', () => {
+      const result = gitUtils.getMergeStatus('test-branch');
+      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+    });
+  });
+
 });
