@@ -425,32 +425,27 @@ describe('Non-deletion verification', () => {
 });
 
 describe('Argument parsing and configuration', () => {
-  it('parses boolean values correctly', () => {
-    expect('true' === 'true' ? true : false).toBe(true);
-    expect('false' === 'false' ? false : true).toBe(false);
+  it('formats bytes correctly for B, KB, MB', () => {
+    expect(formatBytes(512)).toBe('512 B');
+    expect(formatBytes(1024)).toBe('1.00 KB');
+    expect(formatBytes(2048)).toBe('2.00 KB');
+    expect(formatBytes(1024 * 1024)).toBe('1.00 MB');
   });
 
-  it('returns default value for non-boolean strings', () => {
-    const defaultValue = false;
-    const value = 'maybe';
-    expect(value === 'true' ? true : value === 'false' ? false : defaultValue).toBe(defaultValue);
+  it('handles bytes less than 1024', () => {
+    expect(formatBytes(0)).toBe('0 B');
+    expect(formatBytes(1)).toBe('1 B');
+    expect(formatBytes(1023)).toBe('1023 B');
   });
 
-  it('handles numeric arguments', () => {
-    const inactiveDays = parseInt('30', 10);
-    expect(inactiveDays).toBe(30);
-    expect(typeof inactiveDays).toBe('number');
+  it('formats KB correctly with two decimal places', () => {
+    expect(formatBytes(1536)).toBe('1.50 KB');
+    expect(formatBytes(2560)).toBe('2.50 KB');
   });
 
-  it('handles NaN in numeric parsing', () => {
-    const count = parseInt('invalid', 10);
-    expect(isNaN(count)).toBe(true);
-  });
-
-  it('recognizes report formats', () => {
-    const validFormats = ['markdown', 'json'];
-    expect(validFormats).toContain('markdown');
-    expect(validFormats).toContain('json');
+  it('formats MB correctly with two decimal places', () => {
+    expect(formatBytes(1024 * 1024 * 2.5)).toBe('2.50 MB');
+    expect(formatBytes(1024 * 1024 * 5)).toBe('5.00 MB');
   });
 });
 
