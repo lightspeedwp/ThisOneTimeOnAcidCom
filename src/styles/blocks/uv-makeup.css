@@ -1,0 +1,305 @@
+/* UV Makeup Section Block Styles */
+.uv-makeup-section {
+  padding-top: var(--wp--preset--spacing--section-vertical);
+  padding-bottom: var(--wp--preset--spacing--section-vertical);
+  background-color: var(--wp--preset--color--neutral-50);
+  color: var(--wp--preset--color--neutral-900);
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark .uv-makeup-section {
+  background-color: var(--wp--preset--color--atomic-black);
+  color: #fff;
+}
+
+/* Inner content wrapper — positioned above background effects */
+.uv-makeup-section__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Responsive gap scaling for ultra-wide displays */
+@media (min-width: 1024px) {
+  .uv-makeup-section__content {
+    gap: 4rem;
+  }
+}
+
+@media (min-width: 1568px) {
+  .uv-makeup-section__grid {
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+  
+  .uv-makeup-section__content {
+    gap: 4.5rem;
+  }
+}
+
+@media (min-width: 1800px) {
+  .uv-makeup-section__grid {
+    gap: calc(var(--wp--preset--spacing--fluid-xl) * 1.15);
+  }
+  
+  .uv-makeup-section__content {
+    gap: 4.75rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .uv-makeup-section__grid {
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}
+
+.uv-makeup-section__header {
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.uv-makeup-section__description {
+  max-width: 48rem;
+  margin: 0 auto;
+  line-height: 1.6;
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .uv-makeup-section__description {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* Slider Wrapper */
+.uv-makeup-section__slider-wrapper {
+  position: relative;
+}
+
+/* Desktop Grid Layout with Responsive Gaps */
+.uv-makeup-section__grid {
+  gap: var(--wp--preset--spacing--block-gap);
+}
+
+@media (min-width: 1440px) {
+  .uv-makeup-section__grid {
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1568px) {
+  .uv-makeup-section__grid {
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+@media (min-width: 1800px) {
+  .uv-makeup-section__grid {
+    gap: calc(var(--wp--preset--spacing--fluid-xl) * 1.15);
+  }
+  
+  .uv-makeup-section__content {
+    gap: 4.75rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .uv-makeup-section__grid {
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}
+
+/* Nav Buttons */
+.uv-makeup-section__nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: var(--wp--preset--color--base);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wp--preset--color--neutral-700);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--wp--preset--shadow--md);
+}
+
+.dark .uv-makeup-section__nav-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  box-shadow: none;
+}
+
+.uv-makeup-section__nav-button:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--neon-purple);
+  border-color: var(--wp--preset--color--neon-purple);
+  color: #fff;
+}
+
+.dark .uv-makeup-section__nav-button:hover:not(:disabled) {
+  box-shadow: var(--wp--preset--shadow--neon-purple-hover);
+}
+
+.uv-makeup-section__nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.uv-makeup-section__nav-button--prev {
+  left: -1rem;
+}
+
+.uv-makeup-section__nav-button--next {
+  right: -1rem;
+}
+
+@media (min-width: 1440px) {
+  .uv-makeup-section__nav-button--prev {
+    left: -2rem;
+  }
+  .uv-makeup-section__nav-button--next {
+    right: -2rem;
+  }
+}
+
+.uv-makeup-section__nav-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Hide nav buttons on mobile */
+@media (max-width: 768px) {
+  .uv-makeup-section__nav-button {
+    display: none;
+  }
+}
+
+/* Slider Viewport */
+.uv-makeup-section__slider-viewport {
+  overflow: hidden;
+  margin: 0 calc(var(--wp--preset--spacing--block-gap) / -2);
+  padding: calc(var(--wp--preset--spacing--block-gap) / 2);
+}
+
+.uv-makeup-section__track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateX(calc(var(--slide-index, 0) * (100% / var(--slides-per-view, 3)) * -1));
+}
+
+.uv-makeup-section__slide {
+  /* Desktop Default: 3 columns */
+  flex: 0 0 33.333%;
+  padding: 0 calc(var(--wp--preset--spacing--block-gap) / 2);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive Logic */
+@media (max-width: 1280px) {
+  .uv-makeup-section__track {
+    /* Tablet: 2 columns */
+    transform: translateX(calc(var(--slide-index, 0) * -50%));
+  }
+  .uv-makeup-section__slide {
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .uv-makeup-section__track {
+    /* Mobile: 1 column */
+    transform: translateX(calc(var(--slide-index, 0) * -100%));
+  }
+  .uv-makeup-section__slide {
+    flex: 0 0 100%;
+  }
+}
+
+/* Dots Navigation */
+.uv-makeup-section__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.uv-makeup-section__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--wp--preset--color--neutral-300);
+  background-color: var(--wp--preset--color--neutral-100);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dark .uv-makeup-section__dot {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.uv-makeup-section__dot--active {
+  background-color: var(--wp--preset--color--neon-pink) !important;
+  border-color: var(--wp--preset--color--neon-pink) !important;
+  transform: scale(1.2);
+}
+
+.dark .uv-makeup-section__dot--active {
+  box-shadow: var(--wp--preset--shadow--neon-pink-dot);
+}
+
+.uv-makeup-section__dot--inactive:hover {
+  background-color: var(--wp--preset--color--neutral-300);
+}
+
+.dark .uv-makeup-section__dot--inactive:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Helper Classes for Responsive Layouts */
+.uv-makeup-card-wrapper {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+.uv-makeup-section__cta {
+  display: flex;
+  justify-content: center;
+}
+
+.uv-makeup-cta-btn {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .uv-makeup-cta-btn {
+    width: auto;
+  }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .uv-makeup-section__track {
+    transition: none;
+  }
+}
+
+/* ── Fragment Replacement Wrapper ── */
+.uv-makeup-section-wrapper {
+  /* No styles needed - just a semantic wrapper to replace React.Fragment */
+}

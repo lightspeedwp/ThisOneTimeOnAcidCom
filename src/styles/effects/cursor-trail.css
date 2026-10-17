@@ -1,0 +1,42 @@
+.cursor-trail-dot {
+  position: fixed;
+  pointer-events: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-neon-pink);
+  z-index: 9997;
+  animation: cursorDotFade 0.6s ease-out forwards;
+  transform: translate(-50%, -50%);
+}
+
+.tap-ripple {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 2px solid var(--color-neon-pink);
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  animation: tapRippleExpand 0.5s ease-out forwards;
+}
+
+.konami-explosion {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  animation: konamiExplode 2s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-trail-dot,
+  .tap-ripple,
+  .konami-explosion {
+    display: none;
+  }
+}

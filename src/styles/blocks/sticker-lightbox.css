@@ -1,0 +1,191 @@
+/* ============================================
+   STICKER LIGHTBOX OVERLAY
+   Extracted from stickers-page.css (T13)
+   Full-screen polaroid lightbox with nav
+   ============================================ */
+
+.sticker-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--wp--preset--z-index--modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.88);
+  animation: sticker-lightbox-fadein 250ms ease forwards;
+}
+
+@keyframes sticker-lightbox-fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sticker-lightbox__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+/* ── Lightbox Polaroid ── */
+.sticker-lightbox__polaroid {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  max-width: 520px;
+  width: 100%;
+  animation: sticker-lightbox-scalein 300ms ease forwards;
+}
+
+@keyframes sticker-lightbox-scalein {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.dark .sticker-lightbox__polaroid {
+  background: #1a1a1a;
+}
+
+.sticker-lightbox__image-frame {
+  padding: 16px 16px 0;
+}
+
+.sticker-lightbox__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.sticker-lightbox__label {
+  padding: 14px 16px 20px;
+  text-align: center;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.dark .sticker-lightbox__label {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* ── Nav Buttons (shared) ── */
+.sticker-lightbox__nav {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background 200ms ease, border-color 200ms ease;
+  flex-shrink: 0;
+}
+
+.sticker-lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.sticker-lightbox__nav:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 2px;
+}
+
+/* Desktop nav: absolute left/right */
+.sticker-lightbox__nav--desktop {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sticker-lightbox__nav--prev {
+  left: -60px;
+}
+
+.sticker-lightbox__nav--next {
+  right: -60px;
+}
+
+/* Mobile nav row */
+.sticker-lightbox__nav-row {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+/* Desktop counter */
+.sticker-lightbox__counter--desktop {
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .sticker-lightbox__nav--desktop {
+    display: none;
+  }
+
+  .sticker-lightbox__nav-row {
+    display: flex;
+  }
+
+  .sticker-lightbox__counter--desktop {
+    display: none;
+  }
+
+  .sticker-lightbox__polaroid {
+    max-width: 85vw;
+  }
+}
+
+/* ── Close button ── */
+.sticker-lightbox__close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background 200ms ease;
+}
+
+.sticker-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.sticker-lightbox__close:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: 2px;
+}
+
+/* ── Counter (shared) ── */
+.sticker-lightbox__counter {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .sticker-lightbox {
+    animation: none;
+  }
+
+  .sticker-lightbox__polaroid {
+    animation: none;
+  }
+}

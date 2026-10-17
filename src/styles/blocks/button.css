@@ -1,0 +1,273 @@
+/* Button Block Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-radius: var(--wp--preset--border-radius--full);
+  /* Fluid font size targeting 32px max (2rem) */
+  font-size: clamp(1.25rem, 0.8rem + 1.6vw, 2rem);
+  font-weight: 500;
+  font-family: var(--wp--preset--font-family--brand-body);
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid transparent; /* Reserve space for borders */
+  /* Consistent responsive padding - vertical horizontal */
+  padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.btn:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.btn svg {
+  pointer-events: none;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+/* Focus States */
+.btn:focus-visible {
+  border-color: var(--wp--preset--color--neon-purple);
+  box-shadow: var(--wp--preset--shadow--focus-ring);
+}
+
+.btn:hover {
+  border-color: var(--wp--preset--color--neon-purple);
+  box-shadow: var(--wp--preset--shadow--focus-ring);
+}
+
+/* Variants */
+.btn--default {
+  background-color: var(--wp--preset--color--primary);
+  color: #fff;
+}
+
+.btn--default:hover {
+  opacity: 0.9;
+  box-shadow: var(--wp--preset--shadow--neon-sm);
+}
+
+.btn--destructive {
+  background-color: var(--wp--preset--color--neon-red);
+  color: #fff;
+}
+
+.btn--destructive:hover {
+  opacity: 0.9;
+}
+
+.btn--outline {
+  background-color: transparent;
+  border-color: var(--wp--preset--color--neutral-200);
+  color: var(--foreground);
+}
+
+.btn--outline:hover {
+  background-color: var(--wp--preset--color--neutral-100);
+  color: var(--foreground);
+}
+
+.dark .btn--outline {
+  border-color: var(--wp--preset--color--neutral-700);
+}
+
+.dark .btn--outline:hover {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.btn--secondary {
+  background-color: var(--wp--preset--color--neutral-100);
+  color: var(--wp--preset--color--neutral-900);
+}
+
+.btn--secondary:hover {
+  background-color: var(--wp--preset--color--neutral-200);
+}
+
+.dark .btn--secondary {
+  background-color: var(--wp--preset--color--neutral-800);
+  color: var(--wp--preset--color--neutral-50);
+}
+
+.dark .btn--secondary:hover {
+  background-color: var(--wp--preset--color--neutral-700);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--foreground);
+}
+
+.btn--ghost:hover {
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .btn--ghost:hover {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.btn--link {
+  background-color: transparent;
+  color: var(--wp--preset--color--primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  padding: 0;
+  font-size: inherit;
+}
+
+.btn--link:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+/* Neon Variants */
+.btn--neon-primary {
+  background: var(--wp--preset--gradient--cyberpunk);
+  color: #ffffff;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: var(--wp--preset--z-index--0);
+}
+
+.btn--neon-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--wp--preset--gradient--hyperpop);
+  background-size: 300% 300%;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: var(--wp--preset--z-index--n1);
+}
+
+.btn--neon-primary:hover {
+  box-shadow:
+    0 0 12px rgba(255, 16, 240, 0.5),
+    0 0 24px rgba(31, 81, 255, 0.35),
+    0 4px 16px rgba(255, 16, 240, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn--neon-primary:hover::before {
+  opacity: 1;
+  animation: neon-btn-gradient-shift 3s ease infinite;
+}
+
+/* Neon Outline — funky gradient-border ghost button */
+.btn--neon-outline {
+  position: relative;
+  background: transparent;
+  color: var(--wp--preset--color--neon-pink-text);
+  border: 2px solid var(--wp--preset--color--neon-pink);
+  z-index: 0;
+  overflow: hidden;
+}
+
+.dark .btn--neon-outline {
+  color: var(--wp--preset--color--neon-pink);
+  border-color: var(--wp--preset--color--neon-pink);
+}
+
+.btn--neon-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--wp--preset--gradient--cyberpunk);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.btn--neon-outline:hover {
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 12px rgba(255, 16, 240, 0.4),
+    0 0 24px rgba(31, 81, 255, 0.25);
+}
+
+.btn--neon-outline:hover::before {
+  opacity: 1;
+}
+
+.btn--neon-outline:focus-visible {
+  border-color: var(--wp--preset--color--neon-purple);
+  box-shadow: var(--wp--preset--shadow--focus-ring);
+}
+
+.btn--neon-secondary {
+  background: transparent;
+  border: 2px solid var(--wp--preset--color--neon-pink);
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.btn--neon-secondary:hover {
+  background-color: rgba(255, 16, 240, 0.1);
+}
+
+/* Gradient shift keyframe for neon buttons */
+@keyframes neon-btn-gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--neon-primary::before {
+    animation: none;
+  }
+
+  .btn--neon-primary:hover,
+  .btn--neon-outline:hover {
+    transform: none;
+  }
+}
+
+/* Sizes */
+/* Use the base standardized fluid padding for default size */
+.btn--default-size {
+  /* Inherits base padding and font-size */
+}
+
+.btn--sm {
+  /* Scale down relative to the 32px base */
+  font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1.25rem);
+  padding: clamp(0.5rem, 1vw, 0.625rem) clamp(1rem, 2.5vw, 1.5rem);
+  border-radius: var(--wp--preset--border-radius--md);
+}
+
+.btn--lg {
+  /* Scale up slightly or match the large base */
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  padding: clamp(0.875rem, 2vw, 1.25rem) clamp(2rem, 5vw, 3rem);
+}
+
+.btn--icon {
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wp--preset--border-radius--circle);
+}
+
+/* Mobile Full Width Helper */
+.btn--full-mobile {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .btn--full-mobile {
+    width: auto;
+  }
+}

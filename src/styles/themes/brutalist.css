@@ -1,0 +1,47 @@
+/* Brutalist Theme Variables */
+[data-theme="brutalist"] {
+  --color-atomic-black: #000000;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #F4F4F0;
+  --color-surface-hover: #E0E0E0;
+  --color-text-primary: #000000;
+  --color-text-secondary: #333333;
+  --color-text-muted: #666666;
+  --color-border: #000000;
+  --color-divider: #000000;
+  
+  --shadow-sm: 4px 4px 0px rgba(0, 0, 0, 1);
+  --shadow-md: 8px 8px 0px rgba(0, 0, 0, 1);
+  --shadow-lg: 12px 12px 0px rgba(0, 0, 0, 1);
+
+  --wp--preset--spacing--10: 0.5rem;
+  --wp--preset--spacing--20: 1rem;
+  --wp--preset--spacing--30: 1.5rem;
+  --wp--preset--spacing--40: 2rem;
+  
+  --wp--preset--color--neon-pink: #FF10F0;
+  --wp--preset--color--neon-green: #39FF14;
+  --wp--preset--color--neon-blue: #1F51FF;
+  --wp--preset--color--neon-yellow: #FFFF00;
+
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+[data-theme="brutalist"] * {
+  border-radius: 0 !important;
+  font-family: monospace !important;
+}
+
+[data-theme="brutalist"] button,
+[data-theme="brutalist"] a.button {
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+[data-theme="brutalist"] button:active,
+[data-theme="brutalist"] a.button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}

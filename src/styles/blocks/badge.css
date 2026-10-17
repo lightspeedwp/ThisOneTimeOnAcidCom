@@ -1,0 +1,77 @@
+/* Badge Block Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wp--preset--border-radius--md);
+  border: 1px solid transparent;
+  padding: 0.125rem 0.5rem; /* px-2 py-0.5 */
+  font-size: 0.75rem; /* xs */
+  font-weight: 500;
+  white-space: nowrap;
+  gap: 0.25rem;
+  transition: box-shadow 0.2s, color 0.2s;
+  outline: none;
+}
+
+.badge:focus-visible {
+  border-color: var(--wp--preset--color--neon-purple);
+  box-shadow: var(--wp--preset--shadow--focus-ring);
+}
+
+.badge svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  pointer-events: none;
+}
+
+/* Variants */
+.badge--default {
+  background-color: var(--wp--preset--color--primary);
+  color: #fff;
+  border-color: transparent;
+}
+
+.badge--default:hover {
+  opacity: 0.9;
+}
+
+.badge--secondary {
+  background-color: var(--wp--preset--color--neutral-100);
+  color: var(--wp--preset--color--neutral-900);
+}
+
+.badge--secondary:hover {
+  background-color: var(--wp--preset--color--neutral-200);
+}
+
+.dark .badge--secondary {
+  background-color: var(--wp--preset--color--neutral-800);
+  color: var(--wp--preset--color--neutral-50);
+}
+
+.dark .badge--secondary:hover {
+  background-color: var(--wp--preset--color--neutral-700);
+}
+
+.badge--destructive {
+  background-color: var(--wp--preset--color--neon-red);
+  color: #fff;
+}
+
+.badge--destructive:hover {
+  opacity: 0.9;
+}
+
+.badge--outline {
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+.badge--outline:hover {
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .badge--outline:hover {
+  background-color: var(--wp--preset--color--neutral-800);
+}

@@ -1,0 +1,584 @@
+/* ═══════════════════════════════════════════════
+   Palette Demo Modal Block Styles
+   v1.0.0 — Visual demonstrations of color palette applications
+   ═══════════════════════════════════════════════ */
+
+/* ── Modal Backdrop ── */
+.palette-demo-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ── Modal Content ── */
+.palette-demo-modal__content {
+  background: linear-gradient(135deg, var(--wp--preset--color--base), var(--wp--preset--color--neutral-50));
+  border-radius: var(--wp--preset--border-radius--xl);
+  max-width: 1200px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease;
+  border: 2px solid var(--wp--preset--color--neutral-300);
+}
+
+.dark .palette-demo-modal__content {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(255, 16, 240, 0.2);
+}
+
+/* ── Header ── */
+.palette-demo-modal__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, var(--wp--preset--color--neutral-100), var(--wp--preset--color--base));
+  border-bottom: 2px solid var(--wp--preset--color--neutral-300);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dark .palette-demo-modal__header {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.palette-demo-modal__title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--400);
+  font-weight: 700;
+  color: var(--wp--preset--color--contrast);
+  margin: 0;
+  padding-right: 3rem;
+}
+
+.dark .palette-demo-modal__title {
+  background: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.palette-demo-modal__subtitle {
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--neutral-600);
+  margin: 0;
+  font-style: italic;
+}
+
+.dark .palette-demo-modal__subtitle {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+.palette-demo-modal__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
+  border: 2px solid var(--wp--preset--color--neutral-400);
+  border-radius: var(--wp--preset--border-radius--md);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--wp--preset--color--contrast);
+  transition: all 0.2s ease;
+}
+
+.dark .palette-demo-modal__close {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--wp--preset--color--neutral-100);
+}
+
+.palette-demo-modal__close:hover {
+  border-color: var(--wp--preset--color--neon-purple);
+  background: linear-gradient(135deg, rgba(190, 0, 254, 0.15), rgba(190, 0, 254, 0.08));
+  transform: rotate(90deg);
+}
+
+.dark .palette-demo-modal__close:hover {
+  border-color: var(--wp--preset--color--neon-pink);
+  background: linear-gradient(135deg, rgba(255, 16, 240, 0.2), rgba(255, 16, 240, 0.1));
+  box-shadow: 0 0 20px rgba(255, 16, 240, 0.4);
+}
+
+/* ── Body ── */
+.palette-demo-modal__body {
+  padding: 2rem;
+}
+
+/* ── Demo Animations ── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes demoPulse {
+  0%, 100% {
+    box-shadow: 0 0 30px currentColor40;
+  }
+  50% {
+    box-shadow: 0 0 50px currentColor80;
+  }
+}
+
+@keyframes demoGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes demoSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes demoProgressSlide {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 200% 0%;
+  }
+}
+
+/* ── Demo Section Wrappers ── */
+/* Shared structural containers for all demo sub-components */
+.demo-section {
+  padding: 2rem;
+  background-color: #0F0F0F;
+  border-radius: 8px;
+}
+
+.demo-section--padded {
+  padding: 3rem 2rem;
+}
+
+.demo-section--centered {
+  text-align: center;
+}
+
+.demo-section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.demo-section__grid--sm {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.demo-section__flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.demo-section__flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.demo-section__heading {
+  color: #FFFFFF;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.demo-section__body-text {
+  color: #FFFFFF;
+  opacity: 0.8;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+
+.demo-section__subtext {
+  color: #FFFFFF;
+  opacity: 0.7;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.demo-section__nav {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.demo-section__nav-link {
+  color: #FFFFFF;
+  opacity: 0.6;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.demo-card__title {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.demo-card__body {
+  color: #FFFFFF;
+  opacity: 0.7;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.demo-card__btn {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #000000;
+}
+
+/* ── Demo Component Classes ── */
+.demo-card-pulse {
+  animation: demoPulse 2s ease-in-out infinite;
+}
+
+.demo-gradient-shift {
+  animation: demoGradientShift 8s ease infinite;
+}
+
+.demo-button-glow:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+
+.demo-notification-pulse {
+  animation: demoPulse 1.5s ease-in-out infinite;
+}
+
+.demo-spinner {
+  animation: demoSpin 1s linear infinite;
+}
+
+.demo-progress-bar {
+  animation: demoProgressSlide 2s linear infinite;
+}
+
+.demo-status-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.4;
+  animation: demoPulse 2s ease-in-out infinite;
+}
+
+.demo-countdown-pulse {
+  animation: demoPulse 1s ease-in-out infinite;
+}
+
+.demo-gallery-item:hover .demo-gallery-overlay {
+  opacity: 1;
+}
+
+.demo-gallery-item:hover {
+  border-color: currentColor !important;
+  transform: translateY(-4px);
+}
+
+/* ── Light/Dark Mode Demo Container ── */
+.demo-container--light-dark {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.demo-light,
+.demo-dark {
+  min-height: 200px;
+}
+
+@media (max-width: 768px) {
+  .demo-container--light-dark {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Tooltip Pulse ── */
+.demo-tooltip-pulse {
+  animation: tooltipFloat 2s ease-in-out infinite;
+}
+
+@keyframes tooltipFloat {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* ── Pulse Ring Animation ── */
+.demo-pulse-ring::before,
+.demo-pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid currentColor;
+  opacity: 0;
+  animation: pulseRing 2s ease-out infinite;
+}
+
+.demo-pulse-ring::after {
+  animation-delay: 1s;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ── 3D Card Hover ── */
+.demo-card-3d:hover {
+  transform: perspective(1000px) rotateY(5deg) rotateX(2deg);
+}
+
+/* ── Tag Glow ── */
+.demo-tag-glow:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+
+/* ── Shimmer Effect ── */
+.demo-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ── Shimmer Neon (Dark Mode) ── */
+.demo-shimmer-neon {
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-shimmer-neon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 16, 240, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* ── Confetti Fall ── */
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.demo-confetti-fall {
+  animation: confettiFall 3s ease-in infinite;
+}
+
+/* ── Neon Flicker ── */
+@keyframes neonFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+.demo-neon-flicker {
+  animation: neonFlicker 3s infinite;
+}
+
+/* ── Wave Animation ── */
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.demo-wave {
+  animation: wave 10s linear infinite;
+}
+
+/* ── Marquee Scroll ── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.demo-marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 20s linear infinite;
+}
+
+/* ── Sparkle Twinkle ── */
+@keyframes sparkleTwinkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.demo-sparkle-twinkle {
+  animation: sparkleTwinkle 2s ease-in-out infinite;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .palette-demo-modal__content {
+    max-height: 95vh;
+  }
+
+  .palette-demo-modal__header {
+    padding: 1rem 1.5rem;
+  }
+
+  .palette-demo-modal__title {
+    font-size: var(--wp--preset--font-size--300);
+  }
+
+  .palette-demo-modal__body {
+    padding: 1.5rem 1rem;
+  }
+
+  .palette-demo-modal__close {
+    width: 36px;
+    height: 36px;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .palette-demo-modal {
+    animation: none;
+  }
+
+  .palette-demo-modal__content {
+    animation: none;
+  }
+
+  .demo-card-pulse,
+  .demo-gradient-shift,
+  .demo-notification-pulse,
+  .demo-tooltip-pulse,
+  .demo-pulse-ring,
+  .demo-shimmer,
+  .demo-shimmer-neon,
+  .demo-confetti-fall,
+  .demo-neon-flicker,
+  .demo-wave,
+  .demo-marquee span,
+  .demo-sparkle-twinkle,
+  .demo-spinner,
+  .demo-progress-bar,
+  .demo-status-pulse::before,
+  .demo-countdown-pulse {
+    animation: none;
+  }
+
+  .demo-button-glow:hover,
+  .demo-gallery-item:hover,
+  .palette-demo-modal__close:hover {
+    transform: none;
+  }
+}

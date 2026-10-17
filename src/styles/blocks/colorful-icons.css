@@ -1,0 +1,21 @@
+/* Colorful Icons Styles */
+
+.colorful-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.colorful-icon--sm {
+  width: 1.5rem; /* 24px */
+  height: 1.5rem;
+}
+
+.colorful-icon--md {
+  width: 3rem; /* 48px */
+  height: 3rem;
+}
+
+.colorful-icon--lg {
+  width: 5rem; /* 80px */
+  height: 5rem;
+}

@@ -1,0 +1,265 @@
+/* ==========================================================================
+   EBOOK DRAWER — Chapter jump sidebar/bottom-sheet
+   Extracted from ebook.css (T09)
+   ========================================================================== */
+
+/* ══════════════════════════════════════
+   CHAPTER JUMP DRAWER
+   ══════════════════════════════════════ */
+
+/* Backdrop */
+.ebook-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 90;
+  animation: ebookFadeIn 200ms ease forwards;
+}
+
+@keyframes ebookFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Drawer panel */
+.ebook-drawer {
+  position: fixed;
+  z-index: 95;
+  background: var(--wp--preset--color--base);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Mobile: bottom sheet */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 75dvh;
+  border-radius: var(--wp--preset--border-radius--lg) var(--wp--preset--border-radius--lg) 0 0;
+  transform: translateY(100%);
+  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.15);
+}
+
+.dark .ebook-drawer {
+  background: var(--wp--preset--color--atomic-black);
+  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.5);
+}
+
+.ebook-drawer--open {
+  transform: translateY(0);
+}
+
+/* Desktop: side panel */
+@media (min-width: 1024px) {
+  .ebook-drawer {
+    top: 0;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    width: clamp(18rem, 15rem + 10vw, 24rem);
+    max-height: 100dvh;
+    border-radius: var(--wp--preset--border-radius--lg) 0 0 var(--wp--preset--border-radius--lg);
+    transform: translateX(100%);
+  }
+
+  .ebook-drawer--open {
+    transform: translateX(0);
+  }
+}
+
+/* Header */
+.ebook-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(0.75rem, 0.6rem + 0.5vw, 1rem) clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
+  border-bottom: 1px solid var(--wp--preset--color--neutral-200);
+  flex-shrink: 0;
+}
+
+.dark .ebook-drawer__header {
+  border-bottom-color: var(--wp--preset--color--neutral-800);
+}
+
+.ebook-drawer__title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(0.9rem, 0.8rem + 0.3vw, 1.1rem);
+  color: var(--foreground);
+}
+
+.dark .ebook-drawer__title {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+/* List */
+.ebook-drawer__list {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: clamp(0.5rem, 0.4rem + 0.25vw, 0.75rem) 0;
+}
+
+/* Item base */
+.ebook-drawer__item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.95rem);
+  line-height: 1.4;
+  color: var(--wp--preset--color--neutral-600);
+  padding: clamp(0.4rem, 0.35rem + 0.15vw, 0.55rem) clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.ebook-drawer__item:hover {
+  background: var(--wp--preset--color--neutral-100);
+  color: var(--foreground);
+}
+
+.dark .ebook-drawer__item {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.dark .ebook-drawer__item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--wp--preset--color--neutral-200);
+}
+
+.ebook-drawer__item:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: -3px;
+}
+
+/* Section headers (part titles, front/back matter) */
+.ebook-drawer__item--section {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(0.75rem, 0.65rem + 0.25vw, 0.85rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wp--preset--color--neon-pink-text);
+  padding-top: clamp(0.6rem, 0.5rem + 0.2vw, 0.8rem);
+  margin-top: clamp(0.25rem, 0.15rem + 0.15vw, 0.4rem);
+  border-top: 1px solid var(--wp--preset--color--neutral-200);
+}
+
+.ebook-drawer__item--section:first-child {
+  border-top: 0;
+  margin-top: 0;
+}
+
+.dark .ebook-drawer__item--section {
+  color: var(--wp--preset--color--neon-pink);
+  border-top-color: var(--wp--preset--color--neutral-800);
+}
+
+.dark .ebook-drawer__item--section:hover {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+/* Indented chapter items */
+.ebook-drawer__item--indent {
+  padding-left: clamp(1.75rem, 1.5rem + 0.5vw, 2.25rem);
+}
+
+/* Active indicator */
+.ebook-drawer__item--active {
+  color: var(--wp--preset--color--neon-pink-text);
+  background: rgba(255, 16, 240, 0.04);
+}
+
+.ebook-drawer__item--active::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: var(--wp--preset--color--neon-pink);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.dark .ebook-drawer__item--active {
+  color: var(--wp--preset--color--neon-pink);
+  background: rgba(255, 16, 240, 0.06);
+}
+
+/* ── Drawer Groups (collapsible parts) ── */
+.ebook-drawer__group {
+  border-bottom: 1px solid var(--wp--preset--color--neutral-200);
+}
+
+.ebook-drawer__group:last-child {
+  border-bottom: 0;
+}
+
+.dark .ebook-drawer__group {
+  border-bottom-color: var(--wp--preset--color--neutral-800);
+}
+
+.ebook-drawer__group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(0.5rem, 0.4rem + 0.2vw, 0.7rem) clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
+}
+
+.ebook-drawer__group-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(0.7rem, 0.6rem + 0.2vw, 0.8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .ebook-drawer__group-title {
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.ebook-drawer__group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--wp--preset--color--neutral-500);
+  border-radius: var(--wp--preset--border-radius--sm);
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.ebook-drawer__group-toggle:hover {
+  background: var(--wp--preset--color--neutral-100);
+  color: var(--foreground);
+}
+
+.dark .ebook-drawer__group-toggle:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--wp--preset--color--neutral-200);
+}
+
+.ebook-drawer__group-toggle:focus-visible {
+  outline: 3px solid var(--wp--preset--color--neon-pink);
+  outline-offset: -3px;
+}
+
+/* Chevron rotation for collapse state */
+.ebook-drawer__group-toggle .ebook-reader__nav-icon {
+  transition: transform 200ms ease;
+}
+
+.ebook-drawer__group--collapsed .ebook-drawer__group-toggle .ebook-reader__nav-icon {
+  transform: rotate(-90deg);
+}
+
+/* Remove section-header border/margin for items inside groups */
+.ebook-drawer__group .ebook-drawer__item--section {
+  border-top: 0;
+  margin-top: 0;
+}

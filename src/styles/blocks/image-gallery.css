@@ -1,0 +1,385 @@
+/* ==========================================================================
+   IMAGE GALLERY — BEM Block
+   Supports grid, masonry, and justified layout modes.
+   Responsive columns driven by data-cols-* attributes.
+   Imported directly by /components/ui/ImageGallery.tsx
+   ========================================================================== */
+
+/* ── Root container ── */
+.image-gallery {
+  width: 100%;
+}
+
+/* ══════════════════════════════════════
+   GAP MODIFIERS
+   ══════════════════════════════════════ */
+
+.image-gallery--gap-sm {
+  gap: var(--wp--preset--spacing--fluid-xs);
+}
+
+.image-gallery--gap-md {
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.image-gallery--gap-lg {
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+/* ══════════════════════════════════════
+   GRID LAYOUT
+   Mobile-first column counts via data-cols-* attributes
+   ══════════════════════════════════════ */
+
+.image-gallery--grid {
+  display: grid;
+  align-items: start;
+}
+
+/* — Small (default / mobile) — */
+.image-gallery--grid[data-cols-sm="1"] { grid-template-columns: 1fr; }
+.image-gallery--grid[data-cols-sm="2"] { grid-template-columns: repeat(2, 1fr); }
+.image-gallery--grid[data-cols-sm="3"] { grid-template-columns: repeat(3, 1fr); }
+.image-gallery--grid[data-cols-sm="4"] { grid-template-columns: repeat(4, 1fr); }
+
+/* — Medium (>= 768 px) — */
+@media (min-width: 768px) {
+  .image-gallery--grid[data-cols-md="1"] { grid-template-columns: 1fr; }
+  .image-gallery--grid[data-cols-md="2"] { grid-template-columns: repeat(2, 1fr); }
+  .image-gallery--grid[data-cols-md="3"] { grid-template-columns: repeat(3, 1fr); }
+  .image-gallery--grid[data-cols-md="4"] { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* — Large (>= 1024 px) — */
+@media (min-width: 1024px) {
+  .image-gallery--grid[data-cols-lg="1"] { grid-template-columns: 1fr; }
+  .image-gallery--grid[data-cols-lg="2"] { grid-template-columns: repeat(2, 1fr); }
+  .image-gallery--grid[data-cols-lg="3"] { grid-template-columns: repeat(3, 1fr); }
+  .image-gallery--grid[data-cols-lg="4"] { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* — Desktop Wide (>= 1568 px) — */
+@media (min-width: 1568px) {
+  .image-gallery--grid[data-cols-xl="1"] { grid-template-columns: 1fr; }
+  .image-gallery--grid[data-cols-xl="2"] { grid-template-columns: repeat(2, 1fr); }
+  .image-gallery--grid[data-cols-xl="3"] { grid-template-columns: repeat(3, 1fr); }
+  .image-gallery--grid[data-cols-xl="4"] { grid-template-columns: repeat(4, 1fr); }
+  .image-gallery--grid[data-cols-xl="5"] { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* — Ultra-wide (>= 1768 px) — */
+@media (min-width: 1768px) {
+  .image-gallery--grid[data-cols-2xl="1"] { grid-template-columns: 1fr; }
+  .image-gallery--grid[data-cols-2xl="2"] { grid-template-columns: repeat(2, 1fr); }
+  .image-gallery--grid[data-cols-2xl="3"] { grid-template-columns: repeat(3, 1fr); }
+  .image-gallery--grid[data-cols-2xl="4"] { grid-template-columns: repeat(4, 1fr); }
+  .image-gallery--grid[data-cols-2xl="5"] { grid-template-columns: repeat(5, 1fr); }
+  .image-gallery--grid[data-cols-2xl="6"] { grid-template-columns: repeat(6, 1fr); }
+}
+
+/* — Full HD (>= 1920 px) — */
+@media (min-width: 1920px) {
+  .image-gallery--grid[data-cols-fhd="1"] { grid-template-columns: 1fr; }
+  .image-gallery--grid[data-cols-fhd="2"] { grid-template-columns: repeat(2, 1fr); }
+  .image-gallery--grid[data-cols-fhd="3"] { grid-template-columns: repeat(3, 1fr); }
+  .image-gallery--grid[data-cols-fhd="4"] { grid-template-columns: repeat(4, 1fr); }
+  .image-gallery--grid[data-cols-fhd="5"] { grid-template-columns: repeat(5, 1fr); }
+  .image-gallery--grid[data-cols-fhd="6"] { grid-template-columns: repeat(6, 1fr); }
+}
+
+/* ══════════════════════════════════════
+   MASONRY LAYOUT
+   CSS multi-column: items flow top → bottom in each column,
+   then left → right (standard Pinterest style).
+   ══════════════════════════════════════ */
+
+.image-gallery--masonry {
+  display: block; /* column-count requires block context */
+}
+
+/* Gap between masonry columns */
+.image-gallery--masonry.image-gallery--gap-sm  { column-gap: var(--wp--preset--spacing--fluid-xs); }
+.image-gallery--masonry.image-gallery--gap-md  { column-gap: var(--wp--preset--spacing--fluid-sm); }
+.image-gallery--masonry.image-gallery--gap-lg  { column-gap: var(--wp--preset--spacing--fluid-md); }
+
+/* Remove the grid `gap` shorthand for masonry — handled above + margin-bottom on items */
+.image-gallery--masonry {
+  gap: 0;
+}
+
+/* — Small — */
+.image-gallery--masonry[data-cols-sm="1"] { column-count: 1; }
+.image-gallery--masonry[data-cols-sm="2"] { column-count: 2; }
+.image-gallery--masonry[data-cols-sm="3"] { column-count: 3; }
+.image-gallery--masonry[data-cols-sm="4"] { column-count: 4; }
+
+/* — Medium (>= 768 px) — */
+@media (min-width: 768px) {
+  .image-gallery--masonry[data-cols-md="1"] { column-count: 1; }
+  .image-gallery--masonry[data-cols-md="2"] { column-count: 2; }
+  .image-gallery--masonry[data-cols-md="3"] { column-count: 3; }
+  .image-gallery--masonry[data-cols-md="4"] { column-count: 4; }
+}
+
+/* — Large (>= 1024 px) — */
+@media (min-width: 1024px) {
+  .image-gallery--masonry[data-cols-lg="1"] { column-count: 1; }
+  .image-gallery--masonry[data-cols-lg="2"] { column-count: 2; }
+  .image-gallery--masonry[data-cols-lg="3"] { column-count: 3; }
+  .image-gallery--masonry[data-cols-lg="4"] { column-count: 4; }
+}
+
+/* ══════════════════════════════════════
+   JUSTIFIED LAYOUT
+   Flex rows with consistent height and variable widths.
+   ══════════════════════════════════════ */
+
+.image-gallery--justified {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+/* ══════════════════════════════════════
+   ITEMS (all layouts)
+   ══════════════════════════════════════ */
+
+/* Grid item */
+.image-gallery--grid .image-gallery__item {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Masonry item — must not split across columns, has bottom spacing */
+.image-gallery--masonry .image-gallery__item {
+  break-inside: avoid;
+  display: block;
+  margin-bottom: var(--wp--preset--spacing--fluid-sm);
+  margin: 0 0 var(--wp--preset--spacing--fluid-sm) 0;
+}
+
+.image-gallery--masonry.image-gallery--gap-sm .image-gallery__item {
+  margin-bottom: var(--wp--preset--spacing--fluid-xs);
+}
+
+.image-gallery--masonry.image-gallery--gap-lg .image-gallery__item {
+  margin-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+/* Justified item — grows to fill available row width */
+.image-gallery--justified .image-gallery__item {
+  flex: 1 1 200px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ══════════════════════════════════════
+   CLICKABLE BUTTON WRAPPER
+   ══════════════════════════════════════ */
+
+.image-gallery__btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  /* Focus ring using neon pink — WCAG AA */
+  outline: none;
+}
+
+.image-gallery__btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--wp--preset--color--neon-pink);
+  border-radius: var(--wp--preset--border-radius--md);
+}
+
+/* ══════════════════════════════════════
+   FIGURE — inner wrapper for aspect ratio
+   ══════════════════════════════════════ */
+
+.image-gallery__figure {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--wp--preset--color--neutral-100);
+  border-radius: var(--wp--preset--border-radius--md);
+}
+
+.dark .image-gallery__figure {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+/* — Aspect ratio modifiers (grid layout only) — */
+.image-gallery__figure--square {
+  aspect-ratio: 1 / 1;
+}
+
+.image-gallery__figure--landscape {
+  aspect-ratio: 4 / 3;
+}
+
+.image-gallery__figure--video {
+  aspect-ratio: 16 / 9;
+}
+
+/* "auto" has no modifier — image determines natural height */
+
+/* ══════════════════════════════════════
+   IMAGE
+   ══════════════════════════════════════ */
+
+/* Grid + Justified: fill the figure frame */
+.image-gallery--grid .image-gallery__img,
+.image-gallery--justified .image-gallery__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  /* Position absolute to fill parent figure when aspect-ratio is set */
+  position: absolute;
+  inset: 0;
+}
+
+/* Auto-height grid image (no aspect ratio) */
+.image-gallery--grid .image-gallery__figure:not(.image-gallery__figure--square):not(.image-gallery__figure--landscape):not(.image-gallery__figure--video) .image-gallery__img {
+  position: static;
+  height: auto;
+}
+
+/* Masonry: natural image height */
+.image-gallery--masonry .image-gallery__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--wp--preset--border-radius--md);
+  transition: transform 0.5s ease;
+}
+
+/* Justified: fixed height, variable width */
+.image-gallery--justified .image-gallery__img {
+  height: 240px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Hover scale — suppressed when user prefers reduced motion */
+.image-gallery__btn:hover .image-gallery__img,
+.image-gallery__btn:focus-visible .image-gallery__img {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-gallery__img {
+    transition: none;
+  }
+
+  .image-gallery__btn:hover .image-gallery__img,
+  .image-gallery__btn:focus-visible .image-gallery__img {
+    transform: none;
+  }
+}
+
+/* ══════════════════════════════════════
+   HOVER OVERLAY (clickable items only)
+   ══════════════════════════════════════ */
+
+.image-gallery__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wp--preset--border-radius--md);
+  pointer-events: none;
+}
+
+.image-gallery__btn:hover .image-gallery__overlay,
+.image-gallery__btn:focus-visible .image-gallery__overlay {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-gallery__overlay {
+    transition: none;
+  }
+}
+
+.image-gallery__overlay-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  backdrop-filter: blur(4px);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.image-gallery__btn:hover .image-gallery__overlay-icon {
+  transform: scale(1.1);
+  background-color: var(--wp--preset--color--neon-purple);
+  border-color: var(--wp--preset--color--neon-purple);
+  box-shadow: var(--wp--preset--shadow--neon-purple);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-gallery__overlay-icon {
+    transition: none;
+  }
+  .image-gallery__btn:hover .image-gallery__overlay-icon {
+    transform: none;
+  }
+}
+
+.image-gallery__overlay-svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════
+   CAPTION / FIGCAPTION
+   ══════════════════════════════════════ */
+
+.image-gallery__caption {
+  display: block;
+  padding: var(--wp--preset--spacing--fluid-xs) 0 0;
+  color: var(--wp--preset--color--neutral-600);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  line-height: 1.4;
+  text-align: left;
+}
+
+.dark .image-gallery__caption {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ══════════════════════════════════════
+   EMPTY STATE
+   (no items to display)
+   ══════════════════════════════════════ */
+
+.image-gallery:empty::after {
+  content: "No images to display.";
+  display: block;
+  padding: var(--wp--preset--spacing--fluid-lg);
+  text-align: center;
+  color: var(--wp--preset--color--neutral-500);
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--200);
+}

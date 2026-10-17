@@ -1,0 +1,658 @@
+/* Hero Block Styles */
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--wp--preset--color--base);
+  /* Fluid padding: Top/Bottom 24px-32px (Visible) */
+  /* Top includes 5rem (80px) header offset */
+  padding-top: calc(5rem + clamp(1.5rem, 1.35rem + 0.714vw, 2rem));
+  padding-bottom: clamp(1.5rem, 1.35rem + 0.714vw, 2rem);
+  padding-left: var(--wp--preset--spacing--section-horizontal);
+  padding-right: var(--wp--preset--spacing--section-horizontal);
+  min-height: 80vh; /* Default min-height */
+  display: flex;
+  align-items: center;
+}
+
+.hero--compact {
+  min-height: auto;
+  align-items: flex-start;
+}
+
+.dark .hero {
+  background-color: var(--wp--preset--color--pure-black);
+}
+
+.hero--fullscreen {
+  min-height: 100vh;
+}
+
+/* Size Modifiers */
+.hero--sm {
+  min-height: auto;
+  align-items: flex-start;
+}
+
+.hero--lg {
+  min-height: 80vh;
+}
+
+.hero--xl {
+  min-height: 90vh;
+}
+
+/* Background Effects */
+.hero__bg-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__bg-effect {
+  position: absolute;
+  border-radius: var(--wp--preset--border-radius--circle);
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: var(--wp--preset--z-index--0);
+  opacity: 0.2;
+}
+
+.hero__bg-effect--1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: var(--wp--preset--color--neon-pink);
+}
+
+.hero__bg-effect--2 {
+  bottom: 10%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: var(--wp--preset--color--neon-purple);
+  opacity: 0.15;
+}
+
+.hero__bg-effect--3 {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40vw;
+  height: 40vw;
+  background: var(--wp--preset--color--neon-blue);
+  opacity: 0.1;
+}
+
+/* Decorative Wrapper for custom elements */
+.hero__decorative-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Container & Layout */
+.hero__container {
+  width: 100%;
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  z-index: var(--wp--preset--z-index--10);
+}
+
+.hero__container--wide {
+  max-width: var(--wp--preset--layout--wide);
+}
+
+.hero__container--full {
+  max-width: var(--wp--preset--layout--full);
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  text-align: center;
+}
+
+/* Split Layout */
+/* Mobile: images above text */
+.hero__content--split .hero__text-column {
+  order: 2;
+}
+
+.hero__content--split .hero__media-wrapper {
+  order: 1;
+}
+
+@media (min-width: 1024px) {
+  .hero__content--split {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 4rem;
+  }
+
+  .hero__content--split .hero__text-column {
+    order: unset;
+  }
+
+  .hero__content--split .hero__media-wrapper {
+    order: unset;
+  }
+}
+
+.hero__text-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: var(--wp--preset--z-index--10);
+}
+
+/* Typography */
+.hero__title {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: clamp(2rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--foreground);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.hero__subtitle {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--wp--preset--color--neutral-600);
+  line-height: 1.4;
+}
+
+.dark .hero__subtitle {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* ── Pulsing neon word accents ──
+   Each brand tagline keyword gets a unique colour + glow pulse.
+   Staggered animation-delay gives a cascading effect.
+   Respects prefers-reduced-motion.                            */
+
+/* Brand tagline subtitle — explicit size override */
+.hero__subtitle--brand-tagline {
+  font-size: 24px;
+}
+
+@keyframes neon-word-pulse {
+  0%, 100% {
+    text-shadow: 0 0 4px currentColor, 0 0 8px currentColor;
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 40px currentColor;
+    opacity: 0.92;
+  }
+}
+
+/* Shared accent base */
+.hero__subtitle-accent--pink,
+.hero__subtitle-accent--green,
+.hero__subtitle-accent--cyan {
+  display: inline;
+  font-style: italic;
+  animation: neon-word-pulse 3s ease-in-out infinite;
+}
+
+/* "colour" — hot pink / magenta: creativity, vibrancy, visual artistry */
+.hero__subtitle-accent--pink {
+  color: var(--wp--preset--color--neon-pink-text);
+  animation-delay: 0s;
+}
+
+.dark .hero__subtitle-accent--pink {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+/* "energy" — electric green: dynamism, electricity, life force */
+.hero__subtitle-accent--green {
+  color: var(--wp--preset--color--neon-green-text);
+  animation-delay: 1s;
+}
+
+.dark .hero__subtitle-accent--green {
+  color: var(--wp--preset--color--neon-green);
+}
+
+/* "connection" — warm cyan: trust, bonds, togetherness */
+.hero__subtitle-accent--cyan {
+  color: var(--wp--preset--color--neon-cyan-text);
+  animation-delay: 2s;
+}
+
+.dark .hero__subtitle-accent--cyan {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Reduced motion: static colour, no pulse */
+@media (prefers-reduced-motion: reduce) {
+  .hero__subtitle-accent--pink,
+  .hero__subtitle-accent--green,
+  .hero__subtitle-accent--cyan {
+    animation: none;
+    text-shadow: none;
+  }
+}
+
+/* ── Animated neon gradient subtitles ──
+   Each page color gets a gradient using its neon hue + 2 complementary colours.
+   The gradient is animated via background-size shift for a flowing glow effect.
+   Uses background-clip: text to render the gradient as text colour.
+   Respects prefers-reduced-motion.
+   Animation defined in /styles/animations.css                               */
+
+.hero__subtitle--neon {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: subtitle-gradient-flow 6s ease infinite;
+  margin-bottom: 0;
+}
+
+/* Green (home) — green → cyan → yellow */
+.hero__subtitle--neon-green {
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-green),
+    var(--wp--preset--color--neon-cyan),
+    var(--wp--preset--color--neon-yellow),
+    var(--wp--preset--color--neon-green)
+  );
+}
+
+/* Pink (about) — pink → purple → cyan */
+.hero__subtitle--neon-pink {
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-purple),
+    var(--wp--preset--color--neon-cyan),
+    var(--wp--preset--color--neon-pink)
+  );
+}
+
+/* Purple (portfolio) — purple → pink → blue */
+.hero__subtitle--neon-purple {
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-purple),
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-blue),
+    var(--wp--preset--color--neon-purple)
+  );
+}
+
+/* Yellow (videos) — yellow → green → orange */
+.hero__subtitle--neon-yellow {
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-yellow),
+    var(--wp--preset--color--neon-green),
+    var(--wp--preset--color--neon-orange),
+    var(--wp--preset--color--neon-yellow)
+  );
+}
+
+/* Red (events) — red → orange → pink */
+.hero__subtitle--neon-red {
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-red),
+    var(--wp--preset--color--neon-orange),
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-red)
+  );
+}
+
+/* Cyan (blog) — cyan → green → blue */
+.hero__subtitle--neon-cyan {
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-cyan),
+    var(--wp--preset--color--neon-green),
+    var(--wp--preset--color--neon-blue),
+    var(--wp--preset--color--neon-cyan)
+  );
+}
+
+/* Orange (contact) — orange → yellow → red */
+.hero__subtitle--neon-orange {
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-orange),
+    var(--wp--preset--color--neon-yellow),
+    var(--wp--preset--color--neon-red),
+    var(--wp--preset--color--neon-orange)
+  );
+}
+
+/* Blue (dev-tools, misc) — blue → purple → cyan */
+.hero__subtitle--neon-blue {
+  background-image: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-blue),
+    var(--wp--preset--color--neon-purple),
+    var(--wp--preset--color--neon-cyan),
+    var(--wp--preset--color--neon-blue)
+  );
+}
+
+/* Light mode: use text-safe variants for accessibility */
+.hero__subtitle--neon-green { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-green-text), var(--wp--preset--color--neon-cyan-text), var(--wp--preset--color--neon-green-text)); }
+.hero__subtitle--neon-pink { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-pink-text), var(--wp--preset--color--neon-purple-text), var(--wp--preset--color--neon-pink-text)); }
+.hero__subtitle--neon-purple { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-purple-text), var(--wp--preset--color--neon-pink-text), var(--wp--preset--color--neon-purple-text)); }
+.hero__subtitle--neon-yellow { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-yellow-text), var(--wp--preset--color--neon-green-text), var(--wp--preset--color--neon-yellow-text)); }
+.hero__subtitle--neon-red { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-red-text), var(--wp--preset--color--neon-orange-text), var(--wp--preset--color--neon-red-text)); }
+.hero__subtitle--neon-cyan { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-cyan-text), var(--wp--preset--color--neon-green-text), var(--wp--preset--color--neon-cyan-text)); }
+.hero__subtitle--neon-orange { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-orange-text), var(--wp--preset--color--neon-yellow-text), var(--wp--preset--color--neon-orange-text)); }
+.hero__subtitle--neon-blue { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-blue-text), var(--wp--preset--color--neon-purple-text), var(--wp--preset--color--neon-blue-text)); }
+
+/* Dark mode: full-brightness neon for maximum impact */
+.dark .hero__subtitle--neon-green { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-green), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-yellow), var(--wp--preset--color--neon-green)); }
+.dark .hero__subtitle--neon-pink { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-purple), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-pink)); }
+.dark .hero__subtitle--neon-purple { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-purple), var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-blue), var(--wp--preset--color--neon-purple)); }
+.dark .hero__subtitle--neon-yellow { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-yellow), var(--wp--preset--color--neon-green), var(--wp--preset--color--neon-orange), var(--wp--preset--color--neon-yellow)); }
+.dark .hero__subtitle--neon-red { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-red), var(--wp--preset--color--neon-orange), var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-red)); }
+.dark .hero__subtitle--neon-cyan { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-green), var(--wp--preset--color--neon-blue), var(--wp--preset--color--neon-cyan)); }
+.dark .hero__subtitle--neon-orange { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-orange), var(--wp--preset--color--neon-yellow), var(--wp--preset--color--neon-red), var(--wp--preset--color--neon-orange)); }
+.dark .hero__subtitle--neon-blue { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-blue), var(--wp--preset--color--neon-purple), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-blue)); }
+
+/* Reduced motion: disable gradient animation, keep static gradient */
+@media (prefers-reduced-motion: reduce) {
+  .hero__subtitle--neon {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+/* ── Reusable neon gradient text utility ──
+   Apply to any element that needs an animated neon gradient.
+   Add the base class + a colour modifier.
+   Example: class="neon-text-gradient neon-text-gradient--cyan"    */
+
+.neon-text-gradient {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: subtitle-gradient-flow 6s ease infinite;
+  margin-bottom: 0;
+}
+
+.neon-text-gradient--green  { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-green-text), var(--wp--preset--color--neon-cyan-text), var(--wp--preset--color--neon-green-text)); }
+.neon-text-gradient--pink   { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-pink-text), var(--wp--preset--color--neon-purple-text), var(--wp--preset--color--neon-pink-text)); }
+.neon-text-gradient--purple { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-purple-text), var(--wp--preset--color--neon-pink-text), var(--wp--preset--color--neon-purple-text)); }
+.neon-text-gradient--yellow { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-yellow-text), var(--wp--preset--color--neon-green-text), var(--wp--preset--color--neon-yellow-text)); }
+.neon-text-gradient--red    { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-red-text), var(--wp--preset--color--neon-orange-text), var(--wp--preset--color--neon-red-text)); }
+.neon-text-gradient--cyan   { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-cyan-text), var(--wp--preset--color--neon-green-text), var(--wp--preset--color--neon-cyan-text)); }
+.neon-text-gradient--orange { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-orange-text), var(--wp--preset--color--neon-yellow-text), var(--wp--preset--color--neon-orange-text)); }
+.neon-text-gradient--blue   { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-blue-text), var(--wp--preset--color--neon-purple-text), var(--wp--preset--color--neon-blue-text)); }
+
+.dark .neon-text-gradient--green  { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-green), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-yellow), var(--wp--preset--color--neon-green)); }
+.dark .neon-text-gradient--pink   { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-purple), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-pink)); }
+.dark .neon-text-gradient--purple { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-purple), var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-blue), var(--wp--preset--color--neon-purple)); }
+.dark .neon-text-gradient--yellow { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-yellow), var(--wp--preset--color--neon-green), var(--wp--preset--color--neon-orange), var(--wp--preset--color--neon-yellow)); }
+.dark .neon-text-gradient--red    { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-red), var(--wp--preset--color--neon-orange), var(--wp--preset--color--neon-pink), var(--wp--preset--color--neon-red)); }
+.dark .neon-text-gradient--cyan   { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-green), var(--wp--preset--color--neon-blue), var(--wp--preset--color--neon-cyan)); }
+.dark .neon-text-gradient--orange { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-orange), var(--wp--preset--color--neon-yellow), var(--wp--preset--color--neon-red), var(--wp--preset--color--neon-orange)); }
+.dark .neon-text-gradient--blue   { background-image: linear-gradient(135deg, var(--wp--preset--color--neon-blue), var(--wp--preset--color--neon-purple), var(--wp--preset--color--neon-cyan), var(--wp--preset--color--neon-blue)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-text-gradient {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+.hero__description {
+  font-size: 1.125rem;
+  color: var(--wp--preset--color--neutral-500);
+  line-height: 1.6;
+  max-width: 36rem;
+}
+
+.dark .hero__description {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.hero__actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1023px) {
+  .hero__actions {
+    justify-content: center;
+  }
+}
+
+/* Media / Images */
+.hero__media-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--fluid-md);
+}
+
+.hero__media-wrapper-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--wp--preset--spacing--fluid-md);
+}
+
+.hero__media-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+}
+
+@media (min-width: 1024px) {
+  .hero__media-wrapper {
+    flex: 1;
+    height: 100%;
+    min-height: 500px;
+    padding: var(--wp--preset--spacing--fluid-md);
+  }
+
+  .hero__media-container {
+    height: 500px;
+    aspect-ratio: auto;
+    max-width: none;
+  }
+}
+
+/* Mosaic Images */
+.hero__mosaic-image {
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--wp--preset--border-radius--lg);
+  box-shadow: var(--wp--preset--shadow--2xl);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 4px solid #fff;
+}
+
+.dark .hero__mosaic-image {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.hero__mosaic-image:hover {
+  transform: scale(1.05);
+  z-index: var(--wp--preset--z-index--20);
+  box-shadow: 0 30px 60px rgba(190, 0, 254, 0.3);
+  border-color: var(--wp--preset--color--neon-pink);
+}
+
+/* Specific Mosaic Positions (Responsive) */
+.hero__mosaic-image--1 {
+  grid-column: 3 / 11;
+  grid-row: 1 / 8;
+  z-index: 1;
+}
+
+.hero__mosaic-image--2 {
+  grid-column: 8 / 13;
+  grid-row: 6 / 13;
+  z-index: 2;
+}
+
+.hero__mosaic-image--3 {
+  grid-column: 1 / 6;
+  grid-row: 8 / 13;
+  z-index: 3;
+}
+
+/* Scroll Arrow Positioning */
+.hero__scroll-arrow {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .hero__mosaic-image {
+    transition: none;
+  }
+
+  .hero__mosaic-image:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   TERMINAL BOOT SEQUENCE ANIMATIONS
+   80s Neon CLI Aesthetic - Phase 1
+   Created: March 12, 2026
+   ============================================ */
+
+/**
+ * Hero Animation Modifier - Terminal Boot Effect
+ * Apply to .hero element for full section entrance
+ */
+.hero--animated {
+  animation: terminalBoot 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/**
+ * Hero Title - Holographic Shimmer
+ * Apply to .hero__title for animated rainbow gradient
+ */
+.hero__title--holographic {
+  background: linear-gradient(
+    90deg,
+    var(--wp--preset--color--neon-pink) 0%,
+    var(--wp--preset--color--neon-purple) 25%,
+    var(--wp--preset--color--neon-cyan) 50%,
+    var(--wp--preset--color--neon-yellow) 75%,
+    var(--wp--preset--color--neon-pink) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holographicShimmer 4s ease-in-out infinite;
+}
+
+/**
+ * Hero Media - Float Gentle
+ * Apply to .hero__media-wrapper or .hero__mosaic-image for floating effect
+ */
+.hero__media--float {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+/**
+ * Hero Content Elements - Fade In Up with Stagger
+ * Apply to content elements for sequential entrance
+ */
+.hero__content--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+.hero__title--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+  opacity: 0;
+}
+
+.hero__subtitle--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+  opacity: 0;
+}
+
+.hero__description--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+  opacity: 0;
+}
+
+.hero__actions--fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+  opacity: 0;
+}
+
+/**
+ * CTA Button - Neon Pulse Effect
+ * Apply to primary CTA buttons for continuous neon glow
+ */
+.btn--neon-pulse {
+  animation: neonPulseCTA 2s ease-in-out infinite;
+}
+
+.btn--neon-pulse:hover {
+  animation: neonPulseCTA 1s ease-in-out infinite;
+}
+
+/**
+ * Reduced Motion - Disable All Hero Animations
+ * WCAG 2.1 Level AAA Compliance
+ */
+@media (prefers-reduced-motion: reduce) {
+  .hero--animated,
+  .hero__title--holographic,
+  .hero__media--float,
+  .hero__content--fade-in,
+  .hero__title--fade-in,
+  .hero__subtitle--fade-in,
+  .hero__description--fade-in,
+  .hero__actions--fade-in,
+  .btn--neon-pulse {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .hero__title--holographic {
+    /* Keep gradient but remove animation */
+    -webkit-text-fill-color: initial;
+    background: none;
+    color: var(--wp--preset--color--neon-pink);
+  }
+}

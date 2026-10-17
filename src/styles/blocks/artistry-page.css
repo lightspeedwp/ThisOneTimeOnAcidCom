@@ -1,0 +1,134 @@
+/* ──────────────────────────────────────────────
+   Artistry Page — Global Psytrance Artist Journey
+   /about/artistry
+   ────────────────────────────────────────────── */
+
+/* Breadcrumbs wrapper */
+.artistry-breadcrumbs {
+  padding: var(--wp--preset--spacing--fluid-md) var(--wp--preset--spacing--section-horizontal);
+  padding-top: calc(var(--header-height, 4rem) + var(--wp--preset--spacing--fluid-md));
+  max-width: var(--wp--preset--layout--wide);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Hero ── */
+.artistry-hero {
+  padding: var(--wp--preset--spacing--fluid-xl) var(--wp--preset--spacing--section-horizontal);
+  padding-bottom: var(--wp--preset--spacing--fluid-2xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.artistry-hero__inner {
+  max-width: var(--wp--preset--layout--wide);
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-xl);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .artistry-hero__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.artistry-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+.artistry-hero__title {
+  background: linear-gradient(
+    135deg,
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-blue),
+    var(--wp--preset--color--neon-cyan)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.05;
+}
+
+.artistry-hero__subtitle {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--300);
+  font-style: italic;
+  color: var(--wp--preset--color--neutral-700);
+  opacity: 0.85;
+}
+
+.dark .artistry-hero__subtitle {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+.artistry-hero__description {
+  max-width: 42ch;
+  color: var(--wp--preset--color--neutral-700);
+  opacity: 0.9;
+}
+
+.dark .artistry-hero__description {
+  color: var(--wp--preset--color--neutral-200);
+}
+
+.artistry-hero__cta {
+  display: flex;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  margin-top: var(--wp--preset--spacing--fluid-sm);
+}
+
+/* Hero image */
+.artistry-hero__image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.artistry-hero__image {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: var(--wp--preset--border-radius--lg);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 60px rgba(255, 16, 240, 0.15),
+    0 0 120px rgba(0, 247, 255, 0.1);
+}
+
+.dark .artistry-hero__image {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(255, 16, 240, 0.2),
+    0 0 160px rgba(0, 247, 255, 0.12);
+}
+
+/* ── Content wrapper ── */
+.artistry-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-xl);
+  padding: var(--wp--preset--spacing--section-horizontal);
+  padding-top: 0;
+  max-width: var(--wp--preset--layout--wide);
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: var(--wp--preset--spacing--fluid-2xl);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .artistry-content .entrance-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* artistry-page.css cleaned up — moved to about-page.css */
+/* Removed duplicate definitions for .about-skills-grid, .about-technical-card, etc. */

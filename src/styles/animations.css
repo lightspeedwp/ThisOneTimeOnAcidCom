@@ -1,0 +1,626 @@
+/* ============================================
+   ASH SHAW MAKEUP PORTFOLIO
+   CENTRALIZED ANIMATIONS
+   Version: 2.0.0 - Terminal Boot Sequence (Phase 1)
+   Last Updated: March 12, 2026
+   ============================================
+
+   This file contains all common keyframe animations
+   used across the application to eliminate duplication
+   and improve maintainability.
+
+   Performance Notes:
+   - All animations respect prefers-reduced-motion
+   - Mobile optimizations included
+   - GPU acceleration via transform/opacity
+   
+   Animation Count: 29 keyframes
+   New in v2.0.0: Terminal Boot Sequence (6 animations)
+   ============================================ */
+
+/* ============================================
+   UTILITY ANIMATIONS
+   Common animations used across components
+   ============================================ */
+
+/**
+ * Spin - 360° rotation
+ * Used by: Loading spinners, icons, decorative elements
+ */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/**
+ * Pulse - Opacity fade in/out
+ * Used by: Loading indicators, attention-grabbing elements
+ */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/**
+ * Bounce - Vertical bounce effect
+ * Used by: Scroll indicators, CTAs
+ */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-12px); }
+  60% { transform: translateY(-6px); }
+}
+
+/**
+ * Float - Gentle up/down movement
+ * Used by: Hero sections, decorative elements
+ */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+/**
+ * Fade In - Opacity transition
+ * Used by: Modals, overlays, content reveals
+ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/**
+ * Slide In - Slide up with fade
+ * Used by: Menus, notifications, panels
+ */
+@keyframes slideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/**
+ * Slide Up - Vertical slide
+ * Used by: Share menu, tooltips
+ */
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/**
+ * Slide Up Fade - Scroll to top button entrance
+ * Used by: ScrollBackToTop component
+ */
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Scale In - Scale with fade
+ * Used by: Modals, popovers
+ */
+@keyframes scaleIn {
+  from { 
+    transform: scale(0.9); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}
+
+/* ============================================
+   NEON EFFECT ANIMATIONS
+   Brand-specific neon glow effects
+   ============================================ */
+
+/**
+ * Gradient Shift - Animated gradient background
+ * Used by: Hero sections, feature cards
+ */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/**
+ * Subtitle Gradient Flow - Animated gradient for hero subtitles
+ * Used by: Hero subtitle, about subpage hero, hidden about page
+ * Identical to gradientShift but kept as separate name for semantic clarity
+ */
+@keyframes subtitle-gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/**
+ * Neon Pulse - Glow intensity variation
+ * Used by: Neon text, glowing borders
+ * Note: Uses CSS variable --glow-color for flexibility
+ */
+@keyframes neonPulse {
+  from { 
+    box-shadow: 0 0 5px var(--glow-color), 
+                0 0 10px var(--glow-color); 
+  }
+  to { 
+    box-shadow: 0 0 10px var(--glow-color), 
+                0 0 20px var(--glow-color); 
+  }
+}
+
+/**
+ * Neon Pulse Purple - Purple-specific neon effect
+ * Used by: Featured video cards
+ */
+@keyframes neonPulsePurple {
+  from { 
+    box-shadow: 0 0 20px rgba(190, 0, 254, 0.3); 
+    border-color: rgba(190, 0, 254, 0.5); 
+  }
+  to { 
+    box-shadow: 0 0 40px rgba(190, 0, 254, 0.6); 
+    border-color: var(--wp--preset--color--neon-purple); 
+  }
+}
+
+/**
+ * Neon Pulse Pink - Pink-specific neon effect
+ * Used by: Video thumbnails, CTAs
+ */
+@keyframes neonPulsePink {
+  from { 
+    box-shadow: 0 0 10px var(--wp--preset--color--neon-pink); 
+  }
+  to { 
+    box-shadow: 0 0 25px var(--wp--preset--color--neon-pink); 
+  }
+}
+
+/**
+ * Pulse Ring - Expanding ring effect
+ * Used by: ScrollDownArrow component
+ */
+@keyframes pulse-ring {
+  0% { 
+    transform: scale(0.8); 
+    opacity: 0.8; 
+  }
+  100% { 
+    transform: scale(1.5); 
+    opacity: 0; 
+  }
+}
+
+/* ============================================
+   UI COMPONENT ANIMATIONS
+   Specific to UI library components
+   ============================================ */
+
+/**
+ * Accordion Down - Expand accordion content
+ * Used by: Accordion, Collapsible components
+ */
+@keyframes accordionDown {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+/**
+ * Accordion Up - Collapse accordion content
+ * Used by: Accordion, Collapsible components
+ */
+@keyframes accordionUp {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+/**
+ * Collapsible Down - Expand with fade
+ * Used by: Collapsible component
+ */
+@keyframes collapsible-down {
+  from { 
+    height: 0; 
+    opacity: 0; 
+  }
+  to { 
+    height: var(--radix-collapsible-content-height); 
+    opacity: 1; 
+  }
+}
+
+/**
+ * Collapsible Up - Collapse with fade
+ * Used by: Collapsible component
+ */
+@keyframes collapsible-up {
+  from { 
+    height: var(--radix-collapsible-content-height); 
+    opacity: 1; 
+  }
+  to { 
+    height: 0; 
+    opacity: 0; 
+  }
+}
+
+/**
+ * Caret Blink - Blinking cursor effect
+ * Used by: Input OTP component
+ */
+@keyframes caret-blink {
+  0%, 70%, 100% { opacity: 1; }
+  20%, 50% { opacity: 0; }
+}
+
+/**
+ * Shine - Shine effect for loading states
+ * Used by: Skeleton loaders
+ */
+@keyframes shine {
+  100% {
+    left: 150%;
+  }
+}
+
+/**
+ * Skeleton Pulse - Subtle pulse for loading
+ * Used by: Skeleton components
+ */
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/**
+ * Typeform Spin - Loading spinner for Typeform
+ * Used by: TypeformEmbed component
+ */
+@keyframes typeform-spin {
+  to { 
+    transform: translate(-50%, -50%) rotate(360deg); 
+  }
+}
+
+/* ============================================
+   TERMINAL BOOT SEQUENCE ANIMATIONS
+   80s Neon CLI-inspired animations for hero sections
+   Created: March 12, 2026
+   Phase: Animation Movement Audit - Phase 1
+   ============================================ */
+
+/**
+ * Terminal Boot - CLI-style typing effect
+ * Used by: BookHomePage hero section
+ * Creates the illusion of text being typed character by character
+ */
+@keyframes terminalBoot {
+  0% { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  20% { 
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  60% {
+    opacity: 0.8;
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Holographic Shimmer - Iridescent text effect
+ * Used by: Hero titles with .text-neon-rainbow class
+ * Animated rainbow gradient shimmer
+ */
+@keyframes holographicShimmer {
+  0% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+}
+
+/**
+ * Float Gentle - Subtle floating motion
+ * Used by: Hero visual elements, book cover images
+ * Creates gentle up-and-down movement
+ */
+@keyframes floatGentle {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-15px);
+  }
+}
+
+/**
+ * Fade In Up - Entrance animation with upward movement
+ * Used by: Hero content sections with stagger delays
+ * Combines fade in with subtle upward slide
+ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Neon Pulse CTA - Pulsing glow for call-to-action buttons
+ * Used by: Primary CTA buttons site-wide (.button--primary)
+ * Pink neon glow that pulses continuously
+ */
+@keyframes neonPulseCTA {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px var(--wp--preset--color--neon-pink),
+      0 0 10px var(--wp--preset--color--neon-pink),
+      0 0 15px rgba(255, 16, 240, 0.4);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px var(--wp--preset--color--neon-pink),
+      0 0 20px var(--wp--preset--color--neon-pink),
+      0 0 30px rgba(255, 16, 240, 0.6);
+  }
+}
+
+/**
+ * Success Pulse - Form success state animation
+ * Used by: .form--success state
+ * Green neon pulse to indicate successful submission
+ */
+@keyframes successPulse {
+  0%, 100% {
+    border-color: #39FF14;
+    box-shadow: 
+      0 0 5px rgba(57, 255, 20, 0.3),
+      0 0 10px rgba(57, 255, 20, 0.2);
+  }
+  50% {
+    border-color: #39FF14;
+    box-shadow: 
+      0 0 15px rgba(57, 255, 20, 0.5),
+      0 0 25px rgba(57, 255, 20, 0.3),
+      0 0 35px rgba(57, 255, 20, 0.2);
+  }
+}
+
+/**
+ * Error Shake - Form error state animation
+ * Used by: .form--error state
+ * Horizontal shake with red neon glow to indicate validation errors
+ */
+@keyframes errorShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-8px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(8px);
+  }
+}
+
+/**
+ * Label Float - Input label animation
+ * Used by: Form inputs when focused or filled
+ * Floats label above input field
+ */
+@keyframes labelFloat {
+  to {
+    transform: translateY(-24px) scale(0.85);
+    opacity: 0.8;
+  }
+}
+
+/* ============================================
+   PHASE 2–4 KEYFRAMES
+   ============================================ */
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes checkmarkDraw {
+  from { stroke-dashoffset: 100; opacity: 0; }
+  to { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes confettiFall {
+  0% { transform: translate(0, -20px) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--tx, 0px), 220px) rotate(var(--rot, 360deg)); opacity: 0; }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes neonPulseWrapper {
+  from { filter: drop-shadow(0 0 4px var(--np-color, var(--color-neon-pink))); }
+  to { filter: drop-shadow(0 0 14px var(--np-color, var(--color-neon-pink))); }
+}
+
+@keyframes glitchBefore {
+  0% { clip-path: inset(40% 0 40% 0); transform: translate(-3px, 0); }
+  50% { clip-path: inset(60% 0 20% 0); transform: translate(3px, 0); }
+  100% { clip-path: inset(20% 0 60% 0); transform: translate(0, 0); }
+}
+
+@keyframes glitchAfter {
+  0% { clip-path: inset(20% 0 60% 0); transform: translate(3px, 0); }
+  50% { clip-path: inset(40% 0 40% 0); transform: translate(-3px, 0); }
+  100% { clip-path: inset(60% 0 20% 0); transform: translate(0, 0); }
+}
+
+@keyframes scanLineSweep {
+  from { top: -4px; }
+  to { top: 100%; }
+}
+
+@keyframes terminalScanSweep {
+  from { top: -4px; opacity: 0.4; }
+  80% { opacity: 0.3; }
+  to { top: 100%; opacity: 0; }
+}
+
+@keyframes cursorDotFade {
+  0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+}
+
+@keyframes tapRippleExpand {
+  0% { width: 20px; height: 20px; opacity: 0.8; }
+  100% { width: 80px; height: 80px; opacity: 0; }
+}
+
+@keyframes konamiExplode {
+  0% {
+    width: 0; height: 0;
+    box-shadow: 0 0 0 0 var(--color-neon-pink);
+    opacity: 1;
+  }
+  50% {
+    width: 20px; height: 20px;
+    box-shadow:
+      0 0 60px 60px var(--color-neon-pink),
+      0 0 120px 100px rgba(244, 255, 60, 0.4),
+      0 0 180px 140px rgba(255, 16, 240, 0.2);
+    opacity: 0.8;
+  }
+  100% {
+    width: 20px; height: 20px;
+    box-shadow: 0 0 200px 200px transparent;
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   Reduce animation complexity on mobile devices
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Slow down gradient animations to reduce CPU usage */
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Reduce neon pulse intensity on mobile */
+  @keyframes neonPulse {
+    from { 
+      box-shadow: 0 0 3px var(--glow-color), 
+                  0 0 6px var(--glow-color); 
+    }
+    to { 
+      box-shadow: 0 0 6px var(--glow-color), 
+                  0 0 12px var(--glow-color); 
+    }
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY: REDUCED MOTION SUPPORT
+   Disable all animations for users who prefer reduced motion
+   WCAG 2.1 Level AAA Compliance
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Entrance elements: snap to final visible state immediately */
+  .entrance-boot,
+  .entrance-stagger {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Loop/continuous animations: stop entirely */
+  .float-gentle,
+  .holographic-shimmer,
+  .neon-pulse-cta {
+    animation: none !important;
+  }
+
+  /* Form feedback: disable pulse/shake, preserve border color */
+  .form--success,
+  .form--error {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ============================================
+   DATA SAVER MODE
+   Disable heavy animations on slow connections
+   ============================================ */
+
+@media (prefers-reduced-data: reduce) {
+  /* Disable gradient animations (high CPU usage) */
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+  }
+  
+  /* Disable neon pulse (high GPU usage) */
+  @keyframes neonPulse,
+  @keyframes neonPulsePurple,
+  @keyframes neonPulsePink {
+    0%, 100% { 
+      box-shadow: none; 
+    }
+  }
+}

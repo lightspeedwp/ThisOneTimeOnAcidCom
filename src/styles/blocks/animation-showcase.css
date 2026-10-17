@@ -1,0 +1,271 @@
+/* ============================================
+   ANIMATION SHOWCASE PAGE
+   Dev tools for demonstrating terminal animations
+   Version: 1.0.0
+   Created: March 12, 2026
+   ============================================ */
+
+.animation-showcase-page {
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HEADER
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.showcase-header {
+  text-align: center;
+  border-bottom: 2px solid rgba(255, 16, 240, 0.2);
+}
+
+.showcase-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-top: 16px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DEMO NAVIGATION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.demo-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.demo-nav-button {
+  background: rgba(15, 15, 15, 0.6);
+  border: 2px solid rgba(255, 16, 240, 0.2);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.demo-nav-button:hover {
+  border-color: var(--wp--preset--color--neon-pink);
+  background: rgba(255, 16, 240, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(255, 16, 240, 0.2);
+}
+
+.demo-nav-button--active {
+  border-color: var(--wp--preset--color--neon-pink);
+  background: rgba(255, 16, 240, 0.15);
+  box-shadow: 0 0 20px rgba(255, 16, 240, 0.3);
+}
+
+.demo-nav-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: 1.25rem;
+  color: var(--wp--preset--color--neon-pink);
+  margin-bottom: 8px;
+}
+
+.demo-nav-desc {
+  font-size: 0.875rem;
+  color: var(--wp--preset--color--text-muted);
+  line-height: 1.5;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DEMO STAGE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.demo-stage {
+  background: rgba(15, 15, 15, 0.8);
+  border: 2px solid rgba(255, 16, 240, 0.3);
+  border-radius: 12px;
+  padding: 60px 40px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-content {
+  width: 100%;
+  text-align: center;
+}
+
+.demo-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: 1.5rem;
+  color: var(--wp--preset--color--neon-yellow);
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.demo-button-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.demo-media-grid {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Demo float boxes */
+.demo-float-box {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-float-box--pink {
+  background: linear-gradient(135deg, var(--color-neon-pink) 0%, var(--color-neon-yellow) 100%);
+}
+
+.demo-float-box--yellow {
+  background: linear-gradient(135deg, var(--color-neon-yellow) 0%, #00F5FF 100%);
+  animation-delay: 0.5s;
+}
+
+.demo-float-text {
+  color: var(--color-atomic-black);
+  padding: 20px;
+  font-weight: bold;
+}
+
+.demo-page-headers {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.demo-page-header-spacing {
+  margin-bottom: 40px;
+}
+
+.demo-note {
+  font-size: 0.875rem;
+  color: var(--wp--preset--color--text-muted);
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CODE DISPLAY
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.demo-code-block {
+  margin-top: 40px;
+  background: var(--color-atomic-black);
+  border: 1px solid rgba(255, 16, 240, 0.2);
+  border-radius: 8px;
+  padding: 32px;
+}
+
+.demo-code-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: 1.25rem;
+  color: var(--wp--preset--color--neon-pink);
+  margin-bottom: 16px;
+}
+
+.demo-code {
+  background: #000000;
+  border: 1px solid rgba(255, 16, 240, 0.1);
+  border-radius: 4px;
+  padding: 24px;
+  overflow-x: auto;
+  font-family: 'Space Mono', 'Menlo', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.demo-code code {
+  color: var(--wp--preset--color--neon-yellow);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   STATS SECTION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.showcase-stats {
+  border-top: 2px solid rgba(255, 16, 240, 0.2);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(15, 15, 15, 0.6);
+  border: 2px solid rgba(255, 16, 240, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 12px 32px rgba(255, 16, 240, 0.3);
+}
+
+.stat-number {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: 4rem;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 1.125rem;
+  color: var(--wp--preset--color--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (max-width: 768px) {
+  .demo-stage {
+    padding: 40px 20px;
+  }
+
+  .demo-button-row {
+    flex-direction: column;
+  }
+
+  .demo-media-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   REDUCED MOTION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-nav-button:hover,
+  .stat-card:hover {
+    transform: none;
+  }
+}

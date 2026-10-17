@@ -1,0 +1,65 @@
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-surface-elevated, rgba(255, 255, 255, 0.05));
+  border-radius: 9999px;
+  padding: 4px;
+  gap: 2px;
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+}
+
+.theme-switcher__option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--color-text-muted, #888);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--wp--preset--spacing--10) ease;
+}
+
+.theme-switcher__option:hover {
+  color: var(--color-text-primary, #fff);
+  background-color: var(--color-surface-hover, rgba(255, 255, 255, 0.1));
+}
+
+.theme-switcher__option--active {
+  color: var(--color-atomic-black, #000);
+  background-color: var(--color-neon-pink, #FF10F0);
+  box-shadow: 0 0 10px rgba(255, 16, 240, 0.5);
+}
+
+[data-theme="light"] .theme-switcher__option--active {
+  background-color: var(--color-atomic-black, #000);
+  color: #fff;
+  box-shadow: none;
+}
+
+[data-theme="brutalist"] .theme-switcher {
+  border-radius: 0;
+  border: 2px solid #000;
+  background-color: #fff;
+  padding: 0;
+  gap: 0;
+}
+
+[data-theme="brutalist"] .theme-switcher__option {
+  border-radius: 0;
+  border-right: 2px solid #000;
+  color: #000;
+}
+
+[data-theme="brutalist"] .theme-switcher__option:last-child {
+  border-right: none;
+}
+
+[data-theme="brutalist"] .theme-switcher__option--active {
+  background-color: var(--color-neon-yellow, #FFFF00);
+  color: #000;
+  box-shadow: 4px 4px 0 #000;
+  transform: translate(-2px, -2px);
+}

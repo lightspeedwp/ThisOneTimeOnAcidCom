@@ -1,0 +1,234 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "color": {
+      "palette": [
+        {
+          "slug": "neon-green",
+          "color": "#39FF14",
+          "name": "Neon Green"
+        },
+        {
+          "slug": "neon-pink",
+          "color": "#FF10F0",
+          "name": "Neon Pink"
+        },
+        {
+          "slug": "neon-blue",
+          "color": "#1F51FF",
+          "name": "Neon Blue"
+        },
+        {
+          "slug": "neon-yellow",
+          "color": "#FFFF00",
+          "name": "Neon Yellow"
+        },
+        {
+          "slug": "neon-orange",
+          "color": "#FF5F1F",
+          "name": "Neon Orange"
+        },
+        {
+          "slug": "neon-purple",
+          "color": "#BE00FE",
+          "name": "Neon Purple"
+        },
+        {
+          "slug": "neon-cyan",
+          "color": "#00F7FF",
+          "name": "Neon Cyan"
+        },
+        {
+          "slug": "neon-red",
+          "color": "#FF3131",
+          "name": "Neon Red"
+        },
+        {
+          "slug": "atomic-black",
+          "color": "#0F0F0F",
+          "name": "Atomic Black"
+        },
+        {
+          "slug": "base",
+          "color": "#ffffff",
+          "name": "Base"
+        },
+        {
+          "slug": "contrast",
+          "color": "#0F0F0F",
+          "name": "Contrast"
+        }
+      ],
+      "gradients": [
+        {
+          "slug": "cyberpunk",
+          "gradient": "linear-gradient(135deg, #FF10F0 0%, #1F51FF 100%)",
+          "name": "Cyberpunk"
+        },
+        {
+          "slug": "toxic-lime",
+          "gradient": "linear-gradient(to right, #39FF14 0%, #12FFF7 100%)",
+          "name": "Toxic Lime"
+        },
+        {
+          "slug": "solar-flare",
+          "gradient": "linear-gradient(45deg, #FF5F1F 0%, #FFFF00 100%)",
+          "name": "Solar Flare"
+        },
+        {
+          "slug": "hyperpop",
+          "gradient": "linear-gradient(-45deg, #FF10F0, #1F51FF, #00F7FF, #39FF14)",
+          "name": "Hyperpop"
+        }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "\"Righteous\", \"Arial Black\", sans-serif",
+          "slug": "brand-title",
+          "name": "Brand Title"
+        },
+        {
+          "fontFamily": "\"Playfair Display\", \"Times New Roman\", serif",
+          "slug": "brand-heading",
+          "name": "Brand Heading"
+        },
+        {
+          "fontFamily": "\"Inter\", -apple-system, BlinkMacSystemFont, sans-serif",
+          "slug": "brand-body",
+          "name": "Brand Body"
+        }
+      ],
+      "fontSizes": [
+        {
+          "slug": "100",
+          "size": "clamp(0.75rem, 0.65rem + 0.5vw, 0.875rem)",
+          "name": "Small"
+        },
+        {
+          "slug": "200",
+          "size": "clamp(1rem, 0.85rem + 0.75vw, 1.125rem)",
+          "name": "Normal"
+        },
+        {
+          "slug": "300",
+          "size": "clamp(1.125rem, 0.95rem + 0.875vw, 1.25rem)",
+          "name": "Medium"
+        },
+        {
+          "slug": "400",
+          "size": "clamp(1.25rem, 1rem + 1.25vw, 1.5rem)",
+          "name": "Large"
+        },
+        {
+          "slug": "500",
+          "size": "clamp(1.5rem, 1.2rem + 1.5vw, 2rem)",
+          "name": "XL"
+        },
+        {
+          "slug": "600",
+          "size": "clamp(1.875rem, 1.4rem + 2.375vw, 2.5rem)",
+          "name": "2XL"
+        },
+        {
+          "slug": "700",
+          "size": "clamp(2.25rem, 1.75rem + 2.5vw, 3rem)",
+          "name": "3XL"
+        },
+        {
+          "slug": "800",
+          "size": "clamp(2.5rem, 1.9rem + 3vw, 3.5rem)",
+          "name": "4XL"
+        },
+        {
+          "slug": "900",
+          "size": "clamp(3rem, 2.2rem + 4vw, 4.5rem)",
+          "name": "5XL"
+        },
+        {
+          "slug": "hero",
+          "size": "clamp(3.5rem, 6vw + 1rem, 6.5rem)",
+          "name": "Hero"
+        },
+        {
+          "slug": "section",
+          "size": "clamp(2rem, 3vw + 1rem, 3.5rem)",
+          "name": "Section"
+        }
+      ]
+    },
+    "spacing": {
+      "spacingScale": {
+        "steps": 0
+      },
+      "spacingSizes": [
+        {
+          "slug": "fluid-xs",
+          "size": "clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem)",
+          "name": "XS"
+        },
+        {
+          "slug": "fluid-sm",
+          "size": "clamp(0.75rem, 0.5rem + 1vw, 1.25rem)",
+          "name": "SM"
+        },
+        {
+          "slug": "fluid-md",
+          "size": "clamp(1rem, 0.6rem + 2vw, 2rem)",
+          "name": "MD"
+        },
+        {
+          "slug": "fluid-lg",
+          "size": "clamp(1.5rem, 1rem + 2.5vw, 3rem)",
+          "name": "LG"
+        },
+        {
+          "slug": "fluid-xl",
+          "size": "clamp(2rem, 1.2rem + 4vw, 4rem)",
+          "name": "XL"
+        },
+        {
+          "slug": "fluid-2xl",
+          "size": "clamp(3rem, 1.5rem + 7.5vw, 6rem)",
+          "name": "2XL"
+        }
+      ]
+    },
+    "shadow": {
+      "presets": [
+        {
+          "slug": "sm",
+          "shadow": "0 1px 2px rgba(0, 0, 0, 0.05)",
+          "name": "Small"
+        },
+        {
+          "slug": "md",
+          "shadow": "0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06)",
+          "name": "Medium"
+        },
+        {
+          "slug": "lg",
+          "shadow": "0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)",
+          "name": "Large"
+        },
+        {
+          "slug": "neon-pink",
+          "shadow": "0 0 20px rgba(255, 16, 240, 0.4)",
+          "name": "Neon Pink"
+        },
+        {
+          "slug": "neon-purple",
+          "shadow": "0 0 20px rgba(190, 0, 254, 0.4)",
+          "name": "Neon Purple"
+        },
+        {
+          "slug": "card",
+          "shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+          "name": "Card"
+        }
+      ]
+    }
+  }
+}

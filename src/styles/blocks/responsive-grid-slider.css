@@ -1,0 +1,155 @@
+/* Responsive Grid Slider Styles */
+/* Unified responsive layout engine: Desktop Grid / Mobile Slider */
+
+/* Grid mode — blockGap between cards */
+.rgs-grid {
+  gap: var(--wp--preset--spacing--block-gap);
+}
+
+.rgs-grid-item {
+  display: contents;
+}
+
+.rgs-wrapper {
+  position: relative;
+  max-width: 100%;
+}
+
+/* Nav Buttons */
+.rgs-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: var(--wp--preset--color--base);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wp--preset--color--neutral-700);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--wp--preset--shadow--md);
+}
+
+.dark .rgs-nav-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  box-shadow: none;
+}
+
+.rgs-nav-button:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--neon-purple);
+  border-color: var(--wp--preset--color--neon-purple);
+  color: #fff;
+}
+
+.dark .rgs-nav-button:hover:not(:disabled) {
+  box-shadow: 0 0 15px rgba(190, 0, 254, 0.5);
+}
+
+.rgs-nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.rgs-nav-button--prev {
+  left: -1rem;
+}
+
+.rgs-nav-button--next {
+  right: -1rem;
+}
+
+.rgs-nav-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Hide nav buttons on mobile */
+@media (max-width: 768px) {
+  .rgs-nav-button {
+    display: none;
+  }
+}
+
+/* Slider Viewport */
+.rgs-viewport {
+  overflow: hidden;
+  margin: 0 calc(var(--wp--preset--spacing--block-gap) / -2);
+  padding: calc(var(--wp--preset--spacing--block-gap) / 2);
+}
+
+.rgs-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  /* Default transform set by inline style */
+}
+
+.rgs-slide {
+  padding: 0 calc(var(--wp--preset--spacing--block-gap) / 2);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Slide Widths */
+/* Tablet: 2 columns */
+@media (max-width: 1023px) {
+  .rgs-slide {
+    flex: 0 0 50%;
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 767px) {
+  .rgs-slide {
+    flex: 0 0 100%;
+  }
+}
+
+/* Dots Navigation */
+.rgs-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.rgs-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--wp--preset--color--neutral-300);
+  background-color: var(--wp--preset--color--neutral-100);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dark .rgs-dot {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.rgs-dot--active {
+  background-color: var(--wp--preset--color--neon-pink) !important;
+  border-color: var(--wp--preset--color--neon-pink) !important;
+  transform: scale(1.2);
+}
+
+.dark .rgs-dot--active {
+  box-shadow: 0 0 10px rgba(255, 16, 240, 0.5);
+}
+
+.rgs-dot--inactive:hover {
+  background-color: var(--wp--preset--color--neutral-300);
+}
+
+.dark .rgs-dot--inactive:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}

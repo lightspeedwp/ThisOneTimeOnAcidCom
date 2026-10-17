@@ -1,0 +1,223 @@
+/* Home Page Styles */
+
+/* ════════════════════════════════════════════════════════════
+   HOMEPAGE SECTION PADDING — Standard Fluid Values
+   Vertical:   clamp(3rem, 1.5rem + 4vw, 5rem)     → 48px – 80px
+   Horizontal: clamp(1.5rem, 1.35rem + 0.714vw, 2rem) → 24px – 32px
+   ════════════════════════════════════════════════════════════ */
+
+/* Standard padding for all content sections between hero and footer */
+.home-page-layout > section:not(.hero) {
+  padding-top: clamp(3rem, 1.5rem + 4vw, 5rem);
+  padding-bottom: clamp(3rem, 1.5rem + 4vw, 5rem);
+  padding-left: clamp(1.5rem, 1.35rem + 0.714vw, 2rem);
+  padding-right: clamp(1.5rem, 1.35rem + 0.714vw, 2rem);
+}
+
+/* Remove redundant padding from inner container wrappers */
+.home-page-layout > section:not(.hero) .container-wide,
+.home-page-layout > section:not(.hero) .container-6xl,
+.home-page-layout > section:not(.hero) .container-7xl {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Inner containers use flex column + blockGap for vertical rhythm */
+.home-page-layout > section:not(.hero) > .container-wide,
+.home-page-layout > section:not(.hero) > .container-6xl,
+.home-page-layout > section:not(.hero) > .festival-countdown__inner,
+.home-page-layout > section:not(.hero) > .testimonials-section__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--block-gap);
+}
+
+/* ── WhySection ── Reset child margins → parent gap handles spacing */
+.home-page-layout .why-section__header {
+  margin-bottom: 0;
+}
+.home-page-layout .why-section__grid {
+  margin-bottom: 0;
+}
+.home-page-layout .why-section__footer {
+  margin-top: 0;
+}
+
+/* ── FeaturedSection ── */
+.home-page-layout .featured-section__header {
+  margin-bottom: 0;
+}
+.home-page-layout .featured-section__cta-container {
+  margin-top: 0;
+}
+
+/* ── BlogPreviewSection ── */
+.home-page-layout .blog-preview__header {
+  margin-bottom: 0;
+}
+.home-page-layout .blog-preview__cta {
+  margin-top: 0;
+}
+
+/* ── TestimonialsSection ── */
+.home-page-layout .testimonials-section__container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.home-page-layout .testimonials-section__header {
+  margin-bottom: 0;
+}
+
+/* ── FestivalCountdown ── */
+.home-page-layout .festival-countdown__header {
+  margin-bottom: 0;
+}
+.home-page-layout .festival-countdown__grid {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.home-page-layout .festival-countdown__badge-container {
+  margin-bottom: 0;
+}
+.home-page-layout .festival-countdown__subtitle {
+  margin-bottom: 0;
+}
+.home-page-layout .festival-countdown__description {
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-page-layout .festival-countdown__urgency {
+  margin-top: 0;
+}
+.home-page-layout .festival-countdown__cta-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--block-gap);
+}
+
+/* ── InstagramFeed ── */
+.home-page-layout .instagram-feed__title {
+  margin-bottom: 0;
+}
+.home-page-layout .instagram-feed__description {
+  margin-bottom: 0;
+}
+.home-page-layout .instagram-feed__header-col {
+  gap: var(--wp--preset--spacing--block-gap);
+}
+
+/* ── UVMakeupSection ── */
+/* Gap-based layout — no margin overrides needed */
+
+/* ── Reset margin utilities on direct children of inner containers ──
+   Parent gap handles all vertical rhythm — no margin needed */
+.home-page-layout > section:not(.hero) .container-wide > .mb-fluid-sm,
+.home-page-layout > section:not(.hero) .container-wide > .mb-fluid-md,
+.home-page-layout > section:not(.hero) .container-wide > .mb-fluid-lg,
+.home-page-layout > section:not(.hero) .container-wide > .mb-fluid-xl,
+.home-page-layout > section:not(.hero) .container-wide > .mb-fluid-2xl,
+.home-page-layout > section:not(.hero) .testimonials-section__container > .mb-fluid-sm,
+.home-page-layout > section:not(.hero) .testimonials-section__container > .mb-fluid-md,
+.home-page-layout > section:not(.hero) .testimonials-section__container > .mb-fluid-lg,
+.home-page-layout > section:not(.hero) .testimonials-section__container > .mb-fluid-xl,
+.home-page-layout > section:not(.hero) .testimonials-section__container > .mb-fluid-2xl {
+  margin-bottom: 0;
+}
+
+/* Loading State */
+.homepage-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--wp--preset--spacing--fluid-lg);
+}
+
+.homepage-loading__content {
+  width: 100%;
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+}
+
+/* Error State */
+.homepage-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--wp--preset--spacing--fluid-lg);
+}
+
+.homepage-error__content {
+  text-align: center;
+  max-width: var(--wp--preset--layout--content);
+}
+
+.homepage-error__icon-wrapper {
+  margin-bottom: var(--wp--preset--spacing--fluid-lg);
+}
+
+.homepage-error__icon {
+  font-size: 3rem;
+  margin-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+.homepage-error__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+/* Hero Actions */
+.homepage-hero__actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Loading Toast */
+.loading-toast {
+  position: fixed;
+  bottom: var(--wp--preset--spacing--fluid-lg);
+  right: var(--wp--preset--spacing--fluid-lg);
+  z-index: var(--wp--preset--z-index--toast);
+  animation: slideIn 0.3s ease-out;
+}
+
+.loading-toast__inner {
+  background-color: var(--wp--preset--color--neutral-900);
+  color: #fff;
+  padding: var(--wp--preset--spacing--fluid-sm) var(--wp--preset--spacing--fluid-md);
+  border-radius: var(--wp--preset--border-radius--full);
+  box-shadow: var(--wp--preset--shadow--card);
+}
+
+.dark .loading-toast__inner {
+  background-color: var(--wp--preset--color--neutral-800);
+  border: 1px solid var(--wp--preset--color--neutral-700);
+}
+
+.loading-toast__content {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: 500;
+}
+
+.loading-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animation moved to /styles/animations.css */
+
+/* Hero Scroll Arrow Override */
+.hero__scroll-arrow {
+  margin-top: var(--wp--preset--spacing--fluid-xl);
+}

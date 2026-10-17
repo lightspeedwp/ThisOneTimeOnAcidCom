@@ -1,0 +1,481 @@
+/* Countdown Block Styles */
+.festival-countdown {
+  background-color: var(--wp--preset--color--neutral-50);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .festival-countdown {
+  background-color: #080808;
+}
+
+/* Inner content wrapper — positioned above background effects */
+.festival-countdown__inner {
+  position: relative;
+  z-index: 10;
+}
+
+.festival-countdown__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(255, 255, 0, 0.1);
+  border: 1px solid rgba(255, 255, 0, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  color: var(--wp--preset--color--neon-yellow);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 15px rgba(255, 255, 0, 0.2);
+}
+
+.festival-countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 32rem;
+  margin: 0 auto 3rem;
+}
+
+@media (min-width: 640px) {
+  .festival-countdown__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+.festival-timer-card {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: var(--wp--preset--shadow--card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.dark .festival-timer-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.dark .festival-timer-card:hover {
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+  transform: translateY(-2px);
+}
+
+.festival-timer-card__number {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: 2.5rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--wp--preset--color--neon-pink);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
+}
+
+.festival-timer-card__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .festival-timer-card__label {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* Multiple Countdowns Styles */
+.multiple-countdowns {
+  background-color: var(--background);
+  position: relative;
+}
+
+.festival-card {
+  position: relative;
+  background-color: var(--wp--preset--color--neutral-50);
+  border-radius: var(--wp--preset--border-radius--xl);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.dark .festival-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.festival-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--wp--preset--shadow--card-hover);
+}
+
+/* Festival Variants */
+.festival-card--purple {
+  border-top: 4px solid var(--wp--preset--color--neon-purple);
+}
+.festival-card--purple:hover {
+  box-shadow: 0 10px 30px rgba(190, 0, 254, 0.15);
+}
+.dark .festival-card--purple:hover {
+  border-color: var(--wp--preset--color--neon-purple);
+  box-shadow: 0 0 25px rgba(190, 0, 254, 0.4);
+}
+
+.festival-card--green {
+  border-top: 4px solid var(--wp--preset--color--neon-green);
+}
+.festival-card--green:hover {
+  box-shadow: 0 10px 30px rgba(57, 255, 20, 0.15);
+}
+.dark .festival-card--green:hover {
+  border-color: var(--wp--preset--color--neon-green);
+  box-shadow: 0 0 25px rgba(57, 255, 20, 0.4);
+}
+
+.festival-card--amber {
+  border-top: 4px solid var(--wp--preset--color--neon-orange);
+}
+.festival-card--amber:hover {
+  box-shadow: 0 10px 30px rgba(255, 95, 31, 0.15);
+}
+.dark .festival-card--amber:hover {
+  border-color: var(--wp--preset--color--neon-orange);
+  box-shadow: 0 0 25px rgba(255, 95, 31, 0.4);
+}
+
+/* Background Pattern */
+.festival-card__bg-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.festival-card__bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.1;
+}
+
+.festival-card--purple .festival-card__bg-blob { background-color: var(--wp--preset--color--neon-purple); }
+.festival-card--green .festival-card__bg-blob { background-color: var(--wp--preset--color--neon-green); }
+.festival-card--amber .festival-card__bg-blob { background-color: var(--wp--preset--color--neon-orange); }
+
+/* Card Content */
+.festival-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: var(--wp--preset--color--primary);
+}
+
+.festival-card--purple .festival-card__header { color: var(--wp--preset--color--neon-purple); }
+.festival-card--green .festival-card__header { color: var(--wp--preset--color--neon-green); }
+.festival-card--amber .festival-card__header { color: var(--wp--preset--color--neon-orange); }
+
+.festival-card__title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.festival-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--wp--preset--color--neutral-600);
+}
+
+.dark .festival-card__details {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.festival-card__detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Mini Timer Grid */
+.festival-card__timer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.festival-card__timer-box {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--wp--preset--border-radius--md);
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+}
+
+.dark .festival-card__timer-box {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.festival-card__timer-number {
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--foreground);
+}
+
+.dark .festival-card__timer-number {
+  color: #fff;
+}
+
+.festival-card__timer-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--neutral-500);
+  margin-top: 0.25rem;
+}
+
+/* Animation Classes */
+.festival-countdown__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.festival-countdown__badge-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--wp--preset--spacing--fluid-lg);
+}
+
+.festival-countdown__badge-animate {
+  animation: bounce 1s infinite;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.festival-countdown__icon-spin {
+  animation: spin 3s linear infinite;
+}
+
+/* Content Layout */
+.festival-countdown__content {
+  text-align: center;
+}
+
+.festival-countdown__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.festival-countdown__header {
+  text-align: center;
+  margin-bottom: var(--wp--preset--spacing--fluid-xl);
+}
+
+.festival-countdown__subtitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+.festival-countdown__meta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: var(--wp--preset--font-size--200);
+  font-family: var(--wp--preset--font-family--brand-body);
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.dark .festival-countdown__meta {
+  color: var(--wp--preset--color--neutral-300);
+}
+
+.festival-countdown__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.festival-countdown__meta-divider {
+  display: none;
+  width: 0.25rem;
+  height: 0.25rem;
+  background-color: var(--wp--preset--color--neutral-400);
+  border-radius: 50%;
+  align-self: center;
+}
+
+@media (min-width: 640px) {
+  .festival-countdown__meta-divider {
+    display: block;
+  }
+}
+
+/* Call to Action Section */
+.festival-countdown__cta-section {
+  text-align: center;
+}
+
+.festival-countdown__description {
+  margin-bottom: var(--wp--preset--spacing--fluid-lg);
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.festival-countdown__buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .festival-countdown__buttons {
+    flex-direction: row;
+  }
+}
+
+.festival-countdown__urgency {
+  margin-top: var(--wp--preset--spacing--fluid-lg);
+}
+
+.festival-countdown__urgency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(255, 255, 0, 0.1);
+  color: var(--wp--preset--color--neon-yellow); /* Changed to neon yellow for visibility */
+  padding: 0.5rem 1rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+/* Keyframes moved to /styles/animations.css for centralization */
+
+.festival-status {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.festival-status__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(57, 255, 20, 0.1);
+  border: 1px solid rgba(57, 255, 20, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  color: var(--wp--preset--color--neon-green);
+  font-weight: 700;
+  font-size: 0.875rem;
+  animation: pulse 2s infinite;
+}
+
+.festival-status__icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.festival-urgency-badge {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Blob Modifiers */
+.festival-card__bg-blob--large {
+  width: 8rem;
+  height: 8rem;
+}
+
+.festival-card__bg-blob--xlarge {
+  width: 10rem;
+  height: 10rem;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .festival-countdown__badge-animate {
+    animation: none;
+  }
+
+  .festival-countdown__icon-spin {
+    animation: none;
+  }
+
+  .festival-status__badge {
+    animation: none;
+  }
+
+  .festival-card,
+  .festival-timer-card {
+    transition: none;
+  }
+
+  .festival-card:hover,
+  .dark .festival-timer-card:hover {
+    transform: none;
+  }
+}
+
+.festival-card__bg-blob--top-left {
+  top: 0;
+  left: 0;
+}
+
+.festival-card__bg-blob--bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+.festival-intro-text {
+  color: var(--wp--preset--color--neutral-600);
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dark .festival-intro-text {
+  color: #e9d5ff;
+}
+
+.festival-countdown__bg-effect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+}
+
+.festival-countdown__bg-effect--1 {
+  background: radial-gradient(circle at 20% 30%, var(--wp--preset--color--neon-purple), transparent 70%);
+}
+
+.festival-countdown__bg-effect--2 {
+  background: radial-gradient(circle at 80% 70%, var(--wp--preset--color--neon-blue), transparent 70%);
+}

@@ -1,0 +1,49 @@
+.festival-landing-hero {
+    position: relative;
+    padding: var(--wp--preset--spacing--fluid-2xl) 0;
+    text-align: center;
+    background-color: var(--wp--preset--color--atomic-black);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.festival-landing-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(15, 15, 15, 0.4) 0%, var(--wp--preset--color--atomic-black) 100%);
+    pointer-events: none;
+}
+
+.festival-landing__hero-content {
+    position: relative;
+    z-index: 10;
+}
+
+.drop-shadow-neon {
+    text-shadow: 0 0 20px var(--wp--preset--color--neon-purple), 0 0 10px var(--wp--preset--color--neon-blue);
+}
+
+.festival-content-wrapper {
+    margin-top: calc(-1 * var(--wp--preset--spacing--fluid-xl));
+    position: relative;
+    z-index: 10;
+    background: rgba(15, 15, 15, 0.8);
+    backdrop-filter: blur(15px);
+    border-radius: var(--wp--preset--border-radius--xl);
+    padding: var(--wp--preset--spacing--fluid-xl);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure container exists if not global */
+.container-xl {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--wp--preset--spacing--fluid-md);
+    padding-right: var(--wp--preset--spacing--fluid-md);
+}

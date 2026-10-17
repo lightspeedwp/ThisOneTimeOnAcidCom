@@ -1,0 +1,298 @@
+/* ============================================
+   CONTENT LAYOUT TOKENS
+   Split layouts, content grids, sidebar layouts, hero quotes
+   Phase 2 — Content Expansion & Redesign
+   ============================================ */
+
+/* --- Content Grid (Asymmetric) --- */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-lg);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .content-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 3fr 1fr;
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+.content-grid__main {
+  min-width: 0;
+}
+
+.content-grid__sidebar {
+  min-width: 0;
+}
+
+/* --- Split Layout (50/50 or 60/40) --- */
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-lg);
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .split-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split-layout--image-emphasis {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.split-layout__image {
+  width: 100%;
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+}
+
+.split-layout__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.split-layout__content {
+  min-width: 0;
+}
+
+/* Reverse order: image on right (desktop only) */
+@media (min-width: 768px) {
+  .split-layout--right .split-layout__image {
+    order: 2;
+  }
+
+  .split-layout--right .split-layout__content {
+    order: 1;
+  }
+}
+
+/* --- Sidebar Layout (Sticky) --- */
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-lg);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-layout {
+    grid-template-columns: 240px 1fr;
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+.sidebar-layout__nav {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-layout__nav {
+    position: sticky;
+    top: calc(var(--wp--preset--spacing--80) + var(--wp--preset--spacing--20));
+    align-self: start;
+    max-height: calc(100vh - var(--wp--preset--spacing--80) - var(--wp--preset--spacing--40));
+    overflow-y: auto;
+  }
+}
+
+.sidebar-layout__content {
+  min-width: 0;
+}
+
+/* --- Hero Quote Section --- */
+.hero-quote {
+  padding: var(--wp--preset--spacing--fluid-xl) var(--wp--preset--spacing--section-horizontal);
+  text-align: center;
+  position: relative;
+}
+
+.hero-quote__text {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--700);
+  font-weight: 600;
+  line-height: 1.3;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+.hero-quote__author {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .hero-quote__author {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* --- Content Section Component --- */
+.content-section {
+  padding: var(--wp--preset--spacing--fluid-xl) var(--wp--preset--spacing--section-horizontal);
+  position: relative;
+}
+
+.content-section--default {
+  /* Standard section — no extra styling */
+}
+
+.content-section--hero {
+  padding-top: var(--wp--preset--spacing--fluid-2xl);
+  padding-bottom: var(--wp--preset--spacing--fluid-2xl);
+  text-align: center;
+}
+
+.content-section--hero .content-section__title {
+  font-size: var(--wp--preset--font-size--800);
+}
+
+.content-section--callout {
+  border-left: 4px solid transparent;
+  border-radius: var(--wp--preset--border-radius--lg);
+  margin: var(--wp--preset--spacing--fluid-lg) 0;
+}
+
+.content-section--aside {
+  max-width: 36rem;
+  padding: var(--wp--preset--spacing--fluid-md);
+  border-radius: var(--wp--preset--border-radius--md);
+  background-color: var(--wp--preset--color--neutral-50);
+}
+
+.dark .content-section--aside {
+  background-color: rgba(30, 30, 30, 0.4);
+}
+
+.content-section__header {
+  margin-bottom: var(--wp--preset--spacing--fluid-md);
+}
+
+.content-section__subtitle {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.content-section__title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--section);
+  font-weight: 700;
+  line-height: 1.2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.content-section__body {
+  font-size: var(--wp--preset--font-size--200);
+  line-height: 1.7;
+}
+
+/* --- Chapter Navigation Component --- */
+.chapter-nav {
+  width: 100%;
+}
+
+.chapter-nav__list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.25rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar but keep functionality */
+.chapter-nav__list::-webkit-scrollbar {
+  display: none;
+}
+
+.chapter-nav__list {
+  scrollbar-width: none;
+}
+
+.chapter-nav__item {
+  flex-shrink: 0;
+}
+
+.chapter-nav__link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: 500;
+  color: var(--wp--preset--color--neutral-500);
+  background: none;
+  border: none;
+  border-radius: var(--wp--preset--border-radius--md);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.chapter-nav__link:hover {
+  color: var(--foreground);
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .chapter-nav__link:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.chapter-nav__item--active .chapter-nav__link {
+  color: var(--wp--preset--color--neon-purple-text);
+  background-color: rgba(190, 0, 254, 0.08);
+  font-weight: 600;
+}
+
+.dark .chapter-nav__item--active .chapter-nav__link {
+  color: var(--wp--preset--color--neon-purple);
+  background-color: rgba(190, 0, 254, 0.15);
+}
+
+/* Desktop: vertical sidebar layout */
+@media (min-width: 1024px) {
+  .chapter-nav__list {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+
+  .chapter-nav__link {
+    padding: 0.625rem 1rem;
+  }
+
+  .chapter-nav__item--active .chapter-nav__link {
+    border-left: 3px solid var(--wp--preset--color--neon-purple-text);
+    border-radius: 0 var(--wp--preset--border-radius--md) var(--wp--preset--border-radius--md) 0;
+    padding-left: calc(1rem - 3px);
+  }
+
+  .dark .chapter-nav__item--active .chapter-nav__link {
+    border-left-color: var(--wp--preset--color--neon-purple);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .chapter-nav__link {
+    transition: none;
+  }
+}

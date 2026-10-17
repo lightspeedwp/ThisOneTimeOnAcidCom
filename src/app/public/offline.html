@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - Ash Shaw Makeup Artist</title>
+  <style>
+    /* Inline critical styles for offline page */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0F0F0F 0%, #1a1a1a 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    
+    .offline-container {
+      text-align: center;
+      max-width: 600px;
+      padding: 2rem;
+    }
+    
+    .offline-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 2rem;
+      background: linear-gradient(135deg, #BE00FE 0%, #0099FF 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(190, 0, 254, 0.4);
+      }
+      50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(190, 0, 254, 0.6);
+      }
+    }
+    
+    .offline-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #BE00FE 0%, #0099FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+    
+    .offline-message {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #b0b0b0;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .offline-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #BE00FE 0%, #0099FF 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .offline-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(190, 0, 254, 0.4);
+    }
+    
+    .offline-button:active {
+      transform: translateY(0);
+    }
+    
+    .offline-status {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      font-size: 0.875rem;
+      color: #888;
+    }
+    
+    .status-online {
+      color: #00FF9D;
+      font-weight: 600;
+    }
+    
+    .status-offline {
+      color: #FF0055;
+      font-weight: 600;
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .offline-icon {
+        animation: none;
+      }
+      
+      .offline-button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <div class="offline-icon" role="img" aria-label="Offline icon">
+      📡
+    </div>
+    
+    <h1 class="offline-title">You're Offline</h1>
+    
+    <p class="offline-message">
+      It looks like you've lost your internet connection. 
+      Don't worry—your cached pages are still available!
+    </p>
+    
+    <button 
+      class="offline-button" 
+      onclick="window.location.reload()"
+      aria-label="Retry connection"
+    >
+      Try Again
+    </button>
+    
+    <div class="offline-status">
+      Connection Status: <span id="status" class="status-offline">Offline</span>
+    </div>
+  </div>
+  
+  <script>
+    // Monitor online/offline status
+    function updateOnlineStatus() {
+      const status = document.getElementById('status');
+      if (navigator.onLine) {
+        status.textContent = 'Online';
+        status.className = 'status-online';
+        // Auto-reload when back online
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        status.textContent = 'Offline';
+        status.className = 'status-offline';
+      }
+    }
+    
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    
+    // Initial check
+    updateOnlineStatus();
+  </script>
+</body>
+</html>

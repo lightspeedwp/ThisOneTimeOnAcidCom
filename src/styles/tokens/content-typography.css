@@ -1,0 +1,337 @@
+/* ============================================
+   CONTENT TYPOGRAPHY TOKENS
+   Pull quotes, drop caps, inline highlights, chapter numbers
+   Phase 2 — Content Expansion & Redesign
+   ============================================ */
+
+/* --- Pull Quote --- */
+.pull-quote {
+  position: relative;
+  padding: var(--wp--preset--spacing--fluid-lg) var(--wp--preset--spacing--fluid-md);
+  margin: var(--wp--preset--spacing--fluid-lg) 0;
+}
+
+.pull-quote__text {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: clamp(1.25rem, 1rem + 2vw, 2.25rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--foreground);
+  position: relative;
+}
+
+.pull-quote__mark {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--900);
+  font-weight: 700;
+  line-height: 1;
+  position: absolute;
+  top: -0.4em;
+  left: -0.15em;
+  opacity: 0.15;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Pull Quote — Neon Color Variants */
+.pull-quote--pink {
+  border-left: 4px solid var(--wp--preset--color--neon-pink);
+}
+
+.pull-quote--pink .pull-quote__mark {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.pull-quote--green {
+  border-left: 4px solid var(--wp--preset--color--neon-green);
+}
+
+.pull-quote--green .pull-quote__mark {
+  color: var(--wp--preset--color--neon-green);
+}
+
+.pull-quote--blue {
+  border-left: 4px solid var(--wp--preset--color--neon-blue);
+}
+
+.pull-quote--blue .pull-quote__mark {
+  color: var(--wp--preset--color--neon-blue);
+}
+
+.pull-quote--yellow {
+  border-left: 4px solid var(--wp--preset--color--neon-yellow);
+}
+
+.pull-quote--yellow .pull-quote__mark {
+  color: var(--wp--preset--color--neon-yellow);
+}
+
+.pull-quote--purple {
+  border-left: 4px solid var(--wp--preset--color--neon-purple);
+}
+
+.pull-quote--purple .pull-quote__mark {
+  color: var(--wp--preset--color--neon-purple);
+}
+
+.pull-quote--orange {
+  border-left: 4px solid var(--wp--preset--color--neon-orange);
+}
+
+.pull-quote--orange .pull-quote__mark {
+  color: var(--wp--preset--color--neon-orange);
+}
+
+.pull-quote--red {
+  border-left: 4px solid var(--wp--preset--color--neon-red);
+}
+
+.pull-quote--red .pull-quote__mark {
+  color: var(--wp--preset--color--neon-red);
+}
+
+.pull-quote--cyan {
+  border-left: 4px solid var(--wp--preset--color--neon-cyan);
+}
+
+.pull-quote--cyan .pull-quote__mark {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+/* Pull Quote — Alignment Variants */
+.pull-quote--left {
+  text-align: left;
+}
+
+.pull-quote--center {
+  text-align: center;
+  border-left: none;
+  border-top: 4px solid var(--wp--preset--color--neon-pink);
+  border-bottom: 4px solid var(--wp--preset--color--neon-pink);
+}
+
+.pull-quote--center.pull-quote--green {
+  border-top-color: var(--wp--preset--color--neon-green);
+  border-bottom-color: var(--wp--preset--color--neon-green);
+}
+
+.pull-quote--center.pull-quote--blue {
+  border-top-color: var(--wp--preset--color--neon-blue);
+  border-bottom-color: var(--wp--preset--color--neon-blue);
+}
+
+.pull-quote--center.pull-quote--yellow {
+  border-top-color: var(--wp--preset--color--neon-yellow);
+  border-bottom-color: var(--wp--preset--color--neon-yellow);
+}
+
+.pull-quote--center.pull-quote--purple {
+  border-top-color: var(--wp--preset--color--neon-purple);
+  border-bottom-color: var(--wp--preset--color--neon-purple);
+}
+
+.pull-quote--center.pull-quote--orange {
+  border-top-color: var(--wp--preset--color--neon-orange);
+  border-bottom-color: var(--wp--preset--color--neon-orange);
+}
+
+.pull-quote--center.pull-quote--red {
+  border-top-color: var(--wp--preset--color--neon-red);
+  border-bottom-color: var(--wp--preset--color--neon-red);
+}
+
+.pull-quote--center.pull-quote--cyan {
+  border-top-color: var(--wp--preset--color--neon-cyan);
+  border-bottom-color: var(--wp--preset--color--neon-cyan);
+}
+
+.pull-quote--center .pull-quote__mark {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pull-quote--right {
+  text-align: right;
+  border-left: none;
+  border-right: 4px solid var(--wp--preset--color--neon-pink);
+}
+
+.pull-quote--right.pull-quote--green {
+  border-right-color: var(--wp--preset--color--neon-green);
+}
+
+.pull-quote--right.pull-quote--blue {
+  border-right-color: var(--wp--preset--color--neon-blue);
+}
+
+.pull-quote--right.pull-quote--yellow {
+  border-right-color: var(--wp--preset--color--neon-yellow);
+}
+
+.pull-quote--right.pull-quote--purple {
+  border-right-color: var(--wp--preset--color--neon-purple);
+}
+
+.pull-quote--right.pull-quote--orange {
+  border-right-color: var(--wp--preset--color--neon-orange);
+}
+
+.pull-quote--right.pull-quote--red {
+  border-right-color: var(--wp--preset--color--neon-red);
+}
+
+.pull-quote--right.pull-quote--cyan {
+  border-right-color: var(--wp--preset--color--neon-cyan);
+}
+
+.pull-quote__author {
+  display: block;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  font-style: normal;
+  font-weight: 500;
+  color: var(--wp--preset--color--neutral-500);
+  margin-top: var(--wp--preset--spacing--fluid-sm);
+}
+
+.dark .pull-quote__author {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* --- Drop Cap --- */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: 3.5em;
+  line-height: 0.8;
+  font-weight: 700;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  color: var(--wp--preset--color--neon-pink-text);
+}
+
+.dark .drop-cap::first-letter {
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.drop-cap--green::first-letter {
+  color: var(--wp--preset--color--neon-green-text);
+}
+
+.dark .drop-cap--green::first-letter {
+  color: var(--wp--preset--color--neon-green);
+}
+
+.drop-cap--blue::first-letter {
+  color: var(--wp--preset--color--neon-blue-text);
+}
+
+.dark .drop-cap--blue::first-letter {
+  color: var(--wp--preset--color--neon-blue);
+}
+
+.drop-cap--purple::first-letter {
+  color: var(--wp--preset--color--neon-purple-text);
+}
+
+.dark .drop-cap--purple::first-letter {
+  color: var(--wp--preset--color--neon-purple);
+}
+
+/* --- Inline Highlight --- */
+.inline-highlight {
+  position: relative;
+  display: inline;
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(255, 16, 240, 0.2) 60%,
+    rgba(255, 16, 240, 0.2) 90%,
+    transparent 90%
+  );
+}
+
+.dark .inline-highlight {
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(255, 16, 240, 0.35) 60%,
+    rgba(255, 16, 240, 0.35) 90%,
+    transparent 90%
+  );
+}
+
+.inline-highlight--green {
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(57, 255, 20, 0.2) 60%,
+    rgba(57, 255, 20, 0.2) 90%,
+    transparent 90%
+  );
+}
+
+.dark .inline-highlight--green {
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(57, 255, 20, 0.35) 60%,
+    rgba(57, 255, 20, 0.35) 90%,
+    transparent 90%
+  );
+}
+
+.inline-highlight--blue {
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(31, 81, 255, 0.2) 60%,
+    rgba(31, 81, 255, 0.2) 90%,
+    transparent 90%
+  );
+}
+
+.dark .inline-highlight--blue {
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(31, 81, 255, 0.35) 60%,
+    rgba(31, 81, 255, 0.35) 90%,
+    transparent 90%
+  );
+}
+
+/* --- Chapter Number --- */
+.chapter-number {
+  display: block;
+  font-family: var(--wp--preset--font-family--brand-title);
+  font-size: var(--wp--preset--font-size--hero);
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.1;
+  letter-spacing: -0.04em;
+  margin-bottom: var(--wp--preset--spacing--fluid-sm);
+  user-select: none;
+  pointer-events: none;
+}
+
+.chapter-number--pink {
+  color: var(--wp--preset--color--neon-pink);
+  opacity: 0.15;
+}
+
+.chapter-number--green {
+  color: var(--wp--preset--color--neon-green);
+  opacity: 0.15;
+}
+
+.chapter-number--blue {
+  color: var(--wp--preset--color--neon-blue);
+  opacity: 0.15;
+}
+
+.chapter-number--purple {
+  color: var(--wp--preset--color--neon-purple);
+  opacity: 0.15;
+}

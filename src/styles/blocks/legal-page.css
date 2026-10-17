@@ -1,0 +1,74 @@
+/* Legal Page Block Styles */
+.legal-page-container {
+  min-height: 100vh;
+  background-color: var(--wp--preset--color--base);
+  padding: var(--wp--preset--spacing--section-vertical) 0;
+}
+
+.dark .legal-page-container {
+  background-color: var(--wp--preset--color--atomic-black);
+}
+
+.legal-page-content {
+  max-width: var(--wp--preset--layout--content); /* Changed from narrow to content for consistency */
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+}
+
+.legal-page-body {
+  background-color: var(--wp--preset--color--neutral-50);
+  border-radius: var(--wp--preset--border-radius--xl);
+  padding: var(--wp--preset--spacing--fluid-xl);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--block-gap);
+}
+
+.dark .legal-page-body {
+  background-color: var(--wp--preset--color--neutral-900);
+  border-color: var(--wp--preset--color--neutral-800);
+}
+
+.legal-page-list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  color: var(--wp--preset--color--neutral-600);
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+.dark .legal-page-list {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.legal-page-list li {
+  margin-bottom: 0.5rem;
+}
+
+.legal-page-footer {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--wp--preset--color--neutral-200);
+  text-align: center;
+}
+
+.dark .legal-page-footer {
+  border-color: var(--wp--preset--color--neutral-800);
+}
+
+.legal-page-back-btn {
+  background: none;
+  border: none;
+  color: var(--wp--preset--color--neon-purple);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.legal-page-back-btn:hover {
+  text-decoration: underline;
+  color: var(--wp--preset--color--neon-pink);
+}

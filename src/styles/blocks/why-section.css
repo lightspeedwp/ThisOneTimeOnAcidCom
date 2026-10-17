@@ -1,0 +1,357 @@
+/* Why Section & Feature Card Block Styles */
+.why-section {
+  background-color: var(--wp--preset--color--base);
+  padding: var(--wp--preset--spacing--section-horizontal);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .why-section {
+  background-color: transparent;
+}
+
+.why-section__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.why-section__title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--section);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.why-section__subtitle {
+  font-size: var(--wp--preset--font-size--300);
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .why-section__subtitle {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ──────────────────────────────────────────────
+   Desktop Grid — 3 equal columns
+   ────────────────────────────────────────────── */
+.why-section__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--wp--preset--spacing--block-gap);
+  margin-bottom: var(--wp--preset--spacing--fluid-xl);
+}
+
+/* Responsive grid gap scaling for ultra-wide displays */
+@media (min-width: 1440px) {
+  .why-section__grid {
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1568px) {
+  .why-section__grid {
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+@media (min-width: 1800px) {
+  .why-section__grid {
+    gap: calc(var(--wp--preset--spacing--fluid-xl) * 1.15);
+  }
+}
+
+@media (min-width: 1920px) {
+  .why-section__grid {
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}
+
+/* Wrapper for Grid Layout */
+.why-section__card-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ──────────────────────────────────────────────
+   Slider — Tablet (2 cols) & Mobile (1 col)
+   ────────────────────────────────────────────── */
+.why-section__slider-wrapper {
+  position: relative;
+  margin-bottom: var(--wp--preset--spacing--fluid-lg);
+}
+
+/* Nav Buttons */
+.why-section__nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: var(--wp--preset--color--base);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wp--preset--color--neutral-700);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--wp--preset--shadow--md);
+}
+
+.dark .why-section__nav-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  box-shadow: none;
+}
+
+.why-section__nav-button:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--neon-purple);
+  border-color: var(--wp--preset--color--neon-purple);
+  color: #fff;
+}
+
+.dark .why-section__nav-button:hover:not(:disabled) {
+  box-shadow: var(--wp--preset--shadow--neon-purple-hover);
+}
+
+.why-section__nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.why-section__nav-button--prev {
+  left: -1rem;
+}
+
+.why-section__nav-button--next {
+  right: -1rem;
+}
+
+.why-section__nav-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Slider Viewport */
+.why-section__slider-viewport {
+  overflow: hidden;
+  margin: 0 calc(var(--wp--preset--spacing--block-gap) / -2);
+  padding: calc(var(--wp--preset--spacing--block-gap) / 2);
+}
+
+/* Track — driven by CSS custom properties from React */
+.why-section__track {
+  --slide-index: 0;
+  --slides-per-view: 1;
+
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateX(calc(var(--slide-index) * -100% / var(--slides-per-view)));
+}
+
+/* Each slide occupies (100% / slidesPerView) */
+.why-section__slide {
+  flex: 0 0 calc(100% / var(--slides-per-view));
+  box-sizing: border-box;
+  padding: 0 calc(var(--wp--preset--spacing--block-gap) / 2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hide nav arrows on mobile — swipe / dots only */
+@media (max-width: 767px) {
+  .why-section__nav-button {
+    display: none;
+  }
+}
+
+/* Dots Navigation */
+.why-section__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.why-section__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--wp--preset--color--neutral-300);
+  background-color: var(--wp--preset--color--neutral-100);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.dark .why-section__dot {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.why-section__dot--active {
+  background-color: var(--wp--preset--color--neon-pink) !important;
+  border-color: var(--wp--preset--color--neon-pink) !important;
+  transform: scale(1.2);
+}
+
+.dark .why-section__dot--active {
+  box-shadow: var(--wp--preset--shadow--neon-pink-dot);
+}
+
+.why-section__dot--inactive:hover {
+  background-color: var(--wp--preset--color--neutral-300);
+}
+
+.dark .why-section__dot--inactive:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ──────────────────────────────────────────────
+   Feature Card Styles (shared by grid & slider)
+   ────────────────────────────────────────────── */
+.feature-card {
+  background-color: var(--wp--preset--color--neutral-50);
+  border: 1px solid var(--border);
+  border-radius: var(--wp--preset--border-radius--lg);
+  padding: var(--wp--preset--spacing--fluid-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--wp--preset--spacing--block-gap);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+}
+
+.dark .feature-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: var(--wp--preset--color--neutral-800);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--wp--preset--color--neon-purple);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark .feature-card:hover {
+  box-shadow: 0 10px 30px rgba(190, 0, 254, 0.1);
+}
+
+.feature-card__icon-wrapper {
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-card__icon-wrapper {
+  transform: scale(1.1);
+}
+
+.feature-card__title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.feature-card__description {
+  font-size: 1rem;
+  color: var(--wp--preset--color--neutral-600);
+  line-height: 1.6;
+}
+
+.dark .feature-card__description {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+/* ──────────────────────────────────────────────
+   Footer CTA Section
+   ────────────────────────────────────────────── */
+.why-section__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-md);
+  margin-top: var(--wp--preset--spacing--fluid-xl);
+}
+
+.why-section__footer-left {
+  flex: 0 1 auto;
+}
+
+.why-section__follow-text {
+  font-size: var(--wp--preset--font-size--300);
+  color: var(--wp--preset--color--neutral-600);
+  margin: 0;
+}
+
+.dark .why-section__follow-text {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.why-section__follow-link {
+  color: var(--wp--preset--color--neon-purple);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.why-section__follow-link:hover {
+  color: var(--wp--preset--color--neon-pink);
+  text-decoration: underline;
+}
+
+.dark .why-section__follow-link {
+  color: var(--wp--preset--color--neon-cyan);
+}
+
+.dark .why-section__follow-link:hover {
+  color: var(--wp--preset--color--neon-green);
+  text-shadow: 0 0 10px var(--wp--preset--color--neon-green);
+}
+
+/* Responsive Footer */
+@media (max-width: 767px) {
+  .why-section__footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--wp--preset--spacing--fluid-sm);
+  }
+
+  .why-section__follow-text {
+    font-size: var(--wp--preset--font-size--200);
+  }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .why-section__track {
+    transition: none;
+  }
+
+  .why-section__nav-button,
+  .feature-card,
+  .feature-card__icon-wrapper {
+    transition: none;
+  }
+
+  .feature-card:hover {
+    transform: none;
+  }
+
+  .feature-card:hover .feature-card__icon-wrapper {
+    transform: none;
+  }
+}

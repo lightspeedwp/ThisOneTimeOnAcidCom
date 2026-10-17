@@ -1,0 +1,112 @@
+/* Pagination Styles (Atomic Black System) */
+
+.pagination {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.pagination__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.pagination__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-radius: var(--wp--preset--border-radius--md);
+  padding: 0 1rem;
+  height: 2.75rem; /* 44px WCAG touch target minimum */
+  min-width: 2.75rem; /* 44px WCAG touch target minimum */
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: 500;
+  transition: colors 0.2s;
+  color: var(--wp--preset--color--contrast);
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.dark .pagination__link {
+  color: #fff;
+}
+
+.pagination__link:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--neutral-100);
+}
+
+.dark .pagination__link:hover:not(:disabled) {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.pagination__link--active {
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  background-color: var(--wp--preset--color--base);
+  pointer-events: none;
+}
+
+.dark .pagination__link--active {
+  border-color: var(--wp--preset--color--neutral-800);
+  background-color: var(--wp--preset--color--neutral-900);
+}
+
+.pagination__link:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Nav Buttons (Previous/Next) */
+.pagination__nav-button {
+  padding-left: 0.625rem; /* pl-2.5 */
+  padding-right: 0.625rem; /* pr-2.5 */
+}
+
+.pagination__label {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .pagination__label {
+    display: inline-block;
+  }
+}
+
+.pagination__nav-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* Ellipsis */
+.pagination__ellipsis {
+  display: flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--wp--preset--color--contrast);
+}
+
+.dark .pagination__ellipsis {
+  color: #fff;
+}
+
+.pagination__ellipsis-icon {
+  height: 1rem;
+  width: 1rem;
+}

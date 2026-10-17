@@ -1,0 +1,253 @@
+/* ============================================
+   PORTFOLIO RICH TEXT — "Toxic Lime" theme
+   Purple/green palette with diamond accents
+   Extracted from portfolio-detail-page.css (T03 — memory reduction v2)
+   Blockquote DRY consolidation (T04 — memory reduction v2)
+   ============================================ */
+
+/* ── Shared Blockquote Pattern (T04 — DRY consolidation) ──
+   .story-quote, .portfolio-rich-text blockquote, and
+   .portfolio-blockquote-base all share this neon green/cyan gradient */
+
+.portfolio-blockquote-base,
+.story-quote,
+.portfolio-rich-text blockquote {
+  border-width: 0 0 0 4px;
+  border-style: solid;
+  border-image: linear-gradient(
+    to bottom,
+    var(--wp--preset--color--neon-green),
+    var(--wp--preset--color--neon-cyan)
+  ) 1;
+  padding: 1.5rem 2rem;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--wp--preset--color--neutral-600);
+  margin: 2rem 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 143, 0, 0.04),
+    transparent
+  );
+  border-radius: 0 1rem 1rem 0;
+  position: relative;
+}
+
+.portfolio-blockquote-base::before,
+.story-quote::before,
+.portfolio-rich-text blockquote::before {
+  content: '\25C6';
+  position: absolute;
+  top: -0.4rem;
+  left: 0.75rem;
+  font-size: 1.2rem;
+  color: var(--wp--preset--color--neon-green-text);
+  line-height: 1;
+}
+
+.dark .portfolio-blockquote-base::before,
+.dark .story-quote::before,
+.dark .portfolio-rich-text blockquote::before {
+  color: var(--wp--preset--color--neon-green);
+  text-shadow: 0 0 8px var(--wp--preset--color--neon-green);
+}
+
+.dark .portfolio-blockquote-base,
+.dark .story-quote,
+.dark .portfolio-rich-text blockquote {
+  color: var(--wp--preset--color--neutral-300);
+  background: linear-gradient(
+    to right,
+    rgba(0, 255, 0, 0.06),
+    rgba(0, 243, 255, 0.02),
+    transparent
+  );
+  box-shadow: -5px 0 15px -5px rgba(0, 255, 0, 0.15);
+}
+
+/* ── Story Quote: unique override — brand heading font ── */
+.story-quote {
+  font-family: var(--wp--preset--font-family--brand-heading);
+}
+
+/* ── Portfolio Rich Text blockquote: unique override — extra vertical margin ── */
+.portfolio-rich-text blockquote {
+  margin: 2.5rem 0;
+}
+
+/* ── Rich Text: Hidden h1 ── */
+.portfolio-rich-text h1 {
+  display: none;
+}
+
+/* ── Rich Text: Paragraphs ── */
+.portfolio-rich-text p {
+  margin-bottom: 1.5rem;
+}
+
+.portfolio-rich-text strong {
+  color: var(--wp--preset--color--contrast);
+  font-weight: 700;
+}
+
+.dark .portfolio-rich-text strong {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 255, 0, 0.25);
+}
+
+.portfolio-rich-text em {
+  color: var(--wp--preset--color--neon-green-text);
+  font-style: italic;
+}
+
+.dark .portfolio-rich-text em {
+  color: var(--wp--preset--color--neon-green);
+}
+
+/* ── Rich Text: Headings — toxic lime gradient underline ── */
+.portfolio-rich-text h2 {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--600);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--wp--preset--color--contrast);
+  position: relative;
+  display: inline-block;
+}
+
+.dark .portfolio-rich-text h2 {
+  color: #fff;
+  background: linear-gradient(to right, var(--wp--preset--color--neon-green), var(--wp--preset--color--neon-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Diamond chain underline */
+.portfolio-rich-text h2::after {
+  content: '\25C6 \25C7 \25C6 \25C7 \25C6';
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: var(--wp--preset--color--neon-green-text);
+  line-height: 1;
+}
+
+.dark .portfolio-rich-text h2::after {
+  color: var(--wp--preset--color--neon-green);
+  text-shadow: 0 0 8px var(--wp--preset--color--neon-green);
+}
+
+.portfolio-rich-text h3 {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--500);
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--wp--preset--color--neon-purple-text);
+}
+
+.dark .portfolio-rich-text h3 {
+  color: var(--wp--preset--color--neon-purple);
+  text-shadow: 0 0 10px rgba(190, 0, 254, 0.4);
+}
+
+.portfolio-rich-text h4 {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--400);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--wp--preset--color--contrast);
+  font-weight: 600;
+}
+
+.dark .portfolio-rich-text h4 {
+  color: var(--wp--preset--color--neutral-200);
+}
+
+/* ── Rich Text: Lists — diamond bullet points ── */
+.portfolio-rich-text ul,
+.portfolio-rich-text ol {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.portfolio-rich-text li {
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.portfolio-rich-text ul li::before {
+  content: '\25C6';
+  position: absolute;
+  left: 0;
+  color: var(--wp--preset--color--neon-green-text);
+  font-size: 0.6rem;
+  line-height: 2;
+}
+
+.dark .portfolio-rich-text ul li::before {
+  color: var(--wp--preset--color--neon-green);
+  text-shadow: 0 0 5px var(--wp--preset--color--neon-green);
+}
+
+.portfolio-rich-text ol {
+  counter-reset: portfolio-counter;
+}
+
+.portfolio-rich-text ol li {
+  counter-increment: portfolio-counter;
+}
+
+.portfolio-rich-text ol li::before {
+  content: counter(portfolio-counter) ".";
+  position: absolute;
+  left: 0;
+  color: var(--wp--preset--color--neon-purple-text);
+  font-weight: 700;
+  font-family: var(--wp--preset--font-family--brand-heading);
+}
+
+.dark .portfolio-rich-text ol li::before {
+  color: var(--wp--preset--color--neon-purple);
+  text-shadow: 0 0 5px var(--wp--preset--color--neon-purple);
+}
+
+/* ── Rich Text: Links ── */
+.portfolio-rich-text a {
+  color: var(--wp--preset--color--neon-green-text);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.portfolio-rich-text a:hover {
+  border-bottom-color: var(--wp--preset--color--neon-green-text);
+}
+
+.dark .portfolio-rich-text a {
+  color: var(--wp--preset--color--neon-green);
+}
+
+.dark .portfolio-rich-text a:hover {
+  border-bottom-color: var(--wp--preset--color--neon-green);
+  text-shadow: 0 0 8px var(--wp--preset--color--neon-green);
+}
+
+/* ── Rich Text: Code ── */
+.portfolio-rich-text code {
+  background-color: var(--wp--preset--color--neutral-200);
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--wp--preset--border-radius--sm);
+  font-family: monospace;
+  font-size: 0.9em;
+  color: var(--wp--preset--color--neon-green-text);
+}
+
+.dark .portfolio-rich-text code {
+  background-color: var(--wp--preset--color--neutral-800);
+  color: var(--wp--preset--color--neon-green);
+  border: 1px solid var(--wp--preset--color--neutral-700);
+}

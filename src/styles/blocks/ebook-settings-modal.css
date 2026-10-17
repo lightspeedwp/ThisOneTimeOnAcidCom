@@ -1,0 +1,567 @@
+/**
+ * @fileoverview Ebook Settings Modal Styles
+ * 
+ * Accessible, responsive modal for ebook reader settings.
+ * WCAG 2.1 AA compliant with 44x44px touch targets.
+ * 
+ * @version 1.0.0
+ */
+
+/* ══════════════════════════════════════════════════════════════
+   OVERLAY
+   ══════════════════════════════════════════════════════════════ */
+
+.ebook-settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(8px);
+  
+  animation: fadeIn 200ms ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MODAL CONTAINER
+   ══════════════════════════════════════════════════════════════ */
+
+.ebook-settings-modal {
+  position: relative;
+  width: 100%;
+  max-width: 32rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  
+  background: var(--wp--preset--color--white);
+  border-radius: 1rem;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  
+  animation: slideUp 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .ebook-settings-modal {
+  background: var(--wp--preset--color--gray-900);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HEADER
+   ══════════════════════════════════════════════════════════════ */
+
+.ebook-settings-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--wp--preset--color--gray-200);
+}
+
+.dark .ebook-settings-modal__header {
+  border-bottom-color: var(--wp--preset--color--gray-800);
+}
+
+.ebook-settings-modal__header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.ebook-settings-modal__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--wp--preset--color--gray-900);
+}
+
+.dark .ebook-settings-modal__title {
+  color: var(--wp--preset--color--white);
+}
+
+.ebook-settings-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.625rem;
+  
+  background: transparent;
+  border: none;
+  border-radius: 0.5rem;
+  color: var(--wp--preset--color--gray-600);
+  cursor: pointer;
+  
+  transition: all 150ms ease;
+}
+
+.ebook-settings-modal__close:hover,
+.ebook-settings-modal__close:focus {
+  background: var(--wp--preset--color--gray-100);
+  color: var(--wp--preset--color--gray-900);
+  outline: none;
+}
+
+.dark .ebook-settings-modal__close:hover,
+.dark .ebook-settings-modal__close:focus {
+  background: var(--wp--preset--color--gray-800);
+  color: var(--wp--preset--color--white);
+}
+
+.ebook-settings-modal__close:focus-visible {
+  box-shadow: 0 0 0 3px var(--wp--preset--color--neon-pink);
+}
+
+/* ═════════════════════════════════════════════��════════════════
+   SECTIONS
+   ══════════════════════════════════════════════════════════════ */
+
+.ebook-settings-modal__section {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--wp--preset--color--gray-100);
+}
+
+.dark .ebook-settings-modal__section {
+  border-bottom-color: var(--wp--preset--color--gray-800);
+}
+
+.ebook-settings-modal__section:last-of-type {
+  border-bottom: none;
+}
+
+.ebook-settings-modal__section-title {
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wp--preset--color--gray-500);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROGRESS SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+.ebook-settings-modal__progress-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.ebook-settings-modal__stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  background: var(--wp--preset--color--gray-50);
+  border-radius: 0.5rem;
+}
+
+.dark .ebook-settings-modal__stat {
+  background: var(--wp--preset--color--gray-800);
+}
+
+.ebook-settings-modal__stat-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wp--preset--color--gray-500);
+}
+
+.ebook-settings-modal__stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--wp--preset--color--neon-pink);
+}
+
+.ebook-settings-modal__chapter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  
+  background: var(--wp--preset--color--gray-50);
+  border-left: 3px solid var(--wp--preset--color--neon-cyan);
+  border-radius: 0.25rem;
+  
+  font-size: 0.875rem;
+  color: var(--wp--preset--color--gray-700);
+}
+
+.dark .ebook-settings-modal__chapter {
+  background: var(--wp--preset--color--gray-800);
+  color: var(--wp--preset--color--gray-300);
+}
+
+.ebook-settings-modal__progress-bar {
+  position: relative;
+  width: 100%;
+  height: 0.5rem;
+  background: var(--wp--preset--color--gray-200);
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.dark .ebook-settings-modal__progress-bar {
+  background: var(--wp--preset--color--gray-700);
+}
+
+.ebook-settings-modal__progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--wp--preset--color--neon-pink),
+    var(--wp--preset--color--neon-purple),
+    var(--wp--preset--color--neon-blue)
+  );
+  border-radius: 0.25rem;
+  transition: width 300ms ease;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   JUMP TO PAGE
+   ══════════════════════════════════════════════════════════════ */
+
+.ebook-settings-modal__page-jump {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.ebook-settings-modal__page-input {
+  flex: 1;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  
+  background: var(--wp--preset--color--white);
+  border: 2px solid var(--wp--preset--color--gray-300);
+  border-radius: 0.5rem;
+  
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--wp--preset--color--gray-900);
+  
+  transition: all 150ms ease;
+}
+
+.dark .ebook-settings-modal__page-input {
+  background: var(--wp--preset--color--gray-800);
+  border-color: var(--wp--preset--color--gray-700);
+  color: var(--wp--preset--color--white);
+}
+
+.ebook-settings-modal__page-input:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--neon-pink);
+  box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.1);
+}
+
+.ebook-settings-modal__jump-button {
+  min-width: 5rem;
+  min-height: 44px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FONT SIZE CONTROLS
+   ══════════════════════════════════════════════════════════════ */
+
+.ebook-settings-modal__font-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ebook-settings-modal__font-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+}
+
+.ebook-settings-modal__font-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ebook-settings-modal__font-button-label {
+  font-weight: 600;
+}
+
+.ebook-settings-modal__font-current {
+  flex: 1;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--wp--preset--color--gray-900);
+}
+
+.dark .ebook-settings-modal__font-current {
+  color: var(--wp--preset--color--white);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MINIMAL MODE TOGGLE
+   ══════════════════════════════════════════════════════════════ */
+
+.ebook-settings-modal__toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ebook-settings-modal__toggle-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ebook-settings-modal__toggle-track {
+  position: relative;
+  width: 3rem;
+  height: 1.5rem;
+  background: var(--wp--preset--color--gray-700);
+  border-radius: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.ebook-settings-modal__toggle-input:checked + .ebook-settings-modal__toggle-track {
+  background: var(--wp--preset--color--neon-pink);
+}
+
+.ebook-settings-modal__toggle-thumb {
+  position: absolute;
+  top: 0.125rem;
+  left: 0.125rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.ebook-settings-modal__toggle-input:checked + .ebook-settings-modal__toggle-track .ebook-settings-modal__toggle-thumb {
+  transform: translateX(1.5rem);
+}
+
+.ebook-settings-modal__toggle-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.ebook-settings-modal__help-text {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--wp--preset--color--gray-500);
+  line-height: 1.5;
+}
+
+.dark .ebook-settings-modal__help-text {
+  color: var(--wp--preset--color--gray-400);
+}
+
+/* ══════════════════════════════════════
+   KEYBOARD SHORTCUTS
+   ══════════════════════════════════════ */
+
+.ebook-settings-modal__shortcuts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.ebook-settings-modal__shortcut {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--wp--preset--color--gray-200);
+}
+
+.dark .ebook-settings-modal__shortcut {
+  border-bottom-color: var(--wp--preset--color--gray-700);
+}
+
+.ebook-settings-modal__shortcut:last-child {
+  border-bottom: none;
+}
+
+.ebook-settings-modal__kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 1.75rem;
+  padding: 0 0.5rem;
+  font-family: var(--wp--preset--font-family--monospace, 'SF Mono', 'Monaco', 'Consolas', monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--wp--preset--color--gray-700);
+  background: var(--wp--preset--color--gray-100);
+  border: 1px solid var(--wp--preset--color--gray-300);
+  border-radius: 0.25rem;
+  box-shadow: 
+    0 1px 0 0 var(--wp--preset--color--gray-300),
+    0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.dark .ebook-settings-modal__kbd {
+  color: var(--wp--preset--color--gray-200);
+  background: var(--wp--preset--color--gray-800);
+  border-color: var(--wp--preset--color--gray-600);
+  box-shadow: 
+    0 1px 0 0 var(--wp--preset--color--gray-600),
+    0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.ebook-settings-modal__shortcut-desc {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--wp--preset--color--gray-600);
+}
+
+.dark .ebook-settings-modal__shortcut-desc {
+  color: var(--wp--preset--color--gray-400);
+}
+
+/* Responsive: 2-column layout on wider screens */
+@media (min-width: 500px) {
+  .ebook-settings-modal__shortcuts {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .ebook-settings-modal__shortcut {
+    border-bottom: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 420px) {
+  .ebook-settings-modal {
+    max-height: 95vh;
+  }
+  
+  .ebook-settings-modal__header,
+  .ebook-settings-modal__section {
+    padding: 1rem;
+  }
+  
+  .ebook-settings-modal__progress-stats {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .ebook-settings-modal__font-controls {
+    flex-wrap: wrap;
+  }
+  
+  .ebook-settings-modal__font-current {
+    flex-basis: 100%;
+    order: -1;
+    padding: 0.5rem 0;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGING EFFECT OPTIONS
+   ══════════════════════════════════════════════════════════════ */
+
+.ebook-settings-modal__effect-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.ebook-settings-modal__effect-label {
+  position: relative;
+  cursor: pointer;
+}
+
+.ebook-settings-modal__effect-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ebook-settings-modal__effect-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border: 2px solid var(--wp--preset--color--gray-200);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--wp--preset--color--gray-700);
+  font-weight: 500;
+  transition: all 200ms ease;
+}
+
+.dark .ebook-settings-modal__effect-button {
+  border-color: var(--wp--preset--color--gray-800);
+  color: var(--wp--preset--color--gray-300);
+}
+
+.ebook-settings-modal__effect-input:checked + .ebook-settings-modal__effect-button {
+  border-color: var(--color-neon-pink);
+  background: rgba(255, 16, 240, 0.05);
+  color: var(--color-neon-pink);
+}
+
+.ebook-settings-modal__effect-input:focus-visible + .ebook-settings-modal__effect-button {
+  outline: 2px solid var(--color-neon-pink);
+  outline-offset: 2px;
+}

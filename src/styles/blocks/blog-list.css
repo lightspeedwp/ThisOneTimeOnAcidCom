@@ -1,0 +1,256 @@
+/* ============================================
+   BLOG LIST — Grid, cards, header
+   Extracted from blog-page.css (T11)
+   ============================================ */
+
+/* Blog List View - Main Container */
+.blog-list-view {
+  min-height: 100vh;
+  background-color: var(--wp--preset--color--base);
+  color: var(--wp--preset--color--contrast);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .blog-list-view {
+  background-color: var(--wp--preset--color--atomic-black);
+  color: var(--wp--preset--color--neutral-200);
+}
+
+/* Header */
+.blog-list-header {
+  /* Top: 80px (header) + 24-32px fluid padding */
+  padding-top: calc(5rem + clamp(1.5rem, 1.35rem + 0.714vw, 2rem));
+  /* Bottom: 24-32px fluid padding */
+  padding-bottom: clamp(1.5rem, 1.35rem + 0.714vw, 2rem);
+  text-align: center;
+}
+
+.blog-list-header__content {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+/* Content Area */
+.blog-list-content {
+  min-height: 60vh;
+}
+
+.contentful-notice {
+  background-color: var(--wp--preset--color--neutral-100);
+  border-bottom: 1px solid var(--wp--preset--color--neutral-200);
+  padding: var(--wp--preset--spacing--fluid-sm);
+  color: var(--wp--preset--color--neutral-700);
+}
+
+.dark .contentful-notice {
+  background-color: var(--wp--preset--color--neutral-800);
+  border-color: var(--wp--preset--color--neutral-700);
+  color: var(--wp--preset--color--neutral-300);
+}
+
+/* Blog Cards Grid */
+.blog-preview__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-md);
+  padding: 0;
+}
+
+@media (min-width: 600px) {
+  .blog-preview__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-preview__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--wp--preset--spacing--fluid-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .blog-preview__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--wp--preset--spacing--fluid-xl);
+  }
+}
+
+@media (min-width: 1800px) {
+  .blog-preview__grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--wp--preset--spacing--fluid-2xl);
+  }
+}
+
+/* Blog Card */
+.blog-card {
+  background-color: var(--wp--preset--color--base);
+  border-radius: var(--wp--preset--border-radius--lg);
+  overflow: hidden;
+  box-shadow: var(--wp--preset--shadow--card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border: 1px solid var(--wp--preset--color--neutral-200);
+}
+
+.dark .blog-card {
+  /* Match slider-card dark mode style: Atomic Black glass */
+  background-color: rgba(20, 20, 20, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--wp--preset--shadow--card-hover);
+}
+
+.dark .blog-card:hover {
+  border-color: rgba(190, 0, 254, 0.5); /* Neon Purple Border */
+  box-shadow: 0 0 20px rgba(190, 0, 254, 0.2); /* Neon Glow */
+}
+
+.blog-card__image-container {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--wp--preset--color--neutral-100);
+  position: relative;
+}
+
+.dark .blog-card__image-container {
+  background-color: var(--wp--preset--color--neutral-800);
+}
+
+.blog-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-card__image {
+  transform: scale(1.05);
+}
+
+.blog-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wp--preset--gradient--cyberpunk);
+  opacity: 0.1;
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.blog-card__placeholder-icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.blog-card__content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  flex: 1;
+}
+
+.blog-card__category {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--wp--preset--border-radius--md);
+  z-index: 1;
+  /* Light mode */
+  background-color: rgba(255, 255, 255, 0.92);
+  color: var(--wp--preset--color--neutral-800);
+  backdrop-filter: blur(4px);
+}
+
+.dark .blog-card__category {
+  background-color: rgba(15, 15, 15, 0.85);
+  color: var(--wp--preset--color--neon-purple);
+  backdrop-filter: blur(4px);
+}
+
+.blog-card__title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--300);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  color: var(--wp--preset--color--contrast);
+}
+
+.dark .blog-card__title {
+  color: #fff;
+}
+
+.blog-card__excerpt {
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--neutral-600);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.dark .blog-card__excerpt {
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.blog-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--wp--preset--spacing--fluid-sm);
+  border-top: 1px solid var(--wp--preset--color--neutral-200);
+  font-size: var(--wp--preset--font-size--100);
+  color: var(--wp--preset--color--neutral-500);
+}
+
+.dark .blog-card__footer {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--wp--preset--color--neutral-400);
+}
+
+.blog-card__date {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .blog-card {
+    transition: none;
+  }
+  .blog-card:hover {
+    transform: none;
+  }
+  .blog-card__image {
+    transition: none;
+  }
+  .blog-card:hover .blog-card__image {
+    transform: none;
+  }
+}

@@ -1,0 +1,890 @@
+/* ═══════════════════════════════════════════════
+   Book Site Dark Mode - ALL SECTIONS DARK
+   v5.0.0 — CORRECT IMPLEMENTATION
+   ═══════════════════════════════════════════════ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HEADER - DARK BACKGROUND IN DARK MODE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .header,
+body.dark .header,
+html.dark .header {
+  background-color: rgba(15, 15, 15, 0.95) !important;
+  border-bottom: 1px solid rgba(255, 16, 240, 0.2) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LOGO - UV NEON YELLOW TO GREEN ANIMATION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@keyframes neon-yellow-green-pulse {
+  0%, 100% {
+    color: #F4FF3C;
+    text-shadow: 
+      0 0 10px rgba(244, 255, 60, 0.8),
+      0 0 20px rgba(244, 255, 60, 0.6),
+      0 0 30px rgba(244, 255, 60, 0.4);
+  }
+  50% {
+    color: #39FF14;
+    text-shadow: 
+      0 0 10px rgba(57, 255, 20, 0.8),
+      0 0 20px rgba(57, 255, 20, 0.6),
+      0 0 30px rgba(57, 255, 20, 0.4);
+  }
+}
+
+.dark .header__logo,
+body.dark .header__logo,
+.dark .footer__title-btn,
+body.dark .footer__title-btn {
+  color: #F4FF3C !important;
+  animation: neon-yellow-green-pulse 3s ease-in-out infinite;
+  font-weight: 700;
+  text-shadow: 
+    0 0 10px rgba(244, 255, 60, 0.8),
+    0 0 20px rgba(244, 255, 60, 0.6),
+    0 0 30px rgba(244, 255, 60, 0.4);
+  padding-top: 16px;
+  margin-top: 8px;
+}
+
+/* Reduced motion: disable animation */
+@media (prefers-reduced-motion: reduce) {
+  .dark .header__logo,
+  body.dark .header__logo,
+  .dark .footer__title-btn,
+  body.dark .footer__title-btn {
+    animation: none;
+    color: #F4FF3C !important;
+    text-shadow: 0 0 10px rgba(244, 255, 60, 0.6);
+    padding-top: 16px;
+    margin-top: 8px;
+  }
+}
+
+/* Light mode - normal text */
+.header__logo,
+.footer__title-btn {
+  color: var(--wp--preset--color--dark-charcoal);
+  font-weight: 700;
+  padding-top: 16px;
+  margin-top: 8px;
+}
+
+.dark .header__nav-link,
+body.dark .header__nav-link {
+  color: #F6F2EB !important;
+}
+
+.dark .header__nav-link:hover,
+body.dark .header__nav-link:hover {
+  color: #FF10F0 !important;
+}
+
+.dark .header__burger-button,
+body.dark .header__burger-button {
+  color: #F6F2EB !important;
+}
+
+/* Header at top (transparent overlay) */
+.dark .header--at-top,
+body.dark .header--at-top {
+  background-color: rgba(15, 15, 15, 0.3) !important;
+  border-bottom: 1px solid transparent !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DARK MODE = ALL SECTIONS DARK
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ALL sections are dark in dark mode */
+.dark .section,
+.dark .section--dark,
+.dark .hero,
+body.dark .section,
+body.dark .section--dark,
+body.dark .hero,
+html.dark .section,
+html.dark .section--dark,
+html.dark .hero {
+  background-color: #0F0F0F !important;
+  color: #F6F2EB;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TEXT COLORS - ALL LIGHT IN DARK MODE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* All headings are white in dark mode */
+.dark .section h1,
+.dark .section h2,
+.dark .section h3,
+.dark .section h4,
+.dark .section h5,
+.dark .section h6,
+.dark .hero h1,
+.dark .hero h2,
+body.dark .section h1,
+body.dark .section h2,
+body.dark .section h3,
+body.dark .section h4,
+body.dark .section h5,
+body.dark .section h6,
+body.dark .hero h1,
+body.dark .hero h2 {
+  color: #FFFFFF !important;
+}
+
+/* All body text is light cream in dark mode */
+.dark .section p,
+.dark .section .text-body,
+.dark .section .text-lead,
+.dark .section .text-fine,
+.dark .hero p,
+body.dark .section p,
+body.dark .section .text-body,
+body.dark .section .text-lead,
+body.dark .section .text-fine,
+body.dark .hero p {
+  color: #CFC7BB !important;
+}
+
+/* Eyebrows are neon pink */
+.dark .section .eyebrow,
+.dark .hero .eyebrow,
+body.dark .section .eyebrow,
+body.dark .hero .eyebrow {
+  color: #FF10F0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CARDS - DARK BACKGROUNDS WITH PINK BORDERS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .section .card,
+.dark .hero .card,
+body.dark .section .card,
+body.dark .hero .card {
+  background-color: rgba(15, 15, 15, 0.8);
+  border: 2px solid rgba(255, 16, 240, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.dark .section .card:hover,
+.dark .hero .card:hover,
+body.dark .section .card:hover,
+body.dark .hero .card:hover {
+  background-color: rgba(15, 15, 15, 0.95);
+  border-color: #FF10F0;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(255, 16, 240, 0.4),
+    0 0 15px rgba(244, 255, 60, 0.2);
+  transform: translateY(-4px);
+}
+
+.dark .section .card h3,
+.dark .section .card .heading-card,
+body.dark .section .card h3,
+body.dark .section .card .heading-card {
+  color: white;
+}
+
+.dark .section .card p,
+.dark .section .card .text-body,
+body.dark .section .card p,
+body.dark .section .card .text-body {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TAGS - DARK WITH PINK BORDERS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .section .tag,
+body.dark .section .tag {
+  background-color: rgba(15, 15, 15, 0.6);
+  border: 1px solid rgba(255, 16, 240, 0.3);
+  color: #F6F2EB;
+}
+
+.dark .section .tag:hover,
+body.dark .section .tag:hover {
+  border-color: #FF10F0;
+  box-shadow: 0 0 10px rgba(255, 16, 240, 0.3);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TAG LIST - SPECIAL STYLING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .tag-list,
+body.dark .tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LOCKED CONTENT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .locked-content,
+body.dark .locked-content {
+  background: linear-gradient(180deg, rgba(15, 15, 15, 0.9) 0%, rgba(18, 18, 26, 0.5) 100%);
+  border: 2px solid rgba(255, 16, 240, 0.3);
+  padding: 48px 32px;
+  border-radius: 8px;
+}
+
+.dark .locked-content .card,
+body.dark .locked-content .card {
+  background-color: rgba(15, 15, 15, 0.8);
+  border: 2px solid rgba(255, 16, 240, 0.3);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO BOOK COVER VISUAL
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .hero__visual,
+body.dark .hero__visual {
+  background: linear-gradient(135deg, #D4008C 0%, #5500CC 100%);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(255, 16, 240, 0.4);
+  border-radius: 8px;
+  padding: 64px 32px;
+}
+
+.dark .book-cover__title,
+body.dark .book-cover__title {
+  color: white;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.dark .book-cover__author,
+body.dark .book-cover__author {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 20px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NEON RAINBOW TEXT (for "acid" in title)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .text-neon-rainbow,
+body.dark .text-neon-rainbow {
+  background: linear-gradient(90deg, #FF10F0 0%, #F4FF3C 50%, #00D4FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NEON PINK ACCENT TEXT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .text-neon-pink,
+body.dark .text-neon-pink {
+  color: #FF10F0 !important;
+  text-shadow: 0 0 20px rgba(255, 16, 240, 0.5);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BUTTONS - NEON GRADIENT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .button--primary,
+body.dark .button--primary {
+  background: linear-gradient(135deg, #FF10F0 0%, #8A63FF 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 16px rgba(255, 16, 240, 0.3);
+}
+
+.dark .button--primary:hover,
+body.dark .button--primary:hover {
+  background: linear-gradient(135deg, #FF3AAE 0%, #9B74FF 100%);
+  box-shadow: 0 8px 25px rgba(255, 16, 240, 0.5);
+  transform: translateY(-2px);
+}
+
+.dark .button--secondary,
+body.dark .button--secondary {
+  background: transparent;
+  color: #F6F2EB;
+  border: 2px solid rgba(255, 16, 240, 0.5);
+}
+
+.dark .button--secondary:hover,
+body.dark .button--secondary:hover {
+  background: rgba(255, 16, 240, 0.1);
+  border-color: #FF10F0;
+  color: #FF10F0;
+  box-shadow: 0 0 20px rgba(255, 16, 240, 0.3);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FORMS & INPUTS - COMPLETE DARK MODE STYLING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .form__label,
+body.dark .form__label {
+  color: #CFC7BB !important;
+  font-weight: 500;
+}
+
+.dark .form__input,
+.dark .form__textarea,
+body.dark .form__input,
+body.dark .form__textarea {
+  background-color: rgba(15, 15, 15, 0.6) !important;
+  border: 1px solid rgba(255, 16, 240, 0.2) !important;
+  color: #F6F2EB !important;
+}
+
+.dark .form__input::placeholder,
+.dark .form__textarea::placeholder,
+body.dark .form__input::placeholder,
+body.dark .form__textarea::placeholder {
+  color: #9C9488 !important;
+  opacity: 0.7;
+}
+
+.dark .form__input:focus,
+.dark .form__textarea:focus,
+body.dark .form__input:focus,
+body.dark .form__textarea:focus {
+  outline: none !important;
+  border-color: #FF10F0 !important;
+  box-shadow: 0 0 20px rgba(255, 16, 240, 0.4) !important;
+  background-color: rgba(15, 15, 15, 0.8) !important;
+}
+
+.dark .form__input:hover,
+.dark .form__textarea:hover,
+body.dark .form__input:hover,
+body.dark .form__textarea:hover {
+  border-color: rgba(255, 16, 240, 0.4) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CARDS - ENHANCED NEON BORDER GLOWS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .card,
+body.dark .card {
+  background-color: rgba(15, 15, 15, 0.8) !important;
+  border: 1px solid rgba(255, 16, 240, 0.2) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark .card:hover,
+body.dark .card:hover {
+  transform: translateY(-5px);
+  border-color: #FF10F0 !important;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(255, 16, 240, 0.4) !important;
+}
+
+.dark .card--outline-yellow,
+body.dark .card--outline-yellow {
+  border-color: rgba(244, 255, 60, 0.3) !important;
+}
+
+.dark .card--outline-yellow:hover,
+body.dark .card--outline-yellow:hover {
+  border-color: #F4FF3C !important;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(244, 255, 60, 0.4) !important;
+}
+
+.dark .card--outline-violet,
+body.dark .card--outline-violet {
+  border-color: rgba(138, 99, 255, 0.3) !important;
+}
+
+.dark .card--outline-violet:hover,
+body.dark .card--outline-violet:hover {
+  border-color: rgba(138, 99, 255, 0.8) !important;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(138, 99, 255, 0.4) !important;
+}
+
+.dark .card__category,
+body.dark .card__category {
+  color: #F4FF3C !important;
+  font-weight: 600;
+}
+
+.dark .card__title,
+body.dark .card__title {
+  color: #FFFFFF !important;
+}
+
+.dark .card__description,
+body.dark .card__description {
+  color: #CFC7BB !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LINKS - ENHANCED NEON HOVER EFFECTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark a,
+body.dark a {
+  color: #F6F2EB;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.dark a:hover,
+body.dark a:hover {
+  color: #FF10F0;
+  text-shadow: 0 0 10px rgba(255, 16, 240, 0.5);
+}
+
+.dark a:focus-visible,
+body.dark a:focus-visible {
+  outline: 2px solid #FF10F0;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BUTTONS - ENHANCED GRADIENTS & GLOWS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .button--primary,
+body.dark .button--primary {
+  background: linear-gradient(135deg, #FF10F0 0%, #BE00FE 100%) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 16, 240, 0.3);
+  box-shadow: 
+    0 4px 20px rgba(255, 16, 240, 0.3),
+    0 0 15px rgba(255, 16, 240, 0.2);
+  font-weight: 600;
+}
+
+.dark .button--primary:hover,
+body.dark .button--primary:hover {
+  background: linear-gradient(135deg, #FF3AAE 0%, #D000FF 100%) !important;
+  box-shadow: 
+    0 6px 25px rgba(255, 16, 240, 0.5),
+    0 0 25px rgba(255, 16, 240, 0.4) !important;
+  transform: translateY(-3px) !important;
+  border-color: #FF10F0;
+}
+
+.dark .button--secondary,
+body.dark .button--secondary {
+  background-color: transparent !important;
+  color: #F6F2EB !important;
+  border: 1px solid rgba(244, 255, 60, 0.3) !important;
+}
+
+.dark .button--secondary:hover,
+body.dark .button--secondary:hover {
+  border-color: #F4FF3C !important;
+  color: #F4FF3C !important;
+  box-shadow: 0 0 20px rgba(244, 255, 60, 0.3) !important;
+  transform: translateY(-3px) !important;
+  background-color: rgba(244, 255, 60, 0.05) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTIONS - ENHANCED BACKGROUNDS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .section,
+body.dark .section {
+  background-color: #0F0F0F !important;
+}
+
+.dark .section--alternate,
+body.dark .section--alternate {
+  background-color: #0F0F0F !important;
+  background-image: radial-gradient(circle at center, rgba(255, 16, 240, 0.03) 0%, transparent 70%);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TEXT & TYPOGRAPHY - ENHANCED READABILITY
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6 {
+  color: #FFFFFF !important;
+}
+
+.dark p,
+body.dark p {
+  color: #F6F2EB !important;
+}
+
+.dark .text-muted,
+body.dark .text-muted {
+  color: #CFC7BB !important;
+}
+
+.dark .text-subtle,
+body.dark .text-subtle {
+  color: #9C9488 !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TAGS & BADGES - NEON ACCENTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .tag,
+.dark .badge,
+body.dark .tag,
+body.dark .badge {
+  background-color: rgba(255, 16, 240, 0.1) !important;
+  border: 1px solid rgba(255, 16, 240, 0.3) !important;
+  color: #FF10F0 !important;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dark .tag:hover,
+.dark .badge:hover,
+body.dark .tag:hover,
+body.dark .badge:hover {
+  background-color: rgba(255, 16, 240, 0.2) !important;
+  border-color: #FF10F0 !important;
+  box-shadow: 0 0 12px rgba(255, 16, 240, 0.3);
+}
+
+.dark .tag--yellow,
+.dark .badge--yellow,
+body.dark .tag--yellow,
+body.dark .badge--yellow {
+  background-color: rgba(244, 255, 60, 0.1) !important;
+  border-color: rgba(244, 255, 60, 0.3) !important;
+  color: #F4FF3C !important;
+}
+
+.dark .tag--yellow:hover,
+.dark .badge--yellow:hover,
+body.dark .tag--yellow:hover,
+body.dark .badge--yellow:hover {
+  background-color: rgba(244, 255, 60, 0.2) !important;
+  border-color: #F4FF3C !important;
+  box-shadow: 0 0 12px rgba(244, 255, 60, 0.3);
+}
+
+.dark .tag--green,
+.dark .badge--green,
+body.dark .tag--green,
+body.dark .badge--green {
+  background-color: rgba(57, 255, 20, 0.1) !important;
+  border-color: rgba(57, 255, 20, 0.3) !important;
+  color: #39FF14 !important;
+}
+
+.dark .tag--green:hover,
+.dark .badge--green:hover,
+body.dark .tag--green:hover,
+body.dark .badge--green:hover {
+  background-color: rgba(57, 255, 20, 0.2) !important;
+  border-color: #39FF14 !important;
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.3);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GRID & LAYOUT - ENHANCED SPACING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .grid,
+body.dark .grid {
+  gap: 24px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DIVIDERS & SEPARATORS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark hr,
+body.dark hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 16, 240, 0.3) 50%,
+    transparent 100%
+  );
+  margin: 40px 0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CODE BLOCKS - TERMINAL AESTHETIC
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark code,
+.dark pre,
+body.dark code,
+body.dark pre {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid rgba(57, 255, 20, 0.2) !important;
+  color: #39FF14 !important;
+  font-family: 'Space Mono', 'Courier New', monospace;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.dark pre,
+body.dark pre {
+  padding: 16px !important;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.dark pre code,
+body.dark pre code {
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BLOCKQUOTES - NEON LEFT BORDER
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark blockquote,
+body.dark blockquote {
+  border-left: 3px solid #FF10F0 !important;
+  padding-left: 20px;
+  margin-left: 0;
+  color: #CFC7BB !important;
+  font-style: italic;
+  background-color: rgba(255, 16, 240, 0.05);
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.dark blockquote p,
+body.dark blockquote p {
+  color: #CFC7BB !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LISTS - NEON BULLETS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark ul li::marker,
+body.dark ul li::marker {
+  color: #FF10F0;
+}
+
+.dark ol li::marker,
+body.dark ol li::marker {
+  color: #F4FF3C;
+  font-weight: 600;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TABLES - STRIPED WITH NEON BORDERS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark table,
+body.dark table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid rgba(255, 16, 240, 0.2);
+}
+
+.dark th,
+body.dark th {
+  background-color: rgba(255, 16, 240, 0.1) !important;
+  color: #FF10F0 !important;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid rgba(255, 16, 240, 0.3);
+  font-weight: 600;
+}
+
+.dark td,
+body.dark td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 16, 240, 0.1);
+  color: #F6F2EB !important;
+}
+
+.dark tr:nth-child(even),
+body.dark tr:nth-child(even) {
+  background-color: rgba(255, 16, 240, 0.03);
+}
+
+.dark tr:hover,
+body.dark tr:hover {
+  background-color: rgba(255, 16, 240, 0.08) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SELECTION - NEON PINK HIGHLIGHT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark ::selection,
+body.dark ::selection {
+  background-color: rgba(255, 16, 240, 0.3);
+  color: #FFFFFF;
+}
+
+.dark ::-moz-selection,
+body.dark ::-moz-selection {
+  background-color: rgba(255, 16, 240, 0.3);
+  color: #FFFFFF;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCROLLBAR - NEON PINK TRACK
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark ::-webkit-scrollbar,
+body.dark ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.dark ::-webkit-scrollbar-track,
+body.dark ::-webkit-scrollbar-track {
+  background: rgba(15, 15, 15, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb,
+body.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FF10F0 0%, #BE00FE 100%);
+  border-radius: 5px;
+  border: 2px solid rgba(15, 15, 15, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover,
+body.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FF3AAE 0%, #D000FF 100%);
+  box-shadow: 0 0 10px rgba(255, 16, 240, 0.5);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MOBILE MENU - DARK MODE STYLING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .mobile-menu,
+body.dark .mobile-menu {
+  background-color: #0F0F0F !important;
+  background-image: radial-gradient(circle at center, rgba(255, 16, 240, 0.1) 0%, transparent 70%) !important;
+}
+
+.dark .mobile-menu__nav-link,
+body.dark .mobile-menu__nav-link {
+  color: #F6F2EB !important;
+}
+
+.dark .mobile-menu__nav-link:hover,
+.dark .mobile-menu__nav-link[aria-current="page"],
+body.dark .mobile-menu__nav-link:hover,
+body.dark .mobile-menu__nav-link[aria-current="page"] {
+  color: #FF10F0 !important;
+  text-shadow: 0 0 15px rgba(255, 16, 240, 0.5);
+}
+
+.dark .mobile-menu__email-link,
+body.dark .mobile-menu__email-link {
+  color: #CFC7BB !important;
+}
+
+.dark .mobile-menu__email-link:hover,
+.dark .mobile-menu__email-link:focus-visible,
+body.dark .mobile-menu__email-link:hover,
+body.dark .mobile-menu__email-link:focus-visible {
+  color: #F4FF3C !important;
+  text-shadow: 0 0 12px rgba(244, 255, 60, 0.5);
+}
+
+/* Mobile menu orbs - neon pink/yellow/green */
+.dark .mobile-menu__orb--1,
+body.dark .mobile-menu__orb--1 {
+  background: #FF10F0 !important;
+  opacity: 0.15;
+}
+
+.dark .mobile-menu__orb--2,
+body.dark .mobile-menu__orb--2 {
+  background: #F4FF3C !important;
+  opacity: 0.12;
+}
+
+.dark .mobile-menu__orb--3,
+body.dark .mobile-menu__orb--3 {
+  background: #39FF14 !important;
+  opacity: 0.1;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER - ADDITIONAL DARK MODE STYLING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.dark .footer,
+body.dark .footer {
+  background-color: #0F0F0F !important;
+  border-top: 1px solid rgba(255, 16, 240, 0.2);
+}
+
+.dark .footer__tagline,
+body.dark .footer__tagline {
+  color: #CFC7BB !important;
+}
+
+.dark .footer__link-btn,
+body.dark .footer__link-btn {
+  color: #F6F2EB !important;
+}
+
+.dark .footer__link-btn:hover,
+body.dark .footer__link-btn:hover {
+  color: #FF10F0 !important;
+}
+
+.dark .footer__legal-link,
+body.dark .footer__legal-link {
+  color: #9C9488 !important;
+}
+
+.dark .footer__legal-link:hover,
+body.dark .footer__legal-link:hover {
+  color: #F4FF3C !important;
+}
+
+.dark .footer__copy-link,
+body.dark .footer__copy-link {
+  color: #F6F2EB !important;
+}
+
+.dark .footer__copy-link:hover,
+body.dark .footer__copy-link:hover {
+  color: #39FF14 !important;
+}

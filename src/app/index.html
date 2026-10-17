@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+
+    <!-- SEO Meta Tags -->
+    <title>Ash Shaw | Neon & UV Makeup Art — Berlin & Festival Portfolio</title>
+    <meta name="description" content="Explore the bold neon and UV makeup artistry of Ash Shaw. Festival face painting, blacklight designs, editorial looks, and creative tutorials — from Berlin clubs to international psytrance festivals." />
+    <meta name="keywords" content="ash shaw, neon makeup, UV makeup, festival face paint, blacklight art, Berlin makeup artist, psytrance, face painting, body art, creative makeup, neon vs atomic black" />
+    <meta name="author" content="Ash Shaw" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Ash Shaw | Neon & UV Makeup Art — Berlin & Festival Portfolio" />
+    <meta property="og:description" content="Explore the bold neon and UV makeup artistry of Ash Shaw. Festival face painting, blacklight designs, editorial looks, and creative tutorials — from Berlin clubs to international psytrance festivals." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ashshaw.com" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ash Shaw | Neon & UV Makeup Art — Berlin & Festival Portfolio" />
+    <meta name="twitter:description" content="Explore the bold neon and UV makeup artistry of Ash Shaw. Festival face painting, blacklight designs, editorial looks, and creative tutorials — from Berlin clubs to international psytrance festivals." />
+    
+    <meta property="og:site_name" content="Ash Shaw" />
+    <meta property="og:locale" content="en_GB" />
+    <!-- Social Sharing Images -->
+    <meta property="og:image" content="https://ashshaw.com/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ash Shaw — Neon & UV Makeup Art Portfolio" />
+    <meta name="twitter:image" content="https://ashshaw.com/og-image.svg" />
+    <meta name="twitter:image:alt" content="Ash Shaw — Neon & UV Makeup Art Portfolio" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="152x152" href="/pwa-icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/pwa-icons/icon-192x192.png" />
+    
+    <!-- Apple Mobile Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Ash Shaw" />
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileColor" content="#BE00FE" />
+    <meta name="msapplication-TileImage" content="/pwa-icons/icon-144x144.png" />
+    
+    <!-- Google Fonts — only families referenced in CSS token system -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@300..700&family=Righteous&family=Playfair+Display:wght@400..700&family=JetBrains+Mono:wght@300..700&family=Fira+Code:wght@300..700&family=Space+Mono:wght@400;700&family=Vampiro+One&display=swap" rel="stylesheet">
+    
+    <!-- Accessibility -->
+    <meta name="theme-color" content="#BE00FE" />
+    <!-- Color scheme will be set dynamically by ThemeToggle -->
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- FOUC Prevention Script — Defaults to Dark Mode -->
+    <script>
+      (function() {
+        try {
+          var savedTheme = localStorage.getItem('theme');
+          // Default to dark mode (neon pink/yellow design)
+          var theme = savedTheme || 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {
+          // Fallback to dark mode on error
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+
+    <!-- Error Suppression Script - Must run before any other scripts -->
+    <script>
+      (function() {
+        // Patterns to suppress (browser extensions + esm.sh Node polyfill shims)
+        function isSuppressible(msg, src) {
+          return (
+            msg.indexOf('async_hooks') !== -1 ||
+            msg.indexOf('esm.sh/node/') !== -1 ||
+            (src && src.indexOf('async_hooks') !== -1) ||
+            (src && src.indexOf('esm.sh/node/') !== -1)
+          );
+        }
+
+        // Global error handler
+        window.onerror = function(msg, url, line, col, error) {
+          var message = String(msg);
+          var source = String(url || '');
+          var stack = (error && error.stack) ? error.stack : '';
+          if (
+            isSuppressible(message, source) ||
+            isSuppressible(stack, source)
+          ) {
+            return true; // Suppress error
+          }
+          return false;
+        };
+
+        // Error event listener (capture phase — fires before anything else)
+        window.addEventListener('error', function(event) {
+          var message = event.message || '';
+          var filename = event.filename || '';
+          var stack = (event.error && event.error.stack) ? event.error.stack : '';
+          if (
+            isSuppressible(message, filename) ||
+            isSuppressible(stack, filename)
+          ) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+
+        // Unhandled rejection handler
+        window.addEventListener('unhandledrejection', function(event) {
+          var message = event.reason ? (event.reason.message || String(event.reason)) : '';
+          var stack = (event.reason && event.reason.stack) ? event.reason.stack : '';
+          if (
+            isSuppressible(message, '') ||
+            isSuppressible(stack, '')
+          ) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        });
+
+        // Console error override
+        var originalConsoleError = console.error;
+        console.error = function() {
+          var args = Array.from(arguments);
+          var message = args.map(function(arg) {
+            return (arg instanceof Error) ? (arg.message + (arg.stack || '')) : String(arg);
+          }).join(' ');
+
+          if (isSuppressible(message, '')) {
+            return;
+          }
+          originalConsoleError.apply(console, args);
+        };
+      })();
+    </script>
+    
+    <!-- Preload critical assets for PWA -->
+    <link rel="preload" href="/styles/globals.css" as="style" />
+    <link rel="preload" href="/styles/animations.css" as="style" />
+  </head>
+  <body>
+    <!-- Root element for React app -->
+    <div id="root"></div>
+    
+    <!-- Main application script -->
+    <script type="module" src="/main.tsx"></script>
+    
+    <!-- Schema.org structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ash Shaw",
+      "jobTitle": "Makeup Artist",
+      "description": "Makeup artist specialising in festival artistry, UV neon designs, and creative expression — neon UV blacklight makeup, psytrance festival face painting, Berlin club culture.",
+      "url": "https://ashshaw.com",
+      "image": "https://ashshaw.com/og-image.svg",
+      "sameAs": [
+        "https://instagram.com/ashshaw_makeup",
+        "https://ashshaw.com"
+      ],
+      "knowsAbout": [
+        "Festival Makeup",
+        "UV Makeup",
+        "Blacklight Art",
+        "Creative Makeup",
+        "Neon Face Painting",
+        "Nightclub Makeup",
+        "Berlin Nightlife",
+        "Psytrance Festivals",
+        "Body Art",
+        "Editorial Makeup"
+      ],
+      "workLocation": {
+        "@type": "City",
+        "name": "Berlin"
+      },
+      "homeLocation": {
+        "@type": "City",
+        "name": "Berlin"
+      }
+    }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+# Ash Shaw — Neon & UV Makeup Art
+# llms.txt — AI agent discoverability file
+# Standard: https://llmstxt.org
+
+## About this site
+
+Ash Shaw is a makeup artist specialising in neon UV blacklight designs, festival face painting, and bold editorial makeup. The site documents a personal art project spanning Berlin club culture, international psytrance festivals, and creative self-expression. The aesthetic is 80s neon CLI — neon pink and neon yellow on atomic black.
+
+## Content inventory
+
+- **Portfolio** (`/portfolio`) — Photo gallery of UV makeup looks, festival face paints, editorial designs, and blacklight photography. Categorised by style (UV, neon, editorial, festival).
+- **Blog** (`/blog`) — Articles on makeup techniques, festival culture, UV art, the Berlin scene, and creative process essays.
+- **Podcasts** (`/podcasts`) — Audio conversations about makeup artistry, festival culture, creativity, and the intersection of art and nightlife.
+- **Videos** (`/videos`) — Tutorial and documentary video content.
+- **Events** (`/events`) — Festival appearances, workshop dates, and live events.
+- **Book** (`/book`) — "Neon vs Atomic Black" — a book in progress about neon UV makeup art, festival culture, and creative identity.
+- **About** (`/about`) — Bio, manifesto, history, and personal sub-pages (ADHD, cats, cycling, fitness, Berlin, music, travels).
+- **Style Guide** (`/dev/style-guide`) — Design system documentation.
+
+## Author
+
+**Name:** Ash Shaw
+**Profession:** Makeup Artist (festival artistry, UV/blacklight design, editorial)
+**Location:** Berlin, Germany (originally Cape Town, South Africa)
+**Specialisation:** Neon UV blacklight makeup, psytrance festival face paint, 80s-inspired neon editorial
+**Instagram:** @ashshaw_makeup (https://instagram.com/ashshaw_makeup)
+**Website:** https://ashshaw.com
+
+## Preferred citation format
+
+> Ash Shaw. "Neon & UV Makeup Art." ashshaw.com. https://ashshaw.com
+
+## Technical
+
+- Stack: React 18 SPA, React Router v7, Vite 6, Tailwind v4
+- Content: All content is dynamically rendered. No server-side rendering.
+- Sitemap: https://ashshaw.com/sitemap.xml
+- Contact: Via website contact page at https://ashshaw.com/contact

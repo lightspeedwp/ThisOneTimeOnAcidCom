@@ -1,0 +1,742 @@
+/* ==========================================================================
+   ABOUT SUB-PAGES — Shared Styles
+   Berlin, Book, Bio, Process, Lucy, Travels
+   BEM Architecture with per-page neon accent via CSS custom properties
+
+   REFACTORED (T05): Replaced 16 duplicate per-page accent blocks (~600 lines)
+   with a single set of generic accent rules using --accent-rgb, --accent-text,
+   --accent-full custom properties.
+   ========================================================================== */
+
+/* ── Page Shell ── */
+.about-subpage {
+  min-height: 100vh;
+  background: var(--wp--preset--color--neutral-50);
+
+  /* Default accent: Purple (bio, music, tribes) */
+  --accent-rgb: 190, 0, 254;
+  --accent-text: var(--wp--preset--color--neon-purple-text);
+  --accent-full: var(--wp--preset--color--neon-purple);
+  --accent-comp-1: var(--wp--preset--color--neon-pink);
+  --accent-comp-2: var(--wp--preset--color--neon-blue);
+}
+
+.dark .about-subpage {
+  background: var(--wp--preset--color--atomic-black);
+}
+
+/* ══════════════════════════════════════
+   PER-PAGE ACCENT OVERRIDES
+   Each modifier sets three custom properties.
+   All accent-dependent styles reference these generically.
+   Synced with hidden-about.ts card accents (v8.2.0).
+   ══════════════════════════════════════ */
+
+.about-subpage--berlin,
+.about-subpage--music {
+  --accent-rgb: 0, 68, 255;
+  --accent-text: var(--wp--preset--color--neon-blue-text);
+  --accent-full: var(--wp--preset--color--neon-blue);
+  --accent-comp-1: var(--wp--preset--color--neon-purple);
+  --accent-comp-2: var(--wp--preset--color--neon-cyan);
+}
+
+.about-subpage--partners,
+.about-subpage--podcast {
+  --accent-rgb: 255, 16, 240;
+  --accent-text: var(--wp--preset--color--neon-pink-text);
+  --accent-full: var(--wp--preset--color--neon-pink);
+  --accent-comp-1: var(--wp--preset--color--neon-purple);
+  --accent-comp-2: var(--wp--preset--color--neon-cyan);
+}
+
+.about-subpage--process,
+.about-subpage--cycling,
+.about-subpage--six-cats {
+  --accent-rgb: 57, 255, 20;
+  --accent-text: var(--wp--preset--color--neon-green-text);
+  --accent-full: var(--wp--preset--color--neon-green);
+  --accent-comp-1: var(--wp--preset--color--neon-cyan);
+  --accent-comp-2: var(--wp--preset--color--neon-yellow);
+}
+
+.about-subpage--lucy,
+.about-subpage--aquarius {
+  --accent-rgb: 0, 247, 255;
+  --accent-text: var(--wp--preset--color--neon-cyan-text);
+  --accent-full: var(--wp--preset--color--neon-cyan);
+  --accent-comp-1: var(--wp--preset--color--neon-green);
+  --accent-comp-2: var(--wp--preset--color--neon-blue);
+}
+
+.about-subpage--book,
+.about-subpage--lightspeed,
+.about-subpage--fitness {
+  --accent-rgb: 255, 107, 0;
+  --accent-text: var(--wp--preset--color--neon-orange-text);
+  --accent-full: var(--wp--preset--color--neon-orange);
+  --accent-comp-1: var(--wp--preset--color--neon-yellow);
+  --accent-comp-2: var(--wp--preset--color--neon-red);
+}
+
+.about-subpage--adhd,
+.about-subpage--education {
+  --accent-rgb: 255, 229, 0;
+  --accent-text: var(--wp--preset--color--neon-yellow-text);
+  --accent-full: var(--wp--preset--color--neon-yellow);
+  --accent-comp-1: var(--wp--preset--color--neon-green);
+  --accent-comp-2: var(--wp--preset--color--neon-orange);
+}
+
+.about-subpage--travels {
+  --accent-rgb: 255, 0, 50;
+  --accent-text: var(--wp--preset--color--neon-red-text);
+  --accent-full: var(--wp--preset--color--neon-red);
+  --accent-comp-1: var(--wp--preset--color--neon-orange);
+  --accent-comp-2: var(--wp--preset--color--neon-pink);
+}
+
+/* bio, tribes use the default purple — complementary colors set in root .about-subpage block above */
+
+/* ══════════════════════════════════════
+   HERO
+   ══════════════════════════════════════ */
+
+.about-subpage__hero {
+  padding-top: calc(5rem + var(--wp--preset--spacing--section-horizontal));
+  padding-bottom: var(--wp--preset--spacing--fluid-lg);
+  text-align: center;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(var(--accent-rgb), 0.03) 0%,
+      transparent 100%
+    );
+}
+
+.dark .about-subpage__hero {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(var(--accent-rgb), 0.06) 0%,
+      transparent 100%
+    );
+}
+
+/* Lucy exception: two-stop gradient with cyan → purple */
+.about-subpage--lucy .about-subpage__hero {
+  background: linear-gradient(180deg, rgba(0, 243, 255, 0.03) 0%, rgba(190, 0, 254, 0.02) 50%, transparent 100%);
+}
+.dark .about-subpage--lucy .about-subpage__hero {
+  background: linear-gradient(180deg, rgba(0, 243, 255, 0.06) 0%, rgba(190, 0, 254, 0.04) 50%, transparent 100%);
+}
+
+.about-subpage__hero-content {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+/* ── Hero Badge ── */
+.about-subpage__hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 1rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  color: var(--accent-text);
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  white-space: nowrap;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dark .about-subpage__hero-badge {
+  color: var(--accent-full);
+  background: rgba(var(--accent-rgb), 0.12);
+  border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+.about-subpage__hero-desc {
+  max-width: 38rem;
+  color: var(--wp--preset--color--neutral-600);
+  margin-bottom: 0;
+  /* Animated neon gradient text using page accent + complementary colours */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    135deg,
+    var(--accent-text),
+    var(--accent-comp-1),
+    var(--accent-text)
+  );
+  background-size: 200% 200%;
+  animation: subtitle-gradient-flow 6s ease infinite;
+}
+
+.dark .about-subpage__hero-desc {
+  background-image: linear-gradient(
+    135deg,
+    var(--accent-full),
+    var(--accent-comp-1),
+    var(--accent-comp-2),
+    var(--accent-full)
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-subpage__hero-desc {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+/* ══════════════════════════════════════
+   BODY CONTENT
+   ══════════════════════════════════════ */
+
+.about-subpage__body {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal) var(--wp--preset--spacing--fluid-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-xl);
+}
+
+/* ── Section ── */
+.about-subpage__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.about-subpage__section-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--400);
+  color: var(--foreground);
+}
+
+.dark .about-subpage__section-title {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+.about-subpage__section-text {
+  font-family: var(--wp--preset--font-family--brand-body);
+  color: var(--wp--preset--color--neutral-600);
+  line-height: 1.7;
+}
+
+.dark .about-subpage__section-text {
+  color: var(--color-text-muted); /* #CFC7BB - 10.2:1 contrast (WCAG AAA) - FIXED */
+}
+
+/* ── Section Subtitle (h3 within content) ── */
+.about-subpage__section-subtitle {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--300);
+  color: var(--foreground);
+  margin-top: var(--wp--preset--spacing--fluid-sm);
+}
+
+.dark .about-subpage__section-subtitle {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+/* ══════════════════════════════════════
+   BIO — Quick Facts Grid
+   ══════════════════════════════════════ */
+
+.about-subpage__facts {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+@media (min-width: 768px) {
+  .about-subpage__facts {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.about-subpage__fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: var(--wp--preset--spacing--fluid-sm);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  border-radius: var(--wp--preset--border-radius--md);
+  background: var(--wp--preset--color--base);
+  text-align: center;
+}
+
+.dark .about-subpage__fact {
+  border-color: var(--wp--preset--color--neutral-800);
+  background: rgba(20, 20, 20, 0.5);
+}
+
+.about-subpage__fact-label {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-text);
+}
+
+.dark .about-subpage__fact-label {
+  color: var(--accent-full);
+}
+
+.about-subpage__fact-value {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--foreground);
+}
+
+.dark .about-subpage__fact-value {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+/* ══════════════════════════════════════
+   PROCESS — Steps (accent-driven)
+   ══════════════════════════════════════ */
+
+.about-subpage__steps {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-md);
+}
+
+.about-subpage__step {
+  display: flex;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  padding: var(--wp--preset--spacing--fluid-sm);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  border-radius: var(--wp--preset--border-radius--md);
+  background: var(--wp--preset--color--base);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.about-subpage__step:hover {
+  border-color: rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 2px 12px rgba(var(--accent-rgb), 0.06);
+}
+
+.dark .about-subpage__step {
+  border-color: var(--wp--preset--color--neutral-800);
+  background: rgba(20, 20, 20, 0.5);
+}
+
+.dark .about-subpage__step:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.08);
+}
+
+.about-subpage__step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--300);
+  color: var(--accent-text);
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+}
+
+.dark .about-subpage__step-number {
+  color: var(--accent-full);
+  background: rgba(var(--accent-rgb), 0.12);
+  border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+.about-subpage__step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.about-subpage__step-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--foreground);
+}
+
+.dark .about-subpage__step-title {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+.about-subpage__step-desc {
+  font-family: var(--wp--preset--font-family--brand-body);
+  color: var(--wp--preset--color--neutral-500);
+  line-height: 1.6;
+}
+
+.dark .about-subpage__step-desc {
+  color: var(--color-text-muted); /* #CFC7BB - 10.2:1 contrast (WCAG AAA) - FIXED */
+}
+
+/* ══════════════════════════════════════
+   BOOK — Cover Mock
+   (Always pink — represents the physical book)
+   ══════════════════════════════════════ */
+
+.book-cover {
+  max-width: 22rem;
+  margin: 0 auto;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--wp--preset--border-radius--md);
+  background: var(--wp--preset--color--neon-pink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  padding: var(--wp--preset--spacing--fluid-lg);
+  box-shadow:
+    0 8px 40px rgba(255, 16, 240, 0.35),
+    0 0 80px rgba(255, 16, 240, 0.2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .book-cover {
+  box-shadow:
+    0 8px 40px rgba(255, 16, 240, 0.35),
+    0 0 80px rgba(255, 16, 240, 0.2);
+}
+
+.book-cover__title {
+  font-family: 'Vampiro One', 'Righteous', cursive;
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  color: var(--wp--preset--color--neon-yellow);
+  text-shadow: 0 0 20px rgba(255, 229, 0, 0.6);
+  line-height: 1.2;
+  transform: rotate(-2deg);
+}
+
+.book-cover__subtitle {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100);
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.05em;
+}
+
+.book-cover__author {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--wp--preset--color--neon-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 12px rgba(255, 229, 0, 0.5);
+}
+
+.book-cover__status {
+  display: inline-block;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── Book Chapter Previews (accent-driven) ── */
+.about-subpage__chapters {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.about-subpage__chapters-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--400);
+  color: var(--foreground);
+  text-align: center;
+}
+
+.dark .about-subpage__chapters-title {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+.about-subpage__chapter {
+  display: flex;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  padding: var(--wp--preset--spacing--fluid-sm);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  border-radius: var(--wp--preset--border-radius--md);
+  background: var(--wp--preset--color--base);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.about-subpage__chapter:hover {
+  border-color: rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 2px 12px rgba(var(--accent-rgb), 0.06);
+}
+
+.dark .about-subpage__chapter {
+  border-color: var(--wp--preset--color--neutral-800);
+  background: rgba(20, 20, 20, 0.5);
+}
+
+.dark .about-subpage__chapter:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.1);
+}
+
+.about-subpage__chapter-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--wp--preset--border-radius--full);
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--accent-text);
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+}
+
+.dark .about-subpage__chapter-number {
+  color: var(--accent-full);
+  background: rgba(var(--accent-rgb), 0.12);
+  border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+.about-subpage__chapter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.about-subpage__chapter-title {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--200);
+  color: var(--foreground);
+}
+
+.dark .about-subpage__chapter-title {
+  color: var(--wp--preset--color--neutral-100);
+}
+
+.about-subpage__chapter-teaser {
+  font-family: var(--wp--preset--font-family--brand-body);
+  color: var(--wp--preset--color--neutral-500);
+  line-height: 1.5;
+}
+
+.dark .about-subpage__chapter-teaser {
+  color: var(--color-text-muted); /* #CFC7BB - 10.2:1 contrast (WCAG AAA) - FIXED */
+}
+
+/* ══════════════════════════════════════
+   TRAVELS — Destination Grid (accent-driven)
+   ══════════════════════════════════════ */
+
+.about-subpage__destinations {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--section-horizontal);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+@media (min-width: 768px) {
+  .about-subpage__destinations {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-subpage__destinations {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.about-subpage__destination {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: var(--wp--preset--spacing--fluid-sm);
+  border: 1px solid var(--wp--preset--color--neutral-200);
+  border-radius: var(--wp--preset--border-radius--md);
+  background: var(--wp--preset--color--base);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.about-subpage__destination:hover {
+  border-color: rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 2px 12px rgba(var(--accent-rgb), 0.06);
+}
+
+.dark .about-subpage__destination {
+  border-color: var(--wp--preset--color--neutral-800);
+  background: rgba(20, 20, 20, 0.5);
+}
+
+.dark .about-subpage__destination:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.08);
+}
+
+.about-subpage__destination-name {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--300);
+  color: var(--foreground);
+}
+
+/* Aquarius overrides destination-name to accent color */
+.about-subpage--aquarius .about-subpage__destination-name {
+  color: var(--accent-text);
+}
+.dark .about-subpage--aquarius .about-subpage__destination-name {
+  color: var(--accent-full);
+}
+
+.about-subpage__destination-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--accent-text);
+  flex-shrink: 0;
+}
+
+.dark .about-subpage__destination-icon {
+  color: var(--accent-full);
+}
+
+.about-subpage__destination-region {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-text);
+}
+
+.dark .about-subpage__destination-region {
+  color: var(--accent-full);
+}
+
+.about-subpage__destination-desc {
+  font-family: var(--wp--preset--font-family--brand-body);
+  color: var(--wp--preset--color--neutral-500);
+  line-height: 1.5;
+}
+
+.dark .about-subpage__destination-desc {
+  color: var(--color-text-muted); /* #CFC7BB - 10.2:1 contrast (WCAG AAA) - FIXED */
+}
+
+/* ══════════════════════════════════════
+   PULL QUOTE (accent-driven)
+   ══════════════════════════════════════ */
+
+.about-subpage__pull-quote {
+  max-width: var(--wp--preset--layout--content);
+  margin: 0 auto;
+  padding: var(--wp--preset--spacing--fluid-md) var(--wp--preset--spacing--section-horizontal);
+  text-align: center;
+}
+
+.about-subpage__pull-quote-text {
+  font-family: var(--wp--preset--font-family--brand-heading);
+  font-size: var(--wp--preset--font-size--400);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--accent-text);
+  position: relative;
+}
+
+.dark .about-subpage__pull-quote-text {
+  color: var(--accent-full);
+  text-shadow: 0 0 20px rgba(var(--accent-rgb), 0.15);
+}
+
+/* ══════════════════════════════════════
+   PODCAST — Inline Icon & Episode Icon
+   ══════════════════════════════════════ */
+
+.about-subpage__inline-icon {
+  display: inline;
+  width: 1.25rem;
+  height: 1.25rem;
+  vertical-align: -0.15em;
+}
+
+.about-subpage__ep-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--accent-text);
+}
+.dark .about-subpage__ep-icon {
+  color: var(--accent-full);
+}
+
+/* ══════════════════════════════════════
+   EBOOK — Excerpt Blocks
+   (Always pink — represents book excerpts)
+   ══════════════════════════════════════ */
+
+.about-subpage__ebook-chapter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-sm);
+}
+
+.about-subpage__ebook-excerpt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--fluid-sm);
+  padding: var(--wp--preset--spacing--fluid-md);
+  border-left: 3px solid rgba(255, 16, 240, 0.3);
+  border-radius: 0 var(--wp--preset--border-radius--md) var(--wp--preset--border-radius--md) 0;
+  background: rgba(255, 16, 240, 0.02);
+}
+
+.dark .about-subpage__ebook-excerpt {
+  border-left-color: rgba(255, 16, 240, 0.5);
+  background: rgba(255, 16, 240, 0.04);
+}
+
+/* ══════════════════════════════════════
+   REDUCED MOTION
+   ══════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-subpage__step,
+  .about-subpage__chapter,
+  .about-subpage__destination {
+    transition: none;
+  }
+}

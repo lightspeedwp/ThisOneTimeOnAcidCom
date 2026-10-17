@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Chapter Navigation Component
+   Mobile-first responsive navigation for long-form content pages
+   ========================================================================== */
+
+/* Base nav container */
+.chapter-nav {
+  width: 100%;
+}
+
+/* Mobile: horizontal scrolling list */
+.chapter-nav__list {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.chapter-nav__list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Chapter items */
+.chapter-nav__item {
+  flex-shrink: 0;
+}
+
+/* Chapter links/buttons */
+.chapter-nav__link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: var(--wp--preset--font-size--100, 0.75rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wp--preset--color--neutral-600);
+  background-color: transparent;
+  border: 1.5px solid var(--wp--preset--color--neutral-300);
+  border-radius: var(--wp--preset--border-radius--full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.dark .chapter-nav__link {
+  color: var(--wp--preset--color--neutral-400);
+  border-color: var(--wp--preset--color--neutral-700);
+}
+
+.chapter-nav__link:hover {
+  color: var(--wp--preset--color--neon-purple);
+  border-color: var(--wp--preset--color--neon-purple);
+  background-color: rgba(190, 0, 254, 0.05);
+}
+
+.dark .chapter-nav__link:hover {
+  background-color: rgba(190, 0, 254, 0.1);
+}
+
+/* Active chapter */
+.chapter-nav__item--active .chapter-nav__link {
+  color: #fff;
+  background-color: var(--wp--preset--color--neon-purple);
+  border-color: var(--wp--preset--color--neon-purple);
+}
+
+.dark .chapter-nav__item--active .chapter-nav__link {
+  box-shadow: 0 0 16px rgba(190, 0, 254, 0.4);
+}
+
+/* ==========================================================================
+   Desktop: Vertical sidebar layout
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .chapter-nav {
+    /* Base desktop layout — not sticky by default */
+  }
+
+  .chapter-nav__list {
+    flex-direction: column;
+    gap: 0.75rem;
+    overflow: visible;
+  }
+
+  .chapter-nav__item {
+    flex-shrink: 1;
+  }
+
+  .chapter-nav__link {
+    font-size: var(--wp--preset--font-size--200, 0.875rem);
+    padding: 0.75rem 1.25rem;
+    text-align: left;
+  }
+}
+
+/* ==========================================================================
+   Sticky modifier — opt-in sticky sidebar (About Journey layout only)
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .chapter-nav--sticky {
+    position: sticky;
+    top: calc(var(--header-height, 4rem) + 2rem);
+    align-self: flex-start;
+    /* Constrain max-height so it never exceeds the viewport */
+    max-height: calc(100vh - var(--header-height, 4rem) - 4rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--wp--preset--color--neon-purple) transparent;
+  }
+
+  .chapter-nav--sticky::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .chapter-nav--sticky::-webkit-scrollbar-thumb {
+    background: var(--wp--preset--color--neon-purple);
+    border-radius: 2px;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .chapter-nav__link {
+    transition: none;
+  }
+}

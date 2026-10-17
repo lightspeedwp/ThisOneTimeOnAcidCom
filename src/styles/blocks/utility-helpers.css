@@ -1,0 +1,176 @@
+/* ============================================
+   UTILITY HELPER CLASSES
+   Spacing, containers, typography scale, layout helpers
+   Extracted from globals.css (T01 — memory reduction v2)
+   ============================================ */
+
+/* Spacing Helpers */
+.px-horizontal-section { padding-left: var(--wp--preset--spacing--section-horizontal); padding-right: var(--wp--preset--spacing--section-horizontal); }
+.py-section { padding-top: var(--wp--preset--spacing--section-vertical); padding-bottom: var(--wp--preset--spacing--section-vertical); }
+.py-section-sm { padding-top: var(--wp--preset--spacing--fluid-md); padding-bottom: var(--wp--preset--spacing--fluid-md); }
+.py-section-md { padding-top: var(--wp--preset--spacing--fluid-lg); padding-bottom: var(--wp--preset--spacing--fluid-lg); }
+.py-section-lg { padding-top: var(--wp--preset--spacing--fluid-xl); padding-bottom: var(--wp--preset--spacing--fluid-xl); }
+.py-section-xl { padding-top: var(--wp--preset--spacing--fluid-2xl); padding-bottom: var(--wp--preset--spacing--fluid-2xl); }
+.py-footer { padding-top: var(--wp--preset--spacing--fluid-xl); padding-bottom: var(--wp--preset--spacing--fluid-xl); }
+.py-fluid-lg { padding-top: var(--wp--preset--spacing--fluid-lg); padding-bottom: var(--wp--preset--spacing--fluid-lg); }
+.py-fluid-md { padding-top: var(--wp--preset--spacing--fluid-md); padding-bottom: var(--wp--preset--spacing--fluid-md); }
+
+.gap-fluid-sm { gap: var(--wp--preset--spacing--fluid-sm); }
+.gap-fluid-md { gap: var(--wp--preset--spacing--fluid-md); }
+.gap-fluid-lg { gap: var(--wp--preset--spacing--fluid-lg); }
+
+.mb-fluid-xs { margin-bottom: var(--wp--preset--spacing--fluid-xs, 0.5rem); }
+.mb-fluid-sm { margin-bottom: var(--wp--preset--spacing--fluid-sm); }
+.mb-fluid-md { margin-bottom: var(--wp--preset--spacing--fluid-md); }
+.mb-fluid-lg { margin-bottom: var(--wp--preset--spacing--fluid-lg); }
+.mb-fluid-xl { margin-bottom: var(--wp--preset--spacing--fluid-xl); }
+.mb-fluid-2xl { margin-bottom: var(--wp--preset--spacing--fluid-2xl); }
+.mb-fluid-3xl { margin-bottom: clamp(4rem, 2rem + 10vw, 8rem); }
+
+.mt-fluid-sm { margin-top: var(--wp--preset--spacing--fluid-sm); }
+.mt-fluid-md { margin-top: var(--wp--preset--spacing--fluid-md); }
+.mt-fluid-lg { margin-top: var(--wp--preset--spacing--fluid-lg); }
+.mt-fluid-xl { margin-top: var(--wp--preset--spacing--fluid-xl); }
+.mt-fluid-2xl { margin-top: var(--wp--preset--spacing--fluid-2xl); }
+
+.text-inherit { color: inherit; }
+
+/* Layout Container Helpers - DRY Refactored (v2.0.0) */
+/* Base container class with custom property for max-width */
+[class*="container-"] {
+  max-width: var(--container-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--wp--preset--spacing--fluid-md);
+  padding-right: var(--wp--preset--spacing--fluid-md);
+}
+
+/* Container width modifiers */
+.container-wide { --container-w: var(--wp--preset--layout--wide); }
+.container-desktop-wide { --container-w: var(--wp--preset--layout--desktop-wide); }
+.container-ultra-wide { --container-w: var(--wp--preset--layout--ultra-wide); }
+.container-desktop-xl { --container-w: var(--wp--preset--layout--desktop-xl); }
+.container-full-hd { --container-w: var(--wp--preset--layout--full-hd); }
+.container-7xl { --container-w: 80rem; }
+.container-6xl { --container-w: 72rem; }
+.container-5xl { --container-w: 64rem; }
+.container-xl { --container-w: 1200px; }
+.container-lg { --container-w: 64rem; }
+.container-4xl { --container-w: 56rem; }
+.container-3xl { --container-w: 48rem; }
+
+.text-center { text-align: center; }
+.font-bold { font-weight: 700; }
+
+/* ============================================
+   WORDPRESS TYPOGRAPHY HELPER CLASSES
+   Font Size Scale (100-900)
+   ============================================ */
+.text-size-100 { font-size: var(--wp--preset--font-size--100); }
+.text-size-200 { font-size: var(--wp--preset--font-size--200); }
+.text-size-300 { font-size: var(--wp--preset--font-size--300); }
+.text-size-400 { font-size: var(--wp--preset--font-size--400); }
+.text-size-500 { font-size: var(--wp--preset--font-size--500); }
+.text-size-600 { font-size: var(--wp--preset--font-size--600); }
+.text-size-700 { font-size: var(--wp--preset--font-size--700); }
+.text-size-800 { font-size: var(--wp--preset--font-size--800); }
+.text-size-900 { font-size: var(--wp--preset--font-size--900); }
+
+/* Brand Font Family Classes */
+.font-brand-title { font-family: var(--wp--preset--font-family--brand-title); }
+.font-brand-heading { font-family: var(--wp--preset--font-family--brand-heading); }
+.font-brand-body { font-family: var(--wp--preset--font-family--brand-body); }
+.font-brand-sans { font-family: var(--wp--preset--font-family--brand-body); }
+.font-brand-serif { font-family: var(--wp--preset--font-family--brand-heading); }
+
+/* Legacy Font Family Aliases */
+.font-heading { font-family: var(--wp--preset--font-family--brand-heading); }
+.font-body { font-family: var(--wp--preset--font-family--brand-body); }
+.font-title { font-family: var(--wp--preset--font-family--brand-title); }
+
+/* Font Weight Classes */
+.font-thin { font-weight: 100; }
+.font-extralight { font-weight: 200; }
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+/* .font-bold already defined above */
+.font-extrabold { font-weight: 800; }
+.font-black { font-weight: 900; }
+
+/* ============================================
+   WORDPRESS SPACING HELPER CLASSES
+   Fixed Numeric Scale (10-100)
+   ============================================ */
+
+/* Padding Utilities */
+.p-spacing-10 { padding: var(--wp--preset--spacing--10); }
+.p-spacing-20 { padding: var(--wp--preset--spacing--20); }
+.p-spacing-30 { padding: var(--wp--preset--spacing--30); }
+.p-spacing-40 { padding: var(--wp--preset--spacing--40); }
+.p-spacing-50 { padding: var(--wp--preset--spacing--50); }
+.p-spacing-60 { padding: var(--wp--preset--spacing--60); }
+.p-spacing-70 { padding: var(--wp--preset--spacing--70); }
+.p-spacing-80 { padding: var(--wp--preset--spacing--80); }
+.p-spacing-90 { padding: var(--wp--preset--spacing--90); }
+.p-spacing-100 { padding: var(--wp--preset--spacing--100); }
+
+/* Vertical Padding */
+.py-spacing-10 { padding-top: var(--wp--preset--spacing--10); padding-bottom: var(--wp--preset--spacing--10); }
+.py-spacing-20 { padding-top: var(--wp--preset--spacing--20); padding-bottom: var(--wp--preset--spacing--20); }
+.py-spacing-30 { padding-top: var(--wp--preset--spacing--30); padding-bottom: var(--wp--preset--spacing--30); }
+.py-spacing-40 { padding-top: var(--wp--preset--spacing--40); padding-bottom: var(--wp--preset--spacing--40); }
+.py-spacing-50 { padding-top: var(--wp--preset--spacing--50); padding-bottom: var(--wp--preset--spacing--50); }
+.py-spacing-60 { padding-top: var(--wp--preset--spacing--60); padding-bottom: var(--wp--preset--spacing--60); }
+.py-spacing-80 { padding-top: var(--wp--preset--spacing--80); padding-bottom: var(--wp--preset--spacing--80); }
+
+/* Horizontal Padding */
+.px-spacing-10 { padding-left: var(--wp--preset--spacing--10); padding-right: var(--wp--preset--spacing--10); }
+.px-spacing-20 { padding-left: var(--wp--preset--spacing--20); padding-right: var(--wp--preset--spacing--20); }
+.px-spacing-30 { padding-left: var(--wp--preset--spacing--30); padding-right: var(--wp--preset--spacing--30); }
+.px-spacing-40 { padding-left: var(--wp--preset--spacing--40); padding-right: var(--wp--preset--spacing--40); }
+
+/* Margin Bottom */
+.mb-spacing-10 { margin-bottom: var(--wp--preset--spacing--10); }
+.mb-spacing-20 { margin-bottom: var(--wp--preset--spacing--20); }
+.mb-spacing-30 { margin-bottom: var(--wp--preset--spacing--30); }
+.mb-spacing-40 { margin-bottom: var(--wp--preset--spacing--40); }
+.mb-spacing-50 { margin-bottom: var(--wp--preset--spacing--50); }
+.mb-spacing-60 { margin-bottom: var(--wp--preset--spacing--60); }
+
+/* Margin Top */
+.mt-spacing-20 { margin-top: var(--wp--preset--spacing--20); }
+.mt-spacing-30 { margin-top: var(--wp--preset--spacing--30); }
+.mt-spacing-40 { margin-top: var(--wp--preset--spacing--40); }
+.mt-spacing-60 { margin-top: var(--wp--preset--spacing--60); }
+
+/* Gap Utilities */
+.gap-spacing-10 { gap: var(--wp--preset--spacing--10); }
+.gap-spacing-20 { gap: var(--wp--preset--spacing--20); }
+.gap-spacing-30 { gap: var(--wp--preset--spacing--30); }
+.gap-spacing-40 { gap: var(--wp--preset--spacing--40); }
+.gap-spacing-60 { gap: var(--wp--preset--spacing--60); }
+
+/* Block Gap Utilities */
+.gap-block-sm { gap: var(--wp--preset--spacing--20); }
+.gap-block-md { gap: var(--wp--preset--spacing--40); }
+.gap-block-lg { gap: var(--wp--preset--spacing--60); }
+
+.inline-flex-center {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Accessibility Helpers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
