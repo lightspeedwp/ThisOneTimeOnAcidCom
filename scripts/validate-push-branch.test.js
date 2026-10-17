@@ -2,7 +2,8 @@
  * Tests for Git pre-push hook branch validation script
  */
 
-import { extractBranchName, validateBranch } from './validate-push-branch.js';
+import { extractBranchName, validateBranch, main } from './validate-push-branch.js';
+import { Readable } from 'stream';
 
 describe('validate-push-branch', () => {
 
