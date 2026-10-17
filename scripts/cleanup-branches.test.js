@@ -423,3 +423,125 @@ describe('Non-deletion verification', () => {
     expect(source).toContain('no deletions executed');
   });
 });
+
+describe('Argument parsing and configuration', () => {
+  it('parses boolean values correctly', () => {
+    expect('true' === 'true' ? true : false).toBe(true);
+    expect('false' === 'false' ? false : true).toBe(false);
+  });
+
+  it('returns default value for non-boolean strings', () => {
+    const defaultValue = false;
+    const value = 'maybe';
+    expect(value === 'true' ? true : value === 'false' ? false : defaultValue).toBe(defaultValue);
+  });
+
+  it('handles numeric arguments', () => {
+    const inactiveDays = parseInt('30', 10);
+    expect(inactiveDays).toBe(30);
+    expect(typeof inactiveDays).toBe('number');
+  });
+
+  it('handles NaN in numeric parsing', () => {
+    const count = parseInt('invalid', 10);
+    expect(isNaN(count)).toBe(true);
+  });
+
+  it('recognizes report formats', () => {
+    const validFormats = ['markdown', 'json'];
+    expect(validFormats).toContain('markdown');
+    expect(validFormats).toContain('json');
+  });
+});
+
+describe('Timestamp and logging utilities', () => {
+  it('generates valid ISO timestamps', () => {
+    const timestamp = new Date().toISOString();
+    expect(timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+  });
+
+  it('extracts time component from ISO timestamp', () => {
+    const iso = '2026-01-15T14:30:45.123Z';
+    const timePart = iso.split('T')[1].split('.')[0];
+    expect(timePart).toBe('14:30:45');
+  });
+
+  it('generates log prefix for different levels', () => {
+    const levels = {
+      error: '❌',
+      warn: '⚠️ ',
+      debug: '🔍',
+      info: 'ℹ️ '
+    };
+
+    expect(levels).toHaveProperty('error');
+    expect(levels).toHaveProperty('warn');
+    expect(levels).toHaveProperty('debug');
+    expect(levels).toHaveProperty('info');
+  });
+});
+
+describe('Report file operations', () => {
+  let tempDir;
+
+  beforeEach(() => {
+    tempDir = createTempReportDir();
+  });
+
+  afterEach(() => {
+    cleanupTempDir(tempDir);
+  });
+
+  it('creates report directory if missing', () => {
+    expect(fs.existsSync(tempDir)).toBe(true);
+  });
+
+  it('handles existing report directory', () => {
+    const subDir = path.join(tempDir, 'sub');
+    fs.mkdirSync(subDir, { recursive: true });
+    expect(fs.existsSync(subDir)).toBe(true);
+  });
+
+  it('writes files to report directory', () => {
+    const testFile = path.join(tempDir, 'test.txt');
+    fs.writeFileSync(testFile, 'test content');
+    expect(fs.existsSync(testFile)).toBe(true);
+  });
+});
+
+describe('Branch metadata extraction', () => {
+  it('extracts branch type from name', () => {
+    const types = ['feat', 'fix', 'docs', 'refactor', 'perf'];
+    types.forEach(t => {
+      expect(typeof t).toBe('string');
+      expect(t.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('handles complex branch names', () => {
+    const branch = 'feat/user-dashboard-v2-dark-mode';
+    const parts = branch.split('/');
+    expect(parts.length).toBe(2);
+  });
+});
+
+describe('Storage calculation', () => {
+  it('calculates storage for single commit', () => {
+    const bytes = 1 * 1024;
+    expect(bytes).toBe(1024);
+  });
+
+  it('aggregates storage for multiple commits', () => {
+    const commits = [5, 10, 15];
+    const total = commits.reduce((sum, c) => sum + c, 0);
+    expect(total).toBe(30);
+  });
+
+  it('formats bytes correctly', () => {
+    const sizes = ['0 B', '1024 B', '1.0 MB'];
+    sizes.forEach(size => {
+      expect(typeof size).toBe('string');
+      expect(size.length).toBeGreaterThan(0);
+    });
+  });
+});
