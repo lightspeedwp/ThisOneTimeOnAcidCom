@@ -116,9 +116,11 @@ This is a responsive design issue. The menu appears to be in a mobile state on a
 
 ---
 
-## Handoff #2: Playwright Agent → BugHerd Agent
+## Handoff #2: Playwright Agent → Requesting Agent
 
 **Purpose:** Return validation results with evidence
+
+**Routing:** When a BugHerd Agent requests validation, Playwright Agent returns results to BugHerd Agent, which then forwards them to Testing Agent in Handoff #3. When Testing Agent requests validation directly, Playwright Agent returns results to Testing Agent.
 
 **Format:**
 
