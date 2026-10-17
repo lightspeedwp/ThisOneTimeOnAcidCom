@@ -152,6 +152,18 @@ describe('categorizeBranch', () => {
       expect(result.reason).toBe(REASON_CODES.KEEP.dependabot);
     }
   });
+
+  it('defaults to KEEP for unclassified merge status', () => {
+    const result = categorizeBranch('feat/edge-case', {
+      lastCommitDate: '2025-01-01T00:00:00Z',
+      author: 'test@example.com',
+      mergeStatus: 'invalid-status',
+    });
+
+    expect(result.category).toBe('KEEP');
+    expect(result.reason).toBe('Unable to classify');
+    expect(result.autoApproved).toBe(false);
+  });
 });
 
 describe('getBranchType', () => {

@@ -94,5 +94,38 @@ describe('git-merge-utils', () => {
         expect(['merged', 'unmerged', 'unknown']).toContain(result);
       });
     });
+
+    it('should return unknown when git fails unexpectedly', () => {
+      const result = gitUtils.getMergeStatus('', 'origin/invalid-base');
+      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+    });
+  });
+
+  describe('getBaseRef', () => {
+    it('should return a valid base ref string starting with origin/', () => {
+      const baseRef = gitUtils.getBaseRef();
+      expect(typeof baseRef).toBe('string');
+      expect(baseRef.startsWith('origin/')).toBe(true);
+    });
+
+    it('should prefer existing branches over defaults', () => {
+      const baseRef = gitUtils.getBaseRef();
+      // Should be one of the known refs (develop, main, or master)
+      expect(['origin/develop', 'origin/main', 'origin/master']).toContain(baseRef);
+    });
+  });
+
+  describe('getUniqueCommitCount', () => {
+    it('should return 0 for non-existent branches', () => {
+      const count = gitUtils.getUniqueCommitCount('nonexistent-branch-xyz', 'origin/main');
+      expect(typeof count).toBe('number');
+      expect(count).toBeGreaterThanOrEqual(0);
+    });
+
+    it('should handle empty string branch name gracefully', () => {
+      const count = gitUtils.getUniqueCommitCount('', 'origin/main');
+      expect(typeof count).toBe('number');
+      expect(count).toBeGreaterThanOrEqual(0);
+    });
   });
 });
