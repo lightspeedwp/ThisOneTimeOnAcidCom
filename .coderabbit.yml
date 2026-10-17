@@ -105,6 +105,99 @@ reviews:
         - Clear assertions that test one thing per test case
         - Performance considerations for component rendering tests
 
+    - path: "src/app/components/**/*.tsx"
+      instructions: |
+        React components with BEM CSS and accessibility requirements.
+        Review for:
+        - Semantic HTML structure with proper heading hierarchy
+        - WCAG 2.2 AA/AAA compliance (keyboard navigation, ARIA labels, focus management)
+        - BEM CSS classes only — no inline styles or Tailwind utility classes
+        - Proper TypeScript typing with no `any` types
+        - Components organized correctly (common/, pages/, layout/, ui/, sections/, template-parts/)
+        - File exports (default or named) and barrel imports via index.tsx
+        - Component documentation with @fileoverview and features list
+        - Bundler compatibility: no optional chaining (?.), nullish coalescing (??), nested ternaries
+        - Use helper functions from src/app/lib/router.tsx for safe access (grab, arrayGet, setProp)
+        - Error boundaries and SafetyWrapper usage where appropriate
+        - Theme support with CSS custom properties (light/dark mode)
+        - Event handler binding and memory leak prevention
+
+    - path: "src/app/data/**/*.ts"
+      instructions: |
+        Mock data definitions and data types. Review for:
+        - Data structure consistency and typing
+        - No credential or sensitive information exposure
+        - Proper TypeScript interfaces in src/app/data/types/
+        - Adherence to mock data schema patterns
+        - Clear data organization by feature/domain
+        - References to actual content locations (content/ folder for editorial content)
+
+    - path: "src/app/hooks/*.ts"
+      instructions: |
+        Custom React hooks. Review for:
+        - Clear hook naming with 'use' prefix
+        - Proper dependency arrays in useEffect and useCallback
+        - No memory leaks or stale closures
+        - Bundler compatibility (no optional chaining, nullish coalescing)
+        - Clear documentation of hook purpose and parameters
+        - Proper TypeScript typing for parameters and return values
+        - Separation of concerns (one responsibility per hook)
+        - Usage patterns consistent with repository conventions
+        - Hooks that access data use src/app/data/mock/ exclusively
+
+    - path: "src/app/utils/*.ts"
+      instructions: |
+        Utility services and helpers. Review for:
+        - Clear service organization and single responsibility
+        - Proper error handling and validation
+        - TypeScript interfaces and type safety
+        - No hardcoded configuration (use environment or configuration files)
+        - Documentation of service methods and expected inputs
+        - Browser API safety (check for undefined globals in SSR-safe code)
+        - Bundler compatibility patterns throughout
+        - Clear logging patterns (no console.log left behind in production code)
+
+    - path: "src/styles/**/*.css"
+      instructions: |
+        BEM CSS architecture and styling. Review for:
+        - Semantic BEM class naming: .block__element--modifier
+        - No inline styles or Tailwind utility classes
+        - Global styles in globals.css; block styles in blocks/; component-specific in components/
+        - Proper CSS variable usage (design tokens in tokens/, themes in themes/)
+        - Light/dark mode support with CSS custom properties
+        - Animations defined in animations.css with performance in mind
+        - No !important overrides unless absolutely necessary
+        - Proper vendor prefixes where needed
+        - Media query organization and mobile-first approach
+        - Scoped styles to prevent conflicts across the application
+
+    - path: "src/app/lib/*.tsx"
+      instructions: |
+        Library and router utilities. Review for:
+        - Bundler-safe helper functions (grab, arrayGet, setProp usage)
+        - React Router v7 integration patterns
+        - Type safety in generic functions
+        - Documentation of utility purposes and usage
+        - Protection of implementation (these are critical utilities)
+
+    - path: "src/app/public/**/*"
+      instructions: |
+        Static assets and public files. Review for:
+        - No hardcoded credentials or sensitive data
+        - Asset optimization and modern formats where applicable
+        - Proper metadata in manifest.json for PWA functionality
+        - Redirect rules properly configured
+
+    - path: "src/app/scripts/**/*.{ts,js}"
+      instructions: |
+        Build and utility scripts. Review for:
+        - Clear script purpose and documentation
+        - Proper Node.js error handling
+        - No hardcoded paths (use relative/configurable paths)
+        - Compatibility with npm (not pnpm-specific)
+        - Safe file operations with proper guards
+        - Exit codes appropriate for CI/CD usage
+
     - path: "**/*.{tsx,ts,jsx,js,css}"
       instructions: |
         Follow the guidelines in `guidelines/Guidelines.md` for code style,
