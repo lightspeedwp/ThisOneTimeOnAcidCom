@@ -1,0 +1,26 @@
+labels: ['type:question', 'status:needs-triage']
+title: "[Question] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for asking a question! Please provide as much detail as you can.
+  - type: textarea
+    id: question
+    attributes:
+      label: "Your question"
+      description: "What would you like to know?"
+      placeholder: "I'm trying to... but I'm unclear about..."
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: "Context"
+      description: "Provide any relevant context (what you've tried, errors, etc.)"
+      placeholder: "I've looked at... and I tried..."
+  - type: textarea
+    id: relevant_docs
+    attributes:
+      label: "Relevant documentation"
+      description: "Links to relevant docs, issues or discussions (if applicable)"

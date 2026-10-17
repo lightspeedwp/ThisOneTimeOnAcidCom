@@ -635,4 +635,10 @@ export {
   getRemoteBranches,
   writeMarkdownReport,
   writeJsonReport,
+  // Internal utilities exported for testing
+  logTimestamp,
+  log,
+  logError,
+  getArg,
+  parseBool,
 };
