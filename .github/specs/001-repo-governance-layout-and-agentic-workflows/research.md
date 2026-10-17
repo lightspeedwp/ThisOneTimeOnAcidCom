@@ -30,8 +30,9 @@
 
 **Current Evidence**:
 - ✅ `package-lock.json` (lockfile v3) is committed; only npm lockfile in repo
-- ✅ Netlify build command: `npm run build`
-- ⚠️ Remnants: `pnpm-workspace.yaml`, `pnpm.overrides` in package.json, `pnpm run build` in src/app/netlify.toml
+- ⚠️ Netlify UI settings reported in `CONTRIBUTING.md` (checked 3 October 2026): repository-root base directory, `npm run build`, publish `dist`. The active package directory and effective build command remain unconfirmed; no current Netlify settings or deploy log is available in this checkout.
+- ⚠️ `src/app/netlify.toml` sets `command = "pnpm run build"`. If the package directory is `src/app/`, this file may be active and its command takes precedence over the reported UI command; if unset or set to root, there is no root `netlify.toml` and the UI command would apply if unchanged since the reported check. Confirm the package directory and resolved configuration in Netlify before treating either command as effective.
+- ⚠️ Remnants: `pnpm-workspace.yaml`, `pnpm.overrides` in package.json, `pnpm run build` in `src/app/netlify.toml`
 
 **Validation Approach**:
 1. Verify npm ci succeeds with current lock file
@@ -47,16 +48,16 @@
 **Question**: Will pinning Node.js 24 break any dependency compatibility or Netlify deployment?
 
 **Current Evidence**:
-- ✅ Validation baseline: Node 24.21.0, npm 11.19.0 (all tests pass)
-- ✅ No .nvmrc or engines field yet (adds during implementation)
-- ⚠️ Netlify currently reads UI settings (not netlify.toml); actual runtime unknown
+- ✅ Validation baseline: Node 24.21.0, npm 11.19.0 (build passed; Jest validation pending per R1)
+- ✅ `.nvmrc` specifies `24`; `package.json` sets `engines.node` to `>=24`
+- ⚠️ Actual Netlify runtime unknown; `src/app/netlify.toml` sets `NODE_VERSION = "18"` and may be active depending on the unconfirmed package directory (see R2)
 
 **Validation Approach**:
 1. ✅ Build succeeds on Node 24 (verified)
 2. ⏳ Confirm Netlify detects .nvmrc and applies pinning post-deployment
 3. ⏳ Update README and CI documentation
 
-**Decision**: NODE-001 approved. Implementation adds .nvmrc and engines field; Netlify integration verified during implementation PR.
+**Decision**: NODE-001 approved. Implementation verifies the existing `.nvmrc` and `engines.node` values; Netlify integration verified during implementation PR.
 
 ---
 
@@ -178,7 +179,7 @@
 - TOA-254 (Spec Kit): Blocks TOA-255, TOA-256, TOA-257, TOA-259 (documentation org)
 - TOA-260 (Testing): Blocks TOA-242 (CI); independent from others
 - TOA-261 (.github files): Blocks TOA-243, TOA-244, TOA-250–253, TOA-272, TOA-274
-- TOA-262 (Root config): Blocks TOA-258, TOA-273 (plus dependencies of TOA-260)
+- TOA-262 (Root config): Blocks TOA-242 (CI), TOA-258, TOA-273; parallel with TOA-260
 - TOA-271 (Budget): External; no blocking dependencies
 
 **Validation Approach**:

@@ -58,7 +58,8 @@
   - Enable ESM module transformation in Jest config
   - Verify `npm run test:unit` discovers and runs existing tests without modification
   - Ensure compatibility with existing test syntax
-- [ ] T009 [P] [TEST-001] Create Vitest fallback configuration in vitest.config.ts (if Jest proves unstable)
+- [ ] T009 [TEST-001] Create Vitest fallback configuration in vitest.config.ts (only if T008's Jest validation fails)
+  - Run only after T008's Jest validation fails and the Vitest fallback is selected; otherwise skip T009
   - Install `vitest` as dev dependency
   - Mirror Jest test discovery and configuration
   - Document failover trigger conditions
@@ -71,12 +72,12 @@
   - Remove `pnpm.overrides` block from `package.json` (all pnpm-specific config)
   - Remove `command = "pnpm run build"` from `src/app/netlify.toml`
   - Update root `README.md` to document npm-only (section: "Getting Started" or "Installation")
-- [ ] T012 [NODE-001] Pin Node.js version
-  - Create `.nvmrc` file with content: `24` (exactly Node.js 24 LTS)
-  - Add `engines` field to `package.json`: `{ "node": ">=24" }`
+- [ ] T012 [NODE-001] Verify existing Node.js version settings
+  - Verify `.nvmrc` contains `24` (exactly Node.js 24 LTS)
+  - Verify `package.json` sets `engines.node` to `>=24`
   - Run `npm ci` to validate all dependencies resolve correctly under Node 24
   - Update root `README.md` to document Node 24 requirement (e.g., "Requires Node.js 24 LTS or later")
-  - Verify Netlify site settings pin Node 24 (via Netlify dashboard UI, not `.toml`)
+  - Verify Netlify uses Node 24 via its package-directory setting, effective configuration and deploy log (see research.md R2–R3)
 - [ ] T013 [P] [STYLE-001] Audit components for Tailwind utility patterns
   - Scan `src/app/components/` for Tailwind class names (e.g., `mt-4`, `p-8`, `flex`, `grid`)
   - List all files containing utility-like patterns (if any)
@@ -93,7 +94,7 @@
   - Verify component styling remains visually correct post-migration
   - Update `guidelines/css-architecture.md` to lock BEM as canonical (no dual support)
 - [ ] T016 [P] [WS-260] Set up test discovery scripts and validation
-  - Verify `npm run test:unit` runs Jest with ESM support (after T008)
+  - Verify `npm run test:unit` runs Jest with ESM support after T008, or Vitest after T009 if the fallback is selected
   - Verify `npm run test:build` runs Bats build verification (confirm existing)
   - Verify `npm run test:e2e` discovers Playwright tests (confirm existing)
   - Verify `node --test tests/speckit.test.mjs` reports 103/104 baseline (after T010)
@@ -222,11 +223,13 @@
 
 - [ ] T031 [WS-261] [TOA-243] Implement locked-files-guard.yml evaluation workflow
   - Create `.github/workflows/locked-files-guard.yml` (if not present)
-  - Configure to detect modifications to protected files: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`
-  - Verify workflow blocks PR merge if protected files are modified
+  - Configure to detect modifications only to the documented locked paths: `CLAUDE.md`, `AGENTS.md`, `guidelines/*`
+  - Verify workflow blocks PR merge if these locked paths are modified
+  - Verify authorised `.github/` changes, including T033's discussion-template updates, do not trigger the locked-files guard
   - Document when it runs: on every PR push (no manual trigger needed)
 - [ ] T032 [WS-261] [TOA-244] Implement workflow syntax validation (workflow-lint.yml)
   - Ensure `workflow-lint.yml` is deployed and validates all GitHub Actions YAML syntax
+  - Keep syntax validation scoped to workflow YAML; locked-path merge restrictions are defined by T031
   - Run workflow manually to verify no syntax errors in `.github/workflows/*.yml`
   - Document which workflows are validated and error reporting mechanism
 - [ ] T033 [P] [WS-261] [TOA-250] Create GitHub Discussions templates
@@ -307,12 +310,12 @@
 
 ### Implementation for WS-262
 
-- [ ] T040 [WS-262] [TOA-262] Update package.json (already done in Phase 2 T012, verify here)
+- [ ] T040 [WS-262] [TOA-262] Verify package.json (existing Node.js setting checked in Phase 2 T012)
   - Confirm `engines` field set to `{ "node": ">=24" }`
   - Confirm pnpm.overrides block removed (from Phase 2 T011)
   - Confirm npm ci works: `npm ci` should install all dependencies
   - Document package.json as npm-only (add comment or update README)
-- [ ] T041 [WS-262] [TOA-262] Create .nvmrc file (already done in Phase 2 T012, verify here)
+- [ ] T041 [WS-262] [TOA-262] Verify .nvmrc file (existing value checked in Phase 2 T012)
   - Confirm `.nvmrc` file exists at repository root with content: `24`
   - Verify `nvm use` (or equivalent) reads and applies Node 24
   - Document in README.md: "Install Node.js 24 LTS using nvm: `nvm use`"
@@ -553,9 +556,9 @@ Once Phase 2 completes, all 5 workstreams can proceed in parallel:
 
 ### Within-Phase Dependencies
 
-- **Phase 2**: T008 (Jest) must complete before T016 (test discovery)
+- **Phase 2**: T008's Jest validation must complete before T016 (test discovery). Run T009 only if that validation fails and the Vitest fallback is selected; only then must T009 complete before T016. Otherwise skip T009 and let T016 proceed without it.
 - **Phase 3**: T018 must complete before T019 (regression test depends on feature directory routing)
-- **Phase 5**: T031 (locked-files-guard) should complete before T039 (CODEOWNERS, so protected files are enforced)
+- **Phase 5**: T031 (locked-files-guard) must complete before T037 (CODEOWNERS, so locked paths are enforced)
 - **Phase 6**: T040–T042 (config updates) must complete before T044–T046 (documentation updates)
 
 ### Parallel Opportunities
@@ -564,9 +567,9 @@ Once Phase 2 completes, all 5 workstreams can proceed in parallel:
 - T003, T006 can run in parallel
 
 **Phase 2**:
-- T008, T009, T013 can run in parallel (different files, no dependencies)
+- T008 and T013 can run in parallel; T009 runs only after T008's Jest validation fails and the Vitest fallback is selected
 - T011, T012, T014 can run in parallel (different files, no dependencies)
-- T016, T017 can run in parallel after T008, T009, T010, T011, T012, T014 complete
+- T016, T017 can run in parallel after T008, T010, T011, T012, T014 complete; T016 also waits for T009 only when the Vitest fallback is selected, otherwise T009 is skipped
 
 **Phase 3** (WS-254):
 - T021, T022, T023, T024 can run in parallel (documentation/organization, no dependencies)

@@ -58,7 +58,7 @@
 ### Documentation (this feature)
 
 ```text
-specs/[###-feature]/
+.github/specs/[###-feature]/
 ├── plan.md              # This file (/speckit.plan command output)
 ├── research.md          # Phase 0 output (/speckit.plan command)
 ├── data-model.md        # Phase 1 output (/speckit.plan command)
@@ -103,7 +103,7 @@ specs/[###-feature]/
 └── skills/                 # Skill definitions (~5 skills)
 
 Root configuration:
-├── .nvmrc                  # Node.js 24 pin (CREATE)
+├── .nvmrc                  # Node.js 24 pin (existing, verify)
 ├── package.json            # engines field + npm-only (UPDATE)
 ├── .gitattributes          # text=auto first (existing, preserve)
 ├── CHANGELOG.md            # (existing, protect)

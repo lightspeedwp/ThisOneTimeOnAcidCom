@@ -209,15 +209,17 @@
 **Specification Created**: 2026-10-17  
 **Owner Approval**: [ ] @ashley (pending)  
 **Clarification Phase**: [x] Complete (all 3 unresolved questions answered)  
-**Planning Phase**: [ ] Ready (after clarification approval)  
+**Planning Phase**: [x] Complete (plan.md, research.md)
+
+**Task Decomposition**: [x] Complete (tasks.md)
 
 ---
 
 ## Next Steps
 
 1. ✅ **Clarification Phase** (`/speckit-clarify`) — All 3 questions answered (Q1→B, Q2→B, Q3→A)
-2. **Planning Phase** (`/speckit-plan`) — Generate implementation plan and research
-3. **Task Decomposition** (`/speckit-tasks`) — Break planning into actionable tasks
-4. **Implementation PRs** — Create focused PRs for 5 workstreams (TOA-254, TOA-260, TOA-261, TOA-262, and TOA-271 dependencies)
+2. ✅ **Planning Phase** (`/speckit-plan`) — Implementation plan and research complete
+3. ✅ **Task Decomposition** (`/speckit-tasks`) — Actionable tasks complete
+4. **Implementation PRs** — Current hand-off: start Phase 1 Setup in `tasks.md`, then create focused PRs for 5 workstreams (TOA-254, TOA-260, TOA-261, TOA-262, and TOA-271 dependencies)
 
-**Clarification phase complete. Proceed to `/speckit-plan` for implementation strategy.**
+**Planning and task decomposition complete. Proceed to implementation, starting with Phase 1 Setup in `tasks.md`.**
