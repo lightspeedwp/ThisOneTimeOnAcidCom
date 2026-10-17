@@ -54,6 +54,57 @@ reviews:
         - No duplication with existing .claude/skills/ definitions
         - Consistency with Spec Kit phases and orchestration
 
+    - path: "AGENTS.md"
+      instructions: |
+        Repository-wide AI agent conventions and protected files. Critical governance document.
+        Review for:
+        - Accurate tech stack inventory matching package.json
+        - Up-to-date bundler compatibility rules and forbidden patterns
+        - Protected file list correctness (never modify without owner confirmation)
+        - Folder conventions alignment with actual directory structure
+        - Valid script commands that exist in package.json
+        - No stale unresolved decisions or outdated constraints
+        - Links to guidelines/ and other documentation are current
+        This file governs all AI work in the repository — treat changes as high-priority review.
+
+    - path: "CLAUDE.md"
+      instructions: |
+        Organisation-wide AI rules for lightspeedwp/.github. Sets governance policy.
+        Review for:
+        - Branch naming pattern conformance (no forbidden prefixes: claude/, copilot/, openai/)
+        - PR template routing rules and label taxonomy correctness
+        - Specification-first workflow compliance (SpecKit integration)
+        - Protected configuration files (labels.yml, issue-types.yml, templates) — never edit
+        - Changelog format consistency (Keep a Changelog 1.1.0)
+        - Reference to AGENTS.md and linked governance documents
+        - Alignment with actual repository structure and automation
+        This is the source of truth for governance — verify all claims against implementation.
+
+    - path: "tests/**/*.{ts,tsx,mjs}"
+      instructions: |
+        Test files and test infrastructure. Review for:
+        - Proper test framework usage (Node test runner per AGENTS.md)
+        - Clear test naming that describes what is being tested (descriptive case names)
+        - Proper setup and teardown (avoid side effects, use isolated test data)
+        - Alignment with Figma Make bundler compatibility (no forbidden patterns in tests)
+        - Mock data sourced from src/app/data/mock/ only (never hardcode test data)
+        - No flaky or non-deterministic tests (use fixtures, not live data)
+        - Test coverage for critical paths and accessibility requirements
+        - Clear documentation of test purpose and special setup requirements
+        - No use of jsdom for unit tests unless explicitly required
+        - Tests that run independently without order dependencies
+
+    - path: "**/*.test.{ts,tsx}"
+      instructions: |
+        Component and unit tests. Review for:
+        - Clear test descriptions using Arrange-Act-Assert pattern
+        - Proper mocking of external dependencies (data, API calls, browser APIs)
+        - Accessibility testing where relevant (keyboard nav, ARIA attributes)
+        - Mock data from src/app/data/mock/ only
+        - No tests that depend on execution order
+        - Clear assertions that test one thing per test case
+        - Performance considerations for component rendering tests
+
     - path: "**/*.{tsx,ts,jsx,js,css}"
       instructions: |
         Follow the guidelines in `guidelines/Guidelines.md` for code style,

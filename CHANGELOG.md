@@ -19,6 +19,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **`.claude/skills/`** — Reusable skill definitions with SKILL.md structure, metadata, examples, and integration patterns
   - **`.specify/`** — Spec Kit specification files with proper structure, section completeness, and cross-linking
   - **`.gemini/`** — Gemini CLI command definitions for workflow orchestration and consistency
+- **Governance & documentation coverage**: Added CodeRabbit path instructions for critical governance files:
+  - **`AGENTS.md`** — Repository-wide AI conventions, tech stack inventory, bundler compatibility, protected files list
+  - **`CLAUDE.md`** — Organisation-wide governance policy, branch naming, PR templates, specification workflow
+  - **Test infrastructure guidance** (`tests/**/*` and `**/*.test.{ts,tsx}`):
+    - Clear test naming and Arrange-Act-Assert pattern enforcement
+    - Mock data sourcing from `src/app/data/mock/` only (never hardcoded)
+    - No flaky tests or execution order dependencies
+    - Bundler compatibility for test code
+    - Accessibility testing requirements
+    - Component and unit test isolation patterns
 
 ### Fixed
 
