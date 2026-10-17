@@ -19,8 +19,8 @@ export function getBranchType(branch) {
 }
 
 /**
- * Calculate days since ISO date string.
- * Invalid dates return 0.
+ * Calculate elapsed 24-hour days since a date, including fractional days.
+ * Missing or invalid dates return 0; future dates produce negative values.
  * @param {string} isoDate - ISO 8601 date string
  * @returns {number} Days elapsed
  */
@@ -32,23 +32,27 @@ export function daysSince(isoDate) {
 }
 
 /**
- * Classify a branch as KEEP or DELETE based on merge status,
+ * Classify a branch as KEEP, DELETE, or DISCUSS based on merge status,
  * open PRs, exclusion patterns and inactivity threshold.
+ * Protected, excluded, automation, and supplied open-PR branches are kept first.
+ * Otherwise, unknown merge status yields DISCUSS; merged branches at or beyond
+ * the inactivity threshold yield DELETE. No branches are deleted.
  *
  * Returns object with:
  * - category: 'KEEP' | 'DELETE' | 'DISCUSS'
  * - reason: Human-readable explanation
- * - metadata: age, author, lastCommitDate, type
- * - autoApproved: whether deletion can happen automatically (for DISCUSS/DELETE)
+ * - metadata: ageInDays, author, lastCommitDate, type
+ * - autoApproved: always false
  *
  * @param {string} branch - Branch name
- * @param {object} metadata - Branch metadata
+ * @param {object} [metadata={}] - Branch metadata
  * @param {string} metadata.author - Commit author email
  * @param {string} metadata.lastCommitDate - ISO 8601 date of last commit
  * @param {string} metadata.mergeStatus - 'merged' | 'unmerged' | 'unknown'
- * @param {Set<string>} openPRBranches - Set of branch names with open PRs
- * @param {RegExp} excludeRegex - Pattern for branches to preserve
- * @param {number} inactiveDays - Inactivity threshold
+ * @param {Set<string>} [openPRBranches] - Known open-PR branch names; defaults to empty
+ * @param {RegExp|null} [excludeRegex=null] - Pattern for branches to preserve
+ * @param {number} [inactiveDays=30] - Inclusive inactivity threshold in 24-hour days;
+ *   missing or invalid commit dates have age zero
  * @returns {object} Classification result
  */
 export function categorizeBranch(

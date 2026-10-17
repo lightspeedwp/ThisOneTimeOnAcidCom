@@ -25,9 +25,10 @@ function runGit(args) {
 
 /**
  * Get the default base branch for merge checks.
- * Checks for 'develop' branch first, falls back to 'main' or 'master'.
+ * Prefer locally available origin/develop, then origin/main, then origin/master.
+ * Return origin/main if none can be verified, including when Git fails.
  *
- * @returns {string} Base branch name
+ * @returns {string} Base reference including the origin/ prefix
  */
 export function getBaseRef() {
   const candidates = ['origin/develop', 'origin/main', 'origin/master'];
@@ -42,10 +43,13 @@ export function getBaseRef() {
 
 /**
  * Determine merge status of a remote branch.
- * Returns 'merged', 'unmerged', or 'unknown'.
+ * A branch is 'merged' when its tip is an ancestor of the base; equivalent
+ * changes from squash or rebase merges are not detected. Git failures other
+ * than the non-ancestor result return 'unknown' rather than throwing.
  *
  * @param {string} branch - Remote branch name (without 'origin/' prefix)
- * @param {string} baseRef - Base reference (e.g., 'origin/main')
+ * @param {string|null} [baseRef=null] - Base reference (e.g., 'origin/main');
+ *   falsy values use getBaseRef()
  * @returns {string} 'merged' | 'unmerged' | 'unknown'
  */
 export function getMergeStatus(branch, baseRef = null) {
@@ -69,10 +73,12 @@ export function getMergeStatus(branch, baseRef = null) {
 
 /**
  * Get the unique commit count on a branch compared to base.
- * Estimates storage impact by counting exclusive commits.
+ * Count commits reachable from the branch but not from the base. Git failures
+ * or an unparseable count return 0.
  *
  * @param {string} branch - Remote branch name (without 'origin/' prefix)
- * @param {string} baseRef - Base reference (e.g., 'origin/main')
+ * @param {string|null} [baseRef=null] - Base reference (e.g., 'origin/main');
+ *   falsy values use getBaseRef()
  * @returns {number} Count of unique commits
  */
 export function getUniqueCommitCount(branch, baseRef = null) {
@@ -83,7 +89,7 @@ export function getUniqueCommitCount(branch, baseRef = null) {
 }
 
 /**
- * Get the last commit date (ISO 8601) for a remote branch.
+ * Get the last commit's committer date (ISO 8601) for a remote branch.
  *
  * @param {string} branch - Remote branch name (without 'origin/' prefix)
  * @returns {string} ISO 8601 date or empty string

@@ -31,10 +31,16 @@ import { getBaseRef, getMergeStatus, getUniqueCommitCount, getLastCommitDate, ge
 // Logging
 // ============================================================================
 
+/**
+ * Return the current UTC time as HH:mm:ss for log messages.
+ */
 function logTimestamp() {
   return new Date().toISOString().split('T')[1].split('.')[0];
 }
 
+/**
+ * Write a timestamped message to stdout, using level to select the icon.
+ */
 function log(level, message) {
   const timestamp = logTimestamp();
   const prefix =
@@ -42,6 +48,10 @@ function log(level, message) {
   console.log(`[${timestamp}] ${prefix} ${message}`);
 }
 
+/**
+ * Write an error message to stdout and any supplied error detail to stderr
+ * when verbose mode is enabled.
+ */
 function logError(message, error) {
   log('error', message);
   if (error && opts.verbose) {
@@ -53,6 +63,10 @@ function logError(message, error) {
 // CLI argument parsing
 // ============================================================================
 
+/**
+ * Read the first matching --name=value or --name argument from the command line.
+ * Return the value string, 'true' for a bare flag, or defaultValue if absent.
+ */
 function getArg(name, defaultValue) {
   const longFlag = `--${name}=`;
   const boolFlag = `--${name}`;
@@ -67,6 +81,10 @@ function getArg(name, defaultValue) {
   return defaultValue;
 }
 
+/**
+ * Convert the exact strings 'true' and 'false' to booleans; use defaultValue
+ * for any other input.
+ */
 function parseBool(value, defaultValue = false) {
   if (value === 'false') return false;
   if (value === 'true') return true;
@@ -96,6 +114,14 @@ const DEFAULT_EXCLUDE_PATTERN = /^(release\/|hotfix\/)/;
 // Helpers
 // ============================================================================
 
+/**
+ * Combine release/ and hotfix/ prefix exclusions with custom regex patterns.
+ * Invalid combined regex syntax produces a warning and returns the defaults.
+ *
+ * @param {object} [options=opts] - Options, defaulting to the CLI configuration
+ * @param {string} [options.excludePatterns] - Pipe-separated regex alternatives
+ * @returns {RegExp} Pattern matching branch names to preserve
+ */
 function buildExcludeRegex(options = opts) {
   const parts = [DEFAULT_EXCLUDE_PATTERN.source];
   if (options.excludePatterns) {
@@ -116,11 +142,19 @@ function buildExcludeRegex(options = opts) {
   }
 }
 
+/**
+ * Format a ratio as a percentage with two decimal places; return '0.00%'
+ * when the denominator is zero.
+ */
 function toPct(numerator, denominator) {
   if (denominator === 0) return '0.00%';
   return `${((numerator / denominator) * 100).toFixed(2)}%`;
 }
 
+/**
+ * Format bytes using B, KB, or MB with 1024-based units. KB and MB values
+ * have two decimal places; values at or above one MB remain in MB.
+ */
 function formatBytes(bytes) {
   if (bytes < 1024) return `${bytes} B`;
   const kb = bytes / 1024;
@@ -129,10 +163,26 @@ function formatBytes(bytes) {
   return `${mb.toFixed(2)} MB`;
 }
 
+/**
+ * Estimate storage impact in bytes using 4096 bytes per commit.
+ * This estimate does not measure space recoverable by deleting a branch.
+ */
 function estimateStorageFreedBytes(commitCount) {
   return commitCount * AVG_STORAGE_BYTES_PER_COMMIT;
 }
 
+/**
+ * Aggregate report statistics without deleting branches.
+ * successfulDeletes counts candidates, failedDeletes counts analysis errors,
+ * and successRate is candidates / (candidates + errors), or '0.00%' if empty.
+ *
+ * @param {object[]} deleted - Candidates with branch, optional type and author,
+ *   commitCount, and estimatedStorageBytes; missing counts contribute zero
+ * @param {object[]} preserved - Retained branches, including DISCUSS entries
+ * @param {object[]} errors - Branch analysis errors
+ * @returns {object} Counts, percentage, retained-to-candidate ratio, candidates
+ *   by type, commit and byte totals, formatted storage, and sorted unique authors
+ */
 function getMetrics(deleted, preserved, errors) {
   const byType = {};
   const authorSet = new Set();
@@ -167,6 +217,12 @@ function getMetrics(deleted, preserved, errors) {
   };
 }
 
+/**
+ * Create options.reportDir and missing parent directories if the path is absent.
+ * Options default to the CLI configuration.
+ *
+ * @throws {Error} Propagates filesystem errors from creating the directory.
+ */
 function ensureReportDir(options = opts) {
   if (!fs.existsSync(options.reportDir)) {
     fs.mkdirSync(options.reportDir, { recursive: true });
@@ -177,6 +233,20 @@ function ensureReportDir(options = opts) {
 // Reporting
 // ============================================================================
 
+/**
+ * Write a UTF-8 Markdown analysis report, creating the output directory as needed.
+ * Sort deleted in place by branch name. An existing file with the same
+ * timestamp (second precision) is overwritten.
+ *
+ * @param {object[]} deleted - Candidates with branch, author, lastCommitDate,
+ *   hash, age in days, commitCount, estimatedStorageBytes, and reason
+ * @param {object[]} preserved - Branches with branch, category, and reason
+ * @param {object[]} errors - Entries with branch and error message
+ * @param {object} metrics - Aggregates returned by getMetrics
+ * @param {object} [options=opts] - CLI defaults or reportDir and inactiveDays
+ * @returns {string} Written file path, relative if reportDir is relative
+ * @throws {Error} Propagates filesystem errors from directory creation or writing.
+ */
 function writeMarkdownReport(deleted, preserved, errors, metrics, options = opts) {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
   const filePath = path.join(options.reportDir, `branch-cleanup-${timestamp}.md`);
@@ -278,6 +348,21 @@ function writeMarkdownReport(deleted, preserved, errors, metrics, options = opts
   return filePath;
 }
 
+/**
+ * Write a UTF-8 JSON analysis report, creating the output directory as needed.
+ * Candidate order is preserved and inactivity days are rounded to integers.
+ * An existing file with the same timestamp (second precision) is overwritten.
+ *
+ * @param {object[]} deleted - Candidates with branch, author, lastCommitDate,
+ *   hash, age in days, commitCount, estimatedStorageBytes, and reason
+ * @param {object[]} preserved - Branches with branch, category, and reason
+ * @param {object[]} errors - Entries with branch and error message
+ * @param {object} metrics - Aggregates returned by getMetrics
+ * @param {object} [options=opts] - CLI defaults or reportDir and inactiveDays
+ * @returns {string} Written file path, relative if reportDir is relative
+ * @throws {Error} Propagates filesystem errors from directory creation or writing.
+ * @throws {TypeError} Propagates JSON serialization errors, such as circular data.
+ */
 function writeJsonReport(deleted, preserved, errors, metrics, options = opts) {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
   const filePath = path.join(options.reportDir, `branch-cleanup-${timestamp}.json`);
@@ -329,6 +414,13 @@ function writeJsonReport(deleted, preserved, errors, metrics, options = opts) {
 // Git utilities
 // ============================================================================
 
+/**
+ * List locally stored origin refs without fetching, removing the origin/ prefix.
+ * The result can include 'HEAD'; callers must filter it if needed.
+ *
+ * @returns {string[]} Ref names, or an empty array when no refs are found
+ * @throws {Error} If Git cannot list refs; the original error is available as cause.
+ */
 function getRemoteBranches() {
   let output;
   try {
@@ -353,6 +445,11 @@ function getRemoteBranches() {
     .map((b) => b.replace(/^origin\//, ''));
 }
 
+/**
+ * Verify the current directory is in a Git repository with an origin URL.
+ *
+ * @throws {Error} If either Git check fails or origin has no URL.
+ */
 function validateEnvironment() {
   const gitDirResult = spawnSync('git', ['rev-parse', '--git-dir'], {
     encoding: 'utf8',
@@ -378,6 +475,11 @@ function validateEnvironment() {
 // Main
 // ============================================================================
 
+/**
+ * Fetch and prune origin refs, classify branches, and write the configured report.
+ * Exit with 0 on completion, 2 after reporting per-branch errors, or 1 for
+ * environment, fetch, or other fatal failures. Branches are never deleted.
+ */
 async function main() {
   try {
     console.log('🌿 Branch Cleanup Analysis');
