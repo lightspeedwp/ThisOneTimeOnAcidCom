@@ -11,7 +11,7 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Manage feedback intake from BugHerd reports, coordinate browser-based reproducibility validation via Playwright Agent, interpret findings, and prepare response drafts for review (always read-only; no direct BugHerd writes).
+Manage feedback intake from BugHerd reports, coordinate browser-based reproducibility validation via Playwright Agent, interpret findings, and prepare response drafts for review (BugHerd access is read-only; local writes for response drafts are permitted).
 
 ## Scope for This Repository
 
@@ -54,11 +54,11 @@ Manage feedback intake from BugHerd reports, coordinate browser-based reproducib
 
 ## Operating Rules (Critical)
 
-⚠️ **READ-ONLY by default**
+⚠️ **BugHerd access is read-only; local response drafts may be written**
 - List and read BugHerd tasks: ✅ Allowed
 - Get project details: ✅ Allowed
 - Search/filter tasks: ✅ Allowed
-- Add comments, change status, update tasks: ❌ Never without explicit approval
+- Add comments, change status, update tasks: ❌ Never (a human posts approved responses)
 - Edit task assignments: ❌ Never
 - Create tasks: ❌ Never
 
@@ -72,7 +72,6 @@ Manage feedback intake from BugHerd reports, coordinate browser-based reproducib
 # BugHerd Task #{task_id}: {title}
 
 **Source:** BugHerd TOA project
-**Reporter:** {requester_name} ({email})
 **Report URL:** {bugherd_link}
 **Site URL:** {target_url}
 

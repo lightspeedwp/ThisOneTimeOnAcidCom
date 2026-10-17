@@ -86,14 +86,14 @@ Example handoff structure:
 ```
 # BugHerd Task #1: Responsive Menu Scaling
 
-**Environment:** Chrome 154, MacOS, Viewport 1280x716
+**Reported environment:** Chrome 154, MacOS, Viewport 1280x716
 **URL:** https://thisonetimeonacid.com/
 **Steps:** 1. Open site in mobile menu state 2. Check first menu item visibility
 **Expected:** All menu items visible with fluid typography
 **Observed:** First menu item cut off, requires scroll to reach
 **Evidence:** [screenshot], console: no errors
 **Result:** Reproduced ✅
-**Browser:** Mobile Chrome (Pixel 5, 393x873)
+**Environment tested:** Mobile Chrome (Pixel 5, 393x873)
 ```
 
 ---

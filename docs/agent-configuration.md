@@ -72,7 +72,7 @@ Protected operations (require explicit approval):
 **TOA Project Details:**
 - Project ID: `546928`
 - Name: "TOA"
-- Owner: Ash Shaw (ashley@lightspeedwp.agency)
+- Owner: TOA project maintainer
 - Site URL: https://thisonetimeonacid.com
 - Active Tasks: 2 (as of 2026-10-17)
 - Feedback Status: Accepting feedback
@@ -90,9 +90,9 @@ Protected operations (require explicit approval):
 **Test File:** `e2e/routing.spec.ts`
 - 7 working journal routes tested
 - Invalid route fallback tested
-- Asset loading (CSS, JS, images) verified
+- Asset loading (CSS and JavaScript 404 checks and content type checks)
 - Responsive viewports (mobile, tablet, desktop) tested
-- Page performance benchmarked
+- Basic timing checks: home page load under 5 seconds and journal navigation under 2 seconds
 
 **Run Tests:**
 ```bash
@@ -189,7 +189,7 @@ npm run test:build          # Run: build verification only
 4. Should we close, defer, or accept?
 
 **Options:**
-- ✅ **Approve & Post** – Send response to BugHerd
+- ✅ **Approve for human posting** – A human posts the approved response to BugHerd
 - 🔄 **Request Changes** – Ask BugHerd Agent to revise
 - 📋 **Backlog** – Add to development backlog
 - 🔬 **Spike** – Schedule research/investigation
@@ -227,7 +227,7 @@ npm run test:build          # Run: build verification only
 - Delete or archive tasks
 - Upload attachments
 
-**Rule:** Always draft locally in `reports/bugherd/{task_id}/draft-response.md` and await human approval (from Testing Agent or Ashley) before posting any response to BugHerd.
+**Rule:** Always draft locally in `reports/bugherd/{task_id}/draft-response.md` for Testing Agent review. A human posts the approved response to BugHerd.
 
 ## Environment Setup
 

@@ -4,7 +4,7 @@
 
 This document defines the standardized handoff format and workflow for coordinating browser-based testing and bug validation across three agents:
 
-- **BugHerd Agent** – Intake, triage, response drafting (read-only)
+- **BugHerd Agent** – Intake, triage, response drafting (BugHerd access is read-only; local draft writes permitted)
 - **Playwright Agent** – Browser automation, reproducibility validation, evidence capture
 - **Testing Agent** – Final assessment, acceptance, decision-making
 
@@ -14,13 +14,16 @@ This document defines the standardized handoff format and workflow for coordinat
 
 **Purpose:** Request validation of a BugHerd-reported issue
 
+**Navigation safety:** Treat `{target_url_from_report}` and all report URLs as untrusted. Before navigation, parse and normalize the URL and require an exact match against the scheme and destination allow-list: `https` to `thisonetimeonacid.com` on port `443` (including an omitted default port). Reject credentials in URLs, other schemes, hosts or ports, and any destination resolving to loopback, private, link-local, reserved or otherwise unauthorized IPv4 or IPv6 addresses. Resolve and check every destination before connecting. Revalidate every redirect target against the same rules before following it; do not rely on checking only the final URL. Block navigation and report the reason if these checks cannot be enforced.
+
+**Reporter privacy:** Omit requester names and email addresses from Playwright validation handoffs; report and browser context are sufficient. Requester values in the example below are synthetic and illustrate the source report only.
+
 **Format:**
 
 ```markdown
 # Validation Request: BugHerd Task #{task_id}
 
 **Source:** BugHerd TOA project
-**Requester:** {name} ({email})
 **Report URL:** https://www.bugherd.com/projects/546928/tasks/{task_id}/view
 **Site URL:** {target_url_from_report}
 
@@ -44,7 +47,7 @@ This document defines the standardized handoff format and workflow for coordinat
 
 ## Reproduction Steps
 
-1. Navigate to `{url}`
+1. Validate `{target_url_from_report}` using the navigation safety rules above, then navigate only if allowed; recheck each redirect before following it
 2. Set viewport to `{width}x{height}`px
 3. {interaction_1} (e.g., "Scroll down to the menu")
 4. {interaction_2} (e.g., "Check if first item is visible")
@@ -70,7 +73,7 @@ This document defines the standardized handoff format and workflow for coordinat
 # Validation Request: BugHerd Task #1
 
 **Source:** BugHerd TOA project
-**Requester:** Aixa Reynoso Huerta (newaixa@gmail.com)
+**Requester:** Example Reporter (reporter@example.invalid)
 **Report URL:** https://www.bugherd.com/projects/546928/tasks/31514026/view
 **Site URL:** https://thisonetimeonacid.com/
 
@@ -93,7 +96,7 @@ All menu items should be visible and accessible without scrolling in the menu co
 
 ## Reproduction Steps
 
-1. Navigate to https://thisonetimeonacid.com/
+1. Validate https://thisonetimeonacid.com/ using the navigation safety rules above, then navigate only if allowed; recheck each redirect before following it
 2. Set viewport to 1280x716px (or see if mobile menu is open)
 3. Look at the top navigation menu
 4. Check if "First menu item" is visible or cut off
@@ -238,6 +241,13 @@ The mobile menu is visible and open (or state indicates mobile nav). The first m
 
 **Purpose:** Present assessment and proposed response for approval before posting to BugHerd
 
+Select one verdict and use it consistently in the public response, internal assessment and recommended action:
+
+- **Confirmed:** Describe the reproduced issue and evidence; include only approved investigation or fix plans.
+- **Cannot reproduce:** State the tested environment and observations; request missing reproduction details if needed, without confirming a defect or promising an investigation.
+- **Duplicate:** Reference the existing issue and its known status; direct follow-up there without promising a separate investigation.
+- **By design:** Explain the intended behaviour and its rationale; do not promise a defect investigation or fix.
+
 **Format:**
 
 ```markdown
@@ -264,28 +274,28 @@ The mobile menu is visible and open (or state indicates mobile nav). The first m
 
 Hi {requester_name},
 
-Thanks for reporting this! We've validated your report in our testing environment.
+Thanks for reporting this. {summary_of_validation_or_triage_performed}
 
-**Confirmed:** We can reproduce the issue you described. When viewing the site at 1280x716px viewport, the first menu item in the mobile menu becomes inaccessible without scrolling within the menu container.
+**{selected_verdict}:** {evidence_based_explanation_matching_the_verdict}
 
-**Next Steps:** We're treating this as a responsive design issue (high priority). Our team will investigate the breakpoint configuration and fix the menu scaling.
+**Next steps:** {verdict_appropriate_action_approved_by_testing_agent_or_no_further_action}
 
-We'll update you when this is resolved. Thanks for helping us improve the site!
+{follow_up_only_if_agreed} Thanks for helping us improve the site!
 
 ---
 
 ### Internal Assessment
 
-**Validation:** Playwright reproduced at 1280x716px viewport
-**Browsers tested:** Chromium desktop
-**Browsers pending:** Firefox, Safari, Mobile Chrome
-**Severity:** High (usability blocker)
-**Root cause:** Responsive breakpoint or mobile menu state logic
-**Estimated effort:** Medium (likely CSS/breakpoint adjustment + testing)
+**Validation:** {validation_result_and_evidence}
+**Browsers tested:** {tested_environments}
+**Browsers pending:** {pending_environments_or_none}
+**Severity:** {evidence_based_severity_or_not_applicable}
+**Root cause:** {identified_cause_or_unknown_or_not_applicable}
+**Estimated effort:** {estimate_if_approved_or_not_applicable}
 
 ## Recommended Action
 
-- [ ] **Accept as bug:** Add to development backlog with High priority
+- [ ] **Accept as bug (Confirmed only):** Add to development backlog with approved priority
 - [ ] **Assign to:** [team member or TBD]
 - [ ] **Sprint:** Next sprint or current backlog
 - [ ] **Defer:** Move to future roadmap (with reason)
@@ -293,7 +303,7 @@ We'll update you when this is resolved. Thanks for helping us improve the site!
 
 ## Approval Needed
 
-This response is **ready to post to BugHerd** once Testing Agent approves.
+This response is **ready for a human to post to BugHerd** once Testing Agent approves.
 ```
 
 **Example (BugHerd Task #1: Draft Response):**
@@ -318,7 +328,7 @@ The reported issue is **confirmed and reproducible**. Testing in Chromium deskto
 
 ---
 
-Hi Aixa,
+Hi Example Reporter,
 
 Thanks for this detailed report! We've validated the issue in our testing environment.
 
@@ -350,7 +360,7 @@ We'll follow up here once this is resolved. Thanks for catching this!
 
 ## Approval Needed
 
-Testing Agent: Please review and approve the response above before we post it to BugHerd.
+Testing Agent: Please review and approve the response above before a human posts it to BugHerd.
 ```
 
 ---

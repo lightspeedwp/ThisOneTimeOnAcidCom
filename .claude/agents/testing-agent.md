@@ -114,7 +114,7 @@ Plan and execute testing strategy for portfolio site functionality, content inte
 6. **BugHerd Agent** composes response: "Confirmed on Chrome desktop. This is a responsive design issue. We will add it to the backlog."
 7. **BugHerd Agent** sends draft to **Testing Agent** for review
 8. **Testing Agent** approves and decides: "This is a real issue. Backlog priority: high. Responsive typography fix needed."
-9. **Testing Agent** (or human) posts the approved response to BugHerd
+9. A **human** posts the approved response to BugHerd
 10. Testing Agent creates or updates a task in the development backlog
 
 ---
