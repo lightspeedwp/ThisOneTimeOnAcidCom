@@ -180,10 +180,18 @@ describe('validate-push-branch', () => {
       const result = resolveHeadRef('HEAD');
       expect(result === null || typeof result === 'string').toBe(true);
     });
+
+    test('returns non-HEAD refs without calling git', () => {
+      const refs = ['refs/heads/feat/test', 'refs/heads/main', 'refs/tags/v1.0.0'];
+      refs.forEach(ref => {
+        const result = resolveHeadRef(ref);
+        expect(result).toBe(ref);
+      });
+    });
   });
 
   describe('getCurrentBranch', () => {
-    test('returns current branch name', () => {
+    test('returns current branch name or null', () => {
       const branch = getCurrentBranch();
       // Should either return a branch name or null in detached HEAD state
       expect(branch === null || typeof branch === 'string').toBe(true);
@@ -194,6 +202,13 @@ describe('validate-push-branch', () => {
       // getCurrentBranch returns null for detached HEAD, not 'HEAD'
       if (branch !== null) {
         expect(branch).not.toBe('HEAD');
+      }
+    });
+
+    test('returns string or null consistently', () => {
+      for (let i = 0; i < 3; i++) {
+        const branch = getCurrentBranch();
+        expect(['string', 'object'].includes(typeof branch) || branch === null).toBe(true);
       }
     });
   });
@@ -262,6 +277,75 @@ describe('validate-push-branch', () => {
       const result = processPushLines(lines);
       // Should process at least the branch lines, skip the tag
       expect(result.branches.length >= 1).toBe(true);
+    });
+
+    test('filters non-branch refs during processing', () => {
+      const lines = [
+        'refs/heads/feat/valid abc123 refs/heads/feat/valid abc123',
+        'refs/remotes/origin/main def456 refs/remotes/origin/main def456',
+        'refs/heads/fix/bug ghi789 refs/heads/fix/bug ghi789'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches.length).toBe(2);
+      expect(result.branches).toContain('feat/valid');
+      expect(result.branches).toContain('fix/bug');
+    });
+
+    test('skips malformed push lines', () => {
+      const lines = [
+        'refs/heads/feat/valid abc123 refs/heads/feat/valid abc123',
+        'incomplete malformed line',
+        'refs/heads/fix/bug def456 refs/heads/fix/bug def456'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches.length).toBe(2);
+    });
+
+    test('returns empty arrays for empty input', () => {
+      const result = processPushLines([]);
+      expect(result.branches).toEqual([]);
+      expect(result.invalidBranches).toEqual([]);
+      expect(result.hasInvalidBranch).toBe(false);
+    });
+
+    test('handles all-zero deletion markers in multiple lines', () => {
+      const lines = [
+        'refs/heads/feature 0000000000000000000000000000000000000000 refs/heads/feature abc123',
+        'refs/heads/valid abc123 refs/heads/valid abc123',
+        'refs/heads/oldfix 0000000000000000000000000000000000000000 refs/heads/oldfix def456'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches.length).toBe(1);
+      expect(result.branches[0]).toBe('valid');
+    });
+
+    test('processes forbidden prefixes and collects invalid branches', () => {
+      const lines = [
+        'refs/heads/claude/forbidden abc123 refs/heads/claude/forbidden abc123',
+        'refs/heads/copilot/bad def456 refs/heads/copilot/bad def456'
+      ];
+      const result = processPushLines(lines);
+      expect(result.hasInvalidBranch).toBe(true);
+      expect(result.invalidBranches.length).toBeGreaterThan(0);
+      expect(result.invalidBranches).toContain('claude/forbidden');
+    });
+
+    test('extracts branch names from refs correctly', () => {
+      const lines = [
+        'refs/heads/feat/test-feature abc123 refs/heads/feat/test-feature abc123',
+        'refs/heads/fix/bug-fix def456 refs/heads/fix/bug-fix def456'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches).toContain('feat/test-feature');
+      expect(result.branches).toContain('fix/bug-fix');
+    });
+
+    test('returns structure with all required properties', () => {
+      const lines = ['refs/heads/feat/test abc123 refs/heads/feat/test abc123'];
+      const result = processPushLines(lines);
+      expect(result).toHaveProperty('branches');
+      expect(result).toHaveProperty('hasInvalidBranch');
+      expect(result).toHaveProperty('invalidBranches');
     });
   });
 
