@@ -261,8 +261,8 @@ This specification defines a tailored, maintainable governance system for ThisOn
 - Document which agents use: MCP servers, tool use, streaming, model selection, etc.  
 
 **R7.3** — Agent budget controls (TOA-271 owned separately; spec documents requirements)  
-- Distinguish advisory model budgets from enforceable runtime limits  
-- Document enforcement point: host-side limits, not markdown-only  
+- Enforce budgets via host-side mechanisms (hard limits, not advisory)  
+- Document enforcement point: runtime-based hard limits preventing execution beyond budget boundary  
 - Cover: aggregate accounting, retry/cancellation, exhaustion handling, fallback behaviour  
 - Require owner approval of numerical limits and any spending increases  
 
@@ -542,42 +542,13 @@ This specification defines a tailored, maintainable governance system for ThisOn
 
 ---
 
-## Unresolved Questions
-
-### Q1: Workflow Enablement Priority
-
-**Context:** Evaluation workflows (validate-specs, claude-guard-tests, etc.) are defined but gating per workflow requires owner decision.  
-**Question:** Which evaluation workflows should run by default on every PR? Which should be manual/opt-in?  
-**Options:**  
-- A: All evaluation workflows run by default (strictest)
-- B: Only locked-files-guard runs; others are opt-in (pragmatic)
-- C: Each workflow has separate owner decision (granular)  
-
-### Q2: Agent Skill Inventory
-
-**Context:** Baseline inspection found ~18 agents and ~5 skills; actual inventory may have changed.  
-**Question:** Should the specification mandate a specific agent/skill set, or document current inventory with "subject to change" caveat?  
-**Options:**  
-- A: Mandate stable inventory in this spec (tightly controlled)
-- B: Document current state; allow agents/skills to evolve per TOA-265 (flexible)  
-
-### Q3: Budget Enforcement Mechanism
-
-**Context:** TOA-271 owns budget controls; this spec documents requirements.  
-**Question:** Should budget enforcement be runtime-based (host enforces), config-based (settings.json), or advisory (documentation only)?  
-**Options:**  
-- A: Host-side enforcement (hard limit)
-- B: Config-based validation with warnings (soft limit)
-- C: Advisory with escalation to owner on exhaustion (trust-based)  
-
----
-
 ## Clarifications
 
 ### Session 2026-10-17
 
 - Q: Which evaluation workflows should run by default on every PR, and which should be manual or opt-in? → A: Option B: Only `locked-files-guard` runs by default; others are manual/opt-in (pragmatic approach protecting critical governance files without CI overhead)
 - Q: Should the specification mandate a specific agent/skill set, or document current inventory as subject to change? → A: Option B: Document current baseline (~18 agents, ~5 skills) as inventory of Oct 2026; allow evolution per TOA-264/TOA-265 (flexible; reflects reality that agents and skills are active tooling)
+- Q: What enforcement mechanism for agent/skill budgets? → A: Option A: Host-side enforcement (hard limit — execution stops at budget boundary, preventing cost surprises)
 
 ---
 
@@ -597,7 +568,7 @@ This specification defines a tailored, maintainable governance system for ThisOn
 **This specification is ready for `/speckit-clarify` once:**
 
 - ✅ Owner confirms all 9 decisions remain binding
-- ⏳ Answers provided to 3 unresolved questions (Q1–Q3)
+- ✅ Answers provided to 3 unresolved questions (Q1→Option B, Q2→Option B, Q3→Option A)
 - ✅ No additional clarifications needed (max 3 per SpecKit rules)
 
 **Proceed to `/speckit-plan` when:**

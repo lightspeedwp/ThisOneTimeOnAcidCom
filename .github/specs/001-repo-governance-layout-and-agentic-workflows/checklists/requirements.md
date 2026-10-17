@@ -33,8 +33,8 @@
 
 #### R2. Package Management (3 requirements)
 - [x] R2.1 — npm-only enforcement (PKG-001 approved decision)
-- [x] R2.2 — Lockfile sync and validation
-- [x] R2.3 — pnpm artefact removal (pnpm-workspace.yaml, pnpm.overrides)
+- [x] R2.2 — Remove pnpm artefacts during implementation
+- [x] R2.3 — Dependency validation (package.json ↔ package-lock.json)
 
 #### R3. Node.js Pinning (3 requirements)
 - [x] R3.1 — Pin to Node.js 24 LTS (NODE-001 approved decision)
@@ -61,10 +61,10 @@
 - [x] R6.4 — Deterministic quality gates (code, spec, config, branch validation)
 
 #### R7. Agentic Workflows (4 requirements)
-- [x] R7.1 — Agent definitions and skill inventory
-- [x] R7.2 — Tool access and permissions per agent
-- [x] R7.3 — Output routing and escalation
-- [x] R7.4 — Budget controls (TOA-271 owns implementation detail)
+- [x] R7.1 — Agent inventory and contract specification
+- [x] R7.2 — Anthropic reference assessment
+- [x] R7.3 — Agent budget controls (TOA-271 owned separately)
+- [x] R7.4 — Skill runtime routing
 
 #### R8. Styling Rules (2 requirements)
 - [x] R8.1 — BEM-only enforcement (STYLE-001 approved decision)
@@ -79,24 +79,24 @@
 | Issue | Workstream | Mapped to Requirements | Status |
 |-------|-----------|------------------------|--------|
 | TOA-242 | Workstream: TOA-260 | R6.1–R6.4 | ✅ Covered |
-| TOA-243 | Workstream: TOA-260 | R6.2 (evaluation) | ✅ Covered |
-| TOA-244 | Workstream: TOA-260 | R6.2 (validation) | ✅ Covered |
+| TOA-243 | Workstream: TOA-261 | R6.2 (evaluation) | ✅ Covered |
+| TOA-244 | Workstream: TOA-261 | R6.2 (validation) | ✅ Covered |
 | TOA-250 | Workstream: TOA-261 | R5.1 | ✅ Covered |
 | TOA-251 | Workstream: TOA-261 | R5.3 | ✅ Covered |
 | TOA-252 | Workstream: TOA-261 | R5.2 | ✅ Covered |
 | TOA-253 | Workstream: TOA-261 | R5.5 | ✅ Covered |
 | TOA-254 | Workstream: TOA-254 | R9.1–R9.2 | ✅ Covered |
-| TOA-255 | Workstream: TOA-261 | R1.3 (planning docs) | ✅ Covered |
-| TOA-256 | Workstream: TOA-261 | R1.3 (reports org) | ✅ Covered |
-| TOA-257 | Workstream: TOA-261 | R1.3 (portable prompts) | ✅ Covered |
+| TOA-255 | Workstream: TOA-254 | R1.3 (planning docs) | ✅ Covered |
+| TOA-256 | Workstream: TOA-254 | R1.3 (reports org) | ✅ Covered |
+| TOA-257 | Workstream: TOA-254 | R1.3 (portable prompts) | ✅ Covered |
 | TOA-258 | Workstream: TOA-262 | R1.6 (script placement) | ✅ Covered |
-| TOA-259 | Workstream: TOA-261 | R1.3 (task trackers) | ✅ Covered |
+| TOA-259 | Workstream: TOA-254 | R1.3 (task trackers) | ✅ Covered |
 | TOA-260 | Workstream: TOA-260 | R4.1–R4.4 | ✅ Covered |
 | TOA-261 | Workstream: TOA-261 | R5.1–R5.5 | ✅ Covered |
 | TOA-262 | Workstream: TOA-262 | R2.1–R2.3, R3.1–R3.3, R8.1–R8.2 | ✅ Covered |
-| TOA-271 | Workstream: standalone | R7.4 (budget req) | ✅ Covered |
-| TOA-272 | Workstream: TOA-260 | R6.4 (branch validation) | ✅ Covered |
-| TOA-273 | Workstream: TOA-260 | R6.4 (changelog validation) | ✅ Covered |
+| TOA-271 | Workstream: standalone | R7.3 (budget controls) | ✅ Covered |
+| TOA-272 | Workstream: TOA-261 | R6.4 (branch validation) | ✅ Covered |
+| TOA-273 | Workstream: TOA-262 | R6.4 (changelog validation) | ✅ Covered |
 | TOA-274 | Workstream: TOA-260 | R6.3–R6.4 (labeling) | ✅ Covered |
 
 **All 20 child issues mapped to 1+ requirements. Coverage complete.**
@@ -160,31 +160,6 @@
 
 ---
 
-## Unresolved Questions (Blocking Clarification Phase)
-
-### Q1. Workflow Enablement Priority
-**Question**: Which workflows should run by default (implementation vs. evaluation vs. deferred)?
-
-**Impact**: Determines PR template routing, CI duration, cost, and escalation paths  
-**Owner decision required**: Which workflows are mandatory, optional, or future-only?  
-**Blocks**: R6.1–R6.4 implementation decisions  
-
-### Q2. Agent & Skill Inventory Status
-**Question**: Are all 18+ agents and 5+ skills from the earlier inspection still active, or has the inventory changed?
-
-**Impact**: Defines available automation, permissions, escalation, and concurrent execution  
-**Owner decision required**: Confirm current agent/skill definitions and any removals/additions  
-**Blocks**: R7.1–R7.3 (tool definitions) and R7.4 (budget coverage)  
-
-### Q3. Budget Enforcement Mechanism (TOA-271)
-**Question**: What is the actual runtime/host-side enforcement point for agent/skill budgets?
-
-**Impact**: Determines whether budgets are advisory (markdown guidance) or enforceable (host enforcement)  
-**Owner decision required**: Budget enforcement location, scope, retries, cancellation policy, fallback  
-**Blocks**: R7.4 (budget requirement specification)  
-
----
-
 ## Verification Requirements
 
 ### Migration Integrity
@@ -233,16 +208,16 @@
 
 **Specification Created**: 2026-10-17  
 **Owner Approval**: [ ] @ashley (pending)  
-**Clarification Phase**: [ ] Complete (blocks planning)  
+**Clarification Phase**: [x] Complete (all 3 unresolved questions answered)  
 **Planning Phase**: [ ] Ready (after clarification approval)  
 
 ---
 
 ## Next Steps
 
-1. **Clarification Phase** (`/speckit-clarify`) — Address Q1, Q2, Q3 with owner
+1. ✅ **Clarification Phase** (`/speckit-clarify`) — All 3 questions answered (Q1→B, Q2→B, Q3→A)
 2. **Planning Phase** (`/speckit-plan`) — Generate implementation plan and research
 3. **Task Decomposition** (`/speckit-tasks`) — Break planning into actionable tasks
 4. **Implementation PRs** — Create focused PRs for 5 workstreams (TOA-254, TOA-260, TOA-261, TOA-262, and TOA-271 dependencies)
 
-**No implementation changes should proceed until clarification phase is complete and all unresolved questions are resolved.**
+**Clarification phase complete. Proceed to `/speckit-plan` for implementation strategy.**
