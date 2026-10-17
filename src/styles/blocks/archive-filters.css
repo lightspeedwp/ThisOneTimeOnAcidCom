@@ -232,7 +232,7 @@
   justify-content: space-between;
   gap: var(--wp--preset--spacing--fluid-sm);
   flex-wrap: wrap;
-  padding-bottom: 8px;
+  padding: 0 0 8px 0;
 }
 
 /* ── Result Count ── */
