@@ -9,6 +9,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+#### Branch Cleanup Analysis Tool — Report-Only Preview (TOA-270)
+
+- **Automated branch cleanup analysis** — `scripts/cleanup-branches.js` identifies stale merged branches for review without executing deletions
+- **Comprehensive reporting** — Markdown and JSON formats distinguishing:
+  - Branches eligible for deletion (fully merged, inactive 30+ days)
+  - Branches retained (protected, excluded, active work)
+  - Branches requiring discussion (uncertain merge status)
+- **Safety safeguards** — Report-only mode ensures no branch deletions occur; fails closed when merge status cannot be verified
+- **Flexible configuration** — Customisable inactivity threshold, exclusion patterns, report format and output directory
+- **Jest test suite** — 25 tests covering branch classification, reporting, metrics and non-deletion verification
+- **Supporting modules:**
+  - `scripts/lib/constants.js` — Reason codes and configuration constants
+  - `scripts/lib/branch-categorization.js` — Branch classification logic (KEEP / DELETE / DISCUSS)
+  - `scripts/lib/git-merge-utils.js` — Git merge status and history utilities
+- **Documentation updates:**
+  - `.claude/agents/branches-agent.md` — New "Branch Cleanup Workflow" section with usage examples and safety boundaries
+  - `.claude/skills/branch-validation/SKILL.md` — Added cleanup workflow, safety boundaries and references
+- **Usage:**
+  ```bash
+  node scripts/cleanup-branches.js              # Generate markdown report (default)
+  node scripts/cleanup-branches.js --reportFormat=json  # JSON format
+  node scripts/cleanup-branches.js --inactiveDays=45   # Custom threshold
+  node scripts/cleanup-branches.js --verbose           # Debug logging
+  ```
+- **Key guarantees:**
+  - Never executes branch deletion commands
+  - Never pushes deletions to remote
+  - Never removes local branches
+  - Preserves branches with open pull requests
+  - Protects Dependabot and Renovate branches
 #### CodeRabbit Inheritance Configuration (CR-18)
 
 - **`.coderabbit.yml`**: Enabled `inheritance: true` to inherit shared CodeRabbit safeguards and configuration from central `lightspeedwp/coderabbit` repository
