@@ -167,15 +167,16 @@ ajv validate -s ./contracts/catalogue-schema.json -d ./assets/pilot-batch-001/as
 **Run**:
 
 ```bash
-# Validate all 12 pilot asset records
+# Validate all 12 pilot asset records; exit non-zero if any fail
 for file in ./assets/pilot-batch-001/*.json; do
-  ajv validate -s ./contracts/catalogue-schema.json -d "$file" || echo "FAILED: $file"
-done
+  ajv validate -s ./contracts/catalogue-schema.json -d "$file" || { echo "FAILED: $file"; exit 1; }
+done && echo "✓ All records valid"
 
 # Expected output
 ./assets/pilot-batch-001/asset-*.json valid
 ./assets/pilot-batch-001/asset-*.json valid
 ... (12 records total)
+✓ All records valid
 ```
 
 **Pass Criteria**: ✅ All 12 pilot assets validate successfully; zero schema violations
@@ -512,8 +513,8 @@ Phase: 1 Design
 
 ## Asset Recovery (TOA-282 scope)
 - Pilot batch size: 12 assets
-- Recovery success: 11/12 recovered, 1/12 partial_recovery
-- Completion score: 91.7%
+- Recovery success: 12/12 recovered
+- Completion score: 100%
 - Status: ✓ PASS (meets target ≥80%)
 
 ... (full report)

@@ -1,12 +1,20 @@
+---
+title: Data Model — TOA Media Library
+author: Claude
+date: 2026-10-17
+phase: 1 Design
+user_stories: [US1, US2]
+---
+
 # Data Model: TOA Media Library
 
 **Purpose**: Define the entity schemas, relationships and validation rules that govern asset recovery, cataloguing, storage provider evaluation and validation workflows.
 
 **Input**: Specification from [spec.md](spec.md), research decisions from [research.md](research.md)
 
-**Created**: 2026-10-17
+## Overview
 
-**Phase**: 1 Design (US1–US2: Asset Recovery and Catalogue Schema)
+This document defines four core entities (Asset, AssetRelationship, StorageProvider, ValidationResult) with complete attribute lists, validation rules, enums, and references to functional requirements (FR-###).
 
 ---
 
@@ -125,7 +133,9 @@ Captures relationships between assets (original ↔ derivative, asset ↔ publis
 | Attribute | Type | Required? | Constraints | Notes | FR-Ref |
 |---|---|---|---|---|---|
 | `source_asset_id` | String (FK) | **Required** | Must exist in Asset table | Asset that is the origin or parent | FR-007 |
-| `target_asset_id` | String (FK) | **Required** | Must exist in Asset table; cannot equal source_asset_id | Asset that derives from or uses the source | FR-007 |
+| `target_type` | Enum | **Required** | "asset" \| "context" | Whether target is an Asset or a usage context (e.g. website page) | FR-007 |
+| `target_asset_id` | String (FK) | Conditional | Required if `target_type="asset"`; must exist in Asset table; cannot equal source_asset_id | Asset that derives from or relates to the source | FR-007 |
+| `target_reference` | String | Conditional | Required if `target_type="context"`; e.g. URL, page ID, publication identifier | Reference for non-asset targets (e.g. website page URL) | FR-007 |
 | `relationship_type` | Enum | **Required** | "derived_from" \| "variant_of" \| "used_in" \| "replaced_by" | Type of relationship; see enum | FR-007 |
 | `notes` | String | Optional | Freeform; max 512 characters | e.g. "scaled 50% for web", "colour mode changed RGB→CMYK", "superseded by redesign v2" | FR-007 |
 | `verified` | Boolean | Optional | true \| false | Whether relationship has been validated or is inferred | FR-007 |
@@ -306,13 +316,15 @@ Applies across all entities:
 ### Recovery Status Transitions
 
 ```
-Initial State: unrecoverable (default assumption until proven otherwise)
+Initial State: not_attempted (asset identified but recovery not yet attempted)
               ↓
           [Attempt Recovery]
               ↓
       ┌─ recovered (complete metadata, ready to catalogue)
       │
       ├─ partial_recovery (some metadata missing but asset usable)
+      │
+      ├─ unrecoverable (recovery attempted and failed; recovery_notes required)
       │
       └─ manual_export_required (identified; requires manual effort)
 ```
