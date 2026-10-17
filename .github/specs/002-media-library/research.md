@@ -156,7 +156,7 @@ This document captures the three critical clarification questions raised in the 
 
 ---
 
-## Gate Evaluation — Phase 0 Complete
+## Gate Evaluation — Phase 0 Pending
 
 **When all three clarifications (Q1, Q2, Q3) are resolved**, re-evaluate gates:
 
@@ -166,7 +166,7 @@ This document captures the three critical clarification questions raised in the 
 - [ ] **Owner Approval**: All decisions approved and documented
 - [ ] **No Conflicts**: Resolved decisions do not conflict with specification constraints or Linear issue scope
 
-**Gate Outcome**: ✅ PASS Phase 0 → Proceed to Phase 1 Design
+**Gate Outcome**: ⏳ PENDING — Phase 1 design is blocked until the Q1–Q3 checklist is complete, owner approval is recorded, and no conflicts remain.
 
 **If Gate Fails**: [Document why; identify missing information; request clarification]
 

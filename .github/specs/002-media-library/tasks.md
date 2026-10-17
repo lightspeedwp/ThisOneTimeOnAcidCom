@@ -60,7 +60,7 @@
 - [ ] T013 [US1] Define validation rules in data-model.md: asset ID uniqueness, non-invention of unknown metadata (mark as null/"unknown" per FR-008), reference integrity, state transitions
 - [ ] T014 [US1] Define recovery_status enum values in data-model.md: "recovered" | "partial" | "manual_export_required" | "unrecoverable" (map to TOA-282 validation findings)
 - [ ] T015 [P] [US1] Create catalogue-schema.json from data-model.md; include required fields, optional fields, validation constraints, format enums
-- [ ] T016 [P] [US1] Add JSON Schema examples to catalogue-schema.json: 2–3 sample asset records (one original, one derivative, one with unknown fields)
+- [ ] T016 [US1] Add JSON Schema examples to catalogue-schema.json: 2–3 sample asset records (one original, one derivative, one with unknown fields); depends on T015
 - [ ] T017 [US1] Validate catalogue-schema.json against 12 pilot recovered assets (from TOA-280); confirm all mandatory fields populated or marked unknown
 - [ ] T018 [US1] Document field constraints in catalogue-schema.json (max length, nullable, required, enum values) quoted verbatim from FR-006 to prevent implementation-time discretion
 
@@ -83,7 +83,7 @@
 - [ ] T023 [P] [US2] Design asset state machine in data-model.md: transitions (recovered → validated → approved → published), terminal states (unrecoverable, retired, deprecated)
 - [ ] T024 [US2] Test schema against 12+ pilot assets; verify relationships are explicit, non-invention rule is enforced, no missing metadata fabricated
 - [ ] T025 [US2] Document schema version, maintenance procedures and changelog rules in data-model.md for future schema evolution
-- [ ] T026 [US2] Confirm catalogue storage location decision from Q1 resolution: Git-tracked JSON, database schema, or provider-native catalogue (document choice in data-model.md § Storage)
+- [ ] T026 [US2] Choose catalogue storage as a separate Phase 1 design decision, independent of storage-provider selection or deferral: select Git-tracked JSON, a database schema, or a provider-native catalogue based on demonstrated accessibility and durability per FR-009; document the choice, rationale and validation evidence in data-model.md § Storage
 
 **Checkpoint**: US2 design complete — schema handles relationships, provenance, and non-invention rule; validated against pilot assets
 

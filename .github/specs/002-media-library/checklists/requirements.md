@@ -34,7 +34,7 @@
 
 ## Feature Readiness
 
-- [x] All functional requirements have clear acceptance criteria — each user story includes GWT scenarios tied to FR-001–018
+- [ ] All functional requirements have clear acceptance criteria — GWT scenarios are still needed for FR-009 (catalogue-storage accessibility and durability), FR-012 (evaluation separate from approval), and FR-017 (escalation paths)
 - [x] User scenarios cover primary flows — P1: recovery and catalogue (foundation); P2: evaluation and validation; P3: Figma capabilities assessment
 - [x] Feature meets measurable outcomes defined in Success Criteria — recovery, catalogue validation, provider eval, validation approach, Figma assessment, traceability, clarifications mapped to SC-001–007
 - [x] No implementation details leak into specification — responsive images (out of scope), build integration (out of scope), provider infrastructure (out of scope) are explicitly excluded

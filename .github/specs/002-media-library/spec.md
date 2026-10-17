@@ -310,6 +310,7 @@ These questions must be answered to resolve specification ambiguities that impac
 | **Recovery Requirements (FR-001–005)** | TOA-8, TOA-280, TOA-282 | TOA-8 initiates Figma artwork restoration (read-only); TOA-280 evaluates extraction capability; TOA-282 validates pilot recovery quality |
 | **Catalogue Schema (FR-006–009)** | TOA-277, TOA-283 | TOA-277 defines initial schema; TOA-283 finalises schema based on validation findings |
 | **Provider Evaluation (FR-010–013)** | TOA-276 | Evaluation workflow using representative recovered assets |
+| **Import and Reference-Migration Workflow (FR-014)** | TOA-278 | Designs old → new asset reference mappings and broken-reference checks; migration pipeline execution remains in TOA-285 |
 | **Validation Approach (FR-014–016)** | TOA-279, TOA-282 | TOA-279 defines validation and handoff; TOA-282 performs pilot validation |
 | **Figma Capabilities Assessment (FR-001, FR-005)** | TOA-280 | Assesses extraction fidelity, limitations, reusable skills |
 
