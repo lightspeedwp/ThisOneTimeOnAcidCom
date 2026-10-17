@@ -46,6 +46,7 @@ Navigate to: **Settings → Branches → Add rule**
 | Require status checks to pass | ✅ Yes | Enforce CI validation |
 | Require branches to be up to date before merging | ✅ Yes | Keep develop current |
 | Require review from Code Owners | ❌ No | Less strict than main (moderate) |
+| Required number of approvals | 1 | Require approval before auto-merge |
 | Merge workflow policy | Auto-merge permitted | Speeds up integration once required reviews and status checks pass |
 | Allow force pushes | ❌ No | Prevents history rewriting |
 | Allow deletions | ❌ No | Prevents accidental deletion |
@@ -113,8 +114,8 @@ When a PR modifies files matching these patterns on protected branches, GitHub a
 - [ ] Navigate to **Settings → Branches**
 - [ ] Create branch protection rule for `main` (strict configuration above)
 - [ ] Create branch protection rule for `develop` (moderate configuration above)
-- [ ] Verify `.github/CODEOWNERS` file is in repository
-- [ ] Test: Create a test PR to `main` and verify @ashleyshaw review request appears
+- [ ] Verify `.github/CODEOWNERS` is committed to `main` before creating the test PR
+- [ ] Test: Create a test PR targeting `main` and verify @ashleyshaw is requested as a reviewer
 - [ ] Confirm workflow: feature PR → develop → release PR → main
 
 ---
