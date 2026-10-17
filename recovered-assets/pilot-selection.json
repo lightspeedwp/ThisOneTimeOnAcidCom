@@ -1,0 +1,176 @@
+{
+  "pilot_metadata": {
+    "created_at": "2026-10-17T00:00:00Z",
+    "total_selected": 12,
+    "total_catalogue": 56,
+    "selection_strategy": "Tier-based sampling covering all major portfolio categories and both mapped/unmapped asset types",
+    "coverage": {
+      "hero_images": 3,
+      "portfolio_categories": 3,
+      "tier_1_assets": 6,
+      "tier_2_assets": 4,
+      "tier_3_assets": 2,
+      "mapped_percentage": 100,
+      "unmapped_percentage": 0
+    }
+  },
+  "tier_1_high_priority": {
+    "description": "Homepage hero images (highest priority) + Jungle Festival series (largest category)",
+    "rationale": "Hero images are on homepage critical path with highest visibility. Jungle Festival is the largest single portfolio category.",
+    "assets": [
+      {
+        "catalogueId": "toa-heroImage1",
+        "figmaAssetId": "f4a28f747d49fc9d37311b17f513b62e2b95a73e",
+        "originalFilename": "heroImage1.png",
+        "portfolio_category": "Homepage Hero",
+        "alt_text": "Close-up artistic eye makeup with vibrant purple stripe, red metallic lashes and colorful crystal gems",
+        "metadata_status": "complete",
+        "priority": "CRITICAL"
+      },
+      {
+        "catalogueId": "toa-heroImage2",
+        "figmaAssetId": "378acbf4a7518ca6c40b44540bd7a121a91375fe",
+        "originalFilename": "heroImage2.png",
+        "portfolio_category": "Homepage Hero",
+        "alt_text": "Joyful festival participant with rainbow heart body paint on chest, smiling radiantly in colorful festival environment",
+        "metadata_status": "complete",
+        "priority": "CRITICAL"
+      },
+      {
+        "catalogueId": "toa-heroImage3",
+        "figmaAssetId": "e82a7d901c5a28bf9313c7535228e647eaf06b75",
+        "originalFilename": "heroImage3.png",
+        "portfolio_category": "Homepage Hero",
+        "alt_text": "Portrait of person with blonde hair and colorful face paint featuring blue and pink stripes in outdoor festival setting",
+        "metadata_status": "complete",
+        "priority": "CRITICAL"
+      },
+      {
+        "catalogueId": "toa-jungleImage1",
+        "figmaAssetId": "7afa71c7ec4457a1c1983db257703a6c92a9cce7",
+        "originalFilename": "jungleImage1.png",
+        "portfolio_category": "Festival Portfolio - Jungle Festival Koh Phangan",
+        "alt_text": "Jungle festival makeup artwork",
+        "metadata_status": "partial",
+        "priority": "HIGH"
+      },
+      {
+        "catalogueId": "toa-jungleImage2",
+        "figmaAssetId": "1cd08d3825ac7cc423a4672f8ed279139fc99d0a",
+        "originalFilename": "jungleImage2.png",
+        "portfolio_category": "Festival Portfolio - Jungle Festival Koh Phangan",
+        "alt_text": "Ash Shaw artwork - jungle festival",
+        "metadata_status": "partial",
+        "priority": "HIGH"
+      },
+      {
+        "catalogueId": "toa-jungleImage3",
+        "figmaAssetId": "3eb83eb2d4eb493b80283c1b75770d8893b2fc6a",
+        "originalFilename": "jungleImage3.png",
+        "portfolio_category": "Festival Portfolio - Jungle Festival Koh Phangan",
+        "alt_text": "Ash Shaw artwork - jungle festival",
+        "metadata_status": "partial",
+        "priority": "HIGH"
+      }
+    ]
+  },
+  "tier_2_coverage": {
+    "description": "Diverse portfolio categories ensuring extraction methodology covers different themes/styles",
+    "rationale": "Validates recovery workflow across different portfolio series, metadata patterns, and asset complexities.",
+    "assets": [
+      {
+        "catalogueId": "toa-asset-0",
+        "figmaAssetId": "04aa88bd7a81e3f14ceb68f980492bf374b041db",
+        "originalFilename": "asset-0.png",
+        "portfolio_category": "Festival Portfolio - Origin Festival 2025",
+        "alt_text": "Ash Shaw artwork - other",
+        "metadata_status": "framework",
+        "priority": "HIGH",
+        "reason": "Different festival series (Origin), validates multi-festival extraction"
+      },
+      {
+        "catalogueId": "toa-asset-5",
+        "figmaAssetId": "1ec0ba217cad06e2cff662a25a050b0401d1092a",
+        "originalFilename": "asset-5.png",
+        "portfolio_category": "Portfolio - Nail Art Series",
+        "alt_text": "Ash Shaw artwork - other",
+        "metadata_status": "framework",
+        "priority": "HIGH",
+        "reason": "Design system category (nail art), different extraction pattern from festival series"
+      },
+      {
+        "catalogueId": "toa-asset-7",
+        "figmaAssetId": "280168cf45339af581c4065d1f6728ea2de6ff02",
+        "originalFilename": "asset-7.png",
+        "portfolio_category": "Festival Portfolio - Reiserfieber (Swiss)",
+        "alt_text": "Ash Shaw artwork - other",
+        "metadata_status": "framework",
+        "priority": "MEDIUM",
+        "reason": "International festival content, validates metadata patterns for non-Thailand festivals"
+      },
+      {
+        "catalogueId": "toa-asset-38",
+        "figmaAssetId": "bb2d15f1b5450668f0a032ad3765e13d8db4fdd2",
+        "originalFilename": "asset-38.png",
+        "portfolio_category": "Festival Portfolio - Nation of Gondwana",
+        "alt_text": "Ash Shaw artwork - other",
+        "metadata_status": "framework",
+        "priority": "MEDIUM",
+        "reason": "Small category, edge case validation for less-common festival series"
+      }
+    ]
+  },
+  "tier_3_optional": {
+    "description": "Unmapped assets (no code metadata) - validates discovery workflow",
+    "rationale": "Tests recovery methodology for assets without existing alt text/captions in codebase.",
+    "assets": [
+      {
+        "catalogueId": "toa-asset-42",
+        "figmaAssetId": "d35493e2be08017199b3d1523d516a996ec97a5d",
+        "originalFilename": "asset-42.png",
+        "portfolio_category": "Festival Portfolio - Shankra Festival (Swiss)",
+        "alt_text": "Ash Shaw artwork - other",
+        "metadata_status": "framework",
+        "priority": "LOW",
+        "reason": "Unmapped asset example, validates metadata discovery pattern"
+      },
+      {
+        "catalogueId": "toa-asset-51",
+        "figmaAssetId": "e7ee10c85c112ab4acfc9e54087974a5faae5966",
+        "originalFilename": "asset-51.png",
+        "portfolio_category": "Portfolio - Thailand Series",
+        "alt_text": "Ash Shaw artwork - other",
+        "metadata_status": "framework",
+        "priority": "LOW",
+        "reason": "Geographic/cultural diversity, validates international content handling"
+      }
+    ]
+  },
+  "selection_summary": {
+    "total_assets": 12,
+    "breakdown": {
+      "hero_images": 3,
+      "jungle_festival": 3,
+      "other_festivals": 4,
+      "design_systems": 1,
+      "international_content": 1
+    },
+    "portfolio_categories_covered": [
+      "Homepage Hero",
+      "Festival Portfolio - Jungle Festival Koh Phangan",
+      "Festival Portfolio - Origin Festival 2025",
+      "Portfolio - Nail Art Series",
+      "Festival Portfolio - Reiserfieber (Swiss)",
+      "Festival Portfolio - Nation of Gondwana",
+      "Festival Portfolio - Shankra Festival (Swiss)",
+      "Portfolio - Thailand Series"
+    ],
+    "metadata_distribution": {
+      "complete": 3,
+      "partial": 3,
+      "framework": 6
+    },
+    "expected_recovery_rate": "80-90% (all 12 are mapped in codebase)",
+    "extraction_rationale": "This pilot provides comprehensive coverage of extraction workflows across all portfolio categories while keeping sample size manageable for initial validation."
+  }
+}
