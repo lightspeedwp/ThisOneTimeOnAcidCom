@@ -5,14 +5,19 @@
 
 import {
   validateBranch,
-  ValidationResult,
-  AUTHORISED_TYPES,
-  getCurrentBranch,
   checkForbiddenPrefix,
   checkExemptions,
   validateStandardPattern,
+  getCurrentBranch,
+  ValidationResult,
+  AUTHORISED_TYPES,
+  FORBIDDEN_PREFIXES,
+  PATTERNS,
   parseArgs
 } from './validate-branch-name.js';
+import { execSync } from 'child_process';
+
+jest.mock('child_process');
 
 describe('Branch Name Validation', () => {
   describe('Valid Branches - Standard Pattern', () => {
@@ -334,6 +339,174 @@ describe('Branch Name Validation', () => {
     test('should reject numbers-only scope', () => {
       const result = validateBranch('feat/123-feature');
       expect(result.isValid).toBe(false);
+    });
+  });
+
+  describe('Utility Functions - checkForbiddenPrefix', () => {
+    test('should reject all forbidden prefixes', () => {
+      for (const prefix of FORBIDDEN_PREFIXES) {
+        const result = checkForbiddenPrefix(`${prefix}/some-branch`);
+        expect(result).not.toBeNull();
+        expect(result.isValid).toBe(false);
+        expect(result.type).toBe('forbidden-prefix');
+        expect(result.details.forbiddenPrefix).toBe(prefix);
+      }
+    });
+
+    test('should allow non-forbidden prefixes', () => {
+      const result = checkForbiddenPrefix('feat/my-feature');
+      expect(result).toBeNull();
+    });
+
+    test('should not match partial prefix patterns', () => {
+      const result = checkForbiddenPrefix('claud/something');
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('Utility Functions - checkExemptions', () => {
+    test('should recognise dependabot branches', () => {
+      const result = checkExemptions('dependabot/npm_and_yarn/lodash-4.17.21');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+      expect(result.details.pattern).toBe('dependabot');
+      expect(result.type).toBe('exemption');
+    });
+
+    test('should recognise renovate branches', () => {
+      const result = checkExemptions('renovate/npm-major-dependencies');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+      expect(result.details.pattern).toBe('renovate');
+      expect(result.type).toBe('exemption');
+    });
+
+    test('should recognise semantic version release branches', () => {
+      const result = checkExemptions('release/v1.2.3');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+      expect(result.details.pattern).toBe('releaseVersioned');
+    });
+
+    test('should recognise release branches with pre-release versions', () => {
+      const result = checkExemptions('release/v2.0.0-beta.1');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+    });
+
+    test('should recognise date-based release branches', () => {
+      const result = checkExemptions('release/2025-01-15');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+      expect(result.details.pattern).toBe('releaseStandard');
+    });
+
+    test('should reject release branches that don\'t match patterns', () => {
+      const result = checkExemptions('release/my-release');
+      expect(result).toBeNull();
+    });
+
+    test('should return null for non-exemption branches', () => {
+      const result = checkExemptions('feat/my-feature');
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('Utility Functions - validateStandardPattern', () => {
+    test('should validate standard pattern branches', () => {
+      const result = validateStandardPattern('feat/user-dashboard');
+      expect(result.isValid).toBe(true);
+      expect(result.details.pattern).toBe('standard');
+      expect(result.details.matchedType).toBe('feat');
+    });
+
+    test('should reject branches without standard pattern', () => {
+      const result = validateStandardPattern('my-branch-without-slash');
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('invalid-pattern');
+    });
+
+    test('should reject branches with invalid type', () => {
+      const result = validateStandardPattern('invalid/my-branch');
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('invalid-type');
+    });
+
+    test('should extract type, scope and title correctly', () => {
+      const result = validateStandardPattern('refactor/component-hooks-consolidation');
+      expect(result.isValid).toBe(true);
+      expect(result.details.matchedType).toBe('refactor');
+      expect(result.details.scope).toBe('component');
+      expect(result.details.title).toBe('hooks-consolidation');
+    });
+  });
+
+  describe('Utility Functions - getCurrentBranch', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+      execSync.mockReset();
+    });
+
+    test('should return current git branch name', () => {
+      execSync.mockReturnValue('feat/my-feature\n');
+      const branch = getCurrentBranch();
+      expect(branch).toBe('feat/my-feature');
+      expect(execSync).toHaveBeenCalledWith(
+        'git rev-parse --abbrev-ref HEAD',
+        expect.objectContaining({ encoding: 'utf-8' })
+      );
+    });
+
+    test('should trim whitespace from branch name', () => {
+      execSync.mockReturnValue('  main  \n');
+      const branch = getCurrentBranch();
+      expect(branch).toBe('main');
+    });
+
+    test('should throw error when git command fails', () => {
+      execSync.mockImplementation(() => {
+        throw new Error('fatal: not a git repository');
+      });
+      expect(() => getCurrentBranch()).toThrow('Not in a git repository or git command failed');
+    });
+
+    test('should throw error when execSync throws any error', () => {
+      execSync.mockImplementation(() => {
+        throw new Error('Some git error');
+      });
+      expect(() => getCurrentBranch()).toThrow('Not in a git repository or git command failed');
+    });
+  });
+
+  describe('Release Branch Pattern Edge Cases', () => {
+    test('should accept release/ branch matching standard pattern', () => {
+      const result = validateBranch('release/my-release');
+      expect(result.isValid).toBe(true);
+      expect(result.type).toBe('valid');
+    });
+
+    test('should accept release/v0.0.0 (semantic version)', () => {
+      const result = validateBranch('release/v0.0.0');
+      expect(result.isValid).toBe(true);
+      expect(result.type).toBe('exemption');
+    });
+
+    test('should accept release/v1.2.3-alpha.1 (pre-release version)', () => {
+      const result = validateBranch('release/v1.2.3-alpha.1');
+      expect(result.isValid).toBe(true);
+      expect(result.type).toBe('exemption');
+    });
+
+    test('should accept release/2026-10-17 (date-based release)', () => {
+      const result = validateBranch('release/2026-10-17');
+      expect(result.isValid).toBe(true);
+      expect(result.type).toBe('exemption');
+    });
+
+    test('should reject release/v1.2 (invalid semantic version)', () => {
+      const result = validateBranch('release/v1.2');
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('invalid-pattern');
     });
   });
 });
