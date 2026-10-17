@@ -4,9 +4,11 @@ This is a code bundle for This One Time on Acid. The original project is availab
 
 ## Running the code
 
-Run `pnpm install` to install the dependencies.
+**Requirements:** Node.js 24+ (see `.nvmrc`)
 
-Run `pnpm dev` to start the development server.
+Run `npm install` to install the dependencies.
+
+Run `npm run dev` to start the development server.
 
 **A Retro 80s CLI Memoir with Neon Terminal Aesthetics**
 
