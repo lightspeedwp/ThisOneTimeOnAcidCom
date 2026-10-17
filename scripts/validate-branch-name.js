@@ -28,6 +28,14 @@ const PATTERNS = {
 };
 
 class ValidationResult {
+  /**
+   * Create a branch validation outcome with optional diagnostic details.
+   * @param {boolean} isValid - Whether the branch name is accepted.
+   * @param {*} branch - Original or normalized branch value being validated.
+   * @param {string} message - Human-readable validation message.
+   * @param {string} [type='valid'] - Validation outcome category.
+   * @param {Object|null} [details=null] - Additional diagnostic fields.
+   */
   constructor(isValid, branch, message, type = 'valid', details = null) {
     this.isValid = isValid;
     this.branch = branch;
@@ -36,6 +44,10 @@ class ValidationResult {
     this.details = details || {};
   }
 
+  /**
+   * Return the validation fields as a plain object for JSON serialization.
+   * @returns {Object} Validity, branch, message, category, and diagnostic details.
+   */
   toJSON() {
     return {
       isValid: this.isValid,
@@ -47,6 +59,11 @@ class ValidationResult {
   }
 }
 
+/**
+ * Read the current branch name from Git in the working directory.
+ * @returns {string} Trimmed branch name reported by Git.
+ * @throws {Error} If Git cannot determine the current branch.
+ */
 function getCurrentBranch() {
   try {
     return execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf-8' }).trim();
@@ -55,6 +72,11 @@ function getCurrentBranch() {
   }
 }
 
+/**
+ * Check whether a branch starts with a prohibited automation prefix.
+ * @param {string} branch - Branch name to inspect.
+ * @returns {ValidationResult|null} Failure result, or null if no prefix matches.
+ */
 function checkForbiddenPrefix(branch) {
   for (const prefix of FORBIDDEN_PREFIXES) {
     if (branch.startsWith(`${prefix}/`)) {
@@ -70,6 +92,12 @@ function checkForbiddenPrefix(branch) {
   return null;
 }
 
+/**
+ * Check dependency bot exemptions and validate special release branch formats.
+ * @param {string} branch - Branch name to inspect.
+ * @returns {ValidationResult|null} Exemption or invalid-release result, or null
+ *   when standard branch validation should continue.
+ */
 function checkExemptions(branch) {
   if (PATTERNS.dependabot.test(branch)) {
     return new ValidationResult(
@@ -124,6 +152,11 @@ function checkExemptions(branch) {
   return null;
 }
 
+/**
+ * Validate the type/scope-title format and its authorised branch type.
+ * @param {string} branch - Branch name to validate against the standard pattern.
+ * @returns {ValidationResult} Validation outcome with parsed fields on success.
+ */
 function validateStandardPattern(branch) {
   if (!PATTERNS.standard.test(branch)) {
     return new ValidationResult(
@@ -159,6 +192,11 @@ function validateStandardPattern(branch) {
   );
 }
 
+/**
+ * Trim and validate a branch value, checking forbidden prefixes before exemptions.
+ * @param {*} branch - Candidate branch value; non-strings and blank names fail.
+ * @returns {ValidationResult} The first applicable validation outcome.
+ */
 function validateBranch(branch) {
   if (!branch || typeof branch !== 'string') {
     return new ValidationResult(
@@ -195,6 +233,12 @@ function validateBranch(branch) {
   return validateStandardPattern(trimmed);
 }
 
+/**
+ * Validate --branch or the current Git branch and print the result.
+ * Also print structured output when --json is supplied, then exit with status
+ * 0 for a valid branch, 1 for an invalid branch, or 2 for an execution error.
+ * @returns {void}
+ */
 function main() {
   try {
     const args = process.argv.slice(2);
