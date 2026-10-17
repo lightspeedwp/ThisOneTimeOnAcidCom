@@ -133,7 +133,7 @@ reviews:
         - Clear documentation of special setup or template testing patterns
         - Expected failure/skip patterns documented if present
 
-    - path: "tests/**/*.spec.ts"
+    - path: "e2e/**/*.spec.ts"
       instructions: |
         Playwright end-to-end tests. Review for:
         - Proper Playwright test structure with describe() and test()
@@ -199,14 +199,14 @@ reviews:
 
     - path: "src/app/utils/*.ts"
       instructions: |
-        Utility services and helpers (application code). Review for:
+        Utility services and helpers (application code consumed by Figma Make). Review for:
         - Clear service organization and single responsibility
         - Proper error handling and validation
         - TypeScript interfaces and type safety
         - No hardcoded configuration (use environment or configuration files)
         - Documentation of service methods and expected inputs
         - Browser API safety (check for undefined globals in client code)
-        - Standard modern JavaScript patterns permitted (optional chaining, nullish coalescing, etc.)
+        - Figma Make bundler compatibility: no optional chaining (?.), nullish coalescing (??), nested ternaries, for...of loops; use grab(), arrayGet(), setProp() from src/app/lib/router.tsx
         - Clear logging patterns (no debug console.log left behind in production code)
         - No imports from src/app/utils/supabase/ (system-protected deployment artefact)
 
@@ -274,9 +274,9 @@ reviews:
 
     - path: "**/*.{tsx,ts,jsx,js,css}"
       instructions: |
-        Catch-all review for all files not covered by specific path rules above.
+        General guidance applied in addition to any matching path-specific rules above.
 
-        **Application code (src/app/components/, src/app/hooks/, src/app/lib/, src/app/utils/consumed by Figma Make):**
+        **Application code consumed by Figma Make (src/app/components/, src/app/hooks/, src/app/lib/, src/app/utils/):**
         - Follow the guidelines in `guidelines/Guidelines.md` for code style and project conventions.
         - Figma Make bundler compatibility: no optional chaining (?.), nullish coalescing (??), nested ternaries, for...of loops.
         - Use grab(), arrayGet(), setProp() helpers from src/app/lib/router.tsx for safe access.
