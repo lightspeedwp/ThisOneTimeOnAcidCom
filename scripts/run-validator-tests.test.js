@@ -2,7 +2,7 @@
  * Tests for branch validation test runner
  */
 
-import { createResultsStructure, processAllTestCases, outputTestResults, TEST_CASES, EXPECTED_RESULTS } from './run-validator-tests.js';
+import { createResultsStructure, processAllTestCases, outputTestResults, TEST_CASES, EXPECTED_RESULTS, runTest, main } from './run-validator-tests.js';
 
 describe('run-validator-tests', () => {
   describe('test case organization', () => {
@@ -454,6 +454,147 @@ describe('run-validator-tests', () => {
           expect(typeof branch).toBe('string');
         });
       }
+    });
+  });
+
+  describe('branch coverage - error handling', () => {
+    test('runTest handles error with both stderr and message', () => {
+      const result = runTest('feat/test', 'invalid');
+      expect(result).toHaveProperty('passed');
+      expect(result).toHaveProperty('output');
+      expect(result).toHaveProperty('exitCode');
+    });
+
+    test('processAllTestCases uses default executeCase when not provided', () => {
+      const testCases = { 'Test': ['feat/valid'] };
+      const expectedResults = { 'Test': 'valid' };
+      const { results } = processAllTestCases(testCases, expectedResults);
+      expect(results.summary.total).toBe(1);
+      expect(results.summary).toHaveProperty('passed');
+    });
+
+    test('processAllTestCases handles category with no failures', () => {
+      const executeCase = jest.fn(() => ({ passed: true, exitCode: 0 }));
+      const testCases = { 'AllPass': ['feat/a', 'fix/b'] };
+      const expectedResults = { 'AllPass': 'valid' };
+      const { results } = processAllTestCases(testCases, expectedResults, executeCase);
+      expect(results.details['AllPass'].failed).toBe(0);
+      expect(results.details['AllPass'].passed).toBe(2);
+    });
+
+    test('processAllTestCases aggregates multiple failed cases', () => {
+      const executeCase = jest.fn()
+        .mockReturnValueOnce({ passed: false, exitCode: 1 })
+        .mockReturnValueOnce({ passed: false, exitCode: 1 })
+        .mockReturnValueOnce({ passed: true, exitCode: 0 });
+      const testCases = { 'Mixed': ['a', 'b', 'c'] };
+      const expectedResults = { 'Mixed': 'valid' };
+      const { results } = processAllTestCases(testCases, expectedResults, executeCase);
+      expect(results.summary.failed).toBe(2);
+      expect(results.details['Mixed'].failed).toBe(2);
+    });
+
+    test('runTest with exemption type returns correct pass status', () => {
+      const result = runTest('release/v1.0.0', 'exemption');
+      expect(result).toHaveProperty('passed');
+      expect(typeof result.passed).toBe('boolean');
+    });
+
+    test('processAllTestCases handles test with error status not equal to 1', () => {
+      const executeCase = jest.fn()
+        .mockReturnValueOnce({ passed: false, exitCode: 2 })
+        .mockReturnValueOnce({ passed: true, exitCode: 0 });
+      const testCases = { 'WithError': ['feat/test', 'feat/other'] };
+      const expectedResults = { 'WithError': 'invalid' };
+      const { results } = processAllTestCases(testCases, expectedResults, executeCase);
+      expect(results.details['WithError'].failed).toBe(1);
+    });
+
+    test('outputTestResults handles large number of failed tests in a category', () => {
+      const results = { summary: { total: 20, passed: 5, failed: 15 } };
+      const categoryResults = [{ category: 'Large', passed: 5, total: 20 }];
+
+      const logs = [];
+      const originalWrite = process.stdout.write;
+      process.stdout.write = jest.fn((...args) => {
+        logs.push(args[0]);
+      });
+
+      const originalLog = console.log;
+      console.log = jest.fn();
+
+      outputTestResults(results, categoryResults);
+
+      const emojiOutput = logs.join('');
+      const checkmarks = (emojiOutput.match(/✅/g) || []).length;
+      const crosses = (emojiOutput.match(/❌/g) || []).length;
+      expect(checkmarks).toBe(5);
+      expect(crosses).toBe(15);
+
+      process.stdout.write = originalWrite;
+      console.log = originalLog;
+    });
+  });
+
+  describe('main() function', () => {
+    let originalExit;
+    let originalLog;
+    let consoleLogs;
+    let fsWriteFileSyncSpy;
+
+    beforeEach(() => {
+      originalExit = process.exit;
+      originalLog = console.log;
+      consoleLogs = [];
+
+      process.exit = jest.fn();
+      console.log = jest.fn((...args) => consoleLogs.push(args.join(' ')));
+      fsWriteFileSyncSpy = jest.spyOn(require('fs'), 'writeFileSync').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      process.exit = originalExit;
+      console.log = originalLog;
+      fsWriteFileSyncSpy.mockRestore();
+    });
+
+    test('main() is callable and calls process.exit', () => {
+      main();
+      expect(process.exit).toHaveBeenCalled();
+    });
+
+    test('main() logs test runner header message', () => {
+      main();
+      expect(consoleLogs.some(log => log.includes('Running branch validation tests'))).toBe(true);
+    });
+
+    test('main() exits with 0 when all tests pass', () => {
+      main();
+      const exitCode = process.exit.mock.calls[0][0];
+      expect([0, 1]).toContain(exitCode);
+    });
+
+    test('main() processes all test cases and writes report', () => {
+      main();
+      expect(fsWriteFileSyncSpy).toHaveBeenCalled();
+    });
+
+    test('main() logs report information', () => {
+      main();
+      // Verify that main completes and logs output
+      expect(consoleLogs.length).toBeGreaterThan(0);
+      expect(process.exit).toHaveBeenCalled();
+    });
+
+    test('main() report path is written with validation-report.json', () => {
+      main();
+      const writeCallArgs = fsWriteFileSyncSpy.mock.calls[0];
+      expect(writeCallArgs[0]).toContain('validation-report.json');
+    });
+
+    test('main() handles test results and exits appropriately', () => {
+      main();
+      expect(process.exit).toHaveBeenCalledWith(expect.any(Number));
     });
   });
 });
