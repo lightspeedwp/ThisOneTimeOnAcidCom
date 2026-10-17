@@ -344,7 +344,6 @@ describe('Branch Name Validation', () => {
     });
   });
 
-<<<<<<< HEAD
   describe('Edge Cases - Empty and Invalid Inputs', () => {
     test('should reject null branch', () => {
       const result = validateBranch(null);
@@ -447,7 +446,9 @@ describe('Branch Name Validation', () => {
 
     test('should reject release branches that don\'t match patterns', () => {
       const result = checkExemptions('release/my-release');
-      expect(result).toBeNull();
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('invalid-release-pattern');
     });
 
     test('should return null for non-exemption branches', () => {
@@ -523,10 +524,10 @@ describe('Branch Name Validation', () => {
   });
 
   describe('Release Branch Pattern Edge Cases', () => {
-    test('should accept release/ branch matching standard pattern', () => {
+    test('should reject release/ branch not matching semantic or date pattern', () => {
       const result = validateBranch('release/my-release');
-      expect(result.isValid).toBe(true);
-      expect(result.type).toBe('valid');
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('invalid-release-pattern');
     });
 
     test('should accept release/v0.0.0 (semantic version)', () => {
@@ -550,9 +551,10 @@ describe('Branch Name Validation', () => {
     test('should reject release/v1.2 (invalid semantic version)', () => {
       const result = validateBranch('release/v1.2');
       expect(result.isValid).toBe(false);
-      expect(result.type).toBe('invalid-pattern');
+      expect(result.type).toBe('invalid-release-pattern');
     });
-=======
+  });
+
   describe('CLI Execution - Main Function', () => {
     const originalArgv = process.argv;
     const originalExit = process.exit;
@@ -608,7 +610,5 @@ describe('Branch Name Validation', () => {
       main();
       expect(process.exit).toHaveBeenCalled();
     });
-
->>>>>>> origin/develop
   });
 });
