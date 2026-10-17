@@ -5,7 +5,7 @@
  * Simulates Netlify's _redirects rules locally for routing validation.
  */
 
-import { createServer } from './lib/test-server-utils.js';
+import { createServer, getDistDir } from './lib/test-server-utils.js';
 
 const PORT = process.env.PORT || 3000;
 const server = createServer();
@@ -15,7 +15,7 @@ const server = createServer();
  */
 server.listen(PORT, () => {
   console.log(`Test server running at http://localhost:${PORT}`);
-  console.log(`Serving from: ${DIST_DIR}`);
+  console.log(`Serving from: ${getDistDir()}`);
   console.log('SPA fallback enabled: all routes fall back to index.html');
 });
 
