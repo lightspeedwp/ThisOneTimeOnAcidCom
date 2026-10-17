@@ -243,9 +243,9 @@ This specification defines a tailored, maintainable governance system for ThisOn
 ### R7. Agentic Workflows & Agents
 
 **R7.1** — Agent inventory and contract specification  
-- Re-enumerate all `.claude/agents/` definitions (baseline: ~18 agents)  
-- Re-enumerate all skills in `.claude/skills/` (baseline: ~5 skills)  
-- For each agent/skill, document:  
+- Document current agent/skill inventory as of Oct 2026: ~18 agents in `.claude/agents/`, ~5 skills in `.claude/skills/`  
+- Inventory is subject to change per separate governance (TOA-264, TOA-265); this spec does not lock it down  
+- For documented agents/skills, include:  
   - Purpose and applicable use cases  
   - Inputs (prompts, context, arguments)  
   - Outputs (code, spec, report, etc.)  
@@ -577,6 +577,7 @@ This specification defines a tailored, maintainable governance system for ThisOn
 ### Session 2026-10-17
 
 - Q: Which evaluation workflows should run by default on every PR, and which should be manual or opt-in? → A: Option B: Only `locked-files-guard` runs by default; others are manual/opt-in (pragmatic approach protecting critical governance files without CI overhead)
+- Q: Should the specification mandate a specific agent/skill set, or document current inventory as subject to change? → A: Option B: Document current baseline (~18 agents, ~5 skills) as inventory of Oct 2026; allow evolution per TOA-264/TOA-265 (flexible; reflects reality that agents and skills are active tooling)
 
 ---
 
