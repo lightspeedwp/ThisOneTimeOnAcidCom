@@ -9,7 +9,7 @@ dist/
 dist-ssr/
 build/
 out/
-export/
+/export/
 .netlify/
 *.tsbuildinfo
 

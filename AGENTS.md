@@ -117,7 +117,7 @@ Run them with npm, for example `npm run build`.
 | `npm run test:unit` | ❌ Failed | Jest config: ESM import syntax error in `scripts/validate-branch-name.test.js`. Needs Jest ESM or CommonJS transpile configuration |
 | `npm run test:e2e` | ⚠️ Requires setup | Playwright browser not installed in agent environment; command structure valid |
 | `npm run journal:validate` | ✅ Passed | Validates 8 files successfully; paths fixed from `journal-content/` to `content/journal/` |
-| `npm run journal:check-links` | ✅ Passed | Checks 9 files, finds 2 internal links (valid), 0 external; all checks pass |
+| `npm run journal:check-links` | ✅ Passed (after fix) | At `070b296`, script read absent `journal-content/` directory; passed after path fix in commit `a20c268`. Checks 9 files, finds 2 internal links (valid), 0 external; all checks pass |
 | `npm run journal:parse` | ✅ Passed | Parses 8 files, exports JSON to `export/journal/`; wordcount and metadata extraction working |
 | Type-checking, linting, browser and accessibility checks | ℹ️ Not applicable | No npm scripts exist for these; manual review against guidelines is current practice |
 

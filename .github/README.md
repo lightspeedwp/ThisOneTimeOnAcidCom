@@ -22,13 +22,13 @@ Centrally managed GitHub Actions workflows. **Do not edit these files**—they a
 
 ## Community Resources (Inherited from Organisation)
 
-The repository inherits community templates, labels, and saved replies from the shared `lightspeedwp/.github` organisation repository:
+The repository inherits community templates from the shared `lightspeedwp/.github` organisation repository:
 
 - **Issue templates** — Inherited from org defaults ([`.github/ISSUE_TEMPLATE/`](https://github.com/lightspeedwp/.github/tree/develop/.github/ISSUE_TEMPLATE))
 - **PR templates** — Inherited from org defaults ([`.github/PULL_REQUEST_TEMPLATE/`](https://github.com/lightspeedwp/.github/tree/develop/.github/PULL_REQUEST_TEMPLATE))
 - **Discussion templates** — Available from org defaults if repository discussions are enabled
-- **Labels** — Inherited from org label definitions ([`labels.yml`](https://github.com/lightspeedwp/.github/blob/develop/.github/labels.yml))
-- **Saved replies** — Available as personal GitHub resources (not repository files)
+- **Labels** — Managed separately in this repository; reference org label definitions ([`labels.yml`](https://github.com/lightspeedwp/.github/blob/develop/.github/labels.yml))
+- **Saved replies** — Personal GitHub resources, not repository files
 
 ### Enabling Local Templates
 
@@ -145,7 +145,7 @@ Key items:
 | Branch validation | Repository (`scripts/validate-branch-name.js`) | Works; maintained locally |
 | `.specify/` configuration | Managed integration | See Spec Kit docs |
 | `.gemini/` configuration | Managed integration | See Gemini docs |
-| Repository labels | Inherited from org | Use org label definitions |
+| Repository labels | Managed separately in repository | Use org label definitions as reference |
 | Community templates | Inherited from org | Inherit unless customisation needed |
 
 ---

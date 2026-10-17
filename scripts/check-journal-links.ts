@@ -11,8 +11,8 @@
  *
  * Usage:
  *   npm run journal:check-links                 check all links
- *   npm run journal:check-links --verbose       show all links including valid ones
- *   npm run journal:check-links --external      also fetch external URLs (slow)
+ *   npm run journal:check-links -- --verbose    show all links including valid ones
+ *   npm run journal:check-links -- --external   also fetch external URLs (slow)
  *
  * Exit codes:
  *   0 — no broken internal links found
