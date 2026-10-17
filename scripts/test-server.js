@@ -32,6 +32,14 @@ const CONTENT_TYPES = {
   '.svg': 'image/svg+xml',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
+  '.xml': 'application/xml',
+  '.pdf': 'application/pdf',
+  '.mp4': 'video/mp4',
+  '.webm': 'video/webm',
+  '.mp3': 'audio/mpeg',
+  '.wav': 'audio/wav',
+  '.txt': 'text/plain',
+  '.csv': 'text/csv',
 };
 
 /**

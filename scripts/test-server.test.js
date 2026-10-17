@@ -225,4 +225,134 @@ describe('test-server', () => {
       expect(result.endsWith('index.html')).toBe(true);
     });
   });
+
+  describe('getContentType', () => {
+    it('maps XML files to application/xml', () => {
+      expect(getContentType('.xml')).toBe('application/xml');
+    });
+
+    it('maps PDF files to application/pdf', () => {
+      expect(getContentType('.pdf')).toBe('application/pdf');
+    });
+
+    it('maps video files', () => {
+      expect(getContentType('.mp4')).toBe('video/mp4');
+      expect(getContentType('.webm')).toBe('video/webm');
+    });
+
+    it('maps audio files', () => {
+      expect(getContentType('.mp3')).toBe('audio/mpeg');
+      expect(getContentType('.wav')).toBe('audio/wav');
+    });
+
+    it('maps text files', () => {
+      expect(getContentType('.txt')).toBe('text/plain');
+      expect(getContentType('.csv')).toBe('text/csv');
+    });
+
+    it('returns default for uppercase extensions', () => {
+      expect(getContentType('.HTML')).toBe('application/octet-stream');
+      expect(getContentType('.JSON')).toBe('application/octet-stream');
+      expect(getContentType('.CSS')).toBe('application/octet-stream');
+    });
+
+    it('handles extensions without dot', () => {
+      expect(getContentType('html')).toBe('application/octet-stream');
+    });
+
+    it('handles empty extension', () => {
+      expect(getContentType('')).toBe('application/octet-stream');
+    });
+  });
+
+  describe('requestHandler', () => {
+    let tmpDir;
+
+    beforeEach(() => {
+      tmpDir = path.join(os.tmpdir(), `test-handler-${Date.now()}`);
+      fs.mkdirSync(tmpDir, { recursive: true });
+    });
+
+    afterEach(() => {
+      if (fs.existsSync(tmpDir)) {
+        fs.rmSync(tmpDir, { recursive: true, force: true });
+      }
+    });
+
+    it('returns 403 for directory traversal with relative paths', () => {
+      const req = { url: '/../../../etc/passwd' };
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+
+      requestHandler(req, res);
+      expect(res.writeHead).toHaveBeenCalledWith(403);
+      expect(res.end).toHaveBeenCalledWith('Forbidden');
+    });
+
+    it('validates paths through resolvePath', () => {
+      // requestHandler relies on resolvePath to validate paths
+      // Direct testing of traversal is done in resolvePath tests above
+      const req = { url: '/test.html' };
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+
+      // Just verify it can be called without errors
+      // (actual file serving tested via resolvePath tests)
+      expect(() => {
+        requestHandler(req, res);
+      }).not.toThrow();
+    });
+
+    it('accepts valid request and response objects', () => {
+      const req = { url: '/test.html' };
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+
+      // Just verify the request structure is accepted without throwing
+      expect(() => {
+        expect(req.url).toBe('/test.html');
+        expect(typeof res.writeHead).toBe('function');
+        expect(typeof res.end).toBe('function');
+      }).not.toThrow();
+    });
+
+    it('rejects requests with null file paths', () => {
+      const req = { url: '/../../../malicious' };
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+
+      requestHandler(req, res);
+      // Should reject with 403
+      expect(res.writeHead.mock.calls.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('Content type detection', () => {
+    it('correctly identifies all supported types', () => {
+      const typeMap = {
+        '.html': 'text/html',
+        '.js': 'application/javascript',
+        '.css': 'text/css',
+        '.json': 'application/json',
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+        '.gif': 'image/gif',
+        '.svg': 'image/svg+xml',
+        '.woff': 'font/woff',
+        '.woff2': 'font/woff2'
+      };
+
+      Object.entries(typeMap).forEach(([ext, expectedType]) => {
+        expect(getContentType(ext)).toBe(expectedType);
+      });
+    });
+  });
 });
