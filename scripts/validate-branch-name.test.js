@@ -6,7 +6,13 @@
 import {
   validateBranch,
   ValidationResult,
-  AUTHORISED_TYPES
+  AUTHORISED_TYPES,
+  checkForbiddenPrefix,
+  checkExemptions,
+  validateStandardPattern,
+  getCurrentBranch,
+  FORBIDDEN_PREFIXES,
+  PATTERNS
 } from './validate-branch-name.js';
 
 describe('Branch Name Validation', () => {
@@ -354,6 +360,196 @@ describe('Branch Name Validation', () => {
     test('should reject numbers-only scope', () => {
       const result = validateBranch('feat/123-feature');
       expect(result.isValid).toBe(false);
+    });
+  });
+
+  describe('checkForbiddenPrefix', () => {
+    test('returns validation error for claude/ prefix', () => {
+      const result = checkForbiddenPrefix('claude/feature');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(false);
+      expect(result.message).toContain('forbidden');
+    });
+
+    test('returns validation error for copilot/ prefix', () => {
+      const result = checkForbiddenPrefix('copilot/fix');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(false);
+    });
+
+    test('returns validation error for openai/ prefix', () => {
+      const result = checkForbiddenPrefix('openai/update');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(false);
+    });
+
+    test('returns null for allowed prefixes', () => {
+      const result = checkForbiddenPrefix('feat/something');
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('checkExemptions', () => {
+    test('recognizes dependabot branches', () => {
+      const result = checkExemptions('dependabot/npm_and_yarn/lodash-4.17.21');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+      expect(result.message).toContain('dependabot');
+    });
+
+    test('recognizes renovate branches', () => {
+      const result = checkExemptions('renovate/npm-major-version-updates');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+      expect(result.message).toContain('renovate');
+    });
+
+    test('recognizes release branches with semantic versioning', () => {
+      const result = checkExemptions('release/v1.2.3');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+    });
+
+    test('recognizes release branches with dates', () => {
+      const result = checkExemptions('release/2024-01-15');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+    });
+
+    test('returns null for non-exemption branches', () => {
+      const result = checkExemptions('feat/normal-feature');
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('validateStandardPattern', () => {
+    test('validates correct pattern', () => {
+      const result = validateStandardPattern('feat/user-authentication');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(true);
+    });
+
+    test('rejects invalid patterns', () => {
+      const result = validateStandardPattern('invalid-branch');
+      expect(result).not.toBeNull();
+      expect(result.isValid).toBe(false);
+    });
+
+    test('accepts multiple scope parts', () => {
+      const result = validateStandardPattern('feat/user-auth-flow');
+      expect(result.isValid).toBe(true);
+    });
+  });
+
+  describe('ValidationResult class', () => {
+    test('creates valid result', () => {
+      const result = new ValidationResult(true, 'feat/test', 'Valid message', 'standard');
+      expect(result.isValid).toBe(true);
+      expect(result.branch).toBe('feat/test');
+      expect(result.message).toBe('Valid message');
+      expect(result.type).toBe('standard');
+    });
+
+    test('toJSON includes required fields', () => {
+      const result = new ValidationResult(true, 'feat/test', 'Valid message', 'standard', { extra: 'data' });
+      const json = result.toJSON();
+      expect(json.isValid).toBe(true);
+      expect(json.branch).toBe('feat/test');
+      expect(json.type).toBe('standard');
+      expect(json.message).toBe('Valid message');
+    });
+
+    test('toJSON includes details when provided', () => {
+      const details = { forbiddenPrefix: 'claude' };
+      const result = new ValidationResult(false, 'claude/test', 'Invalid', 'forbidden-prefix', details);
+      const json = result.toJSON();
+      expect(json.details).toEqual(details);
+    });
+
+    test('creates result with default details', () => {
+      const result = new ValidationResult(true, 'feat/test', 'Valid', 'standard');
+      expect(result.details).toEqual({});
+    });
+  });
+
+  describe('getCurrentBranch', () => {
+    test('throws error when not in git repository', () => {
+      const execSync = jest.spyOn(require('child_process'), 'execSync')
+        .mockImplementation(() => {
+          throw new Error('fatal: not a git repository');
+        });
+
+      try {
+        expect(() => {
+          getCurrentBranch();
+        }).toThrow('Not in a git repository');
+      } finally {
+        execSync.mockRestore();
+      }
+    });
+
+    test('returns branch name when in git repository', () => {
+      const execSync = jest.spyOn(require('child_process'), 'execSync')
+        .mockReturnValue('feat/test-branch\n');
+
+      try {
+        const branch = getCurrentBranch();
+        expect(branch).toBe('feat/test-branch');
+      } finally {
+        execSync.mockRestore();
+      }
+    });
+
+    test('trims whitespace from git output', () => {
+      const execSync = jest.spyOn(require('child_process'), 'execSync')
+        .mockReturnValue('  main  \n');
+
+      try {
+        const branch = getCurrentBranch();
+        expect(branch).toBe('main');
+      } finally {
+        execSync.mockRestore();
+      }
+    });
+  });
+
+  describe('AUTHORISED_TYPES', () => {
+    test('contains expected branch types', () => {
+      expect(AUTHORISED_TYPES).toContain('feat');
+      expect(AUTHORISED_TYPES).toContain('fix');
+      expect(AUTHORISED_TYPES).toContain('docs');
+      expect(AUTHORISED_TYPES).toContain('test');
+      expect(AUTHORISED_TYPES).toContain('refactor');
+    });
+
+    test('is an array', () => {
+      expect(Array.isArray(AUTHORISED_TYPES)).toBe(true);
+    });
+  });
+
+  describe('FORBIDDEN_PREFIXES', () => {
+    test('contains forbidden prefixes', () => {
+      expect(FORBIDDEN_PREFIXES).toContain('claude');
+      expect(FORBIDDEN_PREFIXES).toContain('copilot');
+      expect(FORBIDDEN_PREFIXES).toContain('openai');
+    });
+
+    test('is an array', () => {
+      expect(Array.isArray(FORBIDDEN_PREFIXES)).toBe(true);
+    });
+  });
+
+  describe('PATTERNS', () => {
+    test('includes expected pattern keys', () => {
+      expect(PATTERNS).toHaveProperty('dependabot');
+      expect(PATTERNS).toHaveProperty('renovate');
+      expect(PATTERNS).toHaveProperty('releaseVersioned');
+      expect(PATTERNS).toHaveProperty('releaseStandard');
+      expect(PATTERNS).toHaveProperty('standard');
+    });
+
+    test('pattern objects have test methods', () => {
+      expect(typeof PATTERNS.standard.test).toBe('function');
     });
   });
 });
