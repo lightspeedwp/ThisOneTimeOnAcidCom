@@ -24,7 +24,7 @@ pre-push:
   parallel: false
   commands:
     branch-validate:
-      run: npm run validate:branch-name
+      run: npm run validate:push-branch
       skip:
         - merge
         - rebase

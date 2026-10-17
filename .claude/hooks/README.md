@@ -14,7 +14,7 @@ Automate tasks within Claude Code sessions:
 
 ### Git Hooks (via Lefthook)
 Automate validation at critical Git operations:
-- **pre-commit** — Runs before staging changes (branch validation, file checks)
+- **pre-commit** — Runs after staging changes and before creating commit (branch validation, file checks)
 - **pre-push** — Runs before pushing to remote (branch validation, build checks)
 
 This directory contains Claude Code hook definitions; Git hooks are configured in `lefthook.yml`.
@@ -37,7 +37,7 @@ The hooks are installed to `.git/hooks/pre-commit` and `.git/hooks/pre-push` and
 
 ### Pre-commit Hook
 
-**Purpose:** Validate branch naming and journal content before staging
+**Purpose:** Validate branch naming and journal content after staging and before commit creation
 
 **Runs:**
 1. `npm run validate:branch-name` — Validates branch name follows `{type}/{scope}-{title}` pattern
@@ -112,7 +112,21 @@ Remove SessionStart hook if validation noise becomes problematic (uncommon).
 
 ## Bypassing Git Hooks
 
-Git hooks can be bypassed if necessary (e.g., emergency fixes):
+To skip all Lefthook checks for one commit:
+
+```bash
+LEFTHOOK=0 git commit -m "message"
+```
+
+Do not export `LEFTHOOK=0` unless the bypass must apply to multiple operations in the same shell session.
+
+For selective exclusions, assign tags to commands in `lefthook.yml` and use `LEFTHOOK_EXCLUDE` with those tags:
+
+```bash
+LEFTHOOK_EXCLUDE=lint git commit -m "message"
+```
+
+Alternatively, use `--no-verify` to skip the entire hook:
 
 ```bash
 # Bypass pre-commit hook
@@ -123,7 +137,7 @@ git push --no-verify
 ```
 
 **⚠️ Use with caution.** Bypassing hooks should be rare. If you find yourself doing this frequently, consider:
-- Whether your branch name is correct (consider `/aiops/branches-agent-enforce-local-validation` pattern)
+- Whether your branch name is correct (consider `feat/your-feature-name` pattern)
 - Whether your build is failing and needs investigation
 - Whether you should create a separate issue to track the problem
 
@@ -216,21 +230,6 @@ Changes take effect immediately. Reinstall hooks if configuration is not recogni
 ```bash
 npx lefthook install --force
 ```
-
-### Disabling Specific Commands
-
-To disable a single command without removing it:
-
-```bash
-# In environment or shell
-export LEFTHOOK=0
-git commit -m "message"
-
-# Or disable just pre-commit
-export LEFTHOOK_PRE_COMMIT=0
-```
-
-Alternatively, use `--no-verify` to skip the entire hook.
 
 ## References
 
