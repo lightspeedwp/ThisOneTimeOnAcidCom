@@ -4,6 +4,10 @@ inheritance: true
 
 language: en-GB
 
+knowledge_base:
+  code_guidelines:
+    filePatterns: []
+
 reviews:
   profile: chill
   path_instructions:
@@ -180,6 +184,14 @@ reviews:
         - Documentation of utility purposes and usage
         - Protection of implementation (these are critical utilities)
 
+    - path: "public/**/*"
+      instructions: |
+        Static assets and public files at repository root. Review for:
+        - No hardcoded credentials or sensitive data
+        - Asset optimization and modern formats where applicable
+        - Redirect rules properly configured (_redirects file)
+        - SPA fallback rules for client-side routing
+
     - path: "src/app/public/**/*"
       instructions: |
         Static assets and public files. Review for:
@@ -187,6 +199,16 @@ reviews:
         - Asset optimization and modern formats where applicable
         - Proper metadata in manifest.json for PWA functionality
         - Redirect rules properly configured
+
+    - path: "scripts/**/*.{ts,js}"
+      instructions: |
+        Build and utility scripts at repository root. Review for:
+        - Clear script purpose and documentation
+        - Proper Node.js error handling
+        - No hardcoded paths (use relative/configurable paths)
+        - Compatibility with npm (not pnpm-specific)
+        - Safe file operations with proper guards
+        - Exit codes appropriate for CI/CD usage
 
     - path: "src/app/scripts/**/*.{ts,js}"
       instructions: |

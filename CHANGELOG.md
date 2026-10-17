@@ -30,6 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Accessibility testing requirements
     - Component and unit test isolation patterns
 
+#### Inheritance Configuration & Repository Scope
+
+- **`knowledge_base.code_guidelines.filePatterns`**: Set to empty array to exclude inherited WordPress-specific guidelines (block-plugin.md, block-theme.md) from applying to React code reviews. This prevents WordPress coding standards from interfering with React/TypeScript reviews while preserving other benefits of inherited configuration.
+
 #### Application Source Code Guidance (`src/` folder architecture)
 
 - **`src/app/components/**/*.tsx`** — React component review guidance:
@@ -79,7 +83,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Asset optimisation and modern formats
   - PWA manifest metadata
   - Redirect rule correctness
-- **`src/app/scripts/**/*.{ts,js}`** — Build and utility scripts:
+- **`public/**/*`** — Root-level static assets:
+  - Redirect rules and SPA fallback configuration
+  - Asset optimisation and modern formats
+  - No credential or sensitive data exposure
+- **`scripts/**/*.{ts,js}`** — Root-level build and utility scripts:
+  - Clear script purpose and documentation
+  - Node.js error handling and exit codes
+  - npm compatibility (not pnpm-specific)
+  - Safe file operations
+- **`src/app/scripts/**/*.{ts,js}`** — Application build and utility scripts:
   - Clear script purpose and documentation
   - Proper Node.js error handling
   - No hardcoded paths
