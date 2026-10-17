@@ -20,7 +20,9 @@ const __dirname = path.dirname(__filename);
 const VALIDATION_SCRIPT = path.join(__dirname, 'validate-branch-name.js');
 
 /**
- * Extract branch name from a Git ref (e.g., refs/heads/main -> main)
+ * Extract branch name from a Git ref (e.g., refs/heads/main -> main).
+ * @param {string} ref - The Git reference string
+ * @returns {string} The branch name without the ref prefix
  */
 function extractBranchName(ref) {
   if (ref.startsWith('refs/heads/')) {
@@ -30,7 +32,9 @@ function extractBranchName(ref) {
 }
 
 /**
- * Validate a single branch using the main validation script
+ * Validate a single branch using the main validation script.
+ * @param {string} branch - The branch name to validate
+ * @returns {{valid: boolean, message?: string, exitCode?: number}} Validation result
  */
 function validateBranch(branch) {
   try {
@@ -50,7 +54,8 @@ function validateBranch(branch) {
 }
 
 /**
- * Main function: read stdin and validate each pushed ref
+ * Main function: read stdin and validate each pushed ref.
+ * Processes pre-push input format and validates each branch.
  */
 async function main() {
   try {
