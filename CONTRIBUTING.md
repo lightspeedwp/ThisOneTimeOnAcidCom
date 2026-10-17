@@ -127,6 +127,62 @@ node --test tests/speckit.test.mjs
 
 No automated linting, type-checking, browser or accessibility checks are configured. Manual review against the guidelines is the current quality gate. Do not describe these checks as passed unless you actually performed them.
 
+## Using Spec Kit
+
+For significant features, governance changes, or architectural decisions, follow the specification-driven development workflow:
+
+### Workflow phases
+
+| Phase | Command | Deliverable | Purpose |
+|---|---|---|---|
+| 1. Specify | `/speckit-specify` | `spec.md` | Define requirements, user stories, acceptance criteria |
+| 2. Clarify | `/speckit-clarify` | Updated spec with Q&A | Resolve ambiguities and get answers recorded |
+| 3. Plan | `/speckit-plan` | `plan.md`, `research.md` | Technical design, architecture, decision rationale |
+| 4. Decompose | `/speckit-tasks` | `tasks.md` | Break planning into actionable implementation tasks |
+| 5. Implement | Your tools | Feature branch | Execute tasks and commit work |
+
+All outputs go to the canonical `.github/specs/` directory (`.github/specs/{NNN-feature-slug}/`). Feature directories are automatically numbered sequentially starting from 001.
+
+### Example: Create a new specification
+
+```bash
+# 1. Start the spec workflow
+/speckit-specify
+
+# 2. Answer clarification questions
+/speckit-clarify
+
+# 3. Review and approve technical plan
+/speckit-plan
+
+# 4. Break down into tasks
+/speckit-tasks
+
+# 5. Implement tasks on your feature branch
+# (following the task breakdown from phase 4)
+```
+
+### When to use Spec Kit
+
+✅ **Use Spec Kit for:**
+- New features with complex requirements
+- Governance or architectural changes
+- Multi-day implementation efforts
+- Decisions that affect multiple components
+- Anything needing written clarification before starting
+
+❌ **Skip Spec Kit for:**
+- Small bug fixes
+- One-line documentation updates
+- Routine maintenance with clear scope
+- Straightforward dependency updates
+
+### More information
+
+- **Specification catalog:** [.github/specs/CATALOG.md](.github/specs/CATALOG.md) — browse all active specifications
+- **Spec Kit configuration:** [.specify/](.specify/) — templates and routing rules
+- **Maintenance procedures:** [.github/specs/MAINTENANCE.md](.github/specs/MAINTENANCE.md) — how to create, update, archive specs
+
 ## Coding conventions
 
 All conventions are documented in **[guidelines/Guidelines.md](guidelines/Guidelines.md)**. Follow the reading order in [guidelines/README.md](guidelines/README.md). The key rules are:
