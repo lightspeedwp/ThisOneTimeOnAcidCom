@@ -1,16 +1,16 @@
 # Phase 1b: Media Library Recovery Pilot — Task Breakdown
 
 **Specification:** `PHASE1B_RECOVERY_PROMPT.md`  
-**Status:** Ready for implementation  
+**Status:** In progress (Phase 1 ✅ Complete, Phase 2 Ready to start)  
 **Total Tasks:** 6 phases (Setup, Asset Selection, Figma Access, Extraction, Validation, Reporting)
 
 ---
 
 ## Task Execution Order
 
-**Phase 1: Setup** (sequential, ~2 hours)
-- T010 - Asset selection & staging
-- T011 - Figma Make project access validation
+**Phase 1: Setup** (sequential, ~2 hours) ✅ COMPLETE
+- T010 - Asset selection & staging ✅ Done
+- T011 - Figma Make project access validation ✅ Done
 
 **Phase 2: Extraction** (sequential, 2–3 days)
 - T012 - Extract assets from Figma [P] (parallelizable per asset)
@@ -26,19 +26,19 @@
 
 ### Phase 1: Setup & Preparation
 
-#### T010: Asset Selection & Staging
+#### T010: Asset Selection & Staging ✅ COMPLETE
 **Dependencies:** FULL-CATALOGUE.json (Phase 1a complete)  
 **Effort:** 4 hours  
 **Files:** PHASE1B_RECOVERY_PROMPT.md, FULL-CATALOGUE.json
 
 **Acceptance Criteria:**
-- [ ] Reviewed FULL-CATALOGUE.json and categorized all 56 assets
-- [ ] Selected 10–15 pilot assets using priority tier criteria
-- [ ] Documented selection rationale (category coverage, mapped/unmapped mix)
-- [ ] Created list with figmaAssetId for each selected asset
-- [ ] Confirmed ≥3 different portfolio categories represented
-- [ ] Included all 3 hero images (high priority)
-- [ ] Documented in RECOVERY-PILOT-REPORT.md § Pilot Assets section
+- [x] Reviewed FULL-CATALOGUE.json and categorized all 56 assets
+- [x] Selected 10–15 pilot assets using priority tier criteria
+- [x] Documented selection rationale (category coverage, mapped/unmapped mix)
+- [x] Created list with figmaAssetId for each selected asset
+- [x] Confirmed ≥3 different portfolio categories represented
+- [x] Included all 3 hero images (high priority)
+- [x] Documented in RECOVERY-PILOT-REPORT.md § Pilot Assets section
 
 **Subtasks:**
 1. Load FULL-CATALOGUE.json and group by category (hero, portfolio series, unmapped)
@@ -54,19 +54,19 @@
 
 ---
 
-#### T011: Figma Make Project Access Validation
+#### T011: Figma Make Project Access Validation ✅ COMPLETE
 **Dependencies:** TOA-284 (Phase 1c infrastructure team coordination)  
 **Effort:** 2–3 hours  
 **Files:** .env (git-ignored), test script, documentation
 
 **Acceptance Criteria:**
-- [ ] Confirmed access to Figma Make project (team/project IDs known)
-- [ ] Figma API token obtained and securely stored (.env, not committed)
-- [ ] Authentication test successful (GET /v1/files/{fileKey} returns 200)
-- [ ] Asset export endpoint tested (GET /v1/files/{fileKey}/nodes for sample asset)
-- [ ] Documented API structure: how to resolve figmaAssetId → file + node ID
-- [ ] Created test script (`test-figma-access.js`) for future validation
-- [ ] Estimated extraction time per asset based on API response times
+- [x] Confirmed access to Figma Make project (team/project IDs known)
+- [x] Figma API token obtained and securely stored (.env, not committed)
+- [x] Authentication test successful (GET /v1/files/{fileKey} returns 200)
+- [x] Asset export endpoint tested (GET /v1/files/{fileKey}/nodes for sample asset)
+- [x] Documented API structure: how to resolve figmaAssetId → file + node ID
+- [x] Created test script (`test-figma-access.js`) for future validation
+- [x] Estimated extraction time per asset based on API response times
 
 **Subtasks:**
 1. Coordinate with Phase 1c team on Figma Make project structure
