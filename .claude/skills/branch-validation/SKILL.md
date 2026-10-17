@@ -292,15 +292,64 @@ Invalid branch names cause:
 - ✗ Manual template assignment required
 - ✗ CI re-run credits wasted
 
+## Branch Cleanup Workflow
+
+Once branches are merged, they may become candidates for cleanup if stale (inactive beyond 30 days by default). Use the branch cleanup script to analyze and report on candidate branches for deletion:
+
+```bash
+# Generate a report-only analysis (no deletions)
+node scripts/cleanup-branches.js
+
+# Customise inactivity threshold
+node scripts/cleanup-branches.js --inactiveDays=45
+
+# Exclude specific patterns from cleanup consideration
+node scripts/cleanup-branches.js --excludePatterns="feature-.*|experiment-.*"
+
+# Generate JSON report for scripting
+node scripts/cleanup-branches.js --reportFormat=json
+```
+
+See `.claude/agents/branches-agent.md` under "Branch Cleanup Workflow" for full details.
+
+## Safety Boundaries
+
+### Branch Name Validation
+
+Invalid branch names (e.g. `claude/`, `copilot/` prefixes) are rejected at:
+1. **Creation time** — Pre-commit hooks prevent invalid branch creation
+2. **Push time** — Pre-push validation scripts check names before remote push
+3. **PR routing time** — PR templates route based on valid branch prefix
+
+Invalid names do **not** block branch cleanup analysis. If a branch with a forbidden prefix is created and merged, it may still appear in cleanup reports as a deletion candidate.
+
+### Cleanup Safety
+
+The cleanup script is **report-only**:
+- ✅ Generates Markdown and JSON reports
+- ✅ Never executes branch deletions
+- ✅ Never pushes deletions to remote
+- ✅ Never removes local branches
+- ✅ Fails closed on uncertain merge status
+- ✅ Protects automated branches (Dependabot, Renovate)
+
+### Enforcement
+
+Invalid branch names are caught early through:
+- **Lefthook pre-push hooks** — `lefthook run pre-push`
+- **GitHub Actions** — `npm run validate:branch-name`
+- **Manual validation** — `node scripts/validate-branch-name.js --branch <name>`
+
 ## References
 
 - `.github/CLAUDE.md` – Branch naming rules (organization-wide)
 - `.github/docs/BRANCHING_STRATEGY.md` – Strategy documentation (in .github repo)
-- `.claude/agents/branches-agent.md` – Interactive branch naming agent
+- `.claude/agents/branches-agent.md` – Interactive branch naming agent and cleanup workflow
 - `docs/BRANCH_NAMING_LOCAL.md` – Local developer quick reference
-- `scripts/validate-branch-name.js` – Validation script
+- `scripts/validate-branch-name.js` – Branch validation script
+- `scripts/cleanup-branches.js` – Branch cleanup analysis (report-only)
 - `CONTRIBUTING.md` – Contribution workflow
 
 ---
 
-*Use this skill to validate branch names before pushing to ensure automation compatibility.*
+*Use this skill to validate branch names before pushing to ensure automation compatibility. Use the cleanup script to identify stale branches for removal.*
