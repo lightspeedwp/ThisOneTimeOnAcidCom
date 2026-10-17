@@ -133,7 +133,7 @@ reviews:
         - Clear documentation of special setup or template testing patterns
         - Expected failure/skip patterns documented if present
 
-    - path: "tests/**/*.spec.ts"
+    - path: "e2e/**/*.spec.ts"
       instructions: |
         Playwright end-to-end tests. Review for:
         - Proper Playwright test structure with describe() and test()
