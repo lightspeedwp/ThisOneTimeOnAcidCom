@@ -18,6 +18,9 @@ import { REASON_CODES, PROTECTED_BRANCHES, AVG_STORAGE_BYTES_PER_COMMIT } from '
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import { execFileSync } from 'child_process';
+
+jest.mock('child_process');
 
 // ============================================================================
 // Helpers for testing
@@ -624,6 +627,79 @@ describe('Report formatting', () => {
     expect(parsed.summary.errorCount).toBe(2);
 
     cleanupTempDir(tempDir);
+  });
+});
+
+describe('getRemoteBranches', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    execFileSync.mockReset();
+  });
+
+  it('returns list of remote branches with origin/ prefix removed', () => {
+    execFileSync.mockReturnValue('origin/main\norigin/develop\norigin/feat/feature-1\n');
+
+    const branches = getRemoteBranches();
+    expect(branches).toEqual(['main', 'develop', 'feat/feature-1']);
+    expect(execFileSync).toHaveBeenCalledWith(
+      'git',
+      ['for-each-ref', 'refs/remotes/origin', '--format=%(refname:short)'],
+      expect.any(Object)
+    );
+  });
+
+  it('includes HEAD in output (filtered by caller)', () => {
+    execFileSync.mockReturnValue('origin/main\nHEAD\n');
+
+    const branches = getRemoteBranches();
+    expect(branches).toEqual(['main', 'HEAD']);
+  });
+
+  it('handles empty remote repository', () => {
+    execFileSync.mockReturnValue('\n');
+
+    const branches = getRemoteBranches();
+    expect(branches).toEqual([]);
+  });
+
+  it('strips origin/ prefix from all branch names', () => {
+    execFileSync.mockReturnValue('origin/main\norigin/release/v1.0.0\norigin/hotfix/bug-fix\n');
+
+    const branches = getRemoteBranches();
+    expect(branches).toEqual(['main', 'release/v1.0.0', 'hotfix/bug-fix']);
+  });
+
+  it('trims whitespace from each line', () => {
+    execFileSync.mockReturnValue('  origin/main  \n  origin/develop  \n\n');
+
+    const branches = getRemoteBranches();
+    expect(branches).toEqual(['main', 'develop']);
+  });
+
+  it('throws error when git command fails', () => {
+    execFileSync.mockImplementation(() => {
+      throw new Error('fatal: not a git repository');
+    });
+
+    expect(() => getRemoteBranches()).toThrow('Repository access failed');
+  });
+
+  it('includes git stderr in error message', () => {
+    const error = new Error('Command failed');
+    error.stderr = 'fatal: could not read remote refs';
+    execFileSync.mockImplementation(() => {
+      throw error;
+    });
+
+    expect(() => getRemoteBranches()).toThrow('could not read remote refs');
+  });
+
+  it('filters empty strings from output', () => {
+    execFileSync.mockReturnValue('origin/main\n\norigin/develop\n');
+
+    const branches = getRemoteBranches();
+    expect(branches).toEqual(['main', 'develop']);
+    expect(branches.length).toBe(2);
   });
 });
 
