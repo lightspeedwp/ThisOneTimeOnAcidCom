@@ -363,6 +363,64 @@ describe('Branch Name Validation', () => {
     });
   });
 
+  describe('validateStandardPattern', () => {
+    test('should extract matched type correctly', () => {
+      const result = validateBranch('feat/user-dashboard');
+      expect(result.details.matchedType).toBe('feat');
+    });
+
+    test('should handle unknown type gracefully', () => {
+      const result = validateBranch('unknown/feature');
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('invalid-type');
+    });
+
+    test('should extract scope and title from complex branch', () => {
+      const result = validateBranch('refactor/api-response-structure-v2');
+      expect(result.details.scope).toBe('api');
+      expect(result.details.title).toBe('response-structure-v2');
+    });
+
+    test('should validate branch with minimum valid structure', () => {
+      const result = validateBranch('fix/a-b');
+      expect(result.isValid).toBe(true);
+      expect(result.details.scope).toBe('a');
+      expect(result.details.title).toBe('b');
+    });
+  });
+
+  describe('Integration: checkForbiddenPrefix and checkExemptions flow', () => {
+    test('forbidden prefix takes precedence over pattern check', () => {
+      const result = validateBranch('claude/feat-like-but-forbidden');
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('forbidden-prefix');
+    });
+
+    test('exemption takes precedence over standard pattern', () => {
+      const result = validateBranch('dependabot/anything/goes/here');
+      expect(result.isValid).toBe(true);
+      expect(result.type).toBe('exemption');
+    });
+
+    test('release exemption with date format', () => {
+      const result = validateBranch('release/2025-06-30');
+      expect(result.isValid).toBe(true);
+      expect(result.type).toBe('exemption');
+    });
+
+    test('invalid date format in release', () => {
+      const result = validateBranch('release/25-06-30');
+      expect(result.isValid).toBe(false);
+    });
+
+    test('complete validation flow for valid branch', () => {
+      const result = validateBranch('perf/database-query-optimization');
+      expect(result.isValid).toBe(true);
+      expect(result.message).toContain('matches');
+      expect(result.details.matchedType).toBe('perf');
+    });
+  });
+
   describe('checkForbiddenPrefix', () => {
     test('returns validation error for claude/ prefix', () => {
       const result = checkForbiddenPrefix('claude/feature');

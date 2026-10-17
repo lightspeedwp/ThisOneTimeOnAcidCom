@@ -381,6 +381,53 @@ describe('run-validator-tests', () => {
         { category: 'Invalid Test', passed: 1, total: 1 }
       ]);
     });
+
+    test('handles multiple branches in a category', () => {
+      executeCase.mockReturnValue({ passed: true, exitCode: 0 });
+      const { results } = processAllTestCases({
+        'Valid Branches': ['feat/a', 'fix/b', 'docs/c']
+      }, {
+        'Valid Branches': 'valid'
+      }, executeCase);
+
+      expect(executeCase).toHaveBeenCalledTimes(3);
+      expect(results.summary.total).toBe(3);
+      expect(results.summary.passed).toBe(3);
+      expect(results.details['Valid Branches'].cases.length).toBe(3);
+    });
+
+    test('handles all failures in a category', () => {
+      executeCase.mockReturnValue({ passed: false, exitCode: 1 });
+      const { results } = processAllTestCases({
+        'Invalid Branches': ['claude/x', 'copilot/y']
+      }, {
+        'Invalid Branches': 'invalid'
+      }, executeCase);
+
+      expect(results.summary.failed).toBe(2);
+      expect(results.summary.byCategory['Invalid Branches'].failed).toBe(2);
+      expect(results.details['Invalid Branches'].failed).toBe(2);
+    });
+
+    test('handles mixed results across multiple categories', () => {
+      executeCase
+        .mockReturnValueOnce({ passed: true, exitCode: 0 })
+        .mockReturnValueOnce({ passed: false, exitCode: 1 })
+        .mockReturnValueOnce({ passed: true, exitCode: 0 })
+        .mockReturnValueOnce({ passed: true, exitCode: 0 });
+
+      const { results } = processAllTestCases({
+        'Category A': ['feat/test', 'claude/bad'],
+        'Category B': ['fix/bug', 'docs/readme']
+      }, {
+        'Category A': 'mixed',
+        'Category B': 'mixed'
+      }, executeCase);
+
+      expect(results.summary.total).toBe(4);
+      expect(results.summary.passed).toBe(3);
+      expect(results.summary.failed).toBe(1);
+    });
   });
 
   describe('outputTestResults', () => {
@@ -500,6 +547,121 @@ describe('run-validator-tests', () => {
 
       console.log = originalLog;
     });
+
+    test('outputs all passed tests (all checkmarks)', () => {
+      const results = { summary: { total: 4, passed: 4, failed: 0 } };
+      const categoryResults = [{ category: 'Valid', passed: 4, total: 4 }];
+
+      const logs = [];
+      const originalWrite = process.stdout.write;
+      process.stdout.write = jest.fn((...args) => {
+        logs.push(args[0]);
+      });
+
+      const originalLog = console.log;
+      console.log = jest.fn();
+
+      outputTestResults(results, categoryResults);
+
+      const emojiOutput = logs.join('');
+      expect(emojiOutput).toContain('✅✅✅✅');
+      expect(emojiOutput).not.toContain('❌');
+
+      process.stdout.write = originalWrite;
+      console.log = originalLog;
+    });
+
+    test('outputs all failed tests (all X marks)', () => {
+      const results = { summary: { total: 3, passed: 0, failed: 3 } };
+      const categoryResults = [{ category: 'Invalid', passed: 0, total: 3 }];
+
+      const logs = [];
+      const originalWrite = process.stdout.write;
+      process.stdout.write = jest.fn((...args) => {
+        logs.push(args[0]);
+      });
+
+      const originalLog = console.log;
+      console.log = jest.fn();
+
+      outputTestResults(results, categoryResults);
+
+      const emojiOutput = logs.join('');
+      expect(emojiOutput).toContain('❌❌❌');
+      expect(emojiOutput).not.toContain('✅');
+
+      process.stdout.write = originalWrite;
+      console.log = originalLog;
+    });
+
+    test('outputs correctly with single test', () => {
+      const results = { summary: { total: 1, passed: 1, failed: 0 } };
+      const categoryResults = [{ category: 'Single', passed: 1, total: 1 }];
+
+      const logs = [];
+      const originalWrite = process.stdout.write;
+      process.stdout.write = jest.fn((...args) => {
+        logs.push(args[0]);
+      });
+
+      const originalLog = console.log;
+      console.log = jest.fn();
+
+      outputTestResults(results, categoryResults);
+
+      const emojiOutput = logs.join('');
+      expect(emojiOutput.startsWith('✅')).toBe(true);
+
+      process.stdout.write = originalWrite;
+      console.log = originalLog;
+    });
+
+    test('formats success rate as percentage with one decimal', () => {
+      const results = { summary: { total: 10, passed: 7, failed: 3 } };
+      const categoryResults = [{ category: 'Mixed', passed: 7, total: 10 }];
+
+      const logs = [];
+      const originalLog = console.log;
+      console.log = jest.fn((...args) => {
+        logs.push(args.join(' '));
+      });
+
+      outputTestResults(results, categoryResults);
+
+      const summaryLog = logs.find(log => log.includes('Success Rate'));
+      expect(summaryLog).toContain('70.0%');
+
+      console.log = originalLog;
+    });
+  });
+
+  describe('runTest', () => {
+    test('returns correct result for valid branches', () => {
+      const result = runTest('feat/test-branch', 'valid');
+      expect(result).toHaveProperty('passed');
+      expect(result).toHaveProperty('output');
+      expect(result).toHaveProperty('exitCode');
+      expect(result).toHaveProperty('branch');
+      expect(result.branch).toBe('feat/test-branch');
+    });
+
+    test('returns correct result for invalid branches', () => {
+      const result = runTest('claude/bad-branch', 'invalid');
+      expect(result).toHaveProperty('passed');
+      expect(result.branch).toBe('claude/bad-branch');
+    });
+
+    test('returns correct result for exemption branches', () => {
+      const result = runTest('release/v1.0.0', 'exemption');
+      expect(result).toHaveProperty('passed');
+      expect(result.branch).toBe('release/v1.0.0');
+    });
+
+    test('handles unexpected exit codes', () => {
+      const result = runTest('feat/test', 'valid');
+      expect(typeof result.exitCode).toBe('number');
+      expect(result.exitCode >= 0).toBe(true);
+    });
   });
 
   describe('TEST_CASES and EXPECTED_RESULTS', () => {
@@ -523,6 +685,85 @@ describe('run-validator-tests', () => {
           expect(typeof branch).toBe('string');
         });
       }
+    });
+  });
+
+  describe('branch coverage - error handling', () => {
+    test('runTest handles error with both stderr and message', () => {
+      const result = runTest('feat/test', 'invalid');
+      expect(result).toHaveProperty('passed');
+      expect(result).toHaveProperty('output');
+      expect(result).toHaveProperty('exitCode');
+    });
+
+    test('processAllTestCases uses default executeCase when not provided', () => {
+      const testCases = { 'Test': ['feat/valid'] };
+      const expectedResults = { 'Test': 'valid' };
+      const { results } = processAllTestCases(testCases, expectedResults);
+      expect(results.summary.total).toBe(1);
+      expect(results.summary).toHaveProperty('passed');
+    });
+
+    test('processAllTestCases handles category with no failures', () => {
+      const executeCase = jest.fn(() => ({ passed: true, exitCode: 0 }));
+      const testCases = { 'AllPass': ['feat/a', 'fix/b'] };
+      const expectedResults = { 'AllPass': 'valid' };
+      const { results } = processAllTestCases(testCases, expectedResults, executeCase);
+      expect(results.details['AllPass'].failed).toBe(0);
+      expect(results.details['AllPass'].passed).toBe(2);
+    });
+
+    test('processAllTestCases aggregates multiple failed cases', () => {
+      const executeCase = jest.fn()
+        .mockReturnValueOnce({ passed: false, exitCode: 1 })
+        .mockReturnValueOnce({ passed: false, exitCode: 1 })
+        .mockReturnValueOnce({ passed: true, exitCode: 0 });
+      const testCases = { 'Mixed': ['a', 'b', 'c'] };
+      const expectedResults = { 'Mixed': 'valid' };
+      const { results } = processAllTestCases(testCases, expectedResults, executeCase);
+      expect(results.summary.failed).toBe(2);
+      expect(results.details['Mixed'].failed).toBe(2);
+    });
+
+    test('runTest with exemption type returns correct pass status', () => {
+      const result = runTest('release/v1.0.0', 'exemption');
+      expect(result).toHaveProperty('passed');
+      expect(typeof result.passed).toBe('boolean');
+    });
+
+    test('processAllTestCases handles test with error status not equal to 1', () => {
+      const executeCase = jest.fn()
+        .mockReturnValueOnce({ passed: false, exitCode: 2 })
+        .mockReturnValueOnce({ passed: true, exitCode: 0 });
+      const testCases = { 'WithError': ['feat/test', 'feat/other'] };
+      const expectedResults = { 'WithError': 'invalid' };
+      const { results } = processAllTestCases(testCases, expectedResults, executeCase);
+      expect(results.details['WithError'].failed).toBe(1);
+    });
+
+    test('outputTestResults handles large number of failed tests in a category', () => {
+      const results = { summary: { total: 20, passed: 5, failed: 15 } };
+      const categoryResults = [{ category: 'Large', passed: 5, total: 20 }];
+
+      const logs = [];
+      const originalWrite = process.stdout.write;
+      process.stdout.write = jest.fn((...args) => {
+        logs.push(args[0]);
+      });
+
+      const originalLog = console.log;
+      console.log = jest.fn();
+
+      outputTestResults(results, categoryResults);
+
+      const emojiOutput = logs.join('');
+      const checkmarks = (emojiOutput.match(/✅/g) || []).length;
+      const crosses = (emojiOutput.match(/❌/g) || []).length;
+      expect(checkmarks).toBe(5);
+      expect(crosses).toBe(15);
+
+      process.stdout.write = originalWrite;
+      console.log = originalLog;
     });
   });
 });

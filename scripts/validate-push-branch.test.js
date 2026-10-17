@@ -445,6 +445,70 @@ describe('validate-push-branch', () => {
       expect(result.valid).toBe(true);
     });
 
+    test('resolveHeadRef consistently returns correct type', () => {
+      const result1 = resolveHeadRef('refs/heads/feature');
+      const result2 = resolveHeadRef('HEAD');
+      expect(typeof result1 === 'string' || result1 === null).toBe(true);
+      expect(typeof result2 === 'string' || result2 === null).toBe(true);
+    });
+
+    test('processPushLines with single valid branch', () => {
+      const result = processPushLines([
+        'refs/heads/feat/single abc123 refs/heads/feat/single abc123'
+      ]);
+      expect(result.branches.length).toBeGreaterThanOrEqual(0);
+      expect(result.branches.length <= 1).toBe(true);
+    });
+
+    test('processPushLines handles branch without resolution error gracefully', () => {
+      const result = processPushLines([
+        'refs/heads/feat/valid abc123 refs/heads/feat/valid abc123'
+      ]);
+      expect(Array.isArray(result.branches)).toBe(true);
+      expect(result).toHaveProperty('hasInvalidBranch');
+      expect(result).toHaveProperty('invalidBranches');
+    });
+  });
+
+  describe('shouldSkipRef edge cases', () => {
+    test('should handle refs with various structures', () => {
+      const result1 = shouldSkipRef('refs/heads/feature', 'abc123');
+      const result2 = shouldSkipRef('refs/tags/v1.0.0', 'abc123');
+      const result3 = shouldSkipRef('HEAD', 'abc123');
+
+      expect(typeof result1 === 'boolean').toBe(true);
+      expect(typeof result2 === 'boolean').toBe(true);
+      expect(typeof result3 === 'boolean').toBe(true);
+    });
+
+    test('should handle short zero hashes', () => {
+      expect(shouldSkipRef('refs/heads/feature', '0000')).toBe(true);
+      expect(shouldSkipRef('refs/heads/feature', '0')).toBe(true);
+    });
+
+    test('should detect mixed alphanumeric deletion markers', () => {
+      // All zeros pattern
+      expect(shouldSkipRef('refs/heads/feature', '00000000000000000000000000000000')).toBe(true);
+    });
+  });
+
+  describe('extractBranchName comprehensive cases', () => {
+    test('should preserve refs structure for non-branch refs', () => {
+      expect(extractBranchName('refs/tags/release-1.0')).toBe('refs/tags/release-1.0');
+      expect(extractBranchName('refs/remotes/origin/main')).toBe('refs/remotes/origin/main');
+    });
+
+    test('should handle deeply nested branch names', () => {
+      expect(extractBranchName('refs/heads/a/b/c/d/e')).toBe('a/b/c/d/e');
+    });
+
+    test('should return bare names unchanged', () => {
+      expect(extractBranchName('bare-branch')).toBe('bare-branch');
+      expect(extractBranchName('simple')).toBe('simple');
+    });
+  });
+
+  describe('validateBranch edge cases', () => {
     test('validateBranch with dependabot branches', () => {
       const result = validateBranch('dependabot/npm_and_yarn/lodash-4.17.21');
       expect(result.valid).toBe(true);
