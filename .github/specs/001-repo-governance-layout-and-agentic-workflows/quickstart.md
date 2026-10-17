@@ -415,7 +415,7 @@ grep -q "@ashley" .github/CODEOWNERS && \
 # Test 9.3: Verify protected paths listed
 echo "Checking CODEOWNERS for protected paths..."
 coverage_complete=true
-for protected_path in .github/workflows/ CHANGELOG.md AGENTS.md guidelines/; do
+for protected_path in .github/workflows/ .github/labels.yml CHANGELOG.md AGENTS.md guidelines/; do
   if awk -v path="$protected_path" '
     ($1 == path || $1 == "/" path) && NF > 1 && $2 !~ /^#/ { found = 1 }
     END { exit !found }

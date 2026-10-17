@@ -65,7 +65,8 @@ export const createRequestHandler = (distDir) => {
 
     // If file doesn't exist, return 404 for assets, or fall back to index.html for routes (SPA behavior)
     if (!fs.existsSync(filePath)) {
-      const ext = path.extname(req.url);
+      const pathname = new URL(`http://localhost${req.url}`).pathname;
+      const ext = path.extname(pathname);
       const isAsset = /\.(js|css|png|jpg|gif|svg|woff|woff2|json|map)$/i.test(ext);
       if (isAsset) {
         res.writeHead(404);

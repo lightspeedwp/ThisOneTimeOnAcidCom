@@ -8,11 +8,11 @@
 
 ## Overview
 
-This document defines the interface contracts for all 17 GitHub Actions workflows that implement repository governance. Contracts specify: workflow trigger conditions, required inputs, expected outputs, and validation gates that downstream workflows depend on.
+This document defines target-state interface contracts for 17 planned GitHub Actions workflows that will implement repository governance. The listed workflows are not all configured in `.github/workflows` yet. Contracts specify: workflow trigger conditions, required inputs, expected outputs, and validation gates that downstream workflows depend on.
 
 ---
 
-## Implementation Workflows (9 — Always Active)
+## Planned Implementation Workflows (9 — Always Active After Implementation)
 
 ### lint.yml
 - **Trigger**: `push`, `pull_request`
@@ -81,7 +81,7 @@ This document defines the interface contracts for all 17 GitHub Actions workflow
 - **Purpose**: Assign PR labels based on branch prefix and file changes
 - **Inputs**: PR branch name; file changes; PR description
 - **Outputs**: Applied labels from canonical set (labels.yml)
-- **Blocking**: NO (informational; uses labels for routing)
+- **Blocking**: YES (must pass before PR merge; labeling failures block merges)
 - **Enforces**: R5.1 (label families: type:*, status:*, area:*, priority:*, meta:*)
 - **Failure Mode**: Posts comment if label assignment cannot be automated
 - **Dependencies**: Reads `.github/labels.yml` (protected file)
@@ -110,7 +110,7 @@ This document defines the interface contracts for all 17 GitHub Actions workflow
 
 ---
 
-## Evaluation Workflows (5 — Manual/Opt-In)
+## Planned Evaluation Workflows (5 — Manual/Opt-In After Implementation)
 
 ### validate-specifications.yml
 - **Trigger**: `workflow_dispatch` (manual)
@@ -133,7 +133,7 @@ This document defines the interface contracts for all 17 GitHub Actions workflow
 - **Dependencies**: Requires `tests.yml` to pass
 
 ### ruleset-drift.yml
-- **Trigger**: `schedule` (optional) or `workflow_dispatch`
+- **Trigger**: `workflow_dispatch` (manual)
 - **Purpose**: Detect configuration consistency across repository
 - **Inputs**: Configuration files (labels.yml, issue-types.yml, CODEOWNERS, etc.)
 - **Outputs**: Configuration drift report; inconsistency detection
@@ -202,12 +202,12 @@ This document defines the interface contracts for all 17 GitHub Actions workflow
 | workflow-lint.yml | Implementation | push, pull_request | YES | ✅ Always |
 | branch-name-validation.yml | Implementation | pull_request | YES | ✅ Always |
 | changelog-unified.yml | Implementation | pull_request | YES | ✅ Always |
-| labeling-unified.yml | Implementation | pull_request | NO | ✅ Always |
+| labeling-unified.yml | Implementation | pull_request | YES | ✅ Always |
 | pr-template-routing.yml | Implementation | pull_request | YES | ✅ Always |
 | locked-files-guard.yml | Implementation | push, pull_request | YES | ✅ Always |
 | validate-specifications.yml | Evaluation | workflow_dispatch | NO | ⏹️ Manual |
 | claude-guard-tests.yml | Evaluation | workflow_dispatch | NO | ⏹️ Manual |
-| ruleset-drift.yml | Evaluation | schedule, workflow_dispatch | NO | ⏹️ Manual |
+| ruleset-drift.yml | Evaluation | workflow_dispatch | NO | ⏹️ Manual |
 | ai-feedback-validation.yml | Evaluation | workflow_dispatch | NO | ⏹️ Manual |
 | ai-feedback.yml | Evaluation | workflow_dispatch | NO | ⏹️ Manual |
 | branch-validation-metrics-aggregator.yml | Deferred | (pending) | NO | ⏸️ Disabled |
