@@ -284,7 +284,13 @@ This specification defines a tailored, maintainable governance system for ThisOn
 **R8.2** — Remove Tailwind configuration  
 - Delete `tailwindcss` and `@tailwindcss/vite` dev dependencies  
 - Remove `@tailwindcss/vite` from `vite.config.ts`  
-- Remove Tailwind configuration from `tailwind.config.js` (if present)  
+- Remove Tailwind configuration from `tailwind.config.js` (if present)
+
+**R8.3** — Bundler syntax enforcement (Figma Make compatibility)
+- Configure ESLint with `figma-make` plugin or equivalent to detect forbidden syntax (optional chaining `?.`, nullish coalescing `??`, `import.meta.env`, nested ternaries, `for...of` loops)
+- Add ESLint rule to CI validation workflow (`lint.yml`); block PR merge on violations
+- Document enforcement in AGENTS.md; code review validates edge cases against Guidelines.md bundler table
+- Rationale: Hard CI enforcement prevents bundler incompatibilities reaching production; code review ensures pragmatic exceptions are justified  
 
 ---
 
@@ -546,6 +552,7 @@ This specification defines a tailored, maintainable governance system for ThisOn
 
 ### Session 2026-10-17
 
+- Q1: What mechanism enforces bundler compatibility rules (forbidden syntax: optional chaining, nullish coalescing, etc.) before code merges? → A: Option A: Automated ESLint rule in CI gating PR merge (hard enforcement via `eslint-plugin-figma-make` or equivalent)
 - Q: Which evaluation workflows should run by default on every PR, and which should be manual or opt-in? → A: Option B: Only `locked-files-guard` runs by default; others are manual/opt-in (pragmatic approach protecting critical governance files without CI overhead)
 - Q: Should the specification mandate a specific agent/skill set, or document current inventory as subject to change? → A: Option B: Document current baseline (~18 agents, ~5 skills) as inventory of Oct 2026; allow evolution per TOA-264/TOA-265 (flexible; reflects reality that agents and skills are active tooling)
 - Q: What enforcement mechanism for agent/skill budgets? → A: Option A: Host-side enforcement (hard limit — execution stops at budget boundary, preventing cost surprises)
