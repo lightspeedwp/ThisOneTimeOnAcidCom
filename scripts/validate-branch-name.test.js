@@ -562,6 +562,7 @@ describe('Branch Name Validation', () => {
     const originalError = console.error;
 
     beforeEach(() => {
+      execSync.mockReset();
       jest.spyOn(process, 'exit').mockImplementation();
       jest.spyOn(console, 'log').mockImplementation();
       jest.spyOn(console, 'error').mockImplementation();
@@ -606,9 +607,10 @@ describe('Branch Name Validation', () => {
 
     test('should validate current branch when no --branch argument provided', () => {
       process.argv = ['node', 'validate-branch-name.js'];
+      execSync.mockReturnValue('feat/my-feature\n');
       const { main } = require('./validate-branch-name.js');
       main();
-      expect(process.exit).toHaveBeenCalled();
+      expect(process.exit).toHaveBeenCalledWith(0);
     });
   });
 });
