@@ -3,7 +3,10 @@
  * @jest-environment node
  */
 
+import fs from 'fs';
 import { handleFileRead, requestHandler, createServer, setDistDir, getDistDir } from './lib/test-server-utils.js';
+
+jest.mock('fs');
 
 describe('test-server', () => {
   describe('handleFileRead', () => {
@@ -196,27 +199,69 @@ describe('test-server', () => {
       expect(res.end).toHaveBeenCalledWith('Forbidden');
     });
 
-    it('accepts normal file paths', () => {
-      expect(typeof requestHandler).toBe('function');
-    });
-  });
+    it('serves files from dist directory with correct content-type', () => {
+      fs.existsSync.mockReturnValue(true);
+      fs.statSync.mockReturnValue({ isDirectory: () => false });
+      fs.readFile.mockImplementation((path, callback) => {
+        callback(null, Buffer.from('console.log("test");'));
+      });
 
-  describe('server initialization', () => {
-    it('uses PORT environment variable when set', () => {
-      process.env.PORT = '8080';
-      const port = process.env.PORT || 3000;
-      expect(port).toBe('8080');
-      delete process.env.PORT;
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn(),
+      };
+      const req = { url: '/bundle.js' };
+
+      requestHandler(req, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(200, { 'Content-Type': 'application/javascript' });
+      expect(res.end).toHaveBeenCalled();
+
+      jest.clearAllMocks();
     });
 
-    it('defaults to port 3000 when PORT not set', () => {
-      delete process.env.PORT;
-      const port = process.env.PORT || 3000;
-      expect(port).toBe(3000);
+    it('handles directory traversal attempts securely', () => {
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn(),
+      };
+      const req = { url: '/../../../etc/passwd' };
+
+      requestHandler(req, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(403);
+      expect(res.end).toHaveBeenCalledWith('Forbidden');
+    });
+
+    it('falls back to index.html for non-existent files (SPA mode)', () => {
+      fs.existsSync.mockReturnValue(false);
+      fs.readFile.mockImplementation((path, callback) => {
+        callback(null, Buffer.from('<html>SPA Index</html>'));
+      });
+
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn(),
+      };
+      const req = { url: '/some-route' };
+
+      requestHandler(req, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(200, { 'Content-Type': 'text/html' });
+      expect(res.end).toHaveBeenCalled();
+
+      jest.clearAllMocks();
     });
   });
 
   describe('server utility functions', () => {
+    const originalDistDir = getDistDir();
+
+    afterEach(() => {
+      // Always restore original DIST_DIR after each test
+      setDistDir(originalDistDir);
+    });
+
     it('can set and get DIST_DIR', () => {
       setDistDir('/custom/path');
       const result = getDistDir();

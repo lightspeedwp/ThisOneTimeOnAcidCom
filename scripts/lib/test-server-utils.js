@@ -7,8 +7,10 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-let DIST_DIR = path.join(process.cwd(), 'dist');
+const MODULE_DIR = path.dirname(fileURLToPath(import.meta.url));
+let DIST_DIR = path.join(MODULE_DIR, '../../dist');
 
 /**
  * Set the DIST_DIR for serving files (used for testing).
