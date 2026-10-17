@@ -167,14 +167,14 @@ Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup
 
 ## Key Decisions Required Before Implementation
 
-| Decision | Options | Recommended | Owner |
-|----------|---------|---|---|
-| Storage Provider | Cloudinary / GitHub / AWS S3 | Cloudinary | Ash |
-| Catalogue Location | In-repo / External service | In-repo (/catalog/assets.json) | Ash |
-| Book Export | Automated API / Manual | Automated API | Ash |
-| Asset Versioning | All versions / Major only | All versions (Git/Cloudinary) | Ash |
-| Fallback Strategy | Placeholder SVG / External URL | Placeholder (reversible) | Ash |
-| Credits Display | Per-asset visible / Metadata only | Visible on gallery pages | Ash |
+| Decision | Options | Recommended | Owner | Status |
+|----------|---------|---|---|---|
+| Storage Provider | Cloudinary / GitHub / AWS S3 | GitHub + Netlify (zero-cost) | Ash | ✅ Approved |
+| Catalogue Location | In-repo / External service | In-repo (.github/data/assets.json) | Ash | 🔴 Pending |
+| Book Export | Automated API / Manual | File-based (high-res originals) | Ash | 🟡 Tentative |
+| Asset Versioning | All versions / Major only | All versions via Git | Ash | ✅ Planned |
+| Fallback Strategy | Placeholder SVG / External URL | Placeholder (reversible) | Ash | ✅ In place |
+| Credits Display | Per-asset visible / Metadata only | Visible on gallery pages | Ash | 🟡 Pending |
 
 ---
 

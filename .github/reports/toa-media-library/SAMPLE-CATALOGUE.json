@@ -66,18 +66,15 @@
         "attribution": "Ash Shaw"
       },
       "printSuitability": {
-        "isPrintReady": true,
-        "recommendedPPI": 300,
-        "printQualityNotes": "High resolution original suitable for book cover or large format prints"
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
       },
       "webOptimization": {
-        "recommendedPreset": "hero",
-        "maxWidth": 1440,
-        "quality": 0.85,
-        "formats": [
-          "webp",
-          "jpeg"
-        ]
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
       },
       "recoveryStatus": "pending",
       "recoveryNotes": "Awaiting export from Figma Make project",

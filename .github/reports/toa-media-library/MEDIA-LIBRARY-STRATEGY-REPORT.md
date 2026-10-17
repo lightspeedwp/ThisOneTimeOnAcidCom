@@ -11,7 +11,7 @@
 
 **Key Finding:** The TOA project maintains 56 unique Figma asset references across 128 import statements, but the expected asset files do not exist in the repository. All referenced assets currently render as placeholder SVGs in development and production builds. A version-controlled asset catalogue with external storage and CDN delivery is proposed, with phased implementation mapped to six existing child issues.
 
-**Critical Discovery:** The audit independently verified 56 unique `figma:asset/` references (previous report claimed 75 – see [Inventory Gap](#inventory-gap) below). The count appears to have been reduced through Figma Make deduplication or repository refactoring since the original audit.
+**Critical Discovery:** The audit independently verified 56 unique `figma:asset/` references (previous report claimed 75 – see [Section 11: Inventory Gap](#section-11-inventory-gap) below). The count appears to have been reduced through Figma Make deduplication or repository refactoring since the original audit.
 
 ---
 
@@ -400,19 +400,20 @@ Book Publishing Exports (high-quality derivatives)
 
 ### 5.3 Recommendation
 
-**Go with Cloudinary** for Phase 1 migration:
+**GitHub + Netlify (Approved)** for Phase 1 migration:
 
-1. **Sweet Spot:** Excellent UX (visual upload), automatic optimisation, global CDN, moderate cost
-2. **Lowest Risk:** Industry-standard for media management; well-documented
-3. **Book Publishing:** API exports high-res variants for print before Lulu/KDP publish
-4. **Fallback:** Even if Cloudinary is abandoned later, version-controlled catalogue allows export to any provider
+1. **Cost-Optimised:** Zero additional expense; leverages existing Netlify subscription
+2. **Portability:** 100% vendor lock-in free; plain files + Git history
+3. **Audit Trail:** All assets version-controlled; full Git history + blame available
+4. **Book Publishing:** File-based export of high-res originals for Lulu/KDP before publishing
+5. **Trade-off:** Manual Sharp/ImageMin build script required for responsive sizing (vs Cloudinary's automatic transforms)
 
-**Parallel: Version-Controlled Catalogue in Repository**
+**Version-Controlled Catalogue in Repository**
 
-Store catalogue JSON in Git (`catalog/assets.json`) for:
-- Portability (not locked in Cloudinary)
-- Audit trail (who uploaded, when, from what source)
-- Book build automation (reference mapping without live dependency)
+Store catalogue JSON in Git (`.github/data/assets.json` or `/catalog/assets.json`) for:
+- Portability (not locked in any SaaS provider)
+- Audit trail (commit history, author, timestamp)
+- Book build automation (reference mapping without live API dependency)
 
 ---
 

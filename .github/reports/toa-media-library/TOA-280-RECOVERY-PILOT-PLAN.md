@@ -155,7 +155,7 @@ Record:
 
 4. **Updated Asset Inventory** (`01-asset-inventory.json` updated)
    - Recovery status for sampled assets
-   - Links to recovered files (GitHub LFS or Cloudinary pending)
+   - Links to recovered files (to be stored in GitHub + Netlify per approved storage decision)
    - Blockers and manual intervention notes
 
 ---

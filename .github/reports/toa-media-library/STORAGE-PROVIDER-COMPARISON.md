@@ -244,49 +244,55 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 
 ---
 
-## Final Recommendation: Cloudinary
+## Final Recommendation: GitHub + Netlify (Approved)
 
-**Why Cloudinary wins for TOA:**
+**Why GitHub + Netlify was selected for TOA:**
 
-1. **Time-to-market:** 2–3 days vs 3–4 days (GitHub) or 4–6 days (AWS)
-2. **User experience:** Non-technical editors can upload; no CLI needed
-3. **Automation:** Responsive sizing automatic; no build scripts
-4. **Book exports:** Purpose-built API for high-res exports
-5. **Cost:** $99/mo is reasonable for professional media management
-6. **Fallback:** If abandoned, export via API to new provider (catalogue remains portable)
+1. **Cost:** $0/month (leverages existing Netlify subscription; no additional expense)
+2. **Portability:** 100% vendor lock-in free; plain files + JSON catalogue
+3. **Integration:** Seamless Git workflow; version control + audit trail
+4. **Existing infrastructure:** Netlify already deployed and configured
+5. **Trade-off accepted:** Manual Sharp/ImageMin build process for responsive sizing (vs runtime Cloudinary transforms)
+6. **Build scalability:** Caching in Netlify build config prevents bloat
 
 **Migration path:**
-- Start with Cloudinary free tier ($0)
-- Upgrade to Pro ($99/mo) when >1,000 daily views
-- If cost becomes concern later, export to self-hosted (GitHub) via API
+- Commit assets to Git LFS (or versioned directory if <1GB/month)
+- Write Sharp/ImageMin build script (Phase 4: TOA-278)
+- Populate version-controlled asset catalogue (`.github/data/assets.json` or `/catalog/assets.json`)
+- Deploy to Netlify; CDN serves optimized variants
+- If scaling requires provider change, export assets and migrate to Cloudinary/AWS
+
+**Note:** Original audit recommended Cloudinary for UX and automation. This decision prioritises cost and portability over visual upload interface.
 
 ---
 
 ## Implementation Checklist
 
 ### Pre-Migration
-- [ ] Approve storage provider (Cloudinary)
-- [ ] Set budget ($100–150/mo for first year)
+- [ ] Confirm storage provider (GitHub + Netlify)
+- [ ] Set budget ($0/month; monitor Git LFS bandwidth if >1GB/month)
 - [ ] Verify Figma asset recovery (TOA-280 pilot)
 - [ ] Design catalogue schema (TOA-277)
 - [ ] Plan reference migration workflow (TOA-278)
 
-### Cloudinary Setup
-- [ ] Create Cloudinary account (free tier)
-- [ ] Configure upload folder structure (/toa/hero/, /toa/portfolio/, etc.)
-- [ ] Generate API tokens (restricted scopes)
-- [ ] Set up webhook for asset notifications (optional)
-- [ ] Configure transformation presets (responsive breakpoints)
+### GitHub + Netlify Setup
+- [ ] Create `.github/data/` directory (or `/catalog/`) for assets.json
+- [ ] Configure Git LFS for large binaries (if needed; see TOA-276)
+- [ ] Set up Git LFS bandwidth monitoring
+- [ ] Configure Netlify build caching for image optimization
+- [ ] Document Git workflow for asset uploads
 
-### Code Integration
-- [ ] Install `cloudinary-react` SDK
-- [ ] Environment config (.env.local)
-- [ ] Update asset reference mapping
-- [ ] Test responsive sizing on multiple devices
-- [ ] Validate book export API
+### Build Script Development
+- [ ] Write Sharp/ImageMin build script (TOA-278)
+- [ ] Configure responsive breakpoints (web: 1200px+, print: 2400px+)
+- [ ] Test build output on multiple devices
+- [ ] Validate high-res exports for book publishing
+- [ ] Document build process for operations team
 
 ### Validation
-- [ ] 100% of 56 assets on CDN
+- [ ] 100% of 56 assets committed to Git
+- [ ] Build script generates all required variants
+- [ ] Netlify CDN serves optimized files
 - [ ] Responsive variants load (480, 800, 1200px)
 - [ ] WebP served to modern browsers; JPEG fallback
 - [ ] Core Web Vitals pass (LCP <2.5s)

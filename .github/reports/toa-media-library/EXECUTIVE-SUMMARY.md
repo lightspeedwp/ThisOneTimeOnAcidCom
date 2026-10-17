@@ -25,7 +25,7 @@ A **phased media-library strategy** with:
 
 1. **Figma Recovery Pilot** – Extract assets from Figma Make, identify export gaps, sample 10–15 assets
 2. **Catalogue Design** – Define standardized JSON structure for asset metadata (source, usage, credits, print-readiness)
-3. **Storage Selection** – Cloudinary (recommended: UX + automation + cost-effective)
+3. **Storage Selection** – GitHub + Netlify (zero-cost: leverages existing Netlify subscription)
 4. **Migration Workflow** – Import assets, populate catalogue, update code references, validate
 5. **Validation & Ops** – Test, document rollback, hand off to production team
 
@@ -37,10 +37,10 @@ A **phased media-library strategy** with:
 
 | Item | Recommendation | Status |
 |---|---|---|
-| **Storage Provider** | Cloudinary | 🔴 Awaiting approval |
+| **Storage Provider** | GitHub + Netlify (zero-cost) | ✅ Approved |
 | **Catalogue Format** | Version-controlled JSON in repo | 🔴 Awaiting approval |
-| **Book Exports** | Automated via API before publishing | 🟡 Tentative |
-| **Figma Recovery** | Use existing `/figma-design-to-code` skill (no custom agent needed) | 🟡 Tentative |
+| **Book Exports** | File-based export before publishing | 🟡 Tentative |
+| **Figma Recovery** | Use existing `/figma-design-to-code` skill (no custom agent needed) | ✅ Approved |
 | **Asset Credits** | Visible in gallery + metadata catalogue | 🟡 Tentative |
 
 ---
@@ -62,12 +62,12 @@ A **phased media-library strategy** with:
 
 | Service | Monthly | Annual | Notes |
 |---|---|---|---|
-| **Cloudinary Pro** | $99 | $1,188 | Recommended; covers ~1.5M API calls/mo |
-| **GitHub LFS** (if used) | $0–5 | $0–60 | Alternative; free for <1GB/mo |
+| **GitHub + Netlify** | $0 | $0 | Selected; leverages existing Netlify subscription |
+| **Build optimization (Sharp/ImageMin)** | $0 | $0 | Manual build process; no runtime cost |
 | **Netlify CDN** | Included | Included | Already part of build pipeline |
 | **Book Publishing (Lulu/KDP)** | Variable | TBD | Per-book cost; asset management included |
 
-**Total:** ~$100/month for storage + CDN (Cloudinary route)
+**Total:** $0/month for storage + CDN (GitHub + Netlify route)
 
 ---
 
