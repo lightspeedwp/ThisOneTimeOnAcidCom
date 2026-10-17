@@ -1,0 +1,78 @@
+name: Workflow Lint
+
+on:
+  push:
+    paths:
+      - '.github/workflows/**'
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+
+jobs:
+  lint-workflows:
+    name: Validate Workflow YAML
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate YAML syntax
+        run: |
+          echo "Validating GitHub Actions workflow YAML files..."
+
+          # Check all YAML files in workflows directory
+          for file in .github/workflows/*.yml .github/workflows/*.yaml; do
+            if [ -f "$file" ]; then
+              echo "Checking $file..."
+
+              # Basic YAML validation using python
+              python3 -c "
+          import yaml
+          import sys
+          try:
+              with open('$file', 'r') as f:
+                  yaml.safe_load(f)
+              print('✓ Valid YAML: $file')
+          except yaml.YAMLError as e:
+              print(f'✗ Invalid YAML in $file: {e}')
+              sys.exit(1)
+              " || exit 1
+            fi
+          done
+
+      - name: Check required fields
+        run: |
+          echo "Checking for required workflow fields..."
+
+          for file in .github/workflows/*.yml .github/workflows/*.yaml; do
+            if [ -f "$file" ]; then
+              # Check for 'name' field
+              if ! grep -q "^name:" "$file"; then
+                echo "::error::Missing 'name' field in $file"
+                exit 1
+              fi
+
+              # Check for 'on' trigger
+              if ! grep -q "^on:" "$file"; then
+                echo "::error::Missing 'on' trigger in $file"
+                exit 1
+              fi
+
+              # Check for 'jobs' section
+              if ! grep -q "^jobs:" "$file"; then
+                echo "::error::Missing 'jobs' section in $file"
+                exit 1
+              fi
+
+              echo "✓ Required fields present: $file"
+            fi
+          done
+
+      - name: Report workflow lint results
+        if: failure()
+        run: |
+          echo "::error::Workflow validation failed. Check YAML syntax and required fields."
+          exit 1

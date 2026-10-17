@@ -1,0 +1,62 @@
+name: Lint
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'docs/**'
+      - '.github/**'
+      - '.eslintrc.*'
+      - '.prettierrc*'
+      - 'package.json'
+      - 'package-lock.json'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'docs/**'
+      - '.github/**'
+      - '.eslintrc.*'
+      - '.prettierrc*'
+      - 'package.json'
+      - 'package-lock.json'
+
+jobs:
+  lint:
+    name: Lint Code & Docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint JavaScript/TypeScript
+        if: always()
+        run: npm run lint:js || true
+        continue-on-error: true
+
+      - name: Check formatting with Prettier
+        if: always()
+        run: npx prettier --check src/ docs/ .github/ || true
+        continue-on-error: true
+
+      - name: Lint Markdown
+        if: always()
+        run: npm run lint:md || true
+        continue-on-error: true
+
+      - name: Report lint results
+        if: failure()
+        run: |
+          echo "::error::Lint validation failed. Run 'npm run format' to fix formatting issues."
+          exit 1

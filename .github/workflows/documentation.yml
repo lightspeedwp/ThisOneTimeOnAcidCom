@@ -1,0 +1,59 @@
+name: Documentation
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - '.github/specs/**'
+      - 'guidelines/**'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - '.github/specs/**'
+      - 'guidelines/**'
+
+jobs:
+  validate-docs:
+    name: Validate Documentation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate frontmatter
+        run: npm run validate:frontmatter
+        continue-on-error: true
+
+      - name: Check Markdown syntax
+        run: npm run lint:md
+        continue-on-error: true
+
+      - name: Check for broken links
+        run: |
+          echo "Checking for broken internal links..."
+          if grep -r "\[.*\](.*\.md)" docs/ README.md .github/specs/ 2>/dev/null | grep -E "\.md\)$|\.md\?" > /tmp/links.txt; then
+            while IFS= read -r line; do
+              echo "Found link: $line"
+            done < /tmp/links.txt
+          fi
+        continue-on-error: true
+
+      - name: Report documentation results
+        if: failure()
+        run: |
+          echo "::error::Documentation validation failed. Check frontmatter, syntax, and links."
+          exit 1

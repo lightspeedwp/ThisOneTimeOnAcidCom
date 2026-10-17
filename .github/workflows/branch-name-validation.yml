@@ -1,0 +1,77 @@
+name: Branch Name Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate-branch-name:
+    name: Validate Branch Naming
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate branch name
+        id: validate
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          echo "Validating branch name: $BRANCH_NAME"
+
+          # Check for exemptions
+          if [[ "$BRANCH_NAME" =~ ^(dependabot|renovate|release)/ ]]; then
+            echo "Branch is exempt from validation (dependabot/renovate/release)"
+            echo "valid=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Validate branch naming pattern: {type}/{scope}-{title}
+          if node scripts/validate-branch-name.js --branch "$BRANCH_NAME"; then
+            echo "valid=true" >> $GITHUB_OUTPUT
+          else
+            echo "valid=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+      - name: Comment on PR (success)
+        if: steps.validate.outputs.valid == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ Branch name \`${{ github.head_ref }}\` follows the repository naming convention.`
+            });
+
+      - name: Comment on PR (failure)
+        if: failure() && steps.validate.outputs.valid == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ Branch name \`${{ github.head_ref }}\` does not follow the repository naming convention.\n\nExpected format: \`{type}/{scope}-{title}\`\n\nValid type values:\n- feat, fix, hotfix, release, refactor, chore, task, doc, docs, test, perf, ci, build, deps, security, revert, research, design, a11y, ux, i18n, ops, proto, ds, api, schema, telemetry, content, seo, config, migrate, qa, uat, audit, codex, aiops, automation, epic\n\nExample: \`feat/user-preferences-panel\``
+            });
+
+      - name: Report validation result
+        if: failure()
+        run: |
+          echo "::error::Branch name validation failed"
+          exit 1
