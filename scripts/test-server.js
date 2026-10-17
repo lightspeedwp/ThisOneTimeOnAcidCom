@@ -88,7 +88,7 @@ export function resolvePath(requestPath, distDir = null) {
  * @param {buffer} data - File contents
  * @param {object} res - HTTP response object
  */
-const handleFileRead = (filePath, err, data, res) => {
+export const handleFileRead = (filePath, err, data, res) => {
   if (err) {
     res.writeHead(500);
     res.end('Server error');
@@ -145,4 +145,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main();
 }
 
-export { main };
+export { main, handleFileRead };

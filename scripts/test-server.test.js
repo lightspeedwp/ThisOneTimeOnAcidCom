@@ -5,7 +5,7 @@
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
-import { getContentType, resolvePath, requestHandler } from './test-server.js';
+import { getContentType, resolvePath, requestHandler, handleFileRead } from './test-server.js';
 
 describe('test-server', () => {
   describe('getContentType', () => {
@@ -353,6 +353,108 @@ describe('test-server', () => {
       Object.entries(typeMap).forEach(([ext, expectedType]) => {
         expect(getContentType(ext)).toBe(expectedType);
       });
+    });
+  });
+
+  describe('handleFileRead', () => {
+    it('handles file read errors with 500 status', () => {
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+      const error = new Error('Read failed');
+
+      handleFileRead('/path/to/file.html', error, null, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(500);
+      expect(res.end).toHaveBeenCalledWith('Server error');
+    });
+
+    it('handles successful file read with correct content type', () => {
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+      const data = Buffer.from('<html>test</html>');
+
+      handleFileRead('/path/to/file.html', null, data, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(200, { 'Content-Type': 'text/html' });
+      expect(res.end).toHaveBeenCalledWith(data);
+    });
+
+    it('determines content type from file extension', () => {
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+      const data = Buffer.from('{}');
+
+      handleFileRead('/path/to/file.json', null, data, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(200, { 'Content-Type': 'application/json' });
+    });
+
+    it('handles CSS files with correct content type', () => {
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+      const data = Buffer.from('body {}');
+
+      handleFileRead('/path/to/style.css', null, data, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(200, { 'Content-Type': 'text/css' });
+    });
+
+    it('handles JavaScript files with correct content type', () => {
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+      const data = Buffer.from('console.log("test");');
+
+      handleFileRead('/path/to/app.js', null, data, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(200, { 'Content-Type': 'application/javascript' });
+    });
+
+    it('handles image files with correct content type', () => {
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+      const data = Buffer.from([137, 80, 78, 71]); // PNG header
+
+      handleFileRead('/path/to/image.png', null, data, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(200, { 'Content-Type': 'image/png' });
+    });
+
+    it('returns early on error without processing file', () => {
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+      const error = new Error('Access denied');
+
+      handleFileRead('/path/to/file.html', error, Buffer.from('data'), res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(500);
+      expect(res.writeHead).toHaveBeenCalledTimes(1);
+      expect(res.end).toHaveBeenCalledWith('Server error');
+    });
+
+    it('handles unknown file extensions', () => {
+      const res = {
+        writeHead: jest.fn(),
+        end: jest.fn()
+      };
+      const data = Buffer.from('unknown');
+
+      handleFileRead('/path/to/file.xyz', null, data, res);
+
+      expect(res.writeHead).toHaveBeenCalledWith(200, { 'Content-Type': 'application/octet-stream' });
     });
   });
 });
