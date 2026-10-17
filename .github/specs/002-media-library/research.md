@@ -1,6 +1,6 @@
 # Phase 0 Research: TOA Media Library Strategy Clarifications
 
-**Date Created**: 2026-10-17 | **Status**: ⏳ AWAITING OWNER RESPONSES | **Phase**: 0 (Research & Clarification)
+**Date Created**: 2026-10-17 | **Status**: ✅ COMPLETE | **Phase**: 0 (Research & Clarification)
 
 ---
 
@@ -130,14 +130,14 @@ This document captures the three critical clarification questions raised in the 
 **Source**: `.github/reports/toa-media-library/` (PR #285, branch `claude/charming-thompson-iyxuvu`)
 
 **Key Findings**:
-- See [audit-report.md](.github/reports/toa-media-library/audit-report.md) for full inventory and recovery assessment
+- See [AUDIT-REPORT.md](.github/reports/toa-media-library/AUDIT-REPORT.md) for full inventory and recovery assessment
 - Decision log favours GitHub + Netlify (Q1 decision basis)
 - Pilot assets demonstrate recovery feasibility via Figma Make extraction
 
 ### From Strategy and Provider-Comparison Reports
 
 **Provider Comparison Summary** (from `.github/reports/toa-media-library/`):
-- See [provider-comparison.md](.github/reports/toa-media-library/provider-comparison.md) for detailed cost, feature and integration analysis
+- See [STORAGE-PROVIDER-COMPARISON.md](.github/reports/toa-media-library/STORAGE-PROVIDER-COMPARISON.md) for detailed cost, feature and integration analysis
 - Q1 decision resolved: GitHub + Netlify approved as working assumption per audit recommendation
 - TOA-276 evaluation will proceed with GitHub+Netlify as baseline; alternatives evaluated but do not gate implementation
 

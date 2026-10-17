@@ -291,7 +291,7 @@ These questions must be answered to resolve specification ambiguities that impac
 
 ### **Question 3: Boundaries Between Definition, Validation and Implementation Phases**
 
-**Context**: Six issues (TOA-277, TOA-278, TOA-279, TOA-280, TOA-282, TOA-8) address definition and validation. Three issues (TOA-283, TOA-284, TOA-285, TOA-286) address implementation. There is known overlap (e.g., TOA-277 "define schema" vs. TOA-283 "finalise schema"). Linear issue descriptions do not clarify blocker relationships; only "related" links exist.
+**Context**: Six issues (TOA-277, TOA-278, TOA-279, TOA-280, TOA-282, TOA-8) address definition and validation. Four issues (TOA-283, TOA-284, TOA-285, TOA-286) address implementation. There is known overlap (e.g., TOA-277 "define schema" vs. TOA-283 "finalise schema"). Linear issue descriptions do not clarify blocker relationships; only "related" links exist.
 
 **What we need to know**: What is the intended sequence? Does TOA-283 (finalise schema) supersede TOA-277 (define schema), or are they distinct phases (first definition, then validation, then finalisation)? Are TOA-284/285/286 explicitly blocked until TOA-282/283 complete?
 
@@ -320,7 +320,7 @@ These questions must be answered to resolve specification ambiguities that impac
 |---|---|---|
 | **Recovery Requirements (FR-001–005)** | TOA-8, TOA-280, TOA-282 | TOA-8 initiates Figma artwork restoration (read-only); TOA-280 evaluates extraction capability; TOA-282 validates pilot recovery quality |
 | **Catalogue Schema (FR-006–009)** | TOA-277, TOA-283 | TOA-277 defines initial schema; TOA-283 finalises schema based on validation findings |
-| **Reference Migration Workflow (FR-001, TOA-278)** | TOA-278 | Design deduplication, reference mappings, verification and rollback; follows catalogue schema and storage provider decisions |
+| **Reference Migration Workflow (FR-009, TOA-278)** | TOA-278 | Design deduplication, reference mappings, verification and rollback; follows catalogue schema and storage provider decisions |
 | **Provider Evaluation (FR-010–013)** | TOA-276 | Evaluation workflow using representative recovered assets |
 | **Validation Approach (FR-014–016)** | TOA-279, TOA-282 | TOA-279 defines validation and handoff; TOA-282 performs pilot validation |
 | **Figma Capabilities Assessment (FR-001, FR-005)** | TOA-280 | Assesses extraction fidelity, limitations, reusable skills |

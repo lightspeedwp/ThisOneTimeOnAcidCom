@@ -69,8 +69,8 @@
               "type": "object",
               "required": ["width", "height", "unit"],
               "properties": {
-                "width": { "type": "number", "minimum": 1 },
-                "height": { "type": "number", "minimum": 1 },
+                "width": { "type": "number", "exclusiveMinimum": 0 },
+                "height": { "type": "number", "exclusiveMinimum": 0 },
                 "unit": {
                   "type": "string",
                   "enum": ["px", "in", "mm", "cm"]
@@ -126,7 +126,7 @@
           "title": "Alt Text",
           "description": "Accessibility description; max 125 chars recommended. Mark 'unknown' or 'unrecoverable' if not found; never fabricated (FR-008).",
           "type": ["string", "null"],
-          "maxLength": 250,
+          "maxLength": 125,
           "examples": [
             "TOA Media Library brand logo on white background",
             "unknown"
@@ -261,6 +261,7 @@
       "additionalProperties": false
     }
   },
+  "required": ["catalogueVersion", "assets"],
   "properties": {
     "catalogueVersion": {
       "title": "Catalogue Version",

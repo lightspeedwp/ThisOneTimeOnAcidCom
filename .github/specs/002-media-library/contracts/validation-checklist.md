@@ -111,9 +111,9 @@ Verify all required catalogue fields are populated or marked as unknown/unrecove
 
 1. For each recovered asset, retrieve catalogue record
 2. For each required field:
-   a. Check field is non-null and non-empty
+   a. Check field is populated OR explicitly null per schema (dimensions, print_suitable may be null if unknown)
    b. Verify value is plausible (matches data type, enum, max length)
-   c. For "unknown"/"unrecoverable" marks, confirm there is a reason in recovery_notes
+   c. For "unknown"/"unrecoverable" string marks, confirm there is a reason in recovery_notes
 3. For each recommended field:
    a. Check field is populated, marked "unknown", or explicitly null
    b. If value appears fabricated or inconsistent, flag as violation of FR-008 (non-invention)
@@ -240,18 +240,25 @@ Verify file format integrity and compatibility.
 2. **Create Catalogue Record**
    - Generate unique `asset_id` (format: `asset_<type>_<description>_<date>`)
    - Populate required fields:
+     - `asset_id`: Unique stable identifier
      - `original_or_derivative`: "original" (first entry) or "derivative"
      - `provenance`: Where asset came from (e.g., "Created in Figma 2026-10-20 by Ash Shaw")
      - `format`: Array of formats (e.g., ["SVG", "PNG"])
-     - `dimensions`: {width, height, unit, dpi}
+     - `dimensions`: {width, height, unit} or null if unknown
+     - `print_suitable`: true/false/null
      - `recovery_status`: "recovered"
      - `recovery_method`: "manual_export" or source
+     - `created_at`: ISO 8601 timestamp
+     - `updated_at`: ISO 8601 timestamp
    - Populate recommended fields:
      - `alt_text`: Accessibility description (max 125 chars)
      - `caption`: Human-readable label
      - `credits`: Creator/source attribution
      - `rights_notes`: Licensing or usage restrictions
-   - Mark any unknown fields as "unknown", never blank
+   - Mark unknown fields appropriately:
+     - String fields (provenance, alt_text, credits, rights_notes): use "unknown" or "unrecoverable" string
+     - Non-string fields (dimensions, print_suitable): use null
+     - Never leave fields blank
 
 3. **Upload to Storage**
    - Upload file(s) to provider (per TOA-284 provider choice)

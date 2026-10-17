@@ -81,7 +81,7 @@ Verify provider support for print workflows (300 DPI, RGB/CMYK, PNG/PDF per Q2).
 | Criterion | What to Assess | Evidence Source | Notes |
 |---|---|---|---|
 | **High-Resolution Support** | Can provider store and deliver files at 300+ DPI? | Documentation; test upload of 300 DPI TIFF | Print quality depends on full-resolution delivery |
-| **Colour Space Preservation** | RGB and CMYK colour spaces preserved during storage/delivery? | Technical documentation; colour profile test | Print requires accurate colour space (RGB → CMYK conversion must be lossless) |
+| **Colour Space Preservation** | RGB and CMYK colour spaces preserved during storage/delivery? | Technical documentation; colour profile test | Print requires storage and retrieval of colour profiles; RGB-to-CMYK conversion fidelity depends on print profile used |
 | **Format Compatibility** | PDF and TIFF delivery without quality loss? | Technical documentation; test delivery | Print PDF must retain embedded fonts and vector graphics |
 | **CDN / Delivery Network** | Can print assets be reliably delivered? | Infrastructure documentation | Print production may require reliable, fast delivery |
 | **Print Workflow Integration** | Does provider offer print-specific tools (colour management, pre-flight checks)? | Features list; vendor documentation | Optional; note if not available |

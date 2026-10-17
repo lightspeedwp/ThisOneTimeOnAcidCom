@@ -58,11 +58,10 @@
 
 **Target Deliverables**:
 - `data-model.md` — Entity definitions (Asset, AssetRelationship, StorageProvider, ValidationResult)
-- `contracts/catalogue-schema.json` — JSON schema with examples and validation rules
-- `contracts/validation-metadata-rules.json` — Non-invention validation rules, field constraints, acceptable reasons for missing data
+- `contracts/catalogue-schema.json` — JSON schema with validation rules, constraints, and examples (includes non-invention validation rules and field constraints per FR-008)
 - `contracts/provider-evaluation.md` — Evaluation criteria matrix and decision framework
-- `contracts/validation-checklist.md` — Quality gates, visual comparison, metadata checks
-- `quickstart.md` — Validation runbook with sample workflows
+- `contracts/validation-checklist.md` — Quality gates, visual comparison, metadata checks, and operational runbook
+- `quickstart.md` — Validation scenarios and sample workflows
 
 ---
 
