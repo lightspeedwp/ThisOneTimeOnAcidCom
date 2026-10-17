@@ -32,10 +32,13 @@
 
 ### 1.2 Asset Resolution Pipeline
 
+Two distinct image resolution paths exist:
+
+#### Path 1: Vite Bundler Asset Resolution (All Figma Assets)
 The Vite bundler uses a custom plugin (`figmaAssetResolver` in `vite.config.ts:20-40`) to resolve `figma:asset/` URLs:
 
 ```
-figma:asset/{id}.png
+figma:asset/{id}.png (import statement)
     ↓
 Check: src/assets/{id}.png exists?
     ↓
@@ -44,7 +47,29 @@ Check: src/assets/{id}.png exists?
     NO → Render placeholder SVG + console.warn
 ```
 
-**Current State:** `src/assets/` directory **does not exist**. All 56 assets render placeholders.
+**Current State:** `src/assets/` directory **does not exist**. All 56 assets resolve to placeholder SVGs at build time.
+
+#### Path 2: PortfolioImage Component Fallback (18 Mapped Assets Only)
+PortfolioImage.tsx (lines 55–90) maintains FIGMA_ASSET_MAP with 18 explicitly mapped Figma asset IDs. For these mapped assets, if the imported variable resolves to a placeholder (because the actual file doesn't exist), the component provides a second-level fallback:
+
+```
+PortfolioImage src="figma:asset/{id}.png"
+    ↓
+Check: Is {id} in FIGMA_ASSET_MAP (18 mapped IDs)?
+    ↓
+    YES → Use mapped imported variable (placeholder SVG if src/assets/ missing)
+    ↓
+    NO (38 unmapped IDs) → 
+        Analyze alt text for context (nail, UV, festival, etc.)
+        ↓
+        Return contextual Unsplash URL fallback
+```
+
+**Example:** Unmapped assets with "nail art" in alt text fallback to Unsplash nail-art photography; festival assets fall back to Unsplash festival makeup; etc.
+
+**Key Distinction:**
+- **Mapped assets (18):** Use placeholder SVG (Vite resolution)
+- **Unmapped assets (38):** Use Unsplash fallback URL (PortfolioImage logic)
 
 ### 1.3 Current Asset Handling
 

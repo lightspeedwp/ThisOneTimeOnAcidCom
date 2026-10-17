@@ -44,9 +44,9 @@ Assets chosen to cover:
 |----------|-------|-----------|--|
 | **Homepage Hero** | 3 | toa-hero-eye-makeup-01, toa-hero-festival-01, toa-hero-makeup-02 | f4a28f74..., f7c2a891..., f9d3b2c1... |
 | **Jungle Festival Portfolio** | 3 | toa-jungle-festival-01, toa-jungle-festival-02, toa-jungle-festival-03 | 7afa71c7..., 8bac82d8..., 9cbd93e9... |
-| **Gondwana Festival** | 2 | toa-gondwana-01, toa-gondwana-02 | a1de04f0..., b2ef15g1... |
-| **Origin Festival** | 2 | toa-origin-01, toa-origin-02 | c3f0269h2..., d4g137ai3... |
-| **Nail Art** | 2 | toa-nail-art-01, toa-nail-art-rainbow-fusion | 7c570c52..., 8d681d63... |
+| **Gondwana Festival** | 2 | toa-gondwana-01, toa-gondwana-02 | a1de04f0..., b2ef15e1... |
+| **Origin Festival** | 2 | toa-origin-01, toa-origin-02 | c3f02692..., d4d137ab... |
+| **Nail Art** | 2 | toa-nail-art-rainbow-fusion, toa-nail-art-01 | 7c570c52..., 8d681d63... |
 
 **Total:** 12 assets across 5 categories (coverage across portfolio, festivals, and specialty services)
 
@@ -144,7 +144,7 @@ Record:
    - Recommendations for full migration
 
 2. **Sample Catalogue Entries** (`SAMPLE-RECOVERED-ASSETS.json`)
-   - 12 successfully recovered assets
+   - At least 10 successfully recovered assets (from 12 samples, ≥80% success rate)
    - Full metadata (dimensions, format, quality notes)
    - Ready for validation and full migration
 
@@ -177,9 +177,9 @@ Record:
 
 ## Success Metric
 
-**Primary:** 12 high-quality, exportable sample assets with complete metadata.  
+**Primary:** At least 10 high-quality, exportable sample assets with complete metadata (from 12 samples, ≥80% success rate).  
 **Secondary:** Clear export workflow documented for full migration (TOA-278).  
-**Threshold:** ≥80% recovery success rate; zero critical blockers.
+**Threshold:** ≥80% recovery success rate (≥10/12 assets); zero critical blockers.
 
 ---
 

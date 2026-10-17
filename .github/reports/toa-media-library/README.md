@@ -61,11 +61,11 @@ Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup
 ### 3. STORAGE-PROVIDER-COMPARISON.md (308 lines)
 **Purpose:** Detailed provider analysis with costs  
 **Contents:**
-- Cloudinary (RECOMMENDED) – UX, automation, cost ($99/mo), setup time
-- GitHub + Netlify – Free alternative, no UX, manual optimisation
+- Cloudinary – UX, automation, cost ($99/mo), setup time; historical reference
+- GitHub + Netlify (APPROVED) – Zero-cost, portable, full version control
 - AWS S3 + CloudFront – Enterprise option, overkill at TOA scale
 - Recommendation matrix (which option for each use case)
-- Final recommendation + migration path
+- Final recommendation + migration path (GitHub + Netlify approved per decision)
 - Implementation checklist
 
 **Time to read:** 15 minutes

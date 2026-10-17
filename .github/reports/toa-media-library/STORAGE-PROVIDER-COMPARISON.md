@@ -2,7 +2,7 @@
 
 ## Overview
 
-Three storage options evaluated for TOA media library. Each supports the proposed architecture (version-controlled catalogue + CDN delivery + book exports). Recommendation: **Cloudinary** for best balance of UX, automation, and cost.
+Three storage options evaluated for TOA media library. Each supports the proposed architecture (version-controlled catalogue + CDN delivery + book exports). **Approved provider: GitHub + Netlify** (see approval note at line 265). Cloudinary analysis below retained for reference; it remains the UX-optimized alternative if scaling requires it.
 
 ---
 
@@ -122,13 +122,13 @@ Free, fully portable approach using Git (+ Git LFS if >100 MB). Assets live in r
 | Item | Monthly | Annual |
 |------|---------|--------|
 | GitHub (free) | $0 | $0 |
-| GitHub LFS (1GB storage + 1GB bandwidth included free; $0.50/GB additional) | $0–10 | $0–120 |
+| GitHub LFS (10GB storage + 10GB bandwidth included free; $0.50/GB additional) | $0–10 | $0–120 |
 | Netlify (free tier, build time limited) | $0 | $0 |
 | Netlify Pro (if builds exceed free tier quota) | $0–20 | $0–240 |
-| **Total (free tier, <1GB/mo assets)** | **$0** | **$0** |
+| **Total (free tier, <10GB/mo assets)** | **$0** | **$0** |
 | **Total (with LFS overage + Pro)** | **$10–30** | **$120–360** |
 
-**Note:** GitHub's free tier includes 1GB LFS storage + 1GB bandwidth per month; free tier sufficient if <~500 daily page views. Upgrade only if assets exceed 1GB/month or build time exceeds 45 min/month.
+**Note:** GitHub's free tier includes 10GB LFS storage + 10GB bandwidth per month; free tier sufficient for TOA scale (<~500 daily page views). Upgrade only if assets exceed 10GB/month or build time exceeds 45 min/month.
 
 ### Pros
 ✅ Zero cost (GitHub + Netlify free)  
@@ -270,7 +270,7 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 
 ### Pre-Migration
 - [ ] Confirm storage provider (GitHub + Netlify)
-- [ ] Set budget ($0/month; monitor Git LFS bandwidth if >1GB/month)
+- [ ] Set budget ($0/month; monitor Git LFS bandwidth if >10GB/month)
 - [ ] Verify Figma asset recovery (TOA-280 pilot)
 - [ ] Design catalogue schema (TOA-277)
 - [ ] Plan reference migration workflow (TOA-278)
@@ -305,10 +305,10 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 
 | Provider | Monthly | Annual | Recommendation |
 |----------|---------|--------|---|
-| **Cloudinary** | $99 | $1,188 | ✅ Recommended |
-| GitHub + Netlify | $0–25 | $0–300 | Alternative (cost-conscious) |
+| **GitHub + Netlify** | $0–25 | $0–300 | ✅ Approved |
+| Cloudinary | $99 | $1,188 | Alternative (UX-optimized scaling) |
 | AWS S3 | $3–20 | $36–240 | Overkill at TOA scale |
 
 ---
 
-**Next Action:** Approve Cloudinary recommendation to unblock TOA-276 (storage evaluation) and TOA-278 (migration design).
+**Next Action:** Begin GitHub + Netlify setup (TOA-278: migration design) with approved provider. Implement asset catalogue versioning, Netlify CDN deployment, and Sharp-based image optimisation.
