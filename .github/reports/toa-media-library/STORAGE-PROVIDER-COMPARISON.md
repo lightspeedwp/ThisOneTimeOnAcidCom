@@ -21,7 +21,7 @@ Industry-standard media management platform with visual upload interface, automa
 | **Book Quality Exports** | ⭐⭐⭐⭐ | API can export high-res variants; batch export feasible |
 | **Portability** | ⭐⭐⭐ | API exports feasible; some vendor lock-in to URL schemes |
 | **Original Preservation** | ⭐⭐⭐⭐ | Stores originals; generates derivatives on-demand |
-| **Cost** | ⭐⭐⭐⭐ | Free tier: 25K API calls/mo; Pro: $99/mo (~1.5M API calls/mo) |
+| **Cost** | ⭐⭐⭐⭐ | Free tier: 25K API calls/mo (credits-based); Pro: $99/mo (625K credits/mo) |
 | **Access Control** | ⭐⭐⭐⭐ | Token-based, signed URLs, role-based dashboard access |
 | **Integration Difficulty** | Easy | React SDK; environment config + reference mapping |
 
@@ -47,10 +47,10 @@ Industry-standard media management platform with visual upload interface, automa
 | Item | Monthly | Annual |
 |------|---------|--------|
 | Cloudinary Pro tier | $99 | $1,188 |
-| API calls (1.5M/mo budget) | Included | Included |
-| Additional overage (if >1.5M) | $0.07/1K calls | TBD |
-| Book exports (manual API calls, ~12/year) | $0 | $0 |
-| **Total** | **$99** | **$1,188** |
+| Credits included (625K/mo for transforms + API calls) | Included | Included |
+| Additional overage (if >625K credits) | ~$0.001/credit | TBD |
+| Book exports (manual API calls via SDK, ~12/year) | $0–5 | $0–60 |
+| **Total** | **$99–104** | **$1,188–1,248** |
 
 **Free Tier (if cost-conscious initially):**
 - 25K API calls/month = ~80 daily page views with caching
@@ -122,13 +122,13 @@ Free, fully portable approach using Git (+ Git LFS if >100 MB). Assets live in r
 | Item | Monthly | Annual |
 |------|---------|--------|
 | GitHub (free) | $0 | $0 |
-| GitHub LFS (if >1GB/mo) | $5 | $60 |
+| GitHub LFS (1GB storage + 1GB bandwidth included free; $0.50/GB additional) | $0–10 | $0–120 |
 | Netlify (free tier, build time limited) | $0 | $0 |
-| Netlify Pro (if builds exceed limit) | $20 | $240 |
-| **Total (free tier)** | **$0** | **$0** |
-| **Total (with LFS + Pro)** | **$25** | **$300** |
+| Netlify Pro (if builds exceed free tier quota) | $0–20 | $0–240 |
+| **Total (free tier, <1GB/mo assets)** | **$0** | **$0** |
+| **Total (with LFS overage + Pro)** | **$10–30** | **$120–360** |
 
-**Note:** Free tier sufficient if <~500 daily page views; upgrade only on scale.
+**Note:** GitHub's free tier includes 1GB LFS storage + 1GB bandwidth per month; free tier sufficient if <~500 daily page views. Upgrade only if assets exceed 1GB/month or build time exceeds 45 min/month.
 
 ### Pros
 ✅ Zero cost (GitHub + Netlify free)  
@@ -167,7 +167,7 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 | **Visual Upload UX** | ⭐⭐⭐ | S3 console (basic) or third-party uploader (complex) |
 | **Automatic Optimisation** | ⭐⭐⭐ | Lambda@Edge or third-party needed; not built-in |
 | **CDN Performance** | ⭐⭐⭐⭐⭐ | CloudFront global edge; excellent for global audience |
-| **Book Quality Exports** | ⭐⭐⭐⭐ | S3 Select, batch export via Lambda |
+| **Book Quality Exports** | ⭐⭐⭐⭐ | Batch download via SDK or Lambda function |
 | **Portability** | ⭐⭐⭐⭐ | AWS-specific APIs; exportable via standard tools |
 | **Original Preservation** | ⭐⭐⭐⭐⭐ | S3 versioning + lifecycle policies |
 | **Cost** | ⭐⭐⭐ | $5–30/mo (storage + data transfer) |
@@ -183,7 +183,7 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 4. URL generation:
    https://d123.cloudfront.net/toa/jungle-01.jpg
 5. Optional: Lambda@Edge for on-demand resizing
-6. Book export: S3 Select or bulk download via SDK
+6. Book export: Bulk download via SDK or Lambda function
 ```
 
 ### Cost Model (TOA Scale)
