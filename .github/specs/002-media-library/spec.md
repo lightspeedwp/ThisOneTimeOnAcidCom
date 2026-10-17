@@ -217,7 +217,7 @@ Captures findings from validation runs.
 
 ### Measurable Outcomes
 
-- **SC-001**: All recoverable original assets are identified and catalogued with complete metadata (asset ID, format, provenance, print suitability, usage); unrecoverable assets are documented with recovery method attempted and reason unrecoverable.
+- **SC-001**: 40–50 of 56 recoverable original assets are identified and catalogued with complete metadata (asset ID, format, provenance, print suitability, usage); unrecoverable assets are documented with recovery method attempted and reason unrecoverable.
 - **SC-002**: Catalogue schema is validated against a minimum of 12 pilot assets and confirmed to capture all required fields without data fabrication for unknown/missing provenance.
 - **SC-003**: Provider evaluation report includes real-world workflow testing (upload, tag, retrieve, edit) for at least 2 shortlisted providers using representative recovered assets, with documented cost, limits and print-quality support.
 - **SC-004**: Validation approach (visual comparison, broken-reference detection, metadata checks) is defined and tested against recovered assets, with a sample operational runbook delivered.
@@ -259,7 +259,10 @@ These questions must be answered to resolve specification ambiguities that impac
 | C | Defer provider choice; proceed with evaluation per TOA-276 and recommend later | TOA-284 and TOA-285 remain blocked until TOA-276 completes; recovery and catalogue work proceed independently |
 | Custom | [Specify alternative provider or decision process] | [Impacts on downstream issues] |
 
-**Your choice**: _[Awaiting owner response]_
+**Your choice**: **Option A** ✅ RESOLVED
+- Decision: Approve GitHub + Netlify as working assumption for planning
+- Rationale: Audit PR #285 decision log supports this approach; aligns with existing Netlify deployment; enables Git LFS integration for binary asset management
+- Implications: TOA-284 and TOA-285 can plan infrastructure around Git LFS quotas, Netlify deployment, and static hosting strategy
 
 ---
 
@@ -278,7 +281,11 @@ These questions must be answered to resolve specification ambiguities that impac
 | C | Recovery percentage is unknown; define success as "recover what is possible, document what is not" and assess print suitability after recovery | Recovery metrics are qualitative; validation focuses on quality, not quantity |
 | Custom | [Specify expected recovery rate and print baseline] | [Impacts on effort estimation and provider evaluation] |
 
-**Your choice**: _[Awaiting owner response]_
+**Your choice**: **Option A** ✅ RESOLVED
+- Decision: 40–50 of 56 assets recoverable as high-quality originals; print requires 300 DPI, RGB/CMYK, PNG/PDF
+- Realistic Recovery Target: 40–50 assets (71–89% of 56 total) recoverable as high-quality originals
+- Print-Quality Baseline: Minimum 300 DPI, RGB/CMYK colour space, PNG or PDF format support
+- Print Requirement Status: Essential for MVP (primary use case supports book publishing)
 
 ---
 
@@ -297,7 +304,11 @@ These questions must be answered to resolve specification ambiguities that impac
 | C | TOA-277 is complete specification; TOA-283 is implementation optimisation only; no blocker relationship | Implementation can start after TOA-277; TOA-283 is a refinement task, not a gate |
 | Custom | [Specify intended dependencies] | [Impacts on project scheduling and blocker logic] |
 
-**Your choice**: _[Awaiting owner response]_
+**Your choice**: **Option B** ✅ RESOLVED
+- Decision: Parallel execution with coordinated validation (Phase 0 → Phase 1 + Phase 2 parallel → Phase 3)
+- Blocker Chain: Phase 0 (research + clarifications) blocks Phase 1 design; Phase 1 can run parallel with Phase 2 (validation); TOA-284/285 can begin planning during Phase 1
+- Parallel Opportunities: TOA-277, TOA-280, TOA-276, TOA-282 run concurrently in Phase 1; TOA-284/285 infrastructure planning begins immediately after Q1 provider approval
+- Rework Risk Mitigation: If TOA-282 validation finds schema issues, TOA-284/285 infrastructure work is provider-independent and continues; pipeline implementation may need refinement
 
 ---
 
@@ -309,6 +320,7 @@ These questions must be answered to resolve specification ambiguities that impac
 |---|---|---|
 | **Recovery Requirements (FR-001–005)** | TOA-8, TOA-280, TOA-282 | TOA-8 initiates Figma artwork restoration (read-only); TOA-280 evaluates extraction capability; TOA-282 validates pilot recovery quality |
 | **Catalogue Schema (FR-006–009)** | TOA-277, TOA-283 | TOA-277 defines initial schema; TOA-283 finalises schema based on validation findings |
+| **Reference Migration Workflow (FR-001, TOA-278)** | TOA-278 | Design deduplication, reference mappings, verification and rollback; follows catalogue schema and storage provider decisions |
 | **Provider Evaluation (FR-010–013)** | TOA-276 | Evaluation workflow using representative recovered assets |
 | **Validation Approach (FR-014–016)** | TOA-279, TOA-282 | TOA-279 defines validation and handoff; TOA-282 performs pilot validation |
 | **Figma Capabilities Assessment (FR-001, FR-005)** | TOA-280 | Assesses extraction fidelity, limitations, reusable skills |

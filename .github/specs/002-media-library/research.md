@@ -130,18 +130,23 @@ This document captures the three critical clarification questions raised in the 
 **Source**: `.github/reports/toa-media-library/` (PR #285, branch `claude/charming-thompson-iyxuvu`)
 
 **Key Findings**:
-- [To be documented after PR review and research summary]
+- See [audit-report.md](.github/reports/toa-media-library/audit-report.md) for full inventory and recovery assessment
+- Decision log favours GitHub + Netlify (Q1 decision basis)
+- Pilot assets demonstrate recovery feasibility via Figma Make extraction
 
 ### From Strategy and Provider-Comparison Reports
 
 **Provider Comparison Summary** (from `.github/reports/toa-media-library/`):
-- [To be documented after report review and provider evaluation]
+- See [provider-comparison.md](.github/reports/toa-media-library/provider-comparison.md) for detailed cost, feature and integration analysis
+- Q1 decision resolved: GitHub + Netlify approved as working assumption per audit recommendation
+- TOA-276 evaluation will proceed with GitHub+Netlify as baseline; alternatives evaluated but do not gate implementation
 
 ### From Figma Extraction Pilot (TOA-280 Scope)
 
 **Extraction Capability Assessment**:
-- [To be documented after pilot runs; informs recovery baseline (Q2)]
-- [Fidelity, supported formats, performance, manual-export gaps]
+- TOA-280 evaluation results in progress (read-only Figma Make extraction testing)
+- Recovery baseline (Q2) established: 40–50 of 56 assets recoverable as high-quality originals; 300 DPI print support required
+- Pilot fidelity assessment will document supported formats, performance characteristics, and manual-export gaps for wider deployment
 
 ### Decision Rationale (Once Resolved)
 
