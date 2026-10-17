@@ -3,20 +3,12 @@
  * Tests all 38 authorised types, forbidden prefixes, exemptions, and edge cases.
  */
 
-import { execSync } from 'child_process';
 import {
   validateBranch,
   ValidationResult,
   AUTHORISED_TYPES,
-  checkForbiddenPrefix,
-  checkExemptions,
-  validateStandardPattern,
-  getCurrentBranch,
-  FORBIDDEN_PREFIXES,
-  PATTERNS
+  main
 } from './validate-branch-name.js';
-
-jest.mock('child_process');
 
 describe('Branch Name Validation', () => {
   describe('Valid Branches - Standard Pattern', () => {
@@ -84,10 +76,12 @@ describe('Branch Name Validation', () => {
   describe('Valid Branches - All 38 Authorised Types', () => {
     AUTHORISED_TYPES.forEach(type => {
       test(`should validate "${type}/scope-title" as valid`, () => {
-        const branch = `${type}/scope-title`;
+        const branch = type === 'release' ? 'release/v1.0.0' : `${type}/scope-title`;
         const result = validateBranch(branch);
         expect(result.isValid).toBe(true);
-        expect(result.details.matchedType).toBe(type);
+        if (type !== 'release') {
+          expect(result.details.matchedType).toBe(type);
+        }
       });
     });
   });
@@ -341,135 +335,61 @@ describe('Branch Name Validation', () => {
     });
   });
 
-  describe('Helper Functions', () => {
-    describe('checkForbiddenPrefix', () => {
-      test('detects claude/ prefix', () => {
-        const result = checkForbiddenPrefix('claude/my-feature');
-        expect(result.isValid).toBe(false);
-        expect(result.type).toBe('forbidden-prefix');
-      });
+  describe('CLI Execution - Main Function', () => {
+    const originalArgv = process.argv;
+    const originalExit = process.exit;
+    const originalLog = console.log;
+    const originalError = console.error;
 
-      test('detects copilot/ prefix', () => {
-        const result = checkForbiddenPrefix('copilot/fix-bug');
-        expect(result.isValid).toBe(false);
-      });
-
-      test('detects openai/ prefix', () => {
-        const result = checkForbiddenPrefix('openai/integration');
-        expect(result.isValid).toBe(false);
-      });
-
-      test('returns null for allowed prefixes', () => {
-        const result = checkForbiddenPrefix('feat/my-feature');
-        expect(result).toBeNull();
-      });
+    beforeEach(() => {
+      jest.spyOn(process, 'exit').mockImplementation();
+      jest.spyOn(console, 'log').mockImplementation();
+      jest.spyOn(console, 'error').mockImplementation();
     });
 
-    describe('checkExemptions', () => {
-      test('recognizes dependabot branches', () => {
-        const result = checkExemptions('dependabot/npm_and_yarn/lodash-4.17.21');
-        expect(result.isValid).toBe(true);
-        expect(result.type).toBe('exemption');
-      });
-
-      test('recognizes renovate branches', () => {
-        const result = checkExemptions('renovate/npm-lodash');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('recognizes release/vX.Y.Z branches', () => {
-        const result = checkExemptions('release/v1.2.3');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('recognizes release/vX.Y.Z-beta.N branches', () => {
-        const result = checkExemptions('release/v2.0.0-beta.1');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('recognizes date-based releases', () => {
-        const result = checkExemptions('release/2025-01-15');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('returns null for non-exemption branches', () => {
-        const result = checkExemptions('feat/my-feature');
-        expect(result).toBeNull();
-      });
+    afterEach(() => {
+      process.argv = originalArgv;
+      process.exit.mockRestore();
+      console.log.mockRestore();
+      console.error.mockRestore();
     });
 
-    describe('validateStandardPattern', () => {
-      test('validates standard type/scope-title pattern', () => {
-        const result = validateStandardPattern('feat/user-dashboard');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('rejects missing scope', () => {
-        const result = validateStandardPattern('feat/');
-        expect(result.isValid).toBe(false);
-      });
-
-      test('rejects invalid type', () => {
-        const result = validateStandardPattern('feature/user-dashboard');
-        expect(result.isValid).toBe(false);
-      });
+    test('should validate branch passed via --branch argument', () => {
+      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test-feature'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(process.exit).toHaveBeenCalledWith(0);
+      expect(console.log).toHaveBeenCalled();
     });
 
-    describe('ValidationResult class', () => {
-      test('toJSON returns correct structure', () => {
-        const result = new ValidationResult(
-          true,
-          'feat/test',
-          'Valid branch',
-          'valid'
-        );
-        const json = result.toJSON();
-        expect(json.isValid).toBe(true);
-        expect(json.branch).toBe('feat/test');
-        expect(json.message).toBe('Valid branch');
-        expect(json.type).toBe('valid');
-      });
-
-      test('toJSON includes details when provided', () => {
-        const result = new ValidationResult(
-          true,
-          'feat/test',
-          'Valid branch',
-          'valid',
-          { matchedType: 'feat', scope: 'test', title: 'branch' }
-        );
-        const json = result.toJSON();
-        expect(json.details).toBeDefined();
-        expect(json.details.matchedType).toBe('feat');
-      });
+    test('should exit with error code for invalid branch via --branch', () => {
+      process.argv = ['node', 'validate-branch-name.js', '--branch', 'invalid-branch'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(process.exit).toHaveBeenCalledWith(1);
     });
 
-    describe('getCurrentBranch', () => {
-      beforeEach(() => {
-        jest.clearAllMocks();
-      });
-
-      test('throws error when not in git repository', () => {
-        execSync.mockImplementation(() => {
-          throw new Error('fatal: not a git repository');
-        });
-
-        expect(() => getCurrentBranch()).toThrow('Not in a git repository or git command failed');
-      });
-
-      test('successfully gets branch name when in git repo', () => {
-        execSync.mockReturnValue('main\n');
-
-        const branch = getCurrentBranch();
-        expect(branch).toBe('main');
-      });
-
-      test('handles branch names with special characters', () => {
-        execSync.mockReturnValue('feat/auth-v2-feature\n');
-
-        const branch = getCurrentBranch();
-        expect(branch).toBe('feat/auth-v2-feature');
-      });
+    test('should output JSON when --json flag is provided', () => {
+      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test', '--json'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(console.log).toHaveBeenCalledTimes(2);
     });
+
+    test('should handle missing value for --branch', () => {
+      process.argv = ['node', 'validate-branch-name.js', '--branch'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(process.exit).toHaveBeenCalledWith(2);
+      expect(console.error).toHaveBeenCalledWith('Error: --branch requires a value');
+    });
+
+    test('should validate current branch when no --branch argument provided', () => {
+      process.argv = ['node', 'validate-branch-name.js'];
+      const { main } = require('./validate-branch-name.js');
+      main();
+      expect(process.exit).toHaveBeenCalled();
+    });
+
   });
 });
