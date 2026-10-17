@@ -143,6 +143,31 @@ describe('Branch Name Validation', () => {
     });
   });
 
+  describe('Empty and edge case branches', () => {
+    test('should reject empty string', () => {
+      const result = validateBranch('');
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('empty-branch');
+    });
+
+    test('should reject null', () => {
+      const result = validateBranch(null);
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('empty-branch');
+    });
+
+    test('should reject whitespace-only string', () => {
+      const result = validateBranch('   ');
+      expect(result.isValid).toBe(false);
+      expect(result.type).toBe('empty-branch');
+    });
+
+    test('should trim whitespace from branch name', () => {
+      const result = validateBranch('  feat/my-feature  ');
+      expect(result.isValid).toBe(true);
+    });
+  });
+
   describe('Valid Exemptions - Renovate', () => {
     test.each([
       'renovate/my-package',

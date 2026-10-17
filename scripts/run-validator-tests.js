@@ -188,10 +188,11 @@ function runTest(branch, expectedType) {
 }
 
 /**
- * Main test runner: execute all test cases and write results report.
+ * Create initial results structure.
+ * @returns {{timestamp: string, summary: {total: number, passed: number, failed: number, byCategory: {}}, details: {}}}
  */
-function main() {
-  const results = {
+function createResultsStructure() {
+  return {
     timestamp: new Date().toISOString(),
     summary: {
       total: 0,
@@ -201,11 +202,23 @@ function main() {
     },
     details: {}
   };
+}
 
-  console.log('🧪 Running branch validation tests...\n');
+/**
+ * Process all test cases and populate results.
+ * Uses the case executor to validate branches and aggregate their results.
+ * The default executor launches child processes; tests can inject a stub.
+ * @param {object} testCases - Test cases organized by category
+ * @param {object} expectedResults - Expected result type for each category
+ * @param {typeof runTest} executeCase - Case executor, defaults to runTest
+ * @returns {{results: object, categoryResults: object[]}}
+ */
+function processAllTestCases(testCases, expectedResults, executeCase = runTest) {
+  const results = createResultsStructure();
+  const categoryResults = [];
 
-  for (const [category, branches] of Object.entries(TEST_CASES)) {
-    const expectedType = EXPECTED_RESULTS[category];
+  for (const [category, branches] of Object.entries(testCases)) {
+    const expectedType = expectedResults[category];
     results.details[category] = {
       expected: expectedType,
       cases: [],
@@ -215,7 +228,7 @@ function main() {
 
     for (const branch of branches) {
       results.summary.total++;
-      const testResult = runTest(branch, expectedType);
+      const testResult = executeCase(branch, expectedType);
       testResult.passed ? results.summary.passed++ : results.summary.failed++;
       results.details[category].cases.push({
         branch,
@@ -225,10 +238,8 @@ function main() {
 
       if (testResult.passed) {
         results.details[category].passed++;
-        process.stdout.write('✅');
       } else {
         results.details[category].failed++;
-        process.stdout.write('❌');
       }
     }
 
@@ -238,7 +249,31 @@ function main() {
       total: branches.length
     };
 
-    console.log(` ${category} (${results.details[category].passed}/${branches.length})`);
+    categoryResults.push({
+      category,
+      passed: results.details[category].passed,
+      total: branches.length
+    });
+  }
+
+  return { results, categoryResults };
+}
+
+/**
+ * Format and output test results to console.
+ * @param {object} results - Test results structure
+ * @param {object[]} categoryResults - Category-level results
+ */
+function outputTestResults(results, categoryResults) {
+  for (const { category, passed, total } of categoryResults) {
+    for (let i = 0; i < total; i++) {
+      if (i < passed) {
+        process.stdout.write('✅');
+      } else {
+        process.stdout.write('❌');
+      }
+    }
+    console.log(` ${category} (${passed}/${total})`);
   }
 
   console.log(`\n📊 Test Results Summary:`);
@@ -246,6 +281,17 @@ function main() {
   console.log(`  Passed: ${results.summary.passed}`);
   console.log(`  Failed: ${results.summary.failed}`);
   console.log(`  Success Rate: ${((results.summary.passed / results.summary.total) * 100).toFixed(1)}%\n`);
+}
+
+/**
+ * Main test runner: execute all test cases and write results report.
+ */
+function main() {
+  console.log('🧪 Running branch validation tests...\n');
+
+  const { results, categoryResults } = processAllTestCases(TEST_CASES, EXPECTED_RESULTS);
+
+  outputTestResults(results, categoryResults);
 
   // Write report
   const { _projectRoot } = getPaths();
@@ -263,4 +309,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   });
 }
 
-export { runTest, main };
+export { runTest, createResultsStructure, processAllTestCases, outputTestResults, main, TEST_CASES, EXPECTED_RESULTS };
