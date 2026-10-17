@@ -2,7 +2,7 @@
  * test-server-handler.test.js — Tests for HTTP server handler functions.
  */
 
-import { describe, it, expect, beforeEach, afterEach } from '@jest/globals';
+import { describe, it, expect, beforeEach, afterEach, jest } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';

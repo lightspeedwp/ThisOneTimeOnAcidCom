@@ -10,7 +10,11 @@ describe('test-server', () => {
 
   afterEach(() => {
     if (server) {
-      server.close();
+      return new Promise((resolve) => {
+        server.close(() => {
+          resolve();
+        });
+      });
     }
   });
 

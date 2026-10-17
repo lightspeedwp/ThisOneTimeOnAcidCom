@@ -30,15 +30,17 @@ export function startServer(port = PORT) {
     console.log('SPA fallback enabled: all routes fall back to index.html');
   });
 
-  process.on('SIGINT', () => {
-    console.log('Test server stopped');
-    process.exit(0);
-  });
-
   return server;
 }
 
 // Only start the server if this is the entry point
-if (import.meta.url === `file://${process.argv[1]}`) {
-  startServer();
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+  const server = startServer();
+
+  process.on('SIGINT', () => {
+    console.log('Test server stopped');
+    server.close(() => {
+      process.exit(0);
+    });
+  });
 }
