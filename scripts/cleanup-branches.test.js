@@ -348,6 +348,18 @@ describe('buildExcludeRegex', () => {
     const regex = buildExcludeRegex({ excludePatterns: ' pattern1 | pattern2 | pattern3 ' });
     expect(regex).toBeDefined();
   });
+
+  it('handles empty custom patterns', () => {
+    const regex = buildExcludeRegex({ excludePatterns: '' });
+    expect(regex.test('release/v1.0.0')).toBe(true);
+    expect(regex.test('feat/normal')).toBe(false);
+  });
+
+  it('handles single custom pattern', () => {
+    const regex = buildExcludeRegex({ excludePatterns: 'custom/.*' });
+    expect(regex.test('custom/branch')).toBe(true);
+    expect(regex.test('release/v1.0.0')).toBe(true);
+  });
 });
 
 describe('formatBytes', () => {
