@@ -302,14 +302,13 @@ describe('Report generation', () => {
     const errors = [];
     const metrics = getMetrics(deleted, preserved, errors);
 
-    // Mock opts for this test
-    global.opts = {
+    const options = {
       reportDir: tempDir,
       inactiveDays: 30,
       verbose: false,
     };
 
-    const reportPath = writeMarkdownReport(deleted, preserved, errors, metrics);
+    const reportPath = writeMarkdownReport(deleted, preserved, errors, metrics, options);
 
     expect(fs.existsSync(reportPath)).toBe(true);
     const content = fs.readFileSync(reportPath, 'utf8');
@@ -341,14 +340,13 @@ describe('Report generation', () => {
     const errors = [];
     const metrics = getMetrics(deleted, preserved, errors);
 
-    // Mock opts for this test
-    global.opts = {
+    const options = {
       reportDir: tempDir,
       inactiveDays: 30,
       verbose: false,
     };
 
-    const reportPath = writeJsonReport(deleted, preserved, errors, metrics);
+    const reportPath = writeJsonReport(deleted, preserved, errors, metrics, options);
 
     expect(fs.existsSync(reportPath)).toBe(true);
     const content = JSON.parse(fs.readFileSync(reportPath, 'utf8'));

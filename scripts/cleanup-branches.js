@@ -96,11 +96,11 @@ const DEFAULT_EXCLUDE_PATTERN = /^(release\/|hotfix\/)/;
 // Helpers
 // ============================================================================
 
-function buildExcludeRegex() {
+function buildExcludeRegex(options = opts) {
   const parts = [DEFAULT_EXCLUDE_PATTERN.source];
-  if (opts.excludePatterns) {
+  if (options.excludePatterns) {
     parts.push(
-      ...opts.excludePatterns
+      ...options.excludePatterns
         .split('|')
         .map((p) => p.trim())
         .filter(Boolean)
@@ -167,9 +167,9 @@ function getMetrics(deleted, preserved, errors) {
   };
 }
 
-function ensureReportDir() {
-  if (!fs.existsSync(opts.reportDir)) {
-    fs.mkdirSync(opts.reportDir, { recursive: true });
+function ensureReportDir(options = opts) {
+  if (!fs.existsSync(options.reportDir)) {
+    fs.mkdirSync(options.reportDir, { recursive: true });
   }
 }
 
@@ -177,16 +177,16 @@ function ensureReportDir() {
 // Reporting
 // ============================================================================
 
-function writeMarkdownReport(deleted, preserved, errors, metrics) {
+function writeMarkdownReport(deleted, preserved, errors, metrics, options = opts) {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-  const filePath = path.join(opts.reportDir, `branch-cleanup-${timestamp}.md`);
+  const filePath = path.join(options.reportDir, `branch-cleanup-${timestamp}.md`);
 
   const lines = [
     `# Branch Cleanup Report`,
     ``,
     `**Date:** ${new Date().toISOString()}`,
     `**Mode:** Report-only (no deletions executed)`,
-    `**Threshold:** ${opts.inactiveDays} days inactive`,
+    `**Threshold:** ${options.inactiveDays} days inactive`,
     ``,
     `## Summary`,
     ``,
@@ -273,19 +273,19 @@ function writeMarkdownReport(deleted, preserved, errors, metrics) {
   );
 
   const content = lines.join('\n');
-  ensureReportDir();
+  ensureReportDir(options);
   fs.writeFileSync(filePath, content, 'utf8');
   return filePath;
 }
 
-function writeJsonReport(deleted, preserved, errors, metrics) {
+function writeJsonReport(deleted, preserved, errors, metrics, options = opts) {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-  const filePath = path.join(opts.reportDir, `branch-cleanup-${timestamp}.json`);
+  const filePath = path.join(options.reportDir, `branch-cleanup-${timestamp}.json`);
 
   const report = {
     timestamp: new Date().toISOString(),
     mode: 'report-only',
-    inactiveDays: opts.inactiveDays,
+    inactiveDays: options.inactiveDays,
     summary: {
       candidateCount: deleted.length,
       keptCount: preserved.filter((b) => b.category === 'KEEP').length,
@@ -320,7 +320,7 @@ function writeJsonReport(deleted, preserved, errors, metrics) {
     })),
   };
 
-  ensureReportDir();
+  ensureReportDir(options);
   fs.writeFileSync(filePath, JSON.stringify(report, null, 2), 'utf8');
   return filePath;
 }
@@ -420,7 +420,7 @@ async function main() {
       try {
         const lastCommitDate = getLastCommitDate(branch);
         const author = getLastCommitAuthor(branch);
-        const mergeStatus = getMergeStatus(branch);
+        const mergeStatus = getMergeStatus(branch, baseRef);
 
         const classification = categorizeBranch(
           branch,

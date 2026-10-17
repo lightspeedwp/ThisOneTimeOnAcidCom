@@ -45,14 +45,14 @@ export function getBaseRef() {
  * Returns 'merged', 'unmerged', or 'unknown'.
  *
  * @param {string} branch - Remote branch name (without 'origin/' prefix)
+ * @param {string} baseRef - Base reference (e.g., 'origin/main')
  * @returns {string} 'merged' | 'unmerged' | 'unknown'
  */
-export function getMergeStatus(branch) {
-  const baseRef = getBaseRef();
+export function getMergeStatus(branch, baseRef = null) {
+  const base = baseRef || getBaseRef();
   try {
-    const output = runGit(['merge-base', '--is-ancestor', `origin/${branch}`, baseRef]);
     // is-ancestor returns exit code 0 if first is ancestor of second (i.e., merged)
-    const result = spawnSync('git', ['merge-base', '--is-ancestor', `origin/${branch}`, baseRef], {
+    const result = spawnSync('git', ['merge-base', '--is-ancestor', `origin/${branch}`, base], {
       encoding: 'utf8',
     });
     if (result.status === 0) {

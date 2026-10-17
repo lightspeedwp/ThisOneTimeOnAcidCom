@@ -340,7 +340,6 @@ The cleanup script is **report-only** and never deletes branches:
 - ✅ No remote push deletions
 - ✅ No local branch removal
 - ✅ Fails closed on unknown merge status (DISCUSS, not DELETE)
-- ✅ Preserves branches with open pull requests
 - ✅ Protects branch authors (e.g., Dependabot, Renovate)
 
 Reports serve as the basis for human review and decision-making.

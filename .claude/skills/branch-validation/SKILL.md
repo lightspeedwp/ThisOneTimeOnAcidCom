@@ -331,7 +331,6 @@ The cleanup script is **report-only**:
 - ✅ Never pushes deletions to remote
 - ✅ Never removes local branches
 - ✅ Fails closed on uncertain merge status
-- ✅ Preserves branches with open PRs
 - ✅ Protects automated branches (Dependabot, Renovate)
 
 ### Enforcement

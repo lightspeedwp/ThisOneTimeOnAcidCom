@@ -13,12 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Automated branch cleanup analysis** — `scripts/cleanup-branches.js` identifies stale merged branches for review without executing deletions
 - **Comprehensive reporting** — Markdown and JSON formats distinguishing:
-  - Branches eligible for deletion (fully merged, inactive 30+ days, no open PRs)
+  - Branches eligible for deletion (fully merged, inactive 30+ days)
   - Branches retained (protected, excluded, active work)
   - Branches requiring discussion (uncertain merge status)
-- **Safety safeguards** — Report-only mode ensures no branch deletions occur; fails closed when PR or merge status cannot be verified
+- **Safety safeguards** — Report-only mode ensures no branch deletions occur; fails closed when merge status cannot be verified
 - **Flexible configuration** — Customisable inactivity threshold, exclusion patterns, report format and output directory
-- **Jest test suite** — 25 tests covering branch classification, reporting, metrics and non-deletion verification (100% coverage)
+- **Jest test suite** — 25 tests covering branch classification, reporting, metrics and non-deletion verification
 - **Supporting modules:**
   - `scripts/lib/constants.js` — Reason codes and configuration constants
   - `scripts/lib/branch-categorization.js` — Branch classification logic (KEEP / DELETE / DISCUSS)
