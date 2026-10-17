@@ -951,13 +951,14 @@ describe('daysSince variations', () => {
     // Use fixed time: 2026-10-17 12:00:00 UTC
     jest.useFakeTimers();
     jest.setSystemTime(new Date('2026-10-17T12:00:00Z'));
-
-    const result = daysSince('2026-10-17');
-    // When passed today's date string, should be between 0 and 1 day
-    expect(result).toBeGreaterThanOrEqual(0);
-    expect(result).toBeLessThan(1);
-
-    jest.useRealTimers();
+    try {
+      const result = daysSince('2026-10-17');
+      // When passed today's date string, should be between 0 and 1 day
+      expect(result).toBeGreaterThanOrEqual(0);
+      expect(result).toBeLessThan(1);
+    } finally {
+      jest.useRealTimers();
+    }
   });
 
   it('daysSince with past dates', () => {
