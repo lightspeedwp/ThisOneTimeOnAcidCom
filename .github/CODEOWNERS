@@ -6,32 +6,32 @@
 
 # Governance & Critical Infrastructure
 # ====================================
-# Critical governance, validation, and build systems require @ashley review
-.github/                @ashley
-scripts/                @ashley
-AGENTS.md               @ashley
-CHANGELOG.md            @ashley
-.nvmrc                  @ashley
-package.json            @ashley
-package-lock.json       @ashley
-vite.config.ts          @ashley
+# Critical governance, validation, and build systems require @ashleyshaw review
+.github/                @ashleyshaw
+scripts/                @ashleyshaw
+AGENTS.md               @ashleyshaw
+CHANGELOG.md            @ashleyshaw
+.nvmrc                  @ashleyshaw
+package.json            @ashleyshaw
+package-lock.json       @ashleyshaw
+vite.config.ts          @ashleyshaw
 
 # Testing Infrastructure
 # ======================
 # Test configuration and test fixtures require review
-jest.config.js          @ashley
-vitest.config.ts        @ashley
-playwright.config.ts    @ashley
-tests/                  @ashley
+jest.config.js          @ashleyshaw
+vitest.config.ts        @ashleyshaw
+playwright.config.ts    @ashleyshaw
+tests/                  @ashleyshaw
 
 # Documentation
 # ==============
-# Guidelines and core documentation require @ashley review
-guidelines/             @ashley
-docs/                   @ashley
-README.md               @ashley
+# Guidelines and core documentation require @ashleyshaw review
+guidelines/             @ashleyshaw
+docs/                   @ashleyshaw
+README.md               @ashleyshaw
 
 # Default Owner
 # ==============
-# For files not matched by specific patterns above, @ashley is the default owner
-*                       @ashley
+# For files not matched by specific patterns above, @ashleyshaw is the default owner
+*                       @ashleyshaw
