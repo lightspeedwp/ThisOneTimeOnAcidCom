@@ -361,7 +361,7 @@ This specification defines a tailored, maintainable governance system for ThisOn
 
 ### ✅ GH-001: Enable GitHub Discussions
 
-**Decision:** Enable with templates (feature request, Q&A, show & tell, ideas).  
+**Decision:** Enable with templates (feature request, Q&A, show & tell, ideas, general).  
 **Rationale:** Reduces noise in Issues backlog; better UX for non-bug conversations.  
 **Verification:** Templates created; discussion categories configured; README documented.
 
