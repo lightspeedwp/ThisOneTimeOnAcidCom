@@ -1,0 +1,109 @@
+name: Labeling Unified
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  assign-labels:
+    name: Assign PR Labels
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Extract branch type
+        id: branch
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          # Extract type from {type}/{scope}-{title}
+          TYPE=$(echo "$BRANCH_NAME" | cut -d/ -f1 | cut -d- -f1)
+          echo "type=$TYPE" >> $GITHUB_OUTPUT
+          echo "Branch type: $TYPE"
+
+      - name: Map branch type to label
+        id: label
+        run: |
+          TYPE="${{ steps.branch.outputs.type }}"
+          LABEL="type:$TYPE"
+
+          echo "label=$LABEL" >> $GITHUB_OUTPUT
+          echo "Mapped label: $LABEL"
+
+      - name: Get changed files
+        id: files
+        run: |
+          # Detect area based on changed files
+          AREAS=""
+
+          if git diff origin/${{ github.base_ref }}...HEAD --name-only | grep -q "^src/"; then
+            AREAS="$AREAS area:src"
+          fi
+
+          if git diff origin/${{ github.base_ref }}...HEAD --name-only | grep -q "^docs/"; then
+            AREAS="$AREAS area:docs"
+          fi
+
+          if git diff origin/${{ github.base_ref }}...HEAD --name-only | grep -q "^\.github/"; then
+            AREAS="$AREAS area:github"
+          fi
+
+          if git diff origin/${{ github.base_ref }}...HEAD --name-only | grep -q "^scripts/"; then
+            AREAS="$AREAS area:scripts"
+          fi
+
+          echo "areas=$AREAS" >> $GITHUB_OUTPUT
+          echo "Detected areas: $AREAS"
+
+      - name: Set PR labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [];
+            const typeLabel = '${{ steps.label.outputs.label }}';
+            const areas = '${{ steps.files.outputs.areas }}'.split(' ').filter(Boolean);
+
+            if (typeLabel) labels.push(typeLabel);
+            labels.push(...areas);
+
+            // Add draft label if draft
+            if (context.payload.pull_request.draft) {
+              labels.push('status:draft');
+            } else {
+              labels.push('status:ready-for-review');
+            }
+
+            if (labels.length > 0) {
+              console.log('Adding labels:', labels);
+              github.rest.issues.addLabels({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: labels
+              });
+            }
+
+      - name: Comment on PR (labeling)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = context.payload.pull_request.labels;
+            if (labels && labels.length > 0) {
+              const labelList = labels.map(l => `\`${l.name}\``).join(', ');
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `🏷️ Labels assigned: ${labelList}`
+              });
+            }

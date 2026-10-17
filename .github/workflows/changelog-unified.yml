@@ -1,0 +1,90 @@
+name: Changelog Unified
+
+on:
+  pull_request:
+    paths:
+      - 'CHANGELOG.md'
+      - 'package.json'
+
+jobs:
+  validate-changelog:
+    name: Validate Changelog
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check changelog format
+        id: check
+        run: |
+          # Verify CHANGELOG.md exists
+          if [ ! -f CHANGELOG.md ]; then
+            echo "::error::CHANGELOG.md not found"
+            exit 1
+          fi
+
+          # Check for Keep a Changelog format
+          if ! head -20 CHANGELOG.md | grep -q "# Changelog"; then
+            echo "::warning::CHANGELOG.md might not follow Keep a Changelog format"
+          fi
+
+          # Check if changelog was updated in this PR
+          if git diff origin/${{ github.base_ref }}...HEAD -- CHANGELOG.md | grep -q "^+"; then
+            echo "changelog_updated=true" >> $GITHUB_OUTPUT
+            echo "✓ Changelog has been updated"
+          else
+            echo "changelog_updated=false" >> $GITHUB_OUTPUT
+            echo "⚠️ Changelog was not updated"
+          fi
+
+      - name: Check for Unreleased section
+        if: steps.check.outputs.changelog_updated == 'true'
+        run: |
+          if grep -q "## \[Unreleased\]" CHANGELOG.md; then
+            echo "✓ Unreleased section found"
+          else
+            echo "::warning::Unreleased section not found in CHANGELOG.md"
+          fi
+
+      - name: Validate version bump
+        if: steps.check.outputs.changelog_updated == 'true'
+        run: |
+          # Get current version from package.json
+          CURRENT_VERSION=$(grep '"version"' package.json | head -1 | sed 's/.*"version": "\([^"]*\)".*/\1/')
+          echo "Current version: $CURRENT_VERSION"
+
+          # Check if CHANGELOG.md mentions the version
+          if grep -q "## \[$CURRENT_VERSION\]" CHANGELOG.md; then
+            echo "✓ Version $CURRENT_VERSION is documented in CHANGELOG.md"
+          else
+            echo "::notice::Ensure version bump is documented in CHANGELOG.md"
+          fi
+
+      - name: Comment on PR (changelog check)
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const checkResult = '${{ steps.check.outputs.changelog_updated }}';
+
+            if (checkResult === 'true') {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `✅ Changelog has been updated. Verify that entries follow Keep a Changelog format.`
+              });
+            } else {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `⚠️ This PR does not appear to update CHANGELOG.md. If this change affects users, please add an entry under the Unreleased section.`
+              });
+            }

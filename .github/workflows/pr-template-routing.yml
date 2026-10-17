@@ -1,0 +1,87 @@
+name: PR Template Routing
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  route-template:
+    name: Route PR to Template
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract branch type
+        id: branch
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          # Extract type from {type}/{scope}-{title}
+          TYPE=$(echo "$BRANCH_NAME" | cut -d/ -f1)
+          echo "type=$TYPE" >> $GITHUB_OUTPUT
+          echo "Branch type: $TYPE"
+
+      - name: Check for PR templates
+        id: templates
+        run: |
+          # List available PR templates
+          TEMPLATES=$(ls .github/PULL_REQUEST_TEMPLATE/*.md 2>/dev/null | xargs -n1 basename | sort || echo "default")
+          echo "available=$TEMPLATES" >> $GITHUB_OUTPUT
+          echo "Available templates:"
+          echo "$TEMPLATES"
+
+      - name: Validate template usage
+        id: validate
+        run: |
+          BRANCH_TYPE="${{ steps.branch.outputs.type }}"
+
+          # Map branch types to templates
+          case "$BRANCH_TYPE" in
+            feat)
+              EXPECTED_TEMPLATE="feat.md"
+              ;;
+            fix)
+              EXPECTED_TEMPLATE="fix.md"
+              ;;
+            docs)
+              EXPECTED_TEMPLATE="docs.md"
+              ;;
+            test)
+              EXPECTED_TEMPLATE="test.md"
+              ;;
+            *)
+              EXPECTED_TEMPLATE="default.md"
+              ;;
+          esac
+
+          echo "expected_template=$EXPECTED_TEMPLATE" >> $GITHUB_OUTPUT
+          echo "Expected template for branch type '$BRANCH_TYPE': $EXPECTED_TEMPLATE"
+
+      - name: Check PR body format
+        run: |
+          PR_BODY="${{ github.event.pull_request.body }}"
+
+          # Check for common PR template sections
+          if echo "$PR_BODY" | grep -q "## Summary\|## Description"; then
+            echo "✓ PR has expected sections"
+          else
+            echo "::notice::PR might not follow the template format"
+          fi
+
+      - name: Comment on PR (template routing)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branchType = '${{ steps.branch.outputs.type }}';
+            const expectedTemplate = '${{ steps.validate.outputs.expected_template }}';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `📋 PR template routing: Branch type \`${branchType}\` should use template \`${expectedTemplate}\`\n\nPlease ensure your PR description follows the appropriate template format.`
+            });
