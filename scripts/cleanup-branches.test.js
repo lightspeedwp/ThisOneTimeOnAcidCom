@@ -8,8 +8,14 @@ import {
   buildExcludeRegex,
   estimateStorageFreedBytes,
   formatBytes,
+  getArg,
   getMetrics,
   getRemoteBranches,
+  log,
+  logError,
+  logTimestamp,
+  parseBool,
+  toPct,
   writeMarkdownReport,
   writeJsonReport,
 } from './cleanup-branches.js';
@@ -71,6 +77,21 @@ describe('categorizeBranch', () => {
       expect(result.category).toBe('KEEP');
       expect(result.reason).toBe(REASON_CODES.KEEP.excluded_pattern);
     }
+  });
+
+  it('does not preserve branches that do not match exclude pattern', () => {
+    const excludeRe = /^(release\/|hotfix\/)/;
+    const inactiveDays = 30;
+    const pastDate = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(); // 60 days ago
+
+    const result = categorizeBranch('feat/old-feature', {
+      lastCommitDate: pastDate,
+      author: 'test@example.com',
+      mergeStatus: 'merged',
+    }, new Set(), excludeRe, inactiveDays);
+
+    // Should be eligible for deletion since it doesn't match exclude pattern
+    expect(result.category).toBe('DELETE');
   });
 
   it('preserves branches with open PRs', () => {
@@ -160,6 +181,81 @@ describe('categorizeBranch', () => {
 
     expect(result.category).toBe('KEEP');
     expect(result.reason).toBe('Unable to classify');
+  });
+
+  it('handles empty metadata with defaults', () => {
+    const result = categorizeBranch('feat/test', {});
+
+    expect(result.category).toBe('DISCUSS');
+    expect(result.reason).toBe(REASON_CODES.DISCUSS.merge_status_unknown);
+  });
+
+  it('preserves branches with open PRs even if they meet deletion criteria', () => {
+    const openPRs = new Set(['fix/stale-with-pr']);
+    const staleDate = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString();
+
+    const result = categorizeBranch('fix/stale-with-pr', {
+      lastCommitDate: staleDate,
+      author: 'test@example.com',
+      mergeStatus: 'merged',
+    }, openPRs, null, 30);
+
+    expect(result.category).toBe('KEEP');
+    expect(result.reason).toBe(REASON_CODES.KEEP.open_pr);
+  });
+
+  it('checks excluded branches before other conditions', () => {
+    const excludeRe = /^excluded\/.*/;
+    const staleDate = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString();
+
+    const result = categorizeBranch('excluded/very-stale', {
+      lastCommitDate: staleDate,
+      author: 'test@example.com',
+      mergeStatus: 'merged',
+    }, new Set(), excludeRe, 30);
+
+    expect(result.category).toBe('KEEP');
+    expect(result.reason).toBe(REASON_CODES.KEEP.excluded_pattern);
+  });
+
+  it('handles null lastCommitDate gracefully', () => {
+    const result = categorizeBranch('feat/no-date', {
+      author: 'test@example.com',
+      mergeStatus: 'merged',
+    }, new Set(), null, 30);
+
+    expect(result.metadata.ageInDays).toBe(0);
+    expect(result.category).toBe('KEEP'); // Recent (age 0 < 30)
+  });
+
+  it('uses custom inactiveDays threshold', () => {
+    const recentDate = new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(); // 45 days ago
+
+    const resultWith30Days = categorizeBranch('feat/test', {
+      lastCommitDate: recentDate,
+      author: 'test@example.com',
+      mergeStatus: 'merged',
+    }, new Set(), null, 30);
+
+    const resultWith60Days = categorizeBranch('feat/test', {
+      lastCommitDate: recentDate,
+      author: 'test@example.com',
+      mergeStatus: 'merged',
+    }, new Set(), null, 60);
+
+    expect(resultWith30Days.category).toBe('DELETE'); // 45 >= 30
+    expect(resultWith60Days.category).toBe('KEEP'); // 45 < 60
+  });
+
+  it('handles renovate branches like dependabot', () => {
+    const result = categorizeBranch('renovate/major-version-update', {
+      lastCommitDate: '2025-01-01T00:00:00Z',
+      author: 'renovate@bot.com',
+      mergeStatus: 'merged',
+    });
+
+    expect(result.category).toBe('KEEP');
+    expect(result.reason).toBe(REASON_CODES.KEEP.dependabot);
   });
 });
 
@@ -307,6 +403,40 @@ describe('estimateStorageFreedBytes', () => {
   });
 });
 
+describe('toPct', () => {
+  it('converts ratio to percentage with two decimals', () => {
+    expect(toPct(50, 100)).toBe('50.00%');
+    expect(toPct(1, 3)).toBe('33.33%');
+    expect(toPct(2, 5)).toBe('40.00%');
+  });
+
+  it('returns 0.00% when denominator is zero', () => {
+    expect(toPct(0, 0)).toBe('0.00%');
+    expect(toPct(100, 0)).toBe('0.00%');
+    expect(toPct(1, 0)).toBe('0.00%');
+  });
+
+  it('handles fractional percentages', () => {
+    expect(toPct(1, 6)).toBe('16.67%');
+    expect(toPct(1, 7)).toBe('14.29%');
+  });
+
+  it('handles small numerators', () => {
+    expect(toPct(1, 1000)).toBe('0.10%');
+    expect(toPct(0, 100)).toBe('0.00%');
+  });
+
+  it('handles 100% correctly', () => {
+    expect(toPct(100, 100)).toBe('100.00%');
+    expect(toPct(1, 1)).toBe('100.00%');
+  });
+
+  it('rounds correctly to two decimals', () => {
+    expect(toPct(1, 3)).toBe('33.33%');
+    expect(toPct(2, 3)).toBe('66.67%');
+  });
+});
+
 describe('ensureReportDir - existing directory', () => {
   it('does not error when directory already exists', () => {
     const tempDir = createTempReportDir();
@@ -372,6 +502,88 @@ describe('getMetrics', () => {
     const metrics = getMetrics([], [], []);
     expect(metrics.successfulDeletes).toBe(0);
     expect(metrics.totalCommits).toBe(0);
+    expect(metrics.preservedDeletedRatio).toBe('0:0');
+  });
+
+  it('calculates preserved-to-deleted ratio correctly', () => {
+    const deleted = [
+      {
+        branch: 'feat/old',
+        type: 'feat',
+        author: 'alice@example.com',
+        commitCount: 5,
+        estimatedStorageBytes: 5 * AVG_STORAGE_BYTES_PER_COMMIT,
+      },
+    ];
+
+    const preserved = [
+      { branch: 'main', category: 'KEEP' },
+      { branch: 'develop', category: 'KEEP' },
+      { branch: 'staging', category: 'KEEP' },
+    ];
+
+    const metrics = getMetrics(deleted, preserved, []);
+    expect(metrics.preservedDeletedRatio).toBe('3:1');
+  });
+
+  it('handles branches with missing authors', () => {
+    const deleted = [
+      {
+        branch: 'feat/auth',
+        type: 'feat',
+        author: 'alice@example.com',
+        commitCount: 5,
+        estimatedStorageBytes: 5 * AVG_STORAGE_BYTES_PER_COMMIT,
+      },
+      {
+        branch: 'fix/bug',
+        type: 'fix',
+        // No author field
+        commitCount: 3,
+        estimatedStorageBytes: 3 * AVG_STORAGE_BYTES_PER_COMMIT,
+      },
+    ];
+
+    const metrics = getMetrics(deleted, [], []);
+    expect(metrics.authorsAffected).toContain('alice@example.com');
+    expect(metrics.authorsAffected).toEqual(['alice@example.com']);
+    expect(metrics.authorsAffected.length).toBe(1);
+  });
+
+  it('handles branches with errors', () => {
+    const deleted = [
+      {
+        branch: 'feat/auth',
+        type: 'feat',
+        author: 'alice@example.com',
+        commitCount: 5,
+        estimatedStorageBytes: 5 * AVG_STORAGE_BYTES_PER_COMMIT,
+      },
+    ];
+
+    const errors = [
+      { branch: 'some/failing-branch', error: 'Failed to analyze' },
+    ];
+
+    const metrics = getMetrics(deleted, [], errors);
+    expect(metrics.successfulDeletes).toBe(1);
+    expect(metrics.failedDeletes).toBe(1);
+    expect(metrics.successRate).toBe('50.00%');
+  });
+
+  it('infers branch type when missing', () => {
+    const deleted = [
+      {
+        branch: 'feat/auth',
+        // No type field; should be inferred as 'feat' from branch name
+        author: 'alice@example.com',
+        commitCount: 5,
+        estimatedStorageBytes: 5 * AVG_STORAGE_BYTES_PER_COMMIT,
+      },
+    ];
+
+    const metrics = getMetrics(deleted, [], []);
+    expect(metrics.byType.feat).toBe(1);
   });
 });
 
@@ -840,6 +1052,211 @@ describe('getRemoteBranches', () => {
     const branches = getRemoteBranches();
     expect(branches).toEqual(['main', 'develop']);
     expect(branches.length).toBe(2);
+  });
+});
+
+describe('CLI Argument Parsing - getArg', () => {
+  it('extracts long-form argument with value', () => {
+    const argv = ['node', 'script.js', '--verbose=true', '--inactiveDays=45'];
+    const result = getArg('inactiveDays', '30', argv);
+    expect(result).toBe('45');
+  });
+
+  it('returns default when argument not found', () => {
+    const argv = ['node', 'script.js'];
+    const result = getArg('missing', 'default-value', argv);
+    expect(result).toBe('default-value');
+  });
+
+  it('extracts boolean flag without value', () => {
+    const argv = ['node', 'script.js', '--verbose'];
+    const result = getArg('verbose', 'false', argv);
+    expect(result).toBe('true');
+  });
+
+  it('ignores arguments before index 2 (node and script name)', () => {
+    const argv = ['--not-parsed', '--also-not', '--target=value'];
+    const result = getArg('target', 'default', argv);
+    expect(result).toBe('value');
+  });
+
+  it('returns empty string value when provided', () => {
+    const argv = ['node', 'script.js', '--name='];
+    const result = getArg('name', 'default', argv);
+    expect(result).toBe('');
+  });
+
+  it('handles multiple arguments and selects correct one', () => {
+    const argv = ['node', 'script.js', '--first=1', '--second=2', '--third=3'];
+    expect(getArg('first', 'x', argv)).toBe('1');
+    expect(getArg('second', 'x', argv)).toBe('2');
+    expect(getArg('third', 'x', argv)).toBe('3');
+  });
+
+  it('returns true for boolean flag even with other arguments present', () => {
+    const argv = ['node', 'script.js', '--verbose', '--inactiveDays=45', '--other=value'];
+    const result = getArg('verbose', 'false', argv);
+    expect(result).toBe('true');
+  });
+
+  it('does not treat partial flag name match as match', () => {
+    const argv = ['node', 'script.js', '--verbosity=high'];
+    const result = getArg('verbose', 'default', argv);
+    expect(result).toBe('default');
+  });
+
+  it('handles special characters in argument values', () => {
+    const argv = ['node', 'script.js', '--pattern=feat.*|fix.*'];
+    const result = getArg('pattern', 'default', argv);
+    expect(result).toBe('feat.*|fix.*');
+  });
+});
+
+describe('CLI Argument Parsing - parseBool', () => {
+  it('converts string "true" to boolean true', () => {
+    expect(parseBool('true')).toBe(true);
+  });
+
+  it('converts string "false" to boolean false', () => {
+    expect(parseBool('false')).toBe(false);
+  });
+
+  it('returns default value for unrecognized string', () => {
+    expect(parseBool('yes', false)).toBe(false);
+    expect(parseBool('yes', true)).toBe(true);
+  });
+
+  it('returns default value for empty string', () => {
+    expect(parseBool('', false)).toBe(false);
+    expect(parseBool('', true)).toBe(true);
+  });
+
+  it('is case-sensitive (only lowercase recognized)', () => {
+    expect(parseBool('True', false)).toBe(false);
+    expect(parseBool('FALSE', false)).toBe(false);
+    expect(parseBool('TRUE', true)).toBe(true);
+  });
+
+  it('uses provided default when value is not true or false', () => {
+    expect(parseBool('maybe', true)).toBe(true);
+    expect(parseBool('1', false)).toBe(false);
+    expect(parseBool('0', true)).toBe(true);
+  });
+
+  it('defaults to false when no default provided', () => {
+    expect(parseBool('unknown')).toBe(false);
+    expect(parseBool('yes')).toBe(false);
+  });
+
+  it('handles numeric strings as non-boolean', () => {
+    expect(parseBool('1', true)).toBe(true);
+    expect(parseBool('0', false)).toBe(false);
+  });
+
+  it('correctly parses result of getArg boolean flag', () => {
+    const argv = ['node', 'script.js', '--verbose'];
+    const argValue = getArg('verbose', 'false', argv);
+    expect(parseBool(argValue)).toBe(true);
+  });
+});
+
+describe('Logging Functions', () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'log').mockImplementation();
+    jest.spyOn(console, 'error').mockImplementation();
+  });
+
+  afterEach(() => {
+    console.log.mockRestore();
+    console.error.mockRestore();
+  });
+
+  describe('logTimestamp', () => {
+    it('returns HH:mm:ss format', () => {
+      const timestamp = logTimestamp();
+      expect(timestamp).toMatch(/^\d{2}:\d{2}:\d{2}$/);
+    });
+
+    it('uses 24-hour time format', () => {
+      const timestamp = logTimestamp();
+      const [hours] = timestamp.split(':');
+      expect(parseInt(hours)).toBeGreaterThanOrEqual(0);
+      expect(parseInt(hours)).toBeLessThan(24);
+    });
+  });
+
+  describe('log', () => {
+    it('logs error level with ❌ prefix', () => {
+      log('error', 'Test error');
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('❌'));
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Test error'));
+    });
+
+    it('logs warn level with ⚠️ prefix', () => {
+      log('warn', 'Test warning');
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('⚠️'));
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Test warning'));
+    });
+
+    it('logs debug level with 🔍 prefix', () => {
+      log('debug', 'Test debug');
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('🔍'));
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Test debug'));
+    });
+
+    it('logs info level with ℹ️ prefix for unknown levels', () => {
+      log('info', 'Test info');
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('ℹ️'));
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Test info'));
+    });
+
+    it('includes timestamp in output', () => {
+      log('info', 'Test message');
+      const call = console.log.mock.calls[0][0];
+      expect(call).toMatch(/\[\d{2}:\d{2}:\d{2}\]/);
+    });
+  });
+
+  describe('logError', () => {
+    it('calls log with error level', () => {
+      jest.spyOn(console, 'log').mockImplementation();
+      logError('Error message');
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('❌'));
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Error message'));
+    });
+
+    it('logs error detail when verbose is true', () => {
+      logError('Error message', new Error('Detailed error'), true);
+      expect(console.error).toHaveBeenCalledWith(expect.stringContaining('Detailed error'));
+    });
+
+    it('does not log error detail when verbose is false', () => {
+      logError('Error message', new Error('Detailed error'), false);
+      expect(console.error).not.toHaveBeenCalled();
+    });
+
+    it('handles error objects with message property', () => {
+      const error = { message: 'Custom error message' };
+      logError('Message', error, true);
+      expect(console.error).toHaveBeenCalledWith(expect.stringContaining('Custom error message'));
+    });
+
+    it('handles error strings directly', () => {
+      logError('Message', 'Error string', true);
+      expect(console.error).toHaveBeenCalledWith(expect.stringContaining('Error string'));
+    });
+
+    it('does not crash when error is null', () => {
+      expect(() => {
+        logError('Message', null, true);
+      }).not.toThrow();
+      expect(console.error).not.toHaveBeenCalled();
+    });
+
+    it('logs main message even when error is undefined', () => {
+      logError('Main message');
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Main message'));
+    });
   });
 });
 
