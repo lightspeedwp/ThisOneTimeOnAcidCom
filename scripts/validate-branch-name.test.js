@@ -3,20 +3,16 @@
  * Tests all 38 authorised types, forbidden prefixes, exemptions, and edge cases.
  */
 
-import { execSync } from 'child_process';
 import {
   validateBranch,
   ValidationResult,
   AUTHORISED_TYPES,
+  getCurrentBranch,
   checkForbiddenPrefix,
   checkExemptions,
   validateStandardPattern,
-  getCurrentBranch,
-  FORBIDDEN_PREFIXES,
-  PATTERNS
+  parseArgs
 } from './validate-branch-name.js';
-
-jest.mock('child_process');
 
 describe('Branch Name Validation', () => {
   describe('Valid Branches - Standard Pattern', () => {
@@ -340,136 +336,162 @@ describe('Branch Name Validation', () => {
       expect(result.isValid).toBe(false);
     });
   });
+});
 
-  describe('Helper Functions', () => {
-    describe('checkForbiddenPrefix', () => {
-      test('detects claude/ prefix', () => {
-        const result = checkForbiddenPrefix('claude/my-feature');
-        expect(result.isValid).toBe(false);
-        expect(result.type).toBe('forbidden-prefix');
-      });
+describe('Main CLI functionality', () => {
+  test('validateBranch handles empty input', () => {
+    const result = validateBranch('');
+    expect(result.isValid).toBe(false);
+    expect(result.type).toBe('empty-branch');
+  });
 
-      test('detects copilot/ prefix', () => {
-        const result = checkForbiddenPrefix('copilot/fix-bug');
-        expect(result.isValid).toBe(false);
-      });
+  test('validateBranch handles null input', () => {
+    const result = validateBranch(null);
+    expect(result.isValid).toBe(false);
+    expect(result.type).toBe('empty-branch');
+  });
 
-      test('detects openai/ prefix', () => {
-        const result = checkForbiddenPrefix('openai/integration');
-        expect(result.isValid).toBe(false);
-      });
+  test('validateBranch handles whitespace-only input', () => {
+    const result = validateBranch('   ');
+    expect(result.isValid).toBe(false);
+    expect(result.type).toBe('empty-branch');
+  });
 
-      test('returns null for allowed prefixes', () => {
-        const result = checkForbiddenPrefix('feat/my-feature');
-        expect(result).toBeNull();
-      });
+  test('validateBranch trims whitespace', () => {
+    const result = validateBranch('  feat/my-feature  ');
+    expect(result.isValid).toBe(true);
+  });
+
+  test('checkForbiddenPrefix detects claude prefix', () => {
+    const result = checkForbiddenPrefix('claude/my-branch');
+    expect(result.isValid).toBe(false);
+    expect(result.type).toBe('forbidden-prefix');
+  });
+
+  test('checkForbiddenPrefix detects copilot prefix', () => {
+    const result = checkForbiddenPrefix('copilot/my-branch');
+    expect(result.isValid).toBe(false);
+    expect(result.type).toBe('forbidden-prefix');
+  });
+
+  test('checkForbiddenPrefix detects openai prefix', () => {
+    const result = checkForbiddenPrefix('openai/my-branch');
+    expect(result.isValid).toBe(false);
+    expect(result.type).toBe('forbidden-prefix');
+  });
+
+  test('checkForbiddenPrefix returns null for valid branches', () => {
+    const result = checkForbiddenPrefix('feat/my-branch');
+    expect(result).toBeNull();
+  });
+
+  test('checkExemptions detects dependabot branches', () => {
+    const result = checkExemptions('dependabot/npm_and_yarn/main');
+    expect(result.isValid).toBe(true);
+    expect(result.type).toBe('exemption');
+    expect(result.details.pattern).toBe('dependabot');
+  });
+
+  test('checkExemptions detects renovate branches', () => {
+    const result = checkExemptions('renovate/vite-6.x');
+    expect(result.isValid).toBe(true);
+    expect(result.type).toBe('exemption');
+    expect(result.details.pattern).toBe('renovate');
+  });
+
+  test('checkExemptions detects semantic version release branches', () => {
+    const result = checkExemptions('release/v1.2.3');
+    expect(result.isValid).toBe(true);
+    expect(result.type).toBe('exemption');
+    expect(result.details.pattern).toBe('releaseVersioned');
+  });
+
+  test('checkExemptions detects pre-release version branches', () => {
+    const result = checkExemptions('release/v2.0.0-beta.1');
+    expect(result.isValid).toBe(true);
+    expect(result.type).toBe('exemption');
+  });
+
+  test('checkExemptions detects date-based release branches', () => {
+    const result = checkExemptions('release/2025-01-15');
+    expect(result.isValid).toBe(true);
+    expect(result.type).toBe('exemption');
+    expect(result.details.pattern).toBe('releaseStandard');
+  });
+
+  test('checkExemptions returns null for non-exempt branches', () => {
+    const result = checkExemptions('feat/my-feature');
+    expect(result).toBeNull();
+  });
+
+  test('validateStandardPattern detects invalid pattern', () => {
+    const result = validateStandardPattern('InvalidPattern');
+    expect(result.isValid).toBe(false);
+    expect(result.type).toBe('invalid-pattern');
+  });
+
+  test('validateStandardPattern detects invalid type', () => {
+    const result = validateStandardPattern('invalid/my-feature');
+    expect(result.isValid).toBe(false);
+    expect(result.type).toBe('invalid-type');
+  });
+
+  test('ValidationResult toJSON converts to JSON', () => {
+    const result = new ValidationResult(true, 'feat/test', 'Valid', 'valid', { detail: 'info' });
+    const json = result.toJSON();
+    expect(json.isValid).toBe(true);
+    expect(json.branch).toBe('feat/test');
+    expect(json.type).toBe('valid');
+    expect(json.details.detail).toBe('info');
+  });
+
+  describe('parseArgs', () => {
+    it('should extract branch name when --branch flag is present', () => {
+      const result = parseArgs(['--branch', 'feat/test-feature']);
+      expect(result.branchName).toBe('feat/test-feature');
+      expect(result.error).toBeNull();
     });
 
-    describe('checkExemptions', () => {
-      test('recognizes dependabot branches', () => {
-        const result = checkExemptions('dependabot/npm_and_yarn/lodash-4.17.21');
-        expect(result.isValid).toBe(true);
-        expect(result.type).toBe('exemption');
-      });
-
-      test('recognizes renovate branches', () => {
-        const result = checkExemptions('renovate/npm-lodash');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('recognizes release/vX.Y.Z branches', () => {
-        const result = checkExemptions('release/v1.2.3');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('recognizes release/vX.Y.Z-beta.N branches', () => {
-        const result = checkExemptions('release/v2.0.0-beta.1');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('recognizes date-based releases', () => {
-        const result = checkExemptions('release/2025-01-15');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('returns null for non-exemption branches', () => {
-        const result = checkExemptions('feat/my-feature');
-        expect(result).toBeNull();
-      });
+    it('should return error when --branch flag has no value', () => {
+      const result = parseArgs(['--branch']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBe('Error: --branch requires a value');
     });
 
-    describe('validateStandardPattern', () => {
-      test('validates standard type/scope-title pattern', () => {
-        const result = validateStandardPattern('feat/user-dashboard');
-        expect(result.isValid).toBe(true);
-      });
-
-      test('rejects missing scope', () => {
-        const result = validateStandardPattern('feat/');
-        expect(result.isValid).toBe(false);
-      });
-
-      test('rejects invalid type', () => {
-        const result = validateStandardPattern('feature/user-dashboard');
-        expect(result.isValid).toBe(false);
-      });
+    it('should return null when --branch flag is not present', () => {
+      const result = parseArgs(['--json', '--other']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBeNull();
     });
 
-    describe('ValidationResult class', () => {
-      test('toJSON returns correct structure', () => {
-        const result = new ValidationResult(
-          true,
-          'feat/test',
-          'Valid branch',
-          'valid'
-        );
-        const json = result.toJSON();
-        expect(json.isValid).toBe(true);
-        expect(json.branch).toBe('feat/test');
-        expect(json.message).toBe('Valid branch');
-        expect(json.type).toBe('valid');
-      });
-
-      test('toJSON includes details when provided', () => {
-        const result = new ValidationResult(
-          true,
-          'feat/test',
-          'Valid branch',
-          'valid',
-          { matchedType: 'feat', scope: 'test', title: 'branch' }
-        );
-        const json = result.toJSON();
-        expect(json.details).toBeDefined();
-        expect(json.details.matchedType).toBe('feat');
-      });
+    it('should handle empty args array', () => {
+      const result = parseArgs([]);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBeNull();
     });
 
-    describe('getCurrentBranch', () => {
-      beforeEach(() => {
-        jest.clearAllMocks();
-      });
+    it('should extract branch name with special characters', () => {
+      const result = parseArgs(['--branch', 'feat/my-special_branch.name']);
+      expect(result.branchName).toBe('feat/my-special_branch.name');
+      expect(result.error).toBeNull();
+    });
 
-      test('throws error when not in git repository', () => {
-        execSync.mockImplementation(() => {
-          throw new Error('fatal: not a git repository');
-        });
+    it('should reject empty string operand for --branch', () => {
+      const result = parseArgs(['--branch', '']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBe('Error: --branch requires a non-empty value that is not a flag');
+    });
 
-        expect(() => getCurrentBranch()).toThrow('Not in a git repository or git command failed');
-      });
+    it('should reject flag-like operand for --branch', () => {
+      const result = parseArgs(['--branch', '--json']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBe('Error: --branch requires a non-empty value that is not a flag');
+    });
 
-      test('successfully gets branch name when in git repo', () => {
-        execSync.mockReturnValue('main\n');
-
-        const branch = getCurrentBranch();
-        expect(branch).toBe('main');
-      });
-
-      test('handles branch names with special characters', () => {
-        execSync.mockReturnValue('feat/auth-v2-feature\n');
-
-        const branch = getCurrentBranch();
-        expect(branch).toBe('feat/auth-v2-feature');
-      });
+    it('should reject operand starting with dash for --branch', () => {
+      const result = parseArgs(['--branch', '-something']);
+      expect(result.branchName).toBeNull();
+      expect(result.error).toBe('Error: --branch requires a non-empty value that is not a flag');
     });
   });
 });

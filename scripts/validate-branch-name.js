@@ -20,7 +20,7 @@ const AUTHORISED_TYPES = [
 const FORBIDDEN_PREFIXES = ['claude', 'copilot', 'openai'];
 
 const PATTERNS = {
-  standard: /^[a-z][a-z0-9]*\/[a-z][a-z0-9]*(-[a-z0-9]+)*$/,
+  standard: /^[a-z][a-z0-9]*\/[a-z][a-z0-9]*(-[a-z0-9]+)+$/,
   releaseVersioned: /^release\/v\d+\.\d+\.\d+(-[a-z0-9]+(\.[a-z0-9]+)*)?$/,
   releaseStandard: /^release\/\d{4}-\d{2}-\d{2}$/,
   dependabot: /^dependabot\/.+$/,
@@ -187,22 +187,45 @@ function validateBranch(branch) {
   return validateStandardPattern(trimmed);
 }
 
+/**
+ * Parse command-line arguments to extract branch name.
+ * @param {string[]} args - Command-line arguments (process.argv.slice(2))
+ * @returns {{branchName: string|null, error: string|null}} Parsed result
+ */
+export function parseArgs(args) {
+  if (args.includes('--branch')) {
+    const index = args.indexOf('--branch');
+    if (index + 1 < args.length) {
+      const operand = args[index + 1];
+      // Reject empty string or flag-like operands (starting with -)
+      if (!operand || operand.startsWith('-')) {
+        return { branchName: null, error: 'Error: --branch requires a non-empty value that is not a flag' };
+      }
+      return { branchName: operand, error: null };
+    } else {
+      return { branchName: null, error: 'Error: --branch requires a value' };
+    }
+  }
+  return { branchName: null, error: null };
+}
+
+/**
+ * Validate the explicit --branch value or current Git branch and print the result.
+ * Include structured output when --json is supplied. Exit with 0 for a valid
+ * branch, 1 for an invalid branch, or 2 for argument or execution errors.
+ * @returns {void}
+ */
 function main() {
   try {
     const args = process.argv.slice(2);
-    let branchName;
+    const { branchName: argBranch, error: parseError } = parseArgs(args);
 
-    if (args.includes('--branch')) {
-      const index = args.indexOf('--branch');
-      if (index + 1 < args.length) {
-        branchName = args[index + 1];
-      } else {
-        console.error('Error: --branch requires a value');
-        process.exit(2);
-      }
-    } else {
-      branchName = getCurrentBranch();
+    let branchName;
+    if (parseError) {
+      console.error(parseError);
+      process.exit(2);
     }
+    branchName = argBranch || getCurrentBranch();
 
     const result = validateBranch(branchName);
 
