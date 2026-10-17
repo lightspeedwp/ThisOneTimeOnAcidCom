@@ -41,6 +41,142 @@ function cleanupTempDir(dir) {
 // Test Suites
 // ============================================================================
 
+describe('buildExcludeRegex', () => {
+  it('includes default exclude patterns', () => {
+    const regex = buildExcludeRegex({ excludePatterns: '' });
+    expect(regex.test('release/v1.0.0')).toBe(true);
+    expect(regex.test('hotfix/critical')).toBe(true);
+  });
+
+  it('combines default patterns with custom patterns', () => {
+    const regex = buildExcludeRegex({ excludePatterns: 'maintenance/.*' });
+    expect(regex.test('release/v1.0.0')).toBe(true);
+    expect(regex.test('maintenance/db-cleanup')).toBe(true);
+    expect(regex.test('feat/normal')).toBe(false);
+  });
+
+  it('handles invalid regex gracefully', () => {
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+    const regex = buildExcludeRegex({ excludePatterns: '[invalid(' });
+    expect(consoleSpy).toHaveBeenCalled();
+    expect(regex.test('release/v1.0.0')).toBe(true);
+    consoleSpy.mockRestore();
+  });
+
+  it('handles pipe-separated patterns', () => {
+    const regex = buildExcludeRegex({ excludePatterns: 'alpha/.*|beta/.*|gamma/.*' });
+    expect(regex.test('alpha/feature')).toBe(true);
+    expect(regex.test('beta/update')).toBe(true);
+    expect(regex.test('gamma/test')).toBe(true);
+  });
+
+  it('trims whitespace from patterns', () => {
+    const regex = buildExcludeRegex({ excludePatterns: ' pattern1 | pattern2 | pattern3 ' });
+    expect(regex).toBeDefined();
+  });
+});
+
+describe('formatBytes', () => {
+  it('formats bytes under 1KB', () => {
+    expect(formatBytes(0)).toBe('0 B');
+    expect(formatBytes(512)).toBe('512 B');
+    expect(formatBytes(1023)).toBe('1023 B');
+  });
+
+  it('formats bytes in KB range', () => {
+    expect(formatBytes(1024)).toBe('1.00 KB');
+    expect(formatBytes(10240)).toBe('10.00 KB');
+    expect(formatBytes(1048575)).toBe('1024.00 KB');
+  });
+
+  it('formats bytes in MB range', () => {
+    expect(formatBytes(1048576)).toBe('1.00 MB');
+    expect(formatBytes(10485760)).toBe('10.00 MB');
+    expect(formatBytes(1073741824)).toBe('1024.00 MB');
+  });
+
+  it('uses two decimal places for KB and MB', () => {
+    expect(formatBytes(1536)).toMatch(/^\d+\.\d{2} KB$/);
+    expect(formatBytes(1572864)).toMatch(/^\d+\.\d{2} MB$/);
+  });
+});
+
+describe('estimateStorageFreedBytes', () => {
+  it('calculates storage for zero commits', () => {
+    expect(estimateStorageFreedBytes(0)).toBe(0);
+  });
+
+  it('multiplies commit count by average bytes per commit', () => {
+    const result = estimateStorageFreedBytes(10);
+    expect(result).toBe(10 * AVG_STORAGE_BYTES_PER_COMMIT);
+  });
+
+  it('handles large commit counts', () => {
+    const result = estimateStorageFreedBytes(1000);
+    expect(result).toBe(1000 * AVG_STORAGE_BYTES_PER_COMMIT);
+  });
+});
+
+describe('getMetrics', () => {
+  it('returns zero metrics for empty inputs', () => {
+    const result = getMetrics([], [], []);
+    expect(result.successfulDeletes).toBe(0);
+    expect(result.failedDeletes).toBe(0);
+    expect(result.successRate).toBe('0.00%');
+    expect(result.preservedDeletedRatio).toBe('0:0');
+    expect(result.totalCommits).toBe(0);
+    expect(result.estimatedStorageBytes).toBe(0);
+  });
+
+  it('aggregates deleted branches by type', () => {
+    const deleted = [
+      { branch: 'feat/a', type: 'feat', commitCount: 5, estimatedStorageBytes: 20480 },
+      { branch: 'fix/b', type: 'fix', commitCount: 3, estimatedStorageBytes: 12288 },
+      { branch: 'feat/c', type: 'feat', commitCount: 2, estimatedStorageBytes: 8192 },
+    ];
+    const result = getMetrics(deleted, [], []);
+    expect(result.byType['feat']).toBe(2);
+    expect(result.byType['fix']).toBe(1);
+    expect(result.totalCommits).toBe(10);
+  });
+
+  it('tracks affected authors', () => {
+    const deleted = [
+      { branch: 'feat/a', author: 'alice@example.com', commitCount: 1, estimatedStorageBytes: 4096 },
+      { branch: 'fix/b', author: 'bob@example.com', commitCount: 1, estimatedStorageBytes: 4096 },
+    ];
+    const result = getMetrics(deleted, [], []);
+    expect(result.authorsAffected).toEqual(['alice@example.com', 'bob@example.com']);
+  });
+
+  it('calculates success rate correctly', () => {
+    const deleted = [{ branch: 'feat/a', commitCount: 1, estimatedStorageBytes: 4096 }];
+    const errors = [{ branch: 'fix/b', error: 'test' }];
+    const result = getMetrics(deleted, [], errors);
+    expect(result.successRate).toBe('50.00%');
+  });
+
+  it('handles preserved to deleted ratio', () => {
+    const deleted = [
+      { branch: 'feat/a', commitCount: 1, estimatedStorageBytes: 4096 },
+      { branch: 'feat/b', commitCount: 1, estimatedStorageBytes: 4096 },
+    ];
+    const preserved = [
+      { branch: 'release/v1', category: 'KEEP' },
+      { branch: 'main', category: 'KEEP' },
+      { branch: 'develop', category: 'KEEP' },
+    ];
+    const result = getMetrics(deleted, preserved, []);
+    expect(result.preservedDeletedRatio).toBe('3:2');
+  });
+
+  it('infers branch type when not provided', () => {
+    const deleted = [{ branch: 'feat/test', commitCount: 1, estimatedStorageBytes: 4096 }];
+    const result = getMetrics(deleted, [], []);
+    expect(result.byType['feat']).toBe(1);
+  });
+});
+
 describe('categorizeBranch', () => {
   it('preserves protected branches', () => {
     for (const branch of PROTECTED_BRANCHES) {

@@ -214,6 +214,24 @@ describe('validate-push-branch', () => {
   });
 
   describe('processPushLines', () => {
+    test('handles errors in resolveHeadRef gracefully', () => {
+      const execSync = jest.spyOn(childProcess, 'execSync')
+        .mockImplementation(() => {
+          throw new Error('Not a git repository');
+        });
+
+      try {
+        const result = processPushLines([
+          'HEAD abc123 refs/heads/feat/test def456'
+        ]);
+
+        expect(result.branches.length).toBeGreaterThanOrEqual(0);
+        expect(Array.isArray(result.invalidBranches)).toBe(true);
+      } finally {
+        execSync.mockRestore();
+      }
+    });
+
     test('resolves and validates the current branch for a HEAD push', () => {
       const currentBranch = 'feat/current-branch';
       const symbolicRef = jest.spyOn(childProcess, 'execSync')

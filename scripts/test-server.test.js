@@ -140,6 +140,15 @@ describe('test-server', () => {
         requestHandler(req, res);
       }).not.toThrow();
     });
+
+    it('returns 403 for directory traversal attempts', () => {
+      const req = { url: '/../../../etc/passwd' };
+      const res = { writeHead: jest.fn(), end: jest.fn() };
+
+      requestHandler(req, res);
+      expect(res.writeHead).toHaveBeenCalledWith(403);
+      expect(res.end).toHaveBeenCalledWith('Forbidden');
+    });
   });
 
   describe('path security', () => {
