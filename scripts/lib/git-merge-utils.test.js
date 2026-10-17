@@ -75,6 +75,14 @@ describe('git-merge-utils', () => {
       const result = getMergeStatus('feature/test', null);
       expect(result).toBe('merged');
     });
+
+    it('returns unknown when spawnSync throws', () => {
+      (spawnSync).mockImplementation(() => {
+        throw new Error('spawn failed');
+      });
+      const result = getMergeStatus('feature/test', 'origin/main');
+      expect(result).toBe('unknown');
+    });
   });
 
   describe('getUniqueCommitCount', () => {

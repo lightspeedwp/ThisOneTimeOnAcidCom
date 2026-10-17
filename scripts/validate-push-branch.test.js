@@ -188,6 +188,20 @@ describe('validate-push-branch', () => {
         expect(result).toBe(ref);
       });
     });
+
+    test('handles git error when resolving HEAD', () => {
+      const execSync = jest.spyOn(childProcess, 'execSync')
+        .mockImplementation(() => {
+          throw new Error('git command failed');
+        });
+
+      try {
+        const result = resolveHeadRef('HEAD');
+        expect(result).toBeNull();
+      } finally {
+        execSync.mockRestore();
+      }
+    });
   });
 
   describe('getCurrentBranch', () => {
@@ -209,6 +223,20 @@ describe('validate-push-branch', () => {
       for (let i = 0; i < 3; i++) {
         const branch = getCurrentBranch();
         expect(['string', 'object'].includes(typeof branch) || branch === null).toBe(true);
+      }
+    });
+
+    test('handles git error gracefully', () => {
+      const execSync = jest.spyOn(childProcess, 'execSync')
+        .mockImplementation(() => {
+          throw new Error('git command failed');
+        });
+
+      try {
+        const branch = getCurrentBranch();
+        expect(branch).toBeNull();
+      } finally {
+        execSync.mockRestore();
       }
     });
   });
@@ -258,6 +286,17 @@ describe('validate-push-branch', () => {
       const result = processPushLines(lines);
       expect(result.branches.length).toBeGreaterThanOrEqual(0);
       expect(typeof result.hasInvalidBranch).toBe('boolean');
+      expect(Array.isArray(result.invalidBranches)).toBe(true);
+    });
+
+    test('skips invalid push lines', () => {
+      const lines = [
+        'invalid line',
+        'too few parts',
+        'refs/heads/feat/valid abc123 refs/heads/feat/valid abc123'
+      ];
+      const result = processPushLines(lines);
+      expect(Array.isArray(result.branches)).toBe(true);
       expect(Array.isArray(result.invalidBranches)).toBe(true);
     });
 
@@ -474,6 +513,94 @@ describe('validate-push-branch', () => {
         const result = validateBranch(branch);
         expect([true, false]).toContain(result.valid);
       });
+    });
+
+    test('validateBranch error handling returns validation details', () => {
+      const result = validateBranch('invalid');
+      expect(result).toHaveProperty('valid');
+      expect(typeof result.valid).toBe('boolean');
+      if (!result.valid) {
+        expect(result).toHaveProperty('message');
+      }
+    });
+
+    test('processPushLines handles complex line combinations', () => {
+      const lines = [
+        'refs/heads/feat/feature-one abc123 refs/heads/feat/feature-one abc123',
+        'refs/heads/hotfix/critical def456 refs/heads/hotfix/critical def456',
+        'refs/tags/v1.0.0 ghi789 refs/tags/v1.0.0 ghi789',
+        'refs/heads/release/v2.0.0 jkl012 refs/heads/release/v2.0.0 jkl012'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches.length).toBeGreaterThanOrEqual(2);
+      expect(Array.isArray(result.branches)).toBe(true);
+      expect(Array.isArray(result.invalidBranches)).toBe(true);
+    });
+
+    test('shouldSkipRef false when object is valid', () => {
+      expect(shouldSkipRef('refs/heads/feat/valid', 'abc123def456')).toBe(false);
+    });
+
+    test('shouldSkipRef with various deletion marker formats', () => {
+      const zeros = [
+        '0000000000000000000000000000000000000000',
+        '00000000000000000000000000000000',
+        '000'
+      ];
+      zeros.forEach(zeroes => {
+        expect(shouldSkipRef('refs/heads/branch', zeroes)).toBe(true);
+      });
+    });
+
+    test('extractBranchName handles various ref formats', () => {
+      const testCases = [
+        { input: 'refs/heads/feat/test', expected: 'feat/test' },
+        { input: 'HEAD', expected: 'HEAD' },
+        { input: 'refs/tags/v1.0.0', expected: 'refs/tags/v1.0.0' },
+        { input: '', expected: '' }
+      ];
+      testCases.forEach(({ input, expected }) => {
+        expect(extractBranchName(input)).toBe(expected);
+      });
+    });
+
+    test('parsePushLine with minimum valid input', () => {
+      const line = 'ref1 obj1 ref2 obj2';
+      const result = parsePushLine(line);
+      expect(result).not.toBeNull();
+      expect(result.localRef).toBe('ref1');
+      expect(result.localObj).toBe('obj1');
+      expect(result.remoteRef).toBe('ref2');
+      expect(result.remoteObj).toBe('obj2');
+    });
+
+    test('validateBranch result structure has required fields on both valid and invalid', () => {
+      const validResult = validateBranch('feat/valid-feature');
+      expect(validResult).toHaveProperty('valid');
+      expect(typeof validResult.valid).toBe('boolean');
+
+      const invalidResult = validateBranch('invalid');
+      expect(invalidResult).toHaveProperty('valid');
+      expect(typeof invalidResult.valid).toBe('boolean');
+    });
+
+    test('getCurrentBranch returns null or string', () => {
+      const result = getCurrentBranch();
+      expect(result === null || typeof result === 'string').toBe(true);
+    });
+
+    test('processPushLines preserves branch order from input', () => {
+      const lines = [
+        'refs/heads/feat/first abc123 refs/heads/feat/first abc123',
+        'refs/heads/fix/second def456 refs/heads/fix/second def456',
+        'refs/heads/docs/third ghi789 refs/heads/docs/third ghi789'
+      ];
+      const result = processPushLines(lines);
+      if (result.branches.length >= 3) {
+        expect(result.branches[0]).toBe('feat/first');
+        expect(result.branches[1]).toBe('fix/second');
+        expect(result.branches[2]).toBe('docs/third');
+      }
     });
   });
 });

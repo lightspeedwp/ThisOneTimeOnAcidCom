@@ -543,6 +543,17 @@ describe('categorizeBranch', () => {
     expect(result.reason).toBe(REASON_CODES.DISCUSS.merge_status_unknown);
   });
 
+  it('defaults to KEEP for unclassified merge status', () => {
+    const result = categorizeBranch('feat/unclassified', {
+      lastCommitDate: '2025-01-01T00:00:00Z',
+      author: 'test@example.com',
+      mergeStatus: 'unclassified',
+    });
+
+    expect(result.category).toBe('KEEP');
+    expect(result.reason).toBe('Unable to classify');
+  });
+
   it('preserves Dependabot branches', () => {
     const testBranches = ['dependabot/npm_and_yarn/main', 'renovate/vite-6.x'];
 
