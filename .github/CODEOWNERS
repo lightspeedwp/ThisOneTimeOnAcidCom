@@ -1,0 +1,37 @@
+# CODEOWNERS — This One Time On Acid
+# GitHub will request reviews from these owners on PRs that modify files matching each pattern.
+#
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# Governance: Decision GH-003 (CODEOWNERS & Branch Protection)
+
+# Governance & Critical Infrastructure
+# ====================================
+# Critical governance, validation, and build systems require @ashley review
+.github/                @ashley
+scripts/                @ashley
+AGENTS.md               @ashley
+CHANGELOG.md            @ashley
+.nvmrc                  @ashley
+package.json            @ashley
+package-lock.json       @ashley
+vite.config.ts          @ashley
+
+# Testing Infrastructure
+# ======================
+# Test configuration and test fixtures require review
+jest.config.js          @ashley
+vitest.config.ts        @ashley
+playwright.config.ts    @ashley
+tests/                  @ashley
+
+# Documentation
+# ==============
+# Guidelines and core documentation require @ashley review
+guidelines/             @ashley
+docs/                   @ashley
+README.md               @ashley
+
+# Default Owner
+# ==============
+# For files not matched by specific patterns above, @ashley is the default owner
+*                       @ashley
