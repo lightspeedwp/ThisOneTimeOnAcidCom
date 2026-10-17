@@ -10,8 +10,10 @@ echo ""
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VALIDATOR_SCRIPT="$SCRIPT_DIR/validate-push-branch.js"
 
-TEST_DIR="/tmp/toa-push-tests"
-mkdir -p "$TEST_DIR"
+# Create unique temporary directory and clean up on exit
+TEST_DIR="$(mktemp -d)"
+trap "rm -rf '$TEST_DIR'" EXIT
+
 cd "$TEST_DIR"
 
 # Initialize test git repo
