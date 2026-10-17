@@ -125,9 +125,9 @@
 
 ## Specification Maturity for Phase 1
 
-- [ ] CHK058 Is the specification complete and internally consistent enough to proceed to Phase 1 design without major revisions? [Gate]
-- [ ] CHK059 Have all critical ambiguities been resolved or explicitly documented as pending? [Gate]
-- [ ] CHK060 Is author confident that Phase 1 design tasks can proceed without additional spec clarifications? [Gate]
+- [x] CHK058 Is the specification complete and internally consistent enough to proceed to Phase 1 design without major revisions? [Gate]
+- [x] CHK059 Have all critical ambiguities been resolved or explicitly documented as pending? [Gate]
+- [x] CHK060 Is author confident that Phase 1 design tasks can proceed without additional spec clarifications? [Gate]
 
 ---
 
