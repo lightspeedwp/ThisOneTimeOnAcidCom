@@ -3,7 +3,7 @@
  * @module scripts/lib/git-merge-utils
  */
 
-import { execFileSync, spawnSync } from 'child_process';
+import * as cp from 'child_process';
 
 /**
  * Run Git command and return trimmed stdout.
@@ -14,7 +14,7 @@ import { execFileSync, spawnSync } from 'child_process';
  */
 function runGit(args) {
   try {
-    return execFileSync('git', args, {
+    return cp.execFileSync('git', args, {
       encoding: 'utf8',
       stdio: ['pipe', 'pipe', 'pipe'],
     }).trim();
@@ -56,7 +56,7 @@ export function getMergeStatus(branch, baseRef = null) {
   const base = baseRef || getBaseRef();
   try {
     // is-ancestor returns exit code 0 if first is ancestor of second (i.e., merged)
-    const result = spawnSync('git', ['merge-base', '--is-ancestor', `origin/${branch}`, base], {
+    const result = cp.spawnSync('git', ['merge-base', '--is-ancestor', `origin/${branch}`, base], {
       encoding: 'utf8',
     });
     if (result.status === 0) {
