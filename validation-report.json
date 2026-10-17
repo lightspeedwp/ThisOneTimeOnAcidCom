@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-17T04:11:47.663Z",
+  "timestamp": "2026-10-17T04:25:39.878Z",
   "summary": {
     "total": 97,
     "passed": 97,
@@ -567,7 +567,7 @@
         {
           "branch": "feat/my$feature",
           "passed": true,
-          "exitCode": 0
+          "exitCode": 1
         },
         {
           "branch": "feat/my%feature",
