@@ -177,7 +177,7 @@ Record:
 
 ## Success Metric
 
-**Primary:** At least 10 high-quality, exportable sample assets with complete metadata (from 12 samples, ≥80% success rate).  
+**Primary:** At least 10 high-quality, exportable sample assets conforming to the AssetRecord schema with all required fields (from 12 samples, ≥80% success rate).  
 **Secondary:** Clear export workflow documented for full migration (TOA-278).  
 **Threshold:** ≥80% recovery success rate (≥10/12 assets); zero critical blockers.
 

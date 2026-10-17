@@ -128,7 +128,7 @@ Free, fully portable approach using Git (+ Git LFS if >100 MB). Assets live in r
 | **Total (free tier, <10GB/mo assets)** | **$0** | **$0** |
 | **Total (with LFS overage + Pro)** | **$10–30** | **$120–360** |
 
-**Note:** GitHub's free tier includes 10GB LFS storage + 10GB bandwidth per month; free tier sufficient for TOA scale (<~500 daily page views). Upgrade only if assets exceed 10GB/month or build time exceeds 45 min/month.
+**Note:** GitHub's free tier includes 10GB LFS storage (total capacity) + 10GB bandwidth per month; free tier sufficient for TOA scale (<~500 daily page views). Upgrade only if stored assets exceed 10GB total capacity or monthly bandwidth exceeds 10GB, or if build time exceeds 45 min/month.
 
 ### Pros
 ✅ Zero cost (GitHub + Netlify free)  
@@ -305,7 +305,7 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 
 | Provider | Monthly | Annual | Recommendation |
 |----------|---------|--------|---|
-| **GitHub + Netlify** | $0–25 | $0–300 | ✅ Approved |
+| **GitHub + Netlify** | $0–30 | $0–360 | ✅ Approved |
 | Cloudinary | $99 | $1,188 | Alternative (UX-optimized scaling) |
 | AWS S3 | $3–20 | $36–240 | Overkill at TOA scale |
 

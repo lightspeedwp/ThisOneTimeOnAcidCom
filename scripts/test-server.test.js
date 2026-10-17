@@ -230,12 +230,14 @@ describe('test-server', () => {
       };
       const req = { url: '/../../../../etc/passwd' };
 
-      requestHandler(req, res);
+      try {
+        requestHandler(req, res);
 
-      expect(res.writeHead).toHaveBeenCalledWith(403);
-      expect(res.end).toHaveBeenCalledWith('Forbidden');
-
-      setDistDir(originalDistDir);
+        expect(res.writeHead).toHaveBeenCalledWith(403);
+        expect(res.end).toHaveBeenCalledWith('Forbidden');
+      } finally {
+        setDistDir(originalDistDir);
+      }
     });
 
     it('falls back to index.html for non-existent files (SPA mode)', () => {
