@@ -63,8 +63,15 @@ export const createRequestHandler = (distDir) => {
       filePath = path.join(filePath, 'index.html');
     }
 
-    // If file doesn't exist, fall back to index.html (SPA behavior)
+    // If file doesn't exist, return 404 for assets, or fall back to index.html for routes (SPA behavior)
     if (!fs.existsSync(filePath)) {
+      const ext = path.extname(req.url);
+      const isAsset = /\.(js|css|png|jpg|gif|svg|woff|woff2|json|map)$/i.test(ext);
+      if (isAsset) {
+        res.writeHead(404);
+        res.end('Not found');
+        return;
+      }
       filePath = path.join(distDir, 'index.html');
     }
 

@@ -27,7 +27,7 @@ export function startServer(port = PORT) {
   server.listen(port, () => {
     console.log(`Test server running at http://localhost:${port}`);
     console.log(`Serving from: ${DIST_DIR}`);
-    console.log('SPA fallback enabled: all routes fall back to index.html');
+    console.log('SPA fallback enabled: routes fall back to index.html, missing assets return 404');
   });
 
   return server;
