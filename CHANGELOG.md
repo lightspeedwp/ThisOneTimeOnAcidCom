@@ -72,6 +72,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Accessibility testing requirements
     - Component and unit test isolation patterns
 
+#### Governance Decision NODE-001 — Node.js Version Pinning (Decision 2)
+
+- **Node.js 24 LTS pinning** via `.nvmrc` and `package.json` `engines` field
+- **Documentation update** — `README.md` now requires Node.js 24+ for contributors
+- **Enforcement** — npm will reject installation and builds on incompatible versions
+- **Purpose:** Ensure consistent runtime across development, testing, and production deployments
+
+#### Governance Decision TEST-001 — Jest ESM Configuration (Decision 3)
+
+- **Jest ESM support** resolved via `@swc/jest` transformer in `jest.config.js`
+- **Full test suite passing** — 179 unit tests across `scripts/validate-branch-name.test.js` and `scripts/cleanup-branches.test.js`
+- **Updated `AGENTS.md`** — Documented working status and configuration details
+- **Purpose:** Enable modern ECMAScript module syntax in test infrastructure without Node.js experimental flags
+
+#### Governance Decision GH-003 — Code Ownership & Branch Protection (Decision 9)
+
+- **`.github/CODEOWNERS`** — Designated @ashley as owner for critical governance paths:
+  - `.github/` — GitHub governance control plane
+  - `scripts/` — Validation and build scripts
+  - `AGENTS.md`, `CHANGELOG.md` — Release management and documentation
+  - `tests/`, `guidelines/`, `docs/` — Test and documentation infrastructure
+  - Default owner for all other repository files
+- **`.github/BRANCH_PROTECTION_CONFIG.md`** — Configuration guide for manual GitHub UI setup:
+  - **Main branch protection** — Strict: PR required, status checks, code owner review
+  - **Develop branch protection** — Moderate: PR required, status checks
+  - **Step-by-step instructions** for GitHub Settings → Branches configuration
+- **Purpose:** Establish code ownership review requirements and branch safety policies
+
 #### Inheritance Configuration & Repository Scope
 
 - **`knowledge_base.code_guidelines.filePatterns`**: Set to empty array to exclude inherited WordPress-specific guidelines (block-plugin.md, block-theme.md) from applying to React code reviews. This prevents WordPress coding standards from interfering with React/TypeScript reviews while preserving other benefits of inherited configuration.
@@ -468,6 +496,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Schema.org Person data** (`schemaService.ts`, `index.html`): Fixed "Berlin-based" → "Cape Town-based" in Person schema addressLocality, workLocation, and description
 - **Stale Lucide references** cleaned from 7 mock data files: `dev-tools.ts` (2 entries), `sitemap.ts` (2), `style-guide.ts` (2), `about-dropdown.ts`, `social-links.ts` — all updated to reference Phosphor icons
 - **`website-content.md`**: Fixed "Berlin-based" in core identity section → "Cape Town-based (home base)"
+
+### Removed
+
+#### Governance Decision STYLE-001 — Enforce BEM-Only CSS Architecture (Decision 6)
+
+- **Tailwind CSS completely removed** from the build system:
+  - **npm dependencies removed:**
+    - `tailwindcss` v4.1.12 (dev dependency)
+    - `@tailwindcss/vite` v4.1.12 (dev dependency)
+    - `tailwind-merge` v3.2.0 (production dependency)
+  - **Build configuration cleanup:**
+    - Removed Tailwind plugin from Vite configuration (`vite.config.ts`)
+    - Removed Tailwind CSS imports from `src/styles/globals.css` and `src/styles/index.css`
+    - Deleted orphaned `src/styles/tailwind.css` (was not imported anywhere)
+  - **Updated documentation:**
+    - `src/app/postcss.config.js` comments updated to reflect BEM-only architecture
+    - `AGENTS.md` tech stack table updated to reflect Tailwind removal
+    - Guidelines updated to enforce semantic BEM classes exclusively
+- **No breaking changes for users** — All styling migrated to semantic BEM classes in previous commits
+- **Build size reduction** — Bundle size reduced from 631 to 616 npm packages (15 package reduction)
+- **Purpose:** Enforce strict semantic BEM CSS architecture and eliminate utility-class complexity; maintains full design fidelity with cleaner, more maintainable code
 
 ---
 
