@@ -678,6 +678,112 @@ describe('Report generation', () => {
     expect(content.summary.candidateCount).toBe(1);
     expect(content.candidates[0].branch).toBe('feat/old-auth');
   });
+
+  it('handles markdown report with no deletion candidates', () => {
+    const deleted = [];
+    const preserved = [
+      { branch: 'main', category: 'KEEP', reason: 'Protected branch' },
+      { branch: 'develop', category: 'KEEP', reason: 'Base integration branch' },
+    ];
+    const errors = [];
+    const metrics = getMetrics(deleted, preserved, errors);
+
+    const options = {
+      reportDir: tempDir,
+      inactiveDays: 30,
+      verbose: false,
+    };
+
+    const reportPath = writeMarkdownReport(deleted, preserved, errors, metrics, options);
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    expect(content).toContain('No branches are eligible for deletion');
+    expect(content).toContain('Repository is clean!');
+  });
+
+  it('handles markdown report with DISCUSS branches', () => {
+    const deleted = [];
+    const preserved = [
+      { branch: 'feat/unknown-status', category: 'DISCUSS', reason: 'Merge status unknown' },
+    ];
+    const errors = [];
+    const metrics = getMetrics(deleted, preserved, errors);
+
+    const options = {
+      reportDir: tempDir,
+      inactiveDays: 30,
+      verbose: false,
+    };
+
+    const reportPath = writeMarkdownReport(deleted, preserved, errors, metrics, options);
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    expect(content).toContain('Branches Requiring Discussion');
+    expect(content).toContain('Merge status unknown');
+  });
+
+  it('handles markdown report with errors', () => {
+    const deleted = [];
+    const preserved = [];
+    const errors = [
+      { branch: 'feat/failed-analysis', error: 'Failed to get merge status' },
+      { branch: 'fix/failed-commit-count', error: 'Failed to count commits' },
+    ];
+    const metrics = getMetrics(deleted, preserved, errors);
+
+    const options = {
+      reportDir: tempDir,
+      inactiveDays: 30,
+      verbose: false,
+    };
+
+    const reportPath = writeMarkdownReport(deleted, preserved, errors, metrics, options);
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    expect(content).toContain('Errors Encountered');
+    expect(content).toContain('Failed to get merge status');
+    expect(content).toContain('Failed to count commits');
+  });
+
+  it('handles markdown report with mixed categories', () => {
+    const deleted = [
+      {
+        branch: 'feat/old-feature',
+        lastCommitDate: '2024-01-01T00:00:00Z',
+        author: 'alice@example.com',
+        hash: 'abc123',
+        age: 60,
+        type: 'feat',
+        commitCount: 3,
+        estimatedStorageBytes: 3 * AVG_STORAGE_BYTES_PER_COMMIT,
+        reason: 'Fully merged and stale',
+      },
+    ];
+    const preserved = [
+      { branch: 'main', category: 'KEEP', reason: 'Protected' },
+      { branch: 'feat/uncertain', category: 'DISCUSS', reason: 'Status unknown' },
+    ];
+    const errors = [{ branch: 'fix/error-branch', error: 'Analysis error' }];
+    const metrics = getMetrics(deleted, preserved, errors);
+
+    const options = {
+      reportDir: tempDir,
+      inactiveDays: 30,
+      verbose: false,
+    };
+
+    const reportPath = writeMarkdownReport(deleted, preserved, errors, metrics, options);
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = fs.readFileSync(reportPath, 'utf8');
+    expect(content).toContain('Branches Eligible for Deletion');
+    expect(content).toContain('Branches Retained (KEEP)');
+    expect(content).toContain('Branches Requiring Discussion');
+    expect(content).toContain('Errors Encountered');
+  });
 });
 
 describe('Safety safeguards', () => {
