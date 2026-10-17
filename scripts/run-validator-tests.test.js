@@ -431,6 +431,10 @@ describe('run-validator-tests', () => {
   });
 
   describe('outputTestResults', () => {
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
     test('does not throw when given valid results', () => {
       const results = {
         summary: { total: 10, passed: 8, failed: 2 },
@@ -466,8 +470,7 @@ describe('run-validator-tests', () => {
 
       // Capture console.log calls
       const logs = [];
-      const originalLog = console.log;
-      console.log = jest.fn((...args) => {
+      jest.spyOn(console, 'log').mockImplementation((...args) => {
         logs.push(args.join(' '));
       });
 
@@ -475,33 +478,30 @@ describe('run-validator-tests', () => {
 
       const summary = logs.find(log => log.includes('Success Rate'));
       expect(summary).toContain('75.0%');
-
-      console.log = originalLog;
     });
   });
 
   describe('outputTestResults', () => {
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
     test('outputs emoji indicators for each passed/failed test', () => {
       const results = { summary: { total: 3, passed: 2, failed: 1 } };
       const categoryResults = [{ category: 'Test', passed: 2, total: 3 }];
 
       const logs = [];
-      const originalWrite = process.stdout.write;
-      process.stdout.write = jest.fn((...args) => {
+      jest.spyOn(process.stdout, 'write').mockImplementation((...args) => {
         logs.push(args[0]);
       });
 
-      const originalLog = console.log;
-      console.log = jest.fn();
+      jest.spyOn(console, 'log').mockImplementation(() => {});
 
       outputTestResults(results, categoryResults);
 
       expect(logs.length).toBeGreaterThan(0);
       const emojiOutput = logs.join('');
       expect(emojiOutput).toContain('✅');
-
-      process.stdout.write = originalWrite;
-      console.log = originalLog;
     });
 
     test('outputs ❌ for failed tests', () => {
@@ -509,21 +509,16 @@ describe('run-validator-tests', () => {
       const categoryResults = [{ category: 'Test', passed: 1, total: 3 }];
 
       const logs = [];
-      const originalWrite = process.stdout.write;
-      process.stdout.write = jest.fn((...args) => {
+      jest.spyOn(process.stdout, 'write').mockImplementation((...args) => {
         logs.push(args[0]);
       });
 
-      const originalLog = console.log;
-      console.log = jest.fn();
+      jest.spyOn(console, 'log').mockImplementation(() => {});
 
       outputTestResults(results, categoryResults);
 
       const emojiOutput = logs.join('');
       expect(emojiOutput).toContain('❌');
-
-      process.stdout.write = originalWrite;
-      console.log = originalLog;
     });
 
     test('outputs results for all categories', () => {
@@ -536,16 +531,13 @@ describe('run-validator-tests', () => {
       ];
 
       const logs = [];
-      const originalLog = console.log;
-      console.log = jest.fn((...args) => {
+      jest.spyOn(console, 'log').mockImplementation((...args) => {
         logs.push(args.join(' '));
       });
 
       outputTestResults(results, categoryResults);
 
       expect(logs.length).toBeGreaterThanOrEqual(4);
-
-      console.log = originalLog;
     });
 
     test('outputs all passed tests (all checkmarks)', () => {
@@ -553,22 +545,17 @@ describe('run-validator-tests', () => {
       const categoryResults = [{ category: 'Valid', passed: 4, total: 4 }];
 
       const logs = [];
-      const originalWrite = process.stdout.write;
-      process.stdout.write = jest.fn((...args) => {
+      jest.spyOn(process.stdout, 'write').mockImplementation((...args) => {
         logs.push(args[0]);
       });
 
-      const originalLog = console.log;
-      console.log = jest.fn();
+      jest.spyOn(console, 'log').mockImplementation(() => {});
 
       outputTestResults(results, categoryResults);
 
       const emojiOutput = logs.join('');
       expect(emojiOutput).toContain('✅✅✅✅');
       expect(emojiOutput).not.toContain('❌');
-
-      process.stdout.write = originalWrite;
-      console.log = originalLog;
     });
 
     test('outputs all failed tests (all X marks)', () => {
@@ -576,22 +563,17 @@ describe('run-validator-tests', () => {
       const categoryResults = [{ category: 'Invalid', passed: 0, total: 3 }];
 
       const logs = [];
-      const originalWrite = process.stdout.write;
-      process.stdout.write = jest.fn((...args) => {
+      jest.spyOn(process.stdout, 'write').mockImplementation((...args) => {
         logs.push(args[0]);
       });
 
-      const originalLog = console.log;
-      console.log = jest.fn();
+      jest.spyOn(console, 'log').mockImplementation(() => {});
 
       outputTestResults(results, categoryResults);
 
       const emojiOutput = logs.join('');
       expect(emojiOutput).toContain('❌❌❌');
       expect(emojiOutput).not.toContain('✅');
-
-      process.stdout.write = originalWrite;
-      console.log = originalLog;
     });
 
     test('outputs correctly with single test', () => {
@@ -599,21 +581,16 @@ describe('run-validator-tests', () => {
       const categoryResults = [{ category: 'Single', passed: 1, total: 1 }];
 
       const logs = [];
-      const originalWrite = process.stdout.write;
-      process.stdout.write = jest.fn((...args) => {
+      jest.spyOn(process.stdout, 'write').mockImplementation((...args) => {
         logs.push(args[0]);
       });
 
-      const originalLog = console.log;
-      console.log = jest.fn();
+      jest.spyOn(console, 'log').mockImplementation(() => {});
 
       outputTestResults(results, categoryResults);
 
       const emojiOutput = logs.join('');
       expect(emojiOutput.startsWith('✅')).toBe(true);
-
-      process.stdout.write = originalWrite;
-      console.log = originalLog;
     });
 
     test('formats success rate as percentage with one decimal', () => {
@@ -621,8 +598,7 @@ describe('run-validator-tests', () => {
       const categoryResults = [{ category: 'Mixed', passed: 7, total: 10 }];
 
       const logs = [];
-      const originalLog = console.log;
-      console.log = jest.fn((...args) => {
+      jest.spyOn(console, 'log').mockImplementation((...args) => {
         logs.push(args.join(' '));
       });
 
@@ -630,8 +606,6 @@ describe('run-validator-tests', () => {
 
       const summaryLog = logs.find(log => log.includes('Success Rate'));
       expect(summaryLog).toContain('70.0%');
-
-      console.log = originalLog;
     });
   });
 
@@ -689,6 +663,10 @@ describe('run-validator-tests', () => {
   });
 
   describe('branch coverage - error handling', () => {
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
     test('runTest handles error with both stderr and message', () => {
       const result = runTest('feat/test', 'invalid');
       expect(result).toHaveProperty('passed');
@@ -746,13 +724,11 @@ describe('run-validator-tests', () => {
       const categoryResults = [{ category: 'Large', passed: 5, total: 20 }];
 
       const logs = [];
-      const originalWrite = process.stdout.write;
-      process.stdout.write = jest.fn((...args) => {
+      jest.spyOn(process.stdout, 'write').mockImplementation((...args) => {
         logs.push(args[0]);
       });
 
-      const originalLog = console.log;
-      console.log = jest.fn();
+      jest.spyOn(console, 'log').mockImplementation(() => {});
 
       outputTestResults(results, categoryResults);
 
@@ -761,9 +737,6 @@ describe('run-validator-tests', () => {
       const crosses = (emojiOutput.match(/❌/g) || []).length;
       expect(checkmarks).toBe(5);
       expect(crosses).toBe(15);
-
-      process.stdout.write = originalWrite;
-      console.log = originalLog;
     });
   });
 

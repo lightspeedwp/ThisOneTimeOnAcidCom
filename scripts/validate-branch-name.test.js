@@ -371,7 +371,7 @@ describe('Branch Name Validation', () => {
     });
 
     test('should handle unknown type gracefully', () => {
-      const result = validateBranch('unknown/feature');
+      const result = validateBranch('unknown/scope-title');
       expect(result.isValid).toBe(false);
       expect(result.type).toBe('invalid-type');
     });
@@ -656,10 +656,13 @@ describe('Branch Name Validation', () => {
       });
     });
 
-    test('validates single-word scopes', () => {
-      const result = validateStandardPattern('feat/feature');
-      expect(result.isValid).toBe(true);
-    });
+    test.each(['feat/feature', 'feat/authflow', 'feat/oauth2integration'])(
+      'rejects "%s" without a hyphen-separated title', (branch) => {
+        const result = validateStandardPattern(branch);
+        expect(result.isValid).toBe(false);
+        expect(result.type).toBe('invalid-pattern');
+      }
+    );
 
     test('rejects branches with multiple slashes in wrong positions', () => {
       const result = validateStandardPattern('feat/test/extra/parts');
@@ -667,13 +670,13 @@ describe('Branch Name Validation', () => {
       expect(result).not.toBeNull();
     });
 
-    test('validates branches without hyphens in scope', () => {
-      const result = validateStandardPattern('feat/authflow');
+    test('validates a single-word scope with a title', () => {
+      const result = validateStandardPattern('feat/authflow-update');
       expect(result.isValid).toBe(true);
     });
 
     test('validates branches with numbers in scope', () => {
-      const result = validateStandardPattern('feat/oauth2integration');
+      const result = validateStandardPattern('feat/oauth2integration-update');
       expect(result.isValid).toBe(true);
     });
 
@@ -706,7 +709,7 @@ describe('Branch Name Validation', () => {
       // Valid patterns
       expect(validateStandardPattern('feat/new-feature').isValid).toBe(true);
       expect(validateStandardPattern('fix/bug-123').isValid).toBe(true);
-      expect(validateStandardPattern('docs/guide').isValid).toBe(true);
+      expect(validateStandardPattern('docs/user-guide').isValid).toBe(true);
 
       // Invalid patterns
       expect(validateStandardPattern('feature/new').isValid).toBe(false);
@@ -783,7 +786,7 @@ describe('Branch Name Validation', () => {
     });
 
     test('outputs JSON when --json flag is present', () => {
-      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/feature', '--json'];
+      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/scope-title', '--json'];
       main();
       expect(consoleLogs.some(msg => msg.includes('"'))).toBe(true);
       expect(process.exit).toHaveBeenCalledWith(0);
@@ -792,7 +795,7 @@ describe('Branch Name Validation', () => {
     test('calls console.error when main catches an exception', () => {
       // Test that main has a try/catch block by checking that console.error is called
       // This tests the catch block at line 216-218
-      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test'];
+      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test-branch'];
       main();
       // If no error is thrown, main should succeed
       expect(process.exit).toHaveBeenCalled();
@@ -811,7 +814,7 @@ describe('Branch Name Validation', () => {
     });
 
     test('message is output to console.log', () => {
-      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test'];
+      process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test-branch'];
       main();
       expect(consoleLogs.length).toBeGreaterThan(0);
       expect(typeof consoleLogs[0]).toBe('string');

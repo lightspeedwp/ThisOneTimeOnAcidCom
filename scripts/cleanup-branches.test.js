@@ -9,7 +9,6 @@ import {
   estimateStorageFreedBytes,
   formatBytes,
   getMetrics,
-  getRemoteBranches,
   writeMarkdownReport,
   writeJsonReport,
 } from './cleanup-branches.js';
@@ -224,50 +223,52 @@ describe('Report file generation', () => {
 });
 
 describe('getRemoteBranches', () => {
+  let execFileSync;
+  let getRemoteBranches;
+
+  beforeEach(() => {
+    execFileSync = jest.spyOn(require('child_process'), 'execFileSync').mockReturnValue('');
+    jest.isolateModules(() => {
+      ({ getRemoteBranches } = require('./cleanup-branches.js'));
+    });
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('returns empty array when no branches exist', () => {
-    const execFileSync = jest.spyOn(require('child_process'), 'execFileSync')
-      .mockReturnValue('');
+    execFileSync.mockReturnValue('');
 
     const result = getRemoteBranches();
     expect(Array.isArray(result)).toBe(true);
     expect(result.length).toBe(0);
-
-    execFileSync.mockRestore();
   });
 
   it('parses multiple branches correctly', () => {
-    const execFileSync = jest.spyOn(require('child_process'), 'execFileSync')
-      .mockReturnValue('feat/one\nfeat/two\nmain\n');
+    execFileSync.mockReturnValue('feat/one\nfeat/two\nmain\n');
 
     const result = getRemoteBranches();
     expect(result).toContain('feat/one');
     expect(result).toContain('feat/two');
     expect(result).toContain('main');
-
-    execFileSync.mockRestore();
   });
 
   it('removes origin/ prefix from branch names', () => {
-    const execFileSync = jest.spyOn(require('child_process'), 'execFileSync')
-      .mockReturnValue('origin/feat/test\norigin/main\n');
+    execFileSync.mockReturnValue('origin/feat/test\norigin/main\n');
 
     const result = getRemoteBranches();
     expect(result).toContain('feat/test');
     expect(result).toContain('main');
     expect(result.every(b => !b.startsWith('origin/'))).toBe(true);
-
-    execFileSync.mockRestore();
   });
 
   it('handles whitespace in output', () => {
-    const execFileSync = jest.spyOn(require('child_process'), 'execFileSync')
-      .mockReturnValue('  feat/one  \n  feat/two  \n');
+    execFileSync.mockReturnValue('  feat/one  \n  feat/two  \n');
 
     const result = getRemoteBranches();
     expect(result[0]).toBe('feat/one');
     expect(result[1]).toBe('feat/two');
-
-    execFileSync.mockRestore();
   });
 });
 

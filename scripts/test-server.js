@@ -109,7 +109,8 @@ export const handleFileRead = (filePath, err, data, res) => {
  * @param {object} res - HTTP response object
  */
 export const requestHandler = (req, res) => {
-  const filePath = resolvePath(req.url, getDistDir());
+  const pathname = req.url.split(/[?#]/, 1)[0];
+  const filePath = resolvePath(pathname, getDistDir());
 
   if (filePath === null) {
     res.writeHead(403);

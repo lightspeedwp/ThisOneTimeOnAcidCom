@@ -669,34 +669,72 @@ describe('validate-push-branch', () => {
   });
 
   describe('main() pre-push hook entrypoint', () => {
-    let originalExit;
+    let originalStdinDescriptor;
     let consoleErrors;
 
     beforeEach(() => {
-      originalExit = process.exit;
+      originalStdinDescriptor = Object.getOwnPropertyDescriptor(process, 'stdin');
       consoleErrors = [];
 
-      process.exit = jest.fn();
+      jest.spyOn(process, 'exit').mockImplementation(() => {});
       jest.spyOn(console, 'error').mockImplementation((msg) => consoleErrors.push(msg));
-      jest.spyOn(childProcess, 'execFileSync').mockImplementation(() => 'mocked output');
+      jest.spyOn(childProcess, 'execFileSync').mockReturnValue('mocked output');
     });
 
     afterEach(() => {
-      process.exit = originalExit;
-      console.error.mockRestore();
-      childProcess.execFileSync.mockRestore();
+      Object.defineProperty(process, 'stdin', originalStdinDescriptor);
+      jest.restoreAllMocks();
     });
 
-    test('main is an async function', () => {
-      expect(typeof main).toBe('function');
-      const result = main();
-      expect(result instanceof Promise).toBe(true);
+    function setStdin(input) {
+      Object.defineProperty(process, 'stdin', {
+        configurable: true,
+        value: Readable.from([input])
+      });
+    }
+
+    test('exits with 2 for malformed input', async () => {
+      setStdin('malformed input\n');
+
+      await main();
+
+      // A real process terminates at the first exit call.
+      expect(process.exit).toHaveBeenNthCalledWith(1, 2);
+      expect(consoleErrors).toContain('Error: Invalid pre-push input format on line 1');
+      expect(childProcess.execFileSync).not.toHaveBeenCalled();
     });
 
-    test('main() returns a promise that resolves or rejects', async () => {
-      const mainPromise = main();
-      expect(mainPromise).toHaveProperty('then');
-      expect(mainPromise).toHaveProperty('catch');
+    test('exits with 0 for a valid pushed branch', async () => {
+      setStdin('refs/heads/feat/my-feature abc123 refs/heads/feat/my-feature def456\n');
+
+      await main();
+
+      expect(process.exit).toHaveBeenCalledTimes(1);
+      expect(process.exit).toHaveBeenCalledWith(0);
+      expect(consoleErrors).toEqual([]);
+      expect(childProcess.execFileSync).toHaveBeenCalledWith(
+        process.execPath,
+        [expect.stringContaining('validate-branch-name.js'), '--branch', 'feat/my-feature'],
+        { stdio: 'pipe', encoding: 'utf-8' }
+      );
+    });
+
+    test('exits with 1 when pushed branch validation throws', async () => {
+      setStdin('refs/heads/invalid-branch abc123 refs/heads/invalid-branch def456\n');
+      childProcess.execFileSync.mockImplementation(() => {
+        throw Object.assign(new Error('invalid branch'), { status: 1 });
+      });
+
+      await main();
+
+      expect(process.exit).toHaveBeenCalledTimes(1);
+      expect(process.exit).toHaveBeenCalledWith(1);
+      expect(childProcess.execFileSync).toHaveBeenCalledTimes(2);
+      expect(childProcess.execFileSync).toHaveBeenLastCalledWith(
+        process.execPath,
+        [expect.stringContaining('validate-branch-name.js'), '--branch', 'invalid-branch'],
+        { stdio: 'inherit', encoding: 'utf-8' }
+      );
     });
   });
 });

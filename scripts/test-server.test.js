@@ -178,6 +178,7 @@ describe('test-server', () => {
     });
 
     afterEach(() => {
+      jest.restoreAllMocks();
       if (fs.existsSync(tmpDir)) {
         fs.rmSync(tmpDir, { recursive: true, force: true });
       }
@@ -289,6 +290,24 @@ describe('test-server', () => {
       requestHandler(req, res);
       expect(res.writeHead).toHaveBeenCalledWith(403);
       expect(res.end).toHaveBeenCalledWith('Forbidden');
+    });
+
+    it('serves an asset when the request includes a query string', () => {
+      const data = Buffer.from('console.log("asset");');
+      const res = { writeHead: jest.fn(), end: jest.fn() };
+      jest.spyOn(fs, 'existsSync').mockReturnValue(true);
+      jest.spyOn(fs, 'statSync').mockReturnValue({ isDirectory: () => false });
+      const readFile = jest.spyOn(fs, 'readFile').mockImplementation((filePath, callback) => {
+        callback(null, data);
+      });
+
+      requestHandler({ url: '/assets/app.js?v=123' }, res);
+
+      expect(readFile).toHaveBeenCalledWith(
+        expect.stringMatching(/[/\\]dist[/\\]assets[/\\]app\.js$/), expect.any(Function)
+      );
+      expect(res.writeHead).toHaveBeenCalledWith(200, { 'Content-Type': 'application/javascript' });
+      expect(res.end).toHaveBeenCalledWith(data);
     });
 
     it('validates paths through resolvePath', () => {

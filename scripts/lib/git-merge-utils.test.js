@@ -74,6 +74,10 @@ describe('git-merge-utils', () => {
       (spawnSync).mockReturnValue({ status: 0 });
       const result = getMergeStatus('feature/test', null);
       expect(result).toBe('merged');
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git', ['merge-base', '--is-ancestor', 'origin/feature/test', 'origin/main'],
+        { encoding: 'utf8' }
+      );
     });
 
     it('returns unknown when spawnSync throws', () => {
@@ -114,6 +118,10 @@ describe('git-merge-utils', () => {
       });
       const result = getUniqueCommitCount('feature/test', null);
       expect(result).toBe(12);
+      expect(execFileSync).toHaveBeenLastCalledWith(
+        'git', ['rev-list', '--count', 'origin/develop..origin/feature/test'],
+        { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }
+      );
     });
   });
 
@@ -193,16 +201,26 @@ describe('git-merge-utils', () => {
       });
       (spawnSync).mockReturnValue({ status: 0 });
       const result = getMergeStatus('test', null);
-      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+      expect(result).toBe('merged');
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git', ['merge-base', '--is-ancestor', 'origin/test', 'origin/main'],
+        { encoding: 'utf8' }
+      );
     });
 
-    it('getUniqueCommitCount uses getBaseRef when baseRef is null', () => {
-      (execFileSync).mockImplementation(() => {
+    it('getUniqueCommitCount uses origin/main when all base-ref lookups fail', () => {
+      (execFileSync).mockImplementation((cmd, args) => {
+        if (args[0] === 'rev-list') return '17\n';
         throw new Error('not found');
       });
       const result = getUniqueCommitCount('test', null);
-      expect(typeof result).toBe('number');
-      expect(result >= 0).toBe(true);
+      expect(result).toBe(17);
+      expect(execFileSync.mock.calls.map(([cmd, args]) => [cmd, args])).toEqual([
+        ['git', ['rev-parse', '--verify', 'origin/develop']],
+        ['git', ['rev-parse', '--verify', 'origin/main']],
+        ['git', ['rev-parse', '--verify', 'origin/master']],
+        ['git', ['rev-list', '--count', 'origin/main..origin/test']],
+      ]);
     });
 
     it('all functions trim git output correctly', () => {
@@ -220,6 +238,10 @@ describe('git-merge-utils', () => {
       (spawnSync).mockReturnValue({ status: 0 });
       const result = getMergeStatus('test', undefined);
       expect(result).toBe('merged');
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git', ['merge-base', '--is-ancestor', 'origin/test', 'origin/main'],
+        { encoding: 'utf8' }
+      );
     });
 
     it('getMergeStatus with empty string baseRef', () => {
@@ -229,6 +251,10 @@ describe('git-merge-utils', () => {
       (spawnSync).mockReturnValue({ status: 1 });
       const result = getMergeStatus('test', '');
       expect(result).toBe('unmerged');
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git', ['merge-base', '--is-ancestor', 'origin/test', 'origin/main'],
+        { encoding: 'utf8' }
+      );
     });
 
     it('getUniqueCommitCount with undefined baseRef', () => {
@@ -239,6 +265,10 @@ describe('git-merge-utils', () => {
       });
       const result = getUniqueCommitCount('test', undefined);
       expect(result).toBe(7);
+      expect(execFileSync).toHaveBeenLastCalledWith(
+        'git', ['rev-list', '--count', 'origin/develop..origin/test'],
+        { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }
+      );
     });
 
     it('getUniqueCommitCount with false baseRef', () => {
@@ -249,6 +279,10 @@ describe('git-merge-utils', () => {
       });
       const result = getUniqueCommitCount('test', false);
       expect(result).toBe(3);
+      expect(execFileSync).toHaveBeenLastCalledWith(
+        'git', ['rev-list', '--count', 'origin/develop..origin/test'],
+        { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }
+      );
     });
 
     it('getMergeStatus with 0 baseRef (falsy but not null/undefined)', () => {
@@ -257,7 +291,11 @@ describe('git-merge-utils', () => {
       });
       (spawnSync).mockReturnValue({ status: 0 });
       const result = getMergeStatus('test', 0);
-      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+      expect(result).toBe('merged');
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git', ['merge-base', '--is-ancestor', 'origin/test', 'origin/main'],
+        { encoding: 'utf8' }
+      );
     });
   });
 });
