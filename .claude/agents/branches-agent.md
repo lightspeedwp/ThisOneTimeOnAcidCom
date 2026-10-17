@@ -287,6 +287,70 @@ Before confirming a branch name, this agent verifies:
 
 ---
 
+## Branch Cleanup Workflow
+
+This repository includes tools to identify and report stale branches for cleanup.
+
+### Report-Only Branch Analysis
+
+Generate a preview report of branches eligible for deletion (merged, inactive, no open PRs):
+
+```bash
+# Generate markdown report (default)
+node scripts/cleanup-branches.js
+
+# Generate JSON report for automation
+node scripts/cleanup-branches.js --reportFormat=json
+
+# Custom inactivity threshold (45 days instead of default 30)
+node scripts/cleanup-branches.js --inactiveDays=45
+
+# Verbose logging for debugging
+node scripts/cleanup-branches.js --verbose
+
+# Exclude additional patterns beyond release/* and hotfix/*
+node scripts/cleanup-branches.js --excludePatterns="main|develop|staging"
+```
+
+### Report Contents
+
+Each report distinguishes:
+
+1. **Branches Eligible for Deletion** — Fully merged and inactive beyond threshold
+   - Sorted by branch type (feat, fix, docs, etc.)
+   - Includes author, last commit date, inactivity period
+   - Shows commit count and estimated storage impact
+
+2. **Branches Retained (KEEP)** — Protected, excluded, or active
+   - Protected branches (main, develop)
+   - Excluded patterns (release/*, hotfix/*)
+   - Branches with open pull requests
+   - Recently merged branches (under inactivity threshold)
+
+3. **Branches Requiring Discussion** — Unable to automatically classify
+   - Merge status could not be determined
+   - PR verification unavailable
+   - Require human review before deletion
+
+### Safety Safeguards
+
+The cleanup script is **report-only** and never deletes branches:
+
+- ✅ No git branch deletion commands
+- ✅ No remote push deletions
+- ✅ No local branch removal
+- ✅ Fails closed on unknown merge status (DISCUSS, not DELETE)
+- ✅ Preserves branches with open pull requests
+- ✅ Protects branch authors (e.g., Dependabot, Renovate)
+
+Reports serve as the basis for human review and decision-making.
+
+### Integration with Branch Names
+
+The cleanup logic does **not** validate branch names for deletion eligibility. Invalid branch names (e.g., `claude/`, `copilot/` prefixes) undergo normal categorization and may still appear as deletion candidates if fully merged and stale. Branch-name validation occurs at creation time via the branch-validation skill and pre-commit hooks, not during cleanup analysis.
+
+---
+
 ## Examples: Book/Content Repository Branching
 
 Since this is a content repository, here are common branch patterns:
