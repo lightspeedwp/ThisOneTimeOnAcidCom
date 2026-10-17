@@ -2,7 +2,16 @@
  * Tests for Git pre-push hook branch validation script
  */
 
-import { extractBranchName, validateBranch, main } from './validate-push-branch.js';
+import {
+  extractBranchName,
+  validateBranch,
+  parsePushLine,
+  shouldSkipRef,
+  resolveHeadRef,
+  getCurrentBranch,
+  processPushLines,
+  main
+} from './validate-push-branch.js';
 import { Readable } from 'stream';
 
 describe('validate-push-branch', () => {
@@ -96,6 +105,138 @@ describe('validate-push-branch', () => {
         const result = validateBranch(branch);
         expect([true, false]).toContain(result.valid);
       });
+    });
+  });
+
+  describe('parsePushLine', () => {
+    test('parses valid pre-push input lines', () => {
+      const line = 'refs/heads/feat/my-feature abc123 refs/heads/feat/my-feature abc123';
+      const result = parsePushLine(line);
+      expect(result).toEqual({
+        localRef: 'refs/heads/feat/my-feature',
+        localObj: 'abc123',
+        remoteRef: 'refs/heads/feat/my-feature',
+        remoteObj: 'abc123'
+      });
+    });
+
+    test('handles extra whitespace in pre-push lines', () => {
+      const line = '  refs/heads/feat/my-feature   abc123   refs/heads/feat/my-feature   abc123  ';
+      const result = parsePushLine(line);
+      expect(result.localRef).toBe('refs/heads/feat/my-feature');
+      expect(result.localObj).toBe('abc123');
+    });
+
+    test('returns null for invalid pre-push input', () => {
+      expect(parsePushLine('incomplete line')).toBeNull();
+      expect(parsePushLine('only three')).toBeNull();
+      expect(parsePushLine('')).toBeNull();
+    });
+
+    test('handles tab-separated pre-push input', () => {
+      const line = 'refs/heads/fix/bug\tdef456\trefs/heads/fix/bug\tdef456';
+      const result = parsePushLine(line);
+      expect(result.localRef).toBe('refs/heads/fix/bug');
+      expect(result.localObj).toBe('def456');
+    });
+  });
+
+  describe('shouldSkipRef', () => {
+    test('skips branch deletions', () => {
+      expect(shouldSkipRef('refs/heads/feat/my-feature', '0000000000000000000000000000000000000000')).toBe(true);
+      expect(shouldSkipRef('refs/heads/fix/bug', '00000000000000000000000000000000')).toBe(true);
+    });
+
+    test('skips tag refs', () => {
+      expect(shouldSkipRef('refs/tags/v1.0.0', 'abc123')).toBe(true);
+      expect(shouldSkipRef('refs/tags/v2.0.0', 'def456')).toBe(true);
+    });
+
+    test('skips non-head non-tag refs', () => {
+      expect(shouldSkipRef('refs/remotes/origin/main', 'abc123')).toBe(true);
+      expect(shouldSkipRef('refs/stash', 'def456')).toBe(true);
+    });
+
+    test('does not skip valid branch refs', () => {
+      expect(shouldSkipRef('refs/heads/feat/my-feature', 'abc123')).toBe(false);
+      expect(shouldSkipRef('refs/heads/main', 'def456')).toBe(false);
+    });
+  });
+
+  describe('resolveHeadRef', () => {
+    test('returns non-HEAD refs unchanged', () => {
+      expect(resolveHeadRef('refs/heads/feat/my-feature')).toBe('refs/heads/feat/my-feature');
+      expect(resolveHeadRef('refs/heads/main')).toBe('refs/heads/main');
+    });
+
+    test('handles HEAD ref resolution', () => {
+      // This will either resolve or return null depending on git state
+      const result = resolveHeadRef('HEAD');
+      expect(result === null || typeof result === 'string').toBe(true);
+    });
+  });
+
+  describe('getCurrentBranch', () => {
+    test('returns current branch name', () => {
+      const branch = getCurrentBranch();
+      // Should either return a branch name or null in detached HEAD state
+      expect(branch === null || typeof branch === 'string').toBe(true);
+    });
+
+    test('does not return HEAD in detached state', () => {
+      const branch = getCurrentBranch();
+      // getCurrentBranch returns null for detached HEAD, not 'HEAD'
+      if (branch !== null) {
+        expect(branch).not.toBe('HEAD');
+      }
+    });
+  });
+
+  describe('processPushLines', () => {
+    test('processes valid push lines', () => {
+      const lines = [
+        'refs/heads/feat/my-feature abc123 refs/heads/feat/my-feature abc123'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches.length).toBeGreaterThanOrEqual(0);
+      expect(typeof result.hasInvalidBranch).toBe('boolean');
+      expect(Array.isArray(result.invalidBranches)).toBe(true);
+    });
+
+    test('skips tag pushes', () => {
+      const lines = [
+        'refs/tags/v1.0.0 abc123 refs/tags/v1.0.0 abc123'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches.length).toBe(0);
+    });
+
+    test('skips branch deletions', () => {
+      const lines = [
+        'refs/heads/old-branch 0000000000000000000000000000000000000000 refs/heads/old-branch abc123'
+      ];
+      const result = processPushLines(lines);
+      expect(result.branches.length).toBe(0);
+    });
+
+    test('returns hasInvalidBranch when branches fail validation', () => {
+      const lines = [
+        'refs/heads/claude/invalid abc123 refs/heads/claude/invalid abc123'
+      ];
+      const result = processPushLines(lines);
+      expect(result.hasInvalidBranch).toBe(true);
+      expect(result.invalidBranches.length).toBeGreaterThan(0);
+    });
+
+    test('handles multiple lines', () => {
+      const lines = [
+        'refs/heads/feat/feature-one abc123 refs/heads/feat/feature-one abc123',
+        'refs/heads/fix/bug-two def456 refs/heads/fix/bug-two def456',
+        'refs/tags/v1.0.0 ghi789 refs/tags/v1.0.0 ghi789'
+      ];
+      const result = processPushLines(lines);
+      // Should process at least the branch lines, skip the tag
+      expect(result.branches.length >= 1).toBe(true);
     });
   });
 

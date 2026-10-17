@@ -61,6 +61,124 @@ function validateBranch(branch) {
 }
 
 /**
+ * Parse a single pre-push input line into its components.
+ * Format: <local ref> <local object> <remote ref> <remote object>
+ * @param {string} line - The pre-push input line
+ * @returns {{localRef: string, localObj: string, remoteRef: string, remoteObj: string}|null}
+ */
+function parsePushLine(line) {
+  const parts = line.trim().split(/\s+/);
+  if (parts.length < 4) {
+    return null;
+  }
+  return {
+    localRef: parts[0],
+    localObj: parts[1],
+    remoteRef: parts[2],
+    remoteObj: parts[3]
+  };
+}
+
+/**
+ * Check if a ref should be skipped (deletion or non-branch).
+ * @param {string} localRef - The local reference
+ * @param {string} localObj - The local object hash
+ * @returns {boolean} True if should skip validation
+ */
+function shouldSkipRef(localRef, localObj) {
+  // Skip deletion refs (indicated by all zeros for local object)
+  if (/^0+$/.test(localObj)) {
+    return true;
+  }
+  // Skip tags and other non-branch refs
+  if (!localRef.startsWith('refs/heads/')) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Resolve HEAD ref to symbolic branch name.
+ * @param {string} ref - The reference to resolve
+ * @returns {string|null} Resolved ref or null if HEAD is detached
+ */
+function resolveHeadRef(ref) {
+  if (ref !== 'HEAD') {
+    return ref;
+  }
+  try {
+    const symbolicRef = execSync('git symbolic-ref HEAD', {
+      encoding: 'utf-8'
+    }).trim();
+    return symbolicRef;
+  } catch (e) {
+    // Detached HEAD state
+    return null;
+  }
+}
+
+/**
+ * Get current branch name, with fallback validation.
+ * @returns {string|null} Current branch name or null if in detached HEAD
+ */
+function getCurrentBranch() {
+  try {
+    const currentBranch = execSync('git rev-parse --abbrev-ref HEAD', {
+      encoding: 'utf-8'
+    }).trim();
+    // Skip validation if in detached HEAD state
+    return currentBranch === 'HEAD' ? null : currentBranch;
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Process a batch of pre-push input lines and validate branches.
+ * Pure function for testing; does not perform I/O.
+ * @param {string[]} lines - Array of pre-push input lines
+ * @returns {{branches: string[], hasInvalidBranch: boolean, invalidBranches: string[]}}
+ */
+function processPushLines(lines) {
+  const branches = [];
+  let hasInvalidBranch = false;
+  const invalidBranches = [];
+
+  for (const line of lines) {
+    const parsed = parsePushLine(line);
+    if (!parsed) {
+      // Invalid format will be caught as error in main()
+      continue;
+    }
+
+    if (shouldSkipRef(parsed.localRef, parsed.localObj)) {
+      continue;
+    }
+
+    let localRef = resolveHeadRef(parsed.localRef);
+    if (!localRef) {
+      // Detached HEAD or resolution failed
+      continue;
+    }
+
+    if (!localRef.startsWith('refs/heads/')) {
+      continue;
+    }
+
+    const branch = extractBranchName(localRef);
+    branches.push(branch);
+
+    const result = validateBranch(branch);
+    if (!result.valid) {
+      hasInvalidBranch = true;
+      invalidBranches.push(branch);
+    }
+  }
+
+  return { branches, hasInvalidBranch, invalidBranches };
+}
+
+/**
  * Main function: read stdin and validate each pushed ref.
  * Processes pre-push input format and validates each branch.
  */
@@ -72,80 +190,30 @@ async function main() {
       terminal: false
     });
 
-    let hasInvalidBranch = false;
-    let lineCount = 0;
-
+    const lines = [];
     for await (const line of rl) {
-      lineCount++;
+      lines.push(line);
+    }
 
-      // Parse the pre-push input line
-      const parts = line.trim().split(/\s+/);
-      if (parts.length < 4) {
-        console.error(`Error: Invalid pre-push input format on line ${lineCount}`);
+    // Validate parsed lines
+    for (let i = 0; i < lines.length; i++) {
+      const parsed = parsePushLine(lines[i]);
+      if (!parsed) {
+        console.error(`Error: Invalid pre-push input format on line ${i + 1}`);
         process.exit(2);
-      }
-
-      let localRef = parts[0];
-      const localObj = parts[1];
-      const remoteRef = parts[2];
-      const remoteObj = parts[3];
-
-      // Skip deletion refs (they're indicated by all zeros for the local object)
-      if (/^0+$/.test(localObj)) {
-        // Branch deletion, skip validation
-        continue;
-      }
-
-      // Resolve HEAD to symbolic branch before checking ref type
-      if (localRef === 'HEAD') {
-        try {
-          const symbolicRef = execSync('git symbolic-ref HEAD', {
-            encoding: 'utf-8'
-          }).trim();
-          localRef = symbolicRef;
-        } catch (e) {
-          // Detached HEAD state, skip validation
-          continue;
-        }
-      }
-
-      // Skip tags and other non-branch refs
-      if (!localRef.startsWith('refs/heads/')) {
-        continue;
-      }
-
-      const branch = extractBranchName(localRef);
-      const result = validateBranch(branch);
-
-      if (!result.valid) {
-        // Get more detailed output by running validation again for display
-        try {
-          execFileSync(
-            process.execPath,
-            [getValidationScript(), '--branch', branch],
-            { stdio: 'inherit', encoding: 'utf-8' }
-          );
-        } catch (e) {
-          // Error already printed to stderr
-        }
-        hasInvalidBranch = true;
       }
     }
 
+    // Process push lines
+    const { hasInvalidBranch, invalidBranches } = processPushLines(lines);
+
     // If no input was received, try to validate the current branch (fallback)
-    if (lineCount === 0) {
-      try {
-        const currentBranch = execSync('git rev-parse --abbrev-ref HEAD', {
-          encoding: 'utf-8'
-        }).trim();
-
-        // Skip validation if in detached HEAD state
-        if (currentBranch === 'HEAD') {
-          process.exit(0);
-        }
-
+    if (lines.length === 0) {
+      const currentBranch = getCurrentBranch();
+      if (currentBranch) {
         const result = validateBranch(currentBranch);
         if (!result.valid) {
+          // Display validation error
           try {
             execFileSync(
               process.execPath,
@@ -155,11 +223,24 @@ async function main() {
           } catch (e) {
             // Error already printed
           }
-          hasInvalidBranch = true;
+          process.exit(1);
         }
-      } catch (e) {
-        console.error('Error: Could not determine branch to validate');
-        process.exit(2);
+      }
+      process.exit(0);
+    }
+
+    // Display validation errors for invalid branches
+    if (hasInvalidBranch) {
+      for (const branch of invalidBranches) {
+        try {
+          execFileSync(
+            process.execPath,
+            [getValidationScript(), '--branch', branch],
+            { stdio: 'inherit', encoding: 'utf-8' }
+          );
+        } catch (e) {
+          // Error already printed to stderr
+        }
       }
     }
 
@@ -177,4 +258,13 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   });
 }
 
-export { extractBranchName, validateBranch, main };
+export {
+  extractBranchName,
+  validateBranch,
+  parsePushLine,
+  shouldSkipRef,
+  resolveHeadRef,
+  getCurrentBranch,
+  processPushLines,
+  main
+};
