@@ -7,6 +7,7 @@
  */
 
 import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
 
 const AUTHORISED_TYPES = [
   'feat', 'fix', 'hotfix', 'release', 'refactor', 'chore', 'task',
@@ -19,7 +20,7 @@ const AUTHORISED_TYPES = [
 const FORBIDDEN_PREFIXES = ['claude', 'copilot', 'openai'];
 
 const PATTERNS = {
-  standard: /^[a-z][a-z0-9]*\/[a-z][a-z0-9]*(-[a-z0-9]+)*$/,
+  standard: /^[a-z][a-z0-9]*\/[a-z][a-z0-9]*-[a-z0-9]+(-[a-z0-9]+)*$/,
   releaseVersioned: /^release\/v\d+\.\d+\.\d+(-[a-z0-9]+(\.[a-z0-9]+)*)?$/,
   releaseStandard: /^release\/\d{4}-\d{2}-\d{2}$/,
   dependabot: /^dependabot\/.+$/,
@@ -110,6 +111,14 @@ function checkExemptions(branch) {
         { pattern: 'releaseStandard', exemption: true }
       );
     }
+
+    return new ValidationResult(
+      false,
+      branch,
+      `❌ Branch '${branch}' does not match release branch pattern. Use release/v{version} (e.g., release/v1.0.0) or release/YYYY-MM-DD format.`,
+      'invalid-release-pattern',
+      { pattern: 'release', received: branch }
+    );
   }
 
   return null;
@@ -232,6 +241,6 @@ export {
   main
 };
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
   main();
 }

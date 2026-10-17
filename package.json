@@ -14,9 +14,9 @@
     "test:unit:watch": "jest --watch",
     "test:unit:coverage": "jest --coverage",
     "test:build": "npm run build && bats tests/build.bats",
-    "test:e2e": "playwright test",
-    "test:e2e:debug": "playwright test --debug",
-    "test:e2e:ui": "playwright test --ui",
+    "test:e2e": "playwright install && playwright test",
+    "test:e2e:debug": "playwright install && playwright test --debug",
+    "test:e2e:ui": "playwright install && playwright test --ui",
     "validate:branch-name": "node scripts/validate-branch-name.js"
   },
   "dependencies": {

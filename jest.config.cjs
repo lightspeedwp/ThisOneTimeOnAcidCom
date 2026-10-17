@@ -3,10 +3,13 @@
  * Validates branch names, validates scripts, and runs test suites.
  */
 
-export default {
+module.exports = {
   testEnvironment: 'node',
   testMatch: ['**/scripts/**/*.test.js'],
   moduleFileExtensions: ['js', 'json'],
+  transform: {
+    '^.+\\.js$': '@swc/jest',
+  },
   collectCoverageFrom: [
     'scripts/**/*.js',
     '!scripts/**/*.test.js',

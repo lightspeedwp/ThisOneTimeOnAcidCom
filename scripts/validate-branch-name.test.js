@@ -3,11 +3,12 @@
  * Tests all 38 authorised types, forbidden prefixes, exemptions, and edge cases.
  */
 
-const {
+import {
   validateBranch,
   ValidationResult,
-  AUTHORISED_TYPES
-} = require('./validate-branch-name');
+  AUTHORISED_TYPES,
+  main
+} from './validate-branch-name.js';
 
 describe('Branch Name Validation', () => {
   describe('Valid Branches - Standard Pattern', () => {
@@ -75,10 +76,12 @@ describe('Branch Name Validation', () => {
   describe('Valid Branches - All 38 Authorised Types', () => {
     AUTHORISED_TYPES.forEach(type => {
       test(`should validate "${type}/scope-title" as valid`, () => {
-        const branch = `${type}/scope-title`;
+        const branch = type === 'release' ? 'release/v1.0.0' : `${type}/scope-title`;
         const result = validateBranch(branch);
         expect(result.isValid).toBe(true);
-        expect(result.details.matchedType).toBe(type);
+        if (type !== 'release') {
+          expect(result.details.matchedType).toBe(type);
+        }
       });
     });
   });
@@ -353,7 +356,7 @@ describe('Branch Name Validation', () => {
 
     test('should validate branch passed via --branch argument', () => {
       process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test-feature'];
-      const { main } = require('./validate-branch-name');
+      const { main } = require('./validate-branch-name.js');
       main();
       expect(process.exit).toHaveBeenCalledWith(0);
       expect(console.log).toHaveBeenCalled();
@@ -361,21 +364,21 @@ describe('Branch Name Validation', () => {
 
     test('should exit with error code for invalid branch via --branch', () => {
       process.argv = ['node', 'validate-branch-name.js', '--branch', 'invalid-branch'];
-      const { main } = require('./validate-branch-name');
+      const { main } = require('./validate-branch-name.js');
       main();
       expect(process.exit).toHaveBeenCalledWith(1);
     });
 
     test('should output JSON when --json flag is provided', () => {
       process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test', '--json'];
-      const { main } = require('./validate-branch-name');
+      const { main } = require('./validate-branch-name.js');
       main();
       expect(console.log).toHaveBeenCalledTimes(2);
     });
 
     test('should handle missing value for --branch', () => {
       process.argv = ['node', 'validate-branch-name.js', '--branch'];
-      const { main } = require('./validate-branch-name');
+      const { main } = require('./validate-branch-name.js');
       main();
       expect(process.exit).toHaveBeenCalledWith(2);
       expect(console.error).toHaveBeenCalledWith('Error: --branch requires a value');
@@ -383,7 +386,7 @@ describe('Branch Name Validation', () => {
 
     test('should validate current branch when no --branch argument provided', () => {
       process.argv = ['node', 'validate-branch-name.js'];
-      const { main } = require('./validate-branch-name');
+      const { main } = require('./validate-branch-name.js');
       main();
       expect(process.exit).toHaveBeenCalled();
     });

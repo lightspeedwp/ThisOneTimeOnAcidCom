@@ -9,7 +9,7 @@ Guidance for setting up and maintaining AI agent configuration for this reposito
 | Configuration | Scope | Owner | Location | Committed | Notes |
 |---|---|---|---|---|---|
 | Shared settings (defaults, model, tools) | Repository | Repository | `.claude/settings.json` | ✓ Yes | Shared across all sessions and users |
-| Example settings (template) | Repository | Repository | `.claude/settings.example.json` | ✓ Yes | Template only; never copy to .local.json |
+| Example settings (template) | Repository | Repository | `.claude/settings.example.json` | ✓ Yes | Template only; copy to `settings.local.json` for overrides. Do not commit the copy. |
 | Personal/machine settings | User | Individual | `.claude/settings.local.json` | ✗ No | Each person's environment; git-ignored |
 | Cloud environment config | Deployment | Cloud ops | (Cloud UI, not repo) | ✗ No | Set via claude.ai cloud environment settings |
 | Agents | Repository | Repository | `.claude/agents/*.md` | ✓ Yes | Shared definitions |
@@ -190,9 +190,14 @@ Or add specific validation events (journal content, changelog format, etc.):
   "hooks": {
     "SessionStart": [
       {
-        "type": "command",
-        "command": "scripts/claude/validate.sh",
-        "timeout": 60
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/claude/validate.sh",
+            "timeout": 60,
+            "match_output": true
+          }
+        ]
       }
     ]
   }
@@ -335,7 +340,7 @@ rm -rf scripts/claude/
 rm docs/claude-configuration.md
 git add .
 git commit -m "Remove Claude configuration"
-git reset --hard HEAD~1  # undo if needed
+# To undo the removal commit later: git revert HEAD
 ```
 
 ### Disable Specific Features
@@ -366,7 +371,7 @@ rm -rf .claude/agents/
 - [Skills](https://code.claude.com/docs/en/skills)
 - [Hooks](https://code.claude.com/docs/en/hooks)
 - [Cloud Environments](https://code.claude.com/docs/en/cloud-environments)
-- [ThisOneTimeOnAcidCom: Guidelines](./guidelines/README.md)
+- [ThisOneTimeOnAcidCom: Guidelines](../guidelines/README.md)
 - [ThisOneTimeOnAcidCom: Cloud Setup](../.claude/cloud/README.md)
 
 ---

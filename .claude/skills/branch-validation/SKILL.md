@@ -218,14 +218,11 @@ node scripts/validate-branch-name.js
 
 ### Created branch with wrong name?
 
-**Fix:** Delete and recreate with correct name
+**Fix:** Rename the branch to preserve commits
 
 ```bash
-# Delete local branch
-git branch -D wrong-branch-name
-
-# Create new branch with correct name
-git checkout -b feat/correct-feature-name
+# Rename local branch
+git branch -m wrong-branch-name feat/correct-feature-name
 ```
 
 ### Already pushed with wrong name?
