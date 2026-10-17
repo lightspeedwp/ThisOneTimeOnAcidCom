@@ -222,13 +222,10 @@ This specification defines a tailored, maintainable governance system for ThisOn
 - `labeling-unified.yml` — Automatic PR label assignment based on branch prefix  
 - `pr-template-routing.yml` — PR template routing based on branch type  
 
-**R6.2** — Evaluation Workflows (validation/audit, may be gated)  
-- `validate-specifications.yml` — Spec Kit regression testing (TOA-254)  
-- `claude-guard-tests.yml` — AI-generated code quality validation  
-- `locked-files-guard.yml` — Detect modifications to protected files (CLAUDE.md, AGENTS.md, guidelines/*)  
-- `ruleset-drift.yml` — Detect branch protection rule changes  
-- `ai-feedback-validation.yml` — Validate AI agent feedback against guardrails  
-- `ai-feedback.yml` — Collect and report agent feedback  
+**R6.2** — Evaluation Workflows (validation/audit, gating policy clarified)  
+- **Always enabled:** `locked-files-guard.yml` — Detect modifications to protected files (CLAUDE.md, AGENTS.md, guidelines/*)  
+- **Manual/opt-in:** `validate-specifications.yml` (Spec Kit regression), `claude-guard-tests.yml` (AI code quality), `ruleset-drift.yml` (branch protection changes), `ai-feedback-validation.yml` (AI feedback guardrails), `ai-feedback.yml` (feedback collection)  
+- Rationale: Pragmatic approach protecting critical governance files without adding CI overhead for evaluation-only workflows  
 
 **R6.3** — Deferred Workflows (not yet enabled; requires owner decision per workflow)  
 - `branch-validation-metrics-aggregator.yml` — Aggregate branch validation metrics  
@@ -572,6 +569,14 @@ This specification defines a tailored, maintainable governance system for ThisOn
 - A: Host-side enforcement (hard limit)
 - B: Config-based validation with warnings (soft limit)
 - C: Advisory with escalation to owner on exhaustion (trust-based)  
+
+---
+
+## Clarifications
+
+### Session 2026-10-17
+
+- Q: Which evaluation workflows should run by default on every PR, and which should be manual or opt-in? → A: Option B: Only `locked-files-guard` runs by default; others are manual/opt-in (pragmatic approach protecting critical governance files without CI overhead)
 
 ---
 
