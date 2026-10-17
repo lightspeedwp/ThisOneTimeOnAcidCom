@@ -228,7 +228,8 @@ module.exports = {
   ValidationResult,
   AUTHORISED_TYPES,
   FORBIDDEN_PREFIXES,
-  PATTERNS
+  PATTERNS,
+  main
 };
 
 if (require.main === module) {

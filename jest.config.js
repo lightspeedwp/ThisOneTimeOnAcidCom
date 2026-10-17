@@ -9,14 +9,15 @@ export default {
   moduleFileExtensions: ['js', 'json'],
   collectCoverageFrom: [
     'scripts/**/*.js',
-    '!scripts/**/*.test.js'
+    '!scripts/**/*.test.js',
+    '!scripts/test-server.js'
   ],
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70
+      branches: 90,
+      functions: 100,
+      lines: 90,
+      statements: 90
     }
   }
 };
