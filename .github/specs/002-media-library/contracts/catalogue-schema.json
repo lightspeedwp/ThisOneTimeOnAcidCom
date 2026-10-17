@@ -200,6 +200,20 @@
           "examples": ["2026-10-17T16:45:00Z"]
         }
       },
+      "if": {
+        "required": ["print_suitable"],
+        "properties": { "print_suitable": { "const": true } }
+      },
+      "then": {
+        "required": ["dimensions"],
+        "properties": {
+          "dimensions": {
+            "type": "object",
+            "required": ["dpi"],
+            "properties": { "dpi": { "type": "number", "minimum": 300 } }
+          }
+        }
+      },
       "additionalProperties": false
     },
     "assetRelationship": {

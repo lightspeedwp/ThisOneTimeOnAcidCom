@@ -23,7 +23,7 @@
 
 ```bash
 # Install JSON Schema validator (if not present)
-npm install -g ajv-cli
+npm install -g ajv-cli ajv-formats
 
 # Verify pilot assets directory exists
 ls -la ./assets/pilot-batch-001/
@@ -323,49 +323,68 @@ done < ./references/old-to-new-mapping.csv
 
 **Setup**:
 
-```bash
-# Prepare test batch (5 assets: SVG, PNG, TIFF, PDF, high-res variant)
-mkdir -p ./test-batch-provider
-cp ./assets/pilot-batch-001/asset-logo-svg.svg ./test-batch-provider/
-cp ./assets/pilot-batch-001/asset-logo-png.png ./test-batch-provider/
-cp ./assets/pilot-batch-001/asset-print-tiff.tiff ./test-batch-provider/
-cp ./assets/pilot-batch-001/asset-report-pdf.pdf ./test-batch-provider/
-cp ./assets/pilot-batch-001/asset-variant-high-res.tif ./test-batch-provider/
+Use a dedicated GitHub evaluation repository with Git LFS enabled, configured Git commit identity and authenticated push/clone access. Set `PROVIDER_TEST_REMOTE` to that repository's URL. These tests create evaluation branches and consume LFS storage and download bandwidth. Run setup and both tests in the same Bash session with Git LFS and ImageMagick (`identify`) installed.
 
-# Verify batch is ready
-ls -lah ./test-batch-provider/
-# Expected: 5 files, total ~50–100 MB (representative of actual asset sizes)
+```bash
+set -euo pipefail
+: "${PROVIDER_TEST_REMOTE:?Set the dedicated GitHub evaluation repository URL}"
+git lfs version
+
+# Prepare all required formats plus the high-resolution TIFF variant.
+mkdir -p ./test-batch-provider
+for name in asset-logo-svg.svg asset-logo-png.png asset-photo-jpg.jpg asset-icon-gif.gif \
+            asset-print-tiff.tiff asset-report-pdf.pdf asset-variant-high-res.tif; do
+  test -f "./assets/pilot-batch-001/$name" || { echo "Missing fixture: $name" >&2; exit 1; }
+  cp "./assets/pilot-batch-001/$name" ./test-batch-provider/
+done
+
+# Each transfer uses a new upload repository and a fresh download clone.
+provider_round_trip() (
+  set -euo pipefail
+  source="$1"
+  destination="$2"
+  test -f "$source" || { echo "Missing fixture: $source" >&2; exit 1; }
+  transfer_dir=$(mktemp -d)
+  trap 'rm -rf "$transfer_dir"' EXIT
+  name="${source##*/}"
+  branch="media-library-$(basename "$transfer_dir")"
+  git init --quiet "$transfer_dir/upload"
+  git -C "$transfer_dir/upload" lfs install --local
+  cp "$source" "$transfer_dir/upload/$name"
+  git -C "$transfer_dir/upload" lfs track "$name"
+  git -C "$transfer_dir/upload" add .gitattributes "$name"
+  git -C "$transfer_dir/upload" commit -m "Evaluate media format: $name"
+  git -C "$transfer_dir/upload" remote add origin "$PROVIDER_TEST_REMOTE"
+  git -C "$transfer_dir/upload" push origin "HEAD:refs/heads/$branch"
+  GIT_LFS_SKIP_SMUDGE=1 git clone --single-branch --branch "$branch" \
+    "$PROVIDER_TEST_REMOTE" "$transfer_dir/download"
+  git -C "$transfer_dir/download" lfs install --local
+  git -C "$transfer_dir/download" lfs pull
+  cp "$transfer_dir/download/$name" "$destination"
+)
 ```
 
 **Test Case 4.1: Format Support Validation**
 
-**Run** (GitHub LFS example):
+**Run** (GitHub LFS):
 
 ```bash
-# Test: Can provider store and deliver each required format?
-# Test all required formats: SVG, PNG, JPEG, GIF (web), PDF, TIFF (print)
-for source in ./test-batch-provider/asset-logo-svg.svg ./test-batch-provider/asset-logo-png.png \
-              ./test-batch-provider/asset-photo-jpg.jpg ./test-batch-provider/asset-icon-gif.gif \
-              ./test-batch-provider/asset-report-pdf.pdf ./test-batch-provider/asset-print-tiff.tiff; do
-  if [ -f "$source" ]; then
-    format="${source##*.}"
-    # For GitHub LFS: track, add, push, verify hash
-    hash_before=$(md5sum "$source" | awk '{print $1}')
-    # Simulate provider upload/download and verify integrity
-    cp "$source" /tmp/test_"$format"_downloaded."$format"
-    hash_after=$(md5sum /tmp/test_"$format"_downloaded."$format" | awk '{print $1}')
-    
-    if [ "$hash_before" = "$hash_after" ]; then
-      echo "✓ $format: Upload/download successful, file integrity preserved"
-    else
-      echo "✗ $format: Integrity check failed (hashes differ)"
-    fi
-    rm /tmp/test_"$format"_downloaded."$format"
-  fi
-done
+(
+  set -euo pipefail
+  download_dir=$(mktemp -d)
+  trap 'rm -rf "$download_dir"' EXIT
+  for name in asset-logo-svg.svg asset-logo-png.png asset-photo-jpg.jpg asset-icon-gif.gif \
+              asset-report-pdf.pdf asset-print-tiff.tiff asset-variant-high-res.tif; do
+    source="./test-batch-provider/$name"
+    downloaded="$download_dir/$name"
+    provider_round_trip "$source" "$downloaded"
+    cmp "$source" "$downloaded"
+    echo "✓ $name: Upload/download successful, file integrity preserved"
+  done
+)
 ```
 
-**Pass Criteria**: ✅ All required formats (web: PNG, JPEG, SVG, GIF; print: PDF, TIFF per Q2) upload and download without corruption
+**Pass Criteria**: ✅ All required formats (web: PNG, JPEG, SVG, GIF; print: PDF, TIFF per Q2) upload and download without corruption; missing files, failed transfers and differing bytes exit non-zero.
 
 ---
 
@@ -374,25 +393,29 @@ done
 **Run**:
 
 ```bash
-# Test: Does provider preserve DPI, colour space, embedded fonts for print assets?
-file="./test-batch-provider/asset-print-tiff.tiff"
-
-# Before upload: Check metadata
-identify "$file"  # or `exiftool` for EXIF
-# Expected: DPI: 300, Colour Space: CMYK
-
-# After provider round-trip (pseudocode):
-# ... upload to provider
-# ... download from provider
-# ... verify metadata
-
-identify ./test-batch-provider/asset-print-tiff-downloaded.tiff
-# Expected: DPI: 300, Colour Space: CMYK (unchanged)
-
-echo "✓ Print metadata preserved: DPI=300, Colour Space=CMYK"
+(
+  set -euo pipefail
+  download_dir=$(mktemp -d)
+  trap 'rm -rf "$download_dir"' EXIT
+  for name in asset-print-tiff.tiff asset-variant-high-res.tif asset-report-pdf.pdf; do
+    source="./test-batch-provider/$name"
+    downloaded="$download_dir/$name"
+    test -f "$source" || { echo "Missing fixture: $source" >&2; exit 1; }
+    # Inspect every page/frame: dimensions, resolution, resolution units and colour space.
+    metadata_before=$(identify -format '%w %h %x %y %U %[colorspace]\n' "$source")
+    test -n "$metadata_before"
+    provider_round_trip "$source" "$downloaded"
+    metadata_after=$(identify -format '%w %h %x %y %U %[colorspace]\n' "$downloaded")
+    test "$metadata_before" = "$metadata_after"
+    cmp "$source" "$downloaded"
+    echo "✓ $name: Print metadata and original bytes preserved"
+  done
+)
 ```
 
-**Pass Criteria**: ✅ Print asset metadata (DPI, colour space, embedded fonts) preserved during provider storage and retrieval per provider-evaluation.md § Print Quality Support (FR-013)
+ImageMagick must support reading TIFF and PDF in this environment; a decoder or policy failure fails the test. Byte comparison also verifies preservation of embedded data such as fonts; the metadata comparison verifies preservation, not whether the source meets print-production requirements.
+
+**Pass Criteria**: ✅ Every print asset completes a provider round trip; `identify`, metadata comparison and byte comparison all succeed before success is reported (FR-013).
 
 ---
 
@@ -400,35 +423,43 @@ echo "✓ Print metadata preserved: DPI=300, Colour Space=CMYK"
 
 **Run**:
 
+Use [GitHub's LFS billing documentation](https://docs.github.com/en/billing/concepts/product-billing/git-lfs) and its linked [pricing calculator](https://github.com/pricing/calculator) to record the repository owner's current plan allowances and metered USD rates before running this estimate. Verified 2026-10-17: Free, Pro and Free for organizations include 10 GiB each of storage and download bandwidth; Team and Enterprise Cloud include 250 GiB each. Prepaid data packs no longer apply. Recheck these values when estimating.
+
+Set `LFS_INCLUDED_STORAGE_GIB`, `LFS_INCLUDED_BANDWIDTH_GIB`, `LFS_STORAGE_USD_PER_GIB_MONTH` and `LFS_BANDWIDTH_USD_PER_GIB` to the verified values. Set `MONTHLY_DOWNLOAD_GB` to estimated monthly downloads. Set `OTHER_STORAGE_GIB` and `OTHER_DOWNLOAD_GIB` to the owner's other LFS usage (including retained object versions); use zero only if none exists. Quotas are shared across the owner's repositories.
+
 ```bash
-# Calculate actual cost for 56 recovered assets at provider's pricing
-# Example: GitHub LFS pricing (2026 rates)
+# Estimate a full month at constant storage; GitHub actually accrues storage hourly.
+# Preserve the stated inputs: 56 assets × 5 decimal MB = 280 MB = 0.28 GB.
+python3 - <<'PYTHON'
+from decimal import Decimal
+import os
 
-total_assets=56
-avg_file_size_mb=5  # Representative average across all formats
-total_storage_gb=$(echo "scale=1; ($total_assets * $avg_file_size_mb) / 1000" | bc)
+def nonnegative_input(name):
+    value = Decimal(os.environ[name])  # Missing/unverified inputs fail the estimate.
+    if not value.is_finite() or value < 0:
+        raise ValueError(name + " must be finite and non-negative")
+    return value
 
-echo "Storage estimate for 56 assets:"
-echo "  Average file size: ${avg_file_size_mb} MB"
-echo "  Total storage needed: ${total_storage_gb} GB"
-
-# GitHub LFS: Check current pricing via API or documentation
-# Typical structure: Free tier + overage rate per GB
-# For accurate cost, fetch current pricing from provider rather than using hardcoded rates
-echo "Checking provider pricing..."
-# TODO: Implement actual provider pricing lookup (provider-specific API call)
-# For now, use placeholder; replace with real pricing data
-estimated_cost_per_month=15  # Placeholder—verify against actual provider rates
-
-echo "  Monthly cost estimate:"
-echo "    Storage needed: ${total_storage_gb} GB"
-echo "    Estimated cost: \$$estimated_cost_per_month/month (⚠ verify against current provider pricing)"
-echo "    Note: Actual cost depends on provider tier, bandwidth, and regional pricing"
-
-# Compare against budget and other providers (see provider-evaluation.md Comparison Matrix)
+total_assets = 56
+avg_file_size_mb = Decimal("5")
+total_storage_gb = total_assets * avg_file_size_mb / 1000
+# GitHub meters GiB (2^30 bytes), while the source size estimate uses decimal GB.
+gb_to_gib = Decimal(10**9) / Decimal(2**30)
+storage_gib = total_storage_gb * gb_to_gib + nonnegative_input("OTHER_STORAGE_GIB")
+bandwidth_gib = nonnegative_input("MONTHLY_DOWNLOAD_GB") * gb_to_gib + nonnegative_input("OTHER_DOWNLOAD_GIB")
+billable_storage = max(Decimal(0), storage_gib - nonnegative_input("LFS_INCLUDED_STORAGE_GIB"))
+billable_bandwidth = max(Decimal(0), bandwidth_gib - nonnegative_input("LFS_INCLUDED_BANDWIDTH_GIB"))
+cost_storage = billable_storage * nonnegative_input("LFS_STORAGE_USD_PER_GIB_MONTH")
+cost_bandwidth = billable_bandwidth * nonnegative_input("LFS_BANDWIDTH_USD_PER_GIB")
+total_cost = cost_storage + cost_bandwidth
+print(f"Storage for {total_assets} assets: {total_storage_gb} GB")
+print(f"Owner's billable storage: {billable_storage:.6f} GiB-months; cost: ${cost_storage:.4f}")
+print(f"Owner's billable downloads: {billable_bandwidth:.6f} GiB; cost: ${cost_bandwidth:.4f}")
+print(f"Estimated owner LFS cost: ${total_cost:.2f}/month")
+PYTHON
 ```
 
-**Pass Criteria**: ✅ Provider cost is within project budget; no surprise overage charges; pricing assumptions verified
+**Pass Criteria**: ✅ Estimate uses verified current pricing and owner allowances, includes other LFS usage, and stays within budget. Confirm payment method and spending budgets in GitHub billing; a zero-cost estimate does not establish provider readiness.
 
 ---
 
@@ -455,75 +486,59 @@ cp ../references/old-to-new-mapping.csv ./
 cp ../contracts/catalogue-schema.json ./
 ```
 
-**Test Case 5.1: E2E Validation Summary Report**
+**Test Case 5.1: E2E Validation Report Template**
+
+Both reports below are sample output only. Generating or copying them does not run validation or establish migration readiness. Replace placeholders with recorded results from Scenarios 1–4 and the validation checklist before making a separate handoff decision.
 
 **Run**:
 
 ```bash
-# Generate validation report summarizing all checks
-
-# Generate validation report from actual check results
-recovered_count=$(jq '[.assets[] | select(.recovery_status == "recovered")] | length' ./pilot-batch-recovered.json)
-total_assets=$(jq '.assets | length' ./pilot-batch-recovered.json)
-recovery_pct=$(echo "scale=1; ($recovered_count / $total_assets) * 100" | bc)
-
-schema_violations=$(node -e "
-  const catalogue = require('./pilot-batch-recovered.json');
-  const schema = require('./contracts/catalogue-schema.json');
-  // Count schema violations (simplified—use proper JSON Schema validator in production)
-  console.log(0);
-" || echo "error")
-
-cat > ./E2E_VALIDATION_SUMMARY.txt << EOF
-# End-to-End Media Library Validation Report
-Generated: $(date -I)
+# Write a sample template, without executing checks or claiming success.
+cat > ./E2E_VALIDATION_SUMMARY.txt << 'EOF'
+# Sample End-to-End Media Library Validation Report — NOT VALIDATED
+Generated: <date of recorded scenario checks>
 Phase: 1 Design
 
-## Asset Recovery (TOA-282 scope)
-- Pilot batch size: $total_assets assets
-- Recovery success: $recovered_count/$total_assets recovered
-- Completion score: $recovery_pct%
-- Status: $([ "$((recovered_count * 100))" -ge "$((total_assets * 80))" ] && echo "✓ PASS (meets target ≥80%)" || echo "✗ FAIL (below target ≥80%)")
+## Asset Recovery (Scenario 1 / TOA-282)
+- Pilot batch size: <observed count>
+- Recovery success: <observed recovered count>/<observed total>
+- Recovery status: NOT RUN — replace with recorded outcome
 
-## Catalogue Schema Validation (contracts/catalogue-schema.json)
-- Assets validated: $total_assets
-- Schema violations: $schema_violations
-- Required fields: See validation-checklist.md for field-by-field results
-- Non-invention rule: Check recovery_notes for any missing credits/rights
-- Print metadata: Count assets with print_suitable=true and DPI≥300
+## Catalogue Schema Validation (Scenario 1)
+- Assets validated: <observed count>
+- Schema violations: <observed count from JSON Schema validator>
+- Non-invention and print metadata checks: NOT RUN
 
-## Validation Completion: Derive score from actual checks above
-- Report derives status from real validation results, not hardcoded values
+## Relationships and Reference Mapping (Scenarios 2–3)
+- Validation result: NOT RUN
 
-## Blockers for Migration: [Document from actual validation results]
-## Advisory Issues: [Document from actual validation results]
+## Provider Transfers, Print Metadata and Cost (Scenario 4)
+- Validation result: NOT RUN
 
-## Recommendation: Based on validation results, proceed or escalate blockers.
+## Blockers and Advisory Issues
+- <link recorded checks and unresolved issues>
+
+## Migration Decision: NOT ASSESSED — sample output only
 EOF
 
-echo "Validation report generated. Review and verify all results before proceeding."
+echo "Sample report template generated; validation has not run."
 ```
 
-**Expected output**:
+**Sample output** (illustration only; no checks have run):
 
-```
-# End-to-End Media Library Validation Report
-Generated: 2026-10-17
+```text
+# Sample End-to-End Media Library Validation Report — NOT VALIDATED
+Generated: <date of recorded scenario checks>
 Phase: 1 Design
 
-## Asset Recovery (TOA-282 scope)
-- Pilot batch size: 12 assets
-- Recovery success: 12/12 recovered
-- Completion score: 100%
-- Status: ✓ PASS (meets target ≥80%)
-
-... (full report)
-
-Validation Completion Score: 95%
-- ✓ GREEN (ready for migration to production)
+Asset recovery: NOT RUN; counts not recorded
+Catalogue schema: NOT RUN; violations not counted
+Relationships and references: NOT RUN
+Provider transfers, print metadata and cost: NOT RUN
+Migration decision: NOT ASSESSED — sample output only
 ```
 
-**Pass Criteria**: ✅ E2E validation report confirms: recovery successful, catalogue validates, references mapped, provider ready; completion score ≥95% (green threshold per validation-checklist.md)
+**Pass Criteria**: Template generation alone has no validation pass criterion. Migration handoff requires recorded recovery, schema, reference and provider results, plus the validation-checklist completion score ≥95% and resolution of blocking failures. Missing or failed validation cannot establish readiness.
 
 ---
 
@@ -557,6 +572,8 @@ file ./new-asset-workflow/new-asset-logo-v3.svg
 **Run** (following validation-checklist.md § Task 1):
 
 ```bash
+set -euo pipefail
+
 # Step 1: Prepare Asset
 echo "Step 1: Verify asset resolution and colour space"
 identify ./new-asset-workflow/new-asset-logo-v3.svg
@@ -592,12 +609,26 @@ cat > ./new-asset-workflow/new-asset-record.json << 'EOF'
 EOF
 
 # Step 3: Validate
-ajv validate -s ./contracts/catalogue-schema.json -d ./new-asset-workflow/new-asset-record.json
+jq '.definitions.asset' ./contracts/catalogue-schema.json > ./new-asset-workflow/asset-schema.json
+ajv validate -c ajv-formats -s ./new-asset-workflow/asset-schema.json -d ./new-asset-workflow/new-asset-record.json
 # Expected output: valid
 
-# Step 4: Verify in catalogue
-grep "asset_logo_v3_2026" ./new-asset-workflow/new-asset-record.json
-# Expected: reference exists
+# Step 4: Add to the canonical catalogue and verify the stored record.
+# pilot-batch-recovered.json is the existing catalogue used in Task 6 below.
+catalogue=./pilot-batch-recovered.json
+record=./new-asset-workflow/new-asset-record.json
+updated_catalogue=$(mktemp "${catalogue%.json}.XXXXXX.json")
+trap 'rm -f "$updated_catalogue"' EXIT
+jq -e --slurpfile record "$record" '
+  if (.assets | type) != "array" then error("Catalogue assets must be an array")
+  elif any(.assets[]; .asset_id == $record[0].asset_id) then error("Duplicate asset ID")
+  else .assets += $record end
+' "$catalogue" > "$updated_catalogue"
+ajv validate -c ajv-formats -s ./contracts/catalogue-schema.json -d "$updated_catalogue"
+mv "$updated_catalogue" "$catalogue"
+jq -e --slurpfile record "$record" '
+  [.assets[] | select(.asset_id == $record[0].asset_id)] == $record
+' "$catalogue"
 
 echo "✓ New asset successfully added to catalogue per operational runbook"
 ```
