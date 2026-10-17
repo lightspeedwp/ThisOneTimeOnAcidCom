@@ -171,11 +171,12 @@ This specification defines a tailored, maintainable governance system for ThisOn
 
 **R5.1** — GitHub Discussions (GH-001 approved: Enable with templates)  
 - Enable Discussions in repository settings  
-- Create `.github/DISCUSSION_TEMPLATE/` directory with templates:  
-  - `feature-request.md` — new feature ideas  
-  - `question-and-answer.md` — Q&A support  
-  - `show-and-tell.md` — community showcase  
-  - `ideas.md` — ideas and proposals  
+- Create `.github/DISCUSSION_TEMPLATE/` directory with YAML category forms:  
+  - `feature-request.yml` — new feature ideas  
+  - `question-and-answer.yml` — Q&A support  
+  - `show-and-tell.yml` — community showcase  
+  - `ideas.yml` — ideas and proposals  
+  - `general.yml` — general discussion  
 - Configure discussion categories in settings  
 - Document in README  
 

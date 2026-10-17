@@ -232,11 +232,12 @@
 - [ ] T033 [P] [WS-261] [TOA-250] Create GitHub Discussions templates
   - Enable Discussions in repository settings (Settings → Discussions → checkbox enabled)
   - Create `.github/DISCUSSION_TEMPLATE/` directory
-  - Create discussion category templates:
-    - `feature-request.md` — for feature ideas and enhancement requests
-    - `question-and-answer.md` — for Q&A support and troubleshooting
-    - `show-and-tell.md` — for community showcase and project sharing
-    - `ideas.md` — for general ideas and proposals
+  - Create YAML discussion category forms:
+    - `feature-request.yml` — for feature ideas and enhancement requests
+    - `question-and-answer.yml` — for Q&A support and troubleshooting
+    - `show-and-tell.yml` — for community showcase and project sharing
+    - `ideas.yml` — for general ideas and proposals
+    - `general.yml` — for general discussion
   - Configure discussion categories in repository settings to map to templates
   - Link discussion guide from README.md
 - [ ] T034 [P] [WS-261] [TOA-251] Verify issue template inheritance
