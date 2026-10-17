@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`.coderabbit.yml`**: Enabled `inheritance: true` to inherit shared CodeRabbit safeguards and configuration from central `lightspeedwp/coderabbit` repository
 - **`.coderabbit.yml`**: Local overrides preserved — `language: en-GB` and `reviews.profile: chill` remain project-specific
 - **`.coderabbit.yml`**: Corrected mock data path reference from `src/mockData/` to `src/app/data/mock/` to align with actual repository structure and path mapping conventions documented in AGENTS.md
+- **`.claude/` folder guidance**: Added CodeRabbit path instructions for Claude Code configuration directories:
+  - **`.claude/agents/`** — Agent specifications with frontmatter validation, tool access checks, and capability scoping
+  - **`.claude/skills/`** — Reusable skill definitions with SKILL.md structure, metadata, examples, and integration patterns
+  - **`.specify/`** — Spec Kit specification files with proper structure, section completeness, and cross-linking
+  - **`.gemini/`** — Gemini CLI command definitions for workflow orchestration and consistency
 
 ### Fixed
 

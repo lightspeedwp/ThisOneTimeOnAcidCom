@@ -7,6 +7,53 @@ language: en-GB
 reviews:
   profile: chill
   path_instructions:
+    - path: ".claude/**/*.md"
+      instructions: |
+        These are Claude Code configuration and skill definitions. Review for:
+        - Skill frontmatter metadata (name, description, trigger conditions)
+        - Proper linking between skills and their usage patterns
+        - Accurate descriptions of tool dependencies and permissions
+        - Consistency with AGENTS.md repository conventions
+        - No hardcoded credentials or sensitive data in skill definitions
+        - Clear examples and use cases for each skill/agent
+
+    - path: ".claude/agents/**/*"
+      instructions: |
+        Claude Code agent specifications and configurations. Review for:
+        - Valid agent type names and proper parameter definitions
+        - Clear prompt instructions that align with repository conventions
+        - Tool access specifications and permission requirements
+        - Agent role declarations matching AGENTS.md conventions
+        - No over-scoping of agent capabilities beyond their intended use case
+
+    - path: ".claude/skills/**/*.md"
+      instructions: |
+        Claude Code reusable skills (SKILL.md files). Review for:
+        - Proper SKILL.md structure with overview, commands, and examples
+        - Frontmatter metadata with name, description and trigger keywords
+        - Clear usage examples showing the skill in action
+        - Accurate tool and permission documentation
+        - Links to related skills and integration points
+        - Consistency with repository-specific conventions (paths, naming, workflow)
+
+    - path: ".specify/**/*"
+      instructions: |
+        Spec Kit specification files and templates. Review for:
+        - Proper YAML/markdown frontmatter in specification files
+        - Clear structure following the spec numbering scheme (.github/specs/)
+        - Links to related specifications and dependencies
+        - Complete sections: Overview, Requirements, Success Criteria, Implementation Plan
+        - No broken links to guidelines or other specifications
+
+    - path: ".gemini/**/*"
+      instructions: |
+        Gemini CLI command definitions and workflows. Review for:
+        - Valid command structure and parameter definitions
+        - Clear descriptions of command purpose and usage
+        - Proper integration with Claude Code workflows
+        - No duplication with existing .claude/skills/ definitions
+        - Consistency with Spec Kit phases and orchestration
+
     - path: "**/*.{tsx,ts,jsx,js,css}"
       instructions: |
         Follow the guidelines in `guidelines/Guidelines.md` for code style,
