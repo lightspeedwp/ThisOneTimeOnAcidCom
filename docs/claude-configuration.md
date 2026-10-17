@@ -165,7 +165,7 @@ Hooks and their executable handlers:
 
 **Current behavior:**
 ```bash
-scripts/claude/validate.sh
+"$CLAUDE_PROJECT_DIR"/scripts/claude/validate.sh
 ```
 
 **What it does:**
