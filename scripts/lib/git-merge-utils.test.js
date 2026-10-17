@@ -69,9 +69,11 @@ describe('Git Merge Utilities', () => {
     });
 
     test('should trim whitespace from git output', () => {
-      execFileSync.mockReturnValue('  abc123  \n');
+      execFileSync
+        .mockReturnValueOnce('   \n')
+        .mockReturnValueOnce('abc123');
       const baseRef = getBaseRef();
-      expect(baseRef).toBe('origin/develop');
+      expect(baseRef).toBe('origin/main');
     });
   });
 
@@ -124,7 +126,7 @@ describe('Git Merge Utilities', () => {
     });
 
     test('should use getBaseRef when baseRef is null', () => {
-      execFileSync.mockReturnValue('origin/main');
+      execFileSync.mockReturnValue('abc123');
       spawnSync.mockReturnValue({ status: 0 });
 
       getMergeStatus('feature-branch', null);
@@ -132,7 +134,7 @@ describe('Git Merge Utilities', () => {
       expect(execFileSync).toHaveBeenCalled();
       expect(spawnSync).toHaveBeenCalledWith(
         'git',
-        expect.any(Array),
+        ['merge-base', '--is-ancestor', 'origin/feature-branch', 'origin/develop'],
         expect.any(Object)
       );
     });

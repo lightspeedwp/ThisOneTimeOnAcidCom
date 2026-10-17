@@ -1187,7 +1187,7 @@ describe('CLI Argument Parsing - getArg', () => {
   });
 
   it('ignores arguments before index 2 (node and script name)', () => {
-    const argv = ['--not-parsed', '--also-not', '--target=value'];
+    const argv = ['--target=ignored', '--target=also-ignored', '--target=value'];
     const result = getArg('target', 'default', argv);
     expect(result).toBe('value');
   });
