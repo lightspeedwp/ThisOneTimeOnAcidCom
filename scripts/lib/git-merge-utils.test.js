@@ -99,13 +99,13 @@ describe('git-merge-utils', () => {
     });
 
     it('returns commit count when baseRef is null', () => {
-      (execFileSync).mockImplementation(() => {
+      (execFileSync).mockImplementation((cmd, args) => {
+        if (args[0] === 'rev-parse' && args[2] === 'origin/develop') return 'abc123';
+        if (args[0] === 'rev-list') return '12\n';
         throw new Error('not found');
       });
-      (execFileSync).mockReturnValueOnce('').mockReturnValueOnce('12\n');
-      getBaseRef();
       const result = getUniqueCommitCount('feature/test', null);
-      expect(result).toBe(0);
+      expect(result).toBe(12);
     });
   });
 
