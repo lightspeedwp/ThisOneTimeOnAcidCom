@@ -41,6 +41,7 @@ function figmaAssetResolver() {
 export default defineConfig({
   plugins: [
     figmaAssetResolver(),
+    // React plugin is required for Make
     react(),
   ],
   resolve: {
