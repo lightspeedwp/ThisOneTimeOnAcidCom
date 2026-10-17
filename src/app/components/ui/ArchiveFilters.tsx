@@ -184,7 +184,7 @@ export function ArchiveFilters({
         </div>
 
         {/* Bottom row: Result count (left) + Sort (right) */}
-        <div className="archive-filters__meta-row px-[0px] pt-[0px] pb-[8px]">
+        <div className="archive-filters__meta-row px-[0px] pt-[0px]">
           <p className="archive-filters__result-count m-[0px]" aria-live="polite" aria-atomic="true">
             {filtersUI.resultsLabel}{' '}
             <strong key={resultCount} className="archive-filters__result-number">
