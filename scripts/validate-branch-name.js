@@ -116,6 +116,11 @@ function checkExemptions(branch) {
   return null;
 }
 
+/**
+ * Check the standard branch-name syntax and authorised type, without exemptions.
+ * @param {string} branch - Branch name to check, already trimmed by the caller
+ * @returns {ValidationResult} Validation outcome with pattern or type details
+ */
 function validateStandardPattern(branch) {
   if (!PATTERNS.standard.test(branch)) {
     return new ValidationResult(
@@ -151,6 +156,12 @@ function validateStandardPattern(branch) {
   );
 }
 
+/**
+ * Validate a branch name after trimming whitespace. Reject empty or non-string
+ * inputs, then check forbidden prefixes, exemptions, and the standard pattern.
+ * @param {string} branch - Branch name to validate
+ * @returns {ValidationResult} Validation outcome with a message and details
+ */
 function validateBranch(branch) {
   if (!branch || typeof branch !== 'string') {
     return new ValidationResult(
