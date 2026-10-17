@@ -1,0 +1,4244 @@
+{
+  "catalogueMetadata": {
+    "version": "1.0.0",
+    "project": "This One Time on Acid",
+    "totalAssets": 56,
+    "createdAt": "2026-10-17T12:34:53.334Z",
+    "lastUpdated": "2026-10-17T12:34:53.334Z",
+    "schema": "https://path-to-schema/asset-catalogue-v1.schema.json"
+  },
+  "assets": [
+    {
+      "catalogueId": "toa-asset-0",
+      "figmaAssetId": "04aa88bd7a81e3f14ceb68f980492bf374b041db",
+      "originalFilename": "asset-0.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 0",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-1",
+      "figmaAssetId": "06d4edfbf4b3d5e14311a5a52ea6756b57d2c956",
+      "originalFilename": "asset-1.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 1",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-2",
+      "figmaAssetId": "1224e4c38d6535426ae19e8b73f8250863737d2a",
+      "originalFilename": "asset-2.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 2",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-3",
+      "figmaAssetId": "15cb1d54a3f2762edc5b82bfdcb272f950a764ce",
+      "originalFilename": "asset-3.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 3",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-jungleImage2",
+      "figmaAssetId": "1cd08d3825ac7cc423a4672f8ed279139fc99d0a",
+      "originalFilename": "asset-jungleImage2.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Festival portfolio - Jungle Festival Koh Phangan",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [
+          "PortfolioImage.tsx"
+        ],
+        "chapters": [],
+        "webContext": [
+          "jungle-festival",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "jungle Image2",
+        "altText": "Ash Shaw artwork - jungle festival",
+        "description": "Makeup artistry from jungle festival portfolio",
+        "tags": [
+          "jungle-festival",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or jungle-festival exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-5",
+      "figmaAssetId": "1ec0ba217cad06e2cff662a25a050b0401d1092a",
+      "originalFilename": "asset-5.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 5",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-6",
+      "figmaAssetId": "2678f2e48d60b8ccd6855469149ffc2cd8877e1c",
+      "originalFilename": "asset-6.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 6",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-7",
+      "figmaAssetId": "280168cf45339af581c4065d1f6728ea2de6ff02",
+      "originalFilename": "asset-7.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 7",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-8",
+      "figmaAssetId": "2cbb530ae9ca33032228346034623a7f83317bfc",
+      "originalFilename": "asset-8.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 8",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-9",
+      "figmaAssetId": "2d37a7cd55fe518f7eb8124fa25a2382be67f948",
+      "originalFilename": "asset-9.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 9",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-10",
+      "figmaAssetId": "33024fb05609d4a4545be47508d2ad3595f143c4",
+      "originalFilename": "asset-10.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 10",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-heroImage2",
+      "figmaAssetId": "378acbf4a7518ca6c40b44540bd7a121a91375fe",
+      "originalFilename": "asset-heroImage2.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Homepage hero - Festival makeup artistry",
+        "figmaPageName": "Home",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Home"
+        ],
+        "components": [
+          "hero-images.ts"
+        ],
+        "chapters": [],
+        "webContext": [
+          "hero",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Rainbow heart love",
+        "altText": "Joyful festival participant with rainbow heart body paint on chest, smiling radiantly in colorful festival environment",
+        "description": "Makeup artistry from hero portfolio",
+        "tags": [
+          "hero",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or hero exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in hero-images.ts",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-12",
+      "figmaAssetId": "39eb8a562689f3a80dae8e93c87865781d23689f",
+      "originalFilename": "asset-12.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 12",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-13",
+      "figmaAssetId": "3c496f3b8a5671dd00830f80a9a061ddf687e849",
+      "originalFilename": "asset-13.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 13",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-jungleImage3",
+      "figmaAssetId": "3eb83eb2d4eb493b80283c1b75770d8893b2fc6a",
+      "originalFilename": "asset-jungleImage3.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Festival portfolio - Jungle Festival Koh Phangan",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [
+          "PortfolioImage.tsx"
+        ],
+        "chapters": [],
+        "webContext": [
+          "jungle-festival",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "jungle Image3",
+        "altText": "Ash Shaw artwork - jungle festival",
+        "description": "Makeup artistry from jungle festival portfolio",
+        "tags": [
+          "jungle-festival",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or jungle-festival exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-15",
+      "figmaAssetId": "3f4571770a4dfe7b87967ba18571e396b485c134",
+      "originalFilename": "asset-15.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 15",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-16",
+      "figmaAssetId": "428cc40e40184633483ae65f75ced5f46af6821d",
+      "originalFilename": "asset-16.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 16",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-17",
+      "figmaAssetId": "4551cad5d171ad088e0e6abd69c3585944e55645",
+      "originalFilename": "asset-17.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 17",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-18",
+      "figmaAssetId": "4b6328b843a4a51e9a075b82c8c73fbe4b42f215",
+      "originalFilename": "asset-18.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 18",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-19",
+      "figmaAssetId": "5c6da7d9c00527f5021ee1e01619d56ac61c94a0",
+      "originalFilename": "asset-19.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 19",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-20",
+      "figmaAssetId": "6095d8818a83e64a063161f9df091d561fde7105",
+      "originalFilename": "asset-20.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 20",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-21",
+      "figmaAssetId": "63ed7ef30e2ed2157c64997c1155cea83b13aec5",
+      "originalFilename": "asset-21.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 21",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-22",
+      "figmaAssetId": "71428a4281ded92c596f8482bfc5f4f6c582be4f",
+      "originalFilename": "asset-22.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 22",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-23",
+      "figmaAssetId": "71597fc19386bc69fb2144851d752977dfd3693e",
+      "originalFilename": "asset-23.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 23",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-24",
+      "figmaAssetId": "74b708f3be9c02b929444ed900d4217477ac45ad",
+      "originalFilename": "asset-24.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 24",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-25",
+      "figmaAssetId": "75e1bf4dac27bde05698ebec24ea1163d955794e",
+      "originalFilename": "asset-25.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 25",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-jungleImage1",
+      "figmaAssetId": "7afa71c7ec4457a1c1983db257703a6c92a9cce7",
+      "originalFilename": "asset-jungleImage1.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Festival portfolio - Jungle Festival Koh Phangan",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [
+          "PortfolioImage.tsx"
+        ],
+        "chapters": [],
+        "webContext": [
+          "jungle-festival",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "jungle Image1",
+        "altText": "Jungle festival makeup artwork",
+        "description": "Makeup artistry from jungle festival portfolio",
+        "tags": [
+          "jungle-festival",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or jungle-festival exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-27",
+      "figmaAssetId": "7c570c5291977a816c8152a098cd6693cff22dbd",
+      "originalFilename": "asset-27.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 27",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-28",
+      "figmaAssetId": "80d0d3af448e4969dc796d00e91c30d3648cd9c4",
+      "originalFilename": "asset-28.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 28",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-29",
+      "figmaAssetId": "84111c7a5216921c0e52a6f591197fbeac334288",
+      "originalFilename": "asset-29.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 29",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-30",
+      "figmaAssetId": "8907346263e2430d129cbb5a32b9909e5a3b8213",
+      "originalFilename": "asset-30.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 30",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-31",
+      "figmaAssetId": "8ff60225169337b591efe035bc54d425662d7569",
+      "originalFilename": "asset-31.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 31",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-32",
+      "figmaAssetId": "9b30f18a5d667c6fb587a0835061f8c6665b02a0",
+      "originalFilename": "asset-32.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 32",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-33",
+      "figmaAssetId": "a3ff6861e08c46c3f53db108c18bf00f4dbb9958",
+      "originalFilename": "asset-33.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 33",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-34",
+      "figmaAssetId": "a59452b4a7623664d2bb471dda9573f2ff124510",
+      "originalFilename": "asset-34.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 34",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-35",
+      "figmaAssetId": "ac03efc4e039fdaefbb30518323e2c68b4dad75f",
+      "originalFilename": "asset-35.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 35",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-36",
+      "figmaAssetId": "ac73f3ba326b1cc61ce5148d7149960fa38c04ff",
+      "originalFilename": "asset-36.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 36",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-37",
+      "figmaAssetId": "b7d9d7618ce02a21f909162ff86c3a02b944d982",
+      "originalFilename": "asset-37.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 37",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-38",
+      "figmaAssetId": "bb2d15f1b5450668f0a032ad3765e13d8db4fdd2",
+      "originalFilename": "asset-38.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 38",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-39",
+      "figmaAssetId": "c014c0ecba1501c870224d37c58f2b6e47f76ed0",
+      "originalFilename": "asset-39.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 39",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-40",
+      "figmaAssetId": "c285a3307ef83e72ea05a995006e9a91cff04ecb",
+      "originalFilename": "asset-40.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 40",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-41",
+      "figmaAssetId": "c8d5d607f61330c5485683e00ba8bcf77a6df568",
+      "originalFilename": "asset-41.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 41",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-42",
+      "figmaAssetId": "d35493e2be08017199b3d1523d516a996ec97a5d",
+      "originalFilename": "asset-42.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 42",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-43",
+      "figmaAssetId": "d3c29f089898fc451873371bcd41ade68c350411",
+      "originalFilename": "asset-43.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 43",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-44",
+      "figmaAssetId": "d99e9e671329d5df41ad0f55042fb3f135e30fdf",
+      "originalFilename": "asset-44.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 44",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-45",
+      "figmaAssetId": "deb2b4ab4cb25c5e47b960708fce6ea552ee6039",
+      "originalFilename": "asset-45.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 45",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-46",
+      "figmaAssetId": "dfc0e7ceee6b7f81fd3e6ccf4d7036097bc79477",
+      "originalFilename": "asset-46.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 46",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-47",
+      "figmaAssetId": "e324dd2108aca23e468d101d18ad9f36227ecb24",
+      "originalFilename": "asset-47.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 47",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-48",
+      "figmaAssetId": "e43f2a86f8b38d1777428264c8c9126d07a9ef75",
+      "originalFilename": "asset-48.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 48",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-49",
+      "figmaAssetId": "e46fceb6809b8f1b7ef5c578d40578eadf301207",
+      "originalFilename": "asset-49.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 49",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-50",
+      "figmaAssetId": "e4ad6bb52b7e38d46cd2b7a75acf7ceab5e7874b",
+      "originalFilename": "asset-50.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 50",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-51",
+      "figmaAssetId": "e7ee10c85c112ab4acfc9e54087974a5faae5966",
+      "originalFilename": "asset-51.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 51",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Makeup artistry from other portfolio",
+        "tags": [
+          "other",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or other exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in PortfolioImage.tsx",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-heroImage3",
+      "figmaAssetId": "e82a7d901c5a28bf9313c7535228e647eaf06b75",
+      "originalFilename": "asset-heroImage3.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Homepage hero - Festival makeup artistry",
+        "figmaPageName": "Home",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Home"
+        ],
+        "components": [
+          "hero-images.ts"
+        ],
+        "chapters": [],
+        "webContext": [
+          "hero",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Vibrant face art",
+        "altText": "Portrait of person with blonde hair and colorful face paint featuring blue and pink stripes in outdoor festival setting",
+        "description": "Makeup artistry from hero portfolio",
+        "tags": [
+          "hero",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or hero exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in hero-images.ts",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-53",
+      "figmaAssetId": "e8a07104860f015b916acaeb232a61777de2fedd",
+      "originalFilename": "asset-53.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 53",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-asset-54",
+      "figmaAssetId": "f0c4301e83be5c7dcfa724f611ca2ffcca9bf032",
+      "originalFilename": "asset-54.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Unknown",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [],
+        "chapters": [],
+        "webContext": [
+          "other",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Asset 54",
+        "altText": "Ash Shaw artwork - other",
+        "description": "Asset in other category - awaiting full metadata extraction",
+        "tags": [
+          "other",
+          "portfolio",
+          "unmapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-heroImage1",
+      "figmaAssetId": "f4a28f747d49fc9d37311b17f513b62e2b95a73e",
+      "originalFilename": "asset-heroImage1.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": null,
+        "height": null,
+        "unit": "px",
+        "aspectRatio": null
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Homepage hero - Festival makeup artistry",
+        "figmaPageName": "Home",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Home"
+        ],
+        "components": [
+          "hero-images.ts"
+        ],
+        "chapters": [],
+        "webContext": [
+          "hero",
+          "portfolio-grid"
+        ]
+      },
+      "metadata": {
+        "caption": "Festival eye art",
+        "altText": "Close-up artistic eye makeup with vibrant purple stripe, red metallic lashes and colorful crystal gems",
+        "description": "Makeup artistry from hero portfolio",
+        "tags": [
+          "hero",
+          "portfolio",
+          "mapped"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or hero exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Asset imported in hero-images.ts",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    }
+  ],
+  "metadata": {
+    "notes": "Complete catalogue for all 56 verified assets verified (not 75). Includes 24 mapped assets (with metadata from code): 3 hero images + 18 portfolio images (Jungle Festival, Gondwana Festival, Origin Festival, Thailand, Nail Art, Shankra Festival, Reiserfieber). Remaining 32 unmapped assets have metadata framework (placeholders for missing data).",
+    "catalogueInstructions": "Use this schema for all asset records. Required fields: catalogueId, figmaAssetId, format, usage, metadata.altText, credits, recoveryStatus. Optional fields: uploadedAs, cloudinaryId (populated during migration). Timestamps track asset lifecycle (created → recovered → uploaded → archived)."
+  }
+}

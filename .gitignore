@@ -9,7 +9,6 @@ dist/
 dist-ssr/
 build/
 out/
-/export/
 .netlify/
 *.tsbuildinfo
 
@@ -91,7 +90,10 @@ test-results/
 .specify/feature.json
 .specify/extensions/*/local-config.yml
 
+# Claude Code local configuration (machine-specific, not shared)
+.claude/settings.local.json
+.claude/*.local.json
+
 # Empty install subfolder (leftover from initial init)
 thisonetimeonacid/
 src/app/reports/comprehensive-hero-architecture/routing-fix-FINAL.md
-playwright-report/
