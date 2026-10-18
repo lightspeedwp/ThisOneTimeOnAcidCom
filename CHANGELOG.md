@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+#### Phase 1 Governance Workflows (TOA-241)
+
+- **Branch name validation** — `branch-name-validation.yml` validates branch naming conventions against `{type}/{scope}-{title}` pattern with forbidden prefix checks (`claude/`, `copilot/`, `openai/`)
+- **Test automation** — `tests.yml` runs test suites on push and pull request events to ensure code quality
+- **Locked files protection** — `locked-files-guard.yml` prevents unauthorised changes to governance configuration files (`.github/labels.yml`, `.github/issue-types.yml`, `.github/PULL_REQUEST_TEMPLATE/*.md`, `.github/ISSUE_TEMPLATE/*.md`)
+- **PR template routing** — `pr-template-routing.yml` routes PR templates based on branch type (feat/fix/docs/design) and validates PR body contains all required template sections
+- **Unified labeling automation** — `labeling-unified.yml` automates issue and PR labeling based on type, area, priority and metadata labels
+- **Unified changelog management** — `changelog-unified.yml` manages changelog entries using Keep a Changelog 1.1.0 format with YAML frontmatter
+- **Specification validation** — `validate-specifications.yml` validates governance specifications against schema and documentation requirements
+- **Claude guard contract validation** — `claude-guard-tests.yml` validates Claude-generated code meets security and quality standards
+- **Lefthook pre-commit/pre-push hooks** — Git hooks enforce branch naming validation before commits and pushes, preventing use of forbidden prefixes
+
 #### Branch Cleanup Analysis Tool — Report-Only Preview (TOA-270)
 
 - **Automated branch cleanup analysis** — `scripts/cleanup-branches.js` identifies stale merged branches for review without executing deletions
