@@ -24,6 +24,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Environment variable reference** — Documented Figma API configuration (FIGMA_API_TOKEN, FIGMA_MAKE_FILE_KEY, FIGMA_TEAM_ID, FIGMA_EXPORT_FORMAT, FIGMA_EXPORT_SCALE)
 - **Extraction time estimates** — Documented pilot and full batch estimates (10 assets ~7 seconds, 56 assets ~42 seconds, 100 assets ~65 seconds)
 
+#### Repository Boundary Enforcement (TOA-??)
+
+- **Recovery pilot file reorganization** — PHASE1A_CATALOGUE_PROMPT.md and PHASE1B_RECOVERY_PROMPT.md moved from `.github/specs/002-media-library/recovery-pilot/` to `.github/reports/toa-media-library/` to establish recovery pilot as a phase within the existing 002-media-library specification, not as a separate specification structure
+- **Specification catalog metadata correction** — Corrected next specification number from "002" to "003" in `.github/specs/CATALOG.md` to accurately reflect that spec 002-media-library has been created and the next new specification will be numbered 003
+- **Repository boundary validation** — Added comprehensive Markdown file validation to `.github/validation/validate-no-root-md-files.cjs` with pattern-based detection for PHASE, PROMPT, REPORT, SPEC, TODO, NOTES, PLAN, and RESEARCH file naming violations (21 passing tests, ~71% code coverage)
+
 #### Phase 2 Governance Consolidation — Repository Restructuring (Spec 001, Spec 021)
 
 - **Specification and implementation plan** for consolidating duplicate governance files from ThisOneTimeOnAcidCom into lightspeedwp/.github as single source of truth (40 tasks across 6 phases)
