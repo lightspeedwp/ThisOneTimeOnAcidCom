@@ -73,6 +73,7 @@ Desktop.ini
 coverage/
 .nyc_output/
 .playwright/
+playwright-report/
 test-results/
 
 # Temporary / linter caches
