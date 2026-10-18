@@ -176,6 +176,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+#### Phase 1 Governance Workflows — Branch Validation & Package Synchronisation
+
+- **Fixed branch validation workflow JSON parsing** — Corrected `branch-name-validation.yml` to query correct JSON field names (`isValid` instead of `valid`) in both jq expression and fallback grep pattern, resolving false validation failures where branches passed validation but workflow reported failure due to field mismatch
+- **Synchronised package-lock.json with lefthook dependencies** — Regenerated lock file to include all lefthook platform-specific variants (lefthook-darwin-arm64, lefthook-linux-x64, etc.), fixing `npm ci` failures in CI workflows that were caused by missing dependencies after lefthook was added to package.json
+
 #### Netlify SPA routing — direct navigation 404s (#3)
 
 - **Replaced the malformed `public/_redirects/` directory** (containing `main.tsx`) with a plain-text `public/_redirects` file holding the same `/*  /index.html  200` fallback rule
