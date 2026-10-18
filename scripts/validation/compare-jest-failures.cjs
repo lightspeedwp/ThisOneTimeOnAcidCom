@@ -40,8 +40,8 @@ function readReport(filePath) {
   }
 }
 
-// Count failures by test file
-function countFailures(report) {
+// Count failures by test file, normalized relative to root
+function countFailures(report, root) {
   const failures = {};
   if (!report || !Array.isArray(report.testResults)) {
     return failures;
@@ -49,7 +49,8 @@ function countFailures(report) {
 
   report.testResults.forEach(result => {
     if (result.numFailingTests > 0) {
-      failures[result.name] = result.numFailingTests;
+      const normalised = path.relative(root || '.', result.name);
+      failures[normalised] = result.numFailingTests;
     }
   });
 
@@ -65,21 +66,33 @@ if (!headReport || !baseReport) {
   process.exit(1);
 }
 
-// Count failures
-const headFailures = countFailures(headReport);
-const baseFailures = countFailures(baseReport);
+// Count failures by file, normalised to respective roots
+const headFailures = countFailures(headReport, opts['head-root']);
+const baseFailures = countFailures(baseReport, opts['base-root']);
 
-// Compare
-const headTotal = headReport.numFailedTests || 0;
-const baseTotal = baseReport.numFailedTests || 0;
-const newFailures = Math.max(0, headTotal - baseTotal);
+// Calculate per-file comparison: count new failures (head > base)
+const newFailuresByFile = Object.entries(headFailures).reduce((acc, [file, count]) => {
+  const baseCount = baseFailures[file] || 0;
+  const newCount = Math.max(0, count - baseCount);
+  if (newCount > 0) {
+    acc[file] = { head: count, base: baseCount, new: newCount };
+  }
+  return acc;
+}, {});
 
-console.log(`Base branch failures: ${baseTotal}`);
-console.log(`PR head failures: ${headTotal}`);
-console.log(`New failures in this PR: ${newFailures}`);
+const headTotal = Object.values(headFailures).reduce((a, b) => a + b, 0);
+const baseTotal = Object.values(baseFailures).reduce((a, b) => a + b, 0);
+const totalNewFailures = Object.values(newFailuresByFile).reduce((a, b) => a + b.new, 0);
 
-if (newFailures > 0) {
-  console.error(`\n❌ This PR introduces ${newFailures} new test failure(s)`);
+console.log(`Base branch failures: ${baseTotal} (${Object.keys(baseFailures).length} files)`);
+console.log(`PR head failures: ${headTotal} (${Object.keys(headFailures).length} files)`);
+console.log(`New failures in this PR: ${totalNewFailures}`);
+
+if (totalNewFailures > 0) {
+  console.error(`\n❌ This PR introduces ${totalNewFailures} new test failure(s):`);
+  Object.entries(newFailuresByFile).forEach(([file, data]) => {
+    console.error(`  • ${file}: ${data.new} new (base: ${data.base}, head: ${data.head})`);
+  });
   process.exit(1);
 }
 

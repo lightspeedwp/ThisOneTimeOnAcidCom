@@ -375,8 +375,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Static metadata files returning production 404s (#5)
 
 - **Moved static metadata files to Vite public directory** — Relocated `robots.txt`, `sitemap.xml`, and `manifest.json` from `src/app/public/` to the root `public/` directory so Vite includes them in the production build
-- **Verified build output** — Confirmed all three files appear in `dist/` with correct content types (text/plain, application/xml, application/json)
-- **Production access restored** — Static metadata files now serve correctly from production without 404 errors; search engines and PWA manifests can access intended content
+- **Verified build output** — Confirmed all three files appear in `dist/` with unchanged contents and the expected file types
+- **Production deployment** — The files are now part of the Vite build output; production deployment verification pending
 - **Service worker excluded** — Left `service-worker.js` in original location pending separate PWA integration decision
 
 #### Style Guide Dark Mode — Atomic Black Backgrounds
