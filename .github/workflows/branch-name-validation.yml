@@ -1,0 +1,158 @@
+name: Branch Name Validation
+
+on:
+  pull_request:
+
+# Read-only: the job calls no GitHub API (artifact upload uses the runner's
+# own token), so no write scopes are granted.
+permissions:
+  contents: read
+
+# One validation per PR at a time; a newer push to PR head supersedes the old run.
+concurrency:
+  group: branch-name-validation-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate-branch-name:
+    name: Validate branch name
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      # The validator only needs its own two files and uses no git history or
+      # npm packages, so a sparse, shallow checkout without an install suffices.
+      # Check out the base branch, not the PR commit, so a contributor cannot
+      # modify the validator script itself to bypass validation (security).
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts
+            lib
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Extract branch name
+        id: extract-branch
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          REF: ${{ github.ref }}
+        run: |
+          # In pull_request events, github.ref is refs/pull/NUMBER/merge, not the branch
+          if [ -n "$HEAD_REF" ]; then
+            BRANCH_NAME="$HEAD_REF"
+          else
+            BRANCH_NAME="${REF#refs/heads/}"
+          fi
+          echo "branch_name=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
+
+      # Branch names can contain shell metacharacters ($, parentheses), so
+      # every value derived from them is passed through env, never inlined.
+      - name: Validate branch name
+        id: validate
+        timeout-minutes: 2
+        env:
+          BRANCH_NAME: ${{ steps.extract-branch.outputs.branch_name }}
+        run: |
+          echo "🔍 Validating: $BRANCH_NAME"
+
+          # Capture stdout only: Node warnings on stderr made the combined
+          # output unparseable, so `errors` was never set and the metrics
+          # error breakdown was always zero.
+          set +e
+          OUTPUT=$(timeout 30s node scripts/validate-branch-name.js --branch "$BRANCH_NAME" --json 2>validator-stderr.log)
+          EXIT_CODE=$?
+          set -e
+
+          # Verify exit codes: 0 = valid, 1 = invalid, 2 = script error
+          if [ "$EXIT_CODE" -ne 0 ] && [ "$EXIT_CODE" -ne 1 ] && [ "$EXIT_CODE" -ne 2 ]; then
+            echo "::error::Unexpected exit code: $EXIT_CODE"
+            exit 1
+          fi
+
+          echo "--- Validation Output ---"
+          echo "$OUTPUT"
+          if [ -s validator-stderr.log ]; then echo "--- stderr ---"; cat validator-stderr.log; fi
+          echo "--- Exit Code: $EXIT_CODE ---"
+
+          # Extract JSON from output (validator prints message then JSON)
+          # Extract from first line containing { to end (multi-line JSON)
+          JSON_OUTPUT=$(echo "$OUTPUT" | sed -n '/^{/,$p')
+
+          # Use jq to extract valid field if jq is available and output looks like JSON
+          if command -v jq &>/dev/null && echo "$JSON_OUTPUT" | jq empty &>/dev/null; then
+            echo "Using jq to parse JSON"
+            VALID=$(echo "$JSON_OUTPUT" | jq -r '.isValid')
+            ERRORS=$(echo "$JSON_OUTPUT" | jq -r 'if .isValid == false then (.errors // .message // empty) else empty end')
+            SUGGESTED=$(echo "$JSON_OUTPUT" | jq -r '.suggestedName // empty')
+
+            echo "valid=$VALID" >> "$GITHUB_OUTPUT"
+            [ -n "$ERRORS" ] && echo "errors=$ERRORS" >> "$GITHUB_OUTPUT"
+            [ -n "$SUGGESTED" ] && echo "suggested_name=$SUGGESTED" >> "$GITHUB_OUTPUT"
+          else
+            # Fallback: simple string matching
+            echo "Using fallback parsing"
+            if echo "$JSON_OUTPUT" | grep -q '"isValid": true'; then
+              echo "valid=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "valid=false" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+          # Exit with the validation script's exit code
+          exit $EXIT_CODE
+
+      - name: Collect validation metrics
+        if: always()
+        env:
+          BRANCH_NAME: ${{ steps.extract-branch.outputs.branch_name }}
+          VALID: ${{ steps.validate.outputs.valid }}
+          ERRORS: ${{ steps.validate.outputs.errors }}
+        run: |
+          mkdir -p validation-metrics
+          FILENAME="validation-metrics/$(date +'%Y%m%d-%H%M%S')-$GITHUB_RUN_ID.json"
+
+          # jq builds the JSON so quotes or backslashes in branch names or
+          # error text cannot corrupt the metrics file.
+          jq -n \
+            --arg timestamp "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+            --arg branch_name "$BRANCH_NAME" \
+            --argjson valid "$([ "$VALID" = "true" ] && echo true || echo false)" \
+            --arg errors "$ERRORS" \
+            --arg actor "$GITHUB_ACTOR" \
+            --arg event "$GITHUB_EVENT_NAME" \
+            --arg ref "$GITHUB_REF" \
+            --arg sha "$GITHUB_SHA" \
+            '{timestamp: $timestamp, branch_name: $branch_name, valid: $valid, errors: $errors, actor: $actor, event: $event, ref: $ref, sha: $sha}' \
+            > "$FILENAME"
+
+          echo "Metrics collected: $FILENAME"
+          cat "$FILENAME"
+
+      - name: Upload metrics artifact
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: branch-validation-metrics
+          path: validation-metrics/
+          retention-days: 30
+
+      - name: Set job status based on validation
+        if: always()
+        env:
+          VALID: ${{ steps.validate.outputs.valid }}
+        run: |
+          if [ "$VALID" = "true" ]; then
+            echo "✅ Branch name validation passed"
+            exit 0
+          else
+            echo "❌ Branch name validation failed (VALID='$VALID')"
+            exit 1
+          fi

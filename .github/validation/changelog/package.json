@@ -1,0 +1,11 @@
+{
+  "name": "@lightspeedwp/changelog-validation",
+  "version": "1.0.0",
+  "description": "Changelog validation utilities (Phase 1 stub)",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "validate": "node validate.js"
+  },
+  "dependencies": {}
+}
