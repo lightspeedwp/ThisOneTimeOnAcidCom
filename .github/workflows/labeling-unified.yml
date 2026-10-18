@@ -78,7 +78,7 @@ jobs:
         # parity, labeler schema, one-type reconciliation, idempotence and
         # router/agent convergence. Blocking: this job gates every other
         # job in the workflow.
-        run: npx jest --config jest.config.cjs scripts/agents/__tests__/label-contracts.test.js --coverage=false --forceExit
+        run: npx jest --config jest.config.js scripts/agents/__tests__/label-contracts.test.js --coverage=false --forceExit
       - name: Guardrail — unknown labels in templates
         # Scans PR template frontmatter against .github/labels.yml. Known
         # LOCKED-template violations are grandfathered with warnings (see
