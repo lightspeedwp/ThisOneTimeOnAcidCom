@@ -277,7 +277,7 @@
   - Create section in CONTRIBUTING.md: "Using Saved Replies"
   - Document how to add saved replies to personal GitHub account
   - Provide examples of common saved replies (e.g., template corrections, validation checks)
-- [ ] T037 [WS-261] Create CODEOWNERS file for branch protection
+- [x] T037 [WS-261] Create CODEOWNERS file for branch protection
   - Create `.github/CODEOWNERS` with code area ownership mapping:
     ```
     # Governance-critical files
@@ -306,7 +306,7 @@
     - Require status checks to pass
     - (No branch update requirement)
   - Document branch protection rules in `docs/BRANCH_PROTECTION.md`
-- [ ] T039 [P] [WS-261] [TOA-272] Implement branch name validation workflow
+- [x] T039 [P] [WS-261] [TOA-272] Implement branch name validation workflow
   - Ensure `branch-name-validation.yml` is deployed and active
   - Verify `npm run validate:branch-name` is called on every PR push
   - Validate against approved prefix list (feat, fix, hotfix, release, etc.)
