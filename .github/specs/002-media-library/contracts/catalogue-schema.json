@@ -207,12 +207,14 @@
         "required": ["print_suitable"]
       },
       "then": {
+        "required": ["format", "dimensions"],
         "properties": {
           "format": {
             "type": "array",
             "items": {
               "enum": ["PNG", "PDF", "TIFF"]
-            }
+            },
+            "minItems": 1
           },
           "dimensions": {
             "type": "object",
