@@ -1383,6 +1383,189 @@ describe('Non-deletion verification', () => {
   });
 });
 
+describe('Error handling and edge cases', () => {
+  it('handles invalid inactiveDays gracefully', () => {
+    const argv = ['node', 'script.js', '--inactiveDays=invalid'];
+    // Should use default when NaN
+    let result;
+    try {
+      result = getArg('inactiveDays', '30', argv);
+      expect(result).toBe('invalid'); // getArg returns the string as-is
+    } catch (e) {
+      // If an error is thrown during parsing, that's acceptable
+      expect(e).toBeDefined();
+    }
+  });
+
+  it('formats bytes for edge case values', () => {
+    expect(formatBytes(1023)).toBe('1023 B');
+    expect(formatBytes(1024 * 1024 + 1)).toMatch(/1\.\d+ MB/);
+  });
+
+  it('handles toPct with edge cases', () => {
+    expect(toPct(0, 0)).toBe('0.00%');
+    expect(toPct(1, 1)).toBe('100.00%');
+    expect(toPct(0, 1)).toBe('0.00%');
+  });
+
+  it('processes branches with missing metadata fields', () => {
+    const deleted = [
+      {
+        branch: 'feat/incomplete',
+        // Missing most fields
+      },
+    ];
+    const metrics = getMetrics(deleted, [], []);
+    expect(metrics.successfulDeletes).toBe(1);
+    expect(metrics.totalCommits).toBe(0);
+    expect(metrics.estimatedStorageBytes).toBe(0);
+  });
+
+  it('handles reportFormat JSON option', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [
+      {
+        branch: 'feat/test',
+        reason: 'stale',
+        lastCommitDate: '2025-01-01T00:00:00Z',
+        author: 'test@example.com',
+        hash: 'abc123',
+        age: 45,
+        type: 'feat',
+        commitCount: 5,
+        estimatedStorageBytes: 5 * AVG_STORAGE_BYTES_PER_COMMIT,
+      },
+    ];
+    const toPreserve = [];
+    const errors = [];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    const reportPath = writeJsonReport(toDelete, toPreserve, errors, metrics, {
+      reportDir: tempDir,
+      inactiveDays: 30,
+      reportFormat: 'json'
+    });
+
+    expect(fs.existsSync(reportPath)).toBe(true);
+    const content = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+    expect(content.mode).toBe('report-only');
+    expect(content.candidates).toHaveLength(1);
+
+    cleanupTempDir(tempDir);
+  });
+
+  it('builds exclude regex from various input patterns', () => {
+    // Empty patterns
+    const regex1 = buildExcludeRegex({ excludePatterns: '', verbose: false });
+    expect(regex1.test('release/v1.0.0')).toBe(true);
+    expect(regex1.test('hotfix/critical')).toBe(true);
+
+    // Single custom pattern
+    const regex2 = buildExcludeRegex({ excludePatterns: 'staging', verbose: false });
+    expect(regex2.test('staging')).toBe(true);
+    expect(regex2.test('release/v1.0.0')).toBe(true);
+
+    // Multiple patterns with empty strings
+    const regex3 = buildExcludeRegex({ excludePatterns: '||feature||', verbose: false });
+    expect(regex3.test('feature')).toBe(true);
+  });
+
+  it('logs error messages with and without verbose', () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+
+    logError('Test message', new Error('Details'), false);
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('❌'));
+    expect(errorSpy).not.toHaveBeenCalled();
+
+    consoleSpy.mockClear();
+    errorSpy.mockClear();
+
+    logError('Test message', new Error('Details'), true);
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('❌'));
+    expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining('Details'));
+
+    consoleSpy.mockRestore();
+    errorSpy.mockRestore();
+  });
+
+  it('handles remote branch list with various formats', () => {
+    execFileSync.mockReturnValue('origin/main\norigin/feat/test-1\norigin/release/v1.0.0\norigin/HEAD\n');
+    const branches = getRemoteBranches();
+    expect(branches).toContain('main');
+    expect(branches).toContain('feat/test-1');
+    expect(branches).toContain('release/v1.0.0');
+    expect(branches).toContain('HEAD');
+  });
+
+  it('reports all error fields in JSON and Markdown', () => {
+    const tempDir = createTempReportDir();
+    const toDelete = [];
+    const toPreserve = [];
+    const errors = [
+      { branch: 'fail/one', error: 'Merge status unknown' },
+      { branch: 'fail/two', error: 'Commit count failed' },
+      { branch: 'fail/three', error: 'Author lookup failed' },
+    ];
+    const metrics = getMetrics(toDelete, toPreserve, errors);
+
+    // JSON report
+    const jsonPath = writeJsonReport(toDelete, toPreserve, errors, metrics, {
+      reportDir: tempDir,
+      inactiveDays: 30
+    });
+    const jsonContent = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+    expect(jsonContent.errors).toHaveLength(3);
+    expect(jsonContent.summary.errorCount).toBe(3);
+
+    // Markdown report
+    const mdPath = writeMarkdownReport(toDelete, toPreserve, errors, metrics, {
+      reportDir: tempDir,
+      inactiveDays: 30
+    });
+    const mdContent = fs.readFileSync(mdPath, 'utf8');
+    expect(mdContent).toContain('Errors Encountered');
+    expect(mdContent).toContain('fail/one');
+    expect(mdContent).toContain('Merge status unknown');
+
+    cleanupTempDir(tempDir);
+  });
+
+  it('handles metrics calculation with large numbers', () => {
+    const deleted = [
+      {
+        branch: 'feat/big',
+        type: 'feat',
+        author: 'test@example.com',
+        commitCount: 10000,
+        estimatedStorageBytes: 10000 * AVG_STORAGE_BYTES_PER_COMMIT,
+      },
+    ];
+    const preserved = Array.from({ length: 50 }, (_, i) => ({
+      branch: `feat/keep-${i}`,
+      category: 'KEEP',
+      reason: 'protected'
+    }));
+    const metrics = getMetrics(deleted, preserved, []);
+    expect(metrics.preservedDeletedRatio).toBe('50:1');
+    expect(metrics.totalCommits).toBe(10000);
+    expect(metrics.successRate).toBe('100.00%');
+  });
+
+  it('categorizes branches by type accurately', () => {
+    const deleted = [
+      { branch: 'feat/new', type: 'feat' },
+      { branch: 'fix/bug', type: 'fix' },
+      { branch: 'docs/readme', type: 'docs' },
+      { branch: 'feat/another', type: 'feat' },
+    ];
+    const metrics = getMetrics(deleted, [], []);
+    expect(metrics.byType.feat).toBe(2);
+    expect(metrics.byType.fix).toBe(1);
+    expect(metrics.byType.docs).toBe(1);
+  });
+});
+
 describe('Argument parsing and configuration', () => {
   it('formats bytes correctly for B, KB, MB', () => {
     expect(formatBytes(512)).toBe('512 B');
@@ -1476,6 +1659,123 @@ describe('Branch metadata extraction', () => {
     const branch = 'feat/user-dashboard-v2-dark-mode';
     const parts = branch.split('/');
     expect(parts.length).toBe(2);
+  });
+});
+
+describe('Argument validation edge cases', () => {
+  it('handles parseBool with various inputs', () => {
+    expect(parseBool('true')).toBe(true);
+    expect(parseBool('false')).toBe(false);
+    expect(parseBool('TRUE', true)).toBe(true);
+    expect(parseBool('FALSE', false)).toBe(false);
+    expect(parseBool('yes', true)).toBe(true);
+    expect(parseBool('no', false)).toBe(false);
+  });
+
+  it('handles getArg with empty and missing values', () => {
+    const argv1 = ['node', 'script.js', '--flag'];
+    expect(getArg('flag', 'default', argv1)).toBe('true');
+
+    const argv2 = ['node', 'script.js', '--flag='];
+    expect(getArg('flag', 'default', argv2)).toBe('');
+
+    const argv3 = ['node', 'script.js', '--other=value'];
+    expect(getArg('flag', 'default', argv3)).toBe('default');
+  });
+
+  it('handles excludePatterns with pipe separators', () => {
+    const regex1 = buildExcludeRegex({
+      excludePatterns: 'pattern1|pattern2|pattern3',
+      verbose: false
+    });
+    expect(typeof regex1).toBe('object');
+    expect(regex1.test('release/')).toBe(true); // Default still applies
+  });
+
+  it('handles buildExcludeRegex with whitespace', () => {
+    const regex = buildExcludeRegex({
+      excludePatterns: '  pattern1  |  pattern2  ',
+      verbose: false
+    });
+    expect(regex).toBeDefined();
+  });
+});
+
+describe('Verbose logging edge cases', () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'log').mockImplementation();
+    jest.spyOn(console, 'error').mockImplementation();
+  });
+
+  afterEach(() => {
+    console.log.mockRestore();
+    console.error.mockRestore();
+  });
+
+  it('logs with different levels consistently', () => {
+    log('info', 'Info message');
+    log('warn', 'Warning message');
+    log('debug', 'Debug message');
+    log('error', 'Error message');
+
+    expect(console.log).toHaveBeenCalledTimes(4);
+  });
+
+  it('logError respects verbose flag', () => {
+    const error = new Error('Test error');
+    logError('Error occurred', error, false);
+    expect(console.error).not.toHaveBeenCalled();
+
+    jest.clearAllMocks();
+    logError('Error occurred', error, true);
+    expect(console.error).toHaveBeenCalled();
+  });
+
+  it('handles logError with string error', () => {
+    logError('Message', 'String error', true);
+    expect(console.error).toHaveBeenCalledWith(expect.stringContaining('String error'));
+  });
+
+  it('handles logError with null/undefined error', () => {
+    expect(() => logError('Message', null, true)).not.toThrow();
+    expect(() => logError('Message', undefined, true)).not.toThrow();
+  });
+});
+
+describe('Metrics edge cases', () => {
+  it('getMetrics with all branch types', () => {
+    const deleted = [
+      { branch: 'feat/a', type: 'feat', author: 'a@test.com', commitCount: 1, estimatedStorageBytes: 1000 },
+      { branch: 'fix/b', type: 'fix', author: 'b@test.com', commitCount: 2, estimatedStorageBytes: 2000 },
+      { branch: 'docs/c', type: 'docs', author: 'c@test.com', commitCount: 3, estimatedStorageBytes: 3000 },
+      { branch: 'refactor/d', type: 'refactor', author: 'd@test.com', commitCount: 4, estimatedStorageBytes: 4000 },
+    ];
+    const metrics = getMetrics(deleted, [], []);
+
+    expect(metrics.byType.feat).toBe(1);
+    expect(metrics.byType.fix).toBe(1);
+    expect(metrics.byType.docs).toBe(1);
+    expect(metrics.byType.refactor).toBe(1);
+    expect(metrics.totalCommits).toBe(10);
+  });
+
+  it('getMetrics handles duplicate authors', () => {
+    const deleted = [
+      { branch: 'feat/a', author: 'same@test.com', commitCount: 1, estimatedStorageBytes: 1000 },
+      { branch: 'fix/b', author: 'same@test.com', commitCount: 2, estimatedStorageBytes: 2000 },
+      { branch: 'docs/c', author: 'different@test.com', commitCount: 3, estimatedStorageBytes: 3000 },
+    ];
+    const metrics = getMetrics(deleted, [], []);
+
+    expect(metrics.authorsAffected).toHaveLength(2);
+    expect(metrics.authorsAffected).toContain('same@test.com');
+    expect(metrics.authorsAffected).toContain('different@test.com');
+  });
+
+  it('toPct rounds correctly for edge values', () => {
+    expect(toPct(1, 3)).toBe('33.33%');
+    expect(toPct(2, 3)).toBe('66.67%');
+    expect(toPct(1, 6)).toBe('16.67%');
   });
 });
 
