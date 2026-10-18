@@ -12,7 +12,7 @@ export default {
   testMatch: ['**/scripts/**/*.test.js'],
   moduleFileExtensions: ['js', 'json'],
   transform: {
-    '^.+\\.js$': ['@swc/jest'],
+    '^.+\\.js$': ['@swc/jest', { module: { type: 'commonjs' } }],
   },
   collectCoverageFrom: [
     'scripts/**/*.js',
