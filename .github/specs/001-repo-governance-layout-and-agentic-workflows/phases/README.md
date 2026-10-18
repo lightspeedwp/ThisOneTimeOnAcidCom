@@ -76,9 +76,10 @@ Phase 2: Governance Consolidation (CURRENT)
   ├── Phase 2.3: Configuration Consolidation
   │   ↓ (must complete before drift prevention)
   ├── Phase 2.4: Drift Prevention & Template Routing
-  │   ↓ (must complete before workflow validation)
+  │   ↓ (must complete before Phase 2.5 starts)
   ├── Phase 2.5: Custom Workflow Validation
-  │   ↓ (independent from 2.3/2.4, can partially overlap)
+  │   (preliminary workflow audit may overlap Phase 2.3)
+  │   ↓ (must complete before final validation)
   └── Phase 2.6: Documentation & Final Validation
       ↓ (must complete before Phase 3)
 
