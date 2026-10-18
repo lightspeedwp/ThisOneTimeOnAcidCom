@@ -39,7 +39,7 @@ jobs:
         continue-on-error: true
 
       - name: Fallback checkout from current commit if script missing
-        if: '!hashFiles("scripts/pr-template-router.js")'
+        if: "!hashFiles('scripts/pr-template-router.js')"
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
