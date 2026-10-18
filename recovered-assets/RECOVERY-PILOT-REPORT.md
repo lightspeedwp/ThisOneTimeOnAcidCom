@@ -16,7 +16,7 @@ Phase 1b recovery pilot will extract and validate **X of 12** sampled assets fro
 - □ **Failed:** X assets requiring manual intervention
 - □ **Recovery Rate:** XX% (target ≥80%)
 - □ **Total Effort:** X hours (Setup + Extraction + Validation + Reporting)
-- □ **Phase 2 Estimate:** ~X hours for full 56-asset recovery
+- □ **Phase 2 Estimate:** ~X hours for the remaining 44 assets plus any pilot assets requiring rework
 
 ---
 
@@ -96,22 +96,19 @@ FIGMA_API_TOKEN=<token>
 FIGMA_MAKE_FILE_KEY=<key>
 FIGMA_API_RATE_LIMIT_PER_MINUTE=10
 FIGMA_CONCURRENT_REQUESTS=5
-FIGMA_EXPORT_FORMAT=png
-FIGMA_EXPORT_SCALE=2
 ```
 
-**Validation:** Confirmed access to Figma Make project via test script (`test-figma-access.js`). Sample asset export successful.
+**Validation:** Before extraction, confirm access to the Figma file and verify that pilot image references appear in the image-fill response described below.
 
 ### 3.2 Extraction Process (T012)
 
 **Methodology:**
 1. Load pilot asset list from `pilot-selection.json`
 2. For each asset:
-   - Resolve `figmaAssetId` → Figma file node ID
-   - Call Figma API: `GET /v1/files/{fileKey}/nodes`
-   - Extract export URL from response
-   - Call Figma API: `GET /v1/files/{fileKey}/export`
-   - Download PNG file to `recovered-assets/{category}/{name}.png`
+   - Read `figmaAssetId`, the 40-character hash copied from `figma:asset/<hash>.png` imports in `Constants.ts` and `ui/PortfolioImage.tsx`; these are asset references, not REST node IDs
+   - Call the documented image-fill endpoint: `GET /v1/files/{fileKey}/images`
+   - Confirm the hash is an `imageRef` in the returned `meta.images` map and read `meta.images[figmaAssetId]`; a missing reference fails extraction rather than being treated as a node ID
+   - Download the original image to `recovered-assets/{category}/{name}.png` and verify its PNG header; this endpoint does not render nodes or apply format/scale options
    - Record extraction metadata (file size, dimensions, time)
 3. Respect rate limiting: token bucket algorithm + Retry-After headers
 4. Implement exponential backoff: 2s → 4s → 8s → 16s (max 4 retries)
@@ -119,6 +116,8 @@ FIGMA_EXPORT_SCALE=2
 
 **Scripts Used:**
 - `scripts/extract-figma-assets.js` (main extraction engine)
+
+**API reference:** [Figma REST API file endpoints](https://developers.figma.com/docs/rest-api/file-endpoints/#get-image-fills-endpoint). Image fills use `GET /v1/files/{fileKey}/images` and return `meta.images[imageRef]`. Rendering a REST node requires a separately established node ID and `GET /v1/images/{fileKey}?ids={nodeId}`; the catalogue contains no such node-ID mapping.
 
 **Rate Limiting & Timing:**
 - API Limit: 10 requests/minute (token bucket algorithm enforces limit across 5 concurrent workers)
@@ -130,7 +129,7 @@ FIGMA_EXPORT_SCALE=2
 - API 429 (rate limited): Exponential backoff + Retry-After compliance
 - API 503 (unavailable): Exponential backoff
 - Network timeout: Exponential backoff
-- Asset not found: Mark as fallback, use Unsplash reference
+- Image reference not found: Retry, then mark failed; the extraction script does not produce fallback images
 - File write error: Retry 3 times, then mark failed
 
 ### 3.3 Validation (T013)
@@ -183,7 +182,7 @@ FIGMA_EXPORT_SCALE=2
 | toa-asset-0 | asset-0.png | Recovered | XX KB | 1200x900 | ✓ Valid | XXX ms | — |
 | toa-asset-5 | asset-5.png | Recovered | XX KB | 1200x900 | ✓ Valid | XXX ms | — |
 | toa-asset-7 | asset-7.png | Recovered | XX KB | 1200x900 | ✓ Valid | XXX ms | — |
-| toa-asset-38 | asset-38.png | Fallback | — | — | Skipped | 0 ms | Unsplash reference |
+| toa-asset-38 | asset-38.png | Pending | — | — | Pending | — | Mapped to the gondwanaImage3 Figma import; extraction pending |
 | toa-asset-42 | asset-42.png | Recovered | XX KB | 1200x900 | ✓ Valid | XXX ms | — |
 | toa-asset-51 | asset-51.png | Recovered | XX KB | 1200x900 | ✓ Valid | XXX ms | — |
 
@@ -196,13 +195,13 @@ FIGMA_EXPORT_SCALE=2
 1. **Asset Not in Make Project**
    - **Issue:** Some assets referenced in catalogue may not be in Figma Make project
    - **Frequency:** X% of sampled assets (X of 12)
-   - **Resolution:** Use Unsplash reference mapping from PortfolioImage.tsx
+   - **Resolution:** For unmapped sources, `src/app/components/ui/PortfolioImage.tsx` provides category-based Unsplash fallbacks
    - **Phase 2 Action:** Verify asset presence before extraction; update asset structure if needed
 
 2. **Export Format Optimization**
-   - **Issue:** Pilot uses PNG export; Figma API supports SVG, JPG, PDF as alternatives
-   - **Frequency:** N/A (format chosen by design for pilot)
-   - **Resolution:** PNG 2x scale provides clarity; format optimized in post-processing as needed
+   - **Issue:** Image-fill downloads preserve the source format and dimensions; the pilot accepts PNG files only
+   - **Frequency:** N/A (source format must be checked during extraction)
+   - **Resolution:** Validate the downloaded PNG without assuming a 2x render; handle other formats separately if encountered
    - **Phase 2 Action:** Evaluate format conversion (WEBP/AVIF) for web delivery optimization
 
 3. **API Rate Limiting**
@@ -219,10 +218,11 @@ FIGMA_EXPORT_SCALE=2
 
 ### Fallback Strategy
 
-**Unsplash Fallback:** For assets not recovered, use existing mappings defined in the codebase (e.g., `src/app/components/PortfolioImage.tsx`):
-- Assets not present in Figma Make project fall back to pre-mapped Unsplash collections
-- Example: `toa-asset-38` (Nation of Gondwana) uses its configured Unsplash reference
-- Other fallbacks: use category-appropriate defaults if mapping unavailable
+**Unsplash Fallback:** Unmapped `figma:asset/` sources use category-based Unsplash fallbacks in `src/app/components/ui/PortfolioImage.tsx`:
+- `FIGMA_ASSET_MAP` maps sources to imported Figma assets; it contains no Unsplash entries
+- `PortfolioImage` selects nail/fusion, UV/neon, festival, or default portfolio fallbacks using alt text; `usePortfolioImageUrl` uses source-string heuristics
+- `toa-asset-38` (Nation of Gondwana) maps to the `gondwanaImage3` Figma import and has no configured Unsplash mapping
+- Failure to recover an asset via the API does not make its existing UI source unmapped or automatically replace a mapped import with an Unsplash image
 
 **Validation:** Before Phase 2, verify all Unsplash images still load and are appropriate; update mappings for deprecated images.
 
@@ -252,8 +252,8 @@ FIGMA_EXPORT_SCALE=2
 - API rate limit: 10 req/min (enforces sequential requests)
 
 **Phase 2 Scaling:**
-- Total assets: 56
-- Estimated extraction time: (56 × XX min) ÷ parallelization_factor = **~X hours**
+- Incremental scope: 44 assets remaining after the 12-asset pilot, plus R pilot assets requiring rework (0 ≤ R ≤ 12)
+- Estimated extraction time: ((44 + R) × XX min) ÷ parallelization_factor = **~X hours**, subject to the shared API rate limit
 - Validation time (parallel with extraction): ~1–2 hours
 - Catalogue update + reporting: ~2 hours
 - **Total Phase 2 Effort: ~X days** (1 week with buffer)
@@ -270,7 +270,7 @@ FIGMA_EXPORT_SCALE=2
 ### High Priority
 
 1. **Full Catalogue Recovery (56 assets)**
-   - Execute extraction for all remaining 44 assets
+   - Execute extraction for all remaining 44 assets plus any pilot assets requiring rework
    - Apply same validation and update workflow
    - Expected effort: X days (based on Phase 1b metrics)
 

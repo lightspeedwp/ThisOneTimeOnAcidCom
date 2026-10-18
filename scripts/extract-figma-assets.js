@@ -226,14 +226,15 @@ function getPNGDimensions(filepath) {
 }
 
 /**
- * Export one Figma asset as a PNG at scale 2, with up to four attempts and
+ * Download one Figma image fill at its original dimensions, with up to four attempts and
  * delays of 2, 4, and 8 seconds before retries. API requests use the shared limiter.
  * Errors caught during an attempt are recorded as notes and retried; failures
  * appending the result to manifest.assets reject the promise.
  * Creates category directories and overwrites output files; files failing the
  * PNG header check are deleted.
  *
- * @param {Object} asset - Selection entry with catalogueId, figmaAssetId,
+ * @param {Object} asset - Selection entry with catalogueId, figmaAssetId (the
+ *   image reference hash from a figma:asset/ import, not a REST node ID),
  *   portfolio_category (used for the output directory), and originalFilename.
  * @param {RateLimiter} rateLimiter - Limiter shared by extraction workers.
  * @param {Object} manifest - Its assets array receives a result with elapsed time
@@ -260,41 +261,26 @@ async function extractAsset(asset, rateLimiter, manifest) {
     }
 
     try {
-      // Get node export
-      const nodeUrl = `https://api.figma.com/v1/files/${FIGMA_MAKE_FILE_KEY}/nodes?ids=${asset.figmaAssetId}`;
+      // Catalogue IDs come from figma:asset/<hash>.png imports. Confirm each hash
+      // is an imageRef by resolving it in the documented image-fill URL map.
+      const imageRef = asset.figmaAssetId;
+      const imagesUrl = `https://api.figma.com/v1/files/${encodeURIComponent(FIGMA_MAKE_FILE_KEY)}/images`;
       await rateLimiter.waitForToken();
-      const nodeRes = await fetchAPI(nodeUrl);
+      const imagesRes = await fetchAPI(imagesUrl);
 
-      if (nodeRes.status === 429) {
+      if (imagesRes.status === 429) {
         lastError = 'Rate limited';
         continue;
       }
-      if (nodeRes.status !== 200) {
-        lastError = `API error: ${nodeRes.status}`;
+      if (imagesRes.status !== 200) {
+        lastError = `API error: ${imagesRes.status}`;
         continue;
       }
 
-      const nodeData = JSON.parse(nodeRes.data);
-      const node = nodeData.nodes[asset.figmaAssetId];
-
-      if (!node) {
-        lastError = 'Node not found';
-        continue;
-      }
-
-      // Get export URL
-      const exportUrl = `https://api.figma.com/v1/files/${FIGMA_MAKE_FILE_KEY}/export?ids=${asset.figmaAssetId}&format=png&scale=2`;
-      await rateLimiter.waitForToken();
-      const expRes = await fetchAPI(exportUrl);
-
-      if (expRes.status !== 200) {
-        lastError = `Export failed: ${expRes.status}`;
-        continue;
-      }
-
-      const expData = JSON.parse(expRes.data);
-      if (!expData.images || !expData.images[asset.figmaAssetId]) {
-        lastError = 'No export URL';
+      const imagesData = JSON.parse(imagesRes.data);
+      const images = imagesData.meta && imagesData.meta.images;
+      if (!images || typeof images[imageRef] !== 'string' || !images[imageRef]) {
+        lastError = 'Image reference not found in file images';
         continue;
       }
 
@@ -304,7 +290,7 @@ async function extractAsset(asset, rateLimiter, manifest) {
       fs.mkdirSync(categoryDir, { recursive: true });
 
       const outPath = path.join(categoryDir, asset.originalFilename);
-      await downloadFile(expData.images[asset.figmaAssetId], outPath);
+      await downloadFile(images[imageRef], outPath);
 
       // Verify file
       fileSize = fs.statSync(outPath).size;
