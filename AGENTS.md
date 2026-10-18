@@ -92,9 +92,9 @@ These scripts are **defined** in [`package.json`](package.json) and have been va
 | `journal:validate` | `tsx scripts/parse-journal-markdown.ts --validate-only` | Validate journal markdown without writing output | ✅ Working |
 | `journal:check-links` | `tsx scripts/check-journal-links.ts` | Check journal link integrity | ✅ Working |
 | `test` | `npm run test:unit && npm run test:build && npm run test:e2e` | Run all test suites (unit, build, e2e) | ⚠️ Partial |
-| `test:unit` | `jest` | Jest unit tests | ⚠️ Config issue |
-| `test:unit:watch` | `jest --watch` | Jest in watch mode | ⚠️ Config issue |
-| `test:unit:coverage` | `jest --coverage` | Jest with coverage report | ⚠️ Config issue |
+| `test:unit` | `jest` | Jest unit tests | ✅ Working |
+| `test:unit:watch` | `jest --watch` | Jest in watch mode | ✅ Working |
+| `test:unit:coverage` | `jest --coverage` | Jest with coverage report | ✅ Working |
 | `test:build` | `npm run build && bats tests/build.bats` | Build verification with Bats | ✅ Working |
 | `test:e2e` | `playwright test` | Playwright end-to-end tests | ⚠️ Browser install needed |
 | `test:e2e:debug` | `playwright test --debug` | Playwright in debug mode | ⚠️ Browser install needed |
@@ -105,7 +105,7 @@ Run them with npm, for example `npm run build`.
 
 ## Commands validated so far
 
-**Baseline validation run on 16 October 2026, commit `070b296`, Node 24.21.0, npm 11.19.0.** Lock file was out of sync with package.json and has been updated.
+**Baseline validation run on 17 October 2026, commit `2e3751d`, Node 24.21.0, npm 11.19.0.** Jest ESM configuration resolved via @swc/jest transformer.
 
 | Command | Result | Notes |
 |---|---|---|
@@ -114,7 +114,7 @@ Run them with npm, for example `npm run build`.
 | `npm run validate:branch-name -- --branch epic/repo-governance-toa-241` | ✅ Passed | Branch naming validation working |
 | `npm run test:build` | ✅ Passed | Bats build tests pass; validates Vite build integrity |
 | `node --test tests/speckit.test.mjs` | ⚠️ 103 pass, 1 fail | Previously 93 pass, 11 fail. Improvement from lock file update. Single failure: template resolution precedence test |
-| `npm run test:unit` | ❌ Failed | Jest config: ESM import syntax error in `scripts/validate-branch-name.test.js`. Needs Jest ESM or CommonJS transpile configuration |
+| `npm run test:unit` | ✅ Passed (179 tests) | Jest ESM configuration working. Tests: scripts/validate-branch-name.test.js + scripts/cleanup-branches.test.js. Solution: @swc/jest transformer handles ESM compilation (Decision 3: TEST-001 resolved) |
 | `npm run test:e2e` | ⚠️ Requires setup | Playwright browser not installed in agent environment; command structure valid |
 | `npm run journal:validate` | ✅ Passed | Validates 8 files successfully; paths fixed from `journal-content/` to `content/journal/` |
 | `npm run journal:check-links` | ✅ Passed (after fix) | At `070b296`, script read absent `journal-content/` directory; passed after path fix in commit `a20c268`. Checks 9 files, finds 2 internal links (valid), 0 external; all checks pass |
@@ -221,12 +221,12 @@ Do not edit deployment settings, environment variables or Netlify configuration 
 
 These items come from repository evidence. They are recorded here, not resolved:
 
-1. **Package manager.** npm is in use (lockfile, Netlify command, README), but `pnpm.overrides` in `package.json` still refers to pnpm. Confirm npm and decide whether to remove this remnant.
-2. **Node.js version.** No version is pinned. Confirm the intended runtime and whether to pin it (`.nvmrc`, `engines` or a Netlify setting).
+1. **Package manager.** npm is in use (lockfile, Netlify command, README), but `pnpm.overrides` in `package.json` still refers to pnpm. Confirm npm and decide whether to remove this remnant. (Governance Decision PKG-001 pending approval)
+2. **Node.js version.** Pinned to Node 24 LTS via `.nvmrc` and `package.json` `engines` field (Governance Decision NODE-001: Option B, implemented 2026-10-17).
 3. **Netlify configuration file.** `src/app/netlify.toml` is not read because the base directory is the repository root. Decide whether to move it to the root, set the base directory, or delete it, and whether its headers and redirect are still wanted.
-4. **BEM vs Tailwind.** The guidelines forbid Tailwind and say the migration is complete. However, `tailwindcss` and `@tailwindcss/vite` are dependencies, `vite.config.ts` loads the Tailwind plugin (with a comment saying it is required by Figma Make), `src/styles/globals.css`, `index.css` and `tailwind.css` import `tailwindcss`, and Guidelines.md § 2 still lists "Tailwind CSS V4 – Utility-first styling". Some components still contain utility-like class names. Follow BEM for new work, and do not remove Tailwind tooling without a decision.
+4. **BEM vs Tailwind.** All site styling now uses semantic BEM classes exclusively. Tailwind CSS and related dependencies have been completely removed (Governance Decision STYLE-001: Enforce BEM-only, implemented 2026-10-17). Guidelines.md § 2 should be updated to remove references to "Tailwind CSS V4".
 5. **`import.meta.env`.** The bundler table in Guidelines.md says it is "Completely removed", but Guidelines.md § 12 (Console Logging Policy) recommends `if (import.meta.env.DEV)`, and `src/app/components/common/ThemeToggleES5.tsx` still uses it. Until this is resolved, follow the bundler table and do not use `import.meta.env`.
-6. **Missing quality scripts.** Guidelines.md § 9 cites `npm run type-check` and `npm run verify`, which do not exist. `tests/` has no runner script, and `tests/accordion.test.tsx` needs `jsdom`, which is not installed.
+6. **Jest ESM and testing infrastructure.** Jest unit tests now working with @swc/jest transformer (Governance Decision TEST-001: Option B, implemented 2026-10-17). Scripts `/scripts/**/*.test.js` pass 179 tests. Guidelines.md § 9 still cites missing `npm run type-check` and `npm run verify` scripts, which do not exist. E2E tests in `tests/` need Playwright browser installation.
 7. **Duplicate attribution files.** A root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. The root-file exception in Guidelines.md permits `AGENTS.md` and `CONTRIBUTING.md` for agent and GitHub discoverability; this exception is already acknowledged. Clarify whether only one attribution file should exist and which name is canonical.
 8. **Changelog location.** [guidelines/changelog.md](guidelines/changelog.md) puts the changelog at the root `CHANGELOG.md`, and that is the only changelog in the repository. There is no `src/app/CHANGELOG.md`. Confirm whether documentation-only changes need an entry (issue #2 carries the `meta:no-changelog` label).
 9. **Broken links in the guidelines.** `guidelines/README.md` and `guidelines/Guidelines.md` link to `../data/README.md`, which does not exist. The actual file is `src/app/data/README.md`. The guidelines were not changed here.
