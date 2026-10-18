@@ -32,7 +32,7 @@ Each specification lives in `.github/specs/{NNN-feature-slug}/` with this struct
 └── quickstart.md         ← (Optional) Integration scenarios and setup guide
 ```
 
-**Numbering:** Specifications are numbered sequentially (001, 002, 003…) in the order they are created. The next new specification will be 002.
+**Numbering:** Specifications are numbered sequentially (001, 002, 003…) in the order they are created. The next new specification will be 003.
 
 ---
 
