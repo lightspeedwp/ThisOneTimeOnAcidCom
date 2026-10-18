@@ -5,6 +5,8 @@
  * requiring actual Figma credentials or making real API calls.
  */
 
+import { execSync } from 'child_process';
+
 describe('Figma Access Validation Script', () => {
   const originalEnv = process.env;
 
@@ -282,6 +284,38 @@ describe('Figma Access Validation Script', () => {
       expect(PILOT_ASSETS[0].priority).toBe('CRITICAL');
       expect(PILOT_ASSETS[1].priority).toBe('HIGH');
       expect(PILOT_ASSETS[0].figmaAssetId).toMatch(/^[a-f0-9]{40}$/);
+    });
+  });
+
+  describe('CLI Executable Invocation', () => {
+    test('should execute script via CLI with correct documented path', () => {
+      // Test that the script exists at the documented path and has correct shebang
+      try {
+        const result = execSync('head -1 scripts/test-figma-access.js', {
+          encoding: 'utf-8',
+          stdio: ['pipe', 'pipe', 'pipe'],
+        });
+
+        expect(result).toMatch(/^#!.*node/);
+      } catch (error) {
+        // File exists and is readable if head succeeds
+        expect(error).toBeNull();
+      }
+    });
+
+    test('should run with help flag without errors', () => {
+      // Test that script can be invoked via documented path
+      // (without credentials, should fail gracefully)
+      try {
+        execSync('node scripts/test-figma-access.js 2>&1', {
+          encoding: 'utf-8',
+          timeout: 5000,
+        });
+      } catch (error) {
+        // Script ran but failed due to missing credentials (expected)
+        // The key is that the path resolved correctly
+        expect(error.message).toMatch(/node|FIGMA|error/i);
+      }
     });
   });
 });

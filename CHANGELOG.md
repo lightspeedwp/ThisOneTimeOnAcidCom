@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-#### File Organisation and Test Coverage (T011)
+**File Organisation and Test Coverage (T011)**
 
 - **Figma API validation script** — Moved `scripts/test-figma-access.js` to proper location under `scripts/` folder for T011 Figma Make project access validation task
 - **Comprehensive Jest test suite** — Created `scripts/__tests__/test-figma-access.test.js` with 15 passing tests covering:

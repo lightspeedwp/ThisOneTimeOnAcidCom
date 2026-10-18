@@ -3,6 +3,7 @@
 > Repository-specific AI instructions for ThisOneTimeOnAcidCom. Read the organisation-wide guidance first:
 > - [lightspeedwp/.github/CLAUDE.md](https://github.com/lightspeedwp/.github/blob/develop/CLAUDE.md)
 > - [lightspeedwp/.github/AGENTS.md](https://github.com/lightspeedwp/.github/blob/develop/AGENTS.md)
+> - [Repository Root AGENTS.md](../../AGENTS.md) — Follow these rules for all work in this session
 
 ## 🎯 Active Initiatives
 
@@ -101,7 +102,7 @@ All feature work follows this sequence:
 
 | ID | Feature | Link | Status |
 |---|---------|------|--------|
-| 001 | Repository Governance & Agentic Workflows | [Spec](./github/specs/001-repo-governance-layout-and-agentic-workflows/) | Phase 2 In Progress |
+| 001 | Repository Governance & Agentic Workflows | [Spec](./.github/specs/001-repo-governance-layout-and-agentic-workflows/) | Phase 2 In Progress |
 
 ## 🚀 Key Development Commands
 
@@ -118,9 +119,7 @@ npm test -- scripts/__tests__/test-figma-access.test.js
 # Validate branch name
 npm run validate:branch-name
 
-# Lint and format
-npm run lint:md
-npm run lint:js
+# Format code
 npm run format
 ```
 
@@ -156,7 +155,7 @@ The workflow now fetches canonical governance files from `lightspeedwp/.github` 
 - name: Fetch canonical labeler.yml from lightspeedwp/.github
   run: |
     mkdir -p .github
-    gh repo clone lightspeedwp/.github -- --depth 1 /tmp/github-repo
+    gh repo clone lightspeedwp/.github /tmp/github-repo -- --depth 1
     cp /tmp/github-repo/labeler.yml .github/labeler.yml
 ```
 
