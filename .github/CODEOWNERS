@@ -1,0 +1,58 @@
+# CODEOWNERS file for ThisOneTimeOnAcidCom
+# Specifies default code owners for repository paths
+# GitHub will request reviews from these owners when PRs affect these paths
+#
+# Syntax: path/to/file @username @org/team
+# Matching: most specific rule wins; last matching rule in file takes precedence
+#
+# Reference: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Critical governance paths – require @ashley review
+.github/                                       @ashley
+.github/workflows/                             @ashley
+.github/specs/                                 @ashley
+.github/CODEOWNERS                             @ashley
+
+# Configuration and root documentation – require @ashley review
+CHANGELOG.md                                   @ashley
+AGENTS.md                                      @ashley
+CONTRIBUTING.md                                @ashley
+CLAUDE.md                                      @ashley
+.nvmrc                                         @ashley
+.specify/                                      @ashley
+
+# Scripts and build configuration – require @ashley review
+scripts/                                       @ashley
+jest.config.js                                 @ashley
+vite.config.ts                                 @ashley
+postcss.config.mjs                             @ashley
+
+# Guidelines – require @ashley review
+guidelines/                                    @ashley
+
+# Project structure documentation
+.gitignore                                     @ashley
+.gitattributes                                 @ashley
+README.md                                      @ashley
+
+# Application source – open for review delegation
+src/                                           @ashley
+src/app/components/                            @ashley
+src/app/utils/                                 @ashley
+src/app/data/                                  @ashley
+src/styles/                                    @ashley
+public/                                        @ashley
+
+# Content – open for review delegation
+content/                                       @ashley
+
+# Dependencies and package management
+package.json                                   @ashley
+package-lock.json                              @ashley
+
+# Test configuration
+playwright.config.ts                           @ashley
+tests/                                         @ashley
+
+# Everything else falls back to this last rule
+*                                              @ashley
