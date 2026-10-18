@@ -66,6 +66,18 @@ const typeMap = {
   hotfix: {
     template: 'fix',
     labels: ['type:hotfix']
+  },
+  deps: {
+    template: 'chore',
+    labels: ['type:chore', 'area:dependencies']
+  },
+  build: {
+    template: 'chore',
+    labels: ['type:chore', 'area:build']
+  },
+  a11y: {
+    template: 'design',
+    labels: ['type:design', 'area:accessibility']
   }
 };
 
