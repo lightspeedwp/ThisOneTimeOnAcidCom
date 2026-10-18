@@ -35,13 +35,13 @@
 
 **⚠️ CRITICAL**: Phase 1 must complete before any workstream work begins
 
-- [ ] T001 Create `.github/specs/` directory structure and verify numbering in `.specify/init-options.json`
+- [x] T001 Create `.github/specs/` directory structure and verify numbering in `.specify/init-options.json`
 - [ ] T002 Document current path inventory in research notes: all directories, consumers, generated outputs
-- [ ] T003 [P] Verify `.specify/` and `.gemini/` integrations remain functional post-migration
-- [ ] T004 Create top-level documentation index linking all governance artefacts
-- [ ] T005 Update AGENTS.md with approved decisions ratification status and test baseline (103/104)
+- [x] T003 [P] Verify `.specify/` and `.gemini/` integrations remain functional post-migration
+- [x] T004 Create top-level documentation index linking all governance artefacts
+- [x] T005 Update AGENTS.md with approved decisions ratification status and test baseline (103/104)
 - [ ] T006 [P] Update CONTRIBUTING.md to reflect branch naming validation and PR template routing
-- [ ] T007 Review and validate all protected files: CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, Supabase utils, Figma assets
+- [x] T007 Review and validate all protected files: CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, Supabase utils, Figma assets
 
 **Checkpoint**: Governance artefacts initialized; all workstreams can begin in parallel
 
@@ -259,7 +259,7 @@
   - Test issue creation: verify correct template loads based on issue type
   - Document which issue types are available (reference `.github/issue-types.yml`)
   - No local duplicates (only override when repository-specific needs differ)
-- [ ] T035 [P] [WS-261] [TOA-252] Configure PR template routing
+- [x] T035 [P] [WS-261] [TOA-252] Configure PR template routing
   - Verify `pr-template-routing.yml` workflow exists and is active
   - Use the branch mapping in `scripts/pr-template-router.js` and preserve or
     restore its required local `.github/PULL_REQUEST_TEMPLATE/{template}.md`
