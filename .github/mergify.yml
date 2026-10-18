@@ -46,8 +46,8 @@ pull_request_rules:
     description: Report status of human-authored pull requests
     conditions:
       # Exclude Dependabot and bot authors
-      - author!=dependabot[bot]
-      - author!~=^(app/.*)$
+      - -author:dependabot[bot]
+      - -author~=^(app/.*)$
       - base=develop
       - -draft
       - -conflict
@@ -67,16 +67,3 @@ pull_request_rules:
 queue_rules:
   - name: default
     batch_size: 1
-
-# Merge protections (defined but not used)
-# These settings would apply when automatic merging is enabled
-merge_protections_settings:
-  reporting_method: check-runs
-  # auto_merge_conditions omitted: automatic merging is currently disabled
-  # When enabled, this will require:
-  # - author~=^(dependabot\[bot\])$
-  # - base=develop
-  # - All required checks passed
-  # - Approved by authorized reviewer
-  # - No unresolved change requests
-  # See issue #306 for activation prerequisites

@@ -72,10 +72,9 @@ updates:
 # Security updates
 #
 # GitHub's default behaviour: all security updates are created for the
-# repository's default branch (currently 'main'), regardless of target-branch.
-# If you need security updates to target 'develop' instead, file a separate
-# GitHub support request.
+# repository's default branch, regardless of target-branch configuration above.
+# The repository's current default branch is 'develop'.
 #
 # Current expected behaviour:
 # - Version updates → target-branch: develop (configured above)
-# - Security updates → main (GitHub default, not configurable here)
+# - Security updates → develop (GitHub automatic, targets default branch)

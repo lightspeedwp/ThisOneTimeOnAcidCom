@@ -215,8 +215,8 @@ A: Review the failure in the PR. If it's a real issue, wait for Dependabot to cr
 **Q: Can I manually merge a Dependabot PR?**  
 A: Yes. Manual merging is always allowed and doesn't require Mergify. Use this if you're confident in the update and want to bypass automatic review.
 
-**Q: A security update is on `main`, but I need it on `develop`. What do I do?**  
-A: Open a PR from `main` to `develop` to backport the security fix. This is a manual process; security updates always target the default branch.
+**Q: Where do security updates land?**  
+A: GitHub automatically creates security updates on the repository's default branch (currently `develop`), regardless of the `target-branch` setting in Dependabot configuration. Version updates (minor, patch, major) follow the configured `target-branch: develop`. Both flow the same way: version and security updates target `develop`, and manual release promotion (`develop` → `main`) is separate.
 
 **Q: Mergify is not merging an eligible Dependabot PR. Why?**  
 A: Check the Mergify run logs in the PR. Common causes:
