@@ -8,7 +8,8 @@ Complete index of all active and archived specifications for ThisOneTimeOnAcidCo
 
 | ID | Feature | Title | Status | Owner | Created | Updated | Link |
 |---|---|---|---|---|---|---|---|
-| 001 | repo-governance-toa-241 | Repository Governance, Layout and Agentic Workflows | Implementation | @ashley | 2026-10-17 | 2026-10-18 | [.github/specs/001-repo-governance-layout-and-agentic-workflows/](./001-repo-governance-layout-and-agentic-workflows/) |
+| 001 | repo-governance-toa-241 | Repository Governance, Layout and Agentic Workflows | Implementation | @ashley | 2026-10-17 | 2026-10-17 | [.github/specs/001-repo-governance-layout-and-agentic-workflows/](./001-repo-governance-layout-and-agentic-workflows/) |
+| 002 | media-library | TOA Media Library Strategy and Asset Recovery | Draft | @ashley | 2026-10-17 | 2026-10-18 | [.github/specs/002-media-library/](./002-media-library/) |
 
 ---
 
@@ -31,7 +32,7 @@ Each specification lives in `.github/specs/{NNN-feature-slug}/` with this struct
 └── quickstart.md         ← (Optional) Integration scenarios and setup guide
 ```
 
-**Numbering:** Specifications are numbered sequentially (001, 002, 003…) in the order they are created. The next new specification will be 002.
+**Numbering:** Specifications are numbered sequentially (001, 002, 003…) in the order they are created. The next new specification will be 003.
 
 ---
 
@@ -73,4 +74,4 @@ When a specification is complete and delivered (merged to main), move its direct
 ---
 
 *Last updated: 2026-10-18*
-*Next specification number: 002*
+*Next specification number: 003*
