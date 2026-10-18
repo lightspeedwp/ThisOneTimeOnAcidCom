@@ -103,7 +103,7 @@ jobs:
           # Failing tests are expected on develop; the compare job decides.
           # A missing or invalid report fails closed there.
           jest_status=0
-          npx jest --config .jest.config.cjs --ci --coverage=false \
+          npx jest --config jest.config.cjs --ci --coverage=false \
             --json --outputFile=jest-report.json || jest_status=$?
           jq -r '"suites=\(.numTotalTestSuites) failed_suites=\(.numFailedTestSuites) tests=\(.numTotalTests) failed=\(.numFailedTests)"' \
             jest-report.json 2>/dev/null || echo "::warning::No Jest report was written"

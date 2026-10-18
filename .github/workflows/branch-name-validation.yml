@@ -27,7 +27,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.base_ref }}
+          ref: ${{ github.event.pull_request.base.sha }}
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout: |
@@ -82,11 +82,16 @@ jobs:
           if [ -s validator-stderr.log ]; then echo "--- stderr ---"; cat validator-stderr.log; fi
           echo "--- Exit Code: $EXIT_CODE ---"
 
+          # Extract JSON from output (validator prints message then JSON)
+          # Extract from first line containing { to end (multi-line JSON)
+          JSON_OUTPUT=$(echo "$OUTPUT" | sed -n '/^{/,$p')
+
           # Use jq to extract valid field if jq is available and output looks like JSON
-          if command -v jq &> /dev/null && echo "$OUTPUT" | jq empty &> /dev/null 2>&1; then
+          if command -v jq &>/dev/null && echo "$JSON_OUTPUT" | jq empty &>/dev/null; then
             echo "Using jq to parse JSON"
-            VALID=$(echo "$OUTPUT" | jq -r '.isValid')
-            ERRORS=$(echo "$OUTPUT" | jq -r '.errors // .message // empty')
+            VALID=$(echo "$JSON_OUTPUT" | jq -r '.isValid')
+            ERRORS=$(echo "$JSON_OUTPUT" | jq -r 'if .isValid == false then (.errors // .message // empty) else empty end')
+            SUGGESTED=$(echo "$JSON_OUTPUT" | jq -r '.suggestedName // empty')
 
             echo "valid=$VALID" >> "$GITHUB_OUTPUT"
             [ -n "$ERRORS" ] && echo "errors=$ERRORS" >> "$GITHUB_OUTPUT"
@@ -94,7 +99,7 @@ jobs:
           else
             # Fallback: simple string matching
             echo "Using fallback parsing"
-            if echo "$OUTPUT" | grep -q '"isValid": true'; then
+            if echo "$JSON_OUTPUT" | grep -q '"isValid": true'; then
               echo "valid=true" >> "$GITHUB_OUTPUT"
             else
               echo "valid=false" >> "$GITHUB_OUTPUT"

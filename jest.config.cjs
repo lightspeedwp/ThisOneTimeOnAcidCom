@@ -5,7 +5,7 @@
 
 module.exports = {
   testEnvironment: 'node',
-  testMatch: ['**/scripts/**/*.test.js'],
+  testMatch: ['**/scripts/**/*.test.js', '**/tests/**/*.test.js'],
   moduleFileExtensions: ['js', 'json'],
   transform: {
     '^.+\\.js$': '@swc/jest',
