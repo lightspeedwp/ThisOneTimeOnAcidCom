@@ -14,8 +14,6 @@
 # See https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/306
 # and https://github.com/lightspeedwp/.github/blob/develop/docs/MERGIFY_STRATEGY.md
 
-version: 2
-
 # Reporting configuration
 # This tells Mergify to report PR status without taking actions
 pull_request_rules:
@@ -30,7 +28,7 @@ pull_request_rules:
       - -draft
       - -conflict
       # Only minor and patch updates (major updates excluded)
-      - title~=^(Bump|build\(deps\)|chore\(deps\)|Merge|Rebase)
+      - dependabot-update-type~=(minor|patch)
     actions:
       # No automatic actions. This rule exists for visibility and reporting only.
       comment:
@@ -45,9 +43,8 @@ pull_request_rules:
   - name: Human PR reporting
     description: Report status of human-authored pull requests
     conditions:
-      # Exclude Dependabot and bot authors
-      - -author:dependabot[bot]
-      - -author~=^(app/.*)$
+      # Exclude Dependabot and bot authors (both exact matches and app/* patterns)
+      - -author~=^(dependabot\[bot\]|app/.*)$
       - base=develop
       - -draft
       - -conflict

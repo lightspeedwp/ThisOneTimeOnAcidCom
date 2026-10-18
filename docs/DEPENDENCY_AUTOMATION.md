@@ -159,8 +159,8 @@ Before activating automatic merging, verify:
 - [ ] Stale checks fail the PR (no merging with old check runs)
 
 ### Mergify Validation
-- [ ] Mergify receives Dependabot PR and reports
-- [ ] Mergify reports human-authored PR without comment
+- [ ] Mergify receives Dependabot PR and posts reporting comment
+- [ ] Mergify posts comment on eligible human-authored PR
 - [ ] Mergify dashboard shows correct rule matching
 
 ### Human Review Validation
