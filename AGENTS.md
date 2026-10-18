@@ -55,7 +55,7 @@ The guidelines were written for Figma Make and use root-style paths. In this rep
 | Framework | React 18.3.1 (peer dependency) + Vite 6 | `package.json`, `vite.config.ts` |
 | Language | TypeScript | `typescript` dev dependency, `src/app/tsconfig.json` |
 | Runtime | Node.js 24 LTS | `.nvmrc`, `engines.node` in `package.json`, `src/app/netlify.toml` |
-| Styling | Semantic BEM CSS per the guidelines; Tailwind CSS v4 is still installed and loaded | `src/styles/`, `vite.config.ts` |
+| Styling | Semantic BEM CSS (Tailwind removed) | `src/styles/` (BEM blocks, components, effects, patterns, tokens), `postcss.config.mjs` empty, `guidelines/css-architecture.md` |
 | UI primitives | Radix UI, shadcn/ui patterns, MUI | `package.json` |
 | Icons | Phosphor, Lucide | `package.json` |
 | Animation | Motion | `package.json` |
@@ -148,11 +148,19 @@ Run them with npm, for example `npm run build`.
 
 ### Cleanup Completed (18 October 2026)
 
+**Phase 2 Foundational Tasks (T008-T015)**
+
 - ✅ **T008**: Jest ESM configuration verified (588 tests passing)
 - ✅ **T009**: Vitest fallback installed (`vitest@1.6.1` added to devDependencies)
 - ✅ **T010**: Test baseline documented above (this section)
 - ✅ **T011**: pnpm artefacts removed (workspace.yaml, lock.yaml, pnpm.overrides block, netlify.toml command)
 - ✅ **T012**: Node.js 24 pinning complete (.nvmrc, engines field, README, netlify.toml updated)
+- ✅ **T013-T015**: Tailwind removed completely
+  - No tailwindcss or @tailwindcss packages in dependencies
+  - No Tailwind config files (tailwind.config.*, .postcssrc)
+  - postcss.config.mjs is empty (no Tailwind plugins)
+  - BEM CSS fully in place: `src/styles/` (blocks, components, effects, patterns, tokens)
+  - Guidelines document BEM-only requirement (`guidelines/css-architecture.md`)
 
 **When you change code, report which of these you actually ran. Never claim validation you did not perform.**
 
