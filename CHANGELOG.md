@@ -375,7 +375,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Static metadata files returning production 404s (#5)
 
-- **Moved static metadata files to Vite public directory** — Relocated `robots.txt`, `sitemap.xml`, and `manifest.json` from `src/app/public/` to the root `public/` directory so Vite includes them in the production build
+- **Copied static metadata files to Vite public directory** — Copied `robots.txt`, `sitemap.xml`, and `manifest.json` to the root `public/` directory so Vite includes them in the production build
 - **Verified build output** — Confirmed all three files appear in `dist/` with the expected file types: plain text, XML, and JSON
 - **Deployment verification pending** — Deployed responses and Netlify headers remain untested; production access and HTTP status codes have not been verified
 - **Manifest asset declarations** — Removed icons and screenshots, including shortcut icons, whose files are absent from the published assets
