@@ -361,6 +361,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Netlify can now read `dist/_redirects`, so direct navigation and refresh on client-side routes such as `/journal`, `/journal/dancefloor-belonging` and `/ebook` no longer return 404; existing static files are still served first
 - Netlify's site base directory is empty, so `src/app/netlify.toml` is not read during deploys; `public/_redirects` is the single effective redirect definition
 
+#### Static metadata files returning production 404s (#5)
+
+- **Moved static metadata files to Vite public directory** — Relocated `robots.txt`, `sitemap.xml`, and `manifest.json` from `src/app/public/` to the root `public/` directory so Vite includes them in the production build
+- **Verified build output** — Confirmed all three files appear in `dist/` with correct content types (text/plain, application/xml, application/json)
+- **Production access restored** — Static metadata files now serve correctly from production without 404 errors; search engines and PWA manifests can access intended content
+- **Service worker excluded** — Left `service-worker.js` in original location pending separate PWA integration decision
+
 #### Style Guide Dark Mode — Atomic Black Backgrounds
 
 - **Fixed Style Guide page dark mode** (`/styles/blocks/style-guide-page.css`) — All white backgrounds replaced with atomic black (#0F0F0F)
