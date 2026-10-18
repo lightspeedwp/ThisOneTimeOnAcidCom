@@ -48,7 +48,7 @@ ThisOneTimeOnAcidCom maintains custom workflows in `.github/workflows/` for repo
 | `branch-name-validation.yml` | Validates branch naming conventions | ThisOneTimeOnAcidCom |
 | `dependency-automation.yml` | Automates dependency updates | ThisOneTimeOnAcidCom |
 | `dependency-validation.yml` | Validates dependency integrity | ThisOneTimeOnAcidCom |
-| `drift-detection.yml` | Blocks duplicate governance files (Phase 2.4) | ThisOneTimeOnAcidCom |
+| `drift-detection.yml` | Reports duplicate governance files (Phase 2.4; informational) | ThisOneTimeOnAcidCom |
 | `pr-template-routing.yml` | Routes PR templates by branch type (Phase 2.4) | ThisOneTimeOnAcidCom |
 | `labeling-unified.yml` | Automates issue/PR labeling | ThisOneTimeOnAcidCom |
 | `changelog-unified.yml` | Manages changelog entries | ThisOneTimeOnAcidCom |
@@ -75,8 +75,9 @@ ThisOneTimeOnAcidCom maintains custom workflows in `.github/workflows/` for repo
    - Label suggestions use canonical label definitions
 
 3. **Drift Prevention**
-   - `drift-detection.yml` workflow blocks attempts to add duplicate governance files
-   - Prevents accidental `.github/labels.yml`, `.github/issue-types.yml`, etc. in ThisOneTimeOnAcidCom
+   - `drift-detection.yml` reports duplicate governance files and fails its check when they are present
+   - Checks for `.github/labels.yml`, `.github/issue-types.yml`, `.github/branch-labels.yml`, and files in `.github/ISSUE_TEMPLATE/` or `.github/PULL_REQUEST_TEMPLATE/`
+   - The check is informational and is not required for merging into `main` or `develop`
    - Allows `.github/workflows/**` custom workflows
 
 ---
@@ -144,7 +145,7 @@ Custom workflows can be added freely to `.github/workflows/` in ThisOneTimeOnAci
 |---|---|
 | **Single Source of Truth** | All governance files centralized in `.github` |
 | **Consistency** | Labels, templates, issue types always in sync across repos |
-| **Drift Prevention** | GitHub Actions workflows block duplicate files |
+| **Drift Prevention** | GitHub Actions reports duplicate files through an informational check |
 | **Flexibility** | Repository-specific workflows maintained locally |
 | **Auditability** | Centralized governance with full Git history |
 | **Scalability** | Works for any number of consuming repositories |

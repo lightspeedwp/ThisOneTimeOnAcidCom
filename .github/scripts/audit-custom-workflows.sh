@@ -81,11 +81,14 @@ for workflow in $CUSTOM_WORKFLOWS; do
     # Check for LOCAL governance file references (key patterns)
     # These should NOT exist since files were consolidated into .github repo
 
-    # Pattern 1: LABELS_CONFIG pointing to local .github/labels.yml
-    if grep -q "LABELS_CONFIG:\s*.github/labels\.yml" "$workflow" 2>/dev/null; then
+    # Pattern 1: Local labels, labeler configuration, or removed templates.
+    # Match each reference separately so a canonical path cannot hide a local
+    # reference elsewhere in the workflow (or even on the same line).
+    if grep -oE '(\.canonical-github/)?\.github/(labels\.yml|labeler\.yml|PULL_REQUEST_TEMPLATE|ISSUE_TEMPLATE)' "$workflow" 2>/dev/null | \
+       grep -qv '^\.canonical-github/'; then
         VIOLATIONS_IN_WORKFLOW=$((VIOLATIONS_IN_WORKFLOW + 1))
         VIOLATIONS_FOUND=$((VIOLATIONS_FOUND + 1))
-        VIOLATION_DETAILS+=("  - Local LABELS_CONFIG reference (should reference canonical .github repo)")
+        VIOLATION_DETAILS+=("  - Local governance file reference (labels, labeler, and templates should reference canonical .github repo)")
         echo -n " ⚠️"
     fi
 
@@ -95,18 +98,6 @@ for workflow in $CUSTOM_WORKFLOWS; do
         VIOLATIONS_FOUND=$((VIOLATIONS_FOUND + 1))
         VIOLATION_DETAILS+=("  - Template copy command (templates should be canonical in .github)")
         echo -n " ⚠️"
-    fi
-
-    # Pattern 3: Hard-coded label creation without using GitHub API
-    if grep -q "\.github/labels\.yml" "$workflow" 2>/dev/null && \
-       ! grep -q ".canonical-github/.github/labels\.yml\|CANONICAL_LABELS" "$workflow" 2>/dev/null; then
-        # Only flag if it's not a canonical reference
-        if grep "\.github/labels\.yml" "$workflow" | grep -q -v "canonical-github\|CANONICAL"; then
-            VIOLATIONS_IN_WORKFLOW=$((VIOLATIONS_IN_WORKFLOW + 1))
-            VIOLATIONS_FOUND=$((VIOLATIONS_FOUND + 1))
-            VIOLATION_DETAILS+=("  - Reference to local labels.yml (should use canonical from .github repo)")
-            echo -n " ⚠️"
-        fi
     fi
 
     if [ $VIOLATIONS_IN_WORKFLOW -eq 0 ]; then
@@ -151,7 +142,7 @@ EOF
 
         # Show context
         echo "" >> "$AUDIT_REPORT"
-        echo "**Context:** References to `.canonical-github/.github/` are legitimate (fetching canonical files)" >> "$AUDIT_REPORT"
+        echo '**Context:** References to `.canonical-github/.github/` are legitimate (fetching canonical files)' >> "$AUDIT_REPORT"
         echo "" >> "$AUDIT_REPORT"
     fi
 done

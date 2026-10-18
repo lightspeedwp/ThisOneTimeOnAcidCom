@@ -8,11 +8,11 @@
 
 ## Overview
 
-This document explains the validation workflows that enforce the hybrid governance model where:
+This document explains the validation workflows that support the hybrid governance model where:
 
 - **Canonical governance** (labels, issue types, PR templates) is centralized in `lightspeedwp/.github`
 - **Consumer repository** (ThisOneTimeOnAcidCom) maintains **custom workflows only**
-- **Drift prevention** blocks attempts to add duplicate governance files
+- **Drift detection** reports duplicate governance files through an informational check
 - **Template routing** suggests appropriate PR templates based on branch type
 
 ---
@@ -23,11 +23,11 @@ This document explains the validation workflows that enforce the hybrid governan
 
 **Trigger:** Pull Request opened, reopened, or synchronized
 
-**Purpose:** Prevent duplicate governance files from being added to ThisOneTimeOnAcidCom
+**Purpose:** Detect duplicate governance files in ThisOneTimeOnAcidCom
 
-### What Gets Blocked
+### What Gets Flagged
 
-The workflow **blocks** these files if they appear in a PR:
+The workflow **flags** these files when present in the checked-out PR tree:
 
 - `.github/labels.yml` — Use canonical from lightspeedwp/.github instead
 - `.github/issue-types.yml` — Use canonical from lightspeedwp/.github instead
@@ -43,9 +43,9 @@ The workflow **allows** these files:
 
 ### Check Results
 
-**✅ PASS** — No blocked files detected. Configuration stays canonical.
+**✅ PASS** — None of the listed duplicate governance files detected.
 
-**❌ FAIL** — Blocked files detected. The PR will not merge until duplicates are removed.
+**❌ FAIL** — Duplicate governance files detected. The workflow fails its check. Drift detection is **informational**, is not a required check for `main` or `develop`, and does not block merging under the documented branch protection rules.
 
 ### Developer Action
 
@@ -136,10 +136,9 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 
 ### Drift Detection Contract
 
-**Guarantee:** If a PR passes the drift detection check, it contains:
-- ✅ Zero duplicate governance files
-- ✅ Only custom workflows in `.github/workflows/`
-- ✅ Correct references to canonical .github repo
+**Guarantee:** If the drift detection check passes, the checked-out PR tree contains none of the listed forbidden governance files and no files inside the listed template directories. Custom workflows are allowed; the check does not audit their references to canonical sources or other `.github/` files.
+
+The check runs for both same-repository and fork pull requests. Results are posted as PR comments only for same-repository pull requests; fork PRs can view results in the workflow logs.
 
 ### PR Template Routing Contract
 
@@ -155,10 +154,10 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 
 ### Drift Detection Fails
 
-**Problem:** PR blocked with "Configuration drift detected"
+**Problem:** The informational check fails with "Configuration drift detected"
 
 **Solution:**
-1. Check which files are flagged (shown in workflow comment)
+1. Check which files are flagged (shown in workflow logs and, for same-repository PRs, the workflow comment)
 2. Remove the file: `git rm <flagged-file>`
 3. Commit and push
 4. Workflow will re-run and pass
@@ -206,7 +205,7 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 1. Check out PR code
 2. Search for forbidden files/directories
 3. Verify custom workflows are present
-4. Comment on PR with results
+4. Comment on PR with results (same-repository PRs only)
 5. Set check status (pass/fail)
 
 **Cost:** ~30 seconds per PR
@@ -232,9 +231,9 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 Track validation success using:
 
 1. **GitHub Actions Dashboard** — View all workflow runs
-2. **PR Comment Timeline** — Each PR gets workflow comments
+2. **PR Comment Timeline** — Same-repository PRs get drift detection comments; fork PRs use workflow logs
 3. **Label Application** — Type labels show which workflow ran
-4. **Branch Protection Rules** — Drift detection and template routing are **informational** (not required checks) in the branch protection rules
+4. **Branch Protection Rules** — Drift detection and template routing are **informational** (not required checks) for `main` and `develop` under the documented branch protection rules
 
 ---
 
