@@ -103,11 +103,32 @@
 **Acceptance Criteria:**
 - [ ] Extracted all 10–15 sampled assets from Figma Make
 - [ ] All extracted files validated: not corrupted, dimensions match catalogue
-- [ ] ≥80% success rate (at least 8 of 10 recovered, 2 max using fallback)
+- [ ] ≥80% recovery rate (at least 8 of 10 with recoveryStatus="recovered"; fallback/failed do not count toward target)
 - [ ] Recorded extraction time per asset (for Phase 2 scaling estimate)
 - [ ] Documented any errors, API failures, or fallbacks used
-- [ ] Created manifest file with extraction metadata per asset
+- [ ] Created extraction-manifest.json with structured metadata per asset
 - [ ] Organized recovered-assets/ directory by category (hero/, portfolio/, etc.)
+
+**Recovery Status Definition:**
+- `"recovered"` — Asset successfully exported directly from Figma Make. File valid, dimensions match catalogue. Counts toward ≥80% target.
+- `"fallback"` — Asset not found in Figma Make or export failed. Replaced with Unsplash reference from existing PortfolioImage.tsx mappings. Does NOT count toward 80% target.
+- `"failed"` — Asset could not be recovered (Unsplash fallback also unavailable or inappropriate). Requires manual intervention in Phase 2. Does NOT count toward 80% target.
+
+**Extraction Script Requirements (scripts/extract-figma-assets.js):**
+The extraction script MUST:
+1. **Rate Limiting:** Enforce FIGMA_API_RATE_LIMIT_PER_MINUTE (from .env, default 10) with a shared token bucket across all concurrent requests. Honor Retry-After headers from API responses.
+2. **Retry Logic:** On API error (429, 503, timeout):
+   - Exponential backoff: 2s, 4s, 8s, 16s (maximum 4 retries)
+   - Log each retry with timestamp and API response code
+   - Fall back to Unsplash after 4 failed retries
+3. **Concurrent Requests:** Respect FIGMA_CONCURRENT_REQUESTS (from .env, default 5). Queue additional assets until a slot opens.
+4. **Comprehensive Logging:** Log all API calls, responses, errors, and recovery decisions with timestamps. Include rate limit state, backoff decisions, and fallback triggers.
+5. **Error Handling:** Catch and document:
+   - Missing figmaAssetId in Make project (mark as fallback)
+   - Export format unsupported (log, retry, fallback)
+   - Network/timeout errors (exponential backoff, then fallback)
+   - File write errors (mark as failed, retry)
+6. **Manifest Generation:** Write extraction-manifest.json with complete metadata (see example below)
 
 **Subtasks:**
 1. Create `recovered-assets/` directory structure
@@ -147,6 +168,8 @@
    - File size: reasonable for image (not 0 bytes)
    - PNG format: file header check
 6. Create extraction manifest (`recovered-assets/extraction-manifest.json`)
+   **Location:** Must be placed at `recovered-assets/extraction-manifest.json` for T013 validation script to consume.
+   **Schema:** Structure per example below. The `recoveryStatus` field in this manifest reflects the extraction outcome (recovered/fallback/failed); this differs from `FULL-CATALOGUE.json` recoveryStatus, which reflects overall Phase 2 planning status.
    ```json
    {
      "extraction_date": "2026-10-17T...",
@@ -164,12 +187,29 @@
          "fileSize": 234567,
          "dimensions": {"width": 1200, "height": 900},
          "extractionTime_ms": 2345,
-         "timestamp": "2026-10-17T12:34:56Z"
+         "timestamp": "2026-10-17T12:34:56Z",
+         "notes": ""
        },
-       ...
+       {
+         "catalogueId": "toa-asset-002",
+         "figmaAssetId": "378acbf4a7518ca6c40b44540bd7a121a91375fe",
+         "originalFilename": "jungleImage1.png",
+         "recoveryStatus": "fallback",
+         "exportedPath": null,
+         "fallbackSource": "unsplash:portfolio-jungle",
+         "extractionTime_ms": 0,
+         "timestamp": "2026-10-17T12:35:12Z",
+         "notes": "Asset not found in Make project; Unsplash fallback applied"
+       }
      ]
    }
    ```
+   **Field Definitions:**
+   - `catalogueId`: Cross-reference to FULL-CATALOGUE.json for matching
+   - `recoveryStatus`: One of ["recovered", "fallback", "failed"]. Indicates extraction outcome only.
+   - `exportedPath`: File path relative to project root (or null if fallback/failed)
+   - `fallbackSource`: For fallback assets, which Unsplash image was used
+   - `notes`: Any error message, API error code, or recovery decision reasoning
 
 **Output Files:**
 - `recovered-assets/` directory (with subdirectories per category, 10–15 PNG files)
@@ -246,15 +286,22 @@
 #### T014: Update Catalogue Recovery Status
 **Dependencies:** T013 (validation complete), FULL-CATALOGUE.json  
 **Effort:** 1–2 hours  
-**Files:** FULL-CATALOGUE.json
+**Files:** FULL-CATALOGUE.json, extraction-manifest.json
 
 **Acceptance Criteria:**
 - [ ] FULL-CATALOGUE.json updated with recovery status for all 10–15 sampled assets
-- [ ] Recovery status values: `"recovered"`, `"fallback"`, or `"pending"` per asset
+- [ ] Recovery status values: `"recovered"` (direct Figma export), `"fallback"` (Unsplash), or `"pending"` (not recovered yet) per asset
 - [ ] Recovery notes documented (extraction time, file size, validation notes)
 - [ ] Timestamps added for each asset (extractedAt, validatedAt)
-- [ ] Unmapped assets (32) remain `"pending"` with notes
+- [ ] Unmapped assets (32) remain `"pending"` with notes "Sampled assets completed; full recovery planned for Phase 2"
 - [ ] File structure and schema unchanged, only data added
+
+**Schema Clarification (A8):**
+The extraction-manifest.json (from T012) tracks extraction outcomes: recovered/fallback/failed. The FULL-CATALOGUE.json recoveryStatus (updated here in T014) reflects overall status: recovered/fallback/pending. Mapping:
+- extraction-manifest "recovered" → FULL-CATALOGUE "recovered" (asset successfully exported)
+- extraction-manifest "fallback" → FULL-CATALOGUE "fallback" (Unsplash reference used)
+- extraction-manifest "failed" → FULL-CATALOGUE "pending" (manual intervention needed in Phase 2)
+This allows extraction script autonomy while preserving phase-wide status for planning.
 
 **Subtasks:**
 1. Load FULL-CATALOGUE.json
@@ -315,11 +362,11 @@
      - API rate limiting (solution: implement backoff)
      - Metadata loss (alt text, captions not in Figma export; stored in catalogue)
      - Fallback strategy: Unsplash images used for missing assets
-   - **Metrics & Timeline:**
+   - **Metrics & Timeline (Measured During T012):**
      - Total effort: X hours (Setup + Extraction + Validation + Reporting)
-     - Per-asset: ~15 min average (range: 5–30 min depending on file size)
-     - Extractions per day: ~10–15 assets/day (parallelizable)
-     - Estimated Phase 2 timeline: 56 assets ÷ 15 assets/day = ~4 days full extraction
+     - **Per-asset extraction time:** Record actual from extraction-manifest.json (extract_time_ms per asset). Calculate mean, min, max, and standard deviation.
+     - **Extractions per day:** Based on measured per-asset time and parallelization (5 concurrent with FIGMA_API_RATE_LIMIT_PER_MINUTE=10)
+     - **Phase 2 scaling estimate:** Calculate from actual pilot metrics. Do NOT assume ~15 min/asset. If pilot mean is X min, then Phase 2 estimate = (56 assets × X min) ÷ 60 ÷ parallelization_factor
    - **Phase 2 Recommendations:**
      - Batch extraction script with concurrency control
      - Async processing to avoid API rate limits
@@ -352,11 +399,15 @@
    Recommendation → Phase 2 (full recovery, 56 assets)
    ```
 
-4. Estimate scaling for Phase 2:
-   - Pilot time per asset: ~15 min (extraction) + ~5 min (validation) = ~20 min/asset
-   - Full recovery for 56 assets: 56 × 20 min = 1,120 min = ~18.7 hours
-   - Accounting for parallelization (5–10 concurrent extracts): ~4–5 days at 4–5 hours/day
-   - Recommendation: Phase 2 can complete full recovery in 1 week
+4. Estimate scaling for Phase 2 (C1 - Based on Actual Pilot Metrics):
+   - Extract pilot per-asset extraction time from extraction-manifest.json: mean(extractionTime_ms)
+   - Pilot validation overhead per asset: Record from validation script execution time
+   - **Do NOT assume ~15–20 min/asset.** Use measured values from Phase 1b.
+   - Full recovery calculation: 56 assets × measured_mean_time_per_asset
+   - Parallelization factor: 5 concurrent requests (FIGMA_CONCURRENT_REQUESTS), limited by rate (10 req/min)
+   - Revised Phase 2 timeline: (56 × measured_time) ÷ parallelization ÷ work_hours_per_day
+   - Example: If pilot measured 12 min/asset on average: 56 × 12 = 672 min = ~11.2 hours wall-clock (accounting for 5 concurrent) = ~2–3 days
+   - Document the actual measurement in RECOVERY-PILOT-REPORT.md and use it to inform Phase 2 planning (TOA-285)
 
 5. Review and finalize report
    - Check for completeness against Phase 1b objectives
