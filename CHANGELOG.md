@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+#### Phase 2 Governance Consolidation — Repository Restructuring (Spec 001, Spec 021)
+
+- **Specification and implementation plan** for consolidating duplicate governance files from ThisOneTimeOnAcidCom into lightspeedwp/.github as single source of truth (40 tasks across 6 phases)
+- **Hybrid governance model architecture** documented: canonical configuration (labels, issue types, PR/issue templates) centralised in lightspeedwp/.github; repo-specific custom workflows preserved in ThisOneTimeOnAcidCom
+- **Drift prevention and template routing workflows** planned to block duplicate governance files while allowing custom workflows
+- **Audit findings documented** identifying all duplicate files for safe removal with zero breaking changes to custom workflows
+- **Related specifications:**
+  - Spec 001 Phase 2: Repository Governance Layout & Agentic Workflows (ThisOneTimeOnAcidCom)
+  - Spec 021: Repository Restructuring & Canonical Governance Config (lightspeedwp/.github)
+  - Linked workstreams: TOA-262 (PR/Issue Template Routing), TOA-271 (Validation & Automation)
+
 #### Phase 1 Governance Workflows (TOA-241)
 
 - **Branch name validation** — `branch-name-validation.yml` validates branch naming conventions against `{type}/{scope}-{title}` pattern with forbidden prefix checks (`claude/`, `copilot/`, `openai/`)
