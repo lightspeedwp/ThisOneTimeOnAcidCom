@@ -83,8 +83,8 @@ jobs:
           echo "--- Exit Code: $EXIT_CODE ---"
 
           # Extract JSON from output (validator prints message then JSON)
-          # Use tail -1 to get the last line (which should be the JSON object)
-          JSON_OUTPUT=$(echo "$OUTPUT" | tail -1)
+          # Extract from first line containing { to end (multi-line JSON)
+          JSON_OUTPUT=$(echo "$OUTPUT" | sed -n '/^{/,$p')
 
           # Use jq to extract valid field if jq is available and output looks like JSON
           if command -v jq &>/dev/null && echo "$JSON_OUTPUT" | jq empty &>/dev/null; then
