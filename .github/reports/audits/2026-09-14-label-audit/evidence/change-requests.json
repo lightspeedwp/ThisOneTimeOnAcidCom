@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "description": "Change-request register for locked configuration files (Constitution Principle II)",
+  "approved": [
+    {
+      "issue_number": null,
+      "description": "Phase 2 Governance Consolidation (Spec 001 Phase 2)",
+      "scope": "Consolidate duplicate governance files from ThisOneTimeOnAcidCom into lightspeedwp/.github canonical source",
+      "status": "approved",
+      "approved_by": "ashley",
+      "approved_at": "2026-10-18",
+      "specification": "Spec 001 Phase 2: Repository Restructuring & Canonical Governance Config",
+      "related_files": [
+        ".github/labels.yml",
+        ".github/issue-types.yml",
+        ".github/branch-labels.yml",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/PULL_REQUEST_TEMPLATE/**"
+      ]
+    }
+  ],
+  "pending": [],
+  "rejected": []
+}
