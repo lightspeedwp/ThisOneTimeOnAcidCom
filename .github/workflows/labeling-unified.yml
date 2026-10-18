@@ -35,7 +35,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  LABELS_CONFIG: .github/labels.yml
+  # Phase 2.5: LABELER_RULES maintained locally; LABELS_CONFIG now canonical
   LABELER_RULES: .github/labeler.yml
 
 jobs:
@@ -51,19 +51,34 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 1
+
+      # Phase 2.5: Fetch canonical labels from .github repository (Spec 021)
+      # Single source of truth: all governance files are canonical in lightspeedwp/.github
+      - name: Fetch canonical governance files
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: lightspeedwp/.github
+          path: .canonical-github
+          fetch-depth: 1
+          sparse-checkout: .github/labels.yml
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
       - name: Validate labeling configs
+        env:
+          CANONICAL_LABELS_PATH: .canonical-github/.github/labels.yml
         run: node scripts/validation/validate-labeling-configs.cjs
       - name: Label governance contracts (#3545)
         # Jest contract suite proving canonical emitters, branch-mapping
         # parity, labeler schema, one-type reconciliation, idempotence and
         # router/agent convergence. Blocking: this job gates every other
         # job in the workflow.
-        run: npx jest --config jest.config.cjs scripts/agents/__tests__/label-contracts.test.js --coverage=false --forceExit
+        run: npx jest --config jest.config.js scripts/agents/__tests__/label-contracts.test.js --coverage=false --forceExit
       - name: Guardrail — unknown labels in templates
         # Scans PR template frontmatter against .github/labels.yml. Known
         # LOCKED-template violations are grandfathered with warnings (see

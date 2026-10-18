@@ -247,11 +247,16 @@
   - No local duplicates (only override when repository-specific needs differ)
 - [ ] T035 [P] [WS-261] [TOA-252] Configure PR template routing
   - Verify `pr-template-routing.yml` workflow exists and is active
-  - Create test PRs from different branch types:
-    - `feat/test-feature` → should load `pr_feature.md` template
-    - `fix/test-bug` → should load `pr_bug_fix.md` template
-    - `docs/test-docs` → should load `pr_documentation.md` template
-  - Confirm each branch type routes to the correct template
+  - Use the branch mapping in `scripts/pr-template-router.js` and preserve or
+    restore its required local `.github/PULL_REQUEST_TEMPLATE/{template}.md`
+    files
+  - Create separate test PRs from different branch types:
+    - `feat/test-feature` → should load local `feat.md` template
+    - `fix/test-bug` → should load local `fix.md` template
+    - `docs/test-docs` → should load local `docs.md` template
+  - Confirm each branch type loads and applies the selected template content to
+    the PR body while preserving contributor content; verify the resulting body
+    contains its sections and the matching type label is applied
   - Document PR template routing in `CONTRIBUTING.md` under "PR Creation Process"
 - [ ] T036 [P] [WS-261] [TOA-253] Document saved replies and contributor setup
   - Link to org-wide saved replies in `.github` repo
