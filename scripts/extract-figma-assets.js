@@ -13,7 +13,13 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '..');
 
-// Load .env file
+/**
+ * Read trimmed key=value entries, ignoring blank lines and lines starting with #.
+ * Values retain quotes and inline comments; later duplicate keys replace earlier ones.
+ *
+ * @returns {Object} Parsed entries, or an empty object if the file is absent.
+ * @throws {Error} If an existing file cannot be read.
+ */
 function loadEnv(filepath) {
   if (!fs.existsSync(filepath)) return {};
   const env = {};
@@ -50,6 +56,11 @@ if (!FIGMA_MAKE_FILE_KEY || FIGMA_MAKE_FILE_KEY.includes('your_')) {
 
 // Token bucket rate limiter
 class RateLimiter {
+  /**
+   * Start with a full token bucket.
+   *
+   * @param {number} tokensPerMinute - Bucket capacity and refill rate per minute.
+   */
   constructor(tokensPerMinute) {
     this.tokensPerMinute = tokensPerMinute;
     this.tokensPerSecond = tokensPerMinute / 60;
@@ -57,6 +68,10 @@ class RateLimiter {
     this.lastRefillTime = Date.now();
   }
 
+  /**
+   * Wait until a token is available, then consume it from the shared bucket.
+   * A nonpositive refill rate cannot replenish an exhausted bucket.
+   */
   async waitForToken() {
     while (this.tokens < 1) {
       const now = Date.now();
@@ -77,7 +92,14 @@ class RateLimiter {
   }
 }
 
-// Fetch helper
+/**
+ * Send an HTTPS GET with the configured Figma token and optional header overrides.
+ * Request errors reject the promise; HTTP error statuses do not.
+ *
+ * @param {Object} headers - Additional headers; may override the default headers.
+ * @returns {Promise<{status: number, headers: Object, data: string}>} HTTP status,
+ *   response headers, and unparsed body, including for non-success responses.
+ */
 async function fetchAPI(url, headers = {}) {
   return new Promise((resolve, reject) => {
     const options = {
@@ -97,7 +119,14 @@ async function fetchAPI(url, headers = {}) {
   });
 }
 
-// Download file from URL
+/**
+ * Stream an HTTPS response to filepath, creating or overwriting the file.
+ * The parent directory must exist; HTTP status codes and redirects are not handled.
+ * Request errors reject the promise after scheduling deletion of the destination;
+ * destination stream errors are not handled here.
+ *
+ * @returns {Promise<void>} Resolves when the destination stream finishes writing.
+ */
 async function downloadFile(url, filepath) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(filepath);
@@ -114,7 +143,13 @@ async function downloadFile(url, filepath) {
   });
 }
 
-// Get PNG dimensions
+/**
+ * Read pixel dimensions after checking the first four PNG signature bytes and
+ * a minimum length of 24 bytes; does not validate the full PNG structure.
+ *
+ * @returns {{width: number, height: number}|null} Header dimensions, or null
+ *   when the header check fails or the file cannot be read.
+ */
 function getPNGDimensions(filepath) {
   try {
     const data = fs.readFileSync(filepath);
@@ -129,7 +164,22 @@ function getPNGDimensions(filepath) {
   }
 }
 
-// Extract single asset with retries
+/**
+ * Export one Figma asset as a PNG at scale 2, with up to four attempts and
+ * delays of 2, 4, and 8 seconds before retries. API requests use the shared limiter.
+ * Errors caught during an attempt are recorded as notes and retried; failures
+ * appending the result to manifest.assets reject the promise.
+ * Creates category directories and overwrites output files; files failing the
+ * PNG header check are deleted.
+ *
+ * @param {Object} asset - Selection entry with catalogueId, figmaAssetId,
+ *   portfolio_category (used for the output directory), and originalFilename.
+ * @param {RateLimiter} rateLimiter - Limiter shared by extraction workers.
+ * @param {Object} manifest - Its assets array receives a result with elapsed time
+ *   in milliseconds, pixel dimensions, byte size, and a path relative to the project.
+ * @returns {Promise<boolean>} True if a downloaded file passes the PNG header
+ *   check; false after all attempts fail. No fallback asset is produced.
+ */
 async function extractAsset(asset, rateLimiter, manifest) {
   const startTime = Date.now();
   let recoveryStatus = 'failed';
@@ -230,7 +280,13 @@ async function extractAsset(asset, rateLimiter, manifest) {
   return recoveryStatus === 'recovered';
 }
 
-// Main
+/**
+ * Extract all three pilot-selection tiers with a shared limiter and worker pool,
+ * then overwrite recovered-assets/extraction-manifest.json with results and totals.
+ * Per-asset failures count toward the failed total without stopping other assets.
+ * Input read/parse errors, invalid selection structure, and manifest write errors
+ * reject the promise for the CLI's fatal-error handler.
+ */
 async function main() {
   console.log('Figma Asset Extraction\n');
   console.log(`Rate Limit: ${RATE_LIMIT} req/min, Concurrency: ${CONCURRENCY}\n`);
@@ -260,6 +316,10 @@ async function main() {
 
   // Process with concurrency control
   let index = 0;
+  /**
+   * Drain the shared selection index, updating manifest results and summary counts.
+   * Caught extraction errors increment the failed count and processing continues.
+   */
   async function worker() {
     while (index < allAssets.length) {
       const asset = allAssets[index++];

@@ -12,7 +12,13 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '..');
 
-// Get PNG dimensions from file header
+/**
+ * Read pixel dimensions after checking the first four PNG signature bytes and
+ * a minimum length of 24 bytes; does not validate the full PNG structure.
+ *
+ * @returns {{width: number, height: number}|null} Header dimensions, or null
+ *   when the header check fails or the file cannot be read.
+ */
 function getPNGDimensions(filepath) {
   try {
     const data = fs.readFileSync(filepath);
@@ -34,7 +40,16 @@ function getPNGDimensions(filepath) {
   }
 }
 
-// Validate file
+/**
+ * Check file size and the partial PNG header used to read pixel dimensions.
+ * Empty files, sizes above 10 MiB, and unreadable or unrecognized headers fail;
+ * sizes below 1 KiB add a warning. Exactly 1 KiB and 10 MiB are allowed.
+ * Missing files and stat errors become failed results rather than thrown errors.
+ *
+ * @returns {Object} Status (failed, warning, or valid), errors, and warnings.
+ *   Byte size and dimensions are included only after a successful stat call;
+ *   dimensions are null if the header cannot be read or recognized.
+ */
 function validateFile(filepath) {
   const errors = [];
   const warnings = [];
@@ -77,7 +92,13 @@ function validateFile(filepath) {
   return { status, fileSize, dimensions: dims, errors, warnings };
 }
 
-// Load manifests
+/**
+ * Read and parse a JSON file synchronously.
+ *
+ * Reading or parsing failures terminate the process with exit code 1.
+ *
+ * @returns {*} The parsed value.
+ */
 function loadJSON(filepath) {
   try {
     return JSON.parse(fs.readFileSync(filepath, 'utf-8'));
@@ -87,7 +108,13 @@ function loadJSON(filepath) {
   }
 }
 
-// Create catalogue lookup
+/**
+ * Index catalogue.assets by truthy catalogueId, retaining references to entries.
+ * Later entries with the same ID replace earlier ones.
+ *
+ * @returns {Object} Lookup, empty when assets is absent or is not an array.
+ * @throws {TypeError} If catalogue is null/undefined or an array entry is null/undefined.
+ */
 function createCatalogeLookup(catalogue) {
   const lookup = {};
 
@@ -102,7 +129,14 @@ function createCatalogeLookup(catalogue) {
   return lookup;
 }
 
-// Main validation
+/**
+ * Validate recovered manifest assets and overwrite recovered-assets/validation-report.json.
+ * Other recovery statuses are skipped; catalogue dimension mismatches add warnings.
+ * Only valid results count toward the quality percentage among recovered assets.
+ * Missing inputs or JSON read/parse errors terminate the process with exit code 1;
+ * invalid data structure and report write errors reject the promise for the CLI's
+ * fatal-error handler. Failed asset checks are recorded in the report.
+ */
 async function main() {
   console.log('Validating Extracted Assets\n');
 

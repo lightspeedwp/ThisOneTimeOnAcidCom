@@ -12,7 +12,13 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '..');
 
-// Load JSON file
+/**
+ * Read and parse a JSON file synchronously.
+ *
+ * Reading or parsing failures terminate the process with exit code 1.
+ *
+ * @returns {*} The parsed value.
+ */
 function loadJSON(filepath) {
   try {
     return JSON.parse(fs.readFileSync(filepath, 'utf-8'));
@@ -22,7 +28,16 @@ function loadJSON(filepath) {
   }
 }
 
-// Main update process
+/**
+ * Overwrite recovered-assets/FULL-CATALOGUE.json using extraction and validation results.
+ * Sampled assets use the extraction status for recovered/fallback; other outcomes become
+ * pending. Unsampled assets receive pending status only if their status is falsy.
+ * Set recovery notes and copy extraction timestamps, plus validation status and timestamp
+ * when available; skipped validation uses a null timestamp and does not change recovery status.
+ * Missing inputs or JSON read/parse errors terminate the process with exit code 1;
+ * invalid data structure and catalogue write errors reject the promise for the CLI's
+ * fatal-error handler.
+ */
 async function main() {
   console.log('Updating Catalogue Recovery Status\n');
 
