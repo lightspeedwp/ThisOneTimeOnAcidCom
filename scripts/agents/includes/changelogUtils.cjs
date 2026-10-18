@@ -1,33 +1,26 @@
-#!/usr/bin/env node
-
 /**
- * changelogUtils.cjs - Changelog utility functions
- * Stub implementation for Phase 1 governance workflows
- * Full implementation deferred to Phase 2 infrastructure work
+ * Phase 1 Stub: Changelog utility functions
+ * Phase 2: Replace with real changelog parsing, section detection, entry extraction
  */
+module.exports = {
+  parseChangelog: (content) => {
+    // Phase 1: Return minimal structure
+    // Phase 2: Parse Keep a Changelog format, extract sections by version
+    return {
+      versions: [],
+      unreleased: { added: [], changed: [], deprecated: [], removed: [], fixed: [], security: [] }
+    };
+  },
 
-const fs = require('fs');
-const path = require('path');
+  getVersionEntry: (content, version) => {
+    // Phase 1: Return empty entry
+    // Phase 2: Extract changelog section for specific version with all subsections
+    return { version, sections: {} };
+  },
 
-// Parse command line arguments
-const args = process.argv.slice(2);
-const validateFlag = args.includes('--validate');
-const changelogFile = args[args.length - 1];
-
-if (!changelogFile || changelogFile.startsWith('--')) {
-  console.error('Usage: changelogUtils.cjs [--validate] <changelog-file>');
-  process.exit(1);
-}
-
-if (!fs.existsSync(changelogFile)) {
-  console.error(`Error: Changelog file not found: ${changelogFile}`);
-  process.exit(1);
-}
-
-if (validateFlag) {
-  console.log(`✓ Changelog validation stub: ${changelogFile} exists`);
-  process.exit(0);
-}
-
-console.log(`✓ Changelog utils processed: ${changelogFile}`);
-process.exit(0);
+  formatEntry: (data) => {
+    // Phase 1: Return stringified entry
+    // Phase 2: Format changelog entry in canonical Keep a Changelog style
+    return JSON.stringify(data);
+  }
+};
