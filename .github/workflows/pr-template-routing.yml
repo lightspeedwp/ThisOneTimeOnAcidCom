@@ -24,11 +24,10 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      # The router needs only scripts/, the PR templates and the root
-      # package files (included by cone-mode sparse checkout), and no git
-      # history. Check out the base branch so a contributor cannot modify the
-      # router script to bypass template assignment (security).
-      - name: Checkout repository
+      # Check out the router script from the base branch so a contributor
+      # cannot modify it to bypass template assignment (security). Templates
+      # come from the current commit to support new templates being added.
+      - name: Checkout router script from base branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.base_ref }}
@@ -36,6 +35,13 @@ jobs:
           fetch-depth: 1
           sparse-checkout: |
             scripts
+
+      - name: Checkout PR templates from current commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
             .github/PULL_REQUEST_TEMPLATE
 
       - name: Set up Node.js
