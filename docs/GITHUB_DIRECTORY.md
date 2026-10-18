@@ -84,12 +84,12 @@ These files are at the repository root and contain important governance informat
 
 This repository uses **Spec Kit** for specification-driven development:
 
-- **Specification Catalog:** [`.github/specs/CATALOG.md`](./specs/CATALOG.md) — Browse all active and archived specifications
+- **Specification Catalog:** [`.github/specs/CATALOG.md`](../.github/specs/CATALOG.md) — Browse all active and archived specifications
 - **Spec Kit configuration:** [`.specify/`](../.specify/)
 - **Gemini CLI integration:** [`.gemini/`](../.gemini/)
 - **Spec workflow:** See [`CONTRIBUTING.md § Using Spec Kit`](../CONTRIBUTING.md#using-spec-kit)
 
-Specifications are created in and tracked within the repository using Spec Kit. See the `.specify/` directory for configuration and the [`specs/`](./specs/) directory for all specification documents.
+Specifications are created in and tracked within the repository using Spec Kit. See the `.specify/` directory for configuration and the [`.github/specs/`](../.github/specs/) directory for all specification documents.
 
 ---
 
