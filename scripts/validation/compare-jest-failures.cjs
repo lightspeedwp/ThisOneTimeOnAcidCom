@@ -53,6 +53,9 @@ function countFailures(report, root) {
     if (Array.isArray(result.assertionResults)) {
       count = result.assertionResults.filter(assertion => assertion.status === 'failed').length;
     }
+    if (count === 0 && result.status === 'failed') {
+      count = 1;
+    }
     if (count > 0) {
       const file = path.relative(root, path.resolve(root, result.name));
       failures[file] = count;

@@ -26,11 +26,12 @@ function compare(headFiles, baseFiles, rawCounts = false) {
       testResults: files.map(file => {
         const result = {
           name: path.resolve(roots[target], file.name),
+          status: file.status || (file.failures > 0 ? 'failed' : 'passed'),
         };
         if (rawCounts) {
           result.numFailingTests = file.failures;
         } else {
-          result.assertionResults = [
+          result.assertionResults = file.assertionResults || [
             ...Array.from({ length: file.failures }, () => ({ status: 'failed' })),
             { status: 'passed' },
             { status: 'pending' },
@@ -128,6 +129,40 @@ test('allows reports with no failures', () => {
 
   expect(result.status).toBe(0);
   expect(result.stdout).toContain('New failures in this PR: 0');
+});
+
+test.each([
+  { assertionResults: [] },
+  { assertionResults: [{ status: 'passed' }] },
+])('detects a failed suite with no failed assertions ($assertionResults)', ({ assertionResults }) => {
+  const result = compare(
+    [{ name: 'tests/execution.test.js', failures: 0, status: 'failed', assertionResults }],
+    [],
+  );
+
+  expect(result.status).toBe(1);
+  expect(result.stdout).toContain('PR head failures: 1');
+  expect(result.stdout).toContain('New failures in this PR: 1');
+});
+
+test('matches existing suite execution failures across checkout roots', () => {
+  const files = [{ name: 'tests/execution.test.js', failures: 0, status: 'failed', assertionResults: [] }];
+  const result = compare(files, files);
+
+  expect(result.status).toBe(0);
+  expect(result.stdout).toContain('Base branch failures: 1');
+  expect(result.stdout).toContain('PR head failures: 1');
+  expect(result.stdout).toContain('New failures in this PR: 0');
+});
+
+test.each(['passed', 'pending'])('ignores an empty %s suite', status => {
+  const result = compare(
+    [{ name: 'tests/empty.test.js', failures: 0, status, assertionResults: [] }],
+    [],
+  );
+
+  expect(result.status).toBe(0);
+  expect(result.stdout).toContain('PR head failures: 0');
 });
 
 test('also compares reports containing per-file numeric failure counts', () => {
