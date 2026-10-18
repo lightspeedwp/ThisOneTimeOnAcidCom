@@ -557,9 +557,6 @@ describe('Branch Name Validation', () => {
 
   describe('CLI Execution - Main Function', () => {
     const originalArgv = process.argv;
-    const originalExit = process.exit;
-    const originalLog = console.log;
-    const originalError = console.error;
 
     beforeEach(() => {
       execSync.mockReset();
@@ -577,7 +574,6 @@ describe('Branch Name Validation', () => {
 
     test('should validate branch passed via --branch argument', () => {
       process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test-feature'];
-      const { main } = require('./validate-branch-name.js');
       main();
       expect(process.exit).toHaveBeenCalledWith(0);
       expect(console.log).toHaveBeenCalled();
@@ -585,21 +581,18 @@ describe('Branch Name Validation', () => {
 
     test('should exit with error code for invalid branch via --branch', () => {
       process.argv = ['node', 'validate-branch-name.js', '--branch', 'invalid-branch'];
-      const { main } = require('./validate-branch-name.js');
       main();
       expect(process.exit).toHaveBeenCalledWith(1);
     });
 
     test('should output JSON when --json flag is provided', () => {
       process.argv = ['node', 'validate-branch-name.js', '--branch', 'feat/test', '--json'];
-      const { main } = require('./validate-branch-name.js');
       main();
       expect(console.log).toHaveBeenCalledTimes(2);
     });
 
     test('should handle missing value for --branch', () => {
       process.argv = ['node', 'validate-branch-name.js', '--branch'];
-      const { main } = require('./validate-branch-name.js');
       main();
       expect(process.exit).toHaveBeenCalledWith(2);
       expect(console.error).toHaveBeenCalledWith('Error: --branch requires a value');
@@ -608,7 +601,6 @@ describe('Branch Name Validation', () => {
     test('should validate current branch when no --branch argument provided', () => {
       process.argv = ['node', 'validate-branch-name.js'];
       execSync.mockReturnValue('feat/my-feature\n');
-      const { main } = require('./validate-branch-name.js');
       main();
       expect(process.exit).toHaveBeenCalledWith(0);
     });

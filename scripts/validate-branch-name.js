@@ -111,6 +111,15 @@ function checkExemptions(branch) {
         { pattern: 'releaseStandard', exemption: true }
       );
     }
+
+    // Release branch that doesn't match valid patterns
+    return new ValidationResult(
+      false,
+      branch,
+      `❌ Release branch '${branch}' does not match valid patterns. Use 'release/v{major}.{minor}.{patch}' or 'release/YYYY-MM-DD'.`,
+      'invalid-release-pattern',
+      { pattern: 'release', invalidPattern: true }
+    );
   }
 
   return null;
