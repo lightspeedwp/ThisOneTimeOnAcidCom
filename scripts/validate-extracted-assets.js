@@ -142,7 +142,7 @@ async function main() {
 
   // Load manifests
   const manifestPath = path.join(projectRoot, 'recovered-assets', 'extraction-manifest.json');
-  const cataloguePath = path.join(projectRoot, 'recovered-assets', 'FULL-CATALOGUE.json');
+  const cataloguePath = path.join(projectRoot, '.github', 'reports', 'toa-media-library', 'FULL-CATALOGUE.json');
 
   if (!fs.existsSync(manifestPath)) {
     console.error(`ERROR: Extraction manifest not found: ${manifestPath}`);
@@ -212,14 +212,20 @@ async function main() {
       validation.catalogueDimensions = catalogueAsset.dimensions;
 
       if (validation.dimensions) {
-        if (validation.dimensions.width !== catalogueAsset.dimensions.width ||
-            validation.dimensions.height !== catalogueAsset.dimensions.height) {
-          validation.warnings.push(
-            `Dimension mismatch: extracted ${validation.dimensions.width}x${validation.dimensions.height}, ` +
-            `catalogue expects ${catalogueAsset.dimensions.width}x${catalogueAsset.dimensions.height}`
-          );
-          if (validation.status === 'valid') {
-            validation.status = 'warning';
+        // Only compare if both width and height are finite numbers
+        const extractedValid = Number.isFinite(validation.dimensions.width) && Number.isFinite(validation.dimensions.height);
+        const catalogueValid = Number.isFinite(catalogueAsset.dimensions.width) && Number.isFinite(catalogueAsset.dimensions.height);
+
+        if (extractedValid && catalogueValid) {
+          if (validation.dimensions.width !== catalogueAsset.dimensions.width ||
+              validation.dimensions.height !== catalogueAsset.dimensions.height) {
+            validation.warnings.push(
+              `Dimension mismatch: extracted ${validation.dimensions.width}x${validation.dimensions.height}, ` +
+              `catalogue expects ${catalogueAsset.dimensions.width}x${catalogueAsset.dimensions.height}`
+            );
+            if (validation.status === 'valid') {
+              validation.status = 'warning';
+            }
           }
         }
       }

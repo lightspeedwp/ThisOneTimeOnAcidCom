@@ -8,15 +8,15 @@
 
 ## Executive Summary
 
-Phase 1b recovery pilot successfully extracted and validated **X of 12** sampled assets from the Figma Make project, achieving a **XX% recovery rate** and validating the extraction methodology for full Phase 2 recovery.
+Phase 1b recovery pilot will extract and validate **X of 12** sampled assets from the Figma Make project, targeting a **XX% recovery rate** to validate the extraction methodology for full Phase 2 recovery.
 
-**Key Results:**
-- ✓ **Recovered:** X assets successfully exported from Figma
-- ⚠ **Fallback:** X assets using Unsplash references
-- ✗ **Failed:** X assets requiring manual intervention
-- ✓ **Recovery Rate:** XX% (meets ≥80% target)
-- ⏱ **Total Effort:** X hours (Setup + Extraction + Validation + Reporting)
-- 📊 **Phase 2 Estimate:** ~X hours for full 56-asset recovery
+**Key Results (pending population from extraction and validation):**
+- □ **Recovered:** X assets successfully exported from Figma
+- □ **Fallback:** X assets using Unsplash references
+- □ **Failed:** X assets requiring manual intervention
+- □ **Recovery Rate:** XX% (target ≥80%)
+- □ **Total Effort:** X hours (Setup + Extraction + Validation + Reporting)
+- □ **Phase 2 Estimate:** ~X hours for full 56-asset recovery
 
 ---
 
@@ -121,7 +121,7 @@ FIGMA_EXPORT_SCALE=2
 - `scripts/extract-figma-assets.js` (main extraction engine)
 
 **Rate Limiting & Timing:**
-- API Limit: 10 requests/minute (600ms minimum between requests in shared limiter)
+- API Limit: 10 requests/minute (token bucket algorithm enforces limit across 5 concurrent workers)
 - Concurrency: 5 workers processing queue in parallel
 - Per-asset time: Measured (see metrics section)
 - Total extraction time: X hours for 12 assets
@@ -199,11 +199,11 @@ FIGMA_EXPORT_SCALE=2
    - **Resolution:** Use Unsplash reference mapping from PortfolioImage.tsx
    - **Phase 2 Action:** Verify asset presence before extraction; update asset structure if needed
 
-2. **Export Format Limitations**
-   - **Issue:** Figma API exports only PNG; no WEBP/SVG support
-   - **Frequency:** 0% (not encountered in pilot)
-   - **Resolution:** PNG 2x scale (@2.png files); generate WEBP variants in post-processing
-   - **Phase 2 Action:** Add post-processing step for format conversion
+2. **Export Format Optimization**
+   - **Issue:** Pilot uses PNG export; Figma API supports SVG, JPG, PDF as alternatives
+   - **Frequency:** N/A (format chosen by design for pilot)
+   - **Resolution:** PNG 2x scale provides clarity; format optimized in post-processing as needed
+   - **Phase 2 Action:** Evaluate format conversion (WEBP/AVIF) for web delivery optimization
 
 3. **API Rate Limiting**
    - **Issue:** 10 req/min limit enforces max throughput
@@ -219,11 +219,12 @@ FIGMA_EXPORT_SCALE=2
 
 ### Fallback Strategy
 
-**Unsplash Fallback:** For assets not recovered, use existing mappings in `src/app/components/PortfolioImage.tsx`:
-- `toa-asset-38` → `portfolio-gondwana` (Unsplash collection reference)
-- Other fallbacks: use category default
+**Unsplash Fallback:** For assets not recovered, use existing mappings defined in the codebase (e.g., `src/app/components/PortfolioImage.tsx`):
+- Assets not present in Figma Make project fall back to pre-mapped Unsplash collections
+- Example: `toa-asset-38` (Nation of Gondwana) uses its configured Unsplash reference
+- Other fallbacks: use category-appropriate defaults if mapping unavailable
 
-**Validation:** Before Phase 2, verify all Unsplash images still load and are appropriate.
+**Validation:** Before Phase 2, verify all Unsplash images still load and are appropriate; update mappings for deprecated images.
 
 ---
 

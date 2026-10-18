@@ -44,7 +44,7 @@ async function main() {
   // Load manifests
   const manifestPath = path.join(projectRoot, 'recovered-assets', 'extraction-manifest.json');
   const validationPath = path.join(projectRoot, 'recovered-assets', 'validation-report.json');
-  const cataloguePath = path.join(projectRoot, 'recovered-assets', 'FULL-CATALOGUE.json');
+  const cataloguePath = path.join(projectRoot, '.github', 'reports', 'toa-media-library', 'FULL-CATALOGUE.json');
 
   if (!fs.existsSync(manifestPath)) {
     console.error(`ERROR: Extraction manifest not found: ${manifestPath}`);
@@ -96,8 +96,9 @@ async function main() {
         const validationData = validationLookup[asset.catalogueId];
 
         // Map extraction status to catalogue status
+        // Check both extraction AND validation - if validation failed, mark as pending
         let recoveryStatus = 'pending';
-        if (extraction.recoveryStatus === 'recovered') {
+        if (extraction.recoveryStatus === 'recovered' && !(validationData && validationData.status === 'failed')) {
           recoveryStatus = 'recovered';
         } else if (extraction.recoveryStatus === 'fallback') {
           recoveryStatus = 'fallback';

@@ -41,8 +41,24 @@ const env = { ...envVars, ...process.env };
 
 const FIGMA_API_TOKEN = env.FIGMA_API_TOKEN;
 const FIGMA_MAKE_FILE_KEY = env.FIGMA_MAKE_FILE_KEY;
-const RATE_LIMIT = parseInt(env.FIGMA_API_RATE_LIMIT_PER_MINUTE || '10');
-const CONCURRENCY = parseInt(env.FIGMA_CONCURRENT_REQUESTS || '5');
+
+// Strict environment variable validation
+function parsePositiveInteger(str, varName, defaultValue) {
+  const value = str || String(defaultValue);
+  if (!/^[1-9]\d*$/.test(value)) {
+    console.error(`ERROR: ${varName} must be a positive integer, got: ${value}`);
+    process.exit(1);
+  }
+  const parsed = parseInt(value, 10);
+  if (!Number.isSafeInteger(parsed) || parsed < 1) {
+    console.error(`ERROR: ${varName} must be a safe positive integer, got: ${parsed}`);
+    process.exit(1);
+  }
+  return parsed;
+}
+
+const RATE_LIMIT = parsePositiveInteger(env.FIGMA_API_RATE_LIMIT_PER_MINUTE, 'FIGMA_API_RATE_LIMIT_PER_MINUTE', '10');
+const CONCURRENCY = parsePositiveInteger(env.FIGMA_CONCURRENT_REQUESTS, 'FIGMA_CONCURRENT_REQUESTS', '5');
 
 // Validate config
 if (!FIGMA_API_TOKEN || FIGMA_API_TOKEN.includes('your_')) {
@@ -111,11 +127,28 @@ async function fetchAPI(url, headers = {}) {
       timeout: 10000
     };
 
-    https.get(url, options, (res) => {
+    const req = https.get(url, options, (res) => {
       let data = '';
+
+      // Check for successful status code
+      if (res.statusCode < 200 || res.statusCode >= 300) {
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => {
+          reject(new Error(`HTTP ${res.statusCode}: ${data.substring(0, 100)}`));
+        });
+        return;
+      }
+
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, data }));
-    }).on('error', reject);
+      res.on('error', reject);
+    });
+
+    req.on('timeout', () => {
+      req.destroy();
+      reject(new Error('Request timeout (10s)'));
+    });
+    req.on('error', reject);
   });
 }
 
@@ -130,13 +163,41 @@ async function fetchAPI(url, headers = {}) {
 async function downloadFile(url, filepath) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(filepath);
-    https.get(url, (res) => {
+
+    const req = https.get(url, { timeout: 10000 }, (res) => {
+      // Check for successful status code
+      if (res.statusCode < 200 || res.statusCode >= 300) {
+        file.destroy();
+        fs.unlink(filepath, () => {});
+        reject(new Error(`HTTP ${res.statusCode}`));
+        return;
+      }
+
       res.pipe(file);
+
       file.on('finish', () => {
         file.close();
         resolve();
       });
-    }).on('error', (err) => {
+      file.on('error', (err) => {
+        fs.unlink(filepath, () => {});
+        reject(err);
+      });
+      res.on('error', (err) => {
+        file.destroy();
+        fs.unlink(filepath, () => {});
+        reject(err);
+      });
+    });
+
+    req.on('timeout', () => {
+      req.destroy();
+      file.destroy();
+      fs.unlink(filepath, () => {});
+      reject(new Error('Download timeout (10s)'));
+    });
+    req.on('error', (err) => {
+      file.destroy();
       fs.unlink(filepath, () => {});
       reject(err);
     });
