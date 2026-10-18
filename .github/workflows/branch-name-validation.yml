@@ -28,7 +28,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout: |
-            scripts/validation
+            scripts
             lib
 
       - name: Set up Node.js
@@ -64,7 +64,7 @@ jobs:
           # output unparseable, so `errors` was never set and the metrics
           # error breakdown was always zero.
           set +e
-          OUTPUT=$(timeout 30s node scripts/validation/validate-branch-name.js --branch "$BRANCH_NAME" --json 2>validator-stderr.log)
+          OUTPUT=$(timeout 30s node scripts/validate-branch-name.js --branch "$BRANCH_NAME" --json 2>validator-stderr.log)
           EXIT_CODE=$?
           set -e
 
