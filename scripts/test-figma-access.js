@@ -6,7 +6,7 @@
  * Tests Figma API connectivity, authentication, and asset export capabilities
  * for the media library recovery pilot.
  *
- * Usage: node test-figma-access.js
+ * Usage: node scripts/test-figma-access.js
  *
  * Environment variables required:
  * - FIGMA_API_TOKEN: Personal access token from figma.com/developers/api#auth

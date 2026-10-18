@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+**File Organisation and Test Coverage (T011)**
+
+- **Figma API validation script** — Moved `scripts/test-figma-access.js` to proper location under `scripts/` folder for T011 Figma Make project access validation task
+- **Comprehensive Jest test suite** — Created `scripts/__tests__/test-figma-access.test.js` with 15 passing tests covering:
+  - Configuration loading from environment variables with defaults
+  - Results data structure and test result tracking (PASS/FAIL/SKIP status)
+  - Metrics calculation (average response time with zero-division handling)
+  - Extraction time estimation for Figma asset batches (pilot and full batch scenarios)
+  - Critical test validation logic
+  - Pilot assets configuration validation
+- **Theme configuration file** — Moved and organised `default-shadcn-theme.css` to `src/styles/` folder with shadcn/ui theme variables and light/dark mode support
+- **Repository-specific guidance** — Added `CLAUDE.md` with Phase 2 governance details, T011 Figma integration reference, environment variable documentation, and development commands
+- **Environment variable reference** — Documented Figma API configuration (FIGMA_API_TOKEN, FIGMA_MAKE_FILE_KEY, FIGMA_TEAM_ID, FIGMA_EXPORT_FORMAT, FIGMA_EXPORT_SCALE)
+- **Extraction time estimates** — Documented pilot and full batch estimates (10 assets ~7 seconds, 56 assets ~42 seconds, 100 assets ~65 seconds)
+
 #### Repository Boundary Enforcement (TOA-??)
 
 - **Recovery pilot file reorganization** — PHASE1A_CATALOGUE_PROMPT.md and PHASE1B_RECOVERY_PROMPT.md moved from `.github/specs/002-media-library/recovery-pilot/` to `.github/reports/toa-media-library/` to establish recovery pilot as a phase within the existing 002-media-library specification, not as a separate specification structure
