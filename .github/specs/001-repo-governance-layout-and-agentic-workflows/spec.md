@@ -113,8 +113,9 @@ This specification defines a tailored, maintainable governance system for ThisOn
 **R2.2** — Remove pnpm artefacts during implementation  
 - Delete `pnpm-workspace.yaml` (unused)  
 - Remove `pnpm.overrides` from `package.json`  
-- Update `src/app/netlify.toml` to remove `command = "pnpm run build"` reference  
+- **Note on `src/app/netlify.toml`**: This file is NOT read by Netlify (base directory is repo root, so root `netlify.toml` would be read if present; currently none exists). Update `src/app/netlify.toml` to remove `command = "pnpm run build"` for future-proofing and documentation clarity (not for current Netlify build).
 - Update root `README.md` to document npm-only  
+- Verify Netlify UI build command remains `npm run build` (not `netlify.toml` file)  
 
 **R2.3** — Dependency validation  
 - Paired validation: `package.json` ↔ `package-lock.json` only  
@@ -235,10 +236,11 @@ This specification defines a tailored, maintainable governance system for ThisOn
 - `label-drift-check.yml` — Detect label definition changes  
 
 **R6.4** — Workflow quality gates  
-- Deterministic validation: code, spec, config checks run unprivileged  
-- Privileged operations: metadata changes, branch updates run from trusted code only  
-- Preserve contributor-authored content and unrelated labels  
-- No AI-driven classification, model calls, automated branch updates or paid execution implied by workflow alignment  
+- **Deterministic validation** (implementation workflows, unprivileged): code lint, tests, spec syntax, config validation, branch-name format, changelog format, protected-file guard. No model calls; no AI-driven classification.
+- **Agentic workflows** (R7, evaluation/deferred, may be privileged): agent decision-making, feedback collection, budget enforcement. Routed to separate execution contexts; documented per R7.1–R7.4.
+- **Privileged operations**: metadata changes (labels), branch updates, merge operations run from trusted code only (dependency-merge-controller)
+- Preserve contributor-authored content and unrelated labels
+- No undocumented model calls or automated branch updates  
 
 ---
 
@@ -277,8 +279,9 @@ This specification defines a tailored, maintainable governance system for ThisOn
 
 ### R8. Styling & Component Rules (STYLE-001 approved: BEM-only)
 
-**R8.1** — Enforce BEM-only CSS architecture  
-- Remove Tailwind CSS from dependencies  
+**R8.1** — Enforce BEM-only CSS architecture (STYLE-001 approved)
+- **Audit result**: Tailwind CSS v4 currently present in repository (see AGENTS.md note)
+- Remove Tailwind CSS from dependencies (all packages: `tailwindcss`, `@tailwindcss/vite`)
 - Remove `@tailwindcss/vite` from Vite config  
 - Audit existing components for Tailwind utility-class names; migrate to BEM  
 - Update `guidelines/css-architecture.md` to lock BEM as canonical  
@@ -330,7 +333,7 @@ This specification defines a tailored, maintainable governance system for ThisOn
 | TOA-260 | Test config, placement & discovery | TOA-260 | TEST-001, TEST-002 | ✅ Blocked on approval |
 | TOA-261 | Allowlisted direct .github/ configuration | TOA-261 | GH-001, GH-002, GH-003 | ✅ Blocked on approval |
 | TOA-262 | Repository-root configuration | TOA-262 | PKG-001, NODE-001, STYLE-001 | ✅ Blocked on approval |
-| TOA-271 | Agent & skill runtime budget controls | External | (owns budget spec) | Separate epic |
+| TOA-271 | Agent & skill runtime budget controls | External | (owns budget spec, out of scope) | Separate epic (TOA-271 independent) |
 | TOA-272 | Deterministic branch-name validation | TOA-261 | GH-002 | Blocked on approval |
 | TOA-273 | Read-only changelog validation | TOA-262 | NODE-001 | Blocked on approval |
 | TOA-274 | Deterministic labelling & PR-routing | TOA-261 | GH-002 | Blocked on approval |

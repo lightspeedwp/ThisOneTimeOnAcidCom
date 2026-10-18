@@ -103,8 +103,22 @@
   - `npm run build` (production build)
   - `npm ls --depth=0` (dependency validation)
   - Document results in research notes (all should pass)
+- [ ] T017a [WS-271] Create agent inventory document (R7.1)
+  - Create `.claude/agents/INVENTORY.md` with table: name | purpose | inputs | outputs | tools | permissions | workflow relationships | budget constraint
+  - Audit current `.claude/agents/` directory and populate inventory for ~18 agents
+  - Add note: "Budget enforcement (hard limits) specified in TOA-271 (separate epic); this inventory documents requirements only"
+- [ ] T017b [WS-271] Document Anthropic platform applicability assessment (R7.2)
+  - Create `docs/ANTHROPIC_PLATFORMS.md` evaluating seven Anthropic references from spec.md Source Register
+  - For each agent: note which platforms used (MCP servers, tool use, streaming, model selection, etc.)
+  - Decision log: which agents use which capabilities; justify "not applicable" cases
+- [ ] T017c [WS-261] Implement protected-files-guard.yml (Phase 2 prerequisite per Constitution II)
+  - Create `.github/workflows/protected-files-guard.yml` (if not present)
+  - Create `.github/PROTECTED_FILES.txt` canonical list: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`, `src/app/utils/supabase/`, `src/app/components/figma/ImageWithFallback.tsx`
+  - Configure workflow to detect modifications to protected files; add error check: `git diff --name-only origin/develop... | grep -E "^(\.github|scripts|AGENTS|CHANGELOG|guidelines|src/app/utils/supabase|src/app/components/figma/ImageWithFallback)" && exit 1 || exit 0`
+  - Verify workflow runs on PR push and blocks merge if protected files modified
+  - Document when it runs: on every PR push (implementation workflow, not evaluation)
 
-**Checkpoint**: Foundation complete. All testing infrastructure, package management, runtime pinning, and styling constraints are resolved. Workstreams can now begin in parallel.
+**Checkpoint**: Protected file enforcement active. Agent inventory and Anthropic assessment documented. All testing infrastructure, package management, runtime pinning, and styling constraints are resolved. Workstreams can now begin in parallel.
 
 ---
 
