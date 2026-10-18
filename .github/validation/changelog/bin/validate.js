@@ -17,7 +17,7 @@ const report = {
     new_failed: 0
   },
   recommendation: 'Phase 1 stub: changelog validation deferred to Phase 2',
-  gate: 'pass'
+  ci_gate_result: 'pass'
 };
 
 if (outputFormat === 'json') {
