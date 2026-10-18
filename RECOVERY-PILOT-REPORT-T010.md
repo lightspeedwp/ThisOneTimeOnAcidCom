@@ -81,11 +81,11 @@
 - Partial metadata: 3 assets (jungle festival)
 - Framework only: 6 assets (portfolio series)
 
-**Expected Recovery Rate:** 80–90% (all 12 are mapped in codebase and findable in Figma Make)
+**Expected Recovery Rate:** 80–90% (pending T012 verification that all 12 assets are mapped in codebase and findable in Figma Make)
 
 **Selection Artifacts:**
 - `recovered-assets/pilot-selection.json` — Structured selection list with full details
-- All figmaAssetIds validated against FULL-CATALOGUE.json
+- figmaAssetIds expected to match FULL-CATALOGUE.json (T012 will confirm during extraction)
 
 ---
 
