@@ -120,7 +120,7 @@ jobs:
             exit 0
           fi
 
-          npx jest -c jest.config.cjs \
+          npx jest -c jest.config.js \
             scripts/__tests__/enforce-branch-name-hook.test.js \
             scripts/__tests__/session-start-hook.test.js \
             scripts/__tests__/setup-node-install.test.js \
