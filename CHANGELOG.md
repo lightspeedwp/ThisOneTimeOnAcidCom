@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Hybrid governance model architecture** documented: canonical configuration (labels, issue types, PR/issue templates) centralised in lightspeedwp/.github; repo-specific custom workflows preserved in ThisOneTimeOnAcidCom
 - **Drift prevention and template routing workflows** planned to block duplicate governance files while allowing custom workflows
 - **Audit findings documented** identifying all duplicate files for safe removal with zero breaking changes to custom workflows
+- **Phase 2.5 Custom Workflow Validation** (T430–T431):
+  - **Custom workflow audit script** (`.github/scripts/audit-custom-workflows.sh`) validates all 9 custom workflows against governance consolidation model
+  - **Labeling workflow remediation** — Updated `labeling-unified.yml` to fetch canonical labels from lightspeedwp/.github at runtime instead of referencing deleted local file
+  - **Governance compliance verified** — All custom workflows now reference canonical governance sources; audit passes with zero violations
 - **Related specifications:**
   - Spec 001 Phase 2: Repository Governance Layout & Agentic Workflows (ThisOneTimeOnAcidCom)
   - Spec 021: Repository Restructuring & Canonical Governance Config (lightspeedwp/.github)
