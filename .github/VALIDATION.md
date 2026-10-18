@@ -234,7 +234,7 @@ Track validation success using:
 1. **GitHub Actions Dashboard** — View all workflow runs
 2. **PR Comment Timeline** — Each PR gets workflow comments
 3. **Label Application** — Type labels show which workflow ran
-4. **Branch Protection Rules** — Drift detection and template routing are **informational** (not required checks) in the branch protection rules
+4. **Branch Protection Rules** — Drift detection is a **required check** that blocks PRs with duplicate governance files; template routing is **informational** (provides routing suggestion)
 
 ---
 

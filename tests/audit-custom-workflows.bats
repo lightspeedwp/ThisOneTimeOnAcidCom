@@ -85,10 +85,13 @@ EOF
   "$AUDIT_SCRIPT" > /dev/null 2>&1
 
   # Check report mentions test violation
-  grep -q "test-violation.yml" "$AUDIT_REPORT"
+  run grep -q "test-violation.yml" "$AUDIT_REPORT"
 
-  # Clean up
+  # Clean up (must happen regardless of grep result)
   rm -f "$TEST_WORKFLOW"
+
+  # Assert after cleanup to ensure cleanup always runs
+  [ $status -eq 0 ]
 }
 
 @test "audit passes when workflows are clean" {
