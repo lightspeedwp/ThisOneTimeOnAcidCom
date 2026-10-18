@@ -671,5 +671,125 @@ describe('validate-push-branch', () => {
       expect(result.remoteRef).toBe('refs/heads/feat/test');
       expect(result.remoteObj).toBe('abc123');
     });
+
+    test('resolveHeadRef catches error and returns null when git symbolic-ref fails', () => {
+      const mock = jest.spyOn(childProcess, 'execSync')
+        .mockImplementationOnce(() => {
+          throw new Error('fatal: not a git repository');
+        });
+
+      try {
+        const result = resolveHeadRef('HEAD');
+        expect(result).toBeNull();
+      } finally {
+        mock.mockRestore();
+      }
+    });
+
+    test('processPushLines skips HEAD when resolveHeadRef returns null', () => {
+      const mock = jest.spyOn(childProcess, 'execSync')
+        .mockImplementationOnce(() => {
+          throw new Error('detached HEAD');
+        });
+
+      try {
+        const lines = ['HEAD abc123 refs/heads/feat/target def456'];
+        const result = processPushLines(lines);
+
+        // When HEAD resolution fails, it should be skipped
+        expect(result.branches.length).toBe(0);
+        expect(result.hasInvalidBranch).toBe(false);
+      } finally {
+        mock.mockRestore();
+      }
+    });
+
+    test('processPushLines skips non-refs/heads/ refs after HEAD resolution', () => {
+      const mock = jest.spyOn(childProcess, 'execSync')
+        .mockReturnValueOnce('refs/tags/v1.0.0\n');
+
+      try {
+        const lines = ['HEAD abc123 refs/heads/feat/target def456'];
+        const result = processPushLines(lines);
+
+        // When HEAD resolves to a non-branch ref, it should be skipped
+        expect(result.branches.length).toBe(0);
+      } finally {
+        mock.mockRestore();
+      }
+    });
+
+    test('getCurrentBranch returns null when in detached HEAD', () => {
+      const mock = jest.spyOn(childProcess, 'execSync')
+        .mockReturnValueOnce('HEAD\n');
+
+      try {
+        const result = getCurrentBranch();
+        expect(result).toBeNull();
+      } finally {
+        mock.mockRestore();
+      }
+    });
+
+    test('processPushLines handles mixed push with valid and HEAD refs', () => {
+      const execMock = jest.spyOn(childProcess, 'execSync')
+        .mockImplementation((cmd) => {
+          if (cmd.includes('symbolic-ref')) {
+            throw new Error('detached HEAD');
+          }
+          return 'not-reached';
+        });
+
+      try {
+        const lines = [
+          'refs/heads/feat/valid abc123 refs/heads/feat/valid abc123',
+          'HEAD def456 refs/heads/feat/target def456'
+        ];
+        const result = processPushLines(lines);
+
+        // First line should be processed, second should be skipped
+        expect(result.branches).toContain('feat/valid');
+        expect(result.branches.length).toBe(1);
+      } finally {
+        execMock.mockRestore();
+      }
+    });
+
+    test('processPushLines validates HEAD ref when it resolves successfully', () => {
+      const execMock = jest.spyOn(childProcess, 'execSync')
+        .mockReturnValueOnce('refs/heads/claude/bad-branch\n');
+
+      try {
+        const lines = ['HEAD abc123 refs/heads/feat/target def456'];
+        const result = processPushLines(lines);
+
+        // Should resolve HEAD and validate the resulting branch name
+        expect(result.branches).toContain('claude/bad-branch');
+        expect(result.hasInvalidBranch).toBe(true);
+        expect(result.invalidBranches).toContain('claude/bad-branch');
+      } finally {
+        execMock.mockRestore();
+      }
+    });
+
+    test('processPushLines skips lines with all-zero deletion object', () => {
+      const lines = [
+        '0000000000000000000000000000000000000000 0000000000000000000000000000000000000000 refs/heads/feat/delete refs/heads/feat/delete'
+      ];
+      const result = processPushLines(lines);
+
+      // Should skip deletion (all-zero localObj)
+      expect(result.branches.length).toBe(0);
+    });
+
+    test('processPushLines skips tag refs', () => {
+      const lines = [
+        'abc123 abc123 refs/tags/v1.0.0 def456'
+      ];
+      const result = processPushLines(lines);
+
+      // Should skip non-branch refs
+      expect(result.branches.length).toBe(0);
+    });
   });
 });
