@@ -27,10 +27,21 @@ jobs:
       # Check out the router script from the base branch so a contributor
       # cannot modify it to bypass template assignment (security). Templates
       # come from the current commit to support new templates being added.
+      # For bootstrap (first-time addition of scripts), fall back to current commit.
       - name: Checkout router script from base branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.base_ref }}
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts
+        continue-on-error: true
+
+      - name: Fallback checkout from current commit if script missing
+        if: '!hashFiles("scripts/pr-template-router.js")'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout: |
