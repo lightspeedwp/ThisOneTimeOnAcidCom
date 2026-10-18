@@ -166,7 +166,7 @@
           "title": "Recovery Status",
           "description": "Outcome of recovery attempt. From data-model.md § recovery_status enum (FR-005, FR-015).",
           "type": "string",
-          "enum": ["recovered", "partial_recovery", "manual_export_required", "unrecoverable"],
+          "enum": ["not_attempted", "recovered", "partial_recovery", "manual_export_required", "unrecoverable"],
           "examples": ["recovered", "partial_recovery"]
         },
         "recovery_notes": {
@@ -198,6 +198,36 @@
           "type": "string",
           "format": "date-time",
           "examples": ["2026-10-17T16:45:00Z"]
+        }
+      },
+      "if": {
+        "properties": {
+          "print_suitable": { "const": true }
+        },
+        "required": ["print_suitable"]
+      },
+      "then": {
+        "properties": {
+          "format": {
+            "type": "array",
+            "items": {
+              "enum": ["PDF", "TIFF"]
+            }
+          },
+          "dimensions": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": ["width", "height", "unit", "colour_space"],
+                "properties": {
+                  "colour_space": {
+                    "enum": ["RGB", "CMYK"]
+                  }
+                }
+              },
+              { "type": "null" }
+            ]
+          }
         }
       },
       "additionalProperties": false

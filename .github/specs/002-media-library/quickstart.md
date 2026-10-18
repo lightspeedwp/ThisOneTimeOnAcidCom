@@ -343,29 +343,29 @@ ls -lah ./test-batch-provider/
 
 ```bash
 # Test: Can provider store and deliver each required format?
-# Test all required formats: SVG, PNG, JPEG, GIF (web), PDF, TIFF (print)
+# Test all required formats: SVG, PNG (web), PDF, TIFF (print)
 for source in ./test-batch-provider/asset-logo-svg.svg ./test-batch-provider/asset-logo-png.png \
-              ./test-batch-provider/asset-photo-jpg.jpg ./test-batch-provider/asset-icon-gif.gif \
-              ./test-batch-provider/asset-report-pdf.pdf ./test-batch-provider/asset-print-tiff.tiff; do
+              ./test-batch-provider/asset-report-pdf.pdf ./test-batch-provider/asset-print-tiff.tiff \
+              ./test-batch-provider/asset-variant-high-res.tif; do
   if [ -f "$source" ]; then
     format="${source##*.}"
     # For GitHub LFS: track, add, push, verify hash
     hash_before=$(md5sum "$source" | awk '{print $1}')
     # Simulate provider upload/download and verify integrity
-    cp "$source" /tmp/test_"$format"_downloaded."$format"
-    hash_after=$(md5sum /tmp/test_"$format"_downloaded."$format" | awk '{print $1}')
+    cp "$source" /tmp/test_"${format}"_downloaded."$format"
+    hash_after=$(md5sum /tmp/test_"${format}"_downloaded."$format" | awk '{print $1}')
     
     if [ "$hash_before" = "$hash_after" ]; then
       echo "✓ $format: Upload/download successful, file integrity preserved"
     else
       echo "✗ $format: Integrity check failed (hashes differ)"
     fi
-    rm /tmp/test_"$format"_downloaded."$format"
+    rm /tmp/test_"${format}"_downloaded."$format"
   fi
 done
 ```
 
-**Pass Criteria**: ✅ All required formats (web: PNG, JPEG, SVG, GIF; print: PDF, TIFF per Q2) upload and download without corruption
+**Pass Criteria**: ✅ All required formats (web: SVG, PNG; print: PDF, TIFF per Q2) upload and download without corruption
 
 ---
 
@@ -636,6 +636,8 @@ jq -e '.assets[] | select(.asset_id == "asset_figma_hero_001") | (.credits != nu
 
 # Commit updated catalogue to version control
 cp ./pilot-batch-recovered-updated.json ./pilot-batch-recovered.json
+git config user.name "TOA Catalogue Bot" || true
+git config user.email "catalogue@thisonetimeonacid.local" || true
 git add ./pilot-batch-recovered.json
 git commit -m "Resolve metadata dispute: Update credits for asset_figma_hero_001"
 
