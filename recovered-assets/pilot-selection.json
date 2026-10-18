@@ -6,10 +6,11 @@
     "selection_strategy": "Tier-based sampling covering all major portfolio categories and both mapped/unmapped asset types",
     "coverage": {
       "hero_images": 3,
-      "portfolio_categories": 3,
+      "portfolio_categories": 8,
       "tier_1_assets": 6,
       "tier_2_assets": 4,
       "tier_3_assets": 2,
+      "mapped_in_codebase": 12,
       "mapped_percentage": 100,
       "unmapped_percentage": 0
     }

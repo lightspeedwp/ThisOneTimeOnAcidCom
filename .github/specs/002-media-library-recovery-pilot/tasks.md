@@ -399,14 +399,14 @@ T011 (Figma Access) ──→ T012 (Extract) [P - parallelizable per asset]
 ## Success Metrics
 
 **Phase 1b Complete When:**
-- [x] 10–15 assets sampled from all major categories
-- [x] ≥80% recovery rate (at least 8 of 10 successfully extracted)
-- [x] RECOVERY-PILOT-REPORT.md completed with workflow, metrics, recommendations
-- [x] FULL-CATALOGUE.json updated with recovery status for sampled assets
-- [x] Extracted assets validated and functional in test context
-- [x] Reusable extraction & validation scripts documented
-- [x] Phase 2 scaling estimate provided (56 assets, ~4–5 days full recovery)
-- [x] Branch ready for merge to develop
+- [x] 10–15 assets sampled from all major categories (T010 ✅)
+- [ ] ≥80% recovery rate (at least 8 of 10 successfully extracted) — T012–T013 pending
+- [ ] RECOVERY-PILOT-REPORT.md completed with workflow, metrics, recommendations — T015 pending
+- [ ] FULL-CATALOGUE.json updated with recovery status for sampled assets — T014 pending
+- [ ] Extracted assets validated and functional in test context — T013 pending
+- [ ] Reusable extraction & validation scripts documented — T012 deliverable
+- [ ] Phase 2 scaling estimate provided (56 assets, ~4–5 days full recovery) — T015 pending
+- [ ] Branch ready for merge to develop — After T015 completion
 
 ---
 

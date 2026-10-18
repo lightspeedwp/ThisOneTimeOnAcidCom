@@ -240,11 +240,17 @@ async function testAssetNodeFetch() {
     });
 
     if (response.status === 200 && response.body.nodes) {
+      const nodeData = response.body.nodes[nodeId];
+      if (!nodeData) {
+        throw new Error(`Node ${nodeId} not found in response`);
+      }
+
       results.metrics.successfulRequests += 1;
 
       const nodeInfo = {
         nodeId: nodeId.substring(0, 8) + '...',
-        nodeFound: nodeId in response.body.nodes,
+        nodeFound: true,
+        nodeHasData: !!nodeData,
         totalNodes: Object.keys(response.body.nodes).length,
         responseTime: response.responseTime,
       };
@@ -300,14 +306,21 @@ async function testAssetExport() {
     });
 
     if (response.status === 200 && response.body.images) {
+      const imageNodeIds = Object.keys(response.body.images);
+      const firstExportUrl = response.body.images[imageNodeIds[0]];
+
+      if (!firstExportUrl || typeof firstExportUrl !== 'string') {
+        throw new Error('Export URLs are missing or invalid in response');
+      }
+
       results.metrics.successfulRequests += 1;
 
-      const imageUrls = Object.keys(response.body.images);
       const exportInfo = {
         format: CONFIG.exportFormat,
         scale: CONFIG.exportScale,
-        exportedNodeCount: imageUrls.length,
-        sampleUrl: imageUrls[0] ? imageUrls[0].substring(0, 50) + '...' : 'N/A',
+        exportedNodeCount: imageNodeIds.length,
+        sampleUrl: firstExportUrl.substring(0, 50) + '...',
+        urlIsValid: firstExportUrl.startsWith('https://'),
         responseTime: response.responseTime,
       };
 
@@ -317,7 +330,8 @@ async function testAssetExport() {
         details: exportInfo,
       });
       console.log(`  ✓ Export endpoint working: ${CONFIG.exportFormat} format`);
-      console.log(`  ✓ Export URLs received: ${imageUrls.length}`);
+      console.log(`  ✓ Export URLs received: ${imageNodeIds.length}`);
+      console.log(`  ✓ URL format valid: ${firstExportUrl.startsWith('https://')}`);
       console.log(`  ✓ Response time: ${response.responseTime}ms`);
       return true;
     } else {
@@ -484,7 +498,12 @@ async function main() {
     const report = await generateReport();
 
     // Exit with appropriate code
-    const hasFailures = results.tests.some((t) => t.status === 'FAIL');
+    // Treat critical test SKIPs (missing required config) as failures
+    const criticalTests = ['Authentication', 'Make Project Access'];
+    const hasCriticalSkips = results.tests
+      .filter((t) => criticalTests.some((c) => t.name.includes(c)))
+      .some((t) => t.status === 'SKIP');
+    const hasFailures = results.tests.some((t) => t.status === 'FAIL') || hasCriticalSkips;
     process.exit(hasFailures ? 1 : 0);
   } catch (e) {
     console.error('❌ Fatal error:', e.message);
