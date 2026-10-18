@@ -266,12 +266,9 @@ function processAllTestCases(testCases, expectedResults, executeCase = runTest) 
  */
 function outputTestResults(results, categoryResults) {
   for (const { category, passed, total } of categoryResults) {
-    for (let i = 0; i < total; i++) {
-      if (i < passed) {
-        process.stdout.write('✅');
-      } else {
-        process.stdout.write('❌');
-      }
+    const categoryDetail = results.details[category];
+    for (const testCase of (categoryDetail && categoryDetail.cases) || []) {
+      process.stdout.write(testCase.passed ? '✅' : '❌');
     }
     console.log(` ${category} (${passed}/${total})`);
   }
@@ -280,16 +277,20 @@ function outputTestResults(results, categoryResults) {
   console.log(`  Total: ${results.summary.total}`);
   console.log(`  Passed: ${results.summary.passed}`);
   console.log(`  Failed: ${results.summary.failed}`);
-  console.log(`  Success Rate: ${((results.summary.passed / results.summary.total) * 100).toFixed(1)}%\n`);
+  const successRate = results.summary.total === 0
+    ? 0.0
+    : (results.summary.passed / results.summary.total) * 100;
+  console.log(`  Success Rate: ${successRate.toFixed(1)}%\n`);
 }
 
 /**
  * Main test runner: execute all test cases and write results report.
+ * @param {typeof runTest} executeCase - Optional injected executor for testing
  */
-function main() {
+function main(executeCase) {
   console.log('🧪 Running branch validation tests...\n');
 
-  const { results, categoryResults } = processAllTestCases(TEST_CASES, EXPECTED_RESULTS);
+  const { results, categoryResults } = processAllTestCases(TEST_CASES, EXPECTED_RESULTS, executeCase);
 
   outputTestResults(results, categoryResults);
 
