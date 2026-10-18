@@ -74,11 +74,16 @@ const config = typeMap[branchType] || typeMap.task || {
   labels: ['type:task']
 };
 
+// Extract scope from branch name (e.g., "feat/governance-audit" -> "governance-audit")
+const scopeMatch = branchName.match(/^[a-z]+\/(.+)$/);
+const scope = scopeMatch ? scopeMatch[1] : 'unknown';
+
 // Output JSON that GitHub Actions can parse
 const output = {
   template: config.template,
-  labels: config.labels,
-  branch_type: branchType
+  default_labels: config.labels,
+  branch_type: branchType,
+  scope: scope
 };
 
 console.log(JSON.stringify(output));
