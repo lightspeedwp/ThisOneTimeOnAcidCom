@@ -71,6 +71,12 @@ jobs:
           EXIT_CODE=$?
           set -e
 
+          # Verify exit codes: 0 = valid, 1 = invalid, 2 = script error
+          if [ "$EXIT_CODE" -ne 0 ] && [ "$EXIT_CODE" -ne 1 ] && [ "$EXIT_CODE" -ne 2 ]; then
+            echo "::error::Unexpected exit code: $EXIT_CODE"
+            exit 1
+          fi
+
           echo "--- Validation Output ---"
           echo "$OUTPUT"
           if [ -s validator-stderr.log ]; then echo "--- stderr ---"; cat validator-stderr.log; fi

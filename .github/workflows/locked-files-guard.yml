@@ -74,6 +74,16 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
+
+            // Fail closed if git operations fail
+            const execSync = require('child_process').execSync;
+            try {
+              execSync('git status', { stdio: 'pipe' });
+            } catch (error) {
+              core.setFailed(`Git operations failed: ${error.message}`);
+              return;
+            }
+
             const guardPath = path.join(process.env.GITHUB_WORKSPACE, 'scripts/validation/check-locked-file-approval.cjs');
             // This workflow is only ever loaded from the default branch, which
             // carries the guard in the same change, so a missing guard means
