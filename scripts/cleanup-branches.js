@@ -645,6 +645,8 @@ export {
   logTimestamp,
   parseBool,
   toPct,
+  validateEnvironment,
+  main,
   writeMarkdownReport,
   writeJsonReport,
 };
