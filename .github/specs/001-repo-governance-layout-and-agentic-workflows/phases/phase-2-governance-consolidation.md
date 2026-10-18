@@ -1,14 +1,49 @@
+---
+title: "Phase 2: Governance Consolidation"
+description: Consolidate governance configuration, preserve local routing templates and workflows, and prevent drift.
+version: "1.0.0"
+status: Draft
+created: 2026-10-18
+updated: 2026-10-18
+owner: "@ashley"
+---
+
+<!-- markdownlint-disable-next-line MD025 -->
 # Phase 2: Governance Consolidation — Repository Restructuring & Canonical Governance Config
 
-**Related Specification**: Spec 021 (lightspeedwp/.github)
+**Related Specification**:
+[Spec 021](https://github.com/lightspeedwp/.github/blob/develop/specs/021-repo-restructuring-canonical-config/spec.md)
+(lightspeedwp/.github)
 
 **Date Created**: 2026-10-18
 
 **Scope**: Consolidate duplicate governance files from ThisOneTimeOnAcidCom into lightspeedwp/.github as canonical source of truth while preserving repo-specific workflows
 
-**Linked Issues**: TOA-262 (PR/Issue Template Routing), TOA-271 (Validation & Automation)
+**Linked Issues**: [TOA-262](https://linear.app/lightspeedwp/issue/TOA-262)
+(PR/Issue Template Routing),
+[TOA-271](https://linear.app/lightspeedwp/issue/TOA-271) (Validation &
+Automation)
 
 ---
+
+## Overview
+
+Phase 2 consolidates shared labels, issue types, and duplicate templates in
+`lightspeedwp/.github`. ThisOneTimeOnAcidCom keeps its custom workflows and the
+local PR templates required by its existing router. The phase adds drift checks,
+verifies template application to PR bodies, and documents this hybrid model.
+
+## Requirements
+
+- Audit governance files in both repositories before deleting duplicates
+  (T401–T410).
+- Keep shared configuration canonical in `lightspeedwp/.github`; preserve custom
+  workflows and required local routing templates (T411–T422).
+- Block duplicate governance files while allowing documented local exceptions;
+  load branch templates into PR bodies and apply the matching labels
+  (T423–T429).
+- Verify custom workflows, issue routing, and all five quickstart scenarios;
+  record results and update governance documentation (T430–T440).
 
 ## Objectives
 
@@ -32,12 +67,25 @@
 
 **Consumer**: `lightspeedwp/ThisOneTimeOnAcidCom/`
 - `.github/workflows/` (custom workflows — maintained locally)
-- **NO** local copies of labels, templates, issue types
-- References canonical governance via routing + API
+- No duplicate labels or issue types; retain local PR templates required by
+  routing
+- Routing source: `scripts/pr-template-router.js` (local branch mapping),
+  invoked by `.github/workflows/pr-template-routing.yml`
+- Template source: local `.github/PULL_REQUEST_TEMPLATE/{template}.md`; `feat/`
+  → `feat.md`, `fix/` → `fix.md`, `docs/` → `docs.md`
+- Preserve or restore every template selected by the router, including `fix.md`;
+  these are documented exceptions to duplicate-template deletion and drift checks
+- References shared canonical governance via API
 
 ---
 
-## Phase 2 Implementation Tasks
+## Implementation Plan
+
+Complete the 40 tasks below in six subphases: discovery (T401–T403), audit
+(T404–T410), consolidation (T411–T422), drift prevention and routing (T423–T429),
+workflow validation (T430–T434), and final documentation and validation
+(T435–T440). Follow the [phase dependencies](#phase-dependencies) and verify each
+checkpoint before advancing.
 
 ### Phase 2.1: Setup (Discovery & Audit Preparation)
 
@@ -62,7 +110,8 @@
 - [ ] T408 [P] Audit ThisOneTimeOnAcidCom/.github/workflows/: Inventory all custom workflows to identify which are repo-specific and should be preserved (save results to `.github/.tmp/phase2-audit/workflows-inventory.md`)
 - [ ] T409 Consolidate audit findings: Create summary in `.github/.tmp/phase2-audit/AUDIT-SUMMARY.md` documenting:
   - Duplicate governance files to delete (with file counts and total size)
-  - Repo-specific governance items to keep local (if any)
+  - Repo-specific governance items to keep local, including every PR template
+    selected by the router
   - Custom workflows to preserve (count and purpose)
   - Risk assessment for each deletion
 - [ ] T410 Create PR template reference document in `.github/.tmp/phase2-audit/pr-template-routing-reference.md` showing branch type → template mapping for validation
@@ -79,32 +128,39 @@
 
 - [ ] T411 Create validation script at `.github/scripts/verify-single-source.sh` that:
   - Lists all canonical governance files in lightspeedwp/.github
-  - Verifies files do NOT exist as duplicates in ThisOneTimeOnAcidCom
+  - Verifies files do NOT exist as duplicates in ThisOneTimeOnAcidCom, excluding
+    documented local routing templates
   - Reports any drift found
   - Runs in CI/CD pipeline
 - [ ] T412 Create governance file inventory in `.github/docs/GOVERNANCE-INVENTORY.md` documenting:
   - Canonical locations: labels.yml (158 labels), issue-types.yml (24 types), ISSUE_TEMPLATE/ (26 templates), PULL_REQUEST_TEMPLATE/ (19 templates)
   - Source of truth authority: lightspeedwp/.github is canonical, ThisOneTimeOnAcidCom references only
-  - Expected state after Phase 2: zero duplicate governance files in ThisOneTimeOnAcidCom
+  - Expected state after Phase 2: zero duplicate governance files in
+    ThisOneTimeOnAcidCom; document required local routing templates as
+    exceptions
 - [ ] T413 Run initial validation: Execute validation script to establish baseline and confirm current drift (results saved to CI logs and `.github/.tmp/phase2-audit/baseline-validation.txt`)
 - [ ] T414 [P] Delete duplicate labels.yml from ThisOneTimeOnAcidCom: `git rm ThisOneTimeOnAcidCom/.github/labels.yml` with commit message referencing Spec 021
 - [ ] T415 [P] Delete duplicate issue-types.yml from ThisOneTimeOnAcidCom: `git rm ThisOneTimeOnAcidCom/.github/issue-types.yml` with commit message referencing Spec 021
 - [ ] T416 [P] Delete duplicate ISSUE_TEMPLATE/ directory from ThisOneTimeOnAcidCom: `git rm -r ThisOneTimeOnAcidCom/.github/ISSUE_TEMPLATE/` with commit message referencing Spec 021
-- [ ] T417 [P] Delete duplicate PULL_REQUEST_TEMPLATE/ directory from ThisOneTimeOnAcidCom: `git rm -r ThisOneTimeOnAcidCom/.github/PULL_REQUEST_TEMPLATE/` with commit message referencing Spec 021
+- [ ] T417 [P] Delete only duplicate PR templates not selected by
+  `scripts/pr-template-router.js`; preserve required local templates,
+  including `feat.md`, `fix.md`, and `docs.md`, with commit message
+  referencing Spec 021
 - [ ] T418 [P] Delete duplicate branch-labels.yml from ThisOneTimeOnAcidCom (if present): `git rm ThisOneTimeOnAcidCom/.github/branch-labels.yml` with commit message referencing Spec 021
 - [ ] T419 [P] Verify custom workflows survive consolidation: Check that all files in `ThisOneTimeOnAcidCom/.github/workflows/` remain intact after deletions (run `git ls-files ThisOneTimeOnAcidCom/.github/workflows/` and confirm expected workflow files present)
 - [ ] T420 Create consolidation verification checklist in `.github/.tmp/phase2-audit/consolidation-verification.md` confirming:
   - ✅ labels.yml deleted
   - ✅ issue-types.yml deleted
   - ✅ ISSUE_TEMPLATE/ deleted
-  - ✅ PULL_REQUEST_TEMPLATE/ deleted
+  - ✅ Duplicate PR templates deleted; required local routing templates preserved
   - ✅ branch-labels.yml deleted (if existed)
   - ✅ Custom workflows preserved
   - ✅ Git history clean (commits reference Spec 021)
 - [ ] T421 Update ThisOneTimeOnAcidCom documentation to explain hybrid model:
   - Add section: "Governance Configuration Strategy" to README or governance docs
   - Document that labels, issue types, and PR templates are managed in lightspeedwp/.github
-  - Explain that ThisOneTimeOnAcidCom maintains only custom workflows in .github/workflows/
+  - Explain that ThisOneTimeOnAcidCom maintains custom workflows in
+    .github/workflows/ and local templates selected by its router
   - Link to canonical files in .github repo
   - File: `ThisOneTimeOnAcidCom/.github/GOVERNANCE.md` or update existing governance docs
 - [ ] T422 Run consolidation validation: Execute validation script again to confirm all duplicate files removed (results saved to CI logs and `.github/.tmp/phase2-audit/post-consolidation-validation.txt`)
@@ -127,16 +183,26 @@
     - `.github/branch-labels.yml`
     - `.github/ISSUE_TEMPLATE/**`
     - `.github/PULL_REQUEST_TEMPLATE/**`
-  - Allows `.github/workflows/**` (custom workflows permitted)
+  - Allows `.github/workflows/**` and the documented local PR templates selected
+    by `scripts/pr-template-router.js`
   - Sets check status to FAILURE if drift detected
   - Sets check status to SUCCESS if no drift
   - Adds comment with clear guidance message
-- [ ] T424 Create PR template routing GitHub Actions workflow at `ThisOneTimeOnAcidCom/.github/workflows/pr-template-routing.yml`:
+- [ ] T424 Extend the existing PR template routing GitHub Actions workflow at
+  `ThisOneTimeOnAcidCom/.github/workflows/pr-template-routing.yml`:
   - Triggered on: `pull_request: [opened, reopened]`
   - Extracts branch prefix from PR branch name (feat/, fix/, etc.)
-  - Looks up template in `branch-types.yml` from lightspeedwp/.github
-  - Comments on PR with suggested template and applies type label
-  - Suggests pr_feature.md for feat/ branches, pr_bug.md for fix/ branches, etc.
+  - Uses the existing mapping in `scripts/pr-template-router.js`; ensure every
+    selected local `.github/PULL_REQUEST_TEMPLATE/{template}.md` file exists,
+    restoring missing templates before enabling routing
+  - Loads and applies the selected template content to the PR body, preserving
+    contributor content; verifies the resulting body contains the selected
+    template sections
+  - Applies `feat.md` for `feat/`, `fix.md` for `fix/`, and `docs.md` for
+    `docs/`; uses the router mapping for other branch types
+  - Applies the router's type label and comments with routing information after
+    applying the template; a suggested template name alone does not satisfy
+    routing
 - [ ] T425 Test drift detection workflow (negative test — should fail):
   - Create feature branch: `git checkout -b test/drift-detection`
   - Add dummy `ThisOneTimeOnAcidCom/.github/labels.yml` with one label
@@ -154,13 +220,24 @@
   - Delete test PR after verification
   - Document results in `.github/.tmp/phase2-audit/drift-detection-positive-test.md`
 - [ ] T427 Test PR template routing workflow:
-  - Create feature branch: `git checkout -b feat/routing-test`
-  - Make trivial commit and push
-  - Create PR from feat/routing-test to develop
-  - Verify: Template routing workflow runs and adds comment suggesting pr_feature.md
-  - Verify: Applies type:feature label
-  - Verify: For fix/routing-test branch, suggests pr_bug.md and applies type:bug
-  - Test multiple branch types (feat/, fix/, docs/, etc.)
+  - Feature case: Create `feat/routing-test`, make a trivial commit, push, and
+    open its own PR to `develop`
+    - Verify: Workflow loads local `.github/PULL_REQUEST_TEMPLATE/feat.md`,
+      applies its content to the PR body, and the resulting body contains its
+      sections
+    - Verify: Applies `type:feature` and comments with `feat.md` routing
+      information
+  - Fix case: Separately create `fix/routing-test`, make a trivial commit,
+    push, and open its own PR to `develop`
+    - Verify: Workflow loads local `.github/PULL_REQUEST_TEMPLATE/fix.md`,
+      applies its content to the PR body, and the resulting body contains its
+      sections
+    - Verify: Applies `type:bug` and comments with `fix.md` routing information
+  - Test `docs/routing-test` in its own PR: verify local `docs.md` content is
+    applied to the body and `type:documentation` is applied
+  - For each case, confirm existing contributor content survives template
+    application; fill the template sections with PR-specific content and verify
+    the existing body validation passes
   - Delete test PRs after verification
   - Document results in `.github/.tmp/phase2-audit/template-routing-tests.md`
 - [ ] T428 Add validation workflow configuration documentation:
@@ -188,17 +265,20 @@
 - [ ] T430 Audit ThisOneTimeOnAcidCom custom workflows for drift violations:
   - Create validation script at `.github/scripts/audit-custom-workflows.sh`
   - Check for hard-coded label definitions (should use API instead)
-  - Check for template file copies (should reference canonical routing instead)
+  - Check for duplicate template file copies, excluding documented local
+    templates required by the router
   - Grep for violations: `grep -r "labels\.yml\|issue-types\.yml\|PULL_REQUEST_TEMPLATE\|ISSUE_TEMPLATE\|createLabel" ThisOneTimeOnAcidCom/.github/workflows/`
   - Save results to `.github/.tmp/phase2-audit/workflow-audit.txt`
 - [ ] T431 [P] For each custom workflow found in T408 audit, verify it:
   - References canonical labels via GitHub API (if it uses labels)
-  - Does NOT copy or duplicate template files
+  - Uses only documented local routing templates; does NOT introduce other
+    duplicate template files
   - Does NOT define label structures
   - Does NOT override canonical configurations
 - [ ] T432 Create workflow reference validation checklist in `.github/.tmp/phase2-audit/workflow-reference-checklist.md`:
   - For each custom workflow, verify against validation contract
-  - Confirm: No label definitions, API references only, no template copies, custom workflows OK per contract
+  - Confirm: No label definitions, labels referenced via API, only documented
+    local routing templates, custom workflows OK per contract
 - [ ] T433 Update ThisOneTimeOnAcidCom workflow documentation explaining:
   - How custom workflows reference canonical labels via GitHub API
   - Constraints and best practices
@@ -270,7 +350,8 @@
 - **Phase 2.2** (Audit): Depends on Phase 2.1 completion — BLOCKS other phases
 - **Phase 2.3** (Consolidation): Depends on Phase 2.2 completion
 - **Phase 2.4** (Drift Prevention): Depends on Phase 2.3 completion
-- **Phase 2.5** (Workflow Validation): Depends on Phase 2.4 completion
+- **Phase 2.5** (Workflow Validation): Starts after Phase 2.4 completion;
+  preliminary workflow audit may overlap Phase 2.3
 - **Phase 2.6** (Documentation): Depends on all prior phases
 
 ### Parallel Opportunities
@@ -303,8 +384,12 @@
 
 ## Notes
 
-- Related to Spec 021 (lightspeedwp/.github) — this phase implements the Phase 2 tasks
-- Relates to TOA-262 (PR/Issue Template Routing) and TOA-271 (Validation & Automation)
+- Related to
+  [Spec 021](https://github.com/lightspeedwp/.github/blob/develop/specs/021-repo-restructuring-canonical-config/spec.md)
+  (lightspeedwp/.github) — this phase implements the Phase 2 tasks
+- Relates to [TOA-262](https://linear.app/lightspeedwp/issue/TOA-262) (PR/Issue
+  Template Routing) and [TOA-271](https://linear.app/lightspeedwp/issue/TOA-271)
+  (Validation & Automation)
 - All test PRs should be cleaned up after verification
 - Commits should reference Spec 021 for traceability
 - Audit findings stored in `.github/.tmp/phase2-audit/` for reference
