@@ -1,0 +1,98 @@
+name: Drift Detection
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  drift-detection:
+    name: Detect configuration drift
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out PR code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+
+      - name: Check for duplicate governance files
+        id: check
+        run: |
+          DRIFT_DETECTED=0
+          VIOLATION_FILES=()
+
+          # Forbidden files that must not exist
+          FORBIDDEN_FILES=(
+            ".github/labels.yml"
+            ".github/issue-types.yml"
+            ".github/branch-labels.yml"
+          )
+
+          # Forbidden directories that must be empty
+          FORBIDDEN_DIRS=(
+            ".github/ISSUE_TEMPLATE"
+            ".github/PULL_REQUEST_TEMPLATE"
+          )
+
+          echo "Checking for forbidden files..."
+          for file in "${FORBIDDEN_FILES[@]}"; do
+            if [ -f "$file" ]; then
+              echo "❌ Drift detected: $file exists (should be deleted)"
+              VIOLATION_FILES+=("$file")
+              DRIFT_DETECTED=1
+            fi
+          done
+
+          echo "Checking for forbidden directories..."
+          for dir in "${FORBIDDEN_DIRS[@]}"; do
+            if [ -d "$dir" ]; then
+              FILE_COUNT=$(find "$dir" -type f 2>/dev/null | wc -l)
+              if [ "$FILE_COUNT" -gt 0 ]; then
+                echo "❌ Drift detected: $dir/ contains files (should be deleted)"
+                VIOLATION_FILES+=("$dir/")
+                DRIFT_DETECTED=1
+              fi
+            fi
+          done
+
+          # Allow custom workflows in .github/workflows/
+          if [ -d ".github/workflows" ]; then
+            WORKFLOW_COUNT=$(find .github/workflows -name "*.yml" -o -name "*.yaml" 2>/dev/null | wc -l)
+            echo "✅ Custom workflows: $WORKFLOW_COUNT workflow(s) found (allowed)"
+          fi
+
+          if [ $DRIFT_DETECTED -eq 0 ]; then
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "message=✅ No drift detected. Configuration is canonical." >> $GITHUB_OUTPUT
+          else
+            echo "status=fail" >> $GITHUB_OUTPUT
+            FILES_LIST=$(IFS=', '; echo "${VIOLATION_FILES[*]}")
+            echo "message=❌ Configuration drift detected. Remove these files/directories: ${FILES_LIST}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on PR with results
+        if: always()
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const status = '${{ steps.check.outputs.status }}';
+            const message = '${{ steps.check.outputs.message }}';
+
+            const body = status === 'pass'
+              ? `## Drift Detection ✅\n\n${message}\n\nCanonical governance files are correctly centralized in [lightspeedwp/.github](https://github.com/lightspeedwp/.github).`
+              : `## Drift Detection ❌\n\n${message}\n\n**Required action:** Remove duplicate governance files from ThisOneTimeOnAcidCom and reference canonical files from [lightspeedwp/.github](https://github.com/lightspeedwp/.github) instead.\n\nAllowed files:\n- \`.github/workflows/**\` (custom workflows are maintained locally)\n\nForbidden files:\n- \`.github/labels.yml\` (use canonical from .github repo)\n- \`.github/issue-types.yml\` (use canonical from .github repo)\n- \`.github/branch-labels.yml\` (use canonical from .github repo)\n- \`.github/ISSUE_TEMPLATE/**\` (use canonical from .github repo)\n- \`.github/PULL_REQUEST_TEMPLATE/**\` (use canonical from .github repo)`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body,
+            });
+
+      - name: Set check status
+        if: steps.check.outputs.status == 'fail'
+        run: exit 1
