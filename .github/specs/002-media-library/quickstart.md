@@ -349,6 +349,8 @@ provider_round_trip() (
   name="${source##*/}"
   branch="media-library-$(basename "$transfer_dir")"
   git init --quiet "$transfer_dir/upload"
+  git -C "$transfer_dir/upload" config user.name "TOA Catalogue Bot"
+  git -C "$transfer_dir/upload" config user.email "catalogue@thisonetimeonacid.local"
   git -C "$transfer_dir/upload" lfs install --local
   cp "$source" "$transfer_dir/upload/$name"
   git -C "$transfer_dir/upload" lfs track "$name"
@@ -617,8 +619,9 @@ ajv validate -c ajv-formats -s ./new-asset-workflow/asset-schema.json -d ./new-a
 # pilot-batch-recovered.json is the existing catalogue used in Task 6 below.
 catalogue=./pilot-batch-recovered.json
 record=./new-asset-workflow/new-asset-record.json
-updated_catalogue=$(mktemp "${catalogue%.json}.XXXXXX.json")
-trap 'rm -f "$updated_catalogue"' EXIT
+catalogue_tmp_dir=$(mktemp -d "${catalogue%.json}.XXXXXX")
+updated_catalogue="$catalogue_tmp_dir/catalogue.json"
+trap 'rm -rf "$catalogue_tmp_dir"' EXIT
 jq -e --slurpfile record "$record" '
   if (.assets | type) != "array" then error("Catalogue assets must be an array")
   elif any(.assets[]; .asset_id == $record[0].asset_id) then error("Duplicate asset ID")

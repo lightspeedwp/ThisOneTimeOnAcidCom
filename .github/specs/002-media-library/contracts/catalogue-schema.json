@@ -211,22 +211,21 @@
           "format": {
             "type": "array",
             "items": {
-              "enum": ["PDF", "TIFF"]
+              "enum": ["PNG", "PDF", "TIFF"]
             }
           },
           "dimensions": {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": ["width", "height", "unit", "colour_space"],
-                "properties": {
-                  "colour_space": {
-                    "enum": ["RGB", "CMYK"]
-                  }
-                }
+            "type": "object",
+            "required": ["width", "height", "unit", "dpi", "colour_space"],
+            "properties": {
+              "dpi": {
+                "type": "number",
+                "minimum": 300
               },
-              { "type": "null" }
-            ]
+              "colour_space": {
+                "enum": ["RGB", "CMYK"]
+              }
+            }
           }
         }
       },

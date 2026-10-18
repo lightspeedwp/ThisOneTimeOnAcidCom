@@ -51,7 +51,7 @@ Represents a single recoverable media item (image, vector, design file, branded 
 | `provenance` | String | **Required** | Marked "unknown" if source cannot be verified | e.g. "Figma file X, page Y, exported 2026-10-17"; "manual upload by user Z"; "archive scan" | FR-001 |
 | `format` | Enum (Array) | **Required** | PNG, SVG, JPEG, PDF, GIF, WebP, others | Primary and secondary formats (e.g. original SVG + exported PNG) | FR-004, FR-006 |
 | `dimensions` | Object or null | **Required** | `{ width, height, unit }` or null if unknown | Unit: "px" (pixels), "in" (inches for print), "mm" (millimetres) | FR-004 |
-| `print_suitable` | Boolean or null | **Required** | true \| false \| null (unknown) | Assesses print suitability; true means asset meets 300 DPI minimum, RGB/CMYK colour space, and supported format (PDF/TIFF). null if unknown. | FR-004 |
+| `print_suitable` | Boolean or null | **Required** | true \| false \| null (unknown) | Assesses print suitability; true means asset meets 300 DPI minimum, RGB/CMYK colour space, and supported format (PNG/PDF/TIFF). null if unknown. | FR-004 |
 | `print_notes` | String | Optional | Freeform | Resolution, colour space (RGB/CMYK), format constraints, etc. | FR-004 |
 | `usages` | Array<String> | Optional | Freeform contexts | e.g. "website hero", "book chapter 3", "social media thumbnail", "email header" | FR-006 |
 | `alt_text` | String | Optional | Marked "unknown" or "unrecoverable" if not found | Accessibility description; max 125 characters recommended | FR-006 |
@@ -311,7 +311,7 @@ Applies across all entities:
 ### Print Suitability Assessment (FR-004, FR-013)
 
 - **Asset.print_suitable**: Boolean or null (unknown), with optional `print_notes` detailing resolution, colour space, format compatibility.
-- **Asset.format**: Must include only print formats (PDF, TIFF) if print_suitable = true.
+- **Asset.format**: Must include only print formats (PNG, PDF, TIFF) if print_suitable = true.
 - **StorageProvider.print_quality_support**: Provider must be evaluated for print-format support and DPI limits (Q2 resolution: 300 DPI minimum, RGB/CMYK, PDF/TIFF).
 
 ### Recovery Status Transitions
