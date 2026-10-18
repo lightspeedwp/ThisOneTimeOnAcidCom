@@ -20,6 +20,8 @@
     "test:e2e": "playwright test",
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:ui": "playwright test --ui",
+    "test:netlify-headers": "node --test tests/netlify-headers.test.mjs",
+    "check:netlify-headers": "node scripts/check-netlify-headers.mjs",
     "validate:branch-name": "node scripts/validate-branch-name.js",
     "validate:push-branch": "node scripts/validate-push-branch.js",
     "postinstall": "git rev-parse --git-dir >/dev/null 2>&1 || exit 0; lefthook install"

@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import fs from 'fs'
 import path from 'path'
 import react from '@vitejs/plugin-react'
+import { netlifyHashedAssetHeaders } from './scripts/netlify-hashed-asset-headers.mjs'
 
 const MISSING_ASSET_PREFIX = '\0figma-missing-asset:'
 
@@ -57,6 +58,8 @@ export default defineConfig({
     resolveReactExternals(),
     // React plugin is required for Make
     react(),
+    // Emits dist/_headers with immutable caching for content-hashed assets only
+    netlifyHashedAssetHeaders(),
   ],
   build: {
     rollupOptions: {
