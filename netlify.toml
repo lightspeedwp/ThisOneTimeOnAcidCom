@@ -1,14 +1,17 @@
+# NOT READ BY NETLIFY. The site builds from the repository root, so /netlify.toml is
+# the active configuration. This file is kept only as a record of the draft CSP and
+# other settings pending a decision; changes here have no effect on deploys.
+
 [build]
   # Build command
   command = "npm run build"
-
+  
   # Directory with the static files to deploy
   publish = "dist"
 
 # Production environment variables
 [build.environment]
   NODE_VERSION = "24"
-  NPM_VERSION = "10"
 
 # Headers for better security and performance
 [[headers]]
