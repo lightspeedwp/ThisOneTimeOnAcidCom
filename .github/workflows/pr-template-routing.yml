@@ -26,12 +26,12 @@ jobs:
     steps:
       # The router needs only scripts/, the PR templates and the root
       # package files (included by cone-mode sparse checkout), and no git
-      # history.
+      # history. Check out the base branch so a contributor cannot modify the
+      # router script to bypass template assignment (security).
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # The router runs PR-supplied scripts; never leave the token in
-          # .git/config for them. github-script uses its own token input.
+          ref: ${{ github.base_ref }}
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout: |

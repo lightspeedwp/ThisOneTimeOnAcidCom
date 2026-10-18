@@ -22,9 +22,12 @@ jobs:
     steps:
       # The validator only needs its own two files and uses no git history or
       # npm packages, so a sparse, shallow checkout without an install suffices.
+      # Check out the base branch, not the PR commit, so a contributor cannot
+      # modify the validator script itself to bypass validation (security).
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.base_ref }}
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout: |

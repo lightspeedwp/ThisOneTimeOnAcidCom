@@ -20,57 +20,57 @@ const branchType = typeMatch ? typeMatch[1] : 'task';
 // Map branch types to PR templates and default labels
 const typeMap = {
   feat: {
-    template: '.github/PULL_REQUEST_TEMPLATE/feat.md',
+    template: 'feat',
     labels: ['type:feature']
   },
   fix: {
-    template: '.github/PULL_REQUEST_TEMPLATE/fix.md',
+    template: 'fix',
     labels: ['type:bug']
   },
   docs: {
-    template: '.github/PULL_REQUEST_TEMPLATE/docs.md',
+    template: 'docs',
     labels: ['type:documentation']
   },
   doc: {
-    template: '.github/PULL_REQUEST_TEMPLATE/docs.md',
+    template: 'docs',
     labels: ['type:documentation']
   },
   design: {
-    template: '.github/PULL_REQUEST_TEMPLATE/design.md',
+    template: 'design',
     labels: ['type:design']
   },
   test: {
-    template: '.github/PULL_REQUEST_TEMPLATE/test.md',
+    template: 'test',
     labels: ['type:test']
   },
   refactor: {
-    template: '.github/PULL_REQUEST_TEMPLATE/refactor.md',
+    template: 'refactor',
     labels: ['type:refactor']
   },
   perf: {
-    template: '.github/PULL_REQUEST_TEMPLATE/perf.md',
+    template: 'perf',
     labels: ['type:performance']
   },
   security: {
-    template: '.github/PULL_REQUEST_TEMPLATE/security.md',
+    template: 'security',
     labels: ['type:security']
   },
   chore: {
-    template: '.github/PULL_REQUEST_TEMPLATE/chore.md',
+    template: 'chore',
     labels: ['type:chore']
   },
   ci: {
-    template: '.github/PULL_REQUEST_TEMPLATE/ci.md',
+    template: 'ci',
     labels: ['type:ci', 'area:ci']
   },
   hotfix: {
-    template: '.github/PULL_REQUEST_TEMPLATE/fix.md',
+    template: 'fix',
     labels: ['type:hotfix']
   }
 };
 
-const config = typeMap[branchType] || typeMap.task || {
-  template: '.github/PULL_REQUEST_TEMPLATE/default.md',
+const config = typeMap[branchType] || {
+  template: 'default',
   labels: ['type:task']
 };
 
