@@ -30,6 +30,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+**Performance: Netlify Asset Caching & Headers Optimization**
+
+- **Explicit HTML revalidation headers** — Added `Cache-Control: public, max-age=0, must-revalidate` for SPA entry points (`/`, `/index.html`) to ensure updated deployments load correctly
+- **Hashed asset immutable caching** — Verified and maintained 1-year immutable caching for all `/assets/*` files (hashed with content-based filenames)
+- **Cache strategy documentation** — Created `NETLIFY_CACHE_VERIFICATION.md` with:
+  - Before/after header comparison and rationale
+  - Comprehensive verification checklist with testing steps
+  - Integration validation procedures (Typeform, YouTube, Vimeo, Google Fonts)
+  - CSP compatibility assessment (existing configuration verified as compatible)
+  - Performance impact analysis and potential issue mitigations
+- **Baseline security headers preserved** — Maintained all existing headers: X-Frame-Options, X-Content-Type-Options (nosniff), Referrer-Policy, Permissions-Policy, and Content-Security-Policy
+
 **File Organisation and Test Coverage (T011)**
 
 #### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
