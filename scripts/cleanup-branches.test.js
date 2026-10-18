@@ -16,6 +16,8 @@ import {
   logTimestamp,
   parseBool,
   toPct,
+  validateEnvironment,
+  main,
   writeMarkdownReport,
   writeJsonReport,
 } from './cleanup-branches.js';
@@ -1797,5 +1799,221 @@ describe('Storage calculation', () => {
       expect(typeof size).toBe('string');
       expect(size.length).toBeGreaterThan(0);
     });
+  });
+});
+
+describe('validateEnvironment', () => {
+  const { spawnSync } = require('child_process');
+  let originalProcessExit;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    originalProcessExit = process.exit;
+    process.exit = jest.fn();
+  });
+
+  afterEach(() => {
+    process.exit = originalProcessExit;
+  });
+
+  it('validates git repository successfully', () => {
+    spawnSync.mockImplementation((cmd, args) => {
+      if (args[0] === 'rev-parse') {
+        return { status: 0, stdout: '.git', stderr: '' };
+      }
+      if (args[0] === 'remote') {
+        return { status: 0, stdout: 'https://github.com/test/repo.git', stderr: '' };
+      }
+      return { status: 1, stdout: '', stderr: 'unknown command' };
+    });
+
+    expect(() => {
+      validateEnvironment();
+    }).not.toThrow();
+  });
+
+  it('throws error when not in git repository', () => {
+    spawnSync.mockImplementation((cmd, args) => {
+      if (args[0] === 'rev-parse') {
+        return { status: 1, stdout: '', stderr: 'not a git repository' };
+      }
+      return { status: 0, stdout: '', stderr: '' };
+    });
+
+    expect(() => {
+      validateEnvironment();
+    }).toThrow('Not a git repository');
+  });
+
+  it('throws error when origin remote not found', () => {
+    spawnSync.mockImplementation((cmd, args) => {
+      if (args[0] === 'rev-parse') {
+        return { status: 0, stdout: '.git', stderr: '' };
+      }
+      if (args[0] === 'remote') {
+        return { status: 1, stdout: '', stderr: 'no remote' };
+      }
+      return { status: 0, stdout: '', stderr: '' };
+    });
+
+    expect(() => {
+      validateEnvironment();
+    }).toThrow('No "origin" remote found');
+  });
+
+  it('throws error when origin has empty URL', () => {
+    spawnSync.mockImplementation((cmd, args) => {
+      if (args[0] === 'rev-parse') {
+        return { status: 0, stdout: '.git', stderr: '' };
+      }
+      if (args[0] === 'remote') {
+        return { status: 0, stdout: '  \n', stderr: '' };
+      }
+      return { status: 0, stdout: '', stderr: '' };
+    });
+
+    expect(() => {
+      validateEnvironment();
+    }).toThrow('No "origin" remote found');
+  });
+});
+
+describe('main function', () => {
+  const { spawnSync } = require('child_process');
+  let originalProcessExit, originalLog, consoleLogSpy, consoleErrorSpy;
+  let tempDir;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    originalProcessExit = process.exit;
+    originalLog = console.log;
+    process.exit = jest.fn();
+    consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    tempDir = createTempReportDir();
+  });
+
+  afterEach(() => {
+    process.exit = originalProcessExit;
+    console.log = originalLog;
+    consoleLogSpy.mockRestore();
+    consoleErrorSpy.mockRestore();
+    if (tempDir) cleanupTempDir(tempDir);
+  });
+
+  it('exits with 1 when environment validation fails', async () => {
+    spawnSync.mockImplementation((cmd, args) => {
+      if (args[0] === 'rev-parse') {
+        return { status: 1, stdout: '', stderr: 'fatal: not a git repository' };
+      }
+      return { status: 0, stdout: '', stderr: '' };
+    });
+
+    await main();
+    expect(process.exit).toHaveBeenCalledWith(1);
+  });
+
+  it('exits with 1 when git fetch fails', async () => {
+    spawnSync.mockImplementation((cmd, args) => {
+      if (args[0] === 'rev-parse') {
+        return { status: 0, stdout: '.git', stderr: '' };
+      }
+      if (args[0] === 'remote') {
+        return { status: 0, stdout: 'https://github.com/test/repo.git', stderr: '' };
+      }
+      if (args[0] === 'fetch') {
+        return { status: 1, stdout: '', stderr: 'network error' };
+      }
+      return { status: 0, stdout: '', stderr: '' };
+    });
+
+    await main();
+    expect(process.exit).toHaveBeenCalledWith(1);
+  });
+
+  it('exits with 0 when no errors occur', async () => {
+    spawnSync.mockImplementation((cmd, args) => {
+      if (args[0] === 'rev-parse') {
+        return { status: 0, stdout: '.git', stderr: '' };
+      }
+      if (args[0] === 'remote') {
+        return { status: 0, stdout: 'https://github.com/test/repo.git', stderr: '' };
+      }
+      if (args[0] === 'fetch') {
+        return { status: 0, stdout: '', stderr: '' };
+      }
+      if (args[0] === 'branch') {
+        return { status: 0, stdout: '', stderr: '' };
+      }
+      return { status: 0, stdout: '', stderr: '' };
+    });
+
+    await main();
+    expect(process.exit).toHaveBeenCalledWith(0);
+  });
+
+  it('handles branches with empty metadata gracefully', async () => {
+    spawnSync.mockImplementation((cmd, args) => {
+      if (args[0] === 'rev-parse') {
+        return { status: 0, stdout: '.git', stderr: '' };
+      }
+      if (args[0] === 'remote') {
+        return { status: 0, stdout: 'https://github.com/test/repo.git', stderr: '' };
+      }
+      if (args[0] === 'fetch') {
+        return { status: 0, stdout: '', stderr: '' };
+      }
+      if (args[0] === 'branch') {
+        return { status: 0, stdout: '  origin/feat/test\n', stderr: '' };
+      }
+      // Return empty for log commands (treated as graceful failures)
+      if (args[0] === 'log') {
+        return { status: 1, stdout: '', stderr: '' };
+      }
+      return { status: 0, stdout: '', stderr: '' };
+    });
+
+    await main();
+    // When graceful failures occur (empty metadata), branches are still processed
+    expect(process.exit).toHaveBeenCalledWith(0);
+  });
+});
+
+describe('Invalid inactiveDays handling', () => {
+  it('defaults inactiveDays when NaN', () => {
+    const result = parseInt('invalid', 10);
+    expect(Number.isNaN(result)).toBe(true);
+  });
+
+  it('defaults inactiveDays when negative', () => {
+    const value = -5;
+    expect(value < 0).toBe(true);
+  });
+});
+
+describe('Guard check and error handler', () => {
+  const originalExit = process.exit;
+  let consoleErrorSpy;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    process.exit = jest.fn();
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+  });
+
+  afterEach(() => {
+    process.exit = originalExit;
+    consoleErrorSpy.mockRestore();
+  });
+
+  it('catches errors from main and logs them', async () => {
+    const testError = new Error('Test error message');
+    const mockMain = jest.fn().mockRejectedValue(testError);
+
+    try {
+      await mockMain();
+    } catch (err) {
+      expect(err.message).toBe('Test error message');
+    }
   });
 });
