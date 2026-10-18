@@ -1,14 +1,14 @@
 [build]
   # Build command
-  command = "pnpm run build"
-  
+  command = "npm run build"
+
   # Directory with the static files to deploy
   publish = "dist"
 
 # Production environment variables
 [build.environment]
-  NODE_VERSION = "18"
-  NPM_VERSION = "9"
+  NODE_VERSION = "24"
+  NPM_VERSION = "11"
 
 # Headers for better security and performance
 [[headers]]

@@ -94,6 +94,7 @@
     "tsx": "^4.23.15",
     "typescript": "6.0.3",
     "vite": "^6.4.3",
+    "vitest": "^1.6.0",
     "zod": "^4.6.5"
   },
   "peerDependencies": {
@@ -106,11 +107,6 @@
     },
     "react-dom": {
       "optional": true
-    }
-  },
-  "pnpm": {
-    "overrides": {
-      "vite": "6.3.5"
     }
   }
 }
