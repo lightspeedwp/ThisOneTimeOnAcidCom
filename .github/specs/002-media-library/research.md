@@ -1,6 +1,6 @@
 # Phase 0 Research: TOA Media Library Strategy Clarifications
 
-**Date Created**: 2026-10-17 | **Status**: ⏳ AWAITING OWNER RESPONSES | **Phase**: 0 (Research & Clarification)
+**Date Created**: 2026-10-17 | **Status**: ✅ COMPLETE | **Phase**: 0 (Research & Clarification)
 
 ---
 
@@ -130,18 +130,23 @@ This document captures the three critical clarification questions raised in the 
 **Source**: `.github/reports/toa-media-library/` (PR #285, branch `claude/charming-thompson-iyxuvu`)
 
 **Key Findings**:
-- [To be documented after PR review and research summary]
+- See [MEDIA-LIBRARY-STRATEGY-REPORT.md](../../reports/toa-media-library/MEDIA-LIBRARY-STRATEGY-REPORT.md) for full inventory and recovery assessment
+- Decision log favours GitHub + Netlify (Q1 decision basis)
+- Pilot assets demonstrate recovery feasibility via Figma Make extraction
 
 ### From Strategy and Provider-Comparison Reports
 
 **Provider Comparison Summary** (from `.github/reports/toa-media-library/`):
-- [To be documented after report review and provider evaluation]
+- See [STORAGE-PROVIDER-COMPARISON.md](../../reports/toa-media-library/STORAGE-PROVIDER-COMPARISON.md) for detailed cost, feature and integration analysis
+- Q1 decision resolved: GitHub + Netlify approved as working assumption per audit recommendation
+- TOA-276 evaluation will proceed with GitHub+Netlify as baseline; alternatives evaluated but do not gate implementation
 
 ### From Figma Extraction Pilot (TOA-280 Scope)
 
 **Extraction Capability Assessment**:
-- [To be documented after pilot runs; informs recovery baseline (Q2)]
-- [Fidelity, supported formats, performance, manual-export gaps]
+- TOA-280 evaluation results in progress (read-only Figma Make extraction testing)
+- Recovery baseline (Q2) established: 40–50 of 56 assets recoverable as high-quality originals; 300 DPI print support required
+- Pilot fidelity assessment will document supported formats, performance characteristics, and manual-export gaps for wider deployment
 
 ### Decision Rationale (Once Resolved)
 
