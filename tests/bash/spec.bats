@@ -5,7 +5,7 @@
 # Full implementation deferred to Phase 2 infrastructure work
 
 @test "Audit scripts exist and are executable" {
-  [ -x ".specify/scripts/bash/audit-specs.sh" ]
+  [ -x ".specify/scripts/bash/audit-specs.sh" ] &&
   [ -x ".specify/scripts/bash/validate-catalog.sh" ]
 }
 
