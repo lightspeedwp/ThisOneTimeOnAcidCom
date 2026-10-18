@@ -1,0 +1,109 @@
+name: Protected Files Guard
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-protected-files:
+    name: Check Protected Files
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for protected file modifications
+        id: protected_check
+        run: |
+          # Get list of changed files in the PR
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+
+          # Define protected file patterns
+          PROTECTED_PATTERNS=(
+            "CHANGELOG.md"
+            "ATTRIBUTIONS.md"
+            "src/app/components/figma/ImageWithFallback.tsx"
+            "src/app/utils/supabase"
+            ".github/workflows"
+            "tasks/task-list.md"
+          )
+
+          PROTECTED_MODIFIED=()
+
+          # Check each changed file against protected patterns
+          for file in $CHANGED_FILES; do
+            for pattern in "${PROTECTED_PATTERNS[@]}"; do
+              if [[ "$file" =~ ^${pattern} ]]; then
+                PROTECTED_MODIFIED+=("$file")
+                break
+              fi
+            done
+          done
+
+          # Report findings
+          if [ ${#PROTECTED_MODIFIED[@]} -gt 0 ]; then
+            echo "protected_files_found=true" >> $GITHUB_OUTPUT
+            echo "PROTECTED_MODIFIED<<EOF" >> $GITHUB_OUTPUT
+            printf '%s\n' "${PROTECTED_MODIFIED[@]}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "protected_files_found=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on PR if protected files detected
+        if: steps.protected_check.outputs.protected_files_found == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const protectedFiles = `${{ steps.protected_check.outputs.PROTECTED_MODIFIED }}`.split('\n').filter(f => f);
+
+            const comment = `⚠️ **Protected Files Modified**
+
+            This pull request modifies one or more protected files that require explicit owner review and approval.
+
+            **Protected files detected:**
+            ${protectedFiles.map(f => `- ~~${f}~~`).join('\n')}
+
+            **Protected file categories:**
+            - \`CHANGELOG.md\` — Release history (managed by Release Agent)
+            - \`ATTRIBUTIONS.md\` — Project attributions
+            - \`src/app/components/figma/ImageWithFallback.tsx\` — Figma integration component
+            - \`src/app/utils/supabase/\` — Backend integration (protected from changes)
+            - \`.github/workflows/\` — CI/CD workflows (managed centrally)
+            - \`tasks/task-list.md\` — Task tracker (never delete)
+
+            **Required action:**
+            1. Open an issue on the \`lightspeedwp/.github\` repository with \`[PROTECTED-FILE-CHANGE-REQUEST]\` tag
+            2. Describe why these protected files need modification
+            3. Wait for @ashley approval before proceeding
+
+            See [AGENTS.md § Protected and locked files](../../AGENTS.md#protected-and-locked-files) for details.`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Fail check if protected files modified
+        if: steps.protected_check.outputs.protected_files_found == 'true'
+        run: |
+          echo "❌ Protected files were modified. This requires explicit owner approval."
+          echo ""
+          echo "Protected files detected:"
+          echo "${{ steps.protected_check.outputs.PROTECTED_MODIFIED }}"
+          exit 1
+
+      - name: Pass check if no protected files modified
+        if: steps.protected_check.outputs.protected_files_found == 'false'
+        run: |
+          echo "✅ No protected files were modified."
+          echo ""
+          echo "This PR is clear of protected file modifications and may proceed."
