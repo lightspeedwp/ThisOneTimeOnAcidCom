@@ -267,7 +267,7 @@ X-Content-Type-Options: nosniff
 
 **Acceptance Criteria Status:**
 - [x] Apply one-year immutable caching only to verified hashed assets
-- [x] Preserve HTML revalidation and verify updated deployments load correctly
+- [ ] Preserve HTML revalidation and verify updated deployments load correctly
 - [x] Review baseline headers against application requirements before enabling
 - [ ] Validate Typeform, YouTube, Vimeo, fonts and other integrations in preview
 - [x] Defer CSP; record before/after header evidence without claiming unmeasured gains
