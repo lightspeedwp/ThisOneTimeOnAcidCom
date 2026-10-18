@@ -1,0 +1,33 @@
+# labeler.yml - GitHub Labeler configuration for automated issue/PR labeling
+# Used by actions/labeler action in labeling-unified.yml workflow
+# Maps file paths and patterns to labels
+
+# Documentation changes
+type:documentation:
+  - changed-files:
+      - any-glob-to-any-file: ['docs/**/*.md', 'guidelines/**/*.md', '*.md', '.github/**/*.md']
+
+# Build/bundler changes
+type:build:
+  - changed-files:
+      - any-glob-to-any-file: ['vite.config.ts', 'tsconfig.json', 'package*.json']
+
+# CI/GitHub Actions changes
+area:ci:
+  - changed-files:
+      - any-glob-to-any-file: ['.github/workflows/**', '.github/actions/**', 'lefthook.yml']
+
+# Source code changes
+type:feature:
+  - changed-files:
+      - any-glob-to-any-file: ['src/**/*.tsx', 'src/**/*.ts']
+
+# Test changes
+type:test:
+  - changed-files:
+      - any-glob-to-any-file: ['tests/**', '*.test.js', '*.test.ts']
+
+# Script changes
+type:chore:
+  - changed-files:
+      - any-glob-to-any-file: ['scripts/**/*.js', 'scripts/**/*.ts']
