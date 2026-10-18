@@ -320,6 +320,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### CI/Workflow Infrastructure
 
 - **Jest test comparison script** — Created missing `scripts/validation/compare-jest-failures.cjs` that compares test results between PR head and base branch to detect new test failures. Pre-existing failures on develop do not block the PR, only NEW failures introduced by the PR are reported.
+- **Jest failure comparison** — Count increases per test file after normalising paths to each checkout root, so fixes in other files cannot hide new failures.
 
 #### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
 
@@ -366,8 +367,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Static metadata files returning production 404s (#5)
 
 - **Moved static metadata files to Vite public directory** — Relocated `robots.txt`, `sitemap.xml`, and `manifest.json` from `src/app/public/` to the root `public/` directory so Vite includes them in the production build
-- **Verified build output** — Confirmed all three files appear in `dist/` with correct content types (text/plain, application/xml, application/json)
-- **Production access restored** — Static metadata files now serve correctly from production without 404 errors; search engines and PWA manifests can access intended content
+- **Verified build output** — Confirmed all three files appear in `dist/` with the expected file types: plain text, XML, and JSON
+- **Deployment verification pending** — Deployed responses and Netlify headers remain untested; production access and HTTP status codes have not been verified
+- **Manifest asset declarations** — Removed icons and screenshots, including shortcut icons, whose files are absent from the published assets
 - **Service worker excluded** — Left `service-worker.js` in original location pending separate PWA integration decision
 
 #### Style Guide Dark Mode — Atomic Black Backgrounds
