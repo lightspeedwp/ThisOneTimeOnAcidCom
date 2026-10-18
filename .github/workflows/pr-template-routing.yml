@@ -23,7 +23,7 @@ jobs:
           echo "Branch name: $BRANCH_NAME"
 
           # Extract prefix (everything before the first slash)
-          if [[ $BRANCH_NAME =~ ^([a-z]+)/ ]]; then
+          if [[ "$BRANCH_NAME" =~ ^([a-z]+)/ ]]; then
             PREFIX="${BASH_REMATCH[1]}"
             echo "prefix=$PREFIX" >> $GITHUB_OUTPUT
           else
@@ -108,12 +108,21 @@ jobs:
 
             const body = `## PR Template Routing 📋\n\nBranch prefix: **${prefix}**\n\nSuggested template: **${template}**\n\nType: ${description}\n\n---\n\n**Canonical templates** are managed in [lightspeedwp/.github](https://github.com/lightspeedwp/.github):\n- Review the suggested template to ensure your PR description covers the required sections\n- All PR templates route from the central .github repository`;
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body,
-            });
+            try {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body,
+              });
+            } catch (error) {
+              // Skip comment on fork PRs with read-only token
+              if (error.status === 403) {
+                console.log('Skipping comment on fork PR (read-only token)');
+              } else {
+                throw error;
+              }
+            }
 
       - name: Apply type label
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0

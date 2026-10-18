@@ -81,14 +81,12 @@ for workflow in $CUSTOM_WORKFLOWS; do
     # Check for LOCAL governance file references (key patterns)
     # These should NOT exist since files were consolidated into .github repo
 
-    # Pattern 1: Local labels, labeler configuration, or removed templates.
-    # Match each reference separately so a canonical path cannot hide a local
-    # reference elsewhere in the workflow (or even on the same line).
-    if grep -oE '(\.canonical-github/)?\.github/(labels\.yml|labeler\.yml|PULL_REQUEST_TEMPLATE|ISSUE_TEMPLATE)' "$workflow" 2>/dev/null | \
-       grep -qv '^\.canonical-github/'; then
+    # Pattern 1: LABELS_CONFIG pointing to local .github/labels.yml (not canonical)
+    if grep "LABELS_CONFIG:" "$workflow" 2>/dev/null | grep -q "\.github/labels\.yml" && \
+       ! grep "LABELS_CONFIG:" "$workflow" 2>/dev/null | grep -q "canonical-github"; then
         VIOLATIONS_IN_WORKFLOW=$((VIOLATIONS_IN_WORKFLOW + 1))
         VIOLATIONS_FOUND=$((VIOLATIONS_FOUND + 1))
-        VIOLATION_DETAILS+=("  - Local governance file reference (labels, labeler, and templates should reference canonical .github repo)")
+        VIOLATION_DETAILS+=("  - Local LABELS_CONFIG reference (should reference canonical .github repo)")
         echo -n " ⚠️"
     fi
 
@@ -97,6 +95,30 @@ for workflow in $CUSTOM_WORKFLOWS; do
         VIOLATIONS_IN_WORKFLOW=$((VIOLATIONS_IN_WORKFLOW + 1))
         VIOLATIONS_FOUND=$((VIOLATIONS_FOUND + 1))
         VIOLATION_DETAILS+=("  - Template copy command (templates should be canonical in .github)")
+        echo -n " ⚠️"
+    fi
+
+    # Pattern 3: References to local .github/labels.yml without canonical reference
+    if grep "\.github/labels\.yml" "$workflow" 2>/dev/null | grep -q -v "canonical-github\|CANONICAL"; then
+        VIOLATIONS_IN_WORKFLOW=$((VIOLATIONS_IN_WORKFLOW + 1))
+        VIOLATIONS_FOUND=$((VIOLATIONS_FOUND + 1))
+        VIOLATION_DETAILS+=("  - Reference to local labels.yml (should use canonical from .github repo)")
+        echo -n " ⚠️"
+    fi
+
+    # Pattern 4: References to removed .github/labeler.yml
+    if grep -q "\.github/labeler\.yml" "$workflow" 2>/dev/null; then
+        VIOLATIONS_IN_WORKFLOW=$((VIOLATIONS_IN_WORKFLOW + 1))
+        VIOLATIONS_FOUND=$((VIOLATIONS_FOUND + 1))
+        VIOLATION_DETAILS+=("  - Reference to removed labeler.yml (consolidated into canonical .github)")
+        echo -n " ⚠️"
+    fi
+
+    # Pattern 5: References to removed issue or PR templates in local .github
+    if grep -E "\.github/(ISSUE|PULL_REQUEST)_TEMPLATE" "$workflow" 2>/dev/null | grep -q -v "canonical-github"; then
+        VIOLATIONS_IN_WORKFLOW=$((VIOLATIONS_IN_WORKFLOW + 1))
+        VIOLATIONS_FOUND=$((VIOLATIONS_FOUND + 1))
+        VIOLATION_DETAILS+=("  - Reference to local issue/PR templates (should use canonical from .github repo)")
         echo -n " ⚠️"
     fi
 
@@ -142,7 +164,7 @@ EOF
 
         # Show context
         echo "" >> "$AUDIT_REPORT"
-        echo '**Context:** References to `.canonical-github/.github/` are legitimate (fetching canonical files)' >> "$AUDIT_REPORT"
+        echo "**Context:** References to `.canonical-github/.github/` are legitimate (fetching canonical files)" >> "$AUDIT_REPORT"
         echo "" >> "$AUDIT_REPORT"
     fi
 done

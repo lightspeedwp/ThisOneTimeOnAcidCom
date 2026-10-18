@@ -86,12 +86,21 @@ jobs:
               ? `## Drift Detection ✅\n\n${message}\n\nCanonical governance files are correctly centralized in [lightspeedwp/.github](https://github.com/lightspeedwp/.github).`
               : `## Drift Detection ❌\n\n${message}\n\n**Required action:** Remove duplicate governance files from ThisOneTimeOnAcidCom and reference canonical files from [lightspeedwp/.github](https://github.com/lightspeedwp/.github) instead.\n\nAllowed files:\n- \`.github/workflows/**\` (custom workflows are maintained locally)\n\nForbidden files:\n- \`.github/labels.yml\` (use canonical from .github repo)\n- \`.github/issue-types.yml\` (use canonical from .github repo)\n- \`.github/branch-labels.yml\` (use canonical from .github repo)\n- \`.github/ISSUE_TEMPLATE/**\` (use canonical from .github repo)\n- \`.github/PULL_REQUEST_TEMPLATE/**\` (use canonical from .github repo)`;
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body,
-            });
+            try {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body,
+              });
+            } catch (error) {
+              // Skip comment on fork PRs with read-only token
+              if (error.status === 403) {
+                console.log('Skipping comment on fork PR (read-only token)');
+              } else {
+                throw error;
+              }
+            }
 
       - name: Set check status
         if: steps.check.outputs.status == 'fail'
