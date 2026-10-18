@@ -2,6 +2,8 @@
  * Tests for branch validation test runner
  */
 
+import { createResultsStructure, processAllTestCases, outputTestResults, TEST_CASES, EXPECTED_RESULTS, runTest, main } from './run-validator-tests.js';
+
 describe('run-validator-tests', () => {
   describe('test case organization', () => {
     test('defines valid branch categories', () => {
@@ -237,6 +239,374 @@ describe('run-validator-tests', () => {
       const testResults = { failed: 5 };
       const exitCode = testResults.failed > 0 ? 1 : 0;
       expect(exitCode).toBe(1);
+    });
+  });
+
+  describe('createResultsStructure', () => {
+    test('creates initial results object with correct shape', () => {
+      const results = createResultsStructure();
+
+      expect(results).toHaveProperty('timestamp');
+      expect(results).toHaveProperty('summary');
+      expect(results).toHaveProperty('details');
+
+      expect(typeof results.timestamp).toBe('string');
+      expect(results.summary.total).toBe(0);
+      expect(results.summary.passed).toBe(0);
+      expect(results.summary.failed).toBe(0);
+      expect(typeof results.summary.byCategory).toBe('object');
+      expect(typeof results.details).toBe('object');
+    });
+
+    test('timestamp is valid ISO string', () => {
+      const results = createResultsStructure();
+      const timestamp = results.timestamp;
+      expect(timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+    });
+
+    test('creates empty details object', () => {
+      const results = createResultsStructure();
+      expect(Object.keys(results.details).length).toBe(0);
+    });
+  });
+
+  describe('processAllTestCases', () => {
+    let executeCase;
+
+    beforeEach(() => {
+      executeCase = jest.fn((branch, expectedType) => ({
+        branch,
+        passed: true,
+        output: '',
+        exitCode: expectedType === 'invalid' ? 1 : 0
+      }));
+    });
+
+    test('returns results and categoryResults objects', () => {
+      const minimalTestCases = {
+        'Test Category': ['feat/test']
+      };
+      const minimalExpected = {
+        'Test Category': 'valid'
+      };
+
+      const result = processAllTestCases(minimalTestCases, minimalExpected, executeCase);
+      expect(result).toHaveProperty('results');
+      expect(result).toHaveProperty('categoryResults');
+    });
+
+    test('populates summary totals correctly', () => {
+      const minimalTestCases = {
+        'Valid Branches': ['feat/test', 'fix/bug'],
+        'Invalid Branches': ['claude/bad']
+      };
+      const minimalExpected = {
+        'Valid Branches': 'valid',
+        'Invalid Branches': 'invalid'
+      };
+
+      const { results } = processAllTestCases(minimalTestCases, minimalExpected, executeCase);
+      expect(results.summary.total).toBe(3);
+      expect(results.summary.passed).toBe(3);
+      expect(results.summary.failed).toBe(0);
+    });
+
+    test('categorizes test results correctly', () => {
+      const minimalTestCases = {
+        'Valid Test': ['feat/test']
+      };
+      const minimalExpected = {
+        'Valid Test': 'valid'
+      };
+
+      const { results } = processAllTestCases(minimalTestCases, minimalExpected, executeCase);
+      expect(results.details).toHaveProperty('Valid Test');
+      expect(results.details['Valid Test'].cases.length).toBe(1);
+    });
+
+    test('builds byCategory summary', () => {
+      const minimalTestCases = {
+        'Test Category': ['feat/test']
+      };
+      const minimalExpected = {
+        'Test Category': 'valid'
+      };
+
+      const { results } = processAllTestCases(minimalTestCases, minimalExpected, executeCase);
+      expect(results.summary.byCategory).toHaveProperty('Test Category');
+      expect(results.summary.byCategory['Test Category']).toHaveProperty('total');
+      expect(results.summary.byCategory['Test Category']).toHaveProperty('passed');
+      expect(results.summary.byCategory['Test Category']).toHaveProperty('failed');
+    });
+
+    test('returns categoryResults array', () => {
+      const { categoryResults } = processAllTestCases(TEST_CASES, EXPECTED_RESULTS, executeCase);
+      expect(Array.isArray(categoryResults)).toBe(true);
+      expect(categoryResults.length).toBeGreaterThan(0);
+
+      categoryResults.forEach(cat => {
+        expect(cat).toHaveProperty('category');
+        expect(cat).toHaveProperty('passed');
+        expect(cat).toHaveProperty('total');
+      });
+    });
+
+    test('passes cases to the executor and aggregates failed results', () => {
+      executeCase.mockReturnValueOnce({ passed: false, exitCode: 1 });
+      const { results, categoryResults } = processAllTestCases({
+        'Valid Test': ['feat/test'],
+        'Invalid Test': ['claude/bad']
+      }, {
+        'Valid Test': 'valid',
+        'Invalid Test': 'invalid'
+      }, executeCase);
+
+      expect(executeCase).toHaveBeenCalledTimes(2);
+      expect(executeCase).toHaveBeenNthCalledWith(1, 'feat/test', 'valid');
+      expect(executeCase).toHaveBeenNthCalledWith(2, 'claude/bad', 'invalid');
+      expect(results.summary).toEqual({
+        total: 2,
+        passed: 1,
+        failed: 1,
+        byCategory: {
+          'Valid Test': { total: 1, passed: 0, failed: 1 },
+          'Invalid Test': { total: 1, passed: 1, failed: 0 }
+        }
+      });
+      expect(results.details['Valid Test'].cases).toEqual([
+        { branch: 'feat/test', passed: false, exitCode: 1 }
+      ]);
+      expect(categoryResults).toEqual([
+        { category: 'Valid Test', passed: 0, total: 1 },
+        { category: 'Invalid Test', passed: 1, total: 1 }
+      ]);
+    });
+  });
+
+  describe('outputTestResults', () => {
+    test('does not throw when given valid results', () => {
+      const results = {
+        summary: { total: 10, passed: 8, failed: 2 },
+        details: {}
+      };
+      const categoryResults = [
+        { category: 'Test', passed: 8, total: 10 }
+      ];
+
+      expect(() => {
+        outputTestResults(results, categoryResults);
+      }).not.toThrow();
+    });
+
+    test('handles empty categoryResults', () => {
+      const results = {
+        summary: { total: 0, passed: 0, failed: 0 },
+        details: {}
+      };
+      const categoryResults = [];
+
+      expect(() => {
+        outputTestResults(results, categoryResults);
+      }).not.toThrow();
+    });
+
+    test('formats success rate correctly', () => {
+      const results = {
+        summary: { total: 100, passed: 75, failed: 25 },
+        details: {}
+      };
+      const categoryResults = [];
+
+      // Capture console.log calls
+      const logs = [];
+      const originalLog = console.log;
+      console.log = jest.fn((...args) => {
+        logs.push(args.join(' '));
+      });
+
+      outputTestResults(results, categoryResults);
+
+      const summary = logs.find(log => log.includes('Success Rate'));
+      expect(summary).toContain('75.0%');
+
+      console.log = originalLog;
+    });
+  });
+
+  describe('TEST_CASES and EXPECTED_RESULTS', () => {
+    test('TEST_CASES is organized by category', () => {
+      expect(typeof TEST_CASES).toBe('object');
+      expect(Object.keys(TEST_CASES).length).toBeGreaterThan(0);
+    });
+
+    test('EXPECTED_RESULTS has entry for each TEST_CASES category', () => {
+      for (const category of Object.keys(TEST_CASES)) {
+        expect(EXPECTED_RESULTS).toHaveProperty(category);
+        expect(['valid', 'invalid', 'exemption']).toContain(EXPECTED_RESULTS[category]);
+      }
+    });
+
+    test('each category in TEST_CASES has branch array', () => {
+      for (const [category, branches] of Object.entries(TEST_CASES)) {
+        expect(Array.isArray(branches)).toBe(true);
+        expect(branches.length).toBeGreaterThan(0);
+        branches.forEach(branch => {
+          expect(typeof branch).toBe('string');
+        });
+      }
+    });
+  });
+
+  describe('branch coverage - error handling', () => {
+    test('runTest handles error with both stderr and message', () => {
+      const result = runTest('feat/test', 'invalid');
+      expect(result).toHaveProperty('passed');
+      expect(result).toHaveProperty('output');
+      expect(result).toHaveProperty('exitCode');
+    });
+
+    test('processAllTestCases uses default executeCase when not provided', () => {
+      const testCases = { 'Test': ['feat/valid'] };
+      const expectedResults = { 'Test': 'valid' };
+      const { results } = processAllTestCases(testCases, expectedResults);
+      expect(results.summary.total).toBe(1);
+      expect(results.summary).toHaveProperty('passed');
+    });
+
+    test('processAllTestCases handles category with no failures', () => {
+      const executeCase = jest.fn(() => ({ passed: true, exitCode: 0 }));
+      const testCases = { 'AllPass': ['feat/a', 'fix/b'] };
+      const expectedResults = { 'AllPass': 'valid' };
+      const { results } = processAllTestCases(testCases, expectedResults, executeCase);
+      expect(results.details['AllPass'].failed).toBe(0);
+      expect(results.details['AllPass'].passed).toBe(2);
+    });
+
+    test('processAllTestCases aggregates multiple failed cases', () => {
+      const executeCase = jest.fn()
+        .mockReturnValueOnce({ passed: false, exitCode: 1 })
+        .mockReturnValueOnce({ passed: false, exitCode: 1 })
+        .mockReturnValueOnce({ passed: true, exitCode: 0 });
+      const testCases = { 'Mixed': ['a', 'b', 'c'] };
+      const expectedResults = { 'Mixed': 'valid' };
+      const { results } = processAllTestCases(testCases, expectedResults, executeCase);
+      expect(results.summary.failed).toBe(2);
+      expect(results.details['Mixed'].failed).toBe(2);
+    });
+
+    test('runTest with exemption type returns correct pass status', () => {
+      const result = runTest('release/v1.0.0', 'exemption');
+      expect(result).toHaveProperty('passed');
+      expect(typeof result.passed).toBe('boolean');
+    });
+
+    test('processAllTestCases handles test with error status not equal to 1', () => {
+      const executeCase = jest.fn()
+        .mockReturnValueOnce({ passed: false, exitCode: 2 })
+        .mockReturnValueOnce({ passed: true, exitCode: 0 });
+      const testCases = { 'WithError': ['feat/test', 'feat/other'] };
+      const expectedResults = { 'WithError': 'invalid' };
+      const { results } = processAllTestCases(testCases, expectedResults, executeCase);
+      expect(results.details['WithError'].failed).toBe(1);
+    });
+
+    test('outputTestResults handles large number of failed tests in a category', () => {
+      const results = { summary: { total: 20, passed: 5, failed: 15 }, details: { 'Large': { cases: Array(5).fill({ passed: true }).concat(Array(15).fill({ passed: false })) } } };
+      const categoryResults = [{ category: 'Large', passed: 5, total: 20 }];
+
+      const logs = [];
+      const originalWrite = process.stdout.write;
+      const originalLog = console.log;
+
+      try {
+        process.stdout.write = jest.fn((...args) => {
+          logs.push(args[0]);
+        });
+
+        console.log = jest.fn();
+
+        outputTestResults(results, categoryResults);
+
+        const emojiOutput = logs.join('');
+        const checkmarks = (emojiOutput.match(/✅/g) || []).length;
+        const crosses = (emojiOutput.match(/❌/g) || []).length;
+        expect(checkmarks).toBe(5);
+        expect(crosses).toBe(15);
+      } finally {
+        process.stdout.write = originalWrite;
+        console.log = originalLog;
+      }
+    });
+  });
+
+  describe('main() function', () => {
+    let originalExit;
+    let originalLog;
+    let consoleLogs;
+    let fsWriteFileSyncSpy;
+    let executeCase;
+
+    beforeEach(() => {
+      originalExit = process.exit;
+      originalLog = console.log;
+      consoleLogs = [];
+
+      process.exit = jest.fn();
+      console.log = jest.fn((...args) => consoleLogs.push(args.join(' ')));
+      fsWriteFileSyncSpy = jest.spyOn(require('fs'), 'writeFileSync').mockImplementation(() => {});
+
+      // Mock executor returns all tests as passed to avoid subprocess launches
+      executeCase = jest.fn(branch => ({
+        passed: true,
+        output: '',
+        exitCode: 0,
+        branch
+      }));
+    });
+
+    afterEach(() => {
+      process.exit = originalExit;
+      console.log = originalLog;
+      fsWriteFileSyncSpy.mockRestore();
+    });
+
+    test('main() is callable and calls process.exit', () => {
+      main(executeCase);
+      expect(process.exit).toHaveBeenCalled();
+    });
+
+    test('main() logs test runner header message', () => {
+      main(executeCase);
+      expect(consoleLogs.some(log => log.includes('Running branch validation tests'))).toBe(true);
+    });
+
+    test('main() exits with 0 when all tests pass', () => {
+      main(executeCase);
+      const exitCode = process.exit.mock.calls[0][0];
+      expect(exitCode).toBe(0);
+    });
+
+    test('main() processes all test cases and writes report', () => {
+      main(executeCase);
+      expect(fsWriteFileSyncSpy).toHaveBeenCalled();
+    });
+
+    test('main() logs report information', () => {
+      main(executeCase);
+      // Verify that main completes and logs output
+      expect(consoleLogs.length).toBeGreaterThan(0);
+      expect(process.exit).toHaveBeenCalled();
+    });
+
+    test('main() report path is written with validation-report.json', () => {
+      main(executeCase);
+      const writeCallArgs = fsWriteFileSyncSpy.mock.calls[0];
+      expect(writeCallArgs[0]).toContain('validation-report.json');
+    });
+
+    test('main() handles test results and exits appropriately', () => {
+      main(executeCase);
+      expect(process.exit).toHaveBeenCalledWith(expect.any(Number));
     });
   });
 });

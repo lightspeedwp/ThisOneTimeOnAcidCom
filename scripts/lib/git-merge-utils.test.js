@@ -1,172 +1,377 @@
 /**
- * git-merge-utils.test.js — Comprehensive test suite for Git merge utilities.
+ * Jest test suite for git merge utilities.
+ * Tests git merge status, commit counting, and branch metadata functions.
  */
 
-import { describe, it, expect } from '@jest/globals';
-import * as gitUtils from './git-merge-utils.js';
+import { execFileSync, spawnSync } from 'child_process';
+import {
+  getBaseRef,
+  getMergeStatus,
+  getUniqueCommitCount,
+  getLastCommitDate,
+  getLastCommitAuthor,
+  getLastCommitHash
+} from './git-merge-utils.js';
 
-describe('git-merge-utils', () => {
-  describe('getLastCommitDate()', () => {
-    it('should return ISO 8601 commit date', () => {
-      // This test doesn't require mocking child_process
-      // It tests the function returns a string or empty string
-      const result = gitUtils.getLastCommitDate('nonexistent-branch-12345');
-      expect(typeof result).toBe('string');
-    });
+jest.mock('child_process');
 
-    it('should return empty string for invalid branches', () => {
-      const result = gitUtils.getLastCommitDate('invalid/branch/name/that/does/not/exist');
-      expect(result).toBe('');
-    });
-  });
-
-  describe('getLastCommitAuthor()', () => {
-    it('should return author email or empty string', () => {
-      const result = gitUtils.getLastCommitAuthor('nonexistent-branch-12345');
-      expect(typeof result).toBe('string');
-    });
-
-    it('should return empty string for invalid branches', () => {
-      const result = gitUtils.getLastCommitAuthor('invalid/branch/name/that/does/not/exist');
-      expect(result).toBe('');
-    });
-  });
-
-  describe('getLastCommitHash()', () => {
-    it('should return commit hash or empty string', () => {
-      const result = gitUtils.getLastCommitHash('nonexistent-branch-12345');
-      expect(typeof result).toBe('string');
-    });
-
-    it('should return empty string for invalid branches', () => {
-      const result = gitUtils.getLastCommitHash('invalid/branch/name/that/does/not/exist');
-      expect(result).toBe('');
-    });
-  });
-
-  describe('getUniqueCommitCount()', () => {
-    it('should return a number', () => {
-      const result = gitUtils.getUniqueCommitCount('nonexistent-branch-12345');
-      expect(typeof result).toBe('number');
-    });
-
-    it('should return 0 for non-existent branches', () => {
-      const result = gitUtils.getUniqueCommitCount('invalid/branch/name/that/does/not/exist');
-      expect(result).toBe(0);
-    });
-  });
-
-  describe('getBaseRef()', () => {
-    it('should return a string starting with origin/', () => {
-      const result = gitUtils.getBaseRef();
-      expect(typeof result).toBe('string');
-      expect(result.startsWith('origin/')).toBe(true);
-    });
-  });
-
-  describe('getMergeStatus()', () => {
-    it('should return a valid status', () => {
-      const result = gitUtils.getMergeStatus('nonexistent-branch-12345', 'origin/main');
-      expect(['merged', 'unmerged', 'unknown']).toContain(result);
-    });
-
-    it('should return unknown for invalid parameters', () => {
-      const result = gitUtils.getMergeStatus('', '');
-      expect(result).toBe('unknown');
-    });
-
-    it('should accept custom baseRef', () => {
-      const result = gitUtils.getMergeStatus('test-branch', 'origin/develop');
-      expect(['merged', 'unmerged', 'unknown']).toContain(result);
-    });
-
-    it('should handle various merge statuses from git', () => {
-      // Test multiple calls - one should be merged, one unmerged, one unknown
-      // We test by calling with different branch names (actual git behavior varies)
-      const results = [
-        gitUtils.getMergeStatus('main', 'origin/main'),  // likely merged (main vs main)
-        gitUtils.getMergeStatus('nonexistent-xyz-999', 'origin/main'),  // likely unknown
-        gitUtils.getMergeStatus('old-branch', 'origin/main')  // varies
-      ];
-
-      // All results should be valid
-      results.forEach(result => {
-        expect(['merged', 'unmerged', 'unknown']).toContain(result);
-      });
-    });
-
-    it('should return unknown when git fails unexpectedly', () => {
-      const result = gitUtils.getMergeStatus('', 'origin/invalid-base');
-      expect(result).toBe('unknown');
-    });
+describe('Git Merge Utilities', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    execFileSync.mockReset();
+    spawnSync.mockReset();
   });
 
   describe('getBaseRef', () => {
-    it('should return a valid base ref string starting with origin/', () => {
-      const baseRef = gitUtils.getBaseRef();
-      expect(typeof baseRef).toBe('string');
-      expect(baseRef.startsWith('origin/')).toBe(true);
+    test('should return develop when it exists', () => {
+      execFileSync.mockReturnValue('abc123');
+      const baseRef = getBaseRef();
+      expect(baseRef).toBe('origin/develop');
+      expect(execFileSync).toHaveBeenCalledWith(
+        'git',
+        ['rev-parse', '--verify', 'origin/develop'],
+        expect.objectContaining({ encoding: 'utf8' })
+      );
     });
 
-    it('should prefer existing branches over defaults', () => {
-      const baseRef = gitUtils.getBaseRef();
-      // Should be one of the known refs (develop, main, or master)
-      expect(['origin/develop', 'origin/main', 'origin/master']).toContain(baseRef);
+    test('should fallback to main when develop does not exist', () => {
+      // First call (develop) fails
+      execFileSync.mockImplementationOnce(() => {
+        throw new Error('Not found');
+      });
+      // Second call (main) succeeds
+      execFileSync.mockReturnValueOnce('def456\n');
+
+      const baseRef = getBaseRef();
+      expect(baseRef).toBe('origin/main');
+      expect(execFileSync).toHaveBeenCalledTimes(2);
+    });
+
+    test('should fallback to master when main does not exist', () => {
+      // Develop and main fail, master succeeds
+      execFileSync
+        .mockImplementationOnce(() => { throw new Error('Not found'); })
+        .mockImplementationOnce(() => { throw new Error('Not found'); })
+        .mockReturnValueOnce('ghi789\n');
+
+      const baseRef = getBaseRef();
+      expect(baseRef).toBe('origin/master');
+      expect(execFileSync).toHaveBeenCalledTimes(3);
+    });
+
+    test('should return origin/main when no candidates exist', () => {
+      execFileSync.mockImplementation(() => {
+        throw new Error('Not found');
+      });
+
+      const baseRef = getBaseRef();
+      expect(baseRef).toBe('origin/main');
+    });
+
+    test('should trim whitespace from git output', () => {
+      execFileSync
+        .mockReturnValueOnce('   \n')
+        .mockReturnValueOnce('abc123');
+      const baseRef = getBaseRef();
+      expect(baseRef).toBe('origin/main');
+    });
+  });
+
+  describe('getMergeStatus', () => {
+    test('should return merged when branch is ancestor of base', () => {
+      spawnSync.mockReturnValue({ status: 0, stdout: '', stderr: '' });
+
+      const status = getMergeStatus('feature-branch');
+      expect(status).toBe('merged');
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git',
+        ['merge-base', '--is-ancestor', 'origin/feature-branch', expect.any(String)],
+        expect.objectContaining({ encoding: 'utf8' })
+      );
+    });
+
+    test('should return unmerged when branch is not ancestor of base', () => {
+      spawnSync.mockReturnValue({ status: 1, stdout: '', stderr: '' });
+
+      const status = getMergeStatus('feature-branch');
+      expect(status).toBe('unmerged');
+    });
+
+    test('should return unknown when git returns non-0/1 exit code', () => {
+      spawnSync.mockReturnValue({ status: 128, stdout: '', stderr: 'fatal error' });
+
+      const status = getMergeStatus('feature-branch');
+      expect(status).toBe('unknown');
+    });
+
+    test('should return unknown when git throws error', () => {
+      spawnSync.mockImplementation(() => {
+        throw new Error('Git error');
+      });
+
+      const status = getMergeStatus('feature-branch');
+      expect(status).toBe('unknown');
+    });
+
+    test('should use provided baseRef instead of getBaseRef', () => {
+      spawnSync.mockReturnValue({ status: 0 });
+
+      getMergeStatus('feature-branch', 'origin/custom-base');
+
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git',
+        ['merge-base', '--is-ancestor', 'origin/feature-branch', 'origin/custom-base'],
+        expect.any(Object)
+      );
+    });
+
+    test('should use getBaseRef when baseRef is null', () => {
+      execFileSync.mockReturnValue('abc123');
+      spawnSync.mockReturnValue({ status: 0 });
+
+      getMergeStatus('feature-branch', null);
+
+      expect(execFileSync).toHaveBeenCalled();
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git',
+        ['merge-base', '--is-ancestor', 'origin/feature-branch', 'origin/develop'],
+        expect.any(Object)
+      );
     });
   });
 
   describe('getUniqueCommitCount', () => {
-    it('should return 0 for non-existent branches', () => {
-      const count = gitUtils.getUniqueCommitCount('nonexistent-branch-xyz', 'origin/main');
-      expect(typeof count).toBe('number');
-      expect(count).toBeGreaterThanOrEqual(0);
+    test('should return commit count when valid number', () => {
+      execFileSync.mockReturnValue('5\n');
+
+      const count = getUniqueCommitCount('feature-branch');
+      expect(count).toBe(5);
+      expect(execFileSync).toHaveBeenCalledWith(
+        'git',
+        ['rev-list', '--count', expect.stringContaining('..origin/feature-branch')],
+        expect.any(Object)
+      );
     });
 
-    it('should handle empty string branch name gracefully', () => {
-      const count = gitUtils.getUniqueCommitCount('', 'origin/main');
-      expect(typeof count).toBe('number');
-      expect(count).toBeGreaterThanOrEqual(0);
+    test('should return 0 for empty commit count', () => {
+      execFileSync.mockReturnValue('0\n');
+
+      const count = getUniqueCommitCount('feature-branch');
+      expect(count).toBe(0);
     });
 
-    it('should handle different baseRef values', () => {
-      const count1 = gitUtils.getUniqueCommitCount('test-branch', 'origin/develop');
-      const count2 = gitUtils.getUniqueCommitCount('test-branch', 'origin/master');
-      expect(typeof count1).toBe('number');
-      expect(typeof count2).toBe('number');
+    test('should return 0 when output is not parseable', () => {
+      execFileSync.mockReturnValue('invalid\n');
+
+      const count = getUniqueCommitCount('feature-branch');
+      expect(count).toBe(0);
+    });
+
+    test('should return 0 when git fails', () => {
+      execFileSync.mockImplementation(() => {
+        throw new Error('Git error');
+      });
+
+      const count = getUniqueCommitCount('feature-branch');
+      expect(count).toBe(0);
+    });
+
+    test('should return 0 when output is empty string', () => {
+      execFileSync.mockReturnValue('');
+
+      const count = getUniqueCommitCount('feature-branch');
+      expect(count).toBe(0);
+    });
+
+    test('should use provided baseRef', () => {
+      execFileSync.mockReturnValue('3\n');
+
+      getUniqueCommitCount('feature-branch', 'origin/custom-base');
+
+      expect(execFileSync).toHaveBeenCalledWith(
+        'git',
+        ['rev-list', '--count', 'origin/custom-base..origin/feature-branch'],
+        expect.any(Object)
+      );
     });
   });
 
-  describe('getLastCommitDate edge cases', () => {
-    it('should handle multiple branches', () => {
-      const date1 = gitUtils.getLastCommitDate('main');
-      const date2 = gitUtils.getLastCommitDate('develop');
-      const date3 = gitUtils.getLastCommitDate('invalid-xyz');
-      expect(typeof date1).toBe('string');
-      expect(typeof date2).toBe('string');
-      expect(typeof date3).toBe('string');
+  describe('getLastCommitDate', () => {
+    test('should return ISO 8601 date for branch', () => {
+      execFileSync.mockReturnValue('2026-10-17T14:30:00+00:00\n');
+
+      const date = getLastCommitDate('feature-branch');
+      expect(date).toBe('2026-10-17T14:30:00+00:00');
+      expect(execFileSync).toHaveBeenCalledWith(
+        'git',
+        ['log', '-1', '--format=%cI', 'origin/feature-branch'],
+        expect.any(Object)
+      );
     });
 
-    it('should return consistent format when date exists', () => {
-      const date = gitUtils.getLastCommitDate('main');
-      expect(typeof date).toBe('string');
-      if (date.length > 0) {
-        expect(/^\d{4}-\d{2}-\d{2}/.test(date)).toBe(true);
-      }
-    });
-  });
+    test('should return empty string when git fails', () => {
+      execFileSync.mockImplementation(() => {
+        throw new Error('Git error');
+      });
 
-  describe('getMergeStatus variations', () => {
-    it('should handle different baseRef options', () => {
-      const result1 = gitUtils.getMergeStatus('feature-a', 'origin/develop');
-      const result2 = gitUtils.getMergeStatus('feature-a', 'origin/master');
-      expect(['merged', 'unmerged', 'unknown']).toContain(result1);
-      expect(['merged', 'unmerged', 'unknown']).toContain(result2);
+      const date = getLastCommitDate('feature-branch');
+      expect(date).toBe('');
     });
 
-    it('should work when baseRef is not provided', () => {
-      const result = gitUtils.getMergeStatus('test-branch');
-      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+    test('should trim whitespace from output', () => {
+      execFileSync.mockReturnValue('  2026-10-17T14:30:00+00:00  \n');
+
+      const date = getLastCommitDate('feature-branch');
+      expect(date).toBe('2026-10-17T14:30:00+00:00');
     });
   });
 
+  describe('getLastCommitAuthor', () => {
+    test('should return author email for branch', () => {
+      execFileSync.mockReturnValue('user@example.com\n');
+
+      const author = getLastCommitAuthor('feature-branch');
+      expect(author).toBe('user@example.com');
+      expect(execFileSync).toHaveBeenCalledWith(
+        'git',
+        ['log', '-1', '--format=%ae', 'origin/feature-branch'],
+        expect.any(Object)
+      );
+    });
+
+    test('should return empty string when git fails', () => {
+      execFileSync.mockImplementation(() => {
+        throw new Error('Git error');
+      });
+
+      const author = getLastCommitAuthor('feature-branch');
+      expect(author).toBe('');
+    });
+
+    test('should trim whitespace from output', () => {
+      execFileSync.mockReturnValue('  user@example.com  \n');
+
+      const author = getLastCommitAuthor('feature-branch');
+      expect(author).toBe('user@example.com');
+    });
+  });
+
+  describe('getLastCommitHash', () => {
+    test('should return commit hash for branch', () => {
+      execFileSync.mockReturnValue('abc123def456\n');
+
+      const hash = getLastCommitHash('feature-branch');
+      expect(hash).toBe('abc123def456');
+      expect(execFileSync).toHaveBeenCalledWith(
+        'git',
+        ['log', '-1', '--format=%H', 'origin/feature-branch'],
+        expect.any(Object)
+      );
+    });
+
+    test('should return empty string when git fails', () => {
+      execFileSync.mockImplementation(() => {
+        throw new Error('Git error');
+      });
+
+      const hash = getLastCommitHash('feature-branch');
+      expect(hash).toBe('');
+    });
+
+    test('should trim whitespace from output', () => {
+      execFileSync.mockReturnValue('  abc123def456  \n');
+
+      const hash = getLastCommitHash('feature-branch');
+      expect(hash).toBe('abc123def456');
+    });
+
+    test('should handle short hash format', () => {
+      execFileSync.mockReturnValue('abc123d\n');
+
+      const hash = getLastCommitHash('feature-branch');
+      expect(hash).toBe('abc123d');
+    });
+  });
+
+  describe('Integration Tests', () => {
+    test('should handle branch names with special characters in getLastCommitDate', () => {
+      execFileSync.mockImplementation(() => '2026-10-17T14:30:00+00:00\n');
+
+      const date = getLastCommitDate('feat/user-dashboard-v2');
+      expect(date).toBe('2026-10-17T14:30:00+00:00');
+    });
+
+    test('should handle git command failures gracefully', () => {
+      execFileSync.mockImplementation(() => {
+        throw new Error('No git repository');
+      });
+      spawnSync.mockImplementation(() => {
+        throw new Error('No git repository');
+      });
+
+      expect(getUniqueCommitCount('branch')).toBe(0);
+      expect(getLastCommitDate('branch')).toBe('');
+      expect(getLastCommitAuthor('branch')).toBe('');
+      expect(getLastCommitHash('branch')).toBe('');
+      expect(getMergeStatus('branch')).toBe('unknown');
+    });
+
+    it('getMergeStatus with undefined baseRef', () => {
+      (execFileSync).mockImplementation(() => {
+        throw new Error('not found');
+      });
+      (spawnSync).mockReturnValue({ status: 0 });
+      const result = getMergeStatus('test', undefined);
+      expect(result).toBe('merged');
+    });
+
+    it('getMergeStatus with empty string baseRef', () => {
+      (execFileSync).mockImplementation(() => {
+        throw new Error('not found');
+      });
+      (spawnSync).mockReturnValue({ status: 1 });
+      const result = getMergeStatus('test', '');
+      expect(result).toBe('unmerged');
+    });
+
+    it('getUniqueCommitCount with undefined baseRef', () => {
+      (execFileSync).mockImplementation((cmd, args) => {
+        if (args[0] === 'rev-parse') return 'abc123';
+        if (args[0] === 'rev-list') return '7\n';
+        throw new Error('not found');
+      });
+      const result = getUniqueCommitCount('test', undefined);
+      expect(result).toBe(7);
+    });
+
+    it('getUniqueCommitCount with false baseRef', () => {
+      (execFileSync).mockImplementation((cmd, args) => {
+        if (args[0] === 'rev-parse') return 'def456';
+        if (args[0] === 'rev-list') return '3\n';
+        throw new Error('not found');
+      });
+      const result = getUniqueCommitCount('test', false);
+      expect(result).toBe(3);
+    });
+
+    it('getMergeStatus with 0 baseRef (falsy but not null/undefined)', () => {
+      // When baseRef is 0 (falsy), getMergeStatus calls getBaseRef()
+      // Mock getBaseRef to return origin/main by making develop/master lookups fail
+      (execFileSync).mockImplementation((cmd, args) => {
+        if (args[0] === 'rev-parse' && args[2] === 'origin/main') {
+          return 'abc123';
+        }
+        throw new Error('not found');
+      });
+      (spawnSync).mockReturnValue({ status: 0 });
+      const result = getMergeStatus('test', 0);
+      expect(result).toBe('merged');
+      // Verify spawnSync was called with the fallback base ref (origin/main)
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git',
+        ['merge-base', '--is-ancestor', 'origin/test', 'origin/main'],
+        expect.any(Object)
+      );
+    });
+  });
 });

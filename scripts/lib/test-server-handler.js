@@ -47,7 +47,8 @@ export const handleFileRead = (filePath, err, data, res) => {
  */
 export const createRequestHandler = (distDir) => {
   return (req, res) => {
-    let filePath = path.join(distDir, req.url);
+    const pathname = req.url.split(/[?#]/, 1)[0];
+    let filePath = path.join(distDir, pathname);
 
     // Normalize path and prevent directory traversal
     filePath = path.normalize(filePath);
