@@ -97,9 +97,31 @@ jobs:
         if: steps.changes.outputs.run == 'true'
         env:
           JEST_COLLECT_COVERAGE: 'false'
-        run: >-
-          npx jest -c jest.config.cjs
-          scripts/__tests__/enforce-branch-name-hook.test.js
-          scripts/__tests__/session-start-hook.test.js
-          scripts/__tests__/setup-node-install.test.js
-          tests/js/claude-cloud-environment-docs.test.js
+        run: |
+          # Phase 1 stub: Check if test files exist before running tests
+          # These tests are in the .github repository and may not exist in all repositories
+          test_files=(
+            "scripts/__tests__/enforce-branch-name-hook.test.js"
+            "scripts/__tests__/session-start-hook.test.js"
+            "scripts/__tests__/setup-node-install.test.js"
+            "tests/js/claude-cloud-environment-docs.test.js"
+          )
+
+          found_any=false
+          for file in "${test_files[@]}"; do
+            if [ -f "$file" ]; then
+              found_any=true
+              break
+            fi
+          done
+
+          if [ "$found_any" = false ]; then
+            echo "Phase 1 stub: Guard test files not found in this repository. Skipping tests."
+            exit 0
+          fi
+
+          npx jest -c jest.config.cjs \
+            scripts/__tests__/enforce-branch-name-hook.test.js \
+            scripts/__tests__/session-start-hook.test.js \
+            scripts/__tests__/setup-node-install.test.js \
+            tests/js/claude-cloud-environment-docs.test.js
