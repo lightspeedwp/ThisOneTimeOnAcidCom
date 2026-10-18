@@ -90,7 +90,7 @@ jobs:
           if command -v jq &>/dev/null && echo "$JSON_OUTPUT" | jq empty &>/dev/null; then
             echo "Using jq to parse JSON"
             VALID=$(echo "$JSON_OUTPUT" | jq -r '.isValid')
-            ERRORS=$(echo "$JSON_OUTPUT" | jq -r '.errors // .message // empty')
+            ERRORS=$(echo "$JSON_OUTPUT" | jq -r 'if .isValid == false then (.errors // .message // empty) else empty end')
             SUGGESTED=$(echo "$JSON_OUTPUT" | jq -r '.suggestedName // empty')
 
             echo "valid=$VALID" >> "$GITHUB_OUTPUT"

@@ -11,12 +11,16 @@ const path = require('path');
 
 const args = process.argv.slice(2);
 const outputFormat = args[args.indexOf('--output') + 1] || 'text';
+const suppliedPath = args[args.indexOf('--changelog-path') + 1];
 
 let gateResult = 'pass';
 let failedChecks = 0;
 
 // Minimal Phase 1 validation: check if CHANGELOG.md exists
-const changelogPath = path.join(process.cwd(), 'CHANGELOG.md');
+// Use supplied path if provided, otherwise check repository root
+const changelogPath = suppliedPath
+  ? path.resolve(suppliedPath)
+  : path.join(process.cwd(), 'CHANGELOG.md');
 if (!fs.existsSync(changelogPath)) {
   gateResult = 'fail';
   failedChecks = 1;

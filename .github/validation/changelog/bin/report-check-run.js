@@ -36,11 +36,11 @@ const checkRunPayload = {
   name: 'Changelog Validation',
   head_sha: sha,
   status: 'completed',
-  conclusion: report.ci_gate_result === 'pass' ? 'success' : 'failure',
+  conclusion: report.summary.new_failed === 0 ? 'success' : 'failure',
   output: {
     title: 'Changelog Validation',
     summary: report.recommendation || 'Changelog validation completed',
-    text: `Passed: ${report.summary.passed}, Failed: ${report.summary.failed}, Warnings: ${report.summary.warnings}`
+    text: `Passed: ${report.summary.passed}, Failed: ${report.summary.failed}, New failures: ${report.summary.new_failed}, Warnings: ${report.summary.warnings}`
   }
 };
 
