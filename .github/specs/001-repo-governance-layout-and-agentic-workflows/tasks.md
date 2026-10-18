@@ -53,65 +53,65 @@
 
 **⚠️ CRITICAL**: Phase 2 must complete before workstream work can begin
 
-- [ ] T008 [P] [TEST-001] Configure Jest ESM support with @swc/core in jest.config.js
+- [x] T008 [P] [TEST-001] Configure Jest ESM support with @swc/core in jest.config.js
   - Install `@swc/core` as dev dependency
   - Enable ESM module transformation in Jest config
   - Verify `npm run test:unit` discovers and runs existing tests without modification
   - Ensure compatibility with existing test syntax
-- [ ] T009 [P] [TEST-001] Create Vitest fallback configuration in vitest.config.ts (if Jest proves unstable)
+- [x] T009 [P] [TEST-001] Create Vitest fallback configuration in vitest.config.ts (if Jest proves unstable)
   - Install `vitest` as dev dependency
   - Mirror Jest test discovery and configuration
   - Document failover trigger conditions
-- [ ] T010 [TEST-002] Update test baseline documentation in AGENTS.md
+- [x] T010 [TEST-002] Update test baseline documentation in AGENTS.md
   - Mark speckit baseline as 103/104 (approved)
   - Document known failure: template resolution precedence edge case
   - Add test comments in tests/speckit.test.mjs explaining deferred edge case
-- [ ] T011 [P] [PKG-001] Remove pnpm artefacts from repository
+- [x] T011 [P] [PKG-001] Remove pnpm artefacts from repository
   - Delete `pnpm-workspace.yaml` (unused file)
   - Remove `pnpm.overrides` block from `package.json` (all pnpm-specific config)
   - Remove `command = "pnpm run build"` from `src/app/netlify.toml`
   - Update root `README.md` to document npm-only (section: "Getting Started" or "Installation")
-- [ ] T012 [NODE-001] Pin Node.js version
+- [x] T012 [NODE-001] Pin Node.js version
   - Create `.nvmrc` file with content: `24` (exactly Node.js 24 LTS)
   - Add `engines` field to `package.json`: `{ "node": ">=24" }`
   - Run `npm ci` to validate all dependencies resolve correctly under Node 24
   - Update root `README.md` to document Node 24 requirement (e.g., "Requires Node.js 24 LTS or later")
   - Verify Netlify site settings pin Node 24 (via Netlify dashboard UI, not `.toml`)
-- [ ] T013 [P] [STYLE-001] Audit components for Tailwind utility patterns
+- [x] T013 [P] [STYLE-001] Audit components for Tailwind utility patterns
   - Scan `src/app/components/` for Tailwind class names (e.g., `mt-4`, `p-8`, `flex`, `grid`)
   - List all files containing utility-like patterns (if any)
   - Document findings for T014 migration
-- [ ] T014 [STYLE-001] Remove Tailwind dependencies from repository
+- [x] T014 [STYLE-001] Remove Tailwind dependencies from repository
   - Delete `tailwindcss` dev dependency from `package.json`
   - Delete `@tailwindcss/vite` dev dependency from `package.json`
   - Remove `@tailwindcss/vite` plugin from `vite.config.ts`
   - Delete or empty `tailwind.config.js` (if present at repository root)
   - Verify `npm run build` succeeds after Tailwind removal
-- [ ] T015 [STYLE-001] Migrate components to BEM (if any Tailwind utilities found in T013)
+- [x] T015 [STYLE-001] Migrate components to BEM (if any Tailwind utilities found in T013)
   - Update affected components (from T013 findings) to use BEM CSS instead of Tailwind utilities
   - Reference `guidelines/css-architecture.md` for BEM patterns
   - Verify component styling remains visually correct post-migration
   - Update `guidelines/css-architecture.md` to lock BEM as canonical (no dual support)
-- [ ] T016 [P] [WS-260] Set up test discovery scripts and validation
+- [x] T016 [P] [WS-260] Set up test discovery scripts and validation
   - Verify `npm run test:unit` runs Jest with ESM support (after T008)
   - Verify `npm run test:build` runs Bats build verification (confirm existing)
   - Verify `npm run test:e2e` discovers Playwright tests (confirm existing)
   - Verify `node --test tests/speckit.test.mjs` reports 103/104 baseline (after T010)
   - Document test command output in AGENTS.md commands table
-- [ ] T017 [P] Run full validation suite post-setup
+- [x] T017 [P] Run full validation suite post-setup
   - `npm run validate:branch-name -- --branch epic/repo-governance-toa-241`
   - `npm run build` (production build)
   - `npm ls --depth=0` (dependency validation)
   - Document results in research notes (all should pass)
-- [ ] T017a [WS-271] Create agent inventory document (R7.1)
+- [x] T017a [WS-271] Create agent inventory document (R7.1)
   - Create `.claude/agents/INVENTORY.md` with table: name | purpose | inputs | outputs | tools | permissions | workflow relationships | budget constraint
   - Audit current `.claude/agents/` directory and populate inventory for ~18 agents
   - Add note: "Budget enforcement (hard limits) specified in TOA-271 (separate epic); this inventory documents requirements only"
-- [ ] T017b [WS-271] Document Anthropic platform applicability assessment (R7.2)
+- [x] T017b [WS-271] Document Anthropic platform applicability assessment (R7.2)
   - Create `docs/ANTHROPIC_PLATFORMS.md` evaluating seven Anthropic references from spec.md Source Register
   - For each agent: note which platforms used (MCP servers, tool use, streaming, model selection, etc.)
   - Decision log: which agents use which capabilities; justify "not applicable" cases
-- [ ] T017c [WS-261] Implement protected-files-guard.yml (Phase 2 prerequisite per Constitution II)
+- [x] T017c [WS-261] Implement protected-files-guard.yml (Phase 2 prerequisite per Constitution II)
   - Create `.github/workflows/protected-files-guard.yml` (if not present)
   - Create `.github/PROTECTED_FILES.txt` canonical list: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`, `src/app/utils/supabase/`, `src/app/components/figma/ImageWithFallback.tsx`
   - Configure workflow to detect modifications to protected files; add error check: `git diff --name-only origin/develop... | grep -E "^(\.github|scripts|AGENTS|CHANGELOG|guidelines|src/app/utils/supabase|src/app/components/figma/ImageWithFallback)" && exit 1 || exit 0`
