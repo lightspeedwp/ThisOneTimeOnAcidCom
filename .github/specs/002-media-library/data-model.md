@@ -60,7 +60,7 @@ Represents a single recoverable media item (image, vector, design file, branded 
 | `rights_notes` | String | Optional | Marked "unknown" or "unrecoverable"; never fabricated | Licencing, usage restrictions, copyright, or verification status | FR-006, FR-008 |
 | `recovery_status` | Enum | **Required** | "not_attempted" \| "recovered" \| "partial_recovery" \| "manual_export_required" \| "unrecoverable" | See Recovery Status Enum | FR-005, FR-015 |
 | `recovery_notes` | String | Optional | Freeform | Reason for partial or failed recovery; impact on catalogue/validation | FR-005 |
-| `recovery_method` | Enum | **Required** | "figma_extraction" \| "manual_export" \| "archive_scan" \| "other" | How asset was obtained | FR-001, FR-005 |
+| `recovery_method` | Enum or null | Conditional | null when `recovery_status` is "not_attempted"; "figma_extraction" \| "manual_export" \| "archive_scan" \| "other" when recovery has been attempted | How asset was obtained; unset before recovery begins | FR-001, FR-005 |
 | `created_at` | ISO 8601 Timestamp | **Required** | Automatic; time when asset was catalogued | Not the asset's creation date, but when it was recovered | FR-006 |
 | `updated_at` | ISO 8601 Timestamp | **Required** | Automatic; time of last modification | Updates when metadata is verified or corrected | FR-006 |
 
@@ -116,9 +116,10 @@ Supported formats (non-exhaustive):
    - If `print_suitable` = true, `dimensions` MUST be a non-null object with numeric `dpi` ≥300. If suitability is unknown, preserve `print_suitable` = null; `dimensions` may be null when unknown.
 
 5. **Recovery Status Consistency**:
-   - `recovery_status` = `"recovered"` implies all required fields (`asset_id`, `format`, `dimensions`, `provenance`) are complete.
-   - `recovery_status` = `"partial_recovery"` means some metadata is missing but asset is usable.
-   - `recovery_status` = `"unrecoverable"` MUST have `recovery_notes` explaining why.
+   - `recovery_status` = `"not_attempted"` means asset is identified but not yet recovered; `recovery_method` MUST be null.
+   - `recovery_status` = `"recovered"` implies all required fields (`asset_id`, `format`, `dimensions`, `provenance`) are complete; `recovery_method` MUST be set.
+   - `recovery_status` = `"partial_recovery"` means some metadata is missing but asset is usable; `recovery_method` MUST be set.
+   - `recovery_status` = `"unrecoverable"` MUST have `recovery_notes` explaining why; `recovery_method` may be null if no attempt was made.
 
 ---
 

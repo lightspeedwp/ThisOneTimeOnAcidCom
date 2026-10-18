@@ -236,59 +236,136 @@
       "title": "Asset Relationship",
       "description": "Relationship between assets (original ↔ derivative, asset ↔ usage). See data-model.md § AssetRelationship.",
       "type": "object",
-      "required": [
-        "source_asset_id",
-        "target_asset_id",
-        "relationship_type",
-        "created_at",
-        "updated_at"
-      ],
-      "properties": {
-        "source_asset_id": {
-          "title": "Source Asset ID",
-          "description": "Asset that is the origin or parent (must exist in Asset records).",
-          "type": "string",
-          "minLength": 1
+      "oneOf": [
+        {
+          "title": "Asset Target Relationship",
+          "type": "object",
+          "required": [
+            "source_asset_id",
+            "target_type",
+            "target_asset_id",
+            "relationship_type",
+            "created_at",
+            "updated_at"
+          ],
+          "properties": {
+            "source_asset_id": {
+              "title": "Source Asset ID",
+              "description": "Asset that is the origin or parent (must exist in Asset records).",
+              "type": "string",
+              "minLength": 1
+            },
+            "target_type": {
+              "title": "Target Type",
+              "description": "Relationship targets an asset.",
+              "type": "string",
+              "enum": ["asset"]
+            },
+            "target_asset_id": {
+              "title": "Target Asset ID",
+              "description": "Asset that derives from or relates to the source (must exist in Asset records; cannot equal source).",
+              "type": "string",
+              "minLength": 1
+            },
+            "relationship_type": {
+              "title": "Relationship Type",
+              "description": "Type of relationship between assets (FR-007).",
+              "type": "string",
+              "enum": ["derived_from", "variant_of", "used_in", "replaced_by"],
+              "examples": ["derived_from", "variant_of"]
+            },
+            "notes": {
+              "title": "Notes",
+              "description": "Additional context (e.g., 'scaled 50% for web', 'colour mode changed RGB→CMYK')",
+              "type": ["string", "null"],
+              "maxLength": 512
+            },
+            "verified": {
+              "title": "Verified",
+              "description": "Whether relationship has been validated or is inferred.",
+              "type": ["boolean", "null"],
+              "examples": [true, false, null]
+            },
+            "created_at": {
+              "title": "Created At",
+              "description": "ISO 8601 timestamp when relationship was recorded.",
+              "type": "string",
+              "format": "date-time"
+            },
+            "updated_at": {
+              "title": "Updated At",
+              "description": "ISO 8601 timestamp of last modification.",
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
         },
-        "target_asset_id": {
-          "title": "Target Asset ID",
-          "description": "Asset that derives from or uses the source (must exist in Asset records; cannot equal source).",
-          "type": "string",
-          "minLength": 1
-        },
-        "relationship_type": {
-          "title": "Relationship Type",
-          "description": "Type of relationship between assets (FR-007).",
-          "type": "string",
-          "enum": ["derived_from", "variant_of", "used_in", "replaced_by"],
-          "examples": ["derived_from", "variant_of"]
-        },
-        "notes": {
-          "title": "Notes",
-          "description": "Additional context (e.g., 'scaled 50% for web', 'colour mode changed RGB→CMYK')",
-          "type": ["string", "null"],
-          "maxLength": 512
-        },
-        "verified": {
-          "title": "Verified",
-          "description": "Whether relationship has been validated or is inferred.",
-          "type": ["boolean", "null"],
-          "examples": [true, false, null]
-        },
-        "created_at": {
-          "title": "Created At",
-          "description": "ISO 8601 timestamp when relationship was recorded.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "updated_at": {
-          "title": "Updated At",
-          "description": "ISO 8601 timestamp of last modification.",
-          "type": "string",
-          "format": "date-time"
+        {
+          "title": "Context Target Relationship",
+          "type": "object",
+          "required": [
+            "source_asset_id",
+            "target_type",
+            "target_reference",
+            "relationship_type",
+            "created_at",
+            "updated_at"
+          ],
+          "properties": {
+            "source_asset_id": {
+              "title": "Source Asset ID",
+              "description": "Asset that is the origin or parent (must exist in Asset records).",
+              "type": "string",
+              "minLength": 1
+            },
+            "target_type": {
+              "title": "Target Type",
+              "description": "Relationship targets a context (website page, publication, etc.), not an asset.",
+              "type": "string",
+              "enum": ["context"]
+            },
+            "target_reference": {
+              "title": "Target Reference",
+              "description": "Reference for non-asset target (e.g., website page URL, publication identifier).",
+              "type": "string",
+              "minLength": 1
+            },
+            "relationship_type": {
+              "title": "Relationship Type",
+              "description": "Type of relationship with the context (FR-007).",
+              "type": "string",
+              "enum": ["derived_from", "variant_of", "used_in", "replaced_by"],
+              "examples": ["used_in"]
+            },
+            "notes": {
+              "title": "Notes",
+              "description": "Additional context about the relationship.",
+              "type": ["string", "null"],
+              "maxLength": 512
+            },
+            "verified": {
+              "title": "Verified",
+              "description": "Whether relationship has been validated or is inferred.",
+              "type": ["boolean", "null"],
+              "examples": [true, false, null]
+            },
+            "created_at": {
+              "title": "Created At",
+              "description": "ISO 8601 timestamp when relationship was recorded.",
+              "type": "string",
+              "format": "date-time"
+            },
+            "updated_at": {
+              "title": "Updated At",
+              "description": "ISO 8601 timestamp of last modification.",
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
         }
-      },
-      "additionalProperties": false
+      ]
     }
   },
   "required": ["catalogueVersion", "assets"],

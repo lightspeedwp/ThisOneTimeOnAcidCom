@@ -667,12 +667,13 @@ jq -e '.assets[] | select(.asset_id == "asset_figma_hero_001") | (.credits != nu
 
 # Commit updated catalogue to version control
 cp ./pilot-batch-recovered-updated.json ./pilot-batch-recovered.json
-git config user.name "TOA Catalogue Bot" || true
-git config user.email "catalogue@thisonetimeonacid.local" || true
 git add ./pilot-batch-recovered.json
-git commit -m "Resolve metadata dispute: Update credits for asset_figma_hero_001"
-
-echo "✓ Dispute resolved; catalogue record updated, verified, and version controlled"
+if git -c user.name="TOA Catalogue Bot" -c user.email="catalogue@thisonetimeonacid.local" commit -m "Resolve metadata dispute: Update credits for asset_figma_hero_001"; then
+  echo "✓ Dispute resolved; catalogue record updated, verified, and version controlled"
+else
+  echo "✗ Catalogue commit failed" >&2
+  exit 1
+fi
 ```
 
 **Pass Criteria**: ✅ Escalation path is clear (triage → investigate → resolve); catalogue can be updated and version tracked per operational runbook (validation-checklist.md § Task 6)
