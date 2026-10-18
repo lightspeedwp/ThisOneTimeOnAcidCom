@@ -499,7 +499,8 @@ async function main() {
 
     // Exit with appropriate code
     // Treat critical test SKIPs (missing required config) as failures
-    const criticalTests = ['Authentication', 'Make Project Access'];
+    // All tests except Rate Limiting require either token or fileKey
+    const criticalTests = ['Authentication', 'Make Project Access', 'Asset Node Fetch', 'Asset Export'];
     const hasCriticalSkips = results.tests
       .filter((t) => criticalTests.some((c) => t.name.includes(c)))
       .some((t) => t.status === 'SKIP');
