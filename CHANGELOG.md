@@ -352,8 +352,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Created `/docs/animation-implementation-report-march-2026.md` (350+ line final report)
   - Complete metrics, testing results, file manifest, and Phase 2 roadmap
 
-### Fixed
-
 #### Phase 1 Governance Workflows — Branch Validation & Package Synchronisation
 
 - **Fixed branch validation workflow JSON parsing** — Corrected `branch-name-validation.yml` to query correct JSON field names (`isValid` instead of `valid`) in both jq expression and fallback grep pattern, resolving false validation failures where branches passed validation but workflow reported failure due to field mismatch
