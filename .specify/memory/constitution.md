@@ -67,7 +67,7 @@ All styling follows BEM (Block, Element, Modifier) convention; Tailwind utilitie
 Development and deployment environments are deterministic:
 - **Package Manager**: npm-only (lockfile: `package-lock.json`); no pnpm or yarn (PKG-001 decision, TOA-241)
 - **Dependency Validation**: CI enforces consistency between package.json and package-lock.json
-- **Node.js Runtime**: Pin to Node.js 24 LTS via .nvmrc, engines field and README documentation (NODE-001 decision, TOA-241; implementation pending)
+- **Node.js Runtime**: Pin to Node.js 24 LTS via .nvmrc, engines field and README documentation (NODE-001 decision, TOA-241; approved 2026-10-17, implementation in progress)
 - **CI/CD Guarantee**: Testing, build and validation workflows use pinned Node version to ensure reproducibility
 
 ### VII. Testing Infrastructure & Verification

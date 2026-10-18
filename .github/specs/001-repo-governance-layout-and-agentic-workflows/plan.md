@@ -130,17 +130,28 @@ src/, content/, public/, etc. (application source, preserved unchanged)
 
 ### Recommended Merge Sequence
 
-**Step 1: Merge PR #301 to develop** (Foundation layer)
+**CRITICAL GATE: PR #319 Workflow Error Resolution (REQUIRED BEFORE MERGE)**
+
+All 9 workflow errors in PR #319 MUST be fixed and CI MUST be green before merging to develop. This is a blocking prerequisite for Phase 1 completion. Failing to resolve these errors will break CI for all subsequent PRs.
+
+**Step 1: Fix all 9 workflow errors in PR #319**
+- See "Phase 1 Workflow Implementation Errors" table below
+- Apply all corrections (HIGH/CRITICAL severity first)
+- Re-run CI until all checks pass (green)
+- Commit fixes to PR #319 branch
+
+**Step 2: Merge PR #301 to develop** (Foundation layer)
+- Only after PR #319 is green
 - Resolve merge conflicts first
 - Verify acceptance criteria met (CODEOWNERS identity, branch protection manually configured)
 - Provides: CODEOWNERS, branch protection config, Node.js 24 pinning, Jest ESM fix, Tailwind removal
 
-**Step 2: Fix & Merge PR #319 to develop** (Phase 1 workflows)
-- Apply 9 workflow error corrections (documented below)
-- Re-run CI until green
+**Step 3: Merge PR #319 to develop** (Phase 1 workflows)
+- All 9 workflow errors resolved ✅
+- CI is green ✅
 - Provides: 8 Phase 1 governance workflows
 
-**Step 3: Close PR #318 as duplicate**
+**Step 4: Close PR #318 as duplicate**
 - Do NOT merge to main
 - #319 provides equivalent implementation with correct base branch
 
