@@ -406,8 +406,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Glow effects more pronounced with correct color
 - **No breaking changes** — CSS custom properties updated, all references automatically inherit new values
 
-### Added
-
 #### Theme Toggle Rewire — Neon Pink/Yellow Controls
 
 - **Rewired theme toggle component** (`/components/common/ThemeToggleES5.tsx`) — Now uses neon pink/yellow styling
