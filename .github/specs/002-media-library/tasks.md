@@ -52,14 +52,16 @@
 
 **Purpose**: Define the schemas, frameworks and procedures that will guide asset recovery, provider evaluation and validation
 
-**Prerequisites**: research.md complete with all clarifications resolved ✅
+**Prerequisites**: 
+- Phase 0 research complete: All three clarification questions (Q1, Q2, Q3) resolved and documented in research.md ✅
+- research.md complete with all clarifications resolved ✅
 
 **Target Deliverables**:
 - `data-model.md` — Entity definitions (Asset, AssetRelationship, StorageProvider, ValidationResult)
-- `contracts/catalogue-schema.json` — JSON schema with examples and validation rules
+- `contracts/catalogue-schema.json` — JSON schema with validation rules, constraints, and examples (includes non-invention validation rules and field constraints per FR-008)
 - `contracts/provider-evaluation.md` — Evaluation criteria matrix and decision framework
-- `contracts/validation-checklist.md` — Quality gates, visual comparison, metadata checks
-- `quickstart.md` — Validation runbook with sample workflows
+- `contracts/validation-checklist.md` — Quality gates, visual comparison, metadata checks, and operational runbook
+- `quickstart.md` — Validation scenarios and sample workflows
 
 ---
 
