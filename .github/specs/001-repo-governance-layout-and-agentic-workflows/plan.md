@@ -116,6 +116,57 @@ src/, content/, public/, etc. (application source, preserved unchanged)
 
 **Structure Decision**: Repository-local configuration (`.github/`, `.specify/`, `.claude/`) plus root scripts remain as-is. Five workstreams will update specific files (workflows, templates, Spec Kit paths, agent specs) without moving existing application code or breaking protected contracts.
 
+## Implementation Progress & Merge Strategy (Updated 2026-10-18)
+
+**Current Status**: Three overlapping PRs identified for Spec 001, all in-flight and targeting different branches.
+
+### Active PRs
+
+| PR | Branch | Base | Status | Content | Merge Blocker |
+|---|---|---|---|---|---|
+| #301 | `feat/governance-decisions-implement` | `develop` | ⏳ Open (not draft) | Foundation: CODEOWNERS, branch protection, Node.js pinning, Jest ESM fix, Tailwind removal | **Merge conflicts** + acceptance criteria unchecked |
+| #318 | `claude/cool-keller-y1ebyr` | `main` | ❌ DRAFT, **WRONG BASE** | Phase 1 workflows (8 workflows, 39,080 additions) | Targets `main` instead of `develop`; superseded by #319 |
+| #319 | `feat/phase1-governance-workflows` | `develop` | ⏳ DRAFT | Phase 1 workflows (8 workflows, 1,919 additions) + lefthook | **9 workflow implementation errors** (see below) |
+
+### Recommended Merge Sequence
+
+**Step 1: Merge PR #301 to develop** (Foundation layer)
+- Resolve merge conflicts first
+- Verify acceptance criteria met (CODEOWNERS identity, branch protection manually configured)
+- Provides: CODEOWNERS, branch protection config, Node.js 24 pinning, Jest ESM fix, Tailwind removal
+
+**Step 2: Fix & Merge PR #319 to develop** (Phase 1 workflows)
+- Apply 9 workflow error corrections (documented below)
+- Re-run CI until green
+- Provides: 8 Phase 1 governance workflows
+
+**Step 3: Close PR #318 as duplicate**
+- Do NOT merge to main
+- #319 provides equivalent implementation with correct base branch
+
+### Phase 1 Workflow Implementation Errors (PR #319)
+
+The 9 Phase 1 workflows require corrections before CI passes:
+
+| Workflow | Error | Severity | Fix |
+|----------|-------|----------|-----|
+| `lint.yml` | `\|\| true` contradicts `continue-on-error: true` | **HIGH** | Remove `\|\| true` operators; let `continue-on-error` handle flow control |
+| `tests.yml` | `continue-on-error: true` suppresses Jest/Playwright failures | **CRITICAL** | Remove `continue-on-error` from Jest and browser-install steps |
+| `documentation.yml` | References missing npm scripts (`lint:md`, `validate:frontmatter`) | **HIGH** | Verify scripts exist in package.json OR replace with direct commands |
+| `workflow-lint.yml` | Python YAML validation assumes PyYAML installed | **HIGH** | Add `python3 -m pip install pyyaml` before validation |
+| `branch-name-validation.yml` | Unclear exit code/output coordination | **MEDIUM** | Verify script exits with code 1 on invalid names, code 0 on valid |
+| `locked-files-guard.yml` | Silent failure on git diff (no error checking) | **CRITICAL** | Add error check before using git diff output |
+| `changelog-unified.yml` | Git diff may fail on shallow clones | **MEDIUM** | Add `fetch-depth: 0` to checkout; add error handling |
+| `labeling-unified.yml` | No rate limiting on API calls | **MEDIUM** | Add error handling for API 403/404 responses |
+| `pr-template-routing.yml` | No validation that template file exists | **LOW** | Add file existence check before routing |
+
+### Repository Structure Cleanup
+
+After PRs merge:
+- **Delete** `.github/labels.yml` (canonical file in lightspeedwp/.github repo only)
+- **Verify** issue/PR templates source from lightspeedwp/.github repo
+- **Confirm** org-wide config files maintained centrally
+
 ## Complexity Tracking
 
 > **Fill ONLY if Constitution Check has violations that must be justified**
