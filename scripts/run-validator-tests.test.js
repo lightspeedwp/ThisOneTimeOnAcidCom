@@ -511,28 +511,31 @@ describe('run-validator-tests', () => {
     });
 
     test('outputTestResults handles large number of failed tests in a category', () => {
-      const results = { summary: { total: 20, passed: 5, failed: 15 } };
+      const results = { summary: { total: 20, passed: 5, failed: 15 }, details: { 'Large': { cases: Array(5).fill({ passed: true }).concat(Array(15).fill({ passed: false })) } } };
       const categoryResults = [{ category: 'Large', passed: 5, total: 20 }];
 
       const logs = [];
       const originalWrite = process.stdout.write;
-      process.stdout.write = jest.fn((...args) => {
-        logs.push(args[0]);
-      });
-
       const originalLog = console.log;
-      console.log = jest.fn();
 
-      outputTestResults(results, categoryResults);
+      try {
+        process.stdout.write = jest.fn((...args) => {
+          logs.push(args[0]);
+        });
 
-      const emojiOutput = logs.join('');
-      const checkmarks = (emojiOutput.match(/✅/g) || []).length;
-      const crosses = (emojiOutput.match(/❌/g) || []).length;
-      expect(checkmarks).toBe(5);
-      expect(crosses).toBe(15);
+        console.log = jest.fn();
 
-      process.stdout.write = originalWrite;
-      console.log = originalLog;
+        outputTestResults(results, categoryResults);
+
+        const emojiOutput = logs.join('');
+        const checkmarks = (emojiOutput.match(/✅/g) || []).length;
+        const crosses = (emojiOutput.match(/❌/g) || []).length;
+        expect(checkmarks).toBe(5);
+        expect(crosses).toBe(15);
+      } finally {
+        process.stdout.write = originalWrite;
+        console.log = originalLog;
+      }
     });
   });
 
@@ -541,6 +544,7 @@ describe('run-validator-tests', () => {
     let originalLog;
     let consoleLogs;
     let fsWriteFileSyncSpy;
+    let executeCase;
 
     beforeEach(() => {
       originalExit = process.exit;
@@ -550,6 +554,14 @@ describe('run-validator-tests', () => {
       process.exit = jest.fn();
       console.log = jest.fn((...args) => consoleLogs.push(args.join(' ')));
       fsWriteFileSyncSpy = jest.spyOn(require('fs'), 'writeFileSync').mockImplementation(() => {});
+
+      // Mock executor returns all tests as passed to avoid subprocess launches
+      executeCase = jest.fn(branch => ({
+        passed: true,
+        output: '',
+        exitCode: 0,
+        branch
+      }));
     });
 
     afterEach(() => {
@@ -559,41 +571,41 @@ describe('run-validator-tests', () => {
     });
 
     test('main() is callable and calls process.exit', () => {
-      main();
+      main(executeCase);
       expect(process.exit).toHaveBeenCalled();
     });
 
     test('main() logs test runner header message', () => {
-      main();
+      main(executeCase);
       expect(consoleLogs.some(log => log.includes('Running branch validation tests'))).toBe(true);
     });
 
     test('main() exits with 0 when all tests pass', () => {
-      main();
+      main(executeCase);
       const exitCode = process.exit.mock.calls[0][0];
-      expect([0, 1]).toContain(exitCode);
+      expect(exitCode).toBe(0);
     });
 
     test('main() processes all test cases and writes report', () => {
-      main();
+      main(executeCase);
       expect(fsWriteFileSyncSpy).toHaveBeenCalled();
     });
 
     test('main() logs report information', () => {
-      main();
+      main(executeCase);
       // Verify that main completes and logs output
       expect(consoleLogs.length).toBeGreaterThan(0);
       expect(process.exit).toHaveBeenCalled();
     });
 
     test('main() report path is written with validation-report.json', () => {
-      main();
+      main(executeCase);
       const writeCallArgs = fsWriteFileSyncSpy.mock.calls[0];
       expect(writeCallArgs[0]).toContain('validation-report.json');
     });
 
     test('main() handles test results and exits appropriately', () => {
-      main();
+      main(executeCase);
       expect(process.exit).toHaveBeenCalledWith(expect.any(Number));
     });
   });

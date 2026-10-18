@@ -355,12 +355,23 @@ describe('Git Merge Utilities', () => {
     });
 
     it('getMergeStatus with 0 baseRef (falsy but not null/undefined)', () => {
-      (execFileSync).mockImplementation(() => {
+      // When baseRef is 0 (falsy), getMergeStatus calls getBaseRef()
+      // Mock getBaseRef to return origin/main by making develop/master lookups fail
+      (execFileSync).mockImplementation((cmd, args) => {
+        if (args[0] === 'rev-parse' && args[2] === 'origin/main') {
+          return 'abc123';
+        }
         throw new Error('not found');
       });
       (spawnSync).mockReturnValue({ status: 0 });
       const result = getMergeStatus('test', 0);
-      expect(['merged', 'unmerged', 'unknown']).toContain(result);
+      expect(result).toBe('merged');
+      // Verify spawnSync was called with the fallback base ref (origin/main)
+      expect(spawnSync).toHaveBeenCalledWith(
+        'git',
+        ['merge-base', '--is-ancestor', 'origin/test', 'origin/main'],
+        expect.any(Object)
+      );
     });
   });
 });
