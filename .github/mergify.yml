@@ -1,0 +1,82 @@
+# Mergify configuration for ThisOneTimeOnAcidCom
+#
+# REPORTING-ONLY CONFIGURATION
+#
+# This configuration validates Mergify integration and reporting without
+# enabling automatic merging. Automatic merging is explicitly disabled
+# pending:
+# 1. Confirmed Mergify App installation and permissions
+# 2. Effective branch protection and human-review enforcement
+# 3. Successful application CI covering install, build and agreed tests
+# 4. Agreed merge authority (currently unresolved)
+# 5. Validation matrix exercise (see issue #306)
+#
+# See https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/306
+# and https://github.com/lightspeedwp/.github/blob/develop/docs/MERGIFY_STRATEGY.md
+
+version: 2
+
+# Reporting configuration
+# This tells Mergify to report PR status without taking actions
+pull_request_rules:
+  - name: Dependabot PR reporting
+    description: Report status of Dependabot pull requests for inspection
+    conditions:
+      # Dependabot identity restrictions
+      - author~=^(dependabot\[bot\])$
+      # Base branch restriction
+      - base=develop
+      # PR state
+      - -draft
+      - -conflict
+      # Only minor and patch updates (major updates excluded)
+      - title~=^(Bump|build\(deps\)|chore\(deps\)|Merge|Rebase)
+    actions:
+      # No automatic actions. This rule exists for visibility and reporting only.
+      comment:
+        message: |
+          ✅ Dependabot PR on `develop` — reporting for review.
+
+          **Status checks to verify before approving:**
+          - All required CI checks pass
+          - No merge conflicts
+          - Matches approved update classification
+
+  - name: Human PR reporting
+    description: Report status of human-authored pull requests
+    conditions:
+      # Exclude Dependabot and bot authors
+      - author!=dependabot[bot]
+      - author!~=^(app/.*)$
+      - base=develop
+      - -draft
+      - -conflict
+    actions:
+      comment:
+        message: |
+          👤 Human-authored PR — awaiting review and approval.
+
+          **Checklist before merge:**
+          - All required CI checks pass
+          - At least one approval from code owner
+          - No unresolved change requests
+          - Branch is up to date with base
+
+# Queue rules (defined but not used)
+# These are placeholders for future activation
+queue_rules:
+  - name: default
+    batch_size: 1
+
+# Merge protections (defined but not used)
+# These settings would apply when automatic merging is enabled
+merge_protections_settings:
+  reporting_method: check-runs
+  # auto_merge_conditions omitted: automatic merging is currently disabled
+  # When enabled, this will require:
+  # - author~=^(dependabot\[bot\])$
+  # - base=develop
+  # - All required checks passed
+  # - Approved by authorized reviewer
+  # - No unresolved change requests
+  # See issue #306 for activation prerequisites
