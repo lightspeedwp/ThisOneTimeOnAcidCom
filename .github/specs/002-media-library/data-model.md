@@ -60,7 +60,7 @@ Represents a single recoverable media item (image, vector, design file, branded 
 | `rights_notes` | String | Optional | Marked "unknown" or "unrecoverable"; never fabricated | Licencing, usage restrictions, copyright, or verification status | FR-006, FR-008 |
 | `recovery_status` | Enum | **Required** | "not_attempted" \| "recovered" \| "partial_recovery" \| "manual_export_required" \| "unrecoverable" | See Recovery Status Enum | FR-005, FR-015 |
 | `recovery_notes` | String | Optional | Freeform | Reason for partial or failed recovery; impact on catalogue/validation | FR-005 |
-| `recovery_method` | Enum or null | Conditional | null when `recovery_status` is "not_attempted"; "figma_extraction" \| "manual_export" \| "archive_scan" \| "other" when recovery has been attempted | How asset was obtained; unset before recovery begins | FR-001, FR-005 |
+| `recovery_method` | Enum or null | **Required** | null before any recovery attempt; "figma_extraction" \| "manual_export" \| "archive_scan" \| "other" when recovery has been attempted | Method actually attempted or used to obtain the asset; never a planned method | FR-001, FR-005 |
 | `created_at` | ISO 8601 Timestamp | **Required** | Automatic; time when asset was catalogued | Not the asset's creation date, but when it was recovered | FR-006 |
 | `updated_at` | ISO 8601 Timestamp | **Required** | Automatic; time of last modification | Updates when metadata is verified or corrected | FR-006 |
 
@@ -82,9 +82,10 @@ Supported formats (non-exhaustive):
 
 #### recovery_status
 ```
-"recovered"               – Successfully recovered; metadata complete or marked unknown
+"not_attempted"           – Identified; no recovery attempt made
+"recovered"               – Successfully recovered; dimensions known, other metadata complete or marked unknown
 "partial_recovery"        – Recovered but with missing/degraded metadata or dimensions
-"manual_export_required"  – Identified but requires manual export (Figma Make limitation)
+"manual_export_required"  – Awaiting manual export, before any attempt or after a failed attempt (Figma Make limitation)
 "unrecoverable"           – Asset cannot be recovered; reason documented in recovery_notes
 ```
 
@@ -116,10 +117,11 @@ Supported formats (non-exhaustive):
    - If `print_suitable` = true, `dimensions` MUST be a non-null object with numeric `dpi` ≥300. If suitability is unknown, preserve `print_suitable` = null; `dimensions` may be null when unknown.
 
 5. **Recovery Status Consistency**:
-   - `recovery_status` = `"not_attempted"` means asset is identified but not yet recovered; `recovery_method` MUST be null.
-   - `recovery_status` = `"recovered"` implies all required fields (`asset_id`, `format`, `dimensions`, `provenance`) are complete; `recovery_method` MUST be set.
+   - `recovery_status` = `"not_attempted"` means asset is identified but no recovery attempt has been made; `recovery_method` MUST be present and null.
+   - `recovery_status` = `"recovered"` implies all required fields (`asset_id`, `format`, `dimensions`, `provenance`) are complete; `dimensions` MUST be a non-null object with `width`, `height`, and `unit`; `recovery_method` MUST be set. If dimensions are unknown (`null`) but the asset is usable, use `"partial_recovery"` instead.
    - `recovery_status` = `"partial_recovery"` means some metadata is missing but asset is usable; `recovery_method` MUST be set.
-   - `recovery_status` = `"unrecoverable"` MUST have `recovery_notes` explaining why; `recovery_method` may be null if no attempt was made.
+   - `recovery_status` = `"manual_export_required"` means manual export is pending. It may be entered before any attempt if the limitation is already known, or after an unsuccessful recovery attempt. `recovery_method` MUST be present and null before any attempt, or set to the method actually attempted afterward; do not set `"manual_export"` merely because it is planned.
+   - `recovery_status` = `"unrecoverable"` MUST have `recovery_notes` explaining why; `recovery_method` MUST be present and null if no attempt was made, or set to the method actually attempted otherwise.
 
 ---
 
@@ -327,8 +329,10 @@ Initial State: not_attempted (asset identified but recovery not yet attempted)
       │
       ├─ unrecoverable (recovery attempted and failed; recovery_notes required)
       │
-      └─ manual_export_required (identified; requires manual effort)
+      └─ manual_export_required (attempt failed; awaiting manual export)
 ```
+
+An asset may also move directly from `not_attempted` to `manual_export_required` when a known limitation requires manual export; `recovery_method` remains null until an attempt is made. After a manual export attempt, set `recovery_method` to `"manual_export"` and update the status to `recovered`, `partial_recovery`, or `unrecoverable` according to the outcome, or retain `manual_export_required` if another manual attempt is pending.
 
 Once in `recovered` or `partial_recovery`, assets proceed to validation.
 

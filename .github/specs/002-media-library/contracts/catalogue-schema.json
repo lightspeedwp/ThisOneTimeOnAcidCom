@@ -180,9 +180,9 @@
         },
         "recovery_method": {
           "title": "Recovery Method",
-          "description": "How asset was obtained (FR-001, FR-005). From data-model.md § recovery_method enum.",
-          "type": "string",
-          "enum": ["figma_extraction", "manual_export", "archive_scan", "other"],
+          "description": "Method actually attempted or used to obtain the asset (FR-001, FR-005), never a planned method. Required and null for not_attempted; set for recovered or partial_recovery. For manual_export_required or unrecoverable, null before any attempt and set to the method actually attempted afterward. From data-model.md § recovery_method enum.",
+          "type": ["string", "null"],
+          "enum": ["figma_extraction", "manual_export", "archive_scan", "other", null],
           "examples": ["figma_extraction", "manual_export"]
         },
         "created_at": {
@@ -200,6 +200,35 @@
           "examples": ["2026-10-17T16:45:00Z"]
         }
       },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "recovery_status": { "const": "not_attempted" } },
+            "required": ["recovery_status"]
+          },
+          "then": {
+            "properties": { "recovery_method": { "type": "null" } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "recovery_status": { "enum": ["recovered", "partial_recovery"] } },
+            "required": ["recovery_status"]
+          },
+          "then": {
+            "properties": { "recovery_method": { "type": "string" } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "recovery_status": { "const": "recovered" } },
+            "required": ["recovery_status"]
+          },
+          "then": {
+            "properties": { "dimensions": { "type": "object" } }
+          }
+        }
+      ],
       "if": {
         "properties": {
           "print_suitable": { "const": true }
