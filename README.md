@@ -4,11 +4,24 @@ This is a code bundle for This One Time on Acid. The original project is availab
 
 ## Running the code
 
-**Requirements:** Node.js 24+ (see `.nvmrc`)
+**Requirements:** Node.js 24+ (see `.nvmrc`), npm 10+
 
 Run `npm install` to install the dependencies.
 
 Run `npm run dev` to start the development server.
+
+### Package Manager & Runtime Configuration
+
+This project uses **npm** as the authoritative package manager with the following standardized configuration:
+
+- **Package Manager:** npm (v10+)
+- **Node Runtime:** Node.js 24+ (pinned in `.nvmrc`)
+- **Lockfile:** `package-lock.json` (auto-generated and committed)
+- **Build System:** Vite with npm scripts
+- **Netlify Build Command:** `npm run build` (configured in `src/app/netlify.toml`)
+- **Netlify Environment:** NODE_VERSION=24, NPM_VERSION=10
+
+This configuration has been standardized across development, CI/CD, and production environments.
 
 **A Retro 80s CLI Memoir with Neon Terminal Aesthetics**
 
@@ -64,7 +77,7 @@ Visit **`/dev/animations`** for an interactive showcase with:
 
 ### 1. Install Dependencies
 ```bash
-pnpm install
+npm install
 ```
 
 ### 2. Configure Environment
@@ -73,15 +86,9 @@ Copy `.env.example` to `.env` and configure as needed.
 cp .env.example .env
 ```
 
-### 3. Verify Build
-Run the verification script to check environment variables, links, and assets.
+### 3. Run Development Server
 ```bash
-pnpm dlx ts-node scripts/verify-build.ts
-```
-
-### 4. Run Development Server
-```bash
-pnpm dev
+npm run dev
 ```
 Access the app at `http://localhost:5173`.
 
