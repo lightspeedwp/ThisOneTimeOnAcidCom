@@ -513,7 +513,7 @@ async function main() {
       process.exit(1);
     }
 
-    const remoteBranches = getRemoteBranches().filter((b) => b !== 'HEAD' && b.trim() !== '');
+    const remoteBranches = getRemoteBranches().filter((b) => b !== 'HEAD' && b !== 'origin' && b.trim() !== '');
     const excludeRe = buildExcludeRegex();
     const baseRef = getBaseRef();
 
@@ -647,10 +647,4 @@ export {
   toPct,
   writeMarkdownReport,
   writeJsonReport,
-  // Internal utilities exported for testing
-  logTimestamp,
-  log,
-  logError,
-  getArg,
-  parseBool,
 };

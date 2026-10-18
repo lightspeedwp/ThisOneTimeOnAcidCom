@@ -252,7 +252,8 @@ export {
   ValidationResult,
   AUTHORISED_TYPES,
   FORBIDDEN_PREFIXES,
-  PATTERNS
+  PATTERNS,
+  main
 };
 
 // Run main if this is the entry point

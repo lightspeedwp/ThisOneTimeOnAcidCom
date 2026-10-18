@@ -1106,11 +1106,11 @@ describe('getRemoteBranches', () => {
     );
   });
 
-  it('includes HEAD in output (filtered by caller)', () => {
-    execFileSync.mockReturnValue('origin/main\nHEAD\n');
+  it('includes origin entry for origin/HEAD (filtered by caller)', () => {
+    execFileSync.mockReturnValue('origin/main\norigin\n');
 
     const branches = getRemoteBranches();
-    expect(branches).toEqual(['main', 'HEAD']);
+    expect(branches).toEqual(['main', 'origin']);
   });
 
   it('handles empty remote repository', () => {
@@ -1369,7 +1369,7 @@ describe('Logging Functions', () => {
 describe('Non-deletion verification', () => {
   it('confirms cleanup-branches.js never deletes branches', () => {
     // Read the source file and verify absence of deletion commands
-    const scriptPath = './scripts/cleanup-branches.js';
+    const scriptPath = path.join(__dirname, 'cleanup-branches.js');
     const source = fs.readFileSync(scriptPath, 'utf8');
 
     // Verify no actual git branch deletion commands

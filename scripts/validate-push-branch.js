@@ -120,17 +120,14 @@ function resolveHeadRef(ref) {
 /**
  * Get current branch name, with fallback validation.
  * @returns {string|null} Current branch name or null if in detached HEAD
+ * @throws {Error} If Git command fails
  */
 function getCurrentBranch() {
-  try {
-    const currentBranch = execSync('git rev-parse --abbrev-ref HEAD', {
-      encoding: 'utf-8'
-    }).trim();
-    // Skip validation if in detached HEAD state
-    return currentBranch === 'HEAD' ? null : currentBranch;
-  } catch (e) {
-    return null;
-  }
+  const currentBranch = execSync('git rev-parse --abbrev-ref HEAD', {
+    encoding: 'utf-8'
+  }).trim();
+  // Return null for detached HEAD state
+  return currentBranch === 'HEAD' ? null : currentBranch;
 }
 
 /**
@@ -209,24 +206,29 @@ async function main() {
 
     // If no input was received, try to validate the current branch (fallback)
     if (lines.length === 0) {
-      const currentBranch = getCurrentBranch();
-      if (currentBranch) {
-        const result = validateBranch(currentBranch);
-        if (!result.valid) {
-          // Display validation error
-          try {
-            execFileSync(
-              process.execPath,
-              [getValidationScript(), '--branch', currentBranch],
-              { stdio: 'inherit', encoding: 'utf-8' }
-            );
-          } catch (e) {
-            // Error already printed
+      try {
+        const currentBranch = getCurrentBranch();
+        if (currentBranch) {
+          const result = validateBranch(currentBranch);
+          if (!result.valid) {
+            // Display validation error
+            try {
+              execFileSync(
+                process.execPath,
+                [getValidationScript(), '--branch', currentBranch],
+                { stdio: 'inherit', encoding: 'utf-8' }
+              );
+            } catch (e) {
+              // Error already printed
+            }
+            process.exit(1);
           }
-          process.exit(1);
         }
+        process.exit(0);
+      } catch (error) {
+        console.error(`Error: ${error.message}`);
+        process.exit(2);
       }
-      process.exit(0);
     }
 
     // Display validation errors for invalid branches
