@@ -14,9 +14,9 @@
  * - FIGMA_TEAM_ID (optional): Team ID if assets are in a team file
  */
 
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
+import https from 'https';
+import fs from 'fs';
+import path from 'path';
 
 // Configuration
 const FIGMA_API_BASE = 'api.figma.com';
