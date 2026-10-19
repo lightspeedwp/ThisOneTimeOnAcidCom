@@ -14,6 +14,15 @@ afterEach(() => {
   rmSync(fixtureRoot, { recursive: true, force: true });
 });
 
+/**
+ * Write synthetic Jest reports under separate checkout roots and run the comparison CLI.
+ *
+ * @param {Array<Object>} headFiles - Head suite fixtures with names, failure counts,
+ *   and optional statuses and assertion results.
+ * @param {Array<Object>} baseFiles - Base suite fixtures in the same format.
+ * @param {boolean} [rawCounts=false] - Use numeric failure counts instead of assertion results.
+ * @returns {import('node:child_process').SpawnSyncReturns<string>} CLI output and exit status.
+ */
 function compare(headFiles, baseFiles, rawCounts = false) {
   const roots = {
     head: path.join(fixtureRoot, 'head'),
