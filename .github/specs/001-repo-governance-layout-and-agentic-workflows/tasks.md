@@ -257,19 +257,16 @@
   - ✅ Document: Available issue types (bug, feature, task, documentation, security, design, question)
   - ✅ Added: "Creating issues" section to CONTRIBUTING.md with inheritance explanation
   - ✅ No local duplicates: all templates inherited from lightspeedwp/.github
-- [x] T035 [P] [WS-261] [TOA-252] Configure PR template routing
+- [ ] T035 [P] [WS-261] [TOA-252] Configure PR template routing (shared-template approach)
   - Verify `pr-template-routing.yml` workflow exists and is active
-  - Use the branch mapping in `scripts/pr-template-router.js` and preserve or
-    restore its required local `.github/PULL_REQUEST_TEMPLATE/{template}.md`
-    files
-  - Create separate test PRs from different branch types:
-    - `feat/test-feature` → should load local `feat.md` template
-    - `fix/test-bug` → should load local `fix.md` template
-    - `docs/test-docs` → should load local `docs.md` template
-  - Confirm each branch type loads and applies the selected template content to
-    the PR body while preserving contributor content; verify the resulting body
-    contains its sections and the matching type label is applied
-  - Document PR template routing in `CONTRIBUTING.md` under "PR Creation Process"
+  - Confirm shared templates are inherited from `lightspeedwp/.github` (no local duplication)
+  - Verify branch-to-template mapping is correct:
+    - `feat/*` → feature template
+    - `fix/*` → bugfix template
+    - `docs/*` → documentation template
+  - Create test PRs from different branch types and verify correct template is suggested
+  - Confirm template content is applied without overwriting contributor content
+  - Document shared-template routing approach in `CONTRIBUTING.md` under "PR Creation Process"
 - [x] T036 [P] [WS-261] [TOA-253] Document saved replies and contributor setup
   - ✅ Add "Using Saved Replies" section to CONTRIBUTING.md
   - ✅ Link to org-wide saved replies catalog in lightspeedwp/.github
@@ -312,11 +309,6 @@
     - Allow auto-merge
   - ⏳ Document branch protection rules in CONTRIBUTING.md
   - **Note:** This is a manual repository Settings UI task, not automated
-  - Go to Settings → Branches → Add rule for `develop` branch:
-    - Require PR review (less strict than main)
-    - Require status checks to pass
-    - (No branch update requirement)
-  - Document branch protection rules in `docs/BRANCH_PROTECTION.md`
 - [x] T039 [P] [WS-261] [TOA-272] Implement branch name validation workflow
   - Ensure `branch-name-validation.yml` is deployed and active
   - Verify `npm run validate:branch-name` is called on every PR push

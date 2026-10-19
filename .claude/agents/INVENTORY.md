@@ -104,9 +104,9 @@ Agents are automatically discovered by the Claude Code session via the `.claude/
 
 Agent execution budgets are tracked separately per T7.3 (TOA-271). Each agent has:
 
-- **Token budget**: Per-invocation maximum tokens
-- **Execution quota**: Maximum invocations per period (day/week/sprint)
-- **Rate limiting**: Enforced by Claude Code runtime
+- **Token budget**: Per-invocation maximum tokens (policy target)
+- **Execution quota**: Maximum invocations per period (policy target)
+- **Rate limiting**: Enforced by agent implementation and caller discipline
 
 See `.github/specs/001-repo-governance-layout-and-agentic-workflows/` for budget allocation details.
 
@@ -199,11 +199,11 @@ Do NOT use an agent when:
 
 ### Budget Enforcement (TOA-271)
 
-Hard limits enforced by Claude Code runtime:
+Required budget controls (policy targets; enforcement owned separately by TOA-271):
 
 - **Token budget**: Maximum tokens per invocation (e.g., 20K for changelog agent)
 - **Execution quota**: Maximum invocations per time period (e.g., 5 per day)
-- **Rate limiting**: Enforced at runtime; agent blocked if limits exceeded
+- **Rate limiting**: To be enforced at runtime; agent blocked if limits exceeded
 - **Retry policy**: Configurable retries (typically 1-2) with exponential backoff
 - **Timeout**: Wall-clock timeout per invocation (e.g., 3 minutes)
 

@@ -10,22 +10,22 @@ This document defines the budget control mechanisms, enforcement points, and esc
 
 ## Budget Types
 
-Each agent has hard limits across four dimensions:
+Each agent has required budget limits across four dimensions (enforcement owned separately by TOA-271):
 
 | Budget Type | Unit | Purpose | Enforcement |
 |------------|------|---------|------------|
-| **Token budget** | Tokens per invocation | Limit inference cost per agent execution | Host-side hard limit; execution stops at boundary |
-| **Execution quota** | Invocations per period | Limit agent usage frequency (daily/weekly) | Host-side enforcement; quota exceeded blocks execution |
-| **Rate limit** | Requests per second | Prevent API overload and rate-limit errors | Host-side runtime limiting; queues excess requests |
+| **Token budget** | Tokens per invocation | Limit inference cost per agent execution | Policy target; to be enforced at runtime |
+| **Execution quota** | Invocations per period | Limit agent usage frequency (daily/weekly) | Policy target; enforcement TBD |
+| **Rate limit** | Requests per second | Prevent API overload and rate-limit errors | Policy target; to be enforced at runtime |
 | **Retry policy** | Attempts per failure | Control escalation costs on transient errors | Exponential backoff (2s, 4s, 8s, 16s) + manual pause |
 
 ---
 
 ## Enforcement Points
 
-### Host-Side Hard Limits (Mandatory)
+### Host-Side Hard Limits (Policy Targets — TOA-271)
 
-All budget constraints are enforced by the Claude Code runtime **before** agent execution, never as advisory guidance:
+All budget constraints are intended to be enforced by the Claude Code runtime **before** agent execution, not as advisory guidance. Implementation status: Pending (TOA-271):
 
 1. **Token budget enforcement**:
    - Runtime reads `max_tokens` parameter for each agent
@@ -79,7 +79,7 @@ Transient failures (rate limits, timeouts, network errors) trigger automatic ret
 
 | Failure Type | Retry Count | Backoff | Final Action |
 |------------|------------|---------|-------------|
-| Rate limit (429) | 3 retries | Exponential (2s, 4s, 8s) | Manual escalation if all fail |
+| Rate limit (429) | 4 retries | Exponential (2s, 4s, 8s, 16s) | Manual escalation if all fail |
 | Timeout | 1 retry | 30s delay | Pause and ask owner for guidance |
 | Network error | 2 retries | Exponential (2s, 4s) | Fail and report to owner |
 | Token budget exceeded | 0 retries | N/A | Pause execution immediately |
@@ -214,7 +214,7 @@ Body:
 ```
 
 ### Change Log
-All budget changes logged in `.claude/BUDGET_CONTROLS.md#changelog`:
+All budget changes logged in `.github/BUDGET_CONTROLS.md#change-log`:
 
 ```markdown
 ## Change Log

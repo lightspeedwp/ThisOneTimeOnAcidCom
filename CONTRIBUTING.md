@@ -541,7 +541,7 @@ This repository is part of the **LightSpeed organization governance** framework:
 | Decision | Status | Documentation |
 |----------|--------|---|
 | Branch naming pattern `{type}/{scope}-{title}` | ✅ Enforced | Section 1: Branch naming above |
-| PR template routing by branch type | ✅ Enforced | Section 3: Pull requests above |
+| PR template routing by branch type | 🟡 Unverified | Section 3: Pull requests above (T035 in progress) |
 | Protected files require approval | ✅ Enforced | Protected files workflow above |
 | npm-only package manager | ✅ Enforced | Prerequisites section above |
 | Node.js 24 LTS pinned | ✅ Enforced | Prerequisites section above |

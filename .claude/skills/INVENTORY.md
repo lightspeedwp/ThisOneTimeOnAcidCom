@@ -123,7 +123,7 @@ Each skill specification (`SKILL.md` file) should include:
 
 ### Budget Enforcement
 
-Each skill has hard limits enforced by Claude Code runtime:
+Each skill has required budget limits (policy targets; enforcement owned separately by TOA-271):
 
 - **Token budget**: Maximum tokens per invocation (e.g., 5K for branch validation)
 - **Execution time**: Wall-clock timeout (e.g., 1 minute)

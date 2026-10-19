@@ -4,12 +4,12 @@ This directory contains GitHub Discussions category templates for ThisOneTimeOnA
 
 ## Available Categories
 
-| Template | Purpose | Category Name |
-|----------|---------|---------------|
-| `feature-request.yml` | Feature ideas and enhancement requests | Feature Requests |
-| `question-and-answer.yml` | Q&A support and troubleshooting | Questions & Answers |
-| `show-and-tell.yml` | Community showcase and project sharing | Show and Tell |
-| `general.yml` | General community discussion | General |
+| Template | Purpose | Category Name | Category Slug |
+|----------|---------|---------------|---------------|
+| `feature-request.yml` | Feature ideas and enhancement requests | Feature Requests | `feature-requests` |
+| `question-and-answer.yml` | Q&A support and troubleshooting | Questions & Answers | `questions-answers` |
+| `show-and-tell.yml` | Community showcase and project sharing | Show and Tell | `show-and-tell` |
+| `general.yml` | General community discussion | General | `general` |
 
 ## Setup Instructions
 

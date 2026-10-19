@@ -125,13 +125,13 @@ Playwright enables browser-based testing of the full application. Setup is requi
 
 ### Installing Browsers
 
-First-time setup:
+First-time setup — install Playwright browsers separately:
 
 ```bash
-npm run test:e2e
+npx playwright install
 ```
 
-This installs Playwright browsers (Chromium, Firefox, Safari) before running tests.
+This installs Playwright browsers (Chromium, Firefox, Safari) needed for running tests.
 
 ### Running E2E Tests
 
@@ -225,9 +225,9 @@ This runs all three suites in sequence:
 
 Tests are integrated into GitHub Actions workflows:
 
-- **`test.yml`** – Runs unit tests on every PR
-- **`build-verify.yml`** – Runs build tests on every PR
-- **`e2e-tests.yml`** – Runs e2e tests on release branches (optional)
+- **`tests.yml`** – Runs unit and build verification tests on every PR
+- **`claude-guard-tests.yml`** – Runs Claude agent validation tests
+- E2E tests are manual or triggered on release branches (optional)
 
 All checks must pass before merging to `develop`.
 

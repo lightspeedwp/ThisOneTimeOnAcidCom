@@ -3,8 +3,9 @@
 # These files are critical to repository governance, testing, and integration.
 # Changes require explicit owner approval and must link to an approved change-request issue.
 #
-# List Format: Path pattern (one per line, supports glob)
+# List Format: Path pattern (one per line, extended regular expressions with anchors)
 # Patterns are matched with: git diff --name-only | grep -E "^{pattern}"
+# Note: Use anchors (^ for start, $ for end) and escape metacharacters (\. \/ etc)
 #
 # Protected File Categories:
 # 1. Governance files (.github/) — workflows, labels, issue types, templates

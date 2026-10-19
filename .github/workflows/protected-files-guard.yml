@@ -9,7 +9,7 @@ jobs:
     name: Check Protected Files
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: read
+      pull-requests: write
       contents: read
 
     steps:
@@ -20,21 +20,24 @@ jobs:
 
       - name: Check for protected file modifications
         id: protected_check
+        env:
+          BASE_REF: ${{ github.base_ref }}
         run: |
           # Get list of changed files in the PR
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          CHANGED_FILES=$(git diff --name-only origin/"${BASE_REF}"...HEAD)
 
           # Define protected file patterns (from .github/PROTECTED_FILES.txt)
+          # Patterns are extended regular expressions with proper escaping
           PROTECTED_PATTERNS=(
-            ".github/"
-            "scripts/"
-            "AGENTS.md"
-            "CHANGELOG.md"
-            "ATTRIBUTIONS.md"
-            "guidelines/"
-            "src/app/utils/supabase/"
-            "src/app/components/figma/ImageWithFallback.tsx"
-            "tasks/task-list.md"
+            "^\.github/"
+            "^scripts/"
+            "^AGENTS\.md$"
+            "^CHANGELOG\.md$"
+            "^ATTRIBUTIONS\.md$"
+            "^guidelines/"
+            "^src/app/utils/supabase/"
+            "^src/app/components/figma/ImageWithFallback\.tsx$"
+            "^tasks/task-list\.md$"
           )
 
           PROTECTED_MODIFIED=()
@@ -42,7 +45,7 @@ jobs:
           # Check each changed file against protected patterns
           for file in $CHANGED_FILES; do
             for pattern in "${PROTECTED_PATTERNS[@]}"; do
-              if [[ "$file" =~ ^${pattern} ]]; then
+              if [[ "$file" =~ $pattern ]]; then
                 PROTECTED_MODIFIED+=("$file")
                 break
               fi
@@ -91,12 +94,17 @@ jobs:
 
             See [AGENTS.md § Protected and locked files](../../AGENTS.md#protected-and-locked-files) for details.`;
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
+            try {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            } catch (error) {
+              // Handle fork PRs that don't have write permissions
+              core.warning(`Failed to post comment: ${error.message}. This may be expected for fork PRs.`);
+            }
 
       - name: Fail check if protected files modified
         if: steps.protected_check.outputs.protected_files_found == 'true'

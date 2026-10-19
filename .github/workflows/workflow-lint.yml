@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
+      pull-requests: write
 
     steps:
       - name: Checkout repository
@@ -60,13 +60,31 @@ jobs:
 
             WORKFLOW_NAME=$(basename "$workflow")
 
-            # Validate YAML syntax using Python
-            if python3 -c "import yaml; yaml.safe_load(open('$workflow'))" 2>/dev/null; then
+            # Validate YAML syntax using Python (properly quoted to avoid injection)
+            if WORKFLOW_PATH="$workflow" python3 -c "
+import yaml
+import sys
+import os
+workflow_path = os.environ.get('WORKFLOW_PATH')
+try:
+  with open(workflow_path, 'r') as f:
+    yaml.safe_load(f)
+  sys.exit(0)
+except Exception as e:
+  print(f'Error: {e}', file=sys.stderr)
+  sys.exit(1)
+" 2>/dev/null; then
               echo "✅ $WORKFLOW_NAME"
               ((VALIDATED++))
             else
               echo "❌ $WORKFLOW_NAME — YAML syntax error"
-              python3 -c "import yaml; yaml.safe_load(open('$workflow'))" 2>&1 | sed 's/^/   /'
+              WORKFLOW_PATH="$workflow" python3 -c "
+import yaml
+import os
+workflow_path = os.environ.get('WORKFLOW_PATH')
+with open(workflow_path, 'r') as f:
+  yaml.safe_load(f)
+" 2>&1 | sed 's/^/   /'
               ((ERRORS++))
             fi
           done
@@ -88,16 +106,21 @@ jobs:
       - name: Report validation results
         if: always()
         uses: actions/github-script@v7
+        env:
+          VALIDATION_RESULT: ${{ steps.validate.outputs.validation_result }}
         with:
           script: |
-            const result = '${{ steps.validate.outputs.validation_result }}';
+            const result = process.env.VALIDATION_RESULT || 'unknown';
             const status = result === 'passed' ? '✅' : '❌';
+            const resultText = result === 'passed' ? 'All workflows passed validation' :
+                               result === 'failed' ? 'Some workflows have syntax errors — see job output above' :
+                               'Validation result unknown';
 
             const message = `${status} **Workflow Syntax Validation**
 
             All workflows in \`.github/workflows/\` have been validated for YAML syntax.
 
-            **Result**: ${result === 'passed' ? 'All workflows passed validation' : 'Some workflows have syntax errors — see job output above'}`;
+            **Result**: ${resultText}`;
 
             // Only comment if there's an associated PR
             if (context.issue.number) {
