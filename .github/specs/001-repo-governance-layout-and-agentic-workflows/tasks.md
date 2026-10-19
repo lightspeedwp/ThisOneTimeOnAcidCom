@@ -231,15 +231,17 @@
 
 ### Implementation for WS-261
 
-- [ ] T031 [WS-261] [TOA-243] Implement locked-files-guard.yml evaluation workflow
-  - Create `.github/workflows/locked-files-guard.yml` (if not present)
-  - Configure to detect modifications to protected files: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`
-  - Verify workflow blocks PR merge if protected files are modified
-  - Document when it runs: on every PR push (no manual trigger needed)
-- [ ] T032 [WS-261] [TOA-244] Implement workflow syntax validation (workflow-lint.yml)
-  - Ensure `workflow-lint.yml` is deployed and validates all GitHub Actions YAML syntax
-  - Run workflow manually to verify no syntax errors in `.github/workflows/*.yml`
-  - Document which workflows are validated and error reporting mechanism
+- [x] T031 [WS-261] [TOA-243] Implement locked-files-guard.yml evaluation workflow
+  - ✅ Create `.github/workflows/protected-files-guard.yml` (was created as Phase 2 T017c prerequisite)
+  - ✅ Create `.github/PROTECTED_FILES.txt` canonical list with all protected file categories
+  - ✅ Configure workflow to detect all protected files: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`, Supabase utils, Figma components, task-list
+  - ✅ Verify workflow blocks PR merge (exit 1) if protected files are modified
+  - ✅ Workflow runs on PR events and via manual trigger; documents requirement for change-request issues
+- [x] T032 [WS-261] [TOA-244] Implement workflow syntax validation (workflow-lint.yml)
+  - ✅ Create `.github/workflows/workflow-lint.yml` to validate all GitHub Actions YAML syntax
+  - ✅ Verify all 13 workflows have valid YAML syntax: branch-name-validation, changelog-unified, claude-guard-tests, dependency-automation, dependency-validation, drift-detection, labeling-unified, locked-files-guard, pr-template-routing, protected-files-guard, tests, validate-specifications, workflow-lint
+  - ✅ Workflow runs on PR changes to .github/workflows/ and can be triggered manually
+  - ✅ Reports validation results as comment on PR when applicable
 - [ ] T033 [P] [WS-261] [TOA-250] Create GitHub Discussions templates
   - Enable Discussions in repository settings (Settings → Discussions → checkbox enabled)
   - Create `.github/DISCUSSION_TEMPLATE/` directory

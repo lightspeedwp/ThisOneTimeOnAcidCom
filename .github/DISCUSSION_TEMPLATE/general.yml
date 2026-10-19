@@ -1,26 +1,37 @@
-labels: ['status:needs-triage']
-title: "[Discussion] "
+title: General Discussion
+labels: [general]
 body:
   - type: markdown
     attributes:
       value: |
-        Start a general discussion about ThisOneTimeOnAcidCom.
+        # General Discussion
+
+        Start a conversation about anything related to this project. This is a space for community dialogue.
+
   - type: textarea
     id: topic
     attributes:
-      label: "What would you like to discuss?"
-      description: "Feel free to bring up any topic related to the project"
-      placeholder: "I'd like to discuss... / What does everyone think about..."
+      label: Discussion Topic
+      description: What would you like to discuss?
+      placeholder: |
+        I'd like to discuss...
     validations:
       required: true
+
   - type: textarea
-    id: context
+    id: details
     attributes:
-      label: "Context"
-      description: "Provide any relevant background or details"
-      placeholder: "Here's some context..."
-  - type: textarea
-    id: thoughts
+      label: Details & Context
+      description: Provide any additional context or details to help start the conversation.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: guidelines
     attributes:
-      label: "Your thoughts"
-      description: "What are your initial thoughts or suggestions?"
+      label: Community Guidelines
+      options:
+        - label: I've read the project's Code of Conduct and community guidelines
+          required: true
+        - label: My discussion is constructive and respectful
+          required: true
