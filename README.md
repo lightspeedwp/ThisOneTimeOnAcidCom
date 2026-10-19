@@ -62,28 +62,75 @@ Visit **`/dev/animations`** for an interactive showcase with:
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies
+**Requirements:** Node.js 24 LTS or later (pinned in `.nvmrc`)
+
+### 1. Use Correct Node.js Version
 ```bash
-pnpm install
+nvm use  # Uses version from .nvmrc (Node.js 24)
 ```
 
-### 2. Configure Environment
-Copy `.env.example` to `.env` and configure as needed.
+### 2. Install Dependencies (npm only)
 ```bash
-cp .env.example .env
+npm ci  # Install exact versions from package-lock.json
 ```
 
-### 3. Verify Build
-Run the verification script to check environment variables, links, and assets.
+### 3. Run Development Server
 ```bash
-pnpm dlx ts-node scripts/verify-build.ts
+npm run dev
+```
+Access the app at `http://localhost:5173`
+
+### 4. Run Tests & Validation
+```bash
+npm test              # Run all test suites
+npm run test:unit    # Jest unit tests
+npm run test:build   # Build verification
+npm run test:e2e     # Playwright e2e tests
+npm run validate:branch-name  # Validate branch naming
 ```
 
-### 4. Run Development Server
+## 🤝 Contributing
+
+### Before You Start
+
+Read these key governance documents:
+
+| Document | Purpose |
+|----------|---------|
+| **[CONTRIBUTING.md](./CONTRIBUTING.md)** | Contribution workflow, branch naming, PR process |
+| **[AGENTS.md](./AGENTS.md)** | AI agent rules and governance for this repository |
+| **[CLAUDE.md](./CLAUDE.md)** | Repository-specific Claude Code instructions |
+
+### Branch Naming
+
+All branches **must** follow this pattern: `{type}/{scope}-{title}`
+
+**Valid types:** `feat`, `fix`, `hotfix`, `docs`, `test`, `refactor`, `chore`, `design`, `security` (and more — see [CONTRIBUTING.md](./CONTRIBUTING.md))
+
+**Validate before pushing:**
 ```bash
-pnpm dev
+npm run validate:branch-name
 ```
-Access the app at `http://localhost:5173`.
+
+### Testing & Validation
+
+See [docs/TESTING.md](./docs/TESTING.md) for comprehensive testing guide covering:
+- **Unit tests** (Jest ESM) — 588 tests
+- **Build verification** (Bats) — 12 tests
+- **End-to-end tests** (Playwright) — configured and ready
+- **Spec Kit regression** — 103/104 baseline
+
+### Repository Governance
+
+This repository follows specification-driven development using SpecKit:
+
+1. **Specify** — Document requirements in `spec.md`
+2. **Clarify** — Resolve ambiguities with Q&A
+3. **Plan** — Design implementation approach
+4. **Decompose** — Break into actionable tasks
+5. **Implement** — Execute tasks and commit
+
+All specifications live in [.github/specs/](./.github/specs/) with full catalog at [CATALOG.md](./.github/specs/CATALOG.md).
 
 ## 📚 Documentation
 
