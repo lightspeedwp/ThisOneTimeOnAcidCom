@@ -44,6 +44,37 @@ jobs:
           VALIDATED=0
           WORKFLOW_DIR=".github/workflows"
 
+          # Use the same strict loader for validation and error reporting.
+          validate_yaml() {
+            WORKFLOW_PATH="$1" python3 - <<'PYTHON'
+          import os
+          import sys
+          import yaml
+
+          class StrictSafeLoader(yaml.SafeLoader):
+              def construct_mapping(self, node, deep=False):
+                  keys = set()
+                  for key_node, _ in node.value:
+                      if key_node.tag == 'tag:yaml.org,2002:merge':
+                          key = '<<'
+                      else:
+                          key = self.construct_object(key_node, deep=deep)
+                      if key in keys:
+                          raise yaml.constructor.ConstructorError(
+                              'while constructing a mapping', node.start_mark,
+                              f'duplicate key: {key}', key_node.start_mark)
+                      keys.add(key)
+                  return super().construct_mapping(node, deep=deep)
+
+          try:
+              with open(os.environ['WORKFLOW_PATH'], 'r') as f:
+                  yaml.load(f, Loader=StrictSafeLoader)
+          except Exception as e:
+              print(f'Error: {e}', file=sys.stderr)
+              sys.exit(1)
+          PYTHON
+          }
+
           if [[ ! -d "$WORKFLOW_DIR" ]]; then
             echo "⚠️ No workflows directory found at $WORKFLOW_DIR"
             exit 0
@@ -61,30 +92,12 @@ jobs:
             WORKFLOW_NAME=$(basename "$workflow")
 
             # Validate YAML syntax using Python (properly quoted to avoid injection)
-            if WORKFLOW_PATH="$workflow" python3 -c "
-import yaml
-import sys
-import os
-workflow_path = os.environ.get('WORKFLOW_PATH')
-try:
-  with open(workflow_path, 'r') as f:
-    yaml.safe_load(f)
-  sys.exit(0)
-except Exception as e:
-  print(f'Error: {e}', file=sys.stderr)
-  sys.exit(1)
-" 2>/dev/null; then
+            if validate_yaml "$workflow" 2>/dev/null; then
               echo "✅ $WORKFLOW_NAME"
               ((VALIDATED++))
             else
               echo "❌ $WORKFLOW_NAME — YAML syntax error"
-              WORKFLOW_PATH="$workflow" python3 -c "
-import yaml
-import os
-workflow_path = os.environ.get('WORKFLOW_PATH')
-with open(workflow_path, 'r') as f:
-  yaml.safe_load(f)
-" 2>&1 | sed 's/^/   /'
+              validate_yaml "$workflow" 2>&1 | sed 's/^/   /'
               ((ERRORS++))
             fi
           done
