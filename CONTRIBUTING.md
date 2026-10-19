@@ -7,11 +7,11 @@ AI agents should also read [AGENTS.md](AGENTS.md).
 
 ## Prerequisites
 
-- **[Node.js](https://nodejs.org/)**. The repository does not pin a version: there is no `.nvmrc`, `.node-version` or `engines` field. Use a current LTS release, and check the Netlify deploy log for the version production uses.
-- **npm**, which ships with Node.js. `package-lock.json` is the only committed lockfile, and Netlify builds with `npm run build`.
+- **[Node.js](https://nodejs.org/) 24 LTS or later**. The repository pins Node.js 24 via `.nvmrc` and the `engines` field in `package.json`. Use `nvm use` or your preferred version manager to switch to the correct version.
+- **npm** (version 11+), which ships with Node.js. `package-lock.json` is the only committed lockfile, and Netlify builds with `npm run build`.
 - **[Git](https://git-scm.com/)**
 
-> Do not use pnpm or Yarn to install dependencies, and do not commit another lockfile. Some pnpm configuration remains in the repository (`pnpm-workspace.yaml`, `pnpm.overrides` in `package.json` and `src/app/netlify.toml`), but npm is the manager currently in use. See [Unresolved decisions](#unresolved-decisions-owner-confirmation-required).
+> Do not use pnpm or Yarn. npm is the only supported package manager. The repository uses `npm ci` to install exact dependencies from `package-lock.json`.
 
 ## Setup
 
@@ -256,15 +256,54 @@ Never replace existing images. Use `ImageWithFallback` (`src/app/components/figm
 
 ### 1. Branch naming
 
-The repository does not document a branch-prefix list. Issue #2 asks for the `docs/` prefix for documentation work, for example `docs/repository-agent-contributor-guidance`. Until the owner confirms the full convention, choose a prefix that describes the change and matches the linked issue. Branches starting with `dependabot/`, `deps/` or `renovate/` are reserved for dependency automation.
+**All branches MUST follow this pattern:** `{type}/{scope}-{title}`
 
-| Change Type | Branch Prefix | Example |
+Where:
+- **type** – Work type (required, one value from the table below)
+- **scope** – Component or area (required, lowercase, no spaces)
+- **title** – Descriptive name (required, lowercase, hyphens between words)
+
+**FORBIDDEN prefixes** (these break PR template routing and automation):
+- ❌ `claude/` — Reserved for Claude Code internal sessions
+- ❌ `copilot/` — Reserved for GitHub Copilot integration
+
+**Valid branch types:**
+
+| Type | Purpose | Example |
 |---|---|---|
-| Documentation | `docs/` | `docs/update-contributing` |
-| Feature | `feat/` | `feat/add-gallery-filter` |
-| Bug fix | `fix/` | `fix/mobile-menu-overflow` |
-| Refactor | `refactor/` | `refactor/extract-card-component` |
-| Dependencies | `deps/` | `deps/git-hooks-add-lefthook` |
+| `feat` | New feature or enhancement | `feat/dark-mode-support` |
+| `fix` | Bug fix | `fix/mobile-menu-overflow` |
+| `hotfix` | Urgent production fix | `hotfix/critical-vulnerability` |
+| `release` | Release branch | `release/v1.0.0` |
+| `refactor` | Code refactoring | `refactor/hook-consolidation` |
+| `chore` | Maintenance, no user changes | `chore/dependency-update` |
+| `task` | Scoped unit of work | `task/ui-component-audit` |
+| `doc` | Single documentation change | `doc/readme-typo-fix` |
+| `docs` | Documentation | `docs/update-contributing` |
+| `design` | Design system or UI | `design/button-component-update` |
+| `test` | Tests and QA | `test/e2e-homepage-tests` |
+| `perf` | Performance optimization | `perf/image-lazy-loading` |
+| `ci` | CI/CD and automation | `ci/github-actions-workflow` |
+| `build` | Build system changes | `build/vite-config-update` |
+| `deps` | Dependency updates | `deps/upgrade-major-versions` |
+| `security` | Security fixes | `security/xss-vulnerability-fix` |
+
+**Before pushing, validate your branch name:**
+
+```bash
+npm run validate:branch-name
+```
+
+Expected output:
+```
+Branch 'feat/your-feature-name' matches the repository branching strategy.
+```
+
+**Why branch naming matters:**
+- Correct names enable automatic PR template selection
+- GitHub Actions workflows depend on valid prefixes
+- Labeling automation uses branch names to assign labels
+- Invalid names cause validation failures and CI delays
 
 ### 2. Making changes
 
@@ -275,10 +314,34 @@ The repository does not document a branch-prefix list. Issue #2 asks for the `do
 
 ### 3. Pull requests
 
-- Write a clear description explaining what changed and why.
-- List the validation commands you ran and their results, including failures.
-- Link related issues. Use "Related to #N" when acceptance criteria are still outstanding, and use a closing keyword only when the PR fully resolves the issue.
-- The repository has no pull request template. If organisation-level templates apply, use the one that matches the change type.
+**PR Template Selection:**
+
+When you create a pull request, GitHub automatically selects a template based on your branch name. The mapping is:
+
+| Branch Type | Template | Used For |
+|---|---|---|
+| `feat/` | Feature template | New features and enhancements |
+| `fix/` | Fix template | Bug fixes and hotfixes |
+| `docs/`, `doc/` | Documentation template | Documentation changes |
+| `design/` | Design template | Design system and UI updates |
+| `test/` | Test template | Test suite and QA changes |
+| `refactor/` | Refactor template | Code refactoring (no user changes) |
+| `chore/` | Chore template | Build, deps, maintenance (no user changes) |
+| Other | Default template | When branch type doesn't match above |
+
+**Template routing is automatic:** If you follow the branch naming convention above, GitHub will load the matching template when you open your PR. You don't need to manually select it.
+
+**Fill out all template sections:**
+- Write a clear description explaining what changed and why
+- List the validation commands you ran and their results, including any failures
+- Link related issues using "Related to #N" when acceptance criteria are still outstanding, and use a closing keyword (e.g. "Closes #N") only when the PR fully resolves the issue
+- Complete any template-specific sections (e.g. screenshots for UI changes, test results for fixes)
+
+**If the wrong template loads:**
+- Verify your branch name matches the pattern `{type}/{scope}-{title}`
+- Check that you didn't use a forbidden prefix (`claude/`, `copilot/`)
+- Run `npm run validate:branch-name` to confirm validity
+- If the issue persists, manually select the correct template from the GitHub dropdown
 
 ### 4. Changelog
 
@@ -297,17 +360,23 @@ The changelog is the root [CHANGELOG.md](CHANGELOG.md). It is a protected file: 
 - **Component usage:** check the specific file in [guidelines/components/](guidelines/components/)
 - **Issue tracking:** [GitHub Issues](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
 
+## Resolved decisions
+
+The following were documented as unresolved but have now been clarified:
+
+- ✅ **Branch naming:** `{type}/{scope}-{title}` pattern required. Validated by `npm run validate:branch-name`.
+- ✅ **PR templates:** Automatically routed based on branch type (see "Pull requests" section above).
+- ✅ **Node.js version:** Pinned to Node.js 24 LTS. Use `.nvmrc` (`nvm use`) or check `package.json` `engines` field.
+- ✅ **Package manager:** npm-only. `package-lock.json` is the canonical lockfile. pnpm remnants to be removed per TOA-262.
+- ✅ **Tailwind:** BEM-only CSS enforced per STYLE-001. Tailwind dependencies to be removed during Phase 6 cleanup.
+
 ## Unresolved decisions (owner confirmation required)
 
 The full list, with evidence, is in [AGENTS.md § Unresolved decisions](AGENTS.md#unresolved-decisions-owner-confirmation-required). In summary:
 
-1. **Package manager:** confirm npm and decide what to do with the pnpm remnants.
-2. **Node.js version:** none is pinned. Confirm the intended runtime.
-3. **Netlify config:** `src/app/netlify.toml` is inactive. Decide whether to move it, delete it or change the base directory.
-4. **BEM vs Tailwind:** the guidelines forbid Tailwind, but it is installed and loaded.
-5. **`import.meta.env`:** it is forbidden in the bundler table but recommended in Guidelines.md § 12, and still used in one component.
-6. **Quality gates:** there are no test, lint or typecheck scripts, and the guidelines reference scripts that do not exist.
-7. **Journal scripts:** they expect `journal-content/`, but content is in `content/journal/`.
-8. **Duplicate attribution files:** a root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. Clarify which is canonical and whether both are needed.
-9. **PostCSS:** two config files exist. The root `postcss.config.mjs` is the likely active one.
-10. **Branch and PR conventions:** no template or prefix list is committed.
+1. **Netlify config:** `src/app/netlify.toml` is inactive. Decide whether to move it, delete it or change the base directory.
+2. **`import.meta.env`:** it is forbidden in the bundler table but recommended in Guidelines.md § 12, and still used in one component.
+3. **Quality gates:** there are no test, lint or typecheck scripts, and the guidelines reference scripts that do not exist.
+4. **Journal scripts:** they expect `journal-content/`, but content is in `content/journal/`.
+5. **Duplicate attribution files:** a root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. Clarify which is canonical and whether both are needed.
+6. **PostCSS:** two config files exist. The root `postcss.config.mjs` is the likely active one.

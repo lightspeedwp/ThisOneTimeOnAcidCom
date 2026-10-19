@@ -208,6 +208,132 @@
 
 ---
 
+---
+
+## R10: Repository Path Inventory (T002: Documentation & Context Mapping)
+
+**Purpose**: Document all directories in ThisOneTimeOnAcidCom, their purposes, consumers, and generated outputs. Used for validation, impact analysis, and contributor understanding.
+
+### Path Inventory
+
+#### Top-Level Directories
+
+| Path | Purpose | Consumers | Generated Outputs | Protected? | Notes |
+|------|---------|-----------|-------------------|------------|-------|
+| `.claude/` | Claude Code configuration and agents | Claude Code, subagents | `.claude/agents/INVENTORY.md`, `.claude/skills/INVENTORY.md` | No | 18 agents (~5 skills) baseline per TOA-271 |
+| `.gemini/` | Gemini API integration & commands | Gemini CLI | Command output, cached responses | No | Legacy; `commands/` subdirectory for custom commands |
+| `.git/` | Git repository metadata | Git CLI | Commits, branches, refs | No | Auto-managed; ignored via `.gitignore` |
+| `.github/` | GitHub community files & workflows | GitHub platform, CI/CD | Workflow logs, artifacts | **YES** | **LOCKED**: governance files, templates, workflows (see Constitution II) |
+| `.specify/` | SpecKit configuration & memory | SpecKit CLI, `/speckit-*` skills | `.specify/memory/`, feature directories | No | Configuration: `init-options.json`, `extensions.yml` |
+| `content/` | Markdown content for features (book, blog, events, etc.) | Next.js app, `npm run build` | Compiled into dist during build | No | Subdirs: `about/`, `blog/`, `book/`, `events/`, `faq/` |
+| `dist/` | Production build output | Web servers (Netlify), CI/CD | Built artifacts (HTML, JS, CSS) | No | **GENERATED**: `npm run build` creates this; commit ignored |
+| `docs/` | Developer & contributor documentation | Contributors, agents, CI/CD | Markdown files (committed) | No | Includes: ANTHROPIC_PLATFORMS.md, BRANCH_NAMING_LOCAL.md, testing guides, etc. |
+| `e2e/` | E2E test fixtures & configuration | Playwright, `npm run test:e2e` | Test reports, screenshots (local) | No | Alternative to `tests/e2e/`; structure TBD |
+| `guidelines/` | Design & development standards | Components, CI/CD validation | BEM stylesheets, component guides | **YES** | **LOCKED**: CSS architecture, patterns, components, sections |
+| `node_modules/` | NPM dependencies | All build/test commands | JavaScript modules | No | **GENERATED** & **IGNORED**: `npm ci` creates; never committed |
+| `plan/` | Project planning documents | Contributors, product mgmt | Markdown files (committed) | No | Strategic plans, roadmaps, etc. |
+| `prompts/` | AI prompts (portable & project-specific) | Agents, LLM calls | Markdown prompts (committed) | No | Subdirs for portability; project-specific→`.github/prompts/` per AGENTS.md |
+| `public/` | Static assets served at root | Web server, `npm run build` | Copied to dist during build | No | Favicon, manifest.json, robots.txt, etc. |
+| `recovered-assets/` | Recovered/archived design assets | Manual staging, Figma Make | Figma asset references, media library backups | No | Pilot batch for T011 (Figma API validation) |
+| `reports/` | Project audits, analysis, metrics | Contributors, auditors | Markdown reports (committed) | No | Categories: `audit/`, `validation/`, `metrics/` (per T022) |
+| `scripts/` | Build, validation, and utility scripts | `npm run` commands, CI/CD, developers | Exit codes, logs, generated test output | **YES (AGENTS.md)** | Includes: validate-branch-name.js, parse-journal-markdown.ts, Figma scripts, etc. |
+| `src/` | Application source code (React, TypeScript) | Vite, `npm run dev`, `npm run build` | dist/ (bundled app) | No | Subdirs: `app/`, `styles/`, `__tests__/` |
+| `tasks/` | Task tracking & project management | Contributors, status updates | Markdown task lists (committed) | **YES (AGENTS.md)** | `task-list.md` is protected; never delete |
+| `tests/` | Test suites (Jest, Bats, Playwright) | `npm test` commands | Coverage reports, test logs | No | Subdirs: unit tests, build.bats, e2e/ (Playwright) |
+
+#### Subdirectories (Key Examples)
+
+**`src/app/`** – React app root
+- `components/` – React components (BEM-styled)
+- `hooks/` – Custom React hooks
+- `public/` – Static assets (images, fonts)
+- `supabase/` – Supabase client configuration
+- `scripts/` – App-specific scripts
+- `data/` – JSON/TypeScript data files
+- `lib/` – Utilities and helpers
+- `utils/` – Shared utilities (including `supabase/`, protected)
+
+**`src/styles/`** – Stylesheet architecture
+- `patterns/` – BEM block patterns
+- `components/` – Component-specific styles
+- `effects/` – Animation and effect styles
+- `themes/` – Theme variable files
+- `blocks/` – Block component styles
+- `tokens/` – Design token definitions
+
+**`guidelines/`** – Design system & standards (Protected)
+- `patterns/` – Design patterns
+- `components/` – Component specifications
+- `responsive/` – Responsive design rules
+- `sections/` – Page section layouts
+- `templates/` – Page templates
+- `icons/` – Icon guidelines and library
+- `design-tokens/` – Token reference
+- `blocks/` – Block component guidance
+- `parts/` – Part & subcomponent patterns
+- `mobile/` – Mobile-specific rules
+- `troubleshooting/` – Common issues
+
+**`tests/`** – Test organization
+- `unit/` – Jest unit tests (`.test.js`, `.test.ts`)
+- `build.bats` – Bats build verification
+- `e2e/` – Playwright end-to-end tests
+
+**`.github/specs/001-repo-governance-*/`** – Specification artefacts
+- `spec.md` – Requirements & acceptance criteria
+- `plan.md` – Implementation plan
+- `research.md` – Technical research & decisions (this file)
+- `data-model.md` – Entity relationships (if applicable)
+- `contracts/` – API contracts, test requirements
+- `checklists/` – Quality validation checklists
+- `tasks.md` – Actionable task breakdown
+- `quickstart.md` – Integration scenarios
+
+#### Ignored Directories (`.gitignore`)
+
+| Pattern | Purpose | Generator | Cleanup Method |
+|---------|---------|-----------|-----------------|
+| `node_modules/` | NPM dependencies | `npm ci` | `rm -rf node_modules/` |
+| `dist/` | Production build | `npm run build` | `rm -rf dist/` |
+| `.vite/` | Vite cache | Vite dev server | Auto-cleaned on restart |
+| `.netlify/` | Netlify local cache | Netlify CLI | Auto-cleaned on redeploy |
+| `.env.local` | Local environment vars | Manual or `.env.example` | Manual (never committed) |
+| `*.log` | Build/runtime logs | Build tools | Auto-cleared or manual |
+
+### Impact Analysis
+
+**Modifications to Locked Directories Require Approval**:
+- `.github/` – Submit [PROTECTED-FILE-CHANGE-REQUEST] issue to lightspeedwp/.github
+- `guidelines/` – Requires governance review (CSS architecture locked per STYLE-001)
+- `scripts/` – Validation scripts protected; new utilities welcome
+- `tasks/` – task-list.md protected; new task files OK
+- `src/app/utils/supabase/` – Supabase config protected
+- `src/app/components/figma/ImageWithFallback.tsx` – Figma integration protected
+
+**High-Frequency Build Outputs** (always ignored, safe to delete):
+- `dist/` – Rebuild with `npm run build`
+- `node_modules/` – Reinstall with `npm ci`
+- `.vite/` – Auto-regenerated on dev start
+
+**Content Changes** (safe; content-driven):
+- `content/` – Add/edit markdown; auto-compiled during build
+- `docs/` – Add/edit documentation; no build impact
+- `reports/` – Add/edit reports; no build impact
+
+### Validation Strategy
+
+**For contributors**: Consult this inventory before:
+- Adding new directories (ask if needed or use `prompts/`, `docs/`, or `reports/`)
+- Modifying locked paths (submit change request)
+- Regenerating outputs (use build commands, don't commit)
+
+**For automation**: Use this inventory for:
+- Protected-files-guard validation (detects modifications to locked paths)
+- Build output caching (ignore `dist/`, `node_modules/`, `.vite/`)
+- Specification context (when auditing repository state)
+
+---
+
 ## Next Phase
 
 **Phase 1: Design & Contracts** – Generate data-model.md, contracts/, quickstart.md based on research findings above. No blockers identified; all research validations mapped to implementation tasks.

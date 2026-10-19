@@ -36,11 +36,11 @@
 **⚠️ CRITICAL**: Phase 1 must complete before any workstream work begins
 
 - [x] T001 Create `.github/specs/` directory structure and verify numbering in `.specify/init-options.json`
-- [ ] T002 Document current path inventory in research notes: all directories, consumers, generated outputs
+- [x] T002 Document current path inventory in research notes: all directories, consumers, generated outputs
 - [x] T003 [P] Verify `.specify/` and `.gemini/` integrations remain functional post-migration
 - [x] T004 Create top-level documentation index linking all governance artefacts
 - [x] T005 Update AGENTS.md with approved decisions ratification status and test baseline (103/104)
-- [ ] T006 [P] Update CONTRIBUTING.md to reflect branch naming validation and PR template routing
+- [x] T006 [P] Update CONTRIBUTING.md to reflect branch naming validation and PR template routing
 - [x] T007 Review and validate all protected files: CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, Supabase utils, Figma assets
 
 **Checkpoint**: Governance artefacts initialized; all workstreams can begin in parallel
