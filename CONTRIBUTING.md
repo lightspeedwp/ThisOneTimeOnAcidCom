@@ -408,12 +408,47 @@ The changelog is the root [CHANGELOG.md](CHANGELOG.md). It is a protected file: 
 - Close linked issues only once their acceptance criteria are met.
 - Update related epics rather than closing them.
 
+## Using Saved Replies
+
+GitHub Saved Replies are templated responses for common feedback patterns. The LightSpeed organization maintains a library of saved replies in [lightspeedwp/.github](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies).
+
+**How to add saved replies to your account:**
+
+1. Go to your [GitHub Settings → Saved replies](https://github.com/settings/saved_replies)
+2. Click "Add a saved reply"
+3. Reference the [LightSpeed Saved Replies catalog](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
+4. Copy the template text and customize as needed
+
+**Common saved replies used in this repository:**
+
+- **Template corrections** — When a PR has the wrong template loaded
+- **Validation checks** — Standard checks that pass or fail
+- **Branch naming** — Guidance on fixing branch naming issues
+- **Merge criteria** — Reminders about acceptance criteria before merging
+- **Code review notes** — Architecture, style, or security observations
+
+**When to use saved replies:**
+
+✅ Use saved replies for:
+- Repetitive feedback (branch naming, validation checks, template corrections)
+- Standard checklists (pre-merge validation, accessibility review)
+- Gentle reminders (acceptance criteria, code ownership, guidelines)
+
+❌ Avoid saved replies for:
+- First-time feedback specific to this PR
+- Detailed technical explanations
+- Sensitive or critical issues
+- Architecture decisions requiring discussion
+
+See [lightspeedwp/.github](https://github.com/lightspeedwp/.github) for the complete catalog and contribution guide.
+
 ## Getting help
 
 - **Guidelines questions:** start with [guidelines/README.md](guidelines/README.md)
 - **Architecture questions:** see [guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)
 - **Component usage:** check the specific file in [guidelines/components/](guidelines/components/)
 - **Issue tracking:** [GitHub Issues](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
+- **Saved replies:** [LightSpeed Saved Replies](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
 
 ## Resolved decisions
 
