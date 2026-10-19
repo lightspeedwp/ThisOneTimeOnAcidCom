@@ -1,0 +1,114 @@
+name: Workflow Lint
+
+on:
+  push:
+    branches: [develop, main]
+    paths:
+      - '.github/workflows/*.yml'
+      - '.github/workflows/*.yaml'
+  pull_request:
+    paths:
+      - '.github/workflows/*.yml'
+      - '.github/workflows/*.yaml'
+  workflow_dispatch:
+
+jobs:
+  lint-workflows:
+    name: Lint GitHub Actions Workflows
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python for YAML validation
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install YAML and workflow validators
+        run: |
+          pip install --quiet pyyaml
+
+      - name: Validate workflow YAML syntax
+        id: validate
+        shell: bash
+        run: |
+          set +e
+          ERRORS=0
+          VALIDATED=0
+          WORKFLOW_DIR=".github/workflows"
+
+          if [[ ! -d "$WORKFLOW_DIR" ]]; then
+            echo "⚠️ No workflows directory found at $WORKFLOW_DIR"
+            exit 0
+          fi
+
+          echo "📋 Validating GitHub Actions workflows..."
+          echo ""
+
+          for workflow in "$WORKFLOW_DIR"/*.{yml,yaml}; do
+            # Skip if file doesn't exist (no workflows found)
+            if [[ ! -f "$workflow" ]]; then
+              continue
+            fi
+
+            WORKFLOW_NAME=$(basename "$workflow")
+
+            # Validate YAML syntax using Python
+            if python3 -c "import yaml; yaml.safe_load(open('$workflow'))" 2>/dev/null; then
+              echo "✅ $WORKFLOW_NAME"
+              ((VALIDATED++))
+            else
+              echo "❌ $WORKFLOW_NAME — YAML syntax error"
+              python3 -c "import yaml; yaml.safe_load(open('$workflow'))" 2>&1 | sed 's/^/   /'
+              ((ERRORS++))
+            fi
+          done
+
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Validated: $VALIDATED | Errors: $ERRORS"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+
+          if [[ $ERRORS -gt 0 ]]; then
+            echo "validation_result=failed" >> $GITHUB_OUTPUT
+            exit 1
+          else
+            echo "validation_result=passed" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+      - name: Report validation results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const result = '${{ steps.validate.outputs.validation_result }}';
+            const status = result === 'passed' ? '✅' : '❌';
+
+            const message = `${status} **Workflow Syntax Validation**
+
+            All workflows in \`.github/workflows/\` have been validated for YAML syntax.
+
+            **Result**: ${result === 'passed' ? 'All workflows passed validation' : 'Some workflows have syntax errors — see job output above'}`;
+
+            // Only comment if there's an associated PR
+            if (context.issue.number) {
+              try {
+                await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: message
+                });
+              } catch (error) {
+                console.log('No PR context available, skipping comment');
+              }
+            }

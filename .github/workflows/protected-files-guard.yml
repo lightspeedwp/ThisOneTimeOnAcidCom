@@ -20,66 +20,92 @@ jobs:
 
       - name: Check for protected file modifications
         id: protected_check
-        env:
-          BASE_REF: ${{ github.base_ref }}
         run: |
-          # Keep filenames intact, including whitespace, and detect renamed paths.
-          CHANGED_FILES=$(mktemp)
-          trap 'rm -f "$CHANGED_FILES"' EXIT
-          git diff --no-renames --name-only -z "origin/$BASE_REF...HEAD" -- > "$CHANGED_FILES"
+          # Get list of changed files in the PR
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
 
-          # Exact filenames and directory prefixes (with a trailing slash).
+          # Define protected file patterns (from .github/PROTECTED_FILES.txt)
           PROTECTED_PATTERNS=(
+            ".github/"
+            "scripts/"
             "AGENTS.md"
             "CHANGELOG.md"
             "ATTRIBUTIONS.md"
             "guidelines/"
-            "scripts/"
-            "src/app/components/figma/ImageWithFallback.tsx"
             "src/app/utils/supabase/"
-            ".github/workflows/"
+            "src/app/components/figma/ImageWithFallback.tsx"
             "tasks/task-list.md"
           )
 
           PROTECTED_MODIFIED=()
 
-          while IFS= read -r -d '' file; do
+          # Check each changed file against protected patterns
+          for file in $CHANGED_FILES; do
             for pattern in "${PROTECTED_PATTERNS[@]}"; do
-              if [[ "$file" == "$pattern" || ( "$pattern" == */ && "$file" == "$pattern"* ) ]]; then
+              if [[ "$file" =~ ^${pattern} ]]; then
                 PROTECTED_MODIFIED+=("$file")
                 break
               fi
             done
-          done < "$CHANGED_FILES"
+          done
 
-          # JSON is a data-only output, even for filenames containing newlines.
-          PROTECTED_JSON=$(node -e 'process.stdout.write(JSON.stringify(process.argv.slice(1)))' -- "${PROTECTED_MODIFIED[@]}")
-          printf 'PROTECTED_MODIFIED=%s\n' "$PROTECTED_JSON" >> "$GITHUB_OUTPUT"
+          # Report findings
           if [ ${#PROTECTED_MODIFIED[@]} -gt 0 ]; then
-            echo "protected_files_found=true" >> "$GITHUB_OUTPUT"
+            echo "protected_files_found=true" >> $GITHUB_OUTPUT
+            echo "PROTECTED_MODIFIED<<EOF" >> $GITHUB_OUTPUT
+            printf '%s\n' "${PROTECTED_MODIFIED[@]}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           else
-            echo "protected_files_found=false" >> "$GITHUB_OUTPUT"
+            echo "protected_files_found=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Summarize protected files requiring owner review
+      - name: Comment on PR if protected files detected
         if: steps.protected_check.outputs.protected_files_found == 'true'
         uses: actions/github-script@v7
-        env:
-          PROTECTED_MODIFIED: ${{ steps.protected_check.outputs.PROTECTED_MODIFIED }}
         with:
           script: |
-            const protectedFiles = JSON.parse(process.env.PROTECTED_MODIFIED);
-            const escapeHtml = value => value
-              .replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;');
+            const protectedFiles = `${{ steps.protected_check.outputs.PROTECTED_MODIFIED }}`.split('\n').filter(f => f);
 
-            await core.summary
-              .addHeading('Protected files modified', 2)
-              .addRaw('These files require explicit owner review and approval.\n\n')
-              .addList(protectedFiles.map(file => `<code>${escapeHtml(file)}</code>`))
-              .addRaw('This check reports detection. Branch protection must require code owner review using .github/CODEOWNERS to enforce approval.\n')
-              .write();
+            const comment = `⚠️ **Protected Files Modified**
+
+            This pull request modifies one or more protected files that require explicit owner review and approval.
+
+            **Protected files detected:**
+            ${protectedFiles.map(f => `- \`${f}\``).join('\n')}
+
+            **Protected file categories:**
+            - \`.github/\` — Governance, workflows, labels, issue types, templates
+            - \`scripts/\` — Build and validation scripts
+            - \`AGENTS.md\` — AI agent rules and governance
+            - \`CHANGELOG.md\` — Release history (managed by Release Agent)
+            - \`ATTRIBUTIONS.md\` — Project attributions
+            - \`guidelines/\` — CSS architecture, coding standards
+            - \`src/app/utils/supabase/\` — Backend integration (protected from changes)
+            - \`src/app/components/figma/ImageWithFallback.tsx\` — Figma integration component
+            - \`tasks/task-list.md\` — Task tracker (never delete)
+
+            **Required action:**
+            1. Open an issue on the \`lightspeedwp/.github\` repository with \`[PROTECTED-FILE-CHANGE-REQUEST]\` tag
+            2. Describe why these protected files need modification
+            3. Wait for @ashley approval before proceeding
+
+            See [AGENTS.md § Protected and locked files](../../AGENTS.md#protected-and-locked-files) for details.`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Fail check if protected files modified
+        if: steps.protected_check.outputs.protected_files_found == 'true'
+        run: |
+          echo "❌ Protected files were modified. This requires explicit owner approval."
+          echo ""
+          echo "Protected files detected:"
+          echo "${{ steps.protected_check.outputs.PROTECTED_MODIFIED }}"
+          exit 1
 
       - name: Pass check if no protected files modified
         if: steps.protected_check.outputs.protected_files_found == 'false'

@@ -151,9 +151,9 @@ Run them with npm, for example `npm run build`.
 | `npm run journal:check-links` | ✅ Passed | Link integrity checking working |
 | `npm run journal:parse` | ✅ Passed | Markdown parsing and export working |
 
-### Cleanup Completed (18 October 2026)
+### Cleanup and Verification Completed
 
-**Phase 2 Foundational Tasks (T008-T015)**
+**Phase 2 Foundational Tasks (T008-T015, completed 18 October 2026)**
 
 - ✅ **T008**: Jest ESM configuration verified (588 tests passing)
 - ✅ **T009**: Vitest fallback installed (`vitest@1.6.1` added to devDependencies)
@@ -166,6 +166,15 @@ Run them with npm, for example `npm run build`.
   - postcss.config.mjs is empty (no Tailwind plugins)
   - BEM CSS fully in place: `src/styles/` (blocks, components, effects, patterns, tokens)
   - Guidelines document BEM-only requirement (`guidelines/css-architecture.md`)
+
+**Phase 4 Testing Infrastructure Tasks (T025-T030, completed 19 October 2026)**
+
+- ✅ **T025**: Jest ESM configuration verified and locked (11 suites, 588/588 tests pass with @swc/core)
+- ✅ **T026**: Bats build verification confirmed (12/12 tests pass; validates output integrity)
+- ✅ **T027**: Playwright e2e configured (structure valid; requires browser install for execution)
+- ✅ **T028**: Comprehensive testing guide created (`docs/TESTING.md`; covers all suites, troubleshooting, CI/CD)
+- ✅ **T029**: PR labeling workflow active (fetches canonical labeler.yml from lightspeedwp/.github; applies labels by branch type)
+- ✅ **T030**: Test command status updated (above tables in this section)
 
 **When you change code, report which of these you actually ran. Never claim validation you did not perform.**
 

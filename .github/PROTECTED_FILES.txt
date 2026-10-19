@@ -1,0 +1,24 @@
+# Protected Files — Constitution Principle II
+#
+# These files are critical to repository governance, testing, and integration.
+# Changes require explicit owner approval and must link to an approved change-request issue.
+#
+# List Format: Path pattern (one per line, supports glob)
+# Patterns are matched with: git diff --name-only | grep -E "^{pattern}"
+#
+# Protected File Categories:
+# 1. Governance files (.github/) — workflows, labels, issue types, templates
+# 2. Repository rules (scripts/, AGENTS.md, guidelines/) — infrastructure and standards
+# 3. Release artifacts (CHANGELOG.md, ATTRIBUTIONS.md) — version history and credits
+# 4. Integration components — Supabase utilities, Figma components
+# 5. Task tracking — task-list.md (never delete)
+
+.github/
+scripts/
+AGENTS.md
+CHANGELOG.md
+ATTRIBUTIONS.md
+guidelines/
+src/app/utils/supabase/
+src/app/components/figma/ImageWithFallback.tsx
+tasks/task-list.md
