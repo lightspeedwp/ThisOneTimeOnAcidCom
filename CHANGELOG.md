@@ -326,8 +326,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-#### CI/Workflow Infrastructure
-
 - **Jest test comparison script** — Created missing `scripts/validation/compare-jest-failures.cjs` that compares test results between PR head and base branch to detect new test failures. Pre-existing failures on develop do not block the PR, only NEW failures introduced by the PR are reported.
 - **Jest failure comparison** — Count increases per test file after normalising paths to each checkout root, so fixes in other files cannot hide new failures.
 
