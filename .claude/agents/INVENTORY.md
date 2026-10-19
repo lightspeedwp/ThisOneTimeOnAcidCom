@@ -4,13 +4,16 @@
 **Spec Reference:** `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)  
 **Task:** T017a
 
-This document provides a complete inventory of all AI agents configured for the ThisOneTimeOnAcidCom repository.
+This document provides an inventory of the AI agents and skills configured for
+the ThisOneTimeOnAcidCom repository.
 
 ---
 
 ## Agent Specifications
 
-A total of **20 agents** are defined and documented in this directory. Each agent is described in its own `.md` file following the pattern `{agent-name}-agent.md`.
+A total of **20 agents** are defined and documented in this directory, with **5
+skills** listed in the [skills inventory](#skill-specifications). Each agent is
+described in its own `.md` file following the pattern `{agent-name}-agent.md`.
 
 ### Content Strategy & Documentation (4 agents)
 
@@ -69,6 +72,25 @@ A total of **20 agents** are defined and documented in this directory. Each agen
 
 ---
 
+## Skill Specifications
+
+The five skills in `.claude/skills/` provide the following reusable workflows.
+Each linked specification documents its usage and constraints.
+
+| Skill | Purpose | Specification |
+| --- | --- | --- |
+| Branch Validation | Check branch names | [SKILL.md][branch] |
+| Changelog Management | Manage changelog entries | [SKILL.md][changelog] |
+| Labeling Workflow | Apply issue and PR labels | [SKILL.md][labeling] |
+| Test Execution | Run applicable test suites | [SKILL.md][test] |
+| Validation | Check repository integrity | [SKILL.md][validate] |
+
+[branch]: ../skills/branch-validation/SKILL.md
+[changelog]: ../skills/changelog/SKILL.md
+[labeling]: ../skills/labeling/SKILL.md
+[test]: ../skills/test/SKILL.md
+[validate]: ../skills/validate/SKILL.md
+
 ## Agent Discovery Process
 
 Agents are automatically discovered by the Claude Code session via the `.claude/` directory structure. The following properties are extracted from each agent specification:
@@ -97,7 +119,8 @@ To add, modify, or remove an agent:
 1. Edit the agent's `.md` file in this directory
 2. Update this inventory to reflect changes
 3. Open an issue with `[AGENT-INVENTORY-UPDATE]` tag for team review
-4. Commit changes to `build/repo-governance-continue-spec-001` branch
+4. Commit changes to the branch created for this change, following the
+   repository branch naming rules
 
 ---
 

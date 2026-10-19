@@ -256,18 +256,24 @@ Never replace existing images. Use `ImageWithFallback` (`src/app/components/figm
 
 ### 1. Branch naming
 
-**All branches MUST follow this pattern:** `{type}/{scope}-{title}`
+**Standard branches MUST follow this pattern:** `{type}/{scope}-{title}`.
+[scripts/validate-branch-name.js](scripts/validate-branch-name.js) is the source
+of truth for approved types, rejected prefixes, and exemptions. `dependabot/*`,
+`renovate/*`, and supported versioned or dated `release/` branches are exempt
+from the standard pattern.
 
 Where:
-- **type** – Work type (required, one value from the table below)
+- **type** – Work type (required, one validator-approved value; common examples
+  appear below)
 - **scope** – Component or area (required, lowercase, no spaces)
 - **title** – Descriptive name (required, lowercase, hyphens between words)
 
 **FORBIDDEN prefixes** (these break PR template routing and automation):
 - ❌ `claude/` — Reserved for Claude Code internal sessions
 - ❌ `copilot/` — Reserved for GitHub Copilot integration
+- ❌ `openai/` — Reserved for OpenAI integration
 
-**Valid branch types:**
+**Common valid branch types** (the validator contains the full list):
 
 | Type | Purpose | Example |
 |---|---|---|
@@ -300,7 +306,8 @@ Branch 'feat/your-feature-name' matches the repository branching strategy.
 ```
 
 **Why branch naming matters:**
-- Correct names enable automatic PR template selection
+- Correct names support template suggestions and type labels from the routing
+  workflow
 - GitHub Actions workflows depend on valid prefixes
 - Labeling automation uses branch names to assign labels
 - Invalid names cause validation failures and CI delays
@@ -316,7 +323,13 @@ Branch 'feat/your-feature-name' matches the repository branching strategy.
 
 **PR Template Selection:**
 
-When you create a pull request, GitHub automatically selects a template based on your branch name. The mapping is:
+The intended branch mapping is defined in
+[scripts/pr-template-router.js](scripts/pr-template-router.js). Templates are
+maintained in [lightspeedwp/.github](https://github.com/lightspeedwp/.github).
+The local workflow currently suggests a template and attempts to apply a type
+label; it does not insert template content into the PR body. Completing and
+verifying the shared-template routing is tracked by T035. The configured mapping
+includes:
 
 | Branch Type | Template | Used For |
 |---|---|---|
@@ -324,12 +337,19 @@ When you create a pull request, GitHub automatically selects a template based on
 | `fix/` | Fix template | Bug fixes and hotfixes |
 | `docs/`, `doc/` | Documentation template | Documentation changes |
 | `design/` | Design template | Design system and UI updates |
+| `a11y/` | Design template | Accessibility changes |
 | `test/` | Test template | Test suite and QA changes |
 | `refactor/` | Refactor template | Code refactoring (no user changes) |
 | `chore/` | Chore template | Build, deps, maintenance (no user changes) |
 | Other | Default template | When branch type doesn't match above |
 
-**Template routing is automatic:** If you follow the branch naming convention above, GitHub will load the matching template when you open your PR. You don't need to manually select it.
+`a11y/` is configured for the design template, but the current prefix parsers do
+not accept digits. Correcting that route and verifying it are part of T035.
+
+**Choose the template explicitly:** Read the matching shared template and copy
+its sections into your PR body, preserving your description. Branch-based
+selection, named-template loading, and default-template inheritance have not
+been verified; do not assume GitHub loads the matching template automatically.
 
 **Fill out all template sections:**
 - Write a clear description explaining what changed and why
@@ -337,11 +357,13 @@ When you create a pull request, GitHub automatically selects a template based on
 - Link related issues using "Related to #N" when acceptance criteria are still outstanding, and use a closing keyword (e.g. "Closes #N") only when the PR fully resolves the issue
 - Complete any template-specific sections (e.g. screenshots for UI changes, test results for fixes)
 
-**If the wrong template loads:**
+**If the template suggestion does not match:**
 - Verify your branch name matches the pattern `{type}/{scope}-{title}`
-- Check that you didn't use a forbidden prefix (`claude/`, `copilot/`)
+- Check that you didn't use a forbidden prefix (`claude/`, `copilot/`,
+  `openai/`)
 - Run `npm run validate:branch-name` to confirm validity
-- If the issue persists, manually select the correct template from the GitHub dropdown
+- Use the matching shared template to complete the PR body and report the
+  routing mismatch
 
 ### 4. Changelog
 

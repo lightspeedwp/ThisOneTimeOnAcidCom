@@ -54,7 +54,7 @@ The guidelines were written for Figma Make and use root-style paths. In this rep
 |---|---|---|
 | Framework | React 18.3.1 (peer dependency) + Vite 6 | `package.json`, `vite.config.ts` |
 | Language | TypeScript | `typescript` dev dependency, `src/app/tsconfig.json` |
-| Runtime | Node.js 24 LTS | `.nvmrc`, `engines.node` in `package.json`, `src/app/netlify.toml` |
+| Runtime | Node.js 24 LTS target | `.nvmrc`, `engines.node` in `package.json`, `src/app/netlify.toml` |
 | Styling | Semantic BEM CSS (Tailwind removed) | `src/styles/` (BEM blocks, components, effects, patterns, tokens), `postcss.config.mjs` empty, `guidelines/css-architecture.md` |
 | UI primitives | Radix UI, shadcn/ui patterns, MUI | `package.json` |
 | Icons | Phosphor, Lucide | `package.json` |
@@ -83,14 +83,19 @@ Do not add a second lockfile or switch managers without owner confirmation.
 
 ### Node.js runtime
 
-**Node.js 24 LTS is pinned** (18 October 2026, T012 — Phase 2 Foundational):
+**Node.js 24 LTS is the intended runtime** (18 October 2026, T012 — Phase 2
+Foundational):
 
-- ✅ `.nvmrc` contains `24` (nvm compatibility)
+- ✅ `.nvmrc` contains `24`; contributors using nvm select it with `nvm use`
 - ✅ `package.json` has `engines.node` field: `">=24"`
 - ✅ `src/app/netlify.toml` sets `NODE_VERSION = "24"` and `NPM_VERSION = "11"`
 - ✅ README.md documents the Node.js 24 requirement
 
-This ensures developers and Netlify production builds both use the same LTS version. The engines field is enforced by npm (displays warning on npm ci/install if the running node version does not satisfy it).
+The `.nvmrc` file is an opt-in selector; it does not enforce the runtime.
+`engines.node: ">=24"` allows Node.js 24 and later major versions. npm normally
+warns on an incompatible version rather than rejecting installation unless
+`engine-strict` is enabled. The Netlify version setting applies when that
+configuration file is active (see [Deployment](#deployment-netlify)).
 
 ---
 
@@ -126,7 +131,7 @@ Run them with npm, for example `npm run build`.
 | Test Runner | Framework | Status | Baseline | Config |
 |---|---|---|---|---|
 | Jest | @swc/jest | ✅ Working | 588 tests passing (11 suites) | `jest.config.js` with ESM via @swc/core |
-| Vitest | @vitest/test-ui | ✅ Installed | Fallback (untested in env) | `vitest.config.ts` with matching Jest discovery patterns |
+| Vitest | `vitest` | ✅ Installed | Fallback runner; no UI package declared | `vitest.config.ts` with matching Jest discovery patterns |
 | Speckit | node --test | ⚠️ 103/104 | 103 pass, 1 fail (acceptance) | Regression test suite for spec creation → plan → tasks pipeline |
 | Bats | shell tests | ✅ Working | Build verification | `tests/build.bats` validates Vite build output |
 | Playwright | e2e tests | ⚠️ Requires setup | Command structure valid | Browser not installed in CI agent env |
@@ -263,7 +268,9 @@ Do not edit deployment settings, environment variables or Netlify configuration 
 These items come from repository evidence. They are recorded here, not resolved:
 
 1. **Package manager.** npm is in use (lockfile, Netlify command, README), but `pnpm.overrides` in `package.json` still refers to pnpm. Confirm npm and decide whether to remove this remnant. (Governance Decision PKG-001 pending approval)
-2. **Node.js version.** Pinned to Node 24 LTS via `.nvmrc` and `package.json` `engines` field (Governance Decision NODE-001: Option B, implemented 2026-10-17).
+2. **Node.js version.** Node 24 LTS selected via opt-in `.nvmrc`; `package.json`
+   `engines.node: ">=24"` permits later majors and is advisory by default
+   (Governance Decision NODE-001: Option B, implemented 2026-10-17).
 3. **Netlify configuration file.** `src/app/netlify.toml` is not read because the base directory is the repository root. Decide whether to move it to the root, set the base directory, or delete it, and whether its headers and redirect are still wanted.
 4. **BEM vs Tailwind.** All site styling now uses semantic BEM classes exclusively. Tailwind CSS and related dependencies have been completely removed (Governance Decision STYLE-001: Enforce BEM-only, implemented 2026-10-17). Guidelines.md § 2 should be updated to remove references to "Tailwind CSS V4".
 5. **`import.meta.env`.** The bundler table in Guidelines.md says it is "Completely removed", but Guidelines.md § 12 (Console Logging Policy) recommends `if (import.meta.env.DEV)`, and `src/app/components/common/ThemeToggleES5.tsx` still uses it. Until this is resolved, follow the bundler table and do not use `import.meta.env`.

@@ -83,6 +83,7 @@
     "@swc/jest": "^0.2.39",
     "@types/jest": "^29.5.12",
     "@vitejs/plugin-react": "4.7.0",
+    "@vitest/coverage-v8": "1.6.1",
     "bats": "^1.11.0",
     "glob": "13.0.6",
     "gray-matter": "^4.0.3",

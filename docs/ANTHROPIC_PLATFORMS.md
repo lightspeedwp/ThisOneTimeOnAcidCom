@@ -14,7 +14,7 @@ This document maps Anthropic platform capabilities against the ThisOneTimeOnAcid
 
 | Platform | Service | Version | Status | Use Case |
 |----------|---------|---------|--------|----------|
-| **Claude API (Messages)** | Inference | Latest (Haiku 4.5, Opus 5.5, Sonnet 5.5) | ✅ Active | Agent reasoning, task execution |
+| **Claude API (Messages)** | Inference | Latest (Haiku 5.5, Opus 5.5, Sonnet 5.5, Fable 5.1; 1M-token context each) | ✅ Active | Agent reasoning, task execution |
 | **Claude API Tool Use** | Tool Routing | Tool Runner (beta) | ✅ Available | Dynamic tool selection & execution |
 | **Managed Agents** | Cloud Sandbox | Server-hosted | ✅ Available | Long-running governance workflows, budget enforcement |
 
@@ -29,8 +29,8 @@ This document maps Anthropic platform capabilities against the ThisOneTimeOnAcid
 
 | Platform | Service | Version | Status | Use Case |
 |----------|---------|---------|--------|----------|
-| **Artifact / Database APIs** | Persistent Storage | Read/Write | ✅ Available | Store spec artifacts, governance config, audit logs |
-| **Claude Docs** | Collaborative Documents | Native | ✅ Available | Specification authoring, team review, version history |
+| **Application-owned storage** | Persistent Storage | Git/files/database | ⚠️ Integration required | Store spec artifacts, governance config, audit logs |
+| **Claude Docs** | Collaborative Documents interface | Native UI | ⚠️ Interface; no API integration established here | Specification authoring, team review, version history |
 
 ---
 
@@ -43,9 +43,9 @@ This document maps Anthropic platform capabilities against the ThisOneTimeOnAcid
 | Requirement | Platform(s) | Implementation | Status |
 |-------------|-------------|-----------------|--------|
 | Agent discovery | Claude API Tool Use | Register agents via MCP | ✅ T017a Complete |
-| Capability contracts | Artifact API | Store agent specs in `.claude/agents/` | ✅ Ready |
+| Capability contracts | Application-owned storage | Store agent specs in Git at `.claude/agents/`; external storage requires integration | ✅ Git storage in use |
 | Execution boundaries | Managed Agents | Enforce via sandbox policies | ✅ Available |
-| Constraint documentation | Claude Docs | Version spec in `.github/specs/` | ✅ Ready |
+| Constraint documentation | Git; Claude Docs interface for authoring | Version spec in `.github/specs/`; no Claude Docs API integration configured | ✅ Git storage in use |
 
 **Applicability:** ✅ **ALL APPLICABLE**  
 All platforms support the inventory and contract specification approach. Managed Agents provide runtime enforcement.
@@ -61,11 +61,11 @@ All platforms support the inventory and contract specification approach. Managed
 | Assessment Dimension | Platform Assessment | Findings |
 |-----|-------|----------|
 | **Governance Automation** | Claude API + Tool Use | ✅ Supports workflow automation (create, plan, tasks pipeline) |
-| **Budget Enforcement** | Managed Agents + Prompt Caching | ✅ Sandbox + token accounting enable budget controls (R7.3) |
-| **Audit Trail** | Artifact API + MCP logging | ⚠️ Partial: API calls loggable, but no native audit dashboard |
+| **Budget Enforcement** | Managed Agents session spend budget + host-side admission control | ⚠️ `max_tokens` limits one response; a session spend cap is separate. Aggregate token accounting requires host-side enforcement (R7.3), not prompt caching |
+| **Audit Trail** | Application-owned storage + MCP logging | ⚠️ Requires log export/storage integration; no native audit dashboard established |
 | **Distributed Execution** | Managed Agents (server-hosted) | ✅ Enables long-running background governance workflows |
 | **External Integration** | MCP (GitHub, Slack, databases) | ✅ Connects governance to development tools & events |
-| **Specification Authoring** | Claude Docs + Artifact API | ✅ Native collaboration for spec-first workflows |
+| **Specification Authoring** | Claude Docs interface + application-owned storage | ⚠️ Author in the interface; persist in Git or integrate external storage |
 
 ---
 
@@ -75,13 +75,22 @@ All platforms support the inventory and contract specification approach. Managed
 
 | Control Type | Platform | Implementation | Status |
 |--------------|----------|-----------------|--------|
-| Token budgets | Managed Agents | Per-execution max_tokens parameter | ✅ Available |
+| Per-response output limit | Claude API Messages | `max_tokens` bounds the output of one response, not total session usage | ✅ API parameter; no aggregate enforcement configured here |
+| Session spend budget | Managed Agents | Set session `budget.type: "limit"` and `budget.max_list_cost` at creation; platform stops new model requests at the cap, while an in-flight request may finish | ⚠️ Available platform control; not configured here |
+| Aggregate token budget | Host-side admission middleware | Reserve tokens before dispatch; reconcile input/output and cached-token usage across calls, retries, and subagents; block dispatch or cancel on exhaustion | ⏳ Required by R7.3; not implemented here (TOA-271) |
 | Invocation quotas | Custom middleware | Track invocations via MCP logging | ⚠️ Manual tracking needed |
-| Rate limiting | Managed Agents | Request/second limits via config | ✅ Available |
+| Endpoint rate limits | Managed Agents | Published organisation-level limits: 300 create requests/minute; 1,200 read/list/stream requests/minute | ✅ Platform limits; not a per-agent setting |
+| Per-agent rate limiting | Host-side admission middleware | Configure a limiter keyed by agent before dispatch | ⏳ No per-agent requests/second setting configured here (TOA-271) |
 | Cost tracking | API usage logs | Monitor token consumption per agent | ✅ Available |
 
 **Applicability:** ✅ **MOSTLY APPLICABLE**  
-Managed Agents provide native token & rate limiting. Invocation quotas require custom tracking (not addressed by this spec — see TOA-271).
+Managed Agents provide a session spend budget and organisation-level endpoint
+limits. Neither enforces the per-agent aggregate token budget. The required
+enforcement point is host-side admission middleware, which must account across
+calls and retries and stop further execution on exhaustion; this repository does
+not implement that control. Numerical budgets and spending increases require
+owner approval under R7.3. Prompt caching can reduce cost but does not enforce a
+budget. See TOA-271.
 
 ---
 
@@ -94,10 +103,12 @@ Managed Agents provide native token & rate limiting. Invocation quotas require c
 | Skill discovery | Claude Code API | List skills via MCP | ✅ Available |
 | Complexity detection | Claude API Messages | Reasoning agent determines skill tier | ✅ Native |
 | Resource allocation | Managed Agents | Assign to appropriate environment tier | ✅ Available |
-| Fallback routing | Tool Runner (beta) | Automatically downgrade on timeout | ⚠️ Beta feature |
+| Fallback routing | Host workflow | No timeout downgrade or model fallback is implemented in this repository | ⏳ Requires explicit host-side routing |
 
-**Applicability:** ✅ **FULLY APPLICABLE**  
-All routing patterns are supported. Fallback routing is beta but production-ready.
+**Applicability:** ⚠️ **PARTIALLY APPLICABLE**
+
+Routing requires host-side implementation and validation. Tool Runner does not
+establish automatic server-side timeout fallback for this workflow.
 
 ---
 
@@ -112,8 +123,10 @@ All routing patterns are supported. Fallback routing is beta but production-read
 
 **Constraints:**
 - Session timeout after inactivity
-- Token context window limits (200K for Opus 5.5, 100K for Sonnet 5.5, 10K for Haiku 4.5)
-- No persistent state between sessions (use Artifact API for state)
+- Token context window limits (1M tokens each for Haiku 5.5, Opus 5.5, Sonnet
+  5.5, and Fable 5.1)
+- Persist workflow state in application-owned storage (Git/files or an
+  explicitly integrated database)
 
 **Governance Use Cases:**
 - Spec clarification and planning workflows
@@ -140,14 +153,21 @@ All routing patterns are supported. Fallback routing is beta but production-read
 ### Prompt Caching
 
 **Best For:**
-- Reducing latency on repeated large contexts (>1KB)
+- Reducing latency on repeated stable prefixes that meet the model's cache
+  minimum
 - Lowering costs when spec context is reused
 - Multi-agent workflows sharing same reference specs
 
 **Constraints:**
-- Cache key computed from full message; any change invalidates
-- Minimum cached size (~1KB)
-- 5-minute TTL for cache entries
+- Caching covers the prompt prefix up to a cache breakpoint (`cache_control`); a
+  stable prefix can be cached alongside a variable suffix
+- Cache levels follow `tools` → `system` → `messages`; changing a level
+  invalidates that level and subsequent levels, while earlier unchanged prefixes
+  can remain cached
+- Minimum cacheable length is measured in tokens and depends on the model and
+  platform
+- Default TTL is 5 minutes, refreshed on cache hits; a 1-hour option is
+  available with `cache_control: {"type": "ephemeral", "ttl": "1h"}`
 
 **Governance Use Cases:**
 - Multi-agent task coordination (all agents read same spec context)
@@ -171,7 +191,7 @@ All routing patterns are supported. Fallback routing is beta but production-read
 - Slack notifications for governance decisions
 - Direct Linear issue creation from test results
 
-### Artifact API & Claude Docs
+### Application-owned storage & Claude Docs interface
 
 **Best For:**
 - Storing specifications and governance configuration
@@ -179,9 +199,12 @@ All routing patterns are supported. Fallback routing is beta but production-read
 - Render spec content alongside agent reasoning
 
 **Constraints:**
-- Document size limits (16MB per version)
-- Requires authentication for read/write
-- Version history stored server-side (retention policy TBD)
+- This repository stores specifications and agent contracts in Git; a database
+  or remote store requires application integration
+- Authentication, size limits, retention, and audit history depend on the chosen
+  storage backend
+- Claude Docs is an authoring/review interface; no API integration with this
+  workflow is established
 
 **Governance Use Cases:**
 - Persist `.github/specs/` artifacts with version control
@@ -194,14 +217,14 @@ All routing patterns are supported. Fallback routing is beta but production-read
 
 Use this matrix to select the best platform(s) for a given governance task:
 
-| Task | Claude API | Managed Agents | Prompt Cache | MCP | Artifact API |
+| Task | Claude API | Managed Agents | Prompt Cache | MCP | Application-owned storage |
 |------|-----------|-----------------|----------|-----|-------------|
 | Real-time branch validation | ✅ Primary | - | ⚠️ Optional | ✅ For GH access | - |
 | Scheduled workflow audits | - | ✅ Primary | - | ✅ For tool access | - |
-| Spec collaboration | - | - | - | - | ✅ Primary |
+| Spec collaboration | - | - | - | - | ✅ Git; integrate other storage as needed |
 | Multi-agent task routing | ✅ Primary | - | ✅ Recommended | - | - |
 | GitHub event processing | ⚠️ Polling | ✅ Event handler | - | ✅ Webhook support | - |
-| Configuration storage | - | - | - | - | ✅ Primary |
+| Configuration storage | - | - | - | - | ✅ Git; integrate other storage as needed |
 
 ---
 
@@ -210,8 +233,8 @@ Use this matrix to select the best platform(s) for a given governance task:
 | Gap | Impact | Mitigation | Status |
 |-----|--------|-----------|--------|
 | No native invocation quota tracking | Budget enforcement incomplete (R7.3) | Custom MCP middleware logging | ⏳ Depends on TOA-271 |
-| Audit trail not dashboard-native | Governance transparency limited | Export logs to Artifact API | ⚠️ Manual export only |
-| Fallback routing is beta | Production reliability concern | Monitor beta release status | ⚠️ Monitor Q4 2026 |
+| Audit trail not dashboard-native | Governance transparency limited | Export logs to application-owned storage through an explicit integration | ⚠️ Manual export only |
+| Fallback routing is unimplemented | No automatic recovery on timeout | Define and test explicit host-side fallback policy | ⏳ Host workflow work required |
 | MCP server per integration | Operational overhead | Pre-configure 5 standard integrations | ✅ In progress |
 
 ---
@@ -222,17 +245,37 @@ Use this matrix to select the best platform(s) for a given governance task:
 
 1. ✅ Use **Claude API + Tool Use** for all real-time governance tasks (branch validation, PR routing)
 2. ✅ Deploy **MCP servers** for GitHub, Slack, Linear integration (tooling ready)
-3. ✅ Store all governance artifacts in **Artifact API** (versioning, audit trail)
-4. ⏳ Schedule budget enforcement design review (R7.3) to use **Managed Agents + sandbox**
+3. ✅ Keep governance artifacts in **Git**; integrate application-owned storage
+   if additional persistence or audit exports are needed
+4. ⏳ Design host-side aggregate budget enforcement (R7.3), with the **Managed
+   Agents session spend budget** as a separate platform control
 
 ### Future Enhancements (Phase 3+)
 
-1. **Audit Dashboard:** Export MCP logs to Artifact API; query via custom dashboard
+1. **Audit Dashboard:** Integrate MCP log export into application-owned storage;
+   query via a custom dashboard
 2. **Multi-Agent Orchestration:** Use **Prompt Caching** for spec context sharing across agents
 3. **Event-Driven Workflows:** Deploy **Managed Agents** as GitHub webhook handlers
 4. **Cost Optimization:** Analyze Prompt Caching effectiveness when SpecKit pipeline scales
 
 ---
+
+## Platform References
+
+Verified against the published documentation on 19 October 2026:
+
+- [Model lineup and context windows][models]
+- [Managed Agents session budgets][budgets]
+- [Managed Agents endpoint rate limits][rates]
+- [Prompt caching, breakpoints, invalidation, and TTLs][caching]
+
+[models]: https://platform.claude.com/docs/en/about-claude/models/overview
+
+[budgets]: https://platform.claude.com/docs/en/managed-agents/budgets
+
+[rates]: https://platform.claude.com/docs/en/managed-agents/reference#rate-limits
+
+[caching]: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
 
 ## Related Documentation
 
