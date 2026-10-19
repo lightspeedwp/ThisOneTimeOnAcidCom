@@ -270,11 +270,13 @@
     the PR body while preserving contributor content; verify the resulting body
     contains its sections and the matching type label is applied
   - Document PR template routing in `CONTRIBUTING.md` under "PR Creation Process"
-- [ ] T036 [P] [WS-261] [TOA-253] Document saved replies and contributor setup
-  - Link to org-wide saved replies in `.github` repo
-  - Create section in CONTRIBUTING.md: "Using Saved Replies"
-  - Document how to add saved replies to personal GitHub account
-  - Provide examples of common saved replies (e.g., template corrections, validation checks)
+- [x] T036 [P] [WS-261] [TOA-253] Document saved replies and contributor setup
+  - ✅ Add "Using Saved Replies" section to CONTRIBUTING.md
+  - ✅ Link to org-wide saved replies catalog in lightspeedwp/.github
+  - ✅ Document step-by-step guide for adding saved replies to personal account
+  - ✅ List common saved reply categories and use cases
+  - ✅ Provide guidance on when to use/avoid saved replies
+  - ✅ Link saved replies from "Getting help" section
 - [x] T037 [WS-261] Create CODEOWNERS file for branch protection
   - Create `.github/CODEOWNERS` with code area ownership mapping:
     ```
@@ -293,12 +295,23 @@
     ```
   - Document CODEOWNERS in `CONTRIBUTING.md` under "Code Ownership"
   - Explain how CODEOWNERS interacts with branch protection
-- [ ] T038 [WS-261] Enable branch protection on main and develop
-  - Go to Settings → Branches → Add rule for `main` branch:
-    - Require PR review (require CODEOWNERS review for protected paths)
-    - Require status checks to pass (enforce CI/CD validation)
-    - Require branches to be up to date
+- [ ] T038 [WS-261] [TOA-261] Enable branch protection on main and develop
+  - ⏳ Go to Settings → Branches → Add rule for `develop` branch:
+    - Require PR review (minimum 1 review required)
+    - Require CODEOWNERS review for protected paths (see .github/CODEOWNERS)
+    - Require status checks to pass (all CI/CD workflows must succeed)
+    - Require branches to be up to date with base branch
     - Allow dismissal of stale reviews on new commits
+    - Enable auto-merge (optional, for maintainer convenience)
+  - ⏳ Add rule for `main` branch:
+    - Require PR review (minimum 1 review required, preferably 2)
+    - Require CODEOWNERS review for protected paths
+    - Require status checks to pass (all CI/CD workflows)
+    - Require branches to be up to date
+    - Restrict who can push to this branch (maintainers only)
+    - Allow auto-merge
+  - ⏳ Document branch protection rules in CONTRIBUTING.md
+  - **Note:** This is a manual repository Settings UI task, not automated
   - Go to Settings → Branches → Add rule for `develop` branch:
     - Require PR review (less strict than main)
     - Require status checks to pass
