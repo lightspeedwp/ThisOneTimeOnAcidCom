@@ -365,11 +365,44 @@ been verified; do not assume GitHub loads the matching template automatically.
 - Use the matching shared template to complete the PR body and report the
   routing mismatch
 
-### 4. Changelog
+### 4. Creating issues
+
+**Issue templates are inherited from the organisation:**
+
+This repository does not maintain local issue templates. Instead, we use the org-wide issue types and templates from [lightspeedwp/.github](https://github.com/lightspeedwp/.github).
+
+**Available issue types:**
+
+| Type | Usage | Example |
+|---|---|---|
+| `type:bug` | Report a bug or defect | "Navigation menu doesn't collapse on mobile" |
+| `type:feature` | Request a new feature | "Add dark mode support" |
+| `type:task` | Tracked work item | "Refactor authentication system" |
+| `type:documentation` | Documentation request or update | "Add deployment guide" |
+| `type:security` | Security issue or vulnerability | "XSS vulnerability in comment input" |
+| `type:design` | Design or UI related | "Update button styling" |
+| `type:question` | Support or clarification question | "How do I configure X?" |
+
+**Creating an issue:**
+
+1. Go to the [Issues tab](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
+2. Click "New issue"
+3. Select the appropriate issue type
+4. Fill out the template completely:
+   - **Title:** Clear, concise description (sentence case)
+   - **Description:** Details, steps to reproduce (for bugs), or requirements (for features)
+   - **Labels:** Automatically applied based on issue type; add area labels (e.g., `area:ci`, `area:docs`)
+   - **Acceptance criteria:** For features and tasks, define what "done" looks like
+
+**No local overrides:** Do not create `.github/ISSUE_TEMPLATE/` files here unless the issue type is repository-specific. The org-wide templates in lightspeedwp/.github are canonical for consistency across the LightSpeed organization.
+
+See [lightspeedwp/.github § Issue Templates](https://github.com/lightspeedwp/.github/tree/develop/.github/ISSUE_TEMPLATE) for the complete list of available templates.
+
+### 5. Changelog
 
 The changelog is the root [CHANGELOG.md](CHANGELOG.md). It is a protected file: never delete, move or rename it. Entries follow [Keep a Changelog v1.1.0](https://keepachangelog.com/en/1.1.0/) under `## [Unreleased]`. See [guidelines/changelog.md](guidelines/changelog.md) for the full rules. Prepare an entry for user-facing changes. Issues labelled `meta:no-changelog` do not need one.
 
-### 5. After merge
+### 6. After merge
 
 - Delete the branch.
 - Close linked issues only once their acceptance criteria are met.
