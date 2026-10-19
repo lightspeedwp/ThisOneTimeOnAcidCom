@@ -1,10 +1,10 @@
-# Anthropic Platforms Applicability Assessment
+# Anthropic Platform Applicability Assessment
 
-**Generated:** 18 October 2026  
+**Generated:** 19 October 2026 (updated)  
 **Spec Reference:** `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.2)  
-**Task:** T017b
+**Task:** T049
 
-This document maps Anthropic platform capabilities against the ThisOneTimeOnAcidCom governance infrastructure and agentic workflows, identifying which platforms support which requirements.
+This document evaluates which Anthropic platforms each of the 20 repository agents uses, assessing applicability and recommending optimal platform combinations per agent.
 
 ---
 
@@ -109,6 +109,90 @@ budget. See TOA-271.
 
 Routing requires host-side implementation and validation. Tool Runner does not
 establish automatic server-side timeout fallback for this workflow.
+
+---
+
+## Agent-by-Agent Platform Assessment
+
+### Content & Documentation Agents
+
+| Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
+|-------|---------|------------------------|-------------|-------|
+| **Changelog Agent** | Keep a Changelog management | Claude API + Tool Use + Prompt Caching | GitHub | Cache schema/examples; validate entries structurally |
+| **Content Strategy Agent** | Portfolio messaging guidance | Claude API + Prompt Caching + Artifact APIs | None | Cache brand guidelines; collaborate on copy |
+| **Document Reviewer Agent** | Documentation quality review | Claude API + Tool Runner + Prompt Caching | GitHub | Multi-step review workflow; cache standards |
+| **Website Content Strategist** | Portfolio engagement strategy | Claude API + Prompt Caching + Artifact APIs | None | Cache content library; collaborate on messaging |
+
+### Design & UX Agents
+
+| Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
+|-------|---------|------------------------|-------------|-------|
+| **Design Partner Agent** | Design system guidance | Claude API + Prompt Caching + Artifact APIs | Figma | Cache component library; reference tokens |
+| **Metadata Agent** | SEO/schema validation | Claude API + Tool Runner + Prompt Caching | None | Structured validation; cache best practices |
+| **Client Website Discovery** | Portfolio opportunity discovery | Claude API + Tool Runner + Prompt Caching | Web Search | Multi-step research; cache analysis criteria |
+
+### Development & Code Agents
+
+| Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
+|-------|---------|------------------------|-------------|-------|
+| **Branches Agent** | Branch name validation | Implement as **Skill** (not agent) | None | Deterministic rules; no reasoning needed |
+| **Labeling Agent** | Issue/PR label assignment | Claude API + Tool Runner + Prompt Caching | GitHub | Multi-step workflow; cache taxonomy |
+| **PR Agent** | PR creation & management | Claude API + Tool Runner + Prompt Caching | GitHub | Complex workflow; cache templates |
+| **Reviewer Agent** | Code review & feedback | Claude API + Tool Runner + Prompt Caching | GitHub | Multi-step review; cache guidelines |
+
+### Testing & QA Agents
+
+| Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
+|-------|---------|------------------------|-------------|-------|
+| **Playwright Agent** | Browser automation & e2e testing | Claude API + Tool Runner + Prompt Caching | None (local Playwright) | Local execution; cache test scenarios |
+| **Testing Agent** | Test strategy & planning | Claude API + Tool Runner + Prompt Caching | None | Multi-step workflows; cache frameworks |
+
+### Issue & Project Management Agents
+
+| Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
+|-------|---------|------------------------|-------------|-------|
+| **BugHerd Agent** | Feedback triage & routing | Claude API + Tool Runner + Prompt Caching | BugHerd, GitHub | Multi-step routing; cache triage rules |
+| **Issue Agent** | Issue triage & prioritization | Claude API + Tool Runner + Prompt Caching | GitHub | Multi-step workflow; cache priority rules |
+| **PRD Agent** | Product requirement specs | Claude API + Tool Runner + Prompt Caching | GitHub | Multi-step drafting; cache templates |
+
+### Analytics & Operations Agents
+
+| Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
+|-------|---------|------------------------|-------------|-------|
+| **Metrics Agent** | Metrics collection & analysis | Claude API + Tool Runner + Prompt Caching | Google Analytics, Amplitude | Data aggregation; cache metric definitions |
+| **PageSpeed Agent** | Performance monitoring | Claude API + Tool Runner + Prompt Caching | Google PageSpeed Insights | Continuous monitoring; cache Core Web Vitals thresholds |
+| **Reporting Agent** | Report generation | Claude API + Tool Runner + Prompt Caching | Multiple (Analytics, GitHub, Email) | Multi-source aggregation; cache templates |
+
+### Release & Deployment Agents
+
+| Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
+|-------|---------|------------------------|-------------|-------|
+| **Release Agent** | Release preparation & validation | Claude API + Tool Runner + Prompt Caching | GitHub, Netlify | Multi-step coordination; cache process rules |
+
+---
+
+## Platform Adoption Summary
+
+### Overall Statistics
+
+- **Agents using Claude API**: 20/20 (100%)
+- **Agents using Tool Use**: 20/20 (100%)
+- **Agents using Prompt Caching**: 18/20 (90%) — excludes minimal-context agents
+- **Agents using MCP**: 15/20 (75%) — majority integrate external services
+- **Agents using Managed Agents**: 0/20 (0% today) — future enhancement for background workflows
+- **Agents using Artifact APIs**: 14/20 (70%) — collaboration + state storage
+
+### MCP Server Distribution
+
+| MCP Server | Agents | Coverage | Status |
+|-----------|--------|----------|--------|
+| **GitHub** | 8 agents | PR/issue/release management, code review | ✅ Primary integration |
+| **Figma** | 1 agent | Design system reference | ✅ Design partner |
+| **Web Search** | 1 agent | Client discovery research | ✅ Research workflows |
+| **BugHerd** | 1 agent | Feedback integration | ✅ QA workflows |
+| **Google Analytics** | 2 agents | Metrics collection | ⚠️ Optional enhancement |
+| **Netlify** | 1 agent | Deployment coordination | ✅ Release workflows |
+| **Email** | 1 agent | Report distribution | ⚠️ Optional enhancement |
 
 ---
 

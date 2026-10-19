@@ -128,10 +128,96 @@ To add, modify, or remove an agent:
 
 - **Agent Specifications**: Each agent file (`{name}-agent.md`)
 - **Budget Controls**: `.github/specs/001-repo-governance-layout-and-agentic-workflows/` (R7.3)
-- **Anthropic Platforms**: `docs/ANTHROPIC_PLATFORMS.md` (T017b)
+- **Anthropic Platforms**: `docs/AnthropicPlatforms.md` (T017b)
 - **Protected Files**: `.github/workflows/protected-files-guard.yml` (T017c)
 
 ---
 
+## Comprehensive Agent Specifications
+
+### Template: Agent Documentation Framework
+
+Each agent specification (`.md` file) should include:
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| **Purpose** | What the agent does and why | Manage changelog entries per Keep a Changelog format |
+| **Inputs** | Prompts, context, file paths, arguments | CHANGELOG.md path, PR description, version info |
+| **Outputs** | Code, specs, reports, formatted entries | Validated CHANGELOG.md entries, validation report |
+| **Tools** | Available tools for this agent | read, write, bash, grep |
+| **Permissions** | Required GitHub/file access | Read CHANGELOG.md, write to CHANGELOG.md |
+| **Workflow Relationships** | When called, from which workflows | Called on PR review, triggered by release workflow |
+| **Validation Points** | Where/how results are validated | Schema validation, format checks, diff review |
+| **Escalation** | When to pause and ask @ashley | Breaking format changes, version schema changes |
+| **Budget** | Token limits, execution time, retry limits | 50K tokens max, 5-minute timeout, 2 retries |
+| **Not In Scope** | What this agent doesn't handle | WordPress content, plugin updates (not applicable) |
+
+### Sample Agent Documentation
+
+#### Changelog Agent
+- **Purpose**: Manage changelog entries using Keep a Changelog 1.1.0 format
+- **Inputs**: CHANGELOG.md file, PR description/context, version number
+- **Outputs**: Validated/formatted CHANGELOG.md, validation report
+- **Tools**: read, write, bash
+- **Permissions**: Read/write CHANGELOG.md (protected file — requires owner approval for changes beyond entries)
+- **Workflow Relationships**: Triggered by changelog-unified.yml workflow on PR to release branches
+- **Validation**: Format validation (em-dashes, capitalization, categories), schema validation (Keep a Changelog 1.1.0)
+- **Escalation**: Breaking changes to version schema, multi-file changelog structure changes
+- **Budget**: 20K tokens per invocation, 3-minute timeout, 2 retries
+- **Not In Scope**: Multi-repository changelog aggregation, plugin changelogs
+
+#### Branches Agent
+- **Purpose**: Validate branch names against repository branching strategy
+- **Inputs**: Branch name string, validation rules (type/scope/title pattern)
+- **Outputs**: Validation result (pass/fail), detailed error messages with corrections
+- **Tools**: bash
+- **Permissions**: Read-only (no file modifications)
+- **Workflow Relationships**: Called by validate:branch-name npm script and pre-push hooks
+- **Validation**: Pattern matching (regex), type enumeration check, prefix validation
+- **Escalation**: If validation rules need to change (requires owner approval)
+- **Budget**: 5K tokens per invocation, 1-minute timeout, 1 retry
+- **Not In Scope**: Enforcing branch protection rules (GitHub Settings only), deleting branches
+
+---
+
+## Agent Governance Principles
+
+### Selection Criteria
+
+Use an agent when:
+- ✅ Task is repetitive and benefits from automation
+- ✅ Decision tree is deterministic (can be documented)
+- ✅ Output can be validated programmatically
+- ✅ Escalation points are clearly defined
+- ✅ Agent can operate within defined budget constraints
+
+Do NOT use an agent when:
+- ❌ Decision requires subjective judgment
+- ❌ Task involves sensitive/critical changes without human review
+- ❌ Output cannot be validated automatically
+- ❌ Escalation would require interrupting work mid-task
+
+### Budget Enforcement (TOA-271)
+
+Hard limits enforced by Claude Code runtime:
+
+- **Token budget**: Maximum tokens per invocation (e.g., 20K for changelog agent)
+- **Execution quota**: Maximum invocations per time period (e.g., 5 per day)
+- **Rate limiting**: Enforced at runtime; agent blocked if limits exceeded
+- **Retry policy**: Configurable retries (typically 1-2) with exponential backoff
+- **Timeout**: Wall-clock timeout per invocation (e.g., 3 minutes)
+
+See `.github/BUDGET_CONTROLS.md` for full enforcement strategy.
+
+### Workflow Integration
+
+Agents integrate with workflows in three patterns:
+
+1. **Pull-triggered**: Called by GitHub Actions workflows (e.g., changelog validation on PR)
+2. **Push-triggered**: Called by developers via CLI scripts (e.g., `npm run validate:branch-name`)
+3. **Manual delegation**: Invoked explicitly by human reviewer/owner (e.g., `/changelog-agent update PR #123`)
+
+---
+
 _Maintained by Claude Haiku 4.5 and team_  
-_Last updated: 18 October 2026_
+_Last updated: 19 October 2026_

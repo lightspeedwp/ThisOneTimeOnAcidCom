@@ -460,6 +460,94 @@ The following were documented as unresolved but have now been clarified:
 - ✅ **Package manager:** npm-only. `package-lock.json` is the canonical lockfile. pnpm remnants to be removed per TOA-262.
 - ✅ **Tailwind:** BEM-only CSS enforced per STYLE-001. Tailwind dependencies to be removed during Phase 6 cleanup.
 
+## Repository Governance & Policies
+
+### Protected Files
+
+The following files are **protected and require explicit approval to modify**:
+
+| File | Purpose | Change Process |
+|------|---------|-----------------|
+| `.github/` | Governance and workflows | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
+| `scripts/` | Build and validation scripts | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
+| `AGENTS.md` | AI agent rules and governance | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
+| `CHANGELOG.md` | Release history (managed by Release Agent) | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
+| `ATTRIBUTIONS.md` | Project attributions | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
+| `guidelines/` | CSS architecture and coding standards | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
+| `src/app/utils/supabase/` | Backend integration (protected from changes) | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
+| `src/app/components/figma/ImageWithFallback.tsx` | Figma integration component | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
+| `tasks/task-list.md` | Task tracker (never delete) | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
+
+**Why files are protected:**
+- Governance infrastructure stability — changes affect all workflows and automations
+- Coding standards consistency — guidelines must remain canonical
+- Backend security — Supabase integration must not be accidentally exposed
+- Asset integrity — Figma components are contracts with design tools
+- Project history — changelog and attributions are permanent records
+
+**To request a change:**
+1. Open a GitHub issue with `[PROTECTED-FILE-CHANGE-REQUEST]` tag
+2. Describe the specific change needed and why it is necessary
+3. Explain any impact on dependent systems or workflows
+4. Wait for @ashley's explicit approval before proceeding
+
+See [`.github/workflows/protected-files-guard.yml`](.github/workflows/protected-files-guard.yml) for automatic enforcement on all PRs.
+
+### Code Ownership
+
+This repository is maintained by the LightSpeed team. Code ownership is declared in [CODEOWNERS](.github/CODEOWNERS):
+
+- **Frontend architecture & components:** @ashley
+- **Guidelines & standards:** @ashley
+- **Spec Kit & governance:** @ashley
+- **CI/CD workflows:** @ashley
+
+When you submit a PR that affects these areas, the code owner is automatically requested for review via GitHub's CODEOWNERS mechanism. Approve their feedback or provide justification before merging.
+
+### Locked Configuration Files
+
+These files are **manually curated by @ashley** and require explicit approval to modify:
+
+| File | Purpose |
+|------|---------|
+| `.github/labels.yml` | Canonical label definitions (158 labels) — all labels **must** use family prefixes (e.g., `type:bug`, not `bug`) |
+| `.github/issue-types.yml` | Org-wide issue type definitions (24 types) |
+| `.github/workflows/labeling-unified.yml` | GitHub Actions labeling automation |
+
+**Label Prefix Requirements:**
+
+All labels applied to issues and PRs **must use the family prefix system**:
+
+- ✅ `type:bug`, `type:feature`, `type:task` — **CORRECT**
+- ✅ `status:in-progress`, `status:done` — **CORRECT**
+- ✅ `priority:high`, `priority:low` — **CORRECT**
+- ❌ `bug` — **WRONG** (use `type:bug`)
+- ❌ `urgent` — **WRONG** (use `priority:critical`)
+
+See [lightspeedwp/.github § Label Creation Rules](https://github.com/lightspeedwp/.github/blob/develop/CLAUDE.md#label-creation-rules-critical) for the complete catalog and prefix reference.
+
+### Governance Structure
+
+This repository is part of the **LightSpeed organization governance** framework:
+
+- **Canonical governance files:** Live in `lightspeedwp/.github` (organization-wide standards)
+- **Local governance files:** Live in `.github/specs/` and `.github/workflows/` (repository-specific implementations)
+- **Repository rules:** Documented in `CONTRIBUTING.md` (this file), `AGENTS.md`, and `CLAUDE.md`
+- **Specification process:** Uses SpecKit in `.github/specs/{NNN-feature-slug}/` for feature documentation
+- **Workflow automation:** 17 GitHub Actions workflows enforce governance automatically
+
+**Key governance decisions:**
+
+| Decision | Status | Documentation |
+|----------|--------|---|
+| Branch naming pattern `{type}/{scope}-{title}` | ✅ Enforced | Section 1: Branch naming above |
+| PR template routing by branch type | ✅ Enforced | Section 3: Pull requests above |
+| Protected files require approval | ✅ Enforced | Protected files workflow above |
+| npm-only package manager | ✅ Enforced | Prerequisites section above |
+| Node.js 24 LTS pinned | ✅ Enforced | Prerequisites section above |
+| BEM-only CSS (no Tailwind utilities) | ✅ Enforced | Coding conventions section above |
+| Spec Kit for feature work | ✅ Recommended | Section: Using Spec Kit above |
+
 ## Unresolved decisions (owner confirmation required)
 
 The full list, with evidence, is in [AGENTS.md § Unresolved decisions](AGENTS.md#unresolved-decisions-owner-confirmation-required). In summary:

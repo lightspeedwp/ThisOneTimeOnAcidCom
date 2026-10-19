@@ -227,7 +227,7 @@
 | `.specify/` | SpecKit configuration & memory | SpecKit CLI, `/speckit-*` skills | `.specify/memory/`, feature directories | No | Configuration: `init-options.json`, `extensions.yml` |
 | `content/` | Markdown content for features (book, blog, events, etc.) | Next.js app, `npm run build` | Compiled into dist during build | No | Subdirs: `about/`, `blog/`, `book/`, `events/`, `faq/` |
 | `dist/` | Production build output | Web servers (Netlify), CI/CD | Built artifacts (HTML, JS, CSS) | No | **GENERATED**: `npm run build` creates this; commit ignored |
-| `docs/` | Developer & contributor documentation | Contributors, agents, CI/CD | Markdown files (committed) | No | Includes: ANTHROPIC_PLATFORMS.md, BRANCH_NAMING_LOCAL.md, testing guides, etc. |
+| `docs/` | Developer & contributor documentation | Contributors, agents, CI/CD | Markdown files (committed) | No | Includes: AnthropicPlatforms.md, BRANCH_NAMING_LOCAL.md, testing guides, etc. |
 | `e2e/` | E2E test fixtures & configuration | Playwright, `npm run test:e2e` | Test reports, screenshots (local) | No | Alternative to `tests/e2e/`; structure TBD |
 | `guidelines/` | Design & development standards | Components, CI/CD validation | BEM stylesheets, component guides | **YES** | **LOCKED**: CSS architecture, patterns, components, sections |
 | `node_modules/` | NPM dependencies | All build/test commands | JavaScript modules | No | **GENERATED** & **IGNORED**: `npm ci` creates; never committed |
