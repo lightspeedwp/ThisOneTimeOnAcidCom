@@ -2,124 +2,105 @@ name: Protected Files Guard
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, edited]
 
 jobs:
   check-protected-files:
     name: Check Protected Files
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
-      pull-requests: write
+      pull-requests: read
+      issues: read
       contents: read
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Check for protected file modifications
-        id: protected_check
-        env:
-          BASE_REF: ${{ github.base_ref }}
-        run: |
-          # Get list of changed files in the PR
-          # Use --no-renames to detect both old and new paths on file renames
-          # This prevents renamed protected files from bypassing the guard
-          CHANGED_FILES=$(git diff --name-only --no-renames origin/"${BASE_REF}"...HEAD)
-
-          # Define protected file patterns (from .github/PROTECTED_FILES.txt)
-          # Patterns are extended regular expressions with proper escaping
-          PROTECTED_PATTERNS=(
-            "^\.github/"
-            "^scripts/"
-            "^AGENTS\.md$"
-            "^CHANGELOG\.md$"
-            "^ATTRIBUTIONS\.md$"
-            "^guidelines/"
-            "^src/app/utils/supabase/"
-            "^src/app/components/figma/ImageWithFallback\.tsx$"
-            "^tasks/task-list\.md$"
-          )
-
-          PROTECTED_MODIFIED=()
-
-          # Check each changed file against protected patterns
-          for file in $CHANGED_FILES; do
-            for pattern in "${PROTECTED_PATTERNS[@]}"; do
-              if [[ "$file" =~ $pattern ]]; then
-                PROTECTED_MODIFIED+=("$file")
-                break
-              fi
-            done
-          done
-
-          # Report findings
-          if [ ${#PROTECTED_MODIFIED[@]} -gt 0 ]; then
-            echo "protected_files_found=true" >> $GITHUB_OUTPUT
-            echo "PROTECTED_MODIFIED<<EOF" >> $GITHUB_OUTPUT
-            printf '%s\n' "${PROTECTED_MODIFIED[@]}" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          else
-            echo "protected_files_found=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Comment on PR if protected files detected
-        if: steps.protected_check.outputs.protected_files_found == 'true'
-        uses: actions/github-script@v7
+      # Read metadata only; never check out or execute pull request code.
+      - name: Check protected files and approval
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
-            const protectedFiles = `${{ steps.protected_check.outputs.PROTECTED_MODIFIED }}`.split('\n').filter(f => f);
-
-            const comment = `⚠️ **Protected Files Modified**
-
-            This pull request modifies one or more protected files that require explicit owner review and approval.
-
-            **Protected files detected:**
-            ${protectedFiles.map(f => `- \`${f}\``).join('\n')}
-
-            **Protected file categories:**
-            - \`.github/\` — Governance, workflows, labels, issue types, templates
-            - \`scripts/\` — Build and validation scripts
-            - \`AGENTS.md\` — AI agent rules and governance
-            - \`CHANGELOG.md\` — Release history (managed by Release Agent)
-            - \`ATTRIBUTIONS.md\` — Project attributions
-            - \`guidelines/\` — CSS architecture, coding standards
-            - \`src/app/utils/supabase/\` — Backend integration (protected from changes)
-            - \`src/app/components/figma/ImageWithFallback.tsx\` — Figma integration component
-            - \`tasks/task-list.md\` — Task tracker (never delete)
-
-            **Required action:**
-            1. Open an issue on the \`lightspeedwp/.github\` repository with \`[PROTECTED-FILE-CHANGE-REQUEST]\` tag
-            2. Describe why these protected files need modification
-            3. Wait for @ashley approval before proceeding
-
-            See [AGENTS.md § Protected and locked files](../../AGENTS.md#protected-and-locked-files) for details.`;
-
-            try {
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: comment
-              });
-            } catch (error) {
-              // Handle fork PRs that don't have write permissions
-              core.warning(`Failed to post comment: ${error.message}. This may be expected for fork PRs.`);
+            const pr = context.payload.pull_request;
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              ...context.repo, pull_number: pr.number, per_page: 100,
+            });
+            if (pr.changed_files > files.length) {
+              core.setFailed('Cannot verify an incomplete changed-file list.');
+              return;
             }
 
-      - name: Fail check if protected files modified
-        if: steps.protected_check.outputs.protected_files_found == 'true'
-        run: |
-          echo "❌ Protected files were modified. This requires explicit owner approval."
-          echo ""
-          echo "Protected files detected:"
-          echo "${{ steps.protected_check.outputs.PROTECTED_MODIFIED }}"
-          exit 1
+            // Include both sides of renames. Keep these patterns aligned with PROTECTED_FILES.txt.
+            const patterns = [
+              /^\.github\//, /^scripts\//, /^AGENTS\.md$/, /^CHANGELOG\.md$/,
+              /^ATTRIBUTIONS\.md$/, /^guidelines\//, /^src\/app\/utils\/supabase\//,
+              /^src\/app\/components\/figma\/ImageWithFallback\.tsx$/, /^tasks\/task-list\.md$/,
+            ];
+            const changedPaths = files.flatMap(file =>
+              file.previous_filename ? [file.filename, file.previous_filename] : [file.filename]
+            );
+            const protectedFiles = [...new Set(changedPaths.filter(file => patterns.some(pattern => pattern.test(file))))];
+            if (protectedFiles.length === 0) {
+              core.info('No protected files were modified.');
+              return;
+            }
 
-      - name: Pass check if no protected files modified
-        if: steps.protected_check.outputs.protected_files_found == 'false'
-        run: |
-          echo "✅ No protected files were modified."
-          echo ""
-          echo "This PR is clear of protected file modifications and may proceed."
+            // CODEOWNERS uses @ashley; @ashleyshaw is the owner's GitHub account.
+            const owners = new Set(['ashley', 'ashleyshaw']);
+            const isApproval = text => /^(?:I approve\b|Approved(?:[.!]|\s|$))/im.test(text || '');
+            const references = [...new Set(Array.from((pr.body || '').matchAll(
+              /https:\/\/github\.com\/lightspeedwp\/\.github\/issues\/([1-9]\d*)(?=$|[\s)#?])/g
+            ), match => Number(match[1])))];
+            const approvedFiles = new Set();
+
+            for (const issue_number of references) {
+              try {
+                const { data: issue } = await github.rest.issues.get({
+                  owner: 'lightspeedwp', repo: '.github', issue_number,
+                });
+                if (issue.pull_request || !issue.title.includes('[PROTECTED-FILE-CHANGE-REQUEST]')) continue;
+                const body = issue.body || '';
+                const prLinks = Array.from(body.matchAll(
+                  /https:\/\/github\.com\/([^\s/]+)\/([^\s/]+)\/pull\/([1-9]\d*)(?=$|[\s)#?])/g
+                ));
+                if (!prLinks.some(link => link[1] === context.repo.owner &&
+                  link[2] === context.repo.repo && Number(link[3]) === pr.number)) continue;
+
+                let approved = owners.has(issue.user.login) && isApproval(body);
+                if (!approved) {
+                  const comments = await github.paginate(github.rest.issues.listComments, {
+                    owner: 'lightspeedwp', repo: '.github', issue_number, per_page: 100,
+                  });
+                  // An approval must postdate the issue's last scope edit.
+                  approved = comments.some(comment => owners.has(comment.user.login) &&
+                    isApproval(comment.body) && Date.parse(comment.created_at) >= Date.parse(issue.updated_at));
+                }
+                if (!approved) continue;
+
+                // Exact code/bold paths, or a directory plus named basenames.
+                // A directory alone never grants approval to every file below it.
+                const paths = Array.from(body.matchAll(/`([^`\n]+)`|\*\*([^*\n]+)\*\*/g), match => {
+                  const path = match[1] || match[2];
+                  return path.startsWith(context.repo.repo + '/') ? path.slice(context.repo.repo.length + 1) : path;
+                });
+                const directories = paths.filter(path => path.endsWith('/'));
+                const scope = new Set(paths.filter(path => !path.endsWith('/')));
+                for (const directory of directories) {
+                  for (const name of paths.filter(path => !path.includes('/'))) scope.add(directory + name);
+                }
+                for (const file of protectedFiles) {
+                  if (scope.has(file)) approvedFiles.add(file);
+                }
+                core.info(`Checked approval: ${issue.html_url}`);
+              } catch (error) {
+                core.warning(`Could not verify lightspeedwp/.github#${issue_number}: ${error.message}`);
+              }
+            }
+
+            const unapproved = protectedFiles.filter(file => !approvedFiles.has(file));
+            if (unapproved.length > 0) {
+              core.setFailed('Owner approval required for: ' + unapproved.join(', ') +
+                '. Link a [PROTECTED-FILE-CHANGE-REQUEST] issue in lightspeedwp/.github ' +
+                'that names this PR and every protected path, and records owner approval.');
+              return;
+            }
+            core.info('Owner approval verified for all modified protected files.');
