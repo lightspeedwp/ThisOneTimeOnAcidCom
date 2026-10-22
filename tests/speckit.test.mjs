@@ -200,14 +200,14 @@ describe('common.sh: project and feature resolution', function () {
     const f = fixture(t);
     feature(f);
     const result = f.common('jq() { return 49; }\nread_feature_json_feature_directory "$SPECIFY_INIT_DIR"');
-    assert.equal(success(result), 'specs/001-example');
+    assert.equal(success(result), '.github/specs/001-example');
   });
 
   it('falls back to text parsing when both available JSON parsers fail', function (t) {
     const f = fixture(t);
     feature(f);
     const result = f.common('jq() { return 49; }\npython3() { return 49; }\nread_feature_json_feature_directory "$SPECIFY_INIT_DIR"');
-    assert.equal(success(result), 'specs/001-example');
+    assert.equal(success(result), '.github/specs/001-example');
   });
 });
 
@@ -590,7 +590,7 @@ describe('workflow CLI prerequisites and output', function () {
   it('accepts only plan.md by default and reports an empty optional document list', function (t) {
     const f = fixture(t);
     const directory = feature(f, ['plan.md']);
-    f.mkdir('specs/001-example/contracts');
+    f.mkdir('.github/specs/001-example/contracts');
     assert.deepEqual(json(f.cli('check-prerequisites', ['--json'])), {
       FEATURE_DIR: directory, AVAILABLE_DOCS: [],
     });
@@ -599,7 +599,7 @@ describe('workflow CLI prerequisites and output', function () {
   it('lists optional documents and includes tasks only when requested', function (t) {
     const f = fixture(t);
     feature(f, ['plan.md', 'spec.md', 'tasks.md', 'research.md', 'data-model.md', 'quickstart.md']);
-    f.write('specs/001-example/contracts/.schema', 'contract');
+    f.write('.github/specs/001-example/contracts/.schema', 'contract');
     const expected = ['research.md', 'data-model.md', 'contracts/', 'quickstart.md'];
     assert.deepEqual(json(f.cli('check-prerequisites', ['--json'])).AVAILABLE_DOCS, expected);
     assert.deepEqual(json(f.cli('check-prerequisites', ['--json', '--require-spec', '--require-tasks', '--include-tasks'])).AVAILABLE_DOCS,
@@ -624,14 +624,14 @@ describe('workflow CLI prerequisites and output', function () {
     feature(f, ['spec.md']);
     f.write('.specify/templates/plan-template.md', 'Initial plan\n\n');
     const data = json(f.cli('setup-plan', ['--json']));
-    assert.equal(data.IMPL_PLAN, f.path('specs/001-example/plan.md'));
-    assert.equal(data.FEATURE_DIR, f.path('specs/001-example'));
-    assert.equal(data.FEATURE_SPEC, f.path('specs/001-example/spec.md'));
+    assert.equal(data.IMPL_PLAN, f.path('.github/specs/001-example/plan.md'));
+    assert.equal(data.FEATURE_DIR, f.path('.github/specs/001-example'));
+    assert.equal(data.FEATURE_SPEC, f.path('.github/specs/001-example/spec.md'));
     assert.equal(data.BRANCH, '001-example');
-    assert.equal(f.read('specs/001-example/plan.md'), 'Initial plan\n\n');
-    f.write('specs/001-example/plan.md', 'User edits\n');
+    assert.equal(f.read('.github/specs/001-example/plan.md'), 'Initial plan\n\n');
+    f.write('.github/specs/001-example/plan.md', 'User edits\n');
     success(f.cli('setup-plan', ['--json']));
-    assert.equal(f.read('specs/001-example/plan.md'), 'User edits\n');
+    assert.equal(f.read('.github/specs/001-example/plan.md'), 'User edits\n');
   });
 
   it('creates the missing feature directory and an empty plan if no template exists', function (t) {
@@ -671,12 +671,12 @@ describe('workflow CLI prerequisites and output', function () {
     const f = fixture(t);
     const directory = feature(f, ['spec.md', 'plan.md', 'research.md', 'tasks.md']);
     const template = f.write('.specify/templates/tasks-template.md', 'Tasks "quoted"\n\n');
-    const original = f.read('specs/001-example/tasks.md');
+    const original = f.read('.github/specs/001-example/tasks.md');
     assert.deepEqual(json(f.cli('setup-tasks', ['--json'])), {
       FEATURE_DIR: directory, AVAILABLE_DOCS: ['research.md'],
       TASKS_TEMPLATE: template, TASKS_TEMPLATE_CONTENT: 'Tasks "quoted"\n\n',
     });
-    assert.equal(f.read('specs/001-example/tasks.md'), original);
+    assert.equal(f.read('.github/specs/001-example/tasks.md'), original);
   });
 
   it('does not create tasks.md just to report its setup', function (t) {
@@ -684,6 +684,6 @@ describe('workflow CLI prerequisites and output', function () {
     feature(f);
     f.write('.specify/templates/tasks-template.md', 'Task template');
     success(f.cli('setup-tasks', ['--json']));
-    assert.equal(f.exists('specs/001-example/tasks.md'), false);
+    assert.equal(f.exists('.github/specs/001-example/tasks.md'), false);
   });
 });
