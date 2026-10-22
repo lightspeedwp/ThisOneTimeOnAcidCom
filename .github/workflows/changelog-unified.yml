@@ -213,7 +213,7 @@ jobs:
       - name: Install validator dependencies
         run: |
           cd .github/validation/changelog
-          npm ci
+          npm ci --prefer-offline --no-audit --no-fund
 
       # Native git diff instead of a third-party action: the checkout is the
       # PR test-merge commit, whose first parent is the base SHA, so this is

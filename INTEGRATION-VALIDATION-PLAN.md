@@ -150,7 +150,7 @@ const embedUrl = `https://player.vimeo.com/video/${videoId}`
 **Active Policy:** Content-Security-Policy header is currently **NOT defined** in the active `netlify.toml`. The draft policy in `src/app/netlify.toml` is intentionally deferred because it would block Typeform, YouTube, and Vimeo embeds.
 
 **Future Policy (when CSP is enabled):**
-```
+```text
 Content-Security-Policy: default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://embed.typeform.com https://www.youtube.com https://player.vimeo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://embed.typeform.com; img-src 'self' data: https:;
 ```
 
@@ -188,7 +188,7 @@ node scripts/check-netlify-headers.mjs https://deploy-preview-XXX--thisonetimeon
 ```
 
 **Expected Output:**
-```
+```text
 200  /  [text/html]  cache-control: public, max-age=0, must-revalidate
 200  /journal  [text/html]  cache-control: public, max-age=0, must-revalidate
 200  /about-ash  [text/html]  cache-control: public, max-age=0, must-revalidate
@@ -321,11 +321,13 @@ $ node scripts/check-netlify-headers.mjs <deploy-preview-url>
 
 **Date:** 2026-10-22  
 **Preview URL:** https://deploy-preview-426--thisonetimeonacid.netlify.app  
-**Overall Status:** 🟡 PARTIAL — Deployment validation passed; browser/performance testing pending
+**Overall Status:** 🟡 PARTIAL — PR #427 deployment, browser, performance, and required validation checks pending
+
+Preview #426 results below are historical and do not validate PR #427. Verify the current PR #427 preview before marking any pending checks complete.
 
 ### Summary
 
-- ✅ **Deployment Validation**: All header checks passed
+- ✅ **Historical Deployment Validation (preview #426 only)**: All header checks passed
   - HTML routes return 200 with revalidation headers
   - Hashed assets return 200 with immutable caching
   - Favicon returns 200 (verify content-type is image, not text/html)
@@ -347,4 +349,4 @@ $ node scripts/check-netlify-headers.mjs <deploy-preview-url>
 ---
 
 **Last Updated:** 2026-10-22  
-**Status:** Ready for deployment — Manual verification steps remain
+**Status:** 🟡 PARTIAL — Current PR #427 preview verification, browser, performance, and required validation checks pending
