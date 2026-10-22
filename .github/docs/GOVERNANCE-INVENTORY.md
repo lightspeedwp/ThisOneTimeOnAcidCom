@@ -72,8 +72,10 @@ After Phase 2.3 completion, ThisOneTimeOnAcidCom MUST contain:
 
    - Source: `lightspeedwp/.github/` (canonical, locked)
    - Access: GitHub Actions workflows read from canonical repo
-   - Routing: PR template routing workflow applies correct template based on branch type
-   - Drift Prevention: `drift-detection.yml` workflow blocks attempts to add duplicates
+- Routing: PR template routing workflow applies correct template based on branch
+type
+- Drift Prevention: `drift-detection.yml` workflow blocks attempts to add
+duplicates
 
 1. **Custom Workflows**
 
@@ -106,7 +108,8 @@ To modify canonical governance files (labels, templates, issue types):
 
 1. Change is implemented in `lightspeedwp/.github`
 
-1. ThisOneTimeOnAcidCom automatically references updated configuration (no local changes needed)
+1. ThisOneTimeOnAcidCom automatically references updated configuration (no local
+changes needed)
 
 ---
 

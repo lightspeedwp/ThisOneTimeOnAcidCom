@@ -19,7 +19,7 @@ is described in its own subdirectory with a `SKILL.md` file.
 
 | Skill | Purpose | Invocation | File |
 |-------|---------|-----------|------|
-| Branch Validation | Validate branch names against repository branching strategy (type/scope-title pattern) | `/branch-validation` or `npm run validate:branch-name` | `branch-validation/SKILL.md` |
+| Branch Validation | Validate branch names | `/branch-validation` or `npm run validate:branch-name` | `branch-validation/SKILL.md` |
 | Validate | Generic validation skill for configuration, lint, and schema checks | `/validate` | `validate/SKILL.md` |
 
 ### Testing & Quality Assurance (1 skill)
@@ -104,7 +104,8 @@ Each skill specification (`SKILL.md` file) should include:
 
 1. **Creation**: New skill created in `.claude/skills/{skill-name}/SKILL.md`
 
-1. **Documentation**: All required fields documented (purpose, invocation, inputs, outputs, budget, rules)
+1. **Documentation**: All required fields documented (purpose, invocation,
+inputs, outputs, budget, rules)
 
 1. **Testing**: Skill tested with sample inputs and edge cases
 

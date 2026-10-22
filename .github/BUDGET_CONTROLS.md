@@ -38,13 +38,15 @@ Pending (TOA-271):
    - Runtime reads `max_tokens` parameter for each agent
    - Execution stops at token boundary; agent cannot exceed limit
    - Example: If `max_tokens: 20000`, execution halts at 20K tokens consumed
-   - Fallback: If agent hits limit mid-task, execution pauses; manual resume or escalation required
+- Fallback: If agent hits limit mid-task, execution pauses; manual resume or
+escalation required
 
 1. **Execution quota enforcement**:
 
    - Runtime tracks invocation count per agent per day/week
    - When quota reached, subsequent invocations blocked until period resets
-   - Example: If `daily_quota: 5`, agent can run 5 times per day; 6th invocation blocked
+- Example: If `daily_quota: 5`, agent can run 5 times per day; 6th invocation
+blocked
    - Admin override: Requires owner approval (documented in escalation procedures)
 
 1. **Rate limiting**:
@@ -123,7 +125,8 @@ When an agent hits a hard budget limit during execution:
 
 1. **Immediate effect**: Execution stops; no more tokens consumed
 
-1. **Output handling**: Return partial results if available; discard incomplete output
+1. **Output handling**: Return partial results if available; discard incomplete
+output
 
 1. **State**: Save checkpoint (if implemented); mark session as paused
 
@@ -139,11 +142,14 @@ When an agent hits a hard budget limit during execution:
 
 1. **Immediate effect**: Invocation blocked; agent not started
 
-1. **Error message**: "Agent invocation quota exceeded (5/5 daily). Reset at [UTC time]."
+1. **Error message**: "Agent invocation quota exceeded (5/5 daily). Reset at
+[UTC time]."
 
-1. **Wait period**: Agent available after quota period resets (e.g., next day at 00:00 UTC)
+1. **Wait period**: Agent available after quota period resets (e.g., next day at
+00:00 UTC)
 
-1. **Override**: Owner can increase `daily_quota` and force immediate execution (rare, requires justification)
+1. **Override**: Owner can increase `daily_quota` and force immediate execution
+(rare, requires justification)
 
 ### Rate Limit (429 Response)
 
@@ -153,9 +159,11 @@ When an agent hits a hard budget limit during execution:
 
 1. **Third attempt**: Retry after 8s
 
-1. **Fourth failure**: Escalate to owner with response headers (shows retry-after window)
+1. **Fourth failure**: Escalate to owner with response headers (shows
+retry-after window)
 
-1. **Resolution**: May require waiting longer than backoff or increasing API quota
+1. **Resolution**: May require waiting longer than backoff or increasing API
+quota
 
 ### Timeout Exceeded
 
@@ -181,11 +189,15 @@ If runtime budget tracking fails (log corruption, clock skew, etc.):
 
 1. **Default behavior**:
 
-   - **Reject invocation** (safe default): Assume quota exceeded until data recovers
-   - **Owner override**: Owner can approve single execution with understanding of risk
-1. **Recovery**: Operator reviews logs; reconciles actual usage with recorded usage
+- **Reject invocation** (safe default): Assume quota exceeded until data
+recovers
+- **Owner override**: Owner can approve single execution with understanding of
+risk
+1. **Recovery**: Operator reviews logs; reconciles actual usage with recorded
+usage
 
-1. **Prevention**: Runtime writes budget telemetry to append-only log immediately after agent execution
+1. **Prevention**: Runtime writes budget telemetry to append-only log
+immediately after agent execution
 
 ---
 
@@ -204,9 +216,11 @@ For long-running agents that may hit timeouts or token limits:
    - `checkpoint_data`: Serializable state (inputs, outputs so far, position)
    - `timestamp`: When checkpoint was saved
    - `tokens_used`: Cumulative token consumption
-1. **Storage**: Checkpoints written to `.claude/checkpoints/{task_id}.json` (protected file)
+1. **Storage**: Checkpoints written to `.claude/checkpoints/{task_id}.json`
+(protected file)
 
-1. **Cleanup**: Checkpoints deleted when task completes or owner explicitly cancels
+1. **Cleanup**: Checkpoints deleted when task completes or owner explicitly
+cancels
 
 ### Resume Protocol
 
@@ -244,7 +258,8 @@ node scripts/resume-agent.js --task-id tsk_xyz123 --from-checkpoint
 
 ### Initial Budget Allocation
 
-1. Agent specification defines initial `max*tokens`, `daily*quota`, `rate_limit`, `timeout`
+1. Agent specification defines initial `max*tokens`, `daily*quota`,
+`rate_limit`, `timeout`
 
 1. Owner (@ashley) reviews and approves in `.claude/agents/{name}-agent.md`
 
@@ -301,7 +316,8 @@ All budget changes logged in `.github/BUDGET_CONTROLS.md#change-log`:
 
 Budget enforcement is **transparent** to CI workflows:
 
-1. **Budgets enforced silently**: Workflow continues running; agent simply stops at limit
+1. **Budgets enforced silently**: Workflow continues running; agent simply stops
+at limit
 
 1. **Error reporting**: If agent hit budget during workflow:
 

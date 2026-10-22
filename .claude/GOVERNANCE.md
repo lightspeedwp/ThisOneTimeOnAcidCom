@@ -122,7 +122,8 @@ reference:
 
 1. **Justify**: Why does this task need more budget? Provide concrete reason:
 
-   - "This codebase is 50k+ lines; standard review budget insufficient for thorough analysis"
+- "This codebase is 50k+ lines; standard review budget insufficient for thorough
+analysis"
    - "Deep research across 10+ documents; 300k tokens estimated"
    - "Complex migration requiring iterative testing; time-intensive"
 
@@ -139,7 +140,8 @@ reference:
    - "Partial results returned (usable but incomplete)"
    - "Session suspended, requires resumption in new session"
 
-1. **Submit approval request**: Create issue with tag `[BUDGET-INCREASE-REQUEST]`:
+1. **Submit approval request**: Create issue with tag
+`[BUDGET-INCREASE-REQUEST]`:
 
 ```text
    Title: [BUDGET-INCREASE-REQUEST] code-review for AWS Lambda migration (TOA-X)
@@ -157,7 +159,8 @@ reference:
 
 ```text
 
-1. **Wait for approval**: @ashley will respond with ✅ approved or ❌ denied + rationale
+1. **Wait for approval**: @ashley will respond with ✅ approved or ❌ denied +
+rationale
 
 1. **If approved**: Execute agent with increased budget using approved amounts
 
@@ -327,7 +330,8 @@ Infrastructure monitors cost trends per agent:
 
 1. **Budget exceeded**: "My analysis used 120k tokens, standard is 50k"
 
-1. **Protected file modification needed**: "I need to update .github/workflows/..."
+1. **Protected file modification needed**: "I need to update
+.github/workflows/..."
 
 1. **Tool access needed**: "I need to push commits, not just read"
 
@@ -395,7 +399,8 @@ If @ashley denies a budget increase or tool access request:
 
 1. **Understand the reason**: Ask for specific rationale
 
-1. **Propose alternative**: Smaller budget? Different approach? Split into phases?
+1. **Propose alternative**: Smaller budget? Different approach? Split into
+phases?
 
 1. **Escalate with new info**: If you have new data that changes the calculus
 

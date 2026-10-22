@@ -118,29 +118,39 @@ not implement that runtime control.
 
 1. **Token limit and accounting**:
 
-   - Reserve tokens before dispatch and reconcile input, output, and cached-token usage across calls, retries, and subagents.
-   - Include concurrent and in-flight reservations in the parent ledger; reject dispatch that would exceed the approved session ceiling.
-   - On exhaustion, block further calls and cancel outstanding work where supported; preserve checkpoints and report the remaining allowance through host-provided feedback.
+- Reserve tokens before dispatch and reconcile input, output, and cached-token
+usage across calls, retries, and subagents.
+- Include concurrent and in-flight reservations in the parent ledger; reject
+dispatch that would exceed the approved session ceiling.
+- On exhaustion, block further calls and cancel outstanding work where
+supported; preserve checkpoints and report the remaining allowance through
+host-provided feedback.
 
 1. **Execution time**:
 
    - Track a session deadline and stop execution at the approved timeout.
-   - Plan a 30–60s checkpoint warning before the deadline; do not promise recovery of in-flight work after termination.
+- Plan a 30–60s checkpoint warning before the deadline; do not promise recovery
+of in-flight work after termination.
 
 1. **Invocation quotas and rate limiting**:
 
-   - Apply per-agent admission limits and bounded retry/backoff policies before dispatch.
-   - Charge retries to the same session budget; retries must not bypass token or time limits.
+- Apply per-agent admission limits and bounded retry/backoff policies before
+dispatch.
+- Charge retries to the same session budget; retries must not bypass token or
+time limits.
 
 ### Soft Policies (Advisory, Not Enforced)
 
 ## These are documented best-practices, not enforced
 
-1. **Recommended Checkpoint Intervals**: Run validation every 50k tokens (advisory only)
+1. **Recommended Checkpoint Intervals**: Run validation every 50k tokens
+(advisory only)
 
-1. **Recommended Session Breaks**: Pause between 100k–200k token sessions (best practice)
+1. **Recommended Session Breaks**: Pause between 100k–200k token sessions (best
+practice)
 
-1. **Cost Warning Thresholds**: Warn when approaching 80% of cost ceiling (informational)
+1. **Cost Warning Thresholds**: Warn when approaching 80% of cost ceiling
+(informational)
 
 ---
 
@@ -165,13 +175,17 @@ Remaining: 5,000 tokens
 
 ### Rules
 
-1. **Subagents**: Token consumption counts against parent budget (nested calls deduct from parent allowance)
+1. **Subagents**: Token consumption counts against parent budget (nested calls
+deduct from parent allowance)
 
-1. **Forked Sessions**: Run on separate budgets (inherit parent's token limit, but tracked independently)
+1. **Forked Sessions**: Run on separate budgets (inherit parent's token limit,
+but tracked independently)
 
-1. **Concurrent Work**: Concurrent subagents within a session share its budget; independently budgeted forked sessions use their own ledgers
+1. **Concurrent Work**: Concurrent subagents within a session share its budget;
+independently budgeted forked sessions use their own ledgers
 
-1. **Chained Delegations**: Transitive subagent usage counts against the originating session's budget; a fork starts a separate accounting boundary
+1. **Chained Delegations**: Transitive subagent usage counts against the
+originating session's budget; a fork starts a separate accounting boundary
 
 **Implication**: An agent cannot spawn unlimited subagents — each subagent
 reduces remaining budget for parent's own work.
@@ -224,7 +238,8 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 
    - Host blocks further dispatch and cancels outstanding work where supported
    - Preserves the latest checkpoint and reports exhaustion
-   - Cost overruns are checked post-execution and require approval before later sessions
+- Cost overruns are checked post-execution and require approval before later
+sessions
 
 1. **Permanent failure**: Unrecoverable error (auth expired, resource deleted)
 
@@ -242,11 +257,13 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 
 1. Host blocks further dispatch when the approved allowance is exhausted
 
-1. Outstanding reservations remain charged until reconciled; cancel in-flight work where supported
+1. Outstanding reservations remain charged until reconciled; cancel in-flight
+work where supported
 
 1. Report: "Token budget exhausted; session terminated"
 
-1. Return saved partial results where available; completion of an in-flight turn is not guaranteed
+1. Return saved partial results where available; completion of an in-flight turn
+is not guaranteed
 
 **Recovery**:
 
@@ -303,8 +320,10 @@ case)
 
 1. **Charge the full remaining allowance**:
 
-   - If usage cannot be reconciled, mark the session's remaining token allowance as consumed (zero remaining)
-   - Keep known usage and outstanding reservations charged; apply this fallback once to the shared session ledger, including subagents
+- If usage cannot be reconciled, mark the session's remaining token allowance as
+consumed (zero remaining)
+- Keep known usage and outstanding reservations charged; apply this fallback
+once to the shared session ledger, including subagents
 
 1. **Suspend further dispatch**:
 
@@ -319,8 +338,10 @@ case)
 
 1. **Resume only within an approved ceiling**:
 
-   - Resume this session only after authoritative usage reconciliation establishes a positive remainder under its original ceiling
-   - Otherwise, require owner approval for a new session allocation; never silently reset or increase the original allowance
+- Resume this session only after authoritative usage reconciliation establishes
+a positive remainder under its original ceiling
+- Otherwise, require owner approval for a new session allocation; never silently
+reset or increase the original allowance
 
 ---
 
