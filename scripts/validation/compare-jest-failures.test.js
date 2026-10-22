@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-const script = path.resolve('scripts/validation/compare-jest-failures.cjs');
+const script = path.resolve(__dirname, 'compare-jest-failures.cjs');
 let fixtureRoot;
 
 beforeEach(() => {
