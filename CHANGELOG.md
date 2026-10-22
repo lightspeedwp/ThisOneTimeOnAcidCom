@@ -60,6 +60,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Spec 021: Repository Restructuring & Canonical Governance Config (lightspeedwp/.github)
   - Linked workstreams: TOA-262 (PR/Issue Template Routing), TOA-271 (Validation & Automation)
 
+#### Netlify Performance & Security Configuration (TOA-7)
+
+- **Root `netlify.toml` configuration** — Added production build settings with npm package manager, Node.js 24 runtime pinning, and SPA fallback rule
+- **Immutable asset caching** — Generate exact-path `Cache-Control: public, max-age=31536000, immutable` rules in `dist/_headers` for content-hashed Vite bundle outputs under `/assets/` matching `-[8-char hash].ext` pattern
+- **Security baseline headers** — `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: DENY` and `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()` (CSP deferred)
+- **HTML cache preservation** — Retain `Cache-Control: public, max-age=0, must-revalidate` for HTML responses to enable revalidation on refresh
+- **SPA fallback rule** — Unforced `/* → /index.html 200` fallback to support direct navigation and refresh on nested routes without breaking real files
+- **Netlify header/redirect validation tests** — Added `tests/netlify-headers.test.mjs` with 7 passing test suites covering hashed asset detection, header generation, and configuration validation
+- **Deployed header checker** — Created `scripts/check-netlify-headers.mjs` for testing deployed site header configuration against expected values
+- **Header generation integration** — Updated `vite.config.ts` to call `netlifyHashedAssetHeaders()` during build, generating `dist/_headers` file with immutable cache rules
+
 #### Phase 1 Governance Workflows (TOA-241)
 
 - **Branch name validation** — `branch-name-validation.yml` validates branch naming conventions against `{type}/{scope}-{title}` pattern with forbidden prefix checks (`claude/`, `copilot/`, `openai/`)
@@ -334,43 +345,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
 
-- **Comprehensive animation system** inspired by retro 80s CLI interfaces with 6 core animation types
-- **Terminal boot sequence** (0.8s typewriter-style page entrance) across 5 pages
-- **Auto-stagger orchestration** (`HeroLayout`) — Automatic cascading fade-in with 0.1s delays (title → subtitle → description → CTA)
-- **Neon pulse CTA buttons** — 2s breathing glow that speeds to 1s on hover
-- **Holographic rainbow shimmer** — 4s infinite gradient sweep across hero titles (pink → purple → cyan → yellow → pink)
-- **Floating media elements** — 4s gentle vertical oscillation with neon glow effects
-- **Page header animation system** (`/styles/blocks/page-header-animations.css`) — Reusable 120-line system for portfolio/blog/contact page headers
-- **Animation showcase dev tools** (`/dev/animations`) — Interactive demos with 6 animation types, live code examples, stats dashboard
-- **Implementation files:**
-  - `/styles/blocks/animations.css` — Extended core @keyframes library (26 total animations)
-  - `/styles/blocks/hero.css` — 115 lines of hero animation utilities
-  - `/styles/blocks/page-header-animations.css` — Reusable page header system
-  - `/styles/blocks/animation-showcase.css` — 240 lines of showcase page styles
-  - `/components/layouts/HeroLayout.tsx` — Auto-stagger animation orchestration
-  - `/components/pages/dev/AnimationShowcasePage.tsx` — Interactive dev tools showcase
-- **Pages enhanced:**
-  - HomePage (v1.7.0) — Full terminal boot + auto-stagger + floating media + neon pulse CTAs
-  - AboutPage (v1.5.0) — All HomePage animations + holographic rainbow shimmer title
-  - PortfolioPage (v1.7.0) — Header boot → filters (0.4s) → grid (0.5s)
-  - BlogPage (v1.5.0) — Header boot → filters (0.4s)
-  - ContactPage (v1.4.0) — Header boot → form grid (0.5s)
-  - AnimationShowcasePage (v1.0.0) — Interactive demos at `/dev/animations`
-- **Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion` support
-- **Performance:** CSS-only animations (60fps, zero JavaScript overhead, +0.6KB minified)
-- **Documentation:**
-  - Updated `/guidelines/Guidelines.md` to v8.4.0 with Animation System Implementation section
-  - Created `/docs/animation-implementation-report-march-2026.md` (350+ line final report)
-  - Complete metrics, testing results, file manifest, and Phase 2 roadmap
+#### Content Specimens Accessibility Audit — 100% WCAG 2.1 AA Compliant
 
 ### Fixed
 
 #### Phase 1 Governance Workflows — Branch Validation & Package Synchronisation
 
-- **Fixed branch validation workflow JSON parsing** — Corrected `branch-name-validation.yml` to query correct JSON field names (`isValid` instead of `valid`) in both jq expression and fallback grep pattern, resolving false validation failures where branches passed validation but workflow reported failure due to field mismatch
-- **Synchronised package-lock.json with lefthook dependencies** — Regenerated lock file to include all lefthook platform-specific variants (lefthook-darwin-arm64, lefthook-linux-x64, etc.), fixing `npm ci` failures in CI workflows that were caused by missing dependencies after lefthook was added to package.json
+#### Color Palettes System — 33 Neon Palettes with Interface Inspiration
 
-#### Netlify SPA routing — direct navigation 404s (#3)
+- **Expanded color palette library from 20 to 33 palettes** in `/data/mock/color-palettes.ts`
+- **Added 13 new brand-aligned palettes**:
+  - **Ash Shaw Core** — All 8 core neon colors from the design system
+  - **Cyberpunk Gradient** — Pink→Blue signature gradient for CTAs and hero titles
+  - **Toxic Lime Gradient** — Green→Cyan for success messages and energy themes
+  - **Solar Flare Gradient** — Orange→Yellow for accent highlights and warnings
+  - **Hyperpop Animated** — Full 8-color spectrum for animated backgrounds
+  - **Monochrome Pink Spectrum** — 5 tonal shades from pastel to electric
+  - **Monochrome Blue Spectrum** — 5 tonal shades from sky to midnight
+  - **Complementary Orange & Blue** — Classic complementary pair for split layouts
+  - **Complementary Pink & Green** — High-energy pair for status indicators
+  - **Warm Neon Sunset** — Red→Orange→Yellow→Pink temperature palette
+  - **Cool Neon Ocean** — Cyan→Blue→Purple temperature palette
+  - **Aurora Mesh Background** — Purple/blue radial gradients with opacity system
+  - **Contrast Checkerboard** — Black/white/neon for accessibility-first designs
+- **Interface Ideas field** — Added `interfaceIdeas` to `ColorPalette` interface with 1-3 practical UI/UX suggestions per palette (e.g., "Dark mode dashboard with neon glowing cards", "Hero section with gradient text using background-clip: text")
+- **Updated `/dev-tools/color-palettes` page**:
+  - Added "Interface inspiration" section with bullet-point design suggestions
+  - CSS styling with purple (light mode) and pink (dark mode) arrow bullets
+  - All 33 palettes now include light/dark mode previews and practical implementation ideas
+- **Updated `/guidelines/design-tokens/neon-colors.md`** with complete palette library documentation:
+  - Full hex codes and use cases for all 33 palettes
+  - "Palette Selection Guide" organized by Interface Type (dashboards, CTAs, success/warning states), Mood (energetic, cool, warm, professional), and Use Case (buttons, backgrounds, data viz, status indicators)
+  - Code examples and CSS snippets for each palette category
+  - 7 organized categories: Brand Core, Signature Gradients, Monochrome Spectrums, Complementary Pairs, Temperature Palettes, Background Systems, Thematic Palettes
 
 - **Replaced the malformed `public/_redirects/` directory** (containing `main.tsx`) with a plain-text `public/_redirects` file holding the same `/*  /index.html  200` fallback rule
 - Netlify can now read `dist/_redirects`, so direct navigation and refresh on client-side routes such as `/journal`, `/journal/dancefloor-belonging` and `/ebook` no longer return 404; existing static files are still served first
@@ -534,66 +541,93 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Ebook enrichment** — 82 pages polished to production-ready quality
 - **About sub-pages** — 21 pages polished to production-ready quality
 
-#### Production Launch Prep — SEO & Meta Tags
+- **Jest test comparison script** — Created missing `scripts/validation/compare-jest-failures.cjs` that compares test results between PR head and base branch to detect new test failures. Pre-existing failures on develop do not block the PR, only NEW failures introduced by the PR are reported.
 
-- **OG image and Twitter image meta tags** added to `index.html` with `og:image`, `twitter:image`, width, height, and alt attributes (placeholder URL pending production domain setup)
+#### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
 
-#### Content Specimens Accessibility Audit — 100% WCAG 2.1 AA Compliant
+- **Comprehensive animation system** inspired by retro 80s CLI interfaces with 6 core animation types
+- **Terminal boot sequence** (0.8s typewriter-style page entrance) across 5 pages
+- **Auto-stagger orchestration** (`HeroLayout`) — Automatic cascading fade-in with 0.1s delays (title → subtitle → description → CTA)
+- **Neon pulse CTA buttons** — 2s breathing glow that speeds to 1s on hover
+- **Holographic rainbow shimmer** — 4s infinite gradient sweep across hero titles (pink → purple → cyan → yellow → pink)
+- **Floating media elements** — 4s gentle vertical oscillation with neon glow effects
+- **Page header animation system** (`/styles/blocks/page-header-animations.css`) — Reusable 120-line system for portfolio/blog/contact page headers
+- **Animation showcase dev tools** (`/dev/animations`) — Interactive demos with 6 animation types, live code examples, stats dashboard
+- **Implementation files:**
+  - `/styles/blocks/animations.css` — Extended core @keyframes library (26 total animations)
+  - `/styles/blocks/hero.css` — 115 lines of hero animation utilities
+  - `/styles/blocks/page-header-animations.css` — Reusable page header system
+  - `/styles/blocks/animation-showcase.css` — 240 lines of showcase page styles
+  - `/components/layouts/HeroLayout.tsx` — Auto-stagger animation orchestration
+  - `/components/pages/dev/AnimationShowcasePage.tsx` — Interactive dev tools showcase
+- **Pages enhanced:**
+  - HomePage (v1.7.0) — Full terminal boot + auto-stagger + floating media + neon pulse CTAs
+  - AboutPage (v1.5.0) — All HomePage animations + holographic rainbow shimmer title
+  - PortfolioPage (v1.7.0) — Header boot → filters (0.4s) → grid (0.5s)
+  - BlogPage (v1.5.0) — Header boot → filters (0.4s)
+  - ContactPage (v1.4.0) — Header boot → form grid (0.5s)
+  - AnimationShowcasePage (v1.0.0) — Interactive demos at `/dev/animations`
+- **Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion` support
+- **Performance:** CSS-only animations (60fps, zero JavaScript overhead, +0.6KB minified)
+- **Documentation:**
+  - Updated `/guidelines/Guidelines.md` to v8.4.0 with Animation System Implementation section
+  - Created `/docs/animation-implementation-report-march-2026.md` (350+ line final report)
+  - Complete metrics, testing results, file manifest, and Phase 2 roadmap
 
-- **Comprehensive accessibility audit** across all 7 Content Specimen pages (Blog, Portfolio, Video, Podcast, Event, FAQ, Content overview)
-- **Verified compliance** across 10 WCAG 2.1 Level AA criteria:
-  - Heading hierarchy (h1 → h2 → h3 semantic order)
-  - Color contrast (all 7 neon accent colors exceed 4.5:1 minimum; 6 of 7 achieve AAA 7:1+)
-  - Keyboard navigation (breadcrumbs, cards, all interactive elements)
-  - ARIA labels & semantic HTML (proper landmarks, icon `aria-hidden`, section labeling)
-  - Responsive design (320px–1920px breakpoints, 200%/400% zoom testing)
-  - Screen reader support (logical reading order, descriptive links)
-  - Reduced motion (all 7 markdown CSS files suppress animations)
-  - Progressive enhancement (core content accessible without JavaScript)
-- **Testing coverage:** 7 pages, 6 breakpoints, 10 accessibility criteria
-- **Results:** 0 critical issues, 0 medium issues, 0 low issues
-- **Report:** `/reports/content-specimens-accessibility/findings.md`
+#### Phase 1 Governance Workflows — Branch Validation & Package Synchronisation
 
-#### Color Palettes System — 33 Neon Palettes with Interface Inspiration
+- **Fixed branch validation workflow JSON parsing** — Corrected `branch-name-validation.yml` to query correct JSON field names (`isValid` instead of `valid`) in both jq expression and fallback grep pattern, resolving false validation failures where branches passed validation but workflow reported failure due to field mismatch
+- **Synchronised package-lock.json with lefthook dependencies** — Regenerated lock file to include all lefthook platform-specific variants (lefthook-darwin-arm64, lefthook-linux-x64, etc.), fixing `npm ci` failures in CI workflows that were caused by missing dependencies after lefthook was added to package.json
 
-- **Expanded color palette library from 20 to 33 palettes** in `/data/mock/color-palettes.ts`
-- **Added 13 new brand-aligned palettes**:
-  - **Ash Shaw Core** — All 8 core neon colors from the design system
-  - **Cyberpunk Gradient** — Pink→Blue signature gradient for CTAs and hero titles
-  - **Toxic Lime Gradient** — Green→Cyan for success messages and energy themes
-  - **Solar Flare Gradient** — Orange→Yellow for accent highlights and warnings
-  - **Hyperpop Animated** — Full 8-color spectrum for animated backgrounds
-  - **Monochrome Pink Spectrum** — 5 tonal shades from pastel to electric
-  - **Monochrome Blue Spectrum** — 5 tonal shades from sky to midnight
-  - **Complementary Orange & Blue** — Classic complementary pair for split layouts
-  - **Complementary Pink & Green** — High-energy pair for status indicators
-  - **Warm Neon Sunset** — Red→Orange→Yellow→Pink temperature palette
-  - **Cool Neon Ocean** — Cyan→Blue→Purple temperature palette
-  - **Aurora Mesh Background** — Purple/blue radial gradients with opacity system
-  - **Contrast Checkerboard** — Black/white/neon for accessibility-first designs
-- **Interface Ideas field** — Added `interfaceIdeas` to `ColorPalette` interface with 1-3 practical UI/UX suggestions per palette (e.g., "Dark mode dashboard with neon glowing cards", "Hero section with gradient text using background-clip: text")
-- **Updated `/dev-tools/color-palettes` page**:
-  - Added "Interface inspiration" section with bullet-point design suggestions
-  - CSS styling with purple (light mode) and pink (dark mode) arrow bullets
-  - All 33 palettes now include light/dark mode previews and practical implementation ideas
-- **Updated `/guidelines/design-tokens/neon-colors.md`** with complete palette library documentation:
-  - Full hex codes and use cases for all 33 palettes
-  - "Palette Selection Guide" organized by Interface Type (dashboards, CTAs, success/warning states), Mood (energetic, cool, warm, professional), and Use Case (buttons, backgrounds, data viz, status indicators)
-  - Code examples and CSS snippets for each palette category
-  - 7 organized categories: Brand Core, Signature Gradients, Monochrome Spectrums, Complementary Pairs, Temperature Palettes, Background Systems, Thematic Palettes
+#### Netlify SPA routing — direct navigation 404s (#3)
 
-#### Phosphor Icons Migration Complete — Lucide Fully Removed
+- **Replaced the malformed `public/_redirects/` directory** (containing `main.tsx`) with a plain-text `public/_redirects` file holding the same `/*  /index.html  200` fallback rule
+- Netlify can now read `dist/_redirects`, so direct navigation and refresh on client-side routes such as `/journal`, `/journal/dancefloor-belonging` and `/ebook` no longer return 404; existing static files are still served first
+- Netlify's site base directory is empty, so `src/app/netlify.toml` is not read during deploys; `public/_redirects` is the single effective redirect definition
 
-- **`lucide-react` fully removed** from the project — all 92+ icons migrated to `@phosphor-icons/react`
-- **Phase 2 Tier 4 cleanup complete** (15 tasks):
-  - Deleted 7 legacy Lucide files: `/lib/icon-base.tsx`, `/lib/icons.ts`, `/lib/icons-set-a.tsx` through `icons-set-e.tsx`
-  - Migrated `/data/mock/ui/navigation.ts` from `LucideIcon` type to Phosphor `Icon` type; `Home` → `House`, `Mail` → `Envelope`
-  - Rewrote `PhosphorIconsPage.tsx` v2.0.0 — now renders all 92 icons live via Phosphor (previously used Lucide for comparison side)
-  - Updated 22 guideline `.md` files: all `from 'lucide-react'` imports replaced with `from '@phosphor-icons/react'`, icon names updated to Phosphor conventions
-  - Updated `vite.config.ts`, data files (`code-quality.ts`, `deployment-readiness.ts`, `events/categories.ts`, `hidden-about.ts`, `icon-library.ts`), and `StyleGuidePage.tsx`
-- **Zero `lucide-react` imports** remain in the codebase (verified via full search)
-- **Zero `LucideIcon` type references** remain (verified via full search)
-- **`/lib/` directory** now contains only `router.tsx`
+#### Static metadata files returning production 404s (#5)
+
+- **Moved static metadata files to Vite public directory** — Relocated `robots.txt`, `sitemap.xml`, and `manifest.json` from `src/app/public/` to the root `public/` directory so Vite includes them in the production build
+- **Verified build output** — Confirmed all three files appear in `dist/` with unchanged contents and the expected file types
+- **Production deployment** — The files are now part of the Vite build output; production deployment verification pending
+- **Service worker excluded** — Left `service-worker.js` in original location pending separate PWA integration decision
+
+#### Style Guide Dark Mode — Atomic Black Backgrounds
+
+- **Fixed Style Guide page dark mode** (`/styles/blocks/style-guide-page.css`) — All white backgrounds replaced with atomic black (#0F0F0F)
+- **Updated 18 color instances:**
+  - 7 backgrounds: `white` → `#0F0F0F`
+  - 11 text colors: `dark-charcoal` → `#FFFFFF` or `#FF10F0`
+  - All borders: `rgba(0,0,0,0.1)` → `rgba(255,16,240,0.2)`
+- **Code block styling** — Neon pink background with yellow text
+- **100% dark mode consistency** across entire site
+
+#### Animation Showcase Bundler Compatibility
+
+- **Removed all inline styles** from AnimationShowcasePage — Replaced with BEM CSS classes
+- **Fixed Figma Make bundler errors** (IframeMessageAbortError) caused by inline style objects
+- **Added BEM classes:**
+  - `.demo-float-box`, `.demo-float-box--pink`, `.demo-float-box--yellow` — Float demo styling
+  - `.demo-float-text` — Float element text styling
+  - `.demo-page-header-spacing` — Page header spacing utility
+- **Strict guidelines compliance** — Zero inline styles, 100% BEM architecture
+
+#### Dark Mode Color Correction — Exact Figma Hex Values
+
+- **Fixed neon pink color** — Changed from #FF3AAE to correct **#FF10F0** (exact Figma design value)
+- **Fixed atomic black** — Changed from #0B0B10 to correct **#0F0F0F** (15,15,15 in RGB)
+- **Added neon magenta** — New color **#D4008C** for button gradients (from Figma design)
+- **Updated all CSS files:**
+  - `/styles/globals.css` — Root color custom properties corrected
+  - `/styles/blocks/book-dark-mode.css` — All rgba() values now use correct hex
+  - `/styles/blocks/theme-toggle.css` — Toggle uses correct #FF10F0
+- **Visual impact:**
+  - Much more vibrant magenta pink (closer to hot pink)
+  - Higher saturation and intensity
+  - Better matches Figma design screenshot
+  - Glow effects more pronounced with correct color
+- **No breaking changes** — CSS custom properties updated, all references automatically inherit new values
+
 
 ### Removed
 
