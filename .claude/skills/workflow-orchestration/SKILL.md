@@ -374,6 +374,14 @@ status: "complete"
 
 One task list per orchestrator. Tasks should be grouped by sub-audit or by priority.
 
+**Register in master task list:**
+
+When the dedicated task list is created, add its entry to `/tasks/master-task-list.md` under "Active":
+- Link: `/tasks/{topic}-tasks.md`
+- Related report: `/reports/YYYY-MM-DD-{topic}/` (orchestrator report folder)
+- Status: Active
+- Created date: YYYY-MM-DD
+
 ---
 
 ## Section 3: Archiving Completed Work
@@ -390,7 +398,9 @@ Before archiving, confirm:
 
 ### Archive Process
 
-**Step 1: Move report to archive**
+**Step 1: After 30 days have passed since completion, move the report to archive**
+
+Do not move the report before the 30-day post-completion retention period ends.
 
 ```bash
 # Single-file report
@@ -406,6 +416,11 @@ Edit `/tasks/task-list.md`:
 - Move entry from "Active" section to "Completed (pending archive)"
 - Add completion date
 
+If this is an orchestrator audit with dedicated task lists:
+- Also update `/tasks/master-task-list.md`
+- Move the dedicated task-list entry from "Active" to "Completed (pending archive)"
+- Add completion date and location of the dedicated task list (e.g., `/tasks/{topic}-tasks.md`)
+
 **Step 3: Keep prompt for reference (optional)**
 
 Prompts can stay in `/prompts/` for re-running. Leave as-is unless superseded.
@@ -413,6 +428,8 @@ Prompts can stay in `/prompts/` for re-running. Leave as-is unless superseded.
 **Step 4: Clean up after 30 days**
 
 After task list is in "Completed" section for 30 days, permanently move to `./tasks/archived/`.
+
+Also update `/tasks/master-task-list.md` with final archived location of any dedicated orchestrator task lists.
 
 ---
 
