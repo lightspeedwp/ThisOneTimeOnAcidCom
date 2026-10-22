@@ -13,6 +13,10 @@ const SECURITY_HEADERS = {
   'x-frame-options': 'DENY',
 }
 
+/**
+ * HTTP probe for a single route; returns status, headers, content type and body.
+ * Follows redirects manually to capture intermediate responses.
+ */
 async function probe(base, path) {
   const res = await fetch(base + path, { redirect: 'manual' })
   const body = await res.text()
@@ -26,6 +30,11 @@ async function probe(base, path) {
   }
 }
 
+/**
+ * Validate caching and security headers on a deployed Netlify site.
+ * Probes HTML routes, hashed assets and public files; checks Content-Type, Cache-Control and security headers.
+ * Returns { results: probes, failures: validation errors }.
+ */
 export async function checkSite(base) {
   const failures = []
   const results = []
