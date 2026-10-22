@@ -165,7 +165,7 @@ The application includes built-in dev tools for inspecting the design system.
 
 ## 📦 Project Structure
 
-```
+```text
 /
 ├── components/           # React components (ES5 TypeScript, BEM CSS)
 │   ├── common/           # Header, Footer, ThemeToggle
@@ -212,7 +212,7 @@ The application includes built-in dev tools for inspecting the design system.
 | **Book Pages** | 15 | Home, The Book, Draft, About, Waitlist, Journal, Events, Speaking, Contact, Thank You, Media, Draft Viewer, Ebook, Sitemap, Style Guide |
 | **Ebook Pages** | 82 | 20 chapters + 2 appendices |
 | **Blog Posts** | 50 | Production-ready with rich storytelling |
-| **Portfolio Entries** | 25 | Enhanced with 150-word descriptions, 10-11 tags each |
+| **Portfolio Entries** | 25 | Enhanced with 150-word descriptions, 10-11 tags |
 | **Videos** | 17 | 9 categories, 87 unique tags |
 | **Podcast Episodes** | 4 | Full transcripts |
 | **Events** | 4 | Origin, Organik, Gondwana, Vortex |
@@ -224,20 +224,26 @@ The application includes built-in dev tools for inspecting the design system.
 ## 🎨 Design System Highlights
 
 **Neon vs Atomic Black Visual Identity:**
-- **8 Neon Colors:** Electric green, hot pink, royal blue, pure yellow, blazing orange, violet purple, aqua cyan, hot red
+
+- **8 Neon Colors:** Electric green, hot pink, royal blue, pure yellow, blazing orange,
+  violet purple, aqua cyan, hot red
 - **Atomic Black:** Deep #0F0F0F background for maximum neon contrast
-- **4 Signature Gradients:** Cyberpunk (pink→blue), Toxic Lime (green→cyan), Solar Flare (orange→yellow), Hyperpop (multi-color)
-- **26 Animations:** Neon pulse, gradient shift, float, bounce, terminal boot, holographic shimmer
+- **4 Signature Gradients:** Cyberpunk (pink→blue), Toxic Lime (green→cyan), Solar
+  Flare (orange→yellow), Hyperpop (multi-color)
+- **26 Animations:** Neon pulse, gradient shift, float, bounce, terminal boot,
+  holographic shimmer
 - **33 Color Palettes:** Comprehensive interface color library
 - **SVG Grain Noise:** Site-wide `feTurbulence` overlay on major sections
 
 **Typography:**
+
 - **Headings:** Playfair Display (elegant serif)
 - **Body:** Inter (readable sans-serif)
 - **Titles:** Righteous (retro display font)
 - **Fluid Scale:** 16px-20px (body), 36px-120px (hero)
 
 **Accessibility:**
+
 - ✅ WCAG 2.1 AAA compliance
 - ✅ Color contrast: 7:1+ in dark mode
 - ✅ Full keyboard navigation
@@ -248,6 +254,7 @@ The application includes built-in dev tools for inspecting the design system.
 ## 🚧 Future Enhancements (Phase 2 - Optional)
 
 **Animation System Phase 2** (~40-60 hours):
+
 1. Scroll-triggered animations for section reveals
 2. Parallax effects on hero media
 3. Interactive hover states on portfolio cards
@@ -258,6 +265,7 @@ The application includes built-in dev tools for inspecting the design system.
 ## 📝 Recent Updates
 
 **March 12, 2026 - Animation System Phase 1 Complete:**
+
 - ✅ Terminal boot animation system (6 types across 5 pages)
 - ✅ Interactive animation showcase at `/dev/animations`
 - ✅ Style guide dark mode fixed (atomic black backgrounds)
