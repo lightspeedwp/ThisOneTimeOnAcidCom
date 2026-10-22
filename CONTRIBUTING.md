@@ -4,8 +4,7 @@ Thank you for your interest in contributing to the Ash Shaw makeup portfolio
 project.
 This guide covers setup, validation and the contribution workflow. It is based
 on the repository's own files. Where the repository is inconsistent, the open
-questions are listed under [Unresolved
-decisions](#unresolved-decisions-owner-confirmation-required).
+questions are listed under [Unresolved decisions](#unresolved-decisions).
 
 AI agents should also read [AGENTS.md](AGENTS.md).
 
