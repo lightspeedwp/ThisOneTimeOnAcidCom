@@ -62,8 +62,12 @@ describe('root netlify.toml', function () {
   it('avoids conflicting wildcard Cache-Control rules that would interfere with exact-path hashed-asset rules', function () {
     // The root netlify.toml should not have wildcard Cache-Control rules
     // Exact-path rules for hashed assets are generated per-file into dist/_headers
-    // Limit match to single headers block to avoid false positives from unrelated rules
-    assert.doesNotMatch(rootToml, /for\s*=\s*"\/\*"[\s\S]{0,500}?Cache-Control/im);
+    // Split at array-table boundaries so later rules cannot satisfy this check.
+    rootToml.split(/(?=^[ \t]*\[\[)/m).forEach(function (block) {
+      if (/^\s*\[\[headers\]\]/.test(block) && /^\s*for\s*=\s*"\/\*"/m.test(block)) {
+        assert.doesNotMatch(block, /Cache-Control/i);
+      }
+    });
   });
 
   it('has an unforced SPA fallback so real files win', function () {
