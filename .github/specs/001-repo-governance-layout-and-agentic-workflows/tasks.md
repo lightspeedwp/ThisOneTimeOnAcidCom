@@ -872,4 +872,84 @@ available to all team members
 
 ---
 
+---
+
+## Phase 9: Convergence – Final Validation & Closure (TOA-241 Completion)
+
+**Purpose**: Resolve remaining incomplete tasks from Phases 5–8 and document final handoff
+
+**Status**: Convergence assessment identifies 4 unchecked tasks and 1 partial gap across implementation
+
+### Implementation for Phase 9 Convergence
+
+- [ ] T060 [P] [WS-261] [TOA-252] Complete PR template routing verification (T035 completion)
+- Create test PR from branch: `test/pr-template-feature`
+- Create test PR from branch: `test/pr-template-fix`
+- Create test PR from branch: `test/pr-template-docs`
+- Create test PR from branch: `test/pr-template-unmatched`
+- Verify correct PR template loads for each branch type (feature/bugfix/docs/default)
+- Document verification results in comment on this convergence phase
+- Close test PRs (no merge needed)
+- Mark: T035 ✅ complete when verification passes all four scenarios
+
+- [ ] T061 [WS-261] [TOA-261] Enable branch protection on develop and main (T038 completion)
+- **Manual step**: Go to Settings → Branches → Add branch protection rule
+- For `develop` branch: Require PR review (1), CODEOWNERS review, status checks, up-to-date
+- For `main` branch: Require PR review (2), CODEOWNERS review, status checks, restrict push to maintainers
+- After configuring, document rules in CONTRIBUTING.md under "Branch Protection"
+- Mark: T038 ✅ complete when settings saved and documented
+
+- [ ] T062 [P] [WS-261] [TOA-250] Enable GitHub Discussions in Settings (T033 sub-item)
+- **Manual step**: Go to Settings → Features → Enable "Discussions"
+- Configure discussion categories to map to templates:
+    - Feature Requests → feature-request.yml
+    - Questions & Answers → question-and-answer.yml
+    - Show and Tell → show-and-tell.yml
+    - General → general.yml
+    - Ideas → ideas.yml (additional)
+- Document Discussions setup in `.github/DISCUSSION_TEMPLATE/README.md` with steps
+- Mark: T033 ✅ complete (with Discussions UI enablement recorded)
+
+- [ ] T063 [WS-262] [TOA-262] Audit and complete Styling documentation (T046 sub-item)
+- Read current CONTRIBUTING.md "Styling: semantic BEM" section
+- Verify coverage of:
+    - BEM naming conventions (Block, Element, Modifier)
+    - File organization (`styles/blocks/`, `styles/tokens/`, `styles/globals.css`)
+    - Component CSS patterns (examples from `src/app/components/`)
+    - Link to `guidelines/css-architecture.md` for detailed rules
+    - Rationale for BEM (Figma Make compatibility, Tailwind removal)
+- Add any missing items to CONTRIBUTING.md or link to guidelines/
+- Mark: T046 ✅ complete (Styling documentation fully audited and complete)
+
+- [ ] T064 [P] Validate protected-file changes and record owner approval (T055 completion)
+- Assessment: PR #346 / branch `build/repo-governance-continue-spec-001` modifies protected files:
+    - `.github/workflows/` (added 8 new workflows)
+    - `scripts/` (unchanged, verified)
+    - `AGENTS.md` (updated governance sections)
+    - `CHANGELOG.md` (standard changelog entry)
+- Review changes against PROTECTED_FILES.txt and ensure they are within governance scope
+- Record explicit approval from @ashley (via GitHub comment, issue reference, or email)
+- Rerun protected-files-guard workflow to verify it passes with approval context
+- Document approval reference and revalidation result
+- Mark: T055 ✅ complete when approval recorded and guard passes
+
+- [ ] T065 Document implementation completion and handoff (T059 completion – deferred until T060–T064 complete)
+- After T060, T061, T062, T063, T064 all marked ✅:
+- Create summary document: `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md`
+- Contents:
+    - Feature: TOA-241 – Repository Governance Infrastructure
+    - Status: ✅ DELIVERED (all 8 phases, 5 workstreams, 20 child issues)
+    - Completion date and session reference
+    - Test results summary (all suites pass: Jest 588/588, Bats 12/12, Playwright configured)
+    - Protected files: verified intact, no breaking changes
+    - Application behavior: preserved (SPA build, Netlify deployment)
+    - Outstanding items: None (all phases and workstreams completed)
+    - Acceptance sign-off: Ready for owner (@ashley) final review and merge to main
+- Update `.github/specs/CATALOG.md` to mark TOA-241 as COMPLETE (status: ✅ Delivered)
+- Mark: T059 ✅ complete when COMPLETION.md created and catalog updated
+
+**Checkpoint**: All convergence gaps resolved. Spec-001 feature complete and ready for final owner review and merge to develop/main.
+
+---
+
 **End of Tasks** — Ready for implementation. Start with Phase 1 Setup tasks.
