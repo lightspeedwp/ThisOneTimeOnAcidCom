@@ -216,6 +216,20 @@ Refactor Tailwind utilities to BEM classes across `/styles/blocks/`. 10 tasks, ~
 2026-11-01 (4 hours, 2 developers)
 ```
 
+### Step 4B: Register Single-File Task List
+
+**When:** Immediately after creating `/tasks/{topic}-tasks.md`
+
+Single-file audits must also register their task lists in the master tracker for lifecycle management:
+
+**Update `/tasks/master-task-list.md` under "Active":**
+- Link: `/tasks/{topic}-tasks.md`
+- Related report: `/reports/{topic}/report.md` (single-file report)
+- Status: Active
+- Created date: YYYY-MM-DD
+
+**Why:** Both single-file and orchestrator task lists follow the same completion → retention → archive → tombstone lifecycle. The master tracker must cover all dedicated task lists so completion status updates and archiving can proceed consistently.
+
 ---
 
 ## Section 2: Orchestrator Workflow
@@ -427,9 +441,21 @@ mv ./reports/{topic}.md ./reports/archived/{topic}.md
 mv ./reports/YYYY-MM-DD-{topic}/ ./reports/archived/YYYY-MM-DD-{topic}/
 ```
 
-**Step 2: Update archive location tracking**
+**Step 2: Move task-list file to archive, then update tracker**
 
-Both `/tasks/task-list.md` and `/tasks/master-task-list.md` should already have status "Completed (pending archive)" from Step 8 (marked at task completion). Now that files are being permanently archived, update the final archive locations:
+Both `/tasks/task-list.md` and `/tasks/master-task-list.md` should already have status "Completed (pending archive)" from Step 8 (marked at task completion). Now that files are being permanently archived:
+
+**First, move the completed task-list file:**
+
+```bash
+# Single-file audit (if a dedicated list was created)
+mv ./tasks/{topic}-tasks.md ./tasks/archived/{topic}-tasks.md
+
+# Orchestrator audit (if dedicated orchestrator list exists)
+mv ./tasks/{topic}-tasks.md ./tasks/archived/{topic}-tasks.md
+```
+
+**Then, update archive location tracking in the master tracker:**
 
 Edit `/tasks/task-list.md`:
 - Move entry from "Completed (pending archive)" section to "Archived"
@@ -438,7 +464,7 @@ Edit `/tasks/task-list.md`:
 If this is an orchestrator audit with dedicated task lists:
 - Also update `/tasks/master-task-list.md`
 - Move the dedicated task-list entry from "Completed (pending archive)" to "Archived"
-- Update path from `/tasks/{topic}-tasks.md` to `/tasks/archived/{topic}-tasks.md`
+- Update path from `/tasks/{topic}-tasks.md` to `/tasks/archived/{topic}-tasks.md` (reflecting the moved file)
 - Add archive date
 
 **Step 3: Keep prompt for reference (optional)**
@@ -449,9 +475,20 @@ Prompts can stay in `/prompts/` for re-running. Leave as-is unless superseded.
 
 After task list entries have been in "Archived" section for 30 additional days (60 days total from original completion), you may permanently delete:
 - The archived task list file (e.g., `/tasks/archived/{topic}-tasks.md`)
-- References in `/tasks/master-task-list.md` may also be removed
 
-**Best practice:** Keep archived task lists and references for 60+ days total to preserve audit trail, then clean up as needed.
+**For `/tasks/master-task-list.md`:** Do NOT remove references. Instead, retain a **tombstone entry** that records:
+- Original link: `/tasks/{topic}-tasks.md`
+- Archived location (if moved): `/tasks/archived/{topic}-tasks.md`
+- Status: **Deleted**
+- Deletion date: YYYY-MM-DD
+- Reason: (e.g., "Archived after 60-day retention period")
+
+**Example tombstone entry:**
+```
+| `/tasks/css-audit-tasks.md` | `/tasks/archived/css-audit-tasks.md` | **Deleted** | 2026-12-21 | Archived after 60-day retention |
+```
+
+**Why:** Preserving deletion history in the master tracker maintains an audit trail of all task lists, their lifecycle, and when they were removed from active use.
 
 ---
 
