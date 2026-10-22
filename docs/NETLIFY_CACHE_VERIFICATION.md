@@ -199,8 +199,8 @@ X-Content-Type-Options: nosniff
 
 | Issue | Mitigation | Status |
 |-------|-----------|--------|
-| Netlify doesn't read `src/app/netlify.toml` | **BLOCKING:** Configure base directory in Netlify UI to `src/app/` | ⚠️ **CONFIRMED - REQUIRES ACTION** |
-| Hashed assets getting wrong cache headers | Base directory must be set so Netlify reads from `src/app/netlify.toml` | ⚠️ **CONFIRMED - ASSETS GETTING max-age=0 INSTEAD OF 1-YEAR CACHE** |
+| Netlify may not read `src/app/netlify.toml` | Check the active package-directory, base directory, and publish settings before changing the configuration | ⏳ **UNVERIFIED - REQUIRES SETTINGS CHECK** |
+| Hashed assets getting wrong cache headers | Confirm which Netlify configuration is active, then apply the intended `/assets/*` cache rule there | ⏳ **ASSET POLICY MISMATCH OBSERVED** |
 | CSP blocks Typeform | Assess in preview; HTTPS connections are allowed, but external iframes fall back to `default-src 'self'` | Pending preview verification |
 | Google Fonts not loading | CSP allows `fonts.gstatic.com` and `fonts.googleapis.com`; assess loading in preview | Pending preview verification |
 | Old JS bundle cached despite deployment | HTML revalidation triggers browser cache bust | ✅ By design |
@@ -262,8 +262,8 @@ X-Content-Type-Options: nosniff
 - [x] Headers verified on `/` (correct: `public, max-age=0, must-revalidate`)
 - [x] Headers verified on `/index.html` (correct: `public, max-age=0, must-revalidate`)
 - [ ] Headers verified on `/assets/*.js` (ISSUE: Currently getting `public, max-age=0, must-revalidate` — should be `public, max-age=31536000, immutable`)
-- [ ] Static metadata files verified (robots.txt, sitemap.xml, manifest.json all accessible)
-- [ ] SPA routing verified (`/journal`, `/about`, `/contact` return 200)
+- [x] Static metadata files verified (robots.txt, sitemap.xml, manifest.json all accessible)
+- [x] SPA routing verified (`/journal`, `/about`, `/contact` return 200)
 - [ ] Typeform integrations load (pending verification)
 - [ ] YouTube/Vimeo embeds load (pending verification)
 - [ ] Google Fonts load (pending verification)
@@ -324,7 +324,8 @@ Configure the "Base directory" setting in Netlify's project settings:
 ### Verification After Fix
 Once base directory is configured, run:
 ```bash
-curl -I https://thisonetimeonacid.netlify.app/assets/index-*.js | grep Cache-Control
+asset_url='https://thisonetimeonacid.netlify.app/assets/<actual-hashed-file>.js'
+curl -I "$asset_url" | grep -i '^Cache-Control:'
 # Should return: Cache-Control: public, max-age=31536000, immutable
 ```
 
