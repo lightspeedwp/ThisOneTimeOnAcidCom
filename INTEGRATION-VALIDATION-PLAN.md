@@ -24,8 +24,8 @@ This document outlines validation procedures for external integrations (Google F
 
 **Expected Behavior:**
 - Preconnect reduces latency to fonts.googleapis.com
-- CSS is loaded with `display=swap` to prevent Flash of Unstyled Text (FOUT)
-- Fonts should load without block (swap with system fonts)
+- CSS is loaded with `display=swap` to show fallback text while web fonts load
+- Fonts swap with system fonts once loaded (no invisible text period)
 - All 8 variable font families available within 3 seconds
 
 **Test Procedure:**
@@ -149,10 +149,12 @@ const embedUrl = `https://player.vimeo.com/video/${videoId}`
 
 **Root CSP Header:** `src/app/netlify.toml` (inactive) / `netlify.toml` (active)
 
-**Expected Header:**
+**Expected Header (documentation example):**
 ```
-Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-*' https://embed.typeform.com https://www.youtube.com https://player.vimeo.com; style-src 'self' 'nonce-*' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://embed.typeform.com; img-src 'self' data: https:;
+Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-<base64-value>' https://embed.typeform.com https://www.youtube.com https://player.vimeo.com; style-src 'self' 'nonce-<base64-value>' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://embed.typeform.com; img-src 'self' data: https:;
 ```
+
+**Note:** Replace `<base64-value>` with a generated nonce for each request; the nonce attribute on inline scripts must match.
 
 **Validation Steps:**
 1. Open DevTools → Network tab
@@ -214,7 +216,7 @@ All header checks passed for <deploy-preview-url>
 | Metric | Target | Notes |
 |--------|--------|-------|
 | LCP (Largest Contentful Paint) | < 3.0s | HTML render + fonts |
-| FID (First Input Delay) | < 100ms | React interactivity |
+| INP (Interaction to Next Paint) | < 200ms | React interactivity responsiveness |
 | CLS (Cumulative Layout Shift) | < 0.1 | Fonts swap should not shift layout |
 | FCP (First Contentful Paint) | < 1.8s | HTML + CSS render |
 | TTFB (Time to First Byte) | < 600ms | Netlify edge response |
