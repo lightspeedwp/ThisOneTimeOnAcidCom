@@ -123,7 +123,7 @@ Identify Tailwind utility violations in `/styles/blocks/` and recommend BEM refa
 
 - [ ] All Tailwind utilities catalogued
 - [ ] BEM replacements identified
-- [ ] Report saved to `/reports/css-audit/`
+- [ ] Report saved to `/reports/css-audit/report.md`
 ```
 
 ### Step 2A: Run the Audit
@@ -214,7 +214,7 @@ Refactor Tailwind utilities to BEM classes across `/styles/blocks/`. 10 tasks, ~
 
 ## Dependencies
 
-- Report: `/reports/css-audit.md` must be complete
+- Report: `/reports/css-audit/report.md` must be complete
 - Skill: `/bem-css-compliance` should be available
 
 ## Estimated Completion
@@ -444,15 +444,17 @@ Before archiving, confirm:
 
 Do not move the report before the 30-day post-completion retention period ends.
 
-Before archiving, update each report's status to archived:
+Before each move, set every report's YAML frontmatter status to `archived` (including the orchestrator's consolidated report and all sub-reports):
 
 ```bash
 # Single-file report
-sed -i 's/status: complete/status: archived/' ./reports/{topic}/report.md
-mv ./reports/{topic}/ ./reports/archived/{topic}/
+sed -i '2,/^---$/s/^status: .*/status: "archived"/' ./reports/{topic}/report.md &&
+  mv ./reports/{topic}/ ./reports/archived/{topic}/
 
 # Orchestrator report folder
-sed -i 's/status: complete/status: archived/' ./reports/YYYY-MM-DD-{topic}/report.md
+for report in ./reports/YYYY-MM-DD-{topic}/*.md; do
+  sed -i '2,/^---$/s/^status: .*/status: "archived"/' "$report" || exit 1
+done
 mv ./reports/YYYY-MM-DD-{topic}/ ./reports/archived/YYYY-MM-DD-{topic}/
 ```
 
@@ -559,7 +561,7 @@ Missing frontmatter means:
 | Content | Location | Example |
 |---------|----------|---------|
 | Prompts | `/prompts/` | `/prompts/css-audit.md` |
-| Reports | `/reports/` | `/reports/css-audit.md` or `/reports/2026-10-22-css-audit/` |
+| Reports | `/reports/` | `/reports/css-audit/report.md` or `/reports/2026-10-22-css-audit/` |
 | Tasks | `/tasks/` | `/tasks/css-audit-tasks.md` |
 | Archived | `/reports/archived/`, `/tasks/archived/` | `/reports/archived/2026-02-01-old-audit/` |
 
@@ -587,7 +589,7 @@ modified: "2026-10-22"
 version: "1.0.0"
 prompt_type: "single-audit"
 estimated_duration: "1 hour"
-related_reports: "/reports/{topic}/"
+related_reports: "/reports/{topic}/report.md"
 related_tasks: "/tasks/{topic}-tasks.md"
 ---
 ```
@@ -601,7 +603,7 @@ Copy and customize:
 ```yaml
 ---
 title: "Report: {Your Title Here}"
-filename: "/reports/{topic}.md"
+filename: "/reports/{topic}/report.md"
 created: "2026-10-22"
 modified: "2026-10-22"
 version: "1.0.0"
@@ -680,7 +682,7 @@ Running your first audit?
 - [ ] Add required YAML frontmatter (copy from templates)
 - [ ] Define scope, method, acceptance criteria
 - [ ] Run audit; document findings
-- [ ] Create `/reports/{topic}.md` with frontmatter
+- [ ] Create `/reports/{topic}/report.md` with frontmatter
 - [ ] Extract `/tasks/{topic}-tasks.md`
 - [ ] Link all three files together (cross-reference in frontmatter)
 - [ ] Begin implementing tasks
