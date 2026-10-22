@@ -55,7 +55,8 @@ const options = {
     'Accept': 'application/vnd.github+json',
     'X-GitHub-Api-Version': '2022-11-28',
     'Content-Type': 'application/json',
-    'Content-Length': Buffer.byteLength(requestBody)
+    'Content-Length': Buffer.byteLength(requestBody),
+    'User-Agent': 'ThisOneTimeOnAcidCom/changelog-validator'
   }
 };
 
