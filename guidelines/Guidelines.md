@@ -119,7 +119,7 @@ The Figma Make bundler has known syntax incompatibilities. **All code MUST follo
 3. Only delete from `/tasks/archived/` — never delete active or recently completed task lists
 
 **Report archiving process:**
-1. When a report's associated task list is 100% complete, move the report folder from `/reports/{topic}/` to `/reports/archived/{topic}/`
+1. When a report's associated task list is 100% complete, wait 30 days from completion, then move the report folder from `/reports/{topic}/` to `/reports/archived/{topic}/`
 2. Reports in `/reports/archived/` can be deleted after 7 days
 3. Only delete from `/reports/archived/` — never delete active reports
 

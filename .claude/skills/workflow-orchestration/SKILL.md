@@ -382,6 +382,23 @@ When the dedicated task list is created, add its entry to `/tasks/master-task-li
 - Status: Active
 - Created date: YYYY-MM-DD
 
+### Step 8: Mark Task List as Complete
+
+**When:** All tasks in the task list are marked complete (100% done)
+
+**Do this immediately upon completion, BEFORE the 30-day retention period begins:**
+
+**Update `/tasks/task-list.md`:**
+- Move entry from "Active" section to "Completed (pending archive)"
+- Add completion date: YYYY-MM-DD
+
+**If this is an orchestrator audit with dedicated task lists:**
+- Also update `/tasks/master-task-list.md`
+- Move the dedicated task-list entry from "Active" to "Completed (pending archive)"
+- Add completion date and location of the dedicated task list (e.g., `/tasks/{topic}-tasks.md`)
+
+**Important:** Status changes to "Completed (pending archive)" happen at task completion, not during archiving. This marks the start of the mandatory 30-day retention period before files can be moved to the archive folder.
+
 ---
 
 ## Section 3: Archiving Completed Work
@@ -410,26 +427,31 @@ mv ./reports/{topic}.md ./reports/archived/{topic}.md
 mv ./reports/YYYY-MM-DD-{topic}/ ./reports/archived/YYYY-MM-DD-{topic}/
 ```
 
-**Step 2: Update master task list**
+**Step 2: Update archive location tracking**
+
+Both `/tasks/task-list.md` and `/tasks/master-task-list.md` should already have status "Completed (pending archive)" from Step 8 (marked at task completion). Now that files are being permanently archived, update the final archive locations:
 
 Edit `/tasks/task-list.md`:
-- Move entry from "Active" section to "Completed (pending archive)"
-- Add completion date
+- Move entry from "Completed (pending archive)" section to "Archived"
+- Add archive date: YYYY-MM-DD
 
 If this is an orchestrator audit with dedicated task lists:
 - Also update `/tasks/master-task-list.md`
-- Move the dedicated task-list entry from "Active" to "Completed (pending archive)"
-- Add completion date and location of the dedicated task list (e.g., `/tasks/{topic}-tasks.md`)
+- Move the dedicated task-list entry from "Completed (pending archive)" to "Archived"
+- Update path from `/tasks/{topic}-tasks.md` to `/tasks/archived/{topic}-tasks.md`
+- Add archive date
 
 **Step 3: Keep prompt for reference (optional)**
 
 Prompts can stay in `/prompts/` for re-running. Leave as-is unless superseded.
 
-**Step 4: Clean up after 30 days**
+**Step 4: Permanent deletion (optional, 30+ days after archiving)**
 
-After task list is in "Completed" section for 30 days, permanently move to `./tasks/archived/`.
+After task list entries have been in "Archived" section for 30 additional days (60 days total from original completion), you may permanently delete:
+- The archived task list file (e.g., `/tasks/archived/{topic}-tasks.md`)
+- References in `/tasks/master-task-list.md` may also be removed
 
-Also update `/tasks/master-task-list.md` with final archived location of any dedicated orchestrator task lists.
+**Best practice:** Keep archived task lists and references for 60+ days total to preserve audit trail, then clean up as needed.
 
 ---
 
