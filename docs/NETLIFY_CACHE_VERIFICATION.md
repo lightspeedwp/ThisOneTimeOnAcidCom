@@ -77,18 +77,27 @@ ls -la dist/assets/ | head -10
 **After Netlify preview deployment:**
 ```bash
 # Replace <preview-url> with actual Netlify preview URL
+preview_url="<preview-url>"
+preview_url="${preview_url%/}"
 
 # 1. Root HTML headers
-curl -I <preview-url>/
+curl -I "$preview_url/"
 
 # 2. index.html headers
-curl -I <preview-url>/index.html
+curl -I "$preview_url/index.html"
+
+# Extract the current asset URLs from the deployed HTML (Vite emits /assets/ paths)
+preview_html=$(curl -fsS "$preview_url/")
+js_path=$(printf '%s\n' "$preview_html" | grep -oE 'src="/assets/[^"]+\.js"' | head -n 1 | cut -d '"' -f 2)
+css_path=$(printf '%s\n' "$preview_html" | grep -oE 'href="/assets/[^"]+\.css"' | head -n 1 | cut -d '"' -f 2)
+js_url="${preview_url}${js_path:?No JavaScript asset found in preview HTML}"
+css_url="${preview_url}${css_path:?No CSS asset found in preview HTML}"
 
 # 3. Sample hashed asset headers (JavaScript)
-curl -I <preview-url>/assets/index-D5rnMSiG.js
+curl -I "$js_url"
 
 # 4. Another hashed asset (CSS)
-curl -I <preview-url>/assets/index-BMyFmeQv.css
+curl -I "$css_url"
 ```
 
 **Expected output:**
