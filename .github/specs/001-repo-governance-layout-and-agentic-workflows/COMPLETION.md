@@ -239,7 +239,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has success
 - ✅ **Protected Files:** Governance files protected, changes tracked
 - ✅ **Workflow Validation:** All GitHub Actions configured and operational
 
-### Delivery Status
+### Completion Status
 - ✅ **Feature Complete:** All 8 phases complete, 59/59 tasks executed
 - ✅ **Tests Passing:** 601/601 unit tests, 12/12 build tests
 - ✅ **Merged to develop:** PR #346 successfully merged
@@ -272,7 +272,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has success
 ### Acceptance Sign-Off
 **Status:** Ready for owner review and approval
 
-```
+```text
 Feature: TOA-241 - Repository Governance Infrastructure
 Specification: 001-repo-governance-layout-and-agentic-workflows
 Delivered: October 22, 2026
