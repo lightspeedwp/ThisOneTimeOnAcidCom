@@ -265,7 +265,9 @@
     - `fix/*` → bugfix template
     - `docs/*` → documentation template
   - Create test PRs from different branch types and verify correct template is suggested
-  - Confirm template content is applied without overwriting contributor content
+  - Verify default-template behaviour in a separate test PR (when branch type doesn't match any named pattern)
+  - Verify named-template selection in a separate test PR (explicit template selection precedence)
+  - Confirm each selected template appears in the PR body without overwriting contributor content
   - Document shared-template routing approach in `CONTRIBUTING.md` under "PR Creation Process"
 - [x] T036 [P] [WS-261] [TOA-253] Document saved replies and contributor setup
   - ✅ Add "Using Saved Replies" section to CONTRIBUTING.md

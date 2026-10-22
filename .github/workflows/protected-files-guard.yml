@@ -24,7 +24,9 @@ jobs:
           BASE_REF: ${{ github.base_ref }}
         run: |
           # Get list of changed files in the PR
-          CHANGED_FILES=$(git diff --name-only origin/"${BASE_REF}"...HEAD)
+          # Use --no-renames to detect both old and new paths on file renames
+          # This prevents renamed protected files from bypassing the guard
+          CHANGED_FILES=$(git diff --name-only --no-renames origin/"${BASE_REF}"...HEAD)
 
           # Define protected file patterns (from .github/PROTECTED_FILES.txt)
           # Patterns are extended regular expressions with proper escaping
