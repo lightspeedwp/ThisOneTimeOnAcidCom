@@ -36,7 +36,7 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; 
 ## Verification Checklist
 
 ### Step 1: Build & Verify Asset Hashing ✅
-- [x] Build successful with `pnpm run build`
+- [x] Build successful with `npm run build`
 - [x] All assets in `/assets/` contain content hashes
 - [x] Example hashed files:
   - `index-BiYfWfa0.js` (main bundle)
@@ -65,7 +65,7 @@ cat netlify.toml
 **Local test before deployment:**
 ```bash
 # Build and test with local development
-pnpm run build
+npm run build
 
 # Inspect dist/index.html references
 grep -E "src=|href=" dist/index.html
@@ -209,7 +209,7 @@ X-Content-Type-Options: nosniff
 | Issue | Mitigation | Status |
 |-------|-----------|--------|
 | `src/app/netlify.toml` configuration discovery | Check the active Netlify package-directory, base directory, and publish settings before identifying the active configuration | ⏳ Configuration source unverified |
-| Hashed assets getting wrong cache headers | Preview recorded `public,max-age=0,must-revalidate` instead of `public,max-age=31536000,immutable`; after checking the settings above, apply the intended `/assets/*` cache policy through the active configuration and recheck deployed headers | ⚠️ Mismatch observed; cause and resolution unverified |
+| Hashed assets getting wrong cache headers | Preview recorded `public,max-age=0,must-revalidate` instead of `public,max-age=31536000,immutable`; after checking the settings above, apply exact-path immutable rules only to verified hashed files through the generated `_headers` file and recheck deployed headers | ⚠️ Mismatch observed; cause and resolution unverified |
 | CSP blocks Typeform | CSP allows HTTPS connections; requires testing in preview | ⏳ Pending integration testing |
 | Google Fonts not loading | CSP allows `fonts.gstatic.com` and `fonts.googleapis.com` | ⏳ Pending integration testing |
 | Old JS bundle cached despite deployment | HTML revalidation triggers browser cache bust | ✅ By design |

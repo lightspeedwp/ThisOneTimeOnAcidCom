@@ -26,8 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Performance: Netlify Asset Caching & Headers Optimization**
 
-- **Explicit HTML revalidation headers** — Added `Cache-Control: public, max-age=0, must-revalidate` for SPA entry points (`/`, `/index.html`) to ensure updated deployments load correctly
-- **Hashed asset immutable caching** — Verified and maintained 1-year immutable caching for all `/assets/*` files (hashed with content-based filenames)
+- **HTML revalidation behaviour** — HTML uses Netlify's default revalidation behaviour; deployed header verification remains pending
+- **Hashed asset immutable caching** — The build emits 1-year immutable rules for matching hashed assets; deployed header verification remains pending
 - **Cache strategy documentation** — Created `NETLIFY_CACHE_VERIFICATION.md` with:
   - Before/after header comparison and rationale
   - Comprehensive verification checklist with testing steps
