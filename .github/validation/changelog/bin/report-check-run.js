@@ -56,7 +56,7 @@ const options = {
     'X-GitHub-Api-Version': '2022-11-28',
     'Content-Type': 'application/json',
     'Content-Length': Buffer.byteLength(requestBody),
-    'User-Agent': 'ThisOneTimeOnAcidCom/changelog-validator'
+    'User-Agent': 'ThisOneTimeOnAcidCom-Changelog-Validation'
   }
 };
 

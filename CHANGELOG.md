@@ -7,18 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **React external dependency resolution regression** — Restored missing `resolveReactExternals()` function and `build.rollupOptions` in Vite configuration that was accidentally removed in PR #345, causing all 7 subsequent Dependabot PRs to fail Netlify builds with unresolved `react/jsx-runtime` import errors (Issue #306)
+
 ### Changed
 
-- **Package manager standardisation** — Standardised on npm across all environments (development, CI/CD, production) with consistent package-lock.json (Issue #4)
+- **Hashed-asset caching** — Content-hashed files Vite emits under `/assets/` now get `Cache-Control: public, max-age=31536000, immutable` through exact-path rules generated into `dist/_headers`. HTML keeps Netlify's `public,max-age=0,must-revalidate`.
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
 - **Removed pnpm configuration** — Deleted `pnpm-lock.yaml` and `pnpm-workspace.yaml` (no longer needed with npm)
 - **Migrated dependency overrides** — Converted pnpm-specific vite override to npm-compatible configuration; removed conflicting vite pinning to allow newer v6.4.3
 - **Updated Netlify build configuration** — Changed `src/app/netlify.toml` build command from `pnpm run build` to `npm run build`
 - **Documentation updates** — Updated README.md with authoritative package manager and runtime configuration for all environments
 
+### Fixed
+
+- **SPA routing** — Direct visits and refreshes on nested routes such as `/journal` and `/about-ash` returned 404 because `public/_redirects` is a directory. A `/* → /index.html 200` fallback in the root `netlify.toml` now serves the app.
+
+### Security
+
+- **Baseline headers** — Site-wide `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: DENY` and `Permissions-Policy` (camera, microphone, geolocation, payment and usb disabled). The deprecated `X-XSS-Protection` and `interest-cohort` values from the inactive draft were not carried over. The draft Content-Security-Policy is still inactive and deferred.
+
 ### Added
 
+**Performance: Netlify Asset Caching & Headers Optimization**
+
+- **HTML revalidation behaviour** — HTML uses Netlify's default revalidation behaviour; deployed header verification remains pending
+- **Hashed asset immutable caching** — The build emits 1-year immutable rules for matching hashed assets; deployed header verification remains pending
+- **Cache strategy documentation** — Created `NETLIFY_CACHE_VERIFICATION.md` with:
+  - Before/after header comparison and rationale
+  - Comprehensive verification checklist with testing steps
+  - Integration validation procedures (Typeform, YouTube, Vimeo, Google Fonts)
+  - CSP compatibility assessment (existing configuration verified as compatible)
+  - Performance impact analysis and potential issue mitigations
+- **Baseline security headers preserved** — Maintained all existing headers: X-Frame-Options, X-Content-Type-Options (nosniff), Referrer-Policy, Permissions-Policy, and Content-Security-Policy
+
 **File Organisation and Test Coverage (T011)**
+
+#### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
 
 - **Figma API validation script** — Moved `scripts/test-figma-access.js` to proper location under `scripts/` folder for T011 Figma Make project access validation task
 - **Comprehensive Jest test suite** — Created `scripts/__tests__/test-figma-access.test.js` with 15 passing tests covering:
@@ -296,7 +322,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Jest test comparison script** — Created missing `scripts/validation/compare-jest-failures.cjs` that compares test results between PR head and base branch to detect new test failures. Pre-existing failures on develop do not block the PR, only NEW failures introduced by the PR are reported.
 - **Jest failure comparison** — Count increases per test file after normalising paths to each checkout root, so fixes in other files cannot hide new failures.
-
 - **Comprehensive animation system** inspired by retro 80s CLI interfaces with 6 core animation types
 - **Terminal boot sequence** (0.8s typewriter-style page entrance) across 5 pages
 - **Auto-stagger orchestration** (`HeroLayout`) — Automatic cascading fade-in with 0.1s delays (title → subtitle → description → CTA)
@@ -325,19 +350,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated `/guidelines/Guidelines.md` to v8.4.0 with Animation System Implementation section
   - Created `/docs/animation-implementation-report-march-2026.md` (350+ line final report)
   - Complete metrics, testing results, file manifest, and Phase 2 roadmap
-
 - **Fixed branch validation workflow JSON parsing** — Corrected `branch-name-validation.yml` to query correct JSON field names (`isValid` instead of `valid`) in both jq expression and fallback grep pattern, resolving false validation failures where branches passed validation but workflow reported failure due to field mismatch
 - **Synchronised package-lock.json with lefthook dependencies** — Regenerated lock file to include all lefthook platform-specific variants (lefthook-darwin-arm64, lefthook-linux-x64, etc.), fixing `npm ci` failures in CI workflows that were caused by missing dependencies after lefthook was added to package.json
-
 - **Replaced the malformed `public/_redirects/` directory** (containing `main.tsx`) with a plain-text `public/_redirects` file holding the same `/*  /index.html  200` fallback rule
 - Netlify can now read `dist/_redirects`, so direct navigation and refresh on client-side routes such as `/journal`, `/journal/dancefloor-belonging` and `/ebook` no longer return 404; existing static files are still served first
 - Netlify's site base directory is empty, so `src/app/netlify.toml` is not read during deploys; `public/_redirects` is the single effective redirect definition
-
 - **Copied static metadata files to Vite public directory** — Copied `robots.txt`, `sitemap.xml`, and `manifest.json` to the root `public/` directory so Vite includes them in the production build
 - **Verified build output** — Confirmed all three files appear in `dist/` with the expected file types: plain text, XML, and JSON
 - **Deployment verification pending** — Deployed responses and Netlify headers remain untested; production access and HTTP status codes have not been verified
 - **Manifest asset declarations** — Removed icons and screenshots, including shortcut icons, whose files are absent from the published assets
 - **Service worker excluded** — Left `service-worker.js` in original location pending separate PWA integration decision
+
+#### Style Guide Dark Mode — Atomic Black Backgrounds
 
 - **Fixed Style Guide page dark mode** (`/styles/blocks/style-guide-page.css`) — All white backgrounds replaced with atomic black (#0F0F0F)
 - **Updated 18 color instances:**
@@ -601,7 +625,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **No breaking changes for users** — All styling migrated to semantic BEM classes in previous commits
 - **Build size reduction** — Bundle size reduced from 631 to 616 npm packages (15 package reduction)
 - **Purpose:** Enforce strict semantic BEM CSS architecture and eliminate utility-class complexity; maintains full design fidelity with cleaner, more maintainable code
-
 ---
 
 ## [8.2.1] - 2026-03-03

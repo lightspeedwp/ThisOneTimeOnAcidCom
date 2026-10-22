@@ -13,15 +13,16 @@
 # Baseline security headers. Content-Security-Policy is deliberately deferred:
 # the draft policy in src/app/netlify.toml would block the Typeform, YouTube and Vimeo embeds.
 [[headers]]
-  for = "/*"
-  [headers.values]
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    X-Frame-Options = "DENY"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+for = "/*"
+
+[headers.values]
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+X-Frame-Options = "DENY"
+Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
 
 # SPA fallback for React Router. Not forced, so existing files are served as-is.
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+from = "/*"
+to = "/index.html"
+status = 200

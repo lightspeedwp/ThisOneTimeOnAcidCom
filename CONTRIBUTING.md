@@ -1,17 +1,13 @@
 # Contributing to ThisOneTimeOnAcid
 
-Thank you for your interest in contributing to the Ash Shaw makeup portfolio project.
-This guide covers setup, validation and the contribution workflow. It is based on the repository's own files. Where the repository is inconsistent, the open questions are listed under [Unresolved decisions](#unresolved-decisions-owner-confirmation-required).
-
-AI agents should also read [AGENTS.md](AGENTS.md).
+Thank you for your interest in contributing to the Ash Shaw Makeup Portfolio project.
+This guide covers setup, validation, and the contribution workflow derived from the existing repository conventions.
 
 ## Prerequisites
 
-- **[Node.js](https://nodejs.org/)**. The repository does not pin a version: there is no `.nvmrc`, `.node-version` or `engines` field. Use a current LTS release, and check the Netlify deploy log for the version production uses.
-- **npm**, which ships with Node.js. `package-lock.json` is the only committed lockfile, and Netlify builds with `npm run build`.
+- **[Node.js](https://nodejs.org/)** 24 (pinned in `.nvmrc` and `package.json` `engines`; older versions are not supported)
+- **npm** — the project uses npm with the committed `package-lock.json`; do not add another lockfile
 - **[Git](https://git-scm.com/)**
-
-> Do not use pnpm or Yarn to install dependencies, and do not commit another lockfile. Some pnpm configuration remains in the repository (`pnpm-workspace.yaml`, `pnpm.overrides` in `package.json` and `src/app/netlify.toml`), but npm is the manager currently in use. See [Unresolved decisions](#unresolved-decisions-owner-confirmation-required).
 
 ## Setup
 
@@ -20,176 +16,82 @@ AI agents should also read [AGENTS.md](AGENTS.md).
 git clone https://github.com/lightspeedwp/ThisOneTimeOnAcidCom.git
 cd ThisOneTimeOnAcidCom
 
-# 2. Install dependencies exactly as locked
+# 2. Install dependencies
 npm ci
 
 # 3. Start the development server
 npm run dev
 ```
 
-The dev server runs on Vite. Open the URL shown in the terminal, which is usually `http://localhost:5173`. Vite's entry point is `index.html`, which loads `src/main.tsx`.
+The dev server runs via Vite. Open the URL shown in the terminal (usually `http://localhost:5173`).
 
-## Project structure
+## Project Structure
 
 ```
 ThisOneTimeOnAcidCom/
-├── guidelines/            ← Design and development guidelines (read first)
+├── guidelines/          ← Design & development guidelines (read first)
 ├── src/
-│   ├── main.tsx           ← Vite entry point (loaded by index.html)
-│   ├── app/               ← Application source
-│   │   ├── components/    ← React components (pages, common, layout, sections, template-parts, ui, figma)
-│   │   ├── data/          ← Centralised mock data (mock/, types/, README.md)
-│   │   ├── hooks/         ← Custom React hooks
-│   │   ├── lib/           ← router.tsx and bundler-safe helpers
-│   │   ├── utils/         ← Services and utilities
-│   │   ├── routes.ts      ← Route definitions
-│   │   └── netlify.toml   ← NOT read by Netlify (see Deployment)
-│   └── styles/            ← Global CSS and BEM blocks (globals.css, blocks/, tokens/ …)
-├── content/               ← Markdown content (journal, blog, book, faq …)
-├── public/                ← Static assets copied into dist/
-├── scripts/               ← Build and utility scripts
-├── tests/                 ← Node test-runner test files (no package script yet)
-├── prompts/               ← AI prompt templates
-├── reports/               ← Audit reports
-├── tasks/                 ← Task lists and checklists
-├── docs/                  ← General documentation
-├── .specify/              ← Spec Kit configuration
-├── .gemini/               ← Gemini agent commands
-├── .github/workflows/     ← Centrally managed dependency workflows (do not edit)
-├── package.json           ← Scripts and dependencies
-├── package-lock.json      ← npm lockfile
-└── vite.config.ts         ← Vite configuration
+│   ├── app/             ← Application source (components, data, routing)
+│   │   ├── components/  ← React components (pages, common, ui, sections)
+│   │   ├── data/        ← Centralised mock data
+│   │   ├── lib/         ← Utility functions and helpers
+│   │   └── routes.ts    ← Route definitions
+│   ├── content/         ← Content files
+│   └── styles/          ← BEM CSS files (globals.css + blocks/)
+├── scripts/             ← Build and utility scripts
+├── prompts/             ← AI prompt templates
+├── reports/             ← Audit reports
+├── tasks/               ← Task lists and checklists
+├── docs/                ← General documentation
+├── .specify/            ← Spec Kit configuration
+└── .gemini/             ← Gemini agent commands
 ```
 
-The guidelines use root-style paths such as `/components/` and `/styles/`. These map to `src/app/components/` and `src/styles/`. The full mapping is in [AGENTS.md § Path convention](AGENTS.md#path-convention-used-in-the-guidelines).
+### Source vs Generated Output
 
-### Source vs generated output
+- **Source**: everything in the repository (`src/`, `guidelines/`, `scripts/`, config files)
+- **Generated**: the `dist/` directory is the Vite production build output, deployed to Netlify — it is git-ignored and not part of source configuration
 
-- **Source** is everything committed to the repository: `src/`, `guidelines/`, `scripts/`, `public/` and the configuration files.
-- **Generated output** is the `dist/` directory, which `npm run build` produces and Netlify publishes. It is git-ignored, is not configuration, and must not be edited by hand.
-
-### Deployment
-
-The Netlify site settings, checked on 3 October 2026, are:
-
-- Base directory: repository root
-- Build command: `npm run build`
-- Publish directory: `dist`
-
-Netlify reads `netlify.toml` in this order: package directory (if set in the UI) → base directory → repository root. There is **no root `netlify.toml`**. Confirm whether the package-directory UI setting is configured:
-- If the package directory is set to `src/app/`, then `src/app/netlify.toml` **may be active**
-- If not configured (or set to root), then `src/app/netlify.toml` is not read
-
-SPA routing is defined in the plain-text `public/_redirects` file, which Vite copies to `dist/_redirects` — keep it as a plain file, not a directory.
-
-**Note:** SPA routing configuration is tracked in [PR #15](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/15) (`public/_redirects` replacement and `dist/_redirects` redirect-rule processing). That PR documents the Netlify deployment configuration, routing fix and outstanding validation requirements. Do not change deployment settings in a contribution unless the owner has asked for it.
-
-## Available scripts
-
-These scripts are defined in [`package.json`](package.json):
-
-| Command | Purpose |
-|---|---|
-| `npm run dev` | Start the Vite development server |
-| `npm run build` | Production build to `dist/` |
-| `npm run journal:parse` | Parse journal markdown into JSON |
-| `npm run journal:validate` | Validate journal markdown (no output written) |
-| `npm run journal:check-links` | Check journal link integrity |
-
-There are **no** `test`, `lint`, `typecheck`, `type-check` or `verify` scripts. Older guidance mentions `npm run type-check` and `npm run verify`, but these do not exist.
+The root `netlify.toml` is the active deployment configuration (build command, Node version, security headers, SPA fallback). Immutable caching for content-hashed assets is written to `dist/_headers` at build time by `scripts/netlify-hashed-asset-headers.mjs`. `src/app/netlify.toml` is not read by Netlify.
 
 ## Validation
 
-Before opening a pull request, run the checks that apply to your change and **report exactly what you ran and what happened**:
+Before submitting a pull request, verify your changes build successfully:
 
 ```bash
-# Primary check: the production build must succeed
+# Production build — this is the primary validation step
 npm run build
+
+# Netlify header configuration tests
+npm run test:netlify-headers
+
+# After a Deploy Preview is ready, check its live headers
+npm run check:netlify-headers -- https://deploy-preview-N--thisonetimeonacid.netlify.app
 ```
 
-If you change journal content, also run:
+> **Note:** The project has configured tests for Netlify headers (`test:netlify-headers`).
+> There is no general linter or type-checker script. Manual review against the guidelines is the current quality gate for style and structure.
+
+### Journal Content Validation
+
+If you've modified journal/blog content:
 
 ```bash
+# Validate journal markdown structure
 npm run journal:validate
+
+# Check journal link integrity
 npm run journal:check-links
 ```
 
-> **Known issue:** as of commit `76b1528`, both journal scripts fail with `journal-content/ directory not found`, because journal content lives in `content/journal/`. Mention this in your PR rather than hiding it.
+## Coding Conventions
 
-If you change Spec Kit scripts, run the Node test runner directly:
+All conventions are documented in **[guidelines/Guidelines.md](guidelines/Guidelines.md)**.
+Key rules summarised here:
 
-```bash
-node --test tests/speckit.test.mjs
-```
+### Styling: Strict BEM — No Tailwind
 
-> **Known issue:** as of commit `76b1528`, this suite reports 93 passing and 11 failing tests (104 in total), all in the "template resolution" suite.
-> `tests/accordion.test.tsx` needs `jsdom`, which is not installed, so it cannot currently run.
-
-No automated linting, type-checking, browser or accessibility checks are configured. Manual review against the guidelines is the current quality gate. Do not describe these checks as passed unless you actually performed them.
-
-## Using Spec Kit
-
-For significant features, governance changes, or architectural decisions, follow the specification-driven development workflow:
-
-### Workflow phases
-
-| Phase | Command | Deliverable | Purpose |
-|---|---|---|---|
-| 1. Specify | `/speckit-specify` | `spec.md` | Define requirements, user stories, acceptance criteria |
-| 2. Clarify | `/speckit-clarify` | Updated spec with Q&A | Resolve ambiguities and get answers recorded |
-| 3. Plan | `/speckit-plan` | `plan.md`, `research.md` | Technical design, architecture, decision rationale |
-| 4. Decompose | `/speckit-tasks` | `tasks.md` | Break planning into actionable implementation tasks |
-| 5. Implement | Your tools | Feature branch | Execute tasks and commit work |
-
-All outputs go to the canonical `.github/specs/` directory (`.github/specs/{NNN-feature-slug}/`). Feature directories are automatically numbered sequentially starting from 001.
-
-### Example: Create a new specification
-
-```bash
-# 1. Start the spec workflow
-/speckit-specify
-
-# 2. Answer clarification questions
-/speckit-clarify
-
-# 3. Review and approve technical plan
-/speckit-plan
-
-# 4. Break down into tasks
-/speckit-tasks
-
-# 5. Implement tasks on your feature branch
-# (following the task breakdown from phase 4)
-```
-
-### When to use Spec Kit
-
-✅ **Use Spec Kit for:**
-- New features with complex requirements
-- Governance or architectural changes
-- Multi-day implementation efforts
-- Decisions that affect multiple components
-- Anything needing written clarification before starting
-
-❌ **Skip Spec Kit for:**
-- Small bug fixes
-- One-line documentation updates
-- Routine maintenance with clear scope
-- Straightforward dependency updates
-
-### More information
-
-- **Specification catalog:** [.github/specs/CATALOG.md](.github/specs/CATALOG.md) — browse all active specifications
-- **Spec Kit configuration:** [.specify/](.specify/) — templates and routing rules
-- **Maintenance procedures:** [.github/specs/MAINTENANCE.md](.github/specs/MAINTENANCE.md) — how to create, update, archive specs
-
-## Coding conventions
-
-All conventions are documented in **[guidelines/Guidelines.md](guidelines/Guidelines.md)**. Follow the reading order in [guidelines/README.md](guidelines/README.md). The key rules are:
-
-### Styling: semantic BEM
-
-The guidelines require **semantic BEM CSS** and forbid Tailwind utility classes, inline styles and CSS-in-JS in components:
+The project uses **Semantic BEM CSS** exclusively. Tailwind utility classes, inline styles, and CSS-in-JS are all forbidden.
 
 ```tsx
 // ✅ Correct
@@ -202,61 +104,59 @@ The guidelines require **semantic BEM CSS** and forbid Tailwind utility classes,
   <span className="text-gray-600">Text</span>
 </div>
 
-// ❌ Wrong — inline styles
+// ❌ Wrong — Inline styles
 <div style={{ padding: '16px' }}>Content</div>
 ```
 
-CSS lives in `src/styles/`, with one file per block in `src/styles/blocks/`. See [guidelines/css-architecture.md](guidelines/css-architecture.md).
+CSS files live in `src/styles/` — one file per component in `src/styles/blocks/`.
 
-> Tailwind CSS v4 remains installed and is loaded by `vite.config.ts` and several stylesheets. Do not remove that tooling as part of an unrelated change. This contradiction is listed under [Unresolved decisions](#unresolved-decisions-owner-confirmation-required).
+### Mock Data: No Hardcoded UI Content
 
-### Data and content authority
+All mock UI data must be imported from `src/app/data/mock/` (aliased as `@/data/mock`).
 
-- **UI and component content:** All UI strings, layout text, navigation labels and component assets must be imported from the centralized mock data system (`src/app/data/mock/`, via `@/data/mock`). Never hardcode text into components:
+Editorial content (journal entries, articles, manuscripts) lives in `content/`.
 
 ```tsx
-// ✅ Correct
+// ✅ Correct — mock UI data
 import { heroContent } from "@/data/mock";
 <h1 className="hero__title">{heroContent.title}</h1>
 
-// ❌ Wrong
+// ❌ Wrong — hardcoded text
 <h1 className="hero__title">Welcome to my Portfolio</h1>
 ```
 
-See [src/app/data/README.md](src/app/data/README.md).
+### Headings: Sentence Case
 
-- **Editorial and reader content:** Long-form manuscript chapters, journal entries, stories and FAQs reside as Markdown under `content/` (e.g. `content/book/`, `content/journal/`). Content loaders (such as `bookContentLoader.ts`) and parser scripts ingest these files directly, distinguishing editorial articles from UI component mock data.
+All headings, titles, navigation labels, and button text use **sentence case** — capitalise only the first word and proper nouns.
 
-### Headings: sentence case
+### Bundler Workarounds
 
-All headings, titles, navigation labels and button text use **sentence case**: capitalise only the first word and proper nouns.
-
-### Bundler workarounds
-
-The Figma Make bundler has known syntax limitations. See the full table in [Guidelines.md § Bundler Compatibility Rules](guidelines/Guidelines.md). Avoid optional chaining (`?.`), nullish coalescing (`??`), `import.meta.env`, `for...of` loops and nested ternaries. Use the helpers in `src/app/lib/router.tsx`.
+The Figma Make bundler has known syntax limitations. See the full table in [Guidelines.md § Bundler Compatibility Rules](guidelines/Guidelines.md). Avoid optional chaining (`?.`), nullish coalescing (`??`), `for...of` loops, and nested ternaries.
 
 ### Images
 
-Never replace existing images. Use `ImageWithFallback` (`src/app/components/figma/ImageWithFallback.tsx`, a protected file) for new images. All `figma:asset/` imports are protected.
+Never replace existing images. Use `ImageWithFallback` for new images. All `figma:asset/` imports are protected.
 
-## File placement rules
+## File Placement Rules
 
-| Content type | Location |
+| Content Type | Location |
 |---|---|
-| Design and development guidelines | `guidelines/` |
-| AI prompt files | `prompts/` |
-| Audit reports and analysis | `reports/{topic}/` |
-| Task lists and checklists | `tasks/` |
-| General documentation | `docs/` |
-| Build and utility scripts | `scripts/` |
+| Design & development guidelines | `/guidelines/` |
+| AI prompt files | `/prompts/` |
+| Audit reports & analysis | `/reports/{topic}/` |
+| Task lists & checklists | `/tasks/` |
+| General documentation | `/docs/` |
+| Build/utility scripts | `/scripts/` |
 
-[Guidelines.md](guidelines/Guidelines.md) permits an acknowledged exception: `AGENTS.md` and `CONTRIBUTING.md` are at the root for agent and GitHub discoverability, supplementing the canonical root files `README.md`, `CHANGELOG.md` and `ATTRIBUTIONS.md`.
+When creating new Markdown (`.md`) files in the project root, only `README.md`, `CHANGELOG.md`, and `ATTRIBUTIONS.md` are permitted.
+`AGENTS.md`, `CLAUDE.md`, and `CONTRIBUTING.md` are acknowledged exceptions for agent and GitHub tooling discoverability.
+This restriction applies only to new Markdown files; existing root Markdown files may remain.
 
-## Contribution workflow
+## Contribution Workflow
 
-### 1. Branch naming
+### 1. Branch Naming
 
-The repository does not document a branch-prefix list. Issue #2 asks for the `docs/` prefix for documentation work, for example `docs/repository-agent-contributor-guidance`. Until the owner confirms the full convention, choose a prefix that describes the change and matches the linked issue. Branches starting with `dependabot/`, `deps/` or `renovate/` are reserved for dependency automation.
+Use the appropriate branch prefix for your change:
 
 | Change Type | Branch Prefix | Example |
 |---|---|---|
@@ -264,50 +164,42 @@ The repository does not document a branch-prefix list. Issue #2 asks for the `do
 | Feature | `feat/` | `feat/add-gallery-filter` |
 | Bug fix | `fix/` | `fix/mobile-menu-overflow` |
 | Refactor | `refactor/` | `refactor/extract-card-component` |
-| Dependencies | `deps/` | `deps/git-hooks-add-lefthook` |
 
-### 2. Making changes
+### 2. Making Changes
 
-1. Create a branch from an up-to-date `develop` (the repository's default branch).
-2. Read the relevant guidelines **before** coding.
-3. Make your changes following the conventions above.
-4. Run the applicable checks from [Validation](#validation) and note the results.
+1. Create a branch from `main` with the appropriate prefix
+2. Read the relevant guidelines **before** coding
+3. Make your changes following the coding conventions above
+4. Run `npm run build` to verify the build passes
 
-### 3. Pull requests
+### 3. Pull Requests
 
-- Write a clear description explaining what changed and why.
-- List the validation commands you ran and their results, including failures.
-- Link related issues. Use "Related to #N" when acceptance criteria are still outstanding, and use a closing keyword only when the PR fully resolves the issue.
-- The repository has no pull request template. If organisation-level templates apply, use the one that matches the change type.
+- Write a clear PR description explaining what changed and why
+- Use the correct PR template based on the `type:` label or linked issue type
+- Link any related issues
+- Ensure the branch prefix matches the change type
 
 ### 4. Changelog
 
-The changelog is the root [CHANGELOG.md](CHANGELOG.md). It is a protected file: never delete, move or rename it. Entries follow [Keep a Changelog v1.1.0](https://keepachangelog.com/en/1.1.0/) under `## [Unreleased]`. See [guidelines/changelog.md](guidelines/changelog.md) for the full rules. Prepare an entry for user-facing changes. Issues labelled `meta:no-changelog` do not need one.
+If your change is user-facing, prepare an entry for the root `CHANGELOG.md` following [Keep a Changelog v1.1.0](https://keepachangelog.com/en/1.1.0/) format. See [guidelines/changelog.md](guidelines/changelog.md) for full conventions.
 
-### 5. After merge
+### 5. After Merge
 
-- Delete the branch.
-- Close linked issues only once their acceptance criteria are met.
-- Update related epics rather than closing them.
+- Delete the feature branch
+- Update and close linked issues
+- Update related epics (do not close epics — update them)
 
-## Getting help
+## Getting Help
 
-- **Guidelines questions:** start with [guidelines/README.md](guidelines/README.md)
-- **Architecture questions:** see [guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)
-- **Component usage:** check the specific file in [guidelines/components/](guidelines/components/)
-- **Issue tracking:** [GitHub Issues](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
+- **Guidelines questions**: start with [guidelines/README.md](guidelines/README.md)
+- **Architecture questions**: see [guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)
+- **Component usage**: check the specific file in [guidelines/components/](guidelines/components/)
+- **Issue tracking**: [GitHub Issues](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
 
-## Unresolved decisions (owner confirmation required)
+## Unresolved Assumptions
 
-The full list, with evidence, is in [AGENTS.md § Unresolved decisions](AGENTS.md#unresolved-decisions-owner-confirmation-required). In summary:
+These items are documented rather than invented:
 
-1. **Package manager:** confirm npm and decide what to do with the pnpm remnants.
-2. **Node.js version:** none is pinned. Confirm the intended runtime.
-3. **Netlify config:** `src/app/netlify.toml` is inactive. Decide whether to move it, delete it or change the base directory.
-4. **BEM vs Tailwind:** the guidelines forbid Tailwind, but it is installed and loaded.
-5. **`import.meta.env`:** it is forbidden in the bundler table but recommended in Guidelines.md § 12, and still used in one component.
-6. **Quality gates:** there are no test, lint or typecheck scripts, and the guidelines reference scripts that do not exist.
-7. **Journal scripts:** they expect `journal-content/`, but content is in `content/journal/`.
-8. **Duplicate attribution files:** a root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. Clarify which is canonical and whether both are needed.
-9. **PostCSS:** two config files exist. The root `postcss.config.mjs` is the likely active one.
-10. **Branch and PR conventions:** no template or prefix list is committed.
+1. **No automated test/lint/typecheck** — there are no `test`, `lint`, or `typecheck` scripts in `package.json`. The quality gate is currently manual review + successful build.
+2. **CI/CD** — The repository has dependency-automation and dependency-validation workflows but no general CI pipeline for PRs. Build validation is manual.
+3. **Dual PostCSS config** — `postcss.config.mjs` exists at root and `postcss.config.js` exists in `src/app/`. Which is active for the Vite build is not explicitly documented.
