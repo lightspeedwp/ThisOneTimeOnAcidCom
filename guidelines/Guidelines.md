@@ -17,7 +17,7 @@ This document defines the core design, development, and technical guidelines for
 
 ### 🤖 Default AI Workflow (MUST FOLLOW)
 
-**See the [Workflow Orchestration Skill](../../.claude/skills/workflow-orchestration/SKILL.md) for comprehensive guidance on:**
+**See the [Workflow Orchestration Skill](../.claude/skills/workflow-orchestration/SKILL.md) for comprehensive guidance on:**
 - Single-file audit workflows (4-step: prompt → audit → report → tasks)
 - Multi-audit orchestrator workflows with parallel execution
 - Folder structure and naming conventions
@@ -49,7 +49,7 @@ This document defines the core design, development, and technical guidelines for
 
 ### 📁 Mandatory Folder Conventions
 
-The project uses three dedicated workflow folders. **All AI-generated and human-authored workflow artifacts MUST be stored in these folders.** See the [Workflow Orchestration Skill](../../.claude/skills/workflow-orchestration/SKILL.md) for full folder structure rules and conventions.
+The project uses three dedicated workflow folders. **All AI-generated and human-authored workflow artifacts MUST be stored in these folders.** See the [Workflow Orchestration Skill](../.claude/skills/workflow-orchestration/SKILL.md) for full folder structure rules and conventions.
 
 **Quick Reference:**
 

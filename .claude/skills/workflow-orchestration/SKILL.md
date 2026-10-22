@@ -130,14 +130,14 @@ Execute the audit prompt against the codebase. The AI will follow your methodolo
 
 ### Step 3A: Save the Report
 
-**File location:** `/reports/{topic}.md` (single file, root of /reports/)
+**File location:** `/reports/{topic}/report.md` (single file inside topic folder)
 
 **Required YAML frontmatter:**
 
 ```yaml
 ---
 title: "Audit Title Report"
-filename: "/reports/{topic}.md"
+filename: "/reports/{topic}/report.md"
 created: "YYYY-MM-DD"
 modified: "YYYY-MM-DD"
 version: "1.0.0"
@@ -394,32 +394,25 @@ Before archiving, confirm:
 
 ```bash
 # Single-file report
-mv /reports/{topic}.md /reports/archived/{topic}.md
+mv ./reports/{topic}.md ./reports/archived/{topic}.md
 
 # Orchestrator report folder
-mv /reports/YYYY-MM-DD-{topic}/ /reports/archived/YYYY-MM-DD-{topic}/
+mv ./reports/YYYY-MM-DD-{topic}/ ./reports/archived/YYYY-MM-DD-{topic}/
 ```
 
-**Step 2: Move task list to archive**
-
-```bash
-# Task list
-mv /tasks/{topic}-tasks.md /tasks/archived/{topic}-tasks.md
-```
-
-**Step 3: Update master task list**
+**Step 2: Update master task list**
 
 Edit `/tasks/master-task-list.md`:
 - Move entry from "Active" section to "Completed (pending archive)"
 - Add completion date
 
-**Step 4: Keep prompt for reference (optional)**
+**Step 3: Keep prompt for reference (optional)**
 
 Prompts can stay in `/prompts/` for re-running. Leave as-is unless superseded.
 
-**Step 5: Clean up after 30 days**
+**Step 4: Clean up after 30 days**
 
-After task list is in "Completed" section for 30 days, permanently move to `/tasks/archived/`.
+After task list is in "Completed" section for 30 days, permanently move to `./tasks/archived/`.
 
 ---
 
@@ -464,6 +457,7 @@ Every prompt, report, and task list starts with YAML frontmatter. No exceptions.
 - `modified` — ISO date (YYYY-MM-DD)
 - `version` — Semantic version (X.Y.Z)
 - Context fields (prompt_type, report_type, related_prompt, etc.)
+- If a prompt relies on project guidance, it MUST link each specific guideline file that it uses in a `Related Guidelines` section
 
 Missing frontmatter means:
 - ❌ Automation tools can't discover the file
