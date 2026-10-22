@@ -13,9 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Netlify configuration** — Added a root `netlify.toml`, the file Netlify actually reads, building with `npm run build` on Node 24 into `dist`. `src/app/netlify.toml` was never read; it is now marked as inactive and updated from pnpm/Node 18 to npm/Node 24. Node 24 is pinned in `.nvmrc` and `package.json` `engines`.
 - **Hashed-asset caching** — Content-hashed files Vite emits under `/assets/` now get `Cache-Control: public, max-age=31536000, immutable` through exact-path rules generated into `dist/_headers`. HTML keeps Netlify's `public,max-age=0,must-revalidate`.
-- **Package manager standardisation** — Standardised on npm across all environments (development, CI/CD, production) with consistent package-lock.json (Issue #4)
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
 - **Removed pnpm configuration** — Deleted `pnpm-lock.yaml` and `pnpm-workspace.yaml` (no longer needed with npm)
 - **Migrated dependency overrides** — Converted pnpm-specific vite override to npm-compatible configuration; removed conflicting vite pinning to allow newer v6.4.3
