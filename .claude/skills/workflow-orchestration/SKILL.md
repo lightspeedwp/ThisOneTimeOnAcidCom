@@ -78,8 +78,10 @@ modified: "YYYY-MM-DD"
 version: "1.0.0"
 prompt_type: "single-audit"
 estimated_duration: "30 minutes"
-related_reports: "/reports/{topic}/"
+related_reports: "/reports/{topic}/report.md"
 related_tasks: "/tasks/{topic}-tasks.md"
+related_guidelines:
+  - "/guidelines/{guideline}.md"
 ---
 ```
 
@@ -171,7 +173,7 @@ created: "YYYY-MM-DD"
 modified: "YYYY-MM-DD"
 version: "1.0.0"
 related_prompt: "/prompts/{topic}.md"
-related_report: "/reports/{topic}.md"
+related_report: "/reports/{topic}/report.md"
 related_guidelines:
   - "/guidelines/{guideline}.md"
 status: "active"
@@ -406,14 +408,19 @@ When the dedicated task list is created, add its entry to `/tasks/master-task-li
 
 **Do this immediately upon completion, BEFORE the 30-day retention period begins:**
 
-**Update `/tasks/task-list.md`:**
+**For single-file task lists:**
+- Move entry in `/tasks/{topic}-tasks.md` from "Active" to "Completed (pending archive)"
+- Add completion date: YYYY-MM-DD
+- Update `/tasks/master-task-list.md`: Move entry from "Active" to "Completed (pending archive)" with completion date and location
+
+**For orchestrator audits with dedicated task lists:**
+- Move entry in dedicated task list (e.g., `/tasks/{topic}-orchestration-tasks.md`) from "Active" to "Completed (pending archive)"
+- Add completion date: YYYY-MM-DD
+- Update `/tasks/master-task-list.md`: Move entry from "Active" to "Completed (pending archive)" with completion date and location
+
+**Always update the persistent `/tasks/task-list.md` (if audit entry exists there):**
 - Move entry from "Active" section to "Completed (pending archive)"
 - Add completion date: YYYY-MM-DD
-
-**If this is an orchestrator audit with dedicated task lists:**
-- Also update `/tasks/master-task-list.md`
-- Move the dedicated task-list entry from "Active" to "Completed (pending archive)"
-- Add completion date and location of the dedicated task list (e.g., `/tasks/{topic}-tasks.md`)
 
 **Important:** Status changes to "Completed (pending archive)" happen at task completion, not during archiving. This marks the start of the mandatory 30-day retention period before files can be moved to the archive folder.
 
@@ -433,15 +440,19 @@ Before archiving, confirm:
 
 ### Archive Process
 
-**Step 1: After 30 days have passed since completion, move the report to archive**
+**Step 1: After 30 days have passed since completion, archive the report**
 
 Do not move the report before the 30-day post-completion retention period ends.
 
+Before archiving, update each report's status to archived:
+
 ```bash
 # Single-file report
-mv ./reports/{topic}.md ./reports/archived/{topic}.md
+sed -i 's/status: complete/status: archived/' ./reports/{topic}/report.md
+mv ./reports/{topic}/ ./reports/archived/{topic}/
 
 # Orchestrator report folder
+sed -i 's/status: complete/status: archived/' ./reports/YYYY-MM-DD-{topic}/report.md
 mv ./reports/YYYY-MM-DD-{topic}/ ./reports/archived/YYYY-MM-DD-{topic}/
 ```
 
@@ -615,7 +626,9 @@ created: "2026-10-22"
 modified: "2026-10-22"
 version: "1.0.0"
 related_prompt: "/prompts/{topic}.md"
-related_report: "/reports/{topic}.md"
+related_report: "/reports/{topic}/report.md"
+related_guidelines:
+  - "/guidelines/{guideline}.md"
 status: "active"
 ---
 ```
