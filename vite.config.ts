@@ -18,6 +18,11 @@ const PLACEHOLDER_SVG =
       '</svg>'
   )
 
+/**
+ * Vite plugin that resolves Figma Make asset imports (`figma:asset/*`).
+ * Serves actual files from `src/assets/`; falls back to neutral placeholder SVG for missing exports.
+ * Logs warnings for missing assets to help identify incomplete Figma sync.
+ */
 function figmaAssetResolver() {
   return {
     name: 'figma-asset-resolver',
@@ -40,6 +45,11 @@ function figmaAssetResolver() {
   }
 }
 
+/**
+ * Vite plugin that marks React and React-DOM as external modules.
+ * Prevents Vite from bundling React separately; relies on Make's runtime to provide React globals.
+ * Pre-enforced to run before other plugins for correct module resolution.
+ */
 function resolveReactExternals() {
   return {
     name: 'resolve-react-externals',

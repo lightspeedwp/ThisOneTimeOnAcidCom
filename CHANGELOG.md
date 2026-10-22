@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Netlify configuration consolidation** — Merged develop branch into build/netlify-hashed-asset-headers, consolidating HTML revalidation headers with build.processing optimizations for CSS, JS, and image compression (PR #427)
 - **Hashed-asset caching** — Content-hashed files Vite emits under `/assets/` now get `Cache-Control: public, max-age=31536000, immutable` through exact-path rules generated into `dist/_headers`. HTML keeps Netlify's `public,max-age=0,must-revalidate`.
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
 - **Removed pnpm configuration** — Deleted `pnpm-lock.yaml` and `pnpm-workspace.yaml` (no longer needed with npm)
