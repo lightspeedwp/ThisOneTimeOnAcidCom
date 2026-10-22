@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
 - **Removed pnpm configuration** — Deleted `pnpm-lock.yaml` and `pnpm-workspace.yaml` (no longer needed with npm)
 - **Migrated dependency overrides** — Converted pnpm-specific vite override to npm-compatible configuration; removed conflicting vite pinning to allow newer v6.4.3
-- **Moved netlify.toml to repository root** — Relocated configuration file from `src/app/netlify.toml` to repository root (`netlify.toml`) to ensure Netlify reads the correct NODE_VERSION=24 and NPM_VERSION=10 settings during production builds (Netlify only reads configuration from repository root, not from subdirectories); this was critical for issue #4 acceptance as the old location prevented production builds from using the standardised runtime
+- **Moved netlify.toml to repository root** — Relocated configuration file from `src/app/netlify.toml` to repository root (`netlify.toml`) to ensure Netlify reads the correct NODE_VERSION=24 and NPM_VERSION=10 settings during production builds; this fix was critical for issue #4 acceptance as the old location prevented production builds from using the standardised runtime
 - **Documentation updates** — Updated README.md with authoritative package manager and runtime configuration for all environments
 
 ### Added
