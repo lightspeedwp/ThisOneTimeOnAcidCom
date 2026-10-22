@@ -18,6 +18,11 @@ const PLACEHOLDER_SVG =
       '</svg>'
   )
 
+/**
+ * Vite plugin that resolves Figma Make asset imports (`figma:asset/*`).
+ * Serves actual files from `src/assets/`; falls back to neutral placeholder SVG for missing exports.
+ * Logs warnings for missing assets to help identify incomplete Figma sync.
+ */
 function figmaAssetResolver() {
   return {
     name: 'figma-asset-resolver',
@@ -40,9 +45,28 @@ function figmaAssetResolver() {
   }
 }
 
+/**
+ * Vite plugin that marks React and React-DOM as external modules.
+ * Prevents Vite from bundling React separately; relies on Make's runtime to provide React globals.
+ * Pre-enforced to run before other plugins for correct module resolution.
+ */
+function resolveReactExternals() {
+  return {
+    name: 'resolve-react-externals',
+    enforce: 'pre',
+    resolveId(id) {
+      // Mark React modules as resolved externals to prevent warning errors
+      if (id.startsWith('react') || id.includes('react-dom')) {
+        return { id, external: true };
+      }
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     figmaAssetResolver(),
+    resolveReactExternals(),
     // The React and Tailwind plugins are both required for Make, even if
     // Tailwind is not being actively used – do not remove them
     react(),
@@ -50,6 +74,18 @@ export default defineConfig({
     // Emits dist/_headers with immutable caching for content-hashed assets only
     netlifyHashedAssetHeaders(),
   ],
+  build: {
+    rollupOptions: {
+      external: ['react', 'react-dom', 'react/jsx-runtime', /^react\/.*/],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'React',
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src/app'),
