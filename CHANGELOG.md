@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+**Jest Failure Comparison Testing Infrastructure**
+
+- **Enhanced failure detection** — Updated `scripts/validation/compare-jest-failures.cjs` to correctly detect failures from `numFailingTests` field, `assertionResults` array, and suite-level `status: 'failed'`; added comprehensive test suite (`scripts/validation/compare-jest-failures.test.js`) with 13 test cases covering all failure detection methods
+
 **CI/CD Configuration Standardisation (Issue #4)**
 
 - **Package manager standardisation** — Standardised on npm across all environments (development, CI/CD, production) with consistent package-lock.json

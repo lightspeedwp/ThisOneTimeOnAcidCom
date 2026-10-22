@@ -48,9 +48,26 @@ function countFailures(report, root) {
   }
 
   report.testResults.forEach(result => {
-    if (result.numFailingTests > 0) {
-      const normalised = path.relative(root || '.', result.name);
+    const normalised = path.relative(root || '.', result.name);
+
+    // Prioritize numFailingTests if present
+    if (result.numFailingTests !== undefined && result.numFailingTests > 0) {
       failures[normalised] = result.numFailingTests;
+      return;
+    }
+
+    // Count failed assertions if available
+    if (Array.isArray(result.assertionResults)) {
+      const failedCount = result.assertionResults.filter(a => a.status === 'failed').length;
+      if (failedCount > 0) {
+        failures[normalised] = failedCount;
+        return;
+      }
+    }
+
+    // Count as 1 failure if status is 'failed' (suite-level failure)
+    if (result.status === 'failed') {
+      failures[normalised] = 1;
     }
   });
 
