@@ -199,8 +199,8 @@ X-Content-Type-Options: nosniff
 
 | Issue | Mitigation | Status |
 |-------|-----------|--------|
-| Netlify configuration file location | Moved to `netlify.toml` at repository root (PR #345) | ✅ **RESOLVED** |
-| Hashed assets getting wrong cache headers | Added React/React-DOM to dependencies (fixed build); cache headers now correctly applied | ✅ **VERIFIED - 31536000s immutable** |
+| `src/app/netlify.toml` configuration discovery | Check the active Netlify package-directory, base directory, and publish settings before identifying the active configuration | ⏳ Configuration source unverified |
+| Hashed assets getting wrong cache headers | Preview recorded `public,max-age=0,must-revalidate` instead of `public,max-age=31536000,immutable`; after checking the settings above, apply the intended `/assets/*` cache policy through the active configuration and recheck deployed headers | ⚠️ Mismatch observed; cause and resolution unverified |
 | CSP blocks Typeform | CSP allows HTTPS connections; requires testing in preview | ⏳ Pending integration testing |
 | Google Fonts not loading | CSP allows `fonts.gstatic.com` and `fonts.googleapis.com` | ⏳ Pending integration testing |
 | Old JS bundle cached despite deployment | HTML revalidation triggers browser cache bust | ✅ By design |
