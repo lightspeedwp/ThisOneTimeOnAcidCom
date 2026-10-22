@@ -44,17 +44,17 @@ Define which execution environment each skill should use based on:
 - `/validate` — configuration validation (read-only check)
 - `/changelog` — changelog entry management (affects local CHANGELOG.md)
 
-### 2. **Subagent (Forked Session)**
+### 2. **Subagent (Parent Session Budget)**
 
-**Definition**: Skill runs in a forked session inheriting full parent context but with independent budget.
+**Definition**: Skill runs as delegated work with supplied parent context. Its usage counts against the parent session's budget under the TOA-271 accounting requirements (host-side enforcement pending).
 
 **Characteristics**:
-- ✅ Full context inheritance (entire conversation, files)
-- ✅ Isolated execution (separate agent, separate budget)
+- ✅ Context supplied by parent (scope depends on invocation)
+- ✅ Separate agent execution; usage charged to parent budget
 - ✅ Clean output (results returned via tool, not in chat)
-- ✅ Can run in parallel with parent (independent token budget)
+- ✅ Can run in parallel with parent (shared aggregate token budget)
 - ✅ Tool access: Inherits parent's available tools
-- ⚠️ Slight latency (fork creation overhead)
+- ⚠️ Slight latency (subagent creation overhead)
 - ❌ Results not in conversation thread (tool output only)
 
 **Best For**:
@@ -67,6 +67,15 @@ Define which execution environment each skill should use based on:
 - `/speckit-analyze` — deep specification analysis (exploration)
 - Code exploration agent — search codebase for patterns
 - Content strategy agent — research and plan content
+
+#### **Forked Session (Independent Budget)**
+
+**Definition**: Skill runs in a separate session initialized from parent context, with its own budget ledger. Under the TOA-271 requirements, a fork inherits the parent's token limit but tracks usage independently; its subagents consume the fork's allowance. Numerical limits and spending increases require owner approval. Host-side enforcement remains pending.
+
+**Characteristics**:
+- Separate session and independent budget; usage does not deduct from the originating session
+- Can run concurrently with the originating session under its own approved ceiling
+- Copying context into a subagent does not by itself create an independently budgeted session
 
 ### 3. **Remote Agent (Cloud Sandbox)**
 
@@ -241,7 +250,7 @@ Skills meant for deferred or batch execution:
 ✅ Same as Local Agent (inherits parent's tools)
 
 Execution Isolation:
-  - Separate budget (token, time, cost)
+  - Usage charged to parent session budget (TOA-271 requirement; enforcement pending)
   - Separate process (sandboxed at OS level)
   - Tool output returned via tool, not in conversation
 ```
@@ -331,9 +340,9 @@ User: "review branch naming with /branch-validation"
 ```
 User: "review this PR for correctness bugs"
 → Skill: code-review
-→ Environment: Subagent (forked session)
+→ Environment: Subagent (parent session budget)
 → Execution:
-   - Fork session inherits PR context
+   - Parent supplies PR context; subagent usage counts against parent budget
    - Subagent reads code, writes findings to artifact
    - Returns findings to parent via tool result
    - Parent can summarize or post comment
@@ -352,7 +361,7 @@ User: "review this PR for correctness bugs"
 ```
 User: "research this account for expansion opportunity"
 → Skill: sales:account-research
-→ Environment: Subagent (forked session)
+→ Environment: Subagent (parent session budget)
 → Execution:
    - Spawn subagent with research parameters
    - Subagent calls external APIs, web search, etc.

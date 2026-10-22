@@ -316,7 +316,7 @@
   - Test: create PR from invalid branch name (e.g., `claude/my-feature`) and confirm workflow blocks
   - Document branch naming rules in `CONTRIBUTING.md` and link to `.github/CLAUDE.md`
 
-**Checkpoint**: GitHub governance fully implemented; branch protection active; PR template routing working; Discussions enabled for community engagement
+**Checkpoint**: GitHub governance partially delivered. T035 PR template routing verification remains unchecked; T038 requires manual branch-protection configuration for main and develop.
 
 ---
 
@@ -420,7 +420,7 @@
     - Aggregate accounting across delegated and concurrent work
     - Retry and cancellation policies (exponential backoff, transient vs. permanent)
     - Exhaustion handling (what happens when budget exceeded)
-    - Missing usage data fallback (estimation + conservative tracking)
+    - Missing usage data fallback (charge remaining allowance and suspend dispatch until reconciliation)
     - Resumable handoff and continuation (state preservation)
   - ✅ Note: TOA-271 owns implementation; this spec documents requirements only
 - [x] T051 [P] [WS-271] Document skill runtime routing
@@ -428,7 +428,8 @@
   - ✅ Mapped each skill to execution environment:
     - Local agent (same session) — quick validations, interactive work
     - Remote agent (cloud sandbox) — long-running, scheduled jobs
-    - Subagent (forked session) — parallel research, isolated execution
+    - Subagent (parent session budget) — parallel research, separate agent execution
+    - Forked session (independent budget) — separate session with its own accounting
     - Managed agent (hosted) — future enhancement (not available today)
   - ✅ Documented tool access per execution context
   - ✅ Ensured deterministic quality gates remain unprivileged (read-only validation)
@@ -468,15 +469,12 @@
   - ✅ Specification structure complete and coherent
   - ✅ All 20 child issues TOA-242 through TOA-274 mapped to tasks
   - ✅ All phases (1-8) and workstreams (WS-254 through WS-271) documented
-  - ✅ Success criteria documented and met
-- [x] T055 [P] Validate all protected files remain unchanged
-  - ✅ CHANGELOG.md not modified (only tracked changes)
-  - ✅ guidelines/ files not modified (all preserved)
-  - ✅ .github/workflows/*.yml only updated as specified in tasks
-  - ✅ src/app/components/figma/ImageWithFallback.tsx not modified (protected)
-  - ✅ src/app/utils/supabase/ not modified (protected)
-  - ✅ AGENTS.md not modified (read-only governance)
-  - ✅ Git status confirms: "No protected files modified"
+  - ✅ Success criteria documented; final acceptance remains pending T035, T038, and T055
+- [ ] T055 [P] Validate protected-file changes and owner approval
+  - ❌ Protected-files guard fails: the implementation branch changes protected paths, including `.github/workflows/`, `scripts/`, `AGENTS.md`, and `CHANGELOG.md` (compare `origin/develop...HEAD`)
+  - ⏳ Explicit owner approval for those implementation changes is not recorded in the repository and has not been verified
+  - ⏳ Record the approval reference and scope, then resolve the guard failure through the owner-approved process and revalidate before marking T055 complete
+  - Changes being specified in tasks does not establish explicit owner approval or a passing guard result
 - [x] T056 [P] Verify application behaviour preserved
   - ✅ Build succeeds: `npm run build` (3.10s, zero errors)
   - ✅ Dev server starts: `npm run dev` (Vite ready, port 5173)
@@ -494,29 +492,29 @@
   - ✅ Commits linked to session for traceability
 - [x] T058 Create pull request for governance implementation
   - ✅ PR prepared with title: `docs(spec): TOA-241 Repository Governance Infrastructure`
-  - ✅ Body includes:
+  - ⏳ Draft body must reflect:
     - Summary of TOA-241 implementation across 5 parallel workstreams
     - Complete list of changes (testing, package, runtime, styling, GitHub, CI/CD, governance)
-    - Validation results (all tests passing, no protected files modified)
-    - All 20 child issues resolved (TOA-242 through TOA-274)
+    - Validation results with protected-files guard failure and approval status (T055)
+    - Child issue status, including outstanding T035 and T038
   - ✅ Status: Ready for draft PR creation and @ashley review
-  - ✅ All CI/CD checks expected to pass (no breaking changes, all tests pass)
-- [x] T059 Document implementation completion and handoff
-  - ✅ Implementation complete: All 8 phases, 59 tasks, 5 workstreams delivered
-  - ✅ Governance infrastructure stable and operational:
+  - ⏳ CI/CD acceptance pending resolution of the protected-files guard failure (T055)
+- [ ] T059 Document implementation completion and handoff
+  - ⏳ Implementation partially delivered: T035 PR template routing verification remains unchecked; T038 requires manual branch-protection configuration; T055 guard failure and owner approval remain unresolved
+  - ✅ Delivered infrastructure and documentation:
     - Testing: Jest ESM (588/588 unit tests), Bats (12/12 build tests), Playwright configured
     - Package: npm-only, Node 24 LTS pinned, pnpm removed
     - Styling: BEM-only, Tailwind removed
-    - GitHub: Discussions, PR templates, CODEOWNERS, branch protection ready
+    - GitHub: Discussions and CODEOWNERS documented; PR template routing verification and branch protection remain pending (T035, T038)
     - CI/CD: 17 workflows (8 implementation, 6 evaluation, 3 deferred)
     - Spec Kit: Routing verified, regression baseline 103/104
     - Agent governance: Budget controls, skill routing, governance framework documented
-  - ✅ No deferred items blocking feature work
-  - ✅ All protected files preserved
+  - ⏳ Complete T035 and T038 before reporting all tasks delivered
+  - ⏳ Resolve T055 and record explicit owner approval for protected-file changes
   - ✅ Application behavior verified (build succeeds, dev server starts)
-  - ✅ Ready for merge to develop and deployment to main
+  - ⏳ Final completion and merge readiness remain pending the outstanding tasks and guard resolution
 
-**Checkpoint**: All governance infrastructure implemented, validated, and integrated. PR ready for owner review and merge. Feature TOA-241 complete.
+**Checkpoint**: Feature TOA-241 remains incomplete. Finish T035, configure branch protection manually for T038, and resolve T055 with recorded owner approval and revalidation before closing T059 or declaring full delivery.
 
 ---
 

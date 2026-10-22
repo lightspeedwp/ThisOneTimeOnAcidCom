@@ -257,7 +257,7 @@ Infrastructure monitors cost trends per agent:
 - [ ] **Read the repository-specific guidelines** in `guidelines/`
 - [ ] **Respect protected files** (no unauthorized modifications)
 - [ ] **Follow branch naming rules** (see CLAUDE.md)
-- [ ] **Commit with proper attribution** (see CLAUDE.md footer)
+- [ ] **If authorised to commit, commit with proper attribution** (see CLAUDE.md footer)
 - [ ] **Document decisions** (code comments, commit messages)
 - [ ] **Escalate when uncertain** (don't guess on governance)
 - [ ] **Validate work before committing** (no breaking changes)

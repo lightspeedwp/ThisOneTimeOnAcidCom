@@ -3,13 +3,15 @@
 **Document Status**: Specification for TOA-271 implementation  
 **Last Updated**: 2026-10-22  
 **Owner**: @ashley (TOA-271 epic implementation)  
-**Scope**: Requirements documentation only — actual enforcement implemented in TOA-271
+**Scope**: Requirements documentation only — host-side enforcement remains pending in TOA-271
 
 ---
 
 ## Purpose
 
 Define budget control mechanisms for agent execution, ensuring predictable resource consumption, cost containment, and graceful degradation when resource limits are approached or exceeded.
+
+Session limits, delegated-work accounting, remaining-budget feedback, and recovery behavior below are TOA-271 requirements, not implemented controls or Claude API guarantees. Numerical limits and spending increases require owner approval under spec §R7.3.
 
 ---
 
@@ -20,10 +22,10 @@ Define budget control mechanisms for agent execution, ensuring predictable resou
 **Definition**: Maximum number of tokens (input + output) an agent session may consume.
 
 **Properties**:
-- Hard limit at host-side (enforced by Claude API runtime)
-- Per-session allocation (not per-turn)
-- Aggregate across all delegated work (nested agents, subagents)
-- Remaining tokens visible to agent (via `total_tokens` feedback)
+- Host-side hard limit (TOA-271; pending implementation)
+- Per-session allocation, not per-turn (pending)
+- Aggregate across all delegated work, including nested agents and subagents (pending)
+- Host-provided remaining-budget feedback (pending); `total_tokens` is not a Claude Messages API guarantee
 
 **Examples**:
 - Standard agent: 100,000 tokens
@@ -54,7 +56,7 @@ Define budget control mechanisms for agent execution, ensuring predictable resou
 - Monitored post-execution (not enforced in real-time)
 - Per-session allocation
 - Aggregate cost across all model calls and external API calls
-- Exceeding ceiling triggers approval workflow (pause session, notify owner)
+- Exceeding ceiling triggers owner notification and requires approval before later sessions
 
 **Examples**:
 - Standard agent: $2.00 per session
@@ -81,24 +83,28 @@ Define budget control mechanisms for agent execution, ensuring predictable resou
 
 ## Enforcement Points
 
-### Host-Side Hard Limits (Non-Negotiable)
+### Claude API Controls
 
-**These are enforced by the Claude API runtime, not configurable:**
+- **Per-response output limit**: Messages API `max_tokens` limits one response's output; it does not cap aggregate input and output across a session.
+- **Usage reporting**: Responses report fields such as `input_tokens`, `output_tokens`, and cache usage. The host must reconcile these into its budget ledger; the API does not provide the session's remaining allowance.
+- **Rate limiting**: The API can reject requests with HTTP 429. Retry scheduling and backoff belong to the client or host; no fixed session pause or quota reset interval is guaranteed here.
 
-1. **Token Limit**: Session terminates when aggregate token budget exhausted
-   - Last turn's output truncated if needed
-   - Graceful shutdown message returned to user
-   - Partial results preserved where possible
+### Required Host-Side Contract (TOA-271 — Pending)
 
-2. **Execution Time**: Session hard-killed when timeout reached
-   - No grace period (immediate termination)
-   - Partial results may be lost
-   - User notified via error message
+Spec §R7.3 requires hard enforcement at the host, covering aggregate accounting, retries/cancellation, exhaustion, and fallback behavior. This repository does not implement that runtime control.
 
-3. **Rate Limiting**: API-side request throttling if quota exceeded
-   - Automatic exponential backoff (no manual override)
-   - Session stalled until quota resets (typically 1 hour)
-   - May trigger cost ceiling checks
+1. **Token limit and accounting**:
+   - Reserve tokens before dispatch and reconcile input, output, and cached-token usage across calls, retries, and subagents.
+   - Include concurrent and in-flight reservations in the parent ledger; reject dispatch that would exceed the approved session ceiling.
+   - On exhaustion, block further calls and cancel outstanding work where supported; preserve checkpoints and report the remaining allowance through host-provided feedback.
+
+2. **Execution time**:
+   - Track a session deadline and stop execution at the approved timeout.
+   - Plan a 30–60s checkpoint warning before the deadline; do not promise recovery of in-flight work after termination.
+
+3. **Invocation quotas and rate limiting**:
+   - Apply per-agent admission limits and bounded retry/backoff policies before dispatch.
+   - Charge retries to the same session budget; retries must not bypass token or time limits.
 
 ### Soft Policies (Advisory, Not Enforced)
 
@@ -132,8 +138,8 @@ Remaining: 5,000 tokens
 
 1. **Subagents**: Token consumption counts against parent budget (nested calls deduct from parent allowance)
 2. **Forked Sessions**: Run on separate budgets (inherit parent's token limit, but tracked independently)
-3. **Concurrent Work**: All concurrent tasks share parent budget (aggregate, not parallel allowances)
-4. **Chained Delegations**: Transitive token usage still counts against originating agent's budget
+3. **Concurrent Work**: Concurrent subagents within a session share its budget; independently budgeted forked sessions use their own ledgers
+4. **Chained Delegations**: Transitive subagent usage counts against the originating session's budget; a fork starts a separate accounting boundary
 
 **Implication**: An agent cannot spawn unlimited subagents — each subagent reduces remaining budget for parent's own work.
 
@@ -177,10 +183,10 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
    - Preserves partial results where possible
    - Returns graceful message to user
 
-2. **Budget exhaustion**: Token/time/cost limit reached
-   - Terminates session immediately
-   - No graceful shutdown opportunity
-   - Returns error state to user
+2. **Budget exhaustion**: Token or time limit reached
+   - Host blocks further dispatch and cancels outstanding work where supported
+   - Preserves the latest checkpoint and reports exhaustion
+   - Cost overruns are checked post-execution and require approval before later sessions
 
 3. **Permanent failure**: Unrecoverable error (auth expired, resource deleted)
    - Log failure with context
@@ -194,10 +200,10 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 ### When Token Budget Exhausted
 
 **Behavior**:
-1. Agent completes current turn if in-flight
-2. Final output truncated if necessary
-3. Response includes: "Token budget exhausted; session terminated"
-4. Partial results returned (incomplete, but usable)
+1. Host blocks further dispatch when the approved allowance is exhausted
+2. Outstanding reservations remain charged until reconciled; cancel in-flight work where supported
+3. Report: "Token budget exhausted; session terminated"
+4. Return saved partial results where available; completion of an in-flight turn is not guaranteed
 
 **Recovery**:
 - User can continue work in new session
@@ -207,7 +213,7 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 ### When Time Budget Exhausted
 
 **Behavior**:
-1. Session force-killed (no grace period)
+1. Host terminates the session at the deadline after any checkpoint warning
 2. In-flight operations aborted
 3. Partial results lost
 4. Error message returned to user
@@ -223,7 +229,7 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 1. Session continues to completion (cost not enforced in real-time)
 2. Post-execution cost check: if ceiling exceeded
 3. Owner notified via alert/email
-4. Future sessions for this agent may require approval
+4. Require owner approval before later sessions for this agent
 
 **Recovery**:
 - Review cost drivers (are API calls inefficient?)
@@ -240,24 +246,22 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 
 **Fallback Strategy**:
 
-1. **Estimate from output length**: 
-   - Assume ~4 characters = 1 token
-   - Round up (conservative estimate)
-   - Mark as "estimated" in logging
+1. **Charge the full remaining allowance**:
+   - If usage cannot be reconciled, mark the session's remaining token allowance as consumed (zero remaining)
+   - Keep known usage and outstanding reservations charged; apply this fallback once to the shared session ledger, including subagents
 
-2. **Assume worst-case ratio**:
-   - If count unavailable, deduct full allocated budget
-   - Prevents accidental over-consumption
+2. **Suspend further dispatch**:
+   - Stop new model calls, retries, and delegated work within this session
+   - Preserve existing checkpoints without additional model calls
 
 3. **Log and escalate**:
    - Record incident with timestamp and context
    - Notify agent owner if pattern emerges
    - Alert infrastructure team (potential API issue)
 
-4. **Continue session** (don't fail):
-   - Session proceeds, but with conservative budget tracking
-   - Reduce remaining budget estimates by 20% (safety margin)
-   - Allow human to manually check usage post-session
+4. **Resume only within an approved ceiling**:
+   - Resume this session only after authoritative usage reconciliation establishes a positive remainder under its original ceiling
+   - Otherwise, require owner approval for a new session allocation; never silently reset or increase the original allowance
 
 ---
 
@@ -352,6 +356,7 @@ Total: 200k (all accounted for)
 - [ ] Monitor cost ceiling (post-execution alerting)
 - [ ] Track retry attempts and apply exponential backoff
 - [ ] Aggregate token usage across nested agents/subagents
+- [ ] Expose remaining-budget feedback from the host ledger
 - [ ] Implement graceful shutdown on budget exhaustion
 - [ ] Provide session resumption API and state preservation
 - [ ] Document user-facing budget error messages
