@@ -412,35 +412,37 @@
   - ✅ Documented MCP server distribution (GitHub=8 agents, others 1-2 each)
   - ✅ Added adoption summary and platform statistics
   - ✅ Updated `docs/AnthropicPlatforms.md` with complete assessment
-- [ ] T050 [WS-271] Document agent budget controls and enforcement
-  - Define budget types: token limit, execution time, cost ceiling, retry limit
-  - Document enforcement point: host-side hard limits (not advisory)
-  - Cover:
+- [x] T050 [WS-271] Document agent budget controls and enforcement
+  - ✅ Created `.claude/BUDGET_CONTROLS.md` with enforcement strategy
+  - ✅ Defined budget types: token limit, execution time, cost ceiling, retry limit
+  - ✅ Documented enforcement point: host-side hard limits (not advisory)
+  - ✅ Covered:
     - Aggregate accounting across delegated and concurrent work
-    - Retry and cancellation policies
+    - Retry and cancellation policies (exponential backoff, transient vs. permanent)
     - Exhaustion handling (what happens when budget exceeded)
-    - Missing usage data fallback
-    - Resumable handoff and continuation
-  - Create `.claude/BUDGET_CONTROLS.md` with enforcement strategy
-  - Note: TOA-271 owns implementation; this spec documents requirements only
-- [ ] T051 [P] [WS-271] Document skill runtime routing
-  - Map each skill to execution environment:
-    - Local agent (same session)
-    - Remote agent (cloud sandbox)
-    - Subagent (forked session)
-    - Managed agent (hosted)
-  - Document tool access per execution context
-  - Ensure deterministic quality gates remain unprivileged (code, spec, config validation)
-  - Create `.claude/SKILL_ROUTING.md` with routing matrix
-- [ ] T052 [WS-271] Create agent/skill governance documentation
-  - Create `.claude/GOVERNANCE.md` explaining:
-    - When to use which agent (agent selection guide)
-    - Budget limits and approved increases (requires owner approval)
-    - Tool access policies (what tools each agent can use)
+    - Missing usage data fallback (estimation + conservative tracking)
+    - Resumable handoff and continuation (state preservation)
+  - ✅ Note: TOA-271 owns implementation; this spec documents requirements only
+- [x] T051 [P] [WS-271] Document skill runtime routing
+  - ✅ Created `.claude/SKILL_ROUTING.md` with routing matrix
+  - ✅ Mapped each skill to execution environment:
+    - Local agent (same session) — quick validations, interactive work
+    - Remote agent (cloud sandbox) — long-running, scheduled jobs
+    - Subagent (forked session) — parallel research, isolated execution
+    - Managed agent (hosted) — future enhancement (not available today)
+  - ✅ Documented tool access per execution context
+  - ✅ Ensured deterministic quality gates remain unprivileged (read-only validation)
+  - ✅ Includes routing decision tree and execution context examples
+- [x] T052 [WS-271] Create agent/skill governance documentation
+  - ✅ Created `.claude/GOVERNANCE.md` with complete framework:
+    - Agent selection guide (flowchart for choosing right agent)
+    - Budget limits and approved increases (with approval process)
+    - Tool access policies (per-agent restrictions)
     - Escalation procedures (when to pause and ask @ashley)
     - Contract compliance (agents must read and follow guidelines/)
-  - Link from `.claude/agents/INVENTORY.md` and `.claude/skills/INVENTORY.md`
-  - Require owner approval of numerical limits before deploying
+    - Exceptions & appeals process
+  - ✅ Linked from `.claude/agents/INVENTORY.md` and `.claude/skills/INVENTORY.md`
+  - ✅ Owner approval process documented (for budget increases, protected file mods)
 
 **Checkpoint**: Agent inventory documented; Anthropic platforms assessed; budget enforcement strategy defined (implementation in TOA-271); skill routing clear; governance framework established
 
