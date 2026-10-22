@@ -11,9 +11,9 @@ Where the repository contradicts itself, the contradiction is recorded under
 than settled here.
 
 > **Note:** This file was updated 16 October 2026 to reflect current test
-infrastructure and validated command baseline. Previous version (from 3 October
-2026) claimed testing infrastructure did not exist; it does. See [Commands
-validated so far](#commands-validated-so-far) for current status.
+> infrastructure and validated command baseline. Previous version (from
+> 3 October 2026) claimed testing infrastructure did not exist; it does. See
+> [Commands validated so far](#commands-validated-so-far) for current status.
 
 ## Sources of truth
 
@@ -190,7 +190,7 @@ complete.
 
 ### Cleanup and Verification Completed
 
-**Phase 2 Foundational Tasks (T008-T015, completed 18 October 2026)**
+#### Phase 2 Foundational Tasks (T008-T015, completed 18 October 2026)
 
 - ✅ **T008**: Jest ESM configuration verified (588 tests passing)
 - ✅ **T009**: Vitest fallback installed (`vitest@1.6.1` added to
@@ -208,7 +208,7 @@ complete.
   tokens)
 - Guidelines document BEM-only requirement (`guidelines/css-architecture.md`)
 
-**Phase 4 Testing Infrastructure Tasks (T025-T030, completed 19 October 2026)**
+#### Phase 4 Testing Infrastructure Tasks (T025-T030, completed 19 October 2026)
 
 - ✅ **T025**: Jest ESM configuration verified and locked (11 suites, 588/588
   tests pass with @swc/core)

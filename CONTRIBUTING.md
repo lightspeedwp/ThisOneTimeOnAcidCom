@@ -60,7 +60,7 @@ template-parts, ui, figma)
 │   │   ├── utils/         ← Services and utilities
 │   │   ├── routes.ts      ← Route definitions
 │   │   └── netlify.toml   ← NOT read by Netlify (see Deployment)
-│   └── styles/            ← Global CSS and BEM blocks (globals.css, blocks/, tokens/ …)
+│ └── styles/ ← Global CSS and BEM blocks (globals.css, blocks/, tokens/ …)
 ├── content/               ← Markdown content (journal, blog, book, faq …)
 ├── public/                ← Static assets copied into dist/
 ├── scripts/               ← Build and utility scripts
@@ -71,7 +71,7 @@ template-parts, ui, figma)
 ├── docs/                  ← General documentation
 ├── .specify/              ← Spec Kit configuration
 ├── .gemini/               ← Gemini agent commands
-├── .github/workflows/     ← Centrally managed dependency workflows (do not edit)
+├── .github/workflows/ ← Centrally managed dependency workflows (do not edit)
 ├── package.json           ← Scripts and dependencies
 ├── package-lock.json      ← npm lockfile
 └── vite.config.ts         ← Vite configuration
@@ -552,7 +552,7 @@ LightSpeed organization maintains a library of saved replies in
 1. Click "Add a saved reply"
 
 1. Reference the [LightSpeed Saved Replies
-   catalog](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
+catalog](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
 
 1. Copy the template text and customize as needed
 
@@ -593,7 +593,7 @@ complete catalog and contribution guide.
 - **Issue tracking:** [GitHub
   Issues](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
 - **Saved replies:** [LightSpeed Saved
-  Replies](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
+Replies](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
 
 ## Resolved decisions
 

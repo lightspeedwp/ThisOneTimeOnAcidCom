@@ -22,7 +22,8 @@ Consolidate duplicate governance config files into `lightspeedwp/.github`
 
 **Key Changes:**
 
-- All workflows fetch canonical `.github/labels.yml`, `.github/issue-types.yml` from `lightspeedwp/.github`
+- All workflows fetch canonical `.github/labels.yml`, `.github/issue-types.yml`
+  from `lightspeedwp/.github`
 - Local duplicate governance files deleted
 - PR template routing via `lightspeedwp/.github`
 - Configuration drift detection workflow active
@@ -33,7 +34,8 @@ Validate Figma API connectivity and recover media library assets via Figma Make.
 
 - **Status:** In Progress
 - **Script:** `scripts/test-figma-access.js`
-- **Tests:** `scripts/_*tests*_/test-figma-access.test.js` (15 tests, all passing)
+- **Tests:** `scripts/_*tests*_/test-figma-access.test.js` (15 tests, all
+  passing)
 - **Environment Variables:**
 - `FIGMA*API*TOKEN` — Figma API personal access token
 - `FIGMA*MAKE*FILE_KEY` — Figma Make project file key
@@ -167,7 +169,8 @@ ThisOneTimeOnAcidCom:
 ## 📝 Coding Standards
 
 - **Language:** UK English (optimise, organisation, colour)
-- **JavaScript/TypeScript:** ESLint + Prettier (WordPress Coding Standards adapted)
+- **JavaScript/TypeScript:** ESLint + Prettier (WordPress Coding Standards
+  adapted)
 - **CSS:** CSS variables follow shadcn/ui conventions
 - **Tests:** Jest for Node.js scripts; use clear, testable scenarios
 - **Security:** Validate all input, escape all output, never commit secrets
@@ -203,7 +206,8 @@ This ensures:
 
 - ✅ Moved `test-figma-access.js` → `scripts/test-figma-access.js`
 - ✅ Moved `default*shadcn*theme.css` → `src/styles/default-shadcn-theme.css`
-- ✅ Created comprehensive test suite: `scripts/_*tests*_/test-figma-access.test.js`
+- ✅ Created comprehensive test suite:
+  `scripts/_*tests*_/test-figma-access.test.js`
 - 🔄 Added repo-specific CLAUDE.md
 
 ### Phase 2 Progress
@@ -216,8 +220,10 @@ This ensures:
 ## 📚 Related Documentation
 
 - [Specification Catalog](./github/specs/CATALOG.md) — All active specifications
-- [lightspeedwp/.github/CLAUDE.md](https://github.com/lightspeedwp/.github/blob/develop/CLAUDE.md) — Organisation-wide guidance
-- [lightspeedwp/.github/AGENTS.md](https://github.com/lightspeedwp/.github/blob/develop/AGENTS.md) — AI agent rules
+  [lightspeedwp/.github/CLAUDE.md](https://github.com/lightspeedwp/.github/blob/develop/CLAUDE.md)
+  — Organisation-wide guidance
+  [lightspeedwp/.github/AGENTS.md](https://github.com/lightspeedwp/.github/blob/develop/AGENTS.md)
+  — AI agent rules
 - `.github/workflows/` — GitHub Actions workflows
 - `.github/specs/` — SpecKit feature specifications
 
