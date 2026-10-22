@@ -1,6 +1,7 @@
 ---
 name: "Labeling Workflow Skill"
-description: "Manages GitHub issue and PR labeling with consistent taxonomy for ThisOneTimeOnAcidCom."
+description: "Manages GitHub issue and PR labeling with consistent taxonomy for
+ThisOneTimeOnAcidCom."
 type: "skill"
 category: "workflow"
 enabled: true
@@ -11,7 +12,8 @@ tags: ["labeling", "github", "taxonomy", "automation"]
 
 ## Purpose
 
-Maintain consistent GitHub issue and PR labeling using standardized taxonomy for organization and automation.
+Maintain consistent GitHub issue and PR labeling using standardized taxonomy for
+organization and automation.
 
 ## Label Taxonomy
 
@@ -74,6 +76,7 @@ Special purpose tags:
 ### On Issue Creation
 
 Apply minimum labels:
+
 - One `type:*` label
 - One `priority:*` label (default: `priority:normal`)
 - One `area:*` label if applicable
@@ -82,6 +85,7 @@ Apply minimum labels:
 ### On PR Creation
 
 Apply:
+
 - One `type:*` label matching PR purpose
 - One `area:*` label if applicable
 - `meta:has-pr` if issue exists
@@ -114,31 +118,34 @@ Apply:
 
 ### Bug Report
 
-```
+```text
 type:bug
 priority:high
 area:design
 status:needs-triage
-```
+
+```text
 
 ### Feature Request
 
-```
+```text
 type:feature
 priority:normal
 area:content
 meta:good-first-issue
-```
+
+```text
 
 ### Documentation Update
 
-```
+```text
 type:documentation
 priority:normal
 area:documentation
 status:in-progress
 meta:has-pr
-```
+
+```text
 
 ## References
 

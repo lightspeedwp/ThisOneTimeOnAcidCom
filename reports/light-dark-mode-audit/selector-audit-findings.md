@@ -1,44 +1,53 @@
 # Light Mode Selector Audit - Complete Findings
 
-**Date:** March 20, 2026  
-**File:** `/styles/themes/light.css`  
-**Total Lines:** 593  
-**Critical Issues Found:** 74 instances of `body:not(.dark)` causing dark mode conflicts
+**Date:** March 20, 2026
+**File:** `/styles/themes/light.css`
+**Total Lines:** 593
+**Critical Issues Found:** 74 instances of `body:not(.dark)` causing dark mode
+conflicts
 
 ---
 
 ## Summary
 
-ALL `body:not(.dark)` selectors in light.css are causing light mode styles to leak into dark mode because:
+ALL `body:not(.dark)` selectors in light.css are causing light mode styles to
+leak into dark mode because:
 
 1. ThemeProvider adds `.dark` to `<html>`, NOT `<body>`
-2. CSS selector lists use OR logic
-3. Therefore `body:not(.dark)` ALWAYS matches (body never has `.dark` class)
+
+1. CSS selector lists use OR logic
+
+1. Therefore `body:not(.dark)` ALWAYS matches (body never has `.dark` class)
 
 ---
 
 ## Instances Found
 
 ### Line 3: Variable Block
+
 ```css
 :root:not(.dark), body:not(.dark) {
   /* All CSS variables */
 }
-```
+
+```text
 **Impact:** HIGH - CSS variables leaking into dark mode
 **Fix:** Remove `body:not(.dark)`, keep only `:root:not(.dark)`
 
 ### Lines 139-593: Component Selectors (73 instances)
 
 Every component selector follows this broken pattern:
+
 ```css
 :root:not(.dark) .component,
 body:not(.dark) .component {
   /* styles */
 }
-```
 
-**Components Affected:**
+```text
+
+## Components Affected
+
 - Header (lines 139-162)
 - Mobile Menu (lines 168-185)
 - Buttons (lines 191-260)
@@ -61,19 +70,25 @@ body:not(.dark) .component {
 ## Fix Strategy
 
 ### Option 1: Automated Find/Replace (RISKY)
+
 Use regex to remove all `body:not(.dark)` lines:
+
 - Risk: Could break multiline selectors
 - Time: Fast
 - Accuracy: Medium
 
 ### Option 2: Manual Section-by-Section Rewrite (SAFE)
+
 Rewrite each section removing `body:not(.dark)`:
+
 - Risk: Low
 - Time: Moderate
 - Accuracy: High
 
 ### Option 3: Complete File Regeneration (SAFEST)
+
 Regenerate the entire file with correct selectors:
+
 - Risk: None (can diff against original)
 - Time: Moderate
 - Accuracy: Perfect
@@ -82,20 +97,24 @@ Regenerate the entire file with correct selectors:
 
 ## Recommended Fix Pattern
 
-### Before (WRONG):
+### Before (WRONG)
+
 ```css
 :root:not(.dark) .header,
 body:not(.dark) .header {
   background: pink;
 }
-```
 
-### After (CORRECT):
+```text
+
+### After (CORRECT)
+
 ```css
 :root:not(.dark) .header {
   background: pink;
 }
-```
+
+```text
 
 ---
 
@@ -104,18 +123,21 @@ body:not(.dark) .header {
 After fix, verify:
 
 1. **Dark Mode:**
+
    - Background: #0F0F0F (atomic black) ✓
    - Text: #F6F2EB (warm white) ✓
    - Neon Pink: #FF3AAE (full brightness) ✓
    - Neon Yellow: #F4FF3C (full brightness) ✓
 
-2. **Light Mode:**
+1. **Light Mode:**
+
    - Background: Pink/cyan gradient ✓
    - Text: #2A1A2A (deep charcoal) ✓
    - Neon Pink: #E0007A (accessible darkened) ✓
    - Neon Yellow: #A08800 (accessible darkened) ✓
 
-3. **Theme Switching:**
+1. **Theme Switching:**
+
    - No flash of unstyled content ✓
    - Instant theme change ✓
    - LocalStorage persistence ✓
@@ -150,8 +172,13 @@ After fix, verify:
 ## Next Steps
 
 1. Choose fix strategy (recommend Option 3: Complete regeneration)
-2. Create backup of current light.css
-3. Implement fixes
-4. Run comprehensive testing
-5. Document changes in changelog
-6. Update guidelines with correct selector patterns
+
+1. Create backup of current light.css
+
+1. Implement fixes
+
+1. Run comprehensive testing
+
+1. Document changes in changelog
+
+1. Update guidelines with correct selector patterns

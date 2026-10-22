@@ -1,6 +1,7 @@
 ---
 name: "Website Content Strategist Agent"
-description: "Specialized content strategist focused on portfolio site messaging and visitor engagement."
+description: "Specialized content strategist focused on portfolio site messaging
+and visitor engagement."
 type: "agent"
 category: "content"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Specialize in portfolio site content strategy, visitor messaging, and engagement optimization.
+Specialize in portfolio site content strategy, visitor messaging, and engagement
+optimization.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Specialize in portfolio site content strategy, visitor messaging, and engagement
 ## Key Responsibilities
 
 1. **Portfolio Messaging** – Develop compelling project descriptions
-2. **Visitor Engagement** – Guide messaging to attract and retain visitors
-3. **Project Showcase** – Structure project information effectively
-4. **Call-to-Action** – Guide engagement messaging and CTAs
-5. **Value Proposition** – Ensure portfolio communicates value clearly
-6. **Content Hierarchy** – Organize content for visitor scanning
+
+1. **Visitor Engagement** – Guide messaging to attract and retain visitors
+
+1. **Project Showcase** – Structure project information effectively
+
+1. **Call-to-Action** – Guide engagement messaging and CTAs
+
+1. **Value Proposition** – Ensure portfolio communicates value clearly
+
+1. **Content Hierarchy** – Organize content for visitor scanning
 
 ## Content Types
 

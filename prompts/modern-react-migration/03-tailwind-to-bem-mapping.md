@@ -7,7 +7,8 @@ version: "1.0.0"
 prompt_type: "sub-prompt"
 execution_order: 3
 estimated_duration: "60 minutes"
-related_reports: "/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md"
+related_reports:
+"/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md"
 related_guidelines: "/guidelines/tailwind-to-bem-mapping.md"
 ---
 
@@ -15,26 +16,34 @@ related_guidelines: "/guidelines/tailwind-to-bem-mapping.md"
 
 ## 1. Objective
 
-Create a comprehensive mapping guide that translates Tailwind CSS utility classes to:
-1. **BEM classes** (defined in `/styles/globals.css`)
-2. **WordPress CSS custom properties** (`--wp--preset--*`)
-3. **WordPress block editor classes** (`.wp-block-*`, `.has-*`)
+Create a comprehensive mapping guide that translates Tailwind CSS utility
+classes to:
 
-This guide will serve as a **permanent reference** for developers converting Tailwind code to BEM.
+1. **BEM classes** (defined in `/styles/globals.css`)
+
+1. **WordPress CSS custom properties** (`--wp--preset--*`)
+
+1. **WordPress block editor classes** (`.wp-block-*`, `.has-*`)
+
+This guide will serve as a **permanent reference** for developers converting
+Tailwind code to BEM.
 
 ---
 
 ## 2. Scope
 
 **Files to analyze:**
+
 - `/styles/globals.css` - All available BEM classes
 - `/styles/blocks/*.css` - Block-specific BEM classes
 - `/styles/themes/*.css` - Theme-specific classes
 - All CSS custom properties
 
 **Deliverables:**
+
 1. **Report:** `/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md`
-2. **Guideline:** `/guidelines/tailwind-to-bem-mapping.md` (permanent reference)
+
+1. **Guideline:** `/guidelines/tailwind-to-bem-mapping.md` (permanent reference)
 
 ---
 
@@ -45,11 +54,15 @@ This guide will serve as a **permanent reference** for developers converting Tai
 Scan all CSS files and create a complete inventory of available BEM classes:
 
 ```bash
-# Extract all class definitions
-grep -r "^\.[a-z]" styles/ | grep -v "^\s*//" | sort | uniq
-```
 
-**Categories to document:**
+# Extract all class definitions
+
+grep -r "^\.[a-z]" styles/ | grep -v "^\s*//" | sort | uniq
+
+```text
+
+## Categories to document
+
 - Layout classes (`.header`, `.footer`, `.section`)
 - Component classes (`.card`, `.button`, `.form`)
 - Utility classes (`.visually-hidden`, `.sr-only`)
@@ -61,9 +74,11 @@ Extract all `--wp--preset--*` custom properties:
 
 ```bash
 grep -r "--wp--preset--" styles/
-```
+
+```text
 
 **Categories:**
+
 - Color properties (`--wp--preset--color--*`)
 - Spacing properties (`--wp--preset--spacing--*`)
 - Font properties (`--wp--preset--font-family--*`)
@@ -97,7 +112,8 @@ Create examples showing how to convert common Tailwind patterns to BEM:
 <div className="card card--horizontal">
   <h2 className="card__title">Title</h2>
 </div>
-```
+
+```text
 
 ---
 
@@ -116,14 +132,16 @@ This prompt is complete when:
 
 ## 5. Report Output
 
-**Location:** `/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md`
+**Location:**
+`/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md`
 
 **Structure:**
 
 ```markdown
 ---
 title: "Tailwind-to-BEM Mapping Report"
-filename: "/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md"
+filename:
+"/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md"
 created: "2026-03-11"
 modified: "2026-03-11"
 version: "1.0.0"
@@ -136,36 +154,42 @@ status: "complete"
 
 ## Executive Summary
 
-**Total BEM Classes Found:** X  
-**Total WordPress Custom Properties:** Y  
+**Total BEM Classes Found:** X
+**Total WordPress Custom Properties:** Y
 **Coverage:** Z% of common Tailwind utilities have BEM equivalents
 
 ## BEM Class Inventory
 
 ### Layout Classes (Total: X)
-- `.header`, `.header__inner`, `.header__logo`
-- `.footer`, `.footer__grid`, `.footer__brand`
+
+- `.header`, `.header_*inner`, `.header*_logo`
+- `.footer`, `.footer_*grid`, `.footer*_brand`
 - `.section`, `.section__container`, `.section--dark`
 
 ### Component Classes (Total: X)
+
 - `.button`, `.button--primary`, `.button--secondary`
-- `.card`, `.card__title`, `.card__image`
+- `.card`, `.card_*title`, `.card*_image`
 
 ## WordPress Custom Properties
 
 ### Color Properties
+
 ```css
 --wp--preset--color--neon-pink: #FF3AAE;
 --wp--preset--color--neon-green: #39FF14;
 --wp--preset--color--atomic-black: #0F0F0F;
-```
+
+```text
 
 ### Spacing Properties
+
 ```css
 --wp--preset--spacing--xs: 0.5rem;
 --wp--preset--spacing--sm: 1rem;
 --wp--preset--spacing--md: 1.5rem;
-```
+
+```text
 
 ## Mapping Tables
 
@@ -178,10 +202,14 @@ status: "complete"
 ## Recommendations
 
 1. Use this mapping guide when converting Tailwind to BEM
-2. Prefer BEM classes over creating new utility classes
-3. Use WordPress custom properties for theming
-4. Follow WordPress block editor naming patterns for new classes
-```
+
+1. Prefer BEM classes over creating new utility classes
+
+1. Use WordPress custom properties for theming
+
+1. Follow WordPress block editor naming patterns for new classes
+
+```text
 
 ---
 
@@ -202,7 +230,8 @@ version: "1.0.0"
 
 # Tailwind-to-BEM Mapping Guide
 
-This guide provides a complete reference for converting Tailwind CSS utility classes to BEM classes used in this project.
+This guide provides a complete reference for converting Tailwind CSS utility
+classes to BEM classes used in this project.
 
 ## Quick Reference
 
@@ -255,7 +284,8 @@ This guide provides a complete reference for converting Tailwind CSS utility cla
 <div className="flex-container flex-container--between">
 // OR use component-specific class
 <div className="header__inner">
-```
+
+```text
 
 ### Pattern 2: Card with Spacing
 
@@ -265,7 +295,8 @@ This guide provides a complete reference for converting Tailwind CSS utility cla
 
 // ✅ BEM
 <div className="card card--elevated">
-```
+
+```text
 
 ### Pattern 3: Typography
 
@@ -275,7 +306,8 @@ This guide provides a complete reference for converting Tailwind CSS utility cla
 
 // ✅ BEM
 <h2 className="card__title">
-```
+
+```text
 
 ## WordPress Block Editor Alignment
 
@@ -283,14 +315,15 @@ This guide provides a complete reference for converting Tailwind CSS utility cla
 
 WordPress block editor uses specific class patterns:
 
-```
+```text
 .wp-block-*           # Block wrapper
 .has-*-color          # Color utility
 .has-*-background     # Background color utility
 .is-style-*           # Block style variation
-```
 
-**Our BEM equivalents:**
+```text
+
+## Our BEM equivalents
 
 | WP Block Class | BEM Equivalent |
 |----------------|----------------|
@@ -303,33 +336,41 @@ WordPress block editor uses specific class patterns:
 ## Best Practices
 
 1. **Always prefer existing BEM classes** over creating new ones
-2. **Use WordPress custom properties** for colors, spacing, typography
-3. **Follow BEM naming convention** when creating new classes
-4. **Avoid inline styles** - always use classes
-5. **Use semantic class names** - describe purpose, not appearance
+
+1. **Use WordPress custom properties** for colors, spacing, typography
+
+1. **Follow BEM naming convention** when creating new classes
+
+1. **Avoid inline styles** - always use classes
+
+1. **Use semantic class names** - describe purpose, not appearance
 
 ## When to Create New BEM Classes
 
 Create new BEM classes when:
+
 - The pattern is reused across multiple components
 - There's no suitable existing class
 - The component needs unique styling
 
 **Always add to:**
+
 - Appropriate CSS file in `/styles/blocks/`
 - Document in this mapping guide
 
 ---
 
-**Last Updated:** March 11, 2026  
+**Last Updated:** March 11, 2026
 **Maintained By:** Development Team
-```
+
+```text
 
 ---
 
 ## Related Documentation
 
 **Guidelines:**
+
 - [BEM Architecture](../../guidelines/css-architecture.md)
 - [WordPress FSE Patterns](../../guidelines/wordpress-fse-patterns.md)
 - [Design Tokens](../../guidelines/design-tokens/)

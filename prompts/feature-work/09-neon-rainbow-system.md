@@ -7,18 +7,22 @@
 
 ## Objective
 
-Formalize the 1:1 mapping of neon colours across the entire site architecture, explicitly explain the implementation to developers, and push the neon tinting deep into interaction elements.
+Formalize the 1:1 mapping of neon colours across the entire site architecture,
+explicitly explain the implementation to developers, and push the neon tinting
+deep into interaction elements.
 
 ---
 
 ## Requirements
 
 1. **Neon Rainbow Dev Tools Page:**
+
    - Create `/dev-tools/neon-rainbow/`.
    - Explicitly display the 1:1 formal mapping (e.g. which major page section/content type gets which signature neon colour).
    - Write in-page documentation (explaining to developers how the neon rainbow CSS variables/BEM classes are implemented and consumed).
 
-2. **Expanded Component Tints:**
+1. **Expanded Component Tints:**
+
    - Instead of just gradient subtitles, enforce the page's assigned neon color deeply across elements:
      - Section divider glow
      - Card hover border colour

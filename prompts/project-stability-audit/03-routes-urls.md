@@ -7,7 +7,10 @@
 
 ## Context
 
-Every page component must be wired to a route in `/routes.ts` and loaded via `RouterProvider` in `/App.tsx`. Missing or misconfigured routes cause blank screens, 404 errors, or unreachable pages. This audit produces a complete route inventory and identifies broken links.
+Every page component must be wired to a route in `/routes.ts` and loaded via
+`RouterProvider` in `/App.tsx`. Missing or misconfigured routes cause blank
+screens, 404 errors, or unreachable pages. This audit produces a complete route
+inventory and identifies broken links.
 
 ---
 
@@ -23,6 +26,7 @@ Read `/routes.ts` in full. For every route definition, record:
 | `*` | `NotFoundPage` | `RootLayout` | N/A | No | No |
 
 **Checks:**
+
 - [ ] Every route has a valid `Component` that exists as a file
 - [ ] Every route's import path resolves without errors
 - [ ] Nested routes have correct parent-child relationships
@@ -48,21 +52,25 @@ Cross-reference the route inventory against all page components:
 Search all `.tsx` files for link targets and navigation calls:
 
 ### `<Link to="...">` patterns
+
 - [ ] Extract every `to` prop value
 - [ ] Verify each matches a defined route path
 - [ ] Check dynamic segments are properly interpolated (e.g., `/blog/${slug}`)
 - [ ] Flag hardcoded URLs that don't match any route
 
 ### `useNavigate()` / `navigate()` calls
+
 - [ ] Extract every navigation target
 - [ ] Verify each matches a defined route path
 
 ### Breadcrumb `href` values
+
 - [ ] Extract every breadcrumb item's `href`
 - [ ] Verify each matches a defined route path
 - [ ] Verify the last breadcrumb item has NO `href` (current page)
 
 ### Data file link references
+
 - [ ] Check mock data files for any `url`, `href`, `link`, or `slug` fields
 - [ ] Verify they produce valid route paths when used in components
 
@@ -73,31 +81,41 @@ Search all `.tsx` files for link targets and navigation calls:
 Document how dynamic URLs are created:
 
 1. **Portfolio:** How does `/portfolio/:slug` get its slug? (from `portfolioEntries[i].slug`)
-2. **Blog:** How does `/blog/:slug` get its slug? (from `blogPosts[i].slug`)
-3. **Categories/tags:** How are `/blog/category/:slug` and `/blog/tag/:slug` generated?
-4. **Videos/podcasts:** Same pattern analysis
-5. **About sub-pages:** How are the 21 hidden about page routes defined?
+
+1. **Blog:** How does `/blog/:slug` get its slug? (from `blogPosts[i].slug`)
+
+1. **Categories/tags:** How are `/blog/category/:slug` and `/blog/tag/:slug` generated?
+
+1. **Videos/podcasts:** Same pattern analysis
+
+1. **About sub-pages:** How are the 21 hidden about page routes defined?
 
 ---
 
 ## Step 5 — Route guidelines
 
-Create `/guidelines/site-structure/routes.md` (or update `/guidelines/sitemap-routes.md`) with:
+Create `/guidelines/site-structure/routes.md` (or update
+`/guidelines/sitemap-routes.md`) with:
 
 1. **Complete route table** — Every route path, component, parent, segments
-2. **URL conventions** — Slug format, kebab-case rules, max URL depth
-3. **How to add a new route:**
+
+1. **URL conventions** — Slug format, kebab-case rules, max URL depth
+
+1. **How to add a new route:**
+
    - [ ] Create page component in `/components/pages/{section}/`
    - [ ] Add route to `/routes.ts` under the correct parent
    - [ ] Add SEO data to `/data/mock/seo.ts`
    - [ ] Add breadcrumb configuration
    - [ ] Add to navigation data (header, footer, sitemap)
    - [ ] Verify with `npm run build`
-4. **How to add a dynamic route:**
+1. **How to add a dynamic route:**
+
    - [ ] Define `:param` in route path
    - [ ] Handle missing params in component (redirect to 404 or show error)
    - [ ] Add to sitemap data for static generation
-5. **Route naming conventions:**
+1. **Route naming conventions:**
+
    - Pages: `{ContentType}Page.tsx` (e.g., `BlogPage.tsx`)
    - Detail pages: `{ContentType}DetailPage.tsx`
    - Category pages: `{ContentType}CategoryPage.tsx`
@@ -108,6 +126,7 @@ Create `/guidelines/site-structure/routes.md` (or update `/guidelines/sitemap-ro
 ## Output format
 
 ```markdown
+
 ## Route inventory
 
 [Complete table from Step 1]
@@ -127,4 +146,5 @@ Create `/guidelines/site-structure/routes.md` (or update `/guidelines/sitemap-ro
 ## Route guidelines
 
 [Draft of routes documentation]
-```
+
+```text

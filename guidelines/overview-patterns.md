@@ -1,13 +1,15 @@
 # Design Patterns Overview
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 Reusable design patterns and compositions for the Ash Shaw Portfolio.
 
 ## Purpose
 
-Define higher-level patterns that combine components and blocks to solve common design problems:
+Define higher-level patterns that combine components and blocks to solve common
+design problems:
+
 - Repeatable solutions to recurring problems
 - Composition guidelines
 - Layout patterns
@@ -16,31 +18,35 @@ Define higher-level patterns that combine components and blocks to solve common 
 
 ---
 
-## What Are Patterns?
+## What Are Patterns
 
-**Patterns** are proven solutions to common design problems. They combine multiple components and blocks into cohesive, reusable structures.
+**Patterns** are proven solutions to common design problems. They combine
+multiple components and blocks into cohesive, reusable structures.
 
 ### Pattern vs Block vs Component
 
-```
+```text
 Pattern (Solution)
 ├── Block (Content unit)
 │   ├── Component (UI element)
 │   └── Component
 └── Block
     └── Component
-```
+
+```text
 
 **Examples:**
+
 - **Pattern:** Hero with CTA - Hero image + heading + description + button group
-- **Block:** Portfolio Card - Individual card displaying portfolio item  
+- **Block:** Portfolio Card - Individual card displaying portfolio item
 - **Component:** Button - Single interactive element
 
 ---
 
 ## Pattern Categories
 
-The Ash Shaw portfolio uses **12 primary patterns** organized by category. Each has detailed implementation guidelines.
+The Ash Shaw portfolio uses **12 primary patterns** organized by category. Each
+has detailed implementation guidelines.
 
 ### Layout Patterns
 
@@ -81,10 +87,11 @@ The Ash Shaw portfolio uses **12 primary patterns** organized by category. Each 
 ### Hero with CTA Pattern
 
 ```tsx
-<section className="relative bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 py-fluid-3xl px-fluid-md">
+<section className="relative bg-gradient-to-br from-pink-50 via-purple-50
+to-blue-50 py-fluid-3xl px-fluid-md">
   {/* Background decorations */}
   <div className="absolute inset-0 opacity-20">{/* Orbs */}</div>
-  
+
   {/* Content */}
   <div className="max-w-7xl mx-auto relative z-10">
     <div className="max-w-2xl">
@@ -108,7 +115,8 @@ The Ash Shaw portfolio uses **12 primary patterns** organized by category. Each 
     </div>
   </div>
 </section>
-```
+
+```text
 
 ### Card Grid with Filters Pattern
 
@@ -117,33 +125,34 @@ The Ash Shaw portfolio uses **12 primary patterns** organized by category. Each 
   <div className="max-w-7xl mx-auto">
     {/* Filter Bar */}
     <div className="flex flex-col md:flex-row gap-4 mb-fluid-xl">
-      <CategoryFilter 
+      <CategoryFilter
         categories={categories}
         active={activeCategory}
         onChange={setActiveCategory}
       />
-      <SearchBar 
+      <SearchBar
         value={searchQuery}
         onChange={setSearchQuery}
       />
     </div>
-    
+
     {/* Grid */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-lg">
       {filteredItems.map(item => (
         <Card key={item.id} {...item} />
       ))}
     </div>
-    
+
     {/* Pagination */}
-    <BlogPagination 
+    <BlogPagination
       currentPage={page}
       totalPages={totalPages}
       onPageChange={setPage}
     />
   </div>
 </section>
-```
+
+```text
 
 ### Modal/Lightbox Pattern
 
@@ -151,11 +160,11 @@ The Ash Shaw portfolio uses **12 primary patterns** organized by category. Each 
 {isOpen && (
   <div className="fixed inset-0 z-50 flex items-center justify-center">
     {/* Backdrop */}
-    <div 
+    <div
       className="absolute inset-0 bg-black/90 backdrop-blur-sm"
       onClick={onClose}
     />
-    
+
     {/* Modal */}
     <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
       <button
@@ -164,14 +173,15 @@ The Ash Shaw portfolio uses **12 primary patterns** organized by category. Each 
       >
         <X className="w-6 h-6 text-white" />
       </button>
-      
+
       <div className="bg-white rounded-2xl p-fluid-xl max-h-[90vh] overflow-auto">
         {children}
       </div>
     </div>
   </div>
 )}
-```
+
+```text
 
 ---
 
@@ -190,12 +200,13 @@ The Ash Shaw portfolio uses **12 primary patterns** organized by category. Each 
 ## Best Practices
 
 ### 1. Reusability
+
 ```tsx
 // ✅ Extract common patterns
-export function FilteredGrid({ 
-  items, 
-  FilterComponent, 
-  ItemComponent 
+export function FilteredGrid({
+  items,
+  FilterComponent,
+  ItemComponent
 }: Props) {
   return (
     <section>
@@ -206,9 +217,11 @@ export function FilteredGrid({
     </section>
   );
 }
-```
+
+```text
 
 ### 2. Composition
+
 ```tsx
 // ✅ Build complex patterns from simple components
 <SectionPattern>
@@ -216,9 +229,11 @@ export function FilteredGrid({
   <SectionBody><Grid /></SectionBody>
   <SectionFooter><CTA /></SectionFooter>
 </SectionPattern>
-```
+
+```text
 
 ### 3. Accessibility
+
 ```tsx
 // ✅ Patterns maintain accessibility
 <NavigationPattern>
@@ -232,7 +247,8 @@ export function FilteredGrid({
     </ul>
   </nav>
 </NavigationPattern>
-```
+
+```text
 
 ---
 
@@ -240,22 +256,26 @@ export function FilteredGrid({
 
 For detailed implementation of each pattern, see the specific guideline files:
 
-### Layout Patterns
+### Layout Patterns (1)
+
 - **[HeroWithCTA.md](./patterns/HeroWithCTA.md)** - Hero section with call-to-action
 - **[TwoColumnSplit.md](./patterns/TwoColumnSplit.md)** - Side-by-side content layout
 - **[MasonryGallery.md](./patterns/MasonryGallery.md)** - Variable-height image grid
 
-### Navigation Patterns
+### Navigation Patterns (1)
+
 - **[DesktopMobileNav.md](./patterns/DesktopMobileNav.md)** - Responsive navigation
 - **[StickyHeader.md](./patterns/StickyHeader.md)** - Fixed header on scroll
 - **[Breadcrumbs.md](./patterns/Breadcrumbs.md)** - Hierarchical navigation
 
-### Content Patterns
+### Content Patterns (1)
+
 - **[CardGridWithFilters.md](./patterns/CardGridWithFilters.md)** - Filterable content grid
 - **[BlogPostLayout.md](./patterns/BlogPostLayout.md)** - Article detail view
 - **[TimelineDisplay.md](./patterns/TimelineDisplay.md)** - Chronological events
 
-### Interaction Patterns
+### Interaction Patterns (1)
+
 - **[ModalLightbox.md](./patterns/ModalLightbox.md)** - Full-screen overlay
 - **[FormWithValidation.md](./patterns/FormWithValidation.md)** - Input validation
 - **[InfiniteScroll.md](./patterns/InfiniteScroll.md)** - Lazy-load content
@@ -271,5 +291,5 @@ For detailed implementation of each pattern, see the specific guideline files:
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

@@ -14,7 +14,7 @@
 | G-03 | Schema coverage | 🟠 High | `Person` schema in `index.html` has only 1 entry in `sameAs` (`instagram.com/ashshaw_makeup`). Missing: other social/professional profiles. Also missing: `Organization`, `WebSite` schema at global level (WebSite is injected per HomePage but not in static HTML). |
 | G-04 | Schema coverage | 🟠 High | 53 page components have **no schema injection at all** — including `EventDetailPage.tsx`, `EventsPage.tsx`, `ContactPage.tsx`, all `book-site/` pages, all About sub-pages (BioPage, ManifestoPage, etc.), legal pages, `BookPage.tsx`, `EbookPage.tsx`, `GearPage.tsx`, `PressKitPage.tsx`. Key missing types: `Event`, `Book`, `ContactPage`, `WebPage`. |
 | G-05 | OG/social meta | 🟠 High | `og-image.jpg` is **referenced** in `index.html` (`https://ashshaw.com/og-image.jpg`) but the file **does not exist** in `/public/`. Social shares will show a broken image. |
-| G-06 | OG/social meta | 🟡 Medium | `og:site_name` and `og:locale` are missing from `index.html`. Should be `og:site_name="Ash Shaw"` and `og:locale="en_GB"` (or `en_ZA`). |
+| G-06 | OG/social meta | 🟡 Medium | `og:site*name` and `og:locale` are missing from `index.html`. Should be `og:site*name="Ash Shaw"` and `og:locale="en*GB"` (or `en*ZA`). |
 | G-07 | Performance | 🟠 High | **27 Google Font families loaded** across 2 stylesheet requests. The orchestrator flags > 8 families as excessive. This is 3× the threshold. Font requests block rendering and inflate LCP time. The second font URL alone loads 24 families including several that appear to be content-type fallbacks never actually used in the UI (Vampiro One, Rubik Glitch, Anonymous Pro, etc.). |
 | G-08 | Performance | 🟠 High | `fetchpriority="high"` is **absent** from all page hero images. Only `Logo.tsx:54` uses `loading="eager"`. No above-the-fold image has `fetchpriority="high"` to signal priority to the browser's preload scanner. |
 | G-09 | Performance | 🟠 High | **No route-level code splitting** — no `React.lazy()` or `Suspense` wrappers around page components. All routes are bundled synchronously. With 90+ page components, this significantly inflates initial JS bundle size. |
@@ -24,7 +24,7 @@
 | G-13 | Schema | 🟡 Medium | `Person` schema `gender: "Male"` is set in `index.html`. Verify this is intentional and accurate. If the subject prefers not to expose gender, remove this field. |
 | G-14 | Sitemap | 🟡 Medium | No static `sitemap.xml` or `robots.txt` exists — only a JavaScript `SitemapPage.tsx` that renders a human-readable page. Crawlers need a machine-readable `sitemap.xml` file at the site root, and `robots.txt` must reference it with a `Sitemap:` directive. |
 | G-15 | AI discoverability | 🟡 Medium | `Person` schema has only 1 `sameAs` entry. For AI indexing quality, the `sameAs` array should list all major public profiles: Instagram, TikTok, YouTube, SoundCloud, LinkedIn (if public), Spotify, etc. |
-| G-16 | OG / LCP | 🟢 Low | `twitter:card` is `summary_large_image` ✅. `og:type` is `website` ✅. `og:url` is canonical ✅. All pass. |
+| G-16 | OG / LCP | 🟢 Low | `twitter:card` is `summary*large*image` ✅. `og:type` is `website` ✅. `og:url` is canonical ✅. All pass. |
 
 ---
 
@@ -41,9 +41,11 @@
 
 ## G.2 — Schema Coverage Summary
 
-**Pages with schema:** 18 (all content archive/detail pages for blog, video, podcast, portfolio)
+**Pages with schema:** 18 (all content archive/detail pages for blog, video,
+podcast, portfolio)
 
 **Critical gaps:**
+
 - `EventDetailPage.tsx` — no `Event` schema
 - `BookPage.tsx` / `EbookPage.tsx` — no `Book` schema
 - `PressKitPage.tsx` — no `Organization` or `ProfilePage` schema
@@ -53,15 +55,19 @@
 - `FestivalLandingPage.tsx` — no `Event` schema
 - `SearchResultsPage.tsx` — no `SearchResultsPage` schema
 
-**WebSite schema:** Injected dynamically by `HomePage.tsx` via `buildWebSiteSchema()` — includes `SearchAction` ✅. But not present in static `index.html` — won't be indexed by crawlers that don't execute JS.
+**WebSite schema:** Injected dynamically by `HomePage.tsx` via
+`buildWebSiteSchema()` — includes `SearchAction` ✅. But not present in static
+`index.html` — won't be indexed by crawlers that don't execute JS.
 
 ---
 
 ## G.3 — AI Discoverability
 
-**`robots.txt`:** MISSING — no policy for GPTBot, ClaudeBot, PerplexityBot, CCBot, Google-Extended, Applebot-Extended.
+**`robots.txt`:** MISSING — no policy for GPTBot, ClaudeBot, PerplexityBot,
+CCBot, Google-Extended, Applebot-Extended.
 
 **`llms.txt`:** MISSING — recommended content:
+
 - One-paragraph site description (Ash Shaw — neon/UV makeup art, Berlin festival artist)
 - Content inventory: portfolio, blog, podcasts, videos, book, events, about
 - Author bio summary
@@ -82,21 +88,25 @@
 | `og:image:width` / `:height` | ✅ Set (1200×630) |
 | `og:site_name` | ❌ Missing |
 | `og:locale` | ❌ Missing |
-| `twitter:card` = `summary_large_image` | ✅ |
+| `twitter:card` = `summary*large*image` | ✅ |
 | `twitter:image` | ❌ Same missing file |
 
 ---
 
 ## G.5 — Font Loading
 
-27 families loaded across 2 Google Fonts requests. Families flagged as likely unused by the design system (not referenced in CSS token files or `index.html` font variables):
+27 families loaded across 2 Google Fonts requests. Families flagged as likely
+unused by the design system (not referenced in CSS token files or `index.html`
+font variables):
+
 - Vampiro One, Rubik Glitch — novelty fonts, not in any CSS file scanned
 - Anonymous Pro — not in CSS token system
 - PT Serif, Source Serif Pro, Libre Baskerville — three competing serif choices; only Spectral and Crimson Pro appear in token files
 - Montserrat, Raleway — not in CSS token system
 - DM Sans — not in CSS token system
 
-**Recommendation:** Audit which families are actually consumed by the CSS token system and remove the rest. Target: ≤ 8 families.
+**Recommendation:** Audit which families are actually consumed by the CSS token
+system and remove the rest. Target: ≤ 8 families.
 
 ---
 
@@ -113,18 +123,21 @@
 
 ## Recommended Actions
 
-**Critical (do first):**
+## Critical (do first)
+
 - **G-01/G-14:** Create `src/app/public/robots.txt` — allow all major crawlers, reference sitemap
 - **G-02:** Create `src/app/public/llms.txt` with site summary for AI agents
 - **G-05:** Create `og-image.jpg` (1200×630px) in `public/` OR update `index.html` to point to an existing image
 
 **High (do next):**
+
 - **G-07:** Audit Google Font families — remove any not referenced in CSS token system. Target ≤ 8 families.
 - **G-08:** Add `fetchpriority="high"` to hero images (at minimum the homepage hero)
 - **G-09:** Implement route-level code splitting with `React.lazy()` + `Suspense` on all page components
 - **G-04:** Add schema to `EventDetailPage.tsx` (Event), `BookPage.tsx` / `EbookPage.tsx` (Book), About sub-pages (WebPage)
 
 **Medium:**
+
 - **G-06:** Add `og:site_name` and `og:locale` to `index.html`
 - **G-10:** Add missing `alt` attributes to 14 `<img>` elements
 - **G-11:** Add native skip-to-main-content link to `RootLayout.tsx`

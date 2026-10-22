@@ -5,25 +5,29 @@ created: "2026-03-12"
 modified: "2026-03-12"
 version: "1.0.0"
 related_docs:
-  - "/docs/wordpress-fse-guide.md"
-  - "/docs/wordpress-block-development.md"
-  - "/docs/wordpress-migration-plan.md"
-  - "/docs/cms-field-mapping.md"
+
+- "/docs/wordpress-fse-guide.md"
+- "/docs/wordpress-block-development.md"
+- "/docs/wordpress-migration-plan.md"
+- "/docs/cms-field-mapping.md"
 ---
 
 # WordPress ACF Integration Guide
 
-**Created:** March 12, 2026  
-**Last Updated:** March 12, 2026  
+**Created:** March 12, 2026
+**Last Updated:** March 12, 2026
 **Status:** Active
 
 ---
 
 ## Overview
 
-This guide documents how to integrate Advanced Custom Fields (ACF) with the Nova News WordPress theme. It covers custom post types (CPTs), field groups, and template integration for portfolio entries, blog posts, videos, and podcasts.
+This guide documents how to integrate Advanced Custom Fields (ACF) with the Nova
+News WordPress theme. It covers custom post types (CPTs), field groups, and
+template integration for portfolio entries, blog posts, videos, and podcasts.
 
 **Prerequisites:**
+
 - WordPress 6.0+
 - Advanced Custom Fields Pro plugin
 - Understanding of WordPress custom post types
@@ -34,20 +38,27 @@ This guide documents how to integrate Advanced Custom Fields (ACF) with the Nova
 ## Table of Contents
 
 1. [What is ACF?](#what-is-acf)
-2. [Custom Post Types](#custom-post-types)
-3. [Field Groups](#field-groups)
-4. [Template Integration](#template-integration)
-5. [REST API Integration](#rest-api-integration)
-6. [Migration from Mock Data](#migration-from-mock-data)
-7. [Best Practices](#best-practices)
+
+1. [Custom Post Types](#custom-post-types)
+
+1. [Field Groups](#field-groups)
+
+1. [Template Integration](#template-integration)
+
+1. [REST API Integration](#rest-api-integration)
+
+1. [Migration from Mock Data](#migration-from-mock-data)
+
+1. [Best Practices](#best-practices)
 
 ---
 
-## What is ACF?
+## What is ACF
 
-**Advanced Custom Fields (ACF)** is a WordPress plugin that allows you to add custom fields to posts, pages, and custom post types.
+**Advanced Custom Fields (ACF)** is a WordPress plugin that allows you to add
+custom fields to posts, pages, and custom post types.
 
-### Why Use ACF?
+### Why Use ACF
 
 - **Visual Field Builder** - No code required for basic field creation
 - **30+ Field Types** - Text, WYSIWYG, Image, Gallery, Relationship, etc.
@@ -67,7 +78,8 @@ This guide documents how to integrate Advanced Custom Fields (ACF) with the Nova
 | ACF Blocks | ❌ | ✅ |
 | Options Pages | ❌ | ✅ |
 
-**Recommendation:** Use ACF Pro for Nova News (requires Repeater and Gallery fields).
+**Recommendation:** Use ACF Pro for Nova News (requires Repeater and Gallery
+fields).
 
 ---
 
@@ -82,21 +94,22 @@ Register a custom post type for portfolio entries.
 ```php
 <?php
 /**
+
  * Register Portfolio Custom Post Type
  */
-function nova_news_register_portfolio_cpt() {
+function nova*news*register*portfolio*cpt() {
   $labels = array(
     'name'                  => 'Portfolio',
     'singular_name'         => 'Portfolio Entry',
     'menu_name'             => 'Portfolio',
     'add_new'               => 'Add New',
-    'add_new_item'          => 'Add New Portfolio Entry',
+    'add*new*item'          => 'Add New Portfolio Entry',
     'edit_item'             => 'Edit Portfolio Entry',
     'new_item'              => 'New Portfolio Entry',
     'view_item'             => 'View Portfolio Entry',
     'search_items'          => 'Search Portfolio',
     'not_found'             => 'No portfolio entries found',
-    'not_found_in_trash'    => 'No portfolio entries found in Trash',
+    'not*found*in_trash'    => 'No portfolio entries found in Trash',
   );
 
   $args = array(
@@ -106,18 +119,19 @@ function nova_news_register_portfolio_cpt() {
     'rewrite'               => array('slug' => 'portfolio'),
     'menu_icon'             => 'dashicons-images-alt2',
     'supports'              => array('title', 'editor', 'thumbnail', 'excerpt'),
-    'show_in_rest'          => true, // Enable Gutenberg + REST API
+    'show*in*rest'          => true, // Enable Gutenberg + REST API
     'taxonomies'            => array('portfolio_category'),
   );
 
-  register_post_type('portfolio', $args);
+  register*post*type('portfolio', $args);
 }
-add_action('init', 'nova_news_register_portfolio_cpt');
+add*action('init', 'nova*news*register*portfolio_cpt');
 
 /**
+
  * Register Portfolio Category Taxonomy
  */
-function nova_news_register_portfolio_taxonomy() {
+function nova*news*register*portfolio*taxonomy() {
   $labels = array(
     'name'              => 'Portfolio Categories',
     'singular_name'     => 'Portfolio Category',
@@ -125,8 +139,8 @@ function nova_news_register_portfolio_taxonomy() {
     'all_items'         => 'All Categories',
     'edit_item'         => 'Edit Category',
     'update_item'       => 'Update Category',
-    'add_new_item'      => 'Add New Category',
-    'new_item_name'     => 'New Category Name',
+    'add*new*item'      => 'Add New Category',
+    'new*item*name'     => 'New Category Name',
     'menu_name'         => 'Categories',
   );
 
@@ -134,27 +148,29 @@ function nova_news_register_portfolio_taxonomy() {
     'hierarchical'      => true,
     'labels'            => $labels,
     'show_ui'           => true,
-    'show_in_rest'      => true,
+    'show*in*rest'      => true,
     'rewrite'           => array('slug' => 'portfolio-category'),
   );
 
-  register_taxonomy('portfolio_category', array('portfolio'), $args);
+  register*taxonomy('portfolio*category', array('portfolio'), $args);
 }
-add_action('init', 'nova_news_register_portfolio_taxonomy');
-```
+add*action('init', 'nova*news*register*portfolio_taxonomy');
+
+```text
 
 ### 2. Video CPT
 
 ```php
 /**
+
  * Register Video Custom Post Type
  */
-function nova_news_register_video_cpt() {
+function nova*news*register*video*cpt() {
   $labels = array(
     'name'                  => 'Videos',
     'singular_name'         => 'Video',
     'menu_name'             => 'Videos',
-    'add_new_item'          => 'Add New Video',
+    'add*new*item'          => 'Add New Video',
   );
 
   $args = array(
@@ -164,27 +180,29 @@ function nova_news_register_video_cpt() {
     'rewrite'               => array('slug' => 'videos'),
     'menu_icon'             => 'dashicons-video-alt3',
     'supports'              => array('title', 'editor', 'thumbnail'),
-    'show_in_rest'          => true,
-    'taxonomies'            => array('video_category', 'video_tag'),
+    'show*in*rest'          => true,
+    'taxonomies'            => array('video*category', 'video*tag'),
   );
 
-  register_post_type('video', $args);
+  register*post*type('video', $args);
 }
-add_action('init', 'nova_news_register_video_cpt');
-```
+add*action('init', 'nova*news*register*video_cpt');
+
+```text
 
 ### 3. Podcast CPT
 
 ```php
 /**
+
  * Register Podcast Custom Post Type
  */
-function nova_news_register_podcast_cpt() {
+function nova*news*register*podcast*cpt() {
   $labels = array(
     'name'                  => 'Podcasts',
     'singular_name'         => 'Podcast Episode',
     'menu_name'             => 'Podcasts',
-    'add_new_item'          => 'Add New Episode',
+    'add*new*item'          => 'Add New Episode',
   );
 
   $args = array(
@@ -194,14 +212,15 @@ function nova_news_register_podcast_cpt() {
     'rewrite'               => array('slug' => 'podcasts'),
     'menu_icon'             => 'dashicons-microphone',
     'supports'              => array('title', 'editor', 'thumbnail'),
-    'show_in_rest'          => true,
+    'show*in*rest'          => true,
     'taxonomies'            => array('podcast_series'),
   );
 
-  register_post_type('podcast', $args);
+  register*post*type('podcast', $args);
 }
-add_action('init', 'nova_news_register_podcast_cpt');
-```
+add*action('init', 'nova*news*register*podcast_cpt');
+
+```text
 
 ---
 
@@ -209,38 +228,40 @@ add_action('init', 'nova_news_register_podcast_cpt');
 
 ### 1. Portfolio Entry Fields
 
-**Mapping:** See [CMS Field Mapping](../docs/cms-field-mapping.md) for complete reference.
+**Mapping:** See [CMS Field Mapping](../docs/cms-field-mapping.md) for complete
+reference.
 
-**ACF Field Group Setup:**
+## ACF Field Group Setup
 
 ```php
 <?php
 /**
+
  * ACF Field Group: Portfolio Entry
- * 
+ *
  * File: /inc/acf-fields.php
  * Register via PHP (recommended for version control)
  */
 
-if (function_exists('acf_add_local_field_group')) {
-  acf_add_local_field_group(array(
-    'key' => 'group_portfolio_entry',
+if (function*exists('acf*add*local*field_group')) {
+  acf*add*local*field*group(array(
+    'key' => 'group*portfolio*entry',
     'title' => 'Portfolio Entry Details',
     'fields' => array(
-      
+
       // Featured Flag
       array(
-        'key' => 'field_portfolio_featured',
+        'key' => 'field*portfolio*featured',
         'label' => 'Featured',
         'name' => 'featured',
         'type' => 'true_false',
         'default_value' => 0,
         'ui' => 1,
       ),
-      
+
       // Main Image
       array(
-        'key' => 'field_portfolio_image',
+        'key' => 'field*portfolio*image',
         'label' => 'Main Image',
         'name' => 'main_image',
         'type' => 'image',
@@ -248,10 +269,10 @@ if (function_exists('acf_add_local_field_group')) {
         'return_format' => 'array',
         'preview_size' => 'medium',
       ),
-      
+
       // Image Gallery
       array(
-        'key' => 'field_portfolio_gallery',
+        'key' => 'field*portfolio*gallery',
         'label' => 'Image Gallery',
         'name' => 'image_gallery',
         'type' => 'gallery',
@@ -259,76 +280,76 @@ if (function_exists('acf_add_local_field_group')) {
         'min' => 3,
         'max' => 20,
       ),
-      
+
       // Location
       array(
-        'key' => 'field_portfolio_location',
+        'key' => 'field*portfolio*location',
         'label' => 'Location',
         'name' => 'location',
         'type' => 'text',
         'placeholder' => 'e.g., Cape Town, Berlin',
       ),
-      
+
       // Event Name
       array(
-        'key' => 'field_portfolio_event',
+        'key' => 'field*portfolio*event',
         'label' => 'Event Name',
         'name' => 'event_name',
         'type' => 'text',
         'placeholder' => 'e.g., Origin Festival 2025',
       ),
-      
+
       // Client/Subject
       array(
-        'key' => 'field_portfolio_client',
+        'key' => 'field*portfolio*client',
         'label' => 'Client/Subject',
         'name' => 'client',
         'type' => 'text',
       ),
-      
+
       // Date
       array(
-        'key' => 'field_portfolio_date',
+        'key' => 'field*portfolio*date',
         'label' => 'Shoot Date',
         'name' => 'shoot_date',
         'type' => 'date_picker',
         'display_format' => 'F j, Y',
         'return_format' => 'Y-m-d',
       ),
-      
+
       // Techniques/Products
       array(
-        'key' => 'field_portfolio_techniques',
+        'key' => 'field*portfolio*techniques',
         'label' => 'Techniques/Products',
         'name' => 'techniques',
         'type' => 'textarea',
         'rows' => 4,
         'placeholder' => 'e.g., UV reactive paint, glitter',
       ),
-      
+
       // Social Proof
       array(
-        'key' => 'field_portfolio_social_proof',
+        'key' => 'field*portfolio*social_proof',
         'label' => 'Social Proof',
         'name' => 'social_proof',
         'type' => 'group',
         'sub_fields' => array(
           array(
-            'key' => 'field_social_likes',
+            'key' => 'field*social*likes',
             'label' => 'Likes',
             'name' => 'likes',
             'type' => 'number',
             'default_value' => 0,
           ),
           array(
-            'key' => 'field_social_comments',
+            'key' => 'field*social*comments',
             'label' => 'Comments',
             'name' => 'comments',
             'type' => 'number',
             'default_value' => 0,
           ),
           array(
-            'key' => 'field_social_shares',
+            'key' => 'field*social*shares',
             'label' => 'Shares',
             'name' => 'shares',
             'type' => 'number',
@@ -336,10 +357,10 @@ if (function_exists('acf_add_local_field_group')) {
           ),
         ),
       ),
-      
+
       // Related Links
       array(
-        'key' => 'field_portfolio_links',
+        'key' => 'field*portfolio*links',
         'label' => 'Related Links',
         'name' => 'related_links',
         'type' => 'repeater',
@@ -347,20 +368,20 @@ if (function_exists('acf_add_local_field_group')) {
         'button_label' => 'Add Link',
         'sub_fields' => array(
           array(
-            'key' => 'field_link_text',
+            'key' => 'field*link*text',
             'label' => 'Link Text',
             'name' => 'text',
             'type' => 'text',
           ),
           array(
-            'key' => 'field_link_url',
+            'key' => 'field*link*url',
             'label' => 'URL',
             'name' => 'url',
             'type' => 'url',
           ),
         ),
       ),
-      
+
     ),
     'location' => array(
       array(
@@ -373,29 +394,30 @@ if (function_exists('acf_add_local_field_group')) {
     ),
   ));
 }
-```
+
+```text
 
 ### 2. Video Entry Fields
 
 ```php
-acf_add_local_field_group(array(
-  'key' => 'group_video_entry',
+acf*add*local*field*group(array(
+  'key' => 'group*video*entry',
   'title' => 'Video Details',
   'fields' => array(
-    
+
     // YouTube/Vimeo URL
     array(
-      'key' => 'field_video_url',
+      'key' => 'field*video*url',
       'label' => 'Video URL',
       'name' => 'video_url',
       'type' => 'url',
       'required' => 1,
       'placeholder' => 'https://www.youtube.com/watch?v=...',
     ),
-    
+
     // Video Type (YouTube/Vimeo/Self-hosted)
     array(
-      'key' => 'field_video_type',
+      'key' => 'field*video*type',
       'label' => 'Video Type',
       'name' => 'video_type',
       'type' => 'select',
@@ -406,33 +428,33 @@ acf_add_local_field_group(array(
       ),
       'default_value' => 'youtube',
     ),
-    
+
     // Duration (mm:ss)
     array(
-      'key' => 'field_video_duration',
+      'key' => 'field*video*duration',
       'label' => 'Duration',
       'name' => 'duration',
       'type' => 'text',
       'placeholder' => 'e.g., 5:32',
     ),
-    
+
     // View Count
     array(
-      'key' => 'field_video_views',
+      'key' => 'field*video*views',
       'label' => 'View Count',
       'name' => 'view_count',
       'type' => 'number',
       'default_value' => 0,
     ),
-    
+
     // Featured
     array(
-      'key' => 'field_video_featured',
+      'key' => 'field*video*featured',
       'label' => 'Featured Video',
       'name' => 'featured',
       'type' => 'true_false',
     ),
-    
+
   ),
   'location' => array(
     array(
@@ -444,57 +466,58 @@ acf_add_local_field_group(array(
     ),
   ),
 ));
-```
+
+```text
 
 ### 3. Podcast Episode Fields
 
 ```php
-acf_add_local_field_group(array(
-  'key' => 'group_podcast_episode',
+acf*add*local*field*group(array(
+  'key' => 'group*podcast*episode',
   'title' => 'Podcast Episode Details',
   'fields' => array(
-    
+
     // Episode Number
     array(
-      'key' => 'field_podcast_episode_number',
+      'key' => 'field*podcast*episode_number',
       'label' => 'Episode Number',
       'name' => 'episode_number',
       'type' => 'number',
       'required' => 1,
     ),
-    
+
     // Audio File
     array(
-      'key' => 'field_podcast_audio',
+      'key' => 'field*podcast*audio',
       'label' => 'Audio File',
       'name' => 'audio_file',
       'type' => 'file',
       'return_format' => 'array',
       'mime_types' => 'mp3,m4a',
     ),
-    
+
     // Duration
     array(
-      'key' => 'field_podcast_duration',
+      'key' => 'field*podcast*duration',
       'label' => 'Duration',
       'name' => 'duration',
       'type' => 'text',
       'placeholder' => 'e.g., 45:30',
     ),
-    
+
     // Publish Date
     array(
-      'key' => 'field_podcast_date',
+      'key' => 'field*podcast*date',
       'label' => 'Publish Date',
       'name' => 'publish_date',
       'type' => 'date_picker',
       'display_format' => 'F j, Y',
       'return_format' => 'Y-m-d',
     ),
-    
+
     // Guests (Repeater)
     array(
-      'key' => 'field_podcast_guests',
+      'key' => 'field*podcast*guests',
       'label' => 'Guests',
       'name' => 'guests',
       'type' => 'repeater',
@@ -502,13 +525,13 @@ acf_add_local_field_group(array(
       'button_label' => 'Add Guest',
       'sub_fields' => array(
         array(
-          'key' => 'field_guest_name',
+          'key' => 'field*guest*name',
           'label' => 'Name',
           'name' => 'name',
           'type' => 'text',
         ),
         array(
-          'key' => 'field_guest_bio',
+          'key' => 'field*guest*bio',
           'label' => 'Bio',
           'name' => 'bio',
           'type' => 'textarea',
@@ -516,17 +539,17 @@ acf_add_local_field_group(array(
         ),
       ),
     ),
-    
+
     // Show Notes
     array(
-      'key' => 'field_podcast_notes',
+      'key' => 'field*podcast*notes',
       'label' => 'Show Notes',
       'name' => 'show_notes',
       'type' => 'wysiwyg',
       'tabs' => 'all',
       'toolbar' => 'full',
     ),
-    
+
   ),
   'location' => array(
     array(
@@ -538,56 +561,57 @@ acf_add_local_field_group(array(
     ),
   ),
 ));
-```
+
+```text
 
 ### 4. Blog Post Extensions
 
 Extend default WordPress posts with additional fields.
 
 ```php
-acf_add_local_field_group(array(
-  'key' => 'group_blog_post',
+acf*add*local*field*group(array(
+  'key' => 'group*blog*post',
   'title' => 'Blog Post Extensions',
   'fields' => array(
-    
+
     // Reading Time
     array(
-      'key' => 'field_blog_reading_time',
+      'key' => 'field*blog*reading_time',
       'label' => 'Reading Time',
       'name' => 'reading_time',
       'type' => 'text',
       'placeholder' => 'e.g., 5 min read',
       'instructions' => 'Auto-calculated on save (optional override)',
     ),
-    
+
     // Featured
     array(
-      'key' => 'field_blog_featured',
+      'key' => 'field*blog*featured',
       'label' => 'Featured Post',
       'name' => 'featured',
       'type' => 'true_false',
     ),
-    
+
     // Custom Excerpt
     array(
-      'key' => 'field_blog_custom_excerpt',
+      'key' => 'field*blog*custom_excerpt',
       'label' => 'Custom Excerpt',
       'name' => 'custom_excerpt',
       'type' => 'textarea',
       'rows' => 3,
       'instructions' => 'Leave blank to use default excerpt',
     ),
-    
+
     // Social Share Image
     array(
-      'key' => 'field_blog_og_image',
+      'key' => 'field*blog*og_image',
       'label' => 'Social Share Image',
       'name' => 'og_image',
       'type' => 'image',
       'return_format' => 'array',
       'instructions' => 'Recommended: 1200x630px',
     ),
-    
+
   ),
   'location' => array(
     array(
@@ -599,7 +623,8 @@ acf_add_local_field_group(array(
     ),
   ),
 ));
-```
+
+```text
 
 ---
 
@@ -616,36 +641,36 @@ acf_add_local_field_group(array(
 
 get_header();
 
-while (have_posts()) : the_post();
-  
+while (have*posts()) : the*post();
+
   // Get ACF fields
   $featured = get_field('featured');
-  $main_image = get_field('main_image');
-  $gallery = get_field('image_gallery');
+  $main*image = get*field('main_image');
+  $gallery = get*field('image*gallery');
   $location = get_field('location');
-  $event_name = get_field('event_name');
+  $event*name = get*field('event_name');
   $techniques = get_field('techniques');
-  $social_proof = get_field('social_proof');
-  
+  $social*proof = get*field('social_proof');
+
   ?>
   <article class="portfolio-entry">
-    
+
     <!-- Hero Image -->
     <?php if ($main_image): ?>
       <div class="portfolio-entry__hero">
-        <img 
-          src="<?php echo esc_url($main_image['sizes']['large']); ?>" 
-          alt="<?php echo esc_attr($main_image['alt']); ?>"
+        <img
+          src="<?php echo esc*url($main*image['sizes']['large']); ?>"
+          alt="<?php echo esc*attr($main*image['alt']); ?>"
           class="portfolio-entry__hero-image"
         />
       </div>
     <?php endif; ?>
-    
+
     <!-- Title -->
     <h1 class="portfolio-entry__title">
       <?php the_title(); ?>
     </h1>
-    
+
     <!-- Meta Info -->
     <div class="portfolio-entry__meta">
       <?php if ($location): ?>
@@ -654,103 +679,106 @@ while (have_posts()) : the_post();
           <?php echo esc_html($location); ?>
         </span>
       <?php endif; ?>
-      
+
       <?php if ($event_name): ?>
         <span class="meta__event">
-          <?php echo esc_html($event_name); ?>
+          <?php echo esc*html($event*name); ?>
         </span>
       <?php endif; ?>
     </div>
-    
+
     <!-- Content -->
     <div class="portfolio-entry__content">
       <?php the_content(); ?>
     </div>
-    
+
     <!-- Gallery -->
     <?php if ($gallery): ?>
       <div class="portfolio-entry__gallery">
         <?php foreach ($gallery as $image): ?>
-          <img 
-            src="<?php echo esc_url($image['sizes']['medium']); ?>" 
+          <img
+            src="<?php echo esc_url($image['sizes']['medium']); ?>"
             alt="<?php echo esc_attr($image['alt']); ?>"
             class="gallery__image"
           />
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
-    
+
     <!-- Social Proof -->
     <?php if ($social_proof): ?>
       <div class="portfolio-entry__social-proof">
         <span class="social-stat">
           <svg><!-- Heart icon --></svg>
-          <?php echo number_format($social_proof['likes']); ?> likes
+          <?php echo number*format($social*proof['likes']); ?> likes
         </span>
         <span class="social-stat">
           <svg><!-- Comment icon --></svg>
-          <?php echo number_format($social_proof['comments']); ?> comments
+          <?php echo number*format($social*proof['comments']); ?> comments
         </span>
       </div>
     <?php endif; ?>
-    
+
   </article>
   <?php
-  
+
 endwhile;
 
 get_footer();
 ?>
-```
+
+```text
 
 #### Method 2: REST API (Headless)
 
-**Expose ACF fields to REST API:**
+## Expose ACF fields to REST API
 
 ```php
 <?php
 /**
+
  * Add ACF fields to REST API response
  * File: /inc/acf-rest-api.php
  */
 
 // Register ACF fields to REST API
-add_action('rest_api_init', function() {
-  
+add*action('rest*api_init', function() {
+
   // Portfolio fields
-  register_rest_field('portfolio', 'acf_fields', array(
+  register*rest*field('portfolio', 'acf_fields', array(
     'get_callback' => function($object) {
       return array(
         'featured' => get_field('featured', $object['id']),
-        'main_image' => get_field('main_image', $object['id']),
-        'gallery' => get_field('image_gallery', $object['id']),
+        'main*image' => get*field('main_image', $object['id']),
+        'gallery' => get*field('image*gallery', $object['id']),
         'location' => get_field('location', $object['id']),
-        'event_name' => get_field('event_name', $object['id']),
+        'event*name' => get*field('event_name', $object['id']),
         'client' => get_field('client', $object['id']),
-        'shoot_date' => get_field('shoot_date', $object['id']),
+        'shoot*date' => get*field('shoot_date', $object['id']),
         'techniques' => get_field('techniques', $object['id']),
-        'social_proof' => get_field('social_proof', $object['id']),
-        'related_links' => get_field('related_links', $object['id']),
+        'social*proof' => get*field('social_proof', $object['id']),
+        'related*links' => get*field('related_links', $object['id']),
       );
     },
     'schema' => null,
   ));
-  
+
   // Video fields
-  register_rest_field('video', 'acf_fields', array(
+  register*rest*field('video', 'acf_fields', array(
     'get_callback' => function($object) {
       return array(
-        'video_url' => get_field('video_url', $object['id']),
-        'video_type' => get_field('video_type', $object['id']),
+        'video*url' => get*field('video_url', $object['id']),
+        'video*type' => get*field('video_type', $object['id']),
         'duration' => get_field('duration', $object['id']),
-        'view_count' => get_field('view_count', $object['id']),
+        'view*count' => get*field('view_count', $object['id']),
         'featured' => get_field('featured', $object['id']),
       );
     },
   ));
-  
+
 });
-```
+
+```text
 
 **Fetch in React:**
 
@@ -791,14 +819,15 @@ export async function fetchPortfolioEntries(): Promise<PortfolioEntry[]> {
   const response = await fetch(
     'https://your-site.com/wp-json/wp/v2/portfolio?_embed'
   );
-  
+
   if (!response.ok) {
     throw new Error('Failed to fetch portfolio entries');
   }
-  
+
   return response.json();
 }
-```
+
+```text
 
 ---
 
@@ -809,22 +838,26 @@ export async function fetchPortfolioEntries(): Promise<PortfolioEntry[]> {
 **Option 1: Field Group Settings (GUI)**
 
 In ACF Field Group editor:
+
 1. Open field group
-2. Scroll to "Settings"
-3. Enable "Show in REST API"
+
+1. Scroll to "Settings"
+
+1. Enable "Show in REST API"
 
 **Option 2: PHP Code**
 
 ```php
-acf_add_local_field_group(array(
-  'key' => 'group_portfolio_entry',
+acf*add*local*field*group(array(
+  'key' => 'group*portfolio*entry',
   'title' => 'Portfolio Entry Details',
-  'show_in_rest' => 1, // Enable REST API
+  'show*in*rest' => 1, // Enable REST API
   'fields' => array(
     // ... fields
   ),
 ));
-```
+
+```text
 
 ### Custom REST Endpoints
 
@@ -833,32 +866,33 @@ Create custom endpoints for complex queries:
 ```php
 <?php
 /**
+
  * Custom REST API endpoints
  * File: /inc/rest-api.php
  */
 
-add_action('rest_api_init', function() {
-  
+add*action('rest*api_init', function() {
+
   // Featured portfolio entries
-  register_rest_route('nova-news/v1', '/portfolio/featured', array(
+  register*rest*route('nova-news/v1', '/portfolio/featured', array(
     'methods' => 'GET',
-    'callback' => 'nova_news_get_featured_portfolio',
-    'permission_callback' => '__return_true',
+    'callback' => 'nova*news*get*featured*portfolio',
+    'permission*callback' => '**return*true',
   ));
-  
+
   // Portfolio by category
-  register_rest_route('nova-news/v1', '/portfolio/category/(?P<slug>[a-zA-Z0-9-]+)', array(
+  register*rest*route('nova-news/v1', '/portfolio/category/(?P<slug>[a-zA-Z0-9-]+)', array(
     'methods' => 'GET',
-    'callback' => 'nova_news_get_portfolio_by_category',
-    'permission_callback' => '__return_true',
+    'callback' => 'nova*news*get*portfolio*by_category',
+    'permission*callback' => '**return*true',
   ));
-  
+
 });
 
-function nova_news_get_featured_portfolio($request) {
+function nova*news*get*featured*portfolio($request) {
   $args = array(
     'post_type' => 'portfolio',
-    'posts_per_page' => 6,
+    'posts*per*page' => 6,
     'meta_query' => array(
       array(
         'key' => 'featured',
@@ -867,35 +901,35 @@ function nova_news_get_featured_portfolio($request) {
       ),
     ),
   );
-  
+
   $query = new WP_Query($args);
   $posts = array();
-  
+
   if ($query->have_posts()) {
     while ($query->have_posts()) {
       $query->the_post();
-      
+
       $posts[] = array(
-        'id' => get_the_ID(),
-        'title' => get_the_title(),
-        'slug' => get_post_field('post_name', get_the_ID()),
-        'excerpt' => get_the_excerpt(),
-        'featured_image' => get_the_post_thumbnail_url(get_the_ID(), 'large'),
-        'acf_fields' => get_fields(get_the_ID()),
+        'id' => get*the*ID(),
+        'title' => get*the*title(),
+        'slug' => get*post*field('post*name', get*the_ID()),
+        'excerpt' => get*the*excerpt(),
+        'featured*image' => get*the*post*thumbnail*url(get*the_ID(), 'large'),
+        'acf*fields' => get*fields(get*the*ID()),
       );
     }
-    wp_reset_postdata();
+    wp*reset*postdata();
   }
-  
-  return rest_ensure_response($posts);
+
+  return rest*ensure*response($posts);
 }
 
-function nova_news_get_portfolio_by_category($request) {
+function nova*news*get*portfolio*by_category($request) {
   $slug = $request['slug'];
-  
+
   $args = array(
     'post_type' => 'portfolio',
-    'posts_per_page' => -1,
+    'posts*per*page' => -1,
     'tax_query' => array(
       array(
         'taxonomy' => 'portfolio_category',
@@ -904,26 +938,27 @@ function nova_news_get_portfolio_by_category($request) {
       ),
     ),
   );
-  
+
   $query = new WP_Query($args);
   $posts = array();
-  
+
   if ($query->have_posts()) {
     while ($query->have_posts()) {
       $query->the_post();
-      
+
       $posts[] = array(
-        'id' => get_the_ID(),
-        'title' => get_the_title(),
-        'acf_fields' => get_fields(get_the_ID()),
+        'id' => get*the*ID(),
+        'title' => get*the*title(),
+        'acf*fields' => get*fields(get*the*ID()),
       );
     }
-    wp_reset_postdata();
+    wp*reset*postdata();
   }
-  
-  return rest_ensure_response($posts);
+
+  return rest*ensure*response($posts);
 }
-```
+
+```text
 
 ---
 
@@ -936,17 +971,20 @@ Create a script to export existing mock data to WordPress import format.
 ```php
 <?php
 /**
+
  * Export mock data to WordPress XML format
  * File: /scripts/export-mock-data.php
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require*once **DIR*_ . '/../vendor/autoload.php';
 
 // Read mock data
-$portfolioData = json_decode(file_get_contents(__DIR__ . '/../data/mock/portfolio/portfolio-data.json'), true);
+$portfolioData = json*decode(file*get*contents(**DIR*_ .
+'/../data/mock/portfolio/portfolio-data.json'), true);
 
 // Generate WordPress XML
-$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"></rss>');
+$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><rss
+version="2.0"></rss>');
 $channel = $xml->addChild('channel');
 
 foreach ($portfolioData as $entry) {
@@ -954,43 +992,54 @@ foreach ($portfolioData as $entry) {
   $item->addChild('title', htmlspecialchars($entry['title']));
   $item->addChild('content:encoded', htmlspecialchars($entry['description']), 'http://purl.org/rss/1.0/modules/content/');
   $item->addChild('wp:post_type', 'portfolio', 'http://wordpress.org/export/1.2/');
-  
+
   // Add ACF fields
-  $postmeta = $item->addChild('wp:postmeta', '', 'http://wordpress.org/export/1.2/');
+$postmeta = $item->addChild('wp:postmeta', '',
+'http://wordpress.org/export/1.2/');
   $postmeta->addChild('wp:meta_key', 'featured');
   $postmeta->addChild('wp:meta_value', $entry['featured'] ? '1' : '0');
-  
+
   // Add more fields...
 }
 
 // Save XML
-file_put_contents(__DIR__ . '/../export/portfolio-import.xml', $xml->asXML());
+file*put*contents(_*DIR*_ . '/../export/portfolio-import.xml', $xml->asXML());
 
 echo "Export complete!\n";
-```
+
+```text
 
 ### Step 2: Import via WP-CLI
 
 ```bash
+
 # Import posts
+
 wp import portfolio-import.xml --authors=create
 
 # Import media
+
 wp media import images/*.jpg --post_id=123
 
 # Set featured images
-wp post meta update 123 _thumbnail_id 456
-```
+
+wp post meta update 123 *thumbnail*id 456
+
+```text
 
 ### Step 3: Verify Import
 
 ```bash
+
 # Check post count
+
 wp post list --post_type=portfolio
 
 # Check ACF fields
+
 wp acf get-field featured 123
-```
+
+```text
 
 ---
 
@@ -1000,22 +1049,26 @@ wp acf get-field featured 123
 
 Register field groups via PHP instead of GUI to track changes in Git.
 
-**Export Field Group:**
+## Export Field Group
 
 In ACF GUI:
+
 1. Field Groups → Select group
-2. Tools → Export as PHP
-3. Copy code to `/inc/acf-fields.php`
+
+1. Tools → Export as PHP
+
+1. Copy code to `/inc/acf-fields.php`
 
 ### 2. Namespace Field Keys
 
 ```php
 // ✅ GOOD - Namespaced keys
-'key' => 'field_portfolio_featured',
+'key' => 'field*portfolio*featured',
 
 // ❌ BAD - Generic keys
 'key' => 'field_featured',
-```
+
+```text
 
 ### 3. Set Return Formats
 
@@ -1027,26 +1080,28 @@ In ACF GUI:
 'return_format' => 'array', // Returns array of image arrays
 
 // Relationship field
-'return_format' => 'object', // Returns WP_Post objects
-```
+'return*format' => 'object', // Returns WP*Post objects
+
+```text
 
 ### 4. Validate Required Fields
 
 ```php
 array(
-  'key' => 'field_portfolio_image',
+  'key' => 'field*portfolio*image',
   'label' => 'Main Image',
   'name' => 'main_image',
   'type' => 'image',
   'required' => 1, // Enforce required
 ),
-```
+
+```text
 
 ### 5. Use Conditional Logic
 
 ```php
 array(
-  'key' => 'field_video_type',
+  'key' => 'field*video*type',
   'name' => 'video_type',
   'type' => 'select',
   'choices' => array(
@@ -1056,33 +1111,35 @@ array(
   ),
 ),
 array(
-  'key' => 'field_video_file',
+  'key' => 'field*video*file',
   'name' => 'video_file',
   'type' => 'file',
   'conditional_logic' => array(
     array(
       array(
-        'field' => 'field_video_type',
+        'field' => 'field*video*type',
         'operator' => '==',
         'value' => 'self',
       ),
     ),
   ),
 ),
-```
+
+```text
 
 ### 6. Sanitize Output
 
 ```php
 // Text fields
-echo esc_html(get_field('location'));
+echo esc*html(get*field('location'));
 
 // URLs
-echo esc_url(get_field('video_url'));
+echo esc*url(get*field('video_url'));
 
 // HTML content
-echo wp_kses_post(get_field('description'));
-```
+echo wp*kses*post(get_field('description'));
+
+```text
 
 ---
 
@@ -1091,19 +1148,28 @@ echo wp_kses_post(get_field('description'));
 This guide covered:
 
 1. ✅ Custom post type registration (Portfolio, Video, Podcast)
-2. ✅ ACF field group setup for all CPTs
-3. ✅ Template integration (PHP and REST API)
-4. ✅ Custom REST endpoints for complex queries
-5. ✅ Migration from mock data to WordPress
-6. ✅ Best practices for ACF development
+
+1. ✅ ACF field group setup for all CPTs
+
+1. ✅ Template integration (PHP and REST API)
+
+1. ✅ Custom REST endpoints for complex queries
+
+1. ✅ Migration from mock data to WordPress
+
+1. ✅ Best practices for ACF development
 
 **Next Steps:**
 
 1. Install ACF Pro plugin
-2. Register custom post types
-3. Create field groups via PHP
-4. Test REST API endpoints
-5. Migrate mock data
+
+1. Register custom post types
+
+1. Create field groups via PHP
+
+1. Test REST API endpoints
+
+1. Migrate mock data
 
 **Related Guides:**
 
@@ -1113,5 +1179,5 @@ This guide covered:
 
 ---
 
-**Last Updated:** March 12, 2026  
+**Last Updated:** March 12, 2026
 **Maintained By:** Development Team

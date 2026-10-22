@@ -1,12 +1,15 @@
 # Accordion Component
 
-**File:** `/components/ui/Accordion.tsx`  
-**Version:** 1.0.0  
+**File:** `/components/ui/Accordion.tsx`
+**Version:** 1.0.0
 **Category:** UI Component (Phase 3)
 
 ## Purpose
 
-Renders a list of expandable/collapsible sections with full keyboard navigation, ARIA attributes, and animated transitions. Supports single-item and multi-item open modes. Used for chapter previews, kit lists, episode previews, grading systems, and FAQ-style content.
+Renders a list of expandable/collapsible sections with full keyboard navigation,
+ARIA attributes, and animated transitions. Supports single-item and multi-item
+open modes. Used for chapter previews, kit lists, episode previews, grading
+systems, and FAQ-style content.
 
 ## Props
 
@@ -24,7 +27,8 @@ Renders a list of expandable/collapsible sections with full keyboard navigation,
   title: string;           // Trigger/header text
   content: React.ReactNode; // Content rendered when expanded
 }
-```
+
+```text
 
 ## Usage
 
@@ -45,7 +49,8 @@ var items = [
 ];
 
 <Accordion items={items} allowMultiple={false} defaultOpen={['art']} />
-```
+
+```text
 
 ## Building Items from Data (Bundler-Safe Pattern)
 
@@ -67,7 +72,8 @@ function buildAccordionItems() {
   }
   return items;
 }
-```
+
+```text
 
 ## Where Used
 
@@ -82,6 +88,7 @@ function buildAccordionItems() {
 Styles are defined in `/styles/blocks/accordion.css`, imported by the component.
 
 **BEM structure:**
+
 - `.accordion` — block
 - `.accordion__item` — individual section
 - `.accordion__trigger` — clickable header button

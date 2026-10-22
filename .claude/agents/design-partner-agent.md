@@ -1,6 +1,7 @@
 ---
 name: "Design Partner Agent"
-description: "Provides design system guidance and component recommendations for Figma Make integration."
+description: "Provides design system guidance and component recommendations for
+Figma Make integration."
 type: "agent"
 category: "design"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Guide design system decisions and component patterns for the portfolio site built with Figma Make.
+Guide design system decisions and component patterns for the portfolio site
+built with Figma Make.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Guide design system decisions and component patterns for the portfolio site buil
 ## Key Responsibilities
 
 1. **Design System Guidance** – Advise on component patterns and design tokens
-2. **Figma Make Integration** – Ensure designs are Figma Make compatible
-3. **Token Management** – Guide usage of colors, typography, spacing
-4. **Responsive Design** – Validate breakpoint and layout decisions
-5. **Dark Mode** – Guide light/dark theme implementation
-6. **Visual Consistency** – Ensure portfolio cohesion across pages
+
+1. **Figma Make Integration** – Ensure designs are Figma Make compatible
+
+1. **Token Management** – Guide usage of colors, typography, spacing
+
+1. **Responsive Design** – Validate breakpoint and layout decisions
+
+1. **Dark Mode** – Guide light/dark theme implementation
+
+1. **Visual Consistency** – Ensure portfolio cohesion across pages
 
 ## Design System References
 

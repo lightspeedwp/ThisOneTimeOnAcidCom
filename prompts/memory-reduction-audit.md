@@ -1,6 +1,8 @@
 # Memory reduction audit
 
-**Purpose:** Identify and resolve memory bloat across CSS, TSX components, data files, and SVGs by splitting large files, removing unused layers, flattening complexity, and applying DRY patterns.
+**Purpose:** Identify and resolve memory bloat across CSS, TSX components, data
+files, and SVGs by splitting large files, removing unused layers, flattening
+complexity, and applying DRY patterns.
 
 **Version:** 2.0.0
 **Created:** March 2, 2026
@@ -10,7 +12,8 @@
 
 ## Status of previous audit (v1.0.0)
 
-The v1.0.0 audit ran in March 2026 and completed ~79% of its tasks. The following splits have **already been completed** and should NOT be re-audited:
+The v1.0.0 audit ran in March 2026 and completed ~79% of its tasks. The
+following splits have **already been completed** and should NOT be re-audited:
 
 | Task | Status |
 |---|---|
@@ -26,11 +29,13 @@ The v1.0.0 audit ran in March 2026 and completed ~79% of its tasks. The followin
 
 ## Scope
 
-This audit covers **four areas** of memory reduction. Each area has specific steps, expected outputs, and references.
+This audit covers **four areas** of memory reduction. Each area has specific
+steps, expected outputs, and references.
 
 ### Area 1: Break up large files into smaller ones
 
-**Objective:** Split remaining oversized CSS and TSX files at logical boundaries.
+**Objective:** Split remaining oversized CSS and TSX files at logical
+boundaries.
 
 #### 1A. CSS files to review (by priority)
 
@@ -60,48 +65,69 @@ This audit covers **four areas** of memory reduction. Each area has specific ste
 | `/data/mock/color-palettes.ts` | Review size. If >400 lines, split into palette groups. |
 
 **Steps:**
+
 1. Read each file and identify logical split points (sections, features, page-specific overrides).
-2. Propose specific file splits with new filenames.
-3. Identify shared/reusable patterns that can be extracted (e.g., rich-text theming, dark/light accent patterns).
-4. Verify no circular dependencies would be introduced.
-5. After splitting, update all import paths in consuming TSX components.
+
+1. Propose specific file splits with new filenames.
+
+1. Identify shared/reusable patterns that can be extracted (e.g., rich-text theming, dark/light accent patterns).
+
+1. Verify no circular dependencies would be introduced.
+
+1. After splitting, update all import paths in consuming TSX components.
 
 ---
 
 ### Area 2: Clean up layers and components
 
-**Objective:** Remove dead code, unused imports, orphaned CSS classes, and redundant wrapper divs.
+**Objective:** Remove dead code, unused imports, orphaned CSS classes, and
+redundant wrapper divs.
 
 **Steps:**
+
 1. Scan for unused component imports across the codebase (components that are defined but never imported by any route or parent).
-2. Identify deeply nested JSX structures (3+ levels of wrapper divs with no semantic purpose or BEM class).
-3. Check for hidden/conditional elements that are never rendered (dead `if` branches, always-false conditions).
-4. Check for orphaned CSS classes (defined in CSS but never referenced in any TSX file).
-5. Review `/imports/` for unused markdown files and legacy attachments — `content-expansion-prompt.md` and `markdown-guide.md` may be orphaned.
-6. Count all CSS block files in `/styles/blocks/` and identify candidates for consolidation (files under 30 lines that could be merged into a parent file).
-7. Check for duplicate `@keyframes` definitions across CSS files (e.g., `subtitle-gradient-flow` appears in both `hidden-about.css` and should reference the centralised `animations.css`).
+
+1. Identify deeply nested JSX structures (3+ levels of wrapper divs with no semantic purpose or BEM class).
+
+1. Check for hidden/conditional elements that are never rendered (dead `if` branches, always-false conditions).
+
+1. Check for orphaned CSS classes (defined in CSS but never referenced in any TSX file).
+
+1. Review `/imports/` for unused markdown files and legacy attachments — `content-expansion-prompt.md` and `markdown-guide.md` may be orphaned.
+
+1. Count all CSS block files in `/styles/blocks/` and identify candidates for consolidation (files under 30 lines that could be merged into a parent file).
+
+1. Check for duplicate `@keyframes` definitions across CSS files (e.g., `subtitle-gradient-flow` appears in both `hidden-about.css` and should reference the centralised `animations.css`).
 
 ---
 
 ### Area 3: Flatten complex SVGs and vector shapes
 
-**Objective:** Reduce SVG complexity where possible to lower DOM node count and memory footprint.
+**Objective:** Reduce SVG complexity where possible to lower DOM node count and
+memory footprint.
 
 **Steps:**
+
 1. Review `/components/common/ColorfulIcons.tsx` — uses `dangerouslySetInnerHTML` for complex SVGs with gradients and animations. Count total path/shape elements. Identify any that could be simplified.
-2. Check the inline SVG noise overlay in `/components/common/RootLayout.tsx` — uses `feTurbulence`. Confirm it's minimal.
-3. Scan all TSX files for inline SVG elements (not Phosphor icon imports) and assess whether any can be replaced with simpler CSS effects or Phosphor icons.
-4. Check for duplicated SVG definitions (e.g., gradient `<defs>` that could be shared).
+
+1. Check the inline SVG noise overlay in `/components/common/RootLayout.tsx` — uses `feTurbulence`. Confirm it's minimal.
+
+1. Scan all TSX files for inline SVG elements (not Phosphor icon imports) and assess whether any can be replaced with simpler CSS effects or Phosphor icons.
+
+1. Check for duplicated SVG definitions (e.g., gradient `<defs>` that could be shared).
 
 ---
 
 ### Area 4: Trim component variants and apply DRY patterns
 
-**Objective:** Reduce duplication by extracting shared patterns into reusable components and shared CSS.
+**Objective:** Reduce duplication by extracting shared patterns into reusable
+components and shared CSS.
 
 #### 4A. Markdown CSS files (HIGHEST IMPACT)
 
-**Finding:** Seven markdown CSS files follow an **identical structural pattern** with only three variables differing:
+**Finding:** Seven markdown CSS files follow an **identical structural pattern**
+with only three variables differing:
+
 - CSS class prefix (`.blog-`, `.content-`, `.portfolio-`, `.video-`, `.podcast-`, `.event-`, `.faq-`)
 - Accent neon color (pink, cyan, green, purple, blue, orange, yellow)
 - Font family trio (sans, serif, mono)
@@ -116,38 +142,55 @@ This audit covers **four areas** of memory reduction. Each area has specific ste
 | `markdown-event.css` | `.event-` | neon-orange | Raleway / Libre Baskerville / Courier Prime |
 | `markdown-faq.css` | `.faq-` | neon-yellow | DM Sans / PT Serif / Anonymous Pro |
 
-**Proposed solution:** Create a shared `markdown-base.css` that uses CSS custom properties (`--md-accent`, `--md-accent-text`, `--md-font-sans`, `--md-font-serif`, `--md-font-mono`). Each content-type file then sets only its custom properties and any type-specific overrides. This could reduce total markdown CSS by ~60-70%.
+**Proposed solution:** Create a shared `markdown-base.css` that uses CSS custom
+properties (`--md-accent`, `--md-accent-text`, `--md-font-sans`,
+`--md-font-serif`, `--md-font-mono`). Each content-type file then sets only its
+custom properties and any type-specific overrides. This could reduce total
+markdown CSS by ~60-70%.
 
 #### 4B. Archive taxonomy pages
 
 **Finding:** Six taxonomy archive pages share near-identical structure:
+
 - `BlogCategoryPage.tsx` / `BlogTagPage.tsx`
 - `PortfolioCategoryPage.tsx` / `PortfolioTagPage.tsx`
 - `VideoCategoryPage.tsx` / `VideoTagPage.tsx`
 - `PodcastCategoryPage.tsx` / `PodcastTagPage.tsx`
 
-Each follows the same pattern: URL params, data filtering, SEO, breadcrumbs, ArchiveFilters, card grid, empty state, FAQ section.
+Each follows the same pattern: URL params, data filtering, SEO, breadcrumbs,
+ArchiveFilters, card grid, empty state, FAQ section.
 
-**Proposed solution:** Extract a shared `TaxonomyArchivePage` component that accepts configuration (content type, data source, card renderer, SEO builder). Each page becomes a thin wrapper that passes configuration.
+**Proposed solution:** Extract a shared `TaxonomyArchivePage` component that
+accepts configuration (content type, data source, card renderer, SEO builder).
+Each page becomes a thin wrapper that passes configuration.
 
 #### 4C. Container helper classes
 
 **Finding:** `globals.css` defines 8+ near-identical container classes:
+
 ```css
 .container-wide, .container-desktop-wide, .container-ultra-wide,
 .container-desktop-xl, .container-full-hd, .container-7xl,
 .container-6xl, .container-5xl, .container-xl, .container-lg,
 .container-4xl, .container-3xl
-```
-All share the same `margin: 0 auto; padding-left/right` pattern with only `max-width` differing.
 
-**Proposed solution:** Use a single `.container` class with a `--container-max-width` custom property, then define modifier classes (`.container--wide`, `.container--xl`, etc.) that only set the max-width.
+```text
+All share the same `margin: 0 auto; padding-left/right` pattern with only
+`max-width` differing.
+
+**Proposed solution:** Use a single `.container` class with a
+`--container-max-width` custom property, then define modifier classes
+(`.container--wide`, `.container--xl`, etc.) that only set the max-width.
 
 #### 4D. Portfolio rich-text duplication
 
-**Finding:** `.story-quote` in `portfolio-detail-page.css` (lines 552-599) is nearly identical to `.portfolio-rich-text blockquote` (lines 766-812). Same gradient border, same diamond accent, same dark mode styles.
+**Finding:** `.story-quote` in `portfolio-detail-page.css` (lines 552-599) is
+nearly identical to `.portfolio-rich-text blockquote` (lines 766-812). Same
+gradient border, same diamond accent, same dark mode styles.
 
-**Proposed solution:** Remove `.story-quote` and use `.portfolio-rich-text blockquote` consistently. If `.story-quote` is used outside rich-text contexts, alias it with the same styles via `@extend` or CSS nesting.
+**Proposed solution:** Remove `.story-quote` and use `.portfolio-rich-text
+blockquote` consistently. If `.story-quote` is used outside rich-text contexts,
+alias it with the same styles via `@extend` or CSS nesting.
 
 ---
 

@@ -1,58 +1,29 @@
-# CODEOWNERS file for ThisOneTimeOnAcidCom
-# Specifies default code owners for repository paths
-# GitHub will request reviews from these owners when PRs affect these paths
-#
-# Syntax: path/to/file @username @org/team
-# Matching: most specific rule wins; last matching rule in file takes precedence
-#
-# Reference: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# Code Ownership — ThisOneTimeOnAcidCom
+# This file defines code area ownership for branch protection and review requirements
+# See CONTRIBUTING.md for workflow details
 
-# Critical governance paths – require @ashley review
-.github/                                       @ashley
-.github/workflows/                             @ashley
-.github/specs/                                 @ashley
-.github/CODEOWNERS                             @ashley
+# Governance-critical files
+.github/                  @ashley
+scripts/                  @ashley
+AGENTS.md                 @ashley
+CHANGELOG.md              @ashley
+guidelines/               @ashley
 
-# Configuration and root documentation – require @ashley review
-CHANGELOG.md                                   @ashley
-AGENTS.md                                      @ashley
-CONTRIBUTING.md                                @ashley
-CLAUDE.md                                      @ashley
-.nvmrc                                         @ashley
-.specify/                                      @ashley
+# Component ownership (delegate as appropriate)
+src/app/components/       @ashley
+src/app/styles/           @ashley
+src/app/utils/            @ashley
 
-# Scripts and build configuration – require @ashley review
-scripts/                                       @ashley
-jest.config.js                                 @ashley
-vite.config.ts                                 @ashley
-postcss.config.mjs                             @ashley
+# Testing
+tests/                    @ashley
 
-# Guidelines – require @ashley review
-guidelines/                                    @ashley
+# Documentation
+docs/                     @ashley
 
-# Project structure documentation
-.gitignore                                     @ashley
-.gitattributes                                 @ashley
-README.md                                      @ashley
+# Configuration files
+package.json              @ashley
+.nvmrc                    @ashley
+vitest.config.ts          @ashley
 
-# Application source – open for review delegation
-src/                                           @ashley
-src/app/components/                            @ashley
-src/app/utils/                                 @ashley
-src/app/data/                                  @ashley
-src/styles/                                    @ashley
-public/                                        @ashley
-
-# Content – open for review delegation
-content/                                       @ashley
-
-# Dependencies and package management
-package.json                                   @ashley
-package-lock.json                              @ashley
-
-# Test configuration
-playwright.config.ts                           @ashley
-tests/                                         @ashley
-
-# Everything else falls back to this last rule
-*                                              @ashley
+# Default owners for any unspecified files
+*                         @ashley

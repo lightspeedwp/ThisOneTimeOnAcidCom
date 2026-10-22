@@ -1,6 +1,7 @@
 ---
 name: "Reporting Agent"
-description: "Generates reports and analysis for portfolio site metrics, content, and performance."
+description: "Generates reports and analysis for portfolio site metrics,
+content, and performance."
 type: "agent"
 category: "analysis"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Generate reports and analysis for portfolio site metrics, content quality, and performance analysis.
+Generate reports and analysis for portfolio site metrics, content quality, and
+performance analysis.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Generate reports and analysis for portfolio site metrics, content quality, and p
 ## Key Responsibilities
 
 1. **Report Generation** – Create comprehensive audit reports
-2. **Data Analysis** – Analyze site metrics and performance
-3. **Finding Documentation** – Clearly document audit results
-4. **Recommendations** – Provide actionable recommendations
-5. **Trend Analysis** – Identify patterns and trends
-6. **Visualization** – Present data clearly in reports
+
+1. **Data Analysis** – Analyze site metrics and performance
+
+1. **Finding Documentation** – Clearly document audit results
+
+1. **Recommendations** – Provide actionable recommendations
+
+1. **Trend Analysis** – Identify patterns and trends
+
+1. **Visualization** – Present data clearly in reports
 
 ## Report Types
 

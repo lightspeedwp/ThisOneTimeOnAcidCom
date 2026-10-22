@@ -24,15 +24,19 @@ Tasks to enable Phosphor usage without touching existing components:
 Group files by priority:
 
 **Tier 1 — Common components (highest impact, shared across all pages):**
+
 - Header.tsx, Footer.tsx, MobileMenu.tsx, ThemeToggle.tsx, ErrorBoundary.tsx, etc.
 
-**Tier 2 — UI components (shared building blocks):**
+## Tier 2 — UI components (shared building blocks)
+
 - Breadcrumbs.tsx, SearchInput.tsx, Pagination.tsx, ShareComponent.tsx, EnhancedLightbox.tsx, etc.
 
-**Tier 3 — Page components (individual pages):**
+## Tier 3 — Page components (individual pages)
+
 - Blog pages, portfolio pages, video pages, event pages, about pages, dev tools pages
 
 **Tier 4 — Cleanup:**
+
 - Remove `/lib/icons-set-a.tsx` through `icons-set-e.tsx`
 - Remove `/lib/icon-base.tsx`
 - Remove `/lib/icons.ts`
@@ -45,6 +49,7 @@ Group files by priority:
 ### Verification per batch
 
 After each tier:
+
 - `npm run type-check`
 - `npm run build`
 - Visual spot-check of affected pages (light + dark mode)
@@ -53,6 +58,7 @@ After each tier:
 ### Effort estimates
 
 For each task, estimate:
+
 - Lines of code changed
 - Number of files touched
 - Risk level (low/medium/high)

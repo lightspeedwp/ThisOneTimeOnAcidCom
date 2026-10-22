@@ -1,13 +1,15 @@
 # Footer Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
-Site-wide footer with contact form, social links, copyright information, and brand consistency.
+Site-wide footer with contact form, social links, copyright information, and
+brand consistency.
 
 ## Purpose
 
 Provide consistent footer across all pages with:
+
 - Social media links
 - Brand tagline and logo
 - Copyright and legal information
@@ -24,7 +26,8 @@ Provide consistent footer across all pages with:
 import { Footer } from './components/common/Footer';
 
 <Footer />
-```
+
+```text
 
 ---
 
@@ -33,18 +36,21 @@ import { Footer } from './components/common/Footer';
 ```typescript
 interface FooterProps {
   /**
+
    * Additional CSS classes
    * @default ""
    */
   className?: string;
-  
+
   /**
+
    * Current year for copyright
    * @default new Date().getFullYear()
    */
   year?: number;
 }
-```
+
+```text
 
 ---
 
@@ -56,24 +62,26 @@ interface FooterProps {
 import { SocialLinks } from './SocialLinks';
 
 <div className="flex justify-center gap-6">
-  <SocialLinks 
+  <SocialLinks
     iconSize={24}
     className="text-white hover:text-pink-300"
   />
 </div>
-```
+
+```text
 
 ### Brand Section
 
 ```tsx
 <div className="text-center lg:text-left">
   <Logo size="md" className="mb-fluid-md" />
-  
+
   <p className="text-fluid-base font-body text-gray-300 max-w-md">
     Makeup that shines with colour, energy, and connection.
   </p>
 </div>
-```
+
+```text
 
 ---
 
@@ -90,8 +98,8 @@ interface FooterProps {
   className?: string;
 }
 
-export function Footer({ 
-  className = '' 
+export function Footer({
+  className = ''
 }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
@@ -103,16 +111,16 @@ export function Footer({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-fluid-lg">
             {/* Brand Column */}
             <div className="text-center md:text-left">
-              <Logo 
-                size="md" 
+              <Logo
+                size="md"
                 className="text-white mb-fluid-md mx-auto md:mx-0"
               />
-              
+
               <p className="text-fluid-base font-body text-gray-300 mb-fluid-md">
                 Makeup that shines with colour, energy, and connection.
               </p>
-              
-              <SocialLinks 
+
+              <SocialLinks
                 iconSize={20}
                 className="justify-center md:justify-start"
               />
@@ -123,36 +131,40 @@ export function Footer({
               <h3 className="text-fluid-lg font-heading font-semibold mb-fluid-md">
                 Quick Links
               </h3>
-              
+
               <ul className="space-y-3">
                 <li>
-                  <a 
+                  <a
                     href="#home"
-                    className="text-fluid-base font-body text-gray-300 hover:text-pink-400 transition-colors"
+className="text-fluid-base font-body text-gray-300 hover:text-pink-400
+transition-colors"
                   >
                     Home
                   </a>
                 </li>
                 <li>
-                  <a 
+                  <a
                     href="#about"
-                    className="text-fluid-base font-body text-gray-300 hover:text-pink-400 transition-colors"
+className="text-fluid-base font-body text-gray-300 hover:text-pink-400
+transition-colors"
                   >
                     About
                   </a>
                 </li>
                 <li>
-                  <a 
+                  <a
                     href="#portfolio"
-                    className="text-fluid-base font-body text-gray-300 hover:text-pink-400 transition-colors"
+className="text-fluid-base font-body text-gray-300 hover:text-pink-400
+transition-colors"
                   >
                     Portfolio
                   </a>
                 </li>
                 <li>
-                  <a 
+                  <a
                     href="#blog"
-                    className="text-fluid-base font-body text-gray-300 hover:text-pink-400 transition-colors"
+className="text-fluid-base font-body text-gray-300 hover:text-pink-400
+transition-colors"
                   >
                     Blog
                   </a>
@@ -165,7 +177,7 @@ export function Footer({
               <h3 className="text-fluid-lg font-heading font-semibold mb-fluid-md">
                 Portfolio Categories
               </h3>
-              
+
               <ul className="space-y-3">
                 <li className="text-fluid-base font-body text-gray-300">
                   Festival Makeup
@@ -187,15 +199,16 @@ export function Footer({
               <h3 className="text-fluid-lg font-heading font-semibold mb-fluid-md">
                 Contact
               </h3>
-              
+
               <ul className="space-y-3">
                 <li className="text-fluid-base font-body text-gray-300">
                   Brisbane, Australia
                 </li>
                 <li>
-                  <a 
+                  <a
                     href="mailto:ashley@ashshaw.makeup"
-                    className="text-fluid-base font-body text-gray-300 hover:text-pink-400 transition-colors"
+className="text-fluid-base font-body text-gray-300 hover:text-pink-400
+transition-colors"
                   >
                     ashley@ashshaw.makeup
                   </a>
@@ -213,17 +226,19 @@ export function Footer({
             <p className="text-fluid-sm font-body text-gray-400 text-center md:text-left">
               © {currentYear} Ash Shaw. All rights reserved.
             </p>
-            
+
             <div className="flex gap-6">
-              <a 
+              <a
                 href="#privacy"
-                className="text-fluid-sm font-body text-gray-400 hover:text-pink-400 transition-colors"
+className="text-fluid-sm font-body text-gray-400 hover:text-pink-400
+transition-colors"
               >
                 Privacy Policy
               </a>
-              <a 
+              <a
                 href="#terms"
-                className="text-fluid-sm font-body text-gray-400 hover:text-pink-400 transition-colors"
+className="text-fluid-sm font-body text-gray-400 hover:text-pink-400
+transition-colors"
               >
                 Terms of Service
               </a>
@@ -234,7 +249,8 @@ export function Footer({
     </footer>
   );
 }
-```
+
+```text
 
 ---
 
@@ -246,15 +262,16 @@ export function Footer({
 <footer className="bg-gray-900 text-white py-fluid-lg px-6">
   <div className="max-w-7xl mx-auto text-center">
     <Logo size="sm" className="text-white mb-fluid-md mx-auto" />
-    
+
     <SocialLinks className="justify-center mb-fluid-md" />
-    
+
     <p className="text-fluid-sm font-body text-gray-400">
       © 2025 Ash Shaw. All rights reserved.
     </p>
   </div>
 </footer>
-```
+
+```text
 
 ### Two-Column Footer
 
@@ -269,7 +286,7 @@ export function Footer({
       </p>
       <SocialLinks />
     </div>
-    
+
     {/* Right: Navigation */}
     <div className="grid grid-cols-2 gap-fluid-md">
       <div>
@@ -283,7 +300,8 @@ export function Footer({
     </div>
   </div>
 </footer>
-```
+
+```text
 
 ---
 
@@ -297,26 +315,29 @@ export function Footer({
     <a href="#home">Home</a>
     <a href="#about">About</a>
   </nav>
-  
+
   <address>
     <a href="mailto:ashley@ashshaw.makeup">
       ashley@ashshaw.makeup
     </a>
   </address>
 </footer>
-```
+
+```text
 
 ### Keyboard Navigation
 
 ```tsx
 // All links must be keyboard accessible
-<a 
+<a
   href="#"
-  className="focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-50 rounded"
+className="focus:outline-none focus:ring-2 focus:ring-pink-400
+focus:ring-opacity-50 rounded"
 >
   Link Text
 </a>
-```
+
+```text
 
 ### Screen Reader Support
 
@@ -325,12 +346,13 @@ export function Footer({
   <nav aria-label="Footer navigation">
     {/* Navigation links */}
   </nav>
-  
+
   <section aria-label="Social media links">
     <SocialLinks />
   </section>
 </footer>
-```
+
+```text
 
 ---
 
@@ -344,24 +366,28 @@ export function Footer({
     <h3 className="text-fluid-xl font-heading font-semibold mb-fluid-md">
       Stay Updated
     </h3>
-    
+
     <p className="text-body-guideline font-body text-gray-300 mb-fluid-md">
       Get the latest makeup tips and portfolio updates
     </p>
-    
+
     <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
       <input
         type="email"
         placeholder="your@email.com"
-        className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400"
+className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20
+text-white placeholder:text-gray-400 focus:outline-none focus:ring-2
+focus:ring-pink-400"
       />
-      <button className="bg-gradient-pink-purple-blue text-white px-6 py-3 rounded-lg font-body font-medium hover:shadow-lg transition-shadow">
+<button className="bg-gradient-pink-purple-blue text-white px-6 py-3 rounded-lg
+font-body font-medium hover:shadow-lg transition-shadow">
         Subscribe
       </button>
     </form>
   </div>
 </div>
-```
+
+```text
 
 ### Footer with CTA
 
@@ -371,17 +397,20 @@ export function Footer({
     <h2 className="text-section-h2 font-heading font-bold mb-fluid-md">
       Ready to Collaborate?
     </h2>
-    
+
     <p className="text-fluid-lg font-body mb-fluid-lg">
       Reach out and let's create something beautiful together.
     </p>
-    
-    <button className="bg-white text-pink-600 px-button py-button rounded-lg font-body font-semibold text-button-fluid shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+
+<button className="bg-white text-pink-600 px-button py-button rounded-lg
+font-body font-semibold text-button-fluid shadow-xl hover:shadow-2xl
+hover:scale-105 transition-all">
       Get in Touch
     </button>
   </div>
 </section>
-```
+
+```text
 
 ---
 
@@ -394,16 +423,19 @@ export function Footer({
 <footer>
   <p>© 2025 Ash Shaw</p>
 </footer>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Clear contact options
 <footer>
   <SocialLinks />
   <a href="mailto:ashley@ashshaw.makeup">Email</a>
 </footer>
-```
+
+```text
 
 ### ❌ Mistake 2: Low Contrast Text
 
@@ -412,15 +444,18 @@ export function Footer({
 <footer className="bg-gray-900">
   <p className="text-gray-600">Copyright info</p>
 </footer>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Sufficient contrast
 <footer className="bg-gray-900">
   <p className="text-gray-300">Copyright info</p>
 </footer>
-```
+
+```text
 
 ### ❌ Mistake 3: No Responsive Layout
 
@@ -431,9 +466,11 @@ export function Footer({
     {/* Columns */}
   </div>
 </footer>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Responsive grid
 <footer>
@@ -441,7 +478,8 @@ export function Footer({
     {/* Columns */}
   </div>
 </footer>
-```
+
+```text
 
 ---
 
@@ -453,53 +491,55 @@ export function Footer({
 flowchart TD
     A[Footer Component] --> C[Quick Links Section]
     A --> D[Copyright Bar]
-    
+
     C --> M[Navigation Links]
     C --> N[Categories List]
     C --> O[Contact Info]
     C --> P[Social Links]
-    
+
     M --> Q[Home, About, Portfolio, Blog]
     N --> R[Festival, Editorial, Events, Nails]
     O --> S[Location + Email]
     P --> T[Instagram, Facebook, TikTok, LinkedIn]
-    
+
     D --> U[Copyright Text]
     D --> V[Legal Links]
     D --> W[Social Icons]
-    
+
     V --> X[Privacy Policy, Terms of Service]
-    
+
     style A fill:#e1f5ff,stroke:#01c3cc,stroke-width:3px
-```
+
+```text
 
 ### Mermaid State Diagram (Footer Interaction States)
 
 ```mermaid
 stateDiagram-v2
     [*] --> Idle: Page loads
-    
+
     Idle --> Visible: User scrolls to footer
-    
+
     Visible --> LinkHover: User hovers link
     Visible --> SocialClick: User clicks social icon
-    
+
     LinkHover --> Visible: Mouse out
-    
+
     SocialClick --> ExternalSite: Opens in new tab
     ExternalSite --> Visible: User returns
-    
+
     note right of Visible
         Footer fully rendered
         All sections displayed
     end note
-    
+
     note right of SocialClick
         Opens social media
         target=\"_blank\"
         rel=\"noopener\"
     end note
-```
+
+```text
 
 ---
 
@@ -514,12 +554,12 @@ stateDiagram-v2
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[overview-components.md](../overview-components.md)** - Component system  
-- **[FILE_STRUCTURE.md](../FILE_STRUCTURE.md)** - File organization
+- **[overview-components.md](../overview-components.md)** - Component system
+- **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
 - **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

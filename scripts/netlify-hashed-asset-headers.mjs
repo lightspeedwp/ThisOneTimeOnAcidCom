@@ -14,10 +14,19 @@ export const IMMUTABLE_CACHE_CONTROL = 'public, max-age=31536000, immutable'
 // Vite's default output names are `assets/[name]-[hash].[ext]` with an 8-character base64url hash
 const HASHED_ASSET_PATTERN = /^assets\/[^/]+-[A-Za-z0-9_-]{8}\.[A-Za-z0-9]+$/
 
+/**
+ * Test whether a file name is a Vite content-hashed asset.
+ * Hashed assets follow the pattern `assets/name-{8-char-hash}.ext` and receive immutable caching.
+ */
 export function isHashedAssetFileName(fileName) {
   return HASHED_ASSET_PATTERN.test(fileName)
 }
 
+/**
+ * Build a Netlify `_headers` file with immutable cache rules for hashed assets.
+ * Sorts rules alphabetically for consistency; uses exact paths to avoid caching
+ * unhashed files or fallback 404s with immutable directives.
+ */
 export function buildHashedAssetHeaders(fileNames) {
   const hashed = []
   for (let i = 0; i < fileNames.length; i++) {
@@ -35,6 +44,11 @@ export function buildHashedAssetHeaders(fileNames) {
   return lines.join('\n') + '\n'
 }
 
+/**
+ * Vite plugin that generates Netlify `_headers` file with immutable cache rules.
+ * Emits to `dist/_headers` during build; only processes bundle files (excludes `public/` copies).
+ * Requires the `netlify.toml` to omit wildcard Cache-Control rules so these exact paths win.
+ */
 export function netlifyHashedAssetHeaders() {
   return {
     name: 'netlify-hashed-asset-headers',

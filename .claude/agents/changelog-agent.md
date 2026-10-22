@@ -1,6 +1,7 @@
 ---
 name: "Changelog Agent"
-description: "Manages changelog entries using Keep a Changelog format with validation and formatting for ThisOneTimeOnAcidCom."
+description: "Manages changelog entries using Keep a Changelog format with
+validation and formatting for ThisOneTimeOnAcidCom."
 type: "agent"
 category: "release-management"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Manage CHANGELOG.md entries following Keep a Changelog 1.1.0 standard with validation and automatic formatting.
+Manage CHANGELOG.md entries following Keep a Changelog 1.1.0 standard with
+validation and automatic formatting.
 
 ## Scope for This Repository
 
@@ -24,10 +26,14 @@ Manage CHANGELOG.md entries following Keep a Changelog 1.1.0 standard with valid
 ## Key Responsibilities
 
 1. **Entry Validation** – Validate changelog entries meet Keep a Changelog format
-2. **Structure Validation** – Ensure CHANGELOG.md stays well-formed
-3. **Formatting** – Enforce consistent em-dashes, capitalization, line length
-4. **Release Processing** – Move [Unreleased] entries to versioned releases
-5. **Category Management** – Maintain categories: Added, Changed, Fixed, Removed, Security
+
+1. **Structure Validation** – Ensure CHANGELOG.md stays well-formed
+
+1. **Formatting** – Enforce consistent em-dashes, capitalization, line length
+
+1. **Release Processing** – Move [Unreleased] entries to versioned releases
+
+1. **Category Management** – Maintain categories: Added, Changed, Fixed, Removed, Security
 
 ## Categories for ThisOneTimeOnAcidCom
 

@@ -1,6 +1,7 @@
 # PWA Icons Directory
 
-This directory contains all Progressive Web App icons for the Ash Shaw Makeup Portfolio.
+This directory contains all Progressive Web App icons for the Ash Shaw Makeup
+Portfolio.
 
 ## 📋 Required Icons
 
@@ -20,12 +21,14 @@ The following icon sizes are required for full PWA support:
 ## 🎨 Icon Design Guidelines
 
 ### Brand Colors
+
 - Background: `#0F0F0F` (Atomic Black)
 - Primary: `#BE00FE` (Neon Purple)
 - Secondary: `#FF0055` (Neon Pink)
 - Accent: `#0099FF` (Neon Blue)
 
 ### Design Requirements
+
 - **Logo:** Ash Shaw logo/brand mark centered
 - **Padding:** 10% safe zone around edges
 - **Background:** Solid atomic black (#0F0F0F)
@@ -33,9 +36,11 @@ The following icon sizes are required for full PWA support:
 - **Color Space:** sRGB
 
 ### Maskable Icons
-Icons with sizes 192x192 and 512x512 should be "maskable" - meaning they have extra padding to account for device-specific icon shapes.
 
-**Safe zone:** 40% of icon size  
+Icons with sizes 192x192 and 512x512 should be "maskable" - meaning they have
+extra padding to account for device-specific icon shapes.
+
+**Safe zone:** 40% of icon size
 **Example:** For 512x512, logo should be centered in 307x307 area
 
 ## 🛠️ How to Generate Icons
@@ -45,26 +50,34 @@ Icons with sizes 192x192 and 512x512 should be "maskable" - meaning they have ex
 Using [PWA Asset Generator](https://github.com/onderceylan/pwa-asset-generator):
 
 ```bash
+
 # Install globally
+
 npm install -g pwa-asset-generator
 
 # Generate all icons from your logo
+
 pwa-asset-generator logo.svg ./public/pwa-icons \
   --icon-only \
   --background "#0F0F0F" \
   --padding "10%" \
   --opaque false \
   --manifest ./public/manifest.json
-```
+
+```text
 
 ### Option 2: Manual Creation
 
 1. Create base icon at 512x512
-2. Export at all required sizes
-3. Ensure consistent padding
-4. Save as optimized PNGs
+
+1. Export at all required sizes
+
+1. Ensure consistent padding
+
+1. Save as optimized PNGs
 
 **Tools:**
+
 - Adobe Illustrator / Photoshop
 - Figma / Sketch
 - GIMP (free)
@@ -75,13 +88,16 @@ pwa-asset-generator logo.svg ./public/pwa-icons \
 Use [RealFaviconGenerator](https://realfavicongenerator.net/):
 
 1. Upload your logo
-2. Customize colors and padding
-3. Download generated icon pack
-4. Move files to this directory
+
+1. Customize colors and padding
+
+1. Download generated icon pack
+
+1. Move files to this directory
 
 ## 🖼️ Example Icon Structure
 
-```
+```text
 logo.svg (source file)
   ↓
 icon-72x72.png    (72x72 px, 10% padding)
@@ -92,7 +108,8 @@ icon-152x152.png  (152x152 px, 10% padding)
 icon-192x192.png  (192x192 px, 40% safe zone - maskable)
 icon-384x384.png  (384x384 px, 10% padding)
 icon-512x512.png  (512x512 px, 40% safe zone - maskable)
-```
+
+```text
 
 ## ✅ Icon Checklist
 
@@ -112,28 +129,42 @@ Before deployment, verify:
 ## 🧪 Testing
 
 ### Test in DevTools
+
 1. Open Chrome DevTools
-2. Go to Application > Manifest
-3. Check "Icons" section
-4. Verify all icons load
-5. Click "Add to home screen" to test
+
+1. Go to Application > Manifest
+
+1. Check "Icons" section
+
+1. Verify all icons load
+
+1. Click "Add to home screen" to test
 
 ### Test on Devices
 
 **iOS (Safari):**
+
 1. Open site in Safari
-2. Tap Share → Add to Home Screen
-3. Verify icon appears correctly
+
+1. Tap Share → Add to Home Screen
+
+1. Verify icon appears correctly
 
 **Android (Chrome):**
-1. Open site in Chrome
-2. Tap menu → Add to home screen
-3. Verify icon appears correctly
 
-**Desktop (Chrome/Edge):**
+1. Open site in Chrome
+
+1. Tap menu → Add to home screen
+
+1. Verify icon appears correctly
+
+## Desktop (Chrome/Edge)
+
 1. Look for install icon in address bar
-2. Click "Install"
-3. Verify app icon in taskbar/dock
+
+1. Click "Install"
+
+1. Verify app icon in taskbar/dock
 
 ## 🎯 Icon Purpose by Size
 
@@ -151,20 +182,24 @@ Before deployment, verify:
 ## 📏 Dimensions Reference
 
 ### Standard Icons (10% padding)
-```
+
+```text
 72x72:   Logo area = 58x58 (center)
 96x96:   Logo area = 77x77 (center)
 128x128: Logo area = 102x102 (center)
 144x144: Logo area = 115x115 (center)
 152x152: Logo area = 122x122 (center)
 384x384: Logo area = 307x307 (center)
-```
+
+```text
 
 ### Maskable Icons (40% safe zone)
-```
+
+```text
 192x192: Safe area = 115x115 (center)
 512x512: Safe area = 307x307 (center)
-```
+
+```text
 
 ## 🔗 Related Files
 
@@ -182,7 +217,8 @@ Before deployment, verify:
 
 ---
 
-**Need Help?**
+## Need Help
+
 - [PWA Icon Requirements](https://web.dev/add-manifest/)
 - [Maskable Icons](https://web.dev/maskable-icon/)
 - [Icon Generator Tools](https://www.pwabuilder.com/)

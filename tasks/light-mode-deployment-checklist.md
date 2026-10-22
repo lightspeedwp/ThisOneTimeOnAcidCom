@@ -3,6 +3,7 @@
 **Created:** March 11, 2026
 **Project:** This One Time on Acid – Book Site
 **Related Reports:**
+
 - [WCAG Contrast Compliance Report](/reports/contrast-audit/wcag-contrast-compliance-report.md)
 - [Implementation Summary](/reports/contrast-audit/implementation-summary.md)
 - [Theme Toggle Usage Guide](/docs/theme-toggle-usage-guide.md)
@@ -70,6 +71,7 @@
 - [x] Deploy updated `/styles/globals.css`
 
 **Verification:**
+
 - [x] Light mode styles load correctly
 - [x] Dark mode styles still work
 - [x] Ebook reader contrast improved
@@ -82,6 +84,7 @@
 - [x] Deploy updated `/components/pages/about/EbookPage.tsx`
 
 **Verification:**
+
 - [x] Theme toggle appears in header
 - [x] Theme toggle is clickable
 - [x] Theme toggle keyboard accessible
@@ -95,6 +98,7 @@
 - [x] Deploy `/tasks/light-mode-deployment-checklist.md` (this file)
 
 **Verification:**
+
 - [x] All documentation files accessible
 - [x] Links between documents work
 - [x] Markdown renders correctly
@@ -127,6 +131,7 @@
 ### Ebook Reader Testing
 
 #### Dark Mode
+
 - [ ] Navigate to ebook reader
 - [ ] Verify text is clearly readable
 - [ ] Check body text contrast (should be 9.5:1)
@@ -136,6 +141,7 @@
 - [ ] Test in low light (evening)
 
 #### Light Mode
+
 - [ ] Switch to light mode
 - [ ] Navigate to ebook reader
 - [ ] Verify text is clearly readable
@@ -148,6 +154,7 @@
 ### Mobile Testing
 
 #### iOS (iPhone 13 Pro or similar)
+
 - [ ] Open site in Safari
 - [ ] Test theme toggle
 - [ ] Test ebook reader (dark mode)
@@ -158,6 +165,7 @@
 - [ ] Test with display brightness at 50%
 
 #### Android (Samsung Galaxy S21 or similar)
+
 - [ ] Open site in Chrome
 - [ ] Test theme toggle
 - [ ] Test ebook reader (dark mode)
@@ -168,6 +176,7 @@
 - [ ] Test with display brightness at 50%
 
 #### Tablet (iPad Air or similar)
+
 - [ ] Open site in Safari
 - [ ] Test theme toggle
 - [ ] Test ebook reader (dark mode)
@@ -179,6 +188,7 @@
 ### Cross-Browser Testing
 
 #### Chrome/Edge (Chromium)
+
 - [ ] Theme toggle works
 - [ ] Light mode renders correctly
 - [ ] Dark mode renders correctly
@@ -187,6 +197,7 @@
 - [ ] localStorage persists
 
 #### Firefox
+
 - [ ] Theme toggle works
 - [ ] Light mode renders correctly
 - [ ] Dark mode renders correctly
@@ -195,6 +206,7 @@
 - [ ] localStorage persists
 
 #### Safari (macOS)
+
 - [ ] Theme toggle works
 - [ ] Light mode renders correctly
 - [ ] Dark mode renders correctly
@@ -205,6 +217,7 @@
 ### Accessibility Testing
 
 #### Keyboard Navigation
+
 - [ ] Tab to theme toggle
 - [ ] Press Enter (theme switches)
 - [ ] Tab to theme toggle again
@@ -212,6 +225,7 @@
 - [ ] Focus indicator clearly visible
 
 #### Screen Reader (VoiceOver/NVDA/JAWS)
+
 - [ ] Theme toggle announces current state
 - [ ] Theme toggle announces purpose
 - [ ] State change announced after activation
@@ -219,6 +233,7 @@
 - [ ] No silent buttons or controls
 
 #### Color Blind Simulation
+
 - [ ] Protanopia (red-blind): Content readable
 - [ ] Deuteranopia (green-blind): Content readable
 - [ ] Tritanopia (blue-blind): Content readable
@@ -227,17 +242,20 @@
 ### Performance Testing
 
 #### Bundle Size
+
 - [ ] Check total CSS bundle size
 - [ ] Verify < 1% increase from baseline
 - [ ] No duplicate styles loaded
 
 #### Load Time
+
 - [ ] Measure First Contentful Paint (FCP)
 - [ ] Measure Largest Contentful Paint (LCP)
 - [ ] Verify no regression from baseline
 - [ ] CSS loads in parallel
 
 #### Runtime Performance
+
 - [ ] Theme switch completes in < 300ms
 - [ ] No layout shift during switch
 - [ ] No forced reflow/repaint
@@ -250,34 +268,54 @@
 ### If Critical Issues Found
 
 #### CSS Issues
+
 1. Remove imports from `/styles/globals.css`:
+
    ```css
    /* @import "./themes/light.css"; */
    /* @import "./themes/dark.css"; */
-   ```
-2. Revert to previous version
-3. Investigate and fix issues
-4. Re-deploy after testing
+
+```text
+
+1. Revert to previous version
+
+1. Investigate and fix issues
+
+1. Re-deploy after testing
 
 #### Component Issues
+
 1. Remove ThemeToggleES5 from Header:
+
    ```typescript
    // React.createElement(ThemeToggleES5, null),
-   ```
-2. Comment out component import:
+
+```text
+
+1. Comment out component import:
+
    ```typescript
    // import { ThemeToggleES5 } from "./ThemeToggleES5";
-   ```
-3. Revert to previous version
-4. Investigate and fix issues
-5. Re-deploy after testing
+
+```text
+
+1. Revert to previous version
+
+1. Investigate and fix issues
+
+1. Re-deploy after testing
 
 #### Bundler Errors
+
 1. Check console for error details
-2. Identify forbidden syntax (arrow functions, let/const, etc.)
-3. Convert to ES5 closure syntax
-4. Re-test bundler
-5. Re-deploy
+
+1. Identify forbidden syntax (arrow functions, let/const, etc.)
+
+1. Convert to ES5 closure syntax
+
+1. Re-test bundler
+
+1. Re-deploy
 
 ---
 
@@ -286,6 +324,7 @@
 All items must be checked before deployment is considered complete:
 
 ### Critical Success Criteria
+
 - [x] Theme toggle visible and functional
 - [x] Light mode loads without errors
 - [x] Dark mode still works correctly
@@ -295,6 +334,7 @@ All items must be checked before deployment is considered complete:
 - [x] WCAG 2.2 AA compliance maintained (100%)
 
 ### User Experience Criteria
+
 - [x] Theme preference persists across sessions
 - [x] System preference detected on first visit
 - [x] Smooth transitions between themes
@@ -303,6 +343,7 @@ All items must be checked before deployment is considered complete:
 - [x] Mobile readability excellent (9/10+)
 
 ### Technical Criteria
+
 - [x] ES5 bundler compliance maintained
 - [x] BEM CSS architecture maintained
 - [x] No Tailwind utility classes used
@@ -321,14 +362,17 @@ All testing completed without critical issues.
 ### Future Enhancements (Non-Blocking)
 
 1. **Mobile Header Integration**
+
    - Theme toggle currently in desktop header only
    - Future: Add to mobile menu
 
-2. **Auto Theme Switching**
+1. **Auto Theme Switching**
+
    - Future: Switch based on time of day
    - Future: Follow sunrise/sunset
 
-3. **Custom Themes**
+1. **Custom Themes**
+
    - Future: User-selectable accent colors
    - Future: Multiple theme presets
 
@@ -372,18 +416,22 @@ All testing completed without critical issues.
 ### Troubleshooting Guide
 
 **Issue:** Theme doesn't persist
+
 - **Check:** localStorage enabled
 - **Fix:** Verify `localStorage.setItem()` calls
 
 **Issue:** Ebook text still hard to read
+
 - **Check:** Enhanced contrast CSS loaded
 - **Fix:** Verify import in EbookPage.tsx
 
 **Issue:** Theme toggle not visible
+
 - **Check:** Header actions CSS
 - **Fix:** Verify display properties
 
 **Issue:** Bundler errors
+
 - **Check:** ES5 syntax compliance
 - **Fix:** Convert modern syntax to closures
 
@@ -418,25 +466,36 @@ All testing completed without critical issues.
 
 ## Post-Deployment Fix (March 11, 2026)
 
-**Issue:** Theme toggle not working - only light mode visible  
-**Root Cause:** Incomplete dark theme CSS + incorrect default state  
+**Issue:** Theme toggle not working - only light mode visible
+**Root Cause:** Incomplete dark theme CSS + incorrect default state
 **Fix Applied:**
-1. Rewrote `/styles/themes/dark.css` with comprehensive dark theme (400+ lines)
-2. Fixed ThemeToggleES5 default state from `false` to `true` (dark mode default)
-3. Disabled SVG grain texture (data URIs not supported by bundler)
-4. Site now defaults to original dark mode design with full neon aesthetics
 
-**Additional Issue:** Build error - data URI in CSS  
-**Root Cause:** Figma Make bundler doesn't support data URIs in CSS `url()` functions  
+1. Rewrote `/styles/themes/dark.css` with comprehensive dark theme (400+ lines)
+
+1. Fixed ThemeToggleES5 default state from `false` to `true` (dark mode default)
+
+1. Disabled SVG grain texture (data URIs not supported by bundler)
+
+1. Site now defaults to original dark mode design with full neon aesthetics
+
+**Additional Issue:** Build error - data URI in CSS
+**Root Cause:** Figma Make bundler doesn't support data URIs in CSS `url()`
+functions
 **Fix Applied:**
+
 1. Commented out data URI in `/styles/globals.css` (global grain texture)
-2. Commented out data URI in `/styles/blocks/sitemap-page.css` (sitemap grain texture)
-3. Updated `/guidelines/Guidelines.md` with new bundler constraint
-4. Build now compiles successfully
+
+1. Commented out data URI in `/styles/blocks/sitemap-page.css` (sitemap grain texture)
+
+1. Updated `/guidelines/Guidelines.md` with new bundler constraint
+
+1. Build now compiles successfully
 
 **Fix Reports:**
+
 - `/reports/contrast-audit/theme-toggle-fix-march-11-2026.md`
 - `/reports/contrast-audit/bundler-error-fix-march-11-2026.md`
 - `/reports/contrast-audit/march-11-2026-fixes-summary.md` (comprehensive overview)
 
-**Status:** ✅ All issues resolved - both modes working correctly, build compiles successfully
+**Status:** ✅ All issues resolved - both modes working correctly, build compiles
+successfully

@@ -1,15 +1,18 @@
 # Interactions Hub Specification
 
-**Version:** 1.0.0  
-**Date:** March 7, 2026  
-**Status:** Planning  
+**Version:** 1.0.0
+**Date:** March 7, 2026
+**Status:** Planning
 **Category:** Dev Tools Enhancement
 
 ---
 
 ## 🎯 Overview
 
-The **Interactions Hub** is a comprehensive documentation and demonstration system for all animations, transitions, and interactive patterns used throughout the Ash Shaw Makeup Portfolio. It will serve as both a developer reference and a live demonstration playground for the site's 26+ animation system.
+The **Interactions Hub** is a comprehensive documentation and demonstration
+system for all animations, transitions, and interactive patterns used throughout
+the Ash Shaw Makeup Portfolio. It will serve as both a developer reference and a
+live demonstration playground for the site's 26+ animation system.
 
 ---
 
@@ -38,10 +41,11 @@ The **Interactions Hub** is a comprehensive documentation and demonstration syst
 
 ### Main Hub Page
 
-**Route:** `/dev-tools/interactions`  
+**Route:** `/dev-tools/interactions`
 **Component:** `InteractionsHubPage.tsx`
 
 **Content:**
+
 - Hero section with animated demo showcase
 - Stats bar (26 animations, X categories, accessibility features)
 - Grid of interaction categories with live previews
@@ -53,6 +57,7 @@ The **Interactions Hub** is a comprehensive documentation and demonstration syst
 #### 1. Neon Effects (`/dev-tools/interactions/neon-effects`)
 
 **Animations:**
+
 - Neon Pulse (green, pink, blue, cyan, purple, orange, yellow, red)
 - Neon Glow Background (Hyperpop gradient shift)
 - Neon Border Pulse
@@ -60,21 +65,25 @@ The **Interactions Hub** is a comprehensive documentation and demonstration syst
 - Neon Shadow Expansion
 
 **Demo:**
+
 - Live buttons with each neon color variant
 - Adjustable pulse speed slider
 - Toggle animation on/off
 - Copy CSS code button
 
-**Implementation Guide:**
+## Implementation Guide
+
 ```css
 .animate-neon-pulse-pink {
   --glow-color: var(--wp--preset--color--neon-pink);
   animation: neonPulse 2s infinite alternate;
   will-change: box-shadow;
 }
-```
+
+```text
 
 **Used On Site:**
+
 - Homepage hero CTA buttons
 - Portfolio featured cards
 - Dev tools category badges
@@ -85,6 +94,7 @@ The **Interactions Hub** is a comprehensive documentation and demonstration syst
 #### 2. Scroll Animations (`/dev-tools/interactions/scroll-animations`)
 
 **Animations:**
+
 - Float animation (scroll down arrow)
 - Bounce animation (notification badges)
 - Fade-in on scroll (content reveals)
@@ -92,11 +102,13 @@ The **Interactions Hub** is a comprehensive documentation and demonstration syst
 - Parallax scrolling (hero backgrounds)
 
 **Demo:**
+
 - Scrollable container with triggered animations
 - Intersection Observer visualization
 - Threshold adjustment controls
 
-**Implementation Guide:**
+## Implementation Guide (1)
+
 ```tsx
 // Using Intersection Observer
 useEffect(() => {
@@ -107,12 +119,14 @@ useEffect(() => {
       }
     });
   }, { threshold: 0.2 });
-  
+
   observer.observe(elementRef.current);
 }, []);
-```
+
+```text
 
 **Used On Site:**
+
 - Blog post card reveals
 - Portfolio grid items
 - About page timeline entries
@@ -123,6 +137,7 @@ useEffect(() => {
 #### 3. Hover Effects (`/dev-tools/interactions/hover-effects`)
 
 **Animations:**
+
 - Card lift (transform: translateY)
 - Image zoom (scale transform)
 - Neon border highlight
@@ -131,20 +146,24 @@ useEffect(() => {
 - Icon rotation
 
 **Demo:**
+
 - Grid of cards with different hover styles
 - Before/after comparison
 - Transition duration slider
 
-**Implementation Guide:**
+## Implementation Guide (2)
+
 ```css
 .card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-```
+
+```text
 
 **Used On Site:**
+
 - Portfolio cards
 - Blog post cards
 - Video thumbnails
@@ -156,6 +175,7 @@ useEffect(() => {
 #### 4. Focus States (`/dev-tools/interactions/focus-states`)
 
 **Patterns:**
+
 - Neon pink focus rings (3px solid + glow)
 - Keyboard navigation indicators
 - Skip links (visible on focus)
@@ -163,20 +183,24 @@ useEffect(() => {
 - Button focus states
 
 **Demo:**
+
 - Interactive keyboard navigation demo
 - Tab through elements showcase
 - Focus trap demonstration
 
-**Implementation Guide:**
+## Implementation Guide (3)
+
 ```css
 .btn:focus-visible {
   outline: 3px solid var(--wp--preset--color--neon-pink);
   outline-offset: 4px;
   box-shadow: 0 0 0 6px rgba(255, 0, 127, 0.2);
 }
-```
+
+```text
 
 **Used On Site:**
+
 - All buttons site-wide
 - Navigation links
 - Form inputs
@@ -188,6 +212,7 @@ useEffect(() => {
 #### 5. Loading States (`/dev-tools/interactions/loading-states`)
 
 **Animations:**
+
 - Spin animation (loading spinners)
 - Skeleton screens
 - Progressive image loading
@@ -195,11 +220,13 @@ useEffect(() => {
 - Pulse loading indicators
 
 **Demo:**
+
 - Loading button states
 - Image lazy loading simulation
 - Skeleton screen examples
 
-**Implementation Guide:**
+## Implementation Guide (4)
+
 ```css
 @keyframes spin {
   from { transform: rotate(0deg); }
@@ -210,9 +237,11 @@ useEffect(() => {
   animation: spin 1s linear infinite;
   will-change: transform;
 }
-```
+
+```text
 
 **Used On Site:**
+
 - Form submission buttons
 - Image placeholders
 - Lazy-loaded content
@@ -223,6 +252,7 @@ useEffect(() => {
 #### 6. Microinteractions (`/dev-tools/interactions/microinteractions`)
 
 **Animations:**
+
 - Icon bounce on click
 - Tooltip fade-in
 - Badge pulse (notification dot)
@@ -230,11 +260,13 @@ useEffect(() => {
 - Toggle switch slide
 
 **Demo:**
+
 - Interactive button grid
 - Click to trigger animations
 - Speed/easing adjustment
 
-**Implementation Guide:**
+## Implementation Guide (5)
+
 ```css
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
@@ -244,9 +276,11 @@ useEffect(() => {
 .icon-bounce {
   animation: bounce 0.6s ease;
 }
-```
+
+```text
 
 **Used On Site:**
+
 - Social media icons
 - Notification badges
 - Form validation checkmarks
@@ -258,6 +292,7 @@ useEffect(() => {
 #### 7. Page Transitions (`/dev-tools/interactions/page-transitions`)
 
 **Patterns:**
+
 - Fade in/out between routes
 - Slide transitions
 - Modal open/close animations
@@ -265,11 +300,13 @@ useEffect(() => {
 - Toast notifications
 
 **Demo:**
+
 - Route transition simulator
 - Modal animation playground
 - Toast notification triggers
 
-**Implementation Guide:**
+## Implementation Guide (6)
+
 ```tsx
 // Using Motion (Framer Motion)
 import { motion } from 'motion/react';
@@ -282,9 +319,11 @@ import { motion } from 'motion/react';
 >
   Page content
 </motion.div>
-```
+
+```text
 
 **Used On Site:**
+
 - Page route changes
 - Modal dialogs
 - Mobile menu
@@ -296,17 +335,20 @@ import { motion } from 'motion/react';
 #### 8. Gradient Animations (`/dev-tools/interactions/gradient-animations`)
 
 **Animations:**
+
 - Hyperpop gradient shift (4-color animated gradient)
 - Gradient text animation
 - Border gradient rotation
 - Background gradient pulse
 
 **Demo:**
+
 - Live gradient editor
 - Color stop adjustment
 - Animation speed controls
 
-**Implementation Guide:**
+## Implementation Guide (7)
+
 ```css
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
@@ -319,9 +361,11 @@ import { motion } from 'motion/react';
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
-```
+
+```text
 
 **Used On Site:**
+
 - Hero section backgrounds
 - Featured portfolio cards
 - Dev tools headers
@@ -334,33 +378,38 @@ import { motion } from 'motion/react';
 Each interaction page follows this standard structure:
 
 ### 1. Hero Section
+
 - Page title (sentence case)
 - Brief description (1-2 sentences)
 - Stats bar (X animations, accessibility status)
 - Live demo preview (hero-specific animation)
 
 ### 2. Animation Grid
+
 - Card-based layout (2-4 columns)
 - Each card shows:
-  - Animation name
-  - Live demo
-  - Play/pause toggle
-  - Speed adjustment
-  - Code snippet (collapsed)
+- Animation name
+- Live demo
+- Play/pause toggle
+- Speed adjustment
+- Code snippet (collapsed)
 
 ### 3. Implementation Section
+
 - CSS code blocks with syntax highlighting
 - React/TypeScript examples where applicable
 - Copy-to-clipboard functionality
 - Accessibility notes
 
 ### 4. Usage Gallery
+
 - "Where it's used on site" section
 - Screenshots with hover states
 - Links to live pages
 - Component references
 
 ### 5. Accessibility Considerations
+
 - Reduced motion variants
 - Keyboard navigation impact
 - Screen reader announcements
@@ -373,30 +422,42 @@ Each interaction page follows this standard structure:
 ### New Components to Create
 
 1. **`InteractionsHubPage.tsx`** — Main hub landing page
-2. **`NeonEffectsPage.tsx`** — Neon animations showcase
-3. **`ScrollAnimationsPage.tsx`** — Scroll-triggered effects
-4. **`HoverEffectsPage.tsx`** — Hover state patterns
-5. **`FocusStatesPage.tsx`** — Keyboard focus patterns
-6. **`LoadingStatesPage.tsx`** — Loading animations
-7. **`MicrointeractionsPage.tsx`** — Small interactions
-8. **`PageTransitionsPage.tsx`** — Route transitions
-9. **`GradientAnimationsPage.tsx`** — Gradient effects
+
+1. **`NeonEffectsPage.tsx`** — Neon animations showcase
+
+1. **`ScrollAnimationsPage.tsx`** — Scroll-triggered effects
+
+1. **`HoverEffectsPage.tsx`** — Hover state patterns
+
+1. **`FocusStatesPage.tsx`** — Keyboard focus patterns
+
+1. **`LoadingStatesPage.tsx`** — Loading animations
+
+1. **`MicrointeractionsPage.tsx`** — Small interactions
+
+1. **`PageTransitionsPage.tsx`** — Route transitions
+
+1. **`GradientAnimationsPage.tsx`** — Gradient effects
 
 ### Shared Components
 
 1. **`AnimationDemo.tsx`** — Reusable demo container
+
    - Props: `animation`, `title`, `description`, `code`, `usedOn`
    - Features: Play/pause, speed control, code view toggle
-   
-2. **`CodeBlock.tsx`** — Syntax-highlighted code display
+
+1. **`CodeBlock.tsx`** — Syntax-highlighted code display
+
    - Props: `code`, `language`, `copyable`
    - Features: Copy button, line numbers, theme
-   
-3. **`InteractionCard.tsx`** — Category card for hub page
+
+1. **`InteractionCard.tsx`** — Category card for hub page
+
    - Props: `title`, `description`, `icon`, `count`, `link`, `preview`
    - Features: Hover animation, badge count, neon accent
-   
-4. **`UsageGallery.tsx`** — Shows where animation is used
+
+1. **`UsageGallery.tsx`** — Shows where animation is used
+
    - Props: `screenshots[]`, `links[]`, `components[]`
    - Features: Image preview, component links
 
@@ -412,7 +473,8 @@ Each interaction page follows this standard structure:
 export const interactionsHubContent = {
   hero: {
     title: 'Interactions hub',
-    description: 'Explore all 26 animations and interactive patterns used throughout the portfolio.',
+description: 'Explore all 26 animations and interactive patterns used throughout
+the portfolio.',
     stats: {
       totalAnimations: 26,
       categories: 8,
@@ -432,9 +494,10 @@ export const interactionsHubContent = {
     // ... 7 more categories
   ],
 };
-```
 
-2. **`/data/mock/ui/animations-catalog.ts`** — All animations with metadata
+```text
+
+1. **`/data/mock/ui/animations-catalog.ts`** — All animations with metadata
 
 ```typescript
 export const animationsCatalog = [
@@ -448,8 +511,10 @@ export const animationsCatalog = [
     reducedMotion: 'paused',
     cssClass: '.animate-neon-pulse-pink',
     usedOn: [
-      { page: 'Homepage', component: 'HeroCTA', screenshot: '/screenshots/hero-cta.png' },
-      { page: 'Portfolio', component: 'FeaturedCard', screenshot: '/screenshots/portfolio-featured.png' },
+{ page: 'Homepage', component: 'HeroCTA', screenshot:
+'/screenshots/hero-cta.png' },
+{ page: 'Portfolio', component: 'FeaturedCard', screenshot:
+'/screenshots/portfolio-featured.png' },
     ],
     code: {
       css: `@keyframes neonPulse { ... }`,
@@ -458,13 +523,15 @@ export const animationsCatalog = [
   },
   // ... 25 more animations
 ];
-```
+
+```text
 
 ---
 
 ## 🚀 Implementation Phases
 
 ### Phase 1: Hub + Neon Effects (Week 1)
+
 - [ ] Create `InteractionsHubPage` component
 - [ ] Create `NeonEffectsPage` component
 - [ ] Build `AnimationDemo` shared component
@@ -474,6 +541,7 @@ export const animationsCatalog = [
 - [ ] Add to dev tools footer navigation
 
 ### Phase 2: Scroll + Hover Effects (Week 2)
+
 - [ ] Create `ScrollAnimationsPage`
 - [ ] Create `HoverEffectsPage`
 - [ ] Document all scroll-triggered patterns
@@ -481,6 +549,7 @@ export const animationsCatalog = [
 - [ ] Create usage galleries
 
 ### Phase 3: Focus + Loading States (Week 3)
+
 - [ ] Create `FocusStatesPage`
 - [ ] Create `LoadingStatesPage`
 - [ ] Document WCAG 2.1 AA focus patterns
@@ -488,6 +557,7 @@ export const animationsCatalog = [
 - [ ] Add keyboard navigation demos
 
 ### Phase 4: Micro + Transitions + Gradients (Week 4)
+
 - [ ] Create `MicrointeractionsPage`
 - [ ] Create `PageTransitionsPage`
 - [ ] Create `GradientAnimationsPage`
@@ -499,18 +569,21 @@ export const animationsCatalog = [
 ## 🎯 Success Criteria
 
 ### Developer Experience
+
 - ✅ All 26 animations documented with live demos
 - ✅ Copy-paste code snippets for every pattern
 - ✅ Clear usage examples with screenshots
 - ✅ Accessibility guidance for each interaction
 
 ### Design System Consistency
+
 - ✅ Standardized animation naming (kebab-case)
 - ✅ Consistent duration/easing values
 - ✅ Reduced motion variants for all animations
 - ✅ Performance guidelines (will-change, GPU acceleration)
 
 ### User Experience
+
 - ✅ Interactive demos (play/pause, speed adjustment)
 - ✅ Mobile-responsive interaction cards
 - ✅ Search/filter by category or name
@@ -545,7 +618,8 @@ export const animationsCatalog = [
     // ... 7 more interaction pages
   ],
 },
-```
+
+```text
 
 ### Sitemap Updates
 
@@ -560,19 +634,22 @@ Add new section to `/components/pages/SitemapPage.tsx`:
     {/* ... 7 more */}
   </ul>
 </div>
-```
+
+```text
 
 ---
 
 ## 📈 Expected Impact
 
 ### For Developers
+
 - **50% faster** animation implementation (copy-paste snippets)
 - **100% coverage** of all site interactions documented
 - **Zero guesswork** on where animations are used
 - **Accessibility built-in** (reduced motion variants)
 
 ### For Design System
+
 - **Single source of truth** for all animations
 - **Easier maintenance** (visual regression testing)
 - **Consistent patterns** across all pages
@@ -583,12 +660,18 @@ Add new section to `/components/pages/SitemapPage.tsx`:
 ## 🎬 Next Steps
 
 1. **Review this specification** — Confirm scope and structure
-2. **Create Phase 1 task list** — Hub + Neon Effects
-3. **Design hero layout pattern** — Left-aligned with WebGL graphics
-4. **Implement InteractionsHubPage** — Main landing page
-5. **Build NeonEffectsPage** — First category page
-6. **Iterate and expand** — Add remaining 7 categories
+
+1. **Create Phase 1 task list** — Hub + Neon Effects
+
+1. **Design hero layout pattern** — Left-aligned with WebGL graphics
+
+1. **Implement InteractionsHubPage** — Main landing page
+
+1. **Build NeonEffectsPage** — First category page
+
+1. **Iterate and expand** — Add remaining 7 categories
 
 ---
 
-**Ready to build the most comprehensive animation documentation system for the portfolio!** 🚀
+**Ready to build the most comprehensive animation documentation system for the
+portfolio!** 🚀

@@ -1,6 +1,7 @@
 ---
 name: "Playwright Agent"
-description: "Executes browser automation, reproduces issues, collects evidence for portfolio site testing and bug validation."
+description: "Executes browser automation, reproduces issues, collects evidence
+for portfolio site testing and bug validation."
 type: "agent"
 category: "quality"
 enabled: true
@@ -11,7 +12,9 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Execute browser-based testing, reproduce reported issues, capture evidence (screenshots, console logs, network traces), and provide reproducible validation for portfolio site quality and bug assessment.
+Execute browser-based testing, reproduce reported issues, capture evidence
+(screenshots, console logs, network traces), and provide reproducible validation
+for portfolio site quality and bug assessment.
 
 ## Scope for This Repository
 
@@ -25,11 +28,16 @@ Execute browser-based testing, reproduce reported issues, capture evidence (scre
 ## Key Responsibilities
 
 1. **Test Execution** – Run Playwright E2E test suite and interpret results
-2. **Issue Reproduction** – Navigate to specific URLs, reproduce reported bugs, collect evidence
-3. **Evidence Capture** – Screenshot, console logs, network traces, browser environment data
-4. **Responsive Validation** – Test across defined viewport sizes (mobile, tablet, desktop)
-5. **Asset Verification** – Confirm CSS, JS, images load without 404 errors
-6. **Handoff Preparation** – Document findings clearly for Testing Agent or BugHerd Agent
+
+1. **Issue Reproduction** – Navigate to specific URLs, reproduce reported bugs, collect evidence
+
+1. **Evidence Capture** – Screenshot, console logs, network traces, browser environment data
+
+1. **Responsive Validation** – Test across defined viewport sizes (mobile, tablet, desktop)
+
+1. **Asset Verification** – Confirm CSS, JS, images load without 404 errors
+
+1. **Handoff Preparation** – Document findings clearly for Testing Agent or BugHerd Agent
 
 ## Operational Mode
 
@@ -42,6 +50,7 @@ Execute browser-based testing, reproduce reported issues, capture evidence (scre
 ## Current Capabilities
 
 ✅ **E2E Test Execution**
+
 - Command: `npm run test:e2e` or `npm run test:e2e:debug`
 - Covers: 7 journal routes + fallback, responsive design, asset loading
 - Browsers: Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari
@@ -49,12 +58,14 @@ Execute browser-based testing, reproduce reported issues, capture evidence (scre
 - Screenshots on failure, video on failure, trace on first retry
 
 ✅ **Reproduction Workflow**
+
 - Navigate to URL with specific viewport
 - Interact with UI (click, scroll, type) per reported steps
 - Capture browser state (screenshot, console, network)
 - Record observed vs. expected behaviour
 
 ✅ **Browser Evidence**
+
 - Screenshots (PNG format)
 - Console output (errors, warnings, info)
 - Network requests/responses
@@ -73,6 +84,7 @@ Execute browser-based testing, reproduce reported issues, capture evidence (scre
 ## Handoff to Testing Agent
 
 Pass structured findings:
+
 - **Report reference** (BugHerd task ID, URL)
 - **Environment** (browser, OS, viewport, base URL)
 - **Reproduction steps** (exact clicks, scrolls, timings)
@@ -83,7 +95,9 @@ Pass structured findings:
 - **Notes** (environment limitations, timing issues, partial reproduction)
 
 Example handoff structure:
-```
+
+```text
+
 # BugHerd Task #1: Responsive Menu Scaling
 
 **Reported environment:** Chrome 154, MacOS, Viewport 1280x716
@@ -94,7 +108,8 @@ Example handoff structure:
 **Evidence:** [screenshot], console: no errors
 **Result:** Reproduced ✅
 **Environment tested:** Mobile Chrome (Pixel 5, 393x873)
-```
+
+```text
 
 ---
 

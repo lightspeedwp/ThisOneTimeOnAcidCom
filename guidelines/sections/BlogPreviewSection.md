@@ -1,13 +1,15 @@
 # BlogPreviewSection
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 ---
 
 ## Purpose
 
-The BlogPreviewSection is a **content teaser area** that displays recent blog posts. It combines:
+The BlogPreviewSection is a **content teaser area** that displays recent blog
+posts. It combines:
+
 - Latest blog post cards (typically 3)
 - Featured images and excerpts
 - Publication metadata (date, reading time, categories)
@@ -27,7 +29,7 @@ The BlogPreviewSection is a **content teaser area** that displays recent blog po
       <h2>{/* Section title */}</h2>
       <p>{/* Section description */}</p>
     </div>
-    
+
     {/* Blog Grid */}
     <div className="[grid-layout]">
       {posts.slice(0, 3).map(post => (
@@ -38,7 +40,7 @@ The BlogPreviewSection is a **content teaser area** that displays recent blog po
         />
       ))}
     </div>
-    
+
     {/* View All Button */}
     <div className="[button-container]">
       <button onClick={() => setCurrentPage('blog')}>
@@ -47,38 +49,46 @@ The BlogPreviewSection is a **content teaser area** that displays recent blog po
     </div>
   </div>
 </section>
-```
+
+```text
 
 ---
 
 ## Container Styles
 
 ### Section Container
+
 ```tsx
 className="
   bg-white                                         // Clean white background
   py-section                                       // clamp(3rem, 6vw + 1rem, 8rem)
   px-fluid-md                                      // clamp(1rem, 0.6rem + 2vw, 2rem)
 "
-```
+
+```text
 
 ### Inner Container
+
 ```tsx
 className="
   max-w-7xl                                        // 1280px max-width
   mx-auto                                          // Center horizontally
 "
-```
+
+```text
 
 ### Section Header
+
 ```tsx
 className="
   text-center                                      // Center alignment
   mb-fluid-2xl                                     // clamp(3rem, 1.5rem + 7.5vw, 6rem)
 "
-```
+
+```text
 
 ### Grid Layout
+
 ```tsx
 className="
   grid                                             // CSS Grid
@@ -88,7 +98,8 @@ className="
   gap-fluid-lg                                     // clamp(1.5rem, 1rem + 2.5vw, 3rem)
   mb-fluid-xl                                      // Margin below grid
 "
-```
+
+```text
 
 ---
 
@@ -97,29 +108,34 @@ className="
 ### 1. Section Header
 
 #### Section Title (H2)
+
 ```tsx
 <h2 className="
   text-section-h2                                  // clamp(1.5rem, 4vw, 3rem)
   font-heading                                     // Playfair Display
-  font-bold 
+  font-bold
   text-gray-800
   mb-fluid-md
 ">
   From the Blog
 </h2>
-```
+
+```text
 
 #### Section Description
+
 ```tsx
 <p className="
   text-body-guideline                              // clamp(1rem, 1.5vw, 1.25rem)
-  text-gray-600 
+  text-gray-600
   max-w-2xl                                        // 672px max-width
   mx-auto
 ">
-  Insights, stories, and tips from my journey in makeup artistry, festivals, and creative exploration.
+Insights, stories, and tips from my journey in makeup artistry, festivals, and
+creative exploration.
 </p>
-```
+
+```text
 
 ---
 
@@ -128,6 +144,7 @@ className="
 Each card displays a blog post preview:
 
 #### Card Container
+
 ```tsx
 <article className="
   bg-white                                         // White background
@@ -140,9 +157,11 @@ Each card displays a blog post preview:
   flex flex-col                                    // Vertical layout
   h-full                                           // Full height for grid
 ">
-```
+
+```text
 
 #### Featured Image
+
 ```tsx
 <div className="
   relative                                         // Position context
@@ -155,31 +174,35 @@ Each card displays a blog post preview:
     src={post.featuredImage?.url}
     alt={post.featuredImage?.alt || post.title}
     className="
-      w-full h-full 
+      w-full h-full
       object-cover                                 // Cover container
       group-hover:scale-105                        // Zoom on hover
       transition-transform duration-500            // Smooth zoom
     "
   />
 </div>
-```
+
+```text
 
 #### Card Content
+
 ```tsx
 <div className="
   p-fluid-md                                       // clamp(1rem, 0.8rem + 1vw, 1.5rem)
-  flex flex-col 
+  flex flex-col
   flex-1                                           // Fill remaining space
   gap-fluid-sm                                     // Space between elements
 ">
-```
+
+```text
 
 #### Metadata Row
+
 ```tsx
 <div className="
-  flex flex-wrap items-center 
-  gap-3 
-  text-sm 
+  flex flex-wrap items-center
+  gap-3
+  text-sm
   text-gray-500
 ">
   {/* Publication Date */}
@@ -189,70 +212,78 @@ Each card displays a blog post preview:
       {formatDate(post.publishedDate)}
     </time>
   </div>
-  
+
   {/* Reading Time */}
   <div className="flex items-center gap-1">
     <Clock className="w-4 h-4" />
     <span>{post.readingTime} min read</span>
   </div>
 </div>
-```
+
+```text
 
 #### Category Badge
+
 ```tsx
 {post.category && (
   <span className="
-    inline-flex items-center gap-1 
-    px-3 py-1 
+    inline-flex items-center gap-1
+    px-3 py-1
     bg-gradient-pink-purple-blue                   // Brand gradient
-    text-white 
-    text-xs 
-    font-medium 
+    text-white
+    text-xs
+    font-medium
     rounded-full
   ">
     <Tag className="w-3 h-3" />
     {post.category}
   </span>
 )}
-```
+
+```text
 
 #### Post Title
+
 ```tsx
 <h3 className="
   text-xl                                          // 20px
   font-heading                                     // Playfair Display
-  font-bold 
-  text-gray-800 
+  font-bold
+  text-gray-800
   group-hover:text-gradient-pink-purple-blue       // Gradient on hover
   transition-colors duration-300
   line-clamp-2                                     // Limit to 2 lines
 ">
   {post.title}
 </h3>
-```
+
+```text
 
 #### Post Excerpt
+
 ```tsx
 <p className="
   text-base                                        // 16px
-  font-body 
-  text-gray-600 
-  leading-relaxed 
+  font-body
+  text-gray-600
+  leading-relaxed
   line-clamp-3                                     // Limit to 3 lines
   flex-1                                           // Fill space
 ">
   {post.excerpt}
 </p>
-```
+
+```text
 
 #### Read More Button
+
 ```tsx
 <ReadMoreButton
   onClick={() => setCurrentPage('blogpost', post.slug)}
   className="
-    inline-flex items-center gap-2 
-    text-gradient-pink-purple-blue 
-    font-medium 
+    inline-flex items-center gap-2
+    text-gradient-pink-purple-blue
+    font-medium
     group-hover:gap-3                              // Expand gap on hover
     transition-all duration-300
   "
@@ -260,21 +291,25 @@ Each card displays a blog post preview:
   Read More
   <ArrowRight className="w-4 h-4" />
 </ReadMoreButton>
-```
+
+```text
 
 ---
 
 ### 3. View All Button
 
 #### Button Container
+
 ```tsx
 <div className="
   text-center                                      // Center button
   mt-fluid-xl                                      // Top margin
 ">
-```
+
+```text
 
 #### CTA Button
+
 ```tsx
 <button
   onClick={() => setCurrentPage('blog')}
@@ -282,23 +317,24 @@ Each card displays a blog post preview:
     w-full sm:w-auto                               // Full width mobile
     bg-gradient-pink-purple-blue                   // Brand gradient
     hover:from-purple-700 hover:to-pink-700        // Hover gradient shift
-    text-white 
+    text-white
     px-button                                      // clamp(1.5rem, 1rem + 2.5vw, 3rem)
     py-button                                      // clamp(0.75rem, 0.5rem + 1.25vw, 1.5rem)
-    font-body 
-    font-medium 
+    font-body
+    font-medium
     text-button-fluid                              // clamp(1rem, 0.9rem + 0.5vw, 1.25rem)
-    transition-all duration-300 
-    rounded-lg 
-    shadow-lg hover:shadow-xl 
-    transform hover:scale-105 
-    focus:outline-none 
+    transition-all duration-300
+    rounded-lg
+    shadow-lg hover:shadow-xl
+    transform hover:scale-105
+    focus:outline-none
     focus:ring-4 focus:ring-pink-200
   "
 >
   View All Posts
 </button>
-```
+
+```text
 
 ---
 
@@ -314,7 +350,8 @@ const { posts, loading, error } = useBlogPosts();
 
 // Get first 3 posts
 const latestPosts = posts.slice(0, 3);
-```
+
+```text
 
 ### Blog Post Structure
 
@@ -338,25 +375,29 @@ interface BlogPost {
     image?: string;
   };
 }
-```
+
+```text
 
 ---
 
 ## Responsive Breakpoints
 
 ### Mobile (< 768px)
+
 - Single column grid (`grid-cols-1`)
 - Full-width cards
 - Stack vertically
 - Full-width CTA button
 
 ### Tablet (768px - 1024px)
+
 - Two column grid (`md:grid-cols-2`)
 - Cards maintain aspect ratio
 - Third card spans full width (if 3 posts)
 - Auto-width CTA button
 
 ### Desktop (1024px+)
+
 - Three column grid (`lg:grid-cols-3`)
 - All cards same width
 - Maximum container width (1280px)
@@ -382,17 +423,20 @@ const handleViewAll = () => {
   setCurrentPage('blog');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
-```
+
+```text
 
 ### 2. Card Hover Effects
 
 Cards have interactive states:
+
 ```css
 hover:shadow-2xl             /* Enhanced shadow */
 group-hover:scale-105        /* Image zoom */
 group-hover:text-gradient    /* Title gradient */
 group-hover:gap-3            /* Button gap expand */
-```
+
+```text
 
 ### 3. Loading States
 
@@ -416,13 +460,15 @@ Handle loading and error states:
     <p className="text-gray-600">No blog posts available yet.</p>
   </div>
 )}
-```
+
+```text
 
 ---
 
 ## Accessibility
 
 ### Semantic HTML
+
 ```tsx
 <section aria-labelledby="blog-preview-heading">
   <h2 id="blog-preview-heading">From the Blog</h2>
@@ -433,9 +479,11 @@ Handle loading and error states:
     </article>
   </div>
 </section>
-```
+
+```text
 
 ### ARIA Labels
+
 ```tsx
 // Read more button
 <button
@@ -452,9 +500,11 @@ Handle loading and error states:
 >
   View All Posts
 </button>
-```
+
+```text
 
 ### Keyboard Navigation
+
 - Tab through cards
 - Enter/Space to activate buttons
 - Logical tab order maintained
@@ -478,74 +528,93 @@ Handle loading and error states:
 ## Color Palette
 
 ### Background
+
 ```css
 bg-white                           /* Section background */
-```
+
+```text
 
 ### Text Colors
+
 ```css
 text-gray-800                      /* Titles */
 text-gray-600                      /* Excerpts */
 text-gray-500                      /* Metadata */
 text-white                         /* Button & badge text */
-```
+
+```text
 
 ### Card Styling
+
 ```css
 bg-white                           /* Card background */
 border-gray-200                    /* Card border */
-```
+
+```text
 
 ### Accents
+
 ```css
 bg-gradient-pink-purple-blue       /* Category badge & button */
 text-gradient-pink-purple-blue     /* Title on hover */
-```
+
+```text
 
 ---
 
 ## Best Practices
 
 ### 1. Limit Posts
+
 ```tsx
 // ✅ Show only latest 3 posts
 const latestPosts = posts.slice(0, 3);
-```
+
+```text
 
 ### 2. Handle Empty States
+
 ```tsx
 // ✅ Provide feedback for all states
 {loading && <LoadingState />}
 {error && <ErrorState />}
 {!loading && posts.length === 0 && <EmptyState />}
-```
+
+```text
 
 ### 3. Responsive Images
+
 ```tsx
 // ✅ Use aspect-ratio utilities
 <div className="aspect-video">
   <ImageWithFallback ... />
 </div>
-```
+
+```text
 
 ### 4. Consistent Spacing
+
 ```tsx
 // ✅ Use fluid spacing tokens
 py-section                         // Section padding
 gap-fluid-lg                       // Grid gap
 p-fluid-md                         // Card padding
-```
+
+```text
 
 ---
 
 ## WordPress Comparison
 
 ### WordPress `core/latest-posts` Block
+
 ```html
 <!-- wp:latest-posts {"postsToShow":3} /-->
-```
+
+```text
 
 ### Ash Shaw BlogPreviewSection
+
 ```tsx
 <section className="bg-white py-section px-fluid-md">
   <div className="max-w-7xl mx-auto">
@@ -562,7 +631,8 @@ p-fluid-md                         // Card padding
     </div>
   </div>
 </section>
-```
+
+```text
 
 ---
 
@@ -576,5 +646,5 @@ p-fluid-md                         // Card padding
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

@@ -1,23 +1,32 @@
 # Interaction Modes Responsive Guidelines
 
-**Version:** 1.0.0  
-**Last Updated:** January 2025  
+**Version:** 1.0.0
+**Last Updated:** January 2025
 **Part of:** Ash Shaw Makeup Portfolio Design System
 
 ## Overview
 
-This document defines how user interactions adapt across different devices and input methods (touch, mouse, keyboard), ensuring optimal user experience for mobile, tablet, and desktop users.
+This document defines how user interactions adapt across different devices and
+input methods (touch, mouse, keyboard), ensuring optimal user experience for
+mobile, tablet, and desktop users.
 
 ## Table of Contents
 
 1. [Input Method Detection](#input-method-detection)
-2. [Touch Interactions](#touch-interactions)
-3. [Mouse Interactions](#mouse-interactions)
-4. [Keyboard Interactions](#keyboard-interactions)
-5. [Hover States](#hover-states)
-6. [Focus Management](#focus-management)
-7. [Gesture Support](#gesture-support)
-8. [Implementation Patterns](#implementation-patterns)
+
+1. [Touch Interactions](#touch-interactions)
+
+1. [Mouse Interactions](#mouse-interactions)
+
+1. [Keyboard Interactions](#keyboard-interactions)
+
+1. [Hover States](#hover-states)
+
+1. [Focus Management](#focus-management)
+
+1. [Gesture Support](#gesture-support)
+
+1. [Implementation Patterns](#implementation-patterns)
 
 ---
 
@@ -52,7 +61,8 @@ This document defines how user interactions adapt across different devices and i
     padding: 1rem;
   }
 }
-```
+
+```text
 
 ### JavaScript Input Detection
 
@@ -73,21 +83,23 @@ const hasHoverCapability = () => {
 
 // Use in React component
 export function AdaptiveButton() {
-  const [inputMethod, setInputMethod] = React.useState<'touch' | 'mouse'>('mouse');
-  
+const [inputMethod, setInputMethod] = React.useState<'touch' |
+'mouse'>('mouse');
+
   React.useEffect(() => {
     setInputMethod(isTouchDevice() ? 'touch' : 'mouse');
   }, []);
-  
+
   return (
-    <button 
+    <button
       className={inputMethod === 'touch' ? 'touch-optimized' : 'mouse-optimized'}
     >
       Click me
     </button>
   );
 }
-```
+
+```text
 
 ---
 
@@ -95,7 +107,8 @@ export function AdaptiveButton() {
 
 ### Touch Target Sizing
 
-**Minimum Requirements:**
+## Minimum Requirements
+
 - **WCAG 2.1:** 44x44px minimum
 - **Recommended:** 48x48px for enhanced usability
 - **iOS Guidelines:** 44x44pt (88x88px on Retina)
@@ -120,23 +133,25 @@ export function AdaptiveButton() {
 .touch-group {
   gap: 0.75rem;               /* 12px minimum */
 }
-```
+
+```text
 
 ### Touch-Specific Interactions
 
 ```tsx
 /**
+
  * Touch-optimized button component
  */
-export function TouchButton({ 
-  children, 
-  onClick 
-}: { 
-  children: React.ReactNode; 
+export function TouchButton({
+  children,
+  onClick
+}: {
+  children: React.ReactNode;
   onClick: () => void;
 }) {
   const [isPressed, setIsPressed] = React.useState(false);
-  
+
   return (
     <button
       className={`
@@ -156,36 +171,39 @@ export function TouchButton({
     </button>
   );
 }
-```
+
+```text
 
 ### Touch Gestures
 
 ```typescript
 /**
+
  * Swipe gesture detection for mobile galleries
  */
-export function useSwipeGesture(onSwipeLeft?: () => void, onSwipeRight?: () => void) {
+export function useSwipeGesture(onSwipeLeft?: () => void, onSwipeRight?: () =>
+void) {
   const [touchStart, setTouchStart] = React.useState(0);
   const [touchEnd, setTouchEnd] = React.useState(0);
-  
+
   const minSwipeDistance = 50; // Minimum distance for swipe
-  
+
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(0); // Reset
     setTouchStart(e.targetTouches[0].clientX);
   };
-  
+
   const onTouchMove = (e: React.TouchEvent) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
-  
+
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-    
+
     if (isLeftSwipe && onSwipeLeft) {
       onSwipeLeft();
     }
@@ -193,7 +211,7 @@ export function useSwipeGesture(onSwipeLeft?: () => void, onSwipeRight?: () => v
       onSwipeRight();
     }
   };
-  
+
   return {
     onTouchStart,
     onTouchMove,
@@ -204,19 +222,21 @@ export function useSwipeGesture(onSwipeLeft?: () => void, onSwipeRight?: () => v
 // Usage in Gallery component
 export function MobileGallery({ images }: { images: string[] }) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  
+
   const swipeHandlers = useSwipeGesture(
-    () => setCurrentIndex((prev) => Math.min(prev + 1, images.length - 1)), // Swipe left
+() => setCurrentIndex((prev) => Math.min(prev + 1, images.length - 1)), // Swipe
+left
     () => setCurrentIndex((prev) => Math.max(prev - 1, 0))                  // Swipe right
   );
-  
+
   return (
     <div {...swipeHandlers} className="relative overflow-hidden">
       <img src={images[currentIndex]} alt={`Slide ${currentIndex + 1}`} />
     </div>
   );
 }
-```
+
+```text
 
 ### Touch Feedback
 
@@ -228,7 +248,7 @@ export function MobileGallery({ images }: { images: string[] }) {
     transform: scale(0.95);
     opacity: 0.9;
   }
-  
+
   /* Disable hover effects on touch devices */
   @media (hover: none) {
     &:hover {
@@ -242,7 +262,7 @@ export function MobileGallery({ images }: { images: string[] }) {
 .touch-ripple {
   position: relative;
   overflow: hidden;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -255,13 +275,14 @@ export function MobileGallery({ images }: { images: string[] }) {
     transform: translate(-50%, -50%);
     transition: width 0.6s, height 0.6s;
   }
-  
+
   &:active::after {
     width: 300px;
     height: 300px;
   }
 }
-```
+
+```text
 
 ---
 
@@ -275,7 +296,7 @@ export function MobileGallery({ images }: { images: string[] }) {
 /* Standard hover effect */
 .hover-effect {
   transition: all 0.3s ease;
-  
+
   @media (hover: hover) {
     &:hover {
       transform: translateY(-2px);
@@ -287,7 +308,7 @@ export function MobileGallery({ images }: { images: string[] }) {
 /* Card hover with scale */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
+
   @media (hover: hover) {
     &:hover {
       transform: scale(1.02);
@@ -300,7 +321,7 @@ export function MobileGallery({ images }: { images: string[] }) {
 .button-hover {
   background: linear-gradient(135deg, #ff6b9d 0%, #c239b3 50%, #4facfe 100%);
   transition: filter 0.3s ease, transform 0.2s ease;
-  
+
   @media (hover: hover) {
     &:hover {
       filter: brightness(1.1);
@@ -308,7 +329,8 @@ export function MobileGallery({ images }: { images: string[] }) {
     }
   }
 }
-```
+
+```text
 
 ### Cursor Styles
 
@@ -320,7 +342,7 @@ export function MobileGallery({ images }: { images: string[] }) {
 
 .cursor-grab {
   cursor: grab;
-  
+
   &:active {
     cursor: grabbing;
   }
@@ -328,7 +350,7 @@ export function MobileGallery({ images }: { images: string[] }) {
 
 .cursor-zoom {
   cursor: zoom-in;
-  
+
   &.zoomed {
     cursor: zoom-out;
   }
@@ -338,18 +360,20 @@ export function MobileGallery({ images }: { images: string[] }) {
 .cursor-custom {
   cursor: url('/cursors/custom.svg'), pointer;
 }
-```
+
+```text
 
 ### Mouse-Specific Components
 
 ```tsx
 /**
+
  * Image hover with zoom preview (desktop only)
  */
 export function ImageHoverZoom({ src, alt }: { src: string; alt: string }) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
-  
+
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePosition({
@@ -357,7 +381,7 @@ export function ImageHoverZoom({ src, alt }: { src: string; alt: string }) {
       y: ((e.clientY - rect.top) / rect.height) * 100
     });
   };
-  
+
   return (
     <div
       className="relative overflow-hidden cursor-zoom-in"
@@ -370,15 +394,16 @@ export function ImageHoverZoom({ src, alt }: { src: string; alt: string }) {
         alt={alt}
         className="transition-transform duration-300"
         style={{
-          transform: isHovered 
-            ? `scale(1.5) translate(-${mousePosition.x}%, -${mousePosition.y}%)` 
+          transform: isHovered
+            ? `scale(1.5) translate(-${mousePosition.x}%, -${mousePosition.y}%)`
             : 'scale(1)'
         }}
       />
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -393,7 +418,7 @@ export function ImageHoverZoom({ src, alt }: { src: string; alt: string }) {
 .focus-ring {
   outline: none;
   transition: box-shadow 0.2s ease;
-  
+
   &:focus-visible {
     box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.3);
     outline: 2px solid #ff6b9d;
@@ -410,7 +435,7 @@ export function ImageHoverZoom({ src, alt }: { src: string; alt: string }) {
 /* Button focus */
 .button-focus {
   &:focus-visible {
-    box-shadow: 
+    box-shadow:
       0 0 0 3px rgba(255, 255, 255, 1),
       0 0 0 6px rgba(255, 107, 157, 0.5);
   }
@@ -420,48 +445,51 @@ export function ImageHoverZoom({ src, alt }: { src: string; alt: string }) {
 .input-focus {
   border: 2px solid transparent;
   transition: border-color 0.2s ease;
-  
+
   &:focus {
     border-color: #ff6b9d;
     box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
   }
 }
-```
+
+```text
 
 ### Keyboard Navigation
 
 ```tsx
 /**
+
  * Keyboard-accessible modal dialog
  */
-export function KeyboardModal({ 
-  isOpen, 
-  onClose, 
-  children 
-}: { 
-  isOpen: boolean; 
-  onClose: () => void; 
+export function KeyboardModal({
+  isOpen,
+  onClose,
+  children
+}: {
+  isOpen: boolean;
+  onClose: () => void;
   children: React.ReactNode;
 }) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  
+
   React.useEffect(() => {
     if (!isOpen) return;
-    
+
     // Focus trap
     const focusableElements = modalRef.current?.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
     const firstElement = focusableElements?.[0] as HTMLElement;
-    const lastElement = focusableElements?.[focusableElements.length - 1] as HTMLElement;
-    
+const lastElement = focusableElements?.[focusableElements.length - 1] as
+HTMLElement;
+
     // Set initial focus
     firstElement?.focus();
-    
+
     // Handle Tab key
     const handleTab = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
-      
+
       if (e.shiftKey) {
         // Shift + Tab
         if (document.activeElement === firstElement) {
@@ -476,25 +504,25 @@ export function KeyboardModal({
         }
       }
     };
-    
+
     // Handle Escape key
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
       }
     };
-    
+
     document.addEventListener('keydown', handleTab);
     document.addEventListener('keydown', handleEscape);
-    
+
     return () => {
       document.removeEventListener('keydown', handleTab);
       document.removeEventListener('keydown', handleEscape);
     };
   }, [isOpen, onClose]);
-  
+
   if (!isOpen) return null;
-  
+
   return (
     <div
       ref={modalRef}
@@ -510,7 +538,8 @@ export function KeyboardModal({
         {children}
         <button
           onClick={onClose}
-          className="mt-fluid-md px-button py-button bg-gray-200 dark:bg-purple-800 rounded-lg focus-ring"
+className="mt-fluid-md px-button py-button bg-gray-200 dark:bg-purple-800
+rounded-lg focus-ring"
         >
           Close (Esc)
         </button>
@@ -518,12 +547,14 @@ export function KeyboardModal({
     </div>
   );
 }
-```
+
+```text
 
 ### Keyboard Shortcuts
 
 ```tsx
 /**
+
  * Global keyboard shortcuts hook
  */
 export function useKeyboardShortcuts(shortcuts: Record<string, () => void>) {
@@ -539,14 +570,14 @@ export function useKeyboardShortcuts(shortcuts: Record<string, () => void>) {
       ]
         .filter(Boolean)
         .join('+');
-      
+
       const handler = shortcuts[key];
       if (handler) {
         e.preventDefault();
         handler();
       }
     };
-    
+
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [shortcuts]);
@@ -555,25 +586,26 @@ export function useKeyboardShortcuts(shortcuts: Record<string, () => void>) {
 // Usage example
 export function App() {
   const [searchOpen, setSearchOpen] = React.useState(false);
-  
+
   useKeyboardShortcuts({
     'ctrl+k': () => setSearchOpen(true),
     'meta+k': () => setSearchOpen(true), // Mac
     'escape': () => setSearchOpen(false),
     'shift+?': () => console.log('Show keyboard shortcuts help')
   });
-  
+
   return (
     <div>
       {/* App content */}
     </div>
   );
 }
-```
+
+```text
 
 ---
 
-## Hover States
+## Hover States (1)
 
 ### Conditional Hover Effects
 
@@ -600,21 +632,23 @@ export function App() {
     opacity: 0.9;
   }
 }
-```
+
+```text
 
 ### Component-Specific Hover
 
 ```tsx
 /**
+
  * Portfolio card with conditional hover
  */
-export function PortfolioCard({ 
-  title, 
-  image, 
-  onClick 
-}: { 
-  title: string; 
-  image: string; 
+export function PortfolioCard({
+  title,
+  image,
+  onClick
+}: {
+  title: string;
+  image: string;
   onClick: () => void;
 }) {
   return (
@@ -629,12 +663,13 @@ export function PortfolioCard({
     >
       {/* Image with overlay */}
       <div className="relative">
-        <img 
-          src={image} 
+        <img
+          src={image}
           alt={title}
-          className="w-full aspect-square object-cover transition-transform duration-300 group-hover:scale-110"
+className="w-full aspect-square object-cover transition-transform duration-300
+group-hover:scale-110"
         />
-        
+
         {/* Hover overlay - only on hover-capable devices */}
         <div className="
           absolute inset-0 bg-gradient-to-t from-black/80 to-transparent
@@ -647,7 +682,7 @@ export function PortfolioCard({
           </p>
         </div>
       </div>
-      
+
       {/* Mobile: Always show title */}
       <div className="md:hidden p-fluid-md bg-white dark:bg-purple-900">
         <h3 className="font-heading text-fluid-lg">{title}</h3>
@@ -655,7 +690,8 @@ export function PortfolioCard({
     </article>
   );
 }
-```
+
+```text
 
 ---
 
@@ -665,34 +701,37 @@ export function PortfolioCard({
 
 ```tsx
 /**
+
  * Focus trap utility for modals and overlays
  */
-export function useFocusTrap(containerRef: React.RefObject<HTMLElement>, isActive: boolean) {
+export function useFocusTrap(containerRef: React.RefObject<HTMLElement>,
+isActive: boolean) {
   React.useEffect(() => {
     if (!isActive || !containerRef.current) return;
-    
+
     const container = containerRef.current;
-    const focusableSelectors = 
-      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-    
+    const focusableSelectors =
+'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]),
+textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
     const focusableElements = Array.from(
       container.querySelectorAll<HTMLElement>(focusableSelectors)
     );
-    
+
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
-    
+
     // Set initial focus
     firstFocusable?.focus();
-    
+
     const handleTab = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
-      
+
       if (focusableElements.length === 1) {
         e.preventDefault();
         return;
       }
-      
+
       if (e.shiftKey) {
         if (document.activeElement === firstFocusable) {
           e.preventDefault();
@@ -705,25 +744,27 @@ export function useFocusTrap(containerRef: React.RefObject<HTMLElement>, isActiv
         }
       }
     };
-    
+
     container.addEventListener('keydown', handleTab);
-    
+
     return () => {
       container.removeEventListener('keydown', handleTab);
     };
   }, [containerRef, isActive]);
 }
-```
+
+```text
 
 ### Focus Restoration
 
 ```tsx
 /**
+
  * Restore focus when modal closes
  */
 export function useRestoreFocus(isOpen: boolean) {
   const previousFocusRef = React.useRef<HTMLElement | null>(null);
-  
+
   React.useEffect(() => {
     if (isOpen) {
       // Save current focus
@@ -738,19 +779,20 @@ export function useRestoreFocus(isOpen: boolean) {
 // Usage in modal
 export function Modal({ isOpen, onClose, children }: ModalProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  
+
   useFocusTrap(modalRef, isOpen);
   useRestoreFocus(isOpen);
-  
+
   if (!isOpen) return null;
-  
+
   return (
     <div ref={modalRef} role="dialog" aria-modal="true">
       {children}
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -760,24 +802,25 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
 
 ```tsx
 /**
+
  * Pinch-to-zoom for touch devices
  */
 export function PinchZoomImage({ src, alt }: { src: string; alt: string }) {
   const [scale, setScale] = React.useState(1);
   const [lastDistance, setLastDistance] = React.useState(0);
-  
+
   const getDistance = (touches: React.TouchList) => {
     const dx = touches[0].clientX - touches[1].clientX;
     const dy = touches[0].clientY - touches[1].clientY;
     return Math.sqrt(dx * dx + dy * dy);
   };
-  
+
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length === 2) {
       setLastDistance(getDistance(e.touches));
     }
   };
-  
+
   const handleTouchMove = (e: React.TouchEvent) => {
     if (e.touches.length === 2) {
       e.preventDefault();
@@ -787,11 +830,11 @@ export function PinchZoomImage({ src, alt }: { src: string; alt: string }) {
       setLastDistance(currentDistance);
     }
   };
-  
+
   const handleTouchEnd = () => {
     setLastDistance(0);
   };
-  
+
   return (
     <div
       className="overflow-hidden touch-none"
@@ -808,38 +851,40 @@ export function PinchZoomImage({ src, alt }: { src: string; alt: string }) {
     </div>
   );
 }
-```
+
+```text
 
 ### Pull to Refresh
 
 ```tsx
 /**
+
  * Pull-to-refresh gesture (mobile)
  */
 export function usePullToRefresh(onRefresh: () => Promise<void>) {
   const [startY, setStartY] = React.useState(0);
   const [pullDistance, setPullDistance] = React.useState(0);
   const [isRefreshing, setIsRefreshing] = React.useState(false);
-  
+
   const threshold = 80; // Minimum pull distance to trigger refresh
-  
+
   const handleTouchStart = (e: React.TouchEvent) => {
     if (window.scrollY === 0) {
       setStartY(e.touches[0].clientY);
     }
   };
-  
+
   const handleTouchMove = (e: React.TouchEvent) => {
     if (window.scrollY === 0 && !isRefreshing) {
       const currentY = e.touches[0].clientY;
       const distance = currentY - startY;
-      
+
       if (distance > 0) {
         setPullDistance(Math.min(distance, threshold * 1.5));
       }
     }
   };
-  
+
   const handleTouchEnd = async () => {
     if (pullDistance >= threshold && !isRefreshing) {
       setIsRefreshing(true);
@@ -849,7 +894,7 @@ export function usePullToRefresh(onRefresh: () => Promise<void>) {
     setPullDistance(0);
     setStartY(0);
   };
-  
+
   return {
     handleTouchStart,
     handleTouchMove,
@@ -858,7 +903,8 @@ export function usePullToRefresh(onRefresh: () => Promise<void>) {
     isRefreshing
   };
 }
-```
+
+```text
 
 ---
 
@@ -868,6 +914,7 @@ export function usePullToRefresh(onRefresh: () => Promise<void>) {
 
 ```tsx
 /**
+
  * Button that adapts to input method
  */
 export function AdaptiveButton({
@@ -880,7 +927,7 @@ export function AdaptiveButton({
   variant?: 'primary' | 'secondary';
 }) {
   const [isPressed, setIsPressed] = React.useState(false);
-  
+
   const baseClasses = `
     min-h-[44px] min-w-[44px]
     px-button py-button
@@ -889,11 +936,13 @@ export function AdaptiveButton({
     transition-all duration-300
     focus:outline-none focus:ring-4 focus:ring-opacity-50
   `;
-  
+
   const variantClasses = variant === 'primary'
-    ? 'bg-gradient-pink-purple-blue hover:from-purple-700 hover:to-pink-700 text-white focus:ring-pink-200'
-    : 'bg-white dark:bg-purple-800 text-gray-800 dark:text-purple-100 focus:ring-purple-300';
-  
+? 'bg-gradient-pink-purple-blue hover:from-purple-700 hover:to-pink-700
+text-white focus:ring-pink-200'
+: 'bg-white dark:bg-purple-800 text-gray-800 dark:text-purple-100
+focus:ring-purple-300';
+
   return (
     <button
       className={`
@@ -914,12 +963,14 @@ export function AdaptiveButton({
     </button>
   );
 }
-```
+
+```text
 
 ### Accessible Interactive Card
 
 ```tsx
 /**
+
  * Interactive card with full accessibility support
  */
 export function InteractiveCard({
@@ -939,7 +990,7 @@ export function InteractiveCard({
       onClick();
     }
   };
-  
+
   return (
     <article
       role="button"
@@ -964,13 +1015,15 @@ export function InteractiveCard({
           src={image}
           alt=""
           role="presentation"
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+className="w-full h-full object-cover transition-transform duration-300
+group-hover:scale-110"
         />
       </div>
-      
+
       {/* Content */}
       <div className="p-card-responsive">
-        <h3 className="text-card-title font-heading font-semibold mb-fluid-sm text-gray-800 dark:text-purple-100">
+<h3 className="text-card-title font-heading font-semibold mb-fluid-sm
+text-gray-800 dark:text-purple-100">
           {title}
         </h3>
         <p className="text-body-guideline font-body text-gray-600 dark:text-purple-300">
@@ -980,7 +1033,8 @@ export function InteractiveCard({
     </article>
   );
 }
-```
+
+```text
 
 ---
 
@@ -1009,7 +1063,7 @@ export function InteractiveCard({
 ### Cross-Device Testing
 
 - [ ] **iOS Safari:** Touch interactions working
-- [ ] **Android Chrome:** Touch interactions working  
+- [ ] **Android Chrome:** Touch interactions working
 - [ ] **Desktop Chrome:** Mouse/keyboard working
 - [ ] **Desktop Safari:** Mouse/keyboard working
 - [ ] **Desktop Firefox:** Mouse/keyboard working
@@ -1024,6 +1078,6 @@ export function InteractiveCard({
 
 ---
 
-**Version:** 1.0.0  
-**Last Updated:** January 2025  
+**Version:** 1.0.0
+**Last Updated:** January 2025
 **Maintained by:** Ash Shaw Portfolio Team

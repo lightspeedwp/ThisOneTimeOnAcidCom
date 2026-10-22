@@ -1,10 +1,11 @@
 # Breakpoints System
 
-**Version:** 5.0.0  
-**Last Updated:** January 2025  
+**Version:** 5.0.0
+**Last Updated:** January 2025
 **WordPress Block Theme Compatible:** ✅
 
-Complete breakpoint definitions, media query patterns, and responsive strategies for the Ash Shaw Makeup Portfolio.
+Complete breakpoint definitions, media query patterns, and responsive strategies
+for the Ash Shaw Makeup Portfolio.
 
 ---
 
@@ -12,7 +13,8 @@ Complete breakpoint definitions, media query patterns, and responsive strategies
 
 ### Three-Tier Breakpoint System
 
-The portfolio uses a **three-tier breakpoint system** optimized for makeup artistry and visual storytelling:
+The portfolio uses a **three-tier breakpoint system** optimized for makeup
+artistry and visual storytelling:
 
 ```css
 /* CSS Custom Properties */
@@ -21,14 +23,15 @@ The portfolio uses a **three-tier breakpoint system** optimized for makeup artis
   --breakpoint-tablet: 768px;    /* Min width for tablet */
   --breakpoint-desktop: 1024px;  /* Min width for desktop */
   --breakpoint-xl: 1440px;       /* Min width for large desktop */
-  
+
   /* Container max-widths */
   --container-mobile: 100%;
   --container-tablet: 720px;
   --container-desktop: 1280px;
   --container-xl: 1600px;
 }
-```
+
+```text
 
 ### Breakpoint Ranges
 
@@ -43,7 +46,7 @@ The portfolio uses a **three-tier breakpoint system** optimized for makeup artis
 
 ## 📱 Visual Breakpoint Reference
 
-```
+```text
 ┌────────────────────────────────────────────────────────────────────────┐
 │                        RESPONSIVE BREAKPOINTS                           │
 └────────────────────────────────────────────────────────────────────────┘
@@ -62,7 +65,8 @@ Mobile                  Tablet                    Desktop              XL
   │      │      │        │        │        │       │        │        │        │
   └──────┴──────┘        └────────┴────────┘       └────────┴────────┘        │
    Mobile Range            Tablet Range              Desktop Range        XL Range
-```
+
+```text
 
 ---
 
@@ -108,7 +112,8 @@ Always start with mobile styles, then enhance for larger screens:
     max-width: 1600px;
   }
 }
-```
+
+```text
 
 ### Desktop-First Approach (Avoid)
 
@@ -135,9 +140,11 @@ Always start with mobile styles, then enhance for larger screens:
     grid-template-columns: 1fr;
   }
 }
-```
 
-**Why mobile-first is better:**
+```text
+
+## Why mobile-first is better
+
 - Smaller CSS file size for mobile users
 - Progressive enhancement mindset
 - Easier to maintain and debug
@@ -184,7 +191,8 @@ Always start with mobile styles, then enhance for larger screens:
     gap: var(--wp--preset--spacing--50);
   }
 }
-```
+
+```text
 
 ---
 
@@ -218,7 +226,8 @@ Always start with mobile styles, then enhance for larger screens:
     gap: var(--wp--preset--spacing--60);
   }
 }
-```
+
+```text
 
 ---
 
@@ -264,13 +273,15 @@ Always start with mobile styles, then enhance for larger screens:
     gap: var(--wp--preset--spacing--40);
   }
 }
-```
+
+```text
 
 ---
 
 ## 🔍 Container Queries (Modern Approach)
 
-Container queries allow components to respond to their **container's size** rather than the viewport:
+Container queries allow components to respond to their **container's size**
+rather than the viewport:
 
 ```css
 /* Container query setup */
@@ -300,9 +311,11 @@ Container queries allow components to respond to their **container's size** rath
     gap: var(--wp--preset--spacing--40);
   }
 }
-```
 
-**When to use container queries:**
+```text
+
+## When to use container queries
+
 - ✅ Reusable components that appear in different contexts
 - ✅ Components in sidebars or variable-width containers
 - ✅ Card components that should adapt to their container
@@ -335,9 +348,11 @@ p {
   font-size: clamp(1rem, 1.5vw, 1.25rem);
   line-height: 1.6;
 }
-```
 
-**See:** [typography-scaling.md](./typography-scaling.md) for complete typography system
+```text
+
+**See:** [typography-scaling.md](./typography-scaling.md) for complete
+typography system
 
 ---
 
@@ -368,9 +383,11 @@ Spacing adapts using WordPress spacing scale:
     padding-inline: var(--wp--preset--spacing--60);
   }
 }
-```
 
-**See:** [spacing-adjustments.md](./spacing-adjustments.md) for complete spacing system
+```text
+
+**See:** [spacing-adjustments.md](./spacing-adjustments.md) for complete spacing
+system
 
 ---
 
@@ -400,7 +417,8 @@ Spacing adapts using WordPress spacing scale:
     gap: var(--wp--preset--spacing--50);
   }
 }
-```
+
+```text
 
 ---
 
@@ -433,7 +451,8 @@ Spacing adapts using WordPress spacing scale:
     max-width: 1600px;
   }
 }
-```
+
+```text
 
 ---
 
@@ -461,7 +480,8 @@ Spacing adapts using WordPress spacing scale:
     display: none;
   }
 }
-```
+
+```text
 
 ---
 
@@ -486,18 +506,19 @@ Spacing adapts using WordPress spacing scale:
   .content-wrapper {
     flex-direction: row;
   }
-  
+
   .content-text {
     order: 1; /* Text first on desktop */
     flex: 1;
   }
-  
+
   .content-image {
     order: 2; /* Image second on desktop */
     flex: 1;
   }
 }
-```
+
+```text
 
 ---
 
@@ -523,7 +544,8 @@ Spacing adapts using WordPress spacing scale:
   alt="Makeup artistry example"
   loading="lazy"
 />
-```
+
+```text
 
 ### CSS Responsive Images
 
@@ -552,7 +574,8 @@ Spacing adapts using WordPress spacing scale:
     background-image: url('hero-xl.jpg');
   }
 }
-```
+
+```text
 
 ---
 
@@ -574,7 +597,8 @@ Spacing adapts using WordPress spacing scale:
   loading="eager"
   alt="Hero image"
 />
-```
+
+```text
 
 ### Reduce Media Queries
 
@@ -593,7 +617,8 @@ Spacing adapts using WordPress spacing scale:
 @media (min-width: 768px) { }   /* Tablet */
 @media (min-width: 1024px) { }  /* Desktop */
 @media (min-width: 1440px) { }  /* XL Desktop */
-```
+
+```text
 
 ---
 
@@ -602,21 +627,25 @@ Spacing adapts using WordPress spacing scale:
 Test all components at these specific widths:
 
 ### Mobile Testing
+
 - [ ] **375px** - iPhone SE, Small Android
 - [ ] **414px** - iPhone 12 Pro Max, Large Android
 - [ ] **767px** - Maximum mobile width
 
 ### Tablet Testing
+
 - [ ] **768px** - iPad Portrait (minimum tablet)
 - [ ] **834px** - iPad Pro 11" Portrait
 - [ ] **1023px** - Maximum tablet width
 
 ### Desktop Testing
+
 - [ ] **1024px** - Small desktop (minimum desktop)
 - [ ] **1280px** - Standard desktop
 - [ ] **1439px** - Maximum desktop width
 
 ### Large Desktop Testing
+
 - [ ] **1440px** - Large desktop (minimum XL)
 - [ ] **1920px** - Full HD displays
 - [ ] **2560px** - 2K/QHD displays
@@ -638,56 +667,69 @@ Test all components at these specific widths:
 ### DO ✅
 
 1. **Use mobile-first media queries**
+
    ```css
    @media (min-width: 768px) { /* Tablet */ }
    @media (min-width: 1024px) { /* Desktop */ }
-   ```
 
-2. **Use WordPress CSS variables**
+```text
+
+1. **Use WordPress CSS variables**
+
    ```css
    padding: var(--wp--preset--spacing--40);
    font-size: var(--wp--preset--font-size--400);
-   ```
 
-3. **Test at all major breakpoints**
+```text
+
+1. **Test at all major breakpoints**
+
    - 375px, 768px, 1024px, 1440px
 
-4. **Use semantic breakpoint names**
+1. **Use semantic breakpoint names**
+
    ```css
    /* ✅ GOOD */
    @media (min-width: 768px) { /* Tablet */ }
-   
+
    /* ❌ BAD */
    @media (min-width: 768px) { /* iPad */ }
-   ```
+
+```text
 
 ### DON'T ❌
 
 1. **Don't use device-specific breakpoints**
+
    ```css
    /* ❌ BAD */
    @media (min-width: 375px) { /* iPhone SE */ }
-   ```
 
-2. **Don't use too many breakpoints**
+```text
+
+1. **Don't use too many breakpoints**
+
    ```css
    /* ❌ BAD */
    @media (min-width: 576px) { }
    @media (min-width: 768px) { }
    @media (min-width: 992px) { }
-   ```
 
-3. **Don't hardcode values**
+```text
+
+1. **Don't hardcode values**
+
    ```css
    /* ❌ BAD */
    padding: 40px;
-   
+
    /* ✅ GOOD */
    padding: var(--wp--preset--spacing--40);
-   ```
+
+```text
 
 ---
 
-**Version:** 5.0.0 (WordPress Breakpoint System)  
-**Last Updated:** January 2025  
+**Version:** 5.0.0 (WordPress Breakpoint System)
+**Last Updated:** January 2025
 **Maintained By:** Ash Shaw Portfolio Team

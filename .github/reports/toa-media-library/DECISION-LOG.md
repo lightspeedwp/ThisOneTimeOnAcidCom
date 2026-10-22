@@ -1,16 +1,17 @@
 # TOA Media Library – Decision Log
 
-**Date:** 17 October 2026  
+**Date:** 17 October 2026
 **Status:** Active decisions recorded
 
 ---
 
 ## Storage Provider Selection
 
-**Decision:** Use **GitHub + Netlify** (free, zero-cost approach)  
-**Override Reason:** Existing Netlify subscription eliminates $99/mo Cloudinary cost  
-**Original Recommendation:** Cloudinary (UX + automation + cost-effective)  
-**Approved By:** Ash Shaw  
+**Decision:** Use **GitHub + Netlify** (free, zero-cost approach)
+**Override Reason:** Existing Netlify subscription eliminates $99/mo Cloudinary
+cost
+**Original Recommendation:** Cloudinary (UX + automation + cost-effective)
+**Approved By:** Ash Shaw
 **Effective:** 17 October 2026
 
 ### Rationale
@@ -24,10 +25,14 @@
 ### Implementation Impact
 
 1. **Storage:** Version-controlled assets in Git (or Git LFS if >1GB/month)
-2. **Optimization:** Build-time Sharp/ImageMin script (not runtime Cloudinary transforms)
-3. **CDN:** Netlify CDN serves from `public/` after build
-4. **Book Export:** Direct file access to source assets (no API export needed)
-5. **Setup:** 3–4 days (vs. 2–3 days with Cloudinary; see STORAGE-PROVIDER-COMPARISON.md § Option 2)
+
+1. **Optimization:** Build-time Sharp/ImageMin script (not runtime Cloudinary transforms)
+
+1. **CDN:** Netlify CDN serves from `public/` after build
+
+1. **Book Export:** Direct file access to source assets (no API export needed)
+
+1. **Setup:** 3–4 days (vs. 2–3 days with Cloudinary; see STORAGE-PROVIDER-COMPARISON.md § Option 2)
 
 ### Blockers & Mitigations
 
@@ -41,38 +46,44 @@
 ### Next Steps
 
 1. ✅ Audit complete; decision documented
-2. ⏳ Update MEDIA-LIBRARY-STRATEGY-REPORT.md § 5 (Storage & Publishing) to reflect GitHub recommendation
-3. ⏳ Update STORAGE-PROVIDER-COMPARISON.md conclusion to prioritise GitHub option
-4. ⏳ TOA-280: Figma asset recovery (unchanged; works with any storage)
-5. ⏳ TOA-278: Build Sharp/ImageMin script for responsive sizing
-6. ⏳ TOA-276: Confirm Git LFS limits and Netlify build time SLA
+
+1. ⏳ Update MEDIA-LIBRARY-STRATEGY-REPORT.md § 5 (Storage & Publishing) to reflect GitHub recommendation
+
+1. ⏳ Update STORAGE-PROVIDER-COMPARISON.md conclusion to prioritise GitHub option
+
+1. ⏳ TOA-280: Figma asset recovery (unchanged; works with any storage)
+
+1. ⏳ TOA-278: Build Sharp/ImageMin script for responsive sizing
+
+1. ⏳ TOA-276: Confirm Git LFS limits and Netlify build time SLA
 
 ---
 
 ## Catalogue Location & Format
 
-**Decision:** Version-controlled JSON in repository (`.github/data/assets.json` or `/catalog/assets.json`)  
-**Status:** Pending approval  
+**Decision:** Version-controlled JSON in repository (`.github/data/assets.json`
+or `/catalog/assets.json`)
+**Status:** Pending approval
 **Approved By:** TBD
 
 ---
 
 ## Book Export Workflow
 
-**Decision:** File-based export (copy high-res originals) before publishing  
-**Status:** Pending approval  
+**Decision:** File-based export (copy high-res originals) before publishing
+**Status:** Pending approval
 **Approved By:** TBD
 
 ---
 
 ## Asset Credits Display
 
-**Decision:** Visible on gallery pages + metadata catalogue  
-**Status:** Pending approval  
+**Decision:** Visible on gallery pages + metadata catalogue
+**Status:** Pending approval
 **Approved By:** TBD
 
 ---
 
-**Log prepared by:** Claude (AI audit)  
-**Repository:** lightspeedwp/ThisOneTimeOnAcidCom  
+**Log prepared by:** Claude (AI audit)
+**Repository:** lightspeedwp/ThisOneTimeOnAcidCom
 **Epic:** TOA-269

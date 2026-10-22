@@ -1,6 +1,7 @@
 # Specification Catalog
 
-Complete index of all active and archived specifications for ThisOneTimeOnAcidCom repository governance and feature development.
+Complete index of all active and archived specifications for
+ThisOneTimeOnAcidCom repository governance and feature development.
 
 ---
 
@@ -15,9 +16,10 @@ Complete index of all active and archived specifications for ThisOneTimeOnAcidCo
 
 ## Specification Template
 
-Each specification lives in `.github/specs/{NNN-feature-slug}/` with this structure:
+Each specification lives in `.github/specs/{NNN-feature-slug}/` with this
+structure:
 
-```
+```text
 .github/specs/{NNN-feature-slug}/
 ├── spec.md               ← Requirements, user stories, acceptance criteria
 ├── plan.md               ← Technical design, architecture, technology choices
@@ -30,9 +32,11 @@ Each specification lives in `.github/specs/{NNN-feature-slug}/` with this struct
 ├── contracts/            ← (Optional) API specs, interfaces, test contracts
 ├── data-model.md         ← (Optional) Entity definitions and relationships
 └── quickstart.md         ← (Optional) Integration scenarios and setup guide
-```
 
-**Numbering:** Specifications are numbered sequentially (001, 002, 003…) in the order they are created. The next new specification will be 003.
+```text
+
+**Numbering:** Specifications are numbered sequentially (001, 002, 003…) in the
+order they are created. The next new specification will be 003.
 
 ---
 
@@ -41,27 +45,36 @@ Each specification lives in `.github/specs/{NNN-feature-slug}/` with this struct
 ### Find a Specification
 
 1. **Browse the Active Specifications table** above to find by feature name, status, or owner
-2. **Click the link** in the rightmost column to open the specification directory
-3. **Start with `spec.md`** — it defines requirements and acceptance criteria
+
+1. **Click the link** in the rightmost column to open the specification directory
+
+1. **Start with `spec.md`** — it defines requirements and acceptance criteria
 
 ### Create a New Specification
 
 Run the Spec Kit workflow in Claude Code:
 
-```
+```text
 /speckit-specify
-```
+
+```text
 
 This will:
-1. Create a new numbered directory (`.github/specs/{NNN-new-feature}/`)
-2. Generate `spec.md` with your requirements
-3. Output the path and next steps
 
-Then continue with `/speckit-clarify`, `/speckit-plan`, and `/speckit-tasks` as needed.
+1. Create a new numbered directory (`.github/specs/{NNN-new-feature}/`)
+
+1. Generate `spec.md` with your requirements
+
+1. Output the path and next steps
+
+Then continue with `/speckit-clarify`, `/speckit-plan`, and `/speckit-tasks` as
+needed.
 
 ### Archive a Specification
 
-When a specification is complete and delivered (merged to main), move its directory to `.github/specs/archive/{NNN-feature-slug}/` and update this catalog, moving the row to an "Archived Specifications" section below.
+When a specification is complete and delivered (merged to main), move its
+directory to `.github/specs/archive/{NNN-feature-slug}/` and update this
+catalog, moving the row to an "Archived Specifications" section below.
 
 ---
 

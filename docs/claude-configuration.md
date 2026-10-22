@@ -1,6 +1,7 @@
 # Claude Configuration — ThisOneTimeOnAcidCom
 
-Guidance for setting up and maintaining AI agent configuration for this repository.
+Guidance for setting up and maintaining AI agent configuration for this
+repository.
 
 ---
 
@@ -22,14 +23,19 @@ Guidance for setting up and maintaining AI agent configuration for this reposito
 ## Settings Precedence (Lowest to Highest)
 
 1. **Built-in defaults** — Claude Code hard-coded defaults
-2. **User-wide settings** — `~/.claude/settings.json` (local machine only)
-3. **Repository shared settings** — `.claude/settings.json` (this file)
-4. **Repository local overrides** — `.claude/settings.local.json` (machine-specific, git-ignored)
-5. **Session overrides** — `/config` command or API parameters
 
-**Effective setting check:**
+1. **User-wide settings** — `~/.claude/settings.json` (local machine only)
 
-In Claude Code, run `/status` to see which settings are actually loaded and their source.
+1. **Repository shared settings** — `.claude/settings.json` (this file)
+
+1. **Repository local overrides** — `.claude/settings.local.json` (machine-specific, git-ignored)
+
+1. **Session overrides** — `/config` command or API parameters
+
+## Effective setting check
+
+In Claude Code, run `/status` to see which settings are actually loaded and
+their source.
 
 ---
 
@@ -42,19 +48,22 @@ git clone https://github.com/lightspeedwp/ThisOneTimeOnAcidCom.git
 cd ThisOneTimeOnAcidCom
 git checkout develop
 git checkout -b aiops/claude-repository-configuration
-```
+
+```text
 
 ### Step 2: Install Dependencies
 
 ```bash
 npm ci --include=dev
-```
+
+```text
 
 ### Step 3: Verify Build
 
 ```bash
 npm run build
-```
+
+```text
 
 Expected output: `✓ built in X ms` (dist/ directory created)
 
@@ -64,17 +73,21 @@ Only if you need machine-specific settings:
 
 ```bash
 cp .claude/settings.example.json .claude/settings.local.json
+
 # Edit .claude/settings.local.json with your overrides
+
 # This file is git-ignored and will not be committed
-```
+
+```text
 
 ### Step 5: Reload Claude Code
 
 Restart Claude Code or open the repository again. Verify settings loaded:
 
-```
+```text
 /status
-```
+
+```text
 
 ---
 
@@ -126,7 +139,7 @@ Hooks and their executable handlers:
 
 ## Agent Adaptation Matrix
 
-**All 17 requested agents are included. Adaptation status:**
+## All 17 requested agents are included. Adaptation status
 
 | # | Agent | Source | Status | Notes |
 |---|---|---|---|---|
@@ -148,7 +161,7 @@ Hooks and their executable handlers:
 | 16 | document-reviewer-agent | .github/agents/document-reviewer-agent | ✓ Adapted | Documentation quality assurance |
 | 17 | client-website-discovery-assistant-agent | .github/agents/client-website-discovery-assistant-agent | ✓ Adapted | Portfolio discovery and analysis |
 
-**Adaptation approach:**
+## Adaptation approach
 
 - Removed unrelated WordPress/governance assumptions
 - Aligned with repository purpose (portfolio site built with Figma Make)
@@ -164,11 +177,14 @@ Hooks and their executable handlers:
 **Purpose:** Validation on session open
 
 **Current behavior:**
+
 ```bash
 scripts/claude/validate.sh
-```
+
+```text
 
 **What it does:**
+
 - Checks `npm ls --depth=0` (dependency consistency)
 - Confirms `npm run build` would succeed
 - Reports validation status
@@ -181,7 +197,8 @@ Remove SessionStart hook if validation noise becomes problematic:
 {
   "hooks": {}
 }
-```
+
+```text
 
 Or add specific validation events (journal content, changelog format, etc.):
 
@@ -197,7 +214,8 @@ Or add specific validation events (journal content, changelog format, etc.):
     ]
   }
 }
-```
+
+```text
 
 ### PreToolUse (Optional — Not Yet Enabled)
 
@@ -206,6 +224,7 @@ Or add specific validation events (journal content, changelog format, etc.):
 **When to enable:**
 
 If you want guards against:
+
 - Unintended branch deletions
 - Accidental force-pushes
 - Risky file deletions
@@ -225,9 +244,11 @@ If you want guards against:
     ]
   }
 }
-```
 
-**Recommendation:** Not enabled by default; enable if risky operations occur frequently.
+```text
+
+**Recommendation:** Not enabled by default; enable if risky operations occur
+frequently.
 
 ### PostEdit (Optional — Not Yet Enabled)
 
@@ -239,7 +260,8 @@ If you want guards against:
 - Regenerate lockfiles
 - Validate JSON/YAML syntax
 
-**Not recommended for this repo** (no formatting requirements; manual review preferred).
+**Not recommended for this repo** (no formatting requirements; manual review
+preferred).
 
 ---
 
@@ -259,9 +281,12 @@ The cloud environment starts with:
 If additional configuration is needed (credentials, custom hosts, etc.):
 
 1. Document the requirement with justification
-2. Request addition through the cloud environment UI
-3. Never hardcode secrets in this repository
-4. Test on a fresh session after setup
+
+1. Request addition through the cloud environment UI
+
+1. Never hardcode secrets in this repository
+
+1. Test on a fresh session after setup
 
 ### Supported Features
 
@@ -282,41 +307,55 @@ If additional configuration is needed (credentials, custom hosts, etc.):
 **Symptom:** `/status` shows unexpected model or missing hooks
 
 **Fixes:**
+
 1. Verify `.claude/settings.json` exists and is valid JSON
-2. Check for `.claude/settings.local.json` overriding defaults
-3. Restart Claude Code
-4. Run `/status` again to confirm
+
+1. Check for `.claude/settings.local.json` overriding defaults
+
+1. Restart Claude Code
+
+1. Run `/status` again to confirm
 
 ### Hook Execution Fails
 
 **Symptom:** SessionStart hook fails; validation errors appear
 
 **Fixes:**
+
 1. Check `scripts/claude/validate.sh` is executable: `chmod +x scripts/claude/validate.sh`
-2. Run manually: `bash scripts/claude/validate.sh` (test outside Claude Code)
-3. Check `npm ci --include=dev` succeeded: `npm ls --depth=0`
-4. Verify `npm run build` works locally
+
+1. Run manually: `bash scripts/claude/validate.sh` (test outside Claude Code)
+
+1. Check `npm ci --include=dev` succeeded: `npm ls --depth=0`
+
+1. Verify `npm run build` works locally
 
 ### Agents Not Discovered
 
 **Symptom:** Agent names not auto-complete; invoke by name fails
 
 **Fixes:**
+
 1. Verify `.claude/agents/` directory exists
-2. Check agent `.md` files have proper frontmatter
-3. Reload Claude Code session
-4. Confirm agent names match directory names
+
+1. Check agent `.md` files have proper frontmatter
+
+1. Reload Claude Code session
+
+1. Confirm agent names match directory names
 
 ### Cloud Session Differences
 
 **Symptom:** Cloud session behaves differently than local
 
 **Known differences:**
+
 - User-wide `~/.claude/settings.json` does NOT transfer to cloud
 - Cloud sessions do NOT have personal `.claude/settings.local.json`
 - Cloud environment settings (env vars, credentials) are separate
 
 **Solutions:**
+
 - Store session-critical config in `.claude/settings.json` (committed)
 - Use cloud environment UI for credentials
 - Document cloud-specific setup in `.claude/cloud/README.md`
@@ -336,7 +375,8 @@ rm docs/claude-configuration.md
 git add .
 git commit -m "Remove Claude configuration"
 git reset --hard HEAD~1  # undo if needed
-```
+
+```text
 
 ### Disable Specific Features
 
@@ -348,13 +388,15 @@ Remove hooks (keep settings and agents):
   "tools": { ... },
   "hooks": {}
 }
-```
+
+```text
 
 Remove agents (keep settings and hooks):
 
 ```bash
 rm -rf .claude/agents/
-```
+
+```text
 
 ---
 
@@ -371,6 +413,6 @@ rm -rf .claude/agents/
 
 ---
 
-**Last Updated:** 2026-10-16  
-**Configuration Owner:** Repository  
+**Last Updated:** 2026-10-16
+**Configuration Owner:** Repository
 **Next Review:** After first agent/hook usage

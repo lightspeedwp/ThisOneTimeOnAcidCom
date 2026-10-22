@@ -1,13 +1,15 @@
 # ReadMoreButton Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
-Expandable content toggle button with smooth animations and accessibility features.
+Expandable content toggle button with smooth animations and accessibility
+features.
 
 ## Purpose
 
 Provide progressive content disclosure with:
+
 - Expand/collapse functionality
 - Smooth height animations
 - Customizable expand/collapse text
@@ -24,22 +26,24 @@ Provide progressive content disclosure with:
 ```tsx
 import { ReadMoreButton } from './components/ui/ReadMoreButton';
 
-<ReadMoreButton 
+<ReadMoreButton
   isExpanded={isExpanded}
   onClick={() => setIsExpanded(!isExpanded)}
 />
-```
+
+```text
 
 ### With Custom Text
 
 ```tsx
-<ReadMoreButton 
+<ReadMoreButton
   isExpanded={isExpanded}
   onClick={toggleExpanded}
   expandText="Show Full Story"
   collapseText="Show Less"
 />
-```
+
+```text
 
 ### Wrapping Content
 
@@ -50,13 +54,14 @@ const [isExpanded, setIsExpanded] = useState(false);
   <p className={isExpanded ? '' : 'line-clamp-3'}>
     Long content that can be expanded...
   </p>
-  
-  <ReadMoreButton 
+
+  <ReadMoreButton
     isExpanded={isExpanded}
     onClick={() => setIsExpanded(!isExpanded)}
   />
 </div>
-```
+
+```text
 
 ---
 
@@ -65,48 +70,56 @@ const [isExpanded, setIsExpanded] = useState(false);
 ```typescript
 interface ReadMoreButtonProps {
   /**
+
    * Whether content is expanded
    * @required
    */
   isExpanded: boolean;
-  
+
   /**
+
    * Click handler to toggle expansion
    * @required
    */
   onClick: () => void;
-  
+
   /**
+
    * Text to show when collapsed
    * @default "Read More"
    */
   expandText?: string;
-  
+
   /**
+
    * Text to show when expanded
    * @default "Show Less"
    */
   collapseText?: string;
-  
+
   /**
+
    * Additional CSS classes
    * @default ""
    */
   className?: string;
-  
+
   /**
+
    * Custom aria-label
    * @optional (auto-generated from expandText/collapseText)
    */
   ariaLabel?: string;
-  
+
   /**
+
    * Show chevron icon
    * @default true
    */
   showIcon?: boolean;
 }
-```
+
+```text
 
 ---
 
@@ -115,15 +128,17 @@ interface ReadMoreButtonProps {
 ### Smooth Animation
 
 ```tsx
-<div 
+<div
   className={`
     transition-all duration-500 ease-in-out
-    ${isExpanded ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}
+${isExpanded ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0
+overflow-hidden'}
   `}
 >
   {/* Hidden content */}
 </div>
-```
+
+```text
 
 ### Line Clamping
 
@@ -132,19 +147,21 @@ interface ReadMoreButtonProps {
 <p className={isExpanded ? '' : 'line-clamp-3'}>
   Long text content...
 </p>
-```
+
+```text
 
 ### Icon Rotation
 
 ```tsx
-<ChevronDown 
+<ChevronDown
   className={`
-    w-4 h-4 
+    w-4 h-4
     transition-transform duration-300
     ${isExpanded ? 'rotate-180' : 'rotate-0'}
   `}
 />
-```
+
+```text
 
 ---
 
@@ -165,7 +182,7 @@ interface ReadMoreButtonProps {
   showIcon?: boolean;
 }
 
-export function ReadMoreButton({ 
+export function ReadMoreButton({
   isExpanded,
   onClick,
   expandText = 'Read More',
@@ -189,11 +206,11 @@ export function ReadMoreButton({
       `}
     >
       <span>{isExpanded ? collapseText : expandText}</span>
-      
+
       {showIcon && (
-        <CaretDown 
+        <CaretDown
           className={`
-            w-4 h-4 
+            w-4 h-4
             transition-transform duration-300
             ${isExpanded ? 'rotate-180' : 'rotate-0'}
           `}
@@ -202,7 +219,8 @@ export function ReadMoreButton({
     </button>
   );
 }
-```
+
+```text
 
 ---
 
@@ -216,24 +234,24 @@ import { ReadMoreButton } from './components/ui/ReadMoreButton';
 
 function AboutSection() {
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   return (
     <section className="py-section">
       <h2 className="text-section-h2 font-heading font-semibold mb-fluid-lg">
         My Journey
       </h2>
-      
+
       <div className="max-w-3xl">
         <p className="text-body-guideline font-body text-gray-700 mb-fluid-md">
           First few paragraphs that are always visible...
         </p>
-        
+
         {/* Expandable content */}
-        <div 
+        <div
           className={`
             transition-all duration-500 ease-in-out
-            ${isExpanded 
-              ? 'max-h-[2000px] opacity-100' 
+            ${isExpanded
+              ? 'max-h-[2000px] opacity-100'
               : 'max-h-0 opacity-0 overflow-hidden'
             }
           `}
@@ -241,13 +259,13 @@ function AboutSection() {
           <p className="text-body-guideline font-body text-gray-700 mb-fluid-md">
             Additional content revealed when expanded...
           </p>
-          
+
           <p className="text-body-guideline font-body text-gray-700 mb-fluid-md">
             More detailed story and background...
           </p>
         </div>
-        
-        <ReadMoreButton 
+
+        <ReadMoreButton
           isExpanded={isExpanded}
           onClick={() => setIsExpanded(!isExpanded)}
         />
@@ -255,28 +273,29 @@ function AboutSection() {
     </section>
   );
 }
-```
+
+```text
 
 ### Portfolio Entry
 
 ```tsx
 function PortfolioEntry({ entry }: Props) {
   const [showFullStory, setShowFullStory] = useState(false);
-  
+
   return (
     <article>
       <h1 className="text-section-h2 font-heading font-bold mb-fluid-lg">
         {entry.title}
       </h1>
-      
+
       <div className="prose prose-lg max-w-none">
         <p className={showFullStory ? '' : 'line-clamp-5'}>
           {entry.story}
         </p>
       </div>
-      
+
       {entry.story.length > 500 && (
-        <ReadMoreButton 
+        <ReadMoreButton
           isExpanded={showFullStory}
           onClick={() => setShowFullStory(!showFullStory)}
           expandText="Read Full Story"
@@ -287,36 +306,38 @@ function PortfolioEntry({ entry }: Props) {
     </article>
   );
 }
-```
+
+```text
 
 ### Blog Post Preview
 
 ```tsx
 function BlogPreview({ post }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   return (
     <article className="bg-white/80 backdrop-blur-sm rounded-2xl p-fluid-lg">
       <h3 className="text-fluid-xl font-heading font-semibold mb-fluid-sm">
         {post.title}
       </h3>
-      
+
       <p className={`
         text-body-guideline font-body text-gray-700 mb-fluid-md
         ${isExpanded ? '' : 'line-clamp-3'}
       `}>
         {post.excerpt}
       </p>
-      
+
       <div className="flex items-center justify-between">
-        <ReadMoreButton 
+        <ReadMoreButton
           isExpanded={isExpanded}
           onClick={() => setIsExpanded(!isExpanded)}
         />
-        
-        <a 
+
+        <a
           href={`/blog/${post.slug}`}
-          className="text-fluid-sm font-body font-medium text-blue-600 hover:text-blue-700"
+className="text-fluid-sm font-body font-medium text-blue-600
+hover:text-blue-700"
         >
           Read Full Article →
         </a>
@@ -324,7 +345,8 @@ function BlogPreview({ post }: Props) {
     </article>
   );
 }
-```
+
+```text
 
 ---
 
@@ -337,17 +359,19 @@ function BlogPreview({ post }: Props) {
   <p className={isExpanded ? '' : 'line-clamp-5'}>
     Content text...
   </p>
-  
+
   {!isExpanded && (
-    <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent" />
+<div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t
+from-white to-transparent" />
   )}
-  
-  <ReadMoreButton 
+
+  <ReadMoreButton
     isExpanded={isExpanded}
     onClick={() => setIsExpanded(!isExpanded)}
   />
 </div>
-```
+
+```text
 
 ### With Character Limit
 
@@ -355,23 +379,24 @@ function BlogPreview({ post }: Props) {
 const CHAR_LIMIT = 300;
 const [isExpanded, setIsExpanded] = useState(false);
 
-const displayText = isExpanded 
-  ? content 
-  : content.slice(0, CHAR_LIMIT) + (content.length > CHAR_LIMIT ? '...' : '');
+const displayText = isExpanded
+  ? content
+  : content.slice(0, CHAR*LIMIT) + (content.length > CHAR*LIMIT ? '...' : '');
 
 return (
   <>
     <p>{displayText}</p>
-    
+
     {content.length > CHAR_LIMIT && (
-      <ReadMoreButton 
+      <ReadMoreButton
         isExpanded={isExpanded}
         onClick={() => setIsExpanded(!isExpanded)}
       />
     )}
   </>
 );
-```
+
+```text
 
 ### With Scroll to Expanded Content
 
@@ -382,20 +407,21 @@ const handleToggle = () => {
   if (!isExpanded) {
     // Expanding - scroll to content after animation
     setTimeout(() => {
-      contentRef.current?.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'nearest' 
+      contentRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
       });
     }, 300);
   }
   setIsExpanded(!isExpanded);
 };
 
-<ReadMoreButton 
+<ReadMoreButton
   isExpanded={isExpanded}
   onClick={handleToggle}
 />
-```
+
+```text
 
 ---
 
@@ -413,13 +439,14 @@ const handleToggle = () => {
   {isExpanded ? 'Show Less' : 'Read More'}
 </button>
 
-<div 
+<div
   id="expandable-content"
   aria-hidden={!isExpanded}
 >
   {/* Expandable content */}
 </div>
-```
+
+```text
 
 ### Keyboard Navigation
 
@@ -435,17 +462,19 @@ const handleToggle = () => {
       onClick();
     }
   }}
-  className="focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-opacity-50"
+className="focus:outline-none focus:ring-2 focus:ring-pink-200
+focus:ring-opacity-50"
 >
   Read More
 </button>
-```
+
+```text
 
 ### Screen Reader Announcements
 
 ```tsx
 // Live region for dynamic content changes
-<div 
+<div
   role="region"
   aria-live="polite"
   aria-atomic="true"
@@ -454,7 +483,8 @@ const handleToggle = () => {
     Content...
   </p>
 </div>
-```
+
+```text
 
 ---
 
@@ -465,18 +495,22 @@ const handleToggle = () => {
 ```tsx
 // ❌ WRONG - Abrupt show/hide
 {isExpanded && <div>Content</div>}
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Smooth transition
 <div className={`
   transition-all duration-500
-  ${isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}
+${isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0
+overflow-hidden'}
 `}>
   Content
 </div>
-```
+
+```text
 
 ### ❌ Mistake 2: Missing ARIA Labels
 
@@ -485,35 +519,41 @@ const handleToggle = () => {
 <button onClick={toggle}>
   {isExpanded ? '▲' : '▼'}
 </button>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Proper labels
-<button 
+<button
   onClick={toggle}
   aria-expanded={isExpanded}
   aria-label={isExpanded ? 'Show less' : 'Show more'}
 >
   {isExpanded ? 'Show Less' : 'Read More'}
 </button>
-```
+
+```text
 
 ### ❌ Mistake 3: Icon Doesn't Rotate
 
 ```tsx
 // ❌ WRONG - Static icon
 <ChevronDown className="w-4 h-4" />
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Animated icon
 <ChevronDown className={`
   w-4 h-4 transition-transform duration-300
   ${isExpanded ? 'rotate-180' : 'rotate-0'}
 `} />
-```
+
+```text
 
 ---
 
@@ -529,9 +569,9 @@ const handleToggle = () => {
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system
-- **[FILE_STRUCTURE.md](../FILE_STRUCTURE.md)** - File organization
+- **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

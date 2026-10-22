@@ -1,14 +1,17 @@
 # Component System Overview
 
-This document provides a comprehensive overview of all components available in the Ash Shaw Makeup Portfolio design system, including a **React Component Architecture Diagram** and **Data Layer Integration**. **Always prefer custom components over generic HTML elements.**
+This document provides a comprehensive overview of all components available in
+the Ash Shaw Makeup Portfolio design system, including a **React Component
+Architecture Diagram** and **Data Layer Integration**. **Always prefer custom
+components over generic HTML elements.**
 
-**Version:** 5.0.0  
+**Version:** 5.0.0
 **Last Updated:** February 2026
 **Last Reviewed:** February 21, 2026
 
 ## 📊 React Component Architecture Diagram
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                              App.tsx                                     │
 │                         (Main Application)                               │
@@ -95,7 +98,8 @@ This document provides a comprehensive overview of all components available in t
                     ├─────────────────────┤
                     │ • portfolioService  │
                     └─────────────────────┘
-```
+
+```text
 
 ### Diagram Legend
 
@@ -114,9 +118,10 @@ This document provides a comprehensive overview of all components available in t
 
 ### Centralized Data Management System
 
-The application uses a comprehensive data layer that separates content from components:
+The application uses a comprehensive data layer that separates content from
+components:
 
-```
+```text
 Data Layer
 ├── Mock Data (/data/mock/)
 │   ├── Blog (posts.ts, categories.ts)
@@ -136,11 +141,12 @@ Data Layer
     ├── blog.ts (BlogPost, BlogCategory, etc.)
     ├── page.ts (HeroContent, AboutSection, etc.)
     └── portfolio.ts (PortfolioEntry, PortfolioImage, etc.)
-```
+
+```text
 
 ### Data Integration Pattern
 
-**Every component uses this pattern:**
+## Every component uses this pattern
 
 ```typescript
 // 1. Import mock data
@@ -157,9 +163,11 @@ const heroData = cmsData ? cmsData.hero : homepageHero;
 
 // 5. Use data in component
 <HeroLayout {...heroData} />
-```
+
+```text
 
 **Key Benefits:**
+
 - ✅ Works without CMS configuration
 - ✅ Automatic fallback to mock data
 - ✅ Type-safe with TypeScript
@@ -167,6 +175,7 @@ const heroData = cmsData ? cmsData.hero : homepageHero;
 - ✅ Easy content updates
 
 **Documentation:**
+
 - Complete guide: [Data System](../data/README.md)
 - CMS integration: [CMS Field Mapping](../docs/cms-field-mapping.md)
 
@@ -174,25 +183,35 @@ const heroData = cmsData ? cmsData.hero : homepageHero;
 
 ## 📚 How to Use This Guide
 
-**IMPORTANT:** Before using ANY component, you MUST read its specific guideline file. This overview helps you discover what's available, but the component-specific files contain critical implementation details.
+**IMPORTANT:** Before using ANY component, you MUST read its specific guideline
+file. This overview helps you discover what's available, but the
+component-specific files contain critical implementation details.
 
 ### Reading Order
 
 1. ✅ Read this overview to understand the component system
-2. ✅ Find the component you need in the tables below
-3. ✅ Read that component's specific guideline file BEFORE using it
-4. ✅ Follow the styling requirements in the component guide
+
+1. ✅ Find the component you need in the tables below
+
+1. ✅ Read that component's specific guideline file BEFORE using it
+
+1. ✅ Follow the styling requirements in the component guide
 
 ---
 
 ## 📋 Table of Contents
 
 1. [Component Philosophy](#component-philosophy)
-2. [Complete Component List](#complete-component-list)
-3. [Component Categories](#component-categories)
-4. [Common Component Props](#common-component-props)
-5. [Component Usage Patterns](#component-usage-patterns)
-6. [Styling Requirements](#styling-requirements)
+
+1. [Complete Component List](#complete-component-list)
+
+1. [Component Categories](#component-categories)
+
+1. [Common Component Props](#common-component-props)
+
+1. [Component Usage Patterns](#component-usage-patterns)
+
+1. [Styling Requirements](#styling-requirements)
 
 ---
 
@@ -201,17 +220,21 @@ const heroData = cmsData ? cmsData.hero : homepageHero;
 ### Always Prefer Components
 
 ✅ **CORRECT:** Use design system components
+
 ```tsx
 <Logo size="md" />
 <ScrollDownArrow />
 <ScrollBackToTop />
-```
+
+```text
 
 ❌ **WRONG:** Use generic HTML without styling
+
 ```tsx
 <div>Logo</div>
 <button>Scroll</button>
-```
+
+```text
 
 ### Explicit Styling Required
 
@@ -219,13 +242,16 @@ Every component must be styled explicitly with guidelines-compliant classes:
 
 ```tsx
 // ✅ CORRECT - Fully styled
-<Button className="w-full sm:w-auto bg-gradient-pink-purple-blue text-white px-button py-button font-body font-medium text-button-fluid rounded-lg shadow-lg hover:shadow-xl">
+<Button className="w-full sm:w-auto bg-gradient-pink-purple-blue text-white
+px-button py-button font-body font-medium text-button-fluid rounded-lg shadow-lg
+hover:shadow-xl">
   Submit
 </Button>
 
 // ❌ WRONG - Relying on defaults
 <Button>Submit</Button>
-```
+
+```text
 
 ---
 
@@ -341,37 +367,43 @@ Modal dialogs, loading indicators, and tag components.
 
 ## Quick Reference: When to Use Which Component
 
-### Building a Page?
+### Building a Page
+
 - Start with **Header** and **Footer**
 - Add **ScrollBackToTop** for long pages
 - Use **HeroSection** for landing pages
 - Add **Breadcrumbs** for deep navigation
 
-### Displaying Portfolio?
+### Displaying Portfolio
+
 - Use **PortfolioCard** in grids
 - Add **ImageGallery** for multiple images
 - Enable **Lightbox** for full-screen viewing
 - Add **CategoryFilter** for filtering
 - Use **LayoutSwitcher** for grid/list toggle
 
-### Building Blog?
+### Building Blog
+
 - Use **BlogCard** for post listings
 - Add **SearchBar** for search functionality
 - Use **Pagination** for page navigation
 - Add **Tag** for categories
 - Include **ShareComponent** on post pages
 
-### Need User Interaction?
+### Need User Interaction
+
 - Use **TypeformEmbed** for contact forms and inquiries
 - Use **ReadMoreButton** for expandable content
 - Add **ShareComponent** for social sharing
 - Use **Modal** for dialogs and confirmations
 
-### Loading States?
+### Loading States
+
 - Use **LoadingSpinner** while fetching data
 - Show skeleton loaders in cards
 
-### Social Features?
+### Social Features
+
 - Add **SocialLinks** in footer
 - Use **ShareComponent** for sharing
 - Include **TestimonialCard** for reviews
@@ -388,17 +420,18 @@ Most components accept these common props:
 interface CommonProps {
   /** Additional CSS classes for customization */
   className?: string;
-  
+
   /** Accessibility label for screen readers */
   ariaLabel?: string;
-  
+
   /** Test/tracking identifier */
   id?: string;
-  
+
   /** Inline styles (use sparingly) */
   style?: React.CSSProperties;
 }
-```
+
+```text
 
 ### Sizing Props
 
@@ -406,11 +439,12 @@ interface CommonProps {
 interface SizingProps {
   /** Component size variant */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /** Responsive width behavior */
   fullWidth?: boolean;
 }
-```
+
+```text
 
 ### Interaction Props
 
@@ -418,14 +452,15 @@ interface SizingProps {
 interface InteractionProps {
   /** Click handler */
   onClick?: (event: React.MouseEvent) => void;
-  
+
   /** Keyboard handler */
   onKeyDown?: (event: React.KeyboardEvent) => void;
-  
+
   /** Disabled state */
   disabled?: boolean;
 }
-```
+
+```text
 
 ---
 
@@ -444,17 +479,18 @@ function PageComponent() {
   return (
     <>
       <Header currentPage="home" onNavigate={handleNavigate} />
-      
+
       <main className="min-h-screen">
         {/* Page content */}
       </main>
-      
+
       <Footer />
       <ScrollBackToTop />
     </>
   );
 }
-```
+
+```text
 
 ### 2. Hero Section Pattern
 
@@ -474,12 +510,13 @@ function HeroSection() {
       <p className="text-body-guideline font-body">
         Makeup that shines with colour, energy, and connection.
       </p>
-      
+
       <ScrollDownArrow targetId="featured-section" />
     </HeroLayout>
   );
 }
-```
+
+```text
 
 ### 3. Content Grid Pattern
 
@@ -492,10 +529,11 @@ import { SectionCard } from './components/ui/SectionCard';
 function ContentGrid() {
   return (
     <section className="py-section">
-      <h2 className="text-section-h2 font-heading font-semibold text-center mb-fluid-lg">
+<h2 className="text-section-h2 font-heading font-semibold text-center
+mb-fluid-lg">
         Why I Do Makeup
       </h2>
-      
+
       <ThreeColumnLayout>
         <SectionCard
           title="Connection"
@@ -516,7 +554,8 @@ function ContentGrid() {
     </section>
   );
 }
-```
+
+```text
 
 ### 4. Portfolio Display Pattern
 
@@ -537,8 +576,9 @@ function PortfolioSection() {
         <h2 className="text-section-h2 font-heading font-semibold">Portfolio</h2>
         <LayoutSwitcher value={layout} onChange={setLayout} />
       </div>
-      
-      <div className={layout === 'grid' ? 'grid grid-cols-2 gap-fluid-md' : 'flex flex-col gap-fluid-md'}>
+
+<div className={layout === 'grid' ? 'grid grid-cols-2 gap-fluid-md' : 'flex
+flex-col gap-fluid-md'}>
         {portfolioEntries.map(entry => (
           <PortfolioCard
             key={entry.id}
@@ -547,7 +587,7 @@ function PortfolioSection() {
           />
         ))}
       </div>
-      
+
       {selectedEntry && (
         <PortfolioLightbox
           entry={selectedEntry}
@@ -557,7 +597,8 @@ function PortfolioSection() {
     </section>
   );
 }
-```
+
+```text
 
 ### 5. Blog Content Pattern
 
@@ -571,20 +612,21 @@ import { SearchBar } from './components/ui/SearchBar';
 function BlogSection() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   return (
     <section className="py-section">
       <h2 className="text-section-h2 font-heading font-semibold mb-fluid-lg">
         Latest Insights
       </h2>
-      
+
       <SearchBar
         value={searchQuery}
         onChange={setSearchQuery}
         placeholder="Search blog posts..."
       />
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md mt-fluid-lg">
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md
+mt-fluid-lg">
         {filteredPosts.map(post => (
           <BlogCard
             key={post.id}
@@ -593,7 +635,7 @@ function BlogSection() {
           />
         ))}
       </div>
-      
+
       <BlogPagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -602,7 +644,8 @@ function BlogSection() {
     </section>
   );
 }
-```
+
+```text
 
 ---
 
@@ -614,7 +657,8 @@ All text must use explicit typography classes:
 
 ```tsx
 // Headings
-<h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue">
+<h1 className="text-hero-h1 font-title font-bold
+text-gradient-pink-purple-blue">
   Main Title
 </h1>
 
@@ -623,10 +667,12 @@ All text must use explicit typography classes:
 </h2>
 
 // Body text
-<p className="text-body-guideline font-body font-normal text-gray-700 leading-relaxed">
+<p className="text-body-guideline font-body font-normal text-gray-700
+leading-relaxed">
   Body content with proper line height and spacing.
 </p>
-```
+
+```text
 
 ### Button Styling (REQUIRED)
 
@@ -634,30 +680,45 @@ All buttons must use complete styling:
 
 ```tsx
 // Primary CTA
-<button className="w-full sm:w-auto justify-center text-center bg-gradient-pink-purple-blue hover:from-purple-700 hover:to-pink-700 text-white px-button py-button font-body font-medium text-button-fluid transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-200 focus:ring-opacity-50">
+<button className="w-full sm:w-auto justify-center text-center
+bg-gradient-pink-purple-blue hover:from-purple-700 hover:to-pink-700 text-white
+px-button py-button font-body font-medium text-button-fluid transition-all
+duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105
+focus:outline-none focus:ring-4 focus:ring-pink-200 focus:ring-opacity-50">
   Explore Portfolio
 </button>
 
 // Secondary action
-<button className="w-full sm:w-auto justify-center text-center bg-gradient-blue-teal-green hover:from-blue-700 hover:to-teal-700 text-white px-button py-button font-body font-medium text-button-fluid transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-teal-200 focus:ring-opacity-50">
+<button className="w-full sm:w-auto justify-center text-center
+bg-gradient-blue-teal-green hover:from-blue-700 hover:to-teal-700 text-white
+px-button py-button font-body font-medium text-button-fluid transition-all
+duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105
+focus:outline-none focus:ring-4 focus:ring-teal-200 focus:ring-opacity-50">
   Read More
 </button>
-```
+
+```text
 
 ### Card Styling (REQUIRED)
 
 All cards must use complete styling:
 
 ```tsx
-<div className="bg-white/80 backdrop-blur-sm rounded-2xl p-card-responsive border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
-  <h3 className="text-section-h2 font-heading font-semibold text-gray-800 mb-fluid-md group-hover:text-gradient-pink-purple-blue transition-colors duration-300">
+<div className="bg-white/80 backdrop-blur-sm rounded-2xl p-card-responsive
+border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300
+group">
+<h3 className="text-section-h2 font-heading font-semibold text-gray-800
+mb-fluid-md group-hover:text-gradient-pink-purple-blue transition-colors
+duration-300">
     Card Title
   </h3>
-  <p className="text-body-guideline font-body font-normal text-gray-700 leading-relaxed">
+<p className="text-body-guideline font-body font-normal text-gray-700
+leading-relaxed">
     Card content
   </p>
 </div>
-```
+
+```text
 
 ---
 
@@ -666,6 +727,7 @@ All cards must use complete styling:
 ### Keyboard Navigation
 
 All interactive components must support:
+
 - **Tab** - Focus navigation
 - **Enter/Space** - Activation
 - **Escape** - Close/cancel
@@ -687,13 +749,15 @@ All interactive components must support:
 <div aria-live="polite" aria-atomic="true">
   {statusMessage}
 </div>
-```
+
+```text
 
 ### Focus Management
 
 ```tsx
 // Visible focus indicators
-<button className="focus:outline-none focus:ring-4 focus:ring-pink-200 focus:ring-opacity-50">
+<button className="focus:outline-none focus:ring-4 focus:ring-pink-200
+focus:ring-opacity-50">
   Action
 </button>
 
@@ -704,7 +768,8 @@ useEffect(() => {
     (firstFocusable as HTMLElement)?.focus();
   }
 }, [isOpen]);
-```
+
+```text
 
 ---
 
@@ -713,12 +778,14 @@ useEffect(() => {
 Before using any component, read its specific guideline file:
 
 ### Core UI Components
+
 - **[Logo](./components/Logo.md)** - Brand logo with responsive sizing
 - **[ScrollDownArrow](./components/ScrollDownArrow.md)** - Animated scroll indicator
 - **[ScrollBackToTop](./components/ScrollBackToTop.md)** - Floating scroll button
 - **[LayoutSwitcher](./components/LayoutSwitcher.md)** - Grid/list view toggle
 
 ### Phase 3 Content Components (NEW)
+
 - **[Timeline](./components/Timeline.md)** - Chronological event timeline with neon accents
 - **[PullQuote](./components/PullQuote.md)** - Visually emphasized blockquote with neon borders
 - **[Accordion](./components/Accordion.md)** - Collapsible content sections with keyboard navigation
@@ -738,12 +805,12 @@ Before using any component, read its specific guideline file:
 
 ---
 
-**Last Updated:** February 2026  
+**Last Updated:** February 2026
 **Version:** 5.0.0
 
 ## Component Extraction Patterns
 
-**Added:** March 11, 2026  
+**Added:** March 11, 2026
 **Based on:** Modern React Migration Audit
 
 ### When to Extract Components
@@ -757,7 +824,8 @@ Before using any component, read its specific guideline file:
 | 300-500 | 🔴 Should split into smaller components |
 | 500+ | 🚨 Must split immediately |
 
-**Complexity Signals - Extract when you see:**
+## Complexity Signals - Extract when you see
+
 - Multiple `useState` calls (5+) managing different concerns
 - Deeply nested JSX (4+ levels)
 - Multiple `useEffect` hooks for different purposes
@@ -765,30 +833,34 @@ Before using any component, read its specific guideline file:
 - Difficulty understanding component purpose at a glance
 - Inline component definitions inside other components
 
-### Extract to Custom Hooks When:
+### Extract to Custom Hooks When
 
 **State Management:**
+
 - Component has 5+ related `useState` calls
 - Complex state logic that could be reused
 - State needs to be shared across multiple components
 
 **Side Effects:**
+
 - Multiple `useEffect` hooks doing different things
 - Event listeners that need cleanup
 - API calls with loading/error states
 
-**Data Transformation:**
+## Data Transformation
+
 - Complex filtering, sorting, or mapping logic
 - Search functionality
 - Pagination logic
 
 **Browser APIs:**
+
 - Fullscreen API
 - Intersection Observer
 - Media queries
 - LocalStorage/SessionStorage
 
-**Example - EbookPage Refactoring:**
+## Example - EbookPage Refactoring
 
 ```typescript
 // BEFORE - 800+ line component
@@ -798,20 +870,20 @@ export function EbookPage() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
   // ... 10+ more useState calls
-  
+
   // Touch gesture handling
   useEffect(() => {
     const handleTouchStart = (e) => { /* ... */ };
     const handleTouchEnd = (e) => { /* ... */ };
     // ... 50+ lines
   }, []);
-  
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => { /* ... */ };
     // ... 40+ lines
   }, []);
-  
+
   // ... 600+ more lines
 }
 
@@ -837,11 +909,13 @@ export function EbookPage() {
     </div>
   );
 }
-```
 
-### Extract to Separate Components When:
+```text
+
+### Extract to Separate Components When
 
 **UI Patterns:**
+
 - Component appears in 3+ places with minor variations
 - Large JSX blocks (100+ lines) that could be self-contained
 - Modal/dialog content
@@ -849,12 +923,13 @@ export function EbookPage() {
 - Form sections
 
 **Layout Structures:**
+
 - Archive page layouts (blog, portfolio, videos)
 - Section wrappers
 - Grid layouts
 - List layouts
 
-**Example - Shared Archive Layout:**
+## Example - Shared Archive Layout
 
 ```typescript
 // BEFORE - 70% duplicated code across 3 files
@@ -896,13 +971,14 @@ export function VideoCategoryPage() {
     </TaxonomyArchiveLayout>
   );
 }
-```
+
+```text
 
 ### Component Organization Best Practices
 
 **File Structure:**
 
-```
+```text
 /components/
 ├── common/           # Shared across entire app
 │   ├── Header.tsx
@@ -931,7 +1007,8 @@ export function VideoCategoryPage() {
 └── layout/           # Layout components
     ├── TaxonomyArchiveLayout.tsx
     └── index.tsx
-```
+
+```text
 
 **Barrel Exports:**
 
@@ -943,7 +1020,8 @@ export { Button } from './Button';
 export { StickerLightbox } from './StickerLightbox';
 export { OptimizedImage } from './OptimizedImage';
 // ... all UI components
-```
+
+```text
 
 **Usage:**
 
@@ -955,13 +1033,14 @@ import { StickerLightbox } from '../../ui/StickerLightbox';
 
 // AFTER - Single import
 import { Breadcrumbs, Button, StickerLightbox } from '../../ui';
-```
+
+```text
 
 ### Custom Hooks Organization
 
 **File Structure:**
 
-```
+```text
 /hooks/
 ├── useEbookState.ts        # State management hooks
 ├── useVideoFiltering.ts    # Data transformation hooks
@@ -972,9 +1051,10 @@ import { Breadcrumbs, Button, StickerLightbox } from '../../ui';
 ├── useScrollSpy.ts         # Browser API hooks
 ├── useTheme.ts             # App-wide state hooks
 └── index.ts                # Barrel export
-```
 
-**Barrel Export `/hooks/index.ts`:**
+```text
+
+## Barrel Export `/hooks/index.ts`
 
 ```typescript
 // State Management
@@ -992,7 +1072,8 @@ export { useKeyboardNav } from './useKeyboardNav';
 // Browser APIs
 export { useFullscreen } from './useFullscreen';
 export { useScrollSpy } from './useScrollSpy';
-```
+
+```text
 
 ### Refactoring Checklist
 
@@ -1013,21 +1094,25 @@ When refactoring a large component, follow this checklist:
 ### Common Patterns from Codebase
 
 **Pattern 1: Archive Page Layout**
+
 - Used by: VideoCategoryPage, VideoTagPage, BlogCategoryPage
 - Shared: Header, Breadcrumbs, Filters, FAQ section
 - Component: `TaxonomyArchiveLayout`
 
 **Pattern 2: Lightbox/Modal**
+
 - Used by: StickersPage, PortfolioPage
 - Shared: Overlay, keyboard nav, prev/next controls
 - Component: `StickerLightbox`, modal base
 
 **Pattern 3: State + Touch + Keyboard**
+
 - Used by: EbookPage, gallery components
 - Shared: State management, touch gestures, keyboard shortcuts
 - Hooks: `useEbookState`, `useTouchGestures`, `useKeyboardNav`
 
 **Pattern 4: Search + Filter + Sort**
+
 - Used by: StickersPage, VideosPage, BlogPage
 - Shared: Search input, category filters, sort dropdown
 - Hooks: `useStickerSearch`, `useVideoFiltering`
@@ -1039,7 +1124,7 @@ When refactoring a large component, follow this checklist:
 
 ---
 
-## Related Documentation
+## Related Documentation (1)
 
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines document
 - **[overview-icons.md](./overview-icons.md)** - Icon system and verification
@@ -1049,5 +1134,5 @@ When refactoring a large component, follow this checklist:
 
 ---
 
-**Last Updated:** February 2026  
+**Last Updated:** February 2026
 **Version:** 5.0.0

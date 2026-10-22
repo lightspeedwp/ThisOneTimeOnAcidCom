@@ -1,8 +1,9 @@
 # Social media content calendar template
 
-**Month:** [Month Year]  
-**Focus theme:** [e.g., "Berlin summer season", "Harvest time", "WordCamp prep"]  
-**Key events:** [List festivals, WordCamps, training milestones, LightSpeed launches]
+**Month:** [Month Year]
+**Focus theme:** [e.g., "Berlin summer season", "Harvest time", "WordCamp prep"]
+**Key events:** [List festivals, WordCamps, training milestones, LightSpeed
+launches]
 
 ---
 
@@ -129,25 +130,36 @@
 ### Blog post → Social media cascade
 
 1. **LinkedIn:** Share full article link with 1–2 paragraph commentary (Week 1)
-2. **Facebook:** Excerpt key section + link to full post (Week 2)
-3. **Instagram:** Pull quote as graphic + carousel with 3–5 key points (Week 3)
-4. **Instagram Stories:** Behind-the-scenes of writing the post (Week 1)
+
+1. **Facebook:** Excerpt key section + link to full post (Week 2)
+
+1. **Instagram:** Pull quote as graphic + carousel with 3–5 key points (Week 3)
+
+1. **Instagram Stories:** Behind-the-scenes of writing the post (Week 1)
 
 ### Festival recap → Multi-format content
 
 1. **Instagram Post:** Best UV transformation photo + short caption
-2. **Instagram Reel:** 30-second montage of painting process
-3. **Instagram Stories:** 5–7 frame series (arrival, setup, faces, dancefloor, sunrise, departure)
-4. **Facebook:** Longer narrative post with photo album
-5. **Blog:** Full festival diary with embedded photos (link back from social)
+
+1. **Instagram Reel:** 30-second montage of painting process
+
+1. **Instagram Stories:** 5–7 frame series (arrival, setup, faces, dancefloor, sunrise, departure)
+
+1. **Facebook:** Longer narrative post with photo album
+
+1. **Blog:** Full festival diary with embedded photos (link back from social)
 
 ### Cycling journey → Documentary series
 
 1. **Instagram Story (Day 1):** "Starting the ride" — bike loaded, route map
-2. **Instagram Story (Day 2):** "Midpoint check-in" — stats, scenery, reflections
-3. **Instagram Story (Day 3):** "Arrival" — festival entrance, unloading gear
-4. **Instagram Post (Week after):** Journey recap with stats + hero image
-5. **Blog (Month after):** Long-form journey essay with map, photos, lessons
+
+1. **Instagram Story (Day 2):** "Midpoint check-in" — stats, scenery, reflections
+
+1. **Instagram Story (Day 3):** "Arrival" — festival entrance, unloading gear
+
+1. **Instagram Post (Week after):** Journey recap with stats + hero image
+
+1. **Blog (Month after):** Long-form journey essay with map, photos, lessons
 
 ---
 
@@ -162,15 +174,16 @@ At the end of each month, review:
 - [ ] **Wins:** What post performed best? Why?
 - [ ] **Lessons:** What didn't work? What to adjust next month?
 
-**Adjust next month's calendar based on review.**
+## Adjust next month's calendar based on review
 
 ---
 
 ## Sample filled calendar (March 2026 example)
 
-**Month:** March 2026  
-**Focus theme:** "Berlin summer prep + Origin Festival recap"  
-**Key events:** Origin Festival (early March), LightSpeed Q1 review, Muay Thai intensive (Koh Phangan)
+**Month:** March 2026
+**Focus theme:** "Berlin summer prep + Origin Festival recap"
+**Key events:** Origin Festival (early March), LightSpeed Q1 review, Muay Thai
+intensive (Koh Phangan)
 
 ### Week 1 (March 1–7): Origin Festival recap
 
@@ -213,25 +226,27 @@ At the end of each month, review:
 
 ## Notes section
 
-Use this space to capture ideas, track trends, or note feedback throughout the month:
+Use this space to capture ideas, track trends, or note feedback throughout the
+month:
 
 - **Ideas bank:**
-  - [ ] Tutorial: How to create geometric UV liner (Reel)
-  - [ ] Behind-the-scenes: Setting up the Six Cats worm tea system
-  - [ ] Time-lapse: Painting a face from start to UV glow
+- [ ] Tutorial: How to create geometric UV liner (Reel)
+- [ ] Behind-the-scenes: Setting up the Six Cats worm tea system
+- [ ] Time-lapse: Painting a face from start to UV glow
 
 - **Trending topics to explore:**
-  - Sustainable festival practices (tie to eco-glitter post)
-  - ADHD-positive content (neurodivergent creatives in tech/art)
-  - Remote work + nomadic lifestyle balance
+- Sustainable festival practices (tie to eco-glitter post)
+- ADHD-positive content (neurodivergent creatives in tech/art)
+- Remote work + nomadic lifestyle balance
 
 - **Feedback received:**
-  - More process videos requested (Instagram comments)
-  - WordPress community wants AI workflow deep-dives (LinkedIn DMs)
-  - Festival crew loves the cycling journey posts (keep doing them!)
+- More process videos requested (Instagram comments)
+- WordPress community wants AI workflow deep-dives (LinkedIn DMs)
+- Festival crew loves the cycling journey posts (keep doing them!)
 
 ---
 
-**End of content calendar template**
+## End of content calendar template
 
-_Copy this template monthly, fill in dates, and adjust based on real-world events and community feedback._
+*Copy this template monthly, fill in dates, and adjust based on real-world
+events and community feedback.*

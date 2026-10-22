@@ -9,15 +9,20 @@
 
 ## Objective
 
-Expand the Six Cats page data to reflect the rich, detailed story now documented in `/docs/website-content.md`. The current page likely contains minimal content. The source document contains a full brand story: individual cat profiles, cultivation processes, grading system, values, and packaging ethos.
+Expand the Six Cats page data to reflect the rich, detailed story now documented
+in `/docs/website-content.md`. The current page likely contains minimal content.
+The source document contains a full brand story: individual cat profiles,
+cultivation processes, grading system, values, and packaging ethos.
 
 ---
 
 ## Source Material
 
-**Primary source:** `/docs/website-content.md` — section: "Six Cats Club / the full story about Ash Shaw's cannabis club"
+**Primary source:** `/docs/website-content.md` — section: "Six Cats Club / the
+full story about Ash Shaw's cannabis club"
 
 Key content sections available:
+
 - Vision & Mission statement
 - 8 brand values (Authenticity, Consciousness, Consistency, Experience, Meticulousness, Sustainability, Passion, Quality)
 - The Humans section
@@ -33,18 +38,22 @@ Key content sections available:
 ## Audit Steps
 
 ### Step 1: Review current Six Cats data
+
 **File:** `/data/mock/pages/six-cats.ts`
 
 Document:
+
 - Current fields and structure
 - What content is already present
 - What is missing compared to `website-content.md`
 - Data shape/TypeScript interface used
 
 ### Step 2: Review the TypeScript types
+
 **File:** `/data/types/`
 
 Identify:
+
 - Existing interface for Six Cats page data
 - Whether cat profile arrays exist
 - Whether cultivation step arrays exist
@@ -114,23 +123,32 @@ interface BrandValue {
   title: string;
   description: string;
 }
-```
 
-All structures must follow existing conventions in the project (see `/data/types/` for patterns).
+```text
+
+All structures must follow existing conventions in the project (see
+`/data/types/` for patterns).
 
 ### Step 5: Write the updated data
 
 Update `/data/mock/pages/six-cats.ts` to include:
 
 1. **Cat profiles array** — all 6 living cats with personality-rich descriptions drawn directly from `website-content.md`
-2. **In memoriam array** — Lisa, Moe, Lucy with their tribute descriptions
-3. **Cultivation steps** — growing (4 steps) + harvest phases (4 steps)
-4. **Grading system** — all 5 grades with descriptions
-5. **Brand values** — all 8 values
-6. **Vision & Mission** strings
-7. **Packaging section** — glass recycling narrative
 
-**Writing guidelines:**
+1. **In memoriam array** — Lisa, Moe, Lucy with their tribute descriptions
+
+1. **Cultivation steps** — growing (4 steps) + harvest phases (4 steps)
+
+1. **Grading system** — all 5 grades with descriptions
+
+1. **Brand values** — all 8 values
+
+1. **Vision & Mission** strings
+
+1. **Packaging section** — glass recycling narrative
+
+## Writing guidelines
+
 - All section titles in **sentence case**
 - All cat names follow the nicknames from `website-content.md` (e.g. "Timmmaaaahh", "Wendells")
 - He/Him pronouns throughout
@@ -140,6 +158,7 @@ Update `/data/mock/pages/six-cats.ts` to include:
 ### Step 6: Verify no hardcoded strings in component
 
 Check `/components/pages/SixCatsPage.tsx` (or equivalent):
+
 - Confirm the component imports from `six-cats.ts` (not hardcoded)
 - If component references fields that don't exist in new data, update imports only (never hardcode)
 
@@ -148,15 +167,18 @@ Check `/components/pages/SixCatsPage.tsx` (or equivalent):
 ## Output Format
 
 ### Section 1: Current state assessment
+
 - Fields present in current six-cats.ts
 - Missing content identified
 - TypeScript interface gaps
 
 ### Section 2: Data structure design
+
 - Proposed TypeScript interfaces for new arrays
 - Field names following existing conventions
 
 ### Section 3: Implementation
+
 - Full updated content for `/data/mock/pages/six-cats.ts`
 - All cat profiles (6 living + 3 in memoriam)
 - All cultivation steps (8 total)
@@ -165,6 +187,7 @@ Check `/components/pages/SixCatsPage.tsx` (or equivalent):
 - Vision, mission, packaging content
 
 ### Section 4: Component checklist
+
 - Components verified as importing from data layer
 - No hardcoded strings
 
@@ -194,18 +217,27 @@ Check `/components/pages/SixCatsPage.tsx` (or equivalent):
 **Total cats adopted:** 9 over the years, 3 passed
 **Website:** sixcats.club
 
-**Living cats (as of 2026):**
+## Living cats (as of 2026)
+
 1. Timmy (Timmmaaaahh) — Sole remaining original six member. Therapy cat. Senses when someone needs a cuddle.
-2. Wendy (Wendells) — Rescued in rainstorm at 5 weeks. Agile matriarch. Soccer with paper balls. Claws are real.
-3. Jimmy (Super Slim Jim) — FIV-positive. Serious illness late 2023, remarkable recovery. Laid-back.
-4. Bean (The Survivor) — Rescued Jan 2022 from under a Wendy house at a shopping centre. Was feral, blossomed with love.
-5. Jeff (The Wanderer) — Found wandering alone May 2022. Nestled into Ash's arms immediately. Occasional adventurer.
-6. Frank (Blue Eyes) — Named after Frank Sinatra. Stray visitor, not quite permanent. Peaceful demeanour, blue eyes.
+
+1. Wendy (Wendells) — Rescued in rainstorm at 5 weeks. Agile matriarch. Soccer with paper balls. Claws are real.
+
+1. Jimmy (Super Slim Jim) — FIV-positive. Serious illness late 2023, remarkable recovery. Laid-back.
+
+1. Bean (The Survivor) — Rescued Jan 2022 from under a Wendy house at a shopping centre. Was feral, blossomed with love.
+
+1. Jeff (The Wanderer) — Found wandering alone May 2022. Nestled into Ash's arms immediately. Occasional adventurer.
+
+1. Frank (Blue Eyes) — Named after Frank Sinatra. Stray visitor, not quite permanent. Peaceful demeanour, blue eyes.
 
 **In memoriam:**
+
 1. Lisa (Granny Cat) — Original matriarch from ~2003, lived to ~17. Passed July 2020.
-2. Moe (Fat-Boy-Fat) — Couch Commissioner. Passed 4 January 2022. Snored, did silly things, left a massive gap.
-3. Lucy (Dennis the Menace) — Cross-Burmese. Matriarch after Lisa. Talkative, welcoming. Passed 24 October 2023.
+
+1. Moe (Fat-Boy-Fat) — Couch Commissioner. Passed 4 January 2022. Snored, did silly things, left a massive gap.
+
+1. Lucy (Dennis the Menace) — Cross-Burmese. Matriarch after Lisa. Talkative, welcoming. Passed 24 October 2023.
 
 ---
 
@@ -218,4 +250,6 @@ Check `/components/pages/SixCatsPage.tsx` (or equivalent):
 ---
 
 **Status:** Ready to execute
-**Next:** Run audit, write report to `/reports/content-expansion-phase7/01-six-cats-expansion.md`, then run [02-lightspeed-stories.md](./02-lightspeed-stories.md)
+**Next:** Run audit, write report to
+`/reports/content-expansion-phase7/01-six-cats-expansion.md`, then run
+[02-lightspeed-stories.md](./02-lightspeed-stories.md)

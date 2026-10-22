@@ -7,25 +7,33 @@
 
 ## Objective
 
-Create a new Dev Tools section for "Content-Type Specimens" that showcases how rich text and layout elements look within the context of specific content types (videos, portfolio, posts, events, podcasts). Each content type has unique neon rainbow styling, and all specimens must be toggleable between light and dark modes.
+Create a new Dev Tools section for "Content-Type Specimens" that showcases how
+rich text and layout elements look within the context of specific content types
+(videos, portfolio, posts, events, podcasts). Each content type has unique neon
+rainbow styling, and all specimens must be toggleable between light and dark
+modes.
 
 ---
 
 ## Requirements
 
 1. **Rich Text Specimens with Tabs:**
+
    - Display a robust rich text block (blockquotes, code blocks, image layouts, pull quotes, lists, tables).
    - Use a Tab navigation to switch between different content-type specimens.
    - Remember to implement explicit light and dark mode styling testing for each.
 
-2. **Tailored FAQ Sections:**
+1. **Tailored FAQ Sections:**
+
    - Every content type (blog, portfolio, video, etc.) should have an FAQ section specimen with styling tailored to its assigned neon rainbow colour.
 
-3. **Template Browser:**
+1. **Template Browser:**
+
    - Present full-page layout specimens using a "template browser" approach.
    - Should provide thumbnail/miniature previews of the detail page layout in both light and dark modes.
 
-4. **Dev-Tools Placement:**
+1. **Dev-Tools Placement:**
+
    - Live inside `/dev-tools/` under a special "Style Guide Expansion" or "Content Specimens" category so these tools grow together.
 
 ---
