@@ -4,25 +4,48 @@
 # scripts/netlify-hashed-asset-headers.mjs; do not add Cache-Control here.
 
 [build]
+  # Build command
   command = "npm run build"
+
+  # Directory with the static files to deploy
   publish = "dist"
 
+# Production environment variables — standardized for development, CI/CD, and Netlify
 [build.environment]
   NODE_VERSION = "24"
+  NPM_VERSION = "10"
 
-# Baseline security headers. Content-Security-Policy is deliberately deferred:
-# the draft policy in src/app/netlify.toml would block the Typeform, YouTube and Vimeo embeds.
+# Security headers
 [[headers]]
-for = "/*"
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none';"
 
-[headers.values]
-X-Content-Type-Options = "nosniff"
-Referrer-Policy = "strict-origin-when-cross-origin"
-X-Frame-Options = "DENY"
-Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
-
-# SPA fallback for React Router. Not forced, so existing files are served as-is.
+# SPA fallback for client-side routing — React Router routes handled by client
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Optimize images
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
