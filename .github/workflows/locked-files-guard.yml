@@ -65,6 +65,7 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             scripts/validation/check-locked-file-approval.cjs
+            .github/PROTECTED_FILES.txt
             .github/reports/audits/2026-09-14-label-audit/evidence/change-requests.json
           sparse-checkout-cone-mode: false
 
