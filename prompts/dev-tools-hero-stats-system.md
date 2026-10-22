@@ -1,9 +1,9 @@
 # Dev Tools Hero & Stats System Implementation Prompt
 
-**Prompt Type:** Feature Implementation & Architecture Design  
-**Category:** Developer Tools Enhancement  
-**Complexity:** Very High (WebGL 3D, Dedicated Layout System, Search)  
-**Version:** 2.0.0  
+**Prompt Type:** Feature Implementation & Architecture Design
+**Category:** Developer Tools Enhancement
+**Complexity:** Very High (WebGL 3D, Dedicated Layout System, Search)
+**Version:** 2.0.0
 **Created:** March 7, 2026
 **Updated:** March 7, 2026 (Added dedicated dev tools layout system)
 
@@ -11,28 +11,41 @@
 
 ## 📋 Objective
 
-Design and implement a complete, isolated layout system for the dev tools section featuring:
+Design and implement a complete, isolated layout system for the dev tools
+section featuring:
 
 ### Core Hero & Stats System
+
 1. **Left-aligned hero content** with dynamic typography and neon accents
-2. **WebGL 3D custom SVG moving graphic** on the right side
-3. **Data-driven configuration** for content, fonts, styles, colors, and Phosphor icons
-4. **Universal stats bar** below the hero showing page-specific metrics
-5. **Automated stats gathering** with reusable audit functions
+
+1. **WebGL 3D custom SVG moving graphic** on the right side
+
+1. **Data-driven configuration** for content, fonts, styles, colors, and Phosphor icons
+
+1. **Universal stats bar** below the hero showing page-specific metrics
+
+1. **Automated stats gathering** with reusable audit functions
 
 ### Dedicated Dev Tools Layout System (NEW)
-6. **Separate dev tools header** with search functionality and burger menu
-7. **Dev tools-specific breadcrumbs** with unique styling
-8. **Dev tools-specific footer** with tool links and metadata
-9. **Full-screen menu** triggered from burger menu icon
-10. **Dev tools search** with real-time filtering across all tools
-11. **Dedicated layout component** wrapping all dev tools pages
+
+1. **Separate dev tools header** with search functionality and burger menu
+
+1. **Dev tools-specific breadcrumbs** with unique styling
+
+1. **Dev tools-specific footer** with tool links and metadata
+
+1. **Full-screen menu** triggered from burger menu icon
+
+1. **Dev tools search** with real-time filtering across all tools
+
+1. **Dedicated layout component** wrapping all dev tools pages
 
 ---
 
 ## 🎯 Success Criteria
 
 ### Hero & Stats System
+
 - [ ] Single `<DevToolsHero>` component powers all 33+ dev tools pages
 - [ ] WebGL 3D graphic system with custom SVG support and animation presets
 - [ ] Centralized hero configuration data file (`/data/mock/ui/dev-tools-heroes.ts`)
@@ -41,6 +54,7 @@ Design and implement a complete, isolated layout system for the dev tools sectio
 - [ ] Reusable stats gathering functions in `/utils/statsGathering.ts`
 
 ### Dev Tools Layout System (NEW)
+
 - [ ] Dedicated `<DevToolsLayout>` component wraps all dev tools pages
 - [ ] `<DevToolsHeader>` with search bar and burger menu
 - [ ] `<DevToolsBreadcrumbs>` with dev tools-specific styling
@@ -51,6 +65,7 @@ Design and implement a complete, isolated layout system for the dev tools sectio
 - [ ] Navigation data file for dev tools menu structure
 
 ### Quality Standards
+
 - [ ] Full BEM CSS architecture (no Tailwind)
 - [ ] WCAG 2.1 AA compliant with reduced motion support
 - [ ] Zero bundler syntax violations (no optional chaining, nullish coalescing, etc.)
@@ -65,22 +80,27 @@ Design and implement a complete, isolated layout system for the dev tools sectio
 ### 1.1 Scan All Dev Tools Pages
 
 **Files to audit:**
-```
+
+```text
 /components/pages/dev-tools/*.tsx (33 files)
-```
+
+```text
 
 **Data to collect:**
+
 - Current hero HTML structure and BEM classes
 - Content patterns (badge, title, subtitle/description)
 - Icon usage (which pages use icons, which Phosphor icons)
 - Layout variations (centered vs left-aligned)
 - Special features (breadcrumbs, tabs, filters)
 
-**Output:** Create report at `/reports/dev-tools-hero-audit/current-hero-patterns.md`
+**Output:** Create report at
+`/reports/dev-tools-hero-audit/current-hero-patterns.md`
 
 ### 1.2 Identify Common Patterns
 
 Extract:
+
 - Shared content structure (badge → title → description)
 - Typography scale (title sizes, subtitle sizes)
 - Color usage (gradient titles, neon accents)
@@ -92,12 +112,14 @@ Extract:
 ### 1.3 Identify Unique Requirements
 
 Document edge cases:
+
 - Pages with tabs below hero (BlogSpecimensPage, ContentCardSpecimensPage)
 - Pages with filters (PortfolioSpecimensPage)
 - Pages with breadcrumbs above hero (all sub-pages)
 - Pages with custom badges or status indicators
 
-**Output:** Add findings to report under "Edge Cases & Special Requirements" section
+**Output:** Add findings to report under "Edge Cases & Special Requirements"
+section
 
 ---
 
@@ -113,15 +135,17 @@ export interface DevToolHeroConfig {
   badge: string;
   badgeColor?: 'pink' | 'cyan' | 'green' | 'purple' | 'orange' | 'yellow';
   title: string;
-  titleGradient?: 'cyberpunk' | 'toxic-lime' | 'solar-flare' | 'hyperpop' | 'default';
+titleGradient?: 'cyberpunk' | 'toxic-lime' | 'solar-flare' | 'hyperpop' |
+'default';
   description: string;
   icon?: string; // Phosphor icon name
   iconWeight?: 'thin' | 'light' | 'regular' | 'bold' | 'fill' | 'duotone';
   iconColor?: string; // Custom CSS color or token reference
-  
+
   // WebGL 3D Graphic Configuration
   graphic: {
-    type: 'svg-morph' | 'particle-system' | 'geometric-rotation' | 'neon-flow' | 'grid-wave';
+type: 'svg-morph' | 'particle-system' | 'geometric-rotation' | 'neon-flow' |
+'grid-wave';
     svgPath?: string; // Path to SVG file in /imports/ or inline SVG code
     primaryColor: string; // Neon color token
     secondaryColor: string;
@@ -129,7 +153,7 @@ export interface DevToolHeroConfig {
     complexity: 'low' | 'medium' | 'high'; // Number of particles/vertices
     interactivity: boolean; // Mouse hover effects
   };
-  
+
   // Layout Options
   layout?: {
     contentWidth?: 'narrow' | 'medium' | 'wide'; // Left column width
@@ -143,9 +167,11 @@ export const devToolsHeroConfigs: Record<string, DevToolHeroConfig> = {
   'content-specimens': { /* ... */ },
   // ... all 33+ dev tools pages
 };
-```
 
-**Design decisions to document:**
+```text
+
+## Design decisions to document
+
 - Should graphic type auto-select based on page category?
 - Default graphic for pages without custom config?
 - Fallback behavior if WebGL not supported?
@@ -155,6 +181,7 @@ export const devToolsHeroConfigs: Record<string, DevToolHeroConfig> = {
 **Create:** `/components/dev-tools/WebGLHeroGraphic.tsx`
 
 **Requirements:**
+
 - Accept configuration from hero data
 - Load and parse SVG paths
 - Render 3D scene using WebGL (canvas element)
@@ -164,16 +191,19 @@ export const devToolsHeroConfigs: Record<string, DevToolHeroConfig> = {
   3. **Geometric Rotation** — 3D geometric shapes rotating (cube, sphere, torus)
   4. **Neon Flow** — Flowing energy lines based on SVG curves
   5. **Grid Wave** — Undulating grid surface with neon wireframe
+
 - Mouse interactivity (tilt, parallax, attract/repel particles)
 - Reduced motion fallback (static SVG with subtle glow)
 - Performance budget: maintain 60fps on mid-range devices
 
-**Libraries to consider:**
+## Libraries to consider
+
 - Three.js (if available in Figma Make)
 - Raw WebGL with custom shaders
 - Canvas 2D fallback for older browsers
 
 **CSS integration:**
+
 - Neon color tokens for colors
 - Respect `prefers-reduced-motion`
 - Responsive sizing (scale down on mobile)
@@ -200,10 +230,12 @@ export function DevToolsHero(props: DevToolsHeroProps) {
   // Handle responsive layout
   // Manage reduced motion
 }
-```
+
+```text
 
 **BEM structure:**
-```
+
+```text
 .dev-tools-hero
   .dev-tools-hero__container (max-width wrapper)
     .dev-tools-hero__content (left column)
@@ -213,11 +245,13 @@ export function DevToolsHero(props: DevToolsHeroProps) {
       .dev-tools-hero__description
     .dev-tools-hero__graphic (right column)
       canvas.dev-tools-hero__canvas
-```
+
+```text
 
 **CSS file:** `/styles/blocks/dev-tools-hero.css`
 
-**Responsive behavior:**
+## Responsive behavior
+
 - Desktop (>1024px): Two-column split (60/40 or 50/50)
 - Tablet (768-1024px): Two-column split (70/30)
 - Mobile (<768px): Stack vertically, graphic at reduced height
@@ -295,7 +329,8 @@ export const devToolsStatsConfigs: Record<string, StatsBarConfig> = {
   },
   // ... all 33+ dev tools pages
 };
-```
+
+```text
 
 ### 3.2 Stats Gathering Functions Architecture
 
@@ -303,6 +338,7 @@ export const devToolsStatsConfigs: Record<string, StatsBarConfig> = {
 
 ```typescript
 /**
+
  * Stats Gathering Utilities
  * Reusable functions to audit codebase and compute page-specific metrics
  */
@@ -312,6 +348,7 @@ export interface GatheredStats {
 }
 
 /**
+
  * Base function to count files matching a pattern
  */
 export function countFiles(pattern: string): number {
@@ -320,6 +357,7 @@ export function countFiles(pattern: string): number {
 }
 
 /**
+
  * Count CSS custom properties (design tokens)
  */
 export function gatherTokenStats(): GatheredStats {
@@ -340,6 +378,7 @@ export function gatherTokenStats(): GatheredStats {
 }
 
 /**
+
  * Count Phosphor icons in use
  */
 export function gatherIconStats(): GatheredStats {
@@ -355,6 +394,7 @@ export function gatherIconStats(): GatheredStats {
 }
 
 /**
+
  * Count components
  */
 export function gatherComponentStats(): GatheredStats {
@@ -369,6 +409,7 @@ export function gatherComponentStats(): GatheredStats {
 }
 
 /**
+
  * Gather accessibility metrics
  */
 export function gatherAccessibilityStats(): GatheredStats {
@@ -383,6 +424,7 @@ export function gatherAccessibilityStats(): GatheredStats {
 }
 
 /**
+
  * Gather performance metrics
  */
 export function gatherPerformanceStats(): GatheredStats {
@@ -397,9 +439,11 @@ export function gatherPerformanceStats(): GatheredStats {
 }
 
 // ... more gathering functions for each page type
-```
 
-**Static vs Dynamic Stats:**
+```text
+
+## Static vs Dynamic Stats
+
 - **Static:** Counts that don't change (total tokens defined in CSS)
 - **Dynamic:** Counts that change per session (DOM elements, active resources)
 - **Precomputed:** Run build-time script to populate static values
@@ -420,10 +464,12 @@ export function StatsBar(props: StatsBarProps) {
   // Render metric cards in horizontal scroll
   // Update values if liveRefresh enabled
 }
-```
+
+```text
 
 **BEM structure:**
-```
+
+```text
 .stats-bar
   .stats-bar__container
     .stats-bar__grid
@@ -432,11 +478,13 @@ export function StatsBar(props: StatsBarProps) {
         .stat-card__value
         .stat-card__label
         .stat-card__trend (optional)
-```
+
+```text
 
 **CSS file:** `/styles/blocks/stats-bar.css`
 
 **Features:**
+
 - Horizontal scroll on mobile
 - Grid layout on desktop (4 columns)
 - Neon accent colors per metric
@@ -463,10 +511,12 @@ export function DevToolsLayout(props: DevToolsLayoutProps) {
   // Manage full-screen menu state
   // Handle search functionality
 }
-```
+
+```text
 
 **BEM structure:**
-```
+
+```text
 .dev-tools-layout
   .dev-tools-layout__header
     .dev-tools-header__search
@@ -481,11 +531,13 @@ export function DevToolsLayout(props: DevToolsLayoutProps) {
     .dev-tools-menu__overlay
     .dev-tools-menu__list
       .dev-tools-menu__item
-```
+
+```text
 
 **CSS file:** `/styles/blocks/dev-tools-layout.css`
 
 **Features:**
+
 - Separate header with search bar and burger menu
 - Dev tools-specific breadcrumbs with unique styling
 - Dev tools-specific footer with tool links and metadata
@@ -510,10 +562,12 @@ export function DevToolsHeader(props: DevToolsHeaderProps) {
   // Handle search input changes
   // Emit menu toggle events
 }
-```
+
+```text
 
 **BEM structure:**
-```
+
+```text
 .dev-tools-header
   .dev-tools-header__container
     .dev-tools-header__logo
@@ -525,11 +579,13 @@ export function DevToolsHeader(props: DevToolsHeaderProps) {
       .dev-tools-search__clear (when query active)
     .dev-tools-header__burger
       .dev-tools-burger__line (3 lines for hamburger icon)
-```
+
+```text
 
 **CSS file:** `/styles/blocks/dev-tools-header.css`
 
 **Features:**
+
 - Dev tools logo/wordmark (unique to dev tools section)
 - Search input with real-time filtering
 - Clear button (X) to reset search
@@ -538,7 +594,8 @@ export function DevToolsHeader(props: DevToolsHeaderProps) {
 - Keyboard shortcuts (Cmd+K or Ctrl+K to focus search)
 - Search icon (Phosphor MagnifyingGlass)
 
-**Responsive behavior:**
+## Responsive behavior (1)
+
 - Desktop (>768px): Full search bar visible, burger menu hidden
 - Mobile (<768px): Search input collapses to icon, burger menu visible
 
@@ -559,28 +616,33 @@ export function DevToolsBreadcrumbs(props: DevToolsBreadcrumbsProps) {
   // Support up to 4 levels
   // Inject Schema.org BreadcrumbList JSON-LD
 }
-```
+
+```text
 
 **BEM structure:**
-```
+
+```text
 .dev-tools-breadcrumbs
   .dev-tools-breadcrumbs__list
     .dev-tools-breadcrumbs__item
       .dev-tools-breadcrumbs__link
       .dev-tools-breadcrumbs__separator (chevron icon)
     .dev-tools-breadcrumbs__item--current
-```
+
+```text
 
 **CSS file:** `/styles/blocks/dev-tools-breadcrumbs.css`
 
-**Differences from main site breadcrumbs:**
+## Differences from main site breadcrumbs
+
 - Neon cyan separator chevrons (vs main site gray)
 - Smaller font size (0.875rem vs 1rem)
 - Compact spacing (8px gaps vs 12px)
 - Dark background with low opacity border
 - Hover effects with neon pink glow
 
-**Responsive behavior:**
+## Responsive behavior (2)
+
 - Desktop: Full breadcrumb trail
 - Mobile: Truncate middle items, show only first and last
 
@@ -593,10 +655,12 @@ export function DevToolsFooter() {
   // Render footer with tool categories and quick links
   // Display metadata (last build date, total tools, version)
 }
-```
+
+```text
 
 **BEM structure:**
-```
+
+```text
 .dev-tools-footer
   .dev-tools-footer__container
     .dev-tools-footer__grid
@@ -606,11 +670,13 @@ export function DevToolsFooter() {
           .dev-tools-footer__link
     .dev-tools-footer__meta
       .dev-tools-footer__stat (3 inline stats)
-```
+
+```text
 
 **CSS file:** `/styles/blocks/dev-tools-footer.css`
 
 **Content structure:**
+
 - **Column 1:** Design Specimens (8 links)
 - **Column 2:** Reference & Docs (7 links)
 - **Column 3:** Testing & Quality (6 links)
@@ -618,6 +684,7 @@ export function DevToolsFooter() {
 - **Meta bar:** Last build, Total tools count, System version
 
 **Features:**
+
 - 4-column grid on desktop, stacked on mobile
 - Neon accent underlines on hover
 - Meta stats bar with live data
@@ -641,10 +708,12 @@ export function DevToolsMenu(props: DevToolsMenuProps) {
   // Manage focus trap when open
   // Handle keyboard navigation (Tab, Escape, Arrow keys)
 }
-```
+
+```text
 
 **BEM structure:**
-```
+
+```text
 .dev-tools-menu
   .dev-tools-menu__overlay (full-screen backdrop)
   .dev-tools-menu__panel (right-side slide-in panel)
@@ -657,11 +726,13 @@ export function DevToolsMenu(props: DevToolsMenuProps) {
         .dev-tools-menu__category-list
           .dev-tools-menu__link
           .dev-tools-menu__link--active
-```
+
+```text
 
 **CSS file:** `/styles/blocks/dev-tools-menu.css`
 
 **Features:**
+
 - Full-screen overlay (dark backdrop with 80% opacity)
 - Right-side panel (400px width, slides in from right)
 - Close button (X icon, top-right corner)
@@ -674,11 +745,13 @@ export function DevToolsMenu(props: DevToolsMenuProps) {
 - Click outside to close
 
 **Animation:**
+
 - Open: Overlay fades in (0.2s), panel slides left (0.3s ease-out)
 - Close: Panel slides right (0.2s ease-in), overlay fades out (0.2s)
 - Reduced motion: Instant show/hide, no animations
 
-**Responsive behavior:**
+## Responsive behavior (3)
+
 - Desktop (>768px): Panel 400px width
 - Mobile (<768px): Panel full-width (with 40px left margin for gesture)
 
@@ -699,10 +772,12 @@ export function DevToolsSearch(props: DevToolsSearchProps) {
   // Filter dev tools based on query
   // Show live search results dropdown
 }
-```
+
+```text
 
 **BEM structure:**
-```
+
+```text
 .dev-tools-search
   .dev-tools-search__input-wrapper
     .dev-tools-search__icon (magnifying glass)
@@ -714,11 +789,13 @@ export function DevToolsSearch(props: DevToolsSearchProps) {
       .dev-tools-search__result-icon
       .dev-tools-search__result-title
       .dev-tools-search__result-category
-```
+
+```text
 
 **CSS file:** `/styles/blocks/dev-tools-search.css`
 
-**Search functionality:**
+## Search functionality
+
 - Real-time filtering across all 33 dev tools
 - Search in: title, description, category name, badge text
 - Debounced search (300ms delay after last keystroke)
@@ -727,11 +804,13 @@ export function DevToolsSearch(props: DevToolsSearchProps) {
 - Fuzzy matching (tolerate typos)
 
 **Search data:**
+
 - Load all dev tools from `/data/mock/ui/dev-tools.ts`
 - Index: title, description, category, badge, icon name
 - Pre-compute search index on component mount
 
 **Results dropdown:**
+
 - Show category badge with color accent
 - Display tool icon (Phosphor icon)
 - Highlight matching text
@@ -821,7 +900,8 @@ export const devToolsNavigation: DevToolsNavCategory[] = [
     ],
   },
 ];
-```
+
+```text
 
 ### 4.8 Router Updates for Dev Tools Layout
 
@@ -860,9 +940,11 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-```
+
+```text
 
 **Key changes:**
+
 - Separate top-level route for `/dev-tools`
 - All dev tools pages nested under `DevToolsLayout`
 - Main site remains under `RootLayout`
@@ -884,33 +966,37 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs(props: BreadcrumbsProps) {
   var variant = grab(props, 'variant');
-  var cssClass = variant === 'dev-tools' 
+  var cssClass = variant === 'dev-tools'
     ? 'breadcrumbs breadcrumbs--dev-tools'
     : 'breadcrumbs breadcrumbs--main-site';
-  
+
   // Render breadcrumbs with appropriate CSS class
 }
-```
+
+```text
 
 **CSS updates:**
 
 `/styles/blocks/breadcrumbs.css` — Base styles + main site variant
 `/styles/blocks/dev-tools-breadcrumbs.css` — Dev tools variant overrides
 
-**Main site variant (`.breadcrumbs--main-site`):**
+## Main site variant (`.breadcrumbs--main-site`)
+
 - Gray separator chevrons
 - 1rem font size
 - 12px gaps
 - Light background
 
-**Dev tools variant (`.breadcrumbs--dev-tools`):**
+## Dev tools variant (`.breadcrumbs--dev-tools`)
+
 - Neon cyan separator chevrons
 - 0.875rem font size
 - 8px gaps
 - Dark background with border
 - Neon pink hover glow
 
-**All templates updated:**
+## All templates updated
+
 - Main site pages: `<Breadcrumbs variant="main-site" ... />`
 - Dev tools pages: `<Breadcrumbs variant="dev-tools" ... />`
 
@@ -921,56 +1007,66 @@ export function Breadcrumbs(props: BreadcrumbsProps) {
 ### Phase 1: Layout System Foundation (Tasks 1-10)
 
 **Task 1:** Create dev tools navigation data
+
 - File: `/data/mock/ui/dev-tools-navigation.ts`
 - Define all 6 categories with 33 tools
 - Add icons, badges, href values
 
 **Task 2:** Create base breadcrumbs variant system
+
 - Update: `/components/ui/Breadcrumbs.tsx`
 - Add `variant` prop ('main-site' | 'dev-tools')
 - Update CSS with variant classes
 
 **Task 3:** Create dev tools header
+
 - File: `/components/dev-tools/DevToolsHeader.tsx`
 - File: `/styles/blocks/dev-tools-header.css`
 - Logo, search input, burger menu button
 - Sticky header behavior
 
 **Task 4:** Create dev tools footer
+
 - File: `/components/dev-tools/DevToolsFooter.tsx`
 - File: `/styles/blocks/dev-tools-footer.css`
 - 4-column grid, meta stats bar
 - Quick links to all tools
 
 **Task 5:** Create dev tools menu
+
 - File: `/components/dev-tools/DevToolsMenu.tsx`
 - File: `/styles/blocks/dev-tools-menu.css`
 - Full-screen overlay, slide-in panel
 - Focus trap, keyboard navigation
 
 **Task 6:** Create dev tools search
+
 - File: `/components/dev-tools/DevToolsSearch.tsx`
 - File: `/styles/blocks/dev-tools-search.css`
 - Real-time filtering, results dropdown
 - Fuzzy matching, keyboard navigation
 
 **Task 7:** Create dev tools layout component
+
 - File: `/components/dev-tools/DevToolsLayout.tsx`
 - File: `/styles/blocks/dev-tools-layout.css`
 - Wire header, breadcrumbs, content, footer
 - Manage menu state, search functionality
 
 **Task 8:** Update router for nested layout
+
 - Update: `/routes.ts`
 - Create separate `/dev-tools` route group
 - Nest all 33 dev tools pages under `DevToolsLayout`
 
 **Task 9:** Migrate 5 pilot pages to new layout
+
 - Choose: Dev Tools Hub, Tokens, Icons, Typography, Components
 - Remove breadcrumbs from page components (now in layout)
 - Test navigation, search, menu
 
 **Task 10:** Migrate remaining 28 dev tools pages
+
 - Batch update all remaining pages
 - Verify breadcrumbs render correctly
 - Test search indexing
@@ -978,40 +1074,50 @@ export function Breadcrumbs(props: BreadcrumbsProps) {
 ### Phase 2: Hero & Stats System (Tasks 11-20)
 
 **Task 11:** Create hero configuration data file
+
 - File: `/data/mock/ui/dev-tools-heroes.ts`
 - Define configs for all 33 pages
 
 **Task 12:** Create stats configuration data file
+
 - File: `/data/mock/ui/dev-tools-stats.ts`
 - Define configs for all 33 pages
 
 **Task 13:** Create stats gathering utilities
+
 - File: `/utils/statsGathering.ts`
 - Implement 10+ gather functions
 
 **Task 14:** Create universal stats bar component
+
 - File: `/components/dev-tools/StatsBar.tsx`
 - File: `/styles/blocks/stats-bar.css`
 
 **Task 15:** Create WebGL graphic system (placeholder)
+
 - File: `/components/dev-tools/WebGLHeroGraphic.tsx`
 
 **Task 16:** Create universal hero component
+
 - File: `/components/dev-tools/DevToolsHero.tsx`
 - File: `/styles/blocks/dev-tools-hero.css`
 
 **Task 17:** Add hero + stats to 5 pilot pages
+
 - Replace existing hero markup
 - Add `<StatsBar>` below hero
 
 **Task 18:** Add hero + stats to remaining 28 pages
+
 - Batch update all pages
 
 **Task 19:** Verify breadcrumbs integration
+
 - Ensure spacing between breadcrumbs and hero
 - Test responsive behavior
 
 **Task 20:** Test full layout system
+
 - Navigation flow (main site ↔ dev tools)
 - Search functionality
 - Menu behavior
@@ -1042,6 +1148,7 @@ export function Breadcrumbs(props: BreadcrumbsProps) {
 **File:** `/docs/dev-tools-hero-system.md`
 
 Contents:
+
 - How to configure a new hero
 - Available graphic types and when to use each
 - How to add new stats metrics
@@ -1053,6 +1160,7 @@ Contents:
 **File:** `/docs/dev-tools-graphics-guide.md`
 
 Contents:
+
 - SVG preparation (clean paths, optimize vertices)
 - Color palette usage (which neon colors for which categories)
 - Animation speed recommendations
@@ -1062,6 +1170,7 @@ Contents:
 ### 5.3 Update Guidelines.md
 
 Add section documenting:
+
 - DevToolsHero component usage
 - StatsBar component usage
 - Hero configuration data structure
@@ -1073,7 +1182,7 @@ Add section documenting:
 
 ### Hero Layout
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │  BREADCRUMBS                                                    │
 ├─────────────────────────────────────────────────────────────────┤
@@ -1094,11 +1203,12 @@ Add section documenting:
 │  60% width                       40% width                     │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
-```
+
+```text
 
 ### Stats Bar Layout
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐            │
 │ │ 🎨       │ │ 📝       │ │ ⚡       │ │ 🎯       │            │
@@ -1107,7 +1217,8 @@ Add section documenting:
 │ │ ↑ +8     │ │          │ │          │ │          │            │
 │ └──────────┘ └──────────┘ └──────────┘ └──────────┘            │
 └─────────────────────────────────────────────────────────────────┘
-```
+
+```text
 
 ---
 
@@ -1116,6 +1227,7 @@ Add section documenting:
 ### Bundler Compatibility (CRITICAL)
 
 **Forbidden syntax:**
+
 - ❌ Optional chaining (`?.`)
 - ❌ Nullish coalescing (`??`)
 - ❌ Template literals in certain contexts
@@ -1124,6 +1236,7 @@ Add section documenting:
 - ❌ Bracket notation (use `grab()` helper)
 
 **Required patterns:**
+
 - ✅ Explicit null checks: `if (value != null)`
 - ✅ Use `grab(obj, key)` for property access
 - ✅ Use `arrayGet(arr, index)` for array access
@@ -1132,24 +1245,31 @@ Add section documenting:
 
 ### BEM Architecture (CRITICAL)
 
-**All styling via semantic BEM classes:**
+## All styling via semantic BEM classes
+
 - ✅ `.dev-tools-hero__title`
 - ✅ `.stat-card--trend-up`
 - ✅ `.stats-bar__metric-icon`
 
-**NO Tailwind utilities:**
+## NO Tailwind utilities
+
 - ❌ `flex items-center gap-4`
 - ❌ `text-2xl font-bold`
 
 ### WebGL Considerations
 
-**Graceful degradation:**
+## Graceful degradation
+
 1. Try WebGL 2.0
-2. Fallback to WebGL 1.0
-3. Fallback to Canvas 2D
-4. Fallback to static SVG
+
+1. Fallback to WebGL 1.0
+
+1. Fallback to Canvas 2D
+
+1. Fallback to static SVG
 
 **Performance:**
+
 - Target: 60fps on mid-range devices
 - Max vertices: 5000 for "high" complexity
 - Reduce quality on mobile automatically
@@ -1176,29 +1296,34 @@ Add section documenting:
 **File:** `/reports/dev-tools-hero-stats/implementation-report.md`
 
 ### Section 1: Audit Findings
+
 - Current hero patterns (with screenshots)
 - Edge cases identified
 - Common pain points
 
 ### Section 2: Architecture Design
+
 - Hero config data structure (final)
 - Stats config data structure (final)
 - WebGL graphic system architecture
 - Gather function architecture
 
 ### Section 3: Implementation Progress
+
 - Phase 1: Foundation ✅ / ⏳ / ❌
 - Phase 2: Hero Component ✅ / ⏳ / ❌
 - Phase 3: WebGL Graphics ✅ / ⏳ / ❌
 - Phase 4: Polish & Testing ✅ / ⏳ / ❌
 
 ### Section 4: Metrics & Performance
+
 - FPS measurements per graphic type
 - Bundle size impact
 - Stats gathering performance
 - Accessibility audit results
 
 ### Section 5: Known Issues & Future Work
+
 - Browser compatibility notes
 - Performance optimization opportunities
 - Additional graphic types to implement
@@ -1211,14 +1336,21 @@ Add section documenting:
 After prompt approval:
 
 1. **Run audit** against all 33 dev tools pages
-2. **Generate report** at `/reports/dev-tools-hero-stats/implementation-report.md`
-3. **Design data structures** (get approval before implementation)
-4. **Implement Phase 1** (foundation files)
-5. **Migrate pilot pages** (5 pages)
-6. **Iterate** based on feedback
-7. **Complete migration** (all 33 pages)
-8. **Implement WebGL graphics** (progressive enhancement)
+
+1. **Generate report** at `/reports/dev-tools-hero-stats/implementation-report.md`
+
+1. **Design data structures** (get approval before implementation)
+
+1. **Implement Phase 1** (foundation files)
+
+1. **Migrate pilot pages** (5 pages)
+
+1. **Iterate** based on feedback
+
+1. **Complete migration** (all 33 pages)
+
+1. **Implement WebGL graphics** (progressive enhancement)
 
 ---
 
-**End of Prompt**
+## End of Prompt

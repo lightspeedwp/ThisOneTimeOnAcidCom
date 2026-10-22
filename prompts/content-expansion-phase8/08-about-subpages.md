@@ -7,13 +7,15 @@
 
 ## Objective
 
-Create new about sub-pages for topics that have rich ebook content but no dedicated page. Assess existing pages for completeness. Register new routes and update navigation data.
+Create new about sub-pages for topics that have rich ebook content but no
+dedicated page. Assess existing pages for completeness. Register new routes and
+update navigation data.
 
 ---
 
 ## Current state
 
-**21 existing about sub-pages:**
+## 21 existing about sub-pages
 
 | Page | File | Topic |
 |---|---|---|
@@ -45,12 +47,17 @@ Create new about sub-pages for topics that have rich ebook content but no dedica
 ## Step 1: Assess existing page completeness
 
 For each existing page, check:
-1. Does the data file have substantial content or is it thin?
-2. Does the page component render all available data?
-3. Is the content aligned with Phase 7 ebook updates?
-4. Are there FAQs on each page (via FaqSection)?
 
-**Priority assessment pages:**
+1. Does the data file have substantial content or is it thin?
+
+1. Does the page component render all available data?
+
+1. Is the content aligned with Phase 7 ebook updates?
+
+1. Are there FAQs on each page (via FaqSection)?
+
+## Priority assessment pages
+
 - **AdhdPage** — Is it complete? Does it cover all ADHD content from the ebook and `/docs/website-content.md`?
 - **SixCatsPage** — Does it include individual cat profiles? The source material has detailed bios for all 6 current cats + 3 in memoriam
 - **FitnessPage** — Does it include the running achievements, Muay Thai details, swimming/Lourens updates from Phase 7?
@@ -70,20 +77,27 @@ For each existing page, check:
 | GradingSystemPage | `/about/grading-system` | Six Cats cannabis grading system | Website-content.md (Grading System section) |
 | CatProfilesPage | `/about/the-cats` | Individual cat bios — Timmy, Wendy, Jimmy, Bean, Jeff, Frank + In Memoriam | Website-content.md (Six Cats — The Cats section) |
 
-### For each new page, create:
+### For each new page, create
 
 1. **Data file** in `/data/mock/pages/about/` (e.g., `ambidextrous.ts`)
-2. **Page component** in `/components/pages/about/` (e.g., `AmbidextrousPage.tsx`)
-3. **Route** in the router (follow existing about sub-page route pattern)
-4. **Navigation entry** in `/data/mock/pages/hidden-about.ts` (HiddenAboutPage links)
-5. **SEO entry** in `/data/mock/seo.ts`
-6. **Breadcrumbs** using the Breadcrumbs component
-7. **CSS** in `/styles/blocks/about-subpage.css` (reuse existing about sub-page BEM classes)
+
+1. **Page component** in `/components/pages/about/` (e.g., `AmbidextrousPage.tsx`)
+
+1. **Route** in the router (follow existing about sub-page route pattern)
+
+1. **Navigation entry** in `/data/mock/pages/hidden-about.ts` (HiddenAboutPage links)
+
+1. **SEO entry** in `/data/mock/seo.ts`
+
+1. **Breadcrumbs** using the Breadcrumbs component
+
+1. **CSS** in `/styles/blocks/about-subpage.css` (reuse existing about sub-page BEM classes)
 
 ### Data file template
 
 ```typescript
 /**
+
  * @fileoverview [Topic] about sub-page data
  * @module data/mock/pages/about/[slug]
  * @version 1.0.0
@@ -121,11 +135,13 @@ export const [pageName]Data = {
     },
   ],
 };
-```
+
+```text
 
 ### Page component template
 
 Follow the pattern established by existing about sub-pages:
+
 - Import `HeroLayout`, `ContentSection`, `SplitContent`, `FaqSection`, `PullQuote`, `Breadcrumbs`
 - Import CSS: `about-subpage.css`
 - Use `setSEO()` and `pageSEO` in `useEffect`
@@ -138,28 +154,35 @@ Follow the pattern established by existing about sub-pages:
 ## Step 3: Update navigation and routing
 
 1. **Router** — Add routes for new pages in `/App.tsx` or route config (follow existing pattern)
-2. **HiddenAboutPage** — Add entries to `/data/mock/pages/hidden-about.ts` with icon, tagline, and link for each new page
-3. **Sitemap** — Add pages to `/data/mock/ui/sitemap.ts` if applicable
-4. **SEO** — Add `pageSEO.[slug]` entries to `/data/mock/seo.ts`
-5. **Icon mapping** — Add Phosphor icon mapping in `HiddenAboutPage.tsx` `getIcon()` function
+
+1. **HiddenAboutPage** — Add entries to `/data/mock/pages/hidden-about.ts` with icon, tagline, and link for each new page
+
+1. **Sitemap** — Add pages to `/data/mock/ui/sitemap.ts` if applicable
+
+1. **SEO** — Add `pageSEO.[slug]` entries to `/data/mock/seo.ts`
+
+1. **Icon mapping** — Add Phosphor icon mapping in `HiddenAboutPage.tsx` `getIcon()` function
 
 ---
 
 ## Step 4: Update about sub-page count
 
 After creating new pages:
+
 1. Update any documentation referencing "21 sub-pages" to the new count
-2. Update `Guidelines.md` component architecture if the count is referenced there
-3. Update `/guidelines/sitemap-routes.md` with new routes
+
+1. Update `Guidelines.md` component architecture if the count is referenced there
+
+1. Update `/guidelines/sitemap-routes.md` with new routes
 
 ---
 
 ## Output
 
 - **Report:** `/reports/content-expansion-phase8/08-about-subpages.md` with:
-  - Existing page assessment (completeness scores)
-  - New pages created (name, slug, route, data file, component file)
-  - Routes registered
-  - Navigation data updated
-  - Total about sub-page count (before and after)
-  - Any existing pages that need content updates (deferred items)
+- Existing page assessment (completeness scores)
+- New pages created (name, slug, route, data file, component file)
+- Routes registered
+- Navigation data updated
+- Total about sub-page count (before and after)
+- Any existing pages that need content updates (deferred items)

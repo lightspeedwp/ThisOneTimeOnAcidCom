@@ -1,6 +1,6 @@
 # Section Patterns Overview
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 WordPress-aligned section patterns for the Ash Shaw Portfolio.
@@ -8,6 +8,7 @@ WordPress-aligned section patterns for the Ash Shaw Portfolio.
 ## Purpose
 
 Define reusable section patterns following WordPress conventions with:
+
 - Semantic HTML5 `<section>` elements
 - Consistent container patterns
 - Responsive spacing system
@@ -19,11 +20,12 @@ Define reusable section patterns following WordPress conventions with:
 
 ## Section Architecture
 
-Sections are the **top-level layout containers** that organize page content into distinct semantic blocks, similar to WordPress block theme sections.
+Sections are the **top-level layout containers** that organize page content into
+distinct semantic blocks, similar to WordPress block theme sections.
 
 ### Hierarchy
 
-```
+```text
 Template (Page)
 ├── Section (Full-width container)
 │   ├── Container (Max-width wrapper)
@@ -33,13 +35,15 @@ Template (Page)
 │   │   └── Block
 │   └── Container
 └── Section
-```
+
+```text
 
 ---
 
 ## Section Types
 
-The Ash Shaw portfolio uses **10 section types** organized by purpose. Each has detailed implementation guidelines.
+The Ash Shaw portfolio uses **10 section types** organized by purpose. Each has
+detailed implementation guidelines.
 
 ### Content Sections
 
@@ -84,7 +88,8 @@ All sections follow these container width standards:
 
 // Minimal width (640px) - Forms/CTAs
 <div className="max-w-2xl mx-auto px-fluid-md">
-```
+
+```text
 
 ### Vertical Spacing
 
@@ -96,7 +101,8 @@ className="py-section"           // clamp(3rem, 6vw + 1rem, 8rem)
 className="py-fluid-3xl"         // clamp(4rem, 2rem + 10vw, 8rem)
 className="py-fluid-2xl"         // clamp(3rem, 1.5rem + 7.5vw, 6rem)
 className="py-fluid-xl"          // clamp(2rem, 1.2rem + 4vw, 4rem)
-```
+
+```text
 
 ### Horizontal Spacing
 
@@ -106,7 +112,8 @@ className="px-fluid-md"          // clamp(1rem, 0.6rem + 2vw, 2rem)
 
 // Alternative breakpoint-based
 className="px-4 sm:px-6 md:px-8" // 16px → 24px → 32px
-```
+
+```text
 
 ### Background Treatments
 
@@ -124,14 +131,15 @@ className="bg-gradient-pink-purple-blue"  // Brand gradient
 // Transparent overlays
 className="bg-white/80 backdrop-blur-sm"
 className="bg-black/50"
-```
+
+```text
 
 ---
 
 ## Complete Section Structure Template
 
 ```tsx
-<section 
+<section
   id="section-id"                    // For anchor links
   className="
     relative                         // Position context
@@ -151,7 +159,7 @@ className="bg-black/50"
   <div className="max-w-7xl mx-auto relative z-10">
     {/* Section header (optional) */}
     <div className="text-center mb-fluid-2xl">
-      <h2 
+      <h2
         id="section-heading"
         className="text-section-h2 font-heading font-bold mb-fluid-md"
       >
@@ -175,7 +183,8 @@ className="bg-black/50"
     </div>
   </div>
 </section>
-```
+
+```text
 
 ---
 
@@ -197,6 +206,7 @@ className="bg-black/50"
 ## Best Practices
 
 ### 1. Consistent Container Pattern
+
 ```tsx
 // ✅ Always wrap section content in max-width container
 <section className="py-section px-fluid-md">
@@ -204,18 +214,22 @@ className="bg-black/50"
     {/* Content */}
   </div>
 </section>
-```
+
+```text
 
 ### 2. Responsive Padding
+
 ```tsx
 // ✅ Use fluid utilities for smooth scaling
 className="py-section px-fluid-md"
 
 // ✅ Or breakpoint-based for precise control
 className="py-8 sm:py-12 md:py-16 lg:py-20"
-```
+
+```text
 
 ### 3. Background Decorations
+
 ```tsx
 // ✅ Keep decorations in separate layer
 <section className="relative">
@@ -226,9 +240,11 @@ className="py-8 sm:py-12 md:py-16 lg:py-20"
     {/* Content above decorations */}
   </div>
 </section>
-```
+
+```text
 
 ### 4. Semantic HTML
+
 ```tsx
 // ✅ CORRECT - Proper section usage
 <section aria-labelledby="about-heading">
@@ -239,22 +255,26 @@ className="py-8 sm:py-12 md:py-16 lg:py-20"
 <div className="section">
   <h2>About</h2>
 </div>
-```
+
+```text
 
 ---
 
 ## Section Guidelines
 
-For detailed implementation of each section type, see the specific guideline files:
+For detailed implementation of each section type, see the specific guideline
+files:
 
-### Content Sections
+### Content Sections (1)
+
 - **[HeroSection.md](./sections/HeroSection.md)** - Main hero with image mosaic and CTAs
 - **[FeaturedSection.md](./sections/FeaturedSection.md)** - Portfolio showcase grid with cards
 - **[WhySection.md](./sections/WhySection.md)** - Mission statement and philosophy
 - **[BlogPreviewSection.md](./sections/BlogPreviewSection.md)** - Latest blog posts preview
 - **[FusionNailsSection.md](./sections/FusionNailsSection.md)** - Special project showcase
 
-### Layout Sections
+### Layout Sections (1)
+
 - **[ThreeColumnPortfolioSection.md](./sections/ThreeColumnPortfolioSection.md)** - Portfolio grid layout
 - **[HeroLayout.md](./sections/HeroLayout.md)** - Hero wrapper with background
 - **[OneColumnLayout.md](./sections/OneColumnLayout.md)** - Single column content
@@ -273,5 +293,5 @@ For detailed implementation of each section type, see the specific guideline fil
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

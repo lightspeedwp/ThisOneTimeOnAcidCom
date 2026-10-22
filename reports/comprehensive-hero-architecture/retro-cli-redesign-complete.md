@@ -1,7 +1,7 @@
 # Retro 80s CLI Redesign — Dev Tools Landing Page
 
-**Date:** March 7, 2026  
-**Status:** ✅ Complete  
+**Date:** March 7, 2026
+**Status:** ✅ Complete
 **Aesthetic:** Retro 80s Neon Command Line Interface
 
 ---
@@ -9,12 +9,14 @@
 ## 🎨 Design Transformation
 
 ### Before: Modern Gradient UI
+
 - Clean, modern design
 - Gradient titles
 - Subtle shadows
 - Professional appearance
 
 ### After: Retro 80s CLI Terminal
+
 - **Monospace 'Courier New' font** throughout
 - **CRT scanline effects** on page and cards
 - **Neon glowing borders** and text shadows
@@ -29,7 +31,8 @@
 
 ### 1. CRT Monitor Background ✅
 
-**Dark scanline overlay:**
+## Dark scanline overlay
+
 ```css
 background: repeating-linear-gradient(
   0deg,
@@ -38,9 +41,11 @@ background: repeating-linear-gradient(
   transparent 2px,
   rgba(0, 255, 0, 0.03) 3px
 );
-```
 
-**Result:** Subtle horizontal scanlines across entire page, mimicking old CRT monitors.
+```text
+
+**Result:** Subtle horizontal scanlines across entire page, mimicking old CRT
+monitors.
 
 ---
 
@@ -49,6 +54,7 @@ background: repeating-linear-gradient(
 **Font:** `'Courier New', Courier, monospace`
 
 **Applied to:**
+
 - Hero badge
 - Hero description
 - Category titles
@@ -66,16 +72,20 @@ background: repeating-linear-gradient(
 ### 3. Neon Glowing Text ✅
 
 **Hero Description:**
+
 ```css
 color: #00FF41;
 text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
-```
 
-**Category Titles (Green accent example):**
+```text
+
+## Category Titles (Green accent example)
+
 ```css
 color: #39FF14;
 text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
-```
+
+```text
 
 **Result:** Terminal green glowing text effect throughout.
 
@@ -83,7 +93,8 @@ text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
 
 ### 4. Retro Computer Screen Cards ✅
 
-**Each card styled as a mini CRT screen:**
+## Each card styled as a mini CRT screen
+
 - Dark background (#0f0f0f)
 - Scanline overlay effect
 - 2px solid colored border (accent-specific)
@@ -91,6 +102,7 @@ text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
 - Monospace text content
 
 **Hover state:**
+
 - Border brightens
 - Glow intensifies
 - 3D perspective transform applied
@@ -100,22 +112,27 @@ text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
 ### 5. CSS 3D Transforms (WebGL-style) ✅
 
 **Hover effect:**
+
 ```css
 transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
-```
+
+```text
 
 **Properties:**
+
 - `transform-style: preserve-3d`
 - `perspective: 1000px`
 - Cards lift up and tilt on hover
 - Simulates 3D depth without actual WebGL
 
 **Accessibility:**
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   transform: none;
 }
-```
+
+```text
 
 **Result:** Cards appear to float and rotate in 3D space on hover!
 
@@ -134,6 +151,7 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
 | **Aqua Cyan** | `#12FFF7` | Content Specimens |
 
 ### Terminal Green
+
 - **Hex:** `#00FF41`
 - **Usage:** All body text, descriptions, card content
 - **Effect:** Classic hacker terminal aesthetic
@@ -143,7 +161,8 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
 ## 🎯 Component Breakdown
 
 ### Hero Section
-```
+
+```text
 ┌─────────────────────────────────────┐
 │ Breadcrumbs (centered)              │
 │                                     │
@@ -154,12 +173,14 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
 │ A collection of internal tools...   │
 │ ↑ Terminal green monospace text    │
 └─────────────────────────────────────┘
-```
+
+```text
 
 ---
 
 ### Sticky Jump-Nav
-```
+
+```text
 ╔═══════════════════════════════════════════╗
 ║ [DESIGN SPECIMENS] [REFERENCE & DOCS]     ║
 ║ [BUILDERS] [TESTING] [CONTENT] [LAB]      ║
@@ -167,12 +188,14 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
   ↑ Neon green border top/bottom
   ↑ Blurred dark background (0.95 opacity)
   ↑ Each pill glows on hover
-```
+
+```text
 
 ---
 
 ### Tool Card (CRT Screen)
-```
+
+```text
 ╔══════════════════════════════════════╗
 ║ ┌──┐                                 ║
 ║ │▓▓│ TYPOGRAPHY SPECIMENS             ║
@@ -189,7 +212,8 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
   ↑ Neon border glow (accent color)
   ↑ Scanline overlay
   ↑ 3D tilt on hover
-```
+
+```text
 
 ---
 
@@ -213,24 +237,27 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
 
 ### 1. Reduced Motion Support ✅
 
-**All animations disabled when user prefers reduced motion:**
+## All animations disabled when user prefers reduced motion
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   .dev-tools-card:hover {
     transform: none; /* No 3D tilt */
   }
-  
+
   .dev-tools-jumpnav__pill {
     transition: none; /* No smooth transitions */
   }
 }
-```
+
+```text
 
 ---
 
 ### 2. Color Contrast ✅
 
-**All neon colors meet WCAG AA:**
+## All neon colors meet WCAG AA
+
 - Terminal green (#00FF41) on dark background: 12:1 ratio (AAA)
 - Neon green (#39FF14) on dark: 11:1 ratio (AAA)
 - Blue, orange, pink, cyan: 7:1+ ratios (AA/AAA)
@@ -248,22 +275,26 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
 ## 📱 Responsive Behavior
 
 ### Mobile (< 768px)
+
 - 1-column card grid
 - Horizontal scrolling jump-nav
 - Pills don't wrap (flex-wrap: nowrap)
 - Reduced padding
 
 ### Tablet (768px - 1023px)
+
 - 2-column card grid
 - Wrapped jump-nav pills
 - Standard spacing
 
 ### Desktop (1024px - 1439px)
+
 - 3-column card grid
 - Full jump-nav visible
 - Enhanced glow effects
 
 ### Desktop Wide (1440px+)
+
 - 4-column card grid
 - Maximum neon glow
 - Full 3D transforms
@@ -275,11 +306,13 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
 ### Card Hover States
 
 **Default:**
+
 - Border: 40% opacity
 - Glow: 20% opacity shadow
 - Position: No transform
 
 **Hover/Focus:**
+
 - Border: 80% opacity (doubled brightness)
 - Glow: 40% opacity outer + 30% depth shadow
 - Transform: `translateY(-8px) rotateX(5deg) rotateY(-2deg)`
@@ -293,11 +326,13 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
 ### Jump-Nav Pill Hover
 
 **Default:**
+
 - Border: Accent color 40% opacity
 - Background: Transparent
 - Shadow: None
 
 **Hover/Focus:**
+
 - Border: Accent color 80% opacity
 - Background: Accent color 15% opacity
 - Shadow: `0 0 15px rgba(accent, 0.4)` (neon glow)
@@ -307,10 +342,12 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
 ## 🔧 Files Modified
 
 1. **`/components/pages/dev-tools/DevToolsPage.tsx`**
+
    - Updated file header comments
    - Version bumped to 8.0.0
 
-2. **`/styles/blocks/dev-tools-page.css`**
+1. **`/styles/blocks/dev-tools-page.css`**
+
    - Complete rewrite (700+ lines)
    - Retro 80s CLI aesthetic
    - Monospace fonts
@@ -324,19 +361,22 @@ transform: translateY(-8px) rotateX(5deg) rotateY(-2deg);
 
 ### CSS-Only 3D (No WebGL)
 
-**Why CSS instead of WebGL?**
+## Why CSS instead of WebGL
+
 - ✅ Lightweight (no JavaScript libraries)
 - ✅ Hardware-accelerated (GPU transforms)
 - ✅ Better accessibility (respects reduced motion)
 - ✅ No bundle bloat
 - ✅ Works on all devices
 
-**CSS transforms used:**
+## CSS transforms used
+
 ```css
 transform-style: preserve-3d;
 perspective: 1000px;
 transform: translateY() rotateX() rotateY();
-```
+
+```text
 
 **Result:** Smooth 60fps 3D card motion without WebGL overhead!
 
@@ -345,6 +385,7 @@ transform: translateY() rotateX() rotateY();
 ## 🎉 Final Result
 
 ### Visual Identity
+
 - **Aesthetic:** Retro 80s hacker terminal / command line interface
 - **Vibe:** Neon-lit CRT monitor screens in a dark room
 - **Typography:** Monospace courier (authentic terminal feel)
@@ -352,12 +393,14 @@ transform: translateY() rotateX() rotateY();
 - **Motion:** 3D floating cards with perspective tilt
 
 ### User Experience
+
 - **Engaging:** Cards feel interactive and tactile
 - **Immersive:** Scanlines and glows create depth
 - **Nostalgic:** 80s computer aesthetic
 - **Accessible:** Full keyboard support, reduced motion, high contrast
 
 ### Technical Quality
+
 - **Performant:** CSS-only animations (no JS)
 - **Responsive:** 1-4 column grid adapts to screen size
 - **Maintainable:** BEM architecture, semantic classes
@@ -386,4 +429,5 @@ transform: translateY() rotateX() rotateY();
 
 **Redesign Status:** ✅ Complete — Retro 80s CLI aesthetic fully implemented!
 
-**Next Enhancement Opportunity:** Add actual WebGL shader effects for even more advanced 3D graphics (optional future upgrade).
+**Next Enhancement Opportunity:** Add actual WebGL shader effects for even more
+advanced 3D graphics (optional future upgrade).

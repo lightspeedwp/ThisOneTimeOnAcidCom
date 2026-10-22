@@ -1,15 +1,16 @@
 # Blog Search & Filtering Troubleshooting Guide
 
-**Version:** 1.0.0  
+**Version:** 1.0.0
 **Last Updated:** January 2025
 
-Comprehensive troubleshooting guide for blog search, filtering, and pagination issues.
+Comprehensive troubleshooting guide for blog search, filtering, and pagination
+issues.
 
 ---
 
 ## 🎯 Quick Problem Identifier
 
-```
+```text
 ┌─────────────────────────────────────┐
 │  Blog Filtering Not Working?        │
 └──────────────┬──────────────────────┘
@@ -27,7 +28,8 @@ Comprehensive troubleshooting guide for blog search, filtering, and pagination i
        │          │            │
        ▼          ▼            ▼
    Issue 1    Issue 2      Issue 3
-```
+
+```text
 
 ---
 
@@ -38,24 +40,24 @@ Comprehensive troubleshooting guide for blog search, filtering, and pagination i
 ```mermaid
 flowchart TD
     A[Blog Feature Issue] --> B{Which feature?}
-    
+
     B -->|Search| C{Returns results?}
     B -->|Category Filter| D{Shows filtered posts?}
     B -->|Tag Filter| E{Multiple tags work?}
     B -->|Pagination| F{Pages navigate?}
-    
+
     C -->|No results| G[Issue 1: Search Logic]
     C -->|Wrong results| H[Issue 2: Search Algorithm]
-    
+
     D -->|Shows all| I[Issue 3: Category Filter]
     D -->|Shows none| J[Issue 4: Category Mismatch]
-    
+
     E -->|Only one tag| K[Issue 5: Tag Logic]
     E -->|No results| L[Issue 6: Tag State]
-    
+
     F -->|Stuck on page 1| M[Issue 7: Pagination State]
     F -->|Shows all posts| N[Issue 8: Pagination Logic]
-    
+
     G --> O[See Section 1]
     H --> P[See Section 2]
     I --> Q[See Section 3]
@@ -64,18 +66,20 @@ flowchart TD
     L --> T[See Section 6]
     M --> U[See Section 7]
     N --> V[See Section 8]
-    
+
     style G fill:#fecaca,stroke:#ef4444,stroke-width:2px
     style I fill:#fed7aa,stroke:#f97316,stroke-width:2px
     style K fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
     style M fill:#fed7aa,stroke:#f97316,stroke-width:2px
-```
+
+```text
 
 ---
 
 ## 🚨 Issue 1: Search Returns No Results
 
 ### Symptoms
+
 - User types in search bar
 - No posts shown (even though they should match)
 - "No results found" message appears
@@ -89,19 +93,19 @@ sequenceDiagram
     participant B as BlogPage
     participant F as Filter Function
     participant P as Posts Data
-    
+
     U->>S: Type "festival"
     S->>S: Update input state
-    
+
     S->>B: onChange(searchQuery: "festival")
     B->>B: setState(searchQuery: "festival")
-    
+
     B->>F: filterPosts(posts, searchQuery)
-    
+
     F->>P: Loop through all posts
-    
+
     Note over F: Check each post
-    
+
     alt Case Mismatch
         Note over F: post.title = "Festival"<br/>searchQuery = "festival"
         F->>F: "Festival" !== "festival" ❌
@@ -111,9 +115,10 @@ sequenceDiagram
         F->>F: Check title, content, tags
         F-->>B: Matched posts []
     end
-    
+
     B->>U: Display results (0 or N posts)
-```
+
+```text
 
 ### Solutions
 
@@ -130,10 +135,11 @@ const filteredPosts = posts.filter(post => {
   const query = searchQuery.toLowerCase();
   const title = post.title.toLowerCase();
   const content = post.excerpt.toLowerCase();
-  
+
   return title.includes(query) || content.includes(query);
 });
-```
+
+```text
 
 **Check 2: Search Multiple Fields**
 
@@ -141,31 +147,32 @@ const filteredPosts = posts.filter(post => {
 // ✅ CORRECT - Search title, excerpt, content, and tags
 const searchPosts = (posts: BlogPost[], query: string) => {
   if (!query.trim()) return posts;
-  
+
   const lowerQuery = query.toLowerCase();
-  
+
   return posts.filter(post => {
     // Search title
     if (post.title.toLowerCase().includes(lowerQuery)) return true;
-    
+
     // Search excerpt
     if (post.excerpt.toLowerCase().includes(lowerQuery)) return true;
-    
+
     // Search content
     if (post.content.toLowerCase().includes(lowerQuery)) return true;
-    
+
     // Search tags
     if (post.tags.some(tag => tag.toLowerCase().includes(lowerQuery))) {
       return true;
     }
-    
+
     // Search category
     if (post.category.toLowerCase().includes(lowerQuery)) return true;
-    
+
     return false;
   });
 };
-```
+
+```text
 
 **Check 3: Trim Whitespace**
 
@@ -177,7 +184,8 @@ const searchQuery = userInput.trim().toLowerCase();
 if (!searchQuery) {
   return allPosts;  // Show all if search is empty
 }
-```
+
+```text
 
 **Check 4: Debug Search**
 
@@ -186,7 +194,7 @@ if (!searchQuery) {
 const searchPosts = (posts: BlogPost[], query: string) => {
   console.log('Search query:', query);
   console.log('Total posts:', posts.length);
-  
+
   const results = posts.filter(post => {
     const matches = post.title.toLowerCase().includes(query.toLowerCase());
     if (matches) {
@@ -194,11 +202,12 @@ const searchPosts = (posts: BlogPost[], query: string) => {
     }
     return matches;
   });
-  
+
   console.log('Results:', results.length);
   return results;
 };
-```
+
+```text
 
 ### Quick Fix Checklist
 
@@ -212,12 +221,13 @@ const searchPosts = (posts: BlogPost[], query: string) => {
 
 ## 🚨 Issue 2: Search Returns Wrong Results
 
-### Symptoms
+### Symptoms (1)
+
 - Search works but returns irrelevant posts
 - Expected posts not in results
 - Search too broad or too narrow
 
-### Solutions
+### Solutions (1)
 
 **Check 1: Improve Search Relevance**
 
@@ -225,29 +235,30 @@ const searchPosts = (posts: BlogPost[], query: string) => {
 // ✅ CORRECT - Weighted search (title matches rank higher)
 const searchPosts = (posts: BlogPost[], query: string) => {
   const lowerQuery = query.toLowerCase();
-  
+
   return posts
     .map(post => {
       let score = 0;
-      
+
       // Title match = highest priority
       if (post.title.toLowerCase().includes(lowerQuery)) score += 10;
-      
+
       // Tag match = medium priority
       if (post.tags.some(tag => tag.toLowerCase().includes(lowerQuery))) {
         score += 5;
       }
-      
+
       // Content match = lower priority
       if (post.excerpt.toLowerCase().includes(lowerQuery)) score += 2;
-      
+
       return { post, score };
     })
     .filter(({ score }) => score > 0)  // Only posts with matches
     .sort((a, b) => b.score - a.score)  // Sort by relevance
     .map(({ post }) => post);
 };
-```
+
+```text
 
 **Check 2: Partial Word Matching**
 
@@ -257,7 +268,8 @@ const query = "fest";  // User types partial word
 
 // Will match: "Festival", "Festive", "Manifesto"
 const matches = post.title.toLowerCase().includes(query.toLowerCase());
-```
+
+```text
 
 **Check 3: Multi-Word Searches**
 
@@ -265,20 +277,22 @@ const matches = post.title.toLowerCase().includes(query.toLowerCase());
 // ✅ CORRECT - Handle "festival makeup"
 const searchPosts = (posts: BlogPost[], query: string) => {
   const words = query.toLowerCase().split(' ').filter(w => w.length > 0);
-  
+
   return posts.filter(post => {
-    const searchText = `${post.title} ${post.excerpt} ${post.tags.join(' ')}`.toLowerCase();
-    
+const searchText = `${post.title} ${post.excerpt} ${post.tags.join('
+')}`.toLowerCase();
+
     // All words must appear (AND logic)
     return words.every(word => searchText.includes(word));
-    
+
     // OR use OR logic (any word matches):
     // return words.some(word => searchText.includes(word));
   });
 };
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (1)
 
 - [ ] Implement relevance scoring
 - [ ] Sort results by relevance
@@ -290,7 +304,8 @@ const searchPosts = (posts: BlogPost[], query: string) => {
 
 ## 🚨 Issue 3: Category Filter Not Working
 
-### Symptoms
+### Symptoms (2)
+
 - Clicking category doesn't filter posts
 - All posts still shown
 - URL updates but results don't change
@@ -300,38 +315,39 @@ const searchPosts = (posts: BlogPost[], query: string) => {
 ```mermaid
 stateDiagram-v2
     [*] --> AllPosts: Initial state
-    
+
     AllPosts --> CategoryClicked: User clicks "Festival"
-    
+
     CategoryClicked --> StateUpdate: setActiveCategory("Festival")
-    
+
     StateUpdate --> FilterApplied: useEffect runs
-    
+
     FilterApplied --> CheckCategory: Filter posts
-    
+
     CheckCategory --> CategoryMatch: post.category === "Festival"
     CheckCategory --> CategoryMismatch: post.category !== "Festival"
-    
+
     CategoryMatch --> DisplayFiltered: ✅ Show filtered
     CategoryMismatch --> DisplayFiltered: (Skip post)
-    
+
     DisplayFiltered --> UserSees: Posts displayed
-    
+
     UserSees --> AllPosts: Click "All" category
-    
+
     note right of StateUpdate
         activeCategory: "Festival"
         Triggers re-filter
     end note
-    
+
     note right of CategoryMismatch
         Post category doesn't match
         Could be casing issue
         or data mismatch
     end note
-```
 
-### Solutions
+```text
+
+### Solutions (2)
 
 **Check 1: Category Filter Logic**
 
@@ -350,7 +366,8 @@ useEffect(() => {
     setFilteredPosts(filtered);
   }
 }, [activeCategory, allPosts]);
-```
+
+```text
 
 **Check 2: Category Button State**
 
@@ -368,7 +385,8 @@ useEffect(() => {
 >
   Festival
 </button>
-```
+
+```text
 
 **Check 3: Category Data Consistency**
 
@@ -393,7 +411,8 @@ export const categories = [
 const filtered = posts.filter(
   post => post.category === activeCategory  // Must match exactly
 );
-```
+
+```text
 
 **Check 4: Reset Other Filters**
 
@@ -405,9 +424,10 @@ const handleCategoryChange = (category: string) => {
   setSelectedTags([]);  // Clear tags
   setCurrentPage(1);   // Reset pagination
 };
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (2)
 
 - [ ] `useEffect` depends on `activeCategory`
 - [ ] Category comparison is case-insensitive
@@ -419,12 +439,13 @@ const handleCategoryChange = (category: string) => {
 
 ## 🚨 Issue 4: Category Shows Zero Results
 
-### Symptoms
+### Symptoms (3)
+
 - Filter by category
 - "No posts found" message
 - But posts exist in that category
 
-### Solutions
+### Solutions (3)
 
 **Check 1: Data Inspection**
 
@@ -433,15 +454,16 @@ const handleCategoryChange = (category: string) => {
 useEffect(() => {
   console.log('Active category:', activeCategory);
   console.log('All posts:', allPosts.length);
-  console.log('Posts in category:', 
+  console.log('Posts in category:',
     allPosts.filter(p => p.category === activeCategory).length
   );
-  
+
   // Log all unique categories
   const categories = [...new Set(allPosts.map(p => p.category))];
   console.log('Available categories:', categories);
 }, [activeCategory, allPosts]);
-```
+
+```text
 
 **Check 2: Category Name Mismatch**
 
@@ -465,18 +487,20 @@ export const blogPosts = [
 <button onClick={() => setActiveCategory(cat.id)}>
   {cat.name}
 </button>
-```
+
+```text
 
 **Check 3: Case Sensitivity**
 
 ```tsx
 // ✅ CORRECT - Handle case differences
-const filtered = allPosts.filter(post => 
+const filtered = allPosts.filter(post =>
   post.category.toLowerCase() === activeCategory.toLowerCase()
 );
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (3)
 
 - [ ] Log actual category values in data
 - [ ] Ensure category names match between buttons and data
@@ -488,7 +512,8 @@ const filtered = allPosts.filter(post =>
 
 ## 🚨 Issue 5: Tag Filtering Allows Only One Tag
 
-### Symptoms
+### Symptoms (4)
+
 - Can select only one tag at a time
 - Selecting second tag deselects first
 - Multiple tag filtering doesn't work
@@ -501,23 +526,23 @@ sequenceDiagram
     participant T as TagChip
     participant S as State
     participant F as FilterLogic
-    
+
     Note over S: selectedTags = []
-    
+
     U->>T: Click "Festival" tag
     T->>S: toggleTag("festival")
-    
+
     S->>S: Add "festival" to array
     Note over S: selectedTags = ["festival"]
-    
+
     S->>F: Filter posts
     F-->>U: Show 10 posts ✅
-    
+
     Note over U: User clicks another tag
-    
+
     U->>T: Click "Glitter" tag
     T->>S: toggleTag("glitter")
-    
+
     alt WRONG Implementation
         S->>S: Replace array
         Note over S: selectedTags = ["glitter"]<br/>❌ Lost "festival"!
@@ -527,9 +552,10 @@ sequenceDiagram
         S->>F: Filter by AND logic
         F-->>U: Show posts with BOTH tags
     end
-```
 
-### Solutions
+```text
+
+### Solutions (4)
 
 **Check 1: Multiple Tag State**
 
@@ -552,7 +578,8 @@ const toggleTag = (tag: string) => {
 // ❌ WRONG - Single tag only
 const [selectedTag, setSelectedTag] = useState<string>('');
 const selectTag = (tag: string) => setSelectedTag(tag);  // Replaces!
-```
+
+```text
 
 **Check 2: Tag Filter Logic**
 
@@ -560,7 +587,7 @@ const selectTag = (tag: string) => setSelectedTag(tag);  // Replaces!
 // ✅ CORRECT - Filter by multiple tags (AND logic)
 const filterByTags = (posts: BlogPost[], tags: string[]) => {
   if (tags.length === 0) return posts;
-  
+
   return posts.filter(post =>
     tags.every(tag => post.tags.includes(tag))  // Post must have ALL tags
   );
@@ -569,12 +596,13 @@ const filterByTags = (posts: BlogPost[], tags: string[]) => {
 // OR logic alternative (post has ANY of the tags):
 const filterByTagsOR = (posts: BlogPost[], tags: string[]) => {
   if (tags.length === 0) return posts;
-  
+
   return posts.filter(post =>
     tags.some(tag => post.tags.includes(tag))  // Post has AT LEAST ONE tag
   );
 };
-```
+
+```text
 
 **Check 3: Tag UI State**
 
@@ -596,9 +624,10 @@ const filterByTagsOR = (posts: BlogPost[], tags: string[]) => {
     {selectedTags.includes(tag) && <X className="ml-1 w-3 h-3" />}
   </button>
 ))}
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (4)
 
 - [ ] Use array state for multiple tags
 - [ ] Implement toggle (add/remove) logic
@@ -610,12 +639,13 @@ const filterByTagsOR = (posts: BlogPost[], tags: string[]) => {
 
 ## 🚨 Issue 6: Tags Don't Filter Posts
 
-### Symptoms
+### Symptoms (5)
+
 - Tags selected but all posts still shown
 - Filter doesn't apply
 - Count doesn't update
 
-### Solutions
+### Solutions (5)
 
 **Check 1: Combine All Filters**
 
@@ -623,14 +653,14 @@ const filterByTagsOR = (posts: BlogPost[], tags: string[]) => {
 // ✅ CORRECT - Apply all filters together
 const getFilteredPosts = () => {
   let filtered = allPosts;
-  
+
   // 1. Filter by category
   if (activeCategory !== 'all') {
     filtered = filtered.filter(
       post => post.category === activeCategory
     );
   }
-  
+
   // 2. Filter by search query
   if (searchQuery) {
     const query = searchQuery.toLowerCase();
@@ -639,14 +669,14 @@ const getFilteredPosts = () => {
       post.excerpt.toLowerCase().includes(query)
     );
   }
-  
+
   // 3. Filter by tags
   if (selectedTags.length > 0) {
     filtered = filtered.filter(post =>
       selectedTags.every(tag => post.tags.includes(tag))
     );
   }
-  
+
   return filtered;
 };
 
@@ -655,7 +685,8 @@ useEffect(() => {
   const results = getFilteredPosts();
   setFilteredPosts(results);
 }, [activeCategory, searchQuery, selectedTags, allPosts]);
-```
+
+```text
 
 **Check 2: Tag Data Format**
 
@@ -673,9 +704,10 @@ export const blogPost = {
 export const blogPost = {
   tags: 'festival, glitter, uv',  // String - won't work with .includes()
 };
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (5)
 
 - [ ] All filters combined in one function
 - [ ] `useEffect` depends on all filter states
@@ -687,7 +719,8 @@ export const blogPost = {
 
 ## 🚨 Issue 7: Pagination Stuck on Page 1
 
-### Symptoms
+### Symptoms (6)
+
 - "Next" button doesn't work
 - Page number stays at 1
 - All posts shown on one page
@@ -697,37 +730,38 @@ export const blogPost = {
 ```mermaid
 stateDiagram-v2
     [*] --> Page1: Initial load
-    
+
     Page1 --> NextClicked: User clicks "Next"
-    
+
     NextClicked --> StateUpdate: setCurrentPage(2)
-    
+
     StateUpdate --> SlicePosts: Calculate slice
-    
+
     SlicePosts --> CheckLogic: start = (2-1) * 12 = 12<br/>end = 2 * 12 = 24
-    
+
     CheckLogic --> ShowPage2: posts.slice(12, 24)
-    
+
     ShowPage2 --> Page2: ✅ Display page 2
-    
+
     Page2 --> PrevClicked: User clicks "Previous"
-    
+
     PrevClicked --> BackToPage1: setCurrentPage(1)
-    
+
     BackToPage1 --> Page1
-    
+
     note right of StateUpdate
         currentPage state must
         actually update!
     end note
-    
+
     note right of CheckLogic
         Slice logic must be
         calculated correctly
     end note
-```
 
-### Solutions
+```text
+
+### Solutions (6)
 
 **Check 1: Pagination State**
 
@@ -748,7 +782,8 @@ const handlePrevPage = () => {
 const handleNextPage = () => {
   currentPage = currentPage + 1;  // Won't trigger re-render!
 };
-```
+
+```text
 
 **Check 2: Slice Logic**
 
@@ -762,7 +797,8 @@ const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 // indexOfLastPost = 2 * 12 = 24
 // indexOfFirstPost = 24 - 12 = 12
 // Posts 12-24 shown ✅
-```
+
+```text
 
 **Check 3: Total Pages**
 
@@ -784,7 +820,8 @@ const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 >
   Next
 </button>
-```
+
+```text
 
 **Check 4: Reset on Filter Change**
 
@@ -793,9 +830,10 @@ const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 useEffect(() => {
   setCurrentPage(1);  // Go back to page 1
 }, [activeCategory, searchQuery, selectedTags]);
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (6)
 
 - [ ] Use `setState` for currentPage (not direct assignment)
 - [ ] Slice logic calculates correct indexes
@@ -807,12 +845,13 @@ useEffect(() => {
 
 ## 🚨 Issue 8: Pagination Shows All Posts
 
-### Symptoms
+### Symptoms (7)
+
 - Pagination buttons render
 - But all posts shown on page 1
 - Page count is correct but slicing doesn't work
 
-### Solutions
+### Solutions (7)
 
 **Check 1: Render Current Posts**
 
@@ -826,7 +865,8 @@ useEffect(() => {
 {currentPosts.map(post => (
   <BlogCard key={post.id} post={post} />
 ))}
-```
+
+```text
 
 **Check 2: Complete Pagination Flow**
 
@@ -835,14 +875,14 @@ function BlogPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredPosts, setFilteredPosts] = useState(allPosts);
   const postsPerPage = 12;
-  
+
   // 1. Calculate slice indexes
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  
+
   // 2. Slice posts for current page
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
-  
+
   // 3. Render ONLY current posts
   return (
     <div>
@@ -851,7 +891,7 @@ function BlogPage() {
           <BlogCard key={post.id} post={post} />
         ))}
       </div>
-      
+
       <Pagination
         currentPage={currentPage}
         totalPages={Math.ceil(filteredPosts.length / postsPerPage)}
@@ -860,9 +900,10 @@ function BlogPage() {
     </div>
   );
 }
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (7)
 
 - [ ] Map over `currentPosts`, not `filteredPosts`
 - [ ] `slice()` returns correct subset
@@ -876,28 +917,28 @@ function BlogPage() {
 ```mermaid
 flowchart TD
     START[Blog Filter Issue] --> A{Which feature?}
-    
+
     A -->|Search| B[Type test query]
     A -->|Category| C[Click category button]
     A -->|Tags| D[Select tag]
     A -->|Pagination| E[Click Next/Prev]
-    
+
     B --> F{Shows results?}
     F -->|No| G[Fix: Issue 1 - Search Logic]
     F -->|Wrong results| H[Fix: Issue 2 - Relevance]
-    
+
     C --> I{Filters posts?}
     I -->|No| J[Fix: Issue 3 - Category Filter]
     I -->|Shows zero| K[Fix: Issue 4 - Data Mismatch]
-    
+
     D --> L{Multiple tags work?}
     L -->|No| M[Fix: Issue 5 - Tag Array]
     L -->|Doesn't filter| N[Fix: Issue 6 - Tag Logic]
-    
+
     E --> O{Page changes?}
     O -->|No| P[Fix: Issue 7 - Pagination State]
     O -->|Shows all posts| Q[Fix: Issue 8 - Slice Logic]
-    
+
     G --> R[Re-test]
     H --> R
     J --> R
@@ -906,15 +947,16 @@ flowchart TD
     N --> R
     P --> R
     Q --> R
-    
+
     R --> S{Fixed?}
     S -->|Yes| T[✅ SUCCESS]
     S -->|No| U[Check console + add debug logs]
-    
+
     U --> START
-    
+
     style T fill:#dcfce7,stroke:#22c55e,stroke-width:3px
-```
+
+```text
 
 ---
 
@@ -929,16 +971,16 @@ function BlogPage() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
-  
+
   // Filter logic
   useEffect(() => {
     let results = allPosts;
-    
+
     // Apply category filter
     if (activeCategory !== 'all') {
       results = results.filter(p => p.category === activeCategory);
     }
-    
+
     // Apply search filter
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
@@ -947,18 +989,18 @@ function BlogPage() {
         p.excerpt.toLowerCase().includes(q)
       );
     }
-    
+
     // Apply tag filter
     if (selectedTags.length > 0) {
       results = results.filter(p =>
         selectedTags.every(tag => p.tags.includes(tag))
       );
     }
-    
+
     setFilteredPosts(results);
     setCurrentPage(1);  // Reset pagination
   }, [searchQuery, activeCategory, selectedTags]);
-  
+
   // Pagination
   const postsPerPage = 12;
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
@@ -966,18 +1008,20 @@ function BlogPage() {
     (currentPage - 1) * postsPerPage,
     currentPage * postsPerPage
   );
-  
+
   return (
     <>
       <SearchBar value={searchQuery} onChange={setSearchQuery} />
       <CategoryFilter active={activeCategory} onChange={setActiveCategory} />
       <TagFilter selected={selectedTags} onChange={setSelectedTags} />
       <BlogGrid posts={currentPosts} />
-      <Pagination current={currentPage} total={totalPages} onChange={setCurrentPage} />
+<Pagination current={currentPage} total={totalPages} onChange={setCurrentPage}
+/>
     </>
   );
 }
-```
+
+```text
 
 ---
 
@@ -989,4 +1033,5 @@ function BlogPage() {
 
 ---
 
-**Pro Tip:** Always reset `currentPage` to 1 when filters change to avoid showing empty pages!
+**Pro Tip:** Always reset `currentPage` to 1 when filters change to avoid
+showing empty pages!

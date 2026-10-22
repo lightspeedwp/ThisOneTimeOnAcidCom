@@ -1,33 +1,43 @@
 # TOA Media Library Strategy – Audit Deliverables
 
-**Investigation Date:** 17 October 2026  
-**Project:** This One Time on Acid (`lightspeedwp/ThisOneTimeOnAcidCom`)  
-**Related Epic:** TOA-269  
-**Scope:** Read-only investigation; no repository or Figma modifications  
+**Investigation Date:** 17 October 2026
+**Project:** This One Time on Acid (`lightspeedwp/ThisOneTimeOnAcidCom`)
+**Related Epic:** TOA-269
+**Scope:** Read-only investigation; no repository or Figma modifications
 
 ---
 
 ## Quick Navigation
 
 ### For Decision-Makers
-**Start here:** [`EXECUTIVE-SUMMARY.md`](./EXECUTIVE-SUMMARY.md)  
+
+**Start here:** [`EXECUTIVE-SUMMARY.md`](./EXECUTIVE-SUMMARY.md)
 One-page overview of the problem, solution, and decisions required. ~5 min read.
 
 ### For Implementation Teams
-**Start here:** [`MEDIA-LIBRARY-STRATEGY-REPORT.md`](./MEDIA-LIBRARY-STRATEGY-REPORT.md)  
-Complete technical specification covering architecture, assets, catalogue schema, migration workflow, validation procedures, and risk mitigation. ~20 min read; detailed reference throughout implementation.
+
+**Start here:**
+[`MEDIA-LIBRARY-STRATEGY-REPORT.md`](./MEDIA-LIBRARY-STRATEGY-REPORT.md)
+Complete technical specification covering architecture, assets, catalogue
+schema, migration workflow, validation procedures, and risk mitigation. ~20 min
+read; detailed reference throughout implementation.
 
 ### For Storage & Cost Analysis
-**Start here:** [`STORAGE-PROVIDER-COMPARISON.md`](./STORAGE-PROVIDER-COMPARISON.md)  
-Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup estimates. Includes recommendation and implementation checklist.
+
+**Start here:**
+[`STORAGE-PROVIDER-COMPARISON.md`](./STORAGE-PROVIDER-COMPARISON.md)
+Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup
+estimates. Includes recommendation and implementation checklist.
 
 ---
 
 ## Deliverables Included
 
 ### 1. EXECUTIVE-SUMMARY.md (113 lines)
-**Purpose:** High-level overview for decision-makers  
+
+**Purpose:** High-level overview for decision-makers
 **Contents:**
+
 - Problem statement (56 assets, no files, placeholder SVGs)
 - Recommended solution (phased media-library strategy)
 - Key decisions required (storage, catalogue, exports, credits)
@@ -40,8 +50,10 @@ Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup
 ---
 
 ### 2. MEDIA-LIBRARY-STRATEGY-REPORT.md (665 lines)
-**Purpose:** Complete technical specification  
+
+**Purpose:** Complete technical specification
 **Contents:**
+
 - Section 1: Current Architecture and Asset Resolution (tech stack, Vite plugin, current handling)
 - Section 2: Asset Inventory & Verification (56 unique verified, 128 total references, category breakdown)
 - Section 3: Figma Integration Assessment (Make project details, unknown capabilities, skill inventory)
@@ -59,8 +71,10 @@ Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup
 ---
 
 ### 3. STORAGE-PROVIDER-COMPARISON.md (308 lines)
-**Purpose:** Detailed provider analysis with costs  
+
+**Purpose:** Detailed provider analysis with costs
 **Contents:**
+
 - Cloudinary – UX, automation, cost ($99/mo), setup time; historical reference
 - GitHub + Netlify (APPROVED) – Zero-cost, portable, full version control
 - AWS S3 + CloudFront – Enterprise option, overkill at TOA scale
@@ -73,8 +87,10 @@ Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup
 ---
 
 ### 4. SAMPLE-CATALOGUE.json (349 lines)
-**Purpose:** Example asset catalogue records  
+
+**Purpose:** Example asset catalogue records
 **Contents:**
+
 - 4 sample records (homepage hero, jungle festival, nail art, fallback)
 - Full schema with all required/optional fields
 - Documentation comments
@@ -85,8 +101,10 @@ Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup
 ---
 
 ### 5. 01-asset-inventory.json (149 lines)
-**Purpose:** Complete list of 56 unique Figma asset IDs  
+
+**Purpose:** Complete list of 56 unique Figma asset IDs
 **Contents:**
+
 - Audit metadata and summary
 - All 56 unique `figma:asset/` IDs
 - Status indicators (pending recovery, placeholder mappings)
@@ -135,33 +153,48 @@ Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup
 ### For Ash (Project Owner)
 
 1. **Read:** EXECUTIVE-SUMMARY.md (5 min)
-2. **Review:** Key decisions table in EXECUTIVE-SUMMARY
-3. **Decide:** Storage provider + catalogue approach + export workflow
-4. **Approve:** Decisions before TOA-280 / TOA-277 kickoff
+
+1. **Review:** Key decisions table in EXECUTIVE-SUMMARY
+
+1. **Decide:** Storage provider + catalogue approach + export workflow
+
+1. **Approve:** Decisions before TOA-280 / TOA-277 kickoff
 
 ### For Implementation Team
 
 1. **Read:** MEDIA-LIBRARY-STRATEGY-REPORT (30 min)
-2. **Reference:** Throughout TOA-280 through TOA-279
-3. **Use:** Catalogue schema (Section 4)
-4. **Follow:** Migration workflow (Section 6)
-5. **Validate:** Checklist (Section 6.3)
+
+1. **Reference:** Throughout TOA-280 through TOA-279
+
+1. **Use:** Catalogue schema (Section 4)
+
+1. **Follow:** Migration workflow (Section 6)
+
+1. **Validate:** Checklist (Section 6.3)
 
 ### For Storage Selection
 
 1. **Read:** STORAGE-PROVIDER-COMPARISON (15 min)
-2. **Review:** Cost models for each provider
-3. **Compare:** Implementation time and team capability
-4. **Choose:** Recommended (Cloudinary) unless specific constraints exist
-5. **Plan:** Setup checklist for chosen provider
+
+1. **Review:** Cost models for each provider
+
+1. **Compare:** Implementation time and team capability
+
+1. **Choose:** Recommended (Cloudinary) unless specific constraints exist
+
+1. **Plan:** Setup checklist for chosen provider
 
 ### For Asset Recovery (TOA-280 / TOA-8)
 
 1. **Reference:** Asset inventory (01-asset-inventory.json)
-2. **Use:** Figma skills available in `/figma-design-to-code`, `/figma-use`
-3. **Document:** Manual export gaps and recovery status
-4. **Sample:** 10–15 representative assets
-5. **Report:** Findings back to catalogue design (TOA-277)
+
+1. **Use:** Figma skills available in `/figma-design-to-code`, `/figma-use`
+
+1. **Document:** Manual export gaps and recovery status
+
+1. **Sample:** 10–15 representative assets
+
+1. **Report:** Findings back to catalogue design (TOA-277)
 
 ---
 
@@ -194,7 +227,7 @@ Detailed comparison of Cloudinary, GitHub, and AWS S3 with cost models and setup
 
 ## Files Included
 
-```
+```text
 toa-media-audit/
 ├── README.md                                (this file)
 ├── EXECUTIVE-SUMMARY.md                     (decision-makers: 5 min)
@@ -202,9 +235,10 @@ toa-media-audit/
 ├── STORAGE-PROVIDER-COMPARISON.md           (cost analysis: 15 min)
 ├── 01-asset-inventory.json                  (reference data)
 └── SAMPLE-CATALOGUE.json                    (example records)
-```
 
-**Total size:** 62 KB  
+```text
+
+**Total size:** 62 KB
 **Total lines:** 1,584 (mostly documentation + structured data)
 
 ---
@@ -212,28 +246,37 @@ toa-media-audit/
 ## Appendix: Commands & References
 
 ### Git
+
 ```bash
+
 # Clone repository
+
 git clone https://github.com/lightspeedwp/ThisOneTimeOnAcidCom
 
 # List all figma:asset references
+
 grep -r "figma:asset/" src --include="*.tsx" --include="*.ts"
 
 # Count unique assets
+
 grep -r "figma:asset/" src --include="*.tsx" --include="*.ts" | \
   grep -oE "'figma:asset/[a-f0-9]+\.png'" | sort -u | wc -l
-```
+
+```text
 
 ### Figma
+
 - **Figma Make Project:** https://www.figma.com/make/WGrQbNWvPQfiaGY1pnkwaq/This-One-Time-on-Acid
 - **Published Website:** https://thisonetimeonacid.figma.site
 - **Design Source:** https://www.figma.com/design/WGrQbNWvPQfiaGY1pnkwaq/This-One-Time-on-Acid
 
 ### Linear Issues
+
 - **Epic:** TOA-269 (media-library strategy)
 - **Children:** TOA-280, TOA-8, TOA-277, TOA-276, TOA-278, TOA-279
 
 ### Cloudinary (if selected)
+
 - **Sign up:** https://cloudinary.com/users/register/free
 - **React SDK:** `npm install cloudinary-react`
 - **Docs:** https://cloudinary.com/documentation/react_integration
@@ -242,13 +285,14 @@ grep -r "figma:asset/" src --include="*.tsx" --include="*.ts" | \
 
 ## Support & Questions
 
-**For audit findings:** See MEDIA-LIBRARY-STRATEGY-REPORT.md (index + search)  
-**For cost questions:** See STORAGE-PROVIDER-COMPARISON.md (cost model section)  
-**For implementation:** Follow migration workflow (MEDIA-LIBRARY-STRATEGY-REPORT § 6)  
+**For audit findings:** See MEDIA-LIBRARY-STRATEGY-REPORT.md (index + search)
+**For cost questions:** See STORAGE-PROVIDER-COMPARISON.md (cost model section)
+**For implementation:** Follow migration workflow (MEDIA-LIBRARY-STRATEGY-REPORT
+§ 6)
 **For approval:** Use decision matrix (EXECUTIVE-SUMMARY.md or § 8)
 
 ---
 
-**Audit prepared by:** Claude (AI agent)  
-**Scope:** Read-only investigation  
+**Audit prepared by:** Claude (AI agent)
+**Scope:** Read-only investigation
 **Status:** Complete; ready for review and approval

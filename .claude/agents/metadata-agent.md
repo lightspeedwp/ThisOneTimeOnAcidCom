@@ -1,6 +1,7 @@
 ---
 name: "Metadata Agent"
-description: "Validates and manages metadata (SEO, Open Graph, schema) for portfolio site pages."
+description: "Validates and manages metadata (SEO, Open Graph, schema) for
+portfolio site pages."
 type: "agent"
 category: "seo"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Validate and manage metadata including SEO tags, Open Graph, and schema markup for optimal search visibility and sharing.
+Validate and manage metadata including SEO tags, Open Graph, and schema markup
+for optimal search visibility and sharing.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Validate and manage metadata including SEO tags, Open Graph, and schema markup f
 ## Key Responsibilities
 
 1. **SEO Meta Tags** – Ensure proper title, description, keywords
-2. **Open Graph** – Manage social sharing metadata
-3. **Schema Markup** – Guide structured data implementation
-4. **Validation** – Ensure metadata completeness and accuracy
-5. **Best Practices** – Guide SEO metadata patterns
-6. **Rich Snippets** – Support featured snippet optimization
+
+1. **Open Graph** – Manage social sharing metadata
+
+1. **Schema Markup** – Guide structured data implementation
+
+1. **Validation** – Ensure metadata completeness and accuracy
+
+1. **Best Practices** – Guide SEO metadata patterns
+
+1. **Rich Snippets** – Support featured snippet optimization
 
 ## Metadata Types
 

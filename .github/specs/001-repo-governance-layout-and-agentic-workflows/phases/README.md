@@ -1,6 +1,7 @@
 # Phase Documentation — Spec 001: Repository Governance Layout & Agentic Workflows
 
-This directory contains phase-specific task breakdowns and implementation details for Spec 001.
+This directory contains phase-specific task breakdowns and implementation
+details for Spec 001.
 
 ## Phase Structure
 
@@ -8,7 +9,8 @@ This directory contains phase-specific task breakdowns and implementation detail
 
 **Location**: Main `tasks.md` (Phase 1 section)
 
-**Scope**: 
+**Scope**:
+
 - Initialize governance artefacts and directory structure
 - Document current state and inventory
 - Validate integrations (.specify/, .gemini/)
@@ -20,9 +22,11 @@ This directory contains phase-specific task breakdowns and implementation detail
 
 ### Phase 2: Governance Consolidation — Repository Restructuring
 
-**Location**: [`phase-2-governance-consolidation.md`](./phase-2-governance-consolidation.md)
+**Location**:
+[`phase-2-governance-consolidation.md`](./phase-2-governance-consolidation.md)
 
 **Scope**:
+
 - Audit existing governance files (labels, templates, issue types)
 - Remove duplicate governance files from ThisOneTimeOnAcidCom
 - Implement drift prevention validation workflows
@@ -31,17 +35,24 @@ This directory contains phase-specific task breakdowns and implementation detail
 - Document hybrid governance model
 
 **Related**:
+
 - **Spec 021** (lightspeedwp/.github) — Source governance consolidation plan
 - **TOA-262** — PR/Issue Template Routing (workstream)
 - **TOA-271** — Validation & Automation (workstream)
 
 **Implementation**: 40 tasks organized across 6 subphases
+
 1. **Phase 2.1**: Setup (3 tasks) — Clone and prepare
-2. **Phase 2.2**: Audit (7 tasks) — Discovery and findings
-3. **Phase 2.3**: Consolidation (12 tasks) — Remove duplicates, preserve workflows
-4. **Phase 2.4**: Drift Prevention (7 tasks) — Deploy validation workflows
-5. **Phase 2.5**: Workflow Validation (5 tasks) — Ensure custom workflows work
-6. **Phase 2.6**: Documentation (6 tasks) — Final validation and docs
+
+1. **Phase 2.2**: Audit (7 tasks) — Discovery and findings
+
+1. **Phase 2.3**: Consolidation (12 tasks) — Remove duplicates, preserve workflows
+
+1. **Phase 2.4**: Drift Prevention (7 tasks) — Deploy validation workflows
+
+1. **Phase 2.5**: Workflow Validation (5 tasks) — Ensure custom workflows work
+
+1. **Phase 2.6**: Documentation (6 tasks) — Final validation and docs
 
 **Status**: Ready for implementation (detailed task breakdown complete)
 
@@ -50,13 +61,19 @@ This directory contains phase-specific task breakdowns and implementation detail
 ## How to Use This Directory
 
 **To implement Phase 2**:
+
 1. Read [`phase-2-governance-consolidation.md`](./phase-2-governance-consolidation.md)
-2. Follow the task sequences (Phase 2.1 → 2.2 → 2.3 → 2.4 → 2.5 → 2.6)
-3. Use parallel execution opportunities where noted [P]
-4. Check off tasks as completed
-5. Review checkpoint validations before proceeding to next phase
+
+1. Follow the task sequences (Phase 2.1 → 2.2 → 2.3 → 2.4 → 2.5 → 2.6)
+
+1. Use parallel execution opportunities where noted [P]
+
+1. Check off tasks as completed
+
+1. Review checkpoint validations before proceeding to next phase
 
 **To reference from main spec**:
+
 - `spec.md` links to the phase documentation
 - `tasks.md` main task list has overview; phase-specific files have details
 - `plan.md` describes overall architecture and dependencies
@@ -65,7 +82,7 @@ This directory contains phase-specific task breakdowns and implementation detail
 
 ## Phase Interdependencies
 
-```
+```text
 Phase 1: Shared Governance Infrastructure (SETUP)
   ↓ (must complete)
 Phase 2: Governance Consolidation (CURRENT)
@@ -84,7 +101,8 @@ Phase 2: Governance Consolidation (CURRENT)
       ↓ (must complete before Phase 3)
 
 Phase 3+: Enhanced Monitoring & Rollout (FUTURE)
-```
+
+```text
 
 ---
 
@@ -126,8 +144,8 @@ All Phase 2 artifacts are stored in `.github/.tmp/phase2-audit/`:
 - **Spec 021** (lightspeedwp/.github): Repository Restructuring & Canonical Governance Config
 - **Spec 001** (ThisOneTimeOnAcidCom): Repository Governance Layout & Agentic Workflows
 - **Contracts** (lightspeedwp/.github/specs/021-repo-restructuring-canonical-config/contracts/):
-  - `drift-detection.contract.md`
-  - `template-routing.contract.md`
-  - `workflow-reference.contract.md`
+- `drift-detection.contract.md`
+- `template-routing.contract.md`
+- `workflow-reference.contract.md`
 - **CLAUDE.md** (lightspeedwp/.github): Branch naming and governance rules
 - **AGENTS.md** (ThisOneTimeOnAcidCom): Repository-specific agent instructions

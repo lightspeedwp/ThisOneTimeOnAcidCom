@@ -1,13 +1,15 @@
 # TOA Media Library Strategy – Executive Summary
 
-**Date:** 17 October 2026  
+**Date:** 17 October 2026
 **Status:** Investigation complete; no modifications made to repository or Figma
 
 ---
 
 ## The Problem
 
-The TOA project has **56 unique Figma asset references** (128 total imports) but no asset files exist in the repository. All images render as placeholder SVGs in development and production.
+The TOA project has **56 unique Figma asset references** (128 total imports) but
+no asset files exist in the repository. All images render as placeholder SVGs in
+development and production.
 
 | Current State | Finding |
 |---|---|
@@ -24,10 +26,14 @@ The TOA project has **56 unique Figma asset references** (128 total imports) but
 A **phased media-library strategy** with:
 
 1. **Figma Recovery Pilot** – Extract assets from Figma Make, identify export gaps, sample 10–15 assets
-2. **Catalogue Design** – Define standardized JSON structure for asset metadata (source, usage, credits, print-readiness)
-3. **Storage Selection** – GitHub + Netlify (zero-cost: leverages existing Netlify subscription)
-4. **Migration Workflow** – Import assets, populate catalogue, update code references, validate
-5. **Validation & Ops** – Test, document rollback, hand off to production team
+
+1. **Catalogue Design** – Define standardized JSON structure for asset metadata (source, usage, credits, print-readiness)
+
+1. **Storage Selection** – GitHub + Netlify (zero-cost: leverages existing Netlify subscription)
+
+1. **Migration Workflow** – Import assets, populate catalogue, update code references, validate
+
+1. **Validation & Ops** – Test, document rollback, hand off to production team
 
 **Timeline:** 2–3 weeks (distributed across 6 existing Linear child issues)
 
@@ -47,14 +53,16 @@ A **phased media-library strategy** with:
 
 ## Deliverables from This Audit
 
-✅ **Verified asset count:** 56 unique, 128 total references  
-✅ **Asset inventory:** Complete list with categories and usage  
-✅ **Current architecture:** Vite bundler pipeline, fallback behavior, integration points  
-✅ **Catalogue schema:** TypeScript interface with example records  
-✅ **Storage comparison:** Cloudinary, GitHub, AWS S3 (pros/cons/costs)  
-✅ **Migration plan:** Phased workflow, reference mapping, validation checklist  
-✅ **Skill assessment:** Existing Figma skills sufficient; no custom agent required  
-✅ **Risk analysis:** Blockers, mitigations, approval checkpoints  
+✅ **Verified asset count:** 56 unique, 128 total references
+✅ **Asset inventory:** Complete list with categories and usage
+✅ **Current architecture:** Vite bundler pipeline, fallback behavior,
+integration points
+✅ **Catalogue schema:** TypeScript interface with example records
+✅ **Storage comparison:** Cloudinary, GitHub, AWS S3 (pros/cons/costs)
+✅ **Migration plan:** Phased workflow, reference mapping, validation checklist
+✅ **Skill assessment:** Existing Figma skills sufficient; no custom agent
+required
+✅ **Risk analysis:** Blockers, mitigations, approval checkpoints
 
 ---
 
@@ -74,30 +82,44 @@ A **phased media-library strategy** with:
 ## Next Steps
 
 1. **Approve pending decisions** (catalogue, credits, export workflow)
-2. **Kick off TOA-280** (Figma extraction pilot)
-3. **Prepare TOA-8** (asset recovery and visual validation)
-4. **Design TOA-277** (finalize catalogue schema)
-5. **Plan TOA-276** (confirm provider contract and SLA)
-6. **Build TOA-278** (migration and reference mapping)
-7. **Execute TOA-279** (validation and handoff)
+
+1. **Kick off TOA-280** (Figma extraction pilot)
+
+1. **Prepare TOA-8** (asset recovery and visual validation)
+
+1. **Design TOA-277** (finalize catalogue schema)
+
+1. **Plan TOA-276** (confirm provider contract and SLA)
+
+1. **Build TOA-278** (migration and reference mapping)
+
+1. **Execute TOA-279** (validation and handoff)
 
 ---
 
 ## Key Findings
 
-**Critical Discovery:** Original audit claimed 75 asset references; verified count is **56** (19 fewer). Likely due to Figma Make deduplication or repository refactoring since last audit. The lower count actually makes migration faster.
+**Critical Discovery:** Original audit claimed 75 asset references; verified
+count is **56** (19 fewer). Likely due to Figma Make deduplication or repository
+refactoring since last audit. The lower count actually makes migration faster.
 
-**Asset Accessibility:** Figma Make export capability is unverified. Pilot phase required to determine which assets can be auto-exported vs. manually exported.
+**Asset Accessibility:** Figma Make export capability is unverified. Pilot phase
+required to determine which assets can be auto-exported vs. manually exported.
 
-**No Custom Tools Needed:** Existing Figma skills (`/figma-design-to-code`, `/figma-use`) sufficient for asset recovery. No custom agent or skill required unless updates become recurring (>3/quarter).
+**No Custom Tools Needed:** Existing Figma skills (`/figma-design-to-code`,
+`/figma-use`) sufficient for asset recovery. No custom agent or skill required
+unless updates become recurring (>3/quarter).
 
-**Backward Compatibility:** Existing `figma:asset/` import statements remain protected and unchanged until verified replacements ready. Staged rollout prevents breakage.
+**Backward Compatibility:** Existing `figma:asset/` import statements remain
+protected and unchanged until verified replacements ready. Staged rollout
+prevents breakage.
 
 ---
 
 ## Full Documentation
 
 See **MEDIA-LIBRARY-STRATEGY-REPORT.md** for complete technical details:
+
 - Architecture deep-dive
 - Catalogue schema specification
 - Storage provider comparison (detailed)
@@ -108,6 +130,6 @@ See **MEDIA-LIBRARY-STRATEGY-REPORT.md** for complete technical details:
 
 ---
 
-**Report prepared by:** Claude (AI audit)  
-**Scope:** Read-only investigation; no code or Figma modifications  
+**Report prepared by:** Claude (AI audit)
+**Scope:** Read-only investigation; no code or Figma modifications
 **Access:** Audit findings available in `/scratchpad/toa-media-audit/`

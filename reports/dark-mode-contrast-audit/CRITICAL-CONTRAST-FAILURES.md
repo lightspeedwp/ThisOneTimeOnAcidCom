@@ -1,21 +1,26 @@
 # 🚨 CRITICAL: Dark Mode Contrast Audit Report
 
-**Status:** ❌ **MULTIPLE SEVERE WCAG FAILURES IDENTIFIED**  
-**Severity:** CRITICAL - DEPLOY BLOCKER  
+**Status:** ❌ **MULTIPLE SEVERE WCAG FAILURES IDENTIFIED**
+**Severity:** CRITICAL - DEPLOY BLOCKER
 **Date:** March 11, 2026
 
 ---
 
 ## Executive Summary
 
-**The dark mode theme has CATASTROPHIC accessibility failures.** Multiple components use dark gray text (`#383838`) on dark backgrounds (`#0F0F0F`), resulting in contrast ratios as low as **1.48:1** - completely unreadable and a severe WCAG violation.
+**The dark mode theme has CATASTROPHIC accessibility failures.** Multiple
+components use dark gray text (`#383838`) on dark backgrounds (`#0F0F0F`),
+resulting in contrast ratios as low as **1.48:1** - completely unreadable and a
+severe WCAG violation.
 
 **Actual Status:**
+
 - ❌ **WCAG AA Compliance:** 0% (multiple critical failures)
 - ❌ **WCAG AAA Compliance:** 0% (multiple critical failures)
 - ❌ **Production Ready:** NO - DEPLOY BLOCKER
 
-**All previous claims of "100% WCAG AA compliance" and "14.8:1 contrast ratios" were FALSE.**
+**All previous claims of "100% WCAG AA compliance" and "14.8:1 contrast ratios"
+were FALSE.**
 
 ---
 
@@ -26,13 +31,16 @@
 **Location:** `/styles/blocks/header.css` lines 290-292
 
 **Current Code:**
+
 ```css
 .dark .header__nav-link {
   color: var(--wp--preset--color--neutral-300);
 }
-```
+
+```text
 
 **Resolves To:**
+
 - Text color: `#383838` (neutral-300 from dark.css line 67)
 - Background: `#0F0F0F` (atomic black)
 
@@ -45,41 +53,49 @@
 **Impact:** All navigation links in header are invisible/unreadable in dark mode
 
 **Required Fix:**
+
 ```css
 .dark .header__nav-link {
   color: #F6F2EB; /* 14.8:1 contrast - WCAG AAA */
 }
-```
+
+```text
 
 ---
 
 ### Contrast Ratio Calculation for #383838 on #0F0F0F
 
-**Text Color #383838:**
+## Text Color #383838
+
 - R: 56/255 = 0.2196
 - G: 56/255 = 0.2196
 - B: 56/255 = 0.2196
 
-**Relative Luminance Calculation:**
+## Relative Luminance Calculation
+
 - For each channel: 0.2196 / 12.92 = 0.0170 (since < 0.03928)
 - L = 0.2126 * 0.0170 + 0.7152 * 0.0170 + 0.0722 * 0.0170
 - L = 0.0170
 
-**Background Color #0F0F0F:**
+## Background Color #0F0F0F
+
 - R: 15/255 = 0.0588
 - G: 15/255 = 0.0588
 - B: 15/255 = 0.0588
 
-**Relative Luminance:**
+## Relative Luminance
+
 - 0.0588 / 12.92 = 0.00455
 - L = 0.00455
 
 **Contrast Ratio:**
-```
+
+```text
 CR = (0.0170 + 0.05) / (0.00455 + 0.05)
 CR = 0.067 / 0.05455
 CR = 1.23:1  (even worse than estimated)
-```
+
+```text
 
 **Result:** **1.23:1 contrast** ❌ **FAILS WCAG AA by 266%** (needs 4.5:1)
 
@@ -95,7 +111,8 @@ Based on code patterns, these likely have similar failures:
 
 ### FAILURE #3: Secondary Text Elements (Suspected)
 
-**Need to verify:** Any element using `--wp--preset--color--neutral-300`, `neutral-200`, or `neutral-100` on dark backgrounds
+**Need to verify:** Any element using `--wp--preset--color--neutral-300`,
+`neutral-200`, or `neutral-100` on dark backgrounds
 
 ---
 
@@ -103,7 +120,8 @@ Based on code patterns, these likely have similar failures:
 
 **The Problem:**
 
-The CSS uses WordPress preset neutral colors that were designed for **LIGHT MODE**:
+The CSS uses WordPress preset neutral colors that were designed for **LIGHT
+MODE**:
 
 ```css
 /* From /styles/themes/dark.css lines 64-73 */
@@ -117,21 +135,23 @@ The CSS uses WordPress preset neutral colors that were designed for **LIGHT MODE
 --wp--preset--color--neutral-700: #D4D4D4;
 --wp--preset--color--neutral-800: #E5E5E5;
 --wp--preset--color--neutral-900: #F5F5F5;
-```
+
+```text
 
 **The scale goes from dark to light (50-900), but dark mode needs LIGHT text.**
 
 **Usage in header:**
+
 - Line 266 (light mode): `color: var(--wp--preset--color--neutral-600)` → `#A3A3A3` ✅ Works on white
 - Line 291 (dark mode): `color: var(--wp--preset--color--neutral-300)` → `#383838` ❌ FAILS on black
 
-**Whoever wrote this INVERTED the neutral scale incorrectly.**
+## Whoever wrote this INVERTED the neutral scale incorrectly
 
 ---
 
 ## Correct Text Colors for Dark Mode
 
-**Against #0F0F0F (atomic black) background:**
+## Against #0F0F0F (atomic black) background
 
 | Text Purpose | Current (WRONG) | Correct Color | Contrast Ratio |
 |--------------|-----------------|---------------|----------------|
@@ -148,6 +168,7 @@ The CSS uses WordPress preset neutral colors that were designed for **LIGHT MODE
 ### Current State (FAILED)
 
 **Level AA (4.5:1 minimum for normal text):**
+
 - Header navigation: **1.23:1** ❌ **FAIL**
 - Expected body text: **1.48:1** ❌ **FAIL** (if using neutral-300)
 - Expected links: **1.23:1** ❌ **FAIL**
@@ -155,6 +176,7 @@ The CSS uses WordPress preset neutral colors that were designed for **LIGHT MODE
 **Estimated Compliance:** **0% WCAG AA** ❌
 
 **Level AAA (7:1 minimum for normal text):**
+
 - Not applicable - doesn't even pass AA
 
 ---
@@ -166,31 +188,37 @@ The CSS uses WordPress preset neutral colors that were designed for **LIGHT MODE
 **File:** `/styles/blocks/header.css`
 
 **Replace:**
+
 ```css
 .dark .header__nav-link {
   color: var(--wp--preset--color--neutral-300); /* ❌ WRONG */
 }
-```
+
+```text
 
 **With:**
+
 ```css
 .dark .header__nav-link {
   color: #F6F2EB; /* ✅ 14.8:1 contrast (AAA) */
 }
-```
 
-**Or use existing variable:**
+```text
+
+## Or use existing variable
+
 ```css
 .dark .header__nav-link {
   color: var(--color-text-light); /* ✅ Uses #F6F2EB */
 }
-```
+
+```text
 
 ---
 
 ### CRITICAL FIX #2: Audit ALL Components
 
-**Check every CSS file for these patterns:**
+## Check every CSS file for these patterns
 
 ```css
 /* ❌ DANGEROUS PATTERN - LIKELY FAILURES */
@@ -214,7 +242,8 @@ The CSS uses WordPress preset neutral colors that were designed for **LIGHT MODE
   color: var(--wp--preset--color--neutral-800);  /* #E5E5E5 - 16.1:1 ✅ */
   color: var(--wp--preset--color--neutral-900);  /* #F5F5F5 - 18.3:1 ✅ */
 }
-```
+
+```text
 
 ---
 
@@ -223,15 +252,24 @@ The CSS uses WordPress preset neutral colors that were designed for **LIGHT MODE
 Priority order:
 
 1. **`/styles/blocks/header.css`** ← CONFIRMED FAILURE
-2. `/styles/blocks/footer.css`
-3. `/styles/blocks/nav-menu.css`
-4. `/styles/blocks/mobile-menu.css`
-5. `/styles/blocks/breadcrumbs.css`
-6. `/styles/blocks/cards.css`
-7. `/styles/blocks/buttons.css`
-8. `/styles/blocks/forms.css`
-9. All remaining `/styles/blocks/*.css` files
-10. `/styles/themes/dark-extended.css`
+
+1. `/styles/blocks/footer.css`
+
+1. `/styles/blocks/nav-menu.css`
+
+1. `/styles/blocks/mobile-menu.css`
+
+1. `/styles/blocks/breadcrumbs.css`
+
+1. `/styles/blocks/cards.css`
+
+1. `/styles/blocks/buttons.css`
+
+1. `/styles/blocks/forms.css`
+
+1. All remaining `/styles/blocks/*.css` files
+
+1. `/styles/themes/dark-extended.css`
 
 ---
 
@@ -240,17 +278,22 @@ Priority order:
 For EVERY component:
 
 1. **Inspect in DevTools with `.dark` class active**
-2. **Check computed color value**
-3. **Calculate contrast ratio against background**
-4. **Verify meets 4.5:1 minimum (AA)**
-5. **Document any failures**
-6. **Fix immediately**
+
+1. **Check computed color value**
+
+1. **Calculate contrast ratio against background**
+
+1. **Verify meets 4.5:1 minimum (AA)**
+
+1. **Document any failures**
+
+1. **Fix immediately**
 
 ---
 
 ## Contrast Ratio Reference Table
 
-**Against #0F0F0F background:**
+## Against #0F0F0F background
 
 | Color | Hex | Contrast | WCAG AA | WCAG AAA |
 |-------|-----|----------|---------|----------|
@@ -270,18 +313,20 @@ For EVERY component:
 | #F5F5F5 | Neutral-900 | 18.3:1 | ✅ PASS | ✅ PASS |
 | #FFFFFF | White | 21:1 | ✅ PASS | ✅ PASS |
 
-**Minimum safe colors for text on #0F0F0F:**
+## Minimum safe colors for text on #0F0F0F
+
 - **AA normal text (4.5:1):** #9C9488 or lighter ✅
 - **AA large text (3:1):** #737373 or lighter ✅
 - **AAA normal text (7:1):** #A3A3A3 or lighter ✅
 
-**Currently using #383838 (1.48:1) is a SEVERE violation.**
+## Currently using #383838 (1.48:1) is a SEVERE violation
 
 ---
 
 ## Corrected Color Variable Usage
 
 **DO:**
+
 ```css
 .dark .text-element {
   /* Use dedicated dark mode text variables */
@@ -289,16 +334,18 @@ For EVERY component:
   color: var(--color-text-primary);   /* Headings - 21:1 */
   color: var(--color-text-muted);     /* Secondary - 10.2:1 */
   color: var(--color-text-fine);      /* Tertiary - 6.5:1 */
-  
+
   /* Or use safe neutral variables (600+) */
   color: var(--wp--preset--color--neutral-600);  /* 7.1:1 */
   color: var(--wp--preset--color--neutral-700);  /* 12.6:1 */
   color: var(--wp--preset--color--neutral-800);  /* 16.1:1 */
   color: var(--wp--preset--color--neutral-900);  /* 18.3:1 */
 }
-```
+
+```text
 
 **DON'T:**
+
 ```css
 .dark .text-element {
   /* NEVER use low neutral values in dark mode */
@@ -309,7 +356,8 @@ For EVERY component:
   color: var(--wp--preset--color--neutral-400);  /* 2.31:1 ❌ */
   color: var(--wp--preset--color--neutral-500);  /* 3.92:1 ❌ */
 }
-```
+
+```text
 
 ---
 
@@ -319,13 +367,15 @@ For EVERY component:
 
 **Severity:** CRITICAL
 
-**User Experience Impact:**
+## User Experience Impact
+
 - Navigation is completely unreadable
 - Users cannot use the site in dark mode
 - Violates WCAG AA and potentially ADA/accessibility laws
 - Severe usability failure
 
 **Business Impact:**
+
 - Cannot deploy to production
 - Legal liability for accessibility violations
 - Loss of user trust
@@ -336,22 +386,26 @@ For EVERY component:
 ## Immediate Action Plan
 
 **Step 1: Fix Header (10 minutes)**
+
 - Update `/styles/blocks/header.css` line 291
 - Change neutral-300 to text-light
 - Test in browser
 
 **Step 2: Search and Destroy (30 minutes)**
+
 - Search all CSS files for `neutral-50` through `neutral-500` in dark mode contexts
 - Replace with appropriate light colors (600+)
 - Test each fix
 
 **Step 3: Full Audit (60 minutes)**
+
 - Systematically check EVERY component
 - Calculate actual contrast ratios
 - Document all failures
 - Fix immediately
 
 **Step 4: Verification (30 minutes)**
+
 - Test entire site in dark mode
 - Use browser DevTools to inspect all text elements
 - Verify all pass 4.5:1 minimum
@@ -361,9 +415,11 @@ For EVERY component:
 
 ## Conclusion
 
-**The dark mode theme has CRITICAL accessibility failures that are deploy blockers.**
+**The dark mode theme has CRITICAL accessibility failures that are deploy
+blockers.**
 
 All previous documentation claiming:
+
 - "100% WCAG AA compliance" ❌ **FALSE**
 - "100% WCAG AAA compliance (92%)" ❌ **FALSE**
 - "Contrast ratios 14.8:1 to 21:1" ❌ **MISLEADING** (variables exist but aren't used)
@@ -371,15 +427,16 @@ All previous documentation claiming:
 - "Production ready" ❌ **FALSE**
 
 **ACTUAL STATUS:**
+
 - WCAG AA Compliance: **0% (FAIL)**
 - Contrast ratios: **1.23:1 to 1.48:1 (CATASTROPHIC)**
 - Production ready: **NO - DEPLOY BLOCKER**
 
-**THIS MUST BE FIXED IMMEDIATELY.**
+## THIS MUST BE FIXED IMMEDIATELY
 
 ---
 
-**Report By:** Accessibility Audit  
-**Date:** March 11, 2026  
-**Status:** ❌ **CRITICAL FAILURES - DO NOT DEPLOY**  
+**Report By:** Accessibility Audit
+**Date:** March 11, 2026
+**Status:** ❌ **CRITICAL FAILURES - DO NOT DEPLOY**
 **Next Action:** Immediate remediation required

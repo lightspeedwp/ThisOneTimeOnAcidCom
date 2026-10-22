@@ -1,13 +1,15 @@
 # WhySection Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 ---
 
 ## Purpose
 
-The WhySection is a **philosophy content area** that communicates core brand values. It combines:
+The WhySection is a **philosophy content area** that communicates core brand
+values. It combines:
+
 - Three-column card layout
 - Custom animated icons
 - Brand messaging about purpose
@@ -32,32 +34,36 @@ The WhySection is a **philosophy content area** that communicates core brand val
       <p>{reason.description}</p>
     </Card>
   ))}
-  
+
   <CallToAction>
     <button onClick={() => setCurrentPage('about')}>
       Read My Story
     </button>
   </CallToAction>
 </ThreeColumnLayout>
-```
+
+```text
 
 ---
 
 ## Container Styles
 
 ### Section Container (via ThreeColumnLayout)
+
 ```tsx
 className="
   relative                                         // Position context
-  bg-gradient-to-br 
+  bg-gradient-to-br
     from-purple-50 via-pink-50 to-orange-50       // Warm gradient background
   py-section                                       // clamp(3rem, 6vw + 1rem, 8rem)
   px-fluid-md                                      // clamp(1rem, 0.6rem + 2vw, 2rem)
   overflow-hidden                                  // Contain decorations
 "
-```
+
+```text
 
 ### Inner Container
+
 ```tsx
 className="
   max-w-7xl                                        // 1280px max-width
@@ -65,9 +71,11 @@ className="
   relative                                         // Above decorations
   z-10                                             // Stack above background
 "
-```
+
+```text
 
 ### Card Grid
+
 ```tsx
 className="
   grid                                             // CSS Grid
@@ -76,7 +84,8 @@ className="
   gap-fluid-lg                                     // clamp(1.5rem, 1rem + 2.5vw, 3rem)
   mb-fluid-xl                                      // Margin below
 "
-```
+
+```text
 
 ---
 
@@ -85,32 +94,37 @@ className="
 ### 1. Section Header
 
 #### Section Title (H2)
+
 ```tsx
 <h2 className="
   text-section-h2                                  // clamp(1.5rem, 4vw, 3rem)
   font-heading                                     // Playfair Display
-  font-bold 
+  font-bold
   text-gray-800
   text-center
   mb-fluid-md
 ">
   Why I Do Makeup
 </h2>
-```
+
+```text
 
 #### Section Subtitle
+
 ```tsx
 <p className="
   text-body-guideline                              // clamp(1rem, 1.5vw, 1.25rem)
-  text-gray-600 
+  text-gray-600
   text-center
   max-w-2xl                                        // 672px max-width
   mx-auto
   mb-fluid-2xl
 ">
-  These three pillars guide everything I create — from festival glitter to bridal elegance.
+These three pillars guide everything I create — from festival glitter to bridal
+elegance.
 </p>
-```
+
+```text
 
 ---
 
@@ -121,24 +135,25 @@ Two large gradient blur orbs for subtle depth:
 ```tsx
 {/* Pink/Purple orb - top left quarter */}
 <div className="
-  absolute top-1/4 left-1/4 
+  absolute top-1/4 left-1/4
   w-32 h-32 sm:w-64 sm:h-64                        // Responsive sizing
   bg-gradient-to-br from-pink-400 to-purple-500
-  rounded-full 
+  rounded-full
   blur-3xl                                         // Heavy blur
   opacity-5                                        // Very subtle
 " />
 
 {/* Blue/Teal orb - bottom right quarter */}
 <div className="
-  absolute top-3/4 right-1/4 
+  absolute top-3/4 right-1/4
   w-24 h-24 sm:w-48 sm:h-48
   bg-gradient-to-br from-blue-400 to-teal-500
-  rounded-full 
-  blur-3xl 
+  rounded-full
+  blur-3xl
   opacity-5
 " />
-```
+
+```text
 
 **Purpose:** Add depth without distracting from content
 
@@ -149,6 +164,7 @@ Two large gradient blur orbs for subtle depth:
 Each card displays a reason with custom icon:
 
 #### Card Container
+
 ```tsx
 <div className="
   bg-white/80                                      // Semi-transparent white
@@ -162,9 +178,11 @@ Each card displays a reason with custom icon:
   flex flex-col items-center                       // Vertical alignment
   gap-fluid-sm                                     // Space between elements
 ">
-```
+
+```text
 
 #### Icon Container
+
 ```tsx
 <div className="
   w-16 h-16                                        // 64×64px container
@@ -172,52 +190,62 @@ Each card displays a reason with custom icon:
 ">
   <ShineIcon className="w-full h-full" />
 </div>
-```
+
+```text
 
 **Custom Icons:**
+
 - **ShineIcon** - Radiant star (Spread Joy)
 - **JoyIcon** - Paint palette with heart (Brings Me Joy)
 - **GrowthIcon** - Flowering plant (To Keep Growing)
 
 #### Card Title (H3)
+
 ```tsx
 <h3 className="
   text-xl                                          // 20px
   sm:text-2xl                                      // 24px on small screens
   font-heading                                     // Playfair Display
-  font-semibold 
+  font-semibold
   text-gray-800
   mb-fluid-xs
 ">
   Spread Joy
 </h3>
-```
+
+```text
 
 #### Card Description
+
 ```tsx
 <p className="
   text-base                                        // 16px
-  font-body 
-  text-gray-600 
+  font-body
+  text-gray-600
   leading-relaxed                                  // 1.625 line-height
 ">
-  When I do makeup for others, it lights them up. They feel special, happy, and confident — and seeing that sparkle in their eyes inspires me to keep creating.
+When I do makeup for others, it lights them up. They feel special, happy, and
+confident — and seeing that sparkle in their eyes inspires me to keep creating.
 </p>
-```
+
+```text
 
 ---
 
 ### 4. Call-to-Action
 
 #### CTA Container
+
 ```tsx
 <div className="
   text-center                                      // Center button
   mt-fluid-xl                                      // Top margin
 ">
-```
+
+```text
 
 #### CTA Button
+
 ```tsx
 <button
   onClick={() => setCurrentPage('about')}
@@ -225,23 +253,24 @@ Each card displays a reason with custom icon:
     w-full sm:w-auto                               // Full width mobile
     bg-gradient-blue-teal-green                    // Secondary gradient
     hover:from-teal-700 hover:to-green-700         // Hover gradient shift
-    text-white 
+    text-white
     px-button                                      // clamp(1.5rem, 1rem + 2.5vw, 3rem)
     py-button                                      // clamp(0.75rem, 0.5rem + 1.25vw, 1.5rem)
-    font-body 
-    font-medium 
+    font-body
+    font-medium
     text-button-fluid                              // clamp(1rem, 0.9rem + 0.5vw, 1.25rem)
-    transition-all duration-300 
-    rounded-lg 
-    shadow-lg hover:shadow-xl 
-    transform hover:scale-105 
-    focus:outline-none 
+    transition-all duration-300
+    rounded-lg
+    shadow-lg hover:shadow-xl
+    transform hover:scale-105
+    focus:outline-none
     focus:ring-4 focus:ring-teal-200
   "
 >
   Read My Story
 </button>
-```
+
+```text
 
 ---
 
@@ -254,38 +283,48 @@ const reasons = [
   {
     icon: ShineIcon,
     title: "Spread Joy",
-    description: "When I do makeup for others, it lights them up. They feel special, happy, and confident — and seeing that sparkle in their eyes inspires me to keep creating."
+description: "When I do makeup for others, it lights them up. They feel special,
+happy, and confident — and seeing that sparkle in their eyes inspires me to keep
+creating."
   },
   {
     icon: JoyIcon,
     title: "Brings Me Joy",
-    description: "Makeup is my creative playground. Whether it's festival glitter, glowing UV paints, or bold eyeshadow blends, I love the process of experimenting and expressing."
+description: "Makeup is my creative playground. Whether it's festival glitter,
+glowing UV paints, or bold eyeshadow blends, I love the process of experimenting
+and expressing."
   },
   {
     icon: GrowthIcon,
     title: "To Keep Growing",
-    description: "Every face, every colour, every night out is a chance to evolve. Makeup is a journey — and I treat each session as an opportunity to learn and expand my artistry."
+description: "Every face, every colour, every night out is a chance to evolve.
+Makeup is a journey — and I treat each session as an opportunity to learn and
+expand my artistry."
   }
 ];
-```
+
+```text
 
 ---
 
 ## Responsive Breakpoints
 
 ### Mobile (< 768px)
+
 - Single column grid (`grid-cols-1`)
 - Stack cards vertically
 - Full-width CTA button
 - Smaller decorative orbs (128×128px)
 
 ### Tablet (768px - 1024px)
+
 - Three column grid begins (`md:grid-cols-3`)
 - May wrap to 2 columns if space tight
 - Cards maintain equal height
 - Auto-width CTA button
 
 ### Desktop (1024px+)
+
 - Three column grid (`md:grid-cols-3`)
 - Maximum container width (1280px)
 - Larger decorative orbs (256×256px, 192×192px)
@@ -304,19 +343,23 @@ const handleReadStory = () => {
   setCurrentPage('about');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
-```
+
+```text
 
 ### 2. Card Hover Effects
 
 Cards have subtle interactions:
+
 ```css
 hover:shadow-xl              /* Shadow elevation */
 transition-all duration-300  /* Smooth animation */
-```
+
+```text
 
 ### 3. Icon Animations
 
 Custom icons may include:
+
 - Pulse animations
 - Gradient fills
 - Hover state changes
@@ -326,6 +369,7 @@ Custom icons may include:
 ## Accessibility
 
 ### Semantic HTML
+
 ```tsx
 <section aria-labelledby="why-heading">
   <h2 id="why-heading">Why I Do Makeup</h2>
@@ -336,9 +380,11 @@ Custom icons may include:
     </article>
   </div>
 </section>
-```
+
+```text
 
 ### ARIA Labels
+
 ```tsx
 // Navigation button
 <button
@@ -347,9 +393,11 @@ Custom icons may include:
 >
   Read My Story
 </button>
-```
+
+```text
 
 ### Keyboard Navigation
+
 - Tab through cards
 - Enter/Space to activate button
 - Logical tab order maintained
@@ -371,41 +419,52 @@ Custom icons may include:
 ## Color Palette
 
 ### Background
+
 ```css
 bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50
-```
+
+```text
 
 ### Text Colors
+
 ```css
 text-gray-800                      /* Titles */
 text-gray-600                      /* Descriptions */
 text-white                         /* Button text */
-```
+
+```text
 
 ### Card Styling
+
 ```css
 bg-white/80                        /* Semi-transparent background */
 backdrop-blur-sm                   /* Glass effect */
 border-white/50                    /* Subtle border */
-```
+
+```text
 
 ### Button Gradient
+
 ```css
 bg-gradient-blue-teal-green                      /* Default */
 hover:from-teal-700 hover:to-green-700           /* Hover state */
-```
+
+```text
 
 ### Decorative Orbs
+
 ```css
 from-pink-400 to-purple-500        /* Top-left orb */
 from-blue-400 to-teal-500          /* Bottom-right orb */
-```
+
+```text
 
 ---
 
 ## Best Practices
 
 ### 1. Consistent Layout
+
 ```tsx
 // ✅ Use ThreeColumnLayout wrapper
 <ThreeColumnLayout
@@ -415,39 +474,47 @@ from-blue-400 to-teal-500          /* Bottom-right orb */
 >
   {/* Content */}
 </ThreeColumnLayout>
-```
+
+```text
 
 ### 2. Icon Integration
+
 ```tsx
 // ✅ Import custom icons
 import { ShineIcon, JoyIcon, GrowthIcon } from "../common/ColorfulIcons";
 
 // ✅ Pass as component
 icon: ShineIcon
-```
+
+```text
 
 ### 3. Card Spacing
+
 ```tsx
 // ✅ Use fluid spacing tokens
 gap-fluid-lg                       // Grid gap
 p-fluid-md                         // Card padding
 mb-fluid-xl                        // Section spacing
-```
+
+```text
 
 ### 4. Responsive Design
+
 ```tsx
 // ✅ Mobile-first grid
 className="grid grid-cols-1 md:grid-cols-3"
 
 // ✅ Responsive button
 className="w-full sm:w-auto"
-```
+
+```text
 
 ---
 
 ## WordPress Comparison
 
 ### WordPress `core/columns` Block
+
 ```html
 <!-- wp:columns -->
 <div class="wp-block-columns">
@@ -459,11 +526,14 @@ className="w-full sm:w-auto"
   <!-- /wp:column -->
 </div>
 <!-- /wp:columns -->
-```
+
+```text
 
 ### Ash Shaw WhySection
+
 ```tsx
-<section className="bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 py-section px-fluid-md">
+<section className="bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50
+py-section px-fluid-md">
   <div className="max-w-7xl mx-auto">
     <h2>Why I Do Makeup</h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-fluid-lg">
@@ -477,7 +547,8 @@ className="w-full sm:w-auto"
     </div>
   </div>
 </section>
-```
+
+```text
 
 ---
 
@@ -491,5 +562,5 @@ className="w-full sm:w-auto"
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

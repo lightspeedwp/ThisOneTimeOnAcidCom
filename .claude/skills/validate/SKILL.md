@@ -1,6 +1,7 @@
 ---
 name: "Validation Skill"
-description: "Runs comprehensive validation checks for ThisOneTimeOnAcidCom repository integrity."
+description: "Runs comprehensive validation checks for ThisOneTimeOnAcidCom
+repository integrity."
 type: "skill"
 category: "quality"
 enabled: true
@@ -11,7 +12,8 @@ tags: ["validation", "npm", "health-check", "ci"]
 
 ## Purpose
 
-Run comprehensive validation checks to ensure repository health and build readiness.
+Run comprehensive validation checks to ensure repository health and build
+readiness.
 
 ## Validation Steps
 
@@ -19,9 +21,11 @@ Run comprehensive validation checks to ensure repository health and build readin
 
 ```bash
 npm ls --depth=0
-```
+
+```text
 
 Verifies:
+
 - ✓ All dependencies resolve correctly
 - ✓ No missing peer dependencies
 - ✓ package-lock.json is in sync with package.json
@@ -32,9 +36,11 @@ Verifies:
 
 ```bash
 npm run build
-```
+
+```text
 
 Verifies:
+
 - ✓ TypeScript compiles without errors
 - ✓ Vite bundling succeeds
 - ✓ All imports and dependencies resolve
@@ -45,6 +51,7 @@ Verifies:
 ### 3. Repository State
 
 Verifies:
+
 - ✓ Working directory is clean (no uncommitted changes)
 - ✓ Branch follows naming convention (type/scope-title)
 - ✓ CHANGELOG.md exists and is valid
@@ -60,11 +67,12 @@ Verifies:
 
 ## Expected Output
 
-```
+```text
 ✓ Dependencies are consistent
 ✓ Build succeeds
 ✓ Repository validation passed
-```
+
+```text
 
 ## Troubleshooting
 
@@ -72,9 +80,11 @@ Verifies:
 
 ```bash
 npm ls --depth=0
-```
+
+```text
 
 Common fixes:
+
 - `npm ci --include=dev` – Reinstall exact versions from lock file
 - `npm update` – Update to newer versions (careful with lock file)
 - Check for conflicting peer dependencies in terminal output
@@ -82,15 +92,19 @@ Common fixes:
 ### Build Failures
 
 1. Check TypeScript compiler output for type errors
-2. Verify all module imports are correct
-3. Ensure referenced assets and data files exist
-4. Check for bundler compatibility violations (Guidelines.md)
+
+1. Verify all module imports are correct
+
+1. Ensure referenced assets and data files exist
+
+1. Check for bundler compatibility violations (Guidelines.md)
 
 ### Branch Name Invalid
 
 Use format: `{type}/{scope}-{title}`
 
 Examples:
+
 - ✓ `feat/dark-mode-support`
 - ✓ `fix/navigation-bug`
 - ✓ `docs/component-guide`

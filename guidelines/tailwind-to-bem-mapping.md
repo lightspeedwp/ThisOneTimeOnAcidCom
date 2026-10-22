@@ -4,29 +4,35 @@ filename: "/guidelines/tailwind-to-bem-mapping.md"
 created: "2026-03-11"
 modified: "2026-03-11"
 version: "1.0.0"
-related_report: "/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md"
+related_report:
+"/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md"
 ---
 
 # Tailwind to BEM Mapping Guide
 
-**Purpose:** Reference guide for converting Tailwind utility classes to BEM CSS architecture  
-**Audience:** Developers joining the project or refactoring Tailwind code  
+**Purpose:** Reference guide for converting Tailwind utility classes to BEM CSS
+architecture
+**Audience:** Developers joining the project or refactoring Tailwind code
 **Status:** Permanent guideline
 
 ---
 
 ## Quick Reference
 
-This guide provides **direct mappings** from common Tailwind utility classes to the project's BEM CSS classes and WordPress-aligned custom properties.
+This guide provides **direct mappings** from common Tailwind utility classes to
+the project's BEM CSS classes and WordPress-aligned custom properties.
 
 ---
 
 ## Core Principles
 
 1. **No Tailwind utilities allowed** - Use BEM classes from `/styles/globals.css` or component CSS files
-2. **WordPress-aligned custom properties** - Use `--wp--preset--*` format for colors, typography, spacing
-3. **Semantic class names** - Classes should describe **what**, not **how** (`.portfolio-card` not `.flex-container`)
-4. **Component-first** - Create BEM classes for reusable components, avoid one-off inline styles
+
+1. **WordPress-aligned custom properties** - Use `--wp--preset--*` format for colors, typography, spacing
+
+1. **Semantic class names** - Classes should describe **what**, not **how** (`.portfolio-card` not `.flex-container`)
+
+1. **Component-first** - Create BEM classes for reusable components, avoid one-off inline styles
 
 ---
 
@@ -45,13 +51,16 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
 | `.gap-4` | Component CSS | `component.css` | `gap: 1rem` |
 
 **Example:**
+
 ```html
 <!-- Tailwind -->
 <div class="container mx-auto px-4 py-8">
 
 <!-- BEM -->
-<div class="container-wide section-container px-horizontal-section section-spacing">
-```
+<div class="container-wide section-container px-horizontal-section
+section-spacing">
+
+```text
 
 ---
 
@@ -73,13 +82,15 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
 | `.italic` | `.italic` | `font-style: italic` | Direct utility |
 
 **Example:**
+
 ```html
 <!-- Tailwind -->
 <h1 class="text-6xl font-bold text-center">
 
 <!-- BEM -->
 <h1 class="text-hero-h1 text-center">
-```
+
+```text
 
 ---
 
@@ -116,15 +127,18 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
 | `.text-transparent bg-clip-text bg-gradient-*` | `.text-gradient-pink-purple-blue` | Gradient text |
 
 **Example:**
+
 ```html
 <!-- Tailwind -->
 <div class="bg-gradient-to-r from-pink-500 to-purple-600">
-  <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
+<h1 class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500
+to-purple-600">
 
 <!-- BEM -->
 <div class="bg-gradient-cyberpunk">
   <h1 class="text-gradient-pink-purple-blue">
-```
+
+```text
 
 ---
 
@@ -139,14 +153,16 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
 | `.mb-8` | `.mb-fluid-md` | `clamp(2rem, 4vw, 3rem)` | Medium fluid margin |
 | `.gap-4` | Component CSS | `gap: 1rem` | Define in component |
 
-**WordPress Spacing Presets:**
+## WordPress Spacing Presets
+
 ```css
 --wp--preset--spacing--20: 0.5rem   /* Tailwind spacing-2 */
 --wp--preset--spacing--30: 1rem     /* Tailwind spacing-4 */
 --wp--preset--spacing--40: 1.5rem   /* Tailwind spacing-6 */
 --wp--preset--spacing--50: 2rem     /* Tailwind spacing-8 */
 --wp--preset--spacing--60: 3rem     /* Tailwind spacing-12 */
-```
+
+```text
 
 ---
 
@@ -171,20 +187,24 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
 ### Pattern 1: Flex Container
 
 **Tailwind:**
+
 ```html
 <div class="flex items-center justify-between gap-4 p-6">
   <span>Left</span>
   <span>Right</span>
 </div>
-```
+
+```text
 
 **BEM:**
+
 ```html
 <div class="header__nav">
   <span>Left</span>
   <span>Right</span>
 </div>
-```
+
+```text
 
 ```css
 /* /styles/blocks/header.css */
@@ -195,29 +215,34 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
   gap: 1rem;
   padding: 1.5rem;
 }
-```
+
+```text
 
 ---
 
 ### Pattern 2: Grid Layout
 
 **Tailwind:**
+
 ```html
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
   <div>Item 1</div>
   <div>Item 2</div>
   <div>Item 3</div>
 </div>
-```
+
+```text
 
 **BEM:**
+
 ```html
 <div class="videos-grid">
   <div class="video-card">Item 1</div>
   <div class="video-card">Item 2</div>
   <div class="video-card">Item 3</div>
 </div>
-```
+
+```text
 
 ```css
 /* /styles/blocks/videos.css */
@@ -238,31 +263,37 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
     grid-template-columns: repeat(3, 1fr);
   }
 }
-```
+
+```text
 
 ---
 
 ### Pattern 3: Card Component
 
 **Tailwind:**
+
 ```html
-<div class="bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow">
+<div class="bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-2xl
+transition-shadow">
   <h3 class="text-2xl font-bold text-white mb-4">Title</h3>
   <p class="text-gray-400 mb-6">Description text</p>
   <button class="bg-pink-500 text-white px-6 py-3 rounded-md hover:bg-pink-600">
     Read More
   </button>
 </div>
-```
+
+```text
 
 **BEM:**
+
 ```html
 <div class="portfolio-card">
   <h3 class="portfolio-card__title">Title</h3>
   <p class="portfolio-card__desc">Description text</p>
   <button class="button button--primary">Read More</button>
 </div>
-```
+
+```text
 
 ```css
 /* /styles/blocks/portfolio-card.css */
@@ -289,25 +320,31 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
   color: var(--color-text-muted);
   margin-bottom: 1.5rem;
 }
-```
+
+```text
 
 ---
 
 ### Pattern 4: Button Component
 
 **Tailwind:**
+
 ```html
-<button class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-8 py-4 rounded-md shadow-lg transition-all transform hover:-translate-y-1">
+<button class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-8 py-4
+rounded-md shadow-lg transition-all transform hover:-translate-y-1">
   Click Me
 </button>
-```
+
+```text
 
 **BEM:**
+
 ```html
 <button class="button button--primary">
   Click Me
 </button>
-```
+
+```text
 
 ```css
 /* /styles/globals.css */
@@ -346,7 +383,8 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
   border-color: var(--color-neon-yellow);
   color: var(--color-neon-yellow);
 }
-```
+
+```text
 
 ---
 
@@ -364,7 +402,8 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
 --wp--preset--color--uv-violet: #8A63FF;
 --wp--preset--color--neon-orange: #FF6B35;
 --wp--preset--color--neon-red: #FF0055;
-```
+
+```text
 
 ### Typography Presets
 
@@ -379,29 +418,35 @@ This guide provides **direct mappings** from common Tailwind utility classes to 
 /* Font families */
 --wp--preset--font-family--heading: 'Space Grotesk', 'Playfair Display', serif;
 --wp--preset--font-family--body: 'Inter', sans-serif;
-```
+
+```text
 
 ---
 
 ## BEM Naming Convention
 
 ### Block
+
 The standalone component (e.g., `.card`, `.button`, `.header`)
 
 ```css
 .portfolio-card { }
-```
+
+```text
 
 ### Element
+
 A part of the block (use `__` double underscore)
 
 ```css
 .portfolio-card__image { }
 .portfolio-card__title { }
 .portfolio-card__desc { }
-```
+
+```text
 
 ### Modifier
+
 A variation of the block or element (use `--` double hyphen)
 
 ```css
@@ -409,7 +454,8 @@ A variation of the block or element (use `--` double hyphen)
 .portfolio-card__title--large { }
 .button--primary { }
 .button--secondary { }
-```
+
+```text
 
 ### Example Component
 
@@ -429,42 +475,49 @@ A variation of the block or element (use `--` double hyphen)
 .mega-menu--portfolio { }
 .mega-menu__grid--three { }
 .mega-menu__featured-overlay--blog { }
-```
+
+```text
 
 ---
 
 ## When to Create BEM Classes
 
 ✅ **Create a BEM class when:**
+
 - Component appears 3+ times across the site
 - Component has multiple states or variations
 - Styling is semantically meaningful (`.portfolio-card` vs `.flex-container`)
 - Component should be reusable
 
 ❌ **Use inline styles when:**
+
 - Value is dynamically calculated (e.g., `transform: translateX(${offset}px)`)
 - ES5 constraint requires object literal workaround
 - One-time unique styling that won't be reused
 - Working with JavaScript-computed values
 
-**Example of acceptable inline style (ES5 constraint):**
+## Example of acceptable inline style (ES5 constraint)
+
 ```typescript
 // ES5 bundler doesn't support object literals in createElement
 React.createElement('div', {
-  style: { 
+  style: {
     transform: `translateX(${swipeOffset}px)`,
     transition: isAnimating ? 'transform 0.3s ease' : 'none'
   }
 })
-```
+
+```text
 
 ---
 
 ## File Organization
 
 ### Global Utilities
-**File:** `/styles/globals.css`  
-**Purpose:** Site-wide utilities (containers, typography, colors, buttons, forms)
+
+**File:** `/styles/globals.css`
+**Purpose:** Site-wide utilities (containers, typography, colors, buttons,
+forms)
 
 ```css
 .container-wide { }
@@ -472,13 +525,15 @@ React.createElement('div', {
 .text-gradient-pink-purple-blue { }
 .button { }
 .button--primary { }
-```
+
+```text
 
 ### Component Styles
-**Files:** `/styles/blocks/*.css`  
+
+**Files:** `/styles/blocks/*.css`
 **Purpose:** Component-specific BEM classes
 
-```
+```text
 /styles/blocks/
 ├── header.css                 # .header, .header__nav, etc.
 ├── footer.css                 # .footer, .footer__grid, etc.
@@ -486,9 +541,11 @@ React.createElement('div', {
 ├── portfolio-card.css         # .portfolio-card, .portfolio-card__title, etc.
 ├── ebook-base.css             # .ebook-reader, .ebook-reader__controls, etc.
 └── ...
-```
+
+```text
 
 ### Import Pattern
+
 Components import their own CSS:
 
 ```typescript
@@ -498,7 +555,8 @@ import '../../styles/blocks/portfolio-card.css';
 export function PortfolioCard() {
   return React.createElement('div', { className: 'portfolio-card' }, ...);
 }
-```
+
+```text
 
 ---
 
@@ -526,7 +584,7 @@ When converting Tailwind code to BEM:
 | **Heading** | `.text-hero-h1`, `.text-section-h2`, `.text-card-h3` | `globals.css` |
 | **Paragraph** | `.text-body-p`, `.text-lead`, `.text-fine` | `globals.css` |
 | **Button** | `.button`, `.button--primary`, `.button--secondary` | `globals.css` |
-| **Form** | `.form`, `.form__input`, `.form__label` | `globals.css` |
+| **Form** | `.form`, `.form_*input`, `.form*_label` | `globals.css` |
 | **Grid** | `.grid-2col`, `.grid-3col`, `.grid-4col` | `globals.css` |
 | **Spacing** | `.section-spacing`, `.px-horizontal-section`, `.mb-fluid-*` | `globals.css` |
 | **Background** | `.bg-atomic-noise`, `.bg-gradient-cyberpunk`, `.bg-dark-panel` | `globals.css` |
@@ -538,15 +596,17 @@ When converting Tailwind code to BEM:
 ## Related Documentation
 
 **Guidelines:**
+
 - [Main Guidelines](./Guidelines.md) - Project overview and BEM architecture rules
 - [CSS Architecture](./css-architecture.md) - BEM naming and organization
 - [Component Guidelines](./overview-components.md) - Component patterns
 
 **Reports:**
+
 - [Tailwind Violations Audit](../reports/2026-03-11-modern-react-migration/02-tailwind-violations-audit.md)
 - [Tailwind-to-BEM Mapping Report](../reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md)
 
 ---
 
-**Last Updated:** March 11, 2026  
+**Last Updated:** March 11, 2026
 **Maintained By:** Development Team

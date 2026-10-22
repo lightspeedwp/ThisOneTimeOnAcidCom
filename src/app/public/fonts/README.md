@@ -1,10 +1,11 @@
 # Self-Hosted Fonts for Ash Shaw Portfolio
 
-This directory contains the self-hosted woff2 font files for optimal performance and consistency.
+This directory contains the self-hosted woff2 font files for optimal performance
+and consistency.
 
-## Font Files Structure:
+## Font Files Structure
 
-```
+```text
 fonts/
 ├── playfair-display/
 │   ├── playfair-display-regular.woff2
@@ -20,10 +21,11 @@ fonts/
 │   └── inter-bold.woff2
 └── righteous/
     └── righteous-regular.woff2
-```
 
-## Download Instructions:
+```text
 
-See `/FONT_DOWNLOAD_GUIDE.md` for the exact Google Fonts URLs to download.
+## Download Instructions
+
+See `/FONT*DOWNLOAD*GUIDE.md` for the exact Google Fonts URLs to download.
 
 After downloading, place the files in the appropriate folders above.

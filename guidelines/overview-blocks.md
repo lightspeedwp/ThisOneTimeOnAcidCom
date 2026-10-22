@@ -1,6 +1,6 @@
 # Block Patterns Overview
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 WordPress-aligned block patterns for the Ash Shaw Portfolio.
@@ -8,6 +8,7 @@ WordPress-aligned block patterns for the Ash Shaw Portfolio.
 ## Purpose
 
 Define reusable content blocks following WordPress Gutenberg block conventions:
+
 - Self-contained content units
 - Composable and nestable
 - Consistent styling patterns
@@ -16,22 +17,26 @@ Define reusable content blocks following WordPress Gutenberg block conventions:
 
 ---
 
-## What Are Blocks?
+## What Are Blocks
 
-**Blocks** are self-contained content units that can be combined to build sections and pages. They are similar to WordPress Gutenberg blocks and represent individual pieces of content or functionality.
+**Blocks** are self-contained content units that can be combined to build
+sections and pages. They are similar to WordPress Gutenberg blocks and represent
+individual pieces of content or functionality.
 
 ### Block vs Component vs Section
 
-```
+```text
 Section (Layout container)
 ├── Block (Content unit)
 │   ├── Component (UI primitive)
 │   └── Component
 └── Block
     └── Component
-```
+
+```text
 
 **Examples:**
+
 - **Section:** `HeroSection` - Full viewport hero area
 - **Block:** `PortfolioCard` - Individual portfolio item
 - **Component:** `Button` - Primitive UI element
@@ -40,7 +45,8 @@ Section (Layout container)
 
 ## Block Types
 
-The Ash Shaw portfolio uses **8 primary block types** organized by category. Each has detailed implementation guidelines.
+The Ash Shaw portfolio uses **8 primary block types** organized by category.
+Each has detailed implementation guidelines.
 
 ### Content Blocks
 
@@ -72,6 +78,7 @@ The Ash Shaw portfolio uses **8 primary block types** organized by category. Eac
 ## Standard Block Patterns
 
 ### Card Pattern
+
 ```tsx
 className="
   bg-white/80
@@ -82,9 +89,11 @@ className="
   shadow-lg hover:shadow-xl
   transition-all duration-300
 "
-```
+
+```text
 
 ### Interactive Pattern
+
 ```tsx
 className="
   group
@@ -93,9 +102,11 @@ className="
   transition-transform duration-300
   focus:outline-none focus:ring-4 focus:ring-pink-200
 "
-```
+
+```text
 
 ### Media Pattern
+
 ```tsx
 className="
   aspect-square
@@ -103,7 +114,8 @@ className="
   rounded-lg
   bg-gray-100
 "
-```
+
+```text
 
 ---
 
@@ -123,6 +135,7 @@ className="
 ## Best Practices
 
 ### 1. Self-Contained Blocks
+
 ```tsx
 // ✅ Block includes all necessary styling
 export function PortfolioCard({ entry }: Props) {
@@ -132,9 +145,11 @@ export function PortfolioCard({ entry }: Props) {
     </article>
   );
 }
-```
+
+```text
 
 ### 2. Composable Blocks
+
 ```tsx
 // ✅ Blocks can contain other blocks
 export function BlogSection() {
@@ -147,36 +162,43 @@ export function BlogSection() {
     </section>
   );
 }
-```
+
+```text
 
 ### 3. Reusable with Variants
+
 ```tsx
 // ✅ Block accepts variants via props
-<PortfolioCard 
+<PortfolioCard
   entry={entry}
   layout="horizontal"    // Layout variant
   size="lg"              // Size variant
   featured={true}        // Featured styling
 />
-```
+
+```text
 
 ---
 
 ## Block Guidelines
 
-For detailed implementation of each block type, see the specific guideline files:
+For detailed implementation of each block type, see the specific guideline
+files:
 
-### Content Blocks
+### Content Blocks (1)
+
 - **[PortfolioCard.md](./blocks/PortfolioCard.md)** - Portfolio entry display card
 - **[BlogCard.md](./blocks/BlogCard.md)** - Blog post preview card
 - **[SectionCard.md](./blocks/SectionCard.md)** - Generic content card
 - **[TestimonialCard.md](./blocks/TestimonialCard.md)** - Client testimonial
 
-### Media Blocks
+### Media Blocks (1)
+
 - **[ImageGallery.md](./blocks/ImageGallery.md)** - Multi-image grid display
 - **[Lightbox.md](./blocks/Lightbox.md)** - Full-screen image viewer
 
-### Interactive Blocks
+### Interactive Blocks (1)
+
 - **[CategoryFilter.md](./blocks/CategoryFilter.md)** - Content filtering controls
 - **[ShareComponent.md](./blocks/ShareComponent.md)** - Social sharing buttons
 - **[Pagination.md](./blocks/Pagination.md)** - Page navigation controls
@@ -193,5 +215,5 @@ For detailed implementation of each block type, see the specific guideline files
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0
