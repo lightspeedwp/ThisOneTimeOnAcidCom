@@ -53,7 +53,7 @@ Define which execution environment each skill should use based on:
 - ✅ Separate agent execution; usage charged to parent budget
 - ✅ Clean output (results returned via tool, not in chat)
 - ✅ Can run in parallel with parent (shared aggregate token budget)
-- ✅ Tool access: Inherits parent's available tools
+- ✅ Tool access: Inherits from the parent's supported tool pool, limited by the subagent's configured tool allowlist and runtime permissions; MCP capabilities are documented separately in [Agent Configuration](../docs/agent-configuration.md#mcp-server-connections) and are not automatically granted by inheritance.
 - ⚠️ Slight latency (subagent creation overhead)
 - ❌ Results not in conversation thread (tool output only)
 
