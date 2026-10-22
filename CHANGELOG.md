@@ -24,76 +24,213 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-#### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
+**File Organisation and Test Coverage (T011)**
 
-- **Comprehensive animation system** inspired by retro 80s CLI interfaces with 6 core animation types
-- **Terminal boot sequence** (0.8s typewriter-style page entrance) across 5 pages
-- **Auto-stagger orchestration** (`HeroLayout`) — Automatic cascading fade-in with 0.1s delays (title → subtitle → description → CTA)
-- **Neon pulse CTA buttons** — 2s breathing glow that speeds to 1s on hover
-- **Holographic rainbow shimmer** — 4s infinite gradient sweep across hero titles (pink → purple → cyan → yellow → pink)
-- **Floating media elements** — 4s gentle vertical oscillation with neon glow effects
-- **Page header animation system** (`/styles/blocks/page-header-animations.css`) — Reusable 120-line system for portfolio/blog/contact page headers
-- **Animation showcase dev tools** (`/dev/animations`) — Interactive demos with 6 animation types, live code examples, stats dashboard
-- **Implementation files:**
-  - `/styles/blocks/animations.css` — Extended core @keyframes library (26 total animations)
-  - `/styles/blocks/hero.css` — 115 lines of hero animation utilities
-  - `/styles/blocks/page-header-animations.css` — Reusable page header system
-  - `/styles/blocks/animation-showcase.css` — 240 lines of showcase page styles
-  - `/components/layouts/HeroLayout.tsx` — Auto-stagger animation orchestration
-  - `/components/pages/dev/AnimationShowcasePage.tsx` — Interactive dev tools showcase
-- **Pages enhanced:**
-  - HomePage (v1.7.0) — Full terminal boot + auto-stagger + floating media + neon pulse CTAs
-  - AboutPage (v1.5.0) — All HomePage animations + holographic rainbow shimmer title
-  - PortfolioPage (v1.7.0) — Header boot → filters (0.4s) → grid (0.5s)
-  - BlogPage (v1.5.0) — Header boot → filters (0.4s)
-  - ContactPage (v1.4.0) — Header boot → form grid (0.5s)
-  - AnimationShowcasePage (v1.0.0) — Interactive demos at `/dev/animations`
-- **Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion` support
-- **Performance:** CSS-only animations (60fps, zero JavaScript overhead, +0.6KB minified)
-- **Documentation:**
-  - Updated `/guidelines/Guidelines.md` to v8.4.0 with Animation System Implementation section
-  - Created `/docs/animation-implementation-report-march-2026.md` (350+ line final report)
-  - Complete metrics, testing results, file manifest, and Phase 2 roadmap
+- **Figma API validation script** — Moved `scripts/test-figma-access.js` to proper location under `scripts/` folder for T011 Figma Make project access validation task
+- **Comprehensive Jest test suite** — Created `scripts/__tests__/test-figma-access.test.js` with 15 passing tests covering:
+  - Configuration loading from environment variables with defaults
+  - Results data structure and test result tracking (PASS/FAIL/SKIP status)
+  - Metrics calculation (average response time with zero-division handling)
+  - Extraction time estimation for Figma asset batches (pilot and full batch scenarios)
+  - Critical test validation logic
+  - Pilot assets configuration validation
+- **Theme configuration file** — Moved and organised `default-shadcn-theme.css` to `src/styles/` folder with shadcn/ui theme variables and light/dark mode support
+- **Repository-specific guidance** — Added `CLAUDE.md` with Phase 2 governance details, T011 Figma integration reference, environment variable documentation, and development commands
+- **Environment variable reference** — Documented Figma API configuration (FIGMA_API_TOKEN, FIGMA_MAKE_FILE_KEY, FIGMA_TEAM_ID, FIGMA_EXPORT_FORMAT, FIGMA_EXPORT_SCALE)
+- **Extraction time estimates** — Documented pilot and full batch estimates (10 assets ~7 seconds, 56 assets ~42 seconds, 100 assets ~65 seconds)
 
-### Fixed
+#### Repository Boundary Enforcement (TOA-??)
 
-#### Style Guide Dark Mode — Atomic Black Backgrounds
+- **Recovery pilot file reorganization** — PHASE1A_CATALOGUE_PROMPT.md and PHASE1B_RECOVERY_PROMPT.md moved from `.github/specs/002-media-library/recovery-pilot/` to `.github/reports/toa-media-library/` to establish recovery pilot as a phase within the existing 002-media-library specification, not as a separate specification structure
+- **Specification catalog metadata correction** — Corrected next specification number from "002" to "003" in `.github/specs/CATALOG.md` to accurately reflect that spec 002-media-library has been created and the next new specification will be numbered 003
+- **Repository boundary validation** — Added comprehensive Markdown file validation to `.github/validation/validate-no-root-md-files.cjs` with pattern-based detection for PHASE, PROMPT, REPORT, SPEC, TODO, NOTES, PLAN, and RESEARCH file naming violations (21 passing tests, ~71% code coverage)
 
-- **Fixed Style Guide page dark mode** (`/styles/blocks/style-guide-page.css`) — All white backgrounds replaced with atomic black (#0F0F0F)
-- **Updated 18 color instances:**
-  - 7 backgrounds: `white` → `#0F0F0F`
-  - 11 text colors: `dark-charcoal` → `#FFFFFF` or `#FF10F0`
-  - All borders: `rgba(0,0,0,0.1)` → `rgba(255,16,240,0.2)`
-- **Code block styling** — Neon pink background with yellow text
-- **100% dark mode consistency** across entire site
+#### Phase 2 Governance Consolidation — Repository Restructuring (Spec 001, Spec 021)
 
-#### Animation Showcase Bundler Compatibility
+- **Specification and implementation plan** for consolidating duplicate governance files from ThisOneTimeOnAcidCom into lightspeedwp/.github as single source of truth (40 tasks across 6 phases)
+- **Hybrid governance model architecture** documented: canonical configuration (labels, issue types, PR/issue templates) centralised in lightspeedwp/.github; repo-specific custom workflows preserved in ThisOneTimeOnAcidCom
+- **Drift prevention and template routing workflows** planned to block duplicate governance files while allowing custom workflows
+- **Audit findings documented** identifying all duplicate files for safe removal with zero breaking changes to custom workflows
+- **Phase 2.5 Custom Workflow Validation** (T430–T431):
+  - **Custom workflow audit script** (`.github/scripts/audit-custom-workflows.sh`) validates all 9 custom workflows against governance consolidation model
+  - **Labeling workflow remediation** — Updated `labeling-unified.yml` to fetch canonical labels from lightspeedwp/.github at runtime instead of referencing deleted local file
+  - **Governance compliance verified** — All custom workflows now reference canonical governance sources; audit passes with zero violations
+- **Related specifications:**
+  - Spec 001 Phase 2: Repository Governance Layout & Agentic Workflows (ThisOneTimeOnAcidCom)
+  - Spec 021: Repository Restructuring & Canonical Governance Config (lightspeedwp/.github)
+  - Linked workstreams: TOA-262 (PR/Issue Template Routing), TOA-271 (Validation & Automation)
 
-- **Removed all inline styles** from AnimationShowcasePage — Replaced with BEM CSS classes
-- **Fixed Figma Make bundler errors** (IframeMessageAbortError) caused by inline style objects
-- **Added BEM classes:**
-  - `.demo-float-box`, `.demo-float-box--pink`, `.demo-float-box--yellow` — Float demo styling
-  - `.demo-float-text` — Float element text styling
-  - `.demo-page-header-spacing` — Page header spacing utility
-- **Strict guidelines compliance** — Zero inline styles, 100% BEM architecture
+#### Netlify Performance & Security Configuration (TOA-7)
 
-#### Dark Mode Color Correction — Exact Figma Hex Values
+- **Root `netlify.toml` configuration** — Added production build settings with npm package manager, Node.js 24 runtime pinning, and SPA fallback rule
+- **Immutable asset caching** — Generate exact-path `Cache-Control: public, max-age=31536000, immutable` rules in `dist/_headers` for content-hashed Vite bundle outputs under `/assets/` matching `-[8-char hash].ext` pattern
+- **Security baseline headers** — `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: DENY` and `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()` (CSP deferred)
+- **HTML cache preservation** — Retain `Cache-Control: public, max-age=0, must-revalidate` for HTML responses to enable revalidation on refresh
+- **SPA fallback rule** — Unforced `/* → /index.html 200` fallback to support direct navigation and refresh on nested routes without breaking real files
+- **Netlify header/redirect validation tests** — Added `tests/netlify-headers.test.mjs` with 7 passing test suites covering hashed asset detection, header generation, and configuration validation
+- **Deployed header checker** — Created `scripts/check-netlify-headers.mjs` for testing deployed site header configuration against expected values
+- **Header generation integration** — Updated `vite.config.ts` to call `netlifyHashedAssetHeaders()` during build, generating `dist/_headers` file with immutable cache rules
 
-- **Fixed neon pink color** — Changed from #FF3AAE to correct **#FF10F0** (exact Figma design value)
-- **Fixed atomic black** — Changed from #0B0B10 to correct **#0F0F0F** (15,15,15 in RGB)
-- **Added neon magenta** — New color **#D4008C** for button gradients (from Figma design)
-- **Updated all CSS files:**
-  - `/styles/globals.css` — Root color custom properties corrected
-  - `/styles/blocks/book-dark-mode.css` — All rgba() values now use correct hex
-  - `/styles/blocks/theme-toggle.css` — Toggle uses correct #FF10F0
-- **Visual impact:**
-  - Much more vibrant magenta pink (closer to hot pink)
-  - Higher saturation and intensity
-  - Better matches Figma design screenshot
-  - Glow effects more pronounced with correct color
-- **No breaking changes** — CSS custom properties updated, all references automatically inherit new values
+#### Phase 1 Governance Workflows (TOA-241)
 
-### Added
+- **Branch name validation** — `branch-name-validation.yml` validates branch naming conventions against `{type}/{scope}-{title}` pattern with forbidden prefix checks (`claude/`, `copilot/`, `openai/`)
+- **Test automation** — `tests.yml` runs test suites on push and pull request events to ensure code quality
+- **Locked files protection** — `locked-files-guard.yml` prevents unauthorised changes to governance configuration files (`.github/labels.yml`, `.github/issue-types.yml`, `.github/PULL_REQUEST_TEMPLATE/*.md`, `.github/ISSUE_TEMPLATE/*.md`)
+- **PR template routing** — `pr-template-routing.yml` routes PR templates based on branch type (feat/fix/docs/design) and validates PR body contains all required template sections
+- **Unified labeling automation** — `labeling-unified.yml` automates issue and PR labeling based on type, area, priority and metadata labels
+- **Unified changelog management** — `changelog-unified.yml` manages changelog entries using Keep a Changelog 1.1.0 format with YAML frontmatter
+- **Specification validation** — `validate-specifications.yml` validates governance specifications against schema and documentation requirements
+- **Claude guard contract validation** — `claude-guard-tests.yml` validates Claude-generated code meets security and quality standards
+- **Lefthook pre-commit/pre-push hooks** — Git hooks enforce branch naming validation before commits and pushes, preventing use of forbidden prefixes
+
+#### Branch Cleanup Analysis Tool — Report-Only Preview (TOA-270)
+
+- **Automated branch cleanup analysis** — `scripts/cleanup-branches.js` identifies stale merged branches for review without executing deletions
+- **Comprehensive reporting** — Markdown and JSON formats distinguishing:
+  - Branches eligible for deletion (fully merged, inactive 30+ days)
+  - Branches retained (protected, excluded, active work)
+  - Branches requiring discussion (uncertain merge status)
+- **Safety safeguards** — Report-only mode ensures no branch deletions occur; fails closed when merge status cannot be verified
+- **Flexible configuration** — Customisable inactivity threshold, exclusion patterns, report format and output directory
+- **Jest test suite** — 25 tests covering branch classification, reporting, metrics and non-deletion verification
+- **Supporting modules:**
+  - `scripts/lib/constants.js` — Reason codes and configuration constants
+  - `scripts/lib/branch-categorization.js` — Branch classification logic (KEEP / DELETE / DISCUSS)
+  - `scripts/lib/git-merge-utils.js` — Git merge status and history utilities
+- **Documentation updates:**
+  - `.claude/agents/branches-agent.md` — New "Branch Cleanup Workflow" section with usage examples and safety boundaries
+  - `.claude/skills/branch-validation/SKILL.md` — Added cleanup workflow, safety boundaries and references
+- **Usage:**
+  ```bash
+  node scripts/cleanup-branches.js              # Generate markdown report (default)
+  node scripts/cleanup-branches.js --reportFormat=json  # JSON format
+  node scripts/cleanup-branches.js --inactiveDays=45   # Custom threshold
+  node scripts/cleanup-branches.js --verbose           # Debug logging
+  ```
+- **Key guarantees:**
+  - Never executes branch deletion commands
+  - Never pushes deletions to remote
+  - Never removes local branches
+  - Preserves branches with open pull requests
+  - Protects Dependabot and Renovate branches
+
+#### CodeRabbit Inheritance Configuration (CR-18)
+
+- **`.coderabbit.yml`**: Enabled `inheritance: true` to inherit shared CodeRabbit safeguards and configuration from central `lightspeedwp/coderabbit` repository
+- **`.coderabbit.yml`**: Local overrides preserved — `language: en-GB` and `reviews.profile: chill` remain project-specific
+- **`.coderabbit.yml`**: Corrected mock data path reference from `src/mockData/` to `src/app/data/mock/` to align with actual repository structure and path mapping conventions documented in AGENTS.md
+- **`.claude/` folder guidance**: Added CodeRabbit path instructions for Claude Code configuration directories:
+  - **`.claude/agents/`** — Agent specifications with frontmatter validation, tool access checks, and capability scoping
+  - **`.claude/skills/`** — Reusable skill definitions with SKILL.md structure, metadata, examples, and integration patterns
+  - **`.specify/`** — Spec Kit specification files with proper structure, section completeness, and cross-linking
+  - **`.gemini/`** — Gemini CLI command definitions for workflow orchestration and consistency
+- **Governance & documentation coverage**: Added CodeRabbit path instructions for critical governance files:
+  - **`AGENTS.md`** — Repository-wide AI conventions, tech stack inventory, bundler compatibility, protected files list
+  - **`CLAUDE.md`** — Organisation-wide governance policy, branch naming, PR templates, specification workflow
+  - **Test infrastructure guidance** (`tests/**/*` and `**/*.test.{ts,tsx}`):
+    - Clear test naming and Arrange-Act-Assert pattern enforcement
+    - Mock data sourcing from `src/app/data/mock/` only (never hardcoded)
+    - No flaky tests or execution order dependencies
+    - Bundler compatibility for test code
+    - Accessibility testing requirements
+    - Component and unit test isolation patterns
+
+#### Governance Decision NODE-001 — Node.js Version Pinning (Decision 2)
+
+- **Node.js 24 LTS pinning** via `.nvmrc` and `package.json` `engines` field
+- **Documentation update** — `README.md` now requires Node.js 24+ for contributors
+- **Enforcement** — npm will reject installation and builds on incompatible versions
+- **Purpose:** Ensure consistent runtime across development, testing, and production deployments
+
+#### Governance Decision TEST-001 — Jest ESM Configuration (Decision 3)
+
+- **Jest ESM support** resolved via `@swc/jest` transformer in `jest.config.js`
+- **Full test suite passing** — 179 unit tests across `scripts/validate-branch-name.test.js` and `scripts/cleanup-branches.test.js`
+- **Updated `AGENTS.md`** — Documented working status and configuration details
+- **Purpose:** Enable modern ECMAScript module syntax in test infrastructure without Node.js experimental flags
+
+#### Governance Decision GH-003 — Code Ownership & Branch Protection (Decision 9)
+
+- **`.github/CODEOWNERS`** — Designated @ashley as owner for critical governance paths:
+  - `.github/` — GitHub governance control plane
+  - `scripts/` — Validation and build scripts
+  - `AGENTS.md`, `CHANGELOG.md` — Release management and documentation
+  - `tests/`, `guidelines/`, `docs/` — Test and documentation infrastructure
+  - Default owner for all other repository files
+- **`.github/BRANCH_PROTECTION_CONFIG.md`** — Configuration guide for manual GitHub UI setup:
+  - **Main branch protection** — Strict: PR required, status checks, code owner review
+  - **Develop branch protection** — Moderate: PR required, status checks
+  - **Step-by-step instructions** for GitHub Settings → Branches configuration
+- **Purpose:** Establish code ownership review requirements and branch safety policies
+
+#### Inheritance Configuration & Repository Scope
+
+- **`knowledge_base.code_guidelines.filePatterns`**: Set to empty array to exclude inherited WordPress-specific guidelines (block-plugin.md, block-theme.md) from applying to React code reviews. This prevents WordPress coding standards from interfering with React/TypeScript reviews while preserving other benefits of inherited configuration.
+
+#### Application Source Code Guidance (`src/` folder architecture)
+
+- **`src/app/components/**/*.tsx`** — React component review guidance:
+  - Semantic HTML with proper heading hierarchy
+  - WCAG 2.2 AA/AAA compliance (keyboard navigation, ARIA labels, focus management)
+  - BEM CSS semantics only (no inline styles or Tailwind utility classes)
+  - TypeScript best practices (no `any` types)
+  - Component organisation by type: `common/`, `pages/`, `layout/`, `ui/`, `sections/`, `template-parts/`, `figma/`
+  - Component documentation with `@fileoverview` and feature lists
+  - Bundler compatibility (no optional chaining, nullish coalescing, nested ternaries)
+  - Safe data access via router helpers: `grab()`, `arrayGet()`, `setProp()`
+  - Error boundaries and theme support patterns
+- **`src/app/data/**/*.ts`** — Mock data and data types:
+  - Data structure consistency and typing
+  - No credential or sensitive data exposure
+  - TypeScript interfaces in `src/app/data/types/`
+  - Clear organisation by feature/domain
+  - References to content locations (`content/` folder for editorial content)
+- **`src/app/hooks/*.ts`** — Custom React hooks:
+  - Clear hook naming with `use` prefix
+  - Proper dependency arrays (no memory leaks or stale closures)
+  - TypeScript typing for parameters and return values
+  - Single responsibility per hook
+  - Data access from `src/app/data/mock/` exclusively
+- **`src/app/utils/*.ts`** — Utility services:
+  - Clear service organisation with single responsibility
+  - Proper error handling and validation
+  - TypeScript interfaces and type safety
+  - No hardcoded configuration
+  - Browser API safety (SSR-compatible)
+  - Clean logging (no stray `console.log` in production code)
+- **`src/styles/**/*.css`** — BEM CSS architecture:
+  - Semantic BEM class naming: `.block__element--modifier`
+  - No inline styles or Tailwind utility classes
+  - Global styles in `globals.css`; block styles in `blocks/`; component-specific in `components/`
+  - CSS variable usage for design tokens and theme support
+  - Light/dark mode with CSS custom properties
+  - Animation performance (avoid over-animation)
+  - Media query organisation (mobile-first approach)
+- **`src/app/lib/*.tsx`** — Library and router utilities:
+  - Bundler-safe helper function patterns
+  - React Router v7 integration patterns
+  - Type safety in generic functions
+  - Critical utilities protection (changes scrutinised)
+- **`src/app/public/**/*`** — Static assets:
+  - No hardcoded credentials or sensitive data
+  - Asset optimisation and modern formats
+  - PWA manifest metadata
+  - Redirect rule correctness
+- **`public/**/*`** — Root-level static assets:
+  - Redirect rules and SPA fallback configuration
+  - Asset optimisation and modern formats
+  - No credential or sensitive data exposure
+- **`scripts/**/*.{ts,js}`** — Root-level build and utility scripts:
+  - Clear script purpose and documentation
+  - Node.js error handling and exit codes
+  - npm compatibility (not pnpm-specific)
+  - Safe file operations
+- **`src/app/scripts/**/*.{ts,js}`** — Application build and utility scripts:
+  - Clear script purpose and documentation
+  - Proper Node.js error handling
+  - No hardcoded paths
+  - npm compatibility (not pnpm-specific)
+  - Safe file operations with proper guards
 
 #### Theme Toggle Rewire — Neon Pink/Yellow Controls
 
@@ -204,7 +341,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Deployment Summary** (`/docs/light-mode-deployment-summary.md`) — 1,400+ line complete recap with executive summary, technical specs, performance metrics, browser compatibility matrix
   - **Session Summary** (`/docs/session-summary-march-11-2026.md`) — Session accomplishments, deliverables, quality metrics
 
-#### Content Expansion Phase 8 — All 8 Sub-audits Complete
+### Fixed
 
 #### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
 
@@ -404,66 +541,93 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Ebook enrichment** — 82 pages polished to production-ready quality
 - **About sub-pages** — 21 pages polished to production-ready quality
 
-#### Production Launch Prep — SEO & Meta Tags
+- **Jest test comparison script** — Created missing `scripts/validation/compare-jest-failures.cjs` that compares test results between PR head and base branch to detect new test failures. Pre-existing failures on develop do not block the PR, only NEW failures introduced by the PR are reported.
 
-- **OG image and Twitter image meta tags** added to `index.html` with `og:image`, `twitter:image`, width, height, and alt attributes (placeholder URL pending production domain setup)
+#### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
 
-#### Content Specimens Accessibility Audit — 100% WCAG 2.1 AA Compliant
+- **Comprehensive animation system** inspired by retro 80s CLI interfaces with 6 core animation types
+- **Terminal boot sequence** (0.8s typewriter-style page entrance) across 5 pages
+- **Auto-stagger orchestration** (`HeroLayout`) — Automatic cascading fade-in with 0.1s delays (title → subtitle → description → CTA)
+- **Neon pulse CTA buttons** — 2s breathing glow that speeds to 1s on hover
+- **Holographic rainbow shimmer** — 4s infinite gradient sweep across hero titles (pink → purple → cyan → yellow → pink)
+- **Floating media elements** — 4s gentle vertical oscillation with neon glow effects
+- **Page header animation system** (`/styles/blocks/page-header-animations.css`) — Reusable 120-line system for portfolio/blog/contact page headers
+- **Animation showcase dev tools** (`/dev/animations`) — Interactive demos with 6 animation types, live code examples, stats dashboard
+- **Implementation files:**
+  - `/styles/blocks/animations.css` — Extended core @keyframes library (26 total animations)
+  - `/styles/blocks/hero.css` — 115 lines of hero animation utilities
+  - `/styles/blocks/page-header-animations.css` — Reusable page header system
+  - `/styles/blocks/animation-showcase.css` — 240 lines of showcase page styles
+  - `/components/layouts/HeroLayout.tsx` — Auto-stagger animation orchestration
+  - `/components/pages/dev/AnimationShowcasePage.tsx` — Interactive dev tools showcase
+- **Pages enhanced:**
+  - HomePage (v1.7.0) — Full terminal boot + auto-stagger + floating media + neon pulse CTAs
+  - AboutPage (v1.5.0) — All HomePage animations + holographic rainbow shimmer title
+  - PortfolioPage (v1.7.0) — Header boot → filters (0.4s) → grid (0.5s)
+  - BlogPage (v1.5.0) — Header boot → filters (0.4s)
+  - ContactPage (v1.4.0) — Header boot → form grid (0.5s)
+  - AnimationShowcasePage (v1.0.0) — Interactive demos at `/dev/animations`
+- **Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion` support
+- **Performance:** CSS-only animations (60fps, zero JavaScript overhead, +0.6KB minified)
+- **Documentation:**
+  - Updated `/guidelines/Guidelines.md` to v8.4.0 with Animation System Implementation section
+  - Created `/docs/animation-implementation-report-march-2026.md` (350+ line final report)
+  - Complete metrics, testing results, file manifest, and Phase 2 roadmap
 
-- **Comprehensive accessibility audit** across all 7 Content Specimen pages (Blog, Portfolio, Video, Podcast, Event, FAQ, Content overview)
-- **Verified compliance** across 10 WCAG 2.1 Level AA criteria:
-  - Heading hierarchy (h1 → h2 → h3 semantic order)
-  - Color contrast (all 7 neon accent colors exceed 4.5:1 minimum; 6 of 7 achieve AAA 7:1+)
-  - Keyboard navigation (breadcrumbs, cards, all interactive elements)
-  - ARIA labels & semantic HTML (proper landmarks, icon `aria-hidden`, section labeling)
-  - Responsive design (320px–1920px breakpoints, 200%/400% zoom testing)
-  - Screen reader support (logical reading order, descriptive links)
-  - Reduced motion (all 7 markdown CSS files suppress animations)
-  - Progressive enhancement (core content accessible without JavaScript)
-- **Testing coverage:** 7 pages, 6 breakpoints, 10 accessibility criteria
-- **Results:** 0 critical issues, 0 medium issues, 0 low issues
-- **Report:** `/reports/content-specimens-accessibility/findings.md`
+#### Phase 1 Governance Workflows — Branch Validation & Package Synchronisation
 
-#### Color Palettes System — 33 Neon Palettes with Interface Inspiration
+- **Fixed branch validation workflow JSON parsing** — Corrected `branch-name-validation.yml` to query correct JSON field names (`isValid` instead of `valid`) in both jq expression and fallback grep pattern, resolving false validation failures where branches passed validation but workflow reported failure due to field mismatch
+- **Synchronised package-lock.json with lefthook dependencies** — Regenerated lock file to include all lefthook platform-specific variants (lefthook-darwin-arm64, lefthook-linux-x64, etc.), fixing `npm ci` failures in CI workflows that were caused by missing dependencies after lefthook was added to package.json
 
-- **Expanded color palette library from 20 to 33 palettes** in `/data/mock/color-palettes.ts`
-- **Added 13 new brand-aligned palettes**:
-  - **Ash Shaw Core** — All 8 core neon colors from the design system
-  - **Cyberpunk Gradient** — Pink→Blue signature gradient for CTAs and hero titles
-  - **Toxic Lime Gradient** — Green→Cyan for success messages and energy themes
-  - **Solar Flare Gradient** — Orange→Yellow for accent highlights and warnings
-  - **Hyperpop Animated** — Full 8-color spectrum for animated backgrounds
-  - **Monochrome Pink Spectrum** — 5 tonal shades from pastel to electric
-  - **Monochrome Blue Spectrum** — 5 tonal shades from sky to midnight
-  - **Complementary Orange & Blue** — Classic complementary pair for split layouts
-  - **Complementary Pink & Green** — High-energy pair for status indicators
-  - **Warm Neon Sunset** — Red→Orange→Yellow→Pink temperature palette
-  - **Cool Neon Ocean** — Cyan→Blue→Purple temperature palette
-  - **Aurora Mesh Background** — Purple/blue radial gradients with opacity system
-  - **Contrast Checkerboard** — Black/white/neon for accessibility-first designs
-- **Interface Ideas field** — Added `interfaceIdeas` to `ColorPalette` interface with 1-3 practical UI/UX suggestions per palette (e.g., "Dark mode dashboard with neon glowing cards", "Hero section with gradient text using background-clip: text")
-- **Updated `/dev-tools/color-palettes` page**:
-  - Added "Interface inspiration" section with bullet-point design suggestions
-  - CSS styling with purple (light mode) and pink (dark mode) arrow bullets
-  - All 33 palettes now include light/dark mode previews and practical implementation ideas
-- **Updated `/guidelines/design-tokens/neon-colors.md`** with complete palette library documentation:
-  - Full hex codes and use cases for all 33 palettes
-  - "Palette Selection Guide" organized by Interface Type (dashboards, CTAs, success/warning states), Mood (energetic, cool, warm, professional), and Use Case (buttons, backgrounds, data viz, status indicators)
-  - Code examples and CSS snippets for each palette category
-  - 7 organized categories: Brand Core, Signature Gradients, Monochrome Spectrums, Complementary Pairs, Temperature Palettes, Background Systems, Thematic Palettes
+#### Netlify SPA routing — direct navigation 404s (#3)
 
-#### Phosphor Icons Migration Complete — Lucide Fully Removed
+- **Replaced the malformed `public/_redirects/` directory** (containing `main.tsx`) with a plain-text `public/_redirects` file holding the same `/*  /index.html  200` fallback rule
+- Netlify can now read `dist/_redirects`, so direct navigation and refresh on client-side routes such as `/journal`, `/journal/dancefloor-belonging` and `/ebook` no longer return 404; existing static files are still served first
+- Netlify's site base directory is empty, so `src/app/netlify.toml` is not read during deploys; `public/_redirects` is the single effective redirect definition
 
-- **`lucide-react` fully removed** from the project — all 92+ icons migrated to `@phosphor-icons/react`
-- **Phase 2 Tier 4 cleanup complete** (15 tasks):
-  - Deleted 7 legacy Lucide files: `/lib/icon-base.tsx`, `/lib/icons.ts`, `/lib/icons-set-a.tsx` through `icons-set-e.tsx`
-  - Migrated `/data/mock/ui/navigation.ts` from `LucideIcon` type to Phosphor `Icon` type; `Home` → `House`, `Mail` → `Envelope`
-  - Rewrote `PhosphorIconsPage.tsx` v2.0.0 — now renders all 92 icons live via Phosphor (previously used Lucide for comparison side)
-  - Updated 22 guideline `.md` files: all `from 'lucide-react'` imports replaced with `from '@phosphor-icons/react'`, icon names updated to Phosphor conventions
-  - Updated `vite.config.ts`, data files (`code-quality.ts`, `deployment-readiness.ts`, `events/categories.ts`, `hidden-about.ts`, `icon-library.ts`), and `StyleGuidePage.tsx`
-- **Zero `lucide-react` imports** remain in the codebase (verified via full search)
-- **Zero `LucideIcon` type references** remain (verified via full search)
-- **`/lib/` directory** now contains only `router.tsx`
+#### Static metadata files returning production 404s (#5)
+
+- **Moved static metadata files to Vite public directory** — Relocated `robots.txt`, `sitemap.xml`, and `manifest.json` from `src/app/public/` to the root `public/` directory so Vite includes them in the production build
+- **Verified build output** — Confirmed all three files appear in `dist/` with unchanged contents and the expected file types
+- **Production deployment** — The files are now part of the Vite build output; production deployment verification pending
+- **Service worker excluded** — Left `service-worker.js` in original location pending separate PWA integration decision
+
+#### Style Guide Dark Mode — Atomic Black Backgrounds
+
+- **Fixed Style Guide page dark mode** (`/styles/blocks/style-guide-page.css`) — All white backgrounds replaced with atomic black (#0F0F0F)
+- **Updated 18 color instances:**
+  - 7 backgrounds: `white` → `#0F0F0F`
+  - 11 text colors: `dark-charcoal` → `#FFFFFF` or `#FF10F0`
+  - All borders: `rgba(0,0,0,0.1)` → `rgba(255,16,240,0.2)`
+- **Code block styling** — Neon pink background with yellow text
+- **100% dark mode consistency** across entire site
+
+#### Animation Showcase Bundler Compatibility
+
+- **Removed all inline styles** from AnimationShowcasePage — Replaced with BEM CSS classes
+- **Fixed Figma Make bundler errors** (IframeMessageAbortError) caused by inline style objects
+- **Added BEM classes:**
+  - `.demo-float-box`, `.demo-float-box--pink`, `.demo-float-box--yellow` — Float demo styling
+  - `.demo-float-text` — Float element text styling
+  - `.demo-page-header-spacing` — Page header spacing utility
+- **Strict guidelines compliance** — Zero inline styles, 100% BEM architecture
+
+#### Dark Mode Color Correction — Exact Figma Hex Values
+
+- **Fixed neon pink color** — Changed from #FF3AAE to correct **#FF10F0** (exact Figma design value)
+- **Fixed atomic black** — Changed from #0B0B10 to correct **#0F0F0F** (15,15,15 in RGB)
+- **Added neon magenta** — New color **#D4008C** for button gradients (from Figma design)
+- **Updated all CSS files:**
+  - `/styles/globals.css` — Root color custom properties corrected
+  - `/styles/blocks/book-dark-mode.css` — All rgba() values now use correct hex
+  - `/styles/blocks/theme-toggle.css` — Toggle uses correct #FF10F0
+- **Visual impact:**
+  - Much more vibrant magenta pink (closer to hot pink)
+  - Higher saturation and intensity
+  - Better matches Figma design screenshot
+  - Glow effects more pronounced with correct color
+- **No breaking changes** — CSS custom properties updated, all references automatically inherit new values
+
 
 ### Removed
 
@@ -527,6 +691,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Schema.org Person data** (`schemaService.ts`, `index.html`): Fixed "Berlin-based" → "Cape Town-based" in Person schema addressLocality, workLocation, and description
 - **Stale Lucide references** cleaned from 7 mock data files: `dev-tools.ts` (2 entries), `sitemap.ts` (2), `style-guide.ts` (2), `about-dropdown.ts`, `social-links.ts` — all updated to reference Phosphor icons
 - **`website-content.md`**: Fixed "Berlin-based" in core identity section → "Cape Town-based (home base)"
+
+### Removed
+
+#### Governance Decision STYLE-001 — Enforce BEM-Only CSS Architecture (Decision 6)
+
+- **Tailwind CSS completely removed** from the build system:
+  - **npm dependencies removed:**
+    - `tailwindcss` v4.1.12 (dev dependency)
+    - `@tailwindcss/vite` v4.1.12 (dev dependency)
+    - `tailwind-merge` v3.2.0 (production dependency)
+  - **Build configuration cleanup:**
+    - Removed Tailwind plugin from Vite configuration (`vite.config.ts`)
+    - Removed Tailwind CSS imports from `src/styles/globals.css` and `src/styles/index.css`
+    - Deleted orphaned `src/styles/tailwind.css` (was not imported anywhere)
+  - **Updated documentation:**
+    - `src/app/postcss.config.js` comments updated to reflect BEM-only architecture
+    - `AGENTS.md` tech stack table updated to reflect Tailwind removal
+    - Guidelines updated to enforce semantic BEM classes exclusively
+- **No breaking changes for users** — All styling migrated to semantic BEM classes in previous commits
+- **Build size reduction** — Bundle size reduced from 631 to 616 npm packages (15 package reduction)
+- **Purpose:** Enforce strict semantic BEM CSS architecture and eliminate utility-class complexity; maintains full design fidelity with cleaner, more maintainable code
 
 ---
 
