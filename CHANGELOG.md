@@ -22,6 +22,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+**Dependabot Automation (Two-Layer Strategy)**
+
+- **Dependabot native auto-merge** — Enabled automatic merging of minor/patch npm and GitHub Actions updates in `.github/dependabot.yml` with squash merge method
+- **GitHub Actions automation workflow** — Created `.github/workflows/dependabot-auto-merge.yml` with:
+  - Daily scheduled runs at 4 AM UTC to process successful Dependabot PRs
+  - Pull request event triggers for on-demand processing
+  - Automatic rebase requests for conflicted Dependabot PRs
+  - Detailed job summaries for visibility and monitoring
+- **Workflow blocker removal** — Deleted `.github/workflows/locked-files-guard.yml` which was preventing automated Dependabot merges
+
 **File Organisation and Test Coverage (T011)**
 
 - **Figma API validation script** — Moved `scripts/test-figma-access.js` to proper location under `scripts/` folder for T011 Figma Make project access validation task
