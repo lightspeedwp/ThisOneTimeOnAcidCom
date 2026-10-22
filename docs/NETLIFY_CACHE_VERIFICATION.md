@@ -199,11 +199,12 @@ X-Content-Type-Options: nosniff
 
 | Issue | Mitigation | Status |
 |-------|-----------|--------|
-| Netlify doesn't read `src/app/netlify.toml` | Verify base directory setting in Netlify UI | Pending verification |
-| CSP blocks Typeform | CSP allows `connect-src 'self' https:` | ✅ Verified |
-| Google Fonts not loading | CSP allows `fonts.gstatic.com` and `fonts.googleapis.com` | ✅ Verified |
+| Netlify doesn't read `src/app/netlify.toml` | **BLOCKING:** Configure base directory in Netlify UI to `src/app/` | ⚠️ **CONFIRMED - REQUIRES ACTION** |
+| Hashed assets getting wrong cache headers | Base directory must be set so Netlify reads from `src/app/netlify.toml` | ⚠️ **CONFIRMED - ASSETS GETTING max-age=0 INSTEAD OF 1-YEAR CACHE** |
+| CSP blocks Typeform | Assess in preview; HTTPS connections are allowed, but external iframes fall back to `default-src 'self'` | Pending preview verification |
+| Google Fonts not loading | CSP allows `fonts.gstatic.com` and `fonts.googleapis.com`; assess loading in preview | Pending preview verification |
 | Old JS bundle cached despite deployment | HTML revalidation triggers browser cache bust | ✅ By design |
-| SPA routes return wrong cache headers | Explicit headers for `/` and `/index.html` | ✅ Added |
+| SPA routes return wrong cache headers | Explicit headers for `/` and `/index.html` | ✅ Working correctly |
 
 ## Testing Results
 
@@ -211,16 +212,62 @@ X-Content-Type-Options: nosniff
 - [x] Build successful
 - [x] All assets hashed
 - [x] Configuration file is valid TOML
+- [x] netlify.toml present at `src/app/netlify.toml` with correct cache rules
+
+### Deployment Preview Results (2026-10-22)
+
+**Netlify Deploy:** https://6ad9545513526f6206a1b8d2--thisonetimeonacid.netlify.app
+
+#### HTML & SPA Routes ✅
+- **`/`** (root)
+  - Status: ✅ 200 OK
+  - Cache-Control: `public,max-age=0,must-revalidate` ✅
+  - Content-Type: `text/html; charset=UTF-8` ✅
+  - Revalidation working as designed
+
+- **`/index.html`**
+  - Status: ✅ 200 OK
+  - Cache-Control: `public,max-age=0,must-revalidate` ✅
+  - Content-Type: `text/html; charset=UTF-8` ✅
+  - Revalidation working as designed
+
+#### SPA Routing ✅
+- **`/journal`** → 200 OK (SPA fallback)
+- **`/about`** → 200 OK (SPA fallback)
+- **`/contact`** → 200 OK (SPA fallback)
+
+#### Static Assets (Hashed) ⚠️ **ISSUE FOUND**
+- **`/assets/AboutAshPage-CrDw5K_g.js`**
+  - Status: ✅ 200 OK
+  - Cache-Control: `public,max-age=0,must-revalidate` ❌ **WRONG**
+  - Should be: `public,max-age=31536000,immutable`
+  - **Root Cause:** Netlify is not reading configuration from `src/app/netlify.toml`
+  - **Fix Required:** Configure "Base directory" setting in Netlify UI to `src/app/`
+
+#### Static Metadata Files ✅ (from PR #344)
+- **`/robots.txt`**
+  - Status: ✅ 200 OK
+  - Cache-Control: `public,max-age=0,must-revalidate`
+  - Content-Type: `text/plain; charset=UTF-8` ✅
+
+- **`/sitemap.xml`**
+  - Status: ✅ 200 OK
+  - Content-Type: `application/xml` ✅
+
+- **`/manifest.json`**
+  - Status: ✅ 200 OK
+  - Content-Type: `application/json` ✅
 
 ### Netlify Preview Deployment
-- [ ] Headers correct on `/`
-- [ ] Headers correct on `/index.html`
-- [ ] Headers correct on `/assets/*.js`
-- [ ] Typeform integrations load
-- [ ] YouTube/Vimeo embeds load (if present)
-- [ ] Google Fonts load
-- [ ] SPA navigation works
-- [ ] Console has no CSP violations
+- [x] Headers verified on `/` (correct: `public, max-age=0, must-revalidate`)
+- [x] Headers verified on `/index.html` (correct: `public, max-age=0, must-revalidate`)
+- [ ] Headers verified on `/assets/*.js` (ISSUE: Currently getting `public, max-age=0, must-revalidate` — should be `public, max-age=31536000, immutable`)
+- [ ] Static metadata files verified (robots.txt, sitemap.xml, manifest.json all accessible)
+- [ ] SPA routing verified (`/journal`, `/about`, `/contact` return 200)
+- [ ] Typeform integrations load (pending verification)
+- [ ] YouTube/Vimeo embeds load (pending verification)
+- [ ] Google Fonts load (pending verification)
+- [ ] Console has no CSP violations (pending verification)
 
 ### Production Verification
 - [ ] Deploy to production
@@ -256,6 +303,46 @@ X-Content-Type-Options: nosniff
 - Baseline security headers preserved (nosniff, referrer policy, CSP, Permissions-Policy)
 ```
 
+## BLOCKING ISSUE: Netlify Base Directory Configuration
+
+### Problem
+Netlify is not reading the `netlify.toml` configuration file from `src/app/`. Instead, it's looking for `netlify.toml` in the repository root. As a result:
+
+- ✅ HTML revalidation headers ARE correctly applied (from Netlify defaults)
+- ❌ Hashed asset immutable caching is NOT applied (configuration ignored)
+
+### Solution Required
+Configure the "Base directory" setting in Netlify's project settings:
+
+1. Go to Netlify project settings: https://app.netlify.com/sites/thisonetimeonacid/settings/general
+2. Find "Build settings" section
+3. Set "Base directory" to: `src/app`
+4. Click "Save"
+5. Trigger a new deployment (re-run workflow or push to branch)
+6. Verify headers are now correct: `/assets/*` should show `Cache-Control: public,max-age=31536000,immutable`
+
+### Verification After Fix
+Once base directory is configured, run:
+```bash
+curl -I https://thisonetimeonacid.netlify.app/assets/index-*.js | grep Cache-Control
+# Should return: Cache-Control: public, max-age=31536000, immutable
+```
+
+### Why This Matters
+Without proper asset caching:
+- Users download large JavaScript bundles on every page load (no browser cache)
+- Bandwidth and performance are negatively impacted
+- The performance optimization goal of this PR is not achieved
+
+### Action Items Before Merge
+- [ ] **MUST DO:** Configure base directory in Netlify project settings
+- [ ] **MUST DO:** Trigger new deployment after configuration change
+- [ ] **MUST DO:** Re-run header verification curl commands
+- [ ] Document actual deployment headers in production
+- [ ] Verify performance metrics meet expectations after fix
+
+---
+
 ## References
 
 - **Issue:** [#6 - perf: netlify - Improve asset caching and baseline headers](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/6)
@@ -266,17 +353,17 @@ X-Content-Type-Options: nosniff
 ---
 
 **Acceptance Criteria Status:**
-- [x] Apply one-year immutable caching only to verified hashed assets
-- [ ] Preserve HTML revalidation and verify updated deployments load correctly
-- [x] Review baseline headers against application requirements before enabling
-- [ ] Validate Typeform, YouTube, Vimeo, fonts and other integrations in preview
-- [x] Defer CSP; record before/after header evidence without claiming unmeasured gains
-- [x] Performance issue is reproducible and clearly documented
-- [ ] Performance meets expected benchmarks after fix (pending benchmarks)
-- [ ] No adverse impact on other functionality
-- [ ] Documentation updated if needed
-- [ ] Changelog entry prepared for PR if resolved
-- [ ] PR uses correct branch prefix (perf/) ✅
-- [ ] PR description updated with relevant details
-- [ ] Labels/types match org standards
-- [ ] Automated performance tests added/updated if relevant
+- [ ] Apply one-year immutable caching only to verified hashed assets — ⚠️ **BLOCKED on Netlify base directory configuration**
+- [x] Preserve HTML revalidation and verify updated deployments load correctly — ✅ **Verified in preview**
+- [x] Review baseline headers against application requirements before enabling — ✅ **Complete**
+- [ ] Validate Typeform, YouTube, Vimeo, fonts and other integrations in preview — ⏳ **Pending Netlify config fix**
+- [ ] Defer CSP; record actual before/after response headers and verify preview and production checks — ⏳ **Pending Netlify config fix**
+- [x] Performance issue is reproducible and clearly documented — ✅ **Complete**
+- [ ] Performance meets expected benchmarks after fix — ⏳ **Pending Netlify config fix**
+- [ ] No adverse impact on other functionality — ⏳ **Pending Netlify config fix**
+- [x] Documentation updated if needed — ✅ **Complete**
+- [x] Changelog entry prepared for PR if resolved — ✅ **Complete**
+- [x] PR uses correct branch prefix (perf/) — ✅ **Verified**
+- [x] PR description updated with relevant details — ✅ **Verified**
+- [x] Labels/types match org standards — ✅ **Verified**
+- [ ] Automated performance tests added/updated if relevant — ⏳ **Pending verification after deployment**
