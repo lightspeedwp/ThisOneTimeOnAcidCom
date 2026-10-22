@@ -1,25 +1,53 @@
-# Protected Files — Constitution Principle II
+# Protected Files List — ThisOneTimeOnAcidCom
 #
-# These files are critical to repository governance, testing, and integration.
-# Changes require explicit owner approval and must link to an approved change-request issue.
+# These files are critical to repository stability and should not be modified
+# without careful consideration and approval. Modifications trigger the
+# locked-files-guard workflow which requires approval before merging.
 #
-# List Format: Path pattern (one per line, extended regular expressions with anchors)
-# Patterns are matched with: git diff --name-only | grep -E "^{pattern}"
-# Note: Use anchors (^ for start, $ for end) and escape metacharacters (\. \/ etc)
+# Protected file categories:
+# 1. Governance (.github/ configuration)
+# 2. Scripts and tooling (scripts/ directory)
+# 3. Agent and skill specifications (AGENTS.md)
+# 4. Changelog (CHANGELOG.md)
+# 5. Style guidelines (guidelines/ directory)
+# 6. Release artifacts (ATTRIBUTIONS.md)
+# 7. Task tracking (tasks/task-list.md)
+# 8. Critical utilities (Supabase, Figma integrations)
 #
-# Protected File Categories:
-# 1. Governance files (.github/) — workflows, labels, issue types, templates
-# 2. Repository rules (scripts/, AGENTS.md, guidelines/) — infrastructure and standards
-# 3. Release artifacts (CHANGELOG.md, ATTRIBUTIONS.md) — version history and credits
-# 4. Integration components — Supabase utilities, Figma components
-# 5. Task tracking — task-list.md (never delete)
+# Date: 2026-10-22
+# Last Modified: 2026-10-22
+# Governance: Constitution Principle II (LOCKED files require approval)
 
+# Category 1: Governance Configuration
 .github/
+
+# Category 2: Scripts and Tooling
 scripts/
+
+# Category 3: Agent and Skill Specifications
 AGENTS.md
+
+# Category 4: Changelog
 CHANGELOG.md
-ATTRIBUTIONS.md
+
+# Category 5: Style Guidelines and Governance Documents
 guidelines/
+
+# Category 6: Release Artifacts and Credits
+ATTRIBUTIONS.md
+
+# Category 7: Task Tracking
+tasks/task-list.md
+
+# Category 8: Critical Utility Files
 src/app/utils/supabase/
 src/app/components/figma/ImageWithFallback.tsx
-tasks/task-list.md
+
+# Notes:
+# - This list is canonical and used by locked-files-guard workflow
+# - Changes to protected files require approval via change-request issues
+# - Issue tag for approval: [LABEL-UPDATE-REQUEST], [TEMPLATE-UPDATE-REQUEST], etc.
+# - Only @ashley can approve changes to protected files
+# - Supabase credentials MUST NEVER be committed (these utils protect against exposure)
+# - Figma Make integration must remain compatible (ImageWithFallback is critical)
+# - Task list must never be deleted or corrupted

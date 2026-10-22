@@ -7,12 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+**Agent and Workflow Orchestration Documentation**
+
+- **Agent inventory and workflow registry** — Added `.claude/agents/INVENTORY.md` documenting 20 agents with their capabilities, workflows, and shared tools; consolidated from scattered agent documentation for centralized reference
+- **Workflow orchestration skill** — Added `.claude/skills/workflow-orchestration/SKILL.md` defining audit, report generation, task tracking, and archival procedures with metadata requirements and file location standards
+- **Platform assessment guide** — Added `docs/ANTHROPIC_PLATFORMS.md` evaluating seven Anthropic platforms with current status, priorities, and roadmap for platform selection decisions
+- **Protected files guidance** — Added `.github/PROTECTED_FILES.txt` documenting canonical governance files and change request process for labels, issue types, and PR templates
+- **SpecKit configuration** — Added `.specify/init-options.json` setting feature directory to `.github/specs` for specification-first workflow
+
 ### Fixed
 
+- **CodeRabbit docstring coverage** — Added docstrings to 7 functions across netlify-hashed-asset-headers.mjs, check-netlify-headers.mjs, and vite.config.ts to meet 80% documentation coverage threshold (PR #426)
 - **React external dependency resolution regression** — Restored missing `resolveReactExternals()` function and `build.rollupOptions` in Vite configuration that was accidentally removed in PR #345, causing all 7 subsequent Dependabot PRs to fail Netlify builds with unresolved `react/jsx-runtime` import errors (Issue #306)
 
 ### Changed
 
+- **Netlify configuration consolidation** — Merged develop branch into build/netlify-hashed-asset-headers, consolidating HTML revalidation headers with build.processing optimizations for CSS, JS, and image compression (PR #427)
 - **Hashed-asset caching** — Content-hashed files Vite emits under `/assets/` now get `Cache-Control: public, max-age=31536000, immutable` through exact-path rules generated into `dist/_headers`. HTML keeps Netlify's `public,max-age=0,must-revalidate`.
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
 - **Removed pnpm configuration** — Deleted `pnpm-lock.yaml` and `pnpm-workspace.yaml` (no longer needed with npm)
@@ -40,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Integration validation procedures (Typeform, YouTube, Vimeo, Google Fonts)
   - CSP compatibility assessment (existing configuration verified as compatible)
   - Performance impact analysis and potential issue mitigations
+- **Integration validation plan** — Created `INTEGRATION-VALIDATION-PLAN.md` with detailed testing procedures for external integrations (Google Fonts, Typeform, YouTube, Vimeo), CSP validation, deployment validation script usage, performance baselines, and test results template (PR #426)
 - **Baseline security headers preserved** — Maintained all existing headers: X-Frame-Options, X-Content-Type-Options (nosniff), Referrer-Policy, Permissions-Policy, and Content-Security-Policy
 
 **File Organisation and Test Coverage (T011)**

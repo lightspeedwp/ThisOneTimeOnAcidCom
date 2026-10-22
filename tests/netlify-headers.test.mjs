@@ -53,10 +53,23 @@ describe('root netlify.toml', function () {
     assert.doesNotMatch(rootToml, /pnpm/);
   });
 
-  it('defines Content-Security-Policy and security headers for all routes', function () {
-    assert.match(rootToml, /Content-Security-Policy\s*=\s*"default-src 'self'/);
+  it('keeps Cache-Control and CSP out of the shared rules to avoid conflicting definitions', function () {
+    // Allow Cache-Control for specific paths (/, /index.html) but not for wildcard patterns
+    // that would conflict with hashed asset rules generated in dist/_headers
+    const wildcardSectionMatch = rootToml.match(/for\s*=\s*"\/\*"[\s\S]*?(?=\[\[headers\]\]|$)/);
+    const wildcardSection = wildcardSectionMatch ? wildcardSectionMatch[0] : '';
+    assert.doesNotMatch(wildcardSection, /Cache-Control\s*=/i, 'Cache-Control not in /* (wildcard) rules');
+    assert.doesNotMatch(rootToml, /Content-Security-Policy\s*=/i);
+    // But Cache-Control IS allowed for specific paths
+    assert.match(rootToml, /for\s*=\s*"\/"/,  'Has / path for HTML revalidation');
+    assert.match(rootToml, /for\s*=\s*"\/index\.html"/, 'Has /index.html path for HTML revalidation');
+  });
+
+  it('defines baseline security headers for all routes', function () {
     assert.match(rootToml, /X-Frame-Options\s*=\s*"DENY"/);
     assert.match(rootToml, /X-Content-Type-Options\s*=\s*"nosniff"/);
+    assert.match(rootToml, /Referrer-Policy\s*=\s*"strict-origin-when-cross-origin"/);
+    assert.match(rootToml, /Permissions-Policy/);
   });
 
   it('avoids conflicting wildcard Cache-Control rules that would interfere with exact-path hashed-asset rules', function () {
