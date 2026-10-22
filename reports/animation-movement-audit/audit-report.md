@@ -1,9 +1,9 @@
 # Animation & Movement Audit Report
 
-**Project:** Nova News (Book Website)  
-**Audit Date:** March 12, 2026  
-**Conducted By:** Animation System Audit Team  
-**Duration:** 3 hours  
+**Project:** Nova News (Book Website)
+**Audit Date:** March 12, 2026
+**Conducted By:** Animation System Audit Team
+**Duration:** 3 hours
 **Version:** 1.0.0
 
 ---
@@ -15,6 +15,7 @@
 **Overall Assessment:** **Limited Strategic Movement** ⚠️
 
 The Nova News website currently has:
+
 - ✅ **23 keyframe animations defined** in `/styles/animations.css`
 - ✅ **Strong accessibility foundation** (prefers-reduced-motion implemented)
 - ✅ **Performance-conscious** (GPU-accelerated properties, mobile optimizations)
@@ -27,23 +28,27 @@ The Nova News website currently has:
 ### Key Findings
 
 1. **Animation Library vs. Implementation Gap**
+
    - 23 animations defined, but only ~5 actively used
    - Most pages have ZERO animations beyond basic CSS transitions
    - Massive opportunity to bring neon CLI aesthetic to life
 
-2. **Missing Brand-Aligned Movement**
+1. **Missing Brand-Aligned Movement**
+
    - No terminal boot sequences
    - No neon flicker/pulse effects on CTAs
    - No holographic reveals
    - No glitch effects
    - No typewriter text reveals
 
-3. **Performance Budget**
+1. **Performance Budget**
+
    - Currently well under budget (0-2 animations per page)
    - Can easily support 5-7 concurrent animations
    - No performance concerns whatsoever
 
-4. **Accessibility Compliance**
+1. **Accessibility Compliance**
+
    - ✅ Full `prefers-reduced-motion` support
    - ✅ Transitions respect user preferences
    - Ready for enhanced animations
@@ -78,14 +83,16 @@ The Nova News website currently has:
 
 #### Current State
 
-**Existing Animations:**
+## Existing Animations
+
 - None (completely static)
 - Basic CSS transitions on buttons (0.3s)
 - No page load sequence
 - No scroll reveals
 - No micro-interactions
 
-**Animation Inventory:**
+## Animation Inventory
+
 | Element | Animation | Duration | Status |
 |---------|-----------|----------|--------|
 | Hero title | None | - | ❌ Missing |
@@ -97,20 +104,23 @@ The Nova News website currently has:
 
 #### Missing Opportunities
 
-**Hero Section (Lines 38-83):**
+## Hero Section (Lines 38-83)
+
 - ❌ Book title should have typewriter reveal effect
 - ❌ "acid" rainbow text should have holographic shimmer
 - ❌ Book cover should float gently (3s ease-in-out)
 - ❌ Hero content should fade in on page load
 - ❌ CTA "Unlock the Draft" button needs neon pink pulse
 
-**Form Elements (Lines 52-62):**
+## Form Elements (Lines 52-62)
+
 - ❌ Input focus should have neon glow expansion
 - ❌ Submit button should have enhanced hover state
 - ❌ Success state animation missing
 - ❌ Error state animation missing
 
-**Section Reveals (Lines 86-97, 99+):**
+## Section Reveals (Lines 86-97, 99+)
+
 - ❌ "What it is" section should slide up on scroll
 - ❌ "Why care" section should stagger-reveal
 - ❌ No visual feedback for scroll progress
@@ -126,19 +136,19 @@ React.createElement(
   { className: "hero section hero--animated" },
   React.createElement(
     "div",
-    { className: "section__container hero__grid" },
+    { className: "section_*container hero*_grid" },
     React.createElement(
       "div",
-      { className: "hero__content hero__content--reveal" },
-      React.createElement("span", { 
+      { className: "hero_*content hero*_content--reveal" },
+      React.createElement("span", {
         className: "eyebrow eyebrow--fade-in",
         style: { animationDelay: '0.2s' }
       }, "First book by Ash Shaw"),
-      React.createElement("h1", { 
+      React.createElement("h1", {
         className: "heading-hero text-neon-pink typewriter-text",
         'data-text': "This one time on acid..."
       }, "This one time on acid..."),
-      React.createElement("h2", { 
+      React.createElement("h2", {
         className: "text-lead fade-in-up",
         style: { animationDelay: '0.8s' }
       }, "A hybrid memoir and creative-life guide..."),
@@ -151,7 +161,8 @@ React.createElement(
     )
   )
 )
-```
+
+```text
 
 **CSS Additions:**
 
@@ -187,7 +198,7 @@ React.createElement(
   overflow: hidden;
   border-right: 3px solid var(--wp--preset--color--neon-pink);
   white-space: nowrap;
-  animation: 
+  animation:
     typewriter 1.5s steps(30) 0.5s forwards,
     cursorBlink 0.75s step-end infinite;
   width: 0;
@@ -195,15 +206,15 @@ React.createElement(
 
 /* Holographic Rainbow Text */
 @keyframes holographicShimmer {
-  0% { 
+  0% {
     background-position: 0% 50%;
     filter: hue-rotate(0deg);
   }
-  50% { 
+  50% {
     background-position: 100% 50%;
     filter: hue-rotate(15deg);
   }
-  100% { 
+  100% {
     background-position: 0% 50%;
     filter: hue-rotate(0deg);
   }
@@ -237,12 +248,12 @@ React.createElement(
 /* Neon Pulse CTA */
 @keyframes neonPulseCTA {
   0%, 100% {
-    box-shadow: 
+    box-shadow:
       0 0 20px rgba(255, 16, 240, 0.4),
       0 4px 12px rgba(0, 0, 0, 0.3);
   }
   50% {
-    box-shadow: 
+    box-shadow:
       0 0 35px rgba(255, 16, 240, 0.7),
       0 6px 16px rgba(0, 0, 0, 0.4);
   }
@@ -277,7 +288,8 @@ React.createElement(
   opacity: 0;
   animation: fadeInUp 0.4s ease-out forwards;
 }
-```
+
+```text
 
 **Phase 2: CTA Enhancements (2 hours)**
 
@@ -285,7 +297,7 @@ React.createElement(
 /* Form Input Neon Focus */
 .form__input:focus {
   border-color: var(--wp--preset--color--neon-pink);
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(255, 16, 240, 0.2),
     0 0 20px rgba(255, 16, 240, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -301,7 +313,8 @@ React.createElement(
 .form--success {
   animation: successPulse 0.5s ease-out;
 }
-```
+
+```text
 
 #### Performance Considerations
 
@@ -319,22 +332,23 @@ React.createElement(
     width: auto;
     border-right: none;
   }
-  
+
   .float-gentle {
     animation: none;
   }
-  
+
   .button--primary {
     animation: none;
   }
-  
+
   .fade-in-up,
   .eyebrow--fade-in {
     animation: none;
     opacity: 1;
   }
 }
-```
+
+```text
 
 ---
 
@@ -342,15 +356,17 @@ React.createElement(
 
 **Priority Level:** 🔴 CRITICAL (Key conversion page)
 
-#### Current State
+#### Current State (1)
 
-**Existing Animations:**
+## Existing Animations (1)
+
 - None identified
 - Static hero
 - No book cover animation
 - No section reveals
 
-**Animation Inventory:**
+## Animation Inventory (1)
+
 | Element | Animation | Duration | Status |
 |---------|-----------|----------|--------|
 | Book cover | None | - | ❌ Missing |
@@ -359,22 +375,22 @@ React.createElement(
 | Testimonials | None | - | ❌ Missing |
 | CTA buttons | Basic transition | 0.3s | ⚠️ Basic |
 
-#### Recommendations
+#### Recommendations (1)
 
-**1. Book Cover Showcase (2 hours)**
+## 1. Book Cover Showcase (2 hours)
 
 ```css
 /* Book Cover with Neon Glow */
 @keyframes bookCoverGlow {
   0%, 100% {
-    box-shadow: 
+    box-shadow:
       0 0 20px rgba(255, 16, 240, 0.5),
       0 0 40px rgba(255, 16, 240, 0.3),
       0 10px 30px rgba(0, 0, 0, 0.4);
     transform: translateY(0) scale(1);
   }
   50% {
-    box-shadow: 
+    box-shadow:
       0 0 30px rgba(255, 16, 240, 0.7),
       0 0 60px rgba(255, 16, 240, 0.5),
       0 15px 40px rgba(0, 0, 0, 0.5);
@@ -385,9 +401,10 @@ React.createElement(
 .book-cover {
   animation: bookCoverGlow 4s ease-in-out infinite;
 }
-```
 
-**2. Feature Cards Stagger (3 hours)**
+```text
+
+## 2. Feature Cards Stagger (3 hours)
 
 ```css
 /* Staggered Card Reveal on Scroll */
@@ -413,9 +430,10 @@ React.createElement(
 .feature-card:nth-child(1).in-view { animation-delay: 0.1s; }
 .feature-card:nth-child(2).in-view { animation-delay: 0.2s; }
 .feature-card:nth-child(3).in-view { animation-delay: 0.3s; }
-```
 
-**React Implementation:**
+```text
+
+## React Implementation
 
 ```tsx
 // Add intersection observer for scroll-triggered animations
@@ -430,17 +448,18 @@ React.useEffect(function() {
     },
     { threshold: 0.1 }
   );
-  
+
   var cards = document.querySelectorAll('.feature-card');
   cards.forEach(function(card) {
     observer.observe(card);
   });
-  
+
   return function() {
     observer.disconnect();
   };
 }, []);
-```
+
+```text
 
 ---
 
@@ -448,17 +467,18 @@ React.useEffect(function() {
 
 **Priority Level:** 🟡 HIGH
 
-#### Current State
+#### Current State (2)
 
-**Existing Animations:**
+## Existing Animations (2)
+
 - None
 - Static chapter list
 - No hover effects
 - No visual feedback
 
-#### Recommendations
+#### Recommendations (2)
 
-**1. Chapter List Animations (2 hours)**
+## 1. Chapter List Animations (2 hours)
 
 ```css
 /* Chapter Row Hover with Neon Underline */
@@ -493,9 +513,10 @@ React.useEffect(function() {
 .chapter-item:hover::after {
   animation: neonUnderlineSweep 0.4s ease-out forwards;
 }
-```
 
-**2. Lock Icon Pulse (1 hour)**
+```text
+
+## 2. Lock Icon Pulse (1 hour)
 
 ```css
 /* Locked Chapter Indicator */
@@ -513,7 +534,8 @@ React.useEffect(function() {
 .chapter-item--locked .lock-icon {
   animation: lockPulse 2s ease-in-out infinite;
 }
-```
+
+```text
 
 ---
 
@@ -521,14 +543,16 @@ React.useEffect(function() {
 
 **Priority Level:** 🟡 HIGH
 
-#### Current State
+#### Current State (3)
 
-**Existing Animations:**
+## Existing Animations (3)
+
 - Skill cards have hover lift (lines 196-221 in about-page.css)
 - Basic transitions on interactive elements
 - No section reveals
 
-**Animation Inventory:**
+## Animation Inventory (2)
+
 | Element | Animation | Duration | Status |
 |---------|-----------|----------|--------|
 | Skill cards | Hover lift | 0.3s | ✅ Good |
@@ -536,9 +560,9 @@ React.useEffect(function() {
 | Sections | None | - | ❌ Missing |
 | Timeline | None | - | ❌ Missing |
 
-#### Recommendations
+#### Recommendations (3)
 
-**1. Timeline Animation (3 hours)**
+## 1. Timeline Animation (3 hours)
 
 ```css
 /* Timeline Progressive Reveal */
@@ -586,7 +610,8 @@ React.useEffect(function() {
 .timeline-event:nth-child(1).in-view { animation-delay: 0.2s; }
 .timeline-event:nth-child(2).in-view { animation-delay: 0.4s; }
 .timeline-event:nth-child(3).in-view { animation-delay: 0.6s; }
-```
+
+```text
 
 ---
 
@@ -594,16 +619,17 @@ React.useEffect(function() {
 
 **Priority Level:** 🟡 HIGH
 
-#### Current State
+#### Current State (4)
 
-**Existing Animations:**
+## Existing Animations (4)
+
 - None
 - Static form
 - No success animation
 
-#### Recommendations
+#### Recommendations (4)
 
-**1. Form Success Animation (2 hours)**
+## 1. Form Success Animation (2 hours)
 
 ```css
 /* Success Checkmark Animation */
@@ -634,9 +660,10 @@ React.useEffect(function() {
 .success-message {
   animation: successScale 0.5s ease-out;
 }
-```
 
-**2. CTA Button Enhanced (1 hour)**
+```text
+
+## 2. CTA Button Enhanced (1 hour)
 
 ```css
 /* Pulsing "Join Waitlist" button */
@@ -662,7 +689,8 @@ React.useEffect(function() {
   width: 300px;
   height: 300px;
 }
-```
+
+```text
 
 ---
 
@@ -670,16 +698,17 @@ React.useEffect(function() {
 
 **Priority Level:** 🟢 MEDIUM
 
-#### Current State
+#### Current State (5)
 
-**Existing Animations:**
+## Existing Animations (5)
+
 - None on journal entries
 - Static grid
 - No hover effects beyond basic transition
 
-#### Recommendations
+#### Recommendations (5)
 
-**1. Journal Entry Cards (2 hours)**
+## 1. Journal Entry Cards (2 hours)
 
 ```css
 /* Card Hover with Glow */
@@ -688,7 +717,7 @@ React.useEffect(function() {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   to {
-    box-shadow: 
+    box-shadow:
       0 8px 24px rgba(0, 0, 0, 0.15),
       0 0 20px rgba(255, 16, 240, 0.2);
   }
@@ -702,9 +731,10 @@ React.useEffect(function() {
   transform: translateY(-8px);
   animation: cardGlow 0.3s ease forwards;
 }
-```
 
-**2. Featured Entry Spotlight (1 hour)**
+```text
+
+## 2. Featured Entry Spotlight (1 hour)
 
 ```css
 /* Featured entry rotating spotlight */
@@ -730,7 +760,8 @@ React.useEffect(function() {
   background-size: 200% 100%;
   animation: spotlight 8s ease-in-out infinite;
 }
-```
+
+```text
 
 ---
 
@@ -738,16 +769,17 @@ React.useEffect(function() {
 
 **Priority Level:** 🟢 MEDIUM
 
-#### Current State
+#### Current State (6)
 
-**Existing Animations:**
+## Existing Animations (6)
+
 - None
 - Static event cards
 - No date countdown animations
 
-#### Recommendations
+#### Recommendations (6)
 
-**1. Upcoming Event Pulse (2 hours)**
+## 1. Upcoming Event Pulse (2 hours)
 
 ```css
 /* Next event highlight pulse */
@@ -765,9 +797,10 @@ React.useEffect(function() {
 .event-card--upcoming {
   animation: eventHighlight 2s ease-in-out infinite;
 }
-```
 
-**2. Date Counter Animation (1 hour)**
+```text
+
+## 2. Date Counter Animation (1 hour)
 
 ```css
 /* Days until event flip animation */
@@ -788,7 +821,8 @@ React.useEffect(function() {
 .countdown-digit.updated {
   animation: digitFlip 0.6s ease-in-out;
 }
-```
+
+```text
 
 ---
 
@@ -796,16 +830,17 @@ React.useEffect(function() {
 
 **Priority Level:** 🟢 MEDIUM
 
-#### Current State
+#### Current State (7)
 
-**Existing Animations:**
+## Existing Animations (7)
+
 - None
 - Static content
 - No visual interest
 
-#### Recommendations
+#### Recommendations (7)
 
-**1. Workshop Card Hover (1 hour)**
+## 1. Workshop Card Hover (1 hour)
 
 ```css
 /* Workshop cards with neon border reveal */
@@ -833,8 +868,8 @@ React.useEffect(function() {
     var(--wp--preset--color--neon-pink),
     var(--wp--preset--color--neon-yellow)
   );
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -845,7 +880,8 @@ React.useEffect(function() {
 .workshop-card:hover::before {
   opacity: 1;
 }
-```
+
+```text
 
 ---
 
@@ -853,16 +889,17 @@ React.useEffect(function() {
 
 **Priority Level:** 🟢 MEDIUM
 
-#### Current State
+#### Current State (8)
 
-**Existing Animations:**
+## Existing Animations (8)
+
 - None on form
 - No focus animations
 - No submission feedback
 
-#### Recommendations
+#### Recommendations (8)
 
-**1. Enhanced Form Interactions (2 hours)**
+## 1. Enhanced Form Interactions (2 hours)
 
 ```css
 /* Input label float animation */
@@ -881,8 +918,8 @@ React.useEffect(function() {
   position: relative;
 }
 
-.form__input:focus + .form__label,
-.form__input:not(:placeholder-shown) + .form__label {
+.form_*input:focus + .form*_label,
+.form_*input:not(:placeholder-shown) + .form*_label {
   animation: labelFloat 0.2s ease-out forwards;
   color: var(--wp--preset--color--neon-pink);
 }
@@ -903,7 +940,8 @@ React.useEffect(function() {
   border-radius: 50%;
   animation: buttonSpin 0.8s linear infinite;
 }
-```
+
+```text
 
 ---
 
@@ -911,15 +949,16 @@ React.useEffect(function() {
 
 **Priority Level:** 🔵 LOW
 
-#### Current State
+#### Current State (9)
 
-**Existing Animations:**
+## Existing Animations (9)
+
 - None
 - Static success message
 
-#### Recommendations
+#### Recommendations (9)
 
-**1. Success Celebration (2 hours)**
+## 1. Success Celebration (2 hours)
 
 ```css
 /* Confetti burst animation */
@@ -951,9 +990,10 @@ React.useEffect(function() {
   background: var(--wp--preset--color--uv-violet);
   animation-delay: 0.2s;
 }
-```
 
-**2. Success Checkmark (1 hour)**
+```text
+
+## 2. Success Checkmark (1 hour)
 
 ```css
 /* Animated checkmark SVG */
@@ -972,7 +1012,8 @@ React.useEffect(function() {
 .success-icon {
   animation: checkmarkScale 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-```
+
+```text
 
 ---
 
@@ -980,16 +1021,17 @@ React.useEffect(function() {
 
 **Priority Level:** 🔵 LOW
 
-#### Current State
+#### Current State (10)
 
-**Existing Animations:**
+## Existing Animations (10)
+
 - None
 - Static press kit downloads
 - No visual feedback
 
-#### Recommendations
+#### Recommendations (10)
 
-**1. Download Button Feedback (1 hour)**
+## 1. Download Button Feedback (1 hour)
 
 ```css
 /* Download progress animation */
@@ -1016,7 +1058,8 @@ React.useEffect(function() {
 .download-button.downloading::after {
   animation: downloadProgress 2s ease-out forwards;
 }
-```
+
+```text
 
 ---
 
@@ -1024,15 +1067,16 @@ React.useEffect(function() {
 
 **Priority Level:** 🟡 HIGH
 
-#### Current State
+#### Current State (11)
 
-**Existing Animations:**
+## Existing Animations (11)
+
 - Unknown (component not examined)
 - Likely minimal
 
-#### Recommendations
+#### Recommendations (11)
 
-**1. Page Turn Animation (4 hours)**
+## 1. Page Turn Animation (4 hours)
 
 ```css
 /* Book page turn effect */
@@ -1049,9 +1093,10 @@ React.useEffect(function() {
   transform-style: preserve-3d;
   animation: pageTurn 0.8s ease-in-out;
 }
-```
 
-**2. Reading Progress Bar (1 hour)**
+```text
+
+## 2. Reading Progress Bar (1 hour)
 
 ```css
 /* Neon progress bar at top */
@@ -1073,7 +1118,8 @@ React.useEffect(function() {
   animation: progressGlow 2s ease-in-out infinite;
   transition: width 0.2s ease;
 }
-```
+
+```text
 
 ---
 
@@ -1081,15 +1127,16 @@ React.useEffect(function() {
 
 **Priority Level:** 🟡 HIGH
 
-#### Current State
+#### Current State (12)
 
-**Existing Animations:**
+## Existing Animations (12)
+
 - Unknown
 - Similar to draft-viewer
 
-#### Recommendations
+#### Recommendations (12)
 
-**1. Chapter Navigation (2 hours)**
+## 1. Chapter Navigation (2 hours)
 
 ```css
 /* Smooth chapter transitions */
@@ -1107,7 +1154,8 @@ React.useEffect(function() {
 .chapter-content {
   animation: chapterFade 0.4s ease-out;
 }
-```
+
+```text
 
 ---
 
@@ -1115,16 +1163,17 @@ React.useEffect(function() {
 
 **Priority Level:** 🔵 LOW
 
-#### Current State
+#### Current State (13)
 
-**Existing Animations:**
+## Existing Animations (13)
+
 - None
 - Static page list
 - Basic hover transitions
 
-#### Recommendations
+#### Recommendations (13)
 
-**1. Grid Materialisation (2 hours)**
+## 1. Grid Materialisation (2 hours)
 
 ```css
 /* Grid items appear in sequence */
@@ -1148,7 +1197,8 @@ React.useEffect(function() {
 .sitemap-list__item:nth-child(2) { animation-delay: 0.1s; }
 .sitemap-list__item:nth-child(3) { animation-delay: 0.15s; }
 /* ... etc */
-```
+
+```text
 
 ---
 
@@ -1156,15 +1206,16 @@ React.useEffect(function() {
 
 **Priority Level:** 🔵 LOW
 
-#### Current State
+#### Current State (14)
 
-**Existing Animations:**
+## Existing Animations (14)
+
 - Likely minimal
 - Focus on documentation
 
-#### Recommendations
+#### Recommendations (14)
 
-**1. Code Block Copy Feedback (1 hour)**
+## 1. Code Block Copy Feedback (1 hour)
 
 ```css
 /* Copy success animation */
@@ -1185,7 +1236,8 @@ React.useEffect(function() {
 .copy-button.copied {
   animation: copySuccess 0.4s ease-out;
 }
-```
+
+```text
 
 ---
 
@@ -1197,7 +1249,8 @@ React.useEffect(function() {
 
 **Brand Alignment:** ⭐⭐⭐⭐⭐ (Perfect fit)
 
-**Description:** Pages load like a terminal booting up with scan lines and progressive reveal.
+**Description:** Pages load like a terminal booting up with scan lines and
+progressive reveal.
 
 **Implementation:**
 
@@ -1256,7 +1309,8 @@ React.useEffect(function() {
 .terminal-text {
   animation: terminalReveal 0.8s steps(20) forwards;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -1267,7 +1321,8 @@ React.createElement(
   { className: "page-load-overlay" },
   // Scan line renders automatically via ::before
 )
-```
+
+```text
 
 **Performance:** Low impact (single div with pseudo-element)
 
@@ -1277,7 +1332,8 @@ React.createElement(
 
 **Brand Alignment:** ⭐⭐⭐⭐⭐ (Perfect fit)
 
-**Description:** CTAs and important elements flicker like real neon signs with random interruptions.
+**Description:** CTAs and important elements flicker like real neon signs with
+random interruptions.
 
 **Implementation:**
 
@@ -1285,7 +1341,7 @@ React.createElement(
 /* Realistic Neon Flicker */
 @keyframes neonFlicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    text-shadow: 
+    text-shadow:
       0 0 10px var(--wp--preset--color--neon-pink),
       0 0 20px var(--wp--preset--color--neon-pink),
       0 0 30px var(--wp--preset--color--neon-pink),
@@ -1305,12 +1361,12 @@ React.createElement(
 /* Continuous Neon Glow (no flicker) */
 @keyframes neonGlow {
   0%, 100% {
-    text-shadow: 
+    text-shadow:
       0 0 10px var(--wp--preset--color--neon-pink),
       0 0 20px var(--wp--preset--color--neon-pink);
   }
   50% {
-    text-shadow: 
+    text-shadow:
       0 0 15px var(--wp--preset--color--neon-pink),
       0 0 30px var(--wp--preset--color--neon-pink),
       0 0 40px var(--wp--preset--color--neon-pink);
@@ -1320,23 +1376,26 @@ React.createElement(
 .neon-glow {
   animation: neonGlow 2s ease-in-out infinite;
 }
-```
+
+```text
 
 **Usage:**
 
 ```tsx
 // "LIVE NOW" indicators
-React.createElement("span", { 
-  className: "badge neon-flicker" 
+React.createElement("span", {
+  className: "badge neon-flicker"
 }, "LIVE NOW")
 
 // CTA buttons
-React.createElement("button", { 
-  className: "button button--primary neon-glow" 
+React.createElement("button", {
+  className: "button button--primary neon-glow"
 }, "Unlock the Draft")
-```
 
-**Performance:** Moderate (text-shadow can be GPU-intensive, limit to 2-3 elements)
+```text
+
+**Performance:** Moderate (text-shadow can be GPU-intensive, limit to 2-3
+elements)
 
 ---
 
@@ -1344,7 +1403,8 @@ React.createElement("button", {
 
 **Brand Alignment:** ⭐⭐⭐⭐ (Strong fit)
 
-**Description:** RGB split chromatic aberration effect on hover for playful moments.
+**Description:** RGB split chromatic aberration effect on hover for playful
+moments.
 
 **Implementation:**
 
@@ -1352,19 +1412,19 @@ React.createElement("button", {
 /* RGB Split Glitch */
 @keyframes rgbSplit {
   0%, 100% {
-    text-shadow: 
+    text-shadow:
       -2px 0 0 rgba(255, 0, 0, 0.7),
       2px 0 0 rgba(0, 255, 255, 0.7);
     transform: translate(0, 0);
   }
   33% {
-    text-shadow: 
+    text-shadow:
       2px 1px 0 rgba(255, 0, 0, 0.7),
       -2px -1px 0 rgba(0, 255, 255, 0.7);
     transform: translate(-1px, 1px);
   }
   66% {
-    text-shadow: 
+    text-shadow:
       -1px -1px 0 rgba(255, 0, 0, 0.7),
       1px 1px 0 rgba(0, 255, 255, 0.7);
     transform: translate(1px, -1px);
@@ -1379,21 +1439,23 @@ React.createElement("button", {
 .glitch-static {
   animation: rgbSplit 0.5s steps(2) infinite;
 }
-```
+
+```text
 
 **Usage:**
 
 ```tsx
 // Interactive headings
-React.createElement("h2", { 
-  className: "heading glitch-on-hover" 
+React.createElement("h2", {
+  className: "heading glitch-on-hover"
 }, "About the Author")
 
 // Error messages
-React.createElement("p", { 
-  className: "error-message glitch-static" 
+React.createElement("p", {
+  className: "error-message glitch-static"
 }, "ERROR 404: Page Not Found")
-```
+
+```text
 
 **Performance:** Low (text-shadow with transform, very efficient)
 
@@ -1403,7 +1465,8 @@ React.createElement("p", {
 
 **Brand Alignment:** ⭐⭐⭐⭐ (Strong fit)
 
-**Description:** Content materialises with holographic color shift and neon trail.
+**Description:** Content materialises with holographic color shift and neon
+trail.
 
 **Implementation:**
 
@@ -1467,18 +1530,21 @@ React.createElement("p", {
 .holographic-reveal.in-view::after {
   animation: neonTrail 1s ease-out;
 }
-```
+
+```text
 
 **Usage:**
 
 ```tsx
 // Section reveals on scroll
-React.createElement("section", { 
-  className: "section holographic-reveal" 
+React.createElement("section", {
+  className: "section holographic-reveal"
 }, /* content */)
-```
 
-**Performance:** High GPU usage (filter + blur), use sparingly (1-2 per viewport)
+```text
+
+**Performance:** High GPU usage (filter + blur), use sparingly (1-2 per
+viewport)
 
 ---
 
@@ -1486,7 +1552,8 @@ React.createElement("section", {
 
 **Brand Alignment:** ⭐⭐⭐ (Good fit for desktop)
 
-**Description:** Neon pink trail follows cursor on desktop, ripple on mobile tap.
+**Description:** Neon pink trail follows cursor on desktop, ripple on mobile
+tap.
 
 **Implementation:**
 
@@ -1536,7 +1603,8 @@ React.createElement("section", {
   box-shadow: 0 0 20px rgba(255, 16, 240, 0.6);
   animation: tapRipple 0.6s ease-out forwards;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -1544,30 +1612,30 @@ React.createElement("section", {
 // Desktop cursor trail
 React.useEffect(function() {
   if (window.innerWidth < 1024) return; // Desktop only
-  
+
   var trails = [];
   var maxTrails = 10;
-  
+
   function handleMouseMove(e) {
     var trail = document.createElement('div');
     trail.className = 'cursor-trail-particle';
     trail.style.left = e.clientX + 'px';
     trail.style.top = e.clientY + 'px';
     document.body.appendChild(trail);
-    
+
     trails.push(trail);
     if (trails.length > maxTrails) {
       var old = trails.shift();
       if (old && old.parentNode) old.parentNode.removeChild(old);
     }
-    
+
     setTimeout(function() {
       if (trail.parentNode) trail.parentNode.removeChild(trail);
     }, 600);
   }
-  
+
   document.addEventListener('mousemove', handleMouseMove);
-  
+
   return function() {
     document.removeEventListener('mousemove', handleMouseMove);
   };
@@ -1580,16 +1648,18 @@ function handleTap(e) {
   ripple.style.left = (e.touches[0].clientX - 25) + 'px';
   ripple.style.top = (e.touches[0].clientY - 25) + 'px';
   document.body.appendChild(ripple);
-  
+
   setTimeout(function() {
     if (ripple.parentNode) ripple.parentNode.removeChild(ripple);
   }, 600);
 }
 
 document.addEventListener('touchstart', handleTap);
-```
 
-**Performance:** Can be intensive with many particles. Throttle mousemove to 60fps max.
+```text
+
+**Performance:** Can be intensive with many particles. Throttle mousemove to
+60fps max.
 
 ---
 
@@ -1600,6 +1670,7 @@ document.addEventListener('touchstart', handleTap);
 **Purpose:** Terminal-style character-by-character text reveal
 
 **Props:**
+
 - `text`: string - The text to reveal
 - `speed`: number - Milliseconds per character (default: 50)
 - `delay`: number - Milliseconds before starting (default: 0)
@@ -1615,18 +1686,18 @@ function TypewriterText(props) {
   var delay = props.delay || 0;
   var showCursor = props.cursor !== false;
   var onComplete = props.onComplete;
-  
+
   var [displayedText, setDisplayedText] = React.useState('');
   var [currentIndex, setCurrentIndex] = React.useState(0);
   var [isComplete, setIsComplete] = React.useState(false);
-  
+
   React.useEffect(function() {
     if (currentIndex < text.length) {
       var timeout = setTimeout(function() {
         setDisplayedText(text.substring(0, currentIndex + 1));
         setCurrentIndex(currentIndex + 1);
       }, currentIndex === 0 ? delay : speed);
-      
+
       return function() {
         clearTimeout(timeout);
       };
@@ -1635,14 +1706,16 @@ function TypewriterText(props) {
       if (onComplete) onComplete();
     }
   }, [currentIndex, text, speed, delay, isComplete, onComplete]);
-  
+
   return React.createElement(
     "span",
-    { className: "typewriter-text" + (showCursor && !isComplete ? " typewriter-text--cursor" : "") },
+{ className: "typewriter-text" + (showCursor && !isComplete ? "
+typewriter-text--cursor" : "") },
     displayedText
   );
 }
-```
+
+```text
 
 **CSS:**
 
@@ -1661,7 +1734,8 @@ function TypewriterText(props) {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
 }
-```
+
+```text
 
 **Usage:**
 
@@ -1675,7 +1749,8 @@ React.createElement(TypewriterText, {
     console.log('Typewriter complete');
   }
 })
-```
+
+```text
 
 ---
 
@@ -1684,6 +1759,7 @@ React.createElement(TypewriterText, {
 **Purpose:** Wraps any element with configurable neon glow pulse
 
 **Props:**
+
 - `children`: ReactNode - Content to wrap
 - `color`: 'pink' | 'yellow' | 'violet' - Glow color (default: 'pink')
 - `intensity`: 'low' | 'medium' | 'high' - Glow strength (default: 'medium')
@@ -1699,24 +1775,25 @@ function NeonPulseWrapper(props) {
   var intensity = props.intensity || 'medium';
   var speed = props.speed || 2;
   var continuous = props.continuous !== false;
-  
+
   var colorMap = {
     pink: 'var(--wp--preset--color--neon-pink)',
     yellow: 'var(--wp--preset--color--neon-yellow)',
     violet: 'var(--wp--preset--color--uv-violet)'
   };
-  
+
   var intensityMap = {
     low: { from: '10px', to: '20px' },
     medium: { from: '15px', to: '30px' },
     high: { from: '20px', to: '40px' }
   };
-  
+
   var glowColor = colorMap[color];
   var glowRange = intensityMap[intensity];
-  
-  var className = 'neon-pulse-wrapper neon-pulse-wrapper--' + color + ' neon-pulse-wrapper--' + intensity;
-  
+
+var className = 'neon-pulse-wrapper neon-pulse-wrapper--' + color + '
+neon-pulse-wrapper--' + intensity;
+
   var style = {
     '--glow-color': glowColor,
     '--glow-from': glowRange.from,
@@ -1724,14 +1801,15 @@ function NeonPulseWrapper(props) {
     '--glow-speed': speed + 's',
     animationIterationCount: continuous ? 'infinite' : '1'
   };
-  
+
   return React.createElement(
     "div",
     { className: className, style: style },
     children
   );
 }
-```
+
+```text
 
 **CSS:**
 
@@ -1748,7 +1826,8 @@ function NeonPulseWrapper(props) {
 .neon-pulse-wrapper {
   animation: neonPulseGlow var(--glow-speed) ease-in-out;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -1758,15 +1837,18 @@ React.createElement(
   { color: 'pink', intensity: 'high', speed: 3 },
   React.createElement("button", { className: "button" }, "Click me")
 )
-```
+
+```text
 
 ---
 
 ### 3. ScrollReveal Component
 
-**Purpose:** Reveals children when scrolled into viewport with configurable animation
+**Purpose:** Reveals children when scrolled into viewport with configurable
+animation
 
 **Props:**
+
 - `children`: ReactNode - Content to reveal
 - `animation`: 'fade' | 'slide-up' | 'slide-left' | 'slide-right' | 'scale' - Animation type (default: 'fade')
 - `delay`: number - Delay in milliseconds (default: 0)
@@ -1782,14 +1864,14 @@ function ScrollReveal(props) {
   var delay = props.delay || 0;
   var threshold = props.threshold || 0.1;
   var once = props.once !== false;
-  
+
   var [isVisible, setIsVisible] = React.useState(false);
   var elementRef = React.useRef(null);
-  
+
   React.useEffect(function() {
     var element = elementRef.current;
     if (!element) return;
-    
+
     var observer = new IntersectionObserver(
       function(entries) {
         entries.forEach(function(entry) {
@@ -1797,7 +1879,7 @@ function ScrollReveal(props) {
             setTimeout(function() {
               setIsVisible(true);
             }, delay);
-            
+
             if (once) {
               observer.unobserve(element);
             }
@@ -1808,23 +1890,25 @@ function ScrollReveal(props) {
       },
       { threshold: threshold }
     );
-    
+
     observer.observe(element);
-    
+
     return function() {
       observer.disconnect();
     };
   }, [delay, threshold, once]);
-  
-  var className = 'scroll-reveal scroll-reveal--' + animation + (isVisible ? ' scroll-reveal--visible' : '');
-  
+
+var className = 'scroll-reveal scroll-reveal--' + animation + (isVisible ? '
+scroll-reveal--visible' : '');
+
   return React.createElement(
     "div",
     { ref: elementRef, className: className },
     children
   );
 }
-```
+
+```text
 
 **CSS:**
 
@@ -1868,7 +1952,8 @@ function ScrollReveal(props) {
   opacity: 1;
   transform: scale(1);
 }
-```
+
+```text
 
 **Usage:**
 
@@ -1878,7 +1963,8 @@ React.createElement(
   { animation: 'slide-up', delay: 200, threshold: 0.2 },
   React.createElement("div", { className: "feature-card" }, "Content")
 )
-```
+
+```text
 
 ---
 
@@ -1887,6 +1973,7 @@ React.createElement(
 **Purpose:** Applies RGB split glitch effect on hover
 
 **Props:**
+
 - `children`: ReactNode - Content to glitch
 - `intensity`: number - Pixel offset for RGB split (default: 2)
 - `duration`: number - Animation duration in milliseconds (default: 300)
@@ -1900,9 +1987,9 @@ function GlitchHover(props) {
   var intensity = props.intensity || 2;
   var duration = props.duration || 300;
   var trigger = props.trigger || 'hover';
-  
+
   var [isGlitching, setIsGlitching] = React.useState(trigger === 'always');
-  
+
   function handleMouseEnter() {
     if (trigger === 'hover') {
       setIsGlitching(true);
@@ -1911,7 +1998,7 @@ function GlitchHover(props) {
       }, duration);
     }
   }
-  
+
   function handleClick() {
     if (trigger === 'click') {
       setIsGlitching(true);
@@ -1920,18 +2007,18 @@ function GlitchHover(props) {
       }, duration);
     }
   }
-  
+
   var className = 'glitch-hover' + (isGlitching ? ' glitch-hover--active' : '');
-  
+
   var style = {
     '--glitch-intensity': intensity + 'px',
     '--glitch-duration': duration + 'ms'
   };
-  
+
   return React.createElement(
     "div",
-    { 
-      className: className, 
+    {
+      className: className,
       style: style,
       onMouseEnter: trigger === 'hover' ? handleMouseEnter : undefined,
       onClick: trigger === 'click' ? handleClick : undefined
@@ -1939,26 +2026,27 @@ function GlitchHover(props) {
     children
   );
 }
-```
+
+```text
 
 **CSS:**
 
 ```css
 @keyframes rgbSplitGlitch {
   0%, 100% {
-    text-shadow: 
+    text-shadow:
       calc(-1 * var(--glitch-intensity)) 0 0 rgba(255, 0, 0, 0.7),
       var(--glitch-intensity) 0 0 rgba(0, 255, 255, 0.7);
     transform: translate(0, 0);
   }
   33% {
-    text-shadow: 
+    text-shadow:
       var(--glitch-intensity) 1px 0 rgba(255, 0, 0, 0.7),
       calc(-1 * var(--glitch-intensity)) -1px 0 rgba(0, 255, 255, 0.7);
     transform: translate(-1px, 1px);
   }
   66% {
-    text-shadow: 
+    text-shadow:
       -1px -1px 0 rgba(255, 0, 0, 0.7),
       1px 1px 0 rgba(0, 255, 255, 0.7);
     transform: translate(1px, -1px);
@@ -1968,7 +2056,8 @@ function GlitchHover(props) {
 .glitch-hover--active {
   animation: rgbSplitGlitch var(--glitch-duration) ease-in-out;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -1978,7 +2067,8 @@ React.createElement(
   { intensity: 3, duration: 400, trigger: 'hover' },
   React.createElement("h2", {}, "Glitch on Hover")
 )
-```
+
+```text
 
 ---
 
@@ -1987,6 +2077,7 @@ React.createElement(
 **Purpose:** Adds animated retro scan lines across element
 
 **Props:**
+
 - `speed`: number - Duration in seconds (default: 2)
 - `opacity`: number - Scan line opacity 0-1 (default: 0.3)
 - `color`: string - Scan line color (default: neon pink)
@@ -2000,21 +2091,22 @@ function ScanLineOverlay(props) {
   var opacity = props.opacity || 0.3;
   var color = props.color || 'var(--wp--preset--color--neon-pink)';
   var height = props.height || 20;
-  
+
   var style = {
     '--scan-speed': speed + 's',
     '--scan-opacity': opacity,
     '--scan-color': color,
     '--scan-height': height + 'px'
   };
-  
-  return React.createElement("div", { 
+
+  return React.createElement("div", {
     className: "scan-line-overlay",
     style: style,
     "aria-hidden": "true"
   });
 }
-```
+
+```text
 
 **CSS:**
 
@@ -2053,7 +2145,8 @@ function ScanLineOverlay(props) {
   box-shadow: 0 0 20px var(--scan-color);
   animation: scanLineMove var(--scan-speed) linear infinite;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -2065,29 +2158,37 @@ React.createElement(ScanLineOverlay, {
   color: 'var(--wp--preset--color--neon-pink)',
   height: 15
 })
-```
+
+```text
 
 ---
 
 ## 📅 Implementation Roadmap
 
 ### Phase 1: Critical Fixes & Quick Wins (Week 1)
+
 **Duration:** 8-12 hours
 
 **Priority:** 🔴 CRITICAL
 
 **Tasks:**
+
 1. ✅ Implement neon pulse CTA on all primary buttons (2h)
-2. ✅ Add hero section animations to homepage (4h)
+
+1. ✅ Add hero section animations to homepage (4h)
+
    - Typewriter title reveal
    - Holographic "acid" text
    - Float animation on book cover
    - Fade-in content sequence
-3. ✅ Add form input focus glow effects (1h)
-4. ✅ Implement success/error state animations (1h)
-5. ✅ Test accessibility compliance (prefers-reduced-motion) (2h)
+1. ✅ Add form input focus glow effects (1h)
+
+1. ✅ Implement success/error state animations (1h)
+
+1. ✅ Test accessibility compliance (prefers-reduced-motion) (2h)
 
 **Deliverables:**
+
 - Homepage with full animation suite
 - All CTAs have neon pulse
 - Forms have enhanced interactions
@@ -2096,28 +2197,35 @@ React.createElement(ScanLineOverlay, {
 ---
 
 ### Phase 2: High-Priority Pages (Week 2)
+
 **Duration:** 12-16 hours
 
 **Priority:** 🟡 HIGH
 
 **Tasks:**
+
 1. ✅ The Book page animations (5h)
+
    - Book cover glow
    - Feature card stagger reveals
    - Testimonial carousel
-2. ✅ Draft viewer animations (4h)
+1. ✅ Draft viewer animations (4h)
+
    - Chapter list hover effects
    - Lock icon pulse
    - Reading progress bar
-3. ✅ About page timeline (3h)
+1. ✅ About page timeline (3h)
+
    - Progressive line draw
    - Staggered event reveals
    - Enhanced skill card hovers
-4. ✅ Waitlist page success animation (2h)
+1. ✅ Waitlist page success animation (2h)
+
    - Checkmark reveal
    - Confetti burst
 
 **Deliverables:**
+
 - 4 key pages with full animation coverage
 - Scroll-triggered reveals working
 - All animations themed consistently
@@ -2125,20 +2233,29 @@ React.createElement(ScanLineOverlay, {
 ---
 
 ### Phase 3: Component Library (Week 3)
+
 **Duration:** 16-20 hours
 
 **Priority:** 🟢 MEDIUM
 
 **Tasks:**
+
 1. ✅ Build TypewriterText component (4h)
-2. ✅ Build NeonPulseWrapper component (3h)
-3. ✅ Build ScrollReveal component (4h)
-4. ✅ Build GlitchHover component (2h)
-5. ✅ Build ScanLineOverlay component (2h)
-6. ✅ Document all components (3h)
-7. ✅ Create usage examples (2h)
+
+1. ✅ Build NeonPulseWrapper component (3h)
+
+1. ✅ Build ScrollReveal component (4h)
+
+1. ✅ Build GlitchHover component (2h)
+
+1. ✅ Build ScanLineOverlay component (2h)
+
+1. ✅ Document all components (3h)
+
+1. ✅ Create usage examples (2h)
 
 **Deliverables:**
+
 - 5 reusable animation components
 - Full documentation with examples
 - Components added to style guide page
@@ -2146,18 +2263,25 @@ React.createElement(ScanLineOverlay, {
 ---
 
 ### Phase 4: Delight Moments & Polish (Week 4)
+
 **Duration:** 8-12 hours
 
 **Priority:** 🔵 LOW
 
 **Tasks:**
+
 1. ✅ Cursor trail effect (desktop) (3h)
-2. ✅ Tap ripple effect (mobile) (2h)
-3. ✅ Terminal boot sequence on page load (3h)
-4. ✅ Easter egg glitch effects (2h)
-5. ✅ Performance optimization (2h)
+
+1. ✅ Tap ripple effect (mobile) (2h)
+
+1. ✅ Terminal boot sequence on page load (3h)
+
+1. ✅ Easter egg glitch effects (2h)
+
+1. ✅ Performance optimization (2h)
 
 **Deliverables:**
+
 - Full 80s neon CLI aesthetic realized
 - Performance budget met
 - Playful micro-interactions throughout
@@ -2178,22 +2302,29 @@ React.createElement(ScanLineOverlay, {
 ### Monitoring Strategy
 
 **Metrics to Track:**
+
 - Frame rate (target: 60fps)
 - Layout shift (CLS < 0.1)
 - Time to interactive (TTI < 3s)
 - Animation jank (0 dropped frames)
 
 **Tools:**
+
 - Chrome DevTools Performance panel
 - Lighthouse audits
 - Real device testing (iOS/Android)
 
 **Testing Protocol:**
+
 1. Test on low-end device (iPhone 8, Android mid-range)
-2. Throttle CPU 4x in DevTools
-3. Monitor frame rate during scrolling
-4. Check for layout thrashing
-5. Verify animations don't block main thread
+
+1. Throttle CPU 4x in DevTools
+
+1. Monitor frame rate during scrolling
+
+1. Check for layout thrashing
+
+1. Verify animations don't block main thread
 
 ---
 
@@ -2204,11 +2335,13 @@ React.createElement(ScanLineOverlay, {
 **Current Status:** ✅ FULLY IMPLEMENTED
 
 **Coverage:**
+
 - All 23 keyframe animations have `prefers-reduced-motion` fallbacks
 - Transitions reduced to 0.01ms when motion reduced
 - Page remains fully functional without animations
 
 **Testing Checklist:**
+
 - [ ] Enable "Reduce Motion" in macOS/iOS settings
 - [ ] Enable "Remove animations" in Windows settings
 - [ ] Test with screen reader (NVDA/JAWS/VoiceOver)
@@ -2237,12 +2370,14 @@ React.createElement(ScanLineOverlay, {
 ### Qualitative Metrics
 
 **Brand Perception:**
+
 - Site feels more "80s retro" ✅
 - Neon CLI aesthetic is clear ✅
 - Playful and energetic vibe ✅
 - Professional yet fun ✅
 
 **User Experience:**
+
 - Clear visual hierarchy ✅
 - Delightful micro-interactions ✅
 - Smooth, non-jarring animations ✅
@@ -2253,19 +2388,24 @@ React.createElement(ScanLineOverlay, {
 ## 📝 Next Steps
 
 1. **Review this audit report** with stakeholders
-2. **Prioritize recommendations** based on business goals
-3. **Begin Phase 1** implementation (homepage animations)
-4. **Test on real devices** after each phase
-5. **Gather user feedback** on animation preferences
-6. **Iterate based on metrics** and feedback
+
+1. **Prioritize recommendations** based on business goals
+
+1. **Begin Phase 1** implementation (homepage animations)
+
+1. **Test on real devices** after each phase
+
+1. **Gather user feedback** on animation preferences
+
+1. **Iterate based on metrics** and feedback
 
 ---
 
-**Report Completed:** March 12, 2026  
-**Total Analysis Time:** 3 hours  
-**Pages Analyzed:** 15  
-**Animations Proposed:** 50+  
-**Components Designed:** 5  
+**Report Completed:** March 12, 2026
+**Total Analysis Time:** 3 hours
+**Pages Analyzed:** 15
+**Animations Proposed:** 50+
+**Components Designed:** 5
 **Estimated Implementation:** 44-60 hours over 4 weeks
 
 **Status:** ✅ AUDIT COMPLETE - Ready for task extraction

@@ -9,6 +9,7 @@
 ## Direction received
 
 Expand the gear page with:
+
 - Professional makeup kit structure from attached reference (onlinemakeupacademy.com)
 - 5 recommended brands: L'Oreal, Revlon, Essence, Make-Up Studio, Maybelline
 - Kit wisdom section
@@ -32,6 +33,7 @@ Expanded from 4 categories to 8:
 | Festival survival | 4 | Existing (kept) |
 
 Added:
+
 - `brands[]` array with 5 recommended brands (name, tagline, URL, specialty, featured product)
 - `kitWisdom[]` array with 8 practical tips
 - `resourcesCta` object linking to `/about/resources`
@@ -39,6 +41,7 @@ Added:
 ### Component (`/components/pages/gear/GearPage.tsx`)
 
 Rewritten with React.createElement for bundler safety. New sections:
+
 - Brands grid (responsive 1/2/3 columns)
 - Kit wisdom list
 - Resources CTA banner
@@ -46,6 +49,7 @@ Rewritten with React.createElement for bundler safety. New sections:
 ### CSS (`/styles/blocks/gear-page.css`)
 
 Added BEM styles for:
+
 - `.gear-brand-card` (card with name, tagline, specialty, featured product, website link)
 - `.gear-wisdom-list` / `.gear-wisdom-item`
 - `.gear-cta-card` (neon green bordered CTA linking to resources)

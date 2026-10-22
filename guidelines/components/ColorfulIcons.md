@@ -1,12 +1,13 @@
 # ColorfulIcons Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
-Custom animated SVG icon system representing core brand values with sophisticated gradients.
+Custom animated SVG icon system representing core brand values with
+sophisticated gradients.
 
-**File:** `/components/common/ColorfulIcons.tsx`  
-**WordPress Equivalent:** Custom SVG blocks or icon plugins  
+**File:** `/components/common/ColorfulIcons.tsx`
+**WordPress Equivalent:** Custom SVG blocks or icon plugins
 **Used In:** WhySection, feature showcases, brand storytelling
 
 ---
@@ -14,6 +15,7 @@ Custom animated SVG icon system representing core brand values with sophisticate
 ## Purpose
 
 ColorfulIcons is a **custom brand iconography system** that provides:
+
 - Three purpose-built icons representing core values
 - Sophisticated multi-gradient color systems
 - CSS-based animations for living, breathing effects
@@ -22,6 +24,7 @@ ColorfulIcons is a **custom brand iconography system** that provides:
 - Accessibility-friendly SVG structure
 
 **Available Icons:**
+
 - **ShineIcon** - Radiant star representing "Make People Shine"
 - **JoyIcon** - Paint palette with heart representing "Brings Me Joy"
 - **GrowthIcon** - Flowering plant representing "To Keep Growing"
@@ -33,8 +36,10 @@ ColorfulIcons is a **custom brand iconography system** that provides:
 ### Import Statement
 
 ```tsx
-import { ShineIcon, JoyIcon, GrowthIcon } from './components/common/ColorfulIcons';
-```
+import { ShineIcon, JoyIcon, GrowthIcon } from
+'./components/common/ColorfulIcons';
+
+```text
 
 ### Basic Usage
 
@@ -52,7 +57,8 @@ import { ShineIcon, JoyIcon, GrowthIcon } from './components/common/ColorfulIcon
 // With custom classes
 <ShineIcon className="text-pink-500" />
 <JoyIcon className="w-20 h-20" />  {/* Custom size overrides size prop */}
-```
+
+```text
 
 ---
 
@@ -61,19 +67,22 @@ import { ShineIcon, JoyIcon, GrowthIcon } from './components/common/ColorfulIcon
 ```typescript
 interface IconProps {
   /**
+
    * Size variant affecting icon dimensions
    * @default 'md'
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
+
    * Additional CSS classes for styling overrides
    * If className includes 'w-' classes, size prop is ignored
    * @default ''
    */
   className?: string;
 }
-```
+
+```text
 
 ### Size Mapping
 
@@ -83,7 +92,8 @@ const sizeMap = {
   md: 'w-6 h-6',    // 24×24px - Default, most common use
   lg: 'w-8 h-8',    // 32×32px - Featured icons, hero sections
 };
-```
+
+```text
 
 ---
 
@@ -94,23 +104,27 @@ const sizeMap = {
 **Concept:** Radiant star representing "Make People Shine"
 
 **Visual Elements:**
+
 - Central radial gradient core (gold → deep purple)
 - Eight directional sparkle rays (4 cardinal + 4 diagonal)
 - Four animated ambient sparkles with varying opacity cycles
 - Dual gradient systems for ray complexity
 
 **Color Story:**
+
 - **Gold center** (#FFD700) - Precious/valuable nature
 - **Deep purple** (#4B0082) - Mystery and transformation
 - **Coral rays** (#FF6B6B → #4ECDC4) - Warmth and energy
 - **Blue-yellow rays** (#45B7D1 → #F9CA24) - Creativity
 
 **Animation:**
+
 - 4 sparkles pulse at different rates (1.5s-2.5s)
 - Opacity cycles: 0.5-1.0 for breathing effect
 - Infinite loop for continuous sparkle
 
 **Usage Example:**
+
 ```tsx
 <div className="flex justify-center mb-fluid-md">
   <ShineIcon size="lg" className="text-shadow-sm" />
@@ -119,9 +133,11 @@ const sizeMap = {
 <p className="text-center">
   Bringing out natural beauty and confidence in everyone I work with
 </p>
-```
+
+```text
 
 **SVG Structure:**
+
 ```tsx
 <svg viewBox="0 0 64 64" fill="none">
   <defs>
@@ -134,7 +150,8 @@ const sizeMap = {
   <path /> × 4                                {/* Diagonal rays */}
   <circle /> × 4                              {/* Animated sparkles */}
 </svg>
-```
+
+```text
 
 ---
 
@@ -143,6 +160,7 @@ const sizeMap = {
 **Concept:** Paint palette with heart representing "Brings Me Joy"
 
 **Visual Elements:**
+
 - Paint palette base with 6-color linear gradient
 - Heart shape with warm gradient fill (hot pink → gold)
 - Realistic paintbrush with multi-colored bristles (6 colors)
@@ -151,17 +169,20 @@ const sizeMap = {
 - Two animated sparkles with offset timing
 
 **Color Story:**
+
 - **Warm pinks** (#FF69B4) - Love and passion
 - **Gold** (#FFD700) - Joy and celebration
 - **Rainbow palette** (#FF6B6B → #F7DC6F) - Unlimited creativity
 - **Paint drops** - Messy, authentic joy of creation
 
 **Animation:**
+
 - 2 sparkles pulse at different rates (2s, 2.5s)
 - Opacity cycles: 0.6-1.0 for subtle effect
 - Infinite loop for continuous sparkle
 
 **Usage Example:**
+
 ```tsx
 <div className="flex justify-center mb-fluid-md">
   <JoyIcon size="lg" />
@@ -170,9 +191,11 @@ const sizeMap = {
 <p className="text-center">
   The creative process and seeing transformation brings pure happiness
 </p>
-```
+
+```text
 
 **SVG Structure:**
+
 ```tsx
 <svg viewBox="0 0 64 64" fill="none">
   <defs>
@@ -189,7 +212,8 @@ const sizeMap = {
   <circle /> × 3                              {/* Paint drops */}
   <circle /> × 2                              {/* Animated sparkles */}
 </svg>
-```
+
+```text
 
 ---
 
@@ -198,6 +222,7 @@ const sizeMap = {
 **Concept:** Flowering plant representing "To Keep Growing"
 
 **Visual Elements:**
+
 - Growth arrow with 5-stop gradient pointing upward
 - Flowering bloom with central core and 4 petal circles
 - Progressive stem with growth stage segments
@@ -206,16 +231,19 @@ const sizeMap = {
 - Three animated sparkles representing transformation
 
 **Color Story:**
+
 - **Green spectrum** (#2E7D32 → #A5D6A7) - Growth, nature, life
 - **Yellow-orange bloom** (#FFD54F → #FF7043) - Achievement, enlightenment
 - **Brown roots** (#8D6E63) - Foundation and grounding
 
 **Animation:**
+
 - 3 sparkles pulse at different rates (1.8s, 2.2s, 2.8s)
 - Opacity cycles: 0.6-1.0 for continuous transformation
 - Infinite loop representing ongoing growth
 
 **Usage Example:**
+
 ```tsx
 <div className="flex justify-center mb-fluid-md">
   <GrowthIcon size="lg" />
@@ -224,9 +252,11 @@ const sizeMap = {
 <p className="text-center">
   Continuously learning new techniques and evolving my craft
 </p>
-```
+
+```text
 
 **SVG Structure:**
+
 ```tsx
 <svg viewBox="0 0 64 64" fill="none">
   <defs>
@@ -243,7 +273,8 @@ const sizeMap = {
   <path /> × 3                                {/* Root system */}
   <circle /> × 3                              {/* Animated sparkles */}
 </svg>
-```
+
+```text
 
 ---
 
@@ -252,6 +283,7 @@ const sizeMap = {
 ### Small (sm: 16×16px)
 
 **Use Cases:**
+
 - Inline text icons
 - Compact UI elements
 - Mobile navigation
@@ -262,11 +294,13 @@ const sizeMap = {
   <ShineIcon size="sm" />
   Feature text
 </span>
-```
+
+```text
 
 ### Medium (md: 24×24px) - Default
 
 **Use Cases:**
+
 - Card headers
 - Feature lists
 - Button icons
@@ -277,11 +311,13 @@ const sizeMap = {
   <JoyIcon size="md" />
   <span>Card Title</span>
 </div>
-```
+
+```text
 
 ### Large (lg: 32×32px)
 
 **Use Cases:**
+
 - Hero sections
 - Featured content
 - Section headers
@@ -292,7 +328,8 @@ const sizeMap = {
   <GrowthIcon size="lg" className="mx-auto mb-4" />
   <h3>Section Heading</h3>
 </div>
-```
+
+```text
 
 ### Custom Sizes
 
@@ -304,7 +341,8 @@ const sizeMap = {
 
 // Responsive sizing
 <ShineIcon className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16" />
-```
+
+```text
 
 ---
 
@@ -313,24 +351,28 @@ const sizeMap = {
 ### Example 1: Why Section Cards
 
 ```tsx
-import { ShineIcon, JoyIcon, GrowthIcon } from './components/common/ColorfulIcons';
+import { ShineIcon, JoyIcon, GrowthIcon } from
+'./components/common/ColorfulIcons';
 
 function WhySection() {
   const reasons = [
     {
       icon: <ShineIcon size="lg" />,
       title: 'Make People Shine',
-      description: 'Bringing out natural beauty and confidence in everyone I work with. Every person deserves to feel radiant and beautiful.'
+description: 'Bringing out natural beauty and confidence in everyone I work
+with. Every person deserves to feel radiant and beautiful.'
     },
     {
       icon: <JoyIcon size="lg" />,
       title: 'Brings Me Joy',
-      description: 'The creative process and seeing transformation brings pure happiness. Makeup is my art form and my passion.'
+description: 'The creative process and seeing transformation brings pure
+happiness. Makeup is my art form and my passion.'
     },
     {
       icon: <GrowthIcon size="lg" />,
       title: 'To Keep Growing',
-      description: 'Continuously learning new techniques and evolving my craft. Growth is essential to excellence.'
+description: 'Continuously learning new techniques and evolving my craft. Growth
+is essential to excellence.'
     }
   ];
 
@@ -340,20 +382,22 @@ function WhySection() {
       gap="lg"
     >
       {reasons.map((reason, index) => (
-        <div 
+        <div
           key={index}
-          className="bg-white/80 backdrop-blur-sm rounded-xl p-fluid-lg border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300"
+className="bg-white/80 backdrop-blur-sm rounded-xl p-fluid-lg border
+border-white/50 shadow-lg hover:shadow-xl transition-all duration-300"
         >
           {/* Icon */}
           <div className="flex justify-center mb-fluid-md">
             {reason.icon}
           </div>
-          
+
           {/* Title */}
-          <h3 className="text-card-h3 font-heading font-bold text-gray-800 text-center mb-fluid-sm">
+<h3 className="text-card-h3 font-heading font-bold text-gray-800 text-center
+mb-fluid-sm">
             {reason.title}
           </h3>
-          
+
           {/* Description */}
           <p className="text-body-fluid font-body text-gray-600 text-center">
             {reason.description}
@@ -363,7 +407,8 @@ function WhySection() {
     </ThreeColumnLayout>
   );
 }
-```
+
+```text
 
 ### Example 2: Feature List
 
@@ -390,7 +435,8 @@ function FeatureList() {
     </ul>
   );
 }
-```
+
+```text
 
 ### Example 3: Hero Section Accent
 
@@ -403,11 +449,11 @@ function HeroSection() {
         <div className="mb-fluid-lg">
           <ShineIcon className="w-20 h-20 mx-auto animate-pulse-slow" />
         </div>
-        
+
         <h1 className="text-hero-h1 font-title font-bold text-white mb-fluid-md">
           Ash Shaw Makeup
         </h1>
-        
+
         <p className="text-section-h3 font-body text-white/90">
           Making people shine with colour, energy, and connection
         </p>
@@ -415,7 +461,8 @@ function HeroSection() {
     </section>
   );
 }
-```
+
+```text
 
 ### Example 4: About Page Timeline
 
@@ -443,7 +490,8 @@ function GrowthTimeline() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -461,9 +509,11 @@ function GrowthTimeline() {
     repeatCount="indefinite"    // Loop forever
   />
 </circle>
-```
+
+```text
 
 **Benefits:**
+
 - ✅ Hardware accelerated (60fps smooth)
 - ✅ No JavaScript required (better performance)
 - ✅ Automatic pause when tab inactive (battery saving)
@@ -490,7 +540,8 @@ function GrowthTimeline() {
     animation-iteration-count: 1 !important;
   }
 }
-```
+
+```text
 
 ---
 
@@ -500,51 +551,74 @@ function GrowthTimeline() {
 
 ```css
 /* Gradients */
+
 #shineGradient: #FFD700 → #4B0082        /* Gold to purple */
+
 #rayGradient1: #FF6B6B → #4ECDC4          /* Coral to teal */
+
 #rayGradient2: #45B7D1 → #F9CA24          /* Blue to yellow */
 
 /* Sparkles */
+
 #FFD700 (Gold)
+
 #4ECDC4 (Teal)
+
 #FF6B6B (Coral)
+
 #45B7D1 (Blue)
-```
+
+```text
 
 ### JoyIcon Palette
 
 ```css
 /* Gradients */
-#paletteGradient: 
+
+#paletteGradient
+
   #FF6B6B → #4ECDC4 → #45B7D1 → #FFA07A → #98D8C8 → #F7DC6F
   (6-stop rainbow)
 
 #heartGradient: #FF69B4 → #FFD700        /* Hot pink to gold */
+
 #brushGradient: #8B4513 → #CD853F → #DEB887  /* Wood tones */
 
 /* Bristles (6 colors) */
+
 #E91E63 (Pink)
+
 #9C27B0 (Purple)
+
 #3F51B5 (Indigo)
+
 #2196F3 (Blue)
+
 #00BCD4 (Cyan)
+
 #4CAF50 (Green)
-```
+
+```text
 
 ### GrowthIcon Palette
 
 ```css
 /* Gradients */
-#growthGradient: 
+
+#growthGradient
+
   #2E7D32 → #43A047 → #66BB6A → #81C784 → #A5D6A7
   (5-stop green spectrum)
 
 #flowerGradient: #FFD54F → #FFA726 → #FF7043  /* Warm bloom */
+
 #leafGradient: #4CAF50 → #2E7D32              /* Leaf shading */
 
 /* Roots */
+
 #8D6E63 (Brown)
-```
+
+```text
 
 ---
 
@@ -555,17 +629,19 @@ function GrowthTimeline() {
 ```tsx
 // All icons are decorative, hidden from screen readers
 <div className="flex justify-center">
-  <ShineIcon 
-    size="lg" 
+  <ShineIcon
+    size="lg"
     aria-hidden="true"              // Hide from screen readers
   />
 </div>
 <h3 id="shine-heading">
   Make People Shine                 {/* Screen readers read this */}
 </h3>
-```
+
+```text
 
 **Key Points:**
+
 - Icons are decorative, not semantic
 - Always pair with visible text
 - Text provides meaning, icon adds visual interest
@@ -576,18 +652,20 @@ function GrowthTimeline() {
 ```tsx
 // If icon must convey meaning (rare):
 <button>
-  <ShineIcon 
-    size="sm" 
+  <ShineIcon
+    size="sm"
     role="img"
     aria-label="Make people shine"
   />
   <span className="sr-only">Make people shine</span>
 </button>
-```
+
+```text
 
 ### Keyboard Navigation
 
 Icons are non-interactive by default:
+
 - ✅ No tab stop
 - ✅ No focus management needed
 - ✅ Parent container handles interaction
@@ -595,6 +673,7 @@ Icons are non-interactive by default:
 ### Color Contrast
 
 All icons meet WCAG 2.1 AA standards:
+
 - ✅ Multiple colors ensure visibility
 - ✅ Gradients provide depth without losing contrast
 - ✅ Works on light and dark backgrounds
@@ -615,7 +694,8 @@ All icons meet WCAG 2.1 AA standards:
 .w-12.h-12                            /* 48×48px */
 .w-16.h-16                            /* 64×64px */
 .w-20.h-20                            /* 80×80px */
-```
+
+```text
 
 ### Spacing Around Icons
 
@@ -629,7 +709,8 @@ All icons meet WCAG 2.1 AA standards:
 .gap-2                                /* 0.5rem - Tight */
 .gap-3                                /* 0.75rem - Standard */
 .gap-4                                /* 1rem - Comfortable */
-```
+
+```text
 
 ---
 
@@ -669,7 +750,8 @@ All icons meet WCAG 2.1 AA standards:
   <h3>Heading</h3>
   <p>Content</p>
 </div>
-```
+
+```text
 
 ### ❌ DON'T
 
@@ -696,7 +778,8 @@ All icons meet WCAG 2.1 AA standards:
 <div className="blog-post">
   <ShineIcon />  {/* These icons are for brand values only */}
 </div>
-```
+
+```text
 
 ---
 
@@ -720,37 +803,42 @@ const MemoizedShineIcon = React.memo(ShineIcon);
     </div>
   ))}
 </div>
-```
+
+```text
 
 ### Bundle Size
 
-```
+```text
 ShineIcon:  ~2.1KB minified + gzipped
 JoyIcon:    ~2.3KB minified + gzipped
 GrowthIcon: ~2.4KB minified + gzipped
 Total:      ~6.8KB for all three icons
-```
+
+```text
 
 ---
 
 ## WordPress Comparison
 
-```
+```text
 ColorfulIcons ≈ Custom SVG blocks or SVG icon plugins
 
 Similarities:
+
 - SVG-based graphics
 - Scalable without quality loss
 - Lightweight assets
 
 Differences:
+
 + ColorfulIcons uses multi-gradient systems
 + Built-in CSS animations
 + Purpose-built for brand values
 + Optimized TypeScript/React components
 + Size variants included
 + Consistent with Guidelines.md design system
-```
+
+```text
 
 ---
 
@@ -759,7 +847,7 @@ Differences:
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system overview
-- **[FILE_STRUCTURE.md](../FILE_STRUCTURE.md)** - File organization
+- **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
 - **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
 
@@ -768,15 +856,18 @@ Differences:
 ## Related Components
 
 ### Layout Components
+
 - **[ThreeColumnLayout](../sections/ThreeColumnLayout.md)** - Primary usage context
 - **[WhySection](../sections/WhySection.md)** - Main implementation
 - **[SectionCard](./SectionCard.md)** - Card wrapper for icons
 
 ### Other Icon Systems
+
 - **[@phosphor-icons/react](../overview-icons.md)** - Interface icons (navigation, UI)
 - **[Logo](./Logo.md)** - Brand logo and mark
 
-### Design Tokens
+### Design Tokens (1)
+
 - **[colors.md](../design-tokens/colors.md)** - Color system and gradients
 - **[spacing.md](../design-tokens/spacing.md)** - Icon spacing guidelines
 - **[typography.md](../design-tokens/typography.md)** - Pairing text with icons
@@ -817,7 +908,8 @@ Potential additions to the ColorfulIcons system:
 
 **Status:** ✅ Production Ready
 
-**Need Help?**
+## Need Help
+
 - Icon not displaying? → Check import path
 - Animation issues? → Verify SVG animate support
 - Size problems? → Review size prop vs className

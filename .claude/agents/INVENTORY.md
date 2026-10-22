@@ -1,5 +1,7 @@
 # Agent Inventory — ThisOneTimeOnAcidCom
 
+# Agent Inventory — ThisOneTimeOnAcidCom
+
 **Last Updated**: 2026-10-22  
 **Status**: Phase 2 Governance Documentation  
 **Scope**: 20 agents, portfolio site specialized agents

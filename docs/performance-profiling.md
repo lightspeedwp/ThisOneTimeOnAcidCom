@@ -5,24 +5,28 @@ created: "2026-03-12"
 modified: "2026-03-12"
 version: "1.0.0"
 related_docs:
-  - "/docs/custom-hooks-guide.md"
-  - "/docs/component-composition-guide.md"
-  - "/docs/virtualization-guide.md"
+
+- "/docs/custom-hooks-guide.md"
+- "/docs/component-composition-guide.md"
+- "/docs/virtualization-guide.md"
 ---
 
 # Performance Profiling Guide
 
-**Created:** March 12, 2026  
-**Last Updated:** March 12, 2026  
+**Created:** March 12, 2026
+**Last Updated:** March 12, 2026
 **Status:** Active
 
 ---
 
 ## Overview
 
-This guide demonstrates how to identify and fix performance bottlenecks in the Nova News React application. It covers profiling tools, memoization strategies, and optimization techniques.
+This guide demonstrates how to identify and fix performance bottlenecks in the
+Nova News React application. It covers profiling tools, memoization strategies,
+and optimization techniques.
 
 **Key Concepts:**
+
 - When to use React DevTools Profiler
 - How to identify expensive re-renders
 - Memoization strategies (useMemo, useCallback, React.memo)
@@ -33,14 +37,22 @@ This guide demonstrates how to identify and fix performance bottlenecks in the N
 ## Table of Contents
 
 1. [Performance Metrics](#performance-metrics)
-2. [React DevTools Profiler](#react-devtools-profiler)
-3. [Chrome DevTools Performance Tab](#chrome-devtools-performance-tab)
-4. [Identifying Performance Issues](#identifying-performance-issues)
-5. [Optimization Strategies](#optimization-strategies)
-6. [Memoization Patterns](#memoization-patterns)
-7. [Code Splitting](#code-splitting)
-8. [Performance Budget](#performance-budget)
-9. [Real-World Examples](#real-world-examples)
+
+1. [React DevTools Profiler](#react-devtools-profiler)
+
+1. [Chrome DevTools Performance Tab](#chrome-devtools-performance-tab)
+
+1. [Identifying Performance Issues](#identifying-performance-issues)
+
+1. [Optimization Strategies](#optimization-strategies)
+
+1. [Memoization Patterns](#memoization-patterns)
+
+1. [Code Splitting](#code-splitting)
+
+1. [Performance Budget](#performance-budget)
+
+1. [Real-World Examples](#real-world-examples)
 
 ---
 
@@ -57,6 +69,7 @@ Google's Core Web Vitals are key metrics for measuring user experience:
 | **CLS** (Cumulative Layout Shift) | ≤ 0.1 | 0.1 - 0.25 | > 0.25 | Visual stability |
 
 **Nova News Targets:**
+
 - LCP: < 2.0s (hero image + text)
 - FID: < 50ms (theme toggle, menu open)
 - CLS: < 0.05 (minimal layout shifts)
@@ -75,25 +88,29 @@ Google's Core Web Vitals are key metrics for measuring user experience:
 ### Installation
 
 1. Install React Developer Tools browser extension:
+
    - [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
    - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
 
-2. Open DevTools (F12)
-3. Navigate to "Profiler" tab
+1. Open DevTools (F12)
+
+1. Navigate to "Profiler" tab
 
 ### Recording a Profile
 
 **Step 1: Start Recording**
 
 1. Click the record button (⏺️) in Profiler tab
-2. Interact with your app (e.g., open portfolio page, filter items)
-3. Click stop button (⏹️)
+
+1. Interact with your app (e.g., open portfolio page, filter items)
+
+1. Click stop button (⏹️)
 
 **Step 2: Analyze the Flame Graph**
 
 The flame graph shows component hierarchy and render times:
 
-```
+```text
 HomePage (15ms)
 ├── Header (2ms)
 │   ├── Logo (0.5ms)
@@ -104,7 +121,8 @@ HomePage (15ms)
 └── PortfolioGrid (8ms)  ← SLOW!
     ├── PortfolioCard (1ms) x 12 = 12ms
     └── Lightbox (3ms)
-```
+
+```text
 
 **What to Look For:**
 
@@ -114,7 +132,7 @@ HomePage (15ms)
 
 ### Profiler Settings
 
-**Recommended Settings:**
+## Recommended Settings
 
 - ✅ "Highlight updates when components render"
 - ✅ "Record why each component rendered"
@@ -127,18 +145,24 @@ HomePage (15ms)
 ### Recording a Performance Profile
 
 1. Open Chrome DevTools (F12)
-2. Navigate to "Performance" tab
-3. Click record button (⏺️)
-4. Perform user actions (scroll, click, navigate)
-5. Click stop button (⏹️)
+
+1. Navigate to "Performance" tab
+
+1. Click record button (⏺️)
+
+1. Perform user actions (scroll, click, navigate)
+
+1. Click stop button (⏹️)
 
 ### Reading the Timeline
 
-```
+```text
 Main Thread Timeline:
+
 |--- Scripting (JS) ---|--- Rendering ---|--- Painting ---|
      50ms                    30ms             20ms
-```
+
+```text
 
 **Key Sections:**
 
@@ -155,18 +179,19 @@ Main Thread Timeline:
 
 ### Long Task Detection
 
-**What is a Long Task?**
+## What is a Long Task
 
 Any JavaScript execution that blocks the main thread for > 50ms.
 
 **Example: Long Task Warning**
 
-```
+```text
 ⚠️ Long Task Detected
 Function: filterPortfolioEntries
 Duration: 127ms
 Impact: UI frozen during filtering
-```
+
+```text
 
 **Fix:**
 
@@ -182,7 +207,8 @@ const filtered = useMemo(() => {
     // Same logic, but only runs when dependencies change
   });
 }, [portfolioData, activeCategory, activeTags]);
-```
+
+```text
 
 ---
 
@@ -193,8 +219,10 @@ const filtered = useMemo(() => {
 **Diagnosis:**
 
 1. Open Chrome DevTools → Performance
-2. Click "Reload" icon with recording enabled
-3. Check "Load" event time
+
+1. Click "Reload" icon with recording enabled
+
+1. Check "Load" event time
 
 **Common Causes:**
 
@@ -214,9 +242,12 @@ const filtered = useMemo(() => {
 **Diagnosis:**
 
 1. Open React DevTools → Profiler
-2. Enable "Highlight updates when components render"
-3. Scroll the page slowly
-4. Watch for flashing blue boxes
+
+1. Enable "Highlight updates when components render"
+
+1. Scroll the page slowly
+
+1. Watch for flashing blue boxes
 
 **Common Causes:**
 
@@ -238,7 +269,7 @@ import { useEffect, useState, useRef } from 'react';
 function useThrottledScroll(delay = 100) {
   const [scrollY, setScrollY] = useState(0);
   const throttleTimeout = useRef<number | null>(null);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (throttleTimeout.current === null) {
@@ -248,23 +279,27 @@ function useThrottledScroll(delay = 100) {
         }, delay);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [delay]);
-  
+
   return scrollY;
 }
-```
+
+```text
 
 ### Symptom 3: Slow Interactions (Button Clicks, Form Input)
 
 **Diagnosis:**
 
 1. Open React DevTools → Profiler
-2. Record a profile
-3. Click a button or type in an input
-4. Check "Why did this render?" in Profiler
+
+1. Record a profile
+
+1. Click a button or type in an input
+
+1. Check "Why did this render?" in Profiler
 
 **Common Causes:**
 
@@ -288,15 +323,18 @@ const handleClickMemo = useCallback(() => {
 <Button onClick={handleClickMemo}>
   Click me
 </Button>
-```
+
+```text
 
 ### Symptom 4: Large List Rendering Slowly
 
 **Diagnosis:**
 
 1. Open React DevTools → Profiler
-2. Render a page with 100+ items (e.g., portfolio grid)
-3. Check total render time
+
+1. Render a page with 100+ items (e.g., portfolio grid)
+
+1. Check total render time
 
 **Common Causes:**
 
@@ -316,7 +354,7 @@ const handleClickMemo = useCallback(() => {
 
 ### 1. Component Memoization
 
-**Use React.memo to prevent unnecessary re-renders:**
+## Use React.memo to prevent unnecessary re-renders
 
 ```tsx
 // ❌ BAD - Re-renders every time parent updates
@@ -330,7 +368,8 @@ export function PortfolioCard({ title, image }) {
 }
 
 // ✅ GOOD - Only re-renders when props change
-export const PortfolioCard = React.memo(function PortfolioCard({ title, image }) {
+export const PortfolioCard = React.memo(function PortfolioCard({ title, image })
+{
   return (
     <article className="portfolio-card">
       <img src={image} alt={title} />
@@ -338,9 +377,10 @@ export const PortfolioCard = React.memo(function PortfolioCard({ title, image })
     </article>
   );
 });
-```
 
-**When to Use React.memo:**
+```text
+
+## When to Use React.memo
 
 - ✅ Pure functional components that render the same output for same props
 - ✅ Components rendered in lists (e.g., PortfolioCard in grid)
@@ -350,37 +390,38 @@ export const PortfolioCard = React.memo(function PortfolioCard({ title, image })
 
 ### 2. useMemo for Expensive Calculations
 
-**Cache computed values:**
+## Cache computed values
 
 ```tsx
 // ❌ BAD - Recalculates on every render
 function PortfolioPage() {
-  const filtered = portfolioData.filter(entry => 
+  const filtered = portfolioData.filter(entry =>
     entry.category === activeCategory
   );
-  const sorted = filtered.sort((a, b) => 
+  const sorted = filtered.sort((a, b) =>
     new Date(b.date) - new Date(a.date)
   );
-  
+
   return <PortfolioGrid entries={sorted} />;
 }
 
 // ✅ GOOD - Only recalculates when dependencies change
 function PortfolioPage() {
   const sortedEntries = useMemo(() => {
-    const filtered = portfolioData.filter(entry => 
+    const filtered = portfolioData.filter(entry =>
       entry.category === activeCategory
     );
-    return filtered.sort((a, b) => 
+    return filtered.sort((a, b) =>
       new Date(b.date) - new Date(a.date)
     );
   }, [portfolioData, activeCategory]);
-  
+
   return <PortfolioGrid entries={sortedEntries} />;
 }
-```
 
-**When to Use useMemo:**
+```text
+
+## When to Use useMemo
 
 - ✅ Expensive calculations (filtering, sorting, transforming large arrays)
 - ✅ Derived state that depends on props/state
@@ -390,16 +431,16 @@ function PortfolioPage() {
 
 ### 3. useCallback for Event Handlers
 
-**Prevent function re-creation:**
+## Prevent function re-creation
 
 ```tsx
 // ❌ BAD - Creates new function on every render
 function ParentComponent() {
   const [count, setCount] = useState(0);
-  
+
   return (
-    <ChildComponent 
-      onClick={() => setCount(count + 1)} 
+    <ChildComponent
+      onClick={() => setCount(count + 1)}
     />
   );
 }
@@ -407,18 +448,19 @@ function ParentComponent() {
 // ✅ GOOD - Memoized function
 function ParentComponent() {
   const [count, setCount] = useState(0);
-  
+
   const handleClick = useCallback(() => {
     setCount(prev => prev + 1);
   }, []); // No dependencies - uses updater function
-  
+
   return (
     <ChildComponent onClick={handleClick} />
   );
 }
-```
 
-**When to Use useCallback:**
+```text
+
+## When to Use useCallback
 
 - ✅ Functions passed to memoized child components
 - ✅ Functions used in useEffect dependencies
@@ -428,7 +470,7 @@ function ParentComponent() {
 
 ### 4. Lazy Loading Components
 
-**Split code and load on demand:**
+## Split code and load on demand
 
 ```tsx
 // ❌ BAD - Loads all pages upfront
@@ -438,7 +480,8 @@ import { BlogPage } from './components/pages/BlogPage';
 
 // ✅ GOOD - Loads pages only when needed
 const HomePage = React.lazy(() => import('./components/pages/HomePage'));
-const PortfolioPage = React.lazy(() => import('./components/pages/PortfolioPage'));
+const PortfolioPage = React.lazy(() =>
+import('./components/pages/PortfolioPage'));
 const BlogPage = React.lazy(() => import('./components/pages/BlogPage'));
 
 function App() {
@@ -452,19 +495,20 @@ function App() {
     </Suspense>
   );
 }
-```
+
+```text
 
 ### 5. Image Optimization
 
-**Lazy load images below the fold:**
+## Lazy load images below the fold
 
 ```tsx
 // ❌ BAD - Loads all images immediately
 <img src="/large-image.jpg" alt="Portfolio" />
 
 // ✅ GOOD - Lazy loads image
-<img 
-  src="/large-image.jpg" 
+<img
+  src="/large-image.jpg"
   alt="Portfolio"
   loading="lazy"
 />
@@ -477,7 +521,8 @@ import { ImageWithFallback } from '@/components/figma/ImageWithFallback';
   alt="Portfolio"
   className="portfolio-card__image"
 />
-```
+
+```text
 
 ---
 
@@ -489,16 +534,18 @@ import { ImageWithFallback } from '@/components/figma/ImageWithFallback';
 function BlogPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
-  
+
   // ✅ Memoize filtered results
   const filteredPosts = useMemo(() => {
     return blogData.posts.filter(post => {
-      const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = activeCategory === 'all' || post.category === activeCategory;
+const matchesSearch =
+post.title.toLowerCase().includes(searchQuery.toLowerCase());
+const matchesCategory = activeCategory === 'all' || post.category ===
+activeCategory;
       return matchesSearch && matchesCategory;
     });
   }, [searchQuery, activeCategory]);
-  
+
   return (
     <div className="blog-archive">
       <SearchInput value={searchQuery} onChange={setSearchQuery} />
@@ -507,27 +554,29 @@ function BlogPage() {
     </div>
   );
 }
-```
+
+```text
 
 ### Pattern 2: Memoizing Complex Calculations
 
 ```tsx
 function AnalyticsPage() {
-  const [dateRange, setDateRange] = useState({ start: '2026-01-01', end: '2026-03-12' });
-  
+const [dateRange, setDateRange] = useState({ start: '2026-01-01', end:
+'2026-03-12' });
+
   // ✅ Memoize expensive analytics calculation
   const stats = useMemo(() => {
-    const views = analyticsData.filter(d => 
+    const views = analyticsData.filter(d =>
       d.date >= dateRange.start && d.date <= dateRange.end
     );
-    
+
     return {
       totalViews: views.reduce((sum, d) => sum + d.views, 0),
       averageViews: views.reduce((sum, d) => sum + d.views, 0) / views.length,
       peakDay: views.reduce((max, d) => d.views > max.views ? d : max),
     };
   }, [dateRange]);
-  
+
   return (
     <div className="analytics">
       <StatCard title="Total views" value={stats.totalViews} />
@@ -536,14 +585,15 @@ function AnalyticsPage() {
     </div>
   );
 }
-```
+
+```text
 
 ### Pattern 3: Memoizing Event Handlers in Lists
 
 ```tsx
 function PortfolioGrid({ entries }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  
+
   // ❌ BAD - Creates new function for every entry
   return (
     <div className="portfolio-grid">
@@ -561,11 +611,11 @@ function PortfolioGrid({ entries }) {
 // ✅ GOOD - Use useCallback + pass ID as prop
 function PortfolioGrid({ entries }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  
+
   const handleCardClick = useCallback((id: string) => {
     setSelectedId(id);
   }, []);
-  
+
   return (
     <div className="portfolio-grid">
       {entries.map(entry => (
@@ -579,11 +629,12 @@ function PortfolioGrid({ entries }) {
   );
 }
 
-const PortfolioCard = React.memo(function PortfolioCard({ id, title, image, onSelect }) {
+const PortfolioCard = React.memo(function PortfolioCard({ id, title, image,
+onSelect }) {
   const handleClick = useCallback(() => {
     onSelect(id);
   }, [id, onSelect]);
-  
+
   return (
     <article className="portfolio-card" onClick={handleClick}>
       <img src={image} alt={title} />
@@ -591,7 +642,8 @@ const PortfolioCard = React.memo(function PortfolioCard({ id, title, image, onSe
     </article>
   );
 });
-```
+
+```text
 
 ---
 
@@ -608,7 +660,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 
 // Lazy load all page components
 const HomePage = lazy(() => import('./components/pages/HomePage'));
-const PortfolioPage = lazy(() => import('./components/pages/portfolio/PortfolioPage'));
+const PortfolioPage = lazy(() =>
+import('./components/pages/portfolio/PortfolioPage'));
 const BlogPage = lazy(() => import('./components/pages/blog/BlogPage'));
 const AboutPage = lazy(() => import('./components/pages/about/AboutPage'));
 
@@ -635,7 +688,8 @@ const router = createBrowserRouter([
 export default function App() {
   return <RouterProvider router={router} />;
 }
-```
+
+```text
 
 **Result:**
 
@@ -645,7 +699,7 @@ export default function App() {
 
 ### Component-Based Code Splitting
 
-**Split heavy components:**
+## Split heavy components
 
 ```tsx
 // ❌ BAD - Loads Lightbox upfront (large dependency)
@@ -653,7 +707,7 @@ import { Lightbox } from '@/components/ui/Lightbox';
 
 function PortfolioPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  
+
   return (
     <>
       <PortfolioGrid />
@@ -667,7 +721,7 @@ const Lightbox = lazy(() => import('@/components/ui/Lightbox'));
 
 function PortfolioPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  
+
   return (
     <>
       <PortfolioGrid />
@@ -679,7 +733,8 @@ function PortfolioPage() {
     </>
   );
 }
-```
+
+```text
 
 ---
 
@@ -698,30 +753,40 @@ function PortfolioPage() {
 
 ### Monitoring Tools
 
-**1. Lighthouse CI**
+## 1. Lighthouse CI
 
 ```bash
+
 # Run Lighthouse audit
+
 npm run lighthouse
 
-# Output:
-# Performance: 97/100 ✅
-# Accessibility: 100/100 ✅
-# Best Practices: 95/100 ✅
-# SEO: 100/100 ✅
-```
+# Output
 
-**2. Bundle Analyzer**
+# Performance: 97/100 ✅
+
+# Accessibility: 100/100 ✅
+
+# Best Practices: 95/100 ✅
+
+# SEO: 100/100 ✅
+
+```text
+
+## 2. Bundle Analyzer
 
 ```bash
+
 # Analyze bundle size
+
 npm run build
 npm run analyze
 
 # Opens interactive treemap showing bundle composition
-```
 
-**3. Web Vitals Library**
+```text
+
+## 3. Web Vitals Library
 
 ```tsx
 // /utils/webVitals.ts
@@ -739,7 +804,8 @@ import { reportWebVitals } from './utils/webVitals';
 if (import.meta.env.DEV) {
   reportWebVitals();
 }
-```
+
+```text
 
 ---
 
@@ -754,11 +820,11 @@ if (import.meta.env.DEV) {
 ```tsx
 function BlogPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  
-  const filtered = blogData.posts.filter(post => 
+
+  const filtered = blogData.posts.filter(post =>
     post.title.includes(searchQuery)
   );
-  
+
   return (
     <>
       <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
@@ -766,9 +832,11 @@ function BlogPage() {
     </>
   );
 }
-```
+
+```text
 
 **Profiler Results:**
+
 - Render time: 127ms (12 re-renders while typing "Berlin")
 - Wasted renders: 11/12 (only last one shows new results)
 
@@ -777,14 +845,14 @@ function BlogPage() {
 ```tsx
 function BlogPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   // ✅ Memoize filtered results
   const filtered = useMemo(() => {
-    return blogData.posts.filter(post => 
+    return blogData.posts.filter(post =>
       post.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [searchQuery]);
-  
+
   return (
     <>
       <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
@@ -803,9 +871,11 @@ const BlogCard = React.memo(function BlogCard({ title, excerpt, image }) {
     </article>
   );
 });
-```
 
-**Profiler Results (After):**
+```text
+
+## Profiler Results (After)
+
 - Render time: 15ms (12 re-renders while typing "Berlin")
 - Wasted renders: 0/12 (BlogCard only re-renders when filtered list changes)
 
@@ -823,18 +893,18 @@ const BlogCard = React.memo(function BlogCard({ title, excerpt, image }) {
 function PortfolioPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  
+
   return (
     <>
       <Header />
-      <PortfolioGrid 
+      <PortfolioGrid
         onImageClick={(index) => {
           setCurrentImage(index);
           setLightboxOpen(true);
         }}
       />
       {lightboxOpen && (
-        <Lightbox 
+        <Lightbox
           images={portfolioData.images}
           currentIndex={currentImage}
           onClose={() => setLightboxOpen(false)}
@@ -844,9 +914,11 @@ function PortfolioPage() {
     </>
   );
 }
-```
+
+```text
 
 **Profiler Results:**
+
 - Opening lightbox: 45ms
 - Re-renders: Header (2ms), PortfolioGrid (25ms), Footer (3ms), Lightbox (15ms)
 
@@ -856,24 +928,24 @@ function PortfolioPage() {
 function PortfolioPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  
+
   // ✅ Memoize event handler
   const handleImageClick = useCallback((index: number) => {
     setCurrentImage(index);
     setLightboxOpen(true);
   }, []);
-  
+
   const handleLightboxClose = useCallback(() => {
     setLightboxOpen(false);
   }, []);
-  
+
   return (
     <>
       <Header />
       <PortfolioGrid onImageClick={handleImageClick} />
       {lightboxOpen && (
         <Suspense fallback={null}>
-          <Lightbox 
+          <Lightbox
             images={portfolioData.images}
             currentIndex={currentImage}
             onClose={handleLightboxClose}
@@ -893,9 +965,11 @@ const PortfolioGrid = React.memo(function PortfolioGrid({ onImageClick }) {
     </div>
   );
 });
-```
 
-**Profiler Results (After):**
+```text
+
+## Profiler Results (After) (1)
+
 - Opening lightbox: 18ms
 - Re-renders: Only Lightbox renders (Header/Footer/Grid stay mounted)
 
@@ -936,14 +1010,22 @@ const PortfolioGrid = React.memo(function PortfolioGrid({ onImageClick }) {
 This guide covered:
 
 1. ✅ Performance metrics (Core Web Vitals, React-specific)
-2. ✅ React DevTools Profiler usage
-3. ✅ Chrome DevTools Performance tab
-4. ✅ Identifying common performance issues
-5. ✅ Optimization strategies (React.memo, useMemo, useCallback)
-6. ✅ Memoization patterns
-7. ✅ Code splitting techniques
-8. ✅ Performance budgets
-9. ✅ Real-world optimization examples
+
+1. ✅ React DevTools Profiler usage
+
+1. ✅ Chrome DevTools Performance tab
+
+1. ✅ Identifying common performance issues
+
+1. ✅ Optimization strategies (React.memo, useMemo, useCallback)
+
+1. ✅ Memoization patterns
+
+1. ✅ Code splitting techniques
+
+1. ✅ Performance budgets
+
+1. ✅ Real-world optimization examples
 
 **Key Takeaways:**
 
@@ -961,5 +1043,5 @@ This guide covered:
 
 ---
 
-**Last Updated:** March 12, 2026  
+**Last Updated:** March 12, 2026
 **Maintained By:** Development Team

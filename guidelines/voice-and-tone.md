@@ -3,17 +3,23 @@
 **Version:** 1.0.0
 **Last Updated:** February 2026
 
-> "I’m not a brand. I’m a guy with a bike, a makeup brush, and a lot of neon paint. But if I _were_ a brand, this is how I’d speak."
+> "I’m not a brand. I’m a guy with a bike, a makeup brush, and a lot of neon
+paint. But if I *were* a brand, this is how I’d speak."
 
 ## 🌟 The Core Identity: Neon vs. Atomic Black
 
-The voice of **AshShaw.makeup** mirrors the visual identity: high contrast, vibrant, and unapologetically distinct. It oscillates between **deep, grounded professionalism** (Atomic Black) and **high-energy, creative expression** (Neon).
+The voice of **AshShaw.makeup** mirrors the visual identity: high contrast,
+vibrant, and unapologetically distinct. It oscillates between **deep, grounded
+professionalism** (Atomic Black) and **high-energy, creative expression**
+(Neon).
 
 ### Brand Archetypes
 
 1.  **The Creator:** Obsessed with craft, technique, and making things exist.
-2.  **The Explorer:** Nomadic, festival-going, seeking new experiences (travel, music, consciousness).
-3.  **The Jester (with a heart):** Playful, self-deprecating, never taking life _too_ seriously, but taking the _work_ seriously.
+
+1.  **The Explorer:** Nomadic, festival-going, seeking new experiences (travel, music, consciousness).
+
+1.  **The Jester (with a heart):** Playful, self-deprecating, never taking life *too* seriously, but taking the *work* seriously.
 
 ---
 
@@ -29,7 +35,8 @@ We don't hide the cracks; we highlight them like kintsugi with neon gold.
 
 ### 2. Energetic & Rhythmic (140 BPM)
 
-The writing should feel like a good psytrance set—driving, hypnotic, and full of energy.
+The writing should feel like a good psytrance set—driving, hypnotic, and full of
+energy.
 
 - **Characteristics:** Active verbs, punchy sentences, sensory language.
 - **Why:** Ash lives at 140 BPM. The text shouldn't drag.
@@ -37,7 +44,8 @@ The writing should feel like a good psytrance set—driving, hypnotic, and full 
 
 ### 3. Meticulous but Unconventional
 
-We are professionals, but not "corporate." We respect the craft, the code, and the art form, but we reject the suit-and-tie stiffness.
+We are professionals, but not "corporate." We respect the craft, the code, and
+the art form, but we reject the suit-and-tie stiffness.
 
 - **Characteristics:** Precise terminology (whether discussing CSS or Cut Creases) mixed with casual slang.
 - **Why:** It establishes authority without creating distance.
@@ -45,7 +53,8 @@ We are professionals, but not "corporate." We respect the craft, the code, and t
 
 ### 4. Conscious & Inclusive
 
-Ash is a "conscious" entity—aware of sustainability, social structures, and identity.
+Ash is a "conscious" entity—aware of sustainability, social structures, and
+identity.
 
 - **Characteristics:** Inclusive language, environmental awareness, respect for pronouns (Ash is strictly **He/Him**), and ethical stances (e.g., cruelty-free).
 - **Tone:** Gentle but firm on values. Not preachy, just principled.
@@ -54,7 +63,8 @@ Ash is a "conscious" entity—aware of sustainability, social structures, and id
 
 ## 🎚️ The Tone Spectrum
 
-Our tone shifts depending on the context, just like the lighting at a festival shifts from sunset to main stage.
+Our tone shifts depending on the context, just like the lighting at a festival
+shifts from sunset to main stage.
 
 | Context               | Tone Setting                        | Description                                                                                        |
 | :-------------------- | :---------------------------------- | :------------------------------------------------------------------------------------------------- |
@@ -67,15 +77,15 @@ Our tone shifts depending on the context, just like the lighting at a festival s
 
 ## ✅ Writing Do's and Don'ts
 
-### DO:
+### DO
 
 - **Use "I" and "Me":** This is a personal portfolio, not a faceless agency.
 - **Be specific:** Don't say "I like music." Say "I live for the rolling basslines of 140 BPM psytrance."
-- **Use sensory words:** Describe textures, colors, sounds, and feelings. Make the reader _feel_ the glitter or the bass.
+- **Use sensory words:** Describe textures, colors, sounds, and feelings. Make the reader *feel* the glitter or the bass.
 - **Own the weirdness:** If it's quirky (like the cats' nicknames), lean into it.
 - **Respect the tech:** When talking about code or makeup, use the correct technical terms. It shows expertise.
 
-### DON'T:
+### DON'T
 
 - **Use corporate jargon:** No "synergy," "leveraging," "circle back," or "thought leadership."
 - **Be passive:** Avoid "Mistakes were made." Say "I messed up."
@@ -95,11 +105,11 @@ Our tone shifts depending on the context, just like the lighting at a festival s
 
 ### Words to Avoid (The "Banned" List)
 
-- _Professional_ (use "Skilled" or "Experienced")
-- _Solutions_ (use "Answers" or "Fixes")
-- _Innovative_ (show, don't tell)
-- _Nice_ (too vague; be specific)
-- _Corporate_ (unless using it ironically)
+- *Professional* (use "Skilled" or "Experienced")
+- *Solutions* (use "Answers" or "Fixes")
+- *Innovative* (show, don't tell)
+- *Nice* (too vague; be specific)
+- *Corporate* (unless using it ironically)
 
 ---
 

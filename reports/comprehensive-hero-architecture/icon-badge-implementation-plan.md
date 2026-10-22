@@ -1,7 +1,7 @@
 # Icon Badge Implementation Plan
 
-**Date:** March 7, 2026  
-**Task:** Add Phosphor icons to dev tools page hero badges  
+**Date:** March 7, 2026
+**Task:** Add Phosphor icons to dev tools page hero badges
 **Scope:** 37 dev tools pages
 
 ---
@@ -12,14 +12,17 @@
 
 ```tsx
 <span className="specimen-page__hero-badge">Typography</span>
-```
+
+```text
 
 **CSS:**
+
 ```css
 .specimen-page__hero-badge {
   /* Neon chip badge styling */
 }
-```
+
+```text
 
 ---
 
@@ -32,9 +35,11 @@
   <TextAa size={16} weight="duotone" aria-hidden="true" />
   <span>Typography</span>
 </span>
-```
+
+```text
 
 **CSS Updates:**
+
 ```css
 .specimen-page__hero-badge {
   display: inline-flex;
@@ -46,7 +51,8 @@
 .specimen-page__hero-badge svg {
   flex-shrink: 0;
 }
-```
+
+```text
 
 ---
 
@@ -55,39 +61,51 @@
 ### Option A: Manual Update (FAST ⚡)
 
 **Pros:**
+
 - Quick implementation (30-45 minutes)
 - No new dependencies
 - Works with existing structure
 
 **Cons:**
+
 - Need to manually update 37 files
 - Icon choices must be decided per-page
 
 **Steps:**
+
 1. Choose icons for each page (based on `/data/mock/ui/dev-tools.ts` icon field)
-2. Import icon in each page component
-3. Add icon element to badge span
-4. Update CSS for icon support
+
+1. Import icon in each page component
+
+1. Add icon element to badge span
+
+1. Update CSS for icon support
 
 ---
 
 ### Option B: Data-Driven Component (COMPREHENSIVE)
 
 **Pros:**
+
 - Single source of truth
 - Easy to maintain
 - Consistent across all pages
 
 **Cons:**
+
 - Requires new component
 - Longer implementation time (2-3 hours)
 - Needs data file updates
 
 **Steps:**
+
 1. Create `<PageHeroBadge>` component
-2. Accept `icon` prop (Phosphor icon name string)
-3. Map icon names to components
-4. Update all 37 pages to use new component
+
+1. Accept `icon` prop (Phosphor icon name string)
+
+1. Map icon names to components
+
+1. Update all 37 pages to use new component
 
 ---
 
@@ -96,9 +114,12 @@
 ### Rationale
 
 1. **Time-efficient** — Can be completed in 40 minutes
-2. **No architecture changes** — Works with existing CSS
-3. **Immediate visual improvement** — Icons appear instantly
-4. **Backward compatible** — Doesn't break existing pages
+
+1. **No architecture changes** — Works with existing CSS
+
+1. **Immediate visual improvement** — Icons appear instantly
+
+1. **Backward compatible** — Doesn't break existing pages
 
 ### Icon Mapping (from dev-tools.ts data)
 
@@ -165,7 +186,8 @@
   width: 16px;
   height: 16px;
 }
-```
+
+```text
 
 ---
 
@@ -186,12 +208,15 @@ After implementation:
 
 ## Sample Implementation
 
-### Before:
+### Before
+
 ```tsx
 <span className="specimen-page__hero-badge">Typography</span>
-```
 
-### After:
+```text
+
+### After
+
 ```tsx
 import { TextAa } from '@phosphor-icons/react';
 
@@ -201,7 +226,8 @@ import { TextAa } from '@phosphor-icons/react';
   <TextAa size={16} weight="duotone" aria-hidden="true" />
   <span>Typography</span>
 </span>
-```
+
+```text
 
 ---
 
@@ -219,13 +245,17 @@ import { TextAa } from '@phosphor-icons/react';
 ## Next Steps
 
 1. ✅ Update CSS for icon support
-2. ⏸️ Add icons to each page (batch process)
-3. ⏸️ Verify visual appearance
-4. ⏸️ Test accessibility
-5. ⏸️ Mark Fix 4 as complete
+
+1. ⏸️ Add icons to each page (batch process)
+
+1. ⏸️ Verify visual appearance
+
+1. ⏸️ Test accessibility
+
+1. ⏸️ Mark Fix 4 as complete
 
 ---
 
-**Status:** Ready to implement  
-**Complexity:** Low  
+**Status:** Ready to implement
+**Complexity:** Low
 **Impact:** High visual improvement

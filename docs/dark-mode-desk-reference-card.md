@@ -1,7 +1,8 @@
 # 🎨 Dark Mode v2.0.0 — Desk Reference Card
 
-**Quick reference for daily development**  
-**Print this page or keep it open in a browser tab**
+**Quick reference for daily development**
+
+## Print this page or keep it open in a browser tab
 
 **Version:** 2.0.0 | **Last Updated:** March 11, 2026
 
@@ -21,7 +22,8 @@ document.documentElement.classList.toggle('dark');
 
 // Save preference
 localStorage.setItem('theme', 'dark');
-```
+
+```text
 
 ---
 
@@ -70,7 +72,8 @@ localStorage.setItem('theme', 'dark');
 <button class="button button--outline">Outline</button>
 <button class="button button--sm">Small</button>
 <button class="button button--lg">Large</button>
-```
+
+```text
 
 ### Cards
 
@@ -86,7 +89,8 @@ localStorage.setItem('theme', 'dark');
 
 <div class="card card--featured">Featured</div>
 <div class="card card--clickable">Clickable</div>
-```
+
+```text
 
 ### Forms
 
@@ -104,7 +108,8 @@ localStorage.setItem('theme', 'dark');
     <span>Accept terms</span>
   </label>
 </div>
-```
+
+```text
 
 ### Alerts
 
@@ -113,7 +118,8 @@ localStorage.setItem('theme', 'dark');
 <div class="alert alert--warning">Warning</div>
 <div class="alert alert--error">Error</div>
 <div class="alert alert--info">Info</div>
-```
+
+```text
 
 ### Modals
 
@@ -132,13 +138,14 @@ localStorage.setItem('theme', 'dark');
     </div>
   </div>
 </div>
-```
+
+```text
 
 ### Navigation
 
 ```html
 <nav class="nav">
-  <a href="/" class="nav__link nav__link--active">Home</a>
+  <a href="/" class="nav_*link nav*_link--active">Home</a>
   <a href="/about" class="nav__link">About</a>
 </nav>
 
@@ -150,10 +157,11 @@ localStorage.setItem('theme', 'dark');
 
 <nav class="pagination">
   <a href="?page=1" class="pagination__link">1</a>
-  <span class="pagination__link pagination__link--active">2</span>
+  <span class="pagination_*link pagination*_link--active">2</span>
   <a href="?page=3" class="pagination__link">3</a>
 </nav>
-```
+
+```text
 
 ---
 
@@ -167,7 +175,8 @@ localStorage.setItem('theme', 'dark');
   <p class="hero__subtitle">80s vibes meet modern design</p>
   <button class="button button--primary button--lg">Get Started</button>
 </section>
-```
+
+```text
 
 ### Feature Grid
 
@@ -179,7 +188,8 @@ localStorage.setItem('theme', 'dark');
     <p class="feature-card__content">Description</p>
   </div>
 </div>
-```
+
+```text
 
 ### Toast Notification
 
@@ -189,7 +199,8 @@ localStorage.setItem('theme', 'dark');
   <p class="toast__message">Changes saved</p>
   <button class="toast__close" aria-label="Close">×</button>
 </div>
-```
+
+```text
 
 ### Loading State
 
@@ -200,9 +211,10 @@ localStorage.setItem('theme', 'dark');
 
 <div class="skeleton">
   <div class="skeleton__line"></div>
-  <div class="skeleton__line skeleton__line--short"></div>
+  <div class="skeleton_*line skeleton*_line--short"></div>
 </div>
-```
+
+```text
 
 ---
 
@@ -223,7 +235,7 @@ localStorage.setItem('theme', 'dark');
 
 ## ♿ ACCESSIBILITY CHECKLIST
 
-### Every Component Must Have:
+### Every Component Must Have
 
 - [ ] Semantic HTML (`<button>`, `<nav>`, `<main>`)
 - [ ] Proper ARIA labels (`aria-label`, `aria-labelledby`)
@@ -232,7 +244,7 @@ localStorage.setItem('theme', 'dark');
 - [ ] Sufficient contrast (4.5:1 minimum)
 - [ ] Screen reader friendly (descriptive text)
 
-### Minimum Contrast Ratios:
+### Minimum Contrast Ratios
 
 - **Normal text:** 4.5:1 (AA) or 7:1 (AAA)
 - **Large text (18px+):** 3:1 (AA) or 4.5:1 (AAA)
@@ -244,7 +256,7 @@ localStorage.setItem('theme', 'dark');
 
 ## 🔧 QUICK DEBUGGING
 
-### Dark Mode Not Working?
+### Dark Mode Not Working
 
 ```javascript
 // Check if dark class is present
@@ -255,11 +267,13 @@ console.log(document.documentElement.classList.contains('dark'));
 var styles = window.getComputedStyle(document.documentElement);
 console.log(styles.getPropertyValue('--color-neon-pink'));
 // Should return: #FF3AAE or rgb(255, 58, 174)
-```
 
-### Components Not Styled?
+```text
 
-**Check BEM class names:**
+### Components Not Styled
+
+## Check BEM class names
+
 ```javascript
 // Find all elements with 'button' class
 document.querySelectorAll('.button').forEach(el => {
@@ -267,9 +281,10 @@ document.querySelectorAll('.button').forEach(el => {
 });
 
 // Should show: "button button--primary" (not "btn" or "flex px-4")
-```
 
-### Colors Look Wrong?
+```text
+
+### Colors Look Wrong
 
 ```javascript
 // Verify color values
@@ -279,7 +294,8 @@ var styles = window.getComputedStyle(root);
 console.log('Pink:', styles.getPropertyValue('--color-neon-pink').trim());
 console.log('Black:', styles.getPropertyValue('--color-atomic-black').trim());
 console.log('Text:', styles.getPropertyValue('--color-text-light').trim());
-```
+
+```text
 
 ---
 
@@ -287,15 +303,16 @@ console.log('Text:', styles.getPropertyValue('--color-text-light').trim());
 
 ### CSS Files
 
-```
+```text
 /styles/themes/
 ├── dark.css                 ← Core theme (1,047 lines)
 └── dark-extended.css        ← Extended components (1,000 lines)
-```
+
+```text
 
 ### Documentation
 
-```
+```text
 /docs/
 ├── README-dark-mode.md                   ← Master index
 ├── dark-mode-10-minute-quick-start.md    ← Quick start
@@ -307,23 +324,29 @@ console.log('Text:', styles.getPropertyValue('--color-text-light').trim());
 ├── dark-mode-customization-guide.md      ← Theming
 ├── dark-mode-maintenance-guide.md        ← Long-term care
 └── dark-mode-desk-reference-card.md      ← This file
-```
+
+```text
 
 ---
 
 ## 🚀 QUICK START COMMANDS
 
 ```bash
+
 # Verify files exist
+
 ls -la styles/themes/dark.css
 ls -la styles/themes/dark-extended.css
 
 # Start dev server
+
 npm run dev
 
 # View in browser
+
 open http://localhost:5173
-```
+
+```text
 
 ```javascript
 // Activate dark mode in console
@@ -339,26 +362,37 @@ localStorage.setItem('theme', 'dark');
 if (localStorage.getItem('theme') === 'dark') {
   document.documentElement.classList.add('dark');
 }
-```
+
+```text
 
 ---
 
 ## 📊 COMPONENT CATEGORIES
 
 ### Navigation (5)
+
 Header, Breadcrumbs, Pagination, Tabs, Sidebar
 
 ### Content (18)
-Cards, Testimonials, Timeline, Accordion, Gallery, Lightbox, Empty State, Error Pages, Author Bio, Comments, Pricing, Newsletter, CTA, Blockquotes, Figures, Video, Social, Images
+
+Cards, Testimonials, Timeline, Accordion, Gallery, Lightbox, Empty State, Error
+Pages, Author Bio, Comments, Pricing, Newsletter, CTA, Blockquotes, Figures,
+Video, Social, Images
 
 ### Forms (12)
-Text, Textarea, Select, Checkbox, Radio, Search, Filters, Chips, Switch, Dropdown, Progress, Skeleton
+
+Text, Textarea, Select, Checkbox, Radio, Search, Filters, Chips, Switch,
+Dropdown, Progress, Skeleton
 
 ### Feedback (10)
-Toast, Alerts, Status, Stars, Spinner, Tooltip, Cookie, Overlay, Scroll Progress, Back to Top
+
+Toast, Alerts, Status, Stars, Spinner, Tooltip, Cookie, Overlay, Scroll
+Progress, Back to Top
 
 ### Layout (9)
-Modal, Mobile Menu, Nav Menu, Headings, Lists, Tables, Scrollbar, Selection, Image Hover
+
+Modal, Mobile Menu, Nav Menu, Headings, Lists, Tables, Scrollbar, Selection,
+Image Hover
 
 **Total: 54 component types**
 
@@ -400,7 +434,8 @@ Modal, Mobile Menu, Nav Menu, Headings, Lists, Tables, Scrollbar, Selection, Ima
 
 /* Desktop Ultra-wide */
 @media (min-width: 1920px) { }
-```
+
+```text
 
 ---
 
@@ -414,7 +449,8 @@ localStorage.getItem('theme');
 // Component states
 localStorage.setItem('modal-dismissed', 'true');
 localStorage.setItem('cookie-consent', 'accepted');
-```
+
+```text
 
 ---
 
@@ -442,7 +478,8 @@ background: linear-gradient(
   #FF0055 85%,
   #4A90FF 100%
 );
-```
+
+```text
 
 ---
 
@@ -524,7 +561,7 @@ background: linear-gradient(
 :root.dark {
   /* Override any color */
   --color-neon-pink: #YOUR_COLOR;
-  
+
   /* Add custom variable */
   --my-custom-color: #123456;
 }
@@ -532,7 +569,8 @@ background: linear-gradient(
 .my-component {
   color: var(--my-custom-color);
 }
-```
+
+```text
 
 ### Conditional Dark Mode
 
@@ -551,7 +589,8 @@ window.matchMedia('(prefers-color-scheme: dark)')
       document.documentElement.classList.remove('dark');
     }
   });
-```
+
+```text
 
 ### Performance Optimization
 
@@ -564,13 +603,14 @@ window.matchMedia('(prefers-color-scheme: dark)')
 </style>
 
 <!-- Load full theme async -->
-<link rel="preload" href="/styles/themes/dark.css" as="style" 
+<link rel="preload" href="/styles/themes/dark.css" as="style"
       onload="this.onload=null;this.rel='stylesheet'">
-```
+
+```text
 
 ---
 
-```
+```text
 ╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
 ║   🎨 DARK MODE v2.0.0 — DESK REFERENCE CARD                  ║
@@ -583,13 +623,14 @@ window.matchMedia('(prefers-color-scheme: dark)')
 ║   📌 Keep this page open for quick reference!               ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝
-```
+
+```text
 
 ---
 
-**Version:** 2.0.0  
-**Last Updated:** March 11, 2026  
-**Print-Friendly:** Yes ✅  
+**Version:** 2.0.0
+**Last Updated:** March 11, 2026
+**Print-Friendly:** Yes ✅
 **Bookmark:** `[Ctrl/Cmd]+D` to save for quick access
 
-**🚀 Happy coding with dark mode!**
+## 🚀 Happy coding with dark mode

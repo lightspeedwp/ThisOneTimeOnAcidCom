@@ -1,13 +1,16 @@
 # 🚨 CRITICAL: Dark Mode Contrast Fixes - DEPLOY BLOCKER
 
-**Priority:** ✅ **RESOLVED**  
-**Severity:** CRITICAL → FIXED  
-**Estimated Time:** 2-3 hours  
-**Actual Time:** 1 hour  
-**Status:** 🟢 **PRODUCTION READY** (Root cause fixed + 35 contrast fixes applied)
+**Priority:** ✅ **RESOLVED**
+**Severity:** CRITICAL → FIXED
+**Estimated Time:** 2-3 hours
+**Actual Time:** 1 hour
+**Status:** 🟢 **PRODUCTION READY** (Root cause fixed + 35 contrast fixes
+applied)
 
-**Root Cause:** ThemeProvider was respecting OS light mode preference instead of defaulting to dark mode  
-**Fix:** Added IIFE to apply `.dark` class immediately + changed default to ALWAYS dark mode  
+**Root Cause:** ThemeProvider was respecting OS light mode preference instead of
+defaulting to dark mode
+**Fix:** Added IIFE to apply `.dark` class immediately + changed default to
+ALWAYS dark mode
 **Result:** Dark mode now works by default, all contrast fixes now visible ✅
 
 ---
@@ -16,7 +19,8 @@
 
 ### The REAL Problem
 
-**The site wasn't in dark mode at all** — `.dark` class was never being applied to `<html>`
+**The site wasn't in dark mode at all** — `.dark` class was never being applied
+to `<html>`
 
 **Bug Location:** `/components/common/ThemeProvider.tsx` lines 35-36
 
@@ -30,13 +34,16 @@ var defaultTheme: Theme = prefersDark ? 'dark' : 'light';
 setThemeState('dark');
 document.documentElement.classList.add('dark');
 localStorage.setItem('theme', 'dark');
-```
+
+```text
 
 **Impact:**
+
 - ❌ BEFORE: Users with OS light mode → stuck in light mode
 - ✅ AFTER: All users → dark mode by default (can manually switch to light)
 
 **Files Modified:**
+
 - `/components/common/ThemeProvider.tsx` (CRITICAL FIX)
 - `/components/common/ThemeToggleES5.tsx` (preventive fix)
 
@@ -44,11 +51,13 @@ localStorage.setItem('theme', 'dark');
 
 ## Critical Failures Summary
 
-Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgrounds (#0F0F0F), making them **completely unreadable** and violating WCAG AA standards by **266%**.
+Multiple components use dark gray text (#383838, contrast 1.48:1) on dark
+backgrounds (#0F0F0F), making them **completely unreadable** and violating WCAG
+AA standards by **266%**.
 
-**Required minimum:** 4.5:1 contrast  
-**Actual (before fix):** 1.23:1 to 1.48:1  
-**After fix:** 6.5:1 to 14.8:1 ✅  
+**Required minimum:** 4.5:1 contrast
+**Actual (before fix):** 1.23:1 to 1.48:1
+**After fix:** 6.5:1 to 14.8:1 ✅
 **Status:** Critical path fixed
 
 ---
@@ -57,8 +66,8 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 
 ### Task 1.1: Fix Header Navigation Links ✅ COMPLETE
 
-**File:** `/styles/blocks/header.css`  
-**Line:** 290-292  
+**File:** `/styles/blocks/header.css`
+**Line:** 290-292
 **Priority:** URGENT
 
 - [x] Open `/styles/blocks/header.css`
@@ -68,7 +77,8 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 - [x] Test in browser with `.dark` class
 - [x] Verify text is readable
 
-**Acceptance Criteria:**
+## Acceptance Criteria
+
 - ✅ Header nav links are clearly visible in dark mode
 - ✅ Text color is #F6F2EB (cream)
 - ✅ Contrast ratio ≥ 14.8:1
@@ -77,7 +87,7 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 
 ### Task 1.2: Search for All neutral-300 Usage in Dark Mode ✅ COMPLETE
 
-**Tool:** Global search  
+**Tool:** Global search
 **Priority:** URGENT
 
 - [x] Search codebase for `neutral-300`
@@ -85,13 +95,14 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 - [x] Document each usage with file and line number
 - [x] Prioritize by visibility/impact
 
-**Results:** 102+ instances found and documented in `/reports/dark-mode-contrast-audit/COMPLETE-FAILURE-ANALYSIS.md`
+**Results:** 102+ instances found and documented in
+`/reports/dark-mode-contrast-audit/COMPLETE-FAILURE-ANALYSIS.md`
 
 ---
 
 ### Task 1.3: Fix Footer Text ✅ COMPLETE
 
-**File:** `/styles/blocks/footer.css`  
+**File:** `/styles/blocks/footer.css`
 **Priority:** HIGH
 
 - [x] Open `/styles/blocks/footer.css`
@@ -109,6 +120,7 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 ### Task 2.1: Audit Navigation Components ✅ COMPLETE
 
 **Files to check:**
+
 - [x] `/styles/blocks/nav-menu.css`
 - [x] `/styles/blocks/mobile-menu.css`
 - [x] `/styles/blocks/breadcrumbs.css`
@@ -116,17 +128,23 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 - [x] `/styles/blocks/tabs.css`
 
 **For each file:**
+
 1. Search for `.dark` selectors
-2. Check all `color:` properties
-3. Calculate or verify contrast ratios
-4. Replace unsafe colors with safe alternatives
-5. Test rendering
+
+1. Check all `color:` properties
+
+1. Calculate or verify contrast ratios
+
+1. Replace unsafe colors with safe alternatives
+
+1. Test rendering
 
 ---
 
 ### Task 2.2: Audit Content Components ✅ COMPLETE
 
 **Files to check:**
+
 - [x] `/styles/blocks/cards.css`
 - [x] `/styles/blocks/testimonials.css`
 - [x] `/styles/blocks/timeline.css`
@@ -134,7 +152,8 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 - [x] `/styles/blocks/gallery.css`
 - [x] `/styles/blocks/lightbox.css`
 
-**Color replacement rules:**
+## Color replacement rules
+
 - Body text → `var(--color-text-light)` (#F6F2EB)
 - Headings → `var(--color-text-primary)` (#FFFFFF)
 - Secondary → `var(--color-text-muted)` (#CFC7BB)
@@ -145,11 +164,13 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 ### Task 2.3: Audit Form Components ✅ COMPLETE
 
 **Files to check:**
+
 - [x] `/styles/blocks/forms.css`
 - [x] `/styles/blocks/buttons.css`
 - [x] `/styles/blocks/inputs.css` (if exists)
 
-**Special attention to:**
+## Special attention to
+
 - Input text color
 - Placeholder text color (should be ≥4.5:1)
 - Label text color
@@ -161,6 +182,7 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 ### Task 2.4: Audit Feedback Components ✅ COMPLETE
 
 **Files to check:**
+
 - [x] `/styles/blocks/alerts.css`
 - [x] `/styles/blocks/toasts.css` (if exists)
 - [x] `/styles/blocks/modals.css` (if exists)
@@ -202,6 +224,7 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 - [ ] Verify all text is clearly readable
 
 **Pages to test:**
+
 - [ ] Homepage
 - [ ] About page
 - [ ] Portfolio/Gallery
@@ -215,11 +238,13 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 ### Task 4.2: Automated Contrast Checking
 
 **Tools:**
+
 - Chrome DevTools Lighthouse
 - axe DevTools extension
 - WebAIM Color Contrast Checker
 
 **Process:**
+
 - [ ] Run Lighthouse accessibility audit
 - [ ] Run axe DevTools scan
 - [ ] Check any flagged contrast issues
@@ -230,7 +255,8 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 
 ### Task 4.3: Calculate Actual Contrast Ratios
 
-**For each text element type:**
+## For each text element type
+
 - [ ] Header nav links
 - [ ] Footer links
 - [ ] Body text
@@ -241,11 +267,13 @@ Multiple components use dark gray text (#383838, contrast 1.48:1) on dark backgr
 - [ ] Placeholder text
 
 **Formula:**
-```
+
+```text
 Contrast = (L1 + 0.05) / (L2 + 0.05)
 where L1 = lighter color luminance
       L2 = darker color luminance
-```
+
+```text
 
 **Tool:** https://webaim.org/resources/contrastchecker/
 
@@ -256,12 +284,14 @@ where L1 = lighter color luminance
 ### Task 5.1: Update Dark Mode Documentation
 
 **Files to update:**
+
 - [ ] `/docs/dark-mode-usage-guide.md`
 - [ ] `/docs/dark-mode-component-showcase.md`
 - [ ] `/docs/DARK-MODE-V2-COMPLETE.md`
 - [ ] `/docs/dark-mode-before-after-comparison.md`
 
 **Changes:**
+
 - ❌ Remove FALSE claims of "100% WCAG AA"
 - ✅ Add ACTUAL contrast ratios after fixes
 - ✅ Document what was fixed
@@ -279,16 +309,20 @@ where L1 = lighter color luminance
 - [ ] Mark as breaking bug fix
 
 **Example entry:**
+
 ```markdown
+
 ## [2.0.1] - 2026-03-11
 
 ### Fixed - CRITICAL
+
 - **ACCESSIBILITY:** Fixed catastrophic contrast failures in dark mode
-  - Header navigation text now uses #F6F2EB (14.8:1 contrast) instead of #383838 (1.48:1)
-  - Replaced all unsafe neutral-300 usage with proper light text colors
-  - All text now meets WCAG AA 4.5:1 minimum contrast requirement
-  - Verified against actual implementation (not just documentation)
-```
+- Header navigation text now uses #F6F2EB (14.8:1 contrast) instead of #383838 (1.48:1)
+- Replaced all unsafe neutral-300 usage with proper light text colors
+- All text now meets WCAG AA 4.5:1 minimum contrast requirement
+- Verified against actual implementation (not just documentation)
+
+```text
 
 ---
 
@@ -315,7 +349,7 @@ where L1 = lighter color luminance
 
 ## Color Reference - Safe Colors for Dark Mode
 
-**Against #0F0F0F background, minimum 4.5:1 contrast:**
+## Against #0F0F0F background, minimum 4.5:1 contrast
 
 ```css
 /* ✅ SAFE - Use these */
@@ -336,20 +370,21 @@ where L1 = lighter color luminance
 --wp--preset--color--neutral-300: #383838;  /* 1.48:1 ❌ */
 --wp--preset--color--neutral-400: #525252;  /* 2.31:1 ❌ */
 --wp--preset--color--neutral-500: #737373;  /* 3.92:1 ❌ */
-```
+
+```text
 
 ---
 
 ## Success Criteria
 
-**This task list is COMPLETE when:**
+## This task list is COMPLETE when
 
-✅ All text elements have ≥4.5:1 contrast ratio  
-✅ Zero usage of neutral-50 through neutral-500 in `.dark` contexts  
-✅ All components visually tested and readable  
-✅ Lighthouse accessibility score 100  
-✅ axe DevTools reports zero contrast violations  
-✅ Documentation updated with accurate information  
+✅ All text elements have ≥4.5:1 contrast ratio
+✅ Zero usage of neutral-50 through neutral-500 in `.dark` contexts
+✅ All components visually tested and readable
+✅ Lighthouse accessibility score 100
+✅ axe DevTools reports zero contrast violations
+✅ Documentation updated with accurate information
 ✅ CHANGELOG updated with fixes
 
 ---
@@ -371,6 +406,7 @@ where L1 = lighter color luminance
 ## Risk Assessment
 
 **If not fixed:**
+
 - ❌ Site is unusable in dark mode
 - ❌ Violates WCAG AA (legal liability)
 - ❌ Poor user experience
@@ -378,6 +414,7 @@ where L1 = lighter color luminance
 - ❌ Reputational damage
 
 **If fixed:**
+
 - ✅ Site is accessible
 - ✅ WCAG AA compliant
 - ✅ Excellent user experience
@@ -386,9 +423,9 @@ where L1 = lighter color luminance
 
 ---
 
-**Status:** ✅ **CRITICAL PATH COMPLETE**  
-**Priority:** P0 - DEPLOY BLOCKER  
-**Assigned To:** Development Team  
+**Status:** ✅ **CRITICAL PATH COMPLETE**
+**Priority:** P0 - DEPLOY BLOCKER
+**Assigned To:** Development Team
 **Due Date:** ASAP (same day)
 
-**DO NOT DEPLOY UNTIL THIS IS COMPLETE.**
+## DO NOT DEPLOY UNTIL THIS IS COMPLETE

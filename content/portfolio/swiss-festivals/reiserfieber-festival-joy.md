@@ -7,13 +7,15 @@ category: Festival Makeup
 date: 2023-08-27
 location: "Reiserfieber, Switzerland"
 tags:
-  - Reiserfieber
-  - Joy
-  - Purple
-  - Turquoise
-  - Eye Art
+
+- Reiserfieber
+- Joy
+- Purple
+- Turquoise
+- Eye Art
 featured: false
 ---
+
 # Festival joy
 
 Joyful purple and turquoise eye design radiating positive festival energy.
@@ -22,4 +24,3 @@ Joyful purple and turquoise eye design radiating positive festival energy.
 
 ![Festival Joy - purple and turquoise eye design at Reiserfieber, Switzerland]()
 *Joyful eyes*
-

@@ -7,13 +7,17 @@
 
 ## Objective
 
-Extend the ebook with new chapters based on topics that don't have dedicated coverage yet. Polish existing unfinished/rough chapters to match the quality of the best chapters. Strengthen cross-chapter narrative connections so the book reads as a cohesive story, not disconnected essays.
+Extend the ebook with new chapters based on topics that don't have dedicated
+coverage yet. Polish existing unfinished/rough chapters to match the quality of
+the best chapters. Strengthen cross-chapter narrative connections so the book
+reads as a cohesive story, not disconnected essays.
 
 ---
 
 ## Current state
 
 **File:** `/data/mock/pages/ebook-pages.ts`
+
 - 82 pages across 20 chapters + 2 appendices
 - Part 1: The foundations (chapters 1–5)
 - Part 2: The art (chapters 6–10)
@@ -29,12 +33,17 @@ Extend the ebook with new chapters based on topics that don't have dedicated cov
 Scan every chapter for:
 
 1. **Incomplete sections** — Chapters that end abruptly or have placeholder-quality content
-2. **Disconnected anecdotes** — Stories added in Phase 7 that aren't woven into the narrative flow
-3. **Voice inconsistencies** — Sections that read like reference material instead of memoir prose
-4. **Missing transitions** — Chapters that don't flow naturally from the previous one
-5. **Repetition** — Stories or phrases duplicated across chapters (some was fixed in Phase 7 P2 polish, but check for remaining issues)
 
-### Polish priorities:
+1. **Disconnected anecdotes** — Stories added in Phase 7 that aren't woven into the narrative flow
+
+1. **Voice inconsistencies** — Sections that read like reference material instead of memoir prose
+
+1. **Missing transitions** — Chapters that don't flow naturally from the previous one
+
+1. **Repetition** — Stories or phrases duplicated across chapters (some was fixed in Phase 7 P2 polish, but check for remaining issues)
+
+### Polish priorities
+
 - Each chapter should have a strong opening line (hook the reader)
 - Each chapter should have a reflective closing paragraph (land the lesson)
 - Anecdotes should serve the chapter's theme, not just fill space
@@ -44,7 +53,8 @@ Scan every chapter for:
 
 ## Step 2: Add new chapters
 
-Based on ebook content gaps and the brief's suggestions, create new chapters for these topics:
+Based on ebook content gaps and the brief's suggestions, create new chapters for
+these topics:
 
 ### Proposed new chapters
 
@@ -65,6 +75,7 @@ Based on ebook content gaps and the brief's suggestions, create new chapters for
 ### Chapter structure template
 
 Each new chapter should have:
+
 - 3–5 pages (consistent with existing chapter lengths)
 - Strong opening hook (first line grabs attention)
 - 2–3 anecdotes woven into the theme
@@ -75,9 +86,10 @@ Each new chapter should have:
 
 ## Step 3: Strengthen cross-chapter connections
 
-Build a narrative thread map showing how chapters connect. Then add organic cross-references.
+Build a narrative thread map showing how chapters connect. Then add organic
+cross-references.
 
-### Connection examples:
+### Connection examples
 
 - Ch 1 (The first drop) → Ch 21 (Ambidextrous artist): "The hands that first picked up paint in Chapter 1 would learn to work together in ways I never expected"
 - Ch 3 (Berlin calling) → Ch 22 (Festival kit): "Berlin taught me to travel light — the kit evolved from there"
@@ -85,7 +97,8 @@ Build a narrative thread map showing how chapters connect. Then add organic cros
 - Ch 16 (The WordPress journey) → Ch 23 (AI workflow): "The tools changed, but the philosophy didn't — build it right, build it once"
 - Ch 15 (Six Cats) → Ch 24 (Grading system): "The craft isn't just in the growing — it's in knowing what you've grown"
 
-### Implementation:
+### Implementation
+
 - Add 1–2 subtle cross-reference lines per chapter where natural
 - Never force connections — if it doesn't flow, don't add it
 - Use callbacks: "Remember the loaded bike from Chapter 9? That's where this story starts..."
@@ -95,18 +108,22 @@ Build a narrative thread map showing how chapters connect. Then add organic cros
 ## Step 4: Update metadata
 
 After adding new chapters:
+
 1. Update page numbers across ALL chapters
-2. Update the table of contents / chapter index
-3. Update any chapter count references in the ebook UI data
-4. Verify total page count
+
+1. Update the table of contents / chapter index
+
+1. Update any chapter count references in the ebook UI data
+
+1. Verify total page count
 
 ---
 
 ## Output
 
 - **Report:** `/reports/content-expansion-phase8/07-ebook-enrichment.md` with:
-  - Rough chapters identified and polish changes made
-  - New chapters created (title, page count, part assignment)
-  - Cross-chapter connections added (source → target, line added)
-  - Updated total: chapters, pages, parts
-  - Any content gaps remaining for future phases
+- Rough chapters identified and polish changes made
+- New chapters created (title, page count, part assignment)
+- Cross-chapter connections added (source → target, line added)
+- Updated total: chapters, pages, parts
+- Any content gaps remaining for future phases

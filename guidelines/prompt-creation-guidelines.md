@@ -8,7 +8,9 @@ version: "1.0.0"
 
 # Prompt Creation Guidelines
 
-This document defines the standards and conventions for creating AI prompts for auditing, analysis, and task automation within the Ash Shaw Makeup Portfolio project.
+This document defines the standards and conventions for creating AI prompts for
+auditing, analysis, and task automation within the Ash Shaw Makeup Portfolio
+project.
 
 ---
 
@@ -16,9 +18,9 @@ This document defines the standards and conventions for creating AI prompts for 
 
 ### Prompt Storage Location
 
-**All prompts MUST be stored in `/prompts/`**
+## All prompts MUST be stored in `/prompts/`
 
-```
+```text
 /prompts/
 ├── simple-audit-prompt.md           # Single-file prompts (no sub-prompts)
 ├── css-architecture-audit.md        # Another single-file prompt
@@ -28,7 +30,8 @@ This document defines the standards and conventions for creating AI prompts for 
     ├── 02-tailwind-violations-audit.md
     ├── 03-wordpress-css-alignment.md
     └── 04-component-structure-audit.md
-```
+
+```text
 
 ### Naming Conventions
 
@@ -40,6 +43,7 @@ This document defines the standards and conventions for creating AI prompts for 
 | **Sub-prompt files** | `{nn}-{descriptive-name}.md` | `01-es5-react-audit.md` |
 
 **Rules:**
+
 - Use kebab-case for all filenames
 - Orchestrator file MUST be named `00-ORCHESTRATOR.md`
 - Sub-prompts MUST be numbered sequentially: `01-`, `02-`, `03-`, etc.
@@ -51,7 +55,7 @@ This document defines the standards and conventions for creating AI prompts for 
 
 ### Required YAML Frontmatter
 
-**Every prompt file MUST start with YAML frontmatter:**
+## Every prompt file MUST start with YAML frontmatter
 
 ```yaml
 ---
@@ -66,7 +70,8 @@ estimated_duration: "30 minutes"  # Optional but recommended
 related_reports: "/reports/{topic}/"  # Where reports will be saved
 related_tasks: "/tasks/{topic}-tasks.md"  # Task list file
 ---
-```
+
+```text
 
 ### YAML Field Definitions
 
@@ -90,6 +95,7 @@ related_tasks: "/tasks/{topic}-tasks.md"  # Task list file
 ### 1. Single-File Prompt
 
 **When to use:**
+
 - Simple one-time audit
 - No sub-components needed
 - Single focused scan
@@ -99,6 +105,7 @@ related_tasks: "/tasks/{topic}-tasks.md"  # Task list file
 **Report location:** `/reports/{topic}.md` (single file, root of /reports/)
 
 **Example:**
+
 ```yaml
 ---
 title: "CSS Architecture Quick Audit"
@@ -106,13 +113,15 @@ filename: "/prompts/css-architecture-audit.md"
 prompt_type: "single-audit"
 related_reports: "/reports/css-architecture-audit.md"
 ---
-```
+
+```text
 
 ---
 
 ### 2. Orchestrator Prompt
 
 **When to use:**
+
 - Complex multi-phase audit
 - Multiple focused sub-scans needed
 - Coordinated sequential execution
@@ -132,6 +141,7 @@ prompt_type: "orchestrator"
 # Orchestrator Title
 
 ## Overview
+
 Brief description of the full audit scope
 
 ## Execution Sequence
@@ -139,38 +149,46 @@ Brief description of the full audit scope
 This orchestrator runs the following sub-prompts IN ORDER:
 
 1. **01-{first-audit}.md** - Description
-2. **02-{second-audit}.md** - Description
-3. **03-{third-audit}.md** - Description
+
+1. **02-{second-audit}.md** - Description
+
+1. **03-{third-audit}.md** - Description
 
 ## Workflow
 
 ### Step 1: Run Sub-Prompt 01
+
 - Execute `/prompts/{topic}/01-{first-audit}.md`
 - Save report to `/reports/{topic}/01-{first-audit}.md`
 - Wait for completion before proceeding
 
 ### Step 2: Run Sub-Prompt 02
+
 - Execute `/prompts/{topic}/02-{second-audit}.md`
 - Save report to `/reports/{topic}/02-{second-audit}.md`
 - Wait for completion before proceeding
 
 ### Step 3: Process All Reports into Task List
+
 - Read ALL reports in `/reports/{topic}/`
 - Extract actionable items
 - Create consolidated task list: `/tasks/{topic}-tasks.md`
 - Group tasks logically by phase/priority
 
 ## Success Criteria
+
 - [ ] All sub-prompts executed
 - [ ] All reports saved to `/reports/{topic}/`
 - [ ] Task list created in `/tasks/{topic}-tasks.md`
-```
+
+```text
 
 ---
 
 ### 3. Sub-Prompt
 
 **When to use:**
+
 - Part of an orchestrator sequence
 - Focused single-topic audit
 - Sequential execution required
@@ -182,6 +200,7 @@ This orchestrator runs the following sub-prompts IN ORDER:
 **Required YAML field:** `execution_order: {n}`
 
 **Example:**
+
 ```yaml
 ---
 title: "ES5 React Best Practices Audit"
@@ -190,7 +209,8 @@ prompt_type: "sub-prompt"
 execution_order: 1
 related_reports: "/reports/modern-react-migration/01-es5-react-audit.md"
 ---
-```
+
+```text
 
 ---
 
@@ -201,39 +221,52 @@ related_reports: "/reports/modern-react-migration/01-es5-react-audit.md"
 Every prompt MUST include these sections:
 
 ```markdown
+
 ## 1. Objective
+
 Clear statement of what this audit will accomplish
 
 ## 2. Scope
+
 What files/folders/components will be audited
 
 ## 3. Audit Steps
+
 Sequential numbered steps to execute the audit
 
 ## 4. Success Criteria
+
 Checklist of what defines completion
 
 ## 5. Report Output
+
 - **Location:** Where to save the report
 - **Format:** Structure of the report
 - **Required sections:** What must be in the report
-```
+
+```text
 
 ### Optional Sections
 
 ```markdown
+
 ## Background
+
 Context for why this audit is needed
 
 ## Related Guidelines
+
 Links to relevant guideline files
 
 ## Tools & References
+
 External tools or documentation needed
 
 ## Estimated Duration
+
 How long this should take
-```
+
+```text
 
 ---
 
@@ -244,10 +277,12 @@ How long this should take
 **Report location:** `/reports/{topic}.md`
 
 **Example:**
-```
+
+```text
 Prompt: /prompts/css-audit.md
 Report: /reports/css-audit.md
-```
+
+```text
 
 ---
 
@@ -258,7 +293,8 @@ Report: /reports/css-audit.md
 **Naming convention:** Reports are saved to a dated subfolder
 
 **Example:**
-```
+
+```text
 Orchestrator: /prompts/modern-react-migration/00-ORCHESTRATOR.md
 
 Reports folder: /reports/2026-03-11-modern-react-migration/
@@ -266,9 +302,11 @@ Reports folder: /reports/2026-03-11-modern-react-migration/
 ├── 02-tailwind-violations.md
 ├── 03-wordpress-css-alignment.md
 └── 04-component-structure.md
-```
+
+```text
 
 **Folder naming:**
+
 - Format: `/reports/{YYYY-MM-DD}-{topic}/`
 - Date is the date the orchestrator was executed
 - Topic matches the orchestrator folder name
@@ -279,27 +317,32 @@ Reports folder: /reports/2026-03-11-modern-react-migration/
 
 ### When to Create Task List
 
-**Single-file prompt:**
+## Single-file prompt
+
 - Create task list immediately after report is complete
 - Location: `/tasks/{topic}-tasks.md`
 
-**Orchestrator prompt:**
+## Orchestrator prompt
+
 - Create task list ONLY after ALL sub-prompts have completed
 - Process ALL reports in `/reports/{topic}/` folder
 - Location: `/tasks/{topic}-tasks.md`
 
 ### Task List Requirements
 
-**One task list per orchestrator/prompt:**
+## One task list per orchestrator/prompt
+
 - ✅ Consolidated single file
 - ❌ NOT one task list per sub-prompt
 
 **Task grouping:**
+
 - Group by logical phase (Phase 1, Phase 2, etc.)
 - Group by priority (Critical, High, Medium, Low)
 - Group by component type (Navigation, Content, Forms, etc.)
 
 **Example structure:**
+
 ```markdown
 ---
 title: "Modern React Migration Tasks"
@@ -327,7 +370,8 @@ related_reports: "/reports/2026-03-11-modern-react-migration/"
 
 - [ ] Task 1 from report 03
 - [ ] Task 2 from report 04
-```
+
+```text
 
 ---
 
@@ -337,39 +381,48 @@ related_reports: "/reports/2026-03-11-modern-react-migration/"
 
 Follow semantic versioning: `MAJOR.MINOR.PATCH`
 
-**MAJOR (1.0.0 → 2.0.0):**
+## MAJOR (1.0.0 → 2.0.0)
+
 - Complete rewrite of audit logic
 - Changed success criteria
 - Different output format
 
-**MINOR (1.0.0 → 1.1.0):**
+## MINOR (1.0.0 → 1.1.0)
+
 - Added new audit steps
 - Expanded scope
 - New sections added
 
-**PATCH (1.0.0 → 1.0.1):**
+## PATCH (1.0.0 → 1.0.1)
+
 - Fixed typos
 - Clarified instructions
 - Updated file paths
 
 ### Updating Prompts
 
-**When modifying a prompt file:**
+## When modifying a prompt file
 
 1. Update `modified` field in YAML frontmatter
-2. Increment `version` field appropriately
-3. Add changelog entry at bottom of file:
+
+1. Increment `version` field appropriately
+
+1. Add changelog entry at bottom of file:
 
 ```markdown
+
 ## Changelog
 
 ### v1.1.0 - 2026-03-12
+
 - Added WordPress block editor CSS class audit
 - Expanded scope to include theme.json alignment
 
 ### v1.0.0 - 2026-03-11
+
 - Initial creation
-```
+
+```text
 
 ---
 
@@ -380,25 +433,32 @@ Follow semantic versioning: `MAJOR.MINOR.PATCH`
 All prompts SHOULD reference relevant guideline files:
 
 ```markdown
-## Related Guidelines
+
+## Related Guidelines (1)
 
 This audit enforces the standards defined in:
+
 - [BEM CSS Architecture](../guidelines/css-architecture.md)
 - [Component Guidelines](../guidelines/overview-components.md)
 - [WordPress FSE Patterns](../guidelines/wordpress-fse-patterns.md)
-```
+
+```text
 
 ### Linking to Other Prompts
 
 Orchestrator prompts MUST link to all sub-prompts:
 
 ```markdown
+
 ## Sub-Prompts
 
 1. [ES5 React Best Practices](./01-es5-react-audit.md)
-2. [Tailwind Violations Audit](./02-tailwind-violations.md)
-3. [WordPress CSS Alignment](./03-wordpress-css-alignment.md)
-```
+
+1. [Tailwind Violations Audit](./02-tailwind-violations.md)
+
+1. [WordPress CSS Alignment](./03-wordpress-css-alignment.md)
+
+```text
 
 ---
 
@@ -414,15 +474,19 @@ All prompts MUST be designed to be **re-runnable**:
 - ✅ Updates task lists incrementally
 
 **Example:**
+
 ```markdown
+
 ## Re-execution Notes
 
 This prompt can be run:
+
 - After every major code change
 - Before deployments
 - Monthly as maintenance
 - When new components are added
-```
+
+```text
 
 ---
 
@@ -452,23 +516,35 @@ This prompt can be run:
 
 ### Single-File Prompt Workflow
 
-```
+```text
+
 1. Create prompt: /prompts/{topic}.md
-2. Run audit
-3. Save report: /reports/{topic}.md
-4. Create task list: /tasks/{topic}-tasks.md
-```
+
+1. Run audit
+
+1. Save report: /reports/{topic}.md
+
+1. Create task list: /tasks/{topic}-tasks.md
+
+```text
 
 ### Orchestrator Prompt Workflow
 
-```
+```text
+
 1. Create folder: /prompts/{topic}/
-2. Create orchestrator: /prompts/{topic}/00-ORCHESTRATOR.md
-3. Create sub-prompts: /prompts/{topic}/01-*.md, 02-*.md, etc.
-4. Run orchestrator (executes all sub-prompts sequentially)
-5. Each sub-prompt saves report: /reports/{date}-{topic}/01-*.md, 02-*.md
-6. After ALL reports complete, create task list: /tasks/{topic}-tasks.md
-```
+
+1. Create orchestrator: /prompts/{topic}/00-ORCHESTRATOR.md
+
+1. Create sub-prompts: /prompts/{topic}/01-*.md, 02-*.md, etc.
+
+1. Run orchestrator (executes all sub-prompts sequentially)
+
+1. Each sub-prompt saves report: /reports/{date}-{topic}/01-*.md, 02-*.md
+
+1. After ALL reports complete, create task list: /tasks/{topic}-tasks.md
+
+```text
 
 ---
 
@@ -487,5 +563,5 @@ Before creating a prompt, verify:
 
 ---
 
-**Last Updated:** March 11, 2026  
+**Last Updated:** March 11, 2026
 **Maintained By:** Prompt Engineering Team

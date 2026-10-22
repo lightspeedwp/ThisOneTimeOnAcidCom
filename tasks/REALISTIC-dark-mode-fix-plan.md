@@ -1,9 +1,10 @@
 # 🚨 REALISTIC Dark Mode Fix Plan
 
-**Reality Check:** This is a MASSIVE systematic failure requiring 4-5 hours of focused work.
+**Reality Check:** This is a MASSIVE systematic failure requiring 4-5 hours of
+focused work.
 
-**Status:** Header fixed (1 of 102+ failures)  
-**Remaining:** 101+ failures across 15+ files  
+**Status:** Header fixed (1 of 102+ failures)
+**Remaining:** 101+ failures across 15+ files
 **Estimated Time:** 4-5 hours total
 
 ---
@@ -12,18 +13,18 @@
 
 ### What We Claimed
 
-❌ "100% WCAG AA compliance"  
-❌ "92% WCAG AAA compliance"  
-❌ "Industry-leading accessibility"  
-❌ "Production ready"  
+❌ "100% WCAG AA compliance"
+❌ "92% WCAG AAA compliance"
+❌ "Industry-leading accessibility"
+❌ "Production ready"
 ❌ "Contrast ratios 14.8:1 to 21:1"
 
 ### What's Actually True
 
-✅ Header navigation: 14.8:1 (FIXED)  
-❌ Everything else: 1.48:1 to 3.92:1 (BROKEN)  
-❌ WCAG AA Compliance: **~1%** (1 of 102+ components)  
-❌ Production ready: **NO**  
+✅ Header navigation: 14.8:1 (FIXED)
+❌ Everything else: 1.48:1 to 3.92:1 (BROKEN)
+❌ WCAG AA Compliance: **~1%** (1 of 102+ components)
+❌ Production ready: **NO**
 ❌ Dark mode usable: **BARELY**
 
 ---
@@ -32,14 +33,16 @@
 
 ### Option A: Complete Fix (4-5 hours)
 
-**Fix all 102+ failures systematically**
+## Fix all 102+ failures systematically
 
 **Pros:**
+
 - Actually achieves WCAG AA compliance
 - Dark mode becomes fully usable
 - Can claim "accessible" honestly
 
 **Cons:**
+
 - Requires 4-5 hours of focused work
 - Must test every single component
 - Tedious and repetitive
@@ -50,30 +53,41 @@
 
 ### Option B: Critical Path Only (1-2 hours)
 
-**Fix only user-facing navigation and content**
+## Fix only user-facing navigation and content
 
 **Fixes:**
+
 1. ✅ Header (DONE)
-2. Footer
-3. Breadcrumbs
-4. Mobile menu
-5. Blog cards
-6. About page
-7. Archive filters
-8. Search results
+
+1. Footer
+
+1. Breadcrumbs
+
+1. Mobile menu
+
+1. Blog cards
+
+1. About page
+
+1. Archive filters
+
+1. Search results
 
 **Leaves broken:**
+
 - Developer tools
 - Specimen pages
 - Analytics dashboard
 - Internal components
 
 **Pros:**
+
 - Faster (1-2 hours)
 - Main user experience fixed
 - Core navigation usable
 
 **Cons:**
+
 - Still incomplete
 - Can't claim full compliance
 - Some pages remain broken
@@ -84,7 +98,7 @@
 
 ### Option C: Nuclear Option (30 minutes)
 
-**Global CSS override — force all dark mode text to be light**
+## Global CSS override — force all dark mode text to be light
 
 ```css
 /* Nuclear fix - override everything */
@@ -98,14 +112,17 @@
 /* etc... */ {
   /* Restore proper colors */
 }
-```
+
+```text
 
 **Pros:**
+
 - Fast (30 minutes)
 - Guarantees readable text
 - Covers unknown failures
 
 **Cons:**
+
 - Destroys intentional color variations
 - Requires extensive selective restoration
 - Crude and inelegant
@@ -127,7 +144,8 @@
 - [ ] Mobile menu
 - [ ] Main nav menu
 
-**Find/Replace Pattern:**
+## Find/Replace Pattern
+
 ```css
 /* FIND in each file */
 .dark .nav-element-name {
@@ -139,7 +157,8 @@
 .dark .nav-element-name {
   color: var(--color-text-light); /* 14.8:1 ✅ */
 }
-```
+
+```text
 
 ---
 
@@ -148,12 +167,14 @@
 **Goal:** Users can read main content
 
 **Files to fix:**
+
 - [ ] `/styles/blocks/blog-preview.css`
 - [ ] `/styles/blocks/about-page.css`
 - [ ] `/styles/blocks/about-subpage.css`
 - [ ] `/styles/blocks/archive-filters.css`
 
 **Pattern:**
+
 ```css
 /* Body/excerpt text */
 .dark .some-excerpt {
@@ -169,7 +190,8 @@
 .dark .some-meta {
   color: var(--color-text-fine); /* #9C9488 - 6.5:1 ✅ */
 }
-```
+
+```text
 
 ---
 
@@ -178,12 +200,14 @@
 **Goal:** Forms and interface elements are usable
 
 **Files to fix:**
+
 - [ ] `/styles/blocks/buttons.css` (if exists)
 - [ ] `/styles/blocks/button-specimen.css`
 - [ ] `/styles/blocks/forms.css` (if exists)
 - [ ] `/styles/blocks/card-specimen.css`
 
 **Common patterns:**
+
 ```css
 /* Button text */
 .dark .button--ghost {
@@ -199,7 +223,8 @@
 .dark .form-helper {
   color: var(--color-text-muted); /* Not neutral-400 ❌ */
 }
-```
+
+```text
 
 ---
 
@@ -208,6 +233,7 @@
 **Goal:** Internal tools work properly
 
 **Files to fix:**
+
 - [ ] `/styles/blocks/analytics-dashboard.css` (12 failures)
 - [ ] `/styles/blocks/component-api.css` (11 failures)
 - [ ] `/styles/blocks/code-quality.css` (13 failures)
@@ -221,18 +247,21 @@
 **Goal:** Confirm everything works
 
 **Manual Testing:**
+
 - [ ] Navigate to every page in dark mode
 - [ ] Read all text elements
 - [ ] Check metadata, labels, helpers
 - [ ] Verify nothing is invisible
 
 **Automated Testing:**
+
 - [ ] Run Lighthouse accessibility audit
 - [ ] Run axe DevTools
 - [ ] Check WebAIM Contrast Checker for samples
 - [ ] Verify zero violations
 
 **Documentation:**
+
 - [ ] Update docs with ACTUAL compliance status
 - [ ] Remove false claims
 - [ ] Document what was fixed
@@ -294,19 +323,20 @@
 --wp--preset--color--neutral-300: #383838;   /* 1.48:1 ❌ */
 --wp--preset--color--neutral-400: #525252;   /* 2.31:1 ❌ */
 --wp--preset--color--neutral-500: #737373;   /* 3.92:1 ❌ */
-```
+
+```text
 
 ---
 
 ## Success Criteria
 
-**This fix plan is COMPLETE when:**
+## This fix plan is COMPLETE when
 
-✅ All text has ≥4.5:1 contrast ratio  
-✅ Lighthouse accessibility = 100  
-✅ axe DevTools = 0 violations  
-✅ Every page visually tested  
-✅ Documentation updated honestly  
+✅ All text has ≥4.5:1 contrast ratio
+✅ Lighthouse accessibility = 100
+✅ axe DevTools = 0 violations
+✅ Every page visually tested
+✅ Documentation updated honestly
 ✅ No false claims remain
 
 ---
@@ -326,25 +356,25 @@
 
 ## Current Progress
 
-**Fixed:** 1 component (header navigation)  
-**Remaining:** 101+ components  
-**Completion:** ~1%  
+**Fixed:** 1 component (header navigation)
+**Remaining:** 101+ components
+**Completion:** ~1%
 **Status:** ❌ **NOT PRODUCTION READY**
 
 ---
 
 ## Honest Assessment
 
-**Can we claim "100% WCAG AA" right now?**  
+**Can we claim "100% WCAG AA" right now?**
 ❌ **NO** — We're at ~1% compliance
 
-**Is dark mode usable?**  
+**Is dark mode usable?**
 ⚠️ **BARELY** — Header works, everything else is nearly invisible
 
-**Should we deploy this?**  
+**Should we deploy this?**
 ❌ **NO** — It's a terrible user experience
 
-**What should we do?**  
+**What should we do?**
 ✅ **Fix it properly** — Spend the 4 hours and do it right
 
 ---
@@ -352,11 +382,16 @@
 ## Next Immediate Actions
 
 1. **Decide on fix strategy** (Option A recommended)
-2. **Allocate 4-5 hours** for systematic fixes
-3. **Start with Phase 1** (finish navigation fixes)
-4. **Work through checklist** methodically
-5. **Test thoroughly** before claiming completion
-6. **Update docs honestly** with actual results
+
+1. **Allocate 4-5 hours** for systematic fixes
+
+1. **Start with Phase 1** (finish navigation fixes)
+
+1. **Work through checklist** methodically
+
+1. **Test thoroughly** before claiming completion
+
+1. **Update docs honestly** with actual results
 
 ---
 
@@ -364,10 +399,10 @@
 
 ---
 
-**Status:** ❌ **WORK IN PROGRESS**  
-**ETA:** 4 hours of focused work  
-**Priority:** P0 - DEPLOY BLOCKER  
-**Assigned:** Development Team  
+**Status:** ❌ **WORK IN PROGRESS**
+**ETA:** 4 hours of focused work
+**Priority:** P0 - DEPLOY BLOCKER
+**Assigned:** Development Team
 **Due:** ASAP
 
-**No more bullshit. Let's fix it properly.**
+## No more bullshit. Let's fix it properly

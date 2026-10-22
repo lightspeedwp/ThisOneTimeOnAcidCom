@@ -1,13 +1,15 @@
 # FeaturedSection
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 ---
 
 ## Purpose
 
-The FeaturedSection is a **content showcase area** that displays curated portfolio work. It combines:
+The FeaturedSection is a **content showcase area** that displays curated
+portfolio work. It combines:
+
 - Portfolio card grid layout
 - Interactive image sliders
 - Lightbox functionality for full-screen viewing
@@ -27,18 +29,18 @@ The FeaturedSection is a **content showcase area** that displays curated portfol
       <h2>{/* Section title */}</h2>
       <p>{/* Section description */}</p>
     </div>
-    
+
     {/* Grid */}
     <div className="[grid-layout]">
       {entries.map(entry => (
-        <SliderCard 
+        <SliderCard
           key={entry.id}
           entry={entry}
           onImageClick={openLightbox}
         />
       ))}
     </div>
-    
+
     {/* View More Button */}
     <div className="[button-container]">
       <button onClick={navigateToPortfolio}>
@@ -46,42 +48,50 @@ The FeaturedSection is a **content showcase area** that displays curated portfol
       </button>
     </div>
   </div>
-  
+
   {/* Lightbox Modal */}
   <EnhancedLightbox {...lightboxProps} />
 </section>
-```
+
+```text
 
 ---
 
 ## Container Styles
 
 ### Section Container
+
 ```tsx
 className="
   bg-gradient-to-br from-pink-100 to-purple-100   // Brand gradient background
   py-section                                       // clamp(3rem, 6vw + 1rem, 8rem)
   px-fluid-md                                      // clamp(1rem, 0.6rem + 2vw, 2rem)
 "
-```
+
+```text
 
 ### Inner Container
+
 ```tsx
 className="
   max-w-7xl                                        // 1280px max-width
   mx-auto                                          // Center horizontally
 "
-```
+
+```text
 
 ### Section Header
+
 ```tsx
 className="
   text-center                                      // Center alignment
   mb-fluid-2xl                                     // clamp(3rem, 1.5rem + 7.5vw, 6rem)
 "
-```
+
+```text
 
 ### Grid Layout
+
 ```tsx
 className="
   grid                                             // CSS Grid
@@ -91,7 +101,8 @@ className="
   gap-fluid-lg                                     // clamp(1.5rem, 1rem + 2.5vw, 3rem)
   mb-fluid-xl                                      // Margin below grid
 "
-```
+
+```text
 
 ---
 
@@ -100,29 +111,34 @@ className="
 ### 1. Section Header
 
 #### Section Title (H2)
+
 ```tsx
 <h2 className="
   text-section-h2                                  // clamp(1.5rem, 4vw, 3rem)
   font-heading                                     // Playfair Display
-  font-bold 
+  font-bold
   text-gray-800
   mb-fluid-md
 ">
   Featured Work
 </h2>
-```
+
+```text
 
 #### Section Description
+
 ```tsx
 <p className="
   text-body-guideline                              // clamp(1rem, 1.5vw, 1.25rem)
-  text-gray-600 
+  text-gray-600
   max-w-2xl                                        // 672px max-width
   mx-auto
 ">
-  Explore my latest makeup artistry from festivals, events, and creative collaborations.
+Explore my latest makeup artistry from festivals, events, and creative
+collaborations.
 </p>
-```
+
+```text
 
 ---
 
@@ -131,6 +147,7 @@ className="
 The grid displays **SliderCard** components for each portfolio entry:
 
 #### SliderCard Integration
+
 ```tsx
 <SliderCard
   key={entry.id}
@@ -140,9 +157,11 @@ The grid displays **SliderCard** components for each portfolio entry:
   }
   layoutMode="grid"                                // Grid layout mode
 />
-```
 
-**SliderCard Features:**
+```text
+
+## SliderCard Features
+
 - Aspect-square image container
 - Multiple image slider with navigation
 - Category badge overlay
@@ -155,14 +174,17 @@ The grid displays **SliderCard** components for each portfolio entry:
 ### 3. View More Button
 
 #### Button Container
+
 ```tsx
 <div className="
   text-center                                      // Center button
   mt-fluid-xl                                      // Top margin
 ">
-```
+
+```text
 
 #### CTA Button
+
 ```tsx
 <button
   onClick={() => setCurrentPage('portfolio')}
@@ -170,24 +192,25 @@ The grid displays **SliderCard** components for each portfolio entry:
     w-full sm:w-auto                               // Full width mobile
     bg-gradient-pink-purple-blue                   // Brand gradient
     hover:from-purple-700 hover:to-pink-700        // Hover gradient shift
-    text-white 
+    text-white
     px-button                                      // clamp(1.5rem, 1rem + 2.5vw, 3rem)
     py-button                                      // clamp(0.75rem, 0.5rem + 1.25vw, 1.5rem)
-    font-body 
-    font-medium 
+    font-body
+    font-medium
     text-button-fluid                              // clamp(1rem, 0.9rem + 0.5vw, 1.25rem)
-    transition-all duration-300 
-    rounded-lg 
-    shadow-lg hover:shadow-xl 
-    transform hover:scale-105 
-    focus:outline-none 
-    focus:ring-4 focus:ring-pink-200 
+    transition-all duration-300
+    rounded-lg
+    shadow-lg hover:shadow-xl
+    transform hover:scale-105
+    focus:outline-none
+    focus:ring-4 focus:ring-pink-200
     focus:ring-opacity-50
   "
 >
   View Full Portfolio
 </button>
-```
+
+```text
 
 ---
 
@@ -202,7 +225,8 @@ import { getFeaturedPortfolioEntries } from "../../utils/portfolioService";
 const featuredEntries = useMemo(() => {
   return getFeaturedPortfolioEntries();
 }, []);
-```
+
+```text
 
 ### Portfolio Entry Structure
 
@@ -223,25 +247,29 @@ interface UnifiedPortfolioEntry {
   location?: string;
   date?: string;
 }
-```
+
+```text
 
 ---
 
 ## Responsive Breakpoints
 
 ### Mobile (< 768px)
+
 - Single column grid (`grid-cols-1`)
 - Full-width cards
 - Stack vertically with consistent spacing
 - Full-width CTA button
 
 ### Tablet (768px - 1024px)
+
 - Two column grid (`md:grid-cols-2`)
 - Cards maintain aspect ratio
 - Responsive padding and gaps
 - Button auto-width
 
 ### Desktop (1024px+)
+
 - Three column grid (`lg:grid-cols-3`)
 - Maximum container width (1280px)
 - Larger spacing between cards
@@ -283,7 +311,8 @@ const closeLightbox = () => {
     description: "",
   });
 };
-```
+
+```text
 
 ### 2. Navigation
 
@@ -294,11 +323,13 @@ const handleViewPortfolio = () => {
   setCurrentPage('portfolio');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
-```
+
+```text
 
 ### 3. Card Interactions
 
 Each SliderCard has:
+
 - Image slider with dot navigation
 - Click to open lightbox
 - Hover scale transform
@@ -309,17 +340,20 @@ Each SliderCard has:
 ## Accessibility
 
 ### Semantic HTML
+
 ```tsx
 <section aria-labelledby="featured-heading">
   <h2 id="featured-heading">Featured Work</h2>
   {/* Content */}
 </section>
-```
+
+```text
 
 ### ARIA Labels
+
 ```tsx
 // SliderCard images
-<img 
+<img
   src={image.src}
   alt={image.alt}
   aria-label={`View ${entry.title} in lightbox`}
@@ -332,9 +366,11 @@ Each SliderCard has:
 >
   View Full Portfolio
 </button>
-```
+
+```text
 
 ### Keyboard Navigation
+
 - Tab through cards
 - Enter/Space to open lightbox
 - Arrow keys in slider navigation
@@ -355,33 +391,42 @@ Each SliderCard has:
 ## Color Palette
 
 ### Background
+
 ```css
 bg-gradient-to-br from-pink-100 to-purple-100
-```
+
+```text
 
 ### Text Colors
+
 ```css
 text-gray-800                      /* Section title */
 text-gray-600                      /* Description */
 text-white                         /* Button text */
-```
+
+```text
 
 ### Button Gradient
+
 ```css
 bg-gradient-pink-purple-blue                     /* Default */
 hover:from-purple-700 hover:to-pink-700          /* Hover state */
-```
+
+```text
 
 ### Focus Ring
+
 ```css
 focus:ring-pink-200                              /* Focus indicator */
-```
+
+```text
 
 ---
 
 ## Best Practices
 
 ### 1. Data Loading
+
 ```tsx
 // ✅ Use memoized data
 const featuredEntries = useMemo(() => {
@@ -394,18 +439,22 @@ const featuredEntries = useMemo(() => {
     No featured work available.
   </p>
 )}
-```
+
+```text
 
 ### 2. Grid Layout
+
 ```tsx
 // ✅ Responsive grid columns
 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
 
 // ✅ Consistent gap
 className="gap-fluid-lg"
-```
+
+```text
 
 ### 3. Performance
+
 ```tsx
 // ✅ Lazy load lightbox
 {lightbox.isOpen && (
@@ -418,22 +467,26 @@ className="gap-fluid-lg"
     description={lightbox.description}
   />
 )}
-```
+
+```text
 
 ### 4. Consistent Spacing
+
 ```tsx
 // ✅ Use fluid spacing tokens
 py-section                         // Section padding
 mb-fluid-2xl                       // Header margin
 gap-fluid-lg                       // Grid gap
 mt-fluid-xl                        // Button margin
-```
+
+```text
 
 ---
 
 ## WordPress Comparison
 
 ### WordPress `core/query` Block
+
 ```html
 <!-- wp:query -->
 <div class="wp-block-query">
@@ -444,11 +497,14 @@ mt-fluid-xl                        // Button margin
   </div>
 </div>
 <!-- /wp:query -->
-```
+
+```text
 
 ### Ash Shaw FeaturedSection
+
 ```tsx
-<section className="bg-gradient-to-br from-pink-100 to-purple-100 py-section px-fluid-md">
+<section className="bg-gradient-to-br from-pink-100 to-purple-100 py-section
+px-fluid-md">
   <div className="max-w-7xl mx-auto">
     <div className="text-center mb-fluid-2xl">
       <h2>Featured Work</h2>
@@ -459,7 +515,8 @@ mt-fluid-xl                        // Button margin
     </div>
   </div>
 </section>
-```
+
+```text
 
 ---
 
@@ -473,5 +530,5 @@ mt-fluid-xl                        // Button margin
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

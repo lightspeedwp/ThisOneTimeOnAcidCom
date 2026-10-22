@@ -1,6 +1,6 @@
 # Tag Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 Tag/badge component for categorization, labels, and metadata display.
@@ -8,6 +8,7 @@ Tag/badge component for categorization, labels, and metadata display.
 ## Purpose
 
 Display labels and categories with:
+
 - Multiple color variants
 - Size options (sm, md, lg)
 - Icon support
@@ -28,11 +29,11 @@ sequenceDiagram
     participant T as Tag Component
     participant B as BlogPage
     participant F as Filter System
-    
+
     Note over B: Display blog post with tags
     B->>T: Render tags ['Festival', 'Tutorial', 'Glitter']
     T-->>U: Display tag pills
-    
+
     alt Clickable Tag
         U->>T: Click "Festival" tag
         T->>T: Check if onClick exists
@@ -51,14 +52,15 @@ sequenceDiagram
         T->>T: No onClick/onRemove
         T-->>U: Display only (no action)
     end
-```
+
+```text
 
 ### Tag Variant Color Mapping (Mermaid)
 
 ```mermaid
 flowchart TD
     A[Tag Renders] --> B{Which Variant?}
-    
+
     B -->|pink| C[Pink Gradient]
     B -->|purple| D[Purple Gradient]
     B -->|blue| E[Blue Gradient]
@@ -66,7 +68,7 @@ flowchart TD
     B -->|orange| G[Orange Solid]
     B -->|gray| H[Gray Neutral]
     B -->|default| I[Default Gray]
-    
+
     C --> C1["bg-gradient-to-r from-pink-500 to-rose-500<br/>text-white"]
     D --> D1["bg-gradient-to-r from-purple-500 to-indigo-500<br/>text-white"]
     E --> E1["bg-gradient-to-r from-blue-500 to-cyan-500<br/>text-white"]
@@ -74,7 +76,7 @@ flowchart TD
     G --> G1["bg-orange-100 text-orange-800<br/>border-orange-300"]
     H --> H1["bg-gray-100 text-gray-700<br/>border-gray-300"]
     I --> I1["bg-gray-200 text-gray-800"]
-    
+
     C1 --> J[Render Tag]
     D1 --> J
     E1 --> J
@@ -82,23 +84,24 @@ flowchart TD
     G1 --> J
     H1 --> J
     I1 --> J
-    
+
     J --> K{Has Icon?}
-    
+
     K -->|Yes| L[Render icon + text]
     K -->|No| M[Render text only]
-    
+
     L --> N{Size?}
     M --> N
-    
+
     N -->|sm| O[px-2 py-1 text-xs]
     N -->|md| P[px-3 py-1.5 text-sm]
     N -->|lg| Q[px-4 py-2 text-base]
-    
+
     style C1 fill:#fce7f3,stroke:#ec4899,stroke-width:2px
     style D1 fill:#f3e8ff,stroke:#a855f7,stroke-width:2px
     style E1 fill:#dbeafe,stroke:#3b82f6,stroke-width:2px
-```
+
+```text
 
 ### Tag State Management (Mermaid)
 
@@ -107,42 +110,45 @@ stateDiagram-v2
     [*] --> Static: onClick/onRemove undefined
     [*] --> Interactive: onClick defined
     [*] --> Removable: onRemove defined
-    
+
     Static --> Idle: Display only
     Idle --> Idle: No user actions
-    
+
     Interactive --> Clickable: Cursor pointer
     Clickable --> Hover: Mouse enter
     Clickable --> Focused: Keyboard focus
-    
+
     Hover --> Click: Mouse click
     Focused --> Click: Enter/Space key
-    
+
     Click --> FilterActive: Execute onClick
     FilterActive --> UpdateUI: Apply filter
     UpdateUI --> Clickable: Return to idle
-    
+
     Removable --> RemovableIdle: Show X button
     RemovableIdle --> RemoveHover: Hover X button
     RemoveHover --> Remove: Click X
-    
+
     Remove --> Unmount: Execute onRemove
     Unmount --> [*]: Tag removed from DOM
-    
+
     note right of Interactive
         Clickable tags:
+
         - Cursor pointer
         - Hover effects
         - Filter on click
     end note
-    
+
     note right of Removable
         Removable tags:
+
         - X close button
         - Remove from list
         - Dismiss action
     end note
-```
+
+```text
 
 ---
 
@@ -154,7 +160,8 @@ stateDiagram-v2
 import { Tag } from './components/ui/Tag';
 
 <Tag>Festival</Tag>
-```
+
+```text
 
 ### With Color Variant
 
@@ -162,42 +169,46 @@ import { Tag } from './components/ui/Tag';
 <Tag variant="pink">Festival</Tag>
 <Tag variant="purple">Editorial</Tag>
 <Tag variant="blue">Special Event</Tag>
-```
+
+```text
 
 ### Clickable Tag
 
 ```tsx
-<Tag 
+<Tag
   variant="pink"
   onClick={() => filterByTag('festival')}
 >
   Festival
 </Tag>
-```
+
+```text
 
 ### Removable Tag
 
 ```tsx
-<Tag 
+<Tag
   variant="purple"
   onRemove={() => removeTag('makeup-tutorial')}
 >
   Makeup Tutorial
 </Tag>
-```
+
+```text
 
 ### With Icon
 
 ```tsx
 import { Sparkle } from '@phosphor-icons/react';
 
-<Tag 
+<Tag
   variant="pink"
   icon={<Sparkle className="w-3 h-3" />}
 >
   Featured
 </Tag>
-```
+
+```text
 
 ---
 
@@ -206,48 +217,56 @@ import { Sparkle } from '@phosphor-icons/react';
 ```typescript
 interface TagProps {
   /**
+
    * Tag content
    * @required
    */
   children: React.ReactNode;
-  
+
   /**
+
    * Color variant
    * @default "gray"
    */
   variant?: 'pink' | 'purple' | 'blue' | 'green' | 'yellow' | 'red' | 'gray';
-  
+
   /**
+
    * Tag size
    * @default "md"
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
+
    * Optional icon
    * @optional
    */
   icon?: React.ReactNode;
-  
+
   /**
+
    * Click handler (makes tag interactive)
    * @optional
    */
   onClick?: () => void;
-  
+
   /**
+
    * Remove/dismiss handler
    * @optional
    */
   onRemove?: () => void;
-  
+
   /**
+
    * Additional CSS classes
    * @default ""
    */
   className?: string;
 }
-```
+
+```text
 
 ---
 
@@ -269,7 +288,7 @@ interface TagProps {
   className?: string;
 }
 
-export function Tag({ 
+export function Tag({
   children,
   variant = 'gray',
   size = 'md',
@@ -317,9 +336,9 @@ export function Tag({
       type={onClick ? 'button' : undefined}
     >
       {icon && <span className={iconSizes[size]}>{icon}</span>}
-      
+
       <span>{children}</span>
-      
+
       {onRemove && (
         <button
           onClick={(e) => {
@@ -335,7 +354,8 @@ export function Tag({
     </Component>
   );
 }
-```
+
+```text
 
 ---
 
@@ -348,10 +368,10 @@ function BlogPost({ post }: Props) {
   return (
     <article>
       <h1>{post.title}</h1>
-      
+
       <div className="flex flex-wrap gap-2 mb-fluid-md">
         {post.tags.map(tag => (
-          <Tag 
+          <Tag
             key={tag}
             variant="pink"
             size="sm"
@@ -361,12 +381,13 @@ function BlogPost({ post }: Props) {
           </Tag>
         ))}
       </div>
-      
+
       {/* Post content */}
     </article>
   );
 }
-```
+
+```text
 
 ### Portfolio Categories
 
@@ -378,32 +399,33 @@ function PortfolioCard({ entry }: Props) {
     'special-event': 'blue',
     nails: 'green'
   };
-  
+
   return (
     <article className="bg-white rounded-2xl p-fluid-md">
       <Tag variant={categoryColors[entry.category]}>
         {entry.category}
       </Tag>
-      
+
       <h3>{entry.title}</h3>
       {/* Card content */}
     </article>
   );
 }
-```
+
+```text
 
 ### Filter Tags (Removable)
 
 ```tsx
 function ActiveFilters({ filters, onRemove }: Props) {
   if (filters.length === 0) return null;
-  
+
   return (
     <div className="flex flex-wrap gap-2 mb-fluid-md">
       <span className="text-fluid-sm font-body text-gray-600">
         Active filters:
       </span>
-      
+
       {filters.map(filter => (
         <Tag
           key={filter.id}
@@ -414,7 +436,7 @@ function ActiveFilters({ filters, onRemove }: Props) {
           {filter.label}
         </Tag>
       ))}
-      
+
       <button
         onClick={() => onRemove('all')}
         className="text-fluid-sm font-body text-pink-600 hover:text-pink-700"
@@ -424,7 +446,8 @@ function ActiveFilters({ filters, onRemove }: Props) {
     </div>
   );
 }
-```
+
+```text
 
 ### Project Status
 
@@ -436,16 +459,17 @@ function ProjectStatus({ status }: Props) {
     completed: { variant: 'blue', label: 'Completed' },
     cancelled: { variant: 'red', label: 'Cancelled' }
   };
-  
+
   const config = statusConfig[status];
-  
+
   return (
     <Tag variant={config.variant}>
       {config.label}
     </Tag>
   );
 }
-```
+
+```text
 
 ### Tag Cloud
 
@@ -456,7 +480,7 @@ function TagCloud({ tags }: Props) {
       <h3 className="text-fluid-lg font-heading font-semibold mb-fluid-md">
         Popular Tags
       </h3>
-      
+
       <div className="flex flex-wrap gap-2">
         {tags.map(tag => (
           <Tag
@@ -472,7 +496,8 @@ function TagCloud({ tags }: Props) {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -483,27 +508,34 @@ function TagCloud({ tags }: Props) {
 ```tsx
 <Tag variant="pink">
   Notifications
-  <span className="ml-1 px-1.5 py-0.5 bg-pink-600 text-white rounded-full text-fluid-xs">
+<span className="ml-1 px-1.5 py-0.5 bg-pink-600 text-white rounded-full
+text-fluid-xs">
     3
   </span>
 </Tag>
-```
+
+```text
 
 ### Gradient Tags
 
 ```tsx
-<span className="inline-flex items-center px-3 py-1 rounded-full bg-gradient-pink-purple-blue text-white font-body font-medium text-fluid-sm">
+<span className="inline-flex items-center px-3 py-1 rounded-full
+bg-gradient-pink-purple-blue text-white font-body font-medium text-fluid-sm">
   Featured
 </span>
-```
+
+```text
 
 ### Outlined Variant
 
 ```tsx
-<span className="inline-flex items-center px-3 py-1 rounded-full border-2 border-pink-500 text-pink-700 font-body font-medium text-fluid-sm hover:bg-pink-50">
+<span className="inline-flex items-center px-3 py-1 rounded-full border-2
+border-pink-500 text-pink-700 font-body font-medium text-fluid-sm
+hover:bg-pink-50">
   Festival
 </span>
-```
+
+```text
 
 ### With Dot Indicator
 
@@ -512,52 +544,67 @@ function TagCloud({ tags }: Props) {
   <span className="w-2 h-2 bg-green-500 rounded-full" />
   Active
 </Tag>
-```
+
+```text
 
 ---
 
 ## Color Variants
 
 ### Pink
+
 ```tsx
 <Tag variant="pink">Festival</Tag>
-```
+
+```text
 Use for: Festival makeup, featured items, primary categories
 
 ### Purple
+
 ```tsx
 <Tag variant="purple">Editorial</Tag>
-```
+
+```text
 Use for: Editorial work, creative categories
 
 ### Blue
+
 ```tsx
 <Tag variant="blue">Special Event</Tag>
-```
+
+```text
 Use for: Events, informational tags
 
 ### Green
+
 ```tsx
 <Tag variant="green">Verified</Tag>
-```
+
+```text
 Use for: Success states, verified items, active status
 
 ### Yellow
+
 ```tsx
 <Tag variant="yellow">Pending</Tag>
-```
+
+```text
 Use for: Warnings, pending states, attention needed
 
 ### Red
+
 ```tsx
 <Tag variant="red">Cancelled</Tag>
-```
+
+```text
 Use for: Errors, cancelled items, important alerts
 
 ### Gray
+
 ```tsx
 <Tag variant="gray">Draft</Tag>
-```
+
+```text
 Use for: Neutral tags, inactive states, default
 
 ---
@@ -575,7 +622,8 @@ Use for: Neutral tags, inactive states, default
 >
   Festival
 </button>
-```
+
+```text
 
 ### Removable Tags
 
@@ -589,7 +637,8 @@ Use for: Neutral tags, inactive states, default
     <X className="w-3 h-3" />
   </button>
 </span>
-```
+
+```text
 
 ### Semantic HTML
 
@@ -605,7 +654,8 @@ Use for: Neutral tags, inactive states, default
   <li><Tag>Tag 1</Tag></li>
   <li><Tag>Tag 2</Tag></li>
 </ul>
-```
+
+```text
 
 ---
 
@@ -618,39 +668,47 @@ Use for: Neutral tags, inactive states, default
 <Tag>Festival</Tag>
 <Tag>Editorial</Tag>
 <Tag>Nails</Tag>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Color-coded categories
 <Tag variant="purple">Festival</Tag>
 <Tag variant="pink">Editorial</Tag>
 <Tag variant="green">Nails</Tag>
-```
+
+```text
 
 ### ❌ Mistake 2: Missing Click Feedback
 
 ```tsx
 // ❌ WRONG - No visual indication it's clickable
 <div onClick={filter}>Festival</div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Button with hover state
 <Tag variant="pink" onClick={filter}>
   Festival
 </Tag>
-```
+
+```text
 
 ### ❌ Mistake 3: No Remove Confirmation
 
 ```tsx
 // ❌ WRONG - Accidental removal
 <Tag onRemove={() => removeTag(id)}>Tag</Tag>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Confirm before removing important tags
 <Tag onRemove={() => {
@@ -658,7 +716,8 @@ Use for: Neutral tags, inactive states, default
 }}>
   Important Tag
 </Tag>
-```
+
+```text
 
 ---
 
@@ -674,11 +733,11 @@ Use for: Neutral tags, inactive states, default
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
-- **[FILE_STRUCTURE.md](../FILE_STRUCTURE.md)** - File organization
+- **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
 - **[design-tokens/typography.md](../design-tokens/typography.md)** - Typography scale
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

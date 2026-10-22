@@ -1,6 +1,7 @@
 ---
 type: timeline-categories
 ---
+
 # Timeline Categories
 
 ## Makeup
@@ -74,4 +75,3 @@ type: timeline-categories
 - **ID:** book
 - **Color:** #FFFF00
 - **Icon:** BookOpen
-

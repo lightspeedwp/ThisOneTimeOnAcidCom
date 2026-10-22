@@ -1,6 +1,7 @@
 # Ebook Audit Tasks
 
-These tasks address the gaps identified during the Ebook Reader audit detailed in `/reports/ebook-audit/findings.md`.
+These tasks address the gaps identified during the Ebook Reader audit detailed
+in `/reports/ebook-audit/findings.md`.
 
 - [x] **Document the Ebook Components**: Create `/guidelines/components/EbookPage.md` to document the architecture, props, swipe logic, spread layout logic, and responsive behaviors of the ebook reader components.
 - [x] **Document Settings & Preferences**: Add documentation for `/utils/ebookPreferences.ts` covering how user configurations (font scaling, themes) are stored and applied.

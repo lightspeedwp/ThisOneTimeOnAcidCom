@@ -1,10 +1,12 @@
 # Mobile Button Guidelines
 
-Mobile-specific button patterns including sizing, padding, width behavior, and spacing.
+Mobile-specific button patterns including sizing, padding, width behavior, and
+spacing.
 
 ## Purpose
 
 Define button standards for mobile devices with:
+
 - 100% width behavior on mobile
 - Touch-friendly sizing (minimum 44px height)
 - Responsive padding and text sizing
@@ -18,7 +20,8 @@ Define button standards for mobile devices with:
 
 ### 1. Mobile-First Width Behavior
 
-Buttons should be **100% width on mobile** within container padding, then switch to auto/content width on larger screens.
+Buttons should be **100% width on mobile** within container padding, then switch
+to auto/content width on larger screens.
 
 ```tsx
 // ✅ CORRECT - Full width on mobile, auto on desktop
@@ -30,17 +33,20 @@ Buttons should be **100% width on mobile** within container padding, then switch
 <button className="w-48">
   Explore Portfolio
 </button>
-```
+
+```text
 
 ### 2. Minimum Touch Target: 44x44px
 
-All buttons must meet minimum touch target size per Apple HIG and WCAG guidelines.
+All buttons must meet minimum touch target size per Apple HIG and WCAG
+guidelines.
 
 ```tsx
 <button className="min-h-[44px] px-6 py-3">
   {/* Ensures 44px minimum height */}
 </button>
-```
+
+```text
 
 ---
 
@@ -72,7 +78,8 @@ All buttons must meet minimum touch target size per Apple HIG and WCAG guideline
   min-height: 48px;
   font-size: clamp(1.125rem, 3vw, 1.25rem);  /* 18px → 20px */
 }
-```
+
+```text
 
 ### Tailwind Implementation
 
@@ -109,7 +116,8 @@ All buttons must meet minimum touch target size per Apple HIG and WCAG guideline
 ">
   Primary CTA
 </button>
-```
+
+```text
 
 ### Button Padding Breakdown
 
@@ -140,7 +148,8 @@ All buttons must meet minimum touch target size per Apple HIG and WCAG guideline
     Secondary Action
   </button>
 </div>
-```
+
+```text
 
 ### Fixed Width Buttons (Use Sparingly)
 
@@ -154,7 +163,8 @@ All buttons must meet minimum touch target size per Apple HIG and WCAG guideline
 <button className="w-auto px-4 py-2 text-sm">
   Cancel
 </button>
-```
+
+```text
 
 ### Auto Width with Min-Width
 
@@ -165,11 +175,13 @@ All buttons must meet minimum touch target size per Apple HIG and WCAG guideline
 </button>
 
 // For icon + text buttons
-<button className="w-full sm:w-auto sm:min-w-[160px] px-6 py-3 flex items-center justify-center gap-2">
+<button className="w-full sm:w-auto sm:min-w-[160px] px-6 py-3 flex items-center
+justify-center gap-2">
   <Share className="w-5 h-5" />
   <span>Share</span>
 </button>
-```
+
+```text
 
 ---
 
@@ -188,9 +200,11 @@ All buttons must meet minimum touch target size per Apple HIG and WCAG guideline
     Secondary Action
   </button>
 </div>
-```
+
+```text
 
 **Spacing Breakdown:**
+
 - **Mobile (< 640px):** Vertical stack with 12px gap (gap-3)
 - **Desktop (640px+):** Horizontal row with 16px gap (gap-4)
 
@@ -206,9 +220,11 @@ All buttons must meet minimum touch target size per Apple HIG and WCAG guideline
     Confirm
   </button>
 </div>
-```
 
-**Usage:** Dialog actions, form submissions where both buttons should remain visible.
+```text
+
+**Usage:** Dialog actions, form submissions where both buttons should remain
+visible.
 
 ### Button Spacing Standards
 
@@ -224,7 +240,8 @@ const BUTTON_SPACING = {
   <button>Action 1</button>
   <button>Action 2</button>
 </div>
-```
+
+```text
 
 ### Three or More Buttons
 
@@ -243,7 +260,8 @@ const BUTTON_SPACING = {
   <button className="w-full sm:w-auto">Option 3</button>
   <button className="w-full sm:w-auto">Option 4</button>
 </div>
-```
+
+```text
 
 ---
 
@@ -269,9 +287,10 @@ const BUTTON_SPACING = {
   font-size: clamp(1.125rem, 3vw, 1.25rem);  /* 18px → 20px */
   line-height: 1.5;
 }
-```
 
-### Tailwind Implementation
+```text
+
+### Tailwind Implementation (1)
 
 ```tsx
 // Small
@@ -293,7 +312,8 @@ const BUTTON_SPACING = {
 <button className="text-button-fluid">
   {/* Scales automatically */}
 </button>
-```
+
+```text
 
 ### Text Sizing Breakdown
 
@@ -328,9 +348,11 @@ const BUTTON_SPACING = {
 ">
   Explore Portfolio
 </button>
-```
+
+```text
 
 **Breakdown:**
+
 - **Width:** Full on mobile, auto on desktop
 - **Padding:** 24px x 12px mobile, 32px x 16px desktop
 - **Min Height:** 44px (touch-friendly)
@@ -358,7 +380,8 @@ const BUTTON_SPACING = {
 ">
   Learn More
 </button>
-```
+
+```text
 
 ### Outline Button
 
@@ -380,7 +403,8 @@ const BUTTON_SPACING = {
 ">
   Contact Me
 </button>
-```
+
+```text
 
 ### Icon Button
 
@@ -414,12 +438,13 @@ const BUTTON_SPACING = {
   <Share className="w-5 h-5" />
   <span>Share</span>
 </button>
-```
+
+```text
 
 ### Loading Button
 
 ```tsx
-<button 
+<button
   disabled
   className="
     w-full sm:w-auto
@@ -436,7 +461,8 @@ const BUTTON_SPACING = {
   <Loader className="w-5 h-5 animate-spin" />
   <span>Loading...</span>
 </button>
-```
+
+```text
 
 ---
 
@@ -445,7 +471,8 @@ const BUTTON_SPACING = {
 ### Hero Section (Two CTAs)
 
 ```tsx
-<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mt-8">
+<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center
+items-center mt-8">
   <button className="
     w-full sm:w-auto
     bg-gradient-pink-purple-blue
@@ -458,7 +485,7 @@ const BUTTON_SPACING = {
   ">
     Explore Portfolio
   </button>
-  
+
   <button className="
     w-full sm:w-auto
     bg-gradient-blue-teal-green
@@ -472,13 +499,14 @@ const BUTTON_SPACING = {
     Get In Touch
   </button>
 </div>
-```
+
+```text
 
 ### Form Actions (Cancel + Submit)
 
 ```tsx
 <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 justify-end">
-  <button 
+  <button
     type="button"
     className="
       w-full sm:w-auto
@@ -493,8 +521,8 @@ const BUTTON_SPACING = {
   >
     Cancel
   </button>
-  
-  <button 
+
+  <button
     type="submit"
     className="
       w-full sm:w-auto
@@ -510,22 +538,27 @@ const BUTTON_SPACING = {
     Submit
   </button>
 </div>
-```
 
-**Note:** `flex-col-reverse` ensures Submit appears above Cancel on mobile (more prominent).
+```text
+
+**Note:** `flex-col-reverse` ensures Submit appears above Cancel on mobile (more
+prominent).
 
 ### Modal Actions
 
 ```tsx
 <div className="flex gap-3 sm:gap-4 border-t pt-4">
-  <button className="flex-1 sm:flex-none sm:w-auto px-6 py-3 bg-gray-200 text-gray-800 rounded-lg">
+<button className="flex-1 sm:flex-none sm:w-auto px-6 py-3 bg-gray-200
+text-gray-800 rounded-lg">
     Cancel
   </button>
-  <button className="flex-1 sm:flex-none sm:w-auto px-6 py-3 bg-pink-600 text-white rounded-lg">
+<button className="flex-1 sm:flex-none sm:w-auto px-6 py-3 bg-pink-600
+text-white rounded-lg">
     Confirm
   </button>
 </div>
-```
+
+```text
 
 ### Floating Action Button (FAB)
 
@@ -545,13 +578,15 @@ const BUTTON_SPACING = {
 ">
   <Plus className="w-6 h-6" />
 </button>
-```
+
+```text
 
 ---
 
 ## Container Padding Context
 
-Buttons respect container padding - they expand to 100% of the **available width** within padding, not 100vw.
+Buttons respect container padding - they expand to 100% of the **available
+width** within padding, not 100vw.
 
 ```tsx
 // ✅ CORRECT - Button respects container padding
@@ -571,7 +606,8 @@ Buttons respect container padding - they expand to 100% of the **available width
     Explore Portfolio
   </button>
 </section>
-```
+
+```text
 
 ---
 
@@ -584,15 +620,18 @@ Buttons respect container padding - they expand to 100% of the **available width
 <button className="w-48 px-6 py-3">
   Too narrow on mobile
 </button>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT
 <button className="w-full sm:w-auto px-6 py-3">
   Full width on mobile, auto on desktop
 </button>
-```
+
+```text
 
 ### ❌ Mistake 2: Too Small Touch Target
 
@@ -601,15 +640,18 @@ Buttons respect container padding - they expand to 100% of the **available width
 <button className="px-4 py-2 text-sm">
   Too small
 </button>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - 44px minimum
 <button className="px-4 py-3 min-h-[44px] text-sm">
   Touch-friendly
 </button>
-```
+
+```text
 
 ### ❌ Mistake 3: No Gap Between Buttons
 
@@ -619,16 +661,19 @@ Buttons respect container padding - they expand to 100% of the **available width
   <button>Action 1</button>
   <button>Action 2</button>
 </div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Proper spacing
 <div className="flex gap-3 sm:gap-4">
   <button>Action 1</button>
   <button>Action 2</button>
 </div>
-```
+
+```text
 
 ### ❌ Mistake 4: Horizontal Buttons on Small Mobile
 
@@ -638,16 +683,19 @@ Buttons respect container padding - they expand to 100% of the **available width
   <button className="flex-1">Very Long Action Name</button>
   <button className="flex-1">Another Long Name</button>
 </div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Stack on mobile
 <div className="flex flex-col sm:flex-row gap-3">
   <button className="w-full sm:w-auto">Very Long Action Name</button>
   <button className="w-full sm:w-auto">Another Long Name</button>
 </div>
-```
+
+```text
 
 ---
 
@@ -666,21 +714,23 @@ Buttons respect container padding - they expand to 100% of the **available width
 >
   Action
 </button>
-```
+
+```text
 
 ### Focus Indicators
 
 ```tsx
 <button className="
   ...
-  focus:outline-none 
-  focus:ring-4 
-  focus:ring-pink-200 
+  focus:outline-none
+  focus:ring-4
+  focus:ring-pink-200
   focus:ring-opacity-50
 ">
   Accessible Button
 </button>
-```
+
+```text
 
 ### ARIA Labels
 
@@ -695,7 +745,8 @@ Buttons respect container padding - they expand to 100% of the **available width
   <Loader className="animate-spin" />
   Loading...
 </button>
-```
+
+```text
 
 ---
 
@@ -707,5 +758,5 @@ Buttons respect container padding - they expand to 100% of the **available width
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 3.2.0

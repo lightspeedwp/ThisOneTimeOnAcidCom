@@ -1,14 +1,15 @@
 # Validation Workflows — Phase 2 Governance Consolidation
 
-**Document created:** 2026-10-18  
-**Phase:** 2.4 Drift Prevention & Template Routing  
+**Document created:** 2026-10-18
+**Phase:** 2.4 Drift Prevention & Template Routing
 **Related:** Spec 001 Phase 2, Spec 021, lightspeedwp/.github
 
 ---
 
 ## Overview
 
-This document explains the validation workflows that enforce the hybrid governance model where:
+This document explains the validation workflows that enforce the hybrid
+governance model where:
 
 - **Canonical governance** (labels, issue types, PR templates) is centralized in `lightspeedwp/.github`
 - **Consumer repository** (ThisOneTimeOnAcidCom) maintains **custom workflows only**
@@ -23,7 +24,8 @@ This document explains the validation workflows that enforce the hybrid governan
 
 **Trigger:** Pull Request opened, reopened, or synchronized
 
-**Purpose:** Prevent duplicate governance files from being added to ThisOneTimeOnAcidCom
+**Purpose:** Prevent duplicate governance files from being added to
+ThisOneTimeOnAcidCom
 
 ### What Gets Blocked
 
@@ -33,7 +35,7 @@ The workflow **blocks** these files if they appear in a PR:
 - `.github/issue-types.yml` — Use canonical from lightspeedwp/.github instead
 - `.github/branch-labels.yml` — Use canonical from lightspeedwp/.github instead
 - `.github/ISSUE_TEMPLATE/**` — Use canonical from lightspeedwp/.github instead
-- `.github/PULL_REQUEST_TEMPLATE/**` — Use canonical from lightspeedwp/.github instead
+- `.github/PULL*REQUEST*TEMPLATE/**` — Use canonical from lightspeedwp/.github instead
 
 ### What Gets Allowed
 
@@ -45,16 +47,20 @@ The workflow **allows** these files:
 
 **✅ PASS** — No blocked files detected. Configuration stays canonical.
 
-**❌ FAIL** — Blocked files detected. The PR will not merge until duplicates are removed.
+**❌ FAIL** — Blocked files detected. The PR will not merge until duplicates are
+removed.
 
 ### Developer Action
 
 If the check fails:
 
 1. Identify which files the workflow flagged
-2. Remove the duplicate files: `git rm <file>`
-3. Push the corrected commit
-4. The check will re-run and pass
+
+1. Remove the duplicate files: `git rm <file>`
+
+1. Push the corrected commit
+
+1. The check will re-run and pass
 
 ### Why This Matters
 
@@ -71,14 +77,18 @@ If the check fails:
 
 **Trigger:** Pull Request opened or reopened
 
-**Purpose:** Suggest the correct PR template based on branch type and apply matching type label
+**Purpose:** Suggest the correct PR template based on branch type and apply
+matching type label
 
 ### How It Works
 
 1. **Extract branch prefix** — Reads the PR's branch name (e.g., `feat/my-feature`)
-2. **Map to template** — Routes to the appropriate template based on prefix
-3. **Suggest template** — Comments on the PR with template recommendation
-4. **Apply label** — Adds a type label matching the branch prefix
+
+1. **Map to template** — Routes to the appropriate template based on prefix
+
+1. **Suggest template** — Comments on the PR with template recommendation
+
+1. **Apply label** — Adds a type label matching the branch prefix
 
 ### Branch Type → Template Mapping
 
@@ -101,7 +111,9 @@ If the check fails:
 **Branch:** `feat/user-authentication`
 
 **Workflow output:**
-```
+
+```text
+
 ## PR Template Routing 📋
 
 Branch prefix: **feat**
@@ -112,16 +124,20 @@ Type: Feature/Enhancement PR
 
 ---
 
-Canonical templates are managed in [lightspeedwp/.github](https://github.com/lightspeedwp/.github):
+Canonical templates are managed in
+[lightspeedwp/.github](https://github.com/lightspeedwp/.github):
+
 - Review the suggested template to ensure your PR description covers required sections
 - All PR templates route from the central .github repository
-```
+
+```text
 
 **Label applied:** `type:feature`
 
 ### Template Specifications
 
-All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQUEST_TEMPLATE/` and include:
+All canonical PR templates are stored in
+`lightspeedwp/.github/.github/PULL*REQUEST*TEMPLATE/` and include:
 
 - **Summary** — Brief overview of changes
 - **Motivation** — Why these changes are needed
@@ -137,6 +153,7 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 ### Drift Detection Contract
 
 **Guarantee:** If a PR passes the drift detection check, it contains:
+
 - ✅ Zero duplicate governance files
 - ✅ Only custom workflows in `.github/workflows/`
 - ✅ Correct references to canonical .github repo
@@ -144,6 +161,7 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 ### PR Template Routing Contract
 
 **Guarantee:** If a PR has the template routing workflow applied, it:
+
 - ✅ Has a branch prefix matching one of the type list above
 - ✅ Received a comment with template suggestion
 - ✅ Received an appropriate type label
@@ -158,12 +176,17 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 **Problem:** PR blocked with "Configuration drift detected"
 
 **Solution:**
+
 1. Check which files are flagged (shown in workflow comment)
-2. Remove the file: `git rm <flagged-file>`
-3. Commit and push
-4. Workflow will re-run and pass
+
+1. Remove the file: `git rm <flagged-file>`
+
+1. Commit and push
+
+1. Workflow will re-run and pass
 
 **Prevention:**
+
 - Never copy governance files from .github
 - Always reference canonical templates via branch routing
 - If you need to change governance: Open an issue in lightspeedwp/.github with `[LABEL-UPDATE-REQUEST]` or `[TEMPLATE-UPDATE-REQUEST]`
@@ -173,12 +196,17 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 **Problem:** Branch doesn't match any known prefix, or label fails to apply
 
 **Solution:**
-1. Ensure branch name follows `{type}/{scope}-{title}` pattern
-2. Check that type is in the mapping table above
-3. If using uncommon type, rename branch to match a standard prefix
-4. Workflow will re-run and apply correct template
 
-**Note:** If a label fails to apply, it's usually because the label doesn't exist in the repository. The workflow logs a warning but doesn't fail the PR.
+1. Ensure branch name follows `{type}/{scope}-{title}` pattern
+
+1. Check that type is in the mapping table above
+
+1. If using uncommon type, rename branch to match a standard prefix
+
+1. Workflow will re-run and apply correct template
+
+**Note:** If a label fails to apply, it's usually because the label doesn't
+exist in the repository. The workflow logs a warning but doesn't fail the PR.
 
 ---
 
@@ -188,40 +216,49 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 - **Governance Model:** `.github/GOVERNANCE.md` — Hybrid model explanation for developers
 - **Canonical Source:** `lightspeedwp/.github/.github/` — All canonical governance files
 - **Change Requests:** Open an issue in lightspeedwp/.github with:
-  - `[LABEL-UPDATE-REQUEST]` — to change `.github/labels.yml`
-  - `[TEMPLATE-UPDATE-REQUEST]` — to change PR/issue templates
-  - `[ISSUE-TYPE-UPDATE-REQUEST]` — to change `.github/issue-types.yml`
+- `[LABEL-UPDATE-REQUEST]` — to change `.github/labels.yml`
+- `[TEMPLATE-UPDATE-REQUEST]` — to change PR/issue templates
+- `[ISSUE-TYPE-UPDATE-REQUEST]` — to change `.github/issue-types.yml`
 
 ---
 
 ## Workflow Execution Details
 
-### Drift Detection Workflow
+### Drift Detection Workflow (1)
 
-**Environment:** Ubuntu Latest  
-**Timeout:** 5 minutes  
+**Environment:** Ubuntu Latest
+**Timeout:** 5 minutes
 **Permissions:** contents:read, pull-requests:write
 
 **Steps:**
+
 1. Check out PR code
-2. Search for forbidden files/directories
-3. Verify custom workflows are present
-4. Comment on PR with results
-5. Set check status (pass/fail)
+
+1. Search for forbidden files/directories
+
+1. Verify custom workflows are present
+
+1. Comment on PR with results
+
+1. Set check status (pass/fail)
 
 **Cost:** ~30 seconds per PR
 
-### PR Template Routing Workflow
+### PR Template Routing Workflow (1)
 
-**Environment:** Ubuntu Latest  
-**Timeout:** 5 minutes  
+**Environment:** Ubuntu Latest
+**Timeout:** 5 minutes
 **Permissions:** contents:read, pull-requests:write, issues:write
 
 **Steps:**
+
 1. Extract branch prefix using regex
-2. Map prefix to template and label
-3. Post comment with suggestion
-4. Apply type label to PR
+
+1. Map prefix to template and label
+
+1. Post comment with suggestion
+
+1. Apply type label to PR
 
 **Cost:** ~20 seconds per PR
 
@@ -232,12 +269,15 @@ All canonical PR templates are stored in `lightspeedwp/.github/.github/PULL_REQU
 Track validation success using:
 
 1. **GitHub Actions Dashboard** — View all workflow runs
-2. **PR Comment Timeline** — Each PR gets workflow comments
-3. **Label Application** — Type labels show which workflow ran
-4. **Branch Protection Rules** — Drift detection is a **required check** that blocks PRs with duplicate governance files; template routing is **informational** (provides routing suggestion)
+
+1. **PR Comment Timeline** — Each PR gets workflow comments
+
+1. **Label Application** — Type labels show which workflow ran
+
+1. **Branch Protection Rules** — Drift detection is a **required check** that blocks PRs with duplicate governance files; template routing is **informational** (provides routing suggestion)
 
 ---
 
-**Document Owner:** Claude Code  
-**Last Updated:** 2026-10-18  
+**Document Owner:** Claude Code
+**Last Updated:** 2026-10-18
 **Status:** Phase 2.4 Drift Prevention & Template Routing (In Progress)

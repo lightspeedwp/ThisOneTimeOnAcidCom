@@ -1,27 +1,37 @@
 # Dark Mode Implementation: Lessons Learned
 
-**Version:** 2.0.0  
-**Last Updated:** March 12, 2026  
+**Version:** 2.0.0
+**Last Updated:** March 12, 2026
 **Project:** Nova News (Book Website)
 
-This document captures critical lessons learned from implementing dark mode across the entire Nova News website, specifically addressing the challenges of working with a strict BEM CSS architecture and neon color system.
+This document captures critical lessons learned from implementing dark mode
+across the entire Nova News website, specifically addressing the challenges of
+working with a strict BEM CSS architecture and neon color system.
 
 ---
 
 ## 🎯 Executive Summary
 
-**Context:** Nova News is a book website with an 80s neon CLI aesthetic. The site uses:
+**Context:** Nova News is a book website with an 80s neon CLI aesthetic. The
+site uses:
+
 - Strict BEM CSS architecture (NO Tailwind utilities)
 - Neon pink (#FF10F0) and neon yellow (#F4FF3C) on atomic black (#0F0F0F)
 - 15+ page components across `/components/pages/book-site/` and `/components/pages/about/`
 
-**Timeline:** Dark mode implementation took significantly longer than anticipated due to:
-1. Manual CSS file creation for every component
-2. Cascading inheritance issues with nested selectors
-3. Inconsistent selector patterns across the codebase
-4. Missing centralized dark mode reference
+**Timeline:** Dark mode implementation took significantly longer than
+anticipated due to:
 
-**Result:** Complete dark mode coverage achieved with vibrant neon pink primary color and neon yellow accents on atomic black backgrounds in dark mode.
+1. Manual CSS file creation for every component
+
+1. Cascading inheritance issues with nested selectors
+
+1. Inconsistent selector patterns across the codebase
+
+1. Missing centralized dark mode reference
+
+**Result:** Complete dark mode coverage achieved with vibrant neon pink primary
+color and neon yellow accents on atomic black backgrounds in dark mode.
 
 ---
 
@@ -29,14 +39,17 @@ This document captures critical lessons learned from implementing dark mode acro
 
 ### 1. **Create a Master Dark Mode CSS File First**
 
-**Problem:** We implemented dark mode by creating individual CSS files for each component (`book-dark-mode.css`, `journal-dark-mode.css`, etc.), leading to:
+**Problem:** We implemented dark mode by creating individual CSS files for each
+component (`book-dark-mode.css`, `journal-dark-mode.css`, etc.), leading to:
+
 - Duplication of color definitions
 - Inconsistent selector patterns
 - Difficult maintenance
 - No single source of truth
 
-**Solution:** 
-```
+**Solution:**
+
+```text
 ✅ DO THIS FIRST:
 Create `/styles/dark-mode.css` with ALL dark mode styles in one place
 
@@ -49,9 +62,11 @@ Structure:
   ├─ Cards
   ├─ Page-specific overrides
   └─ Component-specific overrides
-```
+
+```text
 
 **Implementation:**
+
 ```css
 /* /styles/dark-mode.css */
 
@@ -94,16 +109,20 @@ body.dark h6 {
 }
 
 /* Continue with all components... */
-```
+
+```text
 
 ### 2. **Use BOTH `.dark` and `body.dark` Selectors**
 
-**Problem:** Theme toggle applies `.dark` class to different elements depending on context:
+**Problem:** Theme toggle applies `.dark` class to different elements depending
+on context:
+
 - Sometimes on `<html>`
 - Sometimes on `<body>`
 - React re-renders can cause selector mismatches
 
 **Solution:**
+
 ```css
 /* ❌ WRONG - Will miss some theme toggles */
 .dark .component {
@@ -115,21 +134,26 @@ body.dark h6 {
 body.dark .component {
   color: var(--wp--preset--color--text-light);
 }
-```
+
+```text
 
 **Rule:** ALWAYS double up selectors for dark mode:
+
 ```css
 .dark .selector,
 body.dark .selector {
   /* styles */
 }
-```
+
+```text
 
 ### 3. **Import Dark Mode CSS Last**
 
-**Problem:** Dark mode styles were being overridden by component CSS loaded later in the cascade.
+**Problem:** Dark mode styles were being overridden by component CSS loaded
+later in the cascade.
 
 **Solution:**
+
 ```css
 /* /styles/globals.css - CORRECT ORDER */
 
@@ -154,15 +178,18 @@ body.dark .selector {
 
 /* 5. Dark Mode LAST - CRITICAL */
 @import './dark-mode.css'; /* ← Must be last to override everything */
-```
+
+```text
 
 ### 4. **Document All Dark Mode Color Mappings**
 
-**Problem:** No clear reference for which light mode colors map to which dark mode colors.
+**Problem:** No clear reference for which light mode colors map to which dark
+mode colors.
 
 **Solution:** Create a color mapping table in guidelines:
 
 ```markdown
+
 ## Nova News Dark Mode Color System
 
 | Element | Light Mode | Dark Mode |
@@ -176,13 +203,15 @@ body.dark .selector {
 | Borders | `rgba(0, 0, 0, 0.1)` | `rgba(255, 16, 240, 0.2)` |
 | Form Inputs | `#FFFFFF` | `rgba(15, 15, 15, 0.8)` |
 | Code Blocks | `rgba(0, 0, 0, 0.05)` | `rgba(0, 0, 0, 0.3)` |
-```
+```text
 
 ### 5. **Test Theme Toggle on Every Page**
 
-**Problem:** Some pages had correct dark mode in CSS but the theme toggle didn't work because of React component issues.
+**Problem:** Some pages had correct dark mode in CSS but the theme toggle didn't
+work because of React component issues.
 
 **Solution:**
+
 ```typescript
 // Create a test checklist:
 
@@ -213,11 +242,13 @@ Test on ALL pages:
 □ /ebook
 □ /sitemap
 □ /style-guide
-```
+
+```text
 
 ### 6. **Handle Special Cases Explicitly**
 
-**Problem:** Some elements need special treatment in dark mode (book covers, images, gradients).
+**Problem:** Some elements need special treatment in dark mode (book covers,
+images, gradients).
 
 **Solution:** Document all special cases:
 
@@ -227,7 +258,7 @@ Test on ALL pages:
 .dark .the-book-page__cover-wrapper,
 body.dark .the-book-page__cover-wrapper {
   border: 3px solid var(--wp--preset--color--neon-pink);
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba(255, 16, 240, 0.6),
     0 0 40px rgba(255, 16, 240, 0.4),
     0 0 60px rgba(255, 16, 240, 0.2);
@@ -244,13 +275,16 @@ body.dark img {
 body.dark .gradient-text {
   filter: brightness(1.2); /* Make gradients pop more */
 }
-```
+
+```text
 
 ### 7. **Form Elements Need Special Attention**
 
-**Problem:** Forms are notoriously tricky in dark mode (focus states, placeholders, validation).
+**Problem:** Forms are notoriously tricky in dark mode (focus states,
+placeholders, validation).
 
 **Solution:**
+
 ```css
 /* Complete form dark mode styles */
 .dark .form__input,
@@ -277,11 +311,12 @@ body.dark .form__textarea::placeholder {
 body.dark .form__input:focus,
 body.dark .form__textarea:focus {
   border-color: var(--wp--preset--color--neon-pink);
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(255, 16, 240, 0.2),
     0 0 20px rgba(255, 16, 240, 0.4);
 }
-```
+
+```text
 
 ---
 
@@ -290,41 +325,66 @@ body.dark .form__textarea:focus {
 If we were to implement dark mode again, this would be the optimal sequence:
 
 ### Phase 1: Foundation (Day 1)
+
 1. ✅ Create `/styles/dark-mode.css` with complete color system
-2. ✅ Define all color mappings in a table
-3. ✅ Import dark mode CSS last in `globals.css`
-4. ✅ Test theme toggle on homepage
+
+1. ✅ Define all color mappings in a table
+
+1. ✅ Import dark mode CSS last in `globals.css`
+
+1. ✅ Test theme toggle on homepage
 
 ### Phase 2: Global Elements (Day 1)
+
 1. ✅ Typography (h1-h6, p, spans)
-2. ✅ Buttons (primary, secondary, all states)
-3. ✅ Forms (inputs, textareas, labels, focus states)
-4. ✅ Links (default, hover, visited)
-5. ✅ Cards (all variants)
+
+1. ✅ Buttons (primary, secondary, all states)
+
+1. ✅ Forms (inputs, textareas, labels, focus states)
+
+1. ✅ Links (default, hover, visited)
+
+1. ✅ Cards (all variants)
 
 ### Phase 3: Components (Day 2)
+
 1. ✅ Header
-2. ✅ Footer
-3. ✅ Navigation
-4. ✅ Theme toggle (ensure it works everywhere)
+
+1. ✅ Footer
+
+1. ✅ Navigation
+
+1. ✅ Theme toggle (ensure it works everywhere)
 
 ### Phase 4: Pages (Day 2-3)
+
 1. ✅ Test each page individually
-2. ✅ Fix page-specific issues
-3. ✅ Verify all interactive elements
+
+1. ✅ Fix page-specific issues
+
+1. ✅ Verify all interactive elements
 
 ### Phase 5: Edge Cases (Day 3)
+
 1. ✅ Images and media
-2. ✅ Code blocks
-3. ✅ Tables
-4. ✅ Blockquotes
-5. ✅ Special effects (glows, shadows)
+
+1. ✅ Code blocks
+
+1. ✅ Tables
+
+1. ✅ Blockquotes
+
+1. ✅ Special effects (glows, shadows)
 
 ### Phase 6: Polish (Day 4)
+
 1. ✅ Transition animations
-2. ✅ Accessibility testing
-3. ✅ Cross-browser testing
-4. ✅ Documentation
+
+1. ✅ Accessibility testing
+
+1. ✅ Cross-browser testing
+
+1. ✅ Documentation
 
 **Total Estimate:** 4 days (vs. the actual 2+ weeks we spent)
 
@@ -333,6 +393,7 @@ If we were to implement dark mode again, this would be the optimal sequence:
 ## 🚨 Common Pitfalls
 
 ### Pitfall 1: Forgetting Nested Elements
+
 ```css
 /* ❌ WRONG - Only targets direct children */
 .dark .card {
@@ -350,9 +411,11 @@ body.dark .card p,
 body.dark .card a {
   /* styles */
 }
-```
+
+```text
 
 ### Pitfall 2: Specificity Wars
+
 ```css
 /* ❌ WRONG - Too specific, hard to override */
 body.dark div.card.card--featured h3.card__title {
@@ -364,9 +427,11 @@ body.dark div.card.card--featured h3.card__title {
 body.dark .card__title {
   color: var(--wp--preset--color--text-light);
 }
-```
+
+```text
 
 ### Pitfall 3: Missing Hover States
+
 ```css
 /* ❌ INCOMPLETE - Only base state */
 .dark .button {
@@ -393,7 +458,8 @@ body.dark .button:focus {
 body.dark .button:active {
   transform: scale(0.98);
 }
-```
+
+```text
 
 ---
 
@@ -408,7 +474,8 @@ body.dark .button:active {
 | Documentation | 10 hours (retroactive) | 2 hours (as you go) | 8 hours |
 | **TOTAL** | **70 hours** | **26 hours** | **44 hours saved** |
 
-**Key Insight:** The 4 hours spent planning saves 44+ hours of implementation and debugging.
+**Key Insight:** The 4 hours spent planning saves 44+ hours of implementation
+and debugging.
 
 ---
 
@@ -417,12 +484,14 @@ body.dark .button:active {
 When implementing dark mode on any project:
 
 ### Planning
+
 - [ ] Document all colors in both themes (create mapping table)
 - [ ] Choose centralized vs. distributed CSS approach (centralized recommended)
 - [ ] Create test page checklist
 - [ ] Define color system before writing any code
 
 ### Implementation
+
 - [ ] Create single dark mode CSS file (`/styles/dark-mode.css`)
 - [ ] Use BOTH `.dark` and `body.dark` selectors everywhere
 - [ ] Import dark mode CSS last in cascade
@@ -431,6 +500,7 @@ When implementing dark mode on any project:
 - [ ] Test on real devices (not just browser DevTools)
 
 ### Testing
+
 - [ ] Test every page with theme toggle
 - [ ] Test localStorage persistence
 - [ ] Test system preference detection
@@ -439,6 +509,7 @@ When implementing dark mode on any project:
 - [ ] Test color contrast ratios (WCAG AA minimum)
 
 ### Documentation
+
 - [ ] Document color mappings
 - [ ] Document special cases
 - [ ] Document component dark mode patterns
@@ -450,27 +521,32 @@ When implementing dark mode on any project:
 ## 🎨 Nova News Specific Patterns
 
 ### Neon Glow Pattern
+
 ```css
 /* Neon pink glow - use everywhere for consistency */
 .dark .neon-glow,
 body.dark .neon-glow {
-  box-shadow: 
+  box-shadow:
     0 0 10px rgba(255, 16, 240, 0.6),
     0 0 20px rgba(255, 16, 240, 0.4),
     0 0 30px rgba(255, 16, 240, 0.2);
 }
-```
+
+```text
 
 ### Atomic Black Background Pattern
+
 ```css
 /* Page backgrounds - atomic black */
 .dark .page,
 body.dark .page {
   background-color: var(--wp--preset--color--atomic-black);
 }
-```
+
+```text
 
 ### Card Transparency Pattern
+
 ```css
 /* Cards - subtle transparency on dark bg */
 .dark .card,
@@ -479,23 +555,27 @@ body.dark .card {
   border: 1px solid rgba(255, 16, 240, 0.2);
   backdrop-filter: blur(10px);
 }
-```
+
+```text
 
 ---
 
 ## 🔮 Future Improvements
 
 1. **CSS Variables for Theme Colors:**
+
    - Define `--color-bg`, `--color-text`, etc.
    - Switch values in `.dark` selector
    - Eliminates need for double selectors
 
-2. **Automated Testing:**
+1. **Automated Testing:**
+
    - Playwright tests for theme toggle
    - Visual regression testing
    - Contrast ratio validation
 
-3. **Theme Variants:**
+1. **Theme Variants:**
+
    - High contrast mode
    - Dim mode (between light and dark)
    - Custom color schemes
@@ -505,25 +585,35 @@ body.dark .card {
 ## 📝 Final Recommendations
 
 **For Nova News:**
-1. ✅ Consolidate all dark mode CSS into `/styles/dark-mode.css`
-2. ✅ Delete individual dark mode CSS files (`book-dark-mode.css`, etc.)
-3. ✅ Update guidelines with color mapping table
-4. ✅ Create automated theme toggle tests
 
-**For Future Projects:**
+1. ✅ Consolidate all dark mode CSS into `/styles/dark-mode.css`
+
+1. ✅ Delete individual dark mode CSS files (`book-dark-mode.css`, etc.)
+
+1. ✅ Update guidelines with color mapping table
+
+1. ✅ Create automated theme toggle tests
+
+## For Future Projects
+
 1. ✅ Plan dark mode from day 1 (not as an afterthought)
-2. ✅ Use CSS custom properties for theme switching
-3. ✅ Create comprehensive color mapping documentation
-4. ✅ Test theme toggle on every page as you build
-5. ✅ Never skip the planning phase (4 hours saves 40+ hours)
+
+1. ✅ Use CSS custom properties for theme switching
+
+1. ✅ Create comprehensive color mapping documentation
+
+1. ✅ Test theme toggle on every page as you build
+
+1. ✅ Never skip the planning phase (4 hours saves 40+ hours)
 
 ---
 
-**Last Updated:** March 12, 2026  
-**Author:** Nova News Development Team  
+**Last Updated:** March 12, 2026
+**Author:** Nova News Development Team
 **Status:** Complete implementation with lessons documented
 
 **Related Documents:**
+
 - [dark-mode-implementation.md](./dark-mode-implementation.md) - Original implementation guide
 - [component-dark-mode.md](./component-dark-mode.md) - Component-specific patterns
 - [design-tokens/neon-colors.md](./design-tokens/neon-colors.md) - Color system reference

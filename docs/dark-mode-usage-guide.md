@@ -1,6 +1,7 @@
 # 🌙 Dark Mode Theme - Usage Guide
 
-Quick reference guide for implementing the comprehensive dark mode theme in your application.
+Quick reference guide for implementing the comprehensive dark mode theme in your
+application.
 
 ---
 
@@ -16,7 +17,8 @@ Add to your main CSS file (e.g., `/styles/globals.css`):
 
 /* Extended components (optional but recommended) */
 @import './themes/dark-extended.css';
-```
+
+```text
 
 ### 2. Enable Dark Mode
 
@@ -43,7 +45,8 @@ Add the `.dark` class to your root element:
     <!-- Your app -->
   </body>
 </html>
-```
+
+```text
 
 ---
 
@@ -76,7 +79,8 @@ Add the `.dark` class to your root element:
 <button class="button button--primary" disabled>
   Processing...
 </button>
-```
+
+```text
 
 ### Cards
 
@@ -87,21 +91,22 @@ Add the `.dark` class to your root element:
     Card description with neon glow on hover.
   </p>
 </div>
-```
+
+```text
 
 ### Forms
 
 ```html
 <form class="form">
   <!-- Text Input -->
-  <input 
-    type="text" 
+  <input
+    type="text"
     placeholder="Enter your email"
     class="input"
   />
 
   <!-- Textarea -->
-  <textarea 
+  <textarea
     placeholder="Your message"
     class="textarea"
   ></textarea>
@@ -125,7 +130,8 @@ Add the `.dark` class to your root element:
     <span>Option A</span>
   </label>
 </form>
-```
+
+```text
 
 ### Alerts (4 States)
 
@@ -149,14 +155,15 @@ Add the `.dark` class to your root element:
 <div class="alert alert--info">
   ℹ Additional information available.
 </div>
-```
+
+```text
 
 ### Tabs
 
 ```html
 <div class="tabs">
   <div class="tabs__list">
-    <button class="tabs__button tabs__button--active">
+    <button class="tabs_*button tabs*_button--active">
       Tab 1
     </button>
     <button class="tabs__button">
@@ -166,19 +173,20 @@ Add the `.dark` class to your root element:
       Tab 3
     </button>
   </div>
-  
+
   <div class="tabs__panel">
     <p>Tab 1 content goes here.</p>
   </div>
 </div>
-```
+
+```text
 
 ### Accordion
 
 ```html
 <div class="accordion">
   <div class="accordion__item">
-    <button class="accordion__header accordion__header--active">
+    <button class="accordion_*header accordion*_header--active">
       <span>Section 1</span>
       <svg class="accordion__icon"><!-- Icon --></svg>
     </button>
@@ -186,7 +194,7 @@ Add the `.dark` class to your root element:
       <p>Section 1 content</p>
     </div>
   </div>
-  
+
   <div class="accordion__item">
     <button class="accordion__header">
       <span>Section 2</span>
@@ -197,7 +205,8 @@ Add the `.dark` class to your root element:
     </div>
   </div>
 </div>
-```
+
+```text
 
 ### Progress Bar
 
@@ -209,19 +218,20 @@ Add the `.dark` class to your root element:
 
 <!-- Success variant -->
 <div class="progress">
-  <div class="progress__bar progress__bar--success" style="width: 100%;"></div>
+  <div class="progress_*bar progress*_bar--success" style="width: 100%;"></div>
 </div>
 
 <!-- Warning variant -->
 <div class="progress">
-  <div class="progress__bar progress__bar--warning" style="width: 50%;"></div>
+  <div class="progress_*bar progress*_bar--warning" style="width: 50%;"></div>
 </div>
 
 <!-- Error variant -->
 <div class="progress">
-  <div class="progress__bar progress__bar--error" style="width: 25%;"></div>
+  <div class="progress_*bar progress*_bar--error" style="width: 25%;"></div>
 </div>
-```
+
+```text
 
 ### Loading Spinner
 
@@ -231,38 +241,41 @@ Add the `.dark` class to your root element:
 
 <!-- Neon glow spinner -->
 <div class="spinner spinner--neon"></div>
-```
+
+```text
 
 ### Search
 
 ```html
 <div class="search">
-  <input 
-    type="text" 
-    class="search__input" 
+  <input
+    type="text"
+    class="search__input"
     placeholder="Search..."
   />
   <button class="search__button">
     <svg><!-- Search icon --></svg>
   </button>
 </div>
-```
+
+```text
 
 ### Pagination
 
 ```html
 <nav class="pagination">
-  <button class="pagination__link pagination__link--disabled">
+  <button class="pagination_*link pagination*_link--disabled">
     « Previous
   </button>
   <button class="pagination__link">1</button>
-  <button class="pagination__link pagination__link--active">2</button>
+  <button class="pagination_*link pagination*_link--active">2</button>
   <button class="pagination__link">3</button>
   <button class="pagination__link">
     Next »
   </button>
 </nav>
-```
+
+```text
 
 ### Breadcrumbs
 
@@ -274,7 +287,8 @@ Add the `.dark` class to your root element:
   <span class="breadcrumbs__separator">/</span>
   <span class="breadcrumbs__current">Post Title</span>
 </nav>
-```
+
+```text
 
 ---
 
@@ -287,7 +301,8 @@ Add the `.dark` class to your root element:
   <p>File uploaded successfully!</p>
   <button class="toast__close">×</button>
 </div>
-```
+
+```text
 
 ### Status Indicators
 
@@ -296,19 +311,21 @@ Add the `.dark` class to your root element:
 <span class="status status--offline"></span> Offline
 <span class="status status--busy"></span> Busy
 <span class="status status--away"></span> Away
-```
+
+```text
 
 ### Rating Stars
 
 ```html
 <div class="rating">
-  <span class="rating__star rating__star--filled">★</span>
-  <span class="rating__star rating__star--filled">★</span>
-  <span class="rating__star rating__star--filled">★</span>
-  <span class="rating__star rating__star--half">★</span>
+  <span class="rating_*star rating*_star--filled">★</span>
+  <span class="rating_*star rating*_star--filled">★</span>
+  <span class="rating_*star rating*_star--filled">★</span>
+  <span class="rating_*star rating*_star--half">★</span>
   <span class="rating__star">★</span>
 </div>
-```
+
+```text
 
 ### Timeline
 
@@ -323,7 +340,8 @@ Add the `.dark` class to your root element:
     </div>
   </div>
 </div>
-```
+
+```text
 
 ### Testimonial Card
 
@@ -340,7 +358,8 @@ Add the `.dark` class to your root element:
     </div>
   </div>
 </div>
-```
+
+```text
 
 ### Empty State
 
@@ -352,7 +371,8 @@ Add the `.dark` class to your root element:
     Try adjusting your filters or create a new item.
   </p>
 </div>
-```
+
+```text
 
 ### Back to Top Button
 
@@ -360,7 +380,8 @@ Add the `.dark` class to your root element:
 <button class="back-to-top">
   <svg><!-- Arrow up icon --></svg>
 </button>
-```
+
+```text
 
 ---
 
@@ -410,7 +431,7 @@ Add the `.dark` class to your root element:
 function toggleDarkMode() {
   const html = document.documentElement;
   html.classList.toggle('dark');
-  
+
   // Save preference
   const isDark = html.classList.contains('dark');
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -426,7 +447,8 @@ function loadThemePreference() {
 
 // Apply on page load
 loadThemePreference();
-```
+
+```text
 
 ### React Hook
 
@@ -454,14 +476,15 @@ function useDarkMode() {
 // Usage
 function ThemeToggle() {
   const [isDark, setIsDark] = useDarkMode();
-  
+
   return (
     <button onClick={() => setIsDark(!isDark)}>
       {isDark ? '☀️ Light Mode' : '🌙 Dark Mode'}
     </button>
   );
 }
-```
+
+```text
 
 ---
 
@@ -481,46 +504,55 @@ All dark mode components are fully responsive and work seamlessly across:
   .card {
     /* Reduced padding on mobile */
   }
-  
+
   .tabs__list {
     /* Horizontal scroll on mobile */
   }
-  
+
   .mobile-menu {
     /* Full-screen on mobile */
   }
 }
-```
+
+```text
 
 ---
 
 ## ✨ Tips & Best Practices
 
 ### 1. **Use Semantic HTML**
+
 ```html
 <!-- Good -->
 <button class="button button--primary">Submit</button>
 
 <!-- Avoid -->
 <div class="button button--primary" onclick="submit()">Submit</div>
-```
+
+```text
 
 ### 2. **Combine Modifiers**
+
 ```html
 <!-- You can combine multiple BEM modifiers -->
 <button class="button button--primary button--large">
   Large Primary Button
 </button>
-```
+
+```text
 
 ### 3. **Maintain Contrast**
+
 Always ensure text meets WCAG AA standards:
+
 - Body text: 4.5:1 minimum
 - Large text (18px+): 3:1 minimum
 - Our theme exceeds these requirements!
 
 ### 4. **Test Keyboard Navigation**
+
 All interactive elements should be keyboard accessible:
+
 - Tab to navigate
 - Enter/Space to activate
 - Escape to close modals
@@ -530,30 +562,36 @@ All interactive elements should be keyboard accessible:
 
 ## 🐛 Troubleshooting
 
-### Dark mode not applying?
+### Dark mode not applying
 
 1. **Check class is present:**
+
    ```javascript
    console.log(document.documentElement.classList.contains('dark'));
-   ```
 
-2. **Verify CSS import order:**
+```text
+
+1. **Verify CSS import order:**
    Dark theme files must be imported AFTER base styles.
 
-3. **Clear browser cache:**
+1. **Clear browser cache:**
    Hard refresh with `Ctrl+Shift+R` (Windows) or `Cmd+Shift+R` (Mac).
 
-### Colors look different than expected?
+### Colors look different than expected
 
 1. **Check color profile:** Some monitors may display colors differently
-2. **Verify contrast settings:** Ensure browser/OS hasn't modified colors
-3. **Test in multiple browsers:** Some browsers render gradients differently
 
-### Components not styled?
+1. **Verify contrast settings:** Ensure browser/OS hasn't modified colors
+
+1. **Test in multiple browsers:** Some browsers render gradients differently
+
+### Components not styled
 
 1. **Verify BEM class names:** Must match exactly (case-sensitive)
-2. **Check for typos:** `.button--primay` vs `.button--primary`
-3. **Inspect element:** Use browser DevTools to see applied styles
+
+1. **Check for typos:** `.button--primay` vs `.button--primary`
+
+1. **Inspect element:** Use browser DevTools to see applied styles
 
 ---
 
@@ -566,5 +604,5 @@ All interactive elements should be keyboard accessible:
 
 ---
 
-**Last Updated:** March 11, 2026  
+**Last Updated:** March 11, 2026
 **Theme Version:** 2.0.0

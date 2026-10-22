@@ -1,9 +1,10 @@
 # HomePage Template
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
-Main landing page template combining hero, featured work, why section, and blog preview.
+Main landing page template combining hero, featured work, why section, and blog
+preview.
 
 ---
 
@@ -17,5 +18,5 @@ Main landing page template combining hero, featured work, why section, and blog 
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

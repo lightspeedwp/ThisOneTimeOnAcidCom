@@ -9,7 +9,9 @@
 
 ## Overview
 
-The `ThemeToggleES5` component provides a light/dark mode theme switcher for the site. It's built using ES5 closure syntax to comply with the Figma Make bundler constraints while maintaining full WCAG 2.2 AA/AAA accessibility compliance.
+The `ThemeToggleES5` component provides a light/dark mode theme switcher for the
+site. It's built using ES5 closure syntax to comply with the Figma Make bundler
+constraints while maintaining full WCAG 2.2 AA/AAA accessibility compliance.
 
 ---
 
@@ -50,7 +52,8 @@ var darkMode = darkModeState[0];
 var setDarkMode = darkModeState[1];
 
 function toggleTheme() { ... }
-```
+
+```text
 
 ### Icon Implementation
 
@@ -62,7 +65,8 @@ React.createElement('span', { ... }, '☀')
 
 // Moon icon (dark mode)
 React.createElement('span', { ... }, '☾')
-```
+
+```text
 
 ---
 
@@ -75,7 +79,8 @@ import { ThemeToggleES5 } from './components/common/ThemeToggleES5';
 
 // In your component
 React.createElement(ThemeToggleES5, null)
-```
+
+```text
 
 ### In Header Component
 
@@ -84,19 +89,20 @@ Already integrated in `/components/common/Header.tsx`:
 ```typescript
 React.createElement(
   "div",
-  { 
-    className: "header__actions", 
-    style: { 
-      display: "flex", 
-      alignItems: "center", 
-      justifyContent: "flex-end", 
-      gap: "12px" 
-    } 
+  {
+    className: "header__actions",
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      gap: "12px"
+    }
   },
   React.createElement(ThemeToggleES5, null),
   React.createElement("button", { ... }, "Unlock the Draft")
 )
-```
+
+```text
 
 ---
 
@@ -123,7 +129,8 @@ Located at: `/styles/blocks/theme-toggle.css`
   height: 1.25rem;
   /* ... */
 }
-```
+
+```text
 
 ### Dark Mode Styles
 
@@ -133,7 +140,8 @@ Located at: `/styles/blocks/theme-toggle.css`
   border-color: rgba(255, 255, 255, 0.1);
   color: var(--wp--preset--color--neon-purple);
 }
-```
+
+```text
 
 ### Light Mode Styles
 
@@ -145,7 +153,8 @@ body:not(.dark) .theme-toggle {
   border: 1px solid #D0D0D0;
   color: #1A1A1A;
 }
-```
+
+```text
 
 ---
 
@@ -155,11 +164,12 @@ body:not(.dark) .theme-toggle {
 
 ```typescript
 {
-  'aria-label': darkMode 
-    ? 'Switch to light mode' 
+  'aria-label': darkMode
+    ? 'Switch to light mode'
     : 'Switch to dark mode'
 }
-```
+
+```text
 
 ### Keyboard Support
 
@@ -176,7 +186,8 @@ body:not(.dark) .theme-toggle {
 <span class="sr-only">
   Switch to [light/dark] mode
 </span>
-```
+
+```text
 
 ### Focus Indicator
 
@@ -185,23 +196,28 @@ body:not(.dark) .theme-toggle {
   outline: none;
   box-shadow: var(--wp--preset--shadow--focus-ring-pink);
 }
-```
+
+```text
 
 **Light Mode:**
+
 ```css
 body:not(.dark) *:focus-visible {
   outline: 3px solid #D4008C;
   outline-offset: 2px;
 }
-```
+
+```text
 
 **Dark Mode:**
+
 ```css
 .dark *:focus-visible {
   outline: 3px solid #FF3AAE;
   outline-offset: 2px;
 }
-```
+
+```text
 
 ---
 
@@ -212,7 +228,8 @@ body:not(.dark) *:focus-visible {
 ```typescript
 localStorage.setItem('theme', 'dark');
 localStorage.setItem('theme', 'light');
-```
+
+```text
 
 ### HTML Class Toggle
 
@@ -222,14 +239,16 @@ document.documentElement.classList.add('dark');
 
 // Light mode
 document.documentElement.classList.remove('dark');
-```
+
+```text
 
 ### System Preference Detection
 
 ```typescript
 var prefersDarkMedia = window.matchMedia('(prefers-color-scheme: dark)');
 var prefersDark = prefersDarkMedia.matches;
-```
+
+```text
 
 ---
 
@@ -242,13 +261,15 @@ var prefersDark = prefersDarkMedia.matches;
 **Purpose:** WCAG-compliant light mode colors
 
 **Key Colors:**
+
 ```css
 --color-atomic-black: #FFFFFF; /* Inverted for light mode */
 --color-text-light: #1A1A1A; /* 16.1:1 contrast */
 --color-text-muted: #4A4A4A; /* 9.7:1 contrast */
 --color-neon-pink: #D4008C; /* Darkened for readability */
 --color-neon-yellow: #8C7A00; /* 7.1:1 contrast */
-```
+
+```text
 
 ### 2. Dark Theme
 
@@ -257,11 +278,13 @@ var prefersDark = prefersDarkMedia.matches;
 **Purpose:** Original dark mode styling
 
 **Key Colors:**
+
 ```css
 --color-atomic-black: #0F0F0F;
 --color-text-primary: #FFFFFF;
 --color-text-secondary: #AAAAAA;
-```
+
+```text
 
 ### 3. Ebook Enhanced Contrast
 
@@ -270,20 +293,24 @@ var prefersDark = prefersDarkMedia.matches;
 **Purpose:** High-contrast ebook reader for both themes
 
 **Dark Mode:**
+
 ```css
 .dark .ebook-reader__page-inner {
   background: #1A1A1A; /* Lightened from #0B0B10 */
   color: #F0F0F0; /* 9.5:1 contrast */
 }
-```
+
+```text
 
 **Light Mode:**
+
 ```css
 body:not(.dark) .ebook-reader__page-inner {
   background: #FAFAF7; /* Warm white */
   color: #1A1A1A; /* 16.1:1 contrast */
 }
-```
+
+```text
 
 ---
 
@@ -344,10 +371,12 @@ body:not(.dark) .ebook-reader__page-inner {
 ### Theme doesn't persist on reload
 
 **Check:**
+
 ```typescript
 // Verify localStorage is accessible
 console.log(localStorage.getItem('theme'));
-```
+
+```text
 
 **Fix:** Ensure localStorage is not blocked by browser settings.
 
@@ -356,11 +385,13 @@ console.log(localStorage.getItem('theme'));
 **Check:** Unicode support in font stack
 
 **Fix:**
+
 ```css
 .theme-toggle__icon {
   font-family: system-ui, -apple-system, sans-serif;
 }
-```
+
+```text
 
 ### Transition is jerky
 
@@ -373,7 +404,8 @@ console.log(localStorage.getItem('theme'));
     transition: none;
   }
 }
-```
+
+```text
 
 ### Theme toggle not visible in header
 
@@ -385,7 +417,8 @@ console.log(localStorage.getItem('theme'));
     display: none !important; /* May be hidden on mobile */
   }
 }
-```
+
+```text
 
 **Solution:** Add theme toggle to mobile menu if needed.
 
@@ -396,18 +429,22 @@ console.log(localStorage.getItem('theme'));
 ### Planned Features
 
 1. **Auto Theme Switching**
+
    - Switch automatically based on time of day
    - Follow sunrise/sunset times
 
-2. **Theme Preview**
+1. **Theme Preview**
+
    - Hover to preview theme without applying
    - Smooth preview transitions
 
-3. **Custom Theme Picker**
+1. **Custom Theme Picker**
+
    - Allow users to select custom accent colors
    - Save custom themes to localStorage
 
-4. **Sync Across Devices**
+1. **Sync Across Devices**
+
    - Sync theme preference via backend
    - Currently localStorage only
 
@@ -445,7 +482,8 @@ console.log(localStorage.getItem('theme'));
 .theme-toggle { }           /* Block */
 .theme-toggle__icon { }     /* Element */
 .theme-toggle:hover { }     /* Modifier (pseudo-class) */
-```
+
+```text
 
 ---
 

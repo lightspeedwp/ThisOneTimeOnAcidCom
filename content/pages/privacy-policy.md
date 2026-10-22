@@ -4,19 +4,24 @@ slug: privacy-policy
 title: Privacy Policy
 lastUpdated: February 2026
 ---
+
 # Privacy Policy
 
 *Last updated: February 2026*
 
-Ash Shaw Makeup Portfolio is a personal art project. We respect your privacy and are committed to transparency regarding any data interaction.
+Ash Shaw Makeup Portfolio is a personal art project. We respect your privacy and
+are committed to transparency regarding any data interaction.
 
 ## 1. Introduction
 
-This website is a personal portfolio showcasing artistic work. It is not a commercial e-commerce site. We do not sell user data, nor do we use it for advertising purposes.
+This website is a personal portfolio showcasing artistic work. It is not a
+commercial e-commerce site. We do not sell user data, nor do we use it for
+advertising purposes.
 
 ## 2. Data We Collect
 
-We collect minimal data to ensure the website functions correctly and to facilitate communication:
+We collect minimal data to ensure the website functions correctly and to
+facilitate communication:
 
 - Contact Form Data: If you use the contact form, we receive the name and email address you provide solely to reply to your message.
 - Technical Data: Standard server logs (IP address, browser type) used for security and debugging purposes only.
@@ -39,5 +44,5 @@ We may use trusted third-party services for specific functionality:
 
 ## 5. Contact Details
 
-For any privacy-related questions, please contact me via the contact form on this website.
-
+For any privacy-related questions, please contact me via the contact form on
+this website.

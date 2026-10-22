@@ -1,10 +1,12 @@
 # Lefthook Setup & Troubleshooting
 
-This document covers installation, local configuration, troubleshooting, and rollback of Lefthook git hooks.
+This document covers installation, local configuration, troubleshooting, and
+rollback of Lefthook git hooks.
 
 ## Overview
 
-Lefthook runs local Git validations to catch issues before they reach the remote repository:
+Lefthook runs local Git validations to catch issues before they reach the remote
+repository:
 
 - **`pre-commit`** — Validates journal markdown structure on staged files before each commit
 - **`pre-push`** — Runs production build to ensure deployable code before pushing to remote
@@ -19,9 +21,11 @@ Lefthook installs automatically via pnpm's lifecycle script:
 
 ```bash
 pnpm install
-```
 
-This runs `pnpm run postinstall`, which executes `lefthook install` and configures git hooks.
+```text
+
+This runs `pnpm run postinstall`, which executes `lefthook install` and
+configures git hooks.
 
 ### Manual Installation
 
@@ -29,13 +33,15 @@ If the automatic installation doesn't create git hooks:
 
 ```bash
 pnpm dlx lefthook install
-```
+
+```text
 
 Verify hooks are installed:
 
 ```bash
 ls -la .git/hooks/
-```
+
+```text
 
 You should see `pre-commit` and `pre-push` hook files.
 
@@ -47,29 +53,38 @@ Runs when committing staged files matching `content/journal/*.md`:
 
 ```bash
 pnpm run journal:validate
-```
+
+```text
 
 **What it checks:**
+
 - Markdown frontmatter validity (YAML structure)
 - Required fields (title, date, author)
 
 **How it works:**
+
 - Scans all `.md` files in `content/journal/` regardless of which files are staged
 - Automatically skipped during `git merge` or `git rebase`
 
 **Example:**
 
 ```bash
+
 # Valid commit — passes
+
 git add content/journal/post.md
 git commit -m "Add new post"
+
 # ✓ Pre-commit hook runs and passes
 
 # Invalid commit — fails
+
 git add content/journal/broken.md  # Has malformed YAML
 git commit -m "Add broken post"
+
 # ✗ Hook blocks commit, shows validation errors
-```
+
+```text
 
 ### Pre-Push: Production Build Verification
 
@@ -77,14 +92,17 @@ Runs `pnpm run build` before pushing to remote:
 
 ```bash
 pnpm run build
-```
+
+```text
 
 **What it checks:**
+
 - TypeScript compilation success
 - Vite bundler output
 - No build errors that would break deployment
 
 **Skip conditions:**
+
 - Skipped during rebase or merge operations
 - Can be bypassed (see below)
 
@@ -92,18 +110,25 @@ pnpm run build
 
 ```bash
 git push origin my-feature
+
 # ✗ Build fails
-# Error: TypeScript compilation error in src/app/...
+
+# Error: TypeScript compilation error in src/app/..
+
 # Pushing blocked
 
 # Fix the error
+
 git add .
 git commit -m "Fix TypeScript error"
 
 # Retry push
+
 git push origin my-feature
+
 # ✓ Build passes, push succeeds
-```
+
+```text
 
 ## Bypassing Hooks
 
@@ -118,19 +143,25 @@ git push origin my-feature
 Use `--no-verify` with git commands:
 
 ```bash
+
 # Skip pre-commit hook
+
 git commit --no-verify -m "WIP: partial changes"
 
 # Skip pre-push hook
+
 git push --no-verify
 
 # Skip both
+
 git commit --no-verify -m "msg" && git push --no-verify
-```
+
+```text
 
 ### Recommended Practice
 
-**Never skip hooks without explicit reason.** If you find yourself repeatedly using `--no-verify`, the issue is usually upstream:
+**Never skip hooks without explicit reason.** If you find yourself repeatedly
+using `--no-verify`, the issue is usually upstream:
 
 - **Broken build?** Fix it in your branch; do not skip the check
 - **Slow validation?** Run it locally first to debug
@@ -145,79 +176,100 @@ git commit --no-verify -m "msg" && git push --no-verify
 **Solutions:**
 
 1. **Verify installation:**
+
    ```bash
    npx lefthook install
-   ```
 
-2. **Check hook files exist:**
+```text
+
+1. **Check hook files exist:**
+
    ```bash
    ls -la .git/hooks/ | grep -E "pre-commit|pre-push"
-   ```
-   
-   Should show executable files like:
-   ```
-   -rwxr-xr-x  1 user  group  lefthook
-   ```
 
-3. **Check `.lefthook-local.yml` isn't disabling hooks:**
+```text
+
+   Should show executable files like:
+
+```text
+   -rwxr-xr-x  1 user  group  lefthook
+
+```text
+
+1. **Check `.lefthook-local.yml` isn't disabling hooks:**
+
    ```bash
    cat .lefthook-local.yml 2>/dev/null || echo "No local overrides"
-   ```
 
-4. **Manually run a hook to test:**
+```text
+
+1. **Manually run a hook to test:**
+
    ```bash
    pnpm dlx lefthook run pre-commit
-   ```
+
+```text
 
 ### "Command Not Found" Error
 
-**Problem:** Pre-commit or pre-push fails with `pnpm: command not found` or `tsx: command not found`.
+**Problem:** Pre-commit or pre-push fails with `pnpm: command not found` or
+`tsx: command not found`.
 
 **Solution:** Ensure dependencies are installed:
 
 ```bash
 pnpm install
 pnpm dlx lefthook install
-```
+
+```text
 
 If still failing, try running the validation manually:
 
 ```bash
 pnpm run journal:validate
 pnpm run build
-```
+
+```text
 
 If manual run works but hook fails, reinstall lefthook:
 
 ```bash
 rm -rf .git/hooks/pre-commit .git/hooks/pre-push
 pnpm dlx lefthook install
-```
+
+```text
 
 ### Hook Runs but Validation Passes Locally, Fails in Hook
 
-**Problem:** `pnpm run journal:validate` passes in terminal but fails in pre-commit hook.
+**Problem:** `pnpm run journal:validate` passes in terminal but fails in
+pre-commit hook.
 
 **Likely cause:** Different working directory or environment.
 
 **Solution:**
 
 1. Check what files are actually staged:
+
    ```bash
    git diff --cached --name-only
-   ```
 
-2. Run validation on staged files explicitly:
+```text
+
+1. Run validation on staged files explicitly:
+
    ```bash
    pnpm run journal:validate -- content/journal/specific-file.md
-   ```
 
-3. Clear pnpm cache:
+```text
+
+1. Clear pnpm cache:
+
    ```bash
    pnpm store prune
    pnpm install
    pnpm dlx lefthook install
-   ```
+
+```text
 
 ### Build Hook Slow or Timing Out
 
@@ -226,13 +278,15 @@ pnpm dlx lefthook install
 **Solution:**
 
 1. Run build locally to benchmark:
+
    ```bash
    time pnpm run build
-   ```
 
-2. If consistently slow, consider using `--no-verify` for feature branches and relying on CI for final validation
+```text
 
-3. Repo has no caching; build performs from scratch each push. This is intentional—it guarantees reproducibility.
+1. If consistently slow, consider using `--no-verify` for feature branches and relying on CI for final validation
+
+1. Repo has no caching; build performs from scratch each push. This is intentional—it guarantees reproducibility.
 
 ## Rollback: Removing Lefthook
 
@@ -242,19 +296,22 @@ If Lefthook causes persistent issues and needs to be removed:
 
 ```bash
 pnpm dlx lefthook uninstall
-```
+
+```text
 
 ### 2. Remove from Dependencies
 
 ```bash
 pnpm remove lefthook
-```
+
+```text
 
 ### 3. Remove Configuration Files
 
 ```bash
 rm -f lefthook.yml .lefthook-local.yml
-```
+
+```text
 
 ### 4. Restore Package.json
 
@@ -262,7 +319,8 @@ Remove the `postinstall` script from `package.json`:
 
 ```bash
 pnpm run postinstall  # command will no longer exist
-```
+
+```text
 
 Edit `package.json` manually to remove the `postinstall` line if needed.
 
@@ -271,7 +329,8 @@ Edit `package.json` manually to remove the `postinstall` line if needed.
 ```bash
 pnpm dlx lefthook version  # should fail (command not found)
 ls -la .git/hooks/ | grep -c lefthook  # should return 0
-```
+
+```text
 
 ## Configuration: Project vs Local Overrides
 
@@ -288,7 +347,9 @@ Checked into Git, applies to all developers:
 **Not** checked into Git, per-developer:
 
 ```yaml
+
 # .lefthook-local.yml (create manually if needed)
+
 pre-commit:
   skip: true  # Disable pre-commit for this machine
 
@@ -296,9 +357,11 @@ pre-push:
   commands:
     build:
       skip: true  # Disable build check for this machine
-```
 
-Use local overrides only when you have a specific reason (e.g., different system setup).
+```text
+
+Use local overrides only when you have a specific reason (e.g., different system
+setup).
 
 ## Viewing Hook Logs
 
@@ -307,69 +370,87 @@ Lefthook stores recent run logs in `.lefthook/`:
 ```bash
 ls -la .lefthook/
 cat .lefthook/lefthook.log | tail -50  # Last 50 lines
-```
+
+```text
 
 View what hooks ran on your last commit/push:
 
 ```bash
 grep -E "pre-commit|pre-push" .lefthook/lefthook.log | tail -20
-```
+
+```text
 
 ## Rapid Iteration (Development Mode)
 
-When doing rapid development and frequent commits, you may want to skip hook validation:
+When doing rapid development and frequent commits, you may want to skip hook
+validation:
 
 ### Option 1: Skip Hooks Per Commit (Recommended)
 
 Use `--no-verify` for individual commits:
 
 ```bash
+
 # Make changes and commit without validation
+
 git add .
 git commit --no-verify -m "WIP: feature work"
 
 # When ready, commit normally to re-enable validation
+
 git add .
 git commit -m "Feature complete"
+
 # ✓ Hooks run and validate
-```
+
+```text
 
 ### Option 2: Disable Hooks Temporarily (Local Only)
 
 Create `.lefthook-local.yml` in the repo root (never commit this):
 
 ```yaml
+
 # .lefthook-local.yml (local machine only, .gitignore'd)
+
 pre-commit:
   skip: true
 
 pre-push:
   skip: true
-```
+
+```text
 
 Re-enable by deleting the file:
 
 ```bash
 rm .lefthook-local.yml
-```
+
+```text
 
 ### Option 3: Run Validation Manually
 
 Skip hook-based validation and run checks when you choose:
 
 ```bash
+
 # Commit without validation
+
 git commit --no-verify -m "Work in progress"
 
 # Run validation on demand
+
 pnpm run journal:validate
 pnpm run build
 
 # When all pass, push
-git push
-```
 
-**Note:** Skipping hooks is safe only when you run equivalent validation before pushing to `develop` or `main`.
+git push
+
+```text
+
+**Note:** Skipping hooks is safe only when you run equivalent validation before
+pushing to `develop` or `main`.
 
 ## Performance Notes
 

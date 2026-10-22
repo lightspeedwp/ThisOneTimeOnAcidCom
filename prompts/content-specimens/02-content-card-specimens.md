@@ -7,16 +7,20 @@
 
 ## Objective
 
-Create a dev tools page showcasing 5 distinct card variants for each of the 5 content types (25 total card designs), plus existing tool/tip card types. Every card is shown in light and dark mode with full hover/focus interactions.
+Create a dev tools page showcasing 5 distinct card variants for each of the 5
+content types (25 total card designs), plus existing tool/tip card types. Every
+card is shown in light and dark mode with full hover/focus interactions.
 
 ---
 
 ## Card variant definitions
 
 ### Variant 1: Standard card
+
 The default archive/listing card. Used on content archive pages.
 
 **Structure:**
+
 - Image area (aspect varies by content type)
 - Content type badge with neon colour
 - Title (truncated at 2 lines)
@@ -25,9 +29,11 @@ The default archive/listing card. Used on content archive pages.
 - Hover: lift + neon border glow
 
 ### Variant 2: Featured card
+
 Large hero card for homepage features and top-of-archive slots.
 
 **Structure:**
+
 - Full-width or 2-column image (taller, more prominent)
 - Overlay gradient mask at bottom
 - Title overlaid on image (large typography)
@@ -36,18 +42,22 @@ Large hero card for homepage features and top-of-archive slots.
 - Hover: image zoom + glow intensification
 
 ### Variant 3: Compact card
+
 Small horizontal card for sidebars and related content sections.
 
 **Structure:**
+
 - Thumbnail (small square, left side)
 - Text block (right side): title + date
 - No excerpt, minimal meta
 - Hover: subtle background shift + neon accent line
 
 ### Variant 4: Minimal card
+
 Text-only card for dense lists and search results.
 
 **Structure:**
+
 - Content type icon + badge (inline, small)
 - Title
 - One-line excerpt or description
@@ -56,9 +66,11 @@ Text-only card for dense lists and search results.
 - Hover: left border neon accent line appears
 
 ### Variant 5: Editorial card
+
 Magazine-style card for highlighted/special content.
 
 **Structure:**
+
 - Large image with artistic crop (portrait for portfolio, landscape for blog)
 - Large display title overlaid or adjacent (editorial typography)
 - Pull quote or highlighted snippet
@@ -70,9 +82,11 @@ Magazine-style card for highlighted/special content.
 
 ## Content type-specific adaptations
 
-Each content type's 5 variants should be subtly different to reflect the nature of the content:
+Each content type's 5 variants should be subtly different to reflect the nature
+of the content:
 
 ### Blog cards
+
 - **Aspect ratio:** 16:9 landscape
 - **Meta:** Date, category, read time, tag count
 - **Accent:** Neon pink (#FF10F0)
@@ -80,6 +94,7 @@ Each content type's 5 variants should be subtly different to reflect the nature 
 - **Editorial variant:** Pull quote from the post
 
 ### Portfolio cards
+
 - **Aspect ratio:** 1:1 square or 3:4 portrait (face close-ups benefit from portrait)
 - **Meta:** Event, location, date, image count
 - **Accent:** Neon green (#39FF14)
@@ -88,6 +103,7 @@ Each content type's 5 variants should be subtly different to reflect the nature 
 - **Standard variant:** Image carousel dots visible (gallery indicator)
 
 ### Video cards
+
 - **Aspect ratio:** 16:9 landscape
 - **Meta:** Duration badge (overlay on image), view count, category
 - **Accent:** Neon blue (#1F51FF)
@@ -95,6 +111,7 @@ Each content type's 5 variants should be subtly different to reflect the nature 
 - **Compact variant:** Thumbnail + title + duration (YouTube-style)
 
 ### Podcast cards
+
 - **Aspect ratio:** 1:1 square (album art style)
 - **Meta:** Episode number, season, duration, guest name
 - **Accent:** Neon purple (#BE00FE)
@@ -102,6 +119,7 @@ Each content type's 5 variants should be subtly different to reflect the nature 
 - **Editorial variant:** Waveform decoration, transcript preview snippet
 
 ### Event cards
+
 - **Aspect ratio:** 16:9 or 4:3
 - **Meta:** Date range, location, event type badge, travel method icon
 - **Accent:** Neon orange (#FF5F1F)
@@ -113,7 +131,7 @@ Each content type's 5 variants should be subtly different to reflect the nature 
 
 ## Page layout
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │  Breadcrumbs: Home > Developer Tools > Content card gallery  │
 │  Badge: Content                                              │
@@ -149,7 +167,8 @@ Each content type's 5 variants should be subtly different to reflect the nature 
 │  FAQ section (3 FAQs, content-type neon colour)              │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
-```
+
+```text
 
 ---
 
@@ -158,27 +177,36 @@ Each content type's 5 variants should be subtly different to reflect the nature 
 All cards must demonstrate:
 
 1. **Default state** — Clean, readable, well-spaced
-2. **Hover state** — Transform + shadow + neon glow
-3. **Focus state** — 3px neon focus ring (accessibility)
-4. **Active state** — Scale-down feedback
 
-### Hover effects per variant:
+1. **Hover state** — Transform + shadow + neon glow
+
+1. **Focus state** — 3px neon focus ring (accessibility)
+
+1. **Active state** — Scale-down feedback
+
+### Hover effects per variant
+
 - **Standard:** `translateY(-4px)` + neon box-shadow + image scale(1.05)
 - **Featured:** Image zoom to scale(1.08) + gradient mask intensification
 - **Compact:** Background colour shift + left neon accent line
 - **Minimal:** Left border neon line slides in from transparent
 - **Editorial:** Subtle parallax tilt or image shift
 
-### Reduced motion:
-All hover animations wrapped in `@media (prefers-reduced-motion: reduce)` — falls back to opacity change only.
+### Reduced motion
+
+All hover animations wrapped in `@media (prefers-reduced-motion: reduce)` —
+falls back to opacity change only.
 
 ---
 
 ## Relationship to existing CardSpecimenPage
 
-The existing `/dev-tools/cards` (CardSpecimenPage) shows 6 generic card types (blog, tool, video, podcast, sticker, tip). This new page is a **superset** focused on content-type-specific variants.
+The existing `/dev-tools/cards` (CardSpecimenPage) shows 6 generic card types
+(blog, tool, video, podcast, sticker, tip). This new page is a **superset**
+focused on content-type-specific variants.
 
 **Decision:** Keep both pages:
+
 - `/dev-tools/cards` — Generic card interaction specimens (hover/focus states)
 - `/dev-tools/content-cards` — Content-type-specific card gallery (5 variants × 5 types)
 
@@ -189,11 +217,13 @@ Cross-link between them for reference.
 ## Data file
 
 `/data/mock/ui/content-card-specimens.ts`:
+
 ```typescript
 export const contentCardSpecimens = {
   blog: {
     cards: [
-      { variant: 'standard', title: '...', excerpt: '...', image: '...', category: '...', date: '...', readTime: 5 },
+{ variant: 'standard', title: '...', excerpt: '...', image: '...', category:
+'...', date: '...', readTime: 5 },
       { variant: 'featured', ... },
       { variant: 'compact', ... },
       { variant: 'minimal', ... },
@@ -206,7 +236,8 @@ export const contentCardSpecimens = {
   podcast: { ... },
   event: { ... },
 };
-```
+
+```text
 
 ---
 

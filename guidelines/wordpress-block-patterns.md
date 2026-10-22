@@ -2,16 +2,19 @@
 
 **Version:** 1.0.0
 **Last Updated:** February 2026
-**Purpose:** Defines how React components map to WordPress Block Patterns for migration.
+**Purpose:** Defines how React components map to WordPress Block Patterns for
+migration.
 
 ---
 
 ## 1. Core Layout Patterns
 
 ### Hero Section (`ash/hero-split`)
+
 Maps to `HeroLayout.tsx`.
 
 **Structure:**
+
 - `core/group` (Container, Full Width)
     - `core/columns` (Two Columns)
         - `core/column` (Content, Vertical Align Middle)
@@ -24,9 +27,11 @@ Maps to `HeroLayout.tsx`.
             - `core/image` (Rounded, Shadow-2xl)
 
 ### Why Section (`ash/features-grid`)
+
 Maps to `WhySection.tsx`.
 
 **Structure:**
+
 - `core/group` (Container)
     - `core/heading` (Section Title)
     - `core/columns` (3 Columns)
@@ -40,9 +45,11 @@ Maps to `WhySection.tsx`.
 ## 2. Dynamic Content Patterns
 
 ### FAQ Accordion (`ash/faq-accordion`)
+
 Maps to `FaqSection.tsx`.
 
 **Structure:**
+
 - `core/group` (Background: Atomic Black Noise)
     - `core/heading` (Title)
     - `core/details` (Repeater)
@@ -50,9 +57,11 @@ Maps to `FaqSection.tsx`.
         - `core/group` (Answer Body)
 
 ### Blog Grid (`ash/query-grid`)
+
 Maps to `BlogPreviewSection.tsx`.
 
 **Structure:**
+
 - `core/query` (Inherit query from URL)
     - `core/post-template` (Grid 3-col)
         - `core/group` (Card Wrapper)
@@ -75,5 +84,7 @@ Maps to `BlogPreviewSection.tsx`.
 ## 4. Migration Strategy
 
 1.  **Register Patterns:** Create PHP files in `patterns/` folder of the WP theme containing the block markup.
-2.  **Lock Templates:** Use full-site editing templates (`templates/index.html`) to enforce the layout.
-3.  **ACF Blocks:** For complex interactive components (like the "Neon vs Atomic Black" toggle or 3D books), wrap the React code in a custom ACF Block or use a Headless approach where WP just serves the JSON data.
+
+1.  **Lock Templates:** Use full-site editing templates (`templates/index.html`) to enforce the layout.
+
+1.  **ACF Blocks:** For complex interactive components (like the "Neon vs Atomic Black" toggle or 3D books), wrap the React code in a custom ACF Block or use a Headless approach where WP just serves the JSON data.

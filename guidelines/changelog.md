@@ -8,34 +8,44 @@
 
 ## Overview
 
-The project maintains a `CHANGELOG.md` file in the project root that documents all notable changes across every version. This file is **protected** — it must never be deleted, moved, or renamed.
+The project maintains a `CHANGELOG.md` file in the project root that documents
+all notable changes across every version. This file is **protected** — it must
+never be deleted, moved, or renamed.
 
 ---
 
 ## Format: Keep a Changelog
 
-The changelog strictly follows the [Keep a Changelog v1.1.0](https://keepachangelog.com/en/1.1.0/) format. The project also adheres to [Semantic Versioning (SemVer)](https://semver.org/spec/v2.0.0.html).
+The changelog strictly follows the [Keep a Changelog
+v1.1.0](https://keepachangelog.com/en/1.1.0/) format. The project also adheres
+to [Semantic Versioning (SemVer)](https://semver.org/spec/v2.0.0.html).
 
 ### File Header (Required)
 
 Every changelog must start with this exact header block:
 
 ```markdown
+
 # Changelog
 
-All notable changes to the Ash Shaw Makeup Portfolio will be documented in this file.
+All notable changes to the Ash Shaw Makeup Portfolio will be documented in this
+file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-```
+and this project adheres to [Semantic
+Versioning](https://semver.org/spec/v2.0.0.html).
+
+```text
 
 ### Version Sections
 
 Each release gets its own section with the version number and release date:
 
 ```markdown
+
 ## [X.Y.Z] - YYYY-MM-DD
-```
+
+```text
 
 - **Version number** follows SemVer: `MAJOR.MINOR.PATCH`
 - **Date format** is always ISO 8601: `YYYY-MM-DD`
@@ -56,6 +66,7 @@ Group changes under these headings only. Use **exactly** these names:
 | `### Security` | Vulnerability patches, security improvements |
 
 **Rules:**
+
 - Only include categories that have entries — do not add empty sections
 - Each entry is a bullet point (`-`) with a concise, human-readable description
 - Group related entries together under the same category
@@ -66,6 +77,7 @@ Group changes under these headings only. Use **exactly** these names:
 Always maintain an `[Unreleased]` section at the top of the changelog:
 
 ```markdown
+
 ## [Unreleased]
 
 ### Added
@@ -75,11 +87,14 @@ Always maintain an `[Unreleased]` section at the top of the changelog:
 ### Fixed
 
 - Description of upcoming fix
-```
+
+```text
 
 **Purpose:**
+
 1. Track changes that haven't been released yet
-2. At release time, rename `[Unreleased]` to `[X.Y.Z] - YYYY-MM-DD` and create a new empty `[Unreleased]` section above it
+
+1. At release time, rename `[Unreleased]` to `[X.Y.Z] - YYYY-MM-DD` and create a new empty `[Unreleased]` section above it
 
 ---
 
@@ -93,7 +108,9 @@ Version numbers follow `MAJOR.MINOR.PATCH`:
 | **MINOR** (X.Y.0) | New features, new pages, non-breaking additions | `5.3.0` → Personal Art Project migration |
 | **PATCH** (X.Y.Z) | Bug fixes, typo corrections, minor documentation updates | `7.3.1` → Fix broken guideline link |
 
-**Note:** The Guidelines.md version number and the CHANGELOG version number are synchronised. When Guidelines.md is updated to a new version, a corresponding changelog entry must be created.
+**Note:** The Guidelines.md version number and the CHANGELOG version number are
+synchronised. When Guidelines.md is updated to a new version, a corresponding
+changelog entry must be created.
 
 ---
 
@@ -118,7 +135,8 @@ Version numbers follow `MAJOR.MINOR.PATCH`:
 ### Examples
 
 ```markdown
-### Added
+
+### Added (1)
 
 - Stickers Gallery page with 26 entries
 - FAQ system with Schema.org FAQPage structured data
@@ -133,7 +151,8 @@ Version numbers follow `MAJOR.MINOR.PATCH`:
 
 - `/data/schema.md` — relocated to `/docs/cms-field-mapping.md`
 - All "Shop" and "Services" pages
-```
+
+```text
 
 ---
 
@@ -154,13 +173,20 @@ Version numbers follow `MAJOR.MINOR.PATCH`:
 Update `CHANGELOG.md` whenever:
 
 1. A new version of Guidelines.md is released
-2. New features, pages, or components are added
-3. Existing functionality is changed, deprecated, or removed
-4. Bug fixes are applied
-5. Architecture or infrastructure changes are made
-6. Files are moved, renamed, or deleted as part of cleanup
 
-**Workflow integration:** When the [Default AI Workflow](./Guidelines.md) is followed (prompt → audit → report → task list), the changelog should be updated in the same session if the work results in a version bump.
+1. New features, pages, or components are added
+
+1. Existing functionality is changed, deprecated, or removed
+
+1. Bug fixes are applied
+
+1. Architecture or infrastructure changes are made
+
+1. Files are moved, renamed, or deleted as part of cleanup
+
+**Workflow integration:** When the [Default AI Workflow](./Guidelines.md) is
+followed (prompt → audit → report → task list), the changelog should be updated
+in the same session if the work results in a version bump.
 
 ---
 

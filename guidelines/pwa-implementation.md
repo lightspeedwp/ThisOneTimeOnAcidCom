@@ -1,14 +1,15 @@
 # PWA Implementation Guide - Ash Shaw Makeup Portfolio
 
-**Version:** 1.0.0  
-**Last Updated:** February 5, 2025  
+**Version:** 1.0.0
+**Last Updated:** February 5, 2025
 **Status:** ✅ Complete and Production-Ready
 
 ---
 
 ## 📋 Overview
 
-The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App (PWA)** with offline support, installability, and native app-like features.
+The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App
+(PWA)** with offline support, installability, and native app-like features.
 
 ### ✨ Key Features
 
@@ -27,7 +28,7 @@ The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App (P
 
 ### File Structure
 
-```
+```text
 ash-shaw-makeup-portfolio/
 ├── public/
 │   ├── manifest.json                    # PWA manifest configuration
@@ -53,7 +54,8 @@ ash-shaw-makeup-portfolio/
 └── styles/blocks/
     ├── pwa-install-prompt.css          # Installation prompt styles
     └── offline-indicator.css           # Status indicator styles
-```
+
+```text
 
 ---
 
@@ -64,6 +66,7 @@ ash-shaw-makeup-portfolio/
 **Purpose:** Defines how the app appears when installed
 
 **Key Configuration:**
+
 ```json
 {
   "name": "Ash Shaw Makeup Artist Portfolio",
@@ -75,9 +78,11 @@ ash-shaw-makeup-portfolio/
   "icons": [...],
   "shortcuts": [...]
 }
-```
+
+```text
 
 **Features:**
+
 - 8 icon sizes (72x72 to 512x512)
 - Standalone display mode (full-screen app)
 - App shortcuts to Portfolio, Blog, Contact
@@ -90,7 +95,7 @@ ash-shaw-makeup-portfolio/
 
 **Purpose:** Enables offline functionality and caching
 
-**Caching Strategies:**
+## Caching Strategies
 
 | Resource Type | Strategy | Use Case |
 |--------------|----------|----------|
@@ -100,6 +105,7 @@ ash-shaw-makeup-portfolio/
 | **API Requests** | Network First | Dynamic data, cache fallback |
 
 **Precached Assets:**
+
 ```javascript
 const PRECACHE_ASSETS = [
   '/',
@@ -109,12 +115,16 @@ const PRECACHE_ASSETS = [
   '/manifest.json',
   '/offline.html'
 ];
-```
+
+```text
 
 **Lifecycle:**
+
 1. **Install** - Precache critical assets
-2. **Activate** - Clean up old caches
-3. **Fetch** - Intercept network requests with caching strategies
+
+1. **Activate** - Clean up old caches
+
+1. **Fetch** - Intercept network requests with caching strategies
 
 ---
 
@@ -123,6 +133,7 @@ const PRECACHE_ASSETS = [
 **Purpose:** Custom installation prompt following neon design system
 
 **Features:**
+
 - ✨ Neon gradient branding
 - 🎨 Strict BEM architecture
 - ⏱️ Shows 10 seconds after page load
@@ -131,12 +142,17 @@ const PRECACHE_ASSETS = [
 - 📱 Responsive design
 
 **User Flow:**
+
 1. User visits site for the first time
-2. After 10 seconds, install prompt appears
-3. User can install or dismiss
-4. Dismissal is remembered in localStorage
+
+1. After 10 seconds, install prompt appears
+
+1. User can install or dismiss
+
+1. Dismissal is remembered in localStorage
 
 **Accessibility:**
+
 - ARIA dialog role
 - Keyboard navigation (Enter, Space, Escape)
 - Screen reader announcements
@@ -149,6 +165,7 @@ const PRECACHE_ASSETS = [
 **Purpose:** Real-time network status notification
 
 **Features:**
+
 - 🟢 Green indicator when online
 - 🔴 Red indicator when offline
 - 📡 Automatic detection
@@ -156,6 +173,7 @@ const PRECACHE_ASSETS = [
 - ⏱️ Auto-hide after 5 seconds
 
 **States:**
+
 - **Online** - Green border, WiFi icon, "Back online"
 - **Offline** - Red border, WiFi Off icon, "You are offline"
 
@@ -166,6 +184,7 @@ const PRECACHE_ASSETS = [
 **Purpose:** Fallback page when offline and no cache available
 
 **Features:**
+
 - Inline CSS (no external dependencies)
 - Neon gradient branding
 - Status monitor (online/offline)
@@ -199,15 +218,16 @@ onlineStatusMonitor(callback: (isOnline: boolean) => void): () => void
 
 // Unregister service worker (debugging)
 unregisterServiceWorker(): Promise<boolean>
-```
+
+```text
 
 ### Usage Examples
 
 ```typescript
-import { 
-  registerServiceWorker, 
-  isStandalone, 
-  onlineStatusMonitor 
+import {
+  registerServiceWorker,
+  isStandalone,
+  onlineStatusMonitor
 } from '@/utils/pwaService';
 
 // Register service worker
@@ -222,7 +242,8 @@ if (isStandalone()) {
 const cleanup = onlineStatusMonitor((isOnline) => {
   console.log(`Network status: ${isOnline ? 'Online' : 'Offline'}`);
 });
-```
+
+```text
 
 ---
 
@@ -244,7 +265,8 @@ All PWA components follow strict BEM naming:
 /* Modifiers */
 .pwa-install-prompt__button--primary { }
 .pwa-install-prompt__button--secondary { }
-```
+
+```text
 
 ### Design Tokens
 
@@ -260,7 +282,8 @@ Using WordPress-aligned neon color system:
 
 /* Backgrounds */
 --wp--preset--color--atomic-black: #0F0F0F
-```
+
+```text
 
 ### Animations
 
@@ -274,7 +297,8 @@ All animations respect `prefers-reduced-motion`:
     transition: none !important;
   }
 }
-```
+
+```text
 
 ---
 
@@ -283,25 +307,36 @@ All animations respect `prefers-reduced-motion`:
 ### Desktop (Chrome/Edge)
 
 1. Visit the site in Chrome or Edge
-2. Look for install icon in address bar
-3. Click "Install Ash Shaw"
-4. App opens in standalone window
+
+1. Look for install icon in address bar
+
+1. Click "Install Ash Shaw"
+
+1. App opens in standalone window
 
 ### Mobile (iOS)
 
 1. Open in Safari
-2. Tap Share button
-3. Select "Add to Home Screen"
-4. Tap "Add"
-5. App appears on home screen
+
+1. Tap Share button
+
+1. Select "Add to Home Screen"
+
+1. Tap "Add"
+
+1. App appears on home screen
 
 ### Mobile (Android)
 
 1. Open in Chrome
-2. Tap menu (3 dots)
-3. Select "Add to Home screen"
-4. Tap "Add"
-5. App appears on home screen
+
+1. Tap menu (3 dots)
+
+1. Select "Add to Home screen"
+
+1. Tap "Add"
+
+1. App appears on home screen
 
 ---
 
@@ -320,7 +355,8 @@ Edit `/public/manifest.json` to customize:
   "icons": [...],
   "shortcuts": [...]
 }
-```
+
+```text
 
 ### Service Worker Caching
 
@@ -336,7 +372,8 @@ const PRECACHE_ASSETS = [
   '/index.html',
   // Add your assets here
 ];
-```
+
+```text
 
 ---
 
@@ -345,16 +382,21 @@ const PRECACHE_ASSETS = [
 ### Local Testing
 
 1. **Build for production:**
+
    ```bash
    npm run build
-   ```
 
-2. **Serve production build:**
+```text
+
+1. **Serve production build:**
+
    ```bash
    npm run preview
-   ```
 
-3. **Test in browser:**
+```text
+
+1. **Test in browser:**
+
    - Open DevTools
    - Go to Application tab
    - Check Service Workers
@@ -364,12 +406,17 @@ const PRECACHE_ASSETS = [
 ### Lighthouse Audit
 
 1. Open Chrome DevTools
-2. Go to Lighthouse tab
-3. Select "Progressive Web App"
-4. Click "Generate report"
-5. Aim for 95+ score
+
+1. Go to Lighthouse tab
+
+1. Select "Progressive Web App"
+
+1. Click "Generate report"
+
+1. Aim for 95+ score
 
 **Target Scores:**
+
 - ✅ Installable: Yes
 - ✅ PWA Optimized: 100/100
 - ✅ Works offline: Yes
@@ -382,39 +429,54 @@ const PRECACHE_ASSETS = [
 
 ### Service Worker Issues
 
-**Clear service worker:**
+## Clear service worker
+
 ```javascript
 import { unregisterServiceWorker } from '@/utils/pwaService';
 await unregisterServiceWorker();
-```
+
+```text
 
 **DevTools:**
+
 1. Open Chrome DevTools
-2. Application > Service Workers
-3. Click "Unregister"
-4. Click "Update on reload"
+
+1. Application > Service Workers
+
+1. Click "Unregister"
+
+1. Click "Update on reload"
 
 ### Cache Issues
 
-**Clear cache in DevTools:**
-1. Application > Cache Storage
-2. Right-click cache name
-3. Select "Delete"
+## Clear cache in DevTools
 
-**Clear cache programmatically:**
+1. Application > Cache Storage
+
+1. Right-click cache name
+
+1. Select "Delete"
+
+## Clear cache programmatically
+
 ```javascript
 // Delete all caches
 const cacheNames = await caches.keys();
 await Promise.all(cacheNames.map(name => caches.delete(name)));
-```
+
+```text
 
 ### Manifest Issues
 
 **Validate manifest:**
+
 1. DevTools > Application > Manifest
-2. Check for errors
-3. Verify all icons load
-4. Test theme color
+
+1. Check for errors
+
+1. Verify all icons load
+
+1. Test theme color
 
 ---
 
@@ -440,7 +502,8 @@ await Promise.all(cacheNames.map(name => caches.delete(name)));
 
 ### WCAG 2.1 Level AA Compliance
 
-**PWA Install Prompt:**
+## PWA Install Prompt
+
 - ✅ Keyboard navigation (Tab, Enter, Space, Escape)
 - ✅ Screen reader support (ARIA dialog)
 - ✅ Focus management
@@ -448,6 +511,7 @@ await Promise.all(cacheNames.map(name => caches.delete(name)));
 - ✅ Reduced motion support
 
 **Offline Indicator:**
+
 - ✅ ARIA live region
 - ✅ Status announcements
 - ✅ Icon + text labels
@@ -455,6 +519,7 @@ await Promise.all(cacheNames.map(name => caches.delete(name)));
 - ✅ Reduced motion support
 
 **Offline Page:**
+
 - ✅ Semantic HTML
 - ✅ Accessible status updates
 - ✅ Keyboard navigation
@@ -479,16 +544,19 @@ await Promise.all(cacheNames.map(name => caches.delete(name)));
 
 ### Icon Generation
 
-**Recommended tool:** [PWA Asset Generator](https://github.com/onderceylan/pwa-asset-generator)
+**Recommended tool:** [PWA Asset
+Generator](https://github.com/onderceylan/pwa-asset-generator)
 
 ```bash
 npx pwa-asset-generator logo.svg ./public/pwa-icons \
   --icon-only \
   --background "#0F0F0F" \
   --opaque false
-```
+
+```text
 
 **Required sizes:**
+
 - 72x72, 96x96, 128x128, 144x144
 - 152x152, 192x192, 384x384, 512x512
 
@@ -516,7 +584,8 @@ registration.addEventListener('updatefound', () => {
     }
   });
 });
-```
+
+```text
 
 ### 3. Offline UX
 
@@ -537,15 +606,18 @@ registration.addEventListener('updatefound', () => {
 ## 📚 Resources
 
 ### PWA Documentation
-- [MDN: Progressive Web Apps](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
+
+- [MDN: Progressive Web Apps](https://developer.mozilla.org/en-US/docs/Web/Progressive*web*apps)
 - [web.dev: PWA](https://web.dev/progressive-web-apps/)
 - [Google: PWA Checklist](https://web.dev/pwa-checklist/)
 
 ### Service Worker
-- [MDN: Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
+
+- [MDN: Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service*Worker*API)
 - [Workbox](https://developers.google.com/web/tools/workbox)
 
 ### Testing Tools
+
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse)
 - [PWA Builder](https://www.pwabuilder.com/)
 
@@ -556,24 +628,33 @@ registration.addEventListener('updatefound', () => {
 ### Planned Features
 
 1. **Push Notifications** - Blog post updates
-2. **Background Sync** - Contact form offline submission
-3. **Periodic Background Sync** - Update cache daily
-4. **Share Target** - Share to app from other apps
-5. **Advanced Caching** - Cache portfolio images
-6. **Offline Gallery** - View cached portfolio offline
+
+1. **Background Sync** - Contact form offline submission
+
+1. **Periodic Background Sync** - Update cache daily
+
+1. **Share Target** - Share to app from other apps
+
+1. **Advanced Caching** - Cache portfolio images
+
+1. **Offline Gallery** - View cached portfolio offline
 
 ### Implementation Priority
 
 1. ✅ **Phase 1** - Basic PWA (Complete)
-2. 🔄 **Phase 2** - Enhanced caching (In Progress)
-3. 🔮 **Phase 3** - Push notifications
-4. 🔮 **Phase 4** - Background sync
+
+1. 🔄 **Phase 2** - Enhanced caching (In Progress)
+
+1. 🔮 **Phase 3** - Push notifications
+
+1. 🔮 **Phase 4** - Background sync
 
 ---
 
 ## 📝 Changelog
 
 ### v1.0.0 (February 5, 2025)
+
 - ✅ Initial PWA implementation
 - ✅ Service worker with caching strategies
 - ✅ Offline homepage support
@@ -585,11 +666,12 @@ registration.addEventListener('updatefound', () => {
 
 ---
 
-**Implemented:** February 5, 2025  
-**Status:** Production-Ready  
+**Implemented:** February 5, 2025
+**Status:** Production-Ready
 **Maintained by:** Ash Shaw Portfolio Team
 
-**Need Help?**
+## Need Help
+
 - Installation not working? → Check browser compatibility
 - Service worker not registering? → Check HTTPS requirement
 - Offline mode not working? → Verify cache configuration

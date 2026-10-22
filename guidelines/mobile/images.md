@@ -1,10 +1,12 @@
 # Mobile Image Optimization Guidelines
 
-Mobile-specific image optimization strategies for fast loading and optimal display on small screens.
+Mobile-specific image optimization strategies for fast loading and optimal
+display on small screens.
 
 ## Purpose
 
 Optimize images for mobile devices with:
+
 - Responsive image sizing
 - Lazy loading for performance
 - Proper aspect ratios
@@ -21,13 +23,13 @@ Optimize images for mobile devices with:
 
 ```tsx
 // ❌ WRONG - Loading full desktop image on mobile
-<img 
+<img
   src="/portfolio/festival-makeup-4k.jpg"  /* 3840x2160, 8MB */
   alt="Festival makeup"
 />
 
 // ✅ CORRECT - Responsive image sources
-<img 
+<img
   srcSet="
     /portfolio/festival-makeup-400w.webp 400w,
     /portfolio/festival-makeup-800w.webp 800w,
@@ -42,7 +44,8 @@ Optimize images for mobile devices with:
   src="/portfolio/festival-makeup-800w.webp"
   alt="Festival makeup with UV accents"
 />
-```
+
+```text
 
 ---
 
@@ -52,7 +55,7 @@ Optimize images for mobile devices with:
 
 ```tsx
 // Portfolio Card Image
-<img 
+<img
   srcSet="
     /images/makeup-small.webp 400w,
     /images/makeup-medium.webp 800w,
@@ -69,7 +72,7 @@ Optimize images for mobile devices with:
 />
 
 // Hero Image
-<img 
+<img
   srcSet="
     /images/hero-mobile.webp 640w,
     /images/hero-tablet.webp 1024w,
@@ -80,7 +83,8 @@ Optimize images for mobile devices with:
   alt="Ash Shaw makeup artist hero"
   className="w-full h-auto"
 />
-```
+
+```text
 
 ### Picture Element for Art Direction
 
@@ -88,25 +92,26 @@ Optimize images for mobile devices with:
 // Different images for mobile vs desktop
 <picture>
   {/* Mobile: Portrait orientation */}
-  <source 
+  <source
     media="(max-width: 640px)"
     srcSet="/images/portrait-mobile.webp"
   />
-  
+
   {/* Tablet: Square crop */}
-  <source 
+  <source
     media="(max-width: 1024px)"
     srcSet="/images/square-tablet.webp"
   />
-  
+
   {/* Desktop: Landscape */}
-  <img 
+  <img
     src="/images/landscape-desktop.webp"
     alt="Festival makeup portfolio"
     className="w-full h-auto"
   />
 </picture>
-```
+
+```text
 
 ---
 
@@ -116,7 +121,7 @@ Optimize images for mobile devices with:
 
 ```tsx
 // Basic lazy loading
-<img 
+<img
   src="/portfolio/makeup-look.webp"
   alt="Editorial makeup"
   loading="lazy"
@@ -124,13 +129,14 @@ Optimize images for mobile devices with:
 />
 
 // Eager loading for above-the-fold images
-<img 
+<img
   src="/hero-image.webp"
   alt="Hero image"
   loading="eager"
   className="w-full h-auto"
 />
-```
+
+```text
 
 ### Implementation Patterns
 
@@ -141,7 +147,7 @@ function PortfolioGallery({ entries }: Props) {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {entries.map((entry, index) => (
         <div key={entry.id} className="aspect-square overflow-hidden rounded-lg">
-          <img 
+          <img
             src={entry.image}
             alt={entry.title}
             loading={index < 6 ? 'eager' : 'lazy'}  /* First 6 eager */
@@ -157,16 +163,16 @@ function PortfolioGallery({ entries }: Props) {
 function BlogPost({ post }: Props) {
   return (
     <article className="prose max-w-none">
-      <img 
+      <img
         src={post.featuredImage}
         alt={post.title}
         loading="eager"  /* Featured image loads immediately */
         className="w-full rounded-2xl mb-8"
       />
-      
+
       <div className="content">
         {/* All other images lazy load */}
-        <img 
+        <img
           src={post.contentImage}
           alt="Step 1"
           loading="lazy"
@@ -175,7 +181,8 @@ function BlogPost({ post }: Props) {
     </article>
   );
 }
-```
+
+```text
 
 ---
 
@@ -186,7 +193,7 @@ function BlogPost({ post }: Props) {
 ```tsx
 // Portfolio Grid - Square
 <div className="aspect-square overflow-hidden rounded-lg">
-  <img 
+  <img
     src={image}
     alt={alt}
     className="w-full h-full object-cover"
@@ -195,7 +202,7 @@ function BlogPost({ post }: Props) {
 
 // Blog Card - 16:9
 <div className="aspect-[16/9] overflow-hidden rounded-lg">
-  <img 
+  <img
     src={image}
     alt={alt}
     className="w-full h-full object-cover"
@@ -204,7 +211,7 @@ function BlogPost({ post }: Props) {
 
 // Portrait - 4:5 (Instagram style)
 <div className="aspect-[4/5] overflow-hidden rounded-lg">
-  <img 
+  <img
     src={image}
     alt={alt}
     className="w-full h-full object-cover"
@@ -213,13 +220,14 @@ function BlogPost({ post }: Props) {
 
 // Wide - 21:9 (Cinematic)
 <div className="aspect-[21/9] overflow-hidden rounded-lg">
-  <img 
+  <img
     src={image}
     alt={alt}
     className="w-full h-full object-cover"
   />
 </div>
-```
+
+```text
 
 ### Preventing Layout Shift
 
@@ -229,7 +237,7 @@ function BlogPost({ post }: Props) {
 
 // ✅ CORRECT - Explicit aspect ratio
 <div className="aspect-[4/3] bg-gray-100">
-  <img 
+  <img
     src={image}
     alt={alt}
     className="w-full h-full object-cover"
@@ -238,7 +246,7 @@ function BlogPost({ post }: Props) {
 </div>
 
 // With width/height attributes
-<img 
+<img
   src={image}
   alt={alt}
   width={800}
@@ -246,7 +254,8 @@ function BlogPost({ post }: Props) {
   className="w-full h-auto"
   loading="lazy"
 />
-```
+
+```text
 
 ---
 
@@ -261,7 +270,7 @@ function HeroSection() {
       {/* Background Image */}
       <picture>
         {/* Mobile: Smaller, optimized image */}
-        <source 
+        <source
           media="(max-width: 640px)"
           srcSet="
             /hero-mobile-400w.webp 400w,
@@ -269,9 +278,9 @@ function HeroSection() {
           "
           sizes="100vw"
         />
-        
+
         {/* Tablet */}
-        <source 
+        <source
           media="(max-width: 1024px)"
           srcSet="
             /hero-tablet-800w.webp 800w,
@@ -279,9 +288,9 @@ function HeroSection() {
           "
           sizes="100vw"
         />
-        
+
         {/* Desktop */}
-        <img 
+        <img
           src="/hero-desktop-1920w.webp"
           srcSet="
             /hero-desktop-1920w.webp 1920w,
@@ -294,26 +303,29 @@ function HeroSection() {
           fetchpriority="high"
         />
       </picture>
-      
+
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-white" />
-      
+<div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent
+to-white" />
+
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center h-full px-6">
-        <h1 className="text-4xl md:text-6xl font-title font-bold text-white text-center">
+<h1 className="text-4xl md:text-6xl font-title font-bold text-white
+text-center">
           Ash Shaw
         </h1>
       </div>
     </section>
   );
 }
-```
+
+```text
 
 ### Performance Priority
 
 ```tsx
 // High priority hero image
-<img 
+<img
   src="/hero.webp"
   alt="Hero"
   loading="eager"
@@ -322,13 +334,14 @@ function HeroSection() {
 />
 
 // Preload critical hero image in <head>
-<link 
+<link
   rel="preload"
   as="image"
   href="/hero-mobile.webp"
   media="(max-width: 640px)"
 />
-```
+
+```text
 
 ---
 
@@ -348,7 +361,7 @@ function HorizontalGallery({ images }: Props) {
             onClick={() => openLightbox(index)}
             className="flex-shrink-0 w-64 aspect-square rounded-lg overflow-hidden"
           >
-            <img 
+            <img
               src={image.thumbnail}
               alt={image.alt}
               loading="lazy"
@@ -375,7 +388,7 @@ function TouchGallery({ images }: Props) {
             active:scale-95 transition-transform
           "
         >
-          <img 
+          <img
             src={image.thumbnail}
             alt={image.alt}
             loading="lazy"
@@ -386,7 +399,8 @@ function TouchGallery({ images }: Props) {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -397,27 +411,28 @@ function TouchGallery({ images }: Props) {
 ```tsx
 // Modern browsers: WebP, Fallback: JPEG
 <picture>
-  <source 
+  <source
     type="image/webp"
     srcSet="
       /makeup-400w.webp 400w,
       /makeup-800w.webp 800w
     "
   />
-  <source 
+  <source
     type="image/jpeg"
     srcSet="
       /makeup-400w.jpg 400w,
       /makeup-800w.jpg 800w
     "
   />
-  <img 
+  <img
     src="/makeup-800w.jpg"
     alt="Makeup look"
     loading="lazy"
   />
 </picture>
-```
+
+```text
 
 ### AVIF for Maximum Compression
 
@@ -425,25 +440,26 @@ function TouchGallery({ images }: Props) {
 // Next-gen format with fallbacks
 <picture>
   {/* AVIF - Best compression */}
-  <source 
+  <source
     type="image/avif"
     srcSet="/makeup-800w.avif"
   />
-  
+
   {/* WebP - Good compression, wide support */}
-  <source 
+  <source
     type="image/webp"
     srcSet="/makeup-800w.webp"
   />
-  
+
   {/* JPEG - Universal fallback */}
-  <img 
+  <img
     src="/makeup-800w.jpg"
     alt="Makeup look"
     loading="lazy"
   />
 </picture>
-```
+
+```text
 
 ---
 
@@ -454,11 +470,11 @@ function TouchGallery({ images }: Props) {
 ```tsx
 function ImageWithPlaceholder({ src, alt, placeholder }: Props) {
   const [loaded, setLoaded] = useState(false);
-  
+
   return (
     <div className="relative aspect-square">
       {/* Blurred placeholder */}
-      <img 
+      <img
         src={placeholder}  /* Tiny 20x20 image */
         alt=""
         aria-hidden="true"
@@ -468,9 +484,9 @@ function ImageWithPlaceholder({ src, alt, placeholder }: Props) {
           ${loaded ? 'opacity-0' : 'opacity-100'}
         `}
       />
-      
+
       {/* Full image */}
-      <img 
+      <img
         src={src}
         alt={alt}
         loading="lazy"
@@ -484,7 +500,8 @@ function ImageWithPlaceholder({ src, alt, placeholder }: Props) {
     </div>
   );
 }
-```
+
+```text
 
 ### Skeleton Loader
 
@@ -495,7 +512,7 @@ function ImageSkeleton({ loaded }: { loaded: boolean }) {
       {!loaded && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse" />
       )}
-      <img 
+      <img
         src={src}
         alt={alt}
         loading="lazy"
@@ -505,7 +522,8 @@ function ImageSkeleton({ loaded }: { loaded: boolean }) {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -517,9 +535,9 @@ function ImageSkeleton({ loaded }: { loaded: boolean }) {
 function ResponsiveImage({ highRes, lowRes, alt }: Props) {
   // Check if user has data saver enabled
   const saveData = navigator.connection?.saveData || false;
-  
+
   return (
-    <img 
+    <img
       src={saveData ? lowRes : highRes}
       alt={alt}
       loading="lazy"
@@ -527,18 +545,19 @@ function ResponsiveImage({ highRes, lowRes, alt }: Props) {
     />
   );
 }
-```
+
+```text
 
 ### Connection-Aware Loading
 
 ```tsx
 function AdaptiveImage({ src, alt }: Props) {
   const [quality, setQuality] = useState('high');
-  
+
   useEffect(() => {
     // Check connection type
     const connection = (navigator as any).connection;
-    
+
     if (connection) {
       if (connection.effectiveType === '4g') {
         setQuality('high');
@@ -549,22 +568,23 @@ function AdaptiveImage({ src, alt }: Props) {
       }
     }
   }, []);
-  
+
   const imageSrc = {
     high: `${src}-high.webp`,
     medium: `${src}-medium.webp`,
     low: `${src}-low.webp`
   };
-  
+
   return (
-    <img 
+    <img
       src={imageSrc[quality]}
       alt={alt}
       loading="lazy"
     />
   );
 }
-```
+
+```text
 
 ---
 
@@ -578,7 +598,7 @@ function PortfolioCard({ entry }: Props) {
     <article className="bg-white rounded-2xl overflow-hidden shadow-lg">
       {/* Featured Image */}
       <div className="aspect-[4/3] overflow-hidden">
-        <img 
+        <img
           srcSet="
             ${entry.image}-400w.webp 400w,
             ${entry.image}-800w.webp 800w
@@ -587,10 +607,11 @@ function PortfolioCard({ entry }: Props) {
           src={`${entry.image}-800w.webp`}
           alt={entry.title}
           loading="lazy"
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+className="w-full h-full object-cover hover:scale-105 transition-transform
+duration-500"
         />
       </div>
-      
+
       {/* Content */}
       <div className="p-6">
         <h3 className="text-xl font-heading font-semibold">
@@ -600,26 +621,28 @@ function PortfolioCard({ entry }: Props) {
     </article>
   );
 }
-```
+
+```text
 
 ### Blog Featured Image
 
 ```tsx
 function BlogFeaturedImage({ post }: Props) {
   return (
-    <div className="aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-2xl mb-8">
+<div className="aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-2xl
+mb-8">
       <picture>
         {/* Mobile: 16:9 crop */}
-        <source 
+        <source
           media="(max-width: 640px)"
           srcSet="
             ${post.image}-mobile-400w.webp 400w,
             ${post.image}-mobile-640w.webp 640w
           "
         />
-        
+
         {/* Desktop: 21:9 wide crop */}
-        <img 
+        <img
           src={`${post.image}-desktop-1200w.webp`}
           srcSet="
             ${post.image}-desktop-1200w.webp 1200w,
@@ -634,7 +657,8 @@ function BlogFeaturedImage({ post }: Props) {
     </div>
   );
 }
-```
+
+```text
 
 ### Avatar Images
 
@@ -642,7 +666,7 @@ function BlogFeaturedImage({ post }: Props) {
 function Avatar({ user }: Props) {
   return (
     <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200">
-      <img 
+      <img
         src={`${user.avatar}?w=96&h=96`}  /* Request exact size */
         srcSet="
           ${user.avatar}?w=48&h=48 1x,
@@ -655,7 +679,8 @@ function Avatar({ user }: Props) {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -666,29 +691,34 @@ function Avatar({ user }: Props) {
 ```tsx
 // ❌ WRONG - All images load immediately
 <img src="/large-image.jpg" alt="Portfolio" />
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Lazy load off-screen images
-<img 
-  src="/large-image.jpg" 
+<img
+  src="/large-image.jpg"
   alt="Portfolio"
   loading="lazy"
 />
-```
+
+```text
 
 ### ❌ Mistake 2: Single Large Image
 
 ```tsx
 // ❌ WRONG - 5MB desktop image on mobile
 <img src="/desktop-4k.jpg" alt="Hero" />
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Responsive sources
-<img 
+<img
   srcSet="
     /mobile-640w.webp 640w,
     /tablet-1024w.webp 1024w,
@@ -698,27 +728,31 @@ function Avatar({ user }: Props) {
   src="/tablet-1024w.webp"
   alt="Hero"
 />
-```
+
+```text
 
 ### ❌ Mistake 3: No Aspect Ratio
 
 ```tsx
 // ❌ WRONG - Layout shift when image loads
 <img src={image} alt={alt} className="w-full" />
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Reserved space prevents shift
 <div className="aspect-square">
-  <img 
+  <img
     src={image}
     alt={alt}
     className="w-full h-full object-cover"
     loading="lazy"
   />
 </div>
-```
+
+```text
 
 ---
 
@@ -738,6 +772,7 @@ function Avatar({ user }: Props) {
 ### Performance Metrics
 
 Target metrics:
+
 - **Largest Contentful Paint (LCP):** < 2.5s
 - **Cumulative Layout Shift (CLS):** < 0.1
 - **Total Image Weight:** < 500KB on initial load
@@ -753,5 +788,5 @@ Target metrics:
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 3.2.0

@@ -1,6 +1,7 @@
 ---
 name: "PageSpeed Agent"
-description: "Monitors and analyzes Core Web Vitals and performance metrics for the portfolio site."
+description: "Monitors and analyzes Core Web Vitals and performance metrics for
+the portfolio site."
 type: "agent"
 category: "performance"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Monitor and analyze Core Web Vitals and performance metrics to ensure optimal portfolio site performance.
+Monitor and analyze Core Web Vitals and performance metrics to ensure optimal
+portfolio site performance.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Monitor and analyze Core Web Vitals and performance metrics to ensure optimal po
 ## Key Responsibilities
 
 1. **Metrics Monitoring** – Track Core Web Vitals over time
-2. **Performance Analysis** – Analyze performance audit results
-3. **Optimization Guidance** – Recommend performance improvements
-4. **Regression Detection** – Identify performance degradation
-5. **Reporting** – Document performance findings
-6. **Baseline Tracking** – Maintain performance baselines
+
+1. **Performance Analysis** – Analyze performance audit results
+
+1. **Optimization Guidance** – Recommend performance improvements
+
+1. **Regression Detection** – Identify performance degradation
+
+1. **Reporting** – Document performance findings
+
+1. **Baseline Tracking** – Maintain performance baselines
 
 ## Core Web Vitals
 
