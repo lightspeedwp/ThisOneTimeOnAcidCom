@@ -52,8 +52,7 @@ Follow this **exact reading order** to understand the design system:
 1. **[design-tokens/spacing.md](./design-tokens/spacing.md)** - Spacing system
 
 #### Step 4: Understand Data System (REQUIRED)
-
-1. **[Data System Documentation](../data/README.md)** - Mock data system and centralized content management
+15. **[Data System Documentation](./data-models.md)** - Data model definitions and centralized content management
 
 #### Step 5: Read Theme Documentation (REQUIRED)
 
@@ -200,7 +199,7 @@ guidelines/
 ## Building a Page Component
 
 - Start with [overview-components.md](./overview-components.md)
-- Check [Data System Documentation](../data/README.md) for content
+- Check [data-models.md](./data-models.md) for content structure
 - Review [Guidelines.md](./Guidelines.md) Section 1 for architecture
 
 ## Using a Specific Component
