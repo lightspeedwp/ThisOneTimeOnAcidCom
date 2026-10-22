@@ -1,0 +1,23 @@
+{
+  "name": "Ash Shaw — Neon & UV Makeup Art",
+  "short_name": "Ash Shaw",
+  "description": "Makeup that shines with colour, energy, and connection. Personal art portfolio showcasing festival face painting, UV neon designs, and creative expression.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0F0F",
+  "theme_color": "#BE00FE",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-GB",
+  "dir": "ltr",
+  "categories": ["lifestyle", "entertainment", "photo"],
+  "icons": [],
+  "screenshots": [],
+  "shortcuts": [],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
