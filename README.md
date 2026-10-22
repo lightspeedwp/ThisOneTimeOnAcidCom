@@ -22,11 +22,12 @@ Run `npm run dev` to start the development server.
 
 ## 🌟 Overview
 
-This is a high-performance React application built with **Vite**,
-**TypeScript**,
-and **Tailwind CSS**. It features a unique **"Neon vs Atomic Black"** design
-system with a comprehensive **retro terminal boot animation system**, and
-maintains 100% WCAG 2.1 AAA accessibility compliance.
+This is a high-performance React application built with **Vite** and
+**TypeScript**, featuring a strict **BEM CSS architecture** (no Tailwind
+utilities). It includes a unique **"Neon vs Atomic Black"** design system with a
+comprehensive **retro terminal boot animation system**, and maintains 100% WCAG
+2.1 AAA accessibility compliance. Tailwind tooling is retained for design system
+support but is not used in component styling.
 
 ## Current Architecture
 

@@ -274,6 +274,8 @@ verify tests execute without errors (or expected browser setup messages for e2e)
   actions/labeler
 - ✅ Syncs labels with canonical .github/labels.yml (158 labels)
 - ✅ Validation gates PR labeling (contract suite + schema validation)
+- ✅ Protected files guard approval process established (Constitution Principle
+  II compliance; issue #428 documents change request approval)
 - [x] T030 [WS-260] Update AGENTS.md test command status
 - ✅ `npm run test:unit` → ✅ Working (Jest ESM with @swc/core: 588/588 pass)
 - ✅ `npm run test:build` → ✅ Working (Bats: 12/12 pass)
@@ -476,7 +478,9 @@ run `npm run build` and verify BEM-only styling succeeds
 - Add section: "Styling" — document BEM-only CSS rules
 
 **Checkpoint**: Root configuration updated; npm-only and Node.js 24 enforced;
-Tailwind removed; changelog validation active; documentation complete
+Tailwind tooling retained (for Make support) but not used in component CSS;
+changelog validation active; documentation complete. **Outstanding:** T046
+Styling section to be added to CONTRIBUTING.md documenting BEM-only CSS rules.
 
 ---
 
