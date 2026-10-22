@@ -45,13 +45,13 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 
 ### 2. Claude API Tool Runner
 
-**Status**: ⚠️ **PARTIAL INTEGRATION**
+**Status**: ⚠️ **EVALUATE**
 
-**Description**: Server-hosted agentic loop that runs an agent with access to tools, respawning as needed without user intervention.
+**Description**: SDK orchestration that runs the agentic loop in the calling application: it calls the Messages API, executes tool functions, and returns tool results until the loop completes.
 
 **Usage in This Repo**:
 - **Potentially useful for**: agents that need autonomous retry or multi-step tool coordination (release-agent, testing-agent, labeling-agent)
-- **Current status**: Implemented via Agent SDK locally; not using hosted Tool Runner
+- **Current status**: No direct Tool Runner integration is configured in this repository
 - **Alternative**: Claude Code handles agentic loop locally
 
 **Applicable Agents** (3-4 candidates):
@@ -60,7 +60,7 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 - ⚠️ labeling-agent — Could use Tool Runner for batch labeling operations
 - ⚠️ playwright-agent — Could use Tool Runner for multi-step browser automation
 
-**Decision**: **EVALUATE** — Consider for high-autonomy agents if Tool Runner reduces token cost vs. local agentic loops
+**Decision**: **EVALUATE** — Consider SDK Tool Runner for simplifying application-managed tool orchestration; cost depends on requests and usage
 
 ---
 
@@ -68,16 +68,15 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 
 **Status**: ❌ **NOT CURRENTLY APPLICABLE**
 
-**Description**: Server-hosted agents with managed sandbox, permissions, and token budgets.
+**Description**: Claude Managed Agents provides a server-hosted runtime with a managed agentic loop, tool execution, and sandbox infrastructure for long-running or asynchronous work.
 
 **Why Not Used**:
 - All agents run in Claude Code framework (local or cloud environment)
-- Managed Agents designed for external services/integrations (not internal workflows)
 - Local execution provides better visibility and control over agent behavior
 
 **Potential Use Cases** (Future):
 - If agents needed to be exposed as external APIs (e.g., public bot service)
-- If token budgeting required per-agent hard limits with server enforcement
+- If workflows need a hosted runtime for long-running or asynchronous execution
 
 **Decision**: **NOT APPLICABLE** — Local execution model meets current requirements
 
@@ -87,19 +86,23 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 
 **Status**: ✅ **RECOMMENDED**
 
-**Description**: Caches large prompts in Claude's KV store; subsequent requests reuse cached data, reducing input tokens by 90%.
+**Description**: Caches reusable prompt prefixes to reduce input cost and latency. Cache reads still count toward total input tokens and context usage; a lower cache-read price reduces cost, not token usage. API accounting separates `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`; their sum is total input tokens.
 
 **Potential Usage**:
 - **High-value targets**: agents with large context requirements
   - document-reviewer-agent — Large markdown files (guidelines/, docs/)
-  - reporter-agent — Large data sets
+  - reporting-agent — Large data sets
   - testing-agent — Large test result compilations
   - prd-agent — Long requirements documents
 
-**Token Savings Estimate**:
-- Typical cached prompt: 10,000+ tokens
-- Savings per cache hit: ~9,000 tokens (90%)
-- Breakeven: 2–3 cache hits
+**Cost savings example** (Claude Sonnet 4.6, standard pricing, 5-minute cache TTL):
+
+- Reused prefix: 10,000 tokens; base input $3/million tokens, cache writes $3.75/million (1.25×), reads $0.30/million (0.1×).
+- One write costs $0.0375; each hit costs $0.003 rather than $0.03, saving $0.027 (90% of the prefix's base input cost per hit).
+- Ten requests with one write and nine hits (90% hit rate, unchanged prefix reused within TTL) cost $0.0645 instead of $0.30: $0.2355 saved (78.5%). Total prefix input remains 100,000 tokens.
+- For `N` requests, prompt size `P`, base price per token `B`, write multiplier `w`, read multiplier `r`, and hit rate `h`, cached prefix cost is `N × P × B × ((1 − h) × w + h × r)`, assuming every miss writes the full prefix. Uncached cost is `N × P × B`.
+- Savings require `h > (w − 1) / (w − r)`: above 21.7% for this model and TTL. After one write, hits `H` must satisfy `H > (w − 1) / (1 − r)`; one hit recovers this write premium. A 1-hour TTL uses `w = 2`, requiring above 52.6% hits, or two hits after one write.
+- Recalculate with the selected model's prices, cache TTL, cacheable prompt size, and observed hit rate. Expiry or prefix changes cause new writes; uncached suffixes and output tokens add separate costs.
 
 **Applicable Agents** (4-6):
 - ✅ document-reviewer-agent — Review same doc set repeatedly
@@ -123,16 +126,16 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 
 **Usage in This Repo**:
 - All 20 agents use tool calling via Claude Code SDK
-- Tools available: Bash, Read, Edit, Write, GitHub MCP, etc.
+- Manifest-declared tools: Read, Write, Bash for all 20 agents
 - Tool selection per-agent in `.claude/agents/{agent}.md`
 
 **Applicable Agents** (20/20):
 - ✅ All agents use Tool Use
 
 **Tool Distribution**:
-- **Universal**: Bash, Read, Edit, Write (all agents)
-- **GitHub-specific**: issue-agent, labeling-agent, pr-agent, release-agent
-- **Specialized**: Playwright (bugherd, playwright-agent); Figma (design-partner-agent)
+- **Universal declarations**: `read`, `write`, `bash` (20/20 manifests)
+- **Workflow capabilities**: Git via Bash; browser testing is a task of bugherd-agent and playwright-agent, but Playwright is not a declared tool
+- **Global integrations**: Example GitHub integration is separate from agent tool declarations; see MCP assessment below
 
 **Decision**: **REQUIRED** — Core capability; agents depend on tool use for any file/system operations
 
@@ -170,32 +173,19 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 
 ### 7. MCP (Model Context Protocol)
 
-**Status**: ✅ **WIDELY INTEGRATED**
+**Status**: ⚠️ **NO MCP SERVERS CONFIGURED IN REPOSITORY SETTINGS**
 
 **Description**: Standardized protocol for LLM access to external systems/data sources via servers.
 
-**Usage in This Repo**:
-- GitHub MCP server (issue-agent, labeling-agent, pr-agent)
-- Gmail MCP server (future: email automation)
-- Google Drive MCP server (future: document retrieval)
-- Linear MCP server (future: issue sync if migrated from GitHub)
-- Figma MCP server (design-partner-agent, used for design context retrieval)
+**Repository Configuration**:
 
-**Applicable Agents** (5-7):
-- ✅ issue-agent — GitHub MCP
-- ✅ labeling-agent — GitHub MCP
-- ✅ pr-agent — GitHub MCP
-- ✅ release-agent — GitHub MCP
-- ✅ design-partner-agent — Figma MCP
-- ⚠️ content-strategy-agent — Could use Figma MCP for brand asset retrieval
-- ⚠️ metadata-agent — Could use Google Drive MCP for SEO template retrieval
+- `.claude/settings.json` contains no MCP server or integration declarations.
+- `.claude/settings.example.json` contains `integrations.github.enabled: true`, an example global GitHub integration. This does not establish a configured GitHub MCP server or per-agent access.
+- All 20 agent manifests declare only `read`, `write`, and `bash`; no manifest declares MCP tools.
 
-**MCP Servers Configured**:
-- ✅ GitHub (4 agents)
-- ✅ Figma (1 agent)
-- ⚠️ Gmail, Google Drive, Linear (available but not yet integrated)
+**Applicable Agents**: No per-agent MCP access is established by the committed or example settings. Machine-specific configuration must be verified separately before claiming an integration is available.
 
-**Decision**: **CORE** — GitHub and Figma MCP essential; others available for future integration
+**Decision**: **VERIFY BEFORE USE** — Configure and validate any required MCP server independently of the agent manifests.
 
 ---
 
@@ -205,11 +195,11 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 |---|---|---|---|---|
 | Claude API (Messages) | ✅ Core | Base inference | 20/20 | REQUIRED |
 | Tool Runner | ⚠️ Evaluate | Autonomous loops | 3-4 | MEDIUM |
-| Managed Agents | ❌ Not applicable | External APIs | 0 | N/A |
-| Prompt Caching | ✅ Recommended | Token savings | 4-6 | HIGH |
+| Managed Agents | ❌ Not applicable | Hosted runtime | 0 | N/A |
+| Prompt Caching | ✅ Recommended | Input cost savings | 4-6 | HIGH |
 | Tool Use Interface | ✅ Core | External tool calls | 20/20 | REQUIRED |
 | Artifact / DB APIs | ⚠️ Optional | Report publishing | 3-5 | MEDIUM |
-| MCP | ✅ Core | System integrations | 5-7 | REQUIRED |
+| MCP | ⚠️ Verify configuration | No servers configured in repo settings | Not established | VERIFY |
 
 ---
 
@@ -218,7 +208,7 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 ### Phase 1 (Current — TOA-241)
 - ✅ Claude API (Messages) — Already deployed
 - ✅ Tool Use Interface — Already deployed
-- ✅ MCP (GitHub, Figma) — Already deployed
+- ⚠️ MCP — No servers configured in repository settings; example GitHub integration only
 
 ### Phase 2 (TOA-264/265 — Budget & Optimization)
 - 🔄 Prompt Caching — Evaluate for document-heavy agents
@@ -226,8 +216,8 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 - 🔄 Tool Runner — Evaluate for autonomous workflows
 
 ### Phase 3 (Future)
-- 📋 Managed Agents — Only if exposing agents as public APIs
-- 📋 Additional MCP Servers — Gmail, Google Drive, Linear as needed
+- 📋 Managed Agents — Evaluate if hosted, long-running or asynchronous execution is needed
+- 📋 MCP servers — Configure and validate integrations as workflows require them
 
 ---
 
@@ -244,7 +234,9 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 - **Specification**: `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.2)
 - **Agent Inventory**: `.claude/agents/INVENTORY.md` (R7.1)
 - **Budget Controls**: TOA-271 (separate epic)
-- **Anthropic Documentation**: https://docs.anthropic.com/ (requires login)
+- **Tool Runner**: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner
+- **Claude Managed Agents**: https://platform.claude.com/docs/en/managed-agents/overview
+- **Prompt Caching & Pricing**: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
 
 ---
 

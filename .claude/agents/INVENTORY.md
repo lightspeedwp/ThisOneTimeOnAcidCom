@@ -8,7 +8,7 @@
 
 ## Overview
 
-This document inventories all AI agents in ThisOneTimeOnAcidCom's `.claude/agents/` directory. Each agent serves a distinct purpose in the portfolio site's development, content strategy, and operations workflows.
+This document inventories all AI agents in ThisOneTimeOnAcidCom's `.claude/agents/` directory. All 20 agent manifests have YAML frontmatter with `enabled: true`. Each agent serves a distinct purpose in the portfolio site's development, content strategy, and operations workflows.
 
 **Note**: Budget enforcement (hard limits) is specified in TOA-271 (separate epic); this inventory documents requirements and agent relationships only.
 
@@ -18,8 +18,8 @@ This document inventories all AI agents in ThisOneTimeOnAcidCom's `.claude/agent
 
 | Agent Name | Purpose | Domain | Input | Output | Primary Tools | Permissions | Budget Constraint |
 |---|---|---|---|---|---|---|---|
-| **branches-agent** | Branch validation and Git workflow enforcement | Infrastructure | Branch name, Git operations | Validation results | Bash, Git | Read-only | Pending (TOA-271) |
-| **bugherd-agent** | BugHerd feedback assessment and routing | QA/Testing | Feedback data | Test validation results | Playwright, Read/Write | Testing | Pending (TOA-271) |
+| **branches-agent** | Branch validation and Git workflow enforcement | Infrastructure | Branch name, Git operations | Validation results | Read, Write, Bash | Branch changes require explicit permission | Pending (TOA-271) |
+| **bugherd-agent** | BugHerd feedback assessment and routing | QA/Testing | Feedback data | Test validation results | Read, Write, Bash | Testing | Pending (TOA-271) |
 | **changelog-agent** | Changelog management (Keep a Changelog format) | Documentation | Changelog entries | Validated entries | Read, Write, Bash | Content | Pending (TOA-271) |
 | **client-website-discovery-assistant-agent** | Website discovery and analysis | Research | URLs, project context | Discovery reports | Read, Write, Bash | Research | Pending (TOA-271) |
 | **content-strategy-agent** | Content planning and voice guidance | Content | Content briefs | Strategy docs | Read, Write, Bash | Content | Pending (TOA-271) |
@@ -30,9 +30,9 @@ This document inventories all AI agents in ThisOneTimeOnAcidCom's `.claude/agent
 | **metadata-agent** | SEO and metadata validation | Content | Page metadata | Validation report | Read, Write, Bash | Content | Pending (TOA-271) |
 | **metrics-agent** | Analytics tracking and reporting | Reporting | Usage data | Metric summaries | Read, Write, Bash | Reporting | Pending (TOA-271) |
 | **pagespeed-agent** | Core Web Vitals monitoring | Performance | Performance data | Audit results | Read, Write, Bash | Monitoring | Pending (TOA-271) |
-| **playwright-agent** | Browser automation and testing | Testing | Test scenarios | Evidence, artifacts | Read, Write, Bash, Playwright | Testing | Pending (TOA-271) |
+| **playwright-agent** | Browser automation and testing | Testing | Test scenarios | Evidence, artifacts | Read, Write, Bash | Testing | Pending (TOA-271) |
 | **prd-agent** | Product requirement documentation | Product | Requirements | Specification docs | Read, Write, Bash | Product | Pending (TOA-271) |
-| **pr-agent** | Pull request creation and review | DevOps | PR data | PR management results | Read, Write, Bash, GitHub | GitHub | Pending (TOA-271) |
+| **pr-agent** | Pull request creation and review | DevOps | PR data | PR management results | Read, Write, Bash | GitHub | Pending (TOA-271) |
 | **release-agent** | Release validation and deployment | DevOps | Release data | Deployment results | Read, Write, Bash | Deployment | Pending (TOA-271) |
 | **reporting-agent** | Report generation and analysis | Reporting | Data sources | Reports | Read, Write, Bash | Reporting | Pending (TOA-271) |
 | **reviewer-agent** | Code change review | QA | Code diffs | Review findings | Read, Write, Bash | Review | Pending (TOA-271) |
@@ -88,12 +88,19 @@ This document inventories all AI agents in ThisOneTimeOnAcidCom's `.claude/agent
 
 ## Tools Access Summary
 
-**Read**: 20/20 agents (universal)  
-**Write**: 20/20 agents (universal)  
-**Bash**: 20/20 agents (universal)  
-**GitHub**: 4 agents (issue, labeling, pr, release)  
-**Playwright**: 2 agents (bugherd, playwright)  
-**Specialized**: None (all agents use common toolset)
+**Declared tools** (from manifest YAML frontmatter):
+
+- **Read**: 20/20 agents
+- **Write**: 20/20 agents
+- **Bash**: 20/20 agents
+
+Git and Playwright describe workflow capabilities; neither is declared as a separate tool in these manifests. Registry permissions describe operating rules, not enforced tool restrictions.
+
+**Global integrations** (separate from per-agent declarations):
+
+- `.claude/settings.json` does not declare any MCP servers or integrations.
+- `.claude/settings.example.json` includes `integrations.github.enabled: true` as an example global integration; it does not configure a GitHub MCP server or assign access to individual agents.
+- No MCP servers are configured in either settings file.
 
 ---
 
