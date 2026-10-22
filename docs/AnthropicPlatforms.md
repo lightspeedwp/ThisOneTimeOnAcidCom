@@ -1,10 +1,13 @@
 # Anthropic Platform Applicability Assessment
 
 **Generated:** 19 October 2026 (updated)  
-**Spec Reference:** `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.2)  
+**Spec Reference:**
+`.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.2)
 **Task:** T049
 
-This document evaluates which Anthropic platforms each of the 20 repository agents uses, assessing applicability and recommending optimal platform combinations per agent.
+This document evaluates which Anthropic platforms each of the 20 repository
+agents uses, assessing applicability and recommending optimal platform
+combinations per agent.
 
 ---
 
@@ -38,7 +41,8 @@ This document evaluates which Anthropic platforms each of the 20 repository agen
 
 ### R7.1: Agent Inventory & Contract Specification
 
-**Requirement:** Document all agents, their capabilities, constraints, and execution boundaries.
+**Requirement:** Document all agents, their capabilities, constraints, and
+execution boundaries.
 
 | Requirement | Platform(s) | Implementation | Status |
 |-------------|-------------|-----------------|--------|
@@ -48,15 +52,18 @@ This document evaluates which Anthropic platforms each of the 20 repository agen
 | Constraint documentation | Git; Claude Docs interface for authoring | Version spec in `.github/specs/`; no Claude Docs API integration configured | ✅ Git storage in use |
 
 **Applicability:** ✅ **ALL APPLICABLE**  
-All platforms support the inventory and contract specification approach. Managed Agents provide runtime enforcement.
+All platforms support the inventory and contract specification approach. Managed
+Agents provide runtime enforcement.
 
 ---
 
 ### R7.2: Anthropic Reference Assessment
 
-**Requirement:** Evaluate each Anthropic platform for governance applicability and identify gaps.
+**Requirement:** Evaluate each Anthropic platform for governance applicability
+and identify gaps.
 
-**This Document:** This assessment itself fulfills R7.2 by systematically mapping platforms to governance requirements.
+**This Document:** This assessment itself fulfills R7.2 by systematically
+mapping platforms to governance requirements.
 
 | Assessment Dimension | Platform Assessment | Findings |
 |-----|-------|----------|
@@ -71,7 +78,8 @@ All platforms support the inventory and contract specification approach. Managed
 
 ### R7.3: Agent Budget Controls (TOA-271)
 
-**Requirement:** Enforce token budgets, execution quotas, and rate limiting per agent.
+**Requirement:** Enforce token budgets, execution quotas, and rate limiting per
+agent.
 
 | Control Type | Platform | Implementation | Status |
 |--------------|----------|-----------------|--------|
@@ -96,7 +104,8 @@ budget. See TOA-271.
 
 ### R7.4: Skill Runtime Routing
 
-**Requirement:** Route agent tasks to appropriate skill implementations based on complexity and resource needs.
+**Requirement:** Route agent tasks to appropriate skill implementations based on
+complexity and resource needs.
 
 | Routing Dimension | Platform | Capability | Status |
 |----------|------------|-----------|--------|
@@ -357,7 +366,8 @@ Verified against the published documentation on 19 October 2026:
 
 [budgets]: https://platform.claude.com/docs/en/managed-agents/budgets
 
-[rates]: https://platform.claude.com/docs/en/managed-agents/reference#rate-limits
+[rates]:
+https://platform.claude.com/docs/en/managed-agents/reference#rate-limits
 
 [caching]: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
 

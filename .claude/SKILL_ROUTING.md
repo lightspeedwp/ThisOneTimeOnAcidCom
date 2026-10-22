@@ -46,7 +46,9 @@ Define which execution environment each skill should use based on:
 
 ### 2. **Subagent (Parent Session Budget)**
 
-**Definition**: Skill runs as delegated work with supplied parent context. Its usage counts against the parent session's budget under the TOA-271 accounting requirements (host-side enforcement pending).
+**Definition**: Skill runs as delegated work with supplied parent context. Its
+usage counts against the parent session's budget under the TOA-271 accounting
+requirements (host-side enforcement pending).
 
 **Characteristics**:
 - ✅ Context supplied by parent (scope depends on invocation)
@@ -70,7 +72,11 @@ Define which execution environment each skill should use based on:
 
 #### **Forked Session (Independent Budget)**
 
-**Definition**: Skill runs in a separate session initialized from parent context, with its own budget ledger. Under the TOA-271 requirements, a fork inherits the parent's token limit but tracks usage independently; its subagents consume the fork's allowance. Numerical limits and spending increases require owner approval. Host-side enforcement remains pending.
+**Definition**: Skill runs in a separate session initialized from parent
+context, with its own budget ledger. Under the TOA-271 requirements, a fork
+inherits the parent's token limit but tracks usage independently; its subagents
+consume the fork's allowance. Numerical limits and spending increases require
+owner approval. Host-side enforcement remains pending.
 
 **Characteristics**:
 - Separate session and independent budget; usage does not deduct from the originating session
@@ -79,7 +85,8 @@ Define which execution environment each skill should use based on:
 
 ### 3. **Remote Agent (Cloud Sandbox)**
 
-**Definition**: Skill runs in an isolated cloud container with restricted network access.
+**Definition**: Skill runs in an isolated cloud container with restricted
+network access.
 
 **Characteristics**:
 - ✅ Strong isolation (sandboxed environment)
@@ -104,7 +111,8 @@ Define which execution environment each skill should use based on:
 
 ### 4. **Managed Agent (Hosted)**
 
-**Definition**: Skill runs as a managed agent with Claude controlling execution, tool access, and lifecycle.
+**Definition**: Skill runs as a managed agent with Claude controlling execution,
+tool access, and lifecycle.
 
 **Characteristics**:
 - ✅ Fully managed (Claude handles setup/cleanup)
@@ -228,7 +236,7 @@ Skills meant for deferred or batch execution:
 
 ### Local Agent Tool Access
 
-```
+```text
 ✅ Allowed:
   - Read files (Read, Glob, Grep)
   - Bash (restricted to safe commands)
@@ -242,22 +250,24 @@ Skills meant for deferred or batch execution:
   - External API calls (unless safe/idempotent)
   - Creating AWS resources, databases, etc.
   - Deploying to production
-```
+
+```text
 
 ### Subagent Tool Access
 
-```
+```text
 ✅ Same as Local Agent (inherits parent's tools)
 
 Execution Isolation:
   - Usage charged to parent session budget (TOA-271 requirement; enforcement pending)
   - Separate process (sandboxed at OS level)
   - Tool output returned via tool, not in conversation
-```
+
+```text
 
 ### Remote Agent Tool Access
 
-```
+```text
 ✅ Allowed:
   - Network-safe tools only (HTTP, DNS, APIs)
   - Controlled file I/O (no direct repo access)
@@ -268,13 +278,14 @@ Execution Isolation:
   - Bash shell (dangerous commands blocked)
   - SSH/VPN (no secure channel)
   - Database connections (must use APIs)
-```
+
+```text
 
 ---
 
 ## Routing Decision Tree
 
-```
+```text
 Is the skill a read-only validation check?
 ├─ YES → Is user interaction needed for feedback/redirection?
 │   ├─ YES → Use Local Agent (conversation context matters)
@@ -287,7 +298,8 @@ Is the skill a read-only validation check?
         ├─ YES (> 1 hour) → Use Remote Agent (scheduled/deferred)
         ├─ MEDIUM (30m–1h) → Use Subagent (parallel to parent)
         └─ QUICK (< 30m) → Use Local Agent (low overhead)
-```
+
+```text
 
 ---
 
@@ -316,7 +328,7 @@ These skills must run with NO special privileges and must be reproducible:
 
 ### Example 1: Branch Validation
 
-```
+```text
 User: "review branch naming with /branch-validation"
 → Skill: branch-validation
 → Environment: Local Agent (same session)
@@ -325,7 +337,8 @@ User: "review branch naming with /branch-validation"
    - Validates against .github/CLAUDE.md rules
    - Returns result directly in conversation
    - User can immediately act on feedback
-```
+
+```text
 
 **Why Local Agent**:
 - Read-only operation (no writes)
@@ -337,7 +350,7 @@ User: "review branch naming with /branch-validation"
 
 ### Example 2: Code Review
 
-```
+```text
 User: "review this PR for correctness bugs"
 → Skill: code-review
 → Environment: Subagent (parent session budget)
@@ -346,7 +359,8 @@ User: "review this PR for correctness bugs"
    - Subagent reads code, writes findings to artifact
    - Returns findings to parent via tool result
    - Parent can summarize or post comment
-```
+
+```text
 
 **Why Subagent**:
 - Analysis task (potentially long-running)
@@ -358,7 +372,7 @@ User: "review this PR for correctness bugs"
 
 ### Example 3: Account Research
 
-```
+```text
 User: "research this account for expansion opportunity"
 → Skill: sales:account-research
 → Environment: Subagent (parent session budget)
@@ -367,7 +381,8 @@ User: "research this account for expansion opportunity"
    - Subagent calls external APIs, web search, etc.
    - Aggregates findings into summary document
    - Returns findings link to parent
-```
+
+```text
 
 **Why Subagent**:
 - Autonomous research (no user interaction needed)
@@ -379,7 +394,7 @@ User: "research this account for expansion opportunity"
 
 ### Example 4: Scheduled Audit
 
-```
+```text
 Schedule: Every Sunday 2 AM UTC
 → Skill: audit-security-controls
 → Environment: Remote Agent (cloud sandbox)
@@ -388,7 +403,8 @@ Schedule: Every Sunday 2 AM UTC
    - Scans repo for security issues
    - Posts findings to Linear issue
    - Sends summary email to @ashley
-```
+
+```text
 
 **Why Remote Agent**:
 - Long-running job (30–60 minutes)

@@ -1,9 +1,11 @@
 # Agent & Skill Governance Framework
 
-**Document Status**: Governance specification for TOA-241 Repository Governance Infrastructure  
+**Document Status**: Governance specification for TOA-241 Repository Governance
+Infrastructure
 **Last Updated**: 2026-10-22  
 **Owner**: @ashley  
-**Scope**: Decision-making framework for agent selection, tool access, budget approval, and escalation
+**Scope**: Decision-making framework for agent selection, tool access, budget
+approval, and escalation
 
 ---
 
@@ -16,7 +18,8 @@ Provide clear governance rules for:
 4. **Escalating decisions** to @ashley when uncertain
 5. **Enforcing contract compliance** (agents must read and follow guidelines/)
 
-This document is the **authority on agent governance** for this repository. All agents must read and comply with these rules.
+This document is the **authority on agent governance** for this repository. All
+agents must read and comply with these rules.
 
 ---
 
@@ -37,7 +40,7 @@ This document is the **authority on agent governance** for this repository. All 
 
 **Flowchart**:
 
-```
+```text
 What is the task?
 ├─ Code review / Static analysis
 │  └─ → Use: code-review agent (or code-review skill)
@@ -55,7 +58,8 @@ What is the task?
 │  ├─ Configuration check → validate skill
 │  └─ Label/automation management → Use issue management agents
 ├─ Sales / Customer engagement
-│  └─ → Use sales:* family of agents (account-context, call-prep, draft-outreach, etc.)
+│ └─ → Use sales:* family of agents (account-context, call-prep, draft-outreach,
+etc.)
 ├─ Product / Design
 │  ├─ Design critique → design:design-critique
 │  ├─ Accessibility review → design:accessibility-review
@@ -65,11 +69,13 @@ What is the task?
 │  └─ Manual review/addition → changelog-agent
 └─ Unknown / Hybrid task
    └─ Ask @ashley OR use general-purpose agent
-```
+
+```text
 
 ### Agent Type Reference
 
-See `.claude/agents/INVENTORY.md` for complete agent specifications. Quick reference:
+See `.claude/agents/INVENTORY.md` for complete agent specifications. Quick
+reference:
 
 | Agent | Purpose | Input | Output | Best For |
 |-------|---------|-------|--------|----------|
@@ -121,7 +127,8 @@ See `.claude/agents/INVENTORY.md` for complete agent specifications. Quick refer
    - "Session suspended, requires resumption in new session"
 
 4. **Submit approval request**: Create issue with tag `[BUDGET-INCREASE-REQUEST]`:
-   ```
+
+```text
    Title: [BUDGET-INCREASE-REQUEST] code-review for AWS Lambda migration (TOA-X)
    
    Body:
@@ -134,7 +141,8 @@ See `.claude/agents/INVENTORY.md` for complete agent specifications. Quick refer
    Risk if denied: Incomplete review, missed security issues
    
    Approval from: @ashley
-   ```
+
+```text
 
 5. **Wait for approval**: @ashley will respond with ✅ approved or ❌ denied + rationale
 
@@ -166,7 +174,7 @@ Infrastructure monitors cost trends per agent:
 
 #### **code-review agent**
 
-```
+```text
 ✅ Allowed:
   - Read source code (all file types)
   - GitHub API: read PRs, commits, comments
@@ -178,11 +186,12 @@ Infrastructure monitors cost trends per agent:
   - GitHub write (no comments, no label changes)
   - File modification (code is read-only)
   - Delete operations
-```
+
+```text
 
 #### **changelog-agent**
 
-```
+```text
 ✅ Allowed:
   - Read CHANGELOG.md (and related files)
   - Write CHANGELOG.md (within keep-a-changelog format)
@@ -194,11 +203,12 @@ Infrastructure monitors cost trends per agent:
   - Git operations beyond reading history
   - Delete CHANGELOG.md or version entries
   - Rewrite version history
-```
+
+```text
 
 #### **design-partner agent**
 
-```
+```text
 ✅ Allowed:
   - Read component code
   - Read design system files
@@ -210,11 +220,12 @@ Infrastructure monitors cost trends per agent:
   - Commit code (recommendations only, author implements)
   - Modify component files (read-only)
   - Deploy changes to production
-```
+
+```text
 
 #### **General-Purpose agent**
 
-```
+```text
 ✅ Allowed:
   - All read-only tools
   - File reads/globs
@@ -226,7 +237,8 @@ Infrastructure monitors cost trends per agent:
   - Deployment or infrastructure changes
   - External API calls (unless explicitly approved)
   - Database modifications
-```
+
+```text
 
 ### Protected Files — Agent Restrictions
 
@@ -291,7 +303,8 @@ Infrastructure monitors cost trends per agent:
 ### How to Escalate
 
 **Format**:
-```
+
+```text
 Subject: [ESCALATION] {brief description}
 
 Context:
@@ -305,10 +318,12 @@ Decision needed:
 
 Timeline:
 - How urgent? (blocker / normal / can wait)
-```
+
+```text
 
 **Example**:
-```
+
+```text
 Subject: [ESCALATION] Need to modify protected file .github/workflows/test.yml
 
 Context:
@@ -321,7 +336,8 @@ Or should I open an issue for manual fix by @ashley?
 
 Timeline:
 Blocker — no PRs can merge until CI works
-```
+
+```text
 
 ### Response Time
 
@@ -342,7 +358,8 @@ If @ashley denies a budget increase or tool access request:
 3. **Escalate with new info**: If you have new data that changes the calculus
 
 **Example appeal**:
-```
+
+```text
 Subject: [APPEAL] code-review budget increase request
 
 Original request: 200k tokens for Lambda migration review
@@ -355,7 +372,8 @@ Run code-review twice with 100k tokens each:
 - Total cost: same, but two smaller sessions are more manageable
 
 Can we approve 100k + 100k (two separate runs)?
-```
+
+```text
 
 ### Policy Changes
 
@@ -415,7 +433,7 @@ If you believe a governance rule needs changing:
 
 ## Appendix A: Protected Files List
 
-```
+```text
 ✅ Read-only (agents can read, not modify):
   - .github/AGENTS.md (agent governance)
   - .github/CLAUDE.md (repo-specific rules)
@@ -434,7 +452,8 @@ If you believe a governance rule needs changing:
   - credentials.json (API keys)
   - node_modules/ (build artifact)
   - .git/ (git internals)
-```
+
+```text
 
 ---
 

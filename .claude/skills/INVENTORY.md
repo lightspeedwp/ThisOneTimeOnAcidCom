@@ -1,16 +1,19 @@
 # Skill Inventory — ThisOneTimeOnAcidCom
 
 **Generated:** 19 October 2026  
-**Spec Reference:** `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)  
+**Spec Reference:**
+`.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)
 **Task:** T048
 
-This document provides a complete inventory of all skills configured for the ThisOneTimeOnAcidCom repository.
+This document provides a complete inventory of all skills configured for the
+ThisOneTimeOnAcidCom repository.
 
 ---
 
 ## Skill Specifications
 
-A total of **5 skills** are defined and documented in this directory. Each skill is described in its own subdirectory with a `SKILL.md` file.
+A total of **5 skills** are defined and documented in this directory. Each skill
+is described in its own subdirectory with a `SKILL.md` file.
 
 ### Validation & Governance (2 skills)
 
@@ -56,6 +59,7 @@ Each skill specification (`SKILL.md` file) should include:
 ### Sample Skill Documentation
 
 #### Branch Validation Skill
+
 - **Purpose**: Validate branch names against repository branching strategy
 - **Invocation**: `/branch-validation` or `npm run validate:branch-name -- --branch <name>`
 - **Prerequisites**: Git repository initialized, branch name available
@@ -74,6 +78,7 @@ Each skill specification (`SKILL.md` file) should include:
 - **Integration Points**: Pre-push hook, `npm run validate:branch-name` CLI, GitHub Actions workflow
 
 #### Changelog Skill
+
 - **Purpose**: Manage CHANGELOG.md entries per Keep a Changelog 1.1.0 format
 - **Invocation**: `/changelog` with arguments like `add`, `release`, `validate`
 - **Prerequisites**: CHANGELOG.md exists at repository root, format compliance required
@@ -123,7 +128,8 @@ Each skill specification (`SKILL.md` file) should include:
 
 ### Budget Enforcement
 
-Each skill has required budget limits (policy targets; enforcement owned separately by TOA-271):
+Each skill has required budget limits (policy targets; enforcement owned
+separately by TOA-271):
 
 - **Token budget**: Maximum tokens per invocation (e.g., 5K for branch validation)
 - **Execution time**: Wall-clock timeout (e.g., 1 minute)

@@ -1,7 +1,9 @@
 # Tasks: Repository Governance Layout & Agentic Workflows
 
 **Feature**: TOA-241 – Repository Governance Infrastructure  
-**Input**: Specification from `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` and implementation plan  
+**Input**: Specification from
+`.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` and
+implementation plan
 **Status**: Phase 2 – Actionable Task Decomposition  
 **Branch**: `epic/repo-governance-toa-241`
 
@@ -31,7 +33,8 @@
 
 ## Phase 1: Setup (Shared Governance Infrastructure)
 
-**Purpose**: Initialize shared governance artefacts that all workstreams depend on
+**Purpose**: Initialize shared governance artefacts that all workstreams depend
+on
 
 **⚠️ CRITICAL**: Phase 1 must complete before any workstream work begins
 
@@ -43,7 +46,8 @@
 - [x] T006 [P] Update CONTRIBUTING.md to reflect branch naming validation and PR template routing
 - [x] T007 Review and validate all protected files: CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, Supabase utils, Figma assets
 
-**Checkpoint**: Governance artefacts initialized; all workstreams can begin in parallel
+**Checkpoint**: Governance artefacts initialized; all workstreams can begin in
+parallel
 
 ---
 
@@ -118,15 +122,20 @@
   - Verify workflow runs on PR push and blocks merge if protected files modified
   - Document when it runs: on every PR push (implementation workflow, not evaluation)
 
-**Checkpoint**: Protected file enforcement active. Agent inventory and Anthropic assessment documented. All testing infrastructure, package management, runtime pinning, and styling constraints are resolved. Workstreams can now begin in parallel.
+**Checkpoint**: Protected file enforcement active. Agent inventory and Anthropic
+assessment documented. All testing infrastructure, package management, runtime
+pinning, and styling constraints are resolved. Workstreams can now begin in
+parallel.
 
 ---
 
 ## Phase 3: Workstream WS-254 – Spec Kit Routing & Regression Testing (TOA-254 epic)
 
-**Goal**: Establish canonical Spec Kit output paths, verify feature directory routing, and validate regression test pipeline
+**Goal**: Establish canonical Spec Kit output paths, verify feature directory
+routing, and validate regression test pipeline
 
-**Independent Test**: Run `node --test tests/speckit.test.mjs` and confirm 103/104 baseline; create → plan → tasks workflow completes end-to-end
+**Independent Test**: Run `node --test tests/speckit.test.mjs` and confirm
+103/104 baseline; create → plan → tasks workflow completes end-to-end
 
 **Child Issues Included**: TOA-254, TOA-255, TOA-256, TOA-257, TOA-259
 
@@ -170,15 +179,18 @@
   - Document task organization in `tasks/README.md`
   - Link task-list.md as master tracker
 
-**Checkpoint**: Spec Kit routing verified; regression test passes 103/104 baseline; specification documentation organized; ready for Phase 4+
+**Checkpoint**: Spec Kit routing verified; regression test passes 103/104
+baseline; specification documentation organized; ready for Phase 4+
 
 ---
 
 ## Phase 4: Workstream WS-260 – Testing Infrastructure (TOA-260 epic)
 
-**Goal**: Establish Jest ESM configuration, validate test discovery, integrate Bats and Playwright, document test infrastructure
+**Goal**: Establish Jest ESM configuration, validate test discovery, integrate
+Bats and Playwright, document test infrastructure
 
-**Independent Test**: Run `npm test` (all three suites: unit, build, e2e) and verify tests execute without errors (or expected browser setup messages for e2e)
+**Independent Test**: Run `npm test` (all three suites: unit, build, e2e) and
+verify tests execute without errors (or expected browser setup messages for e2e)
 
 **Child Issues Included**: TOA-260, TOA-274
 
@@ -217,17 +229,21 @@
   - ✅ `npm run test:e2e` → ⏳ Ready (Playwright configured; no tests yet)
   - ✅ `node --test tests/speckit.test.mjs` → ⚠️ 103/104 (approved baseline)
 
-**Checkpoint**: Testing infrastructure fully integrated; all test suites discoverable and executable; developer documentation complete
+**Checkpoint**: Testing infrastructure fully integrated; all test suites
+discoverable and executable; developer documentation complete
 
 ---
 
 ## Phase 5: Workstream WS-261 – GitHub Governance (.github files) (TOA-261 epic)
 
-**Goal**: Implement GitHub Discussions, PR templates with routing, CODEOWNERS, branch protection, issue/discussion templates
+**Goal**: Implement GitHub Discussions, PR templates with routing, CODEOWNERS,
+branch protection, issue/discussion templates
 
-**Independent Test**: Create test PR from `feat/` branch and verify correct PR template loads; create Discussion post and verify template structure
+**Independent Test**: Create test PR from `feat/` branch and verify correct PR
+template loads; create Discussion post and verify template structure
 
-**Child Issues Included**: TOA-261, TOA-243, TOA-244, TOA-250, TOA-251, TOA-252, TOA-253, TOA-272
+**Child Issues Included**: TOA-261, TOA-243, TOA-244, TOA-250, TOA-251, TOA-252,
+TOA-253, TOA-272
 
 ### Implementation for WS-261
 
@@ -279,7 +295,7 @@
 - [x] T037 [WS-261] Create CODEOWNERS file for branch protection
   - Create `.github/CODEOWNERS` with code area ownership mapping:
 
-    ```
+```text
     # Governance-critical files
     .github/ @ashley
     scripts/ @ashley
@@ -292,7 +308,8 @@
     src/styles/ @ashley
     tests/ @ashley
     docs/ @ashley
-    ```
+
+```text
 
   - Document CODEOWNERS in `CONTRIBUTING.md` under "Code Ownership"
   - Explain how CODEOWNERS interacts with branch protection
@@ -328,7 +345,8 @@
 
 ## Phase 6: Workstream WS-262 – Root Configuration & Environment (TOA-262 epic)
 
-**Goal**: Update root configuration files, remove pnpm artefacts and Tailwind, update
+**Goal**: Update root configuration files, remove pnpm artefacts and Tailwind,
+update
 documentation
 
 **Independent Test**: Run `npm ci` with Node 24 and verify dependencies resolve;
@@ -384,7 +402,9 @@ Tailwind removed; changelog validation active; documentation complete
 **Goal**: Document agent inventory, platform assessment, budget enforcement, and
 skill routing
 
-**Independent Test**: Read `.claude/agents/*.md` and `.claude/skills/*.md`; confirm each has documented purpose, inputs, outputs, tools, permissions, and budget coverage
+**Independent Test**: Read `.claude/agents/*.md` and `.claude/skills/*.md`;
+confirm each has documented purpose, inputs, outputs, tools, permissions, and
+budget coverage
 
 **Child Issues Included**: TOA-271
 
@@ -431,7 +451,8 @@ skill routing
     - Aggregate accounting across delegated and concurrent work
     - Retry and cancellation policies (exponential backoff, transient vs. permanent)
     - Exhaustion handling (what happens when budget exceeded)
-    - Missing usage data fallback (charge remaining allowance and suspend dispatch until reconciliation)
+- Missing usage data fallback (charge remaining allowance and suspend dispatch
+until reconciliation)
     - Resumable handoff and continuation (state preservation)
   - ✅ Note: TOA-271 owns implementation; this spec documents requirements only
 - [x] T051 [P] [WS-271] Document skill runtime routing
@@ -456,13 +477,16 @@ skill routing
   - ✅ Linked from `.claude/agents/INVENTORY.md` and `.claude/skills/INVENTORY.md`
   - ✅ Owner approval process documented (for budget increases, protected file mods)
 
-**Checkpoint**: Agent inventory documented; Anthropic platforms assessed; budget enforcement strategy defined (implementation in TOA-271); skill routing clear; governance framework established
+**Checkpoint**: Agent inventory documented; Anthropic platforms assessed; budget
+enforcement strategy defined (implementation in TOA-271); skill routing clear;
+governance framework established
 
 ---
 
 ## Phase 8: Polish & Cross-Cutting Concerns
 
-**Purpose**: Final validation, documentation polish, and integration across all workstreams
+**Purpose**: Final validation, documentation polish, and integration across all
+workstreams
 
 - [x] T053 [P] Run full regression validation suite
   - ✅ `npm ci` — dependency installation (757 packages installed)
@@ -476,7 +500,8 @@ skill routing
   - ✅ All validation results documented
 - [x] T054 [P] Validate specification documentation completeness
   - ✅ All files present in `.github/specs/001-repo-governance-layout-and-agentic-workflows/`:
-    - spec.md, plan.md, research.md, data-model.md, contracts/, quickstart.md, tasks.md, checklists/requirements.md ✓
+- spec.md, plan.md, research.md, data-model.md, contracts/, quickstart.md,
+tasks.md, checklists/requirements.md ✓
   - ✅ Specification structure complete and coherent
   - ✅ All 20 child issues TOA-242 through TOA-274 mapped to tasks
   - ✅ All phases (1-8) and workstreams (WS-254 through WS-271) documented
@@ -505,27 +530,34 @@ skill routing
   - ✅ PR prepared with title: `docs(spec): TOA-241 Repository Governance Infrastructure`
   - ⏳ Draft body must reflect:
     - Summary of TOA-241 implementation across 5 parallel workstreams
-    - Complete list of changes (testing, package, runtime, styling, GitHub, CI/CD, governance)
-    - Validation results with protected-files guard failure and approval status (T055)
+- Complete list of changes (testing, package, runtime, styling, GitHub, CI/CD,
+governance)
+- Validation results with protected-files guard failure and approval status
+(T055)
     - Child issue status, including outstanding T035 and T038
   - ✅ Status: Ready for draft PR creation and @ashley review
   - ⏳ CI/CD acceptance pending resolution of the protected-files guard failure (T055)
 - [ ] T059 Document implementation completion and handoff
   - ⏳ Implementation partially delivered: T035 PR template routing verification remains unchecked; T038 requires manual branch-protection configuration; T055 guard failure and owner approval remain unresolved
   - ✅ Delivered infrastructure and documentation:
-    - Testing: Jest ESM (588/588 unit tests), Bats (12/12 build tests), Playwright configured
+- Testing: Jest ESM (588/588 unit tests), Bats (12/12 build tests), Playwright
+configured
     - Package: npm-only, Node 24 LTS pinned, pnpm removed
     - Styling: BEM-only, Tailwind removed
-    - GitHub: Discussions and CODEOWNERS documented; PR template routing verification and branch protection remain pending (T035, T038)
+- GitHub: Discussions and CODEOWNERS documented; PR template routing
+verification and branch protection remain pending (T035, T038)
     - CI/CD: 17 workflows (8 implementation, 6 evaluation, 3 deferred)
     - Spec Kit: Routing verified, regression baseline 103/104
-    - Agent governance: Budget controls, skill routing, governance framework documented
+- Agent governance: Budget controls, skill routing, governance framework
+documented
   - ⏳ Complete T035 and T038 before reporting all tasks delivered
   - ⏳ Resolve T055 and record explicit owner approval for protected-file changes
   - ✅ Application behavior verified (build succeeds, dev server starts)
   - ⏳ Final completion and merge readiness remain pending the outstanding tasks and guard resolution
 
-**Checkpoint**: Feature TOA-241 remains incomplete. Finish T035, configure branch protection manually for T038, and resolve T055 with recorded owner approval and revalidation before closing T059 or declaring full delivery.
+**Checkpoint**: Feature TOA-241 remains incomplete. Finish T035, configure
+branch protection manually for T038, and resolve T055 with recorded owner
+approval and revalidation before closing T059 or declaring full delivery.
 
 ---
 
@@ -636,7 +668,8 @@ For fastest delivery of governance foundation:
 6. Add WS-271 (Budget) — completes governance framework
 7. Phase 8 (Polish) — final validation before merge to main
 
-**Each increment**: Independently testable, can be merged and integrated before starting next
+**Each increment**: Independently testable, can be merged and integrated before
+starting next
 
 ### Autonomous Execution
 
@@ -664,12 +697,16 @@ If agents are driving this work:
 
 ## Success Criteria
 
-✅ **Phase 1 Complete**: Governance artefacts initialized; all workstreams have clear paths
-✅ **Phase 2 Complete**: Testing, package manager, runtime, styling all configured
+✅ **Phase 1 Complete**: Governance artefacts initialized; all workstreams have
+clear paths
+✅ **Phase 2 Complete**: Testing, package manager, runtime, styling all
+configured
 ✅ **Phases 3–7 Complete**: All 5 workstreams delivered; 20 child issues resolved
-✅ **Phase 8 Complete**: Full validation suite passes; protected files preserved; app behavior maintained
+✅ **Phase 8 Complete**: Full validation suite passes; protected files preserved;
+app behavior maintained
 ✅ **PR Ready**: All changes committed; PR created for owner review
-✅ **Merge to Main**: Owner approves; PR merges to develop; features become available to all team members
+✅ **Merge to Main**: Owner approves; PR merges to develop; features become
+available to all team members
 
 ---
 

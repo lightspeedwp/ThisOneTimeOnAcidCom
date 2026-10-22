@@ -1,7 +1,8 @@
 # Agent Inventory — ThisOneTimeOnAcidCom
 
 **Generated:** 18 October 2026  
-**Spec Reference:** `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)  
+**Spec Reference:**
+`.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)
 **Task:** T017a
 
 This document provides an inventory of the AI agents and skills configured for
@@ -93,7 +94,9 @@ Each linked specification documents its usage and constraints.
 
 ## Agent Discovery Process
 
-Agents are automatically discovered by the Claude Code session via the `.claude/` directory structure. The following properties are extracted from each agent specification:
+Agents are automatically discovered by the Claude Code session via the
+`.claude/` directory structure. The following properties are extracted from each
+agent specification:
 
 1. **Agent name** — derived from the filename (e.g., `changelog-agent.md` → "Changelog Agent")
 2. **Purpose** — extracted from the first heading/section of the agent spec
@@ -102,13 +105,15 @@ Agents are automatically discovered by the Claude Code session via the `.claude/
 
 ## Budget Controls
 
-Agent execution budgets are tracked separately per T7.3 (TOA-271). Each agent has:
+Agent execution budgets are tracked separately per T7.3 (TOA-271). Each agent
+has:
 
 - **Token budget**: Per-invocation maximum tokens (policy target)
 - **Execution quota**: Maximum invocations per period (policy target)
 - **Rate limiting**: Enforced by agent implementation and caller discipline
 
-See `.github/specs/001-repo-governance-layout-and-agentic-workflows/` for budget allocation details.
+See `.github/specs/001-repo-governance-layout-and-agentic-workflows/` for budget
+allocation details.
 
 ---
 
@@ -155,6 +160,7 @@ Each agent specification (`.md` file) should include:
 ### Sample Agent Documentation
 
 #### Changelog Agent
+
 - **Purpose**: Manage changelog entries using Keep a Changelog 1.1.0 format
 - **Inputs**: CHANGELOG.md file, PR description/context, version number
 - **Outputs**: Validated/formatted CHANGELOG.md, validation report
@@ -167,6 +173,7 @@ Each agent specification (`.md` file) should include:
 - **Not In Scope**: Multi-repository changelog aggregation, plugin changelogs
 
 #### Branches Agent
+
 - **Purpose**: Validate branch names against repository branching strategy
 - **Inputs**: Branch name string, validation rules (type/scope/title pattern)
 - **Outputs**: Validation result (pass/fail), detailed error messages with corrections
@@ -199,7 +206,8 @@ Do NOT use an agent when:
 
 ### Budget Enforcement (TOA-271)
 
-Required budget controls (policy targets; enforcement owned separately by TOA-271):
+Required budget controls (policy targets; enforcement owned separately by
+TOA-271):
 
 - **Token budget**: Maximum tokens per invocation (e.g., 20K for changelog agent)
 - **Execution quota**: Maximum invocations per time period (e.g., 5 per day)

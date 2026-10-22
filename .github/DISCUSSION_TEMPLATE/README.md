@@ -1,6 +1,7 @@
 # Discussion Templates
 
-This directory contains GitHub Discussions category templates for ThisOneTimeOnAcidCom.
+This directory contains GitHub Discussions category templates for
+ThisOneTimeOnAcidCom.
 
 ## Available Categories
 
@@ -24,7 +25,7 @@ To enable discussions and map these templates:
    - Go to Settings → Discussions → Categories
    - For each category below, create a new discussion category:
 
-   ```
+```text
    Category: Feature Requests
    Emoji: 💡
    Description: Share ideas for new features or enhancements
@@ -44,7 +45,8 @@ To enable discussions and map these templates:
    Emoji: 💬
    Description: General conversation and community discussion
    Template: general.yml
-   ```
+
+```text
 
 3. **Enable in README** (documentation):
    - Add a "Discussions" link in README.md

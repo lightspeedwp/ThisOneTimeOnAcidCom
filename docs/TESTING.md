@@ -1,6 +1,8 @@
 # Testing Guide
 
-This guide covers all testing infrastructure in ThisOneTimeOnAcidCom: unit tests, build verification, end-to-end tests, and specification regression testing.
+This guide covers all testing infrastructure in ThisOneTimeOnAcidCom: unit
+tests, build verification, end-to-end tests, and specification regression
+testing.
 
 ## Quick Start
 
@@ -8,7 +10,8 @@ Run all test suites:
 
 ```bash
 npm test
-```
+
+```text
 
 Run individual test suites:
 
@@ -16,7 +19,8 @@ Run individual test suites:
 npm run test:unit        # Jest unit tests
 npm run test:build       # Bats build verification  
 npm run test:e2e         # Playwright end-to-end tests
-```
+
+```text
 
 ## Test Infrastructure Overview
 
@@ -29,24 +33,31 @@ npm run test:e2e         # Playwright end-to-end tests
 
 ## Unit Tests (Jest ESM)
 
-Jest is configured with ESM support via `@swc/core`, enabling modern JavaScript test syntax.
+Jest is configured with ESM support via `@swc/core`, enabling modern JavaScript
+test syntax.
 
 ### Running Unit Tests
 
 ```bash
+
 # Run all unit tests once
+
 npm run test:unit
 
 # Watch mode (re-run on file changes)
+
 npm run test:unit:watch
 
 # Coverage report
+
 npm run test:unit:coverage
-```
+
+```text
 
 ### Test Files
 
-Unit tests are located throughout the codebase using the `.test.js` or `.test.ts` extension:
+Unit tests are located throughout the codebase using the `.test.js` or
+`.test.ts` extension:
 
 - `scripts/**/*.test.js` – Build and validation script tests
 - `scripts/__tests__/**/*.test.js` – Grouped test files
@@ -66,28 +77,35 @@ const module = await import("./dynamic-module.js");
 
 // ✅ Top-level await
 await setupDatabase();
-```
+
+```text
 
 ### Common Issues
 
 **Issue**: Tests fail with "Cannot find module"
 
-**Solution**: Verify the module is exported and the import path is correct. Jest resolves paths relative to the source file.
+**Solution**: Verify the module is exported and the import path is correct. Jest
+resolves paths relative to the source file.
 
 **Issue**: ESM import of CommonJS module fails
 
-**Solution**: Use dynamic import or configure `jest.config.js` to handle the specific module type.
+**Solution**: Use dynamic import or configure `jest.config.js` to handle the
+specific module type.
 
 ## Build Verification (Bats)
 
-Bats is a Bash testing framework that validates the build output without running the app.
+Bats is a Bash testing framework that validates the build output without running
+the app.
 
 ### Running Build Tests
 
 ```bash
+
 # Run build and verify output
+
 npm run test:build
-```
+
+```text
 
 This command:
 1. Runs `npm run build` (production build via Vite)
@@ -107,21 +125,25 @@ This command:
 
 ```bash
 cat tests/build.bats
-```
+
+```text
 
 ### Common Issues
 
 **Issue**: Build test fails with "dist directory not created"
 
-**Solution**: Check `npm run build` output for errors. Fix the build issue, then re-run `npm run test:build`.
+**Solution**: Check `npm run build` output for errors. Fix the build issue, then
+re-run `npm run test:build`.
 
 **Issue**: Redirect rules not copied to dist
 
-**Solution**: Verify `public/_redirects` is a file (not a directory) and Vite is configured to copy the `public/` directory.
+**Solution**: Verify `public/_redirects` is a file (not a directory) and Vite is
+configured to copy the `public/` directory.
 
 ## End-to-End Tests (Playwright)
 
-Playwright enables browser-based testing of the full application. Setup is required before running tests.
+Playwright enables browser-based testing of the full application. Setup is
+required before running tests.
 
 ### Installing Browsers
 
@@ -129,22 +151,29 @@ First-time setup — install Playwright browsers separately:
 
 ```bash
 npx playwright install
-```
 
-This installs Playwright browsers (Chromium, Firefox, Safari) needed for running tests.
+```text
+
+This installs Playwright browsers (Chromium, Firefox, Safari) needed for running
+tests.
 
 ### Running E2E Tests
 
 ```bash
+
 # Run all e2e tests
+
 npm run test:e2e
 
 # Debug mode (open inspector)
+
 npm run test:e2e:debug
 
 # UI mode (visual test runner)
+
 npm run test:e2e:ui
-```
+
+```text
 
 ### Writing E2E Tests
 
@@ -164,7 +193,8 @@ test('navigation menu works', async ({ page }) => {
   await page.click('nav a[href="/about"]');
   await expect(page).toHaveURL(/about/);
 });
-```
+
+```text
 
 ### Common Issues
 
@@ -174,21 +204,25 @@ test('navigation menu works', async ({ page }) => {
 
 **Issue**: Tests fail with "target page, context or browser has been closed"
 
-**Solution**: Ensure the dev server is running (`npm run dev`) or configure Playwright to start the server automatically.
+**Solution**: Ensure the dev server is running (`npm run dev`) or configure
+Playwright to start the server automatically.
 
 **Issue**: Timeouts waiting for elements
 
-**Solution**: Increase timeout in Playwright config or use `waitForNavigation()` explicitly.
+**Solution**: Increase timeout in Playwright config or use `waitForNavigation()`
+explicitly.
 
 ## Spec Kit Regression Testing
 
-The Spec Kit pipeline (create → plan → tasks) is validated by a regression test suite.
+The Spec Kit pipeline (create → plan → tasks) is validated by a regression test
+suite.
 
 ### Running Spec Kit Tests
 
 ```bash
 node --test tests/speckit.test.mjs
-```
+
+```text
 
 ### Current Baseline
 
@@ -196,7 +230,8 @@ node --test tests/speckit.test.mjs
 - ⚠️ **1 failing test** – Template resolution edge case (approved to accept)
 - **Total**: 104 tests, 99% pass rate
 
-The failing test is a known, non-critical edge case in template precedence resolution and does not affect feature specification workflows.
+The failing test is a known, non-critical edge case in template precedence
+resolution and does not affect feature specification workflows.
 
 ### Test Coverage
 
@@ -212,14 +247,16 @@ The regression test suite validates:
 
 ```bash
 npm test
-```
+
+```text
 
 This runs all three suites in sequence:
 1. Jest unit tests (`npm run test:unit`)
 2. Build verification (`npm run test:build`)
 3. Playwright e2e tests (`npm run test:e2e`)
 
-**Expected output**: All suites pass (or e2e tests may require browser setup on first run).
+**Expected output**: All suites pass (or e2e tests may require browser setup on
+first run).
 
 ## CI/CD Integration
 
@@ -266,46 +303,60 @@ Playwright tests are slower due to browser startup and interaction simulation.
 **Cause**: Dependencies not installed or lockfile out of sync
 
 **Fix**:
+
 ```bash
 rm -rf node_modules package-lock.json
 npm ci
-```
+
+```text
 
 ### Jest Tests Fail with ESM Error
 
 **Cause**: Module transformation issue
 
 **Fix**: Verify `jest.config.js` has `@swc/core` configured:
+
 ```bash
 cat jest.config.js | grep -i swc
-```
+
+```text
 
 ### Build Tests Fail but `npm run build` Succeeds
 
 **Cause**: Output validation issue (e.g., wrong file format)
 
 **Fix**:
+
 ```bash
+
 # Inspect build output
+
 ls -la dist/
 file dist/index.html
-```
+
+```text
 
 ### E2E Tests Won't Start
 
 **Cause**: Dev server not running or port in use
 
 **Fix**:
+
 ```bash
+
 # Kill any existing process on port 5173
+
 lsof -ti:5173 | xargs kill -9
 
 # Start dev server in another terminal
+
 npm run dev
 
 # Then run e2e tests
+
 npm run test:e2e
-```
+
+```text
 
 ## Related Documentation
 
@@ -318,4 +369,5 @@ npm run test:e2e
 
 ---
 
-**Last updated**: 2026-10-19 | **Maintained by**: Repository governance (TOA-260)
+**Last updated**: 2026-10-19 | **Maintained by**: Repository governance
+(TOA-260)

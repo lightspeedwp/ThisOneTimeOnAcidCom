@@ -11,7 +11,8 @@
 
 ### R1: Testing Infrastructure (TEST-001: Jest ESM with @swc/core)
 
-**Question**: Does Jest ESM configuration with @swc/core reliably support the existing test suite and Speckit baseline (103/104)?
+**Question**: Does Jest ESM configuration with @swc/core reliably support the
+existing test suite and Speckit baseline (103/104)?
 
 **Validation Approach**:
 1. ✅ Current state verified: `npm run test:build` passes; Bats build tests functional
@@ -20,13 +21,15 @@
    - Test: Run `npm run test:unit` after TEST-001 implementation and confirm no new failures vs. approved baseline
    - Risk: ESM transformation could break existing CommonJS test patterns; need transpiler config validation
 
-**Decision**: TEST-001 approved (Jest ESM via @swc/core). Implementation will verify configuration and report any baseline drift.
+**Decision**: TEST-001 approved (Jest ESM via @swc/core). Implementation will
+verify configuration and report any baseline drift.
 
 ---
 
 ### R2: Package Manager Enforcement (PKG-001: npm-only)
 
-**Question**: Can npm-only enforcement be validated in CI without disabling pnpm fallback?
+**Question**: Can npm-only enforcement be validated in CI without disabling pnpm
+fallback?
 
 **Current Evidence**:
 - ✅ `package-lock.json` (lockfile v3) is committed; only npm lockfile in repo
@@ -38,13 +41,15 @@
 2. Delete pnpm artefacts and confirm build still succeeds
 3. Update README and AGENTS.md to document npm-only
 
-**Decision**: PKG-001 approved. Implementation removes pnpm artefacts and adds npm validation to CI.
+**Decision**: PKG-001 approved. Implementation removes pnpm artefacts and adds
+npm validation to CI.
 
 ---
 
 ### R3: Node.js 24 Pinning (NODE-001)
 
-**Question**: Will pinning Node.js 24 break any dependency compatibility or Netlify deployment?
+**Question**: Will pinning Node.js 24 break any dependency compatibility or
+Netlify deployment?
 
 **Current Evidence**:
 - ✅ Validation baseline: Node 24.21.0, npm 11.19.0 (all tests pass)
@@ -56,7 +61,8 @@
 2. ⏳ Confirm Netlify detects .nvmrc and applies pinning post-deployment
 3. ⏳ Update README and CI documentation
 
-**Decision**: NODE-001 approved. Implementation adds .nvmrc and engines field; Netlify integration verified during implementation PR.
+**Decision**: NODE-001 approved. Implementation adds .nvmrc and engines field;
+Netlify integration verified during implementation PR.
 
 ---
 
@@ -79,13 +85,15 @@
 3. ⏳ Create CODEOWNERS file with critical paths (.github/, scripts/, AGENTS.md, guidelines/)
 4. ⏳ Enable branch protection on main and develop; validate interaction with CI status checks
 
-**Decision**: GH-001, GH-002, GH-003 approved. Implementation creates templates, CODEOWNERS, and protection rules; validates routing and enforcement.
+**Decision**: GH-001, GH-002, GH-003 approved. Implementation creates templates,
+CODEOWNERS, and protection rules; validates routing and enforcement.
 
 ---
 
 ### R5: Spec Kit Routing & Regression Testing (SPEC-001, R9.1–R9.2)
 
-**Question**: Does Spec Kit feature directory routing work correctly when explicitly setting SPECIFY_FEATURE_DIRECTORY?
+**Question**: Does Spec Kit feature directory routing work correctly when
+explicitly setting SPECIFY_FEATURE_DIRECTORY?
 
 **Current Evidence**:
 - ✅ SPEC-001 approved: `.github/specs/` is canonical
@@ -99,13 +107,15 @@
 3. ⏳ Verify numbering sequence (001-existing, next should be 002-*)
 4. ⏳ Document Spec Kit path resolution for contributors (CONTRIBUTING.md update)
 
-**Decision**: SPEC-001 and R9 approved. Implementation validates regression test and documents contributor workflow.
+**Decision**: SPEC-001 and R9 approved. Implementation validates regression test
+and documents contributor workflow.
 
 ---
 
 ### R6: CI/CD Workflow Decisions (R6.2: Evaluation Workflow Gating)
 
-**Question**: Which evaluation workflows should run by default, and how do we gate the optional ones?
+**Question**: Which evaluation workflows should run by default, and how do we
+gate the optional ones?
 
 **Current Evidence**:
 - ✅ 8 implementation workflows documented (lint, tests, documentation, workflow-lint, branch-validation, changelog, labeling, pr-template-routing)
@@ -122,7 +132,8 @@
 2. ⏳ Document workflow triggering strategy (manual dispatch, labels, scheduling)
 3. ⏳ Add workflow-enable documentation to CONTRIBUTING.md
 
-**Decision**: R6.2 resolved via Q1 clarification. Implementation enables locked-files-guard; documents manual triggers for evaluation workflows.
+**Decision**: R6.2 resolved via Q1 clarification. Implementation enables
+locked-files-guard; documents manual triggers for evaluation workflows.
 
 ---
 
@@ -145,13 +156,15 @@
 3. ⏳ Document Anthropic reference usage per agent (MCP, tool use, streaming, prompt caching)
 4. ⏳ TOA-271 research: Determine host-side budget enforcement API/mechanism (separate workstream)
 
-**Decision**: R7.1–R7.4 resolved via Q2/Q3 clarification. Implementation documents inventory; TOA-271 handles enforcement design.
+**Decision**: R7.1–R7.4 resolved via Q2/Q3 clarification. Implementation
+documents inventory; TOA-271 handles enforcement design.
 
 ---
 
 ### R8: Styling & Tailwind Removal (STYLE-001)
 
-**Question**: Which components use Tailwind utilities, and what is the migration effort to BEM?
+**Question**: Which components use Tailwind utilities, and what is the migration
+effort to BEM?
 
 **Current Evidence**:
 - ✅ STYLE-001 approved: BEM-only enforcement
@@ -166,13 +179,15 @@
 3. ⏳ Plan migration path for any affected components
 4. ⏳ Remove Tailwind dependencies from package.json
 
-**Decision**: STYLE-001 approved. Implementation audits and removes Tailwind; clarifies Figma Make bundler compatibility.
+**Decision**: STYLE-001 approved. Implementation audits and removes Tailwind;
+clarifies Figma Make bundler compatibility.
 
 ---
 
 ### R9: Workstream Coordination & Blocking Dependencies
 
-**Question**: Can the 5 workstreams execute in parallel, or do they have blocking dependencies?
+**Question**: Can the 5 workstreams execute in parallel, or do they have
+blocking dependencies?
 
 **Current Evidence** (from Workstream Coverage Matrix):
 - TOA-254 (Spec Kit): Blocks TOA-255, TOA-256, TOA-257, TOA-259 (documentation org)
@@ -187,7 +202,8 @@
 3. ⏳ Sequence PRs: TOA-262 and TOA-261 can start immediately; TOA-254, TOA-260 can follow
 4. ⏳ Plan PR creation order and review timeline
 
-**Decision**: Workstreams can execute in parallel with the sequence above. No blocking research needed.
+**Decision**: Workstreams can execute in parallel with the sequence above. No
+blocking research needed.
 
 ---
 
@@ -212,7 +228,9 @@
 
 ## R10: Repository Path Inventory (T002: Documentation & Context Mapping)
 
-**Purpose**: Document all directories in ThisOneTimeOnAcidCom, their purposes, consumers, and generated outputs. Used for validation, impact analysis, and contributor understanding.
+**Purpose**: Document all directories in ThisOneTimeOnAcidCom, their purposes,
+consumers, and generated outputs. Used for validation, impact analysis, and
+contributor understanding.
 
 ### Path Inventory
 
@@ -336,7 +354,8 @@
 
 ## Next Phase
 
-**Phase 1: Design & Contracts** – Generate data-model.md, contracts/, quickstart.md based on research findings above. No blockers identified; all research validations mapped to implementation tasks.
+**Phase 1: Design & Contracts** – Generate data-model.md, contracts/,
+quickstart.md based on research findings above. No blockers identified; all
+research validations mapped to implementation tasks.
 
 **Proceed to**: `/speckit-tasks` for task decomposition across 5 workstreams.
-

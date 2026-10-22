@@ -3,15 +3,24 @@
 **Document Status**: Specification for TOA-271 implementation  
 **Last Updated**: 2026-10-22  
 **Owner**: @ashley (TOA-271 epic implementation)  
-**Scope**: Requirements documentation only — host-side enforcement remains pending in TOA-271
+**Scope**: Requirements documentation only — host-side enforcement remains
+pending
+in TOA-271
 
 ---
 
 ## Purpose
 
-Define budget control mechanisms for agent execution, ensuring predictable resource consumption, cost containment, and graceful degradation when resource limits are approached or exceeded.
+Define budget control mechanisms for agent execution, ensuring predictable
+resource
+consumption, cost containment, and graceful degradation when resource limits are
+approached or exceeded.
 
-Session limits, delegated-work accounting, remaining-budget feedback, and recovery behavior below are TOA-271 requirements, not implemented controls or Claude API guarantees. Numerical limits and spending increases require owner approval under spec §R7.3.
+Session limits, delegated-work accounting, remaining-budget feedback, and
+recovery
+behavior below are TOA-271 requirements, not implemented controls or Claude API
+guarantees. Numerical limits and spending increases require owner approval under
+spec §R7.3.
 
 ---
 
@@ -19,7 +28,8 @@ Session limits, delegated-work accounting, remaining-budget feedback, and recove
 
 ### 1. **Token Limit** (Primary)
 
-**Definition**: Maximum number of tokens (input + output) an agent session may consume.
+**Definition**: Maximum number of tokens (input + output) an agent session may
+consume.
 
 **Properties**:
 - Host-side hard limit (TOA-271; pending implementation)
@@ -34,7 +44,8 @@ Session limits, delegated-work accounting, remaining-budget feedback, and recove
 
 ### 2. **Execution Time** (Secondary)
 
-**Definition**: Maximum wall-clock time an agent session may run before automatic termination.
+**Definition**: Maximum wall-clock time an agent session may run before
+automatic termination.
 
 **Properties**:
 - Host-side enforcement (not advisory)
@@ -50,7 +61,8 @@ Session limits, delegated-work accounting, remaining-budget feedback, and recove
 
 ### 3. **Cost Ceiling** (Tertiary)
 
-**Definition**: Maximum USD cost an agent session is authorized to spend on API calls.
+**Definition**: Maximum USD cost an agent session is authorized to spend on API
+calls.
 
 **Properties**:
 - Monitored post-execution (not enforced in real-time)
@@ -65,7 +77,8 @@ Session limits, delegated-work accounting, remaining-budget feedback, and recove
 
 ### 4. **Retry Limit** (Quaternary)
 
-**Definition**: Maximum number of retries for transient failures (network timeouts, rate limits, service degradation).
+**Definition**: Maximum number of retries for transient failures (network
+timeouts, rate limits, service degradation).
 
 **Properties**:
 - Applied per-operation (not per-session)
@@ -91,7 +104,9 @@ Session limits, delegated-work accounting, remaining-budget feedback, and recove
 
 ### Required Host-Side Contract (TOA-271 — Pending)
 
-Spec §R7.3 requires hard enforcement at the host, covering aggregate accounting, retries/cancellation, exhaustion, and fallback behavior. This repository does not implement that runtime control.
+Spec §R7.3 requires hard enforcement at the host, covering aggregate accounting,
+retries/cancellation, exhaustion, and fallback behavior. This repository does
+not implement that runtime control.
 
 1. **Token limit and accounting**:
    - Reserve tokens before dispatch and reconcile input, output, and cached-token usage across calls, retries, and subagents.
@@ -122,7 +137,7 @@ When an agent spawns subagents, delegates to external agents, or forks sessions:
 
 ### Token Budget Aggregation
 
-```
+```text
 Parent Agent Budget: 200,000 tokens
 ├─ Main session: 150,000 tokens consumed
 └─ Delegated work:
@@ -132,7 +147,8 @@ Parent Agent Budget: 200,000 tokens
 
 Total consumed: 195,000 / 200,000 (97.5% budget used)
 Remaining: 5,000 tokens
-```
+
+```text
 
 ### Rules
 
@@ -141,7 +157,8 @@ Remaining: 5,000 tokens
 3. **Concurrent Work**: Concurrent subagents within a session share its budget; independently budgeted forked sessions use their own ledgers
 4. **Chained Delegations**: Transitive subagent usage counts against the originating session's budget; a fork starts a separate accounting boundary
 
-**Implication**: An agent cannot spawn unlimited subagents — each subagent reduces remaining budget for parent's own work.
+**Implication**: An agent cannot spawn unlimited subagents — each subagent
+reduces remaining budget for parent's own work.
 
 ---
 
@@ -165,14 +182,15 @@ Remaining: 5,000 tokens
 
 ### Retry Strategy
 
-```
+```text
 Attempt 1: Immediate
 Attempt 2: Wait 2 seconds + jitter
 Attempt 3: Wait 4 seconds + jitter
 Attempt 4: Wait 8 seconds + jitter
 Attempt 5 (if configured): Wait 16 seconds + jitter
 → Exhausted: Fail operation, escalate decision to parent
-```
+
+```text
 
 **Jitter** (±10%): Prevent thundering herd on service recovery
 
@@ -242,7 +260,8 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 
 ### Scenario: Token Count Data Unavailable
 
-**Example**: Claude API response missing `usage` field (rare but possible edge case)
+**Example**: Claude API response missing `usage` field (rare but possible edge
+case)
 
 **Fallback Strategy**:
 
@@ -277,14 +296,16 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
    - Document what was completed vs. what remains
 
 2. **Provide handoff summary**:
-   ```
+
+```text
    **Session Suspended: Token Exhaustion**
    - Tokens consumed: 98,500 / 100,000 (98.5%)
    - Completed: Phases 1–3, 8/12 tasks done
    - Remaining: Phases 4–6 (4 tasks pending)
    - Saved state: [link to artifacts/draft files]
    - Resume prompt: [exact user request to continue]
-   ```
+
+```text
 
 3. **Create new session** (user or parent agent):
    - Reload all prior context (conversation, artifacts)
@@ -328,23 +349,26 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 
 When an agent spawns subagents:
 
-```
+```text
 Parent: 200k tokens
 ├─ Code review agent: 50k (25%)
 ├─ Test runner agent: 75k (37.5%)
 └─ Writer agent: 75k (37.5%)
 Total allocated: 200k (100% — no buffer for parent's own work)
-```
+
+```text
 
 **Better allocation**:
-```
+
+```text
 Parent: 200k tokens
 ├─ Parent's own work: 50k (25% buffer)
 ├─ Code review agent: 30k (15%)
 ├─ Test runner agent: 60k (30%)
 └─ Writer agent: 60k (30%)
 Total: 200k (all accounted for)
-```
+
+```text
 
 ---
 

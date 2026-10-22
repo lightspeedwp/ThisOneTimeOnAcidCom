@@ -1,7 +1,11 @@
 # Contributing to ThisOneTimeOnAcid
 
-Thank you for your interest in contributing to the Ash Shaw makeup portfolio project.
-This guide covers setup, validation and the contribution workflow. It is based on the repository's own files. Where the repository is inconsistent, the open questions are listed under [Unresolved decisions](#unresolved-decisions-owner-confirmation-required).
+Thank you for your interest in contributing to the Ash Shaw makeup portfolio
+project.
+This guide covers setup, validation and the contribution workflow. It is based
+on the repository's own files. Where the repository is inconsistent, the open
+questions are listed under [Unresolved
+decisions](#unresolved-decisions-owner-confirmation-required).
 
 AI agents should also read [AGENTS.md](AGENTS.md).
 
@@ -11,33 +15,42 @@ AI agents should also read [AGENTS.md](AGENTS.md).
 - **npm** (version 11+), which ships with Node.js. `package-lock.json` is the only committed lockfile, and Netlify builds with `npm run build`.
 - **[Git](https://git-scm.com/)**
 
-> Do not use pnpm or Yarn. npm is the only supported package manager. The repository uses `npm ci` to install exact dependencies from `package-lock.json`.
+> Do not use pnpm or Yarn. npm is the only supported package manager. The
+repository uses `npm ci` to install exact dependencies from `package-lock.json`.
 
 ## Setup
 
 ```bash
+
 # 1. Clone the repository
+
 git clone https://github.com/lightspeedwp/ThisOneTimeOnAcidCom.git
 cd ThisOneTimeOnAcidCom
 
 # 2. Install dependencies exactly as locked
+
 npm ci
 
 # 3. Start the development server
-npm run dev
-```
 
-The dev server runs on Vite. Open the URL shown in the terminal, which is usually `http://localhost:5173`. Vite's entry point is `index.html`, which loads `src/main.tsx`.
+npm run dev
+
+```text
+
+The dev server runs on Vite. Open the URL shown in the terminal, which is
+usually `http://localhost:5173`. Vite's entry point is `index.html`, which loads
+`src/main.tsx`.
 
 ## Project structure
 
-```
+```text
 ThisOneTimeOnAcidCom/
 ├── guidelines/            ← Design and development guidelines (read first)
 ├── src/
 │   ├── main.tsx           ← Vite entry point (loaded by index.html)
 │   ├── app/               ← Application source
-│   │   ├── components/    ← React components (pages, common, layout, sections, template-parts, ui, figma)
+│ │ ├── components/ ← React components (pages, common, layout, sections,
+template-parts, ui, figma)
 │   │   ├── data/          ← Centralised mock data (mock/, types/, README.md)
 │   │   ├── hooks/         ← Custom React hooks
 │   │   ├── lib/           ← router.tsx and bundler-safe helpers
@@ -59,9 +72,12 @@ ThisOneTimeOnAcidCom/
 ├── package.json           ← Scripts and dependencies
 ├── package-lock.json      ← npm lockfile
 └── vite.config.ts         ← Vite configuration
-```
 
-The guidelines use root-style paths such as `/components/` and `/styles/`. These map to `src/app/components/` and `src/styles/`. The full mapping is in [AGENTS.md § Path convention](AGENTS.md#path-convention-used-in-the-guidelines).
+```text
+
+The guidelines use root-style paths such as `/components/` and `/styles/`. These
+map to `src/app/components/` and `src/styles/`. The full mapping is in
+[AGENTS.md § Path convention](AGENTS.md#path-convention-used-in-the-guidelines).
 
 ### Source vs generated output
 
@@ -76,13 +92,23 @@ The Netlify site settings, checked on 3 October 2026, are:
 - Build command: `npm run build`
 - Publish directory: `dist`
 
-Netlify reads `netlify.toml` in this order: package directory (if set in the UI) → base directory → repository root. There is **no root `netlify.toml`**. Confirm whether the package-directory UI setting is configured:
+Netlify reads `netlify.toml` in this order: package directory (if set in the UI)
+→ base directory → repository root. There is **no root `netlify.toml`**. Confirm
+whether the package-directory UI setting is configured:
 - If the package directory is set to `src/app/`, then `src/app/netlify.toml` **may be active**
 - If not configured (or set to root), then `src/app/netlify.toml` is not read
 
-SPA routing is defined in the plain-text `public/_redirects` file, which Vite copies to `dist/_redirects` — keep it as a plain file, not a directory.
+SPA routing is defined in the plain-text `public/_redirects` file, which Vite
+copies to `dist/_redirects` — keep it as a plain file, not a directory.
 
-**Note:** SPA routing configuration is tracked in [PR #15](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/15) (`public/_redirects` replacement and `dist/_redirects` redirect-rule processing). That PR documents the Netlify deployment configuration, routing fix and outstanding validation requirements. Do not change deployment settings in a contribution unless the owner has asked for it.
+**Note:** SPA routing configuration is tracked in [PR
+
+#15](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/15)
+
+(`public/_redirects` replacement and `dist/_redirects` redirect-rule
+processing). That PR documents the Netlify deployment configuration, routing fix
+and outstanding validation requirements. Do not change deployment settings in a
+contribution unless the owner has asked for it.
 
 ## Available scripts
 
@@ -96,40 +122,55 @@ These scripts are defined in [`package.json`](package.json):
 | `npm run journal:validate` | Validate journal markdown (no output written) |
 | `npm run journal:check-links` | Check journal link integrity |
 
-There are **no** `test`, `lint`, `typecheck`, `type-check` or `verify` scripts. Older guidance mentions `npm run type-check` and `npm run verify`, but these do not exist.
+There are **no** `test`, `lint`, `typecheck`, `type-check` or `verify` scripts.
+Older guidance mentions `npm run type-check` and `npm run verify`, but these do
+not exist.
 
 ## Validation
 
-Before opening a pull request, run the checks that apply to your change and **report exactly what you ran and what happened**:
+Before opening a pull request, run the checks that apply to your change and
+**report exactly what you ran and what happened**:
 
 ```bash
+
 # Primary check: the production build must succeed
+
 npm run build
-```
+
+```text
 
 If you change journal content, also run:
 
 ```bash
 npm run journal:validate
 npm run journal:check-links
-```
 
-> **Known issue:** as of commit `76b1528`, both journal scripts fail with `journal-content/ directory not found`, because journal content lives in `content/journal/`. Mention this in your PR rather than hiding it.
+```text
+
+> **Known issue:** as of commit `76b1528`, both journal scripts fail with
+`journal-content/ directory not found`, because journal content lives in
+`content/journal/`. Mention this in your PR rather than hiding it.
 
 If you change Spec Kit scripts, run the Node test runner directly:
 
 ```bash
 node --test tests/speckit.test.mjs
-```
 
-> **Known issue:** as of commit `76b1528`, this suite reports 93 passing and 11 failing tests (104 in total), all in the "template resolution" suite.
-> `tests/accordion.test.tsx` needs `jsdom`, which is not installed, so it cannot currently run.
+```text
 
-No automated linting, type-checking, browser or accessibility checks are configured. Manual review against the guidelines is the current quality gate. Do not describe these checks as passed unless you actually performed them.
+> **Known issue:** as of commit `76b1528`, this suite reports 93 passing and 11
+failing tests (104 in total), all in the "template resolution" suite.
+> `tests/accordion.test.tsx` needs `jsdom`, which is not installed, so it cannot
+currently run.
+
+No automated linting, type-checking, browser or accessibility checks are
+configured. Manual review against the guidelines is the current quality gate. Do
+not describe these checks as passed unless you actually performed them.
 
 ## Using Spec Kit
 
-For significant features, governance changes, or architectural decisions, follow the specification-driven development workflow:
+For significant features, governance changes, or architectural decisions, follow
+the specification-driven development workflow:
 
 ### Workflow phases
 
@@ -141,26 +182,35 @@ For significant features, governance changes, or architectural decisions, follow
 | 4. Decompose | `/speckit-tasks` | `tasks.md` | Break planning into actionable implementation tasks |
 | 5. Implement | Your tools | Feature branch | Execute tasks and commit work |
 
-All outputs go to the canonical `.github/specs/` directory (`.github/specs/{NNN-feature-slug}/`). Feature directories are automatically numbered sequentially starting from 001.
+All outputs go to the canonical `.github/specs/` directory
+(`.github/specs/{NNN-feature-slug}/`). Feature directories are automatically
+numbered sequentially starting from 001.
 
 ### Example: Create a new specification
 
 ```bash
+
 # 1. Start the spec workflow
+
 /speckit-specify
 
 # 2. Answer clarification questions
+
 /speckit-clarify
 
 # 3. Review and approve technical plan
+
 /speckit-plan
 
 # 4. Break down into tasks
+
 /speckit-tasks
 
 # 5. Implement tasks on your feature branch
+
 # (following the task breakdown from phase 4)
-```
+
+```text
 
 ### When to use Spec Kit
 
@@ -185,11 +235,14 @@ All outputs go to the canonical `.github/specs/` directory (`.github/specs/{NNN-
 
 ## Coding conventions
 
-All conventions are documented in **[guidelines/Guidelines.md](guidelines/Guidelines.md)**. Follow the reading order in [guidelines/README.md](guidelines/README.md). The key rules are:
+All conventions are documented in
+**[guidelines/Guidelines.md](guidelines/Guidelines.md)**. Follow the reading
+order in [guidelines/README.md](guidelines/README.md). The key rules are:
 
 ### Styling: semantic BEM
 
-The guidelines require **semantic BEM CSS** and forbid Tailwind utility classes, inline styles and CSS-in-JS in components:
+The guidelines require **semantic BEM CSS** and forbid Tailwind utility classes,
+inline styles and CSS-in-JS in components:
 
 ```tsx
 // ✅ Correct
@@ -204,11 +257,16 @@ The guidelines require **semantic BEM CSS** and forbid Tailwind utility classes,
 
 // ❌ Wrong — inline styles
 <div style={{ padding: '16px' }}>Content</div>
-```
 
-CSS lives in `src/styles/`, with one file per block in `src/styles/blocks/`. See [guidelines/css-architecture.md](guidelines/css-architecture.md).
+```text
 
-> Tailwind CSS v4 remains installed and is loaded by `vite.config.ts` and several stylesheets. Do not remove that tooling as part of an unrelated change. This contradiction is listed under [Unresolved decisions](#unresolved-decisions-owner-confirmation-required).
+CSS lives in `src/styles/`, with one file per block in `src/styles/blocks/`. See
+[guidelines/css-architecture.md](guidelines/css-architecture.md).
+
+> Tailwind CSS v4 remains installed and is loaded by `vite.config.ts` and
+several stylesheets. Do not remove that tooling as part of an unrelated change.
+This contradiction is listed under [Unresolved
+decisions](#unresolved-decisions-owner-confirmation-required).
 
 ### Data and content authority
 
@@ -221,7 +279,8 @@ import { heroContent } from "@/data/mock";
 
 // ❌ Wrong
 <h1 className="hero__title">Welcome to my Portfolio</h1>
-```
+
+```text
 
 See [src/app/data/README.md](src/app/data/README.md).
 
@@ -229,15 +288,22 @@ See [src/app/data/README.md](src/app/data/README.md).
 
 ### Headings: sentence case
 
-All headings, titles, navigation labels and button text use **sentence case**: capitalise only the first word and proper nouns.
+All headings, titles, navigation labels and button text use **sentence case**:
+capitalise only the first word and proper nouns.
 
 ### Bundler workarounds
 
-The Figma Make bundler has known syntax limitations. See the full table in [Guidelines.md § Bundler Compatibility Rules](guidelines/Guidelines.md). Avoid optional chaining (`?.`), nullish coalescing (`??`), `import.meta.env`, `for...of` loops and nested ternaries. Use the helpers in `src/app/lib/router.tsx`.
+The Figma Make bundler has known syntax limitations. See the full table in
+[Guidelines.md § Bundler Compatibility Rules](guidelines/Guidelines.md). Avoid
+optional chaining (`?.`), nullish coalescing (`??`), `import.meta.env`,
+`for...of` loops and nested ternaries. Use the helpers in
+`src/app/lib/router.tsx`.
 
 ### Images
 
-Never replace existing images. Use `ImageWithFallback` (`src/app/components/figma/ImageWithFallback.tsx`, a protected file) for new images. All `figma:asset/` imports are protected.
+Never replace existing images. Use `ImageWithFallback`
+(`src/app/components/figma/ImageWithFallback.tsx`, a protected file) for new
+images. All `figma:asset/` imports are protected.
 
 ## File placement rules
 
@@ -250,7 +316,10 @@ Never replace existing images. Use `ImageWithFallback` (`src/app/components/figm
 | General documentation | `docs/` |
 | Build and utility scripts | `scripts/` |
 
-[Guidelines.md](guidelines/Guidelines.md) permits an acknowledged exception: `AGENTS.md` and `CONTRIBUTING.md` are at the root for agent and GitHub discoverability, supplementing the canonical root files `README.md`, `CHANGELOG.md` and `ATTRIBUTIONS.md`.
+[Guidelines.md](guidelines/Guidelines.md) permits an acknowledged exception:
+`AGENTS.md` and `CONTRIBUTING.md` are at the root for agent and GitHub
+discoverability, supplementing the canonical root files `README.md`,
+`CHANGELOG.md` and `ATTRIBUTIONS.md`.
 
 ## Contribution workflow
 
@@ -298,12 +367,15 @@ Where:
 
 ```bash
 npm run validate:branch-name
-```
+
+```text
 
 Expected output:
-```
+
+```text
 Branch 'feat/your-feature-name' matches the repository branching strategy.
-```
+
+```text
 
 **Why branch naming matters:**
 - Correct names support template suggestions and type labels from the routing
@@ -369,7 +441,9 @@ been verified; do not assume GitHub loads the matching template automatically.
 
 **Issue templates are inherited from the organisation:**
 
-This repository does not maintain local issue templates. Instead, we use the org-wide issue types and templates from [lightspeedwp/.github](https://github.com/lightspeedwp/.github).
+This repository does not maintain local issue templates. Instead, we use the
+org-wide issue types and templates from
+[lightspeedwp/.github](https://github.com/lightspeedwp/.github).
 
 **Available issue types:**
 
@@ -394,13 +468,23 @@ This repository does not maintain local issue templates. Instead, we use the org
    - **Labels:** Automatically applied based on issue type; add area labels (e.g., `area:ci`, `area:docs`)
    - **Acceptance criteria:** For features and tasks, define what "done" looks like
 
-**No local overrides:** Do not create `.github/ISSUE_TEMPLATE/` files here unless the issue type is repository-specific. The org-wide templates in lightspeedwp/.github are canonical for consistency across the LightSpeed organization.
+**No local overrides:** Do not create `.github/ISSUE_TEMPLATE/` files here
+unless the issue type is repository-specific. The org-wide templates in
+lightspeedwp/.github are canonical for consistency across the LightSpeed
+organization.
 
-See [lightspeedwp/.github § Issue Templates](https://github.com/lightspeedwp/.github/tree/develop/.github/ISSUE_TEMPLATE) for the complete list of available templates.
+See [lightspeedwp/.github § Issue
+Templates](https://github.com/lightspeedwp/.github/tree/develop/.github/ISSUE_TEMPLATE)
+for the complete list of available templates.
 
 ### 5. Changelog
 
-The changelog is the root [CHANGELOG.md](CHANGELOG.md). It is a protected file: never delete, move or rename it. Entries follow [Keep a Changelog v1.1.0](https://keepachangelog.com/en/1.1.0/) under `## [Unreleased]`. See [guidelines/changelog.md](guidelines/changelog.md) for the full rules. Prepare an entry for user-facing changes. Issues labelled `meta:no-changelog` do not need one.
+The changelog is the root [CHANGELOG.md](CHANGELOG.md). It is a protected file:
+never delete, move or rename it. Entries follow [Keep a Changelog
+v1.1.0](https://keepachangelog.com/en/1.1.0/) under `## [Unreleased]`. See
+[guidelines/changelog.md](guidelines/changelog.md) for the full rules. Prepare
+an entry for user-facing changes. Issues labelled `meta:no-changelog` do not
+need one.
 
 ### 6. After merge
 
@@ -410,7 +494,9 @@ The changelog is the root [CHANGELOG.md](CHANGELOG.md). It is a protected file: 
 
 ## Using Saved Replies
 
-GitHub Saved Replies are templated responses for common feedback patterns. The LightSpeed organization maintains a library of saved replies in [lightspeedwp/.github](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies).
+GitHub Saved Replies are templated responses for common feedback patterns. The
+LightSpeed organization maintains a library of saved replies in
+[lightspeedwp/.github](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies).
 
 **How to add saved replies to your account:**
 
@@ -440,7 +526,8 @@ GitHub Saved Replies are templated responses for common feedback patterns. The L
 - Sensitive or critical issues
 - Architecture decisions requiring discussion
 
-See [lightspeedwp/.github](https://github.com/lightspeedwp/.github) for the complete catalog and contribution guide.
+See [lightspeedwp/.github](https://github.com/lightspeedwp/.github) for the
+complete catalog and contribution guide.
 
 ## Getting help
 
@@ -491,22 +578,28 @@ The following files are **protected and require explicit approval to modify**:
 3. Explain any impact on dependent systems or workflows
 4. Wait for @ashley's explicit approval before proceeding
 
-See [`.github/workflows/protected-files-guard.yml`](.github/workflows/protected-files-guard.yml) for automatic enforcement on all PRs.
+See
+[`.github/workflows/protected-files-guard.yml`](.github/workflows/protected-files-guard.yml)
+for automatic enforcement on all PRs.
 
 ### Code Ownership
 
-This repository is maintained by the LightSpeed team. Code ownership is declared in [CODEOWNERS](.github/CODEOWNERS):
+This repository is maintained by the LightSpeed team. Code ownership is declared
+in [CODEOWNERS](.github/CODEOWNERS):
 
 - **Frontend architecture & components:** @ashley
 - **Guidelines & standards:** @ashley
 - **Spec Kit & governance:** @ashley
 - **CI/CD workflows:** @ashley
 
-When you submit a PR that affects these areas, the code owner is automatically requested for review via GitHub's CODEOWNERS mechanism. Approve their feedback or provide justification before merging.
+When you submit a PR that affects these areas, the code owner is automatically
+requested for review via GitHub's CODEOWNERS mechanism. Approve their feedback
+or provide justification before merging.
 
 ### Locked Configuration Files
 
-These files are **manually curated by @ashley** and require explicit approval to modify:
+These files are **manually curated by @ashley** and require explicit approval to
+modify:
 
 | File | Purpose |
 |------|---------|
@@ -524,7 +617,9 @@ All labels applied to issues and PRs **must use the family prefix system**:
 - ❌ `bug` — **WRONG** (use `type:bug`)
 - ❌ `urgent` — **WRONG** (use `priority:critical`)
 
-See [lightspeedwp/.github § Label Creation Rules](https://github.com/lightspeedwp/.github/blob/develop/CLAUDE.md#label-creation-rules-critical) for the complete catalog and prefix reference.
+See [lightspeedwp/.github § Label Creation
+Rules](https://github.com/lightspeedwp/.github/blob/develop/CLAUDE.md#label-creation-rules-critical)
+for the complete catalog and prefix reference.
 
 ### Governance Structure
 
@@ -550,11 +645,14 @@ This repository is part of the **LightSpeed organization governance** framework:
 
 ## Unresolved decisions (owner confirmation required)
 
-The full list, with evidence, is in [AGENTS.md § Unresolved decisions](AGENTS.md#unresolved-decisions-owner-confirmation-required). In summary:
+The full list, with evidence, is in [AGENTS.md § Unresolved
+decisions](AGENTS.md#unresolved-decisions-owner-confirmation-required). In
+summary:
 
 1. **Netlify config:** `src/app/netlify.toml` is inactive. Decide whether to move it, delete it or change the base directory.
 2. **`import.meta.env`:** it is forbidden in the bundler table but recommended in Guidelines.md § 12, and still used in one component.
 3. **Quality gates:** there are no test, lint or typecheck scripts, and the guidelines reference scripts that do not exist.
 4. **Journal scripts:** they expect `journal-content/`, but content is in `content/journal/`.
 5. **Duplicate attribution files:** a root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. Clarify which is canonical and whether both are needed.
-6. **PostCSS:** two config files exist. The root `postcss.config.mjs` is the likely active one.
+6. **PostCSS:** two config files exist. The root `postcss.config.mjs` is the
+likely active one.
