@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **React external dependency resolution regression** — Restored missing `resolveReactExternals()` function and `build.rollupOptions` in Vite configuration that was accidentally removed in PR #345, causing all 7 subsequent Dependabot PRs to fail Netlify builds with unresolved `react/jsx-runtime` import errors (Issue #306)
+
 ### Changed
 
 - **Netlify configuration** — Added a root `netlify.toml`, the file Netlify actually reads, building with `npm run build` on Node 24 into `dist`. `src/app/netlify.toml` was never read; it is now marked as inactive and updated from pnpm/Node 18 to npm/Node 24. Node 24 is pinned in `.nvmrc` and `package.json` `engines`.
