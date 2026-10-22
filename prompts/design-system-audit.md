@@ -10,9 +10,17 @@
 
 ## Purpose
 
-This prompt initiates a **comprehensive, file-wide audit** of the Ash Shaw Makeup Portfolio prototype in Figma Make. The objective is to ensure that every page, component, and nested layer adheres to the project's **Neon vs Atomic Black** design system, strict BEM architecture, naming conventions, and accessibility guidelines.
+This prompt initiates a **comprehensive, file-wide audit** of the Ash Shaw
+Makeup Portfolio prototype in Figma Make. The objective is to ensure that every
+page, component, and nested layer adheres to the project's **Neon vs Atomic
+Black** design system, strict BEM architecture, naming conventions, and
+accessibility guidelines.
 
-The audit goes beyond design tokens to evaluate structural patterns, animations, motion preferences, and the integration of guidelines related to dark/light modes, neon identity, spacing, documentation, tasks and reporting. The audit surfaces deviations and creates a roadmap for remediation **without directly editing code**.
+The audit goes beyond design tokens to evaluate structural patterns, animations,
+motion preferences, and the integration of guidelines related to dark/light
+modes, neon identity, spacing, documentation, tasks and reporting. The audit
+surfaces deviations and creates a roadmap for remediation **without directly
+editing code**.
 
 ### Value
 
@@ -58,87 +66,93 @@ Before running this audit, read the following guideline files:
 
 1. **List all pages and components** in the codebase - every page route, component file, and layout element. Note each page's purpose (Home, About, Portfolio, Blog, Video, Podcast, DevTools, etc.) and any hidden or draft content.
 
-2. For every page, **inventory every styled element**: text layers, shapes, gradient backgrounds, neon elements, icons, images, animations, components and variants. Record class names, making sure to capture nested elements within components.
+1. For every page, **inventory every styled element**: text layers, shapes, gradient backgrounds, neon elements, icons, images, animations, components and variants. Record class names, making sure to capture nested elements within components.
 
-3. **Capture style attributes** for each element: font family, size, weight, line height, letter spacing, fill/stroke colours, gradient definitions, border radius, shadows, glows, spacing, animations and motion preferences. Note any **inline styles** or **Tailwind classes** (both are strictly banned per [Guidelines.md](../guidelines/Guidelines.md)).
+1. **Capture style attributes** for each element: font family, size, weight, line height, letter spacing, fill/stroke colours, gradient definitions, border radius, shadows, glows, spacing, animations and motion preferences. Note any **inline styles** or **Tailwind classes** (both are strictly banned per [Guidelines.md](../guidelines/Guidelines.md)).
 
-4. **Classify each element** according to the design system's content hierarchy: identify whether it belongs to a Hero section, Card, Grid, Section, or Template Part. Use naming conventions to map elements back to pattern guidelines. Record any elements that do not match a defined pattern.
+1. **Classify each element** according to the design system's content hierarchy: identify whether it belongs to a Hero section, Card, Grid, Section, or Template Part. Use naming conventions to map elements back to pattern guidelines. Record any elements that do not match a defined pattern.
 
 ### 2. Typography compliance
 
 1. Verify that only authorised fonts are used:
+
    - **Playfair Display** (`.font-heading`) - elegant headings
    - **Inter** (`.font-body`) - readable body text
    - **Righteous** (`.font-title`) - main hero titles
 
-2. Check that font sizes, weights, line heights, and letter spacing follow the scale defined in [typography.md](../guidelines/design-tokens/typography.md) (e.g., `.text-hero-h1`, `.text-section-h2`, `.text-body-p` with fluid values). Flag any hard-coded pixel sizes or unapproved classes.
+1. Check that font sizes, weights, line heights, and letter spacing follow the scale defined in [typography.md](../guidelines/design-tokens/typography.md) (e.g., `.text-hero-h1`, `.text-section-h2`, `.text-body-p` with fluid values). Flag any hard-coded pixel sizes or unapproved classes.
 
-3. Ensure headings are semantically structured (H1-H6), each page contains one H1, body text uses Inter, and Righteous is only used for hero titles.
+1. Ensure headings are semantically structured (H1-H6), each page contains one H1, body text uses Inter, and Righteous is only used for hero titles.
 
-4. Verify there are **no Tailwind typography classes** (e.g., `text-xl`, `font-bold`) - only semantic BEM classes.
+1. Verify there are **no Tailwind typography classes** (e.g., `text-xl`, `font-bold`) - only semantic BEM classes.
 
-5. Verify all headings, titles, labels, and captions use **sentence case** per [Guidelines.md](../guidelines/Guidelines.md) sentence case rule.
+1. Verify all headings, titles, labels, and captions use **sentence case** per [Guidelines.md](../guidelines/Guidelines.md) sentence case rule.
 
 ### 3. Colour and gradient system
 
 1. Identify all colours and gradients used. Ensure they reference neon colour tokens from [neon-colors.md](../guidelines/design-tokens/neon-colors.md):
+
    - 8 neon colours: electric green, hot pink, royal blue, pure yellow, blazing orange, violet purple, aqua cyan, hot red
    - 4 signature gradients: Cyberpunk, Toxic Lime, Solar Flare, Hyperpop
 
-2. Check backgrounds use **Atomic Black (#0F0F0F)** or appropriate neon gradients. Flag hard-coded hex values outside the palette.
+1. Check backgrounds use **Atomic Black (#0F0F0F)** or appropriate neon gradients. Flag hard-coded hex values outside the palette.
 
-3. Verify dark and light mode variants exist and maintain contrast ratios >= 4.5:1 for body text. Neon colours may require lighter equivalents in light mode.
+1. Verify dark and light mode variants exist and maintain contrast ratios >= 4.5:1 for body text. Neon colours may require lighter equivalents in light mode.
 
-4. Review animated gradients and ensure they match animations defined in [animations.md](../guidelines/design-tokens/animations.md).
+1. Review animated gradients and ensure they match animations defined in [animations.md](../guidelines/design-tokens/animations.md).
 
 ### 4. Spacing & layout
 
 1. Check that spacing tokens from [spacing.md](../guidelines/design-tokens/spacing.md) are used for padding, margin, and gaps. These should be fluid and responsive. Flag any hard-coded pixel values.
 
-2. Verify BEM classes define layout (e.g., `.hero__content`, `.card__body`), with no Tailwind utility classes for spacing (e.g., `p-4`, `gap-8`).
+1. Verify BEM classes define layout (e.g., `.hero_*content`, `.card*_body`), with no Tailwind utility classes for spacing (e.g., `p-4`, `gap-8`).
 
-3. Ensure container widths and breakpoints align with the fluid width system: mobile compact (>320px), mobile (>420px), tablet portrait (>768px), tablet landscape (>1024px), desktop (>1440px).
+1. Ensure container widths and breakpoints align with the fluid width system: mobile compact (>320px), mobile (>420px), tablet portrait (>768px), tablet landscape (>1024px), desktop (>1440px).
 
 ### 5. Borders, radii, shadows & glows
 
 1. Confirm corner radii follow design token values. No custom radii.
 
-2. Inspect shadows and glows. Shadows should use defined tokens (e.g., `--shadow-sm`, `--shadow-lg`); glows must use neon-coloured glows from the neon system. Flag undefined shadow or glow styles.
+1. Inspect shadows and glows. Shadows should use defined tokens (e.g., `--shadow-sm`, `--shadow-lg`); glows must use neon-coloured glows from the neon system. Flag undefined shadow or glow styles.
 
-3. Check that transitions and animations use variables from [animations.md](../guidelines/design-tokens/animations.md) and support `prefers-reduced-motion` per [prefers-reduced-motion.md](../guidelines/prefers-reduced-motion.md). Each animation should degrade gracefully.
+1. Check that transitions and animations use variables from [animations.md](../guidelines/design-tokens/animations.md) and support `prefers-reduced-motion` per [prefers-reduced-motion.md](../guidelines/prefers-reduced-motion.md). Each animation should degrade gracefully.
 
 ### 6. Accessibility & usability
 
 1. Evaluate contrast ratios for text and key UI elements; must meet WCAG 2.1 AA (>= 4.5:1 body text, >= 3:1 large text/UI).
 
-2. Verify all interactive components (buttons, links, inputs) have visible focus rings and states using neon colours with glows per accessibility guidelines.
+1. Verify all interactive components (buttons, links, inputs) have visible focus rings and states using neon colours with glows per accessibility guidelines.
 
-3. Ensure all images include alt text, icons have ARIA labels, and decorative images use `aria-hidden="true"`.
+1. Ensure all images include alt text, icons have ARIA labels, and decorative images use `aria-hidden="true"`.
 
-4. Confirm animations respect `prefers-reduced-motion`: when reduced motion is preferred, animations should be disabled or replaced with static states.
+1. Confirm animations respect `prefers-reduced-motion`: when reduced motion is preferred, animations should be disabled or replaced with static states.
 
-5. Verify keyboard navigation works: Tab, Enter, Space, Arrows, Escape on all interactive elements.
+1. Verify keyboard navigation works: Tab, Enter, Space, Arrows, Escape on all interactive elements.
 
 ### 7. BEM architecture & content
 
-1. **BEM and semantic naming:** verify class names follow strict BEM convention (`.block`, `.block__element`, `.block--modifier`, `.block__element--modifier`) and are semantically meaningful.
+1. **BEM and semantic naming:** verify class names follow strict BEM convention (`.block`, `.block_*element`, `.block--modifier`, `.block*_element--modifier`) and are semantically meaningful.
 
-2. **Folder and component organisation:** ensure components are organised by sections, templates, patterns, and blocks as described in guidelines. Each section should have clear naming.
+1. **Folder and component organisation:** ensure components are organised by sections, templates, patterns, and blocks as described in guidelines. Each section should have clear naming.
 
-3. **Documentation hooks:** where complex animations, gradients, or interactions are used, confirm comments reference appropriate guideline documents.
+1. **Documentation hooks:** where complex animations, gradients, or interactions are used, confirm comments reference appropriate guideline documents.
 
-4. **No Tailwind or inline styles:** identify any Tailwind utility classes or inline styles; both are strictly prohibited. All styling must be encapsulated in BEM classes using design tokens.
+1. **No Tailwind or inline styles:** identify any Tailwind utility classes or inline styles; both are strictly prohibited. All styling must be encapsulated in BEM classes using design tokens.
 
-5. **No hard-coded content:** ensure all text, images, and configuration data are imported from `/data/mock/` directory. No hard-coded strings in JSX.
+1. **No hard-coded content:** ensure all text, images, and configuration data are imported from `/data/mock/` directory. No hard-coded strings in JSX.
 
 ### 8. Report compilation
 
-Create a Markdown report at `/reports/design-system-audit/audit-report.md` including:
+Create a Markdown report at `/reports/design-system-audit/audit-report.md`
+including:
 
 1. **Summary** - count of pages, elements audited, and total violations by category.
-2. **Violations** - table listing each violation (element name, location/page, guideline broken, description, recommended fix with token/class reference).
-3. **Observations** - systemic issues and patterns (e.g., multiple components using Tailwind spacing, inconsistent neon colours across pages).
-4. **Recommendations** - suggestions for updating guidelines or tokens if gaps are discovered.
+
+1. **Violations** - table listing each violation (element name, location/page, guideline broken, description, recommended fix with token/class reference).
+
+1. **Observations** - systemic issues and patterns (e.g., multiple components using Tailwind spacing, inconsistent neon colours across pages).
+
+1. **Recommendations** - suggestions for updating guidelines or tokens if gaps are discovered.
 
 Do not edit any code during the audit; only report findings.
 
@@ -146,9 +160,9 @@ Do not edit any code during the audit; only report findings.
 
 1. Write tasks to `/tasks/task-list.md` (append to existing tasks) for each issue found. Each task should include a title, description, priority, and status (default "NOT STARTED").
 
-2. Group similar issues where possible (e.g., "Replace all hard-coded neon colours with design tokens").
+1. Group similar issues where possible (e.g., "Replace all hard-coded neon colours with design tokens").
 
-3. Follow the priority legend: P0 = Critical, P1 = High, P2 = Medium, P3 = Low.
+1. Follow the priority legend: P0 = Critical, P1 = High, P2 = Medium, P3 = Low.
 
 ---
 
@@ -183,4 +197,4 @@ Do not edit any code during the audit; only report findings.
 
 ---
 
-**End of prompt**
+## End of prompt

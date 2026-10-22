@@ -9,18 +9,21 @@ related: "/guidelines/overview-components.md, /docs/custom-hooks-guide.md"
 
 # Component Composition Guide
 
-**Project:** Ash Shaw Makeup Portfolio  
-**Purpose:** Best practices for composing and structuring React components  
-**Created:** March 11, 2026  
+**Project:** Ash Shaw Makeup Portfolio
+**Purpose:** Best practices for composing and structuring React components
+**Created:** March 11, 2026
 **Status:** Active
 
 ---
 
 ## Overview
 
-Component composition is the art of building complex UIs from smaller, reusable pieces. This guide covers patterns, anti-patterns, and real-world examples from the Ash Shaw portfolio.
+Component composition is the art of building complex UIs from smaller, reusable
+pieces. This guide covers patterns, anti-patterns, and real-world examples from
+the Ash Shaw portfolio.
 
 **Key Principles:**
+
 - Single Responsibility Principle
 - Composition over inheritance
 - Props as configuration
@@ -32,11 +35,16 @@ Component composition is the art of building complex UIs from smaller, reusable 
 ## Table of Contents
 
 1. [When to Split Components](#when-to-split-components)
-2. [Composition Patterns](#composition-patterns)
-3. [Component Hierarchy](#component-hierarchy)
-4. [Real-World Examples](#real-world-examples)
-5. [Anti-Patterns](#anti-patterns)
-6. [Refactoring Strategies](#refactoring-strategies)
+
+1. [Composition Patterns](#composition-patterns)
+
+1. [Component Hierarchy](#component-hierarchy)
+
+1. [Real-World Examples](#real-world-examples)
+
+1. [Anti-Patterns](#anti-patterns)
+
+1. [Refactoring Strategies](#refactoring-strategies)
 
 ---
 
@@ -53,14 +61,15 @@ Component composition is the art of building complex UIs from smaller, reusable 
 
 ### Complexity Signals
 
-**Split when you see:**
+## Split when you see
+
 - Multiple `useState` calls (5+) managing different concerns
 - Deeply nested JSX (4+ levels)
 - Multiple `useEffect` hooks for different purposes
 - Copy-pasted code blocks
 - Difficulty understanding component purpose at a glance
 
-**Example from codebase:**
+## Example from codebase
 
 ```typescript
 // 🔴 BEFORE - 650 lines
@@ -81,7 +90,8 @@ export function StyleGuidePage() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -91,9 +101,11 @@ export function StyleGuidePage() {
 
 **When to use:** Separate data logic from presentation
 
-**Container Component (Smart):**
+## Container Component (Smart)
+
 ```typescript
 /**
+
  * VideosPage - Container component
  * Handles data fetching, filtering, and state management
  */
@@ -120,11 +132,14 @@ export function VideosPage() {
     />
   );
 }
-```
 
-**Presentational Component (Dumb):**
+```text
+
+## Presentational Component (Dumb)
+
 ```typescript
 /**
+
  * VideoArchiveLayout - Presentational component
  * Pure UI rendering with no business logic
  */
@@ -158,9 +173,11 @@ export function VideoArchiveLayout({
     </div>
   );
 }
-```
+
+```text
 
 **Benefits:**
+
 - Easier to test (presentational components are pure)
 - Easier to reuse UI components
 - Clear separation of concerns
@@ -175,6 +192,7 @@ export function VideoArchiveLayout({
 
 ```typescript
 /**
+
  * Accordion - Compound component pattern
  */
 export function Accordion({ children }: { children: React.ReactNode }) {
@@ -230,20 +248,23 @@ export function AccordionItem({
   <AccordionItem title="Question 1">Answer 1</AccordionItem>
   <AccordionItem title="Question 2">Answer 2</AccordionItem>
 </Accordion>
-```
+
+```text
 
 ---
 
 ### Pattern 3: Render Props
 
-**When to use:** Share code between components using a prop whose value is a function
+**When to use:** Share code between components using a prop whose value is a
+function
 
 **Example:** Data fetching with render props
 
 ```typescript
 interface DataFetcherProps<T> {
   url: string;
-  children: (data: T | null, loading: boolean, error: Error | null) => React.ReactNode;
+children: (data: T | null, loading: boolean, error: Error | null) =>
+React.ReactNode;
 }
 
 export function DataFetcher<T>({ url, children }: DataFetcherProps<T>) {
@@ -275,7 +296,8 @@ export function DataFetcher<T>({ url, children }: DataFetcherProps<T>) {
     return <VideoGrid videos={videos || []} />;
   }}
 </DataFetcher>
-```
+
+```text
 
 ---
 
@@ -287,6 +309,7 @@ export function DataFetcher<T>({ url, children }: DataFetcherProps<T>) {
 
 ```typescript
 /**
+
  * withAuth - HOC that adds authentication
  */
 export function withAuth<P extends object>(
@@ -305,7 +328,8 @@ export function withAuth<P extends object>(
 
 // Usage
 const ProtectedPage = withAuth(DashboardPage);
-```
+
+```text
 
 **Note:** Custom hooks are often preferred over HOCs in modern React.
 
@@ -343,7 +367,8 @@ export function Card({ header, children, footer, className }: CardProps) {
   <img src={image} alt={title} />
   <p>{description}</p>
 </Card>
-```
+
+```text
 
 ---
 
@@ -351,7 +376,7 @@ export function Card({ header, children, footer, className }: CardProps) {
 
 ### Recommended Structure
 
-```
+```text
 App Component (Router)
 ├── Layout Components (Header, Footer)
 ├── Page Components (HomePage, AboutPage)
@@ -361,11 +386,12 @@ App Component (Router)
 │   │   └── UI Components (Icon, Badge)
 │   └── UI Components (Breadcrumbs, ScrollToTop)
 └── Common Components (Modal, ErrorBoundary)
-```
+
+```text
 
 ### Real Example from Codebase
 
-```
+```text
 App.tsx
 ├── Header
 │   ├── Logo
@@ -386,7 +412,8 @@ App.tsx
 └── Footer
     ├── SocialLinks
     └── FooterLinks
-```
+
+```text
 
 ---
 
@@ -408,7 +435,8 @@ export function EbookPage() {
   // Progress tracking
   // ... 700+ more lines
 }
-```
+
+```text
 
 **After:** Composed from smaller pieces
 
@@ -447,9 +475,11 @@ export function EbookPage() {
     </div>
   );
 }
-```
+
+```text
 
 **Benefits:**
+
 - Each hook/component has single responsibility
 - Easier to test individual pieces
 - Reusable hooks (useTouchGestures, useKeyboardNav, useFullscreen)
@@ -468,7 +498,8 @@ export function StickersPage() {
   // Lightbox JSX inline (200+ lines)
   // Stickers grid JSX
 }
-```
+
+```text
 
 **After:** Extracted lightbox component
 
@@ -481,7 +512,7 @@ export function StickerLightbox({
   onNext,
 }: StickerLightboxProps) {
   useKeyboardNav({ onPrev, onNext, onClose });
-  
+
   return (
     <div className="lightbox">
       {/* Lightbox UI */}
@@ -507,9 +538,11 @@ export function StickersPage() {
     </div>
   );
 }
-```
+
+```text
 
 **Benefits:**
+
 - Lightbox is now reusable
 - StickersPage is more focused
 - Easier to test lightbox separately
@@ -540,7 +573,8 @@ export function VideoTagPage() {
 }
 
 // BlogCategoryPage.tsx (300 lines) - 70% same code!
-```
+
+```text
 
 **After:** Shared layout component
 
@@ -583,9 +617,11 @@ export function VideoCategoryPage() {
     </TaxonomyArchiveLayout>
   );
 }
-```
+
+```text
 
 **Benefits:**
+
 - DRY (Don't Repeat Yourself)
 - Consistent layout across pages
 - Single place to update structure
@@ -617,7 +653,8 @@ function Header({ user, setUser }) {
 function UserMenu({ user, setUser }) {
   // Finally use the props 3 levels deep!
 }
-```
+
+```text
 
 **Solution:** Use Context or state management
 
@@ -638,7 +675,8 @@ function UserMenu() {
   const { user, setUser } = useContext(UserContext);
   // Direct access, no prop drilling!
 }
-```
+
+```text
 
 ---
 
@@ -658,7 +696,8 @@ export function DashboardPage() {
   // Navigation
   // ... 900+ more lines
 }
-```
+
+```text
 
 **Solution:** Split into focused components
 
@@ -674,7 +713,8 @@ export function DashboardPage() {
     </DashboardLayout>
   );
 }
-```
+
+```text
 
 ---
 
@@ -687,10 +727,11 @@ export function DashboardPage() {
 function SimpleComponent({ name }) {
   const greeting = useMemo(() => `Hello, ${name}!`, [name]);
   const handleClick = useCallback(() => console.log(name), [name]);
-  
+
   return <div onClick={handleClick}>{greeting}</div>;
 }
-```
+
+```text
 
 **Solution:** Only memoize expensive computations
 
@@ -699,7 +740,7 @@ function SimpleComponent({ name }) {
 function SimpleComponent({ name }) {
   const greeting = `Hello, ${name}!`; // No memo needed
   const handleClick = () => console.log(name); // No callback needed
-  
+
   return <div onClick={handleClick}>{greeting}</div>;
 }
 
@@ -709,10 +750,11 @@ function ExpensiveComponent({ data }) {
     // Expensive filtering/sorting/mapping
     return data.filter(/* ... */).sort(/* ... */).map(/* ... */);
   }, [data]);
-  
+
   return <DataTable data={processedData} />;
 }
-```
+
+```text
 
 ---
 
@@ -727,10 +769,11 @@ function ParentComponent() {
   function ChildComponent({ text }) {
     return <div>{text}</div>;
   }
-  
+
   return <ChildComponent text="Hello" />;
 }
-```
+
+```text
 
 **Solution:** Define components outside
 
@@ -743,7 +786,8 @@ function ChildComponent({ text }) {
 function ParentComponent() {
   return <ChildComponent text="Hello" />;
 }
-```
+
+```text
 
 ---
 
@@ -751,7 +795,7 @@ function ParentComponent() {
 
 ### Strategy 1: Extract Sections
 
-**Identify repeating patterns:**
+## Identify repeating patterns
 
 ```typescript
 // BEFORE
@@ -768,9 +812,10 @@ function ParentComponent() {
     {/* Typography samples */}
   </div>
 </section>
-```
 
-**Extract to shared Section component:**
+```text
+
+## Extract to shared Section component
 
 ```typescript
 // AFTER
@@ -790,13 +835,14 @@ function Section({ title, children, className }) {
 <Section title="Typography" className="typography-section">
   <TypeList />
 </Section>
-```
+
+```text
 
 ---
 
 ### Strategy 2: Extract Custom Hooks
 
-**Move stateful logic to hooks:**
+## Move stateful logic to hooks
 
 ```typescript
 // BEFORE - Logic in component
@@ -844,13 +890,14 @@ function SearchPage() {
 
   return (/* JSX */);
 }
-```
+
+```text
 
 ---
 
 ### Strategy 3: Use Compound Components
 
-**Group related components:**
+## Group related components
 
 ```typescript
 // BEFORE - Separate unrelated components
@@ -870,7 +917,8 @@ function SearchPage() {
     <Button onClick={save}>Save</Button>
   </Modal.Footer>
 </Modal>
-```
+
+```text
 
 ---
 
@@ -900,6 +948,6 @@ When composing components, ensure:
 
 ---
 
-**Document Status:** Active  
-**Last Updated:** March 11, 2026  
+**Document Status:** Active
+**Last Updated:** March 11, 2026
 **Maintained By:** Development Team

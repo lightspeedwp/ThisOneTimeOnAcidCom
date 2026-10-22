@@ -1,12 +1,15 @@
 # ContentSection Component
 
-**File:** `/components/sections/ContentSection.tsx`  
-**Version:** 1.0.0  
+**File:** `/components/sections/ContentSection.tsx`
+**Version:** 1.0.0
 **Category:** Section Component (Phase 3)
 
 ## Purpose
 
-A versatile section wrapper that provides consistent spacing, optional titles/subtitles, color accents, and background patterns. The primary building block for about sub-page body content, replacing raw `<section>` + `<h2>` patterns.
+A versatile section wrapper that provides consistent spacing, optional
+titles/subtitles, color accents, and background patterns. The primary building
+block for about sub-page body content, replacing raw `<section>` + `<h2>`
+patterns.
 
 ## Props
 
@@ -45,7 +48,8 @@ import { ContentSection } from '../../sections/ContentSection';
     Ash has always questioned everything...
   </p>
 </ContentSection>
-```
+
+```text
 
 ## Common Pattern: Wrapping Data-Driven Sections
 
@@ -72,11 +76,13 @@ import { ContentSection } from '../../sections/ContentSection';
     </div>
   );
 })}
-```
+
+```text
 
 ## Where Used
 
 Every about sub-page uses ContentSection for body sections. Key examples:
+
 - **AboutPage** — all 4 main content areas
 - **BerlinPage** — city sections (blue accent)
 - **MusicPage** — music sections (purple accent)
@@ -86,9 +92,11 @@ Every about sub-page uses ContentSection for body sections. Key examples:
 
 ## CSS
 
-Styles are defined in `/styles/blocks/content-section.css`, imported by the component.
+Styles are defined in `/styles/blocks/content-section.css`, imported by the
+component.
 
 **BEM structure:**
+
 - `.content-section` — block
 - `.content-section--default` / `--hero` / `--callout` / `--aside` — variant modifiers
 - `.content-section--accent-pink` (etc.) — color modifiers

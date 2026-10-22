@@ -1,6 +1,6 @@
 # Lightbox Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 Full-screen image viewer with navigation, zoom, and keyboard controls.
@@ -8,6 +8,7 @@ Full-screen image viewer with navigation, zoom, and keyboard controls.
 ## Purpose
 
 Provide immersive image viewing with:
+
 - Full-screen modal overlay
 - Image navigation (previous/next)
 - Keyboard controls (Arrow keys, Escape, Space)
@@ -22,7 +23,7 @@ Provide immersive image viewing with:
 
 ## 🖼️ Lightbox Interaction Flow
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    LIGHTBOX INTERACTION FLOW                         │
 └─────────────────────────────────────────────────────────────────────┘
@@ -242,23 +243,34 @@ Error Handling:
 
 On Open:
 ────────
+
 1. Trap focus within lightbox
-2. Move focus to close button
-3. Lock body scroll (prevent background scrolling)
-4. Announce to screen readers: "Viewing image 3 of 5"
+
+1. Move focus to close button
+
+1. Lock body scroll (prevent background scrolling)
+
+1. Announce to screen readers: "Viewing image 3 of 5"
 
 During Navigation:
 ──────────────────
+
 1. Update aria-live region: "Image 4 of 5"
-2. Maintain focus on navigation controls
-3. Update document title (optional)
+
+1. Maintain focus on navigation controls
+
+1. Update document title (optional)
 
 On Close:
 ─────────
+
 1. Restore focus to trigger element (thumbnail clicked)
-2. Unlock body scroll
-3. Remove lightbox from DOM
-4. Announce: "Lightbox closed"
+
+1. Unlock body scroll
+
+1. Remove lightbox from DOM
+
+1. Announce: "Lightbox closed"
 
 Focus Trap:
 ───────────
@@ -290,7 +302,7 @@ Current: Image 3
                        ↑
                    Currently
                    displayed
-                       
+
 Preload Strategy:
 ─────────────────
 ┌──────────────────────────────────────┐
@@ -309,7 +321,7 @@ useEffect(() => {
   const nextIndex = (currentIndex + 1) % images.length;
   const nextImg = new Image();
   nextImg.src = images[nextIndex].url;
-  
+
   // Preload previous image
   const prevIndex = (currentIndex - 1 + images.length) % images.length;
   const prevImg = new Image();
@@ -322,7 +334,8 @@ Benefits:
 ✅ Smooth user experience
 ✅ Reduced perceived loading time
 ✅ Better engagement metrics
-```
+
+```text
 
 ---
 
@@ -333,55 +346,56 @@ Benefits:
 ```mermaid
 stateDiagram-v2
     [*] --> Closed: Page loads
-    
+
     Closed --> Opening: User clicks thumbnail
-    
+
     Opening --> Loading: Lightbox renders
-    
+
     Loading --> ImageLoading: Fetch image
-    
+
     ImageLoading --> Displayed: Image loaded
     ImageLoading --> Error: Load failed
-    
+
     Error --> Displayed: Retry succeeded
     Error --> Closed: User closes
-    
+
     Displayed --> Navigating: Arrow key pressed
     Displayed --> Zooming: Pinch gesture
     Displayed --> Closing: ESC or click backdrop
-    
+
     Navigating --> ImageLoading: Load new image
-    
+
     Zooming --> Displayed: Zoom complete
-    
+
     Closing --> Closed: Animation complete
     Closed --> [*]
-    
+
     note right of Opening
         Trap focus
         Lock body scroll
         Mount lightbox
     end note
-    
+
     note right of Displayed
         Main viewing state
         All controls active
         Preload adjacent
     end note
-    
+
     note right of Closing
         Release focus
         Unlock scroll
         Unmount lightbox
     end note
-```
+
+```text
 
 ### Mermaid Flowchart (Navigation Logic)
 
 ```mermaid
 flowchart TD
     A[User Action] --> B{What Action?}
-    
+
     B -->|Click Next Arrow| C[Next Image]
     B -->|Click Prev Arrow| D[Previous Image]
     B -->|Press → Key| C
@@ -391,33 +405,34 @@ flowchart TD
     B -->|Press SPACE| C
     B -->|Swipe Left| C
     B -->|Swipe Right| D
-    
+
     C --> F{At Last Image?}
     F -->|Yes| G[Wrap to First]
     F -->|No| H[currentIndex + 1]
-    
+
     D --> I{At First Image?}
     I -->|Yes| J[Wrap to Last]
     I -->|No| K[currentIndex - 1]
-    
+
     G --> L[Update State]
     H --> L
     J --> L
     K --> L
-    
+
     L --> M[Preload Adjacent]
     M --> N[Render New Image]
-    
+
     E --> O[Release Focus]
     O --> P[Unlock Body Scroll]
     P --> Q[Return to Gallery]
-    
+
     style C fill:#e1f5ff,stroke:#01c3cc
     style D fill:#e1f5ff,stroke:#01c3cc
     style E fill:#fecaca,stroke:#ef4444
     style L fill:#dcfce7,stroke:#22c55e
     style M fill:#fef3c7,stroke:#f59e0b
-```
+
+```text
 
 ### Mermaid Sequence Diagram (User Interaction)
 
@@ -428,35 +443,36 @@ sequenceDiagram
     participant L as Lightbox
     participant I as Image
     participant K as Keyboard
-    
+
     U->>G: Click thumbnail #3
     G->>L: openLightbox(index: 3)
-    
+
     Note over L: Mount component<br/>Trap focus<br/>Lock scroll
-    
+
     L->>I: Load image #3
     I-->>L: Image loaded
     L->>U: Display image
-    
+
     Note over L: Preload #2 and #4
-    
+
     U->>K: Press → arrow
     K->>L: Navigate next
     L->>L: currentIndex = 4
     L->>I: Load image #4
     I-->>L: Image loaded (preloaded)
     L->>U: Display instantly ⚡
-    
+
     Note over L: Preload #3 and #5
-    
+
     U->>K: Press ESC
     K->>L: Close lightbox
-    
+
     Note over L: Release focus<br/>Unlock scroll<br/>Unmount
-    
+
     L->>G: Return focus to thumbnail
     L->>U: Back to gallery
-```
+
+```text
 
 ---
 
@@ -467,14 +483,15 @@ sequenceDiagram
 ```tsx
 import { Lightbox } from './components/ui/Lightbox';
 
-<Lightbox 
+<Lightbox
   images={images}
   currentIndex={currentIndex}
   isOpen={isOpen}
   onClose={() => setIsOpen(false)}
   onNavigate={setCurrentIndex}
 />
-```
+
+```text
 
 ### With Portfolio Entry
 
@@ -482,7 +499,7 @@ import { Lightbox } from './components/ui/Lightbox';
 const [lightboxOpen, setLightboxOpen] = useState(false);
 const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-<PortfolioCard 
+<PortfolioCard
   entry={entry}
   onClick={() => {
     setCurrentImageIndex(0);
@@ -490,7 +507,7 @@ const [currentImageIndex, setCurrentImageIndex] = useState(0);
   }}
 />
 
-<Lightbox 
+<Lightbox
   images={entry.images}
   currentIndex={currentImageIndex}
   isOpen={lightboxOpen}
@@ -499,7 +516,8 @@ const [currentImageIndex, setCurrentImageIndex] = useState(0);
   title={entry.title}
   description={entry.description}
 />
-```
+
+```text
 
 ---
 
@@ -508,66 +526,77 @@ const [currentImageIndex, setCurrentImageIndex] = useState(0);
 ```typescript
 interface LightboxProps {
   /**
+
    * Array of image URLs
    * @required
    */
   images: string[];
-  
+
   /**
+
    * Current image index
    * @required
    */
   currentIndex: number;
-  
+
   /**
+
    * Whether lightbox is open
    * @required
    */
   isOpen: boolean;
-  
+
   /**
+
    * Close handler
    * @required
    */
   onClose: () => void;
-  
+
   /**
+
    * Navigation handler
    * @required
    */
   onNavigate: (index: number) => void;
-  
+
   /**
+
    * Image title/caption
    * @optional
    */
   title?: string;
-  
+
   /**
+
    * Image description
    * @optional
    */
   description?: string;
-  
+
   /**
+
    * Show thumbnail strip
    * @default true
    */
   showThumbnails?: boolean;
-  
+
   /**
+
    * Enable zoom
    * @default true
    */
   enableZoom?: boolean;
-  
+
   /**
+
    * Additional CSS classes
    * @default ""
    */
   className?: string;
 }
-```
+
+```text
 
 ---
 
@@ -578,7 +607,7 @@ interface LightboxProps {
 ```typescript
 useEffect(() => {
   if (!isOpen) return;
-  
+
   const handleKeyDown = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'Escape':
@@ -596,11 +625,12 @@ useEffect(() => {
         break;
     }
   };
-  
+
   document.addEventListener('keydown', handleKeyDown);
   return () => document.removeEventListener('keydown', handleKeyDown);
 }, [isOpen, currentIndex]);
-```
+
+```text
 
 ### Touch Gesture Support
 
@@ -624,7 +654,8 @@ const handleTouchEnd = () => {
     navigatePrevious();
   }
 };
-```
+
+```text
 
 ### Image Zoom
 
@@ -634,7 +665,8 @@ const [isZoomed, setIsZoomed] = useState(false);
 const handleImageClick = () => {
   setIsZoomed(!isZoomed);
 };
-```
+
+```text
 
 ### Prevent Body Scroll
 
@@ -645,12 +677,13 @@ useEffect(() => {
   } else {
     document.body.style.overflow = '';
   }
-  
+
   return () => {
     document.body.style.overflow = '';
   };
 }, [isOpen]);
-```
+
+```text
 
 ---
 
@@ -660,7 +693,8 @@ Complete lightbox implementation:
 
 ```tsx
 import React, { useState, useEffect } from 'react';
-import { X, CaretLeft, CaretRight, MagnifyingGlassPlus, MagnifyingGlassMinus } from '@phosphor-icons/react';
+import { X, CaretLeft, CaretRight, MagnifyingGlassPlus, MagnifyingGlassMinus }
+from '@phosphor-icons/react';
 
 interface LightboxProps {
   images: string[];
@@ -674,7 +708,7 @@ interface LightboxProps {
   enableZoom?: boolean;
 }
 
-export function Lightbox({ 
+export function Lightbox({
   images,
   currentIndex,
   isOpen,
@@ -695,7 +729,7 @@ export function Lightbox({
       document.body.style.overflow = '';
       setIsZoomed(false);
     }
-    
+
     return () => {
       document.body.style.overflow = '';
     };
@@ -704,7 +738,7 @@ export function Lightbox({
   // Keyboard controls
   useEffect(() => {
     if (!isOpen) return;
-    
+
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
         case 'Escape':
@@ -718,7 +752,7 @@ export function Lightbox({
           break;
       }
     };
-    
+
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, currentIndex]);
@@ -736,7 +770,7 @@ export function Lightbox({
   if (!isOpen) return null;
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
@@ -745,14 +779,16 @@ export function Lightbox({
       {/* Close button */}
       <button
         onClick={onClose}
-        className="fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+className="fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-white/10
+hover:bg-white/20 flex items-center justify-center text-white transition-colors"
         aria-label="Close lightbox"
       >
         <X className="w-6 h-6" />
       </button>
 
       {/* Image counter */}
-      <div className="fixed top-4 left-4 z-50 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full text-white font-body text-fluid-sm">
+<div className="fixed top-4 left-4 z-50 bg-black/50 backdrop-blur-sm px-4 py-2
+rounded-full text-white font-body text-fluid-sm">
         {currentIndex + 1} / {images.length}
       </div>
 
@@ -760,10 +796,13 @@ export function Lightbox({
       {enableZoom && (
         <button
           onClick={() => setIsZoomed(!isZoomed)}
-          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full text-white flex items-center gap-2 hover:bg-black/60 transition-colors"
+className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-black/50
+backdrop-blur-sm px-4 py-2 rounded-full text-white flex items-center gap-2
+hover:bg-black/60 transition-colors"
           aria-label={isZoomed ? 'Zoom out' : 'Zoom in'}
         >
-          {isZoomed ? <MagnifyingGlassMinus className="w-5 h-5" /> : <MagnifyingGlassPlus className="w-5 h-5" />}
+{isZoomed ? <MagnifyingGlassMinus className="w-5 h-5" /> : <MagnifyingGlassPlus
+className="w-5 h-5" />}
         </button>
       )}
 
@@ -786,15 +825,19 @@ export function Lightbox({
         <>
           <button
             onClick={navigatePrevious}
-            className="fixed left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+className="fixed left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16
+rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center
+text-white transition-colors"
             aria-label="Previous image"
           >
             <CaretLeft className="w-6 h-6 md:w-8 md:h-8" />
           </button>
-          
+
           <button
             onClick={navigateNext}
-            className="fixed right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+className="fixed right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16
+rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center
+text-white transition-colors"
             aria-label="Next image"
           >
             <CaretRight className="w-6 h-6 md:w-8 md:h-8" />
@@ -805,7 +848,8 @@ export function Lightbox({
       {/* Caption */}
       {(title || description) && (
         <div className="fixed bottom-24 md:bottom-32 left-0 right-0 z-50 px-4 md:px-8">
-          <div className="max-w-4xl mx-auto bg-black/50 backdrop-blur-sm rounded-2xl p-6 text-white">
+<div className="max-w-4xl mx-auto bg-black/50 backdrop-blur-sm rounded-2xl p-6
+text-white">
             {title && (
               <h3 className="text-fluid-lg font-heading font-semibold mb-2">
                 {title}
@@ -850,7 +894,7 @@ export function Lightbox({
       )}
 
       {/* Backdrop click to close */}
-      <div 
+      <div
         className="absolute inset-0 -z-10"
         onClick={onClose}
         aria-hidden="true"
@@ -858,7 +902,8 @@ export function Lightbox({
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -870,7 +915,7 @@ export function Lightbox({
 function PortfolioGallery({ entry }: Props) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   return (
     <>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -881,9 +926,10 @@ function PortfolioGallery({ entry }: Props) {
               setCurrentIndex(index);
               setLightboxOpen(true);
             }}
-            className="aspect-square overflow-hidden rounded-lg hover:scale-105 transition-transform"
+className="aspect-square overflow-hidden rounded-lg hover:scale-105
+transition-transform"
           >
-            <img 
+            <img
               src={image}
               alt={`${entry.title} image ${index + 1}`}
               className="w-full h-full object-cover"
@@ -891,8 +937,8 @@ function PortfolioGallery({ entry }: Props) {
           </button>
         ))}
       </div>
-      
-      <Lightbox 
+
+      <Lightbox
         images={entry.images}
         currentIndex={currentIndex}
         isOpen={lightboxOpen}
@@ -904,7 +950,8 @@ function PortfolioGallery({ entry }: Props) {
     </>
   );
 }
-```
+
+```text
 
 ### Blog Post Images
 
@@ -912,24 +959,24 @@ function PortfolioGallery({ entry }: Props) {
 function BlogPost({ post }: Props) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  
+
   return (
     <article className="prose max-w-none">
-      <div 
+      <div
         className="cursor-pointer"
         onClick={() => {
           setCurrentImage(0);
           setLightboxOpen(true);
         }}
       >
-        <img 
+        <img
           src={post.featuredImage}
           alt={post.title}
           className="rounded-2xl"
         />
       </div>
-      
-      <Lightbox 
+
+      <Lightbox
         images={[post.featuredImage, ...post.galleryImages]}
         currentIndex={currentImage}
         isOpen={lightboxOpen}
@@ -940,7 +987,8 @@ function BlogPost({ post }: Props) {
     </article>
   );
 }
-```
+
+```text
 
 ---
 
@@ -956,11 +1004,13 @@ function BlogPost({ post }: Props) {
     link.download = `image-${currentIndex + 1}.jpg`;
     link.click();
   }}
-  className="fixed top-20 right-4 z-50 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full text-white"
+className="fixed top-20 right-4 z-50 bg-black/50 backdrop-blur-sm px-4 py-2
+rounded-full text-white"
 >
   <Download className="w-5 h-5" />
 </button>
-```
+
+```text
 
 ### With Share Button
 
@@ -968,21 +1018,24 @@ function BlogPost({ post }: Props) {
 import { ShareComponent } from './ShareComponent';
 
 <div className="fixed top-20 right-4 z-50">
-  <ShareComponent 
+  <ShareComponent
     variant="compact"
     title={title}
     url={images[currentIndex]}
   />
 </div>
-```
+
+```text
 
 ### With Image Info
 
 ```tsx
-<div className="fixed bottom-4 left-4 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full text-white text-fluid-xs">
+<div className="fixed bottom-4 left-4 bg-black/50 backdrop-blur-sm px-4 py-2
+rounded-full text-white text-fluid-xs">
   {imageMetadata.width} × {imageMetadata.height}
 </div>
-```
+
+```text
 
 ---
 
@@ -993,17 +1046,18 @@ import { ShareComponent } from './ShareComponent';
 ```tsx
 useEffect(() => {
   if (!isOpen) return;
-  
+
   const focusableElements = dialogRef.current?.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
   );
-  
+
   const firstElement = focusableElements?.[0] as HTMLElement;
-  const lastElement = focusableElements?.[focusableElements.length - 1] as HTMLElement;
-  
+const lastElement = focusableElements?.[focusableElements.length - 1] as
+HTMLElement;
+
   const handleTab = (e: KeyboardEvent) => {
     if (e.key !== 'Tab') return;
-    
+
     if (e.shiftKey && document.activeElement === firstElement) {
       e.preventDefault();
       lastElement?.focus();
@@ -1012,11 +1066,12 @@ useEffect(() => {
       firstElement?.focus();
     }
   };
-  
+
   document.addEventListener('keydown', handleTab);
   return () => document.removeEventListener('keydown', handleTab);
 }, [isOpen]);
-```
+
+```text
 
 ### ARIA Attributes
 
@@ -1027,21 +1082,22 @@ useEffect(() => {
   aria-label="Image lightbox"
   aria-describedby="lightbox-caption"
 >
-  <img 
+  <img
     src={currentImage}
     alt={imageAlt}
     aria-describedby="image-counter"
   />
-  
+
   <div id="image-counter">
     Image {currentIndex + 1} of {images.length}
   </div>
-  
+
   <div id="lightbox-caption">
     {title}
   </div>
 </div>
-```
+
+```text
 
 ---
 
@@ -1052,24 +1108,29 @@ useEffect(() => {
 ```tsx
 // ❌ WRONG - Page scrolls behind lightbox
 {isOpen && <Lightbox />}
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Prevent scroll
 useEffect(() => {
   document.body.style.overflow = isOpen ? 'hidden' : '';
 }, [isOpen]);
-```
+
+```text
 
 ### ❌ Mistake 2: Missing Keyboard Controls
 
 ```tsx
 // ❌ WRONG - Mouse-only navigation
 <button onClick={navigateNext}>Next</button>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Keyboard support
 useEffect(() => {
@@ -1078,11 +1139,12 @@ useEffect(() => {
     if (e.key === 'ArrowLeft') navigatePrevious();
     if (e.key === 'Escape') onClose();
   };
-  
+
   document.addEventListener('keydown', handleKeyDown);
   return () => document.removeEventListener('keydown', handleKeyDown);
 }, []);
-```
+
+```text
 
 ---
 
@@ -1098,10 +1160,10 @@ useEffect(() => {
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system
-- **[FILE_STRUCTURE.md](../FILE_STRUCTURE.md)** - File organization
+- **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

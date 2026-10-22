@@ -1,0 +1,37 @@
+title: General Discussion
+labels: [general]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # General Discussion
+
+        Start a conversation about anything related to this project. This is a space for community dialogue.
+
+  - type: textarea
+    id: topic
+    attributes:
+      label: Discussion Topic
+      description: What would you like to discuss?
+      placeholder: |
+        I'd like to discuss...
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details & Context
+      description: Provide any additional context or details to help start the conversation.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: guidelines
+    attributes:
+      label: Community Guidelines
+      options:
+        - label: I've read the project's Code of Conduct and community guidelines
+          required: true
+        - label: My discussion is constructive and respectful
+          required: true

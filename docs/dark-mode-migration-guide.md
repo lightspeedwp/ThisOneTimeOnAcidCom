@@ -1,25 +1,27 @@
 # 🔄 Dark Mode Migration Guide — v1.0 to v2.0
 
-**Upgrading from basic dark mode to production-ready system**
+## Upgrading from basic dark mode to production-ready system
 
-**Version:** 2.0.0  
-**Migration Difficulty:** Easy  
-**Estimated Time:** 15-30 minutes  
+**Version:** 2.0.0
+**Migration Difficulty:** Easy
+**Estimated Time:** 15-30 minutes
 **Breaking Changes:** None (100% backward compatible)
 
 ---
 
 ## 🎯 Overview
 
-This guide helps you migrate from the basic dark mode v1.0.0 (524 lines) to the comprehensive v2.0.0 system (2,047 lines, 54 components).
+This guide helps you migrate from the basic dark mode v1.0.0 (524 lines) to the
+comprehensive v2.0.0 system (2,047 lines, 54 components).
 
-**Good news:** v2.0.0 is **100% backward compatible** with v1.0.0. All existing code will continue to work.
+**Good news:** v2.0.0 is **100% backward compatible** with v1.0.0. All existing
+code will continue to work.
 
 ---
 
 ## ✅ Pre-Migration Checklist
 
-**Before starting, verify:**
+## Before starting, verify
 
 - [ ] You have a backup of your current code
 - [ ] Your site is currently using dark mode v1.0.0
@@ -30,10 +32,13 @@ This guide helps you migrate from the basic dark mode v1.0.0 (524 lines) to the 
 **Estimated backup time:** 2 minutes
 
 ```bash
+
 # Create a backup
+
 cp -r styles/themes styles/themes-backup-$(date +%Y%m%d)
 cp styles/globals.css styles/globals.css.backup
-```
+
+```text
 
 ---
 
@@ -43,19 +48,25 @@ cp styles/globals.css styles/globals.css.backup
 
 **What:** Add the extended components file alongside the core theme.
 
-**Why:** v2.0.0 is split into two files for better organization and optional loading.
+**Why:** v2.0.0 is split into two files for better organization and optional
+loading.
 
 **Action:**
 
-The new file `/styles/themes/dark-extended.css` already exists (created during the v2.0.0 enhancement). No action needed unless it's missing.
+The new file `/styles/themes/dark-extended.css` already exists (created during
+the v2.0.0 enhancement). No action needed unless it's missing.
 
 **Verify:**
+
 ```bash
 ls -la styles/themes/dark-extended.css
-# Should show: dark-extended.css (1,000 lines, ~23 KB)
-```
 
-**If missing:** The file was created as part of this project. Check the session deliverables.
+# Should show: dark-extended.css (1,000 lines, ~23 KB)
+
+```text
+
+**If missing:** The file was created as part of this project. Check the session
+deliverables.
 
 ---
 
@@ -74,16 +85,19 @@ Open `/styles/globals.css` and verify these imports exist:
 @import "./themes/light.css";
 @import "./themes/dark.css";              /* Core theme */
 @import "./themes/dark-extended.css";     /* Extended components ← NEW */
-```
+
+```text
 
 **Verify:**
 The imports are already in place. No action needed.
 
 **If missing:**
 Add this line after the `dark.css` import:
+
 ```css
 @import "./themes/dark-extended.css";
-```
+
+```text
 
 ---
 
@@ -94,16 +108,21 @@ Add this line after the `dark.css` import:
 **Action:**
 
 1. Start your dev server: `npm run dev`
-2. Open browser DevTools Console
-3. Activate dark mode: `document.documentElement.classList.add('dark')`
-4. Verify:
+
+1. Open browser DevTools Console
+
+1. Activate dark mode: `document.documentElement.classList.add('dark')`
+
+1. Verify:
+
    - [ ] Background is atomic black (#0F0F0F)
    - [ ] Text is cream (#F6F2EB)
    - [ ] Existing components still styled correctly
 
 **Expected result:** Everything works exactly as before ✅
 
-**If something breaks:** Check console for CSS loading errors. Verify file paths in imports.
+**If something breaks:** Check console for CSS loading errors. Verify file paths
+in imports.
 
 ---
 
@@ -117,22 +136,27 @@ Add this line after the `dark.css` import:
 
 Open `/docs/dark-mode-component-showcase.md` and browse:
 
-**New Navigation Components (4):**
+## New Navigation Components (4)
+
 - Breadcrumbs
 - Pagination
 - Tabs
 - Sidebar
 
-**New Content Components (16):**
+## New Content Components (16)
+
 - Testimonials, Timeline, Accordion, Gallery, Lightbox, Empty State, Error Pages, Author Bio, Comments, Pricing Tables, Newsletter, CTA, Blockquotes, Figures, Video Controls, Social Buttons
 
-**New Form Components (11):**
+## New Form Components (11)
+
 - Textarea, Select, Checkbox, Radio, Search, Filters, Chips, Switch, Dropdown, Progress Bars, Skeleton Loaders
 
-**New Feedback Components (10):**
+## New Feedback Components (10)
+
 - Toast Notifications, Alerts, Status Indicators, Rating Stars, Loading Spinners, Tooltips, Cookie Consent, Loading Overlay, Scroll Progress, Back to Top
 
-**New Layout Components (8):**
+## New Layout Components (8)
+
 - Modal, Mobile Menu, Nav Menu, Lists, Tables, Custom Scrollbar, Text Selection, Image Hover
 
 **Optional:** Bookmark this page for reference when building new features.
@@ -141,26 +165,32 @@ Open `/docs/dark-mode-component-showcase.md` and browse:
 
 ### Step 5: Update Components to Use BEM Classes (Optional, 10-20 minutes)
 
-**What:** Convert any Tailwind utility classes to BEM classes for full v2.0.0 styling.
+**What:** Convert any Tailwind utility classes to BEM classes for full v2.0.0
+styling.
 
-**Why:** v2.0.0 components are styled using BEM methodology. Tailwind utilities won't get the new neon glow effects and enhanced interactions.
+**Why:** v2.0.0 components are styled using BEM methodology. Tailwind utilities
+won't get the new neon glow effects and enhanced interactions.
 
 **Action:**
 
-**Find components using Tailwind utilities:**
+## Find components using Tailwind utilities
 
 ```bash
+
 # Search for common Tailwind patterns
+
 grep -r "className=\"flex" components/
 grep -r "className=\"grid" components/
 grep -r "className=\"px-" components/
-```
+
+```text
 
 **Example migration:**
 
 ```typescript
 // BEFORE (v1.0.0) — Tailwind utilities
-<button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-violet-500">
+<button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r
+from-pink-500 to-violet-500">
   Click Me
 </button>
 
@@ -168,9 +198,10 @@ grep -r "className=\"px-" components/
 <button className="button button--primary">
   Click Me
 </button>
-```
 
-**Common conversions:**
+```text
+
+## Common conversions
 
 | Old (Tailwind) | New (BEM) |
 |----------------|-----------|
@@ -182,7 +213,8 @@ grep -r "className=\"px-" components/
 
 **Reference:** `/docs/dark-mode-component-showcase.md` for all BEM class names.
 
-**Note:** This step is **optional** but recommended for the best v2.0.0 experience.
+**Note:** This step is **optional** but recommended for the best v2.0.0
+experience.
 
 ---
 
@@ -192,9 +224,10 @@ grep -r "className=\"px-" components/
 
 **Action:**
 
-**Test a few new components:**
+## Test a few new components
 
-**1. Test Breadcrumbs:**
+## 1. Test Breadcrumbs
+
 ```typescript
 import { Breadcrumbs } from './ui/Breadcrumbs'; // If you have this component
 
@@ -207,27 +240,33 @@ breadcrumbs.innerHTML = `
   <span class="breadcrumbs__current">Page</span>
 `;
 document.body.appendChild(breadcrumbs);
-```
+
+```text
 
 **Verify:**
+
 - [ ] Separator is visible
 - [ ] Current page has no link
 - [ ] Hover shows pink color
 
 **2. Test Alert:**
+
 ```javascript
 var alert = document.createElement('div');
 alert.className = 'alert alert--success';
 alert.textContent = 'This is a success message!';
 document.body.appendChild(alert);
-```
+
+```text
 
 **Verify:**
+
 - [ ] Green left border
 - [ ] Dark background
 - [ ] Readable text
 
 **3. Test Modal:**
+
 ```html
 <div class="modal">
   <div class="modal__backdrop"></div>
@@ -241,9 +280,11 @@ document.body.appendChild(alert);
     </div>
   </div>
 </div>
-```
+
+```text
 
 **Verify:**
+
 - [ ] Backdrop is visible with blur
 - [ ] Modal has dark background
 - [ ] Close button works
@@ -255,7 +296,8 @@ document.body.appendChild(alert);
 
 ### Step 7: Enable Advanced Features (Optional, 5 minutes)
 
-**What:** Use new features like custom hooks, React components, and full-page layouts.
+**What:** Use new features like custom hooks, React components, and full-page
+layouts.
 
 **Why:** These speed up development significantly.
 
@@ -273,11 +315,11 @@ function Button(props) {
   var variant = props.variant || 'primary';
   var size = props.size || 'default';
   var className = 'button button--' + variant;
-  
+
   if (size !== 'default') {
     className = className + ' button--' + size;
   }
-  
+
   return React.createElement(
     'button',
     {
@@ -291,7 +333,8 @@ function Button(props) {
 }
 
 export { Button };
-```
+
+```text
 
 **Option B: Use Custom Hooks**
 
@@ -324,11 +367,13 @@ function useTheme() {
 }
 
 export { useTheme };
-```
+
+```text
 
 **Option C: Use Full-Page Layouts**
 
 Browse `/docs/dark-mode-composition-patterns.md` for 10 complete page layouts:
+
 - Dashboard
 - Blog post
 - Portfolio gallery
@@ -340,7 +385,7 @@ Browse `/docs/dark-mode-composition-patterns.md` for 10 complete page layouts:
 - Content management
 - Event detail
 
-**Copy-paste the HTML structure and it just works!**
+## Copy-paste the HTML structure and it just works
 
 ---
 
@@ -348,37 +393,43 @@ Browse `/docs/dark-mode-composition-patterns.md` for 10 complete page layouts:
 
 **What:** Explore the comprehensive documentation.
 
-**Why:** You'll discover features and best practices that improve your development.
+**Why:** You'll discover features and best practices that improve your
+development.
 
 **Action:**
 
-**Browse these guides based on your needs:**
+## Browse these guides based on your needs
 
-**Quick Reference (5 min):**
+## Quick Reference (5 min)
+
 - `/docs/dark-mode-quick-reference.md`
 - `/docs/dark-mode-desk-reference-card.md`
 
-**Implementation (30 min):**
+## Implementation (30 min)
+
 - `/docs/dark-mode-usage-guide.md`
 - `/docs/dark-mode-component-showcase.md`
 
-**Advanced (2 hours):**
+## Advanced (2 hours)
+
 - `/docs/dark-mode-composition-patterns.md`
 - `/docs/dark-mode-react-examples.md`
 - `/docs/dark-mode-customization-guide.md`
 
 **Master Index:**
+
 - `/docs/README-dark-mode.md` (complete navigation)
 
-**Bookmark these for future reference.**
+## Bookmark these for future reference
 
 ---
 
 ## ✅ Post-Migration Checklist
 
-**Verify everything works:**
+## Verify everything works
 
 **Visual Tests:**
+
 - [ ] Dark mode activates (`document.documentElement.classList.add('dark')`)
 - [ ] Background is atomic black (#0F0F0F)
 - [ ] Text is cream (#F6F2EB)
@@ -387,25 +438,29 @@ Browse `/docs/dark-mode-composition-patterns.md` for 10 complete page layouts:
 - [ ] Hover effects work on buttons/cards
 
 **Functional Tests:**
+
 - [ ] Theme toggle button works (if implemented)
 - [ ] Keyboard navigation shows pink focus indicators
 - [ ] All forms are accessible
 - [ ] Modals close with Escape key
 - [ ] No console errors
 
-**Accessibility Tests:**
+## Accessibility Tests
+
 - [ ] Tab key navigates all interactive elements
 - [ ] Focus indicators are visible (3px pink outline)
 - [ ] Screen reader announces all content
 - [ ] Contrast ratios meet WCAG AA (4.5:1 minimum)
 
 **Performance Tests:**
+
 - [ ] Page load time is acceptable
 - [ ] No layout shift
 - [ ] Animations are smooth
 - [ ] CSS files load correctly
 
 **Browser Tests:**
+
 - [ ] Chrome: All features work
 - [ ] Firefox: All features work
 - [ ] Safari: All features work
@@ -417,7 +472,7 @@ Browse `/docs/dark-mode-composition-patterns.md` for 10 complete page layouts:
 
 ## 🎉 Migration Complete
 
-```
+```text
 ╔══════════════════════════════════════════════════════════╗
 ║                                                          ║
 ║   ✅ MIGRATION SUCCESSFUL                                ║
@@ -431,7 +486,8 @@ Browse `/docs/dark-mode-composition-patterns.md` for 10 complete page layouts:
 ║   🚀 Ready to build with v2.0.0!                         ║
 ║                                                          ║
 ╚══════════════════════════════════════════════════════════╝
-```
+
+```text
 
 ---
 
@@ -444,23 +500,30 @@ Browse `/docs/dark-mode-composition-patterns.md` for 10 complete page layouts:
 **Cause:** v2.0.0 enhanced styles are applying to existing components
 
 **Solution 1:** Review the changes (they're improvements!)
+
 - Enhanced contrast ratios (better accessibility)
 - Improved hover effects (better UX)
 - Better spacing (improved readability)
 
 **Solution 2:** Opt out specific components
+
 ```css
 /* Override v2.0.0 styles for specific element */
 .my-legacy-component {
   /* Your v1.0.0 styles */
 }
-```
+
+```text
 
 **Solution 3:** Use v1.0.0 backup
+
 ```bash
+
 # Restore v1.0.0 if needed
+
 cp styles/themes-backup-*/dark.css styles/themes/dark.css
-```
+
+```text
 
 ---
 
@@ -479,11 +542,13 @@ console.log(element.className);
 
 // Compare with documentation
 // /docs/dark-mode-component-showcase.md
-```
+
+```text
 
 **Common mistakes:**
+
 - Using `btn` instead of `button`
-- Using `modal-dialog` instead of `modal__dialog` (note the BEM separator `__`)
+- Using `modal-dialog` instead of `modal_*dialog` (note the BEM separator `*_`)
 - Using Tailwind utilities instead of BEM classes
 
 ---
@@ -500,17 +565,23 @@ console.log(element.className);
 @import "./themes/light.css";
 @import "./themes/dark.css";
 @import "./themes/dark-extended.css";  /* ← Must be present */
-```
+
+```text
 
 **Check file paths:**
+
 ```bash
+
 # Verify files exist
+
 ls -la styles/themes/dark.css
 ls -la styles/themes/dark-extended.css
 
 # Check import paths match
+
 cat styles/globals.css | grep dark
-```
+
+```text
 
 ---
 
@@ -521,11 +592,14 @@ cat styles/globals.css | grep dark
 **Solution 1:** Enable gzip compression (server-side)
 
 ```nginx
+
 # Nginx config
+
 gzip on;
 gzip_types text/css;
-gzip_comp_level 6;
-```
+gzip*comp*level 6;
+
+```text
 
 **Solution 2:** Load extended components asynchronously
 
@@ -540,17 +614,21 @@ function loadExtendedComponents() {
 
 // Load on first interaction
 document.addEventListener('click', loadExtendedComponents, { once: true });
-```
+
+```text
 
 **Solution 3:** Minify CSS files
 
 ```bash
+
 # Using cssnano
+
 npx cssnano styles/themes/dark.css styles/themes/dark.min.css
 npx cssnano styles/themes/dark-extended.css styles/themes/dark-extended.min.css
 
 # Update imports to use .min.css
-```
+
+```text
 
 ---
 
@@ -558,14 +636,20 @@ npx cssnano styles/themes/dark-extended.css styles/themes/dark-extended.min.css
 
 **Good news:** There are **zero breaking changes** in v2.0.0!
 
-All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug or configuration issue, not a breaking change.
+All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug
+or configuration issue, not a breaking change.
 
 **To debug:**
+
 1. Check browser console for errors
-2. Verify CSS files are loading (Network tab)
-3. Confirm `.dark` class is on `<html>` element
-4. Check BEM class names are correct
-5. Review documentation for component usage
+
+1. Verify CSS files are loading (Network tab)
+
+1. Confirm `.dark` class is on `<html>` element
+
+1. Check BEM class names are correct
+
+1. Review documentation for component usage
 
 ---
 
@@ -574,19 +658,23 @@ All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug 
 ### Additions (No Breaking Changes)
 
 **New CSS File:**
+
 - ✅ `dark-extended.css` (1,000 lines of new component styles)
 
 **Enhanced CSS File:**
+
 - ✅ `dark.css` expanded from 524 to 1,047 lines
 
-**New Components (39 types):**
+## New Components (39 types)
+
 - ✅ 4 navigation components
 - ✅ 16 content components
 - ✅ 11 form components
 - ✅ 10 feedback components
 - ✅ 8 layout components
 
-**Enhanced Components (15 types):**
+## Enhanced Components (15 types)
+
 - ✅ Buttons (added hover glow, focus states, variants)
 - ✅ Cards (added hover effects, featured variant, structure)
 - ✅ Forms (added focus glow, error states)
@@ -594,7 +682,8 @@ All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug 
 - ✅ Footer (enhanced styling)
 - ✅ And 10 more...
 
-**New Documentation (19 files, 11,000+ lines):**
+## New Documentation (19 files, 11,000+ lines)
+
 - ✅ Quick start guides (3)
 - ✅ Implementation guides (3)
 - ✅ Developer resources (2)
@@ -617,16 +706,19 @@ All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug 
 ### Immediate (Today)
 
 1. **Explore new components**
+
    - Browse `/docs/dark-mode-component-showcase.md`
    - Try out 5-10 new component types
    - Bookmark for future reference
 
-2. **Update existing components** (optional)
+1. **Update existing components** (optional)
+
    - Convert Tailwind utilities to BEM classes
    - Get enhanced hover effects and accessibility
    - See `/docs/dark-mode-usage-guide.md` for patterns
 
-3. **Test accessibility**
+1. **Test accessibility**
+
    - Tab through your app
    - Verify focus indicators are visible
    - Test with screen reader
@@ -635,16 +727,19 @@ All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug 
 ### This Week
 
 1. **Build a new feature**
+
    - Use full-page layout from composition patterns
    - Try React components if using React
    - Reference documentation as needed
 
-2. **Customize colors** (if desired)
+1. **Customize colors** (if desired)
+
    - Follow `/docs/dark-mode-customization-guide.md`
    - Create brand theme variant
    - Test contrast ratios
 
-3. **Deploy to production**
+1. **Deploy to production**
+
    - Follow `/tasks/dark-mode-implementation-checklist.md`
    - Run full verification (200+ checks)
    - Monitor performance
@@ -652,16 +747,19 @@ All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug 
 ### This Month
 
 1. **Review maintenance guide**
+
    - Set up monthly accessibility audits
    - Create maintenance schedule
    - Document any customizations
 
-2. **Train team members**
+1. **Train team members**
+
    - Share documentation with team
    - Run quick start workshop (10 minutes)
    - Establish coding standards
 
-3. **Plan enhancements**
+1. **Plan enhancements**
+
    - Review `/docs/dark-mode-future-roadmap.md`
    - Prioritize optional features
    - Gather user feedback
@@ -696,10 +794,12 @@ All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug 
 ## ✅ Migration Checklist Summary
 
 **Pre-Migration:**
+
 - [ ] Created backup of current code
 - [ ] Verified v1.0.0 is currently running
 
 **Migration:**
+
 - [ ] Added dark-extended.css file (already exists)
 - [ ] Updated globals.css imports (already done)
 - [ ] Tested dark mode still works
@@ -710,6 +810,7 @@ All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug 
 - [ ] (Optional) Reviewed documentation
 
 **Post-Migration:**
+
 - [ ] All visual tests pass
 - [ ] All functional tests pass
 - [ ] All accessibility tests pass
@@ -720,7 +821,7 @@ All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug 
 
 ---
 
-```
+```text
 ╔════════════════════════════════════════════════════════════╗
 ║                                                            ║
 ║   🎉 WELCOME TO DARK MODE v2.0.0!                          ║
@@ -734,14 +835,15 @@ All v1.0.0 code is 100% compatible with v2.0.0. If something breaks, it's a bug 
 ║   Time to build amazing dark mode interfaces! 🚀          ║
 ║                                                            ║
 ╚════════════════════════════════════════════════════════════╝
-```
+
+```text
 
 ---
 
-**Migration Guide Version:** 1.0  
-**Dark Mode Version:** 2.0.0  
-**Last Updated:** March 11, 2026  
-**Estimated Migration Time:** 15-30 minutes  
+**Migration Guide Version:** 1.0
+**Dark Mode Version:** 2.0.0
+**Last Updated:** March 11, 2026
+**Estimated Migration Time:** 15-30 minutes
 **Breaking Changes:** None ✅
 
-**🚀 Happy building with v2.0.0!**
+## 🚀 Happy building with v2.0.0

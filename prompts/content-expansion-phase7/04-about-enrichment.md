@@ -9,20 +9,26 @@
 
 ## Objective
 
-Use the professional profiles (v1 & v2), yearly cycle narrative, legacy content, and identity material from `/docs/website-content.md` to enrich the About sub-pages and Press/Bio page. The goal is richer, more compelling personal storytelling — not a LinkedIn resume.
+Use the professional profiles (v1 & v2), yearly cycle narrative, legacy content,
+and identity material from `/docs/website-content.md` to enrich the About
+sub-pages and Press/Bio page. The goal is richer, more compelling personal
+storytelling — not a LinkedIn resume.
 
 ---
 
 ## Source Material
 
 **Primary source:** `/docs/website-content.md` — sections:
+
 - "LightSpeed / Ashley 'Ash' Ward Shaw - Professional Profile v1" (ChatGPT-generated)
 - "LightSpeed / Ashley 'Ash' Ward Shaw - Professional Profile v2" (revised, content strategy emphasis)
 - Legacy & What People Will Remember (from Book section)
 - Yearly cycle description (from Guidelines.md / various sections)
 - Ash's entrepreneurial philosophy (from Company History section)
 
-**Note on professional profiles:** Both v1 and v2 are AI-generated starting points. They must be adapted to:
+**Note on professional profiles:** Both v1 and v2 are AI-generated starting
+points. They must be adapted to:
+
 - Remove commercial tone ("LightSpeed agency" pitch → "Ash's work")
 - Focus on personal identity, creativity, and community
 - Keep the art project framing (no services, no booking)
@@ -34,7 +40,9 @@ Use the professional profiles (v1 & v2), yearly cycle narrative, legacy content,
 ## Audit Steps
 
 ### Step 1: Review all About sub-page data
+
 **Files to check:**
+
 - `/data/mock/pages/about.ts` — Main About landing page
 - `/data/mock/pages/about-subpages.ts` — All sub-pages: bioPageData, berlinPageData, lightspeedPageData, etc.
 - `/data/mock/pages/press.ts` — Press/bio page
@@ -42,6 +50,7 @@ Use the professional profiles (v1 & v2), yearly cycle narrative, legacy content,
 - `/data/mock/sections/about.ts` — About section snippets
 
 Document:
+
 - What biographical content currently exists
 - Whether the professional summary reflects the v2 profile level of depth
 - Whether the yearly cycle (Cape Town → Berlin → Thailand → back) is described anywhere
@@ -79,22 +88,27 @@ Compare against profile v2 content areas:
 
 ### Step 4: Yearly cycle content
 
-The yearly cycle is central to Ash's identity. It should be described richly in the About/Bio data:
+The yearly cycle is central to Ash's identity. It should be described richly in
+the About/Bio data:
 
-**Correct pattern (from Guidelines + website-content.md):**
+## Correct pattern (from Guidelines + website-content.md)
+
 - **Base:** Cape Town, Woodstock (owns a house — permanent home)
 - **May:** Travels to Berlin for techno season
 - **Aug–Sep:** Returns briefly to South Africa to swap bicycles
 - **Sep–Nov:** Koh Phangan, Thailand — Muay Thai training, triathlon, remote work, island life
 - **Nov:** Returns to Cape Town for South African summer festival season (Origin, Vortex, etc.)
 
-This cycle is what *fuels* his creative energy. The narrative should convey this as a lifestyle design choice, not just a travel itinerary.
+This cycle is what *fuels* his creative energy. The narrative should convey this
+as a lifestyle design choice, not just a travel itinerary.
 
 ### Step 5: Professional biography — adapting profiles v1 & v2
 
-**From profile v2, extract and adapt (adjusted for personal art project framing):**
+**From profile v2, extract and adapt (adjusted for personal art project
+framing):**
 
 Key skills to represent:
+
 - WordPress & WooCommerce (co-founder of LSX Design System, Tour Operator plugin)
 - UI/UX & design systems (Figma, theme.json)
 - Community (WordCamp organiser & speaker, 20+ events across 4 continents)
@@ -102,23 +116,33 @@ Key skills to represent:
 - Content strategy & editorial workflows
 - Open-source contributor
 
-**Entrepreneurial philosophy (from Company History):**
-> "I've always been entrepreneurial, but I really didn't like working for an employer. I have my own ideas and things that drive me. I have my own way — when you work for somebody else they tell you what to do and I would prefer to decide what I do. Throughout my whole life, I've designed my life the way I want to live it."
+## Entrepreneurial philosophy (from Company History)
 
-> "You never know if you're ready to start a business, but I knew that I didn't want to work at City Varsity for another year."
+> "I've always been entrepreneurial, but I really didn't like working for an
+employer. I have my own ideas and things that drive me. I have my own way — when
+you work for somebody else they tell you what to do and I would prefer to decide
+what I do. Throughout my whole life, I've designed my life the way I want to
+live it."
+
+> "You never know if you're ready to start a business, but I knew that I didn't
+want to work at City Varsity for another year."
 
 These quotes should appear in biography or About sub-page data.
 
 ### Step 6: Press-ready bio
 
 The Press page should contain:
+
 1. **Short bio** (50–80 words): Suitable for event programmes, podcast introductions
-2. **Medium bio** (150–200 words): Suitable for WordCamp speaker profiles, magazine features
-3. **Long bio** (300–400 words): Full biographical overview for press kits
+
+1. **Medium bio** (150–200 words): Suitable for WordCamp speaker profiles, magazine features
+
+1. **Long bio** (300–400 words): Full biographical overview for press kits
 
 All three should be in the data layer at `/data/mock/pages/press.ts`.
 
-**Writing guidelines:**
+## Writing guidelines
+
 - Sentence case for headings, title case for proper nouns only
 - He/Him pronouns
 - Lead with creativity, community, and lifestyle — not just tech credentials
@@ -130,24 +154,30 @@ All three should be in the data layer at `/data/mock/pages/press.ts`.
 ### Step 7: Update data files
 
 **Files to update:**
+
 1. `/data/mock/pages/about-subpages.ts` — `bioPageData`: yearly cycle, profile summary, key skills
-2. `/data/mock/pages/press.ts` — short/medium/long bios, quotes, speaking history
-3. `/data/mock/sections/about.ts` — Update any About section snippets that are too sparse
+
+1. `/data/mock/pages/press.ts` — short/medium/long bios, quotes, speaking history
+
+1. `/data/mock/sections/about.ts` — Update any About section snippets that are too sparse
 
 ---
 
 ## Output Format
 
 ### Section 1: Current state
+
 - Existing biographical content (field by field)
 - Current press page content
 - What yearly cycle description (if any) exists
 
 ### Section 2: Gap analysis
+
 - Missing content areas with priority ratings
 - Quote/narrative content not yet captured
 
 ### Section 3: New content
+
 - Short bio (50–80 words, press-ready)
 - Medium bio (150–200 words)
 - Long bio (300–400 words)
@@ -157,6 +187,7 @@ All three should be in the data layer at `/data/mock/pages/press.ts`.
 - Key skills/identity summary for bio page
 
 ### Section 4: Implementation
+
 - Updated `bioPageData` fields
 - Updated `pressPageData` fields
 - All sentence case applied
@@ -189,4 +220,5 @@ All three should be in the data layer at `/data/mock/pages/press.ts`.
 ---
 
 **Status:** Ready to execute
-**Next:** Run audit, write report, then run [05-content-accuracy.md](./05-content-accuracy.md)
+**Next:** Run audit, write report, then run
+[05-content-accuracy.md](./05-content-accuracy.md)

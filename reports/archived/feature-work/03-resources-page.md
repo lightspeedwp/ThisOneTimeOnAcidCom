@@ -36,7 +36,7 @@
 
 ## Page structure
 
-```
+```text
 /about/resources
 
 Hero
@@ -46,12 +46,15 @@ Hero
 
 Section 1: Where to begin (3 intro paragraphs)
 Section 2: First steps (5 tip cards in responsive grid)
-Section 3: The essential makeup kit (4 category cards: makeup, UV, tools, wisdom)
-Section 4: Brands worth knowing (5 brand cards: L'Oreal, Revlon, Essence, Make-Up Studio, Maybelline)
+Section 3: The essential makeup kit (4 category cards: makeup, UV, tools,
+wisdom)
+Section 4: Brands worth knowing (5 brand cards: L'Oreal, Revlon, Essence,
+Make-Up Studio, Maybelline)
 Section 5: How to practise (5 practice tip cards)
 Section 6: Skin safety essentials (8 safety guidelines list)
 Section 7: Explore more (3 cross-link cards: Toolkit, Portfolio, Videos)
-```
+
+```text
 
 ## Compliance
 

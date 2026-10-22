@@ -7,13 +7,15 @@
 
 ## Objective
 
-Create a tabbed dev tools page that demonstrates every rich-text styling element available within single-post/detail-page content bodies. One tab per content type, each styled with its assigned neon colour.
+Create a tabbed dev tools page that demonstrates every rich-text styling element
+available within single-post/detail-page content bodies. One tab per content
+type, each styled with its assigned neon colour.
 
 ---
 
 ## Page structure
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │  Breadcrumbs: Home > Developer Tools > Rich text specimens   │
 │  Badge: Content                                              │
@@ -53,7 +55,8 @@ Create a tabbed dev tools page that demonstrates every rich-text styling element
 │  └───────────────────────────────────────────────────────┘   │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
-```
+
+```text
 
 ---
 
@@ -62,6 +65,7 @@ Create a tabbed dev tools page that demonstrates every rich-text styling element
 ### Blog tab (neon pink)
 
 Demonstrate the complete blog post body styling:
+
 - Post title (h1 with neon pink gradient)
 - Meta bar: published date, category badge (pink), read time, author avatar + name
 - Opening paragraph with **bold**, *italic*, and [links](#)
@@ -85,6 +89,7 @@ Demonstrate the complete blog post body styling:
 ### Portfolio tab (neon green)
 
 Demonstrate the portfolio detail page content styling:
+
 - Entry title (h1 with neon green gradient)
 - Meta bar: date, location, event name, category badge (green)
 - Opening description paragraph
@@ -100,6 +105,7 @@ Demonstrate the portfolio detail page content styling:
 ### Video tab (neon blue)
 
 Demonstrate the video detail page content styling:
+
 - Video title (h1 with neon blue gradient)
 - Video embed placeholder (16:9 with play button overlay)
 - Meta bar: duration, views, likes, category badge (blue), publish date
@@ -114,6 +120,7 @@ Demonstrate the video detail page content styling:
 ### Podcast tab (neon purple)
 
 Demonstrate the podcast detail page content styling:
+
 - Episode title (h1 with neon purple gradient)
 - Cover image (square, album-art style)
 - Meta bar: episode number, season, duration, category badge (purple)
@@ -128,6 +135,7 @@ Demonstrate the podcast detail page content styling:
 ### Event tab (neon orange)
 
 Demonstrate the event detail page content styling:
+
 - Event name (h1 with neon orange gradient)
 - Date range badge, location, genre tags
 - Hero image
@@ -148,34 +156,44 @@ Demonstrate the event detail page content styling:
 ### Tab component
 
 Build a reusable tab component or use a simple state-driven approach:
+
 ```typescript
 var [activeTab, setActiveTab] = useState('blog');
-```
+
+```text
 
 Each tab button gets its neon colour as the active underline:
+
 ```css
-.rich-text-tabs__tab--blog.rich-text-tabs__tab--active {
+.rich-text-tabs_*tab--blog.rich-text-tabs*_tab--active {
   border-bottom-color: var(--wp--preset--color--neon-pink);
 }
-```
+
+```text
 
 ### Theme preview modes
 
 Provide 3 viewing modes:
-1. **Light** — forces light theme on the specimen container
-2. **Dark** — forces dark theme on the specimen container
-3. **Side by side** — renders the same specimen in two columns, one light, one dark
 
-Implementation: wrap specimen in a container with `.force-light` or `.force-dark` class that overrides CSS variables.
+1. **Light** — forces light theme on the specimen container
+
+1. **Dark** — forces dark theme on the specimen container
+
+1. **Side by side** — renders the same specimen in two columns, one light, one dark
+
+Implementation: wrap specimen in a container with `.force-light` or
+`.force-dark` class that overrides CSS variables.
 
 ### Data file
 
 All specimen content text lives in `/data/mock/ui/rich-text-specimens.ts`:
+
 ```typescript
 export const richTextSpecimens = {
   blog: {
     title: 'UV Makeup at Origin Festival 2026',
-    meta: { date: '2026-02-15', category: 'Festival', readTime: 8, author: 'Ash Shaw' },
+meta: { date: '2026-02-15', category: 'Festival', readTime: 8, author: 'Ash
+Shaw' },
     content: '...',
     faqs: [...],
   },
@@ -184,7 +202,8 @@ export const richTextSpecimens = {
   podcast: { ... },
   event: { ... },
 };
-```
+
+```text
 
 ---
 

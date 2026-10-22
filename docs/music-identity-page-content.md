@@ -1,13 +1,20 @@
-Ash — your screenshots are actually perfect for building a **music identity page**. They reveal clear patterns in your listening habits that we can turn into **content + design language** rather than just listing artists.
+Ash — your screenshots are actually perfect for building a **music identity
+page**. They reveal clear patterns in your listening habits that we can turn
+into **content + design language** rather than just listing artists.
 
 Below I’ve extracted the key signals from the screenshots and turned them into:
 
 1. **Content for the page**
-2. **Suggested sections**
-3. **Artist groups**
-4. **Tone / narrative**
-5. **A Figma prompt for designing the page**
-6. **A dev brief for the ashmakeup repo**
+
+1. **Suggested sections**
+
+1. **Artist groups**
+
+1. **Tone / narrative**
+
+1. **A Figma prompt for designing the page**
+
+1. **A dev brief for the ashmakeup repo**
 
 ---
 
@@ -97,22 +104,25 @@ This connects directly to your makeup work.
 
 # 3. Hero Section (content)
 
-**Title**
+## Title
 
 Soundtracks for the Dancefloor and the Canvas
 
-**Text**
+## Text
 
 Music has always been the engine behind my creativity.
 
-From psychedelic trance festivals to Berlin techno basements, the rhythms and textures of electronic music have shaped how I think about colour, energy, and movement.
+From psychedelic trance festivals to Berlin techno basements, the rhythms and
+textures of electronic music have shaped how I think about colour, energy, and
+movement.
 
 Some artists push the mind outward.
 Some pull it inward.
 
-Together they form the soundtrack behind the makeup, the festivals, the travel, and the long nights creating.
+Together they form the soundtrack behind the makeup, the festivals, the travel,
+and the long nights creating.
 
-**CTA**
+## CTA
 
 Listen on Spotify
 [https://open.spotify.com/user/31sfctixrywxowo6b3qs6p4s655a](https://open.spotify.com/user/31sfctixrywxowo6b3qs6p4s655a)
@@ -135,7 +145,8 @@ Man With No Name
 
 Text:
 
-Psytrance festivals were some of the first places where music, art, colour, and community merged into something magical.
+Psytrance festivals were some of the first places where music, art, colour, and
+community merged into something magical.
 These artists helped shape that journey.
 
 ---
@@ -155,7 +166,8 @@ Ben Böhmer
 
 Text:
 
-Electronic music creates landscapes you can travel through without leaving the dancefloor.
+Electronic music creates landscapes you can travel through without leaving the
+dancefloor.
 
 ---
 
@@ -190,7 +202,8 @@ Pixies
 
 Text:
 
-Before festivals and electronic music, these bands opened the door to experimentation and atmosphere.
+Before festivals and electronic music, these bands opened the door to
+experimentation and atmosphere.
 
 ---
 
@@ -261,22 +274,28 @@ You can paste this directly into Figma AI.
 
 ---
 
-**Figma Prompt**
+## Figma Prompt
 
 Design a funky editorial music page for a personal portfolio website.
 
 Theme: electronic music, psychedelic festivals, Berlin techno culture.
 
-The page should feel like a hybrid of a festival poster and a modern music magazine layout.
+The page should feel like a hybrid of a festival poster and a modern music
+magazine layout.
 
 Sections to include:
 
 1. Hero section with headline "Soundtracks for the Dancefloor and the Canvas" and a Spotify profile link.
-2. Psychedelic trance artists section with cards for artists like Hallucinogen, Shpongle, Electric Universe and 1200 Micrograms.
-3. Electronic music section featuring artists like Underworld, Orbital, Massive Attack, Ben Bohmer and Rufus Du Sol.
-4. Dark alternative section with artists like Nine Inch Nails, Tool and Marilyn Manson.
-5. Classic music roots section with artists like The Doors, David Bowie and Talking Heads.
-6. Spotify mixes section with album-style cards for Daily Mix playlists.
+
+1. Psychedelic trance artists section with cards for artists like Hallucinogen, Shpongle, Electric Universe and 1200 Micrograms.
+
+1. Electronic music section featuring artists like Underworld, Orbital, Massive Attack, Ben Bohmer and Rufus Du Sol.
+
+1. Dark alternative section with artists like Nine Inch Nails, Tool and Marilyn Manson.
+
+1. Classic music roots section with artists like The Doors, David Bowie and Talking Heads.
+
+1. Spotify mixes section with album-style cards for Daily Mix playlists.
 
 Design style:
 
@@ -289,7 +308,8 @@ album-art style cards
 asymmetrical layout
 editorial typography
 
-The layout should feel energetic, artistic and music-driven, similar to a festival website or music culture magazine.
+The layout should feel energetic, artistic and music-driven, similar to a
+festival website or music culture magazine.
 
 ---
 
@@ -297,36 +317,40 @@ The layout should feel energetic, artistic and music-driven, similar to a festiv
 
 Add new page:
 
-```
+```text
 /about/music
-```
+
+```text
 
 Components:
 
-```
+```text
 MusicHero
 ArtistGrid
 ArtistCard
 PlaylistCard
 SpotifyCTA
 MusicStorySection
-```
+
+```text
 
 Data file:
 
-```
+```text
 /data/music/artists.ts
-```
+
+```text
 
 Structure:
 
-```
+```text
 artists
   psychedelic
   electronic
   alternative
   roots
-```
+
+```text
 
 ---
 
@@ -351,4 +375,5 @@ If you'd like, I can also:
 • Design the **exact layout structure for the page**
 • Generate **real Figma wireframes**
 • Create **JSON data for the repo**
-• Turn this into a **perfect GitHub issue / dev brief** for the ashmakeup project.
+• Turn this into a **perfect GitHub issue / dev brief** for the ashmakeup
+project.

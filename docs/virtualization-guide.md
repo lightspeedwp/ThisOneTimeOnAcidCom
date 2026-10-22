@@ -5,40 +5,51 @@ created: "2026-03-12"
 modified: "2026-03-12"
 version: "1.0.0"
 related_docs:
-  - "/docs/performance-profiling.md"
-  - "/docs/component-composition-guide.md"
+
+- "/docs/performance-profiling.md"
+- "/docs/component-composition-guide.md"
 ---
 
 # Virtualization Guide
 
-**Created:** March 12, 2026  
-**Last Updated:** March 12, 2026  
+**Created:** March 12, 2026
+**Last Updated:** March 12, 2026
 **Status:** Active
 
 ---
 
 ## Overview
 
-This guide demonstrates when and how to use virtualization (windowing) to optimize rendering of large lists in the Nova News application. Virtualization only renders visible items, dramatically improving performance for lists with 100+ items.
+This guide demonstrates when and how to use virtualization (windowing) to
+optimize rendering of large lists in the Nova News application. Virtualization
+only renders visible items, dramatically improving performance for lists with
+100+ items.
 
-**Key Concept:** Instead of rendering 1,000 blog posts (slow), render only the 10 visible posts (fast).
+**Key Concept:** Instead of rendering 1,000 blog posts (slow), render only the
+10 visible posts (fast).
 
 ---
 
 ## Table of Contents
 
 1. [What is Virtualization?](#what-is-virtualization)
-2. [When to Use Virtualization](#when-to-use-virtualization)
-3. [React Window vs React Virtualized](#react-window-vs-react-virtualized)
-4. [Implementation Examples](#implementation-examples)
-5. [Best Practices](#best-practices)
-6. [Performance Comparison](#performance-comparison)
+
+1. [When to Use Virtualization](#when-to-use-virtualization)
+
+1. [React Window vs React Virtualized](#react-window-vs-react-virtualized)
+
+1. [Implementation Examples](#implementation-examples)
+
+1. [Best Practices](#best-practices)
+
+1. [Performance Comparison](#performance-comparison)
 
 ---
 
-## What is Virtualization?
+## What is Virtualization
 
-**Virtualization** (also called "windowing") is a technique that renders only visible items in a large list, instead of rendering all items at once.
+**Virtualization** (also called "windowing") is a technique that renders only
+visible items in a large list, instead of rendering all items at once.
 
 ### Without Virtualization
 
@@ -49,9 +60,11 @@ This guide demonstrates when and how to use virtualization (windowing) to optimi
     <BlogCard key={post.id} {...post} />
   ))}
 </div>
-```
+
+```text
 
 **Result:**
+
 - 1,000 DOM nodes
 - 1,000 images loaded
 - Render time: ~500ms
@@ -68,16 +81,18 @@ This guide demonstrates when and how to use virtualization (windowing) to optimi
   width="100%"
 >
   {({ index, style }) => (
-    <BlogCard 
-      key={blogPosts[index].id} 
-      {...blogPosts[index]} 
+    <BlogCard
+      key={blogPosts[index].id}
+      {...blogPosts[index]}
       style={style}
     />
   )}
 </FixedSizeList>
-```
+
+```text
 
 **Result:**
+
 - 10-15 DOM nodes (only visible items)
 - 10-15 images loaded
 - Render time: ~20ms
@@ -89,37 +104,44 @@ This guide demonstrates when and how to use virtualization (windowing) to optimi
 
 ## When to Use Virtualization
 
-### ✅ Use Virtualization When:
+### ✅ Use Virtualization When
 
 1. **Large Lists (100+ items)**
+
    - Blog archive with 500+ posts
    - Portfolio grid with 200+ entries
    - Search results with 1,000+ items
 
-2. **Fixed-Size Items**
+1. **Fixed-Size Items**
+
    - All items have same height (e.g., BlogCard, PortfolioCard)
    - Items have predictable heights
 
-3. **Performance Issues**
+1. **Performance Issues**
+
    - Slow initial render (> 100ms)
    - Janky scrolling (< 60 FPS)
    - High memory usage
 
-### ❌ Don't Use Virtualization When:
+### ❌ Don't Use Virtualization When
 
 1. **Small Lists (< 50 items)**
+
    - Overhead of virtualization not worth it
    - Simple pagination is better
 
-2. **Variable-Size Items**
+1. **Variable-Size Items**
+
    - Items have unpredictable heights
    - Requires complex height calculation
 
-3. **SEO-Critical Content**
+1. **SEO-Critical Content**
+
    - Virtualized items not in DOM → not crawled by search engines
    - Use server-side rendering + pagination instead
 
-4. **Print-Friendly Pages**
+1. **Print-Friendly Pages**
+
    - Users need to print entire list
    - Virtualization breaks print layout
 
@@ -137,13 +159,15 @@ This guide demonstrates when and how to use virtualization (windowing) to optimi
 | Features | Basic | Advanced (grid, masonry) |
 | Maintenance | Active | Maintenance mode |
 
-**Recommendation:** Use **react-window** for Nova News (smaller, simpler, faster).
+**Recommendation:** Use **react-window** for Nova News (smaller, simpler,
+faster).
 
 ### Installation
 
 ```bash
 npm install react-window
-```
+
+```text
 
 ---
 
@@ -151,18 +175,18 @@ npm install react-window
 
 ### Example 1: Fixed-Size List (Blog Posts)
 
-**Basic Implementation:**
+## Basic Implementation
 
 ```tsx
 import { FixedSizeList } from 'react-window';
 
 function BlogArchivePage() {
   const posts = blogData.posts; // 500 posts
-  
+
   return (
     <div className="blog-archive">
       <h1>All blog posts</h1>
-      
+
       <FixedSizeList
         height={800} // Viewport height
         itemCount={posts.length} // Total items
@@ -178,7 +202,8 @@ function BlogArchivePage() {
     </div>
   );
 }
-```
+
+```text
 
 **Key Props:**
 
@@ -196,27 +221,28 @@ function BlogArchivePage() {
     <BlogCard {...posts[index]} />
   </div>
 )}
-```
+
+```text
 
 ---
 
 ### Example 2: Variable-Size List (Dynamic Heights)
 
-**Use `VariableSizeList` when item heights differ:**
+## Use `VariableSizeList` when item heights differ
 
 ```tsx
 import { VariableSizeList } from 'react-window';
 
 function PortfolioArchivePage() {
   const entries = portfolioData.entries;
-  
+
   // Function to calculate item height
   const getItemSize = (index: number) => {
     const entry = entries[index];
     // Featured entries are taller
     return entry.featured ? 400 : 300;
   };
-  
+
   return (
     <VariableSizeList
       height={800}
@@ -232,13 +258,14 @@ function PortfolioArchivePage() {
     </VariableSizeList>
   );
 }
-```
+
+```text
 
 ---
 
 ### Example 3: Grid Layout (Portfolio Grid)
 
-**Use `FixedSizeGrid` for 2D grids:**
+## Use `FixedSizeGrid` for 2D grids
 
 ```tsx
 import { FixedSizeGrid } from 'react-window';
@@ -247,7 +274,7 @@ function PortfolioGridPage() {
   const entries = portfolioData.entries;
   const columnCount = 3; // 3 columns
   const rowCount = Math.ceil(entries.length / columnCount);
-  
+
   return (
     <FixedSizeGrid
       columnCount={columnCount}
@@ -260,9 +287,9 @@ function PortfolioGridPage() {
       {({ columnIndex, rowIndex, style }) => {
         const index = rowIndex * columnCount + columnIndex;
         const entry = entries[index];
-        
+
         if (!entry) return null;
-        
+
         return (
           <div style={style}>
             <PortfolioCard {...entry} />
@@ -272,13 +299,14 @@ function PortfolioGridPage() {
     </FixedSizeGrid>
   );
 }
-```
+
+```text
 
 ---
 
 ### Example 4: Infinite Scrolling with react-window
 
-**Combine virtualization with infinite scroll:**
+## Combine virtualization with infinite scroll
 
 ```tsx
 import { FixedSizeList } from 'react-window';
@@ -288,24 +316,24 @@ function InfiniteBlogList() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // Load more items
   const loadMoreItems = async (startIndex: number, stopIndex: number) => {
     if (isLoading) return;
-    
+
     setIsLoading(true);
     const newPosts = await fetchBlogPosts(startIndex, stopIndex);
     setPosts(prev => [...prev, ...newPosts]);
     setHasNextPage(newPosts.length > 0);
     setIsLoading(false);
   };
-  
+
   // Check if item is loaded
   const isItemLoaded = (index: number) => !hasNextPage || index < posts.length;
-  
+
   // Total item count (including placeholders)
   const itemCount = hasNextPage ? posts.length + 1 : posts.length;
-  
+
   return (
     <InfiniteLoader
       isItemLoaded={isItemLoaded}
@@ -323,7 +351,7 @@ function InfiniteBlogList() {
         >
           {({ index, style }) => {
             const post = posts[index];
-            
+
             if (!isItemLoaded(index)) {
               return (
                 <div style={style}>
@@ -331,7 +359,7 @@ function InfiniteBlogList() {
                 </div>
               );
             }
-            
+
             return (
               <div style={style}>
                 <BlogCard {...post} />
@@ -343,13 +371,14 @@ function InfiniteBlogList() {
     </InfiniteLoader>
   );
 }
-```
+
+```text
 
 ---
 
 ### Example 5: Custom Styling with BEM
 
-**Override inline styles with BEM classes:**
+## Override inline styles with BEM classes
 
 ```tsx
 import { FixedSizeList } from 'react-window';
@@ -365,8 +394,8 @@ function StyledBlogList() {
       outerElementType={CustomScrollbar} // Custom scrollbar
     >
       {({ index, style }) => (
-        <article 
-          style={style} 
+        <article
+          style={style}
           className="blog-card-wrapper" // BEM class
         >
           <BlogCard {...posts[index]} />
@@ -378,13 +407,14 @@ function StyledBlogList() {
 
 // Custom scrollbar component
 const CustomScrollbar = React.forwardRef((props, ref) => (
-  <div 
-    {...props} 
-    ref={ref} 
+  <div
+    {...props}
+    ref={ref}
     className="custom-scrollbar" // BEM class for scrollbar
   />
 ));
-```
+
+```text
 
 **CSS:**
 
@@ -407,13 +437,14 @@ const CustomScrollbar = React.forwardRef((props, ref) => (
   /* Wrapper for each virtualized item */
   padding: var(--spacing-sm);
 }
-```
+
+```text
 
 ---
 
 ### Example 6: Responsive Grid with react-window
 
-**Adjust column count based on screen size:**
+## Adjust column count based on screen size
 
 ```tsx
 import { FixedSizeGrid } from 'react-window';
@@ -421,7 +452,7 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 
 function ResponsivePortfolioGrid() {
   const { width } = useWindowSize();
-  
+
   // Calculate column count based on screen width
   const getColumnCount = () => {
     if (width < 768) return 1; // Mobile
@@ -429,11 +460,11 @@ function ResponsivePortfolioGrid() {
     if (width < 1440) return 3; // Desktop
     return 4; // Desktop wide
   };
-  
+
   const columnCount = getColumnCount();
   const columnWidth = Math.floor(width / columnCount);
   const rowCount = Math.ceil(entries.length / columnCount);
-  
+
   return (
     <FixedSizeGrid
       columnCount={columnCount}
@@ -446,9 +477,9 @@ function ResponsivePortfolioGrid() {
       {({ columnIndex, rowIndex, style }) => {
         const index = rowIndex * columnCount + columnIndex;
         const entry = entries[index];
-        
+
         if (!entry) return null;
-        
+
         return (
           <div style={style}>
             <PortfolioCard {...entry} />
@@ -458,7 +489,8 @@ function ResponsivePortfolioGrid() {
     </FixedSizeGrid>
   );
 }
-```
+
+```text
 
 ---
 
@@ -466,7 +498,7 @@ function ResponsivePortfolioGrid() {
 
 ### 1. Use Memoization
 
-**Memoize item components to prevent unnecessary re-renders:**
+## Memoize item components to prevent unnecessary re-renders
 
 ```tsx
 // ❌ BAD - BlogCard re-renders on every scroll
@@ -488,11 +520,13 @@ const BlogCardMemo = React.memo(BlogCard);
     </div>
   )}
 </FixedSizeList>
-```
+
+```text
 
 ### 2. Set Overscan Count
 
-**Render extra items above/below viewport to reduce blank areas during fast scrolling:**
+**Render extra items above/below viewport to reduce blank areas during fast
+scrolling:**
 
 ```tsx
 <FixedSizeList
@@ -504,14 +538,15 @@ const BlogCardMemo = React.memo(BlogCard);
 >
   {renderRow}
 </FixedSizeList>
-```
 
-**Default:** `overscanCount={1}`  
+```text
+
+**Default:** `overscanCount={1}`
 **Recommended:** `overscanCount={3-5}` for smooth scrolling
 
 ### 3. Use Stable Keys
 
-**Always use stable, unique keys:**
+## Always use stable, unique keys
 
 ```tsx
 // ✅ GOOD - Stable ID from data
@@ -519,11 +554,12 @@ const BlogCardMemo = React.memo(BlogCard);
 
 // ❌ BAD - Index as key (can cause issues)
 <div key={index}>
-```
+
+```text
 
 ### 4. Measure Item Heights Accurately
 
-**For `VariableSizeList`, measure heights precisely:**
+## For `VariableSizeList`, measure heights precisely
 
 ```tsx
 // ❌ BAD - Guessed heights
@@ -543,34 +579,36 @@ const setItemHeight = (index: number, height: number) => {
     listRef.current?.resetAfterIndex(index);
   }
 };
-```
+
+```text
 
 ### 5. Handle Window Resize
 
-**Recalculate layout on window resize:**
+## Recalculate layout on window resize
 
 ```tsx
 import { useEffect, useRef } from 'react';
 
 function VirtualizedList() {
   const listRef = useRef<FixedSizeList>(null);
-  
+
   useEffect(() => {
     const handleResize = () => {
       listRef.current?.resetAfterIndex(0);
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
+
   return (
     <FixedSizeList ref={listRef} {...props}>
       {renderRow}
     </FixedSizeList>
   );
 }
-```
+
+```text
 
 ---
 
@@ -579,6 +617,7 @@ function VirtualizedList() {
 ### Benchmark: Rendering 1,000 Blog Posts
 
 **Test Setup:**
+
 - MacBook Pro M1, Chrome 120
 - 1,000 blog posts with images
 - Viewport: 800px × 600px
@@ -595,7 +634,7 @@ function VirtualizedList() {
 
 **Scenario:** Blog archive with 500 posts
 
-**Before Virtualization:**
+## Before Virtualization
 
 ```tsx
 function BlogPage() {
@@ -607,15 +646,17 @@ function BlogPage() {
     </div>
   );
 }
-```
+
+```text
 
 **Profiler Results:**
+
 - Render time: 324ms
 - DOM nodes: 500
 - Memory: 38MB
 - Lighthouse Performance: 72/100
 
-**After Virtualization:**
+## After Virtualization
 
 ```tsx
 import { FixedSizeList } from 'react-window';
@@ -637,15 +678,18 @@ function BlogPage() {
     </FixedSizeList>
   );
 }
-```
+
+```text
 
 **Profiler Results:**
+
 - Render time: 22ms
 - DOM nodes: 15
 - Memory: 4MB
 - Lighthouse Performance: 98/100
 
 **Improvement:**
+
 - 93% faster render
 - 97% fewer DOM nodes
 - 89% less memory
@@ -668,7 +712,8 @@ const handleImageLoad = (index: number) => {
   // Recalculate heights after index
   listRef.current?.resetAfterIndex(index);
 };
-```
+
+```text
 
 ### Issue 2: Blank White Space During Fast Scrolling
 
@@ -681,7 +726,8 @@ const handleImageLoad = (index: number) => {
   overscanCount={10} // Render 10 extra items
   {...props}
 />
-```
+
+```text
 
 ### Issue 3: Horizontal Scrollbar Appears
 
@@ -694,7 +740,8 @@ const handleImageLoad = (index: number) => {
   overflow-x: hidden;
   overflow-y: auto;
 }
-```
+
+```text
 
 ### Issue 4: SEO Issues (Items Not Indexed)
 
@@ -706,7 +753,7 @@ const handleImageLoad = (index: number) => {
 // ✅ SEO-friendly alternative
 function BlogPage({ page = 1 }) {
   const posts = blogData.posts.slice((page - 1) * 20, page * 20);
-  
+
   return (
     <>
       <div className="blog-grid">
@@ -718,7 +765,8 @@ function BlogPage({ page = 1 }) {
     </>
   );
 }
-```
+
+```text
 
 ---
 
@@ -726,7 +774,7 @@ function BlogPage({ page = 1 }) {
 
 ### 1. Small Lists (< 50 Items)
 
-**Use Simple Rendering:**
+## Use Simple Rendering
 
 ```tsx
 // ✅ GOOD - Simple list
@@ -735,7 +783,8 @@ function BlogPage({ page = 1 }) {
     <BlogCard key={post.id} {...post} />
   ))}
 </div>
-```
+
+```text
 
 ### 2. SEO-Critical Pages
 
@@ -745,7 +794,8 @@ function BlogPage({ page = 1 }) {
 // ✅ GOOD - Server-side rendered pages
 <BlogGrid posts={paginatedPosts} />
 <Pagination page={1} total={20} />
-```
+
+```text
 
 ### 3. Print-Friendly Pages
 
@@ -757,12 +807,13 @@ function BlogPage({ page = 1 }) {
   .virtualized-list {
     display: none;
   }
-  
+
   .print-list {
     display: block;
   }
 }
-```
+
+```text
 
 ---
 
@@ -771,12 +822,18 @@ function BlogPage({ page = 1 }) {
 This guide covered:
 
 1. ✅ What virtualization is (windowing technique)
-2. ✅ When to use virtualization (100+ items, fixed heights)
-3. ✅ react-window vs react-virtualized comparison
-4. ✅ Implementation examples (lists, grids, infinite scroll)
-5. ✅ Best practices (memoization, overscan, stable keys)
-6. ✅ Performance benchmarks (96% faster, 94% less memory)
-7. ✅ Common issues and solutions
+
+1. ✅ When to use virtualization (100+ items, fixed heights)
+
+1. ✅ react-window vs react-virtualized comparison
+
+1. ✅ Implementation examples (lists, grids, infinite scroll)
+
+1. ✅ Best practices (memoization, overscan, stable keys)
+
+1. ✅ Performance benchmarks (96% faster, 94% less memory)
+
+1. ✅ Common issues and solutions
 
 **Key Takeaways:**
 
@@ -793,5 +850,5 @@ This guide covered:
 
 ---
 
-**Last Updated:** March 12, 2026  
+**Last Updated:** March 12, 2026
 **Maintained By:** Development Team

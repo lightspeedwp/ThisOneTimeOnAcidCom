@@ -7,13 +7,15 @@ category: Festival Makeup
 date: 2023-08-26
 location: "Reiserfieber, Switzerland"
 tags:
-  - Reiserfieber
-  - Rainbow
-  - Bold
-  - Mountain
-  - Swiss
+
+- Reiserfieber
+- Rainbow
+- Bold
+- Mountain
+- Swiss
 featured: false
 ---
+
 # Mountain spirit
 
 Bold rainbow face stripe embodying the free spirit of Swiss mountain festivals.
@@ -22,4 +24,3 @@ Bold rainbow face stripe embodying the free spirit of Swiss mountain festivals.
 
 ![Mountain Spirit - rainbow face stripe at Reiserfieber, Switzerland]()
 *Rainbow stripe*
-

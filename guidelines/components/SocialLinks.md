@@ -1,6 +1,6 @@
 # SocialLinks Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 Social media link buttons with consistent styling and accessibility features.
@@ -8,6 +8,7 @@ Social media link buttons with consistent styling and accessibility features.
 ## Purpose
 
 Provide social media navigation with:
+
 - Instagram, Facebook, TikTok, LinkedIn, Email integration
 - Hover animations and visual feedback
 - Customizable icon sizes and colors
@@ -28,20 +29,21 @@ sequenceDiagram
     participant D as Mock Data
     participant B as Browser
     participant E as External Platform
-    
+
     Note over S: Component Mounts
     S->>D: Import socialLinks
-    D-->>S: Return 5 platforms<br/>(Instagram, Facebook, TikTok,<br/>LinkedIn, Email)
-    
+D-->>S: Return 5 platforms<br/>(Instagram, Facebook, TikTok,<br/>LinkedIn,
+Email)
+
     S-->>U: Render social icons with gradients
-    
+
     U->>S: Hover over Instagram icon
     S->>S: Apply hover styles<br/>(scale-110, shadow-xl)
     S-->>U: Visual feedback ✨
-    
+
     U->>S: Click Instagram link
     S->>S: Check target attribute
-    
+
     alt External Link (_blank)
         S->>B: Open in new tab
         B->>E: Navigate to Instagram
@@ -50,81 +52,84 @@ sequenceDiagram
         S->>B: Open default mail app
         B-->>U: Compose email to ashley@ashshaw.makeup ✅
     end
-```
+
+```text
 
 ### Platform-Specific Gradient Logic (Mermaid)
 
 ```mermaid
 flowchart TD
     A[Render SocialLinks] --> B[Load socialLinks data]
-    
+
     B --> C[Map over platforms]
-    
+
     C --> D{Which Platform?}
-    
+
     D -->|Instagram| E[Instagram Gradient<br/>#e1306c → #fd1d1d → #fcaf45]
     D -->|Facebook| F[Facebook Gradient<br/>#1877f2 → #42a5f5]
     D -->|TikTok| G[TikTok Gradient<br/>#000000 → #69C9D0]
     D -->|LinkedIn| H[LinkedIn Gradient<br/>#0077b5 → #00a0dc]
     D -->|Email| I[Email Gradient<br/>#10b981 → #059669]
-    
+
     E --> J[Apply gradient + white icon]
     F --> J
     G --> J
     H --> J
     I --> J
-    
+
     J --> K[Render Icon Button]
-    
+
     K --> L{User Interaction?}
-    
+
     L -->|Hover| M[Scale to 110%<br/>Increase shadow]
     L -->|Click| N[Navigate to platform]
     L -->|Focus| O[Show focus ring]
-    
+
     M --> P[Visual Feedback]
     N --> Q[Open link]
     O --> P
-    
+
     style E fill:#fed7aa,stroke:#f97316,stroke-width:2px
     style F fill:#dbeafe,stroke:#3b82f6,stroke-width:2px
     style H fill:#e0f2fe,stroke:#0ea5e9,stroke-width:2px
     style I fill:#dcfce7,stroke:#22c55e,stroke-width:2px
-```
+
+```text
 
 ### External Link Safety (Mermaid)
 
 ```mermaid
 flowchart TD
     A[User Clicks Social Link] --> B{Is Email?}
-    
+
     B -->|Yes| C[Email Link]
     B -->|No| D[External Link]
-    
+
     C --> E[Set target='_self']
     C --> F[No rel attribute]
     C --> G[Opens mail app]
     G --> H[User composes email ✅]
-    
+
     D --> I[Set target='_blank']
     D --> J[Add rel='noopener noreferrer']
-    
+
     J --> K[Prevents Security Issues]
-    
+
     K --> L[noopener:<br/>Prevents window.opener access]
     K --> M[noreferrer:<br/>No referrer info sent]
-    
+
     I --> N[Opens in new tab]
     N --> O[Navigate to platform]
-    
+
     L --> P[Secure Navigation ✅]
     M --> P
-    
+
     style E fill:#dcfce7,stroke:#22c55e,stroke-width:2px
     style I fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
     style K fill:#e0e7ff,stroke:#6366f1,stroke-width:2px
     style P fill:#dcfce7,stroke:#22c55e,stroke-width:3px
-```
+
+```text
 
 ### Responsive Layout States (Mermaid)
 
@@ -133,40 +138,43 @@ stateDiagram-v2
     [*] --> Desktop: Screen > 1024px
     [*] --> Tablet: Screen 768-1023px
     [*] --> Mobile: Screen < 768px
-    
+
     Desktop --> FooterRow: Footer context
     Desktop --> HeaderRow: Header context
     Desktop --> AboutGrid: About page
-    
+
     FooterRow --> HorizontalLayout: gap-fluid-md (16px)
     HeaderRow --> HorizontalLayout
     AboutGrid --> FlexWrap: gap-fluid-lg (24px)
-    
+
     HorizontalLayout --> IconSize48: w-12 h-12 (48px)
     FlexWrap --> IconSize48
-    
+
     Tablet --> FooterRow
     Tablet --> AboutGrid
-    
+
     Mobile --> FooterRow: Stack vertically
     Mobile --> MobileCentered: Center aligned
-    
+
     MobileCentered --> IconSize40: w-10 h-10 (40px)
-    
+
     note right of IconSize48
         Desktop & Tablet:
+
         - 48×48px icons
         - Full gradient visibility
         - Hover effects
     end note
-    
+
     note right of IconSize40
         Mobile:
+
         - 40×40px icons
         - Touch-friendly (44px min)
         - Tap feedback
     end note
-```
+
+```text
 
 ---
 
@@ -185,7 +193,8 @@ import { socialLinks } from '@/data/mock/ui/social-links';
 
 // Type import
 import type { SocialLink } from '@/data/types';
-```
+
+```text
 
 ### Available Platforms
 
@@ -199,7 +208,8 @@ The project includes **5 social media platforms**:
 | **LinkedIn** | `LinkedinLogo` | `https://linkedin.com/in/ashshaw` | Tertiary | `_blank` |
 | **Email** | `Mail` | `mailto:ashley@ashshaw.makeup` | Contact | - |
 
-**Note:** LinkedIn uses the `LinkedinLogo` icon from @phosphor-icons/react (verified).
+**Note:** LinkedIn uses the `LinkedinLogo` icon from @phosphor-icons/react
+(verified).
 
 ### Data Structure
 
@@ -211,7 +221,8 @@ export interface SocialLink {
   label: string;        // Accessible label (e.g., "Follow us on Instagram")
   primary?: boolean;    // Featured/priority link
 }
-```
+
+```text
 
 **Data location:** `/data/mock/ui/social-links.ts`
 
@@ -225,7 +236,7 @@ export function Footer() {
     <div className="flex gap-4">
       {socialLinks.map((link) => {
         const Icon = Icons[link.icon]; // Dynamic icon lookup
-        
+
         return (
           <a
             key={link.platform}
@@ -233,7 +244,8 @@ export function Footer() {
             target={link.platform !== 'email' ? '_blank' : undefined}
             rel={link.platform !== 'email' ? 'noopener noreferrer' : undefined}
             aria-label={link.label}
-            className="text-gray-600 hover:text-pink-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-pink-200 rounded-lg p-2"
+className="text-gray-600 hover:text-pink-500 transition-colors duration-300
+focus:outline-none focus:ring-2 focus:ring-pink-200 rounded-lg p-2"
           >
             <Icon className="w-6 h-6" />
           </a>
@@ -242,18 +254,23 @@ export function Footer() {
     </div>
   );
 }
-```
+
+```text
 
 ### Updating Social Links
 
-**To add, remove, or modify social links:**
+## To add, remove, or modify social links
 
 1. Edit `/data/mock/ui/social-links.ts`
-2. Update the `socialLinks` array
-3. Verify icon exists in @phosphor-icons/react (see [overview-icons.md](../overview-icons.md))
-4. Test changes across all components
+
+1. Update the `socialLinks` array
+
+1. Verify icon exists in @phosphor-icons/react (see [overview-icons.md](../overview-icons.md))
+
+1. Test changes across all components
 
 **Example:**
+
 ```typescript
 export const socialLinks: SocialLink[] = [
   {
@@ -271,9 +288,11 @@ export const socialLinks: SocialLink[] = [
     label: 'Follow us on Twitter'
   }
 ];
-```
 
-**See [Data System](../../data/README.md) for complete mock data documentation.**
+```text
+
+**See [Data System](../../data/README.md) for complete mock data
+documentation.**
 
 ---
 
@@ -285,26 +304,29 @@ export const socialLinks: SocialLink[] = [
 import { SocialLinks } from './components/common/SocialLinks';
 
 <SocialLinks />
-```
+
+```text
 
 ### With Custom Styling
 
 ```tsx
-<SocialLinks 
+<SocialLinks
   iconSize={24}
   className="text-white hover:text-pink-300"
 />
-```
+
+```text
 
 ### Custom Layout
 
 ```tsx
-<SocialLinks 
+<SocialLinks
   layout="vertical"
   showLabels={true}
   iconSize={20}
 />
-```
+
+```text
 
 ---
 
@@ -313,44 +335,52 @@ import { SocialLinks } from './components/common/SocialLinks';
 ```typescript
 interface SocialLinksProps {
   /**
+
    * Icon size in pixels
    * @default 20
    */
   iconSize?: number;
-  
+
   /**
+
    * Layout orientation
    * @default "horizontal"
    */
   layout?: 'horizontal' | 'vertical';
-  
+
   /**
+
    * Show platform labels
    * @default false
    */
   showLabels?: boolean;
-  
+
   /**
+
    * Additional CSS classes
    * @default ""
    */
   className?: string;
-  
+
   /**
+
    * Platforms to display
    * @default all platforms
    */
   platforms?: SocialPlatform[];
-  
+
   /**
+
    * Custom platform URLs
    * @optional (uses default URLs)
    */
   customUrls?: Partial<Record<SocialPlatform, string>>;
 }
 
-type SocialPlatform = 'instagram' | 'facebook' | 'tiktok' | 'linkedin' | 'email';
-```
+type SocialPlatform = 'instagram' | 'facebook' | 'tiktok' | 'linkedin' |
+'email';
+
+```text
 
 ---
 
@@ -389,7 +419,8 @@ const SOCIAL_LINKS = {
     color: 'text-gray-600 hover:text-pink-500'
   }
 };
-```
+
+```text
 
 ---
 
@@ -399,7 +430,8 @@ Complete social links implementation:
 
 ```tsx
 import React from 'react';
-import { InstagramLogo, FacebookLogo, MusicNotes, LinkedinLogo, Envelope } from '@phosphor-icons/react';
+import { InstagramLogo, FacebookLogo, MusicNotes, LinkedinLogo, Envelope } from
+'@phosphor-icons/react';
 
 interface SocialLinksProps {
   iconSize?: number;
@@ -409,7 +441,8 @@ interface SocialLinksProps {
   platforms?: SocialPlatform[];
 }
 
-type SocialPlatform = 'instagram' | 'facebook' | 'tiktok' | 'linkedin' | 'email';
+type SocialPlatform = 'instagram' | 'facebook' | 'tiktok' | 'linkedin' |
+'email';
 
 const SOCIAL_LINKS = {
   instagram: {
@@ -444,7 +477,7 @@ const SOCIAL_LINKS = {
   }
 };
 
-export function SocialLinks({ 
+export function SocialLinks({
   iconSize = 20,
   layout = 'horizontal',
   showLabels = false,
@@ -452,10 +485,11 @@ export function SocialLinks({
   platforms = ['instagram', 'facebook', 'tiktok', 'linkedin', 'email']
 }: SocialLinksProps) {
   return (
-    <div 
+    <div
       className={`
-        flex 
-        ${layout === 'horizontal' ? 'flex-row items-center gap-4' : 'flex-col items-start gap-3'}
+        flex
+${layout === 'horizontal' ? 'flex-row items-center gap-4' : 'flex-col
+items-start gap-3'}
         ${className}
       `}
       role="navigation"
@@ -464,7 +498,7 @@ export function SocialLinks({
       {platforms.map(platform => {
         const social = SOCIAL_LINKS[platform];
         const Icon = social.icon;
-        
+
         return (
           <a
             key={platform}
@@ -477,11 +511,12 @@ export function SocialLinks({
               transition-all duration-300
               ${social.color}
               ${showLabels ? '' : 'hover:scale-110'}
-              focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-opacity-50 rounded-lg p-1
+focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-opacity-50
+rounded-lg p-1
             `}
           >
             <Icon size={iconSize} />
-            
+
             {showLabels && (
               <span className="text-fluid-sm font-body font-medium">
                 {social.label}
@@ -493,7 +528,8 @@ export function SocialLinks({
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -508,34 +544,37 @@ export function SocialLinks({
       <h3 className="text-fluid-lg font-heading font-semibold mb-fluid-sm">
         Follow Me
       </h3>
-      
-      <SocialLinks 
+
+      <SocialLinks
         iconSize={24}
         className="justify-center text-white hover:text-pink-300"
       />
     </div>
   </div>
 </footer>
-```
+
+```text
 
 ### Hero Section Social Links
 
 ```tsx
 <section className="py-section text-center">
-  <h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue mb-fluid-md">
+<h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue
+mb-fluid-md">
     Ash Shaw
   </h1>
-  
+
   <p className="text-fluid-lg font-body text-gray-700 mb-fluid-lg">
     Makeup Artist | Brisbane, Australia
   </p>
-  
-  <SocialLinks 
+
+  <SocialLinks
     iconSize={28}
     className="justify-center text-gray-700"
   />
 </section>
-```
+
+```text
 
 ### Sidebar with Labels
 
@@ -544,15 +583,16 @@ export function SocialLinks({
   <h3 className="text-fluid-lg font-heading font-semibold mb-fluid-md">
     Connect With Me
   </h3>
-  
-  <SocialLinks 
+
+  <SocialLinks
     layout="vertical"
     showLabels={true}
     iconSize={20}
     className="text-gray-700"
   />
 </aside>
-```
+
+```text
 
 ### Contact Page
 
@@ -562,18 +602,19 @@ export function SocialLinks({
     <h2 className="text-section-h2 font-heading font-semibold mb-fluid-md">
       Get In Touch
     </h2>
-    
+
     <p className="text-body-guideline font-body text-gray-700 mb-fluid-lg">
       Reach out through any of these platforms
     </p>
-    
-    <SocialLinks 
+
+    <SocialLinks
       iconSize={32}
       className="justify-center gap-6"
     />
   </div>
 </section>
-```
+
+```text
 
 ---
 
@@ -582,13 +623,14 @@ export function SocialLinks({
 ### With Custom Platform URLs
 
 ```tsx
-<SocialLinks 
+<SocialLinks
   customUrls={{
     instagram: 'https://instagram.com/custom-handle',
     email: 'mailto:custom@email.com'
   }}
 />
-```
+
+```text
 
 ### Circular Button Style
 
@@ -598,14 +640,16 @@ export function SocialLinks({
     <a
       key={platform}
       href={SOCIAL_LINKS[platform].url}
-      className="w-12 h-12 rounded-full bg-gradient-pink-purple-blue flex items-center justify-center text-white hover:shadow-xl transition-all hover:scale-110"
+className="w-12 h-12 rounded-full bg-gradient-pink-purple-blue flex items-center
+justify-center text-white hover:shadow-xl transition-all hover:scale-110"
       aria-label={SOCIAL_LINKS[platform].label}
     >
       {React.createElement(SOCIAL_LINKS[platform].icon, { size: 20 })}
     </a>
   ))}
 </div>
-```
+
+```text
 
 ### With Share Count (if available)
 
@@ -618,7 +662,8 @@ export function SocialLinks({
     </span>
   </a>
 </div>
-```
+
+```text
 
 ### Animated on Hover
 
@@ -627,14 +672,16 @@ export function SocialLinks({
   href={social.url}
   className="group relative"
 >
-  <div className="absolute inset-0 bg-pink-500/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
-  
-  <Icon 
+<div className="absolute inset-0 bg-pink-500/20 rounded-full scale-0
+group-hover:scale-100 transition-transform duration-300" />
+
+  <Icon
     size={24}
     className="relative z-10 transition-transform group-hover:scale-110"
   />
 </a>
-```
+
+```text
 
 ---
 
@@ -651,7 +698,8 @@ export function SocialLinks({
 >
   <InstagramLogo />
 </a>
-```
+
+```text
 
 ### Navigation Landmark
 
@@ -665,14 +713,16 @@ export function SocialLinks({
     </li>
   </ul>
 </nav>
-```
+
+```text
 
 ### Keyboard Navigation
 
 ```tsx
 <a
   href={url}
-  className="focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-opacity-50 rounded-lg p-2"
+className="focus:outline-none focus:ring-2 focus:ring-pink-200
+focus:ring-opacity-50 rounded-lg p-2"
   onKeyDown={(e) => {
     if (e.key === 'Enter') {
       window.open(url, '_blank');
@@ -681,7 +731,8 @@ export function SocialLinks({
 >
   <Icon />
 </a>
-```
+
+```text
 
 ---
 
@@ -694,15 +745,18 @@ export function SocialLinks({
 <a href={url} target="_blank">
   <InstagramLogo />
 </a>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Secure external links
 <a href={url} target="_blank" rel="noopener noreferrer">
   <InstagramLogo />
 </a>
-```
+
+```text
 
 ### ❌ Mistake 2: No Aria Labels
 
@@ -711,15 +765,18 @@ export function SocialLinks({
 <a href={instagramUrl}>
   <InstagramLogo />
 </a>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Clear labels
 <a href={instagramUrl} aria-label="Visit Ash Shaw on Instagram">
   <InstagramLogo />
 </a>
-```
+
+```text
 
 ### ❌ Mistake 3: Inconsistent Spacing
 
@@ -731,42 +788,50 @@ export function SocialLinks({
     <FacebookLogo size={24} />
   </div>
 </div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Consistent spacing
 <div className="flex gap-4">
   <InstagramLogo size={20} />
   <FacebookLogo size={20} />
 </div>
-```
+
+```text
 
 ---
 
 ## Platform-Specific Notes
 
 ### Instagram
+
 - Primary platform for makeup artists
 - Use InstagramLogo icon from @phosphor-icons/react
 - Link to profile: `https://instagram.com/username`
 
 ### Facebook
+
 - Secondary social platform
 - Use FacebookLogo icon from @phosphor-icons/react
 - Link to page: `https://facebook.com/page-name`
 
 ### TikTok
+
 - Growing platform for makeup content
 - Use MusicNotes icon as alternative (@phosphor-icons/react doesn't have TikTok)
 - Link: `https://tiktok.com/@username`
 
 ### LinkedIn
+
 - Professional networking platform
 - Use LinkedinLogo icon from @phosphor-icons/react
 - Link: `https://linkedin.com/in/username`
 
 ### Email
+
 - Direct contact method
 - Use Envelope icon from @phosphor-icons/react
 - Link: `mailto:email@address.com`
@@ -789,9 +854,9 @@ export function SocialLinks({
 - **[overview-components.md](../overview-components.md)** - Component architecture
 - **[overview-icons.md](../overview-icons.md)** - Icon verification process
 - **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
-- **[FILE_STRUCTURE.md](../FILE_STRUCTURE.md)** - File organization
+- **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

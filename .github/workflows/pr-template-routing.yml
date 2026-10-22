@@ -1,0 +1,144 @@
+name: PR Template Routing
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  route-template:
+    name: Suggest PR template and apply type label
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Extract branch prefix
+        id: branch
+        run: |
+          # Extract the branch prefix (feat, fix, docs, etc.)
+          BRANCH_NAME="${{ github.head_ref }}"
+          echo "Branch name: $BRANCH_NAME"
+
+          # Extract prefix (everything before the first slash)
+          if [[ "$BRANCH_NAME" =~ ^([a-z]+)/ ]]; then
+            PREFIX="${BASH_REMATCH[1]}"
+            echo "prefix=$PREFIX" >> $GITHUB_OUTPUT
+          else
+            echo "prefix=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Map branch prefix to template and label
+        id: routing
+        run: |
+          PREFIX="${{ steps.branch.outputs.prefix }}"
+
+          # Map branch prefix to template file and label
+          case "$PREFIX" in
+            feat)
+              TEMPLATE="pr_feature.md"
+              LABEL="type:feature"
+              DESCRIPTION="Feature/Enhancement PR"
+              ;;
+            fix)
+              TEMPLATE="pr_bug.md"
+              LABEL="type:bug"
+              DESCRIPTION="Bug Fix PR"
+              ;;
+            docs)
+              TEMPLATE="pr_documentation.md"
+              LABEL="type:documentation"
+              DESCRIPTION="Documentation PR"
+              ;;
+            design)
+              TEMPLATE="pr_design.md"
+              LABEL="type:design"
+              DESCRIPTION="Design System PR"
+              ;;
+            test)
+              TEMPLATE="pr_test.md"
+              LABEL="type:test"
+              DESCRIPTION="Test/QA PR"
+              ;;
+            chore)
+              TEMPLATE="pr_chore.md"
+              LABEL="type:chore"
+              DESCRIPTION="Maintenance/Chore PR"
+              ;;
+            perf)
+              TEMPLATE="pr_performance.md"
+              LABEL="type:performance"
+              DESCRIPTION="Performance PR"
+              ;;
+            refactor)
+              TEMPLATE="pr_refactor.md"
+              LABEL="type:refactor"
+              DESCRIPTION="Refactoring PR"
+              ;;
+            security)
+              TEMPLATE="pr_security.md"
+              LABEL="type:security"
+              DESCRIPTION="Security PR"
+              ;;
+            ci)
+              TEMPLATE="pr_ci.md"
+              LABEL="type:ci"
+              DESCRIPTION="CI/CD PR"
+              ;;
+            *)
+              TEMPLATE="pr_default.md"
+              LABEL="type:maintenance"
+              DESCRIPTION="General PR"
+              ;;
+          esac
+
+          echo "template=$TEMPLATE" >> $GITHUB_OUTPUT
+          echo "label=$LABEL" >> $GITHUB_OUTPUT
+          echo "description=$DESCRIPTION" >> $GITHUB_OUTPUT
+
+      - name: Comment with template suggestion
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const prefix = '${{ steps.branch.outputs.prefix }}';
+            const template = '${{ steps.routing.outputs.template }}';
+            const description = '${{ steps.routing.outputs.description }}';
+
+            const body = `## PR Template Routing 📋\n\nBranch prefix: **${prefix}**\n\nSuggested template: **${template}**\n\nType: ${description}\n\n---\n\n**Canonical templates** are managed in [lightspeedwp/.github](https://github.com/lightspeedwp/.github):\n- Review the suggested template to ensure your PR description covers the required sections\n- All PR templates route from the central .github repository`;
+
+            try {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body,
+              });
+            } catch (error) {
+              // Skip comment on fork PRs with read-only token
+              if (error.status === 403) {
+                console.log('Skipping comment on fork PR (read-only token)');
+              } else {
+                throw error;
+              }
+            }
+
+      - name: Apply type label
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const label = '${{ steps.routing.outputs.label }}';
+
+            try {
+              await github.rest.issues.addLabels({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: [label],
+              });
+              core.info(`Applied label: ${label}`);
+            } catch (error) {
+              // Label might not exist or other issue; log but don't fail
+              core.warning(`Could not apply label ${label}: ${error.message}`);
+            }

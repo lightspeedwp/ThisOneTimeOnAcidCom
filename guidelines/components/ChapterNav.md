@@ -1,12 +1,14 @@
 # ChapterNav Component
 
-**File:** `/components/ui/ChapterNav.tsx`  
-**Version:** 1.0.0  
+**File:** `/components/ui/ChapterNav.tsx`
+**Version:** 1.0.0
 **Category:** UI Component (Phase 3)
 
 ## Purpose
 
-Renders a sticky chapter navigation sidebar (desktop) or horizontal scroll strip (mobile) that highlights the active section as the user scrolls. Used on long-form pages to provide persistent wayfinding.
+Renders a sticky chapter navigation sidebar (desktop) or horizontal scroll strip
+(mobile) that highlights the active section as the user scrolls. Used on
+long-form pages to provide persistent wayfinding.
 
 ## Props
 
@@ -23,7 +25,8 @@ Renders a sticky chapter navigation sidebar (desktop) or horizontal scroll strip
   id: string;    // Matches the section's HTML id attribute
   label: string; // Display label in the nav
 }
-```
+
+```text
 
 ## Usage
 
@@ -42,7 +45,8 @@ var chapters = [
   activeChapter={activeId}
   onChapterClick={handleChapterClick}
 />
-```
+
+```text
 
 ## Scroll Spy Integration
 
@@ -63,7 +67,8 @@ useEffect(function () {
     window.removeEventListener('scroll', handleScroll);
   };
 }, []);
-```
+
+```text
 
 ## Where Used
 
@@ -71,15 +76,18 @@ useEffect(function () {
 
 ## CSS
 
-Styles are defined in `/styles/blocks/chapter-nav.css`, imported by the component.
+Styles are defined in `/styles/blocks/chapter-nav.css`, imported by the
+component.
 
 **BEM structure:**
+
 - `.chapter-nav` — block (uses `<nav>`)
 - `.chapter-nav__list` — scrollable list container
 - `.chapter-nav__item` — individual chapter link
 - `.chapter-nav__item--active` — highlighted active state (neon glow)
 
-**Responsive behavior:**
+## Responsive behavior
+
 - **Desktop (>1024px):** Vertical sidebar, `position: sticky`, left-aligned
 - **Mobile (<1024px):** Horizontal scroll strip at top of content area
 

@@ -1,0 +1,65 @@
+title: Show and Tell
+labels: [show-and-tell]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Show and Tell
+
+        Share your projects, integrations, and creative uses of this project! We'd love to see what you're building.
+
+  - type: textarea
+    id: title-and-description
+    attributes:
+      label: Project Title & Description
+      description: |
+        What are you sharing? Give a brief overview of your project or use case.
+      placeholder: |
+        Project name: ...
+        Description: I built this amazing project using...
+    validations:
+      required: true
+
+  - type: textarea
+    id: key-features
+    attributes:
+      label: Key Features
+      description: What makes this project interesting or unique?
+      placeholder: |
+        - Feature 1
+        - Feature 2
+        - Feature 3
+    validations:
+      required: false
+
+  - type: textarea
+    id: links-and-media
+    attributes:
+      label: Links & Media
+      description: Share links to your project, GitHub repo, demo, or screenshots.
+      placeholder: |
+        - GitHub: https://...
+        - Demo: https://...
+        - Blog post: https://...
+    validations:
+      required: false
+
+  - type: textarea
+    id: how-it-uses-project
+    attributes:
+      label: How It Uses This Project
+      description: Explain how this project integrates with or uses this repository.
+      placeholder: |
+        I used this project by...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: share-preferences
+    attributes:
+      label: Sharing Preferences
+      options:
+        - label: You can share this project on our social media (with credit to me)
+          required: false
+        - label: You can feature this in our community showcase
+          required: false

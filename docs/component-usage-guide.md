@@ -5,37 +5,48 @@ created: "2026-03-12"
 modified: "2026-03-12"
 version: "1.0.0"
 related_docs:
-  - "/guidelines/overview-components.md"
-  - "/docs/component-composition-guide.md"
-  - "/docs/custom-hooks-guide.md"
+
+- "/guidelines/overview-components.md"
+- "/docs/component-composition-guide.md"
+- "/docs/custom-hooks-guide.md"
 ---
 
 # Component Usage Guide
 
-**Created:** March 12, 2026  
-**Last Updated:** March 12, 2026  
+**Created:** March 12, 2026
+**Last Updated:** March 12, 2026
 **Status:** Active
 
 ---
 
 ## Overview
 
-This guide provides practical examples and best practices for using Nova News components. It covers common patterns, prop configurations, and integration examples for all major component categories.
+This guide provides practical examples and best practices for using Nova News
+components. It covers common patterns, prop configurations, and integration
+examples for all major component categories.
 
-**Target Audience:** Developers working with the Nova News codebase who need quick reference for component usage.
+**Target Audience:** Developers working with the Nova News codebase who need
+quick reference for component usage.
 
 ---
 
 ## Table of Contents
 
 1. [Layout Components](#layout-components)
-2. [Common Components](#common-components)
-3. [UI Components](#ui-components)
-4. [Page Components](#page-components)
-5. [Section Components](#section-components)
-6. [Form Components](#form-components)
-7. [Animation Components](#animation-components)
-8. [Best Practices](#best-practices)
+
+1. [Common Components](#common-components)
+
+1. [UI Components](#ui-components)
+
+1. [Page Components](#page-components)
+
+1. [Section Components](#section-components)
+
+1. [Form Components](#form-components)
+
+1. [Animation Components](#animation-components)
+
+1. [Best Practices](#best-practices)
 
 ---
 
@@ -43,7 +54,8 @@ This guide provides practical examples and best practices for using Nova News co
 
 ### HeroLayout
 
-**Purpose:** Reusable hero section with auto-stagger animations and flexible content slots.
+**Purpose:** Reusable hero section with auto-stagger animations and flexible
+content slots.
 
 **Props:**
 
@@ -58,7 +70,8 @@ interface HeroLayoutProps {
   darkMode?: boolean;
   className?: string;
 }
-```
+
+```text
 
 **Basic Usage:**
 
@@ -72,7 +85,8 @@ import { HeroLayout } from '@/components/sections/HeroLayout';
   autoStagger={true}
   darkMode={true}
 />
-```
+
+```text
 
 **With CTA Buttons:**
 
@@ -92,26 +106,29 @@ import { HeroLayout } from '@/components/sections/HeroLayout';
   }
   autoStagger={true}
 />
-```
 
-**With Floating Media:**
+```text
+
+## With Floating Media
 
 ```tsx
 <HeroLayout
   title="Portfolio"
   subtitle="Neon makeup artistry"
   media={
-    <img 
-      src="/hero-image.jpg" 
+    <img
+      src="/hero-image.jpg"
       alt="Portfolio hero"
       className="hero__media animate-float"
     />
   }
   autoStagger={true}
 />
-```
+
+```text
 
 **Key Features:**
+
 - ✅ Auto-stagger animations (100ms delays)
 - ✅ Terminal boot sequence
 - ✅ Neon pulse CTAs
@@ -123,7 +140,8 @@ import { HeroLayout } from '@/components/sections/HeroLayout';
 
 ### VideoArchiveLayout
 
-**Purpose:** Shared layout for video archive pages (VideosPage, VideoCategoryPage, VideoTagPage).
+**Purpose:** Shared layout for video archive pages (VideosPage,
+VideoCategoryPage, VideoTagPage).
 
 **Props:**
 
@@ -136,7 +154,8 @@ interface VideoArchiveLayoutProps {
   tags: string[];
   showFilters?: boolean;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -152,9 +171,11 @@ import { videoData } from '@/data/mock/videos/video-data';
   tags={videoData.tags}
   showFilters={true}
 />
-```
+
+```text
 
 **Features:**
+
 - ✅ Archive filters (category/tag/search)
 - ✅ Sort controls (date/views/title)
 - ✅ Responsive grid (1-4 columns)
@@ -167,7 +188,8 @@ import { videoData } from '@/data/mock/videos/video-data';
 
 ### Header
 
-**Purpose:** Global site navigation with mobile menu, mega menus, and theme switcher.
+**Purpose:** Global site navigation with mobile menu, mega menus, and theme
+switcher.
 
 **Usage:**
 
@@ -175,11 +197,13 @@ import { videoData } from '@/data/mock/videos/video-data';
 import { Header } from '@/components/common/Header';
 
 <Header />
-```
+
+```text
 
 **No props required** - Header uses internal state and context.
 
 **Features:**
+
 - ✅ Desktop navigation with hover mega menus
 - ✅ Mobile hamburger menu (slide-in drawer)
 - ✅ Theme switcher toggle
@@ -203,7 +227,8 @@ export const navigationData = {
     { label: 'Contact', href: '/contact' },
   ],
 };
-```
+
+```text
 
 ---
 
@@ -217,9 +242,11 @@ export const navigationData = {
 import { Footer } from '@/components/common/Footer';
 
 <Footer />
-```
+
+```text
 
 **Features:**
+
 - ✅ Multi-column link layout
 - ✅ Social media icons (Instagram, Twitter, etc.)
 - ✅ Newsletter signup link
@@ -239,7 +266,8 @@ interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -248,13 +276,15 @@ import { MobileMenu } from '@/components/common/MobileMenu';
 
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-<MobileMenu 
-  isOpen={mobileMenuOpen} 
-  onClose={() => setMobileMenuOpen(false)} 
+<MobileMenu
+  isOpen={mobileMenuOpen}
+  onClose={() => setMobileMenuOpen(false)}
 />
-```
+
+```text
 
 **Features:**
+
 - ✅ Slide-in from right animation
 - ✅ Backdrop overlay
 - ✅ Close on backdrop click
@@ -274,16 +304,20 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 import { ThemeSwitcher } from '@/components/common/ThemeSwitcher';
 
 <ThemeSwitcher />
-```
+
+```text
 
 **No props required** - Uses localStorage to persist theme preference.
 
 **How It Works:**
 
 1. Reads saved theme from `localStorage.getItem('theme')`
-2. Applies `data-theme` attribute to `<html>` element
-3. CSS responds to `[data-theme="dark"]` and `[data-theme="light"]`
-4. Updates icon (☀️ for dark mode, 🌙 for light mode)
+
+1. Applies `data-theme` attribute to `<html>` element
+
+1. CSS responds to `[data-theme="dark"]` and `[data-theme="light"]`
+
+1. Updates icon (☀️ for dark mode, 🌙 for light mode)
 
 **Customization:**
 
@@ -296,7 +330,8 @@ const [theme, setTheme] = useState(() => {
   }
   return 'dark';
 });
-```
+
+```text
 
 ---
 
@@ -317,7 +352,8 @@ interface BreadcrumbItem {
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
 }
-```
+
+```text
 
 **Usage:**
 
@@ -329,9 +365,11 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Festival Makeup' }, // No href = current page
 ]} />
-```
+
+```text
 
 **Features:**
+
 - ✅ Semantic `<nav>` with `aria-label="Breadcrumb"`
 - ✅ Schema.org BreadcrumbList JSON-LD
 - ✅ Current page marked with `aria-current="page"`
@@ -362,7 +400,8 @@ interface ButtonProps {
   href?: string;
   className?: string;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -388,7 +427,8 @@ import { Button } from '@/components/ui/Button';
 <Button disabled>
   Coming soon
 </Button>
-```
+
+```text
 
 **Variants:**
 
@@ -420,7 +460,8 @@ interface PortfolioCardProps {
   featured?: boolean;
   url: string;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -435,9 +476,11 @@ import { PortfolioCard } from '@/components/ui/PortfolioCard';
   featured={true}
   url="/portfolio/origin-festival-2025"
 />
-```
+
+```text
 
 **Features:**
+
 - ✅ Hover scale animation
 - ✅ Neon glow on featured entries
 - ✅ Category badge
@@ -453,7 +496,8 @@ import { PortfolioCard } from '@/components/ui/PortfolioCard';
     <PortfolioCard key={entry.id} {...entry} />
   ))}
 </div>
-```
+
+```text
 
 ---
 
@@ -472,7 +516,8 @@ interface VideoCardProps {
   category: string;
   url: string;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -487,9 +532,11 @@ import { VideoCard } from '@/components/ui/VideoCard';
   category="Tutorial"
   url="/videos/uv-makeup-tutorial"
 />
-```
+
+```text
 
 **Features:**
+
 - ✅ Play button overlay
 - ✅ Duration badge
 - ✅ View count
@@ -515,7 +562,8 @@ interface BlogCardProps {
   tags: string[];
   url: string;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -532,9 +580,11 @@ import { BlogCard } from '@/components/ui/BlogCard';
   tags={['Berlin', 'Techno', 'Community']}
   url="/blog/the-dancefloor-gave-me-everything"
 />
-```
+
+```text
 
 **Features:**
+
 - ✅ Excerpt truncation (3 lines max)
 - ✅ Category badge
 - ✅ Tag pills
@@ -562,7 +612,8 @@ interface ArchiveFiltersProps {
   sortBy?: string;
   onSortChange?: (sort: string) => void;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -581,9 +632,9 @@ const [sortBy, setSortBy] = useState('date');
   activeTags={activeTags}
   onCategoryChange={setActiveCategory}
   onTagToggle={(tag) => {
-    setActiveTags(prev => 
-      prev.includes(tag) 
-        ? prev.filter(t => t !== tag) 
+    setActiveTags(prev =>
+      prev.includes(tag)
+        ? prev.filter(t => t !== tag)
         : [...prev, tag]
     );
   }}
@@ -595,9 +646,11 @@ const [sortBy, setSortBy] = useState('date');
   sortBy={sortBy}
   onSortChange={setSortBy}
 />
-```
+
+```text
 
 **Features:**
+
 - ✅ Category buttons (exclusive selection)
 - ✅ Tag pills (multi-select)
 - ✅ Search input (optional)
@@ -621,7 +674,8 @@ interface LightboxProps {
   onNext?: () => void;
   onPrev?: () => void;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -639,8 +693,8 @@ const images = [
 ];
 
 // Open lightbox on thumbnail click
-<img 
-  src={images[0].url} 
+<img
+  src={images[0].url}
   onClick={() => {
     setCurrentImage(0);
     setLightboxOpen(true);
@@ -653,12 +707,15 @@ const images = [
     currentIndex={currentImage}
     onClose={() => setLightboxOpen(false)}
     onNext={() => setCurrentImage(prev => (prev + 1) % images.length)}
-    onPrev={() => setCurrentImage(prev => (prev - 1 + images.length) % images.length)}
+onPrev={() => setCurrentImage(prev => (prev - 1 + images.length) %
+images.length)}
   />
 )}
-```
+
+```text
 
 **Features:**
+
 - ✅ Fullscreen overlay
 - ✅ Prev/Next navigation
 - ✅ Close on Escape key
@@ -681,9 +738,11 @@ const images = [
 import { HomePage } from '@/components/pages/HomePage';
 
 <HomePage />
-```
+
+```text
 
 **Features:**
+
 - ✅ Terminal boot animation
 - ✅ Auto-stagger hero elements
 - ✅ Featured portfolio grid (3 entries)
@@ -711,7 +770,8 @@ export const homePageContent = {
     posts: [...], // Blog post IDs
   },
 };
-```
+
+```text
 
 ---
 
@@ -725,9 +785,11 @@ export const homePageContent = {
 import { PortfolioPage } from '@/components/pages/portfolio/PortfolioPage';
 
 <PortfolioPage />
-```
+
+```text
 
 **Features:**
+
 - ✅ Category filters (Festival, Editorial, UV, etc.)
 - ✅ Tag filters (Location, event name)
 - ✅ Sort controls (date, views, title)
@@ -747,9 +809,11 @@ import { PortfolioPage } from '@/components/pages/portfolio/PortfolioPage';
 import { BlogPage } from '@/components/pages/blog/BlogPage';
 
 <BlogPage />
-```
+
+```text
 
 **Features:**
+
 - ✅ Full-text search
 - ✅ Category filters
 - ✅ Tag filters
@@ -781,7 +845,8 @@ interface CTASectionProps {
     href: string;
   };
 }
-```
+
+```text
 
 **Usage:**
 
@@ -800,9 +865,11 @@ import { CTASection } from '@/components/sections/CTASection';
     href: '/about',
   }}
 />
-```
+
+```text
 
 **Features:**
+
 - ✅ Cyberpunk gradient background
 - ✅ Neon pulse buttons
 - ✅ Centered layout
@@ -822,11 +889,13 @@ import { CTASection } from '@/components/sections/CTASection';
 import { ContactForm } from '@/components/ui/ContactForm';
 
 <ContactForm />
-```
+
+```text
 
 **No props required** - Typeform URL configured internally.
 
 **Features:**
+
 - ✅ Responsive iframe embed
 - ✅ Full-screen modal option
 - ✅ Loading state
@@ -844,7 +913,8 @@ import { ContactForm } from '@/components/ui/ContactForm';
 interface NewsletterSignupProps {
   inline?: boolean;
 }
-```
+
+```text
 
 **Usage:**
 
@@ -856,9 +926,11 @@ import { NewsletterSignup } from '@/components/ui/NewsletterSignup';
 
 // Full-width form (e.g., dedicated page)
 <NewsletterSignup />
-```
+
+```text
 
 **Features:**
+
 - ✅ Email validation
 - ✅ Success/error states
 - ✅ GDPR compliance notice
@@ -878,9 +950,11 @@ import { NewsletterSignup } from '@/components/ui/NewsletterSignup';
 import { ScrollDownArrow } from '@/components/ui/ScrollDownArrow';
 
 <ScrollDownArrow targetId="content" />
-```
+
+```text
 
 **Features:**
+
 - ✅ Bounce animation
 - ✅ Smooth scroll to target
 - ✅ Auto-hide on scroll
@@ -898,11 +972,13 @@ import { ScrollDownArrow } from '@/components/ui/ScrollDownArrow';
 import { ScrollToTop } from '@/components/ui/ScrollToTop';
 
 <ScrollToTop />
-```
+
+```text
 
 **No props required** - Auto-shows after 300px scroll.
 
 **Features:**
+
 - ✅ Fade-in/out on scroll
 - ✅ Fixed bottom-right position
 - ✅ Smooth scroll to top
@@ -921,7 +997,8 @@ import { Breadcrumbs, Button, PortfolioCard } from '@/components/ui';
 // ❌ BAD - Direct file imports
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { Button } from '@/components/ui/Button';
-```
+
+```text
 
 ### 2. Use Mock Data for Content
 
@@ -936,7 +1013,8 @@ import { portfolioData } from '@/data/mock/portfolio/portfolio-data';
   title="Hardcoded title"
   image="/hardcoded.jpg"
 />
-```
+
+```text
 
 ### 3. Set SEO Meta Tags on Pages
 
@@ -951,7 +1029,8 @@ useEffect(() => {
 
 // ❌ BAD - Forget SEO
 // Page loads with default meta tags
-```
+
+```text
 
 ### 4. Always Add Breadcrumbs to Sub-Pages
 
@@ -964,7 +1043,8 @@ useEffect(() => {
 
 // ❌ BAD - No breadcrumbs
 // Users can't navigate back
-```
+
+```text
 
 ### 5. Use BEM Classes, Not Tailwind
 
@@ -978,7 +1058,8 @@ useEffect(() => {
 <div className="bg-black p-4 rounded-lg">
   <h3 className="text-xl font-bold">Title</h3>
 </div>
-```
+
+```text
 
 ### 6. Wrap Interactive Components in SafetyWrapper
 
@@ -993,7 +1074,8 @@ import { SafetyWrapper } from '@/components/common/SafetyWrapper';
 // ❌ BAD - No error handling
 <ContactForm />
 // If ContactForm crashes, entire page breaks
-```
+
+```text
 
 ### 7. Test with Reduced Motion
 
@@ -1009,7 +1091,8 @@ import { SafetyWrapper } from '@/components/common/SafetyWrapper';
 .animate-float {
   animation: float 4s ease-in-out infinite !important;
 }
-```
+
+```text
 
 ---
 
@@ -1051,13 +1134,20 @@ import { SafetyWrapper } from '@/components/common/SafetyWrapper';
 This guide covered:
 
 1. ✅ Layout components (HeroLayout, VideoArchiveLayout)
-2. ✅ Common components (Header, Footer, ThemeSwitcher, MobileMenu)
-3. ✅ UI components (Breadcrumbs, Button, Cards, Lightbox, Filters)
-4. ✅ Page components (HomePage, PortfolioPage, BlogPage)
-5. ✅ Section components (CTASection)
-6. ✅ Form components (ContactForm, NewsletterSignup)
-7. ✅ Animation components (ScrollToTop, ScrollDownArrow)
-8. ✅ Best practices and quick reference
+
+1. ✅ Common components (Header, Footer, ThemeSwitcher, MobileMenu)
+
+1. ✅ UI components (Breadcrumbs, Button, Cards, Lightbox, Filters)
+
+1. ✅ Page components (HomePage, PortfolioPage, BlogPage)
+
+1. ✅ Section components (CTASection)
+
+1. ✅ Form components (ContactForm, NewsletterSignup)
+
+1. ✅ Animation components (ScrollToTop, ScrollDownArrow)
+
+1. ✅ Best practices and quick reference
 
 **Related Guides:**
 
@@ -1067,5 +1157,5 @@ This guide covered:
 
 ---
 
-**Last Updated:** March 12, 2026  
+**Last Updated:** March 12, 2026
 **Maintained By:** Development Team

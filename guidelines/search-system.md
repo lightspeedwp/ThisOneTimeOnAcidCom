@@ -2,7 +2,8 @@
 
 **Version:** 1.0.0
 **Last Updated:** February 2026
-**Purpose:** Document the global search architecture, ranking, filtering, and URL sync
+**Purpose:** Document the global search architecture, ranking, filtering, and
+URL sync
 
 ---
 
@@ -10,7 +11,7 @@
 
 The search system consists of three layers:
 
-```
+```text
 Header (SearchInput)  ──>  /search?q=...  ──>  SearchResultsPage
                                                     │
                                                     ▼
@@ -20,7 +21,8 @@ Header (SearchInput)  ──>  /search?q=...  ──>  SearchResultsPage
                         ┌─────────────┬──────────┬──┴──────────┬──────────┐
                         ▼             ▼          ▼             ▼          ▼
                     blogPosts   portfolio    videos      podcasts     pages
-```
+
+```text
 
 ### Files
 
@@ -41,7 +43,7 @@ Header (SearchInput)  ──>  /search?q=...  ──>  SearchResultsPage
 
 Searches across all content types and returns a unified `SearchResult[]`.
 
-**Fields searched per type:**
+## Fields searched per type
 
 | Type | Fields |
 |------|--------|
@@ -63,6 +65,7 @@ Each field is scored 0-100 using `scoreMatch()`:
 | Partial word match | 0-40 (proportional) |
 
 Field weights:
+
 - Title: 1.0x
 - Excerpt/Description: 0.7x
 - Tags: 0.5x
@@ -81,9 +84,11 @@ interface SearchFilters {
   category?: string;    // Category name (case-insensitive)
   sortBy: 'relevance' | 'recent' | 'popular' | 'featured' | 'alphabetical';
 }
-```
 
-When `type` is set, only that content type is searched. When `category` is set, results are post-filtered by category name.
+```text
+
+When `type` is set, only that content type is searched. When `category` is set,
+results are post-filtered by category name.
 
 ---
 
@@ -104,6 +109,7 @@ URL updates use `replace: true` to avoid polluting browser history.
 ## 5. Header Search Input
 
 The search input in the Header:
+
 - Collapsed by default (icon button only)
 - Expands on click with 300ms width animation
 - Supports `Ctrl+K` / `Cmd+K` keyboard shortcut to open
@@ -117,6 +123,7 @@ The search input in the Header:
 ## 6. Results Grouping
 
 Results are grouped by `type` on the results page:
+
 - Each group has a heading with count
 - Groups are rendered in the order they appear in the data
 - The `ArchiveFilters` component provides type toggle chips + sort options
@@ -130,9 +137,9 @@ Results are grouped by `type` on the results page:
 - Debounced at 300ms to avoid excessive re-renders
 - `useMemo` caches filtered/grouped results
 - For production with large datasets, consider:
-  - Server-side search API
-  - Full-text search engine (e.g., Algolia, MeiliSearch)
-  - Pre-computed search index
+- Server-side search API
+- Full-text search engine (e.g., Algolia, MeiliSearch)
+- Pre-computed search index
 
 ---
 

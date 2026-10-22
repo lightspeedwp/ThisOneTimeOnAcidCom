@@ -1,16 +1,19 @@
 # Social media guidelines
 
-**Version:** 1.0.0  
-**Last Updated:** March 2, 2026  
+**Version:** 1.0.0
+**Last Updated:** March 2, 2026
 **Owner:** Ash Shaw Portfolio Team
 
 ---
 
 ## Overview
 
-This document defines the voice, tone, content strategy, and platform-specific guidelines for Ash Shaw's social media presence across Instagram, Facebook, and LinkedIn.
+This document defines the voice, tone, content strategy, and platform-specific
+guidelines for Ash Shaw's social media presence across Instagram, Facebook, and
+LinkedIn.
 
-**Core principle:** Authenticity over polish. Community over commerce. Connection over conversion.
+**Core principle:** Authenticity over polish. Community over commerce.
+Connection over conversion.
 
 ---
 
@@ -27,7 +30,8 @@ Ash's social media presence reflects the overlap of multiple communities:
 - **Six Cats** — organic cannabis cultivation, Cape Town garden culture
 - **LightSpeed** — WordPress agency, remote work, AI-assisted workflows
 
-**The overlap is the identity.** Content should weave between these worlds naturally, showing how they inform and enrich each other.
+**The overlap is the identity.** Content should weave between these worlds
+naturally, showing how they inform and enrich each other.
 
 ### Visual identity: Neon vs Atomic Black
 
@@ -51,29 +55,36 @@ Ash's social media presence reflects the overlap of multiple communities:
 ### Voice attributes
 
 1. **Authentic** — Raw, honest, unfiltered. No corporate speak. No pretense.
-2. **Energetic** — Moves fast, like the ADHD brain. Short punchy sentences. Exclamation marks allowed.
-3. **Educational** — Share knowledge freely. Open source mindset. Teach, don't gatekeep.
-4. **Community-focused** — It's about the tribe, not the individual. Name people. Credit collaborators.
-5. **Unapologetically neon** — Bold opinions. Strong visual language. "Neon vs Atomic Black" is a philosophy, not just a colour scheme.
+
+1. **Energetic** — Moves fast, like the ADHD brain. Short punchy sentences. Exclamation marks allowed.
+
+1. **Educational** — Share knowledge freely. Open source mindset. Teach, don't gatekeep.
+
+1. **Community-focused** — It's about the tribe, not the individual. Name people. Credit collaborators.
+
+1. **Unapologetically neon** — Bold opinions. Strong visual language. "Neon vs Atomic Black" is a philosophy, not just a colour scheme.
 
 ### Tone variations by platform
 
-**Instagram:**  
-- Visual-first, story-driven  
-- Behind-the-scenes energy  
-- Festival recaps, UV paint process videos, cycling journey posts  
+**Instagram:**
+
+- Visual-first, story-driven
+- Behind-the-scenes energy
+- Festival recaps, UV paint process videos, cycling journey posts
 - Captions: personal, reflective, 2–4 sentences with a call to connection
 
-**Facebook:**  
-- Longer-form storytelling  
-- Event recaps with context and gratitude  
-- Cross-posting blog articles with commentary  
+**Facebook:**
+
+- Longer-form storytelling
+- Event recaps with context and gratitude
+- Cross-posting blog articles with commentary
 - Captions: 1–2 paragraphs, more narrative depth
 
-**LinkedIn:**  
-- Professional insights without losing personality  
-- WordPress/design system content, open source contributions  
-- LightSpeed updates, AI workflow experiments, team wins  
+**LinkedIn:**
+
+- Professional insights without losing personality
+- WordPress/design system content, open source contributions
+- LightSpeed updates, AI workflow experiments, team wins
 - Captions: educational, value-driven, but still authentic (not corporate)
 
 ### What to avoid
@@ -90,7 +101,7 @@ Ash's social media presence reflects the overlap of multiple communities:
 
 ### Pillar 1: UV makeup & festival artistry (40%)
 
-**Instagram focus**
+## Instagram focus
 
 - Process videos: painting a face from start to finish (Reels/Stories)
 - Before/after transformations under UV light
@@ -99,12 +110,13 @@ Ash's social media presence reflects the overlap of multiple communities:
 - Community spotlight: faces painted, people's reactions
 
 **Sample captions:**
+
 - "Painted this look at Sisyphos last weekend. Sharp geometric liner + toxic green base = instant dancefloor radiance. 🎨✨"
 - "UV paint under blacklight is pure magic. Here's the 3-step process I use to create these neon warriors."
 
 ### Pillar 2: Cycling & endurance (20%)
 
-**Instagram/Facebook focus**
+## Instagram/Facebook focus
 
 - Bike-packing adventures: 300km to Origin, Thailand tours, Berlin city rides
 - Training updates: Muay Thai sessions, trail runs, triathlon prep
@@ -112,12 +124,13 @@ Ash's social media presence reflects the overlap of multiple communities:
 - Stats/milestones: "One million steps in Berlin summer 2025"
 
 **Sample captions:**
+
 - "Cycled 80km to Grabouw via Sir Lowry's Pass today. Tomorrow: 75km to Origin for my birthday. The pilgrimage is as important as the party. 🚴‍♂️"
 - "7,000+ kilometres across Thailand by bicycle. People at festivals don't believe me until they see me riding out on Monday morning."
 
 ### Pillar 3: WordPress & web development (20%)
 
-**LinkedIn focus**
+## LinkedIn focus
 
 - Design system insights: LSX Design System, Figma workflows
 - AI-assisted development: GitHub Copilot, Claude, MCP integrations
@@ -125,12 +138,13 @@ Ash's social media presence reflects the overlap of multiple communities:
 - LightSpeed team wins, hiring insights, remote work culture
 
 **Sample captions:**
+
 - "Spoke at WordCamp Europe 2025 in Basel about the LSX Design System. Building in public + open source = the only way forward."
 - "The team is levelling up week on week at a rate I've never seen. AI amplifies what's already there: curiosity, work ethic, willingness to learn."
 
 ### Pillar 4: Six Cats & cultivation (10%)
 
-**Instagram/Facebook focus**
+## Instagram/Facebook focus (1)
 
 - Harvest season updates (outdoor only, legal context clear)
 - Garden process: living soil, worm tea, companion planting
@@ -138,12 +152,13 @@ Ash's social media presence reflects the overlap of multiple communities:
 - Eight values philosophy: authenticity, consciousness, consistency, experience, meticulousness, sustainability, passion, quality
 
 **Sample captions:**
+
 - "Harvest season begins. Nearly twenty years of green fingers, same organic methods, same respect for the process. 🌱"
 - "Meet Timmy, the resident therapy cat. Every harvest, he claims a spot in the drying room and supervises."
 
 ### Pillar 5: The tribes & community (10%)
 
-**Cross-platform**
+## Cross-platform
 
 - Gratitude posts: naming the people who made the experience
 - Community spotlights: WordPress friends, festival crew, cycling mates
@@ -151,6 +166,7 @@ Ash's social media presence reflects the overlap of multiple communities:
 - Behind-the-scenes: LightSpeed team, collaborators, mentors
 
 **Sample captions:**
+
 - "We are the sum of our tribes. Grateful for the psytrance family, the WordPress community, the Berlin creatives, and the endurance crew who keep me sane."
 - "Special thanks to Vitor for hosting me in Berlin this summer. One of the most special humans I know."
 
@@ -173,7 +189,8 @@ Ash's social media presence reflects the overlap of multiple communities:
 - **Week 3:** WordPress/dev insights (Pillar 3)
 - **Week 4:** Six Cats or community spotlight (Pillars 4/5)
 
-**Flexibility:** Adjust based on real-time events (festivals, WordCamps, cycling trips, harvest season).
+**Flexibility:** Adjust based on real-time events (festivals, WordCamps, cycling
+trips, harvest season).
 
 ---
 
@@ -181,16 +198,20 @@ Ash's social media presence reflects the overlap of multiple communities:
 
 ### Primary hashtags (use 5–10 per post)
 
-**UV makeup & festivals:**  
+**UV makeup & festivals:**
+
 #UVMakeup #FestivalMakeup #PsytranceFestival #NeonArt #BlacklightMakeup #RaveMakeup #BerlinNightlife #OriginFestival
 
-**Cycling & endurance:**  
+**Cycling & endurance:**
+
 #BikePacking #CyclingLife #Ultracycling #MuayThai #TrailRunning #EnduranceAthlete #CyclingAdventure
 
-**WordPress & web dev:**  
+**WordPress & web dev:**
+
 #WordPress #OpenSource #DesignSystems #WebDev #Figma #WordCamp #RemoteWork
 
-**Six Cats:**  
+**Six Cats:**
+
 #OrganicCannabis #LivingSoil #CannabisCommunity #CannabisClub #SouthAfrica #CapeTown
 
 ### Avoid
@@ -226,7 +247,8 @@ Ash's social media presence reflects the overlap of multiple communities:
 
 ## Content calendar template
 
-See `/docs/social-media-content-calendar-template.md` for a monthly planning framework.
+See `/docs/social-media-content-calendar-template.md` for a monthly planning
+framework.
 
 ---
 
@@ -258,14 +280,17 @@ See `/docs/social-media-content-calendar-template.md` for a monthly planning fra
 ## Content approval workflow
 
 1. **Draft content** in notes app or content calendar
-2. **Self-review checklist:**
+
+1. **Self-review checklist:**
+
    - [ ] Sentence case for all headings/captions?
    - [ ] Pronouns correct (he/him)?
    - [ ] Voice authentic (no corporate speak)?
    - [ ] Credits/tags added?
    - [ ] Hashtags relevant and under 15?
-3. **Schedule or post immediately** (depending on timing)
-4. **Engage within first hour** (reply to early comments)
+1. **Schedule or post immediately** (depending on timing)
+
+1. **Engage within first hour** (reply to early comments)
 
 ---
 
@@ -293,20 +318,26 @@ See `/docs/social-media-content-calendar-template.md` for a monthly planning fra
 ### If a post receives negative feedback
 
 1. **Don't delete** (unless it violates platform rules or is factually incorrect)
-2. **Respond calmly** — "Thanks for the feedback. Here's my perspective…"
-3. **Know when to disengage** — Don't feed trolls
+
+1. **Respond calmly** — "Thanks for the feedback. Here's my perspective…"
+
+1. **Know when to disengage** — Don't feed trolls
 
 ### If personal safety is compromised
 
 1. **Block and report** abusive accounts immediately
-2. **Document** (screenshot) before blocking
-3. **Notify trusted contacts** if situation escalates
+
+1. **Document** (screenshot) before blocking
+
+1. **Notify trusted contacts** if situation escalates
 
 ### If content is misinterpreted
 
 1. **Clarify in comments** or a follow-up Story
-2. **Own mistakes** — "You're right, I misspoke. Here's what I meant…"
-3. **Learn and move forward**
+
+1. **Own mistakes** — "You're right, I misspoke. Here's what I meant…"
+
+1. **Learn and move forward**
 
 ---
 
@@ -336,64 +367,87 @@ See `/docs/social-media-content-calendar-template.md` for a monthly planning fra
 
 ### Template 1: Festival recap (Instagram)
 
-**Image:** UV makeup close-up or dancefloor crowd shot  
+**Image:** UV makeup close-up or dancefloor crowd shot
 **Caption:**
-```
-[Festival name] [Year] was pure magic. Painted [X] faces over the weekend, danced until sunrise, and reconnected with the tribe. 🎨✨
 
-Swipe for behind-the-scenes moments and the faces that made this gathering unforgettable.
+```text
+[Festival name] [Year] was pure magic. Painted [X] faces over the weekend,
+danced until sunrise, and reconnected with the tribe. 🎨✨
 
-Shout-out to [@organiser] for curating such an incredible space. See you on the next dancefloor! 💚
+Swipe for behind-the-scenes moments and the faces that made this gathering
+unforgettable.
+
+Shout-out to [@organiser] for curating such an incredible space. See you on the
+next dancefloor! 💚
 
 #UVMakeup #[FestivalName] #PsytranceFestival #NeonArt #Dancefloor
-```
+
+```text
 
 ### Template 2: Cycling journey (Instagram/Facebook)
 
-**Image:** Bike loaded with panniers, mountain pass view, or festival arrival shot  
+**Image:** Bike loaded with panniers, mountain pass view, or festival arrival
+shot
 **Caption:**
-```
-[X]km to [destination]. [Elevation gain]m of climbing. [Hours] of pure adrenaline.
 
-The pilgrimage is as important as the party. By the time I arrive, I'm present, clear, and creatively charged.
+```text
+[X]km to [destination]. [Elevation gain]m of climbing. [Hours] of pure
+adrenaline.
 
-Everything an artist needs fits on two wheels: UV paints, brush kit, mirror stand, camping gear. 40kg total. Portability isn't a limitation — it's a design constraint. 🚴‍♂️
+The pilgrimage is as important as the party. By the time I arrive, I'm present,
+clear, and creatively charged.
+
+Everything an artist needs fits on two wheels: UV paints, brush kit, mirror
+stand, camping gear. 40kg total. Portability isn't a limitation — it's a design
+constraint. 🚴‍♂️
 
 #BikePacking #CyclingLife #Ultracycling #[Destination]
-```
+
+```text
 
 ### Template 3: WordPress/dev insight (LinkedIn)
 
-**Image:** Screenshot of design system, code snippet, or WordCamp stage photo  
+**Image:** Screenshot of design system, code snippet, or WordCamp stage photo
 **Caption:**
-```
+
+```text
 [Topic headline in sentence case]
 
-[1–2 paragraph insight: what you learned, what you built, what the community taught you]
+[1–2 paragraph insight: what you learned, what you built, what the community
+taught you]
 
-The fusion of [technology A] and [technology B] has been transformative. The team is levelling up at a rate I've never seen. AI amplifies what's already there: curiosity, work ethic, willingness to learn.
+The fusion of [technology A] and [technology B] has been transformative. The
+team is levelling up at a rate I've never seen. AI amplifies what's already
+there: curiosity, work ethic, willingness to learn.
 
-Open source is the only way forward. Building in public, sharing knowledge freely, and learning from the community — that's the WordPress way.
+Open source is the only way forward. Building in public, sharing knowledge
+freely, and learning from the community — that's the WordPress way.
 
 #WordPress #OpenSource #DesignSystems #WebDev #[Topic]
-```
+
+```text
 
 ### Template 4: Six Cats harvest (Instagram/Facebook)
 
-**Image:** Garden close-up, cats supervising, or curing jars  
+**Image:** Garden close-up, cats supervising, or curing jars
 **Caption:**
-```
-Harvest season begins. Nearly twenty years of green fingers, same organic methods, same respect for the process.
 
-Living soil. Rainwater. Worm tea. Companion planting. Everything grown outdoors using the natural cycles of the sun and seasons.
+```text
+Harvest season begins. Nearly twenty years of green fingers, same organic
+methods, same respect for the process.
 
-The eight values: authenticity, consciousness, consistency, experience, meticulousness, sustainability, passion, quality.
+Living soil. Rainwater. Worm tea. Companion planting. Everything grown outdoors
+using the natural cycles of the sun and seasons.
+
+The eight values: authenticity, consciousness, consistency, experience,
+meticulousness, sustainability, passion, quality.
 
 Six Cats is not a side project. It's a mirror. 🌱
 
 #OrganicCannabis #LivingSoil #SixCats #CapeTown
-```
+
+```text
 
 ---
 
-**End of social media guidelines v1.0.0**
+## End of social media guidelines v1.0.0

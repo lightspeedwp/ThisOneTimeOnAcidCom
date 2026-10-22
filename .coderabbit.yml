@@ -1,15 +1,306 @@
-# yaml-language-server: $schema=https://storage.googleapis.com/coderabbit_public_assets/schema.v2.json
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+inheritance: true
+
 language: en-GB
+
+knowledge_base:
+  code_guidelines:
+    filePatterns: []
 
 reviews:
   profile: chill
   path_instructions:
-    - path: "**/*.{tsx,ts,css}"
+    - path: ".claude/**/*.md"
       instructions: |
-        Follow the guidelines in `guidelines/Guidelines.md` for code style,
-        file structure, and project conventions.
-        Ensure accessibility (a11y) best practices are followed throughout the application.
-        Verify that mock data is sourced exclusively from `src/mockData/`.
-        Validate that the project-specific bundler configuration supports the implemented features.
-        For CSS, adhere to semantic BEM naming conventions and flag the usage of Tailwind utility classes or inline styles.
-        Maintain consistency with the existing codebase, particularly in component architecture and state management.
+        These are Claude Code configuration and skill definitions. Review for:
+        - Skill frontmatter metadata (name, description, trigger conditions)
+        - Proper linking between skills and their usage patterns
+        - Accurate descriptions of tool dependencies and permissions
+        - Consistency with AGENTS.md repository conventions
+        - No hardcoded credentials or sensitive data in skill definitions
+        - Clear examples and use cases for each skill/agent
+
+    - path: ".claude/agents/**/*"
+      instructions: |
+        Claude Code agent specifications and configurations. Review for:
+        - Valid agent type names and proper parameter definitions
+        - Clear prompt instructions that align with repository conventions
+        - Tool access specifications and permission requirements
+        - Agent role declarations matching AGENTS.md conventions
+        - No over-scoping of agent capabilities beyond their intended use case
+
+    - path: ".claude/skills/**/*.md"
+      instructions: |
+        Claude Code reusable skills (SKILL.md files). Review for:
+        - Proper SKILL.md structure with overview, commands, and examples
+        - Frontmatter metadata with name, description and trigger keywords
+        - Clear usage examples showing the skill in action
+        - Accurate tool and permission documentation
+        - Links to related skills and integration points
+        - Consistency with repository-specific conventions (paths, naming, workflow)
+
+    - path: ".specify/**/*.md"
+      instructions: |
+        Spec Kit template definitions and documentation. Review for:
+        - Template structure and frontmatter (title, description, sections)
+        - Clear instructions for generating specification files
+        - Links to active specifications in .github/specs/
+        - Integration points with Gemini CLI and workflow orchestration
+        - Consistency with specification section requirements
+
+    - path: ".github/specs/**/*.md"
+      instructions: |
+        Feature and governance specifications (actual specification records). Review for:
+        - Proper YAML/markdown frontmatter in specification files
+        - Clear structure following {number}-{slug} folder naming convention
+        - Complete sections matching template: Overview, Requirements, Success Criteria, Implementation Plan
+        - Links to related specifications and dependencies
+        - No broken links to guidelines or referenced documents
+        - Alignment with feature branch and PR conventions
+
+    - path: "specs/**/*.md"
+      instructions: |
+        Specification reference files (if present). Review for:
+        - Consistency with .github/specs/ active specifications
+        - Proper cross-referencing and deduplication
+        - Links to current specification locations
+
+    - path: ".gemini/**/*"
+      instructions: |
+        Gemini CLI command definitions and workflows. Review for:
+        - Valid command structure and parameter definitions
+        - Clear descriptions of command purpose and usage
+        - Proper integration with Claude Code workflows
+        - No duplication with existing .claude/skills/ definitions
+        - Consistency with Spec Kit phases and orchestration
+
+    - path: "AGENTS.md"
+      instructions: |
+        Repository-wide AI agent conventions and protected files. Critical governance document.
+        Review for:
+        - Accurate tech stack inventory matching package.json
+        - Up-to-date bundler compatibility rules and forbidden patterns
+        - Protected file list correctness (never modify without owner confirmation)
+        - Folder conventions alignment with actual directory structure
+        - Valid script commands that exist in package.json
+        - No stale unresolved decisions or outdated constraints
+        - Links to guidelines/ and other documentation are current
+        This file governs all AI work in the repository — treat changes as high-priority review.
+
+    - path: "CLAUDE.md"
+      instructions: |
+        Repository-specific AI rules for ThisOneTimeOnAcidCom. Sets local guidance policy.
+        Review for:
+        - References to AGENTS.md and critical safeguards (bundler compatibility, protected files)
+        - Accuracy of tech stack and available scripts listed
+        - Alignment with actual CONTRIBUTING.md conventions
+        - Any contradictions with guidelines/ documentation (flag for owner review)
+        - Links to AGENTS.md, guidelines/, and specification locations
+        This file is repository guidance — verify all procedural claims against guidelines/.
+
+    - path: "scripts/**/*.test.js"
+      instructions: |
+        Jest unit tests for Node.js tooling scripts. Review for:
+        - Jest test structure and assertions
+        - Clear test naming describing purpose (descriptive case names)
+        - Proper mocking of Node.js modules and file system operations
+        - Isolated test data (use fixtures, not live files)
+        - Appropriate test categorization (unit, integration, validation)
+        - Exit codes and error handling validation
+        - Tests that run independently without order dependencies
+        - No assumptions about working directory or environment state
+
+    - path: "scripts/**/*.test.mjs"
+      instructions: |
+        Node.js native test runner (node:test/node:assert) for scripts. Review for:
+        - Proper node:test test() declarations and describe() nesting
+        - Clear assertions using node:assert
+        - Isolated fixtures for boundary and failure cases (test-local, not external data)
+        - No setup side effects or file system leakage between tests
+        - Clear test naming describing what is validated
+        - Appropriate use of mocks and stubs
+        - Tests that run independently
+
+    - path: "tests/**/*.mjs"
+      instructions: |
+        Node.js native test runner (node:test/node:assert) integration suites. Review for:
+        - Proper node:test test() and describe() structure
+        - Clear test descriptions of what is being validated
+        - Isolated fixtures for boundary/failure cases; template resolution and validation edge cases
+        - No dependencies between test execution order
+        - Appropriate assertions using node:assert
+        - Clear documentation of special setup or template testing patterns
+        - Expected failure/skip patterns documented if present
+
+    - path: "e2e/**/*.spec.ts"
+      instructions: |
+        Playwright end-to-end tests. Review for:
+        - Proper Playwright test structure with describe() and test()
+        - Clear test naming describing user flows and scenarios
+        - Browser-independence (no manual browser setup in tests)
+        - Proper fixture usage for page objects and test data
+        - Accessibility assertions where relevant (keyboard navigation, ARIA)
+        - No hardcoded waits (use proper waitFor patterns)
+        - Tests that can run in any order
+        - Clear assertions testing complete user workflows
+
+    - path: "tests/**/*.bats"
+      instructions: |
+        Bats shell testing framework for build validation. Review for:
+        - Proper @test naming describing what is verified
+        - Setup/teardown for temporary directories and build artifacts
+        - Clear assertions on build output, file presence, and exit codes
+        - Test data isolation (no cross-test dependencies)
+        - Cleanup after each test (no leftover generated files)
+        - Validation of Vite build integrity and output structure
+
+    - path: "src/app/components/**/*.tsx"
+      instructions: |
+        React components with BEM CSS and accessibility requirements.
+        Review for:
+        - Semantic HTML structure with proper heading hierarchy
+        - WCAG 2.2 AA/AAA compliance (keyboard navigation, ARIA labels, focus management)
+        - BEM CSS classes only — no inline styles or Tailwind utility classes
+        - Proper TypeScript typing with no `any` types
+        - Components organized correctly (common/, pages/, layout/, ui/, sections/, template-parts/)
+        - Named exports (exception: src/app/App.tsx uses default export only)
+        - Barrel imports via index.tsx in each folder (re-export components for folder hierarchy)
+        - Component documentation with @fileoverview and features list
+        - Figma Make bundler compatibility (components consumed by bundler): no optional chaining (?.), nullish coalescing (??), nested ternaries, for...of loops; use grab(), arrayGet(), setProp() from src/app/lib/router.tsx
+        - Error boundaries and SafetyWrapper usage where appropriate
+        - Theme support with CSS custom properties (light/dark mode)
+        - Event handler binding and memory leak prevention
+        - UI mock data sourced from src/app/data/mock/ only (never hardcoded)
+
+    - path: "src/app/data/**/*.ts"
+      instructions: |
+        Mock data definitions and data types (UI content sources). Review for:
+        - Data structure consistency and typing
+        - No credential or sensitive information exposure
+        - Proper TypeScript interfaces in src/app/data/types/
+        - Adherence to mock data schema patterns for UI content
+        - Clear data organization by feature/domain
+        - No hardcoding of editorial content (journal entries, articles, manuscript chapters use content/ sources)
+        - References to actual content loaders that fetch from content/ directory
+
+    - path: "src/app/hooks/*.ts"
+      instructions: |
+        Custom React hooks. Review for:
+        - Clear hook naming with 'use' prefix
+        - Proper dependency arrays in useEffect and useCallback
+        - No memory leaks or stale closures
+        - Figma Make bundler compatibility (hooks consumed by bundler): no optional chaining (?.), nullish coalescing (??), nested ternaries
+        - Clear documentation of hook purpose and parameters
+        - Proper TypeScript typing for parameters and return values
+        - Separation of concerns (one responsibility per hook)
+        - Hooks that access data use src/app/data/mock/ exclusively
+        - Use grab(), arrayGet(), setProp() helpers for safe object access
+
+    - path: "src/app/utils/*.ts"
+      instructions: |
+        Utility services and helpers (application code consumed by Figma Make). Review for:
+        - Clear service organization and single responsibility
+        - Proper error handling and validation
+        - TypeScript interfaces and type safety
+        - No hardcoded configuration (use environment or configuration files)
+        - Documentation of service methods and expected inputs
+        - Browser API safety (check for undefined globals in client code)
+        - Figma Make bundler compatibility: no optional chaining (?.), nullish coalescing (??), nested ternaries, for...of loops; use grab(), arrayGet(), setProp() from src/app/lib/router.tsx
+        - Clear logging patterns (no debug console.log left behind in production code)
+        - No imports from src/app/utils/supabase/ (system-protected deployment artefact)
+
+    - path: "src/styles/**/*.css"
+      instructions: |
+        BEM CSS architecture and styling. Review for:
+        - Semantic BEM class naming: .block__element--modifier
+        - No inline styles or Tailwind utility classes
+        - Global styles in globals.css; block styles in blocks/; component-specific in components/
+        - Proper CSS variable usage (design tokens in tokens/, themes in themes/)
+        - Light/dark mode support with CSS custom properties
+        - Animations defined in animations.css with performance in mind
+        - No !important overrides unless absolutely necessary
+        - Proper vendor prefixes where needed
+        - Media query organization and mobile-first approach
+        - Scoped styles to prevent conflicts across the application
+
+    - path: "src/app/lib/*.tsx"
+      instructions: |
+        Library and router utilities (critical application code). Review for:
+        - Bundler-safe helper functions (grab, arrayGet, setProp usage)
+        - React Router v7 integration patterns
+        - Type safety in generic functions
+        - Documentation of utility purposes and usage
+        - Figma Make bundler compatibility: no optional chaining, nullish coalescing, nested ternaries
+        - Protection of implementation (these are critical utilities consumed by Figma Make)
+
+    - path: "public/**/*"
+      instructions: |
+        Static assets and public files at repository root. Review for:
+        - No hardcoded credentials or sensitive data
+        - Asset optimization and modern formats where applicable
+        - Redirect rules properly configured (_redirects file)
+        - SPA fallback rules for client-side routing
+
+    - path: "src/app/public/**/*"
+      instructions: |
+        Static assets and public files. Review for:
+        - No hardcoded credentials or sensitive data
+        - Asset optimization and modern formats where applicable
+        - Proper metadata in manifest.json for PWA functionality
+        - Redirect rules properly configured
+
+    - path: "scripts/**/*.{ts,js}"
+      instructions: |
+        Build and utility scripts (Node.js tooling, not application code). Review for:
+        - Clear script purpose and documentation
+        - Proper Node.js error handling and validation
+        - No hardcoded paths (use relative paths or configurable values)
+        - Compatibility with npm (not pnpm-specific)
+        - Safe file operations with proper guards
+        - Exit codes appropriate for CI/CD usage and script chaining
+        - Standard modern JavaScript patterns permitted (optional chaining, nullish coalescing, etc.)
+
+    - path: "src/app/scripts/**/*.{ts,js}"
+      instructions: |
+        Build and utility scripts (Node.js tooling). Review for:
+        - Clear script purpose and documentation
+        - Proper Node.js error handling and validation
+        - No hardcoded paths (use relative paths or configurable values)
+        - Compatibility with npm (not pnpm-specific)
+        - Safe file operations with proper guards
+        - Exit codes appropriate for CI/CD usage
+        - Standard modern JavaScript permitted (tooling not subject to bundler restrictions)
+
+    - path: "**/*.{tsx,ts,jsx,js,css}"
+      instructions: |
+        General guidance applied in addition to any matching path-specific rules above.
+
+        **Application code consumed by Figma Make (src/app/components/, src/app/hooks/, src/app/lib/, src/app/utils/):**
+        - Follow the guidelines in `guidelines/Guidelines.md` for code style and project conventions.
+        - Figma Make bundler compatibility: no optional chaining (?.), nullish coalescing (??), nested ternaries, for...of loops.
+        - Use grab(), arrayGet(), setProp() helpers from src/app/lib/router.tsx for safe access.
+        - UI mock data sourced exclusively from `src/app/data/mock/`.
+        - Accessibility (a11y) best practices throughout components.
+
+        **Build and utility scripts (scripts/, src/app/scripts/, tooling):**
+        - Clear purpose and documentation.
+        - Standard modern JavaScript permitted (not subject to bundler restrictions).
+        - Safe error handling and path operations.
+        - npm compatibility.
+
+        **Tests (tests/, e2e/):**
+        - Proper test framework usage (Jest, node:test, Playwright, Bats).
+        - Isolated fixtures for boundary/failure cases; test-local mocks allowed.
+        - Editorial content loaders (content/) used only in production code, not test fixtures.
+
+        **CSS and styling (src/styles/):**
+        - Semantic BEM naming conventions: .block__element--modifier.
+        - No inline styles or Tailwind utility classes in application code.
+        - CSS custom properties for theme support (light/dark mode).
+
+        **Editorial content (content/):**
+        - Journal entries, articles, manuscript chapters: YAML frontmatter + markdown body.
+        - UI renders this content via loaders, never hardcoded.
+
+        Read AGENTS.md for repository-specific conventions, protected files, and full guidance.

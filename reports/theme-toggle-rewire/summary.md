@@ -7,14 +7,15 @@ status: "COMPLETE"
 
 # Theme Toggle Rewire — Neon Pink/Yellow Implementation
 
-**Created:** March 12, 2026  
-**Status:** ✅ COMPLETE  
+**Created:** March 12, 2026
+**Status:** ✅ COMPLETE
 
 ---
 
 ## 🎯 Objective
 
-Rewire the light/dark mode toggle in the header to match the neon pink/yellow design system with instant visual feedback and atomic black default.
+Rewire the light/dark mode toggle in the header to match the neon pink/yellow
+design system with instant visual feedback and atomic black default.
 
 ---
 
@@ -27,29 +28,33 @@ Rewire the light/dark mode toggle in the header to match the neon pink/yellow de
 **Key Changes:**
 
 #### Enhanced FOUC Prevention
+
 ```typescript
 (function() {
   var savedTheme = localStorage.getItem('theme');
-  
+
   // Default to dark mode (neon pink/yellow design)
   if (!savedTheme || savedTheme === 'dark') {
     document.documentElement.classList.add('dark');
     document.documentElement.setAttribute('data-theme', 'dark');
   }
 })();
-```
+
+```text
 
 **Features:**
+
 - Runs synchronously before React renders
 - Sets both `.dark` class AND `data-theme` attribute
 - Defaults to dark mode if no preference saved
 
 #### Instant Toggle Feedback
+
 ```typescript
 function toggleTheme() {
   var newMode = !darkMode;
   setDarkMode(newMode);
-  
+
   // Immediate DOM update for instant visual feedback
   if (newMode) {
     document.documentElement.classList.add('dark');
@@ -60,25 +65,28 @@ function toggleTheme() {
     document.documentElement.setAttribute('data-theme', 'light');
     localStorage.setItem('theme', 'light');
   }
-  
+
   // Debug logging (dev mode only)
   console.log('Theme toggled to:', newMode ? 'dark' : 'light');
 }
-```
+
+```text
 
 **Features:**
+
 - Immediate DOM manipulation (no React state delay)
 - Persists to localStorage
 - Console logging for debugging
 - No flash or delay
 
 #### Enhanced Icons
+
 ```typescript
 // Moon Icon (Dark Mode)
 darkMode && React.createElement(
   'span',
   {
-    className: 'theme-toggle__icon theme-toggle__icon--moon',
+    className: 'theme-toggle_*icon theme-toggle*_icon--moon',
     'aria-hidden': 'true'
   },
   '☾'
@@ -88,14 +96,16 @@ darkMode && React.createElement(
 !darkMode && React.createElement(
   'span',
   {
-    className: 'theme-toggle__icon theme-toggle__icon--sun',
+    className: 'theme-toggle_*icon theme-toggle*_icon--sun',
     'aria-hidden': 'true'
   },
   '☀'
 )
-```
+
+```text
 
 **Features:**
+
 - Separate classes for targeted styling
 - Unicode characters (no icon library needed)
 - ARIA hidden (decorative only)
@@ -107,6 +117,7 @@ darkMode && React.createElement(
 **File:** `/styles/blocks/theme-toggle.css` (v4.0.0)
 
 #### Base Button — Light Mode
+
 ```css
 .theme-toggle {
   width: 2.75rem;
@@ -116,9 +127,11 @@ darkMode && React.createElement(
   background-color: var(--wp--preset--color--neutral-50);
   color: var(--wp--preset--color--neutral-700);
 }
-```
+
+```text
 
 #### Dark Mode Button
+
 ```css
 .dark .theme-toggle {
   background-color: rgba(15, 15, 15, 0.8);
@@ -126,47 +139,56 @@ darkMode && React.createElement(
   color: var(--wp--preset--color--neon-pink);
   box-shadow: 0 0 12px rgba(255, 16, 240, 0.2);
 }
-```
+
+```text
 
 **Features:**
+
 - Atomic black background (80% opacity)
 - Pink border (40% opacity)
 - Pink icon color
 - Subtle pink glow
 
 #### Hover State (Light Mode)
+
 ```css
 .theme-toggle:hover {
   transform: rotate(15deg) scale(1.05);
   border-color: var(--wp--preset--color--neon-pink);
   box-shadow: 0 0 20px rgba(255, 16, 240, 0.3);
 }
-```
+
+```text
 
 **Effects:**
+
 - 15° rotation
 - 5% scale up
 - Pink border
 - Pink glow
 
 #### Hover State (Dark Mode)
+
 ```css
 .dark .theme-toggle:hover {
   border-color: var(--wp--preset--color--neon-yellow);
   background-color: rgba(15, 15, 15, 0.95);
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba(255, 16, 240, 0.4),    /* Pink outer */
     0 0 10px rgba(244, 255, 60, 0.3);     /* Yellow inner */
 }
-```
+
+```text
 
 **Effects:**
+
 - Yellow border
 - Darker background
 - Dual pink/yellow glow
 - Rotation + scale from base hover
 
 #### Moon Icon (Dark Mode)
+
 ```css
 .theme-toggle__icon--moon {
   color: var(--wp--preset--color--neon-pink);
@@ -178,15 +200,18 @@ darkMode && React.createElement(
   filter: drop-shadow(0 0 8px var(--wp--preset--color--neon-yellow));
   transform: scale(1.1);
 }
-```
+
+```text
 
 **Effects:**
+
 - Pink moon with glow
 - Transforms to yellow on hover
 - Glow intensifies
 - Scales up 10%
 
 #### Sun Icon (Light Mode)
+
 ```css
 .theme-toggle__icon--sun {
   color: var(--wp--preset--color--neon-yellow);
@@ -197,15 +222,18 @@ darkMode && React.createElement(
   filter: drop-shadow(0 0 8px var(--wp--preset--color--neon-yellow));
   transform: rotate(45deg) scale(1.1);
 }
-```
+
+```text
 
 **Effects:**
+
 - Yellow sun with glow
 - Rotates 45° on hover
 - Glow intensifies
 - Scales up 10%
 
 #### Focus State
+
 ```css
 .theme-toggle:focus-visible {
   outline: 3px solid var(--wp--preset--color--neon-pink);
@@ -216,9 +244,11 @@ darkMode && React.createElement(
   outline-color: var(--wp--preset--color--neon-yellow);
   box-shadow: 0 0 20px rgba(244, 255, 60, 0.5);
 }
-```
+
+```text
 
 **Features:**
+
 - Pink outline in light mode
 - Yellow outline in dark mode
 - 2px offset for visibility
@@ -231,23 +261,29 @@ darkMode && React.createElement(
 **File:** `/index.html` (line 66-85)
 
 **Old Version:**
+
 ```javascript
 var theme = savedTheme || (prefersDark ? 'dark' : 'light');
-```
+
+```text
 
 **New Version:**
+
 ```javascript
 // Default to dark mode (neon pink/yellow design)
 var theme = savedTheme || 'dark';
-```
+
+```text
 
 **Changes:**
+
 - ❌ Removed system preference check
 - ✅ Always defaults to dark mode
 - ✅ Added error fallback to dark mode
 - ✅ Sets both `.dark` class and `data-theme` attribute
 
 **Full Script:**
+
 ```javascript
 <script>
   (function() {
@@ -268,14 +304,16 @@ var theme = savedTheme || 'dark';
     }
   })();
 </script>
-```
+
+```text
 
 ---
 
 ## 🎨 VISUAL DESIGN
 
 ### Light Mode Toggle
-```
+
+```text
 ┌─────────────────┐
 │   Button        │
 │   - Border: Gray│
@@ -289,10 +327,12 @@ var theme = savedTheme || 'dark';
 │   - Pink glow   │
 │   - Sun spins   │
 └─────────────────┘
-```
+
+```text
 
 ### Dark Mode Toggle
-```
+
+```text
 ┌─────────────────┐
 │   Button        │
 │   - Border: Pink│
@@ -308,7 +348,8 @@ var theme = savedTheme || 'dark';
 │   - Moon → Yellow
 │   - Scale up    │
 └─────────────────┘
-```
+
+```text
 
 ---
 
@@ -317,36 +358,41 @@ var theme = savedTheme || 'dark';
 ### WCAG 2.2 Level AA Compliant
 
 ✅ **Focus Indicators:**
+
 - 3px solid outline
 - 2px offset
 - Pink (light mode) / Yellow (dark mode)
 - High contrast visible
 
 ✅ **Keyboard Navigation:**
+
 - Enter key activates
 - Space key activates
 - Tab key focuses
 - Escape key blurs
 
 ✅ **Screen Readers:**
+
 - Proper ARIA labels
 - "Switch to light mode" / "Switch to dark mode"
 - Icon hidden with `aria-hidden="true"`
 - Screen reader text in `.sr-only` span
 
 ✅ **Reduced Motion:**
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   .theme-toggle,
   .theme-toggle__icon {
     transition: none !important;
   }
-  
+
   .theme-toggle:hover {
     transform: none;
   }
 }
-```
+
+```text
 
 ---
 
@@ -385,6 +431,7 @@ var theme = savedTheme || 'dark';
 ## 📊 STATISTICS
 
 ### Component Metrics
+
 - **Component size:** 130 lines
 - **CSS size:** 150 lines
 - **Icon method:** Unicode characters (no library)
@@ -392,12 +439,14 @@ var theme = savedTheme || 'dark';
 - **Glow effects:** 8 shadow combinations
 
 ### Performance
+
 - **Load time:** <10ms (inline script)
 - **Toggle response:** <16ms (1 frame)
 - **No flash:** ✅ FOUC prevented
 - **localStorage:** Instant write
 
 ### Color Usage
+
 - **Neon Pink (#FF3AAE):** Used 12 times
 - **Neon Yellow (#F4FF3C):** Used 8 times
 - **Atomic Black (#0F0F0F):** Used 4 times
@@ -407,10 +456,14 @@ var theme = savedTheme || 'dark';
 ## 📝 FILES MODIFIED
 
 1. `/components/common/ThemeToggleES5.tsx` — **UPDATED** (v4.0.0)
-2. `/styles/blocks/theme-toggle.css` — **UPDATED** (v4.0.0)
-3. `/index.html` — **UPDATED** (FOUC script line 66-85)
-4. `/CHANGELOG.md` — **UPDATED** (added entry)
-5. `/reports/theme-toggle-rewire/summary.md` — **CREATED** (this file)
+
+1. `/styles/blocks/theme-toggle.css` — **UPDATED** (v4.0.0)
+
+1. `/index.html` — **UPDATED** (FOUC script line 66-85)
+
+1. `/CHANGELOG.md` — **UPDATED** (added entry)
+
+1. `/reports/theme-toggle-rewire/summary.md` — **CREATED** (this file)
 
 ---
 
@@ -418,55 +471,80 @@ var theme = savedTheme || 'dark';
 
 ### Integration Status
 
-✅ **Component rewired** — Neon pink/yellow styling active  
-✅ **CSS updated** — All hover/focus states themed  
-✅ **FOUC fixed** — Defaults to dark mode  
-✅ **localStorage** — Persists user choice  
-✅ **Console logging** — Debug info available  
-✅ **Accessibility** — WCAG 2.2 AA compliant  
+✅ **Component rewired** — Neon pink/yellow styling active
+✅ **CSS updated** — All hover/focus states themed
+✅ **FOUC fixed** — Defaults to dark mode
+✅ **localStorage** — Persists user choice
+✅ **Console logging** — Debug info available
+✅ **Accessibility** — WCAG 2.2 AA compliant
 
 ### User Experience
 
 **First Visit:**
+
 1. Page loads → Dark mode (atomic black)
-2. Toggle shows pink moon icon
-3. No flash, instant render
+
+1. Toggle shows pink moon icon
+
+1. No flash, instant render
 
 **Toggle to Light:**
+
 1. Click button
-2. Instant switch (no delay)
-3. Sun icon appears (yellow)
-4. Preference saved
+
+1. Instant switch (no delay)
+
+1. Sun icon appears (yellow)
+
+1. Preference saved
 
 **Toggle to Dark:**
+
 1. Click button
-2. Instant switch
-3. Moon icon appears (pink)
-4. Preference saved
+
+1. Instant switch
+
+1. Moon icon appears (pink)
+
+1. Preference saved
 
 **Hover:**
+
 1. Button rotates 15°
-2. Border changes color
-3. Icon glows and transforms
-4. Dual shadow appears
+
+1. Border changes color
+
+1. Icon glows and transforms
+
+1. Dual shadow appears
 
 ---
 
 ## 🎯 NEXT STEPS
 
-**Optional Enhancements:**
-1. Add sound effect on toggle (subtle click)
-2. Add haptic feedback on mobile
-3. Animate transition with gradient sweep
-4. Add tooltip with keyboard shortcut hint
-5. Create settings panel for theme customization
+## Optional Enhancements
 
-**Testing Recommendations:**
+1. Add sound effect on toggle (subtle click)
+
+1. Add haptic feedback on mobile
+
+1. Animate transition with gradient sweep
+
+1. Add tooltip with keyboard shortcut hint
+
+1. Create settings panel for theme customization
+
+## Testing Recommendations
+
 1. Test with screen readers (NVDA, JAWS, VoiceOver)
-2. Test keyboard-only navigation
-3. Test at 200% zoom
-4. Test on slow connections
-5. Test with browser extensions disabled
+
+1. Test keyboard-only navigation
+
+1. Test at 200% zoom
+
+1. Test on slow connections
+
+1. Test with browser extensions disabled
 
 ---
 
@@ -494,8 +572,8 @@ var theme = savedTheme || 'dark';
 
 ---
 
-**Report Created:** March 12, 2026  
-**Status:** ✅ COMPLETE  
-**Ready for:** Production deployment  
+**Report Created:** March 12, 2026
+**Status:** ✅ COMPLETE
+**Ready for:** Production deployment
 
 **Theme Toggle:** FULLY REWIRED with neon pink/yellow styling! 🎉

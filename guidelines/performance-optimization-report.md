@@ -1,16 +1,20 @@
 # Performance Optimization Report - February 2025
 
-**Report Date:** February 5, 2025  
-**Optimization Focus:** CSS Performance, Animation Efficiency, Bundle Size  
+**Report Date:** February 5, 2025
+**Optimization Focus:** CSS Performance, Animation Efficiency, Bundle Size
 **Version:** 1.0.0
 
 ---
 
 ## 📋 Executive Summary
 
-Comprehensive performance audit identified **significant optimization opportunities** in CSS architecture, animation management, and bundle size. This report documents findings and implements solutions to improve site performance, especially on mobile devices.
+Comprehensive performance audit identified **significant optimization
+opportunities** in CSS architecture, animation management, and bundle size. This
+report documents findings and implements solutions to improve site performance,
+especially on mobile devices.
 
 **Key Findings:**
+
 - 🔴 **Critical:** Duplicate keyframe animations across 10+ files
 - 🟡 **Medium:** Redundant CSS rules in component files
 - 🟡 **Medium:** Unoptimized `will-change` usage
@@ -25,12 +29,13 @@ Comprehensive performance audit identified **significant optimization opportunit
 **Problem:** Same animations defined multiple times across different CSS files
 
 **Impact:**
+
 - Increased bundle size (10-15KB unnecessary CSS)
 - Maintenance complexity (updating requires changes in multiple files)
 - Potential inconsistencies in animation behavior
 - Slower CSS parsing
 
-**Duplicates Identified:**
+## Duplicates Identified
 
 | Animation | Occurrences | Files |
 |-----------|-------------|-------|
@@ -50,6 +55,7 @@ Comprehensive performance audit identified **significant optimization opportunit
 **Problem:** `will-change` property used without cleanup
 
 **Current Usage:**
+
 ```css
 /* globals.css */
 .animate-neon-pulse-green {
@@ -61,14 +67,17 @@ Comprehensive performance audit identified **significant optimization opportunit
   animation: gradientShift 15s ease infinite;
   will-change: background-position;  /* Never removed! */
 }
-```
+
+```text
 
 **Impact:**
+
 - Increased memory usage on low-end devices
 - GPU layer kept active indefinitely
 - Potential performance degradation on mobile
 
 **Best Practice:**
+
 ```css
 /* Only add will-change during animation */
 .animate-neon-pulse-green {
@@ -79,13 +88,15 @@ Comprehensive performance audit identified **significant optimization opportunit
 .animate-neon-pulse-green:active {
   will-change: box-shadow;
 }
-```
+
+```text
 
 ---
 
 ### 3. 🟢 LOW: Minor CSS Redundancies
 
 **Findings:**
+
 - Some utility classes defined but rarely used
 - A few overly specific selectors that could be simplified
 - Minor duplicate color definitions
@@ -97,51 +108,70 @@ Comprehensive performance audit identified **significant optimization opportunit
 ## 🎯 Optimization Strategy
 
 ### Phase 1: Consolidate Animations ✅
+
 **Status:** Ready to implement
 
 **Actions:**
+
 1. Create `/styles/animations.css` with all common animations
-2. Remove duplicates from individual files
-3. Import in globals.css
-4. Update reduced motion support
+
+1. Remove duplicates from individual files
+
+1. Import in globals.css
+
+1. Update reduced motion support
 
 **Expected Savings:** 10-15KB CSS, faster parse time
 
 ---
 
 ### Phase 2: Optimize `will-change` ✅
+
 **Status:** Ready to implement
 
 **Actions:**
+
 1. Remove static `will-change` from animation classes
-2. Add `will-change` only on hover/focus for interactive elements
-3. Use `@media (prefers-reduced-motion: reduce)` to remove completely
+
+1. Add `will-change` only on hover/focus for interactive elements
+
+1. Use `@media (prefers-reduced-motion: reduce)` to remove completely
 
 **Expected Improvement:** 15-20% better animation performance on mobile
 
 ---
 
 ### Phase 3: Mobile Animation Optimization 🔄
+
 **Status:** Planned
 
 **Actions:**
+
 1. Reduce animation complexity on low-end devices
-2. Use `@media (prefers-reduced-data)` for data-conscious users
-3. Simplify gradient animations on mobile
-4. Lazy load heavy animations
+
+1. Use `@media (prefers-reduced-data)` for data-conscious users
+
+1. Simplify gradient animations on mobile
+
+1. Lazy load heavy animations
 
 **Expected Improvement:** 25-30% better mobile performance
 
 ---
 
 ### Phase 4: Bundle Size Analysis 🔄
+
 **Status:** Planned
 
 **Actions:**
+
 1. Analyze final CSS bundle size
-2. Check for unused CSS with PurgeCSS
-3. Optimize font loading strategy
-4. Review component lazy loading
+
+1. Check for unused CSS with PurgeCSS
+
+1. Optimize font loading strategy
+
+1. Review component lazy loading
 
 **Expected Savings:** 20-30KB total bundle size
 
@@ -150,17 +180,20 @@ Comprehensive performance audit identified **significant optimization opportunit
 ## 📊 Performance Metrics - Before Optimization
 
 ### CSS Bundle Size
+
 - **Total CSS:** ~180KB (uncompressed)
 - **Duplicate animations:** ~15KB
 - **Unused selectors:** ~2KB
 - **Optimization potential:** ~17KB (9.4%)
 
 ### Animation Performance
+
 - **Keyframe definitions:** 32 unique + 15 duplicates = 47 total
 - **`will-change` instances:** 5 (all permanent)
 - **Mobile optimization:** None
 
 ### Load Performance
+
 - **Critical CSS:** Not extracted
 - **Unused CSS:** ~10-15% of bundle
 - **Font loading:** Not optimized
@@ -170,6 +203,7 @@ Comprehensive performance audit identified **significant optimization opportunit
 ## 🚀 Implementation Plan
 
 ### Step 1: Create Centralized Animations File
+
 Create `/styles/animations.css` with all common animations:
 
 ```css
@@ -225,15 +259,19 @@ Create `/styles/animations.css` with all common animations:
 
 /* Accessibility: Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
-  * {
+
+* {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
 }
-```
+
+```text
 
 ### Step 2: Remove Duplicates
+
 Remove duplicate `@keyframes` from:
+
 - `/styles/blocks/countdown.css`
 - `/styles/blocks/skeleton.css`
 - `/styles/blocks/home-page.css`
@@ -245,6 +283,7 @@ Remove duplicate `@keyframes` from:
 - `/styles/blocks/videos-page.css`
 
 ### Step 3: Optimize `will-change`
+
 Update `/styles/globals.css`:
 
 ```css
@@ -260,9 +299,11 @@ Update `/styles/globals.css`:
 .animate-neon-pulse-green:focus-within {
   will-change: box-shadow;
 }
-```
+
+```text
 
 ### Step 4: Mobile Optimization
+
 Add mobile-specific optimizations:
 
 ```css
@@ -271,7 +312,7 @@ Add mobile-specific optimizations:
   .animate-neon-glow-bg {
     animation-duration: 20s; /* Slower = less CPU */
   }
-  
+
   .animate-neon-pulse-green,
   .animate-neon-pulse-pink,
   .animate-neon-pulse-blue {
@@ -286,7 +327,8 @@ Add mobile-specific optimizations:
     background: var(--wp--preset--color--neon-purple);
   }
 }
-```
+
+```text
 
 ---
 
@@ -305,6 +347,7 @@ Add mobile-specific optimizations:
 ## 🧪 Testing Checklist
 
 ### Performance Testing
+
 - [ ] Run Lighthouse performance audit (aim for 95+)
 - [ ] Test on low-end Android device (Moto G4/similar)
 - [ ] Test on iPhone SE (low-power mode)
@@ -312,12 +355,14 @@ Add mobile-specific optimizations:
 - [ ] Check animation FPS during heavy scrolling
 
 ### Visual Regression
+
 - [ ] Verify all animations still work correctly
 - [ ] Test reduced motion mode
 - [ ] Verify no visual changes from consolidation
 - [ ] Check all hover states
 
 ### Bundle Analysis
+
 - [ ] Run bundle analyzer
 - [ ] Check CSS gzip compression ratio
 - [ ] Verify no unused animations imported
@@ -327,31 +372,41 @@ Add mobile-specific optimizations:
 ## 🎓 Key Learnings
 
 1. **Animation Consolidation:** Centralizing common animations is critical for maintainability
-2. **will-change Overuse:** Static `will-change` can harm performance on mobile
-3. **Mobile First:** Heavy animations need mobile-specific optimizations
-4. **Reduced Motion:** Must be comprehensive across all animation types
+
+1. **will-change Overuse:** Static `will-change` can harm performance on mobile
+
+1. **Mobile First:** Heavy animations need mobile-specific optimizations
+
+1. **Reduced Motion:** Must be comprehensive across all animation types
 
 ---
 
 ## 🔄 Next Steps
 
 1. ✅ Create `/styles/animations.css`
-2. ✅ Remove duplicate keyframes
-3. ✅ Optimize `will-change` usage
-4. 🔄 Add mobile optimizations
-5. 🔄 Run performance benchmarks
-6. 🔄 Document bundle size improvements
+
+1. ✅ Remove duplicate keyframes
+
+1. ✅ Optimize `will-change` usage
+
+1. 🔄 Add mobile optimizations
+
+1. 🔄 Run performance benchmarks
+
+1. 🔄 Document bundle size improvements
 
 ---
 
 ## 📚 Resources
 
 ### Performance Tools
+
 - [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)
 - [WebPageTest](https://www.webpagetest.org/)
 - [Chrome DevTools Performance](https://developer.chrome.com/docs/devtools/performance/)
 
 ### CSS Optimization
+
 - [CSS Triggers](https://csstriggers.com/)
 - [will-change Best Practices](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change)
 - [PurgeCSS](https://purgecss.com/)
@@ -360,15 +415,18 @@ Add mobile-specific optimizations:
 
 ## 📝 Conclusion
 
-This optimization pass will reduce CSS bundle size by **~9.4%**, improve mobile animation performance by **~33%**, and establish better practices for animation management. All optimizations are non-breaking and maintain full visual consistency.
+This optimization pass will reduce CSS bundle size by **~9.4%**, improve mobile
+animation performance by **~33%**, and establish better practices for animation
+management. All optimizations are non-breaking and maintain full visual
+consistency.
 
-**Status:** Ready to implement  
-**Priority:** High  
-**Estimated Time:** 2-3 hours  
+**Status:** Ready to implement
+**Priority:** High
+**Estimated Time:** 2-3 hours
 **Risk Level:** Low (non-breaking changes)
 
 ---
 
-**Report Completed:** February 5, 2025  
-**Next Review:** March 2025  
+**Report Completed:** February 5, 2025
+**Next Review:** March 2025
 **Maintained by:** Ash Shaw Portfolio Team

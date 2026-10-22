@@ -8,7 +8,15 @@
 
 ## Executive Summary
 
-The audit covered five domains: button padding, design tokens, inline styles, console logging, and undefined CSS token references. The most significant finding is a **systemic undefined token problem** — dozens of `--wp--preset--*` tokens referenced across `button.css`, `read-more-btn.css`, `not-found-page.css`, and the `src/styles/tokens/` layer are never defined in any CSS file. These silently fall back to empty values, producing invisible button states, broken border radii, and missing shadow glows. This is more impactful than it might appear because it affects all button focus/hover states site-wide.
+The audit covered five domains: button padding, design tokens, inline styles,
+console logging, and undefined CSS token references. The most significant
+finding is a **systemic undefined token problem** — dozens of `--wp--preset--*`
+tokens referenced across `button.css`, `read-more-btn.css`,
+`not-found-page.css`, and the `src/styles/tokens/` layer are never defined in
+any CSS file. These silently fall back to empty values, producing invisible
+button states, broken border radii, and missing shadow glows. This is more
+impactful than it might appear because it affects all button focus/hover states
+site-wide.
 
 ---
 
@@ -50,25 +58,35 @@ The audit covered five domains: button padding, design tokens, inline styles, co
 
 1. **Define all undefined `--wp--preset--*` tokens** in `globals.css` `:root {}` — shadow, border-radius, z-index, base, contrast, primary, neon-purple, neon-purple-text, neon-pink-text (E-01 through E-04). This is one focused edit to `globals.css`.
 
-2. **Consolidate button padding** — choose `.btn` as the single system and align `.wp-block-button__link` and `read-more-btn` to use `clamp()` (A-01, A-02, A-03).
+1. **Consolidate button padding** — choose `.btn` as the single system and align `.wp-block-button__link` and `read-more-btn` to use `clamp()` (A-01, A-02, A-03).
 
 ### 🟠 Do next — High (standard violations)
 
-3. **Add font-family brand aliases** to `globals.css` (E-05)
-4. **Add fluid spacing scale** to `globals.css` (E-06)
-5. **Add z-index scale** to `globals.css` (E-07)
-6. **Replace hardcoded hex in `globals.css` selectors** with token refs (B-01)
-7. **Replace hardcoded pixel font-sizes** with `clamp()` (B-03)
-8. **Fix `ThemeToggleES5.tsx` console.log** (D-01)
-9. **Refactor `PaletteDemoModal.tsx`** layout/typography inline styles into BEM classes (C-01)
-10. **Replace hardcoded hex in `dark.css`** with `--color-*` token refs (B-02 — systemic pass)
+1. **Add font-family brand aliases** to `globals.css` (E-05)
+
+1. **Add fluid spacing scale** to `globals.css` (E-06)
+
+1. **Add z-index scale** to `globals.css` (E-07)
+
+1. **Replace hardcoded hex in `globals.css` selectors** with token refs (B-01)
+
+1. **Replace hardcoded pixel font-sizes** with `clamp()` (B-03)
+
+1. **Fix `ThemeToggleES5.tsx` console.log** (D-01)
+
+1. **Refactor `PaletteDemoModal.tsx`** layout/typography inline styles into BEM classes (C-01)
+
+1. **Replace hardcoded hex in `dark.css`** with `--color-*` token refs (B-02 — systemic pass)
 
 ### 🟡 Nice to have — Medium
 
-11. Replace `TimelinePage.tsx` and `HistoryPage.tsx` inline colour with CSS var injection (C-02, C-03)
-12. Inspect and classify `PressKitPage.tsx:38` and `WhySection.tsx:152` (C-04, C-05)
-13. Deprecate legacy `.button` block from `globals.css` (B-05)
-14. Adopt single token convention: `--wp--preset--color--*` only going forward (B-04, E-08)
+1. Replace `TimelinePage.tsx` and `HistoryPage.tsx` inline colour with CSS var injection (C-02, C-03)
+
+1. Inspect and classify `PressKitPage.tsx:38` and `WhySection.tsx:152` (C-04, C-05)
+
+1. Deprecate legacy `.button` block from `globals.css` (B-05)
+
+1. Adopt single token convention: `--wp--preset--color--*` only going forward (B-04, E-08)
 
 ---
 
