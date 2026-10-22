@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **CodeRabbit docstring coverage** — Added docstrings to 7 functions across netlify-hashed-asset-headers.mjs, check-netlify-headers.mjs, and vite.config.ts to meet 80% documentation coverage threshold (PR #426)
 - **React external dependency resolution regression** — Restored missing `resolveReactExternals()` function and `build.rollupOptions` in Vite configuration that was accidentally removed in PR #345, causing all 7 subsequent Dependabot PRs to fail Netlify builds with unresolved `react/jsx-runtime` import errors (Issue #306)
 
 ### Changed
@@ -41,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Integration validation procedures (Typeform, YouTube, Vimeo, Google Fonts)
   - CSP compatibility assessment (existing configuration verified as compatible)
   - Performance impact analysis and potential issue mitigations
+- **Integration validation plan** — Created `INTEGRATION-VALIDATION-PLAN.md` with detailed testing procedures for external integrations (Google Fonts, Typeform, YouTube, Vimeo), CSP validation, deployment validation script usage, performance baselines, and test results template (PR #426)
 - **Baseline security headers preserved** — Maintained all existing headers: X-Frame-Options, X-Content-Type-Options (nosniff), Referrer-Policy, Permissions-Policy, and Content-Security-Policy
 
 **File Organisation and Test Coverage (T011)**
