@@ -1,0 +1,57 @@
+---
+# Mergify Configuration for ThisOneTimeOnAcidCom
+#
+# Purpose: Auto-rebase and auto-merge Dependabot PRs when conditions are met
+# Strategy: Complements Dependabot's native auto-merge with smart rebasing
+#
+# Reference: https://docs.mergify.io/
+
+pull_request_rules:
+  # Rule 1: Auto-merge Dependabot PRs when checks pass
+  - name: Dependabot auto-merge for minor and patch updates
+    conditions:
+      - author: dependabot
+      - author: dependabot[bot]
+      - base: develop
+      - "check-success=Test Suite"
+      - "check-success=netlify/site"
+    actions:
+      merge:
+        method: squash
+        commit_message: auto
+
+  # Rule 2: Auto-rebase Dependabot PRs on conflict (cascading updates)
+  - name: Auto-rebase Dependabot PRs with merge conflicts
+    conditions:
+      - author: dependabot
+      - author: dependabot[bot]
+      - conflict
+    actions:
+      rebase:
+        strategy: merge
+        fail_if_behind: false
+        autosquash: false
+
+  # Rule 3: Dismiss stale approvals/reviews from Dependabot PRs
+  - name: Dismiss stale reviews on Dependabot PRs
+    conditions:
+      - author: dependabot
+      - author: dependabot[bot]
+    actions:
+      dismiss_reviews:
+        approved: true
+
+  # Rule 4: Auto-merge small dependency updates without blocking
+  - name: Fast-track patch and minor npm updates
+    conditions:
+      - author: dependabot
+      - author: dependabot[bot]
+      - base: develop
+      - "#commits <= 2"
+      - "check-success=Test Suite"
+      - "check-success=netlify/site"
+    actions:
+      merge:
+        method: squash
+        commit_message: auto
+        queue_strategy: fifo
