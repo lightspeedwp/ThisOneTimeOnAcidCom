@@ -78,8 +78,10 @@ modified: "YYYY-MM-DD"
 version: "1.0.0"
 prompt_type: "single-audit"
 estimated_duration: "30 minutes"
-related_reports: "/reports/{topic}/"
+related_reports: "/reports/{topic}/report.md"
 related_tasks: "/tasks/{topic}-tasks.md"
+related_guidelines:
+  - "/guidelines/{guideline}.md"
 ---
 ```
 
@@ -121,7 +123,7 @@ Identify Tailwind utility violations in `/styles/blocks/` and recommend BEM refa
 
 - [ ] All Tailwind utilities catalogued
 - [ ] BEM replacements identified
-- [ ] Report saved to `/reports/css-audit/`
+- [ ] Report saved to `/reports/css-audit/report.md`
 ```
 
 ### Step 2A: Run the Audit
@@ -171,10 +173,14 @@ created: "YYYY-MM-DD"
 modified: "YYYY-MM-DD"
 version: "1.0.0"
 related_prompt: "/prompts/{topic}.md"
-related_report: "/reports/{topic}.md"
+related_report: "/reports/{topic}/report.md"
+related_guidelines:
+  - "/guidelines/{guideline}.md"
 status: "active"
 ---
 ```
+
+If a task refers to project guidance, `related_guidelines` MUST list each specific guideline file used.
 
 **Task list structure:**
 - Overview (1–2 sentences on what these tasks accomplish)
@@ -208,7 +214,7 @@ Refactor Tailwind utilities to BEM classes across `/styles/blocks/`. 10 tasks, ~
 
 ## Dependencies
 
-- Report: `/reports/css-audit.md` must be complete
+- Report: `/reports/css-audit/report.md` must be complete
 - Skill: `/bem-css-compliance` should be available
 
 ## Estimated Completion
@@ -402,13 +408,21 @@ When the dedicated task list is created, add its entry to `/tasks/master-task-li
 
 **Do this immediately upon completion, BEFORE the 30-day retention period begins:**
 
-**For a dedicated task list (single-file or orchestrator audit), update `/tasks/master-task-list.md`:**
-- Move the dedicated task-list entry from "Active" to "Completed (pending archive)"
-- Add completion date and location of the dedicated task list (e.g., `/tasks/{topic}-tasks.md`)
+**For single-file task lists:**
+- Move entry in `/tasks/{topic}-tasks.md` from "Active" to "Completed (pending archive)"
+- Add completion date: YYYY-MM-DD
+- Update `/tasks/master-task-list.md`: Move entry from "Active" to "Completed (pending archive)" with completion date and location
 
-**For tasks in `/tasks/task-list.md`:** Mark the relevant checkboxes complete and record their completion date. Keep this persistent checklist and its tracker entry active (ongoing general-purpose); do not apply "Completed (pending archive)" to either.
+**For orchestrator audits with dedicated task lists:**
+- Move entry in dedicated task list (e.g., `/tasks/{topic}-orchestration-tasks.md`) from "Active" to "Completed (pending archive)"
+- Add completion date: YYYY-MM-DD
+- Update `/tasks/master-task-list.md`: Move entry from "Active" to "Completed (pending archive)" with completion date and location
 
-**Important:** The dedicated audit entry changes to "Completed (pending archive)" at task completion, not during archiving. Its completion date marks the start of the mandatory 30-day retention period before the dedicated task list and associated reports can be moved to the archive folder.
+**Always update the persistent `/tasks/task-list.md` (if audit entry exists there):**
+- Move entry from "Active" section to "Completed (pending archive)"
+- Add completion date: YYYY-MM-DD
+
+**Important:** Status changes to "Completed (pending archive)" happen at task completion, not during archiving. This marks the start of the mandatory 30-day retention period before files can be moved to the archive folder.
 
 ---
 
@@ -426,21 +440,29 @@ Before archiving, confirm:
 
 ### Archive Process
 
-**Step 1: After 30 days have passed since completion, move the report to archive**
+**Step 1: After 30 days have passed since completion, archive the report**
 
 Do not move the report before the 30-day post-completion retention period ends.
 
+Before each move, set every report's YAML frontmatter status to `archived` (including the orchestrator's consolidated report and all sub-reports):
+
 ```bash
 # Single-file report
-mv ./reports/{topic}.md ./reports/archived/{topic}.md
+sed -i.bak '2,/^---$/s/^status: .*/status: "archived"/' ./reports/{topic}/report.md &&
+  rm ./reports/{topic}/report.md.bak &&
+  mv ./reports/{topic}/ ./reports/archived/{topic}/
 
 # Orchestrator report folder
+for report in ./reports/YYYY-MM-DD-{topic}/*.md; do
+  sed -i.bak '2,/^---$/s/^status: .*/status: "archived"/' "$report" || exit 1
+  rm "$report.bak" || exit 1
+done
 mv ./reports/YYYY-MM-DD-{topic}/ ./reports/archived/YYYY-MM-DD-{topic}/
 ```
 
-**Step 2: Move task-list file to archive, then update tracker**
+**Step 2: Move task-list file to archive, then update master tracker**
 
-For a dedicated task list, its audit entry in `/tasks/master-task-list.md` should already be in "Completed (pending archive)" from Step 8 (marked at task completion). Only dedicated task-list files are moved below. Keep `/tasks/task-list.md` in place and its tracker entry active (ongoing general-purpose).
+The master tracker `/tasks/master-task-list.md` should already have each dedicated task-list entry marked "Completed (pending archive)" from Step 8 (marked at task completion). Now that files are being permanently archived:
 
 **First, move the completed task-list file:**
 
@@ -452,12 +474,14 @@ mv ./tasks/{topic}-tasks.md ./tasks/archived/{topic}-tasks.md
 mv ./tasks/{topic}-tasks.md ./tasks/archived/{topic}-tasks.md
 ```
 
-**Then, update archive location tracking in the master tracker:**
+**Then, update archive location tracking in the master tracker only:**
 
-For a dedicated task list (single-file or orchestrator audit), edit `/tasks/master-task-list.md`:
-- Move the dedicated task-list entry from "Completed (pending archive)" to "Archived"
+Edit `/tasks/master-task-list.md`:
+- Move the dedicated task-list entry from "Completed (pending archive)" section to "Archived"
 - Update path from `/tasks/{topic}-tasks.md` to `/tasks/archived/{topic}-tasks.md` (reflecting the moved file)
-- Add archive date
+- Add archive date: YYYY-MM-DD
+
+Note: `/tasks/task-list.md` is the persistent general-purpose checklist and is never archived. Do not modify it during archiving—only update `/tasks/master-task-list.md`.
 
 **Step 3: Keep prompt for reference (optional)**
 
@@ -539,7 +563,7 @@ Missing frontmatter means:
 | Content | Location | Example |
 |---------|----------|---------|
 | Prompts | `/prompts/` | `/prompts/css-audit.md` |
-| Reports | `/reports/` | `/reports/css-audit.md` or `/reports/2026-10-22-css-audit/` |
+| Reports | `/reports/` | `/reports/css-audit/report.md` or `/reports/2026-10-22-css-audit/` |
 | Tasks | `/tasks/` | `/tasks/css-audit-tasks.md` |
 | Archived | `/reports/archived/`, `/tasks/archived/` | `/reports/archived/2026-02-01-old-audit/` |
 
@@ -567,7 +591,7 @@ modified: "2026-10-22"
 version: "1.0.0"
 prompt_type: "single-audit"
 estimated_duration: "1 hour"
-related_reports: "/reports/{topic}/"
+related_reports: "/reports/{topic}/report.md"
 related_tasks: "/tasks/{topic}-tasks.md"
 ---
 ```
@@ -581,7 +605,7 @@ Copy and customize:
 ```yaml
 ---
 title: "Report: {Your Title Here}"
-filename: "/reports/{topic}.md"
+filename: "/reports/{topic}/report.md"
 created: "2026-10-22"
 modified: "2026-10-22"
 version: "1.0.0"
@@ -606,7 +630,9 @@ created: "2026-10-22"
 modified: "2026-10-22"
 version: "1.0.0"
 related_prompt: "/prompts/{topic}.md"
-related_report: "/reports/{topic}.md"
+related_report: "/reports/{topic}/report.md"
+related_guidelines:
+  - "/guidelines/{guideline}.md"
 status: "active"
 ---
 ```
@@ -658,7 +684,7 @@ Running your first audit?
 - [ ] Add required YAML frontmatter (copy from templates)
 - [ ] Define scope, method, acceptance criteria
 - [ ] Run audit; document findings
-- [ ] Create `/reports/{topic}.md` with frontmatter
+- [ ] Create `/reports/{topic}/report.md` with frontmatter
 - [ ] Extract `/tasks/{topic}-tasks.md`
 - [ ] Link all three files together (cross-reference in frontmatter)
 - [ ] Begin implementing tasks

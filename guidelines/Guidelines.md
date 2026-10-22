@@ -28,12 +28,15 @@ This document defines the core design, development, and technical guidelines for
 
 ### 🚫 Root Directory Restrictions (CRITICAL)
 
-**Only the following `.md` files are allowed in the project root (`/`):**
+**When creating new Markdown (`.md`) files in the project root (`/`), only the following are permitted:**
 - `README.md` — Project overview
 - `CHANGELOG.md` — Release history (protected file — see **[changelog.md](./changelog.md)**)
-- `Attributions.md` — System-protected file (cannot be moved or deleted)
+- `ATTRIBUTIONS.md` — System-protected file (cannot be moved or deleted)
 
-**All other `.md` files MUST be placed in the appropriate folder:**
+`AGENTS.md`, `CLAUDE.md`, and `CONTRIBUTING.md` are acknowledged exceptions for agent and GitHub tooling discoverability.
+This restriction applies only to new Markdown files; existing root Markdown files may remain.
+
+**All other new `.md` files MUST be placed in the appropriate folder:**
 
 | Content Type | Required Location |
 |---|---|
