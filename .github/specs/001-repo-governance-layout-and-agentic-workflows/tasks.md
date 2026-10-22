@@ -878,18 +878,23 @@ available to all team members
 
 **Purpose**: Resolve remaining incomplete tasks from Phases 5–8 and document final handoff
 
-**Status**: Convergence assessment identifies 4 unchecked tasks and 1 partial gap across implementation
+**Status**: Convergence remains pending routing evidence, manual GitHub setup, protected-file guard revalidation and final handoff
 
 ### Implementation for Phase 9 Convergence
 
-- [x] T060 [P] [WS-261] [TOA-252] Complete PR template routing verification (T035 completion)
-- ✅ Created test branches: `test/pr-template-feature`, `test/pr-template-fix`, `test/pr-template-docs`, `test/pr-template-unmatched`
-- ✅ Verified PR Template Routing workflow at `.github/workflows/pr-template-routing.yml`
-- ✅ Confirmed branch prefix extraction and template mapping logic works correctly
-- ✅ Verified all branch type prefixes (feat, fix, docs, test, chore, perf, etc.) map to appropriate templates
-- ✅ Verified default template fallback for unknown prefixes
-- ✅ Verified label assignment (type:feature, type:bug, type:documentation, etc.)
-- Mark: T035 ✅ complete - PR template routing fully operational and verified
+- [ ] T060 [P] [WS-261] [TOA-252] Complete PR template routing verification (T035 completion)
+- Previously listed branches: `test/pr-template-feature`, `test/pr-template-fix`, `test/pr-template-docs`, `test/pr-template-unmatched`. All have the `test/` prefix, so they do not establish the required routing scenarios.
+- `.github/workflows/pr-template-routing.yml` defines the expected mappings below; configuration inspection does not establish observed PR results.
+
+| Scenario | Expected suggested template | Expected label | Test PR and observed result |
+|----------|-----------------------------|----------------|-----------------------------|
+| `feat/*` | `pr_feature.md` | `type:feature` | Not recorded; verification pending |
+| `fix/*` | `pr_bug.md` | `type:bug` | Not recorded; verification pending |
+| `docs/*` | `pr_documentation.md` | `type:documentation` | Not recorded; verification pending |
+| Unmatched prefix | `pr_default.md` | `type:maintenance` | Not recorded; verification pending |
+
+- Record each test PR URL, routing comment and applied label before completing T060. T035 also requires explicit named-template selection precedence and preservation of contributor content.
+- Mark: T035 complete only after the required PR evidence is recorded; T060 remains unchecked while that evidence is unavailable.
 
 - [ ] T061 [WS-261] [TOA-261] Enable branch protection on develop and main (T038 completion)
 - **Manual step**: Go to Settings → Branches → Add branch protection rule
@@ -921,16 +926,14 @@ available to all team members
 - Mark: T046 ✅ complete (Styling documentation fully audited and complete)
 
 - [ ] T064 [P] Validate protected-file changes and record owner approval (T055 completion)
-- Assessment: PR #346 / branch `build/repo-governance-continue-spec-001` modifies protected files:
-    - `.github/workflows/` (added 8 new workflows)
-    - `scripts/` (unchanged, verified)
-    - `AGENTS.md` (updated governance sections)
-    - `CHANGELOG.md` (standard changelog entry)
-- Review changes against PROTECTED_FILES.txt and ensure they are within governance scope
-- Record explicit approval from @ashley (via GitHub comment, issue reference, or email)
-- Rerun protected-files-guard workflow to verify it passes with approval context
-- Document approval reference and revalidation result
-- Mark: T055 ✅ complete when approval recorded and guard passes
+- Current scope: PR [#429](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/429), changes to `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md` and `tasks.md`.
+- Approval recorded in [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975), authored by owner @ashleyshaw, and confirmed in the [PR approval comment](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/429#issuecomment-6336579786). This approval covers the two specification files; it does not approve unrelated protected-file changes.
+- Historical scope: PR #346 / `build/repo-governance-continue-spec-001` is the earlier implementation PR; its approval status is separate from PR #429's current gate.
+- [Check Protected Files at commit 314881e](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751998299/job/119734602115) failed: the guard rejected protected-file modifications without evaluating the recorded approval.
+- Update the guard to accept linked, owner-approved change requests covering the current PR and all modified protected paths, while rejecting missing, unrelated or insufficient approval.
+- Rerun Check Protected Files after the guard update is available, then record the successful run URL and tested revision here. Any additional protected paths, including the guard itself, require approval covering those changes.
+- Revalidation result: **Pending**; no successful Check Protected Files rerun recorded.
+- Mark: T064 complete only after the approval reference and successful guard rerun are recorded; resolve the historical T055 scope separately before closing it.
 
 - [ ] T065 Document implementation completion and handoff (T059 completion – deferred until T060–T064 complete)
 - After T060, T061, T062, T063, T064 all marked ✅:
@@ -939,7 +942,7 @@ available to all team members
     - Feature: TOA-241 – Repository Governance Infrastructure
     - Status: ✅ DELIVERED (all 8 phases, 5 workstreams, 20 child issues)
     - Completion date and session reference
-    - Test results summary (all suites pass: Jest 588/588, Bats 12/12, Playwright configured)
+    - Test results summary (Jest 601/601 verified in PR #429 CI; Bats 12/12 reported passing; SpecKit 103/104 accepted baseline; Playwright configured, not executed)
     - Protected files: verified intact, no breaking changes
     - Application behavior: preserved (SPA build, Netlify deployment)
     - Outstanding items: None (all phases and workstreams completed)
@@ -947,7 +950,7 @@ available to all team members
 - Update `.github/specs/CATALOG.md` to mark TOA-241 as COMPLETE (status: ✅ Delivered)
 - Mark: T059 ✅ complete when COMPLETION.md created and catalog updated
 
-**Checkpoint**: All convergence gaps resolved. Spec-001 feature complete and ready for final owner review and merge to develop/main.
+**Checkpoint (pending)**: Complete the outstanding tasks and record guard revalidation before finalising T065, declaring convergence complete or requesting final merge approval.
 
 ---
 
