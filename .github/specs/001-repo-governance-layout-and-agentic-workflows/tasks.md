@@ -909,7 +909,7 @@ available to all team members
 - Document Discussions setup in `.github/DISCUSSION_TEMPLATE/README.md` with steps
 - Mark: T033 ✅ complete (with Discussions UI enablement recorded)
 
-- [ ] T063 [WS-262] [TOA-262] Audit and complete Styling documentation (T046 sub-item)
+- [x] T063 [WS-262] [TOA-262] Audit and complete Styling documentation (T046 sub-item)
 - Read current CONTRIBUTING.md "Styling: semantic BEM" section
 - Verify coverage of:
     - BEM naming conventions (Block, Element, Modifier)
