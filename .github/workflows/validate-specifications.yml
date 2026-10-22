@@ -116,7 +116,7 @@ jobs:
 
           printf 'Linting %d changed file(s):\n' "${#CHANGED_MD[@]}"
           printf '  %s\n' "${CHANGED_MD[@]}"
-          npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
+          npm ci --ignore-scripts
           ./node_modules/.bin/markdownlint-cli2 "${CHANGED_MD[@]}"
           echo "✓ Markdown linting passed"
 

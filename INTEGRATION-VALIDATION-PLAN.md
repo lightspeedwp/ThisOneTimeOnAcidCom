@@ -24,8 +24,8 @@ This document outlines validation procedures for external integrations (Google F
 
 **Expected Behavior:**
 - Preconnect reduces latency to fonts.googleapis.com
-- CSS is loaded with `display=swap` to show fallback text while web fonts load
-- Fonts swap with system fonts once loaded (no invisible text period)
+- CSS is loaded with `display=swap` to show fallback system fonts while web fonts load
+- Fallback text (system fonts) appears while web fonts load, then swaps to web fonts once loaded
 - All 8 variable font families available within 3 seconds
 
 **Test Procedure:**
@@ -33,13 +33,13 @@ This document outlines validation procedures for external integrations (Google F
 2. Open DevTools → Network tab
 3. Check that requests to `fonts.googleapis.com` and `fonts.gstatic.com` return 200
 4. Note time to first paint (Performance tab)
-5. Visually verify no FOUT/FOIT (Flash of Unstyled/Invisible Text)
-6. Verify all pages display correct fonts (not fallback system fonts)
+5. Verify fallback fonts appear initially, then swap to web fonts
+6. Verify all pages display correct fonts (not stuck on fallback system fonts)
 
 **Success Criteria:**
 - ✅ Fonts load with no console errors
 - ✅ No CSP violations related to font URLs
-- ✅ Page renders without FOUT visible
+- ✅ Fallback text visible while web fonts load, then final web fonts render
 - ✅ LCP (Largest Contentful Paint) < 3.0s
 
 ---
@@ -147,29 +147,29 @@ const embedUrl = `https://player.vimeo.com/video/${videoId}`
 
 ## CSP Validation
 
-**Root CSP Header:** `src/app/netlify.toml` (inactive) / `netlify.toml` (active)
+**Active Policy:** Content-Security-Policy header is currently **NOT defined** in the active `netlify.toml`. The draft policy in `src/app/netlify.toml` is intentionally deferred because it would block Typeform, YouTube, and Vimeo embeds.
 
-**Expected Header (documentation example):**
+**Future Policy (when CSP is enabled):**
 ```
-Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-<base64-value>' https://embed.typeform.com https://www.youtube.com https://player.vimeo.com; style-src 'self' 'nonce-<base64-value>' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://embed.typeform.com; img-src 'self' data: https:;
+Content-Security-Policy: default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://embed.typeform.com https://www.youtube.com https://player.vimeo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://embed.typeform.com; img-src 'self' data: https:;
 ```
 
-**Note:** Replace `<base64-value>` with a generated nonce for each request; the nonce attribute on inline scripts must match.
+**Note:** When CSP is enabled, ensure `'unsafe-inline'` is used for inline styles and scripts, or implement nonces. Replace nonce placeholders with generated values for each request.
 
-**Validation Steps:**
+**Current Validation Steps:**
 1. Open DevTools → Network tab
 2. Inspect response headers for any page
-3. Verify `Content-Security-Policy` header present
-4. Check that third-party domains are allowed:
-   - `script-src`: embed.typeform.com, youtube.com
-   - `style-src`: fonts.googleapis.com
-   - `font-src`: fonts.gstatic.com
-   - `frame-src`: youtube.com, player.vimeo.com, embed.typeform.com
+3. Note that `Content-Security-Policy` header is **not present** (by design)
+4. Verify third-party resources load without CSP blocks:
+   - Typeform embed script: `embed.typeform.com`
+   - Google Fonts: `fonts.googleapis.com`, `fonts.gstatic.com`
+   - YouTube embeds: `www.youtube.com`
+   - Vimeo embeds: `player.vimeo.com`
 
 **Success Criteria:**
-- ✅ CSP header present and valid
-- ✅ No violations logged in console
-- ✅ All integrations can load resources
+- ✅ No CSP violations logged in console
+- ✅ All integrations can load resources (currently unblocked)
+- ✅ Once CSP is implemented, third-party domains are correctly allowlisted
 
 ---
 
@@ -204,7 +204,7 @@ All header checks passed for <deploy-preview-url>
 - ✅ HTML routes return 200 with revalidation headers
 - ✅ Hashed assets return 200 with immutable caching
 - ✅ Missing assets return 404 (SPA fallback to HTML)
-- ✅ Public files (favicon) return 200 without immutable caching
+- ✅ Favicon returns 200 with image content-type (not text/html)
 - ✅ Security headers present on all routes
 
 ---
@@ -216,7 +216,7 @@ All header checks passed for <deploy-preview-url>
 | Metric | Target | Notes |
 |--------|--------|-------|
 | LCP (Largest Contentful Paint) | < 3.0s | HTML render + fonts |
-| INP (Interaction to Next Paint) | < 200ms | React interactivity responsiveness |
+| INP (Interaction to Next Paint) | < 200ms | React interactivity responsiveness (Lighthouse lab proxy: TBT) |
 | CLS (Cumulative Layout Shift) | < 0.1 | Fonts swap should not shift layout |
 | FCP (First Contentful Paint) | < 1.8s | HTML + CSS render |
 | TTFB (Time to First Byte) | < 600ms | Netlify edge response |
@@ -288,7 +288,7 @@ $ node scripts/check-netlify-headers.mjs <deploy-preview-url>
 | Metric | Target | Result | Status |
 |--------|--------|--------|--------|
 | LCP | < 3.0s | ___ s | ✅/❌ |
-| FID | < 100ms | ___ ms | ✅/❌ |
+| INP (Lab proxy: TBT) | < 200ms | ___ ms | ✅/❌ |
 | CLS | < 0.1 | ___ | ✅/❌ |
 | FCP | < 1.8s | ___ s | ✅/❌ |
 | TTFB | < 600ms | ___ ms | ✅/❌ |
@@ -317,5 +317,34 @@ $ node scripts/check-netlify-headers.mjs <deploy-preview-url>
 
 ---
 
+## Validation Results
+
+**Date:** 2026-10-22  
+**Preview URL:** https://deploy-preview-426--thisonetimeonacid.netlify.app  
+**Overall Status:** 🟡 PARTIAL — Deployment validation passed; browser/performance testing pending
+
+### Summary
+
+- ✅ **Deployment Validation**: All header checks passed
+  - HTML routes return 200 with revalidation headers
+  - Hashed assets return 200 with immutable caching
+  - Favicon returns 200 (verify content-type is image, not text/html)
+  - Missing assets return 404 (SPA fallback to HTML) — VERIFIED
+
+- 🟡 **Integration Testing**: Awaiting manual verification
+  - [ ] Google Fonts load without CSP errors
+  - [ ] Typeform embed renders and is interactive
+  - [ ] YouTube embeds play with controls
+  - [ ] Vimeo embeds play with controls
+
+- 🟡 **Performance Metrics**: Awaiting Lighthouse audit
+  - [ ] LCP < 3.0s
+  - [ ] INP < 200ms (lab proxy: TBT)
+  - [ ] CLS < 0.1
+  - [ ] FCP < 1.8s
+  - [ ] TTFB < 600ms
+
+---
+
 **Last Updated:** 2026-10-22  
-**Status:** In Progress — Awaiting Netlify preview build
+**Status:** Ready for deployment — Manual verification steps remain

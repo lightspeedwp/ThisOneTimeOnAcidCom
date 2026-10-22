@@ -13,6 +13,11 @@ const SECURITY_HEADERS = {
   'x-frame-options': 'DENY',
 }
 
+/**
+ * Probes a single route and captures the initial response.
+ * Uses `redirect: 'manual'` to capture initial response without following redirects.
+ * Returns status, content-type, cache headers, and response body.
+ */
 async function probe(base, path) {
   const res = await fetch(base + path, { redirect: 'manual' })
   const body = await res.text()

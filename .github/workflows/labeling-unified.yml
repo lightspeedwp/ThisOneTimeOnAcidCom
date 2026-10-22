@@ -68,7 +68,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
-      - run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
+      - run: npm ci --ignore-scripts
       - name: Validate labeling configs
         env:
           CANONICAL_LABELS_PATH: .canonical-github/.github/labels.yml
@@ -197,7 +197,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
-      - run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
+      - run: npm ci --ignore-scripts
       - name: Run labeling agent
         id: labeling-run
         env:
