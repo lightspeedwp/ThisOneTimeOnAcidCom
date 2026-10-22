@@ -245,19 +245,42 @@ The application includes built-in dev tools for inspecting the design system.
 
 ## 📊 Content Counts (v8.4.0)
 
-| Content Type | Count | Notes |
-|---|---|---|
-| **Book Pages** | 15 | Home, The Book, Draft, About, Waitlist, Journal, Events, Speaking, Contact, Thank You, Media, Draft Viewer, Ebook, Sitemap, Style Guide |
-| **Ebook Pages** | 82 | 20 chapters + 2 appendices |
-| **Blog Posts** | 50 | Production-ready with rich storytelling |
-| **Portfolio Entries** | 25 | Enhanced with 150-word descriptions, 10-11 tags |
-| **Videos** | 17 | 9 categories, 87 unique tags |
-| **Podcast Episodes** | 4 | Full transcripts |
-| **Events** | 4 | Origin, Organik, Gondwana, Vortex |
-| **Sticker Designs** | 26 | UV reactive art gallery |
-| **FAQ Entries** | 33 | Schema.org structured data |
-| **Animations** | 26 | @keyframes library |
-| **Dev Tools Pages** | 2 | Style Guide + Animation Showcase |
+| Content Type | Count |
+|---|---|
+| **Book Pages** | 15 |
+| **Ebook Pages** | 82 |
+| **Blog Posts** | 50 |
+| **Portfolio Entries** | 25 |
+| **Videos** | 17 |
+| **Podcast Episodes** | 4 |
+| **Events** | 4 |
+| **Sticker Designs** | 26 |
+| **FAQ Entries** | 33 |
+| **Animations** | 26 |
+| **Dev Tools Pages** | 2 |
+
+**Book Pages (15):** Home, The Book, Draft, About, Waitlist, Journal, Events,
+Speaking, Contact, Thank You, Media, Draft Viewer, Ebook, Sitemap, Style Guide
+
+**Ebook Pages (82):** 20 chapters + 2 appendices
+
+**Blog Posts (50):** Production-ready with rich storytelling
+
+**Portfolio Entries (25):** Enhanced with 150-word descriptions, 10-11 tags
+
+**Videos (17):** 9 categories, 87 unique tags
+
+**Podcast Episodes (4):** Full transcripts
+
+**Events (4):** Origin, Organik, Gondwana, Vortex
+
+**Sticker Designs (26):** UV reactive art gallery
+
+**FAQ Entries (33):** Schema.org structured data
+
+**Animations (26):** @keyframes library
+
+**Dev Tools Pages (2):** Style Guide + Animation Showcase
 
 ## 🎨 Design System Highlights
 
