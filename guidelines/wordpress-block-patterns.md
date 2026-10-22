@@ -1,3 +1,12 @@
+---
+title: "WordPress Block Pattern Mapping"
+filename: "/guidelines/wordpress-block-patterns.md"
+created: "2026-02-01"
+modified: "2026-10-22"
+version: "1.0.0"
+status: "complete"
+---
+
 # WordPress Block Pattern Mapping
 
 **Version:** 1.0.0

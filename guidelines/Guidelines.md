@@ -17,18 +17,14 @@ This document defines the core design, development, and technical guidelines for
 
 ### 🤖 Default AI Workflow (MUST FOLLOW)
 
-**When asked to write a prompt, audit, or review, ALWAYS follow this sequence:**
+**See the [Workflow Orchestration Skill](../../.claude/skills/workflow-orchestration/SKILL.md) for comprehensive guidance on:**
+- Single-file audit workflows (4-step: prompt → audit → report → tasks)
+- Multi-audit orchestrator workflows with parallel execution
+- Folder structure and naming conventions
+- YAML frontmatter templates for all content types
+- Task list management and archiving procedures
 
-1. **Create a prompt** in `/prompts/` — defines the audit scope, steps, and references to relevant guidelines.
-2. **Run the audit** described in the prompt against the codebase and guidelines.
-3. **Save findings** to a report file in `/reports/{topic}/` — only after the full audit is complete.
-4. **Create a task list** in `/tasks/` — only once the report is finalized, extract actionable items into a checklist.
-
-**This is the assumed default.** You do not need to be told each step explicitly. When told to "write a prompt" or "audit X", execute the full 4-step workflow above.
-
-**Multi-audit orchestrators:** When an audit covers multiple areas, create a master/orchestrator prompt in `/prompts/{topic}/orchestrator.md` with individual sub-prompts. Each sub-audit gets its own report in `/reports/{topic}/`. All tasks are consolidated into one task list per orchestrator in `/tasks/`.
-
-**Reusability:** All prompts should be written as reusable templates that can be re-run for ongoing maintenance.
+**Quick reference:** When told to "write a prompt" or "audit X", use the skill's decision tree to choose single-file or orchestrator workflow, then execute the full sequence (create prompt → run audit → save report → extract tasks). The skill provides reusable YAML templates and detailed step-by-step guidance.
 
 ### 🚫 Root Directory Restrictions (CRITICAL)
 
@@ -53,25 +49,19 @@ This document defines the core design, development, and technical guidelines for
 
 ### 📁 Mandatory Folder Conventions
 
-The project uses three dedicated workflow folders. **All AI-generated and human-authored workflow artifacts MUST be stored in these folders.** Never place prompts, reports, or task lists anywhere else (e.g., never in root, never in `/guidelines/`).
+The project uses three dedicated workflow folders. **All AI-generated and human-authored workflow artifacts MUST be stored in these folders.** See the [Workflow Orchestration Skill](../../.claude/skills/workflow-orchestration/SKILL.md) for full folder structure rules and conventions.
 
-| Folder | Purpose | Naming Convention |
-|---|---|---|
-| `/prompts/` | All prompt files for AI-assisted tasks | `{topic}.md` or subfolder `{topic}/` with `orchestrator.md` |
-| `/reports/` | All audit findings, analysis results, reports | Subfolder per audit: `/reports/{audit-name}/` |
-| `/tasks/` | All task lists and checklists | `task-list.md` is the master general-purpose task list |
-| `/docs/` | General project documentation, quick references, attributions | Descriptive filenames (e.g., `Attributions.md`, `quick-reference.md`) |
-| `/scripts/` | All build, utility, and automation scripts (`.ts`, `.sh`, `.js`) | Descriptive filenames (e.g., `verify-build.ts`, `deploy.sh`) |
+**Quick Reference:**
 
-**Rules:**
+| Folder | Purpose |
+|---|---|
+| `/prompts/` | All prompt files for AI-assisted tasks |
+| `/reports/` | All audit findings, analysis results, reports |
+| `/tasks/` | All task lists and checklists; `/tasks/task-list.md` is the persistent master |
+| `/docs/` | General project documentation, quick references, attributions |
+| `/scripts/` | All build, utility, and automation scripts |
 
-1. **Prompts:** Always create new prompt files in `/prompts/`. For multi-step workflows, create a subfolder with a master `orchestrator.md` and child prompt files.
-2. **Reports:** Always write reports to `/reports/`, inside a suitable subfolder (e.g., `/reports/root-cleanup/`, `/reports/css-audit/`). One subfolder per audit or topic.
-3. **Tasks:** Always create task lists in `/tasks/`. The file `/tasks/task-list.md` is the **all-purpose general task list** — it must never be deleted. One task list per orchestrator prompt, stored in the root of `/tasks/`.
-4. **Lifecycle:** Archive completed tasks for later reference. Delete any report older than a few days. Regularly review all folders for unused and orphaned files.
-5. **Cross-referencing:** When referencing guidelines from prompts/reports/tasks, always link to the specific guideline file (e.g., `[BEM Architecture](../guidelines/css-architecture.md)`).
-6. **Never delete** `/tasks/task-list.md` — it is the persistent master checklist.
-7. **Docs:** The `/docs/` folder is the designated home for all general-purpose project documentation, quick references, guides, and relocated documentation files (e.g., CMS field mappings, architecture overviews). Any `.md` file that does not belong in `/guidelines/`, `/prompts/`, `/reports/`, or `/tasks/` should go in `/docs/`.
+**Critical rule:** Never delete `/tasks/task-list.md` — it is the persistent master checklist.
 
 ### 🛡️ Bundler Compatibility Rules (Figma Make)
 
