@@ -402,7 +402,7 @@ mv ./reports/YYYY-MM-DD-{topic}/ ./reports/archived/YYYY-MM-DD-{topic}/
 
 **Step 2: Update master task list**
 
-Edit `/tasks/master-task-list.md`:
+Edit `/tasks/task-list.md`:
 - Move entry from "Active" section to "Completed (pending archive)"
 - Add completion date
 
