@@ -42,26 +42,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Performance impact analysis and potential issue mitigations
 - **Baseline security headers preserved** — Maintained all existing headers: X-Frame-Options, X-Content-Type-Options (nosniff), Referrer-Policy, Permissions-Policy, and Content-Security-Policy
 
-**CI/Test Infrastructure: Jest Failure Comparison**
-
-- **Jest test comparison script** — Added `scripts/validation/compare-jest-failures.cjs` to compare Jest test failures between PR head and base branches
-  - Identifies NEW failures introduced by the PR (blocks merge)
-  - Categorises RESOLVED failures (tests that were failing in base but now pass)
-  - Reports PERSISTENT failures (tests still failing in both branches, doesn't block merge)
-  - Normalises file paths for cross-environment comparison
-  - Exit code 0 if no new failures, 1 if new failures found
-- **Comprehensive test coverage** — Created `scripts/validation/__tests__/compare-jest-failures.test.js` with 13 passing tests covering:
-  - No failures scenario
-  - New failures detection and categorisation
-  - Resolved failures detection
-  - Persistent failures detection
-  - Multiple test files handling
-  - Error handling for missing/invalid reports
-  - Argument validation and parsing
-  - File path normalisation across environments
-  - Detailed output display and formatting
-- **GitHub Actions integration** — Enables `.github/workflows/tests.yml` "No new test failures" check to properly validate and report test failure categorisation during CI pipeline
-
 **File Organisation and Test Coverage (T011)**
 
 #### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)

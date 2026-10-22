@@ -204,7 +204,7 @@ X-Content-Type-Options: nosniff
 | CSP blocks Typeform | CSP allows HTTPS connections; requires testing in preview | ⏳ Pending integration testing |
 | Google Fonts not loading | CSP allows `fonts.gstatic.com` and `fonts.googleapis.com` | ⏳ Pending integration testing |
 | Old JS bundle cached despite deployment | HTML revalidation triggers browser cache bust | ✅ By design |
-| SPA routes return wrong cache headers | Explicit headers for `/` and `/index.html` ensure correct behavior | ✅ Verified with `/journal` |
+| SPA routes return wrong cache headers | HTML revalidation observed on SPA routes; verify deployment behavior | ✅ Verified with `/journal`, `/about`, `/contact` |
 
 ## Testing Results
 
@@ -364,11 +364,11 @@ After applying the fix:
 - [ ] Validate Typeform, YouTube, Vimeo, fonts and other integrations in preview — ⏳ **Pending integration testing**
 - [ ] Defer CSP; record actual before/after response headers and verify preview and production checks — ✅ **CSP verified compatible, defer improvements to separate issue**
 - [x] Performance issue is reproducible and clearly documented — ✅ **Complete**
-- [x] Performance meets expected benchmarks after fix — ✅ **Cache headers verified correct on preview**
+- [ ] Performance meets expected benchmarks after fix — ⏳ **Performance metrics pending**
 - [x] No adverse impact on other functionality — ✅ **All CI checks passing, no regressions**
 - [x] Documentation updated if needed — ✅ **Complete (NETLIFY_CACHE_VERIFICATION.md updated with actual verification data)**
 - [x] Changelog entry prepared for PR if resolved — ✅ **Complete**
 - [x] PR uses correct branch prefix (perf/) — ✅ **Verified**
 - [x] PR description updated with relevant details — ✅ **Verified**
 - [x] Labels/types match org standards — ✅ **Verified**
-- [x] Automated performance tests added/updated if relevant — ✅ **Build-time asset hashing verified, cache headers validated**
+- [ ] Automated performance tests added/updated if relevant — ⏳ **Performance tests pending**
