@@ -18,10 +18,10 @@ This project uses **npm** as the authoritative package manager with the followin
 - **Node Runtime:** Node.js 24+ (pinned in `.nvmrc`)
 - **Lockfile:** `package-lock.json` (auto-generated and committed)
 - **Build System:** Vite with npm scripts
-- **Netlify Build Command:** `npm run build` (configured in `src/app/netlify.toml`)
+- **Netlify Build Command:** `npm run build` (configured in `netlify.toml`)
 - **Netlify Environment:** NODE_VERSION=24, NPM_VERSION=10
 
-This configuration has been standardized across development, CI/CD, and production environments.
+These settings are defined for development, CI/CD, and Netlify builds. Effective production use still requires deployment validation.
 
 **A Retro 80s CLI Memoir with Neon Terminal Aesthetics**
 

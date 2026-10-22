@@ -109,8 +109,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p .github
-          gh repo clone lightspeedwp/.github -- --depth 1 /tmp/github-repo
-          cp /tmp/github-repo/labeler.yml .github/labeler.yml
+          gh repo clone lightspeedwp/.github /tmp/github-repo -- --depth 1
+          cp /tmp/github-repo/.github/labeler.yml .github/labeler.yml
       - uses: actions/labeler@bf12e9b00b37c5c0ca2b87b79b2daf7891dbda13 # v7.0.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
