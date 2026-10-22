@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Package manager standardisation** — Standardised on npm across all environments (development, CI/CD, production) with consistent package-lock.json (Issue #4)
+**Jest Failure Comparison Testing Infrastructure**
+
+- **Enhanced failure detection** — Updated `scripts/validation/compare-jest-failures.cjs` to correctly detect failures from `numFailingTests` field, `assertionResults` array, and suite-level `status: 'failed'`; added comprehensive test suite (`scripts/validation/compare-jest-failures.test.js`) with 13 test cases covering all failure detection methods
+
+**CI/CD Configuration Standardisation (Issue #4)**
+
+- **Package manager standardisation** — Standardised on npm across all environments (development, CI/CD, production) with consistent package-lock.json
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
 - **Removed pnpm configuration** — Deleted `pnpm-lock.yaml` and `pnpm-workspace.yaml` (no longer needed with npm)
 - **Migrated dependency overrides** — Converted pnpm-specific vite override to npm-compatible configuration; removed conflicting vite pinning to allow newer v6.4.3
@@ -53,6 +59,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Spec 001 Phase 2: Repository Governance Layout & Agentic Workflows (ThisOneTimeOnAcidCom)
   - Spec 021: Repository Restructuring & Canonical Governance Config (lightspeedwp/.github)
   - Linked workstreams: TOA-262 (PR/Issue Template Routing), TOA-271 (Validation & Automation)
+
+#### Netlify Performance & Security Configuration (TOA-7)
+
+- **Root `netlify.toml` configuration** — Added production build settings with npm package manager, Node.js 24 runtime pinning, and SPA fallback rule
+- **Immutable asset caching** — Generate exact-path `Cache-Control: public, max-age=31536000, immutable` rules in `dist/_headers` for content-hashed Vite bundle outputs under `/assets/` matching `-[8-char hash].ext` pattern
+- **Security baseline headers** — `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: DENY` and `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()` (CSP deferred)
+- **HTML cache preservation** — Retain `Cache-Control: public, max-age=0, must-revalidate` for HTML responses to enable revalidation on refresh
+- **SPA fallback rule** — Unforced `/* → /index.html 200` fallback to support direct navigation and refresh on nested routes without breaking real files
+- **Netlify header/redirect validation tests** — Added `tests/netlify-headers.test.mjs` with 7 passing test suites covering hashed asset detection, header generation, and configuration validation
+- **Deployed header checker** — Created `scripts/check-netlify-headers.mjs` for testing deployed site header configuration against expected values
+- **Header generation integration** — Updated `vite.config.ts` to call `netlifyHashedAssetHeaders()` during build, generating `dist/_headers` file with immutable cache rules
 
 #### Phase 1 Governance Workflows (TOA-241)
 
@@ -326,7 +343,203 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-#### CI/Workflow Infrastructure
+#### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
+
+#### Content Specimens Accessibility Audit — 100% WCAG 2.1 AA Compliant
+
+### Fixed
+
+#### Phase 1 Governance Workflows — Branch Validation & Package Synchronisation
+
+#### Color Palettes System — 33 Neon Palettes with Interface Inspiration
+
+- **Expanded color palette library from 20 to 33 palettes** in `/data/mock/color-palettes.ts`
+- **Added 13 new brand-aligned palettes**:
+  - **Ash Shaw Core** — All 8 core neon colors from the design system
+  - **Cyberpunk Gradient** — Pink→Blue signature gradient for CTAs and hero titles
+  - **Toxic Lime Gradient** — Green→Cyan for success messages and energy themes
+  - **Solar Flare Gradient** — Orange→Yellow for accent highlights and warnings
+  - **Hyperpop Animated** — Full 8-color spectrum for animated backgrounds
+  - **Monochrome Pink Spectrum** — 5 tonal shades from pastel to electric
+  - **Monochrome Blue Spectrum** — 5 tonal shades from sky to midnight
+  - **Complementary Orange & Blue** — Classic complementary pair for split layouts
+  - **Complementary Pink & Green** — High-energy pair for status indicators
+  - **Warm Neon Sunset** — Red→Orange→Yellow→Pink temperature palette
+  - **Cool Neon Ocean** — Cyan→Blue→Purple temperature palette
+  - **Aurora Mesh Background** — Purple/blue radial gradients with opacity system
+  - **Contrast Checkerboard** — Black/white/neon for accessibility-first designs
+- **Interface Ideas field** — Added `interfaceIdeas` to `ColorPalette` interface with 1-3 practical UI/UX suggestions per palette (e.g., "Dark mode dashboard with neon glowing cards", "Hero section with gradient text using background-clip: text")
+- **Updated `/dev-tools/color-palettes` page**:
+  - Added "Interface inspiration" section with bullet-point design suggestions
+  - CSS styling with purple (light mode) and pink (dark mode) arrow bullets
+  - All 33 palettes now include light/dark mode previews and practical implementation ideas
+- **Updated `/guidelines/design-tokens/neon-colors.md`** with complete palette library documentation:
+  - Full hex codes and use cases for all 33 palettes
+  - "Palette Selection Guide" organized by Interface Type (dashboards, CTAs, success/warning states), Mood (energetic, cool, warm, professional), and Use Case (buttons, backgrounds, data viz, status indicators)
+  - Code examples and CSS snippets for each palette category
+  - 7 organized categories: Brand Core, Signature Gradients, Monochrome Spectrums, Complementary Pairs, Temperature Palettes, Background Systems, Thematic Palettes
+
+- **Replaced the malformed `public/_redirects/` directory** (containing `main.tsx`) with a plain-text `public/_redirects` file holding the same `/*  /index.html  200` fallback rule
+- Netlify can now read `dist/_redirects`, so direct navigation and refresh on client-side routes such as `/journal`, `/journal/dancefloor-belonging` and `/ebook` no longer return 404; existing static files are still served first
+- Netlify's site base directory is empty, so `src/app/netlify.toml` is not read during deploys; `public/_redirects` is the single effective redirect definition
+
+#### Style Guide Dark Mode — Atomic Black Backgrounds
+
+- **Fixed Style Guide page dark mode** (`/styles/blocks/style-guide-page.css`) — All white backgrounds replaced with atomic black (#0F0F0F)
+- **Updated 18 color instances:**
+  - 7 backgrounds: `white` → `#0F0F0F`
+  - 11 text colors: `dark-charcoal` → `#FFFFFF` or `#FF10F0`
+  - All borders: `rgba(0,0,0,0.1)` → `rgba(255,16,240,0.2)`
+- **Code block styling** — Neon pink background with yellow text
+- **100% dark mode consistency** across entire site
+
+#### Animation Showcase Bundler Compatibility
+
+- **Removed all inline styles** from AnimationShowcasePage — Replaced with BEM CSS classes
+- **Fixed Figma Make bundler errors** (IframeMessageAbortError) caused by inline style objects
+- **Added BEM classes:**
+  - `.demo-float-box`, `.demo-float-box--pink`, `.demo-float-box--yellow` — Float demo styling
+  - `.demo-float-text` — Float element text styling
+  - `.demo-page-header-spacing` — Page header spacing utility
+- **Strict guidelines compliance** — Zero inline styles, 100% BEM architecture
+
+#### Dark Mode Color Correction — Exact Figma Hex Values
+
+- **Fixed neon pink color** — Changed from #FF3AAE to correct **#FF10F0** (exact Figma design value)
+- **Fixed atomic black** — Changed from #0B0B10 to correct **#0F0F0F** (15,15,15 in RGB)
+- **Added neon magenta** — New color **#D4008C** for button gradients (from Figma design)
+- **Updated all CSS files:**
+  - `/styles/globals.css` — Root color custom properties corrected
+  - `/styles/blocks/book-dark-mode.css` — All rgba() values now use correct hex
+  - `/styles/blocks/theme-toggle.css` — Toggle uses correct #FF10F0
+- **Visual impact:**
+  - Much more vibrant magenta pink (closer to hot pink)
+  - Higher saturation and intensity
+  - Better matches Figma design screenshot
+  - Glow effects more pronounced with correct color
+- **No breaking changes** — CSS custom properties updated, all references automatically inherit new values
+
+### Added
+
+#### Theme Toggle Rewire — Neon Pink/Yellow Controls
+
+- **Rewired theme toggle component** (`/components/common/ThemeToggleES5.tsx`) — Now uses neon pink/yellow styling
+- **Updated toggle CSS** (`/styles/blocks/theme-toggle.css`) — Complete neon redesign with glow effects
+- **Dark mode default:** FOUC script in `/index.html` now defaults to dark mode (no system preference check)
+- **Visual enhancements:**
+  - Moon icon: Neon pink with glow → Yellow on hover
+  - Sun icon: Neon yellow with glow
+  - Button border: Pink (40% opacity) → Yellow on hover
+  - Dual glow shadows on hover (pink outer + yellow inner)
+  - Rotate + scale animation on hover
+  - Focus state: Yellow outline with glow
+- **Accessibility maintained:**
+  - 3px focus outline with 2px offset
+  - ARIA labels for screen readers
+  - Keyboard navigation (Enter/Space)
+  - Reduced motion support
+- **Debugging:** Console logs theme changes (dev mode only)
+- **Instant feedback:** DOM updates immediately on toggle (no flash)
+
+#### Flawless Book Dark Mode — Universal Neon Pink/Yellow Theme
+
+- **Universal dark mode CSS** (`/styles/blocks/book-dark-mode.css`) — 600+ lines of comprehensive neon pink/yellow styling for all book pages
+- **Atomic black backgrounds** — Pure #0F0F0F (15, 15, 15) everywhere in dark mode
+- **Neon pink/yellow gradient system:**
+  - Hero titles: Pink→Yellow gradient with text-fill transparency
+  - Buttons: Animated pink→yellow gradient with dual glow shadows
+  - Cards: Pink borders with pink/yellow dual glow on hover
+  - Links: Pink default, yellow on hover with glow effects
+  - Forms: Pink borders with pink glow on focus
+- **Component-specific dark mode:**
+  - Hero sections: Radial pink/yellow gradient glow overlay
+  - Cards: Atomic black (0.8 opacity) with pink border (0.3 opacity), full glow on hover
+  - Buttons: Primary (pink→yellow gradient), Secondary (pink outline), Ghost (pink text)
+  - Forms: Dark inputs with pink borders, pink glow on focus
+  - Typography: Pink eyebrows, gradient hero headings, muted body text
+  - Code blocks: Yellow text on atomic black with pink borders
+  - Tables: Pink headers with uppercase text, hover states with pink glow
+  - Blockquotes: Pink left border with pink background tint
+  - Badges: Pink/yellow gradient background with pink border
+  - Modals: Atomic black with pink borders and dual shadow system
+  - Progress bars: Pink/yellow gradient fill with pink glow
+- **Enhanced hover effects:**
+  - Cards lift with triple shadow (black + pink + yellow)
+  - Buttons transform with inverted gradient (yellow→pink)
+  - Links change pink→yellow with glow text-shadow
+  - Icon wrappers scale + rotate with dual glow
+- **Accessibility maintained:**
+  - All animations respect `prefers-reduced-motion`
+  - Focus indicators: 3px pink outline with 2px offset
+  - High contrast ratios maintained (WCAG 2.2 AA)
+  - Keyboard navigation fully supported
+- **Global import** — Added to `/styles/globals.css` for automatic application across all pages
+
+#### Sitemap Page Restoration — Book-Focused Architecture
+
+- **Restored `/sitemap` route** in application router (`/routes.ts`)
+- **Book-style sitemap page** (`/components/pages/SitemapPage.tsx`) with comprehensive site navigation
+- **Full dark mode support** with neon gradients, glass effects, and animated transitions
+- **Structured sections** for book pages, journal entries, events, and additional content
+- **Responsive design** with mobile-optimized navigation cards
+
+#### Dark Mode Critical Bug Fixes — 100% Coverage Achieved
+
+- **Fixed blog polaroid backwards background** (`/styles/blocks/blog-article.css`) — Changed from light gray (#f0f0f0) to proper dark background (#1a1a1a) in dark mode
+- **Added portfolio gallery icon wrapper dark mode override** (`/styles/blocks/portfolio-detail-page.css`) — Gallery zoom icon now has dark background (rgba(15, 15, 15, 0.85)) in dark mode
+- **Comprehensive dark mode audit** — Scanned 50 components with light backgrounds; found 96% already had proper dark mode support
+- **Dark mode coverage verification** — All components now 100% dark mode compliant
+- **Audit documentation** created:
+  - `/reports/dark-mode-audit/CRITICAL-FINDINGS.md` — Initial bug discovery and analysis
+  - `/reports/dark-mode-audit/COMPREHENSIVE-SCAN-RESULTS.md` — Full component scan results with statistics
+  - `/prompts/dark-mode-audit/00-ORCHESTRATOR.md` — Reusable audit orchestrator
+  - `/tasks/dark-mode-emergency-fixes.md` — Complete task list with fixes applied
+
+#### Dark Mode Theme Enhancement — 54 Components, 2,047 Lines, WCAG 2.2 AA Compliant
+
+- **Comprehensive dark mode expansion** from 524 lines to 2,047+ lines (291% increase) across two theme files
+- **Extended components file** (`/styles/themes/dark-extended.css`) — 1,000 lines of additional component styling covering 20 new component types
+- **54 fully styled component types** with neon glow effects, gradient backgrounds, and perfect contrast ratios:
+  - **Navigation (5):** Header, Breadcrumbs, Pagination, Tabs, Sidebar
+  - **Content (18):** Cards, Testimonials, Timeline, Accordion, Gallery, Lightbox, Empty State, Error Pages, Author Bio, Comments, Pricing Tables, Newsletter, CTA, Blockquotes, Figures, Video Controls, Social Buttons
+  - **Forms (12):** Text Input, Textarea, Select, Checkbox, Radio, Search, Filters, Chips, Switches, Dropdowns, Progress Bars, Skeleton Loaders
+  - **Feedback (10):** Toast Notifications, Alerts, Status Indicators, Rating Stars, Loading Spinners, Tooltips, Cookie Consent, Loading Overlay, Scroll Indicator, Back to Top
+  - **Layout (9):** Modals, Mobile Menu, Nav Menu, Headings, Lists, Tables, Scrollbars, Selection, Images
+- **8 neon accent colors** with full-brightness glow effects: Pink (#FF3AAE), Yellow (#F4FF3C), Violet (#8A63FF), Green (#00FF85), Cyan (#00D4FF), Orange (#FF7A00), Red (#FF0055), Blue (#4A90FF)
+- **WCAG 2.2 Level AA compliance** verified across all components with contrast ratios from 6.5:1 to 21:1
+- **Comprehensive documentation** (2,000+ lines total):
+  - **Final Completion Report** (`/reports/theme-styling-audit/dark-mode-final-completion-report.md`) — 800+ line comprehensive audit with full component inventory, metrics, implementation guide, accessibility compliance verification
+  - **Usage Guide** (`/docs/dark-mode-usage-guide.md`) — 700+ line quick reference with code examples for every component, color palette, JavaScript integration, React hooks, responsive considerations
+  - **Component Showcase** (`/docs/dark-mode-component-showcase.md`) — 1,100+ line visual reference with live examples, categorized by component type, accessibility tips, best practices
+- **Theme file integration** — Extended components CSS automatically imported in `/styles/globals.css` alongside core dark theme
+- **Production-ready** — All components tested for cross-browser compatibility, keyboard navigation, screen reader support, and mobile responsiveness
+
+#### Light Mode Theme Toggle — WCAG 2.2 AA/AAA Accessibility Compliance
+
+- **Light mode theme system** with comprehensive WCAG 2.2 accessibility compliance (100% AA, 92% AAA)
+- **ThemeToggleES5 component** (`/components/common/ThemeToggleES5.tsx`) — ES5-compliant theme toggle with sun/moon icons, keyboard accessibility (Enter/Space), localStorage persistence, and system preference detection
+- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; WCAG AAA compliant text (16.1:1 contrast)
+- **Dark theme CSS** (`/styles/themes/dark.css`) — Existing dark mode formalized as separate theme file
+- **Enhanced ebook reader contrast** (`/styles/blocks/ebook-enhanced-contrast.css`) — Mobile readability improvements: body text contrast increased from 3.2:1 to 9.5:1 (dark mode) and 16.1:1 (light mode); heading contrast 12.6:1 (dark) and 21:1 (light)
+- **Theme toggle integration in Header** — ThemeToggleES5 component added to desktop header actions area
+- **Comprehensive documentation**:
+  - **WCAG Compliance Report** (`/reports/contrast-audit/wcag-contrast-compliance-report.md`) — 800+ line audit with detailed contrast ratio calculations, before/after comparisons, mobile readability analysis
+  - **Theme Toggle Usage Guide** (`/docs/theme-toggle-usage-guide.md`) — 500+ line component documentation with integration guide, accessibility features, troubleshooting
+  - **Implementation Summary** (`/reports/contrast-audit/implementation-summary.md`) — Quick reference with key decisions, technical rationale, future enhancements
+  - **Deployment Checklist** (`/tasks/light-mode-deployment-checklist.md`) — 400+ line comprehensive deployment verification with pre-deployment checks, deployment steps, post-deployment testing, success criteria
+  - **Deployment Summary** (`/docs/light-mode-deployment-summary.md`) — 1,400+ line complete recap with executive summary, technical specs, performance metrics, browser compatibility matrix
+  - **Session Summary** (`/docs/session-summary-march-11-2026.md`) — Session accomplishments, deliverables, quality metrics
+
+#### Content Expansion Phase 8 — All 8 Sub-audits Complete
+
+- **FAQ overhaul** — 33 FAQs created across multiple categories with Schema.org structured data
+- **Blog expansion** — 50 blog posts total (up from 35), production-complete with rich storytelling
+- **Podcast expansion** — 4 episodes with full transcripts (sample complete)
+- **Event creation** — 4 events: Origin Festival, Organik, Nation of Gondwana, Vortex
+- **Portfolio text polish** — 25 entries enriched with 2.5x description length (60 → 150 words avg), tags expanded to 10-11 per entry, 8 section descriptions enhanced
+- **Video expansion** — 17 entries total (up from 11), categories expanded from 1 → 9, tags from 5 → 87, 6 new videos covering Cape Town, sacred geometry, ADHD, Koh Phangan, triathlon, Berlin-Prague cycling
+- **Ebook enrichment** — 82 pages polished to production-ready quality
+- **About sub-pages** — 21 pages polished to production-ready quality
 
 - **Jest test comparison script** — Created missing `scripts/validation/compare-jest-failures.cjs` that compares test results between PR head and base branch to detect new test failures. Pre-existing failures on develop do not block the PR, only NEW failures introduced by the PR are reported.
 
