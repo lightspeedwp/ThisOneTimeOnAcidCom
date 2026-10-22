@@ -100,7 +100,7 @@
     "sharp": "^0.35.5",
     "tailwindcss": "^4.1.12",
     "tsx": "^4.23.15",
-    "typescript": "6.0.3",
+    "typescript": "7.0.2",
     "vite": "^6.4.3",
     "vitest": "^1.6.0",
     "zod": "^4.6.5"
