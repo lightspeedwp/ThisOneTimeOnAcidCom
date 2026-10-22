@@ -926,13 +926,15 @@ available to all team members
 - Mark: T046 ✅ complete (Styling documentation fully audited and complete)
 
 - [ ] T064 [P] Validate protected-file changes and record owner approval (T055 completion)
-- Current scope: PR [#429](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/429), changes to `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md` and `tasks.md`.
+- Current protected scope: PR [#429](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/429), changes to `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md`, `.github/specs/001-repo-governance-layout-and-agentic-workflows/tasks.md` and `.github/workflows/protected-files-guard.yml`.
 - Approval recorded in [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975), authored by owner @ashleyshaw, and confirmed in the [PR approval comment](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/429#issuecomment-6336579786). This approval covers the two specification files; it does not approve unrelated protected-file changes.
 - Historical scope: PR #346 / `build/repo-governance-continue-spec-001` is the earlier implementation PR; its approval status is separate from PR #429's current gate.
 - [Check Protected Files at commit 314881e](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751998299/job/119734602115) failed: the guard rejected protected-file modifications without evaluating the recorded approval.
-- Update the guard to accept linked, owner-approved change requests covering the current PR and all modified protected paths, while rejecting missing, unrelated or insufficient approval.
-- Rerun Check Protected Files after the guard update is available, then record the successful run URL and tested revision here. Any additional protected paths, including the guard itself, require approval covering those changes.
-- Revalidation result: **Pending**; no successful Check Protected Files rerun recorded.
+- The guard now evaluates linked, owner-approved change requests for the current PR and each modified protected path. [Check Protected Files at commit b3bec8cd4db359cf1dd9230f38c827d190eafb29](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39772063030/job/119801779069) failed specifically because `.github/workflows/protected-files-guard.yml` is outside the approved scope.
+- Controller verification (22 October 2026): **Blocked**. Access to [lightspeedwp/dependency-merge-controller](https://github.com/lightspeedwp/dependency-merge-controller) returned HTTP 404; its reconciliation configuration could not be inspected. [AGENTS.md](../../../AGENTS.md#protected-and-locked-files) describes workflows as centrally managed, while [DEPENDENCY_AUTOMATION.md](../../../docs/DEPENDENCY_AUTOMATION.md#3-centrally-managed-workflows) names only the two dependency workflows. Obtain the current controller configuration or maintainer confirmation that the guard will not be overwritten before expanding approval.
+- Approval update: **Pending**. After controller confirmation, have @ashleyshaw or @ashley update [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975) to explicitly approve `.github/workflows/protected-files-guard.yml` for PR #429 alongside both specification paths above. The existing approval covers only the two specification files.
+- Rerun Check Protected Files after the expanded owner approval is recorded, then record the successful run URL and full tested revision here.
+- Revalidation result: **Blocked** on controller confirmation and expanded owner approval; no successful Check Protected Files rerun recorded.
 - Mark: T064 complete only after the approval reference and successful guard rerun are recorded; resolve the historical T055 scope separately before closing it.
 
 - [ ] T065 Document implementation completion and handoff (T059 completion – deferred until T060–T064 complete)
