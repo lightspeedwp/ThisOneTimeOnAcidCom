@@ -1,7 +1,7 @@
 # Podcast Expansion Sample Implementation — Summary
 
-**Completed:** March 5, 2026  
-**Scope:** Sub-audit 3 of Content Expansion Phase 8  
+**Completed:** March 5, 2026
+**Scope:** Sub-audit 3 of Content Expansion Phase 8
 **Approach:** Sample implementation with pattern documentation
 
 ---
@@ -16,7 +16,7 @@
 | 3 | Berlin calling | 24:30 | ~1,100 | 3 | 2026-02-24 |
 | 7 | Six Cats and the green garden | 28:15 | ~1,200 | 3 | 2026-03-24 |
 
-**Total new FAQs:** 9  
+**Total new FAQs:** 9
 **Total new transcript words:** ~3,300
 
 ---
@@ -37,7 +37,8 @@
 
 All 3 sample episodes meet these criteria:
 
-**Transcript Quality:**
+## Transcript Quality
+
 - ✅ Natural spoken-word voice (conversational, not scripted)
 - ✅ Authentic Ash tone (honest, energetic, personal)
 - ✅ Natural speech patterns ("So here's the thing...", "Look...", "Right?")
@@ -47,13 +48,15 @@ All 3 sample episodes meet these criteria:
 - ✅ Ready for voice recording
 
 **Content Quality:**
+
 - ✅ Show notes (content field): 500+ words
 - ✅ Compelling descriptions for podcast listings
 - ✅ Accurate duration estimates
 - ✅ Relevant Unsplash cover images
 - ✅ Category and tag consistency
 
-**Technical Compliance:**
+## Technical Compliance
+
 - ✅ Bundler-safe syntax (no arrow functions, etc.)
 - ✅ Sentence case titles
 - ✅ He/him pronouns throughout
@@ -65,7 +68,8 @@ All 3 sample episodes meet these criteria:
 
 ### Structure Template
 
-```
+```text
+
 ## Episode [N]: [Title]
 
 **Host:** Ash Shaw
@@ -88,11 +92,13 @@ All 3 sample episodes meet these criteria:
 
 *Neon vs Atomic Black — a podcast by Ash Shaw*
 *Follow on Instagram: @ashshaw.makeup*
-```
+
+```text
 
 ### Voice Guidelines
 
 **Natural Patterns:**
+
 - Use contractions (I'm, you're, can't, don't)
 - Natural fillers ("Look," "So," "Now," "Right?")
 - Personal asides and tangents
@@ -100,6 +106,7 @@ All 3 sample episodes meet these criteria:
 - Emphasis and repetition for spoken clarity
 
 **Content Flow:**
+
 - Story-driven, not lecture-driven
 - Specific anecdotes from ebook and website-content.md
 - Callbacks to previous episodes
@@ -111,32 +118,41 @@ All 3 sample episodes meet these criteria:
 ## Episode Topics Covered
 
 ### Episode 2: "The dancefloor gave me everything"
+
 **Topics:**
+
 - 20-year journey from costumes to UV painting
 - The Berlin warehouse discovery moment (July 2019)
 - Visibility as practice vs performance
 - The cumulative effect theme introduction
 
-**Key Quote:** "The dancefloor taught me everything I needed to know before I ever picked up a brush."
+**Key Quote:** "The dancefloor taught me everything I needed to know before I
+ever picked up a brush."
 
 ### Episode 3: "Berlin calling"
+
 **Topics:**
+
 - Berlin's creative permission structure
 - Warehouse scene (Sisyphos, Renate, About Blank)
 - Open-air culture (Hasenheide, Tempelhof)
 - Finding your species / community
 
-**Key Quote:** "Berlin is not just a location. It's a creative ecosystem that makes certain kinds of art possible that would die anywhere else."
+**Key Quote:** "Berlin is not just a location. It's a creative ecosystem that
+makes certain kinds of art possible that would die anywhere else."
 
 ### Episode 7: "Six Cats and the green garden"
+
 **Topics:**
+
 - Living organic soil philosophy
 - Cannabis cultivation as meditation
 - The six cats (Timmy, Wendy, Jimmy, Bean, Jeff, Frank)
 - Strict grading system (A/B/C/shake/trim)
 - Dancefloor vs garden balance
 
-**Key Quote:** "I don't cultivate for the product. I cultivate for the practice."
+**Key Quote:** "I don't cultivate for the product. I cultivate for the
+practice."
 
 ---
 
@@ -160,8 +176,9 @@ All 3 sample episodes meet these criteria:
 
 ### Episode 1 Polish (existing)
 
-**Current:** Has content and FAQs, but no transcript  
+**Current:** Has content and FAQs, but no transcript
 **Needed:**
+
 - Add full transcript (2,000-3,000 words)
 - Expand content to 500+ words
 - Add third FAQ
@@ -186,11 +203,13 @@ All 3 sample episodes meet these criteria:
 ## Files Created/Modified
 
 ### Created
+
 - `/data/mock/podcasts/episodes-season1.ts` — Episodes 2, 3, 7 (will contain episodes 2-15 when complete)
 - `/reports/content-expansion-phase8/03-podcast-expansion.md` — Full audit report
 - `/docs/podcast-expansion-sample.md` — This document
 
 ### To Modify (Remaining Work)
+
 - `/data/mock/podcasts/episodes.ts` — Add transcript to Episode 1, add 3rd FAQ
 - `/data/mock/podcasts/episodes-season1.ts` — Add remaining 11 episodes
 - `/data/mock/podcasts/index.ts` — Combine episode sources
@@ -201,62 +220,73 @@ All 3 sample episodes meet these criteria:
 
 ## Content Sourcing for Remaining Episodes
 
-**Episode 4 (UV Chemistry):**
+## Episode 4 (UV Chemistry)
+
 - Technical paint information
 - Skin safety protocols
 - Blacklight science basics
 
-**Episode 5 (Ambidextrous):**
+## Episode 5 (Ambidextrous)
+
 - Training non-dominant hand story
 - Muscle memory development
 - Speed and symmetry benefits
 
-**Episode 6 (Festival Nomad):**
+## Episode 6 (Festival Nomad)
+
 - Annual festival circuit
 - Travel logistics
 - Cycling pilgrimages overview
 
-**Episode 8 (Loaded Bike):**
+## Episode 8 (Loaded Bike)
+
 - Detailed gear breakdown (from blog post "The nomad checklist")
 - 40kg packing philosophy
 - Self-sufficiency mindset
 
-**Episode 9 (LightSpeed):**
+## Episode 9 (LightSpeed)
+
 - Company founding (January 2003)
 - BarCamp WordPress pivot (2006)
 - Team evolution, current state
 - AI workflow integration
 
-**Episode 10 (Wired Different):**
+## Episode 10 (Wired Different)
+
 - ADHD diagnosis and acceptance
 - Aquarius personality traits
 - How neurodivergence fuels creativity
 - School struggles → career strengths
 
-**Episode 11 (Cumulative Effect):**
+## Episode 11 (Cumulative Effect)
+
 - Central thesis: it's never one thing
 - Multiple stories illustrating the concept
 - How everything compounds over time
 
-**Episode 12 (Koh Phangan):**
+## Episode 12 (Koh Phangan)
+
 - Sep-Nov annual training season
 - Muay Thai, triathlon, remote work
 - Thailand psytrance scene
 - Creative recharge ritual
 
-**Episode 13 (Nation of Gondwana):**
+## Episode 13 (Nation of Gondwana)
+
 - First NOG experience (2023)
 - 7 days, 10,000 people
 - Psytrance culture in Germany
 - UV painting at scale
 
-**Episode 14 (Festival Kit):**
+## Episode 14 (Festival Kit)
+
 - Complete gear breakdown
 - Paint kit details
 - Camping setup
 - Bike configuration
 
-**Episode 15 (Season Finale):**
+## Episode 15 (Season Finale)
+
 - Reflection on Season 1
 - Upcoming Organik Festival
 - The book project
@@ -267,6 +297,7 @@ All 3 sample episodes meet these criteria:
 ## Next Steps — Two Options
 
 **Option A: Complete Remaining 11 Episodes Now**
+
 - Write all transcripts
 - Add all FAQs
 - Update barrel exports
@@ -274,6 +305,7 @@ All 3 sample episodes meet these criteria:
 - **Result:** 100% complete podcast system ready for recording
 
 **Option B: Continue Phase 8 Sub-Audits** (Recommended)
+
 - Move to Sub-audit 4: Event Creation
 - Complete all expansions first
 - Return to podcast completion in final session
@@ -286,6 +318,7 @@ All 3 sample episodes meet these criteria:
 **Suggested:** Option B — Continue with Phase 8 sub-audits
 
 **Rationale:**
+
 - 3 sample episodes with transcripts establish the pattern ✅
 - Transcript format is clear and reusable
 - Better to complete all content expansions, then do final polish
@@ -293,5 +326,6 @@ All 3 sample episodes meet these criteria:
 
 ---
 
-**Status:** ✅ **SAMPLE IMPLEMENTATION COMPLETE**  
-**Next:** Proceed to Sub-audit 4 (Event Creation) or complete remaining 11 episodes
+**Status:** ✅ **SAMPLE IMPLEMENTATION COMPLETE**
+**Next:** Proceed to Sub-audit 4 (Event Creation) or complete remaining 11
+episodes

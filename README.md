@@ -15,20 +15,20 @@ Run `npm run dev` to start the development server.
 ## A Retro 80s CLI Memoir with Neon Terminal Aesthetics
 
 > **Status:** ✅ **ANIMATION PHASE 1 COMPLETE** - Terminal boot system deployed
-> **Version:** v8.4.0 | **Animation System:** v1.0.0 | **Updated:** March 12, 2026
+> **Version:** v8.4.0 | **Animation System:** v1.0.0 | **Updated:** March 12,
+2026
 > **See:** [Guidelines](./guidelines/Guidelines.md) | [Animation
 > Report](/docs/animation-implementation-report-march-2026.md)
 
 ## 🌟 Overview
 
-This is a high-performance React application built with **Vite**, **TypeScript**,
-and a **strict BEM (Block Element Modifier) CSS architecture**. Tailwind tooling
-is retained for Figma Make, but no Tailwind utilities are used. It features a
-unique **"Neon vs Atomic Black"** design
+This is a high-performance React application built with **Vite**,
+**TypeScript**,
+and **Tailwind CSS**. It features a unique **"Neon vs Atomic Black"** design
 system with a comprehensive **retro terminal boot animation system**, and
 maintains 100% WCAG 2.1 AAA accessibility compliance.
 
-**Current Architecture:**
+## Current Architecture
 
 - **Frontend:** React 18 SPA (Single Page Application)
 - **Styling:** Strict BEM CSS Architecture (zero Tailwind utilities)
@@ -44,18 +44,24 @@ maintains 100% WCAG 2.1 AAA accessibility compliance.
 ### Core Animations
 
 1. **Terminal Boot Sequence** - 0.8s typewriter-style page entrance
-2. **Auto-Stagger System** - Cascading fade-in with 0.1s delays (title →
+
+1. **Auto-Stagger System** - Cascading fade-in with 0.1s delays (title →
    subtitle → description → CTA)
-3. **Neon Pulse CTAs** - 2s breathing glow that speeds to 1s on hover
-4. **Holographic Shimmer** - 4s rainbow gradient sweep (pink → purple → cyan →
+
+1. **Neon Pulse CTAs** - 2s breathing glow that speeds to 1s on hover
+
+1. **Holographic Shimmer** - 4s rainbow gradient sweep (pink → purple → cyan →
    yellow)
-5. **Floating Media** - 4s gentle vertical float with neon glow
-6. **Page Headers** - Unified animation system for archive pages
+
+1. **Floating Media** - 4s gentle vertical float with neon glow
+
+1. **Page Headers** - Unified animation system for archive pages
 
 ### Pages Enhanced
 
 - **HomePage** (v1.7.0) - Full terminal boot + auto-stagger + floating media +
   neon pulse
+
 - **AboutPage** (v1.5.0) - All HomePage animations + holographic rainbow title
 - **PortfolioPage** (v1.7.0) - Header boot → filters → grid stagger
 - **BlogPage** (v1.5.0) - Header boot → filters stagger
@@ -83,19 +89,22 @@ support
 
 ```bash
 nvm use  # Uses version from .nvmrc (Node.js 24)
-```
+
+```text
 
 ### 2. Install Dependencies (npm only)
 
 ```bash
 npm ci  # Install exact versions from package-lock.json
-```
+
+```text
 
 ### 3. Run Development Server
 
 ```bash
 npm run dev
-```
+
+```text
 
 Access the app at `http://localhost:5173`
 
@@ -107,7 +116,8 @@ npm run test:unit    # Jest unit tests
 npm run test:build   # Build verification
 npm run test:e2e     # Playwright e2e tests
 npm run validate:branch-name  # Validate branch naming
-```
+
+```text
 
 ## 🤝 Contributing
 
@@ -129,11 +139,12 @@ All branches **must** follow this pattern: `{type}/{scope}-{title}`
 `design`, `security` (and more — see
 [CONTRIBUTING.md](./CONTRIBUTING.md))
 
-**Validate before pushing:**
+## Validate before pushing
 
 ```bash
 npm run validate:branch-name
-```
+
+```text
 
 ### Testing & Validation
 
@@ -150,10 +161,14 @@ covering:
 This repository follows specification-driven development using SpecKit:
 
 1. **Specify** — Document requirements in `spec.md`
-2. **Clarify** — Resolve ambiguities with Q&A
-3. **Plan** — Design implementation approach
-4. **Decompose** — Break into actionable tasks
-5. **Implement** — Execute tasks and commit
+
+1. **Clarify** — Resolve ambiguities with Q&A
+
+1. **Plan** — Design implementation approach
+
+1. **Decompose** — Break into actionable tasks
+
+1. **Implement** — Execute tasks and commit
 
 All specifications live in [.github/specs/](./.github/specs/) with full catalog
 at [CATALOG.md](./.github/specs/CATALOG.md).
@@ -164,12 +179,16 @@ at [CATALOG.md](./.github/specs/CATALOG.md).
 
 - **[Guidelines.md](./guidelines/Guidelines.md)** - Complete design &
   development guidelines (v8.4.0)
+
 - **[Animation Report](./docs/animation-implementation-report-march-2026.md)** -
   Phase 1 completion report
+
 - **[Overview Components](./guidelines/overview-components.md)** - Component
   architecture
+
 - **[Neon Colors](./guidelines/design-tokens/neon-colors.md)** - Design system
   with 33 palettes
+
 - **[Animations](./guidelines/design-tokens/animations.md)** - Complete
   animation library
 
@@ -177,10 +196,13 @@ at [CATALOG.md](./.github/specs/CATALOG.md).
 
 - **[BEM CSS Architecture](./guidelines/css-architecture.md)** - Strict BEM
   naming conventions
+
 - **[Dark Mode Implementation](./guidelines/dark-mode-implementation.md)** -
   Theme system guide
+
 - **[Component Dark Mode](./guidelines/component-dark-mode.md)** -
   Component-specific patterns
+
 - **[Reduced Motion Standards](./guidelines/prefers-reduced-motion.md)** -
   Accessibility guide
 
@@ -188,6 +210,7 @@ at [CATALOG.md](./.github/specs/CATALOG.md).
 
 - **[Data System README](./data/README.md)** - Centralized mock data
   documentation
+
 - **[CMS Field Mapping](./docs/cms-field-mapping.md)** - WordPress CPT/ACF
   reference
 
@@ -243,7 +266,8 @@ The application includes built-in dev tools for inspecting the design system.
 ├── prompts/              # AI audit prompts
 ├── reports/              # Audit reports (archived after completion)
 └── tasks/                # Task lists & checklists
-```
+
+```text
 
 ## 📊 Content Counts (v8.4.0)
 
@@ -286,15 +310,18 @@ Speaking, Contact, Thank You, Media, Draft Viewer, Ebook, Sitemap, Style Guide
 
 ## 🎨 Design System Highlights
 
-**Neon vs Atomic Black Visual Identity:**
+## Neon vs Atomic Black Visual Identity
 
 - **8 Neon Colors:** Electric green, hot pink, royal blue, pure yellow, blazing
   orange, violet purple, aqua cyan, hot red
+
 - **Atomic Black:** Deep #0F0F0F background for maximum neon contrast
 - **4 Signature Gradients:** Cyberpunk (pink→blue), Toxic Lime (green→cyan),
   Solar Flare (orange→yellow), Hyperpop (multi-color)
+
 - **26 Animations:** Neon pulse, gradient shift, float, bounce, terminal boot,
   holographic shimmer
+
 - **33 Color Palettes:** Comprehensive interface color library
 - **SVG Grain Noise:** Site-wide `feTurbulence` overlay on major sections
 
@@ -319,15 +346,20 @@ Speaking, Contact, Thank You, Media, Draft Viewer, Ebook, Sitemap, Style Guide
 **Animation System Phase 2** (~40-60 hours):
 
 1. Scroll-triggered animations for section reveals
-2. Parallax effects on hero media
-3. Interactive hover states on portfolio cards
-4. Animated page transitions (React Router integration)
-5. Micro-interactions for form validation
-6. Loading skeleton animations
+
+1. Parallax effects on hero media
+
+1. Interactive hover states on portfolio cards
+
+1. Animated page transitions (React Router integration)
+
+1. Micro-interactions for form validation
+
+1. Loading skeleton animations
 
 ## 📝 Recent Updates
 
-**March 12, 2026 - Animation System Phase 1 Complete:**
+## March 12, 2026 - Animation System Phase 1 Complete
 
 - ✅ Terminal boot animation system (6 types across 5 pages)
 - ✅ Interactive animation showcase at `/dev/animations`

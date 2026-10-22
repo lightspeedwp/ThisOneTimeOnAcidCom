@@ -1,6 +1,6 @@
 # Skill Inventory — ThisOneTimeOnAcidCom
 
-**Generated:** 19 October 2026  
+**Generated:** 19 October 2026
 **Spec Reference:**
 `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)
 **Task:** T048
@@ -68,12 +68,12 @@ Each skill specification (`SKILL.md` file) should include:
 - **Tool Access**: bash (read-only)
 - **Permissions**: Read-only; no file modifications
 - **Skill-Specific Rules**:
-  - Type must be from enumerated list (feat, fix, docs, etc.)
-  - Scope must be lowercase with hyphens only
-  - Title must be lowercase with hyphens
-  - FORBIDDEN prefixes: `claude/`, `copilot/`, `openai/`
-  - Release branches follow semantic versioning (e.g., `release/v1.2.0`)
-  - Dependabot/Renovate branches exempt (auto-pass)
+- Type must be from enumerated list (feat, fix, docs, etc.)
+- Scope must be lowercase with hyphens only
+- Title must be lowercase with hyphens
+- FORBIDDEN prefixes: `claude/`, `copilot/`, `openai/`
+- Release branches follow semantic versioning (e.g., `release/v1.2.0`)
+- Dependabot/Renovate branches exempt (auto-pass)
 - **Budget**: 5K tokens per invocation, 1-minute timeout, 1 retry
 - **Integration Points**: Pre-push hook, `npm run validate:branch-name` CLI, GitHub Actions workflow
 
@@ -87,12 +87,12 @@ Each skill specification (`SKILL.md` file) should include:
 - **Tool Access**: read, write, bash
 - **Permissions**: Read/write access to CHANGELOG.md (protected file — changes require PR review)
 - **Skill-Specific Rules**:
-  - Keep a Changelog 1.1.0 schema required
-  - Exact em-dash character usage (— not -)
-  - Entry capitalization (sentence case)
-  - Line length limits (e.g., 80 chars for entry text)
-  - Version format (semantic versioning)
-  - Release date format (YYYY-MM-DD)
+- Keep a Changelog 1.1.0 schema required
+- Exact em-dash character usage (— not -)
+- Entry capitalization (sentence case)
+- Line length limits (e.g., 80 chars for entry text)
+- Version format (semantic versioning)
+- Release date format (YYYY-MM-DD)
 - **Budget**: 20K tokens per invocation, 3-minute timeout, 2 retries
 - **Integration Points**: Changelog validation workflow, release automation, PR review process
 
@@ -103,23 +103,31 @@ Each skill specification (`SKILL.md` file) should include:
 ### Skill Lifecycle
 
 1. **Creation**: New skill created in `.claude/skills/{skill-name}/SKILL.md`
-2. **Documentation**: All required fields documented (purpose, invocation, inputs, outputs, budget, rules)
-3. **Testing**: Skill tested with sample inputs and edge cases
-4. **Approval**: Owner approval required before deployment
-5. **Deployment**: Skill enabled and made available to CLI/workflows
-6. **Maintenance**: Regular audits for performance and rule changes
-7. **Deprecation**: Sunset notice, 2-week notice period before removal
+
+1. **Documentation**: All required fields documented (purpose, invocation, inputs, outputs, budget, rules)
+
+1. **Testing**: Skill tested with sample inputs and edge cases
+
+1. **Approval**: Owner approval required before deployment
+
+1. **Deployment**: Skill enabled and made available to CLI/workflows
+
+1. **Maintenance**: Regular audits for performance and rule changes
+
+1. **Deprecation**: Sunset notice, 2-week notice period before removal
 
 ### Selection: When to Create a Skill vs. Agent
 
-**Create a skill when:**
+## Create a skill when
+
 - ✅ Action is deterministic and rule-based (e.g., validation, formatting)
 - ✅ CLI command or repeated invocation pattern exists
 - ✅ Results are always deterministic (same input = same output)
 - ✅ No subjective decision-making required
 - ✅ Can be used as utility across many workflows
 
-**Create an agent when:**
+## Create an agent when
+
 - ✅ Decision-making requires reasoning (e.g., code review)
 - ✅ Multi-step investigation or learning required
 - ✅ Result may vary based on context
@@ -142,16 +150,19 @@ separately by TOA-271):
 Skills integrate with workflows in three patterns:
 
 1. **CLI Pattern**: Invoked via `/skill-name` command in Claude sessions
-  - Example: `/branch-validation` to check branch name
-  - User provides arguments inline or in prompts
 
-2. **Workflow Pattern**: Triggered by GitHub Actions or scheduled tasks
-  - Example: Changelog validation runs on PR to `main`
-  - Workflow passes context automatically
+- Example: `/branch-validation` to check branch name
+- User provides arguments inline or in prompts
 
-3. **Programmatic Pattern**: Invoked by other agents or skills
-  - Example: Release agent calls changelog skill to validate entries
-  - Parent skill handles error handling and escalation
+1. **Workflow Pattern**: Triggered by GitHub Actions or scheduled tasks
+
+- Example: Changelog validation runs on PR to `main`
+- Workflow passes context automatically
+
+1. **Programmatic Pattern**: Invoked by other agents or skills
+
+- Example: Release agent calls changelog skill to validate entries
+- Parent skill handles error handling and escalation
 
 ---
 
@@ -165,5 +176,5 @@ Skills integrate with workflows in three patterns:
 
 ---
 
-_Maintained by Claude Haiku 4.5 and team_  
-_Last updated: 19 October 2026_
+*Maintained by Claude Haiku 4.5 and team*
+*Last updated: 19 October 2026*

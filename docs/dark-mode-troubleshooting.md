@@ -24,16 +24,19 @@ console.log('Dark mode status:', {
   theme: document.documentElement.getAttribute('data-theme'),
   localStorage: localStorage.getItem('theme')
 });
-```
+
+```text
 
 **Expected Result:**
-```
+
+```text
 Dark mode status: {
   hasClass: true,
   theme: "dark",
   localStorage: "dark"
 }
-```
+
+```text
 
 ---
 
@@ -54,7 +57,8 @@ document.documentElement.setAttribute('data-theme', 'dark');
 
 // Reload page
 location.reload();
-```
+
+```text
 
 ---
 
@@ -65,10 +69,12 @@ location.reload();
 **Cause:** localStorage was set to 'light'
 
 **Fix:**
+
 ```javascript
 localStorage.setItem('theme', 'dark');
 location.reload();
-```
+
+```text
 
 ---
 
@@ -77,9 +83,11 @@ location.reload();
 **Cause:** CSS file not imported
 
 **Fix:** Check `/styles/globals.css` line 5:
+
 ```css
 @import "./blocks/book-dark-mode.css";
-```
+
+```text
 
 If missing, add it after the theme imports.
 
@@ -98,34 +106,44 @@ If missing, add it after the theme imports.
 Run these checks in DevTools console:
 
 ### 1. Check HTML Class
+
 ```javascript
 document.documentElement.classList.contains('dark')
 // Expected: true
-```
+
+```text
 
 ### 2. Check Theme Attribute
+
 ```javascript
 document.documentElement.getAttribute('data-theme')
 // Expected: "dark"
-```
+
+```text
 
 ### 3. Check localStorage
+
 ```javascript
 localStorage.getItem('theme')
 // Expected: "dark"
-```
+
+```text
 
 ### 4. Check CSS Import
+
 ```javascript
 // Look for the CSS file in Network tab
 // Should see: blocks/book-dark-mode.css
-```
+
+```text
 
 ### 5. Check CSS Variables
+
 ```javascript
 getComputedStyle(document.documentElement).getPropertyValue('--wp--preset--color--neon-pink')
 // Expected: "#FF3AAE" or similar
-```
+
+```text
 
 ---
 
@@ -133,12 +151,12 @@ getComputedStyle(document.documentElement).getPropertyValue('--wp--preset--color
 
 When dark mode is working, you should see:
 
-✅ **Background:** Pure black (#0F0F0F)  
-✅ **Text:** White or light gray  
-✅ **Accents:** Neon pink (#FF3AAE)  
-✅ **Links:** Pink that turns yellow on hover  
-✅ **Buttons:** Pink→Yellow gradient  
-✅ **Cards:** Dark with pink borders  
+✅ **Background:** Pure black (#0F0F0F)
+✅ **Text:** White or light gray
+✅ **Accents:** Neon pink (#FF3AAE)
+✅ **Links:** Pink that turns yellow on hover
+✅ **Buttons:** Pink→Yellow gradient
+✅ **Cards:** Dark with pink borders
 
 If you don't see these, run the "Force Dark Mode" script above.
 
@@ -149,9 +167,12 @@ If you don't see these, run the "Force Dark Mode" script above.
 The following files have been updated to **always default to dark mode**:
 
 1. ✅ `/index.html` — FOUC script now defaults to dark (line 66-90)
-2. ✅ `/components/common/ThemeProvider.tsx` — Defaults to dark (line 37)
-3. ✅ `/styles/globals.css` — Dark mode CSS imported (line 5)
-4. ✅ `/styles/blocks/book-dark-mode.css` — 600+ lines of neon styling
+
+1. ✅ `/components/common/ThemeProvider.tsx` — Defaults to dark (line 37)
+
+1. ✅ `/styles/globals.css` — Dark mode CSS imported (line 5)
+
+1. ✅ `/styles/blocks/book-dark-mode.css` — 600+ lines of neon styling
 
 ---
 
@@ -170,7 +191,8 @@ If changes aren't showing:
 ```javascript
 localStorage.clear();
 location.reload();
-```
+
+```text
 
 ---
 
@@ -187,7 +209,8 @@ document.documentElement.classList.add('dark');
 document.documentElement.setAttribute('data-theme', 'dark');
 localStorage.setItem('theme', 'dark');
 window.location.reload(true);
-```
+
+```text
 
 ---
 
@@ -196,12 +219,15 @@ window.location.reload(true);
 Check these files in this order:
 
 1. `/index.html` line 66-90 — FOUC script should default to 'dark'
-2. `/styles/globals.css` line 5 — Should import book-dark-mode.css
-3. `/components/common/ThemeProvider.tsx` line 37 — Should useState('dark')
-4. Browser console for any CSS errors
+
+1. `/styles/globals.css` line 5 — Should import book-dark-mode.css
+
+1. `/components/common/ThemeProvider.tsx` line 37 — Should useState('dark')
+
+1. Browser console for any CSS errors
 
 ---
 
-**Last Updated:** March 12, 2026  
-**Status:** Dark mode now defaults to ON  
+**Last Updated:** March 12, 2026
+**Status:** Dark mode now defaults to ON
 **No user action required** — Dark mode applies automatically

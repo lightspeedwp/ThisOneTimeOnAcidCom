@@ -1,12 +1,14 @@
 # PullQuote Component
 
-**File:** `/components/ui/PullQuote.tsx`  
-**Version:** 1.0.0  
+**File:** `/components/ui/PullQuote.tsx`
+**Version:** 1.0.0
 **Category:** UI Component (Phase 3)
 
 ## Purpose
 
-Renders a large, visually emphasized quotation with neon border accents, decorative quotation marks, and optional author attribution. Replaces manual `<blockquote>` elements across about sub-pages.
+Renders a large, visually emphasized quotation with neon border accents,
+decorative quotation marks, and optional author attribution. Replaces manual
+`<blockquote>` elements across about sub-pages.
 
 ## Props
 
@@ -28,7 +30,8 @@ import { PullQuote } from '../../ui/PullQuote';
   variant="center"
   neonColor="pink"
 />
-```
+
+```text
 
 ## Where Used
 
@@ -44,9 +47,11 @@ import { PullQuote } from '../../ui/PullQuote';
 
 ## CSS
 
-Styles are defined in `/styles/blocks/pull-quote.css`, imported by the component.
+Styles are defined in `/styles/blocks/pull-quote.css`, imported by the
+component.
 
 **BEM structure:**
+
 - `.pull-quote` — block (uses `<blockquote>`)
 - `.pull-quote--center` / `.pull-quote--left` / `.pull-quote--right` — alignment modifiers
 - `.pull-quote--neon-pink` (etc.) — color modifiers
@@ -64,13 +69,17 @@ Styles are defined in `/styles/blocks/pull-quote.css`, imported by the component
 ## Migration from Manual Blockquotes
 
 **Before (manual):**
+
 ```tsx
 <blockquote className="about-subpage__pull-quote" aria-label="Featured quote">
   <p className="about-subpage__pull-quote-text">{data.pullQuote}</p>
 </blockquote>
-```
 
-**After (Phase 3 component):**
+```text
+
+## After (Phase 3 component)
+
 ```tsx
 <PullQuote quote={data.pullQuote} variant="center" neonColor="purple" />
-```
+
+```text

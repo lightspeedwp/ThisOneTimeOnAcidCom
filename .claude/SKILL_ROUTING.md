@@ -1,8 +1,8 @@
 # Skill Runtime Routing & Execution Environment Matrix
 
-**Document Status**: Specification for TOA-271 implementation  
-**Last Updated**: 2026-10-22  
-**Owner**: @ashley (TOA-271 epic implementation)  
+**Document Status**: Specification for TOA-271 implementation
+**Last Updated**: 2026-10-22
+**Owner**: @ashley (TOA-271 epic implementation)
 **Scope**: Routing strategy for skill execution across available environments
 
 ---
@@ -10,6 +10,7 @@
 ## Purpose
 
 Define which execution environment each skill should use based on:
+
 - Skill complexity and resource requirements
 - Tool access needs (read-only vs. write)
 - User interaction requirements (interactive vs. autonomous)
@@ -25,6 +26,7 @@ Define which execution environment each skill should use based on:
 **Definition**: Skill runs in the current session's context.
 
 **Characteristics**:
+
 - ✅ Full context inheritance (conversation, files, state)
 - ✅ No additional latency (immediate execution)
 - ✅ Shared budget with parent session (token/cost aggregate)
@@ -34,12 +36,14 @@ Define which execution environment each skill should use based on:
 - ❌ Shared output (results visible in conversation)
 
 **Best For**:
+
 - Quick validations and checks
 - Tools that need conversation context
 - User-interactive workflows (Q&A, decisions)
 - Lightweight operations (< 10k tokens)
 
 **Examples**:
+
 - `/branch-validation` — validate branch name (read-only check)
 - `/validate` — configuration validation (read-only check)
 - `/changelog` — changelog entry management (affects local CHANGELOG.md)
@@ -51,6 +55,7 @@ usage counts against the parent session's budget under the TOA-271 accounting
 requirements (host-side enforcement pending).
 
 **Characteristics**:
+
 - ✅ Context supplied by parent (scope depends on invocation)
 - ✅ Separate agent execution; usage charged to parent budget
 - ✅ Clean output (results returned via tool, not in chat)
@@ -60,12 +65,14 @@ requirements (host-side enforcement pending).
 - ❌ Results not in conversation thread (tool output only)
 
 **Best For**:
+
 - Research and exploration tasks
 - Multi-step investigation (analysis, gathering)
 - Parallel work (parent continues while subagent researches)
 - Medium complexity (50k–200k tokens)
 
 **Examples**:
+
 - `/speckit-analyze` — deep specification analysis (exploration)
 - Code exploration agent — search codebase for patterns
 - Content strategy agent — research and plan content
@@ -79,6 +86,7 @@ consume the fork's allowance. Numerical limits and spending increases require
 owner approval. Host-side enforcement remains pending.
 
 **Characteristics**:
+
 - Separate session and independent budget; usage does not deduct from the originating session
 - Can run concurrently with the originating session under its own approved ceiling
 - Copying context into a subagent does not by itself create an independently budgeted session
@@ -89,6 +97,7 @@ owner approval. Host-side enforcement remains pending.
 network access.
 
 **Characteristics**:
+
 - ✅ Strong isolation (sandboxed environment)
 - ✅ Network restricted (only allowed endpoints)
 - ✅ Cost-controlled (resource limits)
@@ -99,12 +108,14 @@ network access.
 - ❌ No access to parent session state (cold start)
 
 **Best For**:
+
 - Long-running jobs (6+ hours)
 - Security-sensitive operations (credential handling)
 - Resource-intensive work (data processing)
 - Tasks that can be scheduled/deferred
 
 **Examples**:
+
 - Scheduled audit jobs (compliance scanning)
 - Batch data processing (large file analysis)
 - External API integration (controlled network access)
@@ -115,6 +126,7 @@ network access.
 tool access, and lifecycle.
 
 **Characteristics**:
+
 - ✅ Fully managed (Claude handles setup/cleanup)
 - ✅ Automatic resumption (if task interrupted)
 - ✅ Cost-optimized (Claude picks best model/approach)
@@ -123,6 +135,7 @@ tool access, and lifecycle.
 - ❌ Not available today (future enhancement)
 
 **Best For**:
+
 - Production automation (reliable, auditable)
 - Mission-critical tasks (automatic retries)
 - Scale-out workflows (many parallel agents)
@@ -147,6 +160,7 @@ These skills perform deterministic validation and must NOT modify state.
 | `security-review` | Subagent | Security analysis; isolated execution preferred |
 
 **Rules**:
+
 - ✅ Can read files, parse configs, check syntax
 - ✅ Can output findings, recommendations, reports
 - ❌ Must NOT modify files or state
@@ -167,6 +181,7 @@ These skills modify repository state and require careful sequencing.
 | `labeling` | Subagent | Creates/updates labels; isolated operation |
 
 **Rules**:
+
 - ✅ Modifies files within scope
 - ✅ Can create branches, commits, PRs (if authorized)
 - ❌ Must respect protected files (CODEOWNERS, BUDGET_CONTROLS.md, etc.)
@@ -186,6 +201,7 @@ These skills gather information and may run independently.
 | `design:research-synthesis` | Subagent | Analysis from multiple sources; can run in parallel |
 
 **Rules**:
+
 - ✅ Read external data (APIs, web, documents)
 - ✅ Aggregate and synthesize findings
 - ❌ Do NOT modify external systems (no API writes, no file uploads to external services)
@@ -238,18 +254,20 @@ Skills meant for deferred or batch execution:
 
 ```text
 ✅ Allowed:
-  - Read files (Read, Glob, Grep)
-  - Bash (restricted to safe commands)
-  - Git operations (fetch, commit, push)
-  - GitHub MCP (if session has credentials)
-  - Artifact creation/editing
-  - Write files (for repo-local changes)
+
+- Read files (Read, Glob, Grep)
+- Bash (restricted to safe commands)
+- Git operations (fetch, commit, push)
+- GitHub MCP (if session has credentials)
+- Artifact creation/editing
+- Write files (for repo-local changes)
 
 ❌ Restricted:
-  - Destructive bash (rm -rf, dangerous rewrites)
-  - External API calls (unless safe/idempotent)
-  - Creating AWS resources, databases, etc.
-  - Deploying to production
+
+- Destructive bash (rm -rf, dangerous rewrites)
+- External API calls (unless safe/idempotent)
+- Creating AWS resources, databases, etc.
+- Deploying to production
 
 ```text
 
@@ -259,9 +277,10 @@ Skills meant for deferred or batch execution:
 ✅ Same as Local Agent (inherits parent's tools)
 
 Execution Isolation:
-  - Usage charged to parent session budget (TOA-271 requirement; enforcement pending)
-  - Separate process (sandboxed at OS level)
-  - Tool output returned via tool, not in conversation
+
+- Usage charged to parent session budget (TOA-271 requirement; enforcement pending)
+- Separate process (sandboxed at OS level)
+- Tool output returned via tool, not in conversation
 
 ```text
 
@@ -269,15 +288,17 @@ Execution Isolation:
 
 ```text
 ✅ Allowed:
-  - Network-safe tools only (HTTP, DNS, APIs)
-  - Controlled file I/O (no direct repo access)
-  - Logging and observability
+
+- Network-safe tools only (HTTP, DNS, APIs)
+- Controlled file I/O (no direct repo access)
+- Logging and observability
 
 ❌ Restricted:
-  - Local file system access (sandboxed)
-  - Bash shell (dangerous commands blocked)
-  - SSH/VPN (no secure channel)
-  - Database connections (must use APIs)
+
+- Local file system access (sandboxed)
+- Bash shell (dangerous commands blocked)
+- SSH/VPN (no secure channel)
+- Database connections (must use APIs)
 
 ```text
 
@@ -317,6 +338,7 @@ These skills must run with NO special privileges and must be reproducible:
 | Code review findings | Deterministic analysis | Same code → Same findings (for same model) |
 
 **Implementation**:
+
 - ✅ No external state (no API calls)
 - ✅ No randomness (no Monte Carlo, no shuffling)
 - ✅ No time-based decisions (no "cache if < 1 hour old")
@@ -333,6 +355,7 @@ User: "review branch naming with /branch-validation"
 → Skill: branch-validation
 → Environment: Local Agent (same session)
 → Execution:
+
    - Reads git status (current branch)
    - Validates against .github/CLAUDE.md rules
    - Returns result directly in conversation
@@ -341,6 +364,7 @@ User: "review branch naming with /branch-validation"
 ```text
 
 **Why Local Agent**:
+
 - Read-only operation (no writes)
 - Quick execution (< 1s)
 - User needs immediate feedback in conversation
@@ -355,6 +379,7 @@ User: "review this PR for correctness bugs"
 → Skill: code-review
 → Environment: Subagent (parent session budget)
 → Execution:
+
    - Parent supplies PR context; subagent usage counts against parent budget
    - Subagent reads code, writes findings to artifact
    - Returns findings to parent via tool result
@@ -363,6 +388,7 @@ User: "review this PR for correctness bugs"
 ```text
 
 **Why Subagent**:
+
 - Analysis task (potentially long-running)
 - Can run parallel to parent's other work
 - Results cleanly isolated (tool output, not chat noise)
@@ -377,6 +403,7 @@ User: "research this account for expansion opportunity"
 → Skill: sales:account-research
 → Environment: Subagent (parent session budget)
 → Execution:
+
    - Spawn subagent with research parameters
    - Subagent calls external APIs, web search, etc.
    - Aggregates findings into summary document
@@ -385,6 +412,7 @@ User: "research this account for expansion opportunity"
 ```text
 
 **Why Subagent**:
+
 - Autonomous research (no user interaction needed)
 - May take 30+ minutes
 - External API calls (research team's services)
@@ -399,6 +427,7 @@ Schedule: Every Sunday 2 AM UTC
 → Skill: audit-security-controls
 → Environment: Remote Agent (cloud sandbox)
 → Execution:
+
    - Scheduled job spawns remote agent
    - Scans repo for security issues
    - Posts findings to Linear issue
@@ -407,6 +436,7 @@ Schedule: Every Sunday 2 AM UTC
 ```text
 
 **Why Remote Agent**:
+
 - Long-running job (30–60 minutes)
 - Scheduled/deferred (no interactive user)
 - Secure (audit data sensitive)
@@ -439,6 +469,6 @@ Schedule: Every Sunday 2 AM UTC
 
 ---
 
-**End of Document**  
-*Maintained as part of TOA-241 Repository Governance Infrastructure*  
+**End of Document**
+*Maintained as part of TOA-241 Repository Governance Infrastructure*
 *Implementation roadmap: TOA-271 Skill Runtime Routing & Execution Strategy*

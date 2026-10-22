@@ -7,7 +7,10 @@
 
 ## Objective
 
-Break the single monolithic History page timeline into contextual timelines distributed across relevant about sub-pages. Keep the master History page as an interactive overview that links to sub-pages. Add per-topic timeline data and enhance the Timeline component for interactivity.
+Break the single monolithic History page timeline into contextual timelines
+distributed across relevant about sub-pages. Keep the master History page as an
+interactive overview that links to sub-pages. Add per-topic timeline data and
+enhance the Timeline component for interactivity.
 
 ---
 
@@ -22,7 +25,8 @@ Break the single monolithic History page timeline into contextual timelines dist
 
 ## Step 1: Create a comprehensive categorised timeline dataset
 
-Create `/data/mock/timeline/index.ts` with ALL milestones across Ash's life, each tagged with one or more categories:
+Create `/data/mock/timeline/index.ts` with ALL milestones across Ash's life,
+each tagged with one or more categories:
 
 ### Categories
 
@@ -55,17 +59,20 @@ export interface TimelineEntry {
   link?: string;          // Optional link to relevant page/post
   significance: 'major' | 'standard' | 'minor';
 }
-```
+
+```text
 
 ### Milestone inventory (source from `/docs/website-content.md`)
 
-**Personal / Education:**
+## Personal / Education
+
 - 1986–1993: Paarl Junior School (Miss Scott, school projects)
 - 1994–1998: Paarl Boys High (MTB racing, "2 o'clock club", matric at 17)
 - 1999: Daemelin College (marketing, MTB championships)
 - Age 12–13: First computer (Windows 3.1, self-taught)
 
 **Cycling:**
+
 - 1994: Started racing bicycles
 - 1995: First provincial mountain bike race
 - 1997: WP MTB colours — 3rd overall
@@ -83,6 +90,7 @@ export interface TimelineEntry {
 - Hua Hin to Phuket: 900km in 6 days
 
 **Fitness:**
+
 - Early 2000s: Started yoga
 - 2006: Started trail running
 - 2010: Started triathlon
@@ -90,6 +98,7 @@ export interface TimelineEntry {
 - 2025: 900km dancing in 8 weeks (Berlin)
 
 **Music / Festivals:**
+
 - 1999: First Vortex festival (December Vortex — life-defining)
 - 2001: Solipse solar eclipse festival, Zambia (86-hour bus)
 - 2000s: 2–4 festivals a month in Cape Town
@@ -97,6 +106,7 @@ export interface TimelineEntry {
 - 2025: Berlin summer dancing record
 
 **LightSpeed:**
+
 - 2003: Founded LightSpeed as IT support company
 - 2005: First employee hired
 - 2006: BarCamp Cape Town → WordPress pivot; Warwick joined
@@ -112,12 +122,14 @@ export interface TimelineEntry {
 - 2025–2026: AI workflow transformation
 
 **Makeup:**
+
 - July 2019: First UV paint experience in Berlin
 - 2020: First festival painting gig
 - 2022+: International festival painting (Ozora, MoDem, Shankra, etc.)
 - 2025: NOG inspiration for UV design
 
 **Six Cats:**
+
 - May 2019: Founded Six Cats Cannabis Club
 - 2003: Adopted Bart and Lisa (first cats)
 - 2020: Lisa passed (age 17)
@@ -126,11 +138,13 @@ export interface TimelineEntry {
 - 2023 Oct: Lucy passed
 
 **Berlin:**
+
 - 2019: Moved to Berlin for seasonal visits
 - 2019+: Open-airs, Hasenheide, fairy lights bike
 - The seasonal May–September cycle
 
 **Travel:**
+
 - 2005: First Thailand trip (met Mel Heinz, Koh Phangan)
 - 2009: Thailand with Barbara (40th birthday)
 - 2014: San Francisco bike trip
@@ -161,7 +175,8 @@ var cyclingTimeline = getTimelineByCategory('cycling');
     ariaLabel="Cycling milestones timeline"
   />
 </section>
-```
+
+```text
 
 ### Pages to add timelines to
 
@@ -182,17 +197,22 @@ var cyclingTimeline = getTimelineByCategory('cycling');
 
 ## Step 3: Enhance the master History page
 
-Transform `/about/history` from a flat list into an **interactive timeline hub**:
+Transform `/about/history` from a flat list into an **interactive timeline
+hub**:
 
 1. **Category filter chips** — Click a category to filter the timeline (e.g., show only cycling milestones)
-2. **All categories view** — Default shows all milestones in chronological order, colour-coded by category
-3. **Clickable milestones** — Each milestone with a `link` field becomes clickable, navigating to the relevant sub-page or blog post
-4. **Significance levels** — Major milestones get larger dots and bolder typography; minor milestones are subtle
-5. **Category legend** — Visual legend showing which colour represents which category
+
+1. **All categories view** — Default shows all milestones in chronological order, colour-coded by category
+
+1. **Clickable milestones** — Each milestone with a `link` field becomes clickable, navigating to the relevant sub-page or blog post
+
+1. **Significance levels** — Major milestones get larger dots and bolder typography; minor milestones are subtle
+
+1. **Category legend** — Visual legend showing which colour represents which category
 
 ### Enhanced History page layout
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │  Breadcrumbs: Home > About > History                         │
 │  H1: History (gradient)                                      │
@@ -222,7 +242,8 @@ Transform `/about/history` from a flat list into an **interactive timeline hub**
 │  ● Cyan = Fitness/ADHD  ● Red = Personal                    │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
-```
+
+```text
 
 ---
 
@@ -231,7 +252,9 @@ Transform `/about/history` from a flat list into an **interactive timeline hub**
 The existing Timeline component may need enhancements:
 
 1. **Clickable events** — Add optional `onClick` or `href` to TimelineEvent interface
-2. **Category colour per event** — Currently the whole timeline has one `colorAccent`. Add per-event colour support:
+
+1. **Category colour per event** — Currently the whole timeline has one `colorAccent`. Add per-event colour support:
+
    ```typescript
    interface TimelineEvent {
      year: string;
@@ -242,18 +265,24 @@ The existing Timeline component may need enhancements:
      href?: string;         // NEW: clickable link
      significance?: 'major' | 'standard' | 'minor'; // NEW: visual weight
    }
-   ```
-3. **Significance styling** — Major events get larger dots (12px vs 8px), bolder titles
-4. **Grouping by year/decade** — Optional year headers for long timelines
+
+```text
+
+1. **Significance styling** — Major events get larger dots (12px vs 8px), bolder titles
+
+1. **Grouping by year/decade** — Optional year headers for long timelines
 
 ---
 
 ## Step 5: Update data and barrel exports
 
 1. Create `/data/mock/timeline/index.ts` with all milestone data and helper functions
-2. Export `getTimelineByCategory()`, `getTimelineByDateRange()`, `getAllTimeline()` helpers
-3. Update History page data to use the new centralised timeline
-4. Add timeline CSS enhancements to `/styles/blocks/timeline.css`
+
+1. Export `getTimelineByCategory()`, `getTimelineByDateRange()`, `getAllTimeline()` helpers
+
+1. Update History page data to use the new centralised timeline
+
+1. Add timeline CSS enhancements to `/styles/blocks/timeline.css`
 
 ---
 

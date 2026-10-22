@@ -7,9 +7,13 @@ Complete visual reference of all 54 dark mode components with live examples.
 ## 🎯 Component Categories
 
 ### 1. Navigation Components (5)
+
 ### 2. Content Display (18)
+
 ### 3. Forms & Inputs (12)
+
 ### 4. Feedback & Status (10)
+
 ### 5. Layout & Structure (9)
 
 ---
@@ -23,7 +27,7 @@ Complete visual reference of all 54 dark mode components with live examples.
   <div class="header__left">
     <a href="/" class="header__logo">YourBrand</a>
   </div>
-  
+
   <nav class="header__center">
     <div class="header__nav">
       <a href="/about" class="header__nav-link">About</a>
@@ -31,14 +35,16 @@ Complete visual reference of all 54 dark mode components with live examples.
       <a href="/contact" class="header__nav-link">Contact</a>
     </div>
   </nav>
-  
+
   <div class="header__actions">
     <button class="button button--primary">Get Started</button>
   </div>
 </header>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features
+
 - Neon pink hover effects
 - Atomic black background (#0F0F0F)
 - Backdrop blur on scroll
@@ -58,9 +64,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     Article Title
   </span>
 </nav>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (1)
+
 - Current page in neon pink
 - Subtle gray separators
 - Hover state with color transition
@@ -71,11 +79,11 @@ Complete visual reference of all 54 dark mode components with live examples.
 
 ```html
 <nav class="pagination" aria-label="Pagination">
-  <button class="pagination__link pagination__link--disabled" disabled>
+  <button class="pagination_*link pagination*_link--disabled" disabled>
     ← Previous
   </button>
   <button class="pagination__link">1</button>
-  <button class="pagination__link pagination__link--active" aria-current="page">
+  <button class="pagination_*link pagination*_link--active" aria-current="page">
     2
   </button>
   <button class="pagination__link">3</button>
@@ -85,9 +93,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     Next →
   </button>
 </nav>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (2)
+
 - Active page: Pink→Violet gradient background
 - Hover: Neon pink border glow
 - Disabled: 30% opacity
@@ -99,36 +109,38 @@ Complete visual reference of all 54 dark mode components with live examples.
 ```html
 <div class="tabs">
   <div class="tabs__list" role="tablist">
-    <button 
-      class="tabs__button tabs__button--active" 
-      role="tab" 
+    <button
+      class="tabs_*button tabs*_button--active"
+      role="tab"
       aria-selected="true"
     >
       Overview
     </button>
-    <button 
-      class="tabs__button" 
-      role="tab" 
+    <button
+      class="tabs__button"
+      role="tab"
       aria-selected="false"
     >
       Features
     </button>
-    <button 
-      class="tabs__button" 
-      role="tab" 
+    <button
+      class="tabs__button"
+      role="tab"
       aria-selected="false"
     >
       Reviews
     </button>
   </div>
-  
+
   <div class="tabs__panel" role="tabpanel">
     <p>Overview content goes here...</p>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (3)
+
 - Active tab: Neon pink underline (3px solid)
 - Hover: Semi-transparent pink underline
 - Panel: Dark charcoal background
@@ -142,9 +154,9 @@ Complete visual reference of all 54 dark mode components with live examples.
   <div class="sidebar__header">
     <h3>Navigation</h3>
   </div>
-  
+
   <div class="sidebar__section">
-    <a href="/dashboard" class="sidebar__link sidebar__link--active">
+    <a href="/dashboard" class="sidebar_*link sidebar*_link--active">
       <svg class="sidebar__icon"><!-- Icon --></svg>
       Dashboard
     </a>
@@ -158,9 +170,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     </a>
   </div>
 </aside>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (4)
+
 - Active link: 3px left border accent + pink background
 - Hover: Subtle pink background tint
 - Dark atomic black base
@@ -188,9 +202,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     This card has special styling with neon border.
   </p>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (5)
+
 - Hover: Neon pink border + glow shadow
 - Background: Dark charcoal (#1A1A1A)
 - Title: Pure white for contrast
@@ -202,14 +218,14 @@ Complete visual reference of all 54 dark mode components with live examples.
 ```html
 <div class="testimonial">
   <blockquote class="testimonial__quote">
-    "This product completely transformed how we work. 
+    "This product completely transformed how we work.
     The neon aesthetic is incredible!"
   </blockquote>
-  
+
   <div class="testimonial__author">
-    <img 
-      src="/avatar.jpg" 
-      alt="Jane Doe" 
+    <img
+      src="/avatar.jpg"
+      alt="Jane Doe"
       class="testimonial__avatar"
     />
     <div>
@@ -218,9 +234,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     </div>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (6)
+
 - Pink left border accent (4px)
 - Avatar: Neon pink border ring
 - Author name: Pure white
@@ -240,7 +258,7 @@ Complete visual reference of all 54 dark mode components with live examples.
       <p>Successfully launched the new platform with neon UI.</p>
     </div>
   </div>
-  
+
   <div class="timeline__item">
     <div class="timeline__marker"></div>
     <div class="timeline__content">
@@ -250,9 +268,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     </div>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (7)
+
 - Marker: Neon pink circle with glow
 - Connecting line: Dark gray (#333)
 - Content box: Dark charcoal background
@@ -264,7 +284,7 @@ Complete visual reference of all 54 dark mode components with live examples.
 ```html
 <div class="accordion">
   <div class="accordion__item">
-    <button class="accordion__header accordion__header--active">
+    <button class="accordion_*header accordion*_header--active">
       <span>What is your return policy?</span>
       <svg class="accordion__icon"><!-- Chevron icon --></svg>
     </button>
@@ -272,7 +292,7 @@ Complete visual reference of all 54 dark mode components with live examples.
       <p>We offer a 30-day money-back guarantee...</p>
     </div>
   </div>
-  
+
   <div class="accordion__item">
     <button class="accordion__header">
       <span>How do I get started?</span>
@@ -283,9 +303,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     </div>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (8)
+
 - Active header: Pink text + left border accent
 - Hover: Dark gray background
 - Icon: Rotates on expand
@@ -313,14 +335,16 @@ Complete visual reference of all 54 dark mode components with live examples.
 <div class="lightbox">
   <img src="/image-full.jpg" alt="Full size" class="lightbox__image" />
   <p class="lightbox__caption">Image description</p>
-  
-  <button class="lightbox__close">×</button>
-  <button class="lightbox__nav lightbox__nav--prev">‹</button>
-  <button class="lightbox__nav lightbox__nav--next">›</button>
-</div>
-```
 
-**Dark Mode Features:**
+  <button class="lightbox__close">×</button>
+  <button class="lightbox_*nav lightbox*_nav--prev">‹</button>
+  <button class="lightbox_*nav lightbox*_nav--next">›</button>
+</div>
+
+```text
+
+## Dark Mode Features (9)
+
 - Gallery hover: Neon pink border + glow
 - Lightbox background: 95% black overlay
 - Navigation buttons: Neon pink on hover
@@ -341,9 +365,11 @@ Complete visual reference of all 54 dark mode components with live examples.
   </p>
   <button class="button button--primary">Create New Item</button>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (10)
+
 - Dashed border (2px, dark gray)
 - Icon: Dark gray (#666)
 - Title: Pure white
@@ -362,9 +388,11 @@ Complete visual reference of all 54 dark mode components with live examples.
   </p>
   <button class="button button--primary">Go Home</button>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (11)
+
 - Code (404): Pink→Violet gradient text with glow
 - Background: Atomic black
 - Gradient uses background-clip for text effect
@@ -379,30 +407,32 @@ Complete visual reference of all 54 dark mode components with live examples.
 <form class="form">
   <div class="form__group">
     <label class="form__label" for="email">Email Address</label>
-    <input 
-      type="email" 
-      id="email" 
-      class="form__input" 
+    <input
+      type="email"
+      id="email"
+      class="form__input"
       placeholder="you@example.com"
     />
   </div>
-  
+
   <div class="form__group">
     <label class="form__label" for="message">Message</label>
-    <textarea 
-      id="message" 
-      class="form__textarea" 
+    <textarea
+      id="message"
+      class="form__textarea"
       placeholder="Type your message..."
     ></textarea>
   </div>
-  
+
   <button type="submit" class="button button--primary">
     Send Message
   </button>
 </form>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (12)
+
 - Background: Dark charcoal (#1A1A1A)
 - Border: Dark gray, pink on focus
 - Focus ring: 2px pink glow
@@ -434,9 +464,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     <span>Enterprise Plan</span>
   </label>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (13)
+
 - Unchecked: Dark charcoal background, gray border
 - Checked: Neon pink background + pink border
 - Checked glow: 8px pink shadow
@@ -452,9 +484,11 @@ Complete visual reference of all 54 dark mode components with live examples.
   <span class="switch__slider"></span>
   <span class="switch__label">Enable notifications</span>
 </label>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (14)
+
 - Off: Dark gray background (#333)
 - On: Pink→Violet gradient with glow
 - Thumb: Pure white circle
@@ -466,9 +500,9 @@ Complete visual reference of all 54 dark mode components with live examples.
 
 ```html
 <div class="search">
-  <input 
-    type="search" 
-    class="search__input" 
+  <input
+    type="search"
+    class="search__input"
     placeholder="Search..."
     aria-label="Search"
   />
@@ -476,9 +510,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     <svg><!-- Search icon --></svg>
   </button>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (15)
+
 - Container border: Dark gray, pink on focus
 - Focus-within: Pink border + 2px glow ring
 - Button icon: Pink on hover
@@ -493,17 +529,19 @@ Complete visual reference of all 54 dark mode components with live examples.
   <button class="dropdown__trigger">
     Options ▼
   </button>
-  
+
   <div class="dropdown__menu">
     <button class="dropdown__item">Edit</button>
     <button class="dropdown__item">Duplicate</button>
     <div class="dropdown__divider"></div>
-    <button class="dropdown__item dropdown__item--danger">Delete</button>
+    <button class="dropdown_*item dropdown*_item--danger">Delete</button>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (16)
+
 - Menu: Dark charcoal background + shadow
 - Hover: Gray background + pink text
 - Active: Pink background tint
@@ -520,9 +558,11 @@ Complete visual reference of all 54 dark mode components with live examples.
   <button class="filter">New</button>
   <button class="filter">Popular</button>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (17)
+
 - Default: Dark background, gray border
 - Active: Pink→Violet gradient + glow
 - Hover: Pink border
@@ -546,9 +586,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     <button class="chip__close" aria-label="Remove">×</button>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (18)
+
 - Background: Slightly lighter gray (#242424)
 - Close button: Pink on hover
 - Remove animation supported
@@ -583,9 +625,11 @@ Complete visual reference of all 54 dark mode components with live examples.
   <p>ℹ New update available</p>
   <button class="toast__close" aria-label="Close">×</button>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (19)
+
 - Background: Dark charcoal with shadow
 - Left border: 4px colored accent (green/yellow/red/blue)
 - Close button: Pink on hover
@@ -615,9 +659,11 @@ Complete visual reference of all 54 dark mode components with live examples.
 <div class="alert alert--info">
   <strong>Info:</strong> System maintenance scheduled.
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (20)
+
 - Colored backgrounds (semi-transparent)
 - Colored borders and text
 - Success: Neon green
@@ -638,24 +684,26 @@ Complete visual reference of all 54 dark mode components with live examples.
 
 <!-- Success -->
 <div class="progress">
-  <div class="progress__bar progress__bar--success" style="width: 100%;"></div>
+  <div class="progress_*bar progress*_bar--success" style="width: 100%;"></div>
   <span class="progress__label">Complete!</span>
 </div>
 
 <!-- Warning -->
 <div class="progress">
-  <div class="progress__bar progress__bar--warning" style="width: 50%;"></div>
+  <div class="progress_*bar progress*_bar--warning" style="width: 50%;"></div>
   <span class="progress__label">50%</span>
 </div>
 
 <!-- Error -->
 <div class="progress">
-  <div class="progress__bar progress__bar--error" style="width: 25%;"></div>
+  <div class="progress_*bar progress*_bar--error" style="width: 25%;"></div>
   <span class="progress__label">Failed</span>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (21)
+
 - Container: Dark charcoal background
 - Default bar: Pink→Violet→Cyan gradient
 - Success: Green→Cyan gradient
@@ -677,9 +725,11 @@ Complete visual reference of all 54 dark mode components with live examples.
 <div class="spinner spinner--neon" role="status">
   <span class="sr-only">Loading...</span>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (22)
+
 - Standard: Gray border, pink top border
 - Neon: Semi-transparent pink border with glow
 - Smooth rotation animation
@@ -707,9 +757,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     <span>Away</span>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (23)
+
 - Online: Neon green with glow
 - Offline: Gray (no glow)
 - Busy: Hot red with glow
@@ -722,16 +774,18 @@ Complete visual reference of all 54 dark mode components with live examples.
 
 ```html
 <div class="rating">
-  <span class="rating__star rating__star--filled">★</span>
-  <span class="rating__star rating__star--filled">★</span>
-  <span class="rating__star rating__star--filled">★</span>
-  <span class="rating__star rating__star--half">★</span>
+  <span class="rating_*star rating*_star--filled">★</span>
+  <span class="rating_*star rating*_star--filled">★</span>
+  <span class="rating_*star rating*_star--filled">★</span>
+  <span class="rating_*star rating*_star--half">★</span>
   <span class="rating__star">★</span>
   <span class="rating__count">(4.5 / 5)</span>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (24)
+
 - Filled: Neon yellow with glow
 - Empty: Dark gray (#333)
 - Half: Gradient mask supported
@@ -749,9 +803,11 @@ Complete visual reference of all 54 dark mode components with live examples.
 
 <!-- Neon Variant -->
 <div class="skeleton skeleton--neon skeleton--text"></div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (25)
+
 - Gradient animation: Dark charcoal → Lighter gray
 - Neon variant: Includes pink tint in gradient
 - Shimmer effect
@@ -772,9 +828,11 @@ Complete visual reference of all 54 dark mode components with live examples.
     Helpful tooltip text
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (26)
+
 - Background: Atomic black (#0F0F0F)
 - Border: Neon pink (1px solid)
 - Neon pink glow shadow
@@ -789,22 +847,24 @@ Complete visual reference of all 54 dark mode components with live examples.
 ```html
 <div class="modal" role="dialog" aria-labelledby="modal-title">
   <div class="modal__backdrop"></div>
-  
+
   <div class="modal__content">
     <h2 id="modal-title">Modal Title</h2>
     <p>Modal content goes here...</p>
-    
+
     <div class="modal__actions">
       <button class="button button--secondary">Cancel</button>
       <button class="button button--primary">Confirm</button>
     </div>
-    
+
     <button class="modal__close" aria-label="Close">×</button>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (27)
+
 - Backdrop: 80% black overlay
 - Content: Dark charcoal with border
 - Backdrop blur: 10px
@@ -819,9 +879,11 @@ Complete visual reference of all 54 dark mode components with live examples.
   <div class="spinner spinner--neon"></div>
   <p class="loading-overlay__message">Loading your content...</p>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (28)
+
 - Background: 95% black with backdrop blur
 - Message: Pink text shadow glow
 - Centered spinner
@@ -833,18 +895,20 @@ Complete visual reference of all 54 dark mode components with live examples.
 ```html
 <div class="cookie-consent">
   <p class="cookie-consent__text">
-    We use cookies to improve your experience. 
+    We use cookies to improve your experience.
     <a href="/privacy" class="cookie-consent__link">Learn more</a>
   </p>
-  
+
   <div class="cookie-consent__actions">
     <button class="button button--secondary">Decline</button>
     <button class="button button--primary">Accept</button>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (29)
+
 - Background: 98% black with blur
 - Top border: Dark gray (#333)
 - Link: Neon pink, yellow on hover
@@ -860,19 +924,21 @@ Complete visual reference of all 54 dark mode components with live examples.
   <p class="newsletter__description">
     Get weekly updates delivered to your inbox.
   </p>
-  
+
   <form class="newsletter__form">
-    <input 
-      type="email" 
-      class="newsletter__input" 
+    <input
+      type="email"
+      class="newsletter__input"
       placeholder="your@email.com"
     />
     <button class="button button--primary">Subscribe</button>
   </form>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (30)
+
 - Background: Semi-transparent pink→violet gradient
 - Border: Dark gray
 - Input: Dark charcoal background
@@ -888,15 +954,17 @@ Complete visual reference of all 54 dark mode components with live examples.
   <p class="cta__description">
     Join thousands of users already using our platform.
   </p>
-  
+
   <div class="button-group button-group--center">
     <button class="button button--primary">Start Free Trial</button>
     <button class="button button--secondary">Learn More</button>
   </div>
 </div>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (31)
+
 - Background: Pink→Violet gradient (15% opacity)
 - Border: 2px neon pink
 - Title: Pink glow shadow
@@ -910,9 +978,11 @@ Complete visual reference of all 54 dark mode components with live examples.
 <button class="back-to-top" aria-label="Back to top">
   <svg><!-- Arrow up icon --></svg>
 </button>
-```
 
-**Dark Mode Features:**
+```text
+
+## Dark Mode Features (32)
+
 - Background: Pink→Violet gradient
 - Fixed position (bottom-right)
 - Neon glow shadow
@@ -933,7 +1003,8 @@ Complete visual reference of all 54 dark mode components with live examples.
 .color-orange { color: #FF7A00; }   /* Warning */
 .color-red { color: #FF0055; }      /* Error */
 .color-blue { color: #4A90FF; }     /* Info alt */
-```
+
+```text
 
 ### Surface Colors
 
@@ -942,7 +1013,8 @@ Complete visual reference of all 54 dark mode components with live examples.
 .bg-charcoal { background: #1A1A1A; }   /* Cards, inputs */
 .bg-panel { background: #171722; }      /* Alt panels */
 .bg-hover { background: #242424; }      /* Hover states */
-```
+
+```text
 
 ### Border Colors
 
@@ -950,44 +1022,55 @@ Complete visual reference of all 54 dark mode components with live examples.
 .border-default { border-color: #333333; }
 .border-divider { border-color: #222222; }
 .border-pink { border-color: #FF3AAE; }
-```
+
+```text
 
 ---
 
 ## ✨ Tips for Best Results
 
 ### 1. **Combine Modifiers**
+
 ```html
 <button class="button button--primary button--large">
   Large Primary Button
 </button>
-```
+
+```text
 
 ### 2. **Layer Effects**
+
 ```html
 <div class="card card--featured card--hover-lift">
   <!-- Multiple modifier classes -->
 </div>
-```
+
+```text
 
 ### 3. **Use Semantic HTML**
+
 ```html
 <!-- Good -->
 <button class="button">Click</button>
 
 <!-- Avoid -->
 <div class="button" onclick="...">Click</div>
-```
+
+```text
 
 ### 4. **Test Keyboard Navigation**
+
 All components support:
+
 - Tab navigation
 - Enter/Space activation
 - Escape to close
 - Arrow keys for lists
 
 ### 5. **Ensure Contrast**
+
 All text meets WCAG AA standards:
+
 - Body: 14.8:1 contrast (AAA)
 - Headings: 21:1 contrast (AAA)
 - Muted: 10.2:1 contrast (AAA)
@@ -997,19 +1080,24 @@ All text meets WCAG AA standards:
 ## 🚀 Next Steps
 
 1. **Import theme files** in `/styles/globals.css`
-2. **Add `.dark` class** to `<html>` or `<body>`
-3. **Use BEM class names** as shown in examples
-4. **Test in multiple browsers** for consistency
-5. **Verify accessibility** with keyboard and screen readers
+
+1. **Add `.dark` class** to `<html>` or `<body>`
+
+1. **Use BEM class names** as shown in examples
+
+1. **Test in multiple browsers** for consistency
+
+1. **Verify accessibility** with keyboard and screen readers
 
 ---
 
-**Full Documentation:** `/reports/theme-styling-audit/dark-mode-final-completion-report.md`  
-**Usage Guide:** `/docs/dark-mode-usage-guide.md`  
+**Full Documentation:**
+`/reports/theme-styling-audit/dark-mode-final-completion-report.md`
+**Usage Guide:** `/docs/dark-mode-usage-guide.md`
 **Component API:** Individual component files in `/guidelines/components/`
 
 ---
 
-**Last Updated:** March 11, 2026  
-**Theme Version:** 2.0.0  
+**Last Updated:** March 11, 2026
+**Theme Version:** 2.0.0
 **Components:** 54 fully styled

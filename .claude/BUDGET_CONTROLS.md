@@ -1,8 +1,8 @@
 # Agent Budget Controls & Enforcement Strategy
 
-**Document Status**: Specification for TOA-271 implementation  
-**Last Updated**: 2026-10-22  
-**Owner**: @ashley (TOA-271 epic implementation)  
+**Document Status**: Specification for TOA-271 implementation
+**Last Updated**: 2026-10-22
+**Owner**: @ashley (TOA-271 epic implementation)
 **Scope**: Requirements documentation only — host-side enforcement remains
 pending
 in TOA-271
@@ -32,12 +32,14 @@ spec §R7.3.
 consume.
 
 **Properties**:
+
 - Host-side hard limit (TOA-271; pending implementation)
 - Per-session allocation, not per-turn (pending)
 - Aggregate across all delegated work, including nested agents and subagents (pending)
 - Host-provided remaining-budget feedback (pending); `total_tokens` is not a Claude Messages API guarantee
 
 **Examples**:
+
 - Standard agent: 100,000 tokens
 - Long-research agent: 500,000 tokens
 - Lightweight validator: 50,000 tokens
@@ -48,12 +50,14 @@ consume.
 automatic termination.
 
 **Properties**:
+
 - Host-side enforcement (not advisory)
 - Per-session timeout
 - Applies to entire session lifecycle (not per-turn)
 - Grace period for graceful shutdown (30–60s warning before hard kill)
 
 **Typical Values**:
+
 - Short tasks (validation, review): 10–30 minutes
 - Medium tasks (implementation): 60–120 minutes
 - Long tasks (research, planning): 180–360 minutes
@@ -65,12 +69,14 @@ automatic termination.
 calls.
 
 **Properties**:
+
 - Monitored post-execution (not enforced in real-time)
 - Per-session allocation
 - Aggregate cost across all model calls and external API calls
 - Exceeding ceiling triggers owner notification and requires approval before later sessions
 
 **Examples**:
+
 - Standard agent: $2.00 per session
 - Complex research: $10.00 per session
 - Data-heavy work: $50.00 per session
@@ -81,12 +87,14 @@ calls.
 timeouts, rate limits, service degradation).
 
 **Properties**:
+
 - Applied per-operation (not per-session)
 - Exponential backoff strategy (2s, 4s, 8s, 16s between retries)
 - Failure classification: transient vs. permanent
 - Exhaustion halts operation, escalates to human decision
 
 **Typical Retry Policies**:
+
 - API calls: 3–4 retries
 - Git operations: 2–3 retries
 - External service calls: 2 retries (fast-fail for cost control)
@@ -99,7 +107,7 @@ timeouts, rate limits, service degradation).
 ### Claude API Controls
 
 - **Per-response output limit**: Messages API `max_tokens` limits one response's output; it does not cap aggregate input and output across a session.
-- **Usage reporting**: Responses report fields such as `input_tokens`, `output_tokens`, and cache usage. The host must reconcile these into its budget ledger; the API does not provide the session's remaining allowance.
+- **Usage reporting**: Responses report fields such as `input*tokens`, `output*tokens`, and cache usage. The host must reconcile these into its budget ledger; the API does not provide the session's remaining allowance.
 - **Rate limiting**: The API can reject requests with HTTP 429. Retry scheduling and backoff belong to the client or host; no fixed session pause or quota reset interval is guaranteed here.
 
 ### Required Host-Side Contract (TOA-271 — Pending)
@@ -109,25 +117,30 @@ retries/cancellation, exhaustion, and fallback behavior. This repository does
 not implement that runtime control.
 
 1. **Token limit and accounting**:
+
    - Reserve tokens before dispatch and reconcile input, output, and cached-token usage across calls, retries, and subagents.
    - Include concurrent and in-flight reservations in the parent ledger; reject dispatch that would exceed the approved session ceiling.
    - On exhaustion, block further calls and cancel outstanding work where supported; preserve checkpoints and report the remaining allowance through host-provided feedback.
 
-2. **Execution time**:
+1. **Execution time**:
+
    - Track a session deadline and stop execution at the approved timeout.
    - Plan a 30–60s checkpoint warning before the deadline; do not promise recovery of in-flight work after termination.
 
-3. **Invocation quotas and rate limiting**:
+1. **Invocation quotas and rate limiting**:
+
    - Apply per-agent admission limits and bounded retry/backoff policies before dispatch.
    - Charge retries to the same session budget; retries must not bypass token or time limits.
 
 ### Soft Policies (Advisory, Not Enforced)
 
-**These are documented best-practices, not enforced:**
+## These are documented best-practices, not enforced
 
 1. **Recommended Checkpoint Intervals**: Run validation every 50k tokens (advisory only)
-2. **Recommended Session Breaks**: Pause between 100k–200k token sessions (best practice)
-3. **Cost Warning Thresholds**: Warn when approaching 80% of cost ceiling (informational)
+
+1. **Recommended Session Breaks**: Pause between 100k–200k token sessions (best practice)
+
+1. **Cost Warning Thresholds**: Warn when approaching 80% of cost ceiling (informational)
 
 ---
 
@@ -153,9 +166,12 @@ Remaining: 5,000 tokens
 ### Rules
 
 1. **Subagents**: Token consumption counts against parent budget (nested calls deduct from parent allowance)
-2. **Forked Sessions**: Run on separate budgets (inherit parent's token limit, but tracked independently)
-3. **Concurrent Work**: Concurrent subagents within a session share its budget; independently budgeted forked sessions use their own ledgers
-4. **Chained Delegations**: Transitive subagent usage counts against the originating session's budget; a fork starts a separate accounting boundary
+
+1. **Forked Sessions**: Run on separate budgets (inherit parent's token limit, but tracked independently)
+
+1. **Concurrent Work**: Concurrent subagents within a session share its budget; independently budgeted forked sessions use their own ledgers
+
+1. **Chained Delegations**: Transitive subagent usage counts against the originating session's budget; a fork starts a separate accounting boundary
 
 **Implication**: An agent cannot spawn unlimited subagents — each subagent
 reduces remaining budget for parent's own work.
@@ -167,6 +183,7 @@ reduces remaining budget for parent's own work.
 ### Transient Failure Classification
 
 **Transient** (retry):
+
 - Network timeouts (TCP timeout, connection reset)
 - HTTP 429 (rate limited) — retry with exponential backoff
 - HTTP 503/504 (service temporarily unavailable)
@@ -174,6 +191,7 @@ reduces remaining budget for parent's own work.
 - Temporary database locks
 
 **Permanent** (fail immediately, no retry):
+
 - HTTP 400/401/403/404 (client error, auth failure)
 - HTTP 410 (gone)
 - Invalid input validation (fail immediately, escalate)
@@ -197,16 +215,19 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 ### Cancellation Policy
 
 1. **User-initiated**: `/cancel` command or agent interrupt
+
    - Stops current operation
    - Preserves partial results where possible
    - Returns graceful message to user
 
-2. **Budget exhaustion**: Token or time limit reached
+1. **Budget exhaustion**: Token or time limit reached
+
    - Host blocks further dispatch and cancels outstanding work where supported
    - Preserves the latest checkpoint and reports exhaustion
    - Cost overruns are checked post-execution and require approval before later sessions
 
-3. **Permanent failure**: Unrecoverable error (auth expired, resource deleted)
+1. **Permanent failure**: Unrecoverable error (auth expired, resource deleted)
+
    - Log failure with context
    - Do not retry
    - Escalate to human decision if blocking critical path
@@ -218,12 +239,17 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 ### When Token Budget Exhausted
 
 **Behavior**:
+
 1. Host blocks further dispatch when the approved allowance is exhausted
-2. Outstanding reservations remain charged until reconciled; cancel in-flight work where supported
-3. Report: "Token budget exhausted; session terminated"
-4. Return saved partial results where available; completion of an in-flight turn is not guaranteed
+
+1. Outstanding reservations remain charged until reconciled; cancel in-flight work where supported
+
+1. Report: "Token budget exhausted; session terminated"
+
+1. Return saved partial results where available; completion of an in-flight turn is not guaranteed
 
 **Recovery**:
+
 - User can continue work in new session
 - State preserved in prior turn messages/artifacts
 - Recommended: Save intermediate work before hitting limit
@@ -231,12 +257,17 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 ### When Time Budget Exhausted
 
 **Behavior**:
+
 1. Host terminates the session at the deadline after any checkpoint warning
-2. In-flight operations aborted
-3. Partial results lost
-4. Error message returned to user
+
+1. In-flight operations aborted
+
+1. Partial results lost
+
+1. Error message returned to user
 
 **Recovery**:
+
 - User resumes in new session
 - Lost work must be re-run
 - Recommended: Checkpoint work frequently on long-running tasks
@@ -244,12 +275,17 @@ Attempt 5 (if configured): Wait 16 seconds + jitter
 ### When Cost Ceiling Exceeded
 
 **Behavior** (host-side monitoring):
+
 1. Session continues to completion (cost not enforced in real-time)
-2. Post-execution cost check: if ceiling exceeded
-3. Owner notified via alert/email
-4. Require owner approval before later sessions for this agent
+
+1. Post-execution cost check: if ceiling exceeded
+
+1. Owner notified via alert/email
+
+1. Require owner approval before later sessions for this agent
 
 **Recovery**:
+
 - Review cost drivers (are API calls inefficient?)
 - Lower budget ceiling (if permanent cost reduction needed)
 - Optimize prompts or external API calls (reduce unnecessary calls)
@@ -266,19 +302,23 @@ case)
 **Fallback Strategy**:
 
 1. **Charge the full remaining allowance**:
+
    - If usage cannot be reconciled, mark the session's remaining token allowance as consumed (zero remaining)
    - Keep known usage and outstanding reservations charged; apply this fallback once to the shared session ledger, including subagents
 
-2. **Suspend further dispatch**:
+1. **Suspend further dispatch**:
+
    - Stop new model calls, retries, and delegated work within this session
    - Preserve existing checkpoints without additional model calls
 
-3. **Log and escalate**:
+1. **Log and escalate**:
+
    - Record incident with timestamp and context
    - Notify agent owner if pattern emerges
    - Alert infrastructure team (potential API issue)
 
-4. **Resume only within an approved ceiling**:
+1. **Resume only within an approved ceiling**:
+
    - Resume this session only after authoritative usage reconciliation establishes a positive remainder under its original ceiling
    - Otherwise, require owner approval for a new session allocation; never silently reset or increase the original allowance
 
@@ -288,17 +328,19 @@ case)
 
 ### Saving State for Resumption
 
-**When an agent hits budget limits:**
+## When an agent hits budget limits
 
 1. **Save context**:
+
    - Preserve conversation history (all turns to date)
    - Save any in-progress work artifacts (drafts, partial outputs)
    - Document what was completed vs. what remains
 
-2. **Provide handoff summary**:
+1. **Provide handoff summary**:
 
 ```text
    **Session Suspended: Token Exhaustion**
+
    - Tokens consumed: 98,500 / 100,000 (98.5%)
    - Completed: Phases 1–3, 8/12 tasks done
    - Remaining: Phases 4–6 (4 tasks pending)
@@ -307,7 +349,8 @@ case)
 
 ```text
 
-3. **Create new session** (user or parent agent):
+1. **Create new session** (user or parent agent):
+
    - Reload all prior context (conversation, artifacts)
    - Continue from saved checkpoint
    - New budget allocation (fresh tokens, time, cost)
@@ -316,16 +359,19 @@ case)
 ### Continuation Strategies
 
 **Strategy A: Linear Resumption** (recommended)
+
 - Continue exactly where prior session ended
 - Include summary of completed work in new session prompt
 - Same agent, same workstream
 
 **Strategy B: Escalation**
+
 - Hand off to more capable agent (if current agent insufficient)
 - Provide full context and artifacts
 - Document handoff reason (budget exhaustion, task complexity, etc.)
 
 **Strategy C: Delegation**
+
 - Break remaining work into independent subtasks
 - Spawn separate agents per subtask
 - Parent agent orchestrates merge/integration
@@ -402,6 +448,6 @@ Total: 200k (all accounted for)
 
 ---
 
-**End of Document**  
-*Maintained as part of TOA-241 Repository Governance Infrastructure*  
+**End of Document**
+*Maintained as part of TOA-241 Repository Governance Infrastructure*
 *Implementation roadmap: TOA-271 Agent Budget Controls & Enforcement*

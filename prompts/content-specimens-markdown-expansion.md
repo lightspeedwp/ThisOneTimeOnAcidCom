@@ -1,30 +1,39 @@
 # Prompt: Content Specimens Markdown Expansion
 
-**Version:** 1.0.0  
-**Created:** March 4, 2026  
+**Version:** 1.0.0
+**Created:** March 4, 2026
 **Type:** Enhancement Audit
 
 ## Objective
 
-Expand all 7 Content Specimen pages (`/dev-tools/content-specimens`, `/dev-tools/blog-specimens`, `/dev-tools/portfolio-specimens`, `/dev-tools/video-specimens`, `/dev-tools/podcast-specimens`, `/dev-tools/event-specimens`, `/dev-tools/faq-specimens`) to include comprehensive **markdown rendering samples** for every content type.
+Expand all 7 Content Specimen pages (`/dev-tools/content-specimens`,
+`/dev-tools/blog-specimens`, `/dev-tools/portfolio-specimens`,
+`/dev-tools/video-specimens`, `/dev-tools/podcast-specimens`,
+`/dev-tools/event-specimens`, `/dev-tools/faq-specimens`) to include
+comprehensive **markdown rendering samples** for every content type.
 
-Each specimen page should showcase ALL markdown elements styled with that content-type's neon accent color.
+Each specimen page should showcase ALL markdown elements styled with that
+content-type's neon accent color.
 
 ## Current State
 
 The existing Content Specimen pages currently show:
+
 - Neon accent color swatches
 - Card variant descriptions (text lists)
 - Metadata patterns (text lists)
 - Layout templates (text descriptions)
 
-**Missing:** Live rendered markdown samples showing how each element actually looks when styled.
+**Missing:** Live rendered markdown samples showing how each element actually
+looks when styled.
 
 ## Required Markdown Elements
 
-Based on `/imports/markdown-guide.md`, each Content Specimen page MUST showcase the following rendered markdown elements:
+Based on `/imports/markdown-guide.md`, each Content Specimen page MUST showcase
+the following rendered markdown elements:
 
 ### 1. Basic Text Formatting
+
 - ✅ Heading 1 (`# Heading 1`)
 - ✅ Heading 2 (`## Heading 2`)
 - ✅ Heading 3 (`### Heading 3`)
@@ -39,29 +48,34 @@ Based on `/imports/markdown-guide.md`, each Content Specimen page MUST showcase 
 - ✅ Horizontal rule (`---`)
 
 ### 2. Lists & Organization
+
 - ✅ Unordered list (`- item`)
 - ✅ Ordered list (`1. item`)
 - ✅ Task list / Checkboxes (`- [ ] unchecked`, `- [x] checked`)
 - ✅ Nested lists (indented sub-items)
 
 ### 3. Links & Media
+
 - ✅ Inline link (`[Link Text](url)`)
 - ✅ Automatic link (`<https://url.com>`)
 - ✅ Image (`![Alt](image.jpg)`)
 
 ### 4. Code & Quotes
+
 - ✅ Inline code (`` `code` ``)
 - ✅ Fenced code block (` ```language ... ``` `)
 - ✅ Blockquote (`> quote`)
 - ✅ Nested blockquote (`> outer > inner`)
 
 ### 5. Tables (Extended Syntax)
+
 - ✅ Basic table with header row
 - ✅ Left-aligned column (`:---`)
 - ✅ Right-aligned column (`---:`)
 - ✅ Center-aligned column (`:---:`)
 
 ### 6. Advanced Formatting
+
 - ✅ Footnotes (`[^1]` reference)
 - ✅ Superscript (`X^2^`)
 - ✅ Subscript (`H~2~O`)
@@ -100,9 +114,10 @@ Each Content Specimen page should follow this structure:
       <h3 className="specimen-markdown__label">Paragraph & Inline Text</h3>
       <div className="specimen-markdown__sample">
         <p className="blog-p">
-          This is a paragraph with <strong>bold text</strong>, <em>italic text</em>, 
-          <strong><em>bold italic</em></strong>, and <del>strikethrough</del>. 
-          You can also use <code className="blog-code">inline code</code> for technical terms.
+          This is a paragraph with <strong>bold text</strong>, <em>italic text</em>,
+          <strong><em>bold italic</em></strong>, and <del>strikethrough</del>.
+You can also use <code className="blog-code">inline code</code> for technical
+terms.
         </p>
       </div>
     </div>
@@ -156,8 +171,9 @@ Each Content Specimen page should follow this structure:
       <h3 className="specimen-markdown__label">Links</h3>
       <div className="specimen-markdown__sample">
         <p className="blog-p">
-          Here is an <a href="#" className="blog-link">inline link</a> and 
-          an automatic link: <a href="https://example.com" className="blog-link">https://example.com</a>
+          Here is an <a href="#" className="blog-link">inline link</a> and
+an automatic link: <a href="https://example.com"
+className="blog-link">https://example.com</a>
         </p>
       </div>
     </div>
@@ -178,7 +194,8 @@ Each Content Specimen page should follow this structure:
       <h3 className="specimen-markdown__label">Blockquote</h3>
       <div className="specimen-markdown__sample">
         <blockquote className="blog-blockquote">
-          This is a blockquote. It can contain <strong>bold</strong> and <em>italic</em> text.
+This is a blockquote. It can contain <strong>bold</strong> and <em>italic</em>
+text.
           <blockquote className="blog-blockquote">
             This is a nested blockquote.
           </blockquote>
@@ -224,11 +241,13 @@ Each Content Specimen page should follow this structure:
 
   </div>
 </section>
-```
+
+```text
 
 ## CSS Requirements
 
-Each content type needs dedicated BEM classes for markdown elements in `/styles/blocks/markdown-[content-type].css`:
+Each content type needs dedicated BEM classes for markdown elements in
+`/styles/blocks/markdown-[content-type].css`:
 
 ### Example: `/styles/blocks/markdown-blog.css`
 
@@ -256,7 +275,7 @@ Each content type needs dedicated BEM classes for markdown elements in `/styles/
 }
 
 .blog-h1 { font-size: var(--wp--preset--font-size--900); }
-.blog-h2 { 
+.blog-h2 {
   font-size: var(--wp--preset--font-size--700);
   border-bottom: 2px solid var(--wp--preset--color--neon-pink);
   padding-bottom: 0.5rem;
@@ -415,7 +434,8 @@ Each content type needs dedicated BEM classes for markdown elements in `/styles/
   margin: 2rem 0;
   opacity: 0.3;
 }
-```
+
+```text
 
 ## Neon Color Mapping
 
@@ -436,11 +456,16 @@ Each content type uses a specific neon accent color:
 Each specimen page should follow this section order:
 
 1. **Hero** — Badge, title, description
-2. **Neon accent** — Color swatch with usage notes
-3. **Markdown rendering samples** ← NEW (this is what's missing)
-4. **Card variants** — Layout descriptions
-5. **Metadata patterns** — Data display formats
-6. **Layout templates** — Grid and archive patterns
+
+1. **Neon accent** — Color swatch with usage notes
+
+1. **Markdown rendering samples** ← NEW (this is what's missing)
+
+1. **Card variants** — Layout descriptions
+
+1. **Metadata patterns** — Data display formats
+
+1. **Layout templates** — Grid and archive patterns
 
 ## Specimen Markdown Container CSS
 
@@ -475,11 +500,13 @@ Add to `/styles/blocks/specimen-page.css`:
   background: var(--wp--preset--color--neutral-900);
   border-color: var(--wp--preset--color--neutral-800);
 }
-```
+
+```text
 
 ## Files to Update
 
 ### Component Files (7 files)
+
 - `/components/pages/dev-tools/ContentSpecimensPage.tsx`
 - `/components/pages/dev-tools/BlogSpecimensPage.tsx`
 - `/components/pages/dev-tools/PortfolioSpecimensPage.tsx`
@@ -489,7 +516,9 @@ Add to `/styles/blocks/specimen-page.css`:
 - `/components/pages/dev-tools/FaqSpecimensPage.tsx`
 
 ### CSS Files (8 files)
+
 Create new markdown style files:
+
 - `/styles/blocks/markdown-content.css`
 - `/styles/blocks/markdown-blog.css`
 - `/styles/blocks/markdown-portfolio.css`
@@ -499,6 +528,7 @@ Create new markdown style files:
 - `/styles/blocks/markdown-faq.css`
 
 Update:
+
 - `/styles/blocks/specimen-page.css` (add `.specimen-markdown` container styles)
 
 ## Acceptance Criteria
@@ -519,10 +549,14 @@ Update:
 ## Next Steps
 
 After completing markdown expansion:
+
 1. Create `/guidelines/design-tokens/portfolio-design-tokens.md` guideline
-2. Run Content Expansion sub-audits to add real content using these markdown patterns
-3. Verify all specimen pages in dark mode
-4. Test keyboard navigation and screen reader compatibility
+
+1. Run Content Expansion sub-audits to add real content using these markdown patterns
+
+1. Verify all specimen pages in dark mode
+
+1. Test keyboard navigation and screen reader compatibility
 
 ---
 

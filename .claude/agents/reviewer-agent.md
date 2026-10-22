@@ -1,6 +1,7 @@
 ---
 name: "Reviewer Agent"
-description: "Reviews code changes and design decisions for portfolio site quality and consistency."
+description: "Reviews code changes and design decisions for portfolio site
+quality and consistency."
 type: "agent"
 category: "quality"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Review code changes and design decisions to ensure quality, consistency, and alignment with guidelines.
+Review code changes and design decisions to ensure quality, consistency, and
+alignment with guidelines.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Review code changes and design decisions to ensure quality, consistency, and ali
 ## Key Responsibilities
 
 1. **Code Review** – Evaluate code quality and standards
-2. **Guidelines Compliance** – Ensure adherence to project guidelines
-3. **Design Review** – Assess visual changes and design consistency
-4. **Architecture** – Validate component structure and organization
-5. **Performance** – Review performance implications of changes
-6. **Accessibility** – Ensure WCAG compliance
+
+1. **Guidelines Compliance** – Ensure adherence to project guidelines
+
+1. **Design Review** – Assess visual changes and design consistency
+
+1. **Architecture** – Validate component structure and organization
+
+1. **Performance** – Review performance implications of changes
+
+1. **Accessibility** – Ensure WCAG compliance
 
 ## Review Focus Areas
 

@@ -22,10 +22,14 @@ All authoritative design and development guidance lives in
 files define their own reading order, so follow that rather than inventing one:
 
 1. **[guidelines/README.md](guidelines/README.md)** — directory index and the **required reading order** (Steps 1–7).
-2. **[guidelines/Guidelines.md](guidelines/Guidelines.md)** — Step 1 of that order: critical rules, bundler workarounds, folder conventions and the default AI workflow.
-3. **[guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)** — component taxonomy and file-location mapping.
-4. **[guidelines/css-architecture.md](guidelines/css-architecture.md)** — BEM CSS rules. See the [Tailwind contradiction](#unresolved-decisions-owner-confirmation-required) below.
-5. **[guidelines/changelog.md](guidelines/changelog.md)** — changelog format and protection rules.
+
+1. **[guidelines/Guidelines.md](guidelines/Guidelines.md)** — Step 1 of that order: critical rules, bundler workarounds, folder conventions and the default AI workflow.
+
+1. **[guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)** — component taxonomy and file-location mapping.
+
+1. **[guidelines/css-architecture.md](guidelines/css-architecture.md)** — BEM CSS rules. See the [Tailwind contradiction](#unresolved-decisions-owner-confirmation-required) below.
+
+1. **[guidelines/changelog.md](guidelines/changelog.md)** — changelog format and protection rules.
 
 ### Design tokens and theme
 
@@ -76,7 +80,7 @@ repository they map as follows:
 
 ### Package manager
 
-**npm is the only package manager for this repository:**
+## npm is the only package manager for this repository
 
 - `package-lock.json` (lockfile v3) is the only lockfile committed. There is no `pnpm-lock.yaml` or `yarn.lock`.
 - The Netlify site's build command is `npm run build` (updated in `src/app/netlify.toml` on 18 Oct 2026).
@@ -84,6 +88,7 @@ repository they map as follows:
 - The dependency-validation workflow pairs `package.json` with `package-lock.json`.
 
 All pnpm artefacts have been removed (18 October 2026):
+
 - ✅ Deleted `pnpm-workspace.yaml`
 - ✅ Deleted `pnpm-lock.yaml` (replaced by `package-lock.json`)
 - ✅ Removed `pnpm.overrides` block from `package.json`
@@ -98,7 +103,7 @@ Foundational):
 
 - ✅ `.nvmrc` contains `24`; contributors using nvm select it with `nvm use`
 - ✅ `package.json` has `engines.node` field: `">=24"`
-- ✅ `src/app/netlify.toml` sets `NODE_VERSION = "24"` and `NPM_VERSION = "11"`
+- ✅ `src/app/netlify.toml` sets `NODE*VERSION = "24"` and `NPM*VERSION = "11"`
 - ✅ README.md documents the Node.js 24 requirement
 
 The `.nvmrc` file is an opt-in selector; it does not enforce the runtime.
@@ -175,11 +180,11 @@ complete.
 - ✅ **T011**: pnpm artefacts removed (workspace.yaml, lock.yaml, pnpm.overrides block, netlify.toml command)
 - ✅ **T012**: Node.js 24 pinning complete (.nvmrc, engines field, README, netlify.toml updated)
 - ✅ **T013-T015**: Tailwind removed completely
-  - No tailwindcss or @tailwindcss packages in dependencies
-  - No Tailwind config files (tailwind.config.*, .postcssrc)
-  - postcss.config.mjs is empty (no Tailwind plugins)
-  - BEM CSS fully in place: `src/styles/` (blocks, components, effects, patterns, tokens)
-  - Guidelines document BEM-only requirement (`guidelines/css-architecture.md`)
+- No tailwindcss or @tailwindcss packages in dependencies
+- No Tailwind config files (tailwind.config.*, .postcssrc)
+- postcss.config.mjs is empty (no Tailwind plugins)
+- BEM CSS fully in place: `src/styles/` (blocks, components, effects, patterns, tokens)
+- Guidelines document BEM-only requirement (`guidelines/css-architecture.md`)
 
 **Phase 4 Testing Infrastructure Tasks (T025-T030, completed 19 October 2026)**
 
@@ -226,7 +231,7 @@ import from it, never suggest Supabase integration, and always dismiss the
 `supabase_connect` tool if it is offered.
 
 ### Content rules
- 
+
 - **No hardcoded UI content** — all UI strings, page metadata and component assets come from `src/app/data/mock/`; editorial manuscript chapters, journal entries and articles reside in `content/`
 - **Sentence case** for all headings, titles, labels and navigation
 - **Pronouns:** Ash uses he/him exclusively
@@ -266,9 +271,12 @@ When asked to audit, review or write a prompt, follow the four-step workflow in
 [Guidelines.md § Default AI Workflow](guidelines/Guidelines.md):
 
 1. Create a prompt in `prompts/`
-2. Run the audit described in the prompt
-3. Save findings to `reports/{topic}/`
-4. Extract actionable tasks to `tasks/`
+
+1. Run the audit described in the prompt
+
+1. Save findings to `reports/{topic}/`
+
+1. Extract actionable tasks to `tasks/`
 
 ---
 
@@ -293,7 +301,7 @@ directory come from the Netlify site's UI settings. Do not assume configuration
 inactivity without verifying the package-directory setting in Netlify's
 dashboard.
 
-The SPA fallback rule is in `public/_redirects/main.tsx`. Because `_redirects`
+The SPA fallback rule is in `public/*redirects/main.tsx`. Because `*redirects`
 is a directory rather than a plain file, Netlify may not pick that rule up. This
 is recorded for the owner and has not been changed.
 
@@ -312,35 +320,45 @@ as part of documentation work.
 These items come from repository evidence. They are recorded here, not resolved:
 
 1. **Package manager.** npm is in use (lockfile, Netlify command, README), but `pnpm.overrides` in `package.json` still refers to pnpm. Confirm npm and decide whether to remove this remnant. (Governance Decision PKG-001 pending approval)
-2. **Node.js version.** Node 24 LTS selected via opt-in `.nvmrc`; `package.json`
+
+1. **Node.js version.** Node 24 LTS selected via opt-in `.nvmrc`; `package.json`
    `engines.node: ">=24"` permits later majors and is advisory by default
    (Governance Decision NODE-001: Option B, implemented 2026-10-17).
-3. **Netlify configuration file.** `src/app/netlify.toml` is not read because the base directory is the repository root. Decide whether to move it to the root, set the base directory, or delete it, and whether its headers and redirect are still wanted.
-4. **BEM vs Tailwind.** All site styling now uses semantic BEM classes exclusively. Tailwind CSS and related dependencies have been completely removed (Governance Decision STYLE-001: Enforce BEM-only, implemented 2026-10-17). Guidelines.md § 2 should be updated to remove references to "Tailwind CSS V4".
-5. **`import.meta.env`.** The bundler table in Guidelines.md says it is "Completely removed", but Guidelines.md § 12 (Console Logging Policy) recommends `if (import.meta.env.DEV)`, and `src/app/components/common/ThemeToggleES5.tsx` still uses it. Until this is resolved, follow the bundler table and do not use `import.meta.env`.
-6. **Jest ESM and testing infrastructure.** Jest unit tests now working with
+
+1. **Netlify configuration file.** `src/app/netlify.toml` is not read because the base directory is the repository root. Decide whether to move it to the root, set the base directory, or delete it, and whether its headers and redirect are still wanted.
+
+1. **BEM vs Tailwind.** All site styling now uses semantic BEM classes exclusively. Tailwind CSS and related dependencies have been completely removed (Governance Decision STYLE-001: Enforce BEM-only, implemented 2026-10-17). Guidelines.md § 2 should be updated to remove references to "Tailwind CSS V4".
+
+1. **`import.meta.env`.** The bundler table in Guidelines.md says it is "Completely removed", but Guidelines.md § 12 (Console Logging Policy) recommends `if (import.meta.env.DEV)`, and `src/app/components/common/ThemeToggleES5.tsx` still uses it. Until this is resolved, follow the bundler table and do not use `import.meta.env`.
+
+1. **Jest ESM and testing infrastructure.** Jest unit tests now working with
 @swc/jest transformer (Governance Decision TEST-001: Option B, implemented
 2026-10-17). Scripts `/scripts/**/*.test.js` pass 179 tests. Guidelines.md § 9
 still cites missing `npm run type-check` and `npm run verify` scripts, which do
 not exist. E2E tests in `tests/` need Playwright browser installation.
-7. **Duplicate attribution files.** A root `ATTRIBUTIONS.md` and a separate
+
+1. **Duplicate attribution files.** A root `ATTRIBUTIONS.md` and a separate
 `docs/Attributions.md` exist. The root-file exception in Guidelines.md permits
 `AGENTS.md` and `CONTRIBUTING.md` for agent and GitHub discoverability; this
 exception is already acknowledged. Clarify whether only one attribution file
 should exist and which name is canonical.
-8. **Changelog location.** [guidelines/changelog.md](guidelines/changelog.md)
+
+1. **Changelog location.** [guidelines/changelog.md](guidelines/changelog.md)
 puts the changelog at the root `CHANGELOG.md`, and that is the only changelog in
 the repository. There is no `src/app/CHANGELOG.md`. Confirm whether
 documentation-only changes need an entry (issue #2 carries the
 `meta:no-changelog` label).
-9. **Broken links in the guidelines.** `guidelines/README.md` and
+
+1. **Broken links in the guidelines.** `guidelines/README.md` and
 `guidelines/Guidelines.md` link to `../data/README.md`, which does not exist.
 The actual file is `src/app/data/README.md`. The guidelines were not changed
 here.
-10. **PostCSS configuration.** Vite discovers PostCSS configuration from the
+
+1. **PostCSS configuration.** Vite discovers PostCSS configuration from the
 project root, so the root `postcss.config.mjs` (an empty config) is the likely
 active file. `src/app/postcss.config.js` references `autoprefixer`, which is not
 a dependency. Confirm, and decide whether to remove one of them.
-11. **Branch and PR conventions.** The repository has no pull request template
+
+1. **Branch and PR conventions.** The repository has no pull request template
 and no documented branch-prefix list. The `docs/` prefix comes from issue #2.
 Confirm the conventions, or point to organisation-level templates.

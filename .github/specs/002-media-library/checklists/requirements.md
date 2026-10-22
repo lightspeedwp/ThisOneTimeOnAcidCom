@@ -1,6 +1,7 @@
 # Specification Quality Checklist: TOA Media Library
 
-**Purpose**: Validate specification completeness and quality before proceeding to planning
+**Purpose**: Validate specification completeness and quality before proceeding
+to planning
 
 **Created**: 2026-10-17
 
@@ -47,11 +48,14 @@
 
 **Status**: ⏸️ PENDING OWNER DECISION
 
-**Issue**: Audit PR #285 decision log favours GitHub + Netlify; strategy report and provider-comparison favour Cloudinary or leave open.
+**Issue**: Audit PR #285 decision log favours GitHub + Netlify; strategy report
+and provider-comparison favour Cloudinary or leave open.
 
-**Impact**: TOA-284 (infrastructure) and TOA-285 (build integration) cannot plan without knowing provider.
+**Impact**: TOA-284 (infrastructure) and TOA-285 (build integration) cannot plan
+without knowing provider.
 
-**Options Provided**: A (GitHub + Netlify), B (Cloudinary), C (defer and evaluate), Custom
+**Options Provided**: A (GitHub + Netlify), B (Cloudinary), C (defer and
+evaluate), Custom
 
 **Needed For**: Downstream planning; does NOT block this specification.
 
@@ -61,11 +65,14 @@
 
 **Status**: ⏸️ PENDING OWNER CONFIRMATION
 
-**Issue**: Audit reports cite "12 pilot assets", "56 total assets" without verification. Print-quality requirements undefined.
+**Issue**: Audit reports cite "12 pilot assets", "56 total assets" without
+verification. Print-quality requirements undefined.
 
-**Impact**: Success metrics (SC-001) and provider evaluation (TOA-276) depend on realistic targets.
+**Impact**: Success metrics (SC-001) and provider evaluation (TOA-276) depend on
+realistic targets.
 
-**Options Provided**: A (40–50 recoverable, 300 DPI print), B (~30 recoverable, print aspirational), C (unknown, qualitative success), Custom
+**Options Provided**: A (40–50 recoverable, 300 DPI print), B (~30 recoverable,
+print aspirational), C (unknown, qualitative success), Custom
 
 **Needed For**: Validation approach (TOA-279) and provider evaluation (TOA-276).
 
@@ -75,11 +82,14 @@
 
 **Status**: ⏸️ PENDING OWNER CLARIFICATION
 
-**Issue**: Known overlap between TOA-277 (define schema) and TOA-283 (finalise schema). Linear issue relationships unclear.
+**Issue**: Known overlap between TOA-277 (define schema) and TOA-283 (finalise
+schema). Linear issue relationships unclear.
 
 **Impact**: Execution sequence and blocker logic depend on this clarification.
 
-**Options Provided**: A (sequential: define → validate → finalise → implement), B (parallel: define and implement concurrently), C (TOA-283 is refinement only), Custom
+**Options Provided**: A (sequential: define → validate → finalise → implement),
+B (parallel: define and implement concurrently), C (TOA-283 is refinement only),
+Custom
 
 **Needed For**: Project scheduling; does NOT block this specification.
 
@@ -101,13 +111,13 @@
 
 ## Readiness Assessment
 
-### This Specification is COMPLETE for:
+### This Specification is COMPLETE for
 
 - ✅ Review and approval (ready for `/speckit-clarify` or direct owner review)
 - ✅ Informing project scheduling and resource estimation
 - ✅ Guiding TOA-277, TOA-280, TOA-282 (definition and validation work)
 
-### This Specification REQUIRES CLARIFICATION before:
+### This Specification REQUIRES CLARIFICATION before
 
 - ⏸️ Detailed planning for TOA-284 (provider infrastructure choice depends on Q1)
 - ⏸️ Detailed planning for TOA-276 (provider evaluation baseline depends on Q2)
@@ -117,15 +127,21 @@
 
 ## Next Actions
 
-**Recommended**: Proceed to `/speckit-clarify` to document owner's answers to Q1, Q2, Q3. Once clarified:
+**Recommended**: Proceed to `/speckit-clarify` to document owner's answers to
+Q1, Q2, Q3. Once clarified:
 
 1. Update success criteria (SC-001–002) with confirmed targets
-2. Update assumptions with provider decision or approval of evaluation-first approach
-3. Resolve contradictions section with owner confirmation
-4. Proceed to `/speckit-plan` to generate detailed implementation plan
 
-**Alternative**: Owner can provide answers here in written form; they will be integrated into clarification resolution.
+1. Update assumptions with provider decision or approval of evaluation-first approach
+
+1. Resolve contradictions section with owner confirmation
+
+1. Proceed to `/speckit-plan` to generate detailed implementation plan
+
+**Alternative**: Owner can provide answers here in written form; they will be
+integrated into clarification resolution.
 
 ---
 
-**Checklist Version**: 1.0 | **Last Updated**: 2026-10-17 | **Author**: Claude Haiku 4.5
+**Checklist Version**: 1.0 | **Last Updated**: 2026-10-17 | **Author**: Claude
+Haiku 4.5

@@ -10,7 +10,8 @@ Hooks enable automated tasks at key points in the Claude Code workflow:
 - **PreToolUse** — Runs before tool execution (guards, confirmations)
 - **PostEdit** — Runs after file edits (formatting, regeneration)
 
-This directory contains hook definitions; executable scripts live in `scripts/claude/`.
+This directory contains hook definitions; executable scripts live in
+`scripts/claude/`.
 
 ## Enabled Hooks
 
@@ -21,25 +22,28 @@ This directory contains hook definitions; executable scripts live in `scripts/cl
 **Handler:** `scripts/claude/validate.sh`
 
 **What it does:**
+
 - Checks `npm ls --depth=0` (dependency consistency)
 - Confirms `npm run build` would succeed
 - Reports validation status to user
 
 **Configuration:**
+
 ```json
 {
   "hooks": {
     "SessionStart": [
       {
         "type": "command",
-        "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/claude/validate.sh",
+        "command": "\"$CLAUDE*PROJECT*DIR\"/scripts/claude/validate.sh",
         "timeout": 60,
         "match_output": true
       }
     ]
   }
 }
-```
+
+```text
 
 **When to disable:**
 Remove SessionStart hook if validation noise becomes problematic (uncommon).
@@ -52,11 +56,13 @@ Remove SessionStart hook if validation noise becomes problematic (uncommon).
 
 **When to enable:**
 If you want guards against:
+
 - Unintended branch deletions
 - Accidental force-pushes
 - Risky file deletions
 
 **Configuration:**
+
 ```json
 {
   "hooks": {
@@ -70,7 +76,8 @@ If you want guards against:
     ]
   }
 }
-```
+
+```text
 
 **Handler:** `scripts/claude/pre-tool-guard.sh` (if implemented)
 
@@ -78,23 +85,29 @@ If you want guards against:
 
 ### PostEdit
 
-**Purpose:** Cleanup or validation after file edits (not recommended for this repo)
+**Purpose:** Cleanup or validation after file edits (not recommended for this
+repo)
 
 **When to enable:**
+
 - Auto-format edited files (`prettier`, `eslint --fix`)
 - Regenerate lockfiles
 - Validate JSON/YAML syntax
 
-**Not recommended** for this repository (no formatting requirements; manual review preferred).
+**Not recommended** for this repository (no formatting requirements; manual
+review preferred).
 
 ## Hook Development
 
 To add a new hook:
 
 1. Define in `.claude/settings.json` under `hooks`
-2. Create executable script in `scripts/claude/`
-3. Test manually: `bash scripts/claude/{handler}.sh`
-4. Document here with purpose, triggers, and configuration
+
+1. Create executable script in `scripts/claude/`
+
+1. Test manually: `bash scripts/claude/{handler}.sh`
+
+1. Document here with purpose, triggers, and configuration
 
 ## References
 
@@ -105,6 +118,6 @@ To add a new hook:
 
 ---
 
-**Last Updated:** 2026-10-16  
-**Maintained By:** Repository  
+**Last Updated:** 2026-10-16
+**Maintained By:** Repository
 **Configuration Location:** `.claude/settings.json`

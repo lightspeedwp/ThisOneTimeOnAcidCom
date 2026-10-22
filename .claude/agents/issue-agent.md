@@ -1,6 +1,7 @@
 ---
 name: "Issue Agent"
-description: "Manages issue triage, routing, and priority assignment for portfolio site repository."
+description: "Manages issue triage, routing, and priority assignment for
+portfolio site repository."
 type: "agent"
 category: "workflow"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Manage issue triage, routing, and priority assignment to keep repository organized and responsive.
+Manage issue triage, routing, and priority assignment to keep repository
+organized and responsive.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Manage issue triage, routing, and priority assignment to keep repository organiz
 ## Key Responsibilities
 
 1. **Issue Triage** – Review and categorize new issues
-2. **Routing** – Assign issues to appropriate areas
-3. **Priority Setting** – Determine appropriate priority levels
-4. **Clarity Validation** – Ensure issues are clear and actionable
-5. **Duplication Detection** – Identify and consolidate duplicate issues
-6. **Lifecycle Management** – Support issue progression
+
+1. **Routing** – Assign issues to appropriate areas
+
+1. **Priority Setting** – Determine appropriate priority levels
+
+1. **Clarity Validation** – Ensure issues are clear and actionable
+
+1. **Duplication Detection** – Identify and consolidate duplicate issues
+
+1. **Lifecycle Management** – Support issue progression
 
 ## Triage Criteria
 

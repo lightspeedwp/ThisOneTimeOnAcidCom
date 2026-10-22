@@ -1,7 +1,7 @@
 # Ash Shaw Portfolio - Component Architecture & Taxonomy
 
-**Version:** 4.0.0  
-**Last Updated:** February 2026  
+**Version:** 4.0.0
+**Last Updated:** February 2026
 **Last Reviewed:** February 21, 2026
 **Purpose:** Clarify component organization, file locations, and taxonomy
 
@@ -10,10 +10,14 @@
 ## 📚 Table of Contents
 
 1. [Architecture Overview](#architecture-overview)
-2. [Component Taxonomy](#component-taxonomy)
-3. [File Location Mapping](#file-location-mapping)
-4. [Guidelines Organization](#guidelines-organization)
-5. [Quick Reference](#quick-reference)
+
+1. [Component Taxonomy](#component-taxonomy)
+
+1. [File Location Mapping](#file-location-mapping)
+
+1. [Guidelines Organization](#guidelines-organization)
+
+1. [Quick Reference](#quick-reference)
 
 ---
 
@@ -21,9 +25,11 @@
 
 ### Component Organization Philosophy
 
-The Ash Shaw portfolio follows a **WordPress block theme-inspired** architecture with components organized by their **purpose and role** rather than their technical implementation.
+The Ash Shaw portfolio follows a **WordPress block theme-inspired** architecture
+with components organized by their **purpose and role** rather than their
+technical implementation.
 
-```
+```text
 Conceptual Hierarchy (Documentation)          Physical Location (Code)
 ├── Templates (Page layouts)           →     /components/pages/
 ├── Parts (Global fragments)           →     /components/common/
@@ -31,9 +37,12 @@ Conceptual Hierarchy (Documentation)          Physical Location (Code)
 ├── Patterns (Compositional solutions) →     /components/* (various)
 ├── Blocks (Content units)             →     /components/ui/
 └── Components (UI primitives)         →     /components/ui/, /components/common/
-```
 
-**Key Principle:** Documentation categories (templates, parts, sections, patterns, blocks) describe **what the component does**, while file locations describe **where it lives in the codebase**.
+```text
+
+**Key Principle:** Documentation categories (templates, parts, sections,
+patterns, blocks) describe **what the component does**, while file locations
+describe **where it lives in the codebase**.
 
 ---
 
@@ -41,7 +50,7 @@ Conceptual Hierarchy (Documentation)          Physical Location (Code)
 
 ### 1. Templates (Page Layouts)
 
-**Documentation:** `/guidelines/templates/`  
+**Documentation:** `/guidelines/templates/`
 **Code Location:** `/components/pages/`
 
 Full page layouts that combine parts, sections, patterns, and blocks.
@@ -58,7 +67,7 @@ Full page layouts that combine parts, sections, patterns, and blocks.
 
 ### 2. Parts (Template Parts - Global Fragments)
 
-**Documentation:** `/guidelines/parts/`  
+**Documentation:** `/guidelines/parts/`
 **Code Location:** `/components/common/`
 
 Reusable page fragments that appear across multiple pages.
@@ -72,13 +81,15 @@ Reusable page fragments that appear across multiple pages.
 | ContactForm | `components/ContactForm.md` | `/components/common/ContactForm.tsx` | Contact form |
 | SocialLinks | `components/SocialLinks.md` | `/components/common/SocialLinks.tsx` | Social media links |
 
-**Note:** Parts are documented in both `/guidelines/parts/` (for global parts like Header/Footer) and `/guidelines/components/` (for shared components like Logo).
+**Note:** Parts are documented in both `/guidelines/parts/` (for global parts
+like Header/Footer) and `/guidelines/components/` (for shared components like
+Logo).
 
 ---
 
 ### 3. Sections (Layout Containers)
 
-**Documentation:** `/guidelines/sections/`  
+**Documentation:** `/guidelines/sections/`
 **Code Location:** `/components/sections/`
 
 Top-level layout containers that organize page content into semantic blocks.
@@ -96,7 +107,7 @@ Top-level layout containers that organize page content into semantic blocks.
 
 ### 4. Patterns (Compositional Solutions)
 
-**Documentation:** `/guidelines/patterns/`  
+**Documentation:** `/guidelines/patterns/`
 **Code Location:** Various (patterns are compositions, not single files)
 
 Proven solutions to common design problems that combine multiple components.
@@ -115,7 +126,7 @@ Proven solutions to common design problems that combine multiple components.
 
 ### 5. Blocks (Content Units)
 
-**Documentation:** `/guidelines/blocks/`  
+**Documentation:** `/guidelines/blocks/`
 **Code Location:** `/components/ui/` (primarily)
 
 Self-contained content units that can be combined to build sections.
@@ -135,7 +146,7 @@ Self-contained content units that can be combined to build sections.
 
 ### 6. Components (UI Primitives)
 
-**Documentation:** `/guidelines/components/`  
+**Documentation:** `/guidelines/components/`
 **Code Location:** `/components/ui/`, `/components/common/`
 
 Basic UI elements and utilities.
@@ -156,7 +167,7 @@ Basic UI elements and utilities.
 
 ### Actual Component File Locations
 
-```
+```text
 /components/
 ├── admin/                              # CMS tools
 ├── common/                             # Global/shared components
@@ -196,7 +207,8 @@ Basic UI elements and utilities.
     ├── CategoryFilter.tsx
     ├── SearchBar.tsx
     └── [50+ shadcn/ui components]
-```
+
+```text
 
 ---
 
@@ -204,7 +216,7 @@ Basic UI elements and utilities.
 
 ### Documentation Structure
 
-```
+```text
 /guidelines/
 ├── Guidelines.md                       # Main entry point
 ├── README.md                          # Documentation index
@@ -256,7 +268,8 @@ Basic UI elements and utilities.
     ├── SocialLinks.md
     ├── ReadMoreButton.md
     └── ...
-```
+
+```text
 
 ---
 
@@ -268,25 +281,27 @@ Basic UI elements and utilities.
 
 **Answer:** Use this decision tree:
 
-```
+```text
+
 1. Is it a full page?
    YES → Look in /guidelines/templates/
-   
-2. Is it in the header or footer?
+
+1. Is it in the header or footer?
    YES → Look in /guidelines/parts/
-   
-3. Is it a layout section?
+
+1. Is it a layout section?
    YES → Look in /guidelines/sections/
-   
-4. Is it a card or content unit?
+
+1. Is it a card or content unit?
    YES → Look in /guidelines/blocks/
-   
-5. Is it a compositional pattern?
+
+1. Is it a compositional pattern?
    YES → Look in /guidelines/patterns/
-   
-6. Is it a small UI component?
+
+1. Is it a small UI component?
    YES → Look in /guidelines/components/
-```
+
+```text
 
 ### Finding Component Code
 
@@ -294,63 +309,80 @@ Basic UI elements and utilities.
 
 **Answer:** Use this mapping:
 
-```
+```text
 Template (Page) → /components/pages/
 Part (Header/Footer) → /components/common/
 Section → /components/sections/
 Block (Card/UI) → /components/ui/
 Component (Utility) → /components/ui/ or /components/common/
-```
+
+```text
 
 ---
 
 ## Common Confusions Resolved
 
-### 1. Why is Logo documented in `components/` but referenced in `parts/`?
+### 1. Why is Logo documented in `components/` but referenced in `parts/`
 
-**Answer:** Logo is a **shared component** that appears in multiple parts (Header, Footer, MobileMenu). It's documented in `/guidelines/components/Logo.md` as a reusable component, and referenced from part guidelines.
+**Answer:** Logo is a **shared component** that appears in multiple parts
+(Header, Footer, MobileMenu). It's documented in
+`/guidelines/components/Logo.md` as a reusable component, and referenced from
+part guidelines.
 
 **Pattern:**
+
 ```markdown
+
 # In parts/Header.md
+
 See [Logo component](../components/Logo.md) for complete documentation.
 
 # In components/Logo.md
+
 **Used In:** Header, Footer, MobileMenu (all parts)
-```
+
+```text
 
 ---
 
-### 2. Why is Lightbox in `blocks/` when it's in `/components/ui/`?
+### 2. Why is Lightbox in `blocks/` when it's in `/components/ui/`
 
-**Answer:** "Blocks" is a **conceptual category** describing what the component does (a content unit), not where it lives. The file location `/components/ui/` is the **physical location**.
+**Answer:** "Blocks" is a **conceptual category** describing what the component
+does (a content unit), not where it lives. The file location `/components/ui/`
+is the **physical location**.
 
 **Mapping:**
+
 - **Conceptual:** Block (content unit that displays images)
 - **Documentation:** `/guidelines/blocks/Lightbox.md`
 - **Code Location:** `/components/ui/EnhancedLightbox.tsx`
 
 ---
 
-### 3. Why are some components documented twice?
+### 3. Why are some components documented twice
 
-**Answer:** Components used in specific contexts have **context-specific guidelines**:
+**Answer:** Components used in specific contexts have **context-specific
+guidelines**:
 
 **Example: Logo**
+
 - **Primary:** `/guidelines/components/Logo.md` - Complete component documentation
 - **Referenced in:** `parts/Header.md`, `parts/Footer.md`, `parts/MobileMenu.md`
 
 **Example: ContactForm**
+
 - **Primary:** `/guidelines/components/ContactForm.md` - Complete form documentation
 - **Referenced in:** `parts/Footer.md` (usage within footer context)
 
 ---
 
-### 4. Where are patterns if they're not single files?
+### 4. Where are patterns if they're not single files
 
-**Answer:** Patterns are **compositions** documented as **solutions**, not files:
+**Answer:** Patterns are **compositions** documented as **solutions**, not
+files:
 
 **Example: CardGridWithFilters**
+
 - **Documentation:** `/guidelines/patterns/CardGridWithFilters.md`
 - **Composition:** Uses CategoryFilter + Grid layout + BlogCard components
 - **Code Location:** Implemented in BlogPage.tsx as a pattern, not a single component
@@ -361,33 +393,43 @@ See [Logo component](../components/Logo.md) for complete documentation.
 
 ### Documentation File Names
 
-```
+```text
+
 # PascalCase with .md extension
+
 Logo.md
 ContactForm.md
 HeroSection.md
 CardGridWithFilters.md
-```
+
+```text
 
 ### Component File Names
 
-```
+```text
+
 # PascalCase with .tsx extension
+
 Logo.tsx
 ContactForm.tsx
 HeroSection.tsx
 EnhancedLightbox.tsx  # May have descriptive prefix
-```
+
+```text
 
 ### Documentation Title
 
 ```markdown
+
 # [Component Name] Guidelines
 
 Not:
+
 # [Component Name] Component
+
 # [Component Name] Documentation
-```
+
+```text
 
 ---
 
@@ -396,23 +438,31 @@ Not:
 ### Correct Cross-References
 
 ```markdown
+
 # From sections/HeroSection.md
+
 See [Logo component](../components/Logo.md) for logo usage.
 
 # From blocks/PortfolioCard.md
+
 Uses [Lightbox](./Lightbox.md) for image viewing.
 
 # From parts/Header.md
+
 Integrates [MobileMenu](./MobileMenu.md) for mobile navigation.
-```
+
+```text
 
 ### Referencing Component Code
 
 ```markdown
+
 # When referencing actual component files
+
 **File:** `/components/sections/HeroSection.tsx`
 **Import:** `import { HeroSection } from './components/sections/HeroSection';`
-```
+
+```text
 
 ---
 
@@ -435,16 +485,19 @@ Integrates [MobileMenu](./MobileMenu.md) for mobile navigation.
 
 ### 1. Documentation File Location
 
-```
+```text
 ✅ CORRECT:
+
 - Part documentation → /guidelines/parts/
 - Shared component documentation → /guidelines/components/
 - Block documentation → /guidelines/blocks/
 
 ❌ WRONG:
+
 - Don't duplicate full documentation in multiple locations
 - Don't create guidelines in /components/ folder (code folder)
-```
+
+```text
 
 ### 2. Cross-Referencing
 
@@ -454,7 +507,8 @@ See [Logo component](../components/Logo.md) for details.
 
 ❌ WRONG:
 See [Logo component](../../components/common/Logo.tsx) for details.
-```
+
+```text
 
 ### 3. File Path References
 
@@ -465,7 +519,8 @@ See [Logo component](../../components/common/Logo.tsx) for details.
 ❌ WRONG:
 **File:** `src/components/common/Header.tsx` (no src/ prefix)
 **File:** `/components/parts/Header.tsx` (wrong folder)
-```
+
+```text
 
 ---
 
@@ -473,23 +528,32 @@ See [Logo component](../../components/common/Logo.tsx) for details.
 
 ### If Documentation References Wrong Path
 
-**Problem:** Guideline says component is in `/components/parts/` but it's actually in `/components/common/`
+**Problem:** Guideline says component is in `/components/parts/` but it's
+actually in `/components/common/`
 
 **Solution:**
+
 1. Update the **File:** path in the guideline
-2. Keep the **Documentation:** location the same
-3. Add a note in ARCHITECTURE.md if needed
+
+1. Keep the **Documentation:** location the same
+
+1. Add a note in ARCHITECTURE.md if needed
 
 **Example Fix:**
 
 ```markdown
+
 # Before (WRONG)
+
 **File:** `/components/parts/Header.tsx`
 
 # After (CORRECT)
+
 **File:** `/components/common/Header.tsx`
-**Documentation:** `/guidelines/parts/Header.md` ✓ (This is correct - it's a part conceptually)
-```
+**Documentation:** `/guidelines/parts/Header.md` ✓ (This is correct - it's a
+part conceptually)
+
+```text
 
 ---
 
@@ -498,10 +562,14 @@ See [Logo component](../../components/common/Logo.tsx) for details.
 ### Key Principles
 
 1. **Conceptual vs Physical:** Documentation categories describe **purpose**, file locations describe **storage**
-2. **Single Source of Truth:** Each component has ONE primary guideline file
-3. **Cross-Reference:** Related guidelines reference each other, don't duplicate
-4. **WordPress Alignment:** Use WordPress block theme terminology for clarity
-5. **Consistent Structure:** All guidelines follow the same template
+
+1. **Single Source of Truth:** Each component has ONE primary guideline file
+
+1. **Cross-Reference:** Related guidelines reference each other, don't duplicate
+
+1. **WordPress Alignment:** Use WordPress block theme terminology for clarity
+
+1. **Consistent Structure:** All guidelines follow the same template
 
 ### Quick Lookup
 
@@ -516,8 +584,9 @@ See [Logo component](../../components/common/Logo.tsx) for details.
 
 ---
 
-**Last Updated:** February 2026  
-**Version:** 4.0.0  
+**Last Updated:** February 2026
+**Version:** 4.0.0
 **Maintained by:** Ash Shaw Portfolio Team
 
-For questions about component organization, refer to this document or the main [Guidelines.md](./Guidelines.md).
+For questions about component organization, refer to this document or the main
+[Guidelines.md](./Guidelines.md).

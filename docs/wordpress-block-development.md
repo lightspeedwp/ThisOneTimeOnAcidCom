@@ -5,42 +5,59 @@ created: "2026-03-12"
 modified: "2026-03-12"
 version: "1.0.0"
 related_docs:
-  - "/docs/wordpress-fse-guide.md"
-  - "/docs/wordpress-block-patterns.md"
-  - "/docs/wordpress-block-mapping.md"
-  - "/docs/component-composition-guide.md"
+
+- "/docs/wordpress-fse-guide.md"
+- "/docs/wordpress-block-patterns.md"
+- "/docs/wordpress-block-mapping.md"
+- "/docs/component-composition-guide.md"
 ---
 
 # WordPress Block Development Guide
 
-**Created:** March 12, 2026  
-**Last Updated:** March 12, 2026  
+**Created:** March 12, 2026
+**Last Updated:** March 12, 2026
 **Status:** Active
 
 ---
 
 ## Overview
 
-This guide demonstrates how to convert React components from the Nova News application into custom WordPress blocks. It covers block registration, development workflow, and best practices for maintaining consistency between the React app and WordPress theme.
+This guide demonstrates how to convert React components from the Nova News
+application into custom WordPress blocks. It covers block registration,
+development workflow, and best practices for maintaining consistency between the
+React app and WordPress theme.
 
-**Key Concept:** WordPress blocks are React components that integrate with the Gutenberg editor. Our existing React components can be adapted with minimal changes.
+**Key Concept:** WordPress blocks are React components that integrate with the
+Gutenberg editor. Our existing React components can be adapted with minimal
+changes.
 
 ---
 
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)
-2. [Block Development Tools](#block-development-tools)
-3. [Block Anatomy](#block-anatomy)
-4. [Converting React Components to Blocks](#converting-react-components-to-blocks)
-5. [Block Registration](#block-registration)
-6. [Block Attributes & Props](#block-attributes--props)
-7. [Block Controls & Inspector](#block-controls--inspector)
-8. [Dynamic Blocks](#dynamic-blocks)
-9. [Block Patterns](#block-patterns)
-10. [Testing & Debugging](#testing--debugging)
-11. [Build Process](#build-process)
-12. [Best Practices](#best-practices)
+
+1. [Block Development Tools](#block-development-tools)
+
+1. [Block Anatomy](#block-anatomy)
+
+1. [Converting React Components to Blocks](#converting-react-components-to-blocks)
+
+1. [Block Registration](#block-registration)
+
+1. [Block Attributes & Props](#block-attributes--props)
+
+1. [Block Controls & Inspector](#block-controls--inspector)
+
+1. [Dynamic Blocks](#dynamic-blocks)
+
+1. [Block Patterns](#block-patterns)
+
+1. [Testing & Debugging](#testing--debugging)
+
+1. [Build Process](#build-process)
+
+1. [Best Practices](#best-practices)
 
 ---
 
@@ -56,13 +73,17 @@ This guide demonstrates how to convert React components from the Nova News appli
 ### Development Environment
 
 ```bash
+
 # Node.js 18+ and npm
+
 node --version  # v18.0.0 or higher
 npm --version   # 8.0.0 or higher
 
 # WordPress 6.0+ locally
+
 # Recommended: Local by Flywheel, or MAMP/XAMPP
-```
+
+```text
 
 ---
 
@@ -76,34 +97,48 @@ The official WordPress CLI tool for scaffolding custom blocks.
 
 ```bash
 npm install -g @wordpress/create-block
-```
 
-**Create a New Block:**
+```text
+
+## Create a New Block
 
 ```bash
+
 # Navigate to your theme directory
+
 cd wp-content/themes/nova-news-theme/
 
 # Create a new block
+
 npx @wordpress/create-block theme-switcher
 
-# This creates:
+# This creates
+
 # /blocks/theme-switcher/
+
 #   ├── block.json          # Block metadata
+
 #   ├── src/
+
 #   │   ├── index.js        # Block registration
+
 #   │   ├── edit.js         # Editor component
+
 #   │   ├── save.js         # Frontend component
+
 #   │   ├── editor.scss     # Editor styles
+
 #   │   └── style.scss      # Frontend styles
+
 #   └── package.json        # Dependencies
-```
+
+```text
 
 ### 2. @wordpress/scripts
 
 Build tools for compiling blocks (uses webpack under the hood).
 
-**Package.json Scripts:**
+## Package.json Scripts
 
 ```json
 {
@@ -113,25 +148,31 @@ Build tools for compiling blocks (uses webpack under the hood).
     "lint:js": "wp-scripts lint-js"
   }
 }
-```
+
+```text
 
 **Commands:**
 
 ```bash
+
 # Development mode (watch for changes)
+
 npm start
 
 # Production build
+
 npm run build
 
 # Lint JavaScript
+
 npm run lint:js
-```
+
+```text
 
 ### 3. WordPress Block Editor Components
 
 ```jsx
-import { 
+import {
   InspectorControls,    // Sidebar controls
   InnerBlocks,          // Nested blocks
   RichText,             // Editable text
@@ -141,14 +182,15 @@ import {
   PanelColorSettings    // Color controls panel
 } from '@wordpress/block-editor';
 
-import { 
+import {
   PanelBody,            // Collapsible panel
   TextControl,          // Text input
   ToggleControl,        // Checkbox toggle
   SelectControl,        // Dropdown select
   RangeControl          // Slider input
 } from '@wordpress/components';
-```
+
+```text
 
 ---
 
@@ -200,7 +242,8 @@ import {
     }
   }
 }
-```
+
+```text
 
 ### index.js (Block Registration)
 
@@ -215,7 +258,8 @@ registerBlockType(metadata.name, {
   edit: Edit,
   save,
 });
-```
+
+```text
 
 ### edit.js (Editor Component)
 
@@ -228,7 +272,7 @@ export default function Edit({ attributes, setAttributes }) {
   const blockProps = useBlockProps({
     className: 'theme-switcher',
   });
-  
+
   return (
     <>
       {/* Sidebar Controls */}
@@ -250,7 +294,7 @@ export default function Edit({ attributes, setAttributes }) {
           />
         </PanelBody>
       </InspectorControls>
-      
+
       {/* Block Content */}
       <div {...blockProps}>
         <button className="theme-switcher__btn">
@@ -261,7 +305,8 @@ export default function Edit({ attributes, setAttributes }) {
     </>
   );
 }
-```
+
+```text
 
 ### save.js (Frontend Output)
 
@@ -274,7 +319,7 @@ export default function save({ attributes }) {
     className: 'theme-switcher',
     'data-default-theme': defaultTheme,
   });
-  
+
   return (
     <div {...blockProps}>
       <button className="theme-switcher__btn">
@@ -284,7 +329,8 @@ export default function save({ attributes }) {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -292,7 +338,7 @@ export default function save({ attributes }) {
 
 ### Example 1: ThemeSwitcher Component
 
-**Original React Component:**
+## Original React Component
 
 ```tsx
 // /components/common/ThemeSwitcher.tsx
@@ -300,22 +346,22 @@ import { useState, useEffect } from 'react';
 
 export function ThemeSwitcher() {
   const [theme, setTheme] = useState('dark');
-  
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
-  
+
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
   };
-  
+
   return (
-    <button 
+    <button
       className="theme-switcher__btn"
       onClick={toggleTheme}
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
@@ -326,9 +372,10 @@ export function ThemeSwitcher() {
     </button>
   );
 }
-```
 
-**Converted WordPress Block:**
+```text
+
+## Converted WordPress Block
 
 ```jsx
 // /blocks/theme-switcher/src/edit.js
@@ -338,7 +385,7 @@ export default function Edit() {
   const blockProps = useBlockProps({
     className: 'theme-switcher',
   });
-  
+
   return (
     <div {...blockProps}>
       <button className="theme-switcher__btn" disabled>
@@ -358,7 +405,7 @@ export default function save() {
   const blockProps = useBlockProps.save({
     className: 'theme-switcher',
   });
-  
+
   return (
     <div {...blockProps}>
       <button className="theme-switcher__btn">
@@ -372,39 +419,42 @@ export default function save() {
 // This file runs on the actual website (not in the editor)
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelectorAll('.theme-switcher__btn');
-  
+
   buttons.forEach(button => {
     const icon = button.querySelector('.theme-switcher__icon');
     const savedTheme = localStorage.getItem('theme') || 'dark';
-    
+
     // Set initial theme
     document.documentElement.setAttribute('data-theme', savedTheme);
     icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-    
+
     // Toggle on click
     button.addEventListener('click', () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
+
       document.documentElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
       icon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     });
   });
 });
-```
+
+```text
 
 **Key Changes:**
 
 1. **Separated editor and frontend logic** - Editor shows placeholder, frontend has interactivity
-2. **Used vanilla JavaScript for frontend** - No React on the actual website (smaller bundle)
-3. **Maintained BEM classes** - Same CSS works for both React and WordPress versions
+
+1. **Used vanilla JavaScript for frontend** - No React on the actual website (smaller bundle)
+
+1. **Maintained BEM classes** - Same CSS works for both React and WordPress versions
 
 ---
 
 ### Example 2: Breadcrumbs Component
 
-**Original React Component:**
+## Original React Component (1)
 
 ```tsx
 // /components/ui/Breadcrumbs.tsx
@@ -438,9 +488,10 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
     </nav>
   );
 }
-```
 
-**Converted WordPress Block (Dynamic PHP Rendering):**
+```text
+
+## Converted WordPress Block (Dynamic PHP Rendering)
 
 ```json
 // /blocks/breadcrumbs/block.json
@@ -456,7 +507,8 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
   "attributes": {},
   "textdomain": "nova-news"
 }
-```
+
+```text
 
 ```jsx
 // /blocks/breadcrumbs/src/edit.js
@@ -464,7 +516,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 
 export default function Edit() {
   const blockProps = useBlockProps();
-  
+
   // Preview in editor
   return (
     <nav {...blockProps} className="breadcrumbs" aria-label="Breadcrumb">
@@ -484,7 +536,8 @@ export default function Edit() {
     </nav>
   );
 }
-```
+
+```text
 
 ```jsx
 // /blocks/breadcrumbs/src/index.js
@@ -496,55 +549,57 @@ registerBlockType('custom/breadcrumbs', {
   // Dynamic block - rendered via PHP
   save: () => null,
 });
-```
+
+```text
 
 ```php
 <?php
 // /blocks/breadcrumbs/render.php
 /**
+
  * Render callback for Breadcrumbs block
  */
-function nova_news_render_breadcrumbs() {
-  if (is_front_page()) {
+function nova*news*render_breadcrumbs() {
+  if (is*front*page()) {
     return ''; // No breadcrumbs on homepage
   }
-  
+
   $items = array();
-  
+
   // Home link
   $items[] = array(
     'label' => 'Home',
     'url' => home_url('/')
   );
-  
+
   // Add parent pages if exists
-  if (is_page() && $post->post_parent) {
-    $ancestors = array_reverse(get_post_ancestors($post->ID));
+  if (is*page() && $post->post*parent) {
+    $ancestors = array*reverse(get*post_ancestors($post->ID));
     foreach ($ancestors as $ancestor) {
       $items[] = array(
-        'label' => get_the_title($ancestor),
+        'label' => get*the*title($ancestor),
         'url' => get_permalink($ancestor)
       );
     }
   }
-  
+
   // Add category for single posts
-  if (is_single() && !is_singular('page')) {
-    $category = get_the_category();
+  if (is*single() && !is*singular('page')) {
+    $category = get*the*category();
     if ($category) {
       $items[] = array(
         'label' => $category[0]->name,
-        'url' => get_category_link($category[0]->term_id)
+        'url' => get*category*link($category[0]->term_id)
       );
     }
   }
-  
+
   // Current page
   $items[] = array(
-    'label' => get_the_title(),
+    'label' => get*the*title(),
     'url' => null
   );
-  
+
   // Render
   ob_start();
   ?>
@@ -553,7 +608,7 @@ function nova_news_render_breadcrumbs() {
       <?php foreach ($items as $item): ?>
         <li class="breadcrumbs__item">
           <?php if ($item['url']): ?>
-            <a href="<?php echo esc_url($item['url']); ?>" class="breadcrumbs__link">
+            <a href="<?php echo esc*url($item['url']); ?>" class="breadcrumbs*_link">
               <?php echo esc_html($item['label']); ?>
             </a>
           <?php else: ?>
@@ -566,22 +621,24 @@ function nova_news_render_breadcrumbs() {
     </ol>
   </nav>
   <?php
-  return ob_get_clean();
+  return ob*get*clean();
 }
 
 // Register dynamic block
-register_block_type(__DIR__ . '/build', array(
-  'render_callback' => 'nova_news_render_breadcrumbs'
+register*block*type(_*DIR*_ . '/build', array(
+  'render*callback' => 'nova*news*render*breadcrumbs'
 ));
-```
 
-**Key Concept:** Dynamic blocks use PHP to render content based on WordPress context (current page, post, etc.)
+```text
+
+**Key Concept:** Dynamic blocks use PHP to render content based on WordPress
+context (current page, post, etc.)
 
 ---
 
 ### Example 3: Portfolio Card Component
 
-**Original React Component:**
+## Original React Component (2)
 
 ```tsx
 // /components/ui/PortfolioCard.tsx
@@ -592,13 +649,14 @@ interface PortfolioCardProps {
   url: string;
 }
 
-export function PortfolioCard({ title, image, category, url }: PortfolioCardProps) {
+export function PortfolioCard({ title, image, category, url }:
+PortfolioCardProps) {
   return (
     <article className="portfolio-card">
       <a href={url} className="portfolio-card__link">
         <div className="portfolio-card__image-wrapper">
-          <img 
-            src={image} 
+          <img
+            src={image}
             alt={title}
             className="portfolio-card__image"
           />
@@ -611,9 +669,10 @@ export function PortfolioCard({ title, image, category, url }: PortfolioCardProp
     </article>
   );
 }
-```
 
-**Converted WordPress Block:**
+```text
+
+## Converted WordPress Block (1)
 
 ```json
 // /blocks/portfolio-card/block.json
@@ -648,11 +707,13 @@ export function PortfolioCard({ title, image, category, url }: PortfolioCardProp
     "html": false
   }
 }
-```
+
+```text
 
 ```jsx
 // /blocks/portfolio-card/src/edit.js
-import { useBlockProps, InspectorControls, MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, MediaUpload, MediaUploadCheck } from
+'@wordpress/block-editor';
 import { PanelBody, TextControl, Button } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
@@ -660,7 +721,7 @@ export default function Edit({ attributes, setAttributes }) {
   const blockProps = useBlockProps({
     className: 'portfolio-card',
   });
-  
+
   return (
     <>
       <InspectorControls>
@@ -680,7 +741,7 @@ export default function Edit({ attributes, setAttributes }) {
             value={url}
             onChange={(value) => setAttributes({ url: value })}
           />
-          
+
           <MediaUploadCheck>
             <MediaUpload
               onSelect={(media) => {
@@ -700,12 +761,12 @@ export default function Edit({ attributes, setAttributes }) {
           </MediaUploadCheck>
         </PanelBody>
       </InspectorControls>
-      
+
       <article {...blockProps}>
         <div className="portfolio-card__image-wrapper">
           {imageUrl ? (
-            <img 
-              src={imageUrl} 
+            <img
+              src={imageUrl}
               alt={title}
               className="portfolio-card__image"
             />
@@ -723,7 +784,8 @@ export default function Edit({ attributes, setAttributes }) {
     </>
   );
 }
-```
+
+```text
 
 ```jsx
 // /blocks/portfolio-card/src/save.js
@@ -734,13 +796,13 @@ export default function save({ attributes }) {
   const blockProps = useBlockProps.save({
     className: 'portfolio-card',
   });
-  
+
   return (
     <article {...blockProps}>
       <a href={url} className="portfolio-card__link">
         <div className="portfolio-card__image-wrapper">
-          <img 
-            src={imageUrl} 
+          <img
+            src={imageUrl}
             alt={title}
             className="portfolio-card__image"
           />
@@ -753,7 +815,8 @@ export default function save({ attributes }) {
     </article>
   );
 }
-```
+
+```text
 
 ---
 
@@ -765,7 +828,7 @@ export default function save({ attributes }) {
 <?php
 // /functions.php
 
-function nova_news_register_blocks() {
+function nova*news*register_blocks() {
   // Auto-register all blocks in /blocks directory
   $blocks = array(
     'theme-switcher',
@@ -773,31 +836,34 @@ function nova_news_register_blocks() {
     'portfolio-card',
     'video-card',
   );
-  
+
   foreach ($blocks as $block) {
-    register_block_type(__DIR__ . '/blocks/' . $block . '/build');
+    register*block*type(_*DIR*_ . '/blocks/' . $block . '/build');
   }
 }
-add_action('init', 'nova_news_register_blocks');
-```
+add*action('init', 'nova*news*register*blocks');
+
+```text
 
 ### Method 2: plugin.php (Plugin Approach)
 
 ```php
 <?php
 /**
+
  * Plugin Name: Nova News Blocks
  * Description: Custom blocks for Nova News theme
  * Version: 1.0.0
  */
 
-function nova_news_blocks_register() {
-  register_block_type(__DIR__ . '/blocks/theme-switcher/build');
-  register_block_type(__DIR__ . '/blocks/breadcrumbs/build');
-  register_block_type(__DIR__ . '/blocks/portfolio-card/build');
+function nova*news*blocks_register() {
+  register*block*type(_*DIR*_ . '/blocks/theme-switcher/build');
+  register*block*type(_*DIR*_ . '/blocks/breadcrumbs/build');
+  register*block*type(_*DIR*_ . '/blocks/portfolio-card/build');
 }
-add_action('init', 'nova_news_blocks_register');
-```
+add*action('init', 'nova*news*blocks*register');
+
+```text
 
 ---
 
@@ -832,23 +898,24 @@ Attributes define editable properties for your block.
     }
   }
 }
-```
+
+```text
 
 ### Using Attributes in Components
 
 ```jsx
 export default function Edit({ attributes, setAttributes }) {
   const { title, showSubtitle, columns } = attributes;
-  
+
   // Update single attribute
   setAttributes({ title: 'New Title' });
-  
+
   // Update multiple attributes
   setAttributes({
     title: 'New Title',
     showSubtitle: false,
   });
-  
+
   return (
     <div>
       <h2>{title}</h2>
@@ -857,7 +924,8 @@ export default function Edit({ attributes, setAttributes }) {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -867,7 +935,8 @@ export default function Edit({ attributes, setAttributes }) {
 
 ```jsx
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, ToggleControl, SelectControl, RangeControl } from '@wordpress/components';
+import { PanelBody, TextControl, ToggleControl, SelectControl, RangeControl }
+from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
   return (
@@ -880,14 +949,14 @@ export default function Edit({ attributes, setAttributes }) {
             onChange={(value) => setAttributes({ heading: value })}
           />
         </PanelBody>
-        
+
         <PanelBody title="Display Settings" initialOpen={false}>
           <ToggleControl
             label="Show Featured Badge"
             checked={attributes.showBadge}
             onChange={(value) => setAttributes({ showBadge: value })}
           />
-          
+
           <SelectControl
             label="Layout"
             value={attributes.layout}
@@ -897,7 +966,7 @@ export default function Edit({ attributes, setAttributes }) {
             ]}
             onChange={(value) => setAttributes({ layout: value })}
           />
-          
+
           <RangeControl
             label="Columns"
             value={attributes.columns}
@@ -907,12 +976,13 @@ export default function Edit({ attributes, setAttributes }) {
           />
         </PanelBody>
       </InspectorControls>
-      
+
       {/* Block content */}
     </>
   );
 }
-```
+
+```text
 
 ### BlockControls (Toolbar)
 
@@ -939,12 +1009,13 @@ export default function Edit({ attributes, setAttributes }) {
           />
         </ToolbarGroup>
       </BlockControls>
-      
+
       {/* Block content */}
     </>
   );
 }
-```
+
+```text
 
 ---
 
@@ -969,7 +1040,7 @@ import { useSelect } from '@wordpress/data';
 
 export default function Edit({ attributes, setAttributes }) {
   const { postsToShow } = attributes;
-  
+
   // Fetch posts in editor
   const posts = useSelect((select) => {
     return select('core').getEntityRecords('postType', 'post', {
@@ -977,7 +1048,7 @@ export default function Edit({ attributes, setAttributes }) {
       _embed: true,
     });
   }, [postsToShow]);
-  
+
   return (
     <>
       <InspectorControls>
@@ -991,7 +1062,7 @@ export default function Edit({ attributes, setAttributes }) {
           />
         </PanelBody>
       </InspectorControls>
-      
+
       <div {...useBlockProps()}>
         <h3>Recent Posts ({postsToShow})</h3>
         {!posts ? (
@@ -1007,7 +1078,8 @@ export default function Edit({ attributes, setAttributes }) {
     </>
   );
 }
-```
+
+```text
 
 ```jsx
 // /blocks/recent-posts/src/index.js
@@ -1018,23 +1090,25 @@ registerBlockType('custom/recent-posts', {
   edit: Edit,
   save: () => null, // Dynamic block
 });
-```
+
+```text
 
 ```php
 <?php
 // /blocks/recent-posts/render.php
-function nova_news_render_recent_posts($attributes) {
-  $posts_to_show = isset($attributes['postsToShow']) ? $attributes['postsToShow'] : 5;
-  
-  $recent_posts = wp_get_recent_posts(array(
-    'numberposts' => $posts_to_show,
+function nova*news*render*recent*posts($attributes) {
+$posts*to*show = isset($attributes['postsToShow']) ? $attributes['postsToShow']
+: 5;
+
+  $recent*posts = wp*get*recent*posts(array(
+    'numberposts' => $posts*to*show,
     'post_status' => 'publish',
   ));
-  
+
   if (empty($recent_posts)) {
     return '<p>No posts found</p>';
   }
-  
+
   ob_start();
   ?>
   <div class="recent-posts">
@@ -1043,20 +1117,21 @@ function nova_news_render_recent_posts($attributes) {
       <?php foreach ($recent_posts as $post): ?>
         <li class="recent-posts__item">
           <a href="<?php echo get_permalink($post['ID']); ?>">
-            <?php echo esc_html($post['post_title']); ?>
+            <?php echo esc*html($post['post*title']); ?>
           </a>
         </li>
       <?php endforeach; ?>
     </ul>
   </div>
   <?php
-  return ob_get_clean();
+  return ob*get*clean();
 }
 
-register_block_type(__DIR__ . '/build', array(
-  'render_callback' => 'nova_news_render_recent_posts',
+register*block*type(_*DIR*_ . '/build', array(
+  'render*callback' => 'nova*news*render*recent_posts',
 ));
-```
+
+```text
 
 ---
 
@@ -1071,6 +1146,7 @@ Block patterns are pre-configured collections of blocks.
 // /patterns/hero-section.php
 
 /**
+
  * Title: Hero Section
  * Slug: nova-news/hero-section
  * Categories: featured
@@ -1078,28 +1154,32 @@ Block patterns are pre-configured collections of blocks.
  */
 ?>
 
-<!-- wp:group {"className":"hero hero--dark","layout":{"type":"constrained"}} -->
+<!-- wp:group {"className":"hero hero--dark","layout":{"type":"constrained"}}
+-->
 <div class="wp-block-group hero hero--dark">
-  
-  <!-- wp:heading {"level":1,"className":"hero__title text-gradient-cyberpunk"} -->
+
+<!-- wp:heading {"level":1,"className":"hero__title text-gradient-cyberpunk"}
+-->
   <h1 class="hero__title text-gradient-cyberpunk">Welcome to Nova News</h1>
   <!-- /wp:heading -->
-  
+
   <!-- wp:paragraph {"className":"hero__subtitle"} -->
   <p class="hero__subtitle">A retro 80s neon CLI aesthetic book platform</p>
   <!-- /wp:paragraph -->
-  
+
   <!-- wp:buttons {"className":"hero__cta-group"} -->
   <div class="wp-block-buttons hero__cta-group">
     <!-- wp:button {"className":"btn btn--primary"} -->
-    <div class="wp-block-button"><a class="wp-block-button__link btn btn--primary">Read the draft</a></div>
+<div class="wp-block-button"><a class="wp-block-button__link btn
+btn--primary">Read the draft</a></div>
     <!-- /wp:button -->
   </div>
   <!-- /wp:buttons -->
-  
+
 </div>
 <!-- /wp:group -->
-```
+
+```text
 
 ### Registering Patterns
 
@@ -1107,23 +1187,24 @@ Block patterns are pre-configured collections of blocks.
 <?php
 // /functions.php
 
-function nova_news_register_block_patterns() {
-  register_block_pattern_category('nova-news', array(
+function nova*news*register*block*patterns() {
+  register*block*pattern_category('nova-news', array(
     'label' => __('Nova News', 'nova-news'),
   ));
-  
-  register_block_pattern(
+
+  register*block*pattern(
     'nova-news/hero-section',
     array(
       'title' => __('Hero Section', 'nova-news'),
       'description' => __('Large hero section with title and CTA', 'nova-news'),
       'categories' => array('nova-news', 'featured'),
-      'content' => file_get_contents(__DIR__ . '/patterns/hero-section.php'),
+      'content' => file*get*contents(_*DIR*_ . '/patterns/hero-section.php'),
     )
   );
 }
-add_action('init', 'nova_news_register_block_patterns');
-```
+add*action('init', 'nova*news*register*block_patterns');
+
+```text
 
 ---
 
@@ -1138,10 +1219,11 @@ Install the React Developer Tools browser extension to inspect block components.
 ```jsx
 export default function Edit({ attributes }) {
   console.log('Block attributes:', attributes);
-  
+
   return <div>Block content</div>;
 }
-```
+
+```text
 
 ### 3. WP_DEBUG
 
@@ -1149,9 +1231,10 @@ Enable WordPress debugging in `wp-config.php`:
 
 ```php
 define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', false);
-```
+define('WP*DEBUG*LOG', true);
+define('WP*DEBUG*DISPLAY', false);
+
+```text
 
 Check errors in `/wp-content/debug.log`.
 
@@ -1162,32 +1245,44 @@ Check errors in `/wp-content/debug.log`.
 ### Development Workflow
 
 ```bash
+
 # 1. Navigate to theme directory
+
 cd wp-content/themes/nova-news-theme/
 
 # 2. Install dependencies
+
 npm install
 
 # 3. Start development server (watches for changes)
+
 npm start
 
 # 4. Make changes to blocks in /blocks/**/src/
+
 # Files automatically recompile on save
 
 # 5. Refresh WordPress editor to see changes
-```
+
+```text
 
 ### Production Build
 
 ```bash
+
 # Build all blocks for production
+
 npm run build
 
 # Output: /blocks/**/build/
+
 # - index.js (minified)
+
 # - index.css (compiled CSS)
+
 # - block.json (copied)
-```
+
+```text
 
 ### Custom Build Script
 
@@ -1200,7 +1295,8 @@ npm run build
     "build:css": "postcss styles/**/*.css -d assets/css"
   }
 }
-```
+
+```text
 
 ---
 
@@ -1220,7 +1316,8 @@ Maintain consistency with your React components:
 <div className="card">
   <h3 className="title">Title</h3>
 </div>
-```
+
+```text
 
 ### 2. Share CSS Between React and WordPress
 
@@ -1238,7 +1335,8 @@ Maintain consistency with your React components:
   font-size: var(--font-size-lg);
   color: var(--color-neon-pink);
 }
-```
+
+```text
 
 Import in both contexts:
 
@@ -1248,7 +1346,8 @@ import '../../styles/blocks/portfolio-card.css';
 
 // WordPress: /blocks/portfolio-card/src/style.scss
 @import '../../../styles/blocks/portfolio-card.css';
-```
+
+```text
 
 ### 3. Use useBlockProps Consistently
 
@@ -1258,7 +1357,7 @@ export default function Edit() {
   const blockProps = useBlockProps({
     className: 'my-block',
   });
-  
+
   return <div {...blockProps}>Content</div>;
 }
 
@@ -1266,7 +1365,8 @@ export default function Edit() {
 export default function Edit() {
   return <div className="my-block">Content</div>;
 }
-```
+
+```text
 
 ### 4. Provide Block Examples
 
@@ -1279,7 +1379,8 @@ export default function Edit() {
     }
   }
 }
-```
+
+```text
 
 This creates a preview in the block inserter.
 
@@ -1298,7 +1399,8 @@ This creates a preview in the block inserter.
 >
   Toggle
 </button>
-```
+
+```text
 
 ---
 
@@ -1307,22 +1409,34 @@ This creates a preview in the block inserter.
 This guide covered:
 
 1. ✅ Block development tools (`@wordpress/create-block`, `@wordpress/scripts`)
-2. ✅ Block anatomy (`block.json`, `edit.js`, `save.js`)
-3. ✅ Converting React components to WordPress blocks
-4. ✅ Block registration in `functions.php`
-5. ✅ Attributes and props
-6. ✅ InspectorControls and BlockControls
-7. ✅ Dynamic blocks with PHP rendering
-8. ✅ Block patterns
-9. ✅ Testing and debugging
-10. ✅ Build process and best practices
+
+1. ✅ Block anatomy (`block.json`, `edit.js`, `save.js`)
+
+1. ✅ Converting React components to WordPress blocks
+
+1. ✅ Block registration in `functions.php`
+
+1. ✅ Attributes and props
+
+1. ✅ InspectorControls and BlockControls
+
+1. ✅ Dynamic blocks with PHP rendering
+
+1. ✅ Block patterns
+
+1. ✅ Testing and debugging
+
+1. ✅ Build process and best practices
 
 **Next Steps:**
 
 1. Convert 1-2 simple React components to blocks (start with ThemeSwitcher)
-2. Test in WordPress Site Editor
-3. Gradually migrate all custom components
-4. Create block patterns for common layouts
+
+1. Test in WordPress Site Editor
+
+1. Gradually migrate all custom components
+
+1. Create block patterns for common layouts
 
 **Related Guides:**
 
@@ -1332,5 +1446,5 @@ This guide covered:
 
 ---
 
-**Last Updated:** March 12, 2026  
+**Last Updated:** March 12, 2026
 **Maintained By:** Development Team

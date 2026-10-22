@@ -1,12 +1,14 @@
 # SplitContent Component
 
-**File:** `/components/sections/SplitContent.tsx`  
-**Version:** 1.0.0  
+**File:** `/components/sections/SplitContent.tsx`
+**Version:** 1.0.0
 **Category:** Section Component (Phase 3)
 
 ## Purpose
 
-Renders a responsive two-column layout with an image on one side and text content on the other. Supports even (50/50) and image-emphasis (60/40) splits. Stacks vertically on mobile with image first.
+Renders a responsive two-column layout with an image on one side and text
+content on the other. Supports even (50/50) and image-emphasis (60/40) splits.
+Stacks vertically on mobile with image first.
 
 ## Props
 
@@ -34,7 +36,8 @@ import { SplitContent } from '../../sections/SplitContent';
     It's not a deficit of attention — it's an abundance directed in bursts.
   </p>
 </SplitContent>
-```
+
+```text
 
 ## Where Used
 
@@ -42,9 +45,11 @@ import { SplitContent } from '../../sections/SplitContent';
 
 ## CSS
 
-Styles are defined in `/styles/blocks/split-content.css`, imported by the component.
+Styles are defined in `/styles/blocks/split-content.css`, imported by the
+component.
 
 **BEM structure:**
+
 - `.split-content` — block (flexbox row)
 - `.split-content--image-left` / `--image-right` — side modifier
 - `.split-content--even` / `--image-emphasis` — ratio modifier
@@ -52,15 +57,19 @@ Styles are defined in `/styles/blocks/split-content.css`, imported by the compon
 - `.split-content__image` — `<img>` element (uses `ImageWithFallback`)
 - `.split-content__text-col` — text column
 
-**Responsive behavior:**
+## Responsive behavior
+
 - **Desktop (>768px):** Side-by-side columns
 - **Mobile (<768px):** Stacked vertically, image first
 
 ## Image Handling
 
-Uses `ImageWithFallback` from `/components/figma/ImageWithFallback.tsx` internally. The `imageUrl` prop is passed directly — use Unsplash URLs or `figma:asset/` imports.
+Uses `ImageWithFallback` from `/components/figma/ImageWithFallback.tsx`
+internally. The `imageUrl` prop is passed directly — use Unsplash URLs or
+`figma:asset/` imports.
 
-**Important:** Never replace existing `figma:asset/` imports. Use `ImageWithFallback` only for new images.
+**Important:** Never replace existing `figma:asset/` imports. Use
+`ImageWithFallback` only for new images.
 
 ## Accessibility
 

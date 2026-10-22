@@ -1,13 +1,15 @@
 # CategoryFilter Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
-Category filtering component for portfolio and blog content with active state indication.
+Category filtering component for portfolio and blog content with active state
+indication.
 
 ## Purpose
 
 Provide content filtering by category with:
+
 - Multiple category options (Festival, Editorial, Special Event, Nails, All)
 - Active state visual indication
 - Smooth transitions
@@ -28,11 +30,11 @@ sequenceDiagram
     participant P as Parent (BlogPage)
     participant F as Filter Logic
     participant L as Content List
-    
+
     Note over P: Initial state: "All" active
     P->>C: Render with activeCategory="all"
     C-->>U: Display categories (All highlighted)
-    
+
     U->>C: Click "Festival"
     C->>P: onChange("festival")
     P->>P: setActiveCategory("festival")
@@ -43,44 +45,48 @@ sequenceDiagram
     L-->>U: Show only Festival items ✅
     P->>C: Re-render with activeCategory="festival"
     C-->>U: Highlight "Festival" button
-```
+
+```text
 
 ### Category Selection Flow (Mermaid)
 
 ```mermaid
 flowchart TD
     A[User Views Page] --> B[CategoryFilter Renders]
-    
+
     B --> C[All Categories Button]
     C --> D{"'All' Active?"}
-    
+
     D -->|Yes| E[Highlight with gradient]
     D -->|No| F[Show inactive state]
-    
+
     B --> G[Festival Button]
     G --> H{"'Festival' Active?"}
-    
+
     H -->|Yes| E
     H -->|No| F
-    
-    E --> I[Apply active styles:<br/>bg-gradient-pink-purple-blue<br/>text-white<br/>shadow-lg]
-    
-    F --> J[Apply inactive styles:<br/>bg-white/80<br/>text-gray-700<br/>hover:shadow-md]
-    
+
+E --> I[Apply active
+styles:<br/>bg-gradient-pink-purple-blue<br/>text-white<br/>shadow-lg]
+
+F --> J[Apply inactive
+styles:<br/>bg-white/80<br/>text-gray-700<br/>hover:shadow-md]
+
     I --> K[User Clicks Category]
     J --> K
-    
+
     K --> L[Trigger onChange]
     L --> M[Parent Updates State]
     M --> N[Filter Content]
     N --> O[Re-render with New Active]
-    
+
     O --> B
-    
+
     style E fill:#dcfce7,stroke:#22c55e,stroke-width:2px
     style F fill:#e0e7ff,stroke:#6366f1,stroke-width:2px
     style N fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
-```
+
+```text
 
 ---
 
@@ -91,12 +97,13 @@ flowchart TD
 ```tsx
 import { CategoryFilter } from './components/ui/CategoryFilter';
 
-<CategoryFilter 
+<CategoryFilter
   categories={categories}
   activeCategory={activeCategory}
   onCategoryChange={setActiveCategory}
 />
-```
+
+```text
 
 ### Portfolio Categories
 
@@ -109,13 +116,14 @@ const portfolioCategories = [
   { id: 'nails', label: 'Nail Art', count: 5 }
 ];
 
-<CategoryFilter 
+<CategoryFilter
   categories={portfolioCategories}
   activeCategory={activeCategory}
   onCategoryChange={setActiveCategory}
   showCount={true}
 />
-```
+
+```text
 
 ### Blog Categories
 
@@ -128,12 +136,13 @@ const blogCategories = [
   { id: 'reviews', label: 'Product Reviews' }
 ];
 
-<CategoryFilter 
+<CategoryFilter
   categories={blogCategories}
   activeCategory={activeCategory}
   onCategoryChange={setActiveCategory}
 />
-```
+
+```text
 
 ---
 
@@ -142,36 +151,42 @@ const blogCategories = [
 ```typescript
 interface CategoryFilterProps {
   /**
+
    * Array of categories
    * @required
    */
   categories: Category[];
-  
+
   /**
+
    * Currently active category ID
    * @required
    */
   activeCategory: string;
-  
+
   /**
+
    * Category change handler
    * @required
    */
   onCategoryChange: (categoryId: string) => void;
-  
+
   /**
+
    * Show item count badges
    * @default false
    */
   showCount?: boolean;
-  
+
   /**
+
    * Layout style
    * @default "pills"
    */
   layout?: 'pills' | 'tabs' | 'buttons';
-  
+
   /**
+
    * Additional CSS classes
    * @default ""
    */
@@ -184,7 +199,8 @@ interface Category {
   count?: number;
   icon?: React.ReactNode;
 }
-```
+
+```text
 
 ---
 
@@ -211,7 +227,7 @@ interface CategoryFilterProps {
   className?: string;
 }
 
-export function CategoryFilter({ 
+export function CategoryFilter({
   categories,
   activeCategory,
   onCategoryChange,
@@ -233,7 +249,7 @@ export function CategoryFilter({
             }
           `
         };
-      
+
       case 'tabs':
         return {
           container: 'flex gap-1 border-b border-gray-200',
@@ -246,7 +262,7 @@ export function CategoryFilter({
             }
           `
         };
-      
+
       case 'buttons':
         return {
           container: 'flex flex-wrap gap-2',
@@ -265,7 +281,7 @@ export function CategoryFilter({
   const layoutClasses = getLayoutClasses();
 
   return (
-    <nav 
+    <nav
       className={`${className}`}
       role="navigation"
       aria-label="Category filter"
@@ -273,20 +289,21 @@ export function CategoryFilter({
       <div className={layoutClasses.container}>
         {categories.map(category => {
           const isActive = category.id === activeCategory;
-          
+
           return (
             <button
               key={category.id}
               onClick={() => onCategoryChange(category.id)}
               className={layoutClasses.button(isActive)}
               aria-current={isActive ? 'page' : undefined}
-              aria-label={`Filter by ${category.label}${showCount && category.count ? ` (${category.count} items)` : ''}`}
+aria-label={`Filter by ${category.label}${showCount && category.count ? `
+(${category.count} items)` : ''}`}
             >
               <span className="flex items-center gap-2">
                 {category.icon && <span>{category.icon}</span>}
-                
+
                 <span>{category.label}</span>
-                
+
                 {showCount && category.count !== undefined && (
                   <span className={`
                     text-fluid-xs px-2 py-0.5 rounded-full
@@ -306,7 +323,8 @@ export function CategoryFilter({
     </nav>
   );
 }
-```
+
+```text
 
 ---
 
@@ -320,7 +338,7 @@ import { CategoryFilter } from './components/ui/CategoryFilter';
 
 function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('all');
-  
+
   const categories = [
     { id: 'all', label: 'All Work', count: 45 },
     { id: 'festival', label: 'Festival', count: 12 },
@@ -328,32 +346,33 @@ function PortfolioPage() {
     { id: 'special-event', label: 'Special Event', count: 10 },
     { id: 'nails', label: 'Nail Art', count: 5 }
   ];
-  
+
   const filteredEntries = activeCategory === 'all'
     ? portfolioEntries
     : portfolioEntries.filter(entry => entry.category === activeCategory);
-  
+
   return (
     <section className="py-section px-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-section-h2 font-heading font-semibold text-center mb-fluid-lg">
+<h1 className="text-section-h2 font-heading font-semibold text-center
+mb-fluid-lg">
           Portfolio
         </h1>
-        
-        <CategoryFilter 
+
+        <CategoryFilter
           categories={categories}
           activeCategory={activeCategory}
           onCategoryChange={setActiveCategory}
           showCount={true}
           className="mb-fluid-xl flex justify-center"
         />
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md">
           {filteredEntries.map(entry => (
             <PortfolioCard key={entry.id} entry={entry} />
           ))}
         </div>
-        
+
         {filteredEntries.length === 0 && (
           <p className="text-center text-gray-600 py-fluid-xl">
             No entries found in this category.
@@ -363,25 +382,26 @@ function PortfolioPage() {
     </section>
   );
 }
-```
+
+```text
 
 ### Blog Page with Tabs Layout
 
 ```tsx
 function BlogPage() {
   const [activeCategory, setActiveCategory] = useState('all');
-  
+
   const categories = [
     { id: 'all', label: 'All Posts', count: 24 },
     { id: 'tutorials', label: 'Tutorials', count: 8 },
     { id: 'tips', label: 'Tips', count: 10 },
     { id: 'inspiration', label: 'Inspiration', count: 6 }
   ];
-  
+
   return (
     <section className="py-section">
       <div className="max-w-7xl mx-auto px-6">
-        <CategoryFilter 
+        <CategoryFilter
           categories={categories}
           activeCategory={activeCategory}
           onCategoryChange={setActiveCategory}
@@ -389,7 +409,7 @@ function BlogPage() {
           layout="tabs"
           className="mb-fluid-lg"
         />
-        
+
         <div className="space-y-fluid-md">
           {filteredPosts.map(post => (
             <BlogCard key={post.id} post={post} />
@@ -399,7 +419,8 @@ function BlogPage() {
     </section>
   );
 }
-```
+
+```text
 
 ### With Icons
 
@@ -407,52 +428,54 @@ function BlogPage() {
 import { Sparkle, Camera, Calendar, Palette } from '@phosphor-icons/react';
 
 const categoriesWithIcons = [
-  { 
-    id: 'all', 
-    label: 'All', 
+  {
+    id: 'all',
+    label: 'All',
     icon: <Sparkle className="w-4 h-4" />
   },
-  { 
-    id: 'festival', 
-    label: 'Festival', 
+  {
+    id: 'festival',
+    label: 'Festival',
     icon: <Sparkle className="w-4 h-4" />
   },
-  { 
-    id: 'editorial', 
-    label: 'Editorial', 
+  {
+    id: 'editorial',
+    label: 'Editorial',
     icon: <Camera className="w-4 h-4" />
   },
-  { 
-    id: 'special-event', 
-    label: 'Events', 
+  {
+    id: 'special-event',
+    label: 'Events',
     icon: <Calendar className="w-4 h-4" />
   },
-  { 
-    id: 'nails', 
-    label: 'Nails', 
+  {
+    id: 'nails',
+    label: 'Nails',
     icon: <Palette className="w-4 h-4" />
   }
 ];
 
-<CategoryFilter 
+<CategoryFilter
   categories={categoriesWithIcons}
   activeCategory={activeCategory}
   onCategoryChange={setActiveCategory}
 />
-```
+
+```text
 
 ### Mobile Responsive (Horizontal Scroll)
 
 ```tsx
 <div className="overflow-x-auto pb-4 -mx-6 px-6">
-  <CategoryFilter 
+  <CategoryFilter
     categories={categories}
     activeCategory={activeCategory}
     onCategoryChange={setActiveCategory}
     className="min-w-max"
   />
 </div>
-```
+
+```text
 
 ---
 
@@ -470,11 +493,13 @@ const categoriesWithIcons = [
   `}
 >
   {isActive && (
-    <span className="absolute inset-0 bg-gradient-pink-purple-blue rounded-full animate-pulse" />
+<span className="absolute inset-0 bg-gradient-pink-purple-blue rounded-full
+animate-pulse" />
   )}
   <span className="relative z-10">{category.label}</span>
 </button>
-```
+
+```text
 
 ### With URL Parameters
 
@@ -484,20 +509,21 @@ import { useSearchParams } from 'react-router';
 function PortfolioPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('category') || 'all';
-  
+
   const handleCategoryChange = (categoryId: string) => {
     setSearchParams({ category: categoryId });
   };
-  
+
   return (
-    <CategoryFilter 
+    <CategoryFilter
       categories={categories}
       activeCategory={activeCategory}
       onCategoryChange={handleCategoryChange}
     />
   );
 }
-```
+
+```text
 
 ### With Loading State
 
@@ -507,21 +533,22 @@ const [isLoading, setIsLoading] = useState(false);
 const handleCategoryChange = async (categoryId: string) => {
   setIsLoading(true);
   setActiveCategory(categoryId);
-  
+
   // Fetch filtered data
   await fetchFilteredData(categoryId);
-  
+
   setIsLoading(false);
 };
 
-<CategoryFilter 
+<CategoryFilter
   categories={categories}
   activeCategory={activeCategory}
   onCategoryChange={handleCategoryChange}
 />
 
 {isLoading && <Loader className="mx-auto mt-4 animate-spin" />}
-```
+
+```text
 
 ---
 
@@ -538,16 +565,18 @@ const handleCategoryChange = async (categoryId: string) => {
       onCategoryChange(category.id);
     }
   }}
-  className="focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-opacity-50 rounded-full"
+className="focus:outline-none focus:ring-2 focus:ring-pink-200
+focus:ring-opacity-50 rounded-full"
 >
   {category.label}
 </button>
-```
+
+```text
 
 ### ARIA Attributes
 
 ```tsx
-<nav 
+<nav
   role="navigation"
   aria-label="Category filter"
 >
@@ -559,20 +588,22 @@ const handleCategoryChange = async (categoryId: string) => {
     {category.label}
   </button>
 </nav>
-```
+
+```text
 
 ### Screen Reader Announcements
 
 ```tsx
 // Announce filter changes
-<div 
+<div
   role="status"
   aria-live="polite"
   className="sr-only"
 >
   {`Showing ${filteredCount} ${activeCategory} items`}
 </div>
-```
+
+```text
 
 ---
 
@@ -585,15 +616,19 @@ const handleCategoryChange = async (categoryId: string) => {
 <button onClick={() => filter('festival')}>
   Festival
 </button>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Clear active indication
-<button className={activeCategory === 'festival' ? 'bg-pink-600 text-white' : 'bg-gray-100'}>
+<button className={activeCategory === 'festival' ? 'bg-pink-600 text-white' :
+'bg-gray-100'}>
   Festival
 </button>
-```
+
+```text
 
 ### ❌ Mistake 2: Not Mobile Responsive
 
@@ -602,9 +637,11 @@ const handleCategoryChange = async (categoryId: string) => {
 <div className="flex gap-2">
   {/* Many categories */}
 </div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Horizontal scroll on mobile
 <div className="overflow-x-auto">
@@ -612,20 +649,24 @@ const handleCategoryChange = async (categoryId: string) => {
     {/* Categories */}
   </div>
 </div>
-```
+
+```text
 
 ### ❌ Mistake 3: Missing Count Updates
 
 ```tsx
 // ❌ WRONG - Count doesn't update when filtering
 <span>{category.count}</span>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Dynamic count based on filtered results
 <span>{filteredEntries.filter(e => e.category === category.id).length}</span>
-```
+
+```text
 
 ---
 
@@ -641,11 +682,11 @@ const handleCategoryChange = async (categoryId: string) => {
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
-- **[FILE_STRUCTURE.md](../FILE_STRUCTURE.md)** - File organization
+- **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
 - **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

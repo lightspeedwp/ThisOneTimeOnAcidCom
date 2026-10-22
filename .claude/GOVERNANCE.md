@@ -2,8 +2,8 @@
 
 **Document Status**: Governance specification for TOA-241 Repository Governance
 Infrastructure
-**Last Updated**: 2026-10-22  
-**Owner**: @ashley  
+**Last Updated**: 2026-10-22
+**Owner**: @ashley
 **Scope**: Decision-making framework for agent selection, tool access, budget
 approval, and escalation
 
@@ -12,11 +12,16 @@ approval, and escalation
 ## Purpose
 
 Provide clear governance rules for:
+
 1. **Selecting the right agent** for a task
-2. **Approving budget increases** beyond standard allocations
-3. **Granting/restricting tool access** per agent
-4. **Escalating decisions** to @ashley when uncertain
-5. **Enforcing contract compliance** (agents must read and follow guidelines/)
+
+1. **Approving budget increases** beyond standard allocations
+
+1. **Granting/restricting tool access** per agent
+
+1. **Escalating decisions** to @ashley when uncertain
+
+1. **Enforcing contract compliance** (agents must read and follow guidelines/)
 
 This document is the **authority on agent governance** for this repository. All
 agents must read and comply with these rules.
@@ -26,11 +31,16 @@ agents must read and comply with these rules.
 ## Table of Contents
 
 1. [Agent Selection Guide](#agent-selection-guide)
-2. [Budget Limits & Approval](#budget-limits--approval)
-3. [Tool Access Policies](#tool-access-policies)
-4. [Contract Compliance](#contract-compliance)
-5. [Escalation Procedures](#escalation-procedures)
-6. [Exceptions & Appeals](#exceptions--appeals)
+
+1. [Budget Limits & Approval](#budget-limits--approval)
+
+1. [Tool Access Policies](#tool-access-policies)
+
+1. [Contract Compliance](#contract-compliance)
+
+1. [Escalation Procedures](#escalation-procedures)
+
+1. [Exceptions & Appeals](#exceptions--appeals)
 
 ---
 
@@ -111,26 +121,29 @@ reference:
 **When you need MORE than standard allocation**:
 
 1. **Justify**: Why does this task need more budget? Provide concrete reason:
+
    - "This codebase is 50k+ lines; standard review budget insufficient for thorough analysis"
    - "Deep research across 10+ documents; 300k tokens estimated"
    - "Complex migration requiring iterative testing; time-intensive"
 
-2. **Estimate**: Provide specific numbers requested:
+1. **Estimate**: Provide specific numbers requested:
+
    - Requested token limit: X
    - Requested time limit: Y minutes
    - Requested cost ceiling: $Z
    - Explain how you estimated (word count, complexity factors, etc.)
 
-3. **Risk assessment**: What happens if budget is exceeded?
+1. **Risk assessment**: What happens if budget is exceeded?
+
    - "Task will fail mid-execution (incomplete output)"
    - "Partial results returned (usable but incomplete)"
    - "Session suspended, requires resumption in new session"
 
-4. **Submit approval request**: Create issue with tag `[BUDGET-INCREASE-REQUEST]`:
+1. **Submit approval request**: Create issue with tag `[BUDGET-INCREASE-REQUEST]`:
 
 ```text
    Title: [BUDGET-INCREASE-REQUEST] code-review for AWS Lambda migration (TOA-X)
-   
+
    Body:
    Agent: code-review
    Task: Review AWS Lambda migration PR (50k+ lines)
@@ -139,16 +152,16 @@ reference:
    Reason: Codebase size + infrastructure changes require deep analysis
    Estimated completion: 50k tokens consumed
    Risk if denied: Incomplete review, missed security issues
-   
+
    Approval from: @ashley
 
 ```text
 
-5. **Wait for approval**: @ashley will respond with ✅ approved or ❌ denied + rationale
+1. **Wait for approval**: @ashley will respond with ✅ approved or ❌ denied + rationale
 
-6. **If approved**: Execute agent with increased budget using approved amounts
+1. **If approved**: Execute agent with increased budget using approved amounts
 
-7. **If denied**: Work with smaller budget or break task into multiple runs
+1. **If denied**: Work with smaller budget or break task into multiple runs
 
 ### Cost Trends Monitoring
 
@@ -165,6 +178,7 @@ Infrastructure monitors cost trends per agent:
 ### Base Tool Access (All Agents)
 
 **All agents have read-only access to**:
+
 - Project files (Read, Glob, Grep)
 - Git history (no push/force-push)
 - GitHub issue/PR history (read-only)
@@ -176,16 +190,18 @@ Infrastructure monitors cost trends per agent:
 
 ```text
 ✅ Allowed:
-  - Read source code (all file types)
-  - GitHub API: read PRs, commits, comments
-  - Artifact creation: publish findings
-  - Bash: read-only file operations
+
+- Read source code (all file types)
+- GitHub API: read PRs, commits, comments
+- Artifact creation: publish findings
+- Bash: read-only file operations
 
 ❌ Restricted:
-  - Git push (no direct commits)
-  - GitHub write (no comments, no label changes)
-  - File modification (code is read-only)
-  - Delete operations
+
+- Git push (no direct commits)
+- GitHub write (no comments, no label changes)
+- File modification (code is read-only)
+- Delete operations
 
 ```text
 
@@ -193,16 +209,18 @@ Infrastructure monitors cost trends per agent:
 
 ```text
 ✅ Allowed:
-  - Read CHANGELOG.md (and related files)
-  - Write CHANGELOG.md (within keep-a-changelog format)
-  - Read git log (for version history)
-  - Bash: file operations on CHANGELOG.md only
+
+- Read CHANGELOG.md (and related files)
+- Write CHANGELOG.md (within keep-a-changelog format)
+- Read git log (for version history)
+- Bash: file operations on CHANGELOG.md only
 
 ❌ Restricted:
-  - Modify any OTHER file
-  - Git operations beyond reading history
-  - Delete CHANGELOG.md or version entries
-  - Rewrite version history
+
+- Modify any OTHER file
+- Git operations beyond reading history
+- Delete CHANGELOG.md or version entries
+- Rewrite version history
 
 ```text
 
@@ -210,16 +228,18 @@ Infrastructure monitors cost trends per agent:
 
 ```text
 ✅ Allowed:
-  - Read component code
-  - Read design system files
-  - Create Figma designs (if Figma connector available)
-  - Artifact creation: publish design recommendations
-  - Comment on design decisions
+
+- Read component code
+- Read design system files
+- Create Figma designs (if Figma connector available)
+- Artifact creation: publish design recommendations
+- Comment on design decisions
 
 ❌ Restricted:
-  - Commit code (recommendations only, author implements)
-  - Modify component files (read-only)
-  - Deploy changes to production
+
+- Commit code (recommendations only, author implements)
+- Modify component files (read-only)
+- Deploy changes to production
 
 ```text
 
@@ -227,16 +247,18 @@ Infrastructure monitors cost trends per agent:
 
 ```text
 ✅ Allowed:
-  - All read-only tools
-  - File reads/globs
-  - Artifact viewing/creation
-  - GitHub read (issues, PRs, comments)
+
+- All read-only tools
+- File reads/globs
+- Artifact viewing/creation
+- GitHub read (issues, PRs, comments)
 
 ❌ Restricted:
-  - Any write operations (files, git, github)
-  - Deployment or infrastructure changes
-  - External API calls (unless explicitly approved)
-  - Database modifications
+
+- Any write operations (files, git, github)
+- Deployment or infrastructure changes
+- External API calls (unless explicitly approved)
+- Database modifications
 
 ```text
 
@@ -252,10 +274,14 @@ Infrastructure monitors cost trends per agent:
 - `.claude/` — Agent configuration (read-only for most agents)
 
 **Exception**: If a protected file MUST be modified:
+
 1. Create issue with tag `[PROTECTED-FILE-MODIFICATION-REQUEST]`
-2. Provide justification and exact changes needed
-3. Wait for @ashley approval
-4. Execute changes after approval
+
+1. Provide justification and exact changes needed
+
+1. Wait for @ashley approval
+
+1. Execute changes after approval
 
 ---
 
@@ -278,11 +304,16 @@ Infrastructure monitors cost trends per agent:
 ### Compliance Audits
 
 **Monthly audit**:
+
 1. Review agent execution logs
-2. Validate all commits have proper attribution
-3. Check for protected file modifications
-4. Confirm budget allocations were honored
-5. Escalate any violations to @ashley
+
+1. Validate all commits have proper attribution
+
+1. Check for protected file modifications
+
+1. Confirm budget allocations were honored
+
+1. Escalate any violations to @ashley
 
 ---
 
@@ -293,12 +324,18 @@ Infrastructure monitors cost trends per agent:
 **Escalate immediately if**:
 
 1. **Uncertainty on governance rules**: "Am I allowed to modify this file?"
-2. **Budget exceeded**: "My analysis used 120k tokens, standard is 50k"
-3. **Protected file modification needed**: "I need to update .github/workflows/..."
-4. **Tool access needed**: "I need to push commits, not just read"
-5. **New agent type needed**: "This task doesn't fit any standard agent"
-6. **Compliance question**: "Does this violate the contract?"
-7. **Breaking change detected**: "My changes break existing functionality"
+
+1. **Budget exceeded**: "My analysis used 120k tokens, standard is 50k"
+
+1. **Protected file modification needed**: "I need to update .github/workflows/..."
+
+1. **Tool access needed**: "I need to push commits, not just read"
+
+1. **New agent type needed**: "This task doesn't fit any standard agent"
+
+1. **Compliance question**: "Does this violate the contract?"
+
+1. **Breaking change detected**: "My changes break existing functionality"
 
 ### How to Escalate
 
@@ -308,15 +345,18 @@ Infrastructure monitors cost trends per agent:
 Subject: [ESCALATION] {brief description}
 
 Context:
+
 - What are you trying to do?
 - Why do you think you need escalation?
 - What specific question do you have?
 
 Decision needed:
+
 - Approve / Deny (with reasoning)
 - Alternative approach?
 
 Timeline:
+
 - How urgent? (blocker / normal / can wait)
 
 ```text
@@ -354,8 +394,10 @@ Blocker — no PRs can merge until CI works
 If @ashley denies a budget increase or tool access request:
 
 1. **Understand the reason**: Ask for specific rationale
-2. **Propose alternative**: Smaller budget? Different approach? Split into phases?
-3. **Escalate with new info**: If you have new data that changes the calculus
+
+1. **Propose alternative**: Smaller budget? Different approach? Split into phases?
+
+1. **Escalate with new info**: If you have new data that changes the calculus
 
 **Example appeal**:
 
@@ -367,6 +409,7 @@ Decision: Denied (too high)
 
 New proposal:
 Run code-review twice with 100k tokens each:
+
 - Pass 1: Security + architecture review (100k)
 - Pass 2: Implementation details + testing (100k)
 - Total cost: same, but two smaller sessions are more manageable
@@ -380,9 +423,12 @@ Can we approve 100k + 100k (two separate runs)?
 If you believe a governance rule needs changing:
 
 1. **Document the issue**: What rule is problematic? How does it limit you?
-2. **Propose alternative**: What would be better?
-3. **Submit as issue**: Tag with `[GOVERNANCE-CHANGE-REQUEST]`
-4. **Wait for decision**: @ashley will review and respond
+
+1. **Propose alternative**: What would be better?
+
+1. **Submit as issue**: Tag with `[GOVERNANCE-CHANGE-REQUEST]`
+
+1. **Wait for decision**: @ashley will review and respond
 
 ---
 
@@ -435,29 +481,31 @@ If you believe a governance rule needs changing:
 
 ```text
 ✅ Read-only (agents can read, not modify):
-  - .github/AGENTS.md (agent governance)
-  - .github/CLAUDE.md (repo-specific rules)
-  - .github/workflows/ (all CI/CD workflows)
-  - .github/ISSUE_TEMPLATE/ (issue templates)
-  - .github/PULL_REQUEST_TEMPLATE/ (PR templates)
-  - .github/CODEOWNERS (code ownership)
-  - AGENTS.md (org-wide agent rules)
-  - CHANGELOG.md (version history — changelog-agent only for modification)
-  - guidelines/ (all coding standards)
-  - src/app/utils/supabase/ (sensitive utilities)
-  - .claude/ (agent configuration)
+
+- .github/AGENTS.md (agent governance)
+- .github/CLAUDE.md (repo-specific rules)
+- .github/workflows/ (all CI/CD workflows)
+- .github/ISSUE_TEMPLATE/ (issue templates)
+- .github/PULL*REQUEST*TEMPLATE/ (PR templates)
+- .github/CODEOWNERS (code ownership)
+- AGENTS.md (org-wide agent rules)
+- CHANGELOG.md (version history — changelog-agent only for modification)
+- guidelines/ (all coding standards)
+- src/app/utils/supabase/ (sensitive utilities)
+- .claude/ (agent configuration)
 
 ❌ Hands-off (agents should NOT read or modify):
-  - .env files (secrets)
-  - credentials.json (API keys)
-  - node_modules/ (build artifact)
-  - .git/ (git internals)
+
+- .env files (secrets)
+- credentials.json (API keys)
+- node_modules/ (build artifact)
+- .git/ (git internals)
 
 ```text
 
 ---
 
-**End of Document**  
-*Maintained as part of TOA-241 Repository Governance Infrastructure*  
-*All agents must read and comply with this governance framework*  
+**End of Document**
+*Maintained as part of TOA-241 Repository Governance Infrastructure*
+*All agents must read and comply with this governance framework*
 *Questions? Escalate to @ashley*

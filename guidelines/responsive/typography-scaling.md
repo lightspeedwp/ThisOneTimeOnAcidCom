@@ -1,23 +1,32 @@
 # Typography Scaling Responsive Guidelines
 
-**Version:** 1.0.0  
-**Last Updated:** January 2025  
+**Version:** 1.0.0
+**Last Updated:** January 2025
 **Part of:** Ash Shaw Makeup Portfolio Design System
 
 ## Overview
 
-This document defines how typography scales and adapts across different device sizes, ensuring optimal readability and visual hierarchy on all screens from mobile phones to large desktop displays.
+This document defines how typography scales and adapts across different device
+sizes, ensuring optimal readability and visual hierarchy on all screens from
+mobile phones to large desktop displays.
 
 ## Table of Contents
 
 1. [Fluid Typography System](#fluid-typography-system)
-2. [Device-Specific Scaling](#device-specific-scaling)
-3. [Heading Hierarchy](#heading-hierarchy)
-4. [Body Text Scaling](#body-text-scaling)
-5. [Line Height Adjustments](#line-height-adjustments)
-6. [Letter Spacing](#letter-spacing)
-7. [Reading Width](#reading-width)
-8. [Implementation Patterns](#implementation-patterns)
+
+1. [Device-Specific Scaling](#device-specific-scaling)
+
+1. [Heading Hierarchy](#heading-hierarchy)
+
+1. [Body Text Scaling](#body-text-scaling)
+
+1. [Line Height Adjustments](#line-height-adjustments)
+
+1. [Letter Spacing](#letter-spacing)
+
+1. [Reading Width](#reading-width)
+
+1. [Implementation Patterns](#implementation-patterns)
 
 ---
 
@@ -25,13 +34,16 @@ This document defines how typography scales and adapts across different device s
 
 ### Core Principle
 
-All typography uses CSS `clamp()` for fluid scaling between minimum and maximum sizes:
+All typography uses CSS `clamp()` for fluid scaling between minimum and maximum
+sizes:
 
 ```css
 font-size: clamp([min-size], [preferred-size], [max-size]);
-```
+
+```text
 
 **Benefits:**
+
 - ✅ Smooth scaling across all viewport widths
 - ✅ No sudden jumps at breakpoints
 - ✅ Optimal readability at every size
@@ -39,17 +51,21 @@ font-size: clamp([min-size], [preferred-size], [max-size]);
 
 ### Scaling Formula
 
-```
-Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 100
-```
+```text
+Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) *
+100
+
+```text
 
 **Example: Hero H1**
+
 ```css
 /* clamp(36px @ 320px → 120px @ 1920px) */
 .text-hero-h1 {
   font-size: clamp(2.25rem, 2.25rem + 5.25vw, 7.5rem);
 }
-```
+
+```text
 
 ---
 
@@ -57,13 +73,15 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 
 ### Mobile (320px - 767px)
 
-**Typography Priorities:**
+## Typography Priorities
+
 - ✅ Maximum readability in limited space
 - ✅ Touch-friendly line heights
 - ✅ Shorter line lengths for scanning
 - ✅ Larger tap targets for links
 
 **Scaling Behavior:**
+
 ```css
 /* Headings scale from minimum size */
 .text-hero-h1      { font-size: clamp(2.25rem, 6vw, 7.5rem); }    /* 36px → 46px */
@@ -71,10 +89,13 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .text-subsection-h3 { font-size: clamp(1.25rem, 3vw, 2rem); }     /* 20px → 24px */
 
 /* Body text optimized for mobile reading */
-.text-body-guideline { font-size: clamp(1rem, 1.5vw, 1.25rem); }  /* 16px → 18px */
-```
+.text-body-guideline { font-size: clamp(1rem, 1.5vw, 1.25rem); } /* 16px → 18px
+*/
 
-**Mobile-Specific Adjustments:**
+```text
+
+## Mobile-Specific Adjustments
+
 ```css
 /* Increase line height for easier reading */
 .mobile-line-height {
@@ -85,17 +106,20 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .mobile-letter-spacing {
   letter-spacing: -0.01em;
 }
-```
+
+```text
 
 ### Tablet (768px - 1023px)
 
-**Typography Priorities:**
+## Typography Priorities (1)
+
 - ✅ Balanced hierarchy
 - ✅ Comfortable reading for both orientations
 - ✅ Efficient use of medium-sized screen space
 - ✅ Prepare for desktop-like layouts
 
 **Scaling Behavior:**
+
 ```css
 /* Headings in mid-range */
 .text-hero-h1      { font-size: clamp(2.25rem, 6vw, 7.5rem); }    /* 46px → 61px */
@@ -103,10 +127,13 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .text-subsection-h3 { font-size: clamp(1.25rem, 3vw, 2rem); }     /* 24px → 30px */
 
 /* Body text approaching desktop comfort */
-.text-body-guideline { font-size: clamp(1rem, 1.5vw, 1.25rem); }  /* 18px → 19px */
-```
+.text-body-guideline { font-size: clamp(1rem, 1.5vw, 1.25rem); } /* 18px → 19px
+*/
 
-**Tablet-Specific Considerations:**
+```text
+
+## Tablet-Specific Considerations
+
 ```css
 /* Portrait vs Landscape */
 @media (orientation: portrait) {
@@ -122,17 +149,20 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
     line-height: 1.5;
   }
 }
-```
+
+```text
 
 ### Desktop (1024px+)
 
-**Typography Priorities:**
+## Typography Priorities (2)
+
 - ✅ Maximum visual impact
 - ✅ Comfortable long-form reading
 - ✅ Clear hierarchy with ample spacing
 - ✅ Sophisticated typography details
 
 **Scaling Behavior:**
+
 ```css
 /* Headings at maximum size */
 .text-hero-h1      { font-size: clamp(2.25rem, 6vw, 7.5rem); }    /* 61px → 120px */
@@ -140,20 +170,24 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .text-subsection-h3 { font-size: clamp(1.25rem, 3vw, 2rem); }     /* 30px → 32px */
 
 /* Body text at optimal reading size */
-.text-body-guideline { font-size: clamp(1rem, 1.5vw, 1.25rem); }  /* 19px → 20px */
-```
+.text-body-guideline { font-size: clamp(1rem, 1.5vw, 1.25rem); } /* 19px → 20px
+*/
 
-**Desktop-Specific Enhancements:**
+```text
+
+## Desktop-Specific Enhancements
+
 ```css
 /* Enhanced typography details */
 .desktop-typography {
   letter-spacing: -0.02em;    /* Optical adjustment for large text */
-  font-feature-settings: 
+  font-feature-settings:
     "kern" 1,                  /* Kerning */
     "liga" 1,                  /* Ligatures */
     "calt" 1;                  /* Contextual alternates */
 }
-```
+
+```text
 
 ---
 
@@ -171,20 +205,25 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
-```
 
-**Responsive Behavior:**
+```text
+
+## Responsive Behavior
+
 - **Mobile (320px):** 36px - Fits within screen, remains impactful
 - **Tablet (768px):** 46px - Balanced presence without overwhelming
 - **Desktop (1440px):** 86px - Maximum drama and visual hierarchy
 - **Large Desktop (1920px+):** 120px - Caps at maximum for readability
 
 **Usage Example:**
+
 ```tsx
-<h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue dark:text-purple-100">
+<h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue
+dark:text-purple-100">
   Ash Shaw
 </h1>
-```
+
+```text
 
 ### H2 - Section Headers
 
@@ -198,9 +237,11 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
   line-height: 1.2;
   letter-spacing: -0.015em;
 }
-```
 
-**Responsive Behavior:**
+```text
+
+## Responsive Behavior (1)
+
 - **Mobile (320px):** 24px - Clear hierarchy below H1
 - **Tablet (768px):** 30px - Strong section presence
 - **Desktop (1440px):** 57px - Commanding section headers
@@ -218,9 +259,11 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
-```
 
-**Responsive Behavior:**
+```text
+
+## Responsive Behavior (2)
+
 - **Mobile (320px):** 20px - Readable subdivision
 - **Tablet (768px):** 24px - Clear subsection markers
 - **Desktop (1440px):** 43px - Prominent organization
@@ -237,9 +280,11 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
   font-weight: 600;
   line-height: 1.3;
 }
-```
 
-**Responsive Behavior:**
+```text
+
+## Responsive Behavior (3)
+
 - **Mobile (320px):** 18px - Compact but readable
 - **Tablet (768px):** 20px - Strong card presence
 - **Desktop (1440px):** 28px - Prominent component headings
@@ -261,21 +306,25 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
   line-height: 1.6;
   letter-spacing: normal;
 }
-```
 
-**Responsive Behavior:**
+```text
+
+## Responsive Behavior (4)
+
 - **Mobile (320px):** 16px - Standard reading size
 - **Tablet (768px):** 18px - Comfortable reading
 - **Desktop (1440px):** 21px - Optimal desktop reading
 - **Large Desktop (1920px+):** 20px - Prevents text from becoming too large
 
-**Optimal Line Length:**
+## Optimal Line Length
+
 ```css
 /* Constrain reading width for comfort */
 .reading-width {
   max-width: 65ch;  /* 65 characters per line */
 }
-```
+
+```text
 
 ### Small Text
 
@@ -288,9 +337,11 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
   font-weight: 400;
   line-height: 1.5;
 }
-```
 
-**Responsive Behavior:**
+```text
+
+## Responsive Behavior (5)
+
 - **Mobile (320px):** 14px - Minimum legible size
 - **Tablet (768px):** 15px - Clear metadata
 - **Desktop (1440px+):** 16px - Standard small text
@@ -307,9 +358,11 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
   line-height: 1.2;
   letter-spacing: 0.01em;
 }
-```
 
-**Responsive Behavior:**
+```text
+
+## Responsive Behavior (6)
+
 - **Mobile (320px):** 16px - Large touch targets
 - **Tablet (768px):** 17px - Prominent CTAs
 - **Desktop (1440px+):** 18px - Clear call to action
@@ -342,7 +395,8 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .text-card-title {
   line-height: 1.4;  /* Multi-line friendly */
 }
-```
+
+```text
 
 ### Body Line Heights
 
@@ -363,9 +417,11 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .text-compact {
   line-height: 1.5;  /* Efficient vertical space */
 }
-```
 
-**Mobile Adjustments:**
+```text
+
+## Mobile Adjustments
+
 ```css
 @media (max-width: 767px) {
   /* Increase line height on mobile for easier reading */
@@ -373,7 +429,8 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
     line-height: 1.65;
   }
 }
-```
+
+```text
 
 ---
 
@@ -398,9 +455,11 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .text-subsection-h3 {
   letter-spacing: -0.01em;
 }
-```
 
-**Why Negative Tracking?**
+```text
+
+## Why Negative Tracking
+
 - Large text appears spaced out optically
 - Negative tracking improves visual cohesion
 - Creates more impactful, professional appearance
@@ -419,7 +478,8 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .text-fluid-sm {
   letter-spacing: 0.005em;  /* Improve legibility */
 }
-```
+
+```text
 
 ### Button Text (Interactive Elements)
 
@@ -435,17 +495,19 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .button-uppercase {
   letter-spacing: 0.05em;  /* Prevent cramping */
 }
-```
+
+```text
 
 ---
 
 ## Reading Width
 
-### Optimal Line Length
+### Optimal Line Length (1)
 
 **Purpose:** Maintain comfortable reading regardless of viewport width
 
-**The 65-Character Rule:**
+## The 65-Character Rule
+
 - Ideal line length: **45-75 characters**
 - Optimal: **65 characters per line**
 - Prevents eye strain and improves comprehension
@@ -469,7 +531,8 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
 .narrow-reading {
   max-width: 55ch;      /* Focused reading */
 }
-```
+
+```text
 
 ### Responsive Reading Width
 
@@ -496,7 +559,8 @@ Viewport contribution = (max-size - min-size) / (max-viewport - min-viewport) * 
     max-width: 70ch;
   }
 }
-```
+
+```text
 
 ---
 
@@ -510,18 +574,21 @@ export function HeroSection() {
     <section className="py-fluid-2xl">
       <div className="container mx-auto px-fluid-md">
         {/* Hero title - fluid scaling */}
-        <h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue dark:text-purple-100 mb-fluid-md text-center lg:text-left">
+<h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue
+dark:text-purple-100 mb-fluid-md text-center lg:text-left">
           Ash Shaw
         </h1>
-        
+
         {/* Tagline - responsive sizing */}
-        <p className="text-fluid-xl font-body font-normal text-gray-700 dark:text-purple-200 mb-fluid-lg text-center lg:text-left max-w-3xl">
+<p className="text-fluid-xl font-body font-normal text-gray-700
+dark:text-purple-200 mb-fluid-lg text-center lg:text-left max-w-3xl">
           Makeup that shines with colour, energy, and connection.
         </p>
-        
+
         {/* Body text - constrained width */}
         <div className="reading-container">
-          <p className="text-body-guideline font-body font-normal text-gray-600 dark:text-purple-300 leading-relaxed">
+<p className="text-body-guideline font-body font-normal text-gray-600
+dark:text-purple-300 leading-relaxed">
             Detailed description content here...
           </p>
         </div>
@@ -529,7 +596,8 @@ export function HeroSection() {
     </section>
   );
 }
-```
+
+```text
 
 ### Component Pattern: Blog Post
 
@@ -538,28 +606,33 @@ export function BlogPost() {
   return (
     <article className="container mx-auto px-fluid-md py-fluid-lg">
       {/* Article title */}
-      <h1 className="text-section-h2 font-heading font-bold text-gray-800 dark:text-purple-100 mb-fluid-md">
+<h1 className="text-section-h2 font-heading font-bold text-gray-800
+dark:text-purple-100 mb-fluid-md">
         Festival Makeup Guide 2025
       </h1>
-      
+
       {/* Article content with optimal reading width */}
       <div className="article-content">
-        <p className="text-body-guideline font-body font-normal text-gray-700 dark:text-purple-200 leading-relaxed mb-fluid-md">
+<p className="text-body-guideline font-body font-normal text-gray-700
+dark:text-purple-200 leading-relaxed mb-fluid-md">
           Long-form content with optimal line length...
         </p>
-        
-        <h2 className="text-subsection-h3 font-heading font-semibold text-gray-800 dark:text-purple-100 mt-fluid-lg mb-fluid-md">
+
+<h2 className="text-subsection-h3 font-heading font-semibold text-gray-800
+dark:text-purple-100 mt-fluid-lg mb-fluid-md">
           Subsection Title
         </h2>
-        
-        <p className="text-body-guideline font-body font-normal text-gray-700 dark:text-purple-200 leading-relaxed">
+
+<p className="text-body-guideline font-body font-normal text-gray-700
+dark:text-purple-200 leading-relaxed">
           More content...
         </p>
       </div>
     </article>
   );
 }
-```
+
+```text
 
 ### Component Pattern: Card Grid
 
@@ -568,17 +641,20 @@ export function PortfolioGrid() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md">
       {items.map((item) => (
-        <article key={item.id} className="bg-white dark:bg-purple-900 rounded-xl p-fluid-md">
+<article key={item.id} className="bg-white dark:bg-purple-900 rounded-xl
+p-fluid-md">
           {/* Card title - scales with viewport */}
-          <h3 className="text-card-title font-heading font-semibold text-gray-800 dark:text-purple-100 mb-fluid-sm line-clamp-2">
+<h3 className="text-card-title font-heading font-semibold text-gray-800
+dark:text-purple-100 mb-fluid-sm line-clamp-2">
             {item.title}
           </h3>
-          
+
           {/* Card description - readable size */}
-          <p className="text-body-guideline font-body font-normal text-gray-600 dark:text-purple-300 line-clamp-3">
+<p className="text-body-guideline font-body font-normal text-gray-600
+dark:text-purple-300 line-clamp-3">
             {item.description}
           </p>
-          
+
           {/* Metadata - small text */}
           <div className="flex items-center gap-fluid-sm mt-fluid-sm">
             <span className="text-fluid-sm font-body text-gray-500 dark:text-purple-400">
@@ -590,7 +666,8 @@ export function PortfolioGrid() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -630,6 +707,6 @@ export function PortfolioGrid() {
 
 ---
 
-**Version:** 1.0.0  
-**Last Updated:** January 2025  
+**Version:** 1.0.0
+**Last Updated:** January 2025
 **Maintained by:** Ash Shaw Portfolio Team

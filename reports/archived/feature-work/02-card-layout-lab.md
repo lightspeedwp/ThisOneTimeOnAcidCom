@@ -1,6 +1,7 @@
 # Feature work Sub-audit 2: Card & Layout Lab — completion report
 
-**Prompt:** [/prompts/feature-work/02-portfolio-redesign.md](../../prompts/feature-work/02-portfolio-redesign.md)
+**Prompt:**
+[/prompts/feature-work/02-portfolio-redesign.md](../../prompts/feature-work/02-portfolio-redesign.md)
 **Status:** COMPLETE
 **Completed:** March 6, 2026
 **Version:** 1.0.0
@@ -9,7 +10,10 @@
 
 ## Objective
 
-Build a comprehensive Card & Layout Laboratory inside the dev tools system — a visual playground where every card shape, interaction, grid layout, and detail page template can be previewed, compared, and evaluated before any production decisions are made.
+Build a comprehensive Card & Layout Laboratory inside the dev tools system — a
+visual playground where every card shape, interaction, grid layout, and detail
+page template can be previewed, compared, and evaluated before any production
+decisions are made.
 
 ---
 
@@ -68,8 +72,10 @@ Build a comprehensive Card & Layout Laboratory inside the dev tools system — a
 ## Issues resolved during implementation
 
 1. **`BrowsersThree` icon import** — Phosphor does not export `BrowsersThree`; changed data to use `Browsers` and mapped it in TOOL_ICONS
-2. **Detail template href mismatches** — Fixed hrefs in `detail-templates-lab.ts` to match registered routes
-3. **`setSEO` crash** — 30 missing SEO entries added to `/data/mock/seo/pages.ts`; `setSEO()` in `/utils/seo.ts` hardened to fall back to defaults when called with `undefined`
+
+1. **Detail template href mismatches** — Fixed hrefs in `detail-templates-lab.ts` to match registered routes
+
+1. **`setSEO` crash** — 30 missing SEO entries added to `/data/mock/seo/pages.ts`; `setSEO()` in `/utils/seo.ts` hardened to fall back to defaults when called with `undefined`
 
 ---
 

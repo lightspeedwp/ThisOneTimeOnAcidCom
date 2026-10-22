@@ -1,10 +1,12 @@
 # Sub-audit 5: Design system expansion — all answers received
 
 **Created:** March 8, 2026
-**Updated:** March 8, 2026 (ALL 15 questions answered + Theme Engine specification received)
+**Updated:** March 8, 2026 (ALL 15 questions answered + Theme Engine
+specification received)
 **Status:** ALL 15/15 QUESTIONS ANSWERED — ready for implementation
 **Prompt:** `/prompts/feature-work/05-design-system-expansion.md` + ADDENDUM
-**Source:** `/imports/pending-questions.md` (user-provided answers + theme engine brief)
+**Source:** `/imports/pending-questions.md` (user-provided answers + theme
+engine brief)
 
 ---
 
@@ -34,7 +36,8 @@
 
 ### Overview
 
-The current binary dark/light toggle will be replaced by a **multi-theme engine** with 8 themes across 2 phases:
+The current binary dark/light toggle will be replaced by a **multi-theme
+engine** with 8 themes across 2 phases:
 
 ### Phase 1 themes (priority build order)
 
@@ -90,12 +93,18 @@ The current binary dark/light toggle will be replaced by a **multi-theme engine*
 ### Deployment checklist items
 
 1. Root purge: Replace hardcoded hex values with `var()` references
-2. Figma Make: Swap static SVGs for inline SVGs where variable penetration needed
-3. Z-index audit: Switcher at z-index 9999
-4. Safari blur test: `@supports` guard for backdrop-filter
-5. Animation cap: Max 5 concurrent, verify via Chrome Paint Flashing
-6. Zero-flash script in `<head>`
-7. Contrast stress test: Brutalist + Neon readability verification
+
+1. Figma Make: Swap static SVGs for inline SVGs where variable penetration needed
+
+1. Z-index audit: Switcher at z-index 9999
+
+1. Safari blur test: `@supports` guard for backdrop-filter
+
+1. Animation cap: Max 5 concurrent, verify via Chrome Paint Flashing
+
+1. Zero-flash script in `<head>`
+
+1. Contrast stress test: Brutalist + Neon readability verification
 
 ---
 
@@ -119,6 +128,7 @@ The current binary dark/light toggle will be replaced by a **multi-theme engine*
 ## Implementation sequence (confirmed)
 
 ### Phase 1: Foundation & architecture (sessions 1-3)
+
 - Global Block Library landing page (`/dev-tools/block-library`)
 - Patterns Library landing page (`/dev-tools/patterns`)
 - BlockLabTemplate shared component
@@ -131,22 +141,26 @@ The current binary dark/light toggle will be replaced by a **multi-theme engine*
 - Performance guard hook
 
 ### Phase 2: Core Blocks A (sessions 4-9)
+
 - Paragraph Block Laboratory (20 variations)
 - Heading Block Laboratory (25 variations)
 - Button Block Laboratory (20 variations)
 - List Block Laboratory (10 variations)
 
 ### Phase 3: Core Blocks B (sessions 10-17)
+
 - Divider (10), Forms (5), Image (10), Navigation (10)
 - Breadcrumbs (10), Gallery (10), Social Icons (5), Search (10)
 - Table Block (10 with sorting/filtering/pagination)
 - Code Block (10 with syntax highlighting for 6 languages)
 
 ### Phase 4: Pattern Compositions (sessions 18-22)
+
 - Hero (10), CTA (10), Testimonials (5, with visual waveform), Countdown (5, real-time + static)
 - ~~Pricing (5)~~ — SKIPPED
 
 ### Phase 5: Theme expansion + polish (sessions 23-28)
+
 - Neon + Glassmorphism CSS variable sheets
 - Phase 2 themes: Neumorphism, Claymorphism, Retro, Skeuomorphic
 - Mobile performance optimisation (usePerformanceGuard, media queries)
@@ -160,5 +174,7 @@ The current binary dark/light toggle will be replaced by a **multi-theme engine*
 ## Next steps
 
 1. Create task list at `/tasks/design-system-expansion-tasks.md`
-2. Update orchestrator status to "IN PROGRESS — Phase 1"
-3. Begin Phase 1: Foundation & Architecture
+
+1. Update orchestrator status to "IN PROGRESS — Phase 1"
+
+1. Begin Phase 1: Foundation & Architecture

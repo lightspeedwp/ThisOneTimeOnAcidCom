@@ -1,6 +1,7 @@
 # 🎨 Dark Mode Theme Customization Guide
 
-Learn how to customize the dark mode theme while maintaining accessibility and visual consistency.
+Learn how to customize the dark mode theme while maintaining accessibility and
+visual consistency.
 
 **Version:** 2.0.0 | **Last Updated:** March 11, 2026
 
@@ -9,13 +10,20 @@ Learn how to customize the dark mode theme while maintaining accessibility and v
 ## 📋 Table of Contents
 
 1. [Color Customization](#color-customization)
-2. [Typography Customization](#typography-customization)
-3. [Spacing & Sizing](#spacing--sizing)
-4. [Glow Effects](#glow-effects)
-5. [Animation Speed](#animation-speed)
-6. [Brand Adaptation](#brand-adaptation)
-7. [Component Overrides](#component-overrides)
-8. [Custom Themes](#custom-themes)
+
+1. [Typography Customization](#typography-customization)
+
+1. [Spacing & Sizing](#spacing--sizing)
+
+1. [Glow Effects](#glow-effects)
+
+1. [Animation Speed](#animation-speed)
+
+1. [Brand Adaptation](#brand-adaptation)
+
+1. [Component Overrides](#component-overrides)
+
+1. [Custom Themes](#custom-themes)
 
 ---
 
@@ -30,7 +38,7 @@ Learn how to customize the dark mode theme while maintaining accessibility and v
 :root.dark {
   /* Override primary accent */
   --color-neon-pink: #00FF85; /* Now using green */
-  
+
   /* Update gradient to match */
   --gradient-primary: linear-gradient(
     135deg,
@@ -48,9 +56,11 @@ Learn how to customize the dark mode theme while maintaining accessibility and v
 .button--primary:hover {
   box-shadow: 0 0 30px rgba(0, 255, 133, 0.6); /* Green glow */
 }
-```
 
-**Accessibility Note:** Always verify your new color maintains **4.5:1 contrast minimum** against `#0F0F0F` background.
+```text
+
+**Accessibility Note:** Always verify your new color maintains **4.5:1 contrast
+minimum** against `#0F0F0F` background.
 
 ### Creating a Custom Color Palette
 
@@ -60,7 +70,7 @@ Learn how to customize the dark mode theme while maintaining accessibility and v
   --brand-electric: #00FFFF;      /* Bright cyan */
   --brand-magenta: #FF00FF;       /* Bright magenta */
   --brand-lime: #CCFF00;          /* Electric lime */
-  
+
   /* Apply to components */
   --color-neon-pink: var(--brand-electric);
   --color-neon-yellow: var(--brand-lime);
@@ -80,25 +90,28 @@ Learn how to customize the dark mode theme while maintaining accessibility and v
   border-color: var(--brand-electric);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
 }
-```
+
+```text
 
 ### Surface Color Adjustments
 
-**Make backgrounds lighter or darker:**
+## Make backgrounds lighter or darker
 
 ```css
 :root.dark {
   /* Lighter variant (less intense) */
   --color-atomic-black: #1A1A1A;  /* Was #0F0F0F */
   --color-dark-charcoal: #242424;  /* Was #1A1A1A */
-  
+
   /* OR darker variant (more intense) */
   --color-atomic-black: #080808;   /* Darker */
   --color-dark-charcoal: #121212;  /* Darker */
 }
-```
 
-**Accessibility Warning:** Darker backgrounds require brighter text colors to maintain contrast ratios.
+```text
+
+**Accessibility Warning:** Darker backgrounds require brighter text colors to
+maintain contrast ratios.
 
 ---
 
@@ -126,7 +139,8 @@ body, p, li, td {
 code, pre {
   font-family: var(--font-mono);
 }
-```
+
+```text
 
 ### Adjusting Font Sizes
 
@@ -141,7 +155,8 @@ code, pre {
   --font-size-2xl: 2.4rem;    /* Was 2rem */
   --font-size-3xl: 3rem;      /* Was 2.5rem */
 }
-```
+
+```text
 
 ### Line Height Adjustments
 
@@ -151,13 +166,14 @@ code, pre {
   --line-height-tight: 1.2;   /* Was 1.25 */
   --line-height-normal: 1.4;  /* Was 1.5 */
   --line-height-relaxed: 1.6; /* Was 1.75 */
-  
+
   /* OR looser for more breathing room */
   --line-height-tight: 1.4;
   --line-height-normal: 1.7;
   --line-height-relaxed: 2.0;
 }
-```
+
+```text
 
 ---
 
@@ -176,7 +192,7 @@ code, pre {
   --space-8: 2rem;     /* 32px */
   --space-12: 3rem;    /* 48px */
   --space-16: 4rem;    /* 64px */
-  
+
   /* OR generous spacing (desktop-focused) */
   --space-1: 0.5rem;   /* 8px */
   --space-2: 1rem;     /* 16px */
@@ -187,7 +203,8 @@ code, pre {
   --space-12: 6rem;    /* 96px */
   --space-16: 8rem;    /* 128px */
 }
-```
+
+```text
 
 ### Border Radius Customization
 
@@ -198,7 +215,7 @@ code, pre {
   --radius-md: 0;
   --radius-lg: 0;
   --radius-full: 0;
-  
+
   /* OR super rounded */
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -218,7 +235,8 @@ code, pre {
 .badge {
   border-radius: var(--radius-full);
 }
-```
+
+```text
 
 ---
 
@@ -244,13 +262,14 @@ code, pre {
 
 /* Multiple glow layers (ultra cyberpunk) */
 .button--primary:hover {
-  box-shadow: 
+  box-shadow:
     0 0 10px rgba(255, 58, 174, 0.8),
     0 0 20px rgba(255, 58, 174, 0.6),
     0 0 40px rgba(255, 58, 174, 0.4),
     0 0 80px rgba(255, 58, 174, 0.2);
 }
-```
+
+```text
 
 ### Custom Glow Colors
 
@@ -273,7 +292,8 @@ code, pre {
   border-color: #00D4FF;
   box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
 }
-```
+
+```text
 
 ### Animated Glow (Pulsing)
 
@@ -297,7 +317,8 @@ code, pre {
     animation: none;
   }
 }
-```
+
+```text
 
 ---
 
@@ -311,7 +332,7 @@ code, pre {
   --duration-fast: 100ms;
   --duration-normal: 200ms;
   --duration-slow: 300ms;
-  
+
   /* OR slow animations (smooth) */
   --duration-fast: 200ms;
   --duration-normal: 400ms;
@@ -326,7 +347,8 @@ code, pre {
 .modal {
   transition: opacity var(--duration-slow) ease;
 }
-```
+
+```text
 
 ### Easing Functions
 
@@ -342,7 +364,8 @@ code, pre {
 .button:hover {
   transition: transform 300ms var(--ease-bounce);
 }
-```
+
+```text
 
 ---
 
@@ -357,13 +380,13 @@ code, pre {
   --brand-blue: #3E92CC;
   --brand-cyan: #0AAEFF;
   --brand-white: #FFFFFF;
-  
+
   /* Map to theme variables */
   --color-atomic-black: #0A1628;
   --color-dark-charcoal: #162542;
   --color-neon-pink: var(--brand-cyan);
   --color-neon-violet: var(--brand-blue);
-  
+
   /* Update gradients */
   --gradient-primary: linear-gradient(
     135deg,
@@ -380,7 +403,8 @@ code, pre {
 .button--primary:hover {
   box-shadow: 0 0 20px rgba(14, 174, 255, 0.5);
 }
-```
+
+```text
 
 ### Example: Eco Green Theme
 
@@ -391,7 +415,7 @@ code, pre {
   --brand-green: #2ECC71;
   --brand-lime: #A8E063;
   --brand-mint: #56F89A;
-  
+
   /* Apply to theme */
   --color-atomic-black: #0A2818;
   --color-dark-charcoal: #153828;
@@ -399,7 +423,8 @@ code, pre {
   --color-neon-yellow: var(--brand-lime);
   --color-neon-violet: var(--brand-mint);
 }
-```
+
+```text
 
 ### Example: Sunset Orange Theme
 
@@ -410,12 +435,12 @@ code, pre {
   --brand-coral: #FF8C61;
   --brand-yellow: #FFB347;
   --brand-pink: #FF6FB5;
-  
+
   /* Apply to theme */
   --color-neon-pink: var(--brand-pink);
   --color-neon-yellow: var(--brand-yellow);
   --color-neon-orange: var(--brand-orange);
-  
+
   /* Warm gradient */
   --gradient-primary: linear-gradient(
     135deg,
@@ -423,7 +448,8 @@ code, pre {
     var(--brand-pink) 100%
   );
 }
-```
+
+```text
 
 ---
 
@@ -468,7 +494,8 @@ code, pre {
   justify-content: center;
   border-radius: 50%;
 }
-```
+
+```text
 
 ### Custom Card Styles
 
@@ -506,7 +533,8 @@ code, pre {
   border-radius: inherit;
   z-index: -1;
 }
-```
+
+```text
 
 ### Custom Form Elements
 
@@ -537,7 +565,7 @@ code, pre {
   padding-top: 1rem;
 }
 
-.form__group--floating .form__label {
+.form_*group--floating .form*_label {
   position: absolute;
   top: 1.5rem;
   left: 1rem;
@@ -545,13 +573,14 @@ code, pre {
   pointer-events: none;
 }
 
-.form__group--floating .form__input:focus + .form__label,
-.form__group--floating .form__input:not(:placeholder-shown) + .form__label {
+.form_*group--floating .form**input:focus + .form*_label,
+.form_*group--floating .form**input:not(:placeholder-shown) + .form*_label {
   top: 0.25rem;
   font-size: 0.75rem;
   color: #FF3AAE;
 }
-```
+
+```text
 
 ---
 
@@ -565,24 +594,26 @@ type Theme = 'dark' | 'cyberpunk' | 'corporate' | 'eco';
 
 function applyTheme(theme: Theme) {
   var html = document.documentElement;
-  
+
   // Remove all theme classes
-  html.classList.remove('dark', 'theme-cyberpunk', 'theme-corporate', 'theme-eco');
-  
+html.classList.remove('dark', 'theme-cyberpunk', 'theme-corporate',
+'theme-eco');
+
   // Apply selected theme
   if (theme === 'dark') {
     html.classList.add('dark');
   } else {
     html.classList.add('dark', 'theme-' + theme);
   }
-  
+
   // Save preference
   localStorage.setItem('theme', theme);
 }
 
 // Usage
 applyTheme('cyberpunk');
-```
+
+```text
 
 ### Cyberpunk Theme Variant
 
@@ -601,11 +632,12 @@ applyTheme('cyberpunk');
 
 .theme-cyberpunk .card {
   border: 2px solid #FF0080;
-  box-shadow: 
+  box-shadow:
     0 0 10px rgba(255, 0, 128, 0.5),
     0 0 20px rgba(255, 0, 128, 0.3);
 }
-```
+
+```text
 
 ### Corporate Theme Variant
 
@@ -627,7 +659,8 @@ applyTheme('cyberpunk');
   border-color: #0AAEFF;
   box-shadow: 0 4px 12px rgba(10, 174, 255, 0.2); /* Subtle shadow */
 }
-```
+
+```text
 
 ### Eco Theme Variant
 
@@ -648,7 +681,8 @@ applyTheme('cyberpunk');
 .theme-eco .card {
   border-color: #2ECC71;
 }
-```
+
+```text
 
 ---
 
@@ -661,10 +695,10 @@ applyTheme('cyberpunk');
 function getContrastRatio(color1, color2) {
   var lum1 = getLuminance(color1);
   var lum2 = getLuminance(color2);
-  
+
   var lighter = Math.max(lum1, lum2);
   var darker = Math.min(lum1, lum2);
-  
+
   return (lighter + 0.05) / (darker + 0.05);
 }
 
@@ -673,11 +707,11 @@ function getLuminance(hex) {
   var r = rgb.r / 255;
   var g = rgb.g / 255;
   var b = rgb.b / 255;
-  
+
   r = r <= 0.03928 ? r / 12.92 : Math.pow((r + 0.055) / 1.055, 2.4);
   g = g <= 0.03928 ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4);
   b = b <= 0.03928 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4);
-  
+
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
@@ -687,7 +721,8 @@ console.log('Contrast ratio:', ratio.toFixed(2) + ':1');
 
 // WCAG AA requires 4.5:1 for normal text
 // WCAG AAA requires 7:1 for normal text
-```
+
+```text
 
 ### Visual Regression Testing
 
@@ -712,7 +747,8 @@ components.forEach(function(selector) {
     });
   }
 });
-```
+
+```text
 
 ---
 
@@ -742,29 +778,35 @@ components.forEach(function(selector) {
 
 ### Step-by-Step Process
 
-**1. Define Your Brand Colors**
+## 1. Define Your Brand Colors
+
 ```css
 :root.dark {
   --brand-primary: #YOUR_COLOR;
   --brand-secondary: #YOUR_COLOR;
   --brand-accent: #YOUR_COLOR;
 }
-```
 
-**2. Map to Theme Variables**
+```text
+
+## 2. Map to Theme Variables
+
 ```css
 :root.dark {
   --color-neon-pink: var(--brand-primary);
   --color-neon-violet: var(--brand-secondary);
 }
-```
 
-**3. Test Contrast Ratios**
+```text
+
+## 3. Test Contrast Ratios
+
 - Use WebAIM Contrast Checker
 - Verify 4.5:1 minimum for all text
 - Adjust if needed
 
-**4. Update Components**
+## 4. Update Components
+
 ```css
 .button--primary {
   background: linear-gradient(
@@ -773,24 +815,29 @@ components.forEach(function(selector) {
     var(--brand-secondary) 100%
   );
 }
-```
 
-**5. Test Thoroughly**
+```text
+
+## 5. Test Thoroughly
+
 - Visual inspection
 - Keyboard navigation
 - Screen reader
 - Multiple browsers
 - Mobile devices
 
-**6. Document Changes**
+## 6. Document Changes
+
 ```markdown
+
 ## Theme Customizations
 
 - Changed primary color from #FF3AAE to #YOUR_COLOR
 - Updated button gradient
 - Modified card hover effects
 - Tested contrast: 7.2:1 (WCAG AAA ✅)
-```
+
+```text
 
 ---
 
@@ -803,6 +850,6 @@ components.forEach(function(selector) {
 
 ---
 
-**Last Updated:** March 11, 2026  
-**Version:** 2.0.0  
+**Last Updated:** March 11, 2026
+**Version:** 2.0.0
 **Customization Level:** Advanced

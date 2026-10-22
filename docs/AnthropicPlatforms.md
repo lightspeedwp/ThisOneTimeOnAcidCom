@@ -1,6 +1,6 @@
 # Anthropic Platform Applicability Assessment
 
-**Generated:** 19 October 2026 (updated)  
+**Generated:** 19 October 2026 (updated)
 **Spec Reference:**
 `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.2)
 **Task:** T049
@@ -51,7 +51,7 @@ execution boundaries.
 | Execution boundaries | Managed Agents | Enforce via sandbox policies | ✅ Available |
 | Constraint documentation | Git; Claude Docs interface for authoring | Version spec in `.github/specs/`; no Claude Docs API integration configured | ✅ Git storage in use |
 
-**Applicability:** ✅ **ALL APPLICABLE**  
+**Applicability:** ✅ **ALL APPLICABLE**
 All platforms support the inventory and contract specification approach. Managed
 Agents provide runtime enforcement.
 
@@ -84,14 +84,14 @@ agent.
 | Control Type | Platform | Implementation | Status |
 |--------------|----------|-----------------|--------|
 | Per-response output limit | Claude API Messages | `max_tokens` bounds the output of one response, not total session usage | ✅ API parameter; no aggregate enforcement configured here |
-| Session spend budget | Managed Agents | Set session `budget.type: "limit"` and `budget.max_list_cost` at creation; platform stops new model requests at the cap, while an in-flight request may finish | ⚠️ Available platform control; not configured here |
+| Session spend budget | Managed Agents | Set session `budget.type: "limit"` and `budget.max*list*cost` at creation; platform stops new model requests at the cap, while an in-flight request may finish | ⚠️ Available platform control; not configured here |
 | Aggregate token budget | Host-side admission middleware | Reserve tokens before dispatch; reconcile input/output and cached-token usage across calls, retries, and subagents; block dispatch or cancel on exhaustion | ⏳ Required by R7.3; not implemented here (TOA-271) |
 | Invocation quotas | Custom middleware | Track invocations via MCP logging | ⚠️ Manual tracking needed |
 | Endpoint rate limits | Managed Agents | Published organisation-level limits: 300 create requests/minute; 1,200 read/list/stream requests/minute | ✅ Platform limits; not a per-agent setting |
 | Per-agent rate limiting | Host-side admission middleware | Configure a limiter keyed by agent before dispatch | ⏳ No per-agent requests/second setting configured here (TOA-271) |
 | Cost tracking | API usage logs | Monitor token consumption per agent | ✅ Available |
 
-**Applicability:** ✅ **MOSTLY APPLICABLE**  
+**Applicability:** ✅ **MOSTLY APPLICABLE**
 Managed Agents provide a session spend budget and organisation-level endpoint
 limits. Neither enforces the per-agent aggregate token budget. The required
 enforcement point is host-side admission middleware, which must account across
@@ -210,18 +210,22 @@ establish automatic server-side timeout fallback for this workflow.
 ### Claude API (Messages + Tool Use)
 
 **Best For:**
+
 - Real-time agent reasoning and decision-making
 - Dynamic tool selection based on context
 - Multi-turn conversations with context preservation
 
 **Constraints:**
+
 - Session timeout after inactivity
 - Token context window limits (1M tokens each for Haiku 5.5, Opus 5.5, Sonnet
   5.5, and Fable 5.1)
+
 - Persist workflow state in application-owned storage (Git/files or an
   explicitly integrated database)
 
-**Governance Use Cases:**
+## Governance Use Cases
+
 - Spec clarification and planning workflows
 - Branch validation and labeling logic
 - PR template routing decisions
@@ -229,16 +233,19 @@ establish automatic server-side timeout fallback for this workflow.
 ### Managed Agents
 
 **Best For:**
+
 - Long-running governance workflows (>30min)
 - Background task execution outside user sessions
 - Enforcing budget controls via sandbox
 
 **Constraints:**
+
 - Higher latency (server roundtrip)
 - Limited I/O operations vs. direct API
 - Agent must run to completion (no interactive input)
 
-**Governance Use Cases:**
+## Governance Use Cases (1)
+
 - Nightly workflow validation
 - Scheduled spec regression testing
 - Automated governance audit jobs
@@ -246,23 +253,30 @@ establish automatic server-side timeout fallback for this workflow.
 ### Prompt Caching
 
 **Best For:**
+
 - Reducing latency on repeated stable prefixes that meet the model's cache
   minimum
+
 - Lowering costs when spec context is reused
 - Multi-agent workflows sharing same reference specs
 
 **Constraints:**
+
 - Caching covers the prompt prefix up to a cache breakpoint (`cache_control`); a
   stable prefix can be cached alongside a variable suffix
+
 - Cache levels follow `tools` → `system` → `messages`; changing a level
   invalidates that level and subsequent levels, while earlier unchanged prefixes
   can remain cached
+
 - Minimum cacheable length is measured in tokens and depends on the model and
   platform
+
 - Default TTL is 5 minutes, refreshed on cache hits; a 1-hour option is
   available with `cache_control: {"type": "ephemeral", "ttl": "1h"}`
 
-**Governance Use Cases:**
+## Governance Use Cases (2)
+
 - Multi-agent task coordination (all agents read same spec context)
 - SpecKit pipeline (spec → plan → tasks, reuse spec context)
 - Workflow validation (agents share governance config context)
@@ -270,16 +284,19 @@ establish automatic server-side timeout fallback for this workflow.
 ### MCP (Model Context Protocol)
 
 **Best For:**
+
 - Connecting Claude to external tools (GitHub API, Slack, Linear)
 - Real-time data access without manual fetching
 - Event-driven workflows (GitHub webhooks → Claude agents)
 
 **Constraints:**
+
 - Requires MCP server setup for each integration
 - Tool latency adds to total response time
 - Error handling must account for external service downtime
 
-**Governance Use Cases:**
+## Governance Use Cases (3)
+
 - GitHub event webhook handlers (PR opened → run validation)
 - Slack notifications for governance decisions
 - Direct Linear issue creation from test results
@@ -287,19 +304,24 @@ establish automatic server-side timeout fallback for this workflow.
 ### Application-owned storage & Claude Docs interface
 
 **Best For:**
+
 - Storing specifications and governance configuration
 - Collaborative authoring with version history
 - Render spec content alongside agent reasoning
 
 **Constraints:**
+
 - This repository stores specifications and agent contracts in Git; a database
   or remote store requires application integration
+
 - Authentication, size limits, retention, and audit history depend on the chosen
   storage backend
+
 - Claude Docs is an authoring/review interface; no API integration with this
   workflow is established
 
-**Governance Use Cases:**
+## Governance Use Cases (4)
+
 - Persist `.github/specs/` artifacts with version control
 - Collaborative spec clarification (multiple team members)
 - Audit trail of spec changes over time
@@ -337,19 +359,25 @@ Use this matrix to select the best platform(s) for a given governance task:
 ### Immediate Actions (Phase 2)
 
 1. ✅ Use **Claude API + Tool Use** for all real-time governance tasks (branch validation, PR routing)
-2. ✅ Deploy **MCP servers** for GitHub, Slack, Linear integration (tooling ready)
-3. ✅ Keep governance artifacts in **Git**; integrate application-owned storage
+
+1. ✅ Deploy **MCP servers** for GitHub, Slack, Linear integration (tooling ready)
+
+1. ✅ Keep governance artifacts in **Git**; integrate application-owned storage
    if additional persistence or audit exports are needed
-4. ⏳ Design host-side aggregate budget enforcement (R7.3), with the **Managed
+
+1. ⏳ Design host-side aggregate budget enforcement (R7.3), with the **Managed
    Agents session spend budget** as a separate platform control
 
 ### Future Enhancements (Phase 3+)
 
 1. **Audit Dashboard:** Integrate MCP log export into application-owned storage;
    query via a custom dashboard
-2. **Multi-Agent Orchestration:** Use **Prompt Caching** for spec context sharing across agents
-3. **Event-Driven Workflows:** Deploy **Managed Agents** as GitHub webhook handlers
-4. **Cost Optimization:** Analyze Prompt Caching effectiveness when SpecKit pipeline scales
+
+1. **Multi-Agent Orchestration:** Use **Prompt Caching** for spec context sharing across agents
+
+1. **Event-Driven Workflows:** Deploy **Managed Agents** as GitHub webhook handlers
+
+1. **Cost Optimization:** Analyze Prompt Caching effectiveness when SpecKit pipeline scales
 
 ---
 
@@ -380,5 +408,5 @@ https://platform.claude.com/docs/en/managed-agents/reference#rate-limits
 
 ---
 
-_Generated by Claude Haiku 4.5 for specification R7.2_  
-_Last updated: 18 October 2026_
+*Generated by Claude Haiku 4.5 for specification R7.2*
+*Last updated: 18 October 2026*

@@ -1,12 +1,17 @@
 # Integration Checklist: Repository Governance Layout & Agentic Workflows
 
-**Purpose**: Requirement-quality validation across all five governance domains (Testing, GitHub, Configuration, Spec Kit, Budget) with emphasis on inter-domain consistency, integration dependencies, and cross-cutting enforcement.
+**Purpose**: Requirement-quality validation across all five governance domains
+(Testing, GitHub, Configuration, Spec Kit, Budget) with emphasis on inter-domain
+consistency, integration dependencies, and cross-cutting enforcement.
 
 **Created**: 2026-10-17
 
-**Feature**: [spec.md](../spec.md) | [plan.md](../plan.md) | [tasks.md](../tasks.md)
+**Feature**: [spec.md](../spec.md) | [plan.md](../plan.md) |
+[tasks.md](../tasks.md)
 
-**Note**: This custom checklist tests the quality of requirements themselves, not implementation completeness. Marker semantics: `[x]` means the reviewer confirmed the requirement-quality criterion is satisfied.
+**Note**: This custom checklist tests the quality of requirements themselves,
+not implementation completeness. Marker semantics: `[x]` means the reviewer
+confirmed the requirement-quality criterion is satisfied.
 
 ---
 
@@ -72,7 +77,7 @@
 
 ## Spec Kit Routing & Regression Pipeline
 
-- [ ] CHK031 Does Spec Kit path resolution (R9.1: `.github/specs/{NNN-feature}/` canonical) account for SPECIFY_FEATURE_DIRECTORY environment variable? Is the mechanism documented? [Completeness, Spec §R9.1]
+- [ ] CHK031 Does Spec Kit path resolution (R9.1: `.github/specs/{NNN-feature}/` canonical) account for SPECIFY*FEATURE*DIRECTORY environment variable? Is the mechanism documented? [Completeness, Spec §R9.1]
 - [ ] CHK032 Are Spec Kit regression test requirements (R9.2: create → plan → tasks pipeline) defined with explicit pass/fail criteria? What does "regression test passing" mean? [Measurability, Gap, Spec §R9.2]
 - [ ] CHK033 Does Spec Kit routing (R9.1) account for feature numbering sequence and conflicts? If two features attempt `001-*`, what is the error handling? [Edge Case, Gap, Spec §R9.1]
 - [ ] CHK034 Are Spec Kit output files (spec.md, plan.md, research.md, data-model.md, contracts/, quickstart.md, tasks.md) documented as stable outputs, or can structure change between Spec Kit versions? [Assumption, Spec §R9.1, Project Structure §Implementation Targets]

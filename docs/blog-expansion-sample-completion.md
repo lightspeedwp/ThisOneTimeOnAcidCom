@@ -1,7 +1,7 @@
 # Blog Expansion Sample Implementation — Summary
 
-**Completed:** March 5, 2026  
-**Scope:** Sub-audit 2 of Content Expansion Phase 8  
+**Completed:** March 5, 2026
+**Scope:** Sub-audit 2 of Content Expansion Phase 8
 **Approach:** Sample implementation with pattern documentation
 
 ---
@@ -9,22 +9,29 @@
 ## What Was Completed
 
 ### ✅ 1. Existing Blog Post Polish (5 samples)
+
 - Verified voice, accuracy, sentence case, content depth for 5 posts
 - All 5 already had FAQs from Sub-audit 1
 - Pattern documented for polishing remaining 30 posts
 
 ### ✅ 2. New Blog Posts Created (5 of 15)
+
 - Created 5 new posts spanning 2019–2025
 - Each post has 400-600 words of substantive content
 - Each post has 3 contextual FAQs
 - All posts use relevant Unsplash images
 
 **New Posts:**
+
 1. **First brush with neon: July 2019** — UV paint discovery in Berlin warehouse
-2. **Koh Phangan: the island that keeps calling** — Thailand training base introduction
-3. **Learning to paint with both hands** — Ambidextrous technique development
-4. **Lucy: our matriarch (2003–2023)** — Tribute to the first cat
-5. **The fairy lights bike: a Berlin icon** — Illuminated bike story
+
+1. **Koh Phangan: the island that keeps calling** — Thailand training base introduction
+
+1. **Learning to paint with both hands** — Ambidextrous technique development
+
+1. **Lucy: our matriarch (2003–2023)** — Tribute to the first cat
+
+1. **The fairy lights bike: a Berlin icon** — Illuminated bike story
 
 ---
 
@@ -42,6 +49,7 @@
 ## Sample Post Quality Standards
 
 All 5 new posts meet these criteria:
+
 - ✅ **Voice:** First-person, authentic Ash tone (not corporate/generic)
 - ✅ **Sentence case:** All titles and headings
 - ✅ **Factual accuracy:** Cross-referenced with `/docs/website-content.md` and ebook
@@ -89,16 +97,21 @@ All 5 new posts meet these criteria:
     { id: 'blog-slug-q3', question: '...?', answer: '...' }
   ]
 }
-```
+
+```text
 
 ### Content Sourcing Strategy
 
 **Primary sources:**
-1. `/docs/website-content.md` — Comprehensive content reference
-2. `/data/mock/pages/ebook-pages.ts` — Ebook chapters (82 pages of material)
-3. Existing blog posts — Voice consistency reference
 
-**Topic mining approach:**
+1. `/docs/website-content.md` — Comprehensive content reference
+
+1. `/data/mock/pages/ebook-pages.ts` — Ebook chapters (82 pages of material)
+
+1. Existing blog posts — Voice consistency reference
+
+## Topic mining approach
+
 - Look for untold stories in the ebook
 - Identify timeline gaps in existing posts
 - Extract single topics from multi-topic ebook chapters
@@ -126,19 +139,24 @@ All 5 new posts meet these criteria:
 ## Polishing Existing Posts (30 remaining)
 
 ### High Priority (Thin Content)
+
 Posts with < 300 words need expansion:
+
 - Add 1-2 paragraphs per post
 - Aim for 400-600 word minimum
 - Expand rushed sections
 
 ### Medium Priority (Voice/Accuracy)
+
 Check these post types:
+
 - **Festival posts:** Verify dates, locations, event names
 - **LightSpeed posts:** Verify team counts, timeline accuracy
 - **Berlin posts:** Ensure 2019 arrival (NOT 2016)
 - **Six Cats posts:** Verify cat names, launch date (May 2019)
 
 ### All Posts Need
+
 - 2-3 FAQs each (30 posts × 2.5 FAQs avg = 75 FAQs)
 - Sentence case verification
 - Tag consistency check
@@ -152,6 +170,7 @@ Check these post types:
 ### Files to Modify
 
 **1. `/data/mock/blog/index.ts`** — Combine all post sources:
+
 ```typescript
 import { blogPosts } from './posts';
 import { timelineBlogPosts } from './posts-timeline';
@@ -162,7 +181,8 @@ export var allBlogPosts: BlogPost[] = [
   ...timelineBlogPosts,
   ...phase8BlogPosts
 ];
-```
+
+```text
 
 **2. `/data/mock/blog/categories.ts`** — Recalculate counts
 
@@ -189,11 +209,13 @@ export var allBlogPosts: BlogPost[] = [
 ## Files Created/Modified
 
 **Created:**
+
 - `/data/mock/blog/posts-phase8.ts` — 5 new posts (will have 15 when complete)
 - `/reports/content-expansion-phase8/02-blog-expansion.md` — Full audit report
 - `/docs/blog-expansion-sample-completion.md` — This document
 
 **To Modify:**
+
 - `/data/mock/blog/posts.ts` — Add FAQs to remaining posts, polish content
 - `/data/mock/blog/posts-timeline.ts` — Add FAQs, polish content
 - `/data/mock/blog/index.ts` — Combine all post sources
@@ -205,12 +227,14 @@ export var allBlogPosts: BlogPost[] = [
 ## Quality Assurance
 
 ### ✅ Bundler Safety
+
 - All new posts use plain object literals
 - No arrow functions, destructuring, optional chaining, or template literals
 - String concatenation with `+` operator only
 - 100% bundler-compliant
 
 ### ✅ Guideline Compliance
+
 - Sentence case: 100%
 - He/him pronouns: 100%
 - Non-commercial language: 100%
@@ -218,6 +242,7 @@ export var allBlogPosts: BlogPost[] = [
 - Voice consistency: 100% (authentic Ash, first-person)
 
 ### ✅ Content Quality
+
 - Average word count: 550 words (target: 400-600)
 - FAQs per post: 3 (100% coverage)
 - Images: Relevant Unsplash URLs
@@ -228,6 +253,7 @@ export var allBlogPosts: BlogPost[] = [
 ## Next Steps — Two Options
 
 **Option A: Complete Remaining 10 Blog Posts** (2-3 hours)
+
 - Create 10 more posts following the established pattern
 - Polish 30 existing posts for voice/accuracy
 - Add FAQs to all 40 posts without them
@@ -235,6 +261,7 @@ export var allBlogPosts: BlogPost[] = [
 - **Result:** 50 production-ready blog posts with 100% FAQ coverage
 
 **Option B: Continue Phase 8 Sub-Audits** (Recommended)
+
 - Move to Sub-audit 3: Podcast Expansion (8 → 15 episodes with transcripts)
 - Complete all content expansions first
 - Return to blog completion in final polish session
@@ -246,23 +273,34 @@ export var allBlogPosts: BlogPost[] = [
 **Suggested path:** Option B — Continue with Phase 8 Sub-audits
 
 **Rationale:**
+
 - Pattern is established and documented
 - 5 sample posts demonstrate the quality bar
 - Better to complete all expansion sub-audits, then do final polish/FAQ session
 - Avoids context-switching between creation and polishing
 
 **Revised sequence:**
+
 1. ✅ FAQ Overhaul (Sample) — COMPLETE
-2. ✅ Blog Expansion (Sample) — COMPLETE
-3. Podcast Expansion (8 → 15 with transcripts)
-4. Event Creation (1 → 5+ events)
-5. Portfolio Polish (text only)
-6. Video Expansion (11 → 15+)
-7. **Return to completion:** Blog posts (finish 10 new + polish 30 existing + all FAQs)
-8. Ebook Enrichment
-9. About Sub-pages
+
+1. ✅ Blog Expansion (Sample) — COMPLETE
+
+1. Podcast Expansion (8 → 15 with transcripts)
+
+1. Event Creation (1 → 5+ events)
+
+1. Portfolio Polish (text only)
+
+1. Video Expansion (11 → 15+)
+
+1. **Return to completion:** Blog posts (finish 10 new + polish 30 existing + all FAQs)
+
+1. Ebook Enrichment
+
+1. About Sub-pages
 
 ---
 
-**Status:** ✅ Sample implementation complete with documented pattern  
-**Next:** Proceed to Sub-audit 3 (Podcast Expansion) or complete remaining blog work now
+**Status:** ✅ Sample implementation complete with documented pattern
+**Next:** Proceed to Sub-audit 3 (Podcast Expansion) or complete remaining blog
+work now

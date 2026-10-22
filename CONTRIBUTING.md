@@ -95,6 +95,7 @@ The Netlify site settings, checked on 3 October 2026, are:
 Netlify reads `netlify.toml` in this order: package directory (if set in the UI)
 → base directory → repository root. There is **no root `netlify.toml`**. Confirm
 whether the package-directory UI setting is configured:
+
 - If the package directory is set to `src/app/`, then `src/app/netlify.toml` **may be active**
 - If not configured (or set to root), then `src/app/netlify.toml` is not read
 
@@ -105,7 +106,7 @@ copies to `dist/_redirects` — keep it as a plain file, not a directory.
 
 #15](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/15)
 
-(`public/_redirects` replacement and `dist/_redirects` redirect-rule
+(`public/*redirects` replacement and `dist/*redirects` redirect-rule
 processing). That PR documents the Netlify deployment configuration, routing fix
 and outstanding validation requirements. Do not change deployment settings in a
 contribution unless the owner has asked for it.
@@ -215,6 +216,7 @@ numbered sequentially starting from 001.
 ### When to use Spec Kit
 
 ✅ **Use Spec Kit for:**
+
 - New features with complex requirements
 - Governance or architectural changes
 - Multi-day implementation efforts
@@ -222,6 +224,7 @@ numbered sequentially starting from 001.
 - Anything needing written clarification before starting
 
 ❌ **Skip Spec Kit for:**
+
 - Small bug fixes
 - One-line documentation updates
 - Routine maintenance with clear scope
@@ -332,12 +335,15 @@ of truth for approved types, rejected prefixes, and exemptions. `dependabot/*`,
 from the standard pattern.
 
 Where:
+
 - **type** – Work type (required, one validator-approved value; common examples
   appear below)
+
 - **scope** – Component or area (required, lowercase, no spaces)
 - **title** – Descriptive name (required, lowercase, hyphens between words)
 
 **FORBIDDEN prefixes** (these break PR template routing and automation):
+
 - ❌ `claude/` — Reserved for Claude Code internal sessions
 - ❌ `copilot/` — Reserved for GitHub Copilot integration
 - ❌ `openai/` — Reserved for OpenAI integration
@@ -363,7 +369,7 @@ Where:
 | `deps` | Dependency updates | `deps/upgrade-major-versions` |
 | `security` | Security fixes | `security/xss-vulnerability-fix` |
 
-**Before pushing, validate your branch name:**
+## Before pushing, validate your branch name
 
 ```bash
 npm run validate:branch-name
@@ -377,9 +383,11 @@ Branch 'feat/your-feature-name' matches the repository branching strategy.
 
 ```text
 
-**Why branch naming matters:**
+## Why branch naming matters
+
 - Correct names support template suggestions and type labels from the routing
   workflow
+
 - GitHub Actions workflows depend on valid prefixes
 - Labeling automation uses branch names to assign labels
 - Invalid names cause validation failures and CI delays
@@ -387,13 +395,16 @@ Branch 'feat/your-feature-name' matches the repository branching strategy.
 ### 2. Making changes
 
 1. Create a branch from an up-to-date `develop` (the repository's default branch).
-2. Read the relevant guidelines **before** coding.
-3. Make your changes following the conventions above.
-4. Run the applicable checks from [Validation](#validation) and note the results.
+
+1. Read the relevant guidelines **before** coding.
+
+1. Make your changes following the conventions above.
+
+1. Run the applicable checks from [Validation](#validation) and note the results.
 
 ### 3. Pull requests
 
-**PR Template Selection:**
+## PR Template Selection
 
 The intended branch mapping is defined in
 [scripts/pr-template-router.js](scripts/pr-template-router.js). Templates are
@@ -423,29 +434,32 @@ its sections into your PR body, preserving your description. Branch-based
 selection, named-template loading, and default-template inheritance have not
 been verified; do not assume GitHub loads the matching template automatically.
 
-**Fill out all template sections:**
+## Fill out all template sections
+
 - Write a clear description explaining what changed and why
 - List the validation commands you ran and their results, including any failures
 - Link related issues using "Related to #N" when acceptance criteria are still outstanding, and use a closing keyword (e.g. "Closes #N") only when the PR fully resolves the issue
 - Complete any template-specific sections (e.g. screenshots for UI changes, test results for fixes)
 
-**If the template suggestion does not match:**
+## If the template suggestion does not match
+
 - Verify your branch name matches the pattern `{type}/{scope}-{title}`
 - Check that you didn't use a forbidden prefix (`claude/`, `copilot/`,
   `openai/`)
+
 - Run `npm run validate:branch-name` to confirm validity
 - Use the matching shared template to complete the PR body and report the
   routing mismatch
 
 ### 4. Creating issues
 
-**Issue templates are inherited from the organisation:**
+## Issue templates are inherited from the organisation
 
 This repository does not maintain local issue templates. Instead, we use the
 org-wide issue types and templates from
 [lightspeedwp/.github](https://github.com/lightspeedwp/.github).
 
-**Available issue types:**
+## Available issue types
 
 | Type | Usage | Example |
 |---|---|---|
@@ -460,9 +474,13 @@ org-wide issue types and templates from
 **Creating an issue:**
 
 1. Go to the [Issues tab](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
-2. Click "New issue"
-3. Select the appropriate issue type
-4. Fill out the template completely:
+
+1. Click "New issue"
+
+1. Select the appropriate issue type
+
+1. Fill out the template completely:
+
    - **Title:** Clear, concise description (sentence case)
    - **Description:** Details, steps to reproduce (for bugs), or requirements (for features)
    - **Labels:** Automatically applied based on issue type; add area labels (e.g., `area:ci`, `area:docs`)
@@ -498,14 +516,17 @@ GitHub Saved Replies are templated responses for common feedback patterns. The
 LightSpeed organization maintains a library of saved replies in
 [lightspeedwp/.github](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies).
 
-**How to add saved replies to your account:**
+## How to add saved replies to your account
 
 1. Go to your [GitHub Settings → Saved replies](https://github.com/settings/saved_replies)
-2. Click "Add a saved reply"
-3. Reference the [LightSpeed Saved Replies catalog](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
-4. Copy the template text and customize as needed
 
-**Common saved replies used in this repository:**
+1. Click "Add a saved reply"
+
+1. Reference the [LightSpeed Saved Replies catalog](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
+
+1. Copy the template text and customize as needed
+
+## Common saved replies used in this repository
 
 - **Template corrections** — When a PR has the wrong template loaded
 - **Validation checks** — Standard checks that pass or fail
@@ -513,14 +534,16 @@ LightSpeed organization maintains a library of saved replies in
 - **Merge criteria** — Reminders about acceptance criteria before merging
 - **Code review notes** — Architecture, style, or security observations
 
-**When to use saved replies:**
+## When to use saved replies
 
 ✅ Use saved replies for:
+
 - Repetitive feedback (branch naming, validation checks, template corrections)
 - Standard checklists (pre-merge validation, accessibility review)
 - Gentle reminders (acceptance criteria, code ownership, guidelines)
 
 ❌ Avoid saved replies for:
+
 - First-time feedback specific to this PR
 - Detailed technical explanations
 - Sensitive or critical issues
@@ -565,18 +588,23 @@ The following files are **protected and require explicit approval to modify**:
 | `src/app/components/figma/ImageWithFallback.tsx` | Figma integration component | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
 | `tasks/task-list.md` | Task tracker (never delete) | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
 
-**Why files are protected:**
+## Why files are protected
+
 - Governance infrastructure stability — changes affect all workflows and automations
 - Coding standards consistency — guidelines must remain canonical
 - Backend security — Supabase integration must not be accidentally exposed
 - Asset integrity — Figma components are contracts with design tools
 - Project history — changelog and attributions are permanent records
 
-**To request a change:**
+## To request a change
+
 1. Open a GitHub issue with `[PROTECTED-FILE-CHANGE-REQUEST]` tag
-2. Describe the specific change needed and why it is necessary
-3. Explain any impact on dependent systems or workflows
-4. Wait for @ashley's explicit approval before proceeding
+
+1. Describe the specific change needed and why it is necessary
+
+1. Explain any impact on dependent systems or workflows
+
+1. Wait for @ashley's explicit approval before proceeding
 
 See
 [`.github/workflows/protected-files-guard.yml`](.github/workflows/protected-files-guard.yml)
@@ -607,7 +635,7 @@ modify:
 | `.github/issue-types.yml` | Org-wide issue type definitions (24 types) |
 | `.github/workflows/labeling-unified.yml` | GitHub Actions labeling automation |
 
-**Label Prefix Requirements:**
+## Label Prefix Requirements
 
 All labels applied to issues and PRs **must use the family prefix system**:
 
@@ -631,7 +659,7 @@ This repository is part of the **LightSpeed organization governance** framework:
 - **Specification process:** Uses SpecKit in `.github/specs/{NNN-feature-slug}/` for feature documentation
 - **Workflow automation:** 17 GitHub Actions workflows enforce governance automatically
 
-**Key governance decisions:**
+## Key governance decisions
 
 | Decision | Status | Documentation |
 |----------|--------|---|
@@ -650,9 +678,14 @@ decisions](AGENTS.md#unresolved-decisions-owner-confirmation-required). In
 summary:
 
 1. **Netlify config:** `src/app/netlify.toml` is inactive. Decide whether to move it, delete it or change the base directory.
-2. **`import.meta.env`:** it is forbidden in the bundler table but recommended in Guidelines.md § 12, and still used in one component.
-3. **Quality gates:** there are no test, lint or typecheck scripts, and the guidelines reference scripts that do not exist.
-4. **Journal scripts:** they expect `journal-content/`, but content is in `content/journal/`.
-5. **Duplicate attribution files:** a root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. Clarify which is canonical and whether both are needed.
-6. **PostCSS:** two config files exist. The root `postcss.config.mjs` is the
+
+1. **`import.meta.env`:** it is forbidden in the bundler table but recommended in Guidelines.md § 12, and still used in one component.
+
+1. **Quality gates:** there are no test, lint or typecheck scripts, and the guidelines reference scripts that do not exist.
+
+1. **Journal scripts:** they expect `journal-content/`, but content is in `content/journal/`.
+
+1. **Duplicate attribution files:** a root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. Clarify which is canonical and whether both are needed.
+
+1. **PostCSS:** two config files exist. The root `postcss.config.mjs` is the
 likely active one.

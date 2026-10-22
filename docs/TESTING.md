@@ -17,7 +17,7 @@ Run individual test suites:
 
 ```bash
 npm run test:unit        # Jest unit tests
-npm run test:build       # Bats build verification  
+npm run test:build       # Bats build verification
 npm run test:e2e         # Playwright end-to-end tests
 
 ```text
@@ -60,7 +60,7 @@ Unit tests are located throughout the codebase using the `.test.js` or
 `.test.ts` extension:
 
 - `scripts/**/*.test.js` – Build and validation script tests
-- `scripts/__tests__/**/*.test.js` – Grouped test files
+- `scripts/_*tests*_/**/*.test.js` – Grouped test files
 - `tests/contracts/**/*.test.js` – Contract validation tests
 
 ### ESM Support
@@ -108,15 +108,17 @@ npm run test:build
 ```text
 
 This command:
+
 1. Runs `npm run build` (production build via Vite)
-2. Runs `tests/build.bats` to validate output
+
+1. Runs `tests/build.bats` to validate output
 
 ### What Build Tests Check
 
 - ✅ Build succeeds without errors
 - ✅ `dist/` directory created
 - ✅ `dist/index.html` exists
-- ✅ `public/_redirects` copied to `dist/_redirects` (SPA routing)
+- ✅ `public/*redirects` copied to `dist/*redirects` (SPA routing)
 - ✅ CSS assets compiled and bundled
 - ✅ JavaScript bundles created
 - ✅ Build output is clean (no unexpected files)
@@ -128,7 +130,7 @@ cat tests/build.bats
 
 ```text
 
-### Common Issues
+### Common Issues (1)
 
 **Issue**: Build test fails with "dist directory not created"
 
@@ -196,7 +198,7 @@ test('navigation menu works', async ({ page }) => {
 
 ```text
 
-### Common Issues
+### Common Issues (2)
 
 **Issue**: "Playwright browsers not installed" error
 
@@ -251,9 +253,12 @@ npm test
 ```text
 
 This runs all three suites in sequence:
+
 1. Jest unit tests (`npm run test:unit`)
-2. Build verification (`npm run test:build`)
-3. Playwright e2e tests (`npm run test:e2e`)
+
+1. Build verification (`npm run test:build`)
+
+1. Playwright e2e tests (`npm run test:e2e`)
 
 **Expected output**: All suites pass (or e2e tests may require browser setup on
 first run).
@@ -275,6 +280,7 @@ All checks must pass before merging to `develop`.
 Jest discovers and runs 588 tests in ~5 seconds.
 
 **Optimization tips**:
+
 - Use `npm run test:unit:watch` during development
 - Run focused tests with `jest -t "test name"` to avoid full suite
 - Check `jest --coverage` for untested code paths
@@ -284,6 +290,7 @@ Jest discovers and runs 588 tests in ~5 seconds.
 Bats tests run after production build (~5 seconds total).
 
 **Optimization tips**:
+
 - Run `npm run build` alone to check build performance
 - Run `tests/build.bats` separately if build succeeds but tests fail
 
@@ -292,6 +299,7 @@ Bats tests run after production build (~5 seconds total).
 Playwright tests are slower due to browser startup and interaction simulation.
 
 **Optimization tips**:
+
 - Use `--workers=1` to run tests sequentially (faster for small suites)
 - Use `--headed` mode to watch tests execute
 - Group related tests into single files to reduce browser startup overhead

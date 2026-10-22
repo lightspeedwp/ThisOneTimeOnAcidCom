@@ -1,6 +1,6 @@
 # MobileMenu Template Part
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 Responsive mobile navigation menu with slide-in animation.
@@ -15,5 +15,5 @@ Responsive mobile navigation menu with slide-in animation.
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

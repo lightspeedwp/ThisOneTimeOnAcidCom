@@ -1,6 +1,7 @@
 ---
 name: "Testing Agent"
-description: "Plans and executes test strategy for portfolio site functionality and content."
+description: "Plans and executes test strategy for portfolio site functionality
+and content."
 type: "agent"
 category: "quality"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Plan and execute testing strategy for portfolio site functionality, content integrity, and user experience.
+Plan and execute testing strategy for portfolio site functionality, content
+integrity, and user experience.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Plan and execute testing strategy for portfolio site functionality, content inte
 ## Key Responsibilities
 
 1. **Test Planning** – Develop comprehensive test strategies
-2. **Test Design** – Design effective test cases
-3. **Coverage Strategy** – Guide test coverage decisions
-4. **Content Testing** – Guide content and link validation
-5. **Responsiveness** – Support responsive design testing
-6. **Theme Testing** – Guide light/dark mode testing
+
+1. **Test Design** – Design effective test cases
+
+1. **Coverage Strategy** – Guide test coverage decisions
+
+1. **Content Testing** – Guide content and link validation
+
+1. **Responsiveness** – Support responsive design testing
+
+1. **Theme Testing** – Guide light/dark mode testing
 
 ## Test Categories
 
@@ -72,13 +79,15 @@ Plan and execute testing strategy for portfolio site functionality, content inte
 
 ### Testing Agent ↔ Playwright Agent
 
-**Testing sends to Playwright:**
+## Testing sends to Playwright
+
 - Reproduction steps for reported issues
 - Edge cases to validate
 - Responsive design breakpoints to test
 - Asset loading verification requests
 
-**Playwright returns to Testing:**
+## Playwright returns to Testing
+
 - Evidence: screenshot, console output, network trace
 - Reproducibility verdict: confirmed/not reproduced/partial/blocked
 - Browser environment details
@@ -86,20 +95,23 @@ Plan and execute testing strategy for portfolio site functionality, content inte
 
 ### Testing Agent ↔ BugHerd Agent
 
-**BugHerd Agent sends to Testing:**
+## BugHerd Agent sends to Testing
+
 - Parsed BugHerd report with context
 - Playwright validation results
 - Assessment: real bug vs. environment-specific vs. fixed
 - Draft response prepared
 
-**Testing assesses and decides:**
+## Testing assesses and decides
+
 - Is this a valid issue for this sprint?
 - Should we fix it now or defer?
 - Does the response accurately reflect the validation?
 - Is this a design decision or a real defect?
 - Approves BugHerd Agent's draft response before posting
 
-**Testing then routes to:**
+## Testing then routes to
+
 - Backlog (for future work)
 - PR Agent (if fix is immediate)
 - Spike/Research (if assessment is needed)
@@ -107,16 +119,26 @@ Plan and execute testing strategy for portfolio site functionality, content inte
 ### Example Workflow: BugHerd → Playwright → Testing
 
 1. **BugHerd Agent** reads new TOA task: "Menu doesn't scale on smaller screens"
-2. **BugHerd Agent** extracts: browser=Chrome, viewport=1280x716, URL=/
-3. **BugHerd Agent** sends to **Playwright Agent**: "Navigate to / with viewport 1280x716, check if menu is visible"
-4. **Playwright Agent** runs test in Chromium, captures screenshot, console output
-5. **Playwright Agent** returns: "Reproduced ✅ — First menu item cut off at this viewport"
-6. **BugHerd Agent** composes response: "Confirmed on Chrome desktop. This is a responsive design issue. We will add it to the backlog."
-7. **BugHerd Agent** sends draft to **Testing Agent** for review
-8. **Testing Agent** approves and decides: "This is a real issue. Backlog priority: high. Responsive typography fix needed."
-9. A **human** posts the approved response to BugHerd
-10. Testing Agent creates or updates a task in the development backlog
+
+1. **BugHerd Agent** extracts: browser=Chrome, viewport=1280x716, URL=/
+
+1. **BugHerd Agent** sends to **Playwright Agent**: "Navigate to / with viewport 1280x716, check if menu is visible"
+
+1. **Playwright Agent** runs test in Chromium, captures screenshot, console output
+
+1. **Playwright Agent** returns: "Reproduced ✅ — First menu item cut off at this viewport"
+
+1. **BugHerd Agent** composes response: "Confirmed on Chrome desktop. This is a responsive design issue. We will add it to the backlog."
+
+1. **BugHerd Agent** sends draft to **Testing Agent** for review
+
+1. **Testing Agent** approves and decides: "This is a real issue. Backlog priority: high. Responsive typography fix needed."
+
+1. A **human** posts the approved response to BugHerd
+
+1. Testing Agent creates or updates a task in the development backlog
 
 ---
 
-*Testing strategy and quality assurance for portfolio site. Coordinates Playwright and BugHerd agents for issue validation and triage.*
+*Testing strategy and quality assurance for portfolio site. Coordinates
+Playwright and BugHerd agents for issue validation and triage.*

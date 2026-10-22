@@ -1,13 +1,15 @@
 # PortfolioCard Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
-Interactive portfolio item card with multi-image slider, category badges, and lightbox integration.
+Interactive portfolio item card with multi-image slider, category badges, and
+lightbox integration.
 
 ## Purpose
 
 Display portfolio entries with:
+
 - Multi-image carousel with smooth transitions
 - Category badges and metadata
 - Featured image optimization
@@ -20,11 +22,12 @@ Display portfolio entries with:
 
 ## 🔗 CMS Integration
 
-This component displays portfolio entries from **Headless WordPress** (or mock data) via the unified `useContent` hook.
+This component displays portfolio entries from **Headless WordPress** (or mock
+data) via the unified `useContent` hook.
 
 ### Data Flow
 
-```
+```text
 Component Request
     ↓
 usePortfolioSections() hook
@@ -35,7 +38,8 @@ Success → CMS Data
 Timeout/Error → Mock Data (fallback)
     ↓
 PortfolioCard renders with data
-```
+
+```text
 
 ### Complete Documentation
 
@@ -55,19 +59,19 @@ import { PortfolioCard } from '@/components/ui/PortfolioCard';
 export function PortfolioSection() {
   // Fetch CMS data with automatic fallback
   const { sectionData, loading, error } = usePortfolioSections();
-  
+
   // Use CMS data if available, otherwise fallback to mock
   const entries = sectionData ? sectionData.thailand : portfolioEntries.thailand;
-  
+
   if (loading) {
     return <LoadingSpinner />;
   }
-  
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md">
       {entries.map((entry) => (
-        <PortfolioCard 
-          key={entry.id} 
+        <PortfolioCard
+          key={entry.id}
           entry={entry}
           onClick={handleCardClick}
         />
@@ -75,18 +79,21 @@ export function PortfolioSection() {
     </div>
   );
 }
-```
+
+```text
 
 ### Portfolio Data Sources
 
-**Mock Data (Development/Fallback):**
+## Mock Data (Development/Fallback)
+
 - ✅ **43 complete portfolio entries**
 - ✅ **19 real Figma assets** integrated
 - ✅ **6 categories** (Thailand, Festivals, UV Makeup, Nails, Bridal, Editorial)
 - ✅ **Rich metadata** (dates, locations, tags)
 - ✅ **Located in:** `/data/mock/portfolio/`
 
-**WordPress CMS (Production):**
+## WordPress CMS (Production)
+
 - ✅ **Dynamic content updates** without code changes
 - ✅ **Rich text descriptions** with formatting
 - ✅ **Image optimization** via WordPress media library
@@ -100,7 +107,8 @@ export interface PortfolioEntry {
   id: string;
   title: string;
   description: string;
-  category: 'festival' | 'editorial' | 'special-event' | 'nails' | 'thailand' | 'bridal' | 'uv-makeup';
+category: 'festival' | 'editorial' | 'special-event' | 'nails' | 'thailand' |
+'bridal' | 'uv-makeup';
   images: string[];          // Multiple images for carousel
   featuredImage?: string;    // Primary display image
   story?: string;            // Full story text (rich text in CMS)
@@ -109,7 +117,8 @@ export interface PortfolioEntry {
   tags?: string[];           // Searchable tags
   featured?: boolean;        // Feature on homepage
 }
-```
+
+```text
 
 **Type location:** `/data/types/portfolio.ts`
 
@@ -124,15 +133,16 @@ import { usePortfolioSections } from '@/hooks/useContent';
 
 // Types
 import type { PortfolioEntry } from '@/data/types/portfolio';
-```
+
+```text
 
 ### Benefits
 
-✅ **Works Offline** - Uses mock data when CMS unavailable  
-✅ **Fast Development** - No CMS setup required  
-✅ **Production Ready** - Seamless CMS integration  
-✅ **Type Safe** - Full TypeScript support  
-✅ **Real Assets** - 19 actual Figma images  
+✅ **Works Offline** - Uses mock data when CMS unavailable
+✅ **Fast Development** - No CMS setup required
+✅ **Production Ready** - Seamless CMS integration
+✅ **Type Safe** - Full TypeScript support
+✅ **Real Assets** - 19 actual Figma images
 ✅ **SEO Optimized** - Image optimization and metadata
 
 ### Utility Functions
@@ -146,7 +156,8 @@ const featured = getFeaturedWork();
 // Get entries by category
 const thailandWork = getWorkByCategory('thailand');
 const festivalWork = getWorkByCategory('festival');
-```
+
+```text
 
 **See [CMS Field Mapping](../../docs/cms-field-mapping.md) for complete setup.**
 
@@ -159,11 +170,12 @@ const festivalWork = getWorkByCategory('festival');
 ```tsx
 import { PortfolioCard } from './components/ui/PortfolioCard';
 
-<PortfolioCard 
+<PortfolioCard
   entry={portfolioEntry}
   onClick={handleOpenDetails}
 />
-```
+
+```text
 
 ### In Grid Layout
 
@@ -177,17 +189,19 @@ import { PortfolioCard } from './components/ui/PortfolioCard';
     />
   ))}
 </div>
-```
+
+```text
 
 ### With Layout Mode
 
 ```tsx
-<PortfolioCard 
+<PortfolioCard
   entry={entry}
   layout="list" // or "grid"
   onClick={handleClick}
 />
-```
+
+```text
 
 ---
 
@@ -196,36 +210,42 @@ import { PortfolioCard } from './components/ui/PortfolioCard';
 ```typescript
 interface PortfolioCardProps {
   /**
+
    * Portfolio entry data
    * @required
    */
   entry: PortfolioEntry;
-  
+
   /**
+
    * Click handler for card interaction
    * @required
    */
   onClick: (entry: PortfolioEntry) => void;
-  
+
   /**
+
    * Layout mode
    * @default "grid"
    */
   layout?: 'grid' | 'list';
-  
+
   /**
+
    * Additional CSS classes
    * @default ""
    */
   className?: string;
-  
+
   /**
+
    * Show category badge
    * @default true
    */
   showCategory?: boolean;
-  
+
   /**
+
    * Show image count
    * @default true
    */
@@ -236,7 +256,8 @@ interface PortfolioEntry {
   id: string;
   title: string;
   description: string;
-  category: 'festival' | 'editorial' | 'special-event' | 'nails' | 'thailand' | 'bridal' | 'uv-makeup';
+category: 'festival' | 'editorial' | 'special-event' | 'nails' | 'thailand' |
+'bridal' | 'uv-makeup';
   images: string[];
   featuredImage?: string;
   story?: string;
@@ -245,7 +266,8 @@ interface PortfolioEntry {
   tags?: string[];
   featured?: boolean;
 }
-```
+
+```text
 
 ---
 
@@ -257,17 +279,18 @@ interface PortfolioEntry {
 const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
 const nextImage = () => {
-  setCurrentImageIndex((prev) => 
+  setCurrentImageIndex((prev) =>
     prev === entry.images.length - 1 ? 0 : prev + 1
   );
 };
 
 const previousImage = () => {
-  setCurrentImageIndex((prev) => 
+  setCurrentImageIndex((prev) =>
     prev === 0 ? entry.images.length - 1 : prev - 1
   );
 };
-```
+
+```text
 
 ### Category Badges
 
@@ -280,13 +303,14 @@ const categoryStyles = {
 };
 
 <span className={`
-  inline-flex items-center px-3 py-1 rounded-full 
+  inline-flex items-center px-3 py-1 rounded-full
   text-fluid-sm font-body font-medium
   ${categoryStyles[entry.category]}
 `}>
   {entry.category}
 </span>
-```
+
+```text
 
 ### Touch Gesture Support
 
@@ -306,7 +330,8 @@ const handleTouchEnd = () => {
     previousImage();
   }
 };
-```
+
+```text
 
 ---
 
@@ -325,11 +350,11 @@ interface PortfolioCardProps {
   className?: string;
 }
 
-export function PortfolioCard({ 
-  entry, 
+export function PortfolioCard({
+  entry,
   onClick,
   layout = 'grid',
-  className = '' 
+  className = ''
 }: PortfolioCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -343,14 +368,14 @@ export function PortfolioCard({
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setCurrentImageIndex((prev) => 
+    setCurrentImageIndex((prev) =>
       prev === entry.images.length - 1 ? 0 : prev + 1
     );
   };
 
   const previousImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setCurrentImageIndex((prev) => 
+    setCurrentImageIndex((prev) =>
       prev === 0 ? entry.images.length - 1 : prev - 1
     );
   };
@@ -379,10 +404,12 @@ export function PortfolioCard({
         {/* Current Image */}
         <img
           src={entry.images[currentImageIndex]}
-          alt={`${entry.title} - Image ${currentImageIndex + 1} of ${entry.images.length}`}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+alt={`${entry.title} - Image ${currentImageIndex + 1} of
+${entry.images.length}`}
+className="w-full h-full object-cover transition-transform duration-500
+group-hover:scale-110"
         />
-        
+
         {/* Category Badge */}
         <div className="absolute top-4 left-4">
           <span className={`
@@ -393,38 +420,43 @@ export function PortfolioCard({
             {entry.category}
           </span>
         </div>
-        
+
         {/* Image Count */}
         {entry.images.length > 1 && (
-          <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full">
+<div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1
+bg-black/50 backdrop-blur-sm rounded-full">
             <Images className="w-4 h-4 text-white" />
             <span className="text-fluid-sm font-body font-medium text-white">
               {entry.images.length}
             </span>
           </div>
         )}
-        
+
         {/* Navigation Arrows (show on hover if multiple images) */}
         {entry.images.length > 1 && isHovered && (
           <>
             <button
               onClick={previousImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg hover:bg-white transition-colors"
+className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full
+bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg
+hover:bg-white transition-colors"
               aria-label="Previous image"
             >
               <CaretLeft className="w-5 h-5 text-gray-700" />
             </button>
-            
+
             <button
               onClick={nextImage}
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg hover:bg-white transition-colors"
+className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full
+bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg
+hover:bg-white transition-colors"
               aria-label="Next image"
             >
               <CaretRight className="w-5 h-5 text-gray-700" />
             </button>
           </>
         )}
-        
+
         {/* Image Indicators */}
         {entry.images.length > 1 && (
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
@@ -437,8 +469,8 @@ export function PortfolioCard({
                 }}
                 className={`
                   w-2 h-2 rounded-full transition-all
-                  ${index === currentImageIndex 
-                    ? 'bg-white w-6' 
+                  ${index === currentImageIndex
+                    ? 'bg-white w-6'
                     : 'bg-white/50 hover:bg-white/75'
                   }
                 `}
@@ -448,20 +480,22 @@ export function PortfolioCard({
           </div>
         )}
       </div>
-      
+
       {/* Content Section */}
       <div className={`
         p-fluid-md flex flex-col
         ${isGridLayout ? '' : 'sm:flex-1'}
       `}>
-        <h3 className="text-fluid-xl font-heading font-semibold text-gray-800 mb-fluid-sm group-hover:text-gradient-pink-purple-blue transition-colors">
+<h3 className="text-fluid-xl font-heading font-semibold text-gray-800
+mb-fluid-sm group-hover:text-gradient-pink-purple-blue transition-colors">
           {entry.title}
         </h3>
-        
-        <p className="text-body-guideline font-body text-gray-700 mb-fluid-md line-clamp-3">
+
+<p className="text-body-guideline font-body text-gray-700 mb-fluid-md
+line-clamp-3">
           {entry.description}
         </p>
-        
+
         {/* Metadata */}
         {(entry.date || entry.location) && (
           <div className="flex flex-wrap gap-3 text-fluid-sm text-gray-600 mb-fluid-md">
@@ -470,12 +504,12 @@ export function PortfolioCard({
             {entry.location && <span>{entry.location}</span>}
           </div>
         )}
-        
+
         {/* Tags */}
         {entry.tags && entry.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-fluid-md">
             {entry.tags.slice(0, 3).map(tag => (
-              <span 
+              <span
                 key={tag}
                 className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-fluid-xs font-body"
               >
@@ -484,17 +518,20 @@ export function PortfolioCard({
             ))}
           </div>
         )}
-        
+
         {/* CTA */}
-        <button className="mt-auto text-fluid-sm font-body font-medium text-pink-600 hover:text-pink-700 flex items-center gap-1 group/cta">
+<button className="mt-auto text-fluid-sm font-body font-medium text-pink-600
+hover:text-pink-700 flex items-center gap-1 group/cta">
           <span>Read Story</span>
-          <CaretRight className="w-4 h-4 transition-transform group-hover/cta:translate-x-1" />
+<CaretRight className="w-4 h-4 transition-transform
+group-hover/cta:translate-x-1" />
         </button>
       </div>
     </article>
   );
 }
-```
+
+```text
 
 ---
 
@@ -505,7 +542,7 @@ export function PortfolioCard({
 ```tsx
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md">
   {entries.map(entry => (
-    <PortfolioCard 
+    <PortfolioCard
       key={entry.id}
       entry={entry}
       layout="grid"
@@ -513,14 +550,15 @@ export function PortfolioCard({
     />
   ))}
 </div>
-```
+
+```text
 
 ### List Layout
 
 ```tsx
 <div className="flex flex-col gap-fluid-md">
   {entries.map(entry => (
-    <PortfolioCard 
+    <PortfolioCard
       key={entry.id}
       entry={entry}
       layout="list"
@@ -528,7 +566,8 @@ export function PortfolioCard({
     />
   ))}
 </div>
-```
+
+```text
 
 ### Masonry Layout
 
@@ -536,14 +575,15 @@ export function PortfolioCard({
 <div className="columns-1 md:columns-2 lg:columns-3 gap-fluid-md">
   {entries.map(entry => (
     <div key={entry.id} className="break-inside-avoid mb-fluid-md">
-      <PortfolioCard 
+      <PortfolioCard
         entry={entry}
         onClick={handleClick}
       />
     </div>
   ))}
 </div>
-```
+
+```text
 
 ---
 
@@ -552,19 +592,20 @@ export function PortfolioCard({
 ### Semantic HTML
 
 ```tsx
-<article 
+<article
   role="article"
   aria-label={`Portfolio entry: ${entry.title}`}
 >
-  <img 
+  <img
     src={entry.images[0]}
     alt={`${entry.title} - ${entry.category} makeup`}
   />
-  
+
   <h3>{entry.title}</h3>
   <p>{entry.description}</p>
 </article>
-```
+
+```text
 
 ### Keyboard Navigation
 
@@ -574,11 +615,11 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
     e.preventDefault();
     onClick(entry);
   }
-  
+
   if (e.key === 'ArrowLeft') {
     previousImage(e as any);
   }
-  
+
   if (e.key === 'ArrowRight') {
     nextImage(e as any);
   }
@@ -591,7 +632,8 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 >
   {/* Card content */}
 </article>
-```
+
+```text
 
 ---
 
@@ -602,33 +644,39 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 ```tsx
 // ❌ WRONG
 <img src={image} />
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT
-<img 
+<img
   src={image}
   alt={`${entry.title} - ${entry.category} makeup portfolio`}
 />
-```
+
+```text
 
 ### ❌ Mistake 2: Missing Loading States
 
 ```tsx
 // ❌ WRONG - No loading feedback
 <img src={entry.images[0]} />
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Lazy loading with placeholder
-<img 
+<img
   src={entry.images[0]}
   loading="lazy"
   className="bg-gray-100"
 />
-```
+
+```text
 
 ---
 
@@ -648,9 +696,9 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 - **[Data System](../../data/README.md)** - Mock data system
 - **[overview-components.md](../overview-components.md)** - Component architecture
 - **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
-- **[FILE_STRUCTURE.md](../FILE_STRUCTURE.md)** - File organization
+- **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

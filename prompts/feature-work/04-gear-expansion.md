@@ -2,17 +2,22 @@
 
 **Parent:** [orchestrator.md](./orchestrator.md)
 **Status:** COMPLETE — March 8, 2026
-**Report:** [/reports/feature-work/04-gear-expansion.md](../../reports/feature-work/04-gear-expansion.md)
+**Report:**
+[/reports/feature-work/04-gear-expansion.md](../../reports/feature-work/04-gear-expansion.md)
 
 ---
 
 ## Direction received
 
 Expand the gear page with:
+
 1. Professional makeup kit structure (from onlinemakeupacademy.com reference)
-2. 5 recommended brands: L'Oreal, Revlon, Essence, Make-Up Studio, Maybelline
-3. Kit wisdom section
-4. Cross-link to resources page (`/about/resources`)
+
+1. 5 recommended brands: L'Oreal, Revlon, Essence, Make-Up Studio, Maybelline
+
+1. Kit wisdom section
+
+1. Cross-link to resources page (`/about/resources`)
 
 ## Implementation
 
@@ -22,6 +27,9 @@ Expand the gear page with:
 
 ## Reusability
 
-This prompt can be re-run to add more gear categories or brands. To add a new brand:
+This prompt can be re-run to add more gear categories or brands. To add a new
+brand:
+
 1. Add entry to `gearPageData.brands[]` in `/data/mock/pages/gear.ts`
-2. The component renders brands dynamically — no code changes needed
+
+1. The component renders brands dynamically — no code changes needed

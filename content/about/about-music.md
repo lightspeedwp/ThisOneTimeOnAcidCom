@@ -2,20 +2,25 @@
 
 Soundtracks for the dancefloor and the canvas
 
-Music has always been the engine behind my creativity. From psychedelic trance festivals to Berlin techno basements, the rhythms and textures of electronic music have shaped how I think about colour, energy, and movement.
+Music has always been the engine behind my creativity. From psychedelic trance
+festivals to Berlin techno basements, the rhythms and textures of electronic
+music have shaped how I think about colour, energy, and movement.
 
 - **Heartbeat:** 140 BPM
 - **Curated Artists:** 38
 - **Daily Mixes:** 5
 - **Underground Sets:** 14
 
-Some artists push the mind outward. Some pull it inward. Together they form the soundtrack behind the makeup, the festivals, the travel, and the long nights creating.
+Some artists push the mind outward. Some pull it inward. Together they form the
+soundtrack behind the makeup, the festivals, the travel, and the long nights
+creating.
 
 ## Spotify Favourites
 
 ### Psychedelic Universe
 
-Psytrance festivals were some of the first places where music, art, colour, and community merged into something magical.
+Psytrance festivals were some of the first places where music, art, colour, and
+community merged into something magical.
 
 - Hallucinogen
 - Shpongle
@@ -30,7 +35,9 @@ Psytrance festivals were some of the first places where music, art, colour, and 
 
 ### Electronic Journeys
 
-The artists behind the long sets, sunrise moments, and endless Berlin nights. Music that creates landscapes you can travel through without leaving the dancefloor.
+The artists behind the long sets, sunrise moments, and endless Berlin nights.
+Music that creates landscapes you can travel through without leaving the
+dancefloor.
 
 - RÜFÜS DU SOL
 - WhoMadeWho
@@ -46,7 +53,8 @@ The artists behind the long sets, sunrise moments, and endless Berlin nights. Mu
 
 ### Dark Energy
 
-Not every creative moment is calm and meditative. Sometimes the best ideas come from chaos, distortion, and raw industrial energy.
+Not every creative moment is calm and meditative. Sometimes the best ideas come
+from chaos, distortion, and raw industrial energy.
 
 - Nine Inch Nails
 - Marilyn Manson
@@ -59,7 +67,8 @@ Not every creative moment is calm and meditative. Sometimes the best ideas come 
 
 ### Musical Roots
 
-Before festivals and electronic music, these bands opened the door to experimentation and atmosphere.
+Before festivals and electronic music, these bands opened the door to
+experimentation and atmosphere.
 
 - The Doors
 - Talking Heads
@@ -97,7 +106,8 @@ Daft Punk, Harrington & more
 
 ### Berlin Club Scene
 
-Sets from places like Sisyphos, Kater Blau, and Golden Gate that capture the raw energy of the city’s electronic scene.
+Sets from places like Sisyphos, Kater Blau, and Golden Gate that capture the raw
+energy of the city’s electronic scene.
 
 - Cotumo
 - Alle Farben
@@ -107,7 +117,8 @@ Sets from places like Sisyphos, Kater Blau, and Golden Gate that capture the raw
 
 ### Festival Energy
 
-These mixes capture moments that only exist on a dancefloor somewhere in the forest or at sunrise on a festival stage.
+These mixes capture moments that only exist on a dancefloor somewhere in the
+forest or at sunrise on a festival stage.
 
 - Fusion Festival
 - Nation of Gondwana
@@ -116,7 +127,8 @@ These mixes capture moments that only exist on a dancefloor somewhere in the for
 
 ### Underground Electronic
 
-Where producers experiment, collaborate, and release music that doesn’t always fit traditional labels.
+Where producers experiment, collaborate, and release music that doesn’t always
+fit traditional labels.
 
 - Gray Matter
 - Fadi Mohem
@@ -126,9 +138,17 @@ Where producers experiment, collaborate, and release music that doesn’t always
 
 ## Music & Creativity
 
-Electronic music has always been part of my creative process. From psychedelic trance festivals to Berlin club nights, music shapes the rhythm of how I work, travel, and create. Whether it’s a deep melodic set while working or a sunrise festival mix, these sounds influence the colours and energy that appear in my makeup designs.
+Electronic music has always been part of my creative process. From psychedelic
+trance festivals to Berlin club nights, music shapes the rhythm of how I work,
+travel, and create. Whether it’s a deep melodic set while working or a sunrise
+festival mix, these sounds influence the colours and energy that appear in my
+makeup designs.
 
-I don’t sketch designs beforehand. I read the energy of the music and let it guide the brush. A driving bassline produces sharp geometric patterns. A melodic breakdown opens into flowing organic shapes. The relationship between what I hear and what I paint is so direct that people watching often describe it as visible music.
+I don’t sketch designs beforehand. I read the energy of the music and let it
+guide the brush. A driving bassline produces sharp geometric patterns. A melodic
+breakdown opens into flowing organic shapes. The relationship between what I
+hear and what I paint is so direct that people watching often describe it as
+visible music.
 
 ## Where I Discover Music
 

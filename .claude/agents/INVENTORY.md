@@ -1,6 +1,6 @@
 # Agent Inventory — ThisOneTimeOnAcidCom
 
-**Generated:** 18 October 2026  
+**Generated:** 18 October 2026
 **Spec Reference:**
 `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)
 **Task:** T017a
@@ -99,9 +99,12 @@ Agents are automatically discovered by the Claude Code session via the
 agent specification:
 
 1. **Agent name** — derived from the filename (e.g., `changelog-agent.md` → "Changelog Agent")
-2. **Purpose** — extracted from the first heading/section of the agent spec
-3. **Tools** — listed in the agent configuration and available for use when the agent is invoked
-4. **Constraints** — documented in the agent's specification file
+
+1. **Purpose** — extracted from the first heading/section of the agent spec
+
+1. **Tools** — listed in the agent configuration and available for use when the agent is invoked
+
+1. **Constraints** — documented in the agent's specification file
 
 ## Budget Controls
 
@@ -122,9 +125,12 @@ allocation details.
 To add, modify, or remove an agent:
 
 1. Edit the agent's `.md` file in this directory
-2. Update this inventory to reflect changes
-3. Open an issue with `[AGENT-INVENTORY-UPDATE]` tag for team review
-4. Commit changes to the branch created for this change, following the
+
+1. Update this inventory to reflect changes
+
+1. Open an issue with `[AGENT-INVENTORY-UPDATE]` tag for team review
+
+1. Commit changes to the branch created for this change, following the
    repository branch naming rules
 
 ---
@@ -192,6 +198,7 @@ Each agent specification (`.md` file) should include:
 ### Selection Criteria
 
 Use an agent when:
+
 - ✅ Task is repetitive and benefits from automation
 - ✅ Decision tree is deterministic (can be documented)
 - ✅ Output can be validated programmatically
@@ -199,6 +206,7 @@ Use an agent when:
 - ✅ Agent can operate within defined budget constraints
 
 Do NOT use an agent when:
+
 - ❌ Decision requires subjective judgment
 - ❌ Task involves sensitive/critical changes without human review
 - ❌ Output cannot be validated automatically
@@ -222,10 +230,12 @@ See `.github/BUDGET_CONTROLS.md` for full enforcement strategy.
 Agents integrate with workflows in three patterns:
 
 1. **Pull-triggered**: Called by GitHub Actions workflows (e.g., changelog validation on PR)
-2. **Push-triggered**: Called by developers via CLI scripts (e.g., `npm run validate:branch-name`)
-3. **Manual delegation**: Invoked explicitly by human reviewer/owner (e.g., `/changelog-agent update PR #123`)
+
+1. **Push-triggered**: Called by developers via CLI scripts (e.g., `npm run validate:branch-name`)
+
+1. **Manual delegation**: Invoked explicitly by human reviewer/owner (e.g., `/changelog-agent update PR #123`)
 
 ---
 
-_Maintained by Claude Haiku 4.5 and team_  
-_Last updated: 19 October 2026_
+*Maintained by Claude Haiku 4.5 and team*
+*Last updated: 19 October 2026*

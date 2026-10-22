@@ -1,6 +1,7 @@
 ---
 name: "Release Agent"
-description: "Prepares and validates releases for portfolio site deployments to Netlify."
+description: "Prepares and validates releases for portfolio site deployments to
+Netlify."
 type: "agent"
 category: "release"
 enabled: true
@@ -25,11 +26,16 @@ Prepare and validate portfolio site releases for deployment to Netlify.
 ## Key Responsibilities
 
 1. **Release Preparation** – Prepare releases with proper versioning
-2. **Validation** – Ensure release readiness (build success, changelog)
-3. **Version Management** – Update version numbers and tags
-4. **Changelog** – Prepare and finalize CHANGELOG.md for release
-5. **Deployment** – Validate Netlify deployment readiness
-6. **Documentation** – Prepare release notes and communications
+
+1. **Validation** – Ensure release readiness (build success, changelog)
+
+1. **Version Management** – Update version numbers and tags
+
+1. **Changelog** – Prepare and finalize CHANGELOG.md for release
+
+1. **Deployment** – Validate Netlify deployment readiness
+
+1. **Documentation** – Prepare release notes and communications
 
 ## Release Checklist
 

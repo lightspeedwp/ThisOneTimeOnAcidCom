@@ -1,13 +1,17 @@
 # Specification Quality Checklist: TOA Media Library
 
-**Purpose**: Validate requirements completeness, clarity, consistency, and measurability before Phase 1 design execution
+**Purpose**: Validate requirements completeness, clarity, consistency, and
+measurability before Phase 1 design execution
 **Created**: 2026-10-17
 **Feature**: [002-media-library/spec.md](../spec.md)
 **Reviewer**: Author self-review (pre-Phase 1)
 
-**Review Ownership**: This checklist is a reviewer-owned requirements-quality review artifact. Mark an item `[x]` only when you determine the requirements-quality criterion is satisfied.
+**Review Ownership**: This checklist is a reviewer-owned requirements-quality
+review artifact. Mark an item `[x]` only when you determine the
+requirements-quality criterion is satisfied.
 
-**Marker Semantics**: `[x]` means the criterion has been reviewed and confirmed. It does NOT mean implementation work is complete.
+**Marker Semantics**: `[x]` means the criterion has been reviewed and confirmed.
+It does NOT mean implementation work is complete.
 
 ---
 
@@ -142,4 +146,5 @@
 
 ---
 
-**Checklist Version**: 1.0 | **Status**: Author self-review in progress | **Next**: Complete review, then proceed to Phase 1 design execution
+**Checklist Version**: 1.0 | **Status**: Author self-review in progress |
+**Next**: Complete review, then proceed to Phase 1 design execution

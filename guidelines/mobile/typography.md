@@ -1,10 +1,12 @@
 # Mobile Typography Guidelines
 
-Mobile-specific typography rules for optimal readability and accessibility on small screens.
+Mobile-specific typography rules for optimal readability and accessibility on
+small screens.
 
 ## Purpose
 
 Ensure readable, accessible typography on mobile devices with:
+
 - Minimum font sizes for touch interfaces
 - Appropriate line heights for reading
 - Responsive heading adjustments
@@ -38,9 +40,11 @@ body {
 input, select, textarea {
   font-size: 16px; /* Minimum for iOS Safari */
 }
-```
 
-**Why:** iOS Safari automatically zooms when input fields have font-size < 16px, disrupting user experience.
+```text
+
+**Why:** iOS Safari automatically zooms when input fields have font-size < 16px,
+disrupting user experience.
 
 ---
 
@@ -104,11 +108,13 @@ All typography uses `clamp(MIN, PREFERRED, MAX)` for smooth scaling:
   font-size: clamp(1rem, 2vw, 1.125rem);
   /* MIN: 16px, PREFERRED: 2% of viewport width, MAX: 18px */
 }
-```
+
+```text
 
 ### clamp() Breakdown by Viewport
 
-Understanding how `clamp(2.25rem, 6vw, 7.5rem)` works at different viewport widths:
+Understanding how `clamp(2.25rem, 6vw, 7.5rem)` works at different viewport
+widths:
 
 | Viewport Width | 6vw Calculation | Actual Font Size | Note |
 |---------------|-----------------|------------------|------|
@@ -121,10 +127,14 @@ Understanding how `clamp(2.25rem, 6vw, 7.5rem)` works at different viewport widt
 | **2560px** (Wide) | 154px | **120px** | Uses MAX (7.5rem) |
 
 **How it works:**
+
 1. Browser calculates `6vw` (6% of viewport width)
-2. If result < 36px → Uses 36px (minimum)
-3. If 36px < result < 120px → Uses the calculated vw value
-4. If result > 120px → Uses 120px (maximum)
+
+1. If result < 36px → Uses 36px (minimum)
+
+1. If 36px < result < 120px → Uses the calculated vw value
+
+1. If result > 120px → Uses 120px (maximum)
 
 ### Mobile-First Fluid Sizes
 
@@ -154,7 +164,8 @@ Use the fluid typography tokens from `design-tokens/typography.md`:
   {/* clamp(0.875rem, 1.2vw, 1rem) → 14px to 16px */}
   Published 3 days ago
 </span>
-```
+
+```text
 
 ### Viewport Width (vw) vs Breakpoint Scaling
 
@@ -168,9 +179,11 @@ Use the fluid typography tokens from `design-tokens/typography.md`:
 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
   {/* Jumps at each breakpoint: 36px → 48px → 60px → 72px → 96px */}
 </h1>
-```
+
+```text
 
 **When to use each:**
+
 - **clamp() with vw:** Smooth, continuous scaling. Best for hero titles, large headings.
 - **Breakpoint classes:** Precise control at specific breakpoints. Better for body text, UI elements.
 - **Hybrid:** Use both together for maximum control
@@ -180,7 +193,8 @@ Use the fluid typography tokens from `design-tokens/typography.md`:
 <h1 className="text-hero-h1 sm:text-hero-h1 lg:leading-tight">
   {/* Fluid sizing + breakpoint line-height adjustment */}
 </h1>
-```
+
+```text
 
 ### Viewport Height (vh) for Typography
 
@@ -190,9 +204,11 @@ Use the fluid typography tokens from `design-tokens/typography.md`:
   font-size: clamp(2rem, 8vh, 10rem);
   /* MIN: 32px, PREFERRED: 8% of viewport height, MAX: 160px */
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // Full-screen hero with vh-based text
 <section className="min-h-screen flex items-center justify-center">
@@ -201,9 +217,11 @@ Use the fluid typography tokens from `design-tokens/typography.md`:
     Ash Shaw
   </h1>
 </section>
-```
 
-**⚠️ vh Caution on Mobile:**
+```text
+
+## ⚠️ vh Caution on Mobile
+
 ```tsx
 // ❌ AVOID - Mobile browser address bar causes issues
 <h1 className="text-[10vh]">
@@ -219,7 +237,8 @@ Use the fluid typography tokens from `design-tokens/typography.md`:
 <h1 className="text-[8dvh]">
   {/* Adjusts for mobile chrome dynamically */}
 </h1>
-```
+
+```text
 
 ### Mobile-Specific Adjustments
 
@@ -233,7 +252,8 @@ Use the fluid typography tokens from `design-tokens/typography.md`:
 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-hero-h1">
   Custom Scaling
 </h1>
-```
+
+```text
 
 ---
 
@@ -256,7 +276,8 @@ h1, h2, h3 {
 .prose {
   line-height: 1.8; /* Easier reading on small screens */
 }
-```
+
+```text
 
 ### Implementation
 
@@ -279,7 +300,8 @@ h1, h2, h3 {
   {/* line-height: 2 on mobile, 1.625 on desktop */}
   Long-form reading content...
 </p>
-```
+
+```text
 
 ---
 
@@ -294,8 +316,8 @@ h1, h2, h3 {
   sm:text-5xl           /* 48px on small tablets */
   md:text-6xl           /* 60px on tablets */
   lg:text-hero-h1       /* Fluid 72px-120px on desktop */
-  font-title 
-  font-bold 
+  font-title
+  font-bold
   text-gradient-pink-purple-blue
   leading-tight         /* 1.25 line height */
   tracking-tight        /* Tighter letter spacing */
@@ -308,8 +330,8 @@ h1, h2, h3 {
   text-2xl              /* 24px on mobile */
   sm:text-3xl           /* 30px on small tablets */
   md:text-section-h2    /* Fluid 32px-48px */
-  font-heading 
-  font-semibold 
+  font-heading
+  font-semibold
   leading-tight
 ">
   Portfolio
@@ -319,7 +341,7 @@ h1, h2, h3 {
 <h3 className="
   text-xl               /* 20px on mobile */
   md:text-2xl           /* 24px on desktop */
-  font-heading 
+  font-heading
   font-semibold
 ">
   Festival Makeup
@@ -329,19 +351,21 @@ h1, h2, h3 {
 <h4 className="
   text-lg               /* 18px on mobile */
   md:text-xl            /* 20px on desktop */
-  font-heading 
+  font-heading
   font-medium
 ">
   About This Look
 </h4>
-```
+
+```text
 
 ### Mobile Heading Patterns
 
 ```tsx
 // Page Title Pattern
 <div className="text-center px-6 py-8">
-  <h1 className="text-3xl sm:text-4xl md:text-5xl font-title font-bold text-gradient-pink-purple-blue mb-4">
+<h1 className="text-3xl sm:text-4xl md:text-5xl font-title font-bold
+text-gradient-pink-purple-blue mb-4">
     Page Title
   </h1>
   <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
@@ -353,7 +377,8 @@ h1, h2, h3 {
 <h3 className="text-lg sm:text-xl font-heading font-semibold line-clamp-2">
   Card Title That Might Be Long
 </h3>
-```
+
+```text
 
 ---
 
@@ -370,20 +395,21 @@ h1, h2, h3 {
 
 // ✅ CORRECT - Adequate spacing
 <nav className="flex gap-4">
-  <a 
-    href="#" 
+  <a
+    href="#"
     className="text-base py-3 px-4 min-h-[44px] flex items-center"
   >
     Home
   </a>
-  <a 
-    href="#" 
+  <a
+    href="#"
     className="text-base py-3 px-4 min-h-[44px] flex items-center"
   >
     About
   </a>
 </nav>
-```
+
+```text
 
 ### Mobile Link Patterns
 
@@ -391,7 +417,7 @@ h1, h2, h3 {
 // Inline Links in Text
 <p className="text-base leading-relaxed">
   View my{' '}
-  <a 
+  <a
     href="/portfolio"
     className="text-pink-600 underline underline-offset-4 py-1"
   >
@@ -403,7 +429,7 @@ h1, h2, h3 {
 // List Links
 <ul className="space-y-2">
   <li>
-    <a 
+    <a
       href="/festival"
       className="block py-3 px-4 text-base hover:bg-gray-50 rounded-lg"
     >
@@ -411,7 +437,7 @@ h1, h2, h3 {
     </a>
   </li>
   <li>
-    <a 
+    <a
       href="/editorial"
       className="block py-3 px-4 text-base hover:bg-gray-50 rounded-lg"
     >
@@ -419,7 +445,8 @@ h1, h2, h3 {
     </a>
   </li>
 </ul>
-```
+
+```text
 
 ---
 
@@ -443,7 +470,8 @@ h1, h2, h3 {
 <article className="prose prose-lg max-w-none px-6 md:max-w-prose md:mx-auto">
   <p>Content with optimal line length...</p>
 </article>
-```
+
+```text
 
 ### Mobile Content Width
 
@@ -459,7 +487,8 @@ h1, h2, h3 {
     Content text...
   </p>
 </div>
-```
+
+```text
 
 ---
 
@@ -473,26 +502,26 @@ function BlogPost({ post }: Props) {
     <article className="px-4 sm:px-6 py-8">
       {/* Title */}
       <h1 className="
-        text-2xl sm:text-3xl md:text-4xl 
-        font-heading font-bold 
-        leading-tight 
+        text-2xl sm:text-3xl md:text-4xl
+        font-heading font-bold
+        leading-tight
         mb-4
       ">
         {post.title}
       </h1>
-      
+
       {/* Meta */}
       <div className="flex flex-wrap gap-3 text-sm text-gray-600 mb-6">
         <span>{post.date}</span>
         <span>•</span>
         <span>{post.readingTime} min read</span>
       </div>
-      
+
       {/* Content */}
       <div className="
-        prose prose-base 
-        sm:prose-lg 
-        max-w-none 
+        prose prose-base
+        sm:prose-lg
+        max-w-none
         leading-relaxed
       ">
         {post.content}
@@ -500,7 +529,8 @@ function BlogPost({ post }: Props) {
     </article>
   );
 }
-```
+
+```text
 
 ### Portfolio Entry Mobile
 
@@ -509,25 +539,26 @@ function PortfolioEntry({ entry }: Props) {
   return (
     <section className="px-4 sm:px-6 py-8">
       {/* Category Tag */}
-      <span className="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-3">
+<span className="inline-block px-3 py-1 bg-purple-100 text-purple-700
+rounded-full text-sm font-medium mb-3">
         {entry.category}
       </span>
-      
+
       {/* Title */}
       <h1 className="
-        text-3xl sm:text-4xl 
-        font-heading font-bold 
-        leading-tight 
+        text-3xl sm:text-4xl
+        font-heading font-bold
+        leading-tight
         mb-4
       ">
         {entry.title}
       </h1>
-      
+
       {/* Description */}
       <p className="
-        text-base sm:text-lg 
-        text-gray-700 
-        leading-relaxed 
+        text-base sm:text-lg
+        text-gray-700
+        leading-relaxed
         mb-8
       ">
         {entry.description}
@@ -535,7 +566,8 @@ function PortfolioEntry({ entry }: Props) {
     </section>
   );
 }
-```
+
+```text
 
 ### Hero Section Mobile
 
@@ -546,33 +578,33 @@ function HeroSection() {
       <div className="text-center">
         {/* Subtitle */}
         <p className="
-          text-sm sm:text-base 
-          font-body font-medium 
-          text-gray-600 
-          tracking-wide 
-          uppercase 
+          text-sm sm:text-base
+          font-body font-medium
+          text-gray-600
+          tracking-wide
+          uppercase
           mb-3
         ">
           Makeup Artist
         </p>
-        
+
         {/* Main Title */}
         <h1 className="
-          text-4xl sm:text-5xl md:text-6xl lg:text-7xl 
-          font-title font-bold 
-          text-gradient-pink-purple-blue 
-          leading-tight 
-          tracking-tight 
+          text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+          font-title font-bold
+          text-gradient-pink-purple-blue
+          leading-tight
+          tracking-tight
           mb-4
         ">
           Ash Shaw
         </h1>
-        
+
         {/* Tagline */}
         <p className="
-          text-base sm:text-lg md:text-xl 
-          text-gray-700 
-          leading-relaxed 
+          text-base sm:text-lg md:text-xl
+          text-gray-700
+          leading-relaxed
           max-w-2xl mx-auto
         ">
           Makeup that shines with colour, energy, and connection.
@@ -581,7 +613,8 @@ function HeroSection() {
     </section>
   );
 }
-```
+
+```text
 
 ---
 
@@ -591,54 +624,55 @@ function HeroSection() {
 
 ```tsx
 // ❌ WRONG - iOS will zoom on focus
-<input 
+<input
   type="text"
   className="text-sm px-3 py-2"
   placeholder="Email"
 />
 
 // ✅ CORRECT - 16px minimum prevents zoom
-<input 
+<input
   type="text"
   className="text-base px-4 py-3"
   placeholder="Email"
 />
 
 // All form inputs
-<input 
+<input
   type="email"
   className="
-    w-full 
+    w-full
     text-base               /* 16px minimum */
-    px-4 py-3 
-    rounded-lg 
+    px-4 py-3
+    rounded-lg
     border border-gray-300
     font-body
   "
   placeholder="your@email.com"
 />
 
-<textarea 
+<textarea
   className="
-    w-full 
+    w-full
     text-base               /* 16px minimum */
-    px-4 py-3 
+    px-4 py-3
     rounded-lg
   "
   rows={5}
 />
 
-<select 
+<select
   className="
-    w-full 
+    w-full
     text-base               /* 16px minimum */
-    px-4 py-3 
+    px-4 py-3
     rounded-lg
   "
 >
   <option>Select service</option>
 </select>
-```
+
+```text
 
 ---
 
@@ -653,18 +687,18 @@ function HeroSection() {
 </span>
 
 // Skip to content link (mobile first)
-<a 
+<a
   href="#main-content"
   className="
-    sr-only 
-    focus:not-sr-only 
-    focus:fixed 
-    focus:top-4 
-    focus:left-4 
+    sr-only
+    focus:not-sr-only
+    focus:fixed
+    focus:top-4
+    focus:left-4
     focus:z-50
-    focus:px-6 
+    focus:px-6
     focus:py-3
-    focus:bg-pink-600 
+    focus:bg-pink-600
     focus:text-white
     focus:text-base
     focus:rounded-lg
@@ -672,7 +706,8 @@ function HeroSection() {
 >
   Skip to main content
 </a>
-```
+
+```text
 
 ### Color Contrast
 
@@ -693,7 +728,8 @@ function HeroSection() {
   {/* WCAG AAA: 7:1 for headings */}
   High contrast heading
 </h2>
-```
+
+```text
 
 ---
 
@@ -704,15 +740,18 @@ function HeroSection() {
 ```tsx
 // ❌ WRONG
 <p className="text-xs">Important mobile content</p>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT
 <p className="text-base md:text-sm">
   {/* 16px on mobile, can be smaller on desktop */}
 </p>
-```
+
+```text
 
 ### ❌ Mistake 2: No Line Height Adjustment
 
@@ -721,31 +760,37 @@ function HeroSection() {
 <p className="text-base">
   Long paragraph with default leading...
 </p>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Relaxed line height
 <p className="text-base leading-relaxed">
   {/* line-height: 1.625 */}
   Long paragraph with comfortable reading...
 </p>
-```
+
+```text
 
 ### ❌ Mistake 3: Headings Too Large
 
 ```tsx
 // ❌ WRONG - Overwhelming on mobile
 <h1 className="text-8xl">Title</h1>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Responsive scaling
 <h1 className="text-4xl md:text-6xl lg:text-8xl">
   Title
 </h1>
-```
+
+```text
 
 ---
 
@@ -765,6 +810,7 @@ function HeroSection() {
 ### Device Testing
 
 Test on:
+
 - iPhone SE (smallest modern iPhone)
 - iPhone 14 Pro (standard size)
 - Samsung Galaxy S23 (Android)
@@ -780,5 +826,5 @@ Test on:
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 3.2.0
