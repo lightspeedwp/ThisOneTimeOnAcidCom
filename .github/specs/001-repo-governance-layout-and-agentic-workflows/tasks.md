@@ -265,9 +265,9 @@
     - `fix/*` → bugfix template
     - `docs/*` → documentation template
   - Create test PRs from different branch types and verify correct template is suggested
-  - Verify default-template behaviour in a separate test PR (when branch type doesn't match any named pattern)
-  - Verify named-template selection in a separate test PR (explicit template selection precedence)
-  - Confirm each selected template appears in the PR body without overwriting contributor content
+  - Verify default-template behaviour in a separate test PR (unmatched branch type)
+  - Verify named-template selection in a separate test PR (explicit selection precedence)
+  - Confirm template appears without overwriting contributor content
   - Document shared-template routing approach in `CONTRIBUTING.md` under "PR Creation Process"
 - [x] T036 [P] [WS-261] [TOA-253] Document saved replies and contributor setup
   - ✅ Add "Using Saved Replies" section to CONTRIBUTING.md
@@ -278,6 +278,7 @@
   - ✅ Link saved replies from "Getting help" section
 - [x] T037 [WS-261] Create CODEOWNERS file for branch protection
   - Create `.github/CODEOWNERS` with code area ownership mapping:
+
     ```
     # Governance-critical files
     .github/ @ashley
@@ -292,6 +293,7 @@
     tests/ @ashley
     docs/ @ashley
     ```
+
   - Document CODEOWNERS in `CONTRIBUTING.md` under "Code Ownership"
   - Explain how CODEOWNERS interacts with branch protection
 - [ ] T038 [WS-261] [TOA-261] Enable branch protection on main and develop
@@ -315,34 +317,39 @@
   - Ensure `branch-name-validation.yml` is deployed and active
   - Verify `npm run validate:branch-name` is called on every PR push
   - Validate against approved prefix list (feat, fix, hotfix, release, etc.)
-  - Test: create PR from invalid branch name (e.g., `claude/my-feature`) and confirm workflow blocks
+  - Test: create PR from invalid branch (e.g., `claude/my-feature`) and confirm workflow blocks
   - Document branch naming rules in `CONTRIBUTING.md` and link to `.github/CLAUDE.md`
 
-**Checkpoint**: GitHub governance partially delivered. T035 PR template routing verification remains unchecked; T038 requires manual branch-protection configuration for main and develop.
+**Checkpoint**: GitHub governance partially delivered.
+- T035 PR template routing verification remains unchecked
+- T038 requires manual branch-protection configuration
 
 ---
 
 ## Phase 6: Workstream WS-262 – Root Configuration & Environment (TOA-262 epic)
 
-**Goal**: Update root configuration files (package.json, .nvmrc, .gitattributes), remove pnpm artefacts, remove Tailwind, update documentation
+**Goal**: Update root configuration files, remove pnpm artefacts and Tailwind, update
+documentation
 
-**Independent Test**: Run `npm ci` with Node 24 and verify all dependencies resolve; run `npm run build` and verify BEM-only styling succeeds
+**Independent Test**: Run `npm ci` with Node 24 and verify dependencies resolve;
+run `npm run build` and verify BEM-only styling succeeds
 
 **Child Issues Included**: TOA-262, TOA-258, TOA-273
 
 ### Implementation for WS-262
 
-- [x] T040 [WS-262] [TOA-262] Update package.json (already done in Phase 2 T012, verify here)
+- [x] T040 [WS-262] [TOA-262] Update package.json (verify Phase 2 T012)
   - ✅ Verified: `engines` field set to `{ "node": ">=24" }`
   - ✅ Verified: pnpm.overrides block removed (from Phase 2 T011)
   - ✅ Verified: `npm ci` works and installs all dependencies
-- [x] T041 [WS-262] [TOA-262] Create .nvmrc file (already done in Phase 2 T012, verify here)
+- [x] T041 [WS-262] [TOA-262] Create .nvmrc file (verify Phase 2 T012)
   - ✅ Verified: `.nvmrc` file exists at repository root with content: `24`
   - ✅ Updated README.md with `nvm use` command documentation
 - [x] T042 [P] [WS-262] [TOA-258] Verify script placement at root scripts/
   - ✅ Verified: All scripts in `scripts/` directory (not `.github/scripts/`)
-  - ✅ Verified: Key scripts present: validate-branch-name.js, parse-journal-markdown.ts, check-journal-links.ts, test-figma-access.js
-- [x] T043 [P] [WS-262] [TOA-273] Implement changelog validation workflow (changelog-unified.yml)
+  - ✅ Verified: Key scripts present: validate-branch-name.js, parse-journal-markdown.ts,
+    check-journal-links.ts, test-figma-access.js
+- [x] T043 [P] [WS-262] [TOA-273] Implement changelog validation workflow
   - ✅ Verified: `changelog-unified.yml` deployed and active (597 lines)
   - ✅ Validated: Enforces Keep a Changelog 1.1.0 format
   - ✅ Verified: Three jobs: require-gate, quality-rules, merge-sync
@@ -367,13 +374,15 @@
   - ✅ Links to parent governance docs (lightspeedwp/.github) established
   - Add section: "Styling" — document BEM-only CSS rules
 
-**Checkpoint**: All root configuration updated; npm-only and Node.js 24 enforced; Tailwind removed; changelog validation active; documentation complete
+**Checkpoint**: Root configuration updated; npm-only and Node.js 24 enforced;
+Tailwind removed; changelog validation active; documentation complete
 
 ---
 
 ## Phase 7: Workstream WS-271 – Agent Budget Controls (TOA-271 epic)
 
-**Goal**: Document agent inventory, Anthropic platform assessment, budget enforcement mechanisms, and skill routing
+**Goal**: Document agent inventory, platform assessment, budget enforcement, and
+skill routing
 
 **Independent Test**: Read `.claude/agents/*.md` and `.claude/skills/*.md`; confirm each has documented purpose, inputs, outputs, tools, permissions, and budget coverage
 
