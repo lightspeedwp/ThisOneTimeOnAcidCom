@@ -1,6 +1,7 @@
 ---
 name: "Metrics Agent"
-description: "Tracks and analyzes portfolio site metrics, analytics, and usage patterns."
+description: "Tracks and analyzes portfolio site metrics, analytics, and usage
+patterns."
 type: "agent"
 category: "analysis"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Track and analyze portfolio site metrics and usage patterns to inform optimization decisions.
+Track and analyze portfolio site metrics and usage patterns to inform
+optimization decisions.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Track and analyze portfolio site metrics and usage patterns to inform optimizati
 ## Key Responsibilities
 
 1. **Metrics Tracking** – Define and track key metrics
-2. **Analytics Analysis** – Analyze visitor behavior patterns
-3. **Engagement Measurement** – Measure visitor engagement
-4. **Portfolio Performance** – Analyze individual project views/clicks
-5. **Trend Analysis** – Identify usage trends over time
-6. **Decision Support** – Provide data for optimization decisions
+
+1. **Analytics Analysis** – Analyze visitor behavior patterns
+
+1. **Engagement Measurement** – Measure visitor engagement
+
+1. **Portfolio Performance** – Analyze individual project views/clicks
+
+1. **Trend Analysis** – Identify usage trends over time
+
+1. **Decision Support** – Provide data for optimization decisions
 
 ## Potential Metrics
 

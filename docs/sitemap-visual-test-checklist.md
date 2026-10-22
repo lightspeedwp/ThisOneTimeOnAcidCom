@@ -1,6 +1,6 @@
 # Sitemap Page Visual Test Checklist
 
-**Created:** March 4, 2026  
+**Created:** March 4, 2026
 **Purpose:** Visual QA checklist for sitemap funky styling and animations
 
 ## Pre-Test Setup
@@ -23,10 +23,12 @@
 - [ ] **Glow:** Subtle pink glow extends 120px below rainbow stripe
 
 **Expected Result:**
-```
+
+```text
 🌈 RED | ORANGE | YELLOW | GREEN | CYAN | BLUE | PURPLE | PINK
    (pulsing gently, 8-second loop)
-```
+
+```text
 
 ---
 
@@ -38,12 +40,14 @@
 - [ ] **Breadcrumbs:** "Home > Sitemap" centered above title
 - [ ] **Animation:** Hero content fades in from top (translateY -30px → 0)
 
-**Expected Dark Mode Title:**
-```
-  SITEMAP  
+## Expected Dark Mode Title
+
+```text
+  SITEMAP
   ▓▓▓▓▓▓▓  (gradient fill: pink → purple → blue)
   (subtle glow: rgba(255, 16, 240, 0.3))
-```
+
+```text
 
 ---
 
@@ -55,28 +59,31 @@
 - [ ] **Dark Mode Border:** Border is white with 0.1 opacity
 - [ ] **Stagger:** Sections fade in sequentially (0.1s, 0.15s, 0.2s, ...)
 
-**Expected Section Title Format:**
-```
+## Expected Section Title Format
+
+```text
 🎨 (icon with glow)  Portfolio categories
 ────────────────────────────────────────── (2px border)
-```
+
+```text
 
 ---
 
 ### About Sub-Pages Grid (The Star of the Show!)
 
-- [ ] **Grid Columns:** 
-  - Mobile (<768px): 1 column
-  - Tablet (768px+): 2 columns
-  - Desktop (1024px+): 3 columns
-  - Wide (1440px+): 4 columns
+- [ ] **Grid Columns:**
+- Mobile (<768px): 1 column
+- Tablet (768px+): 2 columns
+- Desktop (1024px+): 3 columns
+- Wide (1440px+): 4 columns
 - [ ] **Item Count:** Exactly 21 items
 - [ ] **Animation:** Each item fades in from below (translateY 20px → 0)
 - [ ] **Sequential Delays:** First item at 0.05s, last item at 1.05s (watch cascade effect!)
 - [ ] **Gap:** Spacing between items (0.5rem mobile, 0.75rem tablet, 1rem desktop)
 
-**Expected Animation Sequence:**
-```
+## Expected Animation Sequence
+
+```text
 Time    Items Visible
 0.05s:  ✓ Item 1
 0.10s:  ✓ Item 1-2
@@ -84,7 +91,8 @@ Time    Items Visible
 0.20s:  ✓ Item 1-4
 ...
 1.05s:  ✓ All 21 items
-```
+
+```text
 
 **Visual Test:** Reload page and watch items "cascade up" in waves.
 
@@ -103,14 +111,14 @@ Time    Items Visible
 #### Hover State
 
 - [ ] **Light Mode:**
-  - Background: `rgba(190, 0, 254, 0.06)` (light purple tint)
-  - Text color: Purple
-  - Transform: Slides 4px right
+- Background: `rgba(190, 0, 254, 0.06)` (light purple tint)
+- Text color: Purple
+- Transform: Slides 4px right
 - [ ] **Dark Mode:**
-  - Background: `rgba(255, 16, 240, 0.08)` (pink glow)
-  - Text color: Neon pink
-  - Box-shadow: `0 0 20px rgba(255, 16, 240, 0.15)` (pink glow)
-  - Transform: Slides 4px right
+- Background: `rgba(255, 16, 240, 0.08)` (pink glow)
+- Text color: Neon pink
+- Box-shadow: `0 0 20px rgba(255, 16, 240, 0.15)` (pink glow)
+- Transform: Slides 4px right
 - [ ] **Icon:** Scales to 1.1, opacity increases to 1, drop-shadow glow
 
 **Visual Test:** Hover over a link — it should glow and slide right.
@@ -126,31 +134,35 @@ Time    Items Visible
 - [ ] **Metadata:** Date and category below link text (gray, 0.75rem font)
 
 **Expected Format:**
-```
+
+```text
 📄 Blog post title here
    Feb 15, 2026 • Creative Process
-```
+
+```text
 
 ---
 
 ### Tags List
 
 - [ ] **Grid Layout:**
-  - Mobile: 1 column
-  - Tablet (768px+): 2 columns
-  - Desktop (1024px+): 3 columns
-  - Wide (1440px+): 4 columns
-  - Ultra-wide (1568px+): 5 columns
+- Mobile: 1 column
+- Tablet (768px+): 2 columns
+- Desktop (1024px+): 3 columns
+- Wide (1440px+): 4 columns
+- Ultra-wide (1568px+): 5 columns
 - [ ] **Color Dots:** 8px round dots in 8 neon colors (cycled)
 - [ ] **Smaller Links:** Uses `.sitemap-link--tag` variant (0.375rem padding)
 - [ ] **Dot Hover:** Scales to 1.3 with glow box-shadow
 
-**Expected Tag Format:**
-```
+## Expected Tag Format
+
+```text
 ● amsterdam    (8px cyan dot)
 ● berlin       (8px pink dot)
 ● festivals    (8px blue dot)
-```
+
+```text
 
 **Visual Test:** Hover over tag — dot should scale and glow.
 
@@ -163,13 +175,15 @@ Time    Items Visible
 - [ ] **Line Color:** Gray (0.3 opacity)
 
 **Expected Format:**
-```
+
+```text
 💻 Developer tools hub
   ├─ Design tokens reference
   ├─ Icon library
   ├─ Phosphor icons showcase
   └─ Component API documentation
-```
+
+```text
 
 ---
 
@@ -204,7 +218,8 @@ Time    Items Visible
 - [ ] **Increment:** +0.05s per section
 - [ ] **Animation:** `fadeIn` (opacity 0 → 1)
 
-**Visual Test:** Reload page — sections should appear one after another in smooth sequence.
+**Visual Test:** Reload page — sections should appear one after another in
+smooth sequence.
 
 ---
 
@@ -216,9 +231,11 @@ Time    Items Visible
 - [ ] **Duration:** 0.6s per item
 - [ ] **Easing:** `ease-out`
 
-**Visual Test:** Reload page and scroll to "Hidden about pages" section — watch items appear in waves!
+**Visual Test:** Reload page and scroll to "Hidden about pages" section — watch
+items appear in waves!
 
 **Expected Timing:**
+
 - 0.05s: "The compass" appears
 - 0.10s: "Origin story" appears
 - 0.15s: "Six cats: the green garden" appears
@@ -234,7 +251,8 @@ Time    Items Visible
 - [ ] **Icon Glow:** Drop-shadow appears
 - [ ] **Dot Scale:** 1 → 1.3 in 0.2s (tags only)
 
-**Visual Test:** Hover over various links — should slide right smoothly with icon scaling.
+**Visual Test:** Hover over various links — should slide right smoothly with
+icon scaling.
 
 ---
 
@@ -250,13 +268,14 @@ Time    Items Visible
 ### Title Gradient
 
 - [ ] **Light Mode:** Standard text color
-- [ ] **Dark Mode:** 
-  - Gradient fill (pink → purple → blue)
-  - `background-clip: text`
-  - `-webkit-text-fill-color: transparent`
-  - Text-shadow glow: `0 0 30px rgba(255, 16, 240, 0.3)`
+- [ ] **Dark Mode:**
+- Gradient fill (pink → purple → blue)
+- `background-clip: text`
+- `-webkit-text-fill-color: transparent`
+- Text-shadow glow: `0 0 30px rgba(255, 16, 240, 0.3)`
 
-**Visual Test:** Toggle dark mode — title should become gradient with subtle glow.
+**Visual Test:** Toggle dark mode — title should become gradient with subtle
+glow.
 
 ---
 
@@ -265,7 +284,8 @@ Time    Items Visible
 - [ ] **Dark Mode:** Text-shadow `0 0 20px rgba(255, 16, 240, 0.15)`
 - [ ] **Icons:** Drop-shadow glow in content-specific colors (pink, green, blue, etc.)
 
-**Visual Test:** In dark mode, section titles and icons should have subtle neon glow.
+**Visual Test:** In dark mode, section titles and icons should have subtle neon
+glow.
 
 ---
 
@@ -304,7 +324,8 @@ Time    Items Visible
 - [ ] **Enter Key:** Activates links
 - [ ] **No Keyboard Traps:** Can Tab out of all sections
 
-**Visual Test:** Press Tab repeatedly — pink outline should move through all links.
+**Visual Test:** Press Tab repeatedly — pink outline should move through all
+links.
 
 ---
 
@@ -314,7 +335,8 @@ Time    Items Visible
 - [ ] **Headings:** Have unique IDs (e.g., `id="sitemap-pages"`)
 - [ ] **Icons:** Have `aria-hidden="true"` (decorative only)
 
-**DevTools Test:** Inspect sections — confirm `aria-labelledby` matches heading ID.
+**DevTools Test:** Inspect sections — confirm `aria-labelledby` matches heading
+ID.
 
 ---
 
@@ -337,9 +359,11 @@ Time    Items Visible
 - [ ] **About Grid Cascade:** Instant visibility (no animation)
 - [ ] **Hover Transforms:** No slide or scale effects
 
-**Visual Test:** Enable `prefers-reduced-motion` — page should load instantly with zero animations.
+**Visual Test:** Enable `prefers-reduced-motion` — page should load instantly
+with zero animations.
 
 **CSS Test:**
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   .sitemap-page__hero::before { animation: none; }
@@ -348,7 +372,8 @@ Time    Items Visible
   .sitemap-list--grid .sitemap-list__item { animation: none !important; }
   .sitemap-link:hover { transform: none; }
 }
-```
+
+```text
 
 ---
 
@@ -419,7 +444,7 @@ Open each section and verify icon colors:
 
 Tags use 8 neon colors in rotation. Verify first 8 tags have different colors:
 
-```
+```text
 Tag 1:  ● Pink
 Tag 2:  ● Blue
 Tag 3:  ● Green
@@ -429,7 +454,8 @@ Tag 6:  ● Cyan
 Tag 7:  ● Yellow
 Tag 8:  ● Red
 Tag 9:  ● Pink (cycle repeats)
-```
+
+```text
 
 ---
 
@@ -446,7 +472,8 @@ Open DevTools and verify correct BEM classes are applied:
 - [ ] List: `.sitemap-list` (NOT `.sitemap__list`)
 - [ ] Link: `.sitemap-link` (NOT `.sitemap__link`)
 
-**Critical:** If any old classes like `.sitemap`, `.sitemap__section`, `.sitemap__link` are present, the CSS won't work!
+**Critical:** If any old classes like `.sitemap`, `.sitemap__section`,
+`.sitemap__link` are present, the CSS won't work!
 
 ---
 
@@ -459,7 +486,8 @@ Inspect an About sub-page item:
   animation: fadeInUp 0.6s ease-out both;
   animation-delay: 0.05s;
 }
-```
+
+```text
 
 - [ ] **Animation Name:** `fadeInUp`
 - [ ] **Duration:** `0.6s`
@@ -537,12 +565,12 @@ Before marking the sitemap as complete:
 
 ---
 
-**Test Completed:** _______________  
-**Tested By:** _______________  
-**Issues Found:** _______________  
+**Test Completed:** _______________
+**Tested By:** _______________
+**Issues Found:** _______________
 **Status:** ☐ Pass ☐ Fail ☐ Needs Revision
 
 ---
 
-**Last Updated:** March 4, 2026  
+**Last Updated:** March 4, 2026
 **Maintained By:** Ash Shaw Portfolio Team

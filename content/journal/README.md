@@ -8,15 +8,18 @@ Each `.md` file becomes one journal entry in the reader.
 
 ## File naming convention
 
-```
+```text
 YYYY-MM-slug-title.md
-```
+
+```text
 
 Examples:
-```
+
+```text
 2026-09-the-dancefloor-returns.md
 2026-08-berlin-morning-light.md
-```
+
+```text
 
 The date prefix ensures files sort chronologically. The slug in the filename
 is a fallback — the canonical slug comes from the `slug` frontmatter field.
@@ -36,7 +39,8 @@ author: "Ash Shaw"
 date: 2026-09-15
 tags: [music, creativity, berlin]
 ---
-```
+
+```text
 
 | Field    | Type                | Notes                                          |
 |----------|---------------------|------------------------------------------------|
@@ -53,7 +57,8 @@ tags: [music, creativity, berlin]
 subtitle: "A short teaser shown on listing cards"
 series: "Berlin Chronicles"
 draft: true
-```
+
+```text
 
 | Field      | Type    | Notes                                         |
 |------------|---------|-----------------------------------------------|
@@ -90,7 +95,8 @@ Second paragraph continues the thought.
 A page break above starts a new reader page. Continue writing here.
 
 Third paragraph on the new page.
-```
+
+```text
 
 ---
 
@@ -100,9 +106,11 @@ Before committing, run the validator locally:
 
 ```bash
 pnpm journal:validate
-```
 
-The CI pipeline runs this automatically on every PR that touches `journal-content/`.
+```text
+
+The CI pipeline runs this automatically on every PR that touches
+`journal-content/`.
 
 ## Exporting JSON
 
@@ -110,6 +118,7 @@ To regenerate the JSON payloads in `export/journal/`:
 
 ```bash
 pnpm journal:parse
-```
+
+```text
 
 This is run automatically in CI but useful for local debugging.

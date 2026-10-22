@@ -1,14 +1,15 @@
 # Sticky Header Implementation — Dev Tools Landing Page
 
-**Date:** March 7, 2026  
-**Status:** ✅ Complete  
+**Date:** March 7, 2026
+**Status:** ✅ Complete
 **Feature:** Retro CLI-styled sticky navigation bar
 
 ---
 
 ## 🎯 Implementation Summary
 
-Added a comprehensive sticky header to the dev tools landing page that appears on scroll, featuring:
+Added a comprehensive sticky header to the dev tools landing page that appears
+on scroll, featuring:
 
 - **Burger menu** for mobile category navigation
 - **Dev Tools icon** (wrench) for visual branding
@@ -22,16 +23,18 @@ Added a comprehensive sticky header to the dev tools landing page that appears o
 
 ## 📐 Layout Structure
 
-```
+```text
 ╔═══════════════════════════════════════════════════════════════╗
 ║ [☰] [🔧] │ [SPECIMENS] [DOCS] [BUILDERS] ... │ 🏠›Dev │ ←Back │ 🔍 ║
 ╚═══════════════════════════════════════════════════════════════╝
      ↑        ↑             ↑                     ↑       ↑       ↑
    Burger  Icon    Desktop nav links      Breadcrumbs  Back   Search
-```
+
+```text
 
 **Mobile (< 1024px):**
-```
+
+```text
 ╔═══════════════════════════════════════════════════╗
 ║ [☰] [🔧]                    🏠›Dev Tools │ 🔍      ║
 ╠═══════════════════════════════════════════════════╣
@@ -43,33 +46,38 @@ Added a comprehensive sticky header to the dev tools landing page that appears o
 ║ [CARD & LAYOUT LAB]                               ║
 ╚═══════════════════════════════════════════════════╝
    ↑ Dropdown menu (appears when burger clicked)
-```
+
+```text
 
 ---
 
 ## 🎨 Visual Styling
 
 ### Header Bar
+
 - **Background:** `rgba(10, 10, 10, 0.98)` — almost black with slight transparency
 - **Backdrop filter:** `blur(16px)` — frosted glass effect
 - **Border bottom:** 2px neon green (`rgba(57, 255, 20, 0.4)`)
-- **Box shadow:** 
-  - Outer glow: `0 0 30px rgba(57, 255, 20, 0.2)`
-  - Depth shadow: `0 4px 20px rgba(0, 0, 0, 0.5)`
+- **Box shadow:**
+- Outer glow: `0 0 30px rgba(57, 255, 20, 0.2)`
+- Depth shadow: `0 4px 20px rgba(0, 0, 0, 0.5)`
 
 ### Burger Button
+
 - **Size:** 40px × 40px
 - **Icon:** `List` (Phosphor Icons, 24px, bold weight)
 - **Border:** 1px neon green (`rgba(57, 255, 20, 0.4)`)
 - **Hover:** Background fill + glow effect
 
 ### Dev Tools Icon
+
 - **Size:** 40px × 40px
 - **Icon:** `Wrench` (Phosphor Icons, 20px, bold weight)
 - **Background:** `rgba(57, 255, 20, 0.1)` — subtle neon fill
 - **Border:** 1px neon green
 
 ### Nav Links (Desktop)
+
 - **Font:** `'Courier New', Courier, monospace`
 - **Size:** 0.875rem (14px)
 - **Weight:** 700 (bold)
@@ -79,7 +87,8 @@ Added a comprehensive sticky header to the dev tools landing page that appears o
 - **Border:** 1px solid (accent color)
 - **Hover:** Background fill + glow + neon border brightens
 
-**Color-coded by category:**
+## Color-coded by category
+
 - Design Specimens: Neon green (#39FF14)
 - Reference & Docs: Royal blue (#1F51FF)
 - Builders & Playground: Blazing orange (#FF5F1F)
@@ -88,6 +97,7 @@ Added a comprehensive sticky header to the dev tools landing page that appears o
 - Card Lab: Blazing orange (#FF5F1F)
 
 ### Breadcrumbs
+
 - **Icon:** `House` (16px, bold)
 - **Separator:** `›` (dimmed green)
 - **Text:** "Dev Tools" (bold)
@@ -95,6 +105,7 @@ Added a comprehensive sticky header to the dev tools landing page that appears o
 - **Color:** Terminal green (#00FF41)
 
 ### Back Button
+
 - **Icon:** `ArrowLeft` (16px, bold)
 - **Text:** "Back to site"
 - **Padding:** 0.5rem 1rem
@@ -102,6 +113,7 @@ Added a comprehensive sticky header to the dev tools landing page that appears o
 - **Hover:** Background fill + glow
 
 ### Search Button
+
 - **Size:** 40px × 40px
 - **Icon:** `MagnifyingGlass` (20px, bold)
 - **Border:** 1px neon green
@@ -127,9 +139,11 @@ useEffect(() => {
   window.addEventListener('scroll', handleScroll);
   return () => window.removeEventListener('scroll', handleScroll);
 }, []);
-```
+
+```text
 
 **Logic:**
+
 - Header starts hidden (top: -100px)
 - When user scrolls past 200px, header slides down (top: 0)
 - Transition: 0.3s ease (smooth animation)
@@ -139,9 +153,11 @@ useEffect(() => {
 
 ```javascript
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-```
+
+```text
 
 **Logic:**
+
 - Burger button toggles dropdown menu
 - Click category link → smooth scroll + close menu
 - Dropdown only visible on mobile (< 1024px)
@@ -150,16 +166,20 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 ```javascript
 const scrollToCategory = useCallback((categoryId: string) => {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReduced = window.matchMedia('(prefers-reduced-motion:
+reduce)').matches;
   const el = document.getElementById(`category-${categoryId}`);
   if (el) {
-    el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start'
+});
   }
   setMobileMenuOpen(false);
 }, []);
-```
+
+```text
 
 **Logic:**
+
 - Smooth scroll to category section
 - Respects reduced motion preference
 - Closes mobile menu after navigation
@@ -169,6 +189,7 @@ const scrollToCategory = useCallback((categoryId: string) => {
 ## 📱 Responsive Breakpoints
 
 ### Mobile (< 768px)
+
 - ✅ Burger menu visible
 - ✅ Dev Tools icon visible
 - ❌ Desktop nav links hidden
@@ -177,6 +198,7 @@ const scrollToCategory = useCallback((categoryId: string) => {
 - ✅ Search button visible
 
 ### Tablet (768px - 1023px)
+
 - ✅ Burger menu visible
 - ✅ Dev Tools icon visible
 - ❌ Desktop nav links hidden
@@ -185,6 +207,7 @@ const scrollToCategory = useCallback((categoryId: string) => {
 - ✅ Search button visible
 
 ### Desktop (1024px+)
+
 - ✅ Burger menu visible (for consistency)
 - ✅ Dev Tools icon visible
 - ✅ Desktop nav links visible
@@ -225,7 +248,8 @@ const scrollToCategory = useCallback((categoryId: string) => {
 <nav aria-label="Mobile menu">
   ...
 </nav>
-```
+
+```text
 
 ### Keyboard Navigation
 
@@ -241,7 +265,7 @@ const scrollToCategory = useCallback((categoryId: string) => {
   .dev-tools-sticky-header {
     transition: none; /* Instant appearance */
   }
-  
+
   .dev-tools-sticky-header__burger,
   .dev-tools-sticky-header__nav-link,
   .dev-tools-sticky-header__back,
@@ -250,9 +274,11 @@ const scrollToCategory = useCallback((categoryId: string) => {
     transition: none; /* Instant hover states */
   }
 }
-```
+
+```text
 
 **Behavior:**
+
 - Header appears instantly (no slide animation)
 - Hover states change instantly (no fade)
 - Smooth scrolling disabled (`scrollIntoView({ behavior: 'auto' })`)
@@ -262,18 +288,21 @@ const scrollToCategory = useCallback((categoryId: string) => {
 ## 🎯 User Experience Benefits
 
 ### Navigation Efficiency
+
 - **Quick category jumps:** Desktop users can click nav links without scrolling
 - **Mobile access:** Burger menu provides organized dropdown
 - **Context awareness:** Breadcrumbs show current location
 - **Easy escape:** "Back to site" button provides clear exit
 
 ### Visual Consistency
+
 - **Always accessible:** Header appears after scrolling past hero
 - **Clear hierarchy:** Left (menu) → Center (nav) → Right (actions)
 - **Color-coded categories:** Visual distinction between tool groups
 - **Retro aesthetic:** Matches CLI theme of main page
 
 ### Performance
+
 - **Lightweight:** CSS-only animations (no heavy JS)
 - **Conditional rendering:** Mobile menu only renders when open
 - **Efficient scroll handling:** Single `scrollY` check per scroll event
@@ -284,13 +313,15 @@ const scrollToCategory = useCallback((categoryId: string) => {
 ## 🔧 Files Modified
 
 1. **`/components/pages/dev-tools/DevToolsPage.tsx`**
+
    - Added state: `mobileMenuOpen`, `stickyHeaderVisible`
    - Added scroll listener
    - Added sticky header JSX
    - Imported new icons: `List`, `House`, `ArrowLeft`, `MagnifyingGlass`, `Wrench`
    - Removed old jump-nav section
 
-2. **`/styles/blocks/dev-tools-page.css`**
+1. **`/styles/blocks/dev-tools-page.css`**
+
    - Added 300+ lines for sticky header styles
    - Breakpoint-specific visibility rules
    - Mobile dropdown menu styles
@@ -347,8 +378,10 @@ const scrollToCategory = useCallback((categoryId: string) => {
 ## 🚀 Next Steps
 
 1. ✅ **Sticky header complete** — Retro CLI navigation bar implemented
-2. ⏭️ **Add Phosphor icons to dev tools badges** — 37 pages need icon additions
-3. ⏭️ **Implement stats sections** — Universal metrics bars below heroes
+
+1. ⏭️ **Add Phosphor icons to dev tools badges** — 37 pages need icon additions
+
+1. ⏭️ **Implement stats sections** — Universal metrics bars below heroes
 
 ---
 

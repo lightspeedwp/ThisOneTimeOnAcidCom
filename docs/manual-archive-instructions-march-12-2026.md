@@ -1,8 +1,10 @@
 # Manual Archive Instructions - March 12, 2026
 
-**Created:** March 12, 2026  
-**Purpose:** Instructions for manually archiving task lists and deleting old reports  
-**Note:** AI tools can only delete individual files, not directories. Use terminal/file manager for folder operations.
+**Created:** March 12, 2026
+**Purpose:** Instructions for manually archiving task lists and deleting old
+reports
+**Note:** AI tools can only delete individual files, not directories. Use
+terminal/file manager for folder operations.
 
 ---
 
@@ -11,12 +13,16 @@
 ### Option 1: Using Terminal (Recommended)
 
 ```bash
+
 # Navigate to project root
+
 cd /path/to/nova-news
 
 # ============================================================================
+
 # STEP 1: Archive Completed Task Lists
-# ============================================================================
+
+# ============================================================================ (1)
 
 mv tasks/dark-mode-emergency-fixes.md tasks/archived/
 mv tasks/dark-mode-implementation-checklist.md tasks/archived/
@@ -24,9 +30,11 @@ mv tasks/light-mode-deployment-checklist.md tasks/archived/
 mv tasks/dev-tools-optimization-tasks.md tasks/archived/
 mv tasks/CRITICAL-dark-mode-contrast-fixes.md tasks/archived/
 
-# ============================================================================
+# ============================================================================ (2)
+
 # STEP 2: Archive Completed Reports
-# ============================================================================
+
+# ============================================================================ (3)
 
 mv reports/alternating-sections-fix reports/archived/
 mv reports/book-dark-mode-final-fix reports/archived/
@@ -41,18 +49,22 @@ mv reports/theme-styling-audit reports/archived/
 mv reports/theme-toggle-rewire reports/archived/
 mv reports/dev-tools-optimization reports/archived/
 
-# ============================================================================
+# ============================================================================ (4)
+
 # STEP 3: Delete Old Archived Reports (>7 days)
-# ============================================================================
+
+# ============================================================================ (5)
 
 rm -rf reports/archived/feature-work
 rm -rf reports/archived/memory-reduction-v2
 rm -rf reports/archived/music-page-creation
 rm -rf reports/archived/production-launch-prep
 
-# ============================================================================
+# ============================================================================ (6)
+
 # Verification
-# ============================================================================
+
+# ============================================================================ (7)
 
 echo "✅ Archive complete!"
 echo ""
@@ -65,7 +77,8 @@ ls -1 reports/archived/
 
 echo ""
 echo "✅ Done! Now update /tasks/master-task-list.md"
-```
+
+```text
 
 ---
 
@@ -76,36 +89,54 @@ echo "✅ Done! Now update /tasks/master-task-list.md"
 **Move these files** from `/tasks/` to `/tasks/archived/`:
 
 1. ✅ `dark-mode-emergency-fixes.md`
-2. ✅ `dark-mode-implementation-checklist.md`
-3. ✅ `light-mode-deployment-checklist.md`
-4. ✅ `dev-tools-optimization-tasks.md`
-5. ✅ `CRITICAL-dark-mode-contrast-fixes.md`
+
+1. ✅ `dark-mode-implementation-checklist.md`
+
+1. ✅ `light-mode-deployment-checklist.md`
+
+1. ✅ `dev-tools-optimization-tasks.md`
+
+1. ✅ `CRITICAL-dark-mode-contrast-fixes.md`
 
 ### Step 2: Archive Reports
 
 **Move these folders** from `/reports/` to `/reports/archived/`:
 
 1. ✅ `alternating-sections-fix/`
-2. ✅ `book-dark-mode-final-fix/`
-3. ✅ `contrast-audit/`
-4. ✅ `dark-mode-audit/`
-5. ✅ `dark-mode-color-fix/`
-6. ✅ `dark-mode-contrast-audit/`
-7. ✅ `flawless-dark-mode/`
-8. ✅ `light-gray-fix/`
-9. ✅ `sitemap-dark-mode-update/`
-10. ✅ `theme-styling-audit/`
-11. ✅ `theme-toggle-rewire/`
-12. ✅ `dev-tools-optimization/`
+
+1. ✅ `book-dark-mode-final-fix/`
+
+1. ✅ `contrast-audit/`
+
+1. ✅ `dark-mode-audit/`
+
+1. ✅ `dark-mode-color-fix/`
+
+1. ✅ `dark-mode-contrast-audit/`
+
+1. ✅ `flawless-dark-mode/`
+
+1. ✅ `light-gray-fix/`
+
+1. ✅ `sitemap-dark-mode-update/`
+
+1. ✅ `theme-styling-audit/`
+
+1. ✅ `theme-toggle-rewire/`
+
+1. ✅ `dev-tools-optimization/`
 
 ### Step 3: Delete Old Archived Reports
 
 **Delete these folders** from `/reports/archived/` (archived >7 days ago):
 
 1. ✅ `feature-work/`
-2. ✅ `memory-reduction-v2/`
-3. ✅ `music-page-creation/`
-4. ✅ `production-launch-prep/`
+
+1. ✅ `memory-reduction-v2/`
+
+1. ✅ `music-page-creation/`
+
+1. ✅ `production-launch-prep/`
 
 ---
 
@@ -128,6 +159,7 @@ After archiving, edit `/tasks/master-task-list.md`:
 ### Move These Entries to "Archived" Section
 
 ```markdown
+
 ## Archived (files in `/tasks/archived/`)
 
 | Task list | Created | Completed | Archived | Notes |
@@ -137,7 +169,7 @@ After archiving, edit `/tasks/master-task-list.md`:
 | [light-mode-deployment-checklist.md](./archived/light-mode-deployment-checklist.md) | Mar 11, 2026 | Mar 11, 2026 | Mar 12, 2026 | Light mode toggle deployed with WCAG AAA compliance. Ebook contrast enhanced (3.2:1 → 9.5:1 dark, 16.1:1 light). |
 | [dev-tools-optimization-tasks.md](./archived/dev-tools-optimization-tasks.md) | Mar 8, 2026 | Mar 8, 2026 | Mar 12, 2026 | Schema.org integration in DetailTemplatePage complete. JSON-LD debugger added. |
 | [CRITICAL-dark-mode-contrast-fixes.md](./archived/CRITICAL-dark-mode-contrast-fixes.md) | Mar 11, 2026 | Mar 11, 2026 | Mar 12, 2026 | Root cause fixed: ThemeProvider defaulting to dark. 35 contrast fixes applied. Production ready. |
-```
+```text
 
 ### Remove From "Completed (pending archive)" Section
 
@@ -146,6 +178,7 @@ Delete these 5 entries that are now archived.
 ### Update "Remaining Active Reports" Section
 
 Remove these 12 reports (now archived):
+
 - `/reports/alternating-sections-fix/`
 - `/reports/book-dark-mode-final-fix/`
 - `/reports/contrast-audit/`
@@ -164,7 +197,8 @@ Remove these 12 reports (now archived):
 ## 📊 Expected Final State
 
 ### `/tasks/` Directory (10 files)
-```
+
+```text
 animation-movement-tasks.md
 animation-phase-1-deployment-checklist.md
 book-website-tasks.md
@@ -175,10 +209,12 @@ master-task-list.md
 modern-react-migration-tasks.md
 REALISTIC-dark-mode-fix-plan.md (NOT COMPLETE - DO NOT ARCHIVE)
 task-list.md
-```
+
+```text
 
 ### `/tasks/archived/` Directory (10 files)
-```
+
+```text
 CRITICAL-dark-mode-contrast-fixes.md (NEW)
 dark-mode-emergency-fixes.md (NEW)
 dark-mode-implementation-checklist.md (NEW)
@@ -189,10 +225,12 @@ memory-reduction-v2-tasks.md
 music-page-creation-tasks.md
 phosphor-migration-tasks.md
 production-launch-prep-tasks.md
-```
+
+```text
 
 ### `/reports/` Directory (7 folders)
-```
+
+```text
 2026-03-11-modern-react-migration/
 animation-movement-audit/
 archived/
@@ -201,10 +239,12 @@ comprehensive-hero-architecture/
 ebook-audit/
 feature-work/
 site-health-check/
-```
+
+```text
 
 ### `/reports/archived/` Directory (12 folders + existing)
-```
+
+```text
 alternating-sections-fix/ (NEW)
 book-dark-mode-final-fix/ (NEW)
 contrast-audit/ (NEW)
@@ -217,21 +257,26 @@ light-gray-fix/ (NEW)
 sitemap-dark-mode-update/ (NEW)
 theme-styling-audit/ (NEW)
 theme-toggle-rewire/ (NEW)
-```
+
+```text
 
 ---
 
 ## 🎯 Next Steps After Archiving
 
 1. ✅ Run git status to review changes
-2. ✅ Commit with message: "chore: archive 5 completed task lists and 12 reports (March 12, 2026)"
-3. ✅ Update project status docs if needed
-4. ✅ Continue with Animation Phase 1 deployment (see `/tasks/animation-phase-1-deployment-checklist.md`)
+
+1. ✅ Commit with message: "chore: archive 5 completed task lists and 12 reports (March 12, 2026)"
+
+1. ✅ Update project status docs if needed
+
+1. ✅ Continue with Animation Phase 1 deployment (see `/tasks/animation-phase-1-deployment-checklist.md`)
 
 ---
 
-**Created:** March 12, 2026  
-**Status:** Ready to execute  
+**Created:** March 12, 2026
+**Status:** Ready to execute
 **Estimated Time:** 5-10 minutes
 
-**Note:** This is a maintenance task following the guidelines in `/guidelines/Guidelines.md` section "Mandatory Folder Conventions".
+**Note:** This is a maintenance task following the guidelines in
+`/guidelines/Guidelines.md` section "Mandatory Folder Conventions".

@@ -7,24 +7,30 @@
 
 ## Objective
 
-Create a template browser dev tool that shows miniature wireframe previews of every page template in the application. Click any preview to see an expanded view with component annotations, CSS file references, and structural anatomy.
+Create a template browser dev tool that shows miniature wireframe previews of
+every page template in the application. Click any preview to see an expanded
+view with component annotations, CSS file references, and structural anatomy.
 
 ---
 
 ## Design concept
 
-The page should feel like a **template selection screen** — a grid of cards where each card is a miniature structural wireframe of a page layout. Think of it like a CMS template picker or a Figma frame browser.
+The page should feel like a **template selection screen** — a grid of cards
+where each card is a miniature structural wireframe of a page layout. Think of
+it like a CMS template picker or a Figma frame browser.
 
 ### Wireframe style
 
-Each preview is a **simplified structural diagram** drawn with CSS (not screenshots or rendered pages). Use:
+Each preview is a **simplified structural diagram** drawn with CSS (not
+screenshots or rendered pages). Use:
+
 - Rectangles with rounded corners for sections
 - Solid fills in neutral greys for content blocks
 - Dashed borders for optional sections
 - Neon colour-coded blocks for content-type-specific areas
 - Small labels in monospace font for section names
 
-```
+```text
 ┌──────────────────────────┐
 │  ░░░░ Header ░░░░░░░░░░  │
 ├──────────────────────────┤
@@ -37,13 +43,15 @@ Each preview is a **simplified structural diagram** drawn with CSS (not screensh
 ├──────────────────────────┤
 │  ░░░░ Footer ░░░░░░░░░░  │
 └──────────────────────────┘
-```
+
+```text
 
 ---
 
 ## Page layout inventory
 
 ### Blog layouts
+
 | Layout | Route | Structure |
 |---|---|---|
 | Blog archive | `/blog` | Hero → ArchiveFilters → 2-col card grid → Pagination |
@@ -52,6 +60,7 @@ Each preview is a **simplified structural diagram** drawn with CSS (not screensh
 | Blog tag | `/blog/tag/:slug` | Hero → Tag description → Card grid → Pagination |
 
 ### Portfolio layouts
+
 | Layout | Route | Structure |
 |---|---|---|
 | Portfolio archive | `/portfolio` | Hero → Filters → Card grid → Pagination |
@@ -60,6 +69,7 @@ Each preview is a **simplified structural diagram** drawn with CSS (not screensh
 | Portfolio tag | `/portfolio/tag/:slug` | Hero → Tag → Card grid → Pagination |
 
 ### Video layouts
+
 | Layout | Route | Structure |
 |---|---|---|
 | Video archive | `/videos` | Hero → Filters → Card grid → Pagination |
@@ -67,6 +77,7 @@ Each preview is a **simplified structural diagram** drawn with CSS (not screensh
 | Video category | `/videos/category/:slug` | Hero → Card grid → Pagination |
 
 ### Podcast layouts
+
 | Layout | Route | Structure |
 |---|---|---|
 | Podcast archive | `/podcasts` | Hero → Filters → Card grid → Pagination |
@@ -74,12 +85,14 @@ Each preview is a **simplified structural diagram** drawn with CSS (not screensh
 | Podcast category | `/podcasts/category/:slug` | Hero → Card grid → Pagination |
 
 ### Event layouts
+
 | Layout | Route | Structure |
 |---|---|---|
 | Event archive | `/events` | Hero → Stats → Card grid |
 | Event detail | `/events/:slug` | Hero → Editions timeline → Travel → Gallery → FAQ |
 
 ### About layouts
+
 | Layout | Route | Structure |
 |---|---|---|
 | About (journey) | `/about` | Hero → ChapterNav sidebar → Scroll-spy content sections |
@@ -87,6 +100,7 @@ Each preview is a **simplified structural diagram** drawn with CSS (not screensh
 | About sub-page | `/about/:slug` | Hero → Content sections → Pull quotes → FAQ |
 
 ### Other layouts
+
 | Layout | Route | Structure |
 |---|---|---|
 | Home | `/` | Hero → Featured → Blog preview → FAQ |
@@ -104,7 +118,7 @@ Each preview is a **simplified structural diagram** drawn with CSS (not screensh
 
 ## Page structure
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │  Breadcrumbs: Home > Developer Tools > Page layout browser   │
 │  Badge: Content                                              │
@@ -133,7 +147,8 @@ Each preview is a **simplified structural diagram** drawn with CSS (not screensh
 │  └──────────┘  └──────────┘  └──────────┘  └──────────┘    │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
-```
+
+```text
 
 ---
 
@@ -141,7 +156,7 @@ Each preview is a **simplified structural diagram** drawn with CSS (not screensh
 
 When clicking a wireframe preview, an expanded panel (modal or slide-out) shows:
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │  [X Close]                                                    │
 │                                                              │
@@ -188,7 +203,8 @@ When clicking a wireframe preview, an expanded panel (modal or slide-out) shows:
 │  Neon colour: Pink (#FF10F0)                                  │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
-```
+
+```text
 
 ---
 
@@ -208,19 +224,23 @@ interface WireframeBlock {
   cssFile?: string;
   neonColour?: string;
 }
-```
 
-The wireframe is rendered entirely with CSS (BEM classes like `.wireframe__block`, `.wireframe__block--hero`, etc.) — no images needed.
+```text
+
+The wireframe is rendered entirely with CSS (BEM classes like
+`.wireframe_*block`, `.wireframe*_block--hero`, etc.) — no images needed.
 
 ### Data file
 
 `/data/mock/ui/page-layout-browser.ts`:
+
 ```typescript
 export interface PageLayout {
   id: string;
   name: string;
   route: string;
-  contentType: 'blog' | 'portfolio' | 'video' | 'podcast' | 'event' | 'about' | 'other';
+contentType: 'blog' | 'portfolio' | 'video' | 'podcast' | 'event' | 'about' |
+'other';
   neonColour: string;
   blocks: WireframeBlock[];
   components: string[];
@@ -240,7 +260,8 @@ export const pageLayouts: PageLayout[] = [
   },
   // ... all other layouts
 ];
-```
+
+```text
 
 ---
 

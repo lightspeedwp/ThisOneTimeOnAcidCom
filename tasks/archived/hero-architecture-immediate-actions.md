@@ -1,7 +1,7 @@
 # Hero Architecture & Dev Tools — Immediate Actions Task List
 
-**Date:** March 7, 2026  
-**Priority:** CRITICAL  
+**Date:** March 7, 2026
+**Priority:** CRITICAL
 **Status:** Ready to Execute
 
 ---
@@ -9,25 +9,28 @@
 ## 🚨 Blocking Issues (Fix First)
 
 ### Issue 1: Dev Tools Routing Fixed ✅
+
 - **Status:** ✅ COMPLETE (earlier in conversation)
 - **Solution:** Nested dev-tools routes inside RootLayout, added conditional rendering
 - **Files Modified:** `/routes.ts`, `/components/common/RootLayout.tsx`
 
 ### Issue 2: Remove Dev Tools from Sitemap ✅
+
 - **Status:** ✅ COMPLETE
 - **Reason:** User requested direct navigation to dev tools (not from main site)
 - **Files Modified:** `/components/pages/SitemapPage.tsx` (removed lines 607-662, cleaned imports)
 - **Result:** Dev tools section removed from sitemap
 
 ### Issue 3: Light/Dark Mode for Dev Tools Components ✅
+
 - **Status:** ✅ COMPLETE
 - **Components Verified:**
-  - ✅ `/styles/blocks/dev-tools-header.css` (already had light mode)
-  - ✅ `/styles/blocks/dev-tools-breadcrumbs.css` (light mode added)
-  - ✅ `/styles/blocks/dev-tools-menu.css` (already had light mode)
-  - ✅ `/styles/blocks/dev-tools-footer.css` (already had light mode)
-  - ✅ `/styles/blocks/dev-tools-search.css` (already had light mode)
-  - ✅ `/styles/blocks/dev-tools-layout.css` (already had light mode)
+- ✅ `/styles/blocks/dev-tools-header.css` (already had light mode)
+- ✅ `/styles/blocks/dev-tools-breadcrumbs.css` (light mode added)
+- ✅ `/styles/blocks/dev-tools-menu.css` (already had light mode)
+- ✅ `/styles/blocks/dev-tools-footer.css` (already had light mode)
+- ✅ `/styles/blocks/dev-tools-search.css` (already had light mode)
+- ✅ `/styles/blocks/dev-tools-layout.css` (already had light mode)
 - **Result:** All 6 dev tools CSS files support light/dark mode switching
 
 ---
@@ -37,13 +40,18 @@
 ### Task 1.1: Remove Dev Tools from Sitemap ✅
 
 **Files:**
+
 - `/components/pages/SitemapPage.tsx` (removed lines 607-662, cleaned imports)
 
 **Steps:**
+
 1. Locate the dev tools section (starts with `<section className="sitemap-section" aria-labelledby="sitemap-dev-tools">`)
-2. Delete the entire section (or comment out)
-3. Update the sitemap section comments at the top of the file
-4. Test sitemap page loads correctly
+
+1. Delete the entire section (or comment out)
+
+1. Update the sitemap section comments at the top of the file
+
+1. Test sitemap page loads correctly
 
 **Expected Result:** Sitemap page no longer shows dev tools section
 
@@ -53,7 +61,8 @@
 
 **File:** `/styles/blocks/dev-tools-header.css`
 
-**Add at end of file:**
+## Add at end of file
+
 ```css
 /* ────────────────────────────────────────────────────────────────
    Light Mode
@@ -82,7 +91,8 @@ body.light-mode .dev-tools-search__input::placeholder {
 body.light-mode .dev-tools-burger__line {
   background: var(--wp--preset--color--neutral-900);
 }
-```
+
+```text
 
 ---
 
@@ -90,7 +100,8 @@ body.light-mode .dev-tools-burger__line {
 
 **File:** `/styles/blocks/dev-tools-breadcrumbs.css`
 
-**Create file if doesn't exist, add:**
+## Create file if doesn't exist, add
+
 ```css
 /* Base styles for dev tools breadcrumbs */
 .dev-tools-breadcrumbs {
@@ -114,7 +125,8 @@ body.light-mode .dev-tools-breadcrumbs__link:hover {
 body.light-mode .dev-tools-breadcrumbs__separator {
   color: var(--wp--preset--color--neutral-400);
 }
-```
+
+```text
 
 ---
 
@@ -123,6 +135,7 @@ body.light-mode .dev-tools-breadcrumbs__separator {
 **File:** `/styles/blocks/dev-tools-menu.css`
 
 **Add at end:**
+
 ```css
 /* ────────────────────────────────────────────────────────────────
    Light Mode
@@ -163,7 +176,8 @@ body.light-mode .dev-tools-menu__link--active {
   background: rgba(0, 0, 0, 0.08);
   color: var(--wp--preset--color--neutral-900);
 }
-```
+
+```text
 
 ---
 
@@ -171,13 +185,15 @@ body.light-mode .dev-tools-menu__link--active {
 
 ### Task 2.1: Audit All Hero Implementations
 
-**Reference:** `/reports/comprehensive-hero-architecture/MASTER-AUDIT-PLAN.md` (Task 1)
+**Reference:** `/reports/comprehensive-hero-architecture/MASTER-AUDIT-PLAN.md`
+(Task 1)
 
 **Files to Audit:** All 150+ page components
 
 **Output:** `/reports/comprehensive-hero-architecture/hero-audit-all-pages.md`
 
 **Data to Extract:**
+
 - Hero HTML structure
 - Content elements (badge, icon, title, subtitle, buttons, scroll arrow)
 - Layout patterns (centered, left-aligned, two-column, full-width)
@@ -188,11 +204,16 @@ body.light-mode .dev-tools-menu__link--active {
 - Data sources
 
 **Deliverables:**
+
 1. Categorized list of all hero implementations
-2. Pattern frequency analysis
-3. Edge cases and unique requirements
-4. Common vs unique elements
-5. Data structure recommendations
+
+1. Pattern frequency analysis
+
+1. Edge cases and unique requirements
+
+1. Common vs unique elements
+
+1. Data structure recommendations
 
 ---
 
@@ -201,6 +222,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Reference:** MASTER-AUDIT-PLAN.md (Task 2)
 
 **Files:**
+
 - `/components/common/Header.tsx`
 - `/components/dev-tools/DevToolsHeader.tsx`
 
@@ -213,6 +235,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Reference:** MASTER-AUDIT-PLAN.md (Task 3)
 
 **Files:**
+
 - `/components/ui/Breadcrumbs.tsx`
 - `/components/common/AutoBreadcrumbs.tsx`
 
@@ -225,6 +248,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Reference:** MASTER-AUDIT-PLAN.md (Task 4)
 
 **Files:**
+
 - `/components/common/Footer.tsx`
 - `/components/dev-tools/DevToolsFooter.tsx`
 
@@ -237,6 +261,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Reference:** MASTER-AUDIT-PLAN.md (Task 5)
 
 **Files:**
+
 - `/components/common/MobileMenu.tsx`
 - `/components/dev-tools/DevToolsMenu.tsx`
 
@@ -249,6 +274,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Reference:** MASTER-AUDIT-PLAN.md (Task 6)
 
 **Folders:**
+
 - `/data/mock/pages/`
 - `/data/mock/ui/`
 - `/data/mock/portfolio/`
@@ -267,6 +293,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Output:** `/docs/hero-component-specification.md`
 
 **Key Decisions:**
+
 - Unified HeroConfig interface
 - Layout pattern variants enum
 - Optional element support
@@ -282,6 +309,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Output:** `/docs/template-parts-specification.md`
 
 **Key Decisions:**
+
 - Header pattern variants (default, dev-tools, editorial, minimal)
 - Breadcrumbs pattern variants
 - Footer pattern variants
@@ -297,6 +325,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Output:** `/docs/data-schema-specification.md`
 
 **Key Decisions:**
+
 - Hero configurations schema
 - Header configurations schema
 - Breadcrumbs configurations schema
@@ -313,6 +342,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Reference:** MASTER-AUDIT-PLAN.md (Task 10)
 
 **New Files:**
+
 - `/components/ui/Hero.tsx`
 - `/styles/blocks/hero.css`
 - `/styles/blocks/hero-layouts.css`
@@ -327,6 +357,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Reference:** `/prompts/dev-tools-hero-stats-system.md`
 
 **New Files:**
+
 - `/components/dev-tools/DevToolsHero.tsx`
 - `/components/dev-tools/StatsBar.tsx`
 - `/components/dev-tools/WebGLHeroGraphic.tsx`
@@ -343,6 +374,7 @@ body.light-mode .dev-tools-menu__link--active {
 **Reference:** MASTER-AUDIT-PLAN.md (Task 12)
 
 **New Files:**
+
 - `/components/template-parts/Header.tsx`
 - `/components/template-parts/Breadcrumbs.tsx`
 - `/components/template-parts/Footer.tsx`
@@ -354,6 +386,7 @@ body.light-mode .dev-tools-menu__link--active {
 ## 🎯 Success Criteria
 
 ### Blocking Issues Fixed
+
 - [x] Dev tools routing works ✅
 - [x] Dev tools removed from sitemap
 - [x] Light/dark mode for all dev tools components
@@ -361,18 +394,21 @@ body.light-mode .dev-tools-menu__link--active {
 - [x] Stats sections on all dev tools pages
 
 ### Comprehensive Hero System
+
 - [x] Single Hero component powers all pages
 - [x] 4+ layout patterns supported
 - [x] Optional elements work correctly
 - [x] All from data files (zero hardcoded)
 
 ### Template Parts System
+
 - [x] Header with 4 pattern variants
 - [x] Breadcrumbs with 3 pattern variants
 - [x] Footer with 3 pattern variants
 - [x] All patterns have light/dark mode
 
 ### Data Schema
+
 - [x] Unified data structures
 - [x] Type-safe interfaces
 - [x] Comprehensive documentation
@@ -382,20 +418,30 @@ body.light-mode .dev-tools-menu__link--active {
 ## 🚀 Next Immediate Steps
 
 **Right Now (Today):**
+
 1. Remove dev tools from sitemap
-2. Add light mode CSS to dev tools components
-3. Test `/dev-tools` routing
-4. Verify light/dark mode switching
+
+1. Add light mode CSS to dev tools components
+
+1. Test `/dev-tools` routing
+
+1. Verify light/dark mode switching
 
 **Tomorrow:**
-5. Start hero audit (all pages)
-6. Start header/breadcrumbs/footer audit
-7. Review `/prompts/dev-tools-hero-stats-system.md` implementation plan
+
+1. Start hero audit (all pages)
+
+1. Start header/breadcrumbs/footer audit
+
+1. Review `/prompts/dev-tools-hero-stats-system.md` implementation plan
 
 **This Week:**
-8. Complete all audits (Tasks 2.1-2.6)
-9. Write design specifications (Tasks 3.1-3.3)
-10. Plan implementation timeline
+
+1. Complete all audits (Tasks 2.1-2.6)
+
+1. Write design specifications (Tasks 3.1-3.3)
+
+1. Plan implementation timeline
 
 ---
 

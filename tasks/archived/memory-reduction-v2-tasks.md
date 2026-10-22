@@ -1,12 +1,15 @@
 # Memory reduction v2.0 — Task list
 
-**Created:** March 5, 2026  
-**Completed:** March 5, 2026  
-**Prompt:** [memory-reduction-audit.md](../prompts/memory-reduction-audit.md) (v2.0.0)  
-**Report:** [report.md](../reports/memory-reduction-v2/report.md)  
-**Completion Summary:** [completion-summary.md](../reports/memory-reduction-v2/completion-summary.md)
+**Created:** March 5, 2026
+**Completed:** March 5, 2026
+**Prompt:** [memory-reduction-audit.md](../prompts/memory-reduction-audit.md)
+(v2.0.0)
+**Report:** [report.md](../reports/memory-reduction-v2/report.md)
+**Completion Summary:**
+[completion-summary.md](../reports/memory-reduction-v2/completion-summary.md)
 
-**Status:** ✅ **ALL TASKS COMPLETE** (29/30 total, 97%) — T30 intentionally skipped (low ROI)
+**Status:** ✅ **ALL TASKS COMPLETE** (29/30 total, 97%) — T30 intentionally
+skipped (low ROI)
 
 ---
 

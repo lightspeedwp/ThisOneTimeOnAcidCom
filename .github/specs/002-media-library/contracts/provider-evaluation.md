@@ -1,10 +1,17 @@
 # Provider Evaluation Framework
 
-**Purpose**: Define evaluation criteria and decision framework for assessing storage and publishing workflow candidates against real-world usage patterns and requirements.
+**Purpose**: Define evaluation criteria and decision framework for assessing
+storage and publishing workflow candidates against real-world usage patterns and
+requirements.
 
-**Input**: Specification from [spec.md](../spec.md) (FR-010–013), research decisions from [research.md](../research.md) (Q1: GitHub + Netlify approved as working assumption)
+**Input**: Specification from [spec.md](../spec.md) (FR-010–013), research
+decisions from [research.md](../research.md) (Q1: GitHub + Netlify approved as
+working assumption)
 
-**Scope**: This document defines the evaluation *process* and *criteria*. It does NOT select a provider. Provider *approval* is a separate decision outside this specification scope (TOA-276 evaluation → recommendation; TOA-284 infrastructure setup).
+**Scope**: This document defines the evaluation *process* and *criteria*. It
+does NOT select a provider. Provider *approval* is a separate decision outside
+this specification scope (TOA-276 evaluation → recommendation; TOA-284
+infrastructure setup).
 
 **Phase**: 1 Design (US3: Provider and Workflow Evaluation)
 
@@ -14,7 +21,8 @@
 
 ### 1. Cost Model (FR-010, FR-011)
 
-Evaluate actual pricing, not free-tier assumptions. Quote from current documentation.
+Evaluate actual pricing, not free-tier assumptions. Quote from current
+documentation.
 
 | Criterion | What to Assess | Evidence Source | Notes |
 |---|---|---|---|
@@ -105,42 +113,51 @@ Estimate effort to integrate provider with website build and publish pipeline.
 ### Phase 1: Shortlist Candidates
 
 Based on initial research (audit PR #285, strategy report), candidate providers:
+
 - **Option A**: GitHub + Netlify (approved per Q1 resolution)
 - **Option B**: Cloudinary
 - **Option C**: [Other provider, if identified]
 
-Document initial assessment for each candidate against cost, features, format support.
+Document initial assessment for each candidate against cost, features, format
+support.
 
 ### Phase 2: Real-World Workflow Testing
 
 For each shortlisted provider:
 
 1. **Set Up Test Account**
+
    - Create trial or production account
    - Authenticate with test credentials
    - Document any setup barriers or costs
 
-2. **Test Batch Upload**
-   - Upload 5–10 representative recovered assets (mix of formats: SVG, PNG, PDF, high-res TIFF)
+1. **Test Batch Upload**
+
+   - Upload 5–10 representative recovered assets (mix of formats: SVG, PNG, PDF,
+     high-res TIFF)
    - Document upload time, success rate, any format issues
    - Verify metadata (dimensions, colour space, EXIF) preserved
 
-3. **Test Visual Editing**
+1. **Test Visual Editing**
+
    - Use provider's visual editing UI (if available)
    - Attempt common operations: crop, tag, add metadata
    - Document ease of use, feature gaps
 
-4. **Test Retrieval**
+1. **Test Retrieval**
+
    - Download uploaded files via UI and API
    - Verify file integrity (MD5 hash or visual inspection for images)
    - Document retrieval speed, API reliability
 
-5. **Test Reference Mapping**
+1. **Test Reference Mapping**
+
    - Simulate reference migration (old asset ID → new provider ID)
    - Test API integration with sample website page
    - Document integration effort estimate
 
-6. **Document Findings**
+1. **Document Findings**
+
    - Complete evaluation matrix (see below) for this provider
    - Flag any show-stoppers, missing features, or cost surprises
    - Note integration effort estimate (low/medium/high)
@@ -148,6 +165,7 @@ For each shortlisted provider:
 ### Phase 3: Comparison and Recommendation
 
 Create provider comparison matrix (see below) with:
+
 - Quantitative scores (cost, limits, API maturity)
 - Qualitative assessment (ease of use, integration complexity, print support)
 - Recommendation with confidence level and risk flags
@@ -198,6 +216,7 @@ Create one row per candidate provider:
 ## Decision Framework
 
 **Approve provider** when:
+
 - ✓ No show-stoppers identified
 - ✓ Cost acceptable (within project budget)
 - ✓ Supports all required formats (web + print per Q2)
@@ -205,11 +224,13 @@ Create one row per candidate provider:
 - ✓ Integration effort is low/medium (within TOA-285 scope)
 
 **Request additional evaluation** when:
+
 - ⚠ One or two criteria unclear or borderline
 - ⚠ Cost estimate uncertain (require more detailed pricing)
 - ⚠ Integration effort unclear (require prototype or POC)
 
 **Reject provider** when:
+
 - ✗ Missing critical format support (print formats per Q2)
 - ✗ Cost prohibitive (>budget threshold)
 - ✗ Integration effort very high (beyond team capacity)
@@ -222,31 +243,37 @@ Create one row per candidate provider:
 - **Recovered Asset Samples**: 12 pilot assets from TOA-280/TOA-282 validation
 - **Figma Source Files**: Original files for comparison during provider testing
 - **Reference Requirements** (Q2 resolution):
-  - 40–50 of 56 assets recoverable as high-quality originals
-  - Print requires 300 DPI, RGB/CMYK, PNG/PDF support
-  - Web formats: PNG, JPEG, SVG at various sizes
+- 40–50 of 56 assets recoverable as high-quality originals
+- Print requires 300 DPI, RGB/CMYK, PNG/PDF support
+- Web formats: PNG, JPEG, SVG at various sizes
 
 ---
 
 ## Outputs
 
 - **Provider Evaluation Report** (TOA-276 deliverable):
-  - Individual evaluation matrices for each shortlisted provider
-  - Comparison matrix with cost, features, integration effort
-  - Recommendation with confidence level and risk flags
-  - Decision log documenting any trade-offs or deviations
+- Individual evaluation matrices for each shortlisted provider
+- Comparison matrix with cost, features, integration effort
+- Recommendation with confidence level and risk flags
+- Decision log documenting any trade-offs or deviations
 
 ---
 
 ## Traceability
 
 **Functional Requirements**:
-- FR-010 (Evaluation workflow) → Real-world testing with representative recovered assets (Phase 2)
-- FR-011 (Provider assessment) → Validates cost, limits, concurrent-user support with actual testing
-- FR-012 (Distinguish evaluation from approval) → This document evaluates; approval is separate decision (TOA-284)
-- FR-013 (Print-quality support per provider) → Print support matrix included (Q2 resolution: 300 DPI, RGB/CMYK, PNG/PDF)
+
+- FR-010 (Evaluation workflow) → Real-world testing with representative
+  recovered assets (Phase 2)
+- FR-011 (Provider assessment) → Validates cost, limits, concurrent-user support
+  with actual testing
+- FR-012 (Distinguish evaluation from approval) → This document evaluates;
+  approval is separate decision (TOA-284)
+- FR-013 (Print-quality support per provider) → Print support matrix included
+  (Q2 resolution: 300 DPI, RGB/CMYK, PNG/PDF)
 
 **Related Linear Issues**:
+
 - TOA-276 → Provider evaluation workflow
 - TOA-280, TOA-282 → Provide pilot recovered assets for real-world testing
 - TOA-284 → Infrastructure setup once provider is approved
@@ -254,4 +281,5 @@ Create one row per candidate provider:
 
 ---
 
-**Version**: 1.0-phase1 | **Phase**: 1 Design (US3) | **Status**: Ready for evaluation workflow (TOA-276)
+**Version**: 1.0-phase1 | **Phase**: 1 Design (US3) | **Status**: Ready for
+evaluation workflow (TOA-276)

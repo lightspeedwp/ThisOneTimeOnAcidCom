@@ -7,15 +7,20 @@
 
 ## Context
 
-Import errors are the most common cause of build failures and blank-screen renders in the Figma Make bundler. A single unresolved import silently breaks the entire component tree. This audit systematically verifies every import statement in the codebase.
+Import errors are the most common cause of build failures and blank-screen
+renders in the Figma Make bundler. A single unresolved import silently breaks
+the entire component tree. This audit systematically verifies every import
+statement in the codebase.
 
 ---
 
 ## Step 1 — Unresolved import detection
 
-For each `.tsx` and `.ts` file in the project, verify every `import` statement resolves to an existing file or installed package:
+For each `.tsx` and `.ts` file in the project, verify every `import` statement
+resolves to an existing file or installed package:
 
-**Directories to scan:**
+## Directories to scan
+
 - `/components/` (all subdirectories)
 - `/hooks/`
 - `/utils/`
@@ -24,6 +29,7 @@ For each `.tsx` and `.ts` file in the project, verify every `import` statement r
 - `/App.tsx`, `/main.tsx`, `/routes.ts`
 
 **Checks per file:**
+
 - [ ] Relative imports (`./`, `../`) — does the target file exist?
 - [ ] Barrel imports (`from '../data/mock'`) — does the barrel `index.ts` export the requested symbol?
 - [ ] Package imports (`from 'react'`, `from 'react-router'`) — is the package in `package.json`?
@@ -31,7 +37,8 @@ For each `.tsx` and `.ts` file in the project, verify every `import` statement r
 - [ ] Asset imports (`from 'figma:asset/...'`) — is the asset path valid?
 - [ ] SVG imports (`from './imports/svg-...'`) — does the SVG file exist?
 
-**Output:** Table of all unresolved imports with file path, line number, and target.
+**Output:** Table of all unresolved imports with file path, line number, and
+target.
 
 ---
 
@@ -40,10 +47,13 @@ For each `.tsx` and `.ts` file in the project, verify every `import` statement r
 Map the import graph and identify circular chains:
 
 1. Build a dependency graph: for each file, list all files it imports
-2. Walk the graph depth-first to detect cycles
-3. Record each cycle chain (e.g., `A.tsx → B.tsx → C.tsx → A.tsx`)
 
-**Common circular dependency patterns to check:**
+1. Walk the graph depth-first to detect cycles
+
+1. Record each cycle chain (e.g., `A.tsx → B.tsx → C.tsx → A.tsx`)
+
+## Common circular dependency patterns to check
+
 - Component A imports Component B which imports Component A
 - Utility imports a hook that imports the same utility
 - Data file imports a type that imports the same data file
@@ -63,7 +73,8 @@ For each file, verify every imported symbol is actually used:
 - [ ] Type-only imports (`import type { ... }`) — are they used in type annotations?
 - [ ] CSS side-effect imports (`import './styles/...'`) — are BEM classes from that CSS file used in the component's JSX `className` attributes?
 
-**Output:** Table of unused imports with file path, imported symbol, and recommendation (remove).
+**Output:** Table of unused imports with file path, imported symbol, and
+recommendation (remove).
 
 ---
 
@@ -78,7 +89,8 @@ import { Bar } from './utils';  // Should be merged with line above
 
 // GOOD: Single import
 import { Foo, Bar } from './utils';
-```
+
+```text
 
 **Output:** List of duplicate imports with file path and line numbers.
 
@@ -89,14 +101,21 @@ import { Foo, Bar } from './utils';
 Verify import statements follow the project convention:
 
 1. **CSS imports** (side-effect) — first
-2. **React/framework imports** — second
-3. **Third-party package imports** — third
-4. **Project utility/hook imports** — fourth
-5. **Component imports** — fifth
-6. **Data/type imports** — sixth
-7. **Asset imports** (images, SVGs) — last
 
-**Note:** This is a guideline check, not a strict enforcement. Flag files with significantly disordered imports.
+1. **React/framework imports** — second
+
+1. **Third-party package imports** — third
+
+1. **Project utility/hook imports** — fourth
+
+1. **Component imports** — fifth
+
+1. **Data/type imports** — sixth
+
+1. **Asset imports** (images, SVGs) — last
+
+**Note:** This is a guideline check, not a strict enforcement. Flag files with
+significantly disordered imports.
 
 ---
 
@@ -125,6 +144,7 @@ Compare `import` package names against `package.json`:
 ## Output format
 
 ```markdown
+
 ## Unresolved imports
 
 | File | Line | Import target | Issue |
@@ -162,4 +182,4 @@ Compare `import` package names against `package.json`:
 
 | Package | In package.json | Imported | Status |
 |---|---|---|---|
-```
+```text

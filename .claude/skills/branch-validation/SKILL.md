@@ -1,6 +1,7 @@
 ---
 name: "Branch Validation Skill"
-description: "Validates branch names against repository branching strategy for ThisOneTimeOnAcidCom."
+description: "Validates branch names against repository branching strategy for
+ThisOneTimeOnAcidCom."
 type: "skill"
 category: "workflow"
 enabled: true
@@ -11,17 +12,20 @@ tags: ["branch", "validation", "git", "strategy"]
 
 ## Purpose
 
-Validate branch names against the repository branching strategy to ensure consistency and enable automation.
+Validate branch names against the repository branching strategy to ensure
+consistency and enable automation.
 
 ## Branch Naming Requirements
 
 All branches must follow this pattern:
 
-```
+```text
 {type}/{scope}-{title}
-```
+
+```text
 
 Where:
+
 - **type** – Work type (required, one value)
 - **scope** – Component or area (required)
 - **title** – Descriptive name (required, hyphens between words)
@@ -103,18 +107,25 @@ These prefixes break PR template routing and automation:
 - ❌ `openai/` – Reserved for OpenAI integration
 
 **Why forbidden?** They break:
+
 1. PR template assignment workflows
-2. GitHub Actions validation
-3. Labeling and metrics automation
-4. Downstream CI/CD pipelines
+
+1. GitHub Actions validation
+
+1. Labeling and metrics automation
+
+1. Downstream CI/CD pipelines
 
 ## Exemptions
 
 ### Dependabot & Renovate
+
 Branches `dependabot/*` and `renovate/*` bypass naming validation automatically.
 
 ### Release Branches with Semantic Versioning
+
 Release branches follow semantic versioning instead of `{type}/{scope}-{title}`:
+
 - ✅ `release/v1.2.0` — semantic version
 - ✅ `release/v2.0.0-beta.1` — pre-release
 - ✅ `release/2025-01-15` — date-based releases (alternative)
@@ -125,20 +136,26 @@ Use the deterministic validation script to check branch names before pushing:
 
 ```bash
 node scripts/validate-branch-name.js [--branch <name>]
-```
+
+```text
 
 ### Example Usage
 
 ```bash
+
 # Validate current branch
+
 node scripts/validate-branch-name.js
 
 # Validate specific branch name
+
 node scripts/validate-branch-name.js --branch feat/my-feature
 
 # Expected output
+
 Branch 'feat/my-feature' matches the repository branching strategy.
-```
+
+```text
 
 ### Exit Codes
 
@@ -154,7 +171,8 @@ The script outputs structured results:
 {
   "isValid": true,
   "branch": "feat/my-feature",
-  "message": "Branch 'feat/my-feature' matches the repository branching strategy.",
+"message": "Branch 'feat/my-feature' matches the repository branching
+strategy.",
   "type": "valid",
   "details": {
     "pattern": "standard",
@@ -163,7 +181,8 @@ The script outputs structured results:
     "title": "feature"
   }
 }
-```
+
+```text
 
 ## Integration with Pre-commit / Pre-push
 
@@ -174,16 +193,20 @@ To run validation automatically before pushing:
 Add to `.git/hooks/pre-push`:
 
 ```bash
+
 #!/bin/bash
+
 node scripts/validate-branch-name.js
 exit $?
-```
+
+```text
 
 ### Make Executable
 
 ```bash
 chmod +x .git/hooks/pre-push
-```
+
+```text
 
 ## Validation Steps
 
@@ -192,9 +215,12 @@ Before pushing a branch:
 ### 1. Check Branch Name Format
 
 ```bash
+
 # Verify your branch name follows the pattern
+
 git branch --show-current
-```
+
+```text
 
 Expected format: `type/scope-title`
 
@@ -202,9 +228,12 @@ Expected format: `type/scope-title`
 
 ```bash
 npm run validate:branch-name
+
 # or
+
 node scripts/validate-branch-name.js
-```
+
+```text
 
 ### 3. Manual Verification
 
@@ -216,31 +245,39 @@ node scripts/validate-branch-name.js
 
 ## Common Issues & Fixes
 
-### Created branch with wrong name?
+### Created branch with wrong name
 
 **Fix:** Rename the branch to preserve commits
 
 ```bash
-# Rename local branch
-git branch -m wrong-branch-name feat/correct-feature-name
-```
 
-### Already pushed with wrong name?
+# Rename local branch
+
+git branch -m wrong-branch-name feat/correct-feature-name
+
+```text
+
+### Already pushed with wrong name
 
 **Fix:** Follow repository procedure for renaming pushed branches
 
 ```bash
-# Rename local branch
+
+# Rename local branch (1)
+
 git branch -m old-name new-name
 
 # Delete remote branch
+
 git push origin --delete old-name
 
 # Push renamed branch
-git push -u origin new-name
-```
 
-### Validation fails but branch looks correct?
+git push -u origin new-name
+
+```text
+
+### Validation fails but branch looks correct
 
 **Fix:** Check for subtle formatting issues
 
@@ -252,24 +289,32 @@ git push -u origin new-name
 ## Branch Workflow
 
 ```bash
+
 # 1. Fetch latest develop branch
+
 git fetch origin develop
 
 # 2. Create feature branch with correct name
+
 git checkout -b feat/your-feature origin/develop
 
 # 3. Make changes and commit
+
 git commit -m "Your commit message"
 
 # 4. Validate branch name (before push)
+
 node scripts/validate-branch-name.js
 
 # 5. Push to origin
+
 git push -u origin feat/your-feature
 
 # 6. Create PR when ready (not automatic)
+
 # [create PR in GitHub UI]
-```
+
+```text
 
 ## Integration with Automation
 
@@ -294,10 +339,11 @@ Invalid branch names cause:
 - `.github/CLAUDE.md` – Branch naming rules (organization-wide)
 - `.github/docs/BRANCHING_STRATEGY.md` – Strategy documentation (in .github repo)
 - `.claude/agents/branches-agent.md` – Interactive branch naming agent
-- `docs/BRANCH_NAMING_LOCAL.md` – Local developer quick reference
+- `docs/BRANCH*NAMING*LOCAL.md` – Local developer quick reference
 - `scripts/validate-branch-name.js` – Validation script
 - `CONTRIBUTING.md` – Contribution workflow
 
 ---
 
-*Use this skill to validate branch names before pushing to ensure automation compatibility.*
+*Use this skill to validate branch names before pushing to ensure automation
+compatibility.*

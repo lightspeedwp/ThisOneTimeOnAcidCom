@@ -9,7 +9,10 @@
 
 ## Objective
 
-Identify and generate 4–6 new blog posts based on the story material in `/docs/website-content.md` that does NOT overlap with the 18 existing posts. These posts should be personal, storytelling-driven, and aligned with the content pillars.
+Identify and generate 4–6 new blog posts based on the story material in
+`/docs/website-content.md` that does NOT overlap with the 18 existing posts.
+These posts should be personal, storytelling-driven, and aligned with the
+content pillars.
 
 ---
 
@@ -43,13 +46,20 @@ Identify and generate 4–6 new blog posts based on the story material in `/docs
 The following topics are NOT yet covered in the 18 existing posts:
 
 1. **The internship programme story** — 450 applicants → 2 selected. The quality filter. The "no bad habits" philosophy.
-2. **Six Cats cat biographies** — The cats as co-founders of the creative life. Individual personality stories.
-3. **BarCamp 2006: the accidental WordPress pivot** — How a single event redirected 20+ years of a career.
-4. **The founding philosophy** — "I didn't like working for an employer." Designing your own life.
-5. **The book announcement / teaser** — "This one time on acid..." What the book is and why it's being written.
-6. **Lucy the cat: a tribute** — Lucy passed 24 October 2023. Her role as welcoming committee, her personality, what she meant.
-7. **The AI workflow transformation** — August 2025: GitHub Copilot, Claude, MCP and why everything changed.
-8. **The yearly cycle: a creative life by design** — Cape Town → Berlin → Thailand → back. Why this pattern exists.
+
+1. **Six Cats cat biographies** — The cats as co-founders of the creative life. Individual personality stories.
+
+1. **BarCamp 2006: the accidental WordPress pivot** — How a single event redirected 20+ years of a career.
+
+1. **The founding philosophy** — "I didn't like working for an employer." Designing your own life.
+
+1. **The book announcement / teaser** — "This one time on acid..." What the book is and why it's being written.
+
+1. **Lucy the cat: a tribute** — Lucy passed 24 October 2023. Her role as welcoming committee, her personality, what she meant.
+
+1. **The AI workflow transformation** — August 2025: GitHub Copilot, Claude, MCP and why everything changed.
+
+1. **The yearly cycle: a creative life by design** — Cape Town → Berlin → Thailand → back. Why this pattern exists.
 
 ---
 
@@ -58,23 +68,31 @@ The following topics are NOT yet covered in the 18 existing posts:
 ### Step 1: Assess feasibility of each candidate
 
 For each of the 8 candidates above:
+
 1. **Content depth:** Is there enough in `website-content.md` to write a 400–800 word post?
-2. **Standalone value:** Does it read well without external context?
-3. **Pillar alignment:** Which content pillar does it serve?
-4. **Date:** What is a historically accurate backdate?
-5. **Audience:** Who is this post for?
-6. **Overlap risk:** Any overlap with existing 18 posts?
+
+1. **Standalone value:** Does it read well without external context?
+
+1. **Pillar alignment:** Which content pillar does it serve?
+
+1. **Date:** What is a historically accurate backdate?
+
+1. **Audience:** Who is this post for?
+
+1. **Overlap risk:** Any overlap with existing 18 posts?
 
 ### Step 2: Select 4–6 posts
 
-**Selection criteria:**
+## Selection criteria
+
 - Fills a genuine gap in the current content mix
 - Has sufficient source material in `website-content.md`
 - Adds personality and depth — not just information
 - Chronologically spread (don't cluster all in 2025)
 - Diverse pillars (don't add 4 WordPress/tech posts)
 
-**Target pillar distribution for new posts:**
+## Target pillar distribution for new posts
+
 - Six Cats: 1 post (cat tribute or cultivation)
 - WordPress/tech: 1–2 posts (BarCamp or AI workflow)
 - Personal/identity: 1–2 posts (yearly cycle, founding philosophy, or book)
@@ -84,6 +102,7 @@ For each of the 8 candidates above:
 ### Step 3: Generate post metadata
 
 For each selected post, define:
+
 - **id** (kebab-case, unique)
 - **slug** (URL-friendly, descriptive)
 - **title** (sentence case)
@@ -98,6 +117,7 @@ For each selected post, define:
 ### Step 4: Write full post content
 
 For each selected post, write the complete `content` field (markdown):
+
 - 400–800 words
 - Personal, first-person voice
 - Sentence case headings (## subheadings)
@@ -108,7 +128,9 @@ For each selected post, write the complete `content` field (markdown):
 
 ### Step 5: Recommended images
 
-For each post, suggest an Unsplash search query for the featured image. The image should:
+For each post, suggest an Unsplash search query for the featured image. The
+image should:
+
 - Be relevant to the post topic
 - Not be identical to existing post images
 - Match the neon/dark aesthetic of the site where possible
@@ -118,6 +140,7 @@ For each post, suggest an Unsplash search query for the featured image. The imag
 ## Candidate Analysis Quick Reference
 
 ### Candidate A: BarCamp 2006
+
 - **Proposed title:** "The event that changed everything: BarCamp Cape Town 2006"
 - **Pillar:** WordPress/tech
 - **Estimated date:** 2006-11-01 (backdate to the year of the event)
@@ -126,6 +149,7 @@ For each post, suggest an Unsplash search query for the featured image. The imag
 - **Word count estimate:** 500–700 words
 
 ### Candidate B: Founding philosophy
+
 - **Proposed title:** "Designing your own life: why I started a business at 22"
 - **Pillar:** Personal/identity
 - **Estimated date:** 2004-06-01 (backdate — reflects early years post-founding)
@@ -134,6 +158,7 @@ For each post, suggest an Unsplash search query for the featured image. The imag
 - **Word count estimate:** 400–600 words
 
 ### Candidate C: Lucy the cat tribute
+
 - **Proposed title:** "Lucy: our welcoming committee (2003–2023)"
 - **Pillar:** Six Cats
 - **Estimated date:** 2023-11-01 (shortly after she passed, 24 Oct 2023)
@@ -142,6 +167,7 @@ For each post, suggest an Unsplash search query for the featured image. The imag
 - **Word count estimate:** 400–500 words
 
 ### Candidate D: AI workflow transformation
+
 - **Proposed title:** "How AI changed everything at LightSpeed (August 2025)"
 - **Pillar:** WordPress/tech
 - **Estimated date:** 2025-09-01 (shortly after the ~6 weeks described)
@@ -150,6 +176,7 @@ For each post, suggest an Unsplash search query for the featured image. The imag
 - **Word count estimate:** 600–800 words
 
 ### Candidate E: Book teaser
+
 - **Proposed title:** "This one time on acid… — announcing the book"
 - **Pillar:** Personal/identity
 - **Estimated date:** 2025-12-01 (end of year reflection)
@@ -158,6 +185,7 @@ For each post, suggest an Unsplash search query for the featured image. The imag
 - **Word count estimate:** 400–500 words
 
 ### Candidate F: Yearly cycle
+
 - **Proposed title:** "Cape Town, Berlin, Koh Phangan — a life designed on purpose"
 - **Pillar:** Personal/identity / Travel
 - **Estimated date:** 2024-03-01
@@ -170,17 +198,21 @@ For each post, suggest an Unsplash search query for the featured image. The imag
 ## Output Format
 
 ### Section 1: Current blog analysis
+
 - 18 existing posts by pillar
 - Gap areas identified
 
 ### Section 2: Candidate assessment
+
 - All 8 candidates evaluated
 - Selected 4–6 with rationale for each choice (and why others were excluded)
 
 ### Section 3: Post metadata (for `/data/mock/blog/posts.ts` additions)
+
 Full BlogPost object for each selected post, ready to add to posts.ts
 
 ### Section 4: Pillar balance after additions
+
 - Table showing pillar distribution: before (18 posts) → after (22–24 posts)
 
 ---
@@ -188,6 +220,7 @@ Full BlogPost object for each selected post, ready to add to posts.ts
 ## Writing Voice Guidelines
 
 These posts are written as Ash, in first person:
+
 - Direct, personal, specific
 - Not marketing copy — storytelling
 - Vulnerable where appropriate (ADHD struggles, life design choices)
@@ -224,4 +257,5 @@ These posts are written as Ash, in first person:
 ---
 
 **Status:** Ready to execute
-**This is the final sub-audit for Phase 7. After completing, create the consolidated task list at `/tasks/content-expansion-phase7-tasks.md`.**
+**This is the final sub-audit for Phase 7. After completing, create the
+consolidated task list at `/tasks/content-expansion-phase7-tasks.md`.**

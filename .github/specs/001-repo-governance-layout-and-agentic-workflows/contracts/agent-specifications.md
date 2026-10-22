@@ -1,16 +1,21 @@
 # Agent Specification Contracts
 
-**Feature**: TOA-241 – Repository Governance Layout & Agentic Workflows  
-**Phase**: 1 – Design & Contracts  
+**Feature**: TOA-241 – Repository Governance Layout & Agentic Workflows
+**Phase**: 1 – Design & Contracts
 **Date**: 2026-10-17
 
 ---
 
 ## Overview
 
-This document defines the interface contracts for ~18 agents and ~5 skills that operate within the repository governance system. Contracts specify: agent purpose, tool access list, permission scope, token budget, and integration points.
+This document defines the interface contracts for ~18 agents and ~5 skills that
+operate within the repository governance system. Contracts specify: agent
+purpose, tool access list, permission scope, token budget, and integration
+points.
 
-**Baseline Inventory**: 18 agents (subject to change per TOA-264/265), 5 skills. Per Q3 clarification, all budgets subject to hard enforcement (host-side limits, not advisory).
+**Baseline Inventory**: 18 agents (subject to change per TOA-264/265), 5 skills.
+Per Q3 clarification, all budgets subject to hard enforcement (host-side limits,
+not advisory).
 
 ---
 
@@ -19,11 +24,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 ### Spec Kit Agents (Workflow Foundation)
 
 #### speckit-specify
+
 - **Purpose**: Create feature specifications from user requirements
 - **Input**: User narrative, acceptance criteria, stakeholder context
 - **Output**: Specification document (spec.md) in `.github/specs/{NNN-feature}/`
 - **Tools**: Read, Write, Edit, Grep, Glob, Bash, Artifact, Agent (for sub-research)
-- **Permissions**: `file_write` (specs directory only), `git_read`
+- **Permissions**: `file*write` (specs directory only), `git*read`
 - **Budget**: 40k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: User manual invocation; skill registry
 - **Validation**: Output must be valid Markdown with required sections (overview, requirements, success criteria, assumptions)
@@ -31,11 +37,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Constraints**: No protected-file modifications; no external API calls without approval
 
 #### speckit-clarify
+
 - **Purpose**: Resolve ambiguities in feature specifications via Q&A
 - **Input**: Feature spec (spec.md); optional user context
 - **Output**: Updated spec.md with clarifications section; resolved questions
 - **Tools**: Read, Write, Edit, Bash
-- **Permissions**: `file_write` (spec directory only), `file_read` (unrestricted)
+- **Permissions**: `file*write` (spec directory only), `file*read` (unrestricted)
 - **Budget**: 25k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: User manual invocation after `speckit-specify`
 - **Validation**: Q&A session must stay within 5 questions; answers recorded in spec; no contradictions introduced
@@ -43,11 +50,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Constraints**: No implementation work; clarifications only
 
 #### speckit-plan
+
 - **Purpose**: Generate implementation plan, research agenda, and design artifacts
 - **Input**: Clarified spec.md; optional technical context
 - **Output**: plan.md, research.md, data-model.md, contracts/, quickstart.md
 - **Tools**: Read, Write, Edit, Bash, Agent (for research delegation)
-- **Permissions**: `file_write` (spec directory), `file_read` (unrestricted), `agent_spawn` (research agents)
+- **Permissions**: `file*write` (spec directory), `file*read` (unrestricted), `agent_spawn` (research agents)
 - **Budget**: 60k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: User manual invocation after `speckit-clarify`
 - **Validation**: All research questions resolved; design phase gates pass; no specification violations
@@ -55,11 +63,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Constraints**: No code generation; design only
 
 #### speckit-tasks
+
 - **Purpose**: Decompose implementation plan into actionable tasks
 - **Input**: plan.md, research.md, data-model.md from speckit-plan
 - **Output**: tasks.md with 50–100 granular tasks, dependency graph, phase organization
 - **Tools**: Read, Write, Edit, Bash, Artifact
-- **Permissions**: `file_write` (spec directory), `file_read` (unrestricted)
+- **Permissions**: `file*write` (spec directory), `file*read` (unrestricted)
 - **Budget**: 50k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: User manual invocation after `speckit-plan`
 - **Validation**: All requirements mapped to tasks; task graph acyclic; estimated effort reasonable
@@ -67,11 +76,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Constraints**: No implementation work; task decomposition only
 
 #### speckit-implement
+
 - **Purpose**: Execute implementation tasks from tasks.md; coordinate multi-phase rollout
 - **Input**: tasks.md; project state (source code, configuration)
 - **Output**: Committed code changes; progress tracking; validation reports
 - **Tools**: All tools (Read, Write, Edit, Bash, Agent, Artifact, etc.)
-- **Permissions**: `file_write` (unrestricted), `file_read` (unrestricted), `git_write`, `github_api` (PR creation, comments)
+- **Permissions**: `file*write` (unrestricted), `file*read` (unrestricted), `git*write`, `github*api` (PR creation, comments)
 - **Protection Scope**: No host-side pre-write control is configured for these permissions. The planned `locked-files-guard.yml` and required CODEOWNERS review gate merges after writes and commits; they do not prevent local edits or commits. Protected-file changes must receive CODEOWNERS approval (@ashley) via PR review before merge.
 - **Budget**: 200k+ tokens/session (hard limit per Q3, variable by task complexity)
 - **Called From**: User manual invocation after `speckit-tasks`
@@ -84,6 +94,7 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 ### GitHub Governance Agents
 
 #### branch-validation
+
 - **Purpose**: Validate branch names against naming convention
 - **Input**: Branch name string; optional git context
 - **Output**: Validation status; pass/fail with error details
@@ -96,11 +107,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Constraints**: Pure deterministic validation; no state changes
 
 #### labeling-agent
+
 - **Purpose**: Assign labels to issues/PRs based on criteria
 - **Input**: Issue/PR metadata; label taxonomy
 - **Output**: Label assignment commands
 - **Tools**: Read, Bash
-- **Permissions**: `file_read` (labels.yml), `github_api` (label write)
+- **Permissions**: `file*read` (labels.yml), `github*api` (label write)
 - **Budget**: 10k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: GitHub Actions (labeling-unified.yml); manual invocation
 - **Validation**: All assigned labels must be from canonical set (labels.yml families)
@@ -108,11 +120,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Constraints**: Prefixed labels only (type:*, status:*, area:*, priority:*, meta:*)
 
 #### changelog-agent
+
 - **Purpose**: Manage CHANGELOG.md entries using Keep a Changelog format
 - **Input**: Commit messages, PR description, version bump
 - **Output**: Updated CHANGELOG.md with formatted entries
 - **Tools**: Read, Write, Edit, Bash
-- **Permissions**: `file_write` (CHANGELOG.md only), `git_read`
+- **Permissions**: `file*write` (CHANGELOG.md only), `git*read`
 - **Budget**: 15k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: GitHub Actions (changelog-unified.yml); manual invocation
 - **Validation**: Output must match Keep a Changelog 1.1.0 format; version increments correct
@@ -124,11 +137,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 ### Agentic Workflow Agents
 
 #### branch-cleanup-agent
+
 - **Purpose**: Analyze and recommend stale branch removal
 - **Input**: Repository branch metadata; last-commit timestamps
 - **Output**: Cleanup report; branch recommendation list
 - **Tools**: Bash, Read, Artifact
-- **Permissions**: `file_read` (git branches), `git_read`
+- **Permissions**: `file*read` (git branches), `git*read`
 - **Budget**: 20k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: Manual invocation or scheduled workflow
 - **Validation**: Report must be read-only (no deletions); must preserve protected branches
@@ -136,11 +150,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Constraints**: Report-only; never deletes without explicit user command
 
 #### issue-routing-agent
+
 - **Purpose**: Route issues to correct team/workflow based on type and area
 - **Input**: Issue metadata, labels, description
 - **Output**: Routing assignment; team notification
 - **Tools**: Read, Bash, Artifact
-- **Permissions**: `file_read` (issue-types.yml, CODEOWNERS), `github_api` (issue assignment)
+- **Permissions**: `file*read` (issue-types.yml, CODEOWNERS), `github*api` (issue assignment)
 - **Budget**: 12k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: GitHub Actions (automation workflow)
 - **Validation**: Must route only to CODEOWNERS entries; no invalid assignments
@@ -148,11 +163,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Constraints**: Respects CODEOWNERS authority; no manual override of explicit assignments
 
 #### metrics-aggregator-agent
+
 - **Purpose**: Collect and aggregate workflow/validation metrics
 - **Input**: Workflow run data; validation results over time
 - **Output**: Metrics dashboard; trend analysis; audit report
 - **Tools**: Read, Bash, Artifact, Agent (for data fetch)
-- **Permissions**: `file_read` (workflows, metrics), `github_api` (workflow runs read-only)
+- **Permissions**: `file*read` (workflows, metrics), `github*api` (workflow runs read-only)
 - **Budget**: 30k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: Scheduled workflow or manual invocation
 - **Validation**: Metrics must be aggregated correctly; no PII in reports
@@ -164,11 +180,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 ### Supplementary Agents (Supporting Services)
 
 #### claude-code-guide
+
 - **Purpose**: Answer questions about Claude Code, Claude API, and agent development
 - **Input**: User question or technical inquiry
 - **Output**: Guidance, code examples, documentation links
 - **Tools**: Read, WebFetch, WebSearch, Grep
-- **Permissions**: `file_read` (documentation), `web_read`
+- **Permissions**: `file*read` (documentation), `web*read`
 - **Budget**: 25k tokens/invocation (advisory → hard limit per Q3)
 - **Called From**: User manual invocation; help requests
 - **Validation**: Responses must be accurate per current documentation; link validity
@@ -176,11 +193,12 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 - **Constraints**: Reference only; no code execution
 
 #### general-purpose
+
 - **Purpose**: Research and exploratory analysis for complex queries
 - **Input**: Research question; context about task
 - **Output**: Analysis report; recommendations; code examples
 - **Tools**: All tools (flexible for research needs)
-- **Permissions**: `file_read`, `file_write` (temporary artifacts), `web_read`, `agent_spawn`
+- **Permissions**: `file*read`, `file*write` (temporary artifacts), `web*read`, `agent*spawn`
 - **Budget**: 100k+ tokens/session (hard limit per Q3, task-dependent)
 - **Called From**: User delegation for research; complex analysis tasks
 - **Validation**: Results must be well-reasoned; sources cited where applicable
@@ -191,37 +209,44 @@ This document defines the interface contracts for ~18 agents and ~5 skills that 
 
 ## Skill Specifications
 
-Skills are packaged agent capabilities registered in `.claude/skills/`. Each skill has a `SKILL.md` entrypoint documenting invocation syntax, expected inputs, and outputs.
+Skills are packaged agent capabilities registered in `.claude/skills/`. Each
+skill has a `SKILL.md` entrypoint documenting invocation syntax, expected
+inputs, and outputs.
 
-### speckit-specify
+### speckit-specify (1)
+
 - **Entrypoint**: `/speckit-specify` or `/skill:speckit-specify`
 - **Description**: Launch `speckit-specify` agent with Spec Kit workflow
 - **Inputs**: User narrative or feature context (optional)
 - **Outputs**: Specification document; artifact link
 - **Integration**: Foundation of specification-first workflow
 
-### speckit-clarify
+### speckit-clarify (1)
+
 - **Entrypoint**: `/speckit-clarify` or `/skill:speckit-clarify`
 - **Description**: Launch `speckit-clarify` agent for ambiguity resolution
 - **Inputs**: Feature spec path (auto-detected from repo context)
 - **Outputs**: Updated spec; clarification session record
 - **Integration**: Runs after `/speckit-specify`
 
-### speckit-plan
+### speckit-plan (1)
+
 - **Entrypoint**: `/speckit-plan` or `/skill:speckit-plan`
 - **Description**: Launch `speckit-plan` agent for design phase
 - **Inputs**: Clarified spec (auto-detected)
 - **Outputs**: plan.md, research.md, design artifacts
 - **Integration**: Runs after `/speckit-clarify`
 
-### speckit-tasks
+### speckit-tasks (1)
+
 - **Entrypoint**: `/speckit-tasks` or `/skill:speckit-tasks`
 - **Description**: Launch `speckit-tasks` agent for task decomposition
 - **Inputs**: plan.md (auto-detected)
 - **Outputs**: tasks.md with decomposed tasks
 - **Integration**: Runs after `/speckit-plan`
 
-### speckit-implement
+### speckit-implement (1)
+
 - **Entrypoint**: `/speckit-implement` or `/skill:speckit-implement`
 - **Description**: Launch `speckit-implement` agent for implementation execution
 - **Inputs**: tasks.md (auto-detected)
@@ -263,13 +288,15 @@ All budgets subject to hard enforcement post-Q3 per R7.3.
 
 ## Success Criteria
 
-✅ **All ~18 agents initialized and documented in `.claude/agents/`**  
-✅ **All ~5 skills registered with working `/skill-name` invocation**  
-✅ **Agent tool access validated against repository permissions**  
-✅ **Budget enforcement mechanism documented (host-side, per TOA-271)**  
-✅ **Agent changes to protected files cannot merge without CODEOWNERS approval once the merge gate is implemented and required**\
-✅ **Spec Kit workflow (specify → clarify → plan → tasks → implement) functional**  
-✅ **Agent output validates against specification contracts**  
+✅ **All ~18 agents initialized and documented in `.claude/agents/`**
+✅ **All ~5 skills registered with working `/skill-name` invocation**
+✅ **Agent tool access validated against repository permissions**
+✅ **Budget enforcement mechanism documented (host-side, per TOA-271)**
+✅ **Agent changes to protected files cannot merge without CODEOWNERS approval
+once the merge gate is implemented and required**\
+✅ **Spec Kit workflow (specify → clarify → plan → tasks → implement)
+functional**
+✅ **Agent output validates against specification contracts**
 
 ---
 

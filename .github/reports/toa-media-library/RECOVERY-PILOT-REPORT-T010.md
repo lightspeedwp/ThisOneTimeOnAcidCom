@@ -1,20 +1,22 @@
 # T010: Asset Selection & Staging — Phase 1b Recovery Pilot
 
-**Status:** ✅ Complete  
-**Executed:** 2026-10-17  
+**Status:** ✅ Complete
+**Executed:** 2026-10-17
 **Acceptance Criteria:** All met
 
 ---
 
 ## Selection Process
 
-**Objective:** Select 10–15 pilot assets from the 56-asset catalogue representing all major portfolio categories and metadata patterns.
+**Objective:** Select 10–15 pilot assets from the 56-asset catalogue
+representing all major portfolio categories and metadata patterns.
 
 **Strategy:** Tier-based sampling with three priority levels:
 
 ### Tier 1: High Priority (Must Include) — 6 Assets
 
 **Homepage Hero Images** (3 assets)
+
 - Critical path content, highest visibility
 - Complete metadata (alt text, captions in code)
 - Represents home page context
@@ -26,6 +28,7 @@
 | toa-heroImage3 | `e82a7d901c5a28bf9313c7535228e647eaf06b75` | Portrait of person with blonde hair and colorful face paint… | CRITICAL |
 
 **Jungle Festival Series** (3 assets)
+
 - Largest single portfolio category (3 images)
 - Partial metadata (alt text only, no captions)
 - Represents mapped portfolio series extraction
@@ -40,7 +43,8 @@
 
 ### Tier 2: Coverage Diversity (4 assets)
 
-**Rationale:** Validate extraction methodology across different portfolio series, metadata patterns, and asset complexities.
+**Rationale:** Validate extraction methodology across different portfolio
+series, metadata patterns, and asset complexities.
 
 | Asset | Category | FigmaId | Priority | Reason |
 |-------|----------|---------|----------|--------|
@@ -53,7 +57,8 @@
 
 ### Tier 3: Optional (2 assets)
 
-**Rationale:** Test recovery methodology for unmapped assets without existing code metadata.
+**Rationale:** Test recovery methodology for unmapped assets without existing
+code metadata.
 
 | Asset | Category | FigmaId | Priority | Reason |
 |-------|----------|---------|----------|--------|
@@ -67,6 +72,7 @@
 **Total Assets Selected:** 12 (6 Tier 1 + 4 Tier 2 + 2 Tier 3)
 
 **Portfolio Categories Covered:** 8
+
 - Homepage Hero
 - Festival Portfolio - Jungle Festival Koh Phangan
 - Festival Portfolio - Origin Festival 2025
@@ -76,14 +82,17 @@
 - Festival Portfolio - Shankra Festival (Swiss)
 - Portfolio - Thailand Series
 
-**Metadata Distribution:**
+## Metadata Distribution
+
 - Complete metadata: 3 assets (hero images)
 - Partial metadata: 3 assets (jungle festival)
 - Framework only: 6 assets (portfolio series)
 
-**Expected Recovery Rate:** 80–90% (pending T012 verification that all 12 assets are mapped in codebase and findable in Figma Make)
+**Expected Recovery Rate:** 80–90% (pending T012 verification that all 12 assets
+are mapped in codebase and findable in Figma Make)
 
-**Selection Artifacts:**
+## Selection Artifacts
+
 - `recovered-assets/pilot-selection.json` — Structured selection list with full details
 - figmaAssetIds expected to match FULL-CATALOGUE.json (T012 will confirm during extraction)
 

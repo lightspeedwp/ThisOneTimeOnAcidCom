@@ -7,7 +7,9 @@
 
 ## Objective
 
-Polish all 8 existing podcast episodes. Create 7 new episodes to reach 15 total. Write full transcripts for ALL 15 episodes so Ash can record them. Each episode gets 2–3 per-item FAQs.
+Polish all 8 existing podcast episodes. Create 7 new episodes to reach 15 total.
+Write full transcripts for ALL 15 episodes so Ash can record them. Each episode
+gets 2–3 per-item FAQs.
 
 ---
 
@@ -15,23 +17,33 @@ Polish all 8 existing podcast episodes. Create 7 new episodes to reach 15 total.
 
 **File:** `/data/mock/podcasts/episodes.ts`
 
-**Check each of the 8 existing episodes for:**
+## Check each of the 8 existing episodes for
+
 1. **Voice** — Natural spoken-word tone, conversational, as if Ash is talking to a friend
-2. **Content depth** — The `content` field should have substantial markdown content (500+ words)
-3. **Description quality** — Short, punchy, podcast-listing-style descriptions
-4. **Duration accuracy** — Durations should match content length (rough estimate: 150 words/minute of speech)
-5. **Category/tag consistency** — Check against `/data/mock/podcasts/categories.ts` and `/data/mock/podcasts/tags.ts`
-6. **Per-item FAQs** — Verify existing FAQs, add if missing (2–3 per episode)
-7. **Sentence case** — All titles
+
+1. **Content depth** — The `content` field should have substantial markdown content (500+ words)
+
+1. **Description quality** — Short, punchy, podcast-listing-style descriptions
+
+1. **Duration accuracy** — Durations should match content length (rough estimate: 150 words/minute of speech)
+
+1. **Category/tag consistency** — Check against `/data/mock/podcasts/categories.ts` and `/data/mock/podcasts/tags.ts`
+
+1. **Per-item FAQs** — Verify existing FAQs, add if missing (2–3 per episode)
+
+1. **Sentence case** — All titles
 
 ---
 
 ## Step 2: Write full transcripts for existing episodes
 
-**Add the `transcript` field** to each existing episode. The Podcast type already supports it:
+**Add the `transcript` field** to each existing episode. The Podcast type
+already supports it:
+
 ```typescript
 transcript?: string;
-```
+
+```text
 
 ### Transcript format
 
@@ -44,13 +56,16 @@ transcript: `## Episode [N]: [Title]
 
 ---
 
-**[Ash]:** [Opening greeting and episode intro — warm, personal, like talking to a friend at a festival afterparty]
+**[Ash]:** [Opening greeting and episode intro — warm, personal, like talking to
+a friend at a festival afterparty]
 
-[Main content following the episode's content field but expanded into natural spoken-word format]
+[Main content following the episode's content field but expanded into natural
+spoken-word format]
 
 **[Ash]:** [Section transitions should feel organic, not scripted]
 
-[Include natural speech patterns: "So here's the thing...", "Look, I'm not gonna lie...", "And that's when it hit me...", "Right?"]
+[Include natural speech patterns: "So here's the thing...", "Look, I'm not gonna
+lie...", "And that's when it hit me...", "Right?"]
 
 [For guest episodes, format as dialogue:]
 **[Ash]:** Question or comment
@@ -62,7 +77,8 @@ transcript: `## Episode [N]: [Title]
 
 *Neon vs Atomic Black — a podcast by Ash Shaw*
 *Follow on Instagram: @ashshaw.makeup*`
-```
+
+```text
 
 ### Transcript guidelines
 
@@ -79,7 +95,7 @@ transcript: `## Episode [N]: [Title]
 
 ### Suggested episode topics
 
-**Season 1 continuation (episodes 9–15):**
+## Season 1 continuation (episodes 9–15)
 
 | Ep | Title | Topic | Guests |
 |---|---|---|---|
@@ -101,7 +117,8 @@ transcript: `## Episode [N]: [Title]
   description: 'One punchy sentence for podcast listings.',
   content: `# Sentence case title
 
-[Substantial markdown content — 500+ words summarising the episode topics, key points, and takeaways. This is the "show notes" version.]
+[Substantial markdown content — 500+ words summarising the episode topics, key
+points, and takeaways. This is the "show notes" version.]
 
 ## Topics covered
 
@@ -125,7 +142,7 @@ transcript: `## Episode [N]: [Title]
   publishedAt: 'YYYY-MM-DD',
   featured: false,
   coverImage: {
-    src: 'UNSPLASH_URL_FROM_TOOL',
+    src: 'UNSPLASH*URL*FROM_TOOL',
     alt: 'Descriptive alt text'
   },
   guests: [],
@@ -147,7 +164,8 @@ transcript: `## Episode [N]: [Title]
     { id: 'pod-N-q2', question: 'Question?', answer: 'Answer.' },
   ]
 }
-```
+
+```text
 
 ### Date distribution
 
@@ -160,17 +178,20 @@ transcript: `## Episode [N]: [Title]
 ## Step 4: Update barrel exports
 
 1. Add new episodes to `/data/mock/podcasts/episodes.ts` (or create `episodes-season1b.ts` and import)
-2. Update category counts in `/data/mock/podcasts/categories.ts`
-3. Add any new tags to `/data/mock/podcasts/tags.ts`
-4. Verify total count = 15
+
+1. Update category counts in `/data/mock/podcasts/categories.ts`
+
+1. Add any new tags to `/data/mock/podcasts/tags.ts`
+
+1. Verify total count = 15
 
 ---
 
 ## Output
 
 - **Report:** `/reports/content-expansion-phase8/03-podcast-expansion.md` with:
-  - Polish changes for existing 8 episodes
-  - 7 new episodes listed (title, date, duration, topic)
-  - Transcript word counts per episode
-  - Total FAQ count
-  - Category/tag changes
+- Polish changes for existing 8 episodes
+- 7 new episodes listed (title, date, duration, topic)
+- Transcript word counts per episode
+- Total FAQ count
+- Category/tag changes

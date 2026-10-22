@@ -1,16 +1,19 @@
 # Icon Library Page v4.1.0 — Complete Feature Set
 
-**Release Date:** March 5, 2026  
-**Previous Version:** 3.0.0  
+**Release Date:** March 5, 2026
+**Previous Version:** 3.0.0
 **Current Version:** 4.1.0
 
 ---
 
 ## 🎯 Executive Summary
 
-The Icon Library page has evolved from a simple searchable icon grid into a comprehensive design tool with 396 unique visual combinations, WCAG 2.1 AA/AAA compliance, and persistent user preferences.
+The Icon Library page has evolved from a simple searchable icon grid into a
+comprehensive design tool with 396 unique visual combinations, WCAG 2.1 AA/AAA
+compliance, and persistent user preferences.
 
 ### Key Metrics
+
 - **6 icon weights** (thin, light, regular, bold, fill, duotone)
 - **33 color palettes** (from cyberpunk to ocean depths)
 - **2 themes** (light & dark with WCAG compliance)
@@ -22,29 +25,36 @@ The Icon Library page has evolved from a simple searchable icon grid into a comp
 ## 🆕 New Features (v4.0.0 → v4.1.0)
 
 ### 1. User Preference Persistence ⭐
-**localStorage Integration:**
+
+## localStorage Integration
+
 ```typescript
 // Automatically saves user selections
 localStorage.setItem('icon-lib-size', '32');
 localStorage.setItem('icon-lib-weight', 'bold');
 localStorage.setItem('icon-lib-palette', 'electric-sunset');
 localStorage.setItem('icon-lib-theme', 'dark');
-```
+
+```text
 
 **Benefits:**
+
 - ✅ Preferences survive page refresh
 - ✅ Preferences survive browser close/reopen
 - ✅ Graceful fallback if localStorage unavailable
 - ✅ No server required (client-side only)
 
 ### 2. Reset to Defaults Button
+
 **One-Click Reset:**
+
 - Resets all 4 settings simultaneously
 - Visible in "Display options" header
 - Neon orange hover effect (WCAG AA: 4.51:1 light, AAA: 8.42:1 dark)
 - Keyboard accessible with focus indicator
 
 **Default Values:**
+
 ```typescript
 {
   size: 24,
@@ -52,22 +62,29 @@ localStorage.setItem('icon-lib-theme', 'dark');
   palette: 'cyberpunk-billboard',
   theme: 'dark'
 }
-```
+
+```text
 
 ### 3. Settings Summary Info Bar
-**Live Current Settings Display:**
+
+## Live Current Settings Display
+
 - Shows: Size, Weight, Theme
 - Updates in real-time as user changes settings
 - Responsive layout (wraps on mobile)
 - Located next to result count for easy reference
 
 **Example Output:**
-```
+
+```text
 Size: 32px • Weight: bold • Theme: dark
-```
+
+```text
 
 ### 4. Enhanced Controls Header
-**"Display options" Section:**
+
+## "Display options" Section
+
 - Clear section title
 - Reset button aligned to the right
 - Visual separator (border-bottom)
@@ -78,7 +95,9 @@ Size: 32px • Weight: bold • Theme: dark
 ## 🎨 Complete Feature List
 
 ### Icon Weight Selector
-**6 Phosphor Icon Weights:**
+
+## 6 Phosphor Icon Weights
+
 | Weight | Use Case | Character |
 |---|---|---|
 | **Thin** | Delicate, minimal designs | Featherlight |
@@ -89,60 +108,81 @@ Size: 32px • Weight: bold • Theme: dark
 | **Duotone** | Two-tone depth | Dimensional |
 
 **UI Implementation:**
+
 - Horizontal button group
 - Active state: Neon blue (light), Neon blue glow (dark)
 - WCAG AA compliant in both themes
 - Full keyboard navigation
 
 ### Color Palette Switcher
+
 **33 Neon Palettes:**
+
 1. Cyberpunk billboard at midnight *(default)*
-2. Midnight rave
-3. Neon rainbow
-4. Electric sunset
-5. Toxic waste warning
-6. Deep ocean bioluminescence
-7. Aurora borealis
-8. Cotton candy dream
-9. Retro arcade
-10. Miami Vice nights
+
+1. Midnight rave
+
+1. Neon rainbow
+
+1. Electric sunset
+
+1. Toxic waste warning
+
+1. Deep ocean bioluminescence
+
+1. Aurora borealis
+
+1. Cotton candy dream
+
+1. Retro arcade
+
+1. Miami Vice nights
 ... *(and 23 more)*
 
 **Features:**
+
 - Dropdown selector with full palette names
 - 4-color preview swatches below dropdown
 - Icons cycle through palette colors automatically
 - Each icon gets unique color from palette
 
-**Color Application Logic:**
+## Color Application Logic
+
 ```typescript
 const colorIndex = iconIndex % currentPalette.colors.length;
 const iconColor = currentPalette.colors[colorIndex].hex;
-```
+
+```text
 
 ### Light/Dark Theme Toggle
+
 **Dual Theme System:**
 
 **Light Mode:**
+
 - Clean white background (`#FFFFFF`)
 - Subtle gray surfaces (`#F5F5F5`)
 - Text-optimized accent colors (4.5:1+ contrast)
 - Professional, presentation-ready
 
 **Dark Mode:**
+
 - Atomic black background (`#0F0F0F`)
 - Translucent surfaces (`rgba(20, 20, 20, 0.8)`)
 - Neon accent colors (7:1+ AAA contrast)
 - Dramatic glow effects
 
 **Toggle Button:**
+
 - Sun icon (☀️) when in dark mode → "Switch to light mode"
 - Moon icon (🌙) when in light mode → "Switch to dark mode"
 - Neon yellow hover effect
 - Smooth transitions
 
 ### Size Controls
+
 **4 Icon Sizes:**
+
 - **S** (16px) — Compact, mobile-friendly
 - **M** (24px) — Default balanced size
 - **L** (32px) — Prominent display
@@ -153,6 +193,7 @@ const iconColor = currentPalette.colors[colorIndex].hex;
 ## ♿ WCAG 2.1 Accessibility
 
 ### Level AA Compliance (Light Mode)
+
 All interface colors meet **4.5:1 minimum contrast**:
 
 | Element | Color | Contrast Ratio | Pass |
@@ -165,6 +206,7 @@ All interface colors meet **4.5:1 minimum contrast**:
 | Orange Reset Button | `#CC5500` | 4.51:1 | ✅ AA |
 
 ### Level AAA Compliance (Dark Mode)
+
 All neon colors **exceed 7:1 contrast** (AAA level):
 
 | Element | Color | Contrast Ratio | Pass |
@@ -177,6 +219,7 @@ All neon colors **exceed 7:1 contrast** (AAA level):
 | Orange Reset Button | `#FF871F` | 8.42:1 | ⭐ AAA |
 
 ### Additional Accessibility Features
+
 - ✅ Full keyboard navigation (Tab, Enter, Space, Arrows)
 - ✅ Enhanced focus indicators (3px neon pink rings)
 - ✅ ARIA labels for all interactive elements
@@ -189,62 +232,79 @@ All neon colors **exceed 7:1 contrast** (AAA level):
 ## 🧪 Testing Scenarios
 
 ### Scenario 1: Professional Client Presentation
+
 **Goal:** Clean, readable, professional appearance
 
 **Settings:**
-```
+
+```text
 Size: L (32px)
 Weight: Light
 Palette: Ocean depths
 Theme: Light
-```
 
-**Result:** Clean icons with subtle ocean blues/teals on white background, perfect for corporate presentations.
+```text
+
+**Result:** Clean icons with subtle ocean blues/teals on white background,
+perfect for corporate presentations.
 
 ### Scenario 2: Portfolio Showcase
+
 **Goal:** Maximum visual drama and creativity
 
 **Settings:**
-```
+
+```text
 Size: XL (48px)
 Weight: Fill
 Palette: Electric sunset
 Theme: Dark
-```
 
-**Result:** Bold filled icons with vibrant orange/pink/purple neon glow effects, dramatic and eye-catching.
+```text
+
+**Result:** Bold filled icons with vibrant orange/pink/purple neon glow effects,
+dramatic and eye-catching.
 
 ### Scenario 3: Technical Documentation
+
 **Goal:** Clear, balanced, accessible
 
 **Settings:**
-```
+
+```text
 Size: M (24px)
 Weight: Regular
 Palette: Cyberpunk billboard
 Theme: Light
-```
 
-**Result:** Standard-size regular weight icons with tech-inspired colors, optimal for documentation.
+```text
+
+**Result:** Standard-size regular weight icons with tech-inspired colors,
+optimal for documentation.
 
 ### Scenario 4: Mobile/Compact View
+
 **Goal:** Space-efficient, clear at small sizes
 
 **Settings:**
-```
+
+```text
 Size: S (16px)
 Weight: Bold
 Palette: Neon rainbow
 Theme: Light
-```
 
-**Result:** Small but bold icons with full color variety, readable on mobile devices.
+```text
+
+**Result:** Small but bold icons with full color variety, readable on mobile
+devices.
 
 ---
 
 ## 📊 Technical Implementation
 
 ### State Management
+
 ```typescript
 const [size, setSize] = useState<IconSize>(24);
 const [weight, setWeight] = useState<IconWeight>('regular');
@@ -252,9 +312,11 @@ const [selectedPalette, setSelectedPalette] = useState('cyberpunk-billboard');
 const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 const [search, setSearch] = useState('');
 const [copied, setCopied] = useState<string | null>(null);
-```
+
+```text
 
 ### localStorage Persistence
+
 ```typescript
 // Save on every state change
 useEffect(() => {
@@ -272,9 +334,11 @@ useEffect(() => {
 const savedSize = localStorage.getItem('icon-lib-size');
 const savedWeight = localStorage.getItem('icon-lib-weight');
 // ... etc
-```
+
+```text
 
 ### Theme Class Application
+
 ```typescript
 const pageClass = 'specimen-page bg-atomic-noise icon-lib--theme-' + theme;
 
@@ -283,15 +347,17 @@ return (
     {/* ... */}
   </main>
 );
-```
+
+```text
 
 ### Color Cycling Algorithm
+
 ```typescript
 {cat.icons.map((icon, iconIndex) => {
   const Icon = getIcon(icon.name);
   const colorIndex = iconIndex % currentPalette.colors.length;
   const iconColor = currentPalette.colors[colorIndex].hex;
-  
+
   return (
     <Icon
       size={size}
@@ -300,45 +366,55 @@ return (
     />
   );
 })}
-```
+
+```text
 
 ---
 
 ## 📁 File Structure
 
 ### Component Files
-```
+
+```text
 /components/pages/dev-tools/
 └── IconLibraryPage.tsx (v4.1.0) — 470 lines
-```
+
+```text
 
 ### Stylesheet Files
-```
+
+```text
 /styles/blocks/
 ├── icon-library.css         — Base + advanced controls (405 lines)
 ├── icon-library-light.css   — WCAG AA light theme (204 lines)
 └── icon-library-dark.css    — WCAG AAA dark theme (256 lines)
-```
+
+```text
 
 ### Data Files
-```
+
+```text
 /data/mock/
 ├── color-palettes.ts        — 33 palettes with interface ideas
 └── ui/icon-library.ts       — Icon metadata (categories, usage)
-```
+
+```text
 
 ### Documentation
-```
+
+```text
 /docs/
 ├── icon-library-enhancements.md    — Full feature guide
 └── icon-library-v4.1-changelog.md  — This file
-```
+
+```text
 
 ---
 
 ## 🎨 Visual Combinations
 
 ### Total Combinations: 396
+
 - **6** icon weights
 - **33** color palettes
 - **2** themes
@@ -347,29 +423,37 @@ return (
 **Math:** 6 weights × 33 palettes × 2 themes = **396 unique visual styles**
 
 ### Most Popular Combinations (User Analytics)
+
 1. **Default:** Regular + Cyberpunk + Dark + M (most familiar)
-2. **Bold Neon:** Bold + Electric sunset + Dark + L (dramatic showcase)
-3. **Professional:** Light + Ocean depths + Light + M (client presentations)
-4. **Minimal:** Thin + Monochrome + Light + S (subtle, refined)
-5. **Maximum Impact:** Fill + Neon rainbow + Dark + XL (festival posters)
+
+1. **Bold Neon:** Bold + Electric sunset + Dark + L (dramatic showcase)
+
+1. **Professional:** Light + Ocean depths + Light + M (client presentations)
+
+1. **Minimal:** Thin + Monochrome + Light + S (subtle, refined)
+
+1. **Maximum Impact:** Fill + Neon rainbow + Dark + XL (festival posters)
 
 ---
 
 ## 🚀 Performance Optimizations
 
 ### Efficient Rendering
+
 - ✅ Icon components only render when in view
 - ✅ Color calculations use `useMemo` for palette resolution
 - ✅ Event handlers use `useCallback` where appropriate
 - ✅ No unnecessary re-renders (React.memo not needed due to simple structure)
 
 ### localStorage Strategy
+
 - ✅ Read once on mount
 - ✅ Write on every state change (debounced by React batching)
 - ✅ Try/catch blocks prevent crashes
 - ✅ Graceful degradation if unavailable
 
 ### CSS Performance
+
 - ✅ Theme switching via class toggle (no inline style changes)
 - ✅ Reduced motion media query disables animations
 - ✅ Hardware-accelerated transforms where possible
@@ -381,43 +465,55 @@ return (
 
 ### None Currently Identified ✅
 
-All planned features implemented and tested. No known bugs or accessibility issues.
+All planned features implemented and tested. No known bugs or accessibility
+issues.
 
 ---
 
 ## 📝 Migration Guide (v3.0.0 → v4.1.0)
 
 ### For Users
-**No action required.** All new features are opt-in and backwards compatible. Default behavior unchanged.
+
+**No action required.** All new features are opt-in and backwards compatible.
+Default behavior unchanged.
 
 ### For Developers
+
 **Import Changes:**
+
 ```diff
 // Before (v3.0.0)
 import { iconLibraryUI } from '../../../data/mock/ui/icon-library';
 
 // After (v4.1.0)
+
 + import type { IconWeight } from '@phosphor-icons/react';
   import { iconLibraryUI } from '../../../data/mock/ui/icon-library';
+
 + import { colorPalettes } from '../../../data/mock/color-palettes';
-```
+
+```text
 
 **CSS Imports:**
+
 ```diff
 // Before (v3.0.0)
 import '../../../styles/blocks/icon-library.css';
 
 // After (v4.1.0)
   import '../../../styles/blocks/icon-library.css';
+
 + import '../../../styles/blocks/icon-library-light.css';
 + import '../../../styles/blocks/icon-library-dark.css';
-```
+
+```text
 
 ---
 
 ## 🎓 Usage Best Practices
 
 ### 1. Choose the Right Weight
+
 - **Thin/Light:** Body text icons, minimal designs
 - **Regular:** Default, most versatile
 - **Bold:** Headings, emphasis, navigation
@@ -425,16 +521,19 @@ import '../../../styles/blocks/icon-library.css';
 - **Duotone:** Illustrations, featured content
 
 ### 2. Match Palette to Context
+
 - **Professional/Corporate:** Ocean depths, Monochrome, Nordic aurora
 - **Creative/Artistic:** Electric sunset, Neon rainbow, Cotton candy
 - **Technical/Developer:** Cyberpunk billboard, Matrix code, Terminal green
 - **Playful/Fun:** Bubblegum pop, Tropical paradise, Candy store
 
 ### 3. Theme Selection
+
 - **Light Mode:** Client presentations, formal documentation, print materials
 - **Dark Mode:** Portfolio showcases, developer tools, creative work
 
 ### 4. Size Selection
+
 - **S (16px):** Mobile UI, compact layouts, inline icons
 - **M (24px):** Standard UI, cards, lists
 - **L (32px):** Headers, featured items, prominent placement
@@ -445,6 +544,7 @@ import '../../../styles/blocks/icon-library.css';
 ## 🏆 Achievement Unlocked
 
 ✅ **Icon Library v4.1.0** — A fully-featured design tool with:
+
 - 6 weight variants
 - 33 color palettes
 - Dual theme support
@@ -458,5 +558,6 @@ import '../../../styles/blocks/icon-library.css';
 
 ---
 
-**Maintained by:** Ash Shaw Portfolio Development Team  
-**Questions?** See `/docs/icon-library-enhancements.md` for detailed feature documentation.
+**Maintained by:** Ash Shaw Portfolio Development Team
+**Questions?** See `/docs/icon-library-enhancements.md` for detailed feature
+documentation.

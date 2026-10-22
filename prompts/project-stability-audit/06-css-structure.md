@@ -7,7 +7,12 @@
 
 ## Context
 
-CSS cascade order is critical. If stylesheets load in the wrong order, base tokens are undefined when block styles reference them, causing invisible or broken layouts. The project uses a strict BEM architecture with CSS custom properties (design tokens). Tailwind V4 is the CSS engine, but raw Tailwind utility classes are forbidden in components — all styling goes through BEM classes defined in `/styles/`.
+CSS cascade order is critical. If stylesheets load in the wrong order, base
+tokens are undefined when block styles reference them, causing invisible or
+broken layouts. The project uses a strict BEM architecture with CSS custom
+properties (design tokens). Tailwind V4 is the CSS engine, but raw Tailwind
+utility classes are forbidden in components — all styling goes through BEM
+classes defined in `/styles/`.
 
 ---
 
@@ -16,10 +21,12 @@ CSS cascade order is critical. If stylesheets load in the wrong order, base toke
 Trace the complete CSS import chain from the application entry point:
 
 ### Entry point: `/main.tsx`
+
 - [ ] What CSS files does `main.tsx` import?
 - [ ] Is `globals.css` imported? (It should be the primary CSS entry)
 
 ### Primary CSS: `/styles/globals.css`
+
 - [ ] Read `globals.css` in full
 - [ ] List every `@import` statement in order
 - [ ] Verify each `@import` target file exists
@@ -33,19 +40,22 @@ Trace the complete CSS import chain from the application entry point:
   7. **Print styles** (if any)
 
 ### Token files: `/styles/tokens/`
+
 - [ ] List all files: `content-animations.css`, `content-colors.css`, `content-interactive.css`, `content-layouts.css`, `content-typography.css`
 - [ ] Verify each is imported by `globals.css`
 - [ ] Verify token CSS custom properties are defined before they are referenced by block styles
 
 ### Block files: `/styles/blocks/`
+
 - [ ] List all ~110 block CSS files
 - [ ] For each file, determine HOW it is imported:
-  - Imported by `globals.css` via `@import`?
-  - Imported directly by its component via `import '../styles/blocks/...'`?
-  - Both? (potential duplicate loading)
-  - Neither? (orphaned — classes may be undefined at runtime)
+- Imported by `globals.css` via `@import`?
+- Imported directly by its component via `import '../styles/blocks/...'`?
+- Both? (potential duplicate loading)
+- Neither? (orphaned — classes may be undefined at runtime)
 
 ### Component files: `/styles/components/`
+
 - [ ] List all component CSS files
 - [ ] Verify each is imported by its component
 
@@ -67,6 +77,7 @@ Cross-reference components against CSS files:
 Search all `.tsx` files for class names that are NOT defined in the project CSS:
 
 **Allowed project utility classes** (defined in `globals.css`):
+
 - `.text-center`, `.font-bold` — layout helpers
 - `.mb-fluid-*`, `.gap-fluid-*` — spacing utilities
 - `.inline-flex-center` — flex helper
@@ -76,6 +87,7 @@ Search all `.tsx` files for class names that are NOT defined in the project CSS:
 - `.bg-atomic-noise`, `.section-spacing`, `.px-horizontal-section` — section utilities
 
 **Forbidden raw Tailwind utilities** (no CSS definition):
+
 - `flex`, `grid`, `block`, `hidden`, `inline`
 - `p-*`, `m-*`, `px-*`, `py-*`, `mx-*`, `my-*` (except project-defined `mb-fluid-*`)
 - `w-*`, `h-*`, `min-w-*`, `max-w-*`
@@ -88,10 +100,14 @@ Search all `.tsx` files for class names that are NOT defined in the project CSS:
 - `opacity-*`, `transition-*`, `duration-*`
 - Any class with `[` brackets (arbitrary values like `w-[300px]`)
 
-**How to check:** For each `className` attribute, split into individual class names and verify each is either:
+**How to check:** For each `className` attribute, split into individual class
+names and verify each is either:
+
 1. Defined in a CSS file (search for `.{className} {` or `.{className},`)
-2. A known project utility class from the list above
-3. A BEM class following the `block__element--modifier` pattern that IS defined
+
+1. A known project utility class from the list above
+
+1. A BEM class following the `block__element--modifier` pattern that IS defined
 
 **Output:** List of all undefined class names with file path and line number.
 
@@ -100,11 +116,13 @@ Search all `.tsx` files for class names that are NOT defined in the project CSS:
 ## Step 4 — CSS custom properties inventory
 
 List ALL CSS custom properties (`--wp--*`, `--*`) defined in:
+
 - `/styles/globals.css`
 - `/styles/tokens/*.css`
 - `/styles/blocks/*.css` (local properties)
 
 Cross-reference with `/guidelines/design-tokens/` documentation:
+
 - [ ] Are all defined properties documented?
 - [ ] Are there documented properties that no longer exist in CSS?
 - [ ] Are there CSS properties that are not documented?
@@ -114,6 +132,7 @@ Cross-reference with `/guidelines/design-tokens/` documentation:
 ## Step 5 — Light/dark mode completeness
 
 For each neon colour class and component class that sets colour:
+
 - [ ] Does it have a `.dark` variant? (e.g., `.dark .hero__title { color: ... }`)
 - [ ] Does the dark variant use the correct neon token (full brightness for dark, text variant for light)?
 
@@ -122,6 +141,7 @@ For each neon colour class and component class that sets colour:
 ## Step 6 — Reduced motion compliance
 
 For each CSS file that defines `transition`, `animation`, or `transform`:
+
 - [ ] Does it have a corresponding `@media (prefers-reduced-motion: reduce)` block?
 - [ ] Does the reduced motion block disable or simplify all animations?
 
@@ -134,21 +154,31 @@ Reference: `/guidelines/prefers-reduced-motion.md`
 Update `/guidelines/css-architecture.md` with:
 
 ### How to add a new CSS file
+
 1. Create `/styles/blocks/{block-name}.css`
-2. Define BEM classes: `.block`, `.block__element`, `.block--modifier`
-3. Import in your component: `import '../../styles/blocks/{block-name}.css'`
-4. OR add `@import './blocks/{block-name}.css'` to `globals.css`
-5. Add `.dark` variants for all colour properties
-6. Add `@media (prefers-reduced-motion: reduce)` for any animations
-7. Verify CSS loads in dev tools (Network tab)
+
+1. Define BEM classes: `.block`, `.block__element`, `.block--modifier`
+
+1. Import in your component: `import '../../styles/blocks/{block-name}.css'`
+
+1. OR add `@import './blocks/{block-name}.css'` to `globals.css`
+
+1. Add `.dark` variants for all colour properties
+
+1. Add `@media (prefers-reduced-motion: reduce)` for any animations
+
+1. Verify CSS loads in dev tools (Network tab)
 
 ### CSS import order rules
+
 - `globals.css` must be imported first in `main.tsx`
 - Within `globals.css`, imports follow: tailwind → tokens → animations → base → blocks → components
 - Never import the same CSS file twice (once in globals.css AND once in component)
 
 ### Future CSS structure
+
 Document planned expansions:
+
 - `/styles/theme-light.css` — Dedicated light mode overrides
 - `/styles/theme-dark.css` — Dedicated dark mode overrides
 - `/styles/theme-variables.css` — CSS custom property presets
@@ -158,6 +188,7 @@ Document planned expansions:
 ## Output format
 
 ```markdown
+
 ## CSS import chain
 
 main.tsx
@@ -201,4 +232,4 @@ main.tsx
 
 | CSS file | Has animations? | Has reduced motion? |
 |---|---|---|
-```
+```text

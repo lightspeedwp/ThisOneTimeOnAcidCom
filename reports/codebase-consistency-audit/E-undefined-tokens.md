@@ -1,13 +1,19 @@
 # Sub-audit E — Undefined & Mismatched CSS Token References
 
 **Date:** 2026-06-19
-**Severity breakdown:** 🔴 Critical: 4 groups | 🟠 High: 3 groups | 🟡 Medium: 2 groups
+**Severity breakdown:** 🔴 Critical: 4 groups | 🟠 High: 3 groups | 🟡 Medium: 2
+groups
 
 ---
 
 ## Summary
 
-A large number of `--wp--preset--*` tokens are referenced across `button.css`, `read-more-btn.css`, `not-found-page.css`, `utility-helpers.css`, and the `src/styles/tokens/` files, but are **never defined** in `globals.css`, `themes/dark.css`, `themes/light.css`, or `themes/dark-extended.css`. These tokens silently fall back to empty strings, producing invisible or broken styles.
+A large number of `--wp--preset--*` tokens are referenced across `button.css`,
+`read-more-btn.css`, `not-found-page.css`, `utility-helpers.css`, and the
+`src/styles/tokens/` files, but are **never defined** in `globals.css`,
+`themes/dark.css`, `themes/light.css`, or `themes/dark-extended.css`. These
+tokens silently fall back to empty strings, producing invisible or broken
+styles.
 
 ---
 
@@ -24,7 +30,8 @@ Tokens referenced but **not defined anywhere**:
 | `--wp--preset--shadow--neon-blue` | `tokens/content-interactive.css:370` |
 | `--wp--preset--shadow--neon-purple` | `tokens/content-interactive.css:375` |
 
-**Impact:** All button focus states, hover neon glows, and card shadows are invisible. Every `.btn:focus-visible` and `.btn:hover` renders without a shadow.
+**Impact:** All button focus states, hover neon glows, and card shadows are
+invisible. Every `.btn:focus-visible` and `.btn:hover` renders without a shadow.
 
 **Fix:** Define all shadow tokens in `globals.css` `:root {}`:
 
@@ -32,10 +39,14 @@ Tokens referenced but **not defined anywhere**:
 --wp--preset--shadow--focus-ring: 0 0 0 3px rgba(255, 16, 240, 0.4);
 --wp--preset--shadow--neon-sm: 0 0 8px rgba(255, 16, 240, 0.35);
 --wp--preset--shadow--card-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
---wp--preset--shadow--neon-pink: 0 0 12px rgba(255, 16, 240, 0.5), 0 0 24px rgba(255, 16, 240, 0.25);
---wp--preset--shadow--neon-blue: 0 0 12px rgba(31, 81, 255, 0.5), 0 0 24px rgba(31, 81, 255, 0.25);
---wp--preset--shadow--neon-purple: 0 0 12px rgba(190, 0, 254, 0.5), 0 0 24px rgba(190, 0, 254, 0.25);
-```
+--wp--preset--shadow--neon-pink: 0 0 12px rgba(255, 16, 240, 0.5), 0 0 24px
+rgba(255, 16, 240, 0.25);
+--wp--preset--shadow--neon-blue: 0 0 12px rgba(31, 81, 255, 0.5), 0 0 24px
+rgba(31, 81, 255, 0.25);
+--wp--preset--shadow--neon-purple: 0 0 12px rgba(190, 0, 254, 0.5), 0 0 24px
+rgba(190, 0, 254, 0.25);
+
+```text
 
 ---
 
@@ -48,7 +59,8 @@ Tokens referenced but **not defined anywhere**:
 | `--wp--preset--border-radius--circle` | `button.css:261` |
 | `--wp--preset--border-radius--lg` | `tokens/content-layouts.css:57`, `tokens/content-interactive.css:341` |
 
-**Impact:** All `.btn` elements and read-more buttons render with no `border-radius` (sharp corners). `.btn--icon` circles are square.
+**Impact:** All `.btn` elements and read-more buttons render with no
+`border-radius` (sharp corners). `.btn--icon` circles are square.
 
 **Fix:**
 
@@ -58,7 +70,8 @@ Tokens referenced but **not defined anywhere**:
 --wp--preset--border-radius--lg: 1rem;
 --wp--preset--border-radius--md: 0.5rem;
 --wp--preset--border-radius--sm: 0.25rem;
-```
+
+```text
 
 ---
 
@@ -71,9 +84,12 @@ Tokens referenced but **not defined anywhere**:
 | `--wp--preset--color--neon-purple-text` | `read-more-btn.css:10` |
 | `--wp--preset--color--neon-pink-text` | `button.css:168` |
 
-`globals.css` defines `--wp--preset--color--neon-pink` (#FF10F0) and `--wp--preset--color--uv-violet` (#8A63FF) but not the aliases above.
+`globals.css` defines `--wp--preset--color--neon-pink` (#FF10F0) and
+`--wp--preset--color--uv-violet` (#8A63FF) but not the aliases above.
 
-**Impact:** `.btn--default` renders with no background colour (transparent). Focus/hover ring on all buttons has no colour. Read-more button text is invisible.
+**Impact:** `.btn--default` renders with no background colour (transparent).
+Focus/hover ring on all buttons has no colour. Read-more button text is
+invisible.
 
 **Fix:** Add aliases in `globals.css` `:root {}`:
 
@@ -82,7 +98,8 @@ Tokens referenced but **not defined anywhere**:
 --wp--preset--color--neon-purple: var(--wp--preset--color--uv-violet);
 --wp--preset--color--neon-purple-text: #6B3FCC; /* accessible dark mode text */
 --wp--preset--color--neon-pink-text: #CC007A;   /* accessible light mode text */
-```
+
+```text
 
 ---
 
@@ -93,22 +110,27 @@ Tokens referenced but **not defined anywhere**:
 | `--wp--preset--color--base` | `not-found-page.css:12`, `tokens/content-interactive.css:340` |
 | `--wp--preset--color--contrast` | `not-found-page.css:36,51` |
 
-These are standard WordPress theme.json semantic tokens but are not defined in any CSS file. `not-found-page.css` background falls back to `transparent`, title falls back to `inherit`.
+These are standard WordPress theme.json semantic tokens but are not defined in
+any CSS file. `not-found-page.css` background falls back to `transparent`, title
+falls back to `inherit`.
 
 **Fix:**
 
 ```css
 --wp--preset--color--base: var(--color-atomic-black);
 --wp--preset--color--contrast: var(--color-text-light);
-```
+
+```text
 
 With `.dark` override:
+
 ```css
 .dark {
   --wp--preset--color--base: #0F0F0F;
   --wp--preset--color--contrast: #F6F2EB;
 }
-```
+
+```text
 
 ---
 
@@ -120,15 +142,20 @@ With `.dark` override:
 | `--wp--preset--font-family--brand-body` | `button.css:13`, `tokens/content-layouts.css:135`, `tokens/content-interactive.css:239` |
 | `--wp--preset--font-family--brand-title` | `tokens/content-interactive.css:211` |
 
-`globals.css` defines `--wp--preset--font-family--heading` and `--wp--preset--font-family--body` (without the `brand-` prefix). All `brand-` prefixed aliases are undefined.
+`globals.css` defines `--wp--preset--font-family--heading` and
+`--wp--preset--font-family--body` (without the `brand-` prefix). All `brand-`
+prefixed aliases are undefined.
 
 **Fix:** Add aliases in `globals.css` `:root {}`:
 
 ```css
---wp--preset--font-family--brand-heading: var(--wp--preset--font-family--heading);
+--wp--preset--font-family--brand-heading:
+var(--wp--preset--font-family--heading);
 --wp--preset--font-family--brand-body: var(--wp--preset--font-family--body);
---wp--preset--font-family--brand-title: 'Righteous', var(--wp--preset--font-family--heading);
-```
+--wp--preset--font-family--brand-title: 'Righteous',
+var(--wp--preset--font-family--heading);
+
+```text
 
 ---
 
@@ -146,7 +173,8 @@ With `.dark` override:
 | `--wp--preset--spacing--80` | `tokens/content-layouts.css:105,107` |
 | `--wp--preset--spacing--50`, `60` | `utility-helpers.css:124,125` |
 
-Only `--wp--preset--spacing--10`, `20`, `30`, `40` are defined (in `brutalist.css`). All fluid and section spacing tokens are undefined.
+Only `--wp--preset--spacing--10`, `20`, `30`, `40` are defined (in
+`brutalist.css`). All fluid and section spacing tokens are undefined.
 
 **Fix:** Add fluid spacing scale in `globals.css` `:root {}`:
 
@@ -168,7 +196,8 @@ Only `--wp--preset--spacing--10`, `20`, `30`, `40` are defined (in `brutalist.cs
 
 --wp--preset--spacing--section-horizontal: clamp(1.5rem, 6vw, 4rem);
 --wp--preset--spacing--section-vertical: clamp(3rem, 8vw, 6rem);
-```
+
+```text
 
 ---
 
@@ -179,7 +208,8 @@ Only `--wp--preset--spacing--10`, `20`, `30`, `40` are defined (in `brutalist.cs
 | `--wp--preset--z-index--0` | `button.css:137` |
 | `--wp--preset--z-index--n1` | `button.css:148` |
 
-**Impact:** `.btn--neon-primary` `z-index` stacking is undefined — gradient overlay pseudo-element may render above button content.
+**Impact:** `.btn--neon-primary` `z-index` stacking is undefined — gradient
+overlay pseudo-element may render above button content.
 
 **Fix:**
 
@@ -192,7 +222,8 @@ Only `--wp--preset--spacing--10`, `20`, `30`, `40` are defined (in `brutalist.cs
 --wp--preset--z-index--overlay: 1000;
 --wp--preset--z-index--modal: 9000;
 --wp--preset--z-index--toast: 9999;
-```
+
+```text
 
 ---
 
@@ -207,15 +238,21 @@ Two parallel token systems coexist in the same files:
 | `--font-body` | `--wp--preset--font-family--body` |
 | `--font-heading` | `--wp--preset--font-family--heading` |
 
-`globals.css` defines both and aliases them. But `button-variations.css` uses `--color-neon-pink` and `--color-neon-blue` (legacy), while `button.css` uses `--wp--preset--color--*` (WP preset). This split makes it hard to retheme consistently.
+`globals.css` defines both and aliases them. But `button-variations.css` uses
+`--color-neon-pink` and `--color-neon-blue` (legacy), while `button.css` uses
+`--wp--preset--color--*` (WP preset). This split makes it hard to retheme
+consistently.
 
-**Recommendation:** All new CSS should use `--wp--preset--color--*` only. Existing legacy token usages in `globals.css` body and header rules should be migrated in a dedicated pass.
+**Recommendation:** All new CSS should use `--wp--preset--color--*` only.
+Existing legacy token usages in `globals.css` body and header rules should be
+migrated in a dedicated pass.
 
 ---
 
 ## E-09 — Hardcoded hex in dark.css & dark-extended.css 🟡 Medium
 
-`dark.css` and `dark-extended.css` contain many hardcoded hex values in selectors, bypassing the token system entirely:
+`dark.css` and `dark-extended.css` contain many hardcoded hex values in
+selectors, bypassing the token system entirely:
 
 - `dark.css:127` — `background-color: #0F0F0F` → should be `var(--color-atomic-black)`
 - `dark.css:127` — `color: #F6F2EB` → should be `var(--color-text-light)`

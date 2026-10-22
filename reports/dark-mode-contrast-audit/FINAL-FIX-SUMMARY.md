@@ -1,15 +1,16 @@
 # 🎉 Dark Mode Emergency Fix - COMPLETE
 
-**Date:** March 11, 2026  
-**Status:** ✅ **RESOLVED - PRODUCTION READY**  
-**Total Time:** 1 hour  
+**Date:** March 11, 2026
+**Status:** ✅ **RESOLVED - PRODUCTION READY**
+**Total Time:** 1 hour
 **Impact:** Site now works in dark mode by default
 
 ---
 
 ## 🔥 What Was Broken
 
-You discovered the site was showing a **white header and light backgrounds** when it should have been in dark mode.
+You discovered the site was showing a **white header and light backgrounds**
+when it should have been in dark mode.
 
 ---
 
@@ -23,14 +24,17 @@ You discovered the site was showing a **white header and light backgrounds** whe
 // BEFORE (BROKEN):
 var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 var defaultTheme: Theme = prefersDark ? 'dark' : 'light';
-```
+
+```text
 
 **What this did:**
+
 - Checked your operating system's theme preference
 - If your OS was in light mode → forced the site to light mode
 - Completely ignored that this is a **neon-themed dark design**
 
 **Result:**
+
 - ❌ Users with OS light mode → stuck in light mode
 - ❌ New visitors → stuck in light mode (no localStorage yet)
 - ❌ `.dark` class never added to `<html>`
@@ -46,9 +50,10 @@ var defaultTheme: Theme = prefersDark ? 'dark' : 'light';
 // CRITICAL: Apply dark mode class IMMEDIATELY on module load to prevent FOUC
 (function() {
   if (typeof document === 'undefined') return;
-  
-  var savedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
-  
+
+var savedTheme = typeof localStorage !== 'undefined' ?
+localStorage.getItem('theme') : null;
+
   // Default to dark mode (original neon design) unless explicitly set to light
   if (!savedTheme || savedTheme === 'dark' || savedTheme === 'brutalist') {
     document.documentElement.classList.add('dark');
@@ -58,9 +63,11 @@ var defaultTheme: Theme = prefersDark ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', 'light');
   }
 })();
-```
+
+```text
 
 **What this does:**
+
 - Runs **IMMEDIATELY** when the module loads (before React renders)
 - Adds `.dark` class to `<html>` synchronously
 - No flash of white content (FOUC)
@@ -79,9 +86,11 @@ var defaultTheme: Theme = prefersDark ? 'dark' : 'light';
   document.documentElement.classList.add('dark');
   localStorage.setItem('theme', 'dark'); // Save default preference
 }
-```
+
+```text
 
 **What this does:**
+
 - ALWAYS defaults to dark mode on first visit
 - Saves this preference to localStorage
 - Ignores OS theme preference completely
@@ -115,10 +124,14 @@ Added identical IIFE for consistency and redundancy.
 ### ✅ Core Functionality
 
 1. **Dark mode by default** - Site loads in dark mode for all users
-2. **No FOUC** - No flash of white content
-3. **Theme toggle works** - Users can switch to light mode if desired
-4. **Persistence works** - Choice saved to localStorage
-5. **All CSS applies** - `.dark` class is present, all dark mode styles work
+
+1. **No FOUC** - No flash of white content
+
+1. **Theme toggle works** - Users can switch to light mode if desired
+
+1. **Persistence works** - Choice saved to localStorage
+
+1. **All CSS applies** - `.dark` class is present, all dark mode styles work
 
 ### ✅ Accessibility
 
@@ -137,15 +150,18 @@ All 35 previously fixed contrast issues are now **VISIBLE**:
 ### Critical Fixes
 
 1. **`/components/common/ThemeProvider.tsx`** - CRITICAL FIX
+
    - Added IIFE to apply `.dark` class immediately
    - Changed default from "respect OS" to "always dark"
    - Saves dark preference to localStorage on first visit
 
-2. **`/components/common/ThemeToggleES5.tsx`** - Preventive fix
+1. **`/components/common/ThemeToggleES5.tsx`** - Preventive fix
+
    - Added identical IIFE for consistency
    - Updated initial state logic
 
-3. **`/styles/blocks/header.css`** - Contrast fix
+1. **`/styles/blocks/header.css`** - Contrast fix
+
    - Fixed search close button color (line 487)
    - Changed from `neutral-400` to `--color-text-muted` (10.2:1)
 
@@ -163,20 +179,26 @@ document.documentElement.classList.contains('dark')
 
 document.documentElement.getAttribute('data-theme')
 // Returns: "dark" ✅
-```
+
+```text
 
 ### 2. Check Theme Toggle Works
 
 1. Click theme toggle button (moon/sun icon)
-2. Site switches to light mode
-3. Click again → returns to dark mode
-4. Refresh page → preference persists
+
+1. Site switches to light mode
+
+1. Click again → returns to dark mode
+
+1. Refresh page → preference persists
 
 ### 3. Check No FOUC
 
 1. Clear localStorage: `localStorage.clear()`
-2. Hard refresh (Cmd+Shift+R or Ctrl+Shift+R)
-3. Page loads **instantly in dark mode** (no white flash)
+
+1. Hard refresh (Cmd+Shift+R or Ctrl+Shift+R)
+
+1. Page loads **instantly in dark mode** (no white flash)
 
 ### 4. Check All Components
 
@@ -217,14 +239,18 @@ document.documentElement.getAttribute('data-theme')
 ### ❌ What Went Wrong
 
 1. **Assumed OS preference was correct** - Wrong for a neon-themed art portfolio
-2. **Relied on useEffect for critical initialization** - Causes FOUC and race conditions
-3. **Didn't test with OS light mode** - Bug only visible in that scenario
+
+1. **Relied on useEffect for critical initialization** - Causes FOUC and race conditions
+
+1. **Didn't test with OS light mode** - Bug only visible in that scenario
 
 ### ✅ What We Fixed
 
 1. **Default to brand identity** - Neon design = dark mode by default
-2. **Apply theme synchronously** - IIFE runs before React renders
-3. **Test all scenarios** - OS light mode, OS dark mode, new users
+
+1. **Apply theme synchronously** - IIFE runs before React renders
+
+1. **Test all scenarios** - OS light mode, OS dark mode, new users
 
 ### 🎓 Key Takeaways
 
@@ -266,23 +292,25 @@ document.documentElement.getAttribute('data-theme')
 
 ### Code Changes
 
-```
+```text
  /components/common/ThemeProvider.tsx      | +25 -6
  /components/common/ThemeToggleES5.tsx     | +18 -4
  /styles/blocks/header.css                 | +1 -1
  3 files changed, 44 insertions(+), 11 deletions(-)
-```
+
+```text
 
 ---
 
 ## ✅ Resolution
 
-**Status:** 🟢 FIXED  
-**Deployed:** Ready for production  
-**Verified:** All scenarios tested  
+**Status:** 🟢 FIXED
+**Deployed:** Ready for production
+**Verified:** All scenarios tested
 **Documentation:** Complete
 
 **The site now:**
+
 - ✅ Loads in dark mode by default
 - ✅ Shows the neon aesthetic as intended
 - ✅ Allows users to switch to light mode
@@ -292,7 +320,7 @@ document.documentElement.getAttribute('data-theme')
 
 ---
 
-**Fixed By:** Emergency Response Team  
-**Date:** March 11, 2026  
-**Time:** 1 hour  
+**Fixed By:** Emergency Response Team
+**Date:** March 11, 2026
+**Time:** 1 hour
 **Status:** ✅ COMPLETE - PRODUCTION READY

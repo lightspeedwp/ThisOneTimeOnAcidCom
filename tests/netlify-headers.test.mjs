@@ -53,6 +53,7 @@ describe('root netlify.toml', function () {
     assert.doesNotMatch(rootToml, /pnpm/);
   });
 
+<<<<<<< HEAD
   it('keeps Cache-Control and CSP out of the shared rules to avoid conflicting definitions', function () {
     // Allow Cache-Control for specific paths (/, /index.html) but not for wildcard patterns
     // that would conflict with hashed asset rules generated in dist/_headers
@@ -63,6 +64,24 @@ describe('root netlify.toml', function () {
     // But Cache-Control IS allowed for specific paths
     assert.match(rootToml, /for\s*=\s*"\/"/,  'Has / path for HTML revalidation');
     assert.match(rootToml, /for\s*=\s*"\/index\.html"/, 'Has /index.html path for HTML revalidation');
+  });
+
+  it('defines baseline security headers for all routes', function () {
+    assert.match(rootToml, /X-Frame-Options\s*=\s*"DENY"/);
+    assert.match(rootToml, /X-Content-Type-Options\s*=\s*"nosniff"/);
+    assert.match(rootToml, /Referrer-Policy\s*=\s*"strict-origin-when-cross-origin"/);
+    assert.match(rootToml, /Permissions-Policy/);
+  });
+
+  it('avoids conflicting wildcard Cache-Control rules that would interfere with exact-path hashed-asset rules', function () {
+    // The root netlify.toml should not have wildcard Cache-Control rules
+    // Exact-path rules for hashed assets are generated per-file into dist/_headers
+    // Split at array-table boundaries so later rules cannot satisfy this check.
+    rootToml.split(/(?=^[ \t]*\[\[)/m).forEach(function (block) {
+      if (/^\s*\[\[headers\]\]/.test(block) && /^\s*for\s*=\s*"\/\*"/m.test(block)) {
+        assert.doesNotMatch(block, /Cache-Control/i);
+      }
+    });
   });
 
   it('has an unforced SPA fallback so real files win', function () {
