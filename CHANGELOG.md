@@ -597,8 +597,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Stale Lucide references** cleaned from 7 mock data files: `dev-tools.ts` (2 entries), `sitemap.ts` (2), `style-guide.ts` (2), `about-dropdown.ts`, `social-links.ts` — all updated to reference Phosphor icons
 - **`website-content.md`**: Fixed "Berlin-based" in core identity section → "Cape Town-based (home base)"
 
-<<<<<<< HEAD
-=======
 ### Removed
 
 - **Tailwind CSS completely removed** from the build system:
@@ -617,8 +615,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **No breaking changes for users** — All styling migrated to semantic BEM classes in previous commits
 - **Build size reduction** — Bundle size reduced from 631 to 616 npm packages (15 package reduction)
 - **Purpose:** Enforce strict semantic BEM CSS architecture and eliminate utility-class complexity; maintains full design fidelity with cleaner, more maintainable code
-
->>>>>>> origin/develop
 ---
 
 ## [8.2.1] - 2026-03-03
