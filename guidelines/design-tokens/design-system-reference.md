@@ -1,7 +1,7 @@
 # Complete Design System Reference
 
-**Version:** 9.0.0  
-**Last Updated:** March 7, 2026  
+**Version:** 9.0.0
+**Last Updated:** March 7, 2026
 **Project:** Ash Shaw Makeup Portfolio
 
 ---
@@ -9,12 +9,18 @@
 ## Table of Contents
 
 1. [Color System](#color-system)
-2. [Gradients](#gradients)
-3. [Typography](#typography)
-4. [Spacing](#spacing)
-5. [Animations](#animations)
-6. [Iconography](#iconography)
-7. [Light/Dark Mode](#lightdark-mode)
+
+1. [Gradients](#gradients)
+
+1. [Typography](#typography)
+
+1. [Spacing](#spacing)
+
+1. [Animations](#animations)
+
+1. [Iconography](#iconography)
+
+1. [Light/Dark Mode](#lightdark-mode)
 
 ---
 
@@ -22,9 +28,14 @@
 
 ### Philosophy: Neon vs Atomic Black
 
-The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** visual identity that reflects the vibrant, energetic nature of makeup artistry and Berlin techno culture.
+The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** visual
+identity that reflects the vibrant, energetic nature of makeup artistry and
+Berlin techno culture.
 
-**Core Principle:** Pair neon colors against very dark backgrounds like `#000000` (Pure Black) or `#0F0F0F` (Atomic Black) to create maximum contrast and visual "pop." Simulate physical glow using `text-shadow` or `box-shadow` for luminous halo effects.
+**Core Principle:** Pair neon colors against very dark backgrounds like
+`#000000` (Pure Black) or `#0F0F0F` (Atomic Black) to create maximum contrast
+and visual "pop." Simulate physical glow using `text-shadow` or `box-shadow` for
+luminous halo effects.
 
 ---
 
@@ -60,11 +71,13 @@ Specialized neon variations for specific design needs:
 #### Neon Green (`#39FF14`)
 
 **Best Paired With:**
+
 - **Complementary:** Deep Magenta `#FF00FF` or Electric Violet `#8B5DFF`
 - **Grounding Neutrals:** Atomic Black `#0F0F0F` or Charcoal Gray `#333333`
 - **Secondary Accents:** Royal Blue `#305CDE`
 
 **Similar Shades:**
+
 - Green `#00FF00`
 - Seafoam Green `#98FF98`
 - Yellow Green `#9ACD32`
@@ -76,6 +89,7 @@ Specialized neon variations for specific design needs:
 #### Neon Pink (`#FF10F0`)
 
 **Best Paired With:**
+
 - **Complementary:** Mint Green `#10FF20` or Teal/Cyan `#00F7FF` (synthwave aesthetic)
 - **Refining Pairings:** Mauve `#E0AFFF` or Lavender `#D3D3FF`
 - **Avoid:** Peachy tones or low-saturation oranges
@@ -85,6 +99,7 @@ Specialized neon variations for specific design needs:
 #### Neon Blue (`#1F51FF`)
 
 **Best Paired With:**
+
 - **Complementary:** Neon Orange `#FF5C00` or Mustard Yellow `#FFCE1B`
 - **Professional Contrast:** Navy Blue `#000080` or Silver `#C4C4C4`
 - **High Energy:** Bright Yellow `#FFED29`
@@ -93,9 +108,11 @@ Specialized neon variations for specific design needs:
 
 #### Neon Yellow (`#FFFF00`)
 
-**Usage Note:** Notoriously difficult on the eyes — requires dark, heavy backgrounds.
+**Usage Note:** Notoriously difficult on the eyes — requires dark, heavy
+backgrounds.
 
 **Best Paired With:**
+
 - **Complementary:** Deep Purple `#9D00FF` or Navy Blue `#000080`
 - **Modern Professional:** Ultimate Gray `#939597`
 - **Fresh Contrast:** Mint Green `#ADEBB3` or Light Blue `#90D5FF`
@@ -104,66 +121,89 @@ Specialized neon variations for specific design needs:
 
 ### 33 Curated Color Palettes
 
-The design system includes 33 professionally curated neon color palettes organized by theme and use case. Each palette is designed for specific interface contexts and emotional impact.
+The design system includes 33 professionally curated neon color palettes
+organized by theme and use case. Each palette is designed for specific interface
+contexts and emotional impact.
 
 #### Palette 1: Cyberpunk Classic
-**Colors:** Pink `#FF10F0`, Blue `#1F51FF`  
-**Use Cases:** Hero sections, CTAs, high-energy landing pages  
+
+**Colors:** Pink `#FF10F0`, Blue `#1F51FF`
+**Use Cases:** Hero sections, CTAs, high-energy landing pages
 **Mood:** Futuristic, tech-forward, electric
 
 #### Palette 2: Toxic Lime
-**Colors:** Neon Green `#39FF14`, Cyan `#00F7FF`  
-**Use Cases:** Fresh tech interfaces, environmental themes, energy  
+
+**Colors:** Neon Green `#39FF14`, Cyan `#00F7FF`
+**Use Cases:** Fresh tech interfaces, environmental themes, energy
 **Mood:** High-energy, futuristic, clean
 
 #### Palette 3: Solar Flare
-**Colors:** Neon Orange `#FF5F1F`, Yellow `#FFFF00`  
-**Use Cases:** High-visibility alerts, energetic branding, warnings  
+
+**Colors:** Neon Orange `#FF5F1F`, Yellow `#FFFF00`
+**Use Cases:** High-visibility alerts, energetic branding, warnings
 **Mood:** Urgent, energetic, attention-grabbing
 
 #### Palette 4: Hyperpop Fusion
-**Colors:** Deep Lilac `#9955BB`, Hot Pink `#FF69B3`, Creme De Banane `#FFFF99`, Turquoise `#2BD9C6`, Soft Navy Blue `#43318F`  
-**Use Cases:** Playful interfaces, music/festival branding  
+
+**Colors:** Deep Lilac `#9955BB`, Hot Pink `#FF69B3`, Creme De Banane `#FFFF99`,
+Turquoise `#2BD9C6`, Soft Navy Blue `#43318F`
+**Use Cases:** Playful interfaces, music/festival branding
 **Mood:** Vibrant, youthful, maximalist
 
 #### Palette 5: Bright Neons
-**Colors:** Electric Purple `#CB0FFF`, Digital Yellow `#FDFF00`, Laser Green `#38FF12`, Bright Indigo `#6600FF`, Aqua `#00F7FF`  
-**Use Cases:** Dashboard UI, data visualization, neon art  
+
+**Colors:** Electric Purple `#CB0FFF`, Digital Yellow `#FDFF00`, Laser Green
+`#38FF12`, Bright Indigo `#6600FF`, Aqua `#00F7FF`
+**Use Cases:** Dashboard UI, data visualization, neon art
 **Mood:** Electric, high-contrast, bold
 
 #### Palette 6: All Bright
-**Colors:** Full Green `#0DFF00`, Vibrant Purple `#A600FF`, Bright Pink `#FF007B`, Hot Yellow `#FFD900`, Vibrant Blue `#0014F1`, Vivid Cyan `#00EAFF`  
-**Use Cases:** Festival posters, maximalist designs  
+
+**Colors:** Full Green `#0DFF00`, Vibrant Purple `#A600FF`, Bright Pink
+`#FF007B`, Hot Yellow `#FFD900`, Vibrant Blue `#0014F1`, Vivid Cyan `#00EAFF`
+**Use Cases:** Festival posters, maximalist designs
 **Mood:** Saturated, joyful, explosive
 
 #### Palette 7: Tribal Facepaint
-**Colors:** Deep Black `#040203`, Electric Green `#73EB1E`, Valentine `#EB1F5B`, Marine Blue `#157FD1`  
-**Use Cases:** Editorial photography, makeup portfolios  
+
+**Colors:** Deep Black `#040203`, Electric Green `#73EB1E`, Valentine `#EB1F5B`,
+Marine Blue `#157FD1`
+**Use Cases:** Editorial photography, makeup portfolios
 **Mood:** Tribal, artistic, cultural
 
 #### Palette 8: Neon Gradient
-**Colors:** Laser Green `#39FF14`, Pure Lime Green `#88FF0C`, Spring Bud `#B0FF08`, Bright Yellowish-Green `#D7FF04`, Digital Yellow `#FFFF00`  
-**Use Cases:** Gradient backgrounds, smooth transitions  
+
+**Colors:** Laser Green `#39FF14`, Pure Lime Green `#88FF0C`, Spring Bud
+`#B0FF08`, Bright Yellowish-Green `#D7FF04`, Digital Yellow `#FFFF00`
+**Use Cases:** Gradient backgrounds, smooth transitions
 **Mood:** Energetic, flowing, progressive
 
 #### Palette 9: DJ Of Love
-**Colors:** Red Hot `#F11501`, Yellow Sea `#FEA900`, Digital Yellow `#FFFF00`, Neon Green `#1AFF00`, Bright Magenta `#FF00CE`, Purple (Munsell) `#9F00D0`  
-**Use Cases:** Music interfaces, DJ branding, nightlife  
+
+**Colors:** Red Hot `#F11501`, Yellow Sea `#FEA900`, Digital Yellow `#FFFF00`,
+Neon Green `#1AFF00`, Bright Magenta `#FF00CE`, Purple (Munsell) `#9F00D0`
+**Use Cases:** Music interfaces, DJ branding, nightlife
 **Mood:** Party, nightlife, electric
 
 #### Palette 10: Neons For Boys
-**Colors:** Fuchsia `#FE00F6`, Erin `#05FF51`, Hot Lemon `#EEFF00`, Full White `#FFFFFF`, Vivid Cyan `#00EEFF`, Blue Screen `#1F10FF`  
-**Use Cases:** Gaming UI, sports branding  
+
+**Colors:** Fuchsia `#FE00F6`, Erin `#05FF51`, Hot Lemon `#EEFF00`, Full White
+`#FFFFFF`, Vivid Cyan `#00EEFF`, Blue Screen `#1F10FF`
+**Use Cases:** Gaming UI, sports branding
 **Mood:** Bold, masculine, tech
 
 #### Palette 11: Electric Colors
-**Colors:** Azure `#037CFE`, Citrine White `#00FFE0`, Lemon `#FFF903`, Vibrant Lime `#94EC0E`, Sporty Pink `#FA0098`  
-**Use Cases:** Athletic branding, sports apps  
+
+**Colors:** Azure `#037CFE`, Citrine White `#00FFE0`, Lemon `#FFF903`, Vibrant
+Lime `#94EC0E`, Sporty Pink `#FA0098`
+**Use Cases:** Athletic branding, sports apps
 **Mood:** Active, energetic, sporty
 
 #### Palette 12: Neon And Colorful
-**Colors:** Glossy Green `#44EC1E`, Candy Apple Red `#FF2910`, Gold Rush `#FFC422`, Roseine `#E013E0`, Busty Blue `#4411DB`, Turquoise Stone `#0DC1E8`  
-**Use Cases:** Playful UI, toy branding, children's content  
+
+**Colors:** Glossy Green `#44EC1E`, Candy Apple Red `#FF2910`, Gold Rush
+`#FFC422`, Roseine `#E013E0`, Busty Blue `#4411DB`, Turquoise Stone `#0DC1E8`
+**Use Cases:** Playful UI, toy branding, children's content
 **Mood:** Fun, colorful, joyful
 
 ---
@@ -185,21 +225,26 @@ The design system includes 33 professionally curated neon color palettes organiz
 
 #### 1. Cyberpunk Classic (Pink to Blue)
 
-**Description:** The quintessential neon look, perfect for hero sections and CTAs.
+**Description:** The quintessential neon look, perfect for hero sections and
+CTAs.
 
 ```css
 /* Vivid Magenta to Electric Blue */
 background: linear-gradient(135deg, #FF10F0 0%, #1F51FF 100%);
-```
+
+```text
 
 **CSS Variable:**
+
 ```css
 .gradient-cyberpunk {
   background: var(--wp--gradient--cyberpunk);
 }
-```
+
+```text
 
 **Use Cases:**
+
 - Hero section backgrounds
 - Call-to-action buttons
 - Featured cards
@@ -214,16 +259,20 @@ background: linear-gradient(135deg, #FF10F0 0%, #1F51FF 100%);
 ```css
 /* Laser Green to Electric Aqua */
 background: linear-gradient(to right, #39FF14 0%, #12FFF7 100%);
-```
+
+```text
 
 **CSS Variable:**
+
 ```css
 .gradient-toxic-lime {
   background: var(--wp--gradient--toxic-lime);
 }
-```
+
+```text
 
 **Use Cases:**
+
 - Fresh tech interfaces
 - Environmental/eco themes
 - Success states
@@ -238,16 +287,20 @@ background: linear-gradient(to right, #39FF14 0%, #12FFF7 100%);
 ```css
 /* Electric Orange to Digital Yellow */
 background: linear-gradient(45deg, #FF5F1F 0%, #FFFF00 100%);
-```
+
+```text
 
 **CSS Variable:**
+
 ```css
 .gradient-solar-flare {
   background: var(--wp--gradient--solar-flare);
 }
-```
+
+```text
 
 **Use Cases:**
+
 - Warning/alert states
 - High-energy CTAs
 - Festival/event branding
@@ -257,23 +310,29 @@ background: linear-gradient(45deg, #FF5F1F 0%, #FFFF00 100%);
 
 #### 4. Aurora Mesh Effect (Multi-Radial)
 
-**Description:** Modern design uses multiple radial gradients to create a "glowing cloud" effect. Works beautifully as full-page background on dark themes.
+**Description:** Modern design uses multiple radial gradients to create a
+"glowing cloud" effect. Works beautifully as full-page background on dark
+themes.
 
 ```css
 background-color: #000000;
-background-image: 
-  radial-gradient(at 0% 0%, hsla(285,100%,50%,0.3) 0, transparent 50%), 
+background-image:
+  radial-gradient(at 0% 0%, hsla(285,100%,50%,0.3) 0, transparent 50%),
   radial-gradient(at 100% 100%, hsla(190,100%,50%,0.3) 0, transparent 50%);
-```
+
+```text
 
 **CSS Variable:**
+
 ```css
 .gradient-aurora {
   background: var(--wp--gradient--aurora);
 }
-```
+
+```text
 
 **Use Cases:**
+
 - Full-page hero backgrounds
 - Section dividers
 - Modal/dialog backgrounds
@@ -285,17 +344,18 @@ background-image:
 
 #### Electric Aurora (Animated Shift)
 
-**Description:** Makes gradients "breathe" by animating background position. Creates fluid, liquid motion.
+**Description:** Makes gradients "breathe" by animating background position.
+Creates fluid, liquid motion.
 
 ```css
 .neon-glow-bg {
   /* Step 1: Define colors — make background 400% larger */
   background: linear-gradient(-45deg, #FF10F0, #1F51FF, #00F7FF, #39FF14);
   background-size: 400% 400%;
-  
+
   /* Step 2: Run animation */
   animation: gradientShift 15s ease infinite;
-  
+
   /* Optional: Full-page hero styling */
   width: 100%;
   height: 100vh;
@@ -313,9 +373,11 @@ background-image:
     background-position: 0% 50%;
   }
 }
-```
 
-**Reduced Motion Support:**
+```text
+
+## Reduced Motion Support
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   .neon-glow-bg {
@@ -323,7 +385,8 @@ background-image:
     background-size: 100% 100%;
   }
 }
-```
+
+```text
 
 ---
 
@@ -346,9 +409,11 @@ background-image:
     box-shadow: 0 0 20px #39FF14, 0 0 40px #39FF14;
   }
 }
-```
 
-**Reduced Motion Support:**
+```text
+
+## Reduced Motion Support (1)
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   .neon-card {
@@ -356,25 +421,30 @@ background-image:
     box-shadow: 0 0 10px #39FF14, inset 0 0 5px #39FF14;
   }
 }
-```
+
+```text
 
 ---
 
 ### Gradient Implementation Tips
 
 **Text Contrast:**
+
 - Never put thin white text directly over bright yellow or green gradients
 - Use dark overlay or keep text bold and black for readability
 
 **Glow Animation:**
+
 - Animate `background-position` to make gradients "breathe"
 - Use `background-size: 400% 400%` for smooth shifting
 
-**Performance Optimization:**
+## Performance Optimization
+
 - Use `will-change: background-position` for smooth mobile animation
 - Dark backgrounds (`#050505`) prevent "muddy" appearance
 
 **Tools:**
+
 - [CSS Gradient](https://cssgradient.io/) — Visual gradient tweaker
 - [uiGradients](https://uigradients.com/) — Gradient library
 
@@ -396,13 +466,15 @@ font-family: var(--wp--preset--font-family--body);
 /* Hero Titles — Bold display */
 font-family: var(--wp--preset--font-family--title);
 /* Righteous, Impact, sans-serif */
-```
+
+```text
 
 ---
 
 ### Fluid Typography Scale
 
-The site uses fluid typography that scales responsively between mobile and desktop viewports.
+The site uses fluid typography that scales responsively between mobile and
+desktop viewports.
 
 | Element | Mobile (320px) | Desktop (1920px) | CSS Class |
 |---|---|---|---|
@@ -413,6 +485,7 @@ The site uses fluid typography that scales responsively between mobile and deskt
 | **Small** | 14px | 16px | `.text-small` |
 
 **Implementation:**
+
 ```css
 /* WordPress-style fluid typography */
 .text-hero-h1 {
@@ -424,7 +497,8 @@ The site uses fluid typography that scales responsively between mobile and deskt
   font-size: clamp(24px, 3vw, 48px);
   line-height: 1.2;
 }
-```
+
+```text
 
 ---
 
@@ -440,7 +514,8 @@ The site uses fluid typography that scales responsively between mobile and deskt
 .text-card-h3          /* Fluid 20px→32px */
 .text-body-p           /* Fluid 16px→20px */
 .text-small            /* Fluid 14px→16px */
-```
+
+```text
 
 ---
 
@@ -448,7 +523,8 @@ The site uses fluid typography that scales responsively between mobile and deskt
 
 ### Spacing Scale
 
-The design system uses an 8px-based spacing scale with WordPress-style variable naming.
+The design system uses an 8px-based spacing scale with WordPress-style variable
+naming.
 
 | Name | Value | CSS Variable | Common Use |
 |---|---|---|---|
@@ -462,6 +538,7 @@ The design system uses an 8px-based spacing scale with WordPress-style variable 
 | **80** | 80px | `--wp--preset--spacing--80` | Hero vertical spacing |
 
 **Usage:**
+
 ```css
 .hero {
   padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--30);
@@ -471,29 +548,36 @@ The design system uses an 8px-based spacing scale with WordPress-style variable 
   gap: var(--wp--preset--spacing--20);
   padding: var(--wp--preset--spacing--30);
 }
-```
+
+```text
 
 ---
 
 ## Animations
 
-The design system includes 26 custom animations organized by category. **All animations must respect `prefers-reduced-motion`.**
+The design system includes 26 custom animations organized by category. **All
+animations must respect `prefers-reduced-motion`.**
 
 ### Animation Categories
 
 1. **Entrance Animations** (7 animations)
+
    - Fade In, Slide Up, Slide Down, Slide Left, Slide Right, Zoom In, Bounce In
 
-2. **Emphasis Animations** (6 animations)
+1. **Emphasis Animations** (6 animations)
+
    - Pulse, Shake, Wiggle, Flash, Glow, Rubber Band
 
-3. **Exit Animations** (4 animations)
+1. **Exit Animations** (4 animations)
+
    - Fade Out, Slide Out Up, Slide Out Down, Zoom Out
 
-4. **Neon Effects** (5 animations)
+1. **Neon Effects** (5 animations)
+
    - Neon Pulse, Neon Flicker, Gradient Shift, Color Cycle, Text Glow
 
-5. **Utility Animations** (4 animations)
+1. **Utility Animations** (4 animations)
+
    - Spin, Float, Bounce, Swing
 
 **Full documentation:** See `/guidelines/design-tokens/animations.md`
@@ -502,7 +586,7 @@ The design system includes 26 custom animations organized by category. **All ani
 
 ### Reduced Motion Compliance
 
-**Every animation must include a reduced motion fallback:**
+## Every animation must include a reduced motion fallback
 
 ```css
 .element {
@@ -516,9 +600,11 @@ The design system includes 26 custom animations organized by category. **All ani
     transform: none;
   }
 }
-```
 
-**Coding Standards:** See `/guidelines/prefers-reduced-motion.md` for complete implementation guide.
+```text
+
+**Coding Standards:** See `/guidelines/prefers-reduced-motion.md` for complete
+implementation guide.
 
 ---
 
@@ -526,7 +612,8 @@ The design system includes 26 custom animations organized by category. **All ani
 
 ### Primary Icon Library: Phosphor Icons
 
-The site uses **Phosphor Icons** (`@phosphor-icons/react`) with 6 weight variants:
+The site uses **Phosphor Icons** (`@phosphor-icons/react`) with 6 weight
+variants:
 
 - **Thin** (100) — Delicate, minimal UI
 - **Light** (200) — Subtle interface elements
@@ -536,13 +623,16 @@ The site uses **Phosphor Icons** (`@phosphor-icons/react`) with 6 weight variant
 - **Duotone** — Two-tone style for visual interest
 
 **Import:**
+
 ```tsx
 import { Icon } from '@phosphor-icons/react';
 
 <Icon size={24} weight="duotone" />
-```
+
+```text
 
 **Common Sizes:**
+
 - 16px — Inline text icons
 - 20px — Small UI elements
 - 24px — Standard icons
@@ -557,15 +647,18 @@ import { Icon } from '@phosphor-icons/react';
 
 ### Dual Theme System
 
-The site supports both light and dark modes with neon colors adapted for each context.
+The site supports both light and dark modes with neon colors adapted for each
+context.
 
 #### Dark Mode (Default)
+
 - Background: Atomic Black `#0F0F0F`
 - Text: Neutral 100 `#F5F5F5`
 - Neon colors: Full brightness
 - Glow effects: Maximum intensity
 
 #### Light Mode
+
 - Background: White `#FFFFFF`
 - Text: Neutral 900 `#1A1A1A`
 - Neon colors: Accessible text variants
@@ -576,6 +669,7 @@ The site supports both light and dark modes with neon colors adapted for each co
 ### Component-Specific Patterns
 
 **General Pattern:**
+
 ```css
 .component {
   background: var(--wp--preset--color--atomic-black);
@@ -586,9 +680,11 @@ body.light-mode .component {
   background: var(--wp--preset--color--white);
   color: var(--wp--preset--color--neutral-900);
 }
-```
 
-**Full documentation:**
+```text
+
+## Full documentation
+
 - See `/guidelines/dark-mode-implementation.md` for complete system
 - See `/guidelines/component-dark-mode.md` for component-specific patterns
 
@@ -599,6 +695,7 @@ body.light-mode .component {
 ### When to Use Neon Colors
 
 **✅ Good Use Cases:**
+
 - Hero section accents
 - Call-to-action buttons
 - Focus states
@@ -608,6 +705,7 @@ body.light-mode .component {
 - Gradient overlays
 
 **❌ Avoid:**
+
 - Long-form body text
 - Low-contrast pairings (yellow on white)
 - Overuse (more than 2-3 neon colors per screen)
@@ -618,15 +716,18 @@ body.light-mode .component {
 ### Accessibility Requirements
 
 **Color Contrast:**
+
 - Body text: 4.5:1 minimum (WCAG AA)
 - Dark mode achieves 7:1+ (WCAG AAA)
 - Always test neon colors against backgrounds
 
 **Reduced Motion:**
+
 - All animations must have `prefers-reduced-motion` fallbacks
 - No motion for users who request reduced motion
 
-**Full compliance:** WCAG 2.1 Level AA — See `/guidelines/accessibility-report-feb-2025.md`
+**Full compliance:** WCAG 2.1 Level AA — See
+`/guidelines/accessibility-report-feb-2025.md`
 
 ---
 
@@ -670,11 +771,13 @@ var(--wp--preset--spacing--50)  /* 40px */
 var(--wp--preset--spacing--60)  /* 48px */
 var(--wp--preset--spacing--70)  /* 64px */
 var(--wp--preset--spacing--80)  /* 80px */
-```
+
+```text
 
 ---
 
-**This is a living document. Always verify token values in `/styles/globals.css` for the most up-to-date implementation.**
+**This is a living document. Always verify token values in `/styles/globals.css`
+for the most up-to-date implementation.**
 
-**Last Updated:** March 7, 2026  
+**Last Updated:** March 7, 2026
 **Maintained by:** Ash Shaw Portfolio Team

@@ -1,39 +1,35 @@
 # This One Time on Acid
 
-This is a code bundle for This One Time on Acid. The original project is available at https://www.figma.com/design/WGrQbNWvPQfiaGY1pnkwaq/This-One-Time-on-Acid.
+This is a code bundle for This One Time on Acid.
+The original project is available at
+<https://www.figma.com/design/WGrQbNWvPQfiaGY1pnkwaq/This-One-Time-on-Acid>.
 
 ## Running the code
 
-**Requirements:** Node.js 24+ (see `.nvmrc`), npm 10+
+**Requirements:** Node.js 24+ (see `.nvmrc`)
 
 Run `npm install` to install the dependencies.
 
 Run `npm run dev` to start the development server.
 
-### Package Manager & Runtime Configuration
+## A Retro 80s CLI Memoir with Neon Terminal Aesthetics
 
-This project uses **npm** as the authoritative package manager with the following standardized configuration:
-
-- **Package Manager:** npm (v10+)
-- **Node Runtime:** Node.js 24+ (pinned in `.nvmrc`)
-- **Lockfile:** `package-lock.json` (auto-generated and committed)
-- **Build System:** Vite with npm scripts
-- **Netlify Build Command:** `npm run build` (configured in `netlify.toml`)
-- **Netlify Environment:** NODE_VERSION=24, NPM_VERSION=10
-
-These settings are defined for development, CI/CD, and Netlify builds. Effective production use still requires deployment validation.
-
-**A Retro 80s CLI Memoir with Neon Terminal Aesthetics**
-
-> **Status:** ✅ **ANIMATION PHASE 1 COMPLETE** - Terminal boot system deployed  
-> **Version:** v8.4.0 | **Animation System:** v1.0.0 | **Updated:** March 12, 2026  
-> **See:** [Guidelines](./guidelines/Guidelines.md) | [Animation Report](/docs/animation-implementation-report-march-2026.md)
+> **Status:** ✅ **ANIMATION PHASE 1 COMPLETE** - Terminal boot system deployed
+> **Version:** v8.4.0 | **Animation System:** v1.0.0 | **Updated:** March 12,
+2026
+> **See:** [Guidelines](./guidelines/Guidelines.md) | [Animation
+> Report](/docs/animation-implementation-report-march-2026.md)
 
 ## 🌟 Overview
 
-This is a high-performance React application built with **Vite**, **TypeScript**, and **Tailwind CSS**. It features a unique **"Neon vs Atomic Black"** design system with a comprehensive **retro terminal boot animation system**, and maintains 100% WCAG 2.1 AAA accessibility compliance.
+This is a high-performance React application built with **Vite**,
+**TypeScript**,
+and **Tailwind CSS**. It features a unique **"Neon vs Atomic Black"** design
+system with a comprehensive **retro terminal boot animation system**, and
+maintains 100% WCAG 2.1 AAA accessibility compliance.
 
-**Current Architecture:**
+## Current Architecture
+
 - **Frontend:** React 18 SPA (Single Page Application)
 - **Styling:** Strict BEM CSS Architecture (zero Tailwind utilities)
 - **Animations:** 26 @keyframes animations with terminal boot sequences
@@ -48,15 +44,24 @@ This is a high-performance React application built with **Vite**, **TypeScript**
 ### Core Animations
 
 1. **Terminal Boot Sequence** - 0.8s typewriter-style page entrance
-2. **Auto-Stagger System** - Cascading fade-in with 0.1s delays (title → subtitle → description → CTA)
-3. **Neon Pulse CTAs** - 2s breathing glow that speeds to 1s on hover
-4. **Holographic Shimmer** - 4s rainbow gradient sweep (pink → purple → cyan → yellow)
-5. **Floating Media** - 4s gentle vertical float with neon glow
-6. **Page Headers** - Unified animation system for archive pages
+
+1. **Auto-Stagger System** - Cascading fade-in with 0.1s delays (title →
+   subtitle → description → CTA)
+
+1. **Neon Pulse CTAs** - 2s breathing glow that speeds to 1s on hover
+
+1. **Holographic Shimmer** - 4s rainbow gradient sweep (pink → purple → cyan →
+   yellow)
+
+1. **Floating Media** - 4s gentle vertical float with neon glow
+
+1. **Page Headers** - Unified animation system for archive pages
 
 ### Pages Enhanced
 
-- **HomePage** (v1.7.0) - Full terminal boot + auto-stagger + floating media + neon pulse
+- **HomePage** (v1.7.0) - Full terminal boot + auto-stagger + floating media +
+  neon pulse
+
 - **AboutPage** (v1.5.0) - All HomePage animations + holographic rainbow title
 - **PortfolioPage** (v1.7.0) - Header boot → filters → grid stagger
 - **BlogPage** (v1.5.0) - Header boot → filters stagger
@@ -65,51 +70,149 @@ This is a high-performance React application built with **Vite**, **TypeScript**
 ### Dev Tools
 
 Visit **`/dev/animations`** for an interactive showcase with:
+
 - 6 live animation demos
 - Code implementation examples
 - Stats dashboard (26 animations, 5 pages, 100% WCAG AAA)
 - Responsive testing tools
 
-**Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion` support  
+**Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion`
+support
+
 **Performance:** CSS-only (60fps, zero JavaScript overhead, +0.6KB minified)
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies
-```bash
-npm install
-```
+**Requirements:** Node.js 24 LTS or later (pinned in `.nvmrc`)
 
-### 2. Configure Environment
-Copy `.env.example` to `.env` and configure as needed.
+### 1. Use Correct Node.js Version
+
 ```bash
-cp .env.example .env
-```
+nvm use  # Uses version from .nvmrc (Node.js 24)
+
+```text
+
+### 2. Install Dependencies (npm only)
+
+```bash
+npm ci  # Install exact versions from package-lock.json
+
+```text
 
 ### 3. Run Development Server
+
 ```bash
 npm run dev
-```
-Access the app at `http://localhost:5173`.
+
+```text
+
+Access the app at `http://localhost:5173`
+
+### 4. Run Tests & Validation
+
+```bash
+npm test              # Run all test suites
+npm run test:unit    # Jest unit tests
+npm run test:build   # Build verification
+npm run test:e2e     # Playwright e2e tests
+npm run validate:branch-name  # Validate branch naming
+
+```text
+
+## 🤝 Contributing
+
+### Before You Start
+
+Read these key governance documents:
+
+| Document | Purpose |
+|----------|---------|
+| **[CONTRIBUTING.md](./CONTRIBUTING.md)** | Contribution workflow, branch naming, PR process |
+| **[AGENTS.md](./AGENTS.md)** | AI agent rules and governance for this repository |
+| **[CLAUDE.md](./CLAUDE.md)** | Repository-specific Claude Code instructions |
+
+### Branch Naming
+
+All branches **must** follow this pattern: `{type}/{scope}-{title}`
+
+**Valid types:** `feat`, `fix`, `hotfix`, `docs`, `test`, `refactor`, `chore`,
+`design`, `security` (and more — see
+[CONTRIBUTING.md](./CONTRIBUTING.md))
+
+## Validate before pushing
+
+```bash
+npm run validate:branch-name
+
+```text
+
+### Testing & Validation
+
+See [docs/TESTING.md](./docs/TESTING.md) for comprehensive testing guide
+covering:
+
+- **Unit tests** (Jest ESM) — 588 tests
+- **Build verification** (Bats) — 12 tests
+- **End-to-end tests** (Playwright) — configured and ready
+- **Spec Kit regression** — 103/104 baseline
+
+### Repository Governance
+
+This repository follows specification-driven development using SpecKit:
+
+1. **Specify** — Document requirements in `spec.md`
+
+1. **Clarify** — Resolve ambiguities with Q&A
+
+1. **Plan** — Design implementation approach
+
+1. **Decompose** — Break into actionable tasks
+
+1. **Implement** — Execute tasks and commit
+
+All specifications live in [.github/specs/](./.github/specs/) with full catalog
+at [CATALOG.md](./.github/specs/CATALOG.md).
 
 ## 📚 Documentation
 
 ### Essential Reading (Start Here)
-*   **[Guidelines.md](./guidelines/Guidelines.md)** - Complete design & development guidelines (v8.4.0)
-*   **[Animation Report](./docs/animation-implementation-report-march-2026.md)** - Phase 1 completion report
-*   **[Overview Components](./guidelines/overview-components.md)** - Component architecture
-*   **[Neon Colors](./guidelines/design-tokens/neon-colors.md)** - Design system with 33 palettes
-*   **[Animations](./guidelines/design-tokens/animations.md)** - Complete animation library
+
+- **[Guidelines.md](./guidelines/Guidelines.md)** - Complete design &
+  development guidelines (v8.4.0)
+
+- **[Animation Report](./docs/animation-implementation-report-march-2026.md)** -
+  Phase 1 completion report
+
+- **[Overview Components](./guidelines/overview-components.md)** - Component
+  architecture
+
+- **[Neon Colors](./guidelines/design-tokens/neon-colors.md)** - Design system
+  with 33 palettes
+
+- **[Animations](./guidelines/design-tokens/animations.md)** - Complete
+  animation library
 
 ### Architecture Documentation
-*   **[BEM CSS Architecture](./guidelines/css-architecture.md)** - Strict BEM naming conventions
-*   **[Dark Mode Implementation](./guidelines/dark-mode-implementation.md)** - Theme system guide
-*   **[Component Dark Mode](./guidelines/component-dark-mode.md)** - Component-specific patterns
-*   **[Reduced Motion Standards](./guidelines/prefers-reduced-motion.md)** - Accessibility guide
+
+- **[BEM CSS Architecture](./guidelines/css-architecture.md)** - Strict BEM
+  naming conventions
+
+- **[Dark Mode Implementation](./guidelines/dark-mode-implementation.md)** -
+  Theme system guide
+
+- **[Component Dark Mode](./guidelines/component-dark-mode.md)** -
+  Component-specific patterns
+
+- **[Reduced Motion Standards](./guidelines/prefers-reduced-motion.md)** -
+  Accessibility guide
 
 ### Data System
-*   **[Data System README](./data/README.md)** - Centralized mock data documentation
-*   **[CMS Field Mapping](./docs/cms-field-mapping.md)** - WordPress CPT/ACF reference
+
+- **[Data System README](./data/README.md)** - Centralized mock data
+  documentation
+
+- **[CMS Field Mapping](./docs/cms-field-mapping.md)** - WordPress CPT/ACF
+  reference
 
 ## 🛠️ Developer Tools
 
@@ -125,7 +228,7 @@ The application includes built-in dev tools for inspecting the design system.
 
 ## 📦 Project Structure
 
-```
+```text
 /
 ├── components/           # React components (ES5 TypeScript, BEM CSS)
 │   ├── common/           # Header, Footer, ThemeToggle
@@ -146,7 +249,7 @@ The application includes built-in dev tools for inspecting the design system.
 │
 ├── styles/               # BEM CSS architecture
 │   ├── blocks/           # Component-specific CSS
-│   │   ├── animations.css              # Core @keyframes library (26 animations)
+│   │   ├── animations.css              # Core @keyframes library (26)
 │   │   ├── hero.css                    # Hero animation utilities
 │   │   ├── page-header-animations.css  # Reusable page header system
 │   │   └── animation-showcase.css      # Showcase page styles
@@ -163,41 +266,74 @@ The application includes built-in dev tools for inspecting the design system.
 ├── prompts/              # AI audit prompts
 ├── reports/              # Audit reports (archived after completion)
 └── tasks/                # Task lists & checklists
-```
+
+```text
 
 ## 📊 Content Counts (v8.4.0)
 
-| Content Type | Count | Notes |
-|---|---|---|
-| **Book Pages** | 15 | Home, The Book, Draft, About, Waitlist, Journal, Events, Speaking, Contact, Thank You, Media, Draft Viewer, Ebook, Sitemap, Style Guide |
-| **Ebook Pages** | 82 | 20 chapters + 2 appendices |
-| **Blog Posts** | 50 | Production-ready with rich storytelling |
-| **Portfolio Entries** | 25 | Enhanced with 150-word descriptions, 10-11 tags each |
-| **Videos** | 17 | 9 categories, 87 unique tags |
-| **Podcast Episodes** | 4 | Full transcripts |
-| **Events** | 4 | Origin, Organik, Gondwana, Vortex |
-| **Sticker Designs** | 26 | UV reactive art gallery |
-| **FAQ Entries** | 33 | Schema.org structured data |
-| **Animations** | 26 | @keyframes library |
-| **Dev Tools Pages** | 2 | Style Guide + Animation Showcase |
+| Content Type | Count |
+|---|---|
+| **Book Pages** | 15 |
+| **Ebook Pages** | 82 |
+| **Blog Posts** | 50 |
+| **Portfolio Entries** | 25 |
+| **Videos** | 17 |
+| **Podcast Episodes** | 4 |
+| **Events** | 4 |
+| **Sticker Designs** | 26 |
+| **FAQ Entries** | 33 |
+| **Animations** | 26 |
+| **Dev Tools Pages** | 2 |
+
+**Book Pages (15):** Home, The Book, Draft, About, Waitlist, Journal, Events,
+Speaking, Contact, Thank You, Media, Draft Viewer, Ebook, Sitemap, Style Guide
+
+**Ebook Pages (82):** 20 chapters + 2 appendices
+
+**Blog Posts (50):** Production-ready with rich storytelling
+
+**Portfolio Entries (25):** Enhanced with 150-word descriptions, 10-11 tags
+
+**Videos (17):** 9 categories, 87 unique tags
+
+**Podcast Episodes (4):** Full transcripts
+
+**Events (4):** Origin, Organik, Gondwana, Vortex
+
+**Sticker Designs (26):** UV reactive art gallery
+
+**FAQ Entries (33):** Schema.org structured data
+
+**Animations (26):** @keyframes library
+
+**Dev Tools Pages (2):** Style Guide + Animation Showcase
 
 ## 🎨 Design System Highlights
 
-**Neon vs Atomic Black Visual Identity:**
-- **8 Neon Colors:** Electric green, hot pink, royal blue, pure yellow, blazing orange, violet purple, aqua cyan, hot red
+## Neon vs Atomic Black Visual Identity
+
+- **8 Neon Colors:** Electric green, hot pink, royal blue, pure yellow, blazing
+  orange, violet purple, aqua cyan, hot red
+
 - **Atomic Black:** Deep #0F0F0F background for maximum neon contrast
-- **4 Signature Gradients:** Cyberpunk (pink→blue), Toxic Lime (green→cyan), Solar Flare (orange→yellow), Hyperpop (multi-color)
-- **26 Animations:** Neon pulse, gradient shift, float, bounce, terminal boot, holographic shimmer
+- **4 Signature Gradients:** Cyberpunk (pink→blue), Toxic Lime (green→cyan),
+  Solar Flare (orange→yellow), Hyperpop (multi-color)
+
+- **26 Animations:** Neon pulse, gradient shift, float, bounce, terminal boot,
+  holographic shimmer
+
 - **33 Color Palettes:** Comprehensive interface color library
 - **SVG Grain Noise:** Site-wide `feTurbulence` overlay on major sections
 
 **Typography:**
+
 - **Headings:** Playfair Display (elegant serif)
 - **Body:** Inter (readable sans-serif)
 - **Titles:** Righteous (retro display font)
 - **Fluid Scale:** 16px-20px (body), 36px-120px (hero)
 
 **Accessibility:**
+
 - ✅ WCAG 2.1 AAA compliance
 - ✅ Color contrast: 7:1+ in dark mode
 - ✅ Full keyboard navigation
@@ -208,16 +344,23 @@ The application includes built-in dev tools for inspecting the design system.
 ## 🚧 Future Enhancements (Phase 2 - Optional)
 
 **Animation System Phase 2** (~40-60 hours):
+
 1. Scroll-triggered animations for section reveals
-2. Parallax effects on hero media
-3. Interactive hover states on portfolio cards
-4. Animated page transitions (React Router integration)
-5. Micro-interactions for form validation
-6. Loading skeleton animations
+
+1. Parallax effects on hero media
+
+1. Interactive hover states on portfolio cards
+
+1. Animated page transitions (React Router integration)
+
+1. Micro-interactions for form validation
+
+1. Loading skeleton animations
 
 ## 📝 Recent Updates
 
-**March 12, 2026 - Animation System Phase 1 Complete:**
+## March 12, 2026 - Animation System Phase 1 Complete
+
 - ✅ Terminal boot animation system (6 types across 5 pages)
 - ✅ Interactive animation showcase at `/dev/animations`
 - ✅ Style guide dark mode fixed (atomic black backgrounds)
@@ -228,6 +371,6 @@ The application includes built-in dev tools for inspecting the design system.
 
 ---
 
-**Maintained by:** Nova News Dev Team  
-**Last Updated:** March 12, 2026  
+**Maintained by:** Nova News Dev Team
+**Last Updated:** March 12, 2026
 **Project Status:** Production-Ready with Phase 1 Animations Complete

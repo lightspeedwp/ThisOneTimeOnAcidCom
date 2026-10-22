@@ -6,7 +6,9 @@
 
 ## Purpose
 
-Reusable stat/fact grid component that renders an accessible list of label/value pairs. Replaces the repeated `about-subpage__facts` + `about-subpage__fact` inline pattern used across 8+ about sub-pages.
+Reusable stat/fact grid component that renders an accessible list of label/value
+pairs. Replaces the repeated `about-subpage_*facts` + `about-subpage*_fact`
+inline pattern used across 8+ about sub-pages.
 
 ## Props
 
@@ -23,7 +25,8 @@ interface StatItem {
   label: string;
   value: string;
 }
-```
+
+```text
 
 ## Usage
 
@@ -34,7 +37,8 @@ import { StatCard } from '../../ui/StatCard';
   items={data.quickFacts}
   ariaLabel="ADHD quick facts"
 />
-```
+
+```text
 
 ## CSS Classes Used
 
@@ -54,10 +58,17 @@ All classes are defined in `/styles/blocks/about-subpage.css`:
 ## Pages Using This Component
 
 1. BioPage — "Quick facts about Ash Shaw"
-2. AdhdPage — "ADHD quick facts"
-3. AquariusPage — "Aquarian traits"
-4. CyclingPage — "Cycling stats"
-5. EducationPage — "Education stats"
-6. FitnessPage — "Fitness stats"
-7. LightSpeedPage — "LightSpeed stats"
-8. MusicPage — "Music stats"
+
+1. AdhdPage — "ADHD quick facts"
+
+1. AquariusPage — "Aquarian traits"
+
+1. CyclingPage — "Cycling stats"
+
+1. EducationPage — "Education stats"
+
+1. FitnessPage — "Fitness stats"
+
+1. LightSpeedPage — "LightSpeed stats"
+
+1. MusicPage — "Music stats"

@@ -1,41 +1,48 @@
 ---
 title: "Component Structure Audit Report"
-filename: "/reports/2026-03-11-modern-react-migration/05-component-structure-audit.md"
+filename:
+"/reports/2026-03-11-modern-react-migration/05-component-structure-audit.md"
 created: "2026-03-11"
 completed: "2026-03-11"
 version: "1.0.0"
 status: "complete"
 auditor: "AI Assistant"
-related_prompt: "/prompts/modern-react-migration/05-component-structure-audit.md"
+related_prompt:
+"/prompts/modern-react-migration/05-component-structure-audit.md"
 ---
 
 # Component Structure Audit Report
 
-**Audit Date:** March 11, 2026  
-**Components Scanned:** 45 total  
+**Audit Date:** March 11, 2026
+**Components Scanned:** 45 total
 **Issues Found:** 18 total
 
 ---
 
 ## Executive Summary
 
-The component structure demonstrates **excellent organization** with clear separation of concerns and well-defined folder hierarchy. The codebase follows React best practices for file naming, component composition, and TypeScript usage.
+The component structure demonstrates **excellent organization** with clear
+separation of concerns and well-defined folder hierarchy. The codebase follows
+React best practices for file naming, component composition, and TypeScript
+usage.
 
 **Strengths:**
+
 - ✅ Excellent folder organization (`common`, `pages`, `ui`, `sections`, `template-parts`, `layout`, `figma`)
 - ✅ 100% TypeScript interface coverage
 - ✅ Comprehensive JSDoc documentation
 - ✅ Named exports throughout (except `/App.tsx`)
 - ✅ Recent v5.0.0 refactoring extracted sub-components from EbookPage
 
-**Areas for Improvement:**
+## Areas for Improvement
+
 - 🔶 One large component (`EbookPage.tsx` - 600+ lines)
 - 🔶 Some duplicate patterns across video archive pages
 - 🔶 Missing barrel exports in some folders
 - 🔶 A few inline hooks that could be extracted
 
-**Well Structured:** 37 components (82%)  
-**Needs Improvement:** 8 components (18%)  
+**Well Structured:** 37 components (82%)
+**Needs Improvement:** 8 components (18%)
 **Critical Issues:** 0 components
 
 ---
@@ -44,7 +51,7 @@ The component structure demonstrates **excellent organization** with clear separ
 
 ### Current Structure
 
-```
+```text
 /components/
 ├── common/              20 components (Header, Footer, Navigation, Modals)
 ├── pages/               12 components (HomePage, AboutPage, etc.)
@@ -53,11 +60,13 @@ The component structure demonstrates **excellent organization** with clear separ
 ├── template-parts/      3 components  (Reusable template fragments)
 ├── layout/              2 components  (RootLayout, PageLayout)
 └── figma/               2 components  (Protected - Figma integration)
-```
+
+```text
 
 ### ✅ Well Organized (42/45 - 93%)
 
-**Excellent folder structure:**
+## Excellent folder structure
+
 - `/components/common/` - Shared components used across multiple pages
 - `/components/pages/` - Page-level components
 - `/components/ui/` - Reusable UI primitives
@@ -74,7 +83,8 @@ The component structure demonstrates **excellent organization** with clear separ
 | `StickerLightbox` (inline) | `/components/pages/StickersPage.tsx` | `/components/ui/StickerLightbox.tsx` | P2 | Extract to separate file |
 | Sub-page components | `/components/pages/about/` | Consider `/components/pages/about/sections/` | P3 | Optional - improve nesting |
 
-**Overall:** Folder organization is excellent with only minor optimization opportunities.
+**Overall:** Folder organization is excellent with only minor optimization
+opportunities.
 
 ---
 
@@ -82,7 +92,8 @@ The component structure demonstrates **excellent organization** with clear separ
 
 ### ✅ Appropriately Sized (40/45 - 89%)
 
-**Well-sized components (under 300 lines):**
+## Well-sized components (under 300 lines)
+
 - `Header.tsx` - 120 lines
 - `Footer.tsx` - 180 lines
 - `Breadcrumbs.tsx` - 85 lines
@@ -100,17 +111,20 @@ The component structure demonstrates **excellent organization** with clear separ
 | `HistoryPage.tsx` | 400+ | Timeline + filtering | Extract timeline component | P3 |
 
 **Note:** `EbookPage.tsx` was refactored in v5.0.0 and already extracted:
+
 - `PageContent` → `/components/pages/about/ebook/EbookPageContent.tsx`
 - `EbookDrawer` → `/components/pages/about/ebook/EbookDrawer.tsx`
 - `EbookReaderNav` → `/components/pages/about/ebook/EbookReaderNav.tsx`
 - Helpers → `/components/pages/about/ebook/ebookHelpers.ts`
 
-**Further extraction recommended:**
-```
+## Further extraction recommended
+
+```text
 useEbookState() → /hooks/useEbookState.ts (state management)
 useTouchGestures() → /hooks/useTouchGestures.ts (swipe handling)
 useKeyboardNav() → /hooks/useKeyboardNav.ts (keyboard controls)
-```
+
+```text
 
 ---
 
@@ -118,9 +132,9 @@ useKeyboardNav() → /hooks/useKeyboardNav.ts (keyboard controls)
 
 ### ✅ Well Named (45/45 - 100%)
 
-**All components follow PascalCase and descriptive naming:**
+## All components follow PascalCase and descriptive naming
 
-```
+```text
 ✅ GOOD NAMES:
 PortfolioMegaMenu.tsx       - Clear, describes mega menu for portfolio
 BlogMegaMenu.tsx            - Clear, describes mega menu for blog
@@ -129,7 +143,8 @@ EbookPage.tsx               - Clear page component
 AutoBreadcrumbs.tsx         - Describes auto-generated breadcrumbs
 ThemeProvider.tsx           - Clear context provider
 ErrorBoundary.tsx           - Standard React pattern name
-```
+
+```text
 
 **No naming issues found** - All components have clear, descriptive names.
 
@@ -139,7 +154,8 @@ ErrorBoundary.tsx           - Standard React pattern name
 
 ### ✅ Well Separated (38/45 - 84%)
 
-**Excellent separation:**
+## Excellent separation
+
 - `/components/ui/Button.tsx` - Presentation only
 - `/components/ui/Breadcrumbs.tsx` - Presentation with minimal logic
 - `/components/common/ThemeProvider.tsx` - Context provider (logic)
@@ -161,7 +177,8 @@ ErrorBoundary.tsx           - Standard React pattern name
 | `PWAInstallPrompt.tsx` | PWA prompt logic + rendering | Keep as-is (acceptable) | P3 |
 | `OfflineIndicator.tsx` | Network monitoring + rendering | Keep as-is (acceptable) | P3 |
 
-**Recommended extractions:**
+## Recommended extractions
+
 ```typescript
 // Extract from EbookPage.tsx
 /hooks/useEbookState.ts         - State management with useReducer
@@ -178,7 +195,8 @@ ErrorBoundary.tsx           - Standard React pattern name
 
 // Extract from AboutPage.tsx
 /hooks/useScrollSpy.ts          - Scroll position tracking
-```
+
+```text
 
 ---
 
@@ -186,7 +204,8 @@ ErrorBoundary.tsx           - Standard React pattern name
 
 ### ✅ Reusable Components (32/45 - 71%)
 
-**Excellent reusability:**
+## Excellent reusability
+
 - `/components/ui/Breadcrumbs.tsx` - Used on all sub-pages
 - `/components/ui/Button.tsx` - Used throughout site
 - `/components/common/Logo.tsx` - Configurable size prop
@@ -196,9 +215,10 @@ ErrorBoundary.tsx           - Standard React pattern name
 ### ❌ Duplicate Patterns (8/45 - 18%)
 
 #### Pattern 1: Video Archive Pages
-**Duplicates:** `VideoCategoryPage.tsx`, `VideoTagPage.tsx`, `VideosPage.tsx`  
-**Similarity:** 70% shared header/layout structure  
-**Recommendation:** Extract `VideoArchiveLayout` component  
+
+**Duplicates:** `VideoCategoryPage.tsx`, `VideoTagPage.tsx`, `VideosPage.tsx`
+**Similarity:** 70% shared header/layout structure
+**Recommendation:** Extract `VideoArchiveLayout` component
 **Priority:** P2
 
 ```typescript
@@ -226,18 +246,22 @@ function VideoArchiveLayout({
     </main>
   );
 }
-```
+
+```text
 
 #### Pattern 2: Mega Menus
-**Duplicates:** `PortfolioMegaMenu.tsx`, `BlogMegaMenu.tsx`  
-**Similarity:** 60% shared structure  
-**Recommendation:** Extract `MegaMenuBase` component with slot composition  
+
+**Duplicates:** `PortfolioMegaMenu.tsx`, `BlogMegaMenu.tsx`
+**Similarity:** 60% shared structure
+**Recommendation:** Extract `MegaMenuBase` component with slot composition
 **Priority:** P3 (low - menus are intentionally different)
 
 #### Pattern 3: About Sub-Pages
-**Duplicates:** `BioPage.tsx`, `BerlinPage.tsx`, `AdhdPage.tsx`, `FitnessPage.tsx`, etc.  
-**Similarity:** All use same layout structure  
-**Recommendation:** Extract `AboutSubPageLayout` wrapper  
+
+**Duplicates:** `BioPage.tsx`, `BerlinPage.tsx`, `AdhdPage.tsx`,
+`FitnessPage.tsx`, etc.
+**Similarity:** All use same layout structure
+**Recommendation:** Extract `AboutSubPageLayout` wrapper
 **Priority:** P3 (optional - pages are simple)
 
 ```typescript
@@ -260,7 +284,8 @@ function AboutSubPageLayout({
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -268,7 +293,8 @@ function AboutSubPageLayout({
 
 ### ✅ Good Exports (45/45 - 100%)
 
-**All components use named exports (except App.tsx):**
+## All components use named exports (except App.tsx)
+
 ```typescript
 // ✅ Named exports
 export function Button(props: ButtonProps) { ... }
@@ -281,7 +307,8 @@ export type BreadcrumbsProps = { ... }
 
 // ✅ Default export (only App.tsx - required)
 export default function App() { ... }
-```
+
+```text
 
 ### 🔶 Missing Barrel Exports (5 folders)
 
@@ -293,7 +320,8 @@ export default function App() { ... }
 | `/hooks/` | `index.ts` | Imports are verbose | P3 |
 | `/utils/` | `index.ts` | Imports are verbose | P3 |
 
-**Recommended barrel exports:**
+## Recommended barrel exports
+
 ```typescript
 // /components/ui/index.tsx
 export { Breadcrumbs } from './Breadcrumbs';
@@ -308,7 +336,8 @@ import { Button } from '../../components/ui/Button';
 
 // After:
 import { Breadcrumbs, Button } from '../../components/ui';
-```
+
+```text
 
 ---
 
@@ -316,7 +345,8 @@ import { Breadcrumbs, Button } from '../../components/ui';
 
 ### ✅ Well Organized (45/45 - 100%)
 
-**All components have:**
+## All components have
+
 - ✅ TypeScript interfaces defined with component
 - ✅ Shared types in `/data/types/`
 - ✅ Consistent naming (`ComponentProps` pattern)
@@ -324,6 +354,7 @@ import { Breadcrumbs, Button } from '../../components/ui';
 **No issues found** - TypeScript organization is exemplary.
 
 **Examples:**
+
 ```typescript
 // Component-specific interface
 export type ButtonProps = {
@@ -339,7 +370,8 @@ export type PortfolioEntry = {
   slug: string;
   // ...
 };
-```
+
+```text
 
 ---
 
@@ -347,8 +379,9 @@ export type PortfolioEntry = {
 
 ### ✅ Well Organized (8/8 - 100%)
 
-**All hooks follow best practices:**
-```
+## All hooks follow best practices
+
+```text
 /hooks/
 ├── useAppNavigate.ts       - Navigation helper
 ├── useReducedMotion.ts     - Accessibility hook
@@ -358,9 +391,11 @@ export type PortfolioEntry = {
 ├── useLocalStorage.ts      - localStorage sync
 ├── useMediaQuery.ts        - Responsive breakpoints
 └── useOnlineStatus.ts      - Network monitoring
-```
+
+```text
 
 **All hooks:**
+
 - ✅ Named with `use*` prefix
 - ✅ Single responsibility
 - ✅ Properly extracted from components
@@ -382,9 +417,10 @@ export type PortfolioEntry = {
 
 ### ✅ Well Decoupled (43/45 - 96%)
 
-**No circular dependencies found.**
+## No circular dependencies found
 
-**Good dependency patterns:**
+## Good dependency patterns
+
 - Components import from `/data/mock/` (data)
 - Components import from `/utils/` (business logic)
 - Components import from `/hooks/` (reusable logic)
@@ -393,13 +429,15 @@ export type PortfolioEntry = {
 ### 🔶 Minor Prop Drilling (2 instances)
 
 #### Instance 1: Mobile Menu State
-**Chain:** `Header.tsx` → `MobileMenu.tsx` → `AboutDropdown.tsx`  
-**Props drilled:** `isOpen`, `onClose`  
-**Recommendation:** Use context or lift state (low priority)  
+
+**Chain:** `Header.tsx` → `MobileMenu.tsx` → `AboutDropdown.tsx`
+**Props drilled:** `isOpen`, `onClose`
+**Recommendation:** Use context or lift state (low priority)
 **Priority:** P3
 
 #### Instance 2: Theme State
-**Chain:** `App.tsx` → `ThemeProvider` → Multiple components  
+
+**Chain:** `App.tsx` → `ThemeProvider` → Multiple components
 **Status:** ✅ Already uses context (no issue)
 
 **Overall:** Minimal prop drilling - component dependencies are well-managed.
@@ -410,27 +448,31 @@ export type PortfolioEntry = {
 
 ### ✅ Well Documented (42/45 - 93%)
 
-**Excellent JSDoc coverage:**
+## Excellent JSDoc coverage
+
 ```typescript
 /**
+
  * @fileoverview Unified responsive eBook reader.
- * 
+ *
  * Breakpoints:
  *   - Mobile compact (320-419px): single-page, 18px body
  *   - Tablet portrait (768-1023px): single-page, 22px body
  *   - Desktop (1280px+): two-page spread, 19px body
- * 
+ *
  * @component EbookPage
  * @version 5.0.0 - Extracted PageContent, Drawer, Nav, helpers
  */
 
 /**
+
  * Logo component with configurable size and theme support.
  * @param size - Logo size: 'sm' | 'md' | 'lg' | 'xl'
  * @param className - Additional CSS classes
  */
 export function Logo({ size = 'md', className = '' }: LogoProps) { ... }
-```
+
+```text
 
 ### 🔶 Missing Documentation (3/45 - 7%)
 
@@ -445,25 +487,38 @@ export function Logo({ size = 'md', className = '' }: LogoProps) { ... }
 ## Recommendations
 
 ### Immediate Actions (P0)
+
 None - no blocking issues
 
 ### High Priority (P1)
+
 1. **Extract EbookPage hooks** - Create `useTouchGestures`, `useKeyboardNav`, `useFullscreen`
-2. **Extract StickersPage lightbox** - Move to `/components/ui/StickerLightbox.tsx`
-3. **Extract StickersPage search** - Create `/hooks/useStickerSearch.ts`
+
+1. **Extract StickersPage lightbox** - Move to `/components/ui/StickerLightbox.tsx`
+
+1. **Extract StickersPage search** - Create `/hooks/useStickerSearch.ts`
 
 ### Improvements (P2)
+
 1. **Extract VideoArchiveLayout** - Reduce duplication across video pages
-2. **Create barrel exports** - Add `index.tsx` to `/components/ui/`, `/components/common/`
-3. **Split StyleGuidePage** - Extract sections into separate components
-4. **Split SitemapPage** - Extract category sections
-5. **Extract `useVideoFiltering` hook** - From VideosPage
-6. **Extract `useScrollSpy` hook** - From AboutPage
+
+1. **Create barrel exports** - Add `index.tsx` to `/components/ui/`, `/components/common/`
+
+1. **Split StyleGuidePage** - Extract sections into separate components
+
+1. **Split SitemapPage** - Extract category sections
+
+1. **Extract `useVideoFiltering` hook** - From VideosPage
+
+1. **Extract `useScrollSpy` hook** - From AboutPage
 
 ### Documentation (P3)
+
 1. **Add JSDoc examples** - ColorfulIcons, ThemeSwitcher
-2. **Create component usage guide** - Document common patterns
-3. **Extract AboutSubPageLayout** - Optional wrapper for about sub-pages
+
+1. **Create component usage guide** - Document common patterns
+
+1. **Extract AboutSubPageLayout** - Optional wrapper for about sub-pages
 
 ---
 
@@ -487,7 +542,8 @@ None - no blocking issues
 ### High-Level Changes
 
 1. **Create UI Library Structure**
-   ```
+
+```text
    /components/ui/
    ├── index.tsx              (barrel export)
    ├── Breadcrumbs.tsx
@@ -495,18 +551,22 @@ None - no blocking issues
    ├── VideoModal.tsx
    ├── StickerLightbox.tsx    (NEW - extracted)
    └── ...
-   ```
 
-2. **Extract Shared Layouts**
-   ```
+```text
+
+1. **Extract Shared Layouts**
+
+```text
    /components/layout/
    ├── VideoArchiveLayout.tsx  (NEW)
    ├── AboutSubPageLayout.tsx  (NEW - optional)
    └── RootLayout.tsx
-   ```
 
-3. **Expand Hooks Library**
-   ```
+```text
+
+1. **Expand Hooks Library**
+
+```text
    /hooks/
    ├── index.ts               (barrel export)
    ├── useEbookState.ts       (NEW)
@@ -517,10 +577,12 @@ None - no blocking issues
    ├── useScrollSpy.ts        (NEW)
    ├── useVideoFiltering.ts   (NEW)
    └── ... (existing hooks)
-   ```
 
-4. **Split Large Components**
-   ```
+```text
+
+1. **Split Large Components**
+
+```text
    /components/pages/
    ├── StyleGuidePage/
    │   ├── index.tsx          (main component)
@@ -534,20 +596,25 @@ None - no blocking issues
        ├── BlogSection.tsx
        ├── VideosSection.tsx
        └── PodcastsSection.tsx
-   ```
+
+```text
 
 ---
 
 ## Next Steps
 
 1. Extract actionable items into `/tasks/modern-react-migration-tasks.md`
-2. Prioritize P1 component refactoring (EbookPage, StickersPage)
-3. Create barrel export files for component folders
-4. Update component documentation with new patterns
-5. Consider performance profiling of large components
+
+1. Prioritize P1 component refactoring (EbookPage, StickersPage)
+
+1. Create barrel export files for component folders
+
+1. Update component documentation with new patterns
+
+1. Consider performance profiling of large components
 
 ---
 
-**Audit Completed:** March 11, 2026  
-**Report Status:** Complete  
+**Audit Completed:** March 11, 2026
+**Report Status:** Complete
 **Overall Assessment:** ✅ Excellent Component Structure (82% well-structured)

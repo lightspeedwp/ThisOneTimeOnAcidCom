@@ -1,7 +1,7 @@
 # ✅ Dark Mode Contrast Fixes - Progress Update
 
-**Date:** March 11, 2026  
-**Status:** IN PROGRESS  
+**Date:** March 11, 2026
+**Status:** IN PROGRESS
 **Completion:** ~10% (Critical navigation mostly complete)
 
 ---
@@ -11,10 +11,12 @@
 ### Phase 1: Critical Navigation ✅ MOSTLY COMPLETE
 
 1. **✅ Header Navigation** (`/styles/blocks/header.css`)
+
    - `.dark .header__nav-link` → `color: var(--color-text-light)` (14.8:1) ✅
    - **Impact:** Header navigation now clearly visible
 
-2. **✅ Footer** (`/styles/blocks/footer.css`) — 6 FIXES
+1. **✅ Footer** (`/styles/blocks/footer.css`) — 6 FIXES
+
    - `.dark .footer__tagline` → `color: var(--color-text-muted)` (10.2:1) ✅
    - `.dark .footer__heading` → `color: var(--color-text-light)` (14.8:1) ✅
    - `.dark .footer__nav-link` → `color: var(--color-text-muted)` (10.2:1) ✅
@@ -24,11 +26,13 @@
    - `.dark .footer__legal-link` → `color: var(--color-text-fine)` (6.5:1) ✅
    - **Impact:** All footer text now readable
 
-3. **✅ Breadcrumbs** (`/styles/blocks/breadcrumbs.css`) — CRITICAL FIX
-   - `.dark .breadcrumbs__item--current .breadcrumbs__text` → `color: var(--color-text-light)` (14.8:1) ✅
+1. **✅ Breadcrumbs** (`/styles/blocks/breadcrumbs.css`) — CRITICAL FIX
+
+   - `.dark .breadcrumbs_*item--current .breadcrumbs*_text` → `color: var(--color-text-light)` (14.8:1) ✅
    - **Impact:** Current page indicator now visible (was COMPLETELY invisible at 1.48:1)
 
-4. **✅ Blog Preview** (`/styles/blocks/blog-preview.css`) — 2 FIXES
+1. **✅ Blog Preview** (`/styles/blocks/blog-preview.css`) — 2 FIXES
+
    - `.dark .blog-card__excerpt` → `color: var(--color-text-muted)` (10.2:1) ✅
    - `.dark .text-blog-description` → `color: var(--color-text-muted)` (10.2:1) ✅
    - **Impact:** Blog card excerpts now readable
@@ -40,6 +44,7 @@
 ### Phase 1: Critical Navigation (INCOMPLETE)
 
 Still need to fix:
+
 - [ ] Mobile menu (if exists)
 - [ ] Main navigation dropdown (if exists)
 
@@ -47,7 +52,8 @@ Still need to fix:
 
 ### Phase 2: Primary Content (HIGH PRIORITY)
 
-**Files requiring fixes:**
+## Files requiring fixes
+
 - [ ] `/styles/blocks/about-page.css` (1 failure)
 - [ ] `/styles/blocks/about-subpage.css` (6 failures)
 - [ ] `/styles/blocks/archive-filters.css` (18 failures) ← HIGH IMPACT
@@ -59,7 +65,8 @@ Still need to fix:
 
 ### Phase 3: UI Components (MEDIUM PRIORITY)
 
-**Files requiring fixes:**
+## Files requiring fixes (1)
+
 - [ ] `/styles/blocks/button-specimen.css` (3 failures)
 - [ ] `/styles/blocks/card-specimen.css` (4 failures)
 - [ ] `/styles/blocks/accessibility-page.css` (1 failure)
@@ -69,7 +76,8 @@ Still need to fix:
 
 ### Phase 4: Developer Tools (LOW PRIORITY)
 
-**Files requiring fixes:**
+## Files requiring fixes (2)
+
 - [ ] `/styles/blocks/analytics-dashboard.css` (12 failures)
 - [ ] `/styles/blocks/component-api.css` (11 failures)
 - [ ] `/styles/blocks/code-quality.css` (13 failures)
@@ -106,17 +114,21 @@ Still need to fix:
 ## 🎯 Next Immediate Actions
 
 1. **Fix archive-filters.css** (18 failures - HIGH IMPACT)
+
    - This affects the entire filtering system
    - Users can't read filter labels, chips, or result counts
 
-2. **Fix about-subpage.css** (6 failures)
+1. **Fix about-subpage.css** (6 failures)
+
    - Affects About page and sub-pages
    - Secondary text and step descriptions unreadable
 
-3. **Fix button/card specimens** (7 failures combined)
+1. **Fix button/card specimens** (7 failures combined)
+
    - UI components need proper contrast
 
-4. **Fix developer tools** (50 failures combined)
+1. **Fix developer tools** (50 failures combined)
+
    - Lower priority but still needs fixing
 
 ---
@@ -138,16 +150,19 @@ All fixed components now meet WCAG AA (4.5:1) or better:
 **Current:** ⚠️ **PARTIAL - NOT FULLY READY**
 
 **Can deploy if:**
+
 - Critical navigation works ✅ (header, footer, breadcrumbs done)
 - Users can navigate the site ✅
 - Main content is readable ⚠️ (partially fixed)
 
 **Cannot claim:**
+
 - ❌ "100% WCAG AA compliance" (only ~15% complete)
 - ❌ "Full accessibility" (still 92 failures remaining)
 - ❌ "Production ready" (need to finish all phases)
 
 **Honest status:**
+
 - ✅ Header works
 - ✅ Footer works
 - ✅ Breadcrumbs work
@@ -160,14 +175,14 @@ All fixed components now meet WCAG AA (4.5:1) or better:
 
 ## 📝 Summary
 
-**Progress:** Good start on critical navigation  
-**Status:** ~10% complete  
-**Next:** Fix archive-filters (18 failures) and about pages (7 failures)  
-**ETA:** 3.5 hours remaining work  
+**Progress:** Good start on critical navigation
+**Status:** ~10% complete
+**Next:** Fix archive-filters (18 failures) and about pages (7 failures)
+**ETA:** 3.5 hours remaining work
 
 **The site is now USABLE in dark mode but NOT FULLY ACCESSIBLE yet.**
 
 ---
 
-**Updated:** March 11, 2026  
+**Updated:** March 11, 2026
 **Next Update:** After Phase 2 completion

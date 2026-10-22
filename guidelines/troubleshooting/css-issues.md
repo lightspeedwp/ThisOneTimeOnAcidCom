@@ -1,6 +1,6 @@
 # CSS Issues Troubleshooting
 
-**Version:** 1.0.0  
+**Version:** 1.0.0
 **Last Updated:** January 2025
 
 Common CSS styling issues and their solutions for the Ash Shaw Makeup Portfolio.
@@ -8,10 +8,14 @@ Common CSS styling issues and their solutions for the Ash Shaw Makeup Portfolio.
 ## 📋 Table of Contents
 
 1. [Light/Dark Mode Issues](#lightdark-mode-issues)
-2. [Spacing Issues](#spacing-issues)
-3. [Typography Issues](#typography-issues)
-4. [Responsive Issues](#responsive-issues)
-5. [Known Issues](#known-issues)
+
+1. [Spacing Issues](#spacing-issues)
+
+1. [Typography Issues](#typography-issues)
+
+1. [Responsive Issues](#responsive-issues)
+
+1. [Known Issues](#known-issues)
 
 ---
 
@@ -21,11 +25,13 @@ Common CSS styling issues and their solutions for the Ash Shaw Makeup Portfolio.
 
 **Status:** 🐛 **KNOWN ISSUE** - Fix pending in v4.1.1
 
-**Problem:**  
-Cards with the `.bg-card` class turn completely black on hover in light mode, making them unreadable. This breaks the user experience and accessibility.
+**Problem:**
+Cards with the `.bg-card` class turn completely black on hover in light mode,
+making them unreadable. This breaks the user experience and accessibility.
 
-**Root Cause:**  
-The global CSS file (`/styles/globals.css`) around line 2375 has an incorrect hover state that applies black background to both light and dark modes:
+**Root Cause:**
+The global CSS file (`/styles/globals.css`) around line 2375 has an incorrect
+hover state that applies black background to both light and dark modes:
 
 ```css
 /* ❌ CURRENT - BROKEN */
@@ -36,15 +42,18 @@ The global CSS file (`/styles/globals.css`) around line 2375 has an incorrect ho
 .dark .bg-card:hover {
   background-color: #000000;  /* Correct for dark mode */
 }
-```
 
-**Affected Components:**
+```text
+
+## Affected Components
+
 - `SliderCard.tsx` - Homepage featured portfolio section
 - `PortfolioCard.tsx` - Portfolio gallery page
 - Any custom component using `.bg-card` class
 
-**Solution:**  
-Update `/styles/globals.css` at lines 2375-2377 to use light gray hover in light mode:
+**Solution:**
+Update `/styles/globals.css` at lines 2375-2377 to use light gray hover in light
+mode:
 
 ```css
 /* ✅ CORRECT - FIXED */
@@ -55,16 +64,22 @@ Update `/styles/globals.css` at lines 2375-2377 to use light gray hover in light
 .dark .bg-card:hover {
   background-color: #000000;  /* Keep black for dark mode */
 }
-```
+
+```text
 
 **Testing After Fix:**
-1. Open homepage in light mode
-2. Hover over featured portfolio cards
-3. Verify cards show light gray hover state (not black)
-4. Switch to dark mode
-5. Verify cards show black hover state
 
-**Alternative Workaround (Temporary):**  
+1. Open homepage in light mode
+
+1. Hover over featured portfolio cards
+
+1. Verify cards show light gray hover state (not black)
+
+1. Switch to dark mode
+
+1. Verify cards show black hover state
+
+**Alternative Workaround (Temporary):**
 If you can't update globals.css immediately, override in component:
 
 ```tsx
@@ -72,19 +87,21 @@ If you can't update globals.css immediately, override in component:
 <div className="bg-card hover:bg-gray-50 dark:hover:bg-black">
   Card content
 </div>
-```
+
+```text
 
 ---
 
 ### Issue 2: Missing Dark Mode Classes
 
-**Problem:**  
+**Problem:**
 Component doesn't change appearance when theme switches to dark mode.
 
-**Root Cause:**  
+**Root Cause:**
 Component is missing `dark:` prefixed Tailwind classes.
 
 **Solution:**
+
 ```tsx
 // ❌ WRONG - Missing dark mode
 <div className="bg-white text-gray-800">
@@ -95,11 +112,13 @@ Component is missing `dark:` prefixed Tailwind classes.
 <div className="bg-white dark:bg-purple-900 text-gray-800 dark:text-purple-100">
   Content
 </div>
-```
 
-**Checklist for Dark Mode:**
+```text
+
+## Checklist for Dark Mode
+
 - [ ] Background colors have `dark:` variants
-- [ ] Text colors have `dark:` variants  
+- [ ] Text colors have `dark:` variants
 - [ ] Border colors have `dark:` variants
 - [ ] Hover states work in both modes
 - [ ] Focus states visible in both modes
@@ -108,13 +127,14 @@ Component is missing `dark:` prefixed Tailwind classes.
 
 ### Issue 3: Low Contrast in Dark Mode
 
-**Problem:**  
+**Problem:**
 Text is hard to read against dark purple backgrounds.
 
-**Root Cause:**  
+**Root Cause:**
 Using mid-tone purple colors that don't have enough contrast.
 
 **Solution:**
+
 ```tsx
 // ❌ WRONG - Insufficient contrast (fails WCAG)
 <p className="text-purple-500 dark:text-purple-500">
@@ -125,18 +145,23 @@ Using mid-tone purple colors that don't have enough contrast.
 <p className="text-gray-700 dark:text-purple-100">
   Readable text
 </p>
-```
 
-**Recommended Dark Mode Text Colors:**
+```text
+
+## Recommended Dark Mode Text Colors
+
 - **Headings:** `dark:text-purple-100` (high contrast)
 - **Body text:** `dark:text-purple-100` or `dark:text-white`
 - **Secondary text:** `dark:text-purple-300`
 - **Muted text:** `dark:text-purple-400`
 
 **Testing Contrast:**
+
 1. Use Chrome DevTools Lighthouse
-2. Check for WCAG 2.1 AA compliance (4.5:1 minimum)
-3. Test with actual users in both modes
+
+1. Check for WCAG 2.1 AA compliance (4.5:1 minimum)
+
+1. Test with actual users in both modes
 
 ---
 
@@ -144,13 +169,13 @@ Using mid-tone purple colors that don't have enough contrast.
 
 ### Issue 4: Inconsistent Section Padding
 
-**Problem:**  
+**Problem:**
 Sections have different vertical padding, creating visual inconsistency.
 
-**Root Cause:**  
+**Root Cause:**
 Not using standardized spacing classes from globals.css.
 
-**Solution:**  
+**Solution:**
 Use standardized section padding classes:
 
 ```tsx
@@ -163,9 +188,11 @@ Use standardized section padding classes:
 <section className="py-section-md">
   Content
 </section>
-```
 
-**Available Section Padding Classes:**
+```text
+
+## Available Section Padding Classes
+
 - `.py-section-xs` - 16px top/bottom
 - `.py-section-sm` - Fluid 16px → 32px (halved VH/VW)
 - `.py-section-md` - Fluid 24px → 48px (halved VH/VW)
@@ -173,6 +200,7 @@ Use standardized section padding classes:
 - `.py-section-lg` - Fluid 32px → 64px (halved VH/VW)
 
 **When to Use Each:**
+
 - **xs**: Tight sections (FAQ accordions)
 - **sm**: Compact sections (newsletter signup)
 - **md**: Standard sections (about, portfolio)
@@ -183,10 +211,10 @@ Use standardized section padding classes:
 
 ### Issue 5: Card Padding Too Large/Small
 
-**Problem:**  
+**Problem:**
 Card content feels cramped or too spaced out.
 
-**Root Cause:**  
+**Root Cause:**
 Using wrong padding scale or not using responsive classes.
 
 **Solution:**
@@ -206,9 +234,11 @@ Using wrong padding scale or not using responsive classes.
 <div className="p-fluid-md">
   Content
 </div>
-```
 
-**Card Padding Scale:**
+```text
+
+## Card Padding Scale
+
 - `.p-fluid-xs` - Very tight cards
 - `.p-fluid-sm` - Compact cards
 - `.p-fluid-md` - Standard cards (default)
@@ -221,10 +251,10 @@ Using wrong padding scale or not using responsive classes.
 
 ### Issue 6: Text Not Scaling Properly
 
-**Problem:**  
+**Problem:**
 Text looks too small on mobile or too large on desktop.
 
-**Root Cause:**  
+**Root Cause:**
 Using fixed font sizes instead of fluid typography classes.
 
 **Solution:**
@@ -239,15 +269,18 @@ Using fixed font sizes instead of fluid typography classes.
 <h1 className="text-hero-h1">
   Title
 </h1>
-```
 
-**Fluid Typography Classes:**
+```text
+
+## Fluid Typography Classes
+
 - `.text-hero-h1` - clamp(2.25rem, 6vw, 7.5rem) - Main hero titles
 - `.text-section-h2` - clamp(1.5rem, 4vw, 3rem) - Section headings
 - `.text-section-h3` - clamp(1.25rem, 3vw, 2rem) - Sub-headings
 - `.text-body-guideline` - clamp(1rem, 1.5vw, 1.25rem) - Body text
 
 **When to Use:**
+
 - Always use fluid classes for headings
 - Use fluid classes for body text in hero/large sections
 - Can use fixed sizes for small UI elements (buttons, labels)
@@ -256,10 +289,10 @@ Using fixed font sizes instead of fluid typography classes.
 
 ### Issue 7: Font Family Not Applied
 
-**Problem:**  
+**Problem:**
 Component shows default system font instead of brand fonts.
 
-**Root Cause:**  
+**Root Cause:**
 Missing font family class.
 
 **Solution:**
@@ -274,9 +307,11 @@ Missing font family class.
 <h2 className="font-heading">
   Heading
 </h2>
-```
 
-**Font Family Classes:**
+```text
+
+## Font Family Classes
+
 - `.font-title` - Righteous (main hero titles only)
 - `.font-heading` - Playfair Display (elegant serif for headings)
 - `.font-body` - Inter (clean sans-serif for body text)
@@ -287,10 +322,10 @@ Missing font family class.
 
 ### Issue 8: Layout Breaks on Mobile
 
-**Problem:**  
+**Problem:**
 Desktop layout doesn't adapt properly to mobile screens.
 
-**Root Cause:**  
+**Root Cause:**
 Using fixed widths or not mobile-first approach.
 
 **Solution:**
@@ -307,22 +342,27 @@ Using fixed widths or not mobile-first approach.
   <div className="w-full lg:w-1/3">Sidebar</div>
   <div className="w-full lg:w-2/3">Content</div>
 </div>
-```
 
-**Responsive Patterns:**
+```text
+
+## Responsive Patterns
+
 1. Start with mobile layout (single column)
-2. Add breakpoint prefixes for larger screens (sm:, md:, lg:, xl:)
-3. Use `flex-col` on mobile, `flex-row` on desktop
-4. Make images/containers `w-full` by default
+
+1. Add breakpoint prefixes for larger screens (sm:, md:, lg:, xl:)
+
+1. Use `flex-col` on mobile, `flex-row` on desktop
+
+1. Make images/containers `w-full` by default
 
 ---
 
 ### Issue 9: Images Overflow Container
 
-**Problem:**  
+**Problem:**
 Images break out of their containers on small screens.
 
-**Root Cause:**  
+**Root Cause:**
 Missing responsive image classes.
 
 **Solution:**
@@ -332,14 +372,16 @@ Missing responsive image classes.
 <img src={url} alt={alt} />
 
 // ✅ CORRECT - Responsive image
-<img 
-  src={url} 
+<img
+  src={url}
   alt={alt}
   className="w-full h-auto object-cover rounded-lg"
 />
-```
 
-**Image Responsive Classes:**
+```text
+
+## Image Responsive Classes
+
 - `w-full` - Fill container width
 - `h-auto` - Maintain aspect ratio
 - `object-cover` - Fill area (may crop)
@@ -362,14 +404,17 @@ Missing responsive image classes.
 If you discover a CSS issue:
 
 1. **Check this document first** - Issue may already be documented
-2. **Check globals.css** - May be global style conflict
-3. **Document the issue:**
+
+1. **Check globals.css** - May be global style conflict
+
+1. **Document the issue:**
+
    - Component affected
    - Expected behavior
    - Actual behavior
    - Code snippet
    - Screenshots (light & dark mode)
-4. **Add to guidelines** - Update this file with solution
+1. **Add to guidelines** - Update this file with solution
 
 ---
 
@@ -378,61 +423,80 @@ If you discover a CSS issue:
 ### ✅ DO
 
 1. **Use global CSS classes first**
+
    ```tsx
    <div className="bg-card p-card-responsive rounded-card-default">
-   ```
 
-2. **Always include dark mode variants**
+```text
+
+1. **Always include dark mode variants**
+
    ```tsx
    <div className="bg-white dark:bg-purple-900">
-   ```
 
-3. **Use fluid typography for scalability**
+```text
+
+1. **Use fluid typography for scalability**
+
    ```tsx
    <h1 className="text-hero-h1">
-   ```
 
-4. **Test in both light and dark modes**
+```text
+
+1. **Test in both light and dark modes**
+
    - Visual check
    - Contrast check
    - Hover states
 
-5. **Use semantic spacing classes**
+1. **Use semantic spacing classes**
+
    ```tsx
    <section className="py-section-md">
-   ```
+
+```text
 
 ### ❌ DON'T
 
 1. **Don't use inline styles**
+
    ```tsx
    // ❌ BAD
    <div style={{ padding: '16px' }}>
-   ```
 
-2. **Don't use arbitrary values**
+```text
+
+1. **Don't use arbitrary values**
+
    ```tsx
    // ❌ BAD
    <div className="p-[23px]">
-   ```
 
-3. **Don't skip dark mode classes**
+```text
+
+1. **Don't skip dark mode classes**
+
    ```tsx
    // ❌ BAD
    <div className="bg-white text-gray-800">
-   ```
 
-4. **Don't hardcode colors**
+```text
+
+1. **Don't hardcode colors**
+
    ```tsx
    // ❌ BAD
    <div className="bg-[#f5f5f5]">
-   ```
 
-5. **Don't mix utility classes with globals inconsistently**
+```text
+
+1. **Don't mix utility classes with globals inconsistently**
+
    ```tsx
    // ⚠️ AVOID - Pick one approach per component
    <div className="bg-card p-4">  // Mixed
-   ```
+
+```text
 
 ---
 
@@ -454,22 +518,26 @@ When CSS isn't working as expected:
 ### Useful Dev Tools
 
 1. **Chrome DevTools**
+
    - Inspect Element → Computed Styles
    - Check which styles are being applied
    - Identify conflicting rules
 
-2. **Lighthouse Audit**
+1. **Lighthouse Audit**
+
    - Performance issues
    - Accessibility (contrast ratios)
    - Best practices
 
-3. **Responsive Design Mode**
+1. **Responsive Design Mode**
+
    - Test all breakpoints (320px - 2560px)
    - Check landscape/portrait orientations
 
 ---
 
-**Related Documentation:**
+## Related Documentation
+
 - [Guidelines.md](../Guidelines.md) - Main guidelines
 - [dark-mode-implementation.md](../dark-mode-implementation.md) - Dark mode guide
 - [design-tokens/spacing.md](../design-tokens/spacing.md) - Spacing system
@@ -478,6 +546,6 @@ When CSS isn't working as expected:
 
 ---
 
-**Last Updated:** January 2025  
-**Version:** 1.0.0  
+**Last Updated:** January 2025
+**Version:** 1.0.0
 **Maintained by:** Ash Shaw Portfolio Team

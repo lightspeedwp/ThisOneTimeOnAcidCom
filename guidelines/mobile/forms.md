@@ -1,10 +1,12 @@
 # Mobile Form Guidelines
 
-Mobile-specific form patterns for optimal usability, accessibility, and conversion on touch devices.
+Mobile-specific form patterns for optimal usability, accessibility, and
+conversion on touch devices.
 
 ## Purpose
 
 Create mobile-friendly forms with:
+
 - Touch-optimized input sizing
 - Appropriate keyboard types
 - Real-time validation feedback
@@ -23,16 +25,16 @@ Touch targets must be at least 44x44 pixels per Apple and WCAG guidelines.
 
 ```tsx
 // ❌ WRONG - Too small for touch
-<input 
+<input
   type="text"
   className="px-2 py-1 text-sm"
 />
 
 // ✅ CORRECT - Touch-friendly size
-<input 
+<input
   type="text"
   className="
-    w-full 
+    w-full
     px-4 py-3           /* Adequate padding */
     min-h-[44px]        /* Minimum touch target */
     text-base           /* 16px prevents iOS zoom */
@@ -40,7 +42,8 @@ Touch targets must be at least 44x44 pixels per Apple and WCAG guidelines.
     border border-gray-300
   "
 />
-```
+
+```text
 
 ---
 
@@ -50,17 +53,17 @@ Touch targets must be at least 44x44 pixels per Apple and WCAG guidelines.
 
 ```tsx
 // Standard Text Input
-<input 
+<input
   type="text"
   className="
-    w-full 
-    px-4 py-3 
-    text-base 
-    rounded-lg 
+    w-full
+    px-4 py-3
+    text-base
+    rounded-lg
     border border-gray-300
-    focus:outline-none 
-    focus:ring-2 
-    focus:ring-pink-200 
+    focus:outline-none
+    focus:ring-2
+    focus:ring-pink-200
     focus:border-pink-500
     font-body
   "
@@ -68,54 +71,55 @@ Touch targets must be at least 44x44 pixels per Apple and WCAG guidelines.
 />
 
 // Email Input
-<input 
+<input
   type="email"
   inputMode="email"
   autoComplete="email"
   className="
-    w-full 
-    px-4 py-3 
-    text-base 
-    rounded-lg 
+    w-full
+    px-4 py-3
+    text-base
+    rounded-lg
     border border-gray-300
-    focus:outline-none 
-    focus:ring-2 
-    focus:ring-pink-200 
+    focus:outline-none
+    focus:ring-2
+    focus:ring-pink-200
     focus:border-pink-500
   "
   placeholder="your@email.com"
 />
 
 // Phone Input
-<input 
+<input
   type="tel"
   inputMode="tel"
   autoComplete="tel"
   className="
-    w-full 
-    px-4 py-3 
-    text-base 
-    rounded-lg 
+    w-full
+    px-4 py-3
+    text-base
+    rounded-lg
     border border-gray-300
   "
   placeholder="(555) 123-4567"
 />
 
 // Textarea
-<textarea 
+<textarea
   rows={5}
   className="
-    w-full 
-    px-4 py-3 
-    text-base 
-    rounded-lg 
+    w-full
+    px-4 py-3
+    text-base
+    rounded-lg
     border border-gray-300
     resize-vertical      /* Allow vertical resize only */
     min-h-[120px]       /* Minimum comfortable height */
   "
   placeholder="Tell me about your event..."
 />
-```
+
+```text
 
 ---
 
@@ -144,7 +148,8 @@ Touch targets must be at least 44x44 pixels per Apple and WCAG guidelines.
 
 // Search (shows "search" button on keyboard)
 <input type="search" inputMode="search" />
-```
+
+```text
 
 ### Complete Contact Form Example
 
@@ -154,88 +159,95 @@ function ContactForm() {
     <form className="space-y-4">
       {/* Name */}
       <div>
-        <label 
+        <label
           htmlFor="name"
           className="block text-sm font-body font-medium text-gray-700 mb-2"
         >
           Name *
         </label>
-        <input 
+        <input
           id="name"
           type="text"
           inputMode="text"
           autoComplete="name"
           required
-          className="w-full px-4 py-3 text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-200"
+className="w-full px-4 py-3 text-base rounded-lg border border-gray-300
+focus:ring-2 focus:ring-pink-200"
           placeholder="Ashley Shaw"
         />
       </div>
-      
+
       {/* Email */}
       <div>
-        <label 
+        <label
           htmlFor="email"
           className="block text-sm font-body font-medium text-gray-700 mb-2"
         >
           Email *
         </label>
-        <input 
+        <input
           id="email"
           type="email"
           inputMode="email"
           autoComplete="email"
           required
-          className="w-full px-4 py-3 text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-200"
+className="w-full px-4 py-3 text-base rounded-lg border border-gray-300
+focus:ring-2 focus:ring-pink-200"
           placeholder="ashley@example.com"
         />
       </div>
-      
+
       {/* Phone */}
       <div>
-        <label 
+        <label
           htmlFor="phone"
           className="block text-sm font-body font-medium text-gray-700 mb-2"
         >
           Phone
         </label>
-        <input 
+        <input
           id="phone"
           type="tel"
           inputMode="tel"
           autoComplete="tel"
-          className="w-full px-4 py-3 text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-200"
+className="w-full px-4 py-3 text-base rounded-lg border border-gray-300
+focus:ring-2 focus:ring-pink-200"
           placeholder="(555) 123-4567"
         />
       </div>
-      
+
       {/* Message */}
       <div>
-        <label 
+        <label
           htmlFor="message"
           className="block text-sm font-body font-medium text-gray-700 mb-2"
         >
           Message *
         </label>
-        <textarea 
+        <textarea
           id="message"
           rows={5}
           required
-          className="w-full px-4 py-3 text-base rounded-lg border border-gray-300 resize-vertical min-h-[120px] focus:ring-2 focus:ring-pink-200"
+className="w-full px-4 py-3 text-base rounded-lg border border-gray-300
+resize-vertical min-h-[120px] focus:ring-2 focus:ring-pink-200"
           placeholder="Tell me about your makeup needs..."
         />
       </div>
-      
+
       {/* Submit */}
-      <button 
+      <button
         type="submit"
-        className="w-full bg-gradient-pink-purple-blue text-white px-6 py-4 text-base font-body font-medium rounded-lg shadow-lg hover:shadow-xl transition-shadow min-h-[44px]"
+className="w-full bg-gradient-pink-purple-blue text-white px-6 py-4 text-base
+font-body font-medium rounded-lg shadow-lg hover:shadow-xl transition-shadow
+min-h-[44px]"
       >
         Send Message
       </button>
     </form>
   );
 }
-```
+
+```text
 
 ---
 
@@ -276,18 +288,18 @@ function CollaborationForm() {
     date: '',
     message: ''
   });
-  
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  
+
   const validate = (field: string, value: string) => {
     let error = '';
-    
+
     switch (field) {
       case 'name':
         if (!value.trim()) error = 'Name is required';
         break;
-      
+
       case 'email':
         if (!value.trim()) {
           error = 'Email is required';
@@ -295,7 +307,7 @@ function CollaborationForm() {
           error = 'Please enter a valid email';
         }
         break;
-      
+
       case 'date':
         if (!value) {
           error = 'Date is required';
@@ -303,65 +315,66 @@ function CollaborationForm() {
           error = 'Date must be in the future';
         }
         break;
-      
+
       case 'message':
         if (!value) error = 'Please enter a message';
         break;
     }
-    
+
     return error;
   };
-  
+
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    
+
     if (touched[field]) {
       const error = validate(field, value);
       setErrors(prev => ({ ...prev, [field]: error }));
     }
   };
-  
+
   const handleBlur = (field: string) => {
     setTouched(prev => ({ ...prev, [field]: true }));
     const error = validate(field, formData[field]);
     setErrors(prev => ({ ...prev, [field]: error }));
   };
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate all fields
     const newErrors: Record<string, string> = {};
     Object.keys(formData).forEach(field => {
       const error = validate(field, formData[field]);
       if (error) newErrors[field] = error;
     });
-    
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       setTouched(Object.keys(formData).reduce((acc, key) => ({
         ...acc,
         [key]: true
       }), {}));
-      
+
       // Focus first error
       const firstError = Object.keys(newErrors)[0];
       document.getElementById(firstError)?.focus();
-      
+
       return;
     }
-    
+
     // Submit form
     submitInquiry(formData);
   };
-  
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Form fields with validation */}
     </form>
   );
 }
-```
+
+```text
 
 ---
 
@@ -372,25 +385,25 @@ function CollaborationForm() {
 ```tsx
 // Native Select (recommended for mobile)
 <div>
-  <label 
+  <label
     htmlFor="service"
     className="block text-sm font-body font-medium text-gray-700 mb-2"
   >
     Service Type *
   </label>
-  
-  <select 
+
+  <select
     id="service"
     required
     className="
-      w-full 
-      px-4 py-3 
-      text-base 
-      rounded-lg 
+      w-full
+      px-4 py-3
+      text-base
+      rounded-lg
       border border-gray-300
       bg-white
-      focus:outline-none 
-      focus:ring-2 
+      focus:outline-none
+      focus:ring-2
       focus:ring-pink-200
       appearance-none
       background-image-select-arrow
@@ -409,12 +422,13 @@ function CollaborationForm() {
   <select className="...">
     <option>Select...</option>
   </select>
-  
+
   <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
     <ChevronDown className="w-5 h-5 text-gray-400" />
   </div>
 </div>
-```
+
+```text
 
 ---
 
@@ -425,24 +439,24 @@ function CollaborationForm() {
 ```tsx
 function ServiceSelector() {
   const [selected, setSelected] = useState('');
-  
+
   const services = [
     { id: 'festival', label: 'Festival Makeup', icon: Sparkles },
     { id: 'editorial', label: 'Editorial Shoot', icon: Camera },
     { id: 'wedding', label: 'Wedding Makeup', icon: Heart },
     { id: 'special', label: 'Special Event', icon: Calendar }
   ];
-  
+
   return (
     <div className="space-y-3">
       <p className="text-sm font-body font-medium text-gray-700 mb-3">
         Select Service Type *
       </p>
-      
+
       {services.map(service => {
         const Icon = service.icon;
         const isSelected = selected === service.id;
-        
+
         return (
           <label
             key={service.id}
@@ -457,7 +471,7 @@ function ServiceSelector() {
               }
             `}
           >
-            <input 
+            <input
               type="radio"
               name="service"
               value={service.id}
@@ -465,9 +479,9 @@ function ServiceSelector() {
               onChange={(e) => setSelected(e.target.value)}
               className="w-5 h-5 text-pink-600 focus:ring-pink-200"
             />
-            
+
             <Icon className={`w-5 h-5 ${isSelected ? 'text-pink-600' : 'text-gray-500'}`} />
-            
+
             <span className="text-base font-body font-medium">
               {service.label}
             </span>
@@ -477,21 +491,22 @@ function ServiceSelector() {
     </div>
   );
 }
-```
+
+```text
 
 ### Touch-Optimized Checkboxes
 
 ```tsx
 function InterestSelector() {
   const [interests, setInterests] = useState<string[]>([]);
-  
+
   const options = [
     'Makeup Tutorial',
     'Product Reviews',
     'Behind the Scenes',
     'Tips & Tricks'
   ];
-  
+
   const toggleInterest = (interest: string) => {
     setInterests(prev =>
       prev.includes(interest)
@@ -499,16 +514,16 @@ function InterestSelector() {
         : [...prev, interest]
     );
   };
-  
+
   return (
     <div className="space-y-3">
       <p className="text-sm font-body font-medium text-gray-700 mb-3">
         Interests
       </p>
-      
+
       {options.map(option => {
         const isChecked = interests.includes(option);
-        
+
         return (
           <label
             key={option}
@@ -523,13 +538,13 @@ function InterestSelector() {
               }
             `}
           >
-            <input 
+            <input
               type="checkbox"
               checked={isChecked}
               onChange={() => toggleInterest(option)}
               className="w-5 h-5 text-pink-600 rounded focus:ring-pink-200"
             />
-            
+
             <span className="text-base font-body">
               {option}
             </span>
@@ -539,7 +554,8 @@ function InterestSelector() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -550,23 +566,23 @@ function InterestSelector() {
 ```tsx
 // Date Input
 <div>
-  <label 
+  <label
     htmlFor="event-date"
     className="block text-sm font-body font-medium text-gray-700 mb-2"
   >
     Preferred Date *
   </label>
-  
-  <input 
+
+  <input
     id="event-date"
     type="date"
     min={new Date().toISOString().split('T')[0]}
     required
     className="
-      w-full 
-      px-4 py-3 
-      text-base 
-      rounded-lg 
+      w-full
+      px-4 py-3
+      text-base
+      rounded-lg
       border border-gray-300
       focus:ring-2 focus:ring-pink-200
     "
@@ -575,30 +591,31 @@ function InterestSelector() {
 
 // Time Input
 <div>
-  <label 
+  <label
     htmlFor="event-time"
     className="block text-sm font-body font-medium text-gray-700 mb-2"
   >
     Preferred Time *
   </label>
-  
-  <input 
+
+  <input
     id="event-time"
     type="time"
     min="09:00"
     max="18:00"
     required
     className="
-      w-full 
-      px-4 py-3 
-      text-base 
-      rounded-lg 
+      w-full
+      px-4 py-3
+      text-base
+      rounded-lg
       border border-gray-300
       focus:ring-2 focus:ring-pink-200
     "
   />
 </div>
-```
+
+```text
 
 ---
 
@@ -609,17 +626,17 @@ function InterestSelector() {
 ```tsx
 <div>
   <label htmlFor="email" className="...">Email *</label>
-  
-  <input 
+
+  <input
     id="email"
     type="email"
     aria-invalid={hasError}
     aria-describedby={hasError ? 'email-error' : undefined}
     className={`... ${hasError ? 'border-red-500' : 'border-gray-300'}`}
   />
-  
+
   {hasError && (
-    <div 
+    <div
       id="email-error"
       role="alert"
       className="mt-2 flex items-start gap-2 text-sm text-red-600"
@@ -629,24 +646,25 @@ function InterestSelector() {
     </div>
   )}
 </div>
-```
+
+```text
 
 ### Form-Level Error Summary
 
 ```tsx
 {errors.length > 0 && (
-  <div 
+  <div
     role="alert"
     className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg"
   >
     <div className="flex items-start gap-3">
       <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
-      
+
       <div>
         <h3 className="text-base font-body font-semibold text-red-800 mb-2">
           Please fix the following errors:
         </h3>
-        
+
         <ul className="list-disc list-inside space-y-1">
           {errors.map((error, index) => (
             <li key={index} className="text-sm text-red-700">
@@ -658,7 +676,8 @@ function InterestSelector() {
     </div>
   </div>
 )}
-```
+
+```text
 
 ---
 
@@ -668,13 +687,13 @@ function InterestSelector() {
 
 ```tsx
 {submitted && (
-  <div 
+  <div
     role="status"
     className="mb-6 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg"
   >
     <div className="flex items-start gap-3">
       <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
-      
+
       <div>
         <h3 className="text-base font-body font-semibold text-green-800 mb-1">
           Success!
@@ -686,7 +705,8 @@ function InterestSelector() {
     </div>
   </div>
 )}
-```
+
+```text
 
 ---
 
@@ -697,26 +717,32 @@ function InterestSelector() {
 ```tsx
 // ❌ WRONG - iOS will zoom
 <input className="text-sm px-2 py-1" />
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - 16px minimum
 <input className="text-base px-4 py-3" />
-```
+
+```text
 
 ### ❌ Mistake 2: Wrong Keyboard Type
 
 ```tsx
 // ❌ WRONG - Text keyboard for email
 <input type="text" placeholder="Email" />
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Email keyboard
 <input type="email" inputMode="email" />
-```
+
+```text
 
 ### ❌ Mistake 3: No Touch-Friendly Spacing
 
@@ -724,16 +750,19 @@ function InterestSelector() {
 // ❌ WRONG - Inputs too close
 <input className="mb-2" />
 <input className="mb-2" />
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Adequate spacing
 <div className="space-y-4">
   <input />
   <input />
 </div>
-```
+
+```text
 
 ---
 
@@ -744,5 +773,5 @@ function InterestSelector() {
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 3.2.0

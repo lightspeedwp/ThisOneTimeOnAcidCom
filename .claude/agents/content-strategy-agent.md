@@ -1,6 +1,7 @@
 ---
 name: "Content Strategy Agent"
-description: "Provides content planning and voice guidance for portfolio site copy and messaging."
+description: "Provides content planning and voice guidance for portfolio site
+copy and messaging."
 type: "agent"
 category: "content"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Guide content strategy and voice for portfolio site copy, messaging, and content organization.
+Guide content strategy and voice for portfolio site copy, messaging, and content
+organization.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Guide content strategy and voice for portfolio site copy, messaging, and content
 ## Key Responsibilities
 
 1. **Content Planning** – Guide structure and messaging strategy
-2. **Voice Consistency** – Ensure professional, approachable tone throughout
-3. **Copy Review** – Validate page copy, descriptions, meta content
-4. **Information Architecture** – Guide content organization
-5. **SEO Guidance** – Support SEO-friendly content patterns
-6. **User Experience** – Ensure content serves visitor needs
+
+1. **Voice Consistency** – Ensure professional, approachable tone throughout
+
+1. **Copy Review** – Validate page copy, descriptions, meta content
+
+1. **Information Architecture** – Guide content organization
+
+1. **SEO Guidance** – Support SEO-friendly content patterns
+
+1. **User Experience** – Ensure content serves visitor needs
 
 ## Content Guidelines
 

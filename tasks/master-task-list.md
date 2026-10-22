@@ -7,9 +7,13 @@ version: "2.2.0"
 
 # Master task list tracker
 
-**Created:** March 4, 2026  
-**Last Updated:** September 10, 2026 — Orchestrator v3.0.0 run complete. Sub-audit G (web standards/AI discoverability) executed for first time. Added 16 new tasks (3 Critical, 5 High, 7 Medium, 1 package cleanup). Total outstanding: 32 tasks.
-**Purpose:** Track all active and archived task lists. Does NOT contain actual tasks — only references.
+**Created:** March 4, 2026
+**Last Updated:** September 10, 2026 — Orchestrator v3.0.0 run complete.
+Sub-audit G (web standards/AI discoverability) executed for first time. Added 16
+new tasks (3 Critical, 5 High, 7 Medium, 1 package cleanup). Total outstanding:
+32 tasks.
+**Purpose:** Track all active and archived task lists. Does NOT contain actual
+tasks — only references.
 
 ---
 
@@ -74,16 +78,27 @@ version: "2.2.0"
 
 ## Stale reports (candidates for archiving or deletion)
 
-_All stale reports cleaned up March 8, 2026. Deleted: memory-reduction (1 file), memory-reduction-v2 (1 file, copy retained in archived/), content-specimens (1 file), content-specimens-accessibility (1 file), dark-mode-markdown-testing (1 file), dev-tools-hero-stats (1 file), phosphor-migration (2 files), content-expansion-phase-8 (4 files), content-expansion-phase8 (4 files). Total: 16 files deleted._
-_Archived: comprehensive-hero-architecture (25 files) and feature-work sub-audits 1-5 (5 files)._
+*All stale reports cleaned up March 8, 2026. Deleted: memory-reduction (1 file),
+memory-reduction-v2 (1 file, copy retained in archived/), content-specimens (1
+file), content-specimens-accessibility (1 file), dark-mode-markdown-testing (1
+file), dev-tools-hero-stats (1 file), phosphor-migration (2 files),
+content-expansion-phase-8 (4 files), content-expansion-phase8 (4 files). Total:
+16 files deleted.*
+*Archived: comprehensive-hero-architecture (25 files) and feature-work
+sub-audits 1-5 (5 files).*
 
 ---
 
 ## Archiving rules
 
 1. When ALL tasks in a list are complete, move the entry from "Active" to "Completed (pending archive)"
-2. After 30 days in "Completed", move the file to `/tasks/archived/` and update this tracker
-3. Delete the task list file and its associated report files
-4. Record the deletion in this tracker for historical reference
-5. Always update this tracker when creating, completing, or archiving a task list
-6. Never delete `/tasks/task-list.md` — it is the persistent master checklist
+
+1. After 30 days in "Completed", move the file to `/tasks/archived/` and update this tracker
+
+1. Delete the task list file and its associated report files
+
+1. Record the deletion in this tracker for historical reference
+
+1. Always update this tracker when creating, completing, or archiving a task list
+
+1. Never delete `/tasks/task-list.md` — it is the persistent master checklist

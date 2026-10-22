@@ -1,6 +1,6 @@
 # Template Parts Overview
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 WordPress-aligned template parts for the Ash Shaw Portfolio.
@@ -8,6 +8,7 @@ WordPress-aligned template parts for the Ash Shaw Portfolio.
 ## Purpose
 
 Define template parts following WordPress conventions:
+
 - Reusable page fragments
 - Global site elements
 - Consistent across pages
@@ -16,13 +17,14 @@ Define template parts following WordPress conventions:
 
 ---
 
-## What Are Parts?
+## What Are Parts
 
-**Parts** (Template Parts) are reusable page fragments that appear across multiple pages or templates. They align with WordPress "Template Parts" concept.
+**Parts** (Template Parts) are reusable page fragments that appear across
+multiple pages or templates. They align with WordPress "Template Parts" concept.
 
 ### Part vs Pattern vs Section
 
-```
+```text
 Template (Page)
 ├── Part (Global fragment)
 │   ├── Pattern (Solution)
@@ -30,9 +32,11 @@ Template (Page)
 │   │   └── Component (UI element)
 │   └── Pattern
 └── Part
-```
+
+```text
 
 **Examples:**
+
 - **Part:** Header - Appears on every page
 - **Pattern:** Desktop + Mobile Navigation - Solution within header
 - **Section:** Hero Section - Page-specific content area
@@ -41,7 +45,8 @@ Template (Page)
 
 ## Part Categories
 
-The Ash Shaw portfolio uses **7 template parts** organized by category. Each has detailed implementation guidelines.
+The Ash Shaw portfolio uses **7 template parts** organized by category. Each has
+detailed implementation guidelines.
 
 ### Global Parts
 
@@ -83,7 +88,7 @@ Behind-the-scenes functionality
     <div className="flex items-center justify-between">
       {/* Logo */}
       <Logo size="header" onClick={() => navigateHome()} />
-      
+
       {/* Desktop Nav */}
       <nav className="hidden md:block">
         <ul className="flex items-center gap-6">
@@ -93,9 +98,9 @@ Behind-the-scenes functionality
           <li><NavLink href="/blog">Blog</NavLink></li>
         </ul>
       </nav>
-      
+
       {/* Mobile Toggle */}
-      <button 
+      <button
         onClick={() => setIsMobileMenuOpen(true)}
         className="md:hidden"
         aria-label="Open menu"
@@ -104,20 +109,23 @@ Behind-the-scenes functionality
       </button>
     </div>
   </div>
-  
-  <MobileMenu 
+
+  <MobileMenu
     isOpen={isMobileMenuOpen}
     onClose={() => setIsMobileMenuOpen(false)}
   />
 </header>
-```
+
+```text
 
 ### Footer Part
 
 ```tsx
-<footer className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 py-section px-fluid-md">
+<footer className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50
+py-section px-fluid-md">
   <div className="max-w-7xl mx-auto">
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-xl mb-fluid-2xl">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-xl
+mb-fluid-2xl">
       {/* Contact Form */}
       <div className="lg:col-span-2">
         <h2 className="text-section-h2 font-heading font-bold mb-fluid-lg">
@@ -125,7 +133,7 @@ Behind-the-scenes functionality
         </h2>
         <ContactForm />
       </div>
-      
+
       {/* Quick Links & Social */}
       <div className="space-y-fluid-lg">
         <div>
@@ -135,14 +143,16 @@ Behind-the-scenes functionality
         <SocialLinks />
       </div>
     </div>
-    
+
     {/* Copyright */}
-    <div className="border-t border-gray-300 pt-6 text-center text-sm text-gray-600">
+<div className="border-t border-gray-300 pt-6 text-center text-sm
+text-gray-600">
       © 2025 Ash Shaw. All rights reserved.
     </div>
   </div>
 </footer>
-```
+
+```text
 
 ### Mobile Menu Part
 
@@ -150,13 +160,14 @@ Behind-the-scenes functionality
 {isOpen && (
   <div className="fixed inset-0 z-50 md:hidden">
     {/* Backdrop */}
-    <div 
+    <div
       className="absolute inset-0 bg-black/50 backdrop-blur-sm"
       onClick={onClose}
     />
-    
+
     {/* Drawer */}
-    <div className="absolute right-0 top-0 bottom-0 w-80 max-w-full bg-white shadow-2xl">
+<div className="absolute right-0 top-0 bottom-0 w-80 max-w-full bg-white
+shadow-2xl">
       <div className="flex flex-col h-full">
         <div className="flex items-center justify-between p-6 border-b">
           <Logo size="md" />
@@ -164,11 +175,11 @@ Behind-the-scenes functionality
             <X className="w-6 h-6" />
           </button>
         </div>
-        
+
         <nav className="flex-1 p-6">
           <ul className="space-y-4">{/* Nav items */}</ul>
         </nav>
-        
+
         <div className="p-6 border-t">
           <SocialLinks />
         </div>
@@ -176,7 +187,8 @@ Behind-the-scenes functionality
     </div>
   </div>
 )}
-```
+
+```text
 
 ---
 
@@ -194,25 +206,29 @@ Behind-the-scenes functionality
 
 ```php
 // WordPress: Template part
-<?php block_template_part('header'); ?>
+<?php block*template*part('header'); ?>
 
 // Ash Shaw: React component
 <Header currentPage={page} setCurrentPage={navigate} />
-```
+
+```text
 
 ---
 
 ## Best Practices
 
 ### 1. Keep Parts Focused
+
 ```tsx
 // ✅ Part has single responsibility
 export function Header() {
   // Only handles header functionality
 }
-```
+
+```text
 
 ### 2. Make Parts Configurable
+
 ```tsx
 // ✅ Accept props for customization
 export function Footer({ showNewsletter = true }: Props) {
@@ -222,9 +238,11 @@ export function Footer({ showNewsletter = true }: Props) {
     </footer>
   );
 }
-```
+
+```text
 
 ### 3. Maintain Accessibility
+
 ```tsx
 // ✅ Parts have proper ARIA and semantic HTML
 <header role="banner">
@@ -232,7 +250,8 @@ export function Footer({ showNewsletter = true }: Props) {
 </header>
 
 <footer role="contentinfo">
-```
+
+```text
 
 ---
 
@@ -240,16 +259,19 @@ export function Footer({ showNewsletter = true }: Props) {
 
 For detailed implementation of each part, see the specific guideline files:
 
-### Global Parts
+### Global Parts (1)
+
 - **[Header.md](./parts/Header.md)** - Site navigation and branding
 - **[Footer.md](./parts/Footer.md)** - Site-wide footer with contact form
 - **[MobileMenu.md](./parts/MobileMenu.md)** - Full-screen mobile navigation
 
-### Conditional Parts
+### Conditional Parts (1)
+
 - **[Breadcrumbs.md](./parts/Breadcrumbs.md)** - Hierarchical navigation path
 - **[SocialLinks.md](./parts/SocialLinks.md)** - Social media icon links
 
-### Utility Parts
+### Utility Parts (1)
+
 - **[ErrorBoundary.md](./parts/ErrorBoundary.md)** - React error handling
 - **[SkipLinks.md](./parts/SkipLinks.md)** - Accessibility shortcuts
 
@@ -264,5 +286,5 @@ For detailed implementation of each part, see the specific guideline files:
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

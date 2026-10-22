@@ -1,6 +1,7 @@
 ---
 name: "Product Requirement Documentation Agent"
-description: "Creates product requirements and specifications for portfolio site features and updates."
+description: "Creates product requirements and specifications for portfolio site
+features and updates."
 type: "agent"
 category: "planning"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Create product requirements and specifications for portfolio site features and updates.
+Create product requirements and specifications for portfolio site features and
+updates.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Create product requirements and specifications for portfolio site features and u
 ## Key Responsibilities
 
 1. **Requirement Documentation** – Write clear, complete feature requirements
-2. **User Story Development** – Create user-centric story definitions
-3. **Acceptance Criteria** – Define measurable success criteria
-4. **Scope Definition** – Clarify feature boundaries
-5. **Dependency Mapping** – Identify feature dependencies
-6. **Specification Review** – Validate specification completeness
+
+1. **User Story Development** – Create user-centric story definitions
+
+1. **Acceptance Criteria** – Define measurable success criteria
+
+1. **Scope Definition** – Clarify feature boundaries
+
+1. **Dependency Mapping** – Identify feature dependencies
+
+1. **Specification Review** – Validate specification completeness
 
 ## Specification Format
 

@@ -1,0 +1,37 @@
+# Auto detect text files and normalize line endings to LF for all developers
+# This ensures consistent line endings across platforms (Windows, Mac, Linux)
+* text=auto
+
+# Explicitly mark files that should always use LF
+*.js text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.zip binary
+*.gz binary
+
+# macOS
+.DS_Store binary
+
+# Lockfiles
+package-lock.json merge=npm-merge-driver
+
+# Editor/IDE
+.vscode/** merge=binary
+.idea/** merge=binary

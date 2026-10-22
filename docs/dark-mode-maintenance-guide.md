@@ -9,13 +9,20 @@ Best practices for maintaining and updating the dark mode theme system.
 ## 📋 Table of Contents
 
 1. [Regular Maintenance Tasks](#regular-maintenance-tasks)
-2. [Adding New Components](#adding-new-components)
-3. [Updating Existing Components](#updating-existing-components)
-4. [Performance Optimization](#performance-optimization)
-5. [Accessibility Audits](#accessibility-audits)
-6. [Browser Compatibility](#browser-compatibility)
-7. [Version Control](#version-control)
-8. [Troubleshooting](#troubleshooting)
+
+1. [Adding New Components](#adding-new-components)
+
+1. [Updating Existing Components](#updating-existing-components)
+
+1. [Performance Optimization](#performance-optimization)
+
+1. [Accessibility Audits](#accessibility-audits)
+
+1. [Browser Compatibility](#browser-compatibility)
+
+1. [Version Control](#version-control)
+
+1. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -24,6 +31,7 @@ Best practices for maintaining and updating the dark mode theme system.
 ### Monthly Checklist
 
 **Visual Inspection** (30 minutes)
+
 - [ ] Review all 54 components in production
 - [ ] Check for visual regressions
 - [ ] Verify hover/focus states work
@@ -31,6 +39,7 @@ Best practices for maintaining and updating the dark mode theme system.
 - [ ] Confirm glow effects display correctly
 
 **Accessibility Audit** (20 minutes)
+
 - [ ] Run Lighthouse accessibility scan
 - [ ] Check contrast ratios haven't changed
 - [ ] Test keyboard navigation
@@ -38,6 +47,7 @@ Best practices for maintaining and updating the dark mode theme system.
 - [ ] Check `prefers-reduced-motion` support
 
 **Performance Check** (15 minutes)
+
 - [ ] Measure CSS file size
 - [ ] Check for unused styles
 - [ ] Verify no duplicate rules
@@ -45,6 +55,7 @@ Best practices for maintaining and updating the dark mode theme system.
 - [ ] Review browser DevTools for warnings
 
 **Browser Testing** (20 minutes)
+
 - [ ] Test in Chrome (latest)
 - [ ] Test in Firefox (latest)
 - [ ] Test in Safari (latest)
@@ -58,6 +69,7 @@ Best practices for maintaining and updating the dark mode theme system.
 ### Quarterly Deep Dive
 
 **Code Quality Review** (2 hours)
+
 - [ ] Review all CSS for consistency
 - [ ] Check BEM naming conventions
 - [ ] Look for hardcoded values
@@ -65,6 +77,7 @@ Best practices for maintaining and updating the dark mode theme system.
 - [ ] Remove deprecated code
 
 **Documentation Update** (1 hour)
+
 - [ ] Update component examples
 - [ ] Add new patterns discovered
 - [ ] Update troubleshooting guide
@@ -72,6 +85,7 @@ Best practices for maintaining and updating the dark mode theme system.
 - [ ] Update version numbers
 
 **Accessibility Deep Audit** (2 hours)
+
 - [ ] Test with multiple screen readers
 - [ ] Test keyboard-only navigation
 - [ ] Test with browser zoom (200%, 400%)
@@ -86,7 +100,8 @@ Best practices for maintaining and updating the dark mode theme system.
 
 ### Step-by-Step Process
 
-**1. Design the Component**
+## 1. Design the Component
+
 ```css
 /* New component: Timeline Card */
 .timeline-card {
@@ -141,9 +156,11 @@ Best practices for maintaining and updating the dark mode theme system.
   outline: 2px solid var(--color-neon-pink);
   outline-offset: 2px;
 }
-```
 
-**2. Test Accessibility**
+```text
+
+## 2. Test Accessibility
+
 ```html
 <!-- Ensure proper semantic HTML -->
 <article class="timeline-card" tabindex="0">
@@ -155,9 +172,11 @@ Best practices for maintaining and updating the dark mode theme system.
     <p>Event description goes here...</p>
   </div>
 </article>
-```
 
-**Accessibility Checklist:**
+```text
+
+## Accessibility Checklist
+
 - [ ] Contrast ratio ≥ 4.5:1 (body text)
 - [ ] Contrast ratio ≥ 3:1 (large text)
 - [ ] Focus indicator visible (2px minimum)
@@ -165,8 +184,10 @@ Best practices for maintaining and updating the dark mode theme system.
 - [ ] Screen reader tested
 - [ ] Semantic HTML used
 
-**3. Document the Component**
+## 3. Document the Component
+
 ```markdown
+
 ### Timeline Card
 
 **Purpose:** Display events in a timeline format with gradient accent.
@@ -185,24 +206,28 @@ Best practices for maintaining and updating the dark mode theme system.
 \`\`\`
 
 **Accessibility:**
+
 - WCAG AA compliant
 - Keyboard accessible (tabindex="0")
 - Screen reader compatible
 
 **Browser Support:** All modern browsers
-```
 
-**4. Add to Component List**
+```text
+
+## 4. Add to Component List
 
 Update `/docs/dark-mode-component-showcase.md`:
+
 - Add to appropriate category
 - Include code example
 - Document accessibility features
 - Note dark mode-specific features
 
-**5. Update Metrics**
+## 5. Update Metrics
 
 Update documentation:
+
 - Increment component count (54 → 55)
 - Update total CSS lines
 - Update CHANGELOG.md
@@ -213,7 +238,8 @@ Update documentation:
 
 ### Safe Update Process
 
-**1. Document Current State**
+## 1. Document Current State
+
 ```css
 /* BEFORE: Button primary (v2.0.0) */
 .button--primary {
@@ -228,9 +254,11 @@ Update documentation:
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
 }
-```
 
-**2. Make Changes**
+```text
+
+## 2. Make Changes
+
 ```css
 /* AFTER: Button primary (v2.1.0) */
 .button--primary {
@@ -249,24 +277,29 @@ Update documentation:
 /* ADDED: Enhanced hover state */
 .button--primary:hover {
   border-color: rgba(255, 58, 174, 0.6);
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba(255, 58, 174, 0.5),
     0 4px 12px rgba(0, 0, 0, 0.3);
 }
-```
 
-**3. Test Thoroughly**
+```text
+
+## 3. Test Thoroughly
+
 - [ ] Visual regression test
 - [ ] Test all button variants
 - [ ] Check responsive behavior
 - [ ] Verify accessibility
 - [ ] Test in all supported browsers
 
-**4. Document Changes**
+## 4. Document Changes
+
 ```markdown
+
 ## v2.1.0 - Button Primary Update
 
 **Changed:**
+
 - Increased padding from 0.75rem/1.5rem to 0.875rem/1.75rem
 - Increased border radius from 8px to 12px
 - Added 1px border with pink tint
@@ -277,7 +310,8 @@ Update documentation:
 **Accessibility Impact:** None (maintains AA compliance)
 
 **Breaking Changes:** None (visual only)
-```
+
+```text
 
 ---
 
@@ -285,14 +319,16 @@ Update documentation:
 
 ### CSS File Size Management
 
-**Current Status (v2.0.0):**
+## Current Status (v2.0.0)
+
 - Core theme: 1,047 lines
 - Extended components: 1,000 lines
 - **Total:** 2,047 lines (~51 KB uncompressed)
 
-**Optimization Strategies:**
+## Optimization Strategies
 
-**1. Remove Unused Components**
+## 1. Remove Unused Components
+
 ```css
 /* If you're not using certain components, comment them out */
 
@@ -300,30 +336,42 @@ Update documentation:
 /* @import './components/timeline.css'; */
 /* @import './components/pricing-table.css'; */
 /* @import './components/testimonial.css'; */
-```
 
-**2. Minify for Production**
+```text
+
+## 2. Minify for Production
+
 ```bash
+
 # Using cssnano or similar
+
 npx cssnano dark.css dark.min.css
 npx cssnano dark-extended.css dark-extended.min.css
 
 # Expected savings: ~60-70% reduction
-# 51 KB → ~15-20 KB
-```
 
-**3. Enable Gzip Compression**
+# 51 KB → ~15-20 KB
+
+```text
+
+## 3. Enable Gzip Compression
+
 ```nginx
+
 # Nginx configuration
+
 gzip on;
 gzip_types text/css;
-gzip_comp_level 6;
+gzip*comp*level 6;
 
 # Expected savings: ~80% additional reduction
-# 15 KB → ~3-5 KB
-```
 
-**4. Use CSS Custom Properties Efficiently**
+# 15 KB → ~3-5 KB
+
+```text
+
+## 4. Use CSS Custom Properties Efficiently
+
 ```css
 /* BEFORE: Repeated values */
 .card { color: #F6F2EB; }
@@ -335,11 +383,13 @@ gzip_comp_level 6;
 .card { color: var(--color-text-light); }
 .button { color: var(--color-text-light); }
 .input { color: var(--color-text-light); }
-```
+
+```text
 
 ### Load Time Optimization
 
-**1. Critical CSS Extraction**
+## 1. Critical CSS Extraction
+
 ```html
 <!-- Inline critical CSS in <head> -->
 <style>
@@ -350,11 +400,15 @@ gzip_comp_level 6;
 </style>
 
 <!-- Load full theme asynchronously -->
-<link rel="preload" href="/themes/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" href="/themes/dark-extended.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-```
+<link rel="preload" href="/themes/dark.css" as="style"
+onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/themes/dark-extended.css" as="style"
+onload="this.onload=null;this.rel='stylesheet'">
 
-**2. Lazy Load Non-Critical Components**
+```text
+
+## 2. Lazy Load Non-Critical Components
+
 ```javascript
 // Load extended components only when needed
 function loadExtendedTheme() {
@@ -373,7 +427,8 @@ var observer = new IntersectionObserver(function(entries) {
 });
 
 observer.observe(document.querySelector('.below-fold'));
-```
+
+```text
 
 ---
 
@@ -382,17 +437,23 @@ observer.observe(document.querySelector('.below-fold'));
 ### Monthly Lighthouse Scan
 
 **Run Lighthouse:**
+
 ```bash
+
 # Using Chrome DevTools or CLI
+
 lighthouse https://your-site.com --only-categories=accessibility --output=html
-```
+
+```text
 
 **Target Scores:**
+
 - Accessibility: 100/100 ✅
 - Best Practices: 95+ ✅
 - Performance: 90+ ✅
 
-**Common Issues to Check:**
+## Common Issues to Check
+
 - [ ] All images have alt text
 - [ ] Form inputs have labels
 - [ ] Buttons have accessible names
@@ -402,7 +463,8 @@ lighthouse https://your-site.com --only-categories=accessibility --output=html
 
 ### Contrast Ratio Verification
 
-**Test All Color Combinations:**
+## Test All Color Combinations
+
 ```javascript
 // Automated contrast check
 var testCases = [
@@ -417,14 +479,16 @@ testCases.forEach(function(test) {
   var ratio = getContrastRatio(test.bg, test.fg);
   var pass = ratio >= test.min;
   console.log(
-    test.bg + ' + ' + test.fg + ': ' + 
-    ratio.toFixed(2) + ':1 ' + 
+    test.bg + ' + ' + test.fg + ': ' +
+    ratio.toFixed(2) + ':1 ' +
     (pass ? '✅ PASS' : '❌ FAIL')
   );
 });
-```
 
-**Expected Results (v2.0.0):**
+```text
+
+## Expected Results (v2.0.0)
+
 - #0F0F0F + #F6F2EB: 14.8:1 ✅ AAA
 - #0F0F0F + #FFFFFF: 21:1 ✅ AAA
 - #0F0F0F + #CFC7BB: 10.2:1 ✅ AAA
@@ -434,14 +498,21 @@ testCases.forEach(function(test) {
 ### Screen Reader Testing
 
 **Test Procedure:**
+
 1. Enable screen reader (NVDA, JAWS, VoiceOver)
-2. Navigate site keyboard-only (Tab, Enter, Arrows)
-3. Verify all content is announced
-4. Check form labels are read correctly
-5. Confirm interactive elements are identified
-6. Test focus order is logical
+
+1. Navigate site keyboard-only (Tab, Enter, Arrows)
+
+1. Verify all content is announced
+
+1. Check form labels are read correctly
+
+1. Confirm interactive elements are identified
+
+1. Test focus order is logical
 
 **Common Issues:**
+
 - Missing ARIA labels on icons
 - Improper heading hierarchy
 - Form inputs without labels
@@ -467,22 +538,26 @@ testCases.forEach(function(test) {
 ### Known Issues & Workarounds
 
 **Safari: Backdrop Filter Performance**
+
 ```css
 /* Issue: backdrop-filter can be slow on older Safari */
 .modal__backdrop {
   backdrop-filter: blur(10px);
-  
+
   /* Fallback for performance */
   @supports not (backdrop-filter: blur(10px)) {
     background-color: rgba(15, 15, 15, 0.95);
   }
 }
-```
+
+```text
 
 **Firefox: Custom Scrollbar**
+
 ```css
 /* Issue: Webkit scrollbar doesn't work in Firefox */
 /* Workaround: Use Firefox-specific scrollbar properties */
+
 * {
   scrollbar-width: thin;
   scrollbar-color: #FF3AAE #1A1A1A;
@@ -501,7 +576,8 @@ testCases.forEach(function(test) {
   background: #FF3AAE;
   border-radius: 6px;
 }
-```
+
+```text
 
 ---
 
@@ -513,9 +589,10 @@ testCases.forEach(function(test) {
 
 **Current Version:** 2.0.0
 
-**Version Bumping Rules:**
+## Version Bumping Rules
 
-**MAJOR (Breaking Changes)**
+## MAJOR (Breaking Changes)
+
 - Remove components
 - Change BEM class names
 - Change CSS variable names
@@ -523,7 +600,8 @@ testCases.forEach(function(test) {
 
 Example: 2.0.0 → 3.0.0
 
-**MINOR (New Features)**
+## MINOR (New Features)
+
 - Add new components
 - Add new color variants
 - Add new modifiers
@@ -531,7 +609,8 @@ Example: 2.0.0 → 3.0.0
 
 Example: 2.0.0 → 2.1.0
 
-**PATCH (Bug Fixes)**
+## PATCH (Bug Fixes)
+
 - Fix contrast ratios
 - Fix hover states
 - Fix responsive bugs
@@ -542,38 +621,46 @@ Example: 2.0.0 → 2.0.1
 ### Changelog Template
 
 ```markdown
+
 ## [2.1.0] - 2026-04-15
 
 ### Added
+
 - New timeline-card component
 - Additional button size variant (--xl)
 - Pulse animation for status indicators
 
 ### Changed
+
 - Increased button padding for better touch targets
 - Enhanced hover glow effect on cards
 - Updated modal backdrop blur intensity
 
 ### Fixed
+
 - Fixed card border color in Safari
 - Corrected checkbox alignment on mobile
 - Fixed tooltip positioning edge case
 
 ### Performance
+
 - Reduced CSS file size by 8% (minification)
 - Optimized gradient rendering
 - Removed unused color variables
 
 ### Accessibility
+
 - Improved focus indicator visibility
 - Enhanced screen reader labels
 - Fixed keyboard navigation in dropdown
 
 ### Documentation
+
 - Added customization guide
 - Updated component examples
 - Added troubleshooting section
-```
+
+```text
 
 ---
 
@@ -582,18 +669,22 @@ Example: 2.0.0 → 2.0.1
 ### Common Issues & Solutions
 
 **Issue: Dark mode not applying**
+
 ```javascript
 // Solution 1: Verify class is present
-console.log(document.documentElement.classList.contains('dark')); // Should be true
+console.log(document.documentElement.classList.contains('dark')); // Should be
+true
 
 // Solution 2: Force add class
 document.documentElement.classList.add('dark');
 
 // Solution 3: Check CSS import order
 // Ensure dark.css and dark-extended.css are imported AFTER light.css
-```
+
+```text
 
 **Issue: Colors look washed out**
+
 ```css
 /* Solution: Check CSS variable cascade */
 :root.dark {
@@ -605,14 +696,16 @@ document.documentElement.classList.add('dark');
 html.dark {
   --color-neon-pink: #FF3AAE;
 }
-```
+
+```text
 
 **Issue: Glow effects not visible**
+
 ```css
 /* Solution 1: Check browser support */
 .button--primary {
   box-shadow: 0 0 20px rgba(255, 58, 174, 0.5);
-  
+
   /* Ensure color has opacity */
   /* rgba(255, 58, 174, 0.5) NOT rgb(255, 58, 174) */
 }
@@ -621,9 +714,11 @@ html.dark {
 .button--primary {
   box-shadow: 0 0 40px rgba(255, 58, 174, 0.8); /* Stronger */
 }
-```
+
+```text
 
 **Issue: Components not styled**
+
 ```html
 <!-- Solution: Verify exact BEM class names -->
 <!-- WRONG -->
@@ -631,54 +726,60 @@ html.dark {
 
 <!-- CORRECT -->
 <button class="button button--primary">Click</button>
-```
+
+```text
 
 **Issue: Contrast ratio failing**
+
 ```css
 /* Solution: Lighten text color */
 :root.dark {
   /* BEFORE: 3.8:1 (FAIL) */
   --color-text-muted: #9C9488;
-  
+
   /* AFTER: 6.5:1 (PASS) */
   --color-text-muted: #B8ACA0;
 }
-```
+
+```text
 
 ---
 
 ## 📝 Maintenance Log Template
 
 ```markdown
+
 # Dark Mode Theme Maintenance Log
 
 ## 2026-04-15 - Monthly Audit
 
-**Visual Inspection:** ✅ All components rendering correctly  
-**Accessibility:** ✅ Lighthouse score 100/100  
-**Performance:** ✅ CSS size: 51 KB (no change)  
-**Browser Testing:** ✅ All browsers pass  
+**Visual Inspection:** ✅ All components rendering correctly
+**Accessibility:** ✅ Lighthouse score 100/100
+**Performance:** ✅ CSS size: 51 KB (no change)
+**Browser Testing:** ✅ All browsers pass
 
-**Issues Found:** None  
-**Actions Taken:** None  
+**Issues Found:** None
+**Actions Taken:** None
 **Next Review:** 2026-05-15
 
 ---
 
 ## 2026-03-11 - Initial Release
 
-**Version:** 2.0.0  
-**Components:** 54 fully styled  
-**CSS Size:** 51 KB (2,047 lines)  
-**Accessibility:** WCAG AA 100%, AAA 92%  
+**Version:** 2.0.0
+**Components:** 54 fully styled
+**CSS Size:** 51 KB (2,047 lines)
+**Accessibility:** WCAG AA 100%, AAA 92%
 **Status:** ✅ Production ready
-```
+
+```text
 
 ---
 
 ## 🎯 Maintenance Checklist Summary
 
 ### Monthly (90 minutes)
+
 - [ ] Visual component review
 - [ ] Accessibility scan (Lighthouse)
 - [ ] Performance check
@@ -686,6 +787,7 @@ html.dark {
 - [ ] Update maintenance log
 
 ### Quarterly (5 hours)
+
 - [ ] Code quality review
 - [ ] Documentation update
 - [ ] Deep accessibility audit
@@ -693,6 +795,7 @@ html.dark {
 - [ ] Version bump (if needed)
 
 ### Annually (1 day)
+
 - [ ] Complete system audit
 - [ ] Refactor for new CSS features
 - [ ] Update to latest WCAG standards
@@ -701,6 +804,6 @@ html.dark {
 
 ---
 
-**Last Updated:** March 11, 2026  
-**Version:** 2.0.0  
+**Last Updated:** March 11, 2026
+**Version:** 2.0.0
 **Next Review:** April 11, 2026

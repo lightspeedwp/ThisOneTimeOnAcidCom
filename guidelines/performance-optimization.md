@@ -1,7 +1,7 @@
 # Performance Optimization Guide
 
-**Version:** 1.0.0  
-**Last Updated:** January 2025  
+**Version:** 1.0.0
+**Last Updated:** January 2025
 **Purpose:** Complete performance optimization implementation guide
 
 ---
@@ -9,14 +9,22 @@
 ## 📋 Table of Contents
 
 1. [Overview](#overview)
-2. [Code Splitting & Lazy Loading](#code-splitting--lazy-loading)
-3. [Image Optimization](#image-optimization)
-4. [Bundle Optimization](#bundle-optimization)
-5. [Core Web Vitals](#core-web-vitals)
-6. [Resource Hints](#resource-hints)
-7. [Performance Monitoring](#performance-monitoring)
-8. [Best Practices](#best-practices)
-9. [Troubleshooting](#troubleshooting)
+
+1. [Code Splitting & Lazy Loading](#code-splitting--lazy-loading)
+
+1. [Image Optimization](#image-optimization)
+
+1. [Bundle Optimization](#bundle-optimization)
+
+1. [Core Web Vitals](#core-web-vitals)
+
+1. [Resource Hints](#resource-hints)
+
+1. [Performance Monitoring](#performance-monitoring)
+
+1. [Best Practices](#best-practices)
+
+1. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -24,13 +32,15 @@
 
 ### Performance Goals
 
-**Lighthouse Score Targets:**
+## Lighthouse Score Targets
+
 - ✅ Performance: 95+
 - ✅ Accessibility: 100
 - ✅ Best Practices: 100
 - ✅ SEO: 100
 
-**Core Web Vitals Targets:**
+## Core Web Vitals Targets
+
 - ✅ LCP (Largest Contentful Paint): < 2.5s
 - ✅ FID (First Input Delay): < 100ms
 - ✅ CLS (Cumulative Layout Shift): < 0.1
@@ -40,26 +50,30 @@
 ### Optimization Features Implemented
 
 1. **Code Splitting**
+
    - React.lazy() with Suspense boundaries
    - Route-based code splitting
    - Component-level lazy loading
    - Vendor chunk optimization
 
-2. **Image Optimization**
+1. **Image Optimization**
+
    - Native lazy loading
    - Intersection Observer fallback
    - Progressive image loading with blur-up
    - WebP format detection
    - Responsive image sizes
 
-3. **Bundle Optimization**
+1. **Bundle Optimization**
+
    - Manual chunking strategy
    - Tree-shaking optimization
    - Minification with Terser
    - CSS code splitting
    - Asset optimization
 
-4. **Core Web Vitals Monitoring**
+1. **Core Web Vitals Monitoring**
+
    - Real-time metrics tracking
    - Performance analytics integration
    - Custom metric reporting
@@ -80,7 +94,8 @@ import { lazyLoad, LazyLoadWrapper } from './components/ui/LazyLoad';
 const HomePage = lazyLoad(() => import('./components/pages/HomePage'));
 const AboutPage = lazyLoad(() => import('./components/pages/AboutPage'));
 const BlogPage = lazyLoad(() => import('./components/pages/blog/BlogPage'));
-const PortfolioPage = lazyLoad(() => import('./components/pages/portfolio/PortfolioMainPage'));
+const PortfolioPage = lazyLoad(() =>
+import('./components/pages/portfolio/PortfolioMainPage'));
 
 function App() {
   return (
@@ -92,7 +107,8 @@ function App() {
     </LazyLoadWrapper>
   );
 }
-```
+
+```text
 
 ### Component-Level Lazy Loading
 
@@ -100,14 +116,16 @@ function App() {
 import { lazyLoad } from './components/ui/LazyLoad';
 
 // Lazy load heavy components
-const PortfolioLightbox = lazyLoad(() => import('./components/ui/PortfolioLightbox'));
+const PortfolioLightbox = lazyLoad(() =>
+import('./components/ui/PortfolioLightbox'));
 const ContactForm = lazyLoad(() => import('./components/common/ContactForm'));
 
 // Use with Suspense
 <Suspense fallback={<LoadingSkeleton />}>
   <PortfolioLightbox {...props} />
 </Suspense>
-```
+
+```text
 
 ### Prefetching Components
 
@@ -115,7 +133,7 @@ const ContactForm = lazyLoad(() => import('./components/common/ContactForm'));
 import { prefetchComponent, useRoutePrefetch } from './components/ui/LazyLoad';
 
 // Prefetch on hover
-<button 
+<button
   onMouseEnter={() => prefetchComponent(() => import('./BlogPage'))}
   onClick={() => navigate('blog')}
 >
@@ -131,8 +149,8 @@ function Navigation() {
 
   return (
     <nav>
-      <a 
-        href="/blog" 
+      <a
+        href="/blog"
         onMouseEnter={() => handleLinkHover('blog')}
       >
         Blog
@@ -140,7 +158,8 @@ function Navigation() {
     </nav>
   );
 }
-```
+
+```text
 
 ### Retry Mechanism
 
@@ -153,7 +172,8 @@ const Component = lazyLoad(
   3,    // retries
   1000  // delay in ms
 );
-```
+
+```text
 
 ---
 
@@ -164,6 +184,7 @@ const Component = lazyLoad(
 **Location:** `/components/ui/OptimizedImage.tsx`
 
 **Features:**
+
 - Native lazy loading with Intersection Observer fallback
 - Progressive loading with blur-up effect
 - Automatic WebP detection
@@ -182,9 +203,10 @@ import { OptimizedImage } from '@/components/ui/OptimizedImage';
   height={1080}
   priority={false}
 />
-```
 
-**With Progressive Loading:**
+```text
+
+## With Progressive Loading
 
 ```tsx
 <OptimizedImage
@@ -196,9 +218,10 @@ import { OptimizedImage } from '@/components/ui/OptimizedImage';
   fallbackSrc="/images/placeholder.jpg"
   onLoad={() => console.log('Image loaded')}
 />
-```
 
-**Priority Loading (Above-Fold):**
+```text
+
+## Priority Loading (Above-Fold)
 
 ```tsx
 // For hero images and above-fold content
@@ -209,7 +232,8 @@ import { OptimizedImage } from '@/components/ui/OptimizedImage';
   width={1920}
   height={1080}
 />
-```
+
+```text
 
 ### Image Preloading
 
@@ -226,7 +250,8 @@ function HeroSection() {
 
   return <div>Hero content</div>;
 }
-```
+
+```text
 
 ### Blur Data URL Generation
 
@@ -241,7 +266,8 @@ const blurURL = generateBlurDataURL(10, 10);
   alt="Photo"
   blurDataURL={blurURL}
 />
-```
+
+```text
 
 ---
 
@@ -251,14 +277,14 @@ const blurURL = generateBlurDataURL(10, 10);
 
 **Location:** `/vite.config.ts`
 
-**Manual Chunking Strategy:**
+## Manual Chunking Strategy
 
 ```typescript
 manualChunks: {
   // Vendor chunks
   'vendor-react': ['react', 'react-dom'],
   'vendor-icons': ['lucide-react'],
-  
+
   // Feature chunks
   'pages-blog': [
     './components/pages/blog/BlogPage.tsx',
@@ -273,11 +299,13 @@ manualChunks: {
     './components/ui/PortfolioLightbox.tsx',
   ],
 }
-```
+
+```text
 
 ### Asset Optimization
 
-**Automatic asset organization:**
+## Automatic asset organization
+
 - Images: `assets/images/[name]-[hash][extname]`
 - Fonts: `assets/fonts/[name]-[hash][extname]`
 - CSS: `assets/css/[name]-[hash].css`
@@ -297,19 +325,22 @@ terserOptions: {
     comments: false,         // Remove all comments
   },
 }
-```
+
+```text
 
 ### CSS Code Splitting
 
 ```typescript
 cssCodeSplit: true,  // Split CSS by route
-```
+
+```text
 
 ### Asset Inlining
 
 ```typescript
 assetsInlineLimit: 8192,  // Inline assets < 8KB as base64
-```
+
+```text
 
 ---
 
@@ -319,7 +350,7 @@ assetsInlineLimit: 8192,  // Inline assets < 8KB as base64
 
 **Location:** `/utils/webVitals.ts`
 
-**Initialize tracking in App.tsx:**
+## Initialize tracking in App.tsx
 
 ```tsx
 import { initWebVitals } from '@/utils/webVitals';
@@ -331,7 +362,8 @@ function App() {
 
   return <div>App content</div>;
 }
-```
+
+```text
 
 **Or use the hook:**
 
@@ -342,11 +374,12 @@ function App() {
   useWebVitals();
   return <div>App content</div>;
 }
-```
+
+```text
 
 ### Custom Metric Reporting
 
-**Override the report function:**
+## Override the report function
 
 ```tsx
 import { reportWebVital } from '@/utils/webVitals';
@@ -362,7 +395,8 @@ export function reportWebVital(metric) {
     });
   }
 }
-```
+
+```text
 
 ### Performance Snapshot
 
@@ -382,7 +416,8 @@ console.log('Performance:', metrics);
 //   totalResources: 45,
 //   memory: { usedJSHeapSize: 12345678, ... }
 // }
-```
+
+```text
 
 ### Custom Performance Monitoring
 
@@ -404,7 +439,8 @@ console.log(`Component rendered in ${duration}ms`);
 
 // Get elapsed time
 const elapsed = performanceMonitor.getElapsed('component-render-start');
-```
+
+```text
 
 ---
 
@@ -415,11 +451,11 @@ const elapsed = performanceMonitor.getElapsed('component-render-start');
 **Location:** `/utils/performance.ts`
 
 ```tsx
-import { 
-  preloadResource, 
-  prefetchResource, 
+import {
+  preloadResource,
+  prefetchResource,
   preconnectOrigin,
-  dnsPrefetch 
+  dnsPrefetch
 } from '@/utils/performance';
 
 // Preload critical images (high priority)
@@ -437,7 +473,8 @@ preconnectOrigin('https://images.ctfassets.net', true);
 
 // DNS prefetch for later use
 dnsPrefetch('https://www.google-analytics.com');
-```
+
+```text
 
 ### In index.html
 
@@ -446,14 +483,16 @@ dnsPrefetch('https://www.google-analytics.com');
   <!-- Preconnect to CDNs -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://images.ctfassets.net" crossorigin>
-  
+
   <!-- Preload critical fonts -->
-  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-  
+<link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2"
+crossorigin>
+
   <!-- DNS prefetch for analytics -->
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
 </head>
-```
+
+```text
 
 ---
 
@@ -470,7 +509,8 @@ const handleSearch = debounce((query: string) => {
 }, 300);
 
 <input onChange={(e) => handleSearch(e.target.value)} />
-```
+
+```text
 
 ### Throttling
 
@@ -483,7 +523,8 @@ const handleScroll = throttle(() => {
 }, 100);
 
 window.addEventListener('scroll', handleScroll);
-```
+
+```text
 
 ### Idle Callback
 
@@ -497,7 +538,8 @@ const cancel = requestIdleCallbackPolyfill(() => {
 
 // Cancel if needed
 cancel();
-```
+
+```text
 
 ### Intersection Observer
 
@@ -512,7 +554,8 @@ const observer = createIntersectionObserver(
 );
 
 observer.observe(element);
-```
+
+```text
 
 ### Network-Aware Loading
 
@@ -521,7 +564,7 @@ import { shouldReduceData, getNetworkInfo } from '@/utils/performance';
 
 function Component() {
   const reduceData = shouldReduceData();
-  
+
   return (
     <div>
       {reduceData ? (
@@ -537,7 +580,8 @@ function Component() {
 const networkInfo = getNetworkInfo();
 console.log('Network type:', networkInfo.effectiveType); // '4g', '3g', etc.
 console.log('Save data mode:', networkInfo.saveData); // true/false
-```
+
+```text
 
 ### DOM Batching
 
@@ -553,7 +597,8 @@ domBatcher.read(() => {
 domBatcher.write(() => {
   element.style.height = '100px'; // Write
 });
-```
+
+```text
 
 ---
 
@@ -573,7 +618,8 @@ domBatcher.write(() => {
 
 // Preload critical resources
 preloadResource('/images/hero.jpg', 'image');
-```
+
+```text
 
 ### 2. **Code Splitting**
 
@@ -584,7 +630,8 @@ const BlogPage = lazyLoad(() => import('./pages/BlogPage'));
 
 // Split heavy components
 const Lightbox = lazyLoad(() => import('./components/Lightbox'));
-```
+
+```text
 
 ### 3. **Image Optimization**
 
@@ -603,7 +650,8 @@ const Lightbox = lazyLoad(() => import('./components/Lightbox'));
   alt="Large image"
   blurDataURL="data:image/svg+xml..."
 />
-```
+
+```text
 
 ### 4. **Event Handlers**
 
@@ -613,7 +661,8 @@ const handleSearch = debounce(performSearch, 300);
 
 // Throttle scroll/resize handlers
 const handleScroll = throttle(updatePosition, 100);
-```
+
+```text
 
 ### 5. **Memory Management**
 
@@ -621,13 +670,14 @@ const handleScroll = throttle(updatePosition, 100);
 useEffect(() => {
   const handleResize = () => updateSize();
   window.addEventListener('resize', handleResize);
-  
+
   // Clean up!
   return () => {
     window.removeEventListener('resize', handleResize);
   };
 }, []);
-```
+
+```text
 
 ### 6. **Lazy Load Below-Fold**
 
@@ -639,7 +689,8 @@ useEffect(() => {
   loading="lazy"
   priority={false}
 />
-```
+
+```text
 
 ---
 
@@ -648,48 +699,69 @@ useEffect(() => {
 ### Issue: Large Bundle Size
 
 **Solution:**
+
 1. Check bundle analyzer: `npm run build -- --analyze`
-2. Review manual chunks in `vite.config.ts`
-3. Ensure tree-shaking is working (check imports)
-4. Lazy load heavy components
+
+1. Review manual chunks in `vite.config.ts`
+
+1. Ensure tree-shaking is working (check imports)
+
+1. Lazy load heavy components
 
 ### Issue: Slow Initial Load
 
 **Solution:**
+
 1. Preload critical resources
-2. Use priority loading for hero images
-3. Inline critical CSS
-4. Minimize above-fold JavaScript
+
+1. Use priority loading for hero images
+
+1. Inline critical CSS
+
+1. Minimize above-fold JavaScript
 
 ### Issue: Poor LCP Score
 
 **Solution:**
+
 1. Optimize largest image
-2. Use priority loading for LCP element
-3. Preconnect to image CDN
-4. Reduce render-blocking resources
+
+1. Use priority loading for LCP element
+
+1. Preconnect to image CDN
+
+1. Reduce render-blocking resources
 
 ### Issue: High CLS Score
 
 **Solution:**
+
 1. Always specify image dimensions
-2. Reserve space for ads/embeds
-3. Avoid inserting content above existing content
-4. Use CSS `aspect-ratio` or padding-bottom trick
+
+1. Reserve space for ads/embeds
+
+1. Avoid inserting content above existing content
+
+1. Use CSS `aspect-ratio` or padding-bottom trick
 
 ### Issue: Images Not Lazy Loading
 
 **Solution:**
+
 1. Check `loading="lazy"` attribute
-2. Verify Intersection Observer polyfill
-3. Ensure images are below fold
-4. Check browser support
+
+1. Verify Intersection Observer polyfill
+
+1. Ensure images are below fold
+
+1. Check browser support
 
 ---
 
 ## 📈 Performance Checklist
 
 ### Build Time
+
 - [ ] Configured manual chunking
 - [ ] Enabled CSS code splitting
 - [ ] Set up Terser minification
@@ -697,6 +769,7 @@ useEffect(() => {
 - [ ] Added source maps for debugging
 
 ### Runtime
+
 - [ ] Implemented lazy loading for routes
 - [ ] Added lazy loading for components
 - [ ] Optimized images with OptimizedImage component
@@ -704,6 +777,7 @@ useEffect(() => {
 - [ ] Added resource hints (preload/prefetch)
 
 ### Monitoring
+
 - [ ] Integrated Web Vitals tracking
 - [ ] Set up analytics reporting
 - [ ] Added performance markers
@@ -711,6 +785,7 @@ useEffect(() => {
 - [ ] Set up real user monitoring (RUM)
 
 ### Testing
+
 - [ ] Run Lighthouse audits
 - [ ] Test on slow connections
 - [ ] Verify mobile performance
@@ -722,11 +797,13 @@ useEffect(() => {
 ## 📚 Additional Resources
 
 ### Internal Documentation
+
 - [Guidelines.md](./Guidelines.md) - Main project guidelines
 - [contentful-integration.md](./contentful-integration.md) - CMS integration
 - [Data System Documentation](../data/README.md) - Mock data system
 
 ### External Resources
+
 - [Web Vitals](https://web.dev/vitals/)
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse)
 - [Vite Performance](https://vitejs.dev/guide/performance.html)
@@ -734,8 +811,9 @@ useEffect(() => {
 
 ---
 
-**Last Updated:** January 2025  
-**Version:** 1.0.0  
+**Last Updated:** January 2025
+**Version:** 1.0.0
 **Maintained by:** Ash Shaw Portfolio Team
 
-For implementation support, see the utilities in `/utils/performance.ts` and `/utils/webVitals.ts`.
+For implementation support, see the utilities in `/utils/performance.ts` and
+`/utils/webVitals.ts`.

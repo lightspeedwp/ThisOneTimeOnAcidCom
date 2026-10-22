@@ -2,7 +2,8 @@
 
 **Parent:** [orchestrator.md](./orchestrator.md)
 **Status:** COMPLETE — March 8, 2026
-**Report:** [/reports/feature-work/03-resources-page.md](../../reports/feature-work/03-resources-page.md)
+**Report:**
+[/reports/feature-work/03-resources-page.md](../../reports/feature-work/03-resources-page.md)
 
 ---
 
@@ -28,7 +29,9 @@
 
 ## Note on concept split
 
-The original prompt offered options A (recommended artists), B (resources), C (inspiration gallery), and D (hybrid). Ash clarified:
+The original prompt offered options A (recommended artists), B (resources), C
+(inspiration gallery), and D (hybrid). Ash clarified:
+
 - Option A (recommended artists) = existing `/about/music` page
 - Option B (getting started) = this new `/about/resources` page
 - Option C (inspiration gallery) = will contain AI-prompted concept images for events — future work, not part of this sub-audit

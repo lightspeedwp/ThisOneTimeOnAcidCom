@@ -2,8 +2,8 @@
 
 Comprehensive deployment checklist for the enhanced dark mode theme system.
 
-**Created:** March 11, 2026  
-**Status:** Ready for Implementation  
+**Created:** March 11, 2026
+**Status:** Ready for Implementation
 **Theme Version:** 2.0.0
 
 ---
@@ -310,25 +310,29 @@ Comprehensive deployment checklist for the enhanced dark mode theme system.
 
 ### Common Issues
 
-**Dark mode not applying?**
+## Dark mode not applying
+
 - [ ] Check `.dark` class is on `<html>` or `<body>`
 - [ ] Verify CSS import order in globals.css
 - [ ] Clear browser cache and hard reload
 - [ ] Check browser DevTools for CSS errors
 
-**Colors look wrong?**
+## Colors look wrong
+
 - [ ] Verify color variables defined in :root.dark
 - [ ] Check for hardcoded colors overriding variables
 - [ ] Test in different browsers
 - [ ] Check monitor color profile
 
-**Components not styled?**
+## Components not styled
+
 - [ ] Verify BEM class names match exactly
 - [ ] Check for typos in class names
 - [ ] Inspect element to see applied styles
 - [ ] Ensure dark-extended.css imported
 
-**Accessibility issues?**
+## Accessibility issues
+
 - [ ] Run Lighthouse audit
 - [ ] Test with screen reader
 - [ ] Verify keyboard navigation
@@ -360,25 +364,30 @@ Comprehensive deployment checklist for the enhanced dark mode theme system.
 Once all checkboxes are ticked:
 
 1. **Mark this task list complete**
-2. **Archive to `/tasks/archived/`** after 30 days
-3. **Update project status** in README.md
-4. **Celebrate!** 🚀✨
+
+1. **Archive to `/tasks/archived/`** after 30 days
+
+1. **Update project status** in README.md
+
+1. **Celebrate!** 🚀✨
 
 ---
 
-**Related Documentation:**
+## Related Documentation
+
 - `/reports/theme-styling-audit/dark-mode-final-completion-report.md`
 - `/docs/dark-mode-usage-guide.md`
 - `/docs/dark-mode-component-showcase.md`
 - `/docs/dark-mode-composition-patterns.md`
 
 **Support:**
+
 - Refer to troubleshooting section above
 - Check Guidelines.md for BEM standards
 - Review component-specific guidelines
 
 ---
 
-**Created:** March 11, 2026  
-**Version:** 1.0.0  
+**Created:** March 11, 2026
+**Version:** 1.0.0
 **Status:** Ready for Use

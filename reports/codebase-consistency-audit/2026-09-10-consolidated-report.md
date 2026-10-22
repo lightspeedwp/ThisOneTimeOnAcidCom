@@ -9,9 +9,20 @@
 
 ## Executive Summary
 
-The site has not been updated for several months. The audit reveals one systemic architectural issue that dwarfs all other findings: **the `src/styles/tokens/` directory contains 5 CSS files that are never imported anywhere**. These files define the entire font-size scale, extended colour palette, layout container widths, and content-type font families used across the codebase. Since none are loaded, every component relying on `--wp--preset--font-size--100` through `--900`, `--wp--preset--layout--content`, and the extended neon colour set is silently falling back to browser defaults — making the text size hierarchy, container widths, and content accent colours all broken in production.
+The site has not been updated for several months. The audit reveals one systemic
+architectural issue that dwarfs all other findings: **the `src/styles/tokens/`
+directory contains 5 CSS files that are never imported anywhere**. These files
+define the entire font-size scale, extended colour palette, layout container
+widths, and content-type font families used across the codebase. Since none are
+loaded, every component relying on `--wp--preset--font-size--100` through
+`--900`, `--wp--preset--layout--content`, and the extended neon colour set is
+silently falling back to browser defaults — making the text size hierarchy,
+container widths, and content accent colours all broken in production.
 
-The good news: the previous audit's fixes (button padding, globals.css token definitions, dark.css hex sweep, inline style reduction) are holding. No regressions found in those areas. The new findings are largely in areas not covered by the first audit.
+The good news: the previous audit's fixes (button padding, globals.css token
+definitions, dark.css hex sweep, inline style reduction) are holding. No
+regressions found in those areas. The new findings are largely in areas not
+covered by the first audit.
 
 ---
 
@@ -54,27 +65,39 @@ The good news: the previous audit's fixes (button padding, globals.css token def
 
 1. **Add `@import` for all 5 token files to `globals.css`** — single change that fixes E-01, E-02, E-03, E-09 in one shot. This is the highest impact fix in the entire audit.
 
-2. **Define 14 missing shadow variant tokens in `globals.css` `:root {}`** — fixes E-05. All button/card hover glows currently invisible.
+1. **Define 14 missing shadow variant tokens in `globals.css` `:root {}`** — fixes E-05. All button/card hover glows currently invisible.
 
 ### 🟠 Do next — High
 
-3. **Define missing border-radius, spacing, z-index tokens** (E-06, E-07, E-08) — add `--pill`, `--xl`, `--2xl`, spacing 70/90/100, z-index `--header` to `globals.css` `:root {}`
-4. **Replace `globals.css` selector hex with token refs** (B-02) — ~15 new regressions since last audit
-5. **Replace `mobile-menu.css` hardcoded neon hex** (B-03) — 5 instances
-6. **Replace `style-guide-page.css` hardcoded hex** (B-04) — 13+ instances
-7. **Convert pixel `font-size` to `clamp()`** in `globals.css` (B-01) — 7 instances
-8. **Fix `SectionCard.tsx` inline style pattern** (C-01) — replace string CSS var ref with proper injection
-9. **Pin `typescript` and `@phosphor-icons/react`** in `package.json` (F-01, F-02)
+1. **Define missing border-radius, spacing, z-index tokens** (E-06, E-07, E-08) — add `--pill`, `--xl`, `--2xl`, spacing 70/90/100, z-index `--header` to `globals.css` `:root {}`
+
+1. **Replace `globals.css` selector hex with token refs** (B-02) — ~15 new regressions since last audit
+
+1. **Replace `mobile-menu.css` hardcoded neon hex** (B-03) — 5 instances
+
+1. **Replace `style-guide-page.css` hardcoded hex** (B-04) — 13+ instances
+
+1. **Convert pixel `font-size` to `clamp()`** in `globals.css` (B-01) — 7 instances
+
+1. **Fix `SectionCard.tsx` inline style pattern** (C-01) — replace string CSS var ref with proper injection
+
+1. **Pin `typescript` and `@phosphor-icons/react`** in `package.json` (F-01, F-02)
 
 ### 🟡 Nice to have — Medium
 
-10. Replace `animation-showcase.css` hardcoded hex (B-05)
-11. Replace `ebook-enhanced-contrast.css` hardcoded hex (B-06)
-12. Fix `portfolio-card.css` single hex instance (B-07)
-13. Fix `light.css` `#1A1A1A` instances (B-08)
-14. Fix 2 remaining `dark.css` hex instances (B-09)
-15. Convert `UVMakeupSection.tsx` transform to CSS var injection (C-03)
-16. Fix `button-variations.css` font-family token ref (A-01)
+1. Replace `animation-showcase.css` hardcoded hex (B-05)
+
+1. Replace `ebook-enhanced-contrast.css` hardcoded hex (B-06)
+
+1. Fix `portfolio-card.css` single hex instance (B-07)
+
+1. Fix `light.css` `#1A1A1A` instances (B-08)
+
+1. Fix 2 remaining `dark.css` hex instances (B-09)
+
+1. Convert `UVMakeupSection.tsx` transform to CSS var injection (C-03)
+
+1. Fix `button-variations.css` font-family token ref (A-01)
 
 ---
 
@@ -123,7 +146,7 @@ See `2026-09-10-G-web-standards.md` for full details.
 - `WebSite` schema with `SearchAction` — injected via `HomePage.tsx` ✅
 - `FAQPage` schema — `FaqSection.tsx` ✅
 - `BreadcrumbList` schema — `Breadcrumbs.tsx` ✅
-- `twitter:card` = `summary_large_image` ✅
+- `twitter:card` = `summary*large*image` ✅
 - `focus-visible` CSS rules — 74 instances across stylesheet ✅
 
 ---

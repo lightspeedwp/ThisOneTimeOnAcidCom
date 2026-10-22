@@ -1,19 +1,26 @@
 # Dark Mode Implementation Guide
 
-**Version:** 1.0.0  
+**Version:** 1.0.0
 **Last Updated:** January 2025
 
-Complete implementation guide for light/dark mode theming across the Ash Shaw Makeup Portfolio.
+Complete implementation guide for light/dark mode theming across the Ash Shaw
+Makeup Portfolio.
 
 ## 📋 Table of Contents
 
 1. [Overview](#overview)
-2. [Architecture](#architecture)
-3. [Implementation Plan](#implementation-plan)
-4. [Component Checklist](#component-checklist)
-5. [Testing Strategy](#testing-strategy)
-6. [Common Patterns](#common-patterns)
-7. [Troubleshooting](#troubleshooting)
+
+1. [Architecture](#architecture)
+
+1. [Implementation Plan](#implementation-plan)
+
+1. [Component Checklist](#component-checklist)
+
+1. [Testing Strategy](#testing-strategy)
+
+1. [Common Patterns](#common-patterns)
+
+1. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -21,15 +28,16 @@ Complete implementation guide for light/dark mode theming across the Ash Shaw Ma
 
 ### Theme System Goals
 
-✅ **Complete Coverage:** Every component supports both themes  
-✅ **Consistent Aesthetic:** Clean light mode, rich dark mode  
-✅ **Smooth Transitions:** 300ms duration on theme changes  
-✅ **Accessible:** WCAG 2.1 AA compliant in both themes  
-✅ **Performant:** No layout shifts or flickering  
+✅ **Complete Coverage:** Every component supports both themes
+✅ **Consistent Aesthetic:** Clean light mode, rich dark mode
+✅ **Smooth Transitions:** 300ms duration on theme changes
+✅ **Accessible:** WCAG 2.1 AA compliant in both themes
+✅ **Performant:** No layout shifts or flickering
 
 ### Theme Aesthetics
 
 **Light Mode:**
+
 - Clean white backgrounds (`bg-white`)
 - Professional gray text (`text-gray-700`, `text-gray-800`)
 - Subtle borders (`border-gray-200`)
@@ -37,6 +45,7 @@ Complete implementation guide for light/dark mode theming across the Ash Shaw Ma
 - Perfect for daytime reading
 
 **Dark Mode:**
+
 - Deep purple gradient backgrounds
 - High contrast lavender text (`text-purple-100`)
 - Rich purple accents (`border-purple-700`)
@@ -69,7 +78,8 @@ The theme system uses CSS custom properties defined in `/styles/globals.css`:
   --card-foreground: #f5f3ff;
   --border: #3b2667;
 }
-```
+
+```text
 
 ### Tailwind Dark Mode Classes
 
@@ -78,10 +88,11 @@ Every styled element must include both light and dark variants:
 ```tsx
 // ✅ CORRECT
 <div className="bg-white dark:bg-purple-900 text-gray-800 dark:text-purple-100">
-  
+
 // ❌ WRONG - Missing dark mode
 <div className="bg-white text-gray-800">
-```
+
+```text
 
 ### Theme Toggle Component
 
@@ -93,7 +104,7 @@ import { useTheme } from '@/hooks/useTheme';
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
-  
+
   return (
     <button
       onClick={toggleTheme}
@@ -104,7 +115,8 @@ export function ThemeToggle() {
     </button>
   );
 }
-```
+
+```text
 
 ---
 
@@ -112,13 +124,15 @@ export function ThemeToggle() {
 
 ### Phase 1: Foundation (✅ Complete)
 
-**CSS Variables Setup**
+## CSS Variables Setup
+
 - [x] Define light mode CSS variables in `:root`
 - [x] Define dark mode CSS variables in `.dark`
 - [x] Add transition properties to body element
 - [x] Test variable switching
 
-**Theme Toggle**
+## Theme Toggle
+
 - [x] Create ThemeToggle component
 - [x] Implement localStorage persistence
 - [x] Add smooth animations
@@ -126,25 +140,29 @@ export function ThemeToggle() {
 
 ### Phase 2: Core Pages (✅ Complete)
 
-**HomePage**
+## HomePage
+
 - [x] Update background: `bg-white dark:bg-gradient-to-br dark:from-purple-950...`
 - [x] Update loading states
 - [x] Update error states
 - [x] Test all sections
 
-**AboutPage**
+## AboutPage
+
 - [x] Update background colors
 - [x] Update text colors
 - [x] Update loading/error states
 - [x] Test scrolling behavior
 
-**PortfolioPage**
+## PortfolioPage
+
 - [x] Update gallery backgrounds
 - [x] Update lightbox styles
 - [x] Update filter buttons
 - [x] Test image overlays
 
-**BlogPage**
+## BlogPage
+
 - [x] Update article cards
 - [x] Update search bar
 - [x] Update category filters
@@ -152,13 +170,15 @@ export function ThemeToggle() {
 
 ### Phase 3: Components (In Progress)
 
-**Navigation Components**
+## Navigation Components
+
 - [x] Header - `bg-white/95 dark:bg-purple-950/95`
 - [ ] Footer - Verify dark mode styling
 - [x] Mobile menu - Update overlay and links
 - [x] Logo - Enhanced dark mode with glow effect
 
-**Section Components**
+## Section Components
+
 - [x] HeroLayout - Card backgrounds and text
 - [x] FeaturedSection - Portfolio cards
 - [x] WhySection - Icon cards and text
@@ -168,7 +188,8 @@ export function ThemeToggle() {
 - [ ] InstagramFeed - Verify image overlays
 - [ ] FestivalCountdown - Verify timer display
 
-**UI Components**
+## UI Components
+
 - [x] ScrollToTop - Button background and icon
 - [x] ScrollDownArrow - Icon color and animation
 - [ ] SectionCard - Verify all theme variants
@@ -180,21 +201,24 @@ export function ThemeToggle() {
 
 ### Phase 4: Testing & Polish (Next)
 
-**Visual Testing**
+## Visual Testing
+
 - [ ] Test all pages in light mode
 - [ ] Test all pages in dark mode
 - [ ] Test theme transitions (no flickering)
 - [ ] Test with different screen sizes
 - [ ] Test loading states in both themes
 
-**Accessibility Testing**
+## Accessibility Testing
+
 - [ ] Contrast ratios (light mode)
 - [ ] Contrast ratios (dark mode)
 - [ ] Focus indicators (both themes)
 - [ ] Screen reader announcements
 - [ ] Keyboard navigation
 
-**Performance Testing**
+## Performance Testing
+
 - [ ] No layout shifts on theme change
 - [ ] Smooth 300ms transitions
 - [ ] No visual artifacts
@@ -208,7 +232,8 @@ export function ThemeToggle() {
 
 ```tsx
 // Pages
-<main className="bg-white dark:bg-gradient-to-br dark:from-purple-950 dark:via-purple-900/50 dark:to-purple-950">
+<main className="bg-white dark:bg-gradient-to-br dark:from-purple-950
+dark:via-purple-900/50 dark:to-purple-950">
 
 // Cards
 <div className="bg-white/80 dark:bg-purple-900/50">
@@ -221,7 +246,8 @@ export function ThemeToggle() {
 
 // Loading skeletons
 <div className="bg-gray-200 dark:bg-purple-800/50">
-```
+
+```text
 
 ### ✅ Text Colors
 
@@ -237,7 +263,8 @@ export function ThemeToggle() {
 
 // Muted text
 <small className="text-gray-500 dark:text-purple-400">
-```
+
+```text
 
 ### ✅ Borders
 
@@ -250,7 +277,8 @@ export function ThemeToggle() {
 
 // Dividers
 <hr className="border-gray-200 dark:border-purple-800">
-```
+
+```text
 
 ### ✅ Buttons
 
@@ -259,40 +287,54 @@ export function ThemeToggle() {
 <button className="bg-gradient-pink-purple-blue text-white">
 
 // Secondary
-<button className="bg-gray-200 dark:bg-purple-700 text-gray-800 dark:text-white">
+<button className="bg-gray-200 dark:bg-purple-700 text-gray-800
+dark:text-white">
 
 // Ghost
-<button className="bg-transparent hover:bg-gray-100 dark:hover:bg-purple-800/30 text-gray-700 dark:text-purple-200 border border-gray-300 dark:border-purple-700">
-```
+<button className="bg-transparent hover:bg-gray-100 dark:hover:bg-purple-800/30
+text-gray-700 dark:text-purple-200 border border-gray-300
+dark:border-purple-700">
+
+```text
 
 ### ✅ Forms
 
 ```tsx
 // Input fields
-<input className="bg-white dark:bg-purple-900/30 border-gray-300 dark:border-purple-700 text-gray-800 dark:text-purple-100 placeholder-gray-500 dark:placeholder-purple-400">
+<input className="bg-white dark:bg-purple-900/30 border-gray-300
+dark:border-purple-700 text-gray-800 dark:text-purple-100 placeholder-gray-500
+dark:placeholder-purple-400">
 
 // Textareas
-<textarea className="bg-white dark:bg-purple-900/30 border-gray-300 dark:border-purple-700 text-gray-800 dark:text-purple-100">
+<textarea className="bg-white dark:bg-purple-900/30 border-gray-300
+dark:border-purple-700 text-gray-800 dark:text-purple-100">
 
 // Select dropdowns
-<select className="bg-white dark:bg-purple-900/30 border-gray-300 dark:border-purple-700 text-gray-800 dark:text-purple-100">
-```
+<select className="bg-white dark:bg-purple-900/30 border-gray-300
+dark:border-purple-700 text-gray-800 dark:text-purple-100">
+
+```text
 
 ### ✅ Status Messages
 
 ```tsx
 // Success
-<div className="bg-green-100 dark:bg-green-900/30 border-green-700 dark:border-green-600 text-green-900 dark:text-green-200">
+<div className="bg-green-100 dark:bg-green-900/30 border-green-700
+dark:border-green-600 text-green-900 dark:text-green-200">
 
 // Error
-<div className="bg-red-100 dark:bg-red-900/30 border-red-700 dark:border-red-600 text-red-900 dark:text-red-200">
+<div className="bg-red-100 dark:bg-red-900/30 border-red-700 dark:border-red-600
+text-red-900 dark:text-red-200">
 
 // Warning
-<div className="bg-amber-100 dark:bg-amber-900/30 border-amber-700 dark:border-amber-600 text-amber-900 dark:text-amber-200">
+<div className="bg-amber-100 dark:bg-amber-900/30 border-amber-700
+dark:border-amber-600 text-amber-900 dark:text-amber-200">
 
 // Info
-<div className="bg-blue-100 dark:bg-blue-900/30 border-blue-700 dark:border-blue-600 text-blue-900 dark:text-blue-200">
-```
+<div className="bg-blue-100 dark:bg-blue-900/30 border-blue-700
+dark:border-blue-600 text-blue-900 dark:text-blue-200">
+
+```text
 
 ---
 
@@ -300,9 +342,9 @@ export function ThemeToggle() {
 
 ### Manual Testing Checklist
 
-#### Visual Testing
+#### Visual Testing (1)
 
-```
+```text
 Light Mode Testing:
 [ ] All pages have white backgrounds
 [ ] Text is dark and readable
@@ -320,11 +362,12 @@ Dark Mode Testing:
 [ ] Buttons maintain visibility
 [ ] Forms are usable with dark backgrounds
 [ ] Images don't feel washed out
-```
 
-#### Accessibility Testing
+```text
 
-```
+#### Accessibility Testing (1)
+
+```text
 Contrast Ratios (use browser DevTools):
 [ ] Light mode headings: 7:1+ (AAA)
 [ ] Light mode body text: 4.5:1+ (AA)
@@ -338,11 +381,12 @@ Keyboard Navigation:
 [ ] Focus indicators visible in dark mode
 [ ] Theme toggle accessible via keyboard
 [ ] Tab order maintained in both themes
-```
+
+```text
 
 #### Transition Testing
 
-```
+```text
 Theme Switching:
 [ ] No layout shift on theme change
 [ ] 300ms smooth transition
@@ -351,7 +395,8 @@ Theme Switching:
 [ ] Scroll position maintained
 [ ] Focus state preserved
 [ ] No console errors
-```
+
+```text
 
 ### Automated Testing
 
@@ -360,22 +405,23 @@ Theme Switching:
 describe('Component Dark Mode', () => {
   it('should apply dark mode classes correctly', () => {
     render(<Component />, { wrapper: DarkModeProvider });
-    
+
     const element = screen.getByRole('main');
     expect(element).toHaveClass('dark:bg-purple-950');
   });
-  
+
   it('should have sufficient contrast in dark mode', () => {
-    const { container } = render(<Component />, { 
-      wrapper: DarkModeProvider 
+    const { container } = render(<Component />, {
+      wrapper: DarkModeProvider
     });
-    
+
     // Use jest-axe for accessibility testing
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
 });
-```
+
+```text
 
 ---
 
@@ -385,41 +431,52 @@ describe('Component Dark Mode', () => {
 
 ```tsx
 // ✅ RECOMMENDED PATTERN
-<main className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-purple-950 dark:via-purple-900/50 dark:to-purple-950 transition-colors duration-300">
+<main className="min-h-screen bg-white dark:bg-gradient-to-br
+dark:from-purple-950 dark:via-purple-900/50 dark:to-purple-950 transition-colors
+duration-300">
   {children}
 </main>
-```
+
+```text
 
 ### Pattern 2: Card Component
 
 ```tsx
 // ✅ RECOMMENDED PATTERN
-<div className="bg-white/80 dark:bg-purple-900/50 backdrop-blur-sm rounded-xl p-fluid-md border border-white/50 dark:border-purple-700/50 shadow-lg hover:shadow-xl transition-all duration-300">
-  <h3 className="text-gray-800 dark:text-purple-100 font-heading font-semibold mb-fluid-sm">
+<div className="bg-white/80 dark:bg-purple-900/50 backdrop-blur-sm rounded-xl
+p-fluid-md border border-white/50 dark:border-purple-700/50 shadow-lg
+hover:shadow-xl transition-all duration-300">
+<h3 className="text-gray-800 dark:text-purple-100 font-heading font-semibold
+mb-fluid-sm">
     Title
   </h3>
   <p className="text-gray-700 dark:text-purple-100 font-body">
     Content
   </p>
 </div>
-```
+
+```text
 
 ### Pattern 3: Navigation Header
 
 ```tsx
 // ✅ RECOMMENDED PATTERN
-<header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-purple-950/95 backdrop-blur-sm border-b border-gray-200 dark:border-purple-800 transition-colors duration-300">
+<header className="fixed top-0 left-0 right-0 z-50 bg-white/95
+dark:bg-purple-950/95 backdrop-blur-sm border-b border-gray-200
+dark:border-purple-800 transition-colors duration-300">
   <nav className="container mx-auto px-4">
     <ul className="flex items-center gap-6">
       <li>
-        <a className="text-gray-700 dark:text-purple-200 hover:text-purple-600 dark:hover:text-purple-300 transition-colors">
+<a className="text-gray-700 dark:text-purple-200 hover:text-purple-600
+dark:hover:text-purple-300 transition-colors">
           Link
         </a>
       </li>
     </ul>
   </nav>
 </header>
-```
+
+```text
 
 ### Pattern 4: Form Input
 
@@ -427,29 +484,41 @@ describe('Component Dark Mode', () => {
 // ✅ RECOMMENDED PATTERN
 <input
   type="text"
-  className="w-full px-4 py-3 bg-white dark:bg-purple-900/30 border border-gray-300 dark:border-purple-700 rounded-lg text-gray-800 dark:text-purple-100 placeholder-gray-500 dark:placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 transition-colors duration-300"
+className="w-full px-4 py-3 bg-white dark:bg-purple-900/30 border
+border-gray-300 dark:border-purple-700 rounded-lg text-gray-800
+dark:text-purple-100 placeholder-gray-500 dark:placeholder-purple-400
+focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400
+transition-colors duration-300"
   placeholder="Enter text..."
 />
-```
+
+```text
 
 ### Pattern 5: Button Variants
 
 ```tsx
 // Primary CTA (gradient - theme-agnostic)
-<button className="bg-gradient-pink-purple-blue hover:from-purple-700 hover:to-pink-700 text-white px-button py-button rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+<button className="bg-gradient-pink-purple-blue hover:from-purple-700
+hover:to-pink-700 text-white px-button py-button rounded-lg shadow-lg
+hover:shadow-xl transform hover:scale-105 transition-all duration-300">
   Primary Action
 </button>
 
 // Secondary (theme-aware)
-<button className="bg-gray-200 dark:bg-purple-700 hover:bg-gray-300 dark:hover:bg-purple-600 text-gray-800 dark:text-white px-button py-button rounded-lg transition-all duration-300">
+<button className="bg-gray-200 dark:bg-purple-700 hover:bg-gray-300
+dark:hover:bg-purple-600 text-gray-800 dark:text-white px-button py-button
+rounded-lg transition-all duration-300">
   Secondary Action
 </button>
 
 // Ghost (theme-aware)
-<button className="bg-transparent hover:bg-gray-100 dark:hover:bg-purple-800/30 text-gray-700 dark:text-purple-200 px-button py-button rounded-lg border border-gray-300 dark:border-purple-700 transition-all duration-300">
+<button className="bg-transparent hover:bg-gray-100 dark:hover:bg-purple-800/30
+text-gray-700 dark:text-purple-200 px-button py-button rounded-lg border
+border-gray-300 dark:border-purple-700 transition-all duration-300">
   Tertiary Action
 </button>
-```
+
+```text
 
 ---
 
@@ -460,6 +529,7 @@ describe('Component Dark Mode', () => {
 **Problem:** Page flickers or shows wrong theme briefly
 
 **Solution:**
+
 ```tsx
 // Add theme class to html element before React mounts
 // In index.html or main.tsx
@@ -469,13 +539,16 @@ describe('Component Dark Mode', () => {
     document.documentElement.classList.add('dark');
   }
 </script>
-```
+
+```text
 
 ### Issue: `.bg-card:hover` Forces Black Background in Light Mode
 
-**Problem:** Cards with `.bg-card` class turn black on hover in light mode instead of light gray
+**Problem:** Cards with `.bg-card` class turn black on hover in light mode
+instead of light gray
 
-**Root Cause:** Global CSS file (`/styles/globals.css`) has incorrect hover state around line 2375:
+**Root Cause:** Global CSS file (`/styles/globals.css`) has incorrect hover
+state around line 2375:
 
 ```css
 /* ❌ CURRENT - Forces black in both modes */
@@ -486,7 +559,8 @@ describe('Component Dark Mode', () => {
 .dark .bg-card:hover {
   background-color: #000000;  /* Correct for dark mode */
 }
-```
+
+```text
 
 **Solution:**
 Update `/styles/globals.css` to use light gray hover in light mode:
@@ -500,9 +574,11 @@ Update `/styles/globals.css` to use light gray hover in light mode:
 .dark .bg-card:hover {
   background-color: #000000;  /* Keep black for dark mode */
 }
-```
 
-**Affected Components:**
+```text
+
+## Affected Components
+
 - SliderCard (home page featured section)
 - PortfolioCard (portfolio page)
 - Any component using `.bg-card` class
@@ -514,52 +590,61 @@ Update `/styles/globals.css` to use light gray hover in light mode:
 **Problem:** Component doesn't change in dark mode
 
 **Solution:**
+
 ```tsx
 // ❌ WRONG - Missing dark: prefix
 <div className="bg-white text-gray-800">
 
 // ✅ CORRECT - Both themes supported
 <div className="bg-white dark:bg-purple-900 text-gray-800 dark:text-purple-100">
-```
+
+```text
 
 ### Issue: Low Contrast in Dark Mode
 
 **Problem:** Text hard to read on dark purple background
 
 **Solution:**
+
 ```tsx
 // ❌ WRONG - Insufficient contrast
 <p className="text-purple-500 dark:text-purple-500">
 
 // ✅ CORRECT - High contrast
 <p className="text-gray-700 dark:text-purple-100">
-```
+
+```text
 
 ### Issue: Gradient Backgrounds in Light Mode
 
 **Problem:** Light mode shows colorful gradients
 
 **Solution:**
+
 ```tsx
 // ❌ WRONG - Gradient in both modes
-<div className="bg-gradient-to-br from-pink-50 to-purple-50 dark:from-purple-950...">
+<div className="bg-gradient-to-br from-pink-50 to-purple-50
+dark:from-purple-950...">
 
 // ✅ CORRECT - Solid light, gradient dark
 <div className="bg-white dark:bg-gradient-to-br dark:from-purple-950...">
-```
+
+```text
 
 ### Issue: Border Visibility
 
 **Problem:** Borders not visible in one or both themes
 
 **Solution:**
+
 ```tsx
 // ❌ WRONG - Same color in both modes
 <div className="border border-gray-300">
 
 // ✅ CORRECT - Theme-appropriate borders
 <div className="border border-gray-300 dark:border-purple-700">
-```
+
+```text
 
 ---
 
@@ -571,6 +656,6 @@ Update `/styles/globals.css` to use light gray hover in light mode:
 
 ---
 
-**Last Updated:** January 2025  
-**Version:** 1.0.0  
+**Last Updated:** January 2025
+**Version:** 1.0.0
 **Maintained by:** Ash Shaw Portfolio Team

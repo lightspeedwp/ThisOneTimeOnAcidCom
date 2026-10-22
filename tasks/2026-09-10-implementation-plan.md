@@ -9,7 +9,12 @@
 
 ## Background
 
-Re-run of the codebase consistency audit after a period of inactivity. The previous audit's fixes (button padding, token definitions, dark.css hex sweep) are holding. New systemic issue discovered: `src/styles/tokens/` directory contains 5 CSS files that have **never been imported** into the CSS load chain. This means the font-size scale, layout widths, and extended colour palette are completely undefined in production.
+Re-run of the codebase consistency audit after a period of inactivity. The
+previous audit's fixes (button padding, token definitions, dark.css hex sweep)
+are holding. New systemic issue discovered: `src/styles/tokens/` directory
+contains 5 CSS files that have **never been imported** into the CSS load chain.
+This means the font-size scale, layout widths, and extended colour palette are
+completely undefined in production.
 
 ---
 
@@ -18,9 +23,19 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 ### CRIT-01 — Import the `tokens/` CSS layer into `globals.css`
 
 **Audit refs:** E-01, E-02, E-03, E-09
-**Root cause:** `src/styles/tokens/` contains 5 CSS files defining the font-size scale (`--wp--preset--font-size--100` through `--900`, `--hero`, `--section` etc.), layout container widths (`--wp--preset--layout--content`, `--layout--wide` etc.), extended neon colour palette (neon-green, neon-cyan, neon-orange + text variants), and content-type font families. None of these files have `@import` statements pointing to them anywhere in the codebase. Since `index.css` only imports `globals.css`, and `globals.css` does not import the tokens/ files, they are entirely absent from the build.
-**Impact:** Every component that relies on these tokens silently falls back to browser defaults — font-size collapses to `inherit`, containers have no max-width constraint, and content accent colours disappear.
-**Affected files:** `src/styles/globals.css` (add imports), all block CSS files (downstream beneficiaries)
+**Root cause:** `src/styles/tokens/` contains 5 CSS files defining the font-size
+scale (`--wp--preset--font-size--100` through `--900`, `--hero`, `--section`
+etc.), layout container widths (`--wp--preset--layout--content`,
+`--layout--wide` etc.), extended neon colour palette (neon-green, neon-cyan,
+neon-orange + text variants), and content-type font families. None of these
+files have `@import` statements pointing to them anywhere in the codebase. Since
+`index.css` only imports `globals.css`, and `globals.css` does not import the
+tokens/ files, they are entirely absent from the build.
+**Impact:** Every component that relies on these tokens silently falls back to
+browser defaults — font-size collapses to `inherit`, containers have no
+max-width constraint, and content accent colours disappear.
+**Affected files:** `src/styles/globals.css` (add imports), all block CSS files
+(downstream beneficiaries)
 
 **Fix — add to `globals.css` after the `@import "tailwindcss"` line:**
 
@@ -37,9 +52,11 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 @import "./themes/light.css";
 @import "./themes/dark.css";
 /* ... rest unchanged */
-```
 
-**Note:** Import token files BEFORE theme files so theme overrides can reference them.
+```text
+
+**Note:** Import token files BEFORE theme files so theme overrides can reference
+them.
 **Status:** Pending
 
 ---
@@ -47,10 +64,15 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 ### CRIT-02 — Define 14 missing shadow variant tokens in `globals.css`
 
 **Audit refs:** E-05
-**Root cause:** The previous audit added core shadow tokens (`focus-ring`, `neon-sm`, `card-hover`, `neon-pink/blue/purple`). A second, larger set of shadow tokens is used across block CSS files but was never defined anywhere — not in globals.css, not in any tokens/ file. Without these, hover glows, card depth effects, and button action shadows all render as invisible.
-**Affected files:** `src/styles/globals.css` (add to `:root {}`), `src/styles/blocks/button.css`, `src/styles/tokens/content-interactive.css`
+**Root cause:** The previous audit added core shadow tokens (`focus-ring`,
+`neon-sm`, `card-hover`, `neon-pink/blue/purple`). A second, larger set of
+shadow tokens is used across block CSS files but was never defined anywhere —
+not in globals.css, not in any tokens/ file. Without these, hover glows, card
+depth effects, and button action shadows all render as invisible.
+**Affected files:** `src/styles/globals.css` (add to `:root {}`),
+`src/styles/blocks/button.css`, `src/styles/tokens/content-interactive.css`
 
-**Fix — add to `globals.css` `:root {}` block:**
+## Fix — add to `globals.css` `:root {}` block
 
 ```css
 /* Extended shadow tokens */
@@ -59,16 +81,21 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 --wp--preset--shadow--lg: 0 8px 24px rgba(0, 0, 0, 0.3);
 --wp--preset--shadow--xl: 0 16px 40px rgba(0, 0, 0, 0.35);
 --wp--preset--shadow--2xl: 0 24px 64px rgba(0, 0, 0, 0.4);
---wp--preset--shadow--card: 0 2px 8px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.15);
+--wp--preset--shadow--card: 0 2px 8px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0,
+0, 0.15);
 --wp--preset--shadow--action-btn: 0 4px 16px rgba(255, 16, 240, 0.3);
---wp--preset--shadow--action-btn-glow: 0 0 20px rgba(255, 16, 240, 0.5), 0 4px 16px rgba(255, 16, 240, 0.3);
+--wp--preset--shadow--action-btn-glow: 0 0 20px rgba(255, 16, 240, 0.5), 0 4px
+16px rgba(255, 16, 240, 0.3);
 --wp--preset--shadow--action-btn-hover: 0 6px 24px rgba(255, 16, 240, 0.45);
 --wp--preset--shadow--focus-ring-pink: 0 0 0 3px rgba(255, 16, 240, 0.5);
 --wp--preset--shadow--focus-ring-strong: 0 0 0 4px rgba(255, 16, 240, 0.6);
---wp--preset--shadow--neon-md: 0 0 16px rgba(255, 16, 240, 0.45), 0 0 32px rgba(255, 16, 240, 0.2);
+--wp--preset--shadow--neon-md: 0 0 16px rgba(255, 16, 240, 0.45), 0 0 32px
+rgba(255, 16, 240, 0.2);
 --wp--preset--shadow--neon-pink-dot: 0 0 6px rgba(255, 16, 240, 0.8);
---wp--preset--shadow--neon-purple-hover: 0 0 16px rgba(190, 0, 254, 0.5), 0 0 32px rgba(190, 0, 254, 0.25);
-```
+--wp--preset--shadow--neon-purple-hover: 0 0 16px rgba(190, 0, 254, 0.5), 0 0
+32px rgba(190, 0, 254, 0.25);
+
+```text
 
 **Status:** Pending
 
@@ -79,7 +106,9 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 ### HIGH-01 — Define missing border-radius, spacing, and z-index tokens
 
 **Audit refs:** E-06, E-07, E-08
-**Root cause:** Additional token variants used in block CSS files are not present in `globals.css`. These cause wrong radii on some buttons and badges, collapsed spacing in layouts, and potential header layering issues.
+**Root cause:** Additional token variants used in block CSS files are not
+present in `globals.css`. These cause wrong radii on some buttons and badges,
+collapsed spacing in layouts, and potential header layering issues.
 **Affected files:** `src/styles/globals.css` (`:root {}` additions)
 
 **Fix:**
@@ -103,7 +132,8 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 /* Z-index extended */
 --wp--preset--z-index--20: 20;
 --wp--preset--z-index--header: 200;
-```
+
+```text
 
 **Status:** Pending
 
@@ -112,10 +142,15 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 ### HIGH-02 — Replace hardcoded hex in `globals.css` selectors
 
 **Audit ref:** B-02
-**Root cause:** New hardcoded hex values were introduced into `globals.css` component-level selectors after the previous audit's sweep. At least 15 instances of brand colours (`#FF10F0`, `#F4FF3C`, `#F6F2EB`, `#0F0F0F`) are used directly in selectors instead of token refs.
+**Root cause:** New hardcoded hex values were introduced into `globals.css`
+component-level selectors after the previous audit's sweep. At least 15
+instances of brand colours (`#FF10F0`, `#F4FF3C`, `#F6F2EB`, `#0F0F0F`) are used
+directly in selectors instead of token refs.
 **Affected files:** `src/styles/globals.css`
 
-**Fix approach:** Grep `globals.css` for `#[0-9a-fA-F]{3,6}` outside the `:root {}` block and replace each with the appropriate `var(--color-*)` or `var(--wp--preset--color--*)` token. Key mappings:
+**Fix approach:** Grep `globals.css` for `#[0-9a-fA-F]{3,6}` outside the `:root
+{}` block and replace each with the appropriate `var(--color-*)` or
+`var(--wp--preset--color--*)` token. Key mappings:
 
 | Hex | Token |
 |---|---|
@@ -132,14 +167,19 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 ### HIGH-03 — Replace hardcoded hex in `mobile-menu.css` and `style-guide-page.css`
 
 **Audit refs:** B-03, B-04
-**Root cause:** `mobile-menu.css` and `style-guide-page.css` both hardcode brand neon colours directly in selectors — these will not update when theme tokens change.
-**Affected files:** `src/styles/blocks/mobile-menu.css`, `src/styles/blocks/style-guide-page.css`
+**Root cause:** `mobile-menu.css` and `style-guide-page.css` both hardcode brand
+neon colours directly in selectors — these will not update when theme tokens
+change.
+**Affected files:** `src/styles/blocks/mobile-menu.css`,
+`src/styles/blocks/style-guide-page.css`
 
-**Fix — mobile-menu.css:**
+## Fix — mobile-menu.css
+
 - Lines 278, 327: `#FF10F0` → `var(--color-neon-pink)`
 - Lines 281, 314, 320: `#F4FF3C` → `var(--color-neon-yellow)`
 
-**Fix — style-guide-page.css:**
+## Fix — style-guide-page.css
+
 - `#0F0F0F` → `var(--color-atomic-black)`
 - `#FF10F0` → `var(--color-neon-pink)`
 - `#F4FF3C` → `var(--color-neon-yellow)`
@@ -151,7 +191,9 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 ### HIGH-04 — Convert pixel `font-size` values in `globals.css` to `clamp()`
 
 **Audit ref:** B-01
-**Root cause:** Seven `font-size: NNpx` values remain in `globals.css` selectors (outside `:root`). These were not caught in the previous audit's font-size sweep because they appear in different selectors than those audited.
+**Root cause:** Seven `font-size: NNpx` values remain in `globals.css` selectors
+(outside `:root`). These were not caught in the previous audit's font-size sweep
+because they appear in different selectors than those audited.
 **Affected files:** `src/styles/globals.css`
 
 | Line | Current | Fix |
@@ -171,24 +213,37 @@ Re-run of the codebase consistency audit after a period of inactivity. The previ
 ### HIGH-05 — Fix `SectionCard.tsx` inline style pattern
 
 **Audit ref:** C-01
-**Root cause:** `SectionCard.tsx:123` uses `style={{ borderColor: 'var(--wp--preset--color--${...})' }}` — injecting a CSS variable reference as a raw string into an inline style. This circumvents the BEM contract and doesn't follow the CSS var injection pattern used elsewhere in the codebase. The correct approach is to inject the token name as a custom property and let CSS consume it.
-**Affected files:** `src/app/components/ui/SectionCard.tsx`, `src/styles/blocks/section-card.css`
+**Root cause:** `SectionCard.tsx:123` uses `style={{ borderColor:
+'var(--wp--preset--color--${...})' }}` — injecting a CSS variable reference as a
+raw string into an inline style. This circumvents the BEM contract and doesn't
+follow the CSS var injection pattern used elsewhere in the codebase. The correct
+approach is to inject the token name as a custom property and let CSS consume
+it.
+**Affected files:** `src/app/components/ui/SectionCard.tsx`,
+`src/styles/blocks/section-card.css`
 
-**Fix in `SectionCard.tsx:123`:**
+## Fix in `SectionCard.tsx:123`
+
 ```tsx
 // Before
-style={{ borderColor: theme.accentGradient ? `var(--wp--preset--color--${theme.accentGradient.from})` : undefined }}
+style={{ borderColor: theme.accentGradient ?
+`var(--wp--preset--color--${theme.accentGradient.from})` : undefined }}
 
 // After
-style={theme.accentGradient ? { '--section-accent': `var(--wp--preset--color--${theme.accentGradient.from})` } as React.CSSProperties : undefined}
-```
+style={theme.accentGradient ? { '--section-accent':
+`var(--wp--preset--color--${theme.accentGradient.from})` } as
+React.CSSProperties : undefined}
 
-**Add to `section-card.css`:**
+```text
+
+## Add to `section-card.css`
+
 ```css
 .section-card__quote {
   border-color: var(--section-accent, var(--wp--preset--color--neon-pink));
 }
-```
+
+```text
 
 **Status:** Pending
 
@@ -197,14 +252,18 @@ style={theme.accentGradient ? { '--section-accent': `var(--wp--preset--color--${
 ### HIGH-06 — Pin unpinned package versions
 
 **Audit refs:** F-01, F-02
-**Root cause:** TypeScript and Phosphor Icons use `^` version specifiers, meaning any `pnpm install` in a fresh environment could pull a newer version. TypeScript 6 is a major version jump with potential breaking changes.
+**Root cause:** TypeScript and Phosphor Icons use `^` version specifiers,
+meaning any `pnpm install` in a fresh environment could pull a newer version.
+TypeScript 6 is a major version jump with potential breaking changes.
 **Affected file:** `package.json`
 
 **Fix:**
+
 ```json
 "typescript": "6.0.3",
 "@phosphor-icons/react": "2.1.10"
-```
+
+```text
 
 **Status:** Pending
 
@@ -215,7 +274,8 @@ style={theme.accentGradient ? { '--section-accent': `var(--wp--preset--color--${
 ### MED-01 — Replace hardcoded hex in `animation-showcase.css` and `ebook-enhanced-contrast.css`
 
 **Audit refs:** B-05, B-06
-**Files:** `src/styles/blocks/animation-showcase.css`, `src/styles/blocks/ebook-enhanced-contrast.css`
+**Files:** `src/styles/blocks/animation-showcase.css`,
+`src/styles/blocks/ebook-enhanced-contrast.css`
 
 - `animation-showcase.css`: Replace `#FF10F0`, `#F4FF3C`, `#0F0F0F` with token refs
 - `ebook-enhanced-contrast.css`: Replace `#1A1A1A` → `var(--color-surface-elevated)`, `#F4FF3C` → `var(--color-neon-yellow)`
@@ -227,7 +287,8 @@ style={theme.accentGradient ? { '--section-accent': `var(--wp--preset--color--${
 ### MED-02 — Fix `portfolio-card.css` and `light.css` hardcoded hex
 
 **Audit refs:** B-07, B-08
-**Files:** `src/styles/blocks/portfolio-card.css:132`, `src/styles/themes/light.css:365,390,396,470,495`
+**Files:** `src/styles/blocks/portfolio-card.css:132`,
+`src/styles/themes/light.css:365,390,396,470,495`
 
 - `portfolio-card.css:132`: `color: #0F0F0F` → `var(--wp--preset--color--atomic-black)`
 - `light.css`: `#1A1A1A` → create `--color-dark-ink: #1A1A1A` in light theme `:root {}` and use `var(--color-dark-ink)`
@@ -239,21 +300,29 @@ style={theme.accentGradient ? { '--section-accent': `var(--wp--preset--color--${
 ### MED-03 — Convert `UVMakeupSection.tsx` transform to CSS var injection
 
 **Audit ref:** C-03
-**Root cause:** `UVMakeupSection.tsx:235` computes a `transform: translateX(...)` via inline style. `WhySection.tsx` already uses the correct CSS var injection pattern for the same slider mechanism.
-**Affected files:** `src/app/components/sections/UVMakeupSection.tsx`, `src/styles/blocks/uv-makeup.css`
+**Root cause:** `UVMakeupSection.tsx:235` computes a `transform:
+translateX(...)` via inline style. `WhySection.tsx` already uses the correct CSS
+var injection pattern for the same slider mechanism.
+**Affected files:** `src/app/components/sections/UVMakeupSection.tsx`,
+`src/styles/blocks/uv-makeup.css`
 
 **Fix:**
+
 ```tsx
 // SectionCard.tsx — inject vars instead of computing inline
-style={{ '--slide-index': currentSlideIndex, '--slides-per-view': slidesPerView } as React.CSSProperties}
-```
+style={{ '--slide-index': currentSlideIndex, '--slides-per-view': slidesPerView
+} as React.CSSProperties}
+
+```text
 
 ```css
 /* uv-makeup.css */
 .uv-makeup-section__track {
-  transform: translateX(calc(var(--slide-index, 0) * calc(-100% / var(--slides-per-view, 1))));
+transform: translateX(calc(var(--slide-index, 0) * calc(-100% /
+var(--slides-per-view, 1))));
 }
-```
+
+```text
 
 **Status:** Pending
 
@@ -262,16 +331,21 @@ style={{ '--slide-index': currentSlideIndex, '--slides-per-view': slidesPerView 
 ### MED-04 — Fix `button-variations.css` font-family token ref
 
 **Audit ref:** A-01
-**Root cause:** `.wp-block-button__link--rounded` uses `var(--wp--preset--font-family--title)` which comes from `content-typography.css` (not yet loaded). Even after CRIT-01 is fixed, prefer using `--brand-heading` for consistency.
+**Root cause:** `.wp-block-button__link--rounded` uses
+`var(--wp--preset--font-family--title)` which comes from
+`content-typography.css` (not yet loaded). Even after CRIT-01 is fixed, prefer
+using `--brand-heading` for consistency.
 **Affected file:** `src/styles/blocks/button-variations.css:69`
 
 **Fix:**
+
 ```css
 /* Before */
 font-family: var(--wp--preset--font-family--title);
 /* After */
 font-family: var(--wp--preset--font-family--brand-heading);
-```
+
+```text
 
 **Status:** Pending
 
@@ -280,9 +354,12 @@ font-family: var(--wp--preset--font-family--brand-heading);
 ### MED-05 — Resolve `dark.css` and `light.css` remaining hex instances
 
 **Audit refs:** B-08, B-09
-**Files:** `src/styles/themes/dark.css:189,190`, `src/styles/themes/light.css:365,390,396,470,495`
+**Files:** `src/styles/themes/dark.css:189,190`,
+`src/styles/themes/light.css:365,390,396,470,495`
 
-Two `#1A1A1A`/`#F6F2EB` instances remain in `dark.css` component-level overrides. Fix with existing token refs (`var(--color-surface-elevated)`, `var(--color-text-light)`).
+Two `#1A1A1A`/`#F6F2EB` instances remain in `dark.css` component-level
+overrides. Fix with existing token refs (`var(--color-surface-elevated)`,
+`var(--color-text-light)`).
 
 **Status:** Pending
 
@@ -334,7 +411,8 @@ Run this audit again after implementing the above fixes. Use:
 `src/app/prompts/codebase-consistency-audit/orchestrator.md`
 
 Expected results after fixes:
+
 - CRIT-01: All font-size, layout, and extended colour tokens resolve ✅
-- CRIT-02: All shadow tokens resolve ✅  
+- CRIT-02: All shadow tokens resolve ✅
 - HIGH-01 through HIGH-06: Token violations eliminated ✅
 - The 30-second spot check should show zero new hex violations in blocks, zero unguarded console calls

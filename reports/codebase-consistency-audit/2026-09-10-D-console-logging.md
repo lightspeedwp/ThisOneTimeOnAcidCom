@@ -41,4 +41,5 @@
 
 ## Recommended Actions
 
-No violations found. Sub-audit D passes with zero unguarded console calls in production component/hook/util code.
+No violations found. Sub-audit D passes with zero unguarded console calls in
+production component/hook/util code.

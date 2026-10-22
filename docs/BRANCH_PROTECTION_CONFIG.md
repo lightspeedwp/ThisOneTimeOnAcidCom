@@ -1,15 +1,18 @@
 # Branch Protection Configuration
 
-> **Status:** Implementation guide for Decision GH-003 (CODEOWNERS & Branch Protection)  
-> **Owner:** @ashley  
-> **Date:** 2026-10-17  
+> **Status:** Implementation guide for Decision GH-003 (CODEOWNERS & Branch
+Protection)
+> **Owner:** @ashley
+> **Date:** 2026-10-17
 > **Repository:** lightspeedwp/ThisOneTimeOnAcidCom
 
 ## Overview
 
-This document specifies the branch protection rules that should be configured for `main` and `develop` branches in GitHub's repository settings.
+This document specifies the branch protection rules that should be configured
+for `main` and `develop` branches in GitHub's repository settings.
 
-**Note:** Branch protection is configured via **GitHub UI** (Settings → Branches → Branch protection rules), not through code.
+**Note:** Branch protection is configured via **GitHub UI** (Settings → Branches
+→ Branch protection rules), not through code.
 
 ---
 
@@ -53,7 +56,8 @@ Navigate to: **Settings → Branches → Add rule**
 
 ## CODEOWNERS Integration
 
-The `.github/CODEOWNERS` file designates review requirements for protected paths:
+The `.github/CODEOWNERS` file designates review requirements for protected
+paths:
 
 - `.github/` → @ashley (governance)
 - `scripts/` → @ashley (validation/build)
@@ -64,7 +68,8 @@ The `.github/CODEOWNERS` file designates review requirements for protected paths
 - `docs/` → @ashley (core docs)
 - Other files → @ashley (default)
 
-When a PR modifies files matching these patterns on protected branches, GitHub automatically requests review from @ashley.
+When a PR modifies files matching these patterns on protected branches, GitHub
+automatically requests review from @ashley.
 
 ---
 
@@ -72,28 +77,43 @@ When a PR modifies files matching these patterns on protected branches, GitHub a
 
 ### Feature Branch → develop (Integration)
 
-```
+```text
+
 1. Create feature branch:   feat/your-feature
-2. Make changes & commit
-3. Create PR to develop
-4. GitHub requests @ashley review (via CODEOWNERS)
-5. @ashley reviews and approves
-6. PR auto-merges to develop
+
+1. Make changes & commit
+
+1. Create PR to develop
+
+1. GitHub requests @ashley review (via CODEOWNERS)
+
+1. @ashley reviews and approves
+
+1. PR auto-merges to develop
    (Status checks pass, approval given)
-```
+
+```text
 
 ### develop → main (Release)
 
-```
+```text
+
 1. Create release branch:   release/v1.0.0
-2. Run version bump commit
-3. Create PR to main
-4. GitHub requests @ashley review (CODEOWNERS: CHANGELOG.md, package.json)
-5. @ashley reviews and approves
-6. Manual merge to main
+
+1. Run version bump commit
+
+1. Create PR to main
+
+1. GitHub requests @ashley review (CODEOWNERS: CHANGELOG.md, package.json)
+
+1. @ashley reviews and approves
+
+1. Manual merge to main
    (Auto-merge disabled for production safety)
-7. Tag release & deploy
-```
+
+1. Tag release & deploy
+
+```text
 
 ---
 
@@ -101,7 +121,7 @@ When a PR modifies files matching these patterns on protected branches, GitHub a
 
 - GitHub Docs: [About branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
 - Repository CODEOWNERS: `.github/CODEOWNERS`
-- Governance Decision: `GOVERNANCE_DECISIONS_2026-10.md` (Decision 9: GH-003)
+- Governance Decision: `GOVERNANCE*DECISIONS*2026-10.md` (Decision 9: GH-003)
 - Branch Naming: `.github/CLAUDE.md` (⚠️ Branch Naming section)
 
 ---
@@ -118,6 +138,6 @@ When a PR modifies files matching these patterns on protected branches, GitHub a
 
 ---
 
-**Implemented:** 2026-10-17  
-**Status:** Awaiting GitHub UI configuration (requires admin access)  
+**Implemented:** 2026-10-17
+**Status:** Awaiting GitHub UI configuration (requires admin access)
 **Owner:** @ashley

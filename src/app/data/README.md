@@ -4,9 +4,12 @@
 **Last Updated:** March 2, 2026
 **Scope:** Centralized Data Layer
 
-This project uses a centralized mock data system to serve as the **single source of truth** for all application content. This architecture ensures type safety, maintainability, and seamless integration with Headless WordPress.
+This project uses a centralized mock data system to serve as the **single source
+of truth** for all application content. This architecture ensures type safety,
+maintainability, and seamless integration with Headless WordPress.
 
 **Core Philosophy:**
+
 - **Decoupled Content:** No hardcoded strings in components.
 - **Type Safety:** All data follows strict TypeScript interfaces.
 - **Centralized UI Text:** Labels, error messages, and button text are stored in `data/mock/ui/`.
@@ -31,7 +34,7 @@ This project uses a centralized mock data system to serve as the **single source
 
 ## 📂 Directory Structure
 
-```
+```text
 /data/
 ├── mock/                          # Centralized mock data
 │   ├── blog/                      # Blog content (18 posts)
@@ -84,8 +87,10 @@ This project uses a centralized mock data system to serve as the **single source
 │   │
 │   ├── portfolio/                 # Portfolio entries (42 total)
 │   │   ├── featured.ts            # Featured homepage work (3 entries)
-│   │   ├── uv-makeup.ts           # UV makeup collection (11 entries: 6 original + 5 Berlin clubs)
-│   │   ├── festivals.ts           # Festival makeup collection (11 entries: 2 original + 9 international)
+│ │ ├── uv-makeup.ts # UV makeup collection (11 entries: 6 original + 5 Berlin
+clubs)
+│ │ ├── festivals.ts # Festival makeup collection (11 entries: 2 original + 9
+international)
 │   │   ├── thailand.ts            # Thailand collection (5 entries: 4 original + 1 Chiang Mai)
 │   │   ├── nail-art.ts            # Nail art portfolio (3 entries)
 │   │   ├── swiss-festivals.ts     # Swiss festival collection (6 entries)
@@ -160,16 +165,19 @@ This project uses a centralized mock data system to serve as the **single source
     ├── portfolio.ts               # Portfolio interfaces
     ├── search.ts                  # Search interfaces
     └── videos.ts                  # Video interfaces
-```
+
+```text
 
 ---
 
 ## 🛠️ Usage Patterns
 
 ### 1. UI Text & Labels
+
 Use `data/mock/ui/*` for button text, headers, empty states, and error messages.
 
-**Example (Component):**
+## Example (Component)
+
 ```tsx
 import { portfolioUI } from '@/data/mock/ui/portfolio';
 
@@ -183,40 +191,52 @@ export function PortfolioSection() {
     </section>
   );
 }
-```
+
+```text
 
 ### 2. Page Content (with Fallback)
+
 Use `data/mock/pages/*` combined with CMS hooks for robust content loading.
 
 **Example (Page):**
+
 ```tsx
 import { aboutHero } from '@/data/mock/pages/about';
 import { useContent } from '@/hooks/useContent';
 
 export function AboutPage() {
   const { data } = useContent('about');
-  
+
   // Use CMS data if available, otherwise fallback to mock
   const title = data ? data.hero.title : aboutHero.title;
-  
+
   return <Hero title={title} />;
 }
-```
+
+```text
 
 ### 3. Portfolio & Blog Data
-Use utility functions from `data/mock/blog` and `data/mock/portfolio` to access content.
 
-**Example (Data Access):**
+Use utility functions from `data/mock/blog` and `data/mock/portfolio` to access
+content.
+
+## Example (Data Access)
+
 ```tsx
-import { getPortfolioEntryById } from '@/utils/portfolioService'; // Abstraction layer
+import { getPortfolioEntryById } from '@/utils/portfolioService'; // Abstraction
+layer
 // OR directly
 import { featuredWork } from '@/data/mock/portfolio/featured';
-```
+
+```text
 
 ### 4. Portfolio Sections
-The portfolio index aggregates all entries and organises them into display sections.
 
-**Example (Portfolio Sections):**
+The portfolio index aggregates all entries and organises them into display
+sections.
+
+## Example (Portfolio Sections)
+
 ```tsx
 import { allPortfolioWork, portfolioSections } from '@/data/mock/portfolio';
 
@@ -229,7 +249,8 @@ import { allPortfolioWork, portfolioSections } from '@/data/mock/portfolio';
 //   5. Nail Art (3 entries)
 //   6. Swiss Festivals (6 entries)
 //   7. Editorial & experimental (3 entries) — NEW Phase 6
-```
+
+```text
 
 ---
 
@@ -244,7 +265,8 @@ export interface YourDataType {
   title: string;
   // ... other fields
 }
-```
+
+```text
 
 ### Step 2: Create Mock Data File
 
@@ -259,7 +281,8 @@ export const yourData: YourDataType[] = [
     // ... other fields
   }
 ];
-```
+
+```text
 
 ### Step 3: Export from Barrel
 
@@ -269,7 +292,8 @@ export * from './your-data';
 
 // /data/mock/index.ts
 export * from './your-category';
-```
+
+```text
 
 ---
 
@@ -278,48 +302,60 @@ export * from './your-category';
 ### 1. Keep Data Semantic
 
 ❌ **Don't include styling in data:**
+
 ```typescript
 {
   title: "Example",
   className: "text-xl font-bold" // ❌ No!
 }
-```
+
+```text
 
 ✅ **Use semantic properties:**
+
 ```typescript
 {
   title: "Example",
   position: "center", // ✅ Yes!
   featured: true
 }
-```
+
+```text
 
 ### 2. Use Descriptive IDs
 
 ❌ **Generic IDs:**
+
 ```typescript
 { id: '1', title: 'Work' }
-```
+
+```text
 
 ✅ **Descriptive IDs:**
+
 ```typescript
 { id: 'festival-eye-art', title: 'Festival eye art' }
-```
+
+```text
 
 ### 3. Use TypeScript Interfaces
 
 Always import and use defined types:
+
 ```typescript
 import { PortfolioEntry } from '@/data/types';
 
 export const myWork: PortfolioEntry[] = [
   // TypeScript will enforce the correct structure
 ];
-```
+
+```text
 
 ### 4. Use Sentence Case for All Titles
 
-All titles, labels, and headings must use sentence case (capitalise only the first word and proper nouns):
+All titles, labels, and headings must use sentence case (capitalise only the
+first word and proper nouns):
+
 ```typescript
 // ✅ Correct
 { title: 'Neon architecture series 1' }
@@ -328,23 +364,28 @@ All titles, labels, and headings must use sentence case (capitalise only the fir
 // ❌ Wrong
 { title: 'Neon Architecture Series 1' }
 { title: 'Berlin Called, I Answered' }
-```
+
+```text
 
 ### 5. Use CSS Variables for Colors
 
 Category colors must use CSS variable strings, not raw hex:
+
 ```typescript
 // ✅ Correct
 { color: 'var(--wp--preset--color--neon-pink)' }
 
 // ❌ Wrong
 { color: '#FF10F0' }
-```
+
+```text
 
 ---
 
 ## 🎨 Theme Support
 
-The data files support light and dark mode values where applicable, particularly for gradients and specific color tokens passed to components.
+The data files support light and dark mode values where applicable, particularly
+for gradients and specific color tokens passed to components.
 
-Ensure any new data structures added consider how they will be rendered in both light and dark modes by the consuming components.
+Ensure any new data structures added consider how they will be rendered in both
+light and dark modes by the consuming components.

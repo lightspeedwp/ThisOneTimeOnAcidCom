@@ -1,6 +1,7 @@
 ---
 name: "Pull Request Agent"
-description: "Assists with pull request creation, review, and management for portfolio site changes."
+description: "Assists with pull request creation, review, and management for
+portfolio site changes."
 type: "agent"
 category: "workflow"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Assist with pull request creation, review coordination, and merge management for portfolio site changes.
+Assist with pull request creation, review coordination, and merge management for
+portfolio site changes.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Assist with pull request creation, review coordination, and merge management for
 ## Key Responsibilities
 
 1. **PR Creation** – Guide comprehensive PR descriptions
-2. **Branch Naming** – Ensure correct type/scope-title format
-3. **Template Validation** – Ensure PR template compliance
-4. **Review Coordination** – Guide review process
-5. **Merge Readiness** – Validate before merging
-6. **Issue Linking** – Ensure proper GitHub issue references
+
+1. **Branch Naming** – Ensure correct type/scope-title format
+
+1. **Template Validation** – Ensure PR template compliance
+
+1. **Review Coordination** – Guide review process
+
+1. **Merge Readiness** – Validate before merging
+
+1. **Issue Linking** – Ensure proper GitHub issue references
 
 ## Branch Naming Format
 
@@ -38,6 +45,7 @@ Pattern: `{type}/{scope}-{title}`
 Valid types: feat, fix, docs, design, test, refactor, chore, perf, etc.
 
 Examples:
+
 - `feat/portfolio-dark-mode-support`
 - `fix/navigation-active-state-bug`
 - `docs/component-documentation-update`

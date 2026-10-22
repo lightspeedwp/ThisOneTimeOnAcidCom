@@ -1,10 +1,11 @@
 # Nova News Dark Mode Implementation Guide
 
-**Version:** 1.0.0  
-**Project:** Nova News (Book Website)  
+**Version:** 1.0.0
+**Project:** Nova News (Book Website)
 **Last Updated:** March 12, 2026
 
-Quick reference guide for implementing and maintaining dark mode across the Nova News website with neon pink and yellow accents on atomic black backgrounds.
+Quick reference guide for implementing and maintaining dark mode across the Nova
+News website with neon pink and yellow accents on atomic black backgrounds.
 
 ---
 
@@ -32,7 +33,8 @@ Quick reference guide for implementing and maintaining dark mode across the Nova
 
 **Location:** `/styles/blocks/book-dark-mode.css`
 
-This single file contains ALL dark mode overrides for the entire site. It is imported last in `globals.css` to ensure proper cascade.
+This single file contains ALL dark mode overrides for the entire site. It is
+imported last in `globals.css` to ensure proper cascade.
 
 ```css
 /* /styles/globals.css - IMPORT ORDER MATTERS */
@@ -41,13 +43,14 @@ This single file contains ALL dark mode overrides for the entire site. It is imp
 
 /* Dark Mode - MUST BE LAST */
 @import './blocks/book-dark-mode.css';
-```
+
+```text
 
 ---
 
 ## 🎨 Selector Pattern (CRITICAL)
 
-**Always use BOTH `.dark` and `body.dark` selectors:**
+## Always use BOTH `.dark` and `body.dark` selectors
 
 ```css
 /* ✅ CORRECT - Catches all theme toggle scenarios */
@@ -61,9 +64,11 @@ body.dark .component {
 .dark .component {
   background-color: var(--wp--preset--color--atomic-black);
 }
-```
 
-**Why?** The theme toggle can apply `.dark` to either `<html>` or `<body>` depending on React re-renders. Using both selectors ensures consistent behavior.
+```text
+
+**Why?** The theme toggle can apply `.dark` to either `<html>` or `<body>`
+depending on React re-renders. Using both selectors ensures consistent behavior.
 
 ---
 
@@ -80,7 +85,8 @@ body.dark .the-book-page,
 body.dark .journal-page {
   background-color: var(--wp--preset--color--atomic-black);
 }
-```
+
+```text
 
 ### 2. Typography
 
@@ -120,7 +126,8 @@ body.dark .text-muted {
 body.dark .text-fine {
   color: var(--wp--preset--color--text-fine);
 }
-```
+
+```text
 
 ### 3. Buttons
 
@@ -131,14 +138,14 @@ body.dark .button--primary {
   background: linear-gradient(135deg, #FF10F0 0%, #D4008C 100%);
   border-color: var(--wp--preset--color--neon-pink);
   color: white;
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba(255, 16, 240, 0.4),
     0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .dark .button--primary:hover,
 body.dark .button--primary:hover {
-  box-shadow: 
+  box-shadow:
     0 0 30px rgba(255, 16, 240, 0.6),
     0 6px 16px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
@@ -158,7 +165,8 @@ body.dark .button--secondary:hover {
   background: rgba(244, 255, 60, 0.1);
   box-shadow: 0 0 20px rgba(244, 255, 60, 0.5);
 }
-```
+
+```text
 
 ### 4. Forms
 
@@ -189,7 +197,7 @@ body.dark .form__input:focus,
 body.dark .form__textarea:focus {
   border-color: var(--wp--preset--color--neon-pink);
   background-color: rgba(15, 15, 15, 0.9);
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(255, 16, 240, 0.2),
     0 0 20px rgba(255, 16, 240, 0.3);
 }
@@ -199,7 +207,8 @@ body.dark .form__textarea:focus {
 body.dark .form__label {
   color: var(--wp--preset--color--text-light);
 }
-```
+
+```text
 
 ### 5. Cards
 
@@ -251,7 +260,8 @@ body.dark .card--outline-violet {
 body.dark .card--outline-violet:hover {
   box-shadow: 0 0 20px rgba(138, 99, 255, 0.4);
 }
-```
+
+```text
 
 ### 6. Links
 
@@ -266,7 +276,8 @@ body.dark a:hover {
   color: var(--wp--preset--color--neon-pink);
   text-shadow: 0 0 10px rgba(255, 16, 240, 0.6);
 }
-```
+
+```text
 
 ### 7. Code Blocks
 
@@ -279,7 +290,8 @@ body.dark code {
   border: 1px solid rgba(255, 16, 240, 0.2);
   color: #00ff00; /* Terminal green for retro aesthetic */
 }
-```
+
+```text
 
 ### 8. Tags/Badges
 
@@ -306,7 +318,8 @@ body.dark .tag--yellow {
 body.dark .tag--yellow:hover {
   box-shadow: 0 0 10px rgba(244, 255, 60, 0.4);
 }
-```
+
+```text
 
 ### 9. Special: Book Cover Glow
 
@@ -316,12 +329,13 @@ body.dark .tag--yellow:hover {
 .dark .the-book-page__cover-wrapper,
 body.dark .the-book-page__cover-wrapper {
   border: 3px solid var(--wp--preset--color--neon-pink);
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba(255, 16, 240, 0.6),
     0 0 40px rgba(255, 16, 240, 0.4),
     0 0 60px rgba(255, 16, 240, 0.2);
 }
-```
+
+```text
 
 ---
 
@@ -347,6 +361,7 @@ Before marking dark mode complete on any page:
 ## 🚨 Common Mistakes to Avoid
 
 ### 1. Forgetting Double Selectors
+
 ```css
 /* ❌ WRONG */
 .dark .card { }
@@ -354,9 +369,11 @@ Before marking dark mode complete on any page:
 /* ✅ CORRECT */
 .dark .card,
 body.dark .card { }
-```
+
+```text
 
 ### 2. Missing Hover States
+
 ```css
 /* ❌ INCOMPLETE - Only base state */
 .dark .button { }
@@ -370,9 +387,11 @@ body.dark .button:hover { }
 
 .dark .button:focus,
 body.dark .button:focus { }
-```
+
+```text
 
 ### 3. Forgetting Nested Elements
+
 ```css
 /* ❌ WRONG - Only targets parent */
 .dark .card { }
@@ -386,9 +405,11 @@ body.dark .card,
 body.dark .card h3,
 body.dark .card p,
 body.dark .card a { }
-```
+
+```text
 
 ### 4. Hardcoding Colors Instead of Variables
+
 ```css
 /* ❌ WRONG */
 .dark .text { color: #F6F2EB; }
@@ -398,7 +419,8 @@ body.dark .card a { }
 body.dark .text {
   color: var(--wp--preset--color--text-light);
 }
-```
+
+```text
 
 ---
 
@@ -422,7 +444,8 @@ body.dark .text {
 --wp--preset--color--text-light: #F6F2EB;
 --wp--preset--color--text-muted: #CFC7BB;
 --wp--preset--color--text-fine: #9C9488;
-```
+
+```text
 
 ---
 
@@ -451,10 +474,14 @@ All pages have dark mode implemented:
 ## 🎯 Adding Dark Mode to a New Page
 
 1. **No component changes needed** - The dark mode CSS is centralized
-2. **Update `/styles/blocks/book-dark-mode.css`** with new page styles
-3. **Follow the patterns above** (always double selectors)
-4. **Test with checklist**
-5. **Mark as complete** in this document
+
+1. **Update `/styles/blocks/book-dark-mode.css`** with new page styles
+
+1. **Follow the patterns above** (always double selectors)
+
+1. **Test with checklist**
+
+1. **Mark as complete** in this document
 
 ---
 
@@ -466,5 +493,5 @@ All pages have dark mode implemented:
 
 ---
 
-**Last Updated:** March 12, 2026  
+**Last Updated:** March 12, 2026
 **Maintained By:** Nova News Development Team

@@ -8,8 +8,8 @@ parent: "00-ORCHESTRATOR.md"
 
 # Theme Switcher Functionality Audit
 
-**Audit Focus:** Verify ThemeSwitcher component actually works  
-**Created:** March 12, 2026  
+**Audit Focus:** Verify ThemeSwitcher component actually works
+**Created:** March 12, 2026
 **Priority:** P0 (Critical)
 
 ---
@@ -19,11 +19,16 @@ parent: "00-ORCHESTRATOR.md"
 Investigate the `ThemeSwitcher` component to verify:
 
 1. Component renders and is visible
-2. Click handler actually fires
-3. Correct HTML attribute is set (`data-theme` vs `.dark` class)
-4. Theme is applied to correct element (`<html>`, `<body>`, or `:root`)
-5. LocalStorage persistence works
-6. Initial theme detection works on page load
+
+1. Click handler actually fires
+
+1. Correct HTML attribute is set (`data-theme` vs `.dark` class)
+
+1. Theme is applied to correct element (`<html>`, `<body>`, or `:root`)
+
+1. LocalStorage persistence works
+
+1. Initial theme detection works on page load
 
 ---
 
@@ -32,11 +37,15 @@ Investigate the `ThemeSwitcher` component to verify:
 ### Step 1: Read ThemeSwitcher Component
 
 ```bash
+
 # Open the component
+
 /components/common/ThemeSwitcher.tsx
-```
+
+```text
 
 **Check for:**
+
 - How theme state is managed (`useState`, `useReducer`, context)
 - Which element gets the theme attribute/class
 - How theme is persisted (localStorage, sessionStorage, cookies)
@@ -44,13 +53,18 @@ Investigate the `ThemeSwitcher` component to verify:
 
 ### Step 2: Verify DOM Manipulation
 
-**Questions to answer:**
+## Questions to answer
+
 1. Does it add `class="dark"` to `<body>`?
-2. Does it add `data-theme="dark"` to `<html>`?
-3. Does it add both?
-4. Does it remove light mode class/attribute?
+
+1. Does it add `data-theme="dark"` to `<html>`?
+
+1. Does it add both?
+
+1. Does it remove light mode class/attribute?
 
 **Expected behavior:**
+
 ```typescript
 // Good - Sets data-theme on documentElement
 document.documentElement.setAttribute('data-theme', 'dark');
@@ -60,16 +74,19 @@ document.body.classList.add('dark');
 
 // BAD - Does nothing
 // (no DOM manipulation)
-```
+
+```text
 
 ### Step 3: Check CSS Selector Alignment
 
-**Cross-reference with CSS files:**
+## Cross-reference with CSS files
+
 - `/styles/themes/dark.css` uses `.dark` selector
 - OR uses `[data-theme="dark"]` selector
 - Does ThemeSwitcher match what CSS expects?
 
 **Example mismatch:**
+
 ```css
 /* CSS expects this: */
 .dark body { background: #0F0F0F; }
@@ -77,39 +94,47 @@ document.body.classList.add('dark');
 /* But component does this: */
 document.documentElement.setAttribute('data-theme', 'dark');
 /* ❌ MISMATCH - CSS won't apply! */
-```
+
+```text
 
 ### Step 4: Verify LocalStorage Persistence
 
 **Check for:**
+
 ```typescript
 // On theme change
 localStorage.setItem('theme', 'dark');
 
 // On initial load
 const savedTheme = localStorage.getItem('theme');
-```
+
+```text
 
 **Questions:**
+
 1. Is theme saved to localStorage?
-2. Is saved theme loaded on mount?
-3. Does it respect `prefers-color-scheme` media query?
+
+1. Is saved theme loaded on mount?
+
+1. Does it respect `prefers-color-scheme` media query?
 
 ### Step 5: Check Initial Theme Detection
 
-**Verify mount behavior:**
+## Verify mount behavior
+
 ```typescript
 useEffect(() => {
   // Should check localStorage first
   const saved = localStorage.getItem('theme');
-  
+
   // Then check system preference
   if (!saved) {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     // Apply preference
   }
 }, []);
-```
+
+```text
 
 ---
 
@@ -125,7 +150,8 @@ document.body.setAttribute('data-theme', theme);
 
 // But CSS is targeting:
 :root[data-theme="dark"] { /* ... */ }
-```
+
+```text
 
 **Fix:** Use `documentElement` instead of `body`
 
@@ -136,12 +162,14 @@ document.body.setAttribute('data-theme', theme);
 ```css
 /* CSS file */
 .dark body { background: #0F0F0F; }
-```
+
+```text
 
 ```typescript
 // Component
 document.documentElement.setAttribute('data-theme', 'dark'); // ❌ Mismatch!
-```
+
+```text
 
 **Fix:** Use `classList.add('dark')` to match CSS selector
 
@@ -153,13 +181,14 @@ document.documentElement.setAttribute('data-theme', 'dark'); // ❌ Mismatch!
 // ❌ BAD - No localStorage
 function ThemeSwitcher() {
   const [theme, setTheme] = useState('dark');
-  
+
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
     // Missing: localStorage.setItem('theme', newTheme);
   };
 }
-```
+
+```text
 
 ### Problem 4: Race Condition on Mount
 
@@ -171,7 +200,8 @@ useEffect(() => {
   const saved = localStorage.getItem('theme');
   setTheme(saved || 'dark');
 }, []);
-```
+
+```text
 
 **Fix:** Check theme BEFORE first render (in `<head>` script or SSR)
 
@@ -189,7 +219,8 @@ useEffect(() => {
 body {
   background: #FFFFFF !important; /* ❌ Overrides dark mode */
 }
-```
+
+```text
 
 ---
 
@@ -215,21 +246,25 @@ Verify each of the following:
 Document the following in your report:
 
 ### 1. Current Implementation
+
 - Which element is targeted?
 - Which attribute/class is used?
 - How is state managed?
 - Is localStorage used?
 
 ### 2. CSS Selector Used
+
 - Does `dark.css` use `.dark` or `[data-theme="dark"]`?
 - Does this match the component?
 
 ### 3. Problems Found
+
 - List specific issues
 - Include code snippets
 - Note severity (P0, P1, P2)
 
 ### 4. Recommended Fixes
+
 - Specific code changes needed
 - File paths
 - Before/after examples
@@ -241,9 +276,10 @@ Document the following in your report:
 Save findings to: `/reports/dark-mode-audit/01-theme-switcher-audit.md`
 
 ```markdown
+
 # Theme Switcher Functionality Audit Report
 
-**Date:** March 12, 2026  
+**Date:** March 12, 2026
 **Files Audited:** `/components/common/ThemeSwitcher.tsx`
 
 ## Summary
@@ -252,47 +288,53 @@ Save findings to: `/reports/dark-mode-audit/01-theme-switcher-audit.md`
 
 ## Current Implementation
 
-**Target Element:** [document.body | document.documentElement]  
-**Method:** [class | data-attribute]  
-**Value:** [.dark | data-theme="dark"]  
-**LocalStorage Key:** [theme | app-theme | null]  
+**Target Element:** [document.body | document.documentElement]
+**Method:** [class | data-attribute]
+**Value:** [.dark | data-theme="dark"]
+**LocalStorage Key:** [theme | app-theme | null]
 **Initial Detection:** [yes | no]
 
 ## CSS Selector Analysis
 
-**Dark.css uses:** [.dark | [data-theme="dark"]]  
+**Dark.css uses:** [.dark | [data-theme="dark"]]
 **Matches component:** [YES | NO]
 
 ## Problems Found
 
 ### P0 - Critical Issues
+
 1. [Issue description]
+
    - **Location:** [file:line]
    - **Problem:** [description]
    - **Impact:** [why this breaks dark mode]
 
 ### P1 - High Priority
+
 [...]
 
 ## Recommended Fixes
 
 1. [Fix description]
+
    ```typescript
    // BEFORE
    [current code]
-   
+
    // AFTER
    [fixed code]
-   ```
+
+```text
 
 ## Files to Modify
 
 - `/components/common/ThemeSwitcher.tsx`
 - `/styles/themes/dark.css` (if selectors need updating)
-```
+
+```text
 
 ---
 
-**Audit Created:** March 12, 2026  
-**Status:** Ready to execute  
+**Audit Created:** March 12, 2026
+**Status:** Ready to execute
 **Next:** Execute this audit and generate report

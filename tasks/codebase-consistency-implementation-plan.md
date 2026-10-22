@@ -16,12 +16,20 @@ This plan was produced by running the codebase consistency audit prompt:
 The audit covered five domains across the Nova News codebase:
 
 1. Button padding and variant inconsistencies
-2. Hardcoded values vs design token usage
-3. Illegal inline styles in TSX components
-4. Unguarded console logging
-5. Undefined / mismatched CSS custom property references
 
-The most impactful finding was systemic: dozens of `--wp--preset--*` tokens were referenced across `button.css`, `read-more-btn.css`, and `not-found-page.css` but never defined anywhere. Every button focus ring, hover glow, and border radius silently fell back to empty — an invisible regression across all interactive elements site-wide.
+1. Hardcoded values vs design token usage
+
+1. Illegal inline styles in TSX components
+
+1. Unguarded console logging
+
+1. Undefined / mismatched CSS custom property references
+
+The most impactful finding was systemic: dozens of `--wp--preset--*` tokens were
+referenced across `button.css`, `read-more-btn.css`, and `not-found-page.css`
+but never defined anywhere. Every button focus ring, hover glow, and border
+radius silently fell back to empty — an invisible regression across all
+interactive elements site-wide.
 
 ---
 
@@ -37,15 +45,21 @@ The most impactful finding was systemic: dozens of `--wp--preset--*` tokens were
 
 ## 🔴 Critical Fixes
 
-Critical fixes resolve silent failures — issues where no error is thrown but visual output is broken or missing.
+Critical fixes resolve silent failures — issues where no error is thrown but
+visual output is broken or missing.
 
 ---
 
 ### CRIT-01 — Define all missing shadow, border-radius, z-index tokens
 
 **Audit refs:** E-01, E-02, E-07
-**Root cause:** `button.css` referenced `--wp--preset--shadow--focus-ring`, `--wp--preset--border-radius--full`, `--wp--preset--z-index--0` etc. — none existed in `globals.css`. Every button focus state, pill radius, and layering rule silently rendered as empty.
-**Affected files:** `src/styles/blocks/button.css`, `src/styles/blocks/read-more-btn.css`, `src/styles/tokens/content-interactive.css`
+**Root cause:** `button.css` referenced `--wp--preset--shadow--focus-ring`,
+`--wp--preset--border-radius--full`, `--wp--preset--z-index--0` etc. — none
+existed in `globals.css`. Every button focus state, pill radius, and layering
+rule silently rendered as empty.
+**Affected files:** `src/styles/blocks/button.css`,
+`src/styles/blocks/read-more-btn.css`,
+`src/styles/tokens/content-interactive.css`
 **Fix:** Add complete token blocks to `globals.css` `:root {}`
 
 ```css
@@ -53,9 +67,12 @@ Critical fixes resolve silent failures — issues where no error is thrown but v
 --wp--preset--shadow--focus-ring: 0 0 0 3px rgba(255, 16, 240, 0.4);
 --wp--preset--shadow--neon-sm: 0 0 8px rgba(255, 16, 240, 0.35);
 --wp--preset--shadow--card-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
---wp--preset--shadow--neon-pink: 0 0 12px rgba(255, 16, 240, 0.5), 0 0 24px rgba(255, 16, 240, 0.25);
---wp--preset--shadow--neon-blue: 0 0 12px rgba(31, 81, 255, 0.5), 0 0 24px rgba(31, 81, 255, 0.25);
---wp--preset--shadow--neon-purple: 0 0 12px rgba(190, 0, 254, 0.5), 0 0 24px rgba(190, 0, 254, 0.25);
+--wp--preset--shadow--neon-pink: 0 0 12px rgba(255, 16, 240, 0.5), 0 0 24px
+rgba(255, 16, 240, 0.25);
+--wp--preset--shadow--neon-blue: 0 0 12px rgba(31, 81, 255, 0.5), 0 0 24px
+rgba(31, 81, 255, 0.25);
+--wp--preset--shadow--neon-purple: 0 0 12px rgba(190, 0, 254, 0.5), 0 0 24px
+rgba(190, 0, 254, 0.25);
 
 /* Border-radius tokens */
 --wp--preset--border-radius--full: 9999px;
@@ -73,7 +90,8 @@ Critical fixes resolve silent failures — issues where no error is thrown but v
 --wp--preset--z-index--overlay: 1000;
 --wp--preset--z-index--modal: 9000;
 --wp--preset--z-index--toast: 9999;
-```
+
+```text
 
 **Implemented:** ✅ 2026-06-19 — Added to `src/styles/globals.css` `:root {}`
 
@@ -82,8 +100,13 @@ Critical fixes resolve silent failures — issues where no error is thrown but v
 ### CRIT-02 — Define missing semantic colour aliases
 
 **Audit refs:** E-03, E-04
-**Root cause:** `not-found-page.css` used `--wp--preset--color--base` and `--wp--preset--color--contrast`; `button.css` used `--wp--preset--color--primary`, `--wp--preset--color--neon-purple`, `--wp--preset--color--neon-purple-text`, `--wp--preset--color--neon-pink-text`. None were defined.
-**Affected files:** `src/styles/blocks/button.css`, `src/styles/blocks/not-found-page.css`, `src/styles/blocks/read-more-btn.css`
+**Root cause:** `not-found-page.css` used `--wp--preset--color--base` and
+`--wp--preset--color--contrast`; `button.css` used
+`--wp--preset--color--primary`, `--wp--preset--color--neon-purple`,
+`--wp--preset--color--neon-purple-text`, `--wp--preset--color--neon-pink-text`.
+None were defined.
+**Affected files:** `src/styles/blocks/button.css`,
+`src/styles/blocks/not-found-page.css`, `src/styles/blocks/read-more-btn.css`
 **Fix:**
 
 ```css
@@ -97,7 +120,8 @@ Critical fixes resolve silent failures — issues where no error is thrown but v
 --wp--preset--color--neon-purple-text: #6B3FCC;
 --wp--preset--color--neon-pink-text: #CC007A;
 --wp--preset--color--neon-red: #FF3860;
-```
+
+```text
 
 **Implemented:** ✅ 2026-06-19 — Added to `src/styles/globals.css` `:root {}`
 
@@ -106,15 +130,21 @@ Critical fixes resolve silent failures — issues where no error is thrown but v
 ### CRIT-03 — Define missing font-family and spacing tokens
 
 **Audit refs:** E-05, E-06
-**Root cause:** `button-variations.css` referenced `--wp--preset--font-family--brand-body`; multiple layout files referenced `--wp--preset--spacing--fluid-*` and `--wp--preset--spacing--section-*`. None existed. Buttons fell back to browser default font; section padding collapsed.
-**Affected files:** `src/styles/blocks/button-variations.css`, multiple layout blocks
+**Root cause:** `button-variations.css` referenced
+`--wp--preset--font-family--brand-body`; multiple layout files referenced
+`--wp--preset--spacing--fluid-*` and `--wp--preset--spacing--section-*`. None
+existed. Buttons fell back to browser default font; section padding collapsed.
+**Affected files:** `src/styles/blocks/button-variations.css`, multiple layout
+blocks
 **Fix:**
 
 ```css
 /* Font family brand aliases */
---wp--preset--font-family--brand-heading: var(--wp--preset--font-family--heading);
+--wp--preset--font-family--brand-heading:
+var(--wp--preset--font-family--heading);
 --wp--preset--font-family--brand-body: var(--wp--preset--font-family--body);
---wp--preset--font-family--brand-title: 'Righteous', var(--wp--preset--font-family--heading);
+--wp--preset--font-family--brand-title: 'Righteous',
+var(--wp--preset--font-family--heading);
 
 /* Spacing scale */
 --wp--preset--spacing--10: 0.5rem;
@@ -134,7 +164,8 @@ Critical fixes resolve silent failures — issues where no error is thrown but v
 --wp--preset--spacing--fluid-2xl: clamp(4rem, 10vw, 8rem);
 --wp--preset--spacing--section-horizontal: clamp(1.5rem, 6vw, 4rem);
 --wp--preset--spacing--section-vertical: clamp(3rem, 8vw, 6rem);
-```
+
+```text
 
 **Implemented:** ✅ 2026-06-19 — Added to `src/styles/globals.css` `:root {}`
 
@@ -143,14 +174,19 @@ Critical fixes resolve silent failures — issues where no error is thrown but v
 ### CRIT-04 — Consolidate button padding to fluid `clamp()` system
 
 **Audit refs:** A-01, A-02, A-03
-**Root cause:** Three competing button systems existed (`.btn`, `.button`, `.wp-block-button__link`) with incompatible padding. `.wp-block-button__link` used hardcoded `12px 24px`; `read-more-btn.css` used fixed `rem` values; `.button` in `globals.css` used pixel values. None were responsive.
+**Root cause:** Three competing button systems existed (`.btn`, `.button`,
+`.wp-block-button_*link`) with incompatible padding. `.wp-block-button*_link`
+used hardcoded `12px 24px`; `read-more-btn.css` used fixed `rem` values;
+`.button` in `globals.css` used pixel values. None were responsive.
 
-**Three systems identified:**
+## Three systems identified
+
 - `.btn` — canonical system in `button.css` (correct)
 - `.button` — legacy in `globals.css` (used by `EbookLandingPage.tsx`, `EbookSettingsModal.tsx` — cannot delete)
 - `.wp-block-button__link` — WordPress-style in `button-variations.css`
 
-**Fix approach:** Standardise padding to `clamp()` in all three. `.button` retained as legacy but modernised.
+**Fix approach:** Standardise padding to `clamp()` in all three. `.button`
+retained as legacy but modernised.
 
 **Changes:**
 
@@ -168,14 +204,17 @@ Critical fixes resolve silent failures — issues where no error is thrown but v
 
 ## 🟠 High Priority Fixes
 
-High priority fixes address standards violations that will cause regressions if left unchecked.
+High priority fixes address standards violations that will cause regressions if
+left unchecked.
 
 ---
 
 ### HIGH-01 — Replace hardcoded hex in `globals.css` selectors
 
 **Audit ref:** B-01
-**Root cause:** Component-level selectors in `globals.css` hardcoded brand colours directly instead of consuming design tokens. Theme switching would not affect these values.
+**Root cause:** Component-level selectors in `globals.css` hardcoded brand
+colours directly instead of consuming design tokens. Theme switching would not
+affect these values.
 **Affected file:** `src/styles/globals.css`
 
 | Selector | Before | After |
@@ -194,7 +233,8 @@ High priority fixes address standards violations that will cause regressions if 
 ### HIGH-02 — Replace hardcoded pixel `font-size` with `clamp()`
 
 **Audit ref:** B-03
-**Root cause:** Typography utility classes in `globals.css` used fixed `px` values, breaking fluid scaling and accessibility zoom behaviour.
+**Root cause:** Typography utility classes in `globals.css` used fixed `px`
+values, breaking fluid scaling and accessibility zoom behaviour.
 **Affected file:** `src/styles/globals.css`
 
 | Class | Before | After |
@@ -212,7 +252,9 @@ High priority fixes address standards violations that will cause regressions if 
 ### HIGH-03 — Fix unguarded `console.log` in `ThemeToggleES5.tsx`
 
 **Audit ref:** D-01
-**Root cause:** `ThemeToggleES5.tsx:79` used `if (typeof console !== 'undefined' && console.log)` — a non-standard guard that does not strip the log from production builds.
+**Root cause:** `ThemeToggleES5.tsx:79` used `if (typeof console !== 'undefined'
+&& console.log)` — a non-standard guard that does not strip the log from
+production builds.
 **Affected file:** `src/app/components/common/ThemeToggleES5.tsx`
 **Fix:**
 
@@ -226,9 +268,12 @@ if (typeof console !== 'undefined' && console.log) {
 if (import.meta.env.DEV) {
   console.log('Theme toggled to:', newMode ? 'dark' : 'light');
 }
-```
 
-**Note:** `import.meta.env.DEV` is bundler-safe in Vite but forbidden in router/lib code per bundler constraints. This component is a React component (not a lib file), so the usage is acceptable.
+```text
+
+**Note:** `import.meta.env.DEV` is bundler-safe in Vite but forbidden in
+router/lib code per bundler constraints. This component is a React component
+(not a lib file), so the usage is acceptable.
 
 **Implemented:** ✅ 2026-06-19
 
@@ -237,18 +282,24 @@ if (import.meta.env.DEV) {
 ### HIGH-04 — Refactor `PaletteDemoModal.tsx` layout inline styles to BEM
 
 **Audit ref:** C-01
-**Root cause:** 40+ inline styles for layout, spacing, and typography in `PaletteDemoModal.tsx` — the demo functions `DashboardDemo`, `GradientTextDemo`, `ButtonDemo`, `NavigationDemo`, `GradientBackgroundDemo` all used `style={{}}` for structural styles.
-**Affected files:** `src/app/components/ui/PaletteDemoModal.tsx`, `src/styles/blocks/palette-demo-modal.css`
+**Root cause:** 40+ inline styles for layout, spacing, and typography in
+`PaletteDemoModal.tsx` — the demo functions `DashboardDemo`, `GradientTextDemo`,
+`ButtonDemo`, `NavigationDemo`, `GradientBackgroundDemo` all used `style={{}}`
+for structural styles.
+**Affected files:** `src/app/components/ui/PaletteDemoModal.tsx`,
+`src/styles/blocks/palette-demo-modal.css`
 
-**New BEM classes created in `palette-demo-modal.css`:**
+## New BEM classes created in `palette-demo-modal.css`
+
 - `.demo-section` — base wrapper with padding and background
 - `.demo-section--padded`, `.demo-section--centered` — modifiers
-- `.demo-section__grid`, `.demo-section__flex-row` — layout children
-- `.demo-section__heading`, `.demo-section__body-text`, `.demo-section__subtext` — typography
-- `.demo-section__nav`, `.demo-section__nav-link` — navigation demo
-- `.demo-card__title`, `.demo-card__body`, `.demo-card__btn` — card elements
+- `.demo-section_*grid`, `.demo-section*_flex-row` — layout children
+- `.demo-section_*heading`, `.demo-section**body-text`, `.demo-section*_subtext` — typography
+- `.demo-section_*nav`, `.demo-section*_nav-link` — navigation demo
+- `.demo-card_*title`, `.demo-card**body`, `.demo-card*_btn` — card elements
 
 **Preserved as acceptable exceptions** (dynamic, no CSS alternative):
+
 - `style={{ color: color.hex }}` — live colour swatch
 - `style={{ background: 'linear-gradient(...)' }}` — dynamic gradient from data
 - `style={{ boxShadow: ... }}` — dynamic neon from data
@@ -260,10 +311,13 @@ if (import.meta.env.DEV) {
 ### HIGH-05 — Sweep `dark.css` and `dark-extended.css` — replace hex with tokens
 
 **Audit refs:** B-02, E-09
-**Root cause:** Component-level overrides in the theme files bypassed the token system and hardcoded brand colours directly. Theme reconfiguration would require hunting every hex occurrence rather than changing one token value.
-**Affected files:** `src/styles/themes/dark.css`, `src/styles/themes/dark-extended.css`
+**Root cause:** Component-level overrides in the theme files bypassed the token
+system and hardcoded brand colours directly. Theme reconfiguration would require
+hunting every hex occurrence rather than changing one token value.
+**Affected files:** `src/styles/themes/dark.css`,
+`src/styles/themes/dark-extended.css`
 
-**Replacements applied (systemic pass):**
+## Replacements applied (systemic pass)
 
 | Hex | Token |
 |---|---|
@@ -276,7 +330,8 @@ if (import.meta.env.DEV) {
 | `#222222` | `var(--color-divider)` |
 | `#FFFFFF` | `var(--wp--preset--color--white)` |
 
-**Scope:** body, header, footer, sidebar, nav-menu, figure, figcaption overrides.
+**Scope:** body, header, footer, sidebar, nav-menu, figure, figcaption
+overrides.
 
 **Implemented:** ✅ 2026-06-19
 
@@ -284,17 +339,23 @@ if (import.meta.env.DEV) {
 
 ## 🟡 Medium Priority Fixes
 
-Medium fixes address inconsistencies that violate the BEM/token contract but do not produce immediate visual regressions.
+Medium fixes address inconsistencies that violate the BEM/token contract but do
+not produce immediate visual regressions.
 
 ---
 
 ### MED-01 — CSS custom property injection for `TimelinePage.tsx` dynamic colours
 
 **Audit ref:** C-02
-**Root cause:** `TimelinePage.tsx` applied dynamic category colours via `style={{ borderColor: accentColor }}`, `style={{ color: accentColor }}`, and `style={{ backgroundColor: catMeta.neonColour }}` directly — a violation of the no-inline-styles rule.
-**Approach:** Use the accepted CSS var injection pattern. Inject runtime value as a custom property; consume in CSS with `var()`.
+**Root cause:** `TimelinePage.tsx` applied dynamic category colours via
+`style={{ borderColor: accentColor }}`, `style={{ color: accentColor }}`, and
+`style={{ backgroundColor: catMeta.neonColour }}` directly — a violation of the
+no-inline-styles rule.
+**Approach:** Use the accepted CSS var injection pattern. Inject runtime value
+as a custom property; consume in CSS with `var()`.
 
-**Changes in `TimelinePage.tsx`:**
+## Changes in `TimelinePage.tsx`
+
 ```tsx
 // Before
 style={{ borderColor: accentColor }}
@@ -305,16 +366,24 @@ style={{ backgroundColor: catMeta.neonColour }}
 style={{ '--timeline-accent': accentColor } as React.CSSProperties}
 // icon color: removed from JSX, handled by CSS var
 style={{ '--cat-neon': catMeta.neonColour } as React.CSSProperties}
-```
 
-**Changes in `timeline-page.css`:**
+```text
+
+## Changes in `timeline-page.css`
+
 ```css
-.timeline-card { border: 2px solid var(--timeline-accent, var(--wp--preset--color--neutral-200)); }
-.timeline-card__icon { color: var(--timeline-accent, var(--wp--preset--color--neon-pink)); }
-.timeline-card__category { background-color: var(--cat-neon, var(--wp--preset--color--neon-pink)); }
-.timeline-legend-item__icon { color: var(--cat-neon, var(--wp--preset--color--neon-pink)); }
-.timeline-legend-item__color { background-color: var(--cat-neon, var(--wp--preset--color--neon-pink)); }
-```
+.timeline-card { border: 2px solid var(--timeline-accent,
+var(--wp--preset--color--neutral-200)); }
+.timeline-card__icon { color: var(--timeline-accent,
+var(--wp--preset--color--neon-pink)); }
+.timeline-card__category { background-color: var(--cat-neon,
+var(--wp--preset--color--neon-pink)); }
+.timeline-legend-item__icon { color: var(--cat-neon,
+var(--wp--preset--color--neon-pink)); }
+.timeline-legend-item__color { background-color: var(--cat-neon,
+var(--wp--preset--color--neon-pink)); }
+
+```text
 
 **Implemented:** ✅ 2026-06-19
 
@@ -323,24 +392,29 @@ style={{ '--cat-neon': catMeta.neonColour } as React.CSSProperties}
 ### MED-02 — CSS custom property injection for `HistoryPage.tsx` legend dots
 
 **Audit ref:** C-03
-**Root cause:** `HistoryPage.tsx:134` used `style={{ background: catHex }}` on legend dot elements.
+**Root cause:** `HistoryPage.tsx:134` used `style={{ background: catHex }}` on
+legend dot elements.
 **Approach:** Same CSS var injection pattern as MED-01.
 
-**Changes in `HistoryPage.tsx`:**
+## Changes in `HistoryPage.tsx`
+
 ```tsx
 // Before
 style={{ background: catHex }}
 
 // After
 style={{ '--cat-hex': catHex } as React.CSSProperties}
-```
 
-**Changes in `history-page.css`:**
+```text
+
+## Changes in `history-page.css`
+
 ```css
 .history-page__legend-dot {
   background: var(--cat-hex, var(--wp--preset--color--neon-pink));
 }
-```
+
+```text
 
 **Implemented:** ✅ 2026-06-19
 
@@ -354,17 +428,23 @@ style={{ '--cat-hex': catHex } as React.CSSProperties}
 - **`PressKitPage.tsx:38`** — `backgroundImage` with dynamic URL + gradient overlay. No CSS-only alternative for a data-driven URL.
 - **`WhySection.tsx:152`** — CSS custom property injection for slider animation (`--slide-index`, `--slides-per-view`). This is the accepted pattern, used correctly.
 
-**Implemented:** ✅ 2026-06-19 — Confirmed accepted, documented in consolidated report.
+**Implemented:** ✅ 2026-06-19 — Confirmed accepted, documented in consolidated
+report.
 
 ---
 
 ### MED-04 — Deprecate legacy `.button` block in `globals.css`
 
 **Audit ref:** B-05
-**Root cause:** The legacy `.button` system in `globals.css` conflicts with the canonical `.btn` system in `button.css`. Cannot be deleted because `EbookLandingPage.tsx` and `EbookSettingsModal.tsx` depend on `.button--primary` and `.button--secondary`.
-**Approach:** Modernise in place — update to use `clamp()`, token refs, and brand fonts. Add deprecation comment. Do not delete.
+**Root cause:** The legacy `.button` system in `globals.css` conflicts with the
+canonical `.btn` system in `button.css`. Cannot be deleted because
+`EbookLandingPage.tsx` and `EbookSettingsModal.tsx` depend on `.button--primary`
+and `.button--secondary`.
+**Approach:** Modernise in place — update to use `clamp()`, token refs, and
+brand fonts. Add deprecation comment. Do not delete.
 
-**Changes applied to `.button` block in `globals.css`:**
+## Changes applied to `.button` block in `globals.css`
+
 - `padding: 12px 24px` → `padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 4vw, 2.5rem)`
 - `font-family: [literal]` → `font-family: var(--wp--preset--font-family--brand-heading)`
 - `font-size: [px]` → `font-size: clamp(0.875rem, 1.5vw, 1rem)`
@@ -379,10 +459,16 @@ style={{ '--cat-hex': catHex } as React.CSSProperties}
 ### MED-05 — Adopt single token convention going forward
 
 **Audit refs:** B-04, E-08
-**Root cause:** Some CSS files use legacy `--color-*` tokens; others use `--wp--preset--color--*`. The legacy tokens are aliased from the wp-preset tokens in `globals.css` `:root {}`, so they technically resolve — but mixing conventions makes grepping and auditing harder.
-**Decision:** Both conventions remain valid. Legacy `--color-*` tokens are aliased and intentionally preserved for backwards compatibility. New code should prefer `--wp--preset--color--*`. No bulk rename required.
+**Root cause:** Some CSS files use legacy `--color-*` tokens; others use
+`--wp--preset--color--*`. The legacy tokens are aliased from the wp-preset
+tokens in `globals.css` `:root {}`, so they technically resolve — but mixing
+conventions makes grepping and auditing harder.
+**Decision:** Both conventions remain valid. Legacy `--color-*` tokens are
+aliased and intentionally preserved for backwards compatibility. New code should
+prefer `--wp--preset--color--*`. No bulk rename required.
 
-**Status:** Accepted as-is — documented as intentional dual-alias system. No file changes needed.
+**Status:** Accepted as-is — documented as intentional dual-alias system. No
+file changes needed.
 
 ---
 
@@ -410,21 +496,28 @@ These inline styles were reviewed and classified as acceptable during the audit:
 
 ## Re-run Instructions
 
-Run this audit again after any major sprint to catch regressions. The prompt is at:
+Run this audit again after any major sprint to catch regressions. The prompt is
+at:
 `/prompts/codebase-consistency-audit/orchestrator.md`
 
-**Trigger conditions:**
+## Trigger conditions
+
 - After adding a new page component
 - After any CSS refactor
 - Before a production deployment
 - After a third-party dependency update
 
 **Process:**
+
 1. Archive the previous report folder to `/reports/archive/`
-2. Execute all 5 sub-audits in order: E → B → A → C → D
-3. Save reports to `/reports/codebase-consistency-audit/`
-4. Save actionable plan to `/plan/` (this folder)
-5. Update task tracking in `/tasks/`
+
+1. Execute all 5 sub-audits in order: E → B → A → C → D
+
+1. Save reports to `/reports/codebase-consistency-audit/`
+
+1. Save actionable plan to `/plan/` (this folder)
+
+1. Update task tracking in `/tasks/`
 
 ---
 

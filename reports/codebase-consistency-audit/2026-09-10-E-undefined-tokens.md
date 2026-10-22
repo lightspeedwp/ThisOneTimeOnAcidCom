@@ -7,18 +7,26 @@
 
 ## Critical Discovery — `src/styles/tokens/` Is Never Imported
 
-The directory `src/styles/tokens/` contains 5 CSS files that together define the font-size scale, extended colour palette, layout widths, and interactive component tokens used across the entire site. **None of these files are imported anywhere** — not in `globals.css`, not in any TSX component, not in `index.css`.
+The directory `src/styles/tokens/` contains 5 CSS files that together define the
+font-size scale, extended colour palette, layout widths, and interactive
+component tokens used across the entire site. **None of these files are imported
+anywhere** — not in `globals.css`, not in any TSX component, not in `index.css`.
 
-```
+```text
 src/styles/tokens/
 ├── content-animations.css   ← NEVER IMPORTED
-├── content-colors.css        ← NEVER IMPORTED  
+├── content-colors.css        ← NEVER IMPORTED
 ├── content-interactive.css   ← NEVER IMPORTED
 ├── content-layouts.css       ← NEVER IMPORTED
 └── content-typography.css    ← NEVER IMPORTED
-```
 
-**Result:** Every `--wp--preset--font-size--*`, `--wp--preset--layout--*`, and extended colour token referenced in block CSS files resolves to `undefined`, silently falling back to browser defaults (typically `0`, `inherit`, or `auto`). This means text size hierarchy, max-width containers, and content accent colours are all broken.
+```text
+
+**Result:** Every `--wp--preset--font-size--*`, `--wp--preset--layout--*`, and
+extended colour token referenced in block CSS files resolves to `undefined`,
+silently falling back to browser defaults (typically `0`, `inherit`, or `auto`).
+This means text size hierarchy, max-width containers, and content accent colours
+are all broken.
 
 ---
 
@@ -71,8 +79,10 @@ None.
 
 ## Recommended Actions
 
-**Priority 1 (Critical — do first):**
-Add `@import` statements for all 5 token files to `globals.css` immediately after the existing `@import "tailwindcss"` line:
+## Priority 1 (Critical — do first)
+
+Add `@import` statements for all 5 token files to `globals.css` immediately
+after the existing `@import "tailwindcss"` line:
 
 ```css
 /* At the top of src/styles/globals.css, after the tailwindcss import */
@@ -81,10 +91,13 @@ Add `@import` statements for all 5 token files to `globals.css` immediately afte
 @import "./tokens/content-layouts.css";
 @import "./tokens/content-interactive.css";
 @import "./tokens/content-animations.css";
-```
 
-**Priority 2 (High — after imports are added):**
+```text
+
+## Priority 2 (High — after imports are added)
+
 Define missing extended tokens in `globals.css` `:root {}`:
+
 - Shadow variants: `--wp--preset--shadow--sm/md/lg/xl/2xl/card/action-btn/focus-ring-pink/focus-ring-strong/neon-md/neon-pink-dot/neon-purple-hover`
 - Border-radius: `--wp--preset--border-radius--pill` (= 9999px), `--xl` (1.5rem), `--2xl` (2rem)
 - Spacing: `--wp--preset--spacing--70` (4rem), `--90` (5.5rem), `--100` (6rem), `--block-gap` (2rem), `--fluid-3xl` (clamp(6rem, 14vw, 12rem))

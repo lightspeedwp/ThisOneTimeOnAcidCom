@@ -1,12 +1,13 @@
 # ThreeColumnLayout Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
-Responsive three-column grid layout wrapper for equal-weight content presentations.
+Responsive three-column grid layout wrapper for equal-weight content
+presentations.
 
-**File:** `/components/sections/ThreeColumnLayout.tsx`  
-**WordPress Equivalent:** `core/columns` block with 3 columns  
+**File:** `/components/sections/ThreeColumnLayout.tsx`
+**WordPress Equivalent:** `core/columns` block with 3 columns
 **Used In:** WhySection, feature showcases, service displays
 
 ---
@@ -14,6 +15,7 @@ Responsive three-column grid layout wrapper for equal-weight content presentatio
 ## Purpose
 
 The ThreeColumnLayout is a **reusable layout wrapper** that provides:
+
 - Responsive 3-column grid (mobile → tablet → desktop)
 - Optional header and footer sections
 - Configurable gap and padding
@@ -23,6 +25,7 @@ The ThreeColumnLayout is a **reusable layout wrapper** that provides:
 - Consistent Guidelines.md spacing patterns
 
 **Primary Use Cases:**
+
 - Feature showcases (Why I Do Makeup section)
 - Service offerings with icons
 - Team member profiles
@@ -40,7 +43,8 @@ import { ThreeColumnLayout } from './components/sections/ThreeColumnLayout';
 <ThreeColumnLayout
   header={
     <div className="text-center mb-fluid-2xl">
-      <h2 className="text-section-h2 font-heading font-bold text-gray-800 mb-fluid-md">
+<h2 className="text-section-h2 font-heading font-bold text-gray-800
+mb-fluid-md">
         Why I Do Makeup
       </h2>
       <p className="text-body-fluid font-body text-gray-600 max-w-2xl mx-auto">
@@ -60,8 +64,10 @@ import { ThreeColumnLayout } from './components/sections/ThreeColumnLayout';
   verticalAlignment="stretch"
   decorativeElements={
     <>
-      <div className="absolute top-10 left-10 w-32 h-32 bg-pink-200/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl" />
+<div className="absolute top-10 left-10 w-32 h-32 bg-pink-200/30 rounded-full
+blur-3xl" />
+<div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-200/30
+rounded-full blur-3xl" />
     </>
   }
   footer={
@@ -76,7 +82,8 @@ import { ThreeColumnLayout } from './components/sections/ThreeColumnLayout';
   <FeatureCard icon={<JoyIcon />} title="Brings Me Joy" description="..." />
   <FeatureCard icon={<GrowthIcon />} title="To Keep Growing" description="..." />
 </ThreeColumnLayout>
-```
+
+```text
 
 ---
 
@@ -87,30 +94,35 @@ import { ThreeColumnLayout } from './components/sections/ThreeColumnLayout';
 ```typescript
 interface ThreeColumnLayoutProps {
   /**
+
    * Content items to display in three columns
    * Can be any React components (cards, features, etc.)
    */
   children: React.ReactNode;
 }
-```
+
+```text
 
 ### Optional Props
 
 ```typescript
 interface ThreeColumnLayoutProps {
   /**
+
    * Additional CSS classes for section customization
    * @default ""
    */
   className?: string;
-  
+
   /**
+
    * HTML id attribute for anchor linking
    * @default undefined
    */
   id?: string;
-  
+
   /**
+
    * Background gradient configuration
    * Uses Tailwind gradient classes
    * @default undefined (no gradient)
@@ -120,59 +132,68 @@ interface ThreeColumnLayoutProps {
     via?: string;    // Optional middle color (e.g., 'pink-50')
     to: string;      // Ending color (e.g., 'orange-50')
   };
-  
+
   /**
+
    * Gap between columns using fluid spacing scale
    * @default 'lg'
    */
   gap?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-  
+
   /**
+
    * Vertical padding using fluid spacing scale
    * @default '3xl'
    */
   padding?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-  
+
   /**
+
    * Number of columns on mobile devices
    * @default 1
    */
   mobileColumns?: 1 | 2;
-  
+
   /**
+
    * Number of columns on tablet devices
    * @default 2
    */
   tabletColumns?: 1 | 2 | 3;
-  
+
   /**
+
    * Vertical alignment of grid items
    * @default 'stretch' (equal heights)
    */
   verticalAlignment?: 'top' | 'center' | 'bottom' | 'stretch';
-  
+
   /**
+
    * Optional decorative elements (blur orbs, shapes, etc.)
    * Rendered with pointer-events-none and aria-hidden
    * @default undefined
    */
   decorativeElements?: React.ReactNode;
-  
+
   /**
+
    * Optional header content above the grid
    * Typically section title and subtitle
    * @default undefined
    */
   header?: React.ReactNode;
-  
+
   /**
+
    * Optional footer content below the grid
    * Typically CTAs or additional links
    * @default undefined
    */
   footer?: React.ReactNode;
 }
-```
+
+```text
 
 ---
 
@@ -189,9 +210,11 @@ interface ThreeColumnLayoutProps {
   py-fluid-3xl                                     // clamp(2.5rem, 2rem + 2.5vw, 4rem)
   px-fluid-md                                      // clamp(1rem, 0.6rem + 2vw, 2rem)
 ">
-```
+
+```text
 
 **Key Classes:**
+
 - `relative` - Position context for absolute decorative elements
 - `overflow-hidden` - Clip decorative blur orbs at edges
 - `bg-gradient-to-br` - Diagonal gradient background
@@ -207,9 +230,11 @@ interface ThreeColumnLayoutProps {
   relative                                         // Position context
   z-10                                             // Above decorative elements
 ">
-```
+
+```text
 
 **Key Classes:**
+
 - `max-w-7xl` - Maximum content width (1280px)
 - `mx-auto` - Center container
 - `relative z-10` - Stack above background decorations
@@ -225,9 +250,11 @@ interface ThreeColumnLayoutProps {
   gap-fluid-lg                                     // clamp(1.5rem, 1rem + 2.5vw, 3rem)
   items-stretch                                    // Equal height items
 ">
-```
+
+```text
 
 **Key Classes:**
+
 - `grid` - Enable CSS Grid
 - `grid-cols-1` - Mobile: 1 column
 - `md:grid-cols-2` - Tablet: 2 columns (768px+)
@@ -250,14 +277,17 @@ const gapClasses = {
   '2xl': 'gap-fluid-2xl',  // clamp(2.5rem, 2rem + 2.5vw, 4rem)
   '3xl': 'gap-fluid-3xl',  // clamp(3rem, 2.5rem + 2.5vw, 4.5rem)
 };
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 <ThreeColumnLayout gap="lg">  {/* 1.5rem → 3rem responsive */}
   {children}
 </ThreeColumnLayout>
-```
+
+```text
 
 ### Padding Options
 
@@ -270,14 +300,17 @@ const paddingClasses = {
   '2xl': 'py-fluid-2xl px-fluid-md', // Vertical: 2.5-4rem, Horizontal: 1-2rem
   '3xl': 'py-fluid-3xl px-fluid-md', // Vertical: 3-4.5rem, Horizontal: 1-2rem
 };
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 <ThreeColumnLayout padding="3xl">  {/* Maximum section spacing */}
   {children}
 </ThreeColumnLayout>
-```
+
+```text
 
 ---
 
@@ -285,11 +318,12 @@ const paddingClasses = {
 
 ### Breakpoint Strategy
 
-```
+```text
 Mobile (< 768px):   1 column (mobileColumns prop)
 Tablet (768-1023px): 2 columns (tabletColumns prop)
 Desktop (1024px+):  3 columns (fixed)
-```
+
+```text
 
 ### Column Configuration Examples
 
@@ -308,7 +342,8 @@ Desktop (1024px+):  3 columns (fixed)
 <ThreeColumnLayout mobileColumns={2} tabletColumns={2}>
   {children}
 </ThreeColumnLayout>
-```
+
+```text
 
 ### Vertical Alignment
 
@@ -319,9 +354,11 @@ const alignmentClasses = {
   bottom: 'items-end',      // Align items to bottom
   stretch: 'items-stretch', // Equal height (default)
 };
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // Equal height cards (recommended)
 <ThreeColumnLayout verticalAlignment="stretch">
@@ -332,7 +369,8 @@ const alignmentClasses = {
 <ThreeColumnLayout verticalAlignment="top">
   {children}
 </ThreeColumnLayout>
-```
+
+```text
 
 ---
 
@@ -349,15 +387,18 @@ const alignmentClasses = {
     to: 'orange-50'       // Ending color
   }}
 >
-```
+
+```text
 
 **Generated Classes:**
+
 ```css
-.bg-gradient-to-br 
-.from-purple-50 
-.via-pink-50 
+.bg-gradient-to-br
+.from-purple-50
+.via-pink-50
 .to-orange-50
-```
+
+```text
 
 ### Common Gradient Patterns
 
@@ -386,7 +427,8 @@ backgroundGradient={{
 <ThreeColumnLayout>
   {/* No backgroundGradient prop */}
 </ThreeColumnLayout>
-```
+
+```text
 
 ---
 
@@ -400,34 +442,36 @@ backgroundGradient={{
     <>
       {/* Top-left blur orb */}
       <div className="
-        absolute top-10 left-10 
-        w-32 h-32 
-        bg-pink-200/30 
+        absolute top-10 left-10
+        w-32 h-32
+        bg-pink-200/30
         rounded-full blur-3xl
       " />
-      
+
       {/* Bottom-right blur orb */}
       <div className="
-        absolute bottom-10 right-10 
-        w-40 h-40 
-        bg-purple-200/30 
+        absolute bottom-10 right-10
+        w-40 h-40
+        bg-purple-200/30
         rounded-full blur-3xl
       " />
-      
+
       {/* Center accent */}
       <div className="
-        absolute top-1/2 left-1/2 
+        absolute top-1/2 left-1/2
         -translate-x-1/2 -translate-y-1/2
-        w-64 h-64 
-        bg-orange-200/20 
+        w-64 h-64
+        bg-orange-200/20
         rounded-full blur-3xl
       " />
     </>
   }
 >
-```
 
-**Decorative Element Styling:**
+```text
+
+## Decorative Element Styling
+
 - Always wrapped in `pointer-events-none` container
 - Always includes `aria-hidden="true"` for accessibility
 - Positioned with `absolute`
@@ -445,19 +489,19 @@ backgroundGradient={{
   header={
     <div className="text-center mb-fluid-2xl">
       <h2 className="
-        text-section-h2 
-        font-heading 
-        font-bold 
-        text-gray-800 
+        text-section-h2
+        font-heading
+        font-bold
+        text-gray-800
         mb-fluid-md
       ">
         Why I Do Makeup
       </h2>
       <p className="
-        text-body-fluid 
-        font-body 
-        text-gray-600 
-        max-w-2xl 
+        text-body-fluid
+        font-body
+        text-gray-600
+        max-w-2xl
         mx-auto
       ">
         Three core reasons that drive my passion for makeup artistry
@@ -465,7 +509,8 @@ backgroundGradient={{
     </div>
   }
 >
-```
+
+```text
 
 ### Footer Pattern (Call to Action)
 
@@ -474,16 +519,16 @@ backgroundGradient={{
   footer={
     <div className="text-center mt-fluid-2xl">
       <button className="
-        w-full sm:w-auto 
-        bg-gradient-pink-purple-blue 
-        hover:from-purple-700 hover:to-pink-700 
-        text-white 
-        px-button py-button 
-        font-body font-medium 
-        text-button-fluid 
-        rounded-lg 
-        shadow-lg hover:shadow-xl 
-        transform hover:scale-105 
+        w-full sm:w-auto
+        bg-gradient-pink-purple-blue
+        hover:from-purple-700 hover:to-pink-700
+        text-white
+        px-button py-button
+        font-body font-medium
+        text-button-fluid
+        rounded-lg
+        shadow-lg hover:shadow-xl
+        transform hover:scale-105
         transition-all duration-300
       ">
         Read My Story
@@ -491,7 +536,8 @@ backgroundGradient={{
     </div>
   }
 >
-```
+
+```text
 
 ---
 
@@ -501,19 +547,22 @@ backgroundGradient={{
 
 ```tsx
 import { ThreeColumnLayout } from './components/sections/ThreeColumnLayout';
-import { ShineIcon, JoyIcon, GrowthIcon } from './components/common/ColorfulIcons';
+import { ShineIcon, JoyIcon, GrowthIcon } from
+'./components/common/ColorfulIcons';
 
 function WhySection() {
   const reasons = [
     {
       icon: <ShineIcon size="lg" />,
       title: 'Make People Shine',
-      description: 'Bringing out natural beauty and confidence in everyone I work with.'
+description: 'Bringing out natural beauty and confidence in everyone I work
+with.'
     },
     {
       icon: <JoyIcon size="lg" />,
       title: 'Brings Me Joy',
-      description: 'The creative process and seeing transformation brings pure happiness.'
+description: 'The creative process and seeing transformation brings pure
+happiness.'
     },
     {
       icon: <GrowthIcon size="lg" />,
@@ -527,7 +576,8 @@ function WhySection() {
       id="why-section"
       header={
         <div className="text-center">
-          <h2 className="text-section-h2 font-heading font-bold text-gray-800 mb-fluid-md">
+<h2 className="text-section-h2 font-heading font-bold text-gray-800
+mb-fluid-md">
             Why I Do Makeup
           </h2>
           <p className="text-body-fluid font-body text-gray-600 max-w-2xl mx-auto">
@@ -547,13 +597,15 @@ function WhySection() {
       verticalAlignment="stretch"
       decorativeElements={
         <>
-          <div className="absolute top-10 left-10 w-32 h-32 bg-pink-200/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl" />
+<div className="absolute top-10 left-10 w-32 h-32 bg-pink-200/30 rounded-full
+blur-3xl" />
+<div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-200/30
+rounded-full blur-3xl" />
         </>
       }
       footer={
         <div className="text-center">
-          <button 
+          <button
             onClick={() => navigateToAbout()}
             className="btn-primary"
           >
@@ -563,14 +615,16 @@ function WhySection() {
       }
     >
       {reasons.map((reason, index) => (
-        <div 
+        <div
           key={index}
-          className="bg-white/80 backdrop-blur-sm rounded-xl p-fluid-lg border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300"
+className="bg-white/80 backdrop-blur-sm rounded-xl p-fluid-lg border
+border-white/50 shadow-lg hover:shadow-xl transition-all duration-300"
         >
           <div className="flex justify-center mb-fluid-md">
             {reason.icon}
           </div>
-          <h3 className="text-card-h3 font-heading font-bold text-gray-800 text-center mb-fluid-sm">
+<h3 className="text-card-h3 font-heading font-bold text-gray-800 text-center
+mb-fluid-sm">
             {reason.title}
           </h3>
           <p className="text-body-fluid font-body text-gray-600 text-center">
@@ -581,7 +635,8 @@ function WhySection() {
     </ThreeColumnLayout>
   );
 }
-```
+
+```text
 
 ### Example 2: Portfolio Showcase (Minimal)
 
@@ -599,7 +654,8 @@ function WhySection() {
   <SectionCard title="Special Events" icon={<StarIcon />} />
   <SectionCard title="Photoshoots" icon={<CameraIcon />} />
 </ThreeColumnLayout>
-```
+
+```text
 
 ### Example 3: Feature Grid (No Header/Footer)
 
@@ -617,7 +673,8 @@ function WhySection() {
   <FeatureCard title="Personalized Service" />
   <FeatureCard title="Flexible Scheduling" />
 </ThreeColumnLayout>
-```
+
+```text
 
 ### Example 4: Team Profiles
 
@@ -640,7 +697,8 @@ function WhySection() {
   <TeamMemberCard name="Artist 2" role="Makeup Artist" />
   <TeamMemberCard name="Artist 3" role="Hair Stylist" />
 </ThreeColumnLayout>
-```
+
+```text
 
 ---
 
@@ -659,28 +717,31 @@ function WhySection() {
         <h2 id="section-heading">{/* Title */}</h2>
       </div>
     )}
-    
+
     <div className="grid ...">
       {children}
     </div>
   </div>
 </section>
-```
 
-### Decorative Elements
+```text
+
+### Decorative Elements (1)
 
 ```tsx
 {decorativeElements && (
-  <div 
-    className="absolute inset-0 pointer-events-none" 
+  <div
+    className="absolute inset-0 pointer-events-none"
     aria-hidden="true"                    // Hide from screen readers
   >
     {decorativeElements}
   </div>
 )}
-```
+
+```text
 
 **Key Points:**
+
 - Decorative elements have `aria-hidden="true"`
 - `pointer-events-none` prevents interaction
 - Content remains above decorations with `z-10`
@@ -708,7 +769,8 @@ function WhySection() {
     <p>Content</p>
   </Card>
 </ThreeColumnLayout>
-```
+
+```text
 
 ---
 
@@ -730,7 +792,8 @@ function WhySection() {
 /* Body Text */
 .text-body-fluid                      /* clamp(1rem, 1.5vw, 1.25rem) - 16px → 20px */
 .font-body                            /* Inter */
-```
+
+```text
 
 ### Spacing Scale
 
@@ -745,7 +808,8 @@ py-fluid-3xl                          /* clamp(3rem, 2.5rem + 2.5vw, 4.5rem) */
 
 /* Gap Options */
 gap-fluid-sm through gap-fluid-3xl    /* Same scale as padding */
-```
+
+```text
 
 ### Colors
 
@@ -759,7 +823,8 @@ from-gray-50 to-white                      /* Neutral gradient */
 bg-white/80                                /* Semi-transparent white */
 backdrop-blur-sm                           /* Backdrop blur effect */
 border-white/50                            /* Semi-transparent border */
-```
+
+```text
 
 ---
 
@@ -785,14 +850,15 @@ border-white/50                            /* Semi-transparent border */
 <ThreeColumnLayout verticalAlignment="stretch">
 
 // ✅ Configure responsive columns appropriately
-<ThreeColumnLayout 
+<ThreeColumnLayout
   mobileColumns={1}    // Single column mobile
   tabletColumns={2}    // Two columns tablet
 >
 
 // ✅ Use fluid spacing tokens
 <ThreeColumnLayout gap="lg" padding="3xl">
-```
+
+```text
 
 ### ❌ DON'T
 
@@ -814,7 +880,8 @@ decorativeElements={
 <ThreeColumnLayout>
   {/* Will default to 1 column mobile - this might be fine */}
 </ThreeColumnLayout>
-```
+
+```text
 
 ---
 
@@ -831,7 +898,8 @@ decorativeElements={
 
 // ✅ Decorative elements are positioned absolutely
 // No impact on grid calculations
-```
+
+```text
 
 ### Rendering Strategy
 
@@ -848,7 +916,8 @@ const reasons = useMemo(() => [
     <ReasonCard key={reason.id} {...reason} />
   ))}
 </ThreeColumnLayout>
-```
+
+```text
 
 ---
 
@@ -856,38 +925,44 @@ const reasons = useMemo(() => [
 
 ### Core/Columns Block
 
-```
+```text
 ThreeColumnLayout ≈ core/columns (3 columns)
 
 Similarities:
+
 - Responsive column layout
 - Configurable gaps
 - Mobile stacking
 - Equal-height option
 
 Differences:
+
 + ThreeColumnLayout includes header/footer sections
 + Built-in decorative element support
 + Background gradient configuration
 + Consistent Guidelines.md spacing
 + Optimized for portfolio showcase patterns
-```
+
+```text
 
 ---
 
 ## Related Components
 
 ### Layout Components
+
 - **[OneColumnLayout](./OneColumnLayout.md)** - Single column centered content
 - **[TwoColumnLayout](./TwoColumnLayout.md)** - Two column split layouts
 - **[overview-sections.md](../overview-sections.md)** - Section system overview
 
 ### Used With
+
 - **[ColorfulIcons](../components/ColorfulIcons.md)** - Custom brand icons
 - **[SectionCard](../components/SectionCard.md)** - Generic card component
 - **[WhySection](./WhySection.md)** - Primary usage example
 
-### Design Tokens
+### Design Tokens (1)
+
 - **[spacing.md](../design-tokens/spacing.md)** - Fluid spacing scale
 - **[colors.md](../design-tokens/colors.md)** - Color system and gradients
 - **[typography.md](../design-tokens/typography.md)** - Typography scale
@@ -915,7 +990,8 @@ When implementing ThreeColumnLayout:
 
 **Status:** ✅ Production Ready
 
-**Need Help?**
+## Need Help
+
 - Props not working? → Check TypeScript interface above
 - Layout issues? → Review responsive behavior section
 - Styling problems? → Reference design tokens section

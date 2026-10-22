@@ -2,14 +2,15 @@
 
 **Created:** March 6, 2026
 **Completed:** March 6, 2026
-**Source prompt:** [orchestrator.md](../prompts/production-launch-prep/orchestrator.md)
+**Source prompt:**
+[orchestrator.md](../prompts/production-launch-prep/orchestrator.md)
 **Report:** [audit-report.md](../reports/production-launch-prep/audit-report.md)
 
 ---
 
 ## Critical priority
 
-- [x] **T01 (S-01):** Fix `schemaService.ts` — Updated `ASH_SHAW_PERSON` addressLocality to Cape Town/ZA, updated `buildPersonSchema()` description and workLocation to Cape Town-based
+- [x] **T01 (S-01):** Fix `schemaService.ts` — Updated `ASH*SHAW*PERSON` addressLocality to Cape Town/ZA, updated `buildPersonSchema()` description and workLocation to Cape Town-based
 - [x] **T02 (S-02):** Fix `index.html` — Updated static Schema.org `workLocation` from Berlin to Cape Town
 
 ## High priority
@@ -31,4 +32,4 @@
 
 ---
 
-**All 10 tasks complete. Audit resolution rate: 100%.**
+## All 10 tasks complete. Audit resolution rate: 100%

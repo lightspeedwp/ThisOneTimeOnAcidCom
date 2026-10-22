@@ -1,6 +1,6 @@
 # Footer Template Part
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 Site footer with contact form, social links, and navigation.
@@ -15,5 +15,5 @@ Site footer with contact form, social links, and navigation.
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

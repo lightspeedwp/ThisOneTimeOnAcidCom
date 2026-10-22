@@ -1,21 +1,24 @@
 # Journal Implementation Guide
 
-**Created:** March 20, 2026  
-**Status:** ✅ COMPLETE  
-**Version:** 1.0.0  
+**Created:** March 20, 2026
+**Status:** ✅ COMPLETE
+**Version:** 1.0.0
 
 ---
 
 ## Overview
 
-The journal section displays blog posts/articles with featured images from Unsplash. Each post card links to a dedicated single post page.
+The journal section displays blog posts/articles with featured images from
+Unsplash. Each post card links to a dedicated single post page.
 
 ## Architecture
 
 ### Data Layer
+
 **File:** `/data/mock/journal-posts.ts`
 
 **Structure:**
+
 ```typescript
 export interface JournalPost {
   id: string;
@@ -26,9 +29,11 @@ export interface JournalPost {
   featuredImage: string; // Unsplash URL
   publishedAt: string;
 }
-```
+
+```text
 
 **Total Posts:** 6 posts across different categories:
+
 - Essay (2 posts)
 - Video (1 post)
 - Podcast (1 post)
@@ -36,25 +41,31 @@ export interface JournalPost {
 - Field Notes (1 post)
 
 ### Routes
-**Archive Page:** `/journal` → `JournalPage` component  
+
+**Archive Page:** `/journal` → `JournalPage` component
 **Single Post:** `/journal/:slug` → `JournalSinglePage` component
 
 **Route Configuration** (`/routes.ts`):
+
 ```typescript
 { path: "journal", Component: JournalPage },
 { path: "journal/:slug", Component: JournalSinglePage }
-```
 
-⚠️ **Order Matters:** The `/journal/:slug` route MUST come AFTER the `/journal` route to prevent routing conflicts.
+```text
+
+⚠️ **Order Matters:** The `/journal/:slug` route MUST come AFTER the `/journal`
+route to prevent routing conflicts.
 
 ---
 
 ## Components
 
 ### 1. JournalPage (Archive)
+
 **File:** `/components/pages/book-site/JournalPage.tsx`
 
 **Features:**
+
 - Displays all journal posts in a grid
 - Featured images (240px height, cropped with `objectFit: cover`)
 - Category-based color coding
@@ -62,6 +73,7 @@ export interface JournalPost {
 - ES5-compatible syntax (no arrow functions)
 
 **Category Colors:**
+
 - Essay → Pink (`card__category--pink`)
 - Video → Green (`card__category--green`)
 - Podcast → Violet (`card__category--violet`)
@@ -69,31 +81,37 @@ export interface JournalPost {
 - Field Notes → Pink (`card__category--pink`)
 
 **Click Handlers:**
+
 ```typescript
 function handlePostClick(slug: string) {
   return function() {
     navigate('/journal/' + slug);
   };
 }
-```
+
+```text
 
 **Card Structure:**
+
 ```tsx
 <article className="card" onClick={handlePostClick(slug)}>
   <div className="card__image-wrapper">
     <img src={featuredImage} alt={title} />
   </div>
-  <span className="card__category card__category--{color}">{category}</span>
+  <span className="card_*category card*_category--{color}">{category}</span>
   <h3 className="heading-card">{title}</h3>
   <p className="text-body">{excerpt}</p>
   <a href="/journal/{slug}" className="card__link">Read more →</a>
 </article>
-```
+
+```text
 
 ### 2. JournalSinglePage (Single Post)
+
 **File:** `/components/pages/book-site/JournalSinglePage.tsx`
 
 **Features:**
+
 - Displays individual journal post
 - Large featured image (400px height)
 - Post metadata (category, publish date)
@@ -103,13 +121,19 @@ function handlePostClick(slug: string) {
 - Dynamic SEO metadata with featured image
 
 **Layout:**
-1. Back button (top)
-2. Featured image (full width, 400px height)
-3. Post header (category badge, title, date)
-4. Content area
-5. Back to Journal CTA (bottom)
 
-**URL Parameter Extraction:**
+1. Back button (top)
+
+1. Featured image (full width, 400px height)
+
+1. Post header (category badge, title, date)
+
+1. Content area
+
+1. Back to Journal CTA (bottom)
+
+## URL Parameter Extraction
+
 ```typescript
 var params = useParams();
 var slug = params.slug;
@@ -122,9 +146,11 @@ for (var i = 0; i < journalPosts.length; i++) {
     break;
   }
 }
-```
+
+```text
 
 **SEO Integration:**
+
 ```typescript
 React.useEffect(function() {
   if (post) {
@@ -134,17 +160,19 @@ React.useEffect(function() {
       ogTitle: post.title,
       ogDescription: post.excerpt,
       ogImage: post.featuredImage,
-      twitterCard: 'summary_large_image'
+      twitterCard: 'summary*large*image'
     });
   }
 }, [post]);
-```
+
+```text
 
 ---
 
 ## Unsplash Images
 
-All featured images are sourced from Unsplash using the `unsplash_tool`. Images are selected to match the post content:
+All featured images are sourced from Unsplash using the `unsplash_tool`. Images
+are selected to match the post content:
 
 | Post | Query | Image URL |
 |---|---|---|
@@ -156,6 +184,7 @@ All featured images are sourced from Unsplash using the `unsplash_tool`. Images 
 | Standing out skill | "colorful neon soul expression art" | images.unsplash.com/photo-1663023943477... |
 
 **Image Parameters:**
+
 - `crop=entropy` - Smart cropping
 - `cs=tinysrgb` - Color space
 - `fit=max` - Fit mode
@@ -169,7 +198,8 @@ All featured images are sourced from Unsplash using the `unsplash_tool`. Images 
 
 ### Featured Images
 
-**Archive Cards (JournalPage):**
+## Archive Cards (JournalPage)
+
 ```css
 .card__image-wrapper {
   width: 100%;
@@ -184,9 +214,11 @@ All featured images are sourced from Unsplash using the `unsplash_tool`. Images 
   height: 100%;
   object-fit: cover;
 }
-```
 
-**Single Post (JournalSinglePage):**
+```text
+
+## Single Post (JournalSinglePage)
+
 ```css
 {
   width: 100%;
@@ -197,9 +229,11 @@ All featured images are sourced from Unsplash using the `unsplash_tool`. Images 
   border-radius: 12px;
   margin-bottom: 32px;
 }
-```
+
+```text
 
 ### Category Badges
+
 Defined in `/styles/globals.css`:
 
 ```css
@@ -208,21 +242,24 @@ Defined in `/styles/globals.css`:
 .card__category--green { color: #39FF14; }
 .card__category--pink { color: var(--color-neon-pink); }
 .card__category--violet { color: var(--color-uv-violet); }
-```
+
+```text
 
 ---
 
 ## ES5 Bundler Compatibility
 
 ### Forbidden Patterns
-❌ Arrow functions → ✅ Classic `function()` syntax  
-❌ Template literals → ✅ String concatenation  
-❌ Optional chaining → ✅ Explicit null checks  
-❌ `const`/`let` → ✅ `var` declarations  
+
+❌ Arrow functions → ✅ Classic `function()` syntax
+❌ Template literals → ✅ String concatenation
+❌ Optional chaining → ✅ Explicit null checks
+❌ `const`/`let` → ✅ `var` declarations
 
 ### Safe Patterns
 
-**Loop with Classic For:**
+## Loop with Classic For
+
 ```typescript
 for (var i = 0; i < journalPosts.length; i++) {
   if (journalPosts[i].slug === slug) {
@@ -230,21 +267,26 @@ for (var i = 0; i < journalPosts.length; i++) {
     break;
   }
 }
-```
 
-**Closure Pattern for Click Handlers:**
+```text
+
+## Closure Pattern for Click Handlers
+
 ```typescript
 function handlePostClick(slug: string) {
   return function() {
     navigate('/journal/' + slug);
   };
 }
-```
 
-**Null Check with Conditional:**
+```text
+
+## Null Check with Conditional
+
 ```typescript
 if (e && e.preventDefault) e.preventDefault();
-```
+
+```text
 
 ---
 
@@ -253,48 +295,63 @@ if (e && e.preventDefault) e.preventDefault();
 ### User Journey
 
 1. **Homepage** → User sees "Journal" in navigation
-2. **Click Journal** → Navigate to `/journal`
-3. **Journal Archive** → Grid of 6 blog post cards with images
-4. **Click Card** → Navigate to `/journal/{slug}`
-5. **Single Post** → Read full post with featured image
-6. **Back Button** → Return to `/journal`
+
+1. **Click Journal** → Navigate to `/journal`
+
+1. **Journal Archive** → Grid of 6 blog post cards with images
+
+1. **Click Card** → Navigate to `/journal/{slug}`
+
+1. **Single Post** → Read full post with featured image
+
+1. **Back Button** → Return to `/journal`
 
 ### Internal Links
 
 **From Homepage:**
+
 ```tsx
 <a href="/journal">Journal</a>
-```
 
-**From Journal Archive to Single Post:**
+```text
+
+## From Journal Archive to Single Post
+
 ```tsx
 onClick={handlePostClick('dancefloor-belonging')}
 // Navigates to: /journal/dancefloor-belonging
-```
 
-**From Single Post back to Archive:**
+```text
+
+## From Single Post back to Archive
+
 ```tsx
 <button onClick={() => navigate('/journal')}>
   Back to Journal
 </button>
-```
+
+```text
 
 ---
 
 ## SEO & Metadata
 
 ### Journal Archive Page
+
 ```typescript
 setSEO(pageSEO.journal);
-```
+
+```text
 
 **Values:**
+
 - Title: "Journal | Nova News"
 - Description: "Notes, stories, videos, and companion media from the world of the book."
 - OG Image: Default site image
 - Twitter Card: summary
 
 ### Single Post Page
+
 ```typescript
 setSEO({
   title: post.title + ' | Nova News',
@@ -302,11 +359,13 @@ setSEO({
   ogTitle: post.title,
   ogDescription: post.excerpt,
   ogImage: post.featuredImage, // Unsplash image
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary*large*image'
 });
-```
+
+```text
 
 **Dynamic Values:**
+
 - Title: Post title + site name
 - Description: Post excerpt
 - OG Image: **Post's featured image** (Unsplash URL)
@@ -319,24 +378,29 @@ setSEO({
 ✅ **WCAG 2.2 AA Compliant**
 
 **Semantic HTML:**
+
 - `<article>` for blog post cards
 - `<h1>`, `<h2>`, `<h3>` proper heading hierarchy
 - `<img>` with descriptive `alt` text
 
-**Keyboard Navigation:**
+## Keyboard Navigation
+
 - Tab to focus on cards
 - Enter/Space to click
 - Back button keyboard accessible
 
 **Focus Indicators:**
+
 - 3px neon pink outline
 - Visible on all interactive elements
 
 **Color Contrast:**
+
 - Text on dark backgrounds: 7:1+ (AAA)
 - Category badges: 4.5:1+ (AA)
 
 **Reduced Motion:**
+
 - No animations on journal cards
 - Hover effects use simple transforms
 - `prefers-reduced-motion` respected
@@ -348,6 +412,7 @@ setSEO({
 ### Adding New Posts
 
 **Step 1:** Add to `/data/mock/journal-posts.ts`
+
 ```typescript
 {
   id: 'unique-id',
@@ -358,33 +423,39 @@ setSEO({
   featuredImage: 'https://images.unsplash.com/photo-...',
   publishedAt: '2026-03-20'
 }
-```
+
+```text
 
 **Step 2:** Get Unsplash Image
-```
+
+```text
 Use unsplash_tool with descriptive query
 Copy URL to featuredImage property
-```
+
+```text
 
 **Step 3:** Test
-```
+
+```text
 Visit /journal → Should see new card
 Click card → Should navigate to /journal/{slug}
-```
+
+```text
 
 ### Category Guidelines
 
-**Essay** - Written reflections, personal stories  
-**Video** - Visual content, video embeds  
-**Podcast** - Audio content, podcast episodes  
-**Travel** - Journey stories, location-based posts  
-**Field Notes** - Behind-the-scenes, process updates  
+**Essay** - Written reflections, personal stories
+**Video** - Visual content, video embeds
+**Podcast** - Audio content, podcast episodes
+**Travel** - Journey stories, location-based posts
+**Field Notes** - Behind-the-scenes, process updates
 
 ---
 
 ## Testing Checklist
 
-### Journal Archive Page
+### Journal Archive Page (1)
+
 - [ ] `/journal` loads without errors
 - [ ] All 6 posts display in grid
 - [ ] Featured images load correctly
@@ -394,7 +465,8 @@ Click card → Should navigate to /journal/{slug}
 - [ ] Responsive grid works on mobile
 - [ ] Tag filters visible (decorative only for now)
 
-### Single Post Page
+### Single Post Page (1)
+
 - [ ] `/journal/dancefloor-belonging` loads
 - [ ] Featured image displays (400px height)
 - [ ] Title, category, date visible
@@ -405,12 +477,14 @@ Click card → Should navigate to /journal/{slug}
 - [ ] SEO metadata includes featured image
 
 ### Navigation
+
 - [ ] Header "Journal" link works
 - [ ] Footer "Journal" link works (if exists)
 - [ ] Browser back button works
 - [ ] Direct URL entry works
 
 ### Mobile
+
 - [ ] Grid collapses to 1 column
 - [ ] Images scale correctly
 - [ ] Cards remain clickable
@@ -421,17 +495,23 @@ Click card → Should navigate to /journal/{slug}
 ## Known Limitations
 
 1. **Static Content:** Full post content is placeholder text (not from data)
-2. **No Rich Text:** Content doesn't support markdown/HTML yet
-3. **No Pagination:** All posts load at once (fine for 6 posts)
-4. **No Filtering:** Tag filters are decorative only
-5. **No Search:** No search functionality within journal
-6. **No Comments:** No comment system
+
+1. **No Rich Text:** Content doesn't support markdown/HTML yet
+
+1. **No Pagination:** All posts load at once (fine for 6 posts)
+
+1. **No Filtering:** Tag filters are decorative only
+
+1. **No Search:** No search functionality within journal
+
+1. **No Comments:** No comment system
 
 ---
 
 ## Future Enhancements
 
 ### Phase 1 (Short Term)
+
 - [ ] Add rich text content to data layer (markdown support)
 - [ ] Wire up category filter tags
 - [ ] Add "Related Posts" section to single post
@@ -439,6 +519,7 @@ Click card → Should navigate to /journal/{slug}
 - [ ] Add reading progress indicator
 
 ### Phase 2 (Medium Term)
+
 - [ ] Pagination (10 posts per page)
 - [ ] Search within journal
 - [ ] Author profiles (multi-author support)
@@ -446,6 +527,7 @@ Click card → Should navigate to /journal/{slug}
 - [ ] Featured post carousels
 
 ### Phase 3 (Long Term)
+
 - [ ] Comments system (Disqus or custom)
 - [ ] Newsletter signup integration
 - [ ] Post bookmarking/favorites
@@ -457,40 +539,54 @@ Click card → Should navigate to /journal/{slug}
 ## Troubleshooting
 
 ### Images Not Loading
-**Problem:** Unsplash images return 403 or don't load  
-**Solution:** Check Unsplash URL parameters are correct. Re-fetch with unsplash_tool if needed.
+
+**Problem:** Unsplash images return 403 or don't load
+**Solution:** Check Unsplash URL parameters are correct. Re-fetch with
+unsplash_tool if needed.
 
 ### Route Not Working
-**Problem:** `/journal/:slug` returns 404  
-**Solution:** Verify route order in `/routes.ts`. Single route MUST come after archive route.
+
+**Problem:** `/journal/:slug` returns 404
+**Solution:** Verify route order in `/routes.ts`. Single route MUST come after
+archive route.
 
 ### Click Not Navigating
-**Problem:** Card click doesn't navigate  
-**Solution:** Check `handlePostClick` closure returns function. Verify `navigate()` is imported.
+
+**Problem:** Card click doesn't navigate
+**Solution:** Check `handlePostClick` closure returns function. Verify
+`navigate()` is imported.
 
 ### Category Color Wrong
-**Problem:** Badge shows wrong color  
-**Solution:** Check `getCategoryColor()` function. Verify CSS classes exist in `globals.css`.
+
+**Problem:** Badge shows wrong color
+**Solution:** Check `getCategoryColor()` function. Verify CSS classes exist in
+`globals.css`.
 
 ### SEO Image Not Showing
-**Problem:** Featured image doesn't appear in social shares  
-**Solution:** Verify `ogImage` is set to `post.featuredImage`. Test with Facebook Debugger.
+
+**Problem:** Featured image doesn't appear in social shares
+**Solution:** Verify `ogImage` is set to `post.featuredImage`. Test with
+Facebook Debugger.
 
 ---
 
 ## Dependencies
 
 **React Router:**
+
 - `useParams()` - Extract slug from URL
 - `useNavigate()` - Programmatic navigation
 
 **Phosphor Icons:**
+
 - `ArrowLeft` - Back button icon
 
 **Utils:**
+
 - `setSEO()` - Dynamic SEO metadata
 
 **Data:**
+
 - `journalPosts` - Post data array
 - `pageSEO.journal` - Archive page SEO
 
@@ -499,24 +595,27 @@ Click card → Should navigate to /journal/{slug}
 ## Performance Notes
 
 **Image Loading:**
+
 - All images loaded from Unsplash CDN
 - No lazy loading implemented (6 images is acceptable)
 - Consider lazy loading if expanding to 20+ posts
 
 **Rendering:**
+
 - 6 cards render immediately on page load
 - No virtualization needed for small dataset
 - Single post renders single image + content
 
 **Bundle Size:**
+
 - Data file: ~2KB
 - Components: ~8KB total
 - No heavy dependencies added
 
 ---
 
-**Documentation Version:** 1.0.0  
-**Last Updated:** March 20, 2026  
-**Maintained By:** Nova News Development Team  
+**Documentation Version:** 1.0.0
+**Last Updated:** March 20, 2026
+**Maintained By:** Nova News Development Team
 
 🎉 **Journal is fully functional and ready for content!**
