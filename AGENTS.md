@@ -40,7 +40,7 @@ Before making any change, agents **must** read these files in order:
 | Routing | React Router v7 |
 | Data | Static mock data (`/data/mock/`) — no backend, no Supabase |
 | Deployment | Netlify (SPA mode) |
-| Package manager | pnpm |
+| Package manager | npm |
 
 ---
 
@@ -50,26 +50,32 @@ These commands are confirmed in [`package.json`](package.json):
 
 ```bash
 # Install dependencies
-pnpm install
+npm ci
 
 # Start development server
-pnpm dev
+npm run dev
 
 # Production build
-pnpm build
+npm run build
+
+# Run tests (Jest)
+npm test
+
+# Run Netlify header validation tests
+npm run test:netlify-headers
 
 # Parse journal markdown content
-pnpm journal:parse
+npm run journal:parse
 
 # Validate journal markdown (dry-run)
-pnpm journal:validate
+npm run journal:validate
 
 # Check journal link integrity
-pnpm journal:check-links
+npm run journal:check-links
 ```
 
-> **Note:** There is no test runner currently configured in `package.json`.
-> The project has no `test`, `lint`, or `typecheck` script at this time.
+> **Note:** The project has configured test suites (`test` and `test:netlify-headers`) using Jest and Node's built-in test runner.
+> There is no general linter or type-checker script at this time.
 
 ---
 
@@ -83,7 +89,7 @@ Key forbidden patterns:
 
 - Optional chaining (`?.`) — use explicit null checks
 - Nullish coalescing (`??`) — use if/else
-- `import.meta.env` — removed entirely
+- `import.meta.env` — do not use in new code (existing usage in `ThemeToggleES5.tsx` is legacy; do not replicate)
 - Nested ternaries — convert to if/else
 - `for...of` loops — use classic `for` loops
 

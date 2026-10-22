@@ -69,8 +69,8 @@ npm run test:netlify-headers
 npm run check:netlify-headers -- https://deploy-preview-N--thisonetimeonacid.netlify.app
 ```
 
-> **Note:** There is no test runner, linter, or type-checker currently configured in `package.json`.
-> Manual review against the guidelines is the current quality gate.
+> **Note:** The project has configured tests for Netlify headers (`test:netlify-headers`).
+> There is no general linter or type-checker script. Manual review against the guidelines is the current quality gate for style and structure.
 
 ### Journal Content Validation
 
@@ -108,18 +108,20 @@ The project uses **Semantic BEM CSS** exclusively. Tailwind utility classes, inl
 <div style={{ padding: '16px' }}>Content</div>
 ```
 
-CSS files live in `/styles/` — one file per component in `/styles/blocks/`.
+CSS files live in `src/styles/` — one file per component in `src/styles/blocks/`.
 
-### Data: No Hardcoded Content
+### Mock Data: No Hardcoded UI Content
 
-All text, images, and configuration must be imported from `/data/mock/`:
+All mock UI data must be imported from `src/app/data/mock/` (aliased as `@/data/mock`).
+
+Editorial content (journal entries, articles, manuscripts) lives in `content/`.
 
 ```tsx
-// ✅ Correct
+// ✅ Correct — mock UI data
 import { heroContent } from "@/data/mock";
 <h1 className="hero__title">{heroContent.title}</h1>
 
-// ❌ Wrong
+// ❌ Wrong — hardcoded text
 <h1 className="hero__title">Welcome to my Portfolio</h1>
 ```
 
