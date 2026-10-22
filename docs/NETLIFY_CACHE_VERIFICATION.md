@@ -209,7 +209,7 @@ X-Content-Type-Options: nosniff
 | Issue | Mitigation | Status |
 |-------|-----------|--------|
 | `src/app/netlify.toml` configuration discovery | Check the active Netlify package-directory, base directory, and publish settings before identifying the active configuration | ⏳ Configuration source unverified |
-| Hashed assets getting wrong cache headers | Preview recorded `public,max-age=0,must-revalidate` instead of `public,max-age=31536000,immutable`; after checking the settings above, apply exact-path immutable rules only to verified hashed files through the generated `_headers` file and recheck deployed headers | ⚠️ Mismatch observed; cause and resolution unverified |
+| Hashed assets getting wrong cache headers | Initial preview recorded `public,max-age=0,must-revalidate`; later preview reported `public,max-age=31536000,immutable` for hashed JavaScript and CSS assets. Keep exact-path immutable rules for verified hashed files and recheck production headers | ⚠️ Initial mismatch reported; preview result reported; production verification pending |
 | CSP blocks Typeform | CSP allows HTTPS connections; requires testing in preview | ⏳ Pending integration testing |
 | Google Fonts not loading | CSP allows `fonts.gstatic.com` and `fonts.googleapis.com` | ⏳ Pending integration testing |
 | Old JS bundle cached despite deployment | HTML revalidation triggers browser cache bust | ✅ By design |
