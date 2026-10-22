@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "engines": {
-    "node": ">=24 <25"
+    "node": ">=24"
   },
   "scripts": {
     "build": "vite build",
@@ -111,11 +111,6 @@
     },
     "react-dom": {
       "optional": true
-    }
-  },
-  "pnpm": {
-    "overrides": {
-      "vite": "6.3.5"
     }
   },
   "readme": "ERROR: No README data found!",

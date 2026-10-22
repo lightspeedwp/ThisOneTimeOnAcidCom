@@ -1,0 +1,51 @@
+# Protected Files List — ThisOneTimeOnAcidCom
+#
+# These files are critical to repository stability and should not be modified
+# without careful consideration and approval. Modifications trigger the
+# locked-files-guard workflow which requires approval before merging.
+#
+# Protected file categories:
+# 1. Governance (.github/ configuration)
+# 2. Scripts and tooling (scripts/ directory)
+# 3. Agent and skill specifications (AGENTS.md)
+# 4. Changelog (CHANGELOG.md)
+# 5. Style guidelines (guidelines/ directory)
+# 6. Critical utilities (Supabase, Figma integrations)
+#
+# Date: 2026-10-22
+# Last Modified: 2026-10-22
+# Governance: Constitution Principle II (LOCKED files require approval)
+
+# Category 1: Governance Configuration
+.github/
+.github/labels.yml
+.github/issue-types.yml
+.github/branch-labels.yml
+.github/ISSUE_TEMPLATE/
+.github/PULL_REQUEST_TEMPLATE/
+.github/workflows/
+.github/PROTECTED_FILES.txt
+
+# Category 2: Scripts and Tooling
+scripts/
+
+# Category 3: Agent and Skill Specifications
+AGENTS.md
+
+# Category 4: Changelog
+CHANGELOG.md
+
+# Category 5: Style Guidelines and Governance Documents
+guidelines/
+
+# Category 6: Critical Utility Files
+src/app/utils/supabase/
+src/app/components/figma/ImageWithFallback.tsx
+
+# Notes:
+# - This list is canonical and used by locked-files-guard workflow
+# - Changes to protected files require approval via change-request issues
+# - Issue tag for approval: [LABEL-UPDATE-REQUEST], [TEMPLATE-UPDATE-REQUEST], etc.
+# - Only @ashley can approve changes to protected files
+# - Supabase credentials MUST NEVER be committed (these utils protect against exposure)
+# - Figma Make integration must remain compatible (ImageWithFallback is critical)
