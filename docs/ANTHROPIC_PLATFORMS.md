@@ -27,7 +27,7 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 
 **Status**: ✅ **CORE PLATFORM**
 
-**Description**: Base inference API for all Claude models (Opus, Sonnet, Haiku, Fable).
+**Description**: Base inference API for all Claude models (Mythos, Opus, Sonnet, Haiku, Fable).
 
 **Usage in This Repo**:
 - All 20 agents use Claude API via Claude Code framework
@@ -125,7 +125,7 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 **Description**: Structured interface for agents to call external tools (CLI, APIs, file I/O).
 
 **Usage in This Repo**:
-- All 20 agents use tool calling via Claude Code SDK
+- All 20 agents use tool calling via Claude Code
 - Manifest-declared tools: Read, Write, Bash for all 20 agents
 - Tool selection per-agent in `.claude/agents/{agent}.md`
 
@@ -141,29 +141,27 @@ This document evaluates the applicability of Anthropic platforms and capabilitie
 
 ---
 
-### 6. Artifact / Database APIs
+### 6. File and Session APIs
 
 **Status**: ⚠️ **OPTIONAL ENHANCEMENT**
 
-**Description**: Server-side artifact storage with optional shared database for collaborative documents/trackers.
+**Description**: Documented file APIs (Files API) and session file capabilities for storing and retrieving content. Any shared state is application-owned and managed by the session caller, not provided by Anthropic as a platform service.
 
 **Potential Usage**:
-- **Artifacts**: Store generated reports, specs, documentation
-  - reporting-agent → publish metric reports as artifacts
-  - prd-agent → publish PRD documents as artifacts
-  - changelog-agent → archive changelog versions
+- **Files API**: Store generated reports, specs, documentation for retrieval in agent sessions
+  - reporting-agent → Generate metric reports and store via Files API
+  - prd-agent → Generate PRD documents and store via Files API
+  - changelog-agent → Archive changelog versions
 
-- **Shared Database**: Track shared state across agent runs
-  - labeling-agent → Store label application state
-  - metrics-agent → Cache metric calculations
-  - testing-agent → Track test result history
+- **Session Files**: Agents in Managed Agents can read/write files within their session context
+  - Shared state is application-owned; agents coordinate through application logic, not platform APIs
 
 **Applicable Agents** (3-5):
-- ⚠️ reporting-agent — Publish reports as artifacts
-- ⚠️ prd-agent — Publish PRDs as artifacts
-- ⚠️ changelog-agent — Archive versions in artifact DB
-- ⚠️ labeling-agent — Track label state in shared DB
-- ⚠️ testing-agent — Track test history in shared DB
+- ⚠️ reporting-agent — Generate and store reports via Files API
+- ⚠️ prd-agent — Generate and store PRDs via Files API
+- ⚠️ changelog-agent — Archive versions in application storage
+- ⚠️ labeling-agent — Application manages label state via files
+- ⚠️ testing-agent — Application manages test history via files
 
 **Current Status**: Reports generated as local files; no artifact publishing configured
 
