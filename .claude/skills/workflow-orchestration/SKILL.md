@@ -402,16 +402,13 @@ When the dedicated task list is created, add its entry to `/tasks/master-task-li
 
 **Do this immediately upon completion, BEFORE the 30-day retention period begins:**
 
-**Update `/tasks/task-list.md`:**
-- Move entry from "Active" section to "Completed (pending archive)"
-- Add completion date: YYYY-MM-DD
-
-**If this is an orchestrator audit with dedicated task lists:**
-- Also update `/tasks/master-task-list.md`
+**For a dedicated task list (single-file or orchestrator audit), update `/tasks/master-task-list.md`:**
 - Move the dedicated task-list entry from "Active" to "Completed (pending archive)"
 - Add completion date and location of the dedicated task list (e.g., `/tasks/{topic}-tasks.md`)
 
-**Important:** Status changes to "Completed (pending archive)" happen at task completion, not during archiving. This marks the start of the mandatory 30-day retention period before files can be moved to the archive folder.
+**For tasks in `/tasks/task-list.md`:** Mark the relevant checkboxes complete and record their completion date. Keep this persistent checklist and its tracker entry active (ongoing general-purpose); do not apply "Completed (pending archive)" to either.
+
+**Important:** The dedicated audit entry changes to "Completed (pending archive)" at task completion, not during archiving. Its completion date marks the start of the mandatory 30-day retention period before the dedicated task list and associated reports can be moved to the archive folder.
 
 ---
 
@@ -443,7 +440,7 @@ mv ./reports/YYYY-MM-DD-{topic}/ ./reports/archived/YYYY-MM-DD-{topic}/
 
 **Step 2: Move task-list file to archive, then update tracker**
 
-Both `/tasks/task-list.md` and `/tasks/master-task-list.md` should already have status "Completed (pending archive)" from Step 8 (marked at task completion). Now that files are being permanently archived:
+For a dedicated task list, its audit entry in `/tasks/master-task-list.md` should already be in "Completed (pending archive)" from Step 8 (marked at task completion). Only dedicated task-list files are moved below. Keep `/tasks/task-list.md` in place and its tracker entry active (ongoing general-purpose).
 
 **First, move the completed task-list file:**
 
@@ -457,12 +454,7 @@ mv ./tasks/{topic}-tasks.md ./tasks/archived/{topic}-tasks.md
 
 **Then, update archive location tracking in the master tracker:**
 
-Edit `/tasks/task-list.md`:
-- Move entry from "Completed (pending archive)" section to "Archived"
-- Add archive date: YYYY-MM-DD
-
-If this is an orchestrator audit with dedicated task lists:
-- Also update `/tasks/master-task-list.md`
+For a dedicated task list (single-file or orchestrator audit), edit `/tasks/master-task-list.md`:
 - Move the dedicated task-list entry from "Completed (pending archive)" to "Archived"
 - Update path from `/tasks/{topic}-tasks.md` to `/tasks/archived/{topic}-tasks.md` (reflecting the moved file)
 - Add archive date
