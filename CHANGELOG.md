@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Jest failure comparison testing infrastructure** — Enhanced `scripts/validation/compare-jest-failures.cjs` to correctly detect failures from `numFailingTests` field, `assertionResults` array, and suite-level `status: 'failed'`; added comprehensive test suite (`scripts/validation/compare-jest-failures.test.js`) with 10 test cases covering all failure detection methods
 - **Package manager standardisation** — Standardised on npm across all environments (development, CI/CD, production) with consistent package-lock.json (Issue #4)
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
 - **Removed pnpm configuration** — Deleted `pnpm-lock.yaml` and `pnpm-workspace.yaml` (no longer needed with npm)
