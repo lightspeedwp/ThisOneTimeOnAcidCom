@@ -74,10 +74,10 @@ function failure(result, message, status = 1) {
 }
 
 function feature(f, documents = ['spec.md', 'plan.md']) {
-  f.mkdir('specs/001-example');
-  documents.forEach(function (name) { f.write('specs/001-example/' + name, '# ' + name + '\n'); });
-  f.write('.specify/feature.json', JSON.stringify({ feature_directory: 'specs/001-example' }));
-  return f.path('specs/001-example');
+  f.mkdir('.github/specs/001-example');
+  documents.forEach(function (name) { f.write('.github/specs/001-example/' + name, '# ' + name + '\n'); });
+  f.write('.specify/feature.json', JSON.stringify({ feature_directory: '.github/specs/001-example' }));
+  return f.path('.github/specs/001-example');
 }
 
 function preset(f, strategy, content, options = {}) {
@@ -131,7 +131,7 @@ describe('common.sh: project and feature resolution', function () {
 
   it('round trips shell metacharacters without evaluating them', function (t) {
     const f = fixture(t);
-    const directory = 'specs/001-$(touch INJECTED); "quoted"';
+    const directory = '.github/specs/001-$(touch INJECTED); "quoted"';
     const result = f.common('paths=$(get_feature_paths --no-persist)\neval "$paths"\nprintf "%s\\n%s\\n%s" "$FEATURE_DIR" "$CURRENT_BRANCH" "$TASKS"', [], {
       SPECIFY_FEATURE_DIRECTORY: directory,
       SPECIFY_FEATURE: 'label; $(touch INJECTED)',
@@ -144,9 +144,9 @@ describe('common.sh: project and feature resolution', function () {
   it('prefers an explicit directory, persists it relatively, and resolves it in the next process', function (t) {
     const f = fixture(t);
     feature(f);
-    const directory = f.path('specs/002-new');
+    const directory = f.path('.github/specs/002-new');
     success(f.common('get_feature_paths', [], { SPECIFY_FEATURE_DIRECTORY: directory }));
-    assert.deepEqual(JSON.parse(f.read('.specify/feature.json')), { feature_directory: 'specs/002-new' });
+    assert.deepEqual(JSON.parse(f.read('.specify/feature.json')), { feature_directory: '.github/specs/002-new' });
     const paths = json(f.cli('check-prerequisites', ['--paths-only', '--json']));
     assert.equal(paths.FEATURE_DIR, directory);
     assert.equal(paths.BRANCH, '002-new');
@@ -182,9 +182,9 @@ describe('common.sh: project and feature resolution', function () {
 
   it('does not rewrite an unchanged feature.json, preserving unrelated metadata', function (t) {
     const f = fixture(t);
-    const original = '{\n  "feature_directory": "specs/001-example",\n  "note": "keep"\n}\n';
+    const original = '{\n  "feature_directory": ".github/specs/001-example",\n  "note": "keep"\n}\n';
     f.write('.specify/feature.json', original);
-    success(f.common('get_feature_paths', [], { SPECIFY_FEATURE_DIRECTORY: 'specs/001-example' }));
+    success(f.common('get_feature_paths', [], { SPECIFY_FEATURE_DIRECTORY: '.github/specs/001-example' }));
     assert.equal(f.read('.specify/feature.json'), original);
   });
 
@@ -200,14 +200,14 @@ describe('common.sh: project and feature resolution', function () {
     const f = fixture(t);
     feature(f);
     const result = f.common('jq() { return 49; }\nread_feature_json_feature_directory "$SPECIFY_INIT_DIR"');
-    assert.equal(success(result), 'specs/001-example');
+    assert.equal(success(result), '.github/specs/001-example');
   });
 
   it('falls back to text parsing when both available JSON parsers fail', function (t) {
     const f = fixture(t);
     feature(f);
     const result = f.common('jq() { return 49; }\npython3() { return 49; }\nread_feature_json_feature_directory "$SPECIFY_INIT_DIR"');
-    assert.equal(success(result), 'specs/001-example');
+    assert.equal(success(result), '.github/specs/001-example');
   });
 });
 
@@ -397,9 +397,9 @@ describe('create-new-feature.sh', function () {
     const result = json(f.cli('create-new-feature', [...dryRun, 'Add user authentication']));
     assert.deepEqual(result, {
       BRANCH_NAME: '001-user-authentication', FEATURE_NUM: '001',
-      SPEC_FILE: f.path('specs/001-user-authentication/spec.md'), DRY_RUN: true,
+      SPEC_FILE: f.path('.github/specs/001-user-authentication/spec.md'), DRY_RUN: true,
     });
-    assert.equal(f.exists('specs'), false);
+    assert.equal(f.exists('.github/specs'), false);
     assert.equal(f.exists('.specify/feature.json'), false);
   });
 
@@ -440,7 +440,7 @@ describe('create-new-feature.sh', function () {
     it('rejects invalid arguments ' + JSON.stringify(args), function (t) {
       const f = fixture(t);
       failure(f.cli('create-new-feature', args), message);
-      assert.equal(f.exists('specs'), false);
+      assert.equal(f.exists('.github/specs'), false);
     });
   });
 
@@ -448,7 +448,7 @@ describe('create-new-feature.sh', function () {
     it('rejects out-of-range or non-integer number ' + number, function (t) {
       const f = fixture(t);
       failure(f.cli('create-new-feature', [...dryRun, '--number', number, 'Description']), /--number must be/);
-      assert.equal(f.exists('specs'), false);
+      assert.equal(f.exists('.github/specs'), false);
     });
   });
 
@@ -463,16 +463,16 @@ describe('create-new-feature.sh', function () {
   it('chooses the next sequential number while ignoring timestamps, files, and overflowing prefixes', function (t) {
     const f = fixture(t);
     ['009-old', '010-new', '20260101-120000-dated', '9223372036854775808-overflow'].forEach(function (name) {
-      f.mkdir('specs/' + name);
+      f.mkdir('.github/specs/' + name);
     });
-    f.write('specs/099-not-a-directory', 'ignore');
+    f.write('.github/specs/099-not-a-directory', 'ignore');
     assert.equal(json(f.cli('create-new-feature', [...dryRun, 'Description'])).FEATURE_NUM, '011');
   });
 
   it('moves a conflicting explicit number above the highest existing prefix', function (t) {
     const f = fixture(t);
-    f.mkdir('specs/003-existing');
-    f.mkdir('specs/008-latest');
+    f.mkdir('.github/specs/003-existing');
+    f.mkdir('.github/specs/008-latest');
     const result = f.cli('create-new-feature', [...dryRun, '--number', '3', 'Description']);
     assert.equal(json(result).FEATURE_NUM, '009');
     assert.match(result.stderr, /conflicts with an existing spec directory/);
@@ -480,7 +480,7 @@ describe('create-new-feature.sh', function () {
 
   it('rejects sequential overflow rather than wrapping to a negative number', function (t) {
     const f = fixture(t);
-    f.mkdir('specs/9223372036854775807-last');
+    f.mkdir('.github/specs/9223372036854775807-last');
     failure(f.cli('create-new-feature', [...dryRun, 'Description']), /feature number must be between/);
   });
 
@@ -506,9 +506,9 @@ describe('create-new-feature.sh', function () {
     f.write('.specify/templates/spec-template.md', '# Specification\n\n');
     const data = json(f.cli('create-new-feature', ['--json', '--short-name', 'example', 'Description']));
     assert.equal(data.BRANCH_NAME, '001-example');
-    assert.equal(data.SPEC_FILE, f.path('specs/001-example/spec.md'));
-    assert.equal(f.read('specs/001-example/spec.md'), '# Specification\n\n');
-    assert.deepEqual(JSON.parse(f.read('.specify/feature.json')), { feature_directory: 'specs/001-example' });
+    assert.equal(data.SPEC_FILE, f.path('.github/specs/001-example/spec.md'));
+    assert.equal(f.read('.github/specs/001-example/spec.md'), '# Specification\n\n');
+    assert.deepEqual(JSON.parse(f.read('.specify/feature.json')), { feature_directory: '.github/specs/001-example' });
     assert.equal(Object.hasOwn(data, 'DRY_RUN'), false);
   });
 
@@ -516,18 +516,18 @@ describe('create-new-feature.sh', function () {
     const f = fixture(t);
     const result = f.cli('create-new-feature', ['--json', '--short-name', 'example', 'Description']);
     success(result);
-    assert.equal(f.read('specs/001-example/spec.md'), '');
+    assert.equal(f.read('.github/specs/001-example/spec.md'), '');
     assert.match(result.stderr, /Spec template not found/);
   });
 
   it('preserves an existing spec when explicitly reusing its directory', function (t) {
     const f = fixture(t);
     feature(f);
-    const original = f.read('specs/001-example/spec.md');
+    const original = f.read('.github/specs/001-example/spec.md');
     f.write('.specify/templates/spec-template.md', 'Do not overwrite');
     const data = json(f.cli('create-new-feature', ['--json', '--allow-existing-branch', '--number', '1', '--short-name', 'example', 'Description']));
     assert.equal(data.FEATURE_NUM, '001');
-    assert.equal(f.read('specs/001-example/spec.md'), original);
+    assert.equal(f.read('.github/specs/001-example/spec.md'), original);
   });
 
   it('creates feature files without replacing pinned state when persistence is disabled', function (t) {
@@ -535,7 +535,7 @@ describe('create-new-feature.sh', function () {
     feature(f);
     const original = f.read('.specify/feature.json');
     success(f.cli('create-new-feature', ['--json', '--short-name', 'new', 'Description'], { SPECIFY_FEATURE_NO_PERSIST: 'true' }));
-    assert.equal(f.exists('specs/002-new/spec.md'), true);
+    assert.equal(f.exists('.github/specs/002-new/spec.md'), true);
     assert.equal(f.read('.specify/feature.json'), original);
   });
 });
@@ -562,16 +562,16 @@ describe('workflow CLI prerequisites and output', function () {
     feature(f);
     const original = f.read('.specify/feature.json');
     const data = json(f.cli('check-prerequisites', ['--paths-only', '--json'], {
-      SPECIFY_FEATURE_DIRECTORY: 'specs/002-uncreated',
+      SPECIFY_FEATURE_DIRECTORY: '.github/specs/002-uncreated',
     }));
-    assert.equal(data.FEATURE_DIR, f.path('specs/002-uncreated'));
-    assert.equal(f.exists('specs/002-uncreated'), false);
+    assert.equal(data.FEATURE_DIR, f.path('.github/specs/002-uncreated'));
+    assert.equal(f.exists('.github/specs/002-uncreated'), false);
     assert.equal(f.read('.specify/feature.json'), original);
   });
 
   it('rejects a missing feature directory before checking its documents', function (t) {
     const f = fixture(t);
-    failure(f.cli('check-prerequisites', ['--json'], { SPECIFY_FEATURE_DIRECTORY: 'specs/missing' }), /Feature directory not found/);
+    failure(f.cli('check-prerequisites', ['--json'], { SPECIFY_FEATURE_DIRECTORY: '.github/specs/missing' }), /Feature directory not found/);
   });
 
   const required = [
@@ -590,7 +590,7 @@ describe('workflow CLI prerequisites and output', function () {
   it('accepts only plan.md by default and reports an empty optional document list', function (t) {
     const f = fixture(t);
     const directory = feature(f, ['plan.md']);
-    f.mkdir('specs/001-example/contracts');
+    f.mkdir('.github/specs/001-example/contracts');
     assert.deepEqual(json(f.cli('check-prerequisites', ['--json'])), {
       FEATURE_DIR: directory, AVAILABLE_DOCS: [],
     });
@@ -599,7 +599,7 @@ describe('workflow CLI prerequisites and output', function () {
   it('lists optional documents and includes tasks only when requested', function (t) {
     const f = fixture(t);
     feature(f, ['plan.md', 'spec.md', 'tasks.md', 'research.md', 'data-model.md', 'quickstart.md']);
-    f.write('specs/001-example/contracts/.schema', 'contract');
+    f.write('.github/specs/001-example/contracts/.schema', 'contract');
     const expected = ['research.md', 'data-model.md', 'contracts/', 'quickstart.md'];
     assert.deepEqual(json(f.cli('check-prerequisites', ['--json'])).AVAILABLE_DOCS, expected);
     assert.deepEqual(json(f.cli('check-prerequisites', ['--json', '--require-spec', '--require-tasks', '--include-tasks'])).AVAILABLE_DOCS,
@@ -624,22 +624,22 @@ describe('workflow CLI prerequisites and output', function () {
     feature(f, ['spec.md']);
     f.write('.specify/templates/plan-template.md', 'Initial plan\n\n');
     const data = json(f.cli('setup-plan', ['--json']));
-    assert.equal(data.IMPL_PLAN, f.path('specs/001-example/plan.md'));
-    assert.equal(data.FEATURE_DIR, f.path('specs/001-example'));
-    assert.equal(data.FEATURE_SPEC, f.path('specs/001-example/spec.md'));
+    assert.equal(data.IMPL_PLAN, f.path('.github/specs/001-example/plan.md'));
+    assert.equal(data.FEATURE_DIR, f.path('.github/specs/001-example'));
+    assert.equal(data.FEATURE_SPEC, f.path('.github/specs/001-example/spec.md'));
     assert.equal(data.BRANCH, '001-example');
-    assert.equal(f.read('specs/001-example/plan.md'), 'Initial plan\n\n');
-    f.write('specs/001-example/plan.md', 'User edits\n');
+    assert.equal(f.read('.github/specs/001-example/plan.md'), 'Initial plan\n\n');
+    f.write('.github/specs/001-example/plan.md', 'User edits\n');
     success(f.cli('setup-plan', ['--json']));
-    assert.equal(f.read('specs/001-example/plan.md'), 'User edits\n');
+    assert.equal(f.read('.github/specs/001-example/plan.md'), 'User edits\n');
   });
 
   it('creates the missing feature directory and an empty plan if no template exists', function (t) {
     const f = fixture(t);
-    const result = f.cli('setup-plan', ['--json'], { SPECIFY_FEATURE_DIRECTORY: 'specs/001-new' });
+    const result = f.cli('setup-plan', ['--json'], { SPECIFY_FEATURE_DIRECTORY: '.github/specs/001-new' });
     success(result);
     assert.match(result.stderr, /Plan template not found/);
-    assert.equal(f.read('specs/001-new/plan.md'), '');
+    assert.equal(f.read('.github/specs/001-new/plan.md'), '');
   });
 
   it('removes a partially created plan when template resolution fails', function (t) {
@@ -647,7 +647,7 @@ describe('workflow CLI prerequisites and output', function () {
     feature(f, ['spec.md']);
     f.write('.specify/extensions/.registry', '{bad json');
     failure(f.cli('setup-plan', ['--json']), /invalid extension registry/, 2);
-    assert.equal(f.exists('specs/001-example/plan.md'), false);
+    assert.equal(f.exists('.github/specs/001-example/plan.md'), false);
   });
 
   [
@@ -671,12 +671,12 @@ describe('workflow CLI prerequisites and output', function () {
     const f = fixture(t);
     const directory = feature(f, ['spec.md', 'plan.md', 'research.md', 'tasks.md']);
     const template = f.write('.specify/templates/tasks-template.md', 'Tasks "quoted"\n\n');
-    const original = f.read('specs/001-example/tasks.md');
+    const original = f.read('.github/specs/001-example/tasks.md');
     assert.deepEqual(json(f.cli('setup-tasks', ['--json'])), {
       FEATURE_DIR: directory, AVAILABLE_DOCS: ['research.md'],
       TASKS_TEMPLATE: template, TASKS_TEMPLATE_CONTENT: 'Tasks "quoted"\n\n',
     });
-    assert.equal(f.read('specs/001-example/tasks.md'), original);
+    assert.equal(f.read('.github/specs/001-example/tasks.md'), original);
   });
 
   it('does not create tasks.md just to report its setup', function (t) {
@@ -684,6 +684,6 @@ describe('workflow CLI prerequisites and output', function () {
     feature(f);
     f.write('.specify/templates/tasks-template.md', 'Task template');
     success(f.cli('setup-tasks', ['--json']));
-    assert.equal(f.exists('specs/001-example/tasks.md'), false);
+    assert.equal(f.exists('.github/specs/001-example/tasks.md'), false);
   });
 });

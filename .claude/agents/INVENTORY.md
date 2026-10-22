@@ -1,257 +1,153 @@
 # Agent Inventory — ThisOneTimeOnAcidCom
 
-**Generated:** 18 October 2026
-**Spec Reference:**
-`.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)
-**Task:** T017a
+# Agent Inventory — ThisOneTimeOnAcidCom
 
-This document provides an inventory of the AI agents and skills configured for
-the ThisOneTimeOnAcidCom repository.
+**Last Updated**: 2026-10-22  
+**Status**: Phase 2 Governance Documentation  
+**Scope**: 20 agents, portfolio site specialized agents
 
 ---
 
-## Agent Specifications
+## Overview
 
-A total of **20 agents** are defined and documented in this directory, with **5
-skills** listed in the [skills inventory](#skill-specifications). Each agent is
-described in its own `.md` file following the pattern `{agent-name}-agent.md`.
+This document inventories all AI agents in ThisOneTimeOnAcidCom's `.claude/agents/` directory. All 20 agent manifests have YAML frontmatter with `enabled: true`. Each agent serves a distinct purpose in the portfolio site's development, content strategy, and operations workflows.
 
-### Content Strategy & Documentation (4 agents)
-
-| Agent | Purpose | File |
-|-------|---------|------|
-| Changelog Agent | Manage changelog entries using Keep a Changelog format with validation | `changelog-agent.md` |
-| Content Strategy Agent | Provide content planning and voice guidance for portfolio site copy | `content-strategy-agent.md` |
-| Document Reviewer Agent | Review documentation quality and completeness | `document-reviewer-agent.md` |
-| Website Content Strategist Agent | Specialized content strategist for portfolio site messaging | `website-content-strategist-agent.md` |
-
-### Design & User Experience (3 agents)
-
-| Agent | Purpose | File |
-|-------|---------|------|
-| Design Partner Agent | Provide design system guidance and component recommendations | `design-partner-agent.md` |
-| Metadata Agent | Validate and manage metadata (SEO, Open Graph, schema) | `metadata-agent.md` |
-| Client Website Discovery Assistant Agent | Discover and analyze client websites and portfolio opportunities | `client-website-discovery-assistant-agent.md` |
-
-### Development & Code (4 agents)
-
-| Agent | Purpose | File |
-|-------|---------|------|
-| Branches Agent | Validate branch names against repository branching strategy | `branches-agent.md` |
-| Labeling Agent | Manage GitHub issue and PR labeling workflows with consistent taxonomy | `labeling-agent.md` |
-| PR Agent | Assist with pull request creation, review, and management | `pr-agent.md` |
-| Reviewer Agent | Review code changes and design decisions | `reviewer-agent.md` |
-
-### Testing & QA (2 agents)
-
-| Agent | Purpose | File |
-|-------|---------|------|
-| Playwright Agent | Execute browser automation and e2e testing | `playwright-agent.md` |
-| Testing Agent | Plan and execute test strategy | `testing-agent.md` |
-
-### Issue & Project Management (3 agents)
-
-| Agent | Purpose | File |
-|-------|---------|------|
-| BugHerd Agent | Assess BugHerd feedback and route to validation | `bugherd-agent.md` |
-| Issue Agent | Manage issue triage, routing, and priority assignment | `issue-agent.md` |
-| PRD Agent | Create product requirements and specifications | `prd-agent.md` |
-
-### Analytics & Operations (3 agents)
-
-| Agent | Purpose | File |
-|-------|---------|------|
-| Metrics Agent | Track and analyze portfolio site metrics and analytics | `metrics-agent.md` |
-| PageSpeed Agent | Monitor and analyze Core Web Vitals and performance metrics | `pagespeed-agent.md` |
-| Reporting Agent | Generate reports and analysis for site metrics and content | `reporting-agent.md` |
-
-### Release & Deployment (1 agent)
-
-| Agent | Purpose | File |
-|-------|---------|------|
-| Release Agent | Prepare and validate releases for portfolio site deployments | `release-agent.md` |
+**Note**: Budget enforcement (hard limits) is specified in TOA-271 (separate epic); this inventory documents requirements and agent relationships only.
 
 ---
 
-## Skill Specifications
+## Agent Registry
 
-The five skills in `.claude/skills/` provide the following reusable workflows.
-Each linked specification documents its usage and constraints.
-
-| Skill | Purpose | Specification |
-| --- | --- | --- |
-| Branch Validation | Check branch names | [SKILL.md][branch] |
-| Changelog Management | Manage changelog entries | [SKILL.md][changelog] |
-| Labeling Workflow | Apply issue and PR labels | [SKILL.md][labeling] |
-| Test Execution | Run applicable test suites | [SKILL.md][test] |
-| Validation | Check repository integrity | [SKILL.md][validate] |
-
-[branch]: ../skills/branch-validation/SKILL.md
-[changelog]: ../skills/changelog/SKILL.md
-[labeling]: ../skills/labeling/SKILL.md
-[test]: ../skills/test/SKILL.md
-[validate]: ../skills/validate/SKILL.md
-
-## Agent Discovery Process
-
-Agents are automatically discovered by the Claude Code session via the
-`.claude/` directory structure. The following properties are extracted from each
-agent specification:
-
-1. **Agent name** — derived from the filename (e.g., `changelog-agent.md` →
-   "Changelog Agent")
-
-1. **Purpose** — extracted from the first heading/section of the agent spec
-
-1. **Tools** — listed in the agent configuration and available for use when the
-   agent is invoked
-
-1. **Constraints** — documented in the agent's specification file
-
-## Budget Controls
-
-Agent execution budgets are tracked separately per T7.3 (TOA-271). Each agent
-has:
-
-- **Token budget**: Per-invocation maximum tokens (policy target)
-- **Execution quota**: Maximum invocations per period (policy target)
-- **Rate limiting**: Enforced by agent implementation and caller discipline
-
-See `.github/specs/001-repo-governance-layout-and-agentic-workflows/` for budget
-allocation details.
+| Agent Name | Purpose | Domain | Input | Output | Primary Tools | Permissions | Budget Constraint |
+|---|---|---|---|---|---|---|---|
+| **branches-agent** | Branch validation and Git workflow enforcement | Infrastructure | Branch name, Git operations | Validation results | Read, Write, Bash | Branch changes require explicit permission | Pending (TOA-271) |
+| **bugherd-agent** | BugHerd feedback assessment and routing | QA/Testing | Feedback data | Test validation results | Read, Write, Bash | Testing | Pending (TOA-271) |
+| **changelog-agent** | Changelog management (Keep a Changelog format) | Documentation | Changelog entries | Validated entries | Read, Write, Bash | Content | Pending (TOA-271) |
+| **client-website-discovery-assistant-agent** | Website discovery and analysis | Research | URLs, project context | Discovery reports | Read, Write, Bash | Research | Pending (TOA-271) |
+| **content-strategy-agent** | Content planning and voice guidance | Content | Content briefs | Strategy docs | Read, Write, Bash | Content | Pending (TOA-271) |
+| **design-partner-agent** | Design system guidance | Design | Design requirements | Component recommendations | Read, Write, Bash | Design | Pending (TOA-271) |
+| **document-reviewer-agent** | Documentation quality review | Documentation | Markdown files | Review results | Read, Write, Bash | Documentation | Pending (TOA-271) |
+| **issue-agent** | GitHub issue triage and routing | DevOps | Issue data | Triage results | Read, Write, Bash | GitHub | Pending (TOA-271) |
+| **labeling-agent** | GitHub issue/PR labeling | DevOps | GitHub metadata | Labels applied | Read, Write, Bash | GitHub | Pending (TOA-271) |
+| **metadata-agent** | SEO and metadata validation | Content | Page metadata | Validation report | Read, Write, Bash | Content | Pending (TOA-271) |
+| **metrics-agent** | Analytics tracking and reporting | Reporting | Usage data | Metric summaries | Read, Write, Bash | Reporting | Pending (TOA-271) |
+| **pagespeed-agent** | Core Web Vitals monitoring | Performance | Performance data | Audit results | Read, Write, Bash | Monitoring | Pending (TOA-271) |
+| **playwright-agent** | Browser automation and testing | Testing | Test scenarios | Evidence, artifacts | Read, Write, Bash | Testing | Pending (TOA-271) |
+| **prd-agent** | Product requirement documentation | Product | Requirements | Specification docs | Read, Write, Bash | Product | Pending (TOA-271) |
+| **pr-agent** | Pull request creation and review | DevOps | PR data | PR management results | Read, Write, Bash | GitHub | Pending (TOA-271) |
+| **release-agent** | Release validation and deployment | DevOps | Release data | Deployment results | Read, Write, Bash | Deployment | Pending (TOA-271) |
+| **reporting-agent** | Report generation and analysis | Reporting | Data sources | Reports | Read, Write, Bash | Reporting | Pending (TOA-271) |
+| **reviewer-agent** | Code change review | QA | Code diffs | Review findings | Read, Write, Bash | Review | Pending (TOA-271) |
+| **testing-agent** | Test strategy planning | Testing | Requirements | Test plan | Read, Write, Bash | Testing | Pending (TOA-271) |
+| **website-content-strategist-agent** | Website copy and engagement | Content | Site context | Content strategy | Read, Write, Bash | Content | Pending (TOA-271) |
 
 ---
 
-## Maintenance & Updates
+## Relationship Map
 
-To add, modify, or remove an agent:
+### By Domain
 
-1. Edit the agent's `.md` file in this directory
+**Infrastructure** (1 agent)
+- branches-agent — Git and branch validation
 
-1. Update this inventory to reflect changes
+**DevOps/GitHub** (4 agents)
+- issue-agent — Issue triage
+- labeling-agent — PR/issue labeling
+- pr-agent — PR management
+- release-agent — Deployment
 
-1. Open an issue with `[AGENT-INVENTORY-UPDATE]` tag for team review
+**Testing/QA** (4 agents)
+- bugherd-agent — BugHerd assessment
+- playwright-agent — Browser automation
+- reviewer-agent — Code review
+- testing-agent — Test planning
 
-1. Commit changes to the branch created for this change, following the
-   repository branch naming rules
+**Content/Design** (6 agents)
+- changelog-agent — Changelog management
+- content-strategy-agent — Voice guidance
+- design-partner-agent — Design system
+- document-reviewer-agent — Docs review
+- metadata-agent — SEO validation
+- website-content-strategist-agent — Copy strategy
 
----
+**Research/Discovery** (1 agent)
+- client-website-discovery-assistant-agent — Website analysis
 
-## Related Documentation
+**Reporting/Monitoring** (4 agents)
+- metrics-agent — Analytics
+- pagespeed-agent — Performance
+- prd-agent — Product specs
+- reporting-agent — Report generation
 
-- **Agent Specifications**: Each agent file (`{name}-agent.md`)
-- **Budget Controls**:
-  `.github/specs/001-repo-governance-layout-and-agentic-workflows/` (R7.3)
-- **Anthropic Platforms**: `docs/AnthropicPlatforms.md` (T017b)
-- **Protected Files**: `.github/workflows/protected-files-guard.yml` (T017c)
+### Workflow Dependencies
 
----
-
-## Comprehensive Agent Specifications
-
-### Template: Agent Documentation Framework
-
-Each agent specification (`.md` file) should include:
-
-| Field | Description | Example |
-|-------|-------------|---------|
-| **Purpose** | What the agent does and why | Manage changelog entries per Keep a Changelog format |
-| **Inputs** | Prompts, context, file paths, arguments | CHANGELOG.md path, PR description, version info |
-| **Outputs** | Code, specs, reports, formatted entries | Validated CHANGELOG.md entries, validation report |
-| **Tools** | Available tools for this agent | read, write, bash, grep |
-| **Permissions** | Required GitHub/file access | Read CHANGELOG.md, write to CHANGELOG.md |
-| **Workflow Relationships** | When called, from which workflows | Called on PR review, triggered by release workflow |
-| **Validation Points** | Where/how results are validated | Schema validation, format checks, diff review |
-| **Escalation** | When to pause and ask @ashley | Breaking format changes, version schema changes |
-| **Budget** | Token limits, execution time, retry limits | 50K tokens max, 5-minute timeout, 2 retries |
-| **Not In Scope** | What this agent doesn't handle | WordPress content, plugin updates (not applicable) |
-
-### Sample Agent Documentation
-
-#### Changelog Agent
-
-- **Purpose**: Manage changelog entries using Keep a Changelog 1.1.0 format
-- **Inputs**: CHANGELOG.md file, PR description/context, version number
-- **Outputs**: Validated/formatted CHANGELOG.md, validation report
-- **Tools**: read, write, bash
-- **Permissions**: Read/write CHANGELOG.md (protected file — requires owner
-  approval for changes beyond entries)
-- **Workflow Relationships**: Triggered by changelog-unified.yml workflow on PR
-  to release branches
-- **Validation**: Format validation (em-dashes, capitalization, categories),
-  schema validation (Keep a Changelog 1.1.0)
-- **Escalation**: Breaking changes to version schema, multi-file changelog
-  structure changes
-- **Budget**: 20K tokens per invocation, 3-minute timeout, 2 retries
-- **Not In Scope**: Multi-repository changelog aggregation, plugin changelogs
-
-#### Branches Agent
-
-- **Purpose**: Validate branch names against repository branching strategy
-- **Inputs**: Branch name string, validation rules (type/scope/title pattern)
-- **Outputs**: Validation result (pass/fail), detailed error messages with
-  corrections
-- **Tools**: bash
-- **Permissions**: Read-only (no file modifications)
-- **Workflow Relationships**: Called by validate:branch-name npm script and
-  pre-push hooks
-- **Validation**: Pattern matching (regex), type enumeration check, prefix
-  validation
-- **Escalation**: If validation rules need to change (requires owner approval)
-- **Budget**: 5K tokens per invocation, 1-minute timeout, 1 retry
-- **Not In Scope**: Enforcing branch protection rules (GitHub Settings only),
-  deleting branches
+- **PR Workflow**: pr-agent → labeling-agent → reviewer-agent
+- **Release Workflow**: release-agent → testing-agent → playwright-agent
+- **Content Workflow**: content-strategy-agent → document-reviewer-agent → changelog-agent
+- **Discovery Workflow**: client-website-discovery-assistant-agent → metadata-agent → metrics-agent
 
 ---
 
-## Agent Governance Principles
+## Tools Access Summary
 
-### Selection Criteria
+**Declared tools** (from manifest YAML frontmatter):
 
-Use an agent when:
+- **Read**: 20/20 agents
+- **Write**: 20/20 agents
+- **Bash**: 20/20 agents
 
-- ✅ Task is repetitive and benefits from automation
-- ✅ Decision tree is deterministic (can be documented)
-- ✅ Output can be validated programmatically
-- ✅ Escalation points are clearly defined
-- ✅ Agent can operate within defined budget constraints
+Git and Playwright describe workflow capabilities; neither is declared as a separate tool in these manifests. Registry permissions describe operating rules, not enforced tool restrictions.
 
-Do NOT use an agent when:
+**Global integrations** (separate from per-agent declarations):
 
-- ❌ Decision requires subjective judgment
-- ❌ Task involves sensitive/critical changes without human review
-- ❌ Output cannot be validated automatically
-- ❌ Escalation would require interrupting work mid-task
-
-### Budget Enforcement (TOA-271)
-
-Required budget controls (policy targets; enforcement owned separately by
-TOA-271):
-
-- **Token budget**: Maximum tokens per invocation (e.g., 20K for changelog
-  agent)
-- **Execution quota**: Maximum invocations per time period (e.g., 5 per day)
-- **Rate limiting**: To be enforced at runtime; agent blocked if limits exceeded
-- **Retry policy**: Configurable retries (typically 1-2) with exponential
-  backoff
-- **Timeout**: Wall-clock timeout per invocation (e.g., 3 minutes)
-
-See `.github/BUDGET_CONTROLS.md` for full enforcement strategy.
-
-### Workflow Integration
-
-Agents integrate with workflows in three patterns:
-
-1. **Pull-triggered**: Called by GitHub Actions workflows (e.g., changelog
-   validation on PR)
-
-1. **Push-triggered**: Called by developers via CLI scripts (e.g., `npm run
-   validate:branch-name`)
-
-1. **Manual delegation**: Invoked explicitly by human reviewer/owner (e.g.,
-   `/changelog-agent update PR #123`)
+- `.claude/settings.json` does not declare any MCP servers or integrations.
+- `.claude/settings.example.json` includes `integrations.github.enabled: true` as an example global integration; it does not configure a GitHub MCP server or assign access to individual agents.
+- No MCP servers are configured in either settings file.
 
 ---
 
-*Maintained by Claude Haiku 4.5 and team*
-*Last updated: 19 October 2026*
+## Budget Constraints
+
+**Status**: Budget enforcement is managed separately under **TOA-271** (AI Agent Budget Controls epic).
+
+Pending decisions:
+- Token budgets per agent per execution
+- Concurrent agent limits
+- Cost tracking and alerts
+- Escalation procedures
+
+**Note**: This inventory documents agent purposes and relationships. Budget configuration will be applied in TOA-271.
+
+---
+
+## Configuration & Extension
+
+### Updating Agent Inventory
+
+When adding or removing agents:
+1. Add/remove row in Agent Registry table above
+2. Update Relationship Map by domain
+3. Update Workflow Dependencies if applicable
+4. Update Tools Access Summary
+5. Commit changes with message: "docs: update agent inventory (add/remove {agent-name})"
+
+### Budget Tracking (TOA-271)
+
+When TOA-271 is implemented, add a `Budget` column to the registry table with:
+- Token limit per execution
+- Concurrency limit
+- Cost category (priority, standard, background)
+
+---
+
+## References
+
+- **Specification**: `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)
+- **Budget Enforcement**: TOA-271 (separate epic)
+- **Related Skills**: `.claude/skills/` (5 skills, listed in AGENTS.md)
+- **Workflow Documentation**: `.github/workflows/` (17 workflows)
+
+---
+
+_Maintained as part of Phase 2 Governance Documentation (TOA-241)_
+_Generated with Claude Code on 2026-10-22_

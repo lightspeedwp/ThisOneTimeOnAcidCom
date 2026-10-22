@@ -1,3 +1,12 @@
+---
+name: "Branches Agent"
+description: "Recommends and validates branch names and guides Git operations while preserving uncommitted work."
+type: "agent"
+category: "workflow"
+enabled: true
+tools: ["read", "write", "bash"]
+---
+
 # Branches Agent
 
 **Purpose:** Recommend and validate branch names according to LightSpeed
