@@ -133,7 +133,8 @@ For each shortlisted provider:
 
 1. **Test Batch Upload**
 
-   - Upload 5–10 representative recovered assets (mix of formats: SVG, PNG, PDF, high-res TIFF)
+   - Upload 5–10 representative recovered assets (mix of formats: SVG, PNG, PDF,
+     high-res TIFF)
    - Document upload time, success rate, any format issues
    - Verify metadata (dimensions, colour space, EXIF) preserved
 
@@ -262,10 +263,14 @@ Create one row per candidate provider:
 
 **Functional Requirements**:
 
-- FR-010 (Evaluation workflow) → Real-world testing with representative recovered assets (Phase 2)
-- FR-011 (Provider assessment) → Validates cost, limits, concurrent-user support with actual testing
-- FR-012 (Distinguish evaluation from approval) → This document evaluates; approval is separate decision (TOA-284)
-- FR-013 (Print-quality support per provider) → Print support matrix included (Q2 resolution: 300 DPI, RGB/CMYK, PNG/PDF)
+- FR-010 (Evaluation workflow) → Real-world testing with representative
+  recovered assets (Phase 2)
+- FR-011 (Provider assessment) → Validates cost, limits, concurrent-user support
+  with actual testing
+- FR-012 (Distinguish evaluation from approval) → This document evaluates;
+  approval is separate decision (TOA-284)
+- FR-013 (Print-quality support per provider) → Print support matrix included
+  (Q2 resolution: 300 DPI, RGB/CMYK, PNG/PDF)
 
 **Related Linear Issues**:
 

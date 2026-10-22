@@ -19,8 +19,10 @@ materials) before committing to a storage provider or migration approach.
 
 **Scope**: This plan covers the *definition and validation phases*:
 
-- Phase 0: Research (resolve 3 critical clarifications on provider choice, asset recovery baseline, implementation sequencing)
-- Phase 1: Design (catalogue schema, provider evaluation criteria, validation approach, operational runbook structure)
+- Phase 0: Research (resolve 3 critical clarifications on provider choice, asset
+  recovery baseline, implementation sequencing)
+- Phase 1: Design (catalogue schema, provider evaluation criteria, validation
+  approach, operational runbook structure)
 
 **Out of Scope** (deferred to separate implementation issues TOA-284/285/286):
 Provider infrastructure, build integration, responsive-image processing,
@@ -62,14 +64,17 @@ runtime performance)
 
 **Constraints**:
 
-- Non-invention rule: do not fabricate missing metadata (credits, provenance, rights)
+- Non-invention rule: do not fabricate missing metadata (credits, provenance,
+  rights)
 - Figma references preserved until recovered assets and mappings verified
 - Asset IDs independent of storage provider (enable future migration)
-- Recovery assessment must be evidence-based (pilot extraction, manual export testing, not assumptions)
+- Recovery assessment must be evidence-based (pilot extraction, manual export
+  testing, not assumptions)
 
 **Scale/Scope**:
 
-- Recover and catalogue ~56 website assets (12 pilot + ~44 additional via Figma Make or manual export)
+- Recover and catalogue ~56 website assets (12 pilot + ~44 additional via Figma
+  Make or manual export)
 - Evaluate 2–3 candidate storage providers against defined criteria
 - Define validation approach for ~56 assets before migration
 - No responsive-image processing or build-system changes in this phase
@@ -85,11 +90,16 @@ is a template (not yet filled with project principles).
 
 **Standard Gates for Definition/Validation Workflow**:
 
-- ✅ **Specification Complete**: Specification reviewed and approved; outstanding clarifications documented
-- ✅ **Requirements Testable**: All functional requirements (FR-001–018) are observable and verifiable
-- ✅ **Traceability Mapped**: All 11 child Linear issues and parent (TOA-269) mapped to requirements
-- ✅ **Scope Boundaries Clear**: Definition phase distinguished from implementation (TOA-284/285/286 separate)
-- ⏳ **Critical Clarifications Pending**: 3 owner decisions required before Phase 1 design can proceed:
+- ✅ **Specification Complete**: Specification reviewed and approved; outstanding
+  clarifications documented
+- ✅ **Requirements Testable**: All functional requirements (FR-001–018) are
+  observable and verifiable
+- ✅ **Traceability Mapped**: All 11 child Linear issues and parent (TOA-269)
+  mapped to requirements
+- ✅ **Scope Boundaries Clear**: Definition phase distinguished from
+  implementation (TOA-284/285/286 separate)
+- ⏳ **Critical Clarifications Pending**: 3 owner decisions required before Phase
+  1 design can proceed:
 - Q1: Approved storage provider choice or evaluation-first approval
 - Q2: Recoverable asset count and print-quality baseline
 - Q3: Implementation sequencing and blocker logic
@@ -98,7 +108,8 @@ is a template (not yet filled with project principles).
 
 - ✅ Specification ready for Phase 0 research
 - ⏳ Phase 0 research must resolve Q1, Q2, Q3 before proceeding to Phase 1 design
-- **ERROR if Phase 0 completes without resolving clarifications**: Phase 1 design blocked until owner provides answers
+- **ERROR if Phase 0 completes without resolving clarifications**: Phase 1
+  design blocked until owner provides answers
 
 ---
 
@@ -141,9 +152,12 @@ is a template (not yet filled with project principles).
 
 **Implementation Phase** (separate issues):
 
-- TOA-284 (Configure Git LFS & Netlify) — Uses catalogue schema and provider choice from Phase 1
-- TOA-285 (Image migration pipeline) — Uses catalogue schema, reference mappings and validation checklist from Phase 1
-- TOA-286 (Operational handover) — Uses validation checklist and quickstart runbook from Phase 1
+- TOA-284 (Configure Git LFS & Netlify) — Uses catalogue schema and provider
+  choice from Phase 1
+- TOA-285 (Image migration pipeline) — Uses catalogue schema, reference mappings
+  and validation checklist from Phase 1
+- TOA-286 (Operational handover) — Uses validation checklist and quickstart
+  runbook from Phase 1
 
 **No code repositories** or source directories are created in this phase. All
 deliverables are specification documents, schemas and frameworks.
@@ -179,14 +193,16 @@ alternative) or should evaluation precede approval?
 - Compare free-tier vs. actual pricing and quotas for 2–3 providers
 - Document integration complexity (build system, API, visual editing UI)
 - Assess print-quality support per provider
-- Recommend decision path: approve one provider OR approve TOA-276 evaluation-first approach
+- Recommend decision path: approve one provider OR approve TOA-276
+  evaluation-first approach
 
 **Deliverable**: Provider recommendation section in `research.md`
 
 **Impacts**:
 
 - If approved: TOA-284 and TOA-285 can plan infrastructure and build integration
-- If evaluation-first: TOA-276 becomes gating issue; TOA-284/285 dependent on TOA-276 completion
+- If evaluation-first: TOA-276 becomes gating issue; TOA-284/285 dependent on
+  TOA-276 completion
 
 ---
 
@@ -198,15 +214,18 @@ print-quality requirements?
 **Scope**:
 
 - Verify "12 pilot assets" and "56 total assets" figures from audit reports
-- Assess Figma Make extraction capability against actual Figma files (if accessible)
+- Assess Figma Make extraction capability against actual Figma files (if
+  accessible)
 - Identify manual-export gaps and effort estimates
-- Define print-quality baseline (resolution, format, colour space) if print is a requirement
+- Define print-quality baseline (resolution, format, colour space) if print is a
+  requirement
 
 **Research Approach**:
 
 - Run extraction pilot on a sample of Figma files (part of TOA-280 validation)
 - Document what Figma Make recovered successfully vs. manual-export requirements
-- Assess print suitability of recovered samples (resolution, format compatibility)
+- Assess print suitability of recovered samples (resolution, format
+  compatibility)
 - Estimate recovery percentage (realistically ~60–80%, not 100%)
 - Confirm print requirements or mark as aspirational
 
@@ -227,15 +246,19 @@ validation, or can phases overlap?
 
 **Scope**:
 
-- Clarify distinction between TOA-277 (define schema) and TOA-283 (finalise schema)
+- Clarify distinction between TOA-277 (define schema) and TOA-283 (finalise
+  schema)
 - Determine whether TOA-284/285 can start before TOA-282 validation completes
-- Assess whether parallel work (e.g., infrastructure planning while validation continues) is acceptable
+- Assess whether parallel work (e.g., infrastructure planning while validation
+  continues) is acceptable
 
 **Research Approach**:
 
 - Map linear issue descriptions to intended blocker relationships
-- Identify work that can proceed in parallel (e.g., TOA-280 extraction pilot parallel to TOA-277 schema definition)
-- Document critical path: research → definition → validation → provider approval → infrastructure → migration
+- Identify work that can proceed in parallel (e.g., TOA-280 extraction pilot
+  parallel to TOA-277 schema definition)
+- Document critical path: research → definition → validation → provider approval
+  → infrastructure → migration
 - Confirm owner's intention for schedule and risk tolerance
 
 **Deliverable**: Implementation sequencing section in `research.md`
@@ -244,7 +267,8 @@ validation, or can phases overlap?
 
 - Determines project schedule and blocker logic
 - Affects team allocation and parallel work opportunities
-- Influences risk (rework if validation finds schema issues) vs. speed (parallelise if acceptable)
+- Influences risk (rework if validation finds schema issues) vs. speed
+  (parallelise if acceptable)
 
 ---
 
@@ -259,7 +283,8 @@ recovery, provider evaluation and validation.
 
 - `data-model.md` — Entity definitions and metadata structure
 - `contracts/catalogue-schema.json` — JSON schema for asset validation
-- `contracts/provider-evaluation.md` — Provider comparison matrix and decision criteria
+- `contracts/provider-evaluation.md` — Provider comparison matrix and decision
+  criteria
 - `contracts/validation-checklist.md` — Quality gates and procedures
 - `quickstart.md` — Validation runbook and sample workflows
 
@@ -270,12 +295,19 @@ ValidationResult).
 
 **Scope**:
 
-- Define Asset entity: asset*id, original/derivative flag, provenance, format, dimensions, print*suitability, usages, metadata (alt*text, caption, credits, rights*notes), recovery*status, recovery*method, timestamps
-- Define AssetRelationship entity: source/target asset IDs, relationship_type, notes
-- Define StorageProvider entity: name, cost_model, formats, performance, print support, API availability
-- Define ValidationResult entity: asset*id, check*type, status, severity, details, recovery_notes
-- Document validation rules (e.g., no fabrication of unknown metadata, asset ID uniqueness, reference integrity)
-- Specify state transitions if applicable (e.g., recovered → validated → approved → published)
+- Define Asset entity: asset*id, original/derivative flag, provenance, format,
+  dimensions, print*suitability, usages, metadata (alt*text, caption, credits,
+  rights*notes), recovery*status, recovery*method, timestamps
+- Define AssetRelationship entity: source/target asset IDs, relationship_type,
+  notes
+- Define StorageProvider entity: name, cost_model, formats, performance, print
+  support, API availability
+- Define ValidationResult entity: asset*id, check*type, status, severity,
+  details, recovery_notes
+- Document validation rules (e.g., no fabrication of unknown metadata, asset ID
+  uniqueness, reference integrity)
+- Specify state transitions if applicable (e.g., recovered → validated →
+  approved → published)
 
 **Deliverable**: `data-model.md` — Entity definitions, attributes,
 relationships, validation rules, state machine
@@ -288,12 +320,17 @@ relationships, validation rules, state machine
 
 **Scope**:
 
-- Translate data model into JSON Schema format (industry standard for validation)
-- Define required fields (asset_id, original/derivative, format, dimensions) vs. optional (credits, rights if unknown)
-- Define field types, formats, ranges, enums (e.g., format: [PNG, SVG, JPEG, PDF])
-- Add validation constraints (e.g., minLength, pattern for asset IDs; enum values for status)
+- Translate data model into JSON Schema format (industry standard for
+  validation)
+- Define required fields (asset_id, original/derivative, format, dimensions) vs.
+  optional (credits, rights if unknown)
+- Define field types, formats, ranges, enums (e.g., format: [PNG, SVG, JPEG,
+  PDF])
+- Add validation constraints (e.g., minLength, pattern for asset IDs; enum
+  values for status)
 - Include examples (1–2 sample asset records)
-- Document how schema enforces non-invention rule (mark unknown data as null or "unknown", not fabricated)
+- Document how schema enforces non-invention rule (mark unknown data as null or
+  "unknown", not fabricated)
 
 **Deliverable**: `contracts/catalogue-schema.json` — JSON Schema with examples,
 validation rules, documentation
@@ -307,11 +344,16 @@ evaluation criteria from spec.
 
 **Scope**:
 
-- Define evaluation criteria: cost model, asset limit, supported formats, max file size, API availability, visual editing UI, batch processing, print quality, concurrent users, integration complexity
+- Define evaluation criteria: cost model, asset limit, supported formats, max
+  file size, API availability, visual editing UI, batch processing, print
+  quality, concurrent users, integration complexity
 - Create comparison matrix template (providers × criteria)
-- Document scoring/weighting (e.g., critical criteria: print support, format flexibility; nice-to-have: visual editing UI)
-- Include decision framework (e.g., "must support PNG/SVG"; "must handle 56+ assets"; "integration complexity <40 hours")
-- Reference research findings (pricing, provider capabilities, print support assessment)
+- Document scoring/weighting (e.g., critical criteria: print support, format
+  flexibility; nice-to-have: visual editing UI)
+- Include decision framework (e.g., "must support PNG/SVG"; "must handle 56+
+  assets"; "integration complexity <40 hours")
+- Reference research findings (pricing, provider capabilities, print support
+  assessment)
 
 **Deliverable**: `contracts/provider-evaluation.md` — Evaluation criteria,
 comparison matrix, decision framework, scoring guidance
@@ -325,11 +367,18 @@ findings.
 
 **Scope**:
 
-- Define validation checks: visual comparison (recovered vs. original website and Figma), broken-reference detection, metadata completeness, format validation, print-quality assessment
+- Define validation checks: visual comparison (recovered vs. original website
+  and Figma), broken-reference detection, metadata completeness, format
+  validation, print-quality assessment
 - Create checklist template with checkboxes and guidance for each check type
-- Document procedures: how to perform visual comparison (tools, criteria for acceptance), how to detect broken references (link scanning, asset ID verification), how to assess metadata completeness (required vs. optional fields), how to test print quality
-- Define severity levels (critical: missing asset or broken reference; high: missing metadata; low: minor visual degradation)
-- Include escalation procedures (who to notify if validation fails, approval process for known gaps)
+- Document procedures: how to perform visual comparison (tools, criteria for
+  acceptance), how to detect broken references (link scanning, asset ID
+  verification), how to assess metadata completeness (required vs. optional
+  fields), how to test print quality
+- Define severity levels (critical: missing asset or broken reference; high:
+  missing metadata; low: minor visual degradation)
+- Include escalation procedures (who to notify if validation fails, approval
+  process for known gaps)
 
 **Deliverable**: `contracts/validation-checklist.md` — Checks, procedures,
 severity levels, escalation
@@ -344,10 +393,13 @@ pilot).
 **Scope**:
 
 - Create step-by-step validation guide for a batch of recovered assets
-- Include prerequisites (asset catalogue file, original website, original Figma files, comparison tools)
-- Document how to run each check type (visual comparison command, reference verification script, metadata validation query)
+- Include prerequisites (asset catalogue file, original website, original Figma
+  files, comparison tools)
+- Document how to run each check type (visual comparison command, reference
+  verification script, metadata validation query)
 - Include expected outcomes for passing/failing checks
-- Document troubleshooting (e.g., "visual comparison fails: possible format degradation, escalate to team lead")
+- Document troubleshooting (e.g., "visual comparison fails: possible format
+  degradation, escalate to team lead")
 - Provide sample results (1–2 example asset validation runs)
 
 **Deliverable**: `quickstart.md` — Runbook, prerequisites, procedures, expected
@@ -359,11 +411,17 @@ outcomes, sample runs, troubleshooting
 
 After Phase 1 design completes, re-check gates:
 
-- ✅ **Data Model Aligns with Spec**: All entities from spec are defined with complete attributes and relationships
-- ✅ **Catalogue Schema is Testable**: Schema can validate sample assets; examples provided
-- ✅ **Provider Evaluation is Objective**: Criteria are testable; weighting or decision logic is clear
-- ✅ **Validation Procedures are Executable**: Each check can be performed by a human or tool; expected outcomes are defined
-- ✅ **Downstream Issues Can Proceed**: TOA-276 has evaluation framework; TOA-277/283 have schema; TOA-279 has validation procedures; TOA-284/285 have inputs
+- ✅ **Data Model Aligns with Spec**: All entities from spec are defined with
+  complete attributes and relationships
+- ✅ **Catalogue Schema is Testable**: Schema can validate sample assets;
+  examples provided
+- ✅ **Provider Evaluation is Objective**: Criteria are testable; weighting or
+  decision logic is clear
+- ✅ **Validation Procedures are Executable**: Each check can be performed by a
+  human or tool; expected outcomes are defined
+- ✅ **Downstream Issues Can Proceed**: TOA-276 has evaluation framework;
+  TOA-277/283 have schema; TOA-279 has validation procedures; TOA-284/285 have
+  inputs
 
 **ERROR Condition**: If Phase 1 design reveals that research did not adequately
 resolve a clarification, halt and return to Phase 0 to get additional owner

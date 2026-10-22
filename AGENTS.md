@@ -21,30 +21,44 @@ All authoritative design and development guidance lives in
 [`guidelines/`](guidelines/). Agents must read it before making changes. These
 files define their own reading order, so follow that rather than inventing one:
 
-1. **[guidelines/README.md](guidelines/README.md)** — directory index and the **required reading order** (Steps 1–7).
+1. **[guidelines/README.md](guidelines/README.md)** — directory index and the
+   **required reading order** (Steps 1–7).
 
-1. **[guidelines/Guidelines.md](guidelines/Guidelines.md)** — Step 1 of that order: critical rules, bundler workarounds, folder conventions and the default AI workflow.
+1. **[guidelines/Guidelines.md](guidelines/Guidelines.md)** — Step 1 of that
+   order: critical rules, bundler workarounds, folder conventions and the
+   default AI workflow.
 
-1. **[guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)** — component taxonomy and file-location mapping.
+1. **[guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)** — component
+   taxonomy and file-location mapping.
 
-1. **[guidelines/css-architecture.md](guidelines/css-architecture.md)** — BEM CSS rules. See the [Tailwind contradiction](#unresolved-decisions-owner-confirmation-required) below.
+1. **[guidelines/css-architecture.md](guidelines/css-architecture.md)** — BEM
+   CSS rules. See the [Tailwind
+   contradiction](#unresolved-decisions-owner-confirmation-required) below.
 
-1. **[guidelines/changelog.md](guidelines/changelog.md)** — changelog format and protection rules.
+1. **[guidelines/changelog.md](guidelines/changelog.md)** — changelog format and
+   protection rules.
 
 ### Design tokens and theme
 
-- **[guidelines/design-tokens/](guidelines/design-tokens/)** — colours, typography, spacing and animations
-- **[guidelines/dark-mode-implementation.md](guidelines/dark-mode-implementation.md)** — light/dark theme system
-- **[guidelines/component-dark-mode.md](guidelines/component-dark-mode.md)** — per-component theme patterns
+- **[guidelines/design-tokens/](guidelines/design-tokens/)** — colours,
+  typography, spacing and animations
+- **[guidelines/dark-mode-implementation.md](guidelines/dark-mode-implementation.md)**
+  — light/dark theme system
+- **[guidelines/component-dark-mode.md](guidelines/component-dark-mode.md)** —
+  per-component theme patterns
 
 ### Data system
 
-- **[src/app/data/README.md](src/app/data/README.md)** — centralised mock data. All UI content must come from `src/app/data/mock/` (written as `/data/mock` in the guidelines), never hardcoded. Editorial content (journal entries, articles, manuscript chapters) resides in `content/`.
+- **[src/app/data/README.md](src/app/data/README.md)** — centralised mock data.
+  All UI content must come from `src/app/data/mock/` (written as `/data/mock` in
+  the guidelines), never hardcoded. Editorial content (journal entries,
+  articles, manuscript chapters) resides in `content/`.
 
 ### Spec Kit (spec-driven development)
 
 - **[.specify/](.specify/)** — Spec Kit templates, scripts and workflows
-- **[.gemini/commands/](.gemini/commands/)** — Gemini CLI Spec Kit commands (`.toml` files)
+- **[.gemini/commands/](.gemini/commands/)** — Gemini CLI Spec Kit commands
+  (`.toml` files)
 
 ### Path convention used in the guidelines
 
@@ -82,10 +96,14 @@ repository they map as follows:
 
 ## npm is the only package manager for this repository
 
-- `package-lock.json` (lockfile v3) is the only lockfile committed. There is no `pnpm-lock.yaml` or `yarn.lock`.
-- The Netlify site's build command is `npm run build` (updated in `src/app/netlify.toml` on 18 Oct 2026).
-- The root [README.md](README.md) tells contributors to run `npm ci` and `npm run dev`.
-- The dependency-validation workflow pairs `package.json` with `package-lock.json`.
+- `package-lock.json` (lockfile v3) is the only lockfile committed. There is no
+  `pnpm-lock.yaml` or `yarn.lock`.
+- The Netlify site's build command is `npm run build` (updated in
+  `src/app/netlify.toml` on 18 Oct 2026).
+- The root [README.md](README.md) tells contributors to run `npm ci` and `npm
+  run dev`.
+- The dependency-validation workflow pairs `package.json` with
+  `package-lock.json`.
 
 All pnpm artefacts have been removed (18 October 2026):
 
@@ -175,24 +193,33 @@ complete.
 **Phase 2 Foundational Tasks (T008-T015, completed 18 October 2026)**
 
 - ✅ **T008**: Jest ESM configuration verified (588 tests passing)
-- ✅ **T009**: Vitest fallback installed (`vitest@1.6.1` added to devDependencies)
+- ✅ **T009**: Vitest fallback installed (`vitest@1.6.1` added to
+  devDependencies)
 - ✅ **T010**: Test baseline documented above (this section)
-- ✅ **T011**: pnpm artefacts removed (workspace.yaml, lock.yaml, pnpm.overrides block, netlify.toml command)
-- ✅ **T012**: Node.js 24 pinning complete (.nvmrc, engines field, README, netlify.toml updated)
+- ✅ **T011**: pnpm artefacts removed (workspace.yaml, lock.yaml, pnpm.overrides
+  block, netlify.toml command)
+- ✅ **T012**: Node.js 24 pinning complete (.nvmrc, engines field, README,
+  netlify.toml updated)
 - ✅ **T013-T015**: Tailwind removed completely
 - No tailwindcss or @tailwindcss packages in dependencies
 - No Tailwind config files (tailwind.config.*, .postcssrc)
 - postcss.config.mjs is empty (no Tailwind plugins)
-- BEM CSS fully in place: `src/styles/` (blocks, components, effects, patterns, tokens)
+- BEM CSS fully in place: `src/styles/` (blocks, components, effects, patterns,
+  tokens)
 - Guidelines document BEM-only requirement (`guidelines/css-architecture.md`)
 
 **Phase 4 Testing Infrastructure Tasks (T025-T030, completed 19 October 2026)**
 
-- ✅ **T025**: Jest ESM configuration verified and locked (11 suites, 588/588 tests pass with @swc/core)
-- ✅ **T026**: Bats build verification confirmed (12/12 tests pass; validates output integrity)
-- ✅ **T027**: Playwright e2e configured (structure valid; requires browser install for execution)
-- ✅ **T028**: Comprehensive testing guide created (`docs/TESTING.md`; covers all suites, troubleshooting, CI/CD)
-- ✅ **T029**: PR labeling workflow active (fetches canonical labeler.yml from lightspeedwp/.github; applies labels by branch type)
+- ✅ **T025**: Jest ESM configuration verified and locked (11 suites, 588/588
+  tests pass with @swc/core)
+- ✅ **T026**: Bats build verification confirmed (12/12 tests pass; validates
+  output integrity)
+- ✅ **T027**: Playwright e2e configured (structure valid; requires browser
+  install for execution)
+- ✅ **T028**: Comprehensive testing guide created (`docs/TESTING.md`; covers all
+  suites, troubleshooting, CI/CD)
+- ✅ **T029**: PR labeling workflow active (fetches canonical labeler.yml from
+  lightspeedwp/.github; applies labels by branch type)
 - ✅ **T030**: Test command status updated (above tables in this section)
 
 **When you change code, report which of these you actually ran. Never claim
@@ -210,7 +237,8 @@ Rules](guidelines/Guidelines.md). The key forbidden patterns are:
 
 - Optional chaining (`?.`) — use explicit null checks
 - Nullish coalescing (`??`) — use if/else
-- `import.meta.env` — do not use it (see the [contradiction](#unresolved-decisions-owner-confirmation-required) below)
+- `import.meta.env` — do not use it (see the
+  [contradiction](#unresolved-decisions-owner-confirmation-required) below)
 - Nested ternaries — convert to if/else
 - `for...of` loops — use classic `for` loops
 
@@ -232,7 +260,9 @@ import from it, never suggest Supabase integration, and always dismiss the
 
 ### Content rules
 
-- **No hardcoded UI content** — all UI strings, page metadata and component assets come from `src/app/data/mock/`; editorial manuscript chapters, journal entries and articles reside in `content/`
+- **No hardcoded UI content** — all UI strings, page metadata and component
+  assets come from `src/app/data/mock/`; editorial manuscript chapters, journal
+  entries and articles reside in `content/`
 - **Sentence case** for all headings, titles, labels and navigation
 - **Pronouns:** Ash uses he/him exclusively
 - **Voice:** follow [guidelines/voice-and-tone.md](guidelines/voice-and-tone.md)
@@ -241,11 +271,13 @@ import from it, never suggest Supabase integration, and always dismiss the
 
 Do not modify these without explicit owner instruction:
 
-- `CHANGELOG.md` — never delete, move or rename it (see [guidelines/changelog.md](guidelines/changelog.md))
+- `CHANGELOG.md` — never delete, move or rename it (see
+  [guidelines/changelog.md](guidelines/changelog.md))
 - `ATTRIBUTIONS.md`
 - `src/app/components/figma/ImageWithFallback.tsx`
 - `src/app/utils/supabase/`
-- `.github/workflows/*` — centrally managed by `lightspeedwp/dependency-merge-controller`, and local edits are reverted
+- `.github/workflows/*` — centrally managed by
+  `lightspeedwp/dependency-merge-controller`, and local edits are reverted
 - `tasks/task-list.md` — never delete it
 
 ---
@@ -310,8 +342,11 @@ as part of documentation work.
 
 ## Source vs generated output
 
-- **Source** is everything committed in the repository: `src/`, `guidelines/`, `scripts/`, `public/` and the root configuration files. Agents edit source.
-- **Generated output** is `dist/`. It is the Vite build output that Netlify publishes, and it is ignored by `.gitignore`. Never treat it as configuration, and never edit it by hand. `.netlify/` is also ignored local state.
+- **Source** is everything committed in the repository: `src/`, `guidelines/`,
+  `scripts/`, `public/` and the root configuration files. Agents edit source.
+- **Generated output** is `dist/`. It is the Vite build output that Netlify
+  publishes, and it is ignored by `.gitignore`. Never treat it as configuration,
+  and never edit it by hand. `.netlify/` is also ignored local state.
 
 ---
 
@@ -319,17 +354,31 @@ as part of documentation work.
 
 These items come from repository evidence. They are recorded here, not resolved:
 
-1. **Package manager.** npm is in use (lockfile, Netlify command, README), but `pnpm.overrides` in `package.json` still refers to pnpm. Confirm npm and decide whether to remove this remnant. (Governance Decision PKG-001 pending approval)
+1. **Package manager.** npm is in use (lockfile, Netlify command, README), but
+   `pnpm.overrides` in `package.json` still refers to pnpm. Confirm npm and
+   decide whether to remove this remnant. (Governance Decision PKG-001 pending
+   approval)
 
 1. **Node.js version.** Node 24 LTS selected via opt-in `.nvmrc`; `package.json`
    `engines.node: ">=24"` permits later majors and is advisory by default
    (Governance Decision NODE-001: Option B, implemented 2026-10-17).
 
-1. **Netlify configuration file.** `src/app/netlify.toml` is not read because the base directory is the repository root. Decide whether to move it to the root, set the base directory, or delete it, and whether its headers and redirect are still wanted.
+1. **Netlify configuration file.** `src/app/netlify.toml` is not read because
+   the base directory is the repository root. Decide whether to move it to the
+   root, set the base directory, or delete it, and whether its headers and
+   redirect are still wanted.
 
-1. **BEM vs Tailwind.** All site styling now uses semantic BEM classes exclusively. Tailwind CSS and related dependencies have been completely removed (Governance Decision STYLE-001: Enforce BEM-only, implemented 2026-10-17). Guidelines.md § 2 should be updated to remove references to "Tailwind CSS V4".
+1. **BEM vs Tailwind.** All site styling now uses semantic BEM classes
+   exclusively. Tailwind CSS and related dependencies have been completely
+   removed (Governance Decision STYLE-001: Enforce BEM-only, implemented
+   2026-10-17). Guidelines.md § 2 should be updated to remove references to
+   "Tailwind CSS V4".
 
-1. **`import.meta.env`.** The bundler table in Guidelines.md says it is "Completely removed", but Guidelines.md § 12 (Console Logging Policy) recommends `if (import.meta.env.DEV)`, and `src/app/components/common/ThemeToggleES5.tsx` still uses it. Until this is resolved, follow the bundler table and do not use `import.meta.env`.
+1. **`import.meta.env`.** The bundler table in Guidelines.md says it is
+   "Completely removed", but Guidelines.md § 12 (Console Logging Policy)
+   recommends `if (import.meta.env.DEV)`, and
+   `src/app/components/common/ThemeToggleES5.tsx` still uses it. Until this is
+   resolved, follow the bundler table and do not use `import.meta.env`.
 
 1. **Jest ESM and testing infrastructure.** Jest unit tests now working with
 @swc/jest transformer (Governance Decision TEST-001: Option B, implemented

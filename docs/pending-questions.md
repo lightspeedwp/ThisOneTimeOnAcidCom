@@ -6,27 +6,35 @@ Core concept question — pick one:
 
 1. What is this page?
 
-   * Option A: Recommended artists — curated gallery of UV/neon makeup artists Ash admires
+   * Option A: Recommended artists — curated gallery of UV/neon makeup artists
+     Ash admires
      * Recommended artists page is an existing page is /about/music
-   * Option B: Getting started resources — resource page for aspiring face painters
+   * Option B: Getting started resources — resource page for aspiring face
+     painters
      * This is a new makeup artistry getting started resources page
-   * Option C: Inspiration gallery — mood board of UV/neon looks that inspire Ash (not his own work)
-     * The Inspiration Gallery is going to contain images that I prompt before events with concepts and themes.
+   * Option C: Inspiration gallery — mood board of UV/neon looks that inspire
+     Ash (not his own work)
+     * The Inspiration Gallery is going to contain images that I prompt before
+       events with concepts and themes.
 
 Additional questions:
 
-1. Should this page live under /about/ (as a sub-page) or as a top-level page (e.g., /recommended or /resources)?
+1. Should this page live under /about/ (as a sub-page) or as a top-level page
+   (e.g., /recommended or /resources)?
 
    * /about/resources/
-1. Is this page linked from the main navigation or discovered through the About section?
+1. Is this page linked from the main navigation or discovered through the About
+   section?
 
-   * The page can be discovered via the main about page /about and also the sitemap, so update the sitemap.
+   * The page can be discovered via the main about page /about and also the
+     sitemap, so update the sitemap.
 1. Should it cross-reference the Gear page (for product recommendations)?
 
    * Yes
 1. Are there specific artists or brands Ash wants to mention by name?
 
-   * I have already briefed in the music page, but for the gear and recommendations / resources section you can promote
+   * I have already briefed in the music page, but for the gear and
+     recommendations / resources section you can promote
      * [https://www.loreal.com/](https://www.loreal.com/)
      * [https://www.revlon.com/](https://www.revlon.com/)
      * [https://essencemakeup.com/](https://essencemakeup.com/)
@@ -37,7 +45,9 @@ Additional questions:
 
 ### **Sub-audit 4: Gear page expansion (0 formal questions — needs direction)**
 
-1. What direction should the gear page expansion take? (No prompt file exists yet — the orchestrator just says "PENDING — awaiting direction". What gear categories, products, or structure should be added?)
+1. What direction should the gear page expansion take? (No prompt file exists
+   yet — the orchestrator just says "PENDING — awaiting direction". What gear
+   categories, products, or structure should be added?)
 
    *
 
@@ -56,8 +66,10 @@ Additional questions:
    * Yes, add them to a Google Fonts dev tools page
 1. Video integration: Embedded videos or animated gradients as fallbacks?
 
-    * Yes, you can embed makeup videos from this channel \- [https://www.youtube.com/@Onlinemakeupacademy](https://www.youtube.com/@Onlinemakeupacademy)
-    * This video is important \- [https://www.youtube.com/watch?v=GiaGSWcnPn0](https://www.youtube.com/watch?v=GiaGSWcnPn0)
+    * Yes, you can embed makeup videos from this channel \-
+      [https://www.youtube.com/@Onlinemakeupacademy](https://www.youtube.com/@Onlinemakeupacademy)
+    * This video is important \-
+      [https://www.youtube.com/watch?v=GiaGSWcnPn0](https://www.youtube.com/watch?v=GiaGSWcnPn0)
 1. Theme priority: Which theme mode should be primary design target?
 
     * I need you to explain this question more
@@ -76,19 +88,24 @@ Additional questions:
 1. Audio integration: Real or simulated audio snippets?
 
     * Explain question more, I need more context
-1. Table complexity: Should tables support sorting, filtering, pagination in the dev tool?
+1. Table complexity: Should tables support sorting, filtering, pagination in the
+   dev tool?
 
     * Yes, show a range of tables with different styles and functionality
-1. Code syntax highlighting: Which programming languages should have full support? (Recommendation: JS, TS, CSS, HTML, Python)
+1. Code syntax highlighting: Which programming languages should have full
+   support? (Recommendation: JS, TS, CSS, HTML, Python)
 
     * Recommendation: JS, TS, CSS, HTML, Python, Shell Scripts
 1. Countdown integration: Real-time JavaScript or static demonstrations?
 
     * Real-time javascript and static demonstrations
-1. Audio effects: Implement sound effects (ticking, alarms, clicks) or document as optional?
+1. Audio effects: Implement sound effects (ticking, alarms, clicks) or document
+   as optional?
 
-    * The audio page can present audio ideas that we could implement on the site, start off with the dev tools page that explains how we implement
-1. Performance budget (animations): Animation-heavy blocks may impact performance — any specific frame-rate targets?
+    * The audio page can present audio ideas that we could implement on the
+      site, start off with the dev tools page that explains how we implement
+1. Performance budget (animations): Animation-heavy blocks may impact
+   performance — any specific frame-rate targets?
 
     * Can you recommend a series options for best practice
 
@@ -97,7 +114,9 @@ Additional questions:
 4 questions need your direction — I've written detailed explanations with
 recommendations in the report. Here's the short version:
 
-1. Q11 — Theme priority: Which theme do we build first? Dark, Light, Neon, or Brutalist? *My recommendation: Dark mode first (it's your site default), Brutalist second.*
+1. Q11 — Theme priority: Which theme do we build first? Dark, Light, Neon, or
+   Brutalist? *My recommendation: Dark mode first (it's your site default),
+   Brutalist second.*
 1. I would like you to build the Dark mode first because it is the site’s
 default, then the brutalist theme, then the Neon theme, then a glassmorphism
 theme, we already have have dark and light themes
@@ -118,11 +137,13 @@ concurrent animations) for any variations deployed to production pages.
 2. Locked in. Strict 60fps for production. We will use CSS transforms instead of
 layout triggers to keep it buttery smooth.
 
-1. Q14 — Export format: When someone clicks "Copy Code" on a variation, what format?
+1. Q14 — Export format: When someone clicks "Copy Code" on a variation, what
+   format?
    1. CSS first priority, React component second, JSON third. Skip Figma tokens.
    2. Locked in. CSS priority, then React.
 
-1. Q16 — Audio in testimonials: Should the speech bubble testimonial pattern play real voice clips or just show a visual waveform animation?
+1. Q16 — Audio in testimonials: Should the speech bubble testimonial pattern
+   play real voice clips or just show a visual waveform animation?
    1. Simulated (visual-only) since you want to present audio as concepts first.
    2. Locked in. Visual waveforms only to keep the UX clean and fast.
 
@@ -141,27 +162,40 @@ the site's structural integrity.
 
 ## Phase 1 Build Order (Priority)
 
-1. **Dark Mode (Default):** Deep blacks, high-contrast makeup photography, luxury feel.
+1. **Dark Mode (Default):** Deep blacks, high-contrast makeup photography,
+   luxury feel.
 
-1. **Brutalist:** Raw, unpolished, "Default Sans" fonts, hard black borders (\#000), no shadows, high-contrast yellow/black highlights.
+1. **Brutalist:** Raw, unpolished, "Default Sans" fonts, hard black borders
+   (\#000), no shadows, high-contrast yellow/black highlights.
 
-1. **Neon:** Cyberpunk aesthetic. Glowing box-shadows, dark purple backgrounds, electric pink/cyan accents.
+1. **Neon:** Cyberpunk aesthetic. Glowing box-shadows, dark purple backgrounds,
+   electric pink/cyan accents.
 
-1. **Glassmorphism:** Frosted glass backgrounds (`backdrop-filter: blur()`), thin white borders (0.5px), and vibrant background blobs.
+1. **Glassmorphism:** Frosted glass backgrounds (`backdrop-filter: blur()`),
+   thin white borders (0.5px), and vibrant background blobs.
 
 ## Phase 2 Additional Styles (Specifications)
 
-* **Neumorphism:** Use `#E0E5EC` as base. Create "extruded" effects using `box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5)`.
-* **Claymorphism:** Use `border-radius: 40px`, inner shadows for "puffiness," and bright, friendly pastels.
-* **Retro/Windows 95:** Use `#C0C0C0` grey, `border-style: inset/outset` for 3D beveled buttons, and pixel-grid fonts.
-* **Bauhaus:** Use strict geometric grids. Palette: `#FF0000` (Red), `#0000FF` (Blue), `#FFFF00` (Yellow). No gradients.
+* **Neumorphism:** Use `#E0E5EC` as base. Create "extruded" effects using
+  `box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px
+  rgba(255,255,255, 0.5)`.
+* **Claymorphism:** Use `border-radius: 40px`, inner shadows for "puffiness,"
+  and bright, friendly pastels.
+* **Retro/Windows 95:** Use `#C0C0C0` grey, `border-style: inset/outset` for 3D
+  beveled buttons, and pixel-grid fonts.
+* **Bauhaus:** Use strict geometric grids. Palette: `#FF0000` (Red), `#0000FF`
+  (Blue), `#FFFF00` (Yellow). No gradients.
 
 ## Technical Constraints
 
-* **Switcher UI:** Design a compact **Segmented Control** or **Dropdown** that replaces the current light/dark toggle.
-* **Performance:** Production code must hit **60fps**. Use CSS `will-change` for animations. Max 5 concurrent animations.
-* **Output Format:** Provide **Raw CSS Variables** first, followed by **React Functional Components**.
-* **Interaction:** Testimonials should feature a **visual-only waveform animation** (CSS/SVG) to represent audio without playback.
+* **Switcher UI:** Design a compact **Segmented Control** or **Dropdown** that
+  replaces the current light/dark toggle.
+* **Performance:** Production code must hit **60fps**. Use CSS `will-change` for
+  animations. Max 5 concurrent animations.
+* **Output Format:** Provide **Raw CSS Variables** first, followed by **React
+  Functional Components**.
+* **Interaction:** Testimonials should feature a **visual-only waveform
+  animation** (CSS/SVG) to represent audio without playback.
 
 ## **Next Step: Please generate the Global CSS Variable mapping for the "Dark" and "Brutalist" themes to begin the handoff.**
 
@@ -180,37 +214,47 @@ Here are specific, actionable web design styles to consider:
 
 1\. Retro / Y2K / "Dial-Up Delight" (Nostalgia)
 
-* Style: Reimagines late 90s/early 2000s, featuring pixel fonts, vibrant colors, tiled backgrounds, and MS Paint-style graphics.
-* Components: Beveled, 3D buttons, low-res GIFs, and bold, neon-on-dark palettes.
+* Style: Reimagines late 90s/early 2000s, featuring pixel fonts, vibrant colors,
+  tiled backgrounds, and MS Paint-style graphics.
+* Components: Beveled, 3D buttons, low-res GIFs, and bold, neon-on-dark
+  palettes.
 
 2\. Neumorphism (Soft/Tactile)
 
-* Style: Blends flat design with subtle shadows to make elements appear as if they are extruded from or pressed into the background, creating a tactile, "pushable" feel.
+* Style: Blends flat design with subtle shadows to make elements appear as if
+  they are extruded from or pressed into the background, creating a tactile,
+  "pushable" feel.
 * Components: Soft, monochromatic, with low-contrast shadows and highlights.
 
 3\. Claymorphism / 3D Puffy
 
-* Style: Features 3D-modeled, soft, "puffy" shapes that look like clay or plastic, popular in modern, playful app design.
+* Style: Features 3D-modeled, soft, "puffy" shapes that look like clay or
+  plastic, popular in modern, playful app design.
 * Components: Rounded corners, bright colors, and soft lighting.
 
 4\. Organic / "Snug Simple" (Cozy/Minimal)
 
-* Style: Prioritizes comfort and warmth using muted earth tones, pastel color blocks, rounded edges, and ample white space.
-* Components: Handwritten fonts, soft textures, and fluid, non-rectangular layout shapes.
+* Style: Prioritizes comfort and warmth using muted earth tones, pastel color
+  blocks, rounded edges, and ample white space.
+* Components: Handwritten fonts, soft textures, and fluid, non-rectangular
+  layout shapes.
 
 5\. [Material
 3](https://www.google.com/search?q=Material+3&rlz=1C5CHFA*enZA1188ZA1188&oq=suggest+other+web+design+styles%2C+for+a+theme+switcher%2C+I+have+dark%2C+light%2C+brutalist%2C+neon%2C+glassmorpism&gs*lcrp=EgZjaHJvbWUyBggAEEUYOdIBCTg0NDE1ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8&mstk=AUtExfCCei07WjhziFVLPTPJ4bp1acUlB3Nl6vBXj3h1M1-Wx6Zmg0PZNsgCIaDtHRYh20m3-lgh5NQ1UOJ2jhhfIL7LjYFnoqlgwVBMjNZ9w4K73PyBV3ZkHroQ38Y4v2j0a5kHFJNg4LBu2IqUEyZ_-l2Sz3vV2Czrpi5SnJvU-fCZhGQ&csui=3&ved=2ahUKEwi-06eD25CTAxXST0EAHeR4NGYQgK4QegQIBxAA)
 / Dynamic Theming
 
-* Style: Google's latest design system that emphasizes "expressive" shapes, customized colors, and motion physics.
-* Components: Large, rounded floating action buttons, bold typography, and dynamic, color-shifting palettes that adapt to user preferences.
+* Style: Google's latest design system that emphasizes "expressive" shapes,
+  customized colors, and motion physics.
+* Components: Large, rounded floating action buttons, bold typography, and
+  dynamic, color-shifting palettes that adapt to user preferences.
 
 6\.
 [Collage](https://www.google.com/search?q=Collage&rlz=1C5CHFA*enZA1188ZA1188&oq=suggest+other+web+design+styles%2C+for+a+theme+switcher%2C+I+have+dark%2C+light%2C+brutalist%2C+neon%2C+glassmorpism&gs*lcrp=EgZjaHJvbWUyBggAEEUYOdIBCTg0NDE1ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8&mstk=AUtExfCCei07WjhziFVLPTPJ4bp1acUlB3Nl6vBXj3h1M1-Wx6Zmg0PZNsgCIaDtHRYh20m3-lgh5NQ1UOJ2jhhfIL7LjYFnoqlgwVBMjNZ9w4K73PyBV3ZkHroQ38Y4v2j0a5kHFJNg4LBu2IqUEyZ_-l2Sz3vV2Czrpi5SnJvU-fCZhGQ&csui=3&ved=2ahUKEwi-06eD25CTAxXST0EAHeR4NGYQgK4QegQICRAA)
 / Scrapbook
 
 * Style: A chaotic, artistic, maximalist look that mimics a physical scrapbook.
-* Components: Torn paper textures, sticker-style graphics, doodle-like scribbles, and overlapping photo cutouts.
+* Components: Torn paper textures, sticker-style graphics, doodle-like
+  scribbles, and overlapping photo cutouts.
 
 suggest other web design styles, for a theme switcher, I have dark, light,
 brutalist, neon, glassmorphism
@@ -220,7 +264,8 @@ This style uses "soft UI" techniques, relying on subtle inner and outer shadows
 to make elements appear as if they are pushed through or extruded from the
 background.
 
-* **Key Traits:** Monochromatic color palettes (often light greys or pastels) and heavily rounded corners.
+* **Key Traits:** Monochromatic color palettes (often light greys or pastels)
+  and heavily rounded corners.
 
 2\. Claymorphism
 A 2026 evolution of 3D design, it combines the tactile feel of neumorphism with
@@ -232,12 +277,14 @@ higher-contrast shadows and inner glows to look like 3D clay objects.
 Lean into "web nostalgia" with a style that mimics early graphical user
 interfaces.
 
-* **Key Traits:** Beveled grey buttons, pixelated fonts (like MS Sans Serif), and strict 90s-era scrollbars.
+* **Key Traits:** Beveled grey buttons, pixelated fonts (like MS Sans Serif),
+  and strict 90s-era scrollbars.
 
 4\. Bauhaus / Swiss Design
 Focus on objective clarity and mathematical precision.
 
-* **Key Traits:** Primary colors (red, blue, yellow), heavy geometric shapes, and asymmetrical layouts.
+* **Key Traits:** Primary colors (red, blue, yellow), heavy geometric shapes,
+  and asymmetrical layouts.
 
 5\. Skeuomorphism (Modern)
 Unlike the 2010s version, the 2026 trend uses high-fidelity 3D assets to make
@@ -251,7 +298,8 @@ for your theme switcher?
 1 site
 
 * What Is Neumorphism? | IxDF \- Interaction-Design.org
-* This design style uses soft shadows and highlights for subtle depth, coupled with a muted color palette and rounded shapes for sim...
+* This design style uses soft shadows and highlights for subtle depth, coupled
+  with a muted color palette and rounded shapes for sim...
 
 Create a detailed prompt to create a theme switcher for my ashshaw.makeup
 website, which is built with figma make, I need to brief the the AI on clear
@@ -363,11 +411,17 @@ your specific export requirements into the master prompt below.
 
 Response to your 4 Questions
 
-* **Q11 (Priority):** Let's go with your recommendation. Build **Dark** (Baseline), then **Brutalist**, then **Neon**, then **Glassmorphism**.
-* **Q12 (Switcher Location):** Since you currently have a binary toggle, the most compact solution for 5+ themes is a **Radial Menu** or a **Dropdown Segmented Control**. Imagine the current toggle expanding into a small "palette" icon that reveals the other choices on hover/click.
-* **Q13 (Performance):** Locked in. **Strict 60fps** for production. We will use CSS transforms instead of layout triggers to keep it buttery smooth.
+* **Q11 (Priority):** Let's go with your recommendation. Build **Dark**
+  (Baseline), then **Brutalist**, then **Neon**, then **Glassmorphism**.
+* **Q12 (Switcher Location):** Since you currently have a binary toggle, the
+  most compact solution for 5+ themes is a **Radial Menu** or a **Dropdown
+  Segmented Control**. Imagine the current toggle expanding into a small
+  "palette" icon that reveals the other choices on hover/click.
+* **Q13 (Performance):** Locked in. **Strict 60fps** for production. We will use
+  CSS transforms instead of layout triggers to keep it buttery smooth.
 * **Q14 (Export):** Locked in. **CSS priority**, then React.
-* **Q16 (Audio):** Locked in. **Visual waveforms only** to keep the UX clean and fast.
+* **Q16 (Audio):** Locked in. **Visual waveforms only** to keep the UX clean and
+  fast.
 
 ---
 
@@ -388,27 +442,40 @@ the site's structural integrity.
 
 ## Phase 1 Build Order (Priority) (1)
 
-1. **Dark Mode (Default):** Deep blacks, high-contrast makeup photography, luxury feel.
+1. **Dark Mode (Default):** Deep blacks, high-contrast makeup photography,
+   luxury feel.
 
-1. **Brutalist:** Raw, unpolished, "Default Sans" fonts, hard black borders (\#000), no shadows, high-contrast yellow/black highlights.
+1. **Brutalist:** Raw, unpolished, "Default Sans" fonts, hard black borders
+   (\#000), no shadows, high-contrast yellow/black highlights.
 
-1. **Neon:** Cyberpunk aesthetic. Glowing box-shadows, dark purple backgrounds, electric pink/cyan accents.
+1. **Neon:** Cyberpunk aesthetic. Glowing box-shadows, dark purple backgrounds,
+   electric pink/cyan accents.
 
-1. **Glassmorphism:** Frosted glass backgrounds (`backdrop-filter: blur()`), thin white borders (0.5px), and vibrant background blobs.
+1. **Glassmorphism:** Frosted glass backgrounds (`backdrop-filter: blur()`),
+   thin white borders (0.5px), and vibrant background blobs.
 
 ## Phase 2 Additional Styles (Specifications) (1)
 
-* **Neumorphism:** Use `#E0E5EC` as base. Create "extruded" effects using `box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5)`.
-* **Claymorphism:** Use `border-radius: 40px`, inner shadows for "puffiness," and bright, friendly pastels.
-* **Retro/Windows 95:** Use `#C0C0C0` grey, `border-style: inset/outset` for 3D beveled buttons, and pixel-grid fonts.
-* **Bauhaus:** Use strict geometric grids. Palette: `#FF0000` (Red), `#0000FF` (Blue), `#FFFF00` (Yellow). No gradients.
+* **Neumorphism:** Use `#E0E5EC` as base. Create "extruded" effects using
+  `box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px
+  rgba(255,255,255, 0.5)`.
+* **Claymorphism:** Use `border-radius: 40px`, inner shadows for "puffiness,"
+  and bright, friendly pastels.
+* **Retro/Windows 95:** Use `#C0C0C0` grey, `border-style: inset/outset` for 3D
+  beveled buttons, and pixel-grid fonts.
+* **Bauhaus:** Use strict geometric grids. Palette: `#FF0000` (Red), `#0000FF`
+  (Blue), `#FFFF00` (Yellow). No gradients.
 
 ## Technical Constraints (1)
 
-* **Switcher UI:** Design a compact **Segmented Control** or **Dropdown** that replaces the current light/dark toggle.
-* **Performance:** Production code must hit **60fps**. Use CSS `will-change` for animations. Max 5 concurrent animations.
-* **Output Format:** Provide **Raw CSS Variables** first, followed by **React Functional Components**.
-* **Interaction:** Testimonials should feature a **visual-only waveform animation** (CSS/SVG) to represent audio without playback.
+* **Switcher UI:** Design a compact **Segmented Control** or **Dropdown** that
+  replaces the current light/dark toggle.
+* **Performance:** Production code must hit **60fps**. Use CSS `will-change` for
+  animations. Max 5 concurrent animations.
+* **Output Format:** Provide **Raw CSS Variables** first, followed by **React
+  Functional Components**.
+* **Interaction:** Testimonials should feature a **visual-only waveform
+  animation** (CSS/SVG) to represent audio without playback.
 
 **Next Step:** Please generate the **Global CSS Variable mapping** for the
 "Dark" and "Brutalist" themes to begin the handoff.
@@ -681,9 +748,14 @@ Use code with caution.
 
 Pro-Implementation Tips:
 
-1. **Avoid Flash of Unstyled Content (FOUC):** To prevent that "white flash" on load, you should add a tiny blocking script in your `index.html` head that reads `localStorage` and sets the `data-theme` before React even boots up.
+1. **Avoid Flash of Unstyled Content (FOUC):** To prevent that "white flash" on
+   load, you should add a tiny blocking script in your `index.html` head that
+   reads `localStorage` and sets the `data-theme` before React even boots up.
 
-1. **Visual Waveforms:** Since we're keeping these visual-only for now, you can use the `theme` variable from `useTheme()` to change the **stroke color** of your SVG waveforms dynamically (e.g., Electric Cyan for Neon, Solid Black for Brutalist).
+1. **Visual Waveforms:** Since we're keeping these visual-only for now, you can
+   use the `theme` variable from `useTheme()` to change the **stroke color** of
+   your SVG waveforms dynamically (e.g., Electric Cyan for Neon, Solid Black for
+   Brutalist).
 
 Shall we move on to the **compact Switcher UI component** (the radial/segmented
 control) to replace your current binary toggle?
@@ -691,7 +763,8 @@ control) to replace your current binary toggle?
 2 sites
 
 * Advanced Theming Techniques with Design Tokens | by David Supik | Medium
-* 25 Oct 2024 — Avoiding Flash of Unstyled Content (FOUC) Ensure that the correct theme is applied before the content is rendered to prevent FOUC.
+* 25 Oct 2024 — Avoiding Flash of Unstyled Content (FOUC) Ensure that the
+  correct theme is applied before the content is rendered to prevent FOUC.
 * Medium
 * ![][image1]
 * Concepts / Migration / from v8 / Component Mapping \- Docs ⋅ Storybook
@@ -806,8 +879,10 @@ Use code with caution.
 
 Performance Check
 
-* **60fps Target:** Using `layoutId` in Framer Motion uses hardware-accelerated transforms, keeping you well within your **Q13 performance budget**.
-* **Accessibility:** Each button has an `aria-label`, ensuring your site remains screen-reader friendly even with minimalist icons.
+* **60fps Target:** Using `layoutId` in Framer Motion uses hardware-accelerated
+  transforms, keeping you well within your **Q13 performance budget**.
+* **Accessibility:** Each button has an `aria-label`, ensuring your site remains
+  screen-reader friendly even with minimalist icons.
 
 **Phase 1 is now architected.** Shall we move into **Phase 2** and design the
 CSS for the **Neumorphism** and **Claymorphism** "Puffy" styles, or would you
@@ -906,8 +981,10 @@ Use code with caution.
 
 Why this works for Ash Shaw:
 
-* **Performance:** Animating `scaleY` and `opacity` is "Cheap" for the browser (Composite layer only), staying under your 60fps desktop budget.
-* **Concept:** It visualizes the artist's voice in testimonials without the friction of an "audio play" button.
+* **Performance:** Animating `scaleY` and `opacity` is "Cheap" for the browser
+  (Composite layer only), staying under your 60fps desktop budget.
+* **Concept:** It visualizes the artist's voice in testimonials without the
+  friction of an "audio play" button.
 
 **Next Step:** Ready to drop into the "puffy" tactile world of **Neumorphism**
 and **Claymorphism** for Phase 2?
@@ -1008,8 +1085,11 @@ Use code with caution.
 
 The "ashshaw.makeup" Touch:
 
-* **Neumorphism** works best for the **contact forms**—making the input fields feel "pressed into" the page.
-* **Claymorphism** is incredible for **image thumbnails**—it makes your makeup portfolio shots look like they are sitting in high-end, soft-touch cosmetic packaging.
+* **Neumorphism** works best for the **contact forms**—making the input fields
+  feel "pressed into" the page.
+* **Claymorphism** is incredible for **image thumbnails**—it makes your makeup
+  portfolio shots look like they are sitting in high-end, soft-touch cosmetic
+  packaging.
 
 **Phase 2 is looking tactile\!** Should we wrap up with the **Retro/Windows 95**
 "Beveled" styles or the **Skeuomorphism** "Wood & Leather" textures to complete
@@ -1113,7 +1193,8 @@ Code" feature** (Q14) so your users can export these styles themselves.
 1 site
 
 * Understanding Neumorphism: A Guide to the Latest UX Design Trend
-* 29 Aug 2024 — Neumorphic design uses a combination of shadows, highlights, and gradients to create depth and a tactile feel, making elements app...
+* 29 Aug 2024 — Neumorphic design uses a combination of shadows, highlights, and
+  gradients to create depth and a tactile feel, making elements app...
 * Flower Press Interactive
 * ![][image2]
 
@@ -1220,8 +1301,11 @@ Use code with caution.
 
 Why this is a "Killer Feature" for ashshaw.makeup:
 
-* **Designer Utility:** It turns your portfolio into a **design tool**. Other creators can visit your site, find a vibe they love (like the "Neon" or "Clay" look), and instantly grab the variables for their own projects.
-* **Minimal Overhead:** This function runs only on click, keeping your **Q13 performance budget** strictly for the visuals.
+* **Designer Utility:** It turns your portfolio into a **design tool**. Other
+  creators can visit your site, find a vibe they love (like the "Neon" or "Clay"
+  look), and instantly grab the variables for their own projects.
+* **Minimal Overhead:** This function runs only on click, keeping your **Q13
+  performance budget** strictly for the visuals.
 
 ## All 8 themes and the core logic are now mapped
 
@@ -1233,13 +1317,16 @@ ensure 30fps smoothness on phones.
 7 sites
 
 * Why Skeuomorphism Is Making a Comeback in 2025
-* 11 Jun 2025 — Skeuomorphism, Reimagined Soft shadows and gradients that imply depth without screaming “1990s.” Icons with enough realism to feel...
+* 11 Jun 2025 — Skeuomorphism, Reimagined Soft shadows and gradients that imply
+  depth without screaming “1990s.” Icons with enough realism to feel...
 
 * Monkey Hi Hat Getting Started Tutorial
-* 20 Jan 2024 — They are more often used to provide abstract data (such as pseudo-random noise, or in the case of MHH, a representation of audio),
+* 20 Jan 2024 — They are more often used to provide abstract data (such as
+  pseudo-random noise, or in the case of MHH, a representation of audio),
 
 * Made in Figma : r/Design
-* 28 Jan 2026 — Yes, this was entirely done in Figma , no Blender or 3D software involved. To get that "realistic" texture, I used gradients (simu...
+* 28 Jan 2026 — Yes, this was entirely done in Figma , no Blender or 3D software
+  involved. To get that "realistic" texture, I used gradients (simu...
 
 Show all
 
@@ -1362,13 +1449,15 @@ seeing.
 7 sites
 
 * Mobile framerate question \- Unity Engine
-* 18 Sept 2019 — Making a quick prototype for an android game and when built I noticed it seemed locked at 30 fps. Googled around a little and foun...
+* 18 Sept 2019 — Making a quick prototype for an android game and when built I
+  noticed it seemed locked at 30 fps. Googled around a little and foun...
 * Unity Discussions
 * SwiftUI Animations for Beginners: Learn with Simple Examples (2025 Edition)
 * 20 Jun 2025 — You need conditional logic around the animation
 
 * @groupher/use-mobile-detect-hook \- npm
-* 13 Nov 2022 — React hook to detect the device type. This hook is able to detect mobile, desktop, android or iOS device.
+* 13 Nov 2022 — React hook to detect the device type. This hook is able to
+  detect mobile, desktop, android or iOS device.
 * NPM
 
 Show all
@@ -1390,23 +1479,35 @@ will sit perfectly on top of your current build.
 
 ## 1\. The "Root Purge" (CSS Variable Mapping)
 
-* **Identify Hardcoded Values:** In your main CSS file, find every instance of `#0a0a0a` (Dark) and replace it with `var(--bg-primary)`.
-* **Universal Fallbacks:** Ensure your variables have fallbacks for older browsers: `background: var(--bg-primary, #0a0a0a);`.
-* **Typography Hijack:** Replace your `font-family` declarations with `var(--font-heading)`. This is where the **Brutalist** and **Retro** themes get their soul.
+* **Identify Hardcoded Values:** In your main CSS file, find every instance of
+  `#0a0a0a` (Dark) and replace it with `var(--bg-primary)`.
+* **Universal Fallbacks:** Ensure your variables have fallbacks for older
+  browsers: `background: var(--bg-primary, #0a0a0a);`.
+* **Typography Hijack:** Replace your `font-family` declarations with
+  `var(--font-heading)`. This is where the **Brutalist** and **Retro** themes
+  get their soul.
 
 ## 2\. Figma Make Specifics
 
-* **Frame Flattening:** Check if Figma Make exported any elements as static SVGs. If it did, CSS variables won't penetrate the paths. You'll need to swap those for **Inline SVGs** so `var(--accent-primary)` can change the `fill`.
-* **Z-Index Audit:** Ensure the new **Theme Switcher** has `z-index: 9999`. You don't want your makeup portfolio images overlapping the palette menu.
+* **Frame Flattening:** Check if Figma Make exported any elements as static
+  SVGs. If it did, CSS variables won't penetrate the paths. You'll need to swap
+  those for **Inline SVGs** so `var(--accent-primary)` can change the `fill`.
+* **Z-Index Audit:** Ensure the new **Theme Switcher** has `z-index: 9999`. You
+  don't want your makeup portfolio images overlapping the palette menu.
 
 ## 3\. Performance Verification (Q13)
 
-* **Safari Blur Test:** Open the site in Safari. If the **Glassmorphism** blur causes lag, ensure the `backdrop-filter` is wrapped in `@supports (backdrop-filter: blur(1px))`.
-* **Animation Cap:** Verify that no more than **5 concurrent animations** (Waveforms \+ Hover effects) are running. Use the Chrome DevTools "Rendering" tab to check "Paint Flashing."
+* **Safari Blur Test:** Open the site in Safari. If the **Glassmorphism** blur
+  causes lag, ensure the `backdrop-filter` is wrapped in `@supports
+  (backdrop-filter: blur(1px))`.
+* **Animation Cap:** Verify that no more than **5 concurrent animations**
+  (Waveforms \+ Hover effects) are running. Use the Chrome DevTools "Rendering"
+  tab to check "Paint Flashing."
 
 ## 4\. The "Zero Flash" Script
 
-* **Head Injection:** Place this tiny script at the very top of your `index.html` (before the `<body>` tag) to prevent the "White Flash" on load:
+* **Head Injection:** Place this tiny script at the very top of your
+  `index.html` (before the `<body>` tag) to prevent the "White Flash" on load:
 
 html
 
@@ -1424,8 +1525,10 @@ Use code with caution.
 
 **5\. QA: The "Contrast Stress Test"**
 
-* **Brutalist Check:** Ensure the text remains readable against the Safety Orange accents.
-* **Neon Check:** Ensure the "Glow" shadows don't make the text look blurry or illegible.
+* **Brutalist Check:** Ensure the text remains readable against the Safety
+  Orange accents.
+* **Neon Check:** Ensure the "Glow" shadows don't make the text look blurry or
+  illegible.
 
 ---
 
@@ -1436,13 +1539,16 @@ instantly?
 13 sites
 
 * How to Create Custom CSS Properties and Use Them Effectively
-* 27 Jul 2024 — Fallbacks for Browser Compatibility To ensure compatibility with older browsers that do not support CSS variables, always provide ...
+* 27 Jul 2024 — Fallbacks for Browser Compatibility To ensure compatibility with
+  older browsers that do not support CSS variables, always provide ...
 
 * Customizing Email Layouts
-* 29 Sept 2025 — html Add it to the top of your Layouts code, under Foundation. Then, find instances of your font families and replace them with yo…
+* 29 Sept 2025 — html Add it to the top of your Layouts code, under Foundation.
+  Then, find instances of your font families and replace them with yo…
 
 * Using Emacs and Org-mode as a static site generator
-* 29 Dec 2024 — The variable website-head holds the links to my JavaScript sources, my default CSS style, my favicon, and the RSS Feed. This websi...
+* 29 Dec 2024 — The variable website-head holds the links to my JavaScript
+  sources, my default CSS style, my favicon, and the RSS Feed. This websi...
 * Dennis Ogbe
 * ![][image3]
 

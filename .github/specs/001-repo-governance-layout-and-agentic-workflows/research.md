@@ -16,14 +16,19 @@ existing test suite and Speckit baseline (103/104)?
 
 **Validation Approach**:
 
-1. ✅ Current state verified: `npm run test:build` passes; Bats build tests functional
+1. ✅ Current state verified: `npm run test:build` passes; Bats build tests
+   functional
 
-1. ✅ Speckit baseline known: 103/104 (template-resolution edge case, approved to accept)
+1. ✅ Speckit baseline known: 103/104 (template-resolution edge case, approved to
+   accept)
 
-1. ⏳ **RESEARCH NEEDED**: Jest ESM setup—verify @swc/core integration doesn't regress existing tests
+1. ⏳ **RESEARCH NEEDED**: Jest ESM setup—verify @swc/core integration doesn't
+   regress existing tests
 
-   - Test: Run `npm run test:unit` after TEST-001 implementation and confirm no new failures vs. approved baseline
-   - Risk: ESM transformation could break existing CommonJS test patterns; need transpiler config validation
+   - Test: Run `npm run test:unit` after TEST-001 implementation and confirm no
+     new failures vs. approved baseline
+   - Risk: ESM transformation could break existing CommonJS test patterns; need
+     transpiler config validation
 
 **Decision**: TEST-001 approved (Jest ESM via @swc/core). Implementation will
 verify configuration and report any baseline drift.
@@ -39,7 +44,8 @@ fallback?
 
 - ✅ `package-lock.json` (lockfile v3) is committed; only npm lockfile in repo
 - ✅ Netlify build command: `npm run build`
-- ⚠️ Remnants: `pnpm-workspace.yaml`, `pnpm.overrides` in package.json, `pnpm run build` in src/app/netlify.toml
+- ⚠️ Remnants: `pnpm-workspace.yaml`, `pnpm.overrides` in package.json, `pnpm
+  run build` in src/app/netlify.toml
 
 **Validation Approach**:
 
@@ -63,7 +69,8 @@ Netlify deployment?
 
 - ✅ Validation baseline: Node 24.21.0, npm 11.19.0 (all tests pass)
 - ✅ No .nvmrc or engines field yet (adds during implementation)
-- ⚠️ Netlify currently reads UI settings (not netlify.toml); actual runtime unknown
+- ⚠️ Netlify currently reads UI settings (not netlify.toml); actual runtime
+  unknown
 
 **Validation Approach**:
 
@@ -82,11 +89,13 @@ Netlify integration verified during implementation PR.
 
 **Questions**:
 
-1. **GH-001**: What Discussion template structure works best for feature requests, Q&A, ideas?
+1. **GH-001**: What Discussion template structure works best for feature
+   requests, Q&A, ideas?
 
 1. **GH-002**: Do local PR templates override org templates, or must we inherit?
 
-1. **GH-003**: How do CODEOWNERS review requirements interact with status checks and auto-merge?
+1. **GH-003**: How do CODEOWNERS review requirements interact with status checks
+   and auto-merge?
 
 **Current Evidence**:
 
@@ -97,13 +106,17 @@ Netlify integration verified during implementation PR.
 
 **Validation Approach**:
 
-1. ✅ Decision GH-002 recorded: Keep local PR templates for this repo (workflow-specific routing)
+1. ✅ Decision GH-002 recorded: Keep local PR templates for this repo
+   (workflow-specific routing)
 
-1. ⏳ Test PR template routing on a feature/* branch to confirm correct template loads
+1. ⏳ Test PR template routing on a feature/* branch to confirm correct template
+   loads
 
-1. ⏳ Create CODEOWNERS file with critical paths (.github/, scripts/, AGENTS.md, guidelines/)
+1. ⏳ Create CODEOWNERS file with critical paths (.github/, scripts/, AGENTS.md,
+   guidelines/)
 
-1. ⏳ Enable branch protection on main and develop; validate interaction with CI status checks
+1. ⏳ Enable branch protection on main and develop; validate interaction with CI
+   status checks
 
 **Decision**: GH-001, GH-002, GH-003 approved. Implementation creates templates,
 CODEOWNERS, and protection rules; validates routing and enforcement.
@@ -118,7 +131,8 @@ explicitly setting SPECIFY*FEATURE*DIRECTORY?
 **Current Evidence**:
 
 - ✅ SPEC-001 approved: `.github/specs/` is canonical
-- ✅ Spec created at `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md`
+- ✅ Spec created at
+  `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md`
 - ✅ Setup-plan.sh works with `SPECIFY*FEATURE*DIRECTORY` env var
 - ✅ Speckit baseline: 103/104 (approved)
 
@@ -144,19 +158,25 @@ gate the optional ones?
 
 **Current Evidence**:
 
-- ✅ 8 implementation workflows documented (lint, tests, documentation, workflow-lint, branch-validation, changelog, labeling, pr-template-routing)
-- ✅ 6 evaluation workflows documented (validate-specs, claude-guard-tests, locked-files-guard, ruleset-drift, ai-feedback-validation, ai-feedback)
-- ✅ 3 deferred workflows documented (metrics, keep-pr-current, label-drift-check)
+- ✅ 8 implementation workflows documented (lint, tests, documentation,
+  workflow-lint, branch-validation, changelog, labeling, pr-template-routing)
+- ✅ 6 evaluation workflows documented (validate-specs, claude-guard-tests,
+  locked-files-guard, ruleset-drift, ai-feedback-validation, ai-feedback)
+- ✅ 3 deferred workflows documented (metrics, keep-pr-current,
+  label-drift-check)
 
 **Decision Clarified (Q1→Option B)**:
 
-- ✅ Only `locked-files-guard.yml` runs by default (protection for critical governance files)
-- ✅ Others (validate-specs, claude-guard-tests, ruleset-drift, ai-feedback-*) are manual/opt-in
+- ✅ Only `locked-files-guard.yml` runs by default (protection for critical
+  governance files)
+- ✅ Others (validate-specs, claude-guard-tests, ruleset-drift, ai-feedback-*)
+  are manual/opt-in
 - ✅ Rationale: Pragmatic—protect critical files without CI overhead
 
 **Validation Approach**:
 
-1. ⏳ Verify locked-files-guard detects modifications to CLAUDE.md, AGENTS.md, guidelines/*
+1. ⏳ Verify locked-files-guard detects modifications to CLAUDE.md, AGENTS.md,
+   guidelines/*
 
 1. ⏳ Document workflow triggering strategy (manual dispatch, labels, scheduling)
 
@@ -173,16 +193,19 @@ locked-files-guard; documents manual triggers for evaluation workflows.
 
 1. **R7.1**: Is the current ~18 agents / ~5 skills inventory still accurate?
 
-1. **R7.2**: Which Anthropic platforms (MCP, tool use, streaming, etc.) apply to which agents?
+1. **R7.2**: Which Anthropic platforms (MCP, tool use, streaming, etc.) apply to
+   which agents?
 
 1. **R7.3/R7.4**: What is the actual enforcement mechanism for agent budgets?
 
 **Current Evidence**:
 
-- ✅ Decision Q2→Option B: Document baseline (~18 agents, ~5 skills), allow evolution per TOA-264/265
+- ✅ Decision Q2→Option B: Document baseline (~18 agents, ~5 skills), allow
+  evolution per TOA-264/265
 - ✅ Decision Q3→Option A: Host-side enforcement (hard limits, not advisory)
 - ⚠️ Agent inventory in `.claude/agents/` not yet audited post-clarification
-- ⚠️ Budget enforcement mechanism (host-side runtime limits) not yet designed (TOA-271 owns)
+- ⚠️ Budget enforcement mechanism (host-side runtime limits) not yet designed
+  (TOA-271 owns)
 
 **Validation Approach**:
 
@@ -190,9 +213,11 @@ locked-files-guard; documents manual triggers for evaluation workflows.
 
 1. ⏳ Document each agent: purpose, tools, permissions, budget (advisory for now)
 
-1. ⏳ Document Anthropic reference usage per agent (MCP, tool use, streaming, prompt caching)
+1. ⏳ Document Anthropic reference usage per agent (MCP, tool use, streaming,
+   prompt caching)
 
-1. ⏳ TOA-271 research: Determine host-side budget enforcement API/mechanism (separate workstream)
+1. ⏳ TOA-271 research: Determine host-side budget enforcement API/mechanism
+   (separate workstream)
 
 **Decision**: R7.1–R7.4 resolved via Q2/Q3 clarification. Implementation
 documents inventory; TOA-271 handles enforcement design.
@@ -216,7 +241,8 @@ effort to BEM?
 
 1. ✅ Audit components for Tailwind utility patterns
 
-1. ⏳ Clarify Figma Make requirement (does it actually need Tailwind, or was this a misunderstanding?)
+1. ⏳ Clarify Figma Make requirement (does it actually need Tailwind, or was this
+   a misunderstanding?)
 
 1. ⏳ Plan migration path for any affected components
 
@@ -234,9 +260,11 @@ blocking dependencies?
 
 **Current Evidence** (from Workstream Coverage Matrix):
 
-- TOA-254 (Spec Kit): Blocks TOA-255, TOA-256, TOA-257, TOA-259 (documentation org)
+- TOA-254 (Spec Kit): Blocks TOA-255, TOA-256, TOA-257, TOA-259 (documentation
+  org)
 - TOA-260 (Testing): Blocks TOA-242 (CI); independent from others
-- TOA-261 (.github files): Blocks TOA-243, TOA-244, TOA-250–253, TOA-272, TOA-274
+- TOA-261 (.github files): Blocks TOA-243, TOA-244, TOA-250–253, TOA-272,
+  TOA-274
 - TOA-262 (Root config): Blocks TOA-258, TOA-273 (plus dependencies of TOA-260)
 - TOA-271 (Budget): External; no blocking dependencies
 
@@ -246,7 +274,8 @@ blocking dependencies?
 
 1. ⏳ Confirm no circular dependencies or hidden constraints
 
-1. ⏳ Sequence PRs: TOA-262 and TOA-261 can start immediately; TOA-254, TOA-260 can follow
+1. ⏳ Sequence PRs: TOA-262 and TOA-261 can start immediately; TOA-254, TOA-260
+   can follow
 
 1. ⏳ Plan PR creation order and review timeline
 
@@ -261,14 +290,19 @@ blocking research needed.
 - [x] Constitution gates passed (no violations requiring justification)
 - [x] 27 source references validated (workflows, Anthropic platforms, repos)
 - [ ] Jest ESM configuration tested end-to-end (implementation phase)
-- [ ] pnpm artefacts removed and npm validation added to CI (implementation phase)
+- [ ] pnpm artefacts removed and npm validation added to CI (implementation
+  phase)
 - [ ] Node.js 24 pinning confirmed with Netlify (implementation phase)
-- [ ] GitHub Discussions, PR templates, CODEOWNERS configured and tested (implementation phase)
-- [ ] Spec Kit regression test (create → plan → tasks) passing (implementation phase)
-- [ ] Evaluation workflow gating documented and optional workflows triggerable (implementation phase)
+- [ ] GitHub Discussions, PR templates, CODEOWNERS configured and tested
+  (implementation phase)
+- [ ] Spec Kit regression test (create → plan → tasks) passing (implementation
+  phase)
+- [ ] Evaluation workflow gating documented and optional workflows triggerable
+  (implementation phase)
 - [ ] Agent/skill inventory audited and documented (implementation phase)
 - [ ] Tailwind audit complete and removal path clear (implementation phase)
-- [ ] Workstream PR order planned and dependencies validated (implementation phase)
+- [ ] Workstream PR order planned and dependencies validated (implementation
+  phase)
 
 ---
 
@@ -375,8 +409,10 @@ contributor understanding.
 
 **Modifications to Locked Directories Require Approval**:
 
-- `.github/` – Submit [PROTECTED-FILE-CHANGE-REQUEST] issue to lightspeedwp/.github
-- `guidelines/` – Requires governance review (CSS architecture locked per STYLE-001)
+- `.github/` – Submit [PROTECTED-FILE-CHANGE-REQUEST] issue to
+  lightspeedwp/.github
+- `guidelines/` – Requires governance review (CSS architecture locked per
+  STYLE-001)
 - `scripts/` – Validation scripts protected; new utilities welcome
 - `tasks/` – task-list.md protected; new task files OK
 - `src/app/utils/supabase/` – Supabase config protected
@@ -398,7 +434,8 @@ contributor understanding.
 
 **For contributors**: Consult this inventory before:
 
-- Adding new directories (ask if needed or use `prompts/`, `docs/`, or `reports/`)
+- Adding new directories (ask if needed or use `prompts/`, `docs/`, or
+  `reports/`)
 - Modifying locked paths (submit change request)
 - Regenerating outputs (use build commands, don't commit)
 

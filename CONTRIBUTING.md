@@ -11,8 +11,11 @@ AI agents should also read [AGENTS.md](AGENTS.md).
 
 ## Prerequisites
 
-- **[Node.js](https://nodejs.org/) 24 LTS or later**. The repository pins Node.js 24 via `.nvmrc` and the `engines` field in `package.json`. Use `nvm use` or your preferred version manager to switch to the correct version.
-- **npm** (version 11+), which ships with Node.js. `package-lock.json` is the only committed lockfile, and Netlify builds with `npm run build`.
+- **[Node.js](https://nodejs.org/) 24 LTS or later**. The repository pins
+  Node.js 24 via `.nvmrc` and the `engines` field in `package.json`. Use `nvm
+  use` or your preferred version manager to switch to the correct version.
+- **npm** (version 11+), which ships with Node.js. `package-lock.json` is the
+  only committed lockfile, and Netlify builds with `npm run build`.
 - **[Git](https://git-scm.com/)**
 
 > Do not use pnpm or Yarn. npm is the only supported package manager. The
@@ -81,8 +84,11 @@ map to `src/app/components/` and `src/styles/`. The full mapping is in
 
 ### Source vs generated output
 
-- **Source** is everything committed to the repository: `src/`, `guidelines/`, `scripts/`, `public/` and the configuration files.
-- **Generated output** is the `dist/` directory, which `npm run build` produces and Netlify publishes. It is git-ignored, is not configuration, and must not be edited by hand.
+- **Source** is everything committed to the repository: `src/`, `guidelines/`,
+  `scripts/`, `public/` and the configuration files.
+- **Generated output** is the `dist/` directory, which `npm run build` produces
+  and Netlify publishes. It is git-ignored, is not configuration, and must not
+  be edited by hand.
 
 ### Deployment
 
@@ -96,7 +102,8 @@ Netlify reads `netlify.toml` in this order: package directory (if set in the UI)
 → base directory → repository root. There is **no root `netlify.toml`**. Confirm
 whether the package-directory UI setting is configured:
 
-- If the package directory is set to `src/app/`, then `src/app/netlify.toml` **may be active**
+- If the package directory is set to `src/app/`, then `src/app/netlify.toml`
+  **may be active**
 - If not configured (or set to root), then `src/app/netlify.toml` is not read
 
 SPA routing is defined in the plain-text `public/_redirects` file, which Vite
@@ -232,9 +239,14 @@ numbered sequentially starting from 001.
 
 ### More information
 
-- **Specification catalog:** [.github/specs/CATALOG.md](.github/specs/CATALOG.md) — browse all active specifications
-- **Spec Kit configuration:** [.specify/](.specify/) — templates and routing rules
-- **Maintenance procedures:** [.github/specs/MAINTENANCE.md](.github/specs/MAINTENANCE.md) — how to create, update, archive specs
+- **Specification catalog:**
+  [.github/specs/CATALOG.md](.github/specs/CATALOG.md) — browse all active
+  specifications
+- **Spec Kit configuration:** [.specify/](.specify/) — templates and routing
+  rules
+- **Maintenance procedures:**
+  [.github/specs/MAINTENANCE.md](.github/specs/MAINTENANCE.md) — how to create,
+  update, archive specs
 
 ## Coding conventions
 
@@ -273,7 +285,10 @@ decisions](#unresolved-decisions-owner-confirmation-required).
 
 ### Data and content authority
 
-- **UI and component content:** All UI strings, layout text, navigation labels and component assets must be imported from the centralized mock data system (`src/app/data/mock/`, via `@/data/mock`). Never hardcode text into components:
+- **UI and component content:** All UI strings, layout text, navigation labels
+  and component assets must be imported from the centralized mock data system
+  (`src/app/data/mock/`, via `@/data/mock`). Never hardcode text into
+  components:
 
 ```tsx
 // ✅ Correct
@@ -287,7 +302,11 @@ import { heroContent } from "@/data/mock";
 
 See [src/app/data/README.md](src/app/data/README.md).
 
-- **Editorial and reader content:** Long-form manuscript chapters, journal entries, stories and FAQs reside as Markdown under `content/` (e.g. `content/book/`, `content/journal/`). Content loaders (such as `bookContentLoader.ts`) and parser scripts ingest these files directly, distinguishing editorial articles from UI component mock data.
+- **Editorial and reader content:** Long-form manuscript chapters, journal
+  entries, stories and FAQs reside as Markdown under `content/` (e.g.
+  `content/book/`, `content/journal/`). Content loaders (such as
+  `bookContentLoader.ts`) and parser scripts ingest these files directly,
+  distinguishing editorial articles from UI component mock data.
 
 ### Headings: sentence case
 
@@ -394,13 +413,15 @@ Branch 'feat/your-feature-name' matches the repository branching strategy.
 
 ### 2. Making changes
 
-1. Create a branch from an up-to-date `develop` (the repository's default branch).
+1. Create a branch from an up-to-date `develop` (the repository's default
+   branch).
 
 1. Read the relevant guidelines **before** coding.
 
 1. Make your changes following the conventions above.
 
-1. Run the applicable checks from [Validation](#validation) and note the results.
+1. Run the applicable checks from [Validation](#validation) and note the
+   results.
 
 ### 3. Pull requests
 
@@ -438,8 +459,11 @@ been verified; do not assume GitHub loads the matching template automatically.
 
 - Write a clear description explaining what changed and why
 - List the validation commands you ran and their results, including any failures
-- Link related issues using "Related to #N" when acceptance criteria are still outstanding, and use a closing keyword (e.g. "Closes #N") only when the PR fully resolves the issue
-- Complete any template-specific sections (e.g. screenshots for UI changes, test results for fixes)
+- Link related issues using "Related to #N" when acceptance criteria are still
+  outstanding, and use a closing keyword (e.g. "Closes #N") only when the PR
+  fully resolves the issue
+- Complete any template-specific sections (e.g. screenshots for UI changes, test
+  results for fixes)
 
 ## If the template suggestion does not match
 
@@ -473,7 +497,8 @@ org-wide issue types and templates from
 
 **Creating an issue:**
 
-1. Go to the [Issues tab](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
+1. Go to the [Issues
+   tab](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
 
 1. Click "New issue"
 
@@ -482,9 +507,12 @@ org-wide issue types and templates from
 1. Fill out the template completely:
 
    - **Title:** Clear, concise description (sentence case)
-   - **Description:** Details, steps to reproduce (for bugs), or requirements (for features)
-   - **Labels:** Automatically applied based on issue type; add area labels (e.g., `area:ci`, `area:docs`)
-   - **Acceptance criteria:** For features and tasks, define what "done" looks like
+   - **Description:** Details, steps to reproduce (for bugs), or requirements
+     (for features)
+   - **Labels:** Automatically applied based on issue type; add area labels
+     (e.g., `area:ci`, `area:docs`)
+   - **Acceptance criteria:** For features and tasks, define what "done" looks
+     like
 
 **No local overrides:** Do not create `.github/ISSUE_TEMPLATE/` files here
 unless the issue type is repository-specific. The org-wide templates in
@@ -518,11 +546,13 @@ LightSpeed organization maintains a library of saved replies in
 
 ## How to add saved replies to your account
 
-1. Go to your [GitHub Settings → Saved replies](https://github.com/settings/saved_replies)
+1. Go to your [GitHub Settings → Saved
+   replies](https://github.com/settings/saved_replies)
 
 1. Click "Add a saved reply"
 
-1. Reference the [LightSpeed Saved Replies catalog](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
+1. Reference the [LightSpeed Saved Replies
+   catalog](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
 
 1. Copy the template text and customize as needed
 
@@ -554,21 +584,31 @@ complete catalog and contribution guide.
 
 ## Getting help
 
-- **Guidelines questions:** start with [guidelines/README.md](guidelines/README.md)
-- **Architecture questions:** see [guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)
-- **Component usage:** check the specific file in [guidelines/components/](guidelines/components/)
-- **Issue tracking:** [GitHub Issues](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
-- **Saved replies:** [LightSpeed Saved Replies](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
+- **Guidelines questions:** start with
+  [guidelines/README.md](guidelines/README.md)
+- **Architecture questions:** see
+  [guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)
+- **Component usage:** check the specific file in
+  [guidelines/components/](guidelines/components/)
+- **Issue tracking:** [GitHub
+  Issues](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues)
+- **Saved replies:** [LightSpeed Saved
+  Replies](https://github.com/lightspeedwp/.github/discussions/categories/saved-replies)
 
 ## Resolved decisions
 
 The following were documented as unresolved but have now been clarified:
 
-- ✅ **Branch naming:** `{type}/{scope}-{title}` pattern required. Validated by `npm run validate:branch-name`.
-- ✅ **PR templates:** Automatically routed based on branch type (see "Pull requests" section above).
-- ✅ **Node.js version:** Pinned to Node.js 24 LTS. Use `.nvmrc` (`nvm use`) or check `package.json` `engines` field.
-- ✅ **Package manager:** npm-only. `package-lock.json` is the canonical lockfile. pnpm remnants to be removed per TOA-262.
-- ✅ **Tailwind:** BEM-only CSS enforced per STYLE-001. Tailwind dependencies to be removed during Phase 6 cleanup.
+- ✅ **Branch naming:** `{type}/{scope}-{title}` pattern required. Validated by
+  `npm run validate:branch-name`.
+- ✅ **PR templates:** Automatically routed based on branch type (see "Pull
+  requests" section above).
+- ✅ **Node.js version:** Pinned to Node.js 24 LTS. Use `.nvmrc` (`nvm use`) or
+  check `package.json` `engines` field.
+- ✅ **Package manager:** npm-only. `package-lock.json` is the canonical
+  lockfile. pnpm remnants to be removed per TOA-262.
+- ✅ **Tailwind:** BEM-only CSS enforced per STYLE-001. Tailwind dependencies to
+  be removed during Phase 6 cleanup.
 
 ## Repository Governance & Policies
 
@@ -590,7 +630,8 @@ The following files are **protected and require explicit approval to modify**:
 
 ## Why files are protected
 
-- Governance infrastructure stability — changes affect all workflows and automations
+- Governance infrastructure stability — changes affect all workflows and
+  automations
 - Coding standards consistency — guidelines must remain canonical
 - Backend security — Supabase integration must not be accidentally exposed
 - Asset integrity — Figma components are contracts with design tools
@@ -653,11 +694,16 @@ for the complete catalog and prefix reference.
 
 This repository is part of the **LightSpeed organization governance** framework:
 
-- **Canonical governance files:** Live in `lightspeedwp/.github` (organization-wide standards)
-- **Local governance files:** Live in `.github/specs/` and `.github/workflows/` (repository-specific implementations)
-- **Repository rules:** Documented in `CONTRIBUTING.md` (this file), `AGENTS.md`, and `CLAUDE.md`
-- **Specification process:** Uses SpecKit in `.github/specs/{NNN-feature-slug}/` for feature documentation
-- **Workflow automation:** 17 GitHub Actions workflows enforce governance automatically
+- **Canonical governance files:** Live in `lightspeedwp/.github`
+  (organization-wide standards)
+- **Local governance files:** Live in `.github/specs/` and `.github/workflows/`
+  (repository-specific implementations)
+- **Repository rules:** Documented in `CONTRIBUTING.md` (this file),
+  `AGENTS.md`, and `CLAUDE.md`
+- **Specification process:** Uses SpecKit in `.github/specs/{NNN-feature-slug}/`
+  for feature documentation
+- **Workflow automation:** 17 GitHub Actions workflows enforce governance
+  automatically
 
 ## Key governance decisions
 
@@ -677,15 +723,21 @@ The full list, with evidence, is in [AGENTS.md § Unresolved
 decisions](AGENTS.md#unresolved-decisions-owner-confirmation-required). In
 summary:
 
-1. **Netlify config:** `src/app/netlify.toml` is inactive. Decide whether to move it, delete it or change the base directory.
+1. **Netlify config:** `src/app/netlify.toml` is inactive. Decide whether to
+   move it, delete it or change the base directory.
 
-1. **`import.meta.env`:** it is forbidden in the bundler table but recommended in Guidelines.md § 12, and still used in one component.
+1. **`import.meta.env`:** it is forbidden in the bundler table but recommended
+   in Guidelines.md § 12, and still used in one component.
 
-1. **Quality gates:** there are no test, lint or typecheck scripts, and the guidelines reference scripts that do not exist.
+1. **Quality gates:** there are no test, lint or typecheck scripts, and the
+   guidelines reference scripts that do not exist.
 
-1. **Journal scripts:** they expect `journal-content/`, but content is in `content/journal/`.
+1. **Journal scripts:** they expect `journal-content/`, but content is in
+   `content/journal/`.
 
-1. **Duplicate attribution files:** a root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. Clarify which is canonical and whether both are needed.
+1. **Duplicate attribution files:** a root `ATTRIBUTIONS.md` and a separate
+   `docs/Attributions.md` exist. Clarify which is canonical and whether both are
+   needed.
 
 1. **PostCSS:** two config files exist. The root `postcss.config.mjs` is the
 likely active one.

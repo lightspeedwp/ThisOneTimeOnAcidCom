@@ -50,11 +50,17 @@ and schema coverage.
 
 **Acceptance Scenarios**:
 
-1. **Given** original Figma artwork exists and Figma Make extraction is authenticated, **When** the pilot extraction runs, **Then** sample assets are recovered with dimensions, format, provenance and verified-complete metadata.
+1. **Given** original Figma artwork exists and Figma Make extraction is
+   authenticated, **When** the pilot extraction runs, **Then** sample assets are
+   recovered with dimensions, format, provenance and verified-complete metadata.
 
-1. **Given** recovered assets exist, **When** manual export gaps are identified, **Then** limitations are documented for handoff to later migration planning.
+1. **Given** recovered assets exist, **When** manual export gaps are identified,
+   **Then** limitations are documented for handoff to later migration planning.
 
-1. **Given** recovered assets exist, **When** the catalogue schema is applied, **Then** all fields required by TOA-277 (asset ID, provenance, original/derivative flag, usage rights, print suitability) are populated or marked as unknown/unrecoverable.
+1. **Given** recovered assets exist, **When** the catalogue schema is applied,
+   **Then** all fields required by TOA-277 (asset ID, provenance,
+   original/derivative flag, usage rights, print suitability) are populated or
+   marked as unknown/unrecoverable.
 
 ---
 
@@ -77,11 +83,17 @@ schema that works with recovered asset samples.
 
 **Acceptance Scenarios**:
 
-1. **Given** TOA-277 defines catalogue fields, **When** the schema is applied to 12 pilot assets, **Then** all mandatory fields are populated or marked as unrecoverable/unknown without data invention.
+1. **Given** TOA-277 defines catalogue fields, **When** the schema is applied to
+   12 pilot assets, **Then** all mandatory fields are populated or marked as
+   unrecoverable/unknown without data invention.
 
-1. **Given** the schema includes provenance tracking, **When** asset relationships (original → derivative, asset → usage) are mapped, **Then** dependencies are clear and no circular references exist.
+1. **Given** the schema includes provenance tracking, **When** asset
+   relationships (original → derivative, asset → usage) are mapped, **Then**
+   dependencies are clear and no circular references exist.
 
-1. **Given** the schema includes rights and credits, **When** incomplete metadata is identified, **Then** gaps are flagged and no missing information is fabricated.
+1. **Given** the schema includes rights and credits, **When** incomplete
+   metadata is identified, **Then** gaps are flagged and no missing information
+   is fabricated.
 
 ---
 
@@ -103,11 +115,18 @@ comparison matrix. Delivers: a provider evaluation report with recommendations.
 
 **Acceptance Scenarios**:
 
-1. **Given** TOA-276 defines evaluation criteria, **When** representative recovered assets are tested against shortlisted providers, **Then** real-world upload, tagging, retrieval and visual-editing workflows are documented.
+1. **Given** TOA-276 defines evaluation criteria, **When** representative
+   recovered assets are tested against shortlisted providers, **Then**
+   real-world upload, tagging, retrieval and visual-editing workflows are
+   documented.
 
-1. **Given** providers are evaluated, **When** cost, storage limits and concurrent-user support are verified against actual pricing (not free-tier assumptions), **Then** hidden costs or limitations are surfaced.
+1. **Given** providers are evaluated, **When** cost, storage limits and
+   concurrent-user support are verified against actual pricing (not free-tier
+   assumptions), **Then** hidden costs or limitations are surfaced.
 
-1. **Given** providers support different formats, **When** print-quality requirements are assessed, **Then** provider suitability for print workflows is documented (not assumed).
+1. **Given** providers support different formats, **When** print-quality
+   requirements are assessed, **Then** provider suitability for print workflows
+   is documented (not assumed).
 
 ---
 
@@ -127,11 +146,17 @@ validation checklist and draft operational guide.
 
 **Acceptance Scenarios**:
 
-1. **Given** recovered assets and their metadata exist, **When** visual comparison is performed against the original website and original Figma files, **Then** missing or degraded assets are identified.
+1. **Given** recovered assets and their metadata exist, **When** visual
+   comparison is performed against the original website and original Figma
+   files, **Then** missing or degraded assets are identified.
 
-1. **Given** reference mappings are defined (old → new asset IDs), **When** broken-reference detection runs, **Then** all internal website links point to valid new asset IDs.
+1. **Given** reference mappings are defined (old → new asset IDs), **When**
+   broken-reference detection runs, **Then** all internal website links point to
+   valid new asset IDs.
 
-1. **Given** the migration is complete, **When** the operational runbook is executed, **Then** the team can perform common tasks (add asset, tag, publish, recover from backup) without ambiguity.
+1. **Given** the migration is complete, **When** the operational runbook is
+   executed, **Then** the team can perform common tasks (add asset, tag,
+   publish, recover from backup) without ambiguity.
 
 ---
 
@@ -152,18 +177,25 @@ deployment.
 
 **Acceptance Scenarios**:
 
-1. **Given** authenticated Figma Make access is available, **When** the extraction pilot runs, **Then** extraction succeeds and fidelity is verified (no corruption, formats preserved, metadata intact).
+1. **Given** authenticated Figma Make access is available, **When** the
+   extraction pilot runs, **Then** extraction succeeds and fidelity is verified
+   (no corruption, formats preserved, metadata intact).
 
-1. **Given** extraction completes, **When** manual gaps are identified (e.g., assets that Figma Make cannot extract), **Then** manual-export approach and effort are documented.
+1. **Given** extraction completes, **When** manual gaps are identified (e.g.,
+   assets that Figma Make cannot extract), **Then** manual-export approach and
+   effort are documented.
 
-1. **Given** pilot extraction succeeds, **When** reusable skills or agent prompts are tested against new Figma files, **Then** extraction consistency and error handling are assessed.
+1. **Given** pilot extraction succeeds, **When** reusable skills or agent
+   prompts are tested against new Figma files, **Then** extraction consistency
+   and error handling are assessed.
 
 ---
 
 ### Edge Cases
 
 - What happens when an asset's original provenance is unknown or unrecoverable?
-- How does the system handle assets marked for print but missing high-resolution originals?
+- How does the system handle assets marked for print but missing high-resolution
+  originals?
 - What is the recovery plan if Figma Make extraction fails mid-batch?
 - How are retired or deprecated assets marked in the catalogue?
 - How does the team handle rights/credits disputes during recovery?
@@ -176,36 +208,62 @@ deployment.
 
 #### Asset Recovery and Inventory
 
-- **FR-001**: System MUST support authenticated extraction of artwork from Figma Make files without modifying source files (read-only extraction).
-- **FR-002**: System MUST catalogue recovered assets with unique stable identifiers (independent of storage provider or file path).
-- **FR-003**: Recovery workflow MUST distinguish original artwork from rendered derivatives and variant formats.
-- **FR-004**: Recovery workflow MUST capture or infer print-suitability assessment (original resolution, format compatibility with print workflows).
-- **FR-005**: Recovery process MUST document unrecoverable assets and manual-export gaps for handoff.
+- **FR-001**: System MUST support authenticated extraction of artwork from Figma
+  Make files without modifying source files (read-only extraction).
+- **FR-002**: System MUST catalogue recovered assets with unique stable
+  identifiers (independent of storage provider or file path).
+- **FR-003**: Recovery workflow MUST distinguish original artwork from rendered
+  derivatives and variant formats.
+- **FR-004**: Recovery workflow MUST capture or infer print-suitability
+  assessment (original resolution, format compatibility with print workflows).
+- **FR-005**: Recovery process MUST document unrecoverable assets and
+  manual-export gaps for handoff.
 
 #### Metadata and Catalogue
 
-- **FR-006**: Catalogue schema MUST define and enforce fields for: asset ID, original/derivative status, provenance, dimensions, format(s), usage context(s), alt text, captions, credits/rights, print-suitability flag.
-- **FR-007**: Catalogue MUST support asset relationships (original ↔ derivative, asset ↔ published usage) without data fabrication when relationships are unknown.
-- **FR-008**: Catalogue MUST enforce: do not invent missing credits, rights or source identifiers; mark unknown/unverified data explicitly.
-- **FR-009**: Catalogue storage location MUST be defined and validated for accessibility and durability (candidate: Git-tracked JSON, separate database, or provider-native tagging).
+- **FR-006**: Catalogue schema MUST define and enforce fields for: asset ID,
+  original/derivative status, provenance, dimensions, format(s), usage
+  context(s), alt text, captions, credits/rights, print-suitability flag.
+- **FR-007**: Catalogue MUST support asset relationships (original ↔ derivative,
+  asset ↔ published usage) without data fabrication when relationships are
+  unknown.
+- **FR-008**: Catalogue MUST enforce: do not invent missing credits, rights or
+  source identifiers; mark unknown/unverified data explicitly.
+- **FR-009**: Catalogue storage location MUST be defined and validated for
+  accessibility and durability (candidate: Git-tracked JSON, separate database,
+  or provider-native tagging).
 
 #### Provider Evaluation and Workflow
 
-- **FR-010**: Evaluation workflow MUST compare candidate providers against defined criteria using representative recovered assets (not free-tier assumptions).
-- **FR-011**: Provider assessment MUST validate cost, storage limits, concurrent-user support and editing-workflow integration with real-world testing.
-- **FR-012**: Assessment MUST distinguish provider evaluation from provider approval (evaluation informs recommendation; approval is a separate decision).
-- **FR-013**: Assessment MUST document print-quality support (file formats, resolution limits, batch processing) per provider.
+- **FR-010**: Evaluation workflow MUST compare candidate providers against
+  defined criteria using representative recovered assets (not free-tier
+  assumptions).
+- **FR-011**: Provider assessment MUST validate cost, storage limits,
+  concurrent-user support and editing-workflow integration with real-world
+  testing.
+- **FR-012**: Assessment MUST distinguish provider evaluation from provider
+  approval (evaluation informs recommendation; approval is a separate decision).
+- **FR-013**: Assessment MUST document print-quality support (file formats,
+  resolution limits, batch processing) per provider.
 
 #### Validation and Handoff
 
-- **FR-014**: Validation workflow MUST include visual comparison (recovered vs. original website and Figma) and broken-reference detection.
-- **FR-015**: Validation MUST verify catalogue metadata completeness before migration begins.
-- **FR-016**: Operational handoff MUST include a runbook for common tasks: add asset, tag asset, publish, recover from backup, retire asset.
-- **FR-017**: Operational guidance MUST document maintenance procedures and escalation paths for asset-related issues.
+- **FR-014**: Validation workflow MUST include visual comparison (recovered vs.
+  original website and Figma) and broken-reference detection.
+- **FR-015**: Validation MUST verify catalogue metadata completeness before
+  migration begins.
+- **FR-016**: Operational handoff MUST include a runbook for common tasks: add
+  asset, tag asset, publish, recover from backup, retire asset.
+- **FR-017**: Operational guidance MUST document maintenance procedures and
+  escalation paths for asset-related issues.
 
 #### Boundaries and Exclusions
 
-- **FR-018**: This specification covers *definition* of catalogue schema, evaluation criteria and validation approach. **[NOT INCLUDED]**: implementation of responsive-image processing, build-system integration, automated migration pipeline execution, or storage-provider infrastructure setup (those are implementation issues TOA-284, TOA-285, TOA-286).
+- **FR-018**: This specification covers *definition* of catalogue schema,
+  evaluation criteria and validation approach. **[NOT INCLUDED]**:
+  implementation of responsive-image processing, build-system integration,
+  automated migration pipeline execution, or storage-provider infrastructure
+  setup (those are implementation issues TOA-284, TOA-285, TOA-286).
 
 ---
 
@@ -220,17 +278,22 @@ material).
 
 - `asset_id`: Unique stable identifier, independent of storage provider
 - `original*or*derivative`: "original" | "derivative" | "variant"
-- `provenance`: Source (e.g., "Figma file X, page Y"; "exported from Z"; "manual upload")
+- `provenance`: Source (e.g., "Figma file X, page Y"; "exported from Z"; "manual
+  upload")
 - `format`: File format(s) (PNG, SVG, JPEG, PDF, etc.)
-- `dimensions`: Width × height (pixels for digital, also note print-capable resolution)
+- `dimensions`: Width × height (pixels for digital, also note print-capable
+  resolution)
 - `print_suitable`: Boolean; notes on print resolution/format compatibility
-- `usages`: Array of contexts where this asset is used (e.g., website hero, book cover, social media)
+- `usages`: Array of contexts where this asset is used (e.g., website hero, book
+  cover, social media)
 - `alt_text`: Accessibility description
 - `caption`: Human-readable label
 - `credits`: Creator/artist/source attribution
 - `rights_notes`: Licencing, usage restrictions, or verification status
-- `recovery*status`: "recovered" | "partial" | "manual*export_required" | "unrecoverable"
-- `recovery_method`: How it was obtained (Figma extraction, manual export, archive, etc.)
+- `recovery*status`: "recovered" | "partial" | "manual*export_required" |
+  "unrecoverable"
+- `recovery_method`: How it was obtained (Figma extraction, manual export,
+  archive, etc.)
 - `created_at`: When catalogued
 - `updated_at`: Last modified
 
@@ -262,7 +325,8 @@ Candidate for asset storage and visual editing.
 - `batch_processing`: Boolean; batch upload/export capability
 - `print*quality*notes`: Format support for print workflows
 - `concurrent_users`: Simultaneous editor limit or undefined
-- `integration_complexity`: Estimated effort to integrate with build/publish pipeline
+- `integration_complexity`: Estimated effort to integrate with build/publish
+  pipeline
 
 #### ValidationResult
 
@@ -271,9 +335,11 @@ Captures findings from validation runs.
 **Attributes**:
 
 - `asset_id`: Asset checked
-- `check*type`: "visual*comparison" | "broken*reference" | "metadata*completeness" | "format_validation"
+- `check*type`: "visual*comparison" | "broken*reference" |
+  "metadata*completeness" | "format_validation"
 - `status`: "pass" | "fail" | "partial" | "unverifiable"
-- `details`: Specific finding (e.g., "visual degradation in JPG conversion"; "alt text missing")
+- `details`: Specific finding (e.g., "visual degradation in JPG conversion";
+  "alt text missing")
 - `severity`: "critical" | "high" | "low"
 - `recovery_note`: Any impact on recovery status
 
@@ -283,26 +349,50 @@ Captures findings from validation runs.
 
 ### Measurable Outcomes
 
-- **SC-001**: 40–50 of 56 recoverable original assets are identified and catalogued with complete metadata (asset ID, format, provenance, print suitability, usage); unrecoverable assets are documented with recovery method attempted and reason unrecoverable.
-- **SC-002**: Catalogue schema is validated against a minimum of 12 pilot assets and confirmed to capture all required fields without data fabrication for unknown/missing provenance.
-- **SC-003**: Provider evaluation report includes real-world workflow testing (upload, tag, retrieve, edit) for at least 2 shortlisted providers using representative recovered assets, with documented cost, limits and print-quality support.
-- **SC-004**: Validation approach (visual comparison, broken-reference detection, metadata checks) is defined and tested against recovered assets, with a sample operational runbook delivered.
-- **SC-005**: Figma Make extraction capabilities are documented, including fidelity, supported formats, performance and manual-export gaps, with reusable skills/prompts for wider recovery deployment validated.
-- **SC-006**: Specification document includes requirement-to-issue traceability mapping all 11 child issues and distinguishes definition work from implementation work.
-- **SC-007**: All clarification questions critical to downstream decisions are answered or explicitly preserved as unresolved for owner confirmation.
+- **SC-001**: 40–50 of 56 recoverable original assets are identified and
+  catalogued with complete metadata (asset ID, format, provenance, print
+  suitability, usage); unrecoverable assets are documented with recovery method
+  attempted and reason unrecoverable.
+- **SC-002**: Catalogue schema is validated against a minimum of 12 pilot assets
+  and confirmed to capture all required fields without data fabrication for
+  unknown/missing provenance.
+- **SC-003**: Provider evaluation report includes real-world workflow testing
+  (upload, tag, retrieve, edit) for at least 2 shortlisted providers using
+  representative recovered assets, with documented cost, limits and
+  print-quality support.
+- **SC-004**: Validation approach (visual comparison, broken-reference
+  detection, metadata checks) is defined and tested against recovered assets,
+  with a sample operational runbook delivered.
+- **SC-005**: Figma Make extraction capabilities are documented, including
+  fidelity, supported formats, performance and manual-export gaps, with reusable
+  skills/prompts for wider recovery deployment validated.
+- **SC-006**: Specification document includes requirement-to-issue traceability
+  mapping all 11 child issues and distinguishes definition work from
+  implementation work.
+- **SC-007**: All clarification questions critical to downstream decisions are
+  answered or explicitly preserved as unresolved for owner confirmation.
 
 ---
 
 ## Assumptions
 
-- **Figma Access**: Figma Make authentication and API access are available or can be configured without delays.
-- **Asset Recover ability**: A significant portion of original artwork is recoverable via Figma Make or manual export within reasonable effort.
-- **Provider Choice Pending**: Storage provider (GitHub + Netlify, Cloudinary, or alternative) remains unresolved; evaluation precedes approval.
-- **Print Requirements Exist**: "Print suitability" is a real requirement (e.g., for book publishing); if digital-only, print assessment is out of scope.
-- **Naming Convention**: Asset IDs are independent of storage provider to support future migration if needed.
-- **Non-Invention Rule**: Missing metadata (credits, rights, provenance) will not be inferred or fabricated; marked as "unknown" or "unrecoverable".
-- **Existing References Preserved**: Original Figma file references are kept intact until recovered assets and replacement mappings are verified and approved.
-- **Sequential Implementation**: Recovery is performed and validated *before* selecting a provider and designing migration/build integration.
+- **Figma Access**: Figma Make authentication and API access are available or
+  can be configured without delays.
+- **Asset Recover ability**: A significant portion of original artwork is
+  recoverable via Figma Make or manual export within reasonable effort.
+- **Provider Choice Pending**: Storage provider (GitHub + Netlify, Cloudinary,
+  or alternative) remains unresolved; evaluation precedes approval.
+- **Print Requirements Exist**: "Print suitability" is a real requirement (e.g.,
+  for book publishing); if digital-only, print assessment is out of scope.
+- **Naming Convention**: Asset IDs are independent of storage provider to
+  support future migration if needed.
+- **Non-Invention Rule**: Missing metadata (credits, rights, provenance) will
+  not be inferred or fabricated; marked as "unknown" or "unrecoverable".
+- **Existing References Preserved**: Original Figma file references are kept
+  intact until recovered assets and replacement mappings are verified and
+  approved.
+- **Sequential Implementation**: Recovery is performed and validated *before*
+  selecting a provider and designing migration/build integration.
 
 ---
 
@@ -335,8 +425,11 @@ close TOA-276 evaluation; it informs estimation and dependencies.)
 **Your choice**: **Option A** ✅ RESOLVED
 
 - Decision: Approve GitHub + Netlify as working assumption for planning
-- Rationale: Audit PR #285 decision log supports this approach; aligns with existing Netlify deployment; enables Git LFS integration for binary asset management
-- Implications: TOA-284 and TOA-285 can plan infrastructure around Git LFS quotas, Netlify deployment, and static hosting strategy
+- Rationale: Audit PR #285 decision log supports this approach; aligns with
+  existing Netlify deployment; enables Git LFS integration for binary asset
+  management
+- Implications: TOA-284 and TOA-285 can plan infrastructure around Git LFS
+  quotas, Netlify deployment, and static hosting strategy
 
 ---
 
@@ -362,10 +455,14 @@ format, colour space)?
 
 **Your choice**: **Option A** ✅ RESOLVED
 
-- Decision: 40–50 of 56 assets recoverable as high-quality originals; print requires 300 DPI, RGB/CMYK, PNG/PDF
-- Realistic Recovery Target: 40–50 assets (71–89% of 56 total) recoverable as high-quality originals
-- Print-Quality Baseline: Minimum 300 DPI, RGB/CMYK colour space, PNG or PDF format support
-- Print Requirement Status: Essential for MVP (primary use case supports book publishing)
+- Decision: 40–50 of 56 assets recoverable as high-quality originals; print
+  requires 300 DPI, RGB/CMYK, PNG/PDF
+- Realistic Recovery Target: 40–50 assets (71–89% of 56 total) recoverable as
+  high-quality originals
+- Print-Quality Baseline: Minimum 300 DPI, RGB/CMYK colour space, PNG or PDF
+  format support
+- Print Requirement Status: Essential for MVP (primary use case supports book
+  publishing)
 
 ---
 
@@ -393,10 +490,17 @@ blocked until TOA-282/283 complete?
 
 **Your choice**: **Option B** ✅ RESOLVED
 
-- Decision: Parallel execution with coordinated validation (Phase 0 → Phase 1 + Phase 2 parallel → Phase 3)
-- Blocker Chain: Phase 0 (research + clarifications) blocks Phase 1 design; Phase 1 can run parallel with Phase 2 (validation); TOA-284/285 can begin planning during Phase 1
-- Parallel Opportunities: TOA-277, TOA-280, TOA-276, TOA-282 run concurrently in Phase 1; TOA-284/285 infrastructure planning begins immediately after Q1 provider approval
-- Rework Risk Mitigation: If TOA-282 validation finds schema issues, TOA-284/285 infrastructure work is provider-independent and continues; pipeline implementation may need refinement
+- Decision: Parallel execution with coordinated validation (Phase 0 → Phase 1 +
+  Phase 2 parallel → Phase 3)
+- Blocker Chain: Phase 0 (research + clarifications) blocks Phase 1 design;
+  Phase 1 can run parallel with Phase 2 (validation); TOA-284/285 can begin
+  planning during Phase 1
+- Parallel Opportunities: TOA-277, TOA-280, TOA-276, TOA-282 run concurrently in
+  Phase 1; TOA-284/285 infrastructure planning begins immediately after Q1
+  provider approval
+- Rework Risk Mitigation: If TOA-282 validation finds schema issues, TOA-284/285
+  infrastructure work is provider-independent and continues; pipeline
+  implementation may need refinement
 
 ---
 
@@ -423,7 +527,8 @@ blocked until TOA-282/283 complete?
 
 ### Related but Outside Scope
 
-- **TOA-269** (parent): Outcome is media-library strategy; this specification addresses strategy definition, not execution.
+- **TOA-269** (parent): Outcome is media-library strategy; this specification
+  addresses strategy definition, not execution.
 
 ---
 
@@ -497,7 +602,8 @@ refine based on validation).
 
 Once the three clarification questions above are answered, proceed to:
 
-1. **`/speckit-clarify`** — Document owner's answers and resolve any follow-up ambiguities
+1. **`/speckit-clarify`** — Document owner's answers and resolve any follow-up
+   ambiguities
 
 1. **`/speckit-plan`** — Generate implementation plan and research tasks
 
@@ -515,18 +621,30 @@ Once the three clarification questions above are answered, proceed to:
 
 ### Linear Issues
 
-- **Parent**: [TOA-269 — Media library strategy and asset recovery](https://linear.app/lightspeedwp/issue/TOA-269)
-- **TOA-8** — [Restore original Figma artwork](https://linear.app/lightspeedwp/issue/TOA-8)
-- **TOA-276** — [Evaluate media storage and publishing workflows](https://linear.app/lightspeedwp/issue/TOA-276)
-- **TOA-277** — [Define the asset catalogue and provenance model](https://linear.app/lightspeedwp/issue/TOA-277)
-- **TOA-278** — [Design the import and reference-migration workflow](https://linear.app/lightspeedwp/issue/TOA-278)
-- **TOA-279** — [Define media-library validation and handoff](https://linear.app/lightspeedwp/issue/TOA-279)
-- **TOA-280** — [Evaluate Figma skills and agent-assisted asset recovery](https://linear.app/lightspeedwp/issue/TOA-280)
-- **TOA-282** — [Validate recovered assets](https://linear.app/lightspeedwp/issue/TOA-282)
-- **TOA-283** — [Finalise the asset catalogue schema](https://linear.app/lightspeedwp/issue/TOA-283)
-- **TOA-284** — [Configure Git LFS and Netlify](https://linear.app/lightspeedwp/issue/TOA-284)
-- **TOA-285** — [Implement the image migration pipeline](https://linear.app/lightspeedwp/issue/TOA-285)
-- **TOA-286** — [Validate readiness and operational handover](https://linear.app/lightspeedwp/issue/TOA-286)
+- **Parent**: [TOA-269 — Media library strategy and asset
+  recovery](https://linear.app/lightspeedwp/issue/TOA-269)
+- **TOA-8** — [Restore original Figma
+  artwork](https://linear.app/lightspeedwp/issue/TOA-8)
+- **TOA-276** — [Evaluate media storage and publishing
+  workflows](https://linear.app/lightspeedwp/issue/TOA-276)
+- **TOA-277** — [Define the asset catalogue and provenance
+  model](https://linear.app/lightspeedwp/issue/TOA-277)
+- **TOA-278** — [Design the import and reference-migration
+  workflow](https://linear.app/lightspeedwp/issue/TOA-278)
+- **TOA-279** — [Define media-library validation and
+  handoff](https://linear.app/lightspeedwp/issue/TOA-279)
+- **TOA-280** — [Evaluate Figma skills and agent-assisted asset
+  recovery](https://linear.app/lightspeedwp/issue/TOA-280)
+- **TOA-282** — [Validate recovered
+  assets](https://linear.app/lightspeedwp/issue/TOA-282)
+- **TOA-283** — [Finalise the asset catalogue
+  schema](https://linear.app/lightspeedwp/issue/TOA-283)
+- **TOA-284** — [Configure Git LFS and
+  Netlify](https://linear.app/lightspeedwp/issue/TOA-284)
+- **TOA-285** — [Implement the image migration
+  pipeline](https://linear.app/lightspeedwp/issue/TOA-285)
+- **TOA-286** — [Validate readiness and operational
+  handover](https://linear.app/lightspeedwp/issue/TOA-286)
 
 ### Repository
 
@@ -536,7 +654,8 @@ Once the three clarification questions above are answered, proceed to:
 
 ### Audit Artefacts (PR #285, not yet merged)
 
-- `.github/reports/toa-media-library/` (contains inventory, strategy report, provider comparison, decision log, pilot plan)
+- `.github/reports/toa-media-library/` (contains inventory, strategy report,
+  provider comparison, decision log, pilot plan)
 
 ---
 

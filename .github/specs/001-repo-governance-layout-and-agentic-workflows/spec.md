@@ -17,12 +17,18 @@ separate Claude epic)
 This specification defines a tailored, maintainable governance system for
 ThisOneTimeOnAcidCom that:
 
-- **Preserves application behaviour** — React/TypeScript/Vite book SPA continues to build and deploy to Netlify unchanged
-- **Formalises repository layout** — Stable paths for specs, workflows, agents, skills, configurations, tests and documentation
-- **Enables deterministic quality gates** — CI/CD workflows validate code, specs, configs and branch naming without manual intervention
-- **Supports agentic workflows** — Agents have clear budgets, tool access, output routing and escalation points
-- **Maintains compliance** — BEM-only CSS, npm-only package management, Node.js 24 LTS pinning
-- **Centralises decision governance** — 9 approved decisions guide all 20 child workstreams without reopening settled questions
+- **Preserves application behaviour** — React/TypeScript/Vite book SPA continues
+  to build and deploy to Netlify unchanged
+- **Formalises repository layout** — Stable paths for specs, workflows, agents,
+  skills, configurations, tests and documentation
+- **Enables deterministic quality gates** — CI/CD workflows validate code,
+  specs, configs and branch naming without manual intervention
+- **Supports agentic workflows** — Agents have clear budgets, tool access,
+  output routing and escalation points
+- **Maintains compliance** — BEM-only CSS, npm-only package management, Node.js
+  24 LTS pinning
+- **Centralises decision governance** — 9 approved decisions guide all 20 child
+  workstreams without reopening settled questions
 
 ---
 
@@ -30,21 +36,32 @@ ThisOneTimeOnAcidCom that:
 
 ### Stakeholders
 
-- **Owner (@ashley)** – Final approval authority, decision ratification, exception handling
-- **AI agents** (Claude, Gemini) – Execute workflows, create/update specs, validate code, manage branches
-- **Human contributors** – Submit PRs, review code, write specifications, maintain documentation
+- **Owner (@ashley)** – Final approval authority, decision ratification,
+  exception handling
+- **AI agents** (Claude, Gemini) – Execute workflows, create/update specs,
+  validate code, manage branches
+- **Human contributors** – Submit PRs, review code, write specifications,
+  maintain documentation
 - **CI/CD systems** – GitHub Actions, Netlify, dependency validators
-- **Book content editors** – Create/edit journal entries, articles, manuscript chapters in `content/`
+- **Book content editors** – Create/edit journal entries, articles, manuscript
+  chapters in `content/`
 
 ### Prioritised Scenarios
 
-1. **New feature via Spec Kit** — Agent creates spec in `.github/specs/NNN-feature/`, uses `/speckit-plan`, `/speckit-tasks` to generate tasks, implements, opens PR, which auto-routes template and validates
+1. **New feature via Spec Kit** — Agent creates spec in
+   `.github/specs/NNN-feature/`, uses `/speckit-plan`, `/speckit-tasks` to
+   generate tasks, implements, opens PR, which auto-routes template and
+   validates
 
-1. **Dependency update** — CI detects semver change, agent runs `npm ci`, validates tests, updates changelog, opens PR
+1. **Dependency update** — CI detects semver change, agent runs `npm ci`,
+   validates tests, updates changelog, opens PR
 
-1. **CI validation failure** — Workflow detects branch-name error / config drift / locked-file modification; prevents PR merge; agent fixes and re-pushes
+1. **CI validation failure** — Workflow detects branch-name error / config drift
+   / locked-file modification; prevents PR merge; agent fixes and re-pushes
 
-1. **Multi-workstream coordination** — Four workstreams (TOA-254, TOA-260, TOA-261, TOA-262) unblock after owner approval; agents create focused implementation PRs in parallel
+1. **Multi-workstream coordination** — Four workstreams (TOA-254, TOA-260,
+   TOA-261, TOA-262) unblock after owner approval; agents create focused
+   implementation PRs in parallel
 
 ---
 
@@ -52,23 +69,37 @@ ThisOneTimeOnAcidCom that:
 
 ### In Scope
 
-- **Repository structure** — All directories, configuration files, generated artefacts and their consumers
-- **Spec Kit integration** — Feature directory routing, template resolution, regression testing (TOA-254)
-- **CI/CD workflows** — Implementation, evaluation and deferred workflows; GitHub Actions, branch protection, CODEOWNERS
-- **Configuration** — Package manager (npm), Node.js pinning, test runners, linters, build system
-- **GitHub governance** — PR templates, issue templates, discussion templates, saved replies, labels
-- **Agentic workflow** — Agent definitions, skills, tools, budgets, permissions, escalation
-- **Quality gates** — Deterministic (code, spec, config validation); separate from AI-driven classification
-- **Content preservation** — Editorial files, protected trackers, images, attribution, archives
+- **Repository structure** — All directories, configuration files, generated
+  artefacts and their consumers
+- **Spec Kit integration** — Feature directory routing, template resolution,
+  regression testing (TOA-254)
+- **CI/CD workflows** — Implementation, evaluation and deferred workflows;
+  GitHub Actions, branch protection, CODEOWNERS
+- **Configuration** — Package manager (npm), Node.js pinning, test runners,
+  linters, build system
+- **GitHub governance** — PR templates, issue templates, discussion templates,
+  saved replies, labels
+- **Agentic workflow** — Agent definitions, skills, tools, budgets, permissions,
+  escalation
+- **Quality gates** — Deterministic (code, spec, config validation); separate
+  from AI-driven classification
+- **Content preservation** — Editorial files, protected trackers, images,
+  attribution, archives
 
 ### Exclusions
 
-- **Book content migration** — Journal, articles, manuscript chapter additions are out of scope
-- **Figma Make bundler changes** — Bundler compatibility rules are pre-existing constraints (guideline-enforced)
-- **Supabase integration** — Remains undeployed system artefact (per AGENTS.md protection rules)
-- **Agent/skill runtime implementation** — Budget enforcement mechanics (TOA-271) owned separately; this spec documents requirements only
-- **Workflow enablement decisions** — Which workflows run by default (evaluation vs. deferred) requires owner decision per workflow
-- **Copilot/GitHub integration setup** — Outside this epic scope; documented in .github repo
+- **Book content migration** — Journal, articles, manuscript chapter additions
+  are out of scope
+- **Figma Make bundler changes** — Bundler compatibility rules are pre-existing
+  constraints (guideline-enforced)
+- **Supabase integration** — Remains undeployed system artefact (per AGENTS.md
+  protection rules)
+- **Agent/skill runtime implementation** — Budget enforcement mechanics
+  (TOA-271) owned separately; this spec documents requirements only
+- **Workflow enablement decisions** — Which workflows run by default (evaluation
+  vs. deferred) requires owner decision per workflow
+- **Copilot/GitHub integration setup** — Outside this epic scope; documented in
+  .github repo
 
 ---
 
@@ -86,8 +117,10 @@ ThisOneTimeOnAcidCom that:
 canonical)
 
 - Specs live in `.github/specs/{NNN-feature}/` (no duplication at root)
-- Feature directory routing via `.specify/init-options.json` (sequential numbering)
-- Preserve Spec Kit templates, commands, checksums, create → plan → tasks regression
+- Feature directory routing via `.specify/init-options.json` (sequential
+  numbering)
+- Preserve Spec Kit templates, commands, checksums, create → plan → tasks
+  regression
 
 **R1.3** — Documentation and configuration consolidation
 
@@ -98,7 +131,8 @@ canonical)
 
 **R1.4** — Test colocaction with modules (TEST-001 approved: Jest ESM enabled)
 
-- Unit tests colocate with source modules (e.g., `src/app/components/Button.test.ts` alongside `Button.tsx`)
+- Unit tests colocate with source modules (e.g.,
+  `src/app/components/Button.test.ts` alongside `Button.tsx`)
 - Tooling fixtures separate from executable tests
 - Jest configured for ESM via `@swc/core`; Vitest available as fallback
 
@@ -107,7 +141,8 @@ canonical)
 - `dist/` — production build output (read-only, gitignored)
 - `export/` — generated artefacts (journal JSON, reports, etc.; gitignored)
 - `coverage/` — test coverage reports (gitignored)
-- Root configuration (`.gitattributes` with `text=auto`, etc.) preserved; no new files inferred without consumer evidence
+- Root configuration (`.gitattributes` with `text=auto`, etc.) preserved; no new
+  files inferred without consumer evidence
 
 **R1.6** — Scripts remain at root `scripts/` (no `.github/scripts/` introduced)
 
@@ -129,9 +164,14 @@ canonical)
 
 - Delete `pnpm-workspace.yaml` (unused)
 - Remove `pnpm.overrides` from `package.json`
-- **Note on `src/app/netlify.toml`**: This file is NOT read by Netlify (base directory is repo root, so root `netlify.toml` would be read if present; currently none exists). Update `src/app/netlify.toml` to remove `command = "pnpm run build"` for future-proofing and documentation clarity (not for current Netlify build).
+- **Note on `src/app/netlify.toml`**: This file is NOT read by Netlify (base
+  directory is repo root, so root `netlify.toml` would be read if present;
+  currently none exists). Update `src/app/netlify.toml` to remove `command =
+  "pnpm run build"` for future-proofing and documentation clarity (not for
+  current Netlify build).
 - Update root `README.md` to document npm-only
-- Verify Netlify UI build command remains `npm run build` (not `netlify.toml` file)
+- Verify Netlify UI build command remains `npm run build` (not `netlify.toml`
+  file)
 
 **R2.3** — Dependency validation
 
@@ -211,16 +251,21 @@ canonical)
 
 - Retain repository-specific PR templates for workflow routing
 - Branch naming validates via `npm run validate:branch-name`
-- Inherit organisation-wide templates from `lightspeedwp/.github` when appropriate
+- Inherit organisation-wide templates from `lightspeedwp/.github` when
+  appropriate
 - No duplicate templates — only override when workflow-specific needs differ
 
 **R5.3** — CODEOWNERS & Branch Protection (GH-003 approved: Enable + protection)
 
 - Create `.github/CODEOWNERS` file with code area ownership mapping
-- @ashley defines all CODEOWNERS entries (maintains consistency and approval control)
-- @ashley: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`, governance-critical areas
-- Process: Team/component leads request CODEOWNERS changes via GitHub issue with rationale; @ashley reviews and updates
-- Rationale: Centralized authority prevents unauthorized ownership claims; issue tracking documents delegation decisions
+- @ashley defines all CODEOWNERS entries (maintains consistency and approval
+  control)
+- @ashley: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`,
+  governance-critical areas
+- Process: Team/component leads request CODEOWNERS changes via GitHub issue with
+  rationale; @ashley reviews and updates
+- Rationale: Centralized authority prevents unauthorized ownership claims; issue
+  tracking documents delegation decisions
 - Enable branch protection on `main`:
 - Require PR review (require CODEOWNERS review for protected paths)
 - Require status checks to pass before merge
@@ -232,7 +277,8 @@ canonical)
 
 **R5.4** — Issue Template Inheritance
 
-- Verify local `.github/ISSUE_TEMPLATE/` templates inherit from organisation defaults
+- Verify local `.github/ISSUE_TEMPLATE/` templates inherit from organisation
+  defaults
 - No duplicate templates; override only when repository-specific needs differ
 
 **R5.5** — Saved Replies
@@ -255,25 +301,36 @@ canonical)
 - `changelog-unified.yml` — CHANGELOG format and protection validation
 - `labeling-unified.yml` — Automatic PR label assignment based on branch prefix
 - `pr-template-routing.yml` — PR template routing based on branch type
-- `locked-files-guard.yml` — Detect modifications to protected files (CHANGELOG.md, AGENTS.md, guidelines/*, ATTRIBUTIONS.md)
+- `locked-files-guard.yml` — Detect modifications to protected files
+  (CHANGELOG.md, AGENTS.md, guidelines/*, ATTRIBUTIONS.md)
 
 **R6.2** — Evaluation Workflows (validation/audit, manual/opt-in)
 
-- `validate-specifications.yml` (Spec Kit regression), `claude-guard-tests.yml` (AI code quality), `ruleset-drift.yml` (branch protection changes), `ai-feedback-validation.yml` (AI feedback guardrails), `ai-feedback.yml` (feedback collection)
-- Rationale: Evaluation workflows run on-demand; developers dispatch manually when auditing code quality or validating against organizational rules
+- `validate-specifications.yml` (Spec Kit regression), `claude-guard-tests.yml`
+  (AI code quality), `ruleset-drift.yml` (branch protection changes),
+  `ai-feedback-validation.yml` (AI feedback guardrails), `ai-feedback.yml`
+  (feedback collection)
+- Rationale: Evaluation workflows run on-demand; developers dispatch manually
+  when auditing code quality or validating against organizational rules
 
 **R6.3** — Deferred Workflows (not yet enabled; requires owner decision per
 workflow)
 
-- `branch-validation-metrics-aggregator.yml` — Aggregate branch validation metrics
+- `branch-validation-metrics-aggregator.yml` — Aggregate branch validation
+  metrics
 - `keep-pr-current.yml` — Rebase PRs against latest develop
 - `label-drift-check.yml` — Detect label definition changes
 
 **R6.4** — Workflow quality gates
 
-- **Deterministic validation** (implementation workflows, unprivileged): code lint, tests, spec syntax, config validation, branch-name format, changelog format, protected-file guard. No model calls; no AI-driven classification.
-- **Agentic workflows** (R7, evaluation/deferred, may be privileged): agent decision-making, feedback collection, budget enforcement. Routed to separate execution contexts; documented per R7.1–R7.4.
-- **Privileged operations**: metadata changes (labels), branch updates, merge operations run from trusted code only (dependency-merge-controller)
+- **Deterministic validation** (implementation workflows, unprivileged): code
+  lint, tests, spec syntax, config validation, branch-name format, changelog
+  format, protected-file guard. No model calls; no AI-driven classification.
+- **Agentic workflows** (R7, evaluation/deferred, may be privileged): agent
+  decision-making, feedback collection, budget enforcement. Routed to separate
+  execution contexts; documented per R7.1–R7.4.
+- **Privileged operations**: metadata changes (labels), branch updates, merge
+  operations run from trusted code only (dependency-merge-controller)
 - Preserve contributor-authored content and unrelated labels
 - No undocumented model calls or automated branch updates
 
@@ -283,8 +340,10 @@ workflow)
 
 **R7.1** — Agent inventory and contract specification
 
-- Document current agent/skill inventory as of Oct 2026: ~18 agents in `.claude/agents/`, ~5 skills in `.claude/skills/`
-- Inventory is subject to change per separate governance (TOA-264, TOA-265); this spec does not lock it down
+- Document current agent/skill inventory as of Oct 2026: ~18 agents in
+  `.claude/agents/`, ~5 skills in `.claude/skills/`
+- Inventory is subject to change per separate governance (TOA-264, TOA-265);
+  this spec does not lock it down
 - For documented agents/skills, include:
 - Purpose and applicable use cases
 - Inputs (prompts, context, arguments)
@@ -297,23 +356,29 @@ workflow)
 
 **R7.2** — Anthropic reference assessment
 
-- Evaluate applicability of seven Anthropic references (detailed in Source Register below)
+- Evaluate applicability of seven Anthropic references (detailed in Source
+  Register below)
 - Do not enable every platform feature in every agent
-- Document which agents use: MCP servers, tool use, streaming, model selection, etc.
+- Document which agents use: MCP servers, tool use, streaming, model selection,
+  etc.
 
 **R7.3** — Agent budget controls (TOA-271 owned separately; spec documents
 requirements)
 
 - Enforce budgets via host-side mechanisms (hard limits, not advisory)
-- Document enforcement point: runtime-based hard limits preventing execution beyond budget boundary
-- Cover: aggregate accounting, retry/cancellation, exhaustion handling, fallback behaviour
+- Document enforcement point: runtime-based hard limits preventing execution
+  beyond budget boundary
+- Cover: aggregate accounting, retry/cancellation, exhaustion handling, fallback
+  behaviour
 - Require owner approval of numerical limits and any spending increases
 
 **R7.4** — Skill runtime routing
 
-- Map skill invocation to execution environment (local agent, remote agent, subagent, fork)
+- Map skill invocation to execution environment (local agent, remote agent,
+  subagent, fork)
 - Document tool access per execution context
-- Preserve deterministic quality gates (specs, validation workflows remain unprivileged)
+- Preserve deterministic quality gates (specs, validation workflows remain
+  unprivileged)
 
 ---
 
@@ -321,8 +386,10 @@ requirements)
 
 **R8.1** — Enforce BEM-only CSS architecture (STYLE-001 approved)
 
-- **Audit result**: Tailwind CSS v4 currently present in repository (see AGENTS.md note)
-- Remove Tailwind CSS from dependencies (all packages: `tailwindcss`, `@tailwindcss/vite`)
+- **Audit result**: Tailwind CSS v4 currently present in repository (see
+  AGENTS.md note)
+- Remove Tailwind CSS from dependencies (all packages: `tailwindcss`,
+  `@tailwindcss/vite`)
 - Remove `@tailwindcss/vite` from Vite config
 - Audit existing components for Tailwind utility-class names; migrate to BEM
 - Update `guidelines/css-architecture.md` to lock BEM as canonical
@@ -335,10 +402,15 @@ requirements)
 
 **R8.3** — Bundler syntax enforcement (Figma Make compatibility)
 
-- Configure ESLint with `figma-make` plugin or equivalent to detect forbidden syntax (optional chaining `?.`, nullish coalescing `??`, `import.meta.env`, nested ternaries, `for...of` loops)
-- Add ESLint rule to CI validation workflow (`lint.yml`); block PR merge on violations
-- Document enforcement in AGENTS.md; code review validates edge cases against Guidelines.md bundler table
-- Rationale: Hard CI enforcement prevents bundler incompatibilities reaching production; code review ensures pragmatic exceptions are justified
+- Configure ESLint with `figma-make` plugin or equivalent to detect forbidden
+  syntax (optional chaining `?.`, nullish coalescing `??`, `import.meta.env`,
+  nested ternaries, `for...of` loops)
+- Add ESLint rule to CI validation workflow (`lint.yml`); block PR merge on
+  violations
+- Document enforcement in AGENTS.md; code review validates edge cases against
+  Guidelines.md bundler table
+- Rationale: Hard CI enforcement prevents bundler incompatibilities reaching
+  production; code review ensures pragmatic exceptions are justified
 
 ---
 
@@ -352,7 +424,8 @@ requirements)
 
 **R9.2** — Regression coverage
 
-- Run `node --test tests/speckit.test.mjs` to validate create → plan → tasks workflow
+- Run `node --test tests/speckit.test.mjs` to validate create → plan → tasks
+  workflow
 - Baseline: 103 pass, 1 fail (known edge case, approved to accept)
 - No test failures from path migrations
 
@@ -486,10 +559,14 @@ components for utility classes; update guidelines.
 
 - Owner (@ashley) approval of all 9 decisions is current and binding
 - No future re-opening of settled decisions without documented exception
-- Workflow enablement (evaluation/deferred workflows) requires separate owner decision per workflow
-- Agent/skill budget enforcement mechanisms (TOA-271) are out of scope; this spec documents requirements only
-- Figma Make bundler compatibility rules remain pre-existing constraints (guidelines-enforced)
-- Supabase integration remains undeployed system artefact (per AGENTS.md protection)
+- Workflow enablement (evaluation/deferred workflows) requires separate owner
+  decision per workflow
+- Agent/skill budget enforcement mechanisms (TOA-271) are out of scope; this
+  spec documents requirements only
+- Figma Make bundler compatibility rules remain pre-existing constraints
+  (guidelines-enforced)
+- Supabase integration remains undeployed system artefact (per AGENTS.md
+  protection)
 
 ---
 
@@ -515,7 +592,8 @@ components for utility classes; update guidelines.
 ### 3. Documentation & Workflow Safety
 
 - ✅ AGENTS.md updated: reflects all configuration changes and command status
-- ✅ CONTRIBUTING.md updated: guides on branch naming, PR templates, Spec Kit workflow
+- ✅ CONTRIBUTING.md updated: guides on branch naming, PR templates, Spec Kit
+  workflow
 - ✅ README.md updated: documents npm-only, Node.js 24 requirement
 - ✅ guidelines/* unchanged or minimally updated for clarity
 - ✅ Workflow YAML syntax validated via `workflow-lint.yml`
@@ -608,9 +686,12 @@ components for utility classes; update guidelines.
 
 ### Repository References (4)
 
-1. **lightspeedwp/.github** — organization-wide governance (PR templates, issue templates, workflows, labels, CODEOWNERS)
+1. **lightspeedwp/.github** — organization-wide governance (PR templates, issue
+   templates, workflows, labels, CODEOWNERS)
 
-1. **lightspeedwp/ThisOneTimeOnAcidCom PR #268** — current governance decisions PR ([github.com/.../pull/268](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/268))
+1. **lightspeedwp/ThisOneTimeOnAcidCom PR #268** — current governance decisions
+   PR
+   ([github.com/.../pull/268](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/268))
 
 1. **github-spec-kit** — Spec Kit documentation and patterns
 
@@ -648,28 +729,50 @@ components for utility classes; update guidelines.
 
 ### Session 2026-10-17
 
-- Q1: What mechanism enforces bundler compatibility rules (forbidden syntax: optional chaining, nullish coalescing, etc.) before code merges? → A: Option A: Automated ESLint rule in CI gating PR merge (hard enforcement via `eslint-plugin-figma-make` or equivalent)
-- Q2: Does `locked-files-guard.yml` run on every PR automatically, or only on-demand/manual trigger? → A: Option A: Always enabled (implementation workflow — runs on every PR)
-- Q3: Who decides CODEOWNERS entries? → A: Option A: @ashley defines all CODEOWNERS entries; changes require issue + approval (maintains consistency and approval control)
-- Q: Which evaluation workflows should run by default on every PR, and which should be manual or opt-in? → A: Option B: Only `locked-files-guard` runs by default; others are manual/opt-in (pragmatic approach protecting critical governance files without CI overhead)
-- Q: Should the specification mandate a specific agent/skill set, or document current inventory as subject to change? → A: Option B: Document current baseline (~18 agents, ~5 skills) as inventory of Oct 2026; allow evolution per TOA-264/TOA-265 (flexible; reflects reality that agents and skills are active tooling)
-- Q: What enforcement mechanism for agent/skill budgets? → A: Option A: Host-side enforcement (hard limit — execution stops at budget boundary, preventing cost surprises)
+- Q1: What mechanism enforces bundler compatibility rules (forbidden syntax:
+  optional chaining, nullish coalescing, etc.) before code merges? → A: Option
+  A: Automated ESLint rule in CI gating PR merge (hard enforcement via
+  `eslint-plugin-figma-make` or equivalent)
+- Q2: Does `locked-files-guard.yml` run on every PR automatically, or only
+  on-demand/manual trigger? → A: Option A: Always enabled (implementation
+  workflow — runs on every PR)
+- Q3: Who decides CODEOWNERS entries? → A: Option A: @ashley defines all
+  CODEOWNERS entries; changes require issue + approval (maintains consistency
+  and approval control)
+- Q: Which evaluation workflows should run by default on every PR, and which
+  should be manual or opt-in? → A: Option B: Only `locked-files-guard` runs by
+  default; others are manual/opt-in (pragmatic approach protecting critical
+  governance files without CI overhead)
+- Q: Should the specification mandate a specific agent/skill set, or document
+  current inventory as subject to change? → A: Option B: Document current
+  baseline (~18 agents, ~5 skills) as inventory of Oct 2026; allow evolution per
+  TOA-264/TOA-265 (flexible; reflects reality that agents and skills are active
+  tooling)
+- Q: What enforcement mechanism for agent/skill budgets? → A: Option A:
+  Host-side enforcement (hard limit — execution stops at budget boundary,
+  preventing cost surprises)
 
 ---
 
 ## Success Criteria
 
-1. **Completeness** — All 20 child issues mapped to 9 approved decisions; no orphaned issues
+1. **Completeness** — All 20 child issues mapped to 9 approved decisions; no
+   orphaned issues
 
-1. **Clarity** — Folder layout stable and documented; path consumers identified; no ambiguity
+1. **Clarity** — Folder layout stable and documented; path consumers identified;
+   no ambiguity
 
-1. **Compliance** — All 9 decisions operationalized: npm-only verified, Node.js 24 pinned, Jest ESM enabled, BEM enforced, GitHub governance configured
+1. **Compliance** — All 9 decisions operationalized: npm-only verified, Node.js
+   24 pinned, Jest ESM enabled, BEM enforced, GitHub governance configured
 
-1. **Determinism** — CI/CD validation workflows run unprivileged; protected files enforced; Spec Kit routing tested
+1. **Determinism** — CI/CD validation workflows run unprivileged; protected
+   files enforced; Spec Kit routing tested
 
-1. **Adoptability** — Agents can create specs, plans, tasks without manual intervention; humans can follow CONTRIBUTING.md guidance
+1. **Adoptability** — Agents can create specs, plans, tasks without manual
+   intervention; humans can follow CONTRIBUTING.md guidance
 
-1. **Reversibility** — Rollback plan documented; no data loss; archives preserved
+1. **Reversibility** — Rollback plan documented; no data loss; archives
+   preserved
 
 ---
 
@@ -678,7 +781,8 @@ components for utility classes; update guidelines.
 ## This specification is ready for `/speckit-clarify` once
 
 - ✅ Owner confirms all 9 decisions remain binding
-- ✅ Answers provided to 3 unresolved questions (Q1→Option B, Q2→Option B, Q3→Option A)
+- ✅ Answers provided to 3 unresolved questions (Q1→Option B, Q2→Option B,
+  Q3→Option A)
 - ✅ No additional clarifications needed (max 3 per SpecKit rules)
 
 ## Proceed to `/speckit-plan` when

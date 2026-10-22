@@ -40,7 +40,8 @@ campfire) into life's biggest lessons:
 - What the chaos teaches you
 - How the wiring that felt like a bug turned out to be the feature
 - How the festival dancefloor became the classroom where everything made sense
-- How ADHD isn't a disorder when your environment matches your brain's operating system
+- How ADHD isn't a disorder when your environment matches your brain's operating
+  system
 
 ## Timeline
 
@@ -52,17 +53,23 @@ campfire) into life's biggest lessons:
 
 ## Chapter Previews (Working Titles)
 
-1. **The First Drop** - Every journey starts somewhere impossible. This one started on a rooftop in Cape Town.
+1. **The First Drop** - Every journey starts somewhere impossible. This one
+   started on a rooftop in Cape Town.
 
-1. **Wired Different** - ADHD, Aquarius, and the feeling that the world was running on a different operating system.
+1. **Wired Different** - ADHD, Aquarius, and the feeling that the world was
+   running on a different operating system.
 
-1. **Berlin Calling** - A one-way ticket, a bicycle, and the city that would become home.
+1. **Berlin Calling** - A one-way ticket, a bicycle, and the city that would
+   become home.
 
-1. **The Dancefloor Classroom** - When 140 BPM became the heartbeat of understanding.
+1. **The Dancefloor Classroom** - When 140 BPM became the heartbeat of
+   understanding.
 
-1. **Neon Revelations** - The night Ash picked up UV paint and discovered his voice wasn't in words.
+1. **Neon Revelations** - The night Ash picked up UV paint and discovered his
+   voice wasn't in words.
 
-1. **The Cumulative Effect** - It's never one moment. It's the thousand moments that suddenly click.
+1. **The Cumulative Effect** - It's never one moment. It's the thousand moments
+   that suddenly click.
 
 ## Blurb (Draft)
 
@@ -107,8 +114,12 @@ If Ash recorded a 3-minute origin reel, the musical beats must include:
 
 ## Legacy & What People Will Remember
 
-- **In makeup:** People thanked him years later. An experience where he saw someone after not seeing them for two years — he'd done their makeup two years ago. That day they felt extremely special; everyone kept complimenting them and it made their day.
-- **In WordPress:** He'll be remembered as the crazy South African in the WordPress community — but definitely as a passionate WordPress contributor.
+- **In makeup:** People thanked him years later. An experience where he saw
+  someone after not seeing them for two years — he'd done their makeup two years
+  ago. That day they felt extremely special; everyone kept complimenting them
+  and it made their day.
+- **In WordPress:** He'll be remembered as the crazy South African in the
+  WordPress community — but definitely as a passionate WordPress contributor.
 
 -----------------------------------------------------------------------------------
 
@@ -449,7 +460,8 @@ doing even six weeks from now.
 - Custom instructions and custom prompts for effective planning
 - Code written, unit tests written to test that code
 - Code reviews implemented
-- Process aligned with contributing guidelines (still being polished): https://github.com/lightspeedwp/.github/blob/master/.github/CONTRIBUTING.md
+- Process aligned with contributing guidelines (still being polished):
+  https://github.com/lightspeedwp/.github/blob/master/.github/CONTRIBUTING.md
 
 ## Closing
 
@@ -489,15 +501,18 @@ finishing up this incredible year.
 
 ## Extended Team (Current as of 2026)
 
-1. **Ash Shaw** — joined January 2003 (CEO, CTO, CMO, Content Strategist, Business Development & Mentor)
+1. **Ash Shaw** — joined January 2003 (CEO, CTO, CMO, Content Strategist,
+   Business Development & Mentor)
 
 1. **Warwick Booth** — joined December 2006 (Lead Developer)
 
 1. **Chris Vancoillie** — joined September 2009 (Systems Administrator)
 
-1. **Barbara Kerr** — joined 2010 and became a partner soon after (COO, CFO & HR)
+1. **Barbara Kerr** — joined 2010 and became a partner soon after (COO, CFO &
+   HR)
 
-1. **Justin Abrahamse** — joined from 2006-2009 and rejoined in 2020 (Frontend Developer, Online Marketing)
+1. **Justin Abrahamse** — joined from 2006-2009 and rejoined in 2020 (Frontend
+   Developer, Online Marketing)
 
 1. **Lourens Visser** — joined August 2021 (Project Manager & Support Manager)
 
@@ -511,9 +526,11 @@ finishing up this incredible year.
 
 1. **Brandon Marshall** — joined 25 August 2025 (Block Theme Developer Intern)
 
-1. **Seren van der Merve** — joined 1 September 2025 (Block Theme Developer Intern)
+1. **Seren van der Merve** — joined 1 September 2025 (Block Theme Developer
+   Intern)
 
-1. **José Abreu** — first joined Aug 2017 to Apr 2019, rejoined 5 September 2025 (Block Theme & Block Developer)
+1. **José Abreu** — first joined Aug 2017 to Apr 2019, rejoined 5 September 2025
+   (Block Theme & Block Developer)
 
 ## Professional Career
 
@@ -555,7 +572,8 @@ define the next two decades.
 - Nicholas Spagnoletti, Glen Veran, Neil Blakey-Milner, Stefano Rivera
 - Jason Bagley, Rob Gilmour, Jonathan Hitchcock, Rafiq Phillips
 - Uno de Waal, Andy Rabagliati, Mark Slingsby, Ian Gilfillan
-- Bradley Whittington, Sam Finnemore, Joe da Silva, Jacques Marneweck, Miguel dos Santos
+- Bradley Whittington, Sam Finnemore, Joe da Silva, Jacques Marneweck, Miguel
+  dos Santos
 
 ## Founding Motivation
 
@@ -588,7 +606,8 @@ AI-powered workflow:
 - **Claude** — Advanced AI reasoning for complex development tasks
 - **Model Context Protocol (MCP)** — Cutting-edge AI agent technology
 - **VS Code** with custom Copilot instructions and agent mode
-- **GitHub workflows** — Issues, pull requests, branches, code reviews, release management, repository management
+- **GitHub workflows** — Issues, pull requests, branches, code reviews, release
+  management, repository management
 
 ### The Impact
 
@@ -605,14 +624,17 @@ been a radical, life-changing shift."
 - Speaker: WordCamp Europe 2025 Basel
 - Volunteer: WordCamp Europe 2024 Torino
 - Sponsor: WordCamp Cape Town 2019, 2024
-- Attendee: WCEU Seville, Vienna, Paris, Belgrade, Berlin, Porto, Athens; WooConf 2014; WordCamp San Francisco 2014
+- Attendee: WCEU Seville, Vienna, Paris, Belgrade, Berlin, Porto, Athens;
+  WooConf 2014; WordCamp San Francisco 2014
 
 ## Community & Public Speaking
 
 ### WordCamp Europe 2025 (Basel)
 
-- Speaker: "Bridging Design and Development: Figma Design Systems for WordPress Success"
-- Talk showcased real-world implementations of Figma modes, typography variables, and theme.json workflows
+- Speaker: "Bridging Design and Development: Figma Design Systems for WordPress
+  Success"
+- Talk showcased real-world implementations of Figma modes, typography
+  variables, and theme.json workflows
 - Video: https://videopress.com/v/fSkgvkk0
 
 ### WordCamp Europe 2024 (Torino)
@@ -623,7 +645,9 @@ been a radical, life-changing shift."
 
 - Regular guest on the OpenChannels.FM network
 - Guest profile: https://openchannels.fm/guest/ash-shaw/
-- Topics covered: remote agency work, accessibility, WordPress block development, block bindings APIs, tour operator plugin, Figma design systems, AI workflows
+- Topics covered: remote agency work, accessibility, WordPress block
+  development, block bindings APIs, tour operator plugin, Figma design systems,
+  AI workflows
 - Episodes:
 - Designing for Clients Using Figma Systems and WordPress Block Themes
 - A Deep Dive into Block Bindings APIs and the LSX Tour Operator Plugin
@@ -632,29 +656,40 @@ been a radical, life-changing shift."
 
 ### BugHerd Webinar
 
-- Guest on BugHerd webinar: "From Website Design to Launch: Creating a Seamless Handoff Workflow"
-- URL: https://bugherd.com/webinar/from-website-design-to-launch-creating-a-seamless-handoff-workflow
-- Topics: client feedback process, prototype to staging to live phases, agency workflow
+- Guest on BugHerd webinar: "From Website Design to Launch: Creating a Seamless
+  Handoff Workflow"
+- URL:
+  https://bugherd.com/webinar/from-website-design-to-launch-creating-a-seamless-handoff-workflow
+- Topics: client feedback process, prototype to staging to live phases, agency
+  workflow
 
 ### Blog Author
 
 - Regular author on LightSpeed blog: https://lightspeedwp.agency/author/ashley/
-- Topics: development, design, workflows, release posts, news, GitHub Copilot, MCP, Figma, VS Code, modern WordPress development workflows, block development, block theme development, build processes, Figma design systems, client feedback processes, eCommerce with WooCommerce, tour operator websites, GitHub issues, GitHub pull requests
+- Topics: development, design, workflows, release posts, news, GitHub Copilot,
+  MCP, Figma, VS Code, modern WordPress development workflows, block
+  development, block theme development, build processes, Figma design systems,
+  client feedback processes, eCommerce with WooCommerce, tour operator websites,
+  GitHub issues, GitHub pull requests
 
 ## Products
 
-- **LSX Design System** — Open-source WordPress block theme design system in Figma
+- **LSX Design System** — Open-source WordPress block theme design system in
+  Figma
 - **Tour Operator** — WordPress plugin suite for travel websites
 - Themes: lsx-design, minimal-lsx (WordPress.org)
-- Plugins: tour-operator, tour-operator-reviews, tour-operator-special-offers, tour-operator-team, lsx-importer-for-wetu
+- Plugins: tour-operator, tour-operator-reviews, tour-operator-special-offers,
+  tour-operator-team, lsx-importer-for-wetu
 
 ## Wetu Partnership
 
 ### Sponsorship
 
-- Wetu sponsored the Wetu Content Importer plugin — LightSpeed's first sponsored open-source project
+- Wetu sponsored the Wetu Content Importer plugin — LightSpeed's first sponsored
+  open-source project
 - Blog: https://lightspeedwp.agency/lightspeed-secures-wetu-sponsorship/
-- Wetu blog: https://blog.wetu.com/increase-travel-bookings-how-wetu-lightspeed-elevate-your-website/
+- Wetu blog:
+  https://blog.wetu.com/increase-travel-bookings-how-wetu-lightspeed-elevate-your-website/
 
 ### Indaba 2025
 
@@ -679,14 +714,18 @@ Demo sites:
 
 ## Portfolio / Case Studies
 
-- African Safari Consultants: https://lightspeedwp.agency/portfolio/african-safari-consultants/
+- African Safari Consultants:
+  https://lightspeedwp.agency/portfolio/african-safari-consultants/
 - Xneelo: https://lightspeedwp.agency/portfolio/xneelo/
 - ARMD Digital: https://lightspeedwp.agency/portfolio/armd-digital/
-- Novus Media (Design at Scale): https://lightspeedwp.agency/portfolio/novus-media-design-at-scale/
+- Novus Media (Design at Scale):
+  https://lightspeedwp.agency/portfolio/novus-media-design-at-scale/
 - African Safaris NZ: https://lightspeedwp.agency/portfolio/african-safaris-nz/
 - Miriam Yoga: https://lightspeedwp.agency/portfolio/miriam-yoga/
-- Deep Blue Adventures: https://lightspeedwp.agency/portfolio/deep-blue-adventures/
-- The Safari Partners: https://lightspeedwp.agency/portfolio/the-safari-partners/
+- Deep Blue Adventures:
+  https://lightspeedwp.agency/portfolio/deep-blue-adventures/
+- The Safari Partners:
+  https://lightspeedwp.agency/portfolio/the-safari-partners/
 - FISA: https://lightspeedwp.agency/portfolio/fisa/
 
 -----------------------------------------------------------------------------------
@@ -704,8 +743,10 @@ Everyone at LightSpeed is upskilling on GitHub and Copilot, including Ash.
 ### Zared Rogers - Figma Designer & Block Theme Developer
 
 - GitHub: https://github.com/ZaredRogers
-- Microsoft Learn: https://learn.microsoft.com/en-us/users/zaredrogers-lightspeed/
-- Has been working on Microsoft Learn profile to level up and prepare for GitHub certification exams
+- Microsoft Learn:
+  https://learn.microsoft.com/en-us/users/zaredrogers-lightspeed/
+- Has been working on Microsoft Learn profile to level up and prepare for GitHub
+  certification exams
 
 ### Tibi Buzdugan - Senior Block Theme and Block Developer
 
@@ -737,7 +778,8 @@ Overall, the change in workflow has:
 
 - Improved morale
 - Made people happier
-- The new skills everyone is learning has contributed to overall happiness within the team beyond any expectation
+- The new skills everyone is learning has contributed to overall happiness
+  within the team beyond any expectation
 
 -----------------------------------------------------------------------------------
 
@@ -776,8 +818,11 @@ wanted:
 
 - NO Elementor or page builders
 - NO people claiming to be WordPress developers who have never used GitHub
-- NO people who have never committed a single line of code to a version control system
-- In LightSpeed's perspective, if you've never used version control, you're a page builder, not a developer - nothing wrong with that, but not what was needed
+- NO people who have never committed a single line of code to a version control
+  system
+- In LightSpeed's perspective, if you've never used version control, you're a
+  page builder, not a developer - nothing wrong with that, but not what was
+  needed
 
 ## The Application Process
 
@@ -790,13 +835,15 @@ The job post expressly stated that to apply, candidates needed to:
 
 1. Complete a series of GitHub skills courses: https://skills.github.com/
 
-1. These courses aimed to prime applicants with GitHub version control and Copilot AI knowledge
+1. These courses aimed to prime applicants with GitHub version control and
+   Copilot AI knowledge
 
 1. Submit application via the LightSpeed website (NOT LinkedIn direct apply)
 
 1. LinkedIn profile up-to-date (better than a CV in Ash's opinion)
 
-1. GitHub profile showing at least a few GitHub skills courses as public repositories
+1. GitHub profile showing at least a few GitHub skills courses as public
+   repositories
 
 ### Results
 
@@ -824,7 +871,8 @@ The job post expressly stated that to apply, candidates needed to:
 - Ash saw all the qualities that make a strong LightSpeed developer
 - They didn't have past experience - and that was exactly what was wanted
 - More often than not, past experience means bad habits or misaligned processes
-- Experienced developers think they know better and don't listen to the experienced LightSpeed team
+- Experienced developers think they know better and don't listen to the
+  experienced LightSpeed team
 
 ### The Internship Structure
 
@@ -841,11 +889,13 @@ The job post expressly stated that to apply, candidates needed to:
 - Clear documentation on three-month training curriculum
 - Daily planning templates defined for each day of the week
 - Weekly reflection templates
-- Daily log templates: https://github.com/lightspeedwp/lsx-demo-theme/tree/main/logs
+- Daily log templates:
+  https://github.com/lightspeedwp/lsx-demo-theme/tree/main/logs
 
 ### Documentation
 
-- Full curriculum details: https://github.com/lightspeedwp/lsx-demo-theme/tree/main/docs
+- Full curriculum details:
+  https://github.com/lightspeedwp/lsx-demo-theme/tree/main/docs
 - Includes evaluation & mentorship requirements
 - Ash is as much accountable for the work as the interns are
 
@@ -887,7 +937,8 @@ The job post expressly stated that to apply, candidates needed to:
 - WordPress Studio: https://developer.wordpress.com/studio/
 - Create Block Theme for exporting block theme edits
 - MCP implementation for improved AI capabilities
-- Copilot custom instructions and custom prompts using YAML frontmatter: https://docs.github.com/en/contributing/writing-for-github-docs/using-yaml-frontmatter
+- Copilot custom instructions and custom prompts using YAML frontmatter:
+  https://docs.github.com/en/contributing/writing-for-github-docs/using-yaml-frontmatter
 
 ### Additional Tools
 
@@ -896,7 +947,8 @@ The job post expressly stated that to apply, candidates needed to:
 
 ## Certification Goals
 
-- Challenge set for Brandon and Seren to write their GitHub certification exams before the end of their internship
+- Challenge set for Brandon and Seren to write their GitHub certification exams
+  before the end of their internship
 
 ## Intern Performance
 
@@ -942,7 +994,8 @@ statement: https://lightspeedwp.agency/about
 ## What LightSpeed Was NOT Looking For
 
 - Full stack developers (doesn't apply to what they're doing)
-- What IS wanted: somebody with motivation to learn modern WordPress development and AI development workflow
+- What IS wanted: somebody with motivation to learn modern WordPress development
+  and AI development workflow
 
 ## Studies & Upskilling
 
@@ -956,8 +1009,10 @@ statement: https://lightspeedwp.agency/about
 ### Current Skills Assessment
 
 - Ash knows Jose has the skills for classic WordPress projects
-- BUT he has been working on React and other full-stack development projects for the past few years since leaving LightSpeed
-- This doesn't mean he lacks skills - just needs the right skills to be effective from day one on current projects
+- BUT he has been working on React and other full-stack development projects for
+  the past few years since leaving LightSpeed
+- This doesn't mean he lacks skills - just needs the right skills to be
+  effective from day one on current projects
 
 ### Performance
 
@@ -975,16 +1030,19 @@ statement: https://lightspeedwp.agency/about
 
 ### WordPress Build Processes
 
-- @wordpress/scripts: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/
+- @wordpress/scripts:
+  https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/
 
 ### Figma Integration
 
-- Using Figma Dev Mode to extract values from Figma design systems and Figma Prototypes
+- Using Figma Dev Mode to extract values from Figma design systems and Figma
+  Prototypes
 
 ## Certification Goals (1)
 
 - GitHub certification exams when ready
-- Hopefully successful outcomes in a follow-up blog post within a couple of months
+- Hopefully successful outcomes in a follow-up blog post within a couple of
+  months
 
 -------------------------------
 
@@ -1020,32 +1078,40 @@ workflows, WooCommerce integrations, and AI-powered publishing solutions.
 
 ### WordPress & WooCommerce Development
 
-- Founder of LSX Design Theme, a block-based WordPress theme designed to replace page builders.
-- Expert in hybrid themes, WooCommerce extensions, and custom WordPress development.
+- Founder of LSX Design Theme, a block-based WordPress theme designed to replace
+  page builders.
+- Expert in hybrid themes, WooCommerce extensions, and custom WordPress
+  development.
 - Contributor to the WordPress Theme Review Team and open-source projects.
 
 ### Business Strategy & Digital Publishing
 
 - Leads large-scale editorial workflows for media groups like Novus Media.
-- Experienced in Google Ad Manager (GAM), GA4, Google Tag Manager (GTM), Looker Studio dashboards, and ad monetisation strategies.
+- Experienced in Google Ad Manager (GAM), GA4, Google Tag Manager (GTM), Looker
+  Studio dashboards, and ad monetisation strategies.
 - Implements AI-powered editorial workflows for newsrooms and publishing teams.
 
 ### UI/UX & Design Systems
 
-- Focused on bridging design and development using Figma Design Systems, theme.json, and structured workflows.
-- Led the design system overhaul for WooCommerce compatibility with the LSX framework.
+- Focused on bridging design and development using Figma Design Systems,
+  theme.json, and structured workflows.
+- Led the design system overhaul for WooCommerce compatibility with the LSX
+  framework.
 - Spearheaded Figma-based design system adoption for WordPress projects.
 
 ### Community Engagement & Public Speaking
 
 - WordCamp Organiser & Speaker (2008-Present) - Speaker at WordCamp Europe 2025.
-- Experienced in workshop facilitation, product demonstrations, and event sponsorships.
-- Speaker at WordCamp Europe 2025, presenting on Figma design systems for WordPress.
+- Experienced in workshop facilitation, product demonstrations, and event
+  sponsorships.
+- Speaker at WordCamp Europe 2025, presenting on Figma design systems for
+  WordPress.
 
 ### AI & Automation for Business Growth
 
 - Researches and implements AI-driven publishing workflows for digital media.
-- Explores AI chatbots, automated sales pipelines, and AI-powered SEO strategies.
+- Explores AI chatbots, automated sales pipelines, and AI-powered SEO
+  strategies.
 - Works with MeowApps AI Engine and other AI-enhanced WordPress tools.
 
 ## Current & Notable Projects
@@ -1053,33 +1119,46 @@ workflows, WooCommerce integrations, and AI-powered publishing solutions.
 ### 1. LSX Design Theme & LSX Tour Operator Plugin
 
 - A block-based WordPress theme built to replace page builders like Elementor.
-- Tour Operator 2.0 Plugin uses the Block Bindings API for flexible content structuring.
-- WooCommerce integrations and custom publication checklists built into the editor.
+- Tour Operator 2.0 Plugin uses the Block Bindings API for flexible content
+  structuring.
+- WooCommerce integrations and custom publication checklists built into the
+  editor.
 
 ### 2. Novus Media - Editorial & Ad Tech Overhaul
 
-- Spearheading the Google Product Suite implementation across 21 regional publications.
-- Developing AI-enhanced editorial workflows, advertising packages, and Newspack Ads integration.
-- Researching GAM Key-Value Pairs, ad placement strategies, and advertiser-facing reports.
+- Spearheading the Google Product Suite implementation across 21 regional
+  publications.
+- Developing AI-enhanced editorial workflows, advertising packages, and Newspack
+  Ads integration.
+- Researching GAM Key-Value Pairs, ad placement strategies, and
+  advertiser-facing reports.
 
 ### 3. WooCommerce & eCommerce Solutions
 
-- Consulting on WooCommerce-based booking and eCommerce sites, including the VKB Flight Sim Europe project.
+- Consulting on WooCommerce-based booking and eCommerce sites, including the VKB
+  Flight Sim Europe project.
 - Researching GDPR & accessibility compliance for EU-based eCommerce platforms.
-- Specialising in custom WooCommerce integrations for brands like The Safari Partners.
+- Specialising in custom WooCommerce integrations for brands like The Safari
+  Partners.
 
 ## WordPress & Community Involvement
 
 - WordCamp Organiser & Speaker (2008-Present) - Speaker at WordCamp Europe 2025.
-- Lead Developer & Open Source Contributor - LSX Design Theme, Tour Operator Plugin, WooCommerce extensions.
-- Member of the WordPress Theme Review Team - Specialising in WordPress theme best practices.
-- WordPress Meetups & Community Leadership - Founder of WordCamp Cape Town (2011-2012).
+- Lead Developer & Open Source Contributor - LSX Design Theme, Tour Operator
+  Plugin, WooCommerce extensions.
+- Member of the WordPress Theme Review Team - Specialising in WordPress theme
+  best practices.
+- WordPress Meetups & Community Leadership - Founder of WordCamp Cape Town
+  (2011-2012).
 
 ## Background & Education
 
-- Self-taught entrepreneur with a background in business, design, and development.
-- Currently pursuing a full-time course while working, focused on digital innovation & advanced WordPress development.
-- Regularly studies hybrid themes, Figma workflows, and advanced WooCommerce integrations.
+- Self-taught entrepreneur with a background in business, design, and
+  development.
+- Currently pursuing a full-time course while working, focused on digital
+  innovation & advanced WordPress development.
+- Regularly studies hybrid themes, Figma workflows, and advanced WooCommerce
+  integrations.
 
 ## Personal Interests & Passion Projects
 
@@ -1132,39 +1211,53 @@ both innovative and cost-effective.
 ### WordPress & WooCommerce
 
 - Builds block-based WordPress themes and custom WooCommerce solutions.
-- Leads plugin enhancements (e.g., Tour Operator 2.0, LSX Theme) and open-source projects.
-- Advocates Figma design systems and theme.json for bridging design & development.
+- Leads plugin enhancements (e.g., Tour Operator 2.0, LSX Theme) and open-source
+  projects.
+- Advocates Figma design systems and theme.json for bridging design &
+  development.
 
 ### Content Strategy & Editorial Workflows
 
 - Designs large-scale editorial workflows for clients, including Novus Media.
 - Specialises in Google Ad Manager (GAM), GA4, Tag Manager, and Looker Studio.
-- Integrates AI-powered tools into editorial pipelines for efficiency and monetisation.
+- Integrates AI-powered tools into editorial pipelines for efficiency and
+  monetisation.
 
 ### Process Creation & Automation
 
-- Known for developing repeatable processes for web design, content creation, and client onboarding.
-- Implements AI & automation solutions to enhance production speed, quality, and collaboration.
-- Regularly applies these refined processes to client projects and internal LightSpeed initiatives.
+- Known for developing repeatable processes for web design, content creation,
+  and client onboarding.
+- Implements AI & automation solutions to enhance production speed, quality, and
+  collaboration.
+- Regularly applies these refined processes to client projects and internal
+  LightSpeed initiatives.
 
 ### Community Involvement & Thought Leadership
 
-- WordCamp Organiser & Speaker since 2008, sharing insights on content workflows and Figma-based design.
-- Contributes to WordPress Theme Review Team - championing best practices and open-source standards.
-- Passionate about education, collaboration, and knowledge-sharing within the WordPress community.
+- WordCamp Organiser & Speaker since 2008, sharing insights on content workflows
+  and Figma-based design.
+- Contributes to WordPress Theme Review Team - championing best practices and
+  open-source standards.
+- Passionate about education, collaboration, and knowledge-sharing within the
+  WordPress community.
 
 ## Select Projects
 
 ### LSX Design Theme & LSX Tour Operator Plugin
 
-- Block-based approach to streamline site builds and replace page builders like Elementor.
-- Advanced WooCommerce integrations with custom editor checklists for eCommerce sites.
+- Block-based approach to streamline site builds and replace page builders like
+  Elementor.
+- Advanced WooCommerce integrations with custom editor checklists for eCommerce
+  sites.
 
 ### Novus Media - Editorial & Ad Tech Transformation
 
-- Leading 21 regional publications through a modern Google Product Suite implementation.
-- Introduced AI-driven editorial workflows to optimise content production and advertising revenue.
-- Researched and adopted GAM Key-Value Pairs and Newspack Ads for more targeted ad placements.
+- Leading 21 regional publications through a modern Google Product Suite
+  implementation.
+- Introduced AI-driven editorial workflows to optimise content production and
+  advertising revenue.
+- Researched and adopted GAM Key-Value Pairs and Newspack Ads for more targeted
+  ad placements.
 
 ### WooCommerce eCommerce Solutions
 
@@ -1174,17 +1267,25 @@ both innovative and cost-effective.
 
 ## Background & Approach
 
-- **Entrepreneurial Roots** - Built LightSpeed from the ground up in 2003, relying on hands-on learning and a user-first mindset.
-- **Process-Focused** - Believes robust methodologies are at the heart of every successful project - scaling from content creation to complex editorial systems.
-- **Tech & Innovation** - Embraces AI, automation, and advanced ad monetisation strategies to keep clients at the forefront of digital innovation.
-- **Passion Projects** - Co-founder of Six Cats Club (cannabis cultivation); outdoor sports fanatic; music festival enthusiast.
+- **Entrepreneurial Roots** - Built LightSpeed from the ground up in 2003,
+  relying on hands-on learning and a user-first mindset.
+- **Process-Focused** - Believes robust methodologies are at the heart of every
+  successful project - scaling from content creation to complex editorial
+  systems.
+- **Tech & Innovation** - Embraces AI, automation, and advanced ad monetisation
+  strategies to keep clients at the forefront of digital innovation.
+- **Passion Projects** - Co-founder of Six Cats Club (cannabis cultivation);
+  outdoor sports fanatic; music festival enthusiast.
 
 ## Personal Interests
 
 - Outdoor Sports - Cycling, trail running, and mountain biking.
-- Cannabis Advocacy - Committed to legal, sustainable cultivation and community outreach.
-- Music & Dance - Finds creativity and inspiration at festivals and through electronic dance culture.
-- AI & Tech Research - Continuously explores emerging tools for business growth and content automation.
+- Cannabis Advocacy - Committed to legal, sustainable cultivation and community
+  outreach.
+- Music & Dance - Finds creativity and inspiration at festivals and through
+  electronic dance culture.
+- AI & Tech Research - Continuously explores emerging tools for business growth
+  and content automation.
 
 ## Contact (1)
 
@@ -1218,22 +1319,49 @@ around whatever feeds his creativity and passion.
 Ash doesn't separate work from art, or art from life. He shapes his year, his
 movements, his daily rhythms — everything — around the things that fuel him:
 
-- **Sport** — Racing bicycles since 1994, representing Western Province in cross-country mountain biking, running since 2006, triathlon since 2010, Muay Thai since 2019, yoga since 2005. Movement isn't something he fits around life — it IS the life. The 300km loaded-bike pilgrimage to Origin Festival is sport, meditation, and art delivery system rolled into one.
-- **Growing cannabis** — Co-founder of Six Cats Club. It's cultivation as craft, patience as practice, and a relationship with nature that grounds everything else.
-- **Dance** — The psytrance dancefloor is Ash's classroom, his gallery, his church. 2-4 festivals a month in Cape Town through the 2000s. Every single Alien Safari and Vortex for years. The dancefloor is where he discovered that his brain's operating system finally had a compatible environment.
-- **Makeup** — UV and neon face painting is the visible output, but it's really about connection. Reading the energy, choosing the palette, painting fast and ambidextrous in the middle of chaos, and watching the reveal under blacklight. He didn't start in a salon — he started on the trance floor.
-- **Business** — LightSpeed (LightSpeedDevelopment, founded 2003). 22+ years of building WordPress and WooCommerce solutions. The business feeds the artist and the artist feeds the business. The company acronym is LSD — intentional. His management style mirrors his art style: freedom, trust, creative autonomy for the team.
-- **Problem solving** — The ADHD brain that rejected boredom but devoured interesting problems. Whether it's debugging code, designing a block theme, mapping a cycling route to a festival, or figuring out how to paint symmetrical neon patterns ambidextrously on a moving dancefloor — it's all the same muscle.
+- **Sport** — Racing bicycles since 1994, representing Western Province in
+  cross-country mountain biking, running since 2006, triathlon since 2010, Muay
+  Thai since 2019, yoga since 2005. Movement isn't something he fits around life
+  — it IS the life. The 300km loaded-bike pilgrimage to Origin Festival is
+  sport, meditation, and art delivery system rolled into one.
+- **Growing cannabis** — Co-founder of Six Cats Club. It's cultivation as craft,
+  patience as practice, and a relationship with nature that grounds everything
+  else.
+- **Dance** — The psytrance dancefloor is Ash's classroom, his gallery, his
+  church. 2-4 festivals a month in Cape Town through the 2000s. Every single
+  Alien Safari and Vortex for years. The dancefloor is where he discovered that
+  his brain's operating system finally had a compatible environment.
+- **Makeup** — UV and neon face painting is the visible output, but it's really
+  about connection. Reading the energy, choosing the palette, painting fast and
+  ambidextrous in the middle of chaos, and watching the reveal under blacklight.
+  He didn't start in a salon — he started on the trance floor.
+- **Business** — LightSpeed (LightSpeedDevelopment, founded 2003). 22+ years of
+  building WordPress and WooCommerce solutions. The business feeds the artist
+  and the artist feeds the business. The company acronym is LSD — intentional.
+  His management style mirrors his art style: freedom, trust, creative autonomy
+  for the team.
+- **Problem solving** — The ADHD brain that rejected boredom but devoured
+  interesting problems. Whether it's debugging code, designing a block theme,
+  mapping a cycling route to a festival, or figuring out how to paint
+  symmetrical neon patterns ambidextrously on a moving dancefloor — it's all the
+  same muscle.
 
 ## The Seasonal Migration
 
 The artist's lifestyle is literally geographic. Ash's year follows the festivals
 and the seasons:
 
-- **Cape Town summers (November–March):** Origin Festival (falls on his birthday weekend every year), the South African psytrance circuit, cycling in the Western Cape mountains, home base at the tip of Africa
-- **European summer (May–September):** Berlin as creative anchor, open-airs in Hasenheide Park, techno nights in Friedrichshain, cycling to festivals across Germany, Czech Republic, Austria
-- **Thailand (historically August–November):** Island psytrance circuit, Koh Phangan parties (Black Moon, Half Moon, Ban Sabaii — never the Full Moon Party), jungle festivals, tropical UV art
-- **The shoulder seasons:** Connecting it all by bicycle, train, and shared rides. "The less you carry, the further you go."
+- **Cape Town summers (November–March):** Origin Festival (falls on his birthday
+  weekend every year), the South African psytrance circuit, cycling in the
+  Western Cape mountains, home base at the tip of Africa
+- **European summer (May–September):** Berlin as creative anchor, open-airs in
+  Hasenheide Park, techno nights in Friedrichshain, cycling to festivals across
+  Germany, Czech Republic, Austria
+- **Thailand (historically August–November):** Island psytrance circuit, Koh
+  Phangan parties (Black Moon, Half Moon, Ban Sabaii — never the Full Moon
+  Party), jungle festivals, tropical UV art
+- **The shoulder seasons:** Connecting it all by bicycle, train, and shared
+  rides. "The less you carry, the further you go."
 
 ## Why It Works
 
@@ -1264,12 +1392,15 @@ This concept is central to "This one time on acid..." — the book Ash is writin
 The artist's lifestyle isn't a chapter; it's the thesis. Every chapter
 demonstrates a different facet:
 
-- **Chapter 1: The First Drop** — The moment the lifestyle began (Vortex 1999, the yellow suit, the Chicken Man)
+- **Chapter 1: The First Drop** — The moment the lifestyle began (Vortex 1999,
+  the yellow suit, the Chicken Man)
 - **Chapter 2: Wired Different** — Why the ADHD brain needs THIS kind of life
-- **Chapter 3: Berlin Calling** — The city that gave permission to live this way full-time
+- **Chapter 3: Berlin Calling** — The city that gave permission to live this way
+  full-time
 - **Chapter 4: The Dancefloor Classroom** — Dance as the central pillar
 - **Chapter 5: Neon Revelations** — The art emerging from the lifestyle
-- **Chapter 6: The Cumulative Effect** — It all connects. It was always going to connect.
+- **Chapter 6: The Cumulative Effect** — It all connects. It was always going to
+  connect.
 
 -----------------------------------------------------------------------------------
 
@@ -1315,7 +1446,8 @@ much as possible to grow into the person he is today.
 
 ### Early Chores & Jobs
 
-- Collecting snails in the garden as a child — his parents would pay him a few cents per snail
+- Collecting snails in the garden as a child — his parents would pay him a few
+  cents per snail
 - These early tasks taught responsibility and the basic concept of earning
 
 ## Primary School — Paarl Junior School (1986-1993)
@@ -1363,10 +1495,13 @@ development.
 Ash grew up with undiagnosed ADHD in a small town in the Western Cape in the
 1990s. The school system wasn't designed for brains like his:
 
-- Could spend six hours building a perfect model of something nobody asked for, but couldn't sit through forty minutes of mathematics
+- Could spend six hours building a perfect model of something nobody asked for,
+  but couldn't sit through forty minutes of mathematics
 - Brain didn't reject information — it rejected boredom
-- Feed it something interesting and it would devour it with a focus so intense it scared his teachers
-- It took him twenty years to understand this wasn't broken — it was a feature, not a bug
+- Feed it something interesting and it would devour it with a focus so intense
+  it scared his teachers
+- It took him twenty years to understand this wasn't broken — it was a feature,
+  not a bug
 - "I just needed to find the right operating system."
 
 ### Bullying
@@ -1395,17 +1530,23 @@ While the classroom was a struggle, the sports field was where Ash thrived:
 - Represented Western Province cross country mountain bike team
 - Western Province XC MTB colours: 1997 (3rd), 1998 (1st — champion), 1999 (3rd)
 - Racing bicycles since 1994 — sport was never optional, it was survival
-- Became provincial champion in 1998 — for this he got half colours at Paarl Boys High
-- Created himself a cycling portfolio to try to get sponsorship (unfortunately difficult to secure, but impressive results as a kid)
+- Became provincial champion in 1998 — for this he got half colours at Paarl
+  Boys High
+- Created himself a cycling portfolio to try to get sponsorship (unfortunately
+  difficult to secure, but impressive results as a kid)
 
 ### First Jobs
 
-- Standard 9 and Standard 10: Worked in Tyger Valley at a coffee shop on Sundays for extra cash at weekends
+- Standard 9 and Standard 10: Worked in Tyger Valley at a coffee shop on Sundays
+  for extra cash at weekends
 
 ### Languages & Writing
 
-- Spoke Afrikaans fluently in high school and reasonably well in junior school — grew up in an Afrikaans town so it was essential. Still speaks it fluently.
-- Wasn't an average writer initially. With practice over his life, he's become a better writer. It doesn't come naturally, but he's a good communicator — able to document what's in his head and get his message across clearly.
+- Spoke Afrikaans fluently in high school and reasonably well in junior school —
+  grew up in an Afrikaans town so it was essential. Still speaks it fluently.
+- Wasn't an average writer initially. With practice over his life, he's become a
+  better writer. It doesn't come naturally, but he's a good communicator — able
+  to document what's in his head and get his message across clearly.
 
 ### What He's Proud Of (Age 17 or Under)
 
@@ -1416,9 +1557,11 @@ self-directed spirit that would define his adult life.
 
 ## Post-Secondary — Daemelin College (1999)
 
-- Studied marketing while training extensively for Western Province mountain bike championships and South African mountain bike championships
+- Studied marketing while training extensively for Western Province mountain
+  bike championships and South African mountain bike championships
 - This was the last year of formal education
-- The same year as the first Vortex festivals that would redirect the course of his entire life
+- The same year as the first Vortex festivals that would redirect the course of
+  his entire life
 
 ## Certifications & Self-Directed Study
 
@@ -1438,7 +1581,8 @@ self-directed spirit that would define his adult life.
 
 ### Linux Professional Institute (2006-2008)
 
-- LPI certification — the Linux/Unix foundation that shaped his approach to reliability
+- LPI certification — the Linux/Unix foundation that shaped his approach to
+  reliability
 
 ### WebPR+ (2007)
 
@@ -1467,24 +1611,31 @@ spending years studying something he didn't want to do as a career.
 - Self-taught web developer, designer, and business manager
 - Learned WordPress development from the ground up
 - Key figure in the WordPress community since 2007
-- Everything from HTML/CSS to block-based themes to AI-powered editorial workflows — learned by doing, not by degree
-- "A self-taught entrepreneur with a background in business, design, and development"
+- Everything from HTML/CSS to block-based themes to AI-powered editorial
+  workflows — learned by doing, not by degree
+- "A self-taught entrepreneur with a background in business, design, and
+  development"
 
 ### The Festival Education (1999 onwards)
 
 - The dancefloor became the classroom where everything made sense
 - ADHD brains learn by immersion, by doing, by feeling — not by sitting in rows
-- Psytrance culture taught: community building, creative risk-taking, ego dissolution, pattern recognition across altered states
+- Psytrance culture taught: community building, creative risk-taking, ego
+  dissolution, pattern recognition across altered states
 - "The festival dancefloor became the classroom where everything made sense"
-- "How ADHD isn't a disorder when your environment matches your brain's operating system"
+- "How ADHD isn't a disorder when your environment matches your brain's
+  operating system"
 
 ### Continuous Learning
 
-- Regularly studies hybrid themes, Figma workflows, and advanced WooCommerce integrations
+- Regularly studies hybrid themes, Figma workflows, and advanced WooCommerce
+  integrations
 - AI and automation research — exploring AI-driven publishing workflows
 - GitHub Copilot, Microsoft Learn courses, Block Academy
-- Ash upskills alongside his team — "Everyone at LightSpeed is upskilling on GitHub and Copilot, including Ash"
-- Currently mentoring the entire team into a new age of AI-powered workflow with Copilot, ChatGPT, and agentic workflow
+- Ash upskills alongside his team — "Everyone at LightSpeed is upskilling on
+  GitHub and Copilot, including Ash"
+- Currently mentoring the entire team into a new age of AI-powered workflow with
+  Copilot, ChatGPT, and agentic workflow
 
 ## Summary (2)
 
@@ -1519,15 +1670,20 @@ Ash's longest and deepest sporting relationship. The bicycle is identity.
 - Continued to race provincial mountain biking all through high school
 - Western Province cross country mountain bike colours:
 - **1997:** 3rd overall
-- **1998:** 1st overall (Western Province champion) — earned half colours at Paarl Boys High
+- **1998:** 1st overall (Western Province champion) — earned half colours at
+  Paarl Boys High
 - **1999:** 3rd overall
-- At Daemelin College (1999), studied marketing while training extensively for Western Province mountain bike championships and South African mountain bike championships
-- Created a cycling portfolio to try to get sponsorship as a kid — impressive results despite difficulty securing sponsorship
+- At Daemelin College (1999), studied marketing while training extensively for
+  Western Province mountain bike championships and South African mountain bike
+  championships
+- Created a cycling portfolio to try to get sponsorship as a kid — impressive
+  results despite difficulty securing sponsorship
 
 ### Bike Packing & Touring
 
 - Bike packing since **2012**
-- This evolved from racing into a fundamentally different relationship with the bike — endurance, self-sufficiency, meditation, and adventure
+- This evolved from racing into a fundamentally different relationship with the
+  bike — endurance, self-sufficiency, meditation, and adventure
 
 ### The Touring Kit
 
@@ -1539,7 +1695,8 @@ Ash's longest and deepest sporting relationship. The bicycle is identity.
 - UV paints, brush kit, mirror stand (when heading to festivals)
 - Camping gear
 - Total weight: **40kg** (bike + gear)
-- "Everything fits in a single bag that straps to the bicycle. Portability isn't a limitation — it's a design constraint that forces creative efficiency."
+- "Everything fits in a single bag that straps to the bicycle. Portability isn't
+  a limitation — it's a design constraint that forces creative efficiency."
 
 ### Festival Cycling Pilgrimages
 
@@ -1547,20 +1704,27 @@ The centrepiece of Ash's cycling life: riding loaded touring bikes to psytrance
 festivals.
 
 - **Origin Festival (4 times: 2020, 2022, 2023, 2026):**
-- Route: Woodstock, Cape Town -> Sir Lowry's Pass -> Grabouw -> Elgin Valley -> Houwhoek Pass -> Helderstroom
+- Route: Woodstock, Cape Town -> Sir Lowry's Pass -> Grabouw -> Elgin Valley ->
+  Houwhoek Pass -> Helderstroom
 - ~150km one way through mountain passes in the Western Cape
-- **2026 birthday ride stats:** ~300km round trip, 40kg bike pack, 3,200m climbing, 14 hours of riding, top speed over 75km/h
-- Day 1 (2026): 80km from Woodstock via Sir Lowry's Pass — "pure adrenaline, crushed that climb, felt on top of the world"
-- Day 2 (2026, his birthday): 75km to Helderstroom, arrived 11:30 AM, skipped the queue, shouted it was his birthday
-- Return (2026): Monday to a farm in Elgin to decompress, Tuesday the full return to Cape Town. "Beautiful sunset over Elgin on the way back."
+- **2026 birthday ride stats:** ~300km round trip, 40kg bike pack, 3,200m
+  climbing, 14 hours of riding, top speed over 75km/h
+- Day 1 (2026): 80km from Woodstock via Sir Lowry's Pass — "pure adrenaline,
+  crushed that climb, felt on top of the world"
+- Day 2 (2026, his birthday): 75km to Helderstroom, arrived 11:30 AM, skipped
+  the queue, shouted it was his birthday
+- Return (2026): Monday to a farm in Elgin to decompress, Tuesday the full
+  return to Cape Town. "Beautiful sunset over Elgin on the way back."
 
-- **Cape Town to Stormsvlei:** 185km in one go to party for four days — "pretty insane"
+- **Cape Town to Stormsvlei:** 185km in one go to party for four days — "pretty
+  insane"
 
 - **Bangkok to Chiang Rai to Chiang Mai:**
 - Rode from Bangkok to Chiang Rai for a festival
 - Spent the weekend at the festival
 - Rode on the Monday to Chiang Mai
-- People at festivals don't believe he's going to ride home — "when they see me riding out of the festival on the Monday morning, they believe me then"
+- People at festivals don't believe he's going to ride home — "when they see me
+  riding out of the festival on the Monday morning, they believe me then"
 
 - **European festival cycling:**
 - Cycled through Germany, Czech Republic, Austria to reach festivals
@@ -1571,14 +1735,18 @@ festivals.
 
 - Over **7,000 km** touring on bicycle in Thailand
 - Cycled north to south and through untold adventures
-- Thailand bikepacking is relatively easy terrain-wise — "whether it goes up or down, I'm not too fussed"
+- Thailand bikepacking is relatively easy terrain-wise — "whether it goes up or
+  down, I'm not too fussed"
 - Less interest in bikepacking in South Africa because he has a car
 
 ### Saddle Sore Prevention (Thailand)
 
-- Keep daily distance to between 80 and 120km at most in Thailand due to humidity
-- Not even chamois cream protects from saddle sores in Thailand if doing more than 150km a day
-- Learned the hard way: the Hua Hin to Phuket ride (900km in 6 days) gave him saddle sores with lasting scars
+- Keep daily distance to between 80 and 120km at most in Thailand due to
+  humidity
+- Not even chamois cream protects from saddle sores in Thailand if doing more
+  than 150km a day
+- Learned the hard way: the Hua Hin to Phuket ride (900km in 6 days) gave him
+  saddle sores with lasting scars
 
 ### Proudest On-the-Road Repair
 
@@ -1600,8 +1768,10 @@ customise it again. Times change, gear changes, and needs change."
 - The flat, endless Berlin streets free the mind
 - Gorlitzer Park to Tempelhof, Spree canal to Tiergarten
 - Ideas form with every pedal stroke
-- The guy cycling in covered in fairy lights became a recognisable figure at Berlin open-airs before the UV art even started
-- Painting faces at open-airs until 3am, cycling home through warm streets that smell of linden trees
+- The guy cycling in covered in fairy lights became a recognisable figure at
+  Berlin open-airs before the UV art even started
+- Painting faces at open-airs until 3am, cycling home through warm streets that
+  smell of linden trees
 
 ## Running
 
@@ -1621,29 +1791,37 @@ customise it again. Times change, gear changes, and needs change."
 - Training since **2019**
 - A source of discipline, strength, and power
 - Currently training with a skilled Muay Thai trainer on Koh Phangan
-- "These practices aren't just physical — they've shaped how I work, lead, and live."
+- "These practices aren't just physical — they've shaped how I work, lead, and
+  live."
 
 ## Yoga
 
 - Attending classes since the **early 2000s**
 - Mostly personal training / self-practice
-- The counterbalance to high-intensity sport: flexibility, breath work, mindfulness
+- The counterbalance to high-intensity sport: flexibility, breath work,
+  mindfulness
 
 ## Swimming (Extended Detail)
 
 - Part of triathlon training since 2010
 - It wasn't until 2019 that swimming ability improved significantly
-- After two years of training with Lourens Visser (now a LightSpeed team member), became a proficient swimmer
+- After two years of training with Lourens Visser (now a LightSpeed team
+  member), became a proficient swimmer
 - Started venturing into longer distance open water swimming in the sea
-- On Koh Phangan: swims out to the coral reefs, sees colourful fish, sea urchins, and beauty
+- On Koh Phangan: swims out to the coral reefs, sees colourful fish, sea
+  urchins, and beauty
 
 ## Dance — The Constant
 
-- Dancing is integral to identity — "more than style; it's freedom, connection, and joy in its purest form"
-- After 25+ years immersed in psytrance, heart now beats for house and techno, though the roots remain
-- Berlin summer 2025 dancing record: approximately **900km or 1 million steps** over 8 weeks, mostly dancing — a new personal record
+- Dancing is integral to identity — "more than style; it's freedom, connection,
+  and joy in its purest form"
+- After 25+ years immersed in psytrance, heart now beats for house and techno,
+  though the roots remain
+- Berlin summer 2025 dancing record: approximately **900km or 1 million steps**
+  over 8 weeks, mostly dancing — a new personal record
 - "My goal was to dance every weekend while I was in Europe"
-- Dance floors, clubs, and festivals are where he expresses himself — through movement, makeup, and nail art
+- Dance floors, clubs, and festivals are where he expresses himself — through
+  movement, makeup, and nail art
 
 ## The Mind-Body-Art Connection
 
@@ -1661,7 +1839,8 @@ Multi-day festivals require a specific kind of fitness:
 - Cycling to and from the festival with full gear
 - Recovery between sets, between days, between festivals
 - Hearing protection: **Loop Experience 2** ear plugs
-- Multi-day events: only sleeps a few hours a night — "you recover after the festival"
+- Multi-day events: only sleeps a few hours a night — "you recover after the
+  festival"
 - "Dance dance dance"
 
 This isn't gym fitness. This is functional endurance built through decades of
@@ -1670,12 +1849,18 @@ sport, shaped by the specific demands of the psytrance lifestyle.
 ## Bike Packing Adventures (Extended Detail)
 
 - Started riding to festivals in 2018
-- Longest distance was 185 km to the Stormvlei December Vortex (didn't ride home — dry run for Thailand trip)
-- Ridden to and from three Origin Festivals: 2020, 2022 & 2023; rode to and from Origin 2026
-- 2014: 300 km bike trip in California from San Francisco to Point Reyes and back
+- Longest distance was 185 km to the Stormvlei December Vortex (didn't ride home
+  — dry run for Thailand trip)
+- Ridden to and from three Origin Festivals: 2020, 2022 & 2023; rode to and from
+  Origin 2026
+- 2014: 300 km bike trip in California from San Francisco to Point Reyes and
+  back
 - Two bike trips in the Netherlands, totalling nearly 800 km
-- Rode from Munich to Amsterdam: 1,000 km in 10 days (not counted as part of NL trips)
-- Rode from Hua Hin to Phuket for friend Pierre Vocat's wedding: nearly 900 km in 6 days with one rest day there, then 1,100 km on the return. Got saddle sores with lasting scars.
+- Rode from Munich to Amsterdam: 1,000 km in 10 days (not counted as part of NL
+  trips)
+- Rode from Hua Hin to Phuket for friend Pierre Vocat's wedding: nearly 900 km
+  in 6 days with one rest day there, then 1,100 km on the return. Got saddle
+  sores with lasting scars.
 - Over 7,000 km touring in Thailand total
 - Toured in Europe, Bali, and the US on two wheels
 
@@ -1756,8 +1941,10 @@ loneliness — it was the training ground for an entrepreneur.
 
 ### Cyclists
 
-- **Marco Pantani** — winner of the Tour de France and Tour of Spain. The climber, the pirate, the tragic genius on two wheels.
-- **Willie Engelbrecht** — Ash's trainer for a while and one of South Africa's best cyclists. The local hero who showed what was possible.
+- **Marco Pantani** — winner of the Tour de France and Tour of Spain. The
+  climber, the pirate, the tragic genius on two wheels.
+- **Willie Engelbrecht** — Ash's trainer for a while and one of South Africa's
+  best cyclists. The local hero who showed what was possible.
 
 ### First Memory of Being "The Organiser"
 
@@ -1779,14 +1966,28 @@ would devour it with a focus so intense it scared his teachers.
 
 ### How ADHD Shows Up in the Art
 
-- **Hyperfocus during painting sessions** — Once Ash starts painting a face, the world narrows to just the pigment, the skin, the music, and the design emerging. This is ADHD's superpower: when the environment matches the brain, focus becomes superhuman.
-- **Ambidextrous technique** — Adapting to chaos isn't a learned skill for ADHD brains; it's native. Painting with both hands simultaneously in a crowded, noisy, dark festival environment is exactly the kind of multi-input processing that ADHD brains thrive on.
-- **Spontaneous design** — No pre-sketching, no Pinterest boards, no planning. The design emerges from the moment. This isn't laziness — it's how ADHD creativity works. The conscious mind gets out of the way and the pattern-recognition engine takes over.
+- **Hyperfocus during painting sessions** — Once Ash starts painting a face, the
+  world narrows to just the pigment, the skin, the music, and the design
+  emerging. This is ADHD's superpower: when the environment matches the brain,
+  focus becomes superhuman.
+- **Ambidextrous technique** — Adapting to chaos isn't a learned skill for ADHD
+  brains; it's native. Painting with both hands simultaneously in a crowded,
+  noisy, dark festival environment is exactly the kind of multi-input processing
+  that ADHD brains thrive on.
+- **Spontaneous design** — No pre-sketching, no Pinterest boards, no planning.
+  The design emerges from the moment. This isn't laziness — it's how ADHD
+  creativity works. The conscious mind gets out of the way and the
+  pattern-recognition engine takes over.
 
 ### How ADHD Shows Up in the Business
 
-- **Process obsession** — LightSpeed's workflow isn't despite ADHD; it's because of it. ADHD brains need structure to function, so Ash builds meticulous systems — GitHub workflows, daily planning templates, curriculum structures — that keep the chaos productive.
-- **Radical delegation** — Giving the team freedom isn't just philosophy; it's necessity. An ADHD founder can't micromanage. So he builds systems that run without him, hires people he trusts, and gets out of their way.
+- **Process obsession** — LightSpeed's workflow isn't despite ADHD; it's because
+  of it. ADHD brains need structure to function, so Ash builds meticulous
+  systems — GitHub workflows, daily planning templates, curriculum structures —
+  that keep the chaos productive.
+- **Radical delegation** — Giving the team freedom isn't just philosophy; it's
+  necessity. An ADHD founder can't micromanage. So he builds systems that run
+  without him, hires people he trusts, and gets out of their way.
 
 ## The Hyperactive Communicator
 
@@ -1815,26 +2016,41 @@ celebration for others.
 
 The identity evolved through outfits:
 
-1. **The Yellow Suit** (early 2000s) — Found at a charity shop. First worn at a festival. Earned him the nickname "the Chicken Man." This was the beginning of standing out on purpose, of making the dancefloor into a stage.
+1. **The Yellow Suit** (early 2000s) — Found at a charity shop. First worn at a
+   festival. Earned him the nickname "the Chicken Man." This was the beginning
+   of standing out on purpose, of making the dancefloor into a stage.
 
 1. **The Red Suit** — Escalation. If one bold suit works, try another.
 
-1. **The White and Black Cow Suit** — The pivot to character. No longer just dressed up — now in costume.
+1. **The White and Black Cow Suit** — The pivot to character. No longer just
+   dressed up — now in costume.
 
-1. **The Brown and Beige Cow Suit** — Became known as "the Cow Man" for many years. People at festivals STILL ask if he's the guy who used to dress as the cow man.
+1. **The Brown and Beige Cow Suit** — Became known as "the Cow Man" for many
+   years. People at festivals STILL ask if he's the guy who used to dress as the
+   cow man.
 
-1. **UV Paint (July 2019 onwards)** — The final evolution. The costume became the art became the identity. No longer wearing something outrageous — now MAKING other people outrageous. The transition from performer to artist.
+1. **UV Paint (July 2019 onwards)** — The final evolution. The costume became
+   the art became the identity. No longer wearing something outrageous — now
+   MAKING other people outrageous. The transition from performer to artist.
 
 ## The Bike
 
 Transport: Bicycle — always. This isn't an environmental statement (though it
 is). It's not a fitness thing (though it is). The bicycle is identity.
 
-- **Daily life in Berlin:** The flat endless streets, Gorlitzer Park to Tempelhof, the Spree canal to Tiergarten. Ideas form with every pedal stroke.
-- **Festival transport:** Cycling hundreds of kilometres to reach festivals, arriving dusty and grinning with panniers full of UV paint.
-- **The fairy lights bike:** The guy cycling in covered in fairy lights became a recognisable figure at Berlin open-airs before the UV art even started.
-- **The loaded touring bike:** 40kg bike pack including UV paints, brush kit, mirror stand, camping gear, touring panniers. Everything an artist needs, on two wheels.
-- **Racing history:** Racing bicycles since 1994. Western Province cross-country mountain bike colours in 1997 (3rd), 1998 (1st), 1999 (3rd). This isn't a hipster cycling habit — it's a lifelong relationship with two wheels that predates Berlin, predates festivals, predates everything.
+- **Daily life in Berlin:** The flat endless streets, Gorlitzer Park to
+  Tempelhof, the Spree canal to Tiergarten. Ideas form with every pedal stroke.
+- **Festival transport:** Cycling hundreds of kilometres to reach festivals,
+  arriving dusty and grinning with panniers full of UV paint.
+- **The fairy lights bike:** The guy cycling in covered in fairy lights became a
+  recognisable figure at Berlin open-airs before the UV art even started.
+- **The loaded touring bike:** 40kg bike pack including UV paints, brush kit,
+  mirror stand, camping gear, touring panniers. Everything an artist needs, on
+  two wheels.
+- **Racing history:** Racing bicycles since 1994. Western Province cross-country
+  mountain bike colours in 1997 (3rd), 1998 (1st), 1999 (3rd). This isn't a
+  hipster cycling habit — it's a lifelong relationship with two wheels that
+  predates Berlin, predates festivals, predates everything.
 
 ## The Neurodivergent Creative Community
 
@@ -1899,78 +2115,112 @@ only.**
 
 ## Key Facts
 
-- Second festival was December Vortex 1999, which was Ash's first experience with Lucy
+- Second festival was December Vortex 1999, which was Ash's first experience
+  with Lucy
 - Ash was seventeen at the time
-- Throughout festivals, Lucy became a staple and had a great impact on perception of life
+- Throughout festivals, Lucy became a staple and had a great impact on
+  perception of life
 - Shaped many decisions in life for the positive
-- Named the business LightSpeedDevelopment — the acronym is LSD (intentional double meaning)
-- Has shared experiences with staff members over the years on camping trips and hikes
-- Lead developer and Ash have shared these experiences on probably 20 occasions together
+- Named the business LightSpeedDevelopment — the acronym is LSD (intentional
+  double meaning)
+- Has shared experiences with staff members over the years on camping trips and
+  hikes
+- Lead developer and Ash have shared these experiences on probably 20 occasions
+  together
 
 ## Impact on Life & Creative Vision
 
 - Permanently changed perception of colour and visual awareness
-- "There's a before and after in Ash's relationship with colour. Before, colours were things he saw. After, they were things he felt."
+- "There's a before and after in Ash's relationship with colour. Before, colours
+  were things he saw. After, they were things he felt."
 - Combined with ADHD wiring to amplify creative connections
-- ADHD brains are already making unusual connections — jumping between ideas, seeing patterns across unrelated domains. Moments of expanded consciousness amplified this natural wiring rather than fighting it.
+- ADHD brains are already making unusual connections — jumping between ideas,
+  seeing patterns across unrelated domains. Moments of expanded consciousness
+  amplified this natural wiring rather than fighting it.
 - Taught that ego is optional, connection is everything
 - The dancefloor became sacred space
 - Never about escape — always about deeper engagement with reality
 - Integration through journaling, cycling, creating, and trusted friendships
-- "The goal was never to check out of reality. It was to check in more deeply. To bring back something useful — a new way of seeing colour, a dissolved creative block, a reminder that the universe is far stranger and more beautiful than the default settings suggest."
+- "The goal was never to check out of reality. It was to check in more deeply.
+  To bring back something useful — a new way of seeing colour, a dissolved
+  creative block, a reminder that the universe is far stranger and more
+  beautiful than the default settings suggest."
 
 ## The Cumulative Effect (Key Theme)
 
-- "It's never one experience that changes everything. It's the slow accumulation — a hundred moments of heightened awareness that gradually rebuild your understanding of yourself and the world."
-- "These experiences taught Ash that ego is optional, that connection is everything, that the dancefloor is sacred, and that the most beautiful art happens when you stop trying to be impressive and start trying to be honest."
+- "It's never one experience that changes everything. It's the slow accumulation
+  — a hundred moments of heightened awareness that gradually rebuild your
+  understanding of yourself and the world."
+- "These experiences taught Ash that ego is optional, that connection is
+  everything, that the dancefloor is sacred, and that the most beautiful art
+  happens when you stop trying to be impressive and start trying to be honest."
 
 ## Connection to UV Art (Direct)
 
 - The connection between expanded states of awareness and UV art is direct
 - When Ash paints someone's face, he's not decorating — he's translating
-- Translating the visual language of heightened perception into pigment that anyone can see, especially under blacklight
-- The way neon paint bleeds under UV light, the way colours breathe and pulse on a dancefloor — these are things Ash noticed because his awareness had been opened to what was always there
+- Translating the visual language of heightened perception into pigment that
+  anyone can see, especially under blacklight
+- The way neon paint bleeds under UV light, the way colours breathe and pulse on
+  a dancefloor — these are things Ash noticed because his awareness had been
+  opened to what was always there
 - "Once you see the hidden frequency, you can't unsee it."
 - Every neon stroke carries a piece of those experiences
-- Every glowing face on the dancefloor is a small portal into that wider, more vivid way of seeing
+- Every glowing face on the dancefloor is a small portal into that wider, more
+  vivid way of seeing
 - "That's the real art — not the paint, but the perception it represents."
 
 ## Connection to ADHD
 
-- "ADHD brains are already making unusual connections — jumping between ideas, seeing patterns across unrelated domains. Moments of expanded consciousness amplified this natural wiring rather than fighting it."
-- Best design ideas come from lateral thinking space — "not copied from references, but emerged from the intersection of music, movement, and a mind that refuses to think in straight lines"
+- "ADHD brains are already making unusual connections — jumping between ideas,
+  seeing patterns across unrelated domains. Moments of expanded consciousness
+  amplified this natural wiring rather than fighting it."
+- Best design ideas come from lateral thinking space — "not copied from
+  references, but emerged from the intersection of music, movement, and a mind
+  that refuses to think in straight lines"
 
 ## Connection to Aquarius
 
-- How Ash's Aquarian crazy soul met with his ADHD neurodiverse brain, how these combined with Lucy made him who he is and helped him achieve what he has to date
-- The three threads (Aquarius + ADHD + Lucy) are inseparable and form the core of the book
+- How Ash's Aquarian crazy soul met with his ADHD neurodiverse brain, how these
+  combined with Lucy made him who he is and helped him achieve what he has to
+  date
+- The three threads (Aquarius + ADHD + Lucy) are inseparable and form the core
+  of the book
 
 ## Dosing Approach & Wisdom
 
 ### No Protocol
 
-- "I don't have a protocol. I have bottle acid and will take it in just about any setting."
+- "I don't have a protocol. I have bottle acid and will take it in just about
+  any setting."
 - No fixed set/setting requirements — spontaneous and mood-driven
 
 ### Wisdom Gained Over the Years
 
-- "I've become wiser over the years. I've made plenty of mistakes and fed the wrong people too much acid. Too much could be one drop and then mine doesn't drive through it."
-- Learning through experience what works and what doesn't — for himself and others
+- "I've become wiser over the years. I've made plenty of mistakes and fed the
+  wrong people too much acid. Too much could be one drop and then mine doesn't
+  drive through it."
+- Learning through experience what works and what doesn't — for himself and
+  others
 
 ### Boundaries (or Lack Thereof)
 
-- "I don't really have a lot of boundaries when it comes to acid. Sometimes I feel like taking a whole lot, sometimes I don't — it's more about mood."
+- "I don't really have a lot of boundaries when it comes to acid. Sometimes I
+  feel like taking a whole lot, sometimes I don't — it's more about mood."
 - Not dogmatic about dosing — guided by intuition and circumstance
 
 ### Frequency & Amount
 
 - Depends on many things: headspace, type of party, quality of visuals
-- "If the visuals at the party are good, I'm more likely to do more acid and trip out more"
+- "If the visuals at the party are good, I'm more likely to do more acid and
+  trip out more"
 - Adapted frequency and amount over the years based on experience
 
 ### Integration Into Life
 
-- "I definitely integrate insights into my life. Many of my best ideas or decisions in life have come about from a really good trip or a trip that didn't go so well that's maybe taught me a lesson."
+- "I definitely integrate insights into my life. Many of my best ideas or
+  decisions in life have come about from a really good trip or a trip that
+  didn't go so well that's maybe taught me a lesson."
 - Both positive and challenging experiences have value
 
 ## Creative Inspiration — Nation of Gondwana
@@ -1979,16 +2229,24 @@ A direct case study of Lucy inspiring art:
 
 - At Nation of Gondwana festival, during a trip, Ash saw some lighting
 - He thought he would recreate that art piece in his makeup the next day
-- The inspiration for one of his best UV face paint designs came directly from that acid trip
-- This is the clearest example of the direct connection between expanded states and creative output
+- The inspiration for one of his best UV face paint designs came directly from
+  that acid trip
+- This is the clearest example of the direct connection between expanded states
+  and creative output
 
 ## The Book Connection
 
-- **Chapter 1: The First Drop** — December Vortex 1999, age seventeen, the yellow suit, the first experience
-- **Chapter 4: The Dancefloor Classroom** — 140 BPM as the heartbeat of understanding
-- **Chapter 6: The Cumulative Effect** — "It's never one moment. It's the thousand moments that suddenly click."
+- **Chapter 1: The First Drop** — December Vortex 1999, age seventeen, the
+  yellow suit, the first experience
+- **Chapter 4: The Dancefloor Classroom** — 140 BPM as the heartbeat of
+  understanding
+- **Chapter 6: The Cumulative Effect** — "It's never one moment. It's the
+  thousand moments that suddenly click."
 - The book's working subtitle: "Stories, lessons & the making of a neon soul"
-- The blurb: "A raw, honest memoir weaving the wildest stories from the psytrance dancefloor into the deepest lessons they taught. How an Aquarian soul, an ADHD brain, and Lucy in the Sky combined to create an artist, a nomad, and a life lived in full colour."
+- The blurb: "A raw, honest memoir weaving the wildest stories from the
+  psytrance dancefloor into the deepest lessons they taught. How an Aquarian
+  soul, an ADHD brain, and Lucy in the Sky combined to create an artist, a
+  nomad, and a life lived in full colour."
 
 ## How This Translates to Public Content
 
@@ -2001,8 +2259,10 @@ On the public website, these experiences are referenced through:
 - The Beatles song reference "Lucy in the Sky with Diamonds"
 - The company name LightSpeedDevelopment (LSD) as a subtle nod
 - "Seeing in neon" — the permanent upgrade to colour perception
-- "The creative unlock" — how expansion amplified ADHD's natural lateral thinking
-- "Integration, not escape" — the thoughtful distinction between expansion and escapism
+- "The creative unlock" — how expansion amplified ADHD's natural lateral
+  thinking
+- "Integration, not escape" — the thoughtful distinction between expansion and
+  escapism
 
 -----------------------------------------------------------------------------------
 
@@ -2018,33 +2278,41 @@ On the public website, these experiences are referenced through:
 - Ash was wearing the yellow suit for the first time
 - He protected her against someone from his hometown
 - They connected deeply on the dancefloor immediately
-- "Connected deeply on the dancefloor immediately" — this is the pattern of Ash's life: the dancefloor as the place where real connections happen
+- "Connected deeply on the dancefloor immediately" — this is the pattern of
+  Ash's life: the dancefloor as the place where real connections happen
 
 ### The Relationship
 
-- Met Barbara again at Ash's birthday celebration (thought to be an Alien Safari at Silverstroom in January 2001)
+- Met Barbara again at Ash's birthday celebration (thought to be an Alien Safari
+  at Silverstroom in January 2001)
 - She quickly became his older friend
 - Got together in **March 2001**
-- Then went to the Zambian solar eclipse festival called **Solipse**, which sealed their unity
-- The 86-hour bus ride, three border crossings, three weeks in the bush — they went through this together and came out bonded
+- Then went to the Zambian solar eclipse festival called **Solipse**, which
+  sealed their unity
+- The 86-hour bus ride, three border crossings, three weeks in the bush — they
+  went through this together and came out bonded
 
 ### The Proposal
 
-- Barbara, being older than Ash, was concerned he would leave her for somebody younger
+- Barbara, being older than Ash, was concerned he would leave her for somebody
+  younger
 - When Ash was in Thailand in **2005**, he decided he would propose to her
 - Proposed when he got back to South Africa
-- The Thailand trip — meeting Mel Heinz and Colin on Koh Phangan, falling in love with island life — was the context for this decision
+- The Thailand trip — meeting Mel Heinz and Colin on Koh Phangan, falling in
+  love with island life — was the context for this decision
 
 ### Barbara at LightSpeed
 
 - Barbara joined LightSpeed in **2010** and became a partner soon after (CFO)
 - The personal and professional lives became intertwined
-- This is consistent with the "artist's lifestyle" — not separating life compartments
+- This is consistent with the "artist's lifestyle" — not separating life
+  compartments
 
 ### Thailand Together (2009)
 
 - Travelled to Koh Phangan for **Barbara's 40th birthday**
-- Attended psytrance parties together: Black Moon, Half Moon, Ban Sabaii after-parties
+- Attended psytrance parties together: Black Moon, Half Moon, Ban Sabaii
+  after-parties
 - NOT the Full Moon Party
 - Also travelled north to Chiang Mai
 - "Experienced the most incredible times"
@@ -2063,21 +2331,26 @@ at 3am, in the glow of UV light.
 - They still live together in Cape Town
 - They run LightSpeed, their software company, together as business partners
 - They run Six Cats, their cannabis club, together as business partners
-- It's not always easy handling these things together, but they've found a way to collaborate and have the best possible interactions
-- Barbara is one of Ash's best friends, if not his best friend — he doesn't want to lose her in his life so he's made every effort to resolve any issues they might have and discuss clear boundaries for things that don't work
+- It's not always easy handling these things together, but they've found a way
+  to collaborate and have the best possible interactions
+- Barbara is one of Ash's best friends, if not his best friend — he doesn't want
+  to lose her in his life so he's made every effort to resolve any issues they
+  might have and discuss clear boundaries for things that don't work
 
 ### The Separation
 
 - Separated amicably
 - "It took a while for us to find our feet"
-- Finding clear boundaries was essential for maintaining the friendship and partnerships
+- Finding clear boundaries was essential for maintaining the friendship and
+  partnerships
 
 ## Aixa
 
 ### How They Met (1)
 
 - Met Aixa Reynosa at **Sisyphos in Berlin**
-- "I was gonna share a drop of acid with her, but she licked the whole drop off my hand"
+- "I was gonna share a drop of acid with her, but she licked the whole drop off
+  my hand"
 - "We always say it was love at first drop"
 - They chased each other around the world for a while
 - Ash really loved her but things didn't work out
@@ -2090,11 +2363,15 @@ at 3am, in the glow of UV light.
 
 - The relationship with Aixa while he was with Barbara was wrong
 - Hiding it from her only caused pain and suffering later down the line
-- He didn't know how to break up with Barbara or separate — it was a difficult situation
-- The relationship with Aixa went on for way too long and eventually he got caught out
-- "I should've just owned up to the fact that things weren't working and found a way to separate"
+- He didn't know how to break up with Barbara or separate — it was a difficult
+  situation
+- The relationship with Aixa went on for way too long and eventually he got
+  caught out
+- "I should've just owned up to the fact that things weren't working and found a
+  way to separate"
 - Instead it had to come to a boil and explode
-- There was a lot of pain and hatred involved for a while, but they got over things
+- There was a lot of pain and hatred involved for a while, but they got over
+  things
 
 ### The Lesson
 
@@ -2106,7 +2383,8 @@ when it's painful — is always the better path.
 
 - He's had two major relationships — he knows he doesn't want someone cold
 - He does want someone who loves him and can show love
-- But he doesn't want someone who's crazy or aggressive or triggers his neurodivergent brain
+- But he doesn't want someone who's crazy or aggressive or triggers his
+  neurodivergent brain
 - Looking for warmth, presence, and emotional safety
 
 ## Gratitude
@@ -2140,17 +2418,23 @@ festival life:
 
 - Ego dissolves on the dancefloor — and that's where the real art begins
 - Connection is the point. The paint is just a vehicle.
-- The most beautiful art happens when you stop trying to be impressive and start trying to be honest
-- "I look for the radiant souls amplifying the energy. If the vibe matches, we create magic."
+- The most beautiful art happens when you stop trying to be impressive and start
+  trying to be honest
+- "I look for the radiant souls amplifying the energy. If the vibe matches, we
+  create magic."
 
 ## Integration, Not Escape
 
 Ash is thoughtful about the difference between expansion and escapism:
 
-- Every powerful experience is followed by integration — journaling, cycling, creating, talking with trusted friends
+- Every powerful experience is followed by integration — journaling, cycling,
+  creating, talking with trusted friends
 - The goal was never to check out of reality. It was to check in more deeply.
-- "To bring back something useful — a new way of seeing colour, a dissolved creative block, a reminder that the universe is far stranger and more beautiful than the default settings suggest."
-- The cycling is integration. The art is integration. The business is integration. Everything feeds back.
+- "To bring back something useful — a new way of seeing colour, a dissolved
+  creative block, a reminder that the universe is far stranger and more
+  beautiful than the default settings suggest."
+- The cycling is integration. The art is integration. The business is
+  integration. Everything feeds back.
 
 ## The Dancefloor as Sacred Space
 
@@ -2159,29 +2443,40 @@ Not metaphorical — literally sacred. The psytrance dancefloor is where:
 - ADHD brains find their natural operating environment
 - Sensory richness replaces the boredom of conventional spaces
 - Community forms without the filters of daily life
-- Creative vision is born (the art that happens on the dancefloor informs the art that happens with paint)
+- Creative vision is born (the art that happens on the dancefloor informs the
+  art that happens with paint)
 - "Never about escape — always about deeper engagement with reality"
 
 ## ADHD as Feature, Not Bug
 
 A reframing that took twenty years:
 
-- Growing up in Paarl, South Africa in the 1990s, ADHD wasn't understood — it was just "being difficult"
-- School failed him: couldn't sit through forty minutes of maths, but could hyperfocus for six hours on something interesting
+- Growing up in Paarl, South Africa in the 1990s, ADHD wasn't understood — it
+  was just "being difficult"
+- School failed him: couldn't sit through forty minutes of maths, but could
+  hyperfocus for six hours on something interesting
 - "My brain didn't reject information — it rejected boredom"
-- The psytrance environment was the first place where the wiring matched the world
+- The psytrance environment was the first place where the wiring matched the
+  world
 - Hyperfocus during painting sessions is ADHD's superpower in action
-- The process obsession at LightSpeed (GitHub workflows, daily planning templates, curriculum structures) is ADHD's need for structure channelled productively
-- "It took me twenty years to understand that this wasn't broken. It was a feature, not a bug. I just needed to find the right operating system."
+- The process obsession at LightSpeed (GitHub workflows, daily planning
+  templates, curriculum structures) is ADHD's need for structure channelled
+  productively
+- "It took me twenty years to understand that this wasn't broken. It was a
+  feature, not a bug. I just needed to find the right operating system."
 
 ## The Aquarian Thread
 
 Not horoscope-page mysticism — pattern recognition about identity:
 
-- The Aquarian need to question everything, reject convention, see patterns others miss
-- Amplified by ADHD: "moves at 200km/h and makes connections across disciplines, cultures, and altered states"
-- "For years, this combination felt like a curse. Too weird for the normal world, too scattered for the creative one."
-- Then Berlin, then Lucy, then the dancefloor — "and suddenly the wiring wasn't a bug, it was the feature"
+- The Aquarian need to question everything, reject convention, see patterns
+  others miss
+- Amplified by ADHD: "moves at 200km/h and makes connections across disciplines,
+  cultures, and altered states"
+- "For years, this combination felt like a curse. Too weird for the normal
+  world, too scattered for the creative one."
+- Then Berlin, then Lucy, then the dancefloor — "and suddenly the wiring wasn't
+  a bug, it was the feature"
 - The book maps that transformation honestly and without apology
 
 ## Freedom as Operating Principle
@@ -2189,10 +2484,16 @@ Not horoscope-page mysticism — pattern recognition about identity:
 Freedom shows up everywhere in Ash's life:
 
 - **Berlin:** Chose a city that demands difference, not conformity
-- **LightSpeed:** Remote-first, flexible hours, creative autonomy for the team. "Freedom is something that many employees don't experience. The freedom given to the LightSpeed team helps them lead happier lives and ultimately benefits the company because they deliver better work."
-- **The bicycle:** Freedom of movement, no schedules, no dependency on infrastructure
-- **Festival life:** The dancefloor as the last truly free space — no phones, no performances, just music and bodies and connection
-- **The art:** No pre-planning, no Pinterest references, no client briefs. Pure spontaneous creation.
+- **LightSpeed:** Remote-first, flexible hours, creative autonomy for the team.
+  "Freedom is something that many employees don't experience. The freedom given
+  to the LightSpeed team helps them lead happier lives and ultimately benefits
+  the company because they deliver better work."
+- **The bicycle:** Freedom of movement, no schedules, no dependency on
+  infrastructure
+- **Festival life:** The dancefloor as the last truly free space — no phones, no
+  performances, just music and bodies and connection
+- **The art:** No pre-planning, no Pinterest references, no client briefs. Pure
+  spontaneous creation.
 
 ## The Entrepreneurial Imperative
 
@@ -2234,10 +2535,14 @@ nothing to do with money.
 Certain transformative experiences permanently upgraded the resolution at which
 Ash perceives the visual world:
 
-- "There's a before and after in Ash's relationship with colour. Before, colours were things he saw. After, they were things he felt."
-- The way neon paint bleeds under UV light, the way colours breathe and pulse on a dancefloor — these are things he noticed because his awareness had been opened to what was always there
+- "There's a before and after in Ash's relationship with colour. Before, colours
+  were things he saw. After, they were things he felt."
+- The way neon paint bleeds under UV light, the way colours breathe and pulse on
+  a dancefloor — these are things he noticed because his awareness had been
+  opened to what was always there
 - "Once you see the hidden frequency, you can't unsee it."
-- This is the direct connection between expanded awareness and UV art: the paint translates heightened perception into pigment anyone can see under blacklight
+- This is the direct connection between expanded awareness and UV art: the paint
+  translates heightened perception into pigment anyone can see under blacklight
 
 ## The Artist's Lifestyle
 
@@ -2257,10 +2562,14 @@ See `/content/personal/artists-lifestyle.md` for the full exploration.
 
 Writing "This one time on acid..." honestly means:
 
-- Admitting that the unconventional path was always the only option, not a brave choice
-- Confronting the gap between who the world expected him to be and who he actually is
-- Being public about neurodivergence, altered states, and ego dissolution in a way that can't be taken back
-- The vulnerability of saying: this is what made me, and I wouldn't change any of it
+- Admitting that the unconventional path was always the only option, not a brave
+  choice
+- Confronting the gap between who the world expected him to be and who he
+  actually is
+- Being public about neurodivergence, altered states, and ego dissolution in a
+  way that can't be taken back
+- The vulnerability of saying: this is what made me, and I wouldn't change any
+  of it
 
 ## Core Beliefs (Summary)
 
@@ -2288,9 +2597,12 @@ Writing "This one time on acid..." honestly means:
 
 Ash's year isn't divided into months — it's divided into festival seasons:
 
-- **Cape Town summers (November–March):** Origin Festival, the South African psytrance circuit, home base
-- **European summer (May–September):** Berlin base, open-airs, cycling to festivals across Germany, Czech Republic, Austria
-- **Thailand (historically August–November):** Island psytrance, jungle festivals, tropical UV art
+- **Cape Town summers (November–March):** Origin Festival, the South African
+  psytrance circuit, home base
+- **European summer (May–September):** Berlin base, open-airs, cycling to
+  festivals across Germany, Czech Republic, Austria
+- **Thailand (historically August–November):** Island psytrance, jungle
+  festivals, tropical UV art
 - **Shoulder seasons:** Connecting it all by bicycle, train, and shared rides
 
 This isn't glamorous digital nomadism. It's dusty festival campsites, sleeping
@@ -2307,8 +2619,10 @@ The less you carry, the further you go.
 The first international journey and one of the defining experiences of Ash's
 life.
 
-- Caught a bus from Cape Town to a few hours above Lusaka — **86 hours** from Cape Town to the endpoint
-- The endpoint was somewhere on the solar eclipse line where the eclipse was the longest, out in the bush
+- Caught a bus from Cape Town to a few hours above Lusaka — **86 hours** from
+  Cape Town to the endpoint
+- The endpoint was somewhere on the solar eclipse line where the eclipse was the
+  longest, out in the bush
 - Border crossings:
   1. South Africa / Botswana border
   2. Botswana / Zimbabwe border at Livingstone
@@ -2316,12 +2630,17 @@ life.
 
 - Spent about three weeks in the bush
 - One week of festival
-- 3.5 minutes of solar eclipse — "three and a half minutes of absolute darkness in the middle of the African bush, surrounded by a thousand strangers who felt like family"
-- Met some of the most amazing people who are still friends and part of their lives
+- 3.5 minutes of solar eclipse — "three and a half minutes of absolute darkness
+  in the middle of the African bush, surrounded by a thousand strangers who felt
+  like family"
+- Met some of the most amazing people who are still friends and part of their
+  lives
 - **This travel experience shaped Ash as a young adult**
-- "I was twenty years old, and I had no idea that those three and a half minutes would rearrange my understanding of what matters."
+- "I was twenty years old, and I had no idea that those three and a half minutes
+  would rearrange my understanding of what matters."
 - Barbara was with him — the trip sealed their unity as a couple
-- "Each border felt like passing through a portal into somewhere more real, more raw, more alive."
+- "Each border felt like passing through a portal into somewhere more real, more
+  raw, more alive."
 
 ## Thailand — First Trip (2005)
 
@@ -2350,7 +2669,8 @@ life.
 - Amazing beaches if you're willing to journey to find them
 - Coral reefs accessible by swimming — colourful fish, sea urchins, and beauty
 - Herbal steam bath at a temple for R&R, with massage onsite
-- Temple wellness: herbal steam baths and traditional massage — a go-to for rest and recovery between training sessions
+- Temple wellness: herbal steam baths and traditional massage — a go-to for rest
+  and recovery between training sessions
 - "During the week I work and train, I live my best life here"
 
 ### Current Life on Koh Phangan
@@ -2360,21 +2680,27 @@ life.
 - Remote work between training sessions
 - Training with a skilled Muay Thai trainer
 - Morning swims out to the coral reefs
-- "I cycled down the coast of Thailand from Hua Hin, arrived on this magical island"
+- "I cycled down the coast of Thailand from Hua Hin, arrived on this magical
+  island"
 
 ### Thailand Cycling Adventures
 
 - Over **7,000 km** touring on bicycle in Thailand
 - Cycled north to south and through untold adventures
-- **Bangkok to Chiang Rai:** Rode from Bangkok to Chiang Rai for a festival, spent the weekend, then rode Monday to Chiang Mai
-- **Hua Hin to Phuket:** Nearly 900 km in 6 days for friend Pierre Vocat's wedding, then 1,100 km on the return
+- **Bangkok to Chiang Rai:** Rode from Bangkok to Chiang Rai for a festival,
+  spent the weekend, then rode Monday to Chiang Mai
+- **Hua Hin to Phuket:** Nearly 900 km in 6 days for friend Pierre Vocat's
+  wedding, then 1,100 km on the return
 - **Hua Hin to Koh Phangan:** Cycled down the coast, then took a boat across
-- "People at festivals don't believe me that I'm gonna ride home. When they see me riding out of the festival on the Monday morning, they believe me then."
+- "People at festivals don't believe me that I'm gonna ride home. When they see
+  me riding out of the festival on the Monday morning, they believe me then."
 
 ## Berlin (2019 — Present)
 
-- Arrived with a one-way ticket, a bike, and exactly enough savings for two months' rent
-- Stories from other festival people drew him to Berlin — not brochures, not travel blogs
+- Arrived with a one-way ticket, a bike, and exactly enough savings for two
+  months' rent
+- Stories from other festival people drew him to Berlin — not brochures, not
+  travel blogs
 - Berlin demanded difference, not just tolerated it
 - Kreuzberg, Neukolln, Friedrichshain became the creative stomping grounds
 - The city became permanent home base for European operations
@@ -2384,14 +2710,21 @@ life.
 
 ### The Creative Season
 
-- Special thanks to dearest friend Vitor who graciously hosted him — "one of the most special humans I know"
-- Spoke at WordCamp Europe conference in June (thanks to Flo for hosting in Basel)
-- Did some of his most inspired work during the time in Berlin — "very proud of my creative output"
-- Practiced doing creative makeup every weekend for 2 months — "very pleased with the outcome and my improved skills"
-- Sisyphos: "my little piece of heaven while I am in Berlin" — met incredible people, saw old friends, made new memories
+- Special thanks to dearest friend Vitor who graciously hosted him — "one of the
+  most special humans I know"
+- Spoke at WordCamp Europe conference in June (thanks to Flo for hosting in
+  Basel)
+- Did some of his most inspired work during the time in Berlin — "very proud of
+  my creative output"
+- Practiced doing creative makeup every weekend for 2 months — "very pleased
+  with the outcome and my improved skills"
+- Sisyphos: "my little piece of heaven while I am in Berlin" — met incredible
+  people, saw old friends, made new memories
 - Dancing goal: dance every weekend while in Europe
-- Result: approximately **900km or 1 million steps** over 8 weeks, mostly dancing — a new personal record
-- "I am leaving Berlin with a heart filled with joy and love, thanks to those who made my time here special, peace out."
+- Result: approximately **900km or 1 million steps** over 8 weeks, mostly
+  dancing — a new personal record
+- "I am leaving Berlin with a heart filled with joy and love, thanks to those
+  who made my time here special, peace out."
 
 ## Travelling by Bicycle
 
@@ -2401,13 +2734,19 @@ he's present, clear, and creatively charged.
 
 ### Notable Routes
 
-- **Cape Town → Origin Festival (Helderstroom):** ~150km one way, through Sir Lowry's Pass, Grabouw, Elgin Valley, Houwhoek Pass. Done four times (2020, 2022, 2023, 2026)
+- **Cape Town → Origin Festival (Helderstroom):** ~150km one way, through Sir
+  Lowry's Pass, Grabouw, Elgin Valley, Houwhoek Pass. Done four times (2020,
+  2022, 2023, 2026)
 - **Cape Town → Stormsvlei:** 185km in one go to party for four days
-- **2026 birthday ride:** 300km round trip, 40kg bike pack, 3,200m climbing, top speed 75km/h
+- **2026 birthday ride:** 300km round trip, 40kg bike pack, 3,200m climbing, top
+  speed 75km/h
 - **Bangkok → Chiang Rai → Chiang Mai:** Festival weekend, then ride on
 - **Hua Hin → Phuket:** 900km in 6 days, 1,100km return
-- **European cycling:** Through Germany, Czech Republic, Austria — arriving at festival gates with panniers full of UV paint and a heart full of road-earned stories
-- **Berlin daily:** Gorlitzer Park to Tempelhof, Spree canal to Tiergarten. Ideas form with every pedal stroke.
+- **European cycling:** Through Germany, Czech Republic, Austria — arriving at
+  festival gates with panniers full of UV paint and a heart full of road-earned
+  stories
+- **Berlin daily:** Gorlitzer Park to Tempelhof, Spree canal to Tiergarten.
+  Ideas form with every pedal stroke.
 - **California (2014):** 300km San Francisco to Point Reyes and back
 - **Netherlands:** Two trips totalling nearly 800km
 - **Munich to Amsterdam:** 1,000km in 10 days
@@ -2422,7 +2761,8 @@ he's present, clear, and creatively charged.
 - Camping gear
 - Touring panniers
 - Total weight: 40kg (bike + gear)
-- "Portability isn't a limitation — it's a design constraint that forces creative efficiency."
+- "Portability isn't a limitation — it's a design constraint that forces
+  creative efficiency."
 
 ## Painting Across Cultures
 
@@ -2472,7 +2812,8 @@ The evolution was:
 
 1. **Dressing up** — Standing out on the dancefloor through outfits (1999–2019)
 
-1. **Being seen** — Becoming a recognisable figure at parties (the guy in the suit, the guy on the fairy-light bike)
+1. **Being seen** — Becoming a recognisable figure at parties (the guy in the
+   suit, the guy on the fairy-light bike)
 
 1. **Creating** — Turning OTHER people into the spectacle (July 2019 onwards)
 
@@ -2495,26 +2836,40 @@ happens when you stop trying to control it.
 
 ### The Steps
 
-1. **Read the energy** — Before touching paint, Ash reads the person. Their energy, their outfit, their vibe. The music playing. The light. Everything informs the design.
+1. **Read the energy** — Before touching paint, Ash reads the person. Their
+   energy, their outfit, their vibe. The music playing. The light. Everything
+   informs the design.
 
-1. **Choose the palette** — Based on skin tone, outfit colour, and the UV conditions of the venue, he selects 3–5 neon pigments that will create maximum impact under blacklight.
+1. **Choose the palette** — Based on skin tone, outfit colour, and the UV
+   conditions of the venue, he selects 3–5 neon pigments that will create
+   maximum impact under blacklight.
 
-1. **Base layer** — A sponge-applied gradient base, often blending two neon colours, establishes the foundation. This goes on fast while the energy is high.
+1. **Base layer** — A sponge-applied gradient base, often blending two neon
+   colours, establishes the foundation. This goes on fast while the energy is
+   high.
 
-1. **Detail work** — Fine brushes create the patterns: geometric shapes, organic flowing lines, third-eye detailing, psychedelic fractals. This is where the ADHD hyperfocus kicks in.
+1. **Detail work** — Fine brushes create the patterns: geometric shapes, organic
+   flowing lines, third-eye detailing, psychedelic fractals. This is where the
+   ADHD hyperfocus kicks in.
 
-1. **The reveal** — The moment under blacklight when the full design comes alive. Colours that seemed subtle suddenly blaze with neon intensity. This is the magic moment.
+1. **The reveal** — The moment under blacklight when the full design comes
+   alive. Colours that seemed subtle suddenly blaze with neon intensity. This is
+   the magic moment.
 
-1. **Capture & release** — A quick photo or video under UV, then back to the dancefloor. The art lives on the skin until dawn, in photos forever, and in the memory of everyone who saw it glow.
+1. **Capture & release** — A quick photo or video under UV, then back to the
+   dancefloor. The art lives on the skin until dawn, in photos forever, and in
+   the memory of everyone who saw it glow.
 
 ### The Tools
 
-- UV-reactive face paints — specifically formulated to pop under blacklight while remaining skin-safe for hours of dancing
+- UV-reactive face paints — specifically formulated to pop under blacklight
+  while remaining skin-safe for hours of dancing
 - High-pigment neon palettes
 - Fine-detail brushes
 - Sponge applicators for base gradients
 - Everything fits in a single bag that straps to the bicycle
-- Portability isn't a limitation — it's a design constraint that forces creative efficiency
+- Portability isn't a limitation — it's a design constraint that forces creative
+  efficiency
 
 ### Ambidextrous Application
 
@@ -2600,7 +2955,8 @@ that creates quite a nice effect.
 ### Thailand / Travel Kit
 
 - In Thailand, he doesn't carry his full makeup kit
-- Doesn't want to dry out his mousse — it's expensive and the last time he brought it to Thailand it dried out and he had to throw it away
+- Doesn't want to dry out his mousse — it's expensive and the last time he
+  brought it to Thailand it dried out and he had to throw it away
 - Currently going through a UV phase because of the limited kit
 - UV products are more portable and travel-friendly
 
@@ -2609,7 +2965,8 @@ that creates quite a nice effect.
 - In Berlin, he has the full makeup kit
 - Maximum products available almost always
 - Can do just about anything with the full range
-- Make-Up Studio Amsterdam mousse eyeshadows — collected nearly every colour, treated like a painter's palette
+- Make-Up Studio Amsterdam mousse eyeshadows — collected nearly every colour,
+  treated like a painter's palette
 
 ## Collaboration & Reading Faces
 
@@ -2637,9 +2994,11 @@ that creates quite a nice effect.
 
 ### Photography
 
-- At festivals or places where he can take photos, always asks if they'd mind a photo at the end
+- At festivals or places where he can take photos, always asks if they'd mind a
+  photo at the end
 - Uses his **Google Pixel phone** — takes incredible portrait photos
-- Festival photos are essential to the portfolio since Berlin club nights are camera-free
+- Festival photos are essential to the portfolio since Berlin club nights are
+  camera-free
 
 ## Pricing & Value
 
@@ -2647,21 +3006,29 @@ that creates quite a nice effect.
 
 - Doesn't charge people for makeup
 - Sometimes people offer money; sometimes he tells them they can buy him a drink
-- "For me it's the pleasure of being able to do my art on somebody and see them happy afterwards"
+- "For me it's the pleasure of being able to do my art on somebody and see them
+  happy afterwards"
 - This is a personal art project, not a professional pursuit
-- "I'm creating a makeup portfolio website primarily so that I can showcase the cool stuff that I've done, but I'm not going to pursue it as a professional career. It is part of my party experience. I love doing it at festivals and making other people happy, as well as doing my own makeup and getting creative."
+- "I'm creating a makeup portfolio website primarily so that I can showcase the
+  cool stuff that I've done, but I'm not going to pursue it as a professional
+  career. It is part of my party experience. I love doing it at festivals and
+  making other people happy, as well as doing my own makeup and getting
+  creative."
 
 ### The Joy of Making People Shine
 
-- An experience recently: saw someone after not seeing them for two years, had done their makeup two years ago
-- That day, they felt extremely special — everyone kept complimenting them and it made their day
+- An experience recently: saw someone after not seeing them for two years, had
+  done their makeup two years ago
+- That day, they felt extremely special — everyone kept complimenting them and
+  it made their day
 - This is the lasting impact: the memory of feeling radiant stays with people
 
 ## Fusion Nails
 
 ### The Concept
 
-- Layered, colourful nail art designs combining nail varnish, stickers, and topcoats for a unique finish
+- Layered, colourful nail art designs combining nail varnish, stickers, and
+  topcoats for a unique finish
 - Named "Fusion Nails" by Ash for the layered technique
 
 ### The Process (1)
@@ -2669,16 +3036,19 @@ that creates quite a nice effect.
 - Sources most stickers from DM in Germany
 - Layers stickers over colour blends
 - Seals with a glossy topcoat
-- Sometimes subtle, sometimes bold — when they come together, the results can be stunning
+- Sometimes subtle, sometimes bold — when they come together, the results can be
+  stunning
 
 ### The Challenge
 
-- Still working on nail art technique — "I'm not the best at doing nail varnish, I'm quite messy but when I get it right, it looks beautiful"
+- Still working on nail art technique — "I'm not the best at doing nail varnish,
+  I'm quite messy but when I get it right, it looks beautiful"
 - Still figuring out how to prevent chipping
 
 ### Re-creating Portfolio Pieces
 
-- While going through images for the portfolio website, plans to pick some of the best ones to re-create with improved skills
+- While going through images for the portfolio website, plans to pick some of
+  the best ones to re-create with improved skills
 
 -----------------------------------------------------------------------------------
 
@@ -2687,7 +3057,9 @@ that creates quite a nice effect.
 ## Consistency (1)
 
 - Ensure handle, profile images, and cover art are consistent across platforms.
-- New tagline ("From discovery to launch, we guide you through every step of your WordPress website journey") should appear in each bio where space permits.
+- New tagline ("From discovery to launch, we guide you through every step of
+  your WordPress website journey") should appear in each bio where space
+  permits.
 - Company website: https://lightspeedwp.agency/ (NOT lsdev.biz — migrated)
 
 ## Visual Identity
@@ -2696,11 +3068,13 @@ that creates quite a nice effect.
 
 ## Calls to Action
 
-- On all platforms, include a link to latest blog post, webinar sign-up, or demo site.
+- On all platforms, include a link to latest blog post, webinar sign-up, or demo
+  site.
 
 ## Open-Source & Community
 
-- Highlight open-source contributions (LSX Design System, Tour Operator plugin, Wetu Importer).
+- Highlight open-source contributions (LSX Design System, Tour Operator plugin,
+  Wetu Importer).
 - Invite followers to contribute or test them.
 
 ## Posting Rhythm
@@ -2795,17 +3169,23 @@ editorial workflows.
 
 ### What I Do
 
-- Build fast, robust WordPress websites using custom block themes and native editor workflows
-- Support business growth through WooCommerce, plugin strategy, and editorial automation
-- Create design systems to bridge design and development using Figma and WordPress
-- Active contributor to WordPress since 2007; WordCamp organiser & speaker since 2010
+- Build fast, robust WordPress websites using custom block themes and native
+  editor workflows
+- Support business growth through WooCommerce, plugin strategy, and editorial
+  automation
+- Create design systems to bridge design and development using Figma and
+  WordPress
+- Active contributor to WordPress since 2007; WordCamp organiser & speaker since
+  2010
 
 ### Currently working on
 
-- LSX Design: a modular block-theme framework engineered to replace page builders
+- LSX Design: a modular block-theme framework engineered to replace page
+  builders
 - TourOperator.Solutions: a toolkit and plugin suite tailored to travel brands
 - Figma -> WordPress theme.json workflows and component-driven handoffs
-- Experimenting with GitHub Copilot Agent Mode and custom instructions for developer workflows
+- Experimenting with GitHub Copilot Agent Mode and custom instructions for
+  developer workflows
 
 ### Currently learning
 
@@ -2826,12 +3206,15 @@ editorial workflows.
 - WordPress architecture and scaling editorial workflows
 - Designing Figma systems underpinned by block themes and theme.json
 - Integrating Copilot workflows into real-world agency teams
-- Prototype -> staging -> live review cycles (Figma -> BugHerd -> client sign-off)
+- Prototype -> staging -> live review cycles (Figma -> BugHerd -> client
+  sign-off)
 
 ### Blog, speaking & podcast highlights
 
-- My WordCamp Europe 2025 session: **"Bridging Design and Development: Figma Design Systems for WordPress Success"**
-- Guest profile & latest blog posts: [LightSpeed Author – Ash Shaw](https://lightspeedwp.agency/author/ashley/)
+- My WordCamp Europe 2025 session: **"Bridging Design and Development: Figma
+  Design Systems for WordPress Success"**
+- Guest profile & latest blog posts: [LightSpeed Author – Ash
+  Shaw](https://lightspeedwp.agency/author/ashley/)
 - Featured guest on **OpenChannels.FM** (Publishing Flow series)
 - [OpenChannels.FM Guest Profile](https://openchannels.fm/guest/ash-shaw/)
 
@@ -2880,40 +3263,59 @@ scale your business.
 
 ## B. Services
 
-- **WordPress & WooCommerce Development** - Custom sites and online stores with full-site editing.
-- **Figma Design Systems & Prototyping** - Creating design tokens and interactive prototypes that map directly to WordPress themes.
-- **Block Theme & Plugin Development** - Converting classic sites/plugins to block-based solutions (e.g. Tour Operator 2.0).
-- **Website Maintenance & Hosting** - Performance tuning, security and ongoing support.
-- **SEO & Content Strategy** - Content planning, SEO audits and copywriting to boost visibility.
-- **Travel & Tourism Digital Strategy** - Creating booking engines, integrations (e.g. Wetu) and custom tools for tour operators.
+- **WordPress & WooCommerce Development** - Custom sites and online stores with
+  full-site editing.
+- **Figma Design Systems & Prototyping** - Creating design tokens and
+  interactive prototypes that map directly to WordPress themes.
+- **Block Theme & Plugin Development** - Converting classic sites/plugins to
+  block-based solutions (e.g. Tour Operator 2.0).
+- **Website Maintenance & Hosting** - Performance tuning, security and ongoing
+  support.
+- **SEO & Content Strategy** - Content planning, SEO audits and copywriting to
+  boost visibility.
+- **Travel & Tourism Digital Strategy** - Creating booking engines, integrations
+  (e.g. Wetu) and custom tools for tour operators.
 
 ## C. Products
 
-- **Tour Operator Plugin** - Block-based WordPress plugin with custom post types, dynamic templates and Wetu integration.
-- **LSX Design Block Theme** - Free, open-source WordPress theme optimised for WooCommerce with full-site editing support.
-- **LSX Design System (Figma)** - Open-source design system mapping Figma variables to WordPress theme.json.
-- **Wetu Content Importer** - Integrates Wetu itinerary data directly into WordPress.
+- **Tour Operator Plugin** - Block-based WordPress plugin with custom post
+  types, dynamic templates and Wetu integration.
+- **LSX Design Block Theme** - Free, open-source WordPress theme optimised for
+  WooCommerce with full-site editing support.
+- **LSX Design System (Figma)** - Open-source design system mapping Figma
+  variables to WordPress theme.json.
+- **Wetu Content Importer** - Integrates Wetu itinerary data directly into
+  WordPress.
 
 ## D. Other Fields
 
-- **Mission:** "Develop excellent WordPress websites that generate traffic and sales while empowering clients to manage their own content."
+- **Mission:** "Develop excellent WordPress websites that generate traffic and
+  sales while empowering clients to manage their own content."
 - **Founded:** 2003
-- **Categories:** "Software Company," "Tourism & Travel," or "Web Design Agency."
-- **Call-to-Action Button:** "Contact Us" or "Book Now" pointing to consultation booking page.
+- **Categories:** "Software Company," "Tourism & Travel," or "Web Design
+  Agency."
+- **Call-to-Action Button:** "Contact Us" or "Book Now" pointing to consultation
+  booking page.
 
 ## E. Content Plan (2-3 weeks of posts)
 
-1. **Behind the Scenes** - Photo of remote team collaborating via Figma/BugHerd, captioned with a quick tip on structured feedback.
+1. **Behind the Scenes** - Photo of remote team collaborating via Figma/BugHerd,
+   captioned with a quick tip on structured feedback.
 
-1. **Project Workflow Series** - Carousel summarising discovery, content collection, prototyping, staging and launch processes.
+1. **Project Workflow Series** - Carousel summarising discovery, content
+   collection, prototyping, staging and launch processes.
 
-1. **Open-Source Spotlight** - Graphics and descriptions of LSX Design System and Tour Operator 2.0 plugin.
+1. **Open-Source Spotlight** - Graphics and descriptions of LSX Design System
+   and Tour Operator 2.0 plugin.
 
-1. **Case Study Snapshot** - Highlight results from African Safari Consultants or Xneelo projects.
+1. **Case Study Snapshot** - Highlight results from African Safari Consultants
+   or Xneelo projects.
 
-1. **WordCamp Recap** - Clip or quote from the talk on bridging design and development.
+1. **WordCamp Recap** - Clip or quote from the talk on bridging design and
+   development.
 
-1. **Wetu Sponsorship Announcement** - Partnership details with link to blog post.
+1. **Wetu Sponsorship Announcement** - Partnership details with link to blog
+   post.
 
 ---
 
@@ -3019,7 +3421,8 @@ Here's how it works in practice:
 - Prototyping — Interactive design walkthroughs that align stakeholders.
 - Staging Feedback — Structured reviews of the working site before launch.
 - Launch — A controlled go-live with checks, balances, and no surprises.
-- Client Handover — Equipping teams with knowledge, training, and ongoing support.
+- Client Handover — Equipping teams with knowledge, training, and ongoing
+  support.
 
 Read the first article: https://lightspeedwp.agency/website-design-process/
 
@@ -3036,22 +3439,30 @@ the LSX Design System & Tour Operator plugin. Cape Town > Global. #WordPress
 
 #WooCommerce #OpenSource
 
-- **Add Link:** Use Linktree or single link to latest blog posts, GitHub repos and sign-up pages.
-- **Add Highlights:** Create Stories Highlights: "Design System," "Tour Operator," "Workflows," "Case Studies," "Events"
+- **Add Link:** Use Linktree or single link to latest blog posts, GitHub repos
+  and sign-up pages.
+- **Add Highlights:** Create Stories Highlights: "Design System," "Tour
+  Operator," "Workflows," "Case Studies," "Events"
 
 ## B. Content Ideas
 
-1. **Design System Teaser** - Short reel showcasing Figma design system and how variables map to WordPress theme.json.
+1. **Design System Teaser** - Short reel showcasing Figma design system and how
+   variables map to WordPress theme.json.
 
-1. **Before/After Carousel** - Compare classic travel website with modern block-based version using Tour Operator plugin.
+1. **Before/After Carousel** - Compare classic travel website with modern
+   block-based version using Tour Operator plugin.
 
-1. **Remote Culture Spotlight** - Photos of team members working remotely, emphasising flexibility and collaboration.
+1. **Remote Culture Spotlight** - Photos of team members working remotely,
+   emphasising flexibility and collaboration.
 
-1. **Open-Source Celebration** - Visual announcement of Tour Operator 2.0 launch highlighting features.
+1. **Open-Source Celebration** - Visual announcement of Tour Operator 2.0 launch
+   highlighting features.
 
-1. **WordCamp Flashback** - Snippet from WordCamp Europe talk about bridging design and development.
+1. **WordCamp Flashback** - Snippet from WordCamp Europe talk about bridging
+   design and development.
 
-1. **Client Testimonial** - Quote and photo from a satisfied travel brand or case study.
+1. **Client Testimonial** - Quote and photo from a satisfied travel brand or
+   case study.
 
 1. **Wetu Partnership Announcement** - Image of team at Indaba 2025.
 
@@ -3152,32 +3563,54 @@ community and contributing to a more accessible, inclusive web.
 
 ### D. Services to Showcase
 
-- **Custom WordPress & WooCommerce Development** - bespoke websites and online stores with full-site editing support.
-- **Design System Consulting** - building Figma design systems tied to WordPress theme.json for efficiency and consistency.
-- **Block Development & FSE Conversion** - converting classic themes/plugins to block-based solutions (e.g., Tour Operator plugin 2.0).
-- **Website Audits & Performance Optimisation** - audits, speed improvements, and SEO best practices.
-- **E-commerce Strategy & Conversion Optimisation** - designing checkout flows, subscriptions and digital products.
-- **Remote Workflow Consulting** - helping agencies adopt remote-first, content-first workflows with tools like Figma, BugHerd, Asana, Slack.
+- **Custom WordPress & WooCommerce Development** - bespoke websites and online
+  stores with full-site editing support.
+- **Design System Consulting** - building Figma design systems tied to WordPress
+  theme.json for efficiency and consistency.
+- **Block Development & FSE Conversion** - converting classic themes/plugins to
+  block-based solutions (e.g., Tour Operator plugin 2.0).
+- **Website Audits & Performance Optimisation** - audits, speed improvements,
+  and SEO best practices.
+- **E-commerce Strategy & Conversion Optimisation** - designing checkout flows,
+  subscriptions and digital products.
+- **Remote Workflow Consulting** - helping agencies adopt remote-first,
+  content-first workflows with tools like Figma, BugHerd, Asana, Slack.
 
 ### E. Featured Items & Projects
 
 - **WordCamp Europe Talk** - link to presentation recap on LightSpeed's blog.
-- **Why We're Building an Open-Source Design System** - article explaining the LSX Design System.
-- **Tour Operator 2.0: A New Standard for Travel Websites** - article detailing new plugin features.
-- **Case Study: African Safari Consultants** - summarising how a custom booking system boosted conversions.
-- **Podcast Appearance on OpenChannels.fm** - episode discussing block development and remote agency life.
+- **Why We're Building an Open-Source Design System** - article explaining the
+  LSX Design System.
+- **Tour Operator 2.0: A New Standard for Travel Websites** - article detailing
+  new plugin features.
+- **Case Study: African Safari Consultants** - summarising how a custom booking
+  system boosted conversions.
+- **Podcast Appearance on OpenChannels.fm** - episode discussing block
+  development and remote agency life.
 
 ### F. New LinkedIn Stories (Article Ideas)
 
-1. **Project Workflows** - Introduce the "Project Workflows" category, summarising six posts covering discovery, content collection, prototyping, staging feedback, launch, and client handover. Link: https://lightspeedwp.agency/website-design-process/
+1. **Project Workflows** - Introduce the "Project Workflows" category,
+   summarising six posts covering discovery, content collection, prototyping,
+   staging feedback, launch, and client handover. Link:
+   https://lightspeedwp.agency/website-design-process/
 
-1. **Open-Source Design Systems** - Describe how the LSX Design System bridges design and development by mapping Figma variables to WordPress theme.json. Links: https://lsx.rocks/design-system, https://lsx.rocks/tour-operator-design-system
+1. **Open-Source Design Systems** - Describe how the LSX Design System bridges
+   design and development by mapping Figma variables to WordPress theme.json.
+   Links: https://lsx.rocks/design-system,
+   https://lsx.rocks/tour-operator-design-system
 
-1. **Tour Operator 2.0 Release** - Announce the block-based Tour Operator plugin. Link: https://lightspeedwp.agency/tour-operator-2-0-a-new-standard-for-travel-websites/
+1. **Tour Operator 2.0 Release** - Announce the block-based Tour Operator
+   plugin. Link:
+   https://lightspeedwp.agency/tour-operator-2-0-a-new-standard-for-travel-websites/
 
-1. **LSX Design Block Theme** - Share how it empowers store owners with full-site editing and WooCommerce integrations. Featured in WooCommerce Developer newsletter.
+1. **LSX Design Block Theme** - Share how it empowers store owners with
+   full-site editing and WooCommerce integrations. Featured in WooCommerce
+   Developer newsletter.
 
-1. **Wetu Sponsorship & Indaba 2025** - Reflect on LightSpeed's first sponsored open-source project. Link: https://lightspeedwp.agency/lightspeed-secures-wetu-sponsorship/
+1. **Wetu Sponsorship & Indaba 2025** - Reflect on LightSpeed's first sponsored
+   open-source project. Link:
+   https://lightspeedwp.agency/lightspeed-secures-wetu-sponsorship/
 
 ---
 
@@ -3235,13 +3668,20 @@ are clear, collaborative, and built to grow.
 - **Company Size**: 11-50 employees
 - **Company Type**: Privately held
 - **Year Founded**: 2003
-- **Specialities**: WordPress Development, WooCommerce, Block Theme Design, Figma Design Systems, Travel & Tourism Websites, Wetu Integration, Online Booking, Web Hosting & Maintenance, E-commerce Strategy, SEO & Content Strategy, Remote Project Management, Accessibility, GitHub Copilot, AI Workflow, Block Plugin Development, Open-Source Development
+- **Specialities**: WordPress Development, WooCommerce, Block Theme Design,
+  Figma Design Systems, Travel & Tourism Websites, Wetu Integration, Online
+  Booking, Web Hosting & Maintenance, E-commerce Strategy, SEO & Content
+  Strategy, Remote Project Management, Accessibility, GitHub Copilot, AI
+  Workflow, Block Plugin Development, Open-Source Development
 - **Website**: https://lightspeedwp.agency/
 
 ### D. Workplace Policy & Benefits
 
 - **Primary Workplace Policy**: Remote
-- **Description** (300-character limit): *Our remote team has been building websites together for nearly a decade. We rely on cloud-based tools for collaboration and adopt an agile, results-focused approach to software development that adapts to our rapidly changing world.*
+- **Description** (300-character limit): *Our remote team has been building
+  websites together for nearly a decade. We rely on cloud-based tools for
+  collaboration and adopt an agile, results-focused approach to software
+  development that adapts to our rapidly changing world.*
 - **Remote Workplace Benefits**:
   1. Collaborative Working Space
   2. Flexible Working Hours
@@ -3256,7 +3696,8 @@ Select: Career Growth & Learning, Diversity Equity & Inclusion, Environmental
 Sustainability, Social Impact, Work-Life Balance
 
 - Publishing Principles & Policies: https://lightspeedwp.agency/policies/
-- Publishing Principles: https://lightspeedwp.agency/policies/publishing-principles/
+- Publishing Principles:
+  https://lightspeedwp.agency/policies/publishing-principles/
 - Ownership & Funding: https://lightspeedwp.agency/policies/ownership-funding/
 - Feedback: https://lightspeedwp.agency/policies/feedback/
 - Corrections: https://lightspeedwp.agency/policies/corrections/
@@ -3312,7 +3753,8 @@ Here's how it works in practice:
 - Prototyping — Interactive design walkthroughs that align stakeholders.
 - Staging Feedback — Structured reviews of the working site before launch.
 - Launch — A controlled go-live with checks, balances, and no surprises.
-- Client Handover — Equipping teams with knowledge, training, and ongoing support.
+- Client Handover — Equipping teams with knowledge, training, and ongoing
+  support.
 
 Read the first article: https://lightspeedwp.agency/website-design-process/
 
@@ -3349,27 +3791,36 @@ Tour Operator plugin & LSX block theme. Open-source advocates. #WordPress
 
 # WooCommerce #OpenSource (1)
 
-- Keep the banner clean - update to feature new tagline or show a collage of products.
+- Keep the banner clean - update to feature new tagline or show a collage of
+  products.
 - Profile link should direct to lightspeedwp.agency or a Linktree.
-- Use a pinned post to highlight the latest major update (e.g., Tour Operator 2.0 release or Wetu partnership).
+- Use a pinned post to highlight the latest major update (e.g., Tour Operator
+  2.0 release or Wetu partnership).
 
 ## B. Post Ideas (Short, frequent updates - 2-3 tweets per week)
 
-1. **Announcement Thread** - Benefits of Tour Operator 2.0 (custom post types, dynamic templates, Wetu integration, advanced filtering). Link to blog post.
+1. **Announcement Thread** - Benefits of Tour Operator 2.0 (custom post types,
+   dynamic templates, Wetu integration, advanced filtering). Link to blog post.
 
-1. **Design System Tip** - Quick thread on how Figma modes make it easy to re-theme brands in minutes.
+1. **Design System Tip** - Quick thread on how Figma modes make it easy to
+   re-theme brands in minutes.
 
 1. **Remote Workflow Tip** - Tip about feedback process using Figma and BugHerd.
 
-1. **Case Study Highlight** - Tweet a stat or client quote with link to full case study.
+1. **Case Study Highlight** - Tweet a stat or client quote with link to full
+   case study.
 
-1. **Community Engagement** - Thank WordCamp attendees and invite contributions to LSX Design System.
+1. **Community Engagement** - Thank WordCamp attendees and invite contributions
+   to LSX Design System.
 
-1. **Podcast/Interview Promo** - Announce podcast appearance on OpenChannels.fm or upcoming webinar.
+1. **Podcast/Interview Promo** - Announce podcast appearance on OpenChannels.fm
+   or upcoming webinar.
 
-1. **Wetu Sponsorship Tweet** - Why this partnership matters for the travel industry.
+1. **Wetu Sponsorship Tweet** - Why this partnership matters for the travel
+   industry.
 
-1. **Questions/Polls** - Engage followers with a poll about biggest website challenges.
+1. **Questions/Polls** - Engage followers with a poll about biggest website
+   challenges.
 
 -----------------------------------------------------------------------------------
 

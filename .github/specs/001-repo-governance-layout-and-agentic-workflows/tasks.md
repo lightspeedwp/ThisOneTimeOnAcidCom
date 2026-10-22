@@ -11,7 +11,8 @@ implementation plan
 
 - ✅ Specification complete (spec.md)
 - ✅ Planning phase complete (plan.md, research.md)
-- ✅ All 9 decisions approved (SPEC-001, TEST-001, TEST-002, GH-001, GH-002, GH-003, PKG-001, NODE-001, STYLE-001)
+- ✅ All 9 decisions approved (SPEC-001, TEST-001, TEST-002, GH-001, GH-002,
+  GH-003, PKG-001, NODE-001, STYLE-001)
 - ✅ 20 child issues mapped to 5 parallel workstreams
 - ✅ No blockers identified; ready for implementation
 
@@ -30,7 +31,8 @@ implementation plan
 
 - ✅ `- [ ] T001 Create governance artefacts directory structure`
 - ✅ `- [ ] T005 [P] [WS-260] Configure Jest ESM in jest.config.js`
-- ✅ `- [ ] T010 [WS-254] Create Spec Kit regression test in tests/speckit.test.mjs`
+- ✅ `- [ ] T010 [WS-254] Create Spec Kit regression test in
+  tests/speckit.test.mjs`
 
 ---
 
@@ -41,13 +43,19 @@ on
 
 **⚠️ CRITICAL**: Phase 1 must complete before any workstream work begins
 
-- [x] T001 Create `.github/specs/` directory structure and verify numbering in `.specify/init-options.json`
-- [x] T002 Document current path inventory in research notes: all directories, consumers, generated outputs
-- [x] T003 [P] Verify `.specify/` and `.gemini/` integrations remain functional post-migration
+- [x] T001 Create `.github/specs/` directory structure and verify numbering in
+  `.specify/init-options.json`
+- [x] T002 Document current path inventory in research notes: all directories,
+  consumers, generated outputs
+- [x] T003 [P] Verify `.specify/` and `.gemini/` integrations remain functional
+  post-migration
 - [x] T004 Create top-level documentation index linking all governance artefacts
-- [x] T005 Update AGENTS.md with approved decisions ratification status and test baseline (103/104)
-- [x] T006 [P] Update CONTRIBUTING.md to reflect branch naming validation and PR template routing
-- [x] T007 Review and validate all protected files: CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, Supabase utils, Figma assets
+- [x] T005 Update AGENTS.md with approved decisions ratification status and test
+  baseline (103/104)
+- [x] T006 [P] Update CONTRIBUTING.md to reflect branch naming validation and PR
+  template routing
+- [x] T007 Review and validate all protected files: CHANGELOG.md,
+  ATTRIBUTIONS.md, guidelines/, Supabase utils, Figma assets
 
 **Checkpoint**: Governance artefacts initialized; all workstreams can begin in
 parallel
@@ -60,12 +68,15 @@ parallel
 
 **⚠️ CRITICAL**: Phase 2 must complete before workstream work can begin
 
-- [x] T008 [P] [TEST-001] Configure Jest ESM support with @swc/core in jest.config.js
+- [x] T008 [P] [TEST-001] Configure Jest ESM support with @swc/core in
+  jest.config.js
 - Install `@swc/core` as dev dependency
 - Enable ESM module transformation in Jest config
-- Verify `npm run test:unit` discovers and runs existing tests without modification
+- Verify `npm run test:unit` discovers and runs existing tests without
+  modification
 - Ensure compatibility with existing test syntax
-- [x] T009 [P] [TEST-001] Create Vitest fallback configuration in vitest.config.ts (if Jest proves unstable)
+- [x] T009 [P] [TEST-001] Create Vitest fallback configuration in
+  vitest.config.ts (if Jest proves unstable)
 - Install `vitest` as dev dependency
 - Mirror Jest test discovery and configuration
 - Document failover trigger conditions
@@ -77,15 +88,19 @@ parallel
 - Delete `pnpm-workspace.yaml` (unused file)
 - Remove `pnpm.overrides` block from `package.json` (all pnpm-specific config)
 - Remove `command = "pnpm run build"` from `src/app/netlify.toml`
-- Update root `README.md` to document npm-only (section: "Getting Started" or "Installation")
+- Update root `README.md` to document npm-only (section: "Getting Started" or
+  "Installation")
 - [x] T012 [NODE-001] Pin Node.js version
 - Create `.nvmrc` file with content: `24` (exactly Node.js 24 LTS)
 - Add `engines` field to `package.json`: `{ "node": ">=24" }`
 - Run `npm ci` to validate all dependencies resolve correctly under Node 24
-- Update root `README.md` to document Node 24 requirement (e.g., "Requires Node.js 24 LTS or later")
-- Verify Netlify site settings pin Node 24 (via Netlify dashboard UI, not `.toml`)
+- Update root `README.md` to document Node 24 requirement (e.g., "Requires
+  Node.js 24 LTS or later")
+- Verify Netlify site settings pin Node 24 (via Netlify dashboard UI, not
+  `.toml`)
 - [x] T013 [P] [STYLE-001] Audit components for Tailwind utility patterns
-- Scan `src/app/components/` for Tailwind class names (e.g., `mt-4`, `p-8`, `flex`, `grid`)
+- Scan `src/app/components/` for Tailwind class names (e.g., `mt-4`, `p-8`,
+  `flex`, `grid`)
 - List all files containing utility-like patterns (if any)
 - Document findings for T014 migration
 - [x] T014 [STYLE-001] Remove Tailwind dependencies from repository
@@ -94,16 +109,20 @@ parallel
 - Remove `@tailwindcss/vite` plugin from `vite.config.ts`
 - Delete or empty `tailwind.config.js` (if present at repository root)
 - Verify `npm run build` succeeds after Tailwind removal
-- [x] T015 [STYLE-001] Migrate components to BEM (if any Tailwind utilities found in T013)
-- Update affected components (from T013 findings) to use BEM CSS instead of Tailwind utilities
+- [x] T015 [STYLE-001] Migrate components to BEM (if any Tailwind utilities
+  found in T013)
+- Update affected components (from T013 findings) to use BEM CSS instead of
+  Tailwind utilities
 - Reference `guidelines/css-architecture.md` for BEM patterns
 - Verify component styling remains visually correct post-migration
-- Update `guidelines/css-architecture.md` to lock BEM as canonical (no dual support)
+- Update `guidelines/css-architecture.md` to lock BEM as canonical (no dual
+  support)
 - [x] T016 [P] [WS-260] Set up test discovery scripts and validation
 - Verify `npm run test:unit` runs Jest with ESM support (after T008)
 - Verify `npm run test:build` runs Bats build verification (confirm existing)
 - Verify `npm run test:e2e` discovers Playwright tests (confirm existing)
-- Verify `node --test tests/speckit.test.mjs` reports 103/104 baseline (after T010)
+- Verify `node --test tests/speckit.test.mjs` reports 103/104 baseline (after
+  T010)
 - Document test command output in AGENTS.md commands table
 - [x] T017 [P] Run full validation suite post-setup
 - `npm run validate:branch-name -- --branch epic/repo-governance-toa-241`
@@ -111,19 +130,32 @@ parallel
 - `npm ls --depth=0` (dependency validation)
 - Document results in research notes (all should pass)
 - [x] T017a [WS-271] Create agent inventory document (R7.1)
-- Create `.claude/agents/INVENTORY.md` with table: name | purpose | inputs | outputs | tools | permissions | workflow relationships | budget constraint
-- Audit current `.claude/agents/` directory and populate inventory for ~18 agents
-- Add note: "Budget enforcement (hard limits) specified in TOA-271 (separate epic); this inventory documents requirements only"
+- Create `.claude/agents/INVENTORY.md` with table: name | purpose | inputs |
+  outputs | tools | permissions | workflow relationships | budget constraint
+- Audit current `.claude/agents/` directory and populate inventory for ~18
+  agents
+- Add note: "Budget enforcement (hard limits) specified in TOA-271 (separate
+  epic); this inventory documents requirements only"
 - [x] T017b [WS-271] Document Anthropic platform applicability assessment (R7.2)
-- Create `docs/AnthropicPlatforms.md` evaluating seven Anthropic references from spec.md Source Register
-- For each agent: note which platforms used (MCP servers, tool use, streaming, model selection, etc.)
-- Decision log: which agents use which capabilities; justify "not applicable" cases
-- [x] T017c [WS-261] Implement protected-files-guard.yml (Phase 2 prerequisite per Constitution II)
+- Create `docs/AnthropicPlatforms.md` evaluating seven Anthropic references from
+  spec.md Source Register
+- For each agent: note which platforms used (MCP servers, tool use, streaming,
+  model selection, etc.)
+- Decision log: which agents use which capabilities; justify "not applicable"
+  cases
+- [x] T017c [WS-261] Implement protected-files-guard.yml (Phase 2 prerequisite
+  per Constitution II)
 - Create `.github/workflows/protected-files-guard.yml` (if not present)
-- Create `.github/PROTECTED_FILES.txt` canonical list: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`, `src/app/utils/supabase/`, `src/app/components/figma/ImageWithFallback.tsx`
-- Configure workflow to detect modifications to protected files; add error check: `git diff --name-only origin/develop... | grep -E "^(\.github|scripts|AGENTS|CHANGELOG|guidelines|src/app/utils/supabase|src/app/components/figma/ImageWithFallback)" && exit 1 || exit 0`
+- Create `.github/PROTECTED_FILES.txt` canonical list: `.github/`, `scripts/`,
+  `AGENTS.md`, `CHANGELOG.md`, `guidelines/`, `src/app/utils/supabase/`,
+  `src/app/components/figma/ImageWithFallback.tsx`
+- Configure workflow to detect modifications to protected files; add error
+  check: `git diff --name-only origin/develop... | grep -E
+  "^(\.github|scripts|AGENTS|CHANGELOG|guidelines|src/app/utils/supabase|src/app/components/figma/ImageWithFallback)"
+  && exit 1 || exit 0`
 - Verify workflow runs on PR push and blocks merge if protected files modified
-- Document when it runs: on every PR push (implementation workflow, not evaluation)
+- Document when it runs: on every PR push (implementation workflow, not
+  evaluation)
 
 **Checkpoint**: Protected file enforcement active. Agent inventory and Anthropic
 assessment documented. All testing infrastructure, package management, runtime
@@ -144,12 +176,16 @@ routing, and validate regression test pipeline
 
 ### Implementation for WS-254
 
-- [x] T018 [WS-254] Verify Spec Kit feature directory routing (.github/specs/ canonical)
-- Confirm `.specify/init-options.json` sets `specifyFeatureDirectory: ".github/specs/"`
-- Run Spec Kit setup to create a numbered feature directory (e.g., 002-test-feature)
+- [x] T018 [WS-254] Verify Spec Kit feature directory routing (.github/specs/
+  canonical)
+- Confirm `.specify/init-options.json` sets `specifyFeatureDirectory:
+  ".github/specs/"`
+- Run Spec Kit setup to create a numbered feature directory (e.g.,
+  002-test-feature)
 - Verify sequential numbering works correctly (001 exists, next is 002)
 - Document path resolution in `.specify/memory/spec-kit-routing.md`
-- [x] T019 [WS-254] Create Spec Kit regression test suite in tests/speckit.test.mjs
+- [x] T019 [WS-254] Create Spec Kit regression test suite in
+  tests/speckit.test.mjs
 - Document expected baseline: 103 pass, 1 fail (template resolution edge case)
 - Create test harness that runs create → plan → tasks pipeline
 - Verify no new test failures introduced by infrastructure changes
@@ -157,21 +193,27 @@ routing, and validate regression test pipeline
 - Run `node --test tests/speckit.test.mjs` and confirm results match baseline
 - [x] T020 [WS-254] Document Spec Kit path resolution for contributors
 - Update `CONTRIBUTING.md` with "Using Spec Kit" section
-- Document the three phases: `/speckit-specify` → `/speckit-clarify` → `/speckit-plan` → `/speckit-tasks`
+- Document the three phases: `/speckit-specify` → `/speckit-clarify` →
+  `/speckit-plan` → `/speckit-tasks`
 - Link to `.github/specs/` as canonical location
 - Include example: "Create spec → Plan → Decompose tasks → Implement"
 - Link to `.specify/` configuration details
-- [x] T021 [P] [WS-254] [TOA-255] Organize planning documents in `.github/specs/001-repo-governance-layout-and-agentic-workflows/`
-- Confirm structure: spec.md, plan.md, research.md, tasks.md (this file), checklists/, contracts/, data-model.md, quickstart.md
+- [x] T021 [P] [WS-254] [TOA-255] Organize planning documents in
+  `.github/specs/001-repo-governance-layout-and-agentic-workflows/`
+- Confirm structure: spec.md, plan.md, research.md, tasks.md (this file),
+  checklists/, contracts/, data-model.md, quickstart.md
 - Ensure all Phase 0–1 outputs are in correct location
 - Create `CATALOG.md` indexing all specifications with status and links
 - Link CATALOG.md from `.github/README.md`
 - [x] T022 [P] [WS-254] [TOA-256] Organize reports in `.github/reports/`
-- Create directory structure: `.github/reports/{category}/` (e.g., `audit/`, `validation/`, `metrics/`)
+- Create directory structure: `.github/reports/{category}/` (e.g., `audit/`,
+  `validation/`, `metrics/`)
 - Move any existing reports into appropriate categories
 - Create `.github/reports/README.md` indexing all reports
-- Document report naming convention: `{date}-{topic}.md` (e.g., `2026-10-17-path-inventory.md`)
-- [x] T023 [P] [WS-254] [TOA-257] Segregate portable vs. repository-specific prompts
+- Document report naming convention: `{date}-{topic}.md` (e.g.,
+  `2026-10-17-path-inventory.md`)
+- [x] T023 [P] [WS-254] [TOA-257] Segregate portable vs. repository-specific
+  prompts
 - Audit `prompts/` directory for repository-specific prompts
 - Document which prompts are reusable (portable) vs. TOA-241-specific
 - Move TOA-241-specific prompts to `.github/prompts/` (if needed)
@@ -199,7 +241,8 @@ verify tests execute without errors (or expected browser setup messages for e2e)
 
 ### Implementation for WS-260
 
-- [x] T025 [P] [WS-260] [TOA-260] Jest ESM Configuration (completed in Phase 2 T008, verify here)
+- [x] T025 [P] [WS-260] [TOA-260] Jest ESM Configuration (completed in Phase 2
+  T008, verify here)
 - ✅ jest.config.js has ESM support via @swc/core enabled
 - ✅ `npm run test:unit` passes: 11 test suites, 588 tests, 100% pass rate
 - ✅ All `.test.js` and `.test.ts` files discovered and run (no breaking changes)
@@ -207,11 +250,13 @@ verify tests execute without errors (or expected browser setup messages for e2e)
 - [x] T026 [P] [WS-260] [TOA-260] Bats build verification integration
 - ✅ `tests/build.bats` exists and validates Vite build integrity
 - ✅ `npm run test:build` passes: 12/12 Bats tests pass
-- ✅ Tests verify: build directory creation, _redirects file, SPA routing, CSS/JS output
+- ✅ Tests verify: build directory creation, _redirects file, SPA routing, CSS/JS
+  output
 - ✅ Build documentation linked in testing guide
 - [x] T027 [P] [WS-260] [TOA-260] Playwright e2e test integration
 - ✅ Playwright (@playwright/test@^1.48.1) installed and configured
-- ✅ Package scripts configured: `npm run test:e2e`, `test:e2e:debug`, `test:e2e:ui`
+- ✅ Package scripts configured: `npm run test:e2e`, `test:e2e:debug`,
+  `test:e2e:ui`
 - ✅ `tests/e2e/` directory ready for e2e tests (no tests yet; placeholder)
 - ✅ Browser installation documented (via Playwright installation)
 - [x] T028 [WS-260] [TOA-260] Create comprehensive testing guide
@@ -220,10 +265,13 @@ verify tests execute without errors (or expected browser setup messages for e2e)
 - ✅ Includes Spec Kit regression test baseline (103/104)
 - ✅ Test execution commands documented
 - ✅ Troubleshooting section for common issues
-- [x] T029 [P] [WS-260] [TOA-274] Implement automatic PR labeling workflow (labeling-unified.yml)
+- [x] T029 [P] [WS-260] [TOA-274] Implement automatic PR labeling workflow
+  (labeling-unified.yml)
 - ✅ `labeling-unified.yml` deployed and active (runs on PR events)
-- ✅ Fetches canonical labeler.yml from lightspeedwp/.github at runtime (single source of truth)
-- ✅ Routes labels based on branch prefix (feat/, fix/, docs/, etc.) via actions/labeler
+- ✅ Fetches canonical labeler.yml from lightspeedwp/.github at runtime (single
+  source of truth)
+- ✅ Routes labels based on branch prefix (feat/, fix/, docs/, etc.) via
+  actions/labeler
 - ✅ Syncs labels with canonical .github/labels.yml (158 labels)
 - ✅ Validation gates PR labeling (contract suite + schema validation)
 - [x] T030 [WS-260] Update AGENTS.md test command status
@@ -250,16 +298,29 @@ TOA-253, TOA-272
 
 ### Implementation for WS-261
 
-- [x] T031 [WS-261] [TOA-243] Implement locked-files-guard.yml evaluation workflow
-- ✅ Create `.github/workflows/protected-files-guard.yml` (was created as Phase 2 T017c prerequisite)
-- ✅ Create `.github/PROTECTED_FILES.txt` canonical list with all protected file categories
-- ✅ Configure workflow to detect all protected files: `.github/`, `scripts/`, `AGENTS.md`, `CHANGELOG.md`, `guidelines/`, Supabase utils, Figma components, task-list
+- [x] T031 [WS-261] [TOA-243] Implement locked-files-guard.yml evaluation
+  workflow
+- ✅ Create `.github/workflows/protected-files-guard.yml` (was created as Phase 2
+  T017c prerequisite)
+- ✅ Create `.github/PROTECTED_FILES.txt` canonical list with all protected file
+  categories
+- ✅ Configure workflow to detect all protected files: `.github/`, `scripts/`,
+  `AGENTS.md`, `CHANGELOG.md`, `guidelines/`, Supabase utils, Figma components,
+  task-list
 - ✅ Verify workflow blocks PR merge (exit 1) if protected files are modified
-- ✅ Workflow runs on PR events and via manual trigger; documents requirement for change-request issues
-- [x] T032 [WS-261] [TOA-244] Implement workflow syntax validation (workflow-lint.yml)
-- ✅ Create `.github/workflows/workflow-lint.yml` to validate all GitHub Actions YAML syntax
-- ✅ Verify all 13 workflows have valid YAML syntax: branch-name-validation, changelog-unified, claude-guard-tests, dependency-automation, dependency-validation, drift-detection, labeling-unified, locked-files-guard, pr-template-routing, protected-files-guard, tests, validate-specifications, workflow-lint
-- ✅ Workflow runs on PR changes to .github/workflows/ and can be triggered manually
+- ✅ Workflow runs on PR events and via manual trigger; documents requirement for
+  change-request issues
+- [x] T032 [WS-261] [TOA-244] Implement workflow syntax validation
+  (workflow-lint.yml)
+- ✅ Create `.github/workflows/workflow-lint.yml` to validate all GitHub Actions
+  YAML syntax
+- ✅ Verify all 13 workflows have valid YAML syntax: branch-name-validation,
+  changelog-unified, claude-guard-tests, dependency-automation,
+  dependency-validation, drift-detection, labeling-unified, locked-files-guard,
+  pr-template-routing, protected-files-guard, tests, validate-specifications,
+  workflow-lint
+- ✅ Workflow runs on PR changes to .github/workflows/ and can be triggered
+  manually
 - ✅ Reports validation results as comment on PR when applicable
 - [x] T033 [P] [WS-261] [TOA-250] Create GitHub Discussions templates
 - ✅ Create `.github/DISCUSSION_TEMPLATE/` directory
@@ -267,27 +328,39 @@ TOA-253, TOA-272
 - ✅ Create question-and-answer.yml template (Q&A support, troubleshooting)
 - ✅ Create show-and-tell.yml template (community showcase, project sharing)
 - ✅ Create general.yml template (general community discussion)
-- ✅ Create DISCUSSION_TEMPLATE/README.md with setup guide (5/5 templates validated)
+- ✅ Create DISCUSSION_TEMPLATE/README.md with setup guide (5/5 templates
+  validated)
 - ⏳ Enable Discussions in Settings (manual UI step, not automated)
-- ⏳ Configure discussion categories in Settings to map templates (manual UI step)
+- ⏳ Configure discussion categories in Settings to map templates (manual UI
+  step)
 - [x] T034 [P] [WS-261] [TOA-251] Verify issue template inheritance
-- ✅ Confirm: No `.github/ISSUE_TEMPLATE/` directory locally (inherits from org defaults)
-- ✅ Verify: Issue types defined in `.github/issue-types.yml` (from lightspeedwp/.github)
-- ✅ Document: Available issue types (bug, feature, task, documentation, security, design, question)
-- ✅ Added: "Creating issues" section to CONTRIBUTING.md with inheritance explanation
+- ✅ Confirm: No `.github/ISSUE_TEMPLATE/` directory locally (inherits from org
+  defaults)
+- ✅ Verify: Issue types defined in `.github/issue-types.yml` (from
+  lightspeedwp/.github)
+- ✅ Document: Available issue types (bug, feature, task, documentation,
+  security, design, question)
+- ✅ Added: "Creating issues" section to CONTRIBUTING.md with inheritance
+  explanation
 - ✅ No local duplicates: all templates inherited from lightspeedwp/.github
-- [ ] T035 [P] [WS-261] [TOA-252] Configure PR template routing (shared-template approach)
+- [ ] T035 [P] [WS-261] [TOA-252] Configure PR template routing (shared-template
+  approach)
 - Verify `pr-template-routing.yml` workflow exists and is active
-- Confirm shared templates are inherited from `lightspeedwp/.github` (no local duplication)
+- Confirm shared templates are inherited from `lightspeedwp/.github` (no local
+  duplication)
 - Verify branch-to-template mapping is correct:
     - `feat/*` → feature template
     - `fix/*` → bugfix template
     - `docs/*` → documentation template
-- Create test PRs from different branch types and verify correct template is suggested
-- Verify default-template behaviour in a separate test PR (unmatched branch type)
-- Verify named-template selection in a separate test PR (explicit selection precedence)
+- Create test PRs from different branch types and verify correct template is
+  suggested
+- Verify default-template behaviour in a separate test PR (unmatched branch
+  type)
+- Verify named-template selection in a separate test PR (explicit selection
+  precedence)
 - Confirm template appears without overwriting contributor content
-- Document shared-template routing approach in `CONTRIBUTING.md` under "PR Creation Process"
+- Document shared-template routing approach in `CONTRIBUTING.md` under "PR
+  Creation Process"
 - [x] T036 [P] [WS-261] [TOA-253] Document saved replies and contributor setup
 - ✅ Add "Using Saved Replies" section to CONTRIBUTING.md
 - ✅ Link to org-wide saved replies catalog in lightspeedwp/.github
@@ -337,8 +410,10 @@ TOA-253, TOA-272
 - Ensure `branch-name-validation.yml` is deployed and active
 - Verify `npm run validate:branch-name` is called on every PR push
 - Validate against approved prefix list (feat, fix, hotfix, release, etc.)
-- Test: create PR from invalid branch (e.g., `claude/my-feature`) and confirm workflow blocks
-- Document branch naming rules in `CONTRIBUTING.md` and link to `.github/CLAUDE.md`
+- Test: create PR from invalid branch (e.g., `claude/my-feature`) and confirm
+  workflow blocks
+- Document branch naming rules in `CONTRIBUTING.md` and link to
+  `.github/CLAUDE.md`
 
 **Checkpoint**: GitHub governance partially delivered.
 
@@ -369,7 +444,8 @@ run `npm run build` and verify BEM-only styling succeeds
 - ✅ Updated README.md with `nvm use` command documentation
 - [x] T042 [P] [WS-262] [TOA-258] Verify script placement at root scripts/
 - ✅ Verified: All scripts in `scripts/` directory (not `.github/scripts/`)
-- ✅ Verified: Key scripts present: validate-branch-name.js, parse-journal-markdown.ts,
+- ✅ Verified: Key scripts present: validate-branch-name.js,
+  parse-journal-markdown.ts,
     check-journal-links.ts, test-figma-access.js
 
 - [x] T043 [P] [WS-262] [TOA-273] Implement changelog validation workflow
@@ -392,8 +468,10 @@ run `npm run build` and verify BEM-only styling succeeds
 - ✅ Added section: "Protected Files" with 9-file table and change process
 - ✅ Added section: "Code Ownership" with CODEOWNERS reference
 - ✅ Added section: "Locked Configuration Files" with label prefix requirements
-- ✅ Added section: "Governance Structure" with decisions table (7 decisions documented)
-- ✅ All 5 original requirements integrated into comprehensive governance sections
+- ✅ Added section: "Governance Structure" with decisions table (7 decisions
+  documented)
+- ✅ All 5 original requirements integrated into comprehensive governance
+  sections
 - ✅ Links to parent governance docs (lightspeedwp/.github) established
 - Add section: "Styling" — document BEM-only CSS rules
 
@@ -418,10 +496,15 @@ budget coverage
 - [x] T047 [WS-271] Audit and document agent inventory in .claude/agents/
 - ✅ Verified 20 agents total in `.claude/agents/` directory
 - ✅ Created comprehensive documentation framework in INVENTORY.md
-- ✅ Template includes all required fields: Purpose, Inputs, Outputs, Tools, Permissions, Workflow Relationships, Validation, Escalation, Budget, Not In Scope
-- ✅ Documented sample agents (Changelog Agent, Branches Agent) with complete specifications
-- ✅ Added Agent Governance Principles section (selection criteria, budget enforcement, workflow integration)
-- ✅ Indexed all 20 agents by category (4 content, 3 design, 4 dev, 2 testing, 3 project mgmt, 3 analytics, 1 release)
+- ✅ Template includes all required fields: Purpose, Inputs, Outputs, Tools,
+  Permissions, Workflow Relationships, Validation, Escalation, Budget, Not In
+  Scope
+- ✅ Documented sample agents (Changelog Agent, Branches Agent) with complete
+  specifications
+- ✅ Added Agent Governance Principles section (selection criteria, budget
+  enforcement, workflow integration)
+- ✅ Indexed all 20 agents by category (4 content, 3 design, 4 dev, 2 testing, 3
+  project mgmt, 3 analytics, 1 release)
 - [x] T048 [P] [WS-271] Audit and document skill inventory in .claude/skills/
 - ✅ Verified 5 skills total in `.claude/skills/` directory
 - ✅ Documented all 5 skills with complete specifications:
@@ -432,8 +515,10 @@ budget coverage
     - Labeling: GitHub label taxonomy management
 - ✅ Created comprehensive framework in INVENTORY.md with template fields
 - ✅ Sample documentation for Branch Validation and Changelog skills (complete)
-- ✅ Added Skill Governance Principles (lifecycle, selection criteria, budget enforcement, integration patterns)
-- ✅ Linked to related documentation (agents, budget controls, routing, governance)
+- ✅ Added Skill Governance Principles (lifecycle, selection criteria, budget
+  enforcement, integration patterns)
+- ✅ Linked to related documentation (agents, budget controls, routing,
+  governance)
 - [x] T049 [P] [WS-271] Assess Anthropic platform applicability per agent
 - ✅ Documented all 20 agents with platform recommendations
 - ✅ Evaluated seven Anthropic platforms per agent:
@@ -454,7 +539,8 @@ budget coverage
 - ✅ Documented enforcement point: host-side hard limits (not advisory)
 - ✅ Covered:
     - Aggregate accounting across delegated and concurrent work
-    - Retry and cancellation policies (exponential backoff, transient vs. permanent)
+    - Retry and cancellation policies (exponential backoff, transient vs.
+      permanent)
     - Exhaustion handling (what happens when budget exceeded)
 - Missing usage data fallback (charge remaining allowance and suspend dispatch
 until reconciliation)
@@ -466,11 +552,14 @@ until reconciliation)
 - ✅ Mapped each skill to execution environment:
     - Local agent (same session) — quick validations, interactive work
     - Remote agent (cloud sandbox) — long-running, scheduled jobs
-    - Subagent (parent session budget) — parallel research, separate agent execution
-    - Forked session (independent budget) — separate session with its own accounting
+    - Subagent (parent session budget) — parallel research, separate agent
+      execution
+    - Forked session (independent budget) — separate session with its own
+      accounting
     - Managed agent (hosted) — future enhancement (not available today)
 - ✅ Documented tool access per execution context
-- ✅ Ensured deterministic quality gates remain unprivileged (read-only validation)
+- ✅ Ensured deterministic quality gates remain unprivileged (read-only
+  validation)
 - ✅ Includes routing decision tree and execution context examples
 - [x] T052 [WS-271] Create agent/skill governance documentation
 - ✅ Created `.claude/GOVERNANCE.md` with complete framework:
@@ -481,7 +570,8 @@ until reconciliation)
     - Contract compliance (agents must read and follow guidelines/)
     - Exceptions & appeals process
 - ✅ Linked from `.claude/agents/INVENTORY.md` and `.claude/skills/INVENTORY.md`
-- ✅ Owner approval process documented (for budget increases, protected file mods)
+- ✅ Owner approval process documented (for budget increases, protected file
+  mods)
 
 **Checkpoint**: Agent inventory documented; Anthropic platforms assessed; budget
 enforcement strategy defined (implementation in TOA-271); skill routing clear;
@@ -496,28 +586,38 @@ workstreams
 
 - [x] T053 [P] Run full regression validation suite
 - ✅ `npm ci` — dependency installation (757 packages installed)
-- ✅ `npm run validate:branch-name -- --branch build/repo-governance-continue-spec-001` — branch naming (PASS)
+- ✅ `npm run validate:branch-name -- --branch
+  build/repo-governance-continue-spec-001` — branch naming (PASS)
 - ✅ `npm run build` — production build (3.10s, all assets compiled)
 - ✅ `npm run test:unit` — Jest unit tests (588/588 passed)
 - ✅ `npm run test:build` — Bats build verification (12/12 passed)
 - ✅ `npm test` — all test suites (11 suites, all passed)
-- ✅ `node --test tests/speckit.test.mjs` — Speckit regression (103/104 as documented)
-- ✅ `npm run dev` — dev server starts successfully (Vite 6.4.3, all warnings expected)
+- ✅ `node --test tests/speckit.test.mjs` — Speckit regression (103/104 as
+  documented)
+- ✅ `npm run dev` — dev server starts successfully (Vite 6.4.3, all warnings
+  expected)
 - ✅ All validation results documented
 - [x] T054 [P] Validate specification documentation completeness
-- ✅ All files present in `.github/specs/001-repo-governance-layout-and-agentic-workflows/`:
+- ✅ All files present in
+  `.github/specs/001-repo-governance-layout-and-agentic-workflows/`:
 - spec.md, plan.md, research.md, data-model.md, contracts/, quickstart.md,
 tasks.md, checklists/requirements.md ✓
 
 - ✅ Specification structure complete and coherent
 - ✅ All 20 child issues TOA-242 through TOA-274 mapped to tasks
 - ✅ All phases (1-8) and workstreams (WS-254 through WS-271) documented
-- ✅ Success criteria documented; final acceptance remains pending T035, T038, and T055
+- ✅ Success criteria documented; final acceptance remains pending T035, T038,
+  and T055
 - [ ] T055 [P] Validate protected-file changes and owner approval
-- ❌ Protected-files guard fails: the implementation branch changes protected paths, including `.github/workflows/`, `scripts/`, `AGENTS.md`, and `CHANGELOG.md` (compare `origin/develop...HEAD`)
-- ⏳ Explicit owner approval for those implementation changes is not recorded in the repository and has not been verified
-- ⏳ Record the approval reference and scope, then resolve the guard failure through the owner-approved process and revalidate before marking T055 complete
-- Changes being specified in tasks does not establish explicit owner approval or a passing guard result
+- ❌ Protected-files guard fails: the implementation branch changes protected
+  paths, including `.github/workflows/`, `scripts/`, `AGENTS.md`, and
+  `CHANGELOG.md` (compare `origin/develop...HEAD`)
+- ⏳ Explicit owner approval for those implementation changes is not recorded in
+  the repository and has not been verified
+- ⏳ Record the approval reference and scope, then resolve the guard failure
+  through the owner-approved process and revalidate before marking T055 complete
+- Changes being specified in tasks does not establish explicit owner approval or
+  a passing guard result
 - [x] T056 [P] Verify application behaviour preserved
 - ✅ Build succeeds: `npm run build` (3.10s, zero errors)
 - ✅ Dev server starts: `npm run dev` (Vite ready, port 5173)
@@ -534,7 +634,8 @@ tasks.md, checklists/requirements.md ✓
 - ✅ All 8 phases committed with proper attribution (Claude Haiku 4.5)
 - ✅ Commits linked to session for traceability
 - [x] T058 Create pull request for governance implementation
-- ✅ PR prepared with title: `docs(spec): TOA-241 Repository Governance Infrastructure`
+- ✅ PR prepared with title: `docs(spec): TOA-241 Repository Governance
+  Infrastructure`
 - ⏳ Draft body must reflect:
     - Summary of TOA-241 implementation across 5 parallel workstreams
 - Complete list of changes (testing, package, runtime, styling, GitHub, CI/CD,
@@ -545,9 +646,12 @@ governance)
 
     - Child issue status, including outstanding T035 and T038
 - ✅ Status: Ready for draft PR creation and @ashley review
-- ⏳ CI/CD acceptance pending resolution of the protected-files guard failure (T055)
+- ⏳ CI/CD acceptance pending resolution of the protected-files guard failure
+  (T055)
 - [ ] T059 Document implementation completion and handoff
-- ⏳ Implementation partially delivered: T035 PR template routing verification remains unchecked; T038 requires manual branch-protection configuration; T055 guard failure and owner approval remain unresolved
+- ⏳ Implementation partially delivered: T035 PR template routing verification
+  remains unchecked; T038 requires manual branch-protection configuration; T055
+  guard failure and owner approval remain unresolved
 - ✅ Delivered infrastructure and documentation:
 - Testing: Jest ESM (588/588 unit tests), Bats (12/12 build tests), Playwright
 configured
@@ -565,7 +669,8 @@ documented
 - ⏳ Complete T035 and T038 before reporting all tasks delivered
 - ⏳ Resolve T055 and record explicit owner approval for protected-file changes
 - ✅ Application behavior verified (build succeeds, dev server starts)
-- ⏳ Final completion and merge readiness remain pending the outstanding tasks and guard resolution
+- ⏳ Final completion and merge readiness remain pending the outstanding tasks
+  and guard resolution
 
 **Checkpoint**: Feature TOA-241 remains incomplete. Finish T035, configure
 branch protection manually for T038, and resolve T055 with recorded owner
@@ -578,8 +683,10 @@ approval and revalidation before closing T059 or declaring full delivery.
 ### Phase Dependencies
 
 - **Phase 1 (Setup)**: No dependencies — start immediately
-- **Phase 2 (Foundational)**: Depends on Phase 1 completion — **BLOCKS all workstreams**
-- **Phases 3–7 (Workstreams)**: All depend on Phase 2 completion — can run in parallel
+- **Phase 2 (Foundational)**: Depends on Phase 1 completion — **BLOCKS all
+  workstreams**
+- **Phases 3–7 (Workstreams)**: All depend on Phase 2 completion — can run in
+  parallel
 - **Phase 8 (Polish)**: Depends on all workstreams completing — runs last
 
 ### Workstream Dependencies (Phases 3–7)
@@ -595,9 +702,12 @@ Once Phase 2 completes, all 5 workstreams can proceed in parallel:
 ### Within-Phase Dependencies
 
 - **Phase 2**: T008 (Jest) must complete before T016 (test discovery)
-- **Phase 3**: T018 must complete before T019 (regression test depends on feature directory routing)
-- **Phase 5**: T031 (locked-files-guard) should complete before T039 (CODEOWNERS, so protected files are enforced)
-- **Phase 6**: T040–T042 (config updates) must complete before T044–T046 (documentation updates)
+- **Phase 3**: T018 must complete before T019 (regression test depends on
+  feature directory routing)
+- **Phase 5**: T031 (locked-files-guard) should complete before T039
+  (CODEOWNERS, so protected files are enforced)
+- **Phase 6**: T040–T042 (config updates) must complete before T044–T046
+  (documentation updates)
 
 ### Parallel Opportunities
 
@@ -609,11 +719,13 @@ Once Phase 2 completes, all 5 workstreams can proceed in parallel:
 
 - T008, T009, T013 can run in parallel (different files, no dependencies)
 - T011, T012, T014 can run in parallel (different files, no dependencies)
-- T016, T017 can run in parallel after T008, T009, T010, T011, T012, T014 complete
+- T016, T017 can run in parallel after T008, T009, T010, T011, T012, T014
+  complete
 
 **Phase 3** (WS-254):
 
-- T021, T022, T023, T024 can run in parallel (documentation/organization, no dependencies)
+- T021, T022, T023, T024 can run in parallel (documentation/organization, no
+  dependencies)
 
 **Phase 4** (WS-260):
 
@@ -633,7 +745,8 @@ Once Phase 2 completes, all 5 workstreams can proceed in parallel:
 
 **Phase 7** (WS-271):
 
-- T047, T048, T049, T051, T052 can run in parallel (documentation, inventory work)
+- T047, T048, T049, T051, T052 can run in parallel (documentation, inventory
+  work)
 
 **Phase 8** (Polish):
 
@@ -647,12 +760,15 @@ With multiple developers/agents, optimal execution:
 
 1. **Phase 1** (1 person): Initialize governance artefacts (4–6 hours)
 
-1. **Phase 2** (1–2 people): Core infrastructure setup (6–10 hours, some parallelism)
+1. **Phase 2** (1–2 people): Core infrastructure setup (6–10 hours, some
+   parallelism)
 
    - Person A: Jest, Vitest, Testing (T008, T009, T016, T017)
-   - Person B: Package manager, Node.js, Tailwind removal (T011, T012, T013, T014)
+   - Person B: Package manager, Node.js, Tailwind removal (T011, T012, T013,
+     T014)
    - Both: T010, T015 (testing baseline, component audit)
-1. **Phases 3–7** (5 people, one per workstream): Parallel workstream execution (8–12 hours each)
+1. **Phases 3–7** (5 people, one per workstream): Parallel workstream execution
+   (8–12 hours each)
 
    - Dev A: WS-254 Spec Kit routing
    - Dev B: WS-260 Testing integration
@@ -675,10 +791,13 @@ For fastest delivery of governance foundation:
 
 1. Complete **Phase 2** (Foundational) — ALL required before any workstream
 
-1. Complete **ONE workstream** (recommend WS-261 for quickest GitHub validation):
+1. Complete **ONE workstream** (recommend WS-261 for quickest GitHub
+   validation):
 
-   - T031–T039 (GitHub Discussions, CODEOWNERS, branch protection, workflow validation)
-   - Result: Governance framework deployed, team can immediately use improved PR routing and branch protection
+   - T031–T039 (GitHub Discussions, CODEOWNERS, branch protection, workflow
+     validation)
+   - Result: Governance framework deployed, team can immediately use improved PR
+     routing and branch protection
 1. **Deploy to develop branch** for testing
 
 1. Create MVP PR: "Repository Governance MVP: Foundation + GitHub Integration"
@@ -712,23 +831,29 @@ If agents are driving this work:
 
 1. Each agent is responsible for one workstream
 
-1. Each agent commits to its own branch feature (e.g., `feat/wg-254-spec-kit` based off `epic/repo-governance-toa-241`)
+1. Each agent commits to its own branch feature (e.g., `feat/wg-254-spec-kit`
+   based off `epic/repo-governance-toa-241`)
 
 1. Merge all branches back to `epic/repo-governance-toa-241` via squash commits
 
-1. Create single PR from `epic/repo-governance-toa-241` → develop for owner review
+1. Create single PR from `epic/repo-governance-toa-241` → develop for owner
+   review
 
 ---
 
 ## Notes
 
-- **[P] = Parallelizable**: Can run simultaneously with other [P] tasks if no file conflicts
-- **[Story] = Workstream**: Maps task to WS-254, WS-260, WS-261, WS-262, or WS-271
+- **[P] = Parallelizable**: Can run simultaneously with other [P] tasks if no
+  file conflicts
+- **[Story] = Workstream**: Maps task to WS-254, WS-260, WS-261, WS-262, or
+  WS-271
 - All file paths are relative to repository root
 - Commit after each phase completes, or at checkpoints
 - Stop at any checkpoint to validate independently
-- Avoid: vague tasks, same-file conflicts, cross-workstream blocking dependencies
-- When blocked, report to @ashley with specific question (do not guess or proceed unsafely)
+- Avoid: vague tasks, same-file conflicts, cross-workstream blocking
+  dependencies
+- When blocked, report to @ashley with specific question (do not guess or
+  proceed unsafely)
 
 ---
 

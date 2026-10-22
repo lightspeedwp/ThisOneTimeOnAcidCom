@@ -188,7 +188,8 @@ establish automatic server-side timeout fallback for this workflow.
 - **Agents using Tool Use**: 20/20 (100%)
 - **Agents using Prompt Caching**: 18/20 (90%) — excludes minimal-context agents
 - **Agents using MCP**: 15/20 (75%) — majority integrate external services
-- **Agents using Managed Agents**: 0/20 (0% today) — future enhancement for background workflows
+- **Agents using Managed Agents**: 0/20 (0% today) — future enhancement for
+  background workflows
 - **Agents using Artifact APIs**: 14/20 (70%) — collaboration + state storage
 
 ### MCP Server Distribution
@@ -358,9 +359,11 @@ Use this matrix to select the best platform(s) for a given governance task:
 
 ### Immediate Actions (Phase 2)
 
-1. ✅ Use **Claude API + Tool Use** for all real-time governance tasks (branch validation, PR routing)
+1. ✅ Use **Claude API + Tool Use** for all real-time governance tasks (branch
+   validation, PR routing)
 
-1. ✅ Deploy **MCP servers** for GitHub, Slack, Linear integration (tooling ready)
+1. ✅ Deploy **MCP servers** for GitHub, Slack, Linear integration (tooling
+   ready)
 
 1. ✅ Keep governance artifacts in **Git**; integrate application-owned storage
    if additional persistence or audit exports are needed
@@ -373,11 +376,14 @@ Use this matrix to select the best platform(s) for a given governance task:
 1. **Audit Dashboard:** Integrate MCP log export into application-owned storage;
    query via a custom dashboard
 
-1. **Multi-Agent Orchestration:** Use **Prompt Caching** for spec context sharing across agents
+1. **Multi-Agent Orchestration:** Use **Prompt Caching** for spec context
+   sharing across agents
 
-1. **Event-Driven Workflows:** Deploy **Managed Agents** as GitHub webhook handlers
+1. **Event-Driven Workflows:** Deploy **Managed Agents** as GitHub webhook
+   handlers
 
-1. **Cost Optimization:** Analyze Prompt Caching effectiveness when SpecKit pipeline scales
+1. **Cost Optimization:** Analyze Prompt Caching effectiveness when SpecKit
+   pipeline scales
 
 ---
 
@@ -402,9 +408,13 @@ https://platform.claude.com/docs/en/managed-agents/reference#rate-limits
 ## Related Documentation
 
 - **Agent Inventory**: `.claude/agents/INVENTORY.md` (T017a)
-- **Budget Controls Spec**: `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.3)
-- **Agentic Workflows**: `.github/specs/001-repo-governance-layout-and-agentic-workflows/` (R7.1-R7.4)
-- **Protected Files Guard**: `.github/workflows/protected-files-guard.yml` (T017c)
+- **Budget Controls Spec**:
+  `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md`
+  (R7.3)
+- **Agentic Workflows**:
+  `.github/specs/001-repo-governance-layout-and-agentic-workflows/` (R7.1-R7.4)
+- **Protected Files Guard**: `.github/workflows/protected-files-guard.yml`
+  (T017c)
 
 ---
 

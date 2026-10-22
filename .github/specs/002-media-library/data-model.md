@@ -29,16 +29,20 @@ This document defines four core entities:
 
 1. **Asset** — A single recoverable media item (image, vector, design file)
 
-1. **AssetRelationship** — Relationships between assets (original ↔ derivative, asset ↔ usage)
+1. **AssetRelationship** — Relationships between assets (original ↔ derivative,
+   asset ↔ usage)
 
-1. **StorageProvider** — Evaluation criteria for candidate storage and editing platforms
+1. **StorageProvider** — Evaluation criteria for candidate storage and editing
+   platforms
 
-1. **ValidationResult** — Findings from validation runs (visual comparison, metadata, references)
+1. **ValidationResult** — Findings from validation runs (visual comparison,
+   metadata, references)
 
 Each entity includes:
 
 - Complete attribute list with types and constraints
-- Validation rules (including the non-invention rule: do not fabricate missing metadata)
+- Validation rules (including the non-invention rule: do not fabricate missing
+  metadata)
 - Enum definitions for state and type fields
 - Reference mappings to functional requirements (FR-###)
 
@@ -121,7 +125,8 @@ failed attempt (Figma Make limitation)
 
 **Validation Rules**:
 
-1. **Uniqueness**: `asset_id` MUST be globally unique within the catalogue. No two assets can share the same ID.
+1. **Uniqueness**: `asset_id` MUST be globally unique within the catalogue. No
+   two assets can share the same ID.
 
 1. **Non-Invention Rule** (FR-008):
 
@@ -129,26 +134,45 @@ failed attempt (Figma Make limitation)
      - `null` (field not applicable)
      - `"unknown"` (not verified; source is unclear)
      - `"unrecoverable"` (attempted but cannot be found)
-   - NEVER invent, assume or fabricate missing `credits`, `rights*notes`, `alt*text`, or provenance.
+   - NEVER invent, assume or fabricate missing `credits`, `rights*notes`,
+     `alt*text`, or provenance.
    - If unsure, mark as `"unknown"` and flag in validation.
 
 1. **Relationship Integrity** (FR-007):
 
-   - Assets with `original*or*derivative` = `"derivative"` or `"variant"` MUST have a corresponding `AssetRelationship` entry pointing to the original (see AssetRelationship below).
+   - Assets with `original*or*derivative` = `"derivative"` or `"variant"` MUST
+     have a corresponding `AssetRelationship` entry pointing to the original
+     (see AssetRelationship below).
    - Relationships MUST NOT be circular (A → B → A).
 
 1. **Format Consistency**:
 
-   - If `format` includes print formats (PDF, TIFF), `print_suitable` SHOULD be true or explicitly marked unknown/false with explanation.
-   - If `print*suitable` = true, `dimensions` MUST be a non-null object with numeric `dpi` ≥300. If suitability is unknown, preserve `print*suitable` = null; `dimensions` may be null when unknown.
+   - If `format` includes print formats (PDF, TIFF), `print_suitable` SHOULD be
+     true or explicitly marked unknown/false with explanation.
+   - If `print*suitable` = true, `dimensions` MUST be a non-null object with
+     numeric `dpi` ≥300. If suitability is unknown, preserve `print*suitable` =
+     null; `dimensions` may be null when unknown.
 
 1. **Recovery Status Consistency**:
 
-   - `recovery*status` = `"not*attempted"` means asset is identified but no recovery attempt has been made; `recovery_method` MUST be present and null.
-   - `recovery*status` = `"recovered"` implies all required fields (`asset*id`, `format`, `dimensions`, `provenance`) are complete; `dimensions` MUST be a non-null object with `width`, `height`, and `unit`; `recovery*method` MUST be set. If dimensions are unknown (`null`) but the asset is usable, use `"partial*recovery"` instead.
-   - `recovery*status` = `"partial*recovery"` means some metadata is missing but asset is usable; `recovery_method` MUST be set.
-   - `recovery*status` = `"manual*export*required"` means manual export is pending. It may be entered before any attempt if the limitation is already known, or after an unsuccessful recovery attempt. `recovery*method` MUST be present and null before any attempt, or set to the method actually attempted afterward; do not set `"manual_export"` merely because it is planned.
-   - `recovery*status` = `"unrecoverable"` MUST have `recovery*notes` explaining why; `recovery_method` MUST be present and null if no attempt was made, or set to the method actually attempted otherwise.
+   - `recovery*status` = `"not*attempted"` means asset is identified but no
+     recovery attempt has been made; `recovery_method` MUST be present and null.
+   - `recovery*status` = `"recovered"` implies all required fields (`asset*id`,
+     `format`, `dimensions`, `provenance`) are complete; `dimensions` MUST be a
+     non-null object with `width`, `height`, and `unit`; `recovery*method` MUST
+     be set. If dimensions are unknown (`null`) but the asset is usable, use
+     `"partial*recovery"` instead.
+   - `recovery*status` = `"partial*recovery"` means some metadata is missing but
+     asset is usable; `recovery_method` MUST be set.
+   - `recovery*status` = `"manual*export*required"` means manual export is
+     pending. It may be entered before any attempt if the limitation is already
+     known, or after an unsuccessful recovery attempt. `recovery*method` MUST be
+     present and null before any attempt, or set to the method actually
+     attempted afterward; do not set `"manual_export"` merely because it is
+     planned.
+   - `recovery*status` = `"unrecoverable"` MUST have `recovery*notes` explaining
+     why; `recovery_method` MUST be present and null if no attempt was made, or
+     set to the method actually attempted otherwise.
 
 ---
 
@@ -196,7 +220,8 @@ v2)
 
 1. **Referential Integrity**:
 
-   - Both `source*asset*id` and `target*asset*id` MUST reference existing Asset records.
+   - Both `source*asset*id` and `target*asset*id` MUST reference existing Asset
+     records.
    - Deleting an Asset MUST cascade-delete its relationships.
 
 1. **Non-Circular Relationships** (FR-007):
@@ -206,15 +231,19 @@ v2)
 
 1. **Consistency with Asset.original*or*derivative**:
 
-   - If Asset.`original*or*derivative` = `"derivative"` or `"variant"`, there MUST be at least one AssetRelationship where:
+   - If Asset.`original*or*derivative` = `"derivative"` or `"variant"`, there
+     MUST be at least one AssetRelationship where:
      - `target*asset*id` = this Asset's ID
      - `relationship*type` ∈ {`"derived*from"`, `"variant_of"`}
-   - If Asset.`original*or*derivative` = `"original"`, it SHOULD NOT be a target of `"derived*from"` or `"variant*of"` relationships (it should be a source).
+   - If Asset.`original*or*derivative` = `"original"`, it SHOULD NOT be a target
+     of `"derived*from"` or `"variant*of"` relationships (it should be a
+     source).
 
 1. **Relationship Cardinality**:
 
    - One source asset can have multiple derived/variant targets (1:many).
-   - One target can derive from multiple sources (many:1) — e.g., composite image from multiple sources.
+   - One target can derive from multiple sources (many:1) — e.g., composite
+     image from multiple sources.
 
 ---
 
@@ -274,15 +303,20 @@ criteria.
 
 1. **Non-Invention Rule**:
 
-   - Cost, limits and features MUST be quoted from current pricing/documentation.
+   - Cost, limits and features MUST be quoted from current
+     pricing/documentation.
    - NEVER assume free-tier limits apply to production (FR-011).
    - If information is unavailable, mark as `"unknown"` or `"not specified"`.
 
 1. **Consistency**:
 
-   - If `api*available` = true, `api*url` SHOULD be populated (unless documentation URL is elsewhere).
-   - If `visual*editing*ui` = true, `visual*editing*notes` SHOULD describe the offering.
-   - If `print*quality*support` is needed (per Q2 resolution), provider MUST support print formats (PDF, TIFF) and document DPI/colour-space constraints.
+   - If `api*available` = true, `api*url` SHOULD be populated (unless
+     documentation URL is elsewhere).
+   - If `visual*editing*ui` = true, `visual*editing*notes` SHOULD describe the
+     offering.
+   - If `print*quality*support` is needed (per Q2 resolution), provider MUST
+     support print formats (PDF, TIFF) and document DPI/colour-space
+     constraints.
 
 ---
 
@@ -352,13 +386,15 @@ missing alt text; can be added post-launch)
 
 1. **Consistency**:
 
-   - If `status` = `"fail"` and `severity` = `"critical"`, this asset BLOCKS migration.
+   - If `status` = `"fail"` and `severity` = `"critical"`, this asset BLOCKS
+     migration.
    - If `status` = `"pass"`, `severity` SHOULD be `"low"` or omitted.
    - If `details` is empty, `status` SHOULD be `"unverifiable"`.
 
 1. **Audit Trail**:
 
-   - `run_id` SHOULD be populated for batch validation runs (e.g., all 56 assets validated in one pass).
+   - `run_id` SHOULD be populated for batch validation runs (e.g., all 56 assets
+     validated in one pass).
    - `run_date` enables traceability (e.g., "validation run #1 on 2026-10-20").
 
 ---
@@ -369,15 +405,22 @@ missing alt text; can be added post-launch)
 
 Applies across all entities:
 
-- **Asset**: Never fabricate `credits`, `rights*notes`, `alt*text` or `provenance`. Mark unknown data as `null`, `"unknown"`, or `"unrecoverable"`.
-- **AssetRelationship**: Relationships inferred from data MUST be marked `verified = false`.
-- **ValidationResult**: If metadata is missing, flag as `status = "fail"` or `"partial"`, not as `status = "pass"` with fabricated data.
+- **Asset**: Never fabricate `credits`, `rights*notes`, `alt*text` or
+  `provenance`. Mark unknown data as `null`, `"unknown"`, or `"unrecoverable"`.
+- **AssetRelationship**: Relationships inferred from data MUST be marked
+  `verified = false`.
+- **ValidationResult**: If metadata is missing, flag as `status = "fail"` or
+  `"partial"`, not as `status = "pass"` with fabricated data.
 
 ### Print Suitability Assessment (FR-004, FR-013)
 
-- **Asset.print*suitable**: Boolean or null (unknown), with optional `print*notes` detailing resolution, colour space, format compatibility.
-- **Asset.format**: Must include only print formats (PNG, PDF, TIFF) if print_suitable = true.
-- **StorageProvider.print*quality*support**: Provider must be evaluated for print-format support and DPI limits (Q2 resolution: 300 DPI minimum, RGB/CMYK, PDF/TIFF).
+- **Asset.print*suitable**: Boolean or null (unknown), with optional
+  `print*notes` detailing resolution, colour space, format compatibility.
+- **Asset.format**: Must include only print formats (PNG, PDF, TIFF) if
+  print_suitable = true.
+- **StorageProvider.print*quality*support**: Provider must be evaluated for
+  print-format support and DPI limits (Q2 resolution: 300 DPI minimum, RGB/CMYK,
+  PDF/TIFF).
 
 ### Recovery Status Transitions
 
@@ -411,7 +454,8 @@ Once in `recovered` or `partial_recovery`, assets proceed to validation.
 
 ### Asset Fields (Required)
 
-- asset*id, original*or*derivative, provenance, format, dimensions, print*suitable, recovery*status, recovery*method, created*at, updated*at
+- asset*id, original*or*derivative, provenance, format, dimensions,
+  print*suitable, recovery*status, recovery*method, created*at, updated*at
 
 ### Asset Fields (Optional but Recommended)
 
@@ -423,7 +467,8 @@ Once in `recovered` or `partial_recovery`, assets proceed to validation.
 
 ### StorageProvider Fields (Required)
 
-- name, cost*model, formats*supported, max*file*size, api*available, visual*editing*ui, batch*processing, print*quality*support, evaluation_status
+- name, cost*model, formats*supported, max*file*size, api*available,
+  visual*editing*ui, batch*processing, print*quality*support, evaluation_status
 
 ### ValidationResult Fields (Required)
 
@@ -438,23 +483,28 @@ Once in `recovered` or `partial_recovery`, assets proceed to validation.
 - FR-001 (Figma extraction) → Asset.recovery_method, Asset.provenance
 - FR-002 (Stable IDs) → Asset.asset_id (constraint: provider-independent)
 - FR-003 (Original vs. derivative) → Asset.original*or*derivative
-- FR-004 (Print suitability) → Asset.print*suitable, Asset.print*notes, StorageProvider.print*quality*support
+- FR-004 (Print suitability) → Asset.print*suitable, Asset.print*notes,
+  StorageProvider.print*quality*support
 - FR-005 (Unrecoverable assets) → Asset.recovery*status, Asset.recovery*notes
 - FR-006 (Metadata fields) → Asset attributes (all documented)
-- FR-007 (Relationships) → AssetRelationship entity, Asset validation rule (non-circular)
+- FR-007 (Relationships) → AssetRelationship entity, Asset validation rule
+  (non-circular)
 - FR-008 (Non-invention) → Validation rule across all entities
 - FR-010–011 (Provider evaluation) → StorageProvider entity, evaluation_status
 - FR-013 (Print support per provider) → StorageProvider.print*quality*support
 - FR-014–015 (Validation) → ValidationResult entity, check_type and status enums
-- FR-018 (Scope boundary) → Data model defines catalogue structure only; implementation excluded
+- FR-018 (Scope boundary) → Data model defines catalogue structure only;
+  implementation excluded
 
 ---
 
 ## Next Steps
 
-1. **T016–T017**: Generate `contracts/catalogue-schema.json` from this data model (JSON Schema format with examples)
+1. **T016–T017**: Generate `contracts/catalogue-schema.json` from this data
+   model (JSON Schema format with examples)
 
-1. **T018**: Document field constraints quoted from spec.md to prevent implementation-time discretion
+1. **T018**: Document field constraints quoted from spec.md to prevent
+   implementation-time discretion
 
 1. **T019**: Validate schema against 12 pilot recovered assets
 
