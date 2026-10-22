@@ -113,8 +113,9 @@ Never import from it, never suggest Supabase integration, always dismiss the `su
 
 ### Root Directory Restrictions
 
-Per project conventions, only `README.md`, `CHANGELOG.md`, and `ATTRIBUTIONS.md` are permitted as `.md` files in the project root.
-`AGENTS.md` and `CONTRIBUTING.md` are placed at root for discoverability by agents and GitHub tooling — this is an **acknowledged exception** to the root-directory rule.
+When creating new Markdown (`.md`) files in the project root, only `README.md`, `CHANGELOG.md`, and `ATTRIBUTIONS.md` are permitted.
+`AGENTS.md`, `CLAUDE.md`, and `CONTRIBUTING.md` are acknowledged exceptions for agent and GitHub tooling discoverability.
+This restriction applies only to new Markdown files; existing root Markdown files may remain.
 
 ---
 
@@ -156,6 +157,5 @@ When asked to audit, review, or write a prompt, follow the **default 4-step work
 The following items are documented as unresolved per repository evidence, not invented:
 
 1. **No test/lint/typecheck scripts** — `package.json` contains no `test`, `lint`, or `typecheck` commands. Whether this is intentional or an omission is not determined.
-2. **Root `.md` exception** — `AGENTS.md` and `CONTRIBUTING.md` are placed at root for agent/GitHub discoverability despite the root-restriction rule in Guidelines.md. This trade-off is acknowledged but not formally resolved in the project guidelines.
-3. **Two `netlify.toml` locations** — The site's base directory is the repository root, so the root `netlify.toml` is authoritative. Whether to delete `src/app/netlify.toml` (and adopt its draft CSP) is still undecided.
-4. **`postcss.config.mjs` vs `postcss.config.js`** — Both exist (root and `src/app/`). The active PostCSS pipeline is not explicitly documented.
+2. **Two `netlify.toml` locations** — The site's base directory is the repository root, so the root `netlify.toml` is authoritative. Whether to delete `src/app/netlify.toml` (and adopt its draft CSP) is still undecided.
+3. **`postcss.config.mjs` vs `postcss.config.js`** — Both exist (root and `src/app/`). The active PostCSS pipeline is not explicitly documented.

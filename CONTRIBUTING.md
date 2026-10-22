@@ -148,7 +148,9 @@ Never replace existing images. Use `ImageWithFallback` for new images. All `figm
 | General documentation | `/docs/` |
 | Build/utility scripts | `/scripts/` |
 
-Only `README.md`, `CHANGELOG.md`, and `ATTRIBUTIONS.md` are permitted as `.md` files in the project root (with the acknowledged exception of `AGENTS.md` and `CONTRIBUTING.md` for GitHub/agent discoverability).
+When creating new Markdown (`.md`) files in the project root, only `README.md`, `CHANGELOG.md`, and `ATTRIBUTIONS.md` are permitted.
+`AGENTS.md`, `CLAUDE.md`, and `CONTRIBUTING.md` are acknowledged exceptions for agent and GitHub tooling discoverability.
+This restriction applies only to new Markdown files; existing root Markdown files may remain.
 
 ## Contribution Workflow
 
