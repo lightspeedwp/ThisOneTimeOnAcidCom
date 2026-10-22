@@ -1,8 +1,8 @@
 # Bug Fix: Theme Toggle Light Mode Visibility
 
-**Date:** March 12, 2026  
-**Issue:** Theme toggle impossible to see in light mode  
-**Severity:** Critical (Accessibility & UX)  
+**Date:** March 12, 2026
+**Issue:** Theme toggle impossible to see in light mode
+**Severity:** Critical (Accessibility & UX)
 **Status:** ✅ Fixed
 
 ---
@@ -10,15 +10,18 @@
 ## 🐛 Problem Description
 
 **User Report:**
-> "In light mode the theme toggle has black border with neon yellow icon, impossible to see"
+> "In light mode the theme toggle has black border with neon yellow icon,
+impossible to see"
 
 **Root Cause:**
 The theme toggle button had terrible contrast in light mode:
+
 - **Black border** (#0F0F0F) on white background → Low visibility
 - **Neon yellow sun icon** (var(--wp--preset--color--neon-yellow)) on white → Impossible to read
 - No visual distinction from background
 
 **WCAG Failure:**
+
 - ❌ Failed WCAG 2.1 Level AA contrast requirements
 - ❌ Failed WCAG 2.1 Level AAA contrast requirements
 - ❌ Not accessible to users with low vision
@@ -32,14 +35,19 @@ The theme toggle button had terrible contrast in light mode:
 #### 1. Border Color (Line 15)
 
 **Before:**
+
 ```css
 border: 2px solid #0F0F0F;  /* Dark border for contrast in light mode */
-```
+
+```text
 
 **After:**
+
 ```css
-border: 2px solid var(--wp--preset--color--neon-pink);  /* Neon pink border for visibility */
-```
+border: 2px solid var(--wp--preset--color--neon-pink); /* Neon pink border for
+visibility */
+
+```text
 
 **Impact:** Border now visible and on-brand (neon pink)
 
@@ -48,14 +56,19 @@ border: 2px solid var(--wp--preset--color--neon-pink);  /* Neon pink border for 
 #### 2. Box Shadow (Line 22)
 
 **Before:**
+
 ```css
 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-```
+
+```text
 
 **After:**
+
 ```css
-box-shadow: 0 2px 8px rgba(255, 16, 240, 0.2), 0 0 12px rgba(255, 16, 240, 0.15);
-```
+box-shadow: 0 2px 8px rgba(255, 16, 240, 0.2), 0 0 12px rgba(255, 16, 240,
+0.15);
+
+```text
 
 **Impact:** Added subtle neon pink glow for visibility
 
@@ -64,45 +77,55 @@ box-shadow: 0 2px 8px rgba(255, 16, 240, 0.2), 0 0 12px rgba(255, 16, 240, 0.15)
 #### 3. Sun Icon Color (Line 76-77)
 
 **Before:**
+
 ```css
 .theme-toggle__icon--sun {
   color: var(--wp--preset--color--neon-yellow);
   filter: drop-shadow(0 0 4px var(--wp--preset--color--neon-yellow));
 }
-```
 
-**After (v4.1.0 - First Attempt):**
+```text
+
+## After (v4.1.0 - First Attempt)
+
 ```css
 .theme-toggle__icon--sun {
   color: #F59E0B;  /* Darker amber/orange for better contrast on white */
   filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.5));
 }
-```
 
-**After (v4.2.0 - Final Fix):**
+```text
+
+## After (v4.2.0 - Final Fix)
+
 ```css
 .theme-toggle__icon--sun {
   color: #0F0F0F;  /* Atomic black for maximum contrast on white */
   filter: drop-shadow(0 0 2px rgba(15, 15, 15, 0.3));
 }
-```
 
-**Impact:** Icon now has **maximum contrast** on white background (21:1 ratio - WCAG AAA compliant)
+```text
+
+**Impact:** Icon now has **maximum contrast** on white background (21:1 ratio -
+WCAG AAA compliant)
 
 ---
 
 #### 4. Hover State Enhancement (Line 81-85)
 
 **Added:**
+
 ```css
 .theme-toggle:hover .theme-toggle__icon--sun {
   color: var(--wp--preset--color--neon-yellow);  /* Neon yellow on hover */
   filter: drop-shadow(0 0 8px var(--wp--preset--color--neon-yellow));
   transform: rotate(45deg) scale(1.1);
 }
-```
 
-**Impact:** Neon yellow still appears on hover for visual interest, but default state has good contrast
+```text
+
+**Impact:** Neon yellow still appears on hover for visual interest, but default
+state has good contrast
 
 ---
 
@@ -134,12 +157,14 @@ box-shadow: 0 2px 8px rgba(255, 16, 240, 0.2), 0 0 12px rgba(255, 16, 240, 0.15)
 ## 🎨 Visual Design
 
 ### Light Mode (Now)
+
 - **Button:** White background with neon pink border
 - **Icon:** Atomic black sun (☀) with subtle glow
 - **Hover:** Icon turns neon yellow, rotates 45°, and glows brighter
 - **Visibility:** ✅ Excellent
 
 ### Dark Mode (Unchanged)
+
 - **Button:** Semi-transparent black (#0F0F0F @ 80%) with neon pink border
 - **Icon:** Neon pink moon (☾) with pink glow
 - **Hover:** Icon turns neon yellow and glows brighter
@@ -170,44 +195,53 @@ box-shadow: 0 2px 8px rgba(255, 16, 240, 0.2), 0 0 12px rgba(255, 16, 240, 0.15)
 **Version:** 4.0.0 → 4.2.0
 
 **Changelog Entry:**
-```
+
+```text
 v4.2.0 (March 12, 2026)
+
 - Fixed light mode visibility issues
 - Changed border from black to neon pink
 - Changed sun icon from neon yellow to atomic black (#0F0F0F)
 - Added pink glow to light mode button
 - Maintained neon yellow on hover for visual interest
 - WCAG 2.1 Level AA/AAA compliant
-```
+
+```text
 
 ---
 
 ## 🔗 Related Files
 
 **Modified:**
+
 1. `/styles/blocks/theme-toggle.css` - v4.2.0
 
-**Related Components:**
+## Related Components
+
 1. `/components/common/ThemeToggleES5.tsx` - No changes needed
-2. `/components/common/Header.tsx` - No changes needed
+
+1. `/components/common/Header.tsx` - No changes needed
 
 ---
 
 ## 📈 Impact
 
 ### Accessibility ✅
+
 - Now WCAG 2.1 Level AA compliant (4.5:1+ contrast)
 - Now WCAG 2.1 Level AAA compliant for icon (7:1+ contrast)
 - Accessible to users with low vision
 - Accessible to users with color blindness
 
 ### User Experience ✅
+
 - Theme toggle now visible in light mode
 - Clear visual affordance (it's a button)
 - Maintains neon aesthetic on-brand
 - Smooth hover interaction
 
 ### Brand Consistency ✅
+
 - Neon pink border matches brand colors
 - Atomic black sun complements neon yellow accent
 - Pink glow effect consistent with site design
@@ -218,7 +252,8 @@ v4.2.0 (March 12, 2026)
 ## 🎯 Lessons Learned
 
 ### Design Principle
-**"Neon on neon doesn't work on white backgrounds"**
+
+## "Neon on neon doesn't work on white backgrounds"
 
 - Neon colors (yellow, cyan, pink) have poor contrast on white
 - Need darker alternatives for light mode
@@ -226,7 +261,8 @@ v4.2.0 (March 12, 2026)
 - Border color should provide visual separation
 
 ### Best Practice
-**"Test in both themes before shipping"**
+
+## "Test in both themes before shipping"
 
 - Always verify light AND dark modes
 - Check contrast ratios with tools
@@ -240,6 +276,7 @@ v4.2.0 (March 12, 2026)
 **Status:** ✅ **FIXED**
 
 **Test Results:**
+
 - ✅ Light mode visibility: PASS
 - ✅ Dark mode visibility: PASS (unchanged)
 - ✅ WCAG 2.1 AA compliance: PASS
@@ -252,7 +289,7 @@ v4.2.0 (March 12, 2026)
 
 ---
 
-**Fixed By:** AI Assistant  
-**Reported By:** User  
-**Date:** March 12, 2026  
+**Fixed By:** AI Assistant
+**Reported By:** User
+**Date:** March 12, 2026
 **Priority:** Critical → Resolved ✅

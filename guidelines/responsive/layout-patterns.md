@@ -1,22 +1,29 @@
 # Responsive Layout Patterns
 
-**Version:** 5.0.0  
-**Last Updated:** January 2025  
+**Version:** 5.0.0
+**Last Updated:** January 2025
 **WordPress Block Theme Compatible:** ✅
 
-Comprehensive responsive layout patterns showing how grid, flexbox, and container systems adapt across mobile, tablet, and desktop breakpoints.
+Comprehensive responsive layout patterns showing how grid, flexbox, and
+container systems adapt across mobile, tablet, and desktop breakpoints.
 
 ---
 
 ## 📋 Table of Contents
 
 1. [Grid Patterns](#grid-patterns)
-2. [Flexbox Patterns](#flexbox-patterns)
-3. [Container Patterns](#container-patterns)
-4. [Hero Section Layouts](#hero-section-layouts)
-5. [Gallery Layouts](#gallery-layouts)
-6. [Blog/Content Layouts](#blogcontent-layouts)
-7. [Sidebar Layouts](#sidebar-layouts)
+
+1. [Flexbox Patterns](#flexbox-patterns)
+
+1. [Container Patterns](#container-patterns)
+
+1. [Hero Section Layouts](#hero-section-layouts)
+
+1. [Gallery Layouts](#gallery-layouts)
+
+1. [Blog/Content Layouts](#blogcontent-layouts)
+
+1. [Sidebar Layouts](#sidebar-layouts)
 
 ---
 
@@ -61,11 +68,12 @@ Progressive grid that scales from 1 column → 2 columns → 3 columns:
     gap: var(--wp--preset--spacing--50);
   }
 }
-```
 
-**Visual Progression:**
+```text
 
-```
+## Visual Progression
+
+```text
 Mobile (< 768px):
 ┌─────────────────┐
 │   Portfolio 1   │
@@ -88,7 +96,8 @@ Desktop (1024px+):
 ├─────┼─────┼─────┤
 │ P 4 │ P 5 │ P 6 │
 └─────┴─────┴─────┘
-```
+
+```text
 
 ---
 
@@ -120,9 +129,11 @@ Grid that automatically fits items based on minimum width:
     padding: var(--wp--preset--spacing--60);
   }
 }
-```
+
+```text
 
 **Benefits:**
+
 - Automatically adjusts column count based on available space
 - No explicit breakpoints for column changes
 - Consistent minimum item width
@@ -150,7 +161,7 @@ Staggered grid layout (like Pinterest):
     grid-auto-flow: dense;
     gap: var(--wp--preset--spacing--30);
   }
-  
+
   .masonry-grid > * {
     /* Items span based on content height */
     grid-row: span var(--row-span, 10);
@@ -164,7 +175,8 @@ Staggered grid layout (like Pinterest):
     gap: var(--wp--preset--spacing--40);
   }
 }
-```
+
+```text
 
 **Alternative using JavaScript library (react-responsive-masonry):**
 
@@ -180,7 +192,8 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
     ))}
   </Masonry>
 </ResponsiveMasonry>
-```
+
+```text
 
 ---
 
@@ -217,7 +230,8 @@ Converts from vertical stack to horizontal row:
     padding: var(--wp--preset--spacing--60);
   }
 }
-```
+
+```text
 
 ---
 
@@ -246,7 +260,8 @@ Items wrap to new rows as needed:
     gap: var(--wp--preset--spacing--30);
   }
 }
-```
+
+```text
 
 ---
 
@@ -277,18 +292,19 @@ Main content with fixed-width sidebar:
     flex-direction: row;
     gap: var(--wp--preset--spacing--60);
   }
-  
+
   .blog-main {
     flex: 1;
     min-width: 0; /* Prevent flex item overflow */
   }
-  
+
   .blog-sidebar {
     width: 320px;
     flex-shrink: 0;
   }
 }
-```
+
+```text
 
 ---
 
@@ -328,7 +344,8 @@ Main content with fixed-width sidebar:
     padding-inline: var(--wp--preset--spacing--80);
   }
 }
-```
+
+```text
 
 ---
 
@@ -362,20 +379,23 @@ Content that breaks out of main container:
     padding-inline: var(--wp--preset--spacing--60);
   }
 }
-```
+
+```text
 
 **Usage:**
+
 ```html
 <div class="main-container">
   <p>Regular contained content</p>
-  
+
   <div class="breakout-full">
     <img src="full-width-image.jpg" alt="Full width" />
   </div>
-  
+
   <p>Back to contained content</p>
 </div>
-```
+
+```text
 
 ---
 
@@ -404,7 +424,7 @@ Content that breaks out of main container:
     padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
     gap: var(--wp--preset--spacing--40);
   }
-  
+
   .hero-centered .hero-content {
     max-width: 800px;
   }
@@ -415,12 +435,13 @@ Content that breaks out of main container:
     padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--60);
     gap: var(--wp--preset--spacing--50);
   }
-  
+
   .hero-centered .hero-content {
     max-width: 1000px;
   }
 }
-```
+
+```text
 
 ---
 
@@ -459,18 +480,19 @@ Content that breaks out of main container:
     gap: var(--wp--preset--spacing--60);
     padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--60);
   }
-  
+
   .hero-split .hero-text {
     order: 1; /* Text first on desktop */
     flex: 1;
   }
-  
+
   .hero-split .hero-media {
     order: 2; /* Image second on desktop */
     flex: 1;
   }
 }
-```
+
+```text
 
 ---
 
@@ -497,7 +519,7 @@ Content that breaks out of main container:
   .hero-fullscreen {
     padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
   }
-  
+
   .hero-fullscreen .hero-content {
     max-width: 800px;
   }
@@ -508,7 +530,8 @@ Content that breaks out of main container:
     max-width: 1000px;
   }
 }
-```
+
+```text
 
 ---
 
@@ -548,7 +571,8 @@ Content that breaks out of main container:
     gap: var(--wp--preset--spacing--40);
   }
 }
-```
+
+```text
 
 ---
 
@@ -572,7 +596,7 @@ Content that breaks out of main container:
     grid-template-columns: repeat(2, 1fr);
     gap: var(--wp--preset--spacing--30);
   }
-  
+
   .gallery-featured .featured-item {
     grid-row: span 2;
   }
@@ -584,17 +608,18 @@ Content that breaks out of main container:
     grid-template-columns: repeat(3, 1fr);
     gap: var(--wp--preset--spacing--40);
   }
-  
+
   .gallery-featured .featured-item {
     grid-column: span 2;
     grid-row: span 2;
   }
 }
-```
+
+```text
 
 **Visual Layout:**
 
-```
+```text
 Desktop (1024px+):
 ┌─────────────┬─────┐
 │             │  2  │
@@ -603,7 +628,8 @@ Desktop (1024px+):
 ├──────┬──────┼─────┤
 │  4   │  5   │  6  │
 └──────┴──────┴─────┘
-```
+
+```text
 
 ---
 
@@ -632,13 +658,13 @@ Desktop (1024px+):
     gap: var(--wp--preset--spacing--50);
     padding: var(--wp--preset--spacing--40);
   }
-  
+
   .blog-list .post-item {
     /* Tablet: Image + text side-by-side */
     flex-direction: row;
     gap: var(--wp--preset--spacing--30);
   }
-  
+
   .blog-list .post-image {
     width: 300px;
     flex-shrink: 0;
@@ -650,12 +676,13 @@ Desktop (1024px+):
     gap: var(--wp--preset--spacing--60);
     padding: var(--wp--preset--spacing--60);
   }
-  
+
   .blog-list .post-image {
     width: 400px;
   }
 }
-```
+
+```text
 
 ---
 
@@ -688,7 +715,8 @@ Desktop (1024px+):
     padding: var(--wp--preset--spacing--60);
   }
 }
-```
+
+```text
 
 ---
 
@@ -719,12 +747,12 @@ Desktop (1024px+):
     flex-direction: row;
     gap: var(--wp--preset--spacing--60);
   }
-  
+
   .content-main {
     flex: 1;
     min-width: 0;
   }
-  
+
   .content-sidebar {
     width: 320px;
     flex-shrink: 0;
@@ -736,7 +764,8 @@ Desktop (1024px+):
     width: 400px;
   }
 }
-```
+
+```text
 
 ---
 
@@ -765,7 +794,8 @@ Desktop (1024px+):
     grid-template-columns: 300px 1fr 300px;
   }
 }
-```
+
+```text
 
 ---
 
@@ -795,7 +825,8 @@ Desktop (1024px+):
     padding: var(--wp--preset--spacing--40);
   }
 }
-```
+
+```text
 
 ---
 
@@ -816,7 +847,8 @@ Desktop (1024px+):
     align-self: start;
   }
 }
-```
+
+```text
 
 ---
 
@@ -825,72 +857,87 @@ Desktop (1024px+):
 ### DO ✅
 
 1. **Use mobile-first approach**
+
    ```css
    .component { /* Mobile styles */ }
    @media (min-width: 768px) { /* Tablet */ }
    @media (min-width: 1024px) { /* Desktop */ }
-   ```
 
-2. **Use WordPress spacing variables**
+```text
+
+1. **Use WordPress spacing variables**
+
    ```css
    gap: var(--wp--preset--spacing--40);
    padding: var(--wp--preset--spacing--20);
-   ```
 
-3. **Maintain consistent gaps/gutters**
+```text
+
+1. **Maintain consistent gaps/gutters**
+
    ```css
    /* Mobile: 20px gap */
    gap: var(--wp--preset--spacing--20);
-   
+
    /* Desktop: 40px gap */
    @media (min-width: 1024px) {
      gap: var(--wp--preset--spacing--40);
    }
-   ```
 
-4. **Use semantic HTML**
+```text
+
+1. **Use semantic HTML**
+
    ```html
    <section class="hero-section">
      <article class="blog-post">
        <aside class="sidebar">
-   ```
+
+```text
 
 ### DON'T ❌
 
 1. **Don't use fixed widths**
+
    ```css
    /* ❌ BAD */
    .container { width: 1200px; }
-   
+
    /* ✅ GOOD */
    .container { max-width: 1280px; width: 100%; }
-   ```
 
-2. **Don't use arbitrary breakpoints**
+```text
+
+1. **Don't use arbitrary breakpoints**
+
    ```css
    /* ❌ BAD */
    @media (min-width: 642px) { }
-   
+
    /* ✅ GOOD */
    @media (min-width: 768px) { }
-   ```
 
-3. **Don't forget min-width: 0 for flex items**
+```text
+
+1. **Don't forget min-width: 0 for flex items**
+
    ```css
    /* ❌ BAD - Text overflow */
    .flex-item { flex: 1; }
-   
+
    /* ✅ GOOD - Prevents overflow */
    .flex-item { flex: 1; min-width: 0; }
-   ```
+
+```text
 
 ---
 
-**Version:** 5.0.0 (WordPress Layout Patterns)  
-**Last Updated:** January 2025  
+**Version:** 5.0.0 (WordPress Layout Patterns)
+**Last Updated:** January 2025
 **Maintained By:** Ash Shaw Portfolio Team
 
-**Related Documentation:**
+## Related Documentation
+
 - [Breakpoints System](./breakpoints-system.md) - Complete breakpoint reference
 - [Spacing Adjustments](./spacing-adjustments.md) - Responsive spacing patterns
 - [Typography Scaling](./typography-scaling.md) - Text scaling across devices

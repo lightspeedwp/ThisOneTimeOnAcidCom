@@ -1,16 +1,19 @@
 # Animation Quick Reference
 
-**Version:** 1.0.0  
-**Created:** March 12, 2026  
+**Version:** 1.0.0
+**Created:** March 12, 2026
 **Updated:** March 12, 2026
 
 ---
 
 ## 📖 Overview
 
-Quick reference guide for implementing animations on the Nova News website. This document provides instant access to the most commonly used animation patterns and components from the comprehensive animation system.
+Quick reference guide for implementing animations on the Nova News website. This
+document provides instant access to the most commonly used animation patterns
+and components from the comprehensive animation system.
 
-**Full Documentation:**
+## Full Documentation
+
 - **[Animation Guidelines](/guidelines/design-tokens/animations.md)** - Complete animation system
 - **[Audit Report](/reports/animation-movement-audit/audit-report.md)** - Detailed analysis and recommendations
 - **[Task List](/tasks/animation-movement-tasks.md)** - Implementation roadmap (65 tasks)
@@ -20,6 +23,7 @@ Quick reference guide for implementing animations on the Nova News website. This
 ## 🎯 80s Neon CLI Theme - 5 Core Patterns
 
 ### 1. Terminal Boot Sequence
+
 **Use for:** Page loads, section reveals
 
 ```css
@@ -37,24 +41,28 @@ Quick reference guide for implementing animations on the Nova News website. This
 .hero--animated {
   animation: terminalBoot 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 <section className="hero section hero--animated">
   {/* Content */}
 </section>
-```
+
+```text
 
 ---
 
 ### 2. Neon Sign Flicker
+
 **Use for:** CTAs, "LIVE NOW" indicators, attention moments
 
 ```css
 @keyframes neonFlicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    text-shadow: 
+    text-shadow:
       0 0 10px var(--wp--preset--color--neon-pink),
       0 0 20px var(--wp--preset--color--neon-pink),
       0 0 30px var(--wp--preset--color--neon-pink);
@@ -69,32 +77,36 @@ Quick reference guide for implementing animations on the Nova News website. This
 .neon-flicker {
   animation: neonFlicker 4s linear infinite;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 <span className="badge neon-flicker">LIVE NOW</span>
-```
+
+```text
 
 ---
 
 ### 3. Digital Glitch
+
 **Use for:** Hover effects, playful interactions, error pages
 
 ```css
 @keyframes rgbSplit {
   0%, 100% {
-    text-shadow: 
+    text-shadow:
       -2px 0 0 rgba(255, 0, 0, 0.7),
       2px 0 0 rgba(0, 255, 255, 0.7);
   }
   33% {
-    text-shadow: 
+    text-shadow:
       2px 1px 0 rgba(255, 0, 0, 0.7),
       -2px -1px 0 rgba(0, 255, 255, 0.7);
   }
   66% {
-    text-shadow: 
+    text-shadow:
       -1px -1px 0 rgba(255, 0, 0, 0.7),
       1px 1px 0 rgba(0, 255, 255, 0.7);
   }
@@ -103,16 +115,20 @@ Quick reference guide for implementing animations on the Nova News website. This
 .glitch-on-hover:hover {
   animation: rgbSplit 0.3s ease-in-out;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 <h2 className="heading glitch-on-hover">Hover me</h2>
-```
+
+```text
 
 ---
 
 ### 4. Holographic Reveal
+
 **Use for:** Content entrance on scroll, special moments
 
 ```css
@@ -135,45 +151,51 @@ Quick reference guide for implementing animations on the Nova News website. This
 .holographic-reveal.in-view {
   animation: holographicReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 <section className="section holographic-reveal">
   {/* Content */}
 </section>
-```
+
+```text
 
 ---
 
 ### 5. Cursor Trail
+
 **Use for:** Desktop interactivity (auto-disabled on mobile)
 
 ```tsx
 // Desktop cursor trail
 React.useEffect(function() {
   if (window.innerWidth < 1024) return;
-  
+
   function handleMouseMove(e) {
     var trail = document.createElement('div');
     trail.className = 'cursor-trail-particle';
     trail.style.left = e.clientX + 'px';
     trail.style.top = e.clientY + 'px';
     document.body.appendChild(trail);
-    
+
     setTimeout(function() {
       if (trail.parentNode) trail.parentNode.removeChild(trail);
     }, 600);
   }
-  
+
   document.addEventListener('mousemove', handleMouseMove);
   return function() {
     document.removeEventListener('mousemove', handleMouseMove);
   };
 }, []);
-```
+
+```text
 
 **CSS:**
+
 ```css
 @keyframes cursorTrailFade {
   0% {
@@ -197,13 +219,15 @@ React.useEffect(function() {
   z-index: 9999;
   animation: cursorTrailFade 0.6s ease-out forwards;
 }
-```
+
+```text
 
 ---
 
 ## 🧩 Reusable Components (Coming in Phase 3)
 
 ### TypewriterText
+
 **Purpose:** Terminal-style character-by-character text reveal
 
 ```tsx
@@ -215,11 +239,13 @@ import { TypewriterText } from '@/components/ui/TypewriterText';
   delay={500}
   cursor={true}
 />
-```
+
+```text
 
 ---
 
 ### NeonPulseWrapper
+
 **Purpose:** Configurable neon glow pulse effect
 
 ```tsx
@@ -228,11 +254,13 @@ import { NeonPulseWrapper } from '@/components/ui/NeonPulseWrapper';
 <NeonPulseWrapper color="pink" intensity="high" speed={3}>
   <button className="button">Click me</button>
 </NeonPulseWrapper>
-```
+
+```text
 
 ---
 
 ### ScrollReveal
+
 **Purpose:** Viewport-triggered animations
 
 ```tsx
@@ -241,11 +269,13 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal';
 <ScrollReveal animation="slide-up" delay={200} threshold={0.2}>
   <div className="feature-card">Content</div>
 </ScrollReveal>
-```
+
+```text
 
 ---
 
 ### GlitchHover
+
 **Purpose:** RGB split glitch effect on interaction
 
 ```tsx
@@ -254,11 +284,13 @@ import { GlitchHover } from '@/components/ui/GlitchHover';
 <GlitchHover intensity={3} duration={400} trigger="hover">
   <h2>Glitch on Hover</h2>
 </GlitchHover>
-```
+
+```text
 
 ---
 
 ### ScanLineOverlay
+
 **Purpose:** Retro scan line effect across screen
 
 ```tsx
@@ -270,7 +302,8 @@ import { ScanLineOverlay } from '@/components/ui/ScanLineOverlay';
   color="var(--wp--preset--color--neon-pink)"
   height={15}
 />
-```
+
+```text
 
 ---
 
@@ -284,22 +317,24 @@ React.createElement(
   { className: "hero section hero--animated" },
   React.createElement(
     "div",
-    { className: "section__container hero__grid" },
+    { className: "section_*container hero*_grid" },
     React.createElement(
       "div",
-      { className: "hero__content hero__content--reveal" },
-      React.createElement("h1", { 
+      { className: "hero_*content hero*_content--reveal" },
+      React.createElement("h1", {
         className: "heading-hero text-neon-pink typewriter-text"
       }, "This one time on acid..."),
-      React.createElement("div", { 
-        className: "hero__visual float-gentle" 
+      React.createElement("div", {
+        className: "hero__visual float-gentle"
       }, /* Book cover */)
     )
   )
 )
-```
+
+```text
 
 **CSS needed:**
+
 - `.hero--animated` - Terminal boot sequence
 - `.typewriter-text` - Character reveal
 - `.float-gentle` - Gentle floating
@@ -312,9 +347,11 @@ React.createElement(
 <button className="button button--primary button--neon-pulse">
   Unlock the Draft
 </button>
-```
+
+```text
 
 **CSS:**
+
 ```css
 @keyframes neonPulseCTA {
   0%, 100% {
@@ -332,7 +369,8 @@ React.createElement(
 .button--neon-pulse:hover {
   animation: neonPulseCTA 1s ease-in-out infinite;
 }
-```
+
+```text
 
 ---
 
@@ -341,12 +379,13 @@ React.createElement(
 ```css
 .form__input:focus {
   border-color: var(--wp--preset--color--neon-pink);
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(255, 16, 240, 0.2),
     0 0 20px rgba(255, 16, 240, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-```
+
+```text
 
 ---
 
@@ -359,11 +398,12 @@ React.createElement(
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.15),
     0 0 20px rgba(255, 16, 240, 0.2);
 }
-```
+
+```text
 
 ---
 
@@ -382,19 +422,21 @@ React.useEffect(function() {
     },
     { threshold: 0.1 }
   );
-  
+
   var cards = document.querySelectorAll('.feature-card');
   cards.forEach(function(card) {
     observer.observe(card);
   });
-  
+
   return function() {
     observer.disconnect();
   };
 }, []);
-```
+
+```text
 
 **CSS:**
+
 ```css
 @keyframes cardReveal {
   from {
@@ -418,13 +460,14 @@ React.useEffect(function() {
 .feature-card:nth-child(1).in-view { animation-delay: 0.1s; }
 .feature-card:nth-child(2).in-view { animation-delay: 0.2s; }
 .feature-card:nth-child(3).in-view { animation-delay: 0.3s; }
-```
+
+```text
 
 ---
 
 ## ♿ Accessibility - Prefers Reduced Motion
 
-**ALWAYS include this for new animations:**
+## ALWAYS include this for new animations
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -435,17 +478,18 @@ React.useEffect(function() {
   .neon-flicker {
     animation: none !important;
   }
-  
+
   .typewriter-text {
     width: auto;
     border-right: none;
   }
-  
+
   .feature-card {
     opacity: 1;
   }
 }
-```
+
+```text
 
 ---
 
@@ -458,12 +502,14 @@ React.useEffect(function() {
 | Utility Pages | 3 | 0 | 3 |
 | Mobile (all) | 3 | 1 | 2 |
 
-**GPU-Accelerated Properties (ALWAYS USE):**
+## GPU-Accelerated Properties (ALWAYS USE)
+
 - ✅ `transform` (translate, scale, rotate)
 - ✅ `opacity`
 - ✅ `filter` (use sparingly)
 
-**CPU-Intensive Properties (NEVER ANIMATE):**
+## CPU-Intensive Properties (NEVER ANIMATE)
+
 - ❌ `width`, `height`
 - ❌ `top`, `left`, `right`, `bottom`
 - ❌ `margin`, `padding`
@@ -473,27 +519,42 @@ React.useEffect(function() {
 ## 🚀 Implementation Priority
 
 ### Phase 1 (Critical) - Week 1
+
 1. Neon pulse CTA on all buttons
-2. Hero section animations (homepage)
-3. Form input focus glow
-4. Success/error animations
+
+1. Hero section animations (homepage)
+
+1. Form input focus glow
+
+1. Success/error animations
 
 ### Phase 2 (High) - Week 2
+
 1. The Book page animations
-2. Draft viewer animations
-3. About page timeline
-4. Waitlist success animation
+
+1. Draft viewer animations
+
+1. About page timeline
+
+1. Waitlist success animation
 
 ### Phase 3 (Medium) - Week 3
+
 1. Build 5 reusable components
-2. Document components
-3. Add to style guide
+
+1. Document components
+
+1. Add to style guide
 
 ### Phase 4 (Low) - Week 4
+
 1. Cursor trail (desktop)
-2. Terminal boot sequence
-3. Easter eggs
-4. Performance optimization
+
+1. Terminal boot sequence
+
+1. Easter eggs
+
+1. Performance optimization
 
 ---
 
@@ -507,6 +568,6 @@ React.useEffect(function() {
 
 ---
 
-**Last Updated:** March 12, 2026  
-**Version:** 1.0.0  
+**Last Updated:** March 12, 2026
+**Version:** 1.0.0
 **Maintained by:** Nova News Development Team

@@ -48,7 +48,8 @@ Highest impact: these render on every page.
 - [x] **P2-T10** `PWAInstallPrompt.tsx` — X → X, Download → DownloadSimple ✅
 - [x] **P2-T11** `PortfolioMegaMenu.tsx` — ArrowRight → ArrowRight ✅
 
-**Per file:** Change import from `'../../lib/icons'` to `'@phosphor-icons/react'`, update icon names, add `weight="regular"` prop.
+**Per file:** Change import from `'../../lib/icons'` to
+`'@phosphor-icons/react'`, update icon names, add `weight="regular"` prop.
 **Effort:** ~15 min per file, ~3 hours total for tier
 **Risk:** Medium — affects all pages, needs visual verification
 
@@ -81,34 +82,41 @@ Shared building blocks used across multiple pages.
 
 Individual pages — can be migrated in batches by area.
 
-**Batch 3a — About pages (8 files):**
+## Batch 3a — About pages (8 files)
+
 - [x] **P2-T29** `AboutPage.tsx` — Palette, Blend → Drop, Layers → Stack, Lightbulb, Sparkles → Sparkle, ArrowRight. Removed legacy `lucide-react` import. ✅
 - [x] **P2-T30** `BookPage.tsx` (BookOpen), `EbookPage.tsx` (X, SlidersHorizontal), `HiddenAboutPage.tsx` (13 icons → Phosphor + getIcon map updated), `PodcastPage.tsx` (Mic → Microphone, Headphones), `SixCatsPage.tsx` (12 icons → Phosphor incl. CaretDown/Up, Stack, ArrowsClockwise, ArrowSquareOut), `TravelsPage.tsx` (MapPin) ✅
 - [x] **P2-T31** `ebook/EbookDrawer.tsx` (X, CaretDown), `ebook/EbookReaderNav.tsx` (CaretLeft/Right, List, ArrowsOut, ArrowsIn, SlidersHorizontal) ✅
 
-**Batch 3b — Blog pages (4 files):**
+## Batch 3b — Blog pages (4 files)
+
 - [x] **P2-T32** `BlogPage.tsx`, `BlogPostPage.tsx` (ShareNetwork, ArrowSquareOut), `BlogCategoryPage.tsx`, `BlogTagPage.tsx` ✅
 
-**Batch 3c — Dev tools pages (14 files):**
+## Batch 3c — Dev tools pages (14 files)
+
 - [x] **P2-T33** `DevToolsPage.tsx` — 20 icons migrated, TOOL_ICONS map updated with Lucide→Phosphor aliases (Activity→Heartbeat, Zap→Lightning, etc.) ✅
 - [ ] **P2-T34** `IconLibraryPage.tsx` — **deferred to Tier 4** (intentionally uses Lucide ICON_MAP for display; will merge with PhosphorIconsPage)
 - [x] **P2-T35** Remaining 12 dev tools pages: AnimationSpecimenPage (Lightning), ButtonSpecimenPage (Cursor, ShareNetwork, DownloadSimple, Trash), CardSpecimenPage (SquaresFour, Microphone), DeploymentReadinessPage (CheckCircle, Warning, XCircle, Heartbeat, MagnifyingGlass), DesignTokensRefPage (CaretRight), IntegrationTesterPage (CheckCircle, XCircle, Trash), PerformanceTesterPage (ArrowsClockwise, Trash, TextAa, Stack, CaretDown), RadiusSpecimenPage (Circle), ShadowSpecimenPage (Cloud), SpacingSpecimenPage (Ruler), TypographySpecimenPage (TextAa), AccessibilityTesterPage (Warning, CheckCircle, XCircle, ArrowsClockwise, Trash, CaretDown) ✅
 
-**Batch 3d — Events, podcasts, portfolio, videos (16 files):**
+## Batch 3d — Events, podcasts, portfolio, videos (16 files)
+
 - [x] **P2-T36** Events: `EventsPage`, `EventDetailPage` (ArrowSquareOut), `EventCategoryPage`, `EventTagPage` — all use MusicNotes ✅
 - [x] **P2-T37** Podcasts: `PodcastsPage`, `PodcastDetailPage` (ShareNetwork), `PodcastCategoryPage`, `PodcastTagPage` — all use Microphone, PlayCircle ✅
 - [x] **P2-T38** Portfolio: `PortfolioDetailPage` (ShareNetwork), `PortfolioCategoryPage` (Stack), `PortfolioTagPage` (Stack) ✅
 - [x] **P2-T39** Videos: `VideosPage`, `VideoDetailPage` (ShareNetwork), `VideoCategoryPage`, `VideoTagPage`, `VideoModal` ✅
 
-**Batch 3e — Other pages (7+ files):**
-- [x] **P2-T40** `NotFoundPage.tsx` (House, ArrowLeft), `SitemapPage.tsx` (30+ icons, ICON_MAP + ABOUT_ICONS + PAGE_ICONS fully migrated), `StickersPage.tsx` (CaretLeft/Right, MagnifyingGlass, Shuffle), `StyleGuidePage.tsx` (40+ icons, ICON_MAP fully migrated, LucideIcon type → PhosphorIcon), `FaqAggregatePage.tsx` (MagnifyingGlass, Plus, Minus, Question), `FeedbackPage.tsx` (MagnifyingGlass, Star, MapPin, Calendar, Chat), `GearPage.tsx` (PaintBrush, Lightning, CaretRight) ✅
+## Batch 3e — Other pages (7+ files)
 
-**Also migrated (discovered during Tier 3 sweep):**
+- [x] **P2-T40** `NotFoundPage.tsx` (House, ArrowLeft), `SitemapPage.tsx` (30+ icons, ICON*MAP + ABOUT*ICONS + PAGE*ICONS fully migrated), `StickersPage.tsx` (CaretLeft/Right, MagnifyingGlass, Shuffle), `StyleGuidePage.tsx` (40+ icons, ICON*MAP fully migrated, LucideIcon type → PhosphorIcon), `FaqAggregatePage.tsx` (MagnifyingGlass, Plus, Minus, Question), `FeedbackPage.tsx` (MagnifyingGlass, Star, MapPin, Calendar, Chat), `GearPage.tsx` (PaintBrush, Lightning, CaretRight) ✅
+
+## Also migrated (discovered during Tier 3 sweep)
+
 - [x] **P2-T40b** `PressKitPage.tsx` (DownloadSimple, Envelope, Camera, FileText, Copy, Check) ✅
 - [x] **P2-T40c** `SearchResultsPage.tsx` (MagnifyingGlass, Microphone, Stack, Question) ✅
 - [x] **P2-T40d** 6 section components: `BlogPreviewSection.tsx`, `FaqSection.tsx`, `FestivalCountdown.tsx` (Sparkle), `UVMakeupSection.tsx` (CaretLeft/Right), `WhySection.tsx` (CaretLeft/Right), `PortfolioFeedbackSection.tsx` (Chat, Star) ✅
 
-**Deferred to Tier 4:**
+## Deferred to Tier 4
+
 - `PhosphorIconsPage.tsx` — intentionally imports Lucide for side-by-side comparison display
 - `IconLibraryPage.tsx` — intentionally imports Lucide for searchable icon grid; will merge with PhosphorIconsPage
 
@@ -135,13 +143,15 @@ Only after ALL Tier 1-3 migrations are verified.
 - [x] **P2-T54** Migrate `/data/mock/ui/navigation.ts` — `LucideIcon` type → Phosphor `Icon` type; `Home` → `House`, `Mail` → `Envelope` ✅
 - [x] **P2-T55** Migrate `PhosphorIconsPage.tsx` — rewritten v2.0.0 to render all 92 Phosphor icons natively; Lucide comparison panel removed ✅
 
-**Remaining Lucide dependencies: ZERO**
+## Remaining Lucide dependencies: ZERO
+
 - ✅ Zero `lucide-react` imports across all `.ts`/`.tsx` files
 - ✅ Zero `LucideIcon` type references across all `.ts`/`.tsx` files
 - ✅ `/lib/` directory contains only `router.tsx`
 - ✅ `lucide-react` removed from `package.json` dependencies (March 4, 2026)
 
-**Status:** ✅ **ALL TASKS COMPLETE** — 15/15 Tier 4 tasks done. Full migration verified. Dependency uninstalled.
+**Status:** ✅ **ALL TASKS COMPLETE** — 15/15 Tier 4 tasks done. Full migration
+verified. Dependency uninstalled.
 
 **Effort:** ~3 hours
 **Risk:** Low (post-verification cleanup)
@@ -150,19 +160,22 @@ Only after ALL Tier 1-3 migrations are verified.
 
 ## Verification checkpoints
 
-### After Phase 1:
+### After Phase 1
+
 - [x] Phosphor imports work without bundler errors ✅ Verified March 4
 - [x] PhosphorIconsPage renders correctly at `/dev-tools/phosphor-icons` ✅ Verified March 4
 - [x] All 6 weights display correctly ✅ Verified March 4
 - [x] Existing Lucide icons unchanged — no regressions ✅ N/A — Lucide fully removed
 
-### After each Tier 2 batch:
+### After each Tier 2 batch
+
 - [x] `npm run type-check` — zero errors ✅ Verified March 4
 - [x] `npm run build` — zero errors ✅ Verified March 4
 - [x] Visual spot-check of affected components (light + dark mode) ✅ Code-level audit clean
 - [x] Interactive icons still function (click, hover, focus) ✅ All aria-labels verified
 
-### After Phase 2 complete:
+### After Phase 2 complete
+
 - [x] Full visual regression pass — all 47+ pages ✅ Code-level audit: 65+ files, zero issues (`/reports/phosphor-visual-regression/findings.md`)
 - [x] Light mode + dark mode comparison ✅ No hardcoded hex colors on Phosphor icons; all colours inherited from CSS custom properties
 - [x] Lighthouse accessibility audit — target 100 ✅ All interactive icons have aria-labels, keyboard accessible
@@ -199,4 +212,4 @@ Only after ALL Tier 1-3 migrations are verified.
 
 ---
 
-**End of task list.**
+## End of task list

@@ -1,6 +1,6 @@
 # Header Template Part
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 Site header with logo, navigation, and mobile menu.
@@ -15,5 +15,5 @@ Site header with logo, navigation, and mobile menu.
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

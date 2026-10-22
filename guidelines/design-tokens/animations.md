@@ -1,16 +1,20 @@
 # Animation System
 
-**Version:** 2.0.0  
-**Last Updated:** March 12, 2026  
+**Version:** 2.0.0
+**Last Updated:** March 12, 2026
 **Design System:** Neon vs Atomic Black
 
 ---
 
 ## 🎬 Overview
 
-The Ash Shaw Makeup Portfolio uses a comprehensive animation system with 26 keyframe animations across the application. Animations enhance user experience, provide visual feedback, and create energy that reflects the vibrant makeup artistry brand.
+The Ash Shaw Makeup Portfolio uses a comprehensive animation system with 26
+keyframe animations across the application. Animations enhance user experience,
+provide visual feedback, and create energy that reflects the vibrant makeup
+artistry brand.
 
-**Animation Philosophy:**
+## Animation Philosophy
+
 - **Purposeful:** Every animation serves a function
 - **Performant:** Hardware-accelerated transforms and opacity
 - **Accessible:** Respects `prefers-reduced-motion`
@@ -23,7 +27,8 @@ The Ash Shaw Makeup Portfolio uses a comprehensive animation system with 26 keyf
 
 ### When to Use Animation
 
-**✅ DO use animation for:**
+## ✅ DO use animation for
+
 - **User feedback** - Button clicks, form submissions, loading states
 - **Attention direction** - Scroll indicators, CTAs, important announcements
 - **Content revelation** - Page load sequences, section reveals on scroll
@@ -32,7 +37,8 @@ The Ash Shaw Makeup Portfolio uses a comprehensive animation system with 26 keyf
 - **Delight moments** - Easter eggs, playful micro-interactions
 - **Brand expression** - Neon glow effects, gradient shifts, pulsing accents
 
-**❌ DON'T use animation for:**
+## ❌ DON'T use animation for
+
 - **Pure decoration** - Animation without purpose creates noise
 - **Content that needs immediate attention** - Error messages, warnings
 - **Frequently repeated actions** - Basic navigation, repeated form fields
@@ -42,6 +48,7 @@ The Ash Shaw Makeup Portfolio uses a comprehensive animation system with 26 keyf
 ### Animation Hierarchy
 
 **Level 1: Subtle (0.15-0.3s) - High Frequency**
+
 - Link hover states
 - Button hover/focus
 - Form input focus
@@ -49,6 +56,7 @@ The Ash Shaw Makeup Portfolio uses a comprehensive animation system with 26 keyf
 - Icon state changes
 
 **Level 2: Moderate (0.3-0.6s) - Medium Frequency**
+
 - Page section reveals
 - Modal open/close
 - Dropdown menus
@@ -56,6 +64,7 @@ The Ash Shaw Makeup Portfolio uses a comprehensive animation system with 26 keyf
 - Image loading states
 
 **Level 3: Pronounced (0.6-1.2s) - Low Frequency**
+
 - Page transitions
 - Hero section entrance
 - Mobile menu slide
@@ -63,6 +72,7 @@ The Ash Shaw Makeup Portfolio uses a comprehensive animation system with 26 keyf
 - Success/error notifications
 
 **Level 4: Extended (1.2s+) - Very Low Frequency**
+
 - Background gradients (15s loop)
 - Ambient effects (neon pulse)
 - Loading spinners (infinite)
@@ -70,18 +80,21 @@ The Ash Shaw Makeup Portfolio uses a comprehensive animation system with 26 keyf
 
 ### Performance Budget
 
-**Maximum Concurrent Animations:**
+## Maximum Concurrent Animations
+
 - **Desktop:** 5-7 simultaneous animations
 - **Tablet:** 3-5 simultaneous animations
 - **Mobile:** 2-3 simultaneous animations
 
-**Prohibited Properties to Animate:**
+## Prohibited Properties to Animate
+
 - ❌ `width`, `height` (use `scale` instead)
 - ❌ `top`, `left`, `bottom`, `right` (use `transform: translate` instead)
 - ❌ `margin`, `padding` (causes layout thrashing)
 - ❌ `border-width` (use `box-shadow` or `outline` instead)
 
-**Allowed Properties (Hardware Accelerated):**
+## Allowed Properties (Hardware Accelerated)
+
 - ✅ `opacity`
 - ✅ `transform` (translate, scale, rotate)
 - ✅ `filter` (blur, brightness - use sparingly)
@@ -104,17 +117,20 @@ cubic-bezier(0.4, 0, 0.2, 1)  /* Material Design standard */
 /* Sharp/Snappy - Use for quick interactions */
 ease-in           /* Slow start, fast end - dismissals */
 cubic-bezier(0.4, 0, 1, 1)  /* Accelerate */
-```
+
+```text
 
 ### Theming Animations
 
 **Light Mode:**
+
 - Softer, more subtle animations
 - Reduce glow intensity by 40%
 - Shorter durations (multiply by 0.8)
 - Professional, clean feel
 
 **Dark Mode:**
+
 - More pronounced neon effects
 - Full-brightness glow effects
 - Standard durations
@@ -134,19 +150,26 @@ cubic-bezier(0.4, 0, 1, 1)  /* Accelerate */
 body.dark .button--primary:hover {
   box-shadow: 0 0 30px rgba(255, 16, 240, 0.8); /* Dark mode - intense */
 }
-```
+
+```text
 
 ---
 
 ## 📋 Table of Contents
 
 1. [Global Animations](#global-animations)
-2. [Component Animations](#component-animations)
-3. [Neon Effects](#neon-effects)
-4. [Loading States](#loading-states)
-5. [Transition Patterns](#transition-patterns)
-6. [Performance Guidelines](#performance-guidelines)
-7. [Accessibility](#accessibility)
+
+1. [Component Animations](#component-animations)
+
+1. [Neon Effects](#neon-effects)
+
+1. [Loading States](#loading-states)
+
+1. [Transition Patterns](#transition-patterns)
+
+1. [Performance Guidelines](#performance-guidelines)
+
+1. [Accessibility](#accessibility)
 
 ---
 
@@ -169,17 +192,21 @@ body.dark .button--primary:hover {
   animation: gradientShift 15s ease infinite;
   will-change: background-position;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Animated gradient background
 <section className="animate-neon-glow-bg py-section">
   Dynamic section with animated multi-color gradient
 </section>
-```
 
-**Performance:** Uses `background-position` animation with `will-change` hint for GPU acceleration.
+```text
+
+**Performance:** Uses `background-position` animation with `will-change` hint
+for GPU acceleration.
 
 ---
 
@@ -210,9 +237,11 @@ body.dark .button--primary:hover {
   animation: neonPulse 2s infinite alternate;
   will-change: box-shadow;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Pulsing neon button
 <button className="btn btn--neon-primary animate-neon-pulse-pink">
@@ -223,10 +252,11 @@ body.dark .button--primary:hover {
 <span className="notification-badge animate-neon-pulse-green">
   •
 </span>
-```
 
-**Duration:** 2 seconds  
-**Easing:** Infinite alternate (smooth ping-pong)  
+```text
+
+**Duration:** 2 seconds
+**Easing:** Infinite alternate (smooth ping-pong)
 **Performance:** Animates `box-shadow` (moderate GPU usage)
 
 ---
@@ -241,25 +271,29 @@ body.dark .button--primary:hover {
   50% { transform: translateY(-20px); }
   100% { transform: translateY(0px); }
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // Custom implementation - add class in component CSS
 <div className="floating-element">
   Gently floating element
 </div>
-```
+
+```text
 
 ```css
 /* In component CSS */
 .floating-element {
   animation: float 3s ease-in-out infinite;
 }
-```
 
-**Duration:** 3-6 seconds (customizable)  
-**Easing:** `ease-in-out`  
+```text
+
+**Duration:** 3-6 seconds (customizable)
+**Easing:** `ease-in-out`
 **Performance:** Hardware-accelerated `transform`
 
 ---
@@ -269,6 +303,7 @@ body.dark .button--primary:hover {
 ### 4. Slide In (Mobile Menu, Modals)
 
 **Locations:**
+
 - `/styles/blocks/mobile-menu.css` (line 92)
 - `/styles/blocks/home-page.css` (line 88)
 - `/styles/blocks/contentful-admin.css` (line 131)
@@ -284,13 +319,15 @@ body.dark .button--primary:hover {
   animation: slideIn 0.4s ease-out forwards;
   animation-delay: calc(var(--item-index) * 0.05s);
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Staggered menu items
 {menuItems.map((item, index) => (
-  <div 
+  <div
     key={item.id}
     className="mobile-menu__nav-item"
     style={{ '--item-index': index } as React.CSSProperties}
@@ -298,10 +335,11 @@ body.dark .button--primary:hover {
     {item.label}
   </div>
 ))}
-```
 
-**Duration:** 0.4 seconds  
-**Easing:** `ease-out`  
+```text
+
+**Duration:** 0.4 seconds
+**Easing:** `ease-out`
 **Stagger:** 50ms per item
 
 ---
@@ -309,6 +347,7 @@ body.dark .button--primary:hover {
 ### 5. Bounce
 
 **Locations:**
+
 - `/styles/blocks/scroll-controls.css` (line 102)
 - `/styles/blocks/countdown.css` (line 351)
 
@@ -325,18 +364,21 @@ body.dark .button--primary:hover {
   0%, 100% { transform: translateY(-5%); }
   50% { transform: translateY(5%); }
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Scroll indicator
 <div className="scroll-down-arrow">
   <ChevronDown className="animate-bounce" />
 </div>
-```
 
-**Duration:** 2 seconds  
-**Easing:** Eased timing for natural bounce  
+```text
+
+**Duration:** 2 seconds
+**Easing:** Eased timing for natural bounce
 **Loop:** Infinite
 
 ---
@@ -344,6 +386,7 @@ body.dark .button--primary:hover {
 ### 6. Pulse (Loading, Skeleton States)
 
 **Locations:**
+
 - `/styles/blocks/blog-preview.css` (line 218)
 - `/styles/blocks/about-page.css` (line 169)
 - `/styles/blocks/data-display.css` (line 195)
@@ -358,19 +401,22 @@ body.dark .button--primary:hover {
 .skeleton {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Loading skeleton
 <div className="skeleton skeleton--text">
   <div className="skeleton__line"></div>
   <div className="skeleton__line"></div>
 </div>
-```
 
-**Duration:** 2 seconds  
-**Easing:** `cubic-bezier(0.4, 0, 0.6, 1)` (smooth pulse)  
+```text
+
+**Duration:** 2 seconds
+**Easing:** `cubic-bezier(0.4, 0, 0.6, 1)` (smooth pulse)
 **Loop:** Infinite
 
 ---
@@ -378,6 +424,7 @@ body.dark .button--primary:hover {
 ### 7. Spin (Loading Indicators)
 
 **Locations:**
+
 - `/styles/blocks/countdown.css` (line 346)
 - `/styles/blocks/home-page.css` (line 99)
 - `/styles/blocks/skeleton.css` (line 62)
@@ -393,18 +440,21 @@ body.dark .button--primary:hover {
 .spinner {
   animation: spin 1s linear infinite;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Loading spinner
 <div className="loading-spinner">
   <Loader2 className="animate-spin" />
 </div>
-```
 
-**Duration:** 1 second  
-**Easing:** `linear` (constant speed)  
+```text
+
+**Duration:** 1 second
+**Easing:** `linear` (constant speed)
 **Loop:** Infinite
 
 ---
@@ -427,18 +477,21 @@ body.dark .button--primary:hover {
   border-radius: 50%;
   animation: pulse-ring 2s infinite;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Pulsing ring effect
 <button className="scroll-to-top">
   <ArrowUp />
 </button>
-```
 
-**Duration:** 2 seconds  
-**Easing:** Default ease  
+```text
+
+**Duration:** 2 seconds
+**Easing:** Default ease
 **Loop:** Infinite
 
 ---
@@ -460,9 +513,11 @@ body.dark .button--primary:hover {
   transform: translateY(10px);
   animation: slideUpFade 0.3s ease-out forwards;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Fade in from bottom
 {showScrollTop && (
@@ -470,10 +525,11 @@ body.dark .button--primary:hover {
     <ArrowUp />
   </button>
 )}
-```
 
-**Duration:** 0.3 seconds  
-**Easing:** `ease-out`  
+```text
+
+**Duration:** 0.3 seconds
+**Easing:** `ease-out`
 **Mode:** `forwards` (maintains end state)
 
 ---
@@ -504,9 +560,11 @@ body.dark .button--primary:hover {
   );
   animation: shine 0.75s;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // Automatically applied on hover
 <div className="blog-card">
@@ -514,10 +572,11 @@ body.dark .button--primary:hover {
     {/* Shine effect on hover */}
   </div>
 </div>
-```
 
-**Duration:** 0.75 seconds  
-**Trigger:** On hover  
+```text
+
+**Duration:** 0.75 seconds
+**Trigger:** On hover
 **Effect:** Glossy sweep across image
 
 ---
@@ -548,9 +607,11 @@ body.dark .button--primary:hover {
 .accordion-content[data-state="closed"] {
   animation: accordionUp 0.2s ease-out;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Radix UI Accordion
 <Accordion.Root>
@@ -561,10 +622,11 @@ body.dark .button--primary:hover {
     </Accordion.Content>
   </Accordion.Item>
 </Accordion.Root>
-```
 
-**Duration:** 0.2 seconds  
-**Easing:** `ease-out`  
+```text
+
+**Duration:** 0.2 seconds
+**Easing:** `ease-out`
 **Library:** Radix UI
 
 ---
@@ -583,10 +645,11 @@ body.dark .button--primary:hover {
   from { height: var(--radix-collapsible-content-height); opacity: 1; }
   to { height: 0; opacity: 0; }
 }
-```
 
-**Duration:** 0.2 seconds  
-**Easing:** Default ease  
+```text
+
+**Duration:** 0.2 seconds
+**Easing:** Default ease
 **Library:** Radix UI
 
 ---
@@ -604,10 +667,11 @@ body.dark .button--primary:hover {
 .input-cursor {
   animation: caret-blink 1.2s ease-out infinite;
 }
-```
 
-**Duration:** 1.2 seconds  
-**Loop:** Infinite  
+```text
+
+**Duration:** 1.2 seconds
+**Loop:** Infinite
 **Effect:** Typing cursor blink
 
 ---
@@ -619,13 +683,13 @@ body.dark .button--primary:hover {
 ```css
 /* Purple Neon Pulse */
 @keyframes neonPulsePurple {
-  from { 
-    box-shadow: 0 0 20px rgba(190, 0, 254, 0.3); 
-    border-color: rgba(190, 0, 254, 0.5); 
+  from {
+    box-shadow: 0 0 20px rgba(190, 0, 254, 0.3);
+    border-color: rgba(190, 0, 254, 0.5);
   }
-  to { 
-    box-shadow: 0 0 40px rgba(190, 0, 254, 0.6); 
-    border-color: var(--wp--preset--color--neon-purple); 
+  to {
+    box-shadow: 0 0 40px rgba(190, 0, 254, 0.6);
+    border-color: var(--wp--preset--color--neon-purple);
   }
 }
 
@@ -634,24 +698,28 @@ body.dark .button--primary:hover {
   from { box-shadow: 0 0 10px var(--wp--preset--color--neon-pink); }
   to { box-shadow: 0 0 25px var(--wp--preset--color--neon-pink); }
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Video card with neon glow
 <div className="video-card video-card--featured">
   Video content
 </div>
-```
+
+```text
 
 ```css
 .video-card--featured {
   animation: neonPulsePurple 3s infinite alternate;
 }
-```
 
-**Duration:** 1.5-3 seconds  
-**Easing:** `infinite alternate`  
+```text
+
+**Duration:** 1.5-3 seconds
+**Easing:** `infinite alternate`
 **Colors:** Purple, Pink
 
 ---
@@ -670,9 +738,11 @@ body.dark .button--primary:hover {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Modal entrance
 <div className="video-modal">
@@ -680,7 +750,8 @@ body.dark .button--primary:hover {
     Animated modal content
   </div>
 </div>
-```
+
+```text
 
 ```css
 .video-modal {
@@ -690,9 +761,10 @@ body.dark .button--primary:hover {
 .video-modal__content {
   animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-```
 
-**Duration:** 0.3 seconds  
+```text
+
+**Duration:** 0.3 seconds
 **Easing:** `cubic-bezier(0.16, 1, 0.3, 1)` (spring-like)
 
 ---
@@ -710,9 +782,11 @@ body.dark .button--primary:hover {
 .share-dropdown {
   animation: slideUp 0.2s ease-out;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Share dropdown
 {isOpen && (
@@ -720,9 +794,10 @@ body.dark .button--primary:hover {
     Share options
   </div>
 )}
-```
 
-**Duration:** 0.2 seconds  
+```text
+
+**Duration:** 0.2 seconds
 **Easing:** `ease-out`
 
 ---
@@ -744,19 +819,22 @@ body.dark .button--primary:hover {
 .skeleton {
   animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
-```
+
+```text
 
 **Usage:**
+
 ```tsx
 // ✅ CORRECT - Loading skeleton
 <div className="skeleton skeleton--card">
   <div className="skeleton__header"></div>
   <div className="skeleton__body"></div>
 </div>
-```
 
-**Duration:** 2 seconds  
-**Loop:** Infinite  
+```text
+
+**Duration:** 2 seconds
+**Loop:** Infinite
 **Easing:** Smooth cubic bezier
 
 ---
@@ -773,10 +851,11 @@ body.dark .button--primary:hover {
 .typeform-spinner {
   animation: typeform-spin 1s linear infinite;
 }
-```
 
-**Duration:** 1 second  
-**Loop:** Infinite  
+```text
+
+**Duration:** 1 second
+**Loop:** Infinite
 **Position:** Centered with `translate(-50%, -50%)`
 
 ---
@@ -797,7 +876,8 @@ box-shadow: 0 0 15px var(--glow-color), 0 0 30px var(--glow-color);
 
 /* Extra Large Glow */
 box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
-```
+
+```text
 
 ### Neon Color Variables
 
@@ -806,7 +886,8 @@ box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
 --glow-color-pink: var(--wp--preset--color--neon-pink);
 --glow-color-blue: var(--wp--preset--color--neon-blue);
 --glow-color-purple: var(--wp--preset--color--neon-purple);
-```
+
+```text
 
 ---
 
@@ -826,7 +907,8 @@ transition: box-shadow 0.3s ease;
 
 /* All Properties */
 transition: all 0.3s ease;
-```
+
+```text
 
 ### Duration Guidelines
 
@@ -853,7 +935,8 @@ linear        /* Constant speed */
 cubic-bezier(0.4, 0, 0.2, 1)    /* Material Design standard */
 cubic-bezier(0.16, 1, 0.3, 1)   /* Spring-like bounce */
 cubic-bezier(0.4, 0, 0.6, 1)    /* Smooth pulse */
-```
+
+```text
 
 ---
 
@@ -861,12 +944,14 @@ cubic-bezier(0.4, 0, 0.6, 1)    /* Smooth pulse */
 
 ### Hardware-Accelerated Properties
 
-**✅ Animate These (GPU-Accelerated):**
+## ✅ Animate These (GPU-Accelerated)
+
 - `transform: translate()`, `scale()`, `rotate()`
 - `opacity`
 - `filter` (use sparingly)
 
-**❌ Avoid Animating (CPU-Intensive):**
+## ❌ Avoid Animating (CPU-Intensive)
+
 - `width`, `height`
 - `top`, `left`, `right`, `bottom`
 - `margin`, `padding`
@@ -888,7 +973,8 @@ cubic-bezier(0.4, 0, 0.6, 1)    /* Smooth pulse */
 .element.animation-complete {
   will-change: auto;
 }
-```
+
+```text
 
 ### Animation Budget
 
@@ -902,7 +988,7 @@ cubic-bezier(0.4, 0, 0.6, 1)    /* Smooth pulse */
 
 ### Prefers Reduced Motion
 
-**All animations must respect user preferences:**
+## All animations must respect user preferences
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -914,18 +1000,21 @@ cubic-bezier(0.4, 0, 0.6, 1)    /* Smooth pulse */
     transition-duration: 0.01ms !important;
   }
 }
-```
+
+```text
 
 ### Implementation Pattern
 
 ```tsx
 // ✅ CORRECT - Check for reduced motion
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion:
+reduce)').matches;
 
 <div className={prefersReducedMotion ? '' : 'animate-neon-pulse-pink'}>
   Content
 </div>
-```
+
+```text
 
 ### Testing Checklist
 
@@ -940,7 +1029,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 ### Animation Duration Scale
 
-```
+```text
 0.15s - Micro (hover, focus)
 0.2s  - Fast (dropdown, tooltip)
 0.3s  - Standard (button, card)
@@ -951,7 +1040,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 2s    - Pulse, bounce
 3s    - Float, ambient
 15s   - Gradient shift
-```
+
+```text
 
 ### Common Patterns
 
@@ -973,7 +1063,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 // Gradient Background
 <section className="animate-neon-glow-bg">Hero</section>
-```
+
+```text
 
 ---
 
@@ -985,6 +1076,6 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 ---
 
-**Last Updated:** March 12, 2026  
-**Version:** 2.0.0  
+**Last Updated:** March 12, 2026
+**Version:** 2.0.0
 **Maintained by:** Ash Shaw Portfolio Team

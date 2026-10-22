@@ -1,10 +1,12 @@
 # Mobile Spacing Guidelines
 
-Mobile-specific spacing rules with fluid clamp values, viewport units, and responsive patterns.
+Mobile-specific spacing rules with fluid clamp values, viewport units, and
+responsive patterns.
 
 ## Purpose
 
 Define spacing system for mobile devices with:
+
 - Fluid clamp() values for smooth scaling
 - Viewport unit (vh/vw) usage patterns
 - Container padding standards
@@ -27,7 +29,8 @@ clamp(minimum-value, viewport-based-value, maximum-value)
 /* Example */
 padding: clamp(1rem, 5vw, 3rem);
 /* = 16px minimum, 5% of viewport width, 48px maximum */
-```
+
+```text
 
 ---
 
@@ -41,16 +44,20 @@ padding: clamp(1rem, 5vw, 3rem);
   padding-left: clamp(1rem, 4vw, 1.5rem);   /* 16px → 24px */
   padding-right: clamp(1rem, 4vw, 1.5rem);  /* 16px → 24px */
 }
-```
 
-**Tailwind Implementation:**
+```text
+
+## Tailwind Implementation
+
 ```tsx
 <div className="px-4 sm:px-6 md:px-8 lg:px-12">
   {/* Content */}
 </div>
-```
+
+```text
 
 **Breakdown:**
+
 - **Mobile (< 640px):** `16px` (1rem = px-4)
 - **Small tablet (640px+):** `24px` (1.5rem = px-6)
 - **Tablet (768px+):** `32px` (2rem = px-8)
@@ -64,16 +71,20 @@ padding: clamp(1rem, 5vw, 3rem);
   padding-top: clamp(3rem, 8vh, 6rem);      /* 48px → 96px */
   padding-bottom: clamp(3rem, 8vh, 6rem);   /* 48px → 96px */
 }
-```
 
-**Tailwind Implementation:**
+```text
+
+## Tailwind Implementation (1)
+
 ```tsx
 <section className="py-12 sm:py-16 md:py-20 lg:py-24">
   {/* Section content */}
 </section>
-```
+
+```text
 
 **Breakdown:**
+
 - **Mobile (< 640px):** `48px` vertical (py-12)
 - **Small tablet (640px+):** `64px` vertical (py-16)
 - **Tablet (768px+):** `80px` vertical (py-20)
@@ -106,7 +117,8 @@ padding: clamp(1rem, 5vw, 3rem);
 
 /* 3XL - Page section spacing */
 --space-3xl: clamp(4rem, 8vw, 8rem);           /* 64px → 128px */
-```
+
+```text
 
 ### Tailwind Fluid Spacing Classes
 
@@ -124,7 +136,8 @@ padding: clamp(1rem, 5vw, 3rem);
 .mb-fluid-md { margin-bottom: clamp(1rem, 2vw, 1.5rem); }
 .mt-fluid-lg { margin-top: clamp(1.5rem, 3vw, 2.5rem); }
 .gap-fluid-sm { gap: clamp(0.5rem, 1vw, 1rem); }
-```
+
+```text
 
 ---
 
@@ -137,9 +150,11 @@ padding: clamp(1rem, 5vw, 3rem);
 .card-padding {
   padding: clamp(1rem, 3vw, 2rem);  /* 16px → 32px */
 }
-```
+
+```text
 
 **Tailwind:**
+
 ```tsx
 <div className="p-4 sm:p-6 md:p-8">
   {/* Card content */}
@@ -149,9 +164,11 @@ padding: clamp(1rem, 5vw, 3rem);
 <div className="p-fluid-md">
   {/* Scales from 16px to 24px */}
 </div>
-```
 
-**Responsive Card Padding:**
+```text
+
+## Responsive Card Padding
+
 ```tsx
 // Portfolio Card
 <div className="p-4 sm:p-5 md:p-6 lg:p-8">
@@ -167,7 +184,8 @@ padding: clamp(1rem, 5vw, 3rem);
 <div className="p-6 sm:p-8 md:p-10">
   {/* 24px → 32px → 40px */}
 </div>
-```
+
+```text
 
 ### Button Spacing
 
@@ -179,9 +197,11 @@ padding: clamp(1rem, 5vw, 3rem);
   padding-top: clamp(0.75rem, 2vw, 1rem); /* 12px → 16px */
   padding-bottom: clamp(0.75rem, 2vw, 1rem); /* 12px → 16px */
 }
-```
+
+```text
 
 **Tailwind:**
+
 ```tsx
 // Standard button
 <button className="px-6 py-3 sm:px-8 sm:py-4">
@@ -192,7 +212,8 @@ padding: clamp(1rem, 5vw, 3rem);
 <button className="px-button py-button">
   {/* Uses defined button padding from globals.css */}
 </button>
-```
+
+```text
 
 ### Grid Gap Spacing
 
@@ -205,12 +226,15 @@ padding: clamp(1rem, 5vw, 3rem);
 .grid-gap-desktop {
   gap: clamp(1.5rem, 3vw, 2.5rem); /* 24px → 40px */
 }
-```
+
+```text
 
 **Tailwind:**
+
 ```tsx
 // Portfolio Grid
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6
+lg:gap-8">
   {/* Mobile: 16px, Tablet: 24px, Desktop: 32px */}
 </div>
 
@@ -223,7 +247,8 @@ padding: clamp(1rem, 5vw, 3rem);
 <div className="grid grid-cols-2 gap-fluid-md">
   {/* Smoothly scales from 16px to 24px */}
 </div>
-```
+
+```text
 
 ---
 
@@ -240,9 +265,11 @@ padding: clamp(1rem, 5vw, 3rem);
 .hero-desktop {
   min-height: clamp(600px, 80vh, 1000px);
 }
-```
+
+```text
 
 **Tailwind:**
+
 ```tsx
 // Mobile hero
 <section className="min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh]">
@@ -258,7 +285,8 @@ padding: clamp(1rem, 5vw, 3rem);
 <section className="min-h-[calc(100vh-80px)]">
   {/* 100vh minus header height */}
 </section>
-```
+
+```text
 
 ### Vertical Spacing with vh
 
@@ -268,9 +296,11 @@ padding: clamp(1rem, 5vw, 3rem);
   padding-top: clamp(2rem, 8vh, 6rem);
   padding-bottom: clamp(2rem, 8vh, 6rem);
 }
-```
+
+```text
 
 **Usage Patterns:**
+
 ```tsx
 // Homepage sections
 <section className="py-[8vh] min-py-8 max-py-24">
@@ -281,12 +311,14 @@ padding: clamp(1rem, 5vw, 3rem);
 <section className="py-[6vh] min-py-6 max-py-20">
   {/* 6% of viewport height */}
 </section>
-```
+
+```text
 
 **⚠️ vh Caution:**
+
 ```tsx
 // ❌ AVOID - Mobile browser chrome issues
-<div className="h-screen">  
+<div className="h-screen">
   {/* May be cut off by address bar on mobile */}
 </div>
 
@@ -299,7 +331,8 @@ padding: clamp(1rem, 5vw, 3rem);
 <div className="h-[100dvh]">
   {/* Modern solution, adjusts for mobile chrome */}
 </div>
-```
+
+```text
 
 ---
 
@@ -316,14 +349,17 @@ padding: clamp(1rem, 5vw, 3rem);
   padding-left: clamp(1rem, 4vw, 3rem);   /* 16px → 48px */
   padding-right: clamp(1rem, 4vw, 3rem);  /* 16px → 48px */
 }
-```
+
+```text
 
 **Tailwind:**
+
 ```tsx
 <div className="max-w-7xl mx-auto px-[4vw] sm:px-8 md:px-12">
   {/* 4% of viewport width on mobile, fixed on larger screens */}
 </div>
-```
+
+```text
 
 ### Typography with vw
 
@@ -336,9 +372,11 @@ padding: clamp(1rem, 5vw, 3rem);
 .section-title {
   font-size: clamp(1.5rem, 4vw, 3rem);  /* 24px → 48px */
 }
-```
+
+```text
 
 **Breakdown:**
+
 - **Mobile (320px):** 6vw = 19.2px → clamps to 32px (minimum)
 - **Tablet (768px):** 6vw = 46px → uses 46px
 - **Desktop (1920px):** 6vw = 115px → uses 115px
@@ -357,9 +395,11 @@ padding: clamp(1rem, 5vw, 3rem);
   min-height: 44px;
   padding: 12px;
 }
-```
+
+```text
 
 **Tailwind:**
+
 ```tsx
 // Button touch target
 <button className="min-h-[44px] min-w-[44px] px-4 py-3">
@@ -372,13 +412,14 @@ padding: clamp(1rem, 5vw, 3rem);
 </button>
 
 // Link touch target
-<a 
+<a
   href="#"
   className="inline-block py-3 px-4 min-h-[44px]"
 >
   Learn More
 </a>
-```
+
+```text
 
 ### Spacing Between Touch Targets
 
@@ -387,9 +428,11 @@ padding: clamp(1rem, 5vw, 3rem);
 .touch-spacing {
   gap: clamp(0.5rem, 2vw, 1rem);  /* 8px → 16px */
 }
-```
+
+```text
 
 **Tailwind:**
+
 ```tsx
 // Button group
 <div className="flex gap-3 sm:gap-4">
@@ -402,7 +445,8 @@ padding: clamp(1rem, 5vw, 3rem);
   <a href="#" className="py-3">Home</a>
   <a href="#" className="py-3">About</a>
 </nav>
-```
+
+```text
 
 ---
 
@@ -427,7 +471,8 @@ padding: clamp(1rem, 5vw, 3rem);
 <div className="flex gap-3 sm:gap-4 md:gap-6">
   {/* 12px → 16px → 24px */}
 </div>
-```
+
+```text
 
 ### Container Max Width Pattern
 
@@ -450,7 +495,8 @@ padding: clamp(1rem, 5vw, 3rem);
 <section className="py-section px-4 sm:px-6 md:px-8">
   {/* Full width content */}
 </section>
-```
+
+```text
 
 ---
 
@@ -463,9 +509,11 @@ padding: clamp(1rem, 5vw, 3rem);
 <div className="p-8 mb-12">
   {/* 32px padding and 48px margin on all screens */}
 </div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Responsive spacing
 <div className="p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 md:mb-12">
@@ -476,7 +524,8 @@ padding: clamp(1rem, 5vw, 3rem);
 <div className="p-fluid-md mb-fluid-lg">
   {/* Smooth scaling with clamp */}
 </div>
-```
+
+```text
 
 ### ❌ Mistake 2: No Container Padding
 
@@ -486,9 +535,11 @@ padding: clamp(1rem, 5vw, 3rem);
   <h2>Section Title</h2>
   <p>Content...</p>
 </section>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Proper container padding
 <section className="px-4 sm:px-6 md:px-8">
@@ -497,7 +548,8 @@ padding: clamp(1rem, 5vw, 3rem);
     <p>Content...</p>
   </div>
 </section>
-```
+
+```text
 
 ### ❌ Mistake 3: Inconsistent Grid Gaps
 
@@ -506,9 +558,11 @@ padding: clamp(1rem, 5vw, 3rem);
 <div className="grid gap-4">...</div>
 <div className="grid gap-6">...</div>
 <div className="grid gap-3">...</div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Consistent gap pattern
 <div className="grid gap-4 md:gap-6">...</div>
@@ -517,7 +571,8 @@ padding: clamp(1rem, 5vw, 3rem);
 
 // Or use design token
 <div className="grid gap-fluid-md">...</div>
-```
+
+```text
 
 ---
 
@@ -526,7 +581,8 @@ padding: clamp(1rem, 5vw, 3rem);
 ### Homepage Hero
 
 ```tsx
-<section className="min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] px-4 sm:px-6 md:px-8">
+<section className="min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] px-4 sm:px-6
+md:px-8">
   <div className="max-w-7xl mx-auto h-full flex items-center justify-center">
     <div className="text-center space-y-6 sm:space-y-8">
       <h1 className="text-hero-h1 mb-fluid-md">
@@ -542,7 +598,8 @@ padding: clamp(1rem, 5vw, 3rem);
     </div>
   </div>
 </section>
-```
+
+```text
 
 ### Portfolio Grid
 
@@ -552,15 +609,17 @@ padding: clamp(1rem, 5vw, 3rem);
     <h2 className="text-section-h2 mb-8 sm:mb-10 md:mb-12">
       Portfolio
     </h2>
-    
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6
+lg:gap-8">
       {portfolioItems.map(item => (
         <PortfolioCard key={item.id} item={item} />
       ))}
     </div>
   </div>
 </section>
-```
+
+```text
 
 ### Blog Post Article
 
@@ -571,20 +630,21 @@ padding: clamp(1rem, 5vw, 3rem);
     <div className="mb-8 sm:mb-10 md:mb-12">
       <img src={post.image} alt={post.title} />
     </div>
-    
+
     {/* Content */}
     <div className="prose prose-lg space-y-6 sm:space-y-8">
       <h1 className="mb-6">{post.title}</h1>
       <div>{post.content}</div>
     </div>
-    
+
     {/* Share Component */}
     <div className="mt-12 sm:mt-16 pt-8 sm:pt-10 border-t">
       <ShareComponent />
     </div>
   </div>
 </article>
-```
+
+```text
 
 ---
 
@@ -604,6 +664,7 @@ padding: clamp(1rem, 5vw, 3rem);
 ### Viewport Testing
 
 Test on these viewport widths:
+
 - **320px** - Smallest mobile (iPhone SE)
 - **375px** - Standard mobile (iPhone)
 - **768px** - Tablet
@@ -620,5 +681,5 @@ Test on these viewport widths:
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 3.2.0

@@ -7,13 +7,17 @@
 
 ## Context
 
-The Figma Make bundler has memory limits. Large files, orphaned code, and inefficient imports inflate the bundle and can cause build failures or blank-screen renders. This audit identifies oversized files, dead code, and establishes size guidelines.
+The Figma Make bundler has memory limits. Large files, orphaned code, and
+inefficient imports inflate the bundle and can cause build failures or
+blank-screen renders. This audit identifies oversized files, dead code, and
+establishes size guidelines.
 
 ---
 
 ## Step 1 — File size inventory
 
-Scan every directory and record file sizes. Flag files exceeding these thresholds:
+Scan every directory and record file sizes. Flag files exceeding these
+thresholds:
 
 | File type | Warning threshold | Critical threshold |
 |---|---|---|
@@ -23,7 +27,8 @@ Scan every directory and record file sizes. Flag files exceeding these threshold
 | `.css` stylesheet | 500 lines | 1000 lines |
 | `.md` documentation | 300 lines | 600 lines |
 
-**Directories to scan:**
+## Directories to scan
+
 - `/components/` (all subdirectories)
 - `/data/mock/` (all subdirectories)
 - `/data/types/`
@@ -32,39 +37,48 @@ Scan every directory and record file sizes. Flag files exceeding these threshold
 - `/lib/`
 - `/styles/` (all subdirectories)
 
-**Output:** Table of all files exceeding warning threshold, sorted by size descending.
+**Output:** Table of all files exceeding warning threshold, sorted by size
+descending.
 
 ---
 
 ## Step 2 — Orphaned file detection
 
-For each file type, check if the file is imported by any other file in the project:
+For each file type, check if the file is imported by any other file in the
+project:
 
 ### Components (`.tsx`)
+
 - [ ] Scan `/components/pages/` — Is every page component referenced in `/routes.ts`?
 - [ ] Scan `/components/sections/` — Is every section component imported by a page?
 - [ ] Scan `/components/ui/` — Is every UI component imported by a section or page?
 - [ ] Scan `/components/common/` — Is every common component imported somewhere?
 
 ### Hooks (`.ts`)
+
 - [ ] Scan `/hooks/` — Is every hook imported by at least one component?
 
 ### Utilities (`.ts`)
+
 - [ ] Scan `/utils/` — Is every utility imported by at least one file?
 
 ### Data files (`.ts`)
+
 - [ ] Scan `/data/mock/` — Is every data file imported (directly or via barrel export)?
 - [ ] Scan `/data/types/` — Is every type file imported by a data file or component?
 
 ### CSS files (`.css`)
+
 - [ ] Scan `/styles/blocks/` — Is every CSS file imported by a component or `globals.css`?
 - [ ] Scan `/styles/tokens/` — Is every token CSS file imported by `globals.css`?
 - [ ] Scan `/styles/components/` — Is every CSS file imported by its component?
 
 ### Library files (`.tsx`, `.ts`)
+
 - [ ] Scan `/lib/` — Is every export consumed by at least one file?
 
-**Output:** Orphaned files table with recommendation (delete / keep with rationale).
+**Output:** Orphaned files table with recommendation (delete / keep with
+rationale).
 
 ---
 
@@ -73,35 +87,49 @@ For each file type, check if the file is imported by any other file in the proje
 Create guidelines at `/guidelines/build-optimisation.md` covering:
 
 ### File size limits
+
 - Recommended maximum sizes per file type (from the thresholds above)
 - How the Figma Make bundler handles large files
 - Symptoms of exceeding memory limits (build failure, blank screen, partial render)
 
 ### Splitting large components
+
 1. Extract sub-components into the same directory
-2. Co-locate styles (one CSS block file per component)
-3. Extract data transformations into utility functions
-4. Extract complex hooks into `/hooks/`
-5. Maximum JSX depth: 4 levels of nesting before extracting
+
+1. Co-locate styles (one CSS block file per component)
+
+1. Extract data transformations into utility functions
+
+1. Extract complex hooks into `/hooks/`
+
+1. Maximum JSX depth: 4 levels of nesting before extracting
 
 ### Splitting large data files
+
 1. One file per content domain (e.g., `blog/posts.ts`, `blog/categories.ts`)
-2. When a data file exceeds 200 lines, split by logical grouping:
+
+1. When a data file exceeds 200 lines, split by logical grouping:
+
    - By content type (posts vs categories vs tags)
    - By date range (e.g., `posts-2024.ts`, `posts-2025.ts`)
    - By content section (e.g., `ebook/part-1.ts`, `ebook/part-2.ts`)
-3. Always maintain a barrel `index.ts` that re-exports all splits
-4. Update the barrel export EVERY time you add a new file
+1. Always maintain a barrel `index.ts` that re-exports all splits
+
+1. Update the barrel export EVERY time you add a new file
 
 ### Splitting large CSS files
+
 1. One block CSS file per component (BEM block = one file)
-2. When a block file exceeds 500 lines, split by concern:
+
+1. When a block file exceeds 500 lines, split by concern:
+
    - Base styles: `{block}.css`
    - Responsive overrides: `{block}-responsive.css`
    - Theme variants: `{block}-theme.css`
-3. Import all splits from the component or from `globals.css`
+1. Import all splits from the component or from `globals.css`
 
 ### Import hygiene checklist (for new components)
+
 - [ ] Import your CSS file at the top
 - [ ] Import data from `/data/mock/` (never hardcode content)
 - [ ] Import types from `/data/types/`
@@ -115,6 +143,7 @@ Create guidelines at `/guidelines/build-optimisation.md` covering:
 ## Output format
 
 ```markdown
+
 ## File size inventory
 
 | File | Lines | Threshold | Status |
@@ -130,4 +159,5 @@ Create guidelines at `/guidelines/build-optimisation.md` covering:
 ## Guidelines
 
 [Draft of `/guidelines/build-optimisation.md`]
-```
+
+```text

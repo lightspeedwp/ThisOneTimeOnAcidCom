@@ -1,10 +1,12 @@
 # Mobile Performance Guidelines
 
-Mobile-specific performance optimization strategies for fast, smooth experiences on all devices and networks.
+Mobile-specific performance optimization strategies for fast, smooth experiences
+on all devices and networks.
 
 ## Purpose
 
 Optimize mobile performance with:
+
 - Fast initial page load
 - Smooth animations and transitions
 - Efficient JavaScript execution
@@ -19,13 +21,14 @@ Optimize mobile performance with:
 
 ### Mobile-Specific Targets
 
-```
+```text
 Largest Contentful Paint (LCP): < 2.5s
 First Input Delay (FID): < 100ms
 Cumulative Layout Shift (CLS): < 0.1
 First Contentful Paint (FCP): < 1.8s
 Time to Interactive (TTI): < 3.8s
-```
+
+```text
 
 ---
 
@@ -35,7 +38,7 @@ Time to Interactive (TTI): < 3.8s
 
 ```tsx
 // ✅ Properly sized images for mobile
-<img 
+<img
   srcSet="
     /makeup-400w.webp 400w,
     /makeup-800w.webp 800w,
@@ -47,16 +50,21 @@ Time to Interactive (TTI): < 3.8s
   loading="lazy"
   decoding="async"
 />
-```
+
+```text
 
 ### Image Format Strategy
 
-```
+```text
 Priority Order:
+
 1. AVIF (best compression, ~50% smaller than JPEG)
-2. WebP (good compression, ~30% smaller than JPEG)
-3. JPEG/PNG (fallback)
-```
+
+1. WebP (good compression, ~30% smaller than JPEG)
+
+1. JPEG/PNG (fallback)
+
+```text
 
 ```tsx
 <picture>
@@ -64,26 +72,28 @@ Priority Order:
   <source type="image/webp" srcSet="/image.webp" />
   <img src="/image.jpg" alt="Fallback" />
 </picture>
-```
+
+```text
 
 ### Critical Images
 
 ```tsx
 // Hero image - load immediately
-<link 
+<link
   rel="preload"
   as="image"
   href="/hero-mobile.webp"
   media="(max-width: 640px)"
 />
 
-<img 
+<img
   src="/hero-mobile.webp"
   alt="Hero"
   loading="eager"
   fetchpriority="high"
 />
-```
+
+```text
 
 ---
 
@@ -111,7 +121,8 @@ Priority Order:
   from { transform: translateX(-100px); }
   to { transform: translateX(0); }
 }
-```
+
+```text
 
 ### Throttle Scroll Animations
 
@@ -120,21 +131,21 @@ import { useEffect, useState } from 'react';
 
 function useThrottledScroll(delay: number = 100) {
   const [scrollY, setScrollY] = useState(0);
-  
+
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
-    
+
     const handleScroll = () => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         setScrollY(window.scrollY);
       }, delay);
     };
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [delay]);
-  
+
   return scrollY;
 }
 
@@ -142,7 +153,7 @@ function useThrottledScroll(delay: number = 100) {
 function Header() {
   const scrollY = useThrottledScroll(100);
   const isScrolled = scrollY > 50;
-  
+
   return (
     <header className={`
       transition-all duration-300
@@ -152,12 +163,14 @@ function Header() {
     </header>
   );
 }
-```
+
+```text
 
 ### Reduce Motion for Accessibility
 
 > **Note:** This project uses pure CSS animations (never `motion/react`).
-> Reduced motion is handled entirely in CSS via `@media (prefers-reduced-motion: reduce)`.
+> Reduced motion is handled entirely in CSS via `@media (prefers-reduced-motion:
+reduce)`.
 
 ```tsx
 // React implementation — uses CSS classes, not motion/react
@@ -168,7 +181,8 @@ function AnimatedComponent() {
     </div>
   );
 }
-```
+
+```text
 
 ```css
 /* CSS handles reduced motion automatically */
@@ -181,7 +195,8 @@ function AnimatedComponent() {
     animation: none;
   }
 }
-```
+
+```text
 
 ---
 
@@ -208,7 +223,8 @@ function App() {
     </Suspense>
   );
 }
-```
+
+```text
 
 ### Debounce Expensive Operations
 
@@ -217,15 +233,15 @@ import { useMemo, useState } from 'react';
 
 function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
-  
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
-    
+
     return () => clearTimeout(handler);
   }, [value, delay]);
-  
+
   return debouncedValue;
 }
 
@@ -233,15 +249,15 @@ function useDebounce<T>(value: T, delay: number): T {
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearch = useDebounce(searchTerm, 300);
-  
+
   useEffect(() => {
     if (debouncedSearch) {
       fetchSearchResults(debouncedSearch);
     }
   }, [debouncedSearch]);
-  
+
   return (
-    <input 
+    <input
       type="search"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
@@ -249,7 +265,8 @@ function SearchBar() {
     />
   );
 }
-```
+
+```text
 
 ### Virtualize Long Lists
 
@@ -263,7 +280,7 @@ function PortfolioList({ entries }: Props) {
       <PortfolioCard entry={entries[index]} />
     </div>
   );
-  
+
   return (
     <FixedSizeList
       height={600}
@@ -275,7 +292,8 @@ function PortfolioList({ entries }: Props) {
     </FixedSizeList>
   );
 }
-```
+
+```text
 
 ---
 
@@ -286,19 +304,19 @@ function PortfolioList({ entries }: Props) {
 ```tsx
 function useNetworkStatus() {
   const [effectiveType, setEffectiveType] = useState('4g');
-  
+
   useEffect(() => {
     const connection = (navigator as any).connection;
-    
+
     if (connection) {
       setEffectiveType(connection.effectiveType);
-      
+
       connection.addEventListener('change', () => {
         setEffectiveType(connection.effectiveType);
       });
     }
   }, []);
-  
+
   return effectiveType;
 }
 
@@ -306,7 +324,7 @@ function useNetworkStatus() {
 function AdaptiveContent() {
   const networkType = useNetworkStatus();
   const isSlowNetwork = ['slow-2g', '2g', '3g'].includes(networkType);
-  
+
   return (
     <div>
       {isSlowNetwork ? (
@@ -317,7 +335,8 @@ function AdaptiveContent() {
     </div>
   );
 }
-```
+
+```text
 
 ### Save Data Mode
 
@@ -328,7 +347,7 @@ function useSaveData() {
 
 function ResponsiveMedia() {
   const saveData = useSaveData();
-  
+
   if (saveData) {
     return (
       <div className="text-center py-8">
@@ -341,10 +360,11 @@ function ResponsiveMedia() {
       </div>
     );
   }
-  
+
   return <VideoPlayer />;
 }
-```
+
+```text
 
 ### Progressive Enhancement
 
@@ -352,7 +372,7 @@ function ResponsiveMedia() {
 // Load basic content first, enhance later
 function PortfolioPage() {
   const [enhanced, setEnhanced] = useState(false);
-  
+
   useEffect(() => {
     // Wait for page to be interactive
     if (document.readyState === 'complete') {
@@ -361,12 +381,12 @@ function PortfolioPage() {
       window.addEventListener('load', () => setEnhanced(true));
     }
   }, []);
-  
+
   return (
     <div>
       {/* Core content always loads */}
       <BasicPortfolioGrid entries={entries} />
-      
+
       {/* Enhanced features load after initial paint */}
       {enhanced && (
         <>
@@ -377,7 +397,8 @@ function PortfolioPage() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -388,31 +409,32 @@ function PortfolioPage() {
 ```tsx
 function useBatteryStatus() {
   const [batteryLevel, setBatteryLevel] = useState(1);
-  
+
   useEffect(() => {
     (navigator as any).getBattery?.().then((battery: any) => {
       setBatteryLevel(battery.level);
-      
+
       battery.addEventListener('levelchange', () => {
         setBatteryLevel(battery.level);
       });
     });
   }, []);
-  
+
   return batteryLevel;
 }
 
 function AnimatedComponent() {
   const batteryLevel = useBatteryStatus();
   const isLowBattery = batteryLevel < 0.2;
-  
+
   return (
     <div className={isLowBattery ? '' : 'animate-float'}>
       Content
     </div>
   );
 }
-```
+
+```text
 
 ```css
 /* Pure CSS float animation — disabled at low battery via JS class toggle */
@@ -423,25 +445,26 @@ function AnimatedComponent() {
 @media (prefers-reduced-motion: reduce) {
   .animate-float { animation: none; }
 }
-```
+
+```text
 
 ### Pause Background Tasks
 
 ```tsx
 function usePageVisibility() {
   const [isVisible, setIsVisible] = useState(true);
-  
+
   useEffect(() => {
     const handleVisibilityChange = () => {
       setIsVisible(!document.hidden);
     };
-    
+
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
-  
+
   return isVisible;
 }
 
@@ -449,20 +472,21 @@ function usePageVisibility() {
 function Carousel({ images }: Props) {
   const isVisible = usePageVisibility();
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   useEffect(() => {
     if (!isVisible) return;  // Don't auto-advance when hidden
-    
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 3000);
-    
+
     return () => clearInterval(interval);
   }, [isVisible, images.length]);
-  
+
   return <CarouselView currentIndex={currentIndex} />;
 }
-```
+
+```text
 
 ---
 
@@ -485,19 +509,20 @@ function Component() {
     const handleResize = () => {
       // Handle resize
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 }
-```
+
+```text
 
 ### Unload Large Objects
 
 ```tsx
 function ImageGallery({ images }: Props) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  
+
   // Clear selected image when component unmounts
   useEffect(() => {
     return () => {
@@ -506,14 +531,15 @@ function ImageGallery({ images }: Props) {
       }
     };
   }, [selectedImage]);
-  
+
   return (
     <div>
       {/* Gallery content */}
     </div>
   );
 }
-```
+
+```text
 
 ### Limit Concurrent Requests
 
@@ -523,12 +549,12 @@ class ImageLoader {
   private queue: Array<() => Promise<void>> = [];
   private active = 0;
   private maxConcurrent = 3;
-  
+
   async load(src: string): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const task = async () => {
         this.active++;
-        
+
         const img = new Image();
         img.onload = () => {
           this.active--;
@@ -538,7 +564,7 @@ class ImageLoader {
         img.onerror = reject;
         img.src = src;
       };
-      
+
       if (this.active < this.maxConcurrent) {
         task();
       } else {
@@ -546,7 +572,7 @@ class ImageLoader {
       }
     });
   }
-  
+
   private processQueue() {
     if (this.queue.length > 0 && this.active < this.maxConcurrent) {
       const task = this.queue.shift();
@@ -554,7 +580,8 @@ class ImageLoader {
     }
   }
 }
-```
+
+```text
 
 ---
 
@@ -565,7 +592,7 @@ class ImageLoader {
 ```html
 <!-- In <head> -->
 <!-- Preload hero image -->
-<link 
+<link
   rel="preload"
   as="image"
   href="/hero-mobile.webp"
@@ -573,21 +600,22 @@ class ImageLoader {
 />
 
 <!-- Preload critical CSS -->
-<link 
+<link
   rel="preload"
   as="style"
   href="/styles/critical.css"
 />
 
 <!-- Preload font -->
-<link 
+<link
   rel="preload"
   as="font"
   href="/fonts/inter-var.woff2"
   type="font/woff2"
   crossorigin
 />
-```
+
+```text
 
 ### DNS Prefetch for External Resources
 
@@ -598,7 +626,8 @@ class ImageLoader {
 
 <!-- Preconnect for critical third parties -->
 <link rel="preconnect" href="https://images.contentful.com" crossorigin />
-```
+
+```text
 
 ---
 
@@ -611,27 +640,28 @@ function PortfolioPage() {
   useEffect(() => {
     // Mark when portfolio starts loading
     performance.mark('portfolio-load-start');
-    
+
     fetchPortfolio().then(() => {
       // Mark when portfolio finishes loading
       performance.mark('portfolio-load-end');
-      
+
       // Measure the duration
       performance.measure(
         'portfolio-load',
         'portfolio-load-start',
         'portfolio-load-end'
       );
-      
+
       // Get the measurement
       const measure = performance.getEntriesByName('portfolio-load')[0];
       console.log(`Portfolio loaded in ${measure.duration}ms`);
     });
   }, []);
-  
+
   return <PortfolioContent />;
 }
-```
+
+```text
 
 ### Web Vitals Reporting
 
@@ -646,7 +676,8 @@ function reportWebVitals() {
 
 // Call on app initialization
 reportWebVitals();
-```
+
+```text
 
 ---
 
@@ -657,14 +688,14 @@ reportWebVitals();
 ```tsx
 function OptimizedPortfolio({ entries }: Props) {
   const [page, setPage] = useState(1);
-  const ITEMS_PER_PAGE = 12;
-  
+  const ITEMS*PER*PAGE = 12;
+
   // Only render current page
   const visibleEntries = entries.slice(
-    (page - 1) * ITEMS_PER_PAGE,
-    page * ITEMS_PER_PAGE
+    (page - 1) * ITEMS*PER*PAGE,
+    page * ITEMS*PER*PAGE
   );
-  
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -676,16 +707,17 @@ function OptimizedPortfolio({ entries }: Props) {
           />
         ))}
       </div>
-      
-      <Pagination 
+
+      <Pagination
         currentPage={page}
-        totalPages={Math.ceil(entries.length / ITEMS_PER_PAGE)}
+        totalPages={Math.ceil(entries.length / ITEMS*PER*PAGE)}
         onPageChange={setPage}
       />
     </>
   );
 }
-```
+
+```text
 
 ### Optimized Blog Post
 
@@ -694,20 +726,20 @@ function BlogPost({ post }: Props) {
   return (
     <article>
       {/* Featured image - high priority */}
-      <img 
+      <img
         src={post.featuredImage}
         alt={post.title}
         loading="eager"
         fetchpriority="high"
         className="w-full aspect-[16/9] object-cover rounded-2xl mb-8"
       />
-      
+
       {/* Content */}
       <div className="prose max-w-none">
         {/* Lazy load content images */}
         <LazyLoadImages content={post.content} />
       </div>
-      
+
       {/* Related posts - load below fold */}
       <Suspense fallback={<LoadingSpinner />}>
         <RelatedPosts category={post.category} />
@@ -715,7 +747,8 @@ function BlogPost({ post }: Props) {
     </article>
   );
 }
-```
+
+```text
 
 ---
 
@@ -734,8 +767,9 @@ function BlogPost({ post }: Props) {
 
 ### Performance Budgets
 
-```
+```text
 Initial Load (3G):
+
 - HTML: < 50KB (compressed)
 - CSS: < 50KB (compressed)
 - JavaScript: < 150KB (compressed)
@@ -743,10 +777,12 @@ Initial Load (3G):
 - Total: < 500KB
 
 Target Metrics:
+
 - Time to Interactive: < 3.8s
 - First Contentful Paint: < 1.8s
 - Speed Index: < 3.4s
-```
+
+```text
 
 ---
 
@@ -755,21 +791,25 @@ Target Metrics:
 ### Recommended Testing Tools
 
 1. **Chrome DevTools**
+
    - Network throttling (3G simulation)
    - Performance profiling
    - Memory leak detection
 
-2. **Lighthouse**
+1. **Lighthouse**
+
    - Mobile performance audits
    - Accessibility checks
    - Best practices validation
 
-3. **WebPageTest**
+1. **WebPageTest**
+
    - Real device testing
    - Video comparison
    - Detailed waterfall charts
 
-4. **Real Device Testing**
+1. **Real Device Testing**
+
    - BrowserStack
    - Physical devices (iPhone SE, Android mid-range)
 
@@ -784,34 +824,40 @@ Target Metrics:
 {entries.map(entry => (
   <img src={entry.image} alt={entry.title} />
 ))}
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Lazy load below-fold images
 {entries.map((entry, index) => (
-  <img 
+  <img
     src={entry.image}
     alt={entry.title}
     loading={index < 3 ? 'eager' : 'lazy'}
   />
 ))}
-```
+
+```text
 
 ### ❌ Mistake 2: Animating Expensive Properties
 
 ```tsx
 // ❌ WRONG - Triggers repaints
 <div style={{ left: position }}>Content</div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - GPU accelerated
 <div style={{ transform: `translateX(${position}px)` }}>
   Content
 </div>
-```
+
+```text
 
 ### ❌ Mistake 3: No Code Splitting
 
@@ -819,14 +865,17 @@ Target Metrics:
 // ❌ WRONG - Everything in main bundle
 import { Lightbox } from './Lightbox';
 import { Modal } from './Modal';
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Lazy load heavy components
 const Lightbox = lazy(() => import('./Lightbox'));
 const Modal = lazy(() => import('./Modal'));
-```
+
+```text
 
 ---
 
@@ -838,5 +887,5 @@ const Modal = lazy(() => import('./Modal'));
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 3.2.0

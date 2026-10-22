@@ -1,6 +1,7 @@
 ---
 name: "Labeling Agent"
-description: "Manages GitHub issue and PR labeling workflows with consistent taxonomy."
+description: "Manages GitHub issue and PR labeling workflows with consistent
+taxonomy."
 type: "agent"
 category: "workflow"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Manage GitHub issue and PR labeling to maintain consistent taxonomy for organization and automation.
+Manage GitHub issue and PR labeling to maintain consistent taxonomy for
+organization and automation.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Manage GitHub issue and PR labeling to maintain consistent taxonomy for organiza
 ## Key Responsibilities
 
 1. **Label Application** – Apply appropriate labels to issues/PRs
-2. **Taxonomy Validation** – Ensure consistent label usage
-3. **Triage Support** – Guide labeling for issue triage
-4. **Automation Support** – Enable workflow automation via labels
-5. **Documentation** – Maintain label reference documentation
-6. **Consistency** – Ensure organization-wide label standards
+
+1. **Taxonomy Validation** – Ensure consistent label usage
+
+1. **Triage Support** – Guide labeling for issue triage
+
+1. **Automation Support** – Enable workflow automation via labels
+
+1. **Documentation** – Maintain label reference documentation
+
+1. **Consistency** – Ensure organization-wide label standards
 
 ## Label Categories
 

@@ -1,6 +1,6 @@
 # Pagination Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 Block for paginating large content lists with page numbers and navigation.
@@ -14,5 +14,5 @@ Block for paginating large content lists with page numbers and navigation.
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

@@ -1,6 +1,7 @@
 ---
 title: "Tailwind-to-BEM Mapping Analysis Report"
-filename: "/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md"
+filename:
+"/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md"
 created: "2026-03-11"
 completed: "2026-03-11"
 version: "1.0.0"
@@ -12,17 +13,21 @@ related_guideline: "/guidelines/tailwind-to-bem-mapping.md"
 
 # Tailwind-to-BEM Mapping Analysis Report
 
-**Audit Date:** March 11, 2026  
-**Purpose:** Document existing BEM architecture and create Tailwind conversion reference  
+**Audit Date:** March 11, 2026
+**Purpose:** Document existing BEM architecture and create Tailwind conversion
+reference
 **Status:** ✅ Complete - Permanent guideline created
 
 ---
 
 ## Executive Summary
 
-This report documents the **complete mapping** between Tailwind utility classes and the project's BEM CSS architecture. A permanent guideline has been created at `/guidelines/tailwind-to-bem-mapping.md` for developer reference.
+This report documents the **complete mapping** between Tailwind utility classes
+and the project's BEM CSS architecture. A permanent guideline has been created
+at `/guidelines/tailwind-to-bem-mapping.md` for developer reference.
 
 **Key Findings:**
+
 - ✅ 150+ BEM classes documented across `/styles/globals.css` and `/styles/blocks/*.css`
 - ✅ WordPress-aligned custom properties for all colors, typography, and spacing
 - ✅ Semantic utility classes for common patterns (text alignment, gradients, backgrounds)
@@ -39,7 +44,7 @@ This report documents the **complete mapping** between Tailwind utility classes 
 | **Containers** | `.container-wide`, `.container-content`, `.section-container` | 3 |
 | **Spacing** | `.section-spacing`, `.px-horizontal-section`, `.mb-fluid-sm`, `.mb-fluid-md` | 10+ |
 | **Grid** | `.grid-2col`, `.grid-3col`, `.grid-4col`, `.grid-auto-fit` | 8 |
-| **Flex** | `.header__nav` (flex), `.footer__grid` (grid) | Component-specific |
+| **Flex** | `.header_*nav` (flex), `.footer*_grid` (grid) | Component-specific |
 
 ### Typography Classes
 
@@ -165,7 +170,8 @@ This report documents the **complete mapping** between Tailwind utility classes 
 --tw-blue-500    → --wp--preset--color--neon-blue: #00F7FF
 --tw-orange-500  → --wp--preset--color--neon-orange: #FF6B35
 --tw-red-500     → --wp--preset--color--neon-red: #FF0055
-```
+
+```text
 
 ### Typography Presets
 
@@ -178,8 +184,10 @@ This report documents the **complete mapping** between Tailwind utility classes 
 
 /* Font Families */
 --tw-font-sans   → --wp--preset--font-family--body: 'Inter', sans-serif
---tw--font-serif → --wp--preset--font-family--heading: 'Space Grotesk', 'Playfair Display', serif
-```
+--tw--font-serif → --wp--preset--font-family--heading: 'Space Grotesk',
+'Playfair Display', serif
+
+```text
 
 ### Spacing Presets
 
@@ -189,7 +197,8 @@ This report documents the **complete mapping** between Tailwind utility classes 
 --tw-spacing-16  → --wp--preset--spacing--40: 1.5rem
 --tw-spacing-24  → --wp--preset--spacing--50: 2rem
 --tw-spacing-32  → --wp--preset--spacing--60: 3rem
-```
+
+```text
 
 ---
 
@@ -198,14 +207,18 @@ This report documents the **complete mapping** between Tailwind utility classes 
 ### Flexbox Patterns
 
 **Tailwind:**
+
 ```html
 <div class="flex items-center justify-between gap-4">
-```
+
+```text
 
 **BEM:**
+
 ```html
 <div class="header__nav">
-```
+
+```text
 
 ```css
 /* In /styles/blocks/header.css */
@@ -215,21 +228,26 @@ This report documents the **complete mapping** between Tailwind utility classes 
   justify-content: space-between;
   gap: 1rem;
 }
-```
+
+```text
 
 ---
 
 ### Grid Patterns
 
 **Tailwind:**
+
 ```html
 <div class="grid grid-cols-3 gap-8">
-```
+
+```text
 
 **BEM:**
+
 ```html
 <div class="grid-3col">
-```
+
+```text
 
 ```css
 /* In globals.css */
@@ -238,27 +256,32 @@ This report documents the **complete mapping** between Tailwind utility classes 
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
-```
+
+```text
 
 ---
 
 ### Card Component
 
 **Tailwind:**
+
 ```html
 <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
   <h3 class="text-2xl font-bold mb-4">Title</h3>
   <p class="text-gray-400">Description</p>
 </div>
-```
+
+```text
 
 **BEM:**
+
 ```html
 <div class="portfolio-card">
   <h3 class="portfolio-card__title">Title</h3>
   <p class="portfolio-card__desc">Description</p>
 </div>
-```
+
+```text
 
 ```css
 /* In /styles/blocks/portfolio-card.css */
@@ -276,25 +299,31 @@ This report documents the **complete mapping** between Tailwind utility classes 
 .portfolio-card__desc {
   color: var(--color-text-muted);
 }
-```
+
+```text
 
 ---
 
 ### Button Component
 
 **Tailwind:**
+
 ```html
-<button class="bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-md font-bold">
+<button class="bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-md
+font-bold">
   Click Me
 </button>
-```
+
+```text
 
 **BEM:**
+
 ```html
 <button class="button button--primary">
   Click Me
 </button>
-```
+
+```text
 
 ```css
 /* In globals.css */
@@ -315,7 +344,8 @@ This report documents the **complete mapping** between Tailwind utility classes 
   background-color: #ff52b9;
   transform: translateY(-2px);
 }
-```
+
+```text
 
 ---
 
@@ -345,7 +375,8 @@ This report documents the **complete mapping** between Tailwind utility classes 
 --wp--preset--spacing--20: clamp(0.5rem, 1vw, 0.75rem);
 --wp--preset--spacing--30: clamp(1rem, 2vw, 1.5rem);
 --wp--preset--spacing--40: clamp(1.5rem, 3vw, 2rem);
-```
+
+```text
 
 ---
 
@@ -354,12 +385,14 @@ This report documents the **complete mapping** between Tailwind utility classes 
 ### When to Create BEM Classes
 
 ✅ **Create a BEM class when:**
+
 - Component appears 3+ times across the site
 - Component has multiple states/variations
 - Styling is semantically meaningful
 - Component is reusable
 
 ❌ **Use inline styles when:**
+
 - Value is dynamically calculated (transform, color from props)
 - ES5 constraint requires object literal workaround
 - One-time unique styling that won't be reused
@@ -383,7 +416,8 @@ This report documents the **complete mapping** between Tailwind utility classes 
 .button--primary { }
 .button--secondary { }
 .button__icon--left { }
-```
+
+```text
 
 ---
 
@@ -392,6 +426,7 @@ This report documents the **complete mapping** between Tailwind utility classes 
 ### Example 1: Hero Section
 
 **Before (Tailwind):**
+
 ```html
 <section class="relative py-20 bg-gradient-to-r from-pink-500 to-purple-600">
   <div class="container mx-auto px-4">
@@ -403,9 +438,11 @@ This report documents the **complete mapping** between Tailwind utility classes 
     </p>
   </div>
 </section>
-```
+
+```text
 
 **After (BEM):**
+
 ```html
 <section class="hero hero--gradient">
   <div class="container-wide section-container px-horizontal-section">
@@ -417,29 +454,34 @@ This report documents the **complete mapping** between Tailwind utility classes 
     </p>
   </div>
 </section>
-```
+
+```text
 
 ---
 
 ### Example 2: Video Grid
 
 **Before (Tailwind):**
+
 ```html
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
   <div class="bg-gray-800 rounded-lg overflow-hidden">
     <!-- Card content -->
   </div>
 </div>
-```
+
+```text
 
 **After (BEM):**
+
 ```html
 <div class="videos-grid">
   <div class="video-card">
     <!-- Card content -->
   </div>
 </div>
-```
+
+```text
 
 ```css
 /* Responsive grid */
@@ -448,17 +490,20 @@ This report documents the **complete mapping** between Tailwind utility classes 
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 }
-```
+
+```text
 
 ---
 
 ## Related Documentation
 
 **Generated Files:**
+
 - ✅ This report: `/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md`
 - ✅ Permanent guideline: `/guidelines/tailwind-to-bem-mapping.md`
 
 **Reference Files:**
+
 - `/styles/globals.css` - Core BEM classes and utilities
 - `/styles/blocks/*.css` - Component-specific BEM styles
 - `/guidelines/Guidelines.md` - Main project guidelines with BEM architecture rules
@@ -468,12 +513,15 @@ This report documents the **complete mapping** between Tailwind utility classes 
 ## Next Steps
 
 1. ✅ **Permanent guideline created** at `/guidelines/tailwind-to-bem-mapping.md`
-2. ➡️ **Proceed to Sub-Prompt 04** (WordPress CSS Alignment)
-3. ➡️ **Share guideline with team** for onboarding new developers
-4. ➡️ **Update component documentation** to reference BEM classes
+
+1. ➡️ **Proceed to Sub-Prompt 04** (WordPress CSS Alignment)
+
+1. ➡️ **Share guideline with team** for onboarding new developers
+
+1. ➡️ **Update component documentation** to reference BEM classes
 
 ---
 
-**Audit Completed:** March 11, 2026  
-**Report Status:** Complete  
+**Audit Completed:** March 11, 2026
+**Report Status:** Complete
 **Guideline Created:** ✅ `/guidelines/tailwind-to-bem-mapping.md`

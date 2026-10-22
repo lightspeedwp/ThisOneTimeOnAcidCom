@@ -1,19 +1,23 @@
 # `.github` Directory Guide
 
-This directory contains governance, community, and workflow resources for the **Ash Shaw Makeup Portfolio** (ThisOneTimeOnAcidCom) repository.
+This directory contains governance, community, and workflow resources for the
+**Ash Shaw Makeup Portfolio** (ThisOneTimeOnAcidCom) repository.
 
 ## Directory Structure
 
 ### `workflows/`
 
-Centrally managed GitHub Actions workflows. **Do not edit these files**—they are controlled by the shared `lightspeedwp/.github` repository and synchronized via the `dependency-merge-controller` workflow.
+Centrally managed GitHub Actions workflows. **Do not edit these files**—they are
+controlled by the shared `lightspeedwp/.github` repository and synchronized via
+the `dependency-merge-controller` workflow.
 
 | File | Purpose | Maintenance |
 |------|---------|------------|
 | `dependency-automation.yml` | Auto-merge dependency PRs | Centrally managed |
 | `dependency-validation.yml` | Validate package and lock files sync | Centrally managed |
 
-**Local workflow contributions:**
+## Local workflow contributions
+
 - New workflows should follow the naming pattern `{type}-{feature}.yml`
 - Keep workflows minimal; prefer repository-level scripts over workflow logic
 - Test workflow syntax with [`workflow-validator`](https://github.com/lightspeedwp/workflow-validator) before committing
@@ -22,19 +26,22 @@ Centrally managed GitHub Actions workflows. **Do not edit these files**—they a
 
 ## Community Resources (Inherited from Organisation)
 
-The repository inherits community templates from the shared `lightspeedwp/.github` organisation repository:
+The repository inherits community templates from the shared
+`lightspeedwp/.github` organisation repository:
 
-- **Issue templates** — Inherited from org defaults ([`.github/ISSUE_TEMPLATE/`](https://github.com/lightspeedwp/.github/tree/develop/.github/ISSUE_TEMPLATE))
-- **PR templates** — Inherited from org defaults ([`.github/PULL_REQUEST_TEMPLATE/`](https://github.com/lightspeedwp/.github/tree/develop/.github/PULL_REQUEST_TEMPLATE))
+- **Issue templates** — Inherited from org defaults ([`.github/ISSUE*TEMPLATE/`](https://github.com/lightspeedwp/.github/tree/develop/.github/ISSUE*TEMPLATE))
+- **PR templates** — Inherited from org defaults ([`.github/PULL*REQUEST*TEMPLATE/`](https://github.com/lightspeedwp/.github/tree/develop/.github/PULL*REQUEST*TEMPLATE))
 - **Discussion templates** — Available from org defaults if repository discussions are enabled
 - **Labels** — Managed separately in this repository; reference org label definitions ([`labels.yml`](https://github.com/lightspeedwp/.github/blob/develop/.github/labels.yml))
 - **Saved replies** — Personal GitHub resources, not repository files
 
 ### Enabling Local Templates
 
-If this repository requires custom issue, PR, or discussion templates (deviating from org defaults), they would be created in:
+If this repository requires custom issue, PR, or discussion templates (deviating
+from org defaults), they would be created in:
+
 - `.github/ISSUE_TEMPLATE/` — Issue templates
-- `.github/PULL_REQUEST_TEMPLATE/` — PR templates
+- `.github/PULL*REQUEST*TEMPLATE/` — PR templates
 - `.github/DISCUSSION_TEMPLATE/` — Discussion form templates
 
 **Current status:** Not configured (using org defaults).
@@ -47,27 +54,36 @@ If this repository requires custom issue, PR, or discussion templates (deviating
 
 **All branches must follow:** `{type}/{scope}-{title}`
 
-**Allowed types:** `feat`, `fix`, `hotfix`, `release`, `refactor`, `chore`, `docs`, `test`, `perf`, `ci`, `build`, `epic`, `task`, `research`, `design`, `a11y`, `ops`, and others—see [`validate-branch-name.js`](../scripts/validate-branch-name.js) for the complete list.
+**Allowed types:** `feat`, `fix`, `hotfix`, `release`, `refactor`, `chore`,
+`docs`, `test`, `perf`, `ci`, `build`, `epic`, `task`, `research`, `design`,
+`a11y`, `ops`, and others—see
+[`validate-branch-name.js`](../scripts/validate-branch-name.js) for the complete
+list.
 
 **Examples:**
+
 - ✅ `feat/dark-mode-implementation`
 - ✅ `fix/journal-validation-path`
 - ✅ `docs/governance-update`
 - ❌ `claude/something` — FORBIDDEN (reserved for Claude Code internal sessions)
 - ❌ `feature/something` — WRONG (use `feat/` not `feature/`)
 
-**Validate before pushing:**
+## Validate before pushing
+
 ```bash
 npm run validate:branch-name -- --branch your-branch-name
-```
 
-**Reference:** [`scripts/validate-branch-name.js`](../scripts/validate-branch-name.js)
+```text
+
+**Reference:**
+[`scripts/validate-branch-name.js`](../scripts/validate-branch-name.js)
 
 ---
 
 ## Key Repository Files (Not in `.github/`)
 
-These files are at the repository root and contain important governance information:
+These files are at the repository root and contain important governance
+information:
 
 | File | Purpose |
 |------|---------|
@@ -89,7 +105,9 @@ This repository uses **Spec Kit** for specification-driven development:
 - **Gemini CLI integration:** [`.gemini/`](../.gemini/)
 - **Spec workflow:** See [`CONTRIBUTING.md § Using Spec Kit`](../CONTRIBUTING.md#using-spec-kit)
 
-Specifications are created in and tracked within the repository using Spec Kit. See the `.specify/` directory for configuration and the [`.github/specs/`](../.github/specs/) directory for all specification documents.
+Specifications are created in and tracked within the repository using Spec Kit.
+See the `.specify/` directory for configuration and the
+[`.github/specs/`](../.github/specs/) directory for all specification documents.
 
 ---
 
@@ -98,15 +116,19 @@ Specifications are created in and tracked within the repository using Spec Kit. 
 ### Netlify Configuration
 
 The Netlify site is configured to:
+
 - **Build command:** `npm run build`
 - **Publish directory:** `dist/`
 - **Branch:** `main`
 
-Netlify does **not** read `src/app/netlify.toml` (the base directory is the repository root, not `src/app/`). Deployment settings are managed in the Netlify UI.
+Netlify does **not** read `src/app/netlify.toml` (the base directory is the
+repository root, not `src/app/`). Deployment settings are managed in the Netlify
+UI.
 
 ### Environment Variables
 
-Environment variables are managed in the Netlify site settings, not in the repository. Do not commit `.env` files.
+Environment variables are managed in the Netlify site settings, not in the
+repository. Do not commit `.env` files.
 
 ---
 
@@ -127,9 +149,12 @@ Do not modify these without explicit owner approval:
 
 ## Known Issues & Decisions Pending
 
-See [`AGENTS.md § Unresolved decisions`](../AGENTS.md#unresolved-decisions-owner-confirmation-required) for a complete list of open questions waiting for owner confirmation.
+See [`AGENTS.md § Unresolved
+decisions`](../AGENTS.md#unresolved-decisions-owner-confirmation-required) for a
+complete list of open questions waiting for owner confirmation.
 
 Key items:
+
 - **Package manager:** npm vs. pnpm remnants (currently npm-only)
 - **Node.js version:** Not pinned
 - **Test framework:** Jest ESM config needs fixing
@@ -162,4 +187,5 @@ Key items:
 
 ---
 
-**Last updated:** 16 October 2026 · **Status:** Governance audit in progress (epic [TOA-241](https://linear.app/lightspeedwp/issue/TOA-241))
+**Last updated:** 16 October 2026 · **Status:** Governance audit in progress
+(epic [TOA-241](https://linear.app/lightspeedwp/issue/TOA-241))

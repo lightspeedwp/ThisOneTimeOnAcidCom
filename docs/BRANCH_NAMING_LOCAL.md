@@ -1,16 +1,19 @@
 # Branch Naming — Local Developer Guide
 
-Quick reference for creating branches following the repository branching strategy.
+Quick reference for creating branches following the repository branching
+strategy.
 
 ## Pattern
 
 All branches must follow this exact pattern:
 
-```
+```text
 {type}/{scope}-{title}
-```
+
+```text
 
 Examples:
+
 - ✅ `feat/user-dashboard`
 - ✅ `fix/navigation-menu`
 - ✅ `docs/api-guide`
@@ -49,7 +52,8 @@ Examples:
 | `deps` | Dependency updates | `deps/upgrade-packages` |
 | `audit` | Compliance review | `audit/code-review` |
 
-**[Full type list →](../.claude/skills/branch-validation/SKILL.md#valid-type-values)**
+**[Full type list
+→](../.claude/skills/branch-validation/SKILL.md#valid-type-values)**
 
 ## Naming Rules
 
@@ -69,13 +73,14 @@ Examples:
 
 ### Good Examples
 
-```
+```text
 feat/user-registration → New user registration flow
 fix/navigation-mobile-menu → Fix mobile navigation bug
 docs/api-endpoint-reference → Document API endpoints
 content/chapter-two-edits → Edit chapter two content
 a11y/form-label-association → Fix form accessibility
-```
+
+```text
 
 ## FORBIDDEN Prefixes
 
@@ -93,45 +98,60 @@ a11y/form-label-association → Fix form accessibility
 
 ```bash
 git fetch origin develop
-```
+
+```text
 
 ### Step 2: Create Branch
 
 ```bash
+
 # For a new feature
+
 git checkout -b feat/your-feature-name origin/develop
 
 # For a bug fix
+
 git checkout -b fix/what-is-broken origin/develop
 
 # For documentation
+
 git checkout -b docs/what-you-are-documenting origin/develop
-```
+
+```text
 
 ### Step 3: Verify Name
 
 ```bash
 git branch --show-current
+
 # Output: feat/your-feature-name
 
 # Validate with script
+
 node scripts/validate-branch-name.js
-# Output: Branch 'feat/your-feature-name' matches the repository branching strategy.
-```
+
+# Output: Branch 'feat/your-feature-name' matches the repository branching strategy
+
+```text
 
 ### Step 4: Work & Commit
 
 ```bash
+
 # Make changes
-# ... edit files ...
+
+# ... edit files ..
 
 # Commit
+
 git add .
 git commit -m "Implement feature XYZ"
 
 # Push
+
 git push -u origin feat/your-feature-name
-```
+
+```text
 
 ### Step 5: Create PR
 
@@ -142,6 +162,7 @@ Create a draft PR on GitHub, request review, and merge when ready.
 ### Start From `develop`
 
 Use `develop` as the base branch for:
+
 - ✅ Features (`feat/`)
 - ✅ Bug fixes (`fix/`)
 - ✅ Documentation (`docs/`)
@@ -152,7 +173,8 @@ Use `develop` as the base branch for:
 
 ```bash
 git checkout -b feat/new-feature origin/develop
-```
+
+```text
 
 ### Start From `main` (Hotfixes Only)
 
@@ -160,90 +182,121 @@ Use `main` only for urgent production fixes:
 
 ```bash
 git checkout -b hotfix/critical-bug origin/main
-```
+
+```text
 
 ## Common Patterns
 
 ### Feature Work
 
 ```bash
+
 # New component
+
 git checkout -b feat/button-component origin/develop
 
 # New API endpoint
+
 git checkout -b feat/user-api-endpoint origin/develop
 
 # New page
+
 git checkout -b feat/dashboard-page origin/develop
-```
+
+```text
 
 ### Bug Fixes
 
 ```bash
+
 # Fix a specific bug
+
 git checkout -b fix/login-error origin/develop
 
 # Fix in a component
+
 git checkout -b fix/navigation-menu origin/develop
 
 # Fix a typo
+
 git checkout -b fix/readme-typo origin/develop
-```
+
+```text
 
 ### Documentation
 
 ```bash
+
 # API docs
+
 git checkout -b docs/api-reference origin/develop
 
 # Setup guide
+
 git checkout -b docs/setup-guide origin/develop
 
 # Contributing guide
+
 git checkout -b docs/contributing origin/develop
-```
+
+```text
 
 ### Content Updates (For Content Repository)
 
 ```bash
+
 # Chapter edits
+
 git checkout -b content/chapter-one-revisions origin/develop
 
 # Fact-checking
+
 git checkout -b content/chapter-three-fact-check origin/develop
 
 # New section
+
 git checkout -b content/glossary-terms origin/develop
-```
+
+```text
 
 ## Validation
 
 ### Before Pushing
 
 ```bash
+
 # Validate your branch name
+
 npm run validate:branch-name
 
 # Expected output
+
 Branch 'feat/your-feature' matches the repository branching strategy.
 
 # Exit code 0 = valid ✅
+
 # Exit code 1 = invalid ❌
-```
+
+```text
 
 ### If Invalid
 
 ```bash
+
 # Check current branch
+
 git branch --show-current
 
 # Rename if needed
+
 git branch -m old-name new-name
 
 # Delete remote and re-push
+
 git push origin --delete old-name
 git push -u origin new-name
-```
+
+```text
 
 ## Help & Support
 
@@ -251,24 +304,26 @@ git push -u origin new-name
 
 Use the branches agent for personalized guidance:
 
-```
+```text
 /branches-agent
 
 Describe your work (e.g., "I'm fixing the navigation menu on mobile")
 Agent will recommend: fix/navigation-mobile-menu
-```
+
+```text
 
 ### Validation Skill
 
 Use the branch validation skill to verify your branch:
 
-```
+```text
 /branch-validation
-```
 
-### Documentation
+```text
 
-- **Full strategy:** [.github/docs/BRANCHING_STRATEGY.md](../.github/docs/BRANCHING_STRATEGY.md) (in .github repo)
+### Documentation (1)
+
+- **Full strategy:** [.github/docs/BRANCHING*STRATEGY.md](../.github/docs/BRANCHING*STRATEGY.md) (in .github repo)
 - **Agent guide:** [.claude/agents/branches-agent.md](../.claude/agents/branches-agent.md)
 - **Skill guide:** [.claude/skills/branch-validation/SKILL.md](../.claude/skills/branch-validation/SKILL.md)
 - **Worktrees guide:** [.claude/guides/worktrees.md](../.claude/guides/worktrees.md)
@@ -281,28 +336,34 @@ Since this is a React/Vite project, here are common patterns:
 ### Component Work
 
 ```bash
-# New component
+
+# New component (1)
+
 feat/button-component
 feat/form-input-field
 feat/navigation-sidebar
 
 # Fix in component
+
 fix/button-styles
 fix/form-validation
 fix/navigation-active-state
 
 # Component documentation
+
 docs/component-button
 docs/form-components-guide
-```
 
-### Feature Work
+```text
+
+### Feature Work (1)
 
 ```bash
 feat/dark-mode-support
 feat/user-preferences-panel
 feat/api-client-refactor
-```
+
+```text
 
 ### Testing
 
@@ -310,7 +371,8 @@ feat/api-client-refactor
 test/button-component-tests
 test/e2e-form-flow
 test/integration-api-client
-```
+
+```text
 
 ### Performance
 
@@ -318,7 +380,8 @@ test/integration-api-client
 perf/image-lazy-loading
 perf/bundle-size-optimization
 perf/query-caching
-```
+
+```text
 
 ### Styling & Design
 
@@ -326,15 +389,18 @@ perf/query-caching
 design/button-refresh
 design/color-tokens-update
 design/spacing-system
-```
+
+```text
 
 ## Troubleshooting
 
 ### "Branch name already exists"
 
 The branch exists on GitHub. Either:
+
 1. Switch to it: `git checkout feat/my-feature`
-2. Use a different name with more specifics: `feat/my-feature-v2`
+
+1. Use a different name with more specifics: `feat/my-feature-v2`
 
 ### "Authentication failed" on push
 
@@ -343,11 +409,13 @@ Verify Git credentials:
 ```bash
 git config --global user.email "your-email@example.com"
 git config --global user.name "Your Name"
-```
+
+```text
 
 ### Branch validation fails but name looks right
 
 Check for subtle issues:
+
 - Underscores: `feat/my_feature` → `feat/my-feature`
 - Uppercase: `feat/MyFeature` → `feat/my-feature`
 - Spaces: `feat/my feature` → `feat/my-feature`
@@ -368,6 +436,7 @@ Before pushing:
 
 ---
 
-*Need help?* Use `/branches-agent` for personalized guidance or `/branch-validation` to check your branch.
+*Need help?* Use `/branches-agent` for personalized guidance or
+`/branch-validation` to check your branch.
 
-_Last updated: 2026-10-16_
+*Last updated: 2026-10-16*

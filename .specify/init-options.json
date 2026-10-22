@@ -4,5 +4,6 @@
   "here": true,
   "integration": "gemini",
   "script": "sh",
+  "specifyFeatureDirectory": ".github/specs",
   "speckit_version": "1.0.13"
 }

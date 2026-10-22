@@ -1,10 +1,12 @@
 # Mobile Animation Guidelines
 
-Animation rules and best practices for mobile devices, covering CSS vs JavaScript animations, performance optimization, and accessibility.
+Animation rules and best practices for mobile devices, covering CSS vs
+JavaScript animations, performance optimization, and accessibility.
 
 ## Purpose
 
 Define animation standards with:
+
 - CSS vs JavaScript animation decision criteria
 - Performance-optimized animation patterns
 - Mobile-friendly timing and easing
@@ -19,6 +21,7 @@ Define animation standards with:
 ### When to Use CSS Animations
 
 **✅ Use CSS for:**
+
 - Simple transitions (hover, focus, active states)
 - Enter/exit animations (fade in/out, slide in/out)
 - Loading spinners and pulse effects
@@ -26,7 +29,8 @@ Define animation standards with:
 - Transform-based animations (translate, rotate, scale)
 - Infinite looping animations
 
-**Why CSS?**
+## Why CSS
+
 - GPU-accelerated (runs on compositor thread)
 - Better performance on mobile
 - Runs even when JavaScript is blocked
@@ -52,11 +56,13 @@ Define animation standards with:
   from { opacity: 0; }
   to { opacity: 1; }
 }
-```
+
+```text
 
 ### When to Use JavaScript Animations
 
-**✅ Use JavaScript for:**
+## ✅ Use JavaScript for
+
 - Complex multi-step sequences
 - Physics-based animations (spring, momentum)
 - Scroll-linked parallax effects
@@ -64,7 +70,8 @@ Define animation standards with:
 - Animations that need precise control or dynamic values
 - Coordinated animations across multiple elements
 
-**Why JavaScript?**
+## Why JavaScript
+
 - Full control over timing and sequencing
 - Dynamic values based on user input
 - Can respond to events mid-animation
@@ -75,7 +82,8 @@ Define animation standards with:
 <div className="animate-slide-up">
   Content
 </div>
-```
+
+```text
 
 ```css
 /* Define in /styles/globals.css */
@@ -87,7 +95,8 @@ Define animation standards with:
 .animate-slide-up {
   animation: slide-up 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-```
+
+```text
 
 ---
 
@@ -114,7 +123,8 @@ These properties are GPU-accelerated and don't trigger layout or paint.
   margin-left: 10px; /* Triggers layout */
   width: 200px;      /* Triggers layout + paint */
 }
-```
+
+```text
 
 ### 2. Use will-change Sparingly
 
@@ -137,7 +147,8 @@ These properties are GPU-accelerated and don't trigger layout or paint.
 .element {
   will-change: transform, opacity;  /* Don't set permanently */
 }
-```
+
+```text
 
 ### 3. Limit Concurrent Animations
 
@@ -155,7 +166,8 @@ These properties are GPU-accelerated and don't trigger layout or paint.
 .stagger-item:nth-child(5) { animation-delay: 0.4s; }
 .stagger-item:nth-child(6) { animation-delay: 0.5s; }
 .stagger-item:nth-child(n+7) { animation-delay: 0s; opacity: 1; }
-```
+
+```text
 
 ---
 
@@ -170,9 +182,11 @@ These properties are GPU-accelerated and don't trigger layout or paint.
 --duration-normal: 300ms;    /* Standard transitions, button effects */
 --duration-slow: 500ms;      /* Slide-ins, fade-ins, page transitions */
 --duration-slower: 700ms;    /* Complex animations, modals */
-```
 
-**Mobile Adjustments:**
+```text
+
+## Mobile Adjustments
+
 ```css
 /* Slightly faster on mobile for better responsiveness */
 @media (max-width: 640px) {
@@ -180,7 +194,8 @@ These properties are GPU-accelerated and don't trigger layout or paint.
   --duration-slow: 400ms;    /* 500ms → 400ms */
   --duration-slower: 600ms;  /* 700ms → 600ms */
 }
-```
+
+```text
 
 ### Easing Functions
 
@@ -198,7 +213,8 @@ These properties are GPU-accelerated and don't trigger layout or paint.
 .button {
   transition: transform 300ms var(--ease-out);
 }
-```
+
+```text
 
 ---
 
@@ -239,7 +255,8 @@ These properties are GPU-accelerated and don't trigger layout or paint.
 .image-container:hover .image {
   transform: scale(1.1);
 }
-```
+
+```text
 
 ### 2. Fade In (CSS)
 
@@ -272,9 +289,11 @@ These properties are GPU-accelerated and don't trigger layout or paint.
 .fade-in-up {
   animation: fadeInUp 500ms ease-out forwards;
 }
-```
 
-**React Implementation:**
+```text
+
+## React Implementation
+
 ```tsx
 const [isVisible, setIsVisible] = useState(false);
 
@@ -283,13 +302,14 @@ useEffect(() => {
 }, []);
 
 <div className={`transition-all duration-500 ${
-  isVisible 
-    ? 'opacity-100 translate-y-0' 
+  isVisible
+    ? 'opacity-100 translate-y-0'
     : 'opacity-0 translate-y-4'
 }`}>
   Content
 </div>
-```
+
+```text
 
 ### 3. Slide In (CSS)
 
@@ -316,7 +336,8 @@ useEffect(() => {
 .mobile-menu.open {
   transform: translateX(0);
 }
-```
+
+```text
 
 ### 4. Loading Spinner (CSS)
 
@@ -347,7 +368,8 @@ useEffect(() => {
 .loading-pulse {
   animation: pulse 2s ease-in-out infinite;
 }
-```
+
+```text
 
 ### 5. Stagger Animation (CSS)
 
@@ -371,7 +393,8 @@ useEffect(() => {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-```
+
+```text
 
 ```tsx
 <div className="stagger-container">
@@ -379,7 +402,8 @@ useEffect(() => {
     <div key={i}>{item.content}</div>
   ))}
 </div>
-```
+
+```text
 
 ### 6. Modal Enter/Exit (CSS)
 
@@ -405,7 +429,8 @@ useEffect(() => {
   from { opacity: 0; transform: scale(0.95) translateY(20px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
-```
+
+```text
 
 ```tsx
 {isOpen && (
@@ -421,7 +446,8 @@ useEffect(() => {
     </div>
   </>
 )}
-```
+
+```text
 
 ---
 
@@ -435,7 +461,7 @@ import { useEffect, useRef, useState } from 'react';
 function useInView(options = {}) {
   const ref = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -446,28 +472,28 @@ function useInView(options = {}) {
       },
       { threshold: 0.1, ...options }
     );
-    
+
     if (ref.current) {
       observer.observe(ref.current);
     }
-    
+
     return () => observer.disconnect();
   }, []);
-  
+
   return { ref, isInView };
 }
 
 // Usage
 function AnimatedSection() {
   const { ref, isInView } = useInView();
-  
+
   return (
-    <div 
+    <div
       ref={ref}
       className={`
         transition-all duration-700 ease-out
-        ${isInView 
-          ? 'opacity-100 translate-y-0' 
+        ${isInView
+          ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-12'
         }
       `}
@@ -476,7 +502,8 @@ function AnimatedSection() {
     </div>
   );
 }
-```
+
+```text
 
 ### Parallax Scroll (CSS + JavaScript)
 
@@ -504,7 +531,8 @@ function ParallaxSection() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -537,7 +565,8 @@ function ParallaxSection() {
 .ripple {
   animation: ripple 600ms ease-out;
 }
-```
+
+```text
 
 ### Swipe Gestures (JavaScript + Touch Events)
 
@@ -573,7 +602,8 @@ function SwipeableCard() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -593,40 +623,42 @@ function SwipeableCard() {
     scroll-behavior: auto !important;
   }
 }
-```
+
+```text
 
 ### JavaScript Detection
 
 ```tsx
 function useReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  
+
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
-    
+
     const listener = (e: MediaQueryListEvent) => {
       setPrefersReducedMotion(e.matches);
     };
-    
+
     mediaQuery.addEventListener('change', listener);
     return () => mediaQuery.removeEventListener('change', listener);
   }, []);
-  
+
   return prefersReducedMotion;
 }
 
 // Usage — toggle CSS animation class based on preference
 function AnimatedComponent() {
   const prefersReducedMotion = useReducedMotion();
-  
+
   return (
     <div className={prefersReducedMotion ? '' : 'animate-fade-in-up'}>
       Content
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -637,62 +669,63 @@ function AnimatedComponent() {
 ```tsx
 function usePauseWhenHidden() {
   const [isPaused, setIsPaused] = useState(false);
-  
+
   useEffect(() => {
     const handleVisibilityChange = () => {
       setIsPaused(document.hidden);
     };
-    
+
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
-  
+
   return isPaused;
 }
 
 // Usage - Pause carousel when tab hidden
 function Carousel() {
   const isPaused = usePauseWhenHidden();
-  
+
   useEffect(() => {
     if (isPaused) return;
-    
+
     const interval = setInterval(() => {
       nextSlide();
     }, 3000);
-    
+
     return () => clearInterval(interval);
   }, [isPaused]);
 }
-```
+
+```text
 
 ### Reduce Animations on Low Battery
 
 ```tsx
 function useLowBattery() {
   const [isLowBattery, setIsLowBattery] = useState(false);
-  
+
   useEffect(() => {
     (navigator as any).getBattery?.().then((battery: any) => {
       const checkBattery = () => {
         setIsLowBattery(battery.level < 0.2 && !battery.charging);
       };
-      
+
       checkBattery();
       battery.addEventListener('levelchange', checkBattery);
       battery.addEventListener('chargingchange', checkBattery);
     });
   }, []);
-  
+
   return isLowBattery;
 }
 
 // Usage
 function AnimatedElement() {
   const isLowBattery = useLowBattery();
-  
+
   // Disable animations on low battery
   return (
     <div className={isLowBattery ? '' : 'animate-float'}>
@@ -700,7 +733,8 @@ function AnimatedElement() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -715,15 +749,18 @@ function AnimatedElement() {
   width: 200px;
   height: 100px;
 }
-```
+
+```text
 
 **Solution:**
+
 ```css
 /* ✅ CORRECT - GPU-accelerated */
 .element:hover {
   transform: translateX(10px) scale(1.1);
 }
-```
+
+```text
 
 ### ❌ Mistake 2: No Reduced Motion Support
 
@@ -732,9 +769,11 @@ function AnimatedElement() {
 .spinner {
   animation: spin 2s linear infinite;
 }
-```
+
+```text
 
 **Solution:**
+
 ```css
 /* ✅ CORRECT - Respects preferences */
 .spinner {
@@ -746,7 +785,8 @@ function AnimatedElement() {
     animation: none;
   }
 }
-```
+
+```text
 
 ### ❌ Mistake 3: Too Many Simultaneous Animations
 
@@ -755,9 +795,11 @@ function AnimatedElement() {
 .grid-item {
   animation: fade-in-up 0.4s ease-out;
 }
-```
+
+```text
 
 **Solution:**
+
 ```css
 /* ✅ CORRECT - Only first 10 items animate, rest appear instantly */
 .grid-item {
@@ -773,4 +815,5 @@ function AnimatedElement() {
 .grid-item:nth-child(2) { animation-delay: 0.05s; }
 .grid-item:nth-child(3) { animation-delay: 0.1s; }
 /* ... up to 10th child */
-```
+
+```text

@@ -1,6 +1,7 @@
 ---
 name: "Document Reviewer Agent"
-description: "Reviews documentation quality and completeness for portfolio site guidelines and content."
+description: "Reviews documentation quality and completeness for portfolio site
+guidelines and content."
 type: "agent"
 category: "quality"
 enabled: true
@@ -11,7 +12,8 @@ tools: ["read", "write", "bash"]
 
 ## Purpose
 
-Review documentation quality and completeness to ensure clear, maintainable project guidance.
+Review documentation quality and completeness to ensure clear, maintainable
+project guidance.
 
 ## Scope for This Repository
 
@@ -25,11 +27,16 @@ Review documentation quality and completeness to ensure clear, maintainable proj
 ## Key Responsibilities
 
 1. **Quality Review** – Assess documentation quality and clarity
-2. **Completeness Validation** – Ensure documentation is comprehensive
-3. **Accuracy Checking** – Validate information accuracy
-4. **Consistency** – Ensure consistent style and structure
-5. **Accessibility** – Ensure documentation is accessible
-6. **Organization** – Guide logical documentation structure
+
+1. **Completeness Validation** – Ensure documentation is comprehensive
+
+1. **Accuracy Checking** – Validate information accuracy
+
+1. **Consistency** – Ensure consistent style and structure
+
+1. **Accessibility** – Ensure documentation is accessible
+
+1. **Organization** – Guide logical documentation structure
 
 ## Documentation Types
 

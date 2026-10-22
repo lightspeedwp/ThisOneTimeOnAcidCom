@@ -1,7 +1,7 @@
 # Fix 4: Icon Badge CSS Implementation Complete
 
-**Date:** March 7, 2026  
-**Status:** ✅ CSS Foundation Complete  
+**Date:** March 7, 2026
+**Status:** ✅ CSS Foundation Complete
 **Next Step:** Add icons to individual pages
 
 ---
@@ -13,44 +13,57 @@
 **File:** `/styles/blocks/specimen-page.css`
 
 **Changes Made:**
+
 1. Changed `.specimen-page__hero-badge` from `display: inline-block` to `display: inline-flex`
-2. Added `align-items: center` for vertical alignment
-3. Added `gap: 6px` for spacing between icon and text
-4. Added `.specimen-page__hero-badge svg` rule:
+
+1. Added `align-items: center` for vertical alignment
+
+1. Added `gap: 6px` for spacing between icon and text
+
+1. Added `.specimen-page__hero-badge svg` rule:
+
    - `flex-shrink: 0` — prevents icon from shrinking
    - `width: 16px` — consistent icon size
    - `height: 16px` — consistent icon size
 
-**Result:** Badge container now supports icons with proper spacing and alignment!
+**Result:** Badge container now supports icons with proper spacing and
+alignment!
 
 ---
 
 ## Visual Preview
 
-### Before:
-```
+### Before
+
+```text
 ┌─────────────┐
 │ TYPOGRAPHY  │
 └─────────────┘
-```
 
-### After (with icon):
-```
+```text
+
+### After (with icon)
+
+```text
 ┌──────────────────┐
 │ [Aa] TYPOGRAPHY  │
 └──────────────────┘
-```
+
+```text
 
 ---
 
 ## Icon Implementation Example
 
-### Before:
+### Before (1)
+
 ```tsx
 <span className="specimen-page__hero-badge">Typography</span>
-```
 
-### After:
+```text
+
+### After
+
 ```tsx
 import { TextAa } from '@phosphor-icons/react';
 
@@ -58,7 +71,8 @@ import { TextAa } from '@phosphor-icons/react';
   <TextAa size={16} weight="duotone" aria-hidden="true" />
   <span>Typography</span>
 </span>
-```
+
+```text
 
 ---
 
@@ -92,7 +106,8 @@ Quick reference for which icon to use on each page:
 | Performance | `Heartbeat` |
 | Deployment | `Rocket` |
 
-*(See full mapping in `/reports/comprehensive-hero-architecture/icon-badge-implementation-plan.md`)*
+*(See full mapping in
+`/reports/comprehensive-hero-architecture/icon-badge-implementation-plan.md`)*
 
 ---
 
@@ -101,10 +116,14 @@ Quick reference for which icon to use on each page:
 To complete Fix 4, add icons to each page:
 
 1. Open page component (e.g., `/components/pages/dev-tools/TypographySpecimenPage.tsx`)
-2. Import the appropriate Phosphor icon
-3. Wrap badge text in `<span>` tags
-4. Add icon element before text
-5. Repeat for all 37 pages
+
+1. Import the appropriate Phosphor icon
+
+1. Wrap badge text in `<span>` tags
+
+1. Add icon element before text
+
+1. Repeat for all 37 pages
 
 **Estimated time:** 25-30 minutes for all pages
 

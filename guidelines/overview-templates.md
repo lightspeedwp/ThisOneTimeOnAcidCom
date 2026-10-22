@@ -1,6 +1,6 @@
 # Page Templates Overview
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 WordPress-aligned page templates for the Ash Shaw Portfolio.
@@ -8,6 +8,7 @@ WordPress-aligned page templates for the Ash Shaw Portfolio.
 ## Purpose
 
 Define page templates following WordPress conventions:
+
 - Full page layouts
 - Reusable template structure
 - Consistent page architecture
@@ -16,13 +17,15 @@ Define page templates following WordPress conventions:
 
 ---
 
-## What Are Templates?
+## What Are Templates
 
-**Templates** are full page layouts that combine parts, sections, patterns, blocks, and components into complete user experiences. They align with WordPress block theme templates.
+**Templates** are full page layouts that combine parts, sections, patterns,
+blocks, and components into complete user experiences. They align with WordPress
+block theme templates.
 
 ### Template Hierarchy
 
-```
+```text
 Template (Full Page)
 ├── Part (Header)
 │   └── Pattern (Navigation)
@@ -37,13 +40,14 @@ Template (Full Page)
 └── Part (Footer)
     └── Block (Contact Form)
         └── Component (Input)
-```
+
+```text
 
 ---
 
 ## React Component Architecture Diagram
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                              App.tsx                                     │
 │                         (Main Application)                               │
@@ -124,7 +128,8 @@ Template (Full Page)
                     │ • emailService      │
                     │ • timeoutHandler    │
                     └─────────────────────┘
-```
+
+```text
 
 ### Diagram Legend
 
@@ -140,7 +145,8 @@ Template (Full Page)
 
 ## Template Categories
 
-The Ash Shaw portfolio uses **7 page templates** organized by category. Each has detailed implementation guidelines.
+The Ash Shaw portfolio uses **7 page templates** organized by category. Each has
+detailed implementation guidelines.
 
 ### Marketing Pages
 
@@ -176,16 +182,17 @@ export function PageTemplate({ setCurrentPage }: Props) {
       <Section1 />
       <Section2 />
       <Section3 />
-      
+
       {/* Global footer */}
       <Footer setCurrentPage={setCurrentPage} />
-      
+
       {/* Utility components */}
       <ScrollToTop />
     </main>
   );
 }
-```
+
+```text
 
 ---
 
@@ -206,6 +213,7 @@ export function PageTemplate({ setCurrentPage }: Props) {
 ## Best Practices
 
 ### 1. Consistent Structure
+
 ```tsx
 // ✅ All templates follow same pattern
 <main id="main-content" role="main" className="min-h-screen">
@@ -213,9 +221,11 @@ export function PageTemplate({ setCurrentPage }: Props) {
   <Section2 />
   <Footer />
 </main>
-```
+
+```text
 
 ### 2. Semantic HTML
+
 ```tsx
 // ✅ Proper semantic elements
 <main>        {/* Main content */}
@@ -223,17 +233,20 @@ export function PageTemplate({ setCurrentPage }: Props) {
   <section>   {/* Content section */}
   <aside>     {/* Sidebar */}
 </main>
-```
+
+```text
 
 ### 3. Accessibility
+
 ```tsx
 // ✅ Proper ARIA and focus management
-<main 
+<main
   id="main-content"
   role="main"
   tabIndex={-1}
 >
-```
+
+```text
 
 ---
 
@@ -241,17 +254,20 @@ export function PageTemplate({ setCurrentPage }: Props) {
 
 For detailed implementation of each template, see the specific guideline files:
 
-### Marketing Pages
+### Marketing Pages (1)
+
 - **[HomePage.md](./templates/HomePage.md)** - Main landing page with hero and featured work
 - **[AboutPage.md](./templates/AboutPage.md)** - Biography, philosophy, and journey
 
-### Content Pages
+### Content Pages (1)
+
 - **[PortfolioMainPage.md](./templates/PortfolioMainPage.md)** - Portfolio archive grid with filters
 - **[PortfolioDetailPage.md](./templates/PortfolioDetailPage.md)** - Single portfolio entry detail
 - **[BlogPage.md](./templates/BlogPage.md)** - Blog archive with search and filters
 - **[BlogPostPage.md](./templates/BlogPostPage.md)** - Single blog post detail view
 
-### Utility Pages
+### Utility Pages (1)
+
 - **[404Page.md](./templates/404Page.md)** - Error page not found
 
 ---
@@ -265,5 +281,5 @@ For detailed implementation of each template, see the specific guideline files:
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

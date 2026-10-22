@@ -9,11 +9,16 @@ Real-world React/TypeScript examples using the dark mode theme system.
 ## 🎯 Table of Contents
 
 1. [Basic Components](#basic-components)
-2. [Form Components](#form-components)
-3. [Layout Components](#layout-components)
-4. [Interactive Components](#interactive-components)
-5. [Feedback Components](#feedback-components)
-6. [Hooks & Utilities](#hooks--utilities)
+
+1. [Form Components](#form-components)
+
+1. [Layout Components](#layout-components)
+
+1. [Interactive Components](#interactive-components)
+
+1. [Feedback Components](#feedback-components)
+
+1. [Hooks & Utilities](#hooks--utilities)
 
 ---
 
@@ -66,7 +71,8 @@ export function Button({
 <Button variant="primary" size="large" onClick={() => console.log('Clicked')}>
   Click Me
 </Button>
-```
+
+```text
 
 ### Card Component
 
@@ -119,15 +125,16 @@ export function Card({
 }
 
 // Usage
-<Card 
-  title="Featured Project" 
+<Card
+  title="Featured Project"
   description="This is a featured card with neon border"
   featured={true}
   badge="New"
 >
   <p>Additional content goes here</p>
 </Card>
-```
+
+```text
 
 ### Badge Component
 
@@ -162,7 +169,8 @@ export function Badge({
 <Badge variant="success">Active</Badge>
 <Badge variant="warning">Pending</Badge>
 <Badge variant="error">Closed</Badge>
-```
+
+```text
 
 ---
 
@@ -267,7 +275,8 @@ function ContactForm() {
     )
   );
 }
-```
+
+```text
 
 ### Textarea Component
 
@@ -326,7 +335,8 @@ export function Textarea({
     )
   );
 }
-```
+
+```text
 
 ### Checkbox Component
 
@@ -388,7 +398,8 @@ function SettingsForm() {
     })
   );
 }
-```
+
+```text
 
 ### Switch Component
 
@@ -428,7 +439,8 @@ export function Switch({
     React.createElement('span', { className: 'switch__label' }, label)
   );
 }
-```
+
+```text
 
 ---
 
@@ -544,7 +556,8 @@ function App() {
     )
   );
 }
-```
+
+```text
 
 ### Tabs Component
 
@@ -583,7 +596,7 @@ export function Tabs({ tabs, defaultTab }: TabsProps) {
           'button',
           {
             key: tab.id,
-            className: isActive ? 'tabs__button tabs__button--active' : 'tabs__button',
+            className: isActive ? 'tabs_*button tabs**button--active' : 'tabs*_button',
             role: 'tab',
             'aria-selected': isActive,
             onClick: function() { setActiveTab(tab.id); },
@@ -622,7 +635,8 @@ function SettingsPage() {
 
   return React.createElement(Tabs, { tabs: tabs, defaultTab: 'profile' });
 }
-```
+
+```text
 
 ### Breadcrumbs Component
 
@@ -644,7 +658,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
     { className: 'breadcrumbs', 'aria-label': 'Breadcrumb' },
     items.map(function(item, index) {
       var isLast = index === items.length - 1;
-      
+
       if (isLast) {
         return React.createElement(
           'span',
@@ -656,7 +670,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
           item.label
         );
       }
-      
+
       return React.createElement(
         React.Fragment,
         { key: index },
@@ -678,14 +692,15 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
 }
 
 // Usage
-<Breadcrumbs 
+<Breadcrumbs
   items={[
     { label: 'Home', href: '/' },
     { label: 'Blog', href: '/blog' },
     { label: 'Article Title' },
-  ]} 
+  ]}
 />
-```
+
+```text
 
 ---
 
@@ -732,14 +747,15 @@ export function Accordion({ items, allowMultiple = false }: AccordionProps) {
     { className: 'accordion' },
     items.map(function(item) {
       var isOpen = openItems.indexOf(item.id) !== -1;
-      
+
       return React.createElement(
         'div',
         { key: item.id, className: 'accordion__item' },
         React.createElement(
           'button',
           {
-            className: isOpen ? 'accordion__header accordion__header--active' : 'accordion__header',
+className: isOpen ? 'accordion_*header accordion**header--active' :
+'accordion*_header',
             onClick: function() { toggleItem(item.id); },
           },
           React.createElement('span', null, item.title),
@@ -776,7 +792,8 @@ function FAQSection() {
 
   return React.createElement(Accordion, { items: faqItems });
 }
-```
+
+```text
 
 ### Dropdown Component
 
@@ -802,7 +819,8 @@ export function Dropdown({ trigger, items }: DropdownProps) {
   React.useEffect(
     function() {
       var handleClickOutside = function(e: MouseEvent) {
-        if (dropdownRef.current != null && !dropdownRef.current.contains(e.target as Node)) {
+if (dropdownRef.current != null && !dropdownRef.current.contains(e.target as
+Node)) {
           setIsOpen(false);
         }
       };
@@ -836,7 +854,8 @@ export function Dropdown({ trigger, items }: DropdownProps) {
           'button',
           {
             key: item.id,
-            className: item.danger ? 'dropdown__item dropdown__item--danger' : 'dropdown__item',
+className: item.danger ? 'dropdown_*item dropdown**item--danger' :
+'dropdown*_item',
             onClick: function() {
               item.onClick();
               setIsOpen(false);
@@ -853,8 +872,10 @@ export function Dropdown({ trigger, items }: DropdownProps) {
 function ActionMenu() {
   var menuItems = [
     { id: 'edit', label: 'Edit', onClick: function() { console.log('Edit'); } },
-    { id: 'duplicate', label: 'Duplicate', onClick: function() { console.log('Duplicate'); } },
-    { id: 'delete', label: 'Delete', danger: true, onClick: function() { console.log('Delete'); } },
+{ id: 'duplicate', label: 'Duplicate', onClick: function() {
+console.log('Duplicate'); } },
+{ id: 'delete', label: 'Delete', danger: true, onClick: function() {
+console.log('Delete'); } },
   ];
 
   return React.createElement(
@@ -865,7 +886,8 @@ function ActionMenu() {
     }
   );
 }
-```
+
+```text
 
 ---
 
@@ -983,7 +1005,8 @@ function App() {
     )
   );
 }
-```
+
+```text
 
 ### Alert Component
 
@@ -1025,7 +1048,8 @@ export function Alert({
 <Alert variant="error" onClose={() => console.log('Closed')}>
   <strong>Error:</strong> Something went wrong.
 </Alert>
-```
+
+```text
 
 ### Progress Bar Component
 
@@ -1054,7 +1078,8 @@ export function ProgressBar({
     'div',
     { className: 'progress' },
     React.createElement('div', {
-      className: variant === 'default' ? 'progress__bar' : 'progress__bar progress__bar--' + variant,
+className: variant === 'default' ? 'progress_*bar' : 'progress**bar
+progress*_bar--' + variant,
       style: { width: percentage + '%' },
       role: 'progressbar',
       'aria-valuenow': value,
@@ -1073,7 +1098,8 @@ export function ProgressBar({
 <ProgressBar value={75} />
 <ProgressBar value={100} variant="success" label="Complete!" />
 <ProgressBar value={30} variant="warning" />
-```
+
+```text
 
 ---
 
@@ -1091,7 +1117,7 @@ export function useTheme() {
       if (stored === 'light' || stored === 'dark') {
         return stored;
       }
-      
+
       var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       return prefersDark ? 'dark' : 'light';
     }
@@ -1101,7 +1127,7 @@ export function useTheme() {
   var setTheme = function(newTheme: 'light' | 'dark') {
     setThemeState(newTheme);
     localStorage.setItem('theme', newTheme);
-    
+
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
@@ -1134,7 +1160,8 @@ function ThemeToggle() {
     theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'
   );
 }
-```
+
+```text
 
 ### useLocalStorage Hook
 
@@ -1146,7 +1173,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     if (typeof window === 'undefined') {
       return initialValue;
     }
-    
+
     var item = window.localStorage.getItem(key);
     if (item != null) {
       return JSON.parse(item);
@@ -1157,7 +1184,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   var setValue = function(value: T | ((val: T) => T)) {
     var valueToStore = value instanceof Function ? value(storedValue) : value;
     setStoredValue(valueToStore);
-    
+
     if (typeof window !== 'undefined') {
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     }
@@ -1182,7 +1209,8 @@ function UserPreferences() {
     })
   );
 }
-```
+
+```text
 
 ---
 
@@ -1207,7 +1235,7 @@ export function DashboardPage() {
   return React.createElement(
     'div',
     { className: 'dashboard-page' },
-    
+
     React.createElement(
       'header',
       { className: 'dashboard-header' },
@@ -1283,7 +1311,8 @@ export function DashboardPage() {
     )
   );
 }
-```
+
+```text
 
 ---
 
@@ -1296,6 +1325,6 @@ export function DashboardPage() {
 
 ---
 
-**Last Updated:** March 11, 2026  
-**Version:** 2.0.0  
+**Last Updated:** March 11, 2026
+**Version:** 2.0.0
 **Framework:** React 18+ with TypeScript

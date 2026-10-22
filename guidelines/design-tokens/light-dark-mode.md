@@ -2,20 +2,24 @@
 
 **Version:** 1.0.0
 **Last Updated:** February 2026
-**Purpose:** Complete documentation of the dual-theme colour system and mode-switching strategy
+**Purpose:** Complete documentation of the dual-theme colour system and
+mode-switching strategy
 
 ---
 
 ## 1. Strategy
 
-The site uses a **class-based** dark mode toggle. The `.dark` class is applied to the `<html>` element by `ThemeToggle.tsx`. CSS custom properties in `:root` define light mode defaults; the `.dark` selector overrides specific tokens.
+The site uses a **class-based** dark mode toggle. The `.dark` class is applied
+to the `<html>` element by `ThemeToggle.tsx`. CSS custom properties in `:root`
+define light mode defaults; the `.dark` selector overrides specific tokens.
 
 ### Toggle Mechanism
 
 ```tsx
 // ThemeToggle.tsx adds/removes .dark on <html>
 document.documentElement.classList.toggle('dark');
-```
+
+```text
 
 ### CSS Pattern
 
@@ -29,7 +33,8 @@ document.documentElement.classList.toggle('dark');
   --background: var(--wp--preset--color--atomic-black); /* #0F0F0F */
   --foreground: #ffffff;
 }
-```
+
+```text
 
 ---
 
@@ -45,7 +50,8 @@ document.documentElement.classList.toggle('dark');
 
 ### Neon Text Colours (Accessibility-Switched)
 
-In light mode, neon text uses darker accessible variants. In dark mode, full-brightness neon is restored.
+In light mode, neon text uses darker accessible variants. In dark mode,
+full-brightness neon is restored.
 
 | Neon Colour | Light `-text` Value | Contrast on White | Dark `-text` Value | Contrast on #0F0F0F |
 |------------|--------------------|--------------------|--------------------|--------------------|
@@ -114,13 +120,15 @@ In light mode, neon text uses darker accessible variants. In dark mode, full-bri
   border-color: rgba(190, 0, 254, 0.5);
   box-shadow: 0 0 20px rgba(190, 0, 254, 0.2);
 }
-```
+
+```text
 
 ---
 
 ## 4. Neon Glow Effects (Dark Mode Only)
 
-Neon glow shadows should only be prominent in dark mode where they contrast against the dark background:
+Neon glow shadows should only be prominent in dark mode where they contrast
+against the dark background:
 
 ```css
 /* Light - subtle or no glow */
@@ -132,7 +140,8 @@ Neon glow shadows should only be prominent in dark mode where they contrast agai
 .dark .badge {
   box-shadow: 0 0 10px rgba(190, 0, 254, 0.4);
 }
-```
+
+```text
 
 ---
 
@@ -153,7 +162,8 @@ button:focus-visible {
   box-shadow: 0 0 0 4px rgba(255, 16, 240, 0.3),
               0 0 15px rgba(255, 16, 240, 0.4);
 }
-```
+
+```text
 
 ---
 
@@ -171,7 +181,8 @@ In dark mode, gradient borders replace solid borders for separators:
     var(--wp--preset--color--neon-blue)
   ) 1;
 }
-```
+
+```text
 
 ---
 
@@ -181,10 +192,10 @@ When creating any new component:
 
 - [ ] Define light mode styles as default
 - [ ] Add `.dark .component` overrides for:
-  - Background colour
-  - Text colour
-  - Border colour
-  - Shadow / glow effects
+- Background colour
+- Text colour
+- Border colour
+- Shadow / glow effects
 - [ ] Use `-text` suffix tokens for neon text (auto-switches between modes)
 - [ ] Test contrast ratios: 4.5:1 minimum for body text, 3:1 for large text
 - [ ] Test neon glow visibility in dark mode

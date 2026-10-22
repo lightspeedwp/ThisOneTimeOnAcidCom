@@ -1,6 +1,7 @@
 ---
 name: "Test Execution Skill"
-description: "Executes and validates tests for ThisOneTimeOnAcidCom portfolio site."
+description: "Executes and validates tests for ThisOneTimeOnAcidCom portfolio
+site."
 type: "skill"
 category: "quality"
 enabled: true
@@ -11,11 +12,13 @@ tags: ["testing", "validation", "qa", "playwright"]
 
 ## Purpose
 
-Execute tests and validate test coverage for portfolio site functionality and quality.
+Execute tests and validate test coverage for portfolio site functionality and
+quality.
 
 ## Current Test Status
 
-✅ **Test infrastructure is now available.** The following test suites are configured in `package.json`:
+✅ **Test infrastructure is now available.** The following test suites are
+configured in `package.json`:
 
 - `npm run test` — Run all tests (unit, build, e2e)
 - `npm run test:unit` — Jest unit tests
@@ -29,17 +32,20 @@ This skill now supports:
 ## Available Test Types
 
 ### Unit Tests (Jest)
-- **Location:** `src/__tests__/` and `*.test.ts` files
+
+- **Location:** `src/_*tests*_/` and `*.test.ts` files
 - **Coverage:** Component logic, hooks, utility functions, data transformations
 - **Run:** `npm run test:unit` or `npm run test:unit:watch`
 
 ### Build Validation (BATS)
+
 - **Location:** `tests/build.bats`
 - **Coverage:** Build process, artifact generation, asset integrity
 - **Validates:** _redirects file structure, CSS/JS assets, dist output correctness
 - **Run:** `npm run test:build` (includes full build)
 
 ### E2E Tests (Playwright)
+
 - **Location:** `e2e/routing.spec.ts`
 - **Coverage:** User workflows, navigation paths, portfolio content display
 - **Validates:** Route handling, SPA fallback, asset loading, responsive behavior
@@ -58,10 +64,11 @@ This skill now supports:
 
 ## Current Coverage
 
-✅ **Routing & SPA:** E2E tests for 7 working journal routes + fallback behavior  
-✅ **Build Output:** BATS tests verify _redirects file structure and asset generation  
-✅ **Asset Loading:** E2E tests validate CSS, JS, and image asset integrity  
-✅ **Responsive Design:** E2E tests cover mobile, tablet, and desktop viewports  
+✅ **Routing & SPA:** E2E tests for 7 working journal routes + fallback behavior
+✅ **Build Output:** BATS tests verify _redirects file structure and asset
+generation
+✅ **Asset Loading:** E2E tests validate CSS, JS, and image asset integrity
+✅ **Responsive Design:** E2E tests cover mobile, tablet, and desktop viewports
 ✅ **Performance:** E2E benchmarks measure route load time and navigation speed
 
 ## Future Test Expansion
@@ -69,10 +76,14 @@ This skill now supports:
 Planned additions to increase coverage:
 
 1. **Component unit tests** – Component logic and state management
-2. **Content validation** – Link integrity, image loading, mock data correctness
-3. **Accessibility tests** – WCAG compliance, keyboard navigation
-4. **Dark mode tests** – Light/dark theme rendering verification
-5. **Integration tests** – Component interactions and data flow
+
+1. **Content validation** – Link integrity, image loading, mock data correctness
+
+1. **Accessibility tests** – WCAG compliance, keyboard navigation
+
+1. **Dark mode tests** – Light/dark theme rendering verification
+
+1. **Integration tests** – Component interactions and data flow
 
 ## Testing Resources
 
@@ -88,4 +99,5 @@ Planned additions to increase coverage:
 
 ---
 
-*Test execution and quality validation for portfolio site. Currently in planning stage.*
+*Test execution and quality validation for portfolio site. Currently in planning
+stage.*

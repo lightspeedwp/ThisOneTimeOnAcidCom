@@ -4,23 +4,28 @@ filename: "/docs/bem-migration-success.md"
 created: "2026-03-11"
 modified: "2026-03-11"
 version: "1.0.0"
-related: "/guidelines/css-architecture.md, /guidelines/tailwind-to-bem-mapping.md"
+related: "/guidelines/css-architecture.md,
+/guidelines/tailwind-to-bem-mapping.md"
 ---
 
 # BEM Migration Success Story
 
-**Project:** Ash Shaw Makeup Portfolio  
-**Timeline:** October 2025 - March 2026  
-**Result:** 100% BEM compliance, zero inline styles  
+**Project:** Ash Shaw Makeup Portfolio
+**Timeline:** October 2025 - March 2026
+**Result:** 100% BEM compliance, zero inline styles
 **Created:** March 11, 2026
 
 ---
 
 ## Executive Summary
 
-The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + inline styles codebase to a pure **BEM (Block Element Modifier)** architecture. This case study documents the challenges, solutions, and measurable improvements achieved.
+The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS +
+inline styles codebase to a pure **BEM (Block Element Modifier)** architecture.
+This case study documents the challenges, solutions, and measurable improvements
+achieved.
 
 **Key Outcomes:**
+
 - ✅ Eliminated 100% of Tailwind utility classes
 - ✅ Removed all inline styles from components
 - ✅ Created comprehensive BEM class library (2,500+ classes)
@@ -32,13 +37,20 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 ## Table of Contents
 
 1. [Background](#background)
-2. [Why We Migrated](#why-we-migrated)
-3. [Migration Strategy](#migration-strategy)
-4. [Challenges & Solutions](#challenges--solutions)
-5. [Before & After Examples](#before--after-examples)
-6. [Measurable Improvements](#measurable-improvements)
-7. [Lessons Learned](#lessons-learned)
-8. [Best Practices](#best-practices)
+
+1. [Why We Migrated](#why-we-migrated)
+
+1. [Migration Strategy](#migration-strategy)
+
+1. [Challenges & Solutions](#challenges--solutions)
+
+1. [Before & After Examples](#before--after-examples)
+
+1. [Measurable Improvements](#measurable-improvements)
+
+1. [Lessons Learned](#lessons-learned)
+
+1. [Best Practices](#best-practices)
 
 ---
 
@@ -46,19 +58,22 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 
 ### Initial State (October 2025)
 
-**Codebase Characteristics:**
+## Codebase Characteristics
+
 - Mixed architecture (Tailwind utilities + custom CSS + inline styles)
 - Inconsistent naming conventions
 - Difficult to maintain across components
 - Hard to align with WordPress theme system
 
 **Technical Stack:**
+
 - React 18
 - Tailwind CSS V4
 - TypeScript
 - Figma Make bundler (ES5 constraints)
 
 **Pain Points:**
+
 - Tailwind classes scattered across 90+ components
 - Inline styles in critical components (Header, Footer, MobileMenu)
 - No clear separation between layout and design
@@ -71,16 +86,20 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 ### 1. Semantic Clarity
 
 **Problem:**
+
 ```tsx
 // Unclear intent from utility classes
-<div className="flex items-center justify-between p-4 bg-gray-900 border-b border-gray-800">
+<div className="flex items-center justify-between p-4 bg-gray-900 border-b
+border-gray-800">
   <div className="flex items-center gap-4">
     <img className="w-12 h-12 rounded-full" />
   </div>
 </div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // Clear semantic meaning
 <div className="header">
@@ -88,16 +107,19 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
     <img className="header__logo" />
   </div>
 </div>
-```
+
+```text
 
 ### 2. Maintainability
 
 **Problem:**
+
 - Changing button styles required updating 30+ components
 - No single source of truth for component styling
 - Difficult to enforce design system consistency
 
 **Solution:**
+
 - Centralized BEM classes in `/styles/blocks/`
 - Single update propagates to all instances
 - Design system enforced through CSS structure
@@ -105,11 +127,13 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 ### 3. WordPress Migration
 
 **Problem:**
+
 - WordPress block editor expects semantic classes (`.alignwide`, `.has-text-color`)
 - Tailwind utilities incompatible with theme.json
 - Would need complete rewrite for WordPress
 
 **Solution:**
+
 - BEM classes align with WordPress naming conventions
 - Easy to create theme.json mappings
 - Smooth migration path to WordPress block themes
@@ -117,11 +141,13 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 ### 4. Performance
 
 **Problem:**
+
 - Unused Tailwind classes in production bundle
 - Large CSS file size from utility-first approach
 - Difficult to optimize with PurgeCSS
 
 **Solution:**
+
 - Only necessary BEM classes included
 - Smaller CSS bundle (reduced by 30%)
 - Better compression with semantic names
@@ -133,12 +159,17 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 ### Phase 1: Audit & Planning (2 weeks)
 
 **Actions:**
+
 1. Inventory all Tailwind usage across codebase
-2. Identify inline styles in components
-3. Create Tailwind → BEM mapping guide
-4. Design BEM naming conventions
+
+1. Identify inline styles in components
+
+1. Create Tailwind → BEM mapping guide
+
+1. Design BEM naming conventions
 
 **Deliverables:**
+
 - [Tailwind-to-BEM Mapping Guide](/guidelines/tailwind-to-bem-mapping.md)
 - Component audit report (90+ components analyzed)
 - Migration priority list
@@ -146,12 +177,17 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 ### Phase 2: Core Components (4 weeks)
 
 **Priority Order:**
+
 1. Layout components (Header, Footer, MobileMenu)
-2. UI primitives (Button, Card, Input)
-3. Section components (Hero, Featured, Gallery)
-4. Page components (Home, About, Portfolio)
+
+1. UI primitives (Button, Card, Input)
+
+1. Section components (Hero, Featured, Gallery)
+
+1. Page components (Home, About, Portfolio)
 
 **Approach:**
+
 - One component at a time
 - Create BEM classes first, then migrate
 - Test thoroughly before moving to next component
@@ -159,6 +195,7 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 ### Phase 3: Content Components (3 weeks)
 
 **Target:**
+
 - Blog components (BlogCard, BlogPost, BlogGrid)
 - Portfolio components (PortfolioCard, Gallery, Lightbox)
 - Video components (VideoCard, VideoModal)
@@ -166,6 +203,7 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 ### Phase 4: Edge Cases & Cleanup (2 weeks)
 
 **Focus:**
+
 - Complex interactions (modals, dropdowns, tooltips)
 - Responsive breakpoints
 - Dark mode variants
@@ -178,6 +216,7 @@ The Ash Shaw Makeup Portfolio successfully migrated from a mixed Tailwind CSS + 
 ### Challenge 1: Figma Make Bundler Constraints
 
 **Problem:**
+
 - Bundler doesn't support modern JavaScript syntax
 - Optional chaining (`?.`) breaks build
 - Nullish coalescing (`??`) not supported
@@ -199,9 +238,11 @@ if (obj != null && obj.property != null) {
 var handler = function handleClick() {
   console.log('click');
 };
-```
 
-**Documentation:** [Bundler Compatibility Rules](/guidelines/Guidelines.md#bundler-compatibility-rules)
+```text
+
+**Documentation:** [Bundler Compatibility
+Rules](/guidelines/Guidelines.md#bundler-compatibility-rules)
 
 ### Challenge 2: Inline Styles Elimination
 
@@ -215,7 +256,8 @@ Footer component had 15+ inline style objects:
     {/* content */}
   </div>
 </div>
-```
+
+```text
 
 **Solution:**
 Created semantic BEM classes:
@@ -227,7 +269,8 @@ Created semantic BEM classes:
     {/* content */}
   </div>
 </div>
-```
+
+```text
 
 ```css
 /* /styles/blocks/footer.css */
@@ -243,7 +286,8 @@ Created semantic BEM classes:
   gap: var(--spacing-sm);
   align-items: center;
 }
-```
+
+```text
 
 **Result:** Eliminated ALL inline styles from Footer (15 style objects → 0)
 
@@ -253,15 +297,18 @@ Created semantic BEM classes:
 Tailwind responsive utilities were convenient:
 
 ```tsx
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-```
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6
+lg:gap-8">
+
+```text
 
 **Solution:**
 Created responsive BEM modifiers:
 
 ```tsx
 <div className="portfolio-grid portfolio-grid--responsive">
-```
+
+```text
 
 ```css
 .portfolio-grid {
@@ -283,7 +330,8 @@ Created responsive BEM modifiers:
     gap: var(--spacing-xl);
   }
 }
-```
+
+```text
 
 ### Challenge 4: Dark Mode
 
@@ -292,14 +340,16 @@ Tailwind dark mode was inline:
 
 ```tsx
 <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-```
+
+```text
 
 **Solution:**
 CSS custom properties + class-based theming:
 
 ```tsx
 <div className="card">
-```
+
+```text
 
 ```css
 /* Light mode (default) */
@@ -313,9 +363,11 @@ CSS custom properties + class-based theming:
   --color-card-bg: #1a1a1a;
   --color-text-primary: #f0f0f0;
 }
-```
 
-**Documentation:** [Dark Mode Implementation](/guidelines/dark-mode-implementation.md)
+```text
+
+**Documentation:** [Dark Mode
+Implementation](/guidelines/dark-mode-implementation.md)
 
 ### Challenge 5: Gradient Backgrounds
 
@@ -323,15 +375,18 @@ CSS custom properties + class-based theming:
 Complex Tailwind gradients:
 
 ```tsx
-<button className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600">
-```
+<button className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500
+hover:from-pink-600 hover:via-purple-600 hover:to-blue-600">
+
+```text
 
 **Solution:**
 Named gradient presets:
 
 ```tsx
 <button className="btn btn--gradient-cyberpunk">
-```
+
+```text
 
 ```css
 .btn--gradient-cyberpunk {
@@ -342,7 +397,8 @@ Named gradient presets:
 .btn--gradient-cyberpunk:hover {
   filter: brightness(1.1) saturate(1.2);
 }
-```
+
+```text
 
 ---
 
@@ -350,26 +406,28 @@ Named gradient presets:
 
 ### Example 1: Header Component
 
-**Before (Tailwind + Inline Styles):**
+## Before (Tailwind + Inline Styles)
 
 ```tsx
 // 250 lines, mixed approaches
 export function Header({ currentPage, onNavigate }) {
   return (
     <header
-      className="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-800"
-      style={{ padding: '24px', display: 'grid', gridTemplateColumns: '1fr auto 1fr' }}
+className="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-md border-b
+border-gray-800"
+style={{ padding: '24px', display: 'grid', gridTemplateColumns: '1fr auto 1fr'
+}}
     >
       <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
         <Logo size="md" />
       </div>
-      
+
       <nav className="hidden md:flex items-center gap-8">
         <a className="text-white hover:text-pink-400 transition-colors duration-300">
           About
         </a>
       </nav>
-      
+
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '16px' }}>
         <button className="md:hidden p-2 text-white hover:bg-gray-800 rounded-lg">
           <Menu size={24} />
@@ -378,7 +436,8 @@ export function Header({ currentPage, onNavigate }) {
     </header>
   );
 }
-```
+
+```text
 
 **After (Pure BEM):**
 
@@ -390,13 +449,13 @@ export function Header({ currentPage, onNavigate }) {
       <div className="header__left">
         <Logo size="md" />
       </div>
-      
+
       <nav className="header__nav">
-        <a className="header__nav-link header__nav-link--active">
+        <a className="header_*nav-link header*_nav-link--active">
           About
         </a>
       </nav>
-      
+
       <div className="header__actions">
         <button className="header__menu-toggle">
           <Menu className="icon icon--md" aria-hidden="true" />
@@ -405,7 +464,8 @@ export function Header({ currentPage, onNavigate }) {
     </header>
   );
 }
-```
+
+```text
 
 ```css
 /* /styles/blocks/header.css */
@@ -482,9 +542,11 @@ export function Header({ currentPage, onNavigate }) {
     display: none;
   }
 }
-```
+
+```text
 
 **Improvements:**
+
 - ✅ 0 inline styles (was 3)
 - ✅ 0 Tailwind classes (was 15+)
 - ✅ Semantic class names
@@ -493,14 +555,15 @@ export function Header({ currentPage, onNavigate }) {
 
 ### Example 2: Footer Component
 
-**Before (Inline Styles):**
+## Before (Inline Styles)
 
 ```tsx
 export function Footer() {
   return (
     <footer className="bg-gray-900 border-t border-gray-800 py-12">
       <div className="container mx-auto px-6">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '48px' }}>
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,
+minmax(250px, 1fr))', gap: '48px' }}>
           <div>
             <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>
               Quick Links
@@ -512,8 +575,9 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        
-        <div style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid #374151', display: 'flex', justifyContent: 'space-between' }}>
+
+<div style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid
+#374151', display: 'flex', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', gap: '16px' }}>
             <a style={{ color: '#9CA3AF' }}>Privacy</a>
           </div>
@@ -522,7 +586,8 @@ export function Footer() {
     </footer>
   );
 }
-```
+
+```text
 
 **After (Pure BEM):**
 
@@ -541,7 +606,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        
+
         <div className="footer__bar">
           <div className="footer__bar-left">
             <a className="footer__link-btn">Privacy</a>
@@ -551,7 +616,8 @@ export function Footer() {
     </footer>
   );
 }
-```
+
+```text
 
 ```css
 /* /styles/blocks/footer.css */
@@ -625,9 +691,11 @@ export function Footer() {
 .footer__link-btn:hover {
   color: var(--color-neon-pink);
 }
-```
+
+```text
 
 **Improvements:**
+
 - ✅ 0 inline styles (was 15)
 - ✅ 0 Tailwind classes (was 8)
 - ✅ Semantic class names
@@ -651,23 +719,27 @@ export function Footer() {
 ### Maintainability Improvements
 
 **Before:**
+
 - Changing button styles → Update 30+ components
 - Adding dark mode → Update 90+ components
 - WordPress migration → Rewrite all CSS
 
 **After:**
+
 - Changing button styles → Update 1 CSS file
 - Adding dark mode → Update CSS custom properties
 - WordPress migration → Map BEM classes to theme.json
 
 ### Developer Experience
 
-**Time to Style New Component:**
+## Time to Style New Component
+
 - Before: 45-60 minutes (writing Tailwind classes + inline styles)
 - After: 20-30 minutes (using existing BEM classes)
 - **Improvement:** 50% faster
 
-**Time to Update Design System:**
+## Time to Update Design System
+
 - Before: 4-6 hours (updating across all components)
 - After: 30-60 minutes (updating central CSS)
 - **Improvement:** 80% faster
@@ -750,13 +822,15 @@ Team could reference migration patterns for consistency.
 .card--featured { }
 .card--compact { }
 .card__title--large { }
-```
+
+```text
 
 **Rules:**
+
 - Block: `.block`
 - Element: `.block__element`
 - Modifier: `.block--modifier` or `.block__element--modifier`
-- Never nest beyond 1 level: ❌ `.block__element__subelement`
+- Never nest beyond 1 level: ❌ `.block_*element*_subelement`
 
 ### 2. CSS Custom Properties
 
@@ -765,12 +839,12 @@ Team could reference migration patterns for consistency.
   /* Colors */
   --color-primary: #FF3AAE;
   --color-text-light: #F6F2EB;
-  
+
   /* Spacing */
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
-  
+
   /* Typography */
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -781,7 +855,8 @@ Team could reference migration patterns for consistency.
   color: var(--color-text-light);
   font-family: var(--font-body);
 }
-```
+
+```text
 
 ### 3. Responsive Design
 
@@ -808,7 +883,8 @@ Team could reference migration patterns for consistency.
     gap: var(--spacing-xl);
   }
 }
-```
+
+```text
 
 ### 4. Component State Modifiers
 
@@ -835,7 +911,8 @@ Team could reference migration patterns for consistency.
   opacity: 0.5;
   cursor: not-allowed;
 }
-```
+
+```text
 
 ### 5. Dark Mode Support
 
@@ -867,7 +944,8 @@ Team could reference migration patterns for consistency.
   background-color: var(--card-bg);
   color: var(--card-text);
 }
-```
+
+```text
 
 ---
 
@@ -875,32 +953,35 @@ Team could reference migration patterns for consistency.
 
 The migration to BEM architecture was a **resounding success**. We achieved:
 
-✅ **100% elimination** of Tailwind utilities  
-✅ **100% elimination** of inline styles  
-✅ **30% reduction** in CSS bundle size  
-✅ **50% faster** component development  
-✅ **80% faster** design system updates  
+✅ **100% elimination** of Tailwind utilities
+✅ **100% elimination** of inline styles
+✅ **30% reduction** in CSS bundle size
+✅ **50% faster** component development
+✅ **80% faster** design system updates
 ✅ **Complete WordPress alignment**
 
-The BEM architecture provides a solid foundation for future growth, WordPress migration, and long-term maintainability.
+The BEM architecture provides a solid foundation for future growth, WordPress
+migration, and long-term maintainability.
 
 ---
 
 ## Resources
 
-**Internal Documentation:**
+## Internal Documentation
+
 - [CSS Architecture Guidelines](/guidelines/css-architecture.md)
 - [Tailwind-to-BEM Mapping](/guidelines/tailwind-to-bem-mapping.md)
 - [WordPress CSS Alignment](/docs/wordpress-migration-plan.md)
 - [Dark Mode Implementation](/guidelines/dark-mode-implementation.md)
 
-**External References:**
+## External References
+
 - [BEM Methodology](https://en.bem.info/methodology/)
-- [CSS Custom Properties Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
+- [CSS Custom Properties Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/Using*CSS*custom_properties)
 - [WordPress Block Themes](https://developer.wordpress.org/block-editor/how-to-guides/themes/)
 
 ---
 
-**Document Status:** Active  
-**Last Updated:** March 11, 2026  
+**Document Status:** Active
+**Last Updated:** March 11, 2026
 **Maintained By:** Development Team

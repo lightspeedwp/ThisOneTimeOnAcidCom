@@ -2,14 +2,21 @@
 
 ## Overview
 
-Three storage options evaluated for TOA media library. Each supports the proposed architecture (version-controlled catalogue + CDN delivery + book exports). **Approved provider: GitHub + Netlify** (see approval note at line 265). Cloudinary analysis below retained for reference; it remains the UX-optimized alternative if scaling requires it.
+Three storage options evaluated for TOA media library. Each supports the
+proposed architecture (version-controlled catalogue + CDN delivery + book
+exports). **Approved provider: GitHub + Netlify** (see approval note at line
+265). Cloudinary analysis below retained for reference; it remains the
+UX-optimized alternative if scaling requires it.
 
 ---
 
 ## Option 1: Cloudinary (RECOMMENDED)
 
 ### Summary
-Industry-standard media management platform with visual upload interface, automatic optimisation, global CDN, and API-driven workflows. Best user experience and automation.
+
+Industry-standard media management platform with visual upload interface,
+automatic optimisation, global CDN, and API-driven workflows. Best user
+experience and automation.
 
 ### Detailed Comparison
 
@@ -27,18 +34,25 @@ Industry-standard media management platform with visual upload interface, automa
 
 ### Workflow
 
-```
+```text
+
 1. Upload original to Cloudinary (web, API, or webhook)
-2. Store asset ID in catalogue: "toa-jungle-01"
-3. URL generation at runtime:
-   https://res.cloudinary.com/toa/image/upload/w_1200,q_auto,f_auto/toa/jungle-01.jpg
-4. CDN auto-serves WebP if browser supports; JPEG fallback
-5. Book export: API call for high-res variant (w_2400,q_95,f_jpg)
-```
+
+1. Store asset ID in catalogue: "toa-jungle-01"
+
+1. URL generation at runtime:
+   https://res.cloudinary.com/toa/image/upload/w*1200,q*auto,f_auto/toa/jungle-01.jpg
+
+1. CDN auto-serves WebP if browser supports; JPEG fallback
+
+1. Book export: API call for high-res variant (w*2400,q*95,f_jpg)
+
+```text
 
 ### Cost Model (TOA Scale)
 
 **Assumptions:**
+
 - 56 assets in catalogue
 - 3 responsive variants per asset (480, 800, 1200px)
 - 3 image renders per page view
@@ -52,26 +66,31 @@ Industry-standard media management platform with visual upload interface, automa
 | Book exports (manual API calls via SDK, ~12/year) | $0–5 | $0–60 |
 | **Total** | **$99–104** | **$1,188–1,248** |
 
-**Free Tier (if cost-conscious initially):**
+## Free Tier (if cost-conscious initially)
+
 - 25K API calls/month = ~80 daily page views with caching
 - Suitable for low-traffic launch; upgrade to Pro at 1,000+ daily views
 
 ### Pros
-✅ Easiest setup (one-line React integration)  
-✅ No infrastructure management  
-✅ Automatic responsive sizing (no build scripts)  
-✅ Industry-standard (widely documented)  
-✅ Excellent support for book export workflows  
-✅ Global CDN, 99.95% uptime SLA  
+
+✅ Easiest setup (one-line React integration)
+✅ No infrastructure management
+✅ Automatic responsive sizing (no build scripts)
+✅ Industry-standard (widely documented)
+✅ Excellent support for book export workflows
+✅ Global CDN, 99.95% uptime SLA
 
 ### Cons
-❌ Monthly recurring cost ($99/mo)  
-❌ Some URL scheme vendor lock-in  
-❌ Requires external account/API keys (vs self-hosted)  
-❌ Not portable if company shut down (unlikely but theoretically possible)  
+
+❌ Monthly recurring cost ($99/mo)
+❌ Some URL scheme vendor lock-in
+❌ Requires external account/API keys (vs self-hosted)
+❌ Not portable if company shut down (unlikely but theoretically possible)
 
 ### Setup Time
+
 **Estimated:** 2–3 days
+
 - Day 1: Create account, configure bucket, API keys
 - Day 2: React SDK integration, environment config, reference mapping
 - Day 3: Test responsive sizing, book export API, CDN resolution
@@ -80,10 +99,13 @@ Industry-standard media management platform with visual upload interface, automa
 
 ## Option 2: GitHub + Version-Controlled Assets
 
-### Summary
-Free, fully portable approach using Git (+ Git LFS if >100 MB). Assets live in repository; Netlify serves from `public/` at build time. No external vendor dependency. Requires build scripts for responsive sizing.
+### Summary (1)
 
-### Detailed Comparison
+Free, fully portable approach using Git (+ Git LFS if >100 MB). Assets live in
+repository; Netlify serves from `public/` at build time. No external vendor
+dependency. Requires build scripts for responsive sizing.
+
+### Detailed Comparison (1)
 
 | Aspect | Rating | Details |
 |--------|--------|---------|
@@ -97,24 +119,31 @@ Free, fully portable approach using Git (+ Git LFS if >100 MB). Assets live in r
 | **Access Control** | ⭐⭐⭐ | GitHub permissions; no granular media-level controls |
 | **Integration Difficulty** | Moderate | Git workflow, Sharp/ImageMin script, reference updates, CI/CD |
 
-### Workflow
+### Workflow (1)
 
-```
+```text
+
 1. Clone repo; create assets/images/ branch (or LFS track)
-2. Git add images; git commit; git push
-3. Build-time:
+
+1. Git add images; git commit; git push
+
+1. Build-time:
    npm run optimize-images
      ↓
    sharp resizes originals → WebP + JPEG
      ↓
    outputs to public/images/
-4. Netlify deploys; CDN serves from public/
-5. Book export: copy source files from assets/ directory
-```
 
-### Cost Model (TOA Scale)
+1. Netlify deploys; CDN serves from public/
+
+1. Book export: copy source files from assets/ directory
+
+```text
+
+### Cost Model (TOA Scale) (1)
 
 **Assumptions:**
+
 - 56 assets, total ~150 MB
 - Responsive variants stored (480, 800, 1200px)
 - Netlify free tier (bandwidth unlimited; build time limited)
@@ -128,26 +157,32 @@ Free, fully portable approach using Git (+ Git LFS if >100 MB). Assets live in r
 | **Total (free tier, <10GB/mo assets)** | **$0** | **$0** |
 | **Total (with LFS overage + Pro)** | **$10–30** | **$120–360** |
 
-**Note:** GitHub's free tier includes 10GB LFS storage + 10GB bandwidth per month; free tier sufficient for TOA scale (<~500 daily page views). Upgrade only if assets exceed 10GB/month or build time exceeds 45 min/month.
+**Note:** GitHub's free tier includes 10GB LFS storage + 10GB bandwidth per
+month; free tier sufficient for TOA scale (<~500 daily page views). Upgrade only
+if assets exceed 10GB/month or build time exceeds 45 min/month.
 
-### Pros
-✅ Zero cost (GitHub + Netlify free)  
-✅ Complete portability (plain files)  
-✅ Full version control history  
-✅ No external vendor dependency  
-✅ Book exports simple (direct file access)  
-✅ Excellent for archival (can be stored on any platform)  
+### Pros (1)
 
-### Cons
-❌ No visual upload interface (CLI/API only)  
-❌ Manual build script for responsive sizing  
-❌ Repository bloat (56 assets × 3 variants = 168+ files)  
-❌ No on-the-fly transforms (all variants pre-generated)  
-❌ Limited global CDN reach vs Cloudinary  
-❌ Build time increases (Sharp processing on every deploy)  
+✅ Zero cost (GitHub + Netlify free)
+✅ Complete portability (plain files)
+✅ Full version control history
+✅ No external vendor dependency
+✅ Book exports simple (direct file access)
+✅ Excellent for archival (can be stored on any platform)
 
-### Setup Time
+### Cons (1)
+
+❌ No visual upload interface (CLI/API only)
+❌ Manual build script for responsive sizing
+❌ Repository bloat (56 assets × 3 variants = 168+ files)
+❌ No on-the-fly transforms (all variants pre-generated)
+❌ Limited global CDN reach vs Cloudinary
+❌ Build time increases (Sharp processing on every deploy)
+
+### Setup Time (1)
+
 **Estimated:** 3–4 days
+
 - Day 1: Plan Git LFS strategy, configure branch structure
 - Day 2: Write Sharp/ImageMin build script, test responsive output
 - Day 3: Integrate with Netlify build config, reference mapping
@@ -157,10 +192,13 @@ Free, fully portable approach using Git (+ Git LFS if >100 MB). Assets live in r
 
 ## Option 3: AWS S3 + CloudFront
 
-### Summary
-Enterprise-grade approach for high-scale deployments. S3 stores originals with versioning; CloudFront CDN serves optimized derivatives. Requires AWS expertise. Best if organisation already uses AWS.
+### Summary (2)
 
-### Detailed Comparison
+Enterprise-grade approach for high-scale deployments. S3 stores originals with
+versioning; CloudFront CDN serves optimized derivatives. Requires AWS expertise.
+Best if organisation already uses AWS.
+
+### Detailed Comparison (2)
 
 | Aspect | Rating | Details |
 |--------|--------|---------|
@@ -174,21 +212,29 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 | **Access Control** | ⭐⭐⭐⭐⭐ | IAM, bucket policies, signed URLs, CloudFront OAI |
 | **Integration Difficulty** | Hard | AWS IAM, S3 config, CloudFront distribution, Lambda (optional) |
 
-### Workflow
+### Workflow (2)
 
-```
+```text
+
 1. Create S3 bucket (versioning enabled)
-2. Upload assets via S3 console / SDK
-3. CloudFront distribution (OAI restricts direct S3 access)
-4. URL generation:
-   https://d123.cloudfront.net/toa/jungle-01.jpg
-5. Optional: Lambda@Edge for on-demand resizing
-6. Book export: Bulk download via SDK or Lambda function
-```
 
-### Cost Model (TOA Scale)
+1. Upload assets via S3 console / SDK
+
+1. CloudFront distribution (OAI restricts direct S3 access)
+
+1. URL generation:
+   https://d123.cloudfront.net/toa/jungle-01.jpg
+
+1. Optional: Lambda@Edge for on-demand resizing
+
+1. Book export: Bulk download via SDK or Lambda function
+
+```text
+
+### Cost Model (TOA Scale) (2)
 
 **Assumptions:**
+
 - 150 MB stored in S3
 - 56 assets × 3 variants = 168 files
 - ~30 GB bandwidth/month (typical for 5K monthly users)
@@ -205,24 +251,28 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 
 **Note:** Pricing scales with traffic; 100K+ monthly users → $20–50/mo.
 
-### Pros
-✅ Very low cost at TOA scale  
-✅ Enterprise-grade reliability (99.99% uptime)  
-✅ Excellent for future scale (100K+ users)  
-✅ S3 versioning (audit trail)  
-✅ IAM fine-grained access control  
-✅ If already using AWS: integrate easily  
+### Pros (2)
 
-### Cons
-❌ Complex setup (AWS-specific knowledge required)  
-❌ Overkill for TOA scale (over-engineered)  
-❌ No visual upload interface (AWS console only)  
-❌ Lambda overhead (maintain functions)  
-❌ Higher integration complexity  
-❌ Costs scale faster with traffic than Cloudinary (above 1.5M API calls)  
+✅ Very low cost at TOA scale
+✅ Enterprise-grade reliability (99.99% uptime)
+✅ Excellent for future scale (100K+ users)
+✅ S3 versioning (audit trail)
+✅ IAM fine-grained access control
+✅ If already using AWS: integrate easily
 
-### Setup Time
+### Cons (2)
+
+❌ Complex setup (AWS-specific knowledge required)
+❌ Overkill for TOA scale (over-engineered)
+❌ No visual upload interface (AWS console only)
+❌ Lambda overhead (maintain functions)
+❌ Higher integration complexity
+❌ Costs scale faster with traffic than Cloudinary (above 1.5M API calls)
+
+### Setup Time (2)
+
 **Estimated:** 4–6 days
+
 - Day 1–2: IAM setup, S3 bucket + versioning, lifecycle policies
 - Day 3: CloudFront distribution, OAI, signed URLs
 - Day 4: SDK integration, reference mapping
@@ -246,29 +296,40 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 
 ## Final Recommendation: GitHub + Netlify (Approved)
 
-**Why GitHub + Netlify was selected for TOA:**
+## Why GitHub + Netlify was selected for TOA
 
 1. **Cost:** $0/month (leverages existing Netlify subscription; no additional expense)
-2. **Portability:** 100% vendor lock-in free; plain files + JSON catalogue
-3. **Integration:** Seamless Git workflow; version control + audit trail
-4. **Existing infrastructure:** Netlify already deployed and configured
-5. **Trade-off accepted:** Manual Sharp/ImageMin build process for responsive sizing (vs runtime Cloudinary transforms)
-6. **Build scalability:** Caching in Netlify build config prevents bloat
+
+1. **Portability:** 100% vendor lock-in free; plain files + JSON catalogue
+
+1. **Integration:** Seamless Git workflow; version control + audit trail
+
+1. **Existing infrastructure:** Netlify already deployed and configured
+
+1. **Trade-off accepted:** Manual Sharp/ImageMin build process for responsive sizing (vs runtime Cloudinary transforms)
+
+1. **Build scalability:** Caching in Netlify build config prevents bloat
 
 **Migration path:**
+
 - Commit assets to Git LFS (or versioned directory if <1GB/month)
 - Write Sharp/ImageMin build script (Phase 4: TOA-278)
 - Populate version-controlled asset catalogue (`.github/data/assets.json` or `/catalog/assets.json`)
 - Deploy to Netlify; CDN serves optimized variants
 - If scaling requires provider change, export assets and migrate to Cloudinary/AWS
 
-**Approval note (17 October 2026):** The original audit recommended Cloudinary ($99/mo) for UX and automation. This decision supersedes that recommendation, prioritising zero-cost operation and full portability over hosted platform convenience. Cloudinary analysis in Section 1 remains available for future reference if scaling or UX requirements change.
+**Approval note (17 October 2026):** The original audit recommended Cloudinary
+($99/mo) for UX and automation. This decision supersedes that recommendation,
+prioritising zero-cost operation and full portability over hosted platform
+convenience. Cloudinary analysis in Section 1 remains available for future
+reference if scaling or UX requirements change.
 
 ---
 
 ## Implementation Checklist
 
 ### Pre-Migration
+
 - [ ] Confirm storage provider (GitHub + Netlify)
 - [ ] Set budget ($0/month; monitor Git LFS bandwidth if >10GB/month)
 - [ ] Verify Figma asset recovery (TOA-280 pilot)
@@ -276,6 +337,7 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 - [ ] Plan reference migration workflow (TOA-278)
 
 ### GitHub + Netlify Setup
+
 - [ ] Create `.github/data/` directory (or `/catalog/`) for assets.json
 - [ ] Configure Git LFS for large binaries (if needed; see TOA-276)
 - [ ] Set up Git LFS bandwidth monitoring
@@ -283,6 +345,7 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 - [ ] Document Git workflow for asset uploads
 
 ### Build Script Development
+
 - [ ] Write Sharp/ImageMin build script (TOA-278)
 - [ ] Configure responsive breakpoints (web: 1200px+, print: 2400px+)
 - [ ] Test build output on multiple devices
@@ -290,6 +353,7 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 - [ ] Document build process for operations team
 
 ### Validation
+
 - [ ] 100% of 56 assets committed to Git
 - [ ] Build script generates all required variants
 - [ ] Netlify CDN serves optimized files
@@ -311,4 +375,6 @@ Enterprise-grade approach for high-scale deployments. S3 stores originals with v
 
 ---
 
-**Next Action:** Begin GitHub + Netlify setup (TOA-278: migration design) with approved provider. Implement asset catalogue versioning, Netlify CDN deployment, and Sharp-based image optimisation.
+**Next Action:** Begin GitHub + Netlify setup (TOA-278: migration design) with
+approved provider. Implement asset catalogue versioning, Netlify CDN deployment,
+and Sharp-based image optimisation.

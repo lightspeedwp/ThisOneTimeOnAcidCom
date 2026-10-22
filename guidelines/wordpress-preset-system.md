@@ -1,31 +1,43 @@
 # WordPress-Aligned Preset System
 
-**Version:** 1.0.0  
+**Version:** 1.0.0
 **Last Updated:** January 2025
 
-Complete guide to the WordPress theme.json-aligned design token system for the Ash Shaw Makeup Portfolio.
+Complete guide to the WordPress theme.json-aligned design token system for the
+Ash Shaw Makeup Portfolio.
 
 ## 📋 Table of Contents
 
 1. [Overview](#overview)
-2. [WordPress CSS Variable Standards](#wordpress-css-variable-standards)
-3. [Slug Conventions](#slug-conventions)
-4. [Color Presets](#color-presets)
-5. [Typography Presets](#typography-presets)
-6. [Spacing Presets](#spacing-presets)
-7. [Shadow Presets](#shadow-presets)
-8. [Border Presets](#border-presets)
-9. [Custom Tokens](#custom-tokens)
-10. [Migration Guide](#migration-guide)
-11. [Implementation Checklist](#implementation-checklist)
+
+1. [WordPress CSS Variable Standards](#wordpress-css-variable-standards)
+
+1. [Slug Conventions](#slug-conventions)
+
+1. [Color Presets](#color-presets)
+
+1. [Typography Presets](#typography-presets)
+
+1. [Spacing Presets](#spacing-presets)
+
+1. [Shadow Presets](#shadow-presets)
+
+1. [Border Presets](#border-presets)
+
+1. [Custom Tokens](#custom-tokens)
+
+1. [Migration Guide](#migration-guide)
+
+1. [Implementation Checklist](#implementation-checklist)
 
 ---
 
 ## Overview
 
-### Why WordPress Alignment?
+### Why WordPress Alignment
 
-The Ash Shaw Makeup Portfolio now follows WordPress theme.json preset standards to provide:
+The Ash Shaw Makeup Portfolio now follows WordPress theme.json preset standards
+to provide:
 
 - **Single Source of Truth:** Predictable, token-based design system
 - **Scalability:** Easy to extend without breaking existing styles
@@ -36,10 +48,14 @@ The Ash Shaw Makeup Portfolio now follows WordPress theme.json preset standards 
 ### Key Principles
 
 1. **Numeric slugs** for size-like presets (spacing, font sizes, shadows, radii)
-2. **Semantic slugs** for colors (with prefixed numeric scales for ramps)
-3. **WordPress-style CSS variables** (`--wp--preset--{feature}--{slug}`)
-4. **No breaking changes** to visual design
-5. **Backward compatibility** during migration
+
+1. **Semantic slugs** for colors (with prefixed numeric scales for ramps)
+
+1. **WordPress-style CSS variables** (`--wp--preset--{feature}--{slug}`)
+
+1. **No breaking changes** to visual design
+
+1. **Backward compatibility** during migration
 
 ---
 
@@ -49,9 +65,10 @@ The Ash Shaw Makeup Portfolio now follows WordPress theme.json preset standards 
 
 WordPress generates CSS custom properties following this pattern:
 
-```
+```text
 --wp--preset--{feature}--{slug}
-```
+
+```text
 
 ### Preset Features
 
@@ -68,11 +85,13 @@ WordPress generates CSS custom properties following this pattern:
 
 For tokens without WordPress preset UI (border widths, z-index, animations):
 
-```
+```text
 --wp--custom--{category}--{slug}
-```
+
+```text
 
 Examples:
+
 - `--wp--custom--border-width--200`
 - `--wp--custom--z-index--modal`
 - `--wp--custom--animation--300`
@@ -85,7 +104,8 @@ Examples:
 
 Use numeric-only slugs for presets that represent sizes:
 
-**✅ USE NUMERIC SLUGS FOR:**
+## ✅ USE NUMERIC SLUGS FOR
+
 - Spacing (10, 20, 30... 100)
 - Font sizes (100, 200, 300... 900)
 - Shadows (100, 200, 300... 600)
@@ -93,6 +113,7 @@ Use numeric-only slugs for presets that represent sizes:
 - Border widths (0, 100, 200... 400)
 
 **Scale Pattern:**
+
 - Start at **100** (tiny/base)
 - Increment by **100**
 - Go up to **900** (colossal/maximum)
@@ -102,7 +123,8 @@ Use numeric-only slugs for presets that represent sizes:
 
 Use semantic names for presets that represent concepts:
 
-**✅ USE SEMANTIC SLUGS FOR:**
+## ✅ USE SEMANTIC SLUGS FOR
+
 - Color roles (`base`, `contrast`, `primary`, `brand`, `cta`)
 - Color scales with prefix (`neutral-100`, `accent-500`)
 - Font families (`brand-sans`, `brand-serif`, `brand-mono`)
@@ -132,16 +154,19 @@ Shared label set for numeric scales:
 The existing Ash Shaw color palette remains unchanged:
 
 **Brand Gradients:**
+
 - Pink → Purple → Blue (Primary CTA)
 - Blue → Teal → Green (Secondary)
 - Gold → Peach → Coral (Accent)
 
 **Light Mode:**
+
 - Clean white backgrounds
 - Gray text hierarchy
 - Subtle borders
 
 **Dark Mode:**
+
 - Deep purple gradient backgrounds
 - Lavender/purple text
 - Purple borders and accents
@@ -185,7 +210,8 @@ The existing Ash Shaw color palette remains unchanged:
 --wp--preset--color--gradient-pink-start: #ff66cc;
 --wp--preset--color--gradient-pink-mid: #9933ff;
 --wp--preset--color--gradient-pink-end: #3399ff;
-```
+
+```text
 
 ### Usage Examples
 
@@ -203,7 +229,8 @@ The existing Ash Shaw color palette remains unchanged:
   color: var(--wp--preset--color--contrast);
   border-color: var(--wp--preset--color--neutral-200);
 }
-```
+
+```text
 
 ---
 
@@ -213,44 +240,61 @@ The existing Ash Shaw color palette remains unchanged:
 
 ```css
 --wp--preset--font-family--brand-title: "Righteous", "Arial Black", sans-serif;
---wp--preset--font-family--brand-heading: "Playfair Display", "Times New Roman", serif;
---wp--preset--font-family--brand-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-```
+--wp--preset--font-family--brand-heading: "Playfair Display", "Times New Roman",
+serif;
+--wp--preset--font-family--brand-body: "Inter", -apple-system,
+BlinkMacSystemFont, sans-serif;
+
+```text
 
 ### Font Sizes (Numeric Slugs 100-900)
 
 WordPress-inspired fluid typography scale:
 
 ```css
---wp--preset--font-size--100: clamp(0.75rem, 0.65rem + 0.5vw, 0.875rem);   /* 12px → 14px */
---wp--preset--font-size--200: clamp(1rem, 0.85rem + 0.75vw, 1.125rem);     /* 16px → 18px (Base) */
---wp--preset--font-size--300: clamp(1.125rem, 0.95rem + 0.875vw, 1.25rem); /* 18px → 20px */
---wp--preset--font-size--400: clamp(1.25rem, 1rem + 1.25vw, 1.5rem);       /* 20px → 24px */
---wp--preset--font-size--500: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);         /* 24px → 32px */
---wp--preset--font-size--600: clamp(1.875rem, 1.4rem + 2.375vw, 2.5rem);   /* 30px → 40px */
---wp--preset--font-size--700: clamp(2.25rem, 1.75rem + 2.5vw, 3rem);       /* 36px → 48px */
---wp--preset--font-size--800: clamp(2.5rem, 1.9rem + 3vw, 3.5rem);         /* 40px → 56px */
---wp--preset--font-size--900: clamp(3rem, 2.2rem + 4vw, 4.5rem);           /* 48px → 72px */
-```
+--wp--preset--font-size--100: clamp(0.75rem, 0.65rem + 0.5vw, 0.875rem); /* 12px
+→ 14px */
+--wp--preset--font-size--200: clamp(1rem, 0.85rem + 0.75vw, 1.125rem); /* 16px →
+18px (Base) */
+--wp--preset--font-size--300: clamp(1.125rem, 0.95rem + 0.875vw, 1.25rem); /*
+18px → 20px */
+--wp--preset--font-size--400: clamp(1.25rem, 1rem + 1.25vw, 1.5rem); /* 20px →
+24px */
+--wp--preset--font-size--500: clamp(1.5rem, 1.2rem + 1.5vw, 2rem); /* 24px →
+32px */
+--wp--preset--font-size--600: clamp(1.875rem, 1.4rem + 2.375vw, 2.5rem); /* 30px
+→ 40px */
+--wp--preset--font-size--700: clamp(2.25rem, 1.75rem + 2.5vw, 3rem); /* 36px →
+48px */
+--wp--preset--font-size--800: clamp(2.5rem, 1.9rem + 3vw, 3.5rem); /* 40px →
+56px */
+--wp--preset--font-size--900: clamp(3rem, 2.2rem + 4vw, 4.5rem); /* 48px → 72px
+*/
+
+```text
 
 ### Special Use Cases
 
 ```css
 /* Hero Titles (Height-Aware) */
---wp--preset--font-size--hero: clamp(2.25rem, min(4vw + 1rem, 3vh + 2rem), 7.5rem);
+--wp--preset--font-size--hero: clamp(2.25rem, min(4vw + 1rem, 3vh + 2rem),
+7.5rem);
 
 /* Section Headings */
---wp--preset--font-size--section: clamp(1.5rem, min(3vw + 0.5rem, 2.5vh + 1rem), 3rem);
+--wp--preset--font-size--section: clamp(1.5rem, min(3vw + 0.5rem, 2.5vh + 1rem),
+3rem);
 
 /* Body Guideline Text */
 --wp--preset--font-size--body-lg: clamp(1rem, 1.2vw + 0.2rem, 1.25rem);
-```
 
-### Usage Examples
+```text
+
+### Usage Examples (1)
 
 ```tsx
 // In React/TSX
-<h1 className="text-[length:var(--wp--preset--font-size--800)] font-[family:var(--wp--preset--font-family--brand-title)]">
+<h1 className="text-[length:var(--wp--preset--font-size--800)]
+font-[family:var(--wp--preset--font-family--brand-title)]">
   Hero Title
 </h1>
 
@@ -262,7 +306,8 @@ WordPress-inspired fluid typography scale:
 .font-brand-title {
   font-family: var(--wp--preset--font-family--brand-title);
 }
-```
+
+```text
 
 ---
 
@@ -283,7 +328,8 @@ WordPress-aligned spacing with increments of 10:
 --wp--preset--spacing--80: 5rem;       /* 80px */
 --wp--preset--spacing--90: 5.625rem;   /* 90px */
 --wp--preset--spacing--100: 6.25rem;   /* 100px */
-```
+
+```text
 
 ### Fluid Spacing Extensions
 
@@ -291,14 +337,22 @@ For responsive spacing that scales with viewport:
 
 ```css
 /* Fluid spacing with viewport-aware scaling */
---wp--preset--spacing--fluid-xs: clamp(0.25rem, 0.15rem + 0.5vw, 0.5rem);     /* 4px → 8px */
---wp--preset--spacing--fluid-sm: clamp(0.5rem, 0.3rem + 1vw, 1rem);           /* 8px → 16px */
---wp--preset--spacing--fluid-md: clamp(1rem, 0.6rem + 2vw, 2rem);             /* 16px → 32px */
---wp--preset--spacing--fluid-lg: clamp(1.5rem, 1rem + 2.5vw, 3rem);           /* 24px → 48px */
---wp--preset--spacing--fluid-xl: clamp(2rem, 1.2rem + 4vw, 4rem);             /* 32px → 64px */
---wp--preset--spacing--fluid-2xl: clamp(3rem, 1.5rem + 7.5vw, 6rem);          /* 48px → 96px */
---wp--preset--spacing--fluid-3xl: clamp(4rem, 2rem + 10vw, 8rem);             /* 64px → 128px */
-```
+--wp--preset--spacing--fluid-xs: clamp(0.25rem, 0.15rem + 0.5vw, 0.5rem); /* 4px
+→ 8px */
+--wp--preset--spacing--fluid-sm: clamp(0.5rem, 0.3rem + 1vw, 1rem); /* 8px →
+16px */
+--wp--preset--spacing--fluid-md: clamp(1rem, 0.6rem + 2vw, 2rem); /* 16px → 32px
+*/
+--wp--preset--spacing--fluid-lg: clamp(1.5rem, 1rem + 2.5vw, 3rem); /* 24px →
+48px */
+--wp--preset--spacing--fluid-xl: clamp(2rem, 1.2rem + 4vw, 4rem); /* 32px → 64px
+*/
+--wp--preset--spacing--fluid-2xl: clamp(3rem, 1.5rem + 7.5vw, 6rem); /* 48px →
+96px */
+--wp--preset--spacing--fluid-3xl: clamp(4rem, 2rem + 10vw, 8rem); /* 64px →
+128px */
+
+```text
 
 ### Component-Specific Spacing
 
@@ -313,7 +367,8 @@ For responsive spacing that scales with viewport:
 
 /* Section Spacing */
 --wp--preset--spacing--section: clamp(3rem, 6vw + 1rem, 8rem);
-```
+
+```text
 
 ### Block Gap (Layout Spacing)
 
@@ -323,9 +378,10 @@ For responsive spacing that scales with viewport:
 --wp--preset--spacing--block-gap-sm: clamp(0.75rem, 1.5vw + 0.25rem, 1.5rem);
 --wp--preset--spacing--block-gap-md: clamp(1.5rem, 3vw + 0.5rem, 3rem);
 --wp--preset--spacing--block-gap-lg: clamp(2.5rem, 5vw + 1rem, 5rem);
-```
 
-### Usage Examples
+```text
+
+### Usage Examples (2)
 
 ```tsx
 // In React/TSX
@@ -345,7 +401,8 @@ For responsive spacing that scales with viewport:
 .section {
   padding-block: var(--wp--preset--spacing--section);
 }
-```
+
+```text
 
 ---
 
@@ -357,12 +414,17 @@ WordPress box-shadow presets for elevation:
 
 ```css
 --wp--preset--shadow--100: 0 1px 2px 0 rgb(0 0 0 / 0.06);
---wp--preset--shadow--200: 0 1px 3px 0 rgb(0 0 0 / 0.10), 0 1px 2px -1px rgb(0 0 0 / 0.10);
---wp--preset--shadow--300: 0 4px 6px -1px rgb(0 0 0 / 0.10), 0 2px 4px -2px rgb(0 0 0 / 0.10);
---wp--preset--shadow--400: 0 10px 15px -3px rgb(0 0 0 / 0.10), 0 4px 6px -4px rgb(0 0 0 / 0.10);
---wp--preset--shadow--500: 0 20px 25px -5px rgb(0 0 0 / 0.12), 0 10px 10px -5px rgb(0 0 0 / 0.08);
+--wp--preset--shadow--200: 0 1px 3px 0 rgb(0 0 0 / 0.10), 0 1px 2px -1px rgb(0 0
+0 / 0.10);
+--wp--preset--shadow--300: 0 4px 6px -1px rgb(0 0 0 / 0.10), 0 2px 4px -2px
+rgb(0 0 0 / 0.10);
+--wp--preset--shadow--400: 0 10px 15px -3px rgb(0 0 0 / 0.10), 0 4px 6px -4px
+rgb(0 0 0 / 0.10);
+--wp--preset--shadow--500: 0 20px 25px -5px rgb(0 0 0 / 0.12), 0 10px 10px -5px
+rgb(0 0 0 / 0.08);
 --wp--preset--shadow--600: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-```
+
+```text
 
 ### Intent Mapping
 
@@ -375,11 +437,12 @@ WordPress box-shadow presets for elevation:
 | 500 | Large | High emphasis overlays |
 | 600 | X-Large | Hero overlays, "floating" elements |
 
-### Usage Examples
+### Usage Examples (3)
 
 ```tsx
 // In React/TSX
-<div className="shadow-[var(--wp--preset--shadow--300)] hover:shadow-[var(--wp--preset--shadow--400)]">
+<div className="shadow-[var(--wp--preset--shadow--300)]
+hover:shadow-[var(--wp--preset--shadow--400)]">
   Card with elevation
 </div>
 
@@ -392,7 +455,8 @@ WordPress box-shadow presets for elevation:
 .card:hover {
   box-shadow: var(--wp--preset--shadow--300);
 }
-```
+
+```text
 
 ---
 
@@ -411,7 +475,8 @@ WordPress box-shadow presets for elevation:
 --wp--preset--border-radius--700: 1.5rem;      /* 24px */
 --wp--preset--border-radius--800: 2rem;        /* 32px */
 --wp--preset--border-radius--900: 9999px;      /* Full/Pill */
-```
+
+```text
 
 ### Border Width (Custom Tokens)
 
@@ -423,13 +488,15 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 --wp--custom--border-width--200: 2px;
 --wp--custom--border-width--300: 4px;
 --wp--custom--border-width--400: 8px;
-```
 
-### Usage Examples
+```text
+
+### Usage Examples (4)
 
 ```tsx
 // In React/TSX
-<div className="rounded-[var(--wp--preset--border-radius--400)] border-[width:var(--wp--custom--border-width--200)]">
+<div className="rounded-[var(--wp--preset--border-radius--400)]
+border-[width:var(--wp--custom--border-width--200)]">
   Card with rounded corners
 </div>
 
@@ -443,7 +510,8 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 .pill-button {
   border-radius: var(--wp--preset--border-radius--900);
 }
-```
+
+```text
 
 ---
 
@@ -456,7 +524,8 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 --wp--custom--animation--200: 300ms;   /* Normal */
 --wp--custom--animation--300: 500ms;   /* Slow */
 --wp--custom--animation--400: 800ms;   /* Very Slow */
-```
+
+```text
 
 ### Easing Functions
 
@@ -466,7 +535,8 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 --wp--custom--ease--accelerate: cubic-bezier(0.4, 0, 1, 1);
 --wp--custom--ease--sharp: cubic-bezier(0.4, 0, 0.6, 1);
 --wp--custom--ease--bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-```
+
+```text
 
 ### Z-Index Scale
 
@@ -476,14 +546,16 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 --wp--custom--z-index--modal: 1050;
 --wp--custom--z-index--popover: 1060;
 --wp--custom--z-index--tooltip: 1070;
-```
+
+```text
 
 ### Layout Widths
 
 ```css
 --wp--style--global--content-size: 40rem;     /* 640px */
 --wp--style--global--wide-size: 64rem;        /* 1024px */
-```
+
+```text
 
 ---
 
@@ -491,17 +563,20 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 
 ### Phase 1: Add WordPress Variables (Non-Breaking)
 
-**Step 1:** Add new WordPress-aligned variables alongside existing ones in `globals.css`:
+**Step 1:** Add new WordPress-aligned variables alongside existing ones in
+`globals.css`:
 
 ```css
 :root {
   /* Existing variables (keep for now) */
   --text-hero-h1: clamp(2.25rem, 6vw, 7.5rem);
-  
+
   /* New WordPress-aligned variables */
-  --wp--preset--font-size--hero: clamp(2.25rem, min(4vw + 1rem, 3vh + 2rem), 7.5rem);
+--wp--preset--font-size--hero: clamp(2.25rem, min(4vw + 1rem, 3vh + 2rem),
+7.5rem);
 }
-```
+
+```text
 
 **Step 2:** Create helper utility classes:
 
@@ -517,7 +592,8 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 /* Shadow helpers */
 .shadow-200 { box-shadow: var(--wp--preset--shadow--200); }
 .shadow-300 { box-shadow: var(--wp--preset--shadow--300); }
-```
+
+```text
 
 ### Phase 2: Gradual Component Migration
 
@@ -535,7 +611,8 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 <h1 className="text-[length:var(--wp--preset--font-size--hero)] text-size-hero">
   Title
 </h1>
-```
+
+```text
 
 ### Phase 3: Deprecate Old Variables
 
@@ -546,13 +623,14 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
   /* @deprecated Use --wp--preset--font-size--hero instead */
   --text-hero-h1: clamp(2.25rem, 6vw, 7.5rem);
 }
-```
+
+```text
 
 **Step 2:** After all components migrate, remove deprecated variables
 
 ### Migration Tracking
 
-**Status Tracking Table:**
+## Status Tracking Table
 
 | Category | Old Variables | New Variables | Status |
 |----------|--------------|---------------|--------|
@@ -567,6 +645,7 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 ## Implementation Checklist
 
 ### CSS Variables
+
 - [ ] Add WordPress-aligned color variables to `:root`
 - [ ] Add WordPress-aligned spacing scale (10-100)
 - [ ] Add WordPress-aligned font size scale (100-900)
@@ -575,12 +654,14 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 - [ ] Add custom tokens (animations, easing, z-index)
 
 ### Helper Classes
+
 - [ ] Create typography helper classes (`.text-size-*`)
 - [ ] Create spacing helper classes (`.p-spacing-*`, `.py-section`)
 - [ ] Create shadow helper classes (`.shadow-*`)
 - [ ] Create border radius helper classes (`.rounded-*`)
 
 ### Documentation
+
 - [ ] Update colors.md with WordPress color structure
 - [ ] Update typography.md with numeric font size scale
 - [ ] Update spacing.md with numeric spacing scale
@@ -588,6 +669,7 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 - [ ] Document border radius presets
 
 ### Testing
+
 - [ ] Verify no visual regressions
 - [ ] Test all components with new variables
 - [ ] Confirm dark mode still works correctly
@@ -595,6 +677,7 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 - [ ] Test responsive scaling across viewports
 
 ### Migration
+
 - [ ] Identify all components using old variables
 - [ ] Create migration plan with priority order
 - [ ] Migrate high-traffic components first
@@ -612,6 +695,6 @@ Since WordPress doesn't have `border.widthSizes`, use custom tokens:
 
 ---
 
-**Last Updated:** January 2025  
-**Version:** 1.0.0  
+**Last Updated:** January 2025
+**Version:** 1.0.0
 **Maintained by:** Ash Shaw Portfolio Team

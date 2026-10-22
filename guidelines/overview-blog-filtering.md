@@ -1,13 +1,15 @@
 # Blog Filtering System Overview
 
-**Version:** 7.0.0  
+**Version:** 7.0.0
 **Last Updated:** February 2026
 
-Complete blog filtering, search, and pagination system for the Ash Shaw Portfolio.
+Complete blog filtering, search, and pagination system for the Ash Shaw
+Portfolio.
 
 ## Purpose
 
 Document the integrated filtering system that combines:
+
 - Category filtering
 - Text search
 - Tag filtering
@@ -19,7 +21,7 @@ Document the integrated filtering system that combines:
 
 ## 🔍 Complete Blog Filtering Flow
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                  BLOG PAGE FILTERING ARCHITECTURE                    │
 └─────────────────────────────────────────────────────────────────────┘
@@ -384,27 +386,27 @@ State → URL:
 ────────────
 useEffect(() => {
   const params = new URLSearchParams();
-  
+
   if (activeCategory !== 'all') {
     params.set('category', activeCategory);
   }
-  
+
   if (searchQuery) {
     params.set('search', searchQuery);
   }
-  
+
   if (selectedTags.length > 0) {
     params.set('tags', selectedTags.join(','));
   }
-  
+
   if (sortBy !== 'date') {
     params.set('sort', sortBy);
   }
-  
+
   if (currentPage > 1) {
     params.set('page', currentPage.toString());
   }
-  
+
   navigate(`?${params.toString()}`, { replace: true });
 }, [activeCategory, searchQuery, selectedTags, sortBy, currentPage]);
 
@@ -412,13 +414,13 @@ URL → State:
 ────────────
 useEffect(() => {
   const params = new URLSearchParams(location.search);
-  
+
   const category = params.get('category') || 'all';
   const search = params.get('search') || '';
   const tags = params.get('tags')?.split(',') || [];
   const sort = params.get('sort') || 'date';
   const page = parseInt(params.get('page') || '1');
-  
+
   setActiveCategory(category);
   setSearchQuery(search);
   setSelectedTags(tags);
@@ -471,14 +473,15 @@ Empty State Component:
   <p className="text-fluid-xl text-gray-600 mb-fluid-md">
     No posts found matching your criteria
   </p>
-  
-  <button 
+
+  <button
     onClick={resetAllFilters}
-    className="bg-gradient-pink-purple-blue text-white px-button py-button rounded-lg"
+className="bg-gradient-pink-purple-blue text-white px-button py-button
+rounded-lg"
   >
     Clear All Filters
   </button>
-  
+
   <div className="mt-fluid-xl">
     <h3 className="text-fluid-lg font-heading font-semibold mb-fluid-md">
       You might be interested in:
@@ -488,7 +491,8 @@ Empty State Component:
     </div>
   </div>
 </div>
-```
+
+```text
 
 ---
 
@@ -508,7 +512,7 @@ import { blogPosts, blogCategories, blogTags } from '@/data/mock';
 export function BlogPage() {
   // URL state management
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   // Filter state
   const [searchQuery, setSearchQuery] = useState(
     searchParams.get('search') || ''
@@ -525,31 +529,31 @@ export function BlogPage() {
   const [currentPage, setCurrentPage] = useState(
     parseInt(searchParams.get('page') || '1')
   );
-  
+
   const postsPerPage = 9;
-  
+
   // Update URL when filters change
   useEffect(() => {
     const params = new URLSearchParams();
-    
+
     if (activeCategory !== 'all') params.set('category', activeCategory);
     if (searchQuery) params.set('search', searchQuery);
     if (selectedTags.length > 0) params.set('tags', selectedTags.join(','));
     if (sortBy !== 'date') params.set('sort', sortBy);
     if (currentPage > 1) params.set('page', currentPage.toString());
-    
+
     setSearchParams(params, { replace: true });
   }, [activeCategory, searchQuery, selectedTags, sortBy, currentPage]);
-  
+
   // Apply all filters
   const filteredPosts = useMemo(() => {
     let posts = [...blogPosts];
-    
+
     // Filter by category
     if (activeCategory !== 'all') {
       posts = posts.filter(post => post.category === activeCategory);
     }
-    
+
     // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
@@ -559,14 +563,14 @@ export function BlogPage() {
         post.content.toLowerCase().includes(query)
       );
     }
-    
+
     // Filter by tags
     if (selectedTags.length > 0) {
       posts = posts.filter(post =>
         selectedTags.every(tag => post.tags.includes(tag))
       );
     }
-    
+
     // Sort posts
     posts.sort((a, b) => {
       if (sortBy === 'date') {
@@ -577,31 +581,31 @@ export function BlogPage() {
         return a.title.localeCompare(b.title);
       }
     });
-    
+
     return posts;
   }, [activeCategory, searchQuery, selectedTags, sortBy]);
-  
+
   // Calculate pagination
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const paginatedPosts = useMemo(() => {
     const startIndex = (currentPage - 1) * postsPerPage;
     return filteredPosts.slice(startIndex, startIndex + postsPerPage);
   }, [filteredPosts, currentPage]);
-  
+
   // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [activeCategory, searchQuery, selectedTags, sortBy]);
-  
+
   // Handle filter changes
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
   };
-  
+
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
   };
-  
+
   const handleTagToggle = (tag: string) => {
     setSelectedTags(prev =>
       prev.includes(tag)
@@ -609,7 +613,7 @@ export function BlogPage() {
         : [...prev, tag]
     );
   };
-  
+
   const resetAllFilters = () => {
     setSearchQuery('');
     setActiveCategory('all');
@@ -617,33 +621,33 @@ export function BlogPage() {
     setSortBy('date');
     setCurrentPage(1);
   };
-  
+
   return (
     <section className="py-section px-6">
       <div className="max-w-7xl mx-auto">
         {/* Search Bar */}
-        <SearchBar 
+        <SearchBar
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder="Search blog posts..."
           className="mb-fluid-lg"
         />
-        
+
         {/* Category Filter */}
-        <CategoryFilter 
+        <CategoryFilter
           categories={blogCategories}
           activeCategory={activeCategory}
           onCategoryChange={handleCategoryChange}
           showCount={true}
           className="mb-fluid-md"
         />
-        
+
         {/* Results Count */}
         <div className="flex items-center justify-between mb-fluid-lg">
           <p className="text-fluid-sm text-gray-600">
             {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'} found
           </p>
-          
+
           {/* Sort Dropdown */}
           <select
             value={sortBy}
@@ -655,7 +659,7 @@ export function BlogPage() {
             <option value="title">A-Z</option>
           </select>
         </div>
-        
+
         {/* Results Grid */}
         {paginatedPosts.length > 0 ? (
           <>
@@ -664,10 +668,10 @@ export function BlogPage() {
                 <BlogCard key={post.id} post={post} />
               ))}
             </div>
-            
+
             {/* Pagination */}
             {totalPages > 1 && (
-              <BlogPagination 
+              <BlogPagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
@@ -681,10 +685,11 @@ export function BlogPage() {
             <p className="text-fluid-xl text-gray-600 mb-fluid-md">
               No posts found matching your criteria
             </p>
-            
-            <button 
+
+            <button
               onClick={resetAllFilters}
-              className="bg-gradient-pink-purple-blue text-white px-button py-button rounded-lg"
+className="bg-gradient-pink-purple-blue text-white px-button py-button
+rounded-lg"
             >
               Clear All Filters
             </button>
@@ -694,7 +699,8 @@ export function BlogPage() {
     </section>
   );
 }
-```
+
+```text
 
 ---
 
@@ -705,101 +711,104 @@ export function BlogPage() {
 ```mermaid
 flowchart TD
     A[User Lands on Blog Page] --> B[Load All Posts<br/>5 posts]
-    
+
     B --> C{User Action?}
-    
+
     C -->|Type in Search| D[Apply Search Filter]
     C -->|Click Category| E[Apply Category Filter]
     C -->|Select Tag| F[Apply Tag Filter]
     C -->|Change Sort| G[Apply Sort]
     C -->|Click Page| H[Apply Pagination]
-    
+
     D --> I[Filter by Title/Excerpt/Content]
     E --> J[Filter by Category]
     F --> K[Filter by Tags]
-    
+
     I --> L[Combine All Filters]
     J --> L
     K --> L
-    
+
     L --> G
-    
+
     G --> M{Sort By?}
     M -->|Date| N[Sort by publishedAt DESC]
     M -->|Popular| O[Sort by readTime DESC]
     M -->|Title| P[Sort alphabetically]
-    
+
     N --> Q[Sorted Posts]
     O --> Q
     P --> Q
-    
+
     Q --> H
-    
+
     H --> R[Calculate:<br/>startIndex = page - 1 × 9<br/>endIndex = startIndex + 9]
-    
+
     R --> S[Slice Posts]
-    
+
     S --> T{Results > 0?}
-    
+
     T -->|Yes| U[Render Blog Cards]
     T -->|No| V[Show Empty State]
-    
+
     U --> W[Show Pagination]
     V --> X[Show Reset Button]
-    
+
     W --> Y[User Sees Filtered Results]
     X --> C
-    
+
     style A fill:#e1f5ff,stroke:#01c3cc,stroke-width:2px
     style L fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
     style Q fill:#dcfce7,stroke:#22c55e,stroke-width:2px
     style T fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
     style U fill:#dcfce7,stroke:#22c55e,stroke-width:2px
     style V fill:#fecaca,stroke:#ef4444,stroke-width:2px
-```
+
+```text
 
 ### Mermaid State Diagram (Filter States)
 
 ```mermaid
 stateDiagram-v2
     [*] --> AllPosts: Page loads
-    
+
     AllPosts --> Searching: User types search
     AllPosts --> FilteringCategory: Click category
     AllPosts --> FilteringTags: Select tag
     AllPosts --> Sorting: Change sort
-    
+
     Searching --> Filtered: Apply search
     FilteringCategory --> Filtered: Apply category
     FilteringTags --> Filtered: Apply tags
-    
+
     Filtered --> Sorting: Sort results
     Sorting --> Paginating: Calculate pages
-    
+
     Paginating --> DisplayingResults: Show posts
-    
+
     DisplayingResults --> Searching: New search
     DisplayingResults --> FilteringCategory: New category
     DisplayingResults --> FilteringTags: New tag
     DisplayingResults --> Sorting: New sort
     DisplayingResults --> Paginating: Change page
-    
+
     DisplayingResults --> Empty: 0 results
     Empty --> ResettingFilters: Click reset
     ResettingFilters --> AllPosts: Clear all filters
-    
+
     note right of Filtered
         Combines:
+
         - Search query
         - Category
         - Tags (AND logic)
     end note
-    
+
     note right of DisplayingResults
         Shows 9 posts per page
         With pagination controls
     end note
-```
+
+```text
 
 ### Mermaid Sequence Diagram (Search Flow)
 
@@ -810,42 +819,43 @@ sequenceDiagram
     participant P as BlogPage
     participant F as Filter Pipeline
     participant R as Results Grid
-    
+
     U->>S: Types "festival"
-    
+
     Note over S: Debounce 300ms
-    
+
     S->>P: onChange("festival")
     P->>P: setSearchQuery("festival")
     P->>P: setCurrentPage(1)
-    
+
     Note over P: Trigger useMemo
-    
+
     P->>F: Apply filters
-    
+
     Note over F: Step 1: Category filter
     F->>F: Filter if category !== 'all'
-    
+
     Note over F: Step 2: Search filter
     F->>F: Filter by title/excerpt/content<br/>Contains "festival"
-    
+
     Note over F: Step 3: Tag filter
     F->>F: Filter if selectedTags.length > 0
-    
+
     Note over F: Step 4: Sort
     F->>F: Sort by date/popular/title
-    
+
     F-->>P: Return 1 filtered post
-    
+
     P->>P: Calculate pagination
     P->>P: Slice for current page
-    
+
     P->>R: Render 1 post
-    
+
     R->>U: Display "Festival Makeup Guide"
-    
+
     Note over R: Shows: "1 post found"
-```
+
+```text
 
 ---
 
@@ -859,5 +869,5 @@ sequenceDiagram
 
 ---
 
-**Last Updated:** February 2026  
+**Last Updated:** February 2026
 **Version:** 7.0.0

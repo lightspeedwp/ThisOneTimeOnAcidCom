@@ -1,14 +1,15 @@
 # 🚨 ROOT CAUSE: Dark Mode Not Working At All
 
-**Date:** March 11, 2026  
-**Status:** ✅ **FIXED**  
+**Date:** March 11, 2026
+**Status:** ✅ **FIXED**
 **Severity:** CRITICAL
 
 ---
 
 ## 🔥 The Real Problem
 
-**The site was STUCK IN LIGHT MODE** — the `.dark` class was never being applied to `<html>`.
+**The site was STUCK IN LIGHT MODE** — the `.dark` class was never being applied
+to `<html>`.
 
 This wasn't a CSS contrast issue. This was a **theme initialization bug**.
 
@@ -16,14 +17,16 @@ This wasn't a CSS contrast issue. This was a **theme initialization bug**.
 
 ## 🐛 Root Cause
 
-### ThemeProvider.tsx Lines 35-36 (BEFORE FIX):
+### ThemeProvider.tsx Lines 35-36 (BEFORE FIX)
 
 ```tsx
 var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 var defaultTheme: Theme = prefersDark ? 'dark' : 'light';
-```
+
+```text
 
 **The bug:**
+
 - If user has no saved preference in `localStorage`
 - AND their OS is set to light mode
 - The site defaults to `'light'` theme
@@ -34,7 +37,7 @@ var defaultTheme: Theme = prefersDark ? 'dark' : 'light';
 
 ## 💥 Impact
 
-**100% of users with OS light mode** → stuck in light mode  
+**100% of users with OS light mode** → stuck in light mode
 **100% of new visitors** → stuck in light mode (no localStorage yet)
 
 This explains why you saw a white header and light backgrounds everywhere.
@@ -51,9 +54,10 @@ This explains why you saw a white header and light backgrounds everywhere.
 // CRITICAL: Apply dark mode class IMMEDIATELY on module load to prevent FOUC
 (function() {
   if (typeof document === 'undefined') return;
-  
-  var savedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
-  
+
+var savedTheme = typeof localStorage !== 'undefined' ?
+localStorage.getItem('theme') : null;
+
   // Default to dark mode (original neon design) unless explicitly set to light
   if (!savedTheme || savedTheme === 'dark' || savedTheme === 'brutalist') {
     document.documentElement.classList.add('dark');
@@ -63,29 +67,35 @@ This explains why you saw a white header and light backgrounds everywhere.
     document.documentElement.setAttribute('data-theme', 'light');
   }
 })();
-```
 
-**This runs synchronously when the module loads**, adding the `.dark` class BEFORE React tries to render anything.
+```text
+
+**This runs synchronously when the module loads**, adding the `.dark` class
+BEFORE React tries to render anything.
 
 ---
 
 ### 2. Changed Default Theme Logic
 
 **BEFORE (BROKEN):**
+
 ```tsx
 // Respect OS preference
 var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 var defaultTheme: Theme = prefersDark ? 'dark' : 'light';
-```
+
+```text
 
 **AFTER (FIXED):**
+
 ```tsx
 // ALWAYS default to dark mode (original neon design)
 setThemeState('dark');
 document.documentElement.setAttribute('data-theme', 'dark');
 document.documentElement.classList.add('dark');
 localStorage.setItem('theme', 'dark'); // Save default preference
-```
+
+```text
 
 ---
 
@@ -110,11 +120,13 @@ Added identical IIFE to `ThemeToggleES5.tsx` for consistency.
 ## 📊 Testing Results
 
 **Before fix:**
+
 - New visitor → Light mode ❌
 - User with OS light mode → Light mode ❌
 - `.dark` class on `<html>` → Missing ❌
 
 **After fix:**
+
 - New visitor → Dark mode ✅
 - User with OS light mode → Dark mode ✅
 - `.dark` class on `<html>` → Applied immediately ✅
@@ -125,14 +137,18 @@ Added identical IIFE to `ThemeToggleES5.tsx` for consistency.
 ## 🧪 How to Verify
 
 1. Open DevTools Console
-2. Run: `document.documentElement.classList.contains('dark')`
-3. Should return `true` ✅
+
+1. Run: `document.documentElement.classList.contains('dark')`
+
+1. Should return `true` ✅
 
 OR
 
 1. Inspect `<html>` element
-2. Should see `class="dark"` attribute ✅
-3. Should see `data-theme="dark"` attribute ✅
+
+1. Should see `class="dark"` attribute ✅
+
+1. Should see `data-theme="dark"` attribute ✅
 
 ---
 
@@ -141,33 +157,42 @@ OR
 ### ❌ What Went Wrong
 
 1. **Assumed OS preference should be respected** — wrong for a neon-themed art portfolio
-2. **Relied on useEffect for theme initialization** — causes FOUC and race conditions
-3. **Used `window.matchMedia('(prefers-color-scheme: dark)')` as default** — bad assumption
+
+1. **Relied on useEffect for theme initialization** — causes FOUC and race conditions
+
+1. **Used `window.matchMedia('(prefers-color-scheme: dark)')` as default** — bad assumption
 
 ### ✅ What We Fixed
 
 1. **Always default to dark mode** — matches the brand's neon aesthetic
-2. **Apply `.dark` class synchronously in IIFE** — no FOUC, instant dark mode
-3. **Save 'dark' to localStorage on first visit** — prevents re-triggering default logic
+
+1. **Apply `.dark` class synchronously in IIFE** — no FOUC, instant dark mode
+
+1. **Save 'dark' to localStorage on first visit** — prevents re-triggering default logic
 
 ---
 
 ## 📝 Related Issues
 
-This bug masked ALL the contrast fixes we did earlier. The contrast fixes WERE correct, but they were never being applied because the `.dark` class was missing.
+This bug masked ALL the contrast fixes we did earlier. The contrast fixes WERE
+correct, but they were never being applied because the `.dark` class was
+missing.
 
-Now that the `.dark` class is applied correctly, all 35 contrast fixes will work.
+Now that the `.dark` class is applied correctly, all 35 contrast fixes will
+work.
 
 ---
 
 ## ✅ Resolution
 
-**Status:** FIXED  
-**Files Modified:** 
+**Status:** FIXED
+**Files Modified:**
+
 - `/components/common/ThemeProvider.tsx` (critical fix)
 - `/components/common/ThemeToggleES5.tsx` (preventive fix)
 
-**Result:** 
+**Result:**
+
 - Dark mode now works by default
 - All CSS contrast fixes now visible
 - No more white header
@@ -176,6 +201,6 @@ Now that the `.dark` class is applied correctly, all 35 contrast fixes will work
 
 ---
 
-**Fixed By:** Dark Mode Emergency Response Team  
-**Date:** March 11, 2026  
+**Fixed By:** Dark Mode Emergency Response Team
+**Date:** March 11, 2026
 **Verified:** ✅ WORKING

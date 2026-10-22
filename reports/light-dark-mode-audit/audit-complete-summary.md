@@ -1,56 +1,71 @@
 # Light/Dark Mode Audit - Complete Summary
 
-**Date:** March 20, 2026  
-**Auditor:** AI Assistant  
+**Date:** March 20, 2026
+**Auditor:** AI Assistant
 **Status:** PARTIALLY FIXED - Critical Issues Remain
 
 ---
 
 ## Executive Summary
 
-**ROOT CAUSE IDENTIFIED:** The light.css file uses 74 instances of `body:not(.dark)` selectors that cause light mode styles to leak into dark mode. This occurs because:
+**ROOT CAUSE IDENTIFIED:** The light.css file uses 74 instances of
+`body:not(.dark)` selectors that cause light mode styles to leak into dark mode.
+This occurs because:
 
 1. ThemeProvider adds `.dark` class to `<html>` (document.documentElement)
-2. The `<body>` element never receives the `.dark` class
-3. Therefore `body:not(.dark)` ALWAYS matches, even in dark mode
-4. CSS selector lists use OR logic - if ANY selector in the list matches, styles apply
+
+1. The `<body>` element never receives the `.dark` class
+
+1. Therefore `body:not(.dark)` ALWAYS matches, even in dark mode
+
+1. CSS selector lists use OR logic - if ANY selector in the list matches, styles apply
 
 ---
 
 ## Fixes Applied ✅
 
 ### 1. Variable Block (Line 3) - ✅ FIXED
+
 **Before:**
+
 ```css
 :root:not(.dark), body:not(.dark) {
   /* variables */
 }
-```
+
+```text
 
 **After:**
+
 ```css
 :root:not(.dark) {
   /* variables */
 }
-```
+
+```text
 
 **Impact:** HIGH - Prevents CSS variable leaking into dark mode
 
 ### 2. Body Background (Lines 125-133) - ✅ FIXED
+
 **Before:**
+
 ```css
 :root:not(.dark) body,
 body:not(.dark) {
   background: pink gradient;
 }
-```
+
+```text
 
 **After:**
+
 ```css
 :root:not(.dark) body {
   background: pink gradient;
 }
-```
+
+```text
 
 **Impact:** CRITICAL - Prevents light background showing in dark mode
 
@@ -61,14 +76,17 @@ body:not(.dark) {
 ### 73 Component Selectors Still Broken
 
 Every component section still has the broken pattern:
+
 ```css
 :root:not(.dark) .component,
 body:not(.dark) .component {  /* ← body:not(.dark) line needs removal */
   /* styles */
 }
-```
+
+```text
 
 **Affected Sections:**
+
 - Header (4 selectors)
 - Mobile Menu (3 selectors)
 - Buttons (13 selectors)
@@ -92,31 +110,37 @@ body:not(.dark) .component {  /* ← body:not(.dark) line needs removal */
 
 ## Why These Selectors Are Dangerous
 
-### The Problem:
+### The Problem
+
 ```css
 /* This selector list uses OR logic */
 :root:not(.dark) .header,  /* Selector A */
 body:not(.dark) .header {   /* Selector B */
   background: pink;
 }
-```
 
-### In Dark Mode:
+```text
+
+### In Dark Mode
+
 - `<html class="dark">` exists
 - `<body>` has NO `.dark` class
 - **Selector A:** `:root:not(.dark) .header` → Does NOT match ✓
 - **Selector B:** `body:not(.dark) .header` → DOES MATCH ✗
 - **Result:** Pink background shows in dark mode!
 
-### The Fix:
+### The Fix
+
 ```css
 /* Only use :root:not(.dark) */
 :root:not(.dark) .header {
   background: pink;
 }
-```
 
-### In Dark Mode (After Fix):
+```text
+
+### In Dark Mode (After Fix)
+
 - `<html class="dark">` exists
 - **Selector:** `:root:not(.dark) .header` → Does NOT match ✓
 - **Result:** Dark mode styles apply correctly!
@@ -126,6 +150,7 @@ body:not(.dark) .header {   /* Selector B */
 ## Current State Assessment
 
 ### What Works ✅
+
 - Variable block correctly scoped to `:root:not(.dark)` only
 - Body background correctly scoped
 - Dark mode CSS file is correct (no changes needed)
@@ -133,16 +158,18 @@ body:not(.dark) .header {   /* Selector B */
 - CSS import order is correct
 
 ### What's Broken ⚠️
+
 - 73 component selectors still have `body:not(.dark)` causing leakage
 - Light mode styles are applying in dark mode for:
-  - Headers
-  - Buttons  
-  - Forms
-  - Cards
-  - Links
-  - All UI components
+- Headers
+- Buttons
+- Forms
+- Cards
+- Links
+- All UI components
 
 ### Impact
+
 - **Severity:** HIGH
 - **Visual Impact:** Moderate (some light mode colors bleeding into dark mode)
 - **Functional Impact:** Low (site still works, just visually incorrect)
@@ -153,38 +180,47 @@ body:not(.dark) .header {   /* Selector B */
 ## Recommended Next Steps
 
 ### Option 1: Manual Fix (Time: 1-2 hours)
+
 Go through all 73 instances and remove `body:not(.dark)` lines manually.
 
-**Pros:** 
+**Pros:**
+
 - Complete control
 - Can review each selector
 - No risk of breaking syntax
 
 **Cons:**
+
 - Time-consuming
 - Error-prone (easy to miss instances)
 
 ### Option 2: Automated Script (Time: 30 minutes)
+
 Use find/replace or script to remove all `body:not(.dark)` lines.
 
 **Pros:**
+
 - Fast
 - Consistent
 - No human error
 
 **Cons:**
+
 - Risk of breaking multiline selectors
 - Requires careful regex
 
 ### Option 3: File Regeneration (Time: 45 minutes - RECOMMENDED)
+
 Regenerate the entire light.css file with correct selectors from scratch.
 
 **Pros:**
+
 - Cleanest solution
 - Can optimize while rewriting
 - No missed instances
 
 **Cons:**
+
 - Need to preserve all existing styles
 - More upfront work
 
@@ -195,6 +231,7 @@ Regenerate the entire light.css file with correct selectors from scratch.
 After complete fix, verify:
 
 ### Dark Mode Verification
+
 - [ ] Background: #0F0F0F (atomic black) - currently PARTIALLY working
 - [ ] Text: #F6F2EB (warm white) - currently working
 - [ ] Neon Pink: #FF3AAE (full brightness) - currently working
@@ -204,12 +241,14 @@ After complete fix, verify:
 - [ ] NO pink gradients visible anywhere - **currently FAILING**
 
 ### Light Mode Verification
+
 - [ ] Background: Pink/cyan gradient - working
 - [ ] Text: #2A1A2A - working
 - [ ] Header: Pink gradient - working
 - [ ] All components show light mode styling - working
 
 ### Theme Switching
+
 - [ ] Instant switch (no flash) - working
 - [ ] LocalStorage persistence - working
 - [ ] Default to dark mode - working
@@ -218,16 +257,19 @@ After complete fix, verify:
 
 ## Conclusion
 
-The audit identified the core issue: **74 instances of `body:not(.dark)` selectors** causing light mode styles to leak into dark mode.
+The audit identified the core issue: **74 instances of `body:not(.dark)`
+selectors** causing light mode styles to leak into dark mode.
 
-**Fixed:** 2 critical instances (variable block + body background)  
+**Fixed:** 2 critical instances (variable block + body background)
 **Remaining:** 73 component selectors need fixing
 
-**Recommended Action:** Use Option 3 (file regeneration) to cleanly fix all remaining instances in one systematic rewrite.
+**Recommended Action:** Use Option 3 (file regeneration) to cleanly fix all
+remaining instances in one systematic rewrite.
 
 ---
 
-**Files Created During Audit:**
+## Files Created During Audit
+
 - `/prompts/light-dark-mode-audit.md` - Audit orchestrator prompt
 - `/reports/light-dark-mode-audit/critical-bug-found.md` - Initial bug discovery
 - `/reports/light-dark-mode-audit/selector-audit-findings.md` - Detailed findings

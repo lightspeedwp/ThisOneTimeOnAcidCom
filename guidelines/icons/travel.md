@@ -1,14 +1,17 @@
 # Travel Icons
 
-Icons related to travel, location, tours, activities, and destinations for the Ash Shaw Makeup Portfolio (applicable for future travel/event-based features).
+Icons related to travel, location, tours, activities, and destinations for the
+Ash Shaw Makeup Portfolio (applicable for future travel/event-based features).
 
-> **Note:** All icons now use `@phosphor-icons/react`. Lucide has been fully replaced.
+> **Note:** All icons now use `@phosphor-icons/react`. Lucide has been fully
+replaced.
 
 ## 📋 Available Icons
 
 ### Location & Navigation
 
 #### MapPin
+
 **Usage:** Location markers, venue addresses, event locations
 
 ```tsx
@@ -18,9 +21,11 @@ import { MapPin } from '@phosphor-icons/react';
   <MapPin size={20} weight="regular" />
   <span>Cape Town, South Africa</span>
 </div>
-```
+
+```text
 
 #### NavigationArrow
+
 **Usage:** Directions, GPS navigation, route planning
 
 ```tsx
@@ -30,20 +35,24 @@ import { NavigationArrow } from '@phosphor-icons/react';
   <NavigationArrow size={16} weight="regular" />
   <span>Get Directions</span>
 </a>
-```
+
+```text
 
 #### Compass
+
 **Usage:** Exploration features, discovery sections
 
 ```tsx
 import { Compass } from '@phosphor-icons/react';
 
 <Compass size={24} weight="regular" />
-```
+
+```text
 
 ### Events & Calendar
 
 #### Calendar
+
 **Usage:** Event dates, festival schedule, timeline
 
 ```tsx
@@ -53,9 +62,11 @@ import { Calendar } from '@phosphor-icons/react';
   <Calendar size={20} weight="regular" />
   <span>January 15, 2025</span>
 </div>
-```
+
+```text
 
 #### Clock
+
 **Usage:** Duration, reading time, event timing
 
 ```tsx
@@ -65,11 +76,13 @@ import { Clock } from '@phosphor-icons/react';
   <Clock size={16} weight="regular" />
   2 hours
 </span>
-```
+
+```text
 
 ### People & Groups
 
 #### Users
+
 **Usage:** Group events, team members, attendees
 
 ```tsx
@@ -79,18 +92,22 @@ import { Users } from '@phosphor-icons/react';
   <Users size={20} weight="regular" />
   <span>Group Festival Pass (5+ people)</span>
 </div>
-```
+
+```text
 
 #### User
+
 **Usage:** Profile, contact, collaborator
 
 ```tsx
 import { User } from '@phosphor-icons/react';
 
 <User size={20} weight="regular" />
-```
+
+```text
 
 #### UserPlus
+
 **Usage:** Add guest, invite people, new contact
 
 ```tsx
@@ -100,49 +117,59 @@ import { UserPlus } from '@phosphor-icons/react';
   <UserPlus size={20} weight="regular" />
   <span>Add Guest</span>
 </button>
-```
+
+```text
 
 ### Activity Types
 
 #### Camera
+
 **Usage:** Photography services, portfolio shoots
 
 ```tsx
 import { Camera } from '@phosphor-icons/react';
 
 <Camera size={24} weight="regular" />
-```
+
+```text
 
 #### Mountains
+
 **Usage:** Outdoor events, festival venues
 
 ```tsx
 import { Mountains } from '@phosphor-icons/react';
 
 <Mountains size={16} weight="regular" />
-```
+
+```text
 
 #### Waves
+
 **Usage:** Beach events, coastal venues
 
 ```tsx
 import { Waves } from '@phosphor-icons/react';
 
 <Waves size={20} weight="regular" />
-```
+
+```text
 
 #### PalmTree
+
 **Usage:** Tropical events, summer festivals
 
 ```tsx
 import { Tree } from '@phosphor-icons/react';
 
 <Tree size={20} weight="regular" />
-```
+
+```text
 
 ### Travel & Transport
 
 #### Airplane
+
 **Usage:** Travel packages, destination events
 
 ```tsx
@@ -152,25 +179,30 @@ import { Airplane } from '@phosphor-icons/react';
   <Airplane size={20} weight="regular" />
   <span>Destination Event</span>
 </div>
-```
+
+```text
 
 #### Car
+
 **Usage:** Transportation, venue access
 
 ```tsx
 import { Car } from '@phosphor-icons/react';
 
 <Car size={16} weight="regular" />
-```
+
+```text
 
 #### Bus
+
 **Usage:** Group transport, shuttle service
 
 ```tsx
 import { Bus } from '@phosphor-icons/react';
 
 <Bus size={16} weight="regular" />
-```
+
+```text
 
 ---
 
@@ -183,5 +215,5 @@ import { Bus } from '@phosphor-icons/react';
 
 ---
 
-**Last Updated:** March 2026  
+**Last Updated:** March 2026
 **Version:** 4.0.0 (Phosphor migration complete)
