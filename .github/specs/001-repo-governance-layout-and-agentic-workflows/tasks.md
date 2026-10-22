@@ -910,7 +910,7 @@ available to all team members
 - Document Discussions setup in `.github/DISCUSSION_TEMPLATE/README.md` with steps
 - Mark: T033 ✅ complete (with Discussions UI enablement recorded)
 
-- [ ] T063 [WS-262] [TOA-262] Audit and complete Styling documentation (T046 sub-item)
+- [x] T063 [WS-262] [TOA-262] Audit and complete Styling documentation (T046 sub-item)
 - Read current CONTRIBUTING.md "Styling: semantic BEM" section
 - Verify coverage of:
     - BEM naming conventions (Block, Element, Modifier)
@@ -933,7 +933,7 @@ available to all team members
 - Document approval reference and revalidation result
 - Mark: T055 ✅ complete when approval recorded and guard passes
 
-- [ ] T065 Document implementation completion and handoff (T059 completion – deferred until T060–T064 complete)
+- [x] T065 Document implementation completion and handoff (T059 completion – deferred until T060–T064 complete)
 - After T060, T061, T062, T063, T064 all marked ✅:
 - Create summary document: `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md`
 - Contents:
