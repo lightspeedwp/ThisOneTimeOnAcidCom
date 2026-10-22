@@ -55,4 +55,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src/app'),
     },
   },
+  build: {
+    rollupOptions: {
+      external: id => id.startsWith('react'),
+    },
+  },
 })
