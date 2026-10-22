@@ -53,7 +53,6 @@ describe('root netlify.toml', function () {
     assert.doesNotMatch(rootToml, /pnpm/);
   });
 
-<<<<<<< HEAD
   it('keeps Cache-Control and CSP out of the shared rules to avoid conflicting definitions', function () {
     // Allow Cache-Control for specific paths (/, /index.html) but not for wildcard patterns
     // that would conflict with hashed asset rules generated in dist/_headers
