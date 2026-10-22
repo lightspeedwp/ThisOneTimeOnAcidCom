@@ -24,8 +24,8 @@ This document outlines validation procedures for external integrations (Google F
 
 **Expected Behavior:**
 - Preconnect reduces latency to fonts.googleapis.com
-- CSS is loaded with `display=swap` to prevent Flash of Unstyled Text (FOUT)
-- Fonts should load without block (swap with system fonts)
+- `display=swap` shows fallback text while the web font loads, then swaps to the downloaded font (a visible FOUT is acceptable)
+- Text remains readable in the fallback font during loading; the final web font must load successfully
 - All 8 variable font families available within 3 seconds
 
 **Test Procedure:**
@@ -33,13 +33,13 @@ This document outlines validation procedures for external integrations (Google F
 2. Open DevTools → Network tab
 3. Check that requests to `fonts.googleapis.com` and `fonts.gstatic.com` return 200
 4. Note time to first paint (Performance tab)
-5. Visually verify no FOUT/FOIT (Flash of Unstyled/Invisible Text)
-6. Verify all pages display correct fonts (not fallback system fonts)
+5. Throttle the network and verify fallback text appears while fonts load; a visible swap is expected
+6. After loading, use DevTools → Elements → Rendered Fonts to verify the intended web fonts render on each page
 
 **Success Criteria:**
 - ✅ Fonts load with no console errors
 - ✅ No CSP violations related to font URLs
-- ✅ Page renders without FOUT visible
+- ✅ Fallback text remains readable during loading and swaps to the intended web font
 - ✅ LCP (Largest Contentful Paint) < 3.0s
 
 ---
@@ -151,18 +151,20 @@ const embedUrl = `https://player.vimeo.com/video/${videoId}`
 
 **Expected Header:**
 ```
-Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-*' https://embed.typeform.com https://www.youtube.com https://player.vimeo.com; style-src 'self' 'nonce-*' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://embed.typeform.com; img-src 'self' data: https:;
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none';
 ```
 
 **Validation Steps:**
 1. Open DevTools → Network tab
 2. Inspect response headers for any page
 3. Verify `Content-Security-Policy` header present
-4. Check that third-party domains are allowed:
-   - `script-src`: embed.typeform.com, youtube.com
-   - `style-src`: fonts.googleapis.com
-   - `font-src`: fonts.gstatic.com
-   - `frame-src`: youtube.com, player.vimeo.com, embed.typeform.com
+4. Compare the complete header with the active root `netlify.toml`:
+   - `script-src`: 'self' and 'unsafe-inline'
+   - `style-src`: 'self', 'unsafe-inline', and fonts.googleapis.com
+   - `font-src`: 'self' and fonts.gstatic.com
+   - `connect-src`: 'self' and https:; `frame-ancestors`: 'none'
+   - No `frame-src` is declared, so frames fall back to `default-src 'self'`
+5. Record integration failures under the active policy: external Typeform scripts and Typeform, YouTube, and Vimeo frames are not allowed. The functional expectations above remain pending until tested; this plan does not change the policy.
 
 **Success Criteria:**
 - ✅ CSP header present and valid
@@ -201,8 +203,8 @@ All header checks passed for <deploy-preview-url>
 **Validation Checks:**
 - ✅ HTML routes return 200 with revalidation headers
 - ✅ Hashed assets return 200 with immutable caching
-- ✅ Missing assets return 404 (SPA fallback to HTML)
-- ✅ Public files (favicon) return 200 without immutable caching
+- ✅ Missing assets (`/assets/index-missing0.js`) return 404; a 200 HTML SPA response is a failure
+- ✅ Public files (`/favicon.ico`) return 200 with an `image/*` Content-Type and without immutable caching; a 200 HTML response is a failure
 - ✅ Security headers present on all routes
 
 ---
@@ -214,7 +216,8 @@ All header checks passed for <deploy-preview-url>
 | Metric | Target | Notes |
 |--------|--------|-------|
 | LCP (Largest Contentful Paint) | < 3.0s | HTML render + fonts |
-| FID (First Input Delay) | < 100ms | React interactivity |
+| INP (Interaction to Next Paint) | ≤ 200ms | Field: CrUX via PageSpeed Insights, 75th percentile over the previous 28 days, per device type |
+| TBT (Total Blocking Time) | < 200ms | Lighthouse lab proxy for responsiveness; does not measure INP |
 | CLS (Cumulative Layout Shift) | < 0.1 | Fonts swap should not shift layout |
 | FCP (First Contentful Paint) | < 1.8s | HTML + CSS render |
 | TTFB (Time to First Byte) | < 600ms | Netlify edge response |
@@ -223,8 +226,9 @@ All header checks passed for <deploy-preview-url>
 1. Open preview URL
 2. Open DevTools → Lighthouse tab
 3. Run audit (Mobile + Desktop)
-4. Compare metrics to baselines
-5. Document in test results
+4. Compare Lighthouse lab metrics, including TBT, to baselines
+5. Record INP separately from CrUX field data in PageSpeed Insights (URL or explicitly labelled origin data, mobile/desktop). Preview URLs may have no field data; record INP as unavailable/pending in that case, without substituting TBT or claiming a pass.
+6. Document results, source, device type, and measurement date
 
 ---
 
@@ -241,7 +245,7 @@ All header checks passed for <deploy-preview-url>
 
 #### Google Fonts
 - [ ] Fonts load without CSP errors
-- [ ] No FOUT/FOIT visible
+- [ ] Fallback text is readable while loading, then the intended web font renders
 - [ ] All font weights/styles available
 - [ ] LCP < 3.0s
 
@@ -281,12 +285,13 @@ $ node scripts/check-netlify-headers.mjs <deploy-preview-url>
 - [ ] Script returns 0 exit code
 - [ ] All checks passed
 
-### Performance Metrics (Lighthouse)
+### Performance Metrics (Lighthouse lab and CrUX field data)
 
 | Metric | Target | Result | Status |
 |--------|--------|--------|--------|
 | LCP | < 3.0s | ___ s | ✅/❌ |
-| FID | < 100ms | ___ ms | ✅/❌ |
+| INP (CrUX field, PageSpeed Insights, 75th percentile / 28 days) | ≤ 200ms | ___ ms; URL/origin, device, date (or unavailable) | ✅/❌/pending |
+| TBT (Lighthouse lab proxy) | < 200ms | ___ ms | ✅/❌ |
 | CLS | < 0.1 | ___ | ✅/❌ |
 | FCP | < 1.8s | ___ s | ✅/❌ |
 | TTFB | < 600ms | ___ ms | ✅/❌ |
@@ -316,7 +321,7 @@ $ node scripts/check-netlify-headers.mjs <deploy-preview-url>
 ---
 
 **Last Updated:** 2026-10-22  
-**Status:** In Progress — Awaiting Netlify preview build
+**Status:** Pending — Preview available; deployment contract failures and integration/performance validation remain outstanding
 
 ---
 
@@ -324,9 +329,11 @@ $ node scripts/check-netlify-headers.mjs <deploy-preview-url>
 
 **Date:** 2026-10-22  
 **Preview URL:** https://deploy-preview-426--thisonetimeonacid.netlify.app  
-**Status:** ✅ COMPLETE
+**Status:** Pending — Deployment contract failures; Google Fonts, Typeform, YouTube, Vimeo, and Lighthouse outcomes not recorded
 
 ### Deployment Validation Script Results
+
+**Historical output from the earlier permissive checker:** Its success message does not satisfy the current contract. The recorded missing-asset status and favicon Content-Type below are failures; rerun the updated checker after deployment fixes.
 
 ```bash
 $ node scripts/check-netlify-headers.mjs https://deploy-preview-426--thisonetimeonacid.netlify.app
@@ -341,25 +348,32 @@ $ node scripts/check-netlify-headers.mjs https://deploy-preview-426--thisonetime
 All header checks passed for https://deploy-preview-426--thisonetimeonacid.netlify.app
 ```
 
+**Updated checker rerun (2026-10-22):** Exited 1 against the same preview, rejecting `/assets/index-missing0.js` (expected 404, got 200) and `/favicon.ico` (unexpected `text/html; charset=UTF-8`). Deployment acceptance remains pending. A real `public/favicon.ico` has been added using the existing `src/app/public/favicon.svg` design; deployment verification is pending. The catch-all SPA rewrite still needs a missing-asset exception; routing changes await clarification of the instruction to leave Netlify configuration unchanged.
+
 ### Validation Checklist
 
 **Caching Strategy:**
 - ✅ HTML routes revalidate correctly (max-age=0, must-revalidate)
 - ✅ Hashed assets have immutable 1-year caching (max-age=31536000, immutable)
-- ✅ SPA fallback works correctly (missing assets → 404 as HTML)
-- ✅ Public files served correctly (favicon.ico)
+- ❌ Missing asset must return 404; recorded `/assets/index-missing0.js` returned 200 HTML
+- ❌ `/favicon.ico` must return 200 with an image Content-Type; recorded response was HTML
 
 **Header Validation:**
 - ✅ Security headers applied to all routes
 - ✅ Cache-Control headers correct per asset type
-- ✅ Content-Type headers accurate
-- ✅ All checks passed (0 failures)
+- ❌ Favicon Content-Type is incorrect in the recorded response
+- ❌ Updated checker rejects both recorded responses; a passing rerun is required
 
 **Integration Testing:**
 - ✅ Netlify deploy preview available and responsive
 - ✅ Hashed assets loading with correct cache headers
 - ✅ SPA routing working (direct visits to /journal and /about-ash)
-- ✅ No CSP errors on preview build
+- [ ] Google Fonts: fallback rendering and final web font loading outcomes not recorded
+- [ ] Typeform: script loading, form rendering, and interaction outcomes not recorded
+- [ ] YouTube: iframe loading, playback, and responsive behavior outcomes not recorded
+- [ ] Vimeo: iframe loading, playback, and responsive behavior outcomes not recorded
+- [ ] Lighthouse: mobile/desktop metrics, including TBT, not recorded; CrUX INP field data availability not checked
+- [ ] CSP console results for each integration not recorded; the active policy blocks external scripts/frames described above
 
 ### CodeRabbit Findings — Resolution
 
@@ -389,8 +403,8 @@ All header checks passed for https://deploy-preview-426--thisonetimeonacid.netli
 
 ### Summary
 
-**Status:** ✅ READY FOR MERGE
+**Status:** Pending validation
 
-All CodeRabbit findings have been addressed, deployment validation passes, and Netlify preview confirms correct caching and header behavior. Integration validation plan provides comprehensive testing procedures for external integrations.
+The historical preview output supports the recorded HTML and hashed-asset caching checks, but fails the missing-asset and favicon contract. Google Fonts, Typeform, YouTube, Vimeo, and Lighthouse outcomes still need to be recorded. Document CrUX INP field results or their unavailability separately. Merge readiness is not established.
 
-**Final Status:** Complete — Ready for PR Review and Merge
+**Final Status:** Pending — Resolve deployment contract failures and record integration/performance outcomes before declaring completion
