@@ -1,16 +1,19 @@
 # Responsive Design System
 
-**Version:** 5.0.0  
-**Last Updated:** January 2025  
+**Version:** 5.0.0
+**Last Updated:** January 2025
 **WordPress Block Theme Compatible:** ✅
 
-Complete responsive design system for the Ash Shaw Makeup Portfolio, providing unified guidance for mobile, tablet, and desktop experiences.
+Complete responsive design system for the Ash Shaw Makeup Portfolio, providing
+unified guidance for mobile, tablet, and desktop experiences.
 
 ## 🎯 Overview
 
-This responsive system provides a **single source of truth** for how the design scales across all devices. Instead of separate mobile/tablet/desktop guidelines, this unified approach shows **progressive enhancement** across breakpoints.
+This responsive system provides a **single source of truth** for how the design
+scales across all devices. Instead of separate mobile/tablet/desktop guidelines,
+this unified approach shows **progressive enhancement** across breakpoints.
 
-### Why Unified Responsive Guidelines?
+### Why Unified Responsive Guidelines
 
 - ✅ **Single source of truth** - No conflicts between device-specific docs
 - ✅ **Shows progression** - See how components evolve across breakpoints
@@ -24,7 +27,7 @@ This responsive system provides a **single source of truth** for how the design 
 
 ### Three-Tier Breakpoint System
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    RESPONSIVE BREAKPOINT SYSTEM                      │
 └─────────────────────────────────────────────────────────────────────┘
@@ -41,7 +44,8 @@ Mobile                Tablet                  Desktop
 └─────────────┘      └──────────────────┘   └──────────────────────────┘
 
 375px - 767px        768px - 1023px          1024px - 1920px+
-```
+
+```text
 
 ### Breakpoint Details
 
@@ -59,9 +63,11 @@ Mobile                Tablet                  Desktop
 This responsive system is organized into focused guideline files:
 
 ### 1. **[breakpoints-system.md](./breakpoints-system.md)**
+
 Complete breakpoint definitions, media query patterns, and container queries.
 
 **Covers:**
+
 - CSS breakpoint variables
 - Media query best practices
 - Container query usage
@@ -72,9 +78,11 @@ Complete breakpoint definitions, media query patterns, and container queries.
 ---
 
 ### 2. **[layout-patterns.md](./layout-patterns.md)**
+
 Responsive grid, flexbox, and container patterns that adapt across devices.
 
 **Covers:**
+
 - Grid systems (1 column → 2 columns → 3+ columns)
 - Flexbox patterns (stack → row)
 - Container patterns (padding, max-width)
@@ -85,9 +93,11 @@ Responsive grid, flexbox, and container patterns that adapt across devices.
 ---
 
 ### 3. **[navigation-responsive.md](./navigation-responsive.md)**
+
 How navigation evolves from mobile hamburger menu to desktop horizontal nav.
 
 **Covers:**
+
 - Mobile: Hamburger menu + full-screen overlay
 - Tablet: Hybrid menu (some items visible)
 - Desktop: Full horizontal navigation
@@ -98,9 +108,12 @@ How navigation evolves from mobile hamburger menu to desktop horizontal nav.
 ---
 
 ### 4. **[typography-scaling.md](./typography-scaling.md)**
-How fluid typography scales across breakpoints (aligned with WordPress font size scale).
+
+How fluid typography scales across breakpoints (aligned with WordPress font size
+scale).
 
 **Covers:**
+
 - Fluid typography with clamp()
 - Font size progression (100-900 scale)
 - Line height adjustments per device
@@ -111,9 +124,12 @@ How fluid typography scales across breakpoints (aligned with WordPress font size
 ---
 
 ### 5. **[spacing-adjustments.md](./spacing-adjustments.md)**
-How spacing values adapt across breakpoints (aligned with WordPress spacing scale).
+
+How spacing values adapt across breakpoints (aligned with WordPress spacing
+scale).
 
 **Covers:**
+
 - Spacing scale usage per device (10-100)
 - Section padding progression
 - Component spacing adjustments
@@ -124,9 +140,11 @@ How spacing values adapt across breakpoints (aligned with WordPress spacing scal
 ---
 
 ### 6. **[interaction-modes.md](./interaction-modes.md)**
+
 Touch vs Hover vs Keyboard interaction patterns.
 
 **Covers:**
+
 - Touch targets (44px minimum)
 - Hover detection with `@media (hover: hover)`
 - Keyboard navigation patterns
@@ -141,15 +159,18 @@ Touch vs Hover vs Keyboard interaction patterns.
 ### For Developers Building Components
 
 **Step 1:** Read [breakpoints-system.md](./breakpoints-system.md)
+
 - Understand the three breakpoints (mobile, tablet, desktop)
 - Learn media query patterns
 
 **Step 2:** Read relevant pattern guide
+
 - Building a layout? → [layout-patterns.md](./layout-patterns.md)
 - Building navigation? → [navigation-responsive.md](./navigation-responsive.md)
 - Adjusting typography? → [typography-scaling.md](./typography-scaling.md)
 
 **Step 3:** Implement mobile-first
+
 ```css
 /* Start with mobile styles (default) */
 .component {
@@ -174,7 +195,8 @@ Touch vs Hover vs Keyboard interaction patterns.
     margin-inline: auto;
   }
 }
-```
+
+```text
 
 ---
 
@@ -204,7 +226,8 @@ Always start with mobile styles, then enhance for larger screens:
     width: 33.333%;
   }
 }
-```
+
+```text
 
 ```css
 /* ❌ BAD - Desktop first */
@@ -226,7 +249,8 @@ Always start with mobile styles, then enhance for larger screens:
     width: 100%;
   }
 }
-```
+
+```text
 
 ---
 
@@ -247,7 +271,7 @@ Enhance experiences for capable devices, don't degrade:
   .interactive-card {
     transition: transform var(--animation-200) var(--ease-standard);
   }
-  
+
   .interactive-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -260,7 +284,8 @@ Enhance experiences for capable devices, don't degrade:
     padding: var(--wp--preset--spacing--60);
   }
 }
-```
+
+```text
 
 ---
 
@@ -282,7 +307,8 @@ Let content determine breakpoints, not devices:
 @media (min-width: 1024px) {
   /* When content can support 3+ columns */
 }
-```
+
+```text
 
 ---
 
@@ -302,7 +328,7 @@ Always detect interaction capability, don't assume:
   .button {
     transition: all var(--animation-200) var(--ease-standard);
   }
-  
+
   .button:hover {
     transform: scale(1.05);
   }
@@ -312,7 +338,8 @@ Always detect interaction capability, don't assume:
 .button:active {
   transform: scale(0.95);
 }
-```
+
+```text
 
 ---
 
@@ -323,6 +350,7 @@ Always detect interaction capability, don't assume:
 Shows how a component progressively enhances:
 
 #### Mobile (< 768px)
+
 - ✅ Single column layout
 - ✅ Stacked text and images
 - ✅ Smaller spacing (--spacing--40)
@@ -330,12 +358,14 @@ Shows how a component progressively enhances:
 - ✅ Vertical scrolling
 
 #### Tablet (768px - 1023px)
+
 - ✅ Still mostly stacked OR early 2-column
 - ✅ Medium spacing (--spacing--60)
 - ✅ Hybrid touch + hover support
 - ✅ Larger typography starts scaling
 
 #### Desktop (1024px+)
+
 - ✅ Full 2-column split layout
 - ✅ Large spacing (--spacing--80)
 - ✅ Hover effects active
@@ -349,36 +379,42 @@ Shows how a component progressively enhances:
 Use this checklist when building responsive components:
 
 ### Layout
+
 - [ ] Mobile: Single column, stacked layout
 - [ ] Tablet: 2 columns where appropriate
 - [ ] Desktop: Multi-column with optimal width (1280px max)
 - [ ] Content readable at all sizes
 
 ### Typography
+
 - [ ] Fluid typography scales smoothly
 - [ ] Line length optimal (45-75 characters)
 - [ ] Font sizes use WordPress scale (100-900)
 - [ ] Heading hierarchy maintained
 
 ### Spacing
+
 - [ ] Mobile: Compact spacing (--spacing--20 to --spacing--40)
 - [ ] Tablet: Medium spacing (--spacing--40 to --spacing--60)
 - [ ] Desktop: Large spacing (--spacing--60 to --spacing--100)
 - [ ] Consistent vertical rhythm
 
 ### Interactions
+
 - [ ] Touch targets minimum 44px on mobile
 - [ ] Hover effects only with `@media (hover: hover)`
 - [ ] Focus indicators visible at all sizes
 - [ ] Keyboard navigation works on all devices
 
 ### Performance
+
 - [ ] Images responsive (srcset, sizes)
 - [ ] No horizontal scrolling
 - [ ] Fast paint times on mobile
 - [ ] Animations respect `prefers-reduced-motion`
 
 ### Testing
+
 - [ ] Tested on mobile (375px - 767px)
 - [ ] Tested on tablet (768px - 1023px)
 - [ ] Tested on desktop (1024px+)
@@ -389,17 +425,20 @@ Use this checklist when building responsive components:
 ## 🔗 Related Documentation
 
 ### Design Tokens
+
 - [Spacing Scale](../design-tokens/spacing.md) - WordPress spacing scale (10-100)
 - [Typography Scale](../design-tokens/typography.md) - WordPress font sizes (100-900)
 - [Animation Durations](../design-tokens/animations.md) - Animation timing system
 - [Colors](../design-tokens/colors.md) - Color palette and gradients
 
 ### Component Guidelines
+
 - [Logo](../components/Logo.md) - Logo responsive behavior
 - [ScrollDownArrow](../components/ScrollDownArrow.md) - Scroll indicator
 - [HeroLayout](../components/HeroLayout.md) - Hero section patterns
 
 ### Accessibility
+
 - [Interactions & Accessibility](../interactions-accessibility.md) - Touch, hover, keyboard patterns
 
 ---
@@ -409,28 +448,35 @@ Use this checklist when building responsive components:
 ### ✅ DO
 
 1. **Start mobile-first**
+
    ```css
    .component { /* Mobile styles */ }
    @media (min-width: 768px) { /* Tablet */ }
    @media (min-width: 1024px) { /* Desktop */ }
-   ```
 
-2. **Use WordPress CSS variables**
+```text
+
+1. **Use WordPress CSS variables**
+
    ```css
    .section {
      padding: var(--wp--preset--spacing--40);
      font-size: var(--wp--preset--font-size--300);
    }
-   ```
 
-3. **Detect hover capability**
+```text
+
+1. **Detect hover capability**
+
    ```css
    @media (hover: hover) {
      .card:hover { transform: scale(1.05); }
    }
-   ```
 
-4. **Test across all breakpoints**
+```text
+
+1. **Test across all breakpoints**
+
    - 375px (mobile)
    - 768px (tablet)
    - 1024px (desktop)
@@ -439,44 +485,55 @@ Use this checklist when building responsive components:
 ### ❌ DON'T
 
 1. **Don't use device-specific breakpoints**
+
    ```css
    /* ❌ BAD */
    @media (min-width: 375px) { /* iPhone SE */ }
    @media (min-width: 768px) { /* iPad */ }
-   ```
 
-2. **Don't assume hover support**
+```text
+
+1. **Don't assume hover support**
+
    ```css
    /* ❌ BAD - Breaks on touch devices */
    .button:hover { /* No fallback */ }
-   ```
 
-3. **Don't hardcode values**
+```text
+
+1. **Don't hardcode values**
+
    ```css
    /* ❌ BAD */
    .component {
      padding: 40px;
      font-size: 24px;
    }
-   
+
    /* ✅ GOOD */
    .component {
      padding: var(--wp--preset--spacing--40);
      font-size: var(--wp--preset--font-size--400);
    }
-   ```
+
+```text
 
 ---
 
 ## 📖 Reading Order
 
-**For New Developers:**
-1. This README (you are here)
-2. [breakpoints-system.md](./breakpoints-system.md)
-3. [layout-patterns.md](./layout-patterns.md)
-4. Other guides as needed
+## For New Developers
 
-**For Specific Tasks:**
+1. This README (you are here)
+
+1. [breakpoints-system.md](./breakpoints-system.md)
+
+1. [layout-patterns.md](./layout-patterns.md)
+
+1. Other guides as needed
+
+## For Specific Tasks
+
 - Building navigation? → [navigation-responsive.md](./navigation-responsive.md)
 - Adjusting typography? → [typography-scaling.md](./typography-scaling.md)
 - Fixing spacing? → [spacing-adjustments.md](./spacing-adjustments.md)
@@ -487,6 +544,7 @@ Use this checklist when building responsive components:
 ## 🎉 Summary
 
 This responsive system provides:
+
 - ✅ **Unified guidance** for all devices (mobile, tablet, desktop)
 - ✅ **WordPress-aligned** breakpoints and design tokens
 - ✅ **Progressive enhancement** approach
@@ -494,14 +552,17 @@ This responsive system provides:
 - ✅ **Single source of truth** - no conflicting guidelines
 
 **Next Steps:**
+
 1. Read [breakpoints-system.md](./breakpoints-system.md) for complete breakpoint details
-2. Review relevant pattern guides for your specific component
-3. Implement mobile-first, progressively enhance for larger screens
+
+1. Review relevant pattern guides for your specific component
+
+1. Implement mobile-first, progressively enhance for larger screens
 
 ---
 
-**Version:** 5.0.0 (Unified Responsive System)  
-**Last Updated:** January 2025  
+**Version:** 5.0.0 (Unified Responsive System)
+**Last Updated:** January 2025
 **Maintained By:** Ash Shaw Portfolio Team
 
 **Questions?** Refer to specific pattern guides or component documentation.

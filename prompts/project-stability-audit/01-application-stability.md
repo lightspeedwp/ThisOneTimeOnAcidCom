@@ -7,7 +7,9 @@
 
 ## Context
 
-The Figma Make prototype sometimes publishes but renders a blank `#121212` screen. This sub-audit examines every config and entrypoint file to identify silent failures in the build pipeline.
+The Figma Make prototype sometimes publishes but renders a blank `#121212`
+screen. This sub-audit examines every config and entrypoint file to identify
+silent failures in the build pipeline.
 
 ---
 
@@ -16,6 +18,7 @@ The Figma Make prototype sometimes publishes but renders a blank `#121212` scree
 Read each file in full and verify:
 
 ### `/vite.config.ts`
+
 - [ ] Tailwind V4 Vite plugin is configured correctly
 - [ ] Build target is compatible with Figma Make bundler
 - [ ] Resolve aliases (if any) match `tsconfig.json` paths
@@ -24,17 +27,20 @@ Read each file in full and verify:
 - [ ] No deprecated Vite options
 
 ### `/postcss.config.js`
+
 - [ ] PostCSS plugins list matches Tailwind V4 requirements
 - [ ] No conflicting plugins (e.g., duplicate autoprefixer)
 - [ ] Plugin order is correct
 
 ### `/package.json`
+
 - [ ] All dependencies referenced in code are listed
 - [ ] No version conflicts between peer dependencies
 - [ ] Scripts section has correct build/dev commands
 - [ ] No deprecated packages that need updating
 
 ### `/tsconfig.json` and `/tsconfig.node.json`
+
 - [ ] `compilerOptions.target` is compatible with the bundler
 - [ ] `compilerOptions.jsx` is set to `react-jsx`
 - [ ] `include` patterns cover all source files
@@ -47,12 +53,14 @@ Read each file in full and verify:
 ## Step 2 — Audit entrypoint files
 
 ### `/index.html`
+
 - [ ] Has `<div id="root"></div>` (or whatever ID `main.tsx` targets)
 - [ ] Script tag points to `/main.tsx` (or correct entry)
 - [ ] Meta viewport tag is present
 - [ ] No inline scripts that could conflict with React hydration
 
 ### `/main.tsx`
+
 - [ ] Imports CSS files in correct cascade order (globals.css must come first or include all others)
 - [ ] Creates React root with `createRoot(document.getElementById('root'))`
 - [ ] Wraps `<App />` in `<React.StrictMode>` (or documents why not)
@@ -60,6 +68,7 @@ Read each file in full and verify:
 - [ ] Error boundary or fallback for root render failures
 
 ### `/App.tsx`
+
 - [ ] Has a `default export` (required by Figma Make)
 - [ ] Uses `<RouterProvider router={router} />` pattern
 - [ ] Imports router from `/routes.ts`
@@ -67,6 +76,7 @@ Read each file in full and verify:
 - [ ] Global context providers are wrapped correctly (ThemeProvider, etc.)
 
 ### `/routes.ts`
+
 - [ ] Uses `createBrowserRouter()` from `react-router`
 - [ ] Every route's `Component` import resolves to an existing file
 - [ ] No circular import chains
@@ -81,17 +91,23 @@ Read each file in full and verify:
 Specifically investigate why the `#121212` background appears with no content:
 
 1. [ ] Is `#121212` defined anywhere in CSS? (Check `globals.css`, `theme.css`, body styles)
-2. [ ] Could the router fail silently, leaving only the body background?
-3. [ ] Are there any uncaught errors in the route component chain?
-4. [ ] Does the ErrorBoundary component render visible content, or could it show an empty state?
-5. [ ] Could a missing CSS import cause all content to be `display: none` or `opacity: 0`?
-6. [ ] Is the root div (`#root`) receiving any children?
+
+1. [ ] Could the router fail silently, leaving only the body background?
+
+1. [ ] Are there any uncaught errors in the route component chain?
+
+1. [ ] Does the ErrorBoundary component render visible content, or could it show an empty state?
+
+1. [ ] Could a missing CSS import cause all content to be `display: none` or `opacity: 0`?
+
+1. [ ] Is the root div (`#root`) receiving any children?
 
 ---
 
 ## Output format
 
 ```markdown
+
 ## Findings
 
 | File | Issue | Severity | Description |
@@ -101,6 +117,9 @@ Specifically investigate why the `#121212` background appears with no content:
 ## Blank screen root cause analysis
 
 1. Most likely cause: ...
-2. Contributing factors: ...
-3. Recommended fix: ...
-```
+
+1. Contributing factors: ...
+
+1. Recommended fix: ...
+
+```text

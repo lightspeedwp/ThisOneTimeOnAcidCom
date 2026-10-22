@@ -9,18 +9,21 @@ related: "/guidelines/overview-components.md"
 
 # Custom Hooks Guide
 
-**Project:** Ash Shaw Makeup Portfolio  
-**Purpose:** Best practices for creating and using custom React hooks  
-**Created:** March 11, 2026  
+**Project:** Ash Shaw Makeup Portfolio
+**Purpose:** Best practices for creating and using custom React hooks
+**Created:** March 11, 2026
 **Status:** Active
 
 ---
 
 ## Overview
 
-Custom hooks are reusable functions that encapsulate stateful logic and side effects. This guide documents patterns, best practices, and examples from the Ash Shaw portfolio codebase.
+Custom hooks are reusable functions that encapsulate stateful logic and side
+effects. This guide documents patterns, best practices, and examples from the
+Ash Shaw portfolio codebase.
 
-**When to Create a Custom Hook:**
+## When to Create a Custom Hook
+
 - Logic is reused across multiple components
 - Component exceeds 300 lines
 - Complex state management (3+ related useState calls)
@@ -32,11 +35,16 @@ Custom hooks are reusable functions that encapsulate stateful logic and side eff
 ## Table of Contents
 
 1. [Naming Conventions](#naming-conventions)
-2. [Hook Patterns](#hook-patterns)
-3. [Examples from Codebase](#examples-from-codebase)
-4. [ES5 Constraints](#es5-constraints)
-5. [Testing Hooks](#testing-hooks)
-6. [Common Pitfalls](#common-pitfalls)
+
+1. [Hook Patterns](#hook-patterns)
+
+1. [Examples from Codebase](#examples-from-codebase)
+
+1. [ES5 Constraints](#es5-constraints)
+
+1. [Testing Hooks](#testing-hooks)
+
+1. [Common Pitfalls](#common-pitfalls)
 
 ---
 
@@ -44,13 +52,15 @@ Custom hooks are reusable functions that encapsulate stateful logic and side eff
 
 ### Standard Pattern
 
-**All custom hooks MUST:**
+## All custom hooks MUST
+
 - Start with `use` prefix (e.g., `useEbookState`, `useVideoFiltering`)
 - Use camelCase (e.g., `useTouchGestures`, not `use-touch-gestures`)
 - Have descriptive names indicating purpose
 - Be placed in `/hooks/` directory
 
 **Examples:**
+
 ```typescript
 ✅ CORRECT
 useEbookState()
@@ -60,21 +70,23 @@ useStickerSearch()
 
 ❌ WRONG
 ebookState()          // Missing "use" prefix
-use_touch_gestures()  // Snake case
+use*touch*gestures()  // Snake case
 useHook()            // Not descriptive
-```
+
+```text
 
 ### File Naming
 
 **Pattern:** Hook name matches filename
 
-```
+```text
 /hooks/
 ├── useEbookState.ts          ← Hook: useEbookState()
 ├── useTouchGestures.ts       ← Hook: useTouchGestures()
 ├── useVideoFiltering.ts      ← Hook: useVideoFiltering()
 └── index.ts                  ← Barrel export
-```
+
+```text
 
 ---
 
@@ -88,6 +100,7 @@ useHook()            // Not descriptive
 
 ```typescript
 /**
+
  * Manages ebook reader state with useReducer
  * Consolidates 12+ related state variables
  */
@@ -115,9 +128,11 @@ export function useEbookState(initialPage = 0) {
     toggleToc: () => dispatch({ type: 'TOGGLE_TOC' }),
   };
 }
-```
+
+```text
 
 **Benefits:**
+
 - Single source of truth for related state
 - Predictable state updates
 - Easy to test
@@ -133,6 +148,7 @@ export function useEbookState(initialPage = 0) {
 
 ```typescript
 /**
+
  * Handles keyboard navigation with automatic cleanup
  */
 export function useKeyboardNav(handlers: KeyboardHandlers) {
@@ -159,9 +175,11 @@ export function useKeyboardNav(handlers: KeyboardHandlers) {
     };
   }, [handlers]);
 }
-```
+
+```text
 
 **Benefits:**
+
 - Automatic event listener cleanup
 - Reusable across components
 - Centralized keyboard logic
@@ -176,6 +194,7 @@ export function useKeyboardNav(handlers: KeyboardHandlers) {
 
 ```typescript
 /**
+
  * Filters and sorts videos based on active categories and sort mode
  */
 export function useVideoFiltering({
@@ -206,9 +225,11 @@ export function useVideoFiltering({
     [videos, activeCategories, sortBy, videoCategories]
   );
 }
-```
+
+```text
 
 **Benefits:**
+
 - Memoized for performance
 - Testable in isolation
 - Reusable across archive pages
@@ -223,6 +244,7 @@ export function useVideoFiltering({
 
 ```typescript
 /**
+
  * Searches and filters stickers by query and theme
  */
 export function useStickerSearch({
@@ -255,9 +277,11 @@ export function useStickerSearch({
     return result;
   }, [stickers, searchQuery, activeTheme, themeMap]);
 }
-```
+
+```text
 
 **Benefits:**
+
 - Memoized search results
 - Centralized search logic
 - Easy to add debouncing later
@@ -272,6 +296,7 @@ export function useStickerSearch({
 
 ```typescript
 /**
+
  * Handles swipe gestures for mobile navigation
  */
 export function useTouchGestures({
@@ -319,9 +344,11 @@ export function useTouchGestures({
     };
   }, [handleTouchStart, handleTouchEnd]);
 }
-```
+
+```text
 
 **Benefits:**
+
 - Encapsulates complex gesture detection
 - Automatic cleanup
 - Configurable threshold
@@ -332,7 +359,7 @@ export function useTouchGestures({
 
 ### Hook Inventory
 
-**Current Custom Hooks (19+):**
+## Current Custom Hooks (19+)
 
 | Hook | Category | Purpose | File |
 |------|----------|---------|------|
@@ -360,11 +387,12 @@ export function useTouchGestures({
 
 ## ES5 Constraints
 
-**Important:** This project uses ES5 TypeScript due to Figma Make bundler constraints.
+**Important:** This project uses ES5 TypeScript due to Figma Make bundler
+constraints.
 
 ### Required Syntax
 
-**Use named functions instead of arrow functions:**
+## Use named functions instead of arrow functions
 
 ```typescript
 // ✅ CORRECT - Named function
@@ -376,9 +404,10 @@ const handleClick = useCallback(function handleClick(e) {
 const handleClick = useCallback((e) => {
   console.log(e);
 }, []);
-```
 
-**Use `var` instead of `const`/`let` in certain contexts:**
+```text
+
+## Use `var` instead of `const`/`let` in certain contexts
 
 ```typescript
 // ✅ CORRECT - var declarations
@@ -394,9 +423,10 @@ function useCustomHook() {
   const [value, setValue] = useState(0);
   return { value, setValue };
 }
-```
 
-**Avoid optional chaining and nullish coalescing:**
+```text
+
+## Avoid optional chaining and nullish coalescing
 
 ```typescript
 // ✅ CORRECT - Explicit null checks
@@ -411,7 +441,8 @@ function useData(data) {
 function useData(data) {
   return data?.items ?? [];
 }
-```
+
+```text
 
 ---
 
@@ -419,7 +450,7 @@ function useData(data) {
 
 ### Test Structure
 
-**File:** `/hooks/__tests__/useVideoFiltering.test.ts`
+**File:** `/hooks/_*tests*_/useVideoFiltering.test.ts`
 
 ```typescript
 import { renderHook } from '@testing-library/react';
@@ -458,7 +489,8 @@ describe('useVideoFiltering', () => {
     expect(result.current[0].publishedAt).toBe('2026-02-01');
   });
 });
-```
+
+```text
 
 ---
 
@@ -478,7 +510,8 @@ useEffect(function () {
 useEffect(function () {
   console.log(count);
 }, [count]);
-```
+
+```text
 
 ### 2. Infinite Loops
 
@@ -495,7 +528,8 @@ const videoIds = useMemo(() => videos.map((v) => v.id), [videos]);
 useEffect(function () {
   // ...
 }, [videoIds]);
-```
+
+```text
 
 ### 3. Stale Closures
 
@@ -505,25 +539,26 @@ useEffect(function () {
 // ❌ WRONG - Count is always 0
 function useCounter() {
   const [count, setCount] = useState(0);
-  
+
   const increment = useCallback(function () {
     setCount(count + 1); // Uses stale count!
   }, []);
-  
+
   return { count, increment };
 }
 
 // ✅ CORRECT - Use functional update
 function useCounter() {
   const [count, setCount] = useState(0);
-  
+
   const increment = useCallback(function () {
     setCount(function (prev) { return prev + 1; });
   }, []);
-  
+
   return { count, increment };
 }
-```
+
+```text
 
 ### 4. Not Cleaning Up
 
@@ -538,12 +573,13 @@ useEffect(function () {
 // ✅ CORRECT - With cleanup
 useEffect(function () {
   window.addEventListener('resize', handleResize);
-  
+
   return function () {
     window.removeEventListener('resize', handleResize);
   };
 }, [handleResize]);
-```
+
+```text
 
 ---
 
@@ -572,10 +608,11 @@ When creating a custom hook, ensure:
 
 ```typescript
 /**
+
  * @fileoverview Template for creating custom hooks
- * 
+ *
  * [Description of what the hook does]
- * 
+ *
  * @example
  * ```tsx
  * const { value, setValue } = useTemplateHook({
@@ -583,7 +620,7 @@ When creating a custom hook, ensure:
  *   onChange: handleChange
  * });
  * ```
- * 
+ *
  * @version 1.0.0
  * @created 2026-03-11
  */
@@ -591,6 +628,7 @@ When creating a custom hook, ensure:
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 /**
+
  * Hook parameters interface
  */
 interface UseTemplateHookParams {
@@ -599,6 +637,7 @@ interface UseTemplateHookParams {
 }
 
 /**
+
  * Hook return value interface
  */
 interface UseTemplateHookReturn {
@@ -608,8 +647,9 @@ interface UseTemplateHookReturn {
 }
 
 /**
+
  * Template hook description
- * 
+ *
  * @param params - Hook configuration
  * @returns Hook state and methods
  */
@@ -652,7 +692,7 @@ export function useTemplateHook({
   useEffect(
     function () {
       // Side effect logic
-      
+
       // Cleanup
       return function () {
         // Cleanup logic
@@ -668,7 +708,8 @@ export function useTemplateHook({
     reset,
   };
 }
-```
+
+```text
 
 ---
 
@@ -696,7 +737,8 @@ export function MyComponent() {
     </div>
   );
 }
-```
+
+```text
 
 **After:** Extracted to custom hook
 
@@ -724,7 +766,8 @@ export function useItemFiltering(items: Item[]) {
 // Component
 export function MyComponent() {
   const [items, setItems] = useState([]);
-  const { filteredItems, filter, setFilter, sortBy, setSortBy } = useItemFiltering(items);
+const { filteredItems, filter, setFilter, sortBy, setSortBy } =
+useItemFiltering(items);
 
   return (
     <div>
@@ -732,7 +775,8 @@ export function MyComponent() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -745,6 +789,6 @@ export function MyComponent() {
 
 ---
 
-**Document Status:** Active  
-**Last Updated:** March 11, 2026  
+**Document Status:** Active
+**Last Updated:** March 11, 2026
 **Maintained By:** Development Team

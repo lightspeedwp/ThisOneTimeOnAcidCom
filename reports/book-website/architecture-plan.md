@@ -6,9 +6,14 @@
 
 ## 1. Executive Summary
 
-The prompt mandates a complete replacement of the standard "portfolio" site with a conversion-focused, book-first website for *This one time on acid...*. The site's primary goals are email signups to unlock the draft, establishing credibility, and preparing for future pre-orders.
+The prompt mandates a complete replacement of the standard "portfolio" site with
+a conversion-focused, book-first website for *This one time on acid...*. The
+site's primary goals are email signups to unlock the draft, establishing
+credibility, and preparing for future pre-orders.
 
-We will build 11 core pages using a strictly typed, ES5/var-based React architecture in Figma Make, honoring the BEM CSS and "no optional chaining / JSX object literals" constraints.
+We will build 11 core pages using a strictly typed, ES5/var-based React
+architecture in Figma Make, honoring the BEM CSS and "no optional chaining / JSX
+object literals" constraints.
 
 ## 2. Technical Architecture
 
@@ -20,9 +25,13 @@ We will build 11 core pages using a strictly typed, ES5/var-based React architec
 ## 3. Implementation Phasing
 
 1. **Phase 1: Scaffolding (Current)** - Generate the `book-site.ts` data file, stub out all 11 pages, and update `routes.ts`, `Header`, and `Footer`.
-2. **Phase 2: Core Funnel** - Home, Read the Draft, Waitlist, and Thank You pages.
-3. **Phase 3: Book & Author Deep Dive** - The Book and About Ash.
-4. **Phase 4: Supporting Ecosystem** - Journal, Events, Speaking, Contact, and Media.
-5. **Phase 5: Polish & Accessibility** - Apply final glow effects, ensure keyboard navigability, and wire up `setSEO` dynamically.
+
+1. **Phase 2: Core Funnel** - Home, Read the Draft, Waitlist, and Thank You pages.
+
+1. **Phase 3: Book & Author Deep Dive** - The Book and About Ash.
+
+1. **Phase 4: Supporting Ecosystem** - Journal, Events, Speaking, Contact, and Media.
+
+1. **Phase 5: Polish & Accessibility** - Apply final glow effects, ensure keyboard navigability, and wire up `setSEO` dynamically.
 
 *See `/tasks/book-website-tasks.md` for the tracked checklist.*

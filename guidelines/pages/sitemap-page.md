@@ -1,17 +1,21 @@
 # Sitemap Page Design Guidelines
 
-**Component:** `/components/pages/SitemapPage.tsx`  
-**Stylesheet:** `/styles/blocks/sitemap-page.css`  
-**Version:** 2.0.0  
+**Component:** `/components/pages/SitemapPage.tsx`
+**Stylesheet:** `/styles/blocks/sitemap-page.css`
+**Version:** 2.0.0
 **Last Updated:** March 4, 2026
 
 ## Purpose
 
-The Sitemap page serves as a comprehensive visual index of the entire website, organized by content type with playful neon styling and sequential animations. It showcases all pages, portfolio categories, blog posts, videos, podcasts, events, tags, developer tools, and the 21 hidden About sub-pages.
+The Sitemap page serves as a comprehensive visual index of the entire website,
+organized by content type with playful neon styling and sequential animations.
+It showcases all pages, portfolio categories, blog posts, videos, podcasts,
+events, tags, developer tools, and the 21 hidden About sub-pages.
 
 ## Design Philosophy
 
-The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered navigation playground** that celebrates the site's content with:
+The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
+navigation playground** that celebrates the site's content with:
 
 - 🌈 Rainbow gradient decoration at the top
 - 🎨 Sequential fade-in animations for content sections
@@ -28,9 +32,10 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
 <main className="sitemap-page">
   {/* All content */}
 </main>
-```
 
-**Class:** `.sitemap-page`  
+```text
+
+**Class:** `.sitemap-page`
 **Purpose:** Root container with background, min-height, grain texture overlay
 
 ### Hero Section
@@ -43,9 +48,11 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
     <p className="sitemap-page__desc text-body-p">Description</p>
   </div>
 </div>
-```
+
+```text
 
 **Classes:**
+
 - `.sitemap-page__hero` — Hero wrapper with rainbow decoration
 - `.sitemap-page__hero-content` — Centered content container
 - `.sitemap-page__title` — Page heading (uses `.text-section-h2` from globals)
@@ -57,9 +64,10 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
 <div className="sitemap-page__content">
   {/* All sections */}
 </div>
-```
 
-**Class:** `.sitemap-page__content`  
+```text
+
+**Class:** `.sitemap-page__content`
 **Purpose:** Main content wrapper with max-width and padding
 
 ### Section Structure
@@ -67,7 +75,8 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
 ```tsx
 <section className="sitemap-section" aria-labelledby="sitemap-pages">
   <h2 id="sitemap-pages" className="sitemap-section__title text-card-h3">
-    <Icon size={24} weight="duotone" aria-hidden="true" style={{ color: 'var(--wp--preset--color--neon-pink)' }} />
+<Icon size={24} weight="duotone" aria-hidden="true" style={{ color:
+'var(--wp--preset--color--neon-pink)' }} />
     Section Title
   </h2>
   <p className="sitemap-section__desc">Optional description</p>
@@ -75,9 +84,11 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
     {/* List items */}
   </ul>
 </section>
-```
+
+```text
 
 **Classes:**
+
 - `.sitemap-section` — Section wrapper with spacing and animation delay
 - `.sitemap-section__title` — Section heading with icon (uses `.text-card-h3`)
 - `.sitemap-section__desc` — Optional section description
@@ -90,13 +101,15 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
 <ul className="sitemap-list">
   <li className="sitemap-list__item">
     <a href="/path" className="sitemap-link">
-      <Icon size={20} weight="duotone" aria-hidden="true" className="sitemap-link__icon" />
+<Icon size={20} weight="duotone" aria-hidden="true"
+className="sitemap-link__icon" />
       <span className="sitemap-link__text">Link text</span>
     </a>
     <span className="sitemap-link__desc">Optional description</span>
   </li>
 </ul>
-```
+
+```text
 
 #### Grid Layout (for About sub-pages)
 
@@ -104,7 +117,8 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
 <ul className="sitemap-list sitemap-list--grid">
   {/* Grid items */}
 </ul>
-```
+
+```text
 
 #### Dense List (for blog posts, videos, etc.)
 
@@ -112,13 +126,15 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
 <ul className="sitemap-list sitemap-list--dense">
   <li className="sitemap-list__item">
     <a href="/path" className="sitemap-link">
-      <Icon size={18} weight="duotone" aria-hidden="true" className="sitemap-link__icon" />
+<Icon size={18} weight="duotone" aria-hidden="true"
+className="sitemap-link__icon" />
       <span className="sitemap-link__text">Link text</span>
     </a>
     <span className="sitemap-link__meta">Date • Category</span>
   </li>
 </ul>
-```
+
+```text
 
 #### Tags List
 
@@ -132,11 +148,13 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
     <span className="sitemap-link__desc">Tag description</span>
   </li>
 </ul>
-```
+
+```text
 
 ### Link Components
 
 **Classes:**
+
 - `.sitemap-link` — Base link style
 - `.sitemap-link--tag` — Tag variant (smaller, with color dot)
 - `.sitemap-link__icon` — Phosphor icon (20px for standard, 18px for dense)
@@ -150,7 +168,8 @@ The sitemap is NOT a boring text list — it's a **funky, animated, neon-powered
 
 ### About Sub-Pages Animation
 
-The 21 hidden About sub-pages should have **sequential fade-in animations** using CSS animation delays.
+The 21 hidden About sub-pages should have **sequential fade-in animations**
+using CSS animation delays.
 
 ```css
 /* Each item gets a staggered delay */
@@ -174,7 +193,8 @@ The 21 hidden About sub-pages should have **sequential fade-in animations** usin
     transform: translateY(0);
   }
 }
-```
+
+```text
 
 ### Section-Level Animations
 
@@ -190,7 +210,8 @@ Each section should also have a subtle fade-in:
 .sitemap-section:nth-child(2) { animation-delay: 0.2s; }
 .sitemap-section:nth-child(3) { animation-delay: 0.3s; }
 /* etc. */
-```
+
+```text
 
 ## Neon Color System
 
@@ -228,7 +249,8 @@ Top border uses all 8 neon colors in gradient:
     var(--wp--preset--color--neon-pink) 100%
   );
 }
-```
+
+```text
 
 ## Responsive Grid Layouts
 
@@ -263,11 +285,13 @@ Top border uses all 8 neon colors in gradient:
     grid-template-columns: repeat(4, 1fr);
   }
 }
-```
+
+```text
 
 ### Tags Grid
 
-Tags use a similar grid but with tighter gaps and more columns at wide viewports:
+Tags use a similar grid but with tighter gaps and more columns at wide
+viewports:
 
 ```css
 @media (min-width: 1568px) {
@@ -275,7 +299,8 @@ Tags use a similar grid but with tighter gaps and more columns at wide viewports
     grid-template-columns: repeat(5, 1fr);
   }
 }
-```
+
+```text
 
 ## Hover States
 
@@ -295,7 +320,8 @@ Tags use a similar grid but with tighter gaps and more columns at wide viewports
   color: var(--wp--preset--color--neon-pink);
   transform: scale(1.1);
 }
-```
+
+```text
 
 ### Focus States
 
@@ -307,7 +333,8 @@ Must have visible 3px neon pink focus indicator with glow:
   outline-offset: 2px;
   box-shadow: 0 0 12px rgba(255, 16, 240, 0.5);
 }
-```
+
+```text
 
 ## Accessibility Requirements
 
@@ -334,14 +361,17 @@ Must have visible 3px neon pink focus indicator with glow:
     Hidden about pages
   </h2>
   <p className="sitemap-section__desc">
-    21 unlisted sub-pages exploring Ash's creative journey, lifestyle, and philosophy.
+21 unlisted sub-pages exploring Ash's creative journey, lifestyle, and
+philosophy.
   </p>
 </section>
-```
+
+```text
 
 ### Reduced Motion
 
-Users with `prefers-reduced-motion: reduce` should get instant visibility (no animations):
+Users with `prefers-reduced-motion: reduce` should get instant visibility (no
+animations):
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -354,7 +384,8 @@ Users with `prefers-reduced-motion: reduce` should get instant visibility (no an
     transform: none;
   }
 }
-```
+
+```text
 
 ## Dark Mode Behavior
 
@@ -370,7 +401,8 @@ Users with `prefers-reduced-motion: reduce` should get instant visibility (no an
 .dark .sitemap-page {
   background-color: var(--wp--preset--color--atomic-black);
 }
-```
+
+```text
 
 ### Text Colors
 
@@ -390,7 +422,8 @@ Dark mode uses **full-brightness neon** for maximum impact:
   color: var(--wp--preset--color--neon-pink);
   text-shadow: 0 0 12px rgba(255, 16, 240, 0.4);
 }
-```
+
+```text
 
 ## Grain Texture Overlay
 
@@ -404,11 +437,16 @@ All sections should have the standard grain noise texture:
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400'
+xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter
+id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'
+numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25'
+filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
 }
-```
+
+```text
 
 ## Performance Considerations
 
@@ -427,6 +465,7 @@ All sections should have the standard grain noise texture:
 ### List Rendering
 
 The sitemap can have 200+ links. Optimize by:
+
 - Not animating every single item (only About sub-pages)
 - Using CSS transforms (GPU-accelerated)
 - Keeping hover transitions under 200ms
@@ -438,11 +477,13 @@ The sitemap can have 200+ links. Optimize by:
 ```tsx
 <section className="sitemap-section" aria-labelledby="sitemap-about-pages">
   <h2 id="sitemap-about-pages" className="sitemap-section__title text-card-h3">
-    <User size={24} weight="duotone" aria-hidden="true" style={{ color: 'var(--wp--preset--color--neon-purple)' }} />
+<User size={24} weight="duotone" aria-hidden="true" style={{ color:
+'var(--wp--preset--color--neon-purple)' }} />
     Hidden about pages
   </h2>
   <p className="sitemap-section__desc">
-    21 unlisted sub-pages exploring Ash's creative journey, lifestyle, and philosophy.
+21 unlisted sub-pages exploring Ash's creative journey, lifestyle, and
+philosophy.
   </p>
   <ul className="sitemap-list sitemap-list--grid">
     {hiddenAboutData.subpages.map((page, index) => (
@@ -452,14 +493,16 @@ The sitemap can have 200+ links. Optimize by:
           onClick={handleNavigate(`/about/${page.slug}`)}
           className="sitemap-link"
         >
-          <IconComponent size={20} weight="duotone" aria-hidden="true" className="sitemap-link__icon" />
+<IconComponent size={20} weight="duotone" aria-hidden="true"
+className="sitemap-link__icon" />
           <span className="sitemap-link__text">{page.title}</span>
         </a>
       </li>
     ))}
   </ul>
 </section>
-```
+
+```text
 
 ## Related Files
 
@@ -473,6 +516,7 @@ The sitemap can have 200+ links. Optimize by:
 ## Changelog
 
 **v2.0.0** (March 4, 2026)
+
 - Complete rewrite of guidelines with funky animation system
 - Sequential fade-in animations for 21 About sub-pages
 - Enhanced neon color system per content type
@@ -480,4 +524,5 @@ The sitemap can have 200+ links. Optimize by:
 - Full accessibility and reduced motion support
 
 **v1.0.0** (Initial)
+
 - Basic sitemap structure

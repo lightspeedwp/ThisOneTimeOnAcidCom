@@ -1,6 +1,6 @@
 # Image Display & Loading Troubleshooting Guide
 
-**Version:** 1.0.0  
+**Version:** 1.0.0
 **Last Updated:** January 2025
 
 Comprehensive troubleshooting guide for image display and loading issues.
@@ -9,7 +9,7 @@ Comprehensive troubleshooting guide for image display and loading issues.
 
 ## 🎯 Quick Problem Identifier
 
-```
+```text
 ┌─────────────────────────────────────┐
 │   Images Not Displaying?            │
 └──────────────┬──────────────────────┘
@@ -27,7 +27,8 @@ Comprehensive troubleshooting guide for image display and loading issues.
        │                       │
        ▼                       ▼
     Issue 1-3              Issue 4-5
-```
+
+```text
 
 ---
 
@@ -38,21 +39,21 @@ Comprehensive troubleshooting guide for image display and loading issues.
 ```mermaid
 flowchart TD
     A[Image Not Displaying] --> B{Which type?}
-    
+
     B -->|Figma Asset| C{Import error?}
     B -->|Unsplash| D{API error?}
     B -->|External URL| E{Network error?}
-    
+
     C -->|"not exported by"| F[Issue 1: Wrong Import Path]
     C -->|404 Not Found| G[Issue 2: Asset Missing]
     C -->|Loads but wrong| H[Issue 3: Wrong Asset Used]
-    
+
     D -->|401 Unauthorized| I[Issue 4: Unsplash API Key]
     D -->|Rate Limited| J[Issue 5: API Quota]
-    
+
     E -->|CORS Error| K[Issue 6: CORS Blocked]
     E -->|404| L[Issue 7: Broken URL]
-    
+
     F --> M[See Section 1]
     G --> N[See Section 2]
     H --> O[See Section 3]
@@ -60,19 +61,21 @@ flowchart TD
     J --> Q[See Section 5]
     K --> R[See Section 6]
     L --> S[See Section 7]
-    
+
     style F fill:#fecaca,stroke:#ef4444,stroke-width:2px
     style G fill:#fecaca,stroke:#ef4444,stroke-width:2px
     style H fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
     style I fill:#fed7aa,stroke:#f97316,stroke-width:2px
     style J fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
-```
+
+```text
 
 ---
 
 ## 🚨 Issue 1: Figma Asset Import Error
 
 ### Symptoms
+
 - Console error: "is not exported by 'figma:asset/...'"
 - Image shows broken icon
 - Build fails with import error
@@ -84,11 +87,11 @@ sequenceDiagram
     participant C as Component
     participant I as Import System
     participant F as Figma Assets
-    
+
     C->>I: import img from "figma:asset/abc123.png"
-    
+
     I->>F: Look for asset abc123.png
-    
+
     alt Asset Exists
         F-->>I: ✅ Return asset
         I-->>C: Image loaded
@@ -102,7 +105,8 @@ sequenceDiagram
         I--xC: ❌ Syntax error
         Note over C: "../figma:asset/..."<br/>wrong format
     end
-```
+
+```text
 
 ### Solutions
 
@@ -118,7 +122,8 @@ import heroImg from "../imports/figma:asset/abc123.png";
 import heroImg from "/public/figma:asset/abc123.png";
 
 // figma:asset is NOT a file path - it's a special import scheme!
-```
+
+```text
 
 **Check 2: Asset ID**
 
@@ -133,7 +138,8 @@ import img2 from "figma:asset/f2dddff10fce8c5cc0468d3c13d16d6eeadcbdb7.jpg";
 // ❌ WRONG - Made up IDs won't work
 import img from "figma:asset/hero-image.png";
 import img from "figma:asset/portfolio-1.jpg";
-```
+
+```text
 
 **Check 3: Check Mock Data**
 
@@ -159,21 +165,28 @@ function Portfolio() {
     <ImageGallery images={festivalGallery} />
   );
 }
-```
+
+```text
 
 **Check 4: Available Assets**
 
 Check which Figma assets exist:
 
 ```bash
+
 # Search for all figma:asset imports in codebase
+
 grep -r "figma:asset" data/mock/
 
-# Should show all available assets like:
+# Should show all available assets like
+
 # figma:asset/76faf8f617b56e6f079c5a7ead8f927f5a5fee32.png
+
 # figma:asset/f2dddff10fce8c5cc0468d3c13d16d6eeadcbdb7.png
-# etc.
-```
+
+# etc
+
+```text
 
 ### Quick Fix Checklist
 
@@ -187,7 +200,8 @@ grep -r "figma:asset" data/mock/
 
 ## 🚨 Issue 2: Figma Asset File Missing
 
-### Symptoms
+### Symptoms (1)
+
 - Import works (no build error)
 - But image shows 404 or broken icon
 - Works in dev but fails in production
@@ -197,62 +211,71 @@ grep -r "figma:asset" data/mock/
 ```mermaid
 stateDiagram-v2
     [*] --> ImportStatement: Component imports asset
-    
+
     ImportStatement --> BuildTime: Vite processes import
-    
+
     BuildTime --> AssetExists: Check if asset in bundle
     BuildTime --> AssetMissing: Asset not found
-    
+
     AssetExists --> DevServer: Dev mode
     AssetExists --> ProductionBuild: Build mode
-    
+
     DevServer --> ImageDisplays: ✅ Shows in dev
-    
+
     ProductionBuild --> BundleCheck: Check dist/
-    
+
     BundleCheck --> InBundle: Asset copied
     BundleCheck --> NotInBundle: Asset missing
-    
+
     InBundle --> ImageDisplays: ✅ Shows in prod
     NotInBundle --> BrokenImage: ❌ 404 in prod
-    
+
     AssetMissing --> BrokenImage: ❌ Always fails
-    
+
     note right of AssetMissing
         Asset was deleted
         or never exported
         from Figma
     end note
-    
+
     note right of NotInBundle
         Build process failed
         to include asset
     end note
-```
 
-### Solutions
+```text
+
+### Solutions (1)
 
 **Check 1: Asset Actually Exists**
 
 The `figma:asset` scheme should be backed by real assets. Check if:
 
 1. Asset was properly exported from Figma
-2. Asset is referenced in `/data/mock/` files
-3. Build process includes it
+
+1. Asset is referenced in `/data/mock/` files
+
+1. Build process includes it
 
 **Check 2: Production Build**
 
 ```bash
+
 # Build for production
+
 npm run build
 
 # Check if assets are in dist/
+
 ls -la dist/assets/
 
-# Should see image files like:
+# Should see image files like
+
 # abc123.png
+
 # def456.jpg
-```
+
+```text
 
 **Check 3: Fallback Images**
 
@@ -270,7 +293,8 @@ import { ImageWithFallback } from './components/figma/ImageWithFallback';
 
 // ❌ WRONG - No fallback
 <img src="figma:asset/abc123.png" alt="Portfolio" />
-```
+
+```text
 
 **Check 4: Use Mock Data**
 
@@ -294,9 +318,10 @@ function Gallery() {
     <img src="figma:asset/abc123.png" alt="Image" />
   );
 }
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (1)
 
 - [ ] Asset exists in Figma export
 - [ ] Check `dist/assets/` after build
@@ -308,12 +333,13 @@ function Gallery() {
 
 ## 🚨 Issue 3: Using Wrong Figma Asset
 
-### Symptoms
+### Symptoms (2)
+
 - Image loads, but shows wrong content
 - Portfolio image shows hero photo instead
 - Assets mixed up between pages
 
-### Solutions
+### Solutions (2)
 
 **Check 1: Mock Data Organization**
 
@@ -327,7 +353,8 @@ function Gallery() {
   portfolio/
     festivalGallery.ts   // Festival portfolio
     editorialGallery.ts  // Editorial portfolio
-```
+
+```text
 
 **Check 2: Import Correct Data**
 
@@ -348,7 +375,8 @@ function AboutPage() {
 function AboutPage() {
   return <Hero images={homepageHero} />;  // ❌ Wrong images!
 }
-```
+
+```text
 
 **Check 3: Asset Naming**
 
@@ -376,9 +404,10 @@ export const images = [
   { url: 'figma:asset/abc.png', alt: 'Image 1' },  // ❌ Unclear!
   { url: 'figma:asset/def.png', alt: 'Image 2' },
 ];
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (2)
 
 - [ ] Import data from correct mock file
 - [ ] Check `id` and `alt` match expected content
@@ -390,7 +419,8 @@ export const images = [
 
 ## 🚨 Issue 4: Unsplash API Issues
 
-### Symptoms
+### Symptoms (3)
+
 - Unsplash images don't load
 - Console error: "Unsplash API error"
 - Placeholder images show instead
@@ -400,32 +430,33 @@ export const images = [
 ```mermaid
 flowchart TD
     A[Request Unsplash Image] --> B{unsplash_tool available?}
-    
+
     B -->|No| C[❌ Tool not configured]
     B -->|Yes| D[Call unsplash_tool]
-    
+
     D --> E{API Response?}
-    
+
     E -->|200 OK| F[✅ Image URL returned]
     E -->|401| G[❌ Invalid API key]
     E -->|403| H[❌ Rate limited]
     E -->|404| I[❌ Query too specific]
-    
+
     F --> J[Display Image]
-    
+
     G --> K[Fix API Key]
     H --> L[Use Cached Results]
     I --> M[Broaden Search Query]
-    
+
     C --> N[Use Figma Assets Instead]
-    
+
     style F fill:#dcfce7,stroke:#22c55e,stroke-width:2px
     style G fill:#fecaca,stroke:#ef4444,stroke-width:2px
     style H fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
     style I fill:#fed7aa,stroke:#f97316,stroke-width:2px
-```
 
-### Solutions
+```text
+
+### Solutions (3)
 
 **Check 1: Use Figma Assets Instead**
 
@@ -441,7 +472,8 @@ function Portfolio() {
 
 // ⚠️ ONLY use unsplash_tool when creating NEW content
 // Not for existing portfolio images!
-```
+
+```text
 
 **Check 2: Search Query**
 
@@ -454,11 +486,12 @@ const img2 = await unsplash_tool({ query: "festival makeup" });
 const img3 = await unsplash_tool({ query: "colorful eyeshadow" });
 
 // ❌ WRONG - Too specific
-const img = await unsplash_tool({ 
-  query: "ash shaw professional festival makeup UV rainbow glitter" 
+const img = await unsplash_tool({
+  query: "ash shaw professional festival makeup UV rainbow glitter"
 });
 // Unsplash library isn't large enough for this!
-```
+
+```text
 
 **Check 3: Fallback**
 
@@ -475,9 +508,10 @@ const getHeroImage = async () => {
     return homepageHero[0].url;  // Fallback to mock data
   }
 };
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (3)
 
 - [ ] Prefer Figma assets from `/data/mock/`
 - [ ] Only use Unsplash for NEW content
@@ -489,58 +523,60 @@ const getHeroImage = async () => {
 
 ## 🚨 Issue 5: Image Loading Performance
 
-### Symptoms
+### Symptoms (4)
+
 - Images load slowly
 - Layout shifts as images load
 - Poor Lighthouse score
 
-### State Diagram
+### State Diagram (1)
 
 ```mermaid
 stateDiagram-v2
     [*] --> PageLoads: User navigates
-    
+
     PageLoads --> ImagesRequested: Request all images
-    
+
     ImagesRequested --> LazyLoad: Check loading strategy
-    
+
     LazyLoad --> EagerLoading: loading="eager"
     LazyLoad --> LazyLoading: loading="lazy"
-    
+
     EagerLoading --> AllAtOnce: Load all immediately
     AllAtOnce --> SlowPageLoad: ⚠️ Poor performance
-    
+
     LazyLoading --> ViewportCheck: Check if in viewport
-    
+
     ViewportCheck --> InViewport: Visible
     ViewportCheck --> OutViewport: Not visible
-    
+
     InViewport --> LoadImage: Load image
     OutViewport --> SkipLoad: Don't load yet
-    
+
     LoadImage --> OptimizedLoad: ✅ Fast page load
     SkipLoad --> OptimizedLoad
-    
+
     note right of AllAtOnce
         All images load
         Even below fold
         Slow initial load
     end note
-    
+
     note right of OptimizedLoad
         Only visible images
         Load on scroll
         Fast initial load
     end note
-```
 
-### Solutions
+```text
+
+### Solutions (4)
 
 **Check 1: Lazy Loading**
 
 ```tsx
 // ✅ CORRECT - Lazy load images below fold
-<img 
+<img
   src={image.url}
   alt={image.alt}
   loading="lazy"  // Only loads when near viewport
@@ -548,7 +584,8 @@ stateDiagram-v2
 
 // ❌ WRONG - Loads all images immediately
 <img src={image.url} alt={image.alt} />
-```
+
+```text
 
 **Check 2: Explicit Dimensions**
 
@@ -567,14 +604,15 @@ Prevent layout shift:
 
 // ❌ WRONG - No dimensions = layout shift
 <img src={image.url} alt={image.alt} />
-```
+
+```text
 
 **Check 3: Responsive Images**
 
 ```tsx
 // ✅ CORRECT - Serve appropriate size
 <picture>
-  <source 
+  <source
     srcSet={`${image.url}?w=400 400w, ${image.url}?w=800 800w`}
     sizes="(max-width: 640px) 400px, 800px"
   />
@@ -587,7 +625,8 @@ Prevent layout shift:
   alt={image.alt}
   className="w-full"
 />
-```
+
+```text
 
 **Check 4: Preload Critical Images**
 
@@ -600,9 +639,10 @@ Prevent layout shift:
 />
 
 // Only for above-fold, critical images!
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (4)
 
 - [ ] Use `loading="lazy"` for below-fold images
 - [ ] Set explicit `width` and `height` attributes
@@ -614,12 +654,13 @@ Prevent layout shift:
 
 ## 🚨 Issue 6: External Image CORS Error
 
-### Symptoms
+### Symptoms (5)
+
 - External images blocked
 - Console: "CORS policy: No 'Access-Control-Allow-Origin'"
 - Images work in new tab, fail in app
 
-### Solutions
+### Solutions (5)
 
 **Check 1: Use Proxy or Download**
 
@@ -636,7 +677,8 @@ const img = await unsplash_tool({ query: "makeup" });
 
 // ✅ OPTION 3 - Use Figma assets
 <img src="figma:asset/abc123.png" alt="Image" />
-```
+
+```text
 
 **Check 2: Contentful Assets**
 
@@ -645,9 +687,10 @@ Contentful assets have proper CORS headers:
 ```tsx
 // ✅ CORRECT - Contentful images work
 <img src="https://images.ctfassets.net/..." alt="Image" />
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (5)
 
 - [ ] Prefer Figma assets or Contentful images
 - [ ] Download external images to `/public/`
@@ -658,48 +701,50 @@ Contentful assets have proper CORS headers:
 
 ## 🚨 Issue 7: Broken Image URLs
 
-### Symptoms
+### Symptoms (6)
+
 - 404 error for images
 - Broken link icon
 - Image worked before, now fails
 
-### Diagnostic Flow
+### Diagnostic Flow (1)
 
 ```mermaid
 flowchart TD
     A[Image 404 Error] --> B{URL type?}
-    
+
     B -->|Relative path| C[Check /public/ folder]
     B -->|Figma asset| D[Check asset exists]
     B -->|External URL| E[URL still valid?]
-    
+
     C --> F{File exists?}
     F -->|No| G[Add file to /public/images/]
     F -->|Yes| H[Check path is correct]
-    
+
     D --> I{In mock data?}
     I -->|No| J[Add to /data/mock/]
     I -->|Yes| K[Check import syntax]
-    
+
     E --> L{URL accessible?}
     L -->|No| M[URL changed/deleted]
     L -->|Yes| N[May be CORS issue]
-    
+
     G --> O[✅ Fixed]
     H --> O
     J --> O
     K --> O
-    
+
     M --> P[Update to new URL or use fallback]
     N --> Q[Use proxy or download]
-    
+
     P --> O
     Q --> O
-    
-    style O fill:#dcfce7,stroke:#22c55e,stroke-width:2px
-```
 
-### Solutions
+    style O fill:#dcfce7,stroke:#22c55e,stroke-width:2px
+
+```text
+
+### Solutions (6)
 
 **Check 1: Public Folder Structure**
 
@@ -710,11 +755,13 @@ flowchart TD
     logo.png           # Logo
   # Other static assets
 
-# Reference in code:
+# Reference in code
+
 <img src="/images/placeholder.jpg" alt="Fallback" />
 
 # Note: /public/ files accessible from root /
-```
+
+```text
 
 **Check 2: Fix Broken Paths**
 
@@ -726,7 +773,8 @@ flowchart TD
 
 // ✅ CORRECT - Absolute from public/
 <img src="/images/photo.jpg" alt="Photo" />
-```
+
+```text
 
 **Check 3: Update Mock Data**
 
@@ -748,9 +796,10 @@ export const galleryImages = [
     alt: 'Makeup photo'
   }
 ];
-```
 
-### Quick Fix Checklist
+```text
+
+### Quick Fix Checklist (6)
 
 - [ ] Files in `/public/` use absolute paths (`/images/...`)
 - [ ] Figma assets in `/data/mock/` with correct IDs
@@ -767,41 +816,42 @@ export const galleryImages = [
 ```mermaid
 flowchart TD
     START[Image Issue] --> A[Open Browser DevTools]
-    
+
     A --> B[Check Console]
-    
+
     B --> C{Error type?}
-    
+
     C -->|Import error| D[Fix: Issue 1 - Import Syntax]
     C -->|404 Not Found| E[Fix: Issue 2 or 7 - Missing File]
     C -->|CORS error| F[Fix: Issue 6 - CORS]
     C -->|No error| G{Image displays?}
-    
+
     G -->|Wrong image| H[Fix: Issue 3 - Wrong Asset]
     G -->|Slow loading| I[Fix: Issue 5 - Performance]
     G -->|Not loading| J[Check Network Tab]
-    
+
     J --> K{Status code?}
     K -->|404| E
     K -->|403| F
     K -->|200 but no display| L[Check CSS/visibility]
-    
+
     D --> M[Re-test]
     E --> M
     F --> M
     H --> M
     I --> M
     L --> M
-    
+
     M --> N{Fixed?}
-    
+
     N -->|Yes| O[✅ SUCCESS]
     N -->|No| P[Check mock data structure]
-    
+
     P --> START
-    
+
     style O fill:#dcfce7,stroke:#22c55e,stroke-width:3px
-```
+
+```text
 
 ---
 
@@ -813,7 +863,7 @@ flowchart TD
 | **Hero images** | Use Figma assets from `/data/mock/images/` | `import { homepageHero }` |
 | **New placeholder** | Add to `/public/images/` | `src="/images/placeholder.jpg"` |
 | **Dynamic content** | Use Contentful CMS images | From API response |
-| **Creating new images** | Use `unsplash_tool` | `unsplash_tool({ query: "makeup" })` |
+| **Creating new images** | Use `unsplash*tool` | `unsplash*tool({ query: "makeup" })` |
 | **Fallback needed** | Use `ImageWithFallback` component | `<ImageWithFallback />` |
 | **Performance** | Add `loading="lazy"` | Below fold images |
 
@@ -827,4 +877,5 @@ flowchart TD
 
 ---
 
-**Pro Tip:** Always import images from `/data/mock/` - never hardcode Figma asset IDs directly in components!
+**Pro Tip:** Always import images from `/data/mock/` - never hardcode Figma
+asset IDs directly in components!

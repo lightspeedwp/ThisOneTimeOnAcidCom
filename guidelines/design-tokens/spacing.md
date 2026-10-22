@@ -1,21 +1,25 @@
 # Spacing Design Tokens
 
-**Version:** 5.2.0  
-**Last Updated:** March 2026  
+**Version:** 5.2.0
+**Last Updated:** March 2026
 **WordPress Theme.json Compatible:** ✅
 
-Complete spacing system for the Ash Shaw Makeup Portfolio, aligned with WordPress block theme standards using numeric spacing scale (10-100) with extended ultra-wide breakpoint support.
+Complete spacing system for the Ash Shaw Makeup Portfolio, aligned with
+WordPress block theme standards using numeric spacing scale (10-100) with
+extended ultra-wide breakpoint support.
 
 ## ✅ IMPLEMENTATION COMPLETE (v5.0.0)
 
-**WordPress Preset System Fully Implemented:**
+## WordPress Preset System Fully Implemented
+
 - ✅ **WordPress Variables:** All `--wp--preset--spacing--{slug}` variables added to globals.css
 - ✅ **Helper Classes:** 150+ utility classes (`.p-spacing-40`, `.py-section`, etc.)
 - ✅ **Fluid Spacing:** Complete fluid scale with viewport-aware scaling
 - ✅ **Component Spacing:** Dedicated variables for buttons, cards, sections
 - ✅ **Block Gap:** WordPress-standard block gap variables
 
-**See Also:** [wordpress-preset-system.md](../wordpress-preset-system.md) for complete implementation details
+**See Also:** [wordpress-preset-system.md](../wordpress-preset-system.md) for
+complete implementation details
 
 ## ✅ WordPress Theme.json Alignment (v5.0.0)
 
@@ -26,7 +30,8 @@ This spacing system now uses WordPress `--wp--preset--spacing--` CSS variables:
 - ✅ **Helper Classes:** `.p-spacing-{slug}`, `.py-section`, `.gap-block-md`
 - ✅ **Component-Specific:** Dedicated button, card, and section spacing
 
-**Key Difference from Previous Version:**
+## Key Difference from Previous Version
+
 - **Before:** Custom variables (--space-xs, --space-sm, --card-padding-mobile, etc.)
 - **Now:** WordPress presets (--wp--preset--spacing--40, --wp--preset--spacing--fluid-md, etc.)
 - **Legacy Support:** Old variables preserved for backward compatibility
@@ -34,12 +39,18 @@ This spacing system now uses WordPress `--wp--preset--spacing--` CSS variables:
 ## 📋 Table of Contents
 
 1. [WordPress Numeric Spacing Scale](#wordpress-numeric-spacing-scale)
-2. [Fluid Spacing Extensions](#fluid-spacing-extensions)
-3. [Component-Specific Spacing](#component-specific-spacing)
-4. [Helper Classes](#helper-classes)
-5. [CSS Variable Usage](#css-variable-usage)
-6. [Migration Guide](#migration-guide)
-7. [Common Spacing Patterns](#common-spacing-patterns)
+
+1. [Fluid Spacing Extensions](#fluid-spacing-extensions)
+
+1. [Component-Specific Spacing](#component-specific-spacing)
+
+1. [Helper Classes](#helper-classes)
+
+1. [CSS Variable Usage](#css-variable-usage)
+
+1. [Migration Guide](#migration-guide)
+
+1. [Common Spacing Patterns](#common-spacing-patterns)
 
 ---
 
@@ -61,11 +72,13 @@ All spacing uses **numeric slugs (10-100)** with increments of 10:
 --wp--preset--spacing--80: 5rem;       /* 80px */
 --wp--preset--spacing--90: 5.625rem;   /* 90px */
 --wp--preset--spacing--100: 6.25rem;   /* 100px */
-```
+
+```text
 
 ### Responsive Breakpoints (v5.2.0)
 
-The project now supports **extended ultra-wide breakpoints** for 4-6 column layouts on large displays:
+The project now supports **extended ultra-wide breakpoints** for 4-6 column
+layouts on large displays:
 
 | Breakpoint | Min Width | Use Case | Typical Columns |
 |------------|-----------|----------|--------------------|
@@ -81,7 +94,8 @@ The project now supports **extended ultra-wide breakpoints** for 4-6 column layo
 | **Desktop XL** | **>1800px** | **Extra-large displays** | **5 columns optimized** |
 | **Full HD** | **>1920px** | **1920×1080+ displays** | **5-6 columns** |
 
-**Layout Width Variables:**
+## Layout Width Variables
+
 ```css
 --wp--preset--layout--content: 800px;        /* Reading width */
 --wp--preset--layout--wide: 1440px;          /* Standard desktop */
@@ -90,9 +104,11 @@ The project now supports **extended ultra-wide breakpoints** for 4-6 column layo
 --wp--preset--layout--desktop-xl: 1800px;    /* Extra-large (NEW v5.2.1) */
 --wp--preset--layout--full-hd: 1920px;       /* Full HD */
 --wp--preset--layout--full: 100%;            /* Full viewport */
-```
 
-**Media Query Examples:**
+```text
+
+## Media Query Examples
+
 ```css
 /* Standard Desktop (3-4 columns) */
 @media (min-width: 1440px) {
@@ -121,11 +137,12 @@ The project now supports **extended ultra-wide breakpoints** for 4-6 column layo
     grid-template-columns: repeat(6, 1fr);
   }
 }
-```
+
+```text
 
 ### Visual Spacing Scale
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │              WORDPRESS NUMERIC SPACING SCALE (Fixed)                 │
 └─────────────────────────────────────────────────────────────────────┘
@@ -159,7 +176,8 @@ The project now supports **extended ultra-wide breakpoints** for 4-6 column layo
 
 --spacing--100
 ▓▓▓▓▓▓▓▓▓▓                           6.25rem (100px)
-```
+
+```text
 
 ### Spacing Progression
 
@@ -184,25 +202,36 @@ The numeric scale provides **predictable progression**:
 
 ### Fluid Spacing Scale
 
-All spacing uses **numeric slugs (10-100)** with increments of 10, with fluid extensions for responsive design:
+All spacing uses **numeric slugs (10-100)** with increments of 10, with fluid
+extensions for responsive design:
 
 ```css
 /* WordPress Theme.json Spacing Scale (Fluid Values) */
---wp--preset--spacing--fluid-10: clamp(0.625rem, 0.625rem + 0.0625vw, 0.625rem);   /* 10px */
---wp--preset--spacing--fluid-20: clamp(1.25rem, 1.25rem + 0.125vw, 1.25rem);    /* 20px */
---wp--preset--spacing--fluid-30: clamp(1.875rem, 1.875rem + 0.1875vw, 1.875rem);   /* 30px */
---wp--preset--spacing--fluid-40: clamp(2.5rem, 2.5rem + 0.25vw, 2.5rem);     /* 40px */
---wp--preset--spacing--fluid-50: clamp(3.125rem, 3.125rem + 0.3125vw, 3.125rem);   /* 50px */
---wp--preset--spacing--fluid-60: clamp(3.75rem, 3.75rem + 0.375vw, 3.75rem);    /* 60px */
---wp--preset--spacing--fluid-70: clamp(4.375rem, 4.375rem + 0.4375vw, 4.375rem);   /* 70px */
+--wp--preset--spacing--fluid-10: clamp(0.625rem, 0.625rem + 0.0625vw, 0.625rem);
+/* 10px */
+--wp--preset--spacing--fluid-20: clamp(1.25rem, 1.25rem + 0.125vw, 1.25rem); /*
+20px */
+--wp--preset--spacing--fluid-30: clamp(1.875rem, 1.875rem + 0.1875vw, 1.875rem);
+/* 30px */
+--wp--preset--spacing--fluid-40: clamp(2.5rem, 2.5rem + 0.25vw, 2.5rem); /* 40px
+*/
+--wp--preset--spacing--fluid-50: clamp(3.125rem, 3.125rem + 0.3125vw, 3.125rem);
+/* 50px */
+--wp--preset--spacing--fluid-60: clamp(3.75rem, 3.75rem + 0.375vw, 3.75rem); /*
+60px */
+--wp--preset--spacing--fluid-70: clamp(4.375rem, 4.375rem + 0.4375vw, 4.375rem);
+/* 70px */
 --wp--preset--spacing--fluid-80: clamp(5rem, 5rem + 0.5vw, 5rem);       /* 80px */
---wp--preset--spacing--fluid-90: clamp(5.625rem, 5.625rem + 0.5625vw, 5.625rem);   /* 90px */
---wp--preset--spacing--fluid-100: clamp(6.25rem, 6.25rem + 0.625vw, 6.25rem);   /* 100px */
-```
+--wp--preset--spacing--fluid-90: clamp(5.625rem, 5.625rem + 0.5625vw, 5.625rem);
+/* 90px */
+--wp--preset--spacing--fluid-100: clamp(6.25rem, 6.25rem + 0.625vw, 6.25rem); /*
+100px */
+
+```text
 
 ### Visual Fluid Spacing Scale
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │              WORDPRESS NUMERIC SPACING SCALE (Fluid)                 │
 └─────────────────────────────────────────────────────────────────────┘
@@ -236,7 +265,8 @@ All spacing uses **numeric slugs (10-100)** with increments of 10, with fluid ex
 
 --spacing--fluid-100
 ▓▓▓▓▓▓▓▓▓▓                           6.25rem (100px)
-```
+
+```text
 
 ### Fluid Spacing Progression
 
@@ -276,14 +306,17 @@ The fluid scale provides **responsive progression**:
 .button-large {
   padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
 }
-```
+
+```text
 
 **React/TSX Usage:**
+
 ```tsx
 <button className="px-spacing-40 py-spacing-20 bg-gradient-pink-purple-blue">
   Submit
 </button>
-```
+
+```text
 
 ### Cards
 
@@ -302,14 +335,17 @@ The fluid scale provides **responsive progression**:
 .card-spacious {
   padding: var(--wp--preset--spacing--60);
 }
-```
+
+```text
 
 **React/TSX Usage:**
+
 ```tsx
 <div className="p-spacing-40 bg-white rounded-xl shadow-lg">
   Card Content
 </div>
-```
+
+```text
 
 ### Sections
 
@@ -329,14 +365,17 @@ The fluid scale provides **responsive progression**:
 .section-large {
   padding-block: var(--wp--preset--spacing--100);
 }
-```
+
+```text
 
 **React/TSX Usage:**
+
 ```tsx
 <section className="py-spacing-80 px-spacing-40">
   Section Content
 </section>
-```
+
+```text
 
 ### Content Flow
 
@@ -353,7 +392,8 @@ The fluid scale provides **responsive progression**:
 .stack-spacing-40 > * + * {
   margin-top: var(--wp--preset--spacing--40);
 }
-```
+
+```text
 
 ---
 
@@ -400,7 +440,8 @@ The fluid scale provides **responsive progression**:
 .gap-spacing-30 {
   gap: var(--wp--preset--spacing--30);
 }
-```
+
+```text
 
 ### Section Padding
 
@@ -420,7 +461,8 @@ The fluid scale provides **responsive progression**:
   padding-top: var(--wp--preset--spacing--100);
   padding-bottom: var(--wp--preset--spacing--100);
 }
-```
+
+```text
 
 ### Block Gap
 
@@ -437,7 +479,8 @@ The fluid scale provides **responsive progression**:
 .gap-block-lg {
   gap: var(--wp--preset--spacing--60);
 }
-```
+
+```text
 
 ---
 
@@ -470,7 +513,8 @@ All spacing uses WordPress custom properties:
   padding-left: var(--wp--preset--spacing--20);
   padding-right: var(--wp--preset--spacing--20);
 }
-```
+
+```text
 
 ### Tailwind-Style Utility Classes
 
@@ -515,7 +559,8 @@ For backward compatibility with existing code:
 .gap-spacing-30 {
   gap: var(--wp--preset--spacing--30);
 }
-```
+
+```text
 
 ---
 
@@ -537,32 +582,40 @@ For backward compatibility with existing code:
 ### Migration Examples
 
 **Before (Semantic):**
+
 ```tsx
 <div className="p-fluid-md mb-fluid-lg">
   Content
 </div>
-```
+
+```text
 
 **After (Numeric):**
+
 ```tsx
 <div className="p-spacing-40 mb-spacing-50">
   Content
 </div>
-```
 
-**Before (Component Spacing):**
+```text
+
+## Before (Component Spacing)
+
 ```tsx
 <button className="px-button py-button">
   Click Me
 </button>
-```
 
-**After (Explicit Numeric):**
+```text
+
+## After (Explicit Numeric)
+
 ```tsx
 <button className="px-spacing-40 py-spacing-20">
   Click Me
 </button>
-```
+
+```text
 
 ---
 
@@ -584,7 +637,8 @@ For backward compatibility with existing code:
   margin-inline: auto;
   padding-inline: var(--wp--preset--spacing--60);
 }
-```
+
+```text
 
 ### Grid Systems
 
@@ -602,7 +656,8 @@ For backward compatibility with existing code:
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--wp--preset--spacing--30);
 }
-```
+
+```text
 
 ### Flexbox Layouts
 
@@ -620,7 +675,8 @@ For backward compatibility with existing code:
   flex-direction: column;
   gap: var(--wp--preset--spacing--20);
 }
-```
+
+```text
 
 ### Form Layouts
 
@@ -641,7 +697,8 @@ For backward compatibility with existing code:
 .form-submit {
   margin-top: var(--wp--preset--spacing--40);
 }
-```
+
+```text
 
 ---
 
@@ -668,7 +725,8 @@ For backward compatibility with existing code:
     padding: var(--wp--preset--spacing--80);
   }
 }
-```
+
+```text
 
 ### Responsive Grid Gaps
 
@@ -693,7 +751,8 @@ For backward compatibility with existing code:
     gap: var(--wp--preset--spacing--40);
   }
 }
-```
+
+```text
 
 ---
 
@@ -702,77 +761,90 @@ For backward compatibility with existing code:
 ### ✅ DO
 
 1. **Use numeric slugs consistently**
+
    ```css
    /* ✅ GOOD */
    padding: var(--wp--preset--spacing--40);
    margin-block: var(--wp--preset--spacing--80);
    gap: var(--wp--preset--spacing--30);
-   ```
 
-2. **Reference via CSS variables**
+```text
+
+1. **Reference via CSS variables**
+
    ```css
    /* ✅ GOOD */
    .component {
      padding: var(--wp--preset--spacing--40);
    }
-   
+
    /* ❌ BAD */
    .component {
      padding: 2.5rem; /* Don't hardcode */
    }
-   ```
 
-3. **Use appropriate scale for context**
+```text
+
+1. **Use appropriate scale for context**
+
    - Small elements (buttons, inputs): `--spacing--10` to `--spacing--30`
    - Medium components (cards): `--spacing--30` to `--spacing--50`
    - Large sections: `--spacing--60` to `--spacing--100`
 
-4. **Maintain vertical rhythm**
+1. **Maintain vertical rhythm**
+
    ```css
    /* ✅ GOOD - Consistent spacing */
    .content > * + * {
      margin-top: var(--wp--preset--spacing--30);
    }
-   ```
+
+```text
 
 ### ❌ DON'T
 
 1. **Don't use arbitrary values**
+
    ```css
    /* ❌ BAD */
    .component {
      padding: 25px; /* Not in scale */
    }
-   
+
    /* ✅ GOOD */
    .component {
      padding: var(--wp--preset--spacing--40); /* Use scale */
    }
-   ```
 
-2. **Don't mix semantic and numeric**
+```text
+
+1. **Don't mix semantic and numeric**
+
    ```css
    /* ❌ BAD */
    .component {
      padding: var(--spacing-fluid-md); /* Old semantic */
      margin: var(--wp--preset--spacing--40); /* New numeric */
    }
-   ```
 
-3. **Don't skip scale increments**
+```text
+
+1. **Don't skip scale increments**
+
    ```css
    /* ⚠️ AVOID - Jumping too far */
    .component {
      padding: var(--wp--preset--spacing--10);
      margin: var(--wp--preset--spacing--100);
    }
-   
+
    /* ✅ BETTER - Gradual progression */
    .component {
      padding: var(--wp--preset--spacing--20);
      margin: var(--wp--preset--spacing--60);
    }
-   ```
+
+```text
 
 ---
 
@@ -795,7 +867,8 @@ Always ensure interactive elements meet WCAG minimum touch target size:
   min-height: 44px;
   padding: var(--wp--preset--spacing--10);
 }
-```
+
+```text
 
 ### Focus Indicator Spacing
 
@@ -805,7 +878,8 @@ Always ensure interactive elements meet WCAG minimum touch target size:
   outline: 4px solid var(--color-pink-200);
   outline-offset: 4px; /* Use spacing--10 equivalent */
 }
-```
+
+```text
 
 ---
 
@@ -814,12 +888,16 @@ Always ensure interactive elements meet WCAG minimum touch target size:
 ### Block Pattern Spacing
 
 ```html
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80"}}}} -->
-<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
+<!-- wp:group
+{"style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80"}}}}
+-->
+<div class="wp-block-group"
+style="padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
   <!-- Content -->
 </div>
 <!-- /wp:group -->
-```
+
+```text
 
 ### Custom CSS in Blocks
 
@@ -833,7 +911,8 @@ Always ensure interactive elements meet WCAG minimum touch target size:
 .wp-block-custom > * + * {
   margin-top: var(--wp--preset--spacing--30);
 }
-```
+
+```text
 
 ---
 
@@ -864,11 +943,12 @@ Always ensure interactive elements meet WCAG minimum touch target size:
 
 ---
 
-**Version:** 5.2.0 (WordPress Numeric Scale)  
-**Last Updated:** March 2026  
+**Version:** 5.2.0 (WordPress Numeric Scale)
+**Last Updated:** March 2026
 **Maintained By:** Ash Shaw Portfolio Team
 
-**Related Documentation:**
+## Related Documentation
+
 - [Typography Design Tokens](./typography.md) - Font sizing system
 - [Colors Design Tokens](./colors.md) - Color palette
 - [Component Guidelines](../components/) - Component-specific usage

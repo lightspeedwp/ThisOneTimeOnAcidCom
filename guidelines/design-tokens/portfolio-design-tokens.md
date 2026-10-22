@@ -1,23 +1,28 @@
 # Portfolio Design Tokens — Comprehensive Reference
 
-**Version:** 1.0.0  
-**Created:** March 4, 2026  
+**Version:** 1.0.0
+**Created:** March 4, 2026
 **Status:** Living Document
 
-This guideline documents all design tokens created and used across the Ash Shaw Makeup Portfolio project. Design tokens are the atomic design decisions that power the visual consistency of the entire system — colors, typography, spacing, shadows, border radii, and animations.
+This guideline documents all design tokens created and used across the Ash Shaw
+Makeup Portfolio project. Design tokens are the atomic design decisions that
+power the visual consistency of the entire system — colors, typography, spacing,
+shadows, border radii, and animations.
 
 ---
 
 ## 📐 Token Philosophy
 
 **Design tokens are:**
+
 - ✅ **Single source of truth** — All visual decisions defined in one place (`/styles/globals.css`)
 - ✅ **Semantic naming** — Token names describe purpose, not value (e.g., `--neutral-900` not `--gray-dark`)
 - ✅ **Fluid & responsive** — Values scale with viewport using `clamp()` for accessibility
 - ✅ **Theme-aware** — Light and dark mode variants defined via `.dark` selector
 - ✅ **BEM-compatible** — Applied via CSS classes, never inline (except color swatches in specimens)
 
-**Design tokens are NOT:**
+## Design tokens are NOT
+
 - ❌ Inline styles (forbidden by Guidelines.md)
 - ❌ Tailwind utilities (replaced by semantic BEM classes)
 - ❌ Hardcoded pixel values scattered across components
@@ -30,7 +35,8 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 ### 1. Color Tokens
 
 #### 1.1 Neon Colors (Brand Identity)
-**File:** `/styles/globals.css`  
+
+**File:** `/styles/globals.css`
 **Reference:** [neon-colors.md](./neon-colors.md)
 
 | Token Name | Hex Value | Usage | Content Type |
@@ -45,6 +51,7 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--preset--color--neon-red` | `#FF3131` | Alerts, error states | Personal, Urgent |
 
 **Application:**
+
 ```css
 /* BEM class using neon token */
 .blog-card {
@@ -55,9 +62,11 @@ This guideline documents all design tokens created and used across the Ash Shaw 
   background: var(--wp--preset--color--neon-green);
   color: var(--wp--preset--color--atomic-black);
 }
-```
+
+```text
 
 #### 1.2 Neutral Colors (Base Palette)
+
 **File:** `/styles/globals.css`
 
 | Token Name | Light Value | Dark Value | Usage |
@@ -73,6 +82,7 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--preset--color--neutral-900` | `#171717` | `#171717` | Dark mode section backgrounds |
 
 **Theme Switching:**
+
 ```css
 /* Light mode default */
 .page-background {
@@ -83,10 +93,12 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 .dark .page-background {
   background: var(--wp--preset--color--atomic-black);
 }
-```
+
+```text
 
 #### 1.3 Gradient Tokens
-**File:** `/styles/globals.css`  
+
+**File:** `/styles/globals.css`
 **Reference:** [neon-colors.md](./neon-colors.md)
 
 | Token Name | Gradient Definition | Usage |
@@ -97,6 +109,7 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--preset--gradient--hyperpop` | `linear-gradient(90deg, #FF10F0, #BE00FE, #1F51FF, #00F7FF, #39FF14, #FFFF00, #FF5F1F, #FF3131)` | Animated backgrounds, loading states |
 
 **Application:**
+
 ```css
 .text-gradient-pink-purple-blue {
   background: var(--wp--preset--gradient--cyberpunk);
@@ -104,13 +117,14 @@ This guideline documents all design tokens created and used across the Ash Shaw 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-```
+
+```text
 
 ---
 
 ### 2. Typography Tokens
 
-**File:** `/styles/globals.css`  
+**File:** `/styles/globals.css`
 **Reference:** [typography.md](./typography.md)
 
 #### 2.1 Font Families
@@ -121,7 +135,8 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--preset--font-family--brand-heading` | `'Playfair Display', serif` | Section headings, card titles |
 | `--wp--preset--font-family--brand-body` | `'Inter', sans-serif` | Body text, UI elements |
 
-**Variable Font Loading:**
+## Variable Font Loading
+
 ```css
 @font-face {
   font-family: 'Inter';
@@ -129,7 +144,8 @@ This guideline documents all design tokens created and used across the Ash Shaw 
   font-display: swap;
   font-weight: 100 900; /* Variable font range */
 }
-```
+
+```text
 
 #### 2.2 Font Size Scale (Fluid Typography)
 
@@ -147,7 +163,8 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--preset--font-size--800` | `2.5rem` (40px) | `4rem` (64px) | Section headings |
 | `--wp--preset--font-size--900` | `3rem` (48px) | `7.5rem` (120px) | Hero titles |
 
-**Fluid Typography Classes:**
+## Fluid Typography Classes
+
 ```css
 .text-hero-h1 {
   font-size: clamp(2.25rem, 2.036rem + 1.071vw, 3rem); /* 36px → 48px */
@@ -158,7 +175,8 @@ This guideline documents all design tokens created and used across the Ash Shaw 
   font-size: clamp(1rem, 0.964rem + 0.179vw, 1.125rem); /* 16px → 18px */
   font-family: var(--wp--preset--font-family--brand-body);
 }
-```
+
+```text
 
 #### 2.3 Font Weight Tokens
 
@@ -185,7 +203,7 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 
 ### 3. Spacing Tokens
 
-**File:** `/styles/globals.css`  
+**File:** `/styles/globals.css`
 **Reference:** [spacing.md](./spacing.md)
 
 #### 3.1 Base Scale
@@ -211,12 +229,14 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--preset--spacing--fluid-2xl` | `4rem` | `8rem` | Major page dividers |
 
 **Application:**
+
 ```css
 .section-padding {
   padding-top: var(--wp--preset--spacing--fluid-xl);
   padding-bottom: var(--wp--preset--spacing--fluid-xl);
 }
-```
+
+```text
 
 #### 3.3 Horizontal Section Padding
 
@@ -228,7 +248,7 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 
 ### 4. Layout Tokens
 
-**File:** `/styles/globals.css`  
+**File:** `/styles/globals.css`
 **Reference:** [spacing.md](./spacing.md)
 
 #### 4.1 Container Max Widths
@@ -244,13 +264,15 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--preset--layout--full` | `100%` | Full viewport width |
 
 **Application:**
+
 ```css
 .container-wide {
   max-width: var(--wp--preset--layout--wide);
   margin: 0 auto;
   padding: 0 var(--wp--preset--spacing--section-horizontal);
 }
-```
+
+```text
 
 #### 4.2 Breakpoint Tokens
 
@@ -269,6 +291,7 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--breakpoint--full-hd` | `1920px` | 5-6 columns |
 
 **Usage:**
+
 ```css
 .grid-responsive {
   display: grid;
@@ -286,7 +309,8 @@ This guideline documents all design tokens created and used across the Ash Shaw 
     grid-template-columns: repeat(3, 1fr);
   }
 }
-```
+
+```text
 
 ---
 
@@ -312,6 +336,7 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--preset--shadow--neon-blue` | `0 0 20px rgba(31, 81, 255, 0.6)` | Blue glow effect |
 
 **Application:**
+
 ```css
 .card-elevated {
   box-shadow: var(--wp--preset--shadow--md);
@@ -320,7 +345,8 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 .button-neon-glow {
   box-shadow: var(--wp--preset--shadow--neon-pink);
 }
-```
+
+```text
 
 ---
 
@@ -340,6 +366,7 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 | `--wp--preset--border-radius--pill` | `50rem` | Pill-shaped badges |
 
 **Application:**
+
 ```css
 .badge {
   border-radius: var(--wp--preset--border-radius--pill);
@@ -348,13 +375,14 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 .card {
   border-radius: var(--wp--preset--border-radius--md);
 }
-```
+
+```text
 
 ---
 
 ### 7. Animation Tokens
 
-**File:** `/styles/globals.css`  
+**File:** `/styles/globals.css`
 **Reference:** [animations.md](./animations.md)
 
 #### 7.1 Timing Function Tokens
@@ -381,6 +409,7 @@ This guideline documents all design tokens created and used across the Ash Shaw 
 **Reference:** See [animations.md](./animations.md) for complete list.
 
 Key animations:
+
 - `neon-pulse` — Breathing glow effect
 - `gradient-shift` — Color gradient animation
 - `float` — Gentle vertical bobbing
@@ -391,6 +420,7 @@ Key animations:
 - `blink-neon` — Strobe effect
 
 **Application:**
+
 ```css
 .neon-text {
   animation: neon-pulse 2s ease-in-out infinite;
@@ -401,13 +431,15 @@ Key animations:
     animation: none;
   }
 }
-```
+
+```text
 
 ---
 
 ## 🎯 Content-Type Color Mapping
 
 Each content type has a dedicated neon accent color used consistently across:
+
 - Card borders
 - Category badges
 - Icon highlights
@@ -424,7 +456,7 @@ Each content type has a dedicated neon accent color used consistently across:
 | FAQ | Yellow | `--wp--preset--color--neon-yellow` | `.faq-*` |
 | Content (generic) | Cyan | `--wp--preset--color--neon-cyan` | `.content-*` |
 
-**Example Markdown Class Pattern:**
+## Example Markdown Class Pattern
 
 ```css
 /* Blog markdown uses neon pink */
@@ -452,7 +484,8 @@ Each content type has a dedicated neon accent color used consistently across:
 .portfolio-table th {
   background: var(--wp--preset--color--neon-green);
 }
-```
+
+```text
 
 ---
 
@@ -461,43 +494,52 @@ Each content type has a dedicated neon accent color used consistently across:
 ### DO ✅
 
 1. **Always use tokens via CSS variables:**
+
    ```css
    .element {
      color: var(--wp--preset--color--neon-pink);
      padding: var(--wp--preset--spacing--md);
      border-radius: var(--wp--preset--border-radius--md);
    }
-   ```
 
-2. **Apply tokens through BEM classes:**
+```text
+
+1. **Apply tokens through BEM classes:**
+
    ```tsx
    <div className="card card--featured">
      <h2 className="card__title">Title</h2>
    </div>
-   ```
 
-3. **Use fluid tokens for responsive scaling:**
+```text
+
+1. **Use fluid tokens for responsive scaling:**
+
    ```css
    .section {
-     padding: var(--wp--preset--spacing--fluid-xl) 
+     padding: var(--wp--preset--spacing--fluid-xl)
               var(--wp--preset--spacing--section-horizontal);
    }
-   ```
 
-4. **Provide dark mode variants:**
+```text
+
+1. **Provide dark mode variants:**
+
    ```css
    .card {
      background: var(--wp--preset--color--neutral-100);
    }
-   
+
    .dark .card {
      background: var(--wp--preset--color--neutral-900);
    }
-   ```
+
+```text
 
 ### DON'T ❌
 
 1. **Never use hardcoded values:**
+
    ```css
    /* ❌ WRONG */
    .element {
@@ -505,38 +547,45 @@ Each content type has a dedicated neon accent color used consistently across:
      padding: 24px;
      border-radius: 8px;
    }
-   ```
 
-2. **Never use Tailwind utilities:**
+```text
+
+1. **Never use Tailwind utilities:**
+
    ```tsx
    {/* ❌ WRONG */}
    <div className="flex items-center gap-4 p-6 rounded-lg">
-   ```
 
-3. **Never use inline styles (except color swatches in specimen pages):**
+```text
+
+1. **Never use inline styles (except color swatches in specimen pages):**
+
    ```tsx
    {/* ❌ WRONG */}
    <div style={{ padding: '24px', color: '#FF10F0' }}>
-   ```
 
-4. **Never skip accessibility considerations:**
+```text
+
+1. **Never skip accessibility considerations:**
+
    ```css
    /* ❌ WRONG - no reduced motion support */
    .element {
      animation: spin 1s infinite;
    }
-   
+
    /* ✅ CORRECT */
    .element {
      animation: spin 1s infinite;
    }
-   
+
    @media (prefers-reduced-motion: reduce) {
      .element {
        animation: none;
      }
    }
-   ```
+
+```text
 
 ---
 
@@ -556,29 +605,35 @@ Each content type has a dedicated neon accent color used consistently across:
 When adding new design tokens:
 
 1. **Define the token in `/styles/globals.css`:**
+
    ```css
    --wp--preset--color--new-accent: #ABC123;
-   ```
 
-2. **Create BEM class using the token:**
+```text
+
+1. **Create BEM class using the token:**
+
    ```css
    .new-component {
      color: var(--wp--preset--color--new-accent);
    }
-   ```
 
-3. **Document the token in this file** — Add to appropriate category table
+```text
 
-4. **Add dark mode variant if needed:**
+1. **Document the token in this file** — Add to appropriate category table
+
+1. **Add dark mode variant if needed:**
+
    ```css
    .dark .new-component {
      color: var(--wp--preset--color--new-accent-dark);
    }
-   ```
 
-5. **Test across all breakpoints** — Verify fluid scaling works
+```text
 
-6. **Update specimen pages** if token affects content-type styling
+1. **Test across all breakpoints** — Verify fluid scaling works
+
+1. **Update specimen pages** if token affects content-type styling
 
 ---
 
@@ -586,9 +641,11 @@ When adding new design tokens:
 
 ### Prefix Pattern
 
-All WordPress-compatible tokens use the prefix: `--wp--preset--{category}--{name}`
+All WordPress-compatible tokens use the prefix:
+`--wp--preset--{category}--{name}`
 
 **Categories:**
+
 - `color` — Color values
 - `font-family` — Font stacks
 - `font-size` — Type scale
@@ -605,14 +662,17 @@ All WordPress-compatible tokens use the prefix: `--wp--preset--{category}--{name
 ### Naming Best Practices
 
 ✅ **Semantic names** (describe purpose, not appearance):
+
 - `--wp--preset--color--neutral-900` ✅
 - `--wp--preset--color--dark-gray` ❌
 
 ✅ **Consistent scale** (use numeric scales for gradations):
+
 - `--wp--preset--font-size--100` through `--wp--preset--font-size--900` ✅
 - `--wp--preset--font-size--small`, `--wp--preset--font-size--medium` ❌
 
 ✅ **Clear hierarchy**:
+
 - `--wp--preset--spacing--xs`, `--wp--preset--spacing--sm`, `--wp--preset--spacing--md` ✅
 - `--wp--preset--spacing--tiny`, `--wp--preset--spacing--biggish` ❌
 
@@ -621,14 +681,18 @@ All WordPress-compatible tokens use the prefix: `--wp--preset--{category}--{name
 ## 🚀 Next Steps
 
 1. **Expand markdown specimens** — Implement `/prompts/content-specimens-markdown-expansion.md`
-2. **Audit token usage** — Ensure all components use tokens consistently
-3. **Create token migration script** — Auto-replace hardcoded values with tokens
-4. **Build token visualization tool** — Interactive specimen page showing all tokens
+
+1. **Audit token usage** — Ensure all components use tokens consistently
+
+1. **Create token migration script** — Auto-replace hardcoded values with tokens
+
+1. **Build token visualization tool** — Interactive specimen page showing all tokens
 
 ---
 
 **Version History:**
+
 - v1.0.0 (March 4, 2026) — Initial comprehensive token documentation
 
-**Maintained by:** Ash Shaw Portfolio Team  
+**Maintained by:** Ash Shaw Portfolio Team
 **Last Updated:** March 4, 2026

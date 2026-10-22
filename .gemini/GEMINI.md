@@ -2,21 +2,9 @@
 
 ## Project Overview
 
-This is a React + Vite + TailwindCSS v4 web application. It uses TypeScript, Radix UI primitives, shadcn/ui patterns, and Motion (Framer Motion) for animations.
-
-## Language Strategies
-
-**[CONFIGURATION]**
-
-- `TARGET_LANGUAGE` = **English (United Kingdom)**
-
-**1. Code & Communications:**
-
-- The agent must use English (United Kingdom) grammar, vocabulary, and spelling for all text responses, task lists, and documentation.
-
-**2. Project-Specific Language:**
-
-- For code comments, commit messages, and technical documentation related to the journal, use **English (UK)**.
+This is a React + Vite + TailwindCSS v4 web application. It uses TypeScript,
+Radix UI primitives, shadcn/ui patterns, and Motion (Framer Motion) for
+animations.
 
 ## Tech Stack
 

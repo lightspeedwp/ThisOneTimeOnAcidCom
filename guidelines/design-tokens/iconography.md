@@ -1,6 +1,7 @@
 # Iconography design tokens
 
-Complete guide to the Phosphor Icons system, weight variants, sizing, colours, and accessibility requirements.
+Complete guide to the Phosphor Icons system, weight variants, sizing, colours,
+and accessibility requirements.
 
 **Version:** 1.0.0
 **Created:** March 3, 2026
@@ -10,22 +11,28 @@ Complete guide to the Phosphor Icons system, weight variants, sizing, colours, a
 
 ## Overview
 
-The project has completed its migration from hand-rolled Lucide SVG wrappers (`/lib/icons-set-*.tsx`) to [Phosphor Icons](https://phosphoricons.com/) as the primary and only icon library. The `/lib/icons*` files have been deleted and `lucide-react` is no longer a dependency.
+The project has completed its migration from hand-rolled Lucide SVG wrappers
+(`/lib/icons-set-*.tsx`) to [Phosphor Icons](https://phosphoricons.com/) as the
+primary and only icon library. The `/lib/icons*` files have been deleted and
+`lucide-react` is no longer a dependency.
 
 **Import pattern:**
+
 ```tsx
 import { MagnifyingGlass, CaretDown, Star } from '@phosphor-icons/react';
 
 <MagnifyingGlass size={24} weight="regular" />
 <CaretDown size={20} weight="bold" />
 <Star size={16} weight="fill" />
-```
+
+```text
 
 ---
 
 ## Weight system
 
-Phosphor provides **6 weight variants** per icon — a major upgrade over Lucide's single stroke style.
+Phosphor provides **6 weight variants** per icon — a major upgrade over Lucide's
+single stroke style.
 
 | Weight | Visual | Stroke equiv. | Best for | A11y rating |
 |---|---|---|---|---|
@@ -53,8 +60,10 @@ Phosphor provides **6 weight variants** per icon — a major upgrade over Lucide
 ### TypeScript type
 
 ```tsx
-type PhosphorWeight = 'thin' | 'light' | 'regular' | 'bold' | 'fill' | 'duotone';
-```
+type PhosphorWeight = 'thin' | 'light' | 'regular' | 'bold' | 'fill' |
+'duotone';
+
+```text
 
 ---
 
@@ -69,7 +78,8 @@ type PhosphorWeight = 'thin' | 'light' | 'regular' | 'bold' | 'fill' | 'duotone'
 --icon-size-base: 1.5rem;   /* 24px — default */
 --icon-size-lg: 2rem;       /* 32px */
 --icon-size-xl: 3rem;       /* 48px */
-```
+
+```text
 
 ### Existing utility classes
 
@@ -82,18 +92,22 @@ Already defined in `/styles/globals.css`:
 .icon-lg  { width: 2rem;    height: 2rem;    }
 .icon-xl  { width: 3rem;    height: 3rem;    }
 .icon-2xl { width: 4rem;    height: 4rem;    }
-```
+
+```text
 
 ### Phosphor `size` prop
 
-Phosphor icons accept a `size` prop (number or string) that sets both width and height:
+Phosphor icons accept a `size` prop (number or string) that sets both width and
+height:
 
 ```tsx
 <Star size={24} />        // 24×24px
 <Star size="1.5rem" />    // rem-based sizing
-```
 
-**Convention:** Use the `size` prop directly for component-level sizing. Use CSS classes for layout-level constraints.
+```text
+
+**Convention:** Use the `size` prop directly for component-level sizing. Use CSS
+classes for layout-level constraints.
 
 ---
 
@@ -110,7 +124,8 @@ Phosphor icons accept a `size` prop (number or string) that sets both width and 
 --icon-color-error:       var(--wp--preset--color--neon-red-text);
 --icon-color-warning:     var(--wp--preset--color--neon-orange-text);
 --icon-color-disabled:    var(--wp--preset--color--neutral-400);
-```
+
+```text
 
 ### Dark mode
 
@@ -125,7 +140,8 @@ Phosphor icons accept a `size` prop (number or string) that sets both width and 
   --icon-color-warning:     var(--wp--preset--color--neon-orange);
   --icon-color-disabled:    var(--wp--preset--color--neutral-600);
 }
-```
+
+```text
 
 ### Using colour with Phosphor
 
@@ -137,9 +153,11 @@ Phosphor icons inherit `currentColor` by default, or accept a `color` prop:
 
 // Explicit color prop:
 <Star color="var(--wp--preset--color--neon-pink)" />
-```
 
-**Convention:** Prefer `currentColor` inheritance via BEM classes. Only use the `color` prop for one-off overrides.
+```text
+
+**Convention:** Prefer `currentColor` inheritance via BEM classes. Only use the
+`color` prop for one-off overrides.
 
 ---
 
@@ -150,7 +168,8 @@ Phosphor icons inherit `currentColor` by default, or accept a `color` prop:
 --icon-hover-scale:       1.1;
 --icon-hover-opacity:     0.8;
 --icon-transition-reduced: 0ms;
-```
+
+```text
 
 ### Reduced motion
 
@@ -162,7 +181,8 @@ All icon animations **must** respect `prefers-reduced-motion`:
     transform: none;
   }
 }
-```
+
+```text
 
 ---
 
@@ -172,7 +192,8 @@ All icon animations **must** respect `prefers-reduced-motion`:
 --icon-btn-gap:    0.5rem;     /* gap between icon and button text */
 --icon-nav-gap:    0.375rem;   /* gap in nav items */
 --icon-inline-gap: 0.25rem;    /* gap when inline with text */
-```
+
+```text
 
 ---
 
@@ -191,19 +212,22 @@ All icon animations **must** respect `prefers-reduced-motion`:
 .ph-icon--xl   { width: var(--icon-size-xl);   height: var(--icon-size-xl);   }
 
 /* Functional modifiers */
-.ph-icon--interactive { cursor: pointer; transition: transform var(--icon-transition); }
+.ph-icon--interactive { cursor: pointer; transition: transform
+var(--icon-transition); }
 .ph-icon--interactive:hover { transform: scale(var(--icon-hover-scale)); }
 .ph-icon--decorative  { pointer-events: none; }
 .ph-icon--muted       { color: var(--icon-color-muted); }
 .ph-icon--accent      { color: var(--icon-color-accent); }
 .ph-icon--neon        { filter: drop-shadow(0 0 6px currentColor); }
-```
+
+```text
 
 ---
 
 ## Duotone weight
 
-The `duotone` weight is unique to Phosphor — each icon has a primary stroke layer and a secondary filled layer at 20% opacity.
+The `duotone` weight is unique to Phosphor — each icon has a primary stroke
+layer and a secondary filled layer at 20% opacity.
 
 ### When to use duotone
 
@@ -221,11 +245,13 @@ The `duotone` weight is unique to Phosphor — each icon has a primary stroke la
 
 ### Custom duotone opacity
 
-Phosphor applies 20% opacity to the secondary layer by default. This can be customised via CSS:
+Phosphor applies 20% opacity to the secondary layer by default. This can be
+customised via CSS:
 
 ```css
 --icon-duotone-opacity: 0.2; /* default */
-```
+
+```text
 
 ---
 
@@ -233,13 +259,15 @@ Phosphor applies 20% opacity to the secondary layer by default. This can be cust
 
 ### ARIA attributes
 
-Phosphor icons include `aria-hidden="true"` by default — correct for most decorative usage.
+Phosphor icons include `aria-hidden="true"` by default — correct for most
+decorative usage.
 
 For **informational icons** (conveying meaning without adjacent text):
 
 ```tsx
 <Warning size={20} weight="fill" aria-label="Warning" aria-hidden={false} />
-```
+
+```text
 
 ### Minimum sizes per weight
 
@@ -254,13 +282,16 @@ For **informational icons** (conveying meaning without adjacent text):
 
 ### Touch targets (WCAG 2.5.5)
 
-Interactive icons (clickable) must have a minimum touch target of **44×44px**. Achieve this via padding on the parent button element, not by inflating the icon size:
+Interactive icons (clickable) must have a minimum touch target of **44×44px**.
+Achieve this via padding on the parent button element, not by inflating the icon
+size:
 
 ```tsx
 <button className="scroll-to-top__btn"> {/* 44×44px min */}
   <ArrowUp size={24} weight="regular" aria-hidden="true" />
 </button>
-```
+
+```text
 
 ---
 
@@ -273,6 +304,7 @@ Interactive icons (clickable) must have a minimum touch target of **44×44px**. 
 | ❌ Missing | 1 (Blend) |
 
 For the complete mapping table, see:
+
 - [Phosphor migration report](../../reports/phosphor-migration/full-audit-report.md)
 - [Phosphor icons dev tool](/dev-tools/phosphor-icons) — live side-by-side comparison
 

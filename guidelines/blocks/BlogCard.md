@@ -1,6 +1,6 @@
 # BlogCard Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 ---
@@ -8,6 +8,7 @@
 ## Purpose
 
 The BlogCard is a **content preview block** for blog posts. It combines:
+
 - Featured image display
 - Post title and excerpt
 - Publication metadata (date, reading time, category)
@@ -24,7 +25,7 @@ The BlogCard is a **content preview block** for blog posts. It combines:
   <div className="[image-wrapper]">
     <img src={post.featuredImage.url} alt={post.title} />
   </div>
-  
+
   {/* Card Content */}
   <div className="[content-container]">
     {/* Metadata Row */}
@@ -34,29 +35,31 @@ The BlogCard is a **content preview block** for blog posts. It combines:
       </time>
       <span>{post.readingTime} min read</span>
     </div>
-    
+
     {/* Category Badge */}
     <span className="[category-badge]">{post.category}</span>
-    
+
     {/* Title */}
     <h3 className="[title]">{post.title}</h3>
-    
+
     {/* Excerpt */}
     <p className="[excerpt]">{post.excerpt}</p>
-    
+
     {/* Read More Button */}
     <button onClick={() => navigate(post.slug)}>
       Read More <ArrowRight />
     </button>
   </div>
 </article>
-```
+
+```text
 
 ---
 
 ## Container Styles
 
 ### Card Container
+
 ```tsx
 className="
   group
@@ -69,9 +72,11 @@ className="
   flex flex-col
   h-full
 "
-```
+
+```text
 
 ### Image Wrapper
+
 ```tsx
 className="
   relative
@@ -80,9 +85,11 @@ className="
   overflow-hidden
   bg-gray-100
 "
-```
+
+```text
 
 ### Image
+
 ```tsx
 className="
   w-full h-full
@@ -90,7 +97,8 @@ className="
   group-hover:scale-105                            // Zoom on hover
   transition-transform duration-500
 "
-```
+
+```text
 
 ---
 
@@ -111,14 +119,15 @@ className="
       {formatDate(post.publishedDate)}
     </time>
   </div>
-  
+
   {/* Reading Time */}
   <div className="flex items-center gap-1">
     <Clock className="w-4 h-4" />
     <span>{post.readingTime} min read</span>
   </div>
 </div>
-```
+
+```text
 
 ### 2. Category Badge
 
@@ -134,7 +143,8 @@ className="
   <Tag className="w-3 h-3" />
   {post.category}
 </span>
-```
+
+```text
 
 ### 3. Title
 
@@ -149,7 +159,8 @@ className="
 ">
   {post.title}
 </h3>
-```
+
+```text
 
 ### 4. Excerpt
 
@@ -164,7 +175,8 @@ className="
 ">
   {post.excerpt}
 </p>
-```
+
+```text
 
 ### 5. Read More Button
 
@@ -182,22 +194,26 @@ className="
   Read More
   <ArrowRight className="w-4 h-4" />
 </button>
-```
+
+```text
 
 ---
 
 ## Accessibility
 
 ### Semantic HTML
+
 ```tsx
 <article>
   <time dateTime={isoDate}>{formattedDate}</time>
   <h3>{title}</h3>
   <p>{excerpt}</p>
 </article>
-```
+
+```text
 
 ### ARIA Labels
+
 ```tsx
 <button
   aria-label={`Read more about ${post.title}`}
@@ -205,7 +221,8 @@ className="
 >
   Read More
 </button>
-```
+
+```text
 
 ---
 
@@ -228,5 +245,5 @@ className="
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

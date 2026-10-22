@@ -3,13 +3,16 @@
 **Version:** 2.0.0
 **Last Updated:** March 4, 2026
 **Source of truth:** `/routes.ts` (82 routes)
-**Router:** Custom lightweight router at `/lib/router.tsx` (API-compatible with react-router)
+**Router:** Custom lightweight router at `/lib/router.tsx` (API-compatible with
+react-router)
 
 ---
 
 ## 1. Complete route inventory (82 routes)
 
-All routes are flat children of the `RootLayout` component, which provides the persistent Header and Footer shell. Routes are defined in `/routes.ts` and consumed by `RouterProvider` in `/App.tsx`.
+All routes are flat children of the `RootLayout` component, which provides the
+persistent Header and Footer shell. Routes are defined in `/routes.ts` and
+consumed by `RouterProvider` in `/App.tsx`.
 
 ### Home
 
@@ -77,7 +80,8 @@ All routes are flat children of the `RootLayout` component, which provides the p
 | `/videos/tag/:slug` | `VideoTagPage` | `:slug` | Via video tags |
 | `/video/:slug` | `VideoDetailPage` | `:slug` | Via video card |
 
-**Note:** The listing path is `/videos` (plural) but the detail path is `/video/:slug` (singular). This is intentional.
+**Note:** The listing path is `/videos` (plural) but the detail path is
+`/video/:slug` (singular). This is intentional.
 
 ### Podcasts (4 routes)
 
@@ -162,17 +166,20 @@ All routes are flat children of the `RootLayout` component, which provides the p
 ## 2. URL conventions
 
 ### Slug format
+
 - All slugs are **kebab-case** (lowercase, hyphens between words)
 - Generated from the `slug` field in mock data files
 - Example: `"UV blacklight magic"` → `uv-blacklight-magic`
 
 ### URL depth
+
 - Maximum 3 segments: `/{section}/{type}/{slug}`
 - Example: `/portfolio/category/festival`
 - About sub-pages use 2 segments: `/about/{slug}`
 - Dev tools use 2 segments: `/dev-tools/{slug}`
 
 ### Singular vs plural
+
 - **Listing pages** use plural: `/videos`, `/podcasts`, `/events`
 - **Detail pages** use singular for Videos/Podcasts: `/video/:slug`, `/podcast/:slug`
 - **Detail pages** use plural for Blog/Portfolio/Events: `/blog/:slug`, `/portfolio/:slug`, `/events/:slug`
@@ -203,13 +210,16 @@ Dynamic routes resolve their `:slug` parameter from mock data:
 | Categories | `categories[i].slug` | Per-domain `categories.ts` |
 | Tags | `tags[i].slug` | Per-domain `tags.ts` |
 
-Components receiving a `:slug` param use `useParams()` from `/lib/router.tsx` to read it, then look up the matching data entry. If no match is found, the component should redirect to the listing page or show a 404 state.
+Components receiving a `:slug` param use `useParams()` from `/lib/router.tsx` to
+read it, then look up the matching data entry. If no match is found, the
+component should redirect to the listing page or show a 404 state.
 
 ---
 
 ## 4. Breadcrumb patterns
 
-All sub-pages use the `<Breadcrumbs>` component from `/components/ui/Breadcrumbs.tsx`.
+All sub-pages use the `<Breadcrumbs>` component from
+`/components/ui/Breadcrumbs.tsx`.
 
 | Route | Breadcrumb trail |
 |---|---|
@@ -225,13 +235,15 @@ All sub-pages use the `<Breadcrumbs>` component from `/components/ui/Breadcrumbs
 | `/search?q=neon` | Home > Search > "neon" |
 | `/dev-tools/typography` | Home > Developer tools > Typography specimens |
 
-The last breadcrumb item has no `href` (renders as plain text with `aria-current="page"`). Schema.org `BreadcrumbList` JSON-LD is injected automatically.
+The last breadcrumb item has no `href` (renders as plain text with
+`aria-current="page"`). Schema.org `BreadcrumbList` JSON-LD is injected
+automatically.
 
 ---
 
 ## 5. Navigation hierarchy
 
-```
+```text
 Header (Main Nav)
 ├── Home /
 ├── About /about (dropdown with 21 sub-pages)
@@ -262,7 +274,8 @@ Footer
 ├── Sitemap /sitemap
 ├── Style Guide /style-guide
 └── Dev Tools /dev-tools
-```
+
+```text
 
 ---
 
@@ -270,9 +283,13 @@ Footer
 
 ### Custom router
 
-The project uses a **custom lightweight router** at `/lib/router.tsx` instead of the `react-router` npm package. This was built to eliminate the `async_hooks` runtime error caused by react-router v7 server-side code being loaded via esm.sh in the Figma Make environment.
+The project uses a **custom lightweight router** at `/lib/router.tsx` instead of
+the `react-router` npm package. This was built to eliminate the `async_hooks`
+runtime error caused by react-router v7 server-side code being loaded via esm.sh
+in the Figma Make environment.
 
 The custom router exposes the same API surface:
+
 - `createBrowserRouter` — route tree definition
 - `RouterProvider` — renders the matched route
 - `useNavigate` — programmatic navigation
@@ -302,11 +319,15 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-```
+
+```text
 
 ### No lazy loading
 
-All 82 route components are **eagerly imported** at the top of `/routes.ts`. The Figma Make bundler does not reliably support `React.lazy()` or dynamic `import()` for code splitting. This means all page code loads on initial visit, which is acceptable for this project's size.
+All 82 route components are **eagerly imported** at the top of `/routes.ts`. The
+Figma Make bundler does not reliably support `React.lazy()` or dynamic
+`import()` for code splitting. This means all page code loads on initial visit,
+which is acceptable for this project's size.
 
 ---
 
@@ -315,38 +336,51 @@ All 82 route components are **eagerly imported** at the top of `/routes.ts`. The
 ### Static page
 
 1. **Create the component** in `/components/pages/{section}/NewPage.tsx`
+
    - Use named export: `export function NewPage() { ... }`
    - Import and use BEM CSS from `/styles/blocks/new-page.css`
    - Import content from `/data/mock/`
-2. **Create the CSS file** at `/styles/blocks/new-page.css`
+1. **Create the CSS file** at `/styles/blocks/new-page.css`
+
    - Follow BEM naming: `.new-page`, `.new-page__title`, `.new-page--modifier`
-3. **Add SEO data** to `/data/mock/seo.ts`
+1. **Add SEO data** to `/data/mock/seo.ts`
+
    - Add entry to `pageSEO` object: `newPage: { title: '...', description: '...' }`
-4. **Add the route** to `/routes.ts`
+1. **Add the route** to `/routes.ts`
+
    - Import the component at the top of the file
    - Add `{ path: 'new-page', Component: NewPage }` to the `children` array
-5. **Add breadcrumbs** in the component
+1. **Add breadcrumbs** in the component
+
    - Import `Breadcrumbs` from `/components/ui/Breadcrumbs`
    - Add appropriate breadcrumb items
-6. **Add to navigation** if needed
+1. **Add to navigation** if needed
+
    - Update header nav data in `/data/mock/ui/navigation.ts`
    - Update footer links in `/data/mock/ui/footer.ts`
    - Update sitemap data in `/data/mock/ui/sitemap.ts`
-7. **Update this file** with the new route entry
-8. **Verify** the route loads correctly in the prototype
+1. **Update this file** with the new route entry
+
+1. **Verify** the route loads correctly in the prototype
 
 ### Dynamic page (with `:slug`)
 
 Follow all steps above, plus:
+
 1. Define the `:slug` parameter in the route path
-2. In the component, use `useParams()` to read the slug
-3. Look up the matching data entry from mock data
-4. Handle missing slugs gracefully (redirect to listing page or show error state)
-5. Add dynamic SEO using helper functions (e.g., `blogPostSEO()`, `videoSEO()`)
+
+1. In the component, use `useParams()` to read the slug
+
+1. Look up the matching data entry from mock data
+
+1. Handle missing slugs gracefully (redirect to listing page or show error state)
+
+1. Add dynamic SEO using helper functions (e.g., `blogPostSEO()`, `videoSEO()`)
 
 ### Category/tag archive page
 
 Follow the same pattern as existing archives:
+
 - Path format: `/{section}/category/:slug` or `/{section}/tag/:slug`
 - Component reads `:slug` and filters the data array
 - Breadcrumbs show: `Home > Section > Category name`

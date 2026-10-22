@@ -13,6 +13,10 @@ const SECURITY_HEADERS = {
   'x-frame-options': 'DENY',
 }
 
+/**
+ * HTTP probe for a single route; returns status, headers, content type and body.
+ * Does not follow redirects automatically; captures the initial response, including redirects.
+ */
 async function probe(base, path) {
   const res = await fetch(base + path, { redirect: 'manual' })
   const body = await res.text()
@@ -26,6 +30,11 @@ async function probe(base, path) {
   }
 }
 
+/**
+ * Validate caching and security headers on a deployed Netlify site.
+ * Probes HTML routes, hashed assets and public files; checks Content-Type, Cache-Control and security headers.
+ * Returns { results: probes, failures: validation errors }.
+ */
 export async function checkSite(base) {
   const failures = []
   const results = []
@@ -43,8 +52,8 @@ export async function checkSite(base) {
     { path: '/', kind: 'html', status: 200 },
     { path: '/journal', kind: 'html', status: 200 },
     { path: '/about-ash', kind: 'html', status: 200 },
-    { path: '/assets/index-missing0.js', kind: 'fallback' },
-    { path: '/favicon.ico', kind: 'public', status: 200 },
+    { path: '/assets/index-missing0.js', kind: 'fallback', status: 404 },
+    { path: '/favicon.ico', kind: 'public', status: 200, type: /^image\//i },
   ]
   if (scripts.length > 0) probes.push({ path: scripts[0], kind: 'hashed', status: 200, type: /javascript/ })
   if (styles.length > 0) probes.push({ path: styles[0], kind: 'hashed', status: 200, type: /text\/css/ })

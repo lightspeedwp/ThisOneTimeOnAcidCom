@@ -8,9 +8,12 @@
 
 ## Overview
 
-Every content type in the Ash Shaw portfolio has an assigned neon colour used consistently across card accents, badges, tab indicators, FAQ sections, specimen pages, timeline markers, and all other content-type-aware UI components.
+Every content type in the Ash Shaw portfolio has an assigned neon colour used
+consistently across card accents, badges, tab indicators, FAQ sections, specimen
+pages, timeline markers, and all other content-type-aware UI components.
 
-**Single source of truth:** Always import from `/data/mock/ui/content-type-colours.ts` rather than hardcoding hex values.
+**Single source of truth:** Always import from
+`/data/mock/ui/content-type-colours.ts` rather than hardcoding hex values.
 
 ---
 
@@ -31,7 +34,7 @@ Every content type in the Ash Shaw portfolio has an assigned neon colour used co
 
 ## Visual legend
 
-```
+```text
   BLOG         ██████  #FF10F0  Neon Pink      ← Articles, posts, insights
   PORTFOLIO    ██████  #39FF14  Neon Green     ← UV makeup gallery, artwork
   VIDEO        ██████  #1F51FF  Neon Blue      ← Tutorials, showcases, reels
@@ -40,7 +43,8 @@ Every content type in the Ash Shaw portfolio has an assigned neon colour used co
   EBOOK        ██████  #FFFF00  Neon Yellow    ← Book chapters, reading
   STICKERS     ██████  #00F7FF  Neon Cyan      ← Sticker art, graphics
   DEV TOOLS    ██████  #FF3131  Neon Red       ← Internal tools, testing
-```
+
+```text
 
 ---
 
@@ -49,18 +53,21 @@ Every content type in the Ash Shaw portfolio has an assigned neon colour used co
 ### Importing the data
 
 ```typescript
-import { getContentTypeColour, contentTypeColours } from '../data/mock/ui/content-type-colours';
+import { getContentTypeColour, contentTypeColours } from
+'../data/mock/ui/content-type-colours';
 
 // Get a single content type's colour
 var blogColour = getContentTypeColour('blog');
-// → { id: 'blog', hex: '#FF10F0', cssVariable: '--wp--preset--color--neon-pink', ... }
+// → { id: 'blog', hex: '#FF10F0', cssVariable:
+'--wp--preset--color--neon-pink', ... }
 
 // Iterate all content types
 for (var i = 0; i < contentTypeColours.length; i++) {
   var ct = contentTypeColours[i];
   // ct.id, ct.hex, ct.cssVariable, ct.modifier, ct.icon, ct.description
 }
-```
+
+```text
 
 ### BEM class pattern
 
@@ -68,12 +75,12 @@ When styling content-type-aware components, use the modifier segment:
 
 ```css
 /* Tab active states */
-.tabs__tab--active.tabs__tab--blog {
+.tabs_*tab--active.tabs*_tab--blog {
   border-bottom-color: var(--wp--preset--color--neon-pink);
   color: var(--wp--preset--color--neon-pink);
 }
 
-.tabs__tab--active.tabs__tab--portfolio {
+.tabs_*tab--active.tabs*_tab--portfolio {
   border-bottom-color: var(--wp--preset--color--neon-green);
   color: var(--wp--preset--color--neon-green);
 }
@@ -86,7 +93,8 @@ When styling content-type-aware components, use the modifier segment:
 /* Category badge backgrounds */
 .badge--blog { background: var(--wp--preset--color--neon-pink); }
 .badge--portfolio { background: var(--wp--preset--color--neon-green); }
-```
+
+```text
 
 ---
 
@@ -105,6 +113,9 @@ When styling content-type-aware components, use the modifier segment:
 ## Rules
 
 1. **Never hardcode hex values** — Always use CSS variables or import from the data file
-2. **Maintain consistency** — Every piece of UI that varies by content type must use this mapping
-3. **Dark mode safe** — All neon colours are designed for dark (atomic black) backgrounds; use the accessible text variants from `neon-colors.md` for light mode
-4. **New content types** — If a new content type is added, assign a colour from the 8 available neons and add it to `content-type-colours.ts` first
+
+1. **Maintain consistency** — Every piece of UI that varies by content type must use this mapping
+
+1. **Dark mode safe** — All neon colours are designed for dark (atomic black) backgrounds; use the accessible text variants from `neon-colors.md` for light mode
+
+1. **New content types** — If a new content type is added, assign a colour from the 8 available neons and add it to `content-type-colours.ts` first

@@ -9,14 +9,22 @@
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Site Architecture](#site-architecture)
-3. [Complete Route Table](#complete-route-table)
-4. [Navigation Structure](#navigation-structure)
-5. [URL Structure](#url-structure)
-6. [Routing Implementation](#routing-implementation)
-7. [SEO & Meta](#seo--meta)
-8. [Breadcrumbs](#breadcrumbs)
-9. [Navigation Components](#navigation-components)
+
+1. [Site Architecture](#site-architecture)
+
+1. [Complete Route Table](#complete-route-table)
+
+1. [Navigation Structure](#navigation-structure)
+
+1. [URL Structure](#url-structure)
+
+1. [Routing Implementation](#routing-implementation)
+
+1. [SEO & Meta](#seo--meta)
+
+1. [Breadcrumbs](#breadcrumbs)
+
+1. [Navigation Components](#navigation-components)
 
 ---
 
@@ -24,15 +32,18 @@
 
 ### Site Type
 
-**Single Page Application (SPA)** with client-side routing via React Router (Data mode).
+**Single Page Application (SPA)** with client-side routing via React Router
+(Data mode).
 
 **Technology:**
+
 - React Router `createBrowserRouter` (client-side, Data mode)
 - `RootLayout` shell with `<Outlet />` for child routes
 - `useNavigate()` and `<Link>` for programmatic and declarative navigation
 - Scroll restoration on route change
 
 **Key Features:**
+
 - Fast page transitions (no full page reloads)
 - Persistent Header/Footer via `RootLayout`
 - Deep linking support (real URL paths)
@@ -45,7 +56,7 @@
 
 ### Visual Sitemap
 
-```
+```text
                         Home Page (/)
                         Hero, Featured work, Blog preview
                                 |
@@ -98,7 +109,8 @@
     |        |       |
   Terms  Privacy  Sitemap
   /terms /privacy /sitemap
-```
+
+```text
 
 ---
 
@@ -198,16 +210,23 @@ All accessible from main navigation:
 **Location:** Header (persistent via `RootLayout`)
 
 **Menu Items** (from `/data/mock/ui/navigation.ts`):
+
 1. **Home** `/`
-2. **About** `/about`
-3. **Portfolio** `/portfolio`
-4. **Videos** `/videos`
-5. **Blog** `/blog`
-6. **Contact** `/contact`
+
+1. **About** `/about`
+
+1. **Portfolio** `/portfolio`
+
+1. **Videos** `/videos`
+
+1. **Blog** `/blog`
+
+1. **Contact** `/contact`
 
 ### Footer Navigation
 
 **Links:**
+
 - Social media (Instagram, YouTube)
 - Legal pages (Terms, Privacy, Sitemap)
 - Contact link
@@ -219,7 +238,8 @@ All accessible from main navigation:
 ### URL Patterns
 
 **Static Pages:**
-```
+
+```text
 /about
 /portfolio
 /blog
@@ -232,18 +252,22 @@ All accessible from main navigation:
 /search
 /style-guide
 /dev-tools
-```
 
-**Dynamic Detail Pages:**
-```
+```text
+
+## Dynamic Detail Pages
+
+```text
 /blog/festival-makeup-survival-guide
 /portfolio/lost-paradise-thailand
 /video/neon-uv-tutorial
 /podcast/episode-one
-```
+
+```text
 
 **Taxonomy Archives:**
-```
+
+```text
 /blog/category/tutorials
 /blog/tag/festival-art
 /portfolio/category/face-paint
@@ -252,13 +276,16 @@ All accessible from main navigation:
 /videos/tag/uv-paint
 /podcasts/category/interviews
 /podcasts/tag/berlin
-```
+
+```text
 
 **Query Parameters:**
-```
+
+```text
 /blog?category=tutorials
 /search?q=neon+paint
-```
+
+```text
 
 ### URL Best Practices
 
@@ -300,7 +327,8 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-```
+
+```text
 
 **Entry Point:** `/App.tsx`
 
@@ -311,13 +339,15 @@ import { router } from './routes';
 export default function App() {
   return <RouterProvider router={router} />;
 }
-```
+
+```text
 
 ### RootLayout
 
 **File:** `/components/common/RootLayout.tsx`
 
-Provides the persistent Header/Footer shell with `<Outlet />` for child page content. All page components render inside the outlet.
+Provides the persistent Header/Footer shell with `<Outlet />` for child page
+content. All page components render inside the outlet.
 
 ---
 
@@ -325,11 +355,14 @@ Provides the persistent Header/Footer shell with `<Outlet />` for child page con
 
 ### Centralised SEO System
 
-**Single Source Utility:** `/utils/seo.ts` exports `setSEO()` which sets `document.title`, `<meta description>`, Open Graph, and Twitter Card tags.
+**Single Source Utility:** `/utils/seo.ts` exports `setSEO()` which sets
+`document.title`, `<meta description>`, Open Graph, and Twitter Card tags.
 
-**Single Source Data:** `/data/mock/seo.ts` exports SEO data for all 46 page components.
+**Single Source Data:** `/data/mock/seo.ts` exports SEO data for all 46 page
+components.
 
 **Usage:**
+
 ```tsx
 import { setSEO } from '../../../utils/seo';
 import { pageSEO } from '../../../data/mock/seo';
@@ -337,13 +370,16 @@ import { pageSEO } from '../../../data/mock/seo';
 useEffect(() => {
   setSEO(pageSEO.about);
 }, []);
-```
+
+```text
 
 **Dynamic pages** use helper functions:
+
 ```tsx
 import { blogPostSEO } from '../../../data/mock/seo';
 setSEO(blogPostSEO(post.title, post.excerpt));
-```
+
+```text
 
 ### Schema.org Structured Data
 
@@ -374,6 +410,7 @@ Provides builder functions and inject/cleanup utilities for JSON-LD schemas:
 **CSS:** `/styles/blocks/breadcrumbs.css` (imported by the component)
 
 **Rules:**
+
 - All breadcrumbs MUST use this single component
 - Never create inline breadcrumb markup
 - Never render `<Breadcrumbs>` more than once per page
@@ -390,11 +427,14 @@ import { Breadcrumbs } from '../../ui/Breadcrumbs';
   { label: 'Developer Tools', href: '/dev-tools' },
   { label: 'Typography Specimens' },
 ]} />
-```
+
+```text
 
 ### Coverage
 
-All sub-pages and dev-tools pages include breadcrumbs. Main landing pages (Home, Portfolio, Blog, Videos, Podcasts) do not use breadcrumbs since they are top-level.
+All sub-pages and dev-tools pages include breadcrumbs. Main landing pages (Home,
+Portfolio, Blog, Videos, Podcasts) do not use breadcrumbs since they are
+top-level.
 
 **Dev-Tools pattern:** `Home > Developer Tools > {Page Name}`
 **Taxonomy pattern:** `Home > {Section} > {Category/Tag Name}`
@@ -409,6 +449,7 @@ All sub-pages and dev-tools pages include breadcrumbs. Main landing pages (Home,
 **File:** `/components/common/Header.tsx`
 
 Features:
+
 - Logo (links to home)
 - Primary navigation from `/data/mock/ui/navigation.ts`
 - Mobile hamburger menu toggle
@@ -420,6 +461,7 @@ Features:
 **File:** `/components/common/MobileMenu.tsx`
 
 Features:
+
 - Full-screen overlay with CSS animation (no motion/react)
 - Touch-friendly buttons (min 44px targets)
 - Close on navigation, close button, or escape key
@@ -431,6 +473,7 @@ Features:
 **File:** `/components/ui/ScrollToTop.tsx`
 
 Features:
+
 - Floating button (bottom-right)
 - Appears after scrolling past threshold
 - Smooth scroll animation

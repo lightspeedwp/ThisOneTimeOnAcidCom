@@ -6,4 +6,5 @@ slug: berlin-bicycles
 title: "Berlin, bicycles, and becoming visible"
 tags: [travel, berlin, bicycles, visibility, movement]
 ---
-Dispatches from a summer of movement, techno, and rediscovering the physical self.
+Dispatches from a summer of movement, techno, and rediscovering the physical
+self.

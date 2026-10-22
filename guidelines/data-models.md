@@ -8,11 +8,13 @@
 
 ## 1. Overview
 
-All content is stored as TypeScript mock data in `/data/mock/`. Types are defined in `/data/types/`. Every piece of text, image URL, and configuration value used in components must be imported from these files - never hardcoded.
+All content is stored as TypeScript mock data in `/data/mock/`. Types are
+defined in `/data/types/`. Every piece of text, image URL, and configuration
+value used in components must be imported from these files - never hardcoded.
 
 ### File Locations
 
-```
+```text
 /data/
   types/
     index.ts              # Barrel export for all types
@@ -40,7 +42,8 @@ All content is stored as TypeScript mock data in `/data/mock/`. Types are define
     sections/             # Section content (FAQ, countdown)
     testimonials/         # Testimonial entries
     ui/                   # UI string content (navigation, blog UI, branding, etc.)
-```
+
+```text
 
 ---
 
@@ -136,7 +139,8 @@ All content is stored as TypeScript mock data in `/data/mock/`. Types are define
 
 Portfolio categories are string unions defined on `PortfolioEntry.category`:
 
-`'Festival Makeup' | 'UV Makeup' | 'Nail Art' | 'Portrait' | 'Special Effects' | 'Body Art'`
+`'Festival Makeup' | 'UV Makeup' | 'Nail Art' | 'Portrait' | 'Special Effects' |
+'Body Art'`
 
 ---
 
@@ -182,7 +186,8 @@ interface Podcast {
   transcript?: string;
   guests?: { name: string; role: string }[];
 }
-```
+
+```text
 
 ### SearchResult (to be created)
 
@@ -199,13 +204,14 @@ interface SearchResult {
   date?: string;
   relevanceScore: number;
 }
-```
+
+```text
 
 ---
 
 ## 6. Relationships
 
-```
+```text
 BlogPost ──────> BlogCategory (via category string)
 BlogPost ──────> BlogAuthor (optional embedded)
 BlogPost ──────> string[] (tags)
@@ -215,7 +221,8 @@ PortfolioEntry ──> string (category)
 PortfolioEntry ──> string[] (tags)
 
 Video ──────────> string (category)
-```
+
+```text
 
 ---
 
@@ -224,27 +231,40 @@ Video ──────────> string (category)
 ### Adding a Blog Post
 
 1. Open `/data/mock/blog/posts.ts`
-2. Add a new `BlogPost` object to the `blogPosts` array
-3. Ensure `id` and `slug` are unique
-4. Add a `featuredImage` with proper alt text
-5. Write content in markdown format
+
+1. Add a new `BlogPost` object to the `blogPosts` array
+
+1. Ensure `id` and `slug` are unique
+
+1. Add a `featuredImage` with proper alt text
+
+1. Write content in markdown format
 
 ### Adding a Portfolio Entry
 
 1. Choose the appropriate file (e.g., `festivals.ts`, `uv-makeup.ts`)
-2. Add a new `PortfolioEntry` object
-3. Add images to the `images` array with proper alt text
-4. Set `featured: true` if it should appear on the homepage
-5. Set `order` for sort priority
+
+1. Add a new `PortfolioEntry` object
+
+1. Add images to the `images` array with proper alt text
+
+1. Set `featured: true` if it should appear on the homepage
+
+1. Set `order` for sort priority
 
 ### Adding a New Content Type
 
 1. Create type interface in `/data/types/new-type.ts`
-2. Export from `/data/types/index.ts`
-3. Create mock data in `/data/mock/new-type/`
-4. Create barrel export in `/data/mock/new-type/index.ts`
-5. Export from `/data/mock/index.ts`
-6. Create UI strings in `/data/mock/ui/new-type.ts`
+
+1. Export from `/data/types/index.ts`
+
+1. Create mock data in `/data/mock/new-type/`
+
+1. Create barrel export in `/data/mock/new-type/index.ts`
+
+1. Export from `/data/mock/index.ts`
+
+1. Create UI strings in `/data/mock/ui/new-type.ts`
 
 ---
 

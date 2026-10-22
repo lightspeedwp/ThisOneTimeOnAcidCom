@@ -1,15 +1,16 @@
 # Specification Quality Checklist — TOA-241
 
-**Feature**: Repository Governance Layout & Agentic Workflows  
-**Specification**: `001-repo-governance-layout-and-agentic-workflows/spec.md`  
-**Created**: 2026-10-17  
-**Status**: Specification complete; ready for clarification phase  
+**Feature**: Repository Governance Layout & Agentic Workflows
+**Specification**: `001-repo-governance-layout-and-agentic-workflows/spec.md`
+**Created**: 2026-10-17
+**Status**: Specification complete; ready for clarification phase
 
 ---
 
 ## Specification Completeness
 
 ### Structure & Format
+
 - [x] Specification uses installed template structure
 - [x] Title, metadata, owner, status clearly stated at top
 - [x] Outcomes & value section explains why this specification exists
@@ -24,6 +25,7 @@
 ### Requirement Coverage
 
 #### R1. Folder Layout & Path Conventions (6 requirements)
+
 - [x] R1.1 — Current path inventory and classification
 - [x] R1.2 — Spec Kit output routing (SPEC-001: `.github/specs/` canonical)
 - [x] R1.3 — Documentation consolidation (docs/, guidelines/, CHANGELOG.md)
@@ -32,22 +34,26 @@
 - [x] R1.6 — Scripts at root `scripts/` (no `.github/scripts/`)
 
 #### R2. Package Management (3 requirements)
+
 - [x] R2.1 — npm-only enforcement (PKG-001 approved decision)
 - [x] R2.2 — Remove pnpm artefacts during implementation
 - [x] R2.3 — Dependency validation (package.json ↔ package-lock.json)
 
 #### R3. Node.js Pinning (3 requirements)
+
 - [x] R3.1 — Pin to Node.js 24 LTS (NODE-001 approved decision)
 - [x] R3.2 — Add `.nvmrc` and `engines` field
 - [x] R3.3 — Document in README and CI
 
 #### R4. Testing Infrastructure (4 requirements)
+
 - [x] R4.1 — Jest ESM configuration (TEST-001: @swc/core)
 - [x] R4.2 — Accept speckit baseline 103/104 (TEST-002 approved decision)
 - [x] R4.3 — Test discovery (unit, build, e2e, speckit)
 - [x] R4.4 — Playwright and Bats integration
 
 #### R5. GitHub Governance (5 requirements)
+
 - [x] R5.1 — GitHub Discussions enable with templates (GH-001 approved decision)
 - [x] R5.2 — PR templates (local, workflow-specific) (GH-002 approved decision)
 - [x] R5.3 — Issue templates and taxonomy
@@ -55,22 +61,26 @@
 - [x] R5.5 — Saved replies and contributor setup
 
 #### R6. CI/CD Workflows (4 requirements)
+
 - [x] R6.1 — Implementation workflows (8 workflows documented)
 - [x] R6.2 — Evaluation workflows (6 workflows documented)
 - [x] R6.3 — Deferred workflows (3 workflows documented)
 - [x] R6.4 — Deterministic quality gates (code, spec, config, branch validation)
 
 #### R7. Agentic Workflows (4 requirements)
+
 - [x] R7.1 — Agent inventory and contract specification
 - [x] R7.2 — Anthropic reference assessment
 - [x] R7.3 — Agent budget controls (TOA-271 owned separately)
 - [x] R7.4 — Skill runtime routing
 
 #### R8. Styling Rules (2 requirements)
+
 - [x] R8.1 — BEM-only enforcement (STYLE-001 approved decision)
 - [x] R8.2 — Tailwind dependency removal
 
 #### R9. Spec Kit Integration (2 requirements)
+
 - [x] R9.1 — Feature directory routing and path resolution
 - [x] R9.2 — Regression testing (create → plan → tasks pipeline)
 
@@ -120,6 +130,7 @@
 ### Source References (27 total)
 
 #### Implementation Workflows (8)
+
 - [x] lint.yml — code quality gates
 - [x] tests.yml — test execution
 - [x] documentation.yml — doc validation
@@ -130,6 +141,7 @@
 - [x] pr-template-routing.yml — template assignment by branch
 
 #### Evaluation Workflows (6)
+
 - [x] validate-specifications.yml — spec syntax/content
 - [x] claude-guard-tests.yml — AI-driven test quality
 - [x] locked-files-guard.yml — protected file detection
@@ -138,11 +150,13 @@
 - [x] ai-feedback.yml — feedback collection
 
 #### Deferred Workflows (3)
+
 - [x] branch-validation-metrics-aggregator.yml — metrics collection
 - [x] keep-pr-current.yml — base branch sync
 - [x] label-drift-check.yml — label taxonomy audit
 
 #### Anthropic Platforms (7)
+
 - [x] Claude API (Messages)
 - [x] Claude API Tool Runner
 - [x] Managed Agents
@@ -152,6 +166,7 @@
 - [x] MCP (Model Context Protocol)
 
 #### Repositories (3)
+
 - [x] lightspeedwp/ThisOneTimeOnAcidCom (primary)
 - [x] lightspeedwp/.github (org control plane)
 - [x] anthropics/github-spec-kit (reference)
@@ -163,12 +178,14 @@
 ## Verification Requirements
 
 ### Migration Integrity
+
 - [ ] Path consumers identified and updated in workflows, agents, documentation
 - [ ] Conditional migrations preserve content, archives, protected files
 - [ ] Verification and rollback procedure documented for each major move
 - [ ] Managed integrations (.specify/, .gemini/) remain functional post-migration
 
 ### Application Behaviour
+
 - [ ] `npm run build` succeeds without errors or warnings post-migration
 - [ ] `npm run dev` starts Vite dev server and serves app on localhost
 - [ ] All routes serve correct pages; SPA fallback works
@@ -177,12 +194,14 @@
 - [ ] No Supabase integration exposed or activated
 
 ### Documentation
+
 - [ ] AGENTS.md updated with resolved decisions (Node.js version, package manager, Tailwind)
 - [ ] CONTRIBUTING.md reflects new PR template routing and branch naming
 - [ ] README.md documents npm-only setup and Node.js 24 requirement
 - [ ] Guidelines remain read-only and Figma-Make-compatible
 
 ### Test Discovery
+
 - [ ] `npm run test:unit` runs Jest with ESM support; all tests discovered
 - [ ] `npm run test:build` runs Bats build verification
 - [ ] `npm run test:e2e` discovers Playwright tests
@@ -190,12 +209,14 @@
 - [ ] All test runners report clear pass/fail status
 
 ### Spec Kit Routing
+
 - [ ] Feature directories created at `.github/specs/{NNN-feature}/` following sequence
 - [ ] `spec.md`, `plan.md`, `tasks.md` pipeline works end-to-end
 - [ ] Regression test confirms create → plan → tasks progression
 - [ ] No new specs created at root; no duplicate numbering
 
 ### CI-CD Stability
+
 - [ ] Implementation workflows (8) run correctly; PR templates route by branch
 - [ ] Evaluation workflows (6) validate specs, configs, locked files without false positives
 - [ ] Deferred workflows remain disabled until owner enables
@@ -206,18 +227,22 @@
 
 ## Approval & Sign-Off
 
-**Specification Created**: 2026-10-17  
-**Owner Approval**: [ ] @ashley (pending)  
-**Clarification Phase**: [x] Complete (all 3 unresolved questions answered)  
-**Planning Phase**: [ ] Ready (after clarification approval)  
+**Specification Created**: 2026-10-17
+**Owner Approval**: [ ] @ashley (pending)
+**Clarification Phase**: [x] Complete (all 3 unresolved questions answered)
+**Planning Phase**: [ ] Ready (after clarification approval)
 
 ---
 
 ## Next Steps
 
 1. ✅ **Clarification Phase** (`/speckit-clarify`) — All 3 questions answered (Q1→B, Q2→B, Q3→A)
-2. **Planning Phase** (`/speckit-plan`) — Generate implementation plan and research
-3. **Task Decomposition** (`/speckit-tasks`) — Break planning into actionable tasks
-4. **Implementation PRs** — Create focused PRs for 5 workstreams (TOA-254, TOA-260, TOA-261, TOA-262, and TOA-271 dependencies)
 
-**Clarification phase complete. Proceed to `/speckit-plan` for implementation strategy.**
+1. **Planning Phase** (`/speckit-plan`) — Generate implementation plan and research
+
+1. **Task Decomposition** (`/speckit-tasks`) — Break planning into actionable tasks
+
+1. **Implementation PRs** — Create focused PRs for 5 workstreams (TOA-254, TOA-260, TOA-261, TOA-262, and TOA-271 dependencies)
+
+**Clarification phase complete. Proceed to `/speckit-plan` for implementation
+strategy.**

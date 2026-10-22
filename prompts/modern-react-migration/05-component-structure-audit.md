@@ -7,14 +7,17 @@ version: "1.0.0"
 prompt_type: "sub-prompt"
 parent_orchestrator: "/prompts/modern-react-migration/00-ORCHESTRATOR.md"
 estimated_duration: "30 minutes"
-output_report: "/reports/2026-03-11-modern-react-migration/05-component-structure-audit.md"
+output_report:
+"/reports/2026-03-11-modern-react-migration/05-component-structure-audit.md"
 ---
 
 # Sub-Prompt 05: Component Structure Audit
 
 ## Purpose
 
-Audit component file organization, naming conventions, separation of concerns, and opportunities for reuse. This ensures the codebase follows React best practices for maintainability and scalability.
+Audit component file organization, naming conventions, separation of concerns,
+and opportunities for reuse. This ensures the codebase follows React best
+practices for maintainability and scalability.
 
 ---
 
@@ -22,14 +25,15 @@ Audit component file organization, naming conventions, separation of concerns, a
 
 Scan ALL component-related files:
 
-```
+```text
 /components/
 /pages/
 /hooks/
 /utils/
 /lib/
 App.tsx
-```
+
+```text
 
 ---
 
@@ -38,6 +42,7 @@ App.tsx
 ### 1. File Organization
 
 **Check for:**
+
 - ✅ Proper folder structure (common, pages, sections, ui)
 - ✅ Components grouped by feature/domain
 - ✅ Consistent file naming (PascalCase for components)
@@ -46,12 +51,14 @@ App.tsx
 - ❌ Deeply nested folder structures (>3 levels)
 
 **Document:**
+
 - Components in wrong locations
 - Folder structure recommendations
 - Naming inconsistencies
 
 **Example Findings:**
-```
+
+```text
 ✅ WELL ORGANIZED:
 /components/common/Header.tsx
 /components/pages/HomePage.tsx
@@ -61,13 +68,15 @@ App.tsx
 /components/HeaderComponent.tsx     → Should be /components/common/Header.tsx
 /pages/HomePageContent.tsx          → Should be /components/pages/HomePage.tsx
 /Button.tsx                         → Should be /components/ui/Button.tsx
-```
+
+```text
 
 ---
 
 ### 2. Component Size and Complexity
 
 **Check for:**
+
 - ✅ Components under 300 lines
 - ✅ Single Responsibility Principle followed
 - ✅ Complex logic extracted into hooks
@@ -76,12 +85,14 @@ App.tsx
 - ❌ Inline business logic (should be in utils/hooks)
 
 **Document:**
+
 - Components that should be split
 - Component line counts
 - Opportunities to extract logic
 
 **Example Findings:**
-```
+
+```text
 ❌ TOO LARGE:
 HomePage.tsx (450 lines)
   → Split into: HomePage.tsx + HeroSection.tsx + FeaturedWork.tsx
@@ -89,13 +100,15 @@ HomePage.tsx (450 lines)
 ❌ MULTIPLE RESPONSIBILITIES:
 PortfolioCard.tsx (handles data fetching + rendering + state)
   → Extract: usePortfolioData hook + PortfolioCard (presentation only)
-```
+
+```text
 
 ---
 
 ### 3. Component Naming Conventions
 
 **Check for:**
+
 - ✅ PascalCase for component files
 - ✅ Descriptive names matching purpose
 - ✅ Consistent naming across similar components
@@ -104,12 +117,14 @@ PortfolioCard.tsx (handles data fetching + rendering + state)
 - ❌ Abbreviations (Btn vs Button)
 
 **Document:**
+
 - Components with unclear names
 - Naming pattern recommendations
 - Renamings needed
 
 **Example Findings:**
-```
+
+```text
 ✅ GOOD NAMES:
 PortfolioCard.tsx
 BlogPostPreview.tsx
@@ -119,13 +134,15 @@ NavigationMenu.tsx
 Card.tsx                → Should be PortfolioCard.tsx or BlogCard.tsx
 Item.tsx                → Should be GalleryItem.tsx or ListItem.tsx
 Container.tsx           → Should be ContentContainer.tsx or PageWrapper.tsx
-```
+
+```text
 
 ---
 
 ### 4. Separation of Concerns
 
 **Check for:**
+
 - ✅ Presentation components (UI only)
 - ✅ Container components (logic only)
 - ✅ Business logic in utils/services
@@ -135,12 +152,14 @@ Container.tsx           → Should be ContentContainer.tsx or PageWrapper.tsx
 - ❌ Complex calculations in render
 
 **Document:**
+
 - Components violating separation of concerns
 - Logic that should be extracted
 - Opportunities for custom hooks
 
 **Example Findings:**
-```
+
+```text
 ✅ WELL SEPARATED:
 /components/ui/Button.tsx              (presentation)
 /hooks/usePortfolioData.ts             (data fetching)
@@ -149,16 +168,19 @@ Container.tsx           → Should be ContentContainer.tsx or PageWrapper.tsx
 ❌ MIXED CONCERNS:
 /components/PortfolioGallery.tsx       (fetch + render + state + validation)
   → Split into:
+
     - usePortfolioGallery hook (data + state)
     - portfolioService (validation)
     - PortfolioGallery (presentation)
-```
+
+```text
 
 ---
 
 ### 5. Component Reusability
 
 **Check for:**
+
 - ✅ Generic components in `/components/ui/`
 - ✅ Configurable props (not hardcoded)
 - ✅ Composition over inheritance
@@ -167,12 +189,14 @@ Container.tsx           → Should be ContentContainer.tsx or PageWrapper.tsx
 - ❌ Over-specific components
 
 **Document:**
+
 - Duplicate patterns that should be unified
 - Components that should be made reusable
 - New reusable components to create
 
 **Example Findings:**
-```
+
+```text
 ❌ DUPLICATE PATTERNS:
 BlogCard.tsx + PortfolioCard.tsx + VideoCard.tsx
   → All share 80% same structure
@@ -186,13 +210,15 @@ BlogCard.tsx + PortfolioCard.tsx + VideoCard.tsx
 ✅ GOOD REUSABILITY:
 <Card variant="blog" image={img} title={title} />
 <Card variant="portfolio" image={img} title={title} />
-```
+
+```text
 
 ---
 
 ### 6. Export Patterns
 
 **Check for:**
+
 - ✅ Named exports for components
 - ✅ Barrel exports (index.tsx files)
 - ✅ Type exports for shared interfaces
@@ -201,12 +227,14 @@ BlogCard.tsx + PortfolioCard.tsx + VideoCard.tsx
 - ❌ Inconsistent export styles
 
 **Document:**
+
 - Components using default exports
 - Missing barrel exports
 - Opportunities for cleaner imports
 
 **Example Findings:**
-```
+
+```text
 ✅ GOOD EXPORTS:
 // Button.tsx
 export function Button(props) { ... }
@@ -222,13 +250,15 @@ export default function Card() { ... }  → Should be named export
 
 // No barrel export in /components/ui/
 → Create index.tsx for cleaner imports
-```
+
+```text
 
 ---
 
 ### 7. TypeScript Interface Organization
 
 **Check for:**
+
 - ✅ Interfaces defined with components
 - ✅ Shared types in `/data/types/`
 - ✅ Proper prop interface naming (ComponentProps)
@@ -237,12 +267,14 @@ export default function Card() { ... }  → Should be named export
 - ❌ Inconsistent interface naming
 
 **Document:**
+
 - Duplicate interfaces to consolidate
 - Shared types to extract
 - Interface naming inconsistencies
 
 **Example Findings:**
-```
+
+```text
 ✅ WELL ORGANIZED:
 /components/ui/Button.tsx
   → export type ButtonProps = { ... }
@@ -259,13 +291,15 @@ BlogCard.tsx ALSO defines PortfolioEntry type
 ButtonProps ✅
 CardProperties ❌ (should be CardProps)
 InputInterface ❌ (should be InputProps)
-```
+
+```text
 
 ---
 
 ### 8. Custom Hooks Organization
 
 **Check for:**
+
 - ✅ Hooks in `/hooks/` directory
 - ✅ Proper naming (`use*`)
 - ✅ Single responsibility per hook
@@ -274,12 +308,14 @@ InputInterface ❌ (should be InputProps)
 - ❌ Missing hook extraction opportunities
 
 **Document:**
+
 - Inline hooks to extract
 - Hooks that should be split
 - New hooks to create
 
 **Example Findings:**
-```
+
+```text
 ✅ GOOD HOOKS:
 /hooks/usePortfolioData.ts          (data fetching)
 /hooks/useScrollPosition.ts         (scroll tracking)
@@ -292,13 +328,15 @@ HomePage.tsx defines usePageData hook inline
 ❌ MULTI-PURPOSE:
 useAppState.ts (handles auth + theme + data + navigation)
   → Split into: useAuth + useTheme + useAppData + useNavigation
-```
+
+```text
 
 ---
 
 ### 9. Component Dependencies
 
 **Check for:**
+
 - ✅ Minimal coupling between components
 - ✅ Props over context (when appropriate)
 - ✅ Clear dependency chains
@@ -307,12 +345,14 @@ useAppState.ts (handles auth + theme + data + navigation)
 - ❌ Unnecessary prop drilling (>3 levels)
 
 **Document:**
+
 - Circular dependencies to break
 - Tightly coupled components
 - Prop drilling to eliminate
 
 **Example Findings:**
-```
+
+```text
 ❌ CIRCULAR DEPENDENCY:
 Header.tsx → imports NavigationMenu.tsx
 NavigationMenu.tsx → imports Header.tsx
@@ -321,13 +361,15 @@ NavigationMenu.tsx → imports Header.tsx
 ❌ PROP DRILLING:
 App → HomePage → HeroSection → Button (passing theme through 3 levels)
   → Use context or lift state
-```
+
+```text
 
 ---
 
 ### 10. Component Documentation
 
 **Check for:**
+
 - ✅ JSDoc comments on all components
 - ✅ Prop descriptions in interfaces
 - ✅ Example usage in comments
@@ -336,14 +378,17 @@ App → HomePage → HeroSection → Button (passing theme through 3 levels)
 - ❌ No usage examples
 
 **Document:**
+
 - Undocumented components
 - Missing JSDoc comments
 - Components needing usage examples
 
 **Example Findings:**
-```
+
+```text
 ✅ WELL DOCUMENTED:
 /**
+
  * Primary button component for user actions
  * @param {ButtonProps} props - Button properties
  * @example
@@ -355,32 +400,36 @@ export function Button(props: ButtonProps) { ... }
 
 ❌ UNDOCUMENTED:
 export function Card(props) { ... }  // No JSDoc, no prop types
-```
+
+```text
 
 ---
 
 ## Report Structure
 
-Save findings to: `/reports/2026-03-11-modern-react-migration/05-component-structure-audit.md`
+Save findings to:
+`/reports/2026-03-11-modern-react-migration/05-component-structure-audit.md`
 
 Use this template:
 
 ```markdown
 ---
 title: "Component Structure Audit Report"
-filename: "/reports/2026-03-11-modern-react-migration/05-component-structure-audit.md"
+filename:
+"/reports/2026-03-11-modern-react-migration/05-component-structure-audit.md"
 created: "2026-03-11"
 completed: "[DATE]"
 version: "1.0.0"
 status: "complete"
 auditor: "AI Assistant"
-related_prompt: "/prompts/modern-react-migration/05-component-structure-audit.md"
+related_prompt:
+"/prompts/modern-react-migration/05-component-structure-audit.md"
 ---
 
 # Component Structure Audit Report
 
-**Audit Date:** [DATE]  
-**Components Scanned:** [NUMBER] total  
+**Audit Date:** [DATE]
+**Components Scanned:** [NUMBER] total
 **Issues Found:** [NUMBER] total
 
 ---
@@ -389,26 +438,28 @@ related_prompt: "/prompts/modern-react-migration/05-component-structure-audit.md
 
 [2-3 paragraphs summarizing component structure quality]
 
-**Well Structured:** [NUMBER] components  
-**Needs Improvement:** [NUMBER] components  
+**Well Structured:** [NUMBER] components
+**Needs Improvement:** [NUMBER] components
 **Critical Issues:** [NUMBER] components
 
 ---
 
-## 1. File Organization
+## 1. File Organization (1)
 
 ### Current Structure
 
-```
+```text
 /components/
 ├── common/           [N] components
 ├── pages/            [N] components
 ├── sections/         [N] components
 ├── ui/               [N] components
 └── figma/            [N] components (protected)
-```
+
+```text
 
 ### ✅ Well Organized ([NUMBER])
+
 - [List well-organized components]
 
 ### ❌ Needs Reorganization ([NUMBER])
@@ -420,9 +471,10 @@ related_prompt: "/prompts/modern-react-migration/05-component-structure-audit.md
 
 ---
 
-## 2. Component Size and Complexity
+## 2. Component Size and Complexity (1)
 
 ### ✅ Appropriately Sized ([NUMBER])
+
 - Components under 300 lines
 - Single responsibility
 - Clean separation of concerns
@@ -436,14 +488,16 @@ related_prompt: "/prompts/modern-react-migration/05-component-structure-audit.md
 
 ---
 
-## 3. Component Naming Conventions
+## 3. Component Naming Conventions (1)
 
 ### ✅ Well Named ([NUMBER])
-```
+
+```text
 PortfolioCard.tsx
 BlogPostPreview.tsx
 NavigationMenu.tsx
-```
+
+```text
 
 ### ❌ Needs Renaming ([NUMBER])
 
@@ -455,11 +509,12 @@ NavigationMenu.tsx
 
 ---
 
-## 4. Separation of Concerns
+## 4. Separation of Concerns (1)
 
 ### ✅ Well Separated ([NUMBER])
 
 **Example: Button Component**
+
 ```tsx
 // Presentation only - perfect separation
 export function Button({ variant, children, onClick }: ButtonProps) {
@@ -468,49 +523,59 @@ export function Button({ variant, children, onClick }: ButtonProps) {
     onClick
   }, children);
 }
-```
+
+```text
 
 ### ❌ Mixed Concerns ([NUMBER])
 
-**Component:** PortfolioGallery.tsx  
+**Component:** PortfolioGallery.tsx
 **Issues:**
+
 - Data fetching (should be in hook)
 - State management (should be in hook)
 - Validation logic (should be in service)
 - Rendering (OK to keep)
 
 **Recommendation:**
-```
+
+```text
 Extract:
+
 1. usePortfolioGallery hook (data + state)
-2. portfolioService (validation)
-3. PortfolioGallery (presentation only)
-```
+
+1. portfolioService (validation)
+
+1. PortfolioGallery (presentation only)
+
+```text
 
 ---
 
-## 5. Component Reusability
+## 5. Component Reusability (1)
 
 ### ✅ Reusable Components ([NUMBER])
+
 ```tsx
 <Card variant="blog" image={img} title={title} />
 <Card variant="portfolio" image={img} title={title} />
 <Button variant="primary">Submit</Button>
-```
+
+```text
 
 ### ❌ Duplicate Patterns ([NUMBER])
 
-**Pattern:** Card Components  
-**Duplicates:** BlogCard.tsx, PortfolioCard.tsx, VideoCard.tsx  
-**Similarity:** 80% shared structure  
-**Recommendation:** Create generic Card.tsx with variant prop  
+**Pattern:** Card Components
+**Duplicates:** BlogCard.tsx, PortfolioCard.tsx, VideoCard.tsx
+**Similarity:** 80% shared structure
+**Recommendation:** Create generic Card.tsx with variant prop
 **Priority:** P1
 
 ---
 
-## 6. Export Patterns
+## 6. Export Patterns (1)
 
 ### ✅ Good Exports ([NUMBER])
+
 ```tsx
 // Named exports
 export function Button(props: ButtonProps) { ... }
@@ -518,7 +583,8 @@ export type ButtonProps = { ... }
 
 // Barrel export
 export { Button } from './Button';
-```
+
+```text
 
 ### ❌ Export Issues ([NUMBER])
 
@@ -529,9 +595,9 @@ export { Button } from './Button';
 
 ---
 
-## 7. TypeScript Interface Organization
+## 7. TypeScript Interface Organization (1)
 
-### ✅ Well Organized ([NUMBER])
+### ✅ Well Organized ([NUMBER]) (1)
 
 ```typescript
 // Component-specific
@@ -541,7 +607,8 @@ export { Button } from './Button';
 // Shared types
 /data/types/portfolio.ts
   → export type PortfolioEntry = { ... }
-```
+
+```text
 
 ### ❌ Interface Issues ([NUMBER])
 
@@ -552,15 +619,17 @@ export { Button } from './Button';
 
 ---
 
-## 8. Custom Hooks Organization
+## 8. Custom Hooks Organization (1)
 
 ### ✅ Well Organized Hooks ([NUMBER])
-```
+
+```text
 /hooks/
 ├── usePortfolioData.ts
 ├── useScrollPosition.ts
 └── useDarkMode.ts
-```
+
+```text
 
 ### ❌ Hook Issues ([NUMBER])
 
@@ -571,43 +640,51 @@ export { Button } from './Button';
 
 ---
 
-## 9. Component Dependencies
+## 9. Component Dependencies (1)
 
 ### ✅ Well Decoupled ([NUMBER])
+
 - Minimal prop passing
 - Clear dependency chains
 - No circular dependencies
 
 ### ❌ Dependency Issues ([NUMBER])
 
-**Circular Dependency:**
-```
+## Circular Dependency
+
+```text
 Header.tsx ⟷ NavigationMenu.tsx
 Fix: Extract shared logic to utils
 Priority: P0
-```
+
+```text
 
 **Prop Drilling:**
-```
+
+```text
 App → HomePage → HeroSection → Button (theme prop)
 Fix: Use context or lift state
 Priority: P1
-```
+
+```text
 
 ---
 
-## 10. Component Documentation
+## 10. Component Documentation (1)
 
 ### ✅ Well Documented ([NUMBER])
+
 ```tsx
 /**
+
  * Primary button component
  * @param {ButtonProps} props
  * @example
  * <Button variant="primary">Click</Button>
  */
 export function Button(props: ButtonProps) { ... }
-```
+
+```text
 
 ### ❌ Undocumented ([NUMBER])
 
@@ -621,25 +698,38 @@ export function Button(props: ButtonProps) { ... }
 ## Recommendations
 
 ### Immediate Actions (P0)
+
 1. Fix circular dependencies
-2. [Other P0 items]
+
+1. [Other P0 items]
 
 ### High Priority (P1)
+
 1. Split oversized components (>300 lines)
-2. Rename poorly named components
-3. Extract duplicate patterns into reusable components
-4. Fix export patterns (remove default exports)
-5. Extract inline hooks
+
+1. Rename poorly named components
+
+1. Extract duplicate patterns into reusable components
+
+1. Fix export patterns (remove default exports)
+
+1. Extract inline hooks
 
 ### Improvements (P2)
+
 1. Create barrel exports for component folders
-2. Improve component documentation
-3. Consolidate duplicate TypeScript interfaces
+
+1. Improve component documentation
+
+1. Consolidate duplicate TypeScript interfaces
 
 ### Documentation (P3)
+
 1. Add JSDoc comments to all components
-2. Create component usage examples
-3. Document component design patterns
+
+1. Create component usage examples
+
+1. Document component design patterns
 
 ---
 
@@ -661,20 +751,24 @@ export function Button(props: ButtonProps) { ... }
 ### High-Level Changes
 
 1. **Create Generic Components**
+
    - Extract Card component from BlogCard, PortfolioCard, VideoCard
    - Create flexible Section component for reusable layouts
 
-2. **Improve Folder Structure**
+1. **Improve Folder Structure**
+
    - Move all UI primitives to `/components/ui/`
    - Create `/components/features/` for feature-specific components
    - Add barrel exports to all folders
 
-3. **Extract Business Logic**
+1. **Extract Business Logic**
+
    - Move data fetching to hooks
    - Move validation to services
    - Keep components focused on presentation
 
-4. **Consolidate Types**
+1. **Consolidate Types**
+
    - Extract shared interfaces to `/data/types/`
    - Remove duplicate type definitions
    - Standardize interface naming (ComponentProps pattern)
@@ -684,15 +778,19 @@ export function Button(props: ButtonProps) { ... }
 ## Next Steps
 
 1. Extract actionable items into task list
-2. Prioritize component refactoring work
-3. Update component guidelines with new patterns
-4. Create component library documentation
+
+1. Prioritize component refactoring work
+
+1. Update component guidelines with new patterns
+
+1. Create component library documentation
 
 ---
 
-**Audit Completed:** [DATE]  
+**Audit Completed:** [DATE]
 **Report Status:** Complete
-```
+
+```text
 
 ---
 
@@ -712,12 +810,13 @@ This audit is COMPLETE when:
 
 **Parent Orchestrator:** [00-ORCHESTRATOR.md](./00-ORCHESTRATOR.md)
 
-**Related Guidelines:**
+## Related Guidelines
+
 - [Component Guidelines](../../guidelines/overview-components.md)
 - [TypeScript Standards](../../guidelines/Guidelines.md)
 - [File Organization](../../guidelines/Guidelines.md#project-structure--architecture)
 
 ---
 
-**Last Updated:** March 11, 2026  
+**Last Updated:** March 11, 2026
 **Maintained By:** Development Team

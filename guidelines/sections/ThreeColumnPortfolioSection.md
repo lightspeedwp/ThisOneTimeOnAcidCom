@@ -1,19 +1,21 @@
 # ThreeColumnPortfolioSection
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 Portfolio gallery grid with three-column responsive layout.
 
-**File:** `/components/sections/ThreeColumnPortfolioSection.tsx`  
-**WordPress Equivalent:** `core/gallery` or `core/columns` with images  
+**File:** `/components/sections/ThreeColumnPortfolioSection.tsx`
+**WordPress Equivalent:** `core/gallery` or `core/columns` with images
 **Used In:** PortfolioMainPage
 
 ---
 
 ## Purpose
 
-The ThreeColumnPortfolioSection is a **gallery display area** for portfolio entries. It combines:
+The ThreeColumnPortfolioSection is a **gallery display area** for portfolio
+entries. It combines:
+
 - Three-column responsive grid
 - Portfolio card components
 - Category filtering
@@ -25,15 +27,18 @@ The ThreeColumnPortfolioSection is a **gallery display area** for portfolio entr
 ## Container Styles
 
 ### Section Container
+
 ```tsx
 className="
   py-section                                       // clamp(3rem, 6vw + 1rem, 8rem)
   px-fluid-md                                      // clamp(1rem, 0.6rem + 2vw, 2rem)
   bg-gray-50                                       // Subtle background
 "
-```
+
+```text
 
 ### Grid Layout
+
 ```tsx
 className="
   grid                                             // CSS Grid
@@ -42,7 +47,8 @@ className="
   lg:grid-cols-3                                   // Three columns desktop
   gap-fluid-lg                                     // clamp(1.5rem, 1rem + 2.5vw, 3rem)
 "
-```
+
+```text
 
 ---
 
@@ -58,9 +64,11 @@ Each portfolio entry displays as a card:
   onClick={() => openLightbox(entry)}
   layoutMode={layoutMode}                          // 'grid' or 'list'
 />
-```
+
+```text
 
 **Card Features:**
+
 - Featured image with aspect-square ratio
 - Title and category overlay
 - Event and location metadata
@@ -72,15 +80,18 @@ Each portfolio entry displays as a card:
 ## Responsive Breakpoints
 
 ### Mobile (< 640px)
+
 - Single column (`grid-cols-1`)
 - Full-width cards
 - Vertical spacing
 
 ### Tablet (640px - 1024px)
+
 - Two columns (`sm:grid-cols-2`)
 - Equal card widths
 
 ### Desktop (1024px+)
+
 - Three columns (`lg:grid-cols-3`)
 - Maximum container width
 - Enhanced hover effects
@@ -95,5 +106,5 @@ Each portfolio entry displays as a card:
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

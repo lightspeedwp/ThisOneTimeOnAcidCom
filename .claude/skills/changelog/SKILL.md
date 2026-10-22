@@ -1,6 +1,7 @@
 ---
 name: "Changelog Management Skill"
-description: "Manages CHANGELOG.md using Keep a Changelog 1.1.0 standard with validation and formatting."
+description: "Manages CHANGELOG.md using Keep a Changelog 1.1.0 standard with
+validation and formatting."
 type: "skill"
 category: "release"
 enabled: true
@@ -11,7 +12,8 @@ tags: ["changelog", "keep-a-changelog", "release", "validation"]
 
 ## Purpose
 
-Manage changelog entries following Keep a Changelog 1.1.0 standard with automatic formatting and validation.
+Manage changelog entries following Keep a Changelog 1.1.0 standard with
+automatic formatting and validation.
 
 ## What This Skill Does
 
@@ -24,38 +26,49 @@ Manage changelog entries following Keep a Changelog 1.1.0 standard with automati
 ## Changelog Structure
 
 ```markdown
+
 # Changelog
 
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+and this project adheres to [Semantic
+Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
 ### Added
+
 - New portfolio pieces, features, components
 
 ### Changed
+
 - Updates to existing content, design refinements
 
 ### Fixed
+
 - Bug fixes in site functionality
 
 ### Removed
+
 - Deprecated content, removed features
 
 ### Security
+
 - Security-related fixes
 
 ## [1.0.0] - 2026-10-16
 
-### Added
+### Added (1)
+
 - Initial portfolio site release
 
-[Unreleased]: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/releases/tag/v1.0.0
-```
+[Unreleased]:
+https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/compare/v1.0.0...HEAD
+[1.0.0]:
+https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/releases/tag/v1.0.0
+
+```text
 
 ## When to Use
 
@@ -75,11 +88,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Example Entries
 
 ✓ **Good:**
+
 - Added dark mode support for portfolio theme
 - Fixed active navigation state indicator on mobile
 - Changed homepage headline for clarity
 
 ✗ **Bad:**
+
 - Implementation of dark mode feature (too technical)
 - Fixed the bug (too vague)
 - Updated homepage (too generic)

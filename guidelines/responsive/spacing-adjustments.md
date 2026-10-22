@@ -1,22 +1,30 @@
 # Spacing Adjustments Responsive Guidelines
 
-**Version:** 1.0.0  
-**Last Updated:** January 2025  
+**Version:** 1.0.0
+**Last Updated:** January 2025
 **Part of:** Ash Shaw Makeup Portfolio Design System
 
 ## Overview
 
-This document defines how spacing scales and adjusts across different device sizes, ensuring consistent rhythm, comfortable touch targets, and optimal use of screen real estate from mobile to desktop.
+This document defines how spacing scales and adjusts across different device
+sizes, ensuring consistent rhythm, comfortable touch targets, and optimal use of
+screen real estate from mobile to desktop.
 
 ## Table of Contents
 
 1. [Fluid Spacing System](#fluid-spacing-system)
-2. [Device-Specific Adjustments](#device-specific-adjustments)
-3. [Component Spacing](#component-spacing)
-4. [Section Spacing](#section-spacing)
-5. [Touch Target Sizing](#touch-target-sizing)
-6. [Grid & Gap Patterns](#grid--gap-patterns)
-7. [Implementation Patterns](#implementation-patterns)
+
+1. [Device-Specific Adjustments](#device-specific-adjustments)
+
+1. [Component Spacing](#component-spacing)
+
+1. [Section Spacing](#section-spacing)
+
+1. [Touch Target Sizing](#touch-target-sizing)
+
+1. [Grid & Gap Patterns](#grid--gap-patterns)
+
+1. [Implementation Patterns](#implementation-patterns)
 
 ---
 
@@ -24,13 +32,16 @@ This document defines how spacing scales and adjusts across different device siz
 
 ### Core Principle
 
-All spacing uses CSS `clamp()` for fluid scaling between minimum and maximum values:
+All spacing uses CSS `clamp()` for fluid scaling between minimum and maximum
+values:
 
 ```css
 padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
-```
+
+```text
 
 **Benefits:**
+
 - ✅ Smooth transitions between breakpoints
 - ✅ No jarring layout shifts
 - ✅ Efficient use of screen space at every size
@@ -68,7 +79,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 
 /* 6XL */
 --spacing-fluid-6xl: clamp(8rem, 16vw, 14rem);          /* 128px → 224px */
-```
+
+```text
 
 ---
 
@@ -76,13 +88,15 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 
 ### Mobile (320px - 767px)
 
-**Spacing Priorities:**
+## Spacing Priorities
+
 - ✅ Maximize usable screen space
 - ✅ Maintain readability with minimal padding
 - ✅ Ensure touch targets are accessible (44px minimum)
 - ✅ Prevent content from feeling cramped
 
 **Typical Values:**
+
 ```css
 /* Container padding */
 .container-mobile {
@@ -106,9 +120,11 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 .stack-mobile {
   gap: clamp(0.75rem, 1.5vw, 1.25rem);       /* 12px → 14px */
 }
-```
 
-**Mobile-Specific Patterns:**
+```text
+
+## Mobile-Specific Patterns
+
 ```css
 /* Reduce section padding on very small screens */
 @media (max-width: 374px) {
@@ -125,17 +141,20 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
     padding-bottom: 3rem;
   }
 }
-```
+
+```text
 
 ### Tablet (768px - 1023px)
 
-**Spacing Priorities:**
+## Spacing Priorities (1)
+
 - ✅ Balance efficiency and breathing room
 - ✅ Accommodate both portrait and landscape orientations
 - ✅ Scale up from mobile but maintain compactness
 - ✅ Prepare for desktop-like layouts
 
 **Typical Values:**
+
 ```css
 /* Container padding */
 .container-tablet {
@@ -159,9 +178,11 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 .grid-tablet {
   gap: clamp(1rem, 2vw, 1.5rem);             /* 16px → 20px */
 }
-```
 
-**Orientation Adjustments:**
+```text
+
+## Orientation Adjustments
+
 ```css
 /* Portrait: Taller, narrower - more vertical spacing */
 @media (min-width: 768px) and (orientation: portrait) {
@@ -178,17 +199,20 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
     padding-right: 3rem;
   }
 }
-```
+
+```text
 
 ### Desktop (1024px+)
 
-**Spacing Priorities:**
+## Spacing Priorities (2)
+
 - ✅ Maximum visual breathing room
 - ✅ Clear section delineation
 - ✅ Generous component spacing
 - ✅ Professional, polished appearance
 
 **Typical Values:**
+
 ```css
 /* Container padding */
 .container-desktop {
@@ -212,9 +236,11 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 .grid-desktop {
   gap: clamp(1.5rem, 3vw, 2.5rem);           /* 24px → 40px */
 }
-```
 
-**Large Desktop Optimizations:**
+```text
+
+## Large Desktop Optimizations
+
 ```css
 /* Extra large screens (1920px+) */
 @media (min-width: 1920px) {
@@ -223,13 +249,14 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .section-xl {
     padding-top: 9rem;      /* 144px - cap vertical spacing */
     padding-bottom: 9rem;
   }
 }
-```
+
+```text
 
 ---
 
@@ -246,7 +273,7 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
   padding-right: clamp(1.5rem, 3vw, 2rem);   /* 24px → 32px */
   padding-top: clamp(0.75rem, 1.5vw, 1rem);  /* 12px → 16px */
   padding-bottom: clamp(0.75rem, 1.5vw, 1rem); /* 12px → 16px */
-  
+
   /* Minimum touch target */
   min-height: 44px;         /* Accessibility requirement */
   min-width: 44px;
@@ -256,9 +283,11 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 .button-group {
   gap: clamp(0.75rem, 1.5vw, 1.25rem);       /* 12px → 20px */
 }
-```
 
-**Mobile Adjustments:**
+```text
+
+## Mobile Adjustments
+
 ```css
 @media (max-width: 767px) {
   /* Full-width buttons on mobile */
@@ -266,14 +295,15 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
     width: 100%;
     padding: 1rem;          /* 16px - generous tap target */
   }
-  
+
   /* Stacked button groups */
   .button-group-mobile {
     flex-direction: column;
     gap: 0.75rem;           /* 12px */
   }
 }
-```
+
+```text
 
 ### Cards
 
@@ -294,9 +324,11 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 .card-gap {
   gap: clamp(1rem, 2vw, 1.5rem);             /* 16px → 24px */
 }
-```
 
-**Component Parts Spacing:**
+```text
+
+## Component Parts Spacing
+
 ```css
 /* Space between card image and content */
 .card-image-gap {
@@ -314,7 +346,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
   padding-top: clamp(0.75rem, 1.5vw, 1.25rem); /* 12px → 20px */
   border-top: 1px solid var(--border-color);
 }
-```
+
+```text
 
 ### Forms
 
@@ -341,9 +374,11 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 .form-section {
   margin-bottom: clamp(1.5rem, 3vw, 2.5rem); /* 24px → 40px */
 }
-```
 
-**Mobile Form Optimizations:**
+```text
+
+## Mobile Form Optimizations
+
 ```css
 @media (max-width: 767px) {
   /* Larger touch targets */
@@ -351,14 +386,15 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
     padding: 1rem;          /* 16px */
     font-size: 16px;        /* Prevent zoom on iOS */
   }
-  
+
   /* Stack form groups */
   .form-group-mobile {
     flex-direction: column;
     gap: 1rem;              /* 16px */
   }
 }
-```
+
+```text
 
 ### Navigation
 
@@ -381,7 +417,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
   padding: clamp(0.5rem, 1vw, 0.75rem);      /* 8px → 12px */
   min-height: 44px;       /* Touch target */
 }
-```
+
+```text
 
 ---
 
@@ -406,9 +443,11 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 .hero-cta-gap {
   margin-top: clamp(2rem, 4vw, 3.5rem);      /* 32px → 56px */
 }
-```
 
-**Mobile Hero Adjustments:**
+```text
+
+## Mobile Hero Adjustments
+
 ```css
 @media (max-width: 767px) {
   .hero-mobile {
@@ -416,7 +455,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
     padding-bottom: 2.5rem;
   }
 }
-```
+
+```text
 
 ### Content Sections
 
@@ -439,7 +479,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 .section-header {
   margin-bottom: clamp(2rem, 4vw, 3.5rem);   /* 32px → 56px */
 }
-```
+
+```text
 
 ### Gallery Sections
 
@@ -462,7 +503,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
   padding: 0;               /* No padding - maximize image */
   margin: 0;
 }
-```
+
+```text
 
 ---
 
@@ -477,7 +519,7 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 .touch-target {
   min-width: 44px;
   min-height: 44px;
-  
+
   /* Ensure clickable area */
   padding: 0.5rem;          /* 8px minimum */
 }
@@ -488,7 +530,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
   min-height: 48px;
   padding: 0.75rem;         /* 12px */
 }
-```
+
+```text
 
 ### Component Touch Targets
 
@@ -523,7 +566,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
   min-height: 44px;
   padding: 0.75rem;         /* 12px */
 }
-```
+
+```text
 
 ### Mobile Touch Target Enhancements
 
@@ -534,12 +578,12 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
     min-width: 48px;
     min-height: 48px;
   }
-  
+
   /* Extra spacing between touch targets */
   .touch-group-mobile {
     gap: 0.75rem;           /* 12px minimum */
   }
-  
+
   /* Full-width touch for important actions */
   .touch-primary-mobile {
     width: 100%;
@@ -547,7 +591,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
     padding: 1rem;          /* 16px */
   }
 }
-```
+
+```text
 
 ---
 
@@ -573,7 +618,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: clamp(2rem, 4vw, 3rem);               /* 32px → 48px */
 }
-```
+
+```text
 
 ### Responsive Grid Pattern
 
@@ -604,7 +650,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
     gap: clamp(2rem, 4vw, 2.5rem);
   }
 }
-```
+
+```text
 
 ### Flexbox Gaps
 
@@ -628,7 +675,8 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
   flex-wrap: wrap;
   gap: clamp(0.5rem, 1vw, 0.75rem);          /* 8px → 12px */
 }
-```
+
+```text
 
 ---
 
@@ -639,24 +687,29 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 ```tsx
 export function HeroSection() {
   return (
-    <section className="py-fluid-2xl px-fluid-md bg-gradient-to-br from-white to-pink-50 dark:from-purple-950 dark:to-purple-900">
+<section className="py-fluid-2xl px-fluid-md bg-gradient-to-br from-white
+to-pink-50 dark:from-purple-950 dark:to-purple-900">
       <div className="container mx-auto max-w-7xl">
         <div className="flex flex-col lg:flex-row items-center gap-fluid-xl">
           {/* Content */}
           <div className="flex-1 text-center lg:text-left">
-            <h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue dark:text-purple-100 mb-fluid-md">
+<h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue
+dark:text-purple-100 mb-fluid-md">
               Ash Shaw
             </h1>
-            <p className="text-fluid-xl font-body text-gray-700 dark:text-purple-200 mb-fluid-lg max-w-2xl mx-auto lg:mx-0">
+<p className="text-fluid-xl font-body text-gray-700 dark:text-purple-200
+mb-fluid-lg max-w-2xl mx-auto lg:mx-0">
               Makeup that shines with colour, energy, and connection.
             </p>
-            <div className="flex flex-col sm:flex-row gap-fluid-sm justify-center lg:justify-start">
-              <button className="px-button py-button min-h-[44px] bg-gradient-pink-purple-blue text-white rounded-lg">
+<div className="flex flex-col sm:flex-row gap-fluid-sm justify-center
+lg:justify-start">
+<button className="px-button py-button min-h-[44px] bg-gradient-pink-purple-blue
+text-white rounded-lg">
                 View Portfolio
               </button>
             </div>
           </div>
-          
+
           {/* Image */}
           <div className="flex-1">
             {/* Hero image */}
@@ -666,7 +719,8 @@ export function HeroSection() {
     </section>
   );
 }
-```
+
+```text
 
 ### Pattern: Card Grid
 
@@ -677,23 +731,27 @@ export function PortfolioGrid() {
       <div className="container mx-auto max-w-7xl">
         {/* Section header */}
         <div className="text-center mb-fluid-2xl">
-          <h2 className="text-section-h2 font-heading font-bold text-gray-800 dark:text-purple-100 mb-fluid-md">
+<h2 className="text-section-h2 font-heading font-bold text-gray-800
+dark:text-purple-100 mb-fluid-md">
             Featured Work
           </h2>
-          <p className="text-body-guideline font-body text-gray-600 dark:text-purple-300 max-w-2xl mx-auto">
+<p className="text-body-guideline font-body text-gray-600 dark:text-purple-300
+max-w-2xl mx-auto">
             Explore my latest makeup artistry projects
           </p>
         </div>
-        
+
         {/* Grid with responsive gaps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md lg:gap-fluid-lg">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md
+lg:gap-fluid-lg">
           {items.map((item) => (
-            <article key={item.id} className="bg-white dark:bg-purple-900 rounded-xl overflow-hidden shadow-lg">
+<article key={item.id} className="bg-white dark:bg-purple-900 rounded-xl
+overflow-hidden shadow-lg">
               {/* Card image */}
               <div className="aspect-video">
                 {/* Image */}
               </div>
-              
+
               {/* Card content with consistent padding */}
               <div className="p-card-responsive">
                 <h3 className="text-card-title font-heading font-semibold mb-fluid-sm">
@@ -710,7 +768,8 @@ export function PortfolioGrid() {
     </section>
   );
 }
-```
+
+```text
 
 ### Pattern: Form Layout
 
@@ -724,36 +783,40 @@ export function ContactForm() {
           <label className="block text-fluid-base font-body font-medium mb-fluid-xs">
             Name
           </label>
-          <input 
+          <input
             type="text"
-            className="w-full px-fluid-sm py-fluid-sm min-h-[44px] rounded-lg border border-gray-300 dark:border-purple-700"
+className="w-full px-fluid-sm py-fluid-sm min-h-[44px] rounded-lg border
+border-gray-300 dark:border-purple-700"
           />
         </div>
-        
+
         <div>
           <label className="block text-fluid-base font-body font-medium mb-fluid-xs">
             Email
           </label>
-          <input 
+          <input
             type="email"
-            className="w-full px-fluid-sm py-fluid-sm min-h-[44px] rounded-lg border border-gray-300 dark:border-purple-700"
+className="w-full px-fluid-sm py-fluid-sm min-h-[44px] rounded-lg border
+border-gray-300 dark:border-purple-700"
           />
         </div>
-        
+
         <div>
           <label className="block text-fluid-base font-body font-medium mb-fluid-xs">
             Message
           </label>
-          <textarea 
+          <textarea
             rows={6}
-            className="w-full px-fluid-sm py-fluid-sm rounded-lg border border-gray-300 dark:border-purple-700"
+className="w-full px-fluid-sm py-fluid-sm rounded-lg border border-gray-300
+dark:border-purple-700"
           />
         </div>
-        
+
         {/* Button with proper spacing */}
-        <button 
+        <button
           type="submit"
-          className="w-full sm:w-auto px-button py-button min-h-[44px] bg-gradient-pink-purple-blue text-white rounded-lg mt-fluid-md"
+className="w-full sm:w-auto px-button py-button min-h-[44px]
+bg-gradient-pink-purple-blue text-white rounded-lg mt-fluid-md"
         >
           Send Message
         </button>
@@ -761,7 +824,8 @@ export function ContactForm() {
     </form>
   );
 }
-```
+
+```text
 
 ---
 
@@ -801,6 +865,6 @@ export function ContactForm() {
 
 ---
 
-**Version:** 1.0.0  
-**Last Updated:** January 2025  
+**Version:** 1.0.0
+**Last Updated:** January 2025
 **Maintained by:** Ash Shaw Portfolio Team

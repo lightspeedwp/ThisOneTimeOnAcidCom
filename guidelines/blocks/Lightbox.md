@@ -1,6 +1,6 @@
 # Lightbox (EnhancedLightbox) Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
 ---
@@ -8,6 +8,7 @@
 ## Purpose
 
 The Lightbox is a **modal block** that provides full-screen image viewing with:
+
 - Clean white card layout centered on screen
 - Image navigation for galleries
 - Touch swipe support for mobile
@@ -25,40 +26,40 @@ The Lightbox is a **modal block** that provides full-screen image viewing with:
   <div className="[overlay-wrapper]">
     {/* Backdrop */}
     <div className="[backdrop]" onClick={onClose} />
-    
+
     {/* Content Card */}
     <div className="[card-container]">
       {/* Close Button (Above Card) */}
       <button className="[close-button]">
         <X />
       </button>
-      
+
       {/* Image Container */}
       <div className="[image-wrapper]">
         {/* Previous Button */}
         <button className="[nav-button-prev]">
           <ChevronLeft />
         </button>
-        
+
         {/* Main Image */}
         <img src={images[currentIndex].src} />
-        
+
         {/* Next Button */}
         <button className="[nav-button-next]">
           <ChevronRight />
         </button>
-        
+
         {/* Bottom Overlay with Title */}
         <div className="[title-overlay]">
           <h3>{title}</h3>
         </div>
       </div>
-      
+
       {/* Instruction Text */}
       <p className="[instructions]">
         Swipe or use arrow keys to navigate
       </p>
-      
+
       {/* Thumbnail Navigation (Optional) */}
       <div className="[thumbnail-row]">
         {images.map((img, index) => (
@@ -70,13 +71,15 @@ The Lightbox is a **modal block** that provides full-screen image viewing with:
     </div>
   </div>
 )}
-```
+
+```text
 
 ---
 
 ## Container Styles
 
 ### Overlay Wrapper
+
 ```tsx
 className="
   fixed inset-0                              // Full viewport coverage
@@ -86,11 +89,13 @@ className="
   bg-black/90                                // Dark backdrop
   backdrop-blur-sm                           // Blur page content
 "
-```
+
+```text
 
 ### Backdrop (for click-to-close)
+
 ```tsx
-<div 
+<div
   className="
     absolute inset-0                         // Cover entire overlay
     -z-10                                    // Behind card
@@ -98,9 +103,11 @@ className="
   onClick={onClose}                          // Click to close
   aria-hidden="true"                         // Decorative
 />
-```
+
+```text
 
 ### Card Container
+
 ```tsx
 className="
   relative                                   // Position context
@@ -112,7 +119,8 @@ className="
   overflow-hidden                            // Contain content
   shadow-2xl                                 // Large shadow
 "
-```
+
+```text
 
 ---
 
@@ -124,26 +132,28 @@ className="
 <button
   onClick={onClose}
   className="
-    absolute 
+    absolute
     -top-12 right-0                          // Positioned above card
     w-12 h-12                                // Square button
     bg-white/10                              // Semi-transparent white
     hover:bg-white/20                        // Hover effect
     rounded-full                             // Circular button
-    flex items-center justify-center 
-    transition-colors duration-200 
-    focus:outline-none 
-    focus:ring-2 focus:ring-white 
-    focus:ring-offset-2 
+    flex items-center justify-center
+    transition-colors duration-200
+    focus:outline-none
+    focus:ring-2 focus:ring-white
+    focus:ring-offset-2
     focus:ring-offset-black/90
   "
   aria-label="Close lightbox"
 >
   <X className="w-6 h-6 text-white" />
 </button>
-```
+
+```text
 
 **Features:**
+
 - Positioned above card for clear visual separation
 - Semi-transparent background
 - White X icon from @phosphor-icons/react
@@ -157,7 +167,7 @@ className="
 ```tsx
 <div className="
   relative                                   // Position context for overlays
-  w-full 
+  w-full
   h-[60vh] sm:h-[70vh]                       // Responsive height
   bg-gray-100                                // Background while loading
 "
@@ -165,23 +175,27 @@ className="
   onTouchMove={onTouchMove}
   onTouchEnd={onTouchEnd}
 >
-```
+
+```text
 
 #### Main Image
+
 ```tsx
 <img
   src={images[localCurrentIndex].src}
   alt={images[localCurrentIndex].alt}
   className="
-    w-full h-full 
+    w-full h-full
     object-contain                           // Maintain aspect ratio
     select-none                              // Prevent selection
   "
   draggable={false}                          // Prevent drag
 />
-```
 
-**Why `object-contain`?**
+```text
+
+## Why `object-contain`
+
 - Maintains original aspect ratio
 - Shows entire image without cropping
 - Centers image within container
@@ -192,20 +206,21 @@ className="
 ### 3. Navigation Buttons
 
 #### Previous Button (Left)
+
 ```tsx
 {hasMultipleImages && (
   <button
     onClick={goToPrevious}
     className="
       absolute left-4 top-1/2 -translate-y-1/2  // Centered vertically
-      w-12 h-12 
-      bg-white/80 hover:bg-white 
-      rounded-full 
-      flex items-center justify-center 
-      transition-all duration-200 
-      shadow-lg 
-      focus:outline-none 
-      focus:ring-2 focus:ring-pink-500 
+      w-12 h-12
+      bg-white/80 hover:bg-white
+      rounded-full
+      flex items-center justify-center
+      transition-all duration-200
+      shadow-lg
+      focus:outline-none
+      focus:ring-2 focus:ring-pink-500
       focus:ring-offset-2
     "
     aria-label="Previous image"
@@ -213,23 +228,25 @@ className="
     <ChevronLeft className="w-6 h-6 text-gray-800" />
   </button>
 )}
-```
+
+```text
 
 #### Next Button (Right)
+
 ```tsx
 {hasMultipleImages && (
   <button
     onClick={goToNext}
     className="
       absolute right-4 top-1/2 -translate-y-1/2
-      w-12 h-12 
-      bg-white/80 hover:bg-white 
-      rounded-full 
-      flex items-center justify-center 
-      transition-all duration-200 
-      shadow-lg 
-      focus:outline-none 
-      focus:ring-2 focus:ring-pink-500 
+      w-12 h-12
+      bg-white/80 hover:bg-white
+      rounded-full
+      flex items-center justify-center
+      transition-all duration-200
+      shadow-lg
+      focus:outline-none
+      focus:ring-2 focus:ring-pink-500
       focus:ring-offset-2
     "
     aria-label="Next image"
@@ -237,9 +254,11 @@ className="
     <ChevronRight className="w-6 h-6 text-gray-800" />
   </button>
 )}
-```
+
+```text
 
 **Features:**
+
 - Only shown if multiple images
 - Positioned at vertical center
 - Semi-transparent white background
@@ -258,26 +277,27 @@ className="
   pointer-events-none                        // Don't block clicks
 ">
   <h3 className="
-    text-2xl 
-    font-heading 
-    font-bold 
-    text-white 
+    text-2xl
+    font-heading
+    font-bold
+    text-white
     drop-shadow-lg                           // Text shadow
   ">
     {title || images[localCurrentIndex].caption}
   </h3>
   {description && (
     <p className="
-      text-base 
-      font-body 
-      text-white/90 
+      text-base
+      font-body
+      text-white/90
       mt-2
     ">
       {description}
     </p>
   )}
 </div>
-```
+
+```text
 
 **Purpose:** Display image title/caption without obscuring image
 
@@ -287,20 +307,22 @@ className="
 
 ```tsx
 <p className="
-  text-center 
-  text-sm 
-  text-gray-600 
-  mt-4 
+  text-center
+  text-sm
+  text-gray-600
+  mt-4
   mb-2
 ">
-  {isMobile 
-    ? "Swipe to navigate" 
+  {isMobile
+    ? "Swipe to navigate"
     : "Use arrow keys or click buttons to navigate"
   }
 </p>
-```
+
+```text
 
 **Features:**
+
 - Different text for mobile vs desktop
 - Subtle gray color
 - Centered below image
@@ -312,10 +334,10 @@ className="
 ```tsx
 {hasMultipleImages && (
   <div className="
-    flex 
-    gap-2 
-    justify-center 
-    p-4 
+    flex
+    gap-2
+    justify-center
+    p-4
     overflow-x-auto                          // Horizontal scroll on mobile
     scrollbar-thin                           // Thin scrollbar
   ">
@@ -324,14 +346,14 @@ className="
         key={index}
         onClick={() => goToImage(index)}
         className={`
-          flex-shrink-0 
+          flex-shrink-0
           w-16 h-16                          // Square thumbnails
-          rounded-lg 
-          overflow-hidden 
-          border-2 
-          transition-all duration-200 
-          focus:outline-none 
-          focus:ring-2 focus:ring-pink-500 
+          rounded-lg
+          overflow-hidden
+          border-2
+          transition-all duration-200
+          focus:outline-none
+          focus:ring-2 focus:ring-pink-500
           ${index === localCurrentIndex
             ? "border-pink-500 scale-110"    // Active state
             : "border-transparent opacity-50 hover:opacity-100"
@@ -349,9 +371,11 @@ className="
     ))}
   </div>
 )}
-```
+
+```text
 
 **Features:**
+
 - Show all images as thumbnails
 - Active thumbnail highlighted with border
 - Horizontal scroll on mobile
@@ -384,9 +408,11 @@ useEffect(() => {
   document.addEventListener('keydown', handleKeyDown);
   return () => document.removeEventListener('keydown', handleKeyDown);
 }, [isOpen]);
-```
+
+```text
 
 **Supported Keys:**
+
 - **Escape** - Close lightbox
 - **ArrowLeft** - Previous image
 - **ArrowRight** - Next image
@@ -404,10 +430,10 @@ const onTouchStart = (e: React.TouchEvent) => {
 
 const onTouchMove = (e: React.TouchEvent) => {
   if (!touchStart) return;
-  
+
   const currentTouch = e.targetTouches[0].clientX;
   setTouchEnd(currentTouch);
-  
+
   const distance = Math.abs(touchStart - currentTouch);
   if (distance > 10) {
     setIsSwiping(true);
@@ -423,12 +449,14 @@ const onTouchEnd = () => {
 
   if (isLeftSwipe) goToNext();
   if (isRightSwipe) goToPrevious();
-  
+
   setIsSwiping(false);
 };
-```
+
+```text
 
 **Features:**
+
 - Left swipe → Next image
 - Right swipe → Previous image
 - Minimum 50px distance to trigger
@@ -443,30 +471,34 @@ useEffect(() => {
   } else {
     document.body.style.overflow = 'unset';   // Restore scroll
   }
-  
+
   return () => {
     document.body.style.overflow = 'unset';   // Cleanup
   };
 }, [isOpen]);
-```
+
+```text
 
 ---
 
 ## Responsive Breakpoints
 
 ### Mobile (< 640px)
+
 - Image height: 60vh
 - Thumbnails: Horizontal scroll
 - Navigation: Swipe gestures
 - Instruction text: "Swipe to navigate"
 
 ### Tablet (640px - 1024px)
+
 - Image height: 70vh
 - Thumbnails: Horizontal scroll
 - Navigation: Buttons + swipe
 - Both navigation methods available
 
 ### Desktop (1024px+)
+
 - Image height: 70vh
 - Thumbnails: All visible (if few images)
 - Navigation: Buttons + arrow keys
@@ -477,10 +509,11 @@ useEffect(() => {
 ## Accessibility
 
 ### ARIA Labels
+
 ```tsx
 // Lightbox container
-<div 
-  role="dialog" 
+<div
+  role="dialog"
   aria-modal="true"
   aria-labelledby="lightbox-title"
   aria-describedby="lightbox-description"
@@ -499,9 +532,11 @@ useEffect(() => {
 
 // Thumbnails
 <button aria-label={`View image ${index + 1}`}>
-```
+
+```text
 
 ### Keyboard Support
+
 - **Full keyboard navigation**
 - **Escape to close**
 - **Arrow keys for navigation**
@@ -509,12 +544,14 @@ useEffect(() => {
 - **Enter/Space to activate buttons**
 
 ### Screen Reader Support
+
 - Dialog role announces modal
 - Image alt text read when changed
 - Navigation button labels descriptive
 - Current image indicator on thumbnails
 
 ### Focus Management
+
 ```tsx
 useEffect(() => {
   if (isOpen) {
@@ -522,13 +559,15 @@ useEffect(() => {
     closeButtonRef.current?.focus();
   }
 }, [isOpen]);
-```
+
+```text
 
 ---
 
 ## Usage Examples
 
 ### Single Image
+
 ```tsx
 const [lightbox, setLightbox] = useState({
   isOpen: false,
@@ -545,8 +584,8 @@ const openLightbox = (imageSrc: string, imageAlt: string, title: string) => {
   });
 };
 
-<img 
-  src={image.src} 
+<img
+  src={image.src}
   onClick={() => openLightbox(image.src, image.alt, "Portfolio Image")}
 />
 
@@ -557,9 +596,11 @@ const openLightbox = (imageSrc: string, imageAlt: string, title: string) => {
   currentIndex={lightbox.currentIndex}
   title={lightbox.title}
 />
-```
+
+```text
 
 ### Image Gallery
+
 ```tsx
 const galleryImages = [
   { src: '/img1.jpg', alt: 'Image 1', caption: 'Festival Look' },
@@ -588,13 +629,15 @@ const openGallery = (startIndex: number) => {
   currentIndex={lightbox.currentIndex}
   onNavigate={(index) => setLightbox({ ...lightbox, currentIndex: index })}
 />
-```
+
+```text
 
 ---
 
 ## Best Practices
 
 ### 1. Performance
+
 ```tsx
 // ✅ Conditional rendering
 {isOpen && <EnhancedLightbox ... />}
@@ -606,17 +649,19 @@ useEffect(() => {
       const img = new Image();
       img.src = images[index].src;
     };
-    
+
     const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
     const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
-    
+
     preloadImage(prevIndex);
     preloadImage(nextIndex);
   }
 }, [isOpen, currentIndex, images]);
-```
+
+```text
 
 ### 2. Accessibility
+
 ```tsx
 // ✅ Always provide alt text
 images: [
@@ -627,9 +672,11 @@ images: [
 images: [
   { src: '/img.jpg', alt: 'Alt text', caption: 'Image title' }
 ]
-```
+
+```text
 
 ### 3. Mobile Experience
+
 ```tsx
 // ✅ Responsive image heights
 className="h-[60vh] sm:h-[70vh]"
@@ -641,7 +688,8 @@ className="w-12 h-12"  // Minimum 44px
 onTouchStart={onTouchStart}
 onTouchMove={onTouchMove}
 onTouchEnd={onTouchEnd}
-```
+
+```text
 
 ---
 
@@ -655,5 +703,5 @@ onTouchEnd={onTouchEnd}
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** January 2025
 **Version:** 4.0.0

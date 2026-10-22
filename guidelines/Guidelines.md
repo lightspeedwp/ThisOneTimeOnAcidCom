@@ -7,7 +7,10 @@ version: "8.4.0"
 
 # 🎨 Ash Shaw Makeup Portfolio – Design & Development Guidelines
 
-This document defines the core design, development, and technical guidelines for building and maintaining the Ash Shaw Makeup Portfolio in **Figma Make**. It serves as the entry point to a comprehensive design system with detailed documentation organized in separate files.
+This document defines the core design, development, and technical guidelines for
+building and maintaining the Ash Shaw Makeup Portfolio in **Figma Make**. It
+serves as the entry point to a comprehensive design system with detailed
+documentation organized in separate files.
 
 **Version:** 8.4.0
 **Last Updated:** March 12, 2026
@@ -20,27 +23,34 @@ This document defines the core design, development, and technical guidelines for
 **When asked to write a prompt, audit, or review, ALWAYS follow this sequence:**
 
 1. **Create a prompt** in `/prompts/` — defines the audit scope, steps, and references to relevant guidelines.
-2. **Run the audit** described in the prompt against the codebase and guidelines.
-3. **Save findings** to a report file in `/reports/{topic}/` — only after the full audit is complete.
-4. **Create a task list** in `/tasks/` — only once the report is finalized, extract actionable items into a checklist.
 
-**This is the assumed default.** You do not need to be told each step explicitly. When told to "write a prompt" or "audit X", execute the full 4-step workflow above.
+1. **Run the audit** described in the prompt against the codebase and guidelines.
 
-**Multi-audit orchestrators:** When an audit covers multiple areas, create a master/orchestrator prompt in `/prompts/{topic}/orchestrator.md` with individual sub-prompts. Each sub-audit gets its own report in `/reports/{topic}/`. All tasks are consolidated into one task list per orchestrator in `/tasks/`.
+1. **Save findings** to a report file in `/reports/{topic}/` — only after the full audit is complete.
 
-**Reusability:** All prompts should be written as reusable templates that can be re-run for ongoing maintenance.
+1. **Create a task list** in `/tasks/` — only once the report is finalized, extract actionable items into a checklist.
+
+**This is the assumed default.** You do not need to be told each step
+explicitly. When told to "write a prompt" or "audit X", execute the full 4-step
+workflow above.
+
+**Multi-audit orchestrators:** When an audit covers multiple areas, create a
+master/orchestrator prompt in `/prompts/{topic}/orchestrator.md` with individual
+sub-prompts. Each sub-audit gets its own report in `/reports/{topic}/`. All
+tasks are consolidated into one task list per orchestrator in `/tasks/`.
+
+**Reusability:** All prompts should be written as reusable templates that can be
+re-run for ongoing maintenance.
 
 ### 🚫 Root Directory Restrictions (CRITICAL)
 
-**When creating new Markdown (`.md`) files in the project root (`/`), only the following are permitted:**
+**Only the following `.md` files are allowed in the project root (`/`):**
+
 - `README.md` — Project overview
 - `CHANGELOG.md` — Release history (protected file — see **[changelog.md](./changelog.md)**)
-- `ATTRIBUTIONS.md` — System-protected file (cannot be moved or deleted)
+- `Attributions.md` — System-protected file (cannot be moved or deleted)
 
-`AGENTS.md`, `CLAUDE.md`, and `CONTRIBUTING.md` are acknowledged exceptions for agent and GitHub tooling discoverability.
-This restriction applies only to new Markdown files; existing root Markdown files may remain.
-
-**All other new `.md` files MUST be placed in the appropriate folder:**
+**All other `.md` files MUST be placed in the appropriate folder:**
 
 | Content Type | Required Location |
 |---|---|
@@ -50,13 +60,19 @@ This restriction applies only to new Markdown files; existing root Markdown file
 | Audit reports & analysis | `/reports/{topic}/` |
 | Task lists & checklists | `/tasks/` |
 
-**Script files:** All `.sh` script files MUST be placed in `/scripts/`. Never create `.sh` files in the project root.
+**Script files:** All `.sh` script files MUST be placed in `/scripts/`. Never
+create `.sh` files in the project root.
 
-**Enforcement:** If you need to create a new `.md` file, determine its purpose and place it in the correct folder above. When in doubt, use `/docs/` for general documentation.
+**Enforcement:** If you need to create a new `.md` file, determine its purpose
+and place it in the correct folder above. When in doubt, use `/docs/` for
+general documentation.
 
 ### 📁 Mandatory Folder Conventions
 
-The project uses three dedicated workflow folders. **All AI-generated and human-authored workflow artifacts MUST be stored in these folders.** Never place prompts, reports, or task lists anywhere else (e.g., never in root, never in `/guidelines/`).
+The project uses three dedicated workflow folders. **All AI-generated and
+human-authored workflow artifacts MUST be stored in these folders.** Never place
+prompts, reports, or task lists anywhere else (e.g., never in root, never in
+`/guidelines/`).
 
 | Folder | Purpose | Naming Convention |
 |---|---|---|
@@ -69,16 +85,23 @@ The project uses three dedicated workflow folders. **All AI-generated and human-
 **Rules:**
 
 1. **Prompts:** Always create new prompt files in `/prompts/`. For multi-step workflows, create a subfolder with a master `orchestrator.md` and child prompt files.
-2. **Reports:** Always write reports to `/reports/`, inside a suitable subfolder (e.g., `/reports/root-cleanup/`, `/reports/css-audit/`). One subfolder per audit or topic.
-3. **Tasks:** Always create task lists in `/tasks/`. The file `/tasks/task-list.md` is the **all-purpose general task list** — it must never be deleted. One task list per orchestrator prompt, stored in the root of `/tasks/`.
-4. **Lifecycle:** Archive completed tasks for later reference. Delete any report older than a few days. Regularly review all folders for unused and orphaned files.
-5. **Cross-referencing:** When referencing guidelines from prompts/reports/tasks, always link to the specific guideline file (e.g., `[BEM Architecture](../guidelines/css-architecture.md)`).
-6. **Never delete** `/tasks/task-list.md` — it is the persistent master checklist.
-7. **Docs:** The `/docs/` folder is the designated home for all general-purpose project documentation, quick references, guides, and relocated documentation files (e.g., CMS field mappings, architecture overviews). Any `.md` file that does not belong in `/guidelines/`, `/prompts/`, `/reports/`, or `/tasks/` should go in `/docs/`.
+
+1. **Reports:** Always write reports to `/reports/`, inside a suitable subfolder (e.g., `/reports/root-cleanup/`, `/reports/css-audit/`). One subfolder per audit or topic.
+
+1. **Tasks:** Always create task lists in `/tasks/`. The file `/tasks/task-list.md` is the **all-purpose general task list** — it must never be deleted. One task list per orchestrator prompt, stored in the root of `/tasks/`.
+
+1. **Lifecycle:** Archive completed tasks for later reference. Delete any report older than a few days. Regularly review all folders for unused and orphaned files.
+
+1. **Cross-referencing:** When referencing guidelines from prompts/reports/tasks, always link to the specific guideline file (e.g., `[BEM Architecture](../guidelines/css-architecture.md)`).
+
+1. **Never delete** `/tasks/task-list.md` — it is the persistent master checklist.
+
+1. **Docs:** The `/docs/` folder is the designated home for all general-purpose project documentation, quick references, guides, and relocated documentation files (e.g., CMS field mappings, architecture overviews). Any `.md` file that does not belong in `/guidelines/`, `/prompts/`, `/reports/`, or `/tasks/` should go in `/docs/`.
 
 ### 🛡️ Bundler Compatibility Rules (Figma Make)
 
-The Figma Make bundler has known syntax incompatibilities. **All code MUST follow these workarounds:**
+The Figma Make bundler has known syntax incompatibilities. **All code MUST
+follow these workarounds:**
 
 | Forbidden Syntax | Required Workaround |
 |---|---|
@@ -98,20 +121,26 @@ The Figma Make bundler has known syntax incompatibilities. **All code MUST follo
 | Data URIs in CSS `url()` | External file or disable feature (comment out) |
 
 **Helper functions** (defined in `/lib/router.tsx`):
+
 - `grab(obj, key)` — Safe property read via `Object.entries()` iteration
 - `arrayGet(arr, index)` — Safe array access
 - `setProp(obj, key, value)` — Safe property write via `Object.defineProperty`
 - `buildContextValue()` — Object construction with `Object.entries()` and explicit if/else
 
-**Critical rule:** Do NOT replace any existing images, logos, or `figma:asset/` imports with Unsplash or placeholder images.
+**Critical rule:** Do NOT replace any existing images, logos, or `figma:asset/`
+imports with Unsplash or placeholder images.
 
 ### 🖼️ Image Protection Rule
 
-**NEVER replace existing images.** All current `figma:asset/` imports, logo files, and existing image references are protected. When adding new images, use `ImageWithFallback` from `/components/figma/ImageWithFallback.tsx` (which must not be modified — it is a protected file).
+**NEVER replace existing images.** All current `figma:asset/` imports, logo
+files, and existing image references are protected. When adding new images, use
+`ImageWithFallback` from `/components/figma/ImageWithFallback.tsx` (which must
+not be modified — it is a protected file).
 
 ### 🚫 Supabase non-usage policy
 
-**Supabase is NOT used on this project.** This is a static personal art portfolio with no backend database requirements.
+**Supabase is NOT used on this project.** This is a static personal art
+portfolio with no backend database requirements.
 
 - The `/utils/supabase/` folder is a **system-protected deployment artifact** — it cannot be deleted, but it is never imported or used by any application code
 - Never suggest, connect, or implement Supabase functionality
@@ -120,73 +149,103 @@ The Figma Make bundler has known syntax incompatibilities. **All code MUST follo
 
 ### 📋 Task list management conventions
 
-**All-purpose task list:** `/tasks/task-list.md` is the master general-purpose checklist. Simple one- or two-checkbox tasks go here. This file must **NEVER** be deleted.
+**All-purpose task list:** `/tasks/task-list.md` is the master general-purpose
+checklist. Simple one- or two-checkbox tasks go here. This file must **NEVER**
+be deleted.
 
-**Dedicated task lists:** Full audits and multi-step prompts get their own task list (e.g., `/tasks/project-stability-audit-tasks.md`). One task list per orchestrator prompt.
+**Dedicated task lists:** Full audits and multi-step prompts get their own task
+list (e.g., `/tasks/project-stability-audit-tasks.md`). One task list per
+orchestrator prompt.
 
-**Master task list tracker:** `/tasks/master-task-list.md` tracks all active and archived task lists. It does NOT contain actual tasks — only references with links to task lists and their related reports. Update it whenever a task list is created, completed, or archived.
+**Master task list tracker:** `/tasks/master-task-list.md` tracks all active and
+archived task lists. It does NOT contain actual tasks — only references with
+links to task lists and their related reports. Update it whenever a task list is
+created, completed, or archived.
 
-**Task list archiving process:**
+## Task list archiving process
+
 1. When ALL tasks in a task list are marked complete, move the entry in `master-task-list.md` from "Active" to "Completed (pending archive)"
-2. After 30 days in "Completed", move the file to `/tasks/archived/` and update `master-task-list.md`
-3. Only delete from `/tasks/archived/` — never delete active or recently completed task lists
 
-**Report archiving process:**
+1. After 30 days in "Completed", move the file to `/tasks/archived/` and update `master-task-list.md`
+
+1. Only delete from `/tasks/archived/` — never delete active or recently completed task lists
+
+## Report archiving process
+
 1. When a report's associated task list is 100% complete, move the report folder from `/reports/{topic}/` to `/reports/archived/{topic}/`
-2. Reports in `/reports/archived/` can be deleted after 7 days
-3. Only delete from `/reports/archived/` — never delete active reports
 
-**Prompt folder protection:** Never delete files in `/prompts/` unless expressly stated by the user.
+1. Reports in `/reports/archived/` can be deleted after 7 days
+
+1. Only delete from `/reports/archived/` — never delete active reports
+
+**Prompt folder protection:** Never delete files in `/prompts/` unless expressly
+stated by the user.
 
 ### 🛑 Content Folder Protection Rule (HISTORICAL — FOLDER DELETED)
 
-> ⚠️ **Status update (Feb 25, 2026):** The `/content/` folder was deleted during the comprehensive codebase cleanup audit (Audit 2). The 25 files it contained were confirmed as having zero code imports and were removed as orphaned reference material. The folder no longer exists in the repository.
+> ⚠️ **Status update (Feb 25, 2026):** The `/content/` folder was deleted during
+the comprehensive codebase cleanup audit (Audit 2). The 25 files it contained
+were confirmed as having zero code imports and were removed as orphaned
+reference material. The folder no longer exists in the repository.
 
-**If re-creating reference content** in the future, use a `/content/` subfolder and treat it as protected personal reference material — never import from it in code, and never flag it as "orphaned" in audits.
+**If re-creating reference content** in the future, use a `/content/` subfolder
+and treat it as protected personal reference material — never import from it in
+code, and never flag it as "orphaned" in audits.
 
-**Historical protected structure (now deleted):**
-```
+## Historical protected structure (now deleted)
+
+```text
 /content/          ← DELETED Feb 25, 2026
 ├── about/          # Personal about page notes (six-cats.md)
 ├── book/           # Book content (this-one-time.md)
 ├── lightspeed/     # Lightspeed agency content (5 files)
 ├── personal/       # Personal bios, notes, research (12 files)
 └── social-profiles/ # Social media strategy & profiles (5 files)
-```
+
+```text
 
 ---
 
 ## 📋 Major Update (v5.3.0) - Personal Art Project
 
-**🚫 NOT FOR PROFIT - PERSONAL ART PROJECT**
+## 🚫 NOT FOR PROFIT - PERSONAL ART PROJECT
 
 This website is strictly a **personal art portfolio**.
+
 - **NO Monetization:** There are no shop, e-commerce, or payment features.
 - **NO Services/Booking:** This is not a business site. No "Book Now" or pricing information.
 - **NO Commercial Intent:** The project exists solely to showcase artistic work and tutorials.
 
-**✅ PERSONAL IDENTITY & CONTENT SCOPE**
+## ✅ PERSONAL IDENTITY & CONTENT SCOPE
+
 - **Pronouns:** Strict **He/Him** usage. Ash is male. (e.g., "guy with the bike", "he created").
 - **Locations:** Focus strictly on **Cape Town (home base in Woodstock, South Africa)**, **Berlin (May seasonal visits)**, **Thailand (Koh Phangan training base, Sep-Nov)**, and **International Festivals**.
 - **Yearly Cycle:** Ash follows an annual creative cycle: based in Cape Town, travels to Berlin each May for techno season, returns to South Africa in August-September (bicycle swap), relocates to Koh Phangan, Thailand (Sep-Nov) for Muay Thai training, triathlon, and remote work, then returns to Cape Town in November for South African summer festival season. This cycle fuels his creative inspiration and energy.
 - **Excluded Content:** NO weddings, NO corporate events, NO bridal makeup.
 
 **Migration Impact:**
+
 - Removed all "Shop" and "Services" pages.
 - Removed pricing, booking forms, and "Add to Cart" functionality.
 - Focus is entirely on Portfolio (Gallery), Videos (Showcase), and Blog (Insights).
 
 ## 📚 How to Use These Guidelines
 
-This project has a comprehensive design system with guidelines organized across multiple files. **Always follow this reading order:**
+This project has a comprehensive design system with guidelines organized across
+multiple files. **Always follow this reading order:**
 
 ### Step 0: Understand Workflow Standards (NEW - REQUIRED)
-Read the workflow documentation to understand how prompts, reports, and tasks are created:
+
+Read the workflow documentation to understand how prompts, reports, and tasks
+are created:
+
 - **[Prompt Creation Guidelines](./prompt-creation-guidelines.md)** - How to write audit prompts and orchestrators
 - **[Report Creation Guidelines](./report-creation-guidelines.md)** - How to structure and save audit reports
 
 ### Step 1: Read Overview Files (REQUIRED)
+
 Read ALL overview files in this directory:
+
 - **[overview-components.md](./overview-components.md)** - Component system and React architecture diagram
 - **[overview-icons.md](./overview-icons.md)** - Icon system and verification process
 - **[overview-sections.md](./overview-sections.md)** - Section patterns (WordPress block theme aligned)
@@ -199,7 +258,9 @@ Read ALL overview files in this directory:
 - **[pwa-implementation.md](./pwa-implementation.md)** - Progressive Web App features and offline support
 
 ### Step 2: Read Design Tokens (REQUIRED)
+
 Read ALL files in the `design-tokens/` folder. Do NOT skip this step:
+
 - **[neon-colors.md](./design-tokens/neon-colors.md)** - 🆕 Neon vs Atomic Black color system (PRIMARY)
 - **[animations.md](./design-tokens/animations.md)** - 🆕 Complete animation system with 26 keyframes
 - **[colors.md](./design-tokens/colors.md)** - Legacy color documentation (reference only)
@@ -209,24 +270,32 @@ Read ALL files in the `design-tokens/` folder. Do NOT skip this step:
 - **[prefers-reduced-motion.md](./prefers-reduced-motion.md)** - 🆕 Reduced motion coding standards & accessibility guide
 
 ### Step 2.5: Understand Light/Dark Mode System (REQUIRED)
+
 Read the light/dark mode documentation for complete theme implementation:
+
 - **[nova-news-dark-mode.md](./nova-news-dark-mode.md)** - 🆕 Quick reference for Nova News dark mode (START HERE!)
 - **[dark-mode-lessons-learned.md](./dark-mode-lessons-learned.md)** - 🆕 CRITICAL: Lessons learned from implementation (read this to avoid 40+ hours of mistakes)
 - **[dark-mode-implementation.md](./dark-mode-implementation.md)** - Complete dark mode implementation guide
 - **[component-dark-mode.md](./component-dark-mode.md)** - Component-specific dark/light mode patterns
 
 ### Step 3: Understand Mock Data System (REQUIRED)
+
 Read the mock data guidelines to understand centralized data management:
+
 - **[Data System Documentation](../data/README.md)** - Complete guide to the mock data system
 
 ### Step 4: Read Component Guidelines BEFORE Using (REQUIRED)
+
 BEFORE using ANY component, you MUST read its specific guideline file:
+
 - Using Logo? → Read **[components/Logo.md](./components/Logo.md)** FIRST
 - Using ScrollDownArrow? → Read **[components/ScrollDownArrow.md](./components/ScrollDownArrow.md)** FIRST
 - Using ScrollToTop? → Read **[components/ScrollToTop.md](./components/ScrollToTop.md)** FIRST
 
 ### Step 5: Verify Icons Before Using (REQUIRED)
-Before using ANY icon, check **[overview-icons.md](./overview-icons.md)** for the verification process. Never assume an icon exists.
+
+Before using ANY icon, check **[overview-icons.md](./overview-icons.md)** for
+the verification process. Never assume an icon exists.
 
 ---
 
@@ -234,12 +303,17 @@ Before using ANY icon, check **[overview-icons.md](./overview-icons.md)** for th
 
 ### ⛔ NO TAILWIND UTILITIES ALLOWED
 
-**SYSTEMATIC MIGRATION COMPLETE:** This codebase has fully migrated to a strict **Semantic BEM (Block Element Modifier)** architecture. Tailwind utility classes are **STRICTLY FORBIDDEN**.
+**SYSTEMATIC MIGRATION COMPLETE:** This codebase has fully migrated to a strict
+**Semantic BEM (Block Element Modifier)** architecture. Tailwind utility classes
+are **STRICTLY FORBIDDEN**.
 
-**Priority Order for Styling:**
-1. **✅ ONLY CHOICE:** Use BEM classes defined in `/styles/globals.css` (e.g., `.portfolio-card__image--featured`, `.hero__title`)
-2. **🚫 NEVER:** Use Tailwind utilities (e.g., `flex`, `p-4`, `text-center`)
-3. **🚫 NEVER:** Use inline styles
+## Priority Order for Styling
+
+1. **✅ ONLY CHOICE:** Use BEM classes defined in `/styles/globals.css` (e.g., `.portfolio-card_*image--featured`, `.hero*_title`)
+
+1. **🚫 NEVER:** Use Tailwind utilities (e.g., `flex`, `p-4`, `text-center`)
+
+1. **🚫 NEVER:** Use inline styles
 
 ```tsx
 // ✅ CORRECT - Semantic BEM Classes
@@ -256,19 +330,21 @@ Before using ANY icon, check **[overview-icons.md](./overview-icons.md)** for th
 <div style={{ padding: '16px' }}>
   Content
 </div>
-```
+
+```text
 
 ### ⚠️ BEM Naming Convention
 
-**All CSS classes must follow the BEM naming convention:**
+## All CSS classes must follow the BEM naming convention
 
 - **Block:** `.block` (e.g., `.header`, `.card`, `.hero`)
-- **Element:** `.block__element` (e.g., `.header__logo`, `.card__title`)
-- **Modifier:** `.block--modifier` or `.block__element--modifier` (e.g., `.header--transparent`, `.card__title--large`)
+- **Element:** `.block_*element` (e.g., `.header**logo`, `.card*_title`)
+- **Modifier:** `.block--modifier` or `.block_*element--modifier` (e.g., `.header--transparent`, `.card*_title--large`)
 
 ### ⚠️ Data & Content Rules
 
-**NO HARDCODED CONTENT:** All text, images, and configuration data must be imported from the `/data/mock` directory.
+**NO HARDCODED CONTENT:** All text, images, and configuration data must be
+imported from the `/data/mock` directory.
 
 ```tsx
 // ✅ CORRECT - Imported Data
@@ -278,19 +354,24 @@ import { heroContent } from "@/data/mock";
 
 // ❌ WRONG - Hardcoded String
 <h1 className="hero__title">Welcome to my Portfolio</h1>
-```
+
+```text
 
 ### 🚫 NO INLINE STYLES - CRITICAL RULE
 
-**NEVER USE INLINE STYLES.** All styling must be done through CSS classes defined in `/styles/globals.css`.
+**NEVER USE INLINE STYLES.** All styling must be done through CSS classes
+defined in `/styles/globals.css`.
 
 ### 🔤 SENTENCE CASE FOR ALL HEADINGS - CRITICAL RULE
 
-**ALL headings, titles, and labels MUST use sentence case.** This applies everywhere: page titles, section headings, ebook chapter titles, TOC entries, navigation labels, card titles, hero text, breadcrumbs, and button labels.
+**ALL headings, titles, and labels MUST use sentence case.** This applies
+everywhere: page titles, section headings, ebook chapter titles, TOC entries,
+navigation labels, card titles, hero text, breadcrumbs, and button labels.
 
-**Sentence case** = Capitalise ONLY the first word and proper nouns (names, places, brand names).
+**Sentence case** = Capitalise ONLY the first word and proper nouns (names,
+places, brand names).
 
-```
+```text
 ✅ CORRECT — Sentence case
 "The dancefloor gave me everything"
 "Neon revelations"
@@ -312,11 +393,17 @@ import { heroContent } from "@/data/mock";
 "The Artist's Lifestyle"
 "Koh Phangan Muay Thai Crew"
 "About The Author"
-```
 
-**Proper nouns that stay capitalised:** Ash, Berlin, Cape Town, Koh Phangan, LightSpeed, WordPress, BarCamp, Six Cats (brand name), Aquarius/Aquarian, ADHD, Lucy (the cat or the experience), Origin (festival name), Solipse (festival), Vortex (festival), UV.
+```text
 
-**This rule applies to all data files** in `/data/mock/`, all component JSX output, and all ebook content in `/data/mock/pages/ebook-pages.ts`. When expanding content, always write headings in sentence case.
+**Proper nouns that stay capitalised:** Ash, Berlin, Cape Town, Koh Phangan,
+LightSpeed, WordPress, BarCamp, Six Cats (brand name), Aquarius/Aquarian, ADHD,
+Lucy (the cat or the experience), Origin (festival name), Solipse (festival),
+Vortex (festival), UV.
+
+**This rule applies to all data files** in `/data/mock/`, all component JSX
+output, and all ebook content in `/data/mock/pages/ebook-pages.ts`. When
+expanding content, always write headings in sentence case.
 
 ---
 
@@ -324,7 +411,7 @@ import { heroContent } from "@/data/mock";
 
 ### File Organization (February 2026)
 
-```
+```text
 ash-shaw-makeup-portfolio/
 ├── 📄 App.tsx                         # Main application router
 ├── 📄 main.tsx                        # React entry point
@@ -337,7 +424,8 @@ ash-shaw-makeup-portfolio/
 │   ├── 📁 ui/                         # UI primitives
 │   └── 📁 figma/                      # Figma integration utilities
 │
-├── 📁 content/                        # ⚠️ DELETED Feb 25, 2026 (orphaned reference files removed in cleanup audit)
+├── 📁 content/ # ⚠️ DELETED Feb 25, 2026 (orphaned reference files removed in
+cleanup audit)
 │
 ├── 📁 data/                           # 🆕 Centralized mock data system
 │   ├── 📁 mock/                       # Mock data (single source of truth)
@@ -379,13 +467,16 @@ ash-shaw-makeup-portfolio/
 │
 ├── 📁 public/                         # Static assets
 └── 📁 Configuration Files             # Build and deployment configs
-```
+
+```text
 
 ### Component Architecture Overview
 
-See **[overview-components.md](./overview-components.md)** for complete component hierarchy and usage patterns.
+See **[overview-components.md](./overview-components.md)** for complete
+component hierarchy and usage patterns.
 
-**Key Application Structure:**
+## Key Application Structure
+
 ```typescript
 App.tsx (Router + Global State)
 ├── Header (Navigation + Mobile Menu)
@@ -401,23 +492,27 @@ App.tsx (Router + Global State)
 ├── FeedbackPage (Testimonials)
 ├── StickersPage (Sticker art gallery)
 └── Footer (Link to Contact Page + Social Links)
-```
+
+```text
 
 ---
 
 ## 2. 🔗 Dependencies & Integrations
 
 ### Core Dependencies
+
 - **React 18+** - Concurrent features and modern hooks
 - **Tailwind CSS V4** - Utility-first styling with custom design tokens
 - **Phosphor Icons** - Primary icon library (`@phosphor-icons/react`) with 6 weight variants (migration from Lucide complete)
 - **TypeScript** - Type safety and developer experience
 
 ### Deployment & Hosting
+
 - **Netlify** - Production deployment, CDN, and hosting
 - **Progressive Web App** - Installable, offline-capable application
 
 ### Key Features
+
 - ✅ Variable Font System (73% fewer requests)
 - ✅ Centralized Mock Data System (single source of truth)
 - ✅ WordPress-Inspired Fluid Typography
@@ -430,26 +525,36 @@ App.tsx (Router + Global State)
 - ✅ **Terminal Boot Animation System** (retro CLI aesthetic with staggered fade-ins, neon pulse CTAs, holographic titles, floating media)
 
 ### Animation System Implementation
+
 **Status:** ✅ Phase 1 Complete (March 2026)
 
-The site features a comprehensive retro terminal boot animation system inspired by 80s CLI interfaces:
+The site features a comprehensive retro terminal boot animation system inspired
+by 80s CLI interfaces:
 
-**Core Animation Types:**
+## Core Animation Types
+
 1. **Terminal Boot Sequence** - 0.8s typewriter-style page entrance
-2. **Staggered Fade-In** - Auto-cascading elements with 0.1s delays (title → subtitle → description → CTA)
-3. **Neon Pulse CTA** - 2s breathing glow on buttons (speeds to 1s on hover)
-4. **Holographic Rainbow Shimmer** - 4s gradient sweep across hero titles
-5. **Floating Media** - 4s gentle vertical oscillation with neon glow
-6. **Page Header Animations** - Unified system for portfolio/blog/contact page headers
 
-**Implementation Files:**
+1. **Staggered Fade-In** - Auto-cascading elements with 0.1s delays (title → subtitle → description → CTA)
+
+1. **Neon Pulse CTA** - 2s breathing glow on buttons (speeds to 1s on hover)
+
+1. **Holographic Rainbow Shimmer** - 4s gradient sweep across hero titles
+
+1. **Floating Media** - 4s gentle vertical oscillation with neon glow
+
+1. **Page Header Animations** - Unified system for portfolio/blog/contact page headers
+
+## Implementation Files
+
 - `/styles/blocks/animations.css` - Core @keyframes library (26 total animations)
 - `/styles/blocks/hero.css` - Hero section animation utilities
 - `/styles/blocks/page-header-animations.css` - Reusable page header system (120 lines)
 - `/components/layouts/HeroLayout.tsx` - Auto-stagger animation orchestration
 - `/components/pages/dev/AnimationShowcasePage.tsx` - Interactive dev tools showcase
 
-**Pages with Animations:**
+## Pages with Animations
+
 - HomePage (v1.7.0) - Full terminal boot + stagger + floating media + neon pulse CTAs
 - AboutPage (v1.5.0) - Same as HomePage + holographic rainbow shimmer title
 - PortfolioPage (v1.7.0) - Header boot → filters → grid stagger
@@ -458,21 +563,26 @@ The site features a comprehensive retro terminal boot animation system inspired 
 - AnimationShowcasePage (v1.0.0) - Interactive demos at `/dev/animations`
 
 **Accessibility:**
+
 - ✅ 100% WCAG AAA compliant with full `prefers-reduced-motion` support
 - ✅ All animations disable gracefully for motion-sensitive users
 - ✅ See **[prefers-reduced-motion.md](./prefers-reduced-motion.md)** for implementation standards
 
 **Dev Tools:**
-Visit `/dev/animations` for interactive showcase with live demos, code examples, and animation testing tools.
+Visit `/dev/animations` for interactive showcase with live demos, code examples,
+and animation testing tools.
 
 ### SEO & Structured Data
+
 - ✅ Centralised `setSEO()` utility (`/utils/seo.ts`) — single call sets title, description, OG, Twitter Card
 - ✅ Centralised SEO data file (`/data/mock/seo.ts`) — all 46 page components wired
 - ✅ Schema.org JSON-LD structured data (`/utils/schemaService.ts`) — WebSite, Person, BlogPosting, VideoObject, PodcastEpisode, VisualArtwork, ImageGallery, CollectionPage, BreadcrumbList, FAQPage
 - ✅ Breadcrumbs component (`/components/ui/Breadcrumbs.tsx`) — single source, dedicated CSS, Schema.org BreadcrumbList JSON-LD
 
 ### All Planned Features Complete
-All tasks from the v4.0.0 task list (Tasks 19–36) are now complete. The project is feature-complete.
+
+All tasks from the v4.0.0 task list (Tasks 19–36) are now complete. The project
+is feature-complete.
 
 ---
 
@@ -481,9 +591,11 @@ All tasks from the v4.0.0 task list (Tasks 19–36) are now complete. The projec
 ### 🌟 Neon vs Atomic Black Visual Identity
 
 **Design Philosophy:**
-The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** design system that reflects the vibrant, energetic nature of makeup artistry.
+The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** design system
+that reflects the vibrant, energetic nature of makeup artistry.
 
 **Core Elements:**
+
 - **8 Neon Colors:** Electric green, hot pink, royal blue, pure yellow, blazing orange, violet purple, aqua cyan, hot red
 - **Atomic Black:** Deep #0F0F0F background for maximum neon contrast
 - **4 Signature Gradients:** Cyberpunk (pink→blue), Toxic Lime (green→cyan), Solar Flare (orange→yellow), Hyperpop (animated multi-color)
@@ -492,14 +604,18 @@ The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** design system
 - **SVG Grain Noise Texture:** Site-wide `feTurbulence` noise overlay on all major sections via `::before` pseudo-elements
 - **33 Color Palettes:** Comprehensive palette library for all interface contexts
 
-**📖 Complete Documentation:**
+## 📖 Complete Documentation
+
 - **[neon-colors.md](./design-tokens/neon-colors.md)** - Full neon color system with 33 curated palettes and interface inspiration
 - **[animations.md](./design-tokens/animations.md)** - All 26 animations documented
 
 ### Responsive Breakpoints & Fluid Typography
-(See [design-tokens/typography.md](./design-tokens/typography.md) and [design-tokens/spacing.md](./design-tokens/spacing.md) for full details)
 
-**Fluid Width System (Updated v7.5.0):**
+(See [design-tokens/typography.md](./design-tokens/typography.md) and
+[design-tokens/spacing.md](./design-tokens/spacing.md) for full details)
+
+## Fluid Width System (Updated v7.5.0)
+
 - Mobile Compact: >320px (1 column)
 - Mobile: >480px (1-2 columns)
 - Small: >600px (2 columns)
@@ -512,7 +628,8 @@ The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** design system
 - **Desktop XL: >1800px (5 columns optimized)** ← NEW v7.5.1
 - **Full HD: >1920px (5-6 columns optimized)**
 
-**Container Max Widths:**
+## Container Max Widths
+
 - Content: 800px (reading width)
 - Wide: 1440px (standard desktop)
 - Desktop Wide: 1568px
@@ -522,6 +639,7 @@ The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** design system
 - Full: 100% (viewport)
 
 **Fluid Typography:**
+
 - H1: 36px → 120px (`.text-hero-h1`)
 - H2: 24px → 48px (`.text-section-h2`)
 - Body: 16px → 20px (`.text-body-p`)
@@ -535,9 +653,10 @@ The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** design system
 **Status:** 100% WCAG 2.1 Level AA Compliant
 
 All components meet the following standards:
+
 - **Color Contrast:** 4.5:1 minimum (body text), 7:1+ achieved in dark mode (AAA)
 - **Reduced Motion:** Full `prefers-reduced-motion` support for all 26 animations
-  - See **[prefers-reduced-motion.md](./prefers-reduced-motion.md)** for coding standards and implementation guide
+- See **[prefers-reduced-motion.md](./prefers-reduced-motion.md)** for coding standards and implementation guide
 - **Keyboard Navigation:** Full support (Tab, Enter, Space, Arrows, Escape)
 - **Screen Readers:** Proper ARIA labels and semantic HTML
 - **Focus Management:** Enhanced 3px neon pink focus indicators with glow effects
@@ -547,16 +666,17 @@ All components meet the following standards:
 ## 5. 📧 Backend Integrations
 
 ### Contact Page Integration (Typeform)
+
 - **Solution:** Typeform embed integration
 - **Features:** Professional inquiry form for collaborations (non-commercial).
 - **Implementation:** `TypeformEmbed` component dynamically loads the form
 
 ### Content Management
-- **Dual Mode Architecture** - Toggle between Mock Data and Headless WordPress via `VITE_USE_WORDPRESS`
+
+- **Dual Mode Architecture** - Toggle between Mock Data and Headless WordPress via `VITE*USE*WORDPRESS`
 - **Centralized Data Access** - All components use `useContent` hooks (facade pattern)
 - **Type-safe** - Full TypeScript support for both Mock and WP data shapes
 - **Single source of truth** - Content is managed externally (WP) or in `/data/mock/`
-
 
 ---
 
@@ -564,18 +684,22 @@ All components meet the following standards:
 
 ### TypeScript Requirements
 
-Every component must include JSDoc comments describing purpose, props, and accessibility features.
+Every component must include JSDoc comments describing purpose, props, and
+accessibility features.
 
 ### Export Standards
+
 - **Named Exports:** All components (for tree-shaking)
 - **Default Export:** Only App.tsx
 - **Type Exports:** Separate export for shared interfaces
 
 ### Breadcrumbs (REQUIRED on all sub-pages)
 
-**Single Source Component:** All breadcrumbs MUST use `/components/ui/Breadcrumbs.tsx`. Never create inline breadcrumb markup.
+**Single Source Component:** All breadcrumbs MUST use
+`/components/ui/Breadcrumbs.tsx`. Never create inline breadcrumb markup.
 
-**CSS:** `/styles/blocks/breadcrumbs.css` (imported by the component itself — no need to import CSS separately).
+**CSS:** `/styles/blocks/breadcrumbs.css` (imported by the component itself — no
+need to import CSS separately).
 
 **Pattern:** `Home > Section > Page Name`
 
@@ -587,16 +711,19 @@ import { Breadcrumbs } from '../../ui/Breadcrumbs';
   { label: 'Developer Tools', href: '/dev-tools' },
   { label: 'Typography Specimens' },
 ]} />
-```
+
+```text
 
 **Rules:**
+
 - Never render `<Breadcrumbs>` more than once per page
 - Last item has no `href` (renders as plain text with `aria-current="page"`)
 - Schema.org BreadcrumbList JSON-LD is injected automatically
 
 ### SEO (REQUIRED on all pages)
 
-**Single Source Utility:** All SEO meta tags MUST use `setSEO()` from `/utils/seo.ts`. Never set `document.title` directly.
+**Single Source Utility:** All SEO meta tags MUST use `setSEO()` from
+`/utils/seo.ts`. Never set `document.title` directly.
 
 ```tsx
 import { setSEO } from '../../../utils/seo';
@@ -605,9 +732,11 @@ import { pageSEO } from '../../../data/mock/seo';
 useEffect(() => {
   setSEO(pageSEO.about);
 }, []);
-```
 
-**Dynamic content pages** use helper functions: `blogPostSEO()`, `videoSEO()`, `podcastSEO()`, `portfolioEntrySEO()`, etc.
+```text
+
+**Dynamic content pages** use helper functions: `blogPostSEO()`, `videoSEO()`,
+`podcastSEO()`, `portfolioEntrySEO()`, etc.
 
 ---
 
@@ -615,26 +744,33 @@ useEffect(() => {
 
 ### Must Use Explicit Design Token Classes
 
-**Layout Components (Header, Footer, MobileMenu):**
+## Layout Components (Header, Footer, MobileMenu)
+
 - **Strictly Prohibited:** Hardcoded pixel values (e.g., `w-[300px]`, `top-[50px]`)
 - **Required:** Use responsive design tokens or fluid utilities
 
 ### Typography Classes (REQUIRED)
-See **[design-tokens/typography.md](./design-tokens/typography.md)** for complete scale.
+
+See **[design-tokens/typography.md](./design-tokens/typography.md)** for
+complete scale.
 
 ```css
 .font-heading          /* Playfair Display serif - elegant headings */
 .font-body             /* Inter sans-serif - readable body text */
 .font-title            /* Righteous - main hero titles */
-```
+
+```text
 
 ### Color Classes (REQUIRED)
-See **[design-tokens/colors.md](./design-tokens/colors.md)** for complete palette.
+
+See **[design-tokens/colors.md](./design-tokens/colors.md)** for complete
+palette.
 
 ```css
 .bg-gradient-pink-purple-blue    /* Primary CTA gradient */
 .text-gradient-pink-purple-blue  /* Hero title gradients */
-```
+
+```text
 
 ---
 
@@ -642,13 +778,15 @@ See **[design-tokens/colors.md](./design-tokens/colors.md)** for complete palett
 
 ### Overview
 
-The project uses a comprehensive centralized mock data system that serves as the **Single source of truth** for all application content.
+The project uses a comprehensive centralized mock data system that serves as the
+**Single source of truth** for all application content.
 
-**📖 Complete Documentation:** See **[Data System Documentation](../data/README.md)** for comprehensive guide
+**📖 Complete Documentation:** See **[Data System
+Documentation](../data/README.md)** for comprehensive guide
 
 ### Data Organization
 
-```
+```text
 /data/
 ├── mock/                          # Centralized mock data
 │   ├── images/                    # Hero images
@@ -656,13 +794,15 @@ The project uses a comprehensive centralized mock data system that serves as the
 │   ├── portfolio/                 # Portfolio entries
 │   ├── blog/                      # Blog posts
 │   └── ui/                        # UI elements
-```
+
+```text
 
 ---
 
 ## 9. 🔍 Quality Standards
 
 ### Pre-Deployment Checklist
+
 - [ ] TypeScript: No compilation errors (`npm run type-check`)
 - [ ] Build Verification: Run `npm run verify` (checks links & env)
 - [ ] Lighthouse: 95+ performance, 100 accessibility
@@ -675,11 +815,14 @@ The project uses a comprehensive centralized mock data system that serves as the
 ## 10. 📖 Additional Documentation
 
 ### Protected Root Files
+
 - **[CHANGELOG.md](../CHANGELOG.md)** - Release history following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format (protected — never delete, move, or rename)
 - **[Changelog Guidelines](./changelog.md)** - Format rules, writing standards, and protection policies for the changelog
 
 ### Component-Specific Guidelines
+
 Before using any component, read its specific guideline file:
+
 - **[Logo](./components/Logo.md)** - Brand logo usage and responsive behavior
 - **[ScrollDownArrow](./components/ScrollDownArrow.md)** - Animated scroll indicator
 - **[ScrollToTop](./components/ScrollToTop.md)** - Floating scroll button
@@ -690,6 +833,7 @@ Before using any component, read its specific guideline file:
 ## 11. 🚀 Future Enhancements
 
 ### Current Foundation (Complete)
+
 - ✅ CSS system with fluid typography and variable fonts
 - ✅ Centralized mock data system with blog, portfolio, videos, podcasts
 - ✅ Full accessibility compliance (WCAG 2.1 AA)
@@ -704,15 +848,18 @@ Before using any component, read its specific guideline file:
 
 ### Console Logging Policy
 
-**Strict Rule:** No `console.log`, `console.warn`, or `console.error` calls are allowed in production code unless wrapped in a development environment check.
+**Strict Rule:** No `console.log`, `console.warn`, or `console.error` calls are
+allowed in production code unless wrapped in a development environment check.
 
 ```tsx
 if (import.meta.env.DEV) {
   console.log('🐞 Debug info:', data);
 }
-```
+
+```text
 
 ### Error Handling
+
 - **Uncaught Promises:** All async operations must have `try/catch` blocks or `.catch()` handlers.
 - **Global Errors:** The `ErrorBoundary` component handles React lifecycle errors.
 
@@ -721,6 +868,7 @@ if (import.meta.env.DEV) {
 **Last Updated:** February 2026
 **Maintained by:** Ash Shaw Portfolio Team
 
-**Need Help?**
+## Need Help
+
 - Component not working? → Check **[overview-components.md](./overview-components.md)**
 - Styling issues? → Review **[design-tokens/](./design-tokens/)** files

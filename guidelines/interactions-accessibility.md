@@ -1,24 +1,35 @@
 # Interactions & Accessibility Guidelines
 
-**Version:** 1.0.0  
-**Last Updated:** January 2025  
+**Version:** 1.0.0
+**Last Updated:** January 2025
 **Part of:** Ash Shaw Makeup Portfolio Design System
 
 ## Overview
 
-This document defines comprehensive accessibility standards and interaction patterns for the Ash Shaw Makeup Portfolio, ensuring WCAG 2.1 AAA compliance and optimal user experience for all users, including those using assistive technologies.
+This document defines comprehensive accessibility standards and interaction
+patterns for the Ash Shaw Makeup Portfolio, ensuring WCAG 2.1 AAA compliance and
+optimal user experience for all users, including those using assistive
+technologies.
 
 ## Table of Contents
 
 1. [Accessibility Standards](#accessibility-standards)
-2. [Keyboard Navigation](#keyboard-navigation)
-3. [Screen Reader Support](#screen-reader-support)
-4. [Focus Management](#focus-management)
-5. [Color Contrast](#color-contrast)
-6. [ARIA Patterns](#aria-patterns)
-7. [Form Accessibility](#form-accessibility)
-8. [Interactive Components](#interactive-components)
-9. [Testing Checklist](#testing-checklist)
+
+1. [Keyboard Navigation](#keyboard-navigation)
+
+1. [Screen Reader Support](#screen-reader-support)
+
+1. [Focus Management](#focus-management)
+
+1. [Color Contrast](#color-contrast)
+
+1. [ARIA Patterns](#aria-patterns)
+
+1. [Form Accessibility](#form-accessibility)
+
+1. [Interactive Components](#interactive-components)
+
+1. [Testing Checklist](#testing-checklist)
 
 ---
 
@@ -28,7 +39,8 @@ This document defines comprehensive accessibility standards and interaction patt
 
 **Target Compliance Level:** AAA (Enhanced)
 
-**Core Principles (POUR):**
+## Core Principles (POUR)
+
 - ✅ **Perceivable:** Information presented in ways all users can perceive
 - ✅ **Operable:** Interface components and navigation must be operable
 - ✅ **Understandable:** Information and operation must be understandable
@@ -38,6 +50,7 @@ This document defines comprehensive accessibility standards and interaction patt
 
 ```typescript
 /**
+
  * Accessibility requirements for all components
  */
 interface AccessibilityRequirements {
@@ -47,27 +60,27 @@ interface AccessibilityRequirements {
     largeText: '4.5:1 (AAA)',     // 18pt+ or 14pt+ bold
     uiComponents: '3:1 (minimum)'  // Buttons, form controls
   };
-  
+
   // Operable
   touchTargets: {
     minimum: '44x44px',            // WCAG 2.1 Level AA
     recommended: '48x48px'         // Enhanced usability
   };
-  
+
   keyboardNavigation: {
     required: true,
     tabOrder: 'logical',
     focusVisible: true,
     shortcuts: 'documented'
   };
-  
+
   // Understandable
   language: {
     declared: true,               // <html lang="en">
     changes: 'marked',            // lang attribute for changes
     labels: 'clear and descriptive'
   };
-  
+
   // Robust
   markup: {
     valid: true,                  // HTML validation
@@ -75,7 +88,8 @@ interface AccessibilityRequirements {
     ariaCompliant: true           // Proper ARIA usage
   };
 }
-```
+
+```text
 
 ---
 
@@ -83,7 +97,8 @@ interface AccessibilityRequirements {
 
 ### Global Keyboard Shortcuts
 
-**Standard Shortcuts:**
+## Standard Shortcuts
+
 ```typescript
 const KEYBOARD_SHORTCUTS = {
   // Navigation
@@ -92,26 +107,28 @@ const KEYBOARD_SHORTCUTS = {
   'Enter': 'Activate link or button',
   'Space': 'Activate button or toggle checkbox',
   'Escape': 'Close modal or cancel operation',
-  
+
   // Page navigation
   'Home': 'Jump to page top',
   'End': 'Jump to page bottom',
-  
+
   // Skip links
   'Alt+1': 'Skip to main content',
   'Alt+2': 'Skip to navigation',
   'Alt+3': 'Skip to search',
-  
+
   // Custom shortcuts
   'Ctrl+K (⌘+K)': 'Open search',
   'Shift+?': 'Show keyboard shortcuts help'
 } as const;
-```
+
+```text
 
 ### Skip Links Pattern
 
 ```tsx
 /**
+
  * Skip navigation links for keyboard users
  */
 export function SkipLinks() {
@@ -148,12 +165,14 @@ export function SkipLinks() {
     </div>
   );
 }
-```
+
+```text
 
 ### Tab Order and Focus Flow
 
 ```tsx
 /**
+
  * Proper tab order in complex layouts
  */
 export function AccessibleLayout() {
@@ -161,7 +180,7 @@ export function AccessibleLayout() {
     <div>
       {/* Skip links come first */}
       <SkipLinks />
-      
+
       {/* Header with navigation */}
       <header id="navigation" tabIndex={-1}>
         <nav aria-label="Main navigation">
@@ -171,12 +190,12 @@ export function AccessibleLayout() {
           <a href="/blog" tabIndex={0}>Blog</a>
         </nav>
       </header>
-      
+
       {/* Main content */}
       <main id="main-content" tabIndex={-1}>
         {/* Content here */}
       </main>
-      
+
       {/* Footer navigation */}
       <footer>
         <nav aria-label="Footer navigation">
@@ -186,12 +205,14 @@ export function AccessibleLayout() {
     </div>
   );
 }
-```
+
+```text
 
 ### Keyboard Event Handlers
 
 ```tsx
 /**
+
  * Accessible keyboard event handling
  */
 export function KeyboardAccessibleButton({
@@ -210,19 +231,21 @@ export function KeyboardAccessibleButton({
       onClick();
     }
   };
-  
+
   return (
     <button
       onClick={onClick}
       onKeyDown={handleKeyDown}
       aria-label={ariaLabel}
-      className="focus:outline-none focus:ring-4 focus:ring-pink-200 dark:focus:ring-purple-500"
+className="focus:outline-none focus:ring-4 focus:ring-pink-200
+dark:focus:ring-purple-500"
     >
       {children}
     </button>
   );
 }
-```
+
+```text
 
 ---
 
@@ -232,6 +255,7 @@ export function KeyboardAccessibleButton({
 
 ```tsx
 /**
+
  * Proper semantic HTML for screen readers
  */
 export function SemanticPage() {
@@ -243,7 +267,7 @@ export function SemanticPage() {
           {/* Navigation content */}
         </nav>
       </header>
-      
+
       <main role="main" id="main-content">
         {/* Main content */}
         <article>
@@ -251,33 +275,36 @@ export function SemanticPage() {
             <h1>Article Title</h1>
             <p>By Author Name</p>
           </header>
-          
+
           <section aria-labelledby="section-1-heading">
             <h2 id="section-1-heading">Section Title</h2>
             {/* Section content */}
           </section>
         </article>
       </main>
-      
+
       <aside role="complementary" aria-label="Related content">
         {/* Sidebar content */}
       </aside>
-      
+
       <footer role="contentinfo">
         {/* Footer content */}
       </footer>
     </div>
   );
 }
-```
+
+```text
 
 ### ARIA Live Regions
 
 ```tsx
 /**
+
  * Announce dynamic content changes
  */
-export function SearchResults({ results, isLoading }: { results: any[]; isLoading: boolean }) {
+export function SearchResults({ results, isLoading }: { results: any[];
+isLoading: boolean }) {
   return (
     <div>
       {/* Polite announcement for search results */}
@@ -287,12 +314,12 @@ export function SearchResults({ results, isLoading }: { results: any[]; isLoadin
         aria-atomic="true"
         className="sr-only"
       >
-        {isLoading 
-          ? 'Loading search results...' 
+        {isLoading
+          ? 'Loading search results...'
           : `Found ${results.length} results`
         }
       </div>
-      
+
       {/* Visual results */}
       <div aria-label="Search results">
         {results.map((result) => (
@@ -304,6 +331,7 @@ export function SearchResults({ results, isLoading }: { results: any[]; isLoadin
 }
 
 /**
+
  * Alert for critical notifications
  */
 export function ErrorAlert({ message }: { message: string }) {
@@ -311,7 +339,8 @@ export function ErrorAlert({ message }: { message: string }) {
     <div
       role="alert"
       aria-live="assertive"
-      className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-fluid-md"
+className="bg-red-50 dark:bg-red-900/20 border border-red-200
+dark:border-red-800 rounded-lg p-fluid-md"
     >
       <p className="text-red-800 dark:text-red-200 font-body">
         {message}
@@ -319,7 +348,8 @@ export function ErrorAlert({ message }: { message: string }) {
     </div>
   );
 }
-```
+
+```text
 
 ### Screen Reader Only Content
 
@@ -348,12 +378,14 @@ export function ErrorAlert({ message }: { message: string }) {
   clip: auto;
   white-space: normal;
 }
-```
+
+```text
 
 ### Descriptive Labels
 
 ```tsx
 /**
+
  * Comprehensive labeling for screen readers
  */
 export function AccessibleForm() {
@@ -362,7 +394,7 @@ export function AccessibleForm() {
       <h2 id="contact-form-heading" className="text-section-h2">
         Contact Form
       </h2>
-      
+
       {/* Explicit label association */}
       <div>
         <label htmlFor="name-input" className="font-body font-medium">
@@ -381,7 +413,7 @@ export function AccessibleForm() {
           Please enter your full name
         </p>
       </div>
-      
+
       {/* Accessible error messages */}
       <div>
         <label htmlFor="email-input" className="font-body font-medium">
@@ -397,14 +429,16 @@ export function AccessibleForm() {
           aria-describedby="email-error"
           className="w-full px-fluid-sm py-fluid-sm rounded-lg border border-red-500"
         />
-        <p id="email-error" role="alert" className="text-fluid-sm text-red-600 dark:text-red-400">
+<p id="email-error" role="alert" className="text-fluid-sm text-red-600
+dark:text-red-400">
           Please enter a valid email address
         </p>
       </div>
     </form>
   );
 }
-```
+
+```text
 
 ---
 
@@ -428,7 +462,7 @@ export function AccessibleForm() {
 
 /* Component-specific focus */
 .button-focus:focus-visible {
-  box-shadow: 
+  box-shadow:
     0 0 0 3px #ffffff,
     0 0 0 6px rgba(255, 107, 157, 0.5);
 }
@@ -444,12 +478,14 @@ a:focus-visible {
   outline-offset: 4px;
   text-decoration: underline;
 }
-```
+
+```text
 
 ### Focus Trap for Modals
 
 ```tsx
 /**
+
  * Focus trap implementation
  */
 export function useFocusTrap(
@@ -458,21 +494,22 @@ export function useFocusTrap(
 ) {
   React.useEffect(() => {
     if (!isActive || !elementRef.current) return;
-    
+
     const element = elementRef.current;
     const focusableElements = element.querySelectorAll<HTMLElement>(
-      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]),
+textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
     );
-    
+
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
-    
+
     // Focus first element
     firstElement?.focus();
-    
+
     const handleTab = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
-      
+
       if (e.shiftKey) {
         if (document.activeElement === firstElement) {
           e.preventDefault();
@@ -485,13 +522,14 @@ export function useFocusTrap(
         }
       }
     };
-    
+
     element.addEventListener('keydown', handleTab);
     return () => element.removeEventListener('keydown', handleTab);
   }, [elementRef, isActive]);
 }
 
 /**
+
  * Accessible modal with focus trap
  */
 export function AccessibleModal({
@@ -507,9 +545,9 @@ export function AccessibleModal({
 }) {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const previousFocusRef = React.useRef<HTMLElement | null>(null);
-  
+
   useFocusTrap(modalRef, isOpen);
-  
+
   React.useEffect(() => {
     if (isOpen) {
       // Save current focus
@@ -523,9 +561,9 @@ export function AccessibleModal({
       document.body.style.overflow = '';
     }
   }, [isOpen]);
-  
+
   if (!isOpen) return null;
-  
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
@@ -537,7 +575,8 @@ export function AccessibleModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
-        className="bg-white dark:bg-purple-900 rounded-xl p-fluid-lg max-w-2xl max-h-[90vh] overflow-y-auto"
+className="bg-white dark:bg-purple-900 rounded-xl p-fluid-lg max-w-2xl
+max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <header className="mb-fluid-md">
@@ -547,18 +586,21 @@ export function AccessibleModal({
           <button
             onClick={onClose}
             aria-label="Close modal"
-            className="absolute top-fluid-md right-fluid-md p-fluid-sm rounded-lg hover:bg-gray-100 dark:hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-pink-200 dark:focus:ring-purple-500"
+className="absolute top-fluid-md right-fluid-md p-fluid-sm rounded-lg
+hover:bg-gray-100 dark:hover:bg-purple-800 focus:outline-none focus:ring-2
+focus:ring-pink-200 dark:focus:ring-purple-500"
           >
             <span aria-hidden="true">×</span>
           </button>
         </header>
-        
+
         <div>{children}</div>
-        
+
         <footer className="mt-fluid-md flex justify-end gap-fluid-sm">
           <button
             onClick={onClose}
-            className="px-button py-button bg-gray-200 dark:bg-purple-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-200 dark:focus:ring-purple-500"
+className="px-button py-button bg-gray-200 dark:bg-purple-800 rounded-lg
+focus:outline-none focus:ring-2 focus:ring-pink-200 dark:focus:ring-purple-500"
           >
             Close
           </button>
@@ -567,7 +609,8 @@ export function AccessibleModal({
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -575,7 +618,8 @@ export function AccessibleModal({
 
 ### AAA Contrast Requirements
 
-**Text Contrast Ratios:**
+## Text Contrast Ratios
+
 - **Normal text (< 18pt or < 14pt bold):** 7:1 minimum
 - **Large text (≥ 18pt or ≥ 14pt bold):** 4.5:1 minimum
 - **UI components and graphics:** 3:1 minimum
@@ -588,15 +632,15 @@ export function AccessibleModal({
   /* Body text on white */
   color: #1a1a1a;              /* 15.3:1 ratio */
   background: #ffffff;
-  
+
   /* Headings on white */
   color: #000000;              /* 21:1 ratio */
   background: #ffffff;
-  
+
   /* Gray text on white */
   color: #4a5568;              /* 8.59:1 ratio */
   background: #ffffff;
-  
+
   /* Links */
   color: #c239b3;              /* 4.5:1 ratio - large text */
   background: #ffffff;
@@ -607,25 +651,27 @@ export function AccessibleModal({
   /* Body text on purple-950 */
   color: #f3e8ff;              /* 15.1:1 ratio */
   background: #1e1b4b;
-  
+
   /* Headings on purple-950 */
   color: #ffffff;              /* 18.2:1 ratio */
   background: #1e1b4b;
-  
+
   /* Light purple text */
   color: #ddd6fe;              /* 12.8:1 ratio */
   background: #1e1b4b;
-  
+
   /* Links */
   color: #a78bfa;              /* 7.2:1 ratio */
   background: #1e1b4b;
 }
-```
+
+```text
 
 ### Contrast Testing
 
 ```typescript
 /**
+
  * Calculate color contrast ratio
  */
 function getContrastRatio(color1: string, color2: string): number {
@@ -634,29 +680,30 @@ function getContrastRatio(color1: string, color2: string): number {
     const r = (rgb >> 16) & 0xff;
     const g = (rgb >> 8) & 0xff;
     const b = (rgb >> 0) & 0xff;
-    
+
     const [rs, gs, bs] = [r, g, b].map(c => {
       const val = c / 255;
       return val <= 0.03928
         ? val / 12.92
         : Math.pow((val + 0.055) / 1.055, 2.4);
     });
-    
+
     return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
   };
-  
+
   const lum1 = getLuminance(color1);
   const lum2 = getLuminance(color2);
   const lighter = Math.max(lum1, lum2);
   const darker = Math.min(lum1, lum2);
-  
+
   return (lighter + 0.05) / (darker + 0.05);
 }
 
 // Usage
 const ratio = getContrastRatio('#000000', '#ffffff');
 console.log(ratio); // 21:1 (AAA)
-```
+
+```text
 
 ---
 
@@ -666,26 +713,31 @@ console.log(ratio); // 21:1 (AAA)
 
 ```tsx
 /**
+
  * Accordion with proper ARIA
  */
-export function AccessibleAccordion({ items }: { items: Array<{ title: string; content: string }> }) {
+export function AccessibleAccordion({ items }: { items: Array<{ title: string;
+content: string }> }) {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
-  
+
   return (
     <div className="space-y-fluid-sm">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
         const headingId = `accordion-heading-${index}`;
         const panelId = `accordion-panel-${index}`;
-        
+
         return (
-          <div key={index} className="border border-gray-200 dark:border-purple-700 rounded-lg">
+<div key={index} className="border border-gray-200 dark:border-purple-700
+rounded-lg">
             <h3 id={headingId}>
               <button
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="w-full px-fluid-md py-fluid-sm text-left font-heading font-semibold flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-pink-200 dark:focus:ring-purple-500"
+className="w-full px-fluid-md py-fluid-sm text-left font-heading font-semibold
+flex justify-between items-center focus:outline-none focus:ring-2
+focus:ring-pink-200 dark:focus:ring-purple-500"
               >
                 {item.title}
                 <span aria-hidden="true">{isOpen ? '−' : '+'}</span>
@@ -708,11 +760,13 @@ export function AccessibleAccordion({ items }: { items: Array<{ title: string; c
 }
 
 /**
+
  * Tabs with proper ARIA
  */
-export function AccessibleTabs({ tabs }: { tabs: Array<{ label: string; content: React.ReactNode }> }) {
+export function AccessibleTabs({ tabs }: { tabs: Array<{ label: string; content:
+React.ReactNode }> }) {
   const [activeTab, setActiveTab] = React.useState(0);
-  
+
   return (
     <div>
       <div role="tablist" aria-label="Content tabs">
@@ -727,8 +781,8 @@ export function AccessibleTabs({ tabs }: { tabs: Array<{ label: string; content:
             onClick={() => setActiveTab(index)}
             className={`
               px-fluid-md py-fluid-sm font-body font-medium
-              ${activeTab === index 
-                ? 'border-b-2 border-pink-500 text-pink-500' 
+              ${activeTab === index
+                ? 'border-b-2 border-pink-500 text-pink-500'
                 : 'text-gray-600 dark:text-purple-300'
               }
               focus:outline-none focus:ring-2 focus:ring-pink-200 dark:focus:ring-purple-500
@@ -738,7 +792,7 @@ export function AccessibleTabs({ tabs }: { tabs: Array<{ label: string; content:
           </button>
         ))}
       </div>
-      
+
       {tabs.map((tab, index) => (
         <div
           key={index}
@@ -755,7 +809,8 @@ export function AccessibleTabs({ tabs }: { tabs: Array<{ label: string; content:
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -765,6 +820,7 @@ export function AccessibleTabs({ tabs }: { tabs: Array<{ label: string; content:
 
 ```tsx
 /**
+
  * Fully accessible form input
  */
 export function AccessibleInput({
@@ -786,39 +842,42 @@ export function AccessibleInput({
 }) {
   const hintId = `${id}-hint`;
   const errorId = `${id}-error`;
-  
+
   return (
     <div className="mb-fluid-md">
-      <label 
+      <label
         htmlFor={id}
-        className="block font-body font-medium mb-fluid-xs text-gray-800 dark:text-purple-100"
+className="block font-body font-medium mb-fluid-xs text-gray-800
+dark:text-purple-100"
       >
         {label}
         {required && (
           <span aria-label="required" className="text-red-500 ml-1">*</span>
         )}
       </label>
-      
+
       {hint && (
-        <p id={hintId} className="text-fluid-sm text-gray-600 dark:text-purple-300 mb-fluid-xs">
+<p id={hintId} className="text-fluid-sm text-gray-600 dark:text-purple-300
+mb-fluid-xs">
           {hint}
         </p>
       )}
-      
+
       <input
         id={id}
         type={type}
         required={required}
         aria-required={required}
         aria-invalid={!!error}
-        aria-describedby={`${hint ? hintId : ''} ${error ? errorId : ''}`.trim() || undefined}
+aria-describedby={`${hint ? hintId : ''} ${error ? errorId : ''}`.trim() ||
+undefined}
         className={`
           w-full px-fluid-sm py-fluid-sm min-h-[44px]
           rounded-lg border-2
           font-body text-fluid-base
           transition-colors duration-200
-          ${error 
-            ? 'border-red-500 focus:border-red-600' 
+          ${error
+            ? 'border-red-500 focus:border-red-600'
             : 'border-gray-300 dark:border-purple-700 focus:border-pink-500'
           }
           focus:outline-none focus:ring-4 focus:ring-pink-200 dark:focus:ring-purple-500
@@ -827,16 +886,18 @@ export function AccessibleInput({
         `}
         {...props}
       />
-      
+
       {error && (
-        <p id={errorId} role="alert" className="text-fluid-sm text-red-600 dark:text-red-400 mt-fluid-xs">
+<p id={errorId} role="alert" className="text-fluid-sm text-red-600
+dark:text-red-400 mt-fluid-xs">
           {error}
         </p>
       )}
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -856,15 +917,20 @@ export function AccessibleInput({
 ### Automated Testing
 
 ```bash
+
 # Install testing tools
+
 npm install --save-dev @axe-core/react pa11y
 
 # Run axe-core in development
+
 npm run dev
 
 # Run pa11y accessibility audit
+
 pa11y http://localhost:3000
-```
+
+```text
 
 ### Screen Reader Testing
 
@@ -884,6 +950,6 @@ pa11y http://localhost:3000
 
 ---
 
-**Version:** 1.0.0  
-**Last Updated:** January 2025  
+**Version:** 1.0.0
+**Last Updated:** January 2025
 **Maintained by:** Ash Shaw Portfolio Team
