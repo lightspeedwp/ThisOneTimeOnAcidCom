@@ -284,6 +284,8 @@ TOA-253, TOA-272
   - Verify default-template behaviour in a separate test PR (unmatched branch type)
   - Verify named-template selection in a separate test PR (explicit selection precedence)
   - Confirm template appears without overwriting contributor content
+  - ⏳ Owner approval for protected-file changes remains unverified (T055);
+    record the approval reference and scope before marking approval verified
   - Document shared-template routing approach in `CONTRIBUTING.md` under "PR Creation Process"
 - [x] T036 [P] [WS-261] [TOA-253] Document saved replies and contributor setup
   - ✅ Add "Using Saved Replies" section to CONTRIBUTING.md
@@ -390,10 +392,13 @@ run `npm run build` and verify BEM-only styling succeeds
   - ✅ Added section: "Governance Structure" with decisions table (7 decisions documented)
   - ✅ All 5 original requirements integrated into comprehensive governance sections
   - ✅ Links to parent governance docs (lightspeedwp/.github) established
-  - Add section: "Styling" — document BEM-only CSS rules
+  - ✅ Verified: "Styling: semantic BEM" section documents BEM-only CSS rules in
+    `CONTRIBUTING.md`
 
-**Checkpoint**: Root configuration updated; npm-only and Node.js 24 enforced;
-Tailwind removed; changelog validation active; documentation complete
+**Checkpoint**: Root configuration partially delivered; npm-only and Node.js 24
+configured; changelog validation active. Tailwind dependencies and the Vite plugin
+remain configured for Make; removal is outstanding. T046's Styling item is
+verified in `CONTRIBUTING.md` under "Styling: semantic BEM".
 
 ---
 

@@ -22,7 +22,9 @@ Run `npm run dev` to start the development server.
 ## 🌟 Overview
 
 This is a high-performance React application built with **Vite**, **TypeScript**,
-and **Tailwind CSS**. It features a unique **"Neon vs Atomic Black"** design
+and a **strict BEM (Block Element Modifier) CSS architecture**. Tailwind tooling
+is retained for Figma Make, but no Tailwind utilities are used. It features a
+unique **"Neon vs Atomic Black"** design
 system with a comprehensive **retro terminal boot animation system**, and
 maintains 100% WCAG 2.1 AAA accessibility compliance.
 
