@@ -9,13 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-**Jest Failure Comparison Testing Infrastructure**
-
-- **Enhanced failure detection** — Updated `scripts/validation/compare-jest-failures.cjs` to correctly detect failures from `numFailingTests` field, `assertionResults` array, and suite-level `status: 'failed'`; added comprehensive test suite (`scripts/validation/compare-jest-failures.test.js`) with 13 test cases covering all failure detection methods
-
-**CI/CD Configuration Standardisation (Issue #4)**
-
-- **Package manager standardisation** — Standardised on npm across all environments (development, CI/CD, production) with consistent package-lock.json
+- **Package manager standardisation** — Standardised on npm across all environments (development, CI/CD, production) with consistent package-lock.json (Issue #4)
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
 - **Removed pnpm configuration** — Deleted `pnpm-lock.yaml` and `pnpm-workspace.yaml` (no longer needed with npm)
 - **Migrated dependency overrides** — Converted pnpm-specific vite override to npm-compatible configuration; removed conflicting vite pinning to allow newer v6.4.3
@@ -51,13 +45,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Environment variable reference** — Documented Figma API configuration (FIGMA_API_TOKEN, FIGMA_MAKE_FILE_KEY, FIGMA_TEAM_ID, FIGMA_EXPORT_FORMAT, FIGMA_EXPORT_SCALE)
 - **Extraction time estimates** — Documented pilot and full batch estimates (10 assets ~7 seconds, 56 assets ~42 seconds, 100 assets ~65 seconds)
 
-#### Repository Boundary Enforcement (TOA-??)
-
 - **Recovery pilot file reorganization** — PHASE1A_CATALOGUE_PROMPT.md and PHASE1B_RECOVERY_PROMPT.md moved from `.github/specs/002-media-library/recovery-pilot/` to `.github/reports/toa-media-library/` to establish recovery pilot as a phase within the existing 002-media-library specification, not as a separate specification structure
 - **Specification catalog metadata correction** — Corrected next specification number from "002" to "003" in `.github/specs/CATALOG.md` to accurately reflect that spec 002-media-library has been created and the next new specification will be numbered 003
 - **Repository boundary validation** — Added comprehensive Markdown file validation to `.github/validation/validate-no-root-md-files.cjs` with pattern-based detection for PHASE, PROMPT, REPORT, SPEC, TODO, NOTES, PLAN, and RESEARCH file naming violations (21 passing tests, ~71% code coverage)
-
-#### Phase 2 Governance Consolidation — Repository Restructuring (Spec 001, Spec 021)
 
 - **Specification and implementation plan** for consolidating duplicate governance files from ThisOneTimeOnAcidCom into lightspeedwp/.github as single source of truth (40 tasks across 6 phases)
 - **Hybrid governance model architecture** documented: canonical configuration (labels, issue types, PR/issue templates) centralised in lightspeedwp/.github; repo-specific custom workflows preserved in ThisOneTimeOnAcidCom
@@ -72,19 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Spec 021: Repository Restructuring & Canonical Governance Config (lightspeedwp/.github)
   - Linked workstreams: TOA-262 (PR/Issue Template Routing), TOA-271 (Validation & Automation)
 
-#### Netlify Performance & Security Configuration (TOA-7)
-
-- **Root `netlify.toml` configuration** — Added production build settings with npm package manager, Node.js 24 runtime pinning, and SPA fallback rule
-- **Immutable asset caching** — Generate exact-path `Cache-Control: public, max-age=31536000, immutable` rules in `dist/_headers` for content-hashed Vite bundle outputs under `/assets/` matching `-[8-char hash].ext` pattern
-- **Security baseline headers** — `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: DENY` and `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()` (CSP deferred)
-- **HTML cache preservation** — Retain `Cache-Control: public, max-age=0, must-revalidate` for HTML responses to enable revalidation on refresh
-- **SPA fallback rule** — Unforced `/* → /index.html 200` fallback to support direct navigation and refresh on nested routes without breaking real files
-- **Netlify header/redirect validation tests** — Added `tests/netlify-headers.test.mjs` with 7 passing test suites covering hashed asset detection, header generation, and configuration validation
-- **Deployed header checker** — Created `scripts/check-netlify-headers.mjs` for testing deployed site header configuration against expected values
-- **Header generation integration** — Updated `vite.config.ts` to call `netlifyHashedAssetHeaders()` during build, generating `dist/_headers` file with immutable cache rules
-
-#### Phase 1 Governance Workflows (TOA-241)
-
 - **Branch name validation** — `branch-name-validation.yml` validates branch naming conventions against `{type}/{scope}-{title}` pattern with forbidden prefix checks (`claude/`, `copilot/`, `openai/`)
 - **Test automation** — `tests.yml` runs test suites on push and pull request events to ensure code quality
 - **Locked files protection** — `locked-files-guard.yml` prevents unauthorised changes to governance configuration files (`.github/labels.yml`, `.github/issue-types.yml`, `.github/PULL_REQUEST_TEMPLATE/*.md`, `.github/ISSUE_TEMPLATE/*.md`)
@@ -94,8 +71,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Specification validation** — `validate-specifications.yml` validates governance specifications against schema and documentation requirements
 - **Claude guard contract validation** — `claude-guard-tests.yml` validates Claude-generated code meets security and quality standards
 - **Lefthook pre-commit/pre-push hooks** — Git hooks enforce branch naming validation before commits and pushes, preventing use of forbidden prefixes
-
-#### Branch Cleanup Analysis Tool — Report-Only Preview (TOA-270)
 
 - **Automated branch cleanup analysis** — `scripts/cleanup-branches.js` identifies stale merged branches for review without executing deletions
 - **Comprehensive reporting** — Markdown and JSON formats distinguishing:
@@ -126,8 +101,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Preserves branches with open pull requests
   - Protects Dependabot and Renovate branches
 
-#### CodeRabbit Inheritance Configuration (CR-18)
-
 - **`.coderabbit.yml`**: Enabled `inheritance: true` to inherit shared CodeRabbit safeguards and configuration from central `lightspeedwp/coderabbit` repository
 - **`.coderabbit.yml`**: Local overrides preserved — `language: en-GB` and `reviews.profile: chill` remain project-specific
 - **`.coderabbit.yml`**: Corrected mock data path reference from `src/mockData/` to `src/app/data/mock/` to align with actual repository structure and path mapping conventions documented in AGENTS.md
@@ -147,21 +120,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Accessibility testing requirements
     - Component and unit test isolation patterns
 
-#### Governance Decision NODE-001 — Node.js Version Pinning (Decision 2)
-
 - **Node.js 24 LTS pinning** via `.nvmrc` and `package.json` `engines` field
 - **Documentation update** — `README.md` now requires Node.js 24+ for contributors
 - **Enforcement** — npm will reject installation and builds on incompatible versions
 - **Purpose:** Ensure consistent runtime across development, testing, and production deployments
 
-#### Governance Decision TEST-001 — Jest ESM Configuration (Decision 3)
-
 - **Jest ESM support** resolved via `@swc/jest` transformer in `jest.config.js`
 - **Full test suite passing** — 179 unit tests across `scripts/validate-branch-name.test.js` and `scripts/cleanup-branches.test.js`
 - **Updated `AGENTS.md`** — Documented working status and configuration details
 - **Purpose:** Enable modern ECMAScript module syntax in test infrastructure without Node.js experimental flags
-
-#### Governance Decision GH-003 — Code Ownership & Branch Protection (Decision 9)
 
 - **`.github/CODEOWNERS`** — Designated @ashley as owner for critical governance paths:
   - `.github/` — GitHub governance control plane
@@ -175,11 +142,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Step-by-step instructions** for GitHub Settings → Branches configuration
 - **Purpose:** Establish code ownership review requirements and branch safety policies
 
-#### Inheritance Configuration & Repository Scope
-
 - **`knowledge_base.code_guidelines.filePatterns`**: Set to empty array to exclude inherited WordPress-specific guidelines (block-plugin.md, block-theme.md) from applying to React code reviews. This prevents WordPress coding standards from interfering with React/TypeScript reviews while preserving other benefits of inherited configuration.
-
-#### Application Source Code Guidance (`src/` folder architecture)
 
 - **`src/app/components/**/*.tsx`** — React component review guidance:
   - Semantic HTML with proper heading hierarchy
@@ -244,8 +207,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - npm compatibility (not pnpm-specific)
   - Safe file operations with proper guards
 
-#### Theme Toggle Rewire — Neon Pink/Yellow Controls
-
 - **Rewired theme toggle component** (`/components/common/ThemeToggleES5.tsx`) — Now uses neon pink/yellow styling
 - **Updated toggle CSS** (`/styles/blocks/theme-toggle.css`) — Complete neon redesign with glow effects
 - **Dark mode default:** FOUC script in `/index.html` now defaults to dark mode (no system preference check)
@@ -263,8 +224,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Reduced motion support
 - **Debugging:** Console logs theme changes (dev mode only)
 - **Instant feedback:** DOM updates immediately on toggle (no flash)
-
-#### Flawless Book Dark Mode — Universal Neon Pink/Yellow Theme
 
 - **Universal dark mode CSS** (`/styles/blocks/book-dark-mode.css`) — 600+ lines of comprehensive neon pink/yellow styling for all book pages
 - **Atomic black backgrounds** — Pure #0F0F0F (15, 15, 15) everywhere in dark mode
@@ -298,15 +257,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Keyboard navigation fully supported
 - **Global import** — Added to `/styles/globals.css` for automatic application across all pages
 
-#### Sitemap Page Restoration — Book-Focused Architecture
-
 - **Restored `/sitemap` route** in application router (`/routes.ts`)
 - **Book-style sitemap page** (`/components/pages/SitemapPage.tsx`) with comprehensive site navigation
 - **Full dark mode support** with neon gradients, glass effects, and animated transitions
 - **Structured sections** for book pages, journal entries, events, and additional content
 - **Responsive design** with mobile-optimized navigation cards
-
-#### Dark Mode Critical Bug Fixes — 100% Coverage Achieved
 
 - **Fixed blog polaroid backwards background** (`/styles/blocks/blog-article.css`) — Changed from light gray (#f0f0f0) to proper dark background (#1a1a1a) in dark mode
 - **Added portfolio gallery icon wrapper dark mode override** (`/styles/blocks/portfolio-detail-page.css`) — Gallery zoom icon now has dark background (rgba(15, 15, 15, 0.85)) in dark mode
@@ -317,8 +272,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `/reports/dark-mode-audit/COMPREHENSIVE-SCAN-RESULTS.md` — Full component scan results with statistics
   - `/prompts/dark-mode-audit/00-ORCHESTRATOR.md` — Reusable audit orchestrator
   - `/tasks/dark-mode-emergency-fixes.md` — Complete task list with fixes applied
-
-#### Dark Mode Theme Enhancement — 54 Components, 2,047 Lines, WCAG 2.2 AA Compliant
 
 - **Comprehensive dark mode expansion** from 524 lines to 2,047+ lines (291% increase) across two theme files
 - **Extended components file** (`/styles/themes/dark-extended.css`) — 1,000 lines of additional component styling covering 20 new component types
@@ -337,8 +290,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Theme file integration** — Extended components CSS automatically imported in `/styles/globals.css` alongside core dark theme
 - **Production-ready** — All components tested for cross-browser compatibility, keyboard navigation, screen reader support, and mobile responsiveness
 
-#### Light Mode Theme Toggle — WCAG 2.2 AA/AAA Accessibility Compliance
-
 - **Light mode theme system** with comprehensive WCAG 2.2 accessibility compliance (100% AA, 92% AAA)
 - **ThemeToggleES5 component** (`/components/common/ThemeToggleES5.tsx`) — ES5-compliant theme toggle with sun/moon icons, keyboard accessibility (Enter/Space), localStorage persistence, and system preference detection
 - **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; WCAG AAA compliant text (16.1:1 contrast)
@@ -354,208 +305,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Session Summary** (`/docs/session-summary-march-11-2026.md`) — Session accomplishments, deliverables, quality metrics
 
 ### Fixed
-
-#### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
-
-#### Content Specimens Accessibility Audit — 100% WCAG 2.1 AA Compliant
-
-### Fixed
-
-#### Phase 1 Governance Workflows — Branch Validation & Package Synchronisation
-
-#### Color Palettes System — 33 Neon Palettes with Interface Inspiration
-
-- **Expanded color palette library from 20 to 33 palettes** in `/data/mock/color-palettes.ts`
-- **Added 13 new brand-aligned palettes**:
-  - **Ash Shaw Core** — All 8 core neon colors from the design system
-  - **Cyberpunk Gradient** — Pink→Blue signature gradient for CTAs and hero titles
-  - **Toxic Lime Gradient** — Green→Cyan for success messages and energy themes
-  - **Solar Flare Gradient** — Orange→Yellow for accent highlights and warnings
-  - **Hyperpop Animated** — Full 8-color spectrum for animated backgrounds
-  - **Monochrome Pink Spectrum** — 5 tonal shades from pastel to electric
-  - **Monochrome Blue Spectrum** — 5 tonal shades from sky to midnight
-  - **Complementary Orange & Blue** — Classic complementary pair for split layouts
-  - **Complementary Pink & Green** — High-energy pair for status indicators
-  - **Warm Neon Sunset** — Red→Orange→Yellow→Pink temperature palette
-  - **Cool Neon Ocean** — Cyan→Blue→Purple temperature palette
-  - **Aurora Mesh Background** — Purple/blue radial gradients with opacity system
-  - **Contrast Checkerboard** — Black/white/neon for accessibility-first designs
-- **Interface Ideas field** — Added `interfaceIdeas` to `ColorPalette` interface with 1-3 practical UI/UX suggestions per palette (e.g., "Dark mode dashboard with neon glowing cards", "Hero section with gradient text using background-clip: text")
-- **Updated `/dev-tools/color-palettes` page**:
-  - Added "Interface inspiration" section with bullet-point design suggestions
-  - CSS styling with purple (light mode) and pink (dark mode) arrow bullets
-  - All 33 palettes now include light/dark mode previews and practical implementation ideas
-- **Updated `/guidelines/design-tokens/neon-colors.md`** with complete palette library documentation:
-  - Full hex codes and use cases for all 33 palettes
-  - "Palette Selection Guide" organized by Interface Type (dashboards, CTAs, success/warning states), Mood (energetic, cool, warm, professional), and Use Case (buttons, backgrounds, data viz, status indicators)
-  - Code examples and CSS snippets for each palette category
-  - 7 organized categories: Brand Core, Signature Gradients, Monochrome Spectrums, Complementary Pairs, Temperature Palettes, Background Systems, Thematic Palettes
-
-- **Replaced the malformed `public/_redirects/` directory** (containing `main.tsx`) with a plain-text `public/_redirects` file holding the same `/*  /index.html  200` fallback rule
-- Netlify can now read `dist/_redirects`, so direct navigation and refresh on client-side routes such as `/journal`, `/journal/dancefloor-belonging` and `/ebook` no longer return 404; existing static files are still served first
-- Netlify's site base directory is empty, so `src/app/netlify.toml` is not read during deploys; `public/_redirects` is the single effective redirect definition
-
-#### Style Guide Dark Mode — Atomic Black Backgrounds
-
-- **Fixed Style Guide page dark mode** (`/styles/blocks/style-guide-page.css`) — All white backgrounds replaced with atomic black (#0F0F0F)
-- **Updated 18 color instances:**
-  - 7 backgrounds: `white` → `#0F0F0F`
-  - 11 text colors: `dark-charcoal` → `#FFFFFF` or `#FF10F0`
-  - All borders: `rgba(0,0,0,0.1)` → `rgba(255,16,240,0.2)`
-- **Code block styling** — Neon pink background with yellow text
-- **100% dark mode consistency** across entire site
-
-#### Animation Showcase Bundler Compatibility
-
-- **Removed all inline styles** from AnimationShowcasePage — Replaced with BEM CSS classes
-- **Fixed Figma Make bundler errors** (IframeMessageAbortError) caused by inline style objects
-- **Added BEM classes:**
-  - `.demo-float-box`, `.demo-float-box--pink`, `.demo-float-box--yellow` — Float demo styling
-  - `.demo-float-text` — Float element text styling
-  - `.demo-page-header-spacing` — Page header spacing utility
-- **Strict guidelines compliance** — Zero inline styles, 100% BEM architecture
-
-#### Dark Mode Color Correction — Exact Figma Hex Values
-
-- **Fixed neon pink color** — Changed from #FF3AAE to correct **#FF10F0** (exact Figma design value)
-- **Fixed atomic black** — Changed from #0B0B10 to correct **#0F0F0F** (15,15,15 in RGB)
-- **Added neon magenta** — New color **#D4008C** for button gradients (from Figma design)
-- **Updated all CSS files:**
-  - `/styles/globals.css` — Root color custom properties corrected
-  - `/styles/blocks/book-dark-mode.css` — All rgba() values now use correct hex
-  - `/styles/blocks/theme-toggle.css` — Toggle uses correct #FF10F0
-- **Visual impact:**
-  - Much more vibrant magenta pink (closer to hot pink)
-  - Higher saturation and intensity
-  - Better matches Figma design screenshot
-  - Glow effects more pronounced with correct color
-- **No breaking changes** — CSS custom properties updated, all references automatically inherit new values
-
-### Added
-
-#### Theme Toggle Rewire — Neon Pink/Yellow Controls
-
-- **Rewired theme toggle component** (`/components/common/ThemeToggleES5.tsx`) — Now uses neon pink/yellow styling
-- **Updated toggle CSS** (`/styles/blocks/theme-toggle.css`) — Complete neon redesign with glow effects
-- **Dark mode default:** FOUC script in `/index.html` now defaults to dark mode (no system preference check)
-- **Visual enhancements:**
-  - Moon icon: Neon pink with glow → Yellow on hover
-  - Sun icon: Neon yellow with glow
-  - Button border: Pink (40% opacity) → Yellow on hover
-  - Dual glow shadows on hover (pink outer + yellow inner)
-  - Rotate + scale animation on hover
-  - Focus state: Yellow outline with glow
-- **Accessibility maintained:**
-  - 3px focus outline with 2px offset
-  - ARIA labels for screen readers
-  - Keyboard navigation (Enter/Space)
-  - Reduced motion support
-- **Debugging:** Console logs theme changes (dev mode only)
-- **Instant feedback:** DOM updates immediately on toggle (no flash)
-
-#### Flawless Book Dark Mode — Universal Neon Pink/Yellow Theme
-
-- **Universal dark mode CSS** (`/styles/blocks/book-dark-mode.css`) — 600+ lines of comprehensive neon pink/yellow styling for all book pages
-- **Atomic black backgrounds** — Pure #0F0F0F (15, 15, 15) everywhere in dark mode
-- **Neon pink/yellow gradient system:**
-  - Hero titles: Pink→Yellow gradient with text-fill transparency
-  - Buttons: Animated pink→yellow gradient with dual glow shadows
-  - Cards: Pink borders with pink/yellow dual glow on hover
-  - Links: Pink default, yellow on hover with glow effects
-  - Forms: Pink borders with pink glow on focus
-- **Component-specific dark mode:**
-  - Hero sections: Radial pink/yellow gradient glow overlay
-  - Cards: Atomic black (0.8 opacity) with pink border (0.3 opacity), full glow on hover
-  - Buttons: Primary (pink→yellow gradient), Secondary (pink outline), Ghost (pink text)
-  - Forms: Dark inputs with pink borders, pink glow on focus
-  - Typography: Pink eyebrows, gradient hero headings, muted body text
-  - Code blocks: Yellow text on atomic black with pink borders
-  - Tables: Pink headers with uppercase text, hover states with pink glow
-  - Blockquotes: Pink left border with pink background tint
-  - Badges: Pink/yellow gradient background with pink border
-  - Modals: Atomic black with pink borders and dual shadow system
-  - Progress bars: Pink/yellow gradient fill with pink glow
-- **Enhanced hover effects:**
-  - Cards lift with triple shadow (black + pink + yellow)
-  - Buttons transform with inverted gradient (yellow→pink)
-  - Links change pink→yellow with glow text-shadow
-  - Icon wrappers scale + rotate with dual glow
-- **Accessibility maintained:**
-  - All animations respect `prefers-reduced-motion`
-  - Focus indicators: 3px pink outline with 2px offset
-  - High contrast ratios maintained (WCAG 2.2 AA)
-  - Keyboard navigation fully supported
-- **Global import** — Added to `/styles/globals.css` for automatic application across all pages
-
-#### Sitemap Page Restoration — Book-Focused Architecture
-
-- **Restored `/sitemap` route** in application router (`/routes.ts`)
-- **Book-style sitemap page** (`/components/pages/SitemapPage.tsx`) with comprehensive site navigation
-- **Full dark mode support** with neon gradients, glass effects, and animated transitions
-- **Structured sections** for book pages, journal entries, events, and additional content
-- **Responsive design** with mobile-optimized navigation cards
-
-#### Dark Mode Critical Bug Fixes — 100% Coverage Achieved
-
-- **Fixed blog polaroid backwards background** (`/styles/blocks/blog-article.css`) — Changed from light gray (#f0f0f0) to proper dark background (#1a1a1a) in dark mode
-- **Added portfolio gallery icon wrapper dark mode override** (`/styles/blocks/portfolio-detail-page.css`) — Gallery zoom icon now has dark background (rgba(15, 15, 15, 0.85)) in dark mode
-- **Comprehensive dark mode audit** — Scanned 50 components with light backgrounds; found 96% already had proper dark mode support
-- **Dark mode coverage verification** — All components now 100% dark mode compliant
-- **Audit documentation** created:
-  - `/reports/dark-mode-audit/CRITICAL-FINDINGS.md` — Initial bug discovery and analysis
-  - `/reports/dark-mode-audit/COMPREHENSIVE-SCAN-RESULTS.md` — Full component scan results with statistics
-  - `/prompts/dark-mode-audit/00-ORCHESTRATOR.md` — Reusable audit orchestrator
-  - `/tasks/dark-mode-emergency-fixes.md` — Complete task list with fixes applied
-
-#### Dark Mode Theme Enhancement — 54 Components, 2,047 Lines, WCAG 2.2 AA Compliant
-
-- **Comprehensive dark mode expansion** from 524 lines to 2,047+ lines (291% increase) across two theme files
-- **Extended components file** (`/styles/themes/dark-extended.css`) — 1,000 lines of additional component styling covering 20 new component types
-- **54 fully styled component types** with neon glow effects, gradient backgrounds, and perfect contrast ratios:
-  - **Navigation (5):** Header, Breadcrumbs, Pagination, Tabs, Sidebar
-  - **Content (18):** Cards, Testimonials, Timeline, Accordion, Gallery, Lightbox, Empty State, Error Pages, Author Bio, Comments, Pricing Tables, Newsletter, CTA, Blockquotes, Figures, Video Controls, Social Buttons
-  - **Forms (12):** Text Input, Textarea, Select, Checkbox, Radio, Search, Filters, Chips, Switches, Dropdowns, Progress Bars, Skeleton Loaders
-  - **Feedback (10):** Toast Notifications, Alerts, Status Indicators, Rating Stars, Loading Spinners, Tooltips, Cookie Consent, Loading Overlay, Scroll Indicator, Back to Top
-  - **Layout (9):** Modals, Mobile Menu, Nav Menu, Headings, Lists, Tables, Scrollbars, Selection, Images
-- **8 neon accent colors** with full-brightness glow effects: Pink (#FF3AAE), Yellow (#F4FF3C), Violet (#8A63FF), Green (#00FF85), Cyan (#00D4FF), Orange (#FF7A00), Red (#FF0055), Blue (#4A90FF)
-- **WCAG 2.2 Level AA compliance** verified across all components with contrast ratios from 6.5:1 to 21:1
-- **Comprehensive documentation** (2,000+ lines total):
-  - **Final Completion Report** (`/reports/theme-styling-audit/dark-mode-final-completion-report.md`) — 800+ line comprehensive audit with full component inventory, metrics, implementation guide, accessibility compliance verification
-  - **Usage Guide** (`/docs/dark-mode-usage-guide.md`) — 700+ line quick reference with code examples for every component, color palette, JavaScript integration, React hooks, responsive considerations
-  - **Component Showcase** (`/docs/dark-mode-component-showcase.md`) — 1,100+ line visual reference with live examples, categorized by component type, accessibility tips, best practices
-- **Theme file integration** — Extended components CSS automatically imported in `/styles/globals.css` alongside core dark theme
-- **Production-ready** — All components tested for cross-browser compatibility, keyboard navigation, screen reader support, and mobile responsiveness
-
-#### Light Mode Theme Toggle — WCAG 2.2 AA/AAA Accessibility Compliance
-
-- **Light mode theme system** with comprehensive WCAG 2.2 accessibility compliance (100% AA, 92% AAA)
-- **ThemeToggleES5 component** (`/components/common/ThemeToggleES5.tsx`) — ES5-compliant theme toggle with sun/moon icons, keyboard accessibility (Enter/Space), localStorage persistence, and system preference detection
-- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; WCAG AAA compliant text (16.1:1 contrast)
-- **Dark theme CSS** (`/styles/themes/dark.css`) — Existing dark mode formalized as separate theme file
-- **Enhanced ebook reader contrast** (`/styles/blocks/ebook-enhanced-contrast.css`) — Mobile readability improvements: body text contrast increased from 3.2:1 to 9.5:1 (dark mode) and 16.1:1 (light mode); heading contrast 12.6:1 (dark) and 21:1 (light)
-- **Theme toggle integration in Header** — ThemeToggleES5 component added to desktop header actions area
-- **Comprehensive documentation**:
-  - **WCAG Compliance Report** (`/reports/contrast-audit/wcag-contrast-compliance-report.md`) — 800+ line audit with detailed contrast ratio calculations, before/after comparisons, mobile readability analysis
-  - **Theme Toggle Usage Guide** (`/docs/theme-toggle-usage-guide.md`) — 500+ line component documentation with integration guide, accessibility features, troubleshooting
-  - **Implementation Summary** (`/reports/contrast-audit/implementation-summary.md`) — Quick reference with key decisions, technical rationale, future enhancements
-  - **Deployment Checklist** (`/tasks/light-mode-deployment-checklist.md`) — 400+ line comprehensive deployment verification with pre-deployment checks, deployment steps, post-deployment testing, success criteria
-  - **Deployment Summary** (`/docs/light-mode-deployment-summary.md`) — 1,400+ line complete recap with executive summary, technical specs, performance metrics, browser compatibility matrix
-  - **Session Summary** (`/docs/session-summary-march-11-2026.md`) — Session accomplishments, deliverables, quality metrics
-
-#### Content Expansion Phase 8 — All 8 Sub-audits Complete
-
-- **FAQ overhaul** — 33 FAQs created across multiple categories with Schema.org structured data
-- **Blog expansion** — 50 blog posts total (up from 35), production-complete with rich storytelling
-- **Podcast expansion** — 4 episodes with full transcripts (sample complete)
-- **Event creation** — 4 events: Origin Festival, Organik, Nation of Gondwana, Vortex
-- **Portfolio text polish** — 25 entries enriched with 2.5x description length (60 → 150 words avg), tags expanded to 10-11 per entry, 8 section descriptions enhanced
-- **Video expansion** — 17 entries total (up from 11), categories expanded from 1 → 9, tags from 5 → 87, 6 new videos covering Cape Town, sacred geometry, ADHD, Koh Phangan, triathlon, Berlin-Prague cycling
-- **Ebook enrichment** — 82 pages polished to production-ready quality
-- **About sub-pages** — 21 pages polished to production-ready quality
 
 - **Jest test comparison script** — Created missing `scripts/validation/compare-jest-failures.cjs` that compares test results between PR head and base branch to detect new test failures. Pre-existing failures on develop do not block the PR, only NEW failures introduced by the PR are reported.
-
-#### Animation System Phase 1 — Terminal Boot & Neon Effects (Complete)
+- **Jest failure comparison** — Count increases per test file after normalising paths to each checkout root, so fixes in other files cannot hide new failures.
 
 - **Comprehensive animation system** inspired by retro 80s CLI interfaces with 6 core animation types
 - **Terminal boot sequence** (0.8s typewriter-style page entrance) across 5 pages
@@ -586,25 +338,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Created `/docs/animation-implementation-report-march-2026.md` (350+ line final report)
   - Complete metrics, testing results, file manifest, and Phase 2 roadmap
 
-#### Phase 1 Governance Workflows — Branch Validation & Package Synchronisation
-
 - **Fixed branch validation workflow JSON parsing** — Corrected `branch-name-validation.yml` to query correct JSON field names (`isValid` instead of `valid`) in both jq expression and fallback grep pattern, resolving false validation failures where branches passed validation but workflow reported failure due to field mismatch
 - **Synchronised package-lock.json with lefthook dependencies** — Regenerated lock file to include all lefthook platform-specific variants (lefthook-darwin-arm64, lefthook-linux-x64, etc.), fixing `npm ci` failures in CI workflows that were caused by missing dependencies after lefthook was added to package.json
-
-#### Netlify SPA routing — direct navigation 404s (#3)
 
 - **Replaced the malformed `public/_redirects/` directory** (containing `main.tsx`) with a plain-text `public/_redirects` file holding the same `/*  /index.html  200` fallback rule
 - Netlify can now read `dist/_redirects`, so direct navigation and refresh on client-side routes such as `/journal`, `/journal/dancefloor-belonging` and `/ebook` no longer return 404; existing static files are still served first
 - Netlify's site base directory is empty, so `src/app/netlify.toml` is not read during deploys; `public/_redirects` is the single effective redirect definition
 
-#### Static metadata files returning production 404s (#5)
-
-- **Moved static metadata files to Vite public directory** — Relocated `robots.txt`, `sitemap.xml`, and `manifest.json` from `src/app/public/` to the root `public/` directory so Vite includes them in the production build
-- **Verified build output** — Confirmed all three files appear in `dist/` with unchanged contents and the expected file types
-- **Production deployment** — The files are now part of the Vite build output; production deployment verification pending
+- **Copied static metadata files to Vite public directory** — Copied `robots.txt`, `sitemap.xml`, and `manifest.json` to the root `public/` directory so Vite includes them in the production build
+- **Verified build output** — Confirmed all three files appear in `dist/` with the expected file types: plain text, XML, and JSON
+- **Deployment verification pending** — Deployed responses and Netlify headers remain untested; production access and HTTP status codes have not been verified
+- **Manifest asset declarations** — Removed icons and screenshots, including shortcut icons, whose files are absent from the published assets
 - **Service worker excluded** — Left `service-worker.js` in original location pending separate PWA integration decision
-
-#### Style Guide Dark Mode — Atomic Black Backgrounds
 
 - **Fixed Style Guide page dark mode** (`/styles/blocks/style-guide-page.css`) — All white backgrounds replaced with atomic black (#0F0F0F)
 - **Updated 18 color instances:**
@@ -614,8 +359,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Code block styling** — Neon pink background with yellow text
 - **100% dark mode consistency** across entire site
 
-#### Animation Showcase Bundler Compatibility
-
 - **Removed all inline styles** from AnimationShowcasePage — Replaced with BEM CSS classes
 - **Fixed Figma Make bundler errors** (IframeMessageAbortError) caused by inline style objects
 - **Added BEM classes:**
@@ -623,8 +366,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `.demo-float-text` — Float element text styling
   - `.demo-page-header-spacing` — Page header spacing utility
 - **Strict guidelines compliance** — Zero inline styles, 100% BEM architecture
-
-#### Dark Mode Color Correction — Exact Figma Hex Values
 
 - **Fixed neon pink color** — Changed from #FF3AAE to correct **#FF10F0** (exact Figma design value)
 - **Fixed atomic black** — Changed from #0B0B10 to correct **#0F0F0F** (15,15,15 in RGB)
@@ -640,6 +381,164 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Glow effects more pronounced with correct color
 - **No breaking changes** — CSS custom properties updated, all references automatically inherit new values
 
+- **Rewired theme toggle component** (`/components/common/ThemeToggleES5.tsx`) — Now uses neon pink/yellow styling
+- **Updated toggle CSS** (`/styles/blocks/theme-toggle.css`) — Complete neon redesign with glow effects
+- **Dark mode default:** FOUC script in `/index.html` now defaults to dark mode (no system preference check)
+- **Visual enhancements:**
+  - Moon icon: Neon pink with glow → Yellow on hover
+  - Sun icon: Neon yellow with glow
+  - Button border: Pink (40% opacity) → Yellow on hover
+  - Dual glow shadows on hover (pink outer + yellow inner)
+  - Rotate + scale animation on hover
+  - Focus state: Yellow outline with glow
+- **Accessibility maintained:**
+  - 3px focus outline with 2px offset
+  - ARIA labels for screen readers
+  - Keyboard navigation (Enter/Space)
+  - Reduced motion support
+- **Debugging:** Console logs theme changes (dev mode only)
+- **Instant feedback:** DOM updates immediately on toggle (no flash)
+
+- **Universal dark mode CSS** (`/styles/blocks/book-dark-mode.css`) — 600+ lines of comprehensive neon pink/yellow styling for all book pages
+- **Atomic black backgrounds** — Pure #0F0F0F (15, 15, 15) everywhere in dark mode
+- **Neon pink/yellow gradient system:**
+  - Hero titles: Pink→Yellow gradient with text-fill transparency
+  - Buttons: Animated pink→yellow gradient with dual glow shadows
+  - Cards: Pink borders with pink/yellow dual glow on hover
+  - Links: Pink default, yellow on hover with glow effects
+  - Forms: Pink borders with pink glow on focus
+- **Component-specific dark mode:**
+  - Hero sections: Radial pink/yellow gradient glow overlay
+  - Cards: Atomic black (0.8 opacity) with pink border (0.3 opacity), full glow on hover
+  - Buttons: Primary (pink→yellow gradient), Secondary (pink outline), Ghost (pink text)
+  - Forms: Dark inputs with pink borders, pink glow on focus
+  - Typography: Pink eyebrows, gradient hero headings, muted body text
+  - Code blocks: Yellow text on atomic black with pink borders
+  - Tables: Pink headers with uppercase text, hover states with pink glow
+  - Blockquotes: Pink left border with pink background tint
+  - Badges: Pink/yellow gradient background with pink border
+  - Modals: Atomic black with pink borders and dual shadow system
+  - Progress bars: Pink/yellow gradient fill with pink glow
+- **Enhanced hover effects:**
+  - Cards lift with triple shadow (black + pink + yellow)
+  - Buttons transform with inverted gradient (yellow→pink)
+  - Links change pink→yellow with glow text-shadow
+  - Icon wrappers scale + rotate with dual glow
+- **Accessibility maintained:**
+  - All animations respect `prefers-reduced-motion`
+  - Focus indicators: 3px pink outline with 2px offset
+  - High contrast ratios maintained (WCAG 2.2 AA)
+  - Keyboard navigation fully supported
+- **Global import** — Added to `/styles/globals.css` for automatic application across all pages
+
+- **Restored `/sitemap` route** in application router (`/routes.ts`)
+- **Book-style sitemap page** (`/components/pages/SitemapPage.tsx`) with comprehensive site navigation
+- **Full dark mode support** with neon gradients, glass effects, and animated transitions
+- **Structured sections** for book pages, journal entries, events, and additional content
+- **Responsive design** with mobile-optimized navigation cards
+
+- **Fixed blog polaroid backwards background** (`/styles/blocks/blog-article.css`) — Changed from light gray (#f0f0f0) to proper dark background (#1a1a1a) in dark mode
+- **Added portfolio gallery icon wrapper dark mode override** (`/styles/blocks/portfolio-detail-page.css`) — Gallery zoom icon now has dark background (rgba(15, 15, 15, 0.85)) in dark mode
+- **Comprehensive dark mode audit** — Scanned 50 components with light backgrounds; found 96% already had proper dark mode support
+- **Dark mode coverage verification** — All components now 100% dark mode compliant
+- **Audit documentation** created:
+  - `/reports/dark-mode-audit/CRITICAL-FINDINGS.md` — Initial bug discovery and analysis
+  - `/reports/dark-mode-audit/COMPREHENSIVE-SCAN-RESULTS.md` — Full component scan results with statistics
+  - `/prompts/dark-mode-audit/00-ORCHESTRATOR.md` — Reusable audit orchestrator
+  - `/tasks/dark-mode-emergency-fixes.md` — Complete task list with fixes applied
+
+- **Comprehensive dark mode expansion** from 524 lines to 2,047+ lines (291% increase) across two theme files
+- **Extended components file** (`/styles/themes/dark-extended.css`) — 1,000 lines of additional component styling covering 20 new component types
+- **54 fully styled component types** with neon glow effects, gradient backgrounds, and perfect contrast ratios:
+  - **Navigation (5):** Header, Breadcrumbs, Pagination, Tabs, Sidebar
+  - **Content (18):** Cards, Testimonials, Timeline, Accordion, Gallery, Lightbox, Empty State, Error Pages, Author Bio, Comments, Pricing Tables, Newsletter, CTA, Blockquotes, Figures, Video Controls, Social Buttons
+  - **Forms (12):** Text Input, Textarea, Select, Checkbox, Radio, Search, Filters, Chips, Switches, Dropdowns, Progress Bars, Skeleton Loaders
+  - **Feedback (10):** Toast Notifications, Alerts, Status Indicators, Rating Stars, Loading Spinners, Tooltips, Cookie Consent, Loading Overlay, Scroll Indicator, Back to Top
+  - **Layout (9):** Modals, Mobile Menu, Nav Menu, Headings, Lists, Tables, Scrollbars, Selection, Images
+- **8 neon accent colors** with full-brightness glow effects: Pink (#FF3AAE), Yellow (#F4FF3C), Violet (#8A63FF), Green (#00FF85), Cyan (#00D4FF), Orange (#FF7A00), Red (#FF0055), Blue (#4A90FF)
+- **WCAG 2.2 Level AA compliance** verified across all components with contrast ratios from 6.5:1 to 21:1
+- **Comprehensive documentation** (2,000+ lines total):
+  - **Final Completion Report** (`/reports/theme-styling-audit/dark-mode-final-completion-report.md`) — 800+ line comprehensive audit with full component inventory, metrics, implementation guide, accessibility compliance verification
+  - **Usage Guide** (`/docs/dark-mode-usage-guide.md`) — 700+ line quick reference with code examples for every component, color palette, JavaScript integration, React hooks, responsive considerations
+  - **Component Showcase** (`/docs/dark-mode-component-showcase.md`) — 1,100+ line visual reference with live examples, categorized by component type, accessibility tips, best practices
+- **Theme file integration** — Extended components CSS automatically imported in `/styles/globals.css` alongside core dark theme
+- **Production-ready** — All components tested for cross-browser compatibility, keyboard navigation, screen reader support, and mobile responsiveness
+
+- **Light mode theme system** with comprehensive WCAG 2.2 accessibility compliance (100% AA, 92% AAA)
+- **ThemeToggleES5 component** (`/components/common/ThemeToggleES5.tsx`) — ES5-compliant theme toggle with sun/moon icons, keyboard accessibility (Enter/Space), localStorage persistence, and system preference detection
+- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; WCAG AAA compliant text (16.1:1 contrast)
+- **Dark theme CSS** (`/styles/themes/dark.css`) — Existing dark mode formalized as separate theme file
+- **Enhanced ebook reader contrast** (`/styles/blocks/ebook-enhanced-contrast.css`) — Mobile readability improvements: body text contrast increased from 3.2:1 to 9.5:1 (dark mode) and 16.1:1 (light mode); heading contrast 12.6:1 (dark) and 21:1 (light)
+- **Theme toggle integration in Header** — ThemeToggleES5 component added to desktop header actions area
+- **Comprehensive documentation**:
+  - **WCAG Compliance Report** (`/reports/contrast-audit/wcag-contrast-compliance-report.md`) — 800+ line audit with detailed contrast ratio calculations, before/after comparisons, mobile readability analysis
+  - **Theme Toggle Usage Guide** (`/docs/theme-toggle-usage-guide.md`) — 500+ line component documentation with integration guide, accessibility features, troubleshooting
+  - **Implementation Summary** (`/reports/contrast-audit/implementation-summary.md`) — Quick reference with key decisions, technical rationale, future enhancements
+  - **Deployment Checklist** (`/tasks/light-mode-deployment-checklist.md`) — 400+ line comprehensive deployment verification with pre-deployment checks, deployment steps, post-deployment testing, success criteria
+  - **Deployment Summary** (`/docs/light-mode-deployment-summary.md`) — 1,400+ line complete recap with executive summary, technical specs, performance metrics, browser compatibility matrix
+  - **Session Summary** (`/docs/session-summary-march-11-2026.md`) — Session accomplishments, deliverables, quality metrics
+
+- **FAQ overhaul** — 33 FAQs created across multiple categories with Schema.org structured data
+- **Blog expansion** — 50 blog posts total (up from 35), production-complete with rich storytelling
+- **Podcast expansion** — 4 episodes with full transcripts (sample complete)
+- **Event creation** — 4 events: Origin Festival, Organik, Nation of Gondwana, Vortex
+- **Portfolio text polish** — 25 entries enriched with 2.5x description length (60 → 150 words avg), tags expanded to 10-11 per entry, 8 section descriptions enhanced
+- **Video expansion** — 17 entries total (up from 11), categories expanded from 1 → 9, tags from 5 → 87, 6 new videos covering Cape Town, sacred geometry, ADHD, Koh Phangan, triathlon, Berlin-Prague cycling
+- **Ebook enrichment** — 82 pages polished to production-ready quality
+- **About sub-pages** — 21 pages polished to production-ready quality
+
+- **OG image and Twitter image meta tags** added to `index.html` with `og:image`, `twitter:image`, width, height, and alt attributes (placeholder URL pending production domain setup)
+
+- **Comprehensive accessibility audit** across all 7 Content Specimen pages (Blog, Portfolio, Video, Podcast, Event, FAQ, Content overview)
+- **Verified compliance** across 10 WCAG 2.1 Level AA criteria:
+  - Heading hierarchy (h1 → h2 → h3 semantic order)
+  - Color contrast (all 7 neon accent colors exceed 4.5:1 minimum; 6 of 7 achieve AAA 7:1+)
+  - Keyboard navigation (breadcrumbs, cards, all interactive elements)
+  - ARIA labels & semantic HTML (proper landmarks, icon `aria-hidden`, section labeling)
+  - Responsive design (320px–1920px breakpoints, 200%/400% zoom testing)
+  - Screen reader support (logical reading order, descriptive links)
+  - Reduced motion (all 7 markdown CSS files suppress animations)
+  - Progressive enhancement (core content accessible without JavaScript)
+- **Testing coverage:** 7 pages, 6 breakpoints, 10 accessibility criteria
+- **Results:** 0 critical issues, 0 medium issues, 0 low issues
+- **Report:** `/reports/content-specimens-accessibility/findings.md`
+
+- **Expanded color palette library from 20 to 33 palettes** in `/data/mock/color-palettes.ts`
+- **Added 13 new brand-aligned palettes**:
+  - **Ash Shaw Core** — All 8 core neon colors from the design system
+  - **Cyberpunk Gradient** — Pink→Blue signature gradient for CTAs and hero titles
+  - **Toxic Lime Gradient** — Green→Cyan for success messages and energy themes
+  - **Solar Flare Gradient** — Orange→Yellow for accent highlights and warnings
+  - **Hyperpop Animated** — Full 8-color spectrum for animated backgrounds
+  - **Monochrome Pink Spectrum** — 5 tonal shades from pastel to electric
+  - **Monochrome Blue Spectrum** — 5 tonal shades from sky to midnight
+  - **Complementary Orange & Blue** — Classic complementary pair for split layouts
+  - **Complementary Pink & Green** — High-energy pair for status indicators
+  - **Warm Neon Sunset** — Red→Orange→Yellow→Pink temperature palette
+  - **Cool Neon Ocean** — Cyan→Blue→Purple temperature palette
+  - **Aurora Mesh Background** — Purple/blue radial gradients with opacity system
+  - **Contrast Checkerboard** — Black/white/neon for accessibility-first designs
+- **Interface Ideas field** — Added `interfaceIdeas` to `ColorPalette` interface with 1-3 practical UI/UX suggestions per palette (e.g., "Dark mode dashboard with neon glowing cards", "Hero section with gradient text using background-clip: text")
+- **Updated `/dev-tools/color-palettes` page**:
+  - Added "Interface inspiration" section with bullet-point design suggestions
+  - CSS styling with purple (light mode) and pink (dark mode) arrow bullets
+  - All 33 palettes now include light/dark mode previews and practical implementation ideas
+- **Updated `/guidelines/design-tokens/neon-colors.md`** with complete palette library documentation:
+  - Full hex codes and use cases for all 33 palettes
+  - "Palette Selection Guide" organized by Interface Type (dashboards, CTAs, success/warning states), Mood (energetic, cool, warm, professional), and Use Case (buttons, backgrounds, data viz, status indicators)
+  - Code examples and CSS snippets for each palette category
+  - 7 organized categories: Brand Core, Signature Gradients, Monochrome Spectrums, Complementary Pairs, Temperature Palettes, Background Systems, Thematic Palettes
+
+- **`lucide-react` fully removed** from the project — all 92+ icons migrated to `@phosphor-icons/react`
+- **Phase 2 Tier 4 cleanup complete** (15 tasks):
+  - Deleted 7 legacy Lucide files: `/lib/icon-base.tsx`, `/lib/icons.ts`, `/lib/icons-set-a.tsx` through `icons-set-e.tsx`
+  - Migrated `/data/mock/ui/navigation.ts` from `LucideIcon` type to Phosphor `Icon` type; `Home` → `House`, `Mail` → `Envelope`
+  - Rewrote `PhosphorIconsPage.tsx` v2.0.0 — now renders all 92 icons live via Phosphor (previously used Lucide for comparison side)
+  - Updated 22 guideline `.md` files: all `from 'lucide-react'` imports replaced with `from '@phosphor-icons/react'`, icon names updated to Phosphor conventions
+  - Updated `vite.config.ts`, data files (`code-quality.ts`, `deployment-readiness.ts`, `events/categories.ts`, `hidden-about.ts`, `icon-library.ts`), and `StyleGuidePage.tsx`
+- **Zero `lucide-react` imports** remain in the codebase (verified via full search)
+- **Zero `LucideIcon` type references** remain (verified via full search)
+- **`/lib/` directory** now contains only `router.tsx`
 
 ### Removed
 
@@ -647,13 +546,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-#### Memory Reduction v2 — ~4,350+ Lines Saved
-
 - **Data file splits** — blog posts split across `posts.ts`, `posts-phase8.ts`, `posts-timeline.ts` with barrel export in `posts/index.ts`; SEO metadata split into `seo/pages.ts`, `seo/dev-tools.ts`, `seo/dynamic.ts` with barrel export in `seo/index.ts`; color palettes split into `color-palettes/data.ts` with barrel export in `color-palettes/index.ts`
 - **Shared components created** — `StickerLightbox` extracted from `StickersPage.tsx`; `TaxonomyArchiveLayout` extracted to replace duplicate archive page patterns across blog, portfolio, video, podcast, and event category/tag pages
 - **29/30 tasks complete** (97%) — 17 HIGH priority, 6 MEDIUM, 6 LOW completed; T30 (archive page consolidation) skipped as diminishing returns
-
-#### Production Launch Prep — Schema.org & Content Accuracy
 
 - **`schemaService.ts`** — `ASH_SHAW_PERSON` addressLocality updated from Berlin/Germany to Cape Town/South Africa; `buildPersonSchema()` description and workLocation corrected to Cape Town-based
 - **`index.html`** — static Schema.org `workLocation` updated from Berlin to Cape Town
@@ -662,14 +557,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`project-status-march-2026.md`** — content counts corrected for Phase 8 completion (50 blog posts, 17 videos, 4 podcasts, 4 events, 33 FAQs)
 - **Dev tools SEO descriptions** updated in `dev-tools.ts` to reflect Phosphor migration complete and 24 tools count
 
-#### Sub-page Alignment Audit — Ebook ↔ About Sub-pages
-
 - **LightSpeed page** (`lightspeed.ts`): Fixed intern count from "only 2" to "only 3" in AI workflows section (Hugo, Brandon, Seren)
 - **Fitness page** (`fitness.ts`): Added Table Mountain Challenge top 10 x3 and Hout Bay Trail top 10 x1 to running sport card; added Lourens Visser swimming training story to swimming sport card
 - **Cycling page** (`cycling.ts`): Added Berlin vs Thailand kit note to UV paints item (full mousse palette in Berlin, UV-only in Thailand due to humidity); added Stormsvlei 185km solo ride (2024) to notable rides list
 - **Travels page** (`travels.ts`): Rewrote nomad circuit section to include full 4-leg seasonal cycle (Cape Town → Berlin → South Africa → Koh Phangan → Cape Town); previously missing Thailand leg entirely
-
-#### P2 Prose Polish — Ebook Chapters 5, 6, 9/12
 
 - **Ch 5 (Eighty-six hours)**: Tightened opening to "Solipse." one-word punch; moved "I was twenty years old" to standalone closing sentence; removed redundant bonding-theme repetition in content-2; varied border crossing rhythm in content-3 (broke formulaic pattern, added personal sensory details); consolidated content-5 into tighter close
 - **Ch 6 (The costume evolution)**: Sharpened opening from generic "I discovered a love for dancing" to "It started with a yellow suit from a charity shop"; varied timeline rhythm with new observations per era; replaced "Costumes were confidence training" with "every costume was a rehearsal"
@@ -706,8 +597,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-#### Governance Decision STYLE-001 — Enforce BEM-Only CSS Architecture (Decision 6)
-
 - **Tailwind CSS completely removed** from the build system:
   - **npm dependencies removed:**
     - `tailwindcss` v4.1.12 (dev dependency)
@@ -731,7 +620,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-#### Technical Stability & Bundler Compatibility
 - **Fixed blog flickering issue** by memoizing `useBlogPosts` and `usePortfolioEntries` options in all calling components (`BlogPage`, `BlogPreviewSection`, `PortfolioMainPage`).
 - **Standardised Bundler Compatibility** across core components and hooks:
   - Eliminated all arrow functions in JSX and hooks, replacing them with named function expressions.
@@ -746,8 +634,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-#### Content Expansion Phase 7 — Blog & Narrative Enrichment
-
 - **5 new blog posts** (23 total, up from 18) in `/data/mock/blog/posts.ts`:
   - "Lucy: the cat who taught me everything" (2023-11-01) — Tribute to the late Six Cats matriarch, exploring grief, legacy, and the connection between cats and creativity
   - "This one time on acid: the book is coming" (2025-12-01) — Book announcement with chapter preview, publication timeline, and dedication to Lucy
@@ -756,8 +642,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - "LightSpeed wasn't a business plan — it was a survival mechanism" (2023-03-01) — Founding philosophy essay on autonomy, ADHD entrepreneurship, and BarCamp 2006 pivot
 
 ### Changed
-
-#### Data File Content Enrichment
 
 - **LightSpeed page** (`/data/mock/pages/about/lightspeed.ts`):
   - Fixed BarCamp 2006 narrative: removed "Jonathan Sobel" (not in source material), corrected attendance from "Twenty-nine" to "Twenty-seven" people, updated to "Dave Duarte, Jeremy Thurgood, and twenty-five others"
@@ -797,8 +681,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [8.1.0] - 2026-03-02
 
 ### Added
-
-#### Content Expansion Phase 6 — Multi-Content Growth
 
 - **18 new portfolio entries** (42 total, up from 24):
   - 5 Berlin club/warehouse entries in `/data/mock/portfolio/uv-makeup.ts` — Berghain, About Blank, ://about blank, Griessmuehle, Sisyphos (2019–2023)
@@ -854,7 +736,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-#### Pages — About Sub-page Ecosystem (18 new pages)
 - `HiddenAboutPage` (`/about`) — unlisted gateway to Ash's world; full story summary, media promotions, social links, and jump-links to all about sub-pages
 - `HistoryPage` (`/about/history`) — studio and personal history archive
 - `BerlinPage` (`/about/berlin`) — Berlin as creative anchor
@@ -874,7 +755,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `FitnessPage` (`/about/fitness`) — the moving body and fitness practice
 - `SixCatsPage` (`/about/six-cats`) — Six Cats Cannabis Club
 
-#### Pages — New Standalone Pages
 - `ManifestoPage` (`/about/manifesto`) — the Neon vs Atomic Black creative manifesto
 - `EbookPage` (`/ebook`) — fully responsive two-page eBook reader with touch swipe, keyboard arrow navigation, table of contents drawer, and fullscreen mode; dual-spread on desktop, single-page on mobile/tablet
 - `PressKitPage` (`/press`) — downloadable press kit with copy-to-clipboard bio snippets and media asset grid
@@ -883,19 +763,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `SitemapPage` (`/sitemap`) — comprehensive visual site index covering all pages, categories, posts, podcasts, videos, tags, dev tools, and legal pages
 - `StyleGuidePage` (`/style-guide`, also at `/dev-tools/style-guide`) — full design-system reference with live previews of all 26 animations, all tokens, and all icon sets
 
-#### Pages — Legal
 - `PrivacyPolicy` (`/privacy`) — full privacy policy with data handling documentation
 - `TermsAndConditions` (`/terms`) — terms and conditions
 - `AccessibilityStatementPage` (`/about/accessibility`) — WCAG 2.1 AA compliance statement
 
-#### Pages — Events System (entirely new)
 - `EventsPage` (`/events`) — full events listing with hero, stats bar (km cycled, editions attended), and category filter pills
 - `EventDetailPage` (`/events/:slug`) — single event detail with rich content and TravelBadge
 - `EventCategoryPage` (`/events/category/:slug`) — category archive for events
 - `EventTagPage` (`/events/tag/:slug`) — tag archive for events
 - `TravelBadge` component — decorative travel/festival badge element used in event cards
 
-#### Pages — Archive Sub-pages (Blog, Portfolio, Video, Podcast)
 - `BlogCategoryPage` (`/blog/category/:slug`) — filtered blog archive by category
 - `BlogTagPage` (`/blog/tag/:slug`) — filtered blog archive by tag
 - `PortfolioMainPage` (`/portfolio`) — full gallery with category filtering, pagination, lightbox, and FAQ section; replaces the previous flat portfolio page
@@ -910,21 +787,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `PodcastTagPage` (`/podcasts/tag/:slug`) — tag archive for podcasts
 - `PodcastDetailPage` (`/podcast/:slug`) — single episode detail page
 
-#### Navigation — Mega Menus & Dropdowns
 - `BlogMegaMenu` — three-column dropdown (featured post + image, 5 recent posts, category list with neon dots and counts); "Neon Cascade Ripple" pure-CSS drop animation
 - `PortfolioMegaMenu` — three-column dropdown (featured card + image, 5 recent entries, category list with neon dots and counts); "Neon Grid Reveal" staggered slide-in animation
 - `AboutDropdown` — animated process-flow vertical timeline in the desktop header; keyboard accessible (Arrow keys, Escape, Enter/Space); pure-CSS stagger, line draw, and neon dot pulse
 - `ContactMiniMenu` — compact contact overlay for the header contact link
 - `ThemeToggle` — persistent light/dark mode switcher with localStorage sync and `prefers-color-scheme` detection
 
-#### Sections
 - `FestivalCountdown` — live countdown timer to next festival with day/hour/minute/second display
 - `InstagramFeed` — Behold.so embeddable widget integration (`@feedmymedia`); two-column layout (25% title/CTA + 75% widget); imperative DOM insertion via `useRef` to prevent React reconciliation conflicts with the `behold-widget` custom element
 - `TestimonialsSection` — testimonial display using `ResponsiveGridSlider` (desktop 3-column grid, tablet/mobile slider)
 - `UVMakeupSection` — UV/blacklight portfolio showcase with `ResponsiveGridSlider` hybrid layout and `EnhancedLightbox` integration
 - `WhySection` — new homepage "why" narrative section
 
-#### UI Components
 - `EnhancedLightbox` (v4.0.0) — video-capable lightbox modal with pagination dots, prominent slider arrows, zoom in/out, grid overview mode, keyboard trap (`useKeyboardTrap`), and `VideoPlayer` integration
 - `VideoPlayer` (v2.0.0) — unified video player supporting direct files (MP4/WebM) with custom controls, YouTube embeds, and Vimeo embeds (auto-detected by URL pattern)
 - `ResponsiveGridSlider` — layout component that renders a CSS grid on desktop and a touch/keyboard slider on tablet and mobile; used by `TestimonialsSection` and `UVMakeupSection`
@@ -935,19 +809,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ShareComponent` — social sharing widget with copy-link, Twitter, and native share API support
 - `SliderCard` — card variant optimised for slider/carousel contexts
 
-#### Common Components
 - `RootLayout` — shared application shell wrapping all routes; provides Header, Footer, PWAInstallPrompt, OfflineIndicator, ModalProvider, ScrollToTop, screen reader live regions, scroll restoration, and focus management on route change
 - `ColorfulIcons` — custom animated SVG icon set using `dangerouslySetInnerHTML` to bypass bundler SVG transform issues; icons include ShineIcon and others with multi-stop gradients and `<animate>` keyframes
 - `SafetyWrapper` — thin render error boundary targeting third-party extension errors (e.g. Behold's `beholdReplaceChildren`); part of a defence-in-depth error suppression system alongside `ErrorBoundary` and `extensionErrorSuppressor`
 - `ModalContext` — React context and `useModal` hook for application-wide modal state management
 - `SocialLinks` — standalone social links bar component used in header and footer
 
-#### Custom Icon System (`/lib/`)
 - `icon-base.tsx` — shared `IconProps` interface and base render logic
 - `icons-set-a.tsx` through `icons-set-e.tsx` — bundler-safe icon library across 5 files using `dangerouslySetInnerHTML` for SVG children (bypasses the bundler's broken `jsxs` SVG transform); covers the full icon vocabulary of the site
 - `icons.ts` — barrel export for the complete icon set
 
-#### Mock Data — New Systems
 - `/data/mock/events/` — full events data system: `origin-festival.ts`, `categories.ts`; helper functions `getEventBySlug`, `getEventsByType`, `getEventsByTag`, `getTotalEditionsAttended`, `getTotalKmCycled`
 - `/data/mock/testimonials/` — testimonials data with `Testimonial` interface supporting rating, role, event, featured flag, and optional video testimonial
 - `/data/mock/portfolio/uv-makeup.ts` — UV/blacklight makeup portfolio collection
@@ -961,7 +832,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `/data/mock/ui/` — 20+ new UI data files covering all new pages and components (about-dropdown, accessibility-tester, events, ebook, countdown, filters, instagram, stickers, style-guide, and more)
 - `/data/types/events.ts`, `search.ts`, `videos.ts` — new TypeScript type definitions
 
-#### Hooks
 - `useAnalytics` — hook wrapping `analyticsService` for per-component view/like/read-time tracking
 - `useAnimatedCount` — animated number counter with configurable duration and easing
 - `useAppNavigate` — bundler-safe navigation wrapper around the custom router's `useNavigate`
@@ -974,7 +844,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `useScrollSpy` — active section detector for in-page navigation
 - `useWordPress` — WordPress REST API integration hook (paired with the Dual Mode Architecture)
 
-#### Utilities
 - `analyticsService.ts` — localStorage-based analytics tracking views, likes, reading time, and browsing history per content type and slug
 - `imageOptimizer.ts` — client-side Canvas API image processing: resize to target dimensions, compress to JPEG/WebP, generate responsive `srcSet` variants, cache blobs to avoid re-processing
 - `simpleMarkdown.ts` — lightweight Markdown→HTML converter supporting headers, bold, italic, ordered/unordered lists, links, images (with Polaroid styling), and blockquotes
@@ -984,7 +853,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `extensionErrorSuppressor.ts` — global error suppressor for known third-party extension errors (Behold, browser extensions)
 - `faqSchema.ts` — Schema.org FAQPage JSON-LD generation helper
 
-#### Guidelines
 - `/guidelines/responsive/` — six new responsive design guidelines: `breakpoints-system.md`, `interaction-modes.md`, `layout-patterns.md`, `navigation-responsive.md`, `spacing-adjustments.md`, `typography-scaling.md`
 - `/guidelines/events-system.md` — Events system data model and usage documentation
 - `/guidelines/overview-blog-filtering.md` — blog filtering and archive system documentation
@@ -993,7 +861,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `/guidelines/voice-and-tone.md` — editorial voice and tone guide
 - Multiple new component, block, section, pattern, icon, and template guideline files
 
-#### Dev Tools
 - `AnimationSpecimenPage` (`/dev-tools/neon`) — live interactive preview of all 26 CSS animation keyframes with controls
 
 ### Changed
