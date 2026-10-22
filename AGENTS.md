@@ -1,234 +1,161 @@
-# Agent instructions — ThisOneTimeOnAcid
+# Agent Instructions — ThisOneTimeOnAcid
 
 > Repository-specific instructions for AI coding agents working on
 > [lightspeedwp/ThisOneTimeOnAcidCom](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom).
-> Human contributors should also read [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Every statement in this file is meant to be checkable against the repository. Where the repository contradicts itself, the contradiction is recorded under [Unresolved decisions](#unresolved-decisions-owner-confirmation-required) rather than settled here.
+## Source of Truth
 
-> **Note:** This file was updated 16 October 2026 to reflect current test infrastructure and validated command baseline. Previous version (from 3 October 2026) claimed testing infrastructure did not exist; it does. See [Commands validated so far](#commands-validated-so-far) for current status.
+All authoritative design and development guidance lives in the **`/guidelines/`** directory.
+Before making any change, agents **must** read these files in order:
 
-## Sources of truth
+1. **[guidelines/Guidelines.md](guidelines/Guidelines.md)** — entry point: critical rules, bundler workarounds, workflow conventions
+2. **[guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)** — component taxonomy and file-location mapping
+3. **[guidelines/css-architecture.md](guidelines/css-architecture.md)** — strict BEM architecture (Tailwind is forbidden)
+4. **[guidelines/README.md](guidelines/README.md)** — full directory structure and reading order
 
-All authoritative design and development guidance lives in [`guidelines/`](guidelines/). Agents must read it before making changes. These files define their own reading order, so follow that rather than inventing one:
-
-1. **[guidelines/README.md](guidelines/README.md)** — directory index and the **required reading order** (Steps 1–7).
-2. **[guidelines/Guidelines.md](guidelines/Guidelines.md)** — Step 1 of that order: critical rules, bundler workarounds, folder conventions and the default AI workflow.
-3. **[guidelines/ARCHITECTURE.md](guidelines/ARCHITECTURE.md)** — component taxonomy and file-location mapping.
-4. **[guidelines/css-architecture.md](guidelines/css-architecture.md)** — BEM CSS rules. See the [Tailwind contradiction](#unresolved-decisions-owner-confirmation-required) below.
-5. **[guidelines/changelog.md](guidelines/changelog.md)** — changelog format and protection rules.
-
-### Design tokens and theme
-
-- **[guidelines/design-tokens/](guidelines/design-tokens/)** — colours, typography, spacing and animations
+### Design Tokens & Theme
+- **[guidelines/design-tokens/](guidelines/design-tokens/)** — colors, typography, spacing, animations
 - **[guidelines/dark-mode-implementation.md](guidelines/dark-mode-implementation.md)** — light/dark theme system
 - **[guidelines/component-dark-mode.md](guidelines/component-dark-mode.md)** — per-component theme patterns
 
-### Data system
+### Data System
+- **[src/app/data/](src/app/data/)** — centralised mock data; **all content must be imported from `/data/mock`**, never hardcoded
 
-- **[src/app/data/README.md](src/app/data/README.md)** — centralised mock data. All UI content must come from `src/app/data/mock/` (written as `/data/mock` in the guidelines), never hardcoded. Editorial content (journal entries, articles, manuscript chapters) resides in `content/`.
+### Spec Kit (SDD Workflow)
+- **[.specify/](/.specify/)** — Spec Kit templates, scripts, and workflows
+- **[.gemini/commands/](/.gemini/commands/)** — Gemini CLI speckit commands (`.toml` files)
 
-### Spec Kit (spec-driven development)
+---
 
-- **[.specify/](.specify/)** — Spec Kit templates, scripts and workflows
-- **[.gemini/commands/](.gemini/commands/)** — Gemini CLI Spec Kit commands (`.toml` files)
+## Tech Stack
 
-### Path convention used in the guidelines
-
-The guidelines were written for Figma Make and use root-style paths. In this repository they map as follows:
-
-| Path in guidelines | Actual repository path |
+| Layer | Technology |
 |---|---|
-| `/components/…` | `src/app/components/…` |
-| `/data/mock/…` | `src/app/data/mock/…` |
-| `/lib/router.tsx` | `src/app/lib/router.tsx` |
-| `/utils/…` (including `/utils/supabase/`) | `src/app/utils/…` |
-| `/styles/…` (including `/styles/blocks/`) | `src/styles/…` |
-| `/CHANGELOG.md` | `CHANGELOG.md` (repository root) |
+| Framework | React 18 + Vite 6 |
+| Language | TypeScript (strict) |
+| Styling | **Semantic BEM CSS** — no Tailwind utilities, no inline styles |
+| UI primitives | Radix UI, shadcn/ui patterns |
+| Icons | Lucide, Phosphor |
+| Animation | Motion (Framer Motion) |
+| Routing | React Router v7 |
+| Data | Static mock data (`/data/mock/`) — no backend, no Supabase |
+| Deployment | Netlify (SPA mode) |
+| Package manager | npm |
 
 ---
 
-## Tech stack (from `package.json`)
+## Verified Build & Dev Commands
 
-| Layer | Technology | Evidence |
-|---|---|---|
-| Framework | React 18.3.1 (peer dependency) + Vite 6 | `package.json`, `vite.config.ts` |
-| Language | TypeScript | `typescript` dev dependency, `src/app/tsconfig.json` |
-| Styling | Semantic BEM CSS per the guidelines; Tailwind CSS v4 is still installed and loaded | `src/styles/`, `vite.config.ts` |
-| UI primitives | Radix UI, shadcn/ui patterns, MUI | `package.json` |
-| Icons | Phosphor, Lucide | `package.json` |
-| Animation | Motion | `package.json` |
-| Routing | React Router v7 | `package.json` |
-| Data | Static mock data — no backend, no Supabase | `src/app/data/` |
-| Hosting | Netlify (static SPA) | Netlify site build settings |
-| Package manager | **npm** (see below) | `package-lock.json`, Netlify build command |
+These commands are confirmed in [`package.json`](package.json):
 
-### Package manager
+```bash
+# Install dependencies
+npm ci
 
-The current evidence points to **npm**:
+# Start development server
+npm run dev
 
-- `package-lock.json` (lockfile v3) is the only lockfile committed. There is no `pnpm-lock.yaml` or `yarn.lock`.
-- The Netlify site's build command is `npm run build`.
-- The root [README.md](README.md) tells contributors to run `npm i` and `npm run dev`.
-- The dependency-validation workflow pairs `package.json` with `package-lock.json`.
+# Production build
+npm run build
 
-Some leftover pnpm configuration remains: `pnpm-workspace.yaml`, a `pnpm.overrides` block in `package.json` (pinning `vite` to 6.3.5) and `command = "pnpm run build"` in `src/app/netlify.toml`. npm ignores `pnpm.overrides`, and `package-lock.json` resolves `vite` to 6.4.3. Do not add a second lockfile or switch managers without owner confirmation.
+# Run tests (Jest)
+npm test
 
-### Node.js runtime
+# Run Netlify header validation tests
+npm run test:netlify-headers
 
-The repository does **not** pin a Node.js version. There is no `.nvmrc`, no `.node-version` and no `engines` field. `src/app/netlify.toml` sets `NODE_VERSION = "18"`, but Netlify does not read that file (see [Deployment](#deployment-netlify)). This file therefore makes no claim about a minimum Node version. Check a production deploy log to see which version Netlify actually uses.
+# Parse journal markdown content
+npm run journal:parse
 
----
+# Validate journal markdown (dry-run)
+npm run journal:validate
 
-## Available scripts
+# Check journal link integrity
+npm run journal:check-links
+```
 
-These scripts are **defined** in [`package.json`](package.json) and have been validated.
-
-| Script | Command | Purpose | Status |
-|---|---|---|---|
-| `dev` | `vite` | Start the Vite development server | ✅ Working |
-| `build` | `vite build` | Production build to `dist/` | ✅ Working |
-| `journal:parse` | `tsx scripts/parse-journal-markdown.ts` | Parse journal markdown into JSON | ✅ Working |
-| `journal:validate` | `tsx scripts/parse-journal-markdown.ts --validate-only` | Validate journal markdown without writing output | ✅ Working |
-| `journal:check-links` | `tsx scripts/check-journal-links.ts` | Check journal link integrity | ✅ Working |
-| `test` | `npm run test:unit && npm run test:build && npm run test:e2e` | Run all test suites (unit, build, e2e) | ⚠️ Partial |
-| `test:unit` | `jest` | Jest unit tests | ✅ Working |
-| `test:unit:watch` | `jest --watch` | Jest in watch mode | ✅ Working |
-| `test:unit:coverage` | `jest --coverage` | Jest with coverage report | ✅ Working |
-| `test:build` | `npm run build && bats tests/build.bats` | Build verification with Bats | ✅ Working |
-| `test:e2e` | `playwright test` | Playwright end-to-end tests | ⚠️ Browser install needed |
-| `test:e2e:debug` | `playwright test --debug` | Playwright in debug mode | ⚠️ Browser install needed |
-| `test:e2e:ui` | `playwright test --ui` | Playwright UI mode | ⚠️ Browser install needed |
-| `validate:branch-name` | `node scripts/validate-branch-name.js` | Validate branch naming convention | ✅ Working |
-
-Run them with npm, for example `npm run build`.
-
-## Commands validated so far
-
-**Baseline validation run on 17 October 2026, commit `2e3751d`, Node 24.21.0, npm 11.19.0.** Jest ESM configuration resolved via @swc/jest transformer.
-
-| Command | Result | Notes |
-|---|---|---|
-| `npm ls --depth=0` | ✅ Passed | No missing or invalid packages after lock file sync |
-| `npm run build` | ✅ Passed (8.28s) | Production build succeeds; bundle sizes normal |
-| `npm run validate:branch-name -- --branch epic/repo-governance-toa-241` | ✅ Passed | Branch naming validation working |
-| `npm run test:build` | ✅ Passed | Bats build tests pass; validates Vite build integrity |
-| `node --test tests/speckit.test.mjs` | ⚠️ 103 pass, 1 fail | Previously 93 pass, 11 fail. Improvement from lock file update. Single failure: template resolution precedence test |
-| `npm run test:unit` | ✅ Passed (179 tests) | Jest ESM configuration working. Tests: scripts/validate-branch-name.test.js + scripts/cleanup-branches.test.js. Solution: @swc/jest transformer handles ESM compilation (Decision 3: TEST-001 resolved) |
-| `npm run test:e2e` | ⚠️ Requires setup | Playwright browser not installed in agent environment; command structure valid |
-| `npm run journal:validate` | ✅ Passed | Validates 8 files successfully; paths fixed from `journal-content/` to `content/journal/` |
-| `npm run journal:check-links` | ✅ Passed (after fix) | At `070b296`, script read absent `journal-content/` directory; passed after path fix in commit `a20c268`. Checks 9 files, finds 2 internal links (valid), 0 external; all checks pass |
-| `npm run journal:parse` | ✅ Passed | Parses 8 files, exports JSON to `export/journal/`; wordcount and metadata extraction working |
-| Type-checking, linting, browser and accessibility checks | ℹ️ Not applicable | No npm scripts exist for these; manual review against guidelines is current practice |
-
-**When you change code, report which of these you actually ran. Never claim validation you did not perform.**
+> **Note:** The project has configured test suites (`test` and `test:netlify-headers`) using Jest and Node's built-in test runner.
+> There is no general linter or type-checker script at this time.
 
 ---
 
-## Critical safeguards
+## Critical Safeguards
 
-### Bundler compatibility (Figma Make)
+### Bundler Compatibility (Figma Make)
 
-The Figma Make bundler cannot parse some modern JS/TS syntax. Follow the full table in [Guidelines.md § Bundler Compatibility Rules](guidelines/Guidelines.md). The key forbidden patterns are:
+The Figma Make bundler **cannot parse** certain modern JS/TS syntax.
+All code must avoid the patterns listed in [Guidelines.md § Bundler Compatibility Rules](guidelines/Guidelines.md).
+Key forbidden patterns:
 
 - Optional chaining (`?.`) — use explicit null checks
 - Nullish coalescing (`??`) — use if/else
-- `import.meta.env` — do not use it (see the [contradiction](#unresolved-decisions-owner-confirmation-required) below)
+- `import.meta.env` — do not use in new code (existing usage in `ThemeToggleES5.tsx` is legacy; do not replicate)
 - Nested ternaries — convert to if/else
 - `for...of` loops — use classic `for` loops
 
-Use the helpers in `src/app/lib/router.tsx`: `grab()`, `arrayGet()` and `setProp()`.
+Use the helper functions in `/lib/router.tsx`: `grab()`, `arrayGet()`, `setProp()`.
 
-### Image protection
+### Image Protection
 
-**Never replace existing images.** All `figma:asset/` imports, logo files and image references are protected. For new images, use `ImageWithFallback` from `src/app/components/figma/ImageWithFallback.tsx`. That file is protected, so do not modify it.
+**Never replace existing images.** All `figma:asset/` imports, logo files, and image references are protected.
+Use `ImageWithFallback` from `/components/figma/ImageWithFallback.tsx` for new images (this file is protected — do not modify).
 
-### Supabase is not used
+### Supabase Non-Usage
 
-`src/app/utils/supabase/` is a system-protected deployment artefact. Never import from it, never suggest Supabase integration, and always dismiss the `supabase_connect` tool if it is offered.
+Supabase is **not used**. The `/utils/supabase/` folder is a system-protected deployment artifact.
+Never import from it, never suggest Supabase integration, always dismiss the `supabase_connect` tool if offered.
 
-### Content rules
- 
-- **No hardcoded UI content** — all UI strings, page metadata and component assets come from `src/app/data/mock/`; editorial manuscript chapters, journal entries and articles reside in `content/`
-- **Sentence case** for all headings, titles, labels and navigation
-- **Pronouns:** Ash uses he/him exclusively
-- **Voice:** follow [guidelines/voice-and-tone.md](guidelines/voice-and-tone.md)
+### Content Rules
 
-### Protected and locked files
+- **No hardcoded content** — all text/images come from `/data/mock`
+- **Sentence case** for all headings, titles, labels, and navigation
+- **Pronouns:** Ash uses He/Him exclusively
 
-Do not modify these without explicit owner instruction:
+### Root Directory Restrictions
 
-- `CHANGELOG.md` — never delete, move or rename it (see [guidelines/changelog.md](guidelines/changelog.md))
-- `ATTRIBUTIONS.md`
-- `src/app/components/figma/ImageWithFallback.tsx`
-- `src/app/utils/supabase/`
-- `.github/workflows/*` — centrally managed by `lightspeedwp/dependency-merge-controller`, and local edits are reverted
-- `tasks/task-list.md` — never delete it
+When creating new Markdown (`.md`) files in the project root, only `README.md`, `CHANGELOG.md`, and `ATTRIBUTIONS.md` are permitted.
+`AGENTS.md`, `CLAUDE.md`, and `CONTRIBUTING.md` are acknowledged exceptions for agent and GitHub tooling discoverability.
+This restriction applies only to new Markdown files; existing root Markdown files may remain.
 
 ---
 
-## Folder conventions
-
-From [Guidelines.md § Mandatory Folder Conventions](guidelines/Guidelines.md):
+## Folder Conventions
 
 | Folder | Purpose | Rules |
 |---|---|---|
-| [`guidelines/`](guidelines/) | Design and development guidance | Source of truth — read before coding |
-| [`prompts/`](prompts/) | AI prompt files | Reusable templates; orchestrators in subfolders |
-| [`reports/`](reports/) | Audit reports and analysis | One subfolder per audit (`reports/{topic}/`) |
-| [`tasks/`](tasks/) | Task lists and checklists | `task-list.md` is the master list (never delete) |
-| [`docs/`](docs/) | General documentation | Catch-all for docs not covered above |
-| [`scripts/`](scripts/) | Build and utility scripts | `.ts`, `.sh`, `.js` only |
-| [`src/app/`](src/app/) | Application source | Components, data, routing, utilities |
-| [`src/styles/`](src/styles/) | Global and BEM block CSS | One file per block in `src/styles/blocks/` |
+| `/guidelines/` | Design & development guidance | Source of truth — read before coding |
+| `/prompts/` | AI prompt files | Reusable templates, orchestrators in subfolders |
+| `/reports/{topic}/` | Audit reports & analysis | One subfolder per audit |
+| `/tasks/` | Task lists & checklists | `task-list.md` is the master (never delete) |
+| `/docs/` | General documentation | Catch-all for docs not in above folders |
+| `/scripts/` | Build/utility scripts | `.ts`, `.sh`, `.js` only |
+| `/src/app/` | Application source | Components, data, routing, styles |
 
-## Default workflow
+---
 
-When asked to audit, review or write a prompt, follow the four-step workflow in [Guidelines.md § Default AI Workflow](guidelines/Guidelines.md):
+## Workflow
 
-1. Create a prompt in `prompts/`
+When asked to audit, review, or write a prompt, follow the **default 4-step workflow** defined in [Guidelines.md § Default AI Workflow](guidelines/Guidelines.md):
+
+1. Create a prompt in `/prompts/`
 2. Run the audit described in the prompt
-3. Save findings to `reports/{topic}/`
-4. Extract actionable tasks to `tasks/`
+3. Save findings to `/reports/{topic}/`
+4. Extract actionable tasks to `/tasks/`
 
 ---
 
-## Deployment (Netlify)
+## Source vs Generated Output
 
-These settings were read from the Netlify site configuration on 3 October 2026:
-
-| Setting | Value |
-|---|---|
-| Repository / branch | `lightspeedwp/ThisOneTimeOnAcidCom` / `main` |
-| Base directory | *(empty — repository root)* |
-| Build command | `npm run build` |
-| Publish directory | `dist` |
-
-Netlify reads `netlify.toml` according to this order: package directory (if set in the UI) → base directory → repository root. The base directory is the repository root, and there is **no root `netlify.toml`**. Confirm whether the package-directory UI setting is configured. If the package directory is set to `src/app/`, then **`src/app/netlify.toml` may be active**. If not, then `src/app/netlify.toml` is not read. The active build command and publish directory come from the Netlify site's UI settings. Do not assume configuration inactivity without verifying the package-directory setting in Netlify's dashboard.
-
-The SPA fallback rule is in `public/_redirects/main.tsx`. Because `_redirects` is a directory rather than a plain file, Netlify may not pick that rule up. This is recorded for the owner and has not been changed.
-
-Do not edit deployment settings, environment variables or Netlify configuration as part of documentation work.
-
-## Source vs generated output
-
-- **Source** is everything committed in the repository: `src/`, `guidelines/`, `scripts/`, `public/` and the root configuration files. Agents edit source.
-- **Generated output** is `dist/`. It is the Vite build output that Netlify publishes, and it is ignored by `.gitignore`. Never treat it as configuration, and never edit it by hand. `.netlify/` is also ignored local state.
+- **Source configuration** lives in the repository root and `src/app/` — this is what agents edit
+- **Generated output** (`dist/`) is the Vite build output deployed to Netlify — it is `.gitignore`d and must never be treated as authoritative configuration
+- The root `netlify.toml` is the active deployment config (`npm run build`, Node 24, publishes `dist/`). `src/app/netlify.toml` is not read by Netlify and is kept only as a record of the deferred CSP draft
 
 ---
 
-## Unresolved decisions (owner confirmation required)
+## Unresolved Assumptions
 
-These items come from repository evidence. They are recorded here, not resolved:
+The following items are documented as unresolved per repository evidence, not invented:
 
-1. **Package manager.** npm is in use (lockfile, Netlify command, README), but `pnpm.overrides` in `package.json` still refers to pnpm. Confirm npm and decide whether to remove this remnant. (Governance Decision PKG-001 pending approval)
-2. **Node.js version.** Pinned to Node 24 LTS via `.nvmrc` and `package.json` `engines` field (Governance Decision NODE-001: Option B, implemented 2026-10-17).
-3. **Netlify configuration file.** `src/app/netlify.toml` is not read because the base directory is the repository root. Decide whether to move it to the root, set the base directory, or delete it, and whether its headers and redirect are still wanted.
-4. **BEM vs Tailwind.** All site styling now uses semantic BEM classes exclusively. Tailwind CSS and related dependencies have been completely removed (Governance Decision STYLE-001: Enforce BEM-only, implemented 2026-10-17). Guidelines.md § 2 should be updated to remove references to "Tailwind CSS V4".
-5. **`import.meta.env`.** The bundler table in Guidelines.md says it is "Completely removed", but Guidelines.md § 12 (Console Logging Policy) recommends `if (import.meta.env.DEV)`, and `src/app/components/common/ThemeToggleES5.tsx` still uses it. Until this is resolved, follow the bundler table and do not use `import.meta.env`.
-6. **Jest ESM and testing infrastructure.** Jest unit tests now working with @swc/jest transformer (Governance Decision TEST-001: Option B, implemented 2026-10-17). Scripts `/scripts/**/*.test.js` pass 179 tests. Guidelines.md § 9 still cites missing `npm run type-check` and `npm run verify` scripts, which do not exist. E2E tests in `tests/` need Playwright browser installation.
-7. **Duplicate attribution files.** A root `ATTRIBUTIONS.md` and a separate `docs/Attributions.md` exist. The root-file exception in Guidelines.md permits `AGENTS.md` and `CONTRIBUTING.md` for agent and GitHub discoverability; this exception is already acknowledged. Clarify whether only one attribution file should exist and which name is canonical.
-8. **Changelog location.** [guidelines/changelog.md](guidelines/changelog.md) puts the changelog at the root `CHANGELOG.md`, and that is the only changelog in the repository. There is no `src/app/CHANGELOG.md`. Confirm whether documentation-only changes need an entry (issue #2 carries the `meta:no-changelog` label).
-9. **Broken links in the guidelines.** `guidelines/README.md` and `guidelines/Guidelines.md` link to `../data/README.md`, which does not exist. The actual file is `src/app/data/README.md`. The guidelines were not changed here.
-10. **PostCSS configuration.** Vite discovers PostCSS configuration from the project root, so the root `postcss.config.mjs` (an empty config) is the likely active file. `src/app/postcss.config.js` references `autoprefixer`, which is not a dependency. Confirm, and decide whether to remove one of them.
-11. **Branch and PR conventions.** The repository has no pull request template and no documented branch-prefix list. The `docs/` prefix comes from issue #2. Confirm the conventions, or point to organisation-level templates.
+1. **No test/lint/typecheck scripts** — `package.json` contains no `test`, `lint`, or `typecheck` commands. Whether this is intentional or an omission is not determined.
+2. **Two `netlify.toml` locations** — The site's base directory is the repository root, so the root `netlify.toml` is authoritative. Whether to delete `src/app/netlify.toml` (and adopt its draft CSP) is still undecided.
+3. **`postcss.config.mjs` vs `postcss.config.js`** — Both exist (root and `src/app/`). The active PostCSS pipeline is not explicitly documented.
