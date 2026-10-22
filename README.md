@@ -1,6 +1,8 @@
 # This One Time on Acid
 
-This is a code bundle for This One Time on Acid. The original project is available at https://www.figma.com/design/WGrQbNWvPQfiaGY1pnkwaq/This-One-Time-on-Acid.
+This is a code bundle for This One Time on Acid.
+The original project is available at
+<https://www.figma.com/design/WGrQbNWvPQfiaGY1pnkwaq/This-One-Time-on-Acid>.
 
 ## Running the code
 
@@ -10,17 +12,22 @@ Run `npm install` to install the dependencies.
 
 Run `npm run dev` to start the development server.
 
-**A Retro 80s CLI Memoir with Neon Terminal Aesthetics**
+## A Retro 80s CLI Memoir with Neon Terminal Aesthetics
 
-> **Status:** ✅ **ANIMATION PHASE 1 COMPLETE** - Terminal boot system deployed  
-> **Version:** v8.4.0 | **Animation System:** v1.0.0 | **Updated:** March 12, 2026  
-> **See:** [Guidelines](./guidelines/Guidelines.md) | [Animation Report](/docs/animation-implementation-report-march-2026.md)
+> **Status:** ✅ **ANIMATION PHASE 1 COMPLETE** - Terminal boot system deployed
+> **Version:** v8.4.0 | **Animation System:** v1.0.0 | **Updated:** March 12, 2026
+> **See:** [Guidelines](./guidelines/Guidelines.md) | [Animation
+> Report](/docs/animation-implementation-report-march-2026.md)
 
 ## 🌟 Overview
 
-This is a high-performance React application built with **Vite**, **TypeScript**, and **Tailwind CSS**. It features a unique **"Neon vs Atomic Black"** design system with a comprehensive **retro terminal boot animation system**, and maintains 100% WCAG 2.1 AAA accessibility compliance.
+This is a high-performance React application built with **Vite**, **TypeScript**,
+and **Tailwind CSS**. It features a unique **"Neon vs Atomic Black"** design
+system with a comprehensive **retro terminal boot animation system**, and
+maintains 100% WCAG 2.1 AAA accessibility compliance.
 
 **Current Architecture:**
+
 - **Frontend:** React 18 SPA (Single Page Application)
 - **Styling:** Strict BEM CSS Architecture (zero Tailwind utilities)
 - **Animations:** 26 @keyframes animations with terminal boot sequences
@@ -35,15 +42,18 @@ This is a high-performance React application built with **Vite**, **TypeScript**
 ### Core Animations
 
 1. **Terminal Boot Sequence** - 0.8s typewriter-style page entrance
-2. **Auto-Stagger System** - Cascading fade-in with 0.1s delays (title → subtitle → description → CTA)
+2. **Auto-Stagger System** - Cascading fade-in with 0.1s delays (title →
+   subtitle → description → CTA)
 3. **Neon Pulse CTAs** - 2s breathing glow that speeds to 1s on hover
-4. **Holographic Shimmer** - 4s rainbow gradient sweep (pink → purple → cyan → yellow)
+4. **Holographic Shimmer** - 4s rainbow gradient sweep (pink → purple → cyan →
+   yellow)
 5. **Floating Media** - 4s gentle vertical float with neon glow
 6. **Page Headers** - Unified animation system for archive pages
 
 ### Pages Enhanced
 
-- **HomePage** (v1.7.0) - Full terminal boot + auto-stagger + floating media + neon pulse
+- **HomePage** (v1.7.0) - Full terminal boot + auto-stagger + floating media +
+  neon pulse
 - **AboutPage** (v1.5.0) - All HomePage animations + holographic rainbow title
 - **PortfolioPage** (v1.7.0) - Header boot → filters → grid stagger
 - **BlogPage** (v1.5.0) - Header boot → filters stagger
@@ -52,12 +62,15 @@ This is a high-performance React application built with **Vite**, **TypeScript**
 ### Dev Tools
 
 Visit **`/dev/animations`** for an interactive showcase with:
+
 - 6 live animation demos
 - Code implementation examples
 - Stats dashboard (26 animations, 5 pages, 100% WCAG AAA)
 - Responsive testing tools
 
-**Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion` support  
+**Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion`
+support
+
 **Performance:** CSS-only (60fps, zero JavaScript overhead, +0.6KB minified)
 
 ## 🚀 Quick Start
@@ -65,22 +78,27 @@ Visit **`/dev/animations`** for an interactive showcase with:
 **Requirements:** Node.js 24 LTS or later (pinned in `.nvmrc`)
 
 ### 1. Use Correct Node.js Version
+
 ```bash
 nvm use  # Uses version from .nvmrc (Node.js 24)
 ```
 
 ### 2. Install Dependencies (npm only)
+
 ```bash
 npm ci  # Install exact versions from package-lock.json
 ```
 
 ### 3. Run Development Server
+
 ```bash
 npm run dev
 ```
+
 Access the app at `http://localhost:5173`
 
 ### 4. Run Tests & Validation
+
 ```bash
 npm test              # Run all test suites
 npm run test:unit    # Jest unit tests
@@ -105,16 +123,21 @@ Read these key governance documents:
 
 All branches **must** follow this pattern: `{type}/{scope}-{title}`
 
-**Valid types:** `feat`, `fix`, `hotfix`, `docs`, `test`, `refactor`, `chore`, `design`, `security` (and more — see [CONTRIBUTING.md](./CONTRIBUTING.md))
+**Valid types:** `feat`, `fix`, `hotfix`, `docs`, `test`, `refactor`, `chore`,
+`design`, `security` (and more — see
+[CONTRIBUTING.md](./CONTRIBUTING.md))
 
 **Validate before pushing:**
+
 ```bash
 npm run validate:branch-name
 ```
 
 ### Testing & Validation
 
-See [docs/TESTING.md](./docs/TESTING.md) for comprehensive testing guide covering:
+See [docs/TESTING.md](./docs/TESTING.md) for comprehensive testing guide
+covering:
+
 - **Unit tests** (Jest ESM) — 588 tests
 - **Build verification** (Bats) — 12 tests
 - **End-to-end tests** (Playwright) — configured and ready
@@ -130,26 +153,41 @@ This repository follows specification-driven development using SpecKit:
 4. **Decompose** — Break into actionable tasks
 5. **Implement** — Execute tasks and commit
 
-All specifications live in [.github/specs/](./.github/specs/) with full catalog at [CATALOG.md](./.github/specs/CATALOG.md).
+All specifications live in [.github/specs/](./.github/specs/) with full catalog
+at [CATALOG.md](./.github/specs/CATALOG.md).
 
 ## 📚 Documentation
 
 ### Essential Reading (Start Here)
-*   **[Guidelines.md](./guidelines/Guidelines.md)** - Complete design & development guidelines (v8.4.0)
-*   **[Animation Report](./docs/animation-implementation-report-march-2026.md)** - Phase 1 completion report
-*   **[Overview Components](./guidelines/overview-components.md)** - Component architecture
-*   **[Neon Colors](./guidelines/design-tokens/neon-colors.md)** - Design system with 33 palettes
-*   **[Animations](./guidelines/design-tokens/animations.md)** - Complete animation library
+
+- **[Guidelines.md](./guidelines/Guidelines.md)** - Complete design &
+  development guidelines (v8.4.0)
+- **[Animation Report](./docs/animation-implementation-report-march-2026.md)** -
+  Phase 1 completion report
+- **[Overview Components](./guidelines/overview-components.md)** - Component
+  architecture
+- **[Neon Colors](./guidelines/design-tokens/neon-colors.md)** - Design system
+  with 33 palettes
+- **[Animations](./guidelines/design-tokens/animations.md)** - Complete
+  animation library
 
 ### Architecture Documentation
-*   **[BEM CSS Architecture](./guidelines/css-architecture.md)** - Strict BEM naming conventions
-*   **[Dark Mode Implementation](./guidelines/dark-mode-implementation.md)** - Theme system guide
-*   **[Component Dark Mode](./guidelines/component-dark-mode.md)** - Component-specific patterns
-*   **[Reduced Motion Standards](./guidelines/prefers-reduced-motion.md)** - Accessibility guide
+
+- **[BEM CSS Architecture](./guidelines/css-architecture.md)** - Strict BEM
+  naming conventions
+- **[Dark Mode Implementation](./guidelines/dark-mode-implementation.md)** -
+  Theme system guide
+- **[Component Dark Mode](./guidelines/component-dark-mode.md)** -
+  Component-specific patterns
+- **[Reduced Motion Standards](./guidelines/prefers-reduced-motion.md)** -
+  Accessibility guide
 
 ### Data System
-*   **[Data System README](./data/README.md)** - Centralized mock data documentation
-*   **[CMS Field Mapping](./docs/cms-field-mapping.md)** - WordPress CPT/ACF reference
+
+- **[Data System README](./data/README.md)** - Centralized mock data
+  documentation
+- **[CMS Field Mapping](./docs/cms-field-mapping.md)** - WordPress CPT/ACF
+  reference
 
 ## 🛠️ Developer Tools
 
@@ -186,7 +224,7 @@ The application includes built-in dev tools for inspecting the design system.
 │
 ├── styles/               # BEM CSS architecture
 │   ├── blocks/           # Component-specific CSS
-│   │   ├── animations.css              # Core @keyframes library (26 animations)
+│   │   ├── animations.css              # Core @keyframes library (26)
 │   │   ├── hero.css                    # Hero animation utilities
 │   │   ├── page-header-animations.css  # Reusable page header system
 │   │   └── animation-showcase.css      # Showcase page styles
@@ -225,11 +263,11 @@ The application includes built-in dev tools for inspecting the design system.
 
 **Neon vs Atomic Black Visual Identity:**
 
-- **8 Neon Colors:** Electric green, hot pink, royal blue, pure yellow, blazing orange,
-  violet purple, aqua cyan, hot red
+- **8 Neon Colors:** Electric green, hot pink, royal blue, pure yellow, blazing
+  orange, violet purple, aqua cyan, hot red
 - **Atomic Black:** Deep #0F0F0F background for maximum neon contrast
-- **4 Signature Gradients:** Cyberpunk (pink→blue), Toxic Lime (green→cyan), Solar
-  Flare (orange→yellow), Hyperpop (multi-color)
+- **4 Signature Gradients:** Cyberpunk (pink→blue), Toxic Lime (green→cyan),
+  Solar Flare (orange→yellow), Hyperpop (multi-color)
 - **26 Animations:** Neon pulse, gradient shift, float, bounce, terminal boot,
   holographic shimmer
 - **33 Color Palettes:** Comprehensive interface color library
@@ -276,6 +314,6 @@ The application includes built-in dev tools for inspecting the design system.
 
 ---
 
-**Maintained by:** Nova News Dev Team  
-**Last Updated:** March 12, 2026  
+**Maintained by:** Nova News Dev Team
+**Last Updated:** March 12, 2026
 **Project Status:** Production-Ready with Phase 1 Animations Complete
