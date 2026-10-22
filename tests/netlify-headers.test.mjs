@@ -53,9 +53,21 @@ describe('root netlify.toml', function () {
     assert.doesNotMatch(rootToml, /pnpm/);
   });
 
-  it('keeps Cache-Control and CSP out of the shared rules to avoid conflicting definitions', function () {
-    assert.doesNotMatch(rootToml, /^\s*Cache-Control\s*=/im);
-    assert.doesNotMatch(rootToml, /^\s*Content-Security-Policy\s*=/im);
+  it('defines Content-Security-Policy and security headers for all routes', function () {
+    assert.match(rootToml, /Content-Security-Policy\s*=\s*"default-src 'self'/);
+    assert.match(rootToml, /X-Frame-Options\s*=\s*"DENY"/);
+    assert.match(rootToml, /X-Content-Type-Options\s*=\s*"nosniff"/);
+  });
+
+  it('avoids conflicting wildcard Cache-Control rules that would interfere with exact-path hashed-asset rules', function () {
+    // The root netlify.toml should not have wildcard Cache-Control rules
+    // Exact-path rules for hashed assets are generated per-file into dist/_headers
+    // Split at array-table boundaries so later rules cannot satisfy this check.
+    rootToml.split(/(?=^[ \t]*\[\[)/m).forEach(function (block) {
+      if (/^\s*\[\[headers\]\]/.test(block) && /^\s*for\s*=\s*"\/\*"/m.test(block)) {
+        assert.doesNotMatch(block, /Cache-Control/i);
+      }
+    });
   });
 
   it('has an unforced SPA fallback so real files win', function () {
