@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+**Agent and Workflow Orchestration Documentation**
+
+- **Agent inventory and workflow registry** — Added `.claude/agents/INVENTORY.md` documenting 20 agents with their capabilities, workflows, and shared tools; consolidated from scattered agent documentation for centralized reference
+- **Workflow orchestration skill** — Added `.claude/skills/workflow-orchestration/SKILL.md` defining audit, report generation, task tracking, and archival procedures with metadata requirements and file location standards
+- **Platform assessment guide** — Added `docs/ANTHROPIC_PLATFORMS.md` evaluating seven Anthropic platforms with current status, priorities, and roadmap for platform selection decisions
+- **Protected files guidance** — Added `.github/PROTECTED_FILES.txt` documenting canonical governance files and change request process for labels, issue types, and PR templates
+- **SpecKit configuration** — Added `.specify/init-options.json` setting feature directory to `.github/specs` for specification-first workflow
+
 ### Fixed
 
 - **React external dependency resolution regression** — Restored missing `resolveReactExternals()` function and `build.rollupOptions` in Vite configuration that was accidentally removed in PR #345, causing all 7 subsequent Dependabot PRs to fail Netlify builds with unresolved `react/jsx-runtime` import errors (Issue #306)
