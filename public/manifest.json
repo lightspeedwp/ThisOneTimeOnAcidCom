@@ -11,13 +11,40 @@
   "lang": "en-GB",
   "dir": "ltr",
   "categories": ["lifestyle", "entertainment", "photo"],
+<<<<<<< HEAD
   "icons": [],
   "screenshots": [],
   "shortcuts": [],
+=======
+  "shortcuts": [
+    {
+      "name": "Portfolio",
+      "short_name": "Portfolio",
+      "description": "View makeup portfolio gallery",
+      "url": "/portfolio"
+    },
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Read makeup tips and tutorials",
+      "url": "/blog"
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch for collaborations",
+      "url": "/contact"
+    }
+  ],
+>>>>>>> origin/fix/static-metadata-public-directory
   "related_applications": [],
   "prefer_related_applications": false,
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "edge_side_panel": {
     "preferred_width": 400
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/fix/static-metadata-public-directory
