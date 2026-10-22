@@ -448,12 +448,14 @@ Before each move, set every report's YAML frontmatter status to `archived` (incl
 
 ```bash
 # Single-file report
-sed -i '2,/^---$/s/^status: .*/status: "archived"/' ./reports/{topic}/report.md &&
+sed -i.bak '2,/^---$/s/^status: .*/status: "archived"/' ./reports/{topic}/report.md &&
+  rm ./reports/{topic}/report.md.bak &&
   mv ./reports/{topic}/ ./reports/archived/{topic}/
 
 # Orchestrator report folder
 for report in ./reports/YYYY-MM-DD-{topic}/*.md; do
-  sed -i '2,/^---$/s/^status: .*/status: "archived"/' "$report" || exit 1
+  sed -i.bak '2,/^---$/s/^status: .*/status: "archived"/' "$report" || exit 1
+  rm "$report.bak" || exit 1
 done
 mv ./reports/YYYY-MM-DD-{topic}/ ./reports/archived/YYYY-MM-DD-{topic}/
 ```
