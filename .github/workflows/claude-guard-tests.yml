@@ -88,7 +88,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.changes.outputs.run == 'true'
-        run: npm ci --ignore-scripts
+        run: npm ci --ignore-scripts --no-audit --no-fund
 
       # The hooks need git and bash, which ubuntu-latest provides. jq is not required:
     # session-start.sh reads its input without it, and a test runs the hook with no
