@@ -70,11 +70,21 @@ For reusable Codex workflows, add repository skills under `.agents/skills/`.
 Gemini command TOML and Claude agent/settings files are not Codex configuration.
 Codex custom prompts are deprecated and are not the basis of this setup.
 
+## Shared custom skills and roles
+
+Six custom skills live in `.agents/skills/`, alongside Codex's generated Spec
+Kit skills. Codex and Gemini discover that shared skill location natively;
+Claude uses relative links from `.claude/skills/`. Shared instructions for
+all twenty roles live in `.agents/roles/` and are loaded by native definitions
+in `.codex/agents/`, `.claude/agents/` and `.gemini/agents/`.
+
+See [the shared layout](../.agents/README.md) for maintenance and discovery.
+
 ## Branch naming before every task
 
 Follow **Branch check before every task** in [AGENTS.md](../AGENTS.md). Codex's
 [$branch-validation skill](../.agents/skills/branch-validation/SKILL.md) points to
-the existing Claude skill and branch agent, so their naming policy is shared.
+the canonical shared branch skill and role, so their naming policy is shared.
 Ash must supply or approve the exact branch name before creation or switching;
 do not automatically prefix names with `codex/`. Validate both the proposed
 name and the checked-out branch before edits.

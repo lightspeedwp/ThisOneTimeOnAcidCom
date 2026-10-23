@@ -9,5 +9,8 @@
     "allowedTools": [
       "shell"
     ]
+  },
+  "skills": {
+    "enabled": true
   }
 }

@@ -62,14 +62,23 @@ files define their own reading order, so follow that rather than inventing one:
 - **[.claude/skills/](.claude/skills/)** — Claude Code Spec Kit skills (`/speckit-specify`)
 - **[.codex/README.md](.codex/README.md)** — configuration and integration maintenance
 
+### Shared skills and agent roles
+
+Custom skills live in [.agents/skills/](.agents/skills/). Shared agent role
+instructions live in [.agents/roles/](.agents/roles/); native definitions in
+`.claude/agents/`, `.gemini/agents/` and `.codex/agents/` load them before acting.
+Claude's custom skill directories link to the shared source. Keep Spec Kit's
+generated skills and manifests in their installer-managed locations.
+See [.agents/README.md](.agents/README.md) for discovery and maintenance.
+
 ### Branch check before every task
 
 Before editing files or running a workflow that writes files:
 
 1. Inspect `git status --short` and `git branch --show-current`.
-2. Read [.claude/skills/branch-validation/SKILL.md](.claude/skills/branch-validation/SKILL.md)
-   and [.claude/agents/branches-agent.md](.claude/agents/branches-agent.md).
-   Codex can also invoke the [branch-validation skill](.agents/skills/branch-validation/SKILL.md).
+2. Read [.agents/skills/branch-validation/SKILL.md](.agents/skills/branch-validation/SKILL.md)
+   and [.agents/roles/branches-agent.md](.agents/roles/branches-agent.md).
+   Codex can invoke this skill explicitly with `$branch-validation`.
 3. Use a task branch whose exact name Ash supplied or approved. If none was
    supplied, propose a meaningful `{type}/{scope}-{title}` name and obtain
    approval before creating or switching branches. Do not default to `codex/`

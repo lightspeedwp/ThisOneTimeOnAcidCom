@@ -16,3 +16,7 @@ Code. See `.codex/README.md` for integration maintenance and branch checks.
 Spec Kit feature directory numbering is independent of Git branch naming.
 Use only Ash's supplied or approved branch name and validate the checked-out
 branch with `npm run validate:branch-name` before writing files.
+
+Shared custom skills are discovered in `.agents/skills/`. Native Gemini agent
+files in `.gemini/agents/` load canonical role instructions from `.agents/roles/`.
+See `.agents/README.md` for the shared layout and maintenance rules.

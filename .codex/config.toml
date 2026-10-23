@@ -1,7 +1,8 @@
 # Shared Codex project configuration.
 # Instructions: ../AGENTS.md; setup and workflow notes: README.md.
 # Branch policy: AGENTS.md, "Branch check before every task".
-# Reusable workflows: ../.agents/skills/ (including branch-validation).
+# Shared skills: ../.agents/skills/ (native discovery, including branch-validation).
+# Native .codex/agents/*.toml adapters load shared .agents/roles/ instructions.
 # https://developers.openai.com/codex/config-reference
 
 # Allow room for the repository instructions and applicable nested AGENTS.md files.

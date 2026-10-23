@@ -1,11 +1,11 @@
 ---
-name: "Validation Skill"
-description: "Runs comprehensive validation checks for ThisOneTimeOnAcidCom
-repository integrity."
-type: "skill"
-category: "quality"
-enabled: true
-tags: ["validation", "npm", "health-check", "ci"]
+name: validate
+description: Runs comprehensive validation checks for ThisOneTimeOnAcidCom repository
+  integrity.
+metadata:
+  category: quality
+  enabled: 'True'
+  tags: validation, npm, health-check, ci
 ---
 
 # Validation Skill

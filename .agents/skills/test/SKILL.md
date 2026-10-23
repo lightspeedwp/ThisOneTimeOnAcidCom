@@ -1,11 +1,10 @@
 ---
-name: "Test Execution Skill"
-description: "Executes and validates tests for ThisOneTimeOnAcidCom portfolio
-site."
-type: "skill"
-category: "quality"
-enabled: true
-tags: ["testing", "validation", "qa", "playwright"]
+name: test
+description: Executes and validates tests for ThisOneTimeOnAcidCom portfolio site.
+metadata:
+  category: quality
+  enabled: 'True'
+  tags: testing, validation, qa, playwright
 ---
 
 # Test Execution Skill

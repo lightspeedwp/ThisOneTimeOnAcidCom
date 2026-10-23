@@ -1,11 +1,11 @@
 ---
-name: "Changelog Management Skill"
-description: "Manages CHANGELOG.md using Keep a Changelog 1.1.0 standard with
-validation and formatting."
-type: "skill"
-category: "release"
-enabled: true
-tags: ["changelog", "keep-a-changelog", "release", "validation"]
+name: changelog
+description: Manages CHANGELOG.md using Keep a Changelog 1.1.0 standard with validation
+  and formatting.
+metadata:
+  category: release
+  enabled: 'True'
+  tags: changelog, keep-a-changelog, release, validation
 ---
 
 # Changelog Management Skill

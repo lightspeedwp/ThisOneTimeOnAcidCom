@@ -1,11 +1,10 @@
 ---
-name: "Labeling Workflow Skill"
-description: "Manages GitHub issue and PR labeling with consistent taxonomy for
-ThisOneTimeOnAcidCom."
-type: "skill"
-category: "workflow"
-enabled: true
-tags: ["labeling", "github", "taxonomy", "automation"]
+name: labeling
+description: Manages GitHub issue and PR labeling with consistent taxonomy for ThisOneTimeOnAcidCom.
+metadata:
+  category: workflow
+  enabled: 'True'
+  tags: labeling, github, taxonomy, automation
 ---
 
 # Labeling Workflow Skill

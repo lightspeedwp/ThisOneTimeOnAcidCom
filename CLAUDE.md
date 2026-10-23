@@ -9,13 +9,20 @@ organisation-wide guidance first:
 > - [Repository Root AGENTS.md](AGENTS.md) — Follow these rules for all
 work in this session
 
+## Shared custom skills and roles
+
+Custom skills in `.claude/skills/` link to `.agents/skills/`. Native agent
+files in `.claude/agents/` load the canonical instructions in `.agents/roles/`.
+Edit the shared source for behaviour changes. Keep Spec Kit-generated skills
+in their existing locations. See `.agents/README.md` for the layout.
+
 ## Branch check before work
 
 Follow `AGENTS.md` → **Branch check before every task** before editing files,
 including when invoking Spec Kit skills. Use Ash's exact supplied or approved
 branch name, validate it before creation and validate the checked-out branch
-before edits. Read `.claude/skills/branch-validation/SKILL.md` and
-`.claude/agents/branches-agent.md`; do not create agent/session branch names or
+before edits. Read `.agents/skills/branch-validation/SKILL.md` and
+`.agents/roles/branches-agent.md`; do not create agent/session branch names or
 put unrelated work on the current branch. Keep the existing Lefthook checks
 enabled for commits and pushes.
 

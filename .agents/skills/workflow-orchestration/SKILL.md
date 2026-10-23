@@ -1,12 +1,13 @@
 ---
-name: "Workflow Orchestration Skill"
-description: "Guides the 4-step audit/prompt/report/task workflow with templates and best practices for ThisOneTimeOnAcidCom."
-type: "skill"
-category: "workflow"
-enabled: true
-tags: ["workflow", "audit", "prompt", "report", "task", "orchestration"]
-version: "1.0.0"
-created: "2026-10-22"
+name: workflow-orchestration
+description: Guides the 4-step audit/prompt/report/task workflow with templates and
+  best practices for ThisOneTimeOnAcidCom.
+metadata:
+  category: workflow
+  enabled: 'True'
+  tags: workflow, audit, prompt, report, task, orchestration
+  version: 1.0.0
+  created: '2026-10-22'
 ---
 
 # Workflow Orchestration Skill
