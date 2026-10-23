@@ -16,7 +16,7 @@ combinations per agent.
 ### Core API Services (3 platforms)
 
 | Platform | Service | Version | Status | Use Case |
-|----------|---------|---------|--------|----------|
+| --- | --- | --- | --- | --- |
 | **Claude API (Messages)** | Inference | Latest (Haiku 5.5, Opus 5.5, Sonnet 5.5, Fable 5.1; 1M-token context each) | ✅ Active | Agent reasoning, task execution |
 | **Claude API Tool Use** | Tool Routing | Tool Runner (beta) | ✅ Available | Dynamic tool selection & execution |
 | **Managed Agents** | Cloud Sandbox | Server-hosted | ✅ Available | Long-running governance workflows, budget enforcement |
@@ -24,14 +24,14 @@ combinations per agent.
 ### Infrastructure Services (2 platforms)
 
 | Platform | Service | Version | Status | Use Case |
-|----------|---------|---------|--------|----------|
+| --- | --- | --- | --- | --- |
 | **Prompt Caching** | Optimization | Multi-turn support | ✅ Active | Reduce latency on repeated spec contexts |
 | **MCP (Model Context Protocol)** | Integration | Standard | ✅ Active | Connect external tools (GitHub, Slack, databases) |
 
 ### Data & Workflow Services (2 platforms)
 
 | Platform | Service | Version | Status | Use Case |
-|----------|---------|---------|--------|----------|
+| --- | --- | --- | --- | --- |
 | **Application-owned storage** | Persistent Storage | Git/files/database | ⚠️ Integration required | Store spec artifacts, governance config, audit logs |
 | **Claude Docs** | Collaborative Documents interface | Native UI | ⚠️ Interface; no API integration established here | Specification authoring, team review, version history |
 
@@ -45,7 +45,7 @@ combinations per agent.
 execution boundaries.
 
 | Requirement | Platform(s) | Implementation | Status |
-|-------------|-------------|-----------------|--------|
+| --- | --- | --- | --- |
 | Agent discovery | Claude API Tool Use | Register agents via MCP | ✅ T017a Complete |
 | Capability contracts | Application-owned storage | Store agent specs in Git at `.claude/agents/`; external storage requires integration | ✅ Git storage in use |
 | Execution boundaries | Managed Agents | Enforce via sandbox policies | ✅ Available |
@@ -66,7 +66,7 @@ and identify gaps.
 mapping platforms to governance requirements.
 
 | Assessment Dimension | Platform Assessment | Findings |
-|-----|-------|----------|
+| --- | --- | --- |
 | **Governance Automation** | Claude API + Tool Use | ✅ Supports workflow automation (create, plan, tasks pipeline) |
 | **Budget Enforcement** | Managed Agents session spend budget + host-side admission control | ⚠️ `max_tokens` limits one response; a session spend cap is separate. Aggregate token accounting requires host-side enforcement (R7.3), not prompt caching |
 | **Audit Trail** | Application-owned storage + MCP logging | ⚠️ Requires log export/storage integration; no native audit dashboard established |
@@ -82,7 +82,7 @@ mapping platforms to governance requirements.
 agent.
 
 | Control Type | Platform | Implementation | Status |
-|--------------|----------|-----------------|--------|
+| --- | --- | --- | --- |
 | Per-response output limit | Claude API Messages | `max_tokens` bounds the output of one response, not total session usage | ✅ API parameter; no aggregate enforcement configured here |
 | Session spend budget | Managed Agents | Set session `budget.type: "limit"` and `budget.max*list*cost` at creation; platform stops new model requests at the cap, while an in-flight request may finish | ⚠️ Available platform control; not configured here |
 | Aggregate token budget | Host-side admission middleware | Reserve tokens before dispatch; reconcile input/output and cached-token usage across calls, retries, and subagents; block dispatch or cancel on exhaustion | ⏳ Required by R7.3; not implemented here (TOA-271) |
@@ -108,7 +108,7 @@ budget. See TOA-271.
 complexity and resource needs.
 
 | Routing Dimension | Platform | Capability | Status |
-|----------|------------|-----------|--------|
+| --- | --- | --- | --- |
 | Skill discovery | Claude Code API | List skills via MCP | ✅ Available |
 | Complexity detection | Claude API Messages | Reasoning agent determines skill tier | ✅ Native |
 | Resource allocation | Managed Agents | Assign to appropriate environment tier | ✅ Available |
@@ -126,7 +126,7 @@ establish automatic server-side timeout fallback for this workflow.
 ### Content & Documentation Agents
 
 | Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
-|-------|---------|------------------------|-------------|-------|
+| --- | --- | --- | --- |
 | **Changelog Agent** | Keep a Changelog management | Claude API + Tool Use + Prompt Caching | GitHub | Cache schema/examples; validate entries structurally |
 | **Content Strategy Agent** | Portfolio messaging guidance | Claude API + Prompt Caching + Artifact APIs | None | Cache brand guidelines; collaborate on copy |
 | **Document Reviewer Agent** | Documentation quality review | Claude API + Tool Runner + Prompt Caching | GitHub | Multi-step review workflow; cache standards |
@@ -135,7 +135,7 @@ establish automatic server-side timeout fallback for this workflow.
 ### Design & UX Agents
 
 | Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
-|-------|---------|------------------------|-------------|-------|
+| --- | --- | --- | --- |
 | **Design Partner Agent** | Design system guidance | Claude API + Prompt Caching + Artifact APIs | Figma | Cache component library; reference tokens |
 | **Metadata Agent** | SEO/schema validation | Claude API + Tool Runner + Prompt Caching | None | Structured validation; cache best practices |
 | **Client Website Discovery** | Portfolio opportunity discovery | Claude API + Tool Runner + Prompt Caching | Web Search | Multi-step research; cache analysis criteria |
@@ -143,7 +143,7 @@ establish automatic server-side timeout fallback for this workflow.
 ### Development & Code Agents
 
 | Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
-|-------|---------|------------------------|-------------|-------|
+| --- | --- | --- | --- |
 | **Branches Agent** | Branch name validation | Implement as **Skill** (not agent) | None | Deterministic rules; no reasoning needed |
 | **Labeling Agent** | Issue/PR label assignment | Claude API + Tool Runner + Prompt Caching | GitHub | Multi-step workflow; cache taxonomy |
 | **PR Agent** | PR creation & management | Claude API + Tool Runner + Prompt Caching | GitHub | Complex workflow; cache templates |
@@ -152,14 +152,14 @@ establish automatic server-side timeout fallback for this workflow.
 ### Testing & QA Agents
 
 | Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
-|-------|---------|------------------------|-------------|-------|
+| --- | --- | --- | --- |
 | **Playwright Agent** | Browser automation & e2e testing | Claude API + Tool Runner + Prompt Caching | None (local Playwright) | Local execution; cache test scenarios |
 | **Testing Agent** | Test strategy & planning | Claude API + Tool Runner + Prompt Caching | None | Multi-step workflows; cache frameworks |
 
 ### Issue & Project Management Agents
 
 | Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
-|-------|---------|------------------------|-------------|-------|
+| --- | --- | --- | --- |
 | **BugHerd Agent** | Feedback triage & routing | Claude API + Tool Runner + Prompt Caching | BugHerd, GitHub | Multi-step routing; cache triage rules |
 | **Issue Agent** | Issue triage & prioritization | Claude API + Tool Runner + Prompt Caching | GitHub | Multi-step workflow; cache priority rules |
 | **PRD Agent** | Product requirement specs | Claude API + Tool Runner + Prompt Caching | GitHub | Multi-step drafting; cache templates |
@@ -167,7 +167,7 @@ establish automatic server-side timeout fallback for this workflow.
 ### Analytics & Operations Agents
 
 | Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
-|-------|---------|------------------------|-------------|-------|
+| --- | --- | --- | --- |
 | **Metrics Agent** | Metrics collection & analysis | Claude API + Tool Runner + Prompt Caching | Google Analytics, Amplitude | Data aggregation; cache metric definitions |
 | **PageSpeed Agent** | Performance monitoring | Claude API + Tool Runner + Prompt Caching | Google PageSpeed Insights | Continuous monitoring; cache Core Web Vitals thresholds |
 | **Reporting Agent** | Report generation | Claude API + Tool Runner + Prompt Caching | Multiple (Analytics, GitHub, Email) | Multi-source aggregation; cache templates |
@@ -175,7 +175,7 @@ establish automatic server-side timeout fallback for this workflow.
 ### Release & Deployment Agents
 
 | Agent | Purpose | Platform Recommendation | MCP Servers | Notes |
-|-------|---------|------------------------|-------------|-------|
+| --- | --- | --- | --- |
 | **Release Agent** | Release preparation & validation | Claude API + Tool Runner + Prompt Caching | GitHub, Netlify | Multi-step coordination; cache process rules |
 
 ---
@@ -195,7 +195,7 @@ establish automatic server-side timeout fallback for this workflow.
 ### MCP Server Distribution
 
 | MCP Server | Agents | Coverage | Status |
-|-----------|--------|----------|--------|
+| --- | --- | --- | --- |
 | **GitHub** | 8 agents | PR/issue/release management, code review | ✅ Primary integration |
 | **Figma** | 1 agent | Design system reference | ✅ Design partner |
 | **Web Search** | 1 agent | Client discovery research | ✅ Research workflows |
@@ -334,7 +334,7 @@ establish automatic server-side timeout fallback for this workflow.
 Use this matrix to select the best platform(s) for a given governance task:
 
 | Task | Claude API | Managed Agents | Prompt Cache | MCP | Application-owned storage |
-|------|-----------|-----------------|----------|-----|-------------|
+| --- | --- | --- | --- |
 | Real-time branch validation | ✅ Primary | - | ⚠️ Optional | ✅ For GH access | - |
 | Scheduled workflow audits | - | ✅ Primary | - | ✅ For tool access | - |
 | Spec collaboration | - | - | - | - | ✅ Git; integrate other storage as needed |
@@ -347,7 +347,7 @@ Use this matrix to select the best platform(s) for a given governance task:
 ## Known Gaps & Mitigation
 
 | Gap | Impact | Mitigation | Status |
-|-----|--------|-----------|--------|
+| --- | --- | --- | --- |
 | No native invocation quota tracking | Budget enforcement incomplete (R7.3) | Custom MCP middleware logging | ⏳ Depends on TOA-271 |
 | Audit trail not dashboard-native | Governance transparency limited | Export logs to application-owned storage through an explicit integration | ⚠️ Manual export only |
 | Fallback routing is unimplemented | No automatic recovery on timeout | Define and test explicit host-side fallback policy | ⏳ Host workflow work required |
@@ -413,8 +413,6 @@ https://platform.claude.com/docs/en/managed-agents/reference#rate-limits
   (R7.3)
 - **Agentic Workflows**:
   `.github/specs/001-repo-governance-layout-and-agentic-workflows/` (R7.1-R7.4)
-- **Protected Files Guard**: `.github/workflows/protected-files-guard.yml`
-  (T017c)
 
 ---
 
