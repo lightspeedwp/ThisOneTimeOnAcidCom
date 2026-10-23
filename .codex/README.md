@@ -44,6 +44,17 @@ remains the default integration; adding an integration does not change the
 default. All three use the existing `.specify/` constitution, templates and
 scripts.
 
+Feature artefacts live in `.github/specs/<NNN-short-name>/`. The repository's
+`specifyFeatureDirectory` setting in `.specify/init-options.json`, local Bash
+creation script, agent specification instructions and plan/task templates are
+aligned to that location. Continue numbering from the existing `001` and `002`
+directories. The setting is a repository convention read by the agents; do not
+assume an upstream Spec Kit installation will automatically honour it.
+
+The three generated specification commands contain this local path
+customisation. Integration upgrades will report them as modified; preserve or
+reapply the customisation when reviewing an upgrade.
+
 | Agent | Generated files | Invoke in agent chat |
 | --- | --- | --- |
 | Codex | `.agents/skills/speckit-*/SKILL.md` | `$speckit-specify`, `$speckit-plan`, `$speckit-tasks`, `$speckit-implement` |
@@ -62,9 +73,9 @@ Gemini is already installed. On a checkout without it, use
 `specify integration install gemini`. Use `specify integration use <agent>` only
 when intentionally changing the default; extension and preset commands follow
 that default. Review managed-file changes before any integration upgrade; do
-not force-overwrite repository customisations. Installation currently reports
-one modified Gemini command and seven modified shared infrastructure files
-that predate this setup. They have been preserved.
+not force-overwrite repository customisations. Spec Kit reports locally modified managed files, including preserved
+pre-existing customisations and the repository-specific `.github/specs/`
+defaults. Review these diffs rather than force-overwriting them.
 
 For reusable Codex workflows, add repository skills under `.agents/skills/`.
 Gemini command TOML and Claude agent/settings files are not Codex configuration.
