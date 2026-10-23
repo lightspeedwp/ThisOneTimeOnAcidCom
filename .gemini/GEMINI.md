@@ -1,46 +1,18 @@
-# ThisOneTimeOnAcid — Workspace Rules
+# Gemini project setup
 
-## Project Overview
+The project settings load `AGENTS.md` and `GEMINI.md` context files. The root
+`AGENTS.md` is the authoritative repository instruction file; follow its
+**Branch check before every task** before editing files or running Spec Kit.
 
-This is a React + Vite + TailwindCSS v4 web application. It uses TypeScript,
-Radix UI primitives, shadcn/ui patterns, and Motion (Framer Motion) for
-animations.
+Use npm and Node.js 24+. Follow semantic BEM CSS and the documented guidelines
+reading order. Preserve the protected assets and files listed in `AGENTS.md`.
 
-## Tech Stack
+Spec Kit's Gemini commands live in `.gemini/commands/`. Invoke them in Gemini
+chat with dotted names such as `/speckit.specify`, `/speckit.plan`,
+`/speckit.tasks` and `/speckit.implement`. Shared configuration lives in
+`.specify/`; Gemini remains the default integration alongside Codex and Claude
+Code. See `.codex/README.md` for integration maintenance and branch checks.
 
-- **Framework**: React 18 + Vite 6
-- **Styling**: TailwindCSS v4 (`@tailwindcss/vite` plugin)
-- **UI Components**: Radix UI primitives, shadcn/ui patterns, Lucide icons, Phosphor icons
-- **Animation**: Motion (Framer Motion)
-- **Routing**: React Router v7
-- **Build**: Vite with Figma asset resolver plugin
-- **Package Manager**: pnpm
-
-## Path Aliases
-
-- `@` → `./src/app`
-
-## Development Commands
-
-- `pnpm dev` — start dev server
-- `pnpm build` — production build
-- `pnpm journal:parse` — parse journal markdown content
-- `pnpm journal:validate` — validate journal markdown
-- `pnpm journal:check-links` — check journal link integrity
-
-## Coding Conventions
-
-- Use TypeScript for all new code
-- Follow existing component patterns in `src/app`
-- Use Radix UI + shadcn/ui patterns for new components
-- Use semantic BEM classes from `styles/globals.css`; do not use Tailwind utilities or inline styles.
-- Use Motion for animations
-- Prefer named exports for components
-- Keep components focused and composable
-
-## Spec Kit Integration
-
-- Spec Kit is installed with the Gemini integration
-- Use `/speckit.*` commands for spec-driven development workflows
-- Specs, plans, and tasks are stored in `.specify/`
-- Constitution template is in `.specify/memory/constitution.md`
+Spec Kit feature directory numbering is independent of Git branch naming.
+Use only Ash's supplied or approved branch name and validate the checked-out
+branch with `npm run validate:branch-name` before writing files.

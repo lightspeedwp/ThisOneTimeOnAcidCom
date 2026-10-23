@@ -1,0 +1,11 @@
+# Shared Codex project configuration.
+# Instructions: ../AGENTS.md; setup and workflow notes: README.md.
+# Branch policy: AGENTS.md, "Branch check before every task".
+# Reusable workflows: ../.agents/skills/ (including branch-validation).
+# https://developers.openai.com/codex/config-reference
+
+# Allow room for the repository instructions and applicable nested AGENTS.md files.
+project_doc_max_bytes = 65536
+
+# Inherit model, reasoning, approvals, sandbox and MCP settings from the user
+# or managed environment. Keep credentials and machine-specific paths out of Git.

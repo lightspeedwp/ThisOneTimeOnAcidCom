@@ -6,8 +6,18 @@ organisation-wide guidance first:
 [lightspeedwp/.github/CLAUDE.md](https://github.com/lightspeedwp/.github/blob/develop/CLAUDE.md)
 > -
 [lightspeedwp/.github/AGENTS.md](https://github.com/lightspeedwp/.github/blob/develop/AGENTS.md)
-> - [Repository Root AGENTS.md](../../AGENTS.md) — Follow these rules for all
+> - [Repository Root AGENTS.md](AGENTS.md) — Follow these rules for all
 work in this session
+
+## Branch check before work
+
+Follow `AGENTS.md` → **Branch check before every task** before editing files,
+including when invoking Spec Kit skills. Use Ash's exact supplied or approved
+branch name, validate it before creation and validate the checked-out branch
+before edits. Read `.claude/skills/branch-validation/SKILL.md` and
+`.claude/agents/branches-agent.md`; do not create agent/session branch names or
+put unrelated work on the current branch. Keep the existing Lefthook checks
+enabled for commits and pushes.
 
 ## 🎯 Active Initiatives
 
