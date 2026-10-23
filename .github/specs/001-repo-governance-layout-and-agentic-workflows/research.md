@@ -319,7 +319,7 @@ contributor understanding.
 #### Top-Level Directories
 
 | Path | Purpose | Consumers | Generated Outputs | Protected? | Notes |
-|------|---------|-----------|-------------------|------------|-------|
+| --- | --- | --- | --- | --- | --- |
 | `.claude/` | Claude Code configuration and agents | Claude Code, subagents | `.claude/agents/INVENTORY.md`, `.claude/skills/INVENTORY.md` | No | 18 agents (~5 skills) baseline per TOA-271 |
 | `.gemini/` | Gemini API integration & commands | Gemini CLI | Command output, cached responses | No | Legacy; `commands/` subdirectory for custom commands |
 | `.git/` | Git repository metadata | Git CLI | Commits, branches, refs | No | Auto-managed; ignored via `.gitignore` |
