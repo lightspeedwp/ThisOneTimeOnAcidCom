@@ -413,8 +413,6 @@ https://platform.claude.com/docs/en/managed-agents/reference#rate-limits
   (R7.3)
 - **Agentic Workflows**:
   `.github/specs/001-repo-governance-layout-and-agentic-workflows/` (R7.1-R7.4)
-- **Protected Files Guard**: `.github/workflows/protected-files-guard.yml`
-  (T017c)
 
 ---
 

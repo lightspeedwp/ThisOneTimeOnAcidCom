@@ -407,16 +407,14 @@ contributor understanding.
 
 ### Impact Analysis
 
-**Modifications to Locked Directories Require Approval**:
+**Directory Access**:
 
-- `.github/` – Submit [PROTECTED-FILE-CHANGE-REQUEST] issue to
-  lightspeedwp/.github
-- `guidelines/` – Requires governance review (CSS architecture locked per
-  STYLE-001)
-- `scripts/` – Validation scripts protected; new utilities welcome
-- `tasks/` – task-list.md protected; new task files OK
-- `src/app/utils/supabase/` – Supabase config protected
-- `src/app/components/figma/ImageWithFallback.tsx` – Figma integration protected
+- `.github/` – Governance configurations; updates coordinated with lightspeedwp/.github
+- `guidelines/` – Coding standards and architecture documentation
+- `scripts/` – Validation and build scripts
+- `tasks/` – Task tracking and project management
+- `src/app/utils/supabase/` – Backend integration utilities
+- `src/app/components/figma/ImageWithFallback.tsx` – Figma integration component
 
 **High-Frequency Build Outputs** (always ignored, safe to delete):
 
