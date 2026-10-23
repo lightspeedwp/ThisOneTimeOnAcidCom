@@ -397,7 +397,7 @@ contributor understanding.
 #### Ignored Directories (`.gitignore`)
 
 | Pattern | Purpose | Generator | Cleanup Method |
-|---------|---------|-----------|-----------------|
+| --- | --- | --- | --- |
 | `node*modules/` | NPM dependencies | `npm ci` | `rm -rf node*modules/` |
 | `dist/` | Production build | `npm run build` | `rm -rf dist/` |
 | `.vite/` | Vite cache | Vite dev server | Auto-cleaned on restart |
