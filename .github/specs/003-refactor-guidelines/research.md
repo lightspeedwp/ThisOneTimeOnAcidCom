@@ -25,18 +25,18 @@ This research phase resolves technical unknowns and documents evidence-pending d
 
 ### 2. Protected-Files Governance
 
-**Finding:** All changes under `.github/` (including `.github/specs/003-refactor-guidelines/`) require `locked-files-guard` approval per the canonical `PROTECTED_FILES.txt`. S-entities (protected supporting documents: AGENTS.md, CONTRIBUTING.md, .claude/skills/*) also require approval under Constitution § II.
+**Finding:** Explicit owner instruction to modify protected files and `locked-files-guard` approval before merge are separate requirements. AGENTS.md defines the owner-instruction requirement; the guard contract lists `.github/workflows/`, `CHANGELOG.md`, `AGENTS.md`, `guidelines/`, and `.github/labels.yml`. `.github/specs/` is not listed in that contract. The broader `.github/` entry in `.github/PROTECTED_FILES.txt` conflicts with the contract's narrower scope and must be reconciled before claiming a specification-only exemption.
 
 **Evidence:**
-- PROTECTED_FILES.txt (canonical source): Lists `.github/` as requiring `locked-files-guard` approval for all changes
-- AGENTS.md § 332–343: Enforces locked-files-guard for protected paths including `.github/`
-- Constitution § II protects CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, and supporting skill/agent files
-- Specification-only edits to `.github/specs/` do require locked-files-guard per PROTECTED_FILES.txt scope
+- [AGENTS.md § Protected and locked files](../../../AGENTS.md#protected-and-locked-files): Requires explicit owner instruction for `CHANGELOG.md`, `ATTRIBUTIONS.md`, `src/app/components/figma/ImageWithFallback.tsx`, `src/app/utils/supabase/`, `.github/workflows/*`, and `tasks/task-list.md`; it does not declare all of `.github/` protected or define the guard's full scope.
+- [CI/CD workflow contract § locked-files-guard.yml](../001-repo-governance-layout-and-agentic-workflows/contracts/ci-cd-workflows.md#locked-files-guardyml-moved-to-implementation-per-q2-clarification): Lists exactly `.github/workflows/`, `CHANGELOG.md`, `AGENTS.md`, `guidelines/`, and `.github/labels.yml`; requires CODEOWNERS approval before merge. `.github/specs/` is not listed.
+- [Constitution § II](../../../.specify/memory/constitution.md#ii-repository-governance--configuration-management): Protects `CHANGELOG.md`, `ATTRIBUTIONS.md`, `guidelines/`, Supabase utils, and `.github/workflows/*` as read-only system artifacts.
+- [.github/PROTECTED_FILES.txt](../../PROTECTED_FILES.txt): Lists all of `.github/`, as well as `scripts/` and other protected paths. [The local approval checker](../../../scripts/validation/check-locked-file-approval.cjs) loads this list and treats directory entries as prefixes, so it includes `.github/specs/`. This is broader than the workflow contract.
 
 **Resolution:**
-- **Specification edits (this PR and future):** Require `locked-files-guard` approval (`.github/` scope)
-- **S-document edits (Phase 2):** Also require `locked-files-guard` approval under D0; all protected-file changes must be scoped in plan.md and verified before merge
-- **Rationale:** Canonical governance source is PROTECTED_FILES.txt; changes to `.github/` including specifications are protected files requiring approval before merge
+- **Specification edits (this PR and future):** Are outside the contract's listed guard paths, but the broader protected-file list and local checker include them. Retain approval before merge under that list pending owner reconciliation of the scope conflict.
+- **S-document edits (Phase 2):** Retain the proposed approval workflow under D0 and the [feature approval-process contract](./contracts/approval-process.md); that design contract is awaiting owner approval. Scope protected-file changes in plan.md and verify them before merge.
+- **Rationale:** Owner instruction, the workflow contract, and the broader protected-file list describe distinct requirements. Record their disagreement explicitly; neither a blanket `.github/` contract claim nor an unconditional specification-only exemption is supported by all sources.
 
 ### 3. Source Inventory Verification
 
@@ -92,7 +92,7 @@ $ find guidelines -type f -name "*.md" | wc -l
 
 **Evidence (per constitution review):**
 - ✅ **Principle I (Spec-First):** Specification exists, follows workflow (spec → clarify → plan → tasks)
-- ✅ **Principle II (Governance):** Specification preserves `.github/` and `guidelines/` protected status; D0 retains approval requirement
+- ✅ **Principle II (Governance):** Specification preserves `.github/workflows/` and `guidelines/` protected status; D0 retains approval requirements, with the broader `.github/` scope conflict recorded in § 2 above
 - ✅ **Principle III (Bundler):** No bundler syntax changes proposed; guidelines document compatibility rules only
 - ✅ **Principle IV (Content):** No mock data or editorial content changes; guidelines refactor only
 - ✅ **Principle V (BEM CSS):** No CSS changes; guidelines documentation only
@@ -227,7 +227,7 @@ These decisions require owner input and are documented here as dependencies for 
 | Item | Status | Evidence | Blocker |
 | --- | --- | --- | --- |
 | Constitutional alignment | ✅ VERIFIED | Constitution § I–VII all compatible | NO |
-| Protected-files governance | ✅ VERIFIED | AGENTS.md § 331–343; Constitution § II | NO |
+| Protected-files governance | 🟡 SCOPE CONFLICT | AGENTS.md; Constitution § II; workflow contract vs `.github/PROTECTED_FILES.txt` (§ 2) | Approval retained pending owner reconciliation |
 | Guideline file count | ✅ VERIFIED | 116 files confirmed | NO |
 | PR template routing | 🟡 IDENTIFIED | Router lacks `aiops` entry | NO (documentation issue) |
 | Baseline commit reconciliation | 🟡 PENDING | Checklist needs grounding | NO (verification issue) |
