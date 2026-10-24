@@ -19,7 +19,7 @@ This contract defines the structural and content expectations for all guideline 
 Every guideline document MUST include:
 
 1. **Title & Metadata Block** (frontmatter or markdown h1)
-   ```
+   ```markdown
    # [Title]
    **Status:** [Active/Draft/Archived]
    **Last Updated:** [Date]
@@ -63,7 +63,7 @@ Every guideline document MUST include:
 ## Content Expectations by Type
 
 ### Rule Guidelines (`content_type: rule`)
-```
+```text
 Purpose: Establish absolute requirements or forbidden patterns
 
 Format:
@@ -81,7 +81,7 @@ Format:
 ---
 
 ### Reference Guidelines (`content_type: reference`)
-```
+```text
 Purpose: Document architecture, structure or lookup tables
 
 Format:
@@ -99,7 +99,7 @@ Format:
 ---
 
 ### Example Guidelines (`content_type: example`)
-```
+```text
 Purpose: Show working patterns or implementations
 
 Format:
@@ -116,7 +116,7 @@ Format:
 ---
 
 ### Decision Guidelines (`content_type: decision`)
-```
+```text
 Purpose: Document architectural decisions and rationale
 
 Format:

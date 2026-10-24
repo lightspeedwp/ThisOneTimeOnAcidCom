@@ -28,7 +28,7 @@ The Guidelines Refactor consolidates, reorganises and documents 116 existing gui
 - `dependencies`: List of other guideline IDs this document references or depends on
 
 **State Transitions (G-Document):**
-```
+```text
 BASELINE (verified at creation)
   → REVIEWED (read-only inspection complete)
   → RECONCILED (decision D4 specifies destination)
@@ -59,7 +59,7 @@ BASELINE (verified at creation)
 - `edits_required`: Scope of changes (e.g., "Update references to G042", "Add new skill definition")
 
 **Mapped S-Entities:**
-```
+```text
 S001: .claude/skills/INVENTORY.md (reference)
 S002: .claude/skills/workflow-orchestration/SKILL.md (protected)
 S003: .claude/skills/validate/SKILL.md (protected)
@@ -72,7 +72,7 @@ S009: CONTRIBUTING.md (protected)
 ```
 
 **State Transitions (S-Document):**
-```
+```text
 BASELINE
   → SCOPED (edits defined)
   → APPROVAL REQUESTED (locked-files-guard or protected-file approval sought)
@@ -104,7 +104,7 @@ BASELINE
 - `estimated_size`: Word count estimate for planning
 
 **State Transitions (N-Document):**
-```
+```text
 PROPOSED (at spec creation)
   → APPROVAL PENDING (awaiting owner decision D4)
   → APPROVED (explicit approval recorded in D4)
@@ -150,7 +150,7 @@ OR
 ## Relationships & Dependencies
 
 ### G-to-N Dependencies
-```
+```text
 G-Entity → [CONSOLIDATED TO] → N-Entity
 (if G is deprecated and replaced by new N-document)
 
@@ -163,7 +163,7 @@ G-Entity → [REFERENCED BY] → N-Entity
 - G015: "Component Patterns" → referenced by N027: "Advanced Pattern Library"
 
 ### G-to-P Dependencies
-```
+```text
 G-Entity → [REDIRECTED VIA] → P-Entity → [POINTS TO] → G-or-N-Entity
 (if G is moved but old path must remain discoverable)
 ```
@@ -174,7 +174,7 @@ G-Entity → [REDIRECTED VIA] → P-Entity → [POINTS TO] → G-or-N-Entity
 - Redirect: `guidelines/old-rules.md` becomes a pointer to new location
 
 ### S-to-G/N Dependencies
-```
+```text
 S-Entity → [REFERENCES] → G-Entity or N-Entity
 (S-documents like AGENTS.md reference guideline locations)
 ```
@@ -188,7 +188,7 @@ S-Entity → [REFERENCES] → G-Entity or N-Entity
 ## Validation & State Model
 
 ### Inventory Reconciliation
-```
+```text
 BASELINE STATE:
   G-count: 116 files in guidelines/
   S-count: 9 protected/reference documents
@@ -202,7 +202,7 @@ EXPECTED COMPLETE STATE:
 ```
 
 ### Verification Checksum
-```
+```text
 Baseline checksum (all 116 G-files + 9 S-files):
   Computed at: b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9
   

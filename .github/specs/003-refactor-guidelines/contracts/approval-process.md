@@ -155,7 +155,7 @@ The following S-documents require `locked-files-guard` approval before changes m
 **Decision Gates That Unblock Approval:**
 
 | Gate | Impact | Resolution Required |
-|---|---|---|
+| --- | --- | --- |
 | **D0** (protected-file policy) | Confirms approval requirement retained | ✅ RESOLVED — existing policy |
 | **D1** (book/site identity) | Blocks S-documents that claim identity | Owner decision session (recorded in requirements.md D1 section) |
 | **D4** (destinations & N-subset) | Gates S-documents that reference new N-paths | Owner decision session (recorded in requirements.md D4 section) |
