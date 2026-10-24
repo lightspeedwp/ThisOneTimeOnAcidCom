@@ -42,7 +42,7 @@ This contract defines how guideline documents are redirected when moved, consoli
 
 For the current version of this guidance, see:
 
-**→ [New Guideline Title](../core-rules.md)**
+**→ [New Guideline Title](./core-rules.md)**
 
 ---
 
@@ -90,10 +90,10 @@ If you bookmarked this old URL, please update your reference to the new location
 
 ## See Also
 
-- Related guidance now appears in: **[Consolidated Title](../consolidated-patterns.md)**
+- Related guidance now appears in: **[Consolidated Title](./consolidated-patterns.md)**
 - Other pattern guidelines: 
-  - [Pattern A](../patterns/pattern-a.md)
-  - [Pattern B](../patterns/pattern-b.md)
+  - [Pattern A](./patterns/pattern-a.md)
+  - [Pattern B](./patterns/pattern-b.md)
 
 ---
 
@@ -113,13 +113,14 @@ For the current, maintained version, see the link above.
 
 ### Type 3: Archival/Deprecation Pointer
 
-**Scenario:** A guideline is no longer maintained and is archived for reference only.
+**Scenario:** A guideline is no longer maintained and is archived. Must reference replacement guidance or explicitly state "archived without replacement".
 
 **Example:**
 - Old path: `guidelines/deprecated-tech-stack.md`
-- Action: Document stays at old path but marked as archived
+- Action: Document stays at old path but marked as archived with pointer to current guidance or explicit archive status
+- **Requirement:** Either provide a `Current guidance` link OR explicitly state "No replacement guidance available"
 
-**Format:**
+**Format (with replacement):**
 
 ```markdown
 # [Original Title] — Archived
@@ -130,7 +131,7 @@ For the current, maintained version, see the link above.
 > 
 > **Why:** [Reason — technology deprecated, approach superseded, decision reversed, etc.]
 > 
-> **Current guidance:** See [New/Related Guideline](../link.md) if applicable
+> **Current guidance:** See [New/Related Guideline](./link.md)
 
 ---
 
@@ -155,7 +156,7 @@ For questions about this historical content, see:
 **Validation:**
 - [ ] Original content is preserved in full
 - [ ] Archival reason is clear
-- [ ] Links to related/replacement guidance are accurate
+- [ ] Either: replacement guidance link exists and is accurate, OR explicit "No replacement guidance available" statement is present
 - [ ] File remains readable (not deleted)
 
 ---
@@ -236,9 +237,9 @@ Pointer documents are **exempt** from the full Guideline Interface structure:
 ### vs. Approval Process Contract
 
 Pointer creation is governed by:
-- ✅ **D5 approval** (preservation strategy gate decision)
+- ✅ **`locked-files-guard` approval** (modifications to `guidelines/` require protected-files approval)
+- ✅ **D5 approval** (preservation strategy gate decision; required in addition to locked-files-guard)
 - ✅ **Scope-bounded changes** (pointer creation is explicit operation)
-- ❌ **Not** separate `locked-files-guard` approval (use D5 approval instead)
 
 ---
 

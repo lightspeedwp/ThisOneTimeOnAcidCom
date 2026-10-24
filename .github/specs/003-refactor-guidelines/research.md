@@ -25,11 +25,11 @@ This research phase resolves technical unknowns and documents evidence-pending d
 
 ### 2. Protected-Files Governance
 
-**Finding:** `.github/specs/003-refactor-guidelines/` is itself a protected artifact under Constitution § II.Protected Files.
+**Finding:** `.github/specs/003-refactor-guidelines/` is not a protected artifact. Specification edits do not require `locked-files-guard` approval.
 
 **Evidence:**
-- Constitution § II: "Protected Files: CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, Supabase utils, .github/workflows/* are read-only system artifacts"
-- AGENTS.md § 332–343: Only `.github/workflows/*` changes require `locked-files-guard` approval; `.github/specs/` is not protected
+- AGENTS.md § 332–343: Only `.github/workflows/*` changes require `locked-files-guard` approval; `.github/specs/` is not listed as protected
+- Constitution § II protects CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, and Supabase utils, but not specification directories
 - spec.md line 44 references broken path `../../PROTECTED_FILES.txt` (does not exist)
 
 **Resolution:**
@@ -238,8 +238,8 @@ These decisions require owner input and are documented here as dependencies for 
 1. **Owner Decision Session:** Resolve D1–D6 and D8 using the questions above; record decisions
 2. **Baseline Reconciliation:** Verify current-develop against baseline commit `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9`
 3. **PR Template Routing:** Apply proposed fix to `scripts/pr-template-router.js` (optional for plan phase, required before implementation PR)
-4. **Phase 1 Design:** Proceed to data-model.md, contracts/, and quickstart.md once gates are resolved
+4. **Phase 1 Finalisation:** Review and approve data-model.md, contracts/, and quickstart.md; then proceed to Phase 2 once gate decisions are recorded
 
 ---
 
-*Research complete 2026-10-24 | Next phase: Design artifacts (data-model.md, contracts/, quickstart.md)*
+*Research complete 2026-10-24 | Phase 1 design artifacts ready for review; awaiting gate resolutions for Phase 2*

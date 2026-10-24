@@ -8,9 +8,9 @@
 
 ## What This Document Is
 
-This is a **validation and verification guide** that proves the Guidelines Refactor specification is complete and ready for Phase 2 implementation.
+This is a **validation and verification guide** that proves Phase 1 of the Guidelines Refactor specification is complete and ready for owner gate resolution.
 
-It is NOT a step-by-step implementation guide. For implementation details, see [plan.md](./plan.md) and [tasks.md](./tasks.md) (generated after gates are resolved).
+It is NOT a step-by-step implementation guide. For implementation details, see [plan.md](./plan.md) and [tasks.md](./tasks.md) (generated after owner decisions on D1–D8 gates are recorded).
 
 ---
 
@@ -19,7 +19,7 @@ It is NOT a step-by-step implementation guide. For implementation details, see [
 - [ ] Git repository cloned: `lightspeedwp/ThisOneTimeOnAcidCom`
 - [ ] Branch: `docs/spec-003-guidelines-reconcile` (validated)
 - [ ] All Phase 1 design artifacts generated (this directory)
-- [ ] Owner decisions (D1–D8) recorded in [checklists/requirements.md](./checklists/requirements.md)
+- [ ] Ready for owner decision session on D1–D8 gates
 
 ---
 
@@ -275,11 +275,23 @@ D_RESOLVED=$(grep -c "RESOLVED" checklists/requirements.md)
 D_PENDING=$(grep -c "PENDING" checklists/requirements.md | head -1)
 echo "  ✓ Gates RESOLVED: $D_RESOLVED (expected: ≥2)"
 echo "  ✓ Gates PENDING: $D_PENDING (expected: ≥7)"
+if [ "$D_RESOLVED" -lt 2 ]; then
+  echo "  ✗ ERROR: D_RESOLVED is $D_RESOLVED (expected: ≥2)" >&2
+  exit 1
+fi
+if [ "$D_PENDING" -lt 7 ]; then
+  echo "  ✗ ERROR: D_PENDING is $D_PENDING (expected: ≥7)" >&2
+  exit 1
+fi
 
 # 4. Contract completeness
 echo "✓ Validating contracts..."
 CONTRACT_COUNT=$(ls contracts/*.md 2>/dev/null | wc -l)
 echo "  ✓ Contracts defined: $CONTRACT_COUNT (expected: 3)"
+if [ "$CONTRACT_COUNT" -ne 3 ]; then
+  echo "  ✗ ERROR: Found $CONTRACT_COUNT contracts (expected: 3)" >&2
+  exit 1
+fi
 
 echo ""
 echo "✅ Phase 1 Validation PASSED"
@@ -288,16 +300,26 @@ echo "📋 Next step: Resolve owner gates (D1–D8) and proceed to Phase 2"
 
 **Run it:**
 
+Extract the script above to a separate file and execute:
+
 ```bash
-bash /home/user/ThisOneTimeOnAcidCom/.github/specs/003-refactor-guidelines/quickstart.md
-# (or save as .sh and execute)
+# Extract the validation script from this file
+cat > /tmp/validate-phase1.sh << 'EOF'
+#!/bin/bash
+set -e
+# [copy the complete end-to-end validation script from above]
+EOF
+
+# Make it executable and run
+chmod +x /tmp/validate-phase1.sh
+bash /tmp/validate-phase1.sh
 ```
 
 ---
 
-## Checklist: Ready for Phase 2?
+## Checklist: Ready for Gate Resolution?
 
-Use this checklist to confirm Phase 1 is complete and Phase 2 can proceed:
+Use this checklist to confirm Phase 1 is complete and ready for owner gate resolution:
 
 - [ ] **Specification**: spec.md exists and is marked "Draft"
 - [ ] **Research**: research.md exists; all NEEDS CLARIFICATION → PENDING OWNER DECISION
@@ -308,12 +330,12 @@ Use this checklist to confirm Phase 1 is complete and Phase 2 can proceed:
 - [ ] **Cross-References**: All internal links valid; no broken references
 - [ ] **Constitution**: research.md confirms COMPLIANT with all 7 principles
 
-**When all boxes are checked,** proceed with:
+**When all boxes are checked,** Phase 1 is complete. Then proceed with:
 
-1. **Owner Decision Session** — Resolve D1–D6, D8 with recorded decisions
+1. **Owner Decision Session** — Resolve D1–D6, D8 with recorded decisions (gates to Phase 2)
 2. **Update requirements.md** — Record decisions and approval evidence
 3. **Generate tasks.md** — Decompose Phase 2 implementation into actionable tasks
-4. **Phase 2 Implementation** — Execute per plan.md
+4. **Phase 2 Implementation** — Execute per plan.md (requires gate resolution)
 
 ---
 

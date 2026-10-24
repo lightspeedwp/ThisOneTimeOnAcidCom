@@ -51,7 +51,7 @@ BASELINE (verified at creation)
 
 **Fields:**
 - `id`: S001–S009 (sequential identifier)
-- `path`: Absolute path to document (e.g., `.claude/skills/branch-validation/SKILL.md`)
+- `path`: Repository-relative path to document (e.g., `.claude/skills/branch-validation/SKILL.md`, `AGENTS.md`)
 - `status`: One of `protected`, `locked`, `inventory`, `reference`
 - `protected_file_approval_required`: Boolean (true if requires `locked-files-guard`)
 - `current_content_hash`: SHA-256 hash at baseline
@@ -224,6 +224,7 @@ Expected post-refactor checksum:
 | **D4** (destinations & N-subset) | Which N-documents are created; G→new-path mapping | Blocks all G/N operations until mapping confirmed |
 | **D5** (preservation) | P-entity creation, old-path handling | Blocks pointer/redirect operations |
 | **D6** (backend) | Backend integration documentation | Blocks N-documents about signup/contact/providers |
+| **D7** (branch naming) | Specification branch validation and PR routing | ✅ RESOLVED — Branch `docs/spec-003-guidelines-reconcile` validated |
 | **D8** (WordPress) | WordPress-related guidance scope | Blocks N-documents about WordPress migration |
 
 ---
