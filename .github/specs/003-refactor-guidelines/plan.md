@@ -62,7 +62,7 @@
 ### Change Categories
 
 | Operation | Count | Verification Method |
-|-----------|-------|---|
+| --- | --- | --- |
 | Edit existing guideline | 116 | Source read → tailored change → preserve safeguards |
 | Edit supporting document | 9 | Scope row → bounded change → preserve unique content |
 | Create new document | 43 (conditional) | Dependency check → create only approved → validate pointers |
@@ -134,7 +134,7 @@ If unresolved issues appear during implementation:
 ## Timeline Estimate
 
 | Phase | Checkpoint | Effort |
-|-------|---|---|
+| --- | --- | --- |
 | Phase 1: Decisions + Planning | Gate resolution | 2–4 hours (owner time) |
 | Phase 2: Implementation | Checkpoint after S-docs | 6–8 hours per 30 guidelines |
 | Phase 3: Verification | Manifest + final report | 4–6 hours |
@@ -147,7 +147,7 @@ If unresolved issues appear during implementation:
 ## Risk Mitigation
 
 | Risk | Mitigation |
-|------|---|
+| --- | --- |
 | Scope creep (new features, fixes) | Strict gate check at each phase boundary |
 | Missing decisions (D1–D8) | Blocked handoff if evidence incomplete |
 | Link/pointer breakage | Static validation before operations; old paths preserved |

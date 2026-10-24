@@ -19,7 +19,7 @@ Consolidate and refactor 116 existing guideline documents plus 43 conditional ne
 ## Key Gates (Decision Required)
 
 | Gate | Decision | Impact | Status |
-|------|----------|--------|--------|
+| --- | --- | --- | --- |
 | **D0** | Protected-file process simplified; file commits no longer require special workflow | All source edits and branch/PR actions | ✅ RESOLVED |
 | **D1** | Canonical book/site identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context | New normative copy, identity claims | 🔄 PENDING |
 | **D2** | Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries | Publication/exposure contracts | 🔄 PENDING |

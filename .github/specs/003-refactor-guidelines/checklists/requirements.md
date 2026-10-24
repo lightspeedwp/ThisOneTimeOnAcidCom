@@ -206,7 +206,7 @@
 **Status Summary:**
 
 | Component | Status | Blocker | Next Step |
-|-----------|--------|---------|-----------|
+| --- | --- | --- | --- |
 | Gates D0–D8 | 2 resolved / 6 pending | ✅ D0 OK | Owner decisions |
 | Source validation | Ready | ❌ None | Pre-impl check |
 | Implementation | Not started | 🔄 Gates | Await decisions |
