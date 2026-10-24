@@ -114,7 +114,7 @@
 ### Scope Integrity
 - [ ] 116 G-rows inventoried
 - [ ] 9 S-rows inventoried
-- [ ] 43 N-rows inventoried (conditional)
+- [ ] 33 N-rows inventoried (conditional)
 - [ ] No unexpected files added/removed since baseline
 - [ ] Original pasted.md attachment intact
 - [ ] Original design caveat preserved
@@ -133,7 +133,7 @@
 ### Per-Operation Approval
 - [ ] S001–S009: Protected-file edits scoped and approved
 - [ ] G001–G116: Destination mapping confirmed and approved
-- [ ] N001–N043: Approved subset identified with dependencies
+- [ ] N001–N033: Approved subset identified with dependencies
 - [ ] Pointer strategy: old paths → new locations mapped and validated
 
 ---
@@ -143,8 +143,8 @@
 ### Coverage Manifest
 - [ ] All 116 G-rows: { path, hash, operation, destination, decision, status }
 - [ ] All 9 S-rows: same + protected-file approval reference
-- [ ] All 43 N-rows: { approval status, dependency resolution, pointer validation }
-- [ ] Row counts reconcile: 116 + 9 + 43 + 0 (no move/delete) = 168 tracked
+- [ ] All 33 N-rows: { approval status, dependency resolution, pointer validation }
+- [ ] Row counts reconcile: 116 + 9 + 33 + 0 (no move/delete) = 158 tracked
 
 ### Link & Anchor Validation
 - [ ] 129 internal reference candidates classified (defect vs working)
@@ -183,7 +183,7 @@
 ## Final Sign-Off
 
 ### Implementation Owner
-- [ ] Understands full scope (116+9+43 documents)
+- [ ] Understands full scope (116+9+33 documents)
 - [ ] Has authority to edit protected files (D0)
 - [ ] Has received resolved gates for D1–D8
 - [ ] Agrees to non-destructive consolidation approach

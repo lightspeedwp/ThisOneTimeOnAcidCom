@@ -7,13 +7,13 @@
 
 ## Overview
 
-Consolidate and refactor 116 existing guideline documents plus 43 conditional new documentation to establish canonical book/site instructions following the bounded memoir/creative-life-guide brief, with non-destructive consolidation and existing-skill integration.
+Consolidate and refactor 116 existing guideline documents plus 33 conditional new documentation to establish canonical book/site instructions following the bounded memoir/creative-life-guide brief, with non-destructive consolidation and existing-skill integration.
 
 ## Requirements
 
 ### Scope & Constraints
 
-- **In Scope:** 116 existing guideline edits (G001–G116), 9 supporting documents (S001–S009), 43 proposed new documents (N001–N043)
+- **In Scope:** 116 existing guideline edits (G001–G116), 9 supporting documents (S001–S009), 33 proposed new documents (N001–N033)
 - **Out of Scope:** Application code changes (TS/TSX/CSS), route/loader/search/filter/forms/access repairs, dependency updates, PWA/service-worker creation, CMS migration, new skills
 - **Preservation Rules:** Every unique policy/safeguard, historical provenance, original pointers remain; non-destructive consolidation only
 - **Skill Reuse:** Integrate with existing six skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration)
@@ -42,7 +42,7 @@ change requires a recorded authorised decision under the
 
 - **Specification Complete:** All gates resolved, scope confirmed, implementation plan created
 - **Implementation Ready:** Branch clean, PR template prepared, no unrelated changes
-- **Verification:** Coverage manifest reconciles 116+9+43 paths; all dependencies resolved
+- **Verification:** Coverage manifest reconciles 116+9+33 paths; all dependencies resolved
 - **Quality Gate:** Static skill exercises pass; no runtime claims without verification method noted
 
 ## Source Inventory
@@ -80,7 +80,7 @@ both contain 116 files; comparison with the observation baseline remains pending
 - `AGENTS.md`
 - `CONTRIBUTING.md`
 
-### Proposed New Documents (43 conditional)
+### Proposed New Documents (33 conditional)
 
 **Categories:**
 - Reference/diagnostics (5): CSS, media, component docs
@@ -112,7 +112,7 @@ These outcomes remain unverified while owner gates and implementation are pendin
 1. What are the canonical book brief identity markers and approved voices (D1)?
 2. What are the manuscript visibility/indexing/cache boundaries (D2)?
 3. Who owns design authority and what's the current CSS/palette/font strategy (D3)?
-4. For the 43 N-docs: are these pointer-only replacements or full new guides (D4)?
+4. For the 33 N-docs: are these pointer-only replacements or full new guides (D4)?
 5. Where should historical copies of deprecated guides be preserved (D5)?
 6. What backend/provider owns signup/waitlist functionality (D6)?
 7. Is WordPress portfolio content retained or deprecated (D8)?

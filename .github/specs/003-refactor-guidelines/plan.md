@@ -7,7 +7,7 @@
 
 ## Summary
 
-Refactor 116 existing guidelines and 9 supporting documents, with 43 conditional
+Refactor 116 existing guidelines and 9 supporting documents, with 33 conditional
 new documents, using non-destructive consolidation and the six existing skills.
 Implementation depends on the requirements and decisions in
 [the specification](./spec.md); [the checklist](./checklists/requirements.md)
@@ -32,7 +32,7 @@ those requirements into sequencing; it does not grant protected-file approval.
 
 **Constraints:** No application/dependency changes, no unapproved moves/deletes, preserve all unique safeguards.
 
-**Scale/Scope:** G001–G116, S001–S009, and conditional N001–N043.
+**Scale/Scope:** G001–G116, S001–S009, and conditional N001–N033.
 
 ### Risk Mitigation
 
@@ -141,9 +141,9 @@ is outside this documentation refactor.
 | --- | --- | --- |
 | Edit existing guideline | 116 | Source read → tailored change → preserve safeguards |
 | Edit supporting document | 9 | Scope row → bounded change → preserve unique content |
-| Create new document | 43 (conditional) | Dependency check → create only approved → validate pointers |
+| Create new document | 33 (conditional) | Dependency check → create only approved → validate pointers |
 | Create pointer | Variable | Old-path mapping → validation → status notes |
-| **Planned existing edits** | 125 (plus up to 43 conditional creates) | Static review + pointer validation |
+| **Planned existing edits** | 125 (plus up to 33 conditional creates) | Static review + pointer validation |
 
 #### Change Preservation
 
@@ -163,7 +163,7 @@ is outside this documentation refactor.
 1. **Coverage Manifest**
    - All 116 G-rows: path, hash, operation, destination, status
    - All 9 S-rows: same + protected-file approval evidence
-   - All 43 N-rows: approval status, dependency resolution, pointer validation
+   - All 33 N-rows: approval status, dependency resolution, pointer validation
 
 2. **Internal Links**
    - 129 candidates: classify defect vs working reference
@@ -224,7 +224,7 @@ If unresolved issues appear during implementation:
 
 - [ ] All 116 guidelines accounted for (current path or explicit pointer)
 - [ ] 9 supporting documents edited within approved scope
-- [ ] 43 new documents created only if approved; old pointers preserved
+- [ ] 33 new documents created only if approved; old pointers preserved
 - [ ] Verification register complete with evidence for every operation
 - [ ] No files moved/deleted without explicit approval
 - [ ] PR ready for review with clean diff and complete description
