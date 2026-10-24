@@ -84,7 +84,7 @@ etc.)
 
 ### Agent Type Reference
 
-See `.claude/agents/INVENTORY.md` for complete agent specifications. Quick
+See `.agents/roles/INVENTORY.md` for complete agent specifications. Quick
 reference:
 
 | Agent | Purpose | Input | Output | Best For |
@@ -265,28 +265,6 @@ Infrastructure monitors cost trends per agent:
 
 ```text
 
-### Protected Files — Agent Restrictions
-
-**These files cannot be modified by ANY agent without explicit approval**:
-
-- `.github/` — PR templates, issue templates, workflows (all)
-- `AGENTS.md` — Agent governance (read-only)
-- `CHANGELOG.md` — Version history (changelog-agent only)
-- `guidelines/` — Coding standards (read-only)
-- `src/app/utils/supabase/` — Sensitive utility code (read-only)
-- `.claude/` — Agent configuration (read-only for most agents)
-
-**Exception**: If a protected file MUST be modified:
-
-1. Create issue with tag `[PROTECTED-FILE-MODIFICATION-REQUEST]`
-
-1. Provide justification and exact changes needed
-
-1. Wait for @ashley approval
-
-1. Execute changes after approval
-
----
 
 ## Contract Compliance
 
@@ -296,7 +274,6 @@ Infrastructure monitors cost trends per agent:
 
 - [ ] **Read this document** (GOVERNANCE.md) before any work
 - [ ] **Read the repository-specific guidelines** in `guidelines/`
-- [ ] **Respect protected files** (no unauthorized modifications)
 - [ ] **Follow branch naming rules** (see CLAUDE.md)
 - [ ] **If authorised to commit, commit with proper attribution** (see CLAUDE.md footer)
 - [ ] **Document decisions** (code comments, commit messages)
@@ -472,41 +449,13 @@ If you believe a governance rule needs changing:
 
 ## References
 
-- `.claude/agents/INVENTORY.md` — Complete agent specifications
-- `.claude/skills/INVENTORY.md` — Skill specifications and routing
+- `.agents/roles/INVENTORY.md` — Complete agent specifications
+- `.agents/skills/INVENTORY.md` — Skill specifications and routing
 - `.claude/BUDGET_CONTROLS.md` — Budget enforcement mechanisms
 - `.claude/SKILL_ROUTING.md` — Execution environment decisions
 - `.github/CLAUDE.md` — Repository-specific rules
 - `guidelines/` — Coding standards and best practices
 - `CONTRIBUTING.md` — Contribution workflow
-
----
-
-## Appendix A: Protected Files List
-
-```text
-✅ Read-only (agents can read, not modify):
-
-- .github/AGENTS.md (agent governance)
-- .github/CLAUDE.md (repo-specific rules)
-- .github/workflows/ (all CI/CD workflows)
-- .github/ISSUE_TEMPLATE/ (issue templates)
-- .github/PULL*REQUEST*TEMPLATE/ (PR templates)
-- .github/CODEOWNERS (code ownership)
-- AGENTS.md (org-wide agent rules)
-- CHANGELOG.md (version history — changelog-agent only for modification)
-- guidelines/ (all coding standards)
-- src/app/utils/supabase/ (sensitive utilities)
-- .claude/ (agent configuration)
-
-❌ Hands-off (agents should NOT read or modify):
-
-- .env files (secrets)
-- credentials.json (API keys)
-- node_modules/ (build artifact)
-- .git/ (git internals)
-
-```text
 
 ---
 

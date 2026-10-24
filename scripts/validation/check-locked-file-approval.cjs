@@ -4,22 +4,38 @@
  * Validates that changes to locked configuration files are approved
  * via linked change-request issues or the change-requests register.
  *
- * Locked files are configuration files that are carefully curated and
- * should not be changed without explicit approval:
- * - .github/labels.yml (canonical label definitions)
- * - .github/issue-types.yml (org-wide issue types)
- * - .github/branch-labels.yml (branch-specific labels)
- * - .github/ISSUE_TEMPLATE/** (issue templates)
- * - .github/PULL_REQUEST_TEMPLATE/** (PR templates)
+ * Locked files are loaded from .github/PROTECTED_FILES.txt, which serves
+ * as the canonical list of protected files and directories.
  */
 
-const LOCKED_PATHS = [
-  '.github/labels.yml',
-  '.github/issue-types.yml',
-  '.github/branch-labels.yml',
-  /^\.github\/ISSUE_TEMPLATE\//,
-  /^\.github\/PULL_REQUEST_TEMPLATE\//,
-];
+const fs = require('fs');
+const path = require('path');
+
+// Load protected files from canonical list
+function loadLockedPaths() {
+  const protectedFilesPath = path.join(__dirname, '../../.github/PROTECTED_FILES.txt');
+  const content = fs.readFileSync(protectedFilesPath, 'utf8');
+
+  const paths = [];
+  content.split(/\r?\n/).forEach((line) => {
+    const trimmed = line.trim();
+    // Skip empty lines and comments
+    if (!trimmed || trimmed.startsWith('#')) return;
+
+    if (trimmed.endsWith('/')) {
+      // Directory pattern: convert to regex
+      const escaped = trimmed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      paths.push(new RegExp(`^${escaped}`));
+    } else {
+      // Exact path match
+      paths.push(trimmed);
+    }
+  });
+
+  return paths;
+}
+
+const LOCKED_PATHS = loadLockedPaths();
 
 const REGISTER_PATH = '.github/reports/audits/2026-09-14-label-audit/evidence/change-requests.json';
 
