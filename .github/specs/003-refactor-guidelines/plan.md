@@ -212,9 +212,9 @@ If unresolved issues appear during implementation:
 | Phase | Checkpoint | Effort |
 | --- | --- | --- |
 | Phase 1: Decisions + Planning | Gate resolution | 2–4 hours (owner time) |
-| Phase 2: Implementation | Checkpoint after S-docs | 6–8 hours per 30 guidelines |
+| Phase 2: Implementation | Checkpoint after S-docs | 6–8 hours per 30 guidelines (23–31 hours for 116 guidelines) |
 | Phase 3: Verification | Manifest + final report | 4–6 hours |
-| **Total** | **Ready to merge** | ~20–30 hours |
+| **Total** | **Ready to merge** | ~29–41 hours |
 
 **Note:** Estimates assume no runtime checks required; verification method substitutions may extend timeline.
 
