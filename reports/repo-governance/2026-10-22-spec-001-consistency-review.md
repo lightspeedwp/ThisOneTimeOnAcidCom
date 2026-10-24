@@ -145,7 +145,7 @@ Tasks without confirmed evidence or awaiting manual steps:
 - **T064** (Protected-file revalidation) — Awaiting guard rerun post-approval
 - **T065** (Final handoff) — Deferred until T060–T064 complete
 
-### Historical / Already Delivered (69 total)
+### Historical / Already Delivered (68 total)
 
 - PR #346 merged: governance automation infrastructure delivered
 - PR #429 merged: Phase 9 convergence documentation merged to develop
@@ -155,9 +155,9 @@ Tasks without confirmed evidence or awaiting manual steps:
 
 ## Discrepancies & Clarifications
 
-### "62-Task Main List" vs. 69 Actual Tasks
+### "62-Task Main List" vs. 68 Actual Tasks
 
-**Resolution**: The "62-task main list" refers to T001–T062 (Phases 1–8 implementation). Phase 9 adds T055–T065 (convergence and final validation), bringing the total to 69. Clarification: is Phase 9 in scope for this reconciliation, or is it a separate handoff?
+**Resolution**: The "62-task main list" refers to T001–T062 (Phases 1–8 implementation). Phase 9 adds T055–T065 (convergence and final validation), bringing the total to 68 (union of T001–T065 plus T017a–T017c). Clarification: is Phase 9 in scope for this reconciliation, or is it a separate handoff?
 
 ### "40-Entry Supplementary Plan"
 
@@ -203,13 +203,13 @@ Tasks without confirmed evidence or awaiting manual steps:
 ## Conclusion
 
 Specification 001 contains:
-- ✅ **34 requirements** properly mapped to 69 tasks across 9 phases and 5 workstreams
-- ✅ **46 tasks fully implemented and verified** with no breaking changes
+- ✅ **34 requirements** properly mapped to 68 tasks across 9 phases and 5 workstreams
+- ✅ **59 tasks fully implemented and verified** with no breaking changes
 - ✅ **9 tasks pending completion** (manual GitHub steps, verification tests, guard rerun)
 - ✅ **No conflicts between baseline requirements and recorded identifiers** (R9 is a necessary addition)
 - ⏳ **Phase 9 convergence documentation merged; gates outstanding** (approval, manual steps, revalidation)
 
-**Ready for**: Next-round implementation prompt addressing the 9 outstanding Phase 9 items and clarifying scope boundaries.
+**Ready for**: Next-round implementation prompt addressing the 9 outstanding tasks (including T035 and T038, outside Phase 9) and clarifying scope boundaries.
 
 ---
 
