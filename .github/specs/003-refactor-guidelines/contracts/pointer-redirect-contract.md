@@ -113,7 +113,7 @@ For the current, maintained version, see the link above.
 
 ### Type 3: Archival/Deprecation Pointer
 
-**Scenario:** A guideline is no longer maintained and is archived. Must reference replacement guidance or explicitly state "archived without replacement".
+**Scenario:** A guideline is no longer maintained and is archived. Must reference replacement guidance or explicitly state "No replacement guidance available".
 
 **Example:**
 - Old path: `guidelines/deprecated-tech-stack.md`

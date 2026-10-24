@@ -269,18 +269,32 @@ else
   exit 1
 fi
 
-# 3. Gates documentation
+# 3. Gates documentation (per-record validation)
 echo "✓ Checking decision gates..."
-D_RESOLVED=$(grep -c "RESOLVED" checklists/requirements.md)
-D_PENDING=$(grep -c "PENDING" checklists/requirements.md | head -1)
-echo "  ✓ Gates RESOLVED: $D_RESOLVED (expected: ≥2)"
-echo "  ✓ Gates PENDING: $D_PENDING (expected: ≥7)"
-if [ "$D_RESOLVED" -lt 2 ]; then
-  echo "  ✗ ERROR: D_RESOLVED is $D_RESOLVED (expected: ≥2)" >&2
-  exit 1
-fi
-if [ "$D_PENDING" -lt 7 ]; then
-  echo "  ✗ ERROR: D_PENDING is $D_PENDING (expected: ≥7)" >&2
+GATE_ERRORS=0
+
+# Check D0 and D7 are RESOLVED
+for gate in D0 D7; do
+  if grep -q "### $gate.*RESOLVED" checklists/requirements.md; then
+    echo "  ✓ $gate: RESOLVED"
+  else
+    echo "  ✗ ERROR: $gate is not marked RESOLVED" >&2
+    ((GATE_ERRORS++))
+  fi
+done
+
+# Check D1–D6 and D8 are PENDING
+for gate in D1 D2 D3 D4 D5 D6 D8; do
+  if grep -q "### $gate.*PENDING" checklists/requirements.md; then
+    echo "  ✓ $gate: PENDING"
+  else
+    echo "  ✗ ERROR: $gate is not marked PENDING" >&2
+    ((GATE_ERRORS++))
+  fi
+done
+
+if [ "$GATE_ERRORS" -gt 0 ]; then
+  echo "  ✗ ERROR: $GATE_ERRORS gate(s) are not in expected state" >&2
   exit 1
 fi
 
@@ -300,19 +314,22 @@ echo "📋 Next step: Resolve owner gates (D1–D8) and proceed to Phase 2"
 
 **Run it:**
 
-Extract the script above to a separate file and execute:
+Extract the script above to this directory and execute:
 
 ```bash
+# Navigate to the spec directory (required for relative paths to resolve)
+cd /home/user/ThisOneTimeOnAcidCom/.github/specs/003-refactor-guidelines
+
 # Extract the validation script from this file
-cat > /tmp/validate-phase1.sh << 'EOF'
+cat > ./validate-phase1.sh << 'EOF'
 #!/bin/bash
 set -e
 # [copy the complete end-to-end validation script from above]
 EOF
 
 # Make it executable and run
-chmod +x /tmp/validate-phase1.sh
-bash /tmp/validate-phase1.sh
+chmod +x ./validate-phase1.sh
+bash ./validate-phase1.sh
 ```
 
 ---
