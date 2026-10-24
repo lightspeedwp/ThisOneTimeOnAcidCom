@@ -10,7 +10,7 @@ Assess eight current site-health domains using verified source/configuration and
 
 [repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
-Actual workflow roots: prompts/, reports/, tasks/ and plan/ at repository root. Application source: src/app; styles: src/styles; HTML entry: index.html; static assets: public/. Inventory real configuration before using examples.
+Actual workflow roots: prompts/, reports/, tasks/ at repository root. Application source: src/app; styles: src/styles; HTML entry: index.html; static assets: public/. Inventory real configuration before using examples.
 
 Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 

@@ -28,7 +28,7 @@ Read current evidence before following historical path examples. This is a React
 
 6. Assess cross-browser/content/legal/privacy readiness and effective deployment headers/security where evidence exists. A configuration declaration is not proof of active production headers; absent access is a limitation.
 
-7. Return a readiness matrix across SEO, accessibility, performance/PWA, browser/functionality and source/content accuracy. Identify blockers, accepted decisions and untested checks; no deploy, publishing, dependency changes, task updates or automatic sign-off.
+7. Return a readiness matrix across SEO, accessibility, performance/PWA, browser/functionality, source/content accuracy, deployment, legal and privacy readiness. Identify blockers, accepted decisions and untested checks; no deploy, publishing, dependency changes, task updates or automatic sign-off.
 
 ## 4. Missing evidence and permission boundaries
 

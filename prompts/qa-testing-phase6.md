@@ -18,7 +18,7 @@ Use the current canonical scope only when explicitly requested. Its separate evi
 
 ## Preserved requirement coverage
 
-Coordinator §3 plus Consolidated Phase 6 check mapping: all 27 original test IDs retained with exact purpose/disposition; child application/build/routes/data checks support relevant current cases.
+Coordinator §3 plus Consolidated Phase 6 check mapping: all 26 original test IDs retained with exact purpose/disposition; child application/build/routes/data checks support relevant current cases.
 
 ## Historical instructions not carried forward as requirements
 
