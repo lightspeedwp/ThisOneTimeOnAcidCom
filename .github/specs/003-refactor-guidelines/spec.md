@@ -9,18 +9,20 @@
 
 Consolidate and refactor 116 existing guideline documents plus 43 conditional new documentation to establish canonical book/site instructions following the bounded memoir/creative-life-guide brief, with non-destructive consolidation and existing-skill integration.
 
-## Scope & Constraints
+## Requirements
+
+### Scope & Constraints
 
 - **In Scope:** 116 existing guideline edits (G001–G116), 9 supporting documents (S001–S009), 43 proposed new documents (N001–N043)
 - **Out of Scope:** Application code changes (TS/TSX/CSS), route/loader/search/filter/forms/access repairs, dependency updates, PWA/service-worker creation, CMS migration, new skills
 - **Preservation Rules:** Every unique policy/safeguard, historical provenance, original pointers remain; non-destructive consolidation only
 - **Skill Reuse:** Integrate with existing six skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration)
 
-## Key Gates (Decision Required)
+### Key Gates (Decision Required)
 
 | Gate | Decision | Impact | Status |
 | --- | --- | --- | --- |
-| **D0** | Protected-file process simplified; file commits no longer require special workflow | All source edits and branch/PR actions | ✅ RESOLVED |
+| **D0** | Retain the existing protected-file approval requirement; no policy simplification is authorised | Protected edits, including all changes under `.github/` | ✅ RESOLVED (existing policy retained) |
 | **D1** | Canonical book/site identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context | New normative copy, identity claims | 🔄 PENDING |
 | **D2** | Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries | Publication/exposure contracts | 🔄 PENDING |
 | **D3** | Brief/current-CSS/approved-design-contract authority, palette/font roles, accessibility target | Design authority; arithmetic/sample corrections | 🔄 PENDING |
@@ -30,25 +32,40 @@ Consolidate and refactor 116 existing guideline documents plus 43 conditional ne
 | **D7** | Verified final branch/reuse scope, manual template/label handling | Branch selection, PR metadata | ✅ RESOLVED (`aiops/refactor-guidelines`) |
 | **D8** | WordPress/portfolio retained-reference vs future-option role | Migration/legacy requirements | 🔄 PENDING |
 
+D0 confirms the current approval requirement, not approval to remove it.
+The canonical [protected-file list](../../PROTECTED_FILES.txt) includes `.github/`;
+`locked-files-guard` requires approval before merging those changes. Any policy
+change requires a recorded authorised decision under the
+[constitution amendment process](../../../.specify/memory/constitution.md#amendment-process).
+
+### Acceptance Criteria (Target State)
+
+- **Specification Complete:** All gates resolved, scope confirmed, implementation plan created
+- **Implementation Ready:** Branch clean, PR template prepared, no unrelated changes
+- **Verification:** Coverage manifest reconciles 116+9+43 paths; all dependencies resolved
+- **Quality Gate:** Static skill exercises pass; no runtime claims without verification method noted
+
 ## Source Inventory
 
 ### Existing Guidelines (116 files)
 
-All at `guidelines/` and subdirectories; unchanged from observation baseline.
+All at `guidelines/` and subdirectories. Current tracked and on-disk inventories
+both contain 116 files; comparison with the observation baseline remains pending.
 
 **Subdirectories:**
-- `blocks/` (2 files)
-- `components/` (28 files)
-- `design-tokens/` (9 files)
+- `blocks/` (4 files)
+- `components/` (34 files)
+- `design-tokens/` (10 files)
 - `icons/` (2 files)
 - `mobile/` (7 files)
 - `pages/` (1 file)
 - `parts/` (3 files)
 - `patterns/` (1 file)
-- `responsive/` (9 files)
+- `responsive/` (7 files)
 - `sections/` (6 files)
+- `templates/` (1 file)
 - `troubleshooting/` (3 files)
-- Root level (55 files)
+- Root level (37 files)
 
 ### Supporting Documents (9 files)
 
@@ -75,25 +92,20 @@ All at `guidelines/` and subdirectories; unchanged from observation baseline.
 - Reports/archived (4): Accessibility, performance, dark-mode, nova-news
 - Platform/service (1): PWA
 
-## Success Criteria
+## Success Criteria (Target State)
 
-1. ✅ All 116 existing guidelines source-read and disposition verified
-2. ✅ Original file hashes validated; current state vs observation documented
-3. ✅ S001–S009 protected-file edits scoped and dependencies mapped
-4. ✅ D1–D8 owner decisions recorded with evidence
-5. ✅ Pointer/anchor validation completed for all 129 internal reference candidates
-6. ✅ Design/typography/spacing examples verified; literal corrections documented
-7. ✅ Six existing skills statically exercised in draft/report/denied scenarios
-8. ✅ Non-destructive consolidation confirmed; old paths mapped to new
-9. ✅ No unapproved file moves/deletes; all changes reviewable
-10. ✅ Final handoff report with coverage manifest, verification register, open decisions
+These outcomes remain unverified while owner gates and implementation are pending.
 
-## Acceptance Criteria
-
-- **Specification Complete:** All gates resolved, scope confirmed, implementation plan created
-- **Implementation Ready:** Branch clean, PR template prepared, no unrelated changes
-- **Verification:** Coverage manifest reconciles 116+9+43 paths; all dependencies resolved
-- **Quality Gate:** Static skill exercises pass; no runtime claims without verification method noted
+1. [ ] All 116 existing guidelines source-read and disposition verified
+2. [ ] Original file hashes validated; current state vs observation documented
+3. [ ] S001–S009 protected-file edits scoped and dependencies mapped
+4. [ ] D0–D8 decisions recorded with evidence
+5. [ ] Pointer/anchor validation completed for all 129 internal reference candidates
+6. [ ] Design/typography/spacing examples verified; literal corrections documented
+7. [ ] Six existing skills statically exercised in draft/report/denied scenarios
+8. [ ] Non-destructive consolidation confirmed; old paths mapped to new
+9. [ ] No unapproved file moves/deletes; all changes reviewable
+10. [ ] Final handoff report with coverage manifest, verification register, open decisions
 
 ## Open Questions
 
@@ -107,13 +119,13 @@ All at `guidelines/` and subdirectories; unchanged from observation baseline.
 
 ## Next Steps
 
-1. **Owner Decision Session:** Resolve D1–D8 gates with focused evidence
-2. **Implementation Plan:** Create `plan.md` with exact source→destination mapping
+1. **Owner Decision Session:** Use [the plan](./plan.md) and [requirements checklist](./checklists/requirements.md) to resolve D1–D6 and D8 with focused evidence; retain D0 and D7 resolutions
+2. **Implementation Plan:** Update [the existing plan](./plan.md) with exact source→destination mapping
 3. **Task Breakdown:** Generate `tasks.md` with verifiable steps
-4. **Quality Checklist:** Complete `checklists/requirements.md`
+4. **Quality Checklist:** Complete [the existing requirements checklist](./checklists/requirements.md)
 5. **Implementation:** Execute within approved scope; validate at each checkpoint
 
 ---
 
-*Generated from TOA-358 implementation prompt*  
-*Source hash validation and gate documentation: See implementation prompt for complete details*
+*Source: TOA-358 implementation prompt (repository path not recorded; obtain the
+original prompt and record its relative path before validating source hashes).*

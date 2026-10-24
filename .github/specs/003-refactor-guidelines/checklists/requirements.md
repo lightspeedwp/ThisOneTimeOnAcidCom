@@ -1,16 +1,18 @@
 # Requirements Verification Checklist: TOA-358 Guidelines Refactor
 
+**Feature**: [Specification 003](../spec.md) · [Implementation plan](../plan.md)
+
 **Owner Sign-Off Required:** Before implementation begins  
 **Updated:** 2026-10-24
 
 ---
 
-## Phase 1: Gate Resolution ✅ PENDING
+## Phase 1: Gate Resolution PENDING
 
 ### D0: Protected-File Process (RESOLVED)
-- [x] Protected-files workflow removed
-- [x] File commits simplified
-- [x] D0 authority confirmed
+- [x] Existing approval requirement confirmed in [the protected-file list](../../../PROTECTED_FILES.txt), including `.github/`
+- [x] `locked-files-guard` approval requirement retained
+- [x] D0 resolution is retention of existing policy; any simplification requires a recorded authorised decision
 
 ### D1: Book/Site Identity (PENDING)
 - [ ] Canonical book brief identity confirmed
@@ -100,7 +102,7 @@
 
 ---
 
-## Phase 2: Source Validation ✅ PENDING
+## Phase 2: Source Validation PENDING
 
 ### Source State Verification
 - [ ] Baseline observation hash confirmed: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f`
@@ -119,7 +121,7 @@
 
 ---
 
-## Phase 3: Implementation Readiness ✅ PENDING
+## Phase 3: Implementation Readiness PENDING
 
 ### Pre-Implementation
 - [ ] All D0–D8 gates resolved with evidence
@@ -136,7 +138,7 @@
 
 ---
 
-## Phase 4: Verification & Quality ✅ PENDING
+## Phase 4: Verification & Quality PENDING
 
 ### Coverage Manifest
 - [ ] All 116 G-rows: { path, hash, operation, destination, decision, status }
@@ -195,8 +197,8 @@
 - [ ] Blockers/deferred items clearly identified
 
 ### Ready for PR Review
-- [ ] Spec: ✅ Complete
-- [ ] Plan: ✅ Complete
+- [ ] Spec: Draft; pending owner decisions
+- [ ] Plan: Draft; pending Phase 1 completion
 - [ ] Tasks: 🔄 Pending Phase 1 completion
 - [ ] Implementation: 🔄 Pending all gate resolutions
 - [ ] Verification: 🔄 Pending implementation
@@ -207,8 +209,8 @@
 
 | Component | Status | Blocker | Next Step |
 | --- | --- | --- | --- |
-| Gates D0–D8 | 2 resolved / 6 pending | ✅ D0 OK | Owner decisions |
-| Source validation | Ready | ❌ None | Pre-impl check |
+| Gates D0–D8 | 2 resolved / 7 pending | D1–D6 and D8 pending; D0 and D7 resolved | Owner decisions |
+| Source validation | Pending | Baseline comparison outstanding | Pre-impl check |
 | Implementation | Not started | 🔄 Gates | Await decisions |
 | Verification | Not started | 🔄 Gates | Post-impl audit |
 
