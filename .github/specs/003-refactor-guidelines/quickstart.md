@@ -78,7 +78,7 @@ grep -i "TODO\|FIXME\|XXX" research.md && echo "✗ Found unresolved markers" &&
 
 ```bash
 # 1. Count guideline files in repository
-cd /home/user/ThisOneTimeOnAcidCom
+cd "$(git rev-parse --show-toplevel)"
 find guidelines -type f -name "*.md" | wc -l
 # Expected: 116
 

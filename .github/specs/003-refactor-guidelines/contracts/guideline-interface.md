@@ -209,7 +209,7 @@ done
 **Authority:** Constitution § II (Repository Governance)
 
 **Approval Requirements:**
-- G-document refactoring: No approval needed (read-only inspection + changes scoped to guidelines/ only)
+- G-document refactoring: No D-gate approval needed (read-only inspection + changes scoped to guidelines/ only). `locked-files-guard` approval is still required.
 - S-document refactoring: `locked-files-guard` approval required (AGENTS.md § 331–343)
 - N-document creation: D4 approval required (owner decision gate)
 - P-document creation: D5 approval required (preservation strategy)
