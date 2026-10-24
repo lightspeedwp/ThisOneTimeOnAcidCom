@@ -146,19 +146,19 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 
 | Task | Purpose | Status | Details |
 |------|---------|--------|---------|
+| T060 | PR template routing verification | ✅ Complete | 4 test PRs verified: #483 feat/ → pr_feature.md/type:feature ✅, #484 fix/ → pr_bug.md/type:bug ✅, #485 docs/ → pr_documentation.md/type:documentation ✅, #486 test/ → pr_test.md/type:test ✅ |
 | T063 | Styling documentation audit | ✅ Complete | Verified CONTRIBUTING.md and guidelines/css-architecture.md have comprehensive BEM documentation |
 
 **Remaining Tasks:**
 
 | Task | Purpose | Type | Status | Owner/Notes |
 |------|---------|------|--------|------------|
-| T060 | PR template routing verification | Evidence | Pending | No test PR references or observed template/label results recorded for feat, fix, docs and unmatched prefixes; the four listed branches all use test/ |
-| T061 | Branch protection configuration | Manual GitHub Setup | Pending | Requires GitHub Settings: enable branch protection on develop/main |
-| T062 | GitHub Discussions enablement | Manual GitHub Setup | Pending | Requires GitHub Settings: enable Discussions and configure categories |
-| T064 | Protected-file approval and revalidation | Guard Validation | Pending | Approval for PR #429 changes to COMPLETION.md and tasks.md recorded in [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975); successful Check Protected Files rerun outstanding |
-| T065 | Final handoff documentation | Documentation | Deferred | This report is a draft handoff; finalise after T060, T061, T062 and T064 are complete |
+| T061 | Branch protection configuration | Manual GitHub Setup | ⏳ Pending | Requires GitHub Settings: enable branch protection on develop (1 review, CODEOWNERS) and main (2 reviews, CODEOWNERS, restrict push) |
+| T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | Requires GitHub Settings: enable Discussions and configure 5 categories (Feature Requests, Questions & Answers, Show and Tell, General, Ideas) |
+| T064 | Protected-file approval and revalidation | Guard Validation | 🔴 Blocked | Controller verification failed (404). Approval for PR #429 covers only spec files; needs expanded approval for `.github/workflows/protected-files-guard.yml`. Successful Check Protected Files rerun required. |
+| T065 | Final handoff documentation | Documentation | ⏳ Pending | This report is draft; finalize after T061, T062 and T064 complete. T060 and T063 now complete ✅ |
 
-**Note:** T061 and T062 require GitHub Settings access. T064 concerns the current PR #429 approval and guard result; PR #346 is the historical implementation PR. The convergence assessment and T065 remain pending the outstanding gates.
+**Note:** T061, T062, and T064 require owner action. T060 and T063 now complete. The convergence assessment and T065 remain pending the outstanding manual and approval gates.
 
 ---
 
