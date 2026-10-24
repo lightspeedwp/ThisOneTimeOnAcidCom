@@ -1,262 +1,30 @@
 ---
-title: "Dark Mode Comprehensive Audit - ORCHESTRATOR"
+title: "Historical entry point: dark-mode-audit/00-ORCHESTRATOR.md"
 filename: "/prompts/dark-mode-audit/00-ORCHESTRATOR.md"
 created: "2026-03-12"
-version: "1.0.0"
-purpose: "Investigate why dark mode isn't actually dark and light mode issues"
+version: "2.0.0"
+purpose: "Preserve the old path and source provenance without executing its historical task"
+modified: "2026-10-24"
 ---
 
-# Dark Mode Comprehensive Audit - ORCHESTRATOR
+# Historical compatibility entry point
 
-**Created:** March 12, 2026
-**Audit Type:** Multi-prompt orchestrator
-**Priority:** CRITICAL (P0)
-**User Concern:** "Dark mode hardly has any dark in it"
+**Do not execute the original task from this path.** This file preserves incoming path references; it is a notice, not an executable prompt or an automatic instruction to run the destination.
 
----
+## Canonical review entry point
 
-## Critical User Feedback
+- [theme-styling-audit.md](../theme-styling-audit.md)
 
-**User Statement:**
-> "I keep telling you that the light and dark mode is broken and you keep
-telling me it's not. I need you to do a deep audit of the full codebase because
-**dark mode hardly has any dark in it**."
+Use the current canonical scope only when explicitly requested. Its separate evidence, protection, failure and approval boundaries apply. No implementation, installation, task/report cleanup or publication is authorised by following this link.
 
-## This is a CRITICAL issue that must be taken seriously
+## Preserved requirement coverage
 
----
+§3 steps 1–10: theme/state source, CSS/selectors, component inventory, initialisation/storage, accessibility and browser/state matrix.
 
-## Audit Objectives
+## Historical instructions not carried forward as requirements
 
-### Primary Goal
+Automatic child execution, prescribed replacement architecture and fabricated completion/check results are withheld. No unique factual claim or historical result is certified by consolidation.
 
-Perform a comprehensive investigation of the entire light/dark mode system to
-identify:
+## Original source and provenance
 
-1. **Why dark mode isn't dark**
-
-   - Check actual background colors being applied
-   - Verify CSS variable cascading
-   - Identify components overriding dark mode styles
-
-1. **Light mode functionality**
-
-   - Verify light mode is actually light
-   - Check contrast ratios
-   - Identify any broken styling
-
-1. **Theme switching mechanism**
-
-   - Verify `ThemeSwitcher` component functionality
-   - Check `data-theme` attribute application
-   - Identify localStorage persistence issues
-
-1. **CSS architecture problems**
-
-   - Find specificity wars
-   - Identify missing `.dark` selectors
-   - Check for hardcoded colors overriding theme variables
-
----
-
-## Sub-Audits
-
-Execute the following sub-prompts in sequence:
-
-### 01 - Theme Switcher Functionality Audit
-
-**File:** `01-theme-switcher-audit.md`
-**Focus:** Verify ThemeSwitcher component actually works
-**Checks:**
-
-- Component renders correctly
-- Click handlers fire
-- `data-theme` attribute gets set on `<body>` or `:root`
-- LocalStorage persists theme choice
-- Initial theme detection works
-
-### 02 - CSS Variable Cascade Audit
-
-**File:** `02-css-variable-cascade-audit.md`
-**Focus:** Trace how CSS variables flow through the system
-**Checks:**
-
-- `:root` vs `.dark` vs `[data-theme="dark"]` selector specificity
-- Which variables are being applied in dark mode
-- Hardcoded color values overriding variables
-- Component-specific CSS files overriding global theme
-
-### 03 - Background Color Audit
-
-**File:** `03-background-color-audit.md`
-**Focus:** Find every background color in the codebase
-**Checks:**
-
-- Scan ALL CSS files for `background-color`, `background:`
-- Identify hardcoded light backgrounds in dark mode
-- Find components with `#FFFFFF`, `white`, `#F0F0F0` hardcoded
-- Check if `body` background is actually `#0F0F0F` in dark mode
-
-### 04 - Component Dark Mode Coverage Audit
-
-**File:** `04-component-dark-mode-coverage.md`
-**Focus:** Check every component for dark mode support
-**Checks:**
-
-- Scan all `/components/**/*.tsx` files
-- Identify inline styles that don't respect theme
-- Find className assignments missing `.dark` variants
-- Check if BEM CSS files have dark mode rules
-
-### 05 - Contrast Ratio Verification Audit
-
-**File:** `05-contrast-ratio-audit.md`
-**Focus:** Verify actual contrast ratios in both modes
-**Checks:**
-
-- Measure text contrast in dark mode
-- Measure text contrast in light mode
-- Identify illegible text combinations
-- Check if neon colors are actually neon in dark mode
-
----
-
-## Investigation Methodology
-
-### Step 1: Check ThemeSwitcher Component
-
-1. Open `/components/common/ThemeSwitcher.tsx`
-
-1. Verify it actually adds `data-theme="dark"` or `.dark` class to HTML
-
-1. Check if it's using the correct selector (body vs html vs :root)
-
-1. Confirm localStorage persistence works
-
-### Step 2: Check CSS Selector Specificity
-
-1. Open `/styles/themes/dark.css`
-
-1. Check if `.dark` selectors have enough specificity
-
-1. Verify dark mode variables are actually being applied
-
-1. Compare to light mode selectors
-
-### Step 3: Scan for Hardcoded Colors
-
-1. Search ALL CSS files for:
-
-   - `background-color: #FFFFFF`
-   - `background-color: white`
-   - `background: #F0F0F0`
-   - `color: #000000`
-1. Check if these have `.dark` overrides
-
-### Step 4: Check Component Inline Styles
-
-1. Search ALL `.tsx` files for:
-
-   - `style={{`
-   - `backgroundColor:`
-   - Hardcoded color values in JSX
-
-### Step 5: Verify Actual DOM in Browser
-
-1. Inspect actual rendered HTML
-
-1. Check computed styles on body element
-
-1. Verify dark mode class is present
-
-1. Check if CSS variables are being applied
-
----
-
-## Expected Output
-
-Each sub-audit will generate a detailed report in `/reports/dark-mode-audit/`
-with:
-
-1. **Findings Summary**
-
-   - List of broken components
-   - List of hardcoded colors
-   - CSS specificity issues
-
-1. **Visual Evidence**
-
-   - Code samples showing problems
-   - Expected vs. actual colors
-   - CSS variable values
-
-1. **Root Cause Analysis**
-
-   - Why dark mode isn't dark
-   - Which files are causing the problem
-   - Specificity wars or missing selectors
-
-1. **Recommended Fixes**
-
-   - Specific file changes needed
-   - CSS selector updates
-   - Component refactoring required
-
----
-
-## Consolidated Task List
-
-After all 5 sub-audits complete, create a single consolidated task list in
-`/tasks/dark-mode-fixes.md` with:
-
-- **P0 (Critical):** Fixes that make dark mode actually dark
-- **P1 (High):** Fixes for broken light mode
-- **P2 (Medium):** Contrast ratio improvements
-- **P3 (Low):** Polish and edge cases
-
----
-
-## Success Criteria
-
-Dark mode audit is successful when:
-
-- [x] We identify WHY dark mode isn't dark
-- [x] We have a complete list of broken components
-- [x] We have a comprehensive fix plan
-- [x] User's concern is validated and addressed
-
----
-
-## Notes
-
-**User has repeatedly stated this is broken.** We must:
-
-1. Believe the user
-
-1. Find the actual root cause
-
-1. Provide concrete evidence
-
-1. Create actionable fixes
-
-**DO NOT dismiss the concern.** The user is experiencing real problems.
-
----
-
-## Execution Instructions
-
-1. Run this orchestrator prompt
-
-1. Execute all 5 sub-prompts in sequence
-
-1. Generate individual reports for each
-
-1. Create consolidated task list
-
-1. Present findings to user with honesty about what's broken
-
----
-
-**Orchestrator Created:** March 12, 2026
-**Priority:** CRITICAL (P0)
-**Status:** Ready to execute
+[Full original at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/dark-mode-audit/00-ORCHESTRATOR.md). All original detail remains available there for comparison; historical instructions are evidence, not additional authority. Proposed notice prepared on 24 October 2026.
