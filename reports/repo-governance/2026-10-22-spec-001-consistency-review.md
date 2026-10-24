@@ -27,7 +27,7 @@ Specification 001 reconciliation identifies:
 ### R1. Folder Layout & Path Conventions (6 requirements → 19 tasks)
 
 | Req ID | Requirement | Task IDs | Status | Evidence | Verification |
-|--------|-------------|----------|--------|----------|--------------|
+| -------- | ------------- | ---------- | -------- | ---------- | -------------- |
 | R1.1 | Inventory current paths, consumers, generated outputs | T002 | ✅ Complete | research.md path inventory | Inspected in read-only |
 | R1.2 | Spec Kit output routing (`.github/specs/` canonical) | T018, T019, T021 | ✅ Complete | `.specify/init-options.json` configured | Verified in .specify/ |
 | R1.3 | Documentation consolidation (docs/, guidelines/, CHANGELOG.md) | T004, T021, T023, T024 | ✅ Complete | Directory structure present; COMPLETION.md confirms | Navigated structure |
@@ -38,7 +38,7 @@ Specification 001 reconciliation identifies:
 ### R2. Package Management (3 requirements → 3 tasks)
 
 | Req ID | Requirement | Task IDs | Status | Evidence | Verification |
-|--------|-------------|----------|--------|----------|--------------|
+| -------- | ------------- | ---------- | -------- | ---------- | -------------- |
 | R2.1 | npm-only enforcement (PKG-001 approved) | T011 | ✅ Complete | pnpm-workspace.yaml deleted; pnpm.overrides removed | AGENTS.md confirms |
 | R2.2 | Remove pnpm artefacts | T011 | ✅ Complete | package-lock.json sole lockfile | AGENTS.md L98–115 |
 | R2.3 | Dependency validation (package.json ↔ package-lock.json) | T017 | ✅ Complete | `npm ci` validates dependencies | AGENTS.md L106 |
@@ -46,7 +46,7 @@ Specification 001 reconciliation identifies:
 ### R3. Node.js Pinning (3 requirements → 3 tasks)
 
 | Req ID | Requirement | Task IDs | Status | Evidence | Verification |
-|--------|-------------|----------|--------|----------|--------------|
+| -------- | ------------- | ---------- | -------- | ---------- | -------------- |
 | R3.1 | Pin to Node.js 24 LTS (NODE-001 approved) | T012 | ✅ Complete | `.nvmrc` contains `24`; `engines.node` field set | AGENTS.md L121–124 |
 | R3.2 | Add `.nvmrc` and `engines` field | T012 | ✅ Complete | Both files present and configured | Verified in read-only |
 | R3.3 | Document in README and CI | T012, T044 | ✅ Complete | README.md updated; netlify.toml NODE_VERSION=24 | CONTRIBUTING.md L10–21 |
@@ -54,7 +54,7 @@ Specification 001 reconciliation identifies:
 ### R4. Testing Infrastructure (4 requirements → 8 tasks)
 
 | Req ID | Requirement | Task IDs | Status | Evidence | Verification |
-|--------|-------------|----------|--------|----------|--------------|
+| -------- | ------------- | ---------- | -------- | ---------- | -------------- |
 | R4.1 | Jest ESM configuration (@swc/core) (TEST-001 approved) | T008, T025 | ✅ Complete | Jest config active; 588/588 tests pass | AGENTS.md L170–171 |
 | R4.2 | Accept SpecKit baseline 103/104 (TEST-002 approved) | T010, T030 | ✅ Complete | tests/speckit.test.mjs baseline documented | AGENTS.md L172–173 |
 | R4.3 | Test discovery (unit, build, e2e, speckit) | T016, T026, T027, T053 | ✅ Complete | All four suites discoverable and documented | docs/TESTING.md created |
@@ -63,7 +63,7 @@ Specification 001 reconciliation identifies:
 ### R5. GitHub Governance (5 requirements → 12 tasks)
 
 | Req ID | Requirement | Task IDs | Status | Evidence | Verification |
-|--------|-------------|----------|--------|----------|--------------|
+| -------- | ------------- | ---------- | -------- | ---------- | -------------- |
 | R5.1 | GitHub Discussions (GH-001 approved) | T033 | ⏳ Partial | Templates created (.github/DISCUSSION_TEMPLATE/); enablement manual (T062) | templates present; T062 outstanding |
 | R5.2 | PR Template Routing (GH-002 approved) | T035, T060 | ⏳ Partial | routing logic documented; verification test PRs not recorded (T060) | T035, T060 unchecked |
 | R5.3 | CODEOWNERS & Branch Protection (GH-003 approved) | T037, T038, T061 | ⏳ Partial | CODEOWNERS created; branch protection requires manual setup (T038, T061) | T038, T061 outstanding |
@@ -73,7 +73,7 @@ Specification 001 reconciliation identifies:
 ### R6. CI/CD Workflows (4 requirements → 6 tasks)
 
 | Req ID | Requirement | Task IDs | Status | Evidence | Verification |
-|--------|-------------|----------|--------|----------|--------------|
+| -------- | ------------- | ---------- | -------- | ---------- | -------------- |
 | R6.1 | Implementation Workflows (8 active) | T029, T032, T044, T053 | ✅ Complete | 8 workflows deployed and validated | AGENTS.md L130–156 |
 | R6.2 | Evaluation Workflows (6 documented) | T031, T032 | ✅ Complete | Workflow-lint.yml, protected-files-guard.yml active | tasks.md T031–T032 |
 | R6.3 | Deferred Workflows (3, owner decision required) | T044, T053 | ⏳ Documented | Three workflows documented as deferred; no policy on enablement | plan.md §Workflow Enablement |
@@ -82,7 +82,7 @@ Specification 001 reconciliation identifies:
 ### R7. Agentic Workflows (4 requirements → 7 tasks)
 
 | Req ID | Requirement | Task IDs | Status | Evidence | Verification |
-|--------|-------------|----------|--------|----------|--------------|
+| -------- | ------------- | ---------- | -------- | ---------- | -------------- |
 | R7.1 | Agent inventory and contract specification | T017a, T047 | ✅ Complete | `.claude/agents/INVENTORY.md` created with 20 agents documented | T047 marked complete |
 | R7.2 | Anthropic reference assessment | T017b, T049 | ✅ Complete | `docs/AnthropicPlatforms.md` created with platform matrix | T049 marked complete |
 | R7.3 | Agent budget controls (TOA-271 owned separately) | T050 | ✅ Complete | `.claude/BUDGET_CONTROLS.md` created with enforcement strategy | T050 marked complete |
@@ -91,7 +91,7 @@ Specification 001 reconciliation identifies:
 ### R8. Styling & Component Rules (3 requirements → 6 tasks)
 
 | Req ID | Requirement | Task IDs | Status | Evidence | Verification |
-|--------|-------------|----------|--------|----------|--------------|
+| -------- | ------------- | ---------- | -------- | ---------- | -------------- |
 | R8.1 | Enforce BEM-only CSS (STYLE-001 approved) | T013, T014, T015 | ✅ Complete | Tailwind removed; BEM CSS in `src/styles/` | AGENTS.md L203–209 |
 | R8.2 | Remove Tailwind configuration | T014 | ✅ Complete | No tailwindcss or @tailwindcss packages remain | npm ls confirms |
 | R8.3 | Bundler syntax enforcement (Figma Make compatibility) | T013, T015 | ✅ Complete | guidelines/css-architecture.md locked for BEM-only | AGENTS.md L236–246 |
@@ -99,7 +99,7 @@ Specification 001 reconciliation identifies:
 ### R9. Spec Kit Integration (2 requirements → 8 tasks)
 
 | Req ID | Requirement | Task IDs | Status | Evidence | Verification |
-|--------|-------------|----------|--------|----------|--------------|
+| -------- | ------------- | ---------- | -------- | ---------- | -------------- |
 | R9.1 | Feature directory canonical path (`.github/specs/`) (SPEC-001 approved) | T018, T021 | ✅ Complete | `.specify/init-options.json` configured for `.github/specs/` | Verified in .specify/ |
 | R9.2 | Regression coverage (create → plan → tasks pipeline) | T019, T020 | ✅ Complete | tests/speckit.test.mjs baseline 103/104; regression test suite passes | AGENTS.md L172 |
 
@@ -108,7 +108,7 @@ Specification 001 reconciliation identifies:
 ## Workstream Status Summary
 
 | Workstream | Epic | Tasks | Status | Evidence |
-|-----------|------|-------|--------|----------|
+| ----------- | ------ | ------- | -------- | ---------- |
 | WS-254 | TOA-254 | T018–T024 (7 tasks) | ✅ Complete | Spec Kit routing verified; regression baseline 103/104 |
 | WS-260 | TOA-260 | T025–T030 (6 tasks) | ✅ Complete | Jest ESM 588/588, Bats 12/12, Playwright configured, testing guide created |
 | WS-261 | TOA-261 | T031–T039, T060–T062 (12 tasks) | ⏳ Partial | 9 tasks complete; T035 (routing verification), T038/T061 (branch protection), T062 (Discussions) outstanding |
