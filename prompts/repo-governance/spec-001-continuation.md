@@ -1,8 +1,8 @@
 # Specification 001 Continuation Prompt: Phase 9 Convergence & Bounded Implementation
 
-**File**: `prompts/repo-governance/spec-001-continuation.md`  
-**Purpose**: Next-round implementation prompt for Phase 9 convergence and final validation  
-**Prepared**: October 22, 2026  
+**File**: `prompts/repo-governance/spec-001-continuation.md`
+**Purpose**: Next-round implementation prompt for Phase 9 convergence and final validation
+**Prepared**: October 22, 2026
 **Base Branch**: develop @ c9dd145fbb5ee59544393e91abb114806ad95a61
 
 ---
@@ -28,7 +28,7 @@
 
 **Specification Package**: `.github/specs/001-repo-governance-layout-and-agentic-workflows/`
 
-**Current Status**: 
+**Current Status**:
 - Phases 1–8 complete and merged (PR #346 merged 2026-10-18; PR #429 merged 2026-10-22)
 - Phase 9 convergence in progress; final acceptance gates outstanding
 
@@ -116,7 +116,7 @@ Preserve these; do not reopen:
 ## Unresolved Boundaries
 
 | Item | Gap | Owner | Decision Required |
-|------|-----|-------|------------------|
+| ------ | ----- | ------- | ------------------ |
 | Supplementary Plan | "40-entry supplementary plan" not found | @ashley | Is this needed? |
 | Deferred Workflows | 3 workflows documented as "deferred"; no enablement policy | @ashley | Approve which, if any? |
 | T035/T060 Priority | PR template routing verification not tested | @ashley | Test required before closure? |
@@ -152,9 +152,9 @@ Prompt covers documentation tasks only (T060, T062, T065):
 
 ## Branch and PR Instructions
 
-**Branch**: `docs/repo-governance-reconcile-spec-planning`  
-**Status**: ✅ Name passes validation  
-**Base**: develop @ c9dd145fbb5ee59544393e91abb114806ad95a61  
+**Branch**: `docs/repo-governance-reconcile-spec-planning`
+**Status**: ✅ Name passes validation
+**Base**: develop @ c9dd145fbb5ee59544393e91abb114806ad95a61
 
 **PR Template**: Documentation (`docs/*` prefix)
 - Link to issue #409 as implementing child
@@ -171,7 +171,7 @@ Prompt covers documentation tasks only (T060, T062, T065):
 ## Summary of Outstanding Items
 
 | ID | Task | Requirement | Status | Owner | Blocker |
-|-----|------|-------------|--------|-------|---------|
+| ----- | ------ | ------------- | -------- | ------- | --------- |
 | T035 | PR template routing verification | R5.2 | ⏳ Unchecked | @claude | No test PR refs recorded |
 | T038 | Branch protection enable (manual) | R5.3 | ⏳ Manual | @ashley | GitHub Settings access |
 | T055 | Protected-file changes validation | R5.1–R5.3 | ⏳ Guard failed | @claude/@ashley | Approval + guard rerun |
