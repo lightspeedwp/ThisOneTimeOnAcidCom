@@ -119,9 +119,9 @@ For the current, maintained version, see the link above.
 - Old path: `guidelines/deprecated-tech-stack.md`
 - New path: `guidelines/current-tech-stack.md` (replacement or successor)
 - Action: Document stays at old path but marked as archived with pointer to current guidance
-- **Requirement:** Must provide a `Current guidance` link to the replacement or successor document
+- **Requirement:** Must provide an explicit `Current guidance` link to the replacement or successor document (`new_path`), which must exist and be accessible before the pointer is deployed
 
-**Note:** Archive-only pointers without a replacement destination are not supported by the P-entity schema (which requires `new_path`). Archived guidance with no replacement must either be moved to a historical archive location (with pointer from old location) or reformatted as a separate archive entity type with explicit approval in D5.
+**Note:** Archive-only pointers without a replacement destination are not supported by the P-entity schema (which requires `new_path`). Archived guidance with no replacement must either be moved to a historical archive location (with an explicit link from the old location to `new_path`, which must exist and be accessible before the pointer is deployed) or use a separately defined archive entity type approved in D5 before deployment. A historical archive pointer must label its destination as `Historical archive`, rather than `Current guidance`. A "No replacement guidance available" statement alone does not satisfy either pointer format.
 
 **Format (with replacement):**
 
@@ -134,7 +134,7 @@ For the current, maintained version, see the link above.
 > 
 > **Why:** [Reason — technology deprecated, approach superseded, decision reversed, etc.]
 > 
-> **Current guidance:** See [New/Related Guideline](./link.md)
+> **Current guidance:** See [Replacement or Successor Guideline](./current-tech-stack.md)
 
 ---
 
@@ -159,7 +159,8 @@ For questions about this historical content, see:
 **Validation:**
 - [ ] Original content is preserved in full
 - [ ] Archival reason is clear
-- [ ] Either: replacement guidance link exists and is accurate, OR explicit "No replacement guidance available" statement is present
+- [ ] Explicit replacement or historical archive link identifies `new_path` and is accurate
+- [ ] Destination exists and is accessible before the pointer is deployed
 - [ ] File remains readable (not deleted)
 
 ---
