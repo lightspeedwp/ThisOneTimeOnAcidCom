@@ -1,318 +1,389 @@
-# `thisonetimeonacid.com` — E-Book Development Plan
+# `thisonetimeonacid.com` — ebook development plan
 
-## As of 27 September 2026
+**Historical baseline:** 27 September 2026
+**Documentation review:** 2026-10-24
+**Verified revision:** `3f583002482d80ffd1910676bcf7c63e13989b20` on `develop`
+**Status:** Source-verified architecture notes and proposed work; not a launch-readiness declaration
 
----
+## Purpose and scope
 
-## What Has Been Built
+This plan describes the existing ebook reader for Ash Shaw's memoir,
+“This one time on acid...”, and the remaining source-loading and reading
+continuity decisions.
 
-### Architecture
+The documentation rewrite is tracked in
+[TOA-369](https://linear.app/lightspeedwp/issue/TOA-369/docs-plan-remove-obsolete-assumptions-and-refresh-retained-guidance).
+It does not implement reader fixes, edit manuscript prose, replace assets,
+change dependencies, provision a backend or alter publication behaviour.
 
-The e-reader is a fully custom React SPA built on a Vite/TypeScript stack. The
-key files are:
+Keep this document at its existing path. Any relocation belongs to
+[TOA-255](https://linear.app/lightspeedwp/issue/TOA-255/refactor-repo-governance-organise-planning-documents)
+and needs an approved destination and reference-migration plan.
 
-| File | Purpose |
+“Verified” below means inspected in source at the pinned revision. It does not
+mean a build, browser test, accessibility review or deployment was performed.
+
+## Current reader architecture
+
+The application uses React, TypeScript and Vite. Read the current
+[package manifest](../package.json) rather than copying historical version
+numbers from this plan.
+
+| File | Current responsibility |
 |---|---|
-| `src/app/utils/bookContentLoader.ts` (417 lines) | Vite glob loader — reads all `*.md` files at build time, parses YAML frontmatter, splits body on `---` page breaks, assembles the final `BookPage[]` array, and auto-splits overflowing pages at load time |
-| `src/app/components/pages/about/EbookPage.tsx` (871 lines) | Unified reader — single-page swipe mode (mobile), two-page spread mode (desktop 1024px+), touch gestures, keyboard nav, 3D-flip/fade/slide paging effects, fullscreen mode, minimal mode |
-| `src/app/components/pages/about/ebook/ebookHelpers.ts` | Constants, `buildChapterIndex()`, `buildDrawerGroups()`, `buildSpreads()`, `useSpreadMode()` hook |
-| `src/app/components/pages/about/ebook/EbookPageContent.tsx` | Renders all 14 page types: cover, inside-front, title, dedication, epigraph, toc, foreword, part-title, chapter-start, chapter-content, appendix-title, afterword, about-author, back-cover |
-| `src/app/data/mock/pages/ebook-pages.ts` | Barrel — re-exports `BookPage`, `BookPageType`, and `bookPages` |
-| `src/styles/blocks/ebook-*.css` (7 files) | All reader styles — shell, navigation, page types, drawer, responsive breakpoints, dark mode contrast |
+| [`bookContentLoader.ts`](../src/app/utils/bookContentLoader.ts) | Eager raw-Markdown glob; custom frontmatter parsing; ordered page assembly; generated contents; paragraph-count fallback splitting |
+| [`ebook-pages.ts`](../src/app/data/mock/pages/ebook-pages.ts) | Re-exports types and loader output; it does not activate the older TypeScript manuscript modules as a fallback |
+| [`ebook/types.ts`](../src/app/data/mock/pages/ebook/types.ts) | `BookPage` and the 14 reader page types |
+| [`EbookPage.tsx`](../src/app/components/pages/about/EbookPage.tsx) | Reader state, single/spread views, navigation, touch/keyboard handling, settings, fullscreen and progress |
+| [`ebookHelpers.ts`](../src/app/components/pages/about/ebook/ebookHelpers.ts) | Chapter index, drawer groups, spread mapping, media-query hooks and measured pagination |
+| [`EbookPageContent.tsx`](../src/app/components/pages/about/ebook/EbookPageContent.tsx) | Page-type rendering; body strings are rendered as text rather than general Markdown |
+| [`ebookPreferences.ts`](../src/app/utils/ebookPreferences.ts) | Numeric reading position and reader preferences in local storage |
+| [`journal-schema.ts`](../scripts/journal-schema.ts) | Existing Zod ebook frontmatter schema, separate from the reader's custom parser |
+| [`routes.ts`](../src/app/routes.ts) | Current route definitions |
+| [`ebook-base.css`](../src/styles/blocks/ebook-base.css) and sibling ebook stylesheets | Reader surface, layout, page types, navigation, responsive presentation and theme styling |
 
-### Content Structure
+Reader page types are `cover`, `inside-front`, `title`, `dedication`,
+`epigraph`, `toc`, `foreword`, `part-title`, `chapter-start`,
+`chapter-content`, `appendix-title`, `afterword`, `about-author` and
+`back-cover`.
 
-36 Markdown files in `src/content/book/`, organised into 6 folders with numbered
-prefixes for sort order:
+Source frontmatter types are not identical to renderer types: for example,
+`chapter` produces chapter-start/content pages, while `appendix` and
+`appendix-divider` produce appendix-related pages.
 
-```text
-00-front-matter/        cover, inside-front, title-page, dedication, epigraph, foreword
-01-part-1-early-life/   00-part.md + ch1–4
-02-part-2-carefree-20s/ 00-part.md + ch5–9
-03-part-3-nomadic-life/ 00-part.md + ch10–14
-04-part-4-re-emergence/ 00-part.md + ch15–20
-05-back-matter/ afterword, appendix-divider, appendix-a, appendix-b-tribes,
-about-author, back-cover
+### Navigation and presentation
 
-```text
+The inspected implementation includes:
 
-Each markdown file uses YAML frontmatter to declare its type, chapter/part
-numbers, and page numbers. Paragraphs within a chapter body are separated by
-blank lines. Page breaks use `---` on its own line between paragraphs. The
-loader auto-paginates any page with more paragraphs than the viewport-responsive
-limit (3 on compact mobile, 4 on standard mobile, 6 on tablet/desktop).
+- Single-page mode below the `1024px` spread breakpoint.
+- A cover-first spread mapping, followed by pairs of pages.
+- Touch, keyboard and button navigation.
+- Drawer entries rebuilt from dynamically paginated pages.
+- Font-size, minimal-mode and paging-effect preferences.
+- Fullscreen handling with a visual fallback when the browser API is denied.
+- Reduced-motion checks in navigation and supporting CSS.
 
-### Bugs Fixed
+These are code paths, not a guarantee that every combination works correctly.
 
-- Dark mode: `body:not(.dark)` → `:root:not(.dark)` in `ebook-enhanced-contrast.css` (39 instances)
-- Breadcrumb gap: removed over-compensating `padding-top` from `.ebook-reader__hero`
-- esbuild rejected em-dash characters (`—`) in TypeScript comments and string literals — replaced with `—` escapes or plain hyphens
-- `about-author` title case mismatch (`About the author` vs `About the Author`) — fixed in frontmatter
-- Appendices missing from auto-generated TOC — `buildTocPages()` now accepts back-matter entries
-- Part TOC titles lost subtitle — now format as `Part one — Early life (Pre-Y2K)`
-- `*/` inside JSDoc comment pattern `01-part-1-*/` prematurely closed block comment — changed to `[n]`
-- Vertical overflow in reader — `overflow-y: auto` → `overflow: hidden` + `splitLargePages()` post-processor
-- Legacy ThemeSwitcher (site footer) visible in reading mode — hidden via `body.ebook-reading .footer { display: none }`
-- 24 unreferenced template CSS files deleted; orphaned `ThemeToggle` and `Switch` barrel exports removed
+## Source inventory and the loading mismatch
 
----
+### Existing files
 
-## Immediate Next Steps
+Root [`content/book/`](../content/book/) contains six numbered directories with
+36 Markdown files, plus `this-one-time-on-acid-brief.md`:
 
-### 1. Write the actual chapter content
+| Directory | Listed files | Intended structural role |
+|---|---:|---|
+| `00-front-matter/` | 6 | Cover through foreword |
+| `01-part-1-early-life/` | 5 | Part divider and chapters 1–4 |
+| `02-part-2-carefree-20s/` | 6 | Part divider and chapters 5–9 |
+| `03-part-3-nomadic-life/` | 6 | Part divider and chapters 10–14 |
+| `04-part-4-re-emergence/` | 7 | Part divider and chapters 15–20 |
+| `05-back-matter/` | 6 | Afterword, appendices, author page and back cover |
 
-**Priority: critical. Everything else is scaffolding.**
+This is a directory inventory, not confirmation that all files are approved,
+complete, valid or publishable manuscript sources.
 
-Each chapter file currently has either placeholder AI text or is empty. Open
-each file in `src/content/book/` and write the real prose. The workflow:
+The earlier plan's blanket claims that all chapter files are empty or
+AI placeholders, and that the foreword and afterword are empty, must not be
+retained as current facts. Inspected examples contain prose:
 
-1. Edit the markdown file directly (locally or via GitHub web editor)
+- `00-front-matter/06-foreword.md`.
+- `01-part-1-early-life/01-snails.md`.
+- `05-back-matter/01-afterword.md`.
+- `05-back-matter/03-appendix-a.md`.
+- `05-back-matter/04-appendix-b-tribes.md`.
 
-1. Commit to the repo
+Prose presence does not establish authorship, factual accuracy, editorial
+approval or completion. Preserve Ash Shaw's legitimate author identity and
+existing editorial wording; do not invent replacement manuscript text.
 
-1. The Vite dev server hot-reloads and the reader updates instantly
+### Actual discovery path
 
-## Rules for content authors
-
-- Separate paragraphs with a single blank line
-- Start a new reader page with `---` on its own line between paragraphs (aim for 3–5 paragraphs per page on mobile, 5–6 on desktop — the auto-splitter will catch anything longer)
-- Do not add HTML, markdown headings (`#`), or any formatting beyond standard paragraphs — the CSS handles all typographic styling based on `page.type`
-- The `subtitle` frontmatter field in chapter files renders as an italic epigraph under the chapter title — use it for a one-line teaser or thematic phrase, not a description
-
-## Files with real content
-
-- `05-back-matter/04-appendix-b-tribes.md` — fully written, 7 tribe sections
-
-## Files that are empty or have placeholder content
-
-- All 20 chapter files in `01-` through `04-`
-- `00-front-matter/06-foreword.md` — body is empty
-- `05-back-matter/01-afterword.md` — body is empty
-- `05-back-matter/03-appendix-a.md` — single paragraph placeholder
-
-### 2. Verify pagination on real devices
-
-After writing content, open the reader on a phone and a tablet and check:
-
-- Pages fit the screen with no clipping at the bottom
-- Paragraph count per page feels right (not too sparse, not clipped)
-- If pages are too short on desktop: increase the `6` in `maxParasForViewport()` in `bookContentLoader.ts` (~line 405)
-- If pages are too long on mobile: decrease the `3` (compact mobile) or `4` (standard mobile)
+The loader still uses:
 
 ```typescript
-// src/app/utils/bookContentLoader.ts — tune these three numbers
-function maxParasForViewport(): number {
-  if (typeof window === 'undefined') return 5;
-  var w = window.innerWidth;
-  if (w < 480) return 3;   // compact mobile: ~390px phones
-  if (w < 768) return 4;   // standard mobile: ~430px iPhones
-  return 6;                 // tablet + desktop
-}
+import.meta.glob<string>('/src/content/book/**/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
+```
 
-```text
+`src/content/book/` is absent at the verified revision. Root `content/book/`
+exists, but the glob does not target it.
 
-### 3. Fix page number drift
+The barrel's comment saying content is sourced from `src/content/book/` is
+therefore not proof that the existing root manuscript reaches the reader.
+Older TypeScript ebook modules are not imported as an active fallback by that
+barrel.
 
-The `startPage` and `pageNumber` values in frontmatter are currently
-hand-authored estimates. Once real content is written, actual page counts will
-shift. Two options:
+Do not promise that editing root manuscript files immediately updates the
+reader. Source approval, discovery and validation must first be reconciled.
 
-**Option A (recommended): Remove hardcoded page numbers entirely.** Change
-`bookContentLoader.ts` to compute page numbers dynamically from array position.
-Delete `startPage` and `pageNumber` from all frontmatter files. Page numbers in
-the TOC and chapter index will always be accurate regardless of content length.
+### Existing workstream
 
-Implementation — add a post-assembly pass at the end of `loadBookPages()` in
-`bookContentLoader.ts`:
+[TOA-328](https://linear.app/lightspeedwp/issue/TOA-328/feat-ebook-align-manuscript-loading-with-validated-sources)
+owns manuscript-source discovery and integration. Its remaining decisions
+include:
 
-```typescript
-var assembled = ([] as BookPage[])
-  .concat(preForeword)
-  .concat(tocPages)
-  .concat(forewordPages)
-  .concat(contentPages)
-  .concat(backMatterPages);
+- Approved canonical files and confirmed missing assets.
+- Exclusion of `this-one-time-on-acid-brief.md` from reader content.
+- Requiredness of type, chapter/part, title/subtitle, page/order and appendix
+  metadata.
+- Deterministic ordering, explicit page breaks and contents mapping.
+- Diagnostics and fixtures for invalid, unsupported and empty sources.
+- Reconciliation with existing validation.
 
-// Assign sequential page numbers; keep any already set in frontmatter
-for (var n = 0; n < assembled.length; n++) {
-  if (assembled[n].pageNumber == null) {
-    assembled[n] = { ...assembled[n], pageNumber: n + 1 };
-  }
-}
-return assembled;
+Do not simply broaden the glob to every Markdown file under `content/book/`:
+that would also discover the brief and would not settle editorial approval.
 
-```text
+## Current parsing and assembly contract
 
-**Option B (keep manual):** After writing each chapter, update `startPage` in
-that chapter's frontmatter to match the actual reader page index. More work but
-keeps page numbers stable between edits.
+The reader's parser recognises a simple frontmatter block, splits lines at the
+first colon, strips matching surrounding quotes and converts numeric-looking
+values. It is not a complete YAML parser.
 
----
+Recognised metadata includes `type`, `chapter`, `part`, `title`, `subtitle`,
+`startPage`, `pageNumber` and `appendixId`.
 
-## Short-Term Improvements
+Important limitations:
 
-### 4. Orientation change re-pagination
+- Multiline YAML values are not handled as general YAML. The inspected first
+  chapter includes a wrapped subtitle, so parser/schema parity needs evidence.
+- An unsupported or missing type has no explicit diagnostic path in the loader.
+- Paths are sorted lexically; numbered names influence ordering.
+- `part-title` establishes the current part used by chapter contents entries.
+- Chapter and appendix bodies split at standalone `---` separators, then into
+  paragraph strings on blank lines.
+- Contents are inserted between pre-foreword material and the foreword.
+- `buildTocPages()` includes part/chapter entries and collected appendix
+  entries, with 11 entries per contents page.
+- Titles, subtitles and body paragraphs are rendered according to page type;
+  arbitrary Markdown/HTML formatting is not interpreted by the body renderer.
 
-`maxParasForViewport()` runs once at module load. If a user rotates their phone,
-the viewport changes but `bookPages` is not re-split. The current reading
-position could become invalid.
+The existing Zod schema requires positive chapter/part numbers for chapter
+sources, permits optional non-negative `startPage`, and constrains appendix IDs
+to a lowercase letter. That schema's existence does not prove the browser
+loader invokes it or that current manuscript files pass it.
 
-Fix — add a resize listener in `EbookPage.tsx` that reloads when the
-mobile/desktop breakpoint is crossed:
+Retain simple paragraphs and explicit page breaks when preparing approved
+sources. Do not remove headings, rewrite prose or change metadata merely to
+fit an unapproved integration decision.
 
-```typescript
-useEffect(function() {
-  var lastWidth = window.innerWidth;
-  function onResize() {
-    var crossed = (lastWidth < 768 && window.innerWidth >= 768) ||
-                  (lastWidth >= 768 && window.innerWidth < 768);
-    if (crossed) { window.location.reload(); }
-    lastWidth = window.innerWidth;
-  }
-  window.addEventListener('resize', onResize);
-  return function() { window.removeEventListener('resize', onResize); };
-}, []);
+## Pagination: current behaviour and remaining risks
 
-```text
+### Two existing stages
 
-### 5. Spread mode mouse-wheel page turning
+1. `splitLargePages()` produces the static fallback from `rawBookPages`.
+   Its paragraph-count limits are 3 below `480px`, 4 below `768px`, 6 otherwise,
+   and 5 without `window`.
+2. `useDynamicPagination()` measures paragraph heights with a hidden DOM probe,
+   using available height and font preference to split supported page types.
 
-`overflow: hidden` was applied to `.ebook-reader__page-inner` to remove vertical
-scrollbars. The existing `handleBookWheel` handler in `EbookPage.tsx` tried to
-scroll within the page-inner — it now does nothing.
+The reader observes the single-page wrapper with `ResizeObserver` and derives
+navigation collections from `dynamicPages`.
 
-Replace `handleBookWheel` with a simple page-turner:
+The old description that pagination only runs once at module load is therefore
+incomplete. The proposed reload-on-resize snippet is removed: dynamic
+pagination already exists, and reloading is not an approved continuity strategy.
 
-```typescript
-const handleBookWheel = useCallback(function(e: React.WheelEvent) {
-  if (e.deltaY > 0) { goForward(); }
-  else if (e.deltaY < 0) { goBackward(); }
-}, [goForward, goBackward]);
+### Verification gaps
 
-```text
+- The measurement observer attaches to the single-page wrapper; equivalent
+  initial spread-mode measurement is not established by that code.
+- Width changes, font application/loading, padding, headings and the probe's
+  measurement surface need representative browser checks.
+- Height splitting does not divide an individual oversized paragraph.
+- Both splitters retain source `pageNumber` values across derived chunks.
+  These are not necessarily unique rendered-page numbers.
+- Clamping a numeric index after repagination does not preserve the same
+  logical passage.
+- Empty data is unsafe in the single-page render path: the active page can be
+  undefined before `pageTypeClass()` and `PageContent` use it.
+- `buildSpreads([])` creates a cover-shaped entry without actual content; this
+  is not an explicit, tested empty-state experience.
 
-Remove the complex spread-midpoint routing logic. Desktop users get mouse-wheel
-page turning instead of within-page scrolling.
+These are source observations and test requirements, not fixes made by this
+documentation rewrite.
 
-### 6. Deep-link to chapter from marketing page
+## Page labels, contents and reading continuity
 
-The book marketing page (`/book`) and reader (`/ebook`) are separate routes. Add
-a `Start Reading` link on the marketing page that deep-links to a specific
-chapter, e.g. `/ebook?chapter=1`. In `EbookPage.tsx`, read the query parameter
-on mount and call `jumpToPage()`:
+Keep four concepts separate:
 
-```typescript
-useEffect(function() {
-  var params = new URLSearchParams(window.location.search);
-  var chapterParam = params.get('chapter');
-  if (chapterParam) {
-    var chapterNum = parseInt(chapterParam, 10);
-    var targetPage = bookPages.findIndex(function(p) {
-      return p.type === 'chapter-start' && p.chapter === chapterNum;
-    });
-    if (targetPage >= 0) { jumpToPage(targetPage); }
-  }
-}, []); // eslint-disable-line react-hooks/exhaustive-deps
+- Source identity.
+- Position within a source.
+- Current array index.
+- Displayed page number.
 
-```text
+The loader uses frontmatter numbers for chapter starts, section pages and
+contents entries. Derived chunks can repeat a number. The old proposed
+post-assembly pass only filled missing numbers; it would not correct all
+existing labels, contents entries or later measured splits.
 
----
+Neither deleting all frontmatter numbers nor manually renumbering every chapter
+is approved here. Decide the display-number/contents contract within the
+existing source and reader workstreams.
 
-## Medium-Term (Pre-Launch)
+[TOA-329](https://linear.app/lightspeedwp/issue/TOA-329/feat-ebook-add-source-anchored-reading-continuity)
+owns logical reading continuity and safe collection states:
 
-### 7. Font choice review
+- Stable source identity and a location within it, independent of display
+  pagination.
+- Continuity across font, viewport/orientation and single/spread changes.
+- Migration or fallback for legacy numeric progress.
+- Defined behaviour for removed content and unavailable/corrupt storage.
+- Safe empty/invalid collections and recovery tests.
 
-The reader uses `var(--wp--preset--font-family--brand-body)` and
-`--brand-heading` CSS variables. Confirm these suit long-form reading — ideally
-a high-x-height serif for body text and a contrasting display face for chapter
-titles. The memoir's neon/underground aesthetic could support **Lora** or
-**Georgia** for body and **Space Grotesk** or **DM Sans** for headings.
+Current `ebookPreferences.ts` stores a numeric index under
+`ash-ebook-position`. Reads validate its range; storage errors fall back or fail
+silently. This is not source anchoring, and it does not establish continuity
+after content or layout changes.
 
-### 8. Reading progress persistence across sessions
+## Wheel behaviour and deep links
 
-The reader already saves `currentPage` to `localStorage` via
-`ebookPreferences.ts`. Verify this survives browser sessions. Consider adding a
-URL-hash fallback (`/ebook#page-42`) for sharing reading position.
+### Mouse wheel
 
-### 9. Foreword and afterword content
+`handleBookWheel()` currently forwards wheel movement to the left or right page
+inner based on pointer position. The stylesheet uses `overflow: hidden`.
 
-`06-foreword.md` and `01-afterword.md` currently have empty bodies. These are
-structurally important framing pieces. Write them early — the foreword sets tone
-and explains the book's unusual structure; the afterword closes the emotional
-arc.
+The old unconditional wheel-to-page-turn replacement is not an accepted fix.
+Verify actual browser behaviour and decide the intended interaction before
+changing it; include trackpads, rapid input, animation state and keyboard
+alternatives.
 
----
+### Routes and chapter links
 
-## Content Editing GitHub Workflow
+Current routes include:
 
-The intended workflow for ongoing content editing:
+- `/the-book` — book information.
+- `/read-the-draft` and `/read-the-book` — the draft-entry page.
+- `/ebook` — the reader.
 
-1. **Open** the repo on GitHub web, Cursor, or VS Code
+The old `/book` route assumption is not supported by the current route table.
+`EbookPage.tsx` does not currently implement the proposed `?chapter=` handler.
 
-1. **Navigate** to `src/content/book/` and open the relevant chapter file
+Chapter deep links and a page-hash fallback remain proposals, not shipped
+features. Resolve link identity and precedence against saved progress and
+repagination before implementation. Do not paste the old mount-only snippet:
+it used a static page collection and suppressed dependency checking.
 
-1. **Edit** the markdown — paragraphs separated by blank lines, `---` for page breaks
+The existing draft-entry page is not evidence of a production subscription
+backend or secure reader access control. Changes to that flow are outside this
+documentation scope.
 
-1. **Commit** with a message like `content: ch3 first draft` or `fix: page break in ch7`
+## Historical September change log
 
-1. The Vite dev server picks up the change instantly (hot module reload via `import.meta.glob`)
+The previous plan reported the following changes. They are retained as
+historical assertions, not newly validated fixes or implementation dates:
 
-1. For production: `pnpm run build` — the loader bakes all markdown at build time, no server-side rendering required
+| Earlier reported change | Current evidential treatment |
+|---|---|
+| Light-theme selectors moved from `body:not(.dark)` to `:root:not(.dark)`; 39 instances claimed | Historical count not rerun |
+| Reader breadcrumb/hero spacing adjusted | Requires visual regression evidence |
+| An esbuild/em-dash compatibility issue was addressed | Do not generalise into a ban on Unicode or repeat ambiguous escape advice |
+| Author-page title casing corrected | Current source/editorial review required |
+| Appendix entries added to contents | `buildTocPages()` currently accepts collected appendix entries |
+| Part contents labels retain subtitles | Current loader includes part subtitles in assembled labels |
+| A comment glob prematurely closed JSDoc | Historical syntax-maintenance note |
+| Overflow hidden and paragraph splitting introduced | Both remain visible in current source; not proof that all content fits |
+| Footer theme widget hidden during reading | Reader body class and matching footer CSS remain |
+| 24 template CSS files and orphaned exports removed | Historical deletion count not independently revalidated |
 
-**Adding a new chapter** — create a file in the correct part folder with the
-next sequential prefix:
+## Proposed delivery sequence
 
-```text
-01-part-1-early-life/05-new-chapter.md
+No dates, effort estimates or new implementation authorisation are established
+by this sequence.
 
-```text
+1. **Approve and apply the documentation-only rewrite.**
+   Keep both plan paths, preserve provenance, resolve changelog/PR-template
+   treatment and record actual checks.
+2. **Continue TOA-328 through its existing approval process.**
+   Approve sources, metadata and diagnostics; demonstrate discovery and mapping
+   with representative fixtures before claiming manuscript integration.
+3. **Continue TOA-329 and representative reader validation.**
+   Establish logical continuity and safe states, then verify navigation,
+   pagination and recovery on realistic content.
 
-Use this frontmatter template:
+Editorial review remains separate. Existing prose must not be labelled final,
+rewritten or published solely because it exists in the inventory.
 
-```yaml
----
-type: chapter
-chapter: 21
-part: 1
-startPage: 0
-title: "Chapter title"
-subtitle: "One-line teaser displayed under the chapter number"
----
+Font changes also need a design decision. Review current tokens and long-form
+readability first; the old suggestions to add Lora, Georgia or other fonts are
+not approval to change typography, assets or loading.
 
-First paragraph of chapter body.
+## npm workflow and verification
 
-Second paragraph.
+Read [AGENTS.md](../AGENTS.md) and [CONTRIBUTING.md](../CONTRIBUTING.md).
+This repository uses npm and `package-lock.json`; do not restore pnpm commands
+or introduce another lockfile.
 
----
+Commands defined for an appropriately authorised working checkout include:
 
-First paragraph of page two.
+```bash
+npm ci
+npm run dev
+npm run build
+npm run test:unit
+npm run test:build
+npm run test:e2e
+```
 
-```text
+Installation, development and build commands can write files. They were not run
+for this read-only documentation review. End-to-end execution may require
+browser setup; report actual results rather than copying historical pass
+counts.
 
-No code changes required — the loader picks it up automatically on next dev
-server start or build.
+`package.json` has no `lint`, `type-check`, `typecheck` or `verify` script.
+Journal validation commands are not evidence that ebook sources pass the ebook
+schema.
 
----
+After source integration is approved, verify:
 
-## File Reference
+- Approved discovery, exclusion of the brief, stable ordering and diagnostics.
+- Frontmatter parsing/schema parity and all supported page types.
+- Contents labels, appendix entries and chapter navigation.
+- First/last page, empty/invalid input and removed content.
+- Font changes, compact/mobile/tablet/spread layouts and orientation changes.
+- Long paragraphs, overflow, wheel input and rapid navigation.
+- Saved-position migration, blocked storage and logical-location continuity.
+- Keyboard/focus behaviour, reduced motion, fullscreen and both themes.
 
-```text
-src/
-  content/book/                    ← edit these to change the book
-    00-front-matter/
-    01-part-1-early-life/
-    02-part-2-carefree-20s/
-    03-part-3-nomadic-life/
-    04-part-4-re-emergence/
-    05-back-matter/
-  app/utils/bookContentLoader.ts   ← tune maxParasForViewport() here
-  app/components/pages/about/
-    EbookPage.tsx                  ← reader shell, navigation, gestures
-    ebook/
-      EbookPageContent.tsx         ← page type renderers (14 types)
-      ebookHelpers.ts              ← chapter index, spreads, hooks
-      EbookReaderNav.tsx           ← bottom nav bar
-      EbookDrawer.tsx              ← chapter jump drawer
-  styles/blocks/ebook-*.css        ← all reader styles
+Record revision, commands, fixtures/devices and outcomes. A build alone cannot
+prove these reader behaviours or editorial readiness.
 
-```text
+## Open decisions and protected boundaries
+
+- Approve canonical manuscript sources and distinguish draft, reference and
+  publishable material.
+- Resolve parser/schema requiredness, ordering and display-number semantics in
+  the existing implementation workstreams.
+- Agree continuity, recovery and any deep-link behaviour before coding it.
+- Resolve contradictory inherited instructions about importing `content/`;
+  do not treat old “content folder deleted” prose as current inventory.
+- Resolve documentation-only changelog treatment and local/shared PR-template
+  differences before preparing a PR.
+- Preserve protected files, images, attribution and governance configuration.
+  No changelog, workflow, template, dependency or deployment edit is included.
+- Preserve this document's location pending TOA-255.
+
+## Review report reconciliation
+
+The supporting report `2026-10-24-thisonetimeonacid-plan-review.md` reviewed
+revision `6b3b76baa955acdfaee0d5e4aef39e099b4b083e`. This replacement draft
+uses the newer verified revision stated above and reconciles its applicable
+findings as follows:
+
+- **PLAN-07:** explains the absent discovery path without implying that documentation changes integrate the root manuscript.
+- **PLAN-08:** distinguishes existing prose from authorship, editorial approval and publication readiness.
+- **PLAN-09:** replaces pnpm instructions with verified npm commands and records that none were executed for this review.
+- **PLAN-10:** separates source identity, array position and displayed numbering; withdraws the incomplete numbering proposal.
+- **PLAN-11:** documents measured dynamic pagination and retains its verification gaps rather than prescribing a reload workaround.
+- **PLAN-12:** the original report identified a proposed snippet using a static page index for dynamically paginated navigation. This replacement removes that proposal and records that the current reader has no chapter-query handler; it does not claim a runtime fix or an implemented deep-link feature.
+
+This reconciliation changes documentation only; reader integration and
+continuity remain within their existing implementation workstreams.
+
+**Review outcome:** the reader architecture exists, but manuscript discovery,
+safe empty states and source-aware continuity must not be described as complete.
+No runtime fix, manuscript edit, test pass or production release is asserted.
