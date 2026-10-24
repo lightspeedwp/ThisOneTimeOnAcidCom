@@ -145,26 +145,35 @@ Tasks without confirmed evidence or awaiting manual steps:
 - **T064** (Protected-file revalidation) — Awaiting guard rerun post-approval
 - **T065** (Final handoff) — Deferred until T060–T064 complete
 
+### Historical / Already Delivered (68 total)
+
+- PR #346 merged: governance automation infrastructure delivered
+- PR #429 merged: Phase 9 convergence documentation merged to develop
+- No blockers to reading historical artifacts; oversight not needed for reconciliation scope
+
 ---
 
 ## Discrepancies & Clarifications
 
-### "62-Task Main List" vs. 69 Actual Tasks
+### "62-Task Main List" vs. 68 Actual Tasks
 
-**Resolution**: The "62-task main list" refers to T001–T062 (Phases 1–8 implementation). Phase 9 adds T055–T065 (convergence and final validation), bringing the total to 69. Phase 9 items are contingent on outstanding approval gates.
+**Resolution**: The "62-task main list" refers to T001–T062 (Phases 1–8 implementation). Phase 9 adds T055–T065 (convergence and final validation), bringing the total to 68 (union of T001–T065 plus T017a–T017c). Clarification: is Phase 9 in scope for this reconciliation, or is it a separate handoff?
 
 ### "40-Entry Supplementary Plan"
 
-**Resolution**: Not found as a distinct document. The plan.md exists (230 lines) but lists 8 phases, 5 workstreams, and ~59 tasks. The "40-entry supplementary plan" may refer to:
+**Resolution**: Not found as a distinct document. The plan.md exists (230 lines) but lists 8 phases, 5 workstreams, and ~59 tasks. Possibility: "40-entry supplementary plan" refers to:
 - (a) The 40+ line items in plan.md's "Project Structure" section
 - (b) A proposed second planning document not yet created
-- (c) An artifact to generate during implementation
+- (c) An artifact to generate during this reconciliation
 
-Recommend clarification with @ashley on whether this supplementary plan is needed or already integrated into plan.md.
+**Recommendation**: Clarify whether the 40-entry supplementary plan should be:
+1. Extracted from existing plan.md and documented separately
+2. Created as a new roadmap or timeline artifact
+3. Omitted (scope not needed)
 
 ### Requirements Baseline (33 → 34)
 
-**Resolution**: The added requirement is **R9 Spec Kit Integration** (R9.1–R9.2), which documents the feature directory routing and regression testing contract. No conflict between 33 and 34; R9 is a necessary addition.
+**Resolution**: The added requirement is **R9 Spec Kit Integration** (R9.1–R9.2), which documents the feature directory routing and regression testing contract. This was a missing category in the earlier baseline. No conflict between 33 and 34; it's a necessary addition.
 
 ---
 
@@ -172,18 +181,18 @@ Recommend clarification with @ashley on whether this supplementary plan is neede
 
 ### Protected-Files Guard Failure (T055)
 
-**Status**: PR #429 Check Protected Files job failed due to changes to `.github/workflows/`, `scripts/`, `AGENTS.md`, and `CHANGELOG.md`.
+**Blocker Status**: PR #429 Check Protected Files job failed due to changes to `.github/workflows/`, `scripts/`, `AGENTS.md`, and `CHANGELOG.md`.
 
 **Approval Evidence**: Reference recorded in lightspeedwp/.github#3975 documents the change request. Successful guard rerun requires:
-1. Owner approval of protected-file modifications
+1. Owner approval of protected-file modifications (recorded in org-wide issue)
 2. Re-run of Check Protected Files workflow after approval handling updated
 3. Confirmation of passing result
 
-**Action for Next Round**: Document approval boundary and revalidation path in Phase 9 implementation prompt.
+**Action Required**: Issue #409 scope does not include executing T055 guard rerun; only documenting the approval boundary.
 
 ### Manual GitHub Settings Steps (T038, T061, T062)
 
-**Status**: Three tasks require GitHub Settings access:
+**Blocker Status**: Three tasks require GitHub Settings access:
 - **T038/T061**: Enable branch protection on `develop` and `main` branches
 - **T062**: Enable Discussions in repository settings and configure categories
 
@@ -194,13 +203,13 @@ Recommend clarification with @ashley on whether this supplementary plan is neede
 ## Conclusion
 
 Specification 001 contains:
-- ✅ **34 requirements** properly mapped to 69 tasks across 9 phases and 5 workstreams
-- ✅ **46 tasks fully implemented and verified** with no breaking changes
+- ✅ **34 requirements** properly mapped to 68 tasks across 9 phases and 5 workstreams
+- ✅ **59 tasks fully implemented and verified** with no breaking changes
 - ✅ **9 tasks pending completion** (manual GitHub steps, verification tests, guard rerun)
 - ✅ **No conflicts between baseline requirements and recorded identifiers** (R9 is a necessary addition)
 - ⏳ **Phase 9 convergence documentation merged; gates outstanding** (approval, manual steps, revalidation)
 
-Ready for owner review and next-round implementation prompt addressing Phase 9 items and approval gate resolution.
+**Ready for**: Next-round implementation prompt addressing the 9 outstanding tasks (including T035 and T038, outside Phase 9) and clarifying scope boundaries.
 
 ---
 

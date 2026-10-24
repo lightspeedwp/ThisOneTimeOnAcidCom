@@ -1,8 +1,8 @@
 # Coverage Matrix: Spec 001 Requirements → Tasks → Evidence → Verification
 
-**File**: `.github/specs/001-repo-governance-layout-and-agentic-workflows/coverage.md`  
-**Purpose**: Traceability from each requirement identifier to its implementing tasks, child issues, verification method, and current status  
-**Prepared**: October 22, 2026  
+**File**: `.github/specs/001-repo-governance-layout-and-agentic-workflows/coverage.md`
+**Purpose**: Traceability from each requirement identifier to its implementing tasks, child issues, verification method, and current status
+**Prepared**: October 22, 2026
 **Base**: develop @ c9dd145fbb5ee59544393e91abb114806ad95a61
 
 ---

@@ -1,157 +1,54 @@
-# Feature work — orchestrator
+**Originally created:** March 4, 2026
 
-**Created:** March 4, 2026
-**Version:** 1.0.0
-**Scope:** New pages, components, interactions, portfolio redesign, timeline
-expansion, new content pages
-**Status:** Partially defined — some sub-audits await further input from Ash
+**Original version:** 1.0.0
 
----
+# Book-site feature-work scope reconciliation
 
-## Overview
+## 1. Objective
 
-This orchestrator covers new feature development across the application. It is
-structured as sub-audits that can be executed independently. Some sub-audits are
-ready for execution; others are pending answers to questions (marked as
-PENDING).
+Clarify the one active style-guide review and preserve all held historical feature scopes without executing a feature programme.
 
----
+## 2. Inputs and scope
 
-## Critical rules
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
-Same as all other prompts — see [Guidelines.md](../../guidelines/Guidelines.md).
-Key reminders:
+Inputs: sibling 06-style-guide-expansion.md; the held sibling files listed below; current issue scope and existing design decisions.
 
-- BEM-only styling, no Tailwind
-- Bundler-safe syntax (var, no arrow callbacks, no destructuring, no optional chaining)
-- All content from `/data/mock/` files
-- Sentence case for all headings
-- He/him pronouns
-- Neon vs Atomic Black design system
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
----
+## 3. Audit steps
 
-## Sub-audits
+1. Inventory sibling prompts and distinguish their status as a review-scope decision, not a claim about delivery. Only sibling 06 is proposed for rewrite/review in this cleanup.
 
-### Sub-audit 1: Timeline expansion to about sub-pages
+2. Preserve held 01 timeline, 02 portfolio, 03 recommended, 04 gear, 05 design-system expansion plus its ADDENDUM and IMPLEMENTATION-SUMMARY, 07 about enrichment, 08 motion playground, 09 neon/rainbow and 10 journey sidebar unchanged.
 
-**Prompt:** [01-timeline-expansion.md](./01-timeline-expansion.md)
-**Status:** ✅ COMPLETE — March 6, 2026
+3. Check actual current style-guide needs with sibling 06 and canonical specimen reviews. Retain historical acceptance criteria in pinned held sources; do not assume a former portfolio or dev-tools route is required on the book site.
 
-### Sub-audit 2: Portfolio card & layout redesign
+4. Distinguish historical “complete”, “cancelled”, session totals and summary assertions from current verified evidence. A hold does not cancel work or approve it for future implementation.
 
-**Prompt:** [02-portfolio-redesign.md](./02-portfolio-redesign.md)
-**Status:** ✅ COMPLETE — March 6, 2026
+5. Return one scope/dependency register and explicit decisions needed before any held work can resume. No batch execution, new routes/components, design-system expansion or automatic tracker changes.
 
-### Sub-audit 3: Resources page (getting started guide)
+## 4. Missing evidence and permission boundaries
 
-**Prompt:** [03-recommended-page.md](./03-recommended-page.md)
-**Status:** ✅ COMPLETE — March 8, 2026
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-### Sub-audit 4: Gear page expansion
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-**Prompt:** [04-gear-expansion.md](./04-gear-expansion.md)
-**Status:** ✅ COMPLETE — March 8, 2026
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-### Sub-audit 5: Global Block Library & Design System Expansion
+## 5. Success criteria
 
-**Prompt:** [05-design-system-expansion.md](./05-design-system-expansion.md)
-**Status:** READY FOR IMPLEMENTATION
+- [ ] All eleven held sibling files and the one active review are accounted for.
+- [ ] No historical completion/session assertion is represented as verified current progress.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-### Sub-audit 6: Content-Type Style Guide Expansion
+## 6. Report output
 
-**Prompt:** [06-style-guide-expansion.md](./06-style-guide-expansion.md)
-**Status:** PENDING EXECUTION
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-### Sub-audit 7: About Sub-Pages Enrichment (WebGL & Layouts)
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-**Prompt:** [07-about-subpage-enrichment.md](./07-about-subpage-enrichment.md)
-**Status:** PENDING EXECUTION
+## 7. Revision provenance
 
-### Sub-audit 8: Motion Playground & Advanced Interactions
-
-**Prompt:** [08-motion-playground.md](./08-motion-playground.md)
-**Status:** PENDING EXECUTION
-
-### Sub-audit 9: Neon Rainbow System & Legend
-
-**Prompt:** [09-neon-rainbow-system.md](./09-neon-rainbow-system.md)
-**Status:** PENDING EXECUTION
-
-### Sub-audit 10: Journey Sidebar Enhancement
-
-**Prompt:** [10-journey-sidebar.md](./10-journey-sidebar.md)
-**Status:** PENDING EXECUTION
-
----
-
-## Execution sequence
-
-```text
-
-1. Timeline expansion (Sub-audit 1) — ✅ COMPLETE
-   ├── Add contextual timelines to existing about sub-pages
-   ├── Enhance the Timeline component if needed
-   ├── Keep master History page but make it interactive
-   └── Update data files with categorised timeline events
-
-1. Portfolio redesign (Sub-audit 2) — ✅ COMPLETE
-    ├── 11 card shape specimens (dev tools page)
-    ├── 10 card interaction specimens (dev tools page)
-    ├── 6 grid layout specimens with pagination variants (dev tools page)
-    ├── Detail template hub + 6 content-type sub-pages (3 templates each)
-    └── New "Card & Layout Lab" dev tools category
-
-1. Resources page (Sub-audit 3) — COMPLETE
-   ├── /about/resources — getting started guide
-   ├── 5 getting started tips, 4 kit categories, 5 brands
-   ├── Cross-links to /toolkit, /portfolio, /videos
-   └── Added to /about landing, sitemap, SEO
-
-1. Gear page expansion (Sub-audit 4) — COMPLETE
-   ├── Expanded from 4 to 8 kit categories
-   ├── 5 recommended brands with URLs
-   ├── Kit wisdom section (8 tips)
-   └── CTA linking to /about/resources
-
-1. Design System Expansion (Sub-audit 5) — READY FOR IMPLEMENTATION
-   ├── 15/15 audit questions answered + Theme Engine specification received
-   ├── 195 variations across 19 block types
-   ├── 4 pattern compositions (pricing skipped)
-├── 8 themes (Dark, Brutalist, Neon, Glassmorphism, Neumorphism, Claymorphism,
-Retro, Skeuomorphic), segmented slider switcher
-├── 2 new dev tools pages (Google Fonts, Audio Concepts), visual waveforms,
-performance guards
-   └── Estimated Effort: 25-28 implementation sessions
-
-1. Style Guide Expansion (Sub-audit 6) — PENDING
-   ├── Rich text specimens with tabs (light/dark modes)
-   ├── FAQ sections per content type with tailored styling
-   ├── Template browser presentation
-   └── Live in new dev-tools special section
-
-1. About Sub-Pages Enrichment (Sub-audit 7) — PENDING
-   ├── Reusable WebGL 3D graphics component with customization variables
-   ├── Dedicated WebGL Dev Tools page
-├── Structural layout variety: parallax, card grids, split-screen, full-bleed
-images
-   ├── Neon hovers & glows on links, borders, pull quotes, timeline nodes
-   └── Apply uniquely to all 21 sub-pages in systematic phases
-
-1. Motion Playground & Advanced Interactions (Sub-audit 8) — PENDING
-   ├── Interactive Motion playground builder (tweak duration, easing, delay)
-   ├── Transition specimens (hover, focus, page transitions)
-   └── Interaction patterns (drag, scroll-triggered, parallax)
-
-1. Neon Rainbow System & Legend (Sub-audit 9) — PENDING
-├── Create `/dev-tools/neon-rainbow/` page mapping system and explaining
-implementation
-   ├── Assign signature neon colour per sub-page
-└── Apply matching tints to section dividers, card borders, icon accents,
-scroll-to-top, etc.
-
-1. Journey Sidebar Enhancement (Sub-audit 10) — PENDING
-└── Make the ChapterNav sidebar fixed/sticky specifically on `/about/journey/`
-page
-
-```text
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/feature-work/orchestrator.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.
