@@ -65,7 +65,7 @@ $ find guidelines -type f -name "*.md" | wc -l
     labels: ['type:documentation']
   }
   ```
-- **Verification Method:** 
+- **Verification Method:**
   1. Run `npm run validate:branch-name -- --branch aiops/refactor-guidelines` to confirm naming
   2. Test router directly: `node scripts/pr-template-router.js aiops/refactor-guidelines` should output `docs` template
   3. Verify typeMap includes: `aiops: { template: 'docs', labels: ['type:documentation'] }`
