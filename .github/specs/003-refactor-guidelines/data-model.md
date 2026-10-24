@@ -224,7 +224,7 @@ Expected post-refactor checksum:
 | **D4** (destinations & N-subset) | Which N-documents are created; G→new-path mapping | Blocks all G/N operations until mapping confirmed |
 | **D5** (preservation) | P-entity creation, old-path handling | Blocks pointer/redirect operations |
 | **D6** (backend) | Backend integration documentation | Blocks N-documents about signup/contact/providers |
-| **D7** (branch naming) | Specification branch validation and PR routing | ✅ RESOLVED — Canonical branch `docs/spec-003-guidelines-reconcile` validated for spec PR and routing; `aiops/` prefix routing fix documented separately in research.md |
+| **D7** (branch naming) | Specification branch validation and PR routing | ✅ RESOLVED — Canonical specification branch: `docs/spec-003-guidelines-reconcile` (active Phase 1 branch). Historical `aiops/refactor-guidelines` branch had routing issues (documented in research.md); D7 gate validates current canonical branch and routing template mapping |
 | **D8** (WordPress) | WordPress-related guidance scope | Blocks N-documents about WordPress migration |
 
 ---
