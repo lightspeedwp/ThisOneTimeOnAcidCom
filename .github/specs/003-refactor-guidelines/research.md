@@ -29,7 +29,7 @@ This research phase resolves technical unknowns and documents evidence-pending d
 
 **Evidence:**
 - Constitution § II: "Protected Files: CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, Supabase utils, .github/workflows/* are read-only system artifacts"
-- AGENTS.md § 332–343: `.github/` hierarchy is protected; changes require `locked-files-guard` approval
+- AGENTS.md § 332–343: Only `.github/workflows/*` changes require `locked-files-guard` approval; `.github/specs/` is not protected
 - spec.md line 44 references broken path `../../PROTECTED_FILES.txt` (does not exist)
 
 **Resolution:**
@@ -65,7 +65,10 @@ $ find guidelines -type f -name "*.md" | wc -l
     labels: ['type:documentation']
   }
   ```
-- **Verification Method:** Run `npm run validate:branch-name -- --branch aiops/refactor-guidelines` to confirm routing
+- **Verification Method:** 
+  1. Run `npm run validate:branch-name -- --branch aiops/refactor-guidelines` to confirm naming
+  2. Test router directly: `node scripts/pr-template-router.js aiops/refactor-guidelines` should output `docs` template
+  3. Verify typeMap includes: `aiops: { template: 'docs', labels: ['type:documentation'] }`
 - **Status:** This fix is NOT blocking specification refinement (it's a documentation/metadata issue, not a specification-gating issue)
 
 ### 5. Baseline Commit Reconciliation

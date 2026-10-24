@@ -50,9 +50,16 @@ ls -la
 grep -l "Specification 003" *.md contracts/*.md
 # Expected: All *.md files in this directory
 
-# 4. Check for TODO/NEEDS CLARIFICATION in research.md
-grep -i "needs clarification\|todo\|pending owner" research.md
-# Expected: No results (all clarifications resolved to "PENDING OWNER DECISION")
+# 4. Verify gate decisions are documented in research.md
+PENDING_GATES=$(grep -c "### Gate D[1-8].*PENDING OWNER DECISION" research.md)
+if [ "$PENDING_GATES" -gt 0 ]; then
+  echo "✓ Found $PENDING_GATES documented pending gate decisions"
+else
+  echo "✗ No gate decisions found in research.md"
+  exit 1
+fi
+# Verify no unresolved TODO/FIXME markers remain
+grep -i "TODO\|FIXME\|XXX" research.md && echo "✗ Found unresolved markers" && exit 1 || echo "✓ No unresolved markers"
 ```
 
 **Expected Outcome:**
@@ -108,10 +115,11 @@ grep -E "^### [0-9]+\. (Guideline|Supporting|New Guidance|Pointer)" \
 grep "^### D[0-8]:" .github/specs/003-refactor-guidelines/checklists/requirements.md
 # Expected: 8 lines (D0–D8)
 
-# 2. Check gate status (resolved vs pending)
-grep -E "RESOLVED|PENDING" .github/specs/003-refactor-guidelines/checklists/requirements.md | \
-  grep "^-" | wc -l
-# Expected: At least 7 (D1–D6, D8 marked PENDING; D0, D7 marked RESOLVED)
+# 2. Check gate status (resolved vs pending) from headings
+RESOLVED=$(grep -c "### .*RESOLVED" .github/specs/003-refactor-guidelines/checklists/requirements.md)
+PENDING=$(grep -c "### .*PENDING" .github/specs/003-refactor-guidelines/checklists/requirements.md)
+echo "Gate status: $RESOLVED resolved, $PENDING pending"
+# Expected: 2 resolved (D0, D7); 7 pending (D1–D6, D8)
 
 # 3. Verify each pending gate has clarification questions
 grep -A 5 "^### D[1-6]:\|^### D8:" \
@@ -199,7 +207,7 @@ grep "\[.*#" spec.md plan.md research.md data-model.md | \
 
 ```bash
 # 1. Read constitution principles
-grep -A 5 "^### [IVI]\." ../../.specify/memory/constitution.md | head -50
+grep -A 5 "^### [IVI]\." ../../../.specify/memory/constitution.md | head -50
 
 # 2. For each principle, verify research.md documents alignment
 grep -E "Principle (I|II|III|IV|V|VI|VII)" \
@@ -254,7 +262,12 @@ fi
 # 2. Data model validation
 echo "✓ Validating data model..."
 GUIDELINE_COUNT=$(find ../../../guidelines -name "*.md" 2>/dev/null | wc -l)
-echo "  ✓ Guideline files: $GUIDELINE_COUNT (expected: 116)"
+if [ "$GUIDELINE_COUNT" -eq 116 ]; then
+  echo "  ✓ Guideline files: $GUIDELINE_COUNT (expected: 116)"
+else
+  echo "  ✗ Guideline files: $GUIDELINE_COUNT (expected: 116) - MISMATCH" >&2
+  exit 1
+fi
 
 # 3. Gates documentation
 echo "✓ Checking decision gates..."

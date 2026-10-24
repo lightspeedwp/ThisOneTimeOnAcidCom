@@ -61,12 +61,12 @@ BASELINE (verified at creation)
 **Mapped S-Entities:**
 ```text
 S001: .claude/skills/INVENTORY.md (reference)
-S002: .claude/skills/workflow-orchestration/SKILL.md (protected)
-S003: .claude/skills/validate/SKILL.md (protected)
-S004: .claude/skills/test/SKILL.md (protected)
-S005: .claude/skills/changelog/SKILL.md (protected)
-S006: .claude/skills/branch-validation/SKILL.md (protected)
-S007: .claude/skills/labeling/SKILL.md (protected)
+S002: .agents/skills/workflow-orchestration/SKILL.md (protected; symlinked from .claude/skills/)
+S003: .agents/skills/validate/SKILL.md (protected; symlinked from .claude/skills/)
+S004: .agents/skills/test/SKILL.md (protected; symlinked from .claude/skills/)
+S005: .agents/skills/changelog/SKILL.md (protected; symlinked from .claude/skills/)
+S006: .agents/skills/branch-validation/SKILL.md (protected; symlinked from .claude/skills/)
+S007: .agents/skills/labeling/SKILL.md (protected; symlinked from .claude/skills/)
 S008: AGENTS.md (protected)
 S009: CONTRIBUTING.md (protected)
 ```
