@@ -1,6 +1,6 @@
 # Skill Inventory — ThisOneTimeOnAcidCom
 
-**Updated:** 23 October 2026
+**Updated:** 24 October 2026
 **Spec Reference:**
 `.github/specs/001-repo-governance-layout-and-agentic-workflows/spec.md` (R7.1)
 **Task:** T048
@@ -29,12 +29,13 @@ workflow. This inventory's slash examples refer to Claude invocation.
 | Validation | `validate/SKILL.md` |
 | Workflow orchestration | `workflow-orchestration/SKILL.md` |
 
-### Validation & Governance (2 skills)
+### Workflow and governance (3 custom skills)
 
 | Skill | Purpose | Invocation | File |
 |-------|---------|-----------|------|
 | Branch Validation | Validate branch names | `/branch-validation` or `npm run validate:branch-name` | `branch-validation/SKILL.md` |
-| Validate | Generic validation skill for configuration, lint, and schema checks | `/validate` | `validate/SKILL.md` |
+| Validate | Read-only assessment; separately authorised build/test execution | `/validate` | `validate/SKILL.md` |
+| Workflow orchestration | Prompt, audit, report and task workflow | `/workflow-orchestration` | `workflow-orchestration/SKILL.md` |
 
 ### Testing & Quality Assurance (1 skill)
 
@@ -42,7 +43,7 @@ workflow. This inventory's slash examples refer to Claude invocation.
 |-------|---------|-----------|------|
 | Test | Plan and execute test strategy, validation suites, and quality gates | `/test` | `test/SKILL.md` |
 
-### Release & Changelog Management (2 skills)
+### Release and GitHub workflow (2 custom skills)
 
 | Skill | Purpose | Invocation | File |
 |-------|---------|-----------|------|
@@ -50,6 +51,21 @@ workflow. This inventory's slash examples refer to Claude invocation.
 | Labeling | Manage GitHub issue and PR labeling workflows with consistent taxonomy | `/labeling` | `labeling/SKILL.md` |
 
 ---
+
+## Discovery and ownership boundary
+
+There are sixteen Codex entry points here: six custom plus ten generated.
+Claude retains six individual relative symlinks and ten separately generated
+native Spec Kit skill files. Its inventory is a pointer, not another authored
+copy. Gemini discovers shared custom skills and keeps ten native TOML commands.
+Its installed 0.41.2 supports `skills.disabled`, but isolation of the ten
+Codex-generated names remains blocked on an authorised trusted smoke test;
+no isolation configuration has been applied.
+
+Native adapters load a shared role, which must then read the operation-specific
+skills listed in `.agents/roles/INVENTORY.md`. Missing required instructions
+stop that action. Discovery, common frontmatter and prose budgets do not
+establish equal permissions or host enforcement across clients.
 
 ## Comprehensive Skill Specifications
 
@@ -185,11 +201,11 @@ Skills integrate with workflows in three patterns:
 
 - **Skill Specifications**: Each skill directory (`{name}/SKILL.md`)
 - **Agent Specifications**: `.agents/roles/INVENTORY.md`
-- **Budget Controls**: `.github/BUDGET_CONTROLS.md` (T050)
+- **Budget Controls**: `.claude/BUDGET_CONTROLS.md` (T050)
 - **Skill Routing**: `.claude/SKILL_ROUTING.md` (T051)
 - **Agent Governance**: `.claude/GOVERNANCE.md` (T052)
 
 ---
 
 *Maintained by Claude Haiku 4.5 and team*
-*Last updated: 19 October 2026*
+*Last updated: 24 October 2026*

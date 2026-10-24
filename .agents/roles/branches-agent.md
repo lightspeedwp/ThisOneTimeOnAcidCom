@@ -28,6 +28,19 @@ safely. It:
 
 ---
 
+## Required skill instructions
+
+Resolve all paths below from the **repository root**, even when launched from
+a subdirectory. Read each required skill in full before the relevant action:
+
+- `.agents/skills/branch-validation/SKILL.md`
+
+STOP if a required source is missing or unreadable; report the exact path.
+Reading a skill grants no additional permission. Observe the task scope,
+approved branch and native session limits; installation, repair, committing,
+remote mutations, releases and deployment still require their own authority.
+
+
 ## Authorised Branch Types
 
 The following 38 branch types are authorised and documented in
@@ -339,7 +352,7 @@ Before confirming a branch name, this agent verifies:
 - **[.github/docs/BRANCHING*STRATEGY*ONE*PAGER.md](../../.github/docs/BRANCHING*STRATEGY*ONE*PAGER.md)** — Quick reference
 - **[.agents/skills/branch-validation/SKILL.md](./../skills/branch-validation/SKILL.md)** — Branch validation skill for execution
 - **[scripts/validate-branch-name.js](../../scripts/validate-branch-name.js)** — Deterministic validation script
-- **[.claude/guides/worktrees.md](./../guides/worktrees.md)** — Claude worktree usage and safety
+- **[.claude/guides/worktrees.md](../../.claude/guides/worktrees.md)** — Claude worktree usage and safety
 
 ---
 

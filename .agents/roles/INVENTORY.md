@@ -1,6 +1,6 @@
 # Shared role inventory — ThisOneTimeOnAcidCom
 
-**Last Updated**: 2026-10-23
+**Last Updated**: 2026-10-24
 **Status**: Phase 2 Governance Documentation
 **Scope**: 20 agents, portfolio site specialized agents
 
@@ -44,6 +44,28 @@ No model override is introduced by these definitions.
 | **website-content-strategist-agent** | Website copy and engagement | Content | Site context | Content strategy | Read, Write, Bash | Content | Pending (TOA-271) |
 
 ---
+
+## Required and conditional skill dependencies
+
+Read sources from the repository root before the relevant action; STOP if a
+required source is unavailable. Native adapter → shared role → required skill
+is an instruction chain, not an automatic import or extra execution permission.
+
+| Role | Required custom skills | Conditional custom skills |
+| --- | --- | --- |
+| branches-agent | branch-validation | — |
+| changelog-agent | changelog | — |
+| labeling-agent | labeling | — |
+| testing-agent | test | — |
+| playwright-agent | test | — |
+| reviewer-agent | validate | — |
+| pr-agent | branch-validation, validate | labeling for requested label work; changelog for requested changelog work |
+| release-agent | validate, test, changelog | — |
+
+Skill paths are `.agents/skills/<name>/SKILL.md`; the roles contain explicit
+paths. The other twelve roles retain their existing scope; they do not load
+all skills by default. Tool metadata, inherited settings and prose budgets
+are not evidence of cross-client permission equivalence or enforced limits.
 
 ## Relationship Map
 

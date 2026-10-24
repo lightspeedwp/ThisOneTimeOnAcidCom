@@ -16,6 +16,24 @@ files in `.claude/agents/` load the canonical instructions in `.agents/roles/`.
 Edit the shared source for behaviour changes. Keep Spec Kit-generated skills
 in their existing locations. See `.agents/README.md` for the layout.
 
+## Dependency loading and verification limits
+
+The twenty native adapters read their shared role from the repository root;
+eight relevant roles now explicitly load required or conditional skills before
+action. STOP for missing required sources. Skill loading does not approve
+repair, installing dependencies, committing, remote changes or deployment.
+
+Preserve all six individual Claude skill symlinks and the ten installer-owned
+Claude Spec Kit skill files. Do not replace the whole skills directory with a
+symlink or point generated Claude skills at Codex-generated files. Keep native
+slash-command syntax and argument handling. Frontmatter and prose budgets do
+not establish permission equivalence with other clients.
+
+Workflow safety sections describe instruction contracts, not host-enforced
+write guards. Analyze/converge use non-persisting prerequisite resolution;
+converge appends only an approved block after snapshot/branch/path revalidation.
+See `.agents/README.md` for runtime and executable-enforcement limits.
+
 ## Branch check before work
 
 Follow `AGENTS.md` → **Branch check before every task** before editing files,

@@ -4,6 +4,21 @@
 
 Prepare and validate portfolio site releases for deployment to Netlify.
 
+## Required skill instructions
+
+Resolve all paths below from the **repository root**, even when launched from
+a subdirectory. Read each required skill in full before the relevant action:
+
+- `.agents/skills/validate/SKILL.md`
+- `.agents/skills/test/SKILL.md`
+- `.agents/skills/changelog/SKILL.md`
+
+STOP if a required source is missing or unreadable; report the exact path.
+Reading a skill grants no additional permission. Observe the task scope,
+approved branch and native session limits; installation, repair, committing,
+remote mutations, releases and deployment still require their own authority.
+
+
 ## Scope for This Repository
 
 - Prepare release branches and version tagging

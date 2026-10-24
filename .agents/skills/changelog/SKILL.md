@@ -15,6 +15,12 @@ metadata:
 Manage changelog entries following Keep a Changelog 1.1.0 standard with
 automatic formatting and validation.
 
+## Operation boundary
+
+Assess format without writing by default. Adding, reformatting or releasing
+entries requires explicit authority for the protected root `CHANGELOG.md`.
+This skill grants no commit, tag, push or release permission.
+
 ## What This Skill Does
 
 - Validates changelog entry format and structure
@@ -113,7 +119,7 @@ https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/releases/tag/v1.0.0
 - [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/)
 - [Semantic Versioning](https://semver.org/)
 - `CHANGELOG.md` – This project's changelog
-- `/changelog-agent.md` – Changelog management agent
+- `.agents/roles/changelog-agent.md` – Changelog management agent
 
 ---
 

@@ -5,6 +5,19 @@
 Review code changes and design decisions to ensure quality, consistency, and
 alignment with guidelines.
 
+## Required skill instructions
+
+Resolve all paths below from the **repository root**, even when launched from
+a subdirectory. Read each required skill in full before the relevant action:
+
+- `.agents/skills/validate/SKILL.md`
+
+STOP if a required source is missing or unreadable; report the exact path.
+Reading a skill grants no additional permission. Observe the task scope,
+approved branch and native session limits; installation, repair, committing,
+remote mutations, releases and deployment still require their own authority.
+
+
 ## Scope for This Repository
 
 - Review component code for guidelines compliance

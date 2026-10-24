@@ -84,7 +84,7 @@ Codex custom prompts are deprecated and are not the basis of this setup.
 ## Shared custom skills and roles
 
 Six custom skills live in `.agents/skills/`, alongside Codex's generated Spec
-Kit skills. Codex and Gemini discover that shared skill location natively;
+Kit skills. Codex and Gemini discover that shared skill location natively (no `skillRoot` setting is used);
 Claude uses relative links from `.claude/skills/`. Shared instructions for
 all twenty roles live in `.agents/roles/` and are loaded by native definitions
 in `.codex/agents/`, `.claude/agents/` and `.gemini/agents/`.
@@ -116,6 +116,38 @@ The repository `.codex/` folder is committed normally, with no `.gitignore`
 entry. Store credentials, session state and machine-specific settings in your
 user-level `~/.codex/` folder. A `config.local.toml` is not an automatically
 loaded override; use supported user-level configuration for personal settings.
+
+## Safeguards and verification limits
+
+The native Specify, Plan, Checklist, Analyze and Converge instructions retain
+separate installer ownership and client invocation syntax. Their leading
+workflow contracts require approved branch/operation checks before writing
+hooks or setup; Specify distinguishes a safe current branch from an approved
+branch-only transition and revalidates actual target checkout before writes.
+Use the validated configured specification root for scanning, numbering and
+candidate construction. Canonical component containment must include existing
+ancestors, symlinks, artefacts and feature-state destinations.
+
+Analyze and converge prerequisite resolution uses
+`SPECIFY_FEATURE_NO_PERSIST=1` with required-file validation. Analyze core is
+read-only. Converge assessment preserves state; an append needs approval of the
+exact task block and an unchanged snapshot. A clean result changes nothing.
+Writing-hook permission is independent of append permission.
+
+These instructions and structural tests do not establish host enforcement.
+The existing raw helpers still accept out-of-boundary path inputs. Strong
+approval, branch, configured-root, symlink and append enforcement requires a
+separately approved executable-helper/client-control plan and adversarial
+runtime tests. Do not describe a structural pass as a protected write path.
+
+Gemini 0.41.2 supports `skills.disabled` for generated-skill isolation, but the
+checkout is untrusted during this run. The conditional settings change is
+blocked; no trust settings were changed. Discovery/configuration inspection
+is distinct from representative model execution and permission validation.
+
+Integration manifests deliberately retain their original fingerprints. Review
+local drift and upgrade behaviour in a disposable checkout; do not force an
+upgrade or re-baseline hashes to hide customisations.
 
 ## References
 

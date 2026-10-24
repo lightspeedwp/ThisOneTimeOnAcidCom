@@ -20,3 +20,21 @@ branch with `npm run validate:branch-name` before writing files.
 Shared custom skills are discovered in `.agents/skills/`. Native Gemini agent
 files in `.gemini/agents/` load canonical role instructions from `.agents/roles/`.
 See `.agents/README.md` for the shared layout and maintenance rules.
+
+## Shared dependencies and workflow limits
+
+Native adapter → `.agents/roles/<name>.md` → operation-specific
+`.agents/skills/<name>/SKILL.md` is an explicit read chain from the repository
+root. STOP if required instructions are unavailable; loading them grants no
+extra permission. Keep native dotted Spec Kit commands and generated ownership.
+
+Gemini 0.41.2 supports `skills.disabled`, but isolating the ten shared
+Codex-generated Spec Kit skills remains blocked on a trusted, authorised smoke
+test. No disabled-name list or trust change has been applied. The six custom
+sources and ten native commands stay in place.
+
+Follow each workflow's leading branch, destination, operation and hook gates.
+Analyze/converge resolve prerequisites with `SPECIFY_FEATURE_NO_PERSIST=1`;
+analysis is read-only and convergence appends only an approved block against
+an unchanged snapshot. Instructions and structural checks are not proof of
+host-enforced permissions. See `.agents/README.md` for outstanding limits.

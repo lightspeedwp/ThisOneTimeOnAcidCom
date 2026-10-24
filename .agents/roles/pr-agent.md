@@ -5,6 +5,25 @@
 Assist with pull request creation, review coordination, and merge management for
 portfolio site changes.
 
+## Required skill instructions
+
+Resolve all paths below from the **repository root**, even when launched from
+a subdirectory. Read each required skill in full before the relevant action:
+
+- `.agents/skills/branch-validation/SKILL.md`
+- `.agents/skills/validate/SKILL.md`
+
+Conditional dependencies: read `.agents/skills/labeling/SKILL.md` before
+a requested label-selection/application operation, and
+`.agents/skills/changelog/SKILL.md` before requested changelog assessment or
+preparation. Do not perform either operation merely because this role loaded.
+
+STOP if a required source is missing or unreadable; report the exact path.
+Reading a skill grants no additional permission. Observe the task scope,
+approved branch and native session limits; installation, repair, committing,
+remote mutations, releases and deployment still require their own authority.
+
+
 ## Scope for This Repository
 
 - Guide PR creation and description writing

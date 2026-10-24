@@ -14,6 +14,16 @@ metadata:
 Execute tests and validate test coverage for portfolio site functionality and
 quality.
 
+## Operation boundary
+
+Inspect `package.json`, runner configuration and relevant tests before choosing
+commands. Assessment reads existing evidence; running tests can write caches,
+coverage, browser traces or build output and can start services. Obtain the
+appropriate task authorisation before executing those operations. A missing
+runner or browser is a reported prerequisite, not permission to install it.
+Do not install dependencies, repair files, commit or publish results merely
+because testing found a failure. Record actual command results and limits.
+
 ## Current Test Status
 
 ✅ **Test infrastructure is now available.** The following test suites are
@@ -93,10 +103,9 @@ Planned additions to increase coverage:
 
 ## Related Skills
 
-- [Build Validation Skill](../build/SKILL.md)
+- [Build verification guide](../../../docs/TESTING.md) (`docs/TESTING.md` from the repository root)
 - [Validation Skill](../validate/SKILL.md)
 
 ---
 
-*Test execution and quality validation for portfolio site. Currently in planning
-stage.*
+*Test execution guidance; verify current commands and report only checks actually run.*

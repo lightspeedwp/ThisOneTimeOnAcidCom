@@ -9,6 +9,12 @@ metadata:
 
 # Labeling Workflow Skill
 
+## Operation boundary
+
+Selecting or auditing labels is read-only. Applying labels, editing taxonomy
+or changing issue/PR metadata is a separate remote write requiring explicit
+authority. Skill loading does not grant it.
+
 ## Purpose
 
 Maintain consistent GitHub issue and PR labeling using standardized taxonomy for
@@ -148,9 +154,9 @@ meta:has-pr
 
 ## References
 
-- `../../.github/labels.yml` – Canonical label definitions (organization-wide)
-- `../../docs/LABEL_STRATEGY.md` – Label taxonomy documentation
-- `../../docs/LABELING.md` – Labeling guide and conventions
+- [Canonical organisation labels](https://github.com/lightspeedwp/.github/blob/develop/.github/labels.yml) – verified upstream authority; no local copy is assumed
+- `CONTRIBUTING.md` → Label prefix requirements (repository-root-relative)
+- `.github/workflows/labeling-unified.yml` – existing read-only evidence of upstream label loading; do not modify protected automation
 - [GitHub Labeling](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels) – GitHub docs
 
 ---

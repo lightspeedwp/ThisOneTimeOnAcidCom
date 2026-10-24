@@ -31,6 +31,8 @@ format. Each role has a small native definition:
 Each definition tells its agent to read the matching `.agents/roles/<name>.md`
 in full before acting, resolving the path from the Git repository root. It
 also requires root `AGENTS.md` and stops if the role document is unavailable.
+The role then reads its required or conditional canonical skills before the
+relevant action; missing required instructions stop progression.
 There is no separate shared-role path setting or file import assumed by these
 definitions. Models and session permission settings are inherited.
 
@@ -65,6 +67,38 @@ Verify relative links resolve in a fresh checkout, parse the native TOML/YAML
 files and confirm that every definition points to an existing shared role.
 File validation establishes layout integrity; an actual agent invocation is
 needed to exercise that client's runtime tool behaviour.
+
+## Safeguards and verification limits
+
+The native Specify, Plan, Checklist, Analyze and Converge instructions retain
+separate installer ownership and client invocation syntax. Their leading
+workflow contracts require approved branch/operation checks before writing
+hooks or setup; Specify distinguishes a safe current branch from an approved
+branch-only transition and revalidates actual target checkout before writes.
+Use the validated configured specification root for scanning, numbering and
+candidate construction. Canonical component containment must include existing
+ancestors, symlinks, artefacts and feature-state destinations.
+
+Analyze and converge prerequisite resolution uses
+`SPECIFY_FEATURE_NO_PERSIST=1` with required-file validation. Analyze core is
+read-only. Converge assessment preserves state; an append needs approval of the
+exact task block and an unchanged snapshot. A clean result changes nothing.
+Writing-hook permission is independent of append permission.
+
+These instructions and structural tests do not establish host enforcement.
+The existing raw helpers still accept out-of-boundary path inputs. Strong
+approval, branch, configured-root, symlink and append enforcement requires a
+separately approved executable-helper/client-control plan and adversarial
+runtime tests. Do not describe a structural pass as a protected write path.
+
+Gemini 0.41.2 supports `skills.disabled` for generated-skill isolation, but the
+checkout is untrusted during this run. The conditional settings change is
+blocked; no trust settings were changed. Discovery/configuration inspection
+is distinct from representative model execution and permission validation.
+
+Integration manifests deliberately retain their original fingerprints. Review
+local drift and upgrade behaviour in a disposable checkout; do not force an
+upgrade or re-baseline hashes to hide customisations.
 
 ## Sources
 

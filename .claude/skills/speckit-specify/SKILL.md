@@ -19,24 +19,102 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Workflow safety contract
+
+### Current branch and approved target
+
+Inspect `git status --short` and `git branch --show-current`; preserve unrelated
+work. Read `.agents/skills/branch-validation/SKILL.md`. Validate the safe current
+branch with `npm run validate:branch-name`. STOP on `main`, `develop`, detached HEAD,
+validation failure or missing approval of the exact target task branch. Validate
+that approved target independently with
+`npm run validate:branch-name -- --branch <approved-name>`.
+
+If the safe current branch differs from the approved target, the **only** hook
+allowed before target checkout is an explicitly authorised **branch-only**
+creation/switch hook. Inspect its implementation and delegated commands first:
+it must preserve existing work and change Git branch state only, without
+feature-state or artefact writes. Pass the exact target as `GIT_BRANCH_NAME`;
+a combined branch-and-file-writing hook cannot use this exception and must STOP
+for a separately scoped plan. No hook, missing hook or an unapproved hook is
+permission to create a branch automatically.
+
+After that hook, require its confirmed success and independently read the
+actual checked-out branch; require it to equal the approved target and rerun
+`npm run validate:branch-name`. Hook JSON alone is not checkout evidence. If
+target checkout is still missing or the result is failed, cancelled, missing
+or unconfirmed, STOP without dispatching any file-writing hook, updating
+`.specify/feature.json` or entering Step 3. When no branch transition is needed,
+the actual approved target must already be checked out and validated.
+Before every writing hook and core write, repeat the actual-target and path
+gates and require approval of the specific writing operation. Branch approval
+alone is not operation approval. Feature numbering is not branch approval.
+
+### Path boundary before effects
+
+Resolve checkout root R, approved boundary B = R/.github/specs, and
+`specifyFeatureDirectory` from `.specify/init-options.json` as configured_root C
+(default `.github/specs`). Resolve relative values from R. Canonicalise R, B,
+C, the candidate feature F and every existing ancestor, including symlinks when
+leaf paths do not exist. Reject traversal escapes and use **component containment**,
+never string-prefix matching: B must remain inside R, C must equal or descend
+from B, and F must be a strict descendant of C. A sibling-prefix path such as
+`.github/specs-other` is outside B. Configuration or an environment value is
+not exception approval; an intentional exception requires its separately
+approved destination and verified validation coverage before proceeding.
+
+Before any hook or setup/write operation, resolve feature context without
+persistence: read the explicit `SPECIFY_FEATURE_DIRECTORY` or pinned
+`.specify/feature.json` without updating either. Specify may compute its new
+candidate in memory from C. Validate each intended artefact path, including
+`spec.md`, `plan.md`, `tasks.md`, `checklists/`, `contracts/` and existing
+artefact symlinks, against canonical F; validate `.specify/feature.json` and
+its ancestors against R before any state write. Reject paths or symlinks that
+redirect writes outside those boundaries. Revalidate immediately before each
+write and after each hook; rejected paths must not persist state, create an
+artefact, or dispatch a writing hook.
+
+Use `SPECIFY_FEATURE_NO_PERSIST=1` for prerequisite resolution, retaining all
+required-file checks. For analyze and converge, --paths-only must not replace
+`--require-spec --require-tasks --include-tasks` validation. For plan, a
+non-persisting paths-only discovery may locate F before setup, but manually
+require the contained spec to exist before calling the writing setup helper.
+
+### Hook and operation boundary
+
+Inspect each hook implementation and delegated commands; a YAML claim or
+mandatory flag grants no permission. A hook that may write requires its own
+explicit approval for its command, paths and effects, separate from core
+operation approval. Apply branch and path gates before invocation. STOP for
+failed, cancelled, missing or unconfirmed results from any invoked hook; no
+artefact/state writes or success report may follow such a result. Do not treat
+an emitted EXECUTE_COMMAND block as a successful invocation. Missing hook
+configuration means no hook ran; it never bypasses core gates. Malformed
+configuration or an unresolved mandatory condition stops progression.
+
+These are **instruction-level contracts**, not host-enforced security controls.
+The existing helpers do not implement all approval/containment checks. If a
+required guarantee cannot be established, STOP that operation, report the gap
+and request a revised executable-helper plan; do not invent enforcement or
+expand permissions through these instructions.
+
 ## Pre-Execution Checks
 
 **Branch safety before every pre-hook**:
-- Before dispatching any `before_specify` hook, including hooks that only write files, inspect `git status --short` and `git branch --show-current`; preserve uncommitted work and follow the branch policy in `AGENTS.md`.
-- Run `npm run validate:branch-name` on the actual checked-out branch and require the exact task branch supplied or approved by the user. STOP on validation failure, `main`, `develop`, detached HEAD, or missing approval; do not dispatch any hook or write files until this gate passes. Recheck before each hook, including after a previous hook changes the branch.
-- Before a `before_specify` hook can create or switch a branch, require the user's approval of the exact task branch and validate that name with `npm run validate:branch-name -- --branch <approved-name>`. Pass the approved name as `GIT_BRANCH_NAME`; stop on failure or missing approval. Feature numbering is not branch approval.
-- If an invoked `before_specify` hook fails, is cancelled, or has no confirmed successful result, STOP before Step 3. Do not create feature artifacts or write `.specify/feature.json`.
+Apply the current-branch/approved-target distinction in the leading Workflow
+safety contract. Only the separately authorised branch-only hook can run from
+a different safe task branch; all writing hooks require actual target checkout.
 
 **Check for extension hooks (before specification)**:
 - Check if `.specify/extensions.yml` exists in the project root.
 - If it exists, read it and look for entries under the `hooks.before_specify` key
-- If the YAML cannot be parsed or is invalid, do not skip silently: tell the user that `.specify/extensions.yml` could not be read (include the parser error) and that no hooks were checked, including any mandatory (`optional: false`) hooks registered there, then continue normally
+- If the YAML cannot be parsed or is invalid, do not skip silently: tell the user that `.specify/extensions.yml` could not be read (include the parser error) and that no hooks were checked, including any mandatory (`optional: false`) hooks registered there, then STOP before hooks, setup or writes
 - Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
 - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
+  - If the hook defines a non-empty `condition`, leave evaluation to the HookExecutor implementation; do not guess its result. If a mandatory hook condition is unresolved, STOP before progression. For an optional hook with an unresolved condition, report it as not invoked; this is not a successful hook result
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
+- For each executable hook that passes the leading Workflow safety contract (including its independent operation approval), output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
     ## Extension Hooks
@@ -58,7 +136,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
     Wait for the result of the hook command before proceeding to the Outline.
     ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after the leading Workflow safety contract passes, actually invoke the hook and require confirmed success before continuing; STOP on failure, cancellation or a missing/unconfirmed result. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
 ## Outline
@@ -83,7 +161,7 @@ Given that feature description, do this:
 
    Inspect `git status --short` and `git branch --show-current` and run `npm run validate:branch-name` on the actual checked-out branch. Require that it is the exact task branch supplied or approved by the user. STOP on validation failure, `main`, `develop`, detached HEAD, or missing approval. This gate applies even when no hook exists or no hook ran; until it passes, do not write `.github/specs/` or `.specify/feature.json`. If a pre-hook ran, also require its confirmed success before proceeding to Step 3.
 
-   If a `before_specify` hook ran successfully in the Pre-Execution Checks above, it will have created/switched to a git branch and output JSON containing `BRANCH_NAME` and `FEATURE_NUM`. Note these values for reference, but the branch name does **not** dictate the spec directory name.
+   If an authorised branch-only `before_specify` hook ran successfully, it may report `BRANCH_NAME` and `FEATURE_NUM`; verify actual checkout independently. Other pre-hooks do not imply a branch transition. The branch name does **not** dictate the spec directory name.
 
    If the user explicitly provided `GIT_BRANCH_NAME`, pass it through to the hook so the branch script uses the exact value as the branch name (bypassing all prefix/suffix generation).
 
@@ -91,14 +169,16 @@ Given that feature description, do this:
 
    Read `specifyFeatureDirectory` from `.specify/init-options.json` as the configured spec root (`.github/specs` in this repository). All feature artifacts, including an explicit `SPECIFY_FEATURE_DIRECTORY` override, must resolve beneath that root.
 
+   Validate configured_root C against R and B using the leading Path boundary contract **before scanning, numbering or constructing a destination**. Use that same validated C throughout; do not accept a nested C and then fall back to a hardcoded root.
+
    **Resolution order for `SPECIFY_FEATURE_DIRECTORY`**:
    1. If the user explicitly provided `SPECIFY_FEATURE_DIRECTORY` (e.g., via environment variable, argument, or configuration), resolve it relative to the repository root when not absolute, then validate containment as described below; never use it as-is
-   2. Otherwise, auto-generate it under `.github/specs/`:
+   2. Otherwise, auto-generate it beneath the validated configured root C:
       - Check `.specify/init-options.json` for `feature_numbering` (preferred) or `branch_numbering` (deprecated, migration only — will be removed in a future release)
       - If `"timestamp"`: prefix is `YYYYMMDD-HHMMSS` (current timestamp)
-      - If `"sequential"` or absent: prefix is `NNN` (next available 3-digit number after scanning existing directories in `.github/specs/`)
+      - If `"sequential"` or absent: prefix is `NNN` (next available 3-digit number after scanning existing directories in the validated configured root C)
       - Construct the directory name: `<prefix>-<short-name>` (e.g., `003-user-auth` or `20260319-143022-user-auth`)
-      - Set `SPECIFY_FEATURE_DIRECTORY` to `.github/specs/<directory-name>`
+      - Set `SPECIFY_FEATURE_DIRECTORY` to `<configured-root>/<directory-name>` (C joined with the generated name; `.github/specs/<directory-name>` only when C is the default)
       - If `branch_numbering` was used (and `feature_numbering` was absent), emit a one-line warning: "⚠️ `branch_numbering` in init-options.json is deprecated. Rename to `feature_numbering`."
 
    **Validate the resolved directory before any writes**:
@@ -256,13 +336,13 @@ Given that feature description, do this:
 Check if `.specify/extensions.yml` exists in the project root.
 - If it does not exist, or no hooks are registered under `hooks.after_specify`, skip to the Completion Report.
 - If it exists, read it and look for entries under the `hooks.after_specify` key.
-- If the YAML cannot be parsed or is invalid, do not skip silently: tell the user that `.specify/extensions.yml` could not be read (include the parser error) and that no hooks were checked, including any mandatory (`optional: false`) hooks registered there, then continue to the Completion Report.
+- If the YAML cannot be parsed or is invalid, do not skip silently: tell the user that `.specify/extensions.yml` could not be read (include the parser error) and that no hooks were checked, including any mandatory (`optional: false`) hooks registered there, then STOP and report the hook configuration failure.
 - Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
 - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
+  - If the hook defines a non-empty `condition`, leave evaluation to the HookExecutor implementation; do not guess its result. If a mandatory hook condition is unresolved, STOP before progression. For an optional hook with an unresolved condition, report it as not invoked; this is not a successful hook result
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
+- For each executable hook that passes the leading Workflow safety contract (including its independent operation approval), output the following based on its `optional` flag:
   - **Mandatory hook** (`optional: false`) — **You MUST emit `EXECUTE_COMMAND:` for each mandatory hook**:
     ```
     ## Extension Hooks
@@ -271,7 +351,7 @@ Check if `.specify/extensions.yml` exists in the project root.
     Executing: `/{command}`
     EXECUTE_COMMAND: {command}
     ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after the leading Workflow safety contract passes, actually invoke the hook and require confirmed success before continuing; STOP on failure, cancellation or a missing/unconfirmed result. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
   - **Optional hook** (`optional: true`):
     ```
     ## Extension Hooks

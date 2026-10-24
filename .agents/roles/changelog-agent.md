@@ -5,6 +5,19 @@
 Manage CHANGELOG.md entries following Keep a Changelog 1.1.0 standard with
 validation and automatic formatting.
 
+## Required skill instructions
+
+Resolve all paths below from the **repository root**, even when launched from
+a subdirectory. Read each required skill in full before the relevant action:
+
+- `.agents/skills/changelog/SKILL.md`
+
+STOP if a required source is missing or unreadable; report the exact path.
+Reading a skill grants no additional permission. Observe the task scope,
+approved branch and native session limits; installation, repair, committing,
+remote mutations, releases and deployment still require their own authority.
+
+
 ## Scope for This Repository
 
 - Validate changelog entries on PR submission

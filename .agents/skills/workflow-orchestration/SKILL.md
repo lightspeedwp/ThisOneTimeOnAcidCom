@@ -579,7 +579,7 @@ Missing frontmatter means:
 
 ### Template 1: Prompt Frontmatter (Single-File)
 
-**Location:** `templates/prompt-frontmatter-single.yml`
+**Source:** inline example below, checked against `guidelines/prompt-creation-guidelines.md` (repository-root-relative). There is no external `templates/prompt-frontmatter-single.yml` file to copy.
 
 Copy and customize:
 
@@ -599,7 +599,7 @@ related_tasks: "/tasks/{topic}-tasks.md"
 
 ### Template 2: Report Frontmatter (Single-File)
 
-**Location:** `templates/report-frontmatter-single.yml`
+**Source:** inline example below, checked against `guidelines/report-creation-guidelines.md` (repository-root-relative). There is no external `templates/report-frontmatter-single.yml` file to copy.
 
 Copy and customize:
 
@@ -619,7 +619,7 @@ status: "complete"
 
 ### Template 3: Task List Frontmatter
 
-**Location:** `templates/task-frontmatter.yml`
+**Source:** inline example below, checked against `guidelines/prompt-creation-guidelines.md` (repository-root-relative). There is no external `templates/task-frontmatter.yml` file to copy.
 
 Copy and customize:
 
@@ -640,7 +640,7 @@ status: "active"
 
 ### Template 4: Orchestrator Frontmatter
 
-**Location:** `templates/orchestrator-frontmatter.yml`
+**Source:** inline example below, checked against `guidelines/prompt-creation-guidelines.md` (repository-root-relative). There is no external `templates/orchestrator-frontmatter.yml` file to copy.
 
 Copy and customize:
 
@@ -682,7 +682,7 @@ Running your first audit?
 
 - [ ] Decide: Single-file or orchestrator?
 - [ ] Create `/prompts/{topic}.md` (or folder + 00-ORCHESTRATOR.md)
-- [ ] Add required YAML frontmatter (copy from templates)
+- [ ] Add required YAML frontmatter using the inline examples and the existing guideline source; do not invent missing template files
 - [ ] Define scope, method, acceptance criteria
 - [ ] Run audit; document findings
 - [ ] Create `/reports/{topic}/report.md` with frontmatter

@@ -19,19 +19,79 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Workflow safety contract
+
+### Read-only core and separate operations
+
+Analysis core is read-only: inspecting artefacts does not authorise repairs,
+branch switching, feature-state persistence or remote changes. A separately
+approved writing hook must satisfy the branch gate before it runs: inspect
+status, preserve work, validate the exact approved target name and the actual
+checked-out branch, and STOP on missing approval, validation failure, `main`,
+`develop`, detached HEAD or branch mismatch. Keep such operations outside the
+analysis core; skill loading does not grant their approval.
+
+### Path boundary before effects
+
+Resolve checkout root R, approved boundary B = R/.github/specs, and
+`specifyFeatureDirectory` from `.specify/init-options.json` as configured_root C
+(default `.github/specs`). Resolve relative values from R. Canonicalise R, B,
+C, the candidate feature F and every existing ancestor, including symlinks when
+leaf paths do not exist. Reject traversal escapes and use **component containment**,
+never string-prefix matching: B must remain inside R, C must equal or descend
+from B, and F must be a strict descendant of C. A sibling-prefix path such as
+`.github/specs-other` is outside B. Configuration or an environment value is
+not exception approval; an intentional exception requires its separately
+approved destination and verified validation coverage before proceeding.
+
+Before any hook or setup/write operation, resolve feature context without
+persistence: read the explicit `SPECIFY_FEATURE_DIRECTORY` or pinned
+`.specify/feature.json` without updating either. Specify may compute its new
+candidate in memory from C. Validate each intended artefact path, including
+`spec.md`, `plan.md`, `tasks.md`, `checklists/`, `contracts/` and existing
+artefact symlinks, against canonical F; validate `.specify/feature.json` and
+its ancestors against R before any state write. Reject paths or symlinks that
+redirect writes outside those boundaries. Revalidate immediately before each
+write and after each hook; rejected paths must not persist state, create an
+artefact, or dispatch a writing hook.
+
+Use `SPECIFY_FEATURE_NO_PERSIST=1` for prerequisite resolution, retaining all
+required-file checks. For analyze and converge, --paths-only must not replace
+`--require-spec --require-tasks --include-tasks` validation. For plan, a
+non-persisting paths-only discovery may locate F before setup, but manually
+require the contained spec to exist before calling the writing setup helper.
+
+### Hook and operation boundary
+
+Inspect each hook implementation and delegated commands; a YAML claim or
+mandatory flag grants no permission. A hook that may write requires its own
+explicit approval for its command, paths and effects, separate from core
+operation approval. Apply branch and path gates before invocation. STOP for
+failed, cancelled, missing or unconfirmed results from any invoked hook; no
+artefact/state writes or success report may follow such a result. Do not treat
+an emitted EXECUTE_COMMAND block as a successful invocation. Missing hook
+configuration means no hook ran; it never bypasses core gates. Malformed
+configuration or an unresolved mandatory condition stops progression.
+
+These are **instruction-level contracts**, not host-enforced security controls.
+The existing helpers do not implement all approval/containment checks. If a
+required guarantee cannot be established, STOP that operation, report the gap
+and request a revised executable-helper plan; do not invent enforcement or
+expand permissions through these instructions.
+
 ## Pre-Execution Checks
 
 **Check for extension hooks (before analysis)**:
 - Check if `.specify/extensions.yml` exists in the project root.
 - If it exists, read it and look for entries under the `hooks.before_analyze` key
-- If the YAML cannot be parsed or is invalid, do not skip silently: tell the user that `.specify/extensions.yml` could not be read (include the parser error) and that no hooks were checked, including any mandatory (`optional: false`) hooks registered there, then continue normally
+- If the YAML cannot be parsed or is invalid, do not skip silently: tell the user that `.specify/extensions.yml` could not be read (include the parser error) and that no hooks were checked, including any mandatory (`optional: false`) hooks registered there, then STOP before hooks, setup or writes
 - Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
 - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
+  - If the hook defines a non-empty `condition`, leave evaluation to the HookExecutor implementation; do not guess its result. If a mandatory hook condition is unresolved, STOP before progression. For an optional hook with an unresolved condition, report it as not invoked; this is not a successful hook result
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
 - **Hook safety gate (applies to optional and mandatory hooks)**: Project-defined hooks are not automatically trusted. Before invoking each hook, inspect its implementation and delegated commands to verify a read-only contract; an assertion in `.specify/extensions.yml` alone is insufficient. If read-only behavior cannot be verified or the hook may write, present the command and possible effects and require explicit user approval for that hook. Do not invoke it while approval is pending; if approval is declined, report it as skipped. Analysis remains read-only; a hook that may write must be treated as a separate, explicitly approved operation outside this analysis.
-- For each hook that passes the safety gate, output the following based on its `optional` flag:
+- For each hook that passes both the safety gate and the leading Workflow safety contract, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
     ## Extension Hooks
@@ -53,7 +113,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
     Wait for the result of the hook command before proceeding to the Goal.
     ```
-    Only after the hook safety gate passes, invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after the hook safety gate and leading Workflow safety contract pass, invoke the hook and require confirmed success before continuing; STOP on failure, cancellation or a missing/unconfirmed result. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
 ## Goal
@@ -70,7 +130,7 @@ Identify inconsistencies, duplications, ambiguities, and underspecified items ac
 
 ### 1. Initialize Analysis Context
 
-Run `.specify/scripts/bash/check-prerequisites.sh --json --require-spec --require-tasks --include-tasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
+Run `SPECIFY_FEATURE_NO_PERSIST=1 .specify/scripts/bash/check-prerequisites.sh --json --require-spec --require-tasks --include-tasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
 
 - SPEC = FEATURE_DIR/spec.md
 - PLAN = FEATURE_DIR/plan.md
@@ -212,14 +272,14 @@ Ask the user: "Would you like me to suggest concrete remediation edits for the t
 
 After reporting, check if `.specify/extensions.yml` exists in the project root.
 - If it exists, read it and look for entries under the `hooks.after_analyze` key
-- If the YAML cannot be parsed or is invalid, do not skip silently: tell the user that `.specify/extensions.yml` could not be read (include the parser error) and that no hooks were checked, including any mandatory (`optional: false`) hooks registered there, then continue normally
+- If the YAML cannot be parsed or is invalid, do not skip silently: tell the user that `.specify/extensions.yml` could not be read (include the parser error) and that no hooks were checked, including any mandatory (`optional: false`) hooks registered there, then STOP before hooks, setup or writes
 - Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
 - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
+  - If the hook defines a non-empty `condition`, leave evaluation to the HookExecutor implementation; do not guess its result. If a mandatory hook condition is unresolved, STOP before progression. For an optional hook with an unresolved condition, report it as not invoked; this is not a successful hook result
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
 - **Hook safety gate (applies to optional and mandatory hooks)**: Project-defined hooks are not automatically trusted. Before invoking each hook, inspect its implementation and delegated commands to verify a read-only contract; an assertion in `.specify/extensions.yml` alone is insufficient. If read-only behavior cannot be verified or the hook may write, present the command and possible effects and require explicit user approval for that hook. Do not invoke it while approval is pending; if approval is declined, report it as skipped. Analysis remains read-only; a hook that may write must be treated as a separate, explicitly approved operation outside this analysis.
-- For each hook that passes the safety gate, output the following based on its `optional` flag:
+- For each hook that passes both the safety gate and the leading Workflow safety contract, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
     ## Extension Hooks
@@ -239,7 +299,7 @@ After reporting, check if `.specify/extensions.yml` exists in the project root.
     Executing: `/{command}`
     EXECUTE_COMMAND: {command}
     ```
-    Only after the hook safety gate passes, invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after the hook safety gate and leading Workflow safety contract pass, invoke the hook and require confirmed success before continuing; STOP on failure, cancellation or a missing/unconfirmed result. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
 ## Operating Principles
