@@ -7,7 +7,7 @@ metadata:
   author: "github-spec-kit"
   source: "templates/commands/specify.md"
 user-invocable: true
-disable-model-invocation: false
+disable-model-invocation: true
 ---
 
 
@@ -20,6 +20,11 @@ $ARGUMENTS
 You **MUST** consider the user input before proceeding (if not empty).
 
 ## Pre-Execution Checks
+
+**Branch approval before branch-changing hooks**:
+- Inspect `git status --short` and `git branch --show-current`; preserve uncommitted work and follow the branch policy in `AGENTS.md`.
+- Before a `before_specify` hook can create or switch a branch, require the user's approval of the exact task branch and validate that name with `npm run validate:branch-name -- --branch <approved-name>`. Pass the approved name as `GIT_BRANCH_NAME`; stop on failure or missing approval. Feature numbering is not branch approval.
+- If an invoked `before_specify` hook fails, is cancelled, or has no confirmed successful result, STOP before Step 3. Do not create feature artifacts or write `.specify/feature.json`.
 
 **Check for extension hooks (before specification)**:
 - Check if `.specify/extensions.yml` exists in the project root.
@@ -73,7 +78,9 @@ Given that feature description, do this:
      - "Create a dashboard for analytics" → "analytics-dashboard"
      - "Fix payment processing timeout bug" → "fix-payment-timeout"
 
-2. **Branch creation** (optional, via hook):
+2. **Branch validation and approval** (required before Step 3; branch creation via hook is optional):
+
+   Inspect `git status --short` and `git branch --show-current` and run `npm run validate:branch-name` on the actual checked-out branch. Require that it is the exact task branch supplied or approved by the user. STOP on validation failure, `main`, `develop`, detached HEAD, or missing approval. This gate applies even when no hook exists or no hook ran; until it passes, do not write `.github/specs/` or `.specify/feature.json`. If a pre-hook ran, also require its confirmed success before proceeding to Step 3.
 
    If a `before_specify` hook ran successfully in the Pre-Execution Checks above, it will have created/switched to a git branch and output JSON containing `BRANCH_NAME` and `FEATURE_NUM`. Note these values for reference, but the branch name does **not** dictate the spec directory name.
 
@@ -81,10 +88,10 @@ Given that feature description, do this:
 
 3. **Create the spec feature directory**:
 
-   Specs live under the default `.github/specs/` directory unless the user explicitly provides `SPECIFY_FEATURE_DIRECTORY`.
+   Read `specifyFeatureDirectory` from `.specify/init-options.json` as the configured spec root (`.github/specs` in this repository). All feature artifacts, including an explicit `SPECIFY_FEATURE_DIRECTORY` override, must resolve beneath that root.
 
    **Resolution order for `SPECIFY_FEATURE_DIRECTORY`**:
-   1. If the user explicitly provided `SPECIFY_FEATURE_DIRECTORY` (e.g., via environment variable, argument, or configuration), use it as-is
+   1. If the user explicitly provided `SPECIFY_FEATURE_DIRECTORY` (e.g., via environment variable, argument, or configuration), resolve it relative to the repository root when not absolute, then validate containment as described below; never use it as-is
    2. Otherwise, auto-generate it under `.github/specs/`:
       - Check `.specify/init-options.json` for `feature_numbering` (preferred) or `branch_numbering` (deprecated, migration only — will be removed in a future release)
       - If `"timestamp"`: prefix is `YYYYMMDD-HHMMSS` (current timestamp)
@@ -93,7 +100,12 @@ Given that feature description, do this:
       - Set `SPECIFY_FEATURE_DIRECTORY` to `.github/specs/<directory-name>`
       - If `branch_numbering` was used (and `feature_numbering` was absent), emit a one-line warning: "⚠️ `branch_numbering` in init-options.json is deprecated. Rename to `feature_numbering`."
 
-   **Create the directory and spec file**:
+   **Validate the resolved directory before any writes**:
+   - Canonicalize the configured spec root and the candidate feature directory, resolving `..` segments and symlinks in every existing ancestor even when the final directory does not exist yet. Compare path components, not a raw string prefix: `.github/specs-other` is outside `.github/specs`.
+   - Require the resolved candidate to be a feature subdirectory beneath the configured `.github/specs/` root, not the root itself. Apply this check to explicit overrides and generated paths before `mkdir`, template copying, or persisting `.specify/feature.json`. Reject existing artifact symlinks that would redirect a write outside the validated feature directory.
+   - Reject paths outside that root unless the user has explicitly approved an intentional exception and the exception's destination and validation coverage have been defined and verified. An environment variable or path argument alone is not an exception. STOP without writing if containment or exception validation fails.
+
+   **Create the directory and spec file** (only after branch approval, successful branch validation, any invoked pre-hook's success, and path validation):
    - `mkdir -p SPECIFY_FEATURE_DIRECTORY`
    - Resolve the active `spec-template` through the Spec Kit preset/template resolution stack (equivalent to `specify preset resolve spec-template`)
    - Copy the resolved `spec-template` file to `SPECIFY_FEATURE_DIRECTORY/spec.md` as the starting point

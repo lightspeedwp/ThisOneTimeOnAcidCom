@@ -21,6 +21,12 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Pre-Execution Checks
 
+**Branch-safety gate (before hooks or any file-writing commands)**:
+- Inspect `git status --short` and `git branch --show-current` from the repository root; preserve unrelated uncommitted work.
+- Follow `AGENTS.md`, `.agents/skills/branch-validation/SKILL.md`, and `.agents/roles/branches-agent.md`. Use only the exact task branch the user supplied or approved; an unrelated valid branch is insufficient.
+- Run `npm run validate:branch-name` on the checked-out branch. STOP on validation failure, `main`, `develop`, or detached HEAD (an empty branch name), before invoking hooks or writing files.
+- If a branch must be created or switched, obtain approval for the exact name and validate it with `npm run validate:branch-name -- --branch <approved-name>` first. Recheck the checked-out branch before writes. Feature numbers and hook output never replace approval or validation.
+
 **Check for extension hooks (before implementation)**:
 - Check if `.specify/extensions.yml` exists in the project root.
 - If it exists, read it and look for entries under the `hooks.before_implement` key
@@ -30,7 +36,9 @@ You **MUST** consider the user input before proceeding (if not empty).
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
   - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
+- **Hook approval and result gate (pre- and post-hooks)**: Before executing each repository-defined hook from `.specify/extensions.yml`, present its resolved command and expected effects and obtain explicit user approval for that hook. General skill-loading approval does not authorize this dispatch path. Do not invoke a hook while approval is pending. If approval is declined for an optional hook, report it as skipped; if declined for a mandatory hook, STOP and report the blocked workflow.
+- Invoke only an approved hook, wait for its result, and verify success. Continue only after a successful pre-hook or post-hook. On failure, cancellation, or an unknown result, STOP and report the hook, failure details, and incomplete workflow; do not execute later steps or report successful completion. Recheck the branch-safety gate after any hook that can change branches.
+- For each approved hook, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
     ## Extension Hooks
@@ -46,13 +54,13 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
     ## Extension Hooks
 
-    **Automatic Pre-Hook**: {extension}
+    **Approved Pre-Hook**: {extension}
     Executing: `/{command}`
     EXECUTE_COMMAND: {command}
 
     Wait for the result of the hook command before proceeding to the Outline.
     ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after explicit approval for this hook, invoke it, wait for completion, and verify success. STOP and report any failure before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
 ## Outline
@@ -195,16 +203,18 @@ Check if `.specify/extensions.yml` exists in the project root.
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
   - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
-  - **Mandatory hook** (`optional: false`) — **You MUST emit `EXECUTE_COMMAND:` for each mandatory hook**:
+- **Hook approval and result gate (pre- and post-hooks)**: Before executing each repository-defined hook from `.specify/extensions.yml`, present its resolved command and expected effects and obtain explicit user approval for that hook. General skill-loading approval does not authorize this dispatch path. Do not invoke a hook while approval is pending. If approval is declined for an optional hook, report it as skipped; if declined for a mandatory hook, STOP and report the blocked workflow.
+- Invoke only an approved hook, wait for its result, and verify success. Continue only after a successful pre-hook or post-hook. On failure, cancellation, or an unknown result, STOP and report the hook, failure details, and incomplete workflow; do not execute later steps or report successful completion. Recheck the branch-safety gate after any hook that can change branches.
+- For each approved hook, output the following based on its `optional` flag:
+  - **Mandatory hook** (`optional: false`) — emit `EXECUTE_COMMAND:` only after approval:
     ```
     ## Extension Hooks
 
-    **Automatic Hook**: {extension}
+    **Approved Hook**: {extension}
     Executing: `/{command}`
     EXECUTE_COMMAND: {command}
     ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after explicit approval for this hook, invoke it, wait for completion, and verify success. STOP and report any failure before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
   - **Optional hook** (`optional: true`):
     ```
     ## Extension Hooks

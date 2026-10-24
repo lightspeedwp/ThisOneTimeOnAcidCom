@@ -6,7 +6,7 @@ metadata:
   author: "github-spec-kit"
   source: "templates/commands/converge.md"
 user-invocable: true
-disable-model-invocation: false
+disable-model-invocation: true
 ---
 
 
@@ -30,7 +30,8 @@ You **MUST** consider the user input before proceeding (if not empty).
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
   - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
+- **Hook safety gate (applies to optional and mandatory hooks)**: Project-defined hooks are not automatically trusted. Before invoking each hook, inspect its implementation and delegated commands to verify a read-only contract; an assertion in `.specify/extensions.yml` alone is insufficient. If read-only behavior cannot be verified or the hook may write, present the command and possible effects and require explicit user approval for that hook. Do not invoke it while approval is pending; if approval is declined, report it as skipped. The append-only and byte-for-byte guarantees apply to convergence itself. A hook that may write must be treated as a separate, explicitly approved operation; approval to append tasks in Step 7 does not approve hook writes. Disclose any such writes separately from the convergence result.
+- For each hook that passes the safety gate, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
 
     ```text
@@ -49,13 +50,13 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```text
     ## Extension Hooks
 
-    **Automatic Pre-Hook**: {extension}
+    **Verified or Approved Pre-Hook**: {extension}
     Executing: `/{command}`
     EXECUTE_COMMAND: {command}
 
     Wait for the result of the hook command before proceeding to the Goal.
     ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after the hook safety gate passes, invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
 
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
@@ -208,7 +209,9 @@ Before appending anything, output a compact, severity-graded summary (no file wr
 
 **If there are one or more actionable findings** (`tasks_appended` outcome):
 
-Append to the **end** of `tasks.md`, per the append contract:
+After presenting the Step 6 findings summary, show the proposed convergence tasks and target `tasks.md` path. STOP and require explicit user confirmation before appending. While confirmation is pending, do not write tasks or proceed to later steps. If confirmation is declined, leave `tasks.md` byte-for-byte unchanged and report that no tasks were appended; do not report `tasks_appended`.
+
+After confirmation, append to the **end** of `tasks.md`, per the append contract:
 
 1. Scan all existing task IDs; let `M` be the maximum. Determine the next phase number `N`
    (highest existing phase + 1).
@@ -257,7 +260,8 @@ After producing the result, check if `.specify/extensions.yml` exists in the pro
 - Report the convergence outcome (`converged` or `tasks_appended`) in-session before listing
   any hooks, so users can decide whether to run optional follow-up commands.
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
+- **Hook safety gate (applies to optional and mandatory hooks)**: Project-defined hooks are not automatically trusted. Before invoking each hook, inspect its implementation and delegated commands to verify a read-only contract; an assertion in `.specify/extensions.yml` alone is insufficient. If read-only behavior cannot be verified or the hook may write, present the command and possible effects and require explicit user approval for that hook. Do not invoke it while approval is pending; if approval is declined, report it as skipped. The append-only and byte-for-byte guarantees apply to convergence itself. A hook that may write must be treated as a separate, explicitly approved operation; approval to append tasks in Step 7 does not approve hook writes. Disclose any such writes separately from the convergence result.
+- For each hook that passes the safety gate, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
 
     ```text
@@ -276,10 +280,10 @@ After producing the result, check if `.specify/extensions.yml` exists in the pro
     ```text
     ## Extension Hooks
 
-    **Automatic Hook**: {extension}
+    **Verified or Approved Hook**: {extension}
     Executing: `/{command}`
     EXECUTE_COMMAND: {command}
     ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after the hook safety gate passes, invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
 
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently

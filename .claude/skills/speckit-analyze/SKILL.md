@@ -30,7 +30,8 @@ You **MUST** consider the user input before proceeding (if not empty).
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
   - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
+- **Hook safety gate (applies to optional and mandatory hooks)**: Project-defined hooks are not automatically trusted. Before invoking each hook, inspect its implementation and delegated commands to verify a read-only contract; an assertion in `.specify/extensions.yml` alone is insufficient. If read-only behavior cannot be verified or the hook may write, present the command and possible effects and require explicit user approval for that hook. Do not invoke it while approval is pending; if approval is declined, report it as skipped. Analysis remains read-only; a hook that may write must be treated as a separate, explicitly approved operation outside this analysis.
+- For each hook that passes the safety gate, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
     ## Extension Hooks
@@ -46,13 +47,13 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
     ## Extension Hooks
 
-    **Automatic Pre-Hook**: {extension}
+    **Verified or Approved Pre-Hook**: {extension}
     Executing: `/{command}`
     EXECUTE_COMMAND: {command}
 
     Wait for the result of the hook command before proceeding to the Goal.
     ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after the hook safety gate passes, invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
 ## Goal
@@ -217,7 +218,8 @@ After reporting, check if `.specify/extensions.yml` exists in the project root.
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
   - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
 - When constructing command invocations from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
+- **Hook safety gate (applies to optional and mandatory hooks)**: Project-defined hooks are not automatically trusted. Before invoking each hook, inspect its implementation and delegated commands to verify a read-only contract; an assertion in `.specify/extensions.yml` alone is insufficient. If read-only behavior cannot be verified or the hook may write, present the command and possible effects and require explicit user approval for that hook. Do not invoke it while approval is pending; if approval is declined, report it as skipped. Analysis remains read-only; a hook that may write must be treated as a separate, explicitly approved operation outside this analysis.
+- For each hook that passes the safety gate, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
     ## Extension Hooks
@@ -233,11 +235,11 @@ After reporting, check if `.specify/extensions.yml` exists in the project root.
     ```
     ## Extension Hooks
 
-    **Automatic Hook**: {extension}
+    **Verified or Approved Hook**: {extension}
     Executing: `/{command}`
     EXECUTE_COMMAND: {command}
     ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+    Only after the hook safety gate passes, invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
 ## Operating Principles

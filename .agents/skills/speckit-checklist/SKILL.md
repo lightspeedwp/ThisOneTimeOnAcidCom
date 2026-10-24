@@ -84,7 +84,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Execution Steps
 
-1. **Setup**: Run `.specify/scripts/bash/check-prerequisites.sh --json --template checklist-template` from repo root and parse JSON for FEATURE_DIR, AVAILABLE_DOCS list, and TEMPLATE_CONTENT.
+1. **Setup**: Run `.specify/scripts/bash/check-prerequisites.sh --json --include-tasks --template checklist-template` from repo root and parse JSON for FEATURE_DIR, AVAILABLE_DOCS list, and TEMPLATE_CONTENT.
+   - The feature directory and `plan.md` are mandatory prerequisites. If the check fails, STOP and report the missing prerequisite; run the plan workflow to create a missing `plan.md` before retrying.
    - All file paths must be absolute.
    - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
@@ -130,8 +131,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 5. **Load feature context**: Read from FEATURE_DIR:
    - spec.md: Feature requirements and scope
-   - plan.md (if exists): Technical details, dependencies
-   - tasks.md (if exists): Implementation tasks
+   - **REQUIRED**: plan.md: Technical details, dependencies
+   - Load additional documents returned in AVAILABLE_DOCS, including implementation context from tasks.md
 
    **Context Loading Strategy**:
    - Load only necessary portions relevant to active focus areas (avoid full-file dumping)

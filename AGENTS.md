@@ -70,7 +70,15 @@ spec root (`.github/specs`). Scan that directory for existing feature numbers;
 the appropriate existing directory when continuing a feature. Persist the full
 feature directory in `.specify/feature.json` so downstream commands resolve the
 same location. Root `specs/` defaults in upstream documentation do not override
-this repository rule. Spec directory numbering never determines the Git branch.
+this repository rule. An explicit `SPECIFY_FEATURE_DIRECTORY` must also resolve
+beneath the configured `.github/specs/` root. Before any artifact or feature-state
+write, canonicalize the root and candidate (including `..` segments and symlinks
+in existing ancestors), require containment by path components, and reject write
+paths redirected outside the feature directory by artifact symlinks. Reject
+out-of-root paths unless the user explicitly approves an intentional exception
+whose destination and validation coverage have been defined and verified. A path
+override alone is not approval. Apply this gate in every specify workflow.
+Spec directory numbering never determines the Git branch.
 
 ### Shared skills and agent roles
 

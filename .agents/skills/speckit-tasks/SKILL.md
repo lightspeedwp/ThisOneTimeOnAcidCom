@@ -18,6 +18,12 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Pre-Execution Checks
 
+**Branch-safety gate (before hooks or any file-writing commands)**:
+- Inspect `git status --short` and `git branch --show-current` from the repository root; preserve unrelated uncommitted work.
+- Follow `AGENTS.md`, `.agents/skills/branch-validation/SKILL.md`, and `.agents/roles/branches-agent.md`. Use only the exact task branch the user supplied or approved; an unrelated valid branch is insufficient.
+- Run `npm run validate:branch-name` on the checked-out branch. STOP on validation failure, `main`, `develop`, or detached HEAD (an empty branch name), before invoking hooks or writing files.
+- If a branch must be created or switched, obtain approval for the exact name and validate it with `npm run validate:branch-name -- --branch <approved-name>` first. Recheck the checked-out branch before writes. Feature numbers and hook output never replace approval or validation.
+
 **Check for extension hooks (before tasks generation)**:
 - Check if `.specify/extensions.yml` exists in the project root.
 - If it exists, read it and look for entries under the `hooks.before_tasks` key
@@ -54,7 +60,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. **Setup**: Run `.specify/scripts/bash/setup-tasks.sh --json` from repo root and parse FEATURE_DIR, TASKS_TEMPLATE_CONTENT, TASKS_TEMPLATE, and AVAILABLE_DOCS list. `FEATURE_DIR` and `TASKS_TEMPLATE` must be absolute paths when provided. `AVAILABLE_DOCS` is a list of document names/relative paths available under `FEATURE_DIR` (for example `research.md` or `contracts/`). For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **Setup**: Recheck Git status, the current branch, user approval, and `npm run validate:branch-name` as required by the branch-safety gate above. STOP on `main`, `develop`, detached HEAD, or failed validation before running `setup-tasks.sh` or writing feature artifacts. Then run `.specify/scripts/bash/setup-tasks.sh --json` from repo root and parse FEATURE_DIR, TASKS_TEMPLATE_CONTENT, TASKS_TEMPLATE, and AVAILABLE_DOCS list. `FEATURE_DIR` and `TASKS_TEMPLATE` must be absolute paths when provided. `AVAILABLE_DOCS` is a list of document names/relative paths available under `FEATURE_DIR` (for example `research.md` or `contracts/`). For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 2. **Load design documents**: Read from FEATURE_DIR:
    - **Required**: plan.md (tech stack, libraries, structure), spec.md (user stories with priorities)
