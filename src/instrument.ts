@@ -8,16 +8,25 @@
  * `release` option is set here.
  */
 import * as Sentry from "@sentry/react";
+import { useEffect } from "react";
+import { createRoutesFromChildren, matchRoutes, useLocation, useNavigationType } from "react-router";
+import { sentryConfig } from "virtual:sentry-config";
 
-var dsn = import.meta.env.VITE_SENTRY_DSN as string | undefined;
+var dsn = sentryConfig.dsn;
 
 if (dsn) {
   Sentry.init({
     dsn: dsn,
-    environment: import.meta.env.MODE,
+    environment: sentryConfig.environment,
 
     integrations: [
-      Sentry.browserTracingIntegration(),
+      Sentry.reactRouterV7BrowserTracingIntegration({
+        useEffect: useEffect,
+        useLocation: useLocation,
+        useNavigationType: useNavigationType,
+        createRoutesFromChildren: createRoutesFromChildren,
+        matchRoutes: matchRoutes,
+      }),
       Sentry.replayIntegration({
         maskAllText: true,
         blockAllMedia: true,
@@ -25,13 +34,13 @@ if (dsn) {
     ],
 
     // Tracing: page load, navigation, and API call spans.
-    tracesSampleRate: import.meta.env.PROD ? 0.2 : 1.0,
+    tracesSampleRate: sentryConfig.tracesSampleRate,
 
     // Session Replay: lightweight sampling in general, full capture on errors.
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
   });
-} else if (import.meta.env.DEV) {
+} else if (sentryConfig.development) {
   // eslint-disable-next-line no-console
   console.warn("[sentry] VITE_SENTRY_DSN is not set — Sentry is disabled.");
 }
