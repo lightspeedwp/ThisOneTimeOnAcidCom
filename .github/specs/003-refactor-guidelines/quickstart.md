@@ -315,7 +315,7 @@ grep -A 10 "^### D[X]:" .github/specs/003-refactor-guidelines/checklists/require
 
 **Likely cause:** Files added/removed since baseline.
 
-**Fix:** 
+**Fix:**
 ```bash
 find guidelines -name "*.md" | wc -l  # Get current count
 git log --oneline -1 b7c3c44  # Verify baseline commit

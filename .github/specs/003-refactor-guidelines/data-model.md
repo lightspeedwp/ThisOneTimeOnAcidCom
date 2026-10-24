@@ -217,7 +217,7 @@ Expected post-refactor checksum:
 ## Decision Gates & State Dependencies
 
 | Gate | Controls | Impact on Model |
-|---|---|---|
+| --- | --- | --- |
 | **D1** (book/site identity) | N-documents that make identity claims | Blocks N-content development for identity-bearing docs |
 | **D2** (manuscript/access) | Publication boundaries in documentation | Blocks N-documents about access control, visibility |
 | **D3** (design authority) | Design examples, palette/font references | Blocks design-related N-documents until authority confirmed |

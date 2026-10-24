@@ -220,7 +220,7 @@ These decisions require owner input and are documented here as dependencies for 
 ## Summary of Research Findings
 
 | Item | Status | Evidence | Blocker |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Constitutional alignment | ✅ VERIFIED | Constitution § I–VII all compatible | NO |
 | Protected-files governance | ✅ VERIFIED | AGENTS.md § 331–343; Constitution § II | NO |
 | Guideline file count | ✅ VERIFIED | 116 files confirmed | NO |
