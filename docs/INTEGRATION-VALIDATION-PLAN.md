@@ -1,352 +1,213 @@
-# Integration Validation Plan
+# Integration validation plan
 
-**Date:** 2026-10-22  
-**PR:** fix/coderabbit-review-findings-netlify  
-**Related:** PRs #345, #343; Issues #6, #418
+Source review: 24 October 2026, revision
+`3f583002482d80ffd1910676bcf7c63e13989b20`.
 
-## Overview
+Original plan date: 22 October 2026.
+Historical branch reference: `fix/coderabbit-review-findings-netlify`.
+Related work: PRs #345 and #343; issues #6 and #418.
 
-This document outlines validation procedures for external integrations (Google Fonts, Typeform, YouTube, Vimeo) on the Netlify preview deployment. Testing ensures Content Security Policy (CSP) headers do not block third-party resources and integrations function correctly.
+This plan describes checks, not completed tests. No deployment checker,
+browser integration or performance measurement was run for this review.
+Use a specifically authorised deployment and record its exact revision.
+Do not change hosting, CSP, application code or live customer data through
+this documentation procedure.
 
----
+## Integration checks
 
-## Integrations & Expected Behavior
+First identify a current route containing each integration. Source components
+do not prove that an integration is present on the selected deployment.
+Record absent test pages and unavailable services as coverage gaps, not passes.
 
-### 1. Google Fonts
+### Google Fonts
 
-**Files:** `src/app/index.html`
+Root `index.html` loads `src/main.tsx`, which imports `src/styles/index.css`.
+The reviewed Vite configuration does not select `src/app/index.html` as an
+alternate HTML input.
 
-**Configuration:**
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@300..700&family=Righteous&family=Playfair+Display:wght@400..700&family=JetBrains+Mono:wght@300..700&family=Fira+Code:wght@300..700&family=Space+Mono:wght@400;700&family=Vampiro+One&display=swap" rel="stylesheet">
-```
+The nested HTML contains Google Fonts preconnects and a `display=swap` request
+for Space Grotesk, Inter, Righteous, Playfair Display, JetBrains Mono, Fira Code,
+Space Mono and Vampiro One. `src/styles/fonts.css` contains a different request.
+Their existence does not establish which requests a deployed page makes.
 
-**Expected Behavior:**
-- Preconnect reduces latency to fonts.googleapis.com
-- CSS is loaded with `display=swap` to show fallback system fonts while web fonts load
-- Fallback text (system fonts) appears while web fonts load, then swaps to web fonts once loaded
-- All 8 variable font families available within 3 seconds
+Check actual HTML, loaded stylesheets, requested families/weights, network
+responses and rendered fonts. Record fallback and final rendering under stated
+browser, network and cache conditions. Inspect `fonts.googleapis.com` and
+`fonts.gstatic.com` where actually requested.
 
-**Test Procedure:**
-1. Open preview URL in browser
-2. Open DevTools → Network tab
-3. Check that requests to `fonts.googleapis.com` and `fonts.gstatic.com` return 200
-4. Note time to first paint (Performance tab)
-5. Verify fallback fonts appear initially, then swap to web fonts
-6. Verify all pages display correct fonts (not stuck on fallback system fonts)
+Do not call every family variable, guarantee availability within three seconds,
+or infer latency, layout stability or font rendering from a preconnect or
+`display=swap` declaration. Record loading failures and console/CSP observations.
 
-**Success Criteria:**
-- ✅ Fonts load with no console errors
-- ✅ No CSP violations related to font URLs
-- ✅ Fallback text visible while web fonts load, then final web fonts render
-- ✅ LCP (Largest Contentful Paint) < 3.0s
+### Typeform
 
----
+`src/app/components/common/TypeformEmbed.tsx` requests
+`https://embed.typeform.com/next/embed.js` and checks for an existing embed
+script before adding one. That source check does not prove successful rendering
+or absence of duplicate loads during real navigation.
 
-### 2. Typeform
+On a page containing the widget:
 
-**Files:** `src/app/components/common/TypeformEmbed.tsx`
+- Record script and frame requests and any CSP/CORS/loading errors.
+- Check inline rendering, labels, keyboard interaction and validation behaviour.
+- Observe repeated mounts/navigation for duplicate-loading behaviour.
+- Submit only with separate authorisation using an appropriate test form and
+  test data; do not send live submissions merely to complete this plan.
 
-**Configuration:**
-```typescript
-script.src = 'https://embed.typeform.com/next/embed.js'
-```
+### YouTube and Vimeo
 
-**Expected Behavior:**
-- Typeform embed script loads dynamically
-- Forms render inline without navigation
-- No CSP blocks for `embed.typeform.com`
-- Script loaded only once (existing script check prevents duplicates)
+`src/app/components/ui/VideoPlayer.tsx` detects supported URL patterns and
+renders iframe embeds. Its normalisation includes
+`https://www.youtube.com/embed/` and `https://player.vimeo.com/video/`.
 
-**Test Procedure:**
-1. Navigate to any page containing a Typeform embed
-2. Open DevTools → Console tab
-3. Check for CSP/CORS errors
-4. Verify form renders inline
-5. Test form interaction (type in field, view validation)
-6. Submit form (if available)
+For each integration actually present:
 
-**Success Criteria:**
-- ✅ Script loads with no CSP violations
-- ✅ Form renders without navigation
-- ✅ Form is interactive (can type, select, submit)
-- ✅ No duplicate script loading
+- Record the original resource, resulting iframe URL and response/error evidence.
+- Check rendering, playback, audio, controls and fullscreen behaviour.
+- Check keyboard interaction and responsive states.
+- Record console/CSP observations and provider restrictions.
 
----
+Do not assume another hostname, including `youtube-nocookie.com`, is used or
+authorised merely because it appeared in older documentation.
 
-### 3. YouTube Embeds
+## CSP evidence
 
-**Files:** `src/app/components/ui/VideoPlayer.tsx`
+Root `netlify.toml` explicitly defers CSP and declares no
+Content-Security-Policy header. The generated `dist/_headers` mechanism emits
+asset cache rules, not a CSP. `src/app/netlify.toml` is absent at this revision;
+references to its archived draft do not identify an available file.
 
-**Configuration:**
-```typescript
-// Detects and converts YouTube URLs to embed format
-// Supports: youtube.com/watch?v=ID and youtu.be/ID
-const embedUrl = `https://www.youtube.com/embed/${videoId}`
-```
+For the selected deployment, inspect document responses for enforced and
+report-only CSPs and inspect the HTML for a CSP meta policy. Record actual
+values or absence, then correlate console/network observations with each
+integration.
 
-**Expected Behavior:**
-- YouTube embeds load via iframe
-- Videos play inline with controls
-- No CSP blocks for `youtube.com` and `youtube-nocookie.com`
-- Responsive iframe respects container width
+`frame-ancestors` governs ancestors embedding this site. It does not authorise
+this site's external frames; `connect-src` alone does not authorise scripts
+or iframe documents.
 
-**Test Procedure:**
-1. Navigate to pages containing YouTube embeds
-2. Open DevTools → Console tab
-3. Check for CSP/CORS errors
-4. Verify iframe renders with video
-5. Test video playback (click play, verify video plays)
-6. Verify full-screen capability
-7. Check responsive behavior (resize window)
+Do not copy the old proposed policy into hosting configuration or prescribe
+`'unsafe-inline'` or nonces as a documentation correction. Policy design and
+deployment support require separate review. Absence of CSP errors is not
+proof of integration success or security.
 
-**Success Criteria:**
-- ✅ Iframe loads without CSP violations
-- ✅ Video plays with audio
-- ✅ Controls visible and functional
-- ✅ Responsive on mobile/tablet/desktop
-- ✅ No console errors
+## Deployment checker contract
 
----
+The defined invocation is:
 
-### 4. Vimeo Embeds
-
-**Files:** `src/app/components/ui/VideoPlayer.tsx`
-
-**Configuration:**
-```typescript
-// Detects and converts Vimeo URLs to embed format
-// Supports: vimeo.com/ID and player.vimeo.com embed
-const embedUrl = `https://player.vimeo.com/video/${videoId}`
-```
-
-**Expected Behavior:**
-- Vimeo embeds load via iframe (player.vimeo.com)
-- Videos play inline with controls
-- No CSP blocks for `player.vimeo.com` or `vimeo.com`
-- Responsive iframe respects container width
-
-**Test Procedure:**
-1. Navigate to pages containing Vimeo embeds
-2. Open DevTools → Console tab
-3. Check for CSP/CORS errors
-4. Verify iframe renders with video
-5. Test video playback (click play, verify video plays)
-6. Verify full-screen capability
-7. Check responsive behavior (resize window)
-
-**Success Criteria:**
-- ✅ Iframe loads without CSP violations
-- ✅ Video plays with audio
-- ✅ Controls visible and functional
-- ✅ Responsive on mobile/tablet/desktop
-- ✅ No console errors
-
----
-
-## CSP Validation
-
-**Active Policy:** Content-Security-Policy header is currently **NOT defined** in the active `netlify.toml`. The draft policy in `src/app/netlify.toml` is intentionally deferred because it would block Typeform, YouTube, and Vimeo embeds.
-
-**Future Policy (when CSP is enabled):**
-```text
-Content-Security-Policy: default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://embed.typeform.com https://www.youtube.com https://player.vimeo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://player.vimeo.com https://embed.typeform.com; img-src 'self' data: https:;
-```
-
-**Note:** When CSP is enabled, ensure `'unsafe-inline'` is used for inline styles and scripts, or implement nonces. Replace nonce placeholders with generated values for each request.
-
-**Current Validation Steps:**
-1. Open DevTools → Network tab
-2. Inspect response headers for any page
-3. Note that `Content-Security-Policy` header is **not present** (by design)
-4. Verify third-party resources load without CSP blocks:
-   - Typeform embed script: `embed.typeform.com`
-   - Google Fonts: `fonts.googleapis.com`, `fonts.gstatic.com`
-   - YouTube embeds: `www.youtube.com`
-   - Vimeo embeds: `player.vimeo.com`
-
-**Success Criteria:**
-- ✅ No CSP violations logged in console
-- ✅ All integrations can load resources (currently unblocked)
-- ✅ Once CSP is implemented, third-party domains are correctly allowlisted
-
----
-
-## Deployment Validation Script
-
-**Script:** `scripts/check-netlify-headers.mjs`
-
-**Usage:**
 ```bash
-node scripts/check-netlify-headers.mjs <deploy-preview-url>
+node scripts/check-netlify-headers.mjs <deployment-base-url>
 ```
 
-**Example:**
-```bash
-node scripts/check-netlify-headers.mjs https://deploy-preview-XXX--thisonetimeonacid.netlify.app
-```
+Replace the argument placeholder with the exact authorised deployment URL.
+The checker makes HTTP requests and does not follow redirects automatically.
 
-**Expected Output:**
-```text
-200  /  [text/html]  cache-control: public, max-age=0, must-revalidate
-200  /journal  [text/html]  cache-control: public, max-age=0, must-revalidate
-200  /about-ash  [text/html]  cache-control: public, max-age=0, must-revalidate
-200  /assets/index-BiYfWfa0.js  [application/javascript]  cache-control: public, max-age=31536000, immutable
-200  /assets/index-BMyFmeQv.css  [text/css]  cache-control: public, max-age=31536000, immutable
-200  /favicon.ico  [image/x-icon]  cache-control: (empty or default)
-404  /assets/index-missing0.js  [text/html]  cache-control: public, max-age=0, must-revalidate
+| Probe | Implemented assertions |
+|---|---|
+| `/`, `/journal`, `/about-ash` | 200; HTML Content-Type; Cache-Control containing `max-age=0` and `must-revalidate`; configured nosniff, referrer and frame-option values; non-empty Permissions-Policy |
+| `/assets/index-missing0.js` | 404; no immutable caching |
+| `/favicon.ico` | 200; `image/*` Content-Type; no immutable caching |
+| First JavaScript and CSS references extracted from home-page `/assets/` URLs | 200; matching Content-Types; exact immutable cache value after whitespace normalisation |
 
-All header checks passed for <deploy-preview-url>
-```
+The missing-asset probe does not require a particular Content-Type; a 200 HTML
+SPA response is a failure. The checker does not establish that every extracted
+filename matches the generator's hash pattern or that every asset is covered.
 
-**Validation Checks:**
-- ✅ HTML routes return 200 with revalidation headers
-- ✅ Hashed assets return 200 with immutable caching
-- ✅ Missing assets return 404 (SPA fallback to HTML)
-- ✅ Favicon returns 200 with image content-type (not text/html)
-- ✅ Security headers present on all routes
+Output lists HTML routes, missing asset and favicon before sampled assets.
+Record real output rather than manufacturing a transcript with old filenames.
+Missing URL exits 2; collected assertion failures exit 1.
 
----
+A success message covers implemented assertions only. It does not verify
+security headers on every route, CSP compatibility, application rendering,
+browser integrations or performance.
+The root catch-all does not explicitly define the required missing-asset
+exception; record mismatches without changing deployment configuration.
 
-## Performance Metrics
+## Performance measurement
 
-**Baseline Expectations (from PR #345):**
+The earlier plan attributed these targets to PR #345. They remain reported
+targets, not new measurements or newly verified acceptance decisions.
 
-| Metric | Target | Notes |
-|--------|--------|-------|
-| LCP (Largest Contentful Paint) | < 3.0s | HTML render + fonts |
-| INP (Interaction to Next Paint) | < 200ms | React interactivity responsiveness (Lighthouse lab proxy: TBT) |
-| CLS (Cumulative Layout Shift) | < 0.1 | Fonts swap should not shift layout |
-| FCP (First Contentful Paint) | < 1.8s | HTML + CSS render |
-| TTFB (Time to First Byte) | < 600ms | Netlify edge response |
+| Metric | Reported target | Evidence |
+|---|---|---|
+| LCP | < 3.0s | Result with page and test conditions |
+| INP | < 200ms | Suitable field data and its scope, or explicit unavailability |
+| CLS | < 0.1 | Result with page and test conditions |
+| FCP | < 1.8s | Result with page and test conditions |
+| TTFB | < 600ms | Result with request and test conditions |
+| TBT | No separate target established here | Distinct lab result |
 
-**Measurement:**
-1. Open preview URL
-2. Open DevTools → Lighthouse tab
-3. Run audit (Mobile + Desktop)
-4. Compare metrics to baselines
-5. Document in test results
+TBT is not measured INP and must not be substituted into the INP threshold.
 
----
+Record deployment revision, route, observation time, tool/version, device,
+network/CPU settings, cache state and run conditions. Preserve mobile and
+desktop lab results separately. Record the source and page/origin scope of
+field INP data, or its unavailability. Compare only like-for-like measurements.
 
-## Test Results Template
+## Results template
 
-```markdown
-## Deployment Preview Test Results
+This section is a template, not factual results.
 
-**Date:** YYYY-MM-DD  
-**Preview URL:** https://deploy-preview-XXX--thisonetimeonacid.netlify.app  
-**Tested by:** [name]
+- Deployment URL and revision: ___
+- Date, tester and evidence locations: ___
+- Browser/device/network/cache conditions: ___
+- Checker command, complete output and exit code: ___
+- CSP response/meta observations: ___
+- Font loading and rendering: ___
+- Typeform rendering/interaction and any separately authorised submission: ___
+- YouTube/Vimeo playback, controls and responsive behaviour: ___
+- Missing integrations, unavailable services and other coverage gaps: ___
 
-### Integration Tests
+| Metric | Reported target | Result | Evidence and status |
+|---|---|---|---|
+| LCP | < 3.0s | ___ s | ___ |
+| CLS | < 0.1 | ___ | ___ |
+| FCP | < 1.8s | ___ s | ___ |
+| TTFB | < 600ms | ___ ms | ___ |
+| TBT, lab | No separate target established | ___ ms | ___ |
+| INP, field | < 200ms | ___ ms or unavailable | Source/scope: ___ |
 
-#### Google Fonts
-- [ ] Fonts load without CSP errors
-- [ ] No FOUT/FOIT visible
-- [ ] All font weights/styles available
-- [ ] LCP < 3.0s
+Use passed, failed, skipped, unavailable and not run explicitly.
+Do not mark unavailable field data or an absent integration as passed.
+Conclude only for the checks and revision evidenced; list unresolved findings
+and required checks whose results are missing.
 
-**Issues:** [none / list any]
+## Historical PR-426 results
 
-#### Typeform
-- [ ] Script loads without CSP errors
-- [ ] Form renders inline
-- [ ] Form is interactive
-- [ ] No duplicate script loading
+Recorded date: 22 October 2026.
+Recorded preview:
+[deploy-preview-426](https://deploy-preview-426--thisonetimeonacid.netlify.app).
 
-**Issues:** [none / list any]
+The [dated PR-426 record](integration-validation/2026-10-22-pr-426-validation-plan.md)
+preserves original output and the updated checker's rejection:
 
-#### YouTube Embeds
-- [ ] Iframe loads without CSP errors
-- [ ] Video plays with audio
-- [ ] Controls functional
-- [ ] Responsive on mobile
+- HTML routes returned 200 with revalidation headers.
+- Sample hashed JavaScript and CSS responses had immutable caching.
+- `/assets/index-missing0.js` returned 200 HTML, not the required 404.
+- `/favicon.ico` returned `text/html; charset=UTF-8`, not an image Content-Type.
+- The record reports that the updated checker exited 1 against the same preview.
 
-**Issues:** [none / list any]
+The earlier permissive checker's success message is not a passing result under
+the updated contract. The previous summary's verified-404/all-pass assertions
+contradicted the dated record and must not be carried forward.
 
-#### Vimeo Embeds
-- [ ] Iframe loads without CSP errors
-- [ ] Video plays with audio
-- [ ] Controls functional
-- [ ] Responsive on mobile
+The record also describes a favicon source addition with deployment verification
+pending and an unresolved missing-asset routing requirement. These are historical
+statements, not newly verified implementation or deployment outcomes.
 
-**Issues:** [none / list any]
+Google Fonts, Typeform, YouTube, Vimeo, CSP browser observations and performance
+evidence remained incomplete in that record. References to PR #427 being current
+are historical context, not a newly checked PR status. None of these observations
+validates another revision or establishes current production acceptance.
 
-### Deployment Validation Script
+## References
 
-\`\`\`bash
-$ node scripts/check-netlify-headers.mjs <deploy-preview-url>
-[script output here]
-\`\`\`
-
-- [ ] Script returns 0 exit code
-- [ ] All checks passed
-
-### Performance Metrics (Lighthouse)
-
-| Metric | Target | Result | Status |
-|--------|--------|--------|--------|
-| LCP | < 3.0s | ___ s | ✅/❌ |
-| INP (Lab proxy: TBT) | < 200ms | ___ ms | ✅/❌ |
-| CLS | < 0.1 | ___ | ✅/❌ |
-| FCP | < 1.8s | ___ s | ✅/❌ |
-| TTFB | < 600ms | ___ ms | ✅/❌ |
-
-### Summary
-
-- [ ] All integrations functional
-- [ ] No CSP violations
-- [ ] Performance meets baseline
-- [ ] No regressions detected
-
-**Overall Status:** ✅ PASS / ❌ NEEDS REVISION
-```
-
----
-
-## Related Documentation
-
-- [PR #345](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/345) - Netlify hashed-asset caching
-- [PR #343](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/343) - HTML revalidation and cache verification
-- [Issue #418](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/418) - Deployment verification tracking
-- [Issue #6](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/6) - Netlify caching and headers
-- `netlify.toml` - Active Netlify configuration
-- `scripts/check-netlify-headers.mjs` - Deployment validation script
-- `src/app/netlify.toml` - Archived (inactive) configuration
-
----
-
-## Validation Results
-
-**Date:** 2026-10-22  
-**Preview URL:** https://deploy-preview-426--thisonetimeonacid.netlify.app  
-**Overall Status:** 🟡 PARTIAL — PR #427 deployment, browser, performance, and required validation checks pending
-
-Preview #426 results below are historical and do not validate PR #427. Verify the current PR #427 preview before marking any pending checks complete.
-
-### Summary
-
-- ✅ **Historical Deployment Validation (preview #426 only)**: All header checks passed
-  - HTML routes return 200 with revalidation headers
-  - Hashed assets return 200 with immutable caching
-  - Favicon returns 200 (verify content-type is image, not text/html)
-  - Missing assets return 404 (SPA fallback to HTML) — VERIFIED
-
-- 🟡 **Integration Testing**: Awaiting manual verification
-  - [ ] Google Fonts load without CSP errors
-  - [ ] Typeform embed renders and is interactive
-  - [ ] YouTube embeds play with controls
-  - [ ] Vimeo embeds play with controls
-
-- 🟡 **Performance Metrics**: Awaiting Lighthouse audit
-  - [ ] LCP < 3.0s
-  - [ ] INP < 200ms (lab proxy: TBT)
-  - [ ] CLS < 0.1
-  - [ ] FCP < 1.8s
-  - [ ] TTFB < 600ms
-
----
-
-**Last Updated:** 2026-10-22  
-**Status:** 🟡 PARTIAL — Current PR #427 preview verification, browser, performance, and required validation checks pending
+- [PR #345](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/345)
+- [PR #343](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/343)
+- [Issue #418](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/418)
+- [Issue #6](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/6)
+- [Root Netlify configuration](../netlify.toml)
+- [Header checker](../scripts/check-netlify-headers.mjs)
+- [Header generator](../scripts/netlify-hashed-asset-headers.mjs)
+- [Caching verification guide](NETLIFY_CACHE_VERIFICATION.md)
+- [Preserved historical PR-426 record](integration-validation/2026-10-22-pr-426-validation-plan.md)
