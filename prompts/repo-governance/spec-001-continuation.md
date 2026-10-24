@@ -116,7 +116,7 @@ Preserve these; do not reopen:
 ## Unresolved Boundaries
 
 | Item | Gap | Owner | Decision Required |
-| ------ | ----- | ------- | ------------------ |
+|------|-----|-------|------------------|
 | Supplementary Plan | "40-entry supplementary plan" not found | @ashley | Is this needed? |
 | Deferred Workflows | 3 workflows documented as "deferred"; no enablement policy | @ashley | Approve which, if any? |
 | T035/T060 Priority | PR template routing verification not tested | @ashley | Test required before closure? |
@@ -171,7 +171,7 @@ Prompt covers documentation tasks only (T060, T062, T065):
 ## Summary of Outstanding Items
 
 | ID | Task | Requirement | Status | Owner | Blocker |
-| ----- | ------ | ------------- | -------- | ------- | --------- |
+|-----|------|-------------|--------|-------|---------|
 | T035 | PR template routing verification | R5.2 | ⏳ Unchecked | @claude | No test PR refs recorded |
 | T038 | Branch protection enable (manual) | R5.3 | ⏳ Manual | @ashley | GitHub Settings access |
 | T055 | Protected-file changes validation | R5.1–R5.3 | ⏳ Guard failed | @claude/@ashley | Approval + guard rerun |
