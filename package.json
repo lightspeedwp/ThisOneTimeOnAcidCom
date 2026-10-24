@@ -85,7 +85,7 @@
     "@swc/jest": "^0.2.39",
     "@tailwindcss/vite": "^4.3.3",
     "@types/jest": "^30.0.0",
-    "@vitejs/plugin-react": "4.7.0",
+    "@vitejs/plugin-react": "6.1.2",
     "@vitest/coverage-v8": "1.6.1",
     "bats": "^1.11.0",
     "glob": "13.0.6",
