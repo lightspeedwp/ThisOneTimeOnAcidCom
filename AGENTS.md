@@ -57,8 +57,69 @@ files define their own reading order, so follow that rather than inventing one:
 ### Spec Kit (spec-driven development)
 
 - **[.specify/](.specify/)** — Spec Kit templates, scripts and workflows
-- **[.gemini/commands/](.gemini/commands/)** — Gemini CLI Spec Kit commands
-  (`.toml` files)
+- **[.gemini/commands/](.gemini/commands/)** — Gemini CLI Spec Kit commands (`.toml` files)
+- **[.agents/skills/](.agents/skills/)** — Codex Spec Kit skills (`$speckit-specify`)
+- **[.claude/skills/](.claude/skills/)** — Claude Code Spec Kit skills (`/speckit-specify`)
+- **[.codex/README.md](.codex/README.md)** — configuration and integration maintenance
+
+**Spec location:** Create all feature specifications, plans, tasks and related
+artefacts under `.github/specs/<NNN-short-name>/`, never a root `specs/` folder.
+Read `.specify/init-options.json` → `specifyFeatureDirectory` as the repository's
+spec root (`.github/specs`). Scan that directory for existing feature numbers;
+`001` and `002` already exist, so the next sequential feature is `003`. Reuse
+the appropriate existing directory when continuing a feature. Persist the full
+feature directory in `.specify/feature.json` so downstream commands resolve the
+same location. Root `specs/` defaults in upstream documentation do not override
+this repository rule. An explicit `SPECIFY_FEATURE_DIRECTORY` must also resolve
+beneath the configured `.github/specs/` root. Before any artifact or feature-state
+write, canonicalize the root and candidate (including `..` segments and symlinks
+in existing ancestors), require containment by path components, and reject write
+paths redirected outside the feature directory by artifact symlinks. Reject
+out-of-root paths unless the user explicitly approves an intentional exception
+whose destination and validation coverage have been defined and verified. A path
+override alone is not approval. Apply this gate in every specify workflow.
+Spec directory numbering never determines the Git branch.
+
+### Shared skills and agent roles
+
+Custom skills live in [.agents/skills/](.agents/skills/). Shared agent role
+instructions live in [.agents/roles/](.agents/roles/); native definitions in
+`.claude/agents/`, `.gemini/agents/` and `.codex/agents/` load them before acting.
+Claude's custom skill directories link to the shared source. Keep Spec Kit's
+generated skills and manifests in their installer-managed locations.
+See [.agents/README.md](.agents/README.md) for discovery and maintenance.
+
+### Branch check before every task
+
+Before editing files or running a workflow that writes files:
+
+1. Inspect `git status --short` and `git branch --show-current`.
+2. Read [.agents/skills/branch-validation/SKILL.md](.agents/skills/branch-validation/SKILL.md)
+   and [.agents/roles/branches-agent.md](.agents/roles/branches-agent.md).
+   Codex can invoke this skill explicitly with `$branch-validation`.
+3. Use a task branch whose exact name Ash supplied or approved. If none was
+   supplied, propose a meaningful `{type}/{scope}-{title}` name and obtain
+   approval before creating or switching branches. Do not default to `codex/`
+   or generate an agent/session branch name. An existing valid name alone does
+   not authorise putting unrelated work on that branch.
+4. Validate the proposed name with
+   `npm run validate:branch-name -- --branch <approved-name>` before creation,
+   then run `npm run validate:branch-name` on the checked-out branch before
+   edits. Stop on failure. Do not edit on `main`, `develop` or detached HEAD.
+5. Preserve uncommitted work when switching. Never stash, discard, rename or
+   delete branches without authorisation. Use the branch agent's base-branch
+   policy (`develop` for normal work, `main` for hotfixes).
+
+The deterministic authority is `scripts/validate-branch-name.js`. The existing
+Lefthook pre-commit and pre-push checks provide local enforcement; ensure hooks
+are installed with `npm exec -- lefthook install` after dependency installation.
+Never bypass them using `--no-verify` or `LEFTHOOK=0` to get an invalid name through.
+
+These rules also apply to Spec Kit. Numbered `specs/NNN-name` directories and
+`BRANCH_NAME` output from `create-new-feature.sh` identify features; they are not
+permission to create a Git branch. Keep spec numbering independent of the
+approved Git branch. Do not install or invoke a branch-creating extension as a
+way around this check.
 
 ### Path convention used in the guidelines
 
@@ -408,6 +469,7 @@ project root, so the root `postcss.config.mjs` (an empty config) is the likely
 active file. `src/app/postcss.config.js` references `autoprefixer`, which is not
 a dependency. Confirm, and decide whether to remove one of them.
 
-1. **Branch and PR conventions.** The repository has no pull request template
-and no documented branch-prefix list. The `docs/` prefix comes from issue #2.
-Confirm the conventions, or point to organisation-level templates.
+1. **Branch and PR conventions.** Branch naming is documented in the branch
+validation skill and branches agent and checked by
+`scripts/validate-branch-name.js`; follow the pre-task check above. PR templates
+and organisation policy remain subject to the live contribution guidance.
