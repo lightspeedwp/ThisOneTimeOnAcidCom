@@ -86,6 +86,7 @@ test-results/
 !.gemini/commands/
 !.gemini/settings.json
 !.gemini/GEMINI.md
+!.gemini/agents/
 
 # Specify local state
 .specify/feature.json

@@ -7,7 +7,7 @@
  */
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync, lstatSync, readlinkSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -685,5 +685,154 @@ describe('workflow CLI prerequisites and output', function () {
     f.write('.specify/templates/tasks-template.md', 'Task template');
     success(f.cli('setup-tasks', ['--json']));
     assert.equal(f.exists('.github/specs/001-example/tasks.md'), false);
+  });
+});
+
+
+// These tests check instruction/discovery contracts, not LLM obedience or host
+// permission enforcement. Executable-helper gaps are characterised separately.
+const repository = fileURLToPath(new URL('../', import.meta.url));
+const clients = ['codex', 'claude', 'gemini'];
+const guardedCommands = ['specify', 'plan', 'checklist', 'analyze', 'converge'];
+function workflowSource(client, command) {
+  const location = client === 'gemini'
+    ? '.gemini/commands/speckit.' + command + '.toml'
+    : (client === 'codex' ? '.agents' : '.claude') + '/skills/speckit-' + command + '/SKILL.md';
+  return readFileSync(join(repository, location), 'utf8');
+}
+
+describe('TOA-365: structural workflow contracts (not host enforcement)', function () {
+  for (const client of clients) {
+    for (const command of guardedCommands) {
+      it(client + ' ' + command + ' gates hooks and setup through its leading safety contract', function () {
+        const source = workflowSource(client, command);
+        const start = source.indexOf('## Workflow safety contract');
+        const end = source.indexOf('## Pre-Execution Checks');
+        assert.ok(start > 0 && start < end, 'Safety contract must precede hook dispatch');
+        const contract = source.slice(start, end);
+        for (const term of ['main', 'develop', 'detached HEAD', 'approval', 'component containment', 'symlink', 'SPECIFY_FEATURE_NO_PERSIST=1', 'STOP']) {
+          assert.ok(contract.includes(term), 'Missing contract term: ' + term);
+        }
+        assert.ok(source.includes(client === 'gemini' ? '{{args}}' : '$ARGUMENTS'), 'Keep native arguments');
+        assert.ok(!source.includes('skip the hook and leave condition evaluation'), 'Do not silently bypass an unresolved mandatory condition');
+        assert.match(source, /mandatory hook condition is unresolved, STOP/);
+      });
+    }
+    it(client + ' specify separates the current branch from an approved branch-only target transition', function () {
+      const source = workflowSource(client, 'specify');
+      assert.match(source, /branch-only/);
+      assert.match(source, /GIT_BRANCH_NAME/);
+      assert.match(source, /cancelled/);
+      assert.match(source, /unconfirmed/);
+      assert.match(source, /scanning existing directories in the validated configured root/);
+      assert.match(source, /<configured-root>\/<directory-name>/);
+    });
+    for (const command of ['analyze', 'converge']) {
+      it(client + ' ' + command + ' keeps prerequisite validation with no persistence', function () {
+        const source = workflowSource(client, command);
+        const calls = source.match(/(?:SPECIFY_FEATURE_NO_PERSIST=1 )?\.specify\/scripts\/bash\/check-prerequisites\.sh --json --require-spec --require-tasks --include-tasks/g) || [];
+        assert.ok(calls.length > 0);
+        assert.ok(calls.every(function (call) { return call.startsWith('SPECIFY_FEATURE_NO_PERSIST=1 '); }));
+        assert.match(source, /--paths-only must not replace/);
+      });
+    }
+    it(client + ' checklist resolves prerequisites without persisting context', function () {
+      const source = workflowSource(client, 'checklist');
+      assert.match(source, /Run `SPECIFY_FEATURE_NO_PERSIST=1 \.specify\/scripts\/bash\/check-prerequisites\.sh --json/);
+    });
+    it(client + ' converge requires approval and an unchanged snapshot before an append', function () {
+      const source = workflowSource(client, 'converge');
+      assert.match(source, /explicit user confirmation before appending/);
+      assert.match(source, /snapshot/);
+      assert.match(source, /byte-for-byte/);
+      assert.match(source, /clean result/);
+      assert.match(source, /does not approve hook writes/);
+      assert.match(source, /Neither an absence of findings nor missing confirmation grants permission/);
+    });
+  }
+});
+
+const roleDependencies = {
+  'branches-agent': ['branch-validation'],
+  'changelog-agent': ['changelog'],
+  'labeling-agent': ['labeling'],
+  'testing-agent': ['test'],
+  'playwright-agent': ['test'],
+  'reviewer-agent': ['validate'],
+  'pr-agent': ['branch-validation', 'validate', 'labeling', 'changelog'],
+  'release-agent': ['validate', 'test', 'changelog'],
+};
+describe('TOA-365: canonical source and native reference contracts', function () {
+  for (const [role, dependencies] of Object.entries(roleDependencies)) {
+    it(role + ' names existing root-relative skill sources and stops if they are missing', function () {
+      const source = readFileSync(join(repository, '.agents/roles', role + '.md'), 'utf8');
+      assert.match(source, /STOP/);
+      assert.match(source, /repository root/);
+      for (const dependency of dependencies) {
+        const skill = '.agents/skills/' + dependency + '/SKILL.md';
+        assert.ok(source.includes(skill), role + ' -> ' + skill);
+        assert.ok(existsSync(join(repository, skill)));
+      }
+      for (const client of clients) {
+        const adapter = client === 'codex' ? '.codex/agents/' + role + '.toml' : '.' + client + '/agents/' + role + '.md';
+        assert.ok(readFileSync(join(repository, adapter), 'utf8').includes('.agents/roles/' + role + '.md'));
+      }
+    });
+  }
+  for (const skill of ['branch-validation', 'changelog', 'labeling', 'test', 'validate', 'workflow-orchestration']) {
+    it('retains the individual Claude link for ' + skill, function () {
+      const link = join(repository, '.claude/skills', skill);
+      assert.ok(lstatSync(link).isSymbolicLink());
+      assert.equal(readlinkSync(link), '../../.agents/skills/' + skill);
+      assert.equal(readFileSync(join(link, 'SKILL.md'), 'utf8'), readFileSync(join(repository, '.agents/skills', skill, 'SKILL.md'), 'utf8'));
+    });
+  }
+  for (const skill of ['test', 'validate']) {
+    it(skill + ' uses the existing testing guide instead of a nonexistent build skill', function () {
+      const source = readFileSync(join(repository, '.agents/skills', skill, 'SKILL.md'), 'utf8');
+      assert.ok(!source.includes('../build/SKILL.md'));
+      assert.ok(source.includes('docs/TESTING.md'));
+      assert.ok(existsSync(join(repository, 'docs/TESTING.md')));
+    });
+  }
+});
+
+describe('TOA-365: executable no-persistence evidence and enforcement limits', function () {
+  for (const mode of ['analyze', 'converge-assessment']) {
+    it(mode + ' prerequisites preserve pinned state and existing artefact bytes', function (t) {
+      const f = fixture(t);
+      feature(f, ['spec.md', 'plan.md', 'tasks.md']);
+      const original = '{"feature_directory":".github/specs/001-example","note":"keep bytes"}\n';
+      f.write('.specify/feature.json', original);
+      ['spec.md', 'plan.md', 'tasks.md'].forEach(function (name) { f.write('.github/specs/002-target/' + name, '# target ' + name + '\n'); });
+      const result = json(f.cli('check-prerequisites', ['--json', '--require-spec', '--require-tasks', '--include-tasks'], {
+        SPECIFY_FEATURE_DIRECTORY: '.github/specs/002-target', SPECIFY_FEATURE_NO_PERSIST: '1',
+      }));
+      assert.equal(result.FEATURE_DIR, f.path('.github/specs/002-target'));
+      assert.equal(f.read('.specify/feature.json'), original);
+      ['spec.md', 'plan.md', 'tasks.md'].forEach(function (name) { assert.equal(f.read('.github/specs/002-target/' + name), '# target ' + name + '\n'); });
+    });
+    it(mode + ' no-persistence still rejects missing required artefacts', function (t) {
+      const f = fixture(t);
+      feature(f, ['plan.md', 'tasks.md']);
+      const original = f.read('.specify/feature.json');
+      failure(f.cli('check-prerequisites', ['--json', '--require-spec', '--require-tasks', '--include-tasks'], {
+        SPECIFY_FEATURE_DIRECTORY: '.github/specs/001-example', SPECIFY_FEATURE_NO_PERSIST: '1',
+      }), /spec.md/);
+      assert.equal(f.read('.specify/feature.json'), original);
+    });
+  }
+  it('documents a helper gap: raw path resolution accepts sibling-prefix and symlink escapes, without persisting in no-persist mode', function (t) {
+    const f = fixture(t);
+    feature(f, ['spec.md', 'plan.md', 'tasks.md']);
+    f.mkdir('.github/specs-other/003-outside');
+    symlinkSync('../specs-other', f.path('.github/specs/linked'));
+    const original = f.read('.specify/feature.json');
+    for (const directory of ['.github/specs-other/003-outside', '.github/specs/../specs-other/003-outside', '.github/specs/linked/003-outside']) {
+      // Success here explicitly characterises an unenforced boundary; it is not
+      // evidence that instruction-level containment rejects these destinations.
+      success(f.common('get_feature_paths', [], { SPECIFY_FEATURE_DIRECTORY: directory, SPECIFY_FEATURE_NO_PERSIST: '1' }));
+      assert.equal(f.read('.specify/feature.json'), original);
+    }
   });
 });
