@@ -98,3 +98,21 @@ test('RouterProvider reports the original handled error to Sentry without changi
   assert.deepEqual(captured, [error]);
   assert.equal(provider.props.fallback, undefined);
 });
+
+test('ErrorBoundary reports caught page errors to Sentry but not filtered noise', function () {
+  const captured = [];
+  const { ErrorBoundary } = loadModule('../src/app/components/common/ErrorBoundary.tsx', {
+    '@sentry/react': { captureException(error, hint) { captured.push({ error, hint }); } },
+    '@phosphor-icons/react': { Warning() {}, ArrowsClockwise() {} },
+  });
+  const boundary = new ErrorBoundary({ children: null });
+  boundary.setState = function () {};
+  const pageError = new Error('page render failed');
+  // Node's test runner frames contain async_hooks, which the boundary filters as noise.
+  pageError.stack = 'Error: page render failed\n    at Page (page.tsx:1:1)';
+  boundary.componentDidCatch(pageError, { componentStack: '\n    at Page' });
+  boundary.componentDidCatch(new Error('boom chrome-extension://abc'), { componentStack: '' });
+  assert.equal(captured.length, 1);
+  assert.equal(captured[0].error, pageError);
+  assert.equal(captured[0].hint.contexts.react.componentStack, '\n    at Page');
+});
