@@ -48,6 +48,11 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Pre-Execution Checks
 
+**Branch safety before setup and writes**:
+- Inspect `git status --short` and `git branch --show-current`; follow the branch check in `AGENTS.md`, `.agents/skills/branch-validation/SKILL.md`, and `.agents/roles/branches-agent.md`. Preserve uncommitted work.
+- Require the exact task branch supplied or approved by the user. If approval is missing, propose a name and obtain approval; validate it with `npm run validate:branch-name -- --branch <approved-name>` before creating or switching branches.
+- Run `npm run validate:branch-name` on the actual checked-out branch. STOP on validation failure, `main`, `develop`, detached HEAD, or missing approval. Do not dispatch hooks, run Step 1 Setup, or write under `FEATURE_DIR/checklists` until this gate passes; recheck after any hook changes the branch.
+
 **Check for extension hooks (before checklist generation)**:
 - Check if `.specify/extensions.yml` exists in the project root.
 - If it exists, read it and look for entries under the `hooks.before_checklist` key

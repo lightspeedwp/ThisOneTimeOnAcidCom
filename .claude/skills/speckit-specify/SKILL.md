@@ -21,8 +21,9 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Pre-Execution Checks
 
-**Branch approval before branch-changing hooks**:
-- Inspect `git status --short` and `git branch --show-current`; preserve uncommitted work and follow the branch policy in `AGENTS.md`.
+**Branch safety before every pre-hook**:
+- Before dispatching any `before_specify` hook, including hooks that only write files, inspect `git status --short` and `git branch --show-current`; preserve uncommitted work and follow the branch policy in `AGENTS.md`.
+- Run `npm run validate:branch-name` on the actual checked-out branch and require the exact task branch supplied or approved by the user. STOP on validation failure, `main`, `develop`, detached HEAD, or missing approval; do not dispatch any hook or write files until this gate passes. Recheck before each hook, including after a previous hook changes the branch.
 - Before a `before_specify` hook can create or switch a branch, require the user's approval of the exact task branch and validate that name with `npm run validate:branch-name -- --branch <approved-name>`. Pass the approved name as `GIT_BRANCH_NAME`; stop on failure or missing approval. Feature numbering is not branch approval.
 - If an invoked `before_specify` hook fails, is cancelled, or has no confirmed successful result, STOP before Step 3. Do not create feature artifacts or write `.specify/feature.json`.
 
@@ -101,7 +102,8 @@ Given that feature description, do this:
       - If `branch_numbering` was used (and `feature_numbering` was absent), emit a one-line warning: "⚠️ `branch_numbering` in init-options.json is deprecated. Rename to `feature_numbering`."
 
    **Validate the resolved directory before any writes**:
-   - Canonicalize the configured spec root and the candidate feature directory, resolving `..` segments and symlinks in every existing ancestor even when the final directory does not exist yet. Compare path components, not a raw string prefix: `.github/specs-other` is outside `.github/specs`.
+   - First canonicalize the repository root, the approved repository `.github/specs` root, and the configured `specifyFeatureDirectory` root (resolve relative values from the repository root), resolving `..` segments and symlinks in every existing ancestor even when the final directory does not exist yet. Require the canonical approved root to remain within the canonical repository, and the canonical configured root to equal or be beneath that approved root. Reject an out-of-root configured value before validating the candidate or writing files unless the explicit exception requirements below are met; a configuration value alone is not approval.
+   - Then canonicalize the candidate feature directory in the same way. Compare path components for every containment check, not a raw string prefix: `.github/specs-other` is outside `.github/specs`.
    - Require the resolved candidate to be a feature subdirectory beneath the configured `.github/specs/` root, not the root itself. Apply this check to explicit overrides and generated paths before `mkdir`, template copying, or persisting `.specify/feature.json`. Reject existing artifact symlinks that would redirect a write outside the validated feature directory.
    - Reject paths outside that root unless the user has explicitly approved an intentional exception and the exception's destination and validation coverage have been defined and verified. An environment variable or path argument alone is not an exception. STOP without writing if containment or exception validation fails.
 
