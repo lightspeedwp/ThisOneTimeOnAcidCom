@@ -485,8 +485,8 @@ echo "All worktrees verified!"
 ## Related Resources
 
 - [Git Worktrees Documentation](https://git-scm.com/docs/git-worktree)
-- `.claude/agents/branches-agent.md` — Interactive branch naming
-- `.claude/skills/branch-validation/SKILL.md` — Branch validation
+- `.agents/roles/branches-agent.md` — Interactive branch naming
+- `.agents/skills/branch-validation/SKILL.md` — Branch validation
 - `scripts/validate-branch-name.js` — Validation script
 - `docs/BRANCH*NAMING*LOCAL.md` — Local developer guide
 
