@@ -113,12 +113,15 @@ For the current, maintained version, see the link above.
 
 ### Type 3: Archival/Deprecation Pointer
 
-**Scenario:** A guideline is no longer maintained and is archived. Must reference replacement guidance or explicitly state "No replacement guidance available".
+**Scenario:** A guideline is archived but a replacement or successor exists. Document must reference that replacement.
 
 **Example:**
 - Old path: `guidelines/deprecated-tech-stack.md`
-- Action: Document stays at old path but marked as archived with pointer to current guidance or explicit archive status
-- **Requirement:** Either provide a `Current guidance` link OR explicitly state "No replacement guidance available"
+- New path: `guidelines/current-tech-stack.md` (replacement or successor)
+- Action: Document stays at old path but marked as archived with pointer to current guidance
+- **Requirement:** Must provide a `Current guidance` link to the replacement or successor document
+
+**Note:** Archive-only pointers without a replacement destination are not supported by the P-entity schema (which requires `new_path`). Archived guidance with no replacement must either be moved to a historical archive location (with pointer from old location) or reformatted as a separate archive entity type with explicit approval in D5.
 
 **Format (with replacement):**
 

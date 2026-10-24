@@ -25,19 +25,18 @@ This research phase resolves technical unknowns and documents evidence-pending d
 
 ### 2. Protected-Files Governance
 
-**Finding:** Specification documents in `.github/specs/003-refactor-guidelines/` do not require `locked-files-guard` approval. However, S-entities (protected supporting documents: AGENTS.md, CONTRIBUTING.md, .claude/skills/*) require approval under Constitution § II.
+**Finding:** All changes under `.github/` (including `.github/specs/003-refactor-guidelines/`) require `locked-files-guard` approval per the canonical `PROTECTED_FILES.txt`. S-entities (protected supporting documents: AGENTS.md, CONTRIBUTING.md, .claude/skills/*) also require approval under Constitution § II.
 
 **Evidence:**
-- AGENTS.md § 332–343: Only `.github/workflows/*` and protected files require `locked-files-guard` approval; `.github/specs/` is not listed as protected
-- Constitution § II protects CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, and supporting skill/agent files; specifications are not included
-- Protected S-documents (AGENTS.md, CONTRIBUTING.md, .claude/skills/*) require approval per D0 gate; specification-only edits do not
-- spec.md line 44 references broken path `../../PROTECTED_FILES.txt` (does not exist)
+- PROTECTED_FILES.txt (canonical source): Lists `.github/` as requiring `locked-files-guard` approval for all changes
+- AGENTS.md § 332–343: Enforces locked-files-guard for protected paths including `.github/`
+- Constitution § II protects CHANGELOG.md, ATTRIBUTIONS.md, guidelines/, and supporting skill/agent files
+- Specification-only edits to `.github/specs/` do require locked-files-guard per PROTECTED_FILES.txt scope
 
 **Resolution:**
-- **Specification edits (this PR):** Do not require `locked-files-guard` approval (governance issue, not scope blocker)
-- **S-document edits (Phase 2):** Require `locked-files-guard` approval under D0; all protected-file changes must be scoped in plan.md and verified before merge
-- **Proposed change to spec.md line 44:** Replace broken reference with "S-documents and protected files require `locked-files-guard` approval per AGENTS.md § 331–343 and Constitution § II; specification edits do not"
-- **Rationale:** Canonical governance reference is in AGENTS.md and Constitution; clarifies that D0 gates protected-file approval, not specification-only edits
+- **Specification edits (this PR and future):** Require `locked-files-guard` approval (`.github/` scope)
+- **S-document edits (Phase 2):** Also require `locked-files-guard` approval under D0; all protected-file changes must be scoped in plan.md and verified before merge
+- **Rationale:** Canonical governance source is PROTECTED_FILES.txt; changes to `.github/` including specifications are protected files requiring approval before merge
 
 ### 3. Source Inventory Verification
 

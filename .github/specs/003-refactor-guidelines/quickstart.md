@@ -279,7 +279,7 @@ for gate in D0 D7; do
     echo "  ✓ $gate: RESOLVED"
   else
     echo "  ✗ ERROR: $gate is not marked RESOLVED" >&2
-    ((GATE_ERRORS++))
+    GATE_ERRORS=$((GATE_ERRORS + 1))
   fi
 done
 
@@ -289,7 +289,7 @@ for gate in D1 D2 D3 D4 D5 D6 D8; do
     echo "  ✓ $gate: PENDING"
   else
     echo "  ✗ ERROR: $gate is not marked PENDING" >&2
-    ((GATE_ERRORS++))
+    GATE_ERRORS=$((GATE_ERRORS + 1))
   fi
 done
 
@@ -314,17 +314,93 @@ echo "📋 Next step: Resolve owner gates (D1–D8) and proceed to Phase 2"
 
 **Run it:**
 
-Extract the script above to this directory and execute:
+From the repository root, extract and execute the script:
 
 ```bash
-# Navigate to the spec directory (required for relative paths to resolve)
-cd /home/user/ThisOneTimeOnAcidCom/.github/specs/003-refactor-guidelines
+# Navigate to the spec directory
+cd .github/specs/003-refactor-guidelines
 
-# Extract the validation script from this file
+# Extract the complete validation script from the section above (copy the entire script block from "echo '🔍 Phase 1 Validation'" through the final 'exit 1')
 cat > ./validate-phase1.sh << 'EOF'
 #!/bin/bash
 set -e
-# [copy the complete end-to-end validation script from above]
+
+echo "🔍 Phase 1 Validation: Guidelines Refactor (TOA-358)"
+echo "=================================================="
+
+# Derive repository root from script location
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+
+cd "$SCRIPT_DIR"
+
+# 1. File presence
+echo "✓ Checking files..."
+MISSING_FILES=0
+for file in spec.md plan.md research.md data-model.md checklists/requirements.md; do
+  if test -f "$file"; then
+    echo "  ✓ $file"
+  else
+    echo "  ✗ $file MISSING"
+    MISSING_FILES=$((MISSING_FILES + 1))
+  fi
+done
+if [ "$MISSING_FILES" -gt 0 ]; then
+  echo "❌ $MISSING_FILES required file(s) missing" >&2
+  exit 1
+fi
+
+# 2. Data model validation
+echo "✓ Validating data model..."
+GUIDELINE_COUNT=$(find ../../../guidelines -name "*.md" 2>/dev/null | wc -l)
+if [ "$GUIDELINE_COUNT" -eq 116 ]; then
+  echo "  ✓ Guideline files: $GUIDELINE_COUNT (expected: 116)"
+else
+  echo "  ✗ Guideline files: $GUIDELINE_COUNT (expected: 116) - MISMATCH" >&2
+  exit 1
+fi
+
+# 3. Gates documentation (per-record validation)
+echo "✓ Checking decision gates..."
+GATE_ERRORS=0
+
+# Check D0 and D7 are RESOLVED
+for gate in D0 D7; do
+  if grep -q "### $gate.*RESOLVED" checklists/requirements.md; then
+    echo "  ✓ $gate: RESOLVED"
+  else
+    echo "  ✗ ERROR: $gate is not marked RESOLVED" >&2
+    GATE_ERRORS=$((GATE_ERRORS + 1))
+  fi
+done
+
+# Check D1–D6 and D8 are PENDING
+for gate in D1 D2 D3 D4 D5 D6 D8; do
+  if grep -q "### $gate.*PENDING" checklists/requirements.md; then
+    echo "  ✓ $gate: PENDING"
+  else
+    echo "  ✗ ERROR: $gate is not marked PENDING" >&2
+    GATE_ERRORS=$((GATE_ERRORS + 1))
+  fi
+done
+
+if [ "$GATE_ERRORS" -gt 0 ]; then
+  echo "  ✗ ERROR: $GATE_ERRORS gate(s) are not in expected state" >&2
+  exit 1
+fi
+
+# 4. Contract completeness
+echo "✓ Validating contracts..."
+CONTRACT_COUNT=$(ls contracts/*.md 2>/dev/null | wc -l)
+echo "  ✓ Contracts defined: $CONTRACT_COUNT (expected: 3)"
+if [ "$CONTRACT_COUNT" -ne 3 ]; then
+  echo "  ✗ ERROR: Found $CONTRACT_COUNT contracts (expected: 3)" >&2
+  exit 1
+fi
+
+echo ""
+echo "✅ Phase 1 Validation PASSED"
+echo "📋 Next step: Resolve owner gates (D1–D8) and proceed to Phase 2"
 EOF
 
 # Make it executable and run
