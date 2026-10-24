@@ -32,9 +32,15 @@ The following S-documents require `locked-files-guard` approval before changes m
 
 **Note:** S001 (`.claude/skills/INVENTORY.md`) is a reference document; edits may not require formal approval if scope-bounded to inventory only.
 
+### Protected Paths Requiring Approval (continued)
+
+4. **G-entities in `guidelines/`** — All 116 existing guideline documents
+   - Per Constitution § II: "`guidelines/` ... are read-only system artifacts"
+   - All G-document edits require `locked-files-guard` approval (see AGENTS.md § 331–343)
+   - Edits include: consolidation, path mapping, pointer creation, safeguard preservation
+
 ### Unprotected Paths (Reference Only)
 
-- `guidelines/` documents (G-entities) — No approval required; changes validated through code review
 - Proposed new documents (N-entities) — Approval required via D4 gate (owner decision), not via `locked-files-guard`
 
 ---

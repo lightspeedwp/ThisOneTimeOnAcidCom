@@ -229,17 +229,31 @@ set -e
 echo "🔍 Phase 1 Validation: Guidelines Refactor (TOA-358)"
 echo "=================================================="
 
-cd /home/user/ThisOneTimeOnAcidCom/.github/specs/003-refactor-guidelines
+# Derive repository root from script location
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+
+cd "$SCRIPT_DIR"
 
 # 1. File presence
 echo "✓ Checking files..."
+MISSING_FILES=0
 for file in spec.md plan.md research.md data-model.md checklists/requirements.md; do
-  test -f "$file" && echo "  ✓ $file" || echo "  ✗ $file MISSING"
+  if test -f "$file"; then
+    echo "  ✓ $file"
+  else
+    echo "  ✗ $file MISSING"
+    ((MISSING_FILES++))
+  fi
 done
+if [ "$MISSING_FILES" -gt 0 ]; then
+  echo "❌ $MISSING_FILES required file(s) missing" >&2
+  exit 1
+fi
 
 # 2. Data model validation
 echo "✓ Validating data model..."
-GUIDELINE_COUNT=$(find ../../.. guidelines -name "*.md" 2>/dev/null | wc -l)
+GUIDELINE_COUNT=$(find ../../../guidelines -name "*.md" 2>/dev/null | wc -l)
 echo "  ✓ Guideline files: $GUIDELINE_COUNT (expected: 116)"
 
 # 3. Gates documentation
