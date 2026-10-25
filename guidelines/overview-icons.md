@@ -1,7 +1,7 @@
 # Icon System Guide
 
 Complete guide to using icons in the Ash Shaw Makeup Portfolio project.
-**CRITICAL:** Always verify icons exist before using them!
+Always verify icons exist before using them!
 
 **Version:** 5.0.0
 **Last Updated:** March 2026
@@ -66,9 +66,7 @@ live side-by-side comparison of all Lucide → Phosphor icon mappings.
 
 ## Icon Verification Process
 
-### ⚠️ CRITICAL: Always Verify Icons Before Using
-
-**NEVER assume an icon exists.** Always follow this verification process:
+Always verify that icons exist before using them. Here's the verification process:
 
 ### Step 1: Search Lucide Documentation
 
