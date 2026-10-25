@@ -393,6 +393,38 @@ All tasks must complete with documented evidence:
 
 ---
 
+## Phase 4: Convergence 📊
+
+**Purpose**: Address gaps identified during convergence assessment (2026-10-25); ensures Phase 2 readiness before implementation continuation.
+
+**Status**: Identified 11 actionable gaps (1 CRITICAL, 7 HIGH, 3 MEDIUM). Pre-implementation verification is the blocking critical item.
+
+### Critical Blockers (Must Resolve Before Phase 2 Execution)
+
+- [ ] **T044** [CRITICAL] Run pre-implementation verification (T001-T004): Confirm D0-D8 gate evidence, verify source hashes against baseline commit b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9, validate branch status, execute phase1.sh validation script per plan.md § Checkpoints
+- [ ] **T045** [HIGH] Execute G-document inventory validation (T019-T021): Verify all 116 guidelines exist and are unchanged; generate coverage manifest with columns {path, hash, operation, destination, status}; document baseline state before edits
+
+### High-Priority Implementation Gaps (After Pre-Verification)
+
+- [ ] **T046** [HIGH] Complete remaining G-document edits (T023-T027): Apply design/accessibility corrections per D3 (Ash Shaw authority, WCAG 2.2 AAA); add N-document pointers per D4; apply historical preservation per D5; verify no-change guidelines; commit edits in category batches per plan.md § Phase 2B
+- [ ] **T047** [HIGH] Complete S-document edits (T008-T014): Edit 7 remaining skills files (.claude/skills/{INVENTORY,branch-validation,changelog,labeling,test,validate,workflow-orchestration}); update file paths per consolidation scope; preserve all validation rules, patterns, and safeguards
+- [ ] **T048** [HIGH] Create approved N-documents (T028-T032): Extract D4 approval list; create specification outlines for 29 approved N-documents; execute creation in `guidelines/` directory per approved scope and D4 decision; commit per D4 evidence
+- [ ] **T049** [HIGH] Execute pointer operations (T033-T034): Create pointers per pointer-redirect-contract.md (Type 1 Relocation, Type 2 Consolidation, Type 3 Archival); validate all pointer destinations exist; enforce 1-hop maximum chain depth per D5; validate markdown syntax
+- [ ] **T050** [HIGH] Complete link validation & correction (T035-T037): Generate inventory of 129 internal reference candidates; validate anchor existence in target files; test cross-file paths; document and resolve broken references; update validation report per plan.md § Phase 2E
+- [ ] **T051** [HIGH] Verify design & examples (T038-T040): Validate colour hex values, spacing scales, typography examples against D3 (design authority: Ash Shaw); verify accessibility recipes against WCAG 2.2 AAA; verify formula/threshold correctness; create design verification manifest
+- [ ] **T052** [HIGH] Complete verification & handoff (T041-T043): Generate final coverage manifest (116 G + 9 S + N per D4); run static skill exercises for all six skills (.claude/skills/); complete sign-off checklist per plan.md § Phase 3; draft PR body with coverage summary
+
+### Sequencing & Workflow Gaps (Support Phase 2 Execution Order)
+
+- [ ] **T053** [MEDIUM] Document task execution order violation (T022 completion before sequencing complete): T022 (copy alignment edits) was completed out of sequence, before T001-T004 (pre-verification), T005-T007 (setup), T019-T021 (inventory), and T008-T014 (S-docs) completion. Record out-of-order execution in convergence sign-off; note that future Phase 2 work must follow documented critical path (plan.md § Task Dependencies & Execution Order) to maintain approval evidence integrity
+- [ ] **T054** [MEDIUM] Complete setup & scoping (T005-T007): Inspect locked-files-guard workflow and protected-file approval process; create D0 approval checklist; review each of 9 S-documents for scope and preservation requirements; document setup completion before proceeding with remaining protected-file edits
+
+### Convergence Sign-Off
+
+- [ ] **Convergence Complete**: All 11 convergence tasks (T044-T054) resolved; Phase 2 ready for continuation per documented sequence; owner sign-off recorded
+
+---
+
 ## Notes
 
 - Each task ID (T001–T043) is sequential and corresponds to execution order
@@ -400,6 +432,7 @@ All tasks must complete with documented evidence:
 - No tests are included in this phase (Phase 2 is implementation only; verification happens in Phase 3)
 - Tasks are specification-driven and gated on owner decisions; no ad hoc changes
 - Estimate: ~29–41 hours total per plan.md § Timeline Estimate
+- **Phase 4 Convergence**: Added 2026-10-25 to address gaps identified during convergence assessment; 11 tasks (T044-T054) must complete before Phase 2 continuation
 
 ---
 
