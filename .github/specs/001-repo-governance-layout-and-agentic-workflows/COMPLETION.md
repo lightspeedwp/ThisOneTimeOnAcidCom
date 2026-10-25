@@ -20,7 +20,7 @@ owner: "@ashley"
 
 ## Executive Summary
 
-Specification-001 (Repository Governance Layout & Agentic Workflows) has delivered phases 1–8 of the implementation. Phase 9 convergence and final merge readiness remain pending routing evidence (T060), branch protection (T061), Discussions setup (T062), and protected-file guard revalidation (T064). The final handoff (T065) is deferred until those gates are complete.
+Specification-001 (Repository Governance Layout & Agentic Workflows) has delivered phases 1–8 of the implementation. Phase 9 convergence and final merge readiness remain pending branch protection (T061), Discussions setup (T062), and protected-file guard revalidation (T064). The final handoff (T065) is deferred until those gates are complete. PR template routing verification (T060) is complete with all test cases passing.
 
 ### Delivery Status
 - ✅ **All 8 implementation phases completed**
@@ -36,7 +36,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 ### Core Specification Package (5,102 lines)
 
 | Artifact | Lines | Purpose | Status |
-|----------|-------|---------|--------|
+| --- | --- | --- | --- |
 | spec.md | 808 | Requirements, acceptance criteria, user stories | ✅ Complete |
 | plan.md | 230 | Implementation strategy, workstreams, phases | ✅ Complete |
 | tasks.md | 955 | Decomposed implementation tasks (59 + 6 convergence) | ✅ Complete |
@@ -54,7 +54,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 ### Implementation Phases Executed
 
 | Phase | Name | Duration | Status |
-|-------|------|----------|--------|
+| --- | --- | --- | --- |
 | 1 | Setup & Initialization | Foundation | ✅ Complete |
 | 2 | Foundational Configuration | Core dependencies | ✅ Complete |
 | 3 | Spec Kit Routing (WS-254) | Agent specification system | ✅ Complete |
@@ -68,7 +68,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 ### Workstream Breakdown
 
 | Workstream | Purpose | Tasks | Status |
-|------------|---------|-------|--------|
+| --- | --- | --- | --- |
 | WS-254 | Spec Kit routing and agent specifications | 8 | ✅ Complete |
 | WS-260 | Testing framework integration (Jest, Bats, Playwright) | 6 | ✅ Complete |
 | WS-261 | GitHub governance (workflows, templates, protection) | 12 | ✅ Complete |
@@ -84,7 +84,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 ### Test Results Summary
 
 | Test Suite | Result | Details |
-|-----------|--------|---------|
+| --- | --- | --- |
 | **Jest (Unit Tests)** | ✅ 601/601 passed | Verified in PR #429 CI at commit `314881e` (12 suites) |
 | **Bats (Build Tests)** | ✅ 12/12 reported passing | Implementation baseline recorded in tasks.md (T026, T053) |
 | **Playwright (E2E)** | Configured, not executed | No E2E execution result recorded for this delivery |
@@ -145,20 +145,20 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 **Completed Tasks:**
 
 | Task | Purpose | Status | Details |
-|------|---------|--------|---------|
+| --- | --- | --- | --- |
+| T060 | PR template routing verification | ✅ Complete | PR #483 (feat/ → type:feature), PR #484 (fix/ → type:bug), PR #485 (docs/ → type:documentation), PR #486 (test/ → type:test), PR #488 (proto/ → type:maintenance, fallback). Routing comments and labels verified for all cases. |
 | T063 | Styling documentation audit | ✅ Complete | Verified CONTRIBUTING.md and guidelines/css-architecture.md have comprehensive BEM documentation |
 
 **Remaining Tasks:**
 
-| Task | Purpose | Type | Status | Owner/Notes |
-|------|---------|------|--------|------------|
-| T060 | PR template routing verification | Evidence | Pending | No test PR references or observed template/label results recorded for feat, fix, docs and unmatched prefixes; the four listed branches all use test/ |
-| T061 | Branch protection configuration | Manual GitHub Setup | Pending | Requires GitHub Settings: enable branch protection on develop/main |
-| T062 | GitHub Discussions enablement | Manual GitHub Setup | Pending | Requires GitHub Settings: enable Discussions and configure categories |
-| T064 | Protected-file approval and revalidation | Guard Validation | Pending | Approval for PR #429 changes to COMPLETION.md and tasks.md recorded in [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975); successful Check Protected Files rerun outstanding |
-| T065 | Final handoff documentation | Documentation | Deferred | This report is a draft handoff; finalise after T060, T061, T062 and T064 are complete |
+| Task | Purpose | Type | Status | Notes |
+| --- | --- | --- | --- | --- |
+| T061 | Branch protection configuration | Manual GitHub Setup | ⏳ Pending | GitHub Settings: develop (1 review + CODEOWNERS), main (2 reviews + CODEOWNERS + maintainer push restriction) |
+| T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | GitHub Settings: Enable Discussions with 5 categories (Features, Q&A, Show and Tell, General, Ideas) |
+| T064 | Protected-file approval and revalidation | Guard Validation | 🔴 Blocked | Controller check (404), approval expansion needed, guard workflow rerun required |
+| T065 | Final handoff documentation | Documentation | ⏳ Pending | Auto-generate after T061–T064 complete. T060 and T063 now ✅ |
 
-**Note:** T061 and T062 require GitHub Settings access. T064 concerns the current PR #429 approval and guard result; PR #346 is the historical implementation PR. The convergence assessment and T065 remain pending the outstanding gates.
+**Note:** T061, T062, and T064 require owner action. T060 and T063 now complete. The convergence assessment and T065 remain pending the outstanding manual and approval gates.
 
 ---
 
@@ -223,7 +223,7 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 ## Risk Assessment & Mitigation
 
 | Risk | Severity | Mitigation | Status |
-|------|----------|-----------|--------|
+| --- | --- | --- | --- |
 | Manual GitHub setup tasks (T061, T062) | Medium | Owner (@ashley) to execute manual steps | ✅ Documented |
 | CI check interpretation (Spec Validation, Jest) | Low | Investigation documented in PR #346 | ✅ Monitoring |
 | Protected files approval workflow (T064) | Medium | Clear approval recording instructions provided | ✅ Process defined |
@@ -255,18 +255,17 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 - ✅ **Implementation Delivered:** Phases 1–8 complete; final acceptance pending Phase 9 gates
 - ✅ **Recorded Test Results:** Jest 601/601 verified in CI; Bats 12/12 reported passing
 - ✅ **Merged to develop:** PR #346 successfully merged
-- ⏳ **Ready for Main:** Pending T060, T061, T062 and T064, final convergence assessment and owner sign-off
+- ⏳ **Ready for Main:** Pending T061, T062 and T064, final convergence assessment and owner sign-off
 
 ---
 
 ## Outstanding Items & Next Steps
 
 ### Phase 9 Implementation (Required Before Merge to Main)
-1. **T060:** Record test PR references and observed template/label results for feat, fix, docs and unmatched prefixes
-2. **T061:** Configure branch protection rules in GitHub Settings
-3. **T062:** Enable GitHub Discussions and configure categories
-4. **T064:** Revalidate Check Protected Files using the approval recorded for PR #429 in lightspeedwp/.github#3975
-5. **T065:** Finalise the draft handoff after the outstanding convergence gates are complete
+1. **T061:** Configure branch protection rules in GitHub Settings
+2. **T062:** Enable GitHub Discussions and configure categories
+3. **T064:** Revalidate Check Protected Files using the approval recorded for PR #429 in lightspeedwp/.github#3975
+4. **T065:** Finalise the draft handoff after the outstanding convergence gates are complete
 
 ### Owner Sign-Off Required
 - **Final Review:** Owner (@ashley) to review specification and implementation
@@ -295,7 +294,7 @@ Session: https://claude.ai/code/session_01M19XUm4o2NcBPgWmgM9xWE
 Implementation phases 1–8 delivered; Phase 9 convergence remains in progress.
 Jest 601/601 verified in CI; Bats 12/12 reported passing.
 SpecKit 103/104 is the accepted baseline; Playwright configured, not executed.
-Draft handoff only. T060, T061, T062 and T064 gate final convergence and T065.
+Draft handoff only. T061, T062 and T064 gate final convergence and T065.
 ```
 
 ### Handoff Checklist
@@ -305,7 +304,7 @@ Draft handoff only. T060, T061, T062 and T064 gate final convergence and T065.
 - ✅ AI agent governance framework implemented
 - ✅ Documentation updated with new workflows
 - ✅ Phase 9 remaining work documented in tasks.md
-- ⏳ Convergence assessment and final handoff pending T060, T061, T062 and T064
+- ⏳ Convergence assessment and final handoff pending T061, T062 and T064
 
 **Next Action:** Owner (@ashley) review and approve Phase 9 items for production merge.
 

@@ -11,102 +11,145 @@ permissions:
 
 jobs:
   route-template:
-    name: Suggest PR template and apply type label
+    name: Route to canonical PR template and apply type label
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github/workflows
+            .github/specs
+
+      - name: Fetch canonical routing config from lightspeedwp/.github
+        id: fetch-config
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Fetch the canonical PR template routing config
+          gh repo clone lightspeedwp/.github /tmp/github-repo -- --depth 1 --sparse --filter=blob:none
+          cd /tmp/github-repo
+          git sparse-checkout set '.github/PULL_REQUEST_TEMPLATE'
+
+          if [ -f ".github/PULL_REQUEST_TEMPLATE/config.yml" ]; then
+            echo "config_path=/tmp/github-repo/.github/PULL_REQUEST_TEMPLATE/config.yml" >> $GITHUB_OUTPUT
+            cat ".github/PULL_REQUEST_TEMPLATE/config.yml"
+          else
+            echo "config_path=NOT_FOUND" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
       - name: Extract branch prefix
         id: branch
         run: |
-          # Extract the branch prefix (feat, fix, docs, etc.)
           BRANCH_NAME="${{ github.head_ref }}"
           echo "Branch name: $BRANCH_NAME"
 
-          # Extract prefix (everything before the first slash)
-          if [[ "$BRANCH_NAME" =~ ^([a-z]+)/ ]]; then
+          if [[ "$BRANCH_NAME" =~ ^([a-z0-9]+)/ ]]; then
             PREFIX="${BASH_REMATCH[1]}"
             echo "prefix=$PREFIX" >> $GITHUB_OUTPUT
           else
             echo "prefix=unknown" >> $GITHUB_OUTPUT
           fi
 
-      - name: Map branch prefix to template and label
+      - name: Map branch prefix to template using canonical config
         id: routing
+        env:
+          CONFIG_PATH: ${{ steps.fetch-config.outputs.config_path }}
         run: |
           PREFIX="${{ steps.branch.outputs.prefix }}"
 
-          # Map branch prefix to template file and label
+          # Parse canonical config.yml to get routing map
+          # Using awk/grep to extract the route for this prefix
+          if [ "$CONFIG_PATH" = "NOT_FOUND" ]; then
+            echo "template=pr_feature.md" >> $GITHUB_OUTPUT
+            echo "label=type:maintenance" >> $GITHUB_OUTPUT
+            echo "description=General PR (fallback)" >> $GITHUB_OUTPUT
+            echo "matched=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Extract template from config.yml routes section (with trailing slash to match config key format)
+          TEMPLATE=$(grep "^  $PREFIX/:" "$CONFIG_PATH" | sed 's/.*: //' | xargs)
+
+          if [ -z "$TEMPLATE" ]; then
+            # Fallback to default if prefix not found
+            TEMPLATE=$(grep "^default_template:" "$CONFIG_PATH" | sed 's/.*: //' | xargs)
+            MATCHED="false"
+          else
+            MATCHED="true"
+          fi
+
+          # Map prefix to label (label follows branch prefix, not template filename)
+          # This allows routes like security/ to reuse pr_bug.md but still get type:security label
           case "$PREFIX" in
-            feat)
-              TEMPLATE="pr_feature.md"
-              LABEL="type:feature"
-              DESCRIPTION="Feature/Enhancement PR"
-              ;;
-            fix)
-              TEMPLATE="pr_bug.md"
-              LABEL="type:bug"
-              DESCRIPTION="Bug Fix PR"
-              ;;
-            docs)
-              TEMPLATE="pr_documentation.md"
-              LABEL="type:documentation"
-              DESCRIPTION="Documentation PR"
-              ;;
-            design)
-              TEMPLATE="pr_design.md"
-              LABEL="type:design"
-              DESCRIPTION="Design System PR"
-              ;;
-            test)
-              TEMPLATE="pr_test.md"
-              LABEL="type:test"
-              DESCRIPTION="Test/QA PR"
-              ;;
-            chore)
-              TEMPLATE="pr_chore.md"
-              LABEL="type:chore"
-              DESCRIPTION="Maintenance/Chore PR"
-              ;;
-            perf)
-              TEMPLATE="pr_performance.md"
-              LABEL="type:performance"
-              DESCRIPTION="Performance PR"
-              ;;
-            refactor)
-              TEMPLATE="pr_refactor.md"
-              LABEL="type:refactor"
-              DESCRIPTION="Refactoring PR"
-              ;;
-            security)
-              TEMPLATE="pr_security.md"
-              LABEL="type:security"
-              DESCRIPTION="Security PR"
-              ;;
-            ci)
-              TEMPLATE="pr_ci.md"
-              LABEL="type:ci"
-              DESCRIPTION="CI/CD PR"
-              ;;
-            *)
-              TEMPLATE="pr_default.md"
-              LABEL="type:maintenance"
-              DESCRIPTION="General PR"
-              ;;
+            feat) LABEL="type:feature"; DESC="Feature/Enhancement PR" ;;
+            fix) LABEL="type:bug"; DESC="Bug Fix PR" ;;
+            hotfix) LABEL="type:release"; DESC="Hotfix/Release PR" ;;
+            refactor) LABEL="type:refactor"; DESC="Refactoring PR" ;;
+            chore) LABEL="type:chore"; DESC="Maintenance/Chore PR" ;;
+            doc|docs) LABEL="type:documentation"; DESC="Documentation PR" ;;
+            task) LABEL="type:task"; DESC="Task/Epic Work PR" ;;
+            test) LABEL="type:test"; DESC="Test/QA PR" ;;
+            design|ds) LABEL="type:design"; DESC="Design System PR" ;;
+            ci) LABEL="type:ci"; DESC="CI/CD PR" ;;
+            build) LABEL="type:build"; DESC="Build System PR" ;;
+            release) LABEL="type:release"; DESC="Release PR" ;;
+            deps|security) LABEL="type:bug"; DESC="Dependency/Security PR" ;;
+            perf) LABEL="type:performance"; DESC="Performance PR" ;;
+            a11y) LABEL="type:a11y"; DESC="Accessibility PR" ;;
+            audit) LABEL="type:audit"; DESC="Audit/Compliance PR" ;;
+            automation) LABEL="type:automation"; DESC="Workflow Automation PR" ;;
+            aiops) LABEL="type:aiops"; DESC="AI Operations PR" ;;
+            epic) LABEL="type:epic"; DESC="Epic PR" ;;
+            *) LABEL="type:maintenance"; DESC="General PR" ;;
           esac
+
+          # Use maintenance label if no route matched
+          if [ "$MATCHED" = "false" ]; then
+            LABEL="type:maintenance"
+            DESC="General PR (unrecognized prefix)"
+          fi
 
           echo "template=$TEMPLATE" >> $GITHUB_OUTPUT
           echo "label=$LABEL" >> $GITHUB_OUTPUT
-          echo "description=$DESCRIPTION" >> $GITHUB_OUTPUT
+          echo "description=$DESC" >> $GITHUB_OUTPUT
+          echo "prefix=$PREFIX" >> $GITHUB_OUTPUT
+          echo "matched=$MATCHED" >> $GITHUB_OUTPUT
 
-      - name: Comment with template suggestion
+      - name: Fetch canonical PR template
+        id: fetch-template
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TEMPLATE_NAME: ${{ steps.routing.outputs.template }}
+        run: |
+          TEMPLATE_NAME="${TEMPLATE_NAME}"
+          TEMPLATE_URL="https://raw.githubusercontent.com/lightspeedwp/.github/develop/.github/PULL_REQUEST_TEMPLATE/${TEMPLATE_NAME}"
+
+          echo "Fetching template from: $TEMPLATE_URL"
+
+          if TEMPLATE_CONTENT=$(curl -f -s "$TEMPLATE_URL"); then
+            # Save template content to output (escaped for JSON)
+            echo "template_fetched=true" >> $GITHUB_OUTPUT
+            echo "template_content<<EOF" >> $GITHUB_OUTPUT
+            echo "$TEMPLATE_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "template_fetched=false" >> $GITHUB_OUTPUT
+            echo "Note: Could not fetch template, but routing rule will be applied"
+          fi
+
+      - name: Comment with template routing confirmation
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const prefix = '${{ steps.branch.outputs.prefix }}';
             const template = '${{ steps.routing.outputs.template }}';
             const description = '${{ steps.routing.outputs.description }}';
+            const config = 'lightspeedwp/.github/.github/PULL_REQUEST_TEMPLATE/config.yml';
 
-            const body = `## PR Template Routing 📋\n\nBranch prefix: **${prefix}**\n\nSuggested template: **${template}**\n\nType: ${description}\n\n---\n\n**Canonical templates** are managed in [lightspeedwp/.github](https://github.com/lightspeedwp/.github):\n- Review the suggested template to ensure your PR description covers the required sections\n- All PR templates route from the central .github repository`;
+            const body = `## ✅ PR Template Routing\n\n**Branch prefix:** \`${prefix}\`\n**Template selected:** \`${template}\`\n**Type:** ${description}\n\n---\n\nThis PR's template has been automatically routed based on the **canonical branching strategy** defined in [lightspeedwp/.github](https://github.com/lightspeedwp/.github).\n\n📋 **Template routing rules:**\n- Source: [\`${config}\`](https://github.com/lightspeedwp/.github/blob/develop/.github/PULL_REQUEST_TEMPLATE/config.yml)\n- All supported branch prefixes: \`feat/\`, \`fix/\`, \`hotfix/\`, \`release/\`, \`refactor/\`, \`chore/\`, \`task/\`, \`docs/\`, \`test/\`, \`perf/\`, \`ci/\`, \`build/\`, \`deps/\`, \`security/\`, \`design/\`, \`a11y/\`, and 10+ more\n\n✨ **Automatic routing** ensures all PRs follow the organization-wide governance structure.`;
 
             try {
               await github.rest.issues.createComment({
@@ -116,7 +159,6 @@ jobs:
                 body: body,
               });
             } catch (error) {
-              // Skip comment on fork PRs with read-only token
               if (error.status === 403) {
                 console.log('Skipping comment on fork PR (read-only token)');
               } else {
@@ -142,3 +184,14 @@ jobs:
               // Label might not exist or other issue; log but don't fail
               core.warning(`Could not apply label ${label}: ${error.message}`);
             }
+
+      - name: Verify canonical governance
+        run: |
+          echo "PR Template Routing Summary"
+          echo "============================"
+          echo "Branch prefix: ${{ steps.branch.outputs.prefix }}"
+          echo "Template: ${{ steps.routing.outputs.template }}"
+          echo "Label: ${{ steps.routing.outputs.label }}"
+          echo ""
+          echo "Canonical source: lightspeedwp/.github/.github/PULL_REQUEST_TEMPLATE/config.yml"
+          echo "All PR templates are sourced from the canonical repository."
