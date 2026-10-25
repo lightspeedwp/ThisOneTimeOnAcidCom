@@ -20,7 +20,7 @@ owner: "@ashley"
 
 ## Executive Summary
 
-Specification-001 (Repository Governance Layout & Agentic Workflows) has delivered phases 1–8 of the implementation. Phase 9 convergence and final merge readiness remain pending branch protection (T061) and Discussions setup (T062). The final handoff (T065) is deferred until those gates are complete. PR template routing verification (T060) is complete with all test cases passing.
+Specification-001 (Repository Governance Layout & Agentic Workflows) has delivered phases 1–8 of the implementation. Phase 9 convergence and final merge readiness remain pending PR template routing evidence (T060), branch protection (T061), Discussions setup (T062), and final handoff (T065). T060 routing observation is recorded but evidence for named-template precedence and content preservation is pending.
 
 ### Delivery Status
 - ✅ **All 8 implementation phases completed**
@@ -146,7 +146,6 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 
 | Task | Purpose | Status | Details |
 | --- | --- | --- | --- |
-| T060 | PR template routing verification | ✅ Complete | PR #483 (feat/ → type:feature), PR #484 (fix/ → type:bug), PR #485 (docs/ → type:documentation), PR #486 (test/ → type:test), PR #488 (proto/ → type:maintenance, fallback). Routing comments and labels verified for all cases. |
 | T063 | Styling documentation audit | ✅ Complete | Verified CONTRIBUTING.md and guidelines/css-architecture.md have comprehensive BEM documentation |
 
 **Cancelled Task:**
@@ -159,11 +158,12 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 
 | Task | Purpose | Type | Status | Notes |
 | --- | --- | --- | --- | --- |
+| T060 | PR template routing verification | Phase 9 Task | ⏳ Pending | Routing observed for `feat/*` (type:feature), `fix/*` (type:bug), `docs/*` (type:documentation), `proto/*` (type:maintenance). Evidence for named-template selection precedence and content preservation still required. |
 | T061 | Branch protection configuration | Manual GitHub Setup | ⏳ Pending | GitHub Settings: develop (1 review + CODEOWNERS), main (2 reviews + CODEOWNERS + maintainer push restriction) |
 | T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | GitHub Settings: Enable Discussions with 5 categories (Features, Q&A, Show and Tell, General, Ideas) |
-| T065 | Final handoff documentation | Documentation | ⏳ Pending | Owner (@ashley) must create after T061–T062 complete. T060 and T063 now ✅ |
+| T065 | Final handoff documentation | Documentation | ⏳ Pending | Owner (@ashley) must create after T060–T062 complete. Final convergence assessment and owner sign-off required. |
 
-**Note:** T061 and T062 require owner action (@ashley) via GitHub Settings UI. T064 is cancelled following the owner-approved guard removal recorded above and in tasks.md; this supersedes the older guard rerun instructions. T060 and T063 are complete. The final handoff (T065) awaits completion of T061–T062, final convergence assessment and owner sign-off.
+**Note:** T061 and T062 require owner action (@ashley) via GitHub Settings UI. T064 is cancelled following the owner-approved guard removal recorded above and in tasks.md; this supersedes the older guard rerun instructions. T060 is pending missing evidence for template precedence and content preservation. The final handoff (T065) awaits completion of T060–T062, final convergence assessment and owner sign-off.
 
 ---
 
@@ -297,7 +297,7 @@ Session: https://claude.ai/code/session_01M19XUm4o2NcBPgWmgM9xWE
 Implementation phases 1–8 delivered; Phase 9 convergence remains in progress.
 Jest 601/601 verified in CI; Bats 12/12 reported passing.
 SpecKit 103/104 is the accepted baseline; Playwright configured, not executed.
-Draft handoff only. T061–T062 gate final convergence and T065.
+Draft handoff only. T060–T062 gate final convergence and T065.
 ```
 
 ### Handoff Checklist
@@ -307,9 +307,9 @@ Draft handoff only. T061–T062 gate final convergence and T065.
 - ✅ AI agent governance framework implemented
 - ✅ Documentation updated with new workflows
 - ✅ Phase 9 remaining work documented in tasks.md
-- ⏳ Convergence assessment and final handoff pending T061–T062 manual GitHub Settings
+- ⏳ Convergence assessment and final handoff pending T060–T062
 
-**Next Action:** Owner (@ashley) complete T061–T062 (GitHub Settings), then create T065 final handoff documentation (COMPLETION.md + CATALOG.md updates).
+**Next Action:** Owner (@ashley) complete T060–T062, then create T065 final handoff documentation (COMPLETION.md + CATALOG.md updates).
 
 ---
 
