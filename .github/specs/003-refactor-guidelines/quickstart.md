@@ -113,7 +113,7 @@ grep -E "^### [0-9]+\. (Guideline|Supporting|New Guidance|Pointer)" \
 ```bash
 # 1. Extract all gate sections from requirements.md
 grep "^### D[0-8]:" .github/specs/003-refactor-guidelines/checklists/requirements.md
-# Expected: 8 lines (D0–D8)
+# Expected: 9 lines (D0–D8)
 
 # 2. Check gate status (resolved vs pending) from headings
 RESOLVED=$(grep -c "### .*RESOLVED" .github/specs/003-refactor-guidelines/checklists/requirements.md)
@@ -207,7 +207,8 @@ grep "\[.*#" spec.md plan.md research.md data-model.md | \
 
 ```bash
 # 1. Read constitution principles
-grep -A 5 "^### [IVI]\." ../../../.specify/memory/constitution.md | head -50
+grep -E -A 5 "^### (I|II|III|IV|V|VI|VII)\." \
+  ../../../.specify/memory/constitution.md | head -50
 
 # 2. For each principle, verify research.md documents alignment
 grep -E "Principle (I|II|III|IV|V|VI|VII)" \
@@ -306,6 +307,15 @@ if [ "$CONTRACT_COUNT" -ne 3 ]; then
   echo "  ✗ ERROR: Found $CONTRACT_COUNT contracts (expected: 3)" >&2
   exit 1
 fi
+for contract in \
+  guideline-interface.md \
+  approval-process.md \
+  pointer-redirect-contract.md; do
+  if ! test -f "contracts/$contract"; then
+    echo "  ✗ ERROR: Missing contracts/$contract" >&2
+    exit 1
+  fi
+done
 
 echo ""
 echo "✅ Phase 1 Validation PASSED"
@@ -397,6 +407,15 @@ if [ "$CONTRACT_COUNT" -ne 3 ]; then
   echo "  ✗ ERROR: Found $CONTRACT_COUNT contracts (expected: 3)" >&2
   exit 1
 fi
+for contract in \
+  guideline-interface.md \
+  approval-process.md \
+  pointer-redirect-contract.md; do
+  if ! test -f "contracts/$contract"; then
+    echo "  ✗ ERROR: Missing contracts/$contract" >&2
+    exit 1
+  fi
+done
 
 echo ""
 echo "✅ Phase 1 Validation PASSED"

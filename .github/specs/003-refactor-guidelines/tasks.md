@@ -25,9 +25,9 @@ created: "2026-10-25"
 
 ---
 
-## Phase 1: Planning & Specification ✅ COMPLETE
+## Phase 1: Planning & Specification ✅ DESIGN ARTEFACTS COMPLETE
 
-**Status**: Gate resolution, specification documents, and validation complete.
+**Status**: Phase 1 design artefacts (specification, data model, contracts, checklists, quickstart) are complete. Gate resolution (D1–D6, D8) and validation remain pending.
 
 - [x] Created spec.md with requirements, scope, and decision gates (D0–D8)
 - [x] Created plan.md with implementation roadmap
@@ -41,7 +41,7 @@ created: "2026-10-25"
 
 ## Phase 2: Implementation 🔄 BLOCKED
 
-**Blocking Condition**: Owner decisions on D1–D6, D8 must be recorded in `checklists/requirements.md` lines 30–43 before Phase 2 starts.
+**Blocking Condition**: Owner decisions on D1–D6, D8 must be recorded in `checklists/requirements.md` under their respective gate headings (### D1: through ### D8:) before Phase 2 starts. Use `grep "^### D[1-8]:" checklists/requirements.md` to verify all gates have RESOLVED status.
 
 **Pre-Implementation Verification** (Complete before any tasks):
 
@@ -288,11 +288,11 @@ created: "2026-10-25"
 
 1. **T001–T004**: Pre-implementation verification (MUST complete before any other Phase 2 tasks)
 2. **T005–T018**: S-document edits (can start after T001–T004)
-3. **T019–T027**: G-document edits (can start in parallel with S-docs after T001–T004)
+3. **T019–T027**: G-document edits (must start after T018 completion; can run in parallel with T005–T017 S-docs)
 4. **T028–T032**: N-document creation (blocked on D4; can start after T001–T004 if D4 approved)
 5. **T033–T034**: Pointer operations (can start once G-docs or N-docs are moved)
 6. **T035–T037**: Link validation (can start once all consolidations complete)
-7. **T038–T040**: Design verification (can start in parallel with link validation)
+7. **T038–T040**: Design verification (must start after T037 completion; cannot run in parallel with link validation)
 8. **T041–T043**: Verification & handoff (final phase; must complete all above tasks)
 
 ### Parallel Opportunities
