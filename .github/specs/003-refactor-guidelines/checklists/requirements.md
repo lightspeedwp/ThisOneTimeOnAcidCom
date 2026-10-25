@@ -55,14 +55,13 @@
 ---
 
 ### D4: Documentation Destinations & N-Document Approvals (RESOLVED) ✅ IMPLEMENTATION GUIDANCE RECORDED
-- [x] N-document approvals recorded: **29 of 33 approved for Phase 2; 2 deferred to Phase 3 per D8**
-- [x] Reference (N001–N005): N001 (Design Token Reference) + N002 (Accessibility Checklist) approved; others (N003–N005) approved
+- [x] N-document approvals recorded: **29 of 33 approved for Phase 2; 4 deferred to Phase 3 per D8**
+- [x] Reference (N001–N005): N001 (Design Token Reference) + N002 (Accessibility Checklist) + N003–N005 approved
 - [x] Organization (N006–N018): **All 13 approved**
 - [x] Patterns (N019–N022): **All 4 approved**
 - [x] Pages (N023–N025): **All 3 approved**
 - [x] Reports (N026–N029): **All 4 approved**
-- [x] WordPress (N030–N031): **None approved** — WordPress not used; site is React/Next.js only
-- [x] Other (N032–N033): **Both approved and deferred to Phase 3 per D8**
+- [x] WordPress & Portfolio (N030–N033): **None approved** — All 4 deferred to Phase 3; WordPress not used (D8); portfolio guidance pending tech stack confirmation
 - [x] Directory structure: N-documents live in `guidelines/` directory (same as G-documents)
 - [x] Subfolder organization: **DECIDED** — Flat structure (`guidelines/`) to keep status quo; no reorganization overhead
 - [x] G→N consolidation: **DECIDED** — Hybrid approach: pointers for high-traffic guidelines (Contributing, Accessibility, Design Tokens), delete for archived guidelines; document per-guideline mapping
@@ -288,10 +287,10 @@
 
 | Component | Status | Blocker | Next Step |
 | --- | --- | --- | --- |
-| Gates D0–D8 | 2 resolved / 7 pending | D1–D6 and D8 pending; D0 and D7 resolved | Owner decisions |
-| Source validation | Pending | Baseline comparison outstanding | Pre-impl check |
-| Implementation | Not started | 🔄 Gates | Await decisions |
-| Verification | Not started | 🔄 Gates | Post-impl audit |
+| Gates D0–D8 | ✅ All 8 resolved | None — all gates documented with decisions and implementation guidance | Phase 2 implementation ready |
+| Source validation | ✅ Complete | None | Proceed to Phase 2A/2B |
+| Implementation | 🟡 Ready to start | None — guidance complete; awaiting Phase 2A kickoff | Begin S-document edits and N-document creation |
+| Verification | ⏳ Scheduled | None — will execute post-Phase 2 implementation | Post-impl quality audit |
 
 ---
 
