@@ -296,7 +296,7 @@ const getPageRange = (
   const pages: (number | 'ellipsis')[] = [];
   const halfVisible = Math.floor(maxVisible / 2);
 
-  // Always show first page
+  // Show first page
   pages.push(1);
 
   // Calculate range around current page
@@ -325,7 +325,7 @@ const getPageRange = (
     pages.push('ellipsis');
   }
 
-  // Always show last page
+  // Show last page
   if (totalPages > 1) {
     pages.push(totalPages);
   }

@@ -82,6 +82,6 @@ Standard "Dark Mode" often just inverts colors. **Atomic Black** is different:
 
 ## 5. CSS Implementation Rules
 
-*   **Never** use `box-shadow: 0 0 10px #f0f`. Use `var(--wp--preset--shadow--neon-pink)`.
-*   **Never** use `background: #000`. Use `var(--wp--preset--color--atomic-black)`.
-*   **Always** define `.dark` overrides for neon elements to ensure they "turn off" (become darker/readable) in Light Mode and "turn on" (glow) in Dark Mode.
+*   Use `var(--wp--preset--shadow--neon-pink)` for neon shadows instead of hardcoded values like `box-shadow: 0 0 10px #f0f`.
+*   Use `var(--wp--preset--color--atomic-black)` for background black instead of raw hex values like `#000`.
+*   Define `.dark` overrides for neon elements so they "turn off" (become darker/readable) in Light Mode and "turn on" (glow) in Dark Mode.

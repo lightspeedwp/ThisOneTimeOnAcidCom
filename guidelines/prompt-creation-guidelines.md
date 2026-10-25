@@ -503,7 +503,7 @@ This prompt can be run:
 
 ### ✅ Do
 
-- ✅ Always include complete YAML frontmatter
+- ✅ Include complete YAML frontmatter
 - ✅ Follow folder structure rules strictly
 - ✅ Create one consolidated task list per orchestrator
 - ✅ Wait for all audits to complete before creating tasks

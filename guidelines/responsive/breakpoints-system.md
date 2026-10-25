@@ -74,7 +74,7 @@ Mobile                  Tablet                    Desktop              XL
 
 ### Mobile-First Approach (Recommended)
 
-Always start with mobile styles, then enhance for larger screens:
+Start with mobile styles, then enhance for larger screens:
 
 ```css
 /* ✅ MOBILE-FIRST (RECOMMENDED) */

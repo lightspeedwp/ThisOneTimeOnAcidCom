@@ -204,7 +204,7 @@ Touch vs Hover vs Keyboard interaction patterns.
 
 ### 1. Mobile-First Approach
 
-Always start with mobile styles, then enhance for larger screens:
+Start with mobile styles, then enhance for larger screens:
 
 ```css
 /* ✅ GOOD - Mobile first */
@@ -314,7 +314,7 @@ Let content determine breakpoints, not devices:
 
 ### 4. Touch vs Hover Detection
 
-Always detect interaction capability, don't assume:
+Detect interaction capability; don't assume:
 
 ```css
 /* Base: Works for both touch and hover */

@@ -683,7 +683,7 @@ group-hover:scale-110"
         </div>
       </div>
 
-      {/* Mobile: Always show title */}
+      {/* Mobile: Show title */}
       <div className="md:hidden p-fluid-md bg-white dark:bg-purple-900">
         <h3 className="font-heading text-fluid-lg">{title}</h3>
       </div>

@@ -636,7 +636,7 @@ const Lightbox = lazyLoad(() => import('./components/Lightbox'));
 ### 3. **Image Optimization**
 
 ```tsx
-// Always specify dimensions (prevents CLS)
+// Specify dimensions to prevent CLS
 <OptimizedImage
   src="/image.jpg"
   alt="Description"
@@ -736,7 +736,7 @@ useEffect(() => {
 
 **Solution:**
 
-1. Always specify image dimensions
+1. Specify image dimensions
 
 1. Reserve space for ads/embeds
 

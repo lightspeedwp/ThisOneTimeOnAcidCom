@@ -551,7 +551,7 @@ Prompt](../prompts/modern-react-migration/01-es5-react-audit.md)
 
 ### ✅ Do
 
-- ✅ Always include complete metadata
+- ✅ Include complete metadata
 - ✅ Use dated folders for orchestrator reports
 - ✅ Provide concrete code examples
 - ✅ Quantify issues with statistics

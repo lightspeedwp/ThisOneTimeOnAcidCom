@@ -12,8 +12,8 @@ Every content type in the Ash Shaw portfolio has an assigned neon colour used
 consistently across card accents, badges, tab indicators, FAQ sections, specimen
 pages, timeline markers, and all other content-type-aware UI components.
 
-**Single source of truth:** Always import from
-`/data/mock/ui/content-type-colours.ts` rather than hardcoding hex values.
+**Single source of truth:** Import from
+`/data/mock/ui/content-type-colours.ts` for consistency and maintainability rather than hardcoding hex values.
 
 ---
 
@@ -112,7 +112,7 @@ When styling content-type-aware components, use the modifier segment:
 
 ## Rules
 
-1. **Never hardcode hex values** — Always use CSS variables or import from the data file
+1. **Use CSS variables or data imports** — Avoid hardcoding hex values to keep the colour system maintainable
 
 1. **Maintain consistency** — Every piece of UI that varies by content type must use this mapping
 
