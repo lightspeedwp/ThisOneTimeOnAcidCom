@@ -64,18 +64,19 @@
 - [x] WordPress & Portfolio (N030–N033): **None approved** — All 4 deferred to Phase 3; WordPress not used (D8); portfolio guidance pending tech stack confirmation
 - [x] Directory structure: N-documents live in `guidelines/` directory (same as G-documents)
 - [x] Subfolder organization: **DECIDED** — Flat structure (`guidelines/`) to keep status quo; no reorganization overhead
-- [x] G→N consolidation: **DECIDED** — Hybrid approach: pointers for high-traffic guidelines (Contributing, Accessibility, Design Tokens), delete for archived guidelines; document per-guideline mapping
+- [x] G→N consolidation: **DECIDED** — Hybrid approach: pointers for high-traffic guidelines (Contributing, Accessibility, Design Tokens), preservation in `guidelines/_archive/` for archived guidelines per D5; document per-guideline mapping
 - [x] Supporting skills: Six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration) remain unchanged
 
-**Decision Statement - D4.a (Subfolder):** Keep flat `guidelines/` structure for active documents. No subcategories; all 145 active documents (116 G + 29 N) live directly in `guidelines/`. Archive exception: deprecated/consolidated guidelines move to `guidelines/_archive/`. Rationale: simple, no migration overhead for active docs, aligns with current G-doc structure; archive subdirectory preserves historical records.
+**Decision Statement - D4.a (Subfolder):** Keep flat `guidelines/` structure for active documents. No subcategories. The pre-refactor inventory is 116 G-documents; 145 (116 baseline G + 29 approved N) is the planning total before consolidation, not a final active-document count. The Phase 2A consolidation manifest determines the final active count, excluding archives and pointer files, while accounting for all 116 baseline G-entities per the data model. Archive exception: deprecated/consolidated guidelines move to `guidelines/_archive/` per D5. Rationale: simple, no migration overhead for active docs, aligns with current G-doc structure; archive subdirectory preserves historical records.
 
-**Active documents rule:** G-documents and N-documents remain directly in `guidelines/`.  
+**Active documents rule:** Active G-documents and approved N-documents remain directly in `guidelines/`.
+
 **Archive exception:** Archived documents moved to `guidelines/_archive/{guideline-name}.md`.
 
 **Decision Statement - D4.b (G→N Mapping):** Use hybrid consolidation strategy:
 - **Pointers for high-traffic G-docs:** Creating `guidelines/old-path.md` → pointer redirecting to `brand-voice-messaging.md` (N-location within `guidelines/`). Applies to frequently referenced guidelines (Contributing, Accessibility, Design Tokens, etc.)
-- **Delete for archived G-docs:** Fully remove G-docs when consolidating into archives or when WordPress/deprecated content has no external references.
-- **Generate consolidation manifest during Phase 2A:** Document per-guideline decision (pointer vs. delete) with rationale for each.
+- **Preserve archived G-docs per D5:** Preserve archived or deprecated G-documents in `guidelines/_archive/`, including WordPress content with no external references. Each must have a valid Type 3 `new_path` to a replacement N-document or a separately approved archive entity per D5.d; the destination must exist and be accessible before pointer deployment. Archival or lack of external references alone does not authorise deletion.
+- **Generate consolidation manifest during Phase 2A:** Document each G-document's disposition, destination, pointer type, rationale and approval evidence, and reconcile baseline entity coverage with the final active, archive and pointer counts. Record any explicitly approved per-document exception to preservation in this manifest before implementation; this rule grants no exception by itself.
 
 **Evidence:** User guidance recorded 2026-10-25
 
@@ -203,7 +204,7 @@
 
 **Implementation Guidance Provided (2026-10-25):** ✅
 1. ✅ D4.a: Subfolder structure — Flat `guidelines/` (no subcategories)
-2. ✅ D4.b: G→N consolidation — Hybrid (pointers for high-traffic, delete for archived); manifest to be generated
+2. ✅ D4.b: G→N consolidation — Hybrid (pointers for high-traffic, archive preservation per D5); manifest and any approved per-document exceptions recorded before implementation
 3. ✅ D5: Pointer chain depth — 1-hop maximum (P cannot point to P)
 4. ✅ D5: Archive location & reverse links — `guidelines/_archive/` with comment-based pointers
 5. ✅ D6: Backend provider stack — Canonical (Vercel/Supabase/tRPC) + documented alternatives
@@ -222,7 +223,7 @@
 - [ ] All 116 G-rows: { path, hash, operation, destination, decision, status }
 - [ ] All 9 S-rows: same + protected-file approval reference
 - [ ] All 33 N-rows: { approval status, dependency resolution, pointer validation }
-- [ ] Row counts reconcile: 116 + 9 + 33 + 0 (no move/delete) = 158 tracked
+- [ ] Row counts reconcile: 116 baseline G + 9 S + 33 proposed N = 158 tracked entities; active, archive and pointer counts reconcile separately with the Phase 2A manifest
 
 ### Link & Anchor Validation
 - [ ] 129 internal reference candidates classified (defect vs working)
@@ -264,7 +265,7 @@
 - [x] Understands full scope (116+9+33 documents)
 - [x] Has authority to edit protected files (D0)
 - [x] Has received resolved gates for D1–D8 (recorded 2026-10-25)
-- [x] Agrees to non-destructive consolidation approach (hybrid G→N with pointers or deletion per guideline)
+- [x] Agrees to non-destructive consolidation approach (hybrid G→N with pointers and archive preservation per D5; approved per-document exceptions recorded before implementation)
 - [x] Commits to preservation rules (Type 1/2/3 pointers; 1-hop limit; hybrid archival)
 
 ### Quality Owner
@@ -280,7 +281,7 @@
 - [x] **Phase 2 Status: UNBLOCKED** — All 5 implementation guidance items provided (2026-10-25)
 - [x] Implementation guidance recorded: D4.a, D4.b, D5, D6 guidance decisions documented in requirements.md
 - [x] Phase 2A ready to begin: S-document edits, N-document creation, consolidation manifest generation
-- [x] Phase 2B ready to proceed: G→N mapping, pointer/delete decisions, archive operations
+- [x] Phase 2B ready to proceed: G→N mapping, pointer/archive decisions, approved exceptions recorded in Phase 2A manifest before implementation
 - [x] PR review ready: Gates documented; implementation guidance provided
 - [x] Plan: Executable; guidance resolution complete
 - [x] Tasks: Ready (unblocked by guidance decisions)

@@ -195,11 +195,13 @@ BASELINE STATE:
   N-count: 33 proposed new documents (pending D4 approval)
   
 EXPECTED COMPLETE STATE:
-  G-count: 116 ✓ (no G-documents deleted; paths mapped or redirected)
+  G-count: 116 ✓ (no G-documents deleted; active/archived paths mapped or redirected)
   S-count: 9 ✓ (updated references, no new S-documents unless approved)
   N-count: 0–33 (depends on D4 approval subset)
   P-count: Variable (depends on D5 preservation strategy)
 ```
+
+G-count tracks coverage of all 116 baseline G-entities, not the number of active guideline files. D4 currently approves 29 N-documents, so 145 (116 G + 29 N) is the planning total before consolidation. The Phase 2A consolidation manifest must reconcile the final active, archive and pointer counts separately: archived G-documents remain preserved in `guidelines/_archive/` per D5 and require valid Type 3 destinations. Any explicitly approved per-document exception to this preservation baseline must be recorded in that manifest before implementation.
 
 ### Verification Checksum
 ```text
