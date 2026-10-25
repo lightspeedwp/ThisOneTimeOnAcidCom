@@ -2,7 +2,7 @@
 title: "Tasks: Guidelines Refactor (TOA-358)"
 spec_id: "003"
 feature: "guidelines-refactor"
-status: "Phase 2 Implementation (Blocked on Implementation Guidance)"
+status: "Phase 2 Implementation Ready"
 created: "2026-10-25"
 ---
 
@@ -10,7 +10,7 @@ created: "2026-10-25"
 
 **Specification**: [spec.md](./spec.md) | **Plan**: [plan.md](./plan.md) | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
 
-**Status**: Phase 2 Implementation — **BLOCKED** until implementation guidance on 5 items (D4.a, D4.b, D5.a, D5.b, D6) is provided. Owner decisions D0–D8 are already RESOLVED and recorded in requirements.md
+**Status**: Phase 2 Implementation — **READY** (all owner decisions D0–D8 RESOLVED and recorded in requirements.md with implementation guidance)
 
 **Total Tasks**: 43 (across Phases 2 & 3)
 
