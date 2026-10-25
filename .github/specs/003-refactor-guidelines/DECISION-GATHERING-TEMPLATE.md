@@ -10,7 +10,7 @@ created: "2026-10-25"
 
 ## Overview
 
-**Purpose:** Historical template used to gather owner decisions on gates D1–D6, D8. Its pending statuses describe the earlier decision session; current resolved decisions are recorded in [requirements.md](./checklists/requirements.md).
+**Purpose:** Structured template for owner to record decisions on gates D1–D6, D8, unblocking Phase 2 implementation.
 
 ## Requirements
 
@@ -316,7 +316,7 @@ Example:
 | **D4** | 🔄 PENDING    | N-doc approvals, G→N mapping & skills   | [Record above] — **CRITICAL**                                    |
 | **D5** | 🔄 PENDING    | Pointer strategy & archive approach     | [Record above]                                                   |
 | **D6** | 🔄 PENDING    | Backend tech stack & integration docs   | [Record above]                                                   |
-| **D7** | ✅ RESOLVED   | No                                      | Historical Phase 1 branch: `docs/spec-003-guidelines-reconcile` (superseded by `docs/spec-003-phase2-implementation`)                     |
+| **D7** | ✅ RESOLVED   | No                                      | Branch: `docs/spec-003-phase2-implementation`                    |
 | **D8** | 🔄 PENDING    | WordPress presence & portfolio guidance | [Record above]                                                   |
 
 ---
