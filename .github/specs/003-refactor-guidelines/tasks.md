@@ -10,7 +10,7 @@ created: "2026-10-25"
 
 **Specification**: [spec.md](./spec.md) | **Plan**: [plan.md](./plan.md) | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
 
-**Status**: Phase 2 Implementation — **BLOCKED** until implementation guidance on 5 items (D4.a, D4.b, D5.a, D5.b, D6) is provided. Owner decisions D0–D8 are already RESOLVED and recorded in requirements.md
+**Status**: Phase 2 Implementation — **UNBLOCKED** (2026-10-25). All owner decisions D0–D8 RESOLVED; implementation guidance provided (requirements.md § D4.a, D4.b, D5.a, D5.b, D5.c, D5.d, D6). Pre-implementation verification (T001–T004) required before task execution.
 
 **Total Tasks**: 43 (across Phases 2 & 3)
 

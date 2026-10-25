@@ -52,7 +52,7 @@ $ find guidelines -type f -name "*.md" | wc -l
 
 ### 4. PR Template Routing Configuration
 
-**Status:** 🔄 HISTORICAL — D7 decision superseded the `aiops/refactor-guidelines` branch with `docs/spec-003-guidelines-reconcile`. This finding documents the earlier branch's routing configuration.
+**Status:** ✅ SUPERSEDED BY D7 — D7 decision changed branch prefix from `aiops/refactor-guidelines` to `docs/spec-003-guidelines-reconcile`, which routes correctly via existing PR template mapping. Original `aiops` routing problem no longer applies; documentation retained for historical reference.
 
 **Finding:** PR template router lacks `aiops/` prefix entry; specification branch `aiops/refactor-guidelines` would route incorrectly.
 
