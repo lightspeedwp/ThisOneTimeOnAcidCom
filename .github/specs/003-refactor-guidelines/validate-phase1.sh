@@ -42,8 +42,8 @@ fi
 echo "✓ Checking decision gates..."
 GATE_ERRORS=0
 
-# Check D0 and D7 are RESOLVED in requirements.md
-for gate in D0 D7; do
+# Check all D0–D8 gates are RESOLVED in requirements.md
+for gate in D0 D1 D2 D3 D4 D5 D6 D7 D8; do
   if grep -E "^### $gate:" "checklists/requirements.md" >/dev/null 2>&1; then
     if grep -A 1 "^### $gate:" "checklists/requirements.md" | grep -q "RESOLVED"; then
       echo "  ✓ $gate: RESOLVED"
@@ -53,16 +53,6 @@ for gate in D0 D7; do
     fi
   else
     echo "  ✗ ERROR: $gate is not documented" >&2
-    GATE_ERRORS=$((GATE_ERRORS + 1))
-  fi
-done
-
-# Check D1–D6 and D8 are PENDING in research.md
-for gate in D1 D2 D3 D4 D5 D6 D8; do
-  if grep -E "^### Gate $gate:" research.md >/dev/null 2>&1; then
-    echo "  ✓ $gate: PENDING"
-  else
-    echo "  ✗ ERROR: $gate is not documented in research.md" >&2
     GATE_ERRORS=$((GATE_ERRORS + 1))
   fi
 done
