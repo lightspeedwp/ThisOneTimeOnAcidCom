@@ -1,10 +1,11 @@
 # Contributing to ThisOneTimeOnAcid
 
 Thank you for your interest in contributing to the Ash Shaw makeup portfolio
-project.
-This guide covers setup, validation and the contribution workflow. It is based
+project. This guide covers setup, validation and the contribution workflow. It is based
 on the repository's own files. Where the repository is inconsistent, the open
 questions are listed under [Unresolved decisions](#unresolved-decisions).
+
+**Design Authority:** Ash Shaw (site designer). All user-facing changes are subject to design review and approval. **Accessibility Target (D3 Decision):** All changes must validate **WCAG 2.2 AAA compliance** — see [Accessibility Checklist](guidelines/accessibility-checklist.md) for detailed requirements.
 
 AI agents should also read [AGENTS.md](AGENTS.md).
 
@@ -91,7 +92,7 @@ map to `src/app/components/` and `src/styles/`. The full mapping is in
 
 ### Deployment
 
-The Netlify site settings, checked on 3 October 2026, are:
+The current deployment uses Netlify as a static SPA host. Site settings (checked 3 October 2026):
 
 - Base directory: repository root
 - Build command: `npm run build`
@@ -107,6 +108,14 @@ whether the package-directory UI setting is configured:
 
 SPA routing is defined in the plain-text `public/_redirects` file, which Vite
 copies to `dist/_redirects` — keep it as a plain file, not a directory.
+
+**Canonical Backend Stack (D6 Decision):** For future backend integration, the approved stack is:
+- **Serverless:** Vercel Functions (auto-scaling, AWS Lambda runtime)
+- **Database:** Supabase PostgreSQL
+- **API Layer:** tRPC with Next.js
+- **ORM:** Prisma
+
+See [Backend Integration & Deployment](guidelines/backend-integration-deployment.md) for the canonical stack and documented alternatives per D6 decision.
 
 **Note:** SPA routing configuration is tracked in [PR
 
@@ -252,6 +261,8 @@ numbered sequentially starting from 001.
 All conventions are documented in
 **[guidelines/Guidelines.md](guidelines/Guidelines.md)**. Follow the reading
 order in [guidelines/README.md](guidelines/README.md). The key rules are:
+
+**Voice and Tone (D1 Decision):** All copy and documentation use Balanced Hybrid tone — professional yet conversational. See [Brand Voice & Messaging](guidelines/brand-voice-messaging.md) for tone guidelines and examples. User-facing changes should balance authority with accessibility and encouragement.
 
 ### Styling: semantic BEM
 
