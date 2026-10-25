@@ -47,8 +47,8 @@ motion. Respecting this preference is a core accessibility requirement.
 - **2.3.3 Animation from Interactions (Level AAA)** -- Motion animation triggered by interaction can be disabled unless it is essential.
 - **2.2.2 Pause, Stop, Hide (Level A)** -- Moving, blinking, or scrolling content must be pausable.
 
-This project targets **WCAG 2.2 Level AAA** compliance. Full `prefers-reduced-motion` 
-support across all 26 keyframe animations and all component transitions is part of this 
+This project targets **WCAG 2.2 Level AAA** compliance. Full `prefers-reduced-motion`
+support across all 26 keyframe animations and all component transitions is part of this
 enhanced accessibility standard.
 
 ---
