@@ -81,6 +81,7 @@
 ### D5: Historical Preservation & Pointer Strategy (RESOLVED) ✅ IMPLEMENTATION GUIDANCE RECORDED
 - [x] Pointer strategy: **Hybrid approach** — Different preservation strategy per guideline (decision to be specified per G-doc)
 - [x] Pointer types approved: Type 1 (Relocation), Type 2 (Consolidation), Type 3 (Archival) per pointer-redirect-contract.md
+- [x] Type 3 constraint: **DECIDED** — Type 3 pointers MUST reference a valid new_path to replacement or archive entity; no orphaned pointers
 - [x] Archive handling: **DECIDED** — Deprecated guidelines moved to `guidelines/_archive/` with comment-based pointers
 - [x] Pointer chain depth: **DECIDED** — 1-hop maximum (P cannot point to another P); no circular chains
 - [x] Reverse links: **DECIDED** — Comment-based pointers in archived files; N-docs remain clean
@@ -97,9 +98,11 @@
 - **Archived file HTML comment:** `<!-- Consolidated into: ../brand-voice.md -->`
 - **Rationale:** Human-friendly visual signal in both locations, supports discovery in both directions
 
+**Decision Statement - D5.d (Type 3 Pointer Constraint):** Type 3 (Archival) pointers MUST reference a valid `new_path` per pointer-redirect-contract.md § Type 3 acceptance criteria. Archive destination must be either: (1) a replacement N-document, or (2) a separately approved archive entity in `guidelines/_archive/`. No orphaned Type 3 pointers without valid destination. Rationale: ensures non-destructive consolidation principle; prevents broken redirect chains; maintains historical provenance.
+
 **Decision Statement - D5 (Pointer Chains):** Maximum 1-hop chain depth strictly enforced. P cannot point to another P; only P → (G or N). Rationale: predictable link traversal, simple tooling, zero circular chain risk. Future consolidations create new N-docs; old pointers stay in place.
 
-**Evidence:** User guidance recorded 2026-10-25
+**Evidence:** User guidance recorded 2026-10-25; pointer-redirect-contract.md § Type 3 Acceptance Criteria validates Type 3 constraint
 
 ---
 

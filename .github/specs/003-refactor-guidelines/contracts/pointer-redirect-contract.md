@@ -1,7 +1,7 @@
 # Contract: Pointer & Redirect Strategy
 
 **Specification:** [Specification 003](../spec.md) | **Data Model:** [../data-model.md](../data-model.md)  
-**Status:** Design Contract — Awaiting Owner Decision (D5)  
+**Status:** Design Contract — ✅ D5 (Preservation Strategy) RESOLVED; Implementation Ready  
 **Date:** 2026-10-24
 
 ---
@@ -261,4 +261,4 @@ This pointer contract is satisfied when:
 
 ---
 
-*Contract complete 2026-10-24 | Awaiting D5 (Preservation Strategy) decision*
+*Contract complete 2026-10-24 | D5 (Preservation Strategy) decision recorded 2026-10-25*
