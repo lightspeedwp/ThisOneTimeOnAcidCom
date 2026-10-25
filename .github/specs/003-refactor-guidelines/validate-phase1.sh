@@ -64,6 +64,16 @@ fi
 
 # 4. Contract completeness
 echo "✓ Validating contracts..."
+MISSING_CONTRACTS=0
+for contract in guideline-interface.md approval-process.md pointer-redirect-contract.md; do
+  if ! test -f "contracts/$contract"; then
+    echo "  ✗ ERROR: Missing required contract: contracts/$contract" >&2
+    MISSING_CONTRACTS=$((MISSING_CONTRACTS + 1))
+  fi
+done
+if [ "$MISSING_CONTRACTS" -gt 0 ]; then
+  exit 1
+fi
 CONTRACT_COUNT=$(find contracts -name "*.md" -type f 2>/dev/null | wc -l)
 if [ "$CONTRACT_COUNT" -eq 3 ]; then
   echo "  ✓ Contracts defined: $CONTRACT_COUNT (expected: 3)"
