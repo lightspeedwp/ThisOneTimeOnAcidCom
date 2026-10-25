@@ -91,6 +91,37 @@ for contract in guideline-interface.md approval-process.md pointer-redirect-cont
 done
 echo "  ✓ All required contracts present"
 
+# 5. Phase 2 readiness check (separate from Phase 1 artifact validation)
+echo "✓ Checking Phase 2 readiness..."
+BLOCKING_GUIDANCE=0
+
+# Check for implementation guidance items in requirements.md
+# These are the 5 blocking decisions that must be recorded before Phase 2 can proceed
+GUIDANCE_ITEMS=(
+  "D4.a: Subfolder structure"
+  "D4.b: G→N consolidation"
+  "D5: Pointer chain depth"
+  "D5: Archive location & reverse links"
+  "D6: Backend provider stack"
+)
+
+for item in "${GUIDANCE_ITEMS[@]}"; do
+  if grep "✅ $item" "checklists/requirements.md" >/dev/null 2>&1; then
+    echo "  ✓ $item recorded"
+  else
+    echo "  ⚠ $item not yet recorded"
+    BLOCKING_GUIDANCE=$((BLOCKING_GUIDANCE + 1))
+  fi
+done
+
 echo ""
 echo "✅ Phase 1 Validation PASSED"
-echo "📋 All owner gates (D0–D8) are RESOLVED. Phase 2 implementation blocked on 5 guidance items: D4.a, D4.b, D5.a, D5.b, D6"
+echo "   All Phase 1 artifacts present and gates RESOLVED."
+
+if [ "$BLOCKING_GUIDANCE" -eq 0 ]; then
+  echo "✅ Phase 2 Readiness: ALL GUIDANCE RECORDED"
+  echo "   All 5 implementation guidance items documented. Phase 2 implementation ready."
+else
+  echo "⏳ Phase 2 Readiness: $BLOCKING_GUIDANCE guidance item(s) pending"
+  echo "   Record remaining guidance decisions before proceeding to Phase 2."
+fi
