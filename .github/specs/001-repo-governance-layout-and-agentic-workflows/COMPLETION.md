@@ -255,18 +255,17 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 - ✅ **Implementation Delivered:** Phases 1–8 complete; final acceptance pending Phase 9 gates
 - ✅ **Recorded Test Results:** Jest 601/601 verified in CI; Bats 12/12 reported passing
 - ✅ **Merged to develop:** PR #346 successfully merged
-- ⏳ **Ready for Main:** Pending T060, T061, T062 and T064, final convergence assessment and owner sign-off
+- ⏳ **Ready for Main:** Pending T061, T062 and T064, final convergence assessment and owner sign-off
 
 ---
 
 ## Outstanding Items & Next Steps
 
 ### Phase 9 Implementation (Required Before Merge to Main)
-1. **T060:** Record test PR references and observed template/label results for feat, fix, docs and unmatched prefixes
-2. **T061:** Configure branch protection rules in GitHub Settings
-3. **T062:** Enable GitHub Discussions and configure categories
-4. **T064:** Revalidate Check Protected Files using the approval recorded for PR #429 in lightspeedwp/.github#3975
-5. **T065:** Finalise the draft handoff after the outstanding convergence gates are complete
+1. **T061:** Configure branch protection rules in GitHub Settings
+2. **T062:** Enable GitHub Discussions and configure categories
+3. **T064:** Revalidate Check Protected Files using the approval recorded for PR #429 in lightspeedwp/.github#3975
+4. **T065:** Finalise the draft handoff after the outstanding convergence gates are complete
 
 ### Owner Sign-Off Required
 - **Final Review:** Owner (@ashley) to review specification and implementation
@@ -295,7 +294,7 @@ Session: https://claude.ai/code/session_01M19XUm4o2NcBPgWmgM9xWE
 Implementation phases 1–8 delivered; Phase 9 convergence remains in progress.
 Jest 601/601 verified in CI; Bats 12/12 reported passing.
 SpecKit 103/104 is the accepted baseline; Playwright configured, not executed.
-Draft handoff only. T060, T061, T062 and T064 gate final convergence and T065.
+Draft handoff only. T061, T062 and T064 gate final convergence and T065.
 ```
 
 ### Handoff Checklist
