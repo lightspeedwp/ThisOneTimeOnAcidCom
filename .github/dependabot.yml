@@ -45,9 +45,6 @@ updates:
     labels:
       - area:dependencies
       - area:ci
-    auto-merge:
-      enabled: true
-      squash: true
 
   # npm dependencies — minor and patch grouped; major separate, weekly (Monday)
   # Requires confirmation that npm is the authoritative package manager.
@@ -71,9 +68,6 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - area:dependencies
-    auto-merge:
-      enabled: true
-      squash: true
 
 # Security updates
 #

@@ -19,12 +19,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Protected files guidance** — Added `.github/PROTECTED_FILES.txt` documenting canonical governance files and change request process for labels, issue types, and PR templates
 - **SpecKit configuration** — Added `.specify/init-options.json` setting feature directory to `.github/specs` for specification-first workflow
 
+### Removed
+
+- **Dependabot native auto-merge configuration** — Removed the native `auto-merge` configuration from `.github/dependabot.yml`. This property is no longer part of Dependabot's schema; automatic merging is now handled centrally by the `dependabot-auto-merge.yml` workflow
+
 **Specification 003: Guidelines Refactor (TOA-358)**
 
 - **Gate resolution D1–D8** — Recorded owner decisions for Guidelines Refactor specification: (D1) Balanced hybrid voice profile with 116 guidelines aligned; (D2) Hybrid publication boundaries with mixed content states; (D3) WCAG 2.2 AAA accessibility target with Ash Shaw as design authority; (D4) 29 of 33 N-documents approved for Phase 2 (N031–N033 deferred to Phase 3 per D8) with hybrid G→N consolidation strategy; (D5) Type 1/2/3 pointer strategy approved; (D6) Hybrid backend integration approach; (D8) WordPress out of scope (React/Next.js only). All decisions recorded in `.github/specs/003-refactor-guidelines/checklists/requirements.md` with evidence links. Phase 2 implementation blocked pending guidance on: (1) subfolder structure for guidelines/ (D4.a), (2) G→N consolidation mapping (D4.b), (3) pointer chain depth confirmation—currently 1-hop maximum per contract, user to confirm acceptable (D5.a), (4) archive location and reverse-link policy (D5.b), and (5) backend provider stack specification (D6)
 
 ### Fixed
 
+- **Dependabot schema validation** — Removed unsupported `auto-merge` properties from `.github/dependabot.yml` that were causing CI validation failures. The `auto-merge` property is no longer part of Dependabot's schema; native auto-merge functionality has been replaced with the centralized `dependabot-auto-merge.yml` workflow
 - **React externalization removed** — Removed the `resolveReactExternals()` plugin and `build.rollupOptions.external/globals` from `vite.config.ts`. They marked `react` and `react-dom` as external with no import map to resolve them, which broke `npm run dev` and left unresolvable `from "react"` imports in the production bundle. React is now bundled normally, as `@sentry/react` requires. This supersedes the restoration listed below under Issue #306
 - **CodeRabbit docstring coverage** — Added docstrings to 7 functions across netlify-hashed-asset-headers.mjs, check-netlify-headers.mjs, and vite.config.ts to meet 80% documentation coverage threshold (PR #426)
 - **React external dependency resolution regression** — Restored missing `resolveReactExternals()` function and `build.rollupOptions` in Vite configuration that was accidentally removed in PR #345, causing all 7 subsequent Dependabot PRs to fail Netlify builds with unresolved `react/jsx-runtime` import errors (Issue #306)
