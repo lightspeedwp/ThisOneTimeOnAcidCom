@@ -352,7 +352,8 @@ status: "Phase 2A Working Document"
 **Related G-Documents (Archive):**
 - guidelines/accessibility-report-feb-2025.md (archive)
 
-**Destination Path:** `guidelines/_archive/accessibility-report-feb-2025.md`  
+**Destination Path:** `guidelines/_archive/accessibility-report-pointer.md`
+
 **Pointer Strategy:** Type 3 (Archival) – comment pointer in archive noting consolidation into N002.  
 **Status:** Archive existing; create pointer in archive comment
 
@@ -363,7 +364,8 @@ status: "Phase 2A Working Document"
 **Related G-Documents (Archive):**
 - guidelines/performance-optimization-report.md (archive)
 
-**Destination Path:** `guidelines/_archive/performance-report.md`  
+**Destination Path:** `guidelines/_archive/performance-report-pointer.md`
+
 **Pointer Strategy:** Type 3 (Archival) – comment pointer noting consolidation into N017.  
 **Status:** Archive existing; create pointer
 
@@ -375,7 +377,8 @@ status: "Phase 2A Working Document"
 - guidelines/dark-mode-lessons-learned.md (archive)
 - guidelines/nova-news-dark-mode.md (archive; out-of-scope per D8 if Nova News unrelated)
 
-**Destination Path:** `guidelines/_archive/dark-mode-report.md`  
+**Destination Path:** `guidelines/_archive/dark-mode-report-pointer.md`
+
 **Pointer Strategy:** Type 3 (Archival).  
 **Status:** Archive existing; create pointer
 

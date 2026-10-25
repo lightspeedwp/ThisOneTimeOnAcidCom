@@ -20,7 +20,7 @@
 
 - Hover states: Color/opacity change
 - Focus states: Visible outline (3px minimum)
-- Disabled states: Reduced opacity + pointer-none
+- Disabled states: Reduced opacity + `pointer-events: none`
 
 ---
 

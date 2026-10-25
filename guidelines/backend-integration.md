@@ -12,7 +12,7 @@
 - **Database:** Supabase PostgreSQL
 - **API Layer:** tRPC with Next.js
 - **ORM:** Prisma
-- **Deployment:** Vercel + GitHub Actions
+- **Deployment:** Vercel + GitHub Actions (planned backend deployment); Netlify (current static SPA host)
 
 ---
 

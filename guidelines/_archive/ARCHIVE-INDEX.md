@@ -16,16 +16,16 @@ This index tracks deprecated or consolidated guidelines moved to `guidelines/_ar
 
 ### Consolidated Reports
 
-- **Accessibility Audit Report** (`accessibility-report-pointer.md`)
-  - Consolidated into: N002 (Accessibility Checklist)
+- **Accessibility Audit Report** ([accessibility-report-pointer.md](./accessibility-report-pointer.md))
+  - Consolidated into: [N002 (Accessibility Checklist)](../accessibility-checklist.md)
   - Reason: Merged into active checklist
 
-- **Performance Audit Report** (`performance-report-pointer.md`)
-  - Consolidated into: N017 (Performance Optimization)
+- **Performance Audit Report** ([performance-report-pointer.md](./performance-report-pointer.md))
+  - Consolidated into: [N017 (Performance Optimization)](../performance-optimization.md)
   - Reason: Merged into active guide
 
-- **Dark Mode Implementation Report** (`dark-mode-report-pointer.md`)
-  - Consolidated into: N003 (CSS Architecture)
+- **Dark Mode Implementation Report** ([dark-mode-report-pointer.md](./dark-mode-report-pointer.md))
+  - Consolidated into: [N003 (CSS Architecture)](../css-architecture-reference.md)
   - Reason: Merged into architecture reference
 
 ---

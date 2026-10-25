@@ -154,9 +154,9 @@ Block, Element, Modifier (BEM) naming convention ensures predictable, maintainab
 | Name | Size | Use Case |
 |------|------|----------|
 | mobile | < 640px | Mobile phones |
-| tablet | 640px – 1024px | Tablets, small laptops |
-| desktop | 1024px – 1536px | Desktops |
-| wide | > 1536px | Large monitors |
+| tablet | 640px ≤ width < 1024px | Tablets, small laptops |
+| desktop | 1024px ≤ width < 1536px | Desktops |
+| wide | ≥ 1536px | Large monitors |
 
 ### Media Query Usage
 

@@ -57,7 +57,7 @@ All colors have dark mode variants. See `guidelines/design-tokens/light-dark-mod
 
 ## 2. Spacing System
 
-Spacing values follow an 8px base unit progression:
+Spacing values use an 8px base unit, with `xs` (4px) as a half-step:
 
 | Scale | Value | Use Case |
 |-------|-------|----------|
@@ -167,9 +167,15 @@ Design tokens are implemented as CSS custom properties in your theme:
 ### Apply Brand Color
 
 ```tsx
-<button style={{ color: 'var(--color-primary)' }}>
+<button className="button button--brand">
   Click Me
 </button>
+```
+
+```css
+.button--brand {
+  color: var(--color-primary);
+}
 ```
 
 ### Use Spacing Scale
@@ -185,9 +191,15 @@ Design tokens are implemented as CSS custom properties in your theme:
 ### Typography Hierarchy
 
 ```tsx
-<h1 style={{ fontSize: 'var(--text-size-h1)' }}>
+<h1 className="hero__title">
   Main Title
 </h1>
+```
+
+```css
+.hero__title {
+  font-size: var(--text-size-h1);
+}
 ```
 
 ---

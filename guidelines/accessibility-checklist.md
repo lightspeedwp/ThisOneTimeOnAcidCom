@@ -29,7 +29,7 @@ Actionable accessibility checklist for ensuring WCAG 2.2 AAA compliance across a
 
 ### Visual & Contrast
 
-- [ ] All text has minimum 7:1 contrast ratio (WCAG AAA)
+- [ ] Normal text has minimum 7:1 contrast ratio; large text has minimum 4.5:1 (WCAG AAA)
 - [ ] Icons have minimum 7:1 contrast when used as solo controls
 - [ ] Color is never the sole indicator of information
 - [ ] Dark mode variants meet contrast requirements
@@ -86,7 +86,7 @@ Actionable accessibility checklist for ensuring WCAG 2.2 AAA compliance across a
 
 **Criterion 1.4.6 (Contrast Enhanced)**
 - Minimum 7:1 contrast for normal text
-- Minimum 4.5:1 for large text (18px+ or 14px+ bold)
+- Minimum 4.5:1 for large text (18pt+ or 14pt+ bold)
 
 **Criterion 1.4.8 (Visual Presentation)**
 - Line spacing at least 1.5 × font size
@@ -111,8 +111,10 @@ Actionable accessibility checklist for ensuring WCAG 2.2 AAA compliance across a
 
 #### Focus Management
 
+**Incomplete example:** This snippet shows dialog markup only. Before use, implement Tab/Shift+Tab focus containment within the open dialog and restore focus to the previously focused element when it closes.
+
 ```tsx
-// Focus trap for modals
+// Dialog markup only; focus trapping and restoration are not implemented
 <div role="dialog" aria-labelledby="dialog-title">
   <h2 id="dialog-title">Confirm Action</h2>
   {/* Content goes here */}
@@ -223,7 +225,7 @@ Use browser tools to catch:
 - **Accessibility Recipes:** `guidelines/accessibility-recipes.md` (detailed WCAG patterns)
 - **Interaction Accessibility:** `guidelines/interactions-accessibility.md` (keyboard & ARIA)
 - **Prefers Reduced Motion:** `guidelines/prefers-reduced-motion.md` (motion handling)
-- **Accessibility Audit Report:** `guidelines/_archive/accessibility-report-feb-2025.md` (Feb 2025 findings)
+- **Accessibility Audit Report:** [Archived report pointer](./_archive/accessibility-report-pointer.md), listed in the [archive index](./_archive/ARCHIVE-INDEX.md) (Feb 2025 findings)
 
 ---
 
@@ -234,7 +236,7 @@ Before merging any feature:
 - [ ] Automated accessibility tests pass (axe, Lighthouse)
 - [ ] Manual keyboard navigation works end-to-end
 - [ ] Screen reader announces page structure correctly
-- [ ] Color contrast meets 7:1 ratio requirement
+- [ ] Text contrast meets 7:1 for normal text and 4.5:1 for large text
 - [ ] No content flashes more than 3x/second
 - [ ] Reduced motion preference is respected
 - [ ] Focus indicators are visible and logical

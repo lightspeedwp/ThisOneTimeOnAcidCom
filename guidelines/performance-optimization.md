@@ -9,7 +9,7 @@
 ## Performance Targets
 
 - **Largest Contentful Paint (LCP):** < 2.5s
-- **First Input Delay (FID):** < 100ms
+- **Interaction to Next Paint (INP):** ≤ 200 ms
 - **Cumulative Layout Shift (CLS):** < 0.1
 - **Page Load:** < 3s (3G)
 
@@ -27,7 +27,7 @@
 
 ## Performance Audit Report
 
-See `guidelines/_archive/performance-report.md` for Feb 2025 findings.
+See the [archived report pointer](./_archive/performance-report-pointer.md) for the Feb 2025 findings reference.
 
 ---
 
