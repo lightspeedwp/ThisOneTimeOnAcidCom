@@ -446,7 +446,7 @@ Schedule: Every Sunday 2 AM UTC
 
 ## Implementation Checklist (For TOA-271)
 
-- [ ] Document routing rules per skill in `.claude/skills/INVENTORY.md`
+- [ ] Document routing rules per skill in `.agents/skills/INVENTORY.md`
 - [ ] Add execution environment to each skill definition (`environment: local|subagent|remote`)
 - [ ] Implement routing logic in agent dispatcher (if automated)
 - [ ] Test skills in each environment with expected budget/permissions
@@ -461,8 +461,8 @@ Schedule: Every Sunday 2 AM UTC
 
 ## References
 
-- `.claude/agents/INVENTORY.md` — Agent specifications with execution environments
-- `.claude/skills/INVENTORY.md` — Skill specifications with routing recommendations
+- `.agents/roles/INVENTORY.md` — Agent specifications with execution environments
+- `.agents/skills/INVENTORY.md` — Skill specifications with routing recommendations
 - `.claude/BUDGET_CONTROLS.md` — Budget implications of execution environment choices
 - `.claude/GOVERNANCE.md` — Owner approval process for routing exceptions
 - `CONTRIBUTING.md` — Contribution workflow and skill invocation patterns

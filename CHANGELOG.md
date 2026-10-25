@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Sentry error monitoring** — Added `@sentry/react` and `@sentry/vite-plugin` with `src/instrument.ts` (errors, tracing, session replay with text masked), a `Sentry.ErrorBoundary` around the app, and route-based tracing via `wrapCreateBrowserRouterV7`. Source maps are uploaded at build time and then deleted from `dist/` only when `SENTRY_AUTH_TOKEN` is set. The root `netlify.toml` returns 404 for `/*.map` regardless of whether the token is set. New env vars `VITE_SENTRY_DSN`, `SENTRY_ORG`, `SENTRY_PROJECT` and `SENTRY_AUTH_TOKEN` are documented in `.env.example`
+
 **Agent and Workflow Orchestration Documentation**
 
 - **Agent inventory and workflow registry** — Added `.claude/agents/INVENTORY.md` documenting 20 agents with their capabilities, workflows, and shared tools; consolidated from scattered agent documentation for centralized reference
@@ -19,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **React externalization removed** — Removed the `resolveReactExternals()` plugin and `build.rollupOptions.external/globals` from `vite.config.ts`. They marked `react` and `react-dom` as external with no import map to resolve them, which broke `npm run dev` and left unresolvable `from "react"` imports in the production bundle. React is now bundled normally, as `@sentry/react` requires. This supersedes the restoration listed below under Issue #306
 - **CodeRabbit docstring coverage** — Added docstrings to 7 functions across netlify-hashed-asset-headers.mjs, check-netlify-headers.mjs, and vite.config.ts to meet 80% documentation coverage threshold (PR #426)
 - **React external dependency resolution regression** — Restored missing `resolveReactExternals()` function and `build.rollupOptions` in Vite configuration that was accidentally removed in PR #345, causing all 7 subsequent Dependabot PRs to fail Netlify builds with unresolved `react/jsx-runtime` import errors (Issue #306)
 
@@ -41,6 +44,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Baseline headers** — Site-wide `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: DENY` and `Permissions-Policy` (camera, microphone, geolocation, payment and usb disabled). The deprecated `X-XSS-Protection` and `interest-cohort` values from the inactive draft were not carried over. The draft Content-Security-Policy is still inactive and deferred.
 
 ### Added
+
+**Dependabot Automation (Two-Layer Strategy)**
+
+- **Dependabot native auto-merge** — Enabled automatic merging of minor/patch npm and GitHub Actions updates in `.github/dependabot.yml` with squash merge method
+- **GitHub Actions automation workflow** — Created `.github/workflows/dependabot-auto-merge.yml` with:
+  - Daily scheduled runs at 4 AM UTC to process successful Dependabot PRs
+  - Pull request event triggers for on-demand processing
+  - Automatic rebase requests for conflicted Dependabot PRs
+  - Detailed job summaries for visibility and monitoring
+- **Workflow blocker removal** — Deleted `.github/workflows/locked-files-guard.yml` which was preventing automated Dependabot merges
 
 **Performance: Netlify Asset Caching & Headers Optimization**
 

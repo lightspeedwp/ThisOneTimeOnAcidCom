@@ -1,196 +1,50 @@
-# Sub-audit 2: Blog expansion (35 → 50 posts)
+# Journal evidence, taxonomy and expansion review
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Report:** `/reports/content-expansion-phase8/02-blog-expansion.md`
+## 1. Objective
 
----
+Review current Journal content and source-backed expansion opportunities.
 
-## Objective
+## 2. Inputs and scope
 
-Polish all 35 existing blog posts for voice, accuracy, and imagery. Then create
-15 new posts to reach 50 total, backdated logically from 2019–2026. Every post
-(existing and new) must have 2–3 per-item FAQs.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current content/data/type inventories, registered routes and author-approved sources. Confirm scope before assessing historical expansion requests; do not use their target totals as present facts.
 
-## Step 1: Polish existing blog posts
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-**Files:**
+## 3. Audit steps
 
-- `/data/mock/blog/posts.ts` — Primary post file
-- `/data/mock/blog/posts-timeline.ts` — Timeline expansion posts (12 posts added in Phase 7)
+1. Inventory actual posts, IDs/slugs, publication dates, authors, excerpts, content files and image sources. Check historical 35-to-50 or similar totals against a pinned current census, not a required expansion target.
 
-## For each of the 35 existing posts, check and fix
+2. Check current categories/tags and their definitions, usage, archive/filter/search consumers, barrel exports and displayed counts. Separate unused taxonomy candidates from approved deletion.
 
-1. **Voice** — First-person where appropriate, authentic Ash voice, not corporate/generic. Cross-reference `/docs/website-content.md` for tone.
+3. Assess topic candidates for book relevance, primary evidence, author voice and consent. Do not manufacture stories or pad drafts to historical word quotas.
 
-1. **Factual accuracy** — Dates, locations, team counts, festival names. Berlin arrival = 2019 (NOT 2016). Origin cycling pilgrimages: 2020, 2022, 2023, 2026.
+4. Validate metadata semantics, genuine publication dates, reading-time calculation and related links. Do not backdate new posts to the events they describe, generate biographies/quotes or replace images.
 
-1. **Sentence case** — All titles and headings
+5. Return supported outlines/copy candidates, exact metadata proposals and missing evidence. No automatic new posts, exports, image generation or publication.
 
-1. **Content depth** — Expand thin posts slightly (aim for 300–600 word `content` fields minimum). Add a paragraph or two where content feels rushed.
+## 4. Missing evidence and permission boundaries
 
-1. **Images** — Use `unsplash_tool` to find NEW relevant Unsplash images where current images are generic or missing. NEVER replace existing images that work well.
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-1. **Excerpt quality** — Each excerpt should be compelling and give a taste of the post, 1–2 sentences.
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-1. **Tags and categories** — Ensure consistent tag naming across all posts. Check against `/data/mock/blog/tags.ts` and `/data/mock/blog/categories.ts`.
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-1. **Per-item FAQs** — Add `faqs` array (2–3 items) to every post that doesn't already have them.
+## 5. Success criteria
 
----
+- [ ] Each factual/content proposal has provenance, relevance and a verified current destination.
+- [ ] Historical quotas and invented metadata are not substituted for genuine source material.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-## Step 2: Create 15 new blog posts (total: 50)
+## 6. Report output
 
-### Content sourcing
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-Mine these sources for post ideas:
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-- `/docs/website-content.md` — Rich material on Six Cats, LightSpeed, education, fitness, identity, philosophy, travel
-- `/data/mock/pages/ebook-pages.ts` — Ebook chapters contain stories that can be extracted into standalone blog posts
-- Existing content gaps identified in Phase 7
+## 7. Revision provenance
 
-### Suggested new post topics (choose 15)
-
-**2019 era:**
-
-1. "First brush with neon" — The story of picking up UV paint for the first time (July 2019)
-
-1. "Why Koh Phangan keeps calling" — First Muay Thai training season, the island's magic
-
-**2020 era:**
-
-1. "When the music stopped" — COVID lockdown reflections, creative pivot
-
-1. "The loaded bike to Origin" — First cycling pilgrimage to Origin Festival (2020)
-
-**2021 era:**
-
-1. "Learning to paint with both hands" — The ambidextrous technique development
-
-1. "Living soil, living art" — Six Cats cultivation as creative practice
-
-**2022 era:**
-
-1. "AfricaBurn on two wheels" — The loaded bike to AfricaBurn (if he attended)
-
-1. "Woodstock studio life" — Setting up the creative base in Cape Town
-
-**2023 era:**
-
-1. "Berlin summer diaries" — Open-airs in Hasenheide, Tempelhof sunsets, cycling the Spree
-
-1. "Saying goodbye to Lucy (the cat)" — Tribute to Lucy the cat (passed October 2023)
-
-1. "Nation of Gondwana: paint and acid" — First NOG experience
-
-**2024 era:**
-
-1. "WordCamp Europe Torino: the volunteer year" — WCEU 2024 volunteering
-
-1. "The nomad's checklist" — How Ash packs for festival cycling pilgrimages
-
-**2025 era:**
-
-1. "900 kilometres of dancing" — Berlin summer 2025 dancing record
-
-1. "WordCamp Europe Basel: bridging design and development" — Speaking at WCEU 2025
-
-1. "The fairy lights bike" — How the illuminated bike became a Berlin icon
-
-1. "Nail art meets neon" — The fusion of nail art and UV face painting
-
-1. "Miss Scott saw it first" — Tribute to the teacher who recognised his potential
-
-1. "The 2 o'clock club" — School days, being different, finding your own path
-
-1. "Wetu, Indaba, and the travel tech connection" — LightSpeed at Indaba 2025
-
-**2026 era:**
-
-1. "300 kilometres for a birthday" — The epic Origin 2026 cycling pilgrimage
-
-1. "The artist's lifestyle" — Exploring what it means to live as an artist (from website-content.md)
-
-1. "Mentoring the next generation" — LightSpeed internship program and the new interns
-
-1. "The cumulative effect" — The central thesis: it's never one thing
-
-### Post structure template
-
-```typescript
-{
-  id: 'blog-XX',
-  slug: 'descriptive-slug',
-  title: 'Sentence case title',
-  excerpt: 'One to two compelling sentences.',
-  content: `# Sentence case title
-
-Opening paragraph that hooks the reader...
-
-## Section heading in sentence case
-
-Body content with Ash's authentic voice. Reference real places, people, events.
-Use markdown formatting: **bold**, *italic*, blockquotes, lists.
-
-> Pull quote in Ash's voice
-
-## Another section
-
-More content...
-
----
-
-*Originally written [month year]. Updated [month year].*
-  `,
-  featuredImage: {
-    src: 'UNSPLASH*URL*FROM_TOOL',
-    alt: 'Descriptive alt text',
-  },
-  publishedAt: '2024-06-15',
-  category: 'Category Name',
-  tags: ['Tag One', 'Tag Two'],
-  readTime: 5,
-  featured: false,
-  faqs: [
-{ id: 'blog-slug-q1', question: 'Contextual question?', answer: 'Substantive
-answer.' },
-{ id: 'blog-slug-q2', question: 'Another question?', answer: 'Another answer.'
-},
-  ]
-}
-
-```text
-
-### Date distribution guidelines
-
-- Spread posts logically across 2019–2026
-- More posts in recent years (2024–2026) than early years
-- No more than 3 posts in any single month
-- Align festival/event posts with actual event dates (e.g., Origin = late January/February, NOG = July, WCEU = June)
-- Timeline posts from Phase 7 already cover 2016–2025 — don't overlap topics
-
----
-
-## Step 3: Update barrel exports
-
-After adding new posts:
-
-1. If using a new file (e.g., `posts-phase8.ts`), import and spread into the main `blogPosts` array in `/data/mock/blog/index.ts`
-
-1. Update category counts in `/data/mock/blog/categories.ts`
-
-1. Add any new tags to `/data/mock/blog/tags.ts`
-
-1. Verify total count matches target (50)
-
----
-
-## Output
-
-- **Report:** `/reports/content-expansion-phase8/02-blog-expansion.md` with:
-- List of all 35 polished posts (changes made per post)
-- List of all 15 new posts (title, slug, date, category)
-- FAQ count added
-- New tags/categories created
-- Image changes (new Unsplash URLs used)
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-expansion-phase8/02-blog-expansion.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

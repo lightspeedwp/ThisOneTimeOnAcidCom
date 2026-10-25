@@ -1,36 +1,21 @@
-# 🤖 Prompt: Bundler Compatibility Final Verification Audit
+# Historical compatibility entry point
 
-## 🎯 Objective
+**Do not execute the original task from this path.** This file preserves incoming path references; it is a notice, not an executable prompt or an automatic instruction to run the destination.
 
-Verify that the codebase is 100% compliant with the Figma Make bundler
-constraints following the v8.2.1 stability refactor. Ensure no arrow functions,
-destructuring, or template literals exist in JSX or core hooks, and that all
-hook options are memoized to prevent flickering.
+## Canonical review entry point
 
-## 🛠️ Scope
+- [bundler-compatibility-audit.md](bundler-compatibility-audit.md)
 
-- `hooks/useContent.ts` (Unified facade)
-- `components/pages/portfolio/PortfolioMainPage.tsx` (IIFE checks)
-- `hooks/useWordPress.ts` (API URL and response handling)
-- `components/sections/BlogPreviewSection.tsx` (Secondary check)
+Use the current canonical scope only when explicitly requested. Its separate evidence, protection, failure and approval boundaries apply. No implementation, installation, task/report cleanup or publication is authorised by following this link.
 
-## 📋 Steps
+## Preserved requirement coverage
 
-1. **Scan `hooks/useContent.ts`** for arrow functions in `useEffect` and `setTimeout`, and destructuring in the mock simulation logic.
+§3 steps 1–8: syntax/context, source/hook existence, historical changelog claims, props/state, loading/errors, content language and verification evidence.
 
-1. **Scan `PortfolioMainPage.tsx`** for IIFE arrow functions and `let` usage in loops.
+## Historical instructions not carried forward as requirements
 
-1. **Verify `useWordPress.ts`** for the placeholder API URL and any remaining modern syntax.
+Fixed version/current compliance assertions, hardcoded totals and prefilled success are not current evidence. No unique factual claim or historical result is certified by consolidation.
 
-1. **Cross-reference findings** against the v8.2.1 changelog claims.
+## Original source and provenance
 
-## 📚 References
-
-- [Guidelines.md](../Guidelines.md) (Bundler Compatibility Rules)
-- [CHANGELOG.md](../CHANGELOG.md) (v8.2.1 claims)
-- [audit-report-march-3-2026.md](../reports/bundler-compatibility/audit-report-march-3-2026.md) (Previous findings)
-
-## 📤 Output
-
-- A report in `/reports/bundler-compatibility/verification-report-v8.2.1.md`
-- Updates to the master task list in `/tasks/task-list.md`
+[Full original at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/bundler-compatibility-verification.md). All original detail remains available there for comparison; historical instructions are evidence, not additional authority. Proposed notice prepared on 24 October 2026.

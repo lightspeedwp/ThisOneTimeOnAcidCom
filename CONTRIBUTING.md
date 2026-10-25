@@ -611,45 +611,6 @@ The following were documented as unresolved but have now been clarified:
 
 ## Repository Governance & Policies
 
-### Protected Files
-
-The following files are **protected and require explicit approval to modify**:
-
-| File | Purpose | Change Process |
-|------|---------|-----------------|
-| `.github/` | Governance and workflows | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
-| `scripts/` | Build and validation scripts | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
-| `AGENTS.md` | AI agent rules and governance | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
-| `CHANGELOG.md` | Release history (managed by Release Agent) | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
-| `ATTRIBUTIONS.md` | Project attributions | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
-| `guidelines/` | CSS architecture and coding standards | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
-| `src/app/utils/supabase/` | Backend integration (protected from changes) | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
-| `src/app/components/figma/ImageWithFallback.tsx` | Figma integration component | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
-| `tasks/task-list.md` | Task tracker (never delete) | Open issue: `[PROTECTED-FILE-CHANGE-REQUEST]` |
-
-## Why files are protected
-
-- Governance infrastructure stability — changes affect all workflows and
-  automations
-- Coding standards consistency — guidelines must remain canonical
-- Backend security — Supabase integration must not be accidentally exposed
-- Asset integrity — Figma components are contracts with design tools
-- Project history — changelog and attributions are permanent records
-
-## To request a change
-
-1. Open a GitHub issue with `[PROTECTED-FILE-CHANGE-REQUEST]` tag
-
-1. Describe the specific change needed and why it is necessary
-
-1. Explain any impact on dependent systems or workflows
-
-1. Wait for @ashley's explicit approval before proceeding
-
-See
-[`.github/workflows/protected-files-guard.yml`](.github/workflows/protected-files-guard.yml)
-for automatic enforcement on all PRs.
-
 ### Code Ownership
 
 This repository is maintained by the LightSpeed team. Code ownership is declared
