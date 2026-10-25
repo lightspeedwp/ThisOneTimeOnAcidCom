@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Protected files guidance** — Added `.github/PROTECTED_FILES.txt` documenting canonical governance files and change request process for labels, issue types, and PR templates
 - **SpecKit configuration** — Added `.specify/init-options.json` setting feature directory to `.github/specs` for specification-first workflow
 
+### Removed
+
+- **Dependabot native auto-merge configuration** — Removed the native `auto-merge` configuration from `.github/dependabot.yml`. This property is no longer part of Dependabot's schema; automatic merging is now handled centrally by the `dependabot-auto-merge.yml` workflow
+
 ### Fixed
 
 - **Dependabot schema validation** — Removed unsupported `auto-merge` properties from `.github/dependabot.yml` that were causing CI validation failures. The `auto-merge` property is no longer part of Dependabot's schema; native auto-merge functionality has been replaced with the centralized `dependabot-auto-merge.yml` workflow
@@ -48,7 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Dependabot Automation (Two-Layer Strategy)**
 
-- **Dependabot native auto-merge (previous configuration)** — Previously enabled automatic merging of minor/patch npm and GitHub Actions updates in `.github/dependabot.yml` with squash merge method
+- **Dependabot native auto-merge** — Enabled automatic merging of minor/patch npm and GitHub Actions updates in `.github/dependabot.yml` with squash merge method
 - **GitHub Actions automation workflow** — Created `.github/workflows/dependabot-auto-merge.yml` with:
   - Daily scheduled runs at 4 AM UTC to process successful Dependabot PRs
   - Pull request event triggers for on-demand processing
