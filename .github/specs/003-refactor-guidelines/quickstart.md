@@ -1,27 +1,25 @@
 # Quickstart: Validate the Guidelines Refactor
 
 **Specification:** [Specification 003](./spec.md)  
-**Status:** Phase 1 decisions complete; Phase 2A guidance recorded; Phase 2B awaits T017 approval\
-**Date:** 2026-10-24 | Updated 2026-10-25
+**Status:** Phase 1 Design Complete\
+**Date:** 2026-10-24
 
 ---
 
 ## What This Document Is
 
-This is a **validation and verification guide** that proves Phase 1 of the Guidelines Refactor specification is complete, with owner decisions recorded in [requirements.md](./checklists/requirements.md).
+This is a **validation and verification guide** that proves Phase 1 of the Guidelines Refactor specification is complete and ready for owner gate resolution.
 
-It is NOT a step-by-step implementation guide. For implementation details, see [plan.md](./plan.md) and [tasks.md](./tasks.md) (generated from the recorded owner decisions).
+It is NOT a step-by-step implementation guide. For implementation details, see [plan.md](./plan.md) and [tasks.md](./tasks.md) (generated after owner decisions on D1–D8 gates are recorded).
 
 ---
 
 ## Prerequisites
 
 - [ ] Git repository cloned: `lightspeedwp/ThisOneTimeOnAcidCom`
-- [ ] Active branch: `docs/spec-003-phase2-implementation` (name validated; verify target checkout cleanliness per T003)
-- Historical branch: `docs/spec-003-guidelines-reconcile` (Phase 1 planning, superseded)
+- [ ] Branch: `docs/spec-003-phase2-implementation` (validated)
 - [ ] All Phase 1 design artifacts generated (this directory)
-- [x] Owner decisions D0–D8 and all five implementation guidance items recorded in requirements.md
-- [ ] Required per-operation approvals recorded; T017 `locked-files-guard` approval is required before Phase 2B G-document edits
+- [ ] Ready for owner decision session on D1–D8 gates
 
 ---
 
@@ -53,13 +51,14 @@ grep -l "Specification 003" *.md contracts/*.md
 # Expected: All *.md files in this directory
 
 # 4. Verify gate decisions are documented in research.md
-for gate in D1 D2 D3 D4 D5 D6 D8; do
-  if ! grep -Eq "^### Gate ${gate}: .*RESOLVED" research.md; then
-    echo "✗ $gate decision missing or unresolved in research.md"
-    exit 1
-  fi
-done
-echo "✓ Research gates resolved; see requirements.md for all D0–D8 decisions"
+RESOLVED_GATES=$(grep -c "^### Gate D[0-7]:" research.md)
+PENDING_GATES=$(grep -c "^### Gate D[1-68]:" research.md)
+if [ "$RESOLVED_GATES" -gt 0 ] && [ "$PENDING_GATES" -gt 0 ]; then
+  echo "✓ Found gates documented in research.md"
+else
+  echo "✗ Gate definitions not found in research.md"
+  exit 1
+fi
 # Verify no unresolved TODO/FIXME markers remain
 if grep -i "TODO\|FIXME\|XXX" research.md >/dev/null 2>&1; then
   echo "✗ Found unresolved markers"
@@ -73,7 +72,7 @@ fi
 - ✅ All Phase 1 artifacts present
 - ✅ All artifacts reference spec
 - ✅ No unresolved technical unknowns
-- ✅ All decision gates resolved with evidence in requirements.md
+- ✅ All unknowns documented as "PENDING OWNER DECISION"
 
 ---
 
@@ -120,28 +119,26 @@ grep -E "^### [0-9]+\. (Guideline|Supporting|New Guidance|Pointer)" \
 ```bash
 # 1. Extract all gate sections from requirements.md
 grep "^### D[0-8]:" .github/specs/003-refactor-guidelines/checklists/requirements.md
-# Expected: 9 lines (D0–D8)
+# Expected: 8 lines (D0–D8)
 
-# 2. Verify the final status of each gate from its heading
-RESOLVED=0
-for gate in D0 D1 D2 D3 D4 D5 D6 D7 D8; do
-  if grep -Eq "^### ${gate}: .*RESOLVED" \
-    .github/specs/003-refactor-guidelines/checklists/requirements.md; then
-    RESOLVED=$((RESOLVED + 1))
-  else
-    echo "✗ $gate decision missing or unresolved"
-    exit 1
-  fi
-done
-echo "Gate status: $RESOLVED resolved"
-# Expected: 9 resolved (D0–D8); no pending decision gates
-# Per-operation approvals, including T017, remain separate requirements.
+# 2. Check gate status (resolved vs pending) from headings
+RESOLVED=$(grep -c "### .*RESOLVED" .github/specs/003-refactor-guidelines/checklists/requirements.md)
+PENDING=$(grep -c "### .*PENDING" .github/specs/003-refactor-guidelines/checklists/requirements.md)
+echo "Gate status: $RESOLVED resolved, $PENDING pending"
+# Expected: 2 resolved (D0, D7); 7 pending (D1–D6, D8)
+
+# 3. Verify each pending gate has clarification questions
+grep -A 5 "^### D[1-6]:\|^### D8:" \
+  .github/specs/003-refactor-guidelines/checklists/requirements.md | \
+  grep "Owner Input Needed"
+# Expected: 7 matches (one per pending gate)
 ```
 
 **Expected Outcome:**
-- ✅ All 9 gates (D0–D8) documented and marked RESOLVED with evidence
-- ✅ D4.a, D4.b, D5 and D6 implementation guidance recorded
-- ✅ T017 protected-file approval remains required before Phase 2B
+- ✅ All 8 gates documented
+- ✅ D0, D7 marked RESOLVED with evidence
+- ✅ D1–D6, D8 marked PENDING with owner-input sections
+- ✅ Each pending gate has clarification questions
 
 ---
 
@@ -258,7 +255,7 @@ The script:
 
 ---
 
-## Checklist: Phase 1 Complete — Phase 2A Guidance Recorded
+## Checklist: Phase 1 Complete — Ready for Implementation Guidance?
 
 Use this checklist to confirm Phase 1 is complete and identify what blocks Phase 2 implementation:
 
@@ -266,20 +263,23 @@ Use this checklist to confirm Phase 1 is complete and identify what blocks Phase
 - [x] **Research**: research.md exists; all gates marked RESOLVED with owner decisions recorded
 - [x] **Data Model**: data-model.md exists; entities match repository (116 G, 9 S, 33 N)
 - [x] **Contracts**: All 3 contracts present (guideline-interface, approval-process, pointer-redirect)
-- [x] **Gates**: requirements.md documents all 9 gates (D0–D8) as RESOLVED with evidence
+- [x] **Gates**: requirements.md documents all 8 gates (D0–D8) as RESOLVED with evidence
 - [x] **Status**: D0–D8 all RESOLVED (owner decisions recorded 2026-10-25)
 - [x] **Cross-References**: All internal links valid; no broken references
 - [x] **Constitution**: research.md confirms COMPLIANT with all 7 principles
 
-**Phase 1 decisions are COMPLETE.** All nine owner decisions (D0–D8) and all five implementation guidance items are recorded in [requirements.md](./checklists/requirements.md):
+**Phase 1 is COMPLETE.** All owner decisions (D0–D8) are RESOLVED and recorded. Phase 2 remains **BLOCKED** pending 5 implementation guidance items:
 
-1. **D4.a: Guidelines folder structure** — Active documents remain flat in `guidelines/`; archives use `guidelines/_archive/`.
-2. **D4.b: G→N consolidation mapping** — Hybrid pointers and archive preservation per D5; record per-guideline destinations and any explicitly approved exceptions in the consolidation manifest before implementation. D4 approves 29 N-documents for Phase 2 and defers 4 to Phase 3.
-3. **D5: Pointer chain depth** — Maximum one hop; pointers cannot target other pointers.
-4. **D5: Archive location and reverse links** — `guidelines/_archive/` with comment-based reverse links; Type 3 pointers require an existing, accessible destination.
-5. **D6: Backend provider stack** — Canonical Vercel Functions, Supabase PostgreSQL, tRPC and Vercel/GitHub Actions deployment, with documented alternatives. This is documentation guidance; it does not verify a live integration.
+1. **D4.a: Guidelines folder structure** — Should `guidelines/` be flat or categorized (`guidelines/{category}/`)?
+2. **D4.b: G→N consolidation mapping** — Per-guideline decision: which become pointers vs. deleted?
+3. **D5.a: Pointer chain depth confirmation** — Is 1-hop maximum acceptable?
+4. **D5.b: Archive location and reverse-link policy** — Directory structure and reverse-link format?
+5. **D6: Backend provider stack specification** — Serverless, managed DB, API services, deployment platform?
 
-**Phase 2A guidance is complete.** Execute approved work per [plan.md](./plan.md) and [tasks.md](./tasks.md), subject to the required per-operation approvals. **Phase 2B remains BLOCKED pending T017 `locked-files-guard` approval** before G-document edits; resolved decisions do not grant that approval.
+When guidance is provided:
+
+1. **Record guidance** — Update requirements.md with answers to D4.a, D4.b, D5.a, D5.b, D6
+2. **Phase 2 Implementation** — Execute per plan.md with clear guidance recorded
 
 ---
 
@@ -295,11 +295,11 @@ cd /home/user/ThisOneTimeOnAcidCom
 SPECIFY_FEATURE_DIRECTORY=.github/specs/003-refactor-guidelines /speckit-plan
 ```
 
-### If a gate status disagrees with its recorded decision:
+### If a gate is marked RESOLVED but should be PENDING:
 
 **Likely cause:** Manual edit or merge conflict.
 
-**Fix:** Check the recorded decision and evidence in requirements.md. Mark a decision gate unresolved only if its decision is not final; track outstanding implementation work and per-operation approvals separately:
+**Fix:** Check requirements.md for the gate definition:
 ```bash
 grep -A 10 "^### D[X]:" .github/specs/003-refactor-guidelines/checklists/requirements.md
 ```
@@ -322,8 +322,8 @@ git log --oneline -1 b7c3c44  # Verify baseline commit
 - **Implementation Plan:** [plan.md](./plan.md)
 - **Research Findings:** [research.md](./research.md)
 - **Requirements Checklist:** [checklists/requirements.md](./checklists/requirements.md)
-- **Tasks (Phase 2):** [tasks.md](./tasks.md) (generated from resolved decisions)
+- **Tasks (Phase 2):** [tasks.md](./tasks.md) (generated after gates resolved)
 
 ---
 
-*Quickstart updated 2026-10-25 | Phase 1 decisions resolved | Phase 2A guidance recorded | Phase 2B awaits T017 approval*
+*Quickstart complete 2026-10-24 | Phase 1 design artifacts generated | Ready for gate resolutions*

@@ -67,7 +67,8 @@ This verifies the Git baseline comparison; the original observation attachment
 remains unidentified. Baseline observation confirmation and overall source
 validation remain **pending** in the [requirements checklist](./checklists/requirements.md#phase-2-source-validation-pending)
 until the original prompt path and observation evidence are recorded and verified.
-Phase 2B is **blocked** pending T017 `locked-files-guard` approval.
+T017 `locked-files-guard` approval is recorded in the requirements checklist;
+source validation remains pending as described above.
 
 **Subdirectories:**
 - `blocks/` (4 files)
@@ -141,7 +142,9 @@ All gates D0–D8 are resolved. Decision evidence and implementation guidance re
 
 **Phase 2B: Guideline Document Edits** (Tasks T019–T027)
 
-**Blocked:** Record T017 `locked-files-guard` approval before G-document edits.
+T017 `locked-files-guard` approval is recorded in the
+[requirements checklist](./checklists/requirements.md#per-operation-approval).
+Complete outstanding source validation and per-operation checks before G-document edits.
 Hash validation does not grant protected-file approval.
 
 1. Execute 116 G-document category-based edits (T019–T026)

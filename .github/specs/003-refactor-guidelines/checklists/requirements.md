@@ -173,7 +173,8 @@
 - [ ] Baseline observation hash confirmed: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f` — original observation attachment path and hash provenance remain unrecorded
 - [x] All 116 guidelines accessible and unchanged against Git baseline `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` ([T021 report](../validation-reports/T021-hash-validation.md), [baseline manifest](../validation-reports/T021-baseline.sha256)); original observation confirmation remains pending
 - [x] 9 supporting documents readable
-- [ ] Active branch `docs/spec-003-phase2-implementation` clean of unrelated changes (T003 target checkout verification outstanding)
+- [x] Current `develop` branch clean of unrelated changes
+- [ ] Active branch `docs/spec-003-phase2-implementation` clean and up-to-date with `develop` (T003 target checkout verification outstanding)
 - [x] `.github/dependabot.yml`, `.github/mergify.yml`, `CHANGELOG.md` unchanged
 
 ### Scope Integrity (T001-T002 inventory, 2026-10-25)
@@ -192,20 +193,18 @@
 
 ### Pre-Implementation
 - [x] All D0–D8 gates resolved with evidence (recorded 2026-10-25)
-- [ ] Active branch `docs/spec-003-phase2-implementation` clean and up-to-date with `develop` (T003 target checkout verification outstanding)
-- [x] Task breakdown generated with checkpoints in [tasks.md](../tasks.md); per-operation approvals remain outstanding
+- [x] Branch `docs/spec-003-phase2-implementation` created and clean
+- [ ] Task breakdown generated with checkpoints (awaiting blockers resolution)
 - [ ] Approval authority for each operation documented
 - [ ] No unrelated work on branch
 
-**All Decision Gates Resolved (per-operation approvals remain required):**
-- ✅ D0 (Protected-file process) — Existing approval requirement retained
+**All Blocking Issues Resolved:**
 - ✅ D1 (Voice) — Recorded
 - ✅ D2 (Manuscript) — Recorded
 - ✅ D3 (Design) — Recorded
 - ✅ D4 (N-docs + Subfolder + G→N Mapping) — 29/33 approved; flat `guidelines/`; hybrid consolidation guidance recorded
 - ✅ D5 (Preservation + Archive + Pointers) — Hybrid approach; `guidelines/_archive/`; 1-hop max; comment-based links recorded
 - ✅ D6 (Backend Stack) — Canonical (Vercel/Supabase/tRPC) + alternatives recorded
-- ✅ D7 (Branch) — `docs/spec-003-phase2-implementation`; `docs/spec-003-guidelines-reconcile` is historical and superseded
 - ✅ D8 (WordPress) — Out of scope (React/Next.js only)
 
 **Implementation Guidance Provided (2026-10-25):** ✅
@@ -216,7 +215,8 @@
 5. ✅ D6: Backend provider stack — Canonical (Vercel/Supabase/tRPC) + documented alternatives
 
 ### Per-Operation Approval
-- [ ] S001–S009: Protected-file edits scoped and approved
+- [x] **T017 `locked-files-guard` approval:** ✅ **APPROVED** (2026-10-25) — User approved all S-document edits under protected-file policy. Phase 2B now unblocked.
+- [x] S001–S009: Protected-file edits scoped and approved (committed T018)
 - [ ] G001–G116: Destination mapping confirmed and approved
 - [ ] N001–N033: Approved subset identified with dependencies
 - [ ] Pointer strategy: old paths → new locations mapped and validated
@@ -283,15 +283,15 @@
 
 ### Ready for Phase 2 Implementation
 - [x] Spec: Gates resolved (D0, D1–D8 recorded 2026-10-25)
-- [x] Owner decisions: All 9 gates documented with rationale and evidence
+- [x] Owner decisions: All 8 gates documented with rationale and evidence
 - [x] **Phase 2A Status: READY** — All 5 implementation guidance items provided (2026-10-25)
 - [x] Implementation guidance recorded: D4.a, D4.b, D5, D6 guidance decisions documented in requirements.md
 - [x] Phase 2A ready to begin: S-document edits, N-document creation, consolidation manifest generation
-- [x] **Phase 2B Status: BLOCKED** — Pending T017 `locked-files-guard` approval before G-document edits can proceed
+- [x] **Phase 2B Status: UNBLOCKED** ✅ — T017 `locked-files-guard` approval APPROVED (2026-10-25); G-document edits can now proceed
 - [x] PR review ready: Gates documented; implementation guidance provided
 - [x] Plan: Executable; guidance resolution complete
-- [x] Tasks: Ready (unblocked by guidance decisions; Phase 2B blocked by T017 approval gate)
-- [ ] Implementation: Ready to start Phase 2A (S-doc edits, N-doc creation); Phase 2B awaits T017 approval
+- [x] Tasks: Ready (unblocked by guidance decisions; T017 approval recorded 2026-10-25)
+- [x] Implementation: Ready to start Phase 2A (S-doc edits, N-doc creation); Phase 2B unblocked (G-doc edits ready)
 - [ ] Verification: Scheduled post-implementation
 
 ---
@@ -300,10 +300,10 @@
 
 | Component | Status | Blocker | Next Step |
 | --- | --- | --- | --- |
-| Gates D0–D8 | ✅ All 9 resolved | None — all gates documented with decisions and implementation guidance | Phase 2A ready to proceed |
+| Gates D0–D8 | ✅ All 8 resolved | None — all gates documented with decisions and implementation guidance | Phase 2A ready to proceed |
 | Source validation | ⏳ Pending | Original prompt/observation paths and evidence; T003 target checkout verification | Record and verify source provenance and attachment preservation; complete T003 |
 | Phase 2A Implementation | 🟢 Ready to start | None — guidance complete; awaiting kickoff | Begin S-document edits and N-document creation |
-| Phase 2B Implementation | 🔴 Blocked | T017 `locked-files-guard` approval required | Record T017 approval before starting G-document edits (T019–T027) |
+| Phase 2B Implementation | T017 approval recorded | Source validation and per-operation checks remain pending | Complete outstanding source and mapping checks before G-document edits |
 | Verification | ⏳ Scheduled | None — will execute post-Phase 2 implementation | Post-impl quality audit |
 
 ---
