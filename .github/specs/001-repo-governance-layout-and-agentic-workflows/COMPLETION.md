@@ -90,11 +90,11 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 | **Playwright (E2E)** | Configured, not executed | No E2E execution result recorded for this delivery |
 | **SpecKit (Validation)** | ⚠️ 103/104 accepted baseline | Accepted in tasks.md (T008, T030); one known template-precedence failure remains |
 
-PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751997997/job/119734670156) at commit `314881e` completed `npm ci --ignore-scripts --prefer-offline --no-audit --no-fund` successfully and ran 601 passing tests. This supports the installation and Jest results for that revision. The historical [Check Protected Files](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751998299/job/119734602115) job failure from PR #429 is superseded by the removal of the protected-files guard workflow in Phase 9; no rerun is possible or required.
+PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751997997/job/119734670156) at commit `314881e` completed `npm ci --ignore-scripts --prefer-offline --no-audit --no-fund` successfully and ran 601 passing tests. This supports the installation and Jest results for that revision. The historical [Check Protected Files](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751998299/job/119734602115) job failure from PR #429 is superseded by the owner-approved guard removal in [PR #434](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/434). It remains a historical failure; no guard rerun is required for T064.
 
 ### Protected Files & System Integrity
 
-- ✅ **Protected Files:** Governance file protection workflow removed (T064 cancelled); no further guard validation required
+- ✅ **T064 cancelled:** @ashleyshaw explicitly proposed and merged the guard removal in [PR #434](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/434) on 2026-10-22 at 12:43:56 UTC (commit `65b67abec6f0216f7609a0756b98fe09d4a9d447`); this records the owner's removal decision, with no separate approving review. The approval in [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975) covers only `COMPLETION.md` and `tasks.md`. The later owner-authored and owner-merged [PR #438](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/438) removes the change-request process. The registry `.github/PROTECTED_FILES.txt` still exists; this does not establish approval of every earlier implementation change.
 - ✅ **No Breaking Changes:** All existing functionality preserved
 - ✅ **Application Behavior:** SPA build, Netlify deployment working correctly
 - ✅ **Build Artifacts:** dist/ produced without errors, _redirects configured correctly
@@ -149,6 +149,12 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 | T060 | PR template routing verification | ✅ Complete | PR #483 (feat/ → type:feature), PR #484 (fix/ → type:bug), PR #485 (docs/ → type:documentation), PR #486 (test/ → type:test), PR #488 (proto/ → type:maintenance, fallback). Routing comments and labels verified for all cases. |
 | T063 | Styling documentation audit | ✅ Complete | Verified CONTRIBUTING.md and guidelines/css-architecture.md have comprehensive BEM documentation |
 
+**Cancelled Task:**
+
+| Task | Purpose | Status | Details |
+| --- | --- | --- | --- |
+| T064 | Protected-file guard revalidation | Cancelled — superseded | Owner-approved guard removal in [PR #434](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/434), commit `65b67abec6f0216f7609a0756b98fe09d4a9d447`. The historical Check Protected Files failure is superseded; no passing rerun is claimed. |
+
 **Remaining Tasks:**
 
 | Task | Purpose | Type | Status | Notes |
@@ -157,7 +163,7 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 | T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | GitHub Settings: Enable Discussions with 5 categories (Features, Q&A, Show and Tell, General, Ideas) |
 | T065 | Final handoff documentation | Documentation | ⏳ Pending | Owner (@ashley) must create after T061–T062 complete. T060 and T063 now ✅ |
 
-**Note:** T061 and T062 require owner action (@ashley) via GitHub Settings UI. T064 (protected-files-guard) has been removed. T060 and T063 are complete. The final handoff (T065) awaits completion of T061–T062.
+**Note:** T061 and T062 require owner action (@ashley) via GitHub Settings UI. T064 is cancelled following the owner-approved guard removal recorded above and in tasks.md; this supersedes the older guard rerun instructions. T060 and T063 are complete. The final handoff (T065) awaits completion of T061–T062, final convergence assessment and owner sign-off.
 
 ---
 
@@ -246,7 +252,7 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 ### Governance Compliance
 - ✅ **Branch Naming:** All work follows required pattern
 - ✅ **Commit Attribution:** Clear author and session references
-- ✅ **Protected Files:** Governance file protection workflow removed (T064 cancelled)
+- ✅ **T064 cancelled:** Guard revalidation superseded by the owner-approved removal in [PR #434](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/434)
 - ✅ **Workflow Validation:** All governance workflows deployed and operational
 
 ### Completion Status

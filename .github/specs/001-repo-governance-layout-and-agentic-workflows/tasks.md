@@ -932,13 +932,14 @@ available to all team members
 - Mark: T046 ✅ complete (Styling documentation fully audited and complete)
 
 - [x] T064 [CANCELLED] Protected-file guard workflow removed
-- Status: The `.github/workflows/protected-files-guard.yml` workflow and protected files enforcement have been removed from the specification.
-- Rationale: Simplified governance model removes the central protected-files registry and guard revalidation requirement.
-- Historical context: This task was originally required to validate owner approval of protected-file modifications but is no longer applicable with the removal of the guard workflow.
-- Mark: T064 complete (cancelled per architecture review)
+- Owner decision: @ashleyshaw explicitly proposed and merged removal of `.github/workflows/protected-files-guard.yml` in [PR #434](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/434) on 2026-10-22 at 12:43:56 UTC (commit `65b67abec6f0216f7609a0756b98fe09d4a9d447`). This owner-authored and owner-merged removal is the approval evidence; no separate approving review was submitted.
+- Scope: [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975) approves only the specification's `COMPLETION.md` and `tasks.md`, not workflow removal. The later owner-authored and owner-merged [PR #438](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/438) removes the change-request process. `.github/PROTECTED_FILES.txt` still exists; cancellation does not establish approval of every earlier implementation change.
+- Historical check: PR #429's failed [Check Protected Files job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751998299/job/119734602115) is superseded by the approved guard removal, not a passing check. The pre-removal guard rerun instructions in T055, coverage.md and phase-9-convergence-action-plan.md are superseded; no guard rerun is required for T064.
+- Mark: T064 cancelled, with the owner removal decision recorded. T061–T062, final convergence assessment and owner sign-off remain required before T065 final handoff.
 
 - [ ] T065 Document implementation completion and handoff (T059 completion – deferred until T061–T062 complete)
 - After T061 and T062 are marked ✅ (T060, T063 already complete):
+- Record T064's owner-approved cancellation and the superseded guard failure; complete the final convergence assessment and obtain owner sign-off before finalising handoff.
 - Create summary document: `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md`
 - Contents:
     - Feature: TOA-241 – Repository Governance Infrastructure
