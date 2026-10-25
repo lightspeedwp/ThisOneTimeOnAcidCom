@@ -281,7 +281,7 @@ Using fixed font sizes instead of fluid typography classes.
 
 **When to Use:**
 
-- Always use fluid classes for headings
+- Use fluid classes for headings
 - Use fluid classes for body text in hero/large sections
 - Can use fixed sizes for small UI elements (buttons, labels)
 
@@ -429,7 +429,7 @@ If you discover a CSS issue:
 
 ```text
 
-1. **Always include dark mode variants**
+1. **Include dark mode variants**
 
    ```tsx
    <div className="bg-white dark:bg-purple-900">

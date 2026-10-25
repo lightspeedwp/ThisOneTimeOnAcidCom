@@ -73,7 +73,7 @@ independently loaded by the component that uses it.
 
 - **One CSS file per component/page** - e.g., `blog-page.css` for `BlogPage.tsx`
 - **No circular imports** - block files do NOT import `globals.css` (it's already loaded)
-- **No `@apply`** - Tailwind's `@apply` directive is forbidden
+- **No `@apply`** - Avoid Tailwind's `@apply` directive; use semantic BEM classes instead
 - **No `@import` in block files** - all tokens are available globally from `globals.css`
 
 ---
