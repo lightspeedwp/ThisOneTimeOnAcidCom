@@ -96,9 +96,9 @@ created: "2026-10-25"
 
 ### G-Document Inventory & Validation
 
-- [ ] **T019** Verify 116 guidelines inventory: `find guidelines -type f -name "*.md" | wc -l` → expect 116
-- [ ] **T020** Generate coverage manifest: Create table in `checklists/requirements.md` § Coverage Manifest with columns: ID, path, operation, destination, status
-- [ ] **T021** [P] Hash validation per file: For each G-document, compute SHA-256 hash and compare vs baseline; document any changes
+- [x] **T019** Verify 116 guidelines inventory: `find guidelines -type f -name "*.md" | wc -l` → expect 116 ✓ Verified 116 files
+- [x] **T020** Generate coverage manifest: Create table in `checklists/requirements.md` § Coverage Manifest with columns: ID, path, operation, destination, status ✓ Manifest generated with 116 baseline hashes
+- [x] **T021** [P] Hash validation per file: For each G-document, compute SHA-256 hash and compare vs baseline; document any changes ✓ All 116 verified unchanged
 
 ### G-Document Edit Operations
 
