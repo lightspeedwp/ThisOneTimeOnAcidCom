@@ -1,31 +1,48 @@
 # Color Design Tokens
 
-**Version:** 5.0.0  
-**Last Updated:** February 2026  
+**Version:** 5.0.0
+**Last Updated:** February 2026
 **Last Reviewed:** February 21, 2026
 
-Complete color system for the Ash Shaw Makeup Portfolio, featuring semantic color tokens, brand gradients, light/dark mode theming, and accessibility-compliant contrast ratios.
+Complete color system for the Ash Shaw Makeup Portfolio, featuring semantic
+color tokens, brand gradients, light/dark mode theming, and
+accessibility-compliant contrast ratios.
 
 ## ✅ Verified Against Codebase
 
-This document has been verified against `/styles/globals.css` as of January 2025. All color utilities, CSS variables, gradient classes, and light/dark mode themes match the current implementation.
+This document has been verified against `/styles/globals.css` as of January
+
+1. All color utilities, CSS variables, gradient classes, and light/dark mode
+themes match the current implementation.
 
 ## 🆕 WordPress-Aligned Presets (v5.0.0)
 
-This color system now follows WordPress theme.json preset standards using `--wp--preset--color--{slug}` naming conventions. See [wordpress-preset-system.md](../wordpress-preset-system.md) for complete details.
+This color system now follows WordPress theme.json preset standards using
+`--wp--preset--color--{slug}` naming conventions. See
+[wordpress-preset-system.md](../wordpress-preset-system.md) for complete
+details.
 
 ## 📋 Table of Contents
 
 1. [Color Philosophy](#color-philosophy)
-2. [WordPress Color Presets](#wordpress-color-presets)
-3. [Light/Dark Mode System](#lightdark-mode-system)
-4. [Light Mode Palette](#light-mode-palette)
-5. [Dark Mode Palette](#dark-mode-palette)
-6. [Brand Gradients](#brand-gradients)
-7. [Semantic Colors](#semantic-colors)
-8. [Component Color Patterns](#component-color-patterns)
-9. [Accessibility Standards](#accessibility-standards)
-10. [CSS Variables Reference](#css-variables-reference)
+
+1. [WordPress Color Presets](#wordpress-color-presets)
+
+1. [Light/Dark Mode System](#lightdark-mode-system)
+
+1. [Light Mode Palette](#light-mode-palette)
+
+1. [Dark Mode Palette](#dark-mode-palette)
+
+1. [Brand Gradients](#brand-gradients)
+
+1. [Semantic Colors](#semantic-colors)
+
+1. [Component Color Patterns](#component-color-patterns)
+
+1. [Accessibility Standards](#accessibility-standards)
+
+1. [CSS Variables Reference](#css-variables-reference)
 
 ---
 
@@ -42,12 +59,14 @@ This color system now follows WordPress theme.json preset standards using `--wp-
 ### Usage Guidelines
 
 ✅ **DO:**
+
 - Use theme-aware classes (`bg-white dark:bg-purple-900`)
 - Maintain consistent color usage across themes
 - Ensure proper contrast ratios for text in both themes
 - Test all components in both light and dark mode
 
 ❌ **DON'T:**
+
 - Hardcode colors without dark mode variants
 - Mix gradients in light mode backgrounds
 - Use low-contrast combinations in either theme
@@ -59,7 +78,8 @@ This color system now follows WordPress theme.json preset standards using `--wp-
 
 ### Preset Naming Conventions
 
-All color presets follow the `--wp--preset--color--{slug}` naming convention to align with WordPress theme.json standards.
+All color presets follow the `--wp--preset--color--{slug}` naming convention to
+align with WordPress theme.json standards.
 
 ```css
 :root {
@@ -77,16 +97,20 @@ All color presets follow the `--wp--preset--color--{slug}` naming convention to 
   --wp--preset--color--card: #1a0f2e;
   --wp--preset--color--card-foreground: #f5f3ff;
 }
-```
+
+```text
 
 ### Implementation Pattern
 
-Every component must implement both light and dark mode styles using the `dark:` prefix pattern:
+Every component must implement both light and dark mode styles using the `dark:`
+prefix pattern:
 
 ```tsx
 // ✅ CORRECT - Both themes supported with utility color classes
-// Note: In production, prefer semantic background classes like .bg-surface-light when available
-<div className="bg-white dark:bg-purple-900/50 text-gray-800 dark:text-purple-100">
+// Note: In production, prefer semantic background classes like
+.bg-surface-light when available
+<div className="bg-white dark:bg-purple-900/50 text-gray-800
+dark:text-purple-100">
   Content
 </div>
 
@@ -94,9 +118,13 @@ Every component must implement both light and dark mode styles using the `dark:`
 <div className="bg-white text-gray-800">
   Content
 </div>
-```
 
-**WordPress Alignment:** While utilities like `bg-white` and `text-gray-800` are shown for clarity, components should use semantic classes from `/styles/globals.css` where they exist (e.g., `.bg-hero-section`, `.text-gradient-pink-purple-blue`).
+```text
+
+**WordPress Alignment:** While utilities like `bg-white` and `text-gray-800` are
+shown for clarity, components should use semantic classes from
+`/styles/globals.css` where they exist (e.g., `.bg-hero-section`,
+`.text-gradient-pink-purple-blue`).
 
 ---
 
@@ -104,20 +132,26 @@ Every component must implement both light and dark mode styles using the `dark:`
 
 ### Theme Switching Architecture
 
-The application uses CSS custom properties defined in `/styles/globals.css` and the `dark:` class prefix to provide seamless theme switching. This system is WordPress-aligned and uses semantic color tokens rather than utility classes.
+The application uses CSS custom properties defined in `/styles/globals.css` and
+the `dark:` class prefix to provide seamless theme switching. This system is
+WordPress-aligned and uses semantic color tokens rather than utility classes.
 
 ```tsx
 // Theme Toggle Component Example
 // Uses layout utilities (flex, items-center) but semantic color classes
-<button 
+<button
   onClick={toggleTheme}
-  className="flex items-center gap-2 bg-white dark:bg-purple-900 text-gray-800 dark:text-purple-100 px-4 py-2 rounded-lg transition-colors duration-300"
+className="flex items-center gap-2 bg-white dark:bg-purple-900 text-gray-800
+dark:text-purple-100 px-4 py-2 rounded-lg transition-colors duration-300"
 >
   {theme === 'light' ? <Moon /> : <Sun />}
 </button>
-```
 
-**Note:** While this example shows some utility patterns (`gap-2`, `px-4`, `py-2`), production code should use semantic spacing classes from globals.css like `.px-button`, `.py-button`, `.gap-fluid-sm` for brand consistency.
+```text
+
+**Note:** While this example shows some utility patterns (`gap-2`, `px-4`,
+`py-2`), production code should use semantic spacing classes from globals.css
+like `.px-button`, `.py-button`, `.gap-fluid-sm` for brand consistency.
 
 ### CSS Custom Properties
 
@@ -139,16 +173,20 @@ All color values are defined as CSS custom properties in `/styles/globals.css`:
   --card: #1a0f2e;
   --card-foreground: #f5f3ff;
 }
-```
 
-### Implementation Pattern
+```text
 
-Every component must implement both light and dark mode styles using the `dark:` prefix pattern:
+### Implementation Pattern (1)
+
+Every component must implement both light and dark mode styles using the `dark:`
+prefix pattern:
 
 ```tsx
 // ✅ CORRECT - Both themes supported with utility color classes
-// Note: In production, prefer semantic background classes like .bg-surface-light when available
-<div className="bg-white dark:bg-purple-900/50 text-gray-800 dark:text-purple-100">
+// Note: In production, prefer semantic background classes like
+.bg-surface-light when available
+<div className="bg-white dark:bg-purple-900/50 text-gray-800
+dark:text-purple-100">
   Content
 </div>
 
@@ -156,9 +194,13 @@ Every component must implement both light and dark mode styles using the `dark:`
 <div className="bg-white text-gray-800">
   Content
 </div>
-```
 
-**WordPress Alignment:** While utilities like `bg-white` and `text-gray-800` are shown for clarity, components should use semantic classes from `/styles/globals.css` where they exist (e.g., `.bg-hero-section`, `.text-gradient-pink-purple-blue`).
+```text
+
+**WordPress Alignment:** While utilities like `bg-white` and `text-gray-800` are
+shown for clarity, components should use semantic classes from
+`/styles/globals.css` where they exist (e.g., `.bg-hero-section`,
+`.text-gradient-pink-purple-blue`).
 
 ---
 
@@ -166,7 +208,7 @@ Every component must implement both light and dark mode styles using the `dark:`
 
 ### Background Colors
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     LIGHT MODE BACKGROUNDS                           │
 └─────────────────────────────────────────────────────────────────────┘
@@ -184,11 +226,12 @@ bg-gray-50             ░░░░░  #f9fafb  (Subtle backgrounds)
 bg-gray-100            ░░░░░  #f3f4f6  (Hover states)
 
 Usage: Cards, modals, navigation elements
-```
+
+```text
 
 ### Text Colors
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     LIGHT MODE TEXT                                  │
 └─────────────────────────────────────────────────────────────────────┘
@@ -208,11 +251,12 @@ SECONDARY TEXT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 text-gray-600          ▓▓▓▓▓  #4b5563  (Secondary text)
 text-gray-500          ▓▓▓▓▓  #6b7280  (Metadata, captions)
-```
+
+```text
 
 ### Border & Divider Colors
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     LIGHT MODE BORDERS                               │
 └─────────────────────────────────────────────────────────────────────┘
@@ -222,22 +266,23 @@ border-gray-300        ▒▒▒▒▒  #d1d5db  (Card borders)
 border-white/50        ░░░░░  rgba(255,255,255,0.5) (Glass effect)
 
 Usage: Cards, dividers, form inputs
-```
+
+```text
 
 ---
 
 ## Dark Mode Palette
 
-### Background Colors
+### Background Colors (1)
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     DARK MODE BACKGROUNDS                            │
 └─────────────────────────────────────────────────────────────────────┘
 
 PRIMARY BACKGROUNDS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-dark:bg-gradient-to-br 
+dark:bg-gradient-to-br
 dark:from-purple-950   ██████  #1a0033  (Deep purple-black)
 dark:via-purple-900/50 ██████  rgba(88,28,135,0.5) (Mid purple)
 dark:to-purple-950     ██████  #1a0033  (Deep purple)
@@ -257,11 +302,12 @@ ACCENT COLORS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 dark:bg-purple-700     ██████  #6b21a8  (Buttons, CTAs)
 dark:bg-purple-600     ██████  #7c3aed  (Hover states)
-```
 
-### Text Colors
+```text
 
-```
+### Text Colors (1)
+
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     DARK MODE TEXT                                   │
 └─────────────────────────────────────────────────────────────────────┘
@@ -282,11 +328,12 @@ SECONDARY TEXT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 dark:text-purple-300   ▒▒▒▒▒  #d8b4fe  (Secondary text)
 dark:text-purple-400   ▒▒▒▒▒  #c4b5fd  (Metadata, captions)
-```
 
-### Border & Divider Colors
+```text
 
-```
+### Border & Divider Colors (1)
+
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     DARK MODE BORDERS                                │
 └─────────────────────────────────────────────────────────────────────┘
@@ -296,7 +343,8 @@ dark:border-purple-800      ██████  #5b21b6  (Strong borders)
 dark:border-purple-900      ██████  #581c87  (Dividers)
 
 Usage: Cards, dividers, form inputs in dark mode
-```
+
+```text
 
 ---
 
@@ -319,20 +367,25 @@ Usage: Cards, dividers, form inputs in dark mode
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-```
+
+```text
 
 **Examples:**
+
 ```tsx
 // Button with gradient (works in both themes)
-<button className="bg-gradient-pink-purple-blue hover:from-purple-700 hover:to-pink-700 text-white px-button py-button rounded-lg">
+<button className="bg-gradient-pink-purple-blue hover:from-purple-700
+hover:to-pink-700 text-white px-button py-button rounded-lg">
   Explore Portfolio
 </button>
 
 // Title with gradient text (works in both themes)
-<h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue">
+<h1 className="text-hero-h1 font-title font-bold
+text-gradient-pink-purple-blue">
   Hi, I'm Ash Shaw
 </h1>
-```
+
+```text
 
 ### Secondary Gradient (Blue → Teal → Green)
 
@@ -342,14 +395,18 @@ Usage: Cards, dividers, form inputs in dark mode
 .bg-gradient-blue-teal-green {
   background: linear-gradient(135deg, #00bfff 0%, #20c997 50%, #32cd32 100%);
 }
-```
+
+```text
 
 **Example:**
+
 ```tsx
-<button className="bg-gradient-blue-teal-green hover:from-teal-600 hover:to-green-700 text-white px-button py-button rounded-lg">
+<button className="bg-gradient-blue-teal-green hover:from-teal-600
+hover:to-green-700 text-white px-button py-button rounded-lg">
   Read My Story
 </button>
-```
+
+```text
 
 ### Accent Gradient (Gold → Peach → Coral)
 
@@ -359,7 +416,8 @@ Usage: Cards, dividers, form inputs in dark mode
 .bg-gradient-gold-peach-coral {
   background: linear-gradient(135deg, #ffd700 0%, #ff9966 50%, #ff5e62 100%);
 }
-```
+
+```text
 
 ---
 
@@ -369,37 +427,45 @@ Usage: Cards, dividers, form inputs in dark mode
 
 ```tsx
 // Works in both light and dark mode
-<div className="bg-green-100 dark:bg-green-900/30 border border-green-700 dark:border-green-600 text-green-900 dark:text-green-200 px-4 py-3 rounded-lg">
+<div className="bg-green-100 dark:bg-green-900/30 border border-green-700
+dark:border-green-600 text-green-900 dark:text-green-200 px-4 py-3 rounded-lg">
   <p className="font-body font-medium">Email sent successfully!</p>
 </div>
-```
+
+```text
 
 ### Error (Red)
 
 ```tsx
 // Works in both light and dark mode
-<div className="bg-red-100 dark:bg-red-900/30 border border-red-700 dark:border-red-600 text-red-900 dark:text-red-200 px-4 py-3 rounded-lg">
+<div className="bg-red-100 dark:bg-red-900/30 border border-red-700
+dark:border-red-600 text-red-900 dark:text-red-200 px-4 py-3 rounded-lg">
   <p className="font-body font-medium">Please fill in all required fields.</p>
 </div>
-```
+
+```text
 
 ### Warning (Amber)
 
 ```tsx
 // Works in both light and dark mode
-<div className="bg-amber-100 dark:bg-amber-900/30 border border-amber-700 dark:border-amber-600 text-amber-900 dark:text-amber-200 px-4 py-3 rounded-lg">
+<div className="bg-amber-100 dark:bg-amber-900/30 border border-amber-700
+dark:border-amber-600 text-amber-900 dark:text-amber-200 px-4 py-3 rounded-lg">
   <p className="font-body font-medium">Your session will expire soon.</p>
 </div>
-```
+
+```text
 
 ### Info (Blue)
 
 ```tsx
 // Works in both light and dark mode
-<div className="bg-blue-100 dark:bg-blue-900/30 border border-blue-700 dark:border-blue-600 text-blue-900 dark:text-blue-200 px-4 py-3 rounded-lg">
+<div className="bg-blue-100 dark:bg-blue-900/30 border border-blue-700
+dark:border-blue-600 text-blue-900 dark:text-blue-200 px-4 py-3 rounded-lg">
   <p className="font-body font-medium">New features available!</p>
 </div>
-```
+
+```text
 
 ---
 
@@ -409,28 +475,37 @@ Usage: Cards, dividers, form inputs in dark mode
 
 ```tsx
 // ✅ CORRECT - Clean light, rich dark
-<main className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-purple-950 dark:via-purple-900/50 dark:to-purple-950 transition-colors duration-300">
+<main className="min-h-screen bg-white dark:bg-gradient-to-br
+dark:from-purple-950 dark:via-purple-900/50 dark:to-purple-950 transition-colors
+duration-300">
   {children}
 </main>
-```
+
+```text
 
 ### Cards
 
 ```tsx
 // ✅ CORRECT - Translucent with backdrop blur
-<div className="bg-white/80 dark:bg-purple-900/50 backdrop-blur-sm rounded-xl p-fluid-md border border-white/50 dark:border-purple-700/50 shadow-lg hover:shadow-xl transition-all duration-300">
-  <h3 className="text-section-h2 font-heading font-semibold text-gray-800 dark:text-purple-100 mb-fluid-md">
+<div className="bg-white/80 dark:bg-purple-900/50 backdrop-blur-sm rounded-xl
+p-fluid-md border border-white/50 dark:border-purple-700/50 shadow-lg
+hover:shadow-xl transition-all duration-300">
+<h3 className="text-section-h2 font-heading font-semibold text-gray-800
+dark:text-purple-100 mb-fluid-md">
     Card Title
   </h3>
-  <p className="text-body-guideline font-body text-gray-700 dark:text-purple-100 leading-relaxed">
+<p className="text-body-guideline font-body text-gray-700 dark:text-purple-100
+leading-relaxed">
     Card content with proper contrast in both themes
   </p>
 </div>
-```
+
+```text
 
 **✅ FIXED: `.bg-card` Hover State (v4.1.1)**
 
-The `.bg-card` global CSS class now has proper hover states for both light and dark modes:
+The `.bg-card` global CSS class now has proper hover states for both light and
+dark modes:
 
 ```css
 /* ✅ FIXED (globals.css line 2568) */
@@ -441,7 +516,8 @@ The `.bg-card` global CSS class now has proper hover states for both light and d
 .dark .bg-card:hover {
   background-color: #000000;  /* Black for dark mode */
 }
-```
+
+```text
 
 **Usage:**
 No workarounds needed - use `.bg-card` normally:
@@ -450,49 +526,63 @@ No workarounds needed - use `.bg-card` normally:
 <div className="bg-card hover:shadow-xl transition-all duration-300">
   Card content with proper hover in both modes
 </div>
-```
 
-**See Also:** [css-issues.md](../troubleshooting/css-issues.md#issue-1-bg-cardhover-forces-black-background-in-light-mode)
+```text
+
+**See Also:**
+[css-issues.md](../troubleshooting/css-issues.md#issue-1-bg-cardhover-forces-black-background-in-light-mode)
 
 ### Buttons
 
 ```tsx
 // Primary CTA (gradient - works in both themes)
-<button className="bg-gradient-pink-purple-blue hover:from-purple-700 hover:to-pink-700 text-white px-button py-button rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+<button className="bg-gradient-pink-purple-blue hover:from-purple-700
+hover:to-pink-700 text-white px-button py-button rounded-lg shadow-lg
+hover:shadow-xl transform hover:scale-105 transition-all duration-300">
   Primary Action
 </button>
 
 // Secondary button (theme-aware)
-<button className="bg-gray-200 dark:bg-purple-700 hover:bg-gray-300 dark:hover:bg-purple-600 text-gray-800 dark:text-white px-button py-button rounded-lg transition-colors duration-300">
+<button className="bg-gray-200 dark:bg-purple-700 hover:bg-gray-300
+dark:hover:bg-purple-600 text-gray-800 dark:text-white px-button py-button
+rounded-lg transition-colors duration-300">
   Secondary Action
 </button>
 
 // Ghost button (theme-aware)
-<button className="bg-transparent hover:bg-gray-100 dark:hover:bg-purple-800/30 text-gray-700 dark:text-purple-200 px-button py-button rounded-lg border border-gray-300 dark:border-purple-700 transition-all duration-300">
+<button className="bg-transparent hover:bg-gray-100 dark:hover:bg-purple-800/30
+text-gray-700 dark:text-purple-200 px-button py-button rounded-lg border
+border-gray-300 dark:border-purple-700 transition-all duration-300">
   Tertiary Action
 </button>
-```
+
+```text
 
 ### Navigation Header
 
 ```tsx
 // ✅ CORRECT - Frosted glass effect in both themes
-<nav className="bg-white/95 dark:bg-purple-950/95 backdrop-blur-sm border-b border-gray-200 dark:border-purple-800 transition-colors duration-300">
+<nav className="bg-white/95 dark:bg-purple-950/95 backdrop-blur-sm border-b
+border-gray-200 dark:border-purple-800 transition-colors duration-300">
   <div className="text-gray-800 dark:text-purple-100">
     Navigation content
   </div>
 </nav>
-```
+
+```text
 
 ### Loading States
 
 ```tsx
 // ✅ CORRECT - Skeleton with theme awareness
 <div className="animate-pulse">
-  <div className="h-16 bg-gray-200 dark:bg-purple-800/50 rounded-lg w-80 mx-auto mb-6"></div>
-  <div className="h-8 bg-gray-200 dark:bg-purple-800/50 rounded w-96 mx-auto mb-4"></div>
+<div className="h-16 bg-gray-200 dark:bg-purple-800/50 rounded-lg w-80 mx-auto
+mb-6"></div>
+<div className="h-8 bg-gray-200 dark:bg-purple-800/50 rounded w-96 mx-auto
+mb-4"></div>
 </div>
-```
+
+```text
 
 ### Form Inputs
 
@@ -500,17 +590,25 @@ No workarounds needed - use `.bg-card` normally:
 // ✅ CORRECT - Input with theme support
 <input
   type="text"
-  className="w-full px-4 py-3 bg-white dark:bg-purple-900/30 border border-gray-300 dark:border-purple-700 rounded-lg text-gray-800 dark:text-purple-100 placeholder-gray-500 dark:placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 transition-colors duration-300"
+className="w-full px-4 py-3 bg-white dark:bg-purple-900/30 border
+border-gray-300 dark:border-purple-700 rounded-lg text-gray-800
+dark:text-purple-100 placeholder-gray-500 dark:placeholder-purple-400
+focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400
+transition-colors duration-300"
   placeholder="Enter text..."
 />
-```
+
+```text
 
 ### Decorative Elements
 
 ```tsx
 // ✅ CORRECT - Subtle accents in both themes
-<div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-pink-300/20 dark:from-pink-300/10 to-purple-400/20 dark:to-purple-400/10 rounded-full opacity-20 dark:opacity-30 animate-pulse" aria-hidden="true"></div>
-```
+<div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br
+from-pink-300/20 dark:from-pink-300/10 to-purple-400/20 dark:to-purple-400/10
+rounded-full opacity-20 dark:opacity-30 animate-pulse" aria-hidden="true"></div>
+
+```text
 
 ---
 
@@ -521,30 +619,38 @@ No workarounds needed - use `.bg-card` normally:
 #### Light Mode Contrast Ratios
 
 **Headings:**
+
 ```css
 text-gray-800 on bg-white     /* 7.02:1 - AAA ✅ */
 text-gray-900 on bg-white     /* 10.46:1 - AAA ✅ */
-```
+
+```text
 
 **Body Text:**
+
 ```css
 text-gray-700 on bg-white     /* 4.83:1 - AA ✅ */
 text-gray-600 on bg-white     /* 3.94:1 - AA (large text) ✅ */
-```
+
+```text
 
 #### Dark Mode Contrast Ratios
 
 **Headings:**
+
 ```css
 text-purple-50 on bg-purple-950    /* 15.2:1 - AAA+ ✅ */
 text-purple-100 on bg-purple-950   /* 12.8:1 - AAA+ ✅ */
-```
+
+```text
 
 **Body Text:**
+
 ```css
 text-purple-100 on bg-purple-950   /* 12.8:1 - AAA+ ✅ */
 text-purple-200 on bg-purple-950   /* 9.4:1 - AAA ✅ */
-```
+
+```text
 
 ### Testing Checklist
 
@@ -569,11 +675,11 @@ text-purple-200 on bg-purple-950   /* 9.4:1 - AAA ✅ */
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
-  
+
   /* Borders */
   --border: #e2e8f0;
   --input: #e2e8f0;
-  
+
   /* UI Elements */
   --primary: #030213;
   --primary-foreground: #f8fafc;
@@ -584,7 +690,8 @@ text-purple-200 on bg-purple-950   /* 9.4:1 - AAA ✅ */
   --accent: #f1f5f9;
   --accent-foreground: #030213;
 }
-```
+
+```text
 
 ### Dark Mode Variables (`.dark`)
 
@@ -595,12 +702,12 @@ text-purple-200 on bg-purple-950   /* 9.4:1 - AAA ✅ */
   --foreground: #f5f3ff;        /* Lavender white */
   --card: #1a0f2e;              /* Rich deep purple */
   --card-foreground: #f5f3ff;
-  
+
   /* Borders */
   --border: #3b2667;            /* Purple borders */
   --input: #1a0f2e;
   --ring: #a78bfa;              /* Purple focus ring */
-  
+
   /* UI Elements */
   --primary: #f5f3ff;
   --primary-foreground: #0a0118;
@@ -611,7 +718,8 @@ text-purple-200 on bg-purple-950   /* 9.4:1 - AAA ✅ */
   --accent: #3b2667;            /* Vibrant accent purple */
   --accent-foreground: #f5f3ff;
 }
-```
+
+```text
 
 ---
 
@@ -625,6 +733,6 @@ text-purple-200 on bg-purple-950   /* 9.4:1 - AAA ✅ */
 
 ---
 
-**Last Updated:** January 2025  
-**Version:** 5.0.0  
+**Last Updated:** January 2025
+**Version:** 5.0.0
 **Maintained by:** Ash Shaw Portfolio Team

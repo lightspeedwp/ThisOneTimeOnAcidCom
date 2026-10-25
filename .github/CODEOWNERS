@@ -1,0 +1,29 @@
+# Code Ownership — ThisOneTimeOnAcidCom
+# This file defines code area ownership for branch protection and review requirements
+# See CONTRIBUTING.md for workflow details
+
+# Governance-critical files
+.github/                  @ashley
+scripts/                  @ashley
+AGENTS.md                 @ashley
+CHANGELOG.md              @ashley
+guidelines/               @ashley
+
+# Component ownership (delegate as appropriate)
+src/app/components/       @ashley
+src/app/styles/           @ashley
+src/app/utils/            @ashley
+
+# Testing
+tests/                    @ashley
+
+# Documentation
+docs/                     @ashley
+
+# Configuration files
+package.json              @ashley
+.nvmrc                    @ashley
+vitest.config.ts          @ashley
+
+# Default owners for any unspecified files
+*                         @ashley

@@ -1,0 +1,57 @@
+title: Question & Answer
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Question & Answer
+
+        Have a question? This is the place to ask! Our community is here to help.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: |
+        I'm trying to... and I'm not sure how to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Provide any additional context about what you're working on.
+      placeholder: |
+        I'm using version X... and my setup is...
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-tried
+    attributes:
+      label: What Have You Tried?
+      description: What approaches or solutions have you already attempted?
+      placeholder: |
+        I've already tried...
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected-vs-actual
+    attributes:
+      label: Expected vs Actual
+      description: What did you expect to happen, and what actually happened?
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: research
+    attributes:
+      label: Research
+      options:
+        - label: I've searched the documentation for this question
+          required: true
+        - label: I've searched existing discussions/issues for similar questions
+          required: true

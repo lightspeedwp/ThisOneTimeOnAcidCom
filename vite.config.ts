@@ -3,6 +3,8 @@ import fs from 'fs'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import { sentryVitePlugin } from '@sentry/vite-plugin'
+import { netlifyHashedAssetHeaders } from './scripts/netlify-hashed-asset-headers.mjs'
 
 const MISSING_ASSET_PREFIX = '\0figma-missing-asset:'
 
@@ -17,6 +19,11 @@ const PLACEHOLDER_SVG =
       '</svg>'
   )
 
+/**
+ * Vite plugin that resolves Figma Make asset imports (`figma:asset/*`).
+ * Serves actual files from `src/assets/`; falls back to neutral placeholder SVG for missing exports.
+ * Logs warnings for missing assets to help identify incomplete Figma sync.
+ */
 function figmaAssetResolver() {
   return {
     name: 'figma-asset-resolver',
@@ -39,14 +46,57 @@ function figmaAssetResolver() {
   }
 }
 
+// Keep environment access in the build configuration: the Make bundler cannot
+// safely read import.meta.env in application modules. Expose only public values.
+function sentryClientConfig() {
+  var clientConfig;
+  return {
+    name: 'sentry-client-config',
+    configResolved(config) {
+      clientConfig = {
+        dsn: config.env.VITE_SENTRY_DSN,
+        environment: config.mode,
+        tracesSampleRate: config.isProduction ? 0.2 : 1.0,
+        development: !config.isProduction,
+      };
+    },
+    resolveId(id) {
+      if (id === 'virtual:sentry-config') return '\0virtual:sentry-config';
+    },
+    load(id) {
+      if (id === '\0virtual:sentry-config') {
+        return 'export var sentryConfig = ' + JSON.stringify(clientConfig) + ';';
+      }
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     figmaAssetResolver(),
+    sentryClientConfig(),
     // The React and Tailwind plugins are both required for Make, even if
     // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
+    // Emits dist/_headers with immutable caching for content-hashed assets only
+    netlifyHashedAssetHeaders(),
+    // Uploads source maps to Sentry so production stack traces show real
+    // source, then deletes them from dist/ so they're never served publicly
+    // (a Netlify edge function also denies .map requests). No-ops locally when
+    // SENTRY_AUTH_TOKEN is unset.
+    sentryVitePlugin({
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      sourcemaps: {
+        filesToDeleteAfterUpload: ['./dist/**/*.map'],
+      },
+    }),
   ],
+  build: {
+    sourcemap: 'hidden',
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src/app'),

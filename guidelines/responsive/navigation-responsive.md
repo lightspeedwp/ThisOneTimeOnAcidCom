@@ -1,10 +1,11 @@
 # Responsive Navigation Patterns
 
-**Version:** 5.0.0  
-**Last Updated:** January 2025  
+**Version:** 5.0.0
+**Last Updated:** January 2025
 **WordPress Block Theme Compatible:** ✅
 
-Complete guide to navigation evolution across mobile, tablet, and desktop breakpoints for the Ash Shaw Makeup Portfolio.
+Complete guide to navigation evolution across mobile, tablet, and desktop
+breakpoints for the Ash Shaw Makeup Portfolio.
 
 ---
 
@@ -12,7 +13,7 @@ Complete guide to navigation evolution across mobile, tablet, and desktop breakp
 
 ### Three-Stage Navigation System
 
-```
+```text
 ┌────────────────────────────────────────────────────────────────────────┐
 │                    NAVIGATION RESPONSIVE EVOLUTION                      │
 └────────────────────────────────────────────────────────────────────────┘
@@ -27,7 +28,8 @@ Mobile                  Tablet                    Desktop
 │  Full-Screen│        │  + Hamburger      │    │    + Hover Effects      │
 │   Overlay   │        │                   │    │                         │
 └─────────────┘        └───────────────────┘    └─────────────────────────┘
-```
+
+```text
 
 ---
 
@@ -36,6 +38,7 @@ Mobile                  Tablet                    Desktop
 ### Pattern: Hamburger Menu with Full-Screen Overlay
 
 **Features:**
+
 - Hamburger icon in top-right
 - Full-screen overlay when open
 - Vertical stacked links
@@ -103,7 +106,7 @@ Mobile                  Tablet                    Desktop
   height: 100vh;
   background: white;
   z-index: 1000;
-  
+
   /* Hidden by default */
   transform: translateX(100%);
   transition: transform var(--animation-300) var(--ease-standard);
@@ -142,7 +145,8 @@ Mobile                  Tablet                    Desktop
   color: var(--wp--preset--color--primary);
   border-bottom-color: var(--wp--preset--color--primary);
 }
-```
+
+```text
 
 ### React Implementation
 
@@ -215,7 +219,8 @@ export function MobileNavigation() {
     </>
   );
 }
-```
+
+```text
 
 ---
 
@@ -224,6 +229,7 @@ export function MobileNavigation() {
 ### Pattern: Hybrid Navigation
 
 **Features:**
+
 - Some links visible in header
 - Hamburger for overflow items
 - Horizontal layout starts
@@ -286,7 +292,8 @@ export function MobileNavigation() {
     width: 100%;
   }
 }
-```
+
+```text
 
 ---
 
@@ -295,6 +302,7 @@ export function MobileNavigation() {
 ### Pattern: Full Horizontal Navigation
 
 **Features:**
+
 - All links visible
 - Hover effects active
 - No hamburger menu
@@ -377,13 +385,14 @@ export function MobileNavigation() {
     gap: var(--wp--preset--spacing--50);
   }
 }
-```
+
+```text
 
 ---
 
 ## 🎨 Complete Responsive Navigation Component
 
-### React Implementation
+### React Implementation (1)
 
 ```tsx
 import { useState, useEffect } from 'react';
@@ -511,7 +520,8 @@ export function Header() {
     </header>
   );
 }
-```
+
+```text
 
 ---
 
@@ -529,7 +539,8 @@ export function Header() {
 .mobile-nav.open {
   transform: translateX(0);
 }
-```
+
+```text
 
 ### Staggered Link Animation
 
@@ -538,7 +549,7 @@ export function Header() {
 .mobile-nav-link {
   opacity: 0;
   transform: translateY(20px);
-  transition: 
+  transition:
     opacity var(--animation-300) var(--ease-decelerate),
     transform var(--animation-300) var(--ease-decelerate);
 }
@@ -572,7 +583,8 @@ export function Header() {
   opacity: 1;
   transform: translateY(0);
 }
-```
+
+```text
 
 ### Desktop Underline Animation
 
@@ -594,7 +606,8 @@ export function Header() {
     width: 100%;
   }
 }
-```
+
+```text
 
 ---
 
@@ -618,7 +631,8 @@ const handleKeyDown = (e: React.KeyboardEvent, action: () => void) => {
   onKeyDown={(e) => handleKeyDown(e, toggleMobileMenu)}
   // ... other props
 >
-```
+
+```text
 
 ### Focus Management
 
@@ -646,7 +660,8 @@ export function MobileNav({ isOpen }: { isOpen: boolean }) {
     </nav>
   );
 }
-```
+
+```text
 
 ### ARIA Labels
 
@@ -659,7 +674,7 @@ export function MobileNav({ isOpen }: { isOpen: boolean }) {
   >
     Menu
   </button>
-  
+
   <ul id="mobile-menu">
     <li>
       <a href="/" aria-current={isCurrentPage ? 'page' : undefined}>
@@ -668,13 +683,15 @@ export function MobileNav({ isOpen }: { isOpen: boolean }) {
     </li>
   </ul>
 </nav>
-```
+
+```text
 
 ---
 
 ## 📋 Navigation Checklist
 
 ### Mobile (< 768px)
+
 - [ ] Hamburger icon visible and accessible
 - [ ] Full-screen overlay covers entire viewport
 - [ ] Touch targets minimum 44px
@@ -683,12 +700,14 @@ export function MobileNav({ isOpen }: { isOpen: boolean }) {
 - [ ] Prevents body scroll when open
 
 ### Tablet (768px - 1023px)
+
 - [ ] Hybrid navigation (some links visible)
 - [ ] Hamburger for overflow items
 - [ ] Touch and hover both supported
 - [ ] Proper spacing between links
 
 ### Desktop (1024px+)
+
 - [ ] All links visible horizontally
 - [ ] No hamburger menu
 - [ ] Hover effects active
@@ -696,6 +715,7 @@ export function MobileNav({ isOpen }: { isOpen: boolean }) {
 - [ ] Focus indicators visible
 
 ### All Devices
+
 - [ ] Logo always visible and clickable
 - [ ] Active page indicated
 - [ ] Smooth transitions
@@ -718,40 +738,48 @@ export function MobileNav({ isOpen }: { isOpen: boolean }) {
 ### DO ✅
 
 1. **Mobile-first navigation**
+
    - Start with hamburger menu
    - Enhance for larger screens
 
-2. **Clear visual feedback**
+1. **Clear visual feedback**
+
    - Active state indicators
    - Hover effects on desktop
    - Touch feedback on mobile
 
-3. **Accessibility first**
+1. **Accessibility first**
+
    - Keyboard navigation
    - ARIA labels
    - Focus management
 
-4. **Smooth transitions**
+1. **Smooth transitions**
+
    - Use animation tokens
    - Respect `prefers-reduced-motion`
 
 ### DON'T ❌
 
 1. **Don't show desktop nav on mobile**
+
    - Links will be too small
    - Not touch-friendly
 
-2. **Don't forget focus states**
+1. **Don't forget focus states**
+
    - Critical for keyboard users
 
-3. **Don't block scrolling permanently**
+1. **Don't block scrolling permanently**
+
    - Only while mobile menu is open
 
-4. **Don't use hover-only interactions**
+1. **Don't use hover-only interactions**
+
    - Always provide touch alternative
 
 ---
 
-**Version:** 5.0.0 (WordPress Navigation System)  
-**Last Updated:** January 2025  
+**Version:** 5.0.0 (WordPress Navigation System)
+**Last Updated:** January 2025
 **Maintained By:** Ash Shaw Portfolio Team

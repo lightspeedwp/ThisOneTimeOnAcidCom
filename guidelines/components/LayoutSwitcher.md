@@ -1,13 +1,15 @@
 # LayoutSwitcher Component
 
-**Version:** 4.0.0  
+**Version:** 4.0.0
 **Last Updated:** January 2025
 
-A toggle component that allows users to switch between grid and list view layouts for content display. Commonly used in portfolio and blog pages.
+A toggle component that allows users to switch between grid and list view
+layouts for content display. Commonly used in portfolio and blog pages.
 
 ## Purpose
 
 Provide flexible content viewing options with:
+
 - Grid view (multi-column cards)
 - List view (single-column detailed view)
 - Visual icon feedback
@@ -26,18 +28,20 @@ import { useState } from 'react';
 
 function Portfolio() {
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
-  
+
   return (
     <>
       <LayoutSwitcher value={layout} onChange={setLayout} />
-      
-      <div className={layout === 'grid' ? 'grid grid-cols-3 gap-4' : 'flex flex-col gap-4'}>
+
+<div className={layout === 'grid' ? 'grid grid-cols-3 gap-4' : 'flex flex-col
+gap-4'}>
         {/* Content */}
       </div>
     </>
   );
 }
-```
+
+```text
 
 ### With Section Header
 
@@ -46,19 +50,20 @@ import { LayoutSwitcher } from './components/ui/LayoutSwitcher';
 
 function PortfolioSection() {
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
-  
+
   return (
     <section className="py-section">
       <div className="flex justify-between items-center mb-fluid-lg">
         <h2 className="text-section-h2 font-heading font-semibold">Portfolio</h2>
         <LayoutSwitcher value={layout} onChange={setLayout} />
       </div>
-      
+
       {/* Content grid/list */}
     </section>
   );
 }
-```
+
+```text
 
 ---
 
@@ -67,36 +72,42 @@ function PortfolioSection() {
 ```typescript
 interface LayoutSwitcherProps {
   /**
+
    * Current layout mode
    * @required
    */
   value: 'grid' | 'list';
-  
+
   /**
+
    * Callback when layout changes
    * @required
    */
   onChange: (layout: 'grid' | 'list') => void;
-  
+
   /**
+
    * Additional CSS classes for customization
    * @default ""
    */
   className?: string;
-  
+
   /**
+
    * Size variant for responsive sizing
    * @default "md"
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
+
    * Custom aria-label
    * @default "Switch between grid and list view"
    */
   ariaLabel?: string;
 }
-```
+
+```text
 
 ---
 
@@ -106,34 +117,37 @@ interface LayoutSwitcherProps {
 
 ```tsx
 // Active state styling
-<button 
+<button
   className={`
-    ${layout === 'grid' 
-      ? 'bg-gradient-pink-purple-blue text-white' 
+    ${layout === 'grid'
+      ? 'bg-gradient-pink-purple-blue text-white'
       : 'bg-gray-100 text-gray-600'
     }
   `}
 >
   <Grid />
 </button>
-```
+
+```text
 
 ### Icon Feedback
 
 Uses Phosphor Icons:
+
 - `SquaresFour` - Grid view icon (multi-column)
 - `List` - List view icon (single column)
 
 ```tsx
 import { SquaresFour, List } from '@phosphor-icons/react';
 
-<LayoutSwitcher 
+<LayoutSwitcher
   value={layout}
   onChange={setLayout}
   gridIcon={<SquaresFour />}
   listIcon={<List />}
 />
-```
+
+```text
 
 ---
 
@@ -142,29 +156,31 @@ import { SquaresFour, List } from '@phosphor-icons/react';
 ### Default Styling
 
 ```tsx
-<LayoutSwitcher 
+<LayoutSwitcher
   value={layout}
   onChange={setLayout}
   className="flex gap-2 bg-gray-100 p-1 rounded-lg"
 />
-```
+
+```text
 
 ### Brand Styled
 
 ```tsx
-<LayoutSwitcher 
+<LayoutSwitcher
   value={layout}
   onChange={setLayout}
   className="
-    flex gap-2 
-    bg-white/80 backdrop-blur-sm 
-    p-1 
-    rounded-lg 
-    shadow-md 
+    flex gap-2
+    bg-white/80 backdrop-blur-sm
+    p-1
+    rounded-lg
+    shadow-md
     border border-white/50
   "
 />
-```
+
+```text
 
 ### Size Variants
 
@@ -177,7 +193,8 @@ import { SquaresFour, List } from '@phosphor-icons/react';
 
 // Large
 <LayoutSwitcher size="lg" value={layout} onChange={setLayout} />
-```
+
+```text
 
 ---
 
@@ -193,21 +210,22 @@ import { PortfolioCard } from './components/ui/PortfolioCard';
 function PortfolioPage() {
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
   const [category, setCategory] = useState<string>('all');
-  
+
   return (
     <section className="py-section">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-fluid-lg">
+<div className="flex flex-col sm:flex-row justify-between items-start
+sm:items-center gap-4 mb-fluid-lg">
         <div>
           <h2 className="text-section-h2 font-heading font-semibold mb-2">Portfolio</h2>
           <p className="text-body-guideline font-body text-gray-600">
             Explore my makeup artistry work
           </p>
         </div>
-        
+
         <div className="flex items-center gap-4">
           {/* Category filter */}
-          <select 
-            value={category} 
+          <select
+            value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="px-4 py-2 rounded-lg bg-white border border-gray-200"
           >
@@ -216,21 +234,21 @@ function PortfolioPage() {
             <option value="editorial">Editorial</option>
             <option value="nails">Nails</option>
           </select>
-          
+
           {/* Layout switcher */}
           <LayoutSwitcher value={layout} onChange={setLayout} />
         </div>
       </div>
-      
+
       {/* Content grid/list */}
       <div className={
-        layout === 'grid' 
-          ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md' 
+        layout === 'grid'
+          ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md'
           : 'flex flex-col gap-fluid-md'
       }>
         {portfolioEntries.map(entry => (
-          <PortfolioCard 
-            key={entry.id} 
+          <PortfolioCard
+            key={entry.id}
             entry={entry}
             layout={layout}
           />
@@ -239,7 +257,8 @@ function PortfolioPage() {
     </section>
   );
 }
-```
+
+```text
 
 ### Blog Page Implementation
 
@@ -250,22 +269,22 @@ import { BlogCard } from './components/ui/BlogCard';
 
 function BlogPage() {
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
-  
+
   return (
     <section className="py-section">
       <div className="flex justify-between items-center mb-fluid-lg">
         <h2 className="text-section-h2 font-heading font-semibold">Blog</h2>
         <LayoutSwitcher value={layout} onChange={setLayout} />
       </div>
-      
+
       <div className={
         layout === 'grid'
           ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-fluid-md'
           : 'flex flex-col gap-fluid-lg'
       }>
         {blogPosts.map(post => (
-          <BlogCard 
-            key={post.id} 
+          <BlogCard
+            key={post.id}
             post={post}
             layout={layout}
           />
@@ -274,7 +293,8 @@ function BlogPage() {
     </section>
   );
 }
-```
+
+```text
 
 ### With Persistent User Preference
 
@@ -288,12 +308,12 @@ function PortfolioPage() {
     const saved = localStorage.getItem('portfolio-layout');
     return (saved as 'grid' | 'list') || 'grid';
   });
-  
+
   // Save preference when changed
   useEffect(() => {
     localStorage.setItem('portfolio-layout', layout);
   }, [layout]);
-  
+
   return (
     <>
       <LayoutSwitcher value={layout} onChange={setLayout} />
@@ -301,7 +321,8 @@ function PortfolioPage() {
     </>
   );
 }
-```
+
+```text
 
 ---
 
@@ -321,8 +342,8 @@ interface LayoutSwitcherProps {
   ariaLabel?: string;
 }
 
-export function LayoutSwitcher({ 
-  value, 
+export function LayoutSwitcher({
+  value,
   onChange,
   className = '',
   size = 'md',
@@ -333,7 +354,7 @@ export function LayoutSwitcher({
     md: 'w-10 h-10',
     lg: 'w-12 h-12'
   };
-  
+
   const iconSizes = {
     sm: 16,
     md: 20,
@@ -341,7 +362,7 @@ export function LayoutSwitcher({
   };
 
   return (
-    <div 
+    <div
       className={`inline-flex gap-1 bg-gray-100 p-1 rounded-lg ${className}`}
       role="group"
       aria-label={ariaLabel}
@@ -355,8 +376,8 @@ export function LayoutSwitcher({
           flex items-center justify-center
           rounded-md
           transition-all duration-200
-          ${value === 'grid' 
-            ? 'bg-gradient-pink-purple-blue text-white shadow-md' 
+          ${value === 'grid'
+            ? 'bg-gradient-pink-purple-blue text-white shadow-md'
             : 'bg-transparent text-gray-600 hover:bg-gray-200'
           }
           focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-opacity-50
@@ -364,7 +385,7 @@ export function LayoutSwitcher({
       >
         <SquaresFour size={iconSizes[size]} />
       </button>
-      
+
       <button
         onClick={() => onChange('list')}
         aria-pressed={value === 'list'}
@@ -374,8 +395,8 @@ export function LayoutSwitcher({
           flex items-center justify-center
           rounded-md
           transition-all duration-200
-          ${value === 'list' 
-            ? 'bg-gradient-pink-purple-blue text-white shadow-md' 
+          ${value === 'list'
+            ? 'bg-gradient-pink-purple-blue text-white shadow-md'
             : 'bg-transparent text-gray-600 hover:bg-gray-200'
           }
           focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-opacity-50
@@ -386,7 +407,8 @@ export function LayoutSwitcher({
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -395,8 +417,8 @@ export function LayoutSwitcher({
 ### ARIA Attributes
 
 ```tsx
-<div 
-  role="group" 
+<div
+  role="group"
   aria-label="View mode selector"
 >
   <button
@@ -405,7 +427,7 @@ export function LayoutSwitcher({
   >
     <Grid />
   </button>
-  
+
   <button
     aria-pressed={value === 'list'}
     aria-label="Switch to list view"
@@ -413,7 +435,8 @@ export function LayoutSwitcher({
     <List />
   </button>
 </div>
-```
+
+```text
 
 ### Keyboard Navigation
 
@@ -429,7 +452,8 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
     onChange('list');
   }
 };
-```
+
+```text
 
 ### Screen Reader Support
 
@@ -441,7 +465,8 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 >
   <Grid />
 </button>
-```
+
+```text
 
 ---
 
@@ -457,13 +482,16 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 <button onClick={() => onChange('list')}>
   <List />
 </button>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Clear visual indication of active state
 <LayoutSwitcher value={layout} onChange={setLayout} />
-```
+
+```text
 
 ### ❌ Mistake 2: Missing ARIA Attributes
 
@@ -473,13 +501,16 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
   <button onClick={() => onChange('grid')}><Grid /></button>
   <button onClick={() => onChange('list')}><List /></button>
 </div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Proper ARIA attributes
 <LayoutSwitcher value={layout} onChange={setLayout} />
-```
+
+```text
 
 ### ❌ Mistake 3: Not Updating Content Layout
 
@@ -489,16 +520,19 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 <div className="grid grid-cols-3">
   {/* Always grid, never list */}
 </div>
-```
+
+```text
 
 **Solution:**
+
 ```tsx
 // ✅ CORRECT - Layout switcher controls content display
 <LayoutSwitcher value={layout} onChange={setLayout} />
 <div className={layout === 'grid' ? 'grid grid-cols-3' : 'flex flex-col'}>
   {/* Content adapts to selected layout */}
 </div>
-```
+
+```text
 
 ---
 
@@ -515,7 +549,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system
-- **[FILE_STRUCTURE.md](../FILE_STRUCTURE.md)** - File organization
+- **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
 
 ---

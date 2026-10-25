@@ -1,181 +1,52 @@
-# Sub-audit 4 — Mock data and types
+# Book-site content, mock-data and type-contract review
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Report:** `/reports/project-stability-audit/04-mock-data-types.md`
+## 1. Objective
 
----
+Assess actual data contracts while keeping editorial sources distinct from display/mock data.
 
-## Context
+## 2. Inputs and scope
 
-All front-end content must be stored in mock data files under `/data/mock/`, never hardcoded in components. Every data file must reference a TypeScript type from `/data/types/`. Misalignment between types and data causes silent rendering failures. Oversized data files risk exceeding bundler memory limits.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current repository instructions, actual source/configuration/manifest, approved scope and relevant existing work. Confirm paths and scripts against the inspected revision; no implied command execution.
 
-## Step 1 — Data file inventory
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-Scan `/data/mock/` recursively. For each `.ts` file, record:
+## 3. Audit steps
 
-| File | Lines | Type import | Barrel exported? | Consumer count |
-|---|---|---|---|---|
-| `/data/mock/blog/posts.ts` | 250 | `BlogPost` from `/data/types/blog` | Yes (via `index.ts`) | 3 files |
+1. Inventory authoritative root content, derived reader/Journal material, app data, mock fixtures and type declarations with their consumers. A mock object or generated excerpt is not authoritative memoir evidence.
 
-**Checks:**
-- [ ] Every data file imports a type from `/data/types/`
-- [ ] Every data file's exports match the imported type shape
-- [ ] Every data file is re-exported through its directory's `index.ts`
-- [ ] The root `/data/mock/index.ts` re-exports all sub-modules
+2. Check schema alignment, required/optional/null values, discriminants, names, IDs/slugs, duplicate identifiers and references. Do not fill unknown metadata with invented names, dates or claims merely to satisfy a type.
 
----
+3. Check date semantics, image/attribution paths, taxonomy definitions/usage, SEO/route metadata and current display/filter/search/reader assumptions. Separate publication/event/recording dates and past/current/future status.
 
-## Step 2 — Type file inventory
+4. Assess exports and module boundaries through actual consumers; internal modules need not all be barrel-exported. Source-size or naming heuristics alone do not require splitting or converting every string into a constant.
 
-Scan `/data/types/` for every `.ts` file. For each type definition, record:
+5. For any proposed contract change identify affected content, parsers, renderers, route consumers and migration/rollback requirements. Missing data can require a question, not a schema expansion or fabricated fallback.
 
-| Type name | File | Used by data files | Used by components |
-|---|---|---|---|
-| `BlogPost` | `/data/types/blog.ts` | `posts.ts`, `posts-timeline.ts` | `BlogPage.tsx`, `BlogPostPage.tsx` |
+6. Return the contract/consumer matrix, confirmed inconsistencies, supported exact data/type proposals and unresolved factual/ownership questions. No data, manuscript, type, parser or export edits.
 
-**Checks:**
-- [ ] Every type is used by at least one data file
-- [ ] Every type field has a corresponding value in its data files
-- [ ] No type fields are unused across ALL data files (phantom fields)
-- [ ] No data files contain fields that are missing from the type (untyped fields)
-- [ ] Type names follow conventions: PascalCase, descriptive, no abbreviations
+## 4. Missing evidence and permission boundaries
 
----
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-## Step 3 — Data-type alignment matrix
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-For each type, compare every field against every data file entry:
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-```
-Type: BlogPost
-Fields: id, title, slug, excerpt, content, category, tags, date, author, image, readTime
+## 5. Success criteria
 
-Data file: /data/mock/blog/posts.ts
-Entry 1: id ✅, title ✅, slug ✅, excerpt ✅, content ✅, category ✅, tags ✅, date ✅, author ✅, image ✅, readTime ✅
-Entry 2: id ✅, title ✅, slug ✅, excerpt ✅, content ✅, category ✅, tags ✅, date ✅, author ❌ MISSING, image ✅, readTime ✅
-```
+- [ ] The complete in-scope inventory, consumers and protected exceptions are recorded.
+- [ ] Each proposed change preserves actual contracts and has evidence, dependencies and verification needs.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-Flag:
-- [ ] Fields defined in type but missing from data entries
-- [ ] Fields present in data but not defined in type
-- [ ] Fields with wrong value types (string where number expected, etc.)
-- [ ] Optional fields (`?`) that are ALWAYS provided (should be required)
-- [ ] Required fields that are sometimes missing (should be optional or data should be fixed)
+## 6. Report output
 
----
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-## Step 4 — Data file size check
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-Flag data files exceeding recommended limits:
+## 7. Revision provenance
 
-| Threshold | Action |
-|---|---|
-| > 200 lines | Warning — consider splitting |
-| > 400 lines | Critical — must split |
-
-For files exceeding thresholds, recommend a split strategy:
-- Split by logical group (e.g., posts by year, portfolio by category)
-- Maintain barrel `index.ts` with combined re-export
-- Document the split pattern
-
----
-
-## Step 5 — Barrel export integrity
-
-For each directory under `/data/mock/`:
-
-- [ ] Does an `index.ts` exist?
-- [ ] Does it re-export ALL files in the directory?
-- [ ] Are there files that exist but are NOT re-exported?
-- [ ] Does the root `/data/mock/index.ts` re-export all sub-directory barrels?
-
----
-
-## Step 6 — Content rules verification
-
-- [ ] All string values use sentence case (per Guidelines.md)
-- [ ] No hardcoded content exists in component files (search for string literals in JSX)
-- [ ] All `seo.ts` entries correspond to existing page components
-- [ ] Image URLs reference valid `figma:asset/` paths or Unsplash URLs (no broken links)
-- [ ] Dates are in consistent format across all data files
-
----
-
-## Step 7 — Data structure guidelines
-
-Create `/guidelines/data-structure/README.md` with:
-
-### Data file conventions
-- One file per content domain
-- Maximum 200 lines per file (split at 200+)
-- Always import types from `/data/types/`
-- Always export as named exports (for tree-shaking)
-- Always include in barrel `index.ts`
-
-### Splitting conventions
-- When to split: file exceeds 200 lines
-- How to split: by logical grouping (year, category, type)
-- Barrel pattern: `index.ts` re-exports all splits with combined array
-- Naming: `{domain}-{group}.ts` (e.g., `posts-timeline.ts`, `portfolio-festivals.ts`)
-
-### Type-first workflow
-1. Define or update type in `/data/types/{domain}.ts`
-2. Create or update data in `/data/mock/{domain}/`
-3. Update barrel export in `index.ts`
-4. Import in component from `/data/mock`
-
-### Adding a new data domain
-1. Create type file: `/data/types/{domain}.ts`
-2. Create data folder: `/data/mock/{domain}/`
-3. Create data file(s) and `index.ts`
-4. Add to root barrel: `/data/mock/index.ts`
-5. Add guideline: `/guidelines/data-structure/{domain}.md`
-
-### Field inventory
-Document every data module with:
-- File path
-- Type reference
-- Field list with types
-- Consumer components
-- Related SEO entry
-
----
-
-## Output format
-
-```markdown
-## Data file inventory
-
-[Table from Step 1]
-
-## Type file inventory
-
-[Table from Step 2]
-
-## Alignment issues
-
-| Data file | Field | Issue |
-|---|---|---|
-| `posts.ts` entry 5 | `author` | Missing (required by type) |
-
-## Size violations
-
-| File | Lines | Status | Split recommendation |
-|---|---|---|---|
-
-## Barrel export gaps
-
-| Directory | Missing exports |
-|---|---|
-
-## Content rule violations
-
-| File | Line | Issue |
-|---|---|---|
-
-## Guidelines draft
-
-[Draft of `/guidelines/data-structure/README.md`]
-```
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/project-stability-audit/04-mock-data-types.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

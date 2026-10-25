@@ -1,176 +1,50 @@
-# Sub-audit 3: Podcast expansion (8 → 15 episodes with transcripts)
+# Podcast evidence and transcript review
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Report:** `/reports/content-expansion-phase8/03-podcast-expansion.md`
+## 1. Objective
 
----
+Assess podcast-related material appropriate to the book website without inventing recordings or transcripts.
 
-## Objective
+## 2. Inputs and scope
 
-Polish all 8 existing podcast episodes. Create 7 new episodes to reach 15 total. Write full transcripts for ALL 15 episodes so Ash can record them. Each episode gets 2–3 per-item FAQs.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current content/data/type inventories, registered routes and author-approved sources. Confirm scope before assessing historical expansion requests; do not use their target totals as present facts.
 
-## Step 1: Audit existing episodes
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-**File:** `/data/mock/podcasts/episodes.ts`
+## 3. Audit steps
 
-**Check each of the 8 existing episodes for:**
-1. **Voice** — Natural spoken-word tone, conversational, as if Ash is talking to a friend
-2. **Content depth** — The `content` field should have substantial markdown content (500+ words)
-3. **Description quality** — Short, punchy, podcast-listing-style descriptions
-4. **Duration accuracy** — Durations should match content length (rough estimate: 150 words/minute of speech)
-5. **Category/tag consistency** — Check against `/data/mock/podcasts/categories.ts` and `/data/mock/podcasts/tags.ts`
-6. **Per-item FAQs** — Verify existing FAQs, add if missing (2–3 per episode)
-7. **Sentence case** — All titles
+1. Inventory actual recordings, episodes, audio URLs, metadata/types, source pages and consumers. Distinguish published audio, planned scripts, edited transcripts and summaries.
 
----
+2. For each item, verify title, date, speakers/guests, consent, attribution, genuine URL and measured duration from available evidence. A proposed dialogue is not a transcript; do not use word-count/150-words-per-minute arithmetic as a recorded duration.
 
-## Step 2: Write full transcripts for existing episodes
+3. Assess relevant book/author/company/community topics with verified source material. Historical episode/word totals and future dates do not authorise new episodes or fabricated guest conversations.
 
-**Add the `transcript` field** to each existing episode. The Podcast type already supports it:
-```typescript
-transcript?: string;
-```
+4. Check metadata/taxonomy/IDs, accessible player/transcript affordances and useful contextual FAQs. @ashshaw.makeup may be a real social account: treat handle verification separately from former website links.
 
-### Transcript format
+5. Return provenance-labelled transcript/copy candidates and gaps. Do not publish, alter audio, replace images, imply recording occurred or create new route/data structures.
 
-```typescript
-transcript: `## Episode [N]: [Title]
+## 4. Missing evidence and permission boundaries
 
-**Host:** Ash Shaw
-**Recorded:** [Date]
-**Duration:** [Duration]
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
----
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-**[Ash]:** [Opening greeting and episode intro — warm, personal, like talking to a friend at a festival afterparty]
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-[Main content following the episode's content field but expanded into natural spoken-word format]
+## 5. Success criteria
 
-**[Ash]:** [Section transitions should feel organic, not scripted]
+- [ ] Each factual/content proposal has provenance, relevance and a verified current destination.
+- [ ] Historical quotas and invented metadata are not substituted for genuine source material.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-[Include natural speech patterns: "So here's the thing...", "Look, I'm not gonna lie...", "And that's when it hit me...", "Right?"]
+## 6. Report output
 
-[For guest episodes, format as dialogue:]
-**[Ash]:** Question or comment
-**[Guest Name]:** Response
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-**[Ash]:** [Closing — thanks, preview of next episode, sign-off]
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
----
+## 7. Revision provenance
 
-*Neon vs Atomic Black — a podcast by Ash Shaw*
-*Follow on Instagram: @ashshaw.makeup*`
-```
-
-### Transcript guidelines
-
-- **Length:** 2,000–4,000 words per episode (roughly 12–25 minutes of speech)
-- **Voice:** Conversational, unscripted feel. Ash talks like he writes — honest, energetic, tangential in the best way
-- **Structure:** Natural flow with clear topic transitions, not bullet-point reading
-- **Anecdotes:** Weave in specific stories from `/docs/website-content.md` and ebook content
-- **Callbacks:** Reference previous episodes where relevant ("Remember in episode 3 when I talked about...")
-- **Sign-off:** Each episode ends with a consistent closing (develop a signature sign-off)
-
----
-
-## Step 3: Create 7 new episodes (total: 15)
-
-### Suggested episode topics
-
-**Season 1 continuation (episodes 9–15):**
-
-| Ep | Title | Topic | Guests |
-|---|---|---|---|
-| 9 | "The loaded bike" | Cycling to festivals with a 40kg pack — Origin, Stormsvlei, Thailand | None |
-| 10 | "Six Cats and the green garden" | Cannabis cultivation as creative practice, the cats, the community | None |
-| 11 | "LightSpeed: 22 years of building" | The company story: BarCamp, WordPress, the team, AI workflow | None (or Warwick Booth as guest) |
-| 12 | "Wired different" | ADHD, Aquarius, and how the brain that didn't fit school built a career | None |
-| 13 | "The cumulative effect" | The central thesis: it's never one thing. Stories that illustrate this. | None |
-| 14 | "Festival kit masterclass" | What's in the bag: paints, brushes, mirror stand, camping gear, bike setup | None |
-| 15 | "Season finale: where to next" | Reflection on Season 1, upcoming plans, Organik preview, the book | None |
-
-### Episode structure template
-
-```typescript
-{
-  id: 'pod-N',
-  slug: 'descriptive-slug',
-  title: 'Sentence case title',
-  description: 'One punchy sentence for podcast listings.',
-  content: `# Sentence case title
-
-[Substantial markdown content — 500+ words summarising the episode topics, key points, and takeaways. This is the "show notes" version.]
-
-## Topics covered
-
-- Topic one
-- Topic two
-
-## Key quotes
-
-> "Pull quote from the episode"
-
-## Resources mentioned
-
-- [Link text](url) — description
-  `,
-  audioUrl: 'https://example.com/podcasts/episode-N.mp3',
-  duration: 'MM:SS',
-  episodeNumber: N,
-  seasonNumber: 1,
-  category: 'Category',
-  tags: ['Tag One', 'Tag Two'],
-  publishedAt: 'YYYY-MM-DD',
-  featured: false,
-  coverImage: {
-    src: 'UNSPLASH_URL_FROM_TOOL',
-    alt: 'Descriptive alt text'
-  },
-  guests: [],
-  transcript: `## Episode N: Title
-
-**Host:** Ash Shaw
-**Recorded:** [Month Year]
-**Duration:** [Duration]
-
----
-
-[Full transcript — 2,000–4,000 words]
-
----
-
-*Neon vs Atomic Black — a podcast by Ash Shaw*`,
-  faqs: [
-    { id: 'pod-N-q1', question: 'Question?', answer: 'Answer.' },
-    { id: 'pod-N-q2', question: 'Question?', answer: 'Answer.' },
-  ]
-}
-```
-
-### Date distribution
-
-- Episodes 1–8 are already dated Feb–March 2026
-- New episodes 9–15 should be dated March–June 2026 (biweekly cadence)
-- Alternatively, backdate some episodes to create a more natural timeline
-
----
-
-## Step 4: Update barrel exports
-
-1. Add new episodes to `/data/mock/podcasts/episodes.ts` (or create `episodes-season1b.ts` and import)
-2. Update category counts in `/data/mock/podcasts/categories.ts`
-3. Add any new tags to `/data/mock/podcasts/tags.ts`
-4. Verify total count = 15
-
----
-
-## Output
-
-- **Report:** `/reports/content-expansion-phase8/03-podcast-expansion.md` with:
-  - Polish changes for existing 8 episodes
-  - 7 new episodes listed (title, date, duration, topic)
-  - Transcript word counts per episode
-  - Total FAQ count
-  - Category/tag changes
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-expansion-phase8/03-podcast-expansion.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

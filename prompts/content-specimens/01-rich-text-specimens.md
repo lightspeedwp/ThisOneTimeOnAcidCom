@@ -1,198 +1,58 @@
-# Sub-audit 1: Rich text specimens page
+# Book-site rich-text specimen coverage review
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Route:** `/dev-tools/rich-text-specimens`
+## 1. Objective
 
----
+Assess rich-text coverage and rendering evidence for the current book website without generating a new legacy dev-tools page.
 
-## Objective
+## 2. Inputs and scope
 
-Create a tabbed dev tools page that demonstrates every rich-text styling element available within single-post/detail-page content bodies. One tab per content type, each styled with its assigned neon colour.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: actual Markdown renderer and sanitisation/configuration, book/Journal/event content, components/styles and current style guide. Root content-specimens-markdown-expansion.md is a compatibility notice.
 
-## Page structure
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  Breadcrumbs: Home > Developer Tools > Rich text specimens   │
-│  Badge: Content                                              │
-│  H1: Rich text specimens (gradient)                          │
-│  Subtitle: Every typography and layout element available...   │
-├──────────────────────────────────────────────────────────────┤
-│  [ Blog ] [ Portfolio ] [ Video ] [ Podcast ] [ Event ]      │
-│  ─────── (active tab underline in content-type neon colour)  │
-├──────────────────────────────────────────────────────────────┤
-│                                                              │
-│  ┌── Theme toggle ──────────────────────────────────────┐   │
-│  │  [Light]  [Dark]  [Side by side]                      │   │
-│  └───────────────────────────────────────────────────────┘   │
-│                                                              │
-│  ┌── Rich text specimen (scrollable) ───────────────────┐   │
-│  │                                                       │   │
-│  │  H1: Post title                                       │   │
-│  │  Meta bar: date, category, read time, author          │   │
-│  │  Body text paragraphs...                              │   │
-│  │  H2: Section heading                                  │   │
-│  │  Blockquote                                           │   │
-│  │  Image (full-width, captioned)                        │   │
-│  │  Unordered list                                       │   │
-│  │  H3: Subsection heading                               │   │
-│  │  Ordered list                                         │   │
-│  │  Pull quote                                           │   │
-│  │  Image gallery (2-3 column grid)                      │   │
-│  │  Table                                                │   │
-│  │  Code block                                           │   │
-│  │  Callout / info panel                                 │   │
-│  │  Horizontal rule                                      │   │
-│  │  Tags + Share                                         │   │
-│  │  Author bio section                                   │   │
-│  │  FAQ section (neon coloured)                           │   │
-│  │  Related content cards                                │   │
-│  │                                                       │   │
-│  └───────────────────────────────────────────────────────┘   │
-│                                                              │
-└──────────────────────────────────────────────────────────────┘
-```
+## 3. Audit steps
 
----
+1. Inventory supported syntax and current examples before proposing specimens. Check heading levels 1–6 by semantic hierarchy, paragraphs, bold/italic/combined emphasis, strikethrough, horizontal rules and inline code; no requirement to make every level a page heading.
 
-## Tab content specifications
+2. Check unordered/ordered/nested/task lists, inline/autolinks, existing images/captions, fenced code and language labels, blockquotes/nested quotes, and tables with left/centre/right alignment. Include long text, wrapping, overflow and keyboard-accessible scrolling where needed.
 
-### Blog tab (neon pink)
+3. Test support before promising footnotes, superscript/subscript, highlighting, definition lists, galleries, callouts, embedded video/audio or transcripts. Distinguish existing parser capability from proposed extension and sanitisation/security implications.
 
-Demonstrate the complete blog post body styling:
-- Post title (h1 with neon pink gradient)
-- Meta bar: published date, category badge (pink), read time, author avatar + name
-- Opening paragraph with **bold**, *italic*, and [links](#)
-- H2 section heading
-- Blockquote with left border (neon pink)
-- Full-width image with caption
-- Unordered list (3–4 items)
-- H3 sub-heading
-- Ordered list (numbered steps)
-- Pull quote component (PullQuote from `/components/ui/PullQuote.tsx`)
-- Image gallery (2–3 images in a responsive grid)
-- Table (3 columns, 4 rows — e.g., UV paint comparison)
-- Inline code and code block
-- Callout box (tip/warning style)
-- Horizontal rule
-- Tag chips + share buttons
-- Author bio card
-- FAQ section with 3 FAQs (pink accent)
-- Related posts (3 blog cards)
+4. Use source-backed specimen content rather than invented memoir. Preserve approved images and attribution; do not add assets or install a renderer/plugin to satisfy a checklist.
 
-### Portfolio tab (neon green)
+5. Assess semantics, keyboard/focus, screen-reader reading order where observed, responsive layout, both themes, code/table readability and reduced motion. Static inspection is not observed assistive-technology testing.
 
-Demonstrate the portfolio detail page content styling:
-- Entry title (h1 with neon green gradient)
-- Meta bar: date, location, event name, category badge (green)
-- Opening description paragraph
-- Hero image (full-width, 3:4 or 1:1 aspect)
-- Technique description (h2 + paragraphs)
-- Image gallery (masonry or grid, 4–6 images)
-- H3: Behind the scenes
-- Pull quote about the design
-- Tags list
-- FAQ section with 3 FAQs (green accent)
-- Related portfolio entries (3 cards)
+6. Reconcile the historical video-purple versus video-blue colour-map conflict against current approved tokens. Do not choose a colour, add fonts or reproduce all 21 legacy content types by assumption.
 
-### Video tab (neon blue)
+7. Return a feature-support/specimen/state matrix and exact proposed examples with their consumer impacts. No new routes, generated dev-tools, permanent reports or implementation.
 
-Demonstrate the video detail page content styling:
-- Video title (h1 with neon blue gradient)
-- Video embed placeholder (16:9 with play button overlay)
-- Meta bar: duration, views, likes, category badge (blue), publish date
-- Description paragraphs with timestamps
-- H2: What you'll see
-- Unordered list of highlights
-- H2: Behind the scenes
-- Paragraphs with inline images
-- FAQ section with 3 FAQs (blue accent)
-- Related videos (3 cards)
+## Consolidated source coverage
 
-### Podcast tab (neon purple)
+The root Markdown-expansion entry point’s rich-text, metadata, long-form, link/image, media and advanced-syntax requirements are assessed here; card layouts are assessed in sibling 02. A distinct page-layout/browser request remains held in sibling 03, not silently cancelled.
 
-Demonstrate the podcast detail page content styling:
-- Episode title (h1 with neon purple gradient)
-- Cover image (square, album-art style)
-- Meta bar: episode number, season, duration, category badge (purple)
-- Audio player placeholder
-- Show notes (h2 + rich text)
-- H2: Transcript
-- Transcript section (styled dialogue format with speaker labels)
-- Guest info card (if applicable)
-- FAQ section with 3 FAQs (purple accent)
-- Related episodes (3 cards)
+## 4. Missing evidence and permission boundaries
 
-### Event tab (neon orange)
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-Demonstrate the event detail page content styling:
-- Event name (h1 with neon orange gradient)
-- Date range badge, location, genre tags
-- Hero image
-- Description paragraphs
-- H2: Editions attended
-- Timeline component (vertical, orange accent) showing edition history
-- H2: Travel
-- Travel method badge (bicycle icon), distance, route description
-- Image gallery from the event
-- Social links (event's social accounts)
-- FAQ section with 3 FAQs (orange accent)
-- Related events (3 cards)
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
----
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-## Technical implementation
+## 5. Success criteria
 
-### Tab component
+- [ ] Basic and advanced syntax requirements are individually classified as supported, proposed, blocked or not applicable.
+- [ ] Content, theme, responsive and accessibility coverage is evidenced without copying the former site identity.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-Build a reusable tab component or use a simple state-driven approach:
-```typescript
-var [activeTab, setActiveTab] = useState('blog');
-```
+## 6. Report output
 
-Each tab button gets its neon colour as the active underline:
-```css
-.rich-text-tabs__tab--blog.rich-text-tabs__tab--active {
-  border-bottom-color: var(--wp--preset--color--neon-pink);
-}
-```
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-### Theme preview modes
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-Provide 3 viewing modes:
-1. **Light** — forces light theme on the specimen container
-2. **Dark** — forces dark theme on the specimen container
-3. **Side by side** — renders the same specimen in two columns, one light, one dark
+## 7. Revision provenance
 
-Implementation: wrap specimen in a container with `.force-light` or `.force-dark` class that overrides CSS variables.
-
-### Data file
-
-All specimen content text lives in `/data/mock/ui/rich-text-specimens.ts`:
-```typescript
-export const richTextSpecimens = {
-  blog: {
-    title: 'UV Makeup at Origin Festival 2026',
-    meta: { date: '2026-02-15', category: 'Festival', readTime: 8, author: 'Ash Shaw' },
-    content: '...',
-    faqs: [...],
-  },
-  portfolio: { ... },
-  video: { ... },
-  podcast: { ... },
-  event: { ... },
-};
-```
-
----
-
-## Output
-
-- Component: `/components/pages/dev-tools/RichTextSpecimensPage.tsx`
-- CSS: `/styles/blocks/rich-text-specimens.css`
-- Data: `/data/mock/ui/rich-text-specimens.ts`
-- Route registered
-- SEO entry added
-- Breadcrumb entry added
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-specimens/01-rich-text-specimens.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

@@ -3,17 +3,20 @@
 **Version:** 1.0.0
 **Last Updated:** February 2026
 **Last Reviewed:** February 21, 2026
-**Purpose:** Document the BEM architecture, file structure, import system, and styling rules
+**Purpose:** Document the BEM architecture, file structure, import system, and
+styling rules
 
 ---
 
 ## 1. Architecture Overview
 
-This project uses a **strict Semantic BEM (Block Element Modifier)** CSS architecture. Tailwind utility classes are **forbidden**. All styles are defined in dedicated CSS files within `/styles/`.
+This project uses a **strict Semantic BEM (Block Element Modifier)** CSS
+architecture. Tailwind utility classes are **forbidden**. All styles are defined
+in dedicated CSS files within `/styles/`.
 
 ### File Structure
 
-```
+```text
 /styles/
   globals.css              # Root: design tokens, reset, base styles, utility helpers
   animations.css           # Centralised keyframe animations (26 keyframes)
@@ -25,7 +28,8 @@ This project uses a **strict Semantic BEM (Block Element Modifier)** CSS archite
     ...
   components/
     typeform-embed.css     # Third-party component overrides
-```
+
+```text
 
 ---
 
@@ -36,13 +40,20 @@ This project uses a **strict Semantic BEM (Block Element Modifier)** CSS archite
 `/styles/globals.css` is the root stylesheet loaded by the application. It:
 
 1. Imports `animations.css` at the top: `@import './animations.css';`
-2. Defines the CSS reset (replacing Tailwind Preflight)
-3. Defines all `:root` design tokens (WordPress preset architecture)
-4. Defines `.dark` mode overrides
-5. Defines base element styles (`body`, headings, `p`)
-6. Defines global utility helpers (`.text-center`, `.sr-only`, `.container-wide`, etc.)
-7. Defines global animation utilities (`.animate-neon-pulse-*`, `.bg-aurora-mesh`)
-8. Defines accessibility rules (`:focus-visible`, `prefers-reduced-motion`)
+
+1. Defines the CSS reset (replacing Tailwind Preflight)
+
+1. Defines all `:root` design tokens (WordPress preset architecture)
+
+1. Defines `.dark` mode overrides
+
+1. Defines base element styles (`body`, headings, `p`)
+
+1. Defines global utility helpers (`.text-center`, `.sr-only`, `.container-wide`, etc.)
+
+1. Defines global animation utilities (`.animate-neon-pulse-*`, `.bg-aurora-mesh`)
+
+1. Defines accessibility rules (`:focus-visible`, `prefers-reduced-motion`)
 
 ### Block CSS Files
 
@@ -51,9 +62,11 @@ Each component/page imports its own block CSS file directly in the TSX:
 ```tsx
 // In /components/pages/blog/BlogPage.tsx
 import "@/styles/blocks/blog-page.css";
-```
 
-The `@/` alias resolves to the project root. This means every block CSS file is independently loaded by the component that uses it.
+```text
+
+The `@/` alias resolves to the project root. This means every block CSS file is
+independently loaded by the component that uses it.
 
 ### Key Rules
 
@@ -68,12 +81,13 @@ The `@/` alias resolves to the project root. This means every block CSS file is 
 
 ### Structure
 
-```
+```text
 .block                          # Standalone component
 .block__element                 # Child element of the block
 .block--modifier                # Variant of the block
 .block__element--modifier       # Variant of an element
-```
+
+```text
 
 ### Examples
 
@@ -89,7 +103,8 @@ The `@/` alias resolves to the project root. This means every block CSS file is 
 /* Modifiers */
 .blog-card--featured { }
 .blog-card__title--large { }
-```
+
+```text
 
 ### Naming Rules
 
@@ -117,7 +132,8 @@ All dark mode styles use the `.dark` class selector on the `<html>` element:
   background-color: var(--wp--preset--color--atomic-black);
   color: var(--wp--preset--color--neutral-200);
 }
-```
+
+```text
 
 ### Rules
 
@@ -147,11 +163,15 @@ All dark mode styles use the `.dark` class selector on the `<html>` element:
 
 ```css
 /* BAD - hardcoded values */
-.card { background: #f3f4f6; border-radius: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.card { background: #f3f4f6; border-radius: 1rem; box-shadow: 0 4px 6px
+rgba(0,0,0,0.1); }
 
 /* GOOD - token references */
-.card { background: var(--wp--preset--color--neutral-100); border-radius: var(--wp--preset--border-radius--lg); box-shadow: var(--wp--preset--shadow--card); }
-```
+.card { background: var(--wp--preset--color--neutral-100); border-radius:
+var(--wp--preset--border-radius--lg); box-shadow:
+var(--wp--preset--shadow--card); }
+
+```text
 
 ---
 
@@ -166,12 +186,15 @@ All dark mode styles use the `.dark` class selector on the `<html>` element:
 .card-list .card { margin-bottom: 1rem; }
 
 /* GOOD - gap on parent */
-.card-list { display: flex; flex-direction: column; gap: var(--wp--preset--spacing--block-gap); }
-```
+.card-list { display: flex; flex-direction: column; gap:
+var(--wp--preset--spacing--block-gap); }
+
+```text
 
 ### blockGap Token
 
-The standard inter-element gap is `--wp--preset--spacing--block-gap` which maps to `fluid-md` (clamp 1rem-2rem).
+The standard inter-element gap is `--wp--preset--spacing--block-gap` which maps
+to `fluid-md` (clamp 1rem-2rem).
 
 ### When Margin Is Acceptable
 
@@ -202,7 +225,8 @@ Mobile-first with standard breakpoints:
 @media (min-width: 1440px) {
   .grid { grid-template-columns: repeat(4, 1fr); }
 }
-```
+
+```text
 
 ---
 

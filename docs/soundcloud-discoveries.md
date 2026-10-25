@@ -1,6 +1,10 @@
-Ash — the SoundCloud screenshots add an **important second dimension** to your music identity. Your Spotify shows your **foundational taste**, while SoundCloud shows your **current underground / club discovery pipeline**. That contrast will make the page far more interesting.
+Ash — the SoundCloud screenshots add an **important second dimension** to your
+music identity. Your Spotify shows your **foundational taste**, while SoundCloud
+shows your **current underground / club discovery pipeline**. That contrast will
+make the page far more interesting.
 
-Below is a structured **add-on section** you can add to the page plus **repo notes + Figma prompt updates**.
+Below is a structured **add-on section** you can add to the page plus **repo
+notes + Figma prompt updates**.
 
 ---
 
@@ -10,16 +14,19 @@ This should sit **after Spotify favourites** on the page.
 
 ## Section Title
 
-**Underground Discoveries on SoundCloud**
+## Underground Discoveries on SoundCloud
 
 ## Intro Text
 
-While Spotify holds my long-term favourites, SoundCloud is where I explore the underground.
+While Spotify holds my long-term favourites, SoundCloud is where I explore the
+underground.
 
 It’s where new DJs, experimental producers, and festival sets appear first.
-Many of the artists I listen to here are connected to the European electronic scene — especially Berlin clubs, festival stages, and emerging labels.
+Many of the artists I listen to here are connected to the European electronic
+scene — especially Berlin clubs, festival stages, and emerging labels.
 
-This is where I discover the sounds behind long nights, festival mornings, and creative inspiration.
+This is where I discover the sounds behind long nights, festival mornings, and
+creative inspiration.
 
 ---
 
@@ -38,7 +45,8 @@ Sportbrigade Sparwasser
 Context text:
 
 A lot of these artists are connected to Berlin’s club culture.
-Sets from places like **Sisyphos, Kater Blau, and Golden Gate** capture the raw energy of the city’s electronic scene.
+Sets from places like **Sisyphos, Kater Blau, and Golden Gate** capture the raw
+energy of the city’s electronic scene.
 
 ---
 
@@ -54,7 +62,8 @@ Sisyphos events
 Text:
 
 Some of the best electronic music lives in festival recordings and live DJ sets.
-These mixes capture moments that only exist on a dancefloor somewhere in the forest or at sunrise on a festival stage.
+These mixes capture moments that only exist on a dancefloor somewhere in the
+forest or at sunrise on a festival stage.
 
 ---
 
@@ -70,9 +79,11 @@ Sahra Bass
 
 Text:
 
-SoundCloud is where producers experiment, collaborate, and release music that doesn’t always fit traditional labels or platforms.
+SoundCloud is where producers experiment, collaborate, and release music that
+doesn’t always fit traditional labels or platforms.
 
-It’s a space where underground sounds grow before reaching the wider music world.
+It’s a space where underground sounds grow before reaching the wider music
+world.
 
 ---
 
@@ -82,19 +93,19 @@ This section makes the page feel **authentic and personal**.
 
 ## Where I Discover Music
 
-**Clubs**
+## Clubs
 
 Sisyphos
 Kater Blau
 Golden Gate
 
-**Festivals**
+## Festivals
 
 Fusion Festival
 Nation of Gondwana
 Mystic Creatures Festival
 
-**Online Platforms**
+## Online Platforms
 
 Spotify
 SoundCloud
@@ -107,7 +118,7 @@ Festival recordings
 
 Final page structure:
 
-```
+```text
 Hero
 ↓
 Music Philosophy
@@ -128,7 +139,8 @@ SoundCloud Discoveries
 Where I Discover Music
 ↓
 Spotify Profile Link
-```
+
+```text
 
 ---
 
@@ -157,11 +169,12 @@ Use this updated prompt.
 
 ---
 
-**Figma AI Prompt**
+## Figma AI Prompt
 
 Design a funky music inspiration page for a makeup artist portfolio.
 
-The page should mix the aesthetic of electronic music culture, psychedelic festivals, and Berlin club nightlife.
+The page should mix the aesthetic of electronic music culture, psychedelic
+festivals, and Berlin club nightlife.
 
 Sections to design:
 
@@ -202,7 +215,8 @@ music waveform graphics
 festival poster style visuals
 asymmetrical editorial layout
 
-The page should feel energetic, artistic and connected to electronic music culture.
+The page should feel energetic, artistic and connected to electronic music
+culture.
 
 ---
 
@@ -212,9 +226,10 @@ Add this to your project brief.
 
 ### New Data Source
 
-```
+```text
 data/music/soundcloud.ts
-```
+
+```text
 
 Example structure:
 
@@ -236,18 +251,20 @@ export const soundcloud = {
     "Mystic Creatures Festival"
   ]
 }
-```
+
+```text
 
 ---
 
 ### New Components
 
-```
+```text
 SoundCloudSection
 DJCard
 FestivalCard
 ClubCard
-```
+
+```text
 
 ---
 
@@ -255,12 +272,14 @@ ClubCard
 
 Add a short paragraph like this.
 
-**Music & Creativity**
+## Music & Creativity
 
 Electronic music has always been part of my creative process.
 
-From psychedelic trance festivals to Berlin club nights, music shapes the rhythm of how I work, travel, and create.
-Whether it’s a deep melodic set while working or a sunrise festival mix, these sounds influence the colours and energy that appear in my makeup designs.
+From psychedelic trance festivals to Berlin club nights, music shapes the rhythm
+of how I work, travel, and create.
+Whether it’s a deep melodic set while working or a sunrise festival mix, these
+sounds influence the colours and energy that appear in my makeup designs.
 
 ---
 
@@ -271,4 +290,5 @@ If you'd like, I can also help you build a **very cool feature** for the page:
 • **A music visualiser reacting to scroll**
 • **A “Currently Listening” section via Spotify API**
 
-It would make the page **one of the coolest portfolio pages for an artist online.**
+It would make the page **one of the coolest portfolio pages for an artist
+online.**

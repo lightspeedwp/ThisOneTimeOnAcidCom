@@ -1,195 +1,54 @@
-# Sub-Audit 3: Book page & ebook enrichment
+**Originally created:** March 3, 2026
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Created:** March 3, 2026
-**Version:** 1.0.0
-**Output:** `/reports/content-expansion-phase7/03-book-content.md`
+**Original version:** 1.0.0
 
----
+# Book positioning and source reconciliation
 
-## Objective
+## 1. Objective
 
-Use the "This one time on acid..." book content from `/docs/website-content.md` to enrich the ebook data and any existing book-related pages. The source document contains a full concept, blurb, chapter list, core threads, and a second alternative book concept — all of which are richer than what's likely in the current ebook data.
+Reconcile historical book concepts with the current manuscript and book brief before proposing any copy.
 
----
+## 2. Inputs and scope
 
-## Source Material
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
-**Primary source:** `/docs/website-content.md` — section: "Book / 'This one time on acid...'"
+Inputs: current manuscript/book brief; relevant author-approved source documents; actual content files, types, data and consumers. Historical content-expansion instructions are context, not proof of factual accuracy.
 
-Available content:
-- **Title:** "This one time on acid..."
-- **Design:** Neon pink cover, neon yellow text
-- **Concept:** Weaving wildest stories from the dancefloor into deepest life lessons
-- **Key theme:** It is never one thing — the cumulative effect of many experiences
-- **Core threads:** Aquarius + ADHD + Lucy
-- **Story structure:** Wild stories (campfire 4am style) → life lessons
-- **Timeline:** Writing over next few years, not to be rushed
-- **6 chapter previews** (working titles)
-- **Draft blurb**
-- **Alternative concept:** "Dance like no one's watching" — 5 chapters
-- **Origin reel beats** (Fatboy Slim, Bob Moses, Depeche Mode)
-- **Legacy stories** — what people will remember Ash for
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
----
+## 3. Audit steps
 
-## Audit Steps
+1. Inventory manuscript, current title/subtitle, synopsis/blurb and existing book-related pages. Distinguish draft status and available excerpts from planned publication or sales.
 
-### Step 1: Review current ebook data
-**File:** `/data/mock/pages/ebook-pages.ts`
+2. Compare historical working chapter concepts “The first drop”, “Wired different”, “Berlin calling”, “The dancefloor classroom”, “Neon revelations” and “The cumulative effect” with the current outline; preserve them as historical concepts, not mandatory new chapters.
 
-Document:
-- Total page count
-- Chapter structure (how many chapters, appendices)
-- Whether the chapter titles match those in `website-content.md`
-- Whether the blurb matches the draft blurb in `website-content.md`
-- Whether core threads (Aquarius + ADHD + Lucy) are reflected
+3. Check the alternative “Dance like no one’s watching” positioning, Aquarius/ADHD/Lucy threads and origin-reel/music references such as Fatboy Slim, Bob Moses and Depeche Mode against attributable material. Do not invent lyrics, dialogue, licences or lived scenes.
 
-### Step 2: Review any book-specific pages
-**Files to check:**
-- Any page component or data file related to the book/ebook
-- Check `/data/mock/pages/` for book-specific exports
-- Check `/components/pages/` for an EbookPage or BookPage component
+4. Assess existing book CTAs and reader/waitlist journeys against actual routes and approved availability. The former no-commerce direction does not prohibit a separately approved future preorder; neither does it approve implementing commerce.
 
-Document:
-- How the book is currently presented on the site
-- Whether there is a dedicated "about the book" section
-- What metadata is stored (title, blurb, cover design)
+5. Produce a claim/source map and exact proposed copy only where grounded. Keep unverified chapter titles, claims, manuscript additions, release dates and marketing promises as questions.
 
-### Step 3: Gap analysis — ebook chapters
+## 4. Missing evidence and permission boundaries
 
-Compare the 6 working chapter titles from `website-content.md` against the current ebook data:
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-| Chapter | Title from website-content.md | In ebook-pages.ts? | Match? |
-|---|---|---|---|
-| 1 | "The first drop" — rooftop in Cape Town | ? | ? |
-| 2 | "Wired different" — ADHD, Aquarius, different OS | ? | ? |
-| 3 | "Berlin calling" — one-way ticket, bicycle | ? | ? |
-| 4 | "The dancefloor classroom" — 140 BPM | ? | ? |
-| 5 | "Neon revelations" — UV paint and finding his voice | ? | ? |
-| 6 | "The cumulative effect" — it's never one moment | ? | ? |
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-Note: Titles in `website-content.md` use **Title Case** — in the data they must be corrected to **sentence case** per project rules.
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-**Correct sentence case versions:**
-1. "The first drop"
-2. "Wired different"
-3. "Berlin calling"
-4. "The dancefloor classroom"
-5. "Neon revelations"
-6. "The cumulative effect"
+## 5. Success criteria
 
-### Step 4: Gap analysis — blurb and concept
+- [ ] Relevant topics are preserved as source-backed material or explicit unresolved questions.
+- [ ] Current content structures and factual conflicts are checked without creating a publishing quota.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-Compare the draft blurb from `website-content.md`:
-> "A raw, honest memoir weaving the wildest stories from the psytrance dancefloor into the deepest lessons they taught. How an Aquarian soul, an ADHD brain, and Lucy in the Sky combined to create an artist, a nomad, and a life lived in full colour."
+## 6. Report output
 
-Against whatever blurb is currently in the ebook data. If different or missing, the `website-content.md` version should be used (adjusted to sentence case: lowercase "in" after first word is fine — the blurb is a paragraph, not a heading).
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-### Step 5: Alternative book concept
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-The "Dance like no one's watching" concept from `website-content.md` is a separate book idea. Options:
-1. Add it as an appendix or "alternative concept" note in the ebook data
-2. Reference it in an "About the book" meta section
-3. Add a future-projects note to the About or Bio page
+## 7. Revision provenance
 
-Recommend the most appropriate placement given the site structure.
-
-### Step 6: Core threads enrichment
-
-The ebook data should clearly reflect the three core threads:
-1. **Aquarius** — The soul archetype: wild, visionary, unconventional
-2. **ADHD** — The neurodivergent brain: bug that turned into a feature
-3. **Lucy** — Expanded awareness, transformative experiences
-
-If these are not prominent in the current ebook intro/preface content, they should be added or enhanced.
-
-### Step 7: Origin reel content
-
-The "origin reel beats" (Fatboy Slim, Bob Moses, Depeche Mode) could be:
-- A fun aside in the book's About section
-- A playlist reference in the ebook data
-- An Easter egg in the Press/Bio page
-
-Determine the best placement that feels authentic and non-commercial.
-
-### Step 8: Update data files
-
-**Files to update (as needed):**
-1. `/data/mock/pages/ebook-pages.ts` — Chapter titles, blurb, core threads
-2. Any book metadata export — title, cover concept, timeline description
-
----
-
-## Output Format
-
-### Section 1: Current ebook state
-- Chapter count and titles
-- Current blurb text
-- Core threads representation
-- Overall alignment with `website-content.md`
-
-### Section 2: Gap analysis
-- Chapter title mismatches (sentence case corrections)
-- Missing/different blurb
-- Missing core threads content
-- Missing alternative book concept
-
-### Section 3: Recommended updates
-- Specific field-by-field changes to ebook-pages.ts
-- Sentence-case corrections for chapter titles
-- Blurb update
-- Core threads integration
-- Alternative concept placement recommendation
-
-### Section 4: Implementation
-- Updated content ready to paste into data files
-- All sentence case applied
-- All content non-commercial (personal art project framing)
-
----
-
-## Success Criteria
-
-- [ ] All 6 chapter titles use sentence case in the data
-- [ ] Chapter titles match "working titles" from `website-content.md`
-- [ ] Draft blurb updated to match `website-content.md` version
-- [ ] Core threads (Aquarius, ADHD, Lucy) present in ebook intro
-- [ ] Alternative concept ("Dance like no one's watching") referenced appropriately
-- [ ] Book timeline described as "writing over next few years, not to be rushed"
-- [ ] No commercial framing (no pricing, no pre-order language)
-- [ ] He/Him pronouns throughout
-
----
-
-## Key Facts from `website-content.md`
-
-**Title:** "This one time on acid..."
-**Cover:** Neon pink, neon yellow text
-**Status:** Being written over next few years — not to be rushed
-**Chapter titles (sentence case):**
-1. "The first drop"
-2. "Wired different"
-3. "Berlin calling"
-4. "The dancefloor classroom"
-5. "Neon revelations"
-6. "The cumulative effect"
-
-**Alternative book:** "Dance like no one's watching" — traces costume/identity evolution: early dancing → cow suit → chicken suit → rave suit → makeup
-
-**Legacy quotes (from website-content.md):**
-- In makeup: "People thanked him years later. An experience where he saw someone after not seeing them for two years — he'd done their makeup two years ago. That day they felt extremely special; everyone kept complimenting them and it made their day."
-- In WordPress: "He'll be remembered as the crazy South African in the WordPress community — but definitely as a passionate WordPress contributor."
-
----
-
-## References
-
-- [website-content.md](../../docs/website-content.md) — Section: Book
-- [ebook-pages.ts](../../data/mock/pages/ebook-pages.ts)
-- [Guidelines.md](../../guidelines/Guidelines.md) — Sentence case rule, personal art project scope
-
----
-
-**Status:** Ready to execute
-**Next:** Run audit, write report, then run [04-about-enrichment.md](./04-about-enrichment.md)
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-expansion-phase7/03-book-content.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

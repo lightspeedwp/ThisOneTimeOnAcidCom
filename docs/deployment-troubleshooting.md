@@ -1,6 +1,6 @@
 # Deployment Troubleshooting - Quick Reference
 
-**Last Updated:** March 12, 2026  
+**Last Updated:** March 12, 2026
 **App Status:** ✅ Code is healthy - check deployment platform
 
 ---
@@ -9,25 +9,29 @@
 
 ### Step 1: Test Local Build (5 minutes)
 
-**Open terminal and run:**
+## Open terminal and run
 
 ```bash
 npm install
 npm run build
 npm run preview
-```
+
+```text
 
 **Expected Result:**
+
 - ✅ Build completes without errors
 - ✅ Preview opens at http://localhost:3000
 - ✅ Site works correctly
 
 **If build fails:**
+
 - Read the error message carefully
 - Check for missing dependencies
 - Run `npm install` again
 
 **If build succeeds:**
+
 - ✅ Code is fine
 - ❌ Issue is in Netlify deployment
 
@@ -38,10 +42,13 @@ npm run preview
 **Go to:** https://app.netlify.com
 
 1. **Find your site** in the dashboard
-2. **Click on "Deploys"** tab
-3. **Look at the most recent deploy**
+
+1. **Click on "Deploys"** tab
+
+1. **Look at the most recent deploy**
 
 **Check Status:**
+
 - ✅ **Green checkmark** = Deployed successfully
 - ❌ **Red X** = Deploy failed
 - ⏳ **Yellow circle** = Currently deploying
@@ -53,9 +60,12 @@ npm run preview
 **If deploy failed:**
 
 1. Click on the **failed deploy**
-2. Scroll down to **"Deploy log"**
-3. Read the **last 20 lines** of the log
-4. Look for error messages in **RED**
+
+1. Scroll down to **"Deploy log"**
+
+1. Read the **last 20 lines** of the log
+
+1. Look for error messages in **RED**
 
 **Common Errors:**
 
@@ -73,7 +83,7 @@ npm run preview
 
 **Go to:** Site Settings → Build & Deploy
 
-**Check these settings:**
+## Check these settings
 
 | Setting | Correct Value |
 |---------|---------------|
@@ -83,23 +93,30 @@ npm run preview
 | Node version | 18 |
 
 **If any are wrong:**
+
 1. Click "Edit settings"
-2. Update the value
-3. Save
-4. Trigger new deploy
+
+1. Update the value
+
+1. Save
+
+1. Trigger new deploy
 
 ---
 
 ### Step 5: Test Default Netlify URL (1 minute)
 
-**Your default URL format:**
-```
-https://[your-site-name].netlify.app
-```
+## Your default URL format
 
-**Try accessing it in your browser**
+```text
+https://[your-site-name].netlify.app
+
+```text
+
+## Try accessing it in your browser
 
 **Result:**
+
 - ✅ **Site loads** = Deployment successful, DNS issue if custom domain doesn't work
 - ❌ **404 error** = Deployment failed, check build logs
 - ❌ **Page not found** = Routing issue, check SPA redirect rule
@@ -108,27 +125,32 @@ https://[your-site-name].netlify.app
 
 ### Step 6: Force Clean Deploy (5 minutes)
 
-**If previous steps didn't work:**
+## If previous steps didn't work
 
 1. **Netlify Dashboard** → Site Settings
-2. **Build & Deploy** → Build settings
-3. Click **"Clear build cache"**
-4. Go to **Deploys** tab
-5. Click **"Trigger deploy"** → **"Clear cache and deploy site"**
-6. **Watch the build log** in real-time
+
+1. **Build & Deploy** → Build settings
+
+1. Click **"Clear build cache"**
+
+1. Go to **Deploys** tab
+
+1. Click **"Trigger deploy"** → **"Clear cache and deploy site"**
+
+1. **Watch the build log** in real-time
 
 ---
 
 ## 🔍 Diagnostic Questions
 
-### Q1: Does `npm run build` work locally?
+### Q1: Does `npm run build` work locally
 
 - ✅ **Yes** → Issue is in Netlify, not code
 - ❌ **No** → Fix local build errors first
 
 ---
 
-### Q2: What does Netlify build log say?
+### Q2: What does Netlify build log say
 
 - 🟢 **Build succeeded** → Check deploy status
 - 🔴 **Build failed** → Read error message, fix issue
@@ -136,14 +158,14 @@ https://[your-site-name].netlify.app
 
 ---
 
-### Q3: Does the default Netlify URL work?
+### Q3: Does the default Netlify URL work
 
 - ✅ **Yes** → Custom domain DNS issue
 - ❌ **No** → Build or deployment issue
 
 ---
 
-### Q4: Is the correct branch being deployed?
+### Q4: Is the correct branch being deployed
 
 - Check **Site Settings** → **Build & deploy** → **Deploy contexts**
 - Verify **Production branch** matches your Git branch name
@@ -154,13 +176,17 @@ https://[your-site-name].netlify.app
 
 ### Fix 1: Missing Environment Variables
 
-**If you need environment variables:**
+## If you need environment variables
 
 1. Netlify Dashboard → Site settings
-2. Build & deploy → Environment
-3. Click "Edit variables"
-4. Add required variables (e.g., `NODE_VERSION=18`)
-5. Redeploy
+
+1. Build & deploy → Environment
+
+1. Click "Edit variables"
+
+1. Add required variables (e.g., `NODE_VERSION=18`)
+
+1. Redeploy
 
 **Note:** This app doesn't use environment variables ✅
 
@@ -168,14 +194,17 @@ https://[your-site-name].netlify.app
 
 ### Fix 2: Build Command Issues
 
-**Wrong build command?**
+## Wrong build command
 
 **Correct command:**
-```
+
+```text
 npm run build
-```
+
+```text
 
 **NOT:**
+
 - ❌ `npm build`
 - ❌ `npm run deploy`
 - ❌ `vite build`
@@ -184,12 +213,15 @@ npm run build
 
 ### Fix 3: Publish Directory Wrong
 
-**Correct publish directory:**
-```
+## Correct publish directory
+
+```text
 dist
-```
+
+```text
 
 **NOT:**
+
 - ❌ `build`
 - ❌ `public`
 - ❌ `out`
@@ -199,27 +231,33 @@ dist
 ### Fix 4: Node Version Too Old
 
 **Minimum required:**
+
 - Node: 18+
 - npm: 9+
 
 **Set in Netlify:**
+
 1. Site Settings → Build & deploy → Environment
-2. Add environment variable: `NODE_VERSION` = `18`
-3. Redeploy
+
+1. Add environment variable: `NODE_VERSION` = `18`
+
+1. Redeploy
 
 ---
 
 ### Fix 5: SPA Routing Not Working
 
-**If routes show 404 errors:**
+## If routes show 404 errors
 
-**Check `netlify.toml` has:**
+## Check `netlify.toml` has
+
 ```toml
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-```
+
+```text
 
 **This file exists and is correct** ✅
 
@@ -232,10 +270,14 @@ dist
 If you need help diagnosing, provide:
 
 1. **Last 50 lines** of Netlify build log
-2. **Default Netlify URL** (e.g., `https://your-site.netlify.app`)
-3. **Custom domain** (if configured)
-4. **Error message** from build log (if any)
-5. **Output of** `npm run build` (if it fails locally)
+
+1. **Default Netlify URL** (e.g., `https://your-site.netlify.app`)
+
+1. **Custom domain** (if configured)
+
+1. **Error message** from build log (if any)
+
+1. **Output of** `npm run build` (if it fails locally)
 
 ---
 
@@ -279,9 +321,11 @@ Based on health check, these are the most likely causes:
 
 **Symptom:** No deploys triggered when pushing to Git
 
-**Solution:** 
+**Solution:**
+
 1. Check Site Settings → Build & deploy → Deploy contexts
-2. Verify production branch name matches your repo
+
+1. Verify production branch name matches your repo
 
 ---
 
@@ -290,9 +334,12 @@ Based on health check, these are the most likely causes:
 **Symptom:** Default Netlify URL works, custom domain doesn't
 
 **Solution:**
+
 1. Check DNS records point to Netlify
-2. Wait 24-48 hours for DNS propagation
-3. Check HTTPS certificate status
+
+1. Wait 24-48 hours for DNS propagation
+
+1. Check HTTPS certificate status
 
 ---
 
@@ -304,6 +351,6 @@ Based on health check, these are the most likely causes:
 
 ---
 
-**Last Verified:** March 12, 2026  
-**Code Status:** ✅ Healthy and production-ready  
+**Last Verified:** March 12, 2026
+**Code Status:** ✅ Healthy and production-ready
 **Issue Location:** Deployment platform configuration

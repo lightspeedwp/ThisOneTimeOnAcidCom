@@ -10,11 +10,16 @@
 ## Table of Contents
 
 1. [Accessibility Significance](#1-accessibility-significance)
-2. [CSS Usage & Syntax](#2-css-usage--syntax)
-3. [JavaScript Detection](#3-javascript-detection)
-4. [Project Implementation](#4-project-implementation)
-5. [Component Authoring Rules](#5-component-authoring-rules)
-6. [Testing Checklist](#6-testing-checklist)
+
+1. [CSS Usage & Syntax](#2-css-usage--syntax)
+
+1. [JavaScript Detection](#3-javascript-detection)
+
+1. [Project Implementation](#4-project-implementation)
+
+1. [Component Authoring Rules](#5-component-authoring-rules)
+
+1. [Testing Checklist](#6-testing-checklist)
 
 ---
 
@@ -22,7 +27,10 @@
 
 ### Why This Matters
 
-For many users, on-screen movement is more than a stylistic choice; it is a **health concern**. The `prefers-reduced-motion` CSS media feature detects whether a user has enabled an operating-system setting to minimise non-essential motion. Respecting this preference is a core accessibility requirement.
+For many users, on-screen movement is more than a stylistic choice; it is a
+**health concern**. The `prefers-reduced-motion` CSS media feature detects
+whether a user has enabled an operating-system setting to minimise non-essential
+motion. Respecting this preference is a core accessibility requirement.
 
 ### Who Benefits
 
@@ -39,7 +47,9 @@ For many users, on-screen movement is more than a stylistic choice; it is a **he
 - **2.3.3 Animation from Interactions (Level AAA)** -- Motion animation triggered by interaction can be disabled unless it is essential.
 - **2.2.2 Pause, Stop, Hide (Level A)** -- Moving, blinking, or scrolling content must be pausable.
 
-This project targets **WCAG 2.1 Level AA** compliance with **AAA enhancements** where feasible. Full `prefers-reduced-motion` support across all 26 keyframe animations and all component transitions is one such enhancement.
+This project targets **WCAG 2.1 Level AA** compliance with **AAA enhancements**
+where feasible. Full `prefers-reduced-motion` support across all 26 keyframe
+animations and all component transitions is one such enhancement.
 
 ---
 
@@ -65,7 +75,9 @@ This project targets **WCAG 2.1 Level AA** compliance with **AAA enhancements** 
 
 ### Approach 1: The "Reduce" Override (Remove Motion)
 
-Define animations normally, then use the media query to remove or simplify them when the user prefers reduced motion. This is the **primary approach used in this project**.
+Define animations normally, then use the media query to remove or simplify them
+when the user prefers reduced motion. This is the **primary approach used in
+this project**.
 
 ```css
 /* Standard animation */
@@ -79,15 +91,19 @@ Define animations normally, then use the media query to remove or simplify them 
     animation: none;
   }
 }
-```
 
-**When to use:** When the animation is the default experience and most users benefit from it.
+```text
+
+**When to use:** When the animation is the default experience and most users
+benefit from it.
 
 ---
 
 ### Approach 2: The "No-Preference" Opt-In (Progressive Enhancement)
 
-Define the static state first and only add animations if the user has **not** requested reduced motion. This is a progressive enhancement strategy where stillness is the default.
+Define the static state first and only add animations if the user has **not**
+requested reduced motion. This is a progressive enhancement strategy where
+stillness is the default.
 
 ```css
 /* Static by default */
@@ -101,15 +117,19 @@ Define the static state first and only add animations if the user has **not** re
     animation: gradientShift 15s ease infinite;
   }
 }
-```
 
-**When to use:** For heavy, decorative, or large-scale animations (parallax, auto-playing carousels, background shifts) where the static state is an equally valid experience.
+```text
+
+**When to use:** For heavy, decorative, or large-scale animations (parallax,
+auto-playing carousels, background shifts) where the static state is an equally
+valid experience.
 
 ---
 
 ### What to Remove vs. What to Keep
 
-Not all motion is harmful. The goal is to remove **non-essential decorative** motion, not to strip the interface of all visual feedback.
+Not all motion is harmful. The goal is to remove **non-essential decorative**
+motion, not to strip the interface of all visual feedback.
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -140,7 +160,8 @@ Not all motion is harmful. The goal is to remove **non-essential decorative** mo
   /* KEEP: Loading spinners (essential for UX clarity) */
   /* But consider replacing with a static "Loading..." label */
 }
-```
+
+```text
 
 #### Decision Matrix
 
@@ -162,7 +183,10 @@ Not all motion is harmful. The goal is to remove **non-essential decorative** mo
 
 ### The `useReducedMotion` Hook
 
-For React components that perform **JavaScript-driven animation** (requestAnimationFrame, timers, Motion library, canvas), CSS media queries alone are insufficient. Use `window.matchMedia()` to detect the preference at runtime and react to live changes.
+For React components that perform **JavaScript-driven animation**
+(requestAnimationFrame, timers, Motion library, canvas), CSS media queries alone
+are insufficient. Use `window.matchMedia()` to detect the preference at runtime
+and react to live changes.
 
 ```tsx
 // /hooks/useReducedMotion.ts
@@ -170,13 +194,18 @@ For React components that perform **JavaScript-driven animation** (requestAnimat
 import { useState, useEffect } from 'react';
 
 /**
+
  * Detects the user's `prefers-reduced-motion` OS setting.
  *
+
  * Returns `true` when the user prefers reduced motion.
- * Listens for live changes (e.g. user toggles the setting while the app is open).
+* Listens for live changes (e.g. user toggles the setting while the app is
+open).
  *
+
  * @returns {boolean} Whether reduced motion is preferred
  *
+
  * @example
  * const prefersReduced = useReducedMotion();
  * // Skip JS animation when true
@@ -203,11 +232,13 @@ export function useReducedMotion(): boolean {
 
   return prefersReduced;
 }
-```
+
+```text
 
 ### One-Shot Check (Non-Reactive)
 
-For fire-and-forget checks inside `useEffect` or event handlers where you do not need to react to live changes:
+For fire-and-forget checks inside `useEffect` or event handlers where you do not
+need to react to live changes:
 
 ```tsx
 const prefersReduced =
@@ -221,13 +252,16 @@ if (prefersReduced) {
   // Run animation
   requestAnimationFrame(fadeIn);
 }
-```
 
-This pattern is already used in the project's `useAnimatedCount` hook (`/hooks/useAnimatedCount.ts`).
+```text
+
+This pattern is already used in the project's `useAnimatedCount` hook
+(`/hooks/useAnimatedCount.ts`).
 
 ### Usage with the Motion Library
 
-When using the Motion library (`motion/react`), wrap animated components with the reduced-motion check:
+When using the Motion library (`motion/react`), wrap animated components with
+the reduced-motion check:
 
 ```tsx
 import { motion } from 'motion/react';
@@ -246,9 +280,12 @@ export function AnimatedCard({ children }: { children: React.ReactNode }) {
     </motion.div>
   );
 }
-```
 
-> **Note:** Motion (Framer Motion) has a built-in `useReducedMotion()` hook. However, using our own hook keeps the dependency minimal and the behaviour consistent across the codebase.
+```text
+
+> **Note:** Motion (Framer Motion) has a built-in `useReducedMotion()` hook.
+However, using our own hook keeps the dependency minimal and the behaviour
+consistent across the codebase.
 
 ### Usage with `scrollTo` / Smooth Scrolling
 
@@ -260,7 +297,8 @@ window.scrollTo({
   top: 0,
   behavior: prefersReduced ? 'auto' : 'smooth',
 });
-```
+
+```text
 
 This pattern is already used in the project's `ScrollToTop` component.
 
@@ -270,7 +308,8 @@ This pattern is already used in the project's `ScrollToTop` component.
 
 ### Global Reduced-Motion Override
 
-The project applies a **blanket reduced-motion override** in `/styles/globals.css`:
+The project applies a **blanket reduced-motion override** in
+`/styles/globals.css`:
 
 ```css
 /* /styles/globals.css */
@@ -295,13 +334,17 @@ The project applies a **blanket reduced-motion override** in `/styles/globals.cs
     /* Empty to prevent animation execution */
   }
 }
-```
 
-This acts as a **safety net** ensuring no animation leaks through, even if a component author forgets to add their own `@media` block.
+```text
+
+This acts as a **safety net** ensuring no animation leaks through, even if a
+component author forgets to add their own `@media` block.
 
 ### Per-Block CSS Overrides
 
-Individual block CSS files add **targeted overrides** for component-specific transitions and transforms that the global rule does not cover (e.g. `transition`, `transform`, `will-change`):
+Individual block CSS files add **targeted overrides** for component-specific
+transitions and transforms that the global rule does not cover (e.g.
+`transition`, `transform`, `will-change`):
 
 | Block CSS File | What It Disables |
 |---|---|
@@ -331,7 +374,9 @@ Individual block CSS files add **targeted overrides** for component-specific tra
 
 ### Rule 1: Every New Animation Gets a Reduced-Motion Override
 
-When adding any `animation` or `transition` to a block CSS file, you **must** add a corresponding `@media (prefers-reduced-motion: reduce)` block in the same file.
+When adding any `animation` or `transition` to a block CSS file, you **must**
+add a corresponding `@media (prefers-reduced-motion: reduce)` block in the same
+file.
 
 ```css
 /* NEW animation */
@@ -348,11 +393,13 @@ When adding any `animation` or `transition` to a block CSS file, you **must** ad
     will-change: auto;
   }
 }
-```
+
+```text
 
 ### Rule 2: Free GPU Resources
 
-When removing an animation, also reset `will-change` to `auto` to release composited layers:
+When removing an animation, also reset `will-change` to `auto` to release
+composited layers:
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -361,11 +408,14 @@ When removing an animation, also reset `will-change` to `auto` to release compos
     will-change: auto;   /* Free GPU memory */
   }
 }
-```
+
+```text
 
 ### Rule 3: JavaScript Animations Must Check the Preference
 
-Any component using `requestAnimationFrame`, `setInterval`-based animation, canvas drawing loops, or the Motion library **must** check `prefers-reduced-motion` before starting the animation. Use either:
+Any component using `requestAnimationFrame`, `setInterval`-based animation,
+canvas drawing loops, or the Motion library **must** check
+`prefers-reduced-motion` before starting the animation. Use either:
 
 - The `useReducedMotion()` hook (reactive, listens for live changes), or
 - A one-shot `window.matchMedia(...)` check (for `useEffect` / event handler contexts)
@@ -381,11 +431,14 @@ if (!prefersReduced) {
 useEffect(() => {
   startAnimation(); // Runs for ALL users regardless of preference
 }, []);
-```
+
+```text
 
 ### Rule 4: Never Remove Essential Feedback
 
-Focus indicators, loading states, and error/success state changes must remain visible. Replace motion-based feedback with instant state changes (opacity, color) rather than removing feedback entirely.
+Focus indicators, loading states, and error/success state changes must remain
+visible. Replace motion-based feedback with instant state changes (opacity,
+color) rather than removing feedback entirely.
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -405,7 +458,8 @@ Focus indicators, loading states, and error/success state changes must remain vi
     outline: 3px solid var(--neon-pink);  /* Focus ring always visible */
   }
 }
-```
+
+```text
 
 ### Rule 5: Replace `scroll-behavior: smooth` with `auto`
 
@@ -415,7 +469,8 @@ Focus indicators, loading states, and error/success state changes must remain vi
     scroll-behavior: auto !important;
   }
 }
-```
+
+```text
 
 In JavaScript, always check before using smooth scrolling:
 
@@ -423,11 +478,14 @@ In JavaScript, always check before using smooth scrolling:
 element.scrollIntoView({
   behavior: prefersReduced ? 'auto' : 'smooth',
 });
-```
+
+```text
 
 ### Rule 6: Prefer `no-preference` for Heavy Decorative Motion
 
-For large-scale background animations, parallax effects, or auto-playing carousels, use the opt-in pattern so the animation is only added for users who have **not** requested reduced motion:
+For large-scale background animations, parallax effects, or auto-playing
+carousels, use the opt-in pattern so the animation is only added for users who
+have **not** requested reduced motion:
 
 ```css
 /* Static default */
@@ -442,7 +500,8 @@ For large-scale background animations, parallax effects, or auto-playing carouse
     /* parallax JS will apply transforms */
   }
 }
-```
+
+```text
 
 ---
 

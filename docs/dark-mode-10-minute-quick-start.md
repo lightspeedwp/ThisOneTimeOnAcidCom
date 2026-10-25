@@ -1,9 +1,9 @@
 # ⚡ Dark Mode v2.0.0 — 10-Minute Quick Start
 
-**Get dark mode working in 10 minutes or less.**
+## Get dark mode working in 10 minutes or less
 
-**Version:** 2.0.0  
-**Difficulty:** Beginner  
+**Version:** 2.0.0
+**Difficulty:** Beginner
 **Time Required:** 10 minutes
 
 ---
@@ -11,46 +11,54 @@
 ## 🎯 What You'll Accomplish
 
 By the end of this guide, you'll have:
+
 - ✅ Dark mode activated on your site
 - ✅ All 54 components styled with neon glow effects
 - ✅ 100% WCAG AA accessibility compliance
 - ✅ Working theme toggle button
 
-**Let's get started!**
+## Let's get started
 
 ---
 
 ## ✅ Step 1: Verify Files Exist (1 minute)
 
-**Check that these files are in your project:**
+## Check that these files are in your project
 
-```
+```text
 /styles/themes/
 ├── dark.css                 ← Core theme (1,047 lines)
 └── dark-extended.css        ← Extended components (1,000 lines)
-```
+
+```text
 
 **Quick test:**
+
 ```bash
-# In your project root, run:
+
+# In your project root, run
+
 ls -la styles/themes/dark.css
 ls -la styles/themes/dark-extended.css
-```
+
+```text
 
 **Expected output:**
-```
+
+```text
 -rw-r--r--  1 user  staff  28672 Mar 11 dark.css
 -rw-r--r--  1 user  staff  23552 Mar 11 dark-extended.css
-```
 
-✅ **Files exist?** Continue to Step 2.  
+```text
+
+✅ **Files exist?** Continue to Step 2.
 ❌ **Files missing?** See troubleshooting at bottom.
 
 ---
 
 ## ✅ Step 2: Import CSS Files (2 minutes)
 
-**Open `/styles/globals.css` and verify these imports:**
+## Open `/styles/globals.css` and verify these imports
 
 ```css
 /* Should already be present: */
@@ -58,83 +66,97 @@ ls -la styles/themes/dark-extended.css
 @import "./themes/light.css";
 @import "./themes/dark.css";              /* ← Core dark mode */
 @import "./themes/dark-extended.css";     /* ← Extended components */
-```
+
+```text
 
 **✨ Good news:** These imports are already in place! No action needed.
 
 **Verify in browser:**
-1. Start your dev server: `npm run dev`
-2. Open browser DevTools → Network tab
-3. Reload page
-4. Search for "dark.css" and "dark-extended.css"
-5. Both files should load with status 200
 
-✅ **Files loading?** Continue to Step 3.  
+1. Start your dev server: `npm run dev`
+
+1. Open browser DevTools → Network tab
+
+1. Reload page
+
+1. Search for "dark.css" and "dark-extended.css"
+
+1. Both files should load with status 200
+
+✅ **Files loading?** Continue to Step 3.
 ❌ **404 errors?** Check file paths match exactly.
 
 ---
 
 ## ✅ Step 3: Activate Dark Mode (30 seconds)
 
-**Open browser DevTools Console and paste:**
+## Open browser DevTools Console and paste
 
 ```javascript
 // Activate dark mode
 document.documentElement.classList.add('dark');
-```
 
-**Press Enter.**
+```text
 
-**What you should see immediately:**
+## Press Enter
+
+## What you should see immediately
+
 - 🌑 Background changes to atomic black (#0F0F0F)
 - ✨ Text changes to cream (#F6F2EB)
 - 💖 Interactive elements get pink glow effects
 - 🎨 All neon colors activate
 
 **Test it:**
+
 ```javascript
 // Toggle dark mode on/off
 document.documentElement.classList.toggle('dark');
-```
 
-✅ **Dark mode working?** Continue to Step 4.  
+```text
+
+✅ **Dark mode working?** Continue to Step 4.
 ❌ **No change?** See troubleshooting at bottom.
 
 ---
 
 ## ✅ Step 4: Test Component Rendering (3 minutes)
 
-**Open your app and check these components:**
+## Open your app and check these components
 
 **Navigation:**
+
 - [ ] Header has dark charcoal background (#1A1A1A)
 - [ ] Logo is visible
 - [ ] Nav links are cream color
 - [ ] Hover over link → pink glow appears
 
 **Cards:**
+
 - [ ] Card background is dark charcoal
 - [ ] Card border is #333333
 - [ ] Hover over card → pink border glow
 
 **Buttons:**
+
 - [ ] Primary button has pink→violet→cyan gradient
 - [ ] Hover over button → glow intensifies
 - [ ] Button text is white
 
 **Forms:**
+
 - [ ] Input fields have dark background
 - [ ] Focus on input → pink border glow
 - [ ] Placeholder text is muted gray
 
-✅ **All working?** Continue to Step 5.  
+✅ **All working?** Continue to Step 5.
 ❌ **Some not styled?** Component might not be using BEM classes (see docs).
 
 ---
 
 ## ✅ Step 5: Add Theme Toggle Button (2 minutes)
 
-**Quick version — Add to your header:**
+## Quick version — Add to your header
 
 ```typescript
 // In your Header component
@@ -161,9 +183,10 @@ function ThemeToggle() {
     isDark ? '☀️ Light' : '🌙 Dark'
   );
 }
-```
 
-**Or use the provided ES5-compliant component:**
+```text
+
+## Or use the provided ES5-compliant component
 
 ```typescript
 // Import the pre-built component
@@ -171,7 +194,8 @@ import { ThemeToggleES5 } from './components/common/ThemeToggleES5';
 
 // Add to your Header
 <ThemeToggleES5 />
-```
+
+```text
 
 ✅ **Toggle working?** Continue to Step 6.
 
@@ -179,19 +203,22 @@ import { ThemeToggleES5 } from './components/common/ThemeToggleES5';
 
 ## ✅ Step 6: Verify Accessibility (1 minute)
 
-**Quick accessibility check:**
+## Quick accessibility check
 
 **Contrast:**
+
 - [ ] Body text is readable (should be 14.8:1 contrast)
 - [ ] Headings are bright white
 - [ ] Links are visible pink
 
 **Keyboard:**
+
 - [ ] Press Tab → focus indicator visible (3px pink outline)
 - [ ] All interactive elements reachable via Tab
 - [ ] Press Enter on focused button → activates
 
 **Screen Reader:**
+
 - [ ] All buttons have text or aria-label
 - [ ] All images have alt text
 - [ ] Headings follow h1 → h2 → h3 order
@@ -202,7 +229,7 @@ import { ThemeToggleES5 } from './components/common/ThemeToggleES5';
 
 ## 🎉 Success! Dark Mode is Live
 
-```
+```text
 ╔══════════════════════════════════════════════════╗
 ║                                                  ║
 ║   ✅ DARK MODE ACTIVATED                         ║
@@ -213,18 +240,21 @@ import { ThemeToggleES5 } from './components/common/ThemeToggleES5';
 ║   • Ready for production                        ║
 ║                                                  ║
 ╚══════════════════════════════════════════════════╝
-```
+
+```text
 
 ---
 
-## 📚 What's Next?
+## 📚 What's Next
 
 ### Explore Components (10 minutes)
 
-**See all 54 components in action:**
+## See all 54 components in action
+
 → `/docs/dark-mode-component-showcase.md`
 
 **Categories:**
+
 - Navigation (5): Header, Breadcrumbs, Pagination, Tabs, Sidebar
 - Content (18): Cards, Timeline, Gallery, Lightbox, etc.
 - Forms (12): Inputs, Checkboxes, Dropdowns, etc.
@@ -233,20 +263,24 @@ import { ThemeToggleES5 } from './components/common/ThemeToggleES5';
 
 ### Customize Colors (15 minutes)
 
-**Want to change the neon pink to another color?**
+## Want to change the neon pink to another color
+
 → `/docs/dark-mode-customization-guide.md`
 
 **Examples:**
+
 - Corporate blue theme
 - Eco green theme
 - Sunset orange theme
 
 ### Build Full Pages (30 minutes)
 
-**Need complete page layouts?**
+## Need complete page layouts
+
 → `/docs/dark-mode-composition-patterns.md`
 
 **10 full examples:**
+
 - Dashboard layout
 - Blog post page
 - Portfolio gallery
@@ -260,10 +294,12 @@ import { ThemeToggleES5 } from './components/common/ThemeToggleES5';
 
 ### React Components (45 minutes)
 
-**Using React/TypeScript?**
+## Using React/TypeScript
+
 → `/docs/dark-mode-react-examples.md`
 
-**25+ production-ready components:**
+## 25+ production-ready components
+
 - Button, Card, Modal, Form, Toast
 - Complete with TypeScript types
 - ES5-compliant (Figma Make safe)
@@ -278,26 +314,35 @@ import { ThemeToggleES5 } from './components/common/ThemeToggleES5';
 **Symptom:** Page doesn't change when adding `.dark` class
 
 **Solution 1:** Check CSS imports
+
 ```css
 /* Verify these are in /styles/globals.css */
 @import "./themes/dark.css";
 @import "./themes/dark-extended.css";
-```
+
+```text
 
 **Solution 2:** Check CSS specificity
+
 ```javascript
 // Check if variables are accessible
 var styles = window.getComputedStyle(document.documentElement);
 console.log(styles.getPropertyValue('--color-neon-pink'));
 // Should output: #FF3AAE or rgb(255, 58, 174)
-```
+
+```text
 
 **Solution 3:** Clear cache and reload
+
 ```bash
+
 # Hard reload in browser
+
 # Mac: Cmd + Shift + R
+
 # Windows: Ctrl + Shift + R
-```
+
+```text
 
 ---
 
@@ -310,6 +355,7 @@ console.log(styles.getPropertyValue('--color-neon-pink'));
 **Solution:** Update component to use BEM classes
 
 **Example:**
+
 ```typescript
 // ❌ WRONG — Using Tailwind utilities
 <button className="flex items-center gap-2 px-4 py-2">
@@ -320,9 +366,11 @@ console.log(styles.getPropertyValue('--color-neon-pink'));
 <button className="button button--primary">
   Click me
 </button>
-```
 
-**Reference:** See `/docs/dark-mode-component-showcase.md` for all BEM class names.
+```text
+
+**Reference:** See `/docs/dark-mode-component-showcase.md` for all BEM class
+names.
 
 ---
 
@@ -331,27 +379,39 @@ console.log(styles.getPropertyValue('--color-neon-pink'));
 **Symptom:** 404 errors in Network tab for dark.css
 
 **Solution 1:** Check file paths
+
 ```bash
+
 # Verify files exist
+
 ls -la styles/themes/dark.css
 ls -la styles/themes/dark-extended.css
-```
+
+```text
 
 **Solution 2:** Check import paths
+
 ```css
 /* In /styles/globals.css */
 /* Should be relative to globals.css location */
 @import "./themes/dark.css";              /* ✅ Correct */
 @import "/styles/themes/dark.css";        /* ❌ Wrong */
-@import "../themes/dark.css";             /* ❌ Wrong (unless globals.css is in different folder) */
-```
+@import "../themes/dark.css"; /* ❌ Wrong (unless globals.css is in different
+folder) */
+
+```text
 
 **Solution 3:** Restart dev server
+
 ```bash
+
 # Stop server (Ctrl+C)
+
 # Start again
+
 npm run dev
-```
+
+```text
 
 ---
 
@@ -360,12 +420,15 @@ npm run dev
 **Symptom:** Neon colors appear washed out or incorrect
 
 **Solution 1:** Check HTML has `.dark` class
+
 ```javascript
 console.log(document.documentElement.classList.contains('dark'));
 // Should be: true
-```
+
+```text
 
 **Solution 2:** Verify CSS variable values
+
 ```javascript
 var root = document.documentElement;
 var styles = window.getComputedStyle(root);
@@ -378,15 +441,18 @@ console.log('Text:', styles.getPropertyValue('--color-text-light').trim());
 // Pink: #FF3AAE or rgb(255, 58, 174)
 // Black: #0F0F0F or rgb(15, 15, 15)
 // Text: #F6F2EB or rgb(246, 242, 235)
-```
+
+```text
 
 **Solution 3:** Check for CSS conflicts
+
 ```javascript
 // Look for inline styles overriding theme
 var element = document.querySelector('.button--primary');
 console.log(element.style);
 // Should be empty or minimal
-```
+
+```text
 
 ---
 
@@ -395,23 +461,32 @@ console.log(element.style);
 **Symptom:** Page load is slower after adding dark mode
 
 **Solution 1:** Enable gzip compression
+
 ```nginx
+
 # Nginx config
+
 gzip on;
 gzip_types text/css;
-gzip_comp_level 6;
-```
+gzip*comp*level 6;
+
+```text
 
 **Solution 2:** Minify CSS files
+
 ```bash
+
 # Using cssnano (or similar)
+
 npx cssnano styles/themes/dark.css styles/themes/dark.min.css
 npx cssnano styles/themes/dark-extended.css styles/themes/dark-extended.min.css
 
 # Update imports to use .min.css
-```
+
+```text
 
 **Solution 3:** Load extended components asynchronously
+
 ```javascript
 // Only load dark-extended.css when needed
 function loadExtendedTheme() {
@@ -423,7 +498,8 @@ function loadExtendedTheme() {
 
 // Load on scroll or user interaction
 window.addEventListener('scroll', loadExtendedTheme, { once: true });
-```
+
+```text
 
 ---
 
@@ -432,35 +508,43 @@ window.addEventListener('scroll', loadExtendedTheme, { once: true });
 ### Essential BEM Classes
 
 **Buttons:**
+
 ```html
 <button class="button button--primary">Primary</button>
 <button class="button button--secondary">Secondary</button>
 <button class="button button--outline">Outline</button>
-```
+
+```text
 
 **Cards:**
+
 ```html
 <div class="card">
   <h3 class="card__title">Title</h3>
   <p class="card__content">Content</p>
 </div>
-```
+
+```text
 
 **Forms:**
+
 ```html
 <div class="form__group">
   <label class="form__label">Email</label>
   <input type="email" class="form__input" />
 </div>
-```
+
+```text
 
 **Alerts:**
+
 ```html
 <div class="alert alert--success">Success message</div>
 <div class="alert alert--warning">Warning message</div>
 <div class="alert alert--error">Error message</div>
 <div class="alert alert--info">Info message</div>
-```
+
+```text
 
 **Complete list:** `/docs/dark-mode-quick-reference.md`
 
@@ -469,6 +553,7 @@ window.addEventListener('scroll', loadExtendedTheme, { once: true });
 ### Color Palette Quick Reference
 
 **Neon Accents:**
+
 - Pink: `#FF3AAE` (primary CTA)
 - Yellow: `#F4FF3C` (hover/warning)
 - Violet: `#8A63FF` (secondary)
@@ -479,12 +564,14 @@ window.addEventListener('scroll', loadExtendedTheme, { once: true });
 - Blue: `#4A90FF` (info alt)
 
 **Surfaces:**
+
 - Atomic Black: `#0F0F0F` (page background)
 - Dark Charcoal: `#1A1A1A` (cards/panels)
 - Dark Panel: `#171722` (alt panels)
 - Hover Gray: `#242424` (hover states)
 
 **Text:**
+
 - Body: `#F6F2EB` (14.8:1 contrast)
 - Headings: `#FFFFFF` (21:1 contrast)
 - Muted: `#CFC7BB` (10.2:1 contrast)
@@ -495,6 +582,7 @@ window.addEventListener('scroll', loadExtendedTheme, { once: true });
 ### Keyboard Shortcuts
 
 **Navigation:**
+
 - `Tab` — Move focus forward
 - `Shift + Tab` — Move focus backward
 - `Enter` — Activate button/link
@@ -503,6 +591,7 @@ window.addEventListener('scroll', loadExtendedTheme, { once: true });
 - `Arrow Keys` — Navigate lists/tabs
 
 **Focus Indicator:**
+
 - All interactive elements: 3px pink outline with glow
 - Visible on keyboard navigation
 - Meets WCAG 2.1 Level AA requirements
@@ -511,29 +600,35 @@ window.addEventListener('scroll', loadExtendedTheme, { once: true });
 
 ## 🎓 Learning Path
 
-**Beginner (You are here! ✅)**
+## Beginner (You are here! ✅)
+
 → 10-Minute Quick Start (this guide)
 
-**Intermediate (30 minutes)**
+## Intermediate (30 minutes)
+
 → Complete Usage Guide (`/docs/dark-mode-usage-guide.md`)
 
-**Advanced (2 hours)**
+## Advanced (2 hours)
+
 → Component Showcase + Customization Guide
 
-**Expert (4+ hours)**
+## Expert (4+ hours)
+
 → React Examples + Composition Patterns + Maintenance Guide
 
 ---
 
-## 📞 Need Help?
+## 📞 Need Help
 
 **Common questions:**
 → `/docs/dark-mode-usage-guide.md#troubleshooting`
 
-**All components reference:**
+## All components reference
+
 → `/docs/dark-mode-component-showcase.md`
 
-**React/TypeScript examples:**
+## React/TypeScript examples
+
 → `/docs/dark-mode-react-examples.md`
 
 **Customization:**
@@ -544,7 +639,7 @@ window.addEventListener('scroll', loadExtendedTheme, { once: true });
 
 ---
 
-## ✅ Checklist: You're Ready If...
+## ✅ Checklist: You're Ready If..
 
 - [ ] Dark mode activates when you add `.dark` class
 - [ ] Background is atomic black (#0F0F0F)
@@ -555,11 +650,11 @@ window.addEventListener('scroll', loadExtendedTheme, { once: true });
 - [ ] Keyboard navigation shows pink focus indicators
 - [ ] All text is readable (high contrast)
 
-**All checked?** 🎉 **You're production ready!**
+## All checked?** 🎉 **You're production ready
 
 ---
 
-```
+```text
 ╔════════════════════════════════════════════════════════╗
 ║                                                        ║
 ║   🎉 CONGRATULATIONS! DARK MODE IS LIVE! 🎉            ║
@@ -574,18 +669,20 @@ window.addEventListener('scroll', loadExtendedTheme, { once: true });
 ║   Time to build something amazing! 🚀                  ║
 ║                                                        ║
 ╚════════════════════════════════════════════════════════╝
-```
+
+```text
 
 ---
 
-**Guide Version:** 1.0  
-**Last Updated:** March 11, 2026  
-**Dark Mode Version:** 2.0.0  
+**Guide Version:** 1.0
+**Last Updated:** March 11, 2026
+**Dark Mode Version:** 2.0.0
 **Estimated Time:** 10 minutes ⚡
 
 **Next Steps:**
+
 - Explore `/docs/dark-mode-component-showcase.md`
 - Build pages with `/docs/dark-mode-composition-patterns.md`
 - Deploy with `/tasks/dark-mode-implementation-checklist.md`
 
-**🚀 Happy building!**
+## 🚀 Happy building

@@ -9,27 +9,32 @@ related_guidelines: "/guidelines/Guidelines.md"
 
 # Inline Styles Guide
 
-**Created:** March 12, 2026  
-**Last Updated:** March 12, 2026  
+**Created:** March 12, 2026
+**Last Updated:** March 12, 2026
 **Status:** Active
 
 ---
 
 ## Overview
 
-This guide documents when to use inline styles vs BEM classes, and specific workarounds needed due to ES5 TypeScript constraints in the Figma Make bundler environment.
+This guide documents when to use inline styles vs BEM classes, and specific
+workarounds needed due to ES5 TypeScript constraints in the Figma Make bundler
+environment.
 
-**General Rule:** This project follows a **strict BEM (Block Element Modifier)** architecture. Inline styles are **STRICTLY FORBIDDEN** in 99% of cases.
+**General Rule:** This project follows a **strict BEM (Block Element Modifier)**
+architecture. Inline styles are **STRICTLY FORBIDDEN** in 99% of cases.
 
 ---
 
 ## 🚫 Default Position: NO INLINE STYLES
 
-**Priority Order for Styling:**
+## Priority Order for Styling
 
 1. **✅ ONLY CHOICE:** Use BEM classes defined in `/styles/globals.css`
-2. **🚫 NEVER:** Use Tailwind utilities
-3. **🚫 NEVER:** Use inline styles (with rare exceptions below)
+
+1. **🚫 NEVER:** Use Tailwind utilities
+
+1. **🚫 NEVER:** Use inline styles (with rare exceptions below)
 
 ```tsx
 // ✅ CORRECT - Semantic BEM Classes
@@ -41,7 +46,8 @@ This guide documents when to use inline styles vs BEM classes, and specific work
 <div style={{ padding: '16px', backgroundColor: '#0F0F0F' }}>
   Content
 </div>
-```
+
+```text
 
 ---
 
@@ -49,31 +55,34 @@ This guide documents when to use inline styles vs BEM classes, and specific work
 
 ### 1. Dynamic User-Generated Values
 
-**When:** CSS custom properties or BEM classes cannot represent the value because it's computed at runtime from user input or external data.
+**When:** CSS custom properties or BEM classes cannot represent the value
+because it's computed at runtime from user input or external data.
 
 **Example:** Background image from user upload or CMS
 
 ```tsx
 // ✅ ALLOWED - Dynamic background from CMS
-<div 
+<div
   className="hero hero--dynamic"
   style={{ backgroundImage: `url(${heroImage})` }}
 >
   <h1 className="hero__title">{title}</h1>
 </div>
-```
+
+```text
 
 **Better Alternative:** Use CSS custom properties
 
 ```tsx
 // ✅ PREFERRED - CSS custom property
-<div 
+<div
   className="hero hero--dynamic"
   style={{ '--hero-bg': `url(${heroImage})` } as React.CSSProperties}
 >
   <h1 className="hero__title">{title}</h1>
 </div>
-```
+
+```text
 
 ```css
 /* In /styles/blocks/hero.css */
@@ -82,35 +91,42 @@ This guide documents when to use inline styles vs BEM classes, and specific work
   background-size: cover;
   background-position: center;
 }
-```
+
+```text
 
 ---
 
 ### 2. Animation Delays (Staggered Animations)
 
-**When:** Auto-cascading staggered animations where delay is calculated per element.
+**When:** Auto-cascading staggered animations where delay is calculated per
+element.
 
 **Example:** HeroLayout auto-stagger system
 
 ```tsx
 // ✅ ALLOWED - Calculated animation delay
-<div 
+<div
   className="hero__subtitle animate-stagger-fade-in"
   style={{ animationDelay: `${index * 100}ms` }}
 >
   {subtitle}
 </div>
-```
 
-**Implementation:** This pattern is used in `/components/sections/HeroLayout.tsx` for terminal boot animations.
+```text
 
-**Why inline?** Each element needs a unique delay based on its position in the DOM. Creating 20+ BEM modifier classes (`.hero__subtitle--delay-0`, `.hero__subtitle--delay-1`, etc.) is impractical.
+**Implementation:** This pattern is used in
+`/components/sections/HeroLayout.tsx` for terminal boot animations.
+
+**Why inline?** Each element needs a unique delay based on its position in the
+DOM. Creating 20+ BEM modifier classes (`.hero__subtitle--delay-0`,
+`.hero__subtitle--delay-1`, etc.) is impractical.
 
 ---
 
 ### 3. ES5 Bundler Workarounds (Figma Make Constraints)
 
-**When:** The Figma Make bundler has specific syntax incompatibilities that require inline styles as a workaround.
+**When:** The Figma Make bundler has specific syntax incompatibilities that
+require inline styles as a workaround.
 
 #### Forbidden Syntax → Required Workaround Table
 
@@ -141,7 +157,8 @@ setProp(obj, key, value)
 
 // Object construction with Object.entries() and explicit if/else
 buildContextValue()
-```
+
+```text
 
 #### Example: Object Literal Workaround
 
@@ -154,15 +171,19 @@ var styles = {};
 setProp(styles, 'padding', '16px');
 setProp(styles, 'margin', '8px');
 <div style={styles}>
-```
 
-**Note:** This is only needed in router/lib code where bundler constraints are strictest. In regular component files, inline styles should still be avoided in favor of BEM classes.
+```text
+
+**Note:** This is only needed in router/lib code where bundler constraints are
+strictest. In regular component files, inline styles should still be avoided in
+favor of BEM classes.
 
 ---
 
 ### 4. Third-Party Library Requirements
 
-**When:** A third-party library expects inline styles as props (e.g., React DnD, React Virtualized).
+**When:** A third-party library expects inline styles as props (e.g., React DnD,
+React Virtualized).
 
 **Example:** react-window
 
@@ -174,7 +195,8 @@ setProp(styles, 'margin', '8px');
 >
   {Row}
 </FixedSizeList>
-```
+
+```text
 
 **Better Alternative:** Check if library accepts className prop instead
 
@@ -186,13 +208,14 @@ setProp(styles, 'margin', '8px');
 >
   {Row}
 </FixedSizeList>
-```
+
+```text
 
 ---
 
-## 🎯 Decision Tree: Should I Use Inline Styles?
+## 🎯 Decision Tree: Should I Use Inline Styles
 
-```
+```text
 START
   |
   ├─ Is this a dynamic value from user input or CMS?
@@ -213,7 +236,8 @@ START
   |
   └─ None of the above?
        └─ NO INLINE STYLES - Use BEM classes
-```
+
+```text
 
 ---
 
@@ -227,19 +251,21 @@ START
 
 // ✅ CORRECT
 <div className="section section--dark">
-```
+
+```text
 
 ### ❌ MISTAKE 2: Using inline styles for responsive design
 
 ```tsx
 // ❌ WRONG
-<div style={{ 
-  width: window.innerWidth > 768 ? '1200px' : '100%' 
+<div style={{
+  width: window.innerWidth > 768 ? '1200px' : '100%'
 }}>
 
 // ✅ CORRECT - Media queries in CSS
 <div className="container container--wide">
-```
+
+```text
 
 ```css
 /* In /styles/blocks/container.css */
@@ -252,7 +278,8 @@ START
     width: 1200px;
   }
 }
-```
+
+```text
 
 ### ❌ MISTAKE 3: Using inline styles for hover states
 
@@ -261,8 +288,8 @@ START
 const [hovered, setHovered] = useState(false);
 
 <button
-  style={{ 
-    backgroundColor: hovered ? '#FF10F0' : 'transparent' 
+  style={{
+    backgroundColor: hovered ? '#FF10F0' : 'transparent'
   }}
   onMouseEnter={() => setHovered(true)}
   onMouseLeave={() => setHovered(false)}
@@ -270,7 +297,8 @@ const [hovered, setHovered] = useState(false);
 
 // ✅ CORRECT - CSS pseudo-class
 <button className="btn btn--outline">
-```
+
+```text
 
 ```css
 /* In /styles/blocks/button.css */
@@ -282,7 +310,8 @@ const [hovered, setHovered] = useState(false);
 .btn--outline:hover {
   background-color: var(--color-neon-pink);
 }
-```
+
+```text
 
 ---
 
@@ -290,23 +319,24 @@ const [hovered, setHovered] = useState(false);
 
 ### Example 1: Footer Link Buttons (BEFORE/AFTER)
 
-**BEFORE (Inline Styles - WRONG):**
+## BEFORE (Inline Styles - WRONG)
 
 ```tsx
 // ❌ OLD CODE - /components/common/Footer.tsx
 <button
   onClick={handleCopyLink}
-  style={{ 
-    background: 'none', 
-    border: 'none', 
-    cursor: 'pointer' 
+  style={{
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer'
   }}
 >
   Copy link
 </button>
-```
 
-**AFTER (BEM Classes - CORRECT):**
+```text
+
+## AFTER (BEM Classes - CORRECT)
 
 ```tsx
 // ✅ NEW CODE - /components/common/Footer.tsx
@@ -316,7 +346,8 @@ const [hovered, setHovered] = useState(false);
 >
   Copy link
 </button>
-```
+
+```text
 
 ```css
 /* In /styles/blocks/footer.css */
@@ -332,7 +363,8 @@ const [hovered, setHovered] = useState(false);
 .footer__copy-link:hover {
   color: var(--color-neon-pink);
 }
-```
+
+```text
 
 **Result:** Migration completed in Modern React Migration audit (Task 15 ✅)
 
@@ -343,7 +375,7 @@ const [hovered, setHovered] = useState(false);
 ```tsx
 // ✅ ALLOWED - /components/sections/HeroLayout.tsx
 {autoStagger && (
-  <div 
+  <div
     className="hero__subtitle animate-stagger-fade-in"
     style={{ animationDelay: `${1 * 100}ms` }}
   >
@@ -352,16 +384,18 @@ const [hovered, setHovered] = useState(false);
 )}
 
 {autoStagger && (
-  <div 
+  <div
     className="hero__description animate-stagger-fade-in"
     style={{ animationDelay: `${2 * 100}ms` }}
   >
     {description}
   </div>
 )}
-```
 
-**Why allowed?** Each element needs a unique calculated delay. The animation class is still defined in BEM CSS - only the delay is inline.
+```text
+
+**Why allowed?** Each element needs a unique calculated delay. The animation
+class is still defined in BEM CSS - only the delay is inline.
 
 ---
 
@@ -371,13 +405,14 @@ const [hovered, setHovered] = useState(false);
 // ✅ PREFERRED - CSS custom property
 import { heroImages } from '@/data/mock/images/hero-images';
 
-<div 
+<div
   className="hero hero--dynamic"
   style={{ '--hero-bg': `url(${heroImages.home})` } as React.CSSProperties}
 >
   <h1 className="hero__title">Welcome</h1>
 </div>
-```
+
+```text
 
 ```css
 /* In /styles/blocks/hero.css */
@@ -387,7 +422,8 @@ import { heroImages } from '@/data/mock/images/hero-images';
   background-position: center;
   background-attachment: fixed;
 }
-```
+
+```text
 
 ---
 
@@ -396,18 +432,22 @@ import { heroImages } from '@/data/mock/images/hero-images';
 ### When You Find Inline Styles in Code
 
 1. **Identify the reason** - Is it truly dynamic or just convenience?
-2. **Check if static** - If the value never changes, create a BEM class
-3. **Check if CSS custom property works** - Prefer this over inline styles
-4. **Document if exception** - If it's a valid exception, add a comment
+
+1. **Check if static** - If the value never changes, create a BEM class
+
+1. **Check if CSS custom property works** - Prefer this over inline styles
+
+1. **Document if exception** - If it's a valid exception, add a comment
 
 ```tsx
 // ✅ GOOD - Documented exception
-<div 
+<div
   className="hero__media animate-float"
   // Inline style required: staggered animation delay (auto-calculated)
   style={{ animationDelay: `${index * 100}ms` }}
 >
-```
+
+```text
 
 ---
 
@@ -447,5 +487,5 @@ Before committing a new component:
 
 ---
 
-**Last Updated:** March 12, 2026  
+**Last Updated:** March 12, 2026
 **Maintained By:** Development Team

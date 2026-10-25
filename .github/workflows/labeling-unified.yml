@@ -1,0 +1,225 @@
+name: Labeling • Unified
+
+on:
+  pull_request:
+    branches: [develop]
+    types: [opened, edited, synchronize, reopened, ready_for_review, labeled, unlabeled]
+  # Issues and discussions react to content, not label changes (#3531): a
+  # bulk relabel queued ~660 runs, and each re-applied default labels from
+  # a stale payload, undoing the manual changes.
+  issues:
+    types: [opened, edited, reopened, typed, untyped]
+  discussion:
+    types: [created, edited, answered]
+  schedule:
+    # Staggered off the 02:00/03:00/04:00 cluster cited in the archival manifest.
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run without writing labels'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: read
+
+# One group per item and action class (#3531): github.event.number exists only
+# on PR events, so every issue event had its own group. A group holds one
+# running and one pending run, and a newer pending run replaces the older one,
+# so a burst of edits collapses. Typed and untyped actions share a transition
+# class; other actions retain separate groups. Running jobs are never
+# cancelled mid-apply.
+concurrency:
+  group: labeling-unified-${{ github.event_name }}-${{ contains(fromJSON('["typed","untyped"]'), github.event.action) && 'type-transition' || github.event.action }}-${{ github.event.pull_request.number || github.event.issue.number || github.event.discussion.number || github.run_id }}
+  cancel-in-progress: false
+
+env:
+  # Phase 2.5: LABELER_RULES maintained locally; LABELS_CONFIG now canonical
+  LABELER_RULES: .github/labeler.yml
+
+jobs:
+  validate:
+    name: Validate configs (read-only)
+    # Configs change only through PRs; issue and discussion runs skip it.
+    if: github.event_name == 'pull_request' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+
+      # Phase 2.5: Fetch canonical labels from .github repository (Spec 021)
+      # Single source of truth: all governance files are canonical in lightspeedwp/.github
+      - name: Fetch canonical governance files
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: lightspeedwp/.github
+          path: .canonical-github
+          fetch-depth: 1
+          sparse-checkout: .github/labels.yml
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
+      - name: Validate labeling configs
+        env:
+          CANONICAL_LABELS_PATH: .canonical-github/.github/labels.yml
+        run: node scripts/validation/validate-labeling-configs.cjs
+      - name: Label governance contracts (#3545)
+        # Jest contract suite proving canonical emitters, branch-mapping
+        # parity, labeler schema, one-type reconciliation, idempotence and
+        # router/agent convergence. Blocking: this job gates every other
+        # job in the workflow.
+        run: npx jest --config jest.config.js scripts/agents/__tests__/label-contracts.test.js --coverage=false --forceExit
+      - name: Guardrail — unknown labels in templates
+        # Scans PR template frontmatter against .github/labels.yml. Known
+        # LOCKED-template violations are grandfathered with warnings (see
+        # the script); any new unknown label fails this job (#3545).
+        run: node scripts/validation/validate-labels-before-creation.cjs --scan-templates
+
+  file-labels:
+    name: File/branch labels (PRs)
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: validate
+    if: github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'meta:skip-labeling')
+    steps:
+      # Phase 2 Consolidation: labeler.yml moved to canonical lightspeedwp/.github.
+      # Fetch it from there instead of the local deleted copy.
+      - name: Checkout minimal (meta only)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          sparse-checkout: '.gitignore'
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - name: Fetch canonical labeler.yml from lightspeedwp/.github
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p .github
+          gh repo clone lightspeedwp/.github /tmp/github-repo -- --depth 1
+          cp /tmp/github-repo/.github/labeler.yml .github/labeler.yml
+      - uses: actions/labeler@bf12e9b00b37c5c0ca2b87b79b2daf7891dbda13 # v7.0.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: ${{ env.LABELER_RULES }}
+          sync-labels: true
+
+  issue-labels:
+    name: Issue labels by type (T018)
+    permissions:
+      contents: read
+      issues: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: validate
+    # Triage label only for new issues, never on later edits (#3531).
+    if: >-
+      !cancelled() && needs.validate.result != 'failure' &&
+      github.event_name == 'issues' && github.event.action == 'opened' &&
+      github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+      - name: Apply status triage label via composite action (T020)
+        uses: ./.github/actions/apply-labels
+        with:
+          labels: 'status:needs-triage'
+          issue-number: ${{ github.event.issue.number }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Collect metrics (T021)
+        uses: ./.github/actions/collect-metrics
+        with:
+          workflow-name: labeling-unified
+          job-name: issue-labels
+          metrics-file: issue-labels-metrics.json
+
+  scheduled-cleanup:
+    name: Scheduled label cleanup (T019)
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: validate
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.dry_run != 'false')
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+      - run: npm ci --ignore-scripts
+      - name: Audit report (read-only, dry-run safe)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: 'true'
+        run: node scripts/agents/run-labeling-agent.js
+        continue-on-error: true
+      - name: Collect metrics (T021)
+        uses: ./.github/actions/collect-metrics
+        with:
+          workflow-name: labeling-unified
+          job-name: scheduled-cleanup
+          metrics-file: scheduled-cleanup-metrics.json
+
+  agent-labels:
+    name: Labeling agent (issues/PRs)
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: validate
+    if: >-
+      !cancelled() && needs.validate.result != 'failure' &&
+      github.actor != 'github-actions[bot]' &&
+      !contains(github.event.head_commit.message, '[skip labeling]')
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
+      - name: Run labeling agent
+        id: labeling-run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
+        run: |
+          set +e
+          node scripts/agents/run-labeling-agent.js
+          EXIT_CODE=$?
+          set -e
+
+          # Handle API rate limit errors (403/429) and not found errors (404)
+          if [ $EXIT_CODE -eq 3 ] || [ $EXIT_CODE -eq 4 ]; then
+            echo "::warning::GitHub API error (exit code $EXIT_CODE): Rate limit exceeded or resource not found"
+            exit 0
+          fi
+
+          exit $EXIT_CODE
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: labeling-report-${{ github.run_id }}
+          path: .github/reports/labeling/
+          if-no-files-found: ignore

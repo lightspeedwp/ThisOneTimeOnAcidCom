@@ -1,220 +1,52 @@
-# Sub-audit 2: Content card specimens page
+# Book-site content-card specimen review
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Route:** `/dev-tools/content-cards`
+## 1. Objective
 
----
+Assess reusable content-card variants and states already relevant to the book website.
 
-## Objective
+## 2. Inputs and scope
 
-Create a dev tools page showcasing 5 distinct card variants for each of the 5 content types (25 total card designs), plus existing tool/tip card types. Every card is shown in light and dark mode with full hover/focus interactions.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current card components/data/types, book/Journal/events/media consumers, current style guide and sibling rich-text review. Historical variants are assessment candidates, not an instruction to create 25 cards.
 
-## Card variant definitions
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-### Variant 1: Standard card
-The default archive/listing card. Used on content archive pages.
+## 3. Audit steps
 
-**Structure:**
-- Image area (aspect varies by content type)
-- Content type badge with neon colour
-- Title (truncated at 2 lines)
-- Excerpt (truncated at 3 lines)
-- Meta bar (date, read time / duration / location)
-- Hover: lift + neon border glow
+1. Inventory actual cards and metadata, supported variants and consumers. Assess standard, featured, compact, minimal and editorial patterns only where current content and hierarchy justify them.
 
-### Variant 2: Featured card
-Large hero card for homepage features and top-of-archive slots.
+2. Check real title/excerpt/date/category/author/image semantics, optional metadata, missing-image/content states, link hit areas and non-duplicated accessible names. Do not invent authors, dates, excerpts or replacement images.
 
-**Structure:**
-- Full-width or 2-column image (taller, more prominent)
-- Overlay gradient mask at bottom
-- Title overlaid on image (large typography)
-- Category badge floating top-left
-- Featured indicator (star/sparkle icon)
-- Hover: image zoom + glow intensification
+3. Compare current responsive layout and featured-card behaviour with documented intent. The old three-/two-/one-column examples are test candidates, not universal breakpoint requirements; inspect narrow viewports and long text without truncating essential meaning.
 
-### Variant 3: Compact card
-Small horizontal card for sidebars and related content sections.
+4. Assess hover/focus/active/visited states, keyboard operation, contrast, reduced motion, text overflow and image treatment in both themes. Do not mandate tilt, glow, animation or decorative effects.
 
-**Structure:**
-- Thumbnail (small square, left side)
-- Text block (right side): title + date
-- No excerpt, minimal meta
-- Hover: subtle background shift + neon accent line
+5. Check BEM/token consistency, actual reuse boundaries and route/search/filter consumers. Distinguish legitimate variant differences from duplicate implementation.
 
-### Variant 4: Minimal card
-Text-only card for dense lists and search results.
+6. Return the current variant/state matrix, gaps and exact supported specimen proposals. No new components, routes, assets or forced legacy content-type expansion.
 
-**Structure:**
-- Content type icon + badge (inline, small)
-- Title
-- One-line excerpt or description
-- Date (right-aligned or below)
-- No image
-- Hover: left border neon accent line appears
+## 4. Missing evidence and permission boundaries
 
-### Variant 5: Editorial card
-Magazine-style card for highlighted/special content.
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-**Structure:**
-- Large image with artistic crop (portrait for portfolio, landscape for blog)
-- Large display title overlaid or adjacent (editorial typography)
-- Pull quote or highlighted snippet
-- Neon accent stripe along one edge
-- Author/artist attribution
-- Hover: parallax shift or tilt effect
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
----
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-## Content type-specific adaptations
+## 5. Success criteria
 
-Each content type's 5 variants should be subtly different to reflect the nature of the content:
+- [ ] Each proposed variant has a real content/consumer need.
+- [ ] Card accessibility and responsive states are assessed without decorative-effects quotas.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-### Blog cards
-- **Aspect ratio:** 16:9 landscape
-- **Meta:** Date, category, read time, tag count
-- **Accent:** Neon pink (#FF10F0)
-- **Featured variant:** Large hero image with gradient text overlay
-- **Editorial variant:** Pull quote from the post
+## 6. Report output
 
-### Portfolio cards
-- **Aspect ratio:** 1:1 square or 3:4 portrait (face close-ups benefit from portrait)
-- **Meta:** Event, location, date, image count
-- **Accent:** Neon green (#39FF14)
-- **Featured variant:** Masonry-style oversized image, minimal text
-- **Editorial variant:** Full-bleed image with floating title
-- **Standard variant:** Image carousel dots visible (gallery indicator)
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-### Video cards
-- **Aspect ratio:** 16:9 landscape
-- **Meta:** Duration badge (overlay on image), view count, category
-- **Accent:** Neon blue (#1F51FF)
-- **Featured variant:** Video player placeholder with large play button
-- **Compact variant:** Thumbnail + title + duration (YouTube-style)
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-### Podcast cards
-- **Aspect ratio:** 1:1 square (album art style)
-- **Meta:** Episode number, season, duration, guest name
-- **Accent:** Neon purple (#BE00FE)
-- **Featured variant:** Large cover art with episode details overlaid
-- **Editorial variant:** Waveform decoration, transcript preview snippet
+## 7. Revision provenance
 
-### Event cards
-- **Aspect ratio:** 16:9 or 4:3
-- **Meta:** Date range, location, event type badge, travel method icon
-- **Accent:** Neon orange (#FF5F1F)
-- **Featured variant:** Large banner with event logo/image, date countdown
-- **Compact variant:** Date + name + location (calendar-style)
-- **Editorial variant:** Multi-edition summary with attendance badges
-
----
-
-## Page layout
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│  Breadcrumbs: Home > Developer Tools > Content card gallery  │
-│  Badge: Content                                              │
-│  H1: Content card gallery (gradient)                         │
-│  Subtitle: 5 card variants for every content type...         │
-├──────────────────────────────────────────────────────────────┤
-│  [ Blog ] [ Portfolio ] [ Video ] [ Podcast ] [ Event ]      │
-│  ─────── active tab with neon colour underline               │
-├──────────────────────────────────────────────────────────────┤
-│                                                              │
-│  Theme toggle: [Light] [Dark] [Side by side]                 │
-│                                                              │
-│  ┌── Standard ──────────────────────────────────────────┐   │
-│  │  3-column grid of standard cards                      │   │
-│  └───────────────────────────────────────────────────────┘   │
-│                                                              │
-│  ┌── Featured ──────────────────────────────────────────┐   │
-│  │  1 large + 2 small layout                             │   │
-│  └───────────────────────────────────────────────────────┘   │
-│                                                              │
-│  ┌── Compact ───────────────────────────────────────────┐   │
-│  │  Narrow sidebar column with 3 compact cards           │   │
-│  └───────────────────────────────────────────────────────┘   │
-│                                                              │
-│  ┌── Minimal ───────────────────────────────────────────┐   │
-│  │  Dense list of 4 minimal cards                        │   │
-│  └───────────────────────────────────────────────────────┘   │
-│                                                              │
-│  ┌── Editorial ─────────────────────────────────────────┐   │
-│  │  2-column editorial layout                            │   │
-│  └───────────────────────────────────────────────────────┘   │
-│                                                              │
-│  FAQ section (3 FAQs, content-type neon colour)              │
-│                                                              │
-└──────────────────────────────────────────────────────────────┘
-```
-
----
-
-## Interaction requirements
-
-All cards must demonstrate:
-
-1. **Default state** — Clean, readable, well-spaced
-2. **Hover state** — Transform + shadow + neon glow
-3. **Focus state** — 3px neon focus ring (accessibility)
-4. **Active state** — Scale-down feedback
-
-### Hover effects per variant:
-- **Standard:** `translateY(-4px)` + neon box-shadow + image scale(1.05)
-- **Featured:** Image zoom to scale(1.08) + gradient mask intensification
-- **Compact:** Background colour shift + left neon accent line
-- **Minimal:** Left border neon line slides in from transparent
-- **Editorial:** Subtle parallax tilt or image shift
-
-### Reduced motion:
-All hover animations wrapped in `@media (prefers-reduced-motion: reduce)` — falls back to opacity change only.
-
----
-
-## Relationship to existing CardSpecimenPage
-
-The existing `/dev-tools/cards` (CardSpecimenPage) shows 6 generic card types (blog, tool, video, podcast, sticker, tip). This new page is a **superset** focused on content-type-specific variants.
-
-**Decision:** Keep both pages:
-- `/dev-tools/cards` — Generic card interaction specimens (hover/focus states)
-- `/dev-tools/content-cards` — Content-type-specific card gallery (5 variants × 5 types)
-
-Cross-link between them for reference.
-
----
-
-## Data file
-
-`/data/mock/ui/content-card-specimens.ts`:
-```typescript
-export const contentCardSpecimens = {
-  blog: {
-    cards: [
-      { variant: 'standard', title: '...', excerpt: '...', image: '...', category: '...', date: '...', readTime: 5 },
-      { variant: 'featured', ... },
-      { variant: 'compact', ... },
-      { variant: 'minimal', ... },
-      { variant: 'editorial', ... },
-    ],
-    faqs: [...],
-  },
-  portfolio: { ... },
-  video: { ... },
-  podcast: { ... },
-  event: { ... },
-};
-```
-
----
-
-## Output
-
-- Component: `/components/pages/dev-tools/ContentCardSpecimensPage.tsx`
-- CSS: `/styles/blocks/content-card-specimens.css`
-- Data: `/data/mock/ui/content-card-specimens.ts`
-- Route registered
-- SEO entry added
-- Breadcrumb entry added
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-specimens/02-content-card-specimens.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

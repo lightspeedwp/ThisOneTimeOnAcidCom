@@ -8,4 +8,4 @@ Cycling isn’t sport for Ash — it’s identity.
 
 ### Origin 2026 — The 300km Birthday Ride
 
-**2026 · ~300 KM ROUND TRIP**
+## 2026 · ~300 KM ROUND TRIP

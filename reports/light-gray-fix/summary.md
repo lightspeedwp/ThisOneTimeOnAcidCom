@@ -7,8 +7,8 @@ status: "COMPLETE"
 
 # Dark Mode Fix — Light Gray Sections (#F0F0F0)
 
-**Created:** March 12, 2026  
-**Status:** ✅ COMPLETE  
+**Created:** March 12, 2026
+**Status:** ✅ COMPLETE
 
 ---
 
@@ -18,7 +18,7 @@ status: "COMPLETE"
 
 Looking at the Figma screenshot and code, the correct design is:
 
-```
+```text
 ┌─────────────────────────────────────┐
 │ Header: rgba(255,255,255,0.95)      │ ← Semi-transparent white
 ├─────────────────────────────────────┤
@@ -36,7 +36,8 @@ Looking at the Figma screenshot and code, the correct design is:
 ├─────────────────────────────────────┤
 │ Footer: #FAFAFA (lighter gray)      │ ← Even lighter gray
 └─────────────────────────────────────┘
-```
+
+```text
 
 ---
 
@@ -67,7 +68,7 @@ Looking at the Figma screenshot and code, the correct design is:
 
 ### 1. `/styles/blocks/book-dark-mode.css` (v3.0.0)
 
-**Complete rewrite to use #F0F0F0 instead of white:**
+## Complete rewrite to use #F0F0F0 instead of white
 
 ```css
 /* Light gray sections stay light gray */
@@ -85,9 +86,11 @@ Looking at the Figma screenshot and code, the correct design is:
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
   color: white;
 }
-```
+
+```text
 
 **Key features:**
+
 - Light sections: `#F0F0F0` (NOT white)
 - Dark cards on light: `rgba(15,15,15,0.8)` with pink borders
 - Header: `rgba(255,255,255,0.95)` semi-transparent white
@@ -97,18 +100,19 @@ Looking at the Figma screenshot and code, the correct design is:
 
 ### 2. `/styles/globals.css`
 
-**Added new color variables:**
+## Added new color variables
 
 ```css
 --wp--preset--color--light-gray: #F0F0F0;
 --wp--preset--color--lighter-gray: #FAFAFA;
-```
+
+```text
 
 ---
 
 ## 🎨 VISUAL DESIGN PATTERN
 
-### From Figma Code Analysis:
+### From Figma Code Analysis
 
 ```tsx
 // Light section with dark cards
@@ -124,7 +128,8 @@ Looking at the Figma screenshot and code, the correct design is:
 <div className="bg-[rgba(15,15,15,0.95)]">  {/* Dark section */}
   <p className="text-white">Content</p>
 </div>
-```
+
+```text
 
 ---
 
@@ -141,11 +146,12 @@ color: white;
 
 /* Hover state */
 border-color: #FF10F0;  /* Neon pink */
-box-shadow: 
+box-shadow:
   0 8px 24px rgba(0, 0, 0, 0.6),
   0 0 30px rgba(255, 16, 240, 0.4),  /* Pink glow */
   0 0 15px rgba(244, 255, 60, 0.2);  /* Yellow glow */
-```
+
+```text
 
 ### Typography on Light Gray
 
@@ -159,7 +165,8 @@ color: #4a4a4a;
 /* Accent text: neon pink (no glow) */
 color: #FF10F0;
 text-shadow: none;
-```
+
+```text
 
 ### Typography on Dark Cards
 
@@ -173,7 +180,8 @@ color: rgba(255, 255, 255, 0.7);
 /* Accent text: neon pink (with glow) */
 color: #FF10F0;
 text-shadow: 0 0 12px rgba(255, 16, 240, 0.6);
-```
+
+```text
 
 ---
 
@@ -184,9 +192,11 @@ text-shadow: 0 0 12px rgba(255, 16, 240, 0.6);
 ```css
 /* Used pure white */
 background-color: #FFFFFF;  /* TOO BRIGHT! */
-```
+
+```text
 
 **Issues:**
+
 - Too bright and harsh
 - Didn't match Figma
 - Wrong contrast
@@ -199,9 +209,11 @@ background-color: #FFFFFF;  /* TOO BRIGHT! */
 ```css
 /* Uses light gray */
 background-color: #F0F0F0;  /* PERFECT! */
-```
+
+```text
 
 **Benefits:**
+
 - ✅ Matches Figma exactly
 - ✅ Softer, more professional
 - ✅ Better contrast
@@ -214,35 +226,47 @@ background-color: #F0F0F0;  /* PERFECT! */
 
 ### Background Hierarchy
 
-```
+```text
+
 #FAFAFA  ← Lightest (Footer)
+
 #F0F0F0  ← Light (Main sections)
+
 #0F0F0F  ← Dark (Full sections)
+
 rgba(15,15,15,0.8)  ← Dark transparent (Cards on light)
 rgba(15,15,15,0.95)  ← Dark opaque (Full sections)
-```
+
+```text
 
 ### Accent Colors
 
-```
+```text
+
 #FF10F0  ← Neon Pink (Primary)
+
 #F4FF3C  ← Neon Yellow (Secondary)
+
 #D4008C  ← Neon Magenta (Buttons)
-```
+
+```text
 
 ### Text Colors
 
-```
+```text
 On Light (#F0F0F0):
+
 - Headings: #1a1a1a (dark)
 - Body: #4a4a4a (medium)
 - Accents: #FF10F0 (pink)
 
 On Dark Cards:
+
 - Headings: #FFFFFF (white)
 - Body: rgba(255,255,255,0.7) (semi-white)
 - Accents: #FF10F0 (pink with glow)
-```
+
+```text
 
 ---
 
@@ -263,10 +287,10 @@ On Dark Cards:
 
 ## 🎉 SUMMARY
 
-**Problem:** CSS was using white (#FFFFFF) instead of light gray (#F0F0F0)  
-**Root cause:** Not checking the exact Figma color values  
-**Solution:** Updated CSS to use #F0F0F0 for light sections  
-**Result:** Design now perfectly matches Figma with proper gray backgrounds!  
+**Problem:** CSS was using white (#FFFFFF) instead of light gray (#F0F0F0)
+**Root cause:** Not checking the exact Figma color values
+**Solution:** Updated CSS to use #F0F0F0 for light sections
+**Result:** Design now perfectly matches Figma with proper gray backgrounds!
 
 **The design is NOW CORRECT with light gray backgrounds!** 🎨
 
@@ -274,9 +298,9 @@ On Dark Cards:
 
 ## 🚀 DEPLOYMENT
 
-**Status:** ✅ Ready for production  
-**Breaking changes:** None (fixes previous error)  
-**Performance:** No impact  
-**Visual change:** Major improvement - now matches design  
+**Status:** ✅ Ready for production
+**Breaking changes:** None (fixes previous error)
+**Performance:** No impact
+**Visual change:** Major improvement - now matches design
 
 **Hard refresh** (`Ctrl+Shift+R`) to see the updated light gray backgrounds!

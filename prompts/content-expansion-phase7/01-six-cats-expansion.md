@@ -1,221 +1,54 @@
-# Sub-Audit 1: Six Cats page enrichment
+**Originally created:** March 3, 2026
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Created:** March 3, 2026
-**Version:** 1.0.0
-**Output:** `/reports/content-expansion-phase7/01-six-cats-expansion.md`
+**Original version:** 1.0.0
 
----
+# Six Cats memoir-source assessment
 
-## Objective
+## 1. Objective
 
-Expand the Six Cats page data to reflect the rich, detailed story now documented in `/docs/website-content.md`. The current page likely contains minimal content. The source document contains a full brand story: individual cat profiles, cultivation processes, grading system, values, and packaging ethos.
+Assess sourced Six Cats material for relevant book/author context rather than expanding a commercial portfolio.
 
----
+## 2. Inputs and scope
 
-## Source Material
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
-**Primary source:** `/docs/website-content.md` — section: "Six Cats Club / the full story about Ash Shaw's cannabis club"
+Inputs: current manuscript/book brief; relevant author-approved source documents; actual content files, types, data and consumers. Historical content-expansion instructions are context, not proof of factual accuracy.
 
-Key content sections available:
-- Vision & Mission statement
-- 8 brand values (Authenticity, Consciousness, Consistency, Experience, Meticulousness, Sustainability, Passion, Quality)
-- The Humans section
-- Individual cat bios: Timmy, Wendy, Jimmy, Bean, Jeff, Frank (6 living)
-- In Memoriam: Lisa, Moe, Lucy (3 passed)
-- Cultivation processes: Living Soil, Rainwater Harvesting, Companion Planting, Worm Tea
-- Harvest phases: Flushing, Drying, Dry Trimming, Curing
-- Grading system: Quads (AAAA), Topshelf (AAA), Standard (AA), Preground (A+), Budget Blend (A)
-- Packaging: glass recycling, sustainable growth ethos
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
----
+## 3. Audit steps
 
-## Audit Steps
+1. Locate current Six Cats source documents, data/types and rendered consumers; separate the memoir’s past from current business claims. Check any website-content section against author-approved evidence.
 
-### Step 1: Review current Six Cats data
-**File:** `/data/mock/pages/six-cats.ts`
+2. Preserve the original useful topic inventory as source questions: living-soil cultivation; rainwater, companion planting and worm tea; flushing, drying, trimming and curing; grading including historical AAAA-style grades; brand values, vision/mission and packaging. Do not turn these into verified product, health or cultivation claims.
 
-Document:
-- Current fields and structure
-- What content is already present
-- What is missing compared to `website-content.md`
-- Data shape/TypeScript interface used
+3. Check names Timmy, Wendy, Jimmy, Bean, Jeff and Frank and memorial references Lisa, Moe and Lucy against source dates. Do not infer present living/dead counts or fabricate personality quotes or anecdotes.
 
-### Step 2: Review the TypeScript types
-**File:** `/data/types/`
+4. Assess which cultivation/values/cat stories illuminate the book and author rather than requiring a new Six Cats site section. Reuse actual content structures only where relevant; identify missing author permission or factual evidence.
 
-Identify:
-- Existing interface for Six Cats page data
-- Whether cat profile arrays exist
-- Whether cultivation step arrays exist
-- What new types may need to be defined
+5. Draft a source-to-proposed-excerpt map, maintaining existing image sources and distinguishing accepted copy from unanswered questions. No new marketing pages, artificial word quotas or automatic data/schema edits.
 
-### Step 3: Gap analysis
+## 4. Missing evidence and permission boundaries
 
-Create a clear gap table:
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-| Content from website-content.md | Currently in data? | Action |
-|---|---|---|
-| Vision statement | ? | Add / Enrich |
-| Brand values (8 values) | ? | Add / Enrich |
-| Cat bio: Timmy | ? | Add |
-| Cat bio: Wendy | ? | Add |
-| Cat bio: Jimmy | ? | Add |
-| Cat bio: Bean | ? | Add |
-| Cat bio: Jeff | ? | Add |
-| Cat bio: Frank | ? | Add |
-| In Memoriam: Lisa | ? | Add |
-| In Memoriam: Moe | ? | Add |
-| In Memoriam: Lucy | ? | Add |
-| Living Soil cultivation | ? | Add |
-| Rainwater Harvesting | ? | Add |
-| Companion Planting | ? | Add |
-| Worm Tea | ? | Add |
-| Flushing (harvest phase) | ? | Add |
-| Drying (harvest phase) | ? | Add |
-| Dry Trimming (harvest phase) | ? | Add |
-| Curing (harvest phase) | ? | Add |
-| Grading system (5 grades) | ? | Add |
-| Glass packaging & recycling | ? | Add |
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-### Step 4: Propose data structure additions
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-Design the TypeScript structures needed to hold the new content:
+## 5. Success criteria
 
-```typescript
-interface CatProfile {
-  id: string;
-  name: string;
-  nickname: string;
-  role: string;
-  description: string;
-  status: 'living' | 'memoriam';
-  yearJoined?: string;
-  yearPassed?: string;
-}
+- [ ] Relevant topics are preserved as source-backed material or explicit unresolved questions.
+- [ ] Current content structures and factual conflicts are checked without creating a publishing quota.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-interface CultivationStep {
-  id: string;
-  title: string;
-  description: string;
-  phase: 'growing' | 'harvest';
-}
+## 6. Report output
 
-interface CannabiisGrade {
-  id: string;
-  label: string;
-  grade: string;
-  tagline: string;
-  description: string;
-}
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-interface BrandValue {
-  id: string;
-  title: string;
-  description: string;
-}
-```
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-All structures must follow existing conventions in the project (see `/data/types/` for patterns).
+## 7. Revision provenance
 
-### Step 5: Write the updated data
-
-Update `/data/mock/pages/six-cats.ts` to include:
-
-1. **Cat profiles array** — all 6 living cats with personality-rich descriptions drawn directly from `website-content.md`
-2. **In memoriam array** — Lisa, Moe, Lucy with their tribute descriptions
-3. **Cultivation steps** — growing (4 steps) + harvest phases (4 steps)
-4. **Grading system** — all 5 grades with descriptions
-5. **Brand values** — all 8 values
-6. **Vision & Mission** strings
-7. **Packaging section** — glass recycling narrative
-
-**Writing guidelines:**
-- All section titles in **sentence case**
-- All cat names follow the nicknames from `website-content.md` (e.g. "Timmmaaaahh", "Wendells")
-- He/Him pronouns throughout
-- Descriptive, warm, personality-driven tone — not clinical
-- Cape Town context: Woodstock, green garden, rescue cats
-
-### Step 6: Verify no hardcoded strings in component
-
-Check `/components/pages/SixCatsPage.tsx` (or equivalent):
-- Confirm the component imports from `six-cats.ts` (not hardcoded)
-- If component references fields that don't exist in new data, update imports only (never hardcode)
-
----
-
-## Output Format
-
-### Section 1: Current state assessment
-- Fields present in current six-cats.ts
-- Missing content identified
-- TypeScript interface gaps
-
-### Section 2: Data structure design
-- Proposed TypeScript interfaces for new arrays
-- Field names following existing conventions
-
-### Section 3: Implementation
-- Full updated content for `/data/mock/pages/six-cats.ts`
-- All cat profiles (6 living + 3 in memoriam)
-- All cultivation steps (8 total)
-- All 5 grade definitions
-- All 8 brand values
-- Vision, mission, packaging content
-
-### Section 4: Component checklist
-- Components verified as importing from data layer
-- No hardcoded strings
-
----
-
-## Success Criteria
-
-- [ ] All 6 living cat profiles added with personality-rich descriptions
-- [ ] All 3 in memoriam entries added with tribute descriptions
-- [ ] All 8 brand values present
-- [ ] Vision and Mission strings added
-- [ ] 4 cultivation growing steps added
-- [ ] 4 harvest phases added
-- [ ] 5 grading tiers added with full descriptions
-- [ ] Packaging/recycling section added
-- [ ] All headings in sentence case
-- [ ] He/Him pronouns throughout
-- [ ] Cape Town / Woodstock context maintained
-- [ ] No commercial framing (personal art project scope)
-
----
-
-## Key Facts from `website-content.md`
-
-**Six Cats founding:** May 2019, co-founded with Barbara Kerr
-**First cats:** Bart and Lisa, adopted 2003 (brother and sister)
-**Total cats adopted:** 9 over the years, 3 passed
-**Website:** sixcats.club
-
-**Living cats (as of 2026):**
-1. Timmy (Timmmaaaahh) — Sole remaining original six member. Therapy cat. Senses when someone needs a cuddle.
-2. Wendy (Wendells) — Rescued in rainstorm at 5 weeks. Agile matriarch. Soccer with paper balls. Claws are real.
-3. Jimmy (Super Slim Jim) — FIV-positive. Serious illness late 2023, remarkable recovery. Laid-back.
-4. Bean (The Survivor) — Rescued Jan 2022 from under a Wendy house at a shopping centre. Was feral, blossomed with love.
-5. Jeff (The Wanderer) — Found wandering alone May 2022. Nestled into Ash's arms immediately. Occasional adventurer.
-6. Frank (Blue Eyes) — Named after Frank Sinatra. Stray visitor, not quite permanent. Peaceful demeanour, blue eyes.
-
-**In memoriam:**
-1. Lisa (Granny Cat) — Original matriarch from ~2003, lived to ~17. Passed July 2020.
-2. Moe (Fat-Boy-Fat) — Couch Commissioner. Passed 4 January 2022. Snored, did silly things, left a massive gap.
-3. Lucy (Dennis the Menace) — Cross-Burmese. Matriarch after Lisa. Talkative, welcoming. Passed 24 October 2023.
-
----
-
-## References
-
-- [website-content.md](../../docs/website-content.md) — Section: Six Cats Club
-- [Guidelines.md](../../guidelines/Guidelines.md) — Sentence case, pronouns, BEM rules
-- [Data System Documentation](../../data/README.md)
-
----
-
-**Status:** Ready to execute
-**Next:** Run audit, write report to `/reports/content-expansion-phase7/01-six-cats-expansion.md`, then run [02-lightspeed-stories.md](./02-lightspeed-stories.md)
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-expansion-phase7/01-six-cats-expansion.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

@@ -1,63 +1,21 @@
-# Sub-audit 6 — Migration task plan
+# Historical compatibility entry point
 
-**Parent:** [orchestrator.md](./orchestrator.md)
+**Do not execute the original task from this path.** This file preserves incoming path references; it is a notice, not an executable prompt or an automatic instruction to run the destination.
 
-## Instructions
+## Canonical review entry point
 
-Generate a prioritised, phased task list for the full Phosphor Icons migration.
+- [phosphor-migration/orchestrator.md](orchestrator.md)
 
-### Phase 1 — Parallel operation (Phosphor alongside Lucide)
+Use the current canonical scope only when explicitly requested. Its separate evidence, protection, failure and approval boundaries apply. No implementation, installation, task/report cleanup or publication is authorised by following this link.
 
-Tasks to enable Phosphor usage without touching existing components:
+## Preserved requirement coverage
 
-- P1-T01: Verify `@phosphor-icons/react` works in Figma Make bundler (import test)
-- P1-T02: Create `/guidelines/design-tokens/iconography.md` (from Sub-audit 4 spec)
-- P1-T03: Create `/data/mock/ui/phosphor-icons.ts` (icon comparison data)
-- P1-T04: Create `PhosphorIconsPage.tsx` dev tools page (from Sub-audit 5 spec)
-- P1-T05: Add route to DevToolsPage hub and router
-- P1-T06: Create icon CSS design tokens in `/styles/globals.css` or `/styles/blocks/icons.css`
-- P1-T07: Update `/guidelines/overview-icons.md` to document both Lucide and Phosphor
-- P1-T08: Fix any WCAG violations found in Sub-audit 3
+§3 steps 1–6: inventory/mapping prerequisites, shared-UI→page→remaining consumer batches, strings/types/wrappers/examples/docs, validation, rollback and safe package retirement gates.
 
-### Phase 2 — File-by-file migration (replace Lucide with Phosphor)
+## Historical instructions not carried forward as requirements
 
-Group files by priority:
+Automatic task-file creation/completion, held dev-tools work, fixed durations/totals, unverified API defaults and nonexistent type-check commands are withheld. No unique factual claim or historical result is certified by consolidation.
 
-**Tier 1 — Common components (highest impact, shared across all pages):**
-- Header.tsx, Footer.tsx, MobileMenu.tsx, ThemeToggle.tsx, ErrorBoundary.tsx, etc.
+## Original source and provenance
 
-**Tier 2 — UI components (shared building blocks):**
-- Breadcrumbs.tsx, SearchInput.tsx, Pagination.tsx, ShareComponent.tsx, EnhancedLightbox.tsx, etc.
-
-**Tier 3 — Page components (individual pages):**
-- Blog pages, portfolio pages, video pages, event pages, about pages, dev tools pages
-
-**Tier 4 — Cleanup:**
-- Remove `/lib/icons-set-a.tsx` through `icons-set-e.tsx`
-- Remove `/lib/icon-base.tsx`
-- Remove `/lib/icons.ts`
-- Update `vite.config.ts` optimizeDeps
-- Update mock data string icon references
-- Update all guideline `.md` files
-- Update `IconLibraryPage.tsx` (merge with or replace by PhosphorIconsPage)
-- Update `StyleGuidePage.tsx` type references
-
-### Verification per batch
-
-After each tier:
-- `npm run type-check`
-- `npm run build`
-- Visual spot-check of affected pages (light + dark mode)
-- Lighthouse accessibility audit
-
-### Effort estimates
-
-For each task, estimate:
-- Lines of code changed
-- Number of files touched
-- Risk level (low/medium/high)
-- Dependencies (which tasks must complete first)
-
-## Output format
-
-Write the complete task list to `/tasks/phosphor-migration-tasks.md`.
+[Full original at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/phosphor-migration/06-migration-tasks.md). All original detail remains available there for comparison; historical instructions are evidence, not additional authority. Proposed notice prepared on 24 October 2026.

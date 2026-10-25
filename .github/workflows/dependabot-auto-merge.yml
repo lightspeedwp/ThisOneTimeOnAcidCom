@@ -1,0 +1,240 @@
+---
+name: Dependabot Auto-Merge
+
+# Trigger on:
+# 1. Completion of CI checks (pull_request_target)
+# 2. Scheduled daily run to handle stale/blocked PRs
+# 3. Manual trigger for recovery
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    branches: [develop, main]
+
+  schedule:
+    # Run daily at 4 AM UTC to auto-merge successful Dependabot PRs
+    - cron: '0 4 * * *'
+
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Dry run (no merges)'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot-auto-merge:
+    name: Auto-merge Dependabot PRs
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Get Dependabot PRs
+        id: dependabot-prs
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              creator: 'dependabot[bot]',
+              base: 'develop',
+              per_page: 50,
+              sort: 'created',
+              direction: 'asc'
+            });
+
+            const results = [];
+
+            for (const pr of prs) {
+              // Check if all required checks pass
+              const { data: checks } = await github.rest.checks.listForRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: pr.head.sha,
+                per_page: 100
+              });
+
+              const failedChecks = checks.check_runs.filter(
+                check => check.status === 'completed' && check.conclusion !== 'success'
+              );
+
+              const allChecksPassed = checks.check_runs.length > 0 && failedChecks.length === 0;
+
+              results.push({
+                number: pr.number,
+                title: pr.title,
+                mergeable: pr.mergeable,
+                mergeable_state: pr.mergeable_state,
+                allChecksPassed,
+                failedChecks: failedChecks.map(c => c.name),
+                autoMergeable: pr.mergeable === true && allChecksPassed
+              });
+            }
+
+            return results;
+
+      - name: Auto-merge ready PRs
+        id: merge-results
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prs = ${{ steps.dependabot-prs.outputs.result }};
+            const dryRun = '${{ github.event.inputs.dry-run }}' === 'true';
+            const merged = [];
+            const skipped = [];
+            const failed = [];
+
+            for (const pr of prs) {
+              if (!pr.autoMergeable) {
+                skipped.push({
+                  number: pr.number,
+                  reason: !pr.mergeable ? `Merge conflicts (${pr.mergeable_state})` :
+                           !pr.allChecksPassed ? `Checks not ready: ${pr.failedChecks.join(', ')}` :
+                           'Unknown'
+                });
+                continue;
+              }
+
+              try {
+                if (!dryRun) {
+                  const result = await github.rest.pulls.merge({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: pr.number,
+                    merge_method: 'squash'
+                  });
+
+                  merged.push({
+                    number: pr.number,
+                    title: pr.title,
+                    merged_at: result.merged_at
+                  });
+
+                  core.notice(`✅ Merged PR #${pr.number}`);
+                } else {
+                  merged.push({
+                    number: pr.number,
+                    title: pr.title,
+                    merged_at: '(dry-run)',
+                    dryRun: true
+                  });
+
+                  core.notice(`🔍 [DRY-RUN] Would merge PR #${pr.number}`);
+                }
+              } catch (error) {
+                failed.push({
+                  number: pr.number,
+                  error: error.message
+                });
+
+                core.warning(`❌ Failed to merge PR #${pr.number}: ${error.message}`);
+              }
+            }
+
+            // Summary
+            core.summary
+              .addHeading('Dependabot Auto-Merge Results')
+              .addHeading(`✅ Merged: ${merged.length}`, 3);
+
+            if (merged.length > 0) {
+              core.summary.addList(
+                merged.map(m => `PR #${m.number}: ${m.title}`)
+              );
+            }
+
+            core.summary.addHeading(`⏭️ Skipped: ${skipped.length}`, 3);
+            if (skipped.length > 0) {
+              core.summary.addList(
+                skipped.map(s => `PR #${s.number}: ${s.reason}`)
+              );
+            }
+
+            if (failed.length > 0) {
+              core.summary.addHeading(`❌ Failed: ${failed.length}`, 3);
+              core.summary.addList(
+                failed.map(f => `PR #${f.number}: ${f.error}`)
+              );
+            }
+
+            core.setOutput('merged', JSON.stringify(merged));
+            core.setOutput('skipped', JSON.stringify(skipped));
+            core.setOutput('failed', JSON.stringify(failed));
+
+      - name: Report results
+        if: always()
+        run: |
+          echo "### Dependabot Auto-Merge Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Merged:** ${{ fromJSON(steps.merge-results.outputs.merged).length }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Skipped:** ${{ fromJSON(steps.merge-results.outputs.skipped).length }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Failed:** ${{ fromJSON(steps.merge-results.outputs.failed).length }}" >> $GITHUB_STEP_SUMMARY
+
+  # Secondary job: Request rebases for conflicted Dependabot PRs
+  dependabot-rebase-conflicts:
+    name: Request rebase for conflicted Dependabot PRs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Request rebase on conflicts
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              creator: 'dependabot[bot]',
+              base: 'develop',
+              per_page: 50
+            });
+
+            for (const pr of prs) {
+              // Check if PR has merge conflicts
+              if (pr.mergeable === false && pr.mergeable_state === 'dirty') {
+                // Check if rebase was already requested recently
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  per_page: 20
+                });
+
+                const recentRebase = comments.some(comment =>
+                  comment.body.includes('@dependabot rebase') &&
+                  new Date(comment.created_at) > new Date(Date.now() - 2 * 60 * 60 * 1000) // Last 2 hours
+                );
+
+                if (!recentRebase) {
+                  try {
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: pr.number,
+                      body: '@dependabot rebase'
+                    });
+
+                    core.notice(`🔄 Requested rebase for PR #${pr.number}`);
+                  } catch (error) {
+                    core.warning(`Failed to comment on PR #${pr.number}: ${error.message}`);
+                  }
+                }
+              }
+            }

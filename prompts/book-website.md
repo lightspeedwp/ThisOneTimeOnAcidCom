@@ -1,93 +1,53 @@
-# Prompt: Build "This one time on acid..." Book Website
+# Book-website requirements reconciliation
 
-**Target Scope:** Global website creation
-**Reference Content:** `../../content/book/this-one-time-on-acid-brief.md`
+## 1. Objective
 
-## 1. Goal
-Build a responsive, multi-page book website for a project called **This one time on acid...** by **Ash Shaw**, adhering to the provided brief and Figma Make constraints.
+Reconcile the book website’s current requirements, source content and unresolved decisions; produce an evidence-led specification draft, not a fresh site build.
 
-## 2. Master Prompt
+## 2. Inputs and scope
 
-Build a responsive, multi-page book website for a project called **This one time on acid...** by **Ash Shaw**.
+[repository instructions](../AGENTS.md); [guideline reading order](../guidelines/README.md); [book brief](../content/book/this-one-time-on-acid-brief.md); [registered routes](../src/app/routes.ts); [package manifest](../package.json).
 
-This website is for a **hybrid memoir and creative-life guide**. The tone is **cult, artistic, psychedelic, editorial, intimate, vivid, emotionally direct, and high-conviction**. It should feel like a dark neon cultural artefact, not a portfolio site and not a corporate author site.
+Inputs: current book brief, existing site implementation, manuscript and author-approved material. Treat the original long book-website specification as historical input rather than current approval.
 
-The site’s main purpose is to:
-1. capture email signups before visitors can read the rough draft,
-2. build credibility for readers, publishers, media, and event organisers,
-3. prepare for later pre-orders and a future print edition,
-4. support speaking, workshops, and live appearances.
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-The design must answer these questions within the first screen or two:
-- What is the book?
-- Who is it for?
-- Why should they care?
-- Why is Ash the right person to write it?
-- What should the visitor do next?
+## 3. Audit steps
 
-Use a dark editorial design system with:
-- atomic black background,
-- neon pink primary accent,
-- neon yellow secondary accent,
-- warm off-white body text,
-- strong typography,
-- subtle grain and glow,
-- clear spacing,
-- minimal but expressive motion.
+1. Inventory the current book-first journeys: discover the book, inspect/read the draft, join the waitlist, discover the author, Journal, events/speaking and media/contact. Use actual routes and access rules; do not create a parallel makeup portfolio, shop, API or gated account system.
 
-Use a maximum of two fonts: a display grotesk for headings and a clean sans-serif for body copy.
+2. Compare book positioning, synopsis, chapter samples, manuscript status, author biography, endorsements and publication/availability claims with their source and revision. Leave unknowns explicit; do not invent a title history, release date, testimonial or live preorder.
 
-Build the following pages:
-- Home
-- The Book
-- Read the Draft
-- About Ash
-- Journal
-- Events
-- Speaking & Workshops
-- Waitlist
-- Contact
-- Thank You / Draft Unlocked
-- Media / Press
+3. Compare current art direction with the brief: near-black #0B0B10, pink #FF3AAE, yellow #F4FF3C and at most two fonts. Verify current tokens and intentional exceptions rather than replacing every colour or adding fonts; preserve the readable light theme and reduced-motion behaviour.
 
-Top navigation:
-Home / The Book / Read the Draft / About Ash / Journal / Events / Speaking & Workshops / Waitlist / Contact
+4. Assess responsive navigation, accessible controls, search, signup validation/success/error/privacy, reader access/deep links, book imagery and content hierarchy. Distinguish visible interface from verified submission, email delivery or authorisation behaviour.
 
-Primary CTA everywhere: **Unlock the Draft**
-Secondary CTA: **Join the Waitlist**
+5. Catalogue historical identity, route, content-model, dependency and implementation proposals as adopt, adapt, hold or reject with evidence. Keep legitimate memoir makeup/festival/ADHD/cycling/company/cat material when relevant to the book; removing a former website reference does not authorise erasing the author’s history.
 
-Important content and layout requirements:
-- Home must lead with the book, not Ash’s portfolio
-- Include an email signup form in the hero
-- Include a clear explanation of the book as a hybrid memoir and creative-life guide
-- Include audience framing for misfits, makers, dancers, seekers, festival people, and people wired differently
-- Include a section explaining why the book matters
-- Include a section showing what readers will get: stories, lessons, energy, and permission
-- Include an author proof section explaining why Ash is the right person to write it
-- Include a locked draft preview section that makes the email gate feel desirable
-- Include Journal, Events, and Speaking teasers on the homepage
-- Create reusable card systems for Journal posts, events, speaking topics, and themes
-- Create mobile, tablet, and desktop responsive layouts
-- Keep the site conversion-focused and book-first
-- Do not create portfolio templates or lead with services
-- Do not make it look like a generic self-help site or beauty site
+6. Present the smallest supported requirements change with acceptance criteria, dependencies, risks and unresolved author/design decisions. No automatic implementation, content generation, route creation, new dependency, tracker update or deployment.
 
-Create a sticky header, polished footer, strong hero, editorial content sections, clear CTA repetition, and clean form states.
+## 4. Missing evidence and permission boundaries
 
-Include the exact copy from the attached text brief wherever possible. Prioritise content hierarchy and visual storytelling over gimmicks.
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-## 3. Iteration / Follow-up Prompts
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-If the initial generation requires refinement, use these follow-up prompts to shape the output:
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-### Follow-up prompt 1 — make it more book-first
-Reduce any sense that this is a personal portfolio. Increase the prominence of the book cover, book headline, email capture, and the “What this book is” section. Make the homepage feel more like a cult book launch site and less like a creator homepage.
+## 5. Success criteria
 
-### Follow-up prompt 2 — sharpen the art direction
-Push the visual language further toward 80s/90s psychedelic editorial design. Add more contrast, more dark atmosphere, more controlled neon glow, and stronger typographic confidence. Keep it premium and readable.
+- [ ] Requirements distinguish current authority from historical site-generation instructions.
+- [ ] Book-first journeys and sourced memoir material are preserved.
+- [ ] Any conflict or proposed future commerce/reader capability is an explicit decision, not an assumed ban or commitment.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-### Follow-up prompt 3 — improve the conversion funnel
-Make the email capture more persuasive. Increase the visibility of the hero signup form, improve the draft teaser block, and repeat the primary CTA more clearly through the homepage and Read the Draft page.
+## 6. Report output
 
-### Follow-up prompt 4 — make it easier to map to WordPress
-Simplify anything too app-like or overly custom. Use reusable sections and patterns that can translate easily to WordPress blocks and templates.
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
+
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
+
+## 7. Revision provenance
+
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/book-website.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

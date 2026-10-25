@@ -7,8 +7,8 @@ status: "COMPLETE"
 
 # Dark Mode FINAL FIX - Section Background Override
 
-**Created:** March 12, 2026  
-**Status:** ✅ COMPLETE  
+**Created:** March 12, 2026
+**Status:** ✅ COMPLETE
 
 ---
 
@@ -16,14 +16,16 @@ status: "COMPLETE"
 
 **The dark mode CSS wasn't targeting the `.section` class at all!**
 
-### ❌ What Was Wrong:
+### ❌ What Was Wrong
 
 Looking at `/styles/themes/dark.css`, there were NO rules for:
+
 - `.dark .section` background colors
 - `.dark .section:not(.section--dark)` light section styling
 - Section-specific text color overrides
 
 **Result:**
+
 - Light sections stayed with their default background (transparent or inherited)
 - No #F0F0F0 light gray background was applied
 - Text colors didn't adapt to section backgrounds
@@ -33,7 +35,8 @@ Looking at `/styles/themes/dark.css`, there were NO rules for:
 
 ## ✅ THE FIX
 
-**Created `/styles/blocks/book-dark-mode.css` (v4.0.0) with proper section targeting:**
+**Created `/styles/blocks/book-dark-mode.css` (v4.0.0) with proper section
+targeting:**
 
 ### **Key CSS Rules:**
 
@@ -51,9 +54,11 @@ body.dark .section--dark {
   background-color: #171722 !important;
   color: #F6F2EB;
 }
-```
+
+```text
 
 **Why this works:**
+
 - `:not(.section--dark)` targets ONLY light sections
 - `!important` ensures override of any conflicting rules
 - Both `.dark` and `body.dark` selectors for compatibility
@@ -62,19 +67,13 @@ body.dark .section--dark {
 
 ## 📊 COMPONENT STRUCTURE
 
-**From `/components/pages/book-site/BookHomePage.tsx`:**
+## From `/components/pages/book-site/BookHomePage.tsx`
 
 ```tsx
 // Hero (always dark)
 <section className="hero section">
-  
+
 // Light section
-<section className="section section--dark">
-
-// Light section  
-<section className="section">
-
-// Dark section
 <section className="section section--dark">
 
 // Light section
@@ -91,9 +90,17 @@ body.dark .section--dark {
 
 // Light section
 <section className="section">
-```
+
+// Dark section
+<section className="section section--dark">
+
+// Light section
+<section className="section">
+
+```text
 
 **Pattern:**
+
 - `.section` alone = Light section → Gets #F0F0F0 in dark mode
 - `.section--dark` = Dark section → Gets #171722 in dark mode
 - `.hero` = Always dark → Gets #0F0F0F
@@ -110,7 +117,8 @@ Text: #1a1a1a (dark)
 Body: #4a4a4a (medium gray)
 Eyebrow: #FF10F0 (neon pink)
 Tags: white with light border
-```
+
+```text
 
 ### **Dark Sections (#171722)**
 
@@ -120,7 +128,8 @@ Text: #F6F2EB (light cream)
 Cards: rgba(15,15,15,0.8) with pink borders
 Card hover: Intense pink + yellow glow
 Eyebrow: #FF10F0 with glow
-```
+
+```text
 
 ### **Hero Section (#0F0F0F)**
 
@@ -128,7 +137,8 @@ Eyebrow: #FF10F0 with glow
 Background: #0F0F0F (atomic black)
 Text: #FFFFFF (white)
 Book cover: Pink/magenta gradient with glow
-```
+
+```text
 
 ---
 
@@ -141,16 +151,19 @@ Book cover: Pink/magenta gradient with glow
 .section { background: transparent; }
 
 /* High specificity - overrides in dark mode */
-.dark .section:not(.section--dark) { 
-  background-color: #F0F0F0 !important; 
+.dark .section:not(.section--dark) {
+  background-color: #F0F0F0 !important;
 }
-```
+
+```text
 
 ### **Cascade Order:**
 
 1. `/styles/globals.css` - Base `.section` styles
-2. `/styles/themes/dark.css` - General dark mode
-3. `/styles/blocks/book-dark-mode.css` - **Book-specific section overrides** ← NEW
+
+1. `/styles/themes/dark.css` - General dark mode
+
+1. `/styles/blocks/book-dark-mode.css` - **Book-specific section overrides** ← NEW
 
 ### **Import in globals.css:**
 
@@ -160,7 +173,8 @@ Book cover: Pink/magenta gradient with glow
 @import "./themes/dark.css";
 @import "./themes/dark-extended.css";
 @import "./blocks/book-dark-mode.css";  /* ← Loaded last */
-```
+
+```text
 
 ---
 
@@ -186,7 +200,8 @@ Book cover: Pink/magenta gradient with glow
   background-color: #0F0F0F !important;
   color: #F6F2EB;
 }
-```
+
+```text
 
 ### **2. Text Colors on Light Sections**
 
@@ -212,7 +227,8 @@ Book cover: Pink/magenta gradient with glow
 .dark .section:not(.section--dark) .eyebrow {
   color: #FF10F0;
 }
-```
+
+```text
 
 ### **3. Cards on Dark Sections**
 
@@ -229,13 +245,14 @@ Book cover: Pink/magenta gradient with glow
 .dark .section--dark .card:hover {
   background-color: rgba(15, 15, 15, 0.95);
   border-color: #FF10F0;
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.6),
     0 0 30px rgba(255, 16, 240, 0.4),
     0 0 15px rgba(244, 255, 60, 0.2);
   transform: translateY(-4px);
 }
-```
+
+```text
 
 ### **4. Tags on Light Sections**
 
@@ -245,7 +262,8 @@ Book cover: Pink/magenta gradient with glow
   border: 1px solid #e5e5e5;
   color: #1a1a1a;
 }
-```
+
+```text
 
 ### **5. Locked Content (Dark Sections)**
 
@@ -259,7 +277,8 @@ Book cover: Pink/magenta gradient with glow
   background-color: rgba(15, 15, 15, 0.8);
   border: 2px solid rgba(255, 16, 240, 0.3);
 }
-```
+
+```text
 
 ---
 
@@ -268,6 +287,7 @@ Book cover: Pink/magenta gradient with glow
 ### 1. `/styles/blocks/book-dark-mode.css` — COMPLETE REWRITE (v4.0.0)
 
 **Added:**
+
 - ✅ Section background overrides (`.section` and `.section--dark`)
 - ✅ Text color overrides for each section type
 - ✅ Card styling for dark sections
@@ -300,7 +320,7 @@ Book cover: Pink/magenta gradient with glow
 
 ## 🎯 EXPECTED VISUAL STRUCTURE
 
-```
+```text
 ┌─────────────────────────────────────────┐
 │ Hero: #0F0F0F (atomic black)            │
 │  • White text                            │
@@ -338,7 +358,8 @@ Book cover: Pink/magenta gradient with glow
 │  • Dark text                             │
 │  • Pink heading                          │
 └─────────────────────────────────────────┘
-```
+
+```text
 
 ---
 
@@ -347,16 +368,19 @@ Book cover: Pink/magenta gradient with glow
 ### **Status:** ✅ Ready for production
 
 ### **Breaking Changes:** None
+
 - Light mode unaffected
 - Only dark mode `.section` styling added
 - All existing dark mode rules preserved
 
 ### **Performance:** No impact
+
 - Small CSS file (~6KB)
 - No JavaScript changes
 - Loaded with other theme CSS
 
 ### **Browser Support:** All modern browsers
+
 - `:not()` selector widely supported
 - `!important` works everywhere
 - No experimental features
@@ -368,26 +392,37 @@ Book cover: Pink/magenta gradient with glow
 ### **Why It Failed Before:**
 
 1. **Generic dark mode CSS** (`/styles/themes/dark.css`) doesn't target `.section` backgrounds
-2. **Book-specific sections** need explicit overrides
-3. **Missing `:not(.section--dark)` selector** to differentiate light vs dark sections
-4. **No section-aware text colors**
+
+1. **Book-specific sections** need explicit overrides
+
+1. **Missing `:not(.section--dark)` selector** to differentiate light vs dark sections
+
+1. **No section-aware text colors**
 
 ### **Why It Works Now:**
 
 1. ✅ **Dedicated book CSS file** with section-specific rules
-2. ✅ **`:not()` selector** targets only light sections
-3. ✅ **`!important`** ensures overrides apply
-4. ✅ **Section-aware text colors** for readability
-5. ✅ **Loaded last** in cascade for maximum specificity
+
+1. ✅ **`:not()` selector** targets only light sections
+
+1. ✅ **`!important`** ensures overrides apply
+
+1. ✅ **Section-aware text colors** for readability
+
+1. ✅ **Loaded last** in cascade for maximum specificity
 
 ---
 
 ## 📝 SUMMARY
 
-**Problem:** Dark mode didn't style `.section` elements, so light sections had no background  
-**Root Cause:** Missing CSS rules for `.section:not(.section--dark)` in dark mode  
-**Solution:** Created `/styles/blocks/book-dark-mode.css` with explicit section targeting  
-**Result:** Light sections now have #F0F0F0 background, dark sections stay dark, text adapts!  
+**Problem:** Dark mode didn't style `.section` elements, so light sections had
+no background
+**Root Cause:** Missing CSS rules for `.section:not(.section--dark)` in dark
+mode
+**Solution:** Created `/styles/blocks/book-dark-mode.css` with explicit section
+targeting
+**Result:** Light sections now have #F0F0F0 background, dark sections stay dark,
+text adapts!
 
 **The book site dark mode is NOW FULLY WORKING!** 🎨🚀
 
@@ -401,7 +436,7 @@ This ensures the new CSS file loads and overrides any cached styles.
 
 ---
 
-**DEPLOYMENT:** Ready for immediate deployment ✅  
-**TESTING:** Verify on book homepage (`/book-home` route)  
-**COMPATIBILITY:** All browsers, no breaking changes  
+**DEPLOYMENT:** Ready for immediate deployment ✅
+**TESTING:** Verify on book homepage (`/book-home` route)
+**COMPATIBILITY:** All browsers, no breaking changes
 **PERFORMANCE:** Negligible impact (<6KB CSS)

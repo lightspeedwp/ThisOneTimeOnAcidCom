@@ -1,287 +1,54 @@
-# Content specimens dev tools — orchestrator
-
-**Created:** March 4, 2026
-**Version:** 1.0.0
-**Scope:** New dev tools section with content-type specimens (rich text, cards, page layout previews), light/dark mode, tabbed interface, per-content-type neon colours
-
----
-
-## Overview
-
-Create a new "Content specimens" section within the Developer Tools hub. This section provides comprehensive visual reference for how each content type (blog, portfolio, video, podcast, event) is styled across the site. Three sub-tool pages, all supporting light and dark mode with per-content-type neon rainbow colours.
-
-### New dev tools to create
-
-| Tool | Route | Purpose |
-|---|---|---|
-| Rich text specimens | `/dev-tools/rich-text-specimens` | Every typography/layout element inside a single post body |
-| Content card specimens | `/dev-tools/content-cards` | 5 card variants per content type in grid, list, featured, sidebar, mini contexts |
-| Page layout browser | `/dev-tools/page-layouts` | Miniature previews of each content type's detail page layout |
-
----
-
-## Critical rules
-
-- **[Guidelines.md](../../guidelines/Guidelines.md)** — All rules apply (BEM-only, sentence case, bundler safety, no Tailwind)
-- **Light and dark mode** — Every specimen must be viewable in both themes. Include a theme toggle or side-by-side preview.
-- **Neon colour assignment** — Each content type gets its own signature neon colour:
-
-| Content type | Neon colour | CSS variable |
-|---|---|---|
-| Blog | Neon pink | `--wp--preset--color--neon-pink` |
-| Portfolio | Neon green | `--wp--preset--color--neon-green` |
-| Video | Neon blue | `--wp--preset--color--neon-blue` |
-| Podcast | Neon purple | `--wp--preset--color--neon-purple` |
-| Event | Neon orange | `--wp--preset--color--neon-orange` |
-
-- **FAQ sections** — Each content type tab/section includes a FAQ section styled with that content type's neon colour
-- **Sticker graphics** — Use sticker images from `/data/mock/images/sticker-graphics.ts` as decorative elements
-- **No hardcoded content** — All specimen text/data in `/data/mock/ui/` files
-- **Breadcrumbs** — `Home > Developer Tools > [Page Name]`
-- **SEO** — Register in `/data/mock/seo.ts`
-- **Bundler safety** — `var` declarations, no arrow callbacks, no destructuring, `grab()`/`arrayGet()` helpers
-
----
-
-## Sub-audit 1: Rich text specimens page
-
-**Prompt:** [01-rich-text-specimens.md](./01-rich-text-specimens.md)
-**Route:** `/dev-tools/rich-text-specimens`
-**Component:** `/components/pages/dev-tools/RichTextSpecimensPage.tsx`
-**CSS:** `/styles/blocks/rich-text-specimens.css`
-**Data:** `/data/mock/ui/rich-text-specimens.ts`
-
-### Requirements
-
-1. **Tabbed interface** — One tab per content type (Blog, Portfolio, Video, Podcast, Event)
-2. **Each tab shows** a complete rich-text specimen for that content type, demonstrating every available styling element within a single post/detail page:
-   - Headings (h1–h6)
-   - Paragraphs with emphasis, strong, links
-   - Blockquotes and pull quotes
-   - Ordered and unordered lists
-   - Images (full-width, inline, captioned)
-   - Code blocks and inline code
-   - Tables
-   - Horizontal rules
-   - Callout boxes / info panels
-   - Video embeds (placeholder)
-   - Gallery grids
-   - Timeline sections (for events)
-   - Tags and category badges
-   - Share buttons
-   - Author bio section (blog)
-   - Related content section
-3. **Tab accent** — Each tab uses its assigned neon colour for the active indicator
-4. **FAQ section per tab** — 3 FAQs per content type, styled with that type's neon colour accent
-5. **Theme toggle** — Button to switch between light and dark mode within the page (or use the global theme toggle)
-6. **Responsive** — Specimens must look correct at all breakpoints
-
-### Content type-specific elements
-
-| Content type | Unique elements to demonstrate |
-|---|---|
-| Blog | Author bio, reading time, category badge, tag chips, related posts, social share |
-| Portfolio | Image gallery grid, lightbox trigger, event/location metadata, techniques list |
-| Video | Video embed placeholder, duration badge, view count, play button overlay |
-| Podcast | Episode number, season badge, duration, transcript section, guest info |
-| Event | Date range, location map placeholder, travel method badge, edition history, social links |
-
----
-
-## Sub-audit 2: Content card specimens page
-
-**Prompt:** [02-content-card-specimens.md](./02-content-card-specimens.md)
-**Route:** `/dev-tools/content-cards`
-**Component:** `/components/pages/dev-tools/ContentCardSpecimensPage.tsx`
-**CSS:** `/styles/blocks/content-card-specimens.css`
-**Data:** `/data/mock/ui/content-card-specimens.ts`
-
-### Requirements
-
-1. **5 card variants per content type** — Each content type (blog, portfolio, video, podcast, event) gets 5 distinct card designs:
-
-| Variant | Description | Use case |
-|---|---|---|
-| Standard | Default grid card with image, title, meta, excerpt | Archive/listing pages |
-| Featured | Large hero card, full-width image, overlay text | Homepage features, top of archives |
-| Compact | Small horizontal card, thumbnail left, text right | Sidebar, related content |
-| Minimal | Text-only with subtle border, no image | Dense lists, search results |
-| Editorial | Magazine-style, large typography, artistic crop | Special features, highlighted content |
-
-2. **Context demonstrations** — Show each variant in:
-   - 3-column grid (standard archive view)
-   - 2-column grid (tablet)
-   - 1-column list (mobile / list view)
-   - Sidebar widget (narrow column)
-   - Featured row (1 large + 2 small)
-
-3. **Neon colour accents** — Each content type's cards use its assigned neon colour for:
-   - Hover border glow
-   - Category/type badge
-   - Active/focus indicators
-
-4. **Hover states** — All cards demonstrate:
-   - Lift shadow on hover
-   - Neon border glow (content-type colour)
-   - Image zoom or reveal effect
-   - Focus ring for keyboard navigation
-
-5. **Light and dark mode** — Every card rendered in both themes, side by side or with theme toggle
-
-6. **This REPLACES or EXTENDS the existing CardSpecimenPage** — The current `/dev-tools/cards` page has 6 basic card types. This new page is a superset with 5 variants × 5 content types = 25 card specimens, plus the existing tool/tip card types.
-
-### Card design direction
-
-Cards should feel **bold, artistic, and energetic** — not corporate. Design cues:
-- Neon accent borders and glows
-- Category badges with neon background colours
-- Strong contrast between image and text sections
-- Hover effects that feel alive (glow, lift, subtle animation)
-- Portfolio cards especially should feel different from blog cards — more visual, less text-heavy
-
----
-
-## Sub-audit 3: Page layout browser
-
-**Prompt:** [03-page-layout-browser.md](./03-page-layout-browser.md)
-**Route:** `/dev-tools/page-layouts`
-**Component:** `/components/pages/dev-tools/PageLayoutBrowserPage.tsx`
-**CSS:** `/styles/blocks/page-layout-browser.css`
-**Data:** `/data/mock/ui/page-layout-browser.ts`
-
-### Requirements
-
-1. **Template browser interface** — Grid of miniature page previews, like a template selection screen:
-   - Thumbnail preview of each page layout (rendered as a simplified wireframe/schematic, not a full screenshot)
-   - Click to expand into a larger preview
-   - Label with page name and content type
-
-2. **Pages to include:**
-
-| Content type | Pages |
-|---|---|
-| Blog | Blog archive, Blog post detail, Blog category archive, Blog tag archive |
-| Portfolio | Portfolio archive, Portfolio detail, Portfolio category, Portfolio tag |
-| Video | Video archive, Video detail, Video category |
-| Podcast | Podcast archive, Podcast detail, Podcast category |
-| Event | Event archive, Event detail |
-| About | About main, Hidden About landing, About sub-page (generic) |
-| Other | Home, Contact, FAQ, Style Guide, Dev Tools, Gear, Stickers, Feedback |
-
-3. **Wireframe/schematic style** — Each layout preview should be a **simplified structural diagram** (not a screenshot or full render) showing:
-   - Header/nav placeholder
-   - Hero section shape
-   - Content area blocks (text columns, image areas, sidebar)
-   - Grid/card layout areas
-   - Footer placeholder
-   - Labelled with BEM section names
-
-4. **Light and dark variants** — Toggle between themes to see how layout elements shift
-
-5. **Click to expand** — Clicking a layout preview opens a larger modal/panel with:
-   - Annotated wireframe showing key sections
-   - List of components used on that page
-   - List of CSS files imported
-   - Route path
-   - Neon colour assignment (if applicable)
-
-6. **Category filtering** — Filter layouts by content type using tabs or dropdown
-
----
-
-## Integration with dev tools hub
-
-### Update DevToolsPage
-
-Add a new category group to the dev tools hub:
-
-```typescript
-{
-  id: 'content-specimens',
-  title: 'Content specimens',
-  description:
-    'Visual reference for content-type styling — rich text elements, card variants, and page layout wireframes across all content types.',
-  accent: 'cyan',  // New accent colour — neon cyan
-  tools: [
-    'rich-text-specimens',
-    'content-cards',
-    'page-layouts',
-  ],
-}
-```
-
-### New tool entries
-
-Add 3 new entries to the `tools` array in `/data/mock/ui/dev-tools.ts`:
-
-```typescript
-{
-  id: 'rich-text-specimens',
-  title: 'Rich text specimens',
-  description: 'Every typography and layout element available inside post content bodies — blockquotes, pull quotes, galleries, tables, and more — for each content type.',
-  href: '/dev-tools/rich-text-specimens',
-  icon: 'FileText',
-  badge: 'Content',
-},
-{
-  id: 'content-cards',
-  title: 'Content card gallery',
-  description: '5 card variants for each content type — standard, featured, compact, minimal, and editorial — with hover effects, neon accents, and theme previews.',
-  href: '/dev-tools/content-cards',
-  icon: 'LayoutGrid',
-  badge: 'Content',
-},
-{
-  id: 'page-layouts',
-  title: 'Page layout browser',
-  description: 'Miniature wireframe previews of every page template — click to inspect components, CSS files, and structural anatomy.',
-  href: '/dev-tools/page-layouts',
-  icon: 'Browser',
-  badge: 'Content',
-},
-```
-
-### Route registration
-
-Add routes in the router configuration for all 3 new pages.
-
-### SEO entries
-
-Add entries to `/data/mock/seo.ts` for `devToolsSEO.richTextSpecimens`, `devToolsSEO.contentCards`, `devToolsSEO.pageLayouts`.
-
-### Breadcrumb entries
-
-Add breadcrumb builder entries using the existing `devToolBreadcrumbs()` pattern.
-
----
-
-## Deliverables
-
-1. **3 new dev tools pages** (components + CSS + data files)
-2. **Updated DevToolsPage** with new "Content specimens" category
-3. **Updated dev-tools data** (tools, categories, SEO, breadcrumbs)
-4. **Routes registered** for all 3 pages
-5. **Report:** `/reports/content-specimens/implementation-report.md`
-6. **Task list:** `/tasks/content-specimens-tasks.md`
-7. **Master task list** updated
-
----
-
-## Content neon colour legend (reference)
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│              CONTENT TYPE → NEON COLOUR MAPPING                  │
-└─────────────────────────────────────────────────────────────────┘
-
-  BLOG         ██████  #FF10F0  Neon Pink      ← Articles, posts, insights
-  PORTFOLIO    ██████  #39FF14  Neon Green     ← UV makeup gallery, artwork
-  VIDEO        ██████  #1F51FF  Neon Blue      ← Tutorials, showcases, reels
-  PODCAST      ██████  #BE00FE  Neon Purple    ← Episodes, transcripts
-  EVENT        ██████  #FF5F1F  Neon Orange    ← Festivals, gatherings
-  EBOOK        ██████  #FFFF00  Neon Yellow    ← Book chapters, reading
-  STICKERS     ██████  #00F7FF  Neon Cyan      ← Sticker art, graphics
-  DEV TOOLS    ██████  #FF3131  Neon Red       ← Internal tools, testing
-```
-
-This mapping should be documented in a guideline file and referenced by all content-type-aware components.
+**Originally created:** March 4, 2026
+
+**Original version:** 1.0.0
+
+# Book-site specimen review coordinator
+
+## 1. Objective
+
+Coordinate the two active specimen reviews while preserving the page-layout/browser hold.
+
+## 2. Inputs and scope
+
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
+
+Inputs: sibling 01 rich text, 02 cards and held 03-page-layout-browser.md; current /style-guide route and actual consumers. The root Markdown-expansion prompt is a historical alias, not a separate execution path.
+
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
+
+## 3. Audit steps
+
+1. Inventory existing renderer/specimen/card support and approved design requirements. Establish which content types and states actually exist, rather than inheriting old 21-type or 25-variant targets.
+
+2. Assess rich-text syntax/support with sibling 01 and current card/layout states with sibling 02; reconcile metadata, colours, typography and accessibility gaps across both.
+
+3. Keep sibling 03 byte-for-byte unchanged and report its browser/page-layout requirement as held. Neither a canonical review nor a missing route establishes cancellation or completion.
+
+4. Propose use of existing style-guide surfaces where appropriate; new dev-tools routes, implementation, dependency changes and design-system expansion require separate approval.
+
+5. Return one coverage/dependency report with source revisions, active/held scopes, exact specimen candidates and untested states. Do not execute children, save tasks or fabricate completed tests.
+
+## 4. Missing evidence and permission boundaries
+
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
+
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
+
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
+
+## 5. Success criteria
+
+- [ ] Two active children and the held third child are explicitly distinguished.
+- [ ] The root alias’s useful checks are retained across rich-text and card reviews.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
+
+## 6. Report output
+
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
+
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
+
+## 7. Revision provenance
+
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-specimens/orchestrator.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

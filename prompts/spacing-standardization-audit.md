@@ -1,239 +1,55 @@
-# 🎨 Global Spacing Standardization Audit Prompt
+**Original version:** 2.0.0 — Global codebase review scope
 
-This prompt defines the scope and steps for a comprehensive global codebase review to identify and standardize inconsistent spacing patterns across the Ash Shaw Makeup Portfolio.
+# Book-site spacing consistency audit
 
-## 🎯 Objective
+## 1. Objective
 
-Conduct a full codebase audit to eliminate spacing inconsistencies and enforce the strict BEM semantic spacing system defined in the design tokens. Ensure zero hardcoded values, zero Tailwind utilities, and 100% compliance with the established spacing architecture.
+Identify evidenced spacing inconsistencies in current book-site layouts and propose token-aligned fixes with justified exceptions.
 
-## 📋 Comprehensive Audit Scope
+## 2. Inputs and scope
 
-### 1. CSS Files — Complete Review
-**Target:** All files in `/styles/` (all subdirectories)
+[repository instructions](../AGENTS.md); [guideline reading order](../guidelines/README.md); [book brief](../content/book/this-one-time-on-acid-brief.md); [registered routes](../src/app/routes.ts); [package manifest](../package.json).
 
-**Check for:**
-- ❌ Hardcoded pixel values for padding/margin/gap (e.g., `padding: 16px`, `margin-top: 32px`)
-- ❌ Hardcoded rem values (e.g., `padding: 2rem`, `gap: 1.5rem`)
-- ❌ Hardcoded percentage values (e.g., `margin: 0 auto`, non-token percentages)
-- ❌ Tailwind utility classes in CSS files (should not exist in BEM architecture)
-- ❌ Inline `calc()` expressions not using CSS custom properties
-- ✅ Verify all spacing uses CSS custom properties: `var(--wp--preset--spacing--*)`
+Inputs: `src/styles/` and token definitions; `src/app/components/`, `src/app/data/mock/`, `src/app/hooks/`, `src/app/utils/` and `src/app/lib/`; responsive breakpoints and current spacing guidelines. Inspect actual CSS definitions before labelling utility-looking classes.
 
-**Target patterns:**
-```css
-/* ❌ VIOLATIONS */
-.example { padding: 24px; }
-.example { margin-top: 2rem; }
-.example { gap: 1.5rem; }
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-/* ✅ CORRECT */
-.example { padding: var(--wp--preset--spacing--fluid-md); }
-.example { margin-top: var(--wp--preset--spacing--fluid-lg); }
-.example { gap: var(--wp--preset--spacing--block-gap); }
-```
+## 3. Audit steps
 
-### 2. TSX/React Components — Complete Review
-**Target:** All files in `/components/` (all subdirectories)
+1. Search padding/margin/gap, inline spacing, dynamic style generation and data-driven configuration. Treat matches as candidates, not proof: zero, auto centring, percentages, calc/clamp and contextually necessary values are not blanket violations.
 
-**Check for:**
-- ❌ Inline `style` prop with hardcoded spacing (e.g., `style={{ padding: '16px' }}`)
-- ❌ Tailwind spacing utilities in `className` (e.g., `px-4`, `py-8`, `gap-6`, `m-4`, `mt-2`)
-- ❌ Custom spacing classes not defined in `/styles/` (e.g., `custom-padding-class`)
-- ✅ Verify all spacing uses semantic BEM classes: `.px-horizontal-section`, `.section-spacing`, `.gap-block-md`
+2. Cross-reference every used spacing token and helper class against actual loaded definitions; identify missing, duplicate, undocumented and apparently unused tokens with consumer evidence. Verify section horizontal/vertical, fluid scale and block-gap purpose without inventing new tokens.
 
-**Target patterns:**
-```tsx
-{/* ❌ VIOLATIONS */}
-<div style={{ padding: '16px' }}>...</div>
-<section className="flex gap-4 px-8 py-12">...</section>
+3. Review page/section/UI/common components, nested layouts, container max-width plus padding and dynamic values. Check BEM classes and accepted CSS-custom-property injection; protect required dynamic calculations and documented exceptions.
 
-{/* ✅ CORRECT */}
-<div className="card__content">...</div>
-<section className="section-spacing px-horizontal-section gap-block-md">...</section>
-```
+4. Compare mobile/tablet/desktop spacing, reading measure, vertical rhythm, responsive overrides, grid gaps and touch/focus clearance. Browser layout claims require observed viewports; static CSS alone does not prove responsive behaviour.
 
-### 3. Data Files — Configuration Review
-**Target:** All mock data files in `/data/mock/`
+5. For each confirmed mismatch provide exact file/line, declaration, source rule, expected versus observed layout, proposed token/class change, cascade/specificity risk and retest cases in both themes.
 
-**Check for:**
-- ❌ Hardcoded spacing configuration in data objects
-- ❌ Style objects with spacing values passed to components
-- ✅ Verify data-driven components reference semantic class names only
+6. Return unique affected-file counts and token coverage with denominators; severity follows user impact, not raw syntax. Recommend bounded changes without hour estimates or inherited 100% checkmarks.
 
-### 4. Utility/Hook Files — Logic Review
-**Target:** `/utils/`, `/hooks/`, `/lib/`
+## 4. Missing evidence and permission boundaries
 
-**Check for:**
-- ❌ Dynamic inline style generation with hardcoded spacing
-- ❌ Style manipulation functions creating non-token spacing
-- ✅ Verify any dynamic styling uses CSS custom property values
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-### 5. Design Token Definitions — Source of Truth
-**Target:** `/styles/globals.css` (CSS custom properties section)
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-**Verify:**
-- ✅ All spacing tokens properly defined with fluid clamp() values
-- ✅ Horizontal section spacing: `--wp--preset--spacing--section-horizontal`
-- ✅ Vertical section spacing: `--wp--preset--spacing--section-vertical`
-- ✅ Fluid spacing scale: `--wp--preset--spacing--fluid-{xs|sm|md|lg|xl|2xl}`
-- ✅ Block gap token: `--wp--preset--spacing--block-gap`
-- ✅ No unused/orphaned spacing tokens
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-## 🛠️ Detailed Audit Steps
+## 5. Success criteria
 
-### Phase 1: Automated Pattern Search (File Search)
-1. Search for hardcoded pixel patterns: `padding: \d+px`, `margin: \d+px`, `gap: \d+px`
-2. Search for hardcoded rem patterns: `padding: \d+\.?\d*rem`, `margin: \d+\.?\d*rem`
-3. Search for Tailwind spacing utilities: `className.*[pm][xytblr]?-\d+`, `className.*gap-\d+`
-4. Search for inline style objects: `style={{.*padding`, `style={{.*margin`, `style={{.*gap`
-5. Generate initial violation count and file list
+- [ ] Each mismatch distinguishes unsupported hardcoding from a justified layout exception.
+- [ ] Token/class references and responsive risks are evidenced.
+- [ ] All counts, coverage and unexecuted browser checks are explicitly qualified.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-### Phase 2: Manual CSS Block Review
-1. Read each CSS file in `/styles/blocks/`
-2. Read each CSS file in `/styles/` (root level)
-3. Identify non-compliant spacing declarations
-4. Categorize violations by type:
-   - Legacy hardcoded values
-   - Missing semantic classes
-   - Incorrect token usage
-   - Mobile/responsive override issues
+## 6. Report output
 
-### Phase 3: Component Pattern Analysis
-1. Review all page components (`/components/pages/`)
-2. Review all section components (`/components/sections/`)
-3. Review all UI primitives (`/components/ui/`)
-4. Review all common components (`/components/common/`)
-5. Identify components using deprecated spacing patterns
-6. Check for prop-based dynamic spacing (anti-pattern)
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-### Phase 4: Cross-Reference Validation
-1. Verify all spacing classes referenced in TSX exist in CSS
-2. Verify all spacing tokens referenced in CSS are defined in `globals.css`
-3. Identify unused helper classes (e.g., `.gap-block-sm` defined but never used)
-4. Check for duplicate/redundant spacing definitions across CSS files
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-### Phase 5: Responsive Behavior Audit
-1. Verify fluid spacing scales correctly across breakpoints
-2. Check mobile-specific overrides use appropriate tokens
-3. Identify any breakpoint-specific hardcoded spacing
-4. Validate container max-width + padding alignment at all viewports
+## 7. Revision provenance
 
-## 📊 Report Structure
-
-Create `/reports/spacing-standardization/report.md` with:
-
-### 1. Executive Summary
-- Total violations found
-- Files affected (count + percentage)
-- Violation breakdown by category
-- Estimated refactor effort (hours)
-
-### 2. Critical Violations (P0)
-- Hardcoded spacing in production components
-- Missing semantic classes in primary sections
-- Tailwind utilities in user-facing pages
-
-### 3. Standard Violations (P1)
-- Hardcoded spacing in secondary components
-- Inconsistent token usage patterns
-- Missing mobile responsiveness
-
-### 4. Minor Violations (P2)
-- Developer tool pages with legacy patterns
-- Internal utility spacing issues
-- Documentation examples with old syntax
-
-### 5. File-by-File Breakdown
-For each violating file:
-- File path
-- Violation count
-- Specific line numbers
-- Code snippets (before)
-- Recommended fix (after)
-
-### 6. Token Coverage Report
-- Tokens defined: X
-- Tokens actively used: Y
-- Orphaned tokens: Z
-- Missing tokens (gaps in scale): A
-
-### 7. Recommended Refactor Plan
-- Prioritized task list
-- Estimated time per task
-- Risk assessment (bundler constraints)
-- Testing requirements
-
-## 📝 Task List Structure
-
-Create `/tasks/spacing-standardization-tasks.md` with:
-
-### Priority Tiers
-- **P0** — Critical user-facing violations (do first)
-- **P1** — Standard violations in core components (do second)
-- **P2** — Minor violations in dev tools/edge cases (do last)
-
-### Task Format
-```markdown
-- [ ] **T01** Fix hardcoded padding in `HomePage.tsx` hero section
-  - File: `/components/pages/HomePage.tsx`
-  - Lines: 45, 67, 89
-  - Replace: `className="px-8 py-12"` → `className="px-horizontal-section section-spacing"`
-  - Impact: High visibility (landing page)
-```
-
-## 🔍 Search Patterns Reference
-
-### CSS Hardcoded Values
-```regex
-padding:\s*\d+px
-margin:\s*\d+px
-gap:\s*\d+px
-padding:\s*\d+\.?\d*rem
-margin:\s*\d+\.?\d*rem
-gap:\s*\d+\.?\d*rem
-```
-
-### Tailwind Utilities in JSX
-```regex
-className="[^"]*\b(px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|gap)-\d+
-className='[^']*\b(px|py|pt|pb|pl|pr|mx|my|mt|mb|ml|mr|gap)-\d+
-```
-
-### Inline Styles
-```regex
-style={{[^}]*(padding|margin|gap):\s*['"]?\d+
-```
-
-## ✅ Success Criteria
-
-Audit is complete when:
-- [x] All CSS files reviewed (100% coverage)
-- [x] All TSX component files reviewed (100% coverage)
-- [x] All violations documented with line numbers
-- [x] All violations categorized by priority
-- [x] Task list created with estimated effort
-- [x] Report includes before/after code examples
-- [x] Token coverage analysis complete
-- [x] Responsive behavior validated
-
-## 🔗 References
-
-- [CSS Architecture Guide](../guidelines/css-architecture.md)
-- [Spacing Tokens Reference](../guidelines/design-tokens/spacing.md)
-- [BEM Methodology](../guidelines/Guidelines.md#-critical-styling-rule---strict-bem-architecture)
-- [Bundler Compatibility Rules](../guidelines/Guidelines.md#-bundler-compatibility-rules-figma-make)
-- [Design Tokens Overview](../guidelines/design-tokens/)
-
-## 🚨 Critical Notes
-
-1. **Bundler Constraints:** All fixes must use bundler-safe syntax (no arrow functions, no destructuring in certain contexts)
-2. **CSS Specificity:** Ensure spacing refactors don't break cascade/specificity rules
-3. **Visual Regression:** Flag any spacing changes that may affect layout significantly
-4. **Mobile Testing:** All spacing fixes must be verified on mobile viewports
-5. **Light/Dark Mode:** Spacing tokens must work in both theme modes
-
----
-
-**Version:** 2.0.0 — Global codebase review scope  
-**Last Updated:** March 3, 2026  
-**Status:** Ready to execute
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/spacing-standardization-audit.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

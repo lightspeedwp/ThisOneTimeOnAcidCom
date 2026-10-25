@@ -9,9 +9,13 @@
 
 ## Executive Summary
 
-This audit identifies and resolves critical contrast ratio issues across the site, with particular focus on the ebook reader which had severe readability problems on mobile devices due to very dark pages with insufficient text contrast.
+This audit identifies and resolves critical contrast ratio issues across the
+site, with particular focus on the ebook reader which had severe readability
+problems on mobile devices due to very dark pages with insufficient text
+contrast.
 
 ### Key Findings
+
 - **Critical Issues Found:** 12 contrast violations (WCAG AA/AAA failures)
 - **Primary Problem Area:** Ebook reader dark mode
 - **Mobile Impact:** Severe - text nearly unreadable on mobile devices
@@ -39,29 +43,35 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 **Location:** `/styles/blocks/ebook-base.css` lines 319-322
 
 **Before:**
+
 ```css
 .dark .ebook-reader__page-inner {
   background: var(--wp--preset--color--atomic-black); /* #0B0B10 */
   color: var(--wp--preset--color--neutral-200); /* Unknown hex */
 }
-```
+
+```text
 
 **Contrast Ratio:** Estimated 3.2:1 (FAIL AA - needs 4.5:1)
 
 **Impact:**
+
 - ❌ WCAG AA: FAIL
 - ❌ WCAG AAA: FAIL
 - Mobile readability: SEVERE - nearly unreadable in low light
 
 **Solution:**
+
 ```css
 .dark .ebook-reader__page-inner {
   background: #1A1A1A; /* Lightened from #0B0B10 */
   color: #F0F0F0; /* 9.5:1 contrast */
 }
-```
+
+```text
 
 **After:**
+
 - ✅ WCAG AA: PASS (9.5:1 exceeds 4.5:1)
 - ✅ WCAG AAA: PASS (9.5:1 exceeds 7:1)
 - Mobile readability: EXCELLENT
@@ -75,19 +85,23 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 **Contrast Ratio:** ~3.2:1 (FAIL AA)
 
 **Impact:**
+
 - ❌ Large text AA: FAIL (needs 3:1)
 - ❌ Large text AAA: FAIL (needs 4.5:1)
 
 **Solution:**
+
 ```css
 .dark .ebook-page h1,
 .dark .ebook-page h2,
 .dark .ebook-page h3 {
   color: #FFFFFF; /* Pure white - 12.6:1 contrast */
 }
-```
+
+```text
 
 **After:**
+
 - ✅ WCAG AA: PASS (12.6:1)
 - ✅ WCAG AAA: PASS (12.6:1)
 
@@ -96,26 +110,31 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 ### 3. Ebook Reader - Cover Page Title (Dark Mode)
 
 **Before:**
+
 ```css
 .dark .ebook-cover__title {
   color: var(--color-neon-yellow); /* #F4FF3C */
 }
-```
+
+```text
 
 **Contrast Ratio:** 8.2:1 on #0B0B10 (PASS AAA, but too dark background)
 
 **Issue:** Background was too dark (#0B0B10), making overall readability poor
 
 **Solution:**
+
 ```css
 .dark .ebook-cover__title {
   color: #FFFF00; /* Pure yellow */
   text-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
 }
 /* Background lightened to #1A1A1A */
-```
+
+```text
 
 **After:**
+
 - ✅ WCAG AA: PASS (10.4:1)
 - ✅ WCAG AAA: PASS (10.4:1)
 - Enhanced with glow for dramatic effect
@@ -129,13 +148,16 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 **Contrast Ratio:** ~4.1:1 (FAIL AA for normal text)
 
 **Solution:**
+
 ```css
 .dark .ebook-toc__item {
   color: #E0E0E0; /* 8.7:1 contrast */
 }
-```
+
+```text
 
 **After:**
+
 - ✅ WCAG AA: PASS (8.7:1)
 - ✅ WCAG AAA: PASS (8.7:1)
 
@@ -144,22 +166,27 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 ### 5. Ebook Reader - Page Numbers (Dark Mode)
 
 **Before:**
+
 ```css
 .dark .ebook-reader__page-number {
   color: var(--wp--preset--color--neutral-600); /* Likely #606060 */
 }
-```
+
+```text
 
 **Contrast Ratio:** ~2.8:1 (FAIL AA)
 
 **Solution:**
+
 ```css
 .dark .ebook-reader__page-number {
   color: #A0A0A0; /* 4.2:1 contrast */
 }
-```
+
+```text
 
 **After:**
+
 - ✅ WCAG AA: PASS for small text (4.2:1)
 - Note: Page numbers are decorative/supplementary, so AA is acceptable
 
@@ -167,7 +194,8 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 
 ### 6. Light Mode - Neon Colors Not Adapted
 
-**Issue:** Bright neon colors (#FF3AAE, #F4FF3C) designed for dark backgrounds fail contrast on white
+**Issue:** Bright neon colors (#FF3AAE, #F4FF3C) designed for dark backgrounds
+fail contrast on white
 
 **Examples:**
 
@@ -183,21 +211,25 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 --color-neon-pink: #D4008C; /* 4.5:1 - AA compliant */
 --color-neon-yellow: #8C7A00; /* 7.1:1 - AAA compliant */
 --color-uv-violet: #5500CC; /* 7.5:1 - AAA compliant */
-```
+
+```text
 
 ---
 
 ### 7. Light Mode - Ebook Reader Body Text
 
 **Solution:**
+
 ```css
 :root:not(.dark) .ebook-reader__page-inner {
   background: #FAFAF7; /* Warm white */
   color: #1A1A1A; /* 16.1:1 contrast */
 }
-```
+
+```text
 
 **Result:**
+
 - ✅ WCAG AA: PASS (16.1:1)
 - ✅ WCAG AAA: PASS (16.1:1)
 
@@ -206,6 +238,7 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 ### 8. Header Navigation (Light Mode)
 
 **Solution:**
+
 ```css
 :root:not(.dark) .header__nav-link {
   color: #4A4A4A; /* 9.7:1 contrast */
@@ -214,9 +247,11 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 :root:not(.dark) .header__nav-link:hover {
   color: #D4008C; /* 4.5:1 - AA compliant */
 }
-```
+
+```text
 
 **Result:**
+
 - ✅ WCAG AA: PASS (9.7:1 default, 4.5:1 hover)
 - ✅ WCAG AAA: PASS (9.7:1 default)
 
@@ -227,25 +262,28 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 **Issue:** Small mobile screens require even higher contrast for readability
 
 **Solution:**
+
 ```css
 @media (max-width: 767px) {
   /* Dark Mode */
   .dark .ebook-page p {
     color: #F5F5F5; /* 10.8:1 contrast */
   }
-  
+
   .dark .ebook-reader__page-inner {
     background: #1F1F1F; /* Slightly lighter */
   }
-  
+
   /* Light Mode */
   body:not(.dark) .ebook-page p {
     color: #000000; /* 21:1 - maximum contrast */
   }
 }
-```
+
+```text
 
 **Result:**
+
 - ✅ Enhanced mobile readability for both themes
 
 ---
@@ -253,24 +291,29 @@ This audit identifies and resolves critical contrast ratio issues across the sit
 ### 10. Navigation Controls (Both Modes)
 
 **Dark Mode Buttons:**
+
 ```css
 .dark .ebook-reader__nav-btn {
   background: #2A2A2A;
   color: #F0F0F0; /* 9.5:1 */
   border: 1px solid #404040;
 }
-```
 
-**Light Mode Buttons:**
+```text
+
+## Light Mode Buttons
+
 ```css
 body:not(.dark) .ebook-reader__nav-btn {
   background: #FFFFFF;
   color: #1A1A1A; /* 16.1:1 */
   border: 1px solid #D0D0D0;
 }
-```
+
+```text
 
 **Result:**
+
 - ✅ Both modes exceed WCAG AAA
 
 ---
@@ -278,20 +321,25 @@ body:not(.dark) .ebook-reader__nav-btn {
 ### 11. Settings Drawer (Both Modes)
 
 **Dark Mode:**
+
 ```css
 .dark .ebook-drawer__link {
   color: #E0E0E0; /* 8.7:1 on #1F1F1F */
 }
-```
+
+```text
 
 **Light Mode:**
+
 ```css
 body:not(.dark) .ebook-drawer__link {
   color: #2A2A2A; /* 13.5:1 on #FFFFFF */
 }
-```
+
+```text
 
 **Result:**
+
 - ✅ Excellent readability in both themes
 
 ---
@@ -299,6 +347,7 @@ body:not(.dark) .ebook-drawer__link {
 ### 12. Form Elements (Light Mode)
 
 **Solution:**
+
 ```css
 body:not(.dark) .form__input,
 body:not(.dark) .form__textarea {
@@ -310,9 +359,11 @@ body:not(.dark) .form__textarea {
 body:not(.dark) .form__label {
   color: #4A4A4A; /* 9.7:1 */
 }
-```
+
+```text
 
 **Result:**
+
 - ✅ WCAG AAA compliant
 
 ---
@@ -322,32 +373,38 @@ body:not(.dark) .form__label {
 ### New Files Created
 
 1. **`/styles/themes/light.css`**
+
    - Complete light theme with WCAG-compliant colors
    - Darkened neon palette for readability
    - 200+ lines of comprehensive styling
 
-2. **`/styles/blocks/ebook-enhanced-contrast.css`**
+1. **`/styles/blocks/ebook-enhanced-contrast.css`**
+
    - Enhanced contrast specifically for ebook reader
    - Mobile-optimized contrast adjustments
    - Both light and dark mode support
    - 450+ lines of detailed styling
 
-3. **`/components/common/ThemeToggleES5.tsx`**
+1. **`/components/common/ThemeToggleES5.tsx`**
+
    - ES5 closure version of theme toggle
    - WCAG 2.2 compliant focus indicators
    - Keyboard navigation support
 
 ### Files Updated
 
-4. **`/styles/globals.css`**
+1. **`/styles/globals.css`**
+
    - Added imports for light and dark theme files
    - Ensures proper cascade order
 
-5. **`/components/common/Header.tsx`**
+1. **`/components/common/Header.tsx`**
+
    - Integrated ThemeToggleES5 component
    - Positioned in header actions area
 
-6. **`/components/pages/about/EbookPage.tsx`**
+1. **`/components/pages/about/EbookPage.tsx`**
+
    - Imported ebook-enhanced-contrast.css
    - Ensures enhanced contrast applies to reader
 
@@ -393,6 +450,7 @@ body:not(.dark) .form__label {
 ### 1. Theme Toggle Component
 
 **Features:**
+
 - ✅ Sun/moon icon indicators
 - ✅ Keyboard navigation (Enter/Space)
 - ✅ Proper ARIA labels
@@ -401,6 +459,7 @@ body:not(.dark) .form__label {
 - ✅ Persists preference to localStorage
 
 **Compliance:**
+
 - ✅ WCAG 2.1.1 (Keyboard)
 - ✅ WCAG 2.4.7 (Focus Visible)
 - ✅ WCAG 4.1.2 (Name, Role, Value)
@@ -408,22 +467,27 @@ body:not(.dark) .form__label {
 ### 2. Focus Indicators
 
 **Dark Mode:**
+
 ```css
 *:focus-visible {
   outline: 3px solid #FF3AAE;
   outline-offset: 2px;
 }
-```
+
+```text
 
 **Light Mode:**
+
 ```css
 body:not(.dark) *:focus-visible {
   outline: 3px solid #D4008C;
   outline-offset: 2px;
 }
-```
+
+```text
 
 **Compliance:**
+
 - ✅ WCAG 2.4.7 (Focus Visible)
 - ✅ 3px minimum width
 - ✅ High contrast against all backgrounds
@@ -431,21 +495,26 @@ body:not(.dark) *:focus-visible {
 ### 3. Color Independence
 
 **Testing:**
+
 - ✅ All content readable without color alone
 - ✅ Text labels supplement color coding
 - ✅ Icons have text alternatives
 
 **Compliance:**
+
 - ✅ WCAG 1.4.1 (Use of Color)
 
 ### 4. Text Resize
 
 **Testing:**
+
 ```css
 --ebook-font-scale: 1; /* User-controllable */
-```
+
+```text
 
 **Compliance:**
+
 - ✅ WCAG 1.4.4 (Resize Text)
 - ✅ Text can scale to 200% without loss of function
 
@@ -456,14 +525,17 @@ body:not(.dark) *:focus-visible {
 ### Tools Used
 
 1. **WebAIM Contrast Checker**
+
    - https://webaim.org/resources/contrastchecker/
    - Used for all color combinations
 
-2. **Chrome DevTools**
+1. **Chrome DevTools**
+
    - Lighthouse accessibility audit
    - Color picker with contrast ratio display
 
-3. **Manual Testing**
+1. **Manual Testing**
+
    - iPhone 13 Pro (iOS 17)
    - Samsung Galaxy S21 (Android 14)
    - iPad Air (iPadOS 17)
@@ -516,29 +588,37 @@ body:not(.dark) *:focus-visible {
 ### Immediate Actions (Completed ✅)
 
 1. ✅ Deploy light and dark theme CSS files
-2. ✅ Deploy enhanced ebook contrast CSS
-3. ✅ Deploy ThemeToggleES5 component
-4. ✅ Test theme switching on all pages
+
+1. ✅ Deploy enhanced ebook contrast CSS
+
+1. ✅ Deploy ThemeToggleES5 component
+
+1. ✅ Test theme switching on all pages
 
 ### Future Enhancements
 
 1. **User Preference Sync**
+
    - Consider syncing theme preference across devices via backend
    - Currently uses localStorage only
 
-2. **High Contrast Mode**
+1. **High Contrast Mode**
+
    - Add optional "high contrast" mode for users with visual impairments
    - Would provide even higher contrast ratios (15:1+)
 
-3. **Color Blind Modes**
+1. **Color Blind Modes**
+
    - Add protanopia/deuteranopia/tritanopia adjusted palettes
    - Use patterns/textures in addition to color coding
 
-4. **Font Smoothing**
+1. **Font Smoothing**
+
    - Review `-webkit-font-smoothing: antialiased` on light backgrounds
    - May want `auto` for light mode
 
-5. **Automated Contrast Testing**
+1. **Automated Contrast Testing**
+
    - Integrate axe-core or pa11y into build pipeline
    - Prevent regression
 
@@ -559,18 +639,25 @@ body:not(.dark) *:focus-visible {
 ### Files Delivered
 
 1. `/styles/themes/light.css` (new)
-2. `/styles/blocks/ebook-enhanced-contrast.css` (new)
-3. `/components/common/ThemeToggleES5.tsx` (new)
-4. `/styles/globals.css` (updated)
-5. `/components/common/Header.tsx` (updated)
-6. `/components/pages/about/EbookPage.tsx` (updated)
+
+1. `/styles/blocks/ebook-enhanced-contrast.css` (new)
+
+1. `/components/common/ThemeToggleES5.tsx` (new)
+
+1. `/styles/globals.css` (updated)
+
+1. `/components/common/Header.tsx` (updated)
+
+1. `/components/pages/about/EbookPage.tsx` (updated)
 
 ### Compliance Status
 
 **WCAG 2.2 Level AA:** ✅ **100% COMPLIANT**
-**WCAG 2.2 Level AAA:** ✅ **92% COMPLIANT**
 
-Remaining AAA non-compliances are intentional design choices for decorative elements (page numbers, which are supplementary).
+## WCAG 2.2 Level AAA:** ✅ **92% COMPLIANT
+
+Remaining AAA non-compliances are intentional design choices for decorative
+elements (page numbers, which are supplementary).
 
 ---
 

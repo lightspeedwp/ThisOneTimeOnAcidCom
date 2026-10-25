@@ -1,174 +1,50 @@
-# Sub-audit 4: Event creation (1 → 5+ events)
+# Book-site event evidence and edition review
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Report:** `/reports/content-expansion-phase8/04-event-creation.md`
+## 1. Objective
 
----
+Assess event records, editions and book relevance using current dated evidence.
 
-## Objective
+## 2. Inputs and scope
 
-Expand the events system from 1 event (Origin Festival) to 5+ events. Add the 4 confirmed festivals from the brief, plus historical events that Ash has attended. Each event follows the rich data structure defined in `/data/types/events.ts`. One post per event — future editions update the same event entry.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current content/data/type inventories, registered routes and author-approved sources. Confirm scope before assessing historical expansion requests; do not use their target totals as present facts.
 
-## Confirmed new events
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-### 1. Organik
-- **Dates:** 11–12 April 2026
-- **Type:** festival
-- **Genre:** Psytrance
-- **Location:** South Africa (exact venue TBC from website)
-- **Status:** Upcoming
-- **Website:** https://organik.co.za/
-- **Social links:**
-  - Facebook: https://facebook.com/organikpsy
-  - Instagram: https://instagram.com/organikpsy
-  - YouTube: https://youtube.com/organikpsy
-  - SoundCloud: https://soundcloud.com/organikpsy
-- **Ash's connection:** Upcoming event in South Africa, aligns with Cape Town festival season
+## 3. Audit steps
 
-### 2. Nation of Gondwana (NOG)
-- **Dates:** 16–19 July 2026
-- **Type:** festival
-- **Genre:** Techno, house, electronic
-- **Location:** Grünefeld, near Berlin, Germany
-- **Status:** Upcoming (2026), Attended (2025)
-- **Website:** https://www.pyonen.de/nog2026/en
-- **Social links:**
-  - Instagram: https://www.instagram.com/nation_of_gondwana_pyonen/
-  - Facebook: https://www.facebook.com/pyonen
-  - SoundCloud: https://soundcloud.com/pyonen-nation-of-gondwana
-  - YouTube: https://www.youtube.com/@pyonennog
-- **Ash's connection:** Attended NOG 2025 (video: https://www.youtube.com/watch?v=9o_GGvEZEio — "Nation of Gondwana festival 2025 | a visual experience"). Close to Berlin base. Inspired UV art design during a trip there (see `/docs/website-content.md` Lucy section).
-- **Editions:** 2025 (attended), 2026 (upcoming)
+1. Inventory current event/edition data, types, route consumers and URLs. Distinguish a recurring event series from a dated edition; propose separate entries only where the current model and evidence support them.
 
-### 3. Moov Festival
-- **Type:** festival
-- **Genre:** Electronic / multi-genre
-- **Location:** South Africa (check website for venue)
-- **Website:** https://moovfestival.co.za/
-- **Mission page:** https://moovfestival.co.za/our-mission/
-- **Gallery:** https://moovfestival.co.za/gallery/
-- **Social links:**
-  - Facebook: https://www.facebook.com/MOOVFestival
-  - Instagram: https://www.instagram.com/moov_festival/
-  - YouTube: https://www.youtube.com/@moovfestival3191
-- **Ash's connection:** South African festival scene
+2. Check official dated sources for names, dates, venue, location, organiser/social links and status. Supplied URLs remain unverified until inspected; an event date in 2026 is not necessarily future at review time.
 
-### 4. Little Forest (Alien Safari NYE)
-- **Dates:** 31 December 2026 – 2 January 2027
-- **Type:** festival
-- **Genre:** Psytrance
-- **Location:** South Africa
-- **Organiser:** Alien Safari
-- **Social links:**
-  - Instagram: https://www.instagram.com/alien_safari_south_africa/
-  - Facebook: https://www.facebook.com/aliensafari/
-- **Reference:** 2025–2026 edition: https://www.quicket.co.za/events/265339-the-little-forest-nye-festival-2025-2026/
-- **What On in Cape Town:** https://whatsonincapetown.com/event/alien-safari-little-forest-festival/
-- **Ash's connection:** Alien Safari is one of the longest-running psytrance event series in South Africa. Ash attended "every single Alien Safari" for years (from website-content.md).
+3. Distinguish announced schedule, verified attendance, personal memoir and promotional copy. Never imply Ash attended or will speak without evidence; do not invent future editions or exact dates.
 
----
+4. Assess relevant source-backed narrative, photographs already in the project, contextual FAQs and edition navigation. Check IDs/slugs, taxonomy, related links and current rendering without automatic schema/route additions.
 
-## Additional historical events to consider
+5. Return precise proposals and source/permission gaps, retaining uncertain event metadata as unknown rather than filling it for completeness.
 
-Based on `/docs/website-content.md` content, these events are significant to Ash's story:
+## 4. Missing evidence and permission boundaries
 
-| Event | Type | Location | Ash's history | Priority |
-|---|---|---|---|---|
-| Vortex | festival | Various, South Africa | First festival experiences (1999 onwards), December Vortex = defining life moment | High |
-| Alien Safari | festival series | Various, South Africa | Attended "every single" one for years | High |
-| AfricaBurn | festival | Tankwa Karoo, South Africa | Cycled there with loaded bike (2022?) | High |
-| Shankra | festival | Switzerland | Regular psytrance festival | Medium |
-| Reiserfieber | festival | Switzerland | Regular psytrance festival | Medium |
-| Solipse | festival | Zambia | Solar eclipse festival 2001 — life-defining trip | Medium |
-| Origin Festival | festival | Helderstroom, South Africa | Already exists — reference only | — |
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-**Note:** Create one entry per event. Multiple years attended are tracked via the `editions` array within each event. This is already how Origin Festival works — follow that pattern exactly.
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
----
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-## Data structure reference
+## 5. Success criteria
 
-Follow the `Event` type from `/data/types/events.ts` and the Origin Festival example at `/data/mock/events/origin-festival.ts`.
+- [ ] Each factual/content proposal has provenance, relevance and a verified current destination.
+- [ ] Historical quotas and invented metadata are not substituted for genuine source material.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-Key fields:
-```typescript
-{
-  id: string,
-  slug: string,
-  name: string,
-  shortName: string,
-  tagline: string,
-  description: string,
-  type: EventType,
-  genre: string[],
-  website: string,
-  socialLinks: EventSocialLink[],
-  location: EventLocation,
-  recurring: boolean,
-  recurrencePattern: string,
-  featuredImage: EventImage,
-  tags: string[],
-  featured: boolean,
-  order: number,
-  editions: EventEdition[],
-  faqs: { id: string; question: string; answer: string }[],
-}
-```
+## 6. Report output
 
-### Edition structure
-```typescript
-{
-  year: number,
-  dates: { start: string, end: string },
-  status: 'attended' | 'upcoming' | 'cancelled' | 'missed',
-  highlights: string[],
-  travel?: { method: TravelMethod, ... },
-  facesCount?: number,
-  personalNote?: string,
-  gallery?: EventImage[],
-}
-```
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
----
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-## File organisation
+## 7. Revision provenance
 
-Create one file per event in `/data/mock/events/`:
-```
-/data/mock/events/
-├── origin-festival.ts        (existing)
-├── organik.ts                (new)
-├── nation-of-gondwana.ts     (new)
-├── moov-festival.ts          (new)
-├── little-forest.ts          (new)
-├── vortex.ts                 (new — if included)
-├── africaburn.ts             (new — if included)
-├── categories.ts             (existing — update)
-└── index.ts                  (existing — update barrel export)
-```
-
----
-
-## Step-by-step
-
-1. Create data files for each confirmed event (4 minimum)
-2. Add 2–3 per-event FAQs to each event's `faqs` array
-3. Consider creating 2–3 additional historical events (Vortex, Alien Safari, AfricaBurn)
-4. Update `/data/mock/events/index.ts` barrel export — add all new events to `allEvents` array
-5. Update `/data/mock/events/categories.ts` if new event types are needed
-6. Add an `events` FAQ group to `/data/mock/sections/faq.ts` (page-level FAQs)
-7. Use `unsplash_tool` for cover images (festival, outdoor, camping, cycling themes) — do NOT use the events' actual logos/images from their websites
-8. Cross-reference `/docs/website-content.md` for accurate descriptions of Ash's experiences at each event
-
----
-
-## Output
-
-- **Report:** `/reports/content-expansion-phase8/04-event-creation.md` with:
-  - Events created (name, slug, editions count)
-  - Total events count (before and after)
-  - FAQs added per event
-  - Categories/tags updated
-  - Historical events included or deferred
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-expansion-phase8/04-event-creation.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

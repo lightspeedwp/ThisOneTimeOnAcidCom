@@ -1,12 +1,14 @@
 # Timeline Component
 
-**File:** `/components/ui/Timeline.tsx`  
-**Version:** 1.0.0  
+**File:** `/components/ui/Timeline.tsx`
+**Version:** 1.0.0
 **Category:** UI Component (Phase 3)
 
 ## Purpose
 
-Displays chronological events along a vertical timeline with neon-glowing dots, optional Phosphor icons, and a configurable color accent. Designed for "story" layouts — education history, notable rides, creative milestones, etc.
+Displays chronological events along a vertical timeline with neon-glowing dots,
+optional Phosphor icons, and a configurable color accent. Designed for "story"
+layouts — education history, notable rides, creative milestones, etc.
 
 ## Props
 
@@ -25,7 +27,8 @@ Displays chronological events along a vertical timeline with neon-glowing dots, 
   description: string; // Event body text
   icon?: ReactNode;    // Optional Phosphor icon rendered inside the dot
 }
-```
+
+```text
 
 ## Usage
 
@@ -38,7 +41,8 @@ var events = [
 ];
 
 <Timeline events={events} variant="vertical" colorAccent="pink" />
-```
+
+```text
 
 ## Where Used
 
@@ -54,13 +58,14 @@ var events = [
 Styles are defined in `/styles/blocks/timeline.css`, imported by the component.
 
 **BEM structure:**
+
 - `.timeline` — block
 - `.timeline--vertical` / `.timeline--horizontal` — variant modifiers
 - `.timeline__connector` — the vertical/horizontal line
 - `.timeline__event` — individual event
 - `.timeline__dot` — neon-glowing circle
 - `.timeline__content` — text area
-- `.timeline__year`, `.timeline__title`, `.timeline__desc` — text elements
+- `.timeline_*year`, `.timeline**title`, `.timeline*_desc` — text elements
 
 ## Accessibility
 

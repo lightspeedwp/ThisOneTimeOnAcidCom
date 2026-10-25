@@ -1,272 +1,61 @@
 ---
-title: "Modern React Migration Orchestrator"
+title: "Book-site React compatibility scope coordinator"
 filename: "/prompts/modern-react-migration/00-ORCHESTRATOR.md"
 created: "2026-03-11"
-modified: "2026-03-11"
-version: "1.0.0"
+modified: "2026-10-24"
+version: "2.0.0"
 prompt_type: "orchestrator"
-estimated_duration: "3-4 hours"
-related_reports: "/reports/2026-03-11-modern-react-migration/"
-related_tasks: "/tasks/modern-react-migration-tasks.md"
+historical_related_reports: "/reports/2026-03-11-modern-react-migration/"
+historical_related_tasks: "/tasks/modern-react-migration-tasks.md"
 ---
 
-# Modern React Migration Orchestrator
+# Book-site React compatibility scope coordinator
 
-## Overview
+## 1. Objective
 
-This orchestrator coordinates a comprehensive audit of the React codebase to identify opportunities for improvement **within ES5 constraints** imposed by the Figma Make bundler. The audit focuses on:
+Reconcile historical React/CSS migration prompts with current audit entry points without initiating a WordPress migration.
 
-1. **ES5 React Best Practices** - Enforce modern React patterns while respecting bundler constraints
-2. **Tailwind Violations** - Identify and document all forbidden Tailwind utility usage
-3. **Tailwind-to-BEM Mapping** - Create a reference guide mapping Tailwind utilities to BEM classes
-4. **WordPress CSS Alignment** - Audit alignment with WordPress block editor CSS patterns
-5. **Component Structure** - Review component architecture and organization
+## 2. Inputs and scope
 
-**IMPORTANT:** This is NOT a migration to modern JSX syntax. We are STAYING in ES5 but improving React patterns within those constraints.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current manifest/configuration, bundler rules and React consumers. Preserve original paths; 01, 02, 03 and 05 are compatibility notices; 04-wordpress-css-alignment.md remains held.
 
-## Execution Sequence
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-This orchestrator runs the following sub-prompts **IN ORDER**:
+## 3. Audit steps
 
-1. **[01-es5-react-best-practices.md](./01-es5-react-best-practices.md)** - Audit React patterns (hooks, prop types, state management) within ES5 constraints
-2. **[02-tailwind-violations-audit.md](./02-tailwind-violations-audit.md)** - Scan for all Tailwind utility class usage (forbidden by BEM architecture)
-3. **[03-tailwind-to-bem-mapping.md](./03-tailwind-to-bem-mapping.md)** - Create mapping guide between Tailwind utilities and BEM classes
-4. **[04-wordpress-css-alignment.md](./04-wordpress-css-alignment.md)** - Audit alignment with WordPress block editor CSS patterns
-5. **[05-component-structure-audit.md](./05-component-structure-audit.md)** - Review component architecture and file organization
+1. Inventory the actual React/TypeScript/Vite setup and current scripts. The presence of Tailwind packages or a migration prompt is not evidence they should be removed or a WordPress runtime should be created.
 
----
+2. Use ../bundler-compatibility-audit.md for child 01’s syntax/hooks/state/types/composition/error/accessibility checks; use ../project-stability-audit/06-css-structure.md for children 02/03’s utility-to-BEM/CSS mapping checks.
 
-## Workflow
+3. Use ../project-stability-audit/01-application-stability.md for child 05’s component structure, logic boundaries, exports, hooks and type checks. Retain unique requirement provenance through each compatibility notice.
 
-### Step 1: Run Sub-Prompt 01 - ES5 React Best Practices
+4. Preserve child 04 unchanged and identify its WordPress-alignment scope as held. Do not apply WordPress class names, migrate the application or create a new stylesheet under this review.
 
-**Execute:** `/prompts/modern-react-migration/01-es5-react-best-practices.md`
+5. Reconcile contradictory historical “complete”, 40/52 or other totals by revision/evidence; do not infer completion, run scripts, install dependencies or update trackers. Return a scope/dependency report with current findings and missing evidence.
 
-**What it does:**
-- Audits all React components for best practices within ES5 constraints
-- Checks for proper hook usage (allowed in ES5)
-- Verifies prop types and TypeScript interfaces
-- Reviews state management patterns
-- Checks for proper cleanup in useEffect
-- Identifies anti-patterns
+## 4. Missing evidence and permission boundaries
 
-**Output:** `/reports/2026-03-11-modern-react-migration/01-es5-react-best-practices.md`
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-**Wait for completion** before proceeding to Step 2
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
----
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-### Step 2: Run Sub-Prompt 02 - Tailwind Violations Audit
+## 5. Success criteria
 
-**Execute:** `/prompts/modern-react-migration/02-tailwind-violations-audit.md`
+- [ ] All five original children have a clear canonical or held disposition.
+- [ ] No assumed migration, Tailwind removal or nonexistent typecheck command is introduced.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-**What it does:**
-- Scans all `.tsx` files for Tailwind utility classes (e.g., `flex`, `p-4`, `text-center`)
-- Documents every violation with file path and line number
-- Categorizes by severity (critical vs. minor)
-- Provides statistics on violation frequency
+## 6. Report output
 
-**Output:** `/reports/2026-03-11-modern-react-migration/02-tailwind-violations-audit.md`
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-**Wait for completion** before proceeding to Step 3
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
----
+## 7. Revision provenance
 
-### Step 3: Run Sub-Prompt 03 - Tailwind-to-BEM Mapping
-
-**Execute:** `/prompts/modern-react-migration/03-tailwind-to-bem-mapping.md`
-
-**What it does:**
-- Creates a comprehensive mapping guide
-- Maps Tailwind utilities → BEM classes → WordPress CSS custom properties
-- Documents all available BEM classes in `/styles/globals.css`
-- Provides conversion examples for common patterns
-
-**Output:** 
-- Report: `/reports/2026-03-11-modern-react-migration/03-tailwind-to-bem-mapping.md`
-- Guideline: `/guidelines/tailwind-to-bem-mapping.md` (permanent reference)
-
-**Wait for completion** before proceeding to Step 4
-
----
-
-### Step 4: Run Sub-Prompt 04 - WordPress CSS Alignment
-
-**Execute:** `/prompts/modern-react-migration/04-wordpress-css-alignment.md`
-
-**What it does:**
-- Audits BEM classes for alignment with WordPress Full Site Editing patterns
-- Checks custom properties for `--wp--preset--*` naming
-- Verifies block editor CSS class patterns (`.wp-block-*`, `.has-*`)
-- Documents gaps in WordPress alignment
-
-**Output:** `/reports/2026-03-11-modern-react-migration/04-wordpress-css-alignment.md`
-
-**Wait for completion** before proceeding to Step 5
-
----
-
-### Step 5: Run Sub-Prompt 05 - Component Structure Audit
-
-**Execute:** `/prompts/modern-react-migration/05-component-structure-audit.md`
-
-**What it does:**
-- Reviews component file organization
-- Checks for proper separation of concerns
-- Audits component naming conventions
-- Identifies opportunities for component reuse
-- Reviews export patterns
-
-**Output:** `/reports/2026-03-11-modern-react-migration/05-component-structure-audit.md`
-
-**Wait for completion** before proceeding to Step 6
-
----
-
-### Step 6: Process All Reports into Task List
-
-**After ALL sub-prompts have completed:**
-
-1. Read ALL reports in `/reports/2026-03-11-modern-react-migration/`
-2. Extract actionable items from each report
-3. Group tasks logically by:
-   - **Phase 1: Critical Fixes** (P0 - blocking issues)
-   - **Phase 2: High Priority** (P1 - important but not blocking)
-   - **Phase 3: Improvements** (P2 - nice-to-have enhancements)
-   - **Phase 4: Documentation** (P3 - docs and guidelines)
-4. Create consolidated task list: `/tasks/modern-react-migration-tasks.md`
-
-**Task list format:**
-```markdown
----
-title: "Modern React Migration Tasks"
-filename: "/tasks/modern-react-migration-tasks.md"
-created: "2026-03-11"
-modified: "2026-03-11"
-version: "1.0.0"
-related_reports: "/reports/2026-03-11-modern-react-migration/"
----
-
-# Modern React Migration Tasks
-
-## Phase 1: Critical Fixes (P0)
-- [ ] Task 1 from report 01
-- [ ] Task 2 from report 02
-
-## Phase 2: High Priority (P1)
-- [ ] Task 3 from report 03
-- [ ] Task 4 from report 04
-
-## Phase 3: Improvements (P2)
-- [ ] Task 5 from report 05
-
-## Phase 4: Documentation (P3)
-- [ ] Task 6 from report 03
-```
-
----
-
-## Success Criteria
-
-This orchestrator is COMPLETE when:
-
-- [x] All 5 sub-prompts have been executed
-- [x] All 5 reports saved to `/reports/2026-03-11-modern-react-migration/`
-- [x] Tailwind-to-BEM mapping guideline created in `/guidelines/`
-- [x] Consolidated task list created in `/tasks/modern-react-migration-tasks.md`
-- [x] All reports have status: "complete" in YAML frontmatter
-
----
-
-## Expected Outcomes
-
-### Reports Generated (5 total)
-
-1. **01-es5-react-best-practices.md** - React patterns audit
-2. **02-tailwind-violations-audit.md** - Tailwind usage violations
-3. **03-tailwind-to-bem-mapping.md** - Conversion mapping guide
-4. **04-wordpress-css-alignment.md** - WordPress CSS audit
-5. **05-component-structure-audit.md** - Component architecture review
-
-### Guidelines Created (1 total)
-
-1. **`/guidelines/tailwind-to-bem-mapping.md`** - Permanent reference for developers
-
-### Tasks Created (1 total)
-
-1. **`/tasks/modern-react-migration-tasks.md`** - Consolidated action items
-
----
-
-## Related Documentation
-
-**Generated By:** Modern React Migration Orchestrator
-
-**Related Guidelines:**
-- [Guidelines.md](../../guidelines/Guidelines.md) - Main project guidelines
-- [BEM CSS Architecture](../../guidelines/css-architecture.md) - BEM naming conventions
-- [Component Guidelines](../../guidelines/overview-components.md) - Component patterns
-- [Bundler Constraints](../../guidelines/Guidelines.md#bundler-compatibility-rules-figma-make) - Figma Make limitations
-
-**Bundler Constraints Reference:**
-```
-Forbidden:
-❌ Optional chaining (?.)
-❌ Nullish coalescing (??)
-❌ JSX (must use React.createElement)
-❌ Arrow functions (in certain contexts)
-❌ let/const (prefer var)
-❌ for...of loops
-❌ Tailwind utility classes (use BEM)
-
-Required:
-✅ React.createElement
-✅ var declarations
-✅ Classic for loops
-✅ Explicit null checks
-✅ BEM CSS classes
-✅ Named function expressions
-```
-
----
-
-## Execution Instructions
-
-### How to Run This Orchestrator
-
-1. **Start Here:** Read this orchestrator document
-2. **Execute Sub-Prompts in Order:** Run 01 → 02 → 03 → 04 → 05
-3. **Wait Between Prompts:** Each must complete before starting the next
-4. **Create Task List LAST:** Only after all reports are complete
-
-### Estimated Timeline
-
-| Step | Sub-Prompt | Est. Duration |
-|------|-----------|---------------|
-| 1 | ES5 React Best Practices | 45 min |
-| 2 | Tailwind Violations Audit | 30 min |
-| 3 | Tailwind-to-BEM Mapping | 60 min |
-| 4 | WordPress CSS Alignment | 45 min |
-| 5 | Component Structure Audit | 30 min |
-| 6 | Task List Creation | 30 min |
-| **TOTAL** | | **3-4 hours** |
-
----
-
-## Re-execution Notes
-
-This orchestrator can be run:
-- After major codebase changes
-- Quarterly as maintenance
-- When new components are added
-- Before major releases
-- When updating WordPress block patterns
-
-Each execution will generate a new dated folder in `/reports/` (e.g., `/reports/2026-06-15-modern-react-migration/`)
-
----
-
-**Last Updated:** March 11, 2026  
-**Maintained By:** Development Team
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/modern-react-migration/00-ORCHESTRATOR.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

@@ -1,0 +1,346 @@
+{
+  "catalogueMetadata": {
+    "version": "1.0.0",
+    "project": "This One Time on Acid",
+    "totalAssets": 56,
+    "createdAt": "2026-10-17T00:00:00Z",
+    "lastUpdated": "2026-10-17T00:00:00Z",
+    "schema": "https://path-to-schema/asset-catalogue-v1.schema.json"
+  },
+  "assets": [
+    {
+      "catalogueId": "toa-hero-eye-makeup-01",
+      "figmaAssetId": "f4a28f747d49fc9d37311b17f513b62e2b95a73e",
+      "originalFilename": "hero-eye-makeup-purple-stripe.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": 1200,
+        "height": 900,
+        "unit": "px",
+        "aspectRatio": "4:3"
+      },
+      "filesize": {
+        "original": 2457600,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Pages/Home/Hero/Eye Makeup",
+        "figmaPageName": "Home",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Home"
+        ],
+        "components": [
+          "HeroLayout",
+          "homepageHeroImages"
+        ],
+        "chapters": [],
+        "webContext": [
+          "hero",
+          "landing-visual",
+          "featured-imagery"
+        ]
+      },
+      "metadata": {
+        "caption": "Festival eye art",
+        "altText": "Close-up artistic eye makeup with vibrant purple stripe, red metallic lashes and colorful crystal gems",
+        "description": "Intricate eye makeup featuring a bold purple stripe design, metallic red lashes, and decorative crystal gems showcasing precision and creativity in festival artistry",
+        "tags": [
+          "festival",
+          "eye-makeup",
+          "neon",
+          "artistic"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": null,
+        "recommendedPPI": null,
+        "printQualityNotes": null
+      },
+      "webOptimization": {
+        "recommendedPreset": null,
+        "maxWidth": null,
+        "quality": null,
+        "formats": []
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-jungle-festival-01",
+      "figmaAssetId": "7afa71c7ec4457a1c1983db257703a6c92a9cce7",
+      "originalFilename": "jungle-festival-koh-phangan-portrait-01.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": 800,
+        "height": 1000,
+        "unit": "px",
+        "aspectRatio": "4:5"
+      },
+      "filesize": {
+        "original": 1843200,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Pages/Portfolio/Jungle Festival/Image 1",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [
+          "PortfolioGrid",
+          "PortfolioImage",
+          "EventPortfolioCard"
+        ],
+        "chapters": [
+          "Introduction",
+          "Festival & Events"
+        ],
+        "webContext": [
+          "portfolio-grid",
+          "portfolio-detail",
+          "book-preview"
+        ]
+      },
+      "metadata": {
+        "caption": "Jungle Festival Koh Phangan",
+        "altText": "Festival participant with vibrant face paint and body art at Jungle Festival Koh Phangan",
+        "description": "Beautiful makeup artistry showcasing festival culture and artistic self-expression at Jungle Festival on Koh Phangan, Thailand",
+        "tags": [
+          "jungle-festival",
+          "koh-phangan",
+          "festival",
+          "thailand",
+          "body-art",
+          "portfolio"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Print ready for book page or portfolio exhibition"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-nail-art-rainbow-fusion",
+      "figmaAssetId": "7c570c5291977a816c8152a098cd6693cff22dbd",
+      "originalFilename": "nail-art-rainbow-fusion.png",
+      "uploadedAs": null,
+      "format": "png",
+      "dimensions": {
+        "width": 600,
+        "height": 800,
+        "unit": "px",
+        "aspectRatio": "3:4"
+      },
+      "filesize": {
+        "original": 912000,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": "Pages/Portfolio/Nail Art/Rainbow Fusion",
+        "figmaPageName": "Portfolio",
+        "importedFrom": "figma",
+        "isDerivative": false,
+        "originalSourceUrl": null
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [
+          "PortfolioGrid",
+          "PortfolioImage",
+          "ServiceCard"
+        ],
+        "chapters": [
+          "Nail Art Artistry"
+        ],
+        "webContext": [
+          "portfolio-grid",
+          "service-showcase"
+        ]
+      },
+      "metadata": {
+        "caption": "Rainbow Fusion nail art",
+        "altText": "Vibrant rainbow gradient nail art design with fusion of multiple bright colors",
+        "description": "Intricate nail art design featuring a rainbow gradient fusion, showcasing detailed colour blending and precision work",
+        "tags": [
+          "nail-art",
+          "rainbow",
+          "fusion",
+          "gradient",
+          "portfolio"
+        ]
+      },
+      "credits": {
+        "photographer": "Ash Shaw",
+        "artist": "Ash Shaw",
+        "sourceUrl": null,
+        "usageRights": "Original artwork",
+        "license": "proprietary",
+        "attribution": "Ash Shaw"
+      },
+      "printSuitability": {
+        "isPrintReady": true,
+        "recommendedPPI": 300,
+        "printQualityNotes": "Suitable for portfolio publication and service catalogue"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "pending",
+      "recoveryNotes": "Awaiting export from Figma Make project",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": null,
+        "archivedAt": null
+      }
+    },
+    {
+      "catalogueId": "toa-external-fallback-unsplash-nail-01",
+      "figmaAssetId": null,
+      "originalFilename": "unsplash-nail-art-fallback",
+      "uploadedAs": "external-unsplash-nail-01.jpg",
+      "format": "jpeg",
+      "dimensions": {
+        "width": 800,
+        "height": 600,
+        "unit": "px",
+        "aspectRatio": "4:3"
+      },
+      "filesize": {
+        "original": null,
+        "unit": "bytes"
+      },
+      "source": {
+        "figmaComponentPath": null,
+        "figmaPageName": null,
+        "importedFrom": "unsplash",
+        "isDerivative": true,
+        "originalSourceUrl": "https://images.unsplash.com/photo-1590926918555-c058b85940d6"
+      },
+      "usage": {
+        "pages": [
+          "Portfolio"
+        ],
+        "components": [
+          "PortfolioImage"
+        ],
+        "chapters": [],
+        "webContext": [
+          "portfolio-grid-fallback"
+        ]
+      },
+      "metadata": {
+        "caption": "Fallback nail art reference",
+        "altText": "Professional nail art design showcasing technique",
+        "description": "Stock reference image used as fallback when original Figma asset unavailable",
+        "tags": [
+          "fallback",
+          "nail-art",
+          "external-reference"
+        ]
+      },
+      "credits": {
+        "photographer": "Unknown",
+        "artist": null,
+        "sourceUrl": "https://unsplash.com/",
+        "usageRights": "Unsplash License (free for personal & commercial use)",
+        "license": "unsplash",
+        "attribution": "Unsplash photographer (no attribution required)"
+      },
+      "printSuitability": {
+        "isPrintReady": false,
+        "recommendedPPI": null,
+        "printQualityNotes": "NOT FOR PRINT – external reference only; use original Figma asset for print"
+      },
+      "webOptimization": {
+        "recommendedPreset": "gallery",
+        "maxWidth": 1200,
+        "quality": 0.88,
+        "formats": [
+          "webp",
+          "jpeg"
+        ]
+      },
+      "recoveryStatus": "fallback",
+      "recoveryNotes": "Temporary external reference; replace with recovered Figma asset when available",
+      "cloudinaryId": null,
+      "cloudinaryUrl": null,
+      "timestamps": {
+        "createdAt": "2026-10-17T00:00:00Z",
+        "recoveredAt": null,
+        "uploadedAt": "2026-10-17T00:00:00Z",
+        "archivedAt": null
+      }
+    }
+  ],
+  "metadata": {
+    "notes": "This is a sample showing 4 of 56 catalogue records. The full catalogue will include entries for: Homepage hero (3), Jungle Festival (3), Gondwana Festival (3), Origin Festival (3), Thailand portfolio (3), Nail art (3), Shankra Festival (3), Reiserfieber Festival (3), and 38 additional unmapped assets. External/fallback references will be marked as derivatives with source documentation.",
+    "catalogueInstructions": "Use this schema for all asset records. Required fields: catalogueId, figmaAssetId (or source.importedFrom), format, usage, metadata.altText, credits, recoveryStatus. Optional fields: uploadedAs, cloudinaryId (populated during migration). Timestamps track asset lifecycle (created → recovered → uploaded → archived)."
+  }
+}

@@ -1,17 +1,22 @@
 # TypeformEmbed Component
 
-**Version:** 1.0.1  
-**Component Type:** Integration Component  
-**Status:** ✅ Production Ready  
+**Version:** 1.0.1
+**Component Type:** Integration Component
+**Status:** ✅ Production Ready
 **Location:** `/components/common/TypeformEmbed.tsx`
 
-**Recent Fix:** v1.0.1 - Fixed "TypeError: Failed to fetch" errors by whitelisting Typeform domains in extension detection utilities. See [TYPEFORM_ERROR_FIX.md](/TYPEFORM_ERROR_FIX.md) for details.
+**Recent Fix:** v1.0.1 - Fixed "TypeError: Failed to fetch" errors by
+whitelisting Typeform domains in extension detection utilities. See
+[TYPEFORM*ERROR*FIX.md](/TYPEFORM*ERROR*FIX.md) for details.
 
 ---
 
 ## Overview
 
-The `TypeformEmbed` component integrates Typeform forms into the Ash Shaw portfolio with full light/dark mode support and Semantic BEM styling. It provides a seamless embedded form experience that matches the portfolio's "Neon vs Atomic Black" design system.
+The `TypeformEmbed` component integrates Typeform forms into the Ash Shaw
+portfolio with full light/dark mode support and Semantic BEM styling. It
+provides a seamless embedded form experience that matches the portfolio's "Neon
+vs Atomic Black" design system.
 
 ---
 
@@ -28,7 +33,8 @@ interface TypeformEmbedProps {
   /** Optional CSS class name for container */
   className?: string;
 }
-```
+
+```text
 
 ### Usage Example
 
@@ -39,14 +45,15 @@ export function ContactPage() {
   return (
     <div>
       <h2>Get in Touch</h2>
-      <TypeformEmbed 
+      <TypeformEmbed
         formId="01KGP965M86E2TCRWEVS0WJX57"
         height="600px"
       />
     </div>
   );
 }
-```
+
+```text
 
 ---
 
@@ -61,6 +68,7 @@ export function ContactPage() {
 ### WordPress Design Tokens Used
 
 **Colors:**
+
 - `--wp--preset--color--neutral-50` - Light mode background
 - `--wp--preset--color--neutral-900` - Dark mode background
 - `--wp--preset--color--neutral-200` - Light mode border
@@ -69,13 +77,16 @@ export function ContactPage() {
 - `--wp--preset--color--neon-pink` - Dark mode accent
 
 **Spacing:**
+
 - No internal padding (transparent container)
 
 **Borders:**
+
 - `--wp--preset--border-radius--xl` - Rounded corners (desktop)
 - `--wp--preset--border-radius--lg` - Rounded corners (mobile)
 
 **Shadows:**
+
 - `--wp--preset--shadow--card` - Default elevation
 - `--wp--preset--shadow--elevated` - Hover/dark mode elevation
 
@@ -84,18 +95,21 @@ export function ContactPage() {
 ## Visual States
 
 ### Light Mode
+
 - **Background:** Neutral 50 (light gray)
 - **Border:** Neutral 200 (medium gray)
 - **Shadow:** Subtle card shadow
 - **Loading spinner:** Purple accent
 
 ### Dark Mode
+
 - **Background:** Neutral 900 (near black)
 - **Border:** Neutral 800 (dark gray)
 - **Shadow:** Enhanced elevation shadow
 - **Loading spinner:** Pink accent
 
 ### Interactive States
+
 - **Hover:** Elevated shadow + 2px upward translation
 - **Focus:** 2px purple outline (light) / pink outline (dark)
 - **Loading:** Animated spinner until iframe loads
@@ -106,22 +120,26 @@ export function ContactPage() {
 
 ### WCAG AAA Compliance
 
-**✅ Keyboard Navigation:**
+## ✅ Keyboard Navigation
+
 - Full keyboard support inherited from Typeform iframe
 - Tab navigation through form fields
 - Enter/Space for button interactions
 
 **✅ Screen Readers:**
+
 - Iframe has `title="Contact Form"` attribute
 - Container is semantically structured
 - Form fields maintain Typeform's built-in ARIA labels
 
-**✅ Focus Management:**
+## ✅ Focus Management
+
 - Clear focus indicator with 2px outline
 - 4px outline offset for visibility
 - Color contrast meets AAA standards
 
 **✅ Color Contrast:**
+
 - Light mode: 7:1+ on all text
 - Dark mode: 7:1+ on all text
 - Loading spinner uses high-contrast colors
@@ -140,9 +158,11 @@ const script = document.createElement('script');
 script.src = '//embed.typeform.com/next/embed.js';
 script.async = true;
 document.body.appendChild(script);
-```
+
+```text
 
 **Benefits:**
+
 - No manual script tags in HTML
 - Automatic cleanup on unmount
 - Shared script across multiple instances
@@ -153,7 +173,7 @@ document.body.appendChild(script);
 The embed uses these data attributes:
 
 ```html
-<div 
+<div
   data-tf-live="FORM_ID"           <!-- Form ID -->
   data-tf-opacity="0"              <!-- Transparent background -->
   data-tf-hide-headers             <!-- Hide Typeform header -->
@@ -161,23 +181,27 @@ The embed uses these data attributes:
   data-tf-iframe-props="title=Contact Form"  <!-- Accessibility -->
   data-tf-medium="snippet"         <!-- Embed type -->
 />
-```
+
+```text
 
 ---
 
 ## Responsive Behavior
 
 ### Desktop (1024px+)
+
 - Full width within container
 - XL border radius
 - Enhanced shadow on hover
 
 ### Tablet (768px - 1023px)
+
 - Full width
 - XL border radius
 - Standard shadow
 
 ### Mobile (<768px)
+
 - Full width
 - LG border radius (smaller)
 - Reduced shadow for performance
@@ -187,13 +211,19 @@ The embed uses these data attributes:
 ## Performance Considerations
 
 **✅ Optimizations:**
-1. **Lazy script loading** - Script loads only when component mounts
-2. **Shared script** - Single script tag for all instances
-3. **CSS transitions** - Hardware-accelerated transforms
-4. **Loading indicator** - Visual feedback while iframe loads
-5. **No unnecessary re-renders** - Script cleanup only on unmount
 
-**⚡ Lighthouse Impact:**
+1. **Lazy script loading** - Script loads only when component mounts
+
+1. **Shared script** - Single script tag for all instances
+
+1. **CSS transitions** - Hardware-accelerated transforms
+
+1. **Loading indicator** - Visual feedback while iframe loads
+
+1. **No unnecessary re-renders** - Script cleanup only on unmount
+
+## ⚡ Lighthouse Impact
+
 - Minimal impact on initial page load
 - Async script prevents blocking
 - Iframe sandboxed for security
@@ -212,12 +242,13 @@ The embed uses these data attributes:
   <h2 className="text-section-h2 text-gradient-gold-peach-coral mb-fluid-sm">
     {contactUI.form.title}
   </h2>
-  <TypeformEmbed 
+  <TypeformEmbed
     formId="01KGP965M86E2TCRWEVS0WJX57"
     height="600px"
   />
 </div>
-```
+
+```text
 
 **CSS:** `/styles/blocks/contact-page.css`
 
@@ -235,7 +266,8 @@ The embed uses these data attributes:
 .contact-page-form h2 {
   padding: 0 var(--wp--preset--spacing--20);
 }
-```
+
+```text
 
 ---
 
@@ -255,25 +287,28 @@ The embed uses these data attributes:
 
 {/* Full viewport */}
 <TypeformEmbed formId="..." height="100vh" />
-```
+
+```text
 
 ### Adding Custom Classes
 
 ```tsx
-<TypeformEmbed 
+<TypeformEmbed
   formId="..."
   className="custom-spacing"
   height="600px"
 />
-```
+
+```text
 
 ### Changing Form ID
 
 Simply update the `formId` prop:
 
 ```tsx
-<TypeformEmbed formId="NEW_FORM_ID" />
-```
+<TypeformEmbed formId="NEW*FORM*ID" />
+
+```text
 
 ---
 
@@ -284,28 +319,38 @@ Simply update the `formId` prop:
 **Issue:** Typeform embed shows loading spinner indefinitely
 
 **Solutions:**
+
 1. Verify form ID is correct
-2. Check if form is published in Typeform
-3. Ensure script is loading (check Network tab)
-4. Clear browser cache and reload
+
+1. Check if form is published in Typeform
+
+1. Ensure script is loading (check Network tab)
+
+1. Clear browser cache and reload
 
 ### Dark Mode Not Working
 
 **Issue:** Embed doesn't switch to dark mode styling
 
 **Solutions:**
+
 1. Verify `.dark` class is on parent element
-2. Check CSS custom properties are defined
-3. Ensure `/styles/components/typeform-embed.css` is imported
+
+1. Check CSS custom properties are defined
+
+1. Ensure `/styles/components/typeform-embed.css` is imported
 
 ### Iframe Height Issues
 
 **Issue:** Form content is cut off or too much white space
 
 **Solutions:**
+
 1. Adjust `height` prop (recommended: 500px-700px)
-2. Use viewport units: `height="80vh"`
-3. Check Typeform form length and adjust accordingly
+
+1. Use viewport units: `height="80vh"`
+
+1. Check Typeform form length and adjust accordingly
 
 ---
 
@@ -316,24 +361,29 @@ Simply update the `formId` prop:
 If migrating from the previous `ContactForm` component:
 
 1. **Update import:**
+
    ```tsx
    // Old
    import { ContactForm } from "../../common/ContactForm";
-   
+
    // New
    import { TypeformEmbed } from "../../common/TypeformEmbed";
-   ```
 
-2. **Replace component:**
+```text
+
+1. **Replace component:**
+
    ```tsx
    // Old
    <ContactForm />
-   
+
    // New
    <TypeformEmbed formId="01KGP965M86E2TCRWEVS0WJX57" height="600px" />
-   ```
 
-3. **Update CSS:**
+```text
+
+1. **Update CSS:**
+
    - Remove `.contact-page-form` background, padding, borders
    - Add transparent container styling
 
@@ -341,13 +391,15 @@ If migrating from the previous `ContactForm` component:
 
 ## Browser Compatibility
 
-**✅ Supported Browsers:**
+## ✅ Supported Browsers
+
 - Chrome 90+ (full support)
 - Firefox 88+ (full support)
 - Safari 14+ (full support)
 - Edge 90+ (full support)
 
-**⚠️ Limited Support:**
+## ⚠️ Limited Support
+
 - IE 11 (Typeform not supported)
 - Opera Mini (limited iframe support)
 
@@ -355,13 +407,18 @@ If migrating from the previous `ContactForm` component:
 
 ## Security Considerations
 
-**✅ Security Features:**
+## ✅ Security Features
+
 1. Iframe sandboxing (Typeform handles this)
-2. HTTPS-only script loading
-3. No sensitive data in props
-4. Content Security Policy compatible
+
+1. HTTPS-only script loading
+
+1. No sensitive data in props
+
+1. Content Security Policy compatible
 
 **⚠️ Important:**
+
 - Form data is sent to Typeform servers
 - Ensure Typeform account has proper security settings
 - Review Typeform's privacy policy and GDPR compliance
@@ -370,12 +427,17 @@ If migrating from the previous `ContactForm` component:
 
 ## Future Enhancements
 
-**Potential improvements:**
+## Potential improvements
+
 1. Add support for popup/slider modes
-2. Implement custom loading spinner
-3. Add error boundary for script failures
-4. Support for Typeform Analytics tracking
-5. Custom theming via Typeform API
+
+1. Implement custom loading spinner
+
+1. Add error boundary for script failures
+
+1. Support for Typeform Analytics tracking
+
+1. Custom theming via Typeform API
 
 ---
 
@@ -405,6 +467,6 @@ Before deployment, verify:
 
 ---
 
-**Last Updated:** February 2025  
-**Maintained by:** Ash Shaw Portfolio Team  
+**Last Updated:** February 2025
+**Maintained by:** Ash Shaw Portfolio Team
 **Dependencies:** Typeform Embed SDK (`embed.typeform.com/next/embed.js`)

@@ -1,0 +1,36 @@
+# Lefthook configuration for ThisOneTimeOnAcid
+# Runs local Git hooks to catch issues before they reach remote
+
+min_version: 1.5.3
+
+# Pre-commit: validate branch naming and journal markdown
+pre-commit:
+  parallel: false
+  commands:
+    branch-validate:
+      run: npm run validate:branch-name
+      skip:
+        - merge
+        - rebase
+    journal-validate:
+      glob: "content/journal/*.md"
+      run: npm run journal:validate
+      skip:
+        - merge
+        - rebase
+
+# Pre-push: validate branch naming and build verification before pushing to remote
+pre-push:
+  parallel: false
+  commands:
+    branch-validate:
+      run: npm run validate:push-branch
+      use_stdin: true
+      skip:
+        - merge
+        - rebase
+    build:
+      run: npm run build
+      skip:
+        - merge
+        - rebase
