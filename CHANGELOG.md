@@ -29,7 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Governance convergence and manifest loading** — Recorded verified T060 routing evidence and pending Phase 9 closure; aligned T065 with disabled protected-file enforcement and limited missing-manifest handling to ENOENT.
 - **Dependabot schema validation** — Removed unsupported `auto-merge` properties from `.github/dependabot.yml` that were causing CI validation failures. The `auto-merge` property is no longer part of Dependabot's schema; native auto-merge functionality has been replaced with the centralized `dependabot-auto-merge.yml` workflow
 - **React externalization removed** — Removed the `resolveReactExternals()` plugin and `build.rollupOptions.external/globals` from `vite.config.ts`. They marked `react` and `react-dom` as external with no import map to resolve them, which broke `npm run dev` and left unresolvable `from "react"` imports in the production bundle. React is now bundled normally, as `@sentry/react` requires. This supersedes the restoration listed below under Issue #306
 - **CodeRabbit docstring coverage** — Added docstrings to 7 functions across netlify-hashed-asset-headers.mjs, check-netlify-headers.mjs, and vite.config.ts to meet 80% documentation coverage threshold (PR #426)
@@ -38,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Governance convergence and manifest loading** — Recorded verified T060 routing evidence and pending Phase 9 closure; protected-file enforcement is disabled when the manifest is absent (ENOENT only), and T065 reflects this policy.
 - **Netlify configuration consolidation** — Merged develop branch into build/netlify-hashed-asset-headers, consolidating HTML revalidation headers with build.processing optimizations for CSS, JS, and image compression (PR #427)
 - **Hashed-asset caching** — Content-hashed files Vite emits under `/assets/` now get `Cache-Control: public, max-age=31536000, immutable` through exact-path rules generated into `dist/_headers`. HTML keeps Netlify's `public,max-age=0,must-revalidate`.
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
