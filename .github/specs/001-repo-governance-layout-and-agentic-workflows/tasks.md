@@ -886,7 +886,7 @@ available to all team members
 
 ### Implementation for Phase 9 Convergence
 
-- [ ] T060 [P] [WS-261] [TOA-252] Complete PR template routing verification (T035 completion)
+- [x] T060 [P] [WS-261] [TOA-252] Complete PR template routing verification (T035 completion)
 - Previously listed branches: `test/pr-template-feature`, `test/pr-template-fix`, `test/pr-template-docs`, `test/pr-template-unmatched`. All have the `test/` prefix, so they do not establish the required routing scenarios.
 - `.github/workflows/pr-template-routing.yml` defines the expected mappings below; configuration inspection does not establish observed PR results.
 
