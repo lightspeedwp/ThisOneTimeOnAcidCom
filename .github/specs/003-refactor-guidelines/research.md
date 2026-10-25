@@ -30,7 +30,7 @@ This research phase resolves technical unknowns and documents evidence-pending d
 **Evidence:**
 - [AGENTS.md § Protected and locked files](../../../AGENTS.md#protected-and-locked-files): Requires explicit owner instruction for `CHANGELOG.md`, `ATTRIBUTIONS.md`, `src/app/components/figma/ImageWithFallback.tsx`, `src/app/utils/supabase/`, `.github/workflows/*`, and `tasks/task-list.md`; it does not declare all of `.github/` protected or define the guard's full scope.
 - [CI/CD workflow contract § locked-files-guard.yml](../001-repo-governance-layout-and-agentic-workflows/contracts/ci-cd-workflows.md#locked-files-guardyml-moved-to-implementation-per-q2-clarification): Lists exactly `.github/workflows/`, `CHANGELOG.md`, `AGENTS.md`, `guidelines/`, and `.github/labels.yml`; requires CODEOWNERS approval before merge. `.github/specs/` is not listed.
-- [Constitution § II](../../../.specify/memory/constitution.md#ii-repository-governance--configuration-management): Protects `CHANGELOG.md`, `ATTRIBUTIONS.md`, `guidelines/`, Supabase utils, and `.github/workflows/*` as read-only system artifacts.
+- [Constitution § II](../../../.specify/memory/constitution.md#ii-repository-governance--configuration-management): Protects `CHANGELOG.md`, `ATTRIBUTIONS.md`, `guidelines/`, Supabase utils, and `.github/workflows/*` specifically as read-only system artifacts. Only `.github/workflows/` is protected within `.github/`, not all of `.github/`.
 - [.github/PROTECTED_FILES.txt](../../PROTECTED_FILES.txt): Lists all of `.github/`, as well as `scripts/` and other protected paths. [The local approval checker](../../../scripts/validation/check-locked-file-approval.cjs) loads this list and treats directory entries as prefixes, so it includes `.github/specs/`. This is broader than the workflow contract.
 
 **Resolution:**
@@ -69,8 +69,9 @@ $ find guidelines -type f -name "*.md" | wc -l
   ```
 - **Verification Method:**
   1. Run `npm run validate:branch-name -- --branch aiops/refactor-guidelines` to confirm naming
-  2. Test router directly: `node scripts/pr-template-router.js aiops/refactor-guidelines` should output `docs` template
-  3. Verify typeMap includes: `aiops: { template: 'docs', labels: ['type:documentation'] }`
+  2. Test router mapping: `node scripts/pr-template-router.js aiops/refactor-guidelines` should output `{ template: 'docs', labels: ['type:documentation'] }`
+  3. Verify router loads correctly: `grep -A 2 "aiops:" scripts/pr-template-router.js` should show template and labels entries
+  4. Confirm router is wired into workflow: `.github/workflows/labeling-unified.yml` must import and execute `scripts/pr-template-router.js`
 - **Status:** This fix is NOT blocking specification refinement (it's a documentation/metadata issue, not a specification-gating issue)
 
 ### 5. Baseline Commit Reconciliation
