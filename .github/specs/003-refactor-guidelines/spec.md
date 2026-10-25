@@ -64,7 +64,10 @@ both contain 116 Markdown files. The 2026-10-25 rerun compared baseline commit
 hashes for all 116 files, with zero changes. See the [T021 report](./validation-reports/T021-hash-validation.md)
 and [baseline hash manifest](./validation-reports/T021-baseline.sha256).
 This verifies the Git baseline comparison; the original observation attachment
-remains unidentified. Phase 2B is **blocked** pending T017 `locked-files-guard` approval.
+remains unidentified. Baseline observation confirmation and overall source
+validation remain **pending** in the [requirements checklist](./checklists/requirements.md#phase-2-source-validation-pending)
+until the original prompt path and observation evidence are recorded and verified.
+Phase 2B is **blocked** pending T017 `locked-files-guard` approval.
 
 **Subdirectories:**
 - `blocks/` (4 files)
@@ -155,4 +158,6 @@ See [plan.md](./plan.md) and [tasks.md](./tasks.md) for full task breakdown and 
 ---
 
 *Source: TOA-358 implementation prompt (repository path not recorded; obtain the
-original prompt and record its relative path before validating source hashes).*
+original prompt and record its relative path and observation evidence before
+marking baseline observation confirmation and overall source validation complete).
+T021 records the separate Git baseline comparison linked above.*

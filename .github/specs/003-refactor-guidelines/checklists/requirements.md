@@ -166,24 +166,25 @@
 
 ---
 
-## Phase 2: Source Validation ✅ COMPLETE
+## Phase 2: Source Validation PENDING
 
-### Source State Verification (Completed T002, 2026-10-25)
-- [x] Baseline observation hash confirmed: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f`
-- [x] All 116 guidelines accessible and unchanged (T021 hash validation report)
+### Source State Verification (T002/T021 evidence, 2026-10-25)
+- [ ] Original TOA-358 implementation prompt relative path recorded (see [source note](../spec.md))
+- [ ] Baseline observation hash confirmed: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f` — original observation attachment path and hash provenance remain unrecorded
+- [x] All 116 guidelines accessible and unchanged against Git baseline `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` ([T021 report](../validation-reports/T021-hash-validation.md), [baseline manifest](../validation-reports/T021-baseline.sha256)); original observation confirmation remains pending
 - [x] 9 supporting documents readable
 - [ ] Active branch `docs/spec-003-phase2-implementation` clean of unrelated changes (T003 target checkout verification outstanding)
 - [x] `.github/dependabot.yml`, `.github/mergify.yml`, `CHANGELOG.md` unchanged
 
-### Scope Integrity (Completed T001-T002, 2026-10-25)
+### Scope Integrity (T001-T002 inventory, 2026-10-25)
 - [x] 116 G-rows inventoried
 - [x] 9 S-rows inventoried
 - [x] 33 N-rows inventoried (conditional)
 - [x] No unexpected files added/removed since baseline
-- [x] Original pasted.md attachment intact
+- [ ] Original pasted.md attachment intact — repository path and preservation evidence pending
 - [x] Original design caveat preserved
 
-**Status:** ✅ Phase 2 source validation complete. All 116 guidelines verified against baseline. Inventory reconciled. Repository state confirmed clean.
+**Status:** ⏳ Phase 2 source validation pending. T021 verifies all 116 guidelines against the named Git baseline; it does not authenticate the original observation attachment. Record and verify the original prompt path, observation hash provenance and attachment preservation evidence before completing source validation. T003 target checkout cleanliness verification also remains outstanding.
 
 ---
 
@@ -300,7 +301,7 @@
 | Component | Status | Blocker | Next Step |
 | --- | --- | --- | --- |
 | Gates D0–D8 | ✅ All 9 resolved | None — all gates documented with decisions and implementation guidance | Phase 2A ready to proceed |
-| Source validation | ✅ Complete | None | Phase 2A: Begin S-document edits; Phase 2B: Await T017 approval |
+| Source validation | ⏳ Pending | Original prompt/observation paths and evidence; T003 target checkout verification | Record and verify source provenance and attachment preservation; complete T003 |
 | Phase 2A Implementation | 🟢 Ready to start | None — guidance complete; awaiting kickoff | Begin S-document edits and N-document creation |
 | Phase 2B Implementation | 🔴 Blocked | T017 `locked-files-guard` approval required | Record T017 approval before starting G-document edits (T019–T027) |
 | Verification | ⏳ Scheduled | None — will execute post-Phase 2 implementation | Post-impl quality audit |
