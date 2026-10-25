@@ -169,7 +169,8 @@
 ## Phase 2: Source Validation PENDING
 
 ### Source State Verification
-- [ ] Baseline commit verified: `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` (per Phase 1 instruction); guidelines inventory digest: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f` (optional)
+- [ ] Baseline commit verified: `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` (per Phase 1 instruction; required by T002)
+- [ ] Guidelines inventory digest recorded: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f` (informational; not checked by any task)
 - [ ] All 116 guidelines accessible and unchanged
 - [ ] 9 supporting documents readable
 - [ ] Current `develop` branch clean of unrelated changes

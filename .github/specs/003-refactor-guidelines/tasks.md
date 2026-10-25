@@ -2,7 +2,7 @@
 title: "Tasks: Guidelines Refactor (TOA-358)"
 spec_id: "003"
 feature: "guidelines-refactor"
-status: "Phase 2 Implementation (Blocked on Implementation Guidance)"
+status: "Phase 2 Implementation (Unblocked)"
 created: "2026-10-25"
 ---
 
@@ -39,12 +39,9 @@ created: "2026-10-25"
 
 ---
 
-## Phase 2: Implementation 🔄 BLOCKED
+## Phase 2: Implementation ✅ UNBLOCKED
 
-**Blocking Condition**: Owner decisions on D1–D6, D8 must be recorded in `checklists/requirements.md` under their respective gate headings (### D1: through ### D8:) before Phase 2 starts. Verify ALL of the following:
-1. All gates D0–D8 have gate headings with RESOLVED status: `grep "^### D[0-8]:" checklists/requirements.md`
-2. All blocking guidance items for D4, D5, D6 have recorded answers (see "Blocking Issues" and "Blocking Guidance" sections in each gate)
-3. Phase 2 readiness status explicitly shows BLOCKED or READY based on whether all guidance is resolved
+**Status**: Owner decisions D0–D8 are RESOLVED and recorded in `checklists/requirements.md`. All implementation guidance is confirmed. Pre-implementation verification tasks (T001–T004) must complete successfully before phase execution begins.
 
 **Pre-Implementation Verification** (Complete before any tasks):
 
