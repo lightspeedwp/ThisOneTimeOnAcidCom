@@ -509,8 +509,8 @@ texture adds subtle depth and tactile quality to every major section.
 
 **Requirements:**
 
-- The parent section MUST have `position: relative` and `overflow: hidden`
-- Section content MUST sit above the noise layer (use `position: relative; z-index: 1` or higher)
+- Set the parent section with `position: relative` and `overflow: hidden` for proper containment
+- Position section content above the noise layer (use `position: relative; z-index: 1` or higher)
 - The grain is purely decorative — `pointer-events: none` and `aria-hidden` are implicit
 
 **Usage:**
