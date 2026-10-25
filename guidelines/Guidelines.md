@@ -52,7 +52,7 @@ re-run for ongoing maintenance.
 
 - `README.md` — Project overview
 - `CHANGELOG.md` — Release history (protected file — see **[changelog.md](./changelog.md)**)
-- `Attributions.md` — System-protected file (cannot be moved or deleted)
+- `Attributions.md` — System-protected file (treat as protected)
 
 **Other `.md` files generally belong in the appropriate folder:**
 
@@ -70,11 +70,8 @@ re-run for ongoing maintenance.
 
 ### 📁 Mandatory Folder Conventions
 
-The project uses three dedicated workflow folders. **All AI-generated and human-authored workflow artifacts MUST be stored in these folders.** See the [Workflow Orchestration Skill](../.claude/skills/workflow-orchestration/SKILL.md) for full folder structure rules and conventions.
-The project uses three dedicated workflow folders. **All AI-generated and
-human-authored workflow artifacts MUST be stored in these folders.** Never place
-prompts, reports, or task lists anywhere else (e.g., never in root, never in
-`/guidelines/`).
+The project uses three dedicated workflow folders for organizing AI-generated and human-authored workflow artifacts. See the [Workflow Orchestration Skill](../.claude/skills/workflow-orchestration/SKILL.md) for full folder structure rules and conventions.
+Store prompts, reports, and task lists in these designated folders rather than placing them elsewhere (e.g., avoid root, avoid `/guidelines/`).
 
 **Quick Reference:**
 
@@ -146,8 +143,7 @@ The Figma Make bundler has some known syntax incompatibilities. **To ensure comp
 ### 📋 Task list management conventions
 
 **All-purpose task list:** `/tasks/task-list.md` is the master general-purpose
-checklist. Simple one- or two-checkbox tasks go here. This file must **NEVER**
-be deleted.
+checklist. Simple one- or two-checkbox tasks go here. Preserve this file as a reference resource.
 
 **Dedicated task lists:** Full audits and multi-step prompts get their own task
 list (e.g., `/tasks/project-stability-audit-tasks.md`). One task list per
@@ -685,8 +681,8 @@ accessibility features.
 
 ### Breadcrumbs (REQUIRED on all sub-pages)
 
-**Single Source Component:** All breadcrumbs MUST use
-`/components/ui/Breadcrumbs.tsx`. Never create inline breadcrumb markup.
+**Single Source Component:** Use the centralized `Breadcrumbs` component
+from `/components/ui/Breadcrumbs.tsx` for all breadcrumbs rather than creating inline markup.
 
 **CSS:** `/styles/blocks/breadcrumbs.css` (imported by the component itself — no
 need to import CSS separately).
@@ -706,14 +702,14 @@ import { Breadcrumbs } from '../../ui/Breadcrumbs';
 
 **Rules:**
 
-- Never render `<Breadcrumbs>` more than once per page
+- Render `<Breadcrumbs>` once per page for optimal performance and clarity
 - Last item has no `href` (renders as plain text with `aria-current="page"`)
 - Schema.org BreadcrumbList JSON-LD is injected automatically
 
 ### SEO (REQUIRED on all pages)
 
-**Single Source Utility:** All SEO meta tags MUST use `setSEO()` from
-`/utils/seo.ts`. Never set `document.title` directly.
+**Single Source Utility:** Use the centralized `setSEO()` utility from
+`/utils/seo.ts` for managing SEO meta tags rather than setting `document.title` directly.
 
 ```tsx
 import { setSEO } from '../../../utils/seo';
@@ -736,8 +732,8 @@ useEffect(() => {
 
 ## Layout Components (Header, Footer, MobileMenu)
 
-- **Strictly Prohibited:** Hardcoded pixel values (e.g., `w-[300px]`, `top-[50px]`)
-- **Required:** Use responsive design tokens or fluid utilities
+- **Avoid hardcoded pixel values** (e.g., `w-[300px]`, `top-[50px]`) — they break responsive design
+- **Preferred:** Use responsive design tokens or fluid utilities for consistency across devices
 
 ### Typography Classes (REQUIRED)
 
@@ -838,8 +834,7 @@ Before using any component, read its specific guideline file:
 
 ### Console Logging Policy
 
-**Strict Rule:** No `console.log`, `console.warn`, or `console.error` calls are
-allowed in production code unless wrapped in a development environment check.
+Keep `console.log`, `console.warn`, and `console.error` calls out of production code, except when wrapped in a development environment check to avoid cluttering console output for end users.
 
 ```tsx
 if (import.meta.env.DEV) {
