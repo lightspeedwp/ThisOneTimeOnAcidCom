@@ -89,7 +89,7 @@
 
 **Evidence:** User decision recorded 2026-10-25
 
-**Blocking Issues for Phase 2B:** 
+**Blocking Issues for Phase 2B:**
 1. Pointer chain depth confirmation (1-hop acceptable?)
 2. Archive location structure (guidelines/_archive/ or other?)
 3. Reverse link policy (include "Formerly at" in new N-docs?)
