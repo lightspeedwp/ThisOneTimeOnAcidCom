@@ -1,7 +1,7 @@
 # Implementation Plan: TOA-358 Guidelines Refactor
 
 **Status:** Draft  
-**Branch:** `aiops/refactor-guidelines`  
+**Branch:** `docs/spec-003-guidelines-reconcile`\
 **Spec:** [Specification 003](./spec.md)
 **Timeline:** Phased (gates → planning → implementation → verification)
 
@@ -122,7 +122,7 @@ is outside this documentation refactor.
 #### Pre-Implementation Verification
 
 - [ ] D0–D8 decision evidence and required protected-file approvals present
-- [ ] Branch `aiops/refactor-guidelines` clean and up-to-date with `develop`
+- [ ] Branch `docs/spec-003-guidelines-reconcile` clean and up-to-date with `develop`
 - [ ] All 116 guidelines readable and unchanged
 - [ ] S001–S009 protected-file edits scoped
 
