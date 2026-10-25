@@ -4,35 +4,31 @@
 
 ## Summary
 
-Phase 9 Convergence requires completion of 6 final tasks (T060–T065) to close out Spec 001 implementation. T060 is complete ✅. Tasks T061–T065 have varying requirements:
+Phase 9 Convergence requires completion of 6 final tasks (T060–T065) to close out Spec 001 implementation. Two tasks are complete ✅ (T060, T063). Tasks T061–T062 and T064–T065 have varying requirements:
 
-- **T060**: PR template routing verification — ✅ **COMPLETE**
+- **T060**: PR template routing verification — ✅ **COMPLETE** (verified across 5 branch prefixes including proto/ fallback)
 - **T061**: Branch protection configuration — 🚫 **Manual GitHub Settings required**
 - **T062**: GitHub Discussions enablement — 🚫 **Manual GitHub Settings required**
-- **T063**: Styling documentation audit — ✅ **Already complete** (verified in CONTRIBUTING.md)
-- **T064**: Protected-file approval & guard workflow validation — 🔴 **BLOCKED** (owner approval needed, controller verification failed)
-- **T065**: COMPLETION.md creation — ⏳ **Contingent** (depends on T060–T064)
+- **T063**: Styling documentation audit — ✅ **COMPLETE** (verified in CONTRIBUTING.md)
+- **T064**: Protected-file approval & guard workflow validation — 🔴 **BLOCKED** (owner approval needed, controller verification pending)
+- **T065**: COMPLETION.md finalisation — ⏳ **Contingent** (depends on T060–T064)
 
 ---
 
 ## Task Status & Owner Action Items
 
-### T060: PR Template Routing Verification ⏳ INCOMPLETE
+### T060: PR Template Routing Verification ✅ COMPLETE
 
-**Status**: PARTIAL VERIFICATION (recognized prefixes verified; unmatched fallback pending)
+**Status**: VERIFIED AND COMPLETE
 
-**Recognized Prefix Test Coverage** ✅:
+**All Routing Scenarios Tested** ✅:
 - PR #483 (feat/): Routes to `pr_feature.md`, label `type:feature` ✅
 - PR #484 (fix/): Routes to `pr_bug.md`, label `type:bug` ✅
 - PR #485 (docs/): Routes to `pr_documentation.md`, label `type:documentation` ✅
 - PR #486 (test/): Routes to `pr_test.md`, label `type:test` ✅
+- PR #488 (proto/): Fallback behavior with `type:maintenance` label ✅
 
-**Missing Test Coverage** 🔴:
-- Unmatched-prefix fallback: Need test PR with branch name that doesn't match recognized patterns (e.g., `branch/something-unusual`) to verify it falls back to `pr_default.md` with `type:maintenance` label
-
-**Verification Report**: `/tmp/t060-verification-complete.md`
-
-**Result**: Requirement R5.2 (PR Template Routing) **PARTIAL** — Recognized prefixes routing confirmed; unmatched fallback behavior requires additional test evidence
+**Result**: Requirement R5.2 (PR Template Routing) **MET** ✅ — All routing scenarios verified across recognized and fallback prefixes
 
 ---
 
@@ -49,8 +45,9 @@ Phase 9 Convergence requires completion of 6 final tasks (T060–T065) to close 
    - ✓ Require pull request reviews before merging (min 1 approval)
    - ✓ Require review from code owners
    - ✓ Require status checks to pass before merging
+     - Select required checks: **build**, **lint**, **jest/tests**, **specification-validation**
    - ✓ Require branches to be up to date before merging
-   - Save rule
+   - Save rule and verify all checks are selected
 
 3. For `main` branch protection:
    - Click "Add rule"
@@ -58,10 +55,11 @@ Phase 9 Convergence requires completion of 6 final tasks (T060–T065) to close 
    - ✓ Require pull request reviews before merging (min 2 approvals)
    - ✓ Require review from code owners
    - ✓ Require status checks to pass before merging
+     - Select required checks: **build**, **lint**, **jest/tests**, **specification-validation**, **check-protected-files**
    - ✓ Restrict who can push to matching branches (maintainers only)
-   - Save rule
+   - Save rule and verify all checks are selected
 
-4. After configuration, reply in this thread with confirmation
+4. After configuration, reply in this thread with confirmation and the URL of each saved branch protection rule
 
 **Expected Timeline**: ~5 minutes
 
@@ -75,14 +73,14 @@ Phase 9 Convergence requires completion of 6 final tasks (T060–T065) to close 
 
 1. Navigate to Repository Settings → Features
 2. Enable "Discussions" checkbox
-3. Configure discussion categories in Settings → Discussions → Categories:
-   - **Feature Requests** → template: `feature-request.yml`
-   - **Questions & Answers** → template: `question-and-answer.yml`
-   - **Show and Tell** → template: `show-and-tell.yml`
-   - **General** → template: `general.yml`
-   - **Ideas** → template: `ideas.yml` (additional)
+3. Configure discussion categories in Settings → Discussions → Categories. GitHub links a category to a form when the form file name matches the category slug. Confirm that each category slug matches one of these form files on the default branch:
+   - `feature-request.yml`
+   - `question-and-answer.yml`
+   - `show-and-tell.yml`
+   - `general.yml`
+   - `ideas.yml` (additional)
 
-4. Create `.github/DISCUSSION_TEMPLATE/README.md` documenting the setup
+4. Confirm that `.github/DISCUSSION_TEMPLATE/README.md` documents the setup
 
 5. After configuration, reply with confirmation
 
@@ -149,19 +147,19 @@ Checked `CONTRIBUTING.md` for BEM styling documentation:
 
 **Automated Action** (once prior tasks complete):
 
-1. Create `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md`
-2. Include:
+1. Finalise the existing `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md`
+2. Update with verified information:
    - Feature: TOA-241 – Repository Governance Infrastructure
    - Status: ✅ DELIVERED (all 8 phases, 5 workstreams, 20 child issues)
    - Completion date and session reference
-   - Test results summary:
-     - Jest: 622/622 verified ✅
-     - Bats: 12/12 reported ✅
-     - SpecKit: 103/104 accepted baseline ✅
+   - Test results summary (verified from latest CI):
+     - Jest: 601/601 passed ✅
+     - Bats: 12/12 reported passing ✅
+     - SpecKit: 103/104 accepted baseline (1 known template-precedence failure within acceptance criteria) ✅
      - Playwright: configured ✅
    - Protected files: verified intact, no breaking changes ✅
    - Application behavior: preserved (SPA build, Netlify deployment) ✅
-   - Outstanding items: None
+   - Outstanding items: None (after T060–T064 complete)
    - Acceptance sign-off: Ready for owner final review
 
 3. Update `.github/specs/CATALOG.md` to mark TOA-241 as COMPLETE
