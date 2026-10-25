@@ -33,11 +33,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **React externalization removed** — Removed the `resolveReactExternals()` plugin and `build.rollupOptions.external/globals` from `vite.config.ts`. They marked `react` and `react-dom` as external with no import map to resolve them, which broke `npm run dev` and left unresolvable `from "react"` imports in the production bundle. React is now bundled normally, as `@sentry/react` requires. This supersedes the restoration listed below under Issue #306
 - **CodeRabbit docstring coverage** — Added docstrings to 7 functions across netlify-hashed-asset-headers.mjs, check-netlify-headers.mjs, and vite.config.ts to meet 80% documentation coverage threshold (PR #426)
 - **React external dependency resolution regression** — Restored missing `resolveReactExternals()` function and `build.rollupOptions` in Vite configuration that was accidentally removed in PR #345, causing all 7 subsequent Dependabot PRs to fail Netlify builds with unresolved `react/jsx-runtime` import errors (Issue #306)
-- **npm dependency lock synchronization** — Regenerated `package-lock.json` to resolve out-of-sync dependencies with `package.json`, fixing `npm ci` failures that prevented Jest baseline testing in CI workflows. Resolved version mismatches in @mui/icons-material, react-dom, and scheduler packages
+- **npm dependency lock synchronization** — Regenerated `package-lock.json` to resolve out-of-sync dependencies with `package.json`, fixing `npm ci` failures that prevented Jest baseline testing in CI workflows. Resolved version mismatches in @mui/icons-material, react-dom, and scheduler packages.
 
 ### Changed
 
-- **Governance convergence and manifest loading** — Recorded verified T060 routing evidence and pending Phase 9 closure; protected-file enforcement is disabled when the manifest is absent (ENOENT only), and T065 reflects this policy.
+- **Phase 9 convergence** — T064 cancelled after owner-approved guard removal ([#434](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/434)); T060–T062, final convergence assessment and owner sign-off remain required for T065 handoff
 - **Netlify configuration consolidation** — Merged develop branch into build/netlify-hashed-asset-headers, consolidating HTML revalidation headers with build.processing optimizations for CSS, JS, and image compression (PR #427)
 - **Hashed-asset caching** — Content-hashed files Vite emits under `/assets/` now get `Cache-Control: public, max-age=31536000, immutable` through exact-path rules generated into `dist/_headers`. HTML keeps Netlify's `public,max-age=0,must-revalidate`.
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)
@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **npm dependency lock synchronization** — Regenerated `package-lock.json` to resolve out-of-sync dependencies with `package.json`, fixing `npm ci` failures that prevented Jest baseline testing in CI workflows. Resolved version mismatches in @mui/icons-material, react-dom, and scheduler packages.
 - **SPA routing** — Direct visits and refreshes on nested routes such as `/journal` and `/about-ash` returned 404 because `public/_redirects` is a directory. A `/* → /index.html 200` fallback in the root `netlify.toml` now serves the app.
 
 ### Security
