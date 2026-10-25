@@ -85,7 +85,7 @@
 ---
 
 ### D7: Branch & PR Strategy (RESOLVED)
-- [x] Branch name validated: `aiops/refactor-guidelines`
+- [x] Branch name validated: `docs/spec-003-guidelines-reconcile`
 - [x] Reuse scope confirmed: fresh branch from develop
 - [x] Manual template/label handling: documented
 - [x] Side effects of current routing: understood
@@ -125,7 +125,7 @@
 
 ### Pre-Implementation
 - [ ] All D0–D8 gates resolved with evidence
-- [ ] Branch `aiops/refactor-guidelines` created and clean
+- [ ] Branch `docs/spec-003-guidelines-reconcile` created and clean
 - [ ] Task breakdown generated with checkpoints
 - [ ] Approval authority for each operation documented
 - [ ] No unrelated work on branch
@@ -216,4 +216,4 @@
 
 ---
 
-*Updated 2026-10-24 | Branch: aiops/refactor-guidelines*
+*Updated 2026-10-24 | Branch: docs/spec-003-guidelines-reconcile*
