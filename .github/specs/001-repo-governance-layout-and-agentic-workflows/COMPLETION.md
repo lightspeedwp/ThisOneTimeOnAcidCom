@@ -90,7 +90,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 | **Playwright (E2E)** | Configured, not executed | No E2E execution result recorded for this delivery |
 | **SpecKit (Validation)** | ⚠️ 103/104 accepted baseline | Accepted in tasks.md (T008, T030); one known template-precedence failure remains |
 
-PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751997997/job/119734670156) at commit `314881e` completed `npm ci --ignore-scripts --prefer-offline --no-audit --no-fund` successfully and ran 601 passing tests. This supports the installation and Jest results for that revision. Full CI validation remains outstanding: [Check Protected Files](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751998299/job/119734602115) failed and requires a successful rerun after approval handling is updated.
+PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751997997/job/119734670156) at commit `314881e` completed `npm ci --ignore-scripts --prefer-offline --no-audit --no-fund` successfully and ran 601 passing tests. This supports the installation and Jest results for that revision. The historical [Check Protected Files](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751998299/job/119734602115) job failure from PR #429 is superseded by the removal of the protected-files guard workflow in Phase 9; no rerun is possible or required.
 
 ### Protected Files & System Integrity
 
@@ -155,7 +155,7 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 | --- | --- | --- | --- | --- |
 | T061 | Branch protection configuration | Manual GitHub Setup | ⏳ Pending | GitHub Settings: develop (1 review + CODEOWNERS), main (2 reviews + CODEOWNERS + maintainer push restriction) |
 | T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | GitHub Settings: Enable Discussions with 5 categories (Features, Q&A, Show and Tell, General, Ideas) |
-| T065 | Final handoff documentation | Documentation | ⏳ Pending | Auto-generate after T061–T062 complete. T060 and T063 now ✅ |
+| T065 | Final handoff documentation | Documentation | ⏳ Pending | Owner (@ashley) must create after T061–T062 complete. T060 and T063 now ✅ |
 
 **Note:** T061 and T062 require owner action (@ashley) via GitHub Settings UI. T064 (protected-files-guard) has been removed. T060 and T063 are complete. The final handoff (T065) awaits completion of T061–T062.
 
@@ -303,7 +303,7 @@ Draft handoff only. T061–T062 gate final convergence and T065.
 - ✅ Phase 9 remaining work documented in tasks.md
 - ⏳ Convergence assessment and final handoff pending T061–T062 manual GitHub Settings
 
-**Next Action:** Owner (@ashley) complete T061–T062 (GitHub Settings) to trigger T065 final handoff.
+**Next Action:** Owner (@ashley) complete T061–T062 (GitHub Settings), then create T065 final handoff documentation (COMPLETION.md + CATALOG.md updates).
 
 ---
 

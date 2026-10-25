@@ -950,7 +950,7 @@ available to all team members
 - Update `.github/specs/CATALOG.md` to mark TOA-241 as COMPLETE (status: ✅ Delivered)
 - Mark: T059 ✅ complete when COMPLETION.md created and catalog updated
 
-**Checkpoint (pending)**: Owner (@ashley) to complete T061–T062 (GitHub Settings). After both are marked ✅, T065 will auto-generate final handoff documentation.
+**Checkpoint (pending)**: Owner (@ashley) to complete T061–T062 (GitHub Settings). After both are marked ✅, owner must execute T065 to create final handoff documentation (COMPLETION.md update and CATALOG.md update).
 
 ---
 
