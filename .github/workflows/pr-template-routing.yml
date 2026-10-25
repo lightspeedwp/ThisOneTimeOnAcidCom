@@ -85,17 +85,22 @@ jobs:
           # This allows routes like security/ to reuse pr_bug.md but still get type:security label
           case "$PREFIX" in
             feat) LABEL="type:feature"; DESC="Feature/Enhancement PR" ;;
-            fix|hotfix) LABEL="type:bug"; DESC="Bug Fix PR" ;;
+            fix) LABEL="type:bug"; DESC="Bug Fix PR" ;;
+            hotfix) LABEL="type:release"; DESC="Hotfix/Release PR" ;;
             refactor) LABEL="type:refactor"; DESC="Refactoring PR" ;;
             chore) LABEL="type:chore"; DESC="Maintenance/Chore PR" ;;
             doc|docs) LABEL="type:documentation"; DESC="Documentation PR" ;;
             task) LABEL="type:task"; DESC="Task/Epic Work PR" ;;
             test) LABEL="type:test"; DESC="Test/QA PR" ;;
             design|ds) LABEL="type:design"; DESC="Design System PR" ;;
-            ci|build) LABEL="type:ci"; DESC="CI/CD PR" ;;
+            ci) LABEL="type:ci"; DESC="CI/CD PR" ;;
+            build) LABEL="type:build"; DESC="Build System PR" ;;
             release) LABEL="type:release"; DESC="Release PR" ;;
             deps|security) LABEL="type:bug"; DESC="Dependency/Security PR" ;;
-            perf) LABEL="type:refactor"; DESC="Performance PR" ;;
+            perf) LABEL="type:performance"; DESC="Performance PR" ;;
+            a11y) LABEL="type:a11y"; DESC="Accessibility PR" ;;
+            audit) LABEL="type:audit"; DESC="Audit/Compliance PR" ;;
+            automation) LABEL="type:automation"; DESC="Workflow Automation PR" ;;
             aiops) LABEL="type:aiops"; DESC="AI Operations PR" ;;
             epic) LABEL="type:epic"; DESC="Epic PR" ;;
             *) LABEL="type:maintenance"; DESC="General PR" ;;
