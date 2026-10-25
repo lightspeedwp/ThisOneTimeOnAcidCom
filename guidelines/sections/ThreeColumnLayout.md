@@ -963,9 +963,9 @@ Differences:
 
 ### Design Tokens (1)
 
-- **[spacing.md](../design-tokens/spacing.md)** - Fluid spacing scale
-- **[colors.md](../design-tokens/colors.md)** - Color system and gradients
-- **[typography.md](../design-tokens/typography.md)** - Typography scale
+- **[spacing.md](./design-tokens-reference.md)** - Fluid spacing scale
+- **[colors.md](./design-tokens-reference.md)** - Color system and gradients
+- **[typography.md](./design-tokens-reference.md)** - Typography scale
 
 ---
 

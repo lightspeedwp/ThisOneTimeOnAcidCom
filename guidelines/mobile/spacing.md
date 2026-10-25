@@ -677,7 +677,7 @@ Test on these viewport widths:
 
 - **[mobile/typography.md](./typography.md)** - Typography scaling
 - **[mobile/buttons.md](./buttons.md)** - Button spacing and sizing
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Full spacing system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Full spacing system
 
 ---
 

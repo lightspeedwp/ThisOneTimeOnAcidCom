@@ -142,8 +142,8 @@ Block, Element, Modifier (BEM) naming convention ensures predictable, maintainab
 
 ### Related Guidance
 
-- **Dark Mode Lessons Learned:** `guidelines/dark-mode-lessons-learned.md`
-- **Light/Dark Mode Tokens:** `guidelines/design-tokens/light-dark-mode.md`
+- **Dark Mode Lessons Learned:** `guidelines/css-architecture-reference.md`
+- **Light/Dark Mode Tokens:** `guidelines/design-tokens-reference.md`
 
 ---
 
@@ -186,8 +186,8 @@ Block, Element, Modifier (BEM) naming convention ensures predictable, maintainab
 ### Related Guidance
 
 - **Responsive Design:** `guidelines/responsive-design.md`
-- **Breakpoints System:** `guidelines/responsive/breakpoints-system.md`
-- **Layout Patterns:** `guidelines/responsive/layout-patterns.md`
+- **Breakpoints System:** `guidelines/responsive-design.md`
+- **Layout Patterns:** `guidelines/responsive-design.md`
 
 ---
 
@@ -267,9 +267,9 @@ This N-document (N003) consolidates content from and maintains cross-references 
 
 - **Guidelines Preserved (Type 2 Consolidation):** Old files consolidated here
   - `guidelines/css-architecture.md` → content integrated
-  - `guidelines/dark-mode-implementation.md` → reference maintained
-  - `guidelines/dark-mode-lessons-learned.md` → reference maintained
-  - `guidelines/tailwind-to-bem-mapping.md` → reference maintained
+  - `guidelines/css-architecture-reference.md` → reference maintained
+  - `guidelines/css-architecture-reference.md` → reference maintained
+  - `guidelines/css-architecture-reference.md` → reference maintained
 
 All original files accessible as pointers to this canonical reference.
 

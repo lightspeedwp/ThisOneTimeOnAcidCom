@@ -11,7 +11,7 @@ Composite pattern combining filtering controls with responsive card grids.
 
 - **[overview-patterns.md](../overview-patterns.md)** - Pattern system
 - **[CategoryFilter.md](../components/CategoryFilter.md)** - Filter component
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing
 
 ---
 

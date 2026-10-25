@@ -28,7 +28,7 @@
 
 All animations must respect `prefers-reduced-motion` setting.
 
-See `guidelines/prefers-reduced-motion.md` for implementation.
+See `guidelines/accessibility-checklist.md` for implementation.
 
 ---
 

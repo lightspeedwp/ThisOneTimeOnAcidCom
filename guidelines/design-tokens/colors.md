@@ -752,7 +752,7 @@ text-purple-200 on bg-purple-950   /* 9.4:1 - AAA ✅ */
 
 - **[typography.md](./typography.md)** - Typography system and hierarchy
 - **[spacing.md](./spacing.md)** - Spacing scale and patterns
-- **[dark-mode-implementation.md](../dark-mode-implementation.md)** - Complete dark mode guide
+- **[css-architecture-reference.md](./css-architecture-reference.md)** - Complete dark mode guide
 - **[component-dark-mode.md](../component-dark-mode.md)** - Component-specific dark mode patterns
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 

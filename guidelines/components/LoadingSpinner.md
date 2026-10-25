@@ -693,7 +693,7 @@ Animated vertical bars - modern look.
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
 
 ---
 

@@ -689,8 +689,8 @@ rounded-full px-6 py-3 shadow-lg">
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
 
 ---
 

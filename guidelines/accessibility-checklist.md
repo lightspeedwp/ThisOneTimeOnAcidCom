@@ -164,7 +164,7 @@ Actionable accessibility checklist for ensuring WCAG 2.2 AAA compliance across a
 
 ### Reduced Motion Support
 
-Reference: `guidelines/prefers-reduced-motion.md` for comprehensive implementation guide.
+Reference: `guidelines/accessibility-checklist.md` for comprehensive implementation guide.
 
 ---
 
@@ -223,8 +223,8 @@ Use browser tools to catch:
 ## 6. Related Documentation
 
 - **Accessibility Recipes:** `guidelines/accessibility-recipes.md` (detailed WCAG patterns)
-- **Interaction Accessibility:** `guidelines/interactions-accessibility.md` (keyboard & ARIA)
-- **Prefers Reduced Motion:** `guidelines/prefers-reduced-motion.md` (motion handling)
+- **Interaction Accessibility:** `guidelines/accessibility-checklist.md` (keyboard & ARIA)
+- **Prefers Reduced Motion:** `guidelines/accessibility-checklist.md` (motion handling)
 - **Accessibility Audit Report:** [Archived report pointer](./_archive/accessibility-report-pointer.md), listed in the [archive index](./_archive/ARCHIVE-INDEX.md) (Feb 2025 findings)
 
 ---
@@ -252,8 +252,8 @@ This N-document (N002) consolidates content from and maintains cross-references 
 
 - **Guidelines Preserved (Type 2 Consolidation):** Old files consolidated here
   - `guidelines/accessibility-report-feb-2025.md` → content integrated; archive pointer maintained
-  - `guidelines/interactions-accessibility.md` → reference maintained
-  - `guidelines/prefers-reduced-motion.md` → reference maintained
+  - `guidelines/accessibility-checklist.md` → reference maintained
+  - `guidelines/accessibility-checklist.md` → reference maintained
 
 All original files accessible as pointers to this canonical reference.
 

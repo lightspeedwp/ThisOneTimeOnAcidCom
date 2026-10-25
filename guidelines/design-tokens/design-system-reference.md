@@ -580,7 +580,7 @@ animations must respect `prefers-reduced-motion`.**
 
    - Spin, Float, Bounce, Swing
 
-**Full documentation:** See `/guidelines/design-tokens/animations.md`
+**Full documentation:** See `/guidelines/design-tokens-reference.md`
 
 ---
 
@@ -603,7 +603,7 @@ animations must respect `prefers-reduced-motion`.**
 
 ```text
 
-**Coding Standards:** See `/guidelines/prefers-reduced-motion.md` for complete
+**Coding Standards:** See `/guidelines/accessibility-checklist.md` for complete
 implementation guide.
 
 ---
@@ -685,7 +685,7 @@ body.light-mode .component {
 
 ## Full documentation
 
-- See `/guidelines/dark-mode-implementation.md` for complete system
+- See `/guidelines/css-architecture-reference.md` for complete system
 - See `/guidelines/component-dark-mode.md` for component-specific patterns
 
 ---

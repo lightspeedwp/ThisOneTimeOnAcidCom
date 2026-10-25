@@ -487,8 +487,8 @@ All pages have dark mode implemented:
 
 ## 📚 Related Documentation
 
-- **[dark-mode-lessons-learned.md](./dark-mode-lessons-learned.md)** - Detailed lessons from implementing dark mode (70+ hours of experience)
-- **[design-tokens/neon-colors.md](./design-tokens/neon-colors.md)** - Complete neon color system reference
+- **[css-architecture-reference.md](./css-architecture-reference.md)** - Detailed lessons from implementing dark mode (70+ hours of experience)
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Complete neon color system reference
 - **[/styles/blocks/book-dark-mode.css](../styles/blocks/book-dark-mode.css)** - Master dark mode CSS file
 
 ---

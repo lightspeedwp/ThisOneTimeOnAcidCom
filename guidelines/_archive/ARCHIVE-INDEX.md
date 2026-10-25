@@ -33,33 +33,33 @@ Files that have been consolidated into larger reference documents:
 
 | Original Path | Consolidated Into | N-Document | Consolidation Type | Date |
 |---|---|---|---|---|
-| `guidelines/design-tokens/colors.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
-| `guidelines/design-tokens/typography.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
-| `guidelines/design-tokens/spacing.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
-| `guidelines/design-tokens/animations.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
-| `guidelines/design-tokens/neon-colors.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
-| `guidelines/design-tokens/neon-system.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
-| `guidelines/design-tokens/light-dark-mode.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
-| `guidelines/design-tokens/iconography.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
-| `guidelines/design-tokens/portfolio-design-tokens.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
-| `guidelines/image-optimization.md` | `guidelines/media-guidelines.md` | N004 | Media & asset consolidation | 2026-10-25 |
-| `guidelines/icons/interface.md` | `guidelines/media-guidelines.md` | N004 | Media & asset consolidation | 2026-10-25 |
-| `guidelines/icons/travel.md` | `guidelines/media-guidelines.md` | N004 | Media & asset consolidation | 2026-10-25 |
-| `guidelines/interactions-accessibility.md` | `guidelines/accessibility-checklist.md` | N002 | Accessibility guidance consolidation | 2026-10-25 |
-| `guidelines/prefers-reduced-motion.md` | `guidelines/accessibility-checklist.md` | N002 | Accessibility guidance consolidation | 2026-10-25 |
-| `guidelines/dark-mode-implementation.md` | `guidelines/css-architecture-reference.md` | N003 | CSS architecture consolidation | 2026-10-25 |
-| `guidelines/dark-mode-lessons-learned.md` | `guidelines/css-architecture-reference.md` | N003 | CSS architecture consolidation | 2026-10-25 |
-| `guidelines/tailwind-to-bem-mapping.md` | `guidelines/css-architecture-reference.md` | N003 | CSS architecture consolidation | 2026-10-25 |
-| `guidelines/responsive/breakpoints-system.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
-| `guidelines/responsive/layout-patterns.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
-| `guidelines/responsive/typography-scaling.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
-| `guidelines/responsive/spacing-adjustments.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
-| `guidelines/responsive/interaction-modes.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
-| `guidelines/responsive/navigation-responsive.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
-| `guidelines/sitemap-routes.md` | `guidelines/sitemap-navigation.md` | N025 | Sitemap consolidation | 2026-10-25 |
-| `guidelines/pages/sitemap-page.md` | `guidelines/sitemap-navigation.md` | N025 | Sitemap consolidation | 2026-10-25 |
+| `guidelines/design-tokens-reference.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
+| `guidelines/design-tokens-reference.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
+| `guidelines/design-tokens-reference.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
+| `guidelines/design-tokens-reference.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
+| `guidelines/design-tokens-reference.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
+| `guidelines/design-tokens-reference.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
+| `guidelines/design-tokens-reference.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
+| `guidelines/design-tokens-reference.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
+| `guidelines/design-tokens-reference.md` | `guidelines/design-tokens-reference.md` | N001 | Unified token governance | 2026-10-25 |
+| `guidelines/media-guidelines.md` | `guidelines/media-guidelines.md` | N004 | Media & asset consolidation | 2026-10-25 |
+| `guidelines/media-guidelines.md` | `guidelines/media-guidelines.md` | N004 | Media & asset consolidation | 2026-10-25 |
+| `guidelines/media-guidelines.md` | `guidelines/media-guidelines.md` | N004 | Media & asset consolidation | 2026-10-25 |
+| `guidelines/accessibility-checklist.md` | `guidelines/accessibility-checklist.md` | N002 | Accessibility guidance consolidation | 2026-10-25 |
+| `guidelines/accessibility-checklist.md` | `guidelines/accessibility-checklist.md` | N002 | Accessibility guidance consolidation | 2026-10-25 |
+| `guidelines/css-architecture-reference.md` | `guidelines/css-architecture-reference.md` | N003 | CSS architecture consolidation | 2026-10-25 |
+| `guidelines/css-architecture-reference.md` | `guidelines/css-architecture-reference.md` | N003 | CSS architecture consolidation | 2026-10-25 |
+| `guidelines/css-architecture-reference.md` | `guidelines/css-architecture-reference.md` | N003 | CSS architecture consolidation | 2026-10-25 |
+| `guidelines/responsive-design.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
+| `guidelines/responsive-design.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
+| `guidelines/responsive-design.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
+| `guidelines/responsive-design.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
+| `guidelines/responsive-design.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
+| `guidelines/responsive-design.md` | `guidelines/responsive-design.md` | N009 | Responsive design consolidation | 2026-10-25 |
+| `guidelines/sitemap-navigation.md` | `guidelines/sitemap-navigation.md` | N025 | Sitemap consolidation | 2026-10-25 |
+| `guidelines/sitemap-navigation.md` | `guidelines/sitemap-navigation.md` | N025 | Sitemap consolidation | 2026-10-25 |
 
-See respective pointer files (e.g., `guidelines/image-optimization.md`) for navigation to consolidated content.
+See respective pointer files (e.g., `guidelines/media-guidelines.md`) for navigation to consolidated content.
 
 ---
 
@@ -113,9 +113,9 @@ To find specific archived guidance:
 4. **Check the pointer file** (if available) for quick navigation
 
 Example: Looking for color guidance?
-- Original: `guidelines/design-tokens/colors.md`
+- Original: `guidelines/design-tokens-reference.md`
 - New location: `guidelines/design-tokens-reference.md` (N001)
-- Pointer: See `guidelines/design-tokens/colors.md` for navigation
+- Pointer: See `guidelines/design-tokens-reference.md` for navigation
 
 ---
 

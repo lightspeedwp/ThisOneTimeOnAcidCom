@@ -255,21 +255,21 @@ Review the overview files in this directory to get the bigger picture:
 
 Review the files in the `design-tokens/` folder to understand the design system:
 
-- **[neon-colors.md](./design-tokens/neon-colors.md)** - 🆕 Neon vs Atomic Black color system (PRIMARY)
-- **[animations.md](./design-tokens/animations.md)** - 🆕 Complete animation system with 26 keyframes
-- **[colors.md](./design-tokens/colors.md)** - Legacy color documentation (reference only)
-- **[typography.md](./design-tokens/typography.md)** - Typography scale and hierarchy
-- **[spacing.md](./design-tokens/spacing.md)** - Spacing system and responsive patterns
+- **[neon-colors.md](./design-tokens-reference.md)** - 🆕 Neon vs Atomic Black color system (PRIMARY)
+- **[animations.md](./design-tokens-reference.md)** - 🆕 Complete animation system with 26 keyframes
+- **[colors.md](./design-tokens-reference.md)** - Legacy color documentation (reference only)
+- **[typography.md](./design-tokens-reference.md)** - Typography scale and hierarchy
+- **[spacing.md](./design-tokens-reference.md)** - Spacing system and responsive patterns
 - **[accessibility-report-feb-2025.md](./accessibility-report-feb-2025.md)** - 🆕 WCAG 2.2 AAA compliance report
-- **[prefers-reduced-motion.md](./prefers-reduced-motion.md)** - 🆕 Reduced motion coding standards & accessibility guide
+- **[accessibility-checklist.md](./accessibility-checklist.md)** - 🆕 Reduced motion coding standards & accessibility guide
 
 ### Step 2.5: Understand Light/Dark Mode System
 
 Review the light/dark mode documentation to understand theme implementation:
 
 - **[nova-news-dark-mode.md](./nova-news-dark-mode.md)** - 🆕 Quick reference for Nova News dark mode (START HERE!)
-- **[dark-mode-lessons-learned.md](./dark-mode-lessons-learned.md)** - 🆕 CRITICAL: Lessons learned from implementation (read this to avoid 40+ hours of mistakes)
-- **[dark-mode-implementation.md](./dark-mode-implementation.md)** - Complete dark mode implementation guide
+- **[css-architecture-reference.md](./css-architecture-reference.md)** - 🆕 CRITICAL: Lessons learned from implementation (read this to avoid 40+ hours of mistakes)
+- **[css-architecture-reference.md](./css-architecture-reference.md)** - Complete dark mode implementation guide
 - **[component-dark-mode.md](./component-dark-mode.md)** - Component-specific dark/light mode patterns
 
 ### Step 3: Understand Mock Data System
@@ -552,7 +552,7 @@ by 80s CLI interfaces:
 
 - ✅ 100% WCAG 2.2 AAA compliant with full `prefers-reduced-motion` support
 - ✅ All animations disable gracefully for motion-sensitive users
-- ✅ See **[prefers-reduced-motion.md](./prefers-reduced-motion.md)** for implementation standards
+- ✅ See **[accessibility-checklist.md](./accessibility-checklist.md)** for implementation standards
 
 **Dev Tools:**
 Visit `/dev/animations` for interactive showcase with live demos, code examples,
@@ -592,13 +592,13 @@ that reflects the vibrant, energetic nature of makeup artistry.
 
 ## 📖 Complete Documentation
 
-- **[neon-colors.md](./design-tokens/neon-colors.md)** - Full neon color system with 33 curated palettes and interface inspiration
-- **[animations.md](./design-tokens/animations.md)** - All 26 animations documented
+- **[neon-colors.md](./design-tokens-reference.md)** - Full neon color system with 33 curated palettes and interface inspiration
+- **[animations.md](./design-tokens-reference.md)** - All 26 animations documented
 
 ### Responsive Breakpoints & Fluid Typography
 
-(See [design-tokens/typography.md](./design-tokens/typography.md) and
-[design-tokens/spacing.md](./design-tokens/spacing.md) for full details)
+(See [design-tokens-reference.md](./design-tokens-reference.md) and
+[design-tokens-reference.md](./design-tokens-reference.md) for full details)
 
 ## Fluid Width System (Updated v7.5.0)
 
@@ -644,7 +644,7 @@ All components meet the following standards:
 
 - **Color Contrast:** 4.5:1 minimum (body text), 7:1+ achieved in dark mode (AAA)
 - **Reduced Motion:** Full `prefers-reduced-motion` support for all 26 animations
-- See **[prefers-reduced-motion.md](./prefers-reduced-motion.md)** for coding standards and implementation guide
+- See **[accessibility-checklist.md](./accessibility-checklist.md)** for coding standards and implementation guide
 - **Keyboard Navigation:** Full support (Tab, Enter, Space, Arrows, Escape)
 - **Screen Readers:** Proper ARIA labels and semantic HTML
 - **Focus Management:** Enhanced 3px neon pink focus indicators with glow effects
@@ -739,7 +739,7 @@ useEffect(() => {
 
 ### Typography Classes (REQUIRED)
 
-See **[design-tokens/typography.md](./design-tokens/typography.md)** for
+See **[design-tokens-reference.md](./design-tokens-reference.md)** for
 complete scale.
 
 ```css
@@ -751,7 +751,7 @@ complete scale.
 
 ### Color Classes (REQUIRED)
 
-See **[design-tokens/colors.md](./design-tokens/colors.md)** for complete
+See **[design-tokens-reference.md](./design-tokens-reference.md)** for complete
 palette.
 
 ```css

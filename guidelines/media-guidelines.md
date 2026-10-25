@@ -29,7 +29,7 @@ Guidelines for image optimization, responsive images, iconography usage, and ass
 - **Max file size:** 500KB per image (after optimization)
 - **Thumbnail:** < 50KB
 
-Reference: `guidelines/image-optimization.md`
+Reference: `guidelines/media-guidelines.md`
 
 ---
 
@@ -54,10 +54,10 @@ Reference: `guidelines/image-optimization.md`
 
 ### Icon Sets
 
-**Interface Icons** (`guidelines/icons/interface.md`)
+**Interface Icons** (`guidelines/media-guidelines.md`)
 - Navigation, UI controls, status
 
-**Travel & Portfolio Icons** (`guidelines/icons/travel.md`)
+**Travel & Portfolio Icons** (`guidelines/media-guidelines.md`)
 - Festival locations, travel themes
 
 ### Usage Rules
@@ -82,9 +82,9 @@ Reference: `guidelines/image-optimization.md`
 This N-document (N004) consolidates content from and maintains cross-references to the following G-documents per the guidelines refactor (Specification 003):
 
 - **Guidelines Preserved (Type 2 Consolidation):** Old files consolidated here
-  - `guidelines/image-optimization.md` → content integrated
-  - `guidelines/icons/interface.md` → reference maintained
-  - `guidelines/icons/travel.md` → reference maintained
+  - `guidelines/media-guidelines.md` → content integrated
+  - `guidelines/media-guidelines.md` → reference maintained
+  - `guidelines/media-guidelines.md` → reference maintained
 
 All original files accessible as pointers to this canonical reference.
 

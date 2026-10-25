@@ -853,7 +853,7 @@ focus:ring-opacity-50 rounded-lg p-2"
 - **[Data System](../../data/README.md)** - Mock data system guide
 - **[overview-components.md](../overview-components.md)** - Component architecture
 - **[overview-icons.md](../overview-icons.md)** - Icon verification process
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 
 ---

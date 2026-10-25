@@ -28,9 +28,9 @@
 
 ## Related Documentation
 
-- `guidelines/responsive/breakpoints-system.md`
-- `guidelines/responsive/layout-patterns.md`
-- `guidelines/responsive/typography-scaling.md`
+- `guidelines/responsive-design.md`
+- `guidelines/responsive-design.md`
+- `guidelines/responsive-design.md`
 
 ---
 
