@@ -625,6 +625,38 @@ When you submit a PR that affects these areas, the code owner is automatically
 requested for review via GitHub's CODEOWNERS mechanism. Approve their feedback
 or provide justification before merging.
 
+### Branch Protection
+
+This repository enforces branch protection rules to maintain code quality and
+prevent accidental changes to critical branches.
+
+#### `develop` Branch
+
+The `develop` branch is the integration branch for feature work:
+
+- ✅ **Require pull request reviews:** 1 approval required
+- ✅ **Require CODEOWNERS review:** All changes affecting CODEOWNERS areas require approval
+- ✅ **Require status checks to pass:** The following checks must pass before merge:
+  - `Tests / No new test failures` — Jest unit tests
+  - `Build / Build passes` — Build verification
+- ✅ **Require branches to be up to date:** Head branch must be up-to-date with base before merge
+- ✅ **Allow force pushes:** Disabled (rewriting history is not permitted)
+
+#### `main` Branch
+
+The `main` branch is the production release branch:
+
+- ✅ **Require pull request reviews:** 2 approvals required
+- ✅ **Require CODEOWNERS review:** All changes require approval
+- ✅ **Require status checks to pass:** Same checks as `develop`:
+  - `Tests / No new test failures` — Jest unit tests
+  - `Build / Build passes` — Build verification
+- ✅ **Restrict who can push:** Only @ashley (maintainer) can push directly
+- ✅ **Allow force pushes:** Disabled (rewriting history is not permitted)
+
+**Merging to main:** Only release commits are merged from `develop` to `main`.
+All work flows through `develop` first.
+
 ### Locked Configuration Files
 
 These files are **manually curated by @ashley** and require explicit approval to
