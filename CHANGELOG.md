@@ -37,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Phase 9 convergence** — T064 cancelled after owner-approved guard removal ([#434](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/434)); T061–T062, final convergence assessment and owner sign-off remain required for T065 handoff
+- **Phase 9 convergence** — T064 cancelled after owner-approved guard removal ([#434](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/434)); T060–T062, final convergence assessment and owner sign-off remain required for T065 handoff
 - **Netlify configuration consolidation** — Merged develop branch into build/netlify-hashed-asset-headers, consolidating HTML revalidation headers with build.processing optimizations for CSS, JS, and image compression (PR #427)
 - **Hashed-asset caching** — Content-hashed files Vite emits under `/assets/` now get `Cache-Control: public, max-age=31536000, immutable` through exact-path rules generated into `dist/_headers`. HTML keeps Netlify's `public,max-age=0,must-revalidate`.
 - **Runtime version pinning** — Updated `.nvmrc` and Netlify configuration to Node.js 24 and npm 10 (previously Node 18 / npm 9)

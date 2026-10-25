@@ -161,9 +161,9 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 | T060 | PR template routing verification | Phase 9 Task | ⏳ Pending | Routing observed for `feat/*` (type:feature), `fix/*` (type:bug), `docs/*` (type:documentation), `proto/*` (type:maintenance). Evidence for named-template selection precedence and content preservation still required. |
 | T061 | Branch protection configuration | Manual GitHub Setup | ⏳ Pending | GitHub Settings: develop (1 review + CODEOWNERS), main (2 reviews + CODEOWNERS + maintainer push restriction) |
 | T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | GitHub Settings: Enable Discussions with 5 categories (Features, Q&A, Show and Tell, General, Ideas) |
-| T065 | Final handoff documentation | Documentation | ⏳ Pending | Owner (@ashley) must create after T060–T062 complete. Final convergence assessment and owner sign-off required. |
+| T065 | Final handoff documentation | Documentation | ⏳ Pending | Prerequisites: (1) T060–T062 complete, (2) Final convergence assessment performed, (3) Owner (@ashley) sign-off. All required before handoff documentation can be finalized. |
 
-**Note:** T061 and T062 require owner action (@ashley) via GitHub Settings UI. T064 is cancelled following the owner-approved guard removal recorded above and in tasks.md; this supersedes the older guard rerun instructions. T060 is pending missing evidence for template precedence and content preservation. The final handoff (T065) awaits completion of T060–T062, final convergence assessment and owner sign-off.
+**Note:** T061 and T062 require owner action (@ashley) via GitHub Settings UI. T064 is cancelled following the owner-approved guard removal recorded above and in tasks.md; this supersedes the older guard rerun instructions. T060 is pending missing evidence for template precedence and content preservation. The final handoff (T065) requires three prerequisites: (1) completion of T060–T062, (2) final convergence assessment confirming all gates passed, and (3) owner sign-off on Phase 9 completion.
 
 ---
 

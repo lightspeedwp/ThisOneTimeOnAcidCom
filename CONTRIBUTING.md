@@ -638,6 +638,10 @@ The `develop` branch is the integration branch for feature work:
 - **Require pull request reviews:** 1 approval required
 - **Require CODEOWNERS review:** All changes affecting CODEOWNERS areas require approval
 - **Require status checks to pass:** The following checks must pass before merge:
+  - `Jest (head)` — Jest unit tests on current branch
+  - `Jest (base)` — Jest unit tests on base branch (develop)
+  - `Specification Validation` — SpecKit specification validation
+  - `Lint GitHub Actions Workflows` — YAML linting for workflows
   - `Tests / No new test failures` — Jest unit tests
 - **Require branches to be up to date:** Head branch must be up-to-date with base before merge
 - **Allow force pushes:** Disabled (rewriting history is not permitted)
@@ -649,6 +653,10 @@ The `main` branch is the production release branch:
 - **Require pull request reviews:** 2 approvals required
 - **Require CODEOWNERS review:** All changes require approval
 - **Require status checks to pass:** Same checks as `develop`:
+  - `Jest (head)` — Jest unit tests on current branch
+  - `Jest (base)` — Jest unit tests on base branch (main)
+  - `Specification Validation` — SpecKit specification validation
+  - `Lint GitHub Actions Workflows` — YAML linting for workflows
   - `Tests / No new test failures` — Jest unit tests
 - **Restrict who can push:** Only @ashley (maintainer) can push directly
 - **Allow force pushes:** Disabled (rewriting history is not permitted)
