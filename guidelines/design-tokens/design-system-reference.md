@@ -719,7 +719,7 @@ body.light-mode .component {
 
 - Body text: 4.5:1 minimum (WCAG AA)
 - Dark mode achieves 7:1+ (WCAG AAA)
-- Always test neon colors against backgrounds
+- Test neon colors against backgrounds
 
 **Reduced Motion:**
 
@@ -776,7 +776,7 @@ var(--wp--preset--spacing--80)  /* 80px */
 
 ---
 
-**This is a living document. Always verify token values in `/styles/globals.css`
+**This is a living document. Verify token values in `/styles/globals.css`
 for the most up-to-date implementation.**
 
 **Last Updated:** March 7, 2026

@@ -278,7 +278,7 @@ lg:gap-8">
 
 // Full viewport hero
 <section className="min-h-screen">
-  {/* Always 100vh */}
+  {/* Full viewport height */}
 </section>
 
 // Safe area for mobile (accounting for browser chrome)

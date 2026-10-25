@@ -41,7 +41,7 @@ imported last in `globals.css` to ensure proper cascade.
 
 /* ... all component styles ... */
 
-/* Dark Mode - MUST BE LAST */
+/* Dark Mode - Place last for proper precedence */
 @import './blocks/book-dark-mode.css';
 
 ```text
@@ -50,7 +50,7 @@ imported last in `globals.css` to ensure proper cascade.
 
 ## 🎨 Selector Pattern (CRITICAL)
 
-## Always use BOTH `.dark` and `body.dark` selectors
+## Use BOTH `.dark` and `body.dark` selectors
 
 ```css
 /* ✅ CORRECT - Catches all theme toggle scenarios */

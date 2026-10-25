@@ -134,7 +134,7 @@ This script:
 
 ## 4. Best Practices
 
-1. **Always use presets:** Avoid manual `maxWidth` unless absolutely necessary.
+1. **Use presets:** Avoid manual `maxWidth` unless absolutely necessary.
 
 1. **Lazy Load:** The component defaults to `loading="lazy"`. Only disable for LCP (Largest Contentful Paint) images like the Hero.
 

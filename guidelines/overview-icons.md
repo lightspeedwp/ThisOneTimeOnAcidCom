@@ -418,7 +418,7 @@ import { ArrowUp, Menu } from 'lucide-react';
 
 ```text
 
-**Solution:** Always include aria-label for icon-only buttons:
+**Solution:** Include aria-label for icon-only buttons:
 
 ```tsx
 // ✅ CORRECT - Accessible
