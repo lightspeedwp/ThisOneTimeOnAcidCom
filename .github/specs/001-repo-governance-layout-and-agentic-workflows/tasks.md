@@ -882,7 +882,7 @@ available to all team members
 
 **Purpose**: Resolve remaining incomplete tasks from Phases 5–8 and document final handoff
 
-**Status**: Convergence pending manual GitHub Settings (T061–T062) and final handoff (T065)
+**Status**: Convergence pending PR template routing verification (T060), manual GitHub Settings (T061–T062), protected-file approval revalidation (T064), and final handoff (T065)
 
 ### Implementation for Phase 9 Convergence
 
@@ -945,10 +945,10 @@ available to all team members
     - Feature: TOA-241 – Repository Governance Infrastructure
     - Status: ✅ DELIVERED (all 8 phases, 5 workstreams, 20 child issues)
     - Completion date and session reference
-    - Test results summary (Jest 622/622 verified in PR #429 CI; Bats 12/12 reported passing; SpecKit 103/104 accepted baseline; Playwright configured, not executed)
-    - Protected files: verified intact, no breaking changes
+    - Test results summary (Jest 601/601 verified in PR #429 CI baseline; Bats 12/12 reported passing; SpecKit 103/104 accepted baseline; Playwright configured, not executed; current-head Jest result absent pending PR #518 npm lock sync)
+    - Protected files: .github/PROTECTED_FILES.txt deleted and owner-approved in PR #434; implementation converged to checked-in guard removal without revalidation required
     - Application behavior: preserved (SPA build, Netlify deployment)
-    - Outstanding items: None (all phases and workstreams completed)
+    - Outstanding items: T060–T062 and owner sign-off pending (Phase 9 convergence gates)
     - Acceptance sign-off: Ready for owner (@ashley) final review and merge to main
 - Update `.github/specs/CATALOG.md` to mark TOA-241 as COMPLETE (status: ✅ Delivered)
 - Mark: T059 ✅ complete when COMPLETION.md created and catalog updated
