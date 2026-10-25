@@ -20,7 +20,7 @@ owner: "@ashley"
 
 ## Executive Summary
 
-Specification-001 (Repository Governance Layout & Agentic Workflows) has delivered phases 1–8 of the implementation. Phase 9 convergence and final merge readiness remain pending routing evidence (T060), branch protection (T061), Discussions setup (T062), and protected-file guard revalidation (T064). The final handoff (T065) is deferred until those gates are complete.
+Specification-001 (Repository Governance Layout & Agentic Workflows) has delivered phases 1–8 of the implementation. Phase 9 convergence and final merge readiness remain pending branch protection (T061), Discussions setup (T062), and protected-file guard revalidation (T064). The final handoff (T065) is deferred until those gates are complete. PR template routing verification (T060) is complete with all test cases passing.
 
 ### Delivery Status
 - ✅ **All 8 implementation phases completed**
@@ -146,7 +146,7 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 
 | Task | Purpose | Status | Details |
 | --- | --- | --- | --- |
-| T060 | PR template routing verification | ✅ Complete | 4 test PRs verified across feat/, fix/, docs/, test/ prefixes with correct routing |
+| T060 | PR template routing verification | ✅ Complete | PR #483 (feat/ → type:feature), PR #484 (fix/ → type:bug), PR #485 (docs/ → type:documentation), PR #486 (test/ → type:test), PR #488 (proto/ → type:maintenance, fallback). Routing comments and labels verified for all cases. |
 | T063 | Styling documentation audit | ✅ Complete | Verified CONTRIBUTING.md and guidelines/css-architecture.md have comprehensive BEM documentation |
 
 **Remaining Tasks:**
@@ -304,7 +304,7 @@ Draft handoff only. T061, T062 and T064 gate final convergence and T065.
 - ✅ AI agent governance framework implemented
 - ✅ Documentation updated with new workflows
 - ✅ Phase 9 remaining work documented in tasks.md
-- ⏳ Convergence assessment and final handoff pending T060, T061, T062 and T064
+- ⏳ Convergence assessment and final handoff pending T061, T062 and T064
 
 **Next Action:** Owner (@ashley) review and approve Phase 9 items for production merge.
 
