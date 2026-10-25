@@ -246,8 +246,22 @@ Before merging any feature:
 
 ---
 
+## Consolidated G-Document References
+
+This N-document (N002) consolidates content from and maintains cross-references to the following G-documents per the guidelines refactor (Specification 003):
+
+- **Guidelines Preserved (Type 2 Consolidation):** Old files consolidated here
+  - `guidelines/accessibility-report-feb-2025.md` → content integrated; archive pointer maintained
+  - `guidelines/interactions-accessibility.md` → reference maintained
+  - `guidelines/prefers-reduced-motion.md` → reference maintained
+
+All original files accessible as pointers to this canonical reference.
+
+---
+
 **Last Updated:** 2026-10-25  
 **Maintained by:** Ash Shaw Portfolio Team  
 **Canonical Reference:** Yes  
-**Compliance Level:** WCAG 2.2 AAA
+**Compliance Level:** WCAG 2.2 AAA  
+**N-Document ID:** N002 (Specification 003 - Guidelines Refactor)
 

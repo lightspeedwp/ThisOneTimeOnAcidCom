@@ -77,6 +77,20 @@ Reference: `guidelines/image-optimization.md`
 
 ---
 
+## Consolidated G-Document References
+
+This N-document (N004) consolidates content from and maintains cross-references to the following G-documents per the guidelines refactor (Specification 003):
+
+- **Guidelines Preserved (Type 2 Consolidation):** Old files consolidated here
+  - `guidelines/image-optimization.md` → content integrated
+  - `guidelines/icons/interface.md` → reference maintained
+  - `guidelines/icons/travel.md` → reference maintained
+
+All original files accessible as pointers to this canonical reference.
+
+---
+
 **Last Updated:** 2026-10-25  
-**Canonical Reference:** Yes
+**Canonical Reference:** Yes  
+**N-Document ID:** N004 (Specification 003 - Guidelines Refactor)
 

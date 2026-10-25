@@ -261,7 +261,22 @@ Use specificity to solve conflicts, not !important:
 
 ---
 
+## Consolidated G-Document References
+
+This N-document (N003) consolidates content from and maintains cross-references to the following G-documents per the guidelines refactor (Specification 003):
+
+- **Guidelines Preserved (Type 2 Consolidation):** Old files consolidated here
+  - `guidelines/css-architecture.md` → content integrated
+  - `guidelines/dark-mode-implementation.md` → reference maintained
+  - `guidelines/dark-mode-lessons-learned.md` → reference maintained
+  - `guidelines/tailwind-to-bem-mapping.md` → reference maintained
+
+All original files accessible as pointers to this canonical reference.
+
+---
+
 **Last Updated:** 2026-10-25  
 **Maintained by:** Ash Shaw Portfolio Team  
-**Canonical Reference:** Yes
+**Canonical Reference:** Yes  
+**N-Document ID:** N003 (Specification 003 - Guidelines Refactor)
 

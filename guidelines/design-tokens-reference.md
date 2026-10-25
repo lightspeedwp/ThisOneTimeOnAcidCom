@@ -204,7 +204,27 @@ Design tokens are implemented as CSS custom properties in your theme:
 
 ---
 
+## Consolidated G-Document References
+
+This N-document (N001) consolidates content from and maintains cross-references to the following G-documents per the guidelines refactor (Specification 003):
+
+- **Guidelines Preserved (Type 1 Relocation):** Old design-tokens/* files redirect here
+  - `guidelines/design-tokens/colors.md` → reference maintained
+  - `guidelines/design-tokens/typography.md` → reference maintained
+  - `guidelines/design-tokens/spacing.md` → reference maintained
+  - `guidelines/design-tokens/animations.md` → reference maintained
+  - `guidelines/design-tokens/neon-colors.md` → reference maintained
+  - `guidelines/design-tokens/neon-system.md` → reference maintained
+  - `guidelines/design-tokens/light-dark-mode.md` → reference maintained
+  - `guidelines/design-tokens/iconography.md` → reference maintained
+  - `guidelines/design-tokens/portfolio-design-tokens.md` → reference maintained
+
+All original files accessible as pointers to this canonical reference.
+
+---
+
 **Last Updated:** 2026-10-25  
 **Maintained by:** Ash Shaw Portfolio Team  
-**Canonical Reference:** Yes
+**Canonical Reference:** Yes  
+**N-Document ID:** N001 (Specification 003 - Guidelines Refactor)
 
