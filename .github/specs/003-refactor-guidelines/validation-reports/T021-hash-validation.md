@@ -25,6 +25,8 @@ Run from the repository root using Bash, Git and GNU coreutils:
 set -euo pipefail
 baseline=b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9
 manifest=.github/specs/003-refactor-guidelines/validation-reports/T021-baseline.sha256
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT
 git ls-tree -r --name-only "$baseline" -- guidelines/ | LC_ALL=C sort |
   while IFS= read -r path; do
     case "$path" in
@@ -33,15 +35,15 @@ git ls-tree -r --name-only "$baseline" -- guidelines/ | LC_ALL=C sort |
         printf '%s  %s\n' "${digest%% *}" "$path"
         ;;
     esac
-  done > /tmp/t021-baseline.sha256
+  done > "$tmpdir/t021-baseline.sha256"
 find guidelines/ -type f -name '*.md' -print0 | LC_ALL=C sort -z |
-  xargs -0 sha256sum > /tmp/t021-current.sha256
-wc -l /tmp/t021-baseline.sha256 /tmp/t021-current.sha256
-cmp "$manifest" /tmp/t021-baseline.sha256
-cmp /tmp/t021-baseline.sha256 /tmp/t021-current.sha256
-sha256sum -c "$manifest" > /tmp/t021-check.log
+  xargs -0 sha256sum > "$tmpdir/t021-current.sha256"
+wc -l "$tmpdir/t021-baseline.sha256" "$tmpdir/t021-current.sha256"
+cmp "$manifest" "$tmpdir/t021-baseline.sha256"
+cmp "$tmpdir/t021-baseline.sha256" "$tmpdir/t021-current.sha256"
+sha256sum -c "$manifest" > "$tmpdir/t021-check.log"
 printf 'Verified files: '
-wc -l < /tmp/t021-check.log
+wc -l < "$tmpdir/t021-check.log"
 sha256sum "$manifest"
 ```
 

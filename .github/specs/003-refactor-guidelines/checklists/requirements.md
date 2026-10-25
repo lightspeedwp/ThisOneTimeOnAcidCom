@@ -281,14 +281,14 @@
 ### Ready for Phase 2 Implementation
 - [x] Spec: Gates resolved (D0, D1–D8 recorded 2026-10-25)
 - [x] Owner decisions: All 8 gates documented with rationale and evidence
-- [x] **Phase 2 Status: UNBLOCKED** — All 5 implementation guidance items provided (2026-10-25)
+- [x] **Phase 2A Status: READY** — All 5 implementation guidance items provided (2026-10-25)
 - [x] Implementation guidance recorded: D4.a, D4.b, D5, D6 guidance decisions documented in requirements.md
 - [x] Phase 2A ready to begin: S-document edits, N-document creation, consolidation manifest generation
-- [x] Phase 2B ready to proceed: G→N mapping, pointer/archive decisions, approved exceptions recorded in Phase 2A manifest before implementation
+- [x] **Phase 2B Status: BLOCKED** — Pending T017 `locked-files-guard` approval before G-document edits can proceed
 - [x] PR review ready: Gates documented; implementation guidance provided
 - [x] Plan: Executable; guidance resolution complete
-- [x] Tasks: Ready (unblocked by guidance decisions)
-- [ ] Implementation: Ready to start Phase 2A (S-doc edits, N-doc creation)
+- [x] Tasks: Ready (unblocked by guidance decisions; Phase 2B blocked by T017 approval gate)
+- [ ] Implementation: Ready to start Phase 2A (S-doc edits, N-doc creation); Phase 2B awaits T017 approval
 - [ ] Verification: Scheduled post-implementation
 
 ---
@@ -297,9 +297,10 @@
 
 | Component | Status | Blocker | Next Step |
 | --- | --- | --- | --- |
-| Gates D0–D8 | ✅ All 8 resolved | None — all gates documented with decisions and implementation guidance | Phase 2 implementation ready |
-| Source validation | ✅ Complete | None | Proceed to Phase 2A/2B |
-| Implementation | 🟡 Ready to start | None — guidance complete; awaiting Phase 2A kickoff | Begin S-document edits and N-document creation |
+| Gates D0–D8 | ✅ All 8 resolved | None — all gates documented with decisions and implementation guidance | Phase 2A ready to proceed |
+| Source validation | ✅ Complete | None | Phase 2A: Begin S-document edits; Phase 2B: Await T017 approval |
+| Phase 2A Implementation | 🟢 Ready to start | None — guidance complete; awaiting kickoff | Begin S-document edits and N-document creation |
+| Phase 2B Implementation | 🔴 Blocked | T017 `locked-files-guard` approval required | Record T017 approval before starting G-document edits (T019–T027) |
 | Verification | ⏳ Scheduled | None — will execute post-Phase 2 implementation | Post-impl quality audit |
 
 ---
