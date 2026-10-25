@@ -35,7 +35,7 @@ Block, Element, Modifier (BEM) naming convention ensures predictable, maintainab
 
 ### Naming
 
-```
+```css
 .block {}
 .block__element {}
 .block--modifier {}
@@ -76,7 +76,7 @@ Block, Element, Modifier (BEM) naming convention ensures predictable, maintainab
 
 ### Structure
 
-```
+```text
 /styles/
   ├── globals.css           # Global resets, variables
   ├── themes/

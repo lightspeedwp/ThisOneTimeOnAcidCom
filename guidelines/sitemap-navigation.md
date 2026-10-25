@@ -8,7 +8,7 @@
 
 ## Site Structure
 
-```
+```text
 /
   ├── /about
   ├── /portfolio
