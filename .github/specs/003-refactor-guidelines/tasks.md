@@ -120,7 +120,7 @@ created: "2026-10-25"
 
 - [x] **T023** [P] Edit guidelines with design/accessibility corrections: Files per D3 decision list
   - ✅ Apply approved design authority corrections (palette, spacing, typography)
-  - ✅ Update accessibility target per D3: Updated WCAG 2.1 AA → WCAG 2.2 AAA across 25+ guidelines
+  - ✅ Update accessibility target per D3: Updated WCAG 2.1 AA → WCAG 2.2 AAA across 21 guidelines
   - ✅ Preserve existing component/token definitions
   - ✅ Completed files: Guidelines.md, pwa-implementation.md, dark-mode-implementation.md, prefers-reduced-motion.md, interactions-accessibility.md, README.md, css-issues.md, component guidelines (13 files), and design-token files
   - ✅ Commit: 64a4649 (T023: D3 Design Authority - Update WCAG 2.1 AA to WCAG 2.2 AAA across all guidelines)
@@ -417,7 +417,7 @@ All tasks must complete with documented evidence:
 
 **Purpose**: Address gaps identified during convergence assessment (2026-10-25); ensures Phase 2 readiness before implementation continuation.
 
-**Status**: Identified 11 actionable gaps (1 CRITICAL, 7 HIGH, 3 MEDIUM). Pre-implementation verification is COMPLETE. Markdown linting violations fixed and pushed (commit 48748aa, 2026-10-25). Implementation gaps in T046-T052 require dependency resolution and mapping execution.
+**Status**: Identified 11 actionable gaps (1 CRITICAL, 8 HIGH, 2 MEDIUM). Pre-implementation verification is COMPLETE. Markdown linting violations fixed and pushed (commit 48748aa, 2026-10-25). Implementation gaps in T046-T052 require dependency resolution and mapping execution.
 
 ### Critical Blockers (Must Resolve Before Phase 2 Execution)
 
@@ -435,9 +435,9 @@ All tasks must complete with documented evidence:
 
 ### High-Priority Implementation Gaps (After Pre-Verification)
 
-- [x] **T046** [HIGH] Complete remaining G-document edits (T023-T027): Apply design/accessibility corrections per D3 (Ash Shaw authority, WCAG 2.2 AAA); add N-document pointers per D4; apply historical preservation per D5; verify no-change guidelines; commit edits in category batches per plan.md § Phase 2B
+- [ ] **T046** [HIGH] Complete remaining G-document edits (T023-T027): Apply design/accessibility corrections per D3 (Ash Shaw authority, WCAG 2.2 AAA); add N-document pointers per D4; apply historical preservation per D5; verify no-change guidelines; commit edits in category batches per plan.md § Phase 2B
   - ✅ T023: COMPLETE — WCAG 2.1 AA → WCAG 2.2 AAA updates applied across 21 files (commit 64a4649)
-  - ⏳ T024-T027: **Blocked** — Requires explicit G-to-N document mapping. D4.b specifies "high-traffic" guidelines (Contributing, Accessibility, Design Tokens) → new N-documents, but full mapping not provided. **Path forward:** Create N-documents (T028-T032) first to unblock T024-T026 edit operations
+  - ⏳ T024-T027: **Blocked** — Requires explicit G-to-N document mapping. D4.b specifies "high-traffic" guidelines (Contributing, Accessibility, Design Tokens) → new N-documents, but full mapping not provided. **Path forward:** Create N-documents (T028-T032) first to unblock T024-T027 edit operations
   - Decision: Proceed with T028-T032 (N-document creation) in parallel to establish mapping, then complete T024-T027
 - [ ] **T047** [HIGH] Complete S-document edits (T008-T014): Edit 7 remaining skills files (.claude/skills/{INVENTORY,branch-validation,changelog,labeling,test,validate,workflow-orchestration}); update file paths per consolidation scope; preserve all validation rules, patterns, and safeguards
 - [ ] **T048** [HIGH] Create approved N-documents (T028-T032): Extract D4 approval list; create specification outlines for 29 approved N-documents; execute creation in `guidelines/` directory per approved scope and D4 decision; commit per D4 evidence
