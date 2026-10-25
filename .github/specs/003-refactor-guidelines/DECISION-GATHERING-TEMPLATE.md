@@ -254,7 +254,7 @@ Example:
 - Should N-documents on "WordPress Integration" or "Portfolio Showcase" be created?
 
 **Decision Statement:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example: "WordPress is NOT used; site is React/Next.js only; portfolio 
@@ -264,12 +264,12 @@ in existing guidelines marked as archived."
 ```
 
 **Rationale:**
-```
+```text
 [OWNER RECORDS HERE]
 ```
 
 **Evidence / Source:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example:
@@ -283,17 +283,17 @@ Example:
 
 ## Summary Table
 
-| Gate | Status | Owner Input Required | Evidence Link |
-|------|--------|---------------------|----------------|
-| **D0** | ✅ RESOLVED | No | Protected-file policy retained |
-| **D1** | 🔄 PENDING | Voice & identity decisions | [Record above] |
-| **D2** | 🔄 PENDING | Publication boundaries | [Record above] |
-| **D3** | 🔄 PENDING | Design authority & accessibility | [Record above] |
-| **D4** | 🔄 PENDING | N-document approvals & G→N mapping | [Record above] — **CRITICAL** |
-| **D5** | 🔄 PENDING | Pointer strategy & archive approach | [Record above] |
-| **D6** | 🔄 PENDING | Backend tech stack & integration docs | [Record above] |
-| **D7** | ✅ RESOLVED | No | Branch: `docs/spec-003-guidelines-reconcile` |
-| **D8** | 🔄 PENDING | WordPress presence & portfolio guidance | [Record above] |
+| Gate   | Status        | Owner Input Required                    | Evidence Link                                                    |
+| ------ | ------------- | --------------------------------------- | ---------------------------------------------------------------- |
+| **D0** | ✅ RESOLVED   | No                                      | Protected-file policy retained                                   |
+| **D1** | 🔄 PENDING    | Voice & identity decisions              | [Record above]                                                   |
+| **D2** | 🔄 PENDING    | Publication boundaries                  | [Record above]                                                   |
+| **D3** | 🔄 PENDING    | Design authority & accessibility        | [Record above]                                                   |
+| **D4** | 🔄 PENDING    | N-document approvals & G→N mapping      | [Record above] — **CRITICAL**                                    |
+| **D5** | 🔄 PENDING    | Pointer strategy & archive approach     | [Record above]                                                   |
+| **D6** | 🔄 PENDING    | Backend tech stack & integration docs   | [Record above]                                                   |
+| **D7** | ✅ RESOLVED   | No                                      | Branch: `docs/spec-003-guidelines-reconcile`                     |
+| **D8** | 🔄 PENDING    | WordPress presence & portfolio guidance | [Record above]                                                   |
 
 ---
 
