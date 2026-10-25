@@ -10,7 +10,7 @@ created: "2026-10-24"
 
 **Status:** Draft  
 **Issue:** [TOA-358](https://linear.app/lightspeedwp/issue/TOA-358) | [GitHub #416](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/416)  
-**Branch:** `aiops/refactor-guidelines`  
+**Branch:** `docs/spec-003-guidelines-reconcile`\
 **Created:** 2026-10-24
 
 ## Overview
@@ -37,7 +37,7 @@ Consolidate and refactor 116 existing guideline documents plus 33 conditional ne
 | **D4** | Exact canonical destinations/pointer treatment, six-skill reference approach | Conditional N creates, pointer-only replacement, extraction | 🔄 PENDING |
 | **D5** | Artefact-specific retention and historical preservation-copy locations | Historical-copy operations | 🔄 PENDING |
 | **D6** | Signup/contact/waitlist/backend provider and verification | Delivery, secure unlock, CMS claims | 🔄 PENDING |
-| **D7** | Verified final branch/reuse scope, manual template/label handling | Branch selection, PR metadata | ✅ RESOLVED (`aiops/refactor-guidelines`) |
+| **D7** | Verified final branch/reuse scope, manual template/label handling | Branch selection, PR metadata | ✅ RESOLVED (`docs/spec-003-guidelines-reconcile`) |
 | **D8** | WordPress/portfolio retained-reference vs future-option role | Migration/legacy requirements | 🔄 PENDING |
 
 D0 confirms the current approval requirement, not approval to remove it.
