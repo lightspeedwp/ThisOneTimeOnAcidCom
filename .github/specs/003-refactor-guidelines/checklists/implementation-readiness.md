@@ -110,7 +110,7 @@
 
 ## Branch & Git Operations
 
-- [ ] **CHK096** Tasks reference correct branch name: `docs/spec-003-guidelines-reconcile` (per plan.md § Branch)
+- [ ] **CHK096** Tasks reference correct branch name: `docs/spec-003-phase2-implementation` (per plan.md § Branch)
 - [ ] **CHK097** No task assumes branch validation has passed; T001 includes "npm run validate:branch-name" verification
 - [ ] **CHK098** Commit message template is provided in approval-process.md or tasks.md for S-document changes
 - [ ] **CHK099** Push instructions specify `-u origin <branch>` flag (upstream tracking)

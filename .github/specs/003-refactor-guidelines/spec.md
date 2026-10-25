@@ -26,7 +26,7 @@ Consolidate and refactor 116 existing guideline documents plus 33 conditional ne
 - **Preservation Rules:** Every unique policy/safeguard, historical provenance, original pointers remain; non-destructive consolidation only
 - **Skill Reuse:** Integrate with existing six skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration)
 
-### Key Gates (Decision Required)
+### Key Gates (Resolved Decisions)
 
 | Gate | Decision | Impact | Status |
 | --- | --- | --- | --- |
@@ -113,7 +113,7 @@ All decision gates (D0–D8) are resolved; implementation is underway per Phase 
 1. [ ] All 116 existing guidelines source-read and disposition verified
 2. [ ] Original file hashes validated; current state vs observation documented
 3. [ ] S001–S009 protected-file edits scoped and dependencies mapped
-4. [ ] D0–D8 decisions recorded with evidence
+4. [x] D0–D8 decisions recorded with evidence
 5. [ ] Pointer/anchor validation completed for all 129 internal reference candidates
 6. [ ] Design/typography/spacing examples verified; literal corrections documented
 7. [ ] Six existing skills statically exercised in draft/report/denied scenarios

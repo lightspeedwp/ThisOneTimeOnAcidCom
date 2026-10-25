@@ -410,4 +410,4 @@ All tasks must complete with documented evidence:
 ---
 
 *Generated: 2026-10-25*  
-*Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-guidelines-reconcile` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
+*Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-phase2-implementation` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)

@@ -139,7 +139,7 @@ The following S-documents require `locked-files-guard` approval before changes m
 
 2. **Push** (to feature branch)
    ```bash
-   git push -u origin docs/spec-003-guidelines-reconcile
+   git push -u origin docs/spec-003-phase2-implementation
    ```
 
 3. **Create PR** (draft or ready)
