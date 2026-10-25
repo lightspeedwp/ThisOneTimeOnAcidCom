@@ -53,7 +53,7 @@ details.
 - **Dual Theme System:** Complete light and dark mode support
 - **Clean Light Mode:** Professional white backgrounds with subtle accents
 - **Rich Dark Mode:** Deep purple gradient aesthetic with high contrast
-- **Accessible:** All color combinations meet WCAG 2.2 AAA standards
+- **Accessible:** Color combinations target WCAG 2.2 AAA standards (dark mode verified; light mode verification in progress)
 - **Semantic:** Colors convey meaning (success, error, warning)
 
 ### Usage Guidelines
