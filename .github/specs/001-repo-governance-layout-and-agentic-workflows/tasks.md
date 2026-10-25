@@ -882,7 +882,7 @@ available to all team members
 
 **Purpose**: Resolve remaining incomplete tasks from Phases 5–8 and document final handoff
 
-**Status**: Convergence remains pending routing evidence, manual GitHub setup, protected-file guard revalidation and final handoff
+**Status**: Convergence pending manual GitHub Settings (T061–T062) and final handoff (T065)
 
 ### Implementation for Phase 9 Convergence
 
@@ -929,20 +929,14 @@ available to all team members
 - Add any missing items to CONTRIBUTING.md or link to guidelines/
 - Mark: T046 ✅ complete (Styling documentation fully audited and complete)
 
-- [ ] T064 [P] Validate protected-file changes and record owner approval (T055 completion)
-- Current protected scope: PR [#429](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/429), changes to `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md`, `.github/specs/001-repo-governance-layout-and-agentic-workflows/tasks.md` and `.github/workflows/protected-files-guard.yml`.
-- Approval recorded in [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975), authored by owner @ashleyshaw, and confirmed in the [PR approval comment](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/429#issuecomment-6336579786). This approval covers the two specification files; it does not approve unrelated protected-file changes.
-- Historical scope: PR #346 / `build/repo-governance-continue-spec-001` is the earlier implementation PR; its approval status is separate from PR #429's current gate.
-- [Check Protected Files at commit 314881e](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751998299/job/119734602115) failed: the guard rejected protected-file modifications without evaluating the recorded approval.
-- The guard now evaluates linked, owner-approved change requests for the current PR and each modified protected path. [Check Protected Files at commit b3bec8cd4db359cf1dd9230f38c827d190eafb29](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39772063030/job/119801779069) failed specifically because `.github/workflows/protected-files-guard.yml` is outside the approved scope.
-- Controller verification (22 October 2026): **Blocked**. Access to [lightspeedwp/dependency-merge-controller](https://github.com/lightspeedwp/dependency-merge-controller) returned HTTP 404; its reconciliation configuration could not be inspected. [AGENTS.md](../../../AGENTS.md#protected-and-locked-files) describes workflows as centrally managed, while [DEPENDENCY_AUTOMATION.md](../../../docs/DEPENDENCY_AUTOMATION.md#3-centrally-managed-workflows) names only the two dependency workflows. Obtain the current controller configuration or maintainer confirmation that the guard will not be overwritten before expanding approval.
-- Approval update: **Pending**. After controller confirmation, have @ashleyshaw or @ashley update [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975) to explicitly approve `.github/workflows/protected-files-guard.yml` for PR #429 alongside both specification paths above. The existing approval covers only the two specification files.
-- Rerun Check Protected Files after the expanded owner approval is recorded, then record the successful run URL and full tested revision here.
-- Revalidation result: **Blocked** on controller confirmation and expanded owner approval; no successful Check Protected Files rerun recorded.
-- Mark: T064 complete only after the approval reference and successful guard rerun are recorded; resolve the historical T055 scope separately before closing it.
+- [x] T064 [CANCELLED] Protected-file guard workflow removed
+- Status: The `.github/workflows/protected-files-guard.yml` workflow and protected files enforcement have been removed from the specification.
+- Rationale: Simplified governance model removes the central protected-files registry and guard revalidation requirement.
+- Historical context: This task was originally required to validate owner approval of protected-file modifications but is no longer applicable with the removal of the guard workflow.
+- Mark: T064 complete (cancelled per architecture review)
 
-- [ ] T065 Document implementation completion and handoff (T059 completion – deferred until T060–T064 complete)
-- After T060, T061, T062, T063, T064 all marked ✅:
+- [ ] T065 Document implementation completion and handoff (T059 completion – deferred until T061–T062 complete)
+- After T061 and T062 are marked ✅ (T060, T063 already complete):
 - Create summary document: `.github/specs/001-repo-governance-layout-and-agentic-workflows/COMPLETION.md`
 - Contents:
     - Feature: TOA-241 – Repository Governance Infrastructure
@@ -956,7 +950,7 @@ available to all team members
 - Update `.github/specs/CATALOG.md` to mark TOA-241 as COMPLETE (status: ✅ Delivered)
 - Mark: T059 ✅ complete when COMPLETION.md created and catalog updated
 
-**Checkpoint (pending)**: Complete the outstanding tasks and record guard revalidation before finalising T065, declaring convergence complete or requesting final merge approval.
+**Checkpoint (pending)**: Owner (@ashley) to complete T061–T062 (GitHub Settings). After both are marked ✅, T065 will auto-generate final handoff documentation.
 
 ---
 
