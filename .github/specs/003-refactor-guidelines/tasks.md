@@ -503,5 +503,42 @@ All tasks must complete with documented evidence:
 
 ---
 
-*Generated: 2026-10-25*  
-*Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-guidelines-reconcile` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
+## Phase 6: Convergence (Implementation Completion) 📊
+
+**Purpose**: Address implementation completion gaps identified during convergence assessment (2026-10-25); complete Phase 2 execution and move toward Phase 3 verification readiness.
+
+**Status**: 5 actionable findings identified (0 CRITICAL, 3 HIGH, 2 MEDIUM). Implementation completion tasks assigned for broken-link remediation, design verification, coverage documentation, skill validation, and final sign-off.
+
+### High-Priority Implementation Completion
+
+- [ ] **T065** [HIGH] Complete T037 broken-link remediation: 51 consolidated-old-paths broken references identified in link-validation-report.json. These are guidelines that point to old document locations that have been consolidated into N-documents. For each of the 51 broken references in categories {design-tokens/*, media, accessibility, CSS, responsive, sitemap}: update the source guideline to point to the new N-document consolidated location instead of the old path. Document all changes with mapping evidence (old-path → N-doc); commit with message "refactor(003-T037): Fix 51 consolidated-old-paths broken references to N-documents"
+  - Prerequisites: Analysis complete (prior convergence)
+  - Verify: All 51 references updated; link-validation-report.json re-run shows these 51 moved to "working" category
+  - Unblocks: T038–T040 (design verification cannot proceed until all broken links resolved per plan.md § Phase 3 Verification Checklist)
+
+- [ ] **T066** [HIGH] Complete Phase 2F design & examples verification (T038–T040): Validate literal colour, spacing, typography, and formula correctness against approved design standards (D3 decision, WCAG 2.2 AAA). For each design-related guideline in guidelines/design-tokens/ and guidelines/components/: (T038) verify colour hex values match approved palette; confirm spacing values (px, rem, %) follow documented scale; check typography examples use approved fonts. (T039) For formula/threshold examples, verify calculation correctness and document source/authority. (T040) Create design verification manifest recording all checked values, sources, and corrections in checklists/requirements.md § Design Verification
+  - Prerequisites: T037 complete (all broken links resolved)
+  - Verify: Design verification manifest complete with min 15 checked design tokens, coverage of 8+ component/token files
+  - Unblocks: T041–T043 (final verification phase requires design verification complete)
+
+- [ ] **T067** [HIGH] Generate final coverage manifest (T041): Create comprehensive reconciliation of all 116 G-documents + 9 S-documents + 29 N-documents in checklists/requirements.md § Final Coverage Manifest. Table format: ID | Path | Operation | Destination | Status. For each document: verify it exists, confirm operation (consolidated/edited/created/pointer) matches implementation, record destination (N-doc or original path), mark status as COMPLETE/PENDING/SKIPPED with evidence. Total row count: 154 (116+9+29). Include summary: all G-documents accounted for, all S-documents approved and committed, all N-documents created per D4, all pointers validated
+  - Prerequisites: T037–T040 complete (all implementation work done)
+  - Verify: 154 rows complete with no missing operations; coverage summary shows 100% accountability
+  - Unblocks: T042–T043 (skill exercises and sign-off require coverage manifest complete)
+
+### Medium-Priority Workflow Completion
+
+- [ ] **T068** [MEDIUM] Validate static skill exercises (T042): For each of six skills in .claude/skills/ (branch-validation, changelog, labeling, test, validate, workflow-orchestration): Run skill in draft scenario (expected: proposal with file paths resolved correctly); run skill in report scenario (expected: summary with example paths working); run skill in denied scenario (expected: graceful handling of permission denial). Document all results in validation report. Verify all file paths in skill examples resolve to actual files in repository; confirm no runtime claims without verification method; document results in checklists/requirements.md § Skill Validation
+  - Prerequisites: T037–T040 complete
+  - Verify: All 6 skills tested; 0 unresolved file-path references; evidence documented
+  - Unblocks: T043 (final sign-off requires skill validation complete)
+
+- [ ] **T069** [MEDIUM] Complete final sign-off checklist (T043): Fill in checklists/requirements.md § Final Sign-Off with evidence for each requirement: (✓) All 8 gates (D0–D8) resolved with evidence; (✓) 116 G-documents preservation validated (no unauthorized deletes); (✓) 9 S-documents edited and approved (locked-files-guard evidence); (✓) 29 N-documents created per D4 approval; (✓) 26 pointer files created and validated per D4/D5; (✓) Coverage manifest complete (154 rows); (✓) All internal links validated/fixed; (✓) Design examples verified; (✓) Skill exercises passed; (✓) No unrelated changes in .github/dependabot.yml, .github/mergify.yml, CHANGELOG.md. Draft PR body with coverage summary per plan.md § Success Definition. Mark checklist "READY FOR MERGE" only when all items complete
+  - Prerequisites: T065–T068 complete
+  - Verify: All 10 checklist items marked ✓; PR body drafted; owner approval documented
+  - Outcome: Phase 2 implementation complete; ready for PR review and merge
+
+---
+
+*Generated: 2026-10-25 (Phase 6 Convergence)*  
+*Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-phase2-implementation` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
