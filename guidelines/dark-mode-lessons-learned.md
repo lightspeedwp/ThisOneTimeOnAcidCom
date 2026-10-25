@@ -506,7 +506,7 @@ When implementing dark mode on any project:
 - [ ] Test system preference detection
 - [ ] Test keyboard navigation in dark mode
 - [ ] Test screen reader compatibility
-- [ ] Test color contrast ratios (WCAG AA minimum)
+- [ ] Test color contrast ratios (WCAG 2.2 AAA minimum)
 
 ### Documentation
 

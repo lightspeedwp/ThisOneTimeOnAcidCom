@@ -134,10 +134,10 @@ This script:
 
 ## 4. Best Practices
 
-1. **Always use presets:** Avoid manual `maxWidth` unless absolutely necessary.
+1. **Use presets:** Avoid manual `maxWidth` unless absolutely necessary.
 
 1. **Lazy Load:** The component defaults to `loading="lazy"`. Only disable for LCP (Largest Contentful Paint) images like the Hero.
 
-1. **Alt Text:** Always provide descriptive `alt` text.
+1. **Alt Text:** Provide descriptive `alt` text.
 
 1. **Aspect Ratio:** The optimization preserves the original aspect ratio. Use CSS `object-fit: cover` on the component to enforce container shapes.

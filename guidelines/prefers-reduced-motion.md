@@ -2,7 +2,7 @@
 
 **Version:** 1.0.0
 **Last Updated:** February 2026
-**WCAG Reference:** 2.3.3 Animation from Interactions (Level AAA)
+**WCAG Reference:** WCAG 2.2 Level AAA — 2.3.3 Animation from Interactions
 **Part of:** Ash Shaw Makeup Portfolio Design System
 
 ---
@@ -47,9 +47,9 @@ motion. Respecting this preference is a core accessibility requirement.
 - **2.3.3 Animation from Interactions (Level AAA)** -- Motion animation triggered by interaction can be disabled unless it is essential.
 - **2.2.2 Pause, Stop, Hide (Level A)** -- Moving, blinking, or scrolling content must be pausable.
 
-This project targets **WCAG 2.1 Level AA** compliance with **AAA enhancements**
-where feasible. Full `prefers-reduced-motion` support across all 26 keyframe
-animations and all component transitions is one such enhancement.
+This project targets **WCAG 2.2 Level AAA** compliance. Full `prefers-reduced-motion`
+support across all 26 keyframe animations and all component transitions is part of this
+enhanced accessibility standard.
 
 ---
 
@@ -536,7 +536,7 @@ Before merging any component that includes animation or transition:
 ## Related Documentation
 
 - **[animations.md](./design-tokens/animations.md)** -- Complete animation system (26 keyframes)
-- **[accessibility-report-feb-2025.md](./accessibility-report-feb-2025.md)** -- WCAG AA compliance report
+- **[accessibility-report-feb-2025.md](./accessibility-report-feb-2025.md)** -- WCAG 2.2 AAA compliance report
 - **[interactions-accessibility.md](./interactions-accessibility.md)** -- Keyboard, screen reader, and ARIA guidelines
 - **[css-architecture.md](./css-architecture.md)** -- BEM architecture and block CSS file rules
 

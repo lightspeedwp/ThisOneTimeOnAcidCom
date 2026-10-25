@@ -143,7 +143,7 @@ These properties are GPU-accelerated and don't trigger layout or paint.
   will-change: auto;
 }
 
-/* ❌ WRONG - Always applied, wastes GPU memory */
+/* ❌ WRONG - Permanently applied, wastes GPU memory */
 .element {
   will-change: transform, opacity;  /* Don't set permanently */
 }

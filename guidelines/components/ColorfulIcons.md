@@ -643,7 +643,7 @@ function GrowthTimeline() {
 **Key Points:**
 
 - Icons are decorative, not semantic
-- Always pair with visible text
+- Pair with visible text
 - Text provides meaning, icon adds visual interest
 - Use `aria-hidden="true"` if icon is purely decorative
 
@@ -672,7 +672,7 @@ Icons are non-interactive by default:
 
 ### Color Contrast
 
-All icons meet WCAG 2.1 AA standards:
+All icons meet WCAG 2.2 AAA standards:
 
 - ✅ Multiple colors ensure visibility
 - ✅ Gradients provide depth without losing contrast
@@ -719,7 +719,7 @@ All icons meet WCAG 2.1 AA standards:
 ### ✅ DO
 
 ```tsx
-// ✅ Always pair icons with descriptive text
+// ✅ Pair icons with descriptive text
 <div>
   <ShineIcon size="lg" />
   <h3>Make People Shine</h3>

@@ -430,8 +430,8 @@ Creates fluid, liquid motion.
 
 **Text Contrast:**
 
-- Never put thin white text directly over bright yellow or green gradients
-- Use dark overlay or keep text bold and black for readability
+- Avoid placing thin white text directly over bright yellow or green gradients — it reduces readability
+- Use a dark overlay or keep text bold and black for better contrast
 
 **Glow Animation:**
 
@@ -717,16 +717,16 @@ body.light-mode .component {
 
 **Color Contrast:**
 
-- Body text: 4.5:1 minimum (WCAG AA)
-- Dark mode achieves 7:1+ (WCAG AAA)
-- Always test neon colors against backgrounds
+- Body text: 7:1 minimum (WCAG 2.2 AAA)
+- Dark mode achieves 7:1+ (WCAG 2.2 AAA)
+- Test neon colors against backgrounds
 
 **Reduced Motion:**
 
 - All animations must have `prefers-reduced-motion` fallbacks
 - No motion for users who request reduced motion
 
-**Full compliance:** WCAG 2.1 Level AA — See
+**Full compliance:** WCAG 2.2 Level AAA — See
 `/guidelines/accessibility-report-feb-2025.md`
 
 ---
@@ -776,7 +776,7 @@ var(--wp--preset--spacing--80)  /* 80px */
 
 ---
 
-**This is a living document. Always verify token values in `/styles/globals.css`
+**This is a living document. Verify token values in `/styles/globals.css`
 for the most up-to-date implementation.**
 
 **Last Updated:** March 7, 2026

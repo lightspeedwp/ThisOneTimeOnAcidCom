@@ -74,7 +74,7 @@ Group changes under these headings only. Use **exactly** these names:
 
 ### The `[Unreleased]` Section
 
-Always maintain an `[Unreleased]` section at the top of the changelog:
+Maintain an `[Unreleased]` section at the top of the changelog:
 
 ```markdown
 
@@ -163,7 +163,7 @@ changelog entry must be created.
 | **Never delete** | `CHANGELOG.md` is a protected root file — it must always exist |
 | **Never move** | It must remain at `/CHANGELOG.md` (project root) |
 | **Never rename** | The filename must always be `CHANGELOG.md` |
-| **Always update** | Every version bump must have a corresponding changelog entry |
+| **Update** | Every version bump should have a corresponding changelog entry |
 | **Append only** | Never remove or rewrite historical entries (corrections are acceptable) |
 
 ---

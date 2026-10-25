@@ -761,7 +761,7 @@ small {
 ### Minimum Font Size
 
 ```css
-/* Always maintain readable minimum */
+/* Maintain readable minimum */
 --wp--typography--fluid--min-font-size: 0.875rem; /* 14px minimum */
 
 ```text

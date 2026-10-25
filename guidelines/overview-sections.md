@@ -208,7 +208,7 @@ className="bg-black/50"
 ### 1. Consistent Container Pattern
 
 ```tsx
-// ✅ Always wrap section content in max-width container
+// ✅ Wrap section content in max-width container for responsive layout consistency
 <section className="py-section px-fluid-md">
   <div className="max-w-7xl mx-auto">
     {/* Content */}

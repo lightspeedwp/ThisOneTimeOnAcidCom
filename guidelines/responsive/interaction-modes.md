@@ -109,7 +109,7 @@ const [inputMethod, setInputMethod] = React.useState<'touch' |
 
 ## Minimum Requirements
 
-- **WCAG 2.1:** 44x44px minimum
+- **WCAG 2.2 AAA:** 44x44px minimum
 - **Recommended:** 48x48px for enhanced usability
 - **iOS Guidelines:** 44x44pt (88x88px on Retina)
 - **Android Material:** 48x48dp
@@ -683,7 +683,7 @@ group-hover:scale-110"
         </div>
       </div>
 
-      {/* Mobile: Always show title */}
+      {/* Mobile: Show title */}
       <div className="md:hidden p-fluid-md bg-white dark:bg-purple-900">
         <h3 className="font-heading text-fluid-lg">{title}</h3>
       </div>

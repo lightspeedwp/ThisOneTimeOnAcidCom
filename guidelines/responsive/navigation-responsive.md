@@ -776,7 +776,7 @@ export function MobileNav({ isOpen }: { isOpen: boolean }) {
 
 1. **Don't use hover-only interactions**
 
-   - Always provide touch alternative
+   - Provide touch alternatives
 
 ---
 

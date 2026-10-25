@@ -693,7 +693,7 @@ dark:text-purple-300 line-clamp-3">
 
 - [ ] **Minimum size:** No text smaller than 14px
 - [ ] **Line height:** Minimum 1.5 for body text
-- [ ] **Contrast:** All text meets WCAG AAA standards
+- [ ] **Contrast:** All text meets WCAG 2.2 AAA standards
 - [ ] **Zoom:** Text scales properly up to 200%
 
 ---

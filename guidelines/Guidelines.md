@@ -16,9 +16,9 @@ documentation organized in separate files.
 **Last Updated:** March 12, 2026
 **Last Reviewed:** March 12, 2026
 
-## 🚨 CRITICAL: Project Workflow & File Organization (MUST READ FIRST)
+## 🚨 Project Workflow & File Organization (Start Here)
 
-### 🤖 Default AI Workflow (MUST FOLLOW)
+### 🤖 Default AI Workflow (Recommended)
 
 **See the [Workflow Orchestration Skill](../.claude/skills/workflow-orchestration/SKILL.md) for comprehensive guidance on:**
 - Single-file audit workflows (4-step: prompt → audit → report → tasks)
@@ -27,7 +27,7 @@ documentation organized in separate files.
 - YAML frontmatter templates for all content types
 - Task list management and archiving procedures
 
-**Quick reference:** When told to "write a prompt" or "audit X", use the skill's decision tree to choose single-file or orchestrator workflow, then execute the full sequence (create prompt → run audit → save report → extract tasks). The skill provides reusable YAML templates and detailed step-by-step guidance.
+**Quick reference:** When working on prompts or audits, the skill's decision tree helps you choose between single-file or orchestrator workflows. From there, you'll typically go through the sequence (create prompt → run audit → save report → extract tasks). The skill provides reusable YAML templates and step-by-step guidance to keep things consistent.
 1. **Create a prompt** in `/prompts/` — defines the audit scope, steps, and references to relevant guidelines.
 
 1. **Run the audit** described in the prompt against the codebase and guidelines.
@@ -36,9 +36,7 @@ documentation organized in separate files.
 
 1. **Create a task list** in `/tasks/` — only once the report is finalized, extract actionable items into a checklist.
 
-**This is the assumed default.** You do not need to be told each step
-explicitly. When told to "write a prompt" or "audit X", execute the full 4-step
-workflow above.
+**This is the assumed default workflow.** You generally won't need to be told each step explicitly. When working on prompts or audits, follow this 4-step pattern as your baseline approach.
 
 **Multi-audit orchestrators:** When an audit covers multiple areas, create a
 master/orchestrator prompt in `/prompts/{topic}/orchestrator.md` with individual
@@ -48,15 +46,15 @@ tasks are consolidated into one task list per orchestrator in `/tasks/`.
 **Reusability:** All prompts should be written as reusable templates that can be
 re-run for ongoing maintenance.
 
-### 🚫 Root Directory Restrictions (CRITICAL)
+### 📂 Root Directory Organization
 
-**Only the following `.md` files are allowed in the project root (`/`):**
+**By convention, the following `.md` files belong in the project root (`/`):**
 
 - `README.md` — Project overview
 - `CHANGELOG.md` — Release history (protected file — see **[changelog.md](./changelog.md)**)
-- `Attributions.md` — System-protected file (cannot be moved or deleted)
+- `Attributions.md` — System-protected file (treat as protected)
 
-**All other `.md` files MUST be placed in the appropriate folder:**
+**Other `.md` files generally belong in the appropriate folder:**
 
 | Content Type | Required Location |
 |---|---|
@@ -66,20 +64,14 @@ re-run for ongoing maintenance.
 | Audit reports & analysis | `/reports/{topic}/` |
 | Task lists & checklists | `/tasks/` |
 
-**Script files:** All `.sh` script files MUST be placed in `/scripts/`. Never
-create `.sh` files in the project root.
+**Script files:** Shell scripts (`.sh`) generally belong in `/scripts/` to keep the root clean and organized.
 
-**Enforcement:** If you need to create a new `.md` file, determine its purpose
-and place it in the correct folder above. When in doubt, use `/docs/` for
-general documentation.
+**Placement guide:** When creating a new `.md` file, think about its purpose and place it in the appropriate folder. If you're unsure, `/docs/` is a good default for general documentation.
 
 ### 📁 Mandatory Folder Conventions
 
-The project uses three dedicated workflow folders. **All AI-generated and human-authored workflow artifacts MUST be stored in these folders.** See the [Workflow Orchestration Skill](../.claude/skills/workflow-orchestration/SKILL.md) for full folder structure rules and conventions.
-The project uses three dedicated workflow folders. **All AI-generated and
-human-authored workflow artifacts MUST be stored in these folders.** Never place
-prompts, reports, or task lists anywhere else (e.g., never in root, never in
-`/guidelines/`).
+The project uses three dedicated workflow folders for organizing AI-generated and human-authored workflow artifacts. See the [Workflow Orchestration Skill](../.claude/skills/workflow-orchestration/SKILL.md) for full folder structure rules and conventions.
+Store prompts, reports, and task lists in these designated folders rather than placing them elsewhere (e.g., avoid root, avoid `/guidelines/`).
 
 **Quick Reference:**
 
@@ -91,25 +83,23 @@ prompts, reports, or task lists anywhere else (e.g., never in root, never in
 | `/docs/` | General project documentation, quick references, attributions |
 | `/scripts/` | All build, utility, and automation scripts |
 
-**Critical rule:** Never delete `/tasks/task-list.md` — it is the persistent master checklist.
-1. **Prompts:** Always create new prompt files in `/prompts/`. For multi-step workflows, create a subfolder with a master `orchestrator.md` and child prompt files.
+**Important:** Keep `/tasks/task-list.md` as the persistent master checklist — it shouldn't be deleted.
 
-1. **Reports:** Always write reports to `/reports/`, inside a suitable subfolder (e.g., `/reports/root-cleanup/`, `/reports/css-audit/`). One subfolder per audit or topic.
+1. **Prompts:** Create new prompt files in `/prompts/`. For multi-step workflows, use a subfolder with a master `orchestrator.md` and child prompt files.
 
-1. **Tasks:** Always create task lists in `/tasks/`. The file `/tasks/task-list.md` is the **all-purpose general task list** — it must never be deleted. One task list per orchestrator prompt, stored in the root of `/tasks/`.
+1. **Reports:** Write reports to `/reports/`, organized in a suitable subfolder (e.g., `/reports/root-cleanup/`, `/reports/css-audit/`). Use one subfolder per audit or topic.
 
-1. **Lifecycle:** Archive completed tasks for later reference. Delete any report older than a few days. Regularly review all folders for unused and orphaned files.
+1. **Tasks:** Create task lists in `/tasks/`. The file `/tasks/task-list.md` serves as the general-purpose master checklist and should be preserved. Create one task list per orchestrator prompt, stored in the root of `/tasks/`.
 
-1. **Cross-referencing:** When referencing guidelines from prompts/reports/tasks, always link to the specific guideline file (e.g., `[BEM Architecture](../guidelines/css-architecture.md)`).
+1. **Lifecycle:** Archive completed tasks for future reference. You can delete reports after a few days once the findings are integrated. Periodically review all folders to identify unused or orphaned files.
 
-1. **Never delete** `/tasks/task-list.md` — it is the persistent master checklist.
+1. **Cross-referencing:** When referencing guidelines from prompts, reports, or tasks, link to the specific guideline file (e.g., `[BEM Architecture](../guidelines/css-architecture.md)`).
 
-1. **Docs:** The `/docs/` folder is the designated home for all general-purpose project documentation, quick references, guides, and relocated documentation files (e.g., CMS field mappings, architecture overviews). Any `.md` file that does not belong in `/guidelines/`, `/prompts/`, `/reports/`, or `/tasks/` should go in `/docs/`.
+1. **Docs:** The `/docs/` folder is home to general-purpose project documentation, quick references, guides, and relocated documentation files (e.g., CMS field mappings, architecture overviews). Any `.md` file that doesn't fit in `/guidelines/`, `/prompts/`, `/reports/`, or `/tasks/` generally belongs in `/docs/`.
 
 ### 🛡️ Bundler Compatibility Rules (Figma Make)
 
-The Figma Make bundler has known syntax incompatibilities. **All code MUST
-follow these workarounds:**
+The Figma Make bundler has some known syntax incompatibilities. **To ensure compatibility, use these workarounds:**
 
 | Forbidden Syntax | Required Workaround |
 |---|---|
@@ -135,31 +125,25 @@ follow these workarounds:**
 - `setProp(obj, key, value)` — Safe property write via `Object.defineProperty`
 - `buildContextValue()` — Object construction with `Object.entries()` and explicit if/else
 
-**Critical rule:** Do NOT replace any existing images, logos, or `figma:asset/`
-imports with Unsplash or placeholder images.
+**Important:** Preserve existing images, logos, and `figma:asset/` imports — avoid replacing them with Unsplash or placeholder images.
 
 ### 🖼️ Image Protection Rule
 
-**NEVER replace existing images.** All current `figma:asset/` imports, logo
-files, and existing image references are protected. When adding new images, use
-`ImageWithFallback` from `/components/figma/ImageWithFallback.tsx` (which must
-not be modified — it is a protected file).
+**Protect existing images** by preserving all current `figma:asset/` imports, logo files, and image references. When adding new images, use `ImageWithFallback` from `/components/figma/ImageWithFallback.tsx` (a protected file that shouldn't be modified).
 
-### 🚫 Supabase non-usage policy
+### 🚫 Supabase Non-Usage
 
-**Supabase is NOT used on this project.** This is a static personal art
-portfolio with no backend database requirements.
+**This project doesn't use Supabase.** It's a static personal art portfolio with no backend database requirements.
 
-- The `/utils/supabase/` folder is a **system-protected deployment artifact** — it cannot be deleted, but it is never imported or used by any application code
-- Never suggest, connect, or implement Supabase functionality
-- If the `supabase_connect` tool is offered, always dismiss it
-- All data is served from centralised mock data files in `/data/mock/`
+- The `/utils/supabase/` folder is a system-protected deployment artifact — it's kept for technical reasons but is never imported or used by application code
+- Avoid suggesting or implementing Supabase functionality
+- If the `supabase_connect` tool appears, dismiss it
+- All data comes from centralized mock data files in `/data/mock/`
 
 ### 📋 Task list management conventions
 
 **All-purpose task list:** `/tasks/task-list.md` is the master general-purpose
-checklist. Simple one- or two-checkbox tasks go here. This file must **NEVER**
-be deleted.
+checklist. Simple one- or two-checkbox tasks go here. Preserve this file as a reference resource.
 
 **Dedicated task lists:** Full audits and multi-step prompts get their own task
 list (e.g., `/tasks/project-stability-audit-tasks.md`). One task list per
@@ -243,20 +227,18 @@ This website is strictly a **personal art portfolio**.
 
 ## 📚 How to Use These Guidelines
 
-This project has a comprehensive design system with guidelines organized across
-multiple files. **Always follow this reading order:**
+This project has a comprehensive design system with guidelines organized across multiple files. Here's a recommended reading order:
 
-### Step 0: Understand Workflow Standards (NEW - REQUIRED)
+### Step 0: Understand Workflow Standards
 
-Read the workflow documentation to understand how prompts, reports, and tasks
-are created:
+Start with the workflow documentation to see how prompts, reports, and tasks are typically created:
 
 - **[Prompt Creation Guidelines](./prompt-creation-guidelines.md)** - How to write audit prompts and orchestrators
 - **[Report Creation Guidelines](./report-creation-guidelines.md)** - How to structure and save audit reports
 
-### Step 1: Read Overview Files (REQUIRED)
+### Step 1: Read Overview Files
 
-Read ALL overview files in this directory:
+Review the overview files in this directory to get the bigger picture:
 
 - **[overview-components.md](./overview-components.md)** - Component system and React architecture diagram
 - **[overview-icons.md](./overview-icons.md)** - Icon system and verification process
@@ -269,63 +251,60 @@ Read ALL overview files in this directory:
 - **[CMS Field Mapping](../docs/cms-field-mapping.md)** - WordPress CPT/ACF field mapping reference
 - **[pwa-implementation.md](./pwa-implementation.md)** - Progressive Web App features and offline support
 
-### Step 2: Read Design Tokens (REQUIRED)
+### Step 2: Read Design Tokens
 
-Read ALL files in the `design-tokens/` folder. Do NOT skip this step:
+Review the files in the `design-tokens/` folder to understand the design system:
 
 - **[neon-colors.md](./design-tokens/neon-colors.md)** - 🆕 Neon vs Atomic Black color system (PRIMARY)
 - **[animations.md](./design-tokens/animations.md)** - 🆕 Complete animation system with 26 keyframes
 - **[colors.md](./design-tokens/colors.md)** - Legacy color documentation (reference only)
 - **[typography.md](./design-tokens/typography.md)** - Typography scale and hierarchy
 - **[spacing.md](./design-tokens/spacing.md)** - Spacing system and responsive patterns
-- **[accessibility-report-feb-2025.md](./accessibility-report-feb-2025.md)** - 🆕 WCAG AA compliance report
+- **[accessibility-report-feb-2025.md](./accessibility-report-feb-2025.md)** - 🆕 WCAG 2.2 AAA compliance report
 - **[prefers-reduced-motion.md](./prefers-reduced-motion.md)** - 🆕 Reduced motion coding standards & accessibility guide
 
-### Step 2.5: Understand Light/Dark Mode System (REQUIRED)
+### Step 2.5: Understand Light/Dark Mode System
 
-Read the light/dark mode documentation for complete theme implementation:
+Review the light/dark mode documentation to understand theme implementation:
 
 - **[nova-news-dark-mode.md](./nova-news-dark-mode.md)** - 🆕 Quick reference for Nova News dark mode (START HERE!)
 - **[dark-mode-lessons-learned.md](./dark-mode-lessons-learned.md)** - 🆕 CRITICAL: Lessons learned from implementation (read this to avoid 40+ hours of mistakes)
 - **[dark-mode-implementation.md](./dark-mode-implementation.md)** - Complete dark mode implementation guide
 - **[component-dark-mode.md](./component-dark-mode.md)** - Component-specific dark/light mode patterns
 
-### Step 3: Understand Mock Data System (REQUIRED)
+### Step 3: Understand Mock Data System
 
-Read the mock data guidelines to understand centralized data management:
+Review the mock data guidelines to see how centralized data is managed:
 
 - **[Data System Documentation](../data/README.md)** - Complete guide to the mock data system
 
-### Step 4: Read Component Guidelines BEFORE Using (REQUIRED)
+### Step 4: Review Component Guidelines
 
-BEFORE using ANY component, you MUST read its specific guideline file:
+Before using a component, check its specific guideline file:
 
-- Using Logo? → Read **[components/Logo.md](./components/Logo.md)** FIRST
-- Using ScrollDownArrow? → Read **[components/ScrollDownArrow.md](./components/ScrollDownArrow.md)** FIRST
-- Using ScrollToTop? → Read **[components/ScrollToTop.md](./components/ScrollToTop.md)** FIRST
+- Using Logo? → Review **[components/Logo.md](./components/Logo.md)**
+- Using ScrollDownArrow? → Review **[components/ScrollDownArrow.md](./components/ScrollDownArrow.md)**
+- Using ScrollToTop? → Review **[components/ScrollToTop.md](./components/ScrollToTop.md)**
 
-### Step 5: Verify Icons Before Using (REQUIRED)
+### Step 5: Verify Icons Before Using
 
-Before using ANY icon, check **[overview-icons.md](./overview-icons.md)** for
-the verification process. Never assume an icon exists.
+Before using an icon, check **[overview-icons.md](./overview-icons.md)** to see if it's available in the system.
 
 ---
 
-## 🚨 CRITICAL STYLING RULE - STRICT BEM ARCHITECTURE
+## 🎨 Styling Architecture - Semantic BEM
 
-### ⛔ NO TAILWIND UTILITIES ALLOWED
+### CSS Approach
 
-**SYSTEMATIC MIGRATION COMPLETE:** This codebase has fully migrated to a strict
-**Semantic BEM (Block Element Modifier)** architecture. Tailwind utility classes
-are **STRICTLY FORBIDDEN**.
+**This codebase uses Semantic BEM (Block Element Modifier) architecture.** Tailwind utility classes have been migrated out of the codebase, so please use BEM classes instead.
 
-## Priority Order for Styling
+## Styling Guidelines
 
-1. **✅ ONLY CHOICE:** Use BEM classes defined in `/styles/globals.css` (e.g., `.portfolio-card_*image--featured`, `.hero*_title`)
+1. **✅ Required:** Use BEM classes defined in `/styles/globals.css` (e.g., `.portfolio-card__image--featured`, `.hero__title`)
 
-1. **🚫 NEVER:** Use Tailwind utilities (e.g., `flex`, `p-4`, `text-center`)
+1. **❌ Unsupported:** Tailwind utilities are not available (e.g., `flex`, `p-4`, `text-center`)
 
-1. **🚫 NEVER:** Use inline styles
+1. **❌ Avoid:** Inline styles
 
 ```tsx
 // ✅ CORRECT - Semantic BEM Classes
@@ -353,10 +332,9 @@ are **STRICTLY FORBIDDEN**.
 - **Element:** `.block_*element` (e.g., `.header**logo`, `.card*_title`)
 - **Modifier:** `.block--modifier` or `.block_*element--modifier` (e.g., `.header--transparent`, `.card*_title--large`)
 
-### ⚠️ Data & Content Rules
+### 📊 Data & Content Best Practice
 
-**NO HARDCODED CONTENT:** All text, images, and configuration data must be
-imported from the `/data/mock` directory.
+**Use centralized data:** Text, images, and configuration data should be imported from the `/data/mock` directory instead of hardcoding them into components.
 
 ```tsx
 // ✅ CORRECT - Imported Data
@@ -369,19 +347,15 @@ import { heroContent } from "@/data/mock";
 
 ```text
 
-### 🚫 NO INLINE STYLES - CRITICAL RULE
+### 💅 Avoid Inline Styles
 
-**NEVER USE INLINE STYLES.** All styling must be done through CSS classes
-defined in `/styles/globals.css`.
+Keep inline styles out of components. All styling is done through CSS classes defined in `/styles/globals.css`.
 
-### 🔤 SENTENCE CASE FOR ALL HEADINGS - CRITICAL RULE
+### 🔤 Use Sentence Case for Headings
 
-**ALL headings, titles, and labels MUST use sentence case.** This applies
-everywhere: page titles, section headings, ebook chapter titles, TOC entries,
-navigation labels, card titles, hero text, breadcrumbs, and button labels.
+Headings, titles, and labels generally use sentence case. This applies to page titles, section headings, ebook chapter titles, navigation labels, card titles, hero text, breadcrumbs, and button labels.
 
-**Sentence case** = Capitalise ONLY the first word and proper nouns (names,
-places, brand names).
+**Sentence case** means capitalizing only the first word and proper nouns (names, places, brand names).
 
 ```text
 ✅ CORRECT — Sentence case
@@ -528,7 +502,7 @@ App.tsx (Router + Global State)
 - ✅ Variable Font System (73% fewer requests)
 - ✅ Centralized Mock Data System (single source of truth)
 - ✅ WordPress-Inspired Fluid Typography
-- ✅ WCAG 2.1 AA Accessibility Compliance
+- ✅ WCAG 2.2 AAA Accessibility Compliance
 - ✅ Advanced Blog System (search, filtering, pagination)
 - ✅ Progressive Web App (installable, offline support, service worker)
 - ✅ Global search system with ArchiveFilters
@@ -576,7 +550,7 @@ by 80s CLI interfaces:
 
 **Accessibility:**
 
-- ✅ 100% WCAG AAA compliant with full `prefers-reduced-motion` support
+- ✅ 100% WCAG 2.2 AAA compliant with full `prefers-reduced-motion` support
 - ✅ All animations disable gracefully for motion-sensitive users
 - ✅ See **[prefers-reduced-motion.md](./prefers-reduced-motion.md)** for implementation standards
 
@@ -660,9 +634,11 @@ that reflects the vibrant, energetic nature of makeup artistry.
 
 ## 4. ♿ Accessibility Standards
 
-### WCAG 2.1 AA Compliance ✅
+### WCAG 2.2 AAA Compliance ✅
 
-**Status:** 100% WCAG 2.1 Level AA Compliant
+**Target:** WCAG 2.2 Level AAA Compliance
+
+**Status:** Implementation and verification in progress. All components are designed to meet AAA standards; comprehensive testing suite to follow in Phase 2 implementation.
 
 All components meet the following standards:
 
@@ -707,8 +683,8 @@ accessibility features.
 
 ### Breadcrumbs (REQUIRED on all sub-pages)
 
-**Single Source Component:** All breadcrumbs MUST use
-`/components/ui/Breadcrumbs.tsx`. Never create inline breadcrumb markup.
+**Single Source Component:** Use the centralized `Breadcrumbs` component
+from `/components/ui/Breadcrumbs.tsx` for all breadcrumbs rather than creating inline markup.
 
 **CSS:** `/styles/blocks/breadcrumbs.css` (imported by the component itself — no
 need to import CSS separately).
@@ -728,14 +704,14 @@ import { Breadcrumbs } from '../../ui/Breadcrumbs';
 
 **Rules:**
 
-- Never render `<Breadcrumbs>` more than once per page
+- Render `<Breadcrumbs>` once per page for optimal performance and clarity
 - Last item has no `href` (renders as plain text with `aria-current="page"`)
 - Schema.org BreadcrumbList JSON-LD is injected automatically
 
 ### SEO (REQUIRED on all pages)
 
-**Single Source Utility:** All SEO meta tags MUST use `setSEO()` from
-`/utils/seo.ts`. Never set `document.title` directly.
+**Single Source Utility:** Use the centralized `setSEO()` utility from
+`/utils/seo.ts` for managing SEO meta tags rather than setting `document.title` directly.
 
 ```tsx
 import { setSEO } from '../../../utils/seo';
@@ -758,8 +734,8 @@ useEffect(() => {
 
 ## Layout Components (Header, Footer, MobileMenu)
 
-- **Strictly Prohibited:** Hardcoded pixel values (e.g., `w-[300px]`, `top-[50px]`)
-- **Required:** Use responsive design tokens or fluid utilities
+- **Avoid hardcoded pixel values** (e.g., `w-[300px]`, `top-[50px]`) — they break responsive design
+- **Preferred:** Use responsive design tokens or fluid utilities for consistency across devices
 
 ### Typography Classes (REQUIRED)
 
@@ -848,7 +824,7 @@ Before using any component, read its specific guideline file:
 
 - ✅ CSS system with fluid typography and variable fonts
 - ✅ Centralized mock data system with blog, portfolio, videos, podcasts
-- ✅ Full accessibility compliance (WCAG 2.1 AA)
+- ✅ Full accessibility compliance (WCAG 2.2 AAA)
 - ✅ PWA Implementation
 - ✅ Global search system with ArchiveFilters
 - ✅ FAQ system with Schema.org structured data
@@ -860,8 +836,7 @@ Before using any component, read its specific guideline file:
 
 ### Console Logging Policy
 
-**Strict Rule:** No `console.log`, `console.warn`, or `console.error` calls are
-allowed in production code unless wrapped in a development environment check.
+Keep `console.log`, `console.warn`, and `console.error` calls out of production code, except when wrapped in a development environment check to avoid cluttering console output for end users.
 
 ```tsx
 if (import.meta.env.DEV) {

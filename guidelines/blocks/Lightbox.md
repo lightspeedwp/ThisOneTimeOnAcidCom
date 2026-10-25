@@ -663,7 +663,7 @@ useEffect(() => {
 ### 2. Accessibility
 
 ```tsx
-// ✅ Always provide alt text
+// ✅ Provide alt text
 images: [
   { src: '/img.jpg', alt: 'Descriptive alt text' }
 ]

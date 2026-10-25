@@ -18,7 +18,7 @@ project.
 
 ### Prompt Storage Location
 
-## All prompts MUST be stored in `/prompts/`
+## Store all prompts in `/prompts/`
 
 ```text
 /prompts/
@@ -45,8 +45,8 @@ project.
 **Rules:**
 
 - Use kebab-case for all filenames
-- Orchestrator file MUST be named `00-ORCHESTRATOR.md`
-- Sub-prompts MUST be numbered sequentially: `01-`, `02-`, `03-`, etc.
+- Name the orchestrator file `00-ORCHESTRATOR.md`
+- Number sub-prompts sequentially: `01-`, `02-`, `03-`, etc.
 - Sub-prompt numbers indicate execution order
 
 ---
@@ -55,7 +55,7 @@ project.
 
 ### Required YAML Frontmatter
 
-## Every prompt file MUST start with YAML frontmatter
+## Include YAML frontmatter at the beginning of every prompt file
 
 ```yaml
 ---
@@ -218,7 +218,7 @@ related_reports: "/reports/modern-react-migration/01-es5-react-audit.md"
 
 ### Required Sections (All Prompts)
 
-Every prompt MUST include these sections:
+Every prompt should include these sections:
 
 ```markdown
 
@@ -446,7 +446,7 @@ This audit enforces the standards defined in:
 
 ### Linking to Other Prompts
 
-Orchestrator prompts MUST link to all sub-prompts:
+Orchestrator prompts should link to all sub-prompts:
 
 ```markdown
 
@@ -466,7 +466,7 @@ Orchestrator prompts MUST link to all sub-prompts:
 
 ### Design for Repeated Execution
 
-All prompts MUST be designed to be **re-runnable**:
+All prompts should be designed to be **re-runnable**:
 
 - ✅ Can be executed multiple times
 - ✅ Generates fresh reports each time
@@ -503,7 +503,7 @@ This prompt can be run:
 
 ### ✅ Do
 
-- ✅ Always include complete YAML frontmatter
+- ✅ Include complete YAML frontmatter
 - ✅ Follow folder structure rules strictly
 - ✅ Create one consolidated task list per orchestrator
 - ✅ Wait for all audits to complete before creating tasks

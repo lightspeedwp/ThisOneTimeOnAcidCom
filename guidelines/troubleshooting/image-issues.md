@@ -230,7 +230,7 @@ stateDiagram-v2
     InBundle --> ImageDisplays: ✅ Shows in prod
     NotInBundle --> BrokenImage: ❌ 404 in prod
 
-    AssetMissing --> BrokenImage: ❌ Always fails
+    AssetMissing --> BrokenImage: ❌ Fails when asset missing
 
     note right of AssetMissing
         Asset was deleted
@@ -279,7 +279,7 @@ ls -la dist/assets/
 
 **Check 3: Fallback Images**
 
-Always use `ImageWithFallback` component:
+Use `ImageWithFallback` component:
 
 ```tsx
 // ✅ CORRECT - Fallback for missing images
@@ -495,7 +495,7 @@ const img = await unsplash_tool({
 
 **Check 3: Fallback**
 
-Always have fallback images:
+Provide fallback images:
 
 ```tsx
 // ✅ CORRECT - Fallback to Figma assets
@@ -516,7 +516,7 @@ const getHeroImage = async () => {
 - [ ] Prefer Figma assets from `/data/mock/`
 - [ ] Only use Unsplash for NEW content
 - [ ] Keep search queries simple (2-3 words)
-- [ ] Always have fallback to Figma assets
+- [ ] Include fallback to Figma assets
 - [ ] Cache Unsplash results to avoid rate limits
 
 ---
@@ -877,5 +877,5 @@ flowchart TD
 
 ---
 
-**Pro Tip:** Always import images from `/data/mock/` - never hardcode Figma
+**Pro Tip:** Import images from `/data/mock/` rather than hardcoding Figma
 asset IDs directly in components!

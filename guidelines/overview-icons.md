@@ -1,7 +1,7 @@
 # Icon System Guide
 
 Complete guide to using icons in the Ash Shaw Makeup Portfolio project.
-**CRITICAL:** Always verify icons exist before using them!
+Verify icons exist before using them.
 
 **Version:** 5.0.0
 **Last Updated:** March 2026
@@ -66,9 +66,7 @@ live side-by-side comparison of all Lucide → Phosphor icon mappings.
 
 ## Icon Verification Process
 
-### ⚠️ CRITICAL: Always Verify Icons Before Using
-
-**NEVER assume an icon exists.** Always follow this verification process:
+Verify that icons exist before using them. Here's the verification process:
 
 ### Step 1: Search Lucide Documentation
 
@@ -370,7 +368,7 @@ import { Makeup, Lipstick, Eyeshadow } from 'lucide-react';
 
 ```text
 
-**Solution:** Always verify icons exist. Use alternatives:
+**Solution:** Verify icons exist. Use alternatives:
 
 ```tsx
 // ✅ CORRECT - Use verified alternatives
@@ -402,7 +400,7 @@ import { ArrowUp, Menu } from 'lucide-react';
 
 ```text
 
-**Solution:** Always specify explicit size:
+**Solution:** Specify explicit size:
 
 ```tsx
 // ✅ CORRECT - Explicit sizing
@@ -420,7 +418,7 @@ import { ArrowUp, Menu } from 'lucide-react';
 
 ```text
 
-**Solution:** Always include aria-label for icon-only buttons:
+**Solution:** Include aria-label for icon-only buttons:
 
 ```tsx
 // ✅ CORRECT - Accessible

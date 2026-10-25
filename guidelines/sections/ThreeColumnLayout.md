@@ -472,8 +472,8 @@ backgroundGradient={{
 
 ## Decorative Element Styling
 
-- Always wrapped in `pointer-events-none` container
-- Always includes `aria-hidden="true"` for accessibility
+- Wrapped in `pointer-events-none` container
+- Includes `aria-hidden="true"` for accessibility
 - Positioned with `absolute`
 - Uses low opacity (20-30%) for subtle effect
 - Uses `blur-3xl` for soft appearance

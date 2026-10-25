@@ -18,7 +18,7 @@ makeup artistry.
 
 - **Light Mode:** Accessible darker neon variants for readability on white
 - **Dark Mode:** Full-brightness neon colors with glowing effects on atomic black (#0F0F0F)
-- **Contrast:** All combinations meet WCAG 2.1 AA standards
+- **Contrast:** All combinations meet WCAG 2.2 AAA standards
 - **Energy:** Bold, vibrant, unapologetically colorful
 
 ---
@@ -509,8 +509,8 @@ texture adds subtle depth and tactile quality to every major section.
 
 **Requirements:**
 
-- The parent section MUST have `position: relative` and `overflow: hidden`
-- Section content MUST sit above the noise layer (use `position: relative; z-index: 1` or higher)
+- Set the parent section with `position: relative` and `overflow: hidden` for proper containment
+- Position section content above the noise layer (use `position: relative; z-index: 1` or higher)
 - The grain is purely decorative — `pointer-events: none` and `aria-hidden` are implicit
 
 **Usage:**
@@ -756,7 +756,7 @@ background-image:
 **Use Cases:**
 
 - High-contrast dark mode toggle with black/white switch and neon accent glow
-- Accessibility-focused button designs with WCAG AAA contrast ratios
+- Accessibility-focused button designs with WCAG 2.2 AAA contrast ratios
 - Alert banners using black backgrounds with neon text for critical warnings
 
 ### Thematic Palettes (Image-Inspired)

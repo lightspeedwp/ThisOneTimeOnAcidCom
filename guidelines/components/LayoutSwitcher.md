@@ -518,7 +518,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 // ❌ WRONG - Layout switcher exists but doesn't affect content
 <LayoutSwitcher value={layout} onChange={setLayout} />
 <div className="grid grid-cols-3">
-  {/* Always grid, never list */}
+  {/* Grid layout, not list */}
 </div>
 
 ```text

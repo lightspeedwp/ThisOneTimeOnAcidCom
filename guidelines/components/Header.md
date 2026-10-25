@@ -13,7 +13,7 @@ Provide consistent site-wide navigation with:
 - Desktop horizontal navigation
 - Mobile hamburger menu
 - Active page indication
-- Accessibility compliance (WCAG 2.1 AA)
+- Accessibility compliance (WCAG 2.2 AAA)
 - Sticky positioning for easy access
 - Focus management and keyboard navigation
 

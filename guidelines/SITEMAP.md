@@ -411,9 +411,9 @@ Provides builder functions and inject/cleanup utilities for JSON-LD schemas:
 
 **Rules:**
 
-- All breadcrumbs MUST use this single component
-- Never create inline breadcrumb markup
-- Never render `<Breadcrumbs>` more than once per page
+- Use the single `<Breadcrumbs>` component for all breadcrumbs
+- Avoid creating inline breadcrumb markup — use the component instead
+- Render the `<Breadcrumbs>` component once per page
 - Last item has no `href` (renders as plain text with `aria-current="page"`)
 - Schema.org BreadcrumbList JSON-LD is injected automatically
 
