@@ -10,7 +10,7 @@ created: "2026-10-24"
 
 **Status:** Draft  
 **Issue:** [TOA-358](https://linear.app/lightspeedwp/issue/TOA-358) | [GitHub #416](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/416)  
-**Branch:** `docs/spec-003-guidelines-reconcile`\
+**Branch:** `docs/spec-003-phase2-implementation`\
 **Created:** 2026-10-24
 
 ## Overview
@@ -31,14 +31,14 @@ Consolidate and refactor 116 existing guideline documents plus 33 conditional ne
 | Gate | Decision | Impact | Status |
 | --- | --- | --- | --- |
 | **D0** | Retain the existing protected-file approval requirement; no policy simplification is authorised | Protected edits, including all changes under `.github/` | ✅ RESOLVED (existing policy retained) |
-| **D1** | Canonical book/site identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context | New normative copy, identity claims | 🔄 PENDING |
-| **D2** | Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries | Publication/exposure contracts | 🔄 PENDING |
-| **D3** | Brief/current-CSS/approved-design-contract authority, palette/font roles, accessibility target | Design authority; arithmetic/sample corrections | 🔄 PENDING |
-| **D4** | Exact canonical destinations/pointer treatment, six-skill reference approach | Conditional N creates, pointer-only replacement, extraction | 🔄 PENDING |
-| **D5** | Artefact-specific retention and historical preservation-copy locations | Historical-copy operations | 🔄 PENDING |
-| **D6** | Signup/contact/waitlist/backend provider and verification | Delivery, secure unlock, CMS claims | 🔄 PENDING |
-| **D7** | Verified final branch/reuse scope, manual template/label handling | Branch selection, PR metadata | ✅ RESOLVED (`docs/spec-003-guidelines-reconcile`) |
-| **D8** | WordPress/portfolio retained-reference vs future-option role | Migration/legacy requirements | 🔄 PENDING |
+| **D1** | Canonical book/site identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context | New normative copy, identity claims | ✅ RESOLVED |
+| **D2** | Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries | Publication/exposure contracts | ✅ RESOLVED |
+| **D3** | Brief/current-CSS/approved-design-contract authority, palette/font roles, accessibility target | Design authority; arithmetic/sample corrections | ✅ RESOLVED |
+| **D4** | Exact canonical destinations/pointer treatment, six-skill reference approach | Conditional N creates, pointer-only replacement, extraction | ✅ RESOLVED |
+| **D5** | Artefact-specific retention and historical preservation-copy locations | Historical-copy operations | ✅ RESOLVED |
+| **D6** | Signup/contact/waitlist/backend provider and verification | Delivery, secure unlock, CMS claims | ✅ RESOLVED |
+| **D7** | Verified final branch/reuse scope, manual template/label handling | Branch selection, PR metadata | ✅ RESOLVED (`docs/spec-003-phase2-implementation`) |
+| **D8** | WordPress/portfolio retained-reference vs future-option role | Migration/legacy requirements | ✅ RESOLVED |
 
 D0 confirms the current approval requirement, not approval to remove it.
 The canonical [protected-file list](../../PROTECTED_FILES.txt) includes `.github/`;

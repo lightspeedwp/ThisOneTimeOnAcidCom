@@ -48,9 +48,9 @@ created: "2026-10-25"
 
 **Pre-Implementation Verification** ✅ COMPLETE (2026-10-25):
 
-- [x] **T001** Confirm all owner decisions (D0–D8) recorded with evidence in `checklists/requirements.md` — ✅ All 8 gates RESOLVED
+- [x] **T001** Confirm all owner decisions (D0–D8) recorded with evidence in `checklists/requirements.md` — ✅ All 9 gates RESOLVED
 - [x] **T002** Verify source hashes: Compare 116 guidelines against baseline commit `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` — ✅ 116 files verified; inventory consistent
-- [x] **T003** Validate branch `docs/spec-003-phase2-implementation` is clean and up-to-date with `develop` — ✅ Branch up-to-date (7ee2d07)
+- [x] **T003** Validate branch `docs/spec-003-phase2-implementation` is clean and up-to-date with `develop` — ✅ Branch up-to-date (ca813db)
 - [x] **T004** [P] Prepare the repository-local `validate-phase1.sh` script as described in `quickstart.md`, then run it from the repository root: `cd .github/specs/003-refactor-guidelines && bash ./validate-phase1.sh` — ✅ Validation PASSED; Phase 2 ready
 
 ---
