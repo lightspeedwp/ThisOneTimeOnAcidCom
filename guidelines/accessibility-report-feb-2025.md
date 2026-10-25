@@ -147,7 +147,7 @@ select:focus-visible,
 
 **Problem:** Full brightness neon colors used on light backgrounds
 **Impact:** Poor readability, failed WCAG 2.2 AAA contrast requirements
-**WCAG Criteria:** 1.4.3 Contrast (Minimum) - Level AAAA
+**WCAG Criteria:** 1.4.3 Contrast (Minimum) - Level AA; 1.4.6 Contrast (Enhanced) - Level AAA
 
 ## Solution Implemented (2)
 
