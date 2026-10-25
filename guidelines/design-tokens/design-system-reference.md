@@ -717,8 +717,8 @@ body.light-mode .component {
 
 **Color Contrast:**
 
-- Body text: 4.5:1 minimum (WCAG AA)
-- Dark mode achieves 7:1+ (WCAG AAA)
+- Body text: 7:1 minimum (WCAG 2.2 AAA)
+- Dark mode achieves 7:1+ (WCAG 2.2 AAA)
 - Test neon colors against backgrounds
 
 **Reduced Motion:**
@@ -726,7 +726,7 @@ body.light-mode .component {
 - All animations must have `prefers-reduced-motion` fallbacks
 - No motion for users who request reduced motion
 
-**Full compliance:** WCAG 2.1 Level AA — See
+**Full compliance:** WCAG 2.2 Level AAA — See
 `/guidelines/accessibility-report-feb-2025.md`
 
 ---

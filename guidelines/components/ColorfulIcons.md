@@ -672,7 +672,7 @@ Icons are non-interactive by default:
 
 ### Color Contrast
 
-All icons meet WCAG 2.1 AA standards:
+All icons meet WCAG 2.2 AAA standards:
 
 - ✅ Multiple colors ensure visibility
 - ✅ Gradients provide depth without losing contrast

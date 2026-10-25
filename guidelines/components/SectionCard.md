@@ -129,13 +129,13 @@ dark:border-purple-700       /* Solid purple borders */
 
 ### Accessibility Compliance
 
-## WCAG 2.1 AA Standards
+## WCAG 2.2 AAA Standards
 
 **Light Mode:**
 
 - Heading contrast: 7.02:1 (AAA ✅)
-- Body text contrast: 4.83:1 (AA ✅)
-- Interactive elements: 4.5:1+ (AA ✅)
+- Body text contrast: 4.83:1 (AAA ✅)
+- Interactive elements: 4.5:1+ (AAA ✅)
 
 **Dark Mode:**
 

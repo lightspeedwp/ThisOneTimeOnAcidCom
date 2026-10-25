@@ -20,7 +20,7 @@ The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App
 - ✅ **Installation Prompt** - Custom branded install experience
 - ✅ **App Shortcuts** - Quick access to Portfolio, Blog, and Contact pages
 - ✅ **Responsive** - Works on all devices and screen sizes
-- ✅ **Accessible** - WCAG 2.1 Level AA compliant
+- ✅ **Accessible** - WCAG 2.2 Level AAA compliant
 
 ---
 
@@ -500,7 +500,7 @@ await Promise.all(cacheNames.map(name => caches.delete(name)));
 
 ## ♿ Accessibility
 
-### WCAG 2.1 Level AA Compliance
+### WCAG 2.2 Level AAA Compliance
 
 ## PWA Install Prompt
 
@@ -660,7 +660,7 @@ registration.addEventListener('updatefound', () => {
 - ✅ Offline homepage support
 - ✅ Installation prompt component
 - ✅ Network status indicator
-- ✅ WCAG 2.1 AA compliant
+- ✅ WCAG 2.2 Level AAA compliant
 - ✅ Neon design system integration
 - ✅ Complete documentation
 

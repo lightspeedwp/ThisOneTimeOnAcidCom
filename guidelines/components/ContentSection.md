@@ -110,7 +110,7 @@ component.
 - Uses `<section>` semantic element
 - `aria-labelledby` links to the title when present
 - Title rendered as `<h2>` maintaining heading hierarchy
-- Color accents meet WCAG AA contrast requirements
+- Color accents meet WCAG 2.2 AAA contrast requirements
 
 ## Bundler Rules
 

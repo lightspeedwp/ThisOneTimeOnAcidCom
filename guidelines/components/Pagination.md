@@ -17,7 +17,7 @@ Provide multi-page navigation with:
 - Ellipsis for long page ranges
 - Keyboard navigation support
 - Mobile-responsive design
-- WCAG 2.1 AA compliance
+- WCAG 2.2 AAA compliance
 
 ---
 

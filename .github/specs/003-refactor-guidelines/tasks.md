@@ -103,11 +103,12 @@ created: "2026-10-25"
 
 #### Category 1: Copy Alignment (depends on D1)
 
-- [ ] **T022** [P] Edit guidelines with D1-dependent copy changes: Files per D1 decision list
-  - Review identity/voice requirements from D1
-  - Update copy while preserving technical content
-  - Preserve all safeguards and author attribution
-  - Example files: `guidelines/Guidelines.md`, content-related files per D1
+- [x] **T022** [P] Edit guidelines with D1-dependent copy changes: Files per D1 decision list
+  - Review identity/voice requirements from D1 ✅
+  - Update copy while preserving technical content ✅
+  - Preserve all safeguards and author attribution ✅
+  - Example files: `guidelines/Guidelines.md`, content-related files per D1 ✅
+  - Completed: Softened prescriptive language (MUST/NEVER/Always/forbidden) across ~37 guidelines files, applied "Balanced Hybrid voice" pattern consistently while preserving all technical requirements and safety constraints
 
 #### Category 2: Design & Accessibility (depends on D3)
 

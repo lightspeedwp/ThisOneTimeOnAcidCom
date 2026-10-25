@@ -7,7 +7,7 @@
 ## Overview
 
 This document defines comprehensive accessibility standards and interaction
-patterns for the Ash Shaw Makeup Portfolio, ensuring WCAG 2.1 AAA compliance and
+patterns for the Ash Shaw Makeup Portfolio, ensuring WCAG 2.2 AAA compliance and
 optimal user experience for all users, including those using assistive
 technologies.
 
@@ -35,7 +35,7 @@ technologies.
 
 ## Accessibility Standards
 
-### WCAG 2.1 Compliance
+### WCAG 2.2 Compliance
 
 **Target Compliance Level:** AAA (Enhanced)
 
@@ -63,7 +63,7 @@ interface AccessibilityRequirements {
 
   // Operable
   touchTargets: {
-    minimum: '44x44px',            // WCAG 2.1 Level AA
+    minimum: '44x44px',            // WCAG 2.2 Level AAA
     recommended: '48x48px'         // Enhanced usability
   };
 

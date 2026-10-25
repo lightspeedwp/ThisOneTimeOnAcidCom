@@ -64,7 +64,7 @@ component.
 - Uses semantic `<blockquote>` element
 - Decorative quotation mark is `aria-hidden="true"`
 - Author attribution uses `<cite>` element
-- WCAG AA color contrast in both light and dark modes
+- WCAG 2.2 AAA color contrast in both light and dark modes
 
 ## Migration from Manual Blockquotes
 

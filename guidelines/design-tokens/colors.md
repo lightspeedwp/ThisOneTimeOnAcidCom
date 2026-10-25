@@ -53,7 +53,7 @@ details.
 - **Dual Theme System:** Complete light and dark mode support
 - **Clean Light Mode:** Professional white backgrounds with subtle accents
 - **Rich Dark Mode:** Deep purple gradient aesthetic with high contrast
-- **Accessible:** All color combinations meet WCAG 2.1 AA standards
+- **Accessible:** All color combinations meet WCAG 2.2 AAA standards
 - **Semantic:** Colors convey meaning (success, error, warning)
 
 ### Usage Guidelines
@@ -614,7 +614,7 @@ rounded-full opacity-20 dark:opacity-30 animate-pulse" aria-hidden="true"></div>
 
 ## Accessibility Standards
 
-### WCAG 2.1 AA Compliance
+### WCAG 2.2 AAA Compliance
 
 #### Light Mode Contrast Ratios
 

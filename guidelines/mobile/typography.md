@@ -719,13 +719,13 @@ function HeroSection() {
 
 // ✅ CORRECT - High contrast
 <p className="text-gray-700">
-  {/* WCAG AA: 4.5:1 minimum */}
+  {/* WCAG 2.2 AAA: 7:1 minimum for body text */}
   Easy to read
 </p>
 
 // Headings need higher contrast
 <h2 className="text-gray-900">
-  {/* WCAG AAA: 7:1 for headings */}
+  {/* WCAG 2.2 AAA: 7:1 minimum for all text */}
   High contrast heading
 </h2>
 

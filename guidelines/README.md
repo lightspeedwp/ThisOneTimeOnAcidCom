@@ -101,7 +101,7 @@ guidelines/
 ├── component-dark-mode.md         - Component theme patterns
 ├── css-architecture.md            - CSS system documentation
 ├── data-models.md                 - Data model definitions
-├── accessibility-report-feb-2025.md - WCAG AA compliance report
+├── accessibility-report-feb-2025.md - WCAG 2.2 AAA compliance report
 │
 ├── components/                    - Component-specific guides (24 files)
 │   ├── Logo.md

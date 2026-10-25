@@ -512,7 +512,7 @@ padding: clamp([min-spacing], [preferred-spacing], [max-spacing]);
 
 ### Minimum Touch Target Size
 
-**WCAG 2.1 Requirement:** 44x44px minimum for touch targets
+**WCAG 2.2 AAA Requirement:** 44x44px minimum for touch targets
 
 ```css
 /* Base touch target */

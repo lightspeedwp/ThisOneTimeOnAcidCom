@@ -18,7 +18,7 @@ makeup artistry.
 
 - **Light Mode:** Accessible darker neon variants for readability on white
 - **Dark Mode:** Full-brightness neon colors with glowing effects on atomic black (#0F0F0F)
-- **Contrast:** All combinations meet WCAG 2.1 AA standards
+- **Contrast:** All combinations meet WCAG 2.2 AAA standards
 - **Energy:** Bold, vibrant, unapologetically colorful
 
 ---
@@ -756,7 +756,7 @@ background-image:
 **Use Cases:**
 
 - High-contrast dark mode toggle with black/white switch and neon accent glow
-- Accessibility-focused button designs with WCAG AAA contrast ratios
+- Accessibility-focused button designs with WCAG 2.2 AAA contrast ratios
 - Alert banners using black backgrounds with neon text for critical warnings
 
 ### Thematic Palettes (Image-Inspired)

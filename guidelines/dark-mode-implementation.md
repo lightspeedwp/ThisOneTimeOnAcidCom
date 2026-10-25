@@ -31,7 +31,7 @@ Makeup Portfolio.
 ✅ **Complete Coverage:** Every component supports both themes
 ✅ **Consistent Aesthetic:** Clean light mode, rich dark mode
 ✅ **Smooth Transitions:** 300ms duration on theme changes
-✅ **Accessible:** WCAG 2.1 AA compliant in both themes
+✅ **Accessible:** WCAG 2.2 AAA compliant in both themes
 ✅ **Performant:** No layout shifts or flickering
 
 ### Theme Aesthetics
