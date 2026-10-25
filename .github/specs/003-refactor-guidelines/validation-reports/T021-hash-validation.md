@@ -1,33 +1,65 @@
-# T021: Hash Validation Report
+# T021: Hash validation report
 
-**Generated**: 2026-10-25  
-**Baseline Commit**: b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9  
-**Current Check**: All 116 files validated
+**Validated**: 2026-10-25\
+**Baseline commit**: `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9`\
+**Compared checkout revision**: `bb5888cf4681ed40402b2fc0b05d1366f109f4ad`\
+**Result**: PASS — all 116 Markdown guideline paths and SHA-256 hashes match.
 
-## Validation Method
+## Evidence and scope
 
-**Command used**: `find guidelines/ -type f -name "*.md" -exec sha256sum {} \; | sort`
+The [baseline manifest](./T021-baseline.sha256) contains one SHA-256 hash and
+repository-relative path for each of the 116 Markdown files. It was regenerated
+from Git blobs at the baseline commit and compared with current disk contents.
+The manifest SHA-256 is
+`9f987a7900a2aede0e1f05e2d6aa4a20589cff157864aa1f68dbdc30062aaa30`.
 
-**Baseline hash list location**: See `spec.md` § "Source Inventory" for 116 file paths scanned.
+This rerun verifies equality with the named Git commit. It does not authenticate
+the original observation attachment, whose repository path is not recorded in
+[spec.md](../spec.md), or establish `locked-files-guard` approval.
 
-**Verification environment**: Repository checkout at commit b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9 established baseline.
+## Reproduction
 
-## Validation Results
+Run from the repository root using Bash, Git and GNU coreutils:
 
-**Summary**: 116 files scanned, baseline hashes recorded, 0 changes detected since baseline commit.
+```bash
+set -euo pipefail
+baseline=b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9
+manifest=.github/specs/003-refactor-guidelines/validation-reports/T021-baseline.sha256
+git ls-tree -r --name-only "$baseline" -- guidelines/ | LC_ALL=C sort |
+  while IFS= read -r path; do
+    case "$path" in
+      *.md)
+        digest=$(git show "$baseline:$path" | sha256sum)
+        printf '%s  %s\n' "${digest%% *}" "$path"
+        ;;
+    esac
+  done > /tmp/t021-baseline.sha256
+find guidelines/ -type f -name '*.md' -print0 | LC_ALL=C sort -z |
+  xargs -0 sha256sum > /tmp/t021-current.sha256
+wc -l /tmp/t021-baseline.sha256 /tmp/t021-current.sha256
+cmp "$manifest" /tmp/t021-baseline.sha256
+cmp /tmp/t021-baseline.sha256 /tmp/t021-current.sha256
+sha256sum -c "$manifest" > /tmp/t021-check.log
+printf 'Verified files: '
+wc -l < /tmp/t021-check.log
+sha256sum "$manifest"
+```
 
-| Metric | Value |
-|--------|-------|
-| Files scanned | 116 |
-| Baseline established | 2026-10-24 |
-| Current check date | 2026-10-25 |
-| Changes detected | 0 |
-| Verification result | ✅ PASS |
+Observed output (both `cmp` commands produced no output and exited 0):
+
+```text
+  116 /tmp/t021-baseline.sha256
+  116 /tmp/t021-current.sha256
+  232 total
+Verified files: 116
+9f987a7900a2aede0e1f05e2d6aa4a20589cff157864aa1f68dbdc30062aaa30  .github/specs/003-refactor-guidelines/validation-reports/T021-baseline.sha256
+```
 
 ## Conclusion
 
-✅ **ALL 116 G-DOCUMENTS VERIFIED**: No unexpected changes since baseline. Ready for Phase 2B edits per decision gates D1–D5.
+T021's Git baseline comparison passes: 116 files, no added or removed paths,
+and zero changed hashes. The saved manifest supports the result reported in
+[spec.md](../spec.md#source-inventory).
 
-**Reproduction**: To verify this report, run `find guidelines/ -type f -name "*.md" -exec sha256sum {} \; | sort` at baseline commit b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9, then again on current working tree to compare.
-
-**Next Step**: Proceed to T022–T026 (category-based G-document edits per D1–D5 decisions).
+**Phase 2B remains blocked** pending recorded T017 `locked-files-guard` approval.
+Do not begin T022–T026 guideline edits until that approval is recorded.

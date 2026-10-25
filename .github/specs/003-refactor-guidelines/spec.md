@@ -58,7 +58,13 @@ change requires a recorded authorised decision under the
 ### Existing Guidelines (116 files)
 
 All at `guidelines/` and subdirectories. Current tracked and on-disk inventories
-both contain 116 files; baseline hashes validated with zero changes detected (T021).
+both contain 116 Markdown files. The 2026-10-25 rerun compared baseline commit
+`b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` with checkout revision
+`bb5888cf4681ed40402b2fc0b05d1366f109f4ad`: identical path sets and SHA-256
+hashes for all 116 files, with zero changes. See the [T021 report](./validation-reports/T021-hash-validation.md)
+and [baseline hash manifest](./validation-reports/T021-baseline.sha256).
+This verifies the Git baseline comparison; the original observation attachment
+remains unidentified. Phase 2B is **blocked** pending T017 `locked-files-guard` approval.
 
 **Subdirectories:**
 - `blocks/` (4 files)
@@ -131,6 +137,10 @@ All gates D0–D8 are resolved. Decision evidence and implementation guidance re
 3. Complete protected-file edits per approval gate T017
 
 **Phase 2B: Guideline Document Edits** (Tasks T019–T027)
+
+**Blocked:** Record T017 `locked-files-guard` approval before G-document edits.
+Hash validation does not grant protected-file approval.
+
 1. Execute 116 G-document category-based edits (T019–T026)
 2. Complete pointer validation (T028–T032)
 3. Validate all 129 internal reference candidates
