@@ -233,6 +233,7 @@ Run this sequence to validate the entire Phase 1 design:
 ```bash
 #!/bin/bash
 set -e
+set -o pipefail
 
 echo "🔍 Phase 1 Validation: Guidelines Refactor (TOA-358)"
 echo "=================================================="
@@ -324,6 +325,7 @@ cd .github/specs/003-refactor-guidelines
 cat > ./validate-phase1.sh << 'EOF'
 #!/bin/bash
 set -e
+set -o pipefail
 
 echo "🔍 Phase 1 Validation: Guidelines Refactor (TOA-358)"
 echo "=================================================="
