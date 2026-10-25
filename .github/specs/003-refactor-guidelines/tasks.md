@@ -84,7 +84,7 @@ created: "2026-10-25"
 ### S-Documents: Approval & Commit
 
 - [ ] **T017** Obtain `locked-files-guard` approval for all S-document edits per D0
-- [ ] **T018** Stage and commit S-documents: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"`
+- [x] **T018** Stage and commit S-documents: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"` ✓ Commit edb647c
 
 ---
 
