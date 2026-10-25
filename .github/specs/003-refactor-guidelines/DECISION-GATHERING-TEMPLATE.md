@@ -140,12 +140,12 @@ Example:
 - For each approved N-document: where should it live (`guidelines/` path)?
 - For G-documents that consolidate into N-documents: should old G-paths become pointers?
 - Which G-documents remain standalone (no consolidation)?
-- How should updated guidelines reference the six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration)? Confirm the reference approach for all six.
-- For each optional new skill proposal, explicitly APPROVE or REJECT it and record its name, purpose, proposed destination, rationale, and evidence link. New skill creation is out of scope in [Specification 003](spec.md#scope--constraints); approval requires a separately authorised scope change before implementation.
+- **[REQUIRED]** How should updated guidelines reference the six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration)? Confirm the reference approach for all six.
+- **[REQUIRED]** For each optional new skill proposal, explicitly APPROVE or REJECT it and record its name, purpose, proposed destination, rationale, and evidence link. New skill creation is out of scope in [Specification 003](spec.md#scope--constraints); approval requires a separately authorised scope change before implementation.
 
 **Decision Statement:**
 ```text
-[OWNER RECORDS HERE]
+[OWNER RECORDS HERE — must include N-documents, pointer strategy, AND skill decisions]
 
 Example: "Approved N-documents:
 - N001: Design Token Reference (guidelines/design/tokens.md)
@@ -158,6 +158,16 @@ Not approved (defer to Phase 3 or future):
 
 Approved with pointer-only (no new document):
 - N005–N010 (reference; create redirect entries in G-docs, no new file)
+
+Six-skill reference approach:
+- All six existing skills (branch-validation, changelog, labeling, test, validate, 
+  workflow-orchestration) are referenced from canonical .agents/skills/ locations
+- Guidelines updated to link to skill documentation at canonical paths
+- No new skills created in Phase 2; any future skill proposals require separate D-gate
+
+Optional new skill decisions:
+- REJECTED: S010 (codeowners-management) — deferred to Phase 3
+- APPROVED: S011 (guidelines-validator) — for Phase 2 validation; lives in .agents/skills/
 "
 ```
 

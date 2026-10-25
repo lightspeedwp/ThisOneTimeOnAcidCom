@@ -82,6 +82,15 @@ else
   exit 1
 fi
 
+# Verify required contract files exist
+for contract in guideline-interface.md approval-process.md pointer-redirect-contract.md; do
+  if ! test -f "contracts/$contract"; then
+    echo "  ✗ ERROR: Missing contracts/$contract" >&2
+    exit 1
+  fi
+done
+echo "  ✓ All required contracts present"
+
 echo ""
 echo "✅ Phase 1 Validation PASSED"
 echo "📋 Next step: Resolve owner gates (D1–D8) and proceed to Phase 2"
