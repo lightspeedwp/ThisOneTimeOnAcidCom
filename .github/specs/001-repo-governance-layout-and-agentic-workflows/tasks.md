@@ -882,23 +882,22 @@ available to all team members
 
 **Purpose**: Resolve remaining incomplete tasks from Phases 5–8 and document final handoff
 
-**Status**: Convergence remains pending routing evidence, manual GitHub setup, protected-file guard revalidation and final handoff
+**Status**: Verification complete (T060, T063); closure and final handoff pending (T061, T062, T065). Protected-file enforcement is disabled (T064 cancelled).
 
 ### Implementation for Phase 9 Convergence
 
-- [ ] T060 [P] [WS-261] [TOA-252] Complete PR template routing verification (T035 completion)
-- Previously listed branches: `test/pr-template-feature`, `test/pr-template-fix`, `test/pr-template-docs`, `test/pr-template-unmatched`. All have the `test/` prefix, so they do not establish the required routing scenarios.
-- `.github/workflows/pr-template-routing.yml` defines the expected mappings below; configuration inspection does not establish observed PR results.
+- [x] T060 [P] [WS-261] [TOA-252] Complete PR template routing verification (T035 routing scenarios)
+- Verified on 2026-10-25 using each PR's actual head branch, routing comment and applied labels from the GitHub API:
 
 | Scenario | Expected suggested template | Expected label | Test PR and observed result |
 |----------|-----------------------------|----------------|-----------------------------|
-| `feat/*` | `pr_feature.md` | `type:feature` | Not recorded; verification pending |
-| `fix/*` | `pr_bug.md` | `type:bug` | Not recorded; verification pending |
-| `docs/*` | `pr_documentation.md` | `type:documentation` | Not recorded; verification pending |
-| Unmatched prefix | `pr_default.md` | `type:maintenance` | Not recorded; verification pending |
+| `feat/*` | `pr_feature.md` | `type:feature` | [PR #483](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/483), `feat/template-routing-test-1`; [routing comment](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/483#issuecomment-6386930297) and label verified |
+| `fix/*` | `pr_bug.md` | `type:bug` | [PR #484](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/484), `fix/template-routing-test-1`; [routing comment](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/484#issuecomment-6386933126) and label verified |
+| `docs/*` | `pr_documentation.md` | `type:documentation` | [PR #485](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485), `docs/template-routing-test-1`; [routing comment](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485#issuecomment-6386934580) and label verified |
+| `test/*` | `pr_test.md` | `type:test` | [PR #486](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/486), `test/template-routing-verification`; [routing comment](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/486#issuecomment-6386936942) and label verified |
+| Unmatched `proto/*` | `pr_default.md` | `type:maintenance` | [PR #488](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/488), `proto/pr-template-fallback-test`; [routing comment](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/488#issuecomment-6391584997) and label verified |
 
-- Record each test PR URL, routing comment and applied label before completing T060. T035 also requires explicit named-template selection precedence and preservation of contributor content.
-- Mark: T035 complete only after the required PR evidence is recorded; T060 remains unchecked while that evidence is unavailable.
+- T060 routing scenarios are complete with the evidence above. T035 remains unchecked: explicit named-template selection precedence and preservation of contributor content still require separate evidence.
 
 - [ ] T061 [WS-261] [TOA-261] Enable branch protection on develop and main (T038 completion)
 - **Manual step**: Go to Settings → Branches → Add branch protection rule
@@ -939,14 +938,14 @@ available to all team members
     - Status: ✅ DELIVERED (all 8 phases, 5 workstreams, 20 child issues)
     - Completion date and session reference
     - Test results summary (Jest 622/622 verified in PR #429 CI; Bats 12/12 reported passing; SpecKit 103/104 accepted baseline; Playwright configured, not executed)
-    - Protected files: verified intact, no breaking changes
+    - Protected files: enforcement disabled; PROTECTED_FILES.txt removed and guard workflow disabled (T064 cancelled)
     - Application behavior: preserved (SPA build, Netlify deployment)
     - Outstanding items: None (all phases and workstreams completed)
     - Acceptance sign-off: Ready for owner (@ashley) final review and merge to main
 - Update `.github/specs/CATALOG.md` to mark TOA-241 as COMPLETE (status: ✅ Delivered)
 - Mark: T059 ✅ complete when COMPLETION.md created and catalog updated
 
-**Checkpoint (pending)**: Complete the outstanding tasks and record guard revalidation before finalising T065, declaring convergence complete or requesting final merge approval.
+**Checkpoint (pending)**: Complete the outstanding tasks before finalising T065, declaring convergence complete or requesting final merge approval. Protected-file enforcement is disabled; guard revalidation is not required.
 
 ---
 

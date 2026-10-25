@@ -15,12 +15,14 @@ const path = require('path');
 function loadLockedPaths() {
   const protectedFilesPath = path.join(__dirname, '../../.github/PROTECTED_FILES.txt');
 
-  // Protected files enforcement is disabled; return empty list if file not found
-  if (!fs.existsSync(protectedFilesPath)) {
-    return [];
+  let content;
+  try {
+    content = fs.readFileSync(protectedFilesPath, 'utf8');
+  } catch (error) {
+    // Enforcement is disabled when the manifest is absent.
+    if (error.code === 'ENOENT') return [];
+    throw error;
   }
-
-  const content = fs.readFileSync(protectedFilesPath, 'utf8');
 
   const paths = [];
   content.split(/\r?\n/).forEach((line) => {
