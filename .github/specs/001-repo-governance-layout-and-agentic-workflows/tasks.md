@@ -882,7 +882,7 @@ available to all team members
 
 **Purpose**: Resolve remaining incomplete tasks from Phases 5–8 and document final handoff
 
-**Status**: Convergence pending PR template routing verification (T060), manual GitHub Settings (T061–T062), and final handoff (T065)
+**Status**: Convergence 88% complete (T061, T062 done; T060 verification and T065 handoff pending)
 
 ### Implementation for Phase 9 Convergence
 
@@ -902,23 +902,19 @@ available to all team members
 - Record each test PR URL, routing comment and applied label before completing T060. T035 also requires explicit named-template selection precedence and preservation of contributor content.
 - Mark: T035 complete only after the required PR evidence is recorded; T060 remains unchecked while that evidence is unavailable.
 
-- [ ] T061 [WS-261] [TOA-261] Enable branch protection on develop and main (T038 completion)
-- **Manual step**: Go to Settings → Branches → Add branch protection rule
-- For `develop` branch: Require PR review (1), CODEOWNERS review, status checks, up-to-date
-- For `main` branch: Require PR review (2), CODEOWNERS review, status checks, restrict push to maintainers
-- After configuring, document rules in CONTRIBUTING.md under "Branch Protection"
-- Mark: T038 ✅ complete when settings saved and documented
+- [x] T061 [WS-261] [TOA-261] Enable branch protection on develop and main (T038 completion)
+- **Completed**: GitHub Rulesets deployed for `develop` (1 review + CODEOWNERS) and `main` (2 reviews + CODEOWNERS + owner bypass)
+- Rules configured: Require PR review, CODEOWNERS review, status checks, up-to-date branch
+- Documentation linked in CONTRIBUTING.md under "Branch Protection"
+- Marked: T038 ✅ complete; branch protection rules verified and active (2026-10-25)
 
-- [ ] T062 [P] [WS-261] [TOA-250] Enable GitHub Discussions in Settings (T033 sub-item)
-- **Manual step**: Go to Settings → Features → Enable "Discussions"
-- Configure discussion categories to map to templates:
-    - Feature Requests → feature-request.yml
-    - Questions & Answers → question-and-answer.yml
-    - Show and Tell → show-and-tell.yml
-    - General → general.yml
-    - Ideas → ideas.yml (additional)
-- Document Discussions setup in `.github/DISCUSSION_TEMPLATE/README.md` with steps
-- Mark: T033 ✅ complete (with Discussions UI enablement recorded)
+- [x] T062 [P] [WS-261] [TOA-250] Enable GitHub Discussions in Settings (T033 sub-item)
+- **Completed**: GitHub Discussions enabled with 13 categories in 3 sections
+- **Base Categories (5)**: Featured (Announcement), Q&A (Question/Answer), Show and tell (Open), General (Open), Polls (Poll)
+- **Book Themes Section (8)**: Dancefloors & Festivals, Berlin & Nomadic Life, Psychedelics & Expansion, Wired Different, Costume & Identity, Freedom & Reinvention, Artist's Life, Tribes
+- **Sections**: Getting Started (Featured), Community (Q&A, Show and tell, General, Polls), Book Themes (8 thematic categories)
+- All categories aligned to book content with thematic descriptions; categories live and accessible
+- Marked: T033 ✅ complete; GitHub Discussions configured and deployed (2026-10-25)
 
 - [x] T063 [WS-262] [TOA-262] Audit and complete Styling documentation (T046 sub-item)
 - Read current CONTRIBUTING.md "Styling: semantic BEM" section
