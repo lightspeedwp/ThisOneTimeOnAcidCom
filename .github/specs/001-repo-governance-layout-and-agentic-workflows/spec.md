@@ -247,13 +247,15 @@ canonical)
 - Configure discussion categories in settings
 - Document in README
 
-**R5.2** — PR Template Routing (GH-002 approved: Keep local PR templates)
+**R5.2** — PR Template Routing (GH-002 approved: Automatic canonical routing)
 
-- Retain repository-specific PR templates for workflow routing
-- Branch naming validates via `npm run validate:branch-name`
-- Inherit organisation-wide templates from `lightspeedwp/.github` when
-  appropriate
-- No duplicate templates — only override when workflow-specific needs differ
+- **Automatic routing** for all branch prefixes defined in `lightspeedwp/.github/docs/BRANCHING_STRATEGY.md` (24+ types)
+- `pr-template-routing.yml` fetches canonical routing config from `lightspeedwp/.github/.github/PULL_REQUEST_TEMPLATE/config.yml` at workflow runtime
+- Route mapping applies to: `feat/`, `fix/`, `hotfix/`, `release/`, `refactor/`, `chore/`, `task/`, `docs/`, `test/`, `perf/`, `ci/`, `build/`, `deps/`, `security/`, and all others in branching strategy
+- PR templates sourced exclusively from canonical `lightspeedwp/.github` repository; no local template duplicates
+- Workflow applies correct type label (e.g., `type:feature`, `type:bug`) based on branch prefix
+- Fallback to `pr_feature.md` (default template) for unrecognized prefixes with `type:maintenance` label
+- Branch naming validates via `npm run validate:branch-name` before PR creation
 
 **R5.3** — CODEOWNERS & Branch Protection (GH-003 approved: Enable + protection)
 
