@@ -316,7 +316,7 @@ Example:
 | **D4** | 🔄 PENDING    | N-doc approvals, G→N mapping & skills   | [Record above] — **CRITICAL**                                    |
 | **D5** | 🔄 PENDING    | Pointer strategy & archive approach     | [Record above]                                                   |
 | **D6** | 🔄 PENDING    | Backend tech stack & integration docs   | [Record above]                                                   |
-| **D7** | ✅ RESOLVED   | No                                      | Branch: `docs/spec-003-guidelines-reconcile`                     |
+| **D7** | ✅ RESOLVED   | No                                      | Branch: `docs/spec-003-phase2-implementation`                    |
 | **D8** | 🔄 PENDING    | WordPress presence & portfolio guidance | [Record above]                                                   |
 
 ---

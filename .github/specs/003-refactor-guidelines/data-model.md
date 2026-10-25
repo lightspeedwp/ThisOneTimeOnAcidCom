@@ -226,7 +226,7 @@ Expected post-refactor checksum:
 | **D4** (destinations & N-subset) | Which N-documents are created; G→new-path mapping | Blocks all G/N operations until mapping confirmed |
 | **D5** (preservation) | P-entity creation, old-path handling | Blocks pointer/redirect operations |
 | **D6** (backend) | Backend integration documentation | Blocks N-documents about signup/contact/providers |
-| **D7** (branch naming) | Specification branch validation and PR routing | ✅ RESOLVED — Canonical specification branch: `docs/spec-003-guidelines-reconcile` (active Phase 1 branch). Historical branch routing issues are documented in research.md; D7 gate validates current canonical branch and routing template mapping |
+| **D7** (branch naming) | Specification branch validation and PR routing | ✅ RESOLVED — Canonical specification branch: `docs/spec-003-phase2-implementation` (active Phase 2 branch). Historical Phase 1 branch: `docs/spec-003-guidelines-reconcile` (superseded). Historical branch routing issues are documented in research.md; D7 gate validates current canonical branch and routing template mapping |
 | **D8** (WordPress) | WordPress-related guidance scope | Blocks N-documents about WordPress migration |
 
 ---

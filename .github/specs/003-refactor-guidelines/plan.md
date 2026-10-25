@@ -1,9 +1,11 @@
 # Implementation Plan: TOA-358 Guidelines Refactor
 
 **Status:** Draft  
-**Branch:** `docs/spec-003-guidelines-reconcile`\
+**Branch:** `docs/spec-003-phase2-implementation`\
 **Spec:** [Specification 003](./spec.md)
 **Timeline:** Phased (gates → planning → implementation → verification)
+
+**Historical branch:** `docs/spec-003-guidelines-reconcile` (Phase 1 planning, superseded).
 
 ## Summary
 
@@ -99,7 +101,7 @@ D7 retains the recorded branch/reuse decision. D1–D6 and D8 remain pending.
 ├── spec.md                     # Requirements, scope, decisions
 ├── plan.md                     # Sequencing and verification (this file)
 ├── checklists/requirements.md  # Evidence and sign-off tracking
-└── tasks.md                    # Planned Phase 1 task breakdown; not yet created
+└── tasks.md                    # Task breakdown for Phase 2 implementation
 ```
 
 ### Repository paths in scope
@@ -122,7 +124,7 @@ is outside this documentation refactor.
 #### Pre-Implementation Verification
 
 - [ ] D0–D8 decision evidence and required protected-file approvals present
-- [ ] Branch `docs/spec-003-guidelines-reconcile` clean and up-to-date with `develop`
+- [ ] Branch `docs/spec-003-phase2-implementation` clean and up-to-date with `develop`
 - [ ] All 116 guidelines readable and unchanged
 - [ ] S001–S009 protected-file edits scoped
 

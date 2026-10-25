@@ -131,6 +131,7 @@ Examples:
 - [Branch Validation Skill](../branch-validation/SKILL.md)
 - `guidelines/Guidelines.md` – Build and bundler rules
 - `CONTRIBUTING.md` – Contribution guidelines
+- `.github/specs/003-refactor-guidelines/spec.md` – Guidelines Refactor specification (consolidation validation requirements)
 
 ---
 
