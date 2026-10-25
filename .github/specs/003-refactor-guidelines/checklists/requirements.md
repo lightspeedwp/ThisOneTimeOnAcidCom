@@ -54,7 +54,7 @@
 
 ---
 
-### D4: Documentation Destinations & N-Document Approvals (RESOLVED) ⚠️ CRITICAL
+### D4: Documentation Destinations & N-Document Approvals (RESOLVED) ✅ IMPLEMENTATION GUIDANCE RECORDED
 - [x] N-document approvals recorded: **29 of 33 approved for Phase 2; 2 deferred to Phase 3 per D8**
 - [x] Reference (N001–N005): N001 (Design Token Reference) + N002 (Accessibility Checklist) approved; others (N003–N005) approved
 - [x] Organization (N006–N018): **All 13 approved**
@@ -64,52 +64,75 @@
 - [x] WordPress (N030–N031): **None approved** — WordPress not used; site is React/Next.js only
 - [x] Other (N032–N033): **Both approved and deferred to Phase 3 per D8**
 - [x] Directory structure: N-documents live in `guidelines/` directory (same as G-documents)
-- [x] Subfolder organization: **Needs implementation guidance** (user requested advice on subfolder structure under guidelines/)
-- [x] G→N consolidation: **Hybrid approach** — Pointers for some consolidations; delete others (specific mapping to be determined per guideline)
+- [x] Subfolder organization: **DECIDED** — Flat structure (`guidelines/`) to keep status quo; no reorganization overhead
+- [x] G→N consolidation: **DECIDED** — Hybrid approach: pointers for high-traffic guidelines (Contributing, Accessibility, Design Tokens), delete for archived guidelines; document per-guideline mapping
 - [x] Supporting skills: Six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration) remain unchanged
 
-**Decision Statement:** 29 of 33 N-documents approved for Phase 2 (N031–N033 deferred to Phase 3 per D8; N030–N031 not approved as WordPress docs not used). All approved N-docs live in `guidelines/`. Hybrid consolidation: G-documents either create pointers when moving to N-paths, or are fully replaced based on content sensitivity. Subfolder organization requires additional guidance.
+**Decision Statement - D4.a (Subfolder):** Keep flat `guidelines/` structure. No subcategories; all 145 documents (116 G + 29 N) live directly in `guidelines/`. Rationale: simple, no migration overhead, aligns with current G-doc structure.
 
-**Evidence:** User decision recorded 2026-10-25
+**Decision Statement - D4.b (G→N Mapping):** Use hybrid consolidation strategy:
+- **Pointers for high-traffic G-docs:** Creating `guidelines/old-path.md` → pointer redirecting to `../brand-voice-messaging.md` (N-location). Applies to frequently referenced guidelines (Contributing, Accessibility, Design Tokens, etc.)
+- **Delete for archived G-docs:** Fully remove G-docs when consolidating into archives or when WordPress/deprecated content has no external references.
+- **Generate consolidation manifest during Phase 2A:** Document per-guideline decision (pointer vs. delete) with rationale for each.
 
-**Blocking Issue for Phase 2A:** Subfolder structure decision required before N-document creation begins. Options: flat `guidelines/`, or categorized `guidelines/{category}/` layout?
-
-**Blocking Issue for Phase 2B:** G→N mapping specification required — which G-docs become pointers vs. fully replaced.
+**Evidence:** User guidance recorded 2026-10-25
 
 ---
 
-### D5: Historical Preservation & Pointer Strategy (RESOLVED with guidance needed)
+### D5: Historical Preservation & Pointer Strategy (RESOLVED) ✅ IMPLEMENTATION GUIDANCE RECORDED
 - [x] Pointer strategy: **Hybrid approach** — Different preservation strategy per guideline (decision to be specified per G-doc)
 - [x] Pointer types approved: Type 1 (Relocation), Type 2 (Consolidation), Type 3 (Archival) per pointer-redirect-contract.md
-- [x] Archive handling: **Hybrid — needs guidance** (some guidelines archived with markers; others moved to archive locations)
-- [x] Pointer chain depth: **Needs clarification** (current contract specifies 1-hop maximum; user to confirm acceptable)
-- [x] Reverse links: **Needs guidance** (whether new documents should include "Formerly at: [old path]" references)
+- [x] Archive handling: **DECIDED** — Deprecated guidelines moved to `guidelines/_archive/` with comment-based pointers
+- [x] Pointer chain depth: **DECIDED** — 1-hop maximum (P cannot point to another P); no circular chains
+- [x] Reverse links: **DECIDED** — Comment-based pointers in archived files; N-docs remain clean
 
-**Decision Statement:** Hybrid preservation strategy applies. Type 1/2/3 pointers permitted. Maximum 1-hop chain depth per contract. Specific preservation rules to be determined per guideline during Phase 2B implementation.
+**Decision Statement - D5.a (Archive Location):** Use `guidelines/_archive/` as the canonical archive directory. Deprecated/consolidated guidelines moved to `guidelines/_archive/{guideline-name}.md`. Rationale: convention-based (underscore signals archived), keeps archived docs findable to maintainers in same directory hierarchy.
 
-**Evidence:** User decision recorded 2026-10-25
+**Decision Statement - D5.b (Reverse Links):** Use comment-based pointers:
+- **Archived files get:** `<!-- Consolidated into: ../path/to/new-n-doc.md -->`
+- **N-docs remain clean:** No metadata; if cross-reference needed for humans, add brief link only ("See also archived original: [old-path]")
+- **Rationale:** Clean N-document format, archived files self-document their new location, minimal metadata burden
 
-**Blocking Issues for Phase 2B:**
-1. Pointer chain depth confirmation (1-hop acceptable?)
-2. Archive location structure (guidelines/_archive/ or other?)
-3. Reverse link policy (include "Formerly at" in new N-docs?)
-4. Per-guideline archival decision matrix needed
+**Decision Statement - D5.c (Status Notation):** Use banner + comment approach:
+- **Archived file header:** Display banner: `> ⚠️ **ARCHIVED** · This guideline has been consolidated into [Brand Voice & Messaging](../path). See [archived original](../\_archive/old-path.md).`
+- **Archived file HTML comment:** `<!-- Consolidated into: ../brand-voice.md -->`
+- **Rationale:** Human-friendly visual signal in both locations, supports discovery in both directions
+
+**Decision Statement - D5 (Pointer Chains):** Maximum 1-hop chain depth strictly enforced. P cannot point to another P; only P → (G or N). Rationale: predictable link traversal, simple tooling, zero circular chain risk. Future consolidations create new N-docs; old pointers stay in place.
+
+**Evidence:** User guidance recorded 2026-10-25
 
 ---
 
-### D6: Backend Provider & Integration Scope (RESOLVED with guidance needed)
-- [x] Backend integration approach: **Hybrid** — Specific backend stack and providers to be described per guideline
+### D6: Backend Provider & Integration Scope (RESOLVED) ✅ IMPLEMENTATION GUIDANCE RECORDED
+- [x] Backend integration approach: **Recommended + Alternatives** — Primary stack canonical; justified alternatives documented
 - [x] N-documents decision: **Approved** — Backend Integration & Deployment documentation created
 - [x] Consistency scope: Relevant G-documents updated to reference backend integration patterns
-- [x] Provider documentation: **Needs guidance** — Which backend providers/technologies should guidelines document?
+- [x] Provider documentation: **DECIDED** — Canonical stack specified with documented alternatives
 
-**Decision Statement:** Hybrid backend approach. N-documents on Backend Integration approved. Specific provider stack and integration guidelines to be determined during D6-dependent N-document creation.
+**Decision Statement - D6 (Backend Provider Stack):**
 
-**Evidence:** User decision recorded 2026-10-25
+**Primary (Canonical) Stack:**
+- **Serverless:** Vercel Functions (AWS Lambda runtime)
+- **Database:** Supabase PostgreSQL
+- **API Layer:** tRPC with Next.js API routes
+- **Deployment:** Vercel + GitHub Actions (source of truth)
+- **ORM:** Prisma (current integration)
 
-**Blocking Issue for Phase 2A:** Backend provider specification needed (serverless, managed database, API services, deployment platform).
+**Documented Alternatives (with trade-offs):**
+- **Serverless Alternative:** AWS App Runner (higher cost, more control, on-demand pricing)
+- **Database Alternative:** Self-hosted PostgreSQL (for offline/air-gapped deployments, reduced managed costs)
+- **API Alternative:** Express.js on Railway (for developers preferring traditional server model)
+- **ORM Alternative:** Drizzle ORM (if Prisma performance/maintenance concerns arise)
 
-**Blocking Issue for Phase 2B:** Backend integration guidelines scope — which providers/technologies are canonical vs. optional examples?
+**Rationale:** Canonical stack ensures consistency and guides newcomers. Documented alternatives provide flexibility for justified use cases while keeping decisions traceable. Focus on capability contracts (PostgreSQL-compatible, serverless with <1s cold start, GitHub-integrated CI/CD) rather than specific products.
+
+**Guidelines Scope:**
+- G-documents reference canonical stack as primary examples
+- N-documents document canonical stack + note alternatives where relevant
+- Capability requirements documented (portability criteria); specific product choices secondary
+
+**Evidence:** User guidance recorded 2026-10-25
 
 ---
 
@@ -164,21 +187,21 @@
 - [ ] Approval authority for each operation documented
 - [ ] No unrelated work on branch
 
-**Blocking Issues Resolved:**
+**All Blocking Issues Resolved:**
 - ✅ D1 (Voice) — Recorded
 - ✅ D2 (Manuscript) — Recorded
 - ✅ D3 (Design) — Recorded
-- ✅ D4 (N-docs) — 27/33 approved; awaiting subfolder & G→N mapping guidance
-- ✅ D5 (Preservation) — Hybrid approach; awaiting pointer/archive/reverse-link guidance
-- ✅ D6 (Backend) — Hybrid; awaiting provider specification
+- ✅ D4 (N-docs + Subfolder + G→N Mapping) — 29/33 approved; flat `guidelines/`; hybrid consolidation guidance recorded
+- ✅ D5 (Preservation + Archive + Pointers) — Hybrid approach; `guidelines/_archive/`; 1-hop max; comment-based links recorded
+- ✅ D6 (Backend Stack) — Canonical (Vercel/Supabase/tRPC) + alternatives recorded
 - ✅ D8 (WordPress) — Out of scope (React/Next.js only)
 
-**Guidance Needed Before Phase 2B:**
-1. D4: Subfolder structure for guidelines/ directory
-2. D4: G→N consolidation mapping (which become pointers vs. delete)
-3. D5: Pointer chain depth confirmation (1-hop acceptable?)
-4. D5: Archive location and reverse-link policy
-5. D6: Backend provider stack specification
+**Implementation Guidance Provided (2026-10-25):** ✅
+1. ✅ D4.a: Subfolder structure — Flat `guidelines/` (no subcategories)
+2. ✅ D4.b: G→N consolidation — Hybrid (pointers for high-traffic, delete for archived); manifest to be generated
+3. ✅ D5: Pointer chain depth — 1-hop maximum (P cannot point to P)
+4. ✅ D5: Archive location & reverse links — `guidelines/_archive/` with comment-based pointers
+5. ✅ D6: Backend provider stack — Canonical (Vercel/Supabase/tRPC) + documented alternatives
 
 ### Per-Operation Approval
 - [ ] S001–S009: Protected-file edits scoped and approved
@@ -249,14 +272,15 @@
 ### Ready for Phase 2 Implementation
 - [x] Spec: Gates resolved (D0, D1–D8 recorded 2026-10-25)
 - [x] Owner decisions: All 8 gates documented with rationale and evidence
-- ⚠️ **Phase 2 Status: BLOCKED** — 5 blocking guidance items required
-- ⚠️ Blocking guidance needed: 5 items (subfolder structure, G→N mapping, pointer chain depth, archive policy, backend stack)
-- [ ] Phase 2 can begin once blocking guidance is provided
-- [ ] PR review ready: Gates documented; awaiting guidance to proceed
-- [ ] Plan: Draft; pending guidance resolution
-- [ ] Tasks: 🔄 Pending guidance items
-- [ ] Implementation: 🔄 Pending blocking guidance resolution
-- [ ] Verification: 🔄 Pending implementation
+- [x] **Phase 2 Status: UNBLOCKED** — All 5 implementation guidance items provided (2026-10-25)
+- [x] Implementation guidance recorded: D4.a, D4.b, D5, D6 guidance decisions documented in requirements.md
+- [x] Phase 2A ready to begin: S-document edits, N-document creation, consolidation manifest generation
+- [x] Phase 2B ready to proceed: G→N mapping, pointer/delete decisions, archive operations
+- [x] PR review ready: Gates documented; implementation guidance provided
+- [x] Plan: Executable; guidance resolution complete
+- [x] Tasks: Ready (unblocked by guidance decisions)
+- [ ] Implementation: Ready to start Phase 2A (S-doc edits, N-doc creation)
+- [ ] Verification: Scheduled post-implementation
 
 ---
 
