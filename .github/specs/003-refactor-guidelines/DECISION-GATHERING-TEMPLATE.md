@@ -16,7 +16,7 @@
 - Should N-documents on "Brand Voice & Messaging" be created, and if so, what identity should they reinforce?
 
 **Decision Statement:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example: "Site adopts conversational but authoritative voice; guidelines on 
@@ -25,12 +25,12 @@ brand voice should emphasize accessibility and inclusivity; N-document
 ```
 
 **Rationale:**
-```
+```text
 [OWNER RECORDS HERE - explain why this approach aligns with site goals]
 ```
 
 **Evidence / Source:**
-```
+```text
 [OWNER RECORDS HERE - link to brand guidelines, design docs, past decisions, etc.]
 
 Example: 
@@ -54,7 +54,7 @@ Example:
 - Should N-documents on "Publication & Access" be created?
 
 **Decision Statement:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example: "Site and manuscript are separate; guidelines must NOT reference 
@@ -63,12 +63,12 @@ for author reference only (not published)."
 ```
 
 **Rationale:**
-```
+```text
 [OWNER RECORDS HERE]
 ```
 
 **Evidence / Source:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example:
@@ -91,7 +91,7 @@ Example:
 - Should N-documents on "Design System & Accessibility" be created, and should they reference the authority?
 
 **Decision Statement:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example: "Design system approved by [Designer Name/Role]; accessibility 
@@ -101,12 +101,12 @@ target is WCAG 2.2 AA; color palette v2.1 is canonical; N-document
 ```
 
 **Rationale:**
-```
+```text
 [OWNER RECORDS HERE]
 ```
 
 **Evidence / Source:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example:
@@ -130,7 +130,7 @@ Example:
 - Which G-documents remain standalone (no consolidation)?
 
 **Decision Statement:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example: "Approved N-documents:
@@ -148,12 +148,12 @@ Approved with pointer-only (no new document):
 ```
 
 **Rationale:**
-```
+```text
 [OWNER RECORDS HERE - explain prioritization and consolidation strategy]
 ```
 
 **Evidence / Source:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example:
@@ -178,7 +178,7 @@ Example:
 - Should reverse links be added to new documents (e.g., "Formerly: [old path]")?
 
 **Decision Statement:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example: "Use Type 1 (relocation) and Type 2 (consolidation) pointers per 
@@ -188,12 +188,12 @@ recommended but not required."
 ```
 
 **Rationale:**
-```
+```text
 [OWNER RECORDS HERE]
 ```
 
 **Evidence / Source:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example:
@@ -216,7 +216,7 @@ Example:
 - Which guidelines reference backend concerns and need updates?
 
 **Decision Statement:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example: "Backend uses Vercel Functions (serverless) + Supabase (postgres); 
@@ -225,12 +225,12 @@ routing and environment variables updated per D1 voice."
 ```
 
 **Rationale:**
-```
+```text
 [OWNER RECORDS HERE]
 ```
 
 **Evidence / Source:**
-```
+```text
 [OWNER RECORDS HERE]
 
 Example:
