@@ -153,7 +153,7 @@
 **Blockers Identified:**
 - [ ] Validation remains pending: all CHK items above are unchecked; Phase 2 readiness has not been established.
 - [ ] Unresolved protected-path scope conflict: `.github/PROTECTED_FILES.txt` and the local approval checker include all of `.github/`, while the workflow contract lists narrower paths and omits `.github/specs/`. The feature approval contract also treats S002–S009 as protected, beyond the canonical list's explicit S-path coverage. Reconcile these scopes with the owner before claiming consistency or an exemption; retain existing approval requirements. See [research § 2](../research.md#2-protected-files-governance).
-- [ ] Owner decisions D1–D6 and D8 remain pending and block Phase 2.
+- [ ] Source validation and readiness remain pending; complete the outstanding provenance, checkout, and per-operation checks before proceeding.
 
 **Recommended Improvements:** (List items for future enhancement; do not block Phase 2)
 - [ ] None recorded

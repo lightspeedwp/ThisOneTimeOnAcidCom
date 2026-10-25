@@ -135,7 +135,7 @@ All gates D0–D8 are resolved. Decision evidence and implementation guidance re
 
 ## Phase 2 Implementation Steps
 
-**Phase 2A: Protected-File Edits** (Tasks T005–T017)
+**Phase 2A: Protected-File Edits** (Tasks T005–T018)
 1. Review `locked-files-guard` approval process
 2. Edit 9 supporting documents (.claude/skills, AGENTS.md, CONTRIBUTING.md) with approval
 3. Complete protected-file edits per approval gate T017

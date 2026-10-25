@@ -101,7 +101,7 @@ D7 retains the recorded branch/reuse decision. D1–D6 and D8 remain pending.
 ├── spec.md                     # Requirements, scope, decisions
 ├── plan.md                     # Sequencing and verification (this file)
 ├── checklists/requirements.md  # Evidence and sign-off tracking
-└── tasks.md                    # Planned Phase 1 task breakdown; not yet created
+└── tasks.md                    # Task breakdown for Phase 2 implementation
 ```
 
 ### Repository paths in scope
