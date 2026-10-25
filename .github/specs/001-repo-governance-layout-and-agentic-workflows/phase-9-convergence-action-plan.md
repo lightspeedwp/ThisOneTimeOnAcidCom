@@ -45,7 +45,7 @@ Phase 9 Convergence requires completion of 6 final tasks (T060–T065) to close 
    - ✓ Require pull request reviews before merging (min 1 approval)
    - ✓ Require review from code owners
    - ✓ Require status checks to pass before merging
-     - Select required checks: **build**, **lint**, **jest/tests**, **specification-validation**
+     - Select required checks: **Jest (head)**, **Jest (base)**, **No new test failures**, **Specification Validation**, **Lint GitHub Actions Workflows**
    - ✓ Require branches to be up to date before merging
    - Save rule and verify all checks are selected
 
@@ -55,7 +55,7 @@ Phase 9 Convergence requires completion of 6 final tasks (T060–T065) to close 
    - ✓ Require pull request reviews before merging (min 2 approvals)
    - ✓ Require review from code owners
    - ✓ Require status checks to pass before merging
-     - Select required checks: **build**, **lint**, **jest/tests**, **specification-validation**, **check-protected-files**
+     - Select required checks: **Jest (head)**, **Jest (base)**, **No new test failures**, **Specification Validation**, **Lint GitHub Actions Workflows**, **Check Protected Files**
    - ✓ Restrict who can push to matching branches (maintainers only)
    - Save rule and verify all checks are selected
 
