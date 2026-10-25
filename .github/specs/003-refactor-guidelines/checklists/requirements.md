@@ -3,7 +3,7 @@
 **Feature**: [Specification 003](../spec.md) · [Implementation plan](../plan.md)
 
 **Owner Sign-Off Required:** Before implementation begins  
-**Updated:** 2026-10-24
+**Updated:** 2026-10-25
 
 ---
 
@@ -55,20 +55,20 @@
 ---
 
 ### D4: Documentation Destinations & N-Document Approvals (RESOLVED) ⚠️ CRITICAL
-- [x] N-document approvals recorded: **27 of 33 approved**
+- [x] N-document approvals recorded: **29 of 33 approved for Phase 2; 2 deferred to Phase 3 per D8**
 - [x] Reference (N001–N005): N001 (Design Token Reference) + N002 (Accessibility Checklist) approved; others (N003–N005) approved
 - [x] Organization (N006–N018): **All 13 approved**
 - [x] Patterns (N019–N022): **All 4 approved**
 - [x] Pages (N023–N025): **All 3 approved**
 - [x] Reports (N026–N029): **All 4 approved**
 - [x] WordPress (N030–N031): **None approved** — WordPress not used; site is React/Next.js only
-- [x] Other (N032–N033): **Both approved**
+- [x] Other (N032–N033): **Both approved and deferred to Phase 3 per D8**
 - [x] Directory structure: N-documents live in `guidelines/` directory (same as G-documents)
 - [x] Subfolder organization: **Needs implementation guidance** (user requested advice on subfolder structure under guidelines/)
 - [x] G→N consolidation: **Hybrid approach** — Pointers for some consolidations; delete others (specific mapping to be determined per guideline)
 - [x] Supporting skills: Six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration) remain unchanged
 
-**Decision Statement:** 27 of 33 N-documents approved (WordPress docs deferred; 2 organization docs not listed). All approved N-docs live in `guidelines/`. Hybrid consolidation: G-documents either create pointers when moving to N-paths, or are fully replaced based on content sensitivity. Subfolder organization requires additional guidance.
+**Decision Statement:** 29 of 33 N-documents approved for Phase 2 (N031–N033 deferred to Phase 3 per D8; N030–N031 not approved as WordPress docs not used). All approved N-docs live in `guidelines/`. Hybrid consolidation: G-documents either create pointers when moving to N-paths, or are fully replaced based on content sensitivity. Subfolder organization requires additional guidance.
 
 **Evidence:** User decision recorded 2026-10-25
 
@@ -249,12 +249,13 @@
 ### Ready for Phase 2 Implementation
 - [x] Spec: Gates resolved (D0, D1–D8 recorded 2026-10-25)
 - [x] Owner decisions: All 8 gates documented with rationale and evidence
+- ⚠️ **Phase 2 Status: BLOCKED** — 5 blocking guidance items required
 - ⚠️ Blocking guidance needed: 5 items (subfolder structure, G→N mapping, pointer chain depth, archive policy, backend stack)
 - [ ] Phase 2 can begin once blocking guidance is provided
 - [ ] PR review ready: Gates documented; awaiting guidance to proceed
-- [ ] Plan: Draft; pending Phase 1 completion
-- [ ] Tasks: 🔄 Pending Phase 1 completion
-- [ ] Implementation: 🔄 Pending all gate resolutions
+- [ ] Plan: Draft; pending guidance resolution
+- [ ] Tasks: 🔄 Pending guidance items
+- [ ] Implementation: 🔄 Pending blocking guidance resolution
 - [ ] Verification: 🔄 Pending implementation
 
 ---
@@ -270,4 +271,4 @@
 
 ---
 
-*Updated 2026-10-24 | Branch: docs/spec-003-guidelines-reconcile*
+*Updated 2026-10-25 | Branch: docs/spec-003-guidelines-reconcile*

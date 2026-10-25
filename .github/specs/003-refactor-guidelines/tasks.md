@@ -41,7 +41,10 @@ created: "2026-10-25"
 
 ## Phase 2: Implementation 🔄 BLOCKED
 
-**Blocking Condition**: Owner decisions on D1–D6, D8 must be recorded in `checklists/requirements.md` under their respective gate headings (### D1: through ### D8:) before Phase 2 starts. Use `grep "^### D[1-8]:" checklists/requirements.md` to verify all gates have RESOLVED status.
+**Blocking Condition**: Owner decisions on D1–D6, D8 must be recorded in `checklists/requirements.md` under their respective gate headings (### D1: through ### D8:) before Phase 2 starts. Verify ALL of the following:
+1. All gates D0–D8 have gate headings with RESOLVED status: `grep "^### D[0-8]:" checklists/requirements.md`
+2. All blocking guidance items for D4, D5, D6 have recorded answers (see "Blocking Issues" and "Blocking Guidance" sections in each gate)
+3. Phase 2 readiness status explicitly shows BLOCKED or READY based on whether all guidance is resolved
 
 **Pre-Implementation Verification** (Complete before any tasks):
 

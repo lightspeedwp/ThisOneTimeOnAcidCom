@@ -213,7 +213,7 @@ grep "\[.*#" spec.md plan.md research.md data-model.md | \
 
 ```bash
 # 1. Read constitution principles
-grep -A 5 "^### [IVI]\." ../../../../.specify/memory/constitution.md | head -50
+grep -A 5 "^### [IVI]\." ../../../.specify/memory/constitution.md | head -50
 
 # 2. For each principle, verify research.md documents alignment
 grep -E "Principle (I|II|III|IV|V|VI|VII)" research.md
