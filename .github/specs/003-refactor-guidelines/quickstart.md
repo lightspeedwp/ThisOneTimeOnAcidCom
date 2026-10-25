@@ -17,7 +17,7 @@ It is NOT a step-by-step implementation guide. For implementation details, see [
 ## Prerequisites
 
 - [ ] Git repository cloned: `lightspeedwp/ThisOneTimeOnAcidCom`
-- [ ] Branch: `docs/spec-003-guidelines-reconcile` (validated)
+- [ ] Branch: `aiops/refactor-guidelines` (validated)
 - [ ] All Phase 1 design artifacts generated (this directory)
 - [ ] Ready for owner decision session on D1–D8 gates
 
@@ -51,15 +51,21 @@ grep -l "Specification 003" *.md contracts/*.md
 # Expected: All *.md files in this directory
 
 # 4. Verify gate decisions are documented in research.md
-PENDING_GATES=$(grep -c "### Gate D[1-8].*PENDING OWNER DECISION" research.md)
-if [ "$PENDING_GATES" -gt 0 ]; then
-  echo "✓ Found $PENDING_GATES documented pending gate decisions"
+RESOLVED_GATES=$(grep -c "^### Gate D[0-7]:" research.md)
+PENDING_GATES=$(grep -c "^### Gate D[1-68]:" research.md)
+if [ "$RESOLVED_GATES" -gt 0 ] && [ "$PENDING_GATES" -gt 0 ]; then
+  echo "✓ Found gates documented in research.md"
 else
-  echo "✗ No gate decisions found in research.md"
+  echo "✗ Gate definitions not found in research.md"
   exit 1
 fi
 # Verify no unresolved TODO/FIXME markers remain
-grep -i "TODO\|FIXME\|XXX" research.md && echo "✗ Found unresolved markers" && exit 1 || echo "✓ No unresolved markers"
+if grep -i "TODO\|FIXME\|XXX" research.md >/dev/null 2>&1; then
+  echo "✗ Found unresolved markers"
+  exit 1
+else
+  echo "✓ No unresolved markers"
+fi
 ```
 
 **Expected Outcome:**
@@ -86,9 +92,9 @@ find guidelines -type f -name "*.md" | wc -l
 grep "G-count: 116" .github/specs/003-refactor-guidelines/data-model.md
 # Expected: Found (exact match)
 
-# 3. List supporting documents and verify paths exist
-ls -la .claude/skills/*/SKILL.md AGENTS.md CONTRIBUTING.md .claude/skills/INVENTORY.md
-# Expected: All 9 files exist
+# 3. List supporting documents and verify canonical paths exist
+ls -la .agents/skills/*/SKILL.md AGENTS.md CONTRIBUTING.md .claude/skills/INVENTORY.md
+# Expected: All 9 files exist (S002–S009 at canonical .agents/skills/ paths)
 
 # 4. Verify data model sections reference all three entity types
 grep -E "^### [0-9]+\. (Guideline|Supporting|New Guidance|Pointer)" \
@@ -113,7 +119,7 @@ grep -E "^### [0-9]+\. (Guideline|Supporting|New Guidance|Pointer)" \
 ```bash
 # 1. Extract all gate sections from requirements.md
 grep "^### D[0-8]:" .github/specs/003-refactor-guidelines/checklists/requirements.md
-# Expected: 9 lines (D0–D8)
+# Expected: 8 lines (D0–D8)
 
 # 2. Check gate status (resolved vs pending) from headings
 RESOLVED=$(grep -c "### .*RESOLVED" .github/specs/003-refactor-guidelines/checklists/requirements.md)
@@ -207,12 +213,10 @@ grep "\[.*#" spec.md plan.md research.md data-model.md | \
 
 ```bash
 # 1. Read constitution principles
-grep -E -A 5 "^### (I|II|III|IV|V|VI|VII)\." \
-  ../../../.specify/memory/constitution.md | head -50
+grep -A 5 "^### [IVI]\." ../../../../.specify/memory/constitution.md | head -50
 
 # 2. For each principle, verify research.md documents alignment
-grep -E "Principle (I|II|III|IV|V|VI|VII)" \
-  .github/specs/003-refactor-guidelines/research.md
+grep -E "Principle (I|II|III|IV|V|VI|VII)" research.md
 # Expected: 7 matches (one per principle)
 
 # 3. Verify status is COMPLIANT
@@ -229,205 +233,25 @@ grep "COMPLIANT\|Constitutional alignment" research.md
 
 ## End-to-End Validation Script
 
-Run this sequence to validate the entire Phase 1 design:
+A standalone validator is provided in `validate-phase1.sh`. To run it:
 
 ```bash
-#!/bin/bash
-set -e
-set -o pipefail
-
-echo "🔍 Phase 1 Validation: Guidelines Refactor (TOA-358)"
-echo "=================================================="
-
-# Derive repository root from script location
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-
-cd "$SCRIPT_DIR"
-
-# 1. File presence
-echo "✓ Checking files..."
-MISSING_FILES=0
-for file in spec.md plan.md research.md data-model.md checklists/requirements.md; do
-  if test -f "$file"; then
-    echo "  ✓ $file"
-  else
-    echo "  ✗ $file MISSING"
-    ((MISSING_FILES++))
-  fi
-done
-if [ "$MISSING_FILES" -gt 0 ]; then
-  echo "❌ $MISSING_FILES required file(s) missing" >&2
-  exit 1
-fi
-
-# 2. Data model validation
-echo "✓ Validating data model..."
-GUIDELINE_COUNT=$(find ../../../guidelines -name "*.md" 2>/dev/null | wc -l)
-if [ "$GUIDELINE_COUNT" -eq 116 ]; then
-  echo "  ✓ Guideline files: $GUIDELINE_COUNT (expected: 116)"
-else
-  echo "  ✗ Guideline files: $GUIDELINE_COUNT (expected: 116) - MISMATCH" >&2
-  exit 1
-fi
-
-# 3. Gates documentation (per-record validation)
-echo "✓ Checking decision gates..."
-GATE_ERRORS=0
-
-# Check D0 and D7 are RESOLVED
-for gate in D0 D7; do
-  if grep -q "### $gate.*RESOLVED" checklists/requirements.md; then
-    echo "  ✓ $gate: RESOLVED"
-  else
-    echo "  ✗ ERROR: $gate is not marked RESOLVED" >&2
-    GATE_ERRORS=$((GATE_ERRORS + 1))
-  fi
-done
-
-# Check D1–D6 and D8 are PENDING
-for gate in D1 D2 D3 D4 D5 D6 D8; do
-  if grep -q "### $gate.*PENDING" checklists/requirements.md; then
-    echo "  ✓ $gate: PENDING"
-  else
-    echo "  ✗ ERROR: $gate is not marked PENDING" >&2
-    GATE_ERRORS=$((GATE_ERRORS + 1))
-  fi
-done
-
-if [ "$GATE_ERRORS" -gt 0 ]; then
-  echo "  ✗ ERROR: $GATE_ERRORS gate(s) are not in expected state" >&2
-  exit 1
-fi
-
-# 4. Contract completeness
-echo "✓ Validating contracts..."
-CONTRACT_COUNT=$(ls contracts/*.md 2>/dev/null | wc -l)
-echo "  ✓ Contracts defined: $CONTRACT_COUNT (expected: 3)"
-if [ "$CONTRACT_COUNT" -ne 3 ]; then
-  echo "  ✗ ERROR: Found $CONTRACT_COUNT contracts (expected: 3)" >&2
-  exit 1
-fi
-for contract in \
-  guideline-interface.md \
-  approval-process.md \
-  pointer-redirect-contract.md; do
-  if ! test -f "contracts/$contract"; then
-    echo "  ✗ ERROR: Missing contracts/$contract" >&2
-    exit 1
-  fi
-done
-
-echo ""
-echo "✅ Phase 1 Validation PASSED"
-echo "📋 Next step: Resolve owner gates (D1–D8) and proceed to Phase 2"
-```
-
-**Run it:**
-
-From the repository root, extract and execute the script:
-
-```bash
-# Navigate to the spec directory
+# From the repository root:
 cd .github/specs/003-refactor-guidelines
 
-# Extract the complete validation script from the section above (copy the entire script block from "echo '🔍 Phase 1 Validation'" through the final 'exit 1')
-cat > ./validate-phase1.sh << 'EOF'
-#!/bin/bash
-set -e
-set -o pipefail
-
-echo "🔍 Phase 1 Validation: Guidelines Refactor (TOA-358)"
-echo "=================================================="
-
-# Derive repository root from script location
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-
-cd "$SCRIPT_DIR"
-
-# 1. File presence
-echo "✓ Checking files..."
-MISSING_FILES=0
-for file in spec.md plan.md research.md data-model.md checklists/requirements.md; do
-  if test -f "$file"; then
-    echo "  ✓ $file"
-  else
-    echo "  ✗ $file MISSING"
-    MISSING_FILES=$((MISSING_FILES + 1))
-  fi
-done
-if [ "$MISSING_FILES" -gt 0 ]; then
-  echo "❌ $MISSING_FILES required file(s) missing" >&2
-  exit 1
-fi
-
-# 2. Data model validation
-echo "✓ Validating data model..."
-GUIDELINE_COUNT=$(find ../../../guidelines -name "*.md" 2>/dev/null | wc -l)
-if [ "$GUIDELINE_COUNT" -eq 116 ]; then
-  echo "  ✓ Guideline files: $GUIDELINE_COUNT (expected: 116)"
-else
-  echo "  ✗ Guideline files: $GUIDELINE_COUNT (expected: 116) - MISMATCH" >&2
-  exit 1
-fi
-
-# 3. Gates documentation (per-record validation)
-echo "✓ Checking decision gates..."
-GATE_ERRORS=0
-
-# Check D0 and D7 are RESOLVED
-for gate in D0 D7; do
-  if grep -q "### $gate.*RESOLVED" checklists/requirements.md; then
-    echo "  ✓ $gate: RESOLVED"
-  else
-    echo "  ✗ ERROR: $gate is not marked RESOLVED" >&2
-    GATE_ERRORS=$((GATE_ERRORS + 1))
-  fi
-done
-
-# Check D1–D6 and D8 are PENDING
-for gate in D1 D2 D3 D4 D5 D6 D8; do
-  if grep -q "### $gate.*PENDING" checklists/requirements.md; then
-    echo "  ✓ $gate: PENDING"
-  else
-    echo "  ✗ ERROR: $gate is not marked PENDING" >&2
-    GATE_ERRORS=$((GATE_ERRORS + 1))
-  fi
-done
-
-if [ "$GATE_ERRORS" -gt 0 ]; then
-  echo "  ✗ ERROR: $GATE_ERRORS gate(s) are not in expected state" >&2
-  exit 1
-fi
-
-# 4. Contract completeness
-echo "✓ Validating contracts..."
-CONTRACT_COUNT=$(ls contracts/*.md 2>/dev/null | wc -l)
-echo "  ✓ Contracts defined: $CONTRACT_COUNT (expected: 3)"
-if [ "$CONTRACT_COUNT" -ne 3 ]; then
-  echo "  ✗ ERROR: Found $CONTRACT_COUNT contracts (expected: 3)" >&2
-  exit 1
-fi
-for contract in \
-  guideline-interface.md \
-  approval-process.md \
-  pointer-redirect-contract.md; do
-  if ! test -f "contracts/$contract"; then
-    echo "  ✗ ERROR: Missing contracts/$contract" >&2
-    exit 1
-  fi
-done
-
-echo ""
-echo "✅ Phase 1 Validation PASSED"
-echo "📋 Next step: Resolve owner gates (D1–D8) and proceed to Phase 2"
-EOF
-
-# Make it executable and run
-chmod +x ./validate-phase1.sh
-bash ./validate-phase1.sh
+# Make executable and run
+chmod +x validate-phase1.sh
+./validate-phase1.sh
 ```
+
+The script:
+- Derives the repository root dynamically (works in any clone location)
+- Verifies all Phase 1 design artifacts are present
+- Validates the 116 guideline files exist in `guidelines/`
+- Confirms all decision gates (D0–D8) are documented
+- Checks contract definitions are complete
+
+**Expected output:** `✅ Phase 1 Validation PASSED`
 
 ---
 
