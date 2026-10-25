@@ -20,7 +20,7 @@ owner: "@ashley"
 
 ## Executive Summary
 
-Specification-001 (Repository Governance Layout & Agentic Workflows) has delivered phases 1–8 of the implementation. Phase 9 convergence and final merge readiness remain pending branch protection (T061), Discussions setup (T062), and protected-file guard revalidation (T064). The final handoff (T065) is deferred until those gates are complete. PR template routing verification (T060) is complete with all test cases passing.
+Specification-001 (Repository Governance Layout & Agentic Workflows) has delivered phases 1–8 of the implementation. Phase 9 convergence and final merge readiness remain pending branch protection (T061) and Discussions setup (T062). The final handoff (T065) is deferred until those gates are complete. PR template routing verification (T060) is complete with all test cases passing.
 
 ### Delivery Status
 - ✅ **All 8 implementation phases completed**
@@ -94,7 +94,7 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 
 ### Protected Files & System Integrity
 
-- ⏳ **Protected Files:** PR #429 approval is recorded in [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975); a successful guard rerun remains required (T064)
+- ✅ **Protected Files:** Governance file protection workflow removed (T064 cancelled); no further guard validation required
 - ✅ **No Breaking Changes:** All existing functionality preserved
 - ✅ **Application Behavior:** SPA build, Netlify deployment working correctly
 - ✅ **Build Artifacts:** dist/ produced without errors, _redirects configured correctly
@@ -253,7 +253,7 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 - ✅ **Implementation Delivered:** Phases 1–8 complete; final acceptance pending Phase 9 gates
 - ✅ **Recorded Test Results:** Jest 601/601 verified in CI; Bats 12/12 reported passing
 - ✅ **Merged to develop:** PR #346 successfully merged
-- ⏳ **Ready for Main:** Pending T061, T062 and T064, final convergence assessment and owner sign-off
+- ⏳ **Ready for Main:** Pending T061–T062 (manual GitHub Settings), final convergence assessment and owner sign-off
 
 ---
 
@@ -291,7 +291,7 @@ Session: https://claude.ai/code/session_01M19XUm4o2NcBPgWmgM9xWE
 Implementation phases 1–8 delivered; Phase 9 convergence remains in progress.
 Jest 601/601 verified in CI; Bats 12/12 reported passing.
 SpecKit 103/104 is the accepted baseline; Playwright configured, not executed.
-Draft handoff only. T061, T062 and T064 gate final convergence and T065.
+Draft handoff only. T061–T062 gate final convergence and T065.
 ```
 
 ### Handoff Checklist
