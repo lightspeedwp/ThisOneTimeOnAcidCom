@@ -28,6 +28,17 @@ This skill consolidates guidance from:
 
 ---
 
+## Backend Stack Reference (D6 Decision)
+
+**Canonical Stack (D6, 2026-10-25):** Deployment workflows reference this stack:
+- **Serverless:** Vercel Functions (AWS Lambda runtime)
+- **Database:** Supabase PostgreSQL
+- **API Layer:** tRPC with Next.js API routes
+- **Deployment:** Vercel + GitHub Actions (source of truth)
+- **ORM:** Prisma
+
+See [Backend Integration & Deployment](../guidelines/backend-integration-deployment.md) for canonical stack + documented alternatives per D6 decision.
+
 ## When to Use
 
 Use this skill when:
@@ -36,6 +47,7 @@ Use this skill when:
 - ✅ Creating a task list from audit results
 - ✅ Archiving completed work
 - ✅ Running multi-step orchestrator audits
+- ✅ Documenting deployment workflows (reference canonical stack per D6)
 
 ## Workflow Decision Tree
 

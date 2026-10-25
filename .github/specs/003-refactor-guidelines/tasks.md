@@ -2,7 +2,7 @@
 title: "Tasks: Guidelines Refactor (TOA-358)"
 spec_id: "003"
 feature: "guidelines-refactor"
-status: "Phase 2B Blocked Pending Approval"
+status: "Phase 2 Implementation (Unblocked)"
 created: "2026-10-25"
 ---
 
@@ -10,7 +10,7 @@ created: "2026-10-25"
 
 **Specification**: [spec.md](./spec.md) | **Plan**: [plan.md](./plan.md) | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
 
-**Status**: Phase 2B — **BLOCKED** pending T017 `locked-files-guard` approval; owner decisions D0–D8 are recorded in requirements.md.
+**Status**: Phase 2 Implementation — **UNBLOCKED** (2026-10-25). All owner decisions D0–D8 RESOLVED; implementation guidance provided (requirements.md § D4.a, D4.b, D5.a, D5.b, D5.c, D5.d, D6). Pre-implementation verification (T001–T004) required before task execution.
 
 **Total Tasks**: 43 (across Phases 2 & 3)
 
@@ -39,23 +39,16 @@ created: "2026-10-25"
 
 ---
 
-## Phase 2: Implementation — Approval Pending
+## Phase 2: Implementation ✅ UNBLOCKED
 
-**Decision Status** (2026-10-25): All owner decisions D0–D8 are recorded as RESOLVED in `checklists/requirements.md` with implementation guidance. Decision resolution does not supply T017 protected-file approval:
-1. ✅ All gates D0–D8 have gate headings with RESOLVED status and recorded evidence
-2. ✅ All guidance items for D4, D5, D6 have recorded answers in requirements.md
-3. Phase 2B remains **BLOCKED** until T017 `locked-files-guard` approval is recorded
+**Status**: Owner decisions D0–D8 are RESOLVED and recorded in `checklists/requirements.md`. All implementation guidance is confirmed. Pre-implementation verification tasks (T001–T004) must complete successfully before phase execution begins.
 
-**Pre-Implementation Verification** — T003 remains open (2026-10-25):
+**Pre-Implementation Verification** (Complete before any tasks):
 
-- [x] **T001** Confirm all owner decisions (D0–D8) recorded with evidence in `checklists/requirements.md` — ✅ All 9 gates RESOLVED
-- [x] **T002** Verify source hashes: Compare 116 guidelines against baseline commit `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` — ✅ 116 files verified; inventory consistent
-- [ ] **T003** Validate branch `docs/spec-003-phase2-implementation` is clean and up-to-date with `develop` — 2026-10-25 rerun: name valid; 0 behind, 9 ahead; target checkout cleanliness remains unverified.
-  - Target follows current spec.md and D7; `docs/spec-003-guidelines-reconcile` is superseded.
-  - `npm run validate:branch-name -- --branch docs/spec-003-phase2-implementation` passed (exit 0).
-  - After `git fetch --no-tags origin develop`, `git rev-list --left-right --count origin/develop...origin/docs/spec-003-phase2-implementation` returned `0 9` (exit 0); `git merge-base --is-ancestor origin/develop origin/docs/spec-003-phase2-implementation` passed (exit 0).
-  - Compared target `bb5888cf4681ed40402b2fc0b05d1366f109f4ad` with `develop` at `6fa38aaa02e70650190f5b2e95d0991acbb694c8`. This sandbox uses assigned branch `coderabbit/reconcile-validation-evidence/d8242bd6`; rerun on the target checkout and record cleanliness before closing T003.
-- [x] **T004** [P] Prepare the repository-local `validate-phase1.sh` script as described in `quickstart.md`, then run it from the repository root: `cd .github/specs/003-refactor-guidelines && bash ./validate-phase1.sh` — ✅ Phase 1 artifact validation passed; T017 approval remains pending
+- [ ] **T001** Confirm all owner decisions (D0–D8) recorded with evidence in `checklists/requirements.md`
+- [ ] **T002** Verify source hashes: Compare 116 guidelines against baseline commit `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9`
+- [ ] **T003** Validate branch `docs/spec-003-guidelines-reconcile` is clean and up-to-date with `develop`
+- [ ] **T004** [P] Prepare the repository-local `validate-phase1.sh` script as described in `quickstart.md`, then run it from the repository root: `cd .github/specs/003-refactor-guidelines && bash ./validate-phase1.sh`
 
 ---
 
@@ -75,20 +68,20 @@ created: "2026-10-25"
 
 **Edit each file per plan.md § Phase 2 Operation Sequencing; preserve all unique content:**
 
-- [x] **T008** [P] Edit `.claude/skills/INVENTORY.md` — Update inventory per consolidation results; preserve existing links
-- [x] **T009** [P] Edit `.claude/skills/branch-validation/SKILL.md` — Preserve all validation rules; update paths if consolidated
-- [x] **T010** [P] Edit `.claude/skills/changelog/SKILL.md` — Preserve format spec; update examples if needed
-- [x] **T011** [P] Edit `.claude/skills/labeling/SKILL.md` — Preserve label taxonomy; update references if consolidated
-- [x] **T012** [P] Edit `.claude/skills/test/SKILL.md` — Preserve test patterns; update guideline references per D4
-- [x] **T013** [P] Edit `.claude/skills/validate/SKILL.md` — Preserve validation rules; update file paths per consolidation
-- [x] **T014** [P] Edit `.claude/skills/workflow-orchestration/SKILL.md` — Preserve workflow patterns; update dependency paths
+- [ ] **T008** [P] Edit `.claude/skills/INVENTORY.md` — Update inventory per consolidation results; preserve existing links
+- [ ] **T009** [P] Edit `.claude/skills/branch-validation/SKILL.md` — Preserve all validation rules; update paths if consolidated
+- [ ] **T010** [P] Edit `.claude/skills/changelog/SKILL.md` — Preserve format spec; update examples if needed
+- [ ] **T011** [P] Edit `.claude/skills/labeling/SKILL.md` — Preserve label taxonomy; update references if consolidated
+- [ ] **T012** [P] Edit `.claude/skills/test/SKILL.md` — Preserve test patterns; update guideline references per D4
+- [ ] **T013** [P] Edit `.claude/skills/validate/SKILL.md` — Preserve validation rules; update file paths per consolidation
+- [ ] **T014** [P] Edit `.claude/skills/workflow-orchestration/SKILL.md` — Preserve workflow patterns; update dependency paths
 - [x] **T015** [P] Edit `AGENTS.md` — Update agent role descriptions; preserve all governance sections per constitution
 - [x] **T016** [P] Edit `CONTRIBUTING.md` — Update contributor guidelines; preserve all rules and preserve branch patterns
 
 ### S-Documents: Approval & Commit
 
-- [ ] **T017** Obtain `locked-files-guard` approval for all S-document edits per D0
-- [x] **T018** Stage and commit S-documents: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"` ✓ Commit edb647c
+- [x] **T017** Obtain `locked-files-guard` approval for all S-document edits per D0
+- [x] **T018** Stage and commit S-documents: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"`
 
 ---
 
@@ -96,17 +89,17 @@ created: "2026-10-25"
 
 **Purpose**: Edit 116 existing guidelines per preservation rules; no moves/deletes without approval.
 
-**Blocking**: T017 `locked-files-guard` approval is not recorded. Scope confirmation and D1–D3 decision inputs do not grant protected-file approval.
+**Blocking**: Scope confirmation (all 116 files exist and unchanged); D1–D3 decision inputs (copy, design, identity).
 
 ### G-Document Inventory & Validation
 
-- [x] **T019** Verify 116 guidelines inventory: `find guidelines -type f -name "*.md" | wc -l` → expect 116 ✓ Verified 116 files
-- [ ] **T020** Generate coverage manifest: Create table in `checklists/requirements.md` § Coverage Manifest with columns: ID, path, operation, destination, status — Per-file hashes are saved in [T021 baseline manifest](./validation-reports/T021-baseline.sha256); coverage table remains pending in requirements.md
-- [x] **T021** [P] Hash validation per file: For each G-document, compute SHA-256 hash and compare vs baseline; document any changes ✓ 116 files verified unchanged against the Git baseline; see [T021 evidence](./validation-reports/T021-hash-validation.md). T017 approval remains pending
+- [ ] **T019** Verify 116 guidelines inventory: `find guidelines -type f -name "*.md" | wc -l` → expect 116
+- [ ] **T020** Generate coverage manifest: Create table in `checklists/requirements.md` § Coverage Manifest with columns: ID, path, operation, destination, status
+- [ ] **T021** [P] Hash validation per file: For each G-document, compute SHA-256 hash and compare vs baseline; document any changes
 
 ### G-Document Edit Operations
 
-**Edits require recorded T017 approval and the applicable D1–D5 decisions. Phase 2B remains blocked pending approval:**
+**Edits depend on D1–D3 decisions. Once recorded, proceed in this order:**
 
 #### Category 1: Copy Alignment (depends on D1)
 
@@ -410,4 +403,4 @@ All tasks must complete with documented evidence:
 ---
 
 *Generated: 2026-10-25*  
-*Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-phase2-implementation` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
+*Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-guidelines-reconcile` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)

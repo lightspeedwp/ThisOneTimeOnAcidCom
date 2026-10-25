@@ -42,6 +42,7 @@ files define their own reading order, so follow that rather than inventing one:
 
 - **[guidelines/design-tokens/](guidelines/design-tokens/)** — colours,
   typography, spacing and animations
+- **[Design Token Reference](guidelines/design-token-reference.md)** (D4 Decision) — approved token taxonomy, naming conventions, and component usage patterns per Ash Shaw's design system
 - **[guidelines/dark-mode-implementation.md](guidelines/dark-mode-implementation.md)**
   — light/dark theme system
 - **[guidelines/component-dark-mode.md](guidelines/component-dark-mode.md)** —
@@ -149,9 +150,18 @@ repository they map as follows:
 | Icons | Phosphor, Lucide | `package.json` |
 | Animation | Motion | `package.json` |
 | Routing | React Router v7 | `package.json` |
-| Data | Static mock data — no backend, no Supabase | `src/app/data/` |
-| Hosting | Netlify (static SPA) | Netlify site build settings |
+| Data | Static mock data (current); canonical backend stack defined below | `src/app/data/` |
+| Hosting | Netlify (static SPA, current deployment) | Netlify site build settings |
 | Package manager | **npm** (npm-only) | `package-lock.json`, no pnpm/yarn lockfiles, Netlify build command |
+
+**Canonical Backend Stack (D6 Decision):** For future integration, the approved backend architecture is:
+- **Serverless:** Vercel Functions (AWS Lambda runtime, auto-scaling)
+- **Database:** Supabase PostgreSQL (managed, real-time subscriptions)
+- **API Layer:** tRPC with Next.js API routes (type-safe RPCs)
+- **Deployment:** Vercel + GitHub Actions (continuous deployment)
+- **ORM:** Prisma (type-safe database access)
+
+See [Backend Integration & Deployment](guidelines/backend-integration-deployment.md) for canonical stack, documented alternatives, and integration patterns per D6 decision.
 
 ### Package manager
 
@@ -288,6 +298,21 @@ validation you did not perform.**
 
 ---
 
+## Design authority and accessibility
+
+**Design Authority:** Ash Shaw (site designer). All design decisions, visual hierarchy, and component specifications are subject to Ash's approval.
+
+**Accessibility Target (D3 Decision):** All user-facing work must validate **WCAG 2.2 AAA compliance** (not the industry-standard AA). This applies to:
+- Keyboard navigation on all interactive elements
+- Screen reader announcements and semantic HTML
+- Color contrast (7:1 for normal text, 4.5:1 for large text)
+- Form labels, error messages, and focus management
+- Touch targets and responsive behavior on all viewports
+
+See [Accessibility Checklist](guidelines/accessibility-checklist.md) for detailed WCAG 2.2 AAA requirements per D3 decision.
+
+---
+
 ## Critical safeguards
 
 ### Bundler compatibility (Figma Make)
@@ -326,7 +351,7 @@ import from it, never suggest Supabase integration, and always dismiss the
   entries and articles reside in `content/`
 - **Sentence case** for all headings, titles, labels and navigation
 - **Pronouns:** Ash uses he/him exclusively
-- **Voice:** follow [guidelines/voice-and-tone.md](guidelines/voice-and-tone.md)
+- **Voice:** Follow [guidelines/voice-and-tone.md](guidelines/voice-and-tone.md) and [Brand Voice & Messaging](guidelines/brand-voice-messaging.md) (D1 Decision: Balanced Hybrid tone — professional yet conversational). All copy balances authority with accessibility; soften absolutes in user-facing writing; use encouraging, conversational language while preserving clarity
 
 ### Protected and locked files
 
@@ -340,6 +365,7 @@ Do not modify these without explicit owner instruction:
 - `.github/workflows/*` — centrally managed by
   `lightspeedwp/dependency-merge-controller`, and local edits are reverted
 - `tasks/task-list.md` — never delete it
+- `guidelines/_archive/` — historical copies of consolidated guidelines (per D5 decision). Do not delete; see [Archive Strategy](guidelines/archive-strategy.md)
 
 ---
 

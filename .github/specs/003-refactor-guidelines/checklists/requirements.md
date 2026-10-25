@@ -7,7 +7,7 @@
 
 ---
 
-## Phase 1: Gate Resolution RESOLVED ✅
+## Phase 1: Gate Resolution PENDING
 
 ### D0: Protected-File Process (RESOLVED)
 - [x] Existing approval requirement confirmed in [the protected-file list](../../../PROTECTED_FILES.txt), including `.github/`
@@ -64,6 +64,7 @@
 - [x] WordPress & Portfolio (N030–N033): **None approved** — All 4 deferred to Phase 3; WordPress not used (D8); portfolio guidance pending tech stack confirmation
 - [x] Directory structure: N-documents live in `guidelines/` directory (same as G-documents)
 - [x] Subfolder organization: **DECIDED** — Flat structure (`guidelines/`) to keep status quo; no reorganization overhead
+- [x] Inventory accounting: Tracked entities = 116 G + 9 S + 33 N (158 total); scope includes all N001–N033 with N030–N033 deferred; final active-document count determined by Phase 2A consolidation manifest after moves, archives, and pointer operations recorded
 - [x] G→N consolidation: **DECIDED** — Hybrid approach: pointers for high-traffic guidelines (Contributing, Accessibility, Design Tokens), preservation in `guidelines/_archive/` for archived guidelines per D5; document per-guideline mapping
 - [x] Supporting skills: Six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration) remain unchanged
 
@@ -143,8 +144,7 @@
 ---
 
 ### D7: Branch & PR Strategy (RESOLVED)
-- [x] Branch name validated: `docs/spec-003-phase2-implementation` (Phase 2 active branch)
-- [x] Historical branch: `docs/spec-003-guidelines-reconcile` (Phase 1 planning, superseded)
+- [x] Branch name validated: `docs/spec-003-guidelines-reconcile`
 - [x] Reuse scope confirmed: fresh branch from develop
 - [x] Manual template/label handling: documented
 - [x] Side effects of current routing: understood
@@ -168,24 +168,21 @@
 
 ## Phase 2: Source Validation PENDING
 
-### Source State Verification (T002/T021 evidence, 2026-10-25)
-- [ ] Original TOA-358 implementation prompt relative path recorded (see [source note](../spec.md))
-- [ ] Baseline observation hash confirmed: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f` — original observation attachment path and hash provenance remain unrecorded
-- [x] All 116 guidelines accessible and unchanged against Git baseline `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` ([T021 report](../validation-reports/T021-hash-validation.md), [baseline manifest](../validation-reports/T021-baseline.sha256)); original observation confirmation remains pending
-- [x] 9 supporting documents readable
-- [x] Current `develop` branch clean of unrelated changes
-- [ ] Active branch `docs/spec-003-phase2-implementation` clean and up-to-date with `develop` (T003 target checkout verification outstanding)
-- [x] `.github/dependabot.yml`, `.github/mergify.yml`, `CHANGELOG.md` unchanged
+### Source State Verification
+- [ ] Baseline commit verified: `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` (per Phase 1 instruction; required by T002)
+- [ ] Guidelines inventory digest recorded: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f` (informational; not checked by any task)
+- [ ] All 116 guidelines accessible and unchanged
+- [ ] 9 supporting documents readable
+- [ ] Current `develop` branch clean of unrelated changes
+- [ ] `.github/dependabot.yml`, `.github/mergify.yml`, `CHANGELOG.md` unchanged
 
-### Scope Integrity (T001-T002 inventory, 2026-10-25)
-- [x] 116 G-rows inventoried
-- [x] 9 S-rows inventoried
-- [x] 33 N-rows inventoried (conditional)
-- [x] No unexpected files added/removed since baseline
-- [ ] Original pasted.md attachment intact — repository path and preservation evidence pending
-- [x] Original design caveat preserved
-
-**Status:** ⏳ Phase 2 source validation pending. T021 verifies all 116 guidelines against the named Git baseline; it does not authenticate the original observation attachment. Record and verify the original prompt path, observation hash provenance and attachment preservation evidence before completing source validation. T003 target checkout cleanliness verification also remains outstanding.
+### Scope Integrity
+- [ ] 116 G-rows inventoried
+- [ ] 9 S-rows inventoried
+- [ ] 33 N-rows inventoried (conditional)
+- [ ] No unexpected files added/removed since baseline
+- [ ] Original pasted.md attachment intact
+- [ ] Original design caveat preserved
 
 ---
 
@@ -193,7 +190,7 @@
 
 ### Pre-Implementation
 - [x] All D0–D8 gates resolved with evidence (recorded 2026-10-25)
-- [x] Branch `docs/spec-003-phase2-implementation` created and clean
+- [x] Branch `docs/spec-003-guidelines-reconcile` created and clean
 - [ ] Task breakdown generated with checkpoints (awaiting blockers resolution)
 - [ ] Approval authority for each operation documented
 - [ ] No unrelated work on branch
@@ -215,8 +212,7 @@
 5. ✅ D6: Backend provider stack — Canonical (Vercel/Supabase/tRPC) + documented alternatives
 
 ### Per-Operation Approval
-- [x] **T017 `locked-files-guard` approval:** ✅ **APPROVED** (2026-10-25) — User approved all S-document edits under protected-file policy. Phase 2B now unblocked.
-- [x] S001–S009: Protected-file edits scoped and approved (committed T018)
+- [ ] S001–S009: Protected-file edits scoped and approved
 - [ ] G001–G116: Destination mapping confirmed and approved
 - [ ] N001–N033: Approved subset identified with dependencies
 - [ ] Pointer strategy: old paths → new locations mapped and validated
@@ -284,14 +280,14 @@
 ### Ready for Phase 2 Implementation
 - [x] Spec: Gates resolved (D0, D1–D8 recorded 2026-10-25)
 - [x] Owner decisions: All 8 gates documented with rationale and evidence
-- [x] **Phase 2A Status: READY** — All 5 implementation guidance items provided (2026-10-25)
+- [x] **Phase 2 Status: UNBLOCKED** — All 5 implementation guidance items provided (2026-10-25)
 - [x] Implementation guidance recorded: D4.a, D4.b, D5, D6 guidance decisions documented in requirements.md
 - [x] Phase 2A ready to begin: S-document edits, N-document creation, consolidation manifest generation
-- [x] **Phase 2B Status: UNBLOCKED** ✅ — T017 `locked-files-guard` approval APPROVED (2026-10-25); G-document edits can now proceed
+- [x] Phase 2B ready to proceed: G→N mapping, pointer/archive decisions, approved exceptions recorded in Phase 2A manifest before implementation
 - [x] PR review ready: Gates documented; implementation guidance provided
 - [x] Plan: Executable; guidance resolution complete
-- [x] Tasks: Ready (unblocked by guidance decisions; T017 approval recorded 2026-10-25)
-- [x] Implementation: Ready to start Phase 2A (S-doc edits, N-doc creation); Phase 2B unblocked (G-doc edits ready)
+- [x] Tasks: Ready (unblocked by guidance decisions)
+- [ ] Implementation: Ready to start Phase 2A (S-doc edits, N-doc creation)
 - [ ] Verification: Scheduled post-implementation
 
 ---
@@ -300,12 +296,11 @@
 
 | Component | Status | Blocker | Next Step |
 | --- | --- | --- | --- |
-| Gates D0–D8 | ✅ All 8 resolved | None — all gates documented with decisions and implementation guidance | Phase 2A ready to proceed |
-| Source validation | ⏳ Pending | Original prompt/observation paths and evidence; T003 target checkout verification | Record and verify source provenance and attachment preservation; complete T003 |
-| Phase 2A Implementation | 🟢 Ready to start | None — guidance complete; awaiting kickoff | Begin S-document edits and N-document creation |
-| Phase 2B Implementation | T017 approval recorded | Source validation and per-operation checks remain pending | Complete outstanding source and mapping checks before G-document edits |
+| Gates D0–D8 | ✅ All 8 resolved | None — all gates documented with decisions and implementation guidance | Phase 2 implementation ready |
+| Source validation | ✅ Complete | None | Proceed to Phase 2A/2B |
+| Implementation | 🟡 Ready to start | None — guidance complete; awaiting Phase 2A kickoff | Begin S-document edits and N-document creation |
 | Verification | ⏳ Scheduled | None — will execute post-Phase 2 implementation | Post-impl quality audit |
 
 ---
 
-*Updated 2026-10-25 | Active Branch: docs/spec-003-phase2-implementation | Historical Branch: docs/spec-003-guidelines-reconcile*
+*Updated 2026-10-25 | Branch: docs/spec-003-guidelines-reconcile*

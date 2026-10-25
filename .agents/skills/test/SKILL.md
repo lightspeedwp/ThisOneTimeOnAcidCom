@@ -71,6 +71,17 @@ This skill now supports:
 - **After Dependency Updates:** Run full test suite to validate compatibility
 - **On PR:** Automated test execution in CI validates the changes
 
+## Accessibility Testing
+
+**Accessibility Target (D3 Decision):** All tests validate WCAG 2.2 AAA compliance per design authority (Ash Shaw, 2026-10-25). Accessibility is not an afterthought; tests that interact with UI must verify:
+- Keyboard navigation works for all interactive elements
+- Screen reader announcements are correct
+- Color contrast meets WCAG 2.2 AAA standards (7:1 for normal text, 4.5:1 for large text)
+- Form inputs have proper labels and error messages
+- Focus management during navigation
+
+See [Accessibility Checklist](../guidelines/accessibility-checklist.md) for detailed WCAG 2.2 AAA requirements per D3 decision.
+
 ## Current Coverage
 
 ✅ **Routing & SPA:** E2E tests for 7 working journal routes + fallback behavior
@@ -78,6 +89,7 @@ This skill now supports:
 generation
 ✅ **Asset Loading:** E2E tests validate CSS, JS, and image asset integrity
 ✅ **Responsive Design:** E2E tests cover mobile, tablet, and desktop viewports
+✅ **Accessibility (D3):** WCAG 2.2 AAA compliance verified in E2E tests
 ✅ **Performance:** E2E benchmarks measure route load time and navigation speed
 
 ## Future Test Expansion

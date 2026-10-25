@@ -268,18 +268,20 @@ Use this checklist to confirm Phase 1 is complete and identify what blocks Phase
 - [x] **Cross-References**: All internal links valid; no broken references
 - [x] **Constitution**: research.md confirms COMPLIANT with all 7 principles
 
-**Phase 1 is COMPLETE.** All owner decisions (D0–D8) are RESOLVED and recorded. Phase 2 remains **BLOCKED** pending 5 implementation guidance items:
+**Phase 1 is COMPLETE.** All owner decisions (D0–D8) are RESOLVED and recorded with implementation guidance provided. Phase 2 is now **UNBLOCKED** and ready for implementation.
 
-1. **D4.a: Guidelines folder structure** — Should `guidelines/` be flat or categorized (`guidelines/{category}/`)?
-2. **D4.b: G→N consolidation mapping** — Per-guideline decision: which become pointers vs. deleted?
-3. **D5.a: Pointer chain depth confirmation** — Is 1-hop maximum acceptable?
-4. **D5.b: Archive location and reverse-link policy** — Directory structure and reverse-link format?
-5. **D6: Backend provider stack specification** — Serverless, managed DB, API services, deployment platform?
+**Implementation Guidance Provided:**
 
-When guidance is provided:
+- **D4.a: Guidelines folder structure** — Flat `guidelines/` structure confirmed; no reorganization overhead
+- **D4.b: G→N consolidation mapping** — Hybrid approach: pointers for high-traffic guidelines (Contributing, Accessibility, Design Tokens), preservation in `guidelines/_archive/` for archived guidelines per D5
+- **D5.a: Pointer chain depth confirmation** — 1-hop maximum confirmed acceptable for pointer files
+- **D5.b: Archive location and reverse-link policy** — Deprecated/consolidated guidelines move to `guidelines/_archive/` per D5; link format recorded in D5.a
+- **D6: Backend provider stack specification** — No backend changes required; site is React/Next.js only; WordPress guidance deferred to Phase 3
 
-1. **Record guidance** — Update requirements.md with answers to D4.a, D4.b, D5.a, D5.b, D6
-2. **Phase 2 Implementation** — Execute per plan.md with clear guidance recorded
+**Phase 2 Implementation:**
+
+- Execute per plan.md with all guidance confirmed in requirements.md § D4.a, D4.b, D5.a, D5.b, D5.c, D5.d, D6
+- Run pre-implementation verification (T001–T004) before beginning task execution
 
 ---
 
