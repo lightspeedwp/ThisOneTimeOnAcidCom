@@ -498,15 +498,19 @@ conversations.
 **Verification:** Templates created; discussion categories configured; README
 documented.
 
-### ✅ GH-002: Retain Local PR Templates
+### ⚠️ GH-002: Retain Local PR Templates — SUPERSEDED
 
-**Decision:** Keep repository-specific PR templates for workflow-specific
+**Former decision:** Keep repository-specific PR templates for workflow-specific
 routing.
-**Rationale:** TOA-241 has specific governance workflow needs; local templates
-enable Spec Kit routing.
-**Verified fact:** Local templates correctly route branch types; no duplicates
-of org defaults.
-**Verification:** Sync org updates manually 2–3x/year; no auto-merge conflicts.
+**Status:** Superseded by R5.2 (Automatic PR Template Routing).
+**Rationale for change:** Phase 9 implementation centralizes PR template sourcing
+to `lightspeedwp/.github`, eliminating manual sync overhead and configuration
+drift. Automated runtime routing replaces local template duplication.
+**New approach (R5.2):** PR templates are now sourced exclusively from canonical
+`lightspeedwp/.github` repository; no local template duplicates required.
+Automatic routing workflow selects the correct template based on branch prefix.
+**Action:** Remove any retained local PR templates from this repository; the
+pr-template-routing workflow handles all routing decisions.
 
 ### ✅ GH-003: Enable CODEOWNERS & Branch Protection
 
