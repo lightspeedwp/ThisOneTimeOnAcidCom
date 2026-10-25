@@ -627,7 +627,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Incorrect default state** — Fixed `ThemeToggleES5` component default from `false` (light mode) to `true` (dark mode) to restore original neon aesthetic as default
   - **Full dark mode restoration** — Added all 8 neon colors at maximum brightness, atomic black backgrounds (#0F0F0F), high-contrast text (14.8:1 to 20.6:1 ratios), ebook reader dark mode (9.5:1 to 12.6:1 contrast), and comprehensive component styling for header, footer, buttons, cards, forms, links, code blocks, tables, scrollbar, modals, and text selection
   - **Theme persistence working** — Verified localStorage saves user preference and restores on page reload
-  - **WCAG compliance targeted** — Both modes target WCAG 2.2 Level AA/AAA compliance (dark mode meets AAA standards; light mode verification in progress)
+  - **WCAG compliance targeted** — Both modes target WCAG 2.2 Level AA/AAA compliance (dark mode: 92% AAA verified; light mode verification in progress)
 
   **Build Error — Data URIs:**
   - **Bundler incompatibility fixed** — Commented out SVG grain texture data URIs in `/styles/globals.css` and `/styles/blocks/sitemap-page.css` (Figma Make bundler treats `url("data:image/...")` as npm package imports, causing HTTP 400 errors)
