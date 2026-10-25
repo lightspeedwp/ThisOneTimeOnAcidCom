@@ -106,7 +106,7 @@ GUIDANCE_ITEMS=(
 )
 
 for item in "${GUIDANCE_ITEMS[@]}"; do
-  if grep "✅ $item" "checklists/requirements.md" >/dev/null 2>&1; then
+  if grep -F "✅ $item" "checklists/requirements.md" >/dev/null 2>&1; then
     echo "  ✓ $item recorded"
   else
     echo "  ⚠ $item not yet recorded"
