@@ -156,14 +156,14 @@ select:focus-visible,
 ```css
 /* --- ACCESSIBLE TEXT COLORS (Light Mode) --- */
 /* Darker variants for readability on white backgrounds */
-/* WCAG 2.2 AAA COMPLIANCE: All colors meet 7:1+ contrast ratio on white */
---wp--preset--color--neon-green-text: #008f00;    /* Contrast ratio: 5.2:1 ✅ */
---wp--preset--color--neon-pink-text: #b300a4;     /* Contrast ratio: 5.8:1 ✅ */
---wp--preset--color--neon-blue-text: #002db3;     /* Contrast ratio: 8.9:1 ✅ */
---wp--preset--color--neon-yellow-text: #8a8a00;   /* Contrast ratio: 4.6:1 ✅ */
---wp--preset--color--neon-orange-text: #cc4100;   /* Contrast ratio: 5.1:1 ✅ */
---wp--preset--color--neon-purple-text: #7800a1;   /* Contrast ratio: 6.4:1 ✅ */
---wp--preset--color--neon-cyan-text: #008f94;     /* Contrast ratio: 4.9:1 ✅ */
+/* WCAG 2.2 AA COMPLIANCE: Most colors meet 4.5:1+ contrast ratio (AA); only blue meets 7:1+ (AAA) */
+--wp--preset--color--neon-green-text: #008f00;    /* Contrast ratio: 5.2:1 (AA) */
+--wp--preset--color--neon-pink-text: #b300a4;     /* Contrast ratio: 5.8:1 (AA) */
+--wp--preset--color--neon-blue-text: #002db3;     /* Contrast ratio: 8.9:1 (AAA) ✅ */
+--wp--preset--color--neon-yellow-text: #8a8a00;   /* Contrast ratio: 4.6:1 (AA) */
+--wp--preset--color--neon-orange-text: #cc4100;   /* Contrast ratio: 5.1:1 (AA) */
+--wp--preset--color--neon-purple-text: #7800a1;   /* Contrast ratio: 6.4:1 (AA) */
+--wp--preset--color--neon-cyan-text: #008f94;     /* Contrast ratio: 4.9:1 (AA) */
 
 ```text
 

@@ -300,11 +300,11 @@ Before using an icon, check **[overview-icons.md](./overview-icons.md)** to see 
 
 ## Styling Guidelines
 
-1. **✅ Preferred:** Use BEM classes defined in `/styles/globals.css` (e.g., `.portfolio-card__image--featured`, `.hero__title`)
+1. **✅ Required:** Use BEM classes defined in `/styles/globals.css` (e.g., `.portfolio-card__image--featured`, `.hero__title`)
 
-1. **Avoid:** Tailwind utilities (e.g., `flex`, `p-4`, `text-center`)
+1. **❌ Unsupported:** Tailwind utilities are not available (e.g., `flex`, `p-4`, `text-center`)
 
-1. **Avoid:** Inline styles
+1. **❌ Avoid:** Inline styles
 
 ```tsx
 // ✅ CORRECT - Semantic BEM Classes
