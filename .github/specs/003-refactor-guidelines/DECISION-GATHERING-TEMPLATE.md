@@ -167,7 +167,7 @@ Six-skill reference approach:
 
 Optional new skill decisions:
 - REJECTED: S010 (codeowners-management) — deferred to Phase 3
-- APPROVED: S011 (guidelines-validator) — for Phase 2 validation; lives in .agents/skills/
+- [APPROVE or REJECT each optional skill; record separate scope-change authorisation and evidence]
 "
 ```
 

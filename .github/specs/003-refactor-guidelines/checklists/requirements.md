@@ -67,10 +67,13 @@
 - [x] G→N consolidation: **DECIDED** — Hybrid approach: pointers for high-traffic guidelines (Contributing, Accessibility, Design Tokens), delete for archived guidelines; document per-guideline mapping
 - [x] Supporting skills: Six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration) remain unchanged
 
-**Decision Statement - D4.a (Subfolder):** Keep flat `guidelines/` structure. No subcategories; all 145 documents (116 G + 29 N) live directly in `guidelines/`. Rationale: simple, no migration overhead, aligns with current G-doc structure.
+**Decision Statement - D4.a (Subfolder):** Keep flat `guidelines/` structure for active documents. No subcategories; all 145 active documents (116 G + 29 N) live directly in `guidelines/`. Archive exception: deprecated/consolidated guidelines move to `guidelines/_archive/`. Rationale: simple, no migration overhead for active docs, aligns with current G-doc structure; archive subdirectory preserves historical records.
+
+**Active documents rule:** G-documents and N-documents remain directly in `guidelines/`.  
+**Archive exception:** Archived documents moved to `guidelines/_archive/{guideline-name}.md`.
 
 **Decision Statement - D4.b (G→N Mapping):** Use hybrid consolidation strategy:
-- **Pointers for high-traffic G-docs:** Creating `guidelines/old-path.md` → pointer redirecting to `../brand-voice-messaging.md` (N-location). Applies to frequently referenced guidelines (Contributing, Accessibility, Design Tokens, etc.)
+- **Pointers for high-traffic G-docs:** Creating `guidelines/old-path.md` → pointer redirecting to `brand-voice-messaging.md` (N-location within `guidelines/`). Applies to frequently referenced guidelines (Contributing, Accessibility, Design Tokens, etc.)
 - **Delete for archived G-docs:** Fully remove G-docs when consolidating into archives or when WordPress/deprecated content has no external references.
 - **Generate consolidation manifest during Phase 2A:** Document per-guideline decision (pointer vs. delete) with rationale for each.
 
@@ -94,9 +97,9 @@
 - **Rationale:** Clean N-document format, archived files self-document their new location, minimal metadata burden
 
 **Decision Statement - D5.c (Status Notation):** Use banner + comment approach:
-- **Archived file header:** Display banner: `> ⚠️ **ARCHIVED** · This guideline has been consolidated into [Brand Voice & Messaging](../path). See [archived original](../\_archive/old-path.md).`
-- **Archived file HTML comment:** `<!-- Consolidated into: ../brand-voice.md -->`
-- **Rationale:** Human-friendly visual signal in both locations, supports discovery in both directions
+- **Archived file header:** Display banner: `> ⚠️ **ARCHIVED** · This guideline has been consolidated into [Brand Voice & Messaging](./brand-voice-messaging.md).`
+- **Archived file HTML comment:** `<!-- Consolidated into: ./brand-voice-messaging.md -->`
+- **Rationale:** Human-friendly visual signal in both locations, supports discovery; archived file self-documents its new location
 
 **Decision Statement - D5.d (Type 3 Pointer Constraint):** Type 3 (Archival) pointers MUST reference a valid `new_path` per pointer-redirect-contract.md § Type 3 acceptance criteria. Archive destination must be either: (1) a replacement N-document, or (2) a separately approved archive entity in `guidelines/_archive/`. No orphaned Type 3 pointers without valid destination. Rationale: ensures non-destructive consolidation principle; prevents broken redirect chains; maintains historical provenance.
 
