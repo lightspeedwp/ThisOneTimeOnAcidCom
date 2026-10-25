@@ -170,16 +170,11 @@ created: "2026-10-25"
 
 - [ ] **T028** Extract N-document approval list from D4 decision in `checklists/requirements.md`
   - Categorize: Approved (create), Pointer-only (create redirect), Deferred (skip in Phase 2)
-- [ ] **T029** [P] Create N-document specification per approved subset: For each approved N-doc, create outline in temporary file with structure (title, purpose, required sections)
-
-### N-Document Approval & Planning (In Progress)
-
-- [ ] **T028** Extract N-document approval list from D4 decision in `checklists/requirements.md`
   - ✅ N-document list verified: 29 approved for Phase 2 (N001-N029)
   - ✅ Categorized: Reference (N001-N005), Organization (N006-N018), Patterns (N019-N022), Pages (N023-N025), Reports (N026-N029)
   - ✅ Consolidation Manifest available: `CONSOLIDATION-MANIFEST.md` provides detailed G-to-N mapping, pointer strategy, and destination paths
   - ⏳ Mapping incomplete: N007 and N018 related G-documents remain TBD; N016 source documents remain undefined; N012/N013 creation versus consolidation into N001 remains conditional
-  - Status: Keep mapping open until these entries are resolved before proceeding with dependent N-document creation (T030)
+  - Status: Keep T028 open until the complete G-to-N mapping is resolved in `CONSOLIDATION-MANIFEST.md`, including all TBD, undefined, and conditional entries; this is required before T030 begins
   - Approval list verified: 2026-10-25 23:45 UTC; mapping verification pending
 
 - [ ] **T029** [P] Create N-document specification per approved subset: For each approved N-doc, create outline in temporary file with structure (title, purpose, required sections)
@@ -189,6 +184,7 @@ created: "2026-10-25"
 **Only execute if D4 approves; otherwise skip to T031:**
 
 - [ ] **T030** [P] Create approved N-documents in `guidelines/` with:
+  - Prerequisites: Complete T028 (approval list and complete G-to-N mapping resolved) and the relevant T029 outline before creation begins
   - Standard structure per spec.md ("Reference/diagnostics", "Design inspiration", etc.)
   - Full content per approved scope
   - Cross-references to G-documents where applicable
@@ -325,7 +321,7 @@ created: "2026-10-25"
 - T022–T026 (edit operations per category) can run in parallel
 - T019–T021 (inventory validation) must complete before edits
 
-**Within Phase 2C** (N-documents): T029–T030 can run in parallel if multiple approved N-docs
+**Within Phase 2C** (N-documents): After T028 resolves the complete G-to-N mapping, T029 outlines for other approved N-docs can run in parallel with T030 creation of N-docs whose T029 outlines are complete
 
 **Within Phase 2D–E** (Pointers & validation): T033–T037 can partially overlap
 
@@ -437,8 +433,8 @@ All tasks must complete with documented evidence:
 
 - [ ] **T046** [HIGH] Complete remaining G-document edits (T023-T027): Apply design/accessibility corrections per D3 (Ash Shaw authority, WCAG 2.2 AAA); add N-document pointers per D4; apply historical preservation per D5; verify no-change guidelines; commit edits in category batches per plan.md § Phase 2B
   - ✅ T023: COMPLETE — WCAG 2.1 AA → WCAG 2.2 AAA updates applied across 21 files (commit 64a4649)
-  - ⏳ T024-T027: **Blocked** — Requires explicit G-to-N document mapping. D4.b specifies "high-traffic" guidelines (Contributing, Accessibility, Design Tokens) → new N-documents, but full mapping not provided. **Path forward:** Create N-documents (T028-T032) first to unblock T024-T027 edit operations
-  - Decision: Proceed with T028-T032 (N-document creation) in parallel to establish mapping, then complete T024-T027
+  - ⏳ T024-T027: **Blocked** — Requires explicit G-to-N document mapping. D4.b specifies "high-traffic" guidelines (Contributing, Accessibility, Design Tokens) → new N-documents, but full mapping not provided. **Path forward:** Resolve the complete G-to-N mapping in T028 before T030 begins; then create and verify the required N-document destinations (T029-T032) before T024-T027 pointer edits
+  - Decision: Complete T028 mapping resolution first; then follow T029-T032 creation dependencies and complete T024-T027 once their required destinations exist and are verified
 - [ ] **T047** [HIGH] Complete S-document edits (T008-T014): Edit 7 remaining skills files (.claude/skills/{INVENTORY,branch-validation,changelog,labeling,test,validate,workflow-orchestration}); update file paths per consolidation scope; preserve all validation rules, patterns, and safeguards
 - [ ] **T048** [HIGH] Create approved N-documents (T028-T032): Extract D4 approval list; create specification outlines for 29 approved N-documents; execute creation in `guidelines/` directory per approved scope and D4 decision; commit per D4 evidence
 - [ ] **T049** [HIGH] Execute pointer operations (T033-T034): Create pointers per pointer-redirect-contract.md (Type 1 Relocation, Type 2 Consolidation, Type 3 Archival); validate all pointer destinations exist; enforce 1-hop maximum chain depth per D5; validate markdown syntax
@@ -487,7 +483,7 @@ All tasks must complete with documented evidence:
 - [ ] **T058** [HIGH] Validate N007 mapping status: CONSOLIDATION-MANIFEST.md defines N007 as **Publishing Workflow & Boundaries** — Manuscript status, publication model, content maturity levels, and editorial workflow (internal reference per D2). Create specification outline per manifest definition; document any related G-document mappings; mark status as "Approved" in CONSOLIDATION-MANIFEST.md per D4 authority
 - [ ] **T059** [HIGH] Validate N016 definition status: CONSOLIDATION-MANIFEST.md defines N016 as **Testing Strategy & Coverage** — Testing patterns, coverage goals, test scenarios, and validation approaches. Create specification outline per manifest definition; document any related G-document mappings from existing test documentation; mark status as "Approved" in CONSOLIDATION-MANIFEST.md per D4 authority
 - [ ] **T060** [HIGH] Validate N018 mapping status: CONSOLIDATION-MANIFEST.md defines N018 as **Backend Stack & Integration Patterns** — Canonical backend stack (Vercel/Supabase/tRPC), API patterns, deployment workflow, and alternatives (internal reference per D6). Create specification outline per manifest definition; document any related G-document mappings from existing backend documentation; mark status as "Approved" in CONSOLIDATION-MANIFEST.md per D4 authority
-- [ ] **T061** [HIGH] Resolve Phase 4 severity totals mismatch: CodeRabbit review identified discrepancy between reported phase totals and actual task counts. Audit Phase 4 task severity assignments (current: 1 CRITICAL T044, 6 HIGH T045–T050, 3 MEDIUM T051–T053, 1 MEDIUM T054 = totals mismatch); recount and correct severity labels in tasks.md to match declared summary; document audit results in convergence sign-off
+- [ ] **T061** [HIGH] Record Phase 4 severity audit: Actual task totals are 1 CRITICAL (T044), 8 HIGH (T045–T052), and 2 MEDIUM (T053–T054), matching the declared summary. Retain the existing severity labels for T044–T054; document audit results in convergence sign-off
 
 ### Medium-Priority Workflow Gaps
 
