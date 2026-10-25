@@ -36,7 +36,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 ### Core Specification Package (5,102 lines)
 
 | Artifact | Lines | Purpose | Status |
-|----------|-------|---------|--------|
+| --- | --- | --- | --- |
 | spec.md | 808 | Requirements, acceptance criteria, user stories | ✅ Complete |
 | plan.md | 230 | Implementation strategy, workstreams, phases | ✅ Complete |
 | tasks.md | 955 | Decomposed implementation tasks (59 + 6 convergence) | ✅ Complete |
@@ -54,7 +54,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 ### Implementation Phases Executed
 
 | Phase | Name | Duration | Status |
-|-------|------|----------|--------|
+| --- | --- | --- | --- |
 | 1 | Setup & Initialization | Foundation | ✅ Complete |
 | 2 | Foundational Configuration | Core dependencies | ✅ Complete |
 | 3 | Spec Kit Routing (WS-254) | Agent specification system | ✅ Complete |
@@ -68,7 +68,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 ### Workstream Breakdown
 
 | Workstream | Purpose | Tasks | Status |
-|------------|---------|-------|--------|
+| --- | --- | --- | --- |
 | WS-254 | Spec Kit routing and agent specifications | 8 | ✅ Complete |
 | WS-260 | Testing framework integration (Jest, Bats, Playwright) | 6 | ✅ Complete |
 | WS-261 | GitHub governance (workflows, templates, protection) | 12 | ✅ Complete |
@@ -84,7 +84,7 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 ### Test Results Summary
 
 | Test Suite | Result | Details |
-|-----------|--------|---------|
+| --- | --- | --- |
 | **Jest (Unit Tests)** | ✅ 601/601 passed | Verified in PR #429 CI at commit `314881e` (12 suites) |
 | **Bats (Build Tests)** | ✅ 12/12 reported passing | Implementation baseline recorded in tasks.md (T026, T053) |
 | **Playwright (E2E)** | Configured, not executed | No E2E execution result recorded for this delivery |
@@ -145,18 +145,18 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 **Completed Tasks:**
 
 | Task | Purpose | Status | Details |
-|------|---------|--------|---------|
-| T060 | PR template routing verification | ✅ Complete | 4 test PRs verified: #483 feat/ → pr_feature.md/type:feature ✅, #484 fix/ → pr_bug.md/type:bug ✅, #485 docs/ → pr_documentation.md/type:documentation ✅, #486 test/ → pr_test.md/type:test ✅ |
+| --- | --- | --- | --- |
+| T060 | PR template routing verification | ✅ Complete | 4 test PRs verified across feat/, fix/, docs/, test/ prefixes with correct routing |
 | T063 | Styling documentation audit | ✅ Complete | Verified CONTRIBUTING.md and guidelines/css-architecture.md have comprehensive BEM documentation |
 
 **Remaining Tasks:**
 
-| Task | Purpose | Type | Status | Owner/Notes |
-|------|---------|------|--------|------------|
-| T061 | Branch protection configuration | Manual GitHub Setup | ⏳ Pending | Requires GitHub Settings: enable branch protection on develop (1 review, CODEOWNERS) and main (2 reviews, CODEOWNERS, restrict push) |
-| T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | Requires GitHub Settings: enable Discussions and configure 5 categories (Feature Requests, Questions & Answers, Show and Tell, General, Ideas) |
-| T064 | Protected-file approval and revalidation | Guard Validation | 🔴 Blocked | Controller verification failed (404). Approval for PR #429 covers only spec files; needs expanded approval for `.github/workflows/protected-files-guard.yml`. Successful Check Protected Files rerun required. |
-| T065 | Final handoff documentation | Documentation | ⏳ Pending | This report is draft; finalize after T061, T062 and T064 complete. T060 and T063 now complete ✅ |
+| Task | Purpose | Type | Status | Notes |
+| --- | --- | --- | --- | --- |
+| T061 | Branch protection configuration | Manual GitHub Setup | ⏳ Pending | GitHub Settings: develop (1 review + CODEOWNERS), main (2 reviews + CODEOWNERS + maintainer push restriction) |
+| T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | GitHub Settings: Enable Discussions with 5 categories (Features, Q&A, Show and Tell, General, Ideas) |
+| T064 | Protected-file approval and revalidation | Guard Validation | 🔴 Blocked | Controller check (404), approval expansion needed, guard workflow rerun required |
+| T065 | Final handoff documentation | Documentation | ⏳ Pending | Auto-generate after T061–T064 complete. T060 and T063 now ✅ |
 
 **Note:** T061, T062, and T064 require owner action. T060 and T063 now complete. The convergence assessment and T065 remain pending the outstanding manual and approval gates.
 
@@ -223,7 +223,7 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 ## Risk Assessment & Mitigation
 
 | Risk | Severity | Mitigation | Status |
-|------|----------|-----------|--------|
+| --- | --- | --- | --- |
 | Manual GitHub setup tasks (T061, T062) | Medium | Owner (@ashley) to execute manual steps | ✅ Documented |
 | CI check interpretation (Spec Validation, Jest) | Low | Investigation documented in PR #346 | ✅ Monitoring |
 | Protected files approval workflow (T064) | Medium | Clear approval recording instructions provided | ✅ Process defined |
