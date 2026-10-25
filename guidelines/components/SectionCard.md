@@ -134,8 +134,8 @@ dark:border-purple-700       /* Solid purple borders */
 **Light Mode:**
 
 - Heading contrast: 7.02:1 (AAA ✅)
-- Body text contrast: 4.83:1 (AAA ✅)
-- Interactive elements: 4.5:1+ (AAA ✅)
+- Body text contrast: 4.83:1 (AA ✅ — below AAA's 7:1 requirement for normal text)
+- Interactive elements: 4.5:1+ (AA ✅)
 
 **Dark Mode:**
 

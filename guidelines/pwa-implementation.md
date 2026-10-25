@@ -20,7 +20,7 @@ The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App
 - ✅ **Installation Prompt** - Custom branded install experience
 - ✅ **App Shortcuts** - Quick access to Portfolio, Blog, and Contact pages
 - ✅ **Responsive** - Works on all devices and screen sizes
-- ✅ **Accessible** - WCAG 2.2 Level AAA compliant
+- ✅ **Accessible** - WCAG 2.2 Level AAA target (verification in progress)
 
 ---
 

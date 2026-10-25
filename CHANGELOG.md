@@ -344,9 +344,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Theme file integration** — Extended components CSS automatically imported in `/styles/globals.css` alongside core dark theme
 - **Production-ready** — All components tested for cross-browser compatibility, keyboard navigation, screen reader support, and mobile responsiveness
 
-- **Light mode theme system** with comprehensive WCAG 2.2 accessibility compliance (100% AA, 92% AAA)
+- **Light mode theme system** targeting WCAG 2.2 accessibility compliance (verification in progress)
 - **ThemeToggleES5 component** (`/components/common/ThemeToggleES5.tsx`) — ES5-compliant theme toggle with sun/moon icons, keyboard accessibility (Enter/Space), localStorage persistence, and system preference detection
-- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; WCAG AAA compliant text (16.1:1 contrast)
+- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; high contrast text (16.1:1 contrast ratio achieved)
 - **Dark theme CSS** (`/styles/themes/dark.css`) — Existing dark mode formalized as separate theme file
 - **Enhanced ebook reader contrast** (`/styles/blocks/ebook-enhanced-contrast.css`) — Mobile readability improvements: body text contrast increased from 3.2:1 to 9.5:1 (dark mode) and 16.1:1 (light mode); heading contrast 12.6:1 (dark) and 21:1 (light)
 - **Theme toggle integration in Header** — ThemeToggleES5 component added to desktop header actions area
@@ -384,7 +384,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - BlogPage (v1.5.0) — Header boot → filters (0.4s)
   - ContactPage (v1.4.0) — Header boot → form grid (0.5s)
   - AnimationShowcasePage (v1.0.0) — Interactive demos at `/dev/animations`
-- **Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion` support
+- **Accessibility:** WCAG 2.2 AAA target with full `prefers-reduced-motion` support (verification in progress)
 - **Performance:** CSS-only animations (60fps, zero JavaScript overhead, +0.6KB minified)
 - **Documentation:**
   - Updated `/guidelines/Guidelines.md` to v8.4.0 with Animation System Implementation section
@@ -516,9 +516,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Theme file integration** — Extended components CSS automatically imported in `/styles/globals.css` alongside core dark theme
 - **Production-ready** — All components tested for cross-browser compatibility, keyboard navigation, screen reader support, and mobile responsiveness
 
-- **Light mode theme system** with comprehensive WCAG 2.2 accessibility compliance (100% AA, 92% AAA)
+- **Light mode theme system** targeting WCAG 2.2 accessibility compliance (verification in progress)
 - **ThemeToggleES5 component** (`/components/common/ThemeToggleES5.tsx`) — ES5-compliant theme toggle with sun/moon icons, keyboard accessibility (Enter/Space), localStorage persistence, and system preference detection
-- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; WCAG AAA compliant text (16.1:1 contrast)
+- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; high contrast text (16.1:1 contrast ratio achieved)
 - **Dark theme CSS** (`/styles/themes/dark.css`) — Existing dark mode formalized as separate theme file
 - **Enhanced ebook reader contrast** (`/styles/blocks/ebook-enhanced-contrast.css`) — Mobile readability improvements: body text contrast increased from 3.2:1 to 9.5:1 (dark mode) and 16.1:1 (light mode); heading contrast 12.6:1 (dark) and 21:1 (light)
 - **Theme toggle integration in Header** — ThemeToggleES5 component added to desktop header actions area
@@ -627,7 +627,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Incorrect default state** — Fixed `ThemeToggleES5` component default from `false` (light mode) to `true` (dark mode) to restore original neon aesthetic as default
   - **Full dark mode restoration** — Added all 8 neon colors at maximum brightness, atomic black backgrounds (#0F0F0F), high-contrast text (14.8:1 to 20.6:1 ratios), ebook reader dark mode (9.5:1 to 12.6:1 contrast), and comprehensive component styling for header, footer, buttons, cards, forms, links, code blocks, tables, scrollbar, modals, and text selection
   - **Theme persistence working** — Verified localStorage saves user preference and restores on page reload
-  - **WCAG compliance maintained** — Both modes achieve 100% WCAG 2.2 Level AA compliance (dark mode: 92% AAA, light mode: 100% AAA)
+  - **WCAG compliance targeted** — Both modes target WCAG 2.2 Level AA/AAA compliance (dark mode meets AAA standards; light mode verification in progress)
 
   **Build Error — Data URIs:**
   - **Bundler incompatibility fixed** — Commented out SVG grain texture data URIs in `/styles/globals.css` and `/styles/blocks/sitemap-page.css` (Figma Make bundler treats `url("data:image/...")` as npm package imports, causing HTTP 400 errors)
