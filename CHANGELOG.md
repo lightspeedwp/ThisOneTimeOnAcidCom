@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **React externalization removed** — Removed the `resolveReactExternals()` plugin and `build.rollupOptions.external/globals` from `vite.config.ts`. They marked `react` and `react-dom` as external with no import map to resolve them, which broke `npm run dev` and left unresolvable `from "react"` imports in the production bundle. React is now bundled normally, as `@sentry/react` requires. This supersedes the restoration listed below under Issue #306
 - **CodeRabbit docstring coverage** — Added docstrings to 7 functions across netlify-hashed-asset-headers.mjs, check-netlify-headers.mjs, and vite.config.ts to meet 80% documentation coverage threshold (PR #426)
 - **React external dependency resolution regression** — Restored missing `resolveReactExternals()` function and `build.rollupOptions` in Vite configuration that was accidentally removed in PR #345, causing all 7 subsequent Dependabot PRs to fail Netlify builds with unresolved `react/jsx-runtime` import errors (Issue #306)
+- **npm dependency lock synchronization** — Regenerated `package-lock.json` to resolve out-of-sync dependencies with `package.json`, fixing `npm ci` failures that prevented Jest baseline testing in CI workflows. Resolved version mismatches in @mui/icons-material, react-dom, and scheduler packages
 
 ### Changed
 
