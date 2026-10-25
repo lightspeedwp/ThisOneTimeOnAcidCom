@@ -82,7 +82,7 @@ $ find guidelines -type f -name "*.md" | wc -l
 
 **Evidence:**
 - Instruction line 16: "Research baseline: `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9`"
-- Checklist line 108: "Baseline observation hash confirmed: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f`" (no reference to commit)
+- Checklist line 108: "Guidelines inventory digest recorded: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f`" (informational; baseline commit verified separately)
 
 **Resolution:**
 - Proposed change to requirements.md line 108: Connect checklist to instruction baseline commit
