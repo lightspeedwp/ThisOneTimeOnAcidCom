@@ -117,7 +117,7 @@ Checked `CONTRIBUTING.md` for BEM styling documentation:
 
 **Owner Action Required** (@ashley):
 
-1. **Confirm Controller Status**: 
+1. **Confirm Controller Status**:
    - Check if `lightspeedwp/dependency-merge-controller` is still the active configuration source
    - Verify whether the guard workflow will be overwritten by controller reconciliation
    - Reply with controller status confirmation
@@ -164,7 +164,7 @@ Checked `CONTRIBUTING.md` for BEM styling documentation:
 3. Update `.github/specs/CATALOG.md` to mark TOA-241 as COMPLETE
 
 4. Commit with message:
-   ```
+   ```bash
    docs: T065 COMPLETION.md for Spec 001 – Repository Governance (TOA-241)
    
    All 8 phases complete:
