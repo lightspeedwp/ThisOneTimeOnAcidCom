@@ -897,7 +897,7 @@ available to all team members
 | `docs/*` | `pr_documentation.md` | `type:documentation` | [PR #485](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485) | [Suggests `pr_documentation.md`](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485#issuecomment-6386934580) | `type:documentation` ✅ |
 | Unmatched prefix (`proto/*`) | `pr_default.md` | `type:maintenance` | [PR #488](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/488) | [Suggests `pr_default.md`](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/488#issuecomment-6391584997) | `type:maintenance` ✅ |
 
-- Verified all four routing comments and applied labels directly on GitHub on 2026-10-25; T060 is complete with this evidence recorded.
+- Verified all four routing comments and applied labels directly on GitHub on 2026-10-25; routing evidence recorded. T060 remains unchecked pending T035 evidence (named-template selection precedence and preservation of contributor content).
 
 - Record each test PR URL, routing comment and applied label before completing T060. T035 also requires explicit named-template selection precedence and preservation of contributor content.
 - Mark: T035 complete only after the required PR evidence is recorded; T060 remains unchecked while that evidence is unavailable.
