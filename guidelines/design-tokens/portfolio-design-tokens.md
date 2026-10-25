@@ -23,7 +23,7 @@ shadows, border radii, and animations.
 
 ## Design tokens are NOT
 
-- ❌ Inline styles (forbidden by Guidelines.md)
+- ❌ Inline styles (see Guidelines.md for rationale)
 - ❌ Tailwind utilities (replaced by semantic BEM classes)
 - ❌ Hardcoded pixel values scattered across components
 - ❌ Magic numbers without documentation
@@ -493,7 +493,7 @@ Each content type has a dedicated neon accent color used consistently across:
 
 ### DO ✅
 
-1. **Always use tokens via CSS variables:**
+1. **Use tokens via CSS variables:**
 
    ```css
    .element {

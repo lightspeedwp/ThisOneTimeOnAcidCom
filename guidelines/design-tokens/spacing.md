@@ -852,7 +852,7 @@ For backward compatibility with existing code:
 
 ### Touch Target Minimum (44px)
 
-Always ensure interactive elements meet WCAG minimum touch target size:
+Ensure interactive elements meet WCAG minimum touch target size:
 
 ```css
 /* Button with minimum touch target */
