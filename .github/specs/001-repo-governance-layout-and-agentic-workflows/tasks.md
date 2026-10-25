@@ -890,12 +890,14 @@ available to all team members
 - Previously listed branches: `test/pr-template-feature`, `test/pr-template-fix`, `test/pr-template-docs`, `test/pr-template-unmatched`. All have the `test/` prefix, so they do not establish the required routing scenarios.
 - `.github/workflows/pr-template-routing.yml` defines the expected mappings below; configuration inspection does not establish observed PR results.
 
-| Scenario | Expected suggested template | Expected label | Test PR and observed result |
-|----------|-----------------------------|----------------|-----------------------------|
-| `feat/*` | `pr_feature.md` | `type:feature` | [PR #483](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/483) ✅ |
-| `fix/*` | `pr_bug.md` | `type:bug` | [PR #484](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/484) ✅ |
-| `docs/*` | `pr_documentation.md` | `type:documentation` | [PR #485](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485) ✅ |
-| Unmatched prefix | `pr_default.md` | `type:maintenance` | [PR #488](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/488) ✅ |
+| Scenario | Expected suggested template | Expected label | Test PR | Observed routing comment | Applied label |
+|----------|-----------------------------|----------------|---------|--------------------------|---------------|
+| `feat/*` | `pr_feature.md` | `type:feature` | [PR #483](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/483) | [Suggests `pr_feature.md`](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/483#issuecomment-6386930297) | `type:feature` ✅ |
+| `fix/*` | `pr_bug.md` | `type:bug` | [PR #484](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/484) | [Suggests `pr_bug.md`](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/484#issuecomment-6386933126) | `type:bug` ✅ |
+| `docs/*` | `pr_documentation.md` | `type:documentation` | [PR #485](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485) | [Suggests `pr_documentation.md`](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485#issuecomment-6386934580) | `type:documentation` ✅ |
+| Unmatched prefix (`proto/*`) | `pr_default.md` | `type:maintenance` | [PR #488](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/488) | [Suggests `pr_default.md`](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/488#issuecomment-6391584997) | `type:maintenance` ✅ |
+
+- Verified all four routing comments and applied labels directly on GitHub on 2026-10-25; T060 is complete with this evidence recorded.
 
 - Record each test PR URL, routing comment and applied label before completing T060. T035 also requires explicit named-template selection precedence and preservation of contributor content.
 - Mark: T035 complete only after the required PR evidence is recorded; T060 remains unchecked while that evidence is unavailable.
