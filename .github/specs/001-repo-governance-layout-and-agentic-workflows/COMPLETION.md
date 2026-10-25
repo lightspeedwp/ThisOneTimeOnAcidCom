@@ -154,7 +154,7 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 | --- | --- | --- | --- | --- |
 | T061 | Branch protection configuration | Manual GitHub Setup | ⏳ Pending | GitHub Settings: develop (1 review + CODEOWNERS), main (2 reviews + CODEOWNERS + maintainer push restriction) |
 | T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | GitHub Settings: Enable Discussions with 5 categories (Features, Q&A, Show and Tell, General, Ideas) |
-| T065 | Final handoff documentation | Documentation | ⏳ Pending | Auto-generate after T061–T063 complete. T060 and T063 now ✅ |
+| T065 | Final handoff documentation | Documentation | ⏳ Pending | Auto-generate after T061–T062 complete. T060 and T063 now ✅ |
 
 **Cancelled Tasks:**
 
