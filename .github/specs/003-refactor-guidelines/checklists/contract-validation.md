@@ -146,18 +146,20 @@
 
 ## Contract Consistency Summary
 
-**Validated Dimensions:**
-- ✅ All three contracts are complete and scoped
-- ✅ Protected paths and approval authority are consistent
-- ✅ Safeguard preservation rules are enforced across contracts
-- ✅ Pointer formats and validation are rigorous
-- ✅ Design example verification is defined operationally
-- ✅ Data model state transitions align with contract workflows
-- ✅ Gate dependencies are documented and consistent
-- ✅ Governance anchors are accurate and verifiable
+**Validation Results: Pending**
+- [ ] Pending validation: All three contracts are complete and scoped
+- [ ] Pending validation: Protected paths and approval authority are consistent
+- [ ] Pending validation: Safeguard preservation rules are enforced across contracts
+- [ ] Pending validation: Pointer formats and validation are rigorous
+- [ ] Pending validation: Design example verification is defined operationally
+- [ ] Pending validation: Data model state transitions align with contract workflows
+- [ ] Pending validation: Gate dependencies are documented and consistent
+- [ ] Pending validation: Governance anchors are accurate and verifiable
 
-**Blockers Identified:** (List any findings that prevent contract implementation)
-- [ ] None — Contracts are consistent and ready
+**Blockers Identified:**
+- [ ] Validation remains pending: all CHK items above are unchecked; Phase 2 readiness has not been established.
+- [ ] Unresolved protected-path scope conflict: `.github/PROTECTED_FILES.txt` and the local approval checker include all of `.github/`, while the workflow contract lists narrower paths and omits `.github/specs/`. The feature approval contract also treats S002–S009 as protected, beyond the canonical list's explicit S-path coverage. Reconcile these scopes with the owner before claiming consistency or an exemption; retain existing approval requirements. See [research § 2](../research.md#2-protected-files-governance).
+- [ ] Owner decisions D1–D6 and D8 remain pending and block Phase 2.
 
 **Recommended Improvements:** (List items for future enhancement; do not block Phase 2)
 - [ ] None recorded
@@ -165,10 +167,10 @@
 ---
 
 **Checklist Status:**
-- **Consistency:** ___ of 65 items verified
-- **Blocking Issues:** ___ (0 acceptable for Phase 2 start)
+- **Consistency:** 0 of 65 items verified — pending
+- **Blocking Issues:** Unresolved — see blockers above; further assessment pending
 - **Non-Blocking Recommendations:** ___ (logged for future reference)
-- **Approved for Phase 2:** ☐ Yes  ☐ No  ☐ Conditional (see blockers)
+- **Approved for Phase 2:** No — pending validation, scope reconciliation, and owner decisions
 
 **Reviewer:** ________________________  **Date:** __________
 

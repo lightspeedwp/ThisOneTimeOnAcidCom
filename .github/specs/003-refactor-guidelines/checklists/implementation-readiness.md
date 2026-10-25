@@ -22,7 +22,7 @@
 
 - [ ] **CHK051** Phase 2A (protected-file edits, T005–T018) comes before Phase 2B (guideline edits, T019–T027)
 - [ ] **CHK052** Phase 2C (N-document creation, T028–T032) includes explicit dependency note: "Blocked on D4 approval"
-- [ ] **CHK053** Phase 2D (pointer operations, T033–T034) includes explicit dependency note: "Blocked on D5 approval"
+- [ ] **CHK053** Phase 2D (pointer operations, T033–T034) explicitly requires D4 approval for pointer strategy and destination decisions and D5 approval for preservation decisions before pointer operations
 - [ ] **CHK054** Task dependencies are documented (e.g., T019 depends on T005–T018 completion, not assumed)
 - [ ] **CHK055** Each task explicitly states blocking conditions: "Proceed only if...", "Blocked until..."
 
@@ -41,7 +41,7 @@
 ## Parallelization & Effort Estimation
 
 - [ ] **CHK061** Tasks marked [P] (parallelizable) do not depend on each other or on prior non-[P] tasks
-- [ ] **CHK062** Phase 2B G-document edits (T019–T027, 9 tasks) are marked [P] to allow parallel work on 3 guidelines per developer
+- [ ] **CHK062** Only Phase 2B tasks T021–T026 (six tasks) are marked [P]; parallel execution respects prerequisites and avoids overlapping file edits
 - [ ] **CHK063** At least one parallelizable task grouping is documented (e.g., "T019–T021 can run in parallel; T022–T024 can run in parallel")
 - [ ] **CHK064** Effort estimates in plan.md § Timeline Estimate match task granularity (e.g., "6–8 hours per 30 guidelines" aligns with task count)
 - [ ] **CHK065** If effort estimate assumes parallelization, [P] markers match that assumption
@@ -140,18 +140,20 @@
 
 ## Implementation Readiness Summary
 
-**Validated Dimensions:**
-- ✅ Tasks are complete, traceable, and scoped
-- ✅ Phases are ordered with explicit dependencies
-- ✅ Gate dependencies are documented and blocking
-- ✅ Parallelization is possible and marked
-- ✅ Approval workflows are defined before execution
-- ✅ Preservation rules are enforced per task
-- ✅ Validation and verification are integrated
-- ✅ Rollback and contingency are planned
+**Validation Results: Pending**
+- [ ] Pending validation: Tasks are complete, traceable, and scoped
+- [ ] Pending validation: Phases are ordered with explicit dependencies
+- [ ] Pending validation: Gate dependencies are documented and blocking
+- [ ] Pending validation: Parallelization is possible and marked
+- [ ] Pending validation: Approval workflows are defined before execution
+- [ ] Pending validation: Preservation rules are enforced per task
+- [ ] Pending validation: Validation and verification are integrated
+- [ ] Pending validation: Rollback and contingency are planned
 
-**Blockers Identified:** (List any findings that prevent Phase 2 start)
-- [ ] None — Implementation plan is ready
+**Blockers Identified:**
+- [ ] Validation remains pending: all CHK items above are unchecked; Phase 2 readiness has not been established.
+- [ ] Unresolved protected-path scope conflict: `.github/PROTECTED_FILES.txt` and the local approval checker include all of `.github/`, while the workflow contract lists narrower paths and omits `.github/specs/`. The feature approval contract also treats S002–S009 as protected, beyond the canonical list's explicit S-path coverage. Reconcile these scopes with the owner before claiming consistency or an exemption; retain existing approval requirements. See [research § 2](../research.md#2-protected-files-governance).
+- [ ] Owner decisions D1–D6 and D8 remain pending and block Phase 2.
 
 **Recommended Improvements:** (List items for future enhancement; do not block Phase 2)
 - [ ] None recorded
@@ -159,10 +161,10 @@
 ---
 
 **Checklist Status:**
-- **Readiness:** ___ of 65 items verified
-- **Blocking Issues:** ___ (0 acceptable for Phase 2 start)
+- **Readiness:** 0 of 65 items verified — pending
+- **Blocking Issues:** Unresolved — see blockers above; further assessment pending
 - **Non-Blocking Recommendations:** ___ (logged for future reference)
-- **Approved for Phase 2:** ☐ Yes  ☐ No  ☐ Conditional (see blockers)
+- **Approved for Phase 2:** No — pending validation, scope reconciliation, and owner decisions
 
 **Reviewer:** ________________________  **Date:** __________
 

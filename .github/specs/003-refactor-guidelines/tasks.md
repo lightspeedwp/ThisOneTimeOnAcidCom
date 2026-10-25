@@ -48,7 +48,7 @@ created: "2026-10-25"
 - [ ] **T001** Confirm all owner decisions (D0–D8) recorded with evidence in `checklists/requirements.md`
 - [ ] **T002** Verify source hashes: Compare 116 guidelines against baseline commit `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9`
 - [ ] **T003** Validate branch `docs/spec-003-guidelines-reconcile` is clean and up-to-date with `develop`
-- [ ] **T004** [P] Run Phase 1 validation script: `cd .github/specs/003-refactor-guidelines && bash ./quickstart.md`
+- [ ] **T004** [P] Prepare the repository-local `validate-phase1.sh` script as described in `quickstart.md`, then run it from the repository root: `cd .github/specs/003-refactor-guidelines && bash ./validate-phase1.sh`
 
 ---
 
@@ -188,15 +188,16 @@ created: "2026-10-25"
 
 ### Pointer Validation & Creation
 
-- [ ] **T033** [P] For each G-document moved/consolidated per D5:
-  - Create pointer file at old path per `contracts/pointer-redirect-contract.md` Type 3
-  - Pointer includes: archived status, reason, link to new location
-  - Example format in `guidelines/old-name.md` → points to `guidelines/new-location/name.md`
+- [ ] **T033** [P] For each G-document moved/consolidated per D4 pointer strategy/destinations and D5 preservation decisions:
+  - Create a pointer at the old path per `contracts/pointer-redirect-contract.md`, selecting Type 1 (Path Relocation) for moves or Type 2 (Consolidation) for consolidations
+  - Type 1 includes: original title, relocation notice, `New location` relative link, `Why`, `When`, updated-content link, and historical note
+  - Type 2 includes: original title, consolidation notice, `Updated guideline` relative link, `What changed` (related topic and date), `See Also` links, and read-only archive note; all consolidated old paths link to the same destination
+  - Record P-entity fields: `old_path`, `new_path`, `redirect_type` (`moved` for relocation or `merged` for consolidation), `status`, `created_timestamp`, and assigned `id`; deploy only after the destination exists and is verified
 
 - [ ] **T034** [P] Validate all pointers:
   - Check destination exists and is accessible
   - Verify markdown syntax and link format
-  - Confirm "Current guidance" link is exact and working
+  - Confirm the selected type's destination link (`New location` for Type 1 or `Updated guideline` for Type 2) is exact, relative, and working
   - Use validation script: `npm run validate:links -- guidelines/`
 
 ---

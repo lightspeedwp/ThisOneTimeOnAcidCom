@@ -214,7 +214,7 @@ npm run guidelines:check-links
 **Authority:** Constitution § II (Repository Governance)
 
 **Approval Requirements:**
-- G-document refactoring: No D-gate approval needed (read-only inspection + changes scoped to guidelines/ only). `locked-files-guard` approval is still required.
+- G-document refactoring: Read-only inspection requires no D-gate approval. Before making guideline changes, resolve the applicable pending D-gate decisions (including D4 destination mapping and any content or preservation decisions the operation depends on). `locked-files-guard` approval is still required for changes.
 - S-document refactoring: `locked-files-guard` approval required (AGENTS.md § 331–343)
 - N-document creation: D4 approval required (owner decision gate)
 - P-document creation: D5 approval required (preservation strategy)
