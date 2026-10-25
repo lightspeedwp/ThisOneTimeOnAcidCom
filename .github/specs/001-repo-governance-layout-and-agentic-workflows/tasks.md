@@ -882,7 +882,7 @@ available to all team members
 
 **Purpose**: Resolve remaining incomplete tasks from Phases 5–8 and document final handoff
 
-**Status**: Convergence pending PR template routing verification (T060), manual GitHub Settings (T061–T062), protected-file approval revalidation (T064), and final handoff (T065)
+**Status**: Convergence pending PR template routing verification (T060), manual GitHub Settings (T061–T062), and final handoff (T065)
 
 ### Implementation for Phase 9 Convergence
 
