@@ -430,8 +430,8 @@ Creates fluid, liquid motion.
 
 **Text Contrast:**
 
-- Never put thin white text directly over bright yellow or green gradients
-- Use dark overlay or keep text bold and black for readability
+- Avoid placing thin white text directly over bright yellow or green gradients — it reduces readability
+- Use a dark overlay or keep text bold and black for better contrast
 
 **Glow Animation:**
 
