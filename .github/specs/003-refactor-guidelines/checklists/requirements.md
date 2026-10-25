@@ -143,7 +143,8 @@
 ---
 
 ### D7: Branch & PR Strategy (RESOLVED)
-- [x] Branch name validated: `docs/spec-003-guidelines-reconcile`
+- [x] Branch name validated: `docs/spec-003-phase2-implementation` (Phase 2 active branch)
+- [x] Historical branch: `docs/spec-003-guidelines-reconcile` (Phase 1 planning, superseded)
 - [x] Reuse scope confirmed: fresh branch from develop
 - [x] Manual template/label handling: documented
 - [x] Side effects of current routing: understood
@@ -301,4 +302,4 @@
 
 ---
 
-*Updated 2026-10-25 | Branch: docs/spec-003-guidelines-reconcile*
+*Updated 2026-10-25 | Active Branch: docs/spec-003-phase2-implementation | Historical Branch: docs/spec-003-guidelines-reconcile*

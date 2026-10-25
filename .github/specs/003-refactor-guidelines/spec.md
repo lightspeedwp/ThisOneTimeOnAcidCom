@@ -58,7 +58,7 @@ change requires a recorded authorised decision under the
 ### Existing Guidelines (116 files)
 
 All at `guidelines/` and subdirectories. Current tracked and on-disk inventories
-both contain 116 files; comparison with the observation baseline remains pending.
+both contain 116 files; baseline hashes validated with zero changes detected (T021).
 
 **Subdirectories:**
 - `blocks/` (4 files)
@@ -102,7 +102,7 @@ both contain 116 files; comparison with the observation baseline remains pending
 
 ## Success Criteria (Target State)
 
-These outcomes remain unverified while owner gates and implementation are pending.
+All decision gates (D0–D8) are resolved; implementation is underway per Phase 2 tasks.
 
 1. [ ] All 116 existing guidelines source-read and disposition verified
 2. [ ] Original file hashes validated; current state vs observation documented
@@ -115,19 +115,17 @@ These outcomes remain unverified while owner gates and implementation are pendin
 9. [ ] No unapproved file moves/deletes; all changes reviewable
 10. [ ] Final handoff report with coverage manifest, verification register, open decisions
 
-## Open Questions
+## Resolved Decisions
 
-1. What are the canonical book brief identity markers and approved voices (D1)?
-2. What are the manuscript visibility/indexing/cache boundaries (D2)?
-3. Who owns design authority and what's the current CSS/palette/font strategy (D3)?
-4. For the 33 N-docs: are these pointer-only replacements or full new guides (D4)?
-5. Where should historical copies of deprecated guides be preserved (D5)?
-6. What backend/provider owns signup/waitlist functionality (D6)?
-7. Is WordPress portfolio content retained or deprecated (D8)?
+All gates D0–D8 are resolved. Decision evidence and implementation guidance recorded in [requirements checklist](./checklists/requirements.md):
+
+- **D0–D8:** Fully resolved with rationale and implementation guidance (2026-10-25)
+- **D7 Branch:** `docs/spec-003-phase2-implementation` (Phase 2 implementation branch)
+- **Historical branch:** `docs/spec-003-guidelines-reconcile` (Phase 1 planning branch, superseded)
 
 ## Next Steps
 
-1. **Owner Decision Session:** Use [the plan](./plan.md) and [requirements checklist](./checklists/requirements.md) to resolve D1–D6 and D8 with focused evidence; retain D0 and D7 resolutions
+1. **Implementation Plan:** Execute Phase 2 tasks per [the existing plan](./plan.md) and [task list](./tasks.md)
 2. **Implementation Plan:** Update [the existing plan](./plan.md) with exact source→destination mapping
 3. **Task Breakdown:** Generate `tasks.md` with verifiable steps
 4. **Quality Checklist:** Complete [the existing requirements checklist](./checklists/requirements.md)
