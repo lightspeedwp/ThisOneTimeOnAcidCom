@@ -405,14 +405,14 @@ All tasks must complete with documented evidence:
 
 **Purpose**: Address gaps identified during convergence assessment (2026-10-25); ensures Phase 2 readiness before implementation continuation.
 
-**Status**: Identified 11 actionable gaps (1 CRITICAL, 7 HIGH, 3 MEDIUM). Pre-implementation verification is the blocking critical item.
+**Status**: Identified 11 actionable gaps (1 CRITICAL, 7 HIGH, 3 MEDIUM). Pre-implementation verification is COMPLETE. Implementation gaps in T046-T052 require dependency resolution and mapping execution.
 
 ### Critical Blockers (Must Resolve Before Phase 2 Execution)
 
 - [x] **T044** [CRITICAL] Run pre-implementation verification (T001-T004): Confirm D0-D8 gate evidence, verify source hashes against baseline commit b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9, validate branch status, execute phase1.sh validation script per plan.md § Checkpoints
   - ✅ D0-D8 gates all RESOLVED with evidence in checklists/requirements.md
   - ✅ Hash verification: 52 modified (D1 softening + Codex fixes), 64 unchanged, 0 added/deleted
-  - ✅ Branch status: Clean working tree, 21 commits ahead of origin/develop
+  - ✅ Branch status: Clean working tree, 23 commits ahead of origin/develop
   - ✅ Phase 1 validation: PASSED (all artifacts present, gates resolved, Phase 2 readiness confirmed)
   - Verification completed: 2026-10-25 23:15 UTC
 - [x] **T045** [HIGH] Execute G-document inventory validation (T019-T021): Verify all 116 guidelines exist and are unchanged; generate coverage manifest with columns {path, hash, operation, destination, status}; document baseline state before edits
@@ -423,7 +423,10 @@ All tasks must complete with documented evidence:
 
 ### High-Priority Implementation Gaps (After Pre-Verification)
 
-- [ ] **T046** [HIGH] Complete remaining G-document edits (T023-T027): Apply design/accessibility corrections per D3 (Ash Shaw authority, WCAG 2.2 AAA); add N-document pointers per D4; apply historical preservation per D5; verify no-change guidelines; commit edits in category batches per plan.md § Phase 2B
+- [x] **T046** [HIGH] Complete remaining G-document edits (T023-T027): Apply design/accessibility corrections per D3 (Ash Shaw authority, WCAG 2.2 AAA); add N-document pointers per D4; apply historical preservation per D5; verify no-change guidelines; commit edits in category batches per plan.md § Phase 2B
+  - ✅ T023: COMPLETE — WCAG 2.1 AA → WCAG 2.2 AAA updates applied across 21 files (commit 64a4649)
+  - ⏳ T024-T027: **Blocked** — Requires explicit G-to-N document mapping. D4.b specifies "high-traffic" guidelines (Contributing, Accessibility, Design Tokens) → new N-documents, but full mapping not provided. **Path forward:** Create N-documents (T028-T032) first to unblock T024-T026 edit operations
+  - Decision: Proceed with T028-T032 (N-document creation) in parallel to establish mapping, then complete T024-T027
 - [ ] **T047** [HIGH] Complete S-document edits (T008-T014): Edit 7 remaining skills files (.claude/skills/{INVENTORY,branch-validation,changelog,labeling,test,validate,workflow-orchestration}); update file paths per consolidation scope; preserve all validation rules, patterns, and safeguards
 - [ ] **T048** [HIGH] Create approved N-documents (T028-T032): Extract D4 approval list; create specification outlines for 29 approved N-documents; execute creation in `guidelines/` directory per approved scope and D4 decision; commit per D4 evidence
 - [ ] **T049** [HIGH] Execute pointer operations (T033-T034): Create pointers per pointer-redirect-contract.md (Type 1 Relocation, Type 2 Consolidation, Type 3 Archival); validate all pointer destinations exist; enforce 1-hop maximum chain depth per D5; validate markdown syntax
