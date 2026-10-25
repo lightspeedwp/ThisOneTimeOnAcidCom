@@ -17,19 +17,22 @@ Phase 9 Convergence requires completion of 6 final tasks (T060–T065) to close 
 
 ## Task Status & Owner Action Items
 
-### T060: PR Template Routing Verification ✅ COMPLETE
+### T060: PR Template Routing Verification ⏳ INCOMPLETE
 
-**Status**: VERIFIED AND PASSING
+**Status**: PARTIAL VERIFICATION (recognized prefixes verified; unmatched fallback pending)
 
-All 4 test PRs successfully demonstrate PR template routing:
+**Recognized Prefix Test Coverage** ✅:
 - PR #483 (feat/): Routes to `pr_feature.md`, label `type:feature` ✅
 - PR #484 (fix/): Routes to `pr_bug.md`, label `type:bug` ✅
 - PR #485 (docs/): Routes to `pr_documentation.md`, label `type:documentation` ✅
 - PR #486 (test/): Routes to `pr_test.md`, label `type:test` ✅
 
+**Missing Test Coverage** 🔴:
+- Unmatched-prefix fallback: Need test PR with branch name that doesn't match recognized patterns (e.g., `branch/something-unusual`) to verify it falls back to `pr_default.md` with `type:maintenance` label
+
 **Verification Report**: `/tmp/t060-verification-complete.md`
 
-**Result**: Requirement R3.2 (PR Template Routing) **MET** ✅
+**Result**: Requirement R5.2 (PR Template Routing) **PARTIAL** — Recognized prefixes routing confirmed; unmatched fallback behavior requires additional test evidence
 
 ---
 
