@@ -64,6 +64,7 @@
 - [x] WordPress & Portfolio (N030–N033): **None approved** — All 4 deferred to Phase 3; WordPress not used (D8); portfolio guidance pending tech stack confirmation
 - [x] Directory structure: N-documents live in `guidelines/` directory (same as G-documents)
 - [x] Subfolder organization: **DECIDED** — Flat structure (`guidelines/`) to keep status quo; no reorganization overhead
+- [x] Inventory accounting: Tracked entities = 116 G + 9 S + 33 N (158 total); scope includes all N001–N033 with N030–N033 deferred; final active-document count determined by Phase 2A consolidation manifest after moves, archives, and pointer operations recorded
 - [x] G→N consolidation: **DECIDED** — Hybrid approach: pointers for high-traffic guidelines (Contributing, Accessibility, Design Tokens), preservation in `guidelines/_archive/` for archived guidelines per D5; document per-guideline mapping
 - [x] Supporting skills: Six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration) remain unchanged
 
@@ -168,7 +169,8 @@
 ## Phase 2: Source Validation PENDING
 
 ### Source State Verification
-- [ ] Baseline observation hash confirmed: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f`
+- [ ] Baseline commit verified: `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` (per Phase 1 instruction; required by T002)
+- [ ] Guidelines inventory digest recorded: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f` (informational; not checked by any task)
 - [ ] All 116 guidelines accessible and unchanged
 - [ ] 9 supporting documents readable
 - [ ] Current `develop` branch clean of unrelated changes

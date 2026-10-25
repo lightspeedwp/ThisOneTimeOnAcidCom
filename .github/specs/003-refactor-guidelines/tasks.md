@@ -2,7 +2,7 @@
 title: "Tasks: Guidelines Refactor (TOA-358)"
 spec_id: "003"
 feature: "guidelines-refactor"
-status: "Phase 2 Implementation (Blocked on Implementation Guidance)"
+status: "Phase 2 Implementation (Unblocked)"
 created: "2026-10-25"
 ---
 
@@ -10,7 +10,7 @@ created: "2026-10-25"
 
 **Specification**: [spec.md](./spec.md) | **Plan**: [plan.md](./plan.md) | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
 
-**Status**: Phase 2 Implementation — **BLOCKED** until implementation guidance on 5 items (D4.a, D4.b, D5.a, D5.b, D6) is provided. Owner decisions D0–D8 are already RESOLVED and recorded in requirements.md
+**Status**: Phase 2 Implementation — **UNBLOCKED** (2026-10-25). All owner decisions D0–D8 RESOLVED; implementation guidance provided (requirements.md § D4.a, D4.b, D5.a, D5.b, D5.c, D5.d, D6). Pre-implementation verification (T001–T004) required before task execution.
 
 **Total Tasks**: 43 (across Phases 2 & 3)
 
@@ -39,12 +39,9 @@ created: "2026-10-25"
 
 ---
 
-## Phase 2: Implementation 🔄 BLOCKED
+## Phase 2: Implementation ✅ UNBLOCKED
 
-**Blocking Condition**: Owner decisions on D1–D6, D8 must be recorded in `checklists/requirements.md` under their respective gate headings (### D1: through ### D8:) before Phase 2 starts. Verify ALL of the following:
-1. All gates D0–D8 have gate headings with RESOLVED status: `grep "^### D[0-8]:" checklists/requirements.md`
-2. All blocking guidance items for D4, D5, D6 have recorded answers (see "Blocking Issues" and "Blocking Guidance" sections in each gate)
-3. Phase 2 readiness status explicitly shows BLOCKED or READY based on whether all guidance is resolved
+**Status**: Owner decisions D0–D8 are RESOLVED and recorded in `checklists/requirements.md`. All implementation guidance is confirmed. Pre-implementation verification tasks (T001–T004) must complete successfully before phase execution begins.
 
 **Pre-Implementation Verification** (Complete before any tasks):
 
@@ -78,13 +75,13 @@ created: "2026-10-25"
 - [ ] **T012** [P] Edit `.claude/skills/test/SKILL.md` — Preserve test patterns; update guideline references per D4
 - [ ] **T013** [P] Edit `.claude/skills/validate/SKILL.md` — Preserve validation rules; update file paths per consolidation
 - [ ] **T014** [P] Edit `.claude/skills/workflow-orchestration/SKILL.md` — Preserve workflow patterns; update dependency paths
-- [ ] **T015** [P] Edit `AGENTS.md` — Update agent role descriptions; preserve all governance sections per constitution
-- [ ] **T016** [P] Edit `CONTRIBUTING.md` — Update contributor guidelines; preserve all rules and preserve branch patterns
+- [x] **T015** [P] Edit `AGENTS.md` — Update agent role descriptions; preserve all governance sections per constitution
+- [x] **T016** [P] Edit `CONTRIBUTING.md` — Update contributor guidelines; preserve all rules and preserve branch patterns
 
 ### S-Documents: Approval & Commit
 
-- [ ] **T017** Obtain `locked-files-guard` approval for all S-document edits per D0
-- [ ] **T018** Stage and commit S-documents: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"`
+- [x] **T017** Obtain `locked-files-guard` approval for all S-document edits per D0
+- [x] **T018** Stage and commit S-documents: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"`
 
 ---
 

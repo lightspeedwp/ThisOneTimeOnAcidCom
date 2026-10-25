@@ -52,7 +52,7 @@ $ find guidelines -type f -name "*.md" | wc -l
 
 ### 4. PR Template Routing Configuration
 
-**Status:** 🔄 HISTORICAL — D7 decision superseded the `aiops/refactor-guidelines` branch with `docs/spec-003-guidelines-reconcile`. This finding documents the earlier branch's routing configuration.
+**Status:** ✅ SUPERSEDED BY D7 — D7 decision changed branch prefix from `aiops/refactor-guidelines` to `docs/spec-003-guidelines-reconcile`, which routes correctly via existing PR template mapping. Original `aiops` routing problem no longer applies; documentation retained for historical reference.
 
 **Finding:** PR template router lacks `aiops/` prefix entry; specification branch `aiops/refactor-guidelines` would route incorrectly.
 
@@ -82,7 +82,7 @@ $ find guidelines -type f -name "*.md" | wc -l
 
 **Evidence:**
 - Instruction line 16: "Research baseline: `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9`"
-- Checklist line 108: "Baseline observation hash confirmed: `8af4e7c37c19e2ac56df5a93952014a97bbffa15577d669cbbd2e2cae58b874f`" (no reference to commit)
+- Checklist line 172-173: Baseline commit verification (required by T002) and guidelines inventory digest recorded (informational; not checked by any task)
 
 **Resolution:**
 - Proposed change to requirements.md line 108: Connect checklist to instruction baseline commit
