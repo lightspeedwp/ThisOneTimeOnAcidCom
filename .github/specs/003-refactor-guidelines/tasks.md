@@ -468,5 +468,34 @@ All tasks must complete with documented evidence:
 
 ---
 
+---
+
+## Phase 5: Convergence (Gap Remediation) 📊
+
+**Purpose**: Address implementation and workflow gaps identified during convergence assessment (2026-10-25); ensure Phase 2 execution integrity and data consistency.
+
+**Status**: 10 actionable findings identified (1 CRITICAL, 6 HIGH, 3 MEDIUM). Remediation tasks assigned for dependency resolution, data validation, and workflow compliance.
+
+### Critical Execution Blockers
+
+- [ ] **T055** [CRITICAL] Remediate T022 execution order violation: T022 (copy alignment edits) was completed before required prerequisite tasks (T001–T004, T005–T007, T019–T021, T008–T014). Document violation in convergence sign-off; establish evidence trail of when T022 executed out of sequence; update task execution order documentation to prevent future violations; add execution-order validation checkpoint to future convergence runs (per plan.md § Task Dependencies & Execution Order)
+
+### High-Priority Implementation Gaps
+
+- [ ] **T056** [HIGH] Resolve T024–T027 blocking dependency: T024 (N-document pointer edits) requires explicit G-to-N mapping. D4.b specifies mapping targets ("Contributing" → N001, "Accessibility" → N002, "Design Tokens" → N003, etc.) but full specification not available in mapping manifest. Extract and document complete mapping from D4.b evidence in checklists/requirements.md; generate mapping table in CONSOLIDATION-MANIFEST.md with columns {G-ID, N-target, pointer-type}; unblock T024–T027 execution
+- [ ] **T057** [HIGH] Complete N-document creation pathway (T028–T032): 29 approved N-documents (N001–N029) ready for creation per D4 approval list. Create specification outlines for all 29 approved N-documents; document structure (title, purpose, required sections) per spec.md; execute N-document creation in `guidelines/` per approved scope; commit with D4 evidence link (feat(003-N001-N029): Add approved reference guides per D4)
+- [ ] **T058** [HIGH] Validate N007 mapping status: CONSOLIDATION-MANIFEST.md marks N007 as "TBD". Determine final N007 scope (Related Patterns reference guide vs Skill Dependencies reference); create specification outline if approved; document decision evidence; mark status as "Approved" or "Deferred" per D4 authority
+- [ ] **T059** [HIGH] Validate N016 definition status: N016 listed in approved set but no definition provided in mapping manifest. Verify N016 scope (likely Navigation & Layout guidelines); create specification outline if included in Phase 2; document authority; mark status in CONSOLIDATION-MANIFEST.md
+- [ ] **T060** [HIGH] Validate N018 mapping status: N018 marked as "TBD" in mapping manifest. Determine final N018 scope (Design System Integration or Testing Infrastructure reference); create specification or mark "Deferred" with evidence; update CONSOLIDATION-MANIFEST.md
+- [ ] **T061** [HIGH] Resolve Phase 4 severity totals mismatch: CodeRabbit review identified discrepancy between reported phase totals and actual task counts. Audit Phase 4 task severity assignments (current: 1 CRITICAL T044, 6 HIGH T045–T050, 3 MEDIUM T051–T053, 1 MEDIUM T054 = totals mismatch); recount and correct severity labels in tasks.md to match declared summary; document audit results in convergence sign-off
+
+### Medium-Priority Workflow Gaps
+
+- [ ] **T062** [MEDIUM] Address T023 file count inconsistency: T023 summary reports "25+ guidelines" updated for WCAG 2.2 AAA but completion note shows "21 files". Audit WCAG updates across guidelines/; count actual files modified; reconcile discrepancy with commit 64a4649 evidence; update T023 completion notes with accurate file count and list
+- [ ] **T063** [MEDIUM] Validate data integrity of T046 vs T024–T027: PR review identified T046 marked complete while T024–T027 remain blocked. T046 was task to "complete remaining G-document edits (T023–T027)"; completion claim conflicts with documented blocking state. Review T046 completion evidence; clarify whether T023 completion satisfies T046 or if full T024–T027 completion required; update task descriptions to resolve ambiguity
+- [ ] **T064** [MEDIUM] Create convergence sign-off report: Consolidate all Phase 5 remediation into convergence sign-off section in checklists/requirements.md; record T055–T064 completion status; verify all 10 findings addressed; document execution date and evidence links; confirm Phase 2 readiness; obtain owner approval on sign-off before Phase 2 continuation
+
+---
+
 *Generated: 2026-10-25*  
 *Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-guidelines-reconcile` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
