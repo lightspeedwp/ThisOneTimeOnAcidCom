@@ -75,13 +75,13 @@ created: "2026-10-25"
 - [ ] **T012** [P] Edit `.claude/skills/test/SKILL.md` — Preserve test patterns; update guideline references per D4
 - [ ] **T013** [P] Edit `.claude/skills/validate/SKILL.md` — Preserve validation rules; update file paths per consolidation
 - [ ] **T014** [P] Edit `.claude/skills/workflow-orchestration/SKILL.md` — Preserve workflow patterns; update dependency paths
-- [ ] **T015** [P] Edit `AGENTS.md` — Update agent role descriptions; preserve all governance sections per constitution
-- [ ] **T016** [P] Edit `CONTRIBUTING.md` — Update contributor guidelines; preserve all rules and preserve branch patterns
+- [x] **T015** [P] Edit `AGENTS.md` — Update agent role descriptions; preserve all governance sections per constitution
+- [x] **T016** [P] Edit `CONTRIBUTING.md` — Update contributor guidelines; preserve all rules and preserve branch patterns
 
 ### S-Documents: Approval & Commit
 
-- [ ] **T017** Obtain `locked-files-guard` approval for all S-document edits per D0
-- [ ] **T018** Stage and commit S-documents: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"`
+- [x] **T017** Obtain `locked-files-guard` approval for all S-document edits per D0
+- [x] **T018** Stage and commit S-documents: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"`
 
 ---
 
