@@ -118,11 +118,13 @@ created: "2026-10-25"
 
 #### Category 2: Design & Accessibility (depends on D3)
 
-- [ ] **T023** [P] Edit guidelines with design/accessibility corrections: Files per D3 decision list
-  - Apply approved design authority corrections (palette, spacing, typography)
-  - Update accessibility target per D3
-  - Preserve existing component/token definitions
-  - Example files: `guidelines/design-tokens/`, `guidelines/components/`
+- [x] **T023** [P] Edit guidelines with design/accessibility corrections: Files per D3 decision list
+  - ✅ Apply approved design authority corrections (palette, spacing, typography)
+  - ✅ Update accessibility target per D3: Updated WCAG 2.1 AA → WCAG 2.2 AAA across 25+ guidelines
+  - ✅ Preserve existing component/token definitions
+  - ✅ Completed files: Guidelines.md, pwa-implementation.md, dark-mode-implementation.md, prefers-reduced-motion.md, interactions-accessibility.md, README.md, css-issues.md, component guidelines (13 files), and design-token files
+  - ✅ Commit: 64a4649 (T023: D3 Design Authority - Update WCAG 2.1 AA to WCAG 2.2 AAA across all guidelines)
+  - Completed: 2026-10-25
 
 #### Category 3: Pointer & Relationship Updates (depends on D4)
 
