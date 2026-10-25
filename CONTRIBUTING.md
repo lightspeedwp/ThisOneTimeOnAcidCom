@@ -253,6 +253,8 @@ All conventions are documented in
 **[guidelines/Guidelines.md](guidelines/Guidelines.md)**. Follow the reading
 order in [guidelines/README.md](guidelines/README.md). The key rules are:
 
+> **Consolidation in progress:** [Specification 003 (Guidelines Refactor — TOA-358)](/.github/specs/003-refactor-guidelines/spec.md) is consolidating and reorganizing guidelines documentation. Guidelines remain in `guidelines/` and existing paths continue to work during consolidation (non-destructive). See the spec for implementation details.
+
 ### Styling: semantic BEM
 
 The guidelines require **semantic BEM CSS** and forbid Tailwind utility classes,

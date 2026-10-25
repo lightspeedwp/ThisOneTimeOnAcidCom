@@ -105,6 +105,7 @@ Planned additions to increase coverage:
 
 - [Build verification guide](../../../docs/TESTING.md) (`docs/TESTING.md` from the repository root)
 - [Validation Skill](../validate/SKILL.md)
+- `.github/specs/003-refactor-guidelines/spec.md` – Guidelines Refactor specification (consolidation impacts test coverage)
 
 ---
 

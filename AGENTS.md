@@ -66,7 +66,7 @@ files define their own reading order, so follow that rather than inventing one:
 artefacts under `.github/specs/<NNN-short-name>/`, never a root `specs/` folder.
 Read `.specify/init-options.json` → `specifyFeatureDirectory` as the repository's
 spec root (`.github/specs`). Scan that directory for existing feature numbers;
-`001` and `002` already exist, so the next sequential feature is `003`. Reuse
+`001`, `002`, and `003` (Guidelines Refactor — TOA-358) already exist. Reuse
 the appropriate existing directory when continuing a feature. Persist the full
 feature directory in `.specify/feature.json` so downstream commands resolve the
 same location. Root `specs/` defaults in upstream documentation do not override

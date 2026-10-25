@@ -669,6 +669,7 @@ related_tasks: "/tasks/{topic}-tasks.md"
 - `guidelines/Guidelines.md` § "Default AI Workflow" — High-level workflow
 - `guidelines/Guidelines.md` § "Mandatory Folder Conventions" — Folder rules
 - `guidelines/Guidelines.md` § "Task list management conventions" — Archiving process
+- `.github/specs/003-refactor-guidelines/spec.md` – Guidelines Refactor specification (consolidation updates to guidelines/)
 
 **Related skills:**
 - `/bem-css-compliance` — For CSS audits

@@ -71,15 +71,15 @@ created: "2026-10-25"
 
 **Edit each file per plan.md § Phase 2 Operation Sequencing; preserve all unique content:**
 
-- [ ] **T008** [P] Edit `.claude/skills/INVENTORY.md` — Update inventory per consolidation results; preserve existing links
-- [ ] **T009** [P] Edit `.claude/skills/branch-validation/SKILL.md` — Preserve all validation rules; update paths if consolidated
-- [ ] **T010** [P] Edit `.claude/skills/changelog/SKILL.md` — Preserve format spec; update examples if needed
-- [ ] **T011** [P] Edit `.claude/skills/labeling/SKILL.md` — Preserve label taxonomy; update references if consolidated
-- [ ] **T012** [P] Edit `.claude/skills/test/SKILL.md` — Preserve test patterns; update guideline references per D4
-- [ ] **T013** [P] Edit `.claude/skills/validate/SKILL.md` — Preserve validation rules; update file paths per consolidation
-- [ ] **T014** [P] Edit `.claude/skills/workflow-orchestration/SKILL.md` — Preserve workflow patterns; update dependency paths
-- [ ] **T015** [P] Edit `AGENTS.md` — Update agent role descriptions; preserve all governance sections per constitution
-- [ ] **T016** [P] Edit `CONTRIBUTING.md` — Update contributor guidelines; preserve all rules and preserve branch patterns
+- [x] **T008** [P] Edit `.claude/skills/INVENTORY.md` — Update inventory per consolidation results; preserve existing links
+- [x] **T009** [P] Edit `.claude/skills/branch-validation/SKILL.md` — Preserve all validation rules; update paths if consolidated
+- [x] **T010** [P] Edit `.claude/skills/changelog/SKILL.md` — Preserve format spec; update examples if needed
+- [x] **T011** [P] Edit `.claude/skills/labeling/SKILL.md` — Preserve label taxonomy; update references if consolidated
+- [x] **T012** [P] Edit `.claude/skills/test/SKILL.md` — Preserve test patterns; update guideline references per D4
+- [x] **T013** [P] Edit `.claude/skills/validate/SKILL.md` — Preserve validation rules; update file paths per consolidation
+- [x] **T014** [P] Edit `.claude/skills/workflow-orchestration/SKILL.md` — Preserve workflow patterns; update dependency paths
+- [x] **T015** [P] Edit `AGENTS.md` — Update agent role descriptions; preserve all governance sections per constitution
+- [x] **T016** [P] Edit `CONTRIBUTING.md` — Update contributor guidelines; preserve all rules and preserve branch patterns
 
 ### S-Documents: Approval & Commit
 
