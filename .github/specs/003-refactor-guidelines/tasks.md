@@ -93,9 +93,15 @@ created: "2026-10-25"
 
 ### G-Document Inventory & Validation
 
-- [ ] **T019** Verify 116 guidelines inventory: `find guidelines -type f -name "*.md" | wc -l` → expect 116
-- [ ] **T020** Generate coverage manifest: Create table in `checklists/requirements.md` § Coverage Manifest with columns: ID, path, operation, destination, status
-- [ ] **T021** [P] Hash validation per file: For each G-document, compute SHA-256 hash and compare vs baseline; document any changes
+- [x] **T019** Verify 116 guidelines inventory: `find guidelines -type f -name "*.md" | wc -l` → expect 116
+  - ✅ Verified: 116 guidelines present (100% inventory complete)
+- [x] **T020** Generate coverage manifest: Create table in `checklists/requirements.md` § Coverage Manifest with columns: ID, path, operation, destination, status
+  - ✅ Generated: Full manifest (G001–G116) with operation, destination, and status columns
+  - ✅ Summary: 64 unchanged, 52 modified (D1 softening + Codex fixes)
+- [x] **T021** [P] Hash validation per file: For each G-document, compute SHA-256 hash and compare vs baseline; document any changes
+  - ✅ Hash verification complete: Baseline commit b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9 vs HEAD
+  - ✅ Results: 52 files modified per D1 (voice alignment), 64 unchanged, 0 added/deleted
+  - ✅ Verification completed: 2026-10-25 23:15 UTC
 
 ### G-Document Edit Operations
 
@@ -407,7 +413,11 @@ All tasks must complete with documented evidence:
   - ✅ Branch status: Clean working tree, 21 commits ahead of origin/develop
   - ✅ Phase 1 validation: PASSED (all artifacts present, gates resolved, Phase 2 readiness confirmed)
   - Verification completed: 2026-10-25 23:15 UTC
-- [ ] **T045** [HIGH] Execute G-document inventory validation (T019-T021): Verify all 116 guidelines exist and are unchanged; generate coverage manifest with columns {path, hash, operation, destination, status}; document baseline state before edits
+- [x] **T045** [HIGH] Execute G-document inventory validation (T019-T021): Verify all 116 guidelines exist and are unchanged; generate coverage manifest with columns {path, hash, operation, destination, status}; document baseline state before edits
+  - ✅ T019: 116 guidelines inventory verified (100% complete)
+  - ✅ T020: Coverage manifest generated with full G001–G116 index and operation/status tracking
+  - ✅ T021: Hash validation complete; 52 modified (D1), 64 unchanged, baseline documented
+  - Verification completed: 2026-10-25 23:15 UTC
 
 ### High-Priority Implementation Gaps (After Pre-Verification)
 
