@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **npm dependency lock synchronization** — Regenerated `package-lock.json` to resolve out-of-sync dependencies with `package.json`, fixing `npm ci` failures that prevented Jest baseline testing in CI workflows. Resolved version mismatches in @mui/icons-material, react-dom, and scheduler packages.
 - **SPA routing** — Direct visits and refreshes on nested routes such as `/journal` and `/about-ash` returned 404 because `public/_redirects` is a directory. A `/* → /index.html 200` fallback in the root `netlify.toml` now serves the app.
 
 ### Security
