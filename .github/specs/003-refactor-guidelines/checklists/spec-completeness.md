@@ -13,7 +13,7 @@
 - [ ] **CHK001** All scope items (116 G-docs, 9 S-docs, 33 N-docs) are quantified with evidence (e.g., "verified count: 116")
 - [ ] **CHK002** "In Scope" and "Out of Scope" sections are mutually exclusive; no item appears in both
 - [ ] **CHK003** Each preservation rule in spec.md § Scope & Constraints has at least one concrete example or guideline cross-reference
-- [ ] **CHK004** All 8 decision gates (D0–D8) have clear impact statements describing what gets blocked/enabled by resolution
+- [ ] **CHK004** All 9 decision gates (D0–D8) have clear impact statements describing what gets blocked/enabled by resolution
 - [ ] **CHK005** Decision gates do not reference each other in circular dependency chains (e.g., D1 doesn't require D4, which requires D1)
 
 ---
@@ -100,18 +100,20 @@
 
 ## Completeness Summary
 
-**Validated Dimensions:**
-- ✅ Requirements are quantified and verifiable
-- ✅ Acceptance criteria are specific and independent
-- ✅ Gates are documented with clear resolution criteria
-- ✅ Constraints are operational and concrete
-- ✅ Open questions map to pending decisions
-- ✅ Cross-references and traceability are checkable
-- ✅ Scope boundaries are explicit
-- ✅ Governance authority is anchored
+**Validation Results: Pending**
+- [ ] Pending validation: Requirements are quantified and verifiable
+- [ ] Pending validation: Acceptance criteria are specific and independent
+- [ ] Pending validation: Gates are documented with clear resolution criteria
+- [ ] Pending validation: Constraints are operational and concrete
+- [ ] Pending validation: Open questions map to pending decisions
+- [ ] Pending validation: Cross-references and traceability are checkable
+- [ ] Pending validation: Scope boundaries are explicit
+- [ ] Pending validation: Governance authority is anchored
 
-**Blockers Identified:** (List any findings that prevent Phase 2 start)
-- [ ] None — Specification is complete
+**Blockers Identified:**
+- [ ] Validation remains pending: all CHK items above are unchecked; Phase 2 readiness has not been established.
+- [ ] Unresolved protected-path scope conflict: `.github/PROTECTED_FILES.txt` and the local approval checker include all of `.github/`, while the workflow contract lists narrower paths and omits `.github/specs/`. The feature approval contract also treats S002–S009 as protected, beyond the canonical list's explicit S-path coverage. Reconcile these scopes with the owner before claiming consistency or an exemption; retain existing approval requirements. See [research § 2](../research.md#2-protected-files-governance).
+- [ ] Owner decisions D1–D6 and D8 remain pending and block Phase 2.
 
 **Recommended Improvements:** (List items for future enhancement; do not block Phase 2)
 - [ ] None recorded
@@ -119,10 +121,10 @@
 ---
 
 **Checklist Status:**
-- **Completeness:** ___ of 45 items verified
-- **Blocking Issues:** ___ (0 acceptable for Phase 2 start)
+- **Completeness:** 0 of 45 items verified — pending
+- **Blocking Issues:** Unresolved — see blockers above; further assessment pending
 - **Non-Blocking Recommendations:** ___ (logged for future reference)
-- **Approved for Phase 2:** ☐ Yes  ☐ No  ☐ Conditional (see blockers)
+- **Approved for Phase 2:** No — pending validation, scope reconciliation, and owner decisions
 
 **Reviewer:** ________________________  **Date:** __________
 

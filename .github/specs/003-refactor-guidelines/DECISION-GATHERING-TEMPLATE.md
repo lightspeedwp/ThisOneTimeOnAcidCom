@@ -1,12 +1,24 @@
+---
+spec_id: "003"
+feature: "guidelines-refactor"
+issue: "TOA-358"
+status: "draft"
+created: "2026-10-25"
+---
+
 # Decision-Gathering Template: Guidelines Refactor (TOA-358)
+
+## Overview
 
 **Purpose:** Structured template for owner to record decisions on gates D1–D6, D8, unblocking Phase 2 implementation.
 
-**Timeline:** Record decisions here, then copy into `.github/specs/003-refactor-guidelines/checklists/requirements.md` lines 30–43 with evidence links.
+## Requirements
+
+Record a Decision Statement, Rationale, and Evidence / Source for each pending gate (D1, D2, D3, D4, D5, D6, D8). Keep the resolved D0 and D7 records intact.
 
 ---
 
-## D1: Book/Site Identity & Voice (PENDING)
+### D1: Book/Site Identity & Voice (PENDING)
 
 **Context:** Determines which N-documents make identity claims and how existing guidelines should evolve their tone to reflect site/book identity.
 
@@ -43,7 +55,7 @@ Example:
 
 ---
 
-## D2: Manuscript Visibility & Publication Boundaries (PENDING)
+### D2: Manuscript Visibility & Publication Boundaries (PENDING)
 
 **Context:** Defines whether documentation should acknowledge/reference the book manuscript, preview content, or maintain separation between published site and work-in-progress materials.
 
@@ -80,7 +92,7 @@ Example:
 
 ---
 
-## D3: Design Authority & Accessibility Targets (PENDING)
+### D3: Design Authority & Accessibility Targets (PENDING)
 
 **Context:** Specifies design system authority (who approved palette, spacing, typography, accessibility levels) and drives correctness of all design examples in guidelines.
 
@@ -119,7 +131,7 @@ Example:
 
 ---
 
-## D4: Documentation Destinations & N-Document Approval Subset (PENDING) — CRITICAL
+### D4: Documentation Destinations & N-Document Approval Subset (PENDING) — CRITICAL
 
 **Context:** Specifies which of 33 proposed N-documents are approved for creation, their destinations, and how existing guidelines map to new consolidated documentation.
 
@@ -128,6 +140,8 @@ Example:
 - For each approved N-document: where should it live (`guidelines/` path)?
 - For G-documents that consolidate into N-documents: should old G-paths become pointers?
 - Which G-documents remain standalone (no consolidation)?
+- How should updated guidelines reference the six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration)? Confirm the reference approach for all six.
+- For each optional new skill proposal, explicitly APPROVE or REJECT it and record its name, purpose, proposed destination, rationale, and evidence link. New skill creation is out of scope in [Specification 003](spec.md#scope--constraints); approval requires a separately authorised scope change before implementation.
 
 **Decision Statement:**
 ```text
@@ -167,7 +181,7 @@ Example:
 
 ---
 
-## D5: Historical Preservation & Pointer Strategy (PENDING)
+### D5: Historical Preservation & Pointer Strategy (PENDING)
 
 **Context:** Defines how old guideline paths remain discoverable when documents move or consolidate (pointer types, redirect approach, archive handling).
 
@@ -205,7 +219,7 @@ Example:
 
 ---
 
-## D6: Backend Provider & Integration Scope (PENDING)
+### D6: Backend Provider & Integration Scope (PENDING)
 
 **Context:** Specifies backend technology stack, provider (e.g., serverless function platform, managed service), and which N-documents should document backend integration.
 
@@ -243,7 +257,7 @@ Example:
 
 ---
 
-## D8: WordPress/Portfolio Role & Guidance Scope (PENDING)
+### D8: WordPress/Portfolio Role & Guidance Scope (PENDING)
 
 **Context:** Clarifies whether WordPress is part of the site stack, whether portfolio-related guidance should be in main guidelines or separate, and which N-documents address WordPress/portfolio concerns.
 
@@ -289,7 +303,7 @@ Example:
 | **D1** | 🔄 PENDING    | Voice & identity decisions              | [Record above]                                                   |
 | **D2** | 🔄 PENDING    | Publication boundaries                  | [Record above]                                                   |
 | **D3** | 🔄 PENDING    | Design authority & accessibility        | [Record above]                                                   |
-| **D4** | 🔄 PENDING    | N-document approvals & G→N mapping      | [Record above] — **CRITICAL**                                    |
+| **D4** | 🔄 PENDING    | N-doc approvals, G→N mapping & skills   | [Record above] — **CRITICAL**                                    |
 | **D5** | 🔄 PENDING    | Pointer strategy & archive approach     | [Record above]                                                   |
 | **D6** | 🔄 PENDING    | Backend tech stack & integration docs   | [Record above]                                                   |
 | **D7** | ✅ RESOLVED   | No                                      | Branch: `docs/spec-003-guidelines-reconcile`                     |
@@ -297,17 +311,27 @@ Example:
 
 ---
 
-## How to Use This Template
+## Success Criteria
 
-### For the Owner
+- All seven pending gates have a complete Decision Statement, Rationale, and Evidence / Source with evidence links.
+- Each complete gate record is copied under its matching checklist heading, and the corresponding checklist items reflect the decision.
+- D4 records the six-existing-skill reference approach and an explicit approval or rejection for each optional new skill proposal.
+
+## Implementation Plan
+
+**Timeline:** Record decisions here, then copy each complete gate record (Decision Statement, Rationale, and Evidence / Source, including evidence links) under the matching D1, D2, D3, D4, D5, D6, and D8 headings in [Phase 1: Gate Resolution PENDING](checklists/requirements.md#phase-1-gate-resolution-pending). Update the corresponding checklist items.
+
+### How to Use This Template
+
+#### For the Owner
 
 1. **Review each gate section** above (D1, D2, D3, D4, D5, D6, D8)
 2. **Fill in the Decision Statement** — write concisely what was decided
 3. **Add Rationale** — briefly explain why this decision aligns with site goals
 4. **Provide Evidence** — link to where this decision is documented (GitHub issue, Linear issue, Figma file, design doc, etc.)
-5. **Commit to repository** — once all 7 gates are complete, copy decisions into `.github/specs/003-refactor-guidelines/checklists/requirements.md` lines 30–43
+5. **Commit to repository** — once all 7 gates are complete, copy each complete gate record (Decision Statement, Rationale, and Evidence / Source, including evidence links) under the matching D1, D2, D3, D4, D5, D6, and D8 headings in [Phase 1: Gate Resolution PENDING](checklists/requirements.md#phase-1-gate-resolution-pending), then update the corresponding checklist items.
 
-### For Claude (Implementation Agent)
+#### For Claude (Implementation Agent)
 
 Once decisions are recorded in `checklists/requirements.md`:
 
@@ -317,7 +341,7 @@ Once decisions are recorded in `checklists/requirements.md`:
 
 ---
 
-## Next Steps
+### Next Steps
 
 1. **Owner:** Review and fill out this template
 2. **Owner:** Share filled template with implementation team (GitHub issue comment, Linear discussion, or direct message)
@@ -327,7 +351,7 @@ Once decisions are recorded in `checklists/requirements.md`:
 
 ---
 
-## Questions?
+### Questions?
 
 Refer to:
 - **Specification:** `.github/specs/003-refactor-guidelines/spec.md`

@@ -19,6 +19,7 @@ This contract defines the structural and content expectations for all guideline 
 Every guideline document MUST include:
 
 1. **Title & Metadata Block** (frontmatter or markdown h1)
+   - Start with an exact `---` frontmatter delimiter on the first line or a Markdown H1 (`# `) within the first ten lines.
    ```markdown
    # [Title]
    **Status:** [Active/Draft/Archived]
@@ -170,10 +171,22 @@ All guidelines MUST maintain:
 **Verification Method:**
 ```bash
 # Before merge, validate guideline structure and links:
-# 1. Verify all guideline files have required frontmatter
-find guidelines -name "*.md" -type f | while read file; do
-  head -10 "$file" | grep -q "^---" || echo "WARN: $file missing frontmatter"
-done
+# 1. Verify all guideline files have frontmatter or an H1
+structure_status=0
+while IFS= read -r -d '' file; do
+  if ! awk '
+    NR == 1 && $0 == "---" { valid = 1 }
+    NR <= 10 && /^# / { valid = 1 }
+    NR == 10 { exit }
+    END { exit !valid }
+  ' "$file"; then
+    echo "ERROR: $file needs first-line frontmatter or an H1 within the first ten lines" >&2
+    structure_status=1
+  fi
+done < <(find guidelines -name "*.md" -type f -print0)
+if [ "$structure_status" -ne 0 ]; then
+  exit "$structure_status"
+fi
 
 # 2. Run guidelines link checker (validates guidelines/ directory)
 npm run guidelines:check-links
@@ -214,7 +227,7 @@ npm run guidelines:check-links
 **Authority:** Constitution § II (Repository Governance)
 
 **Approval Requirements:**
-- G-document refactoring: No D-gate approval needed (read-only inspection + changes scoped to guidelines/ only). `locked-files-guard` approval is still required.
+- G-document refactoring: Read-only inspection requires no D-gate approval. Before making guideline changes, resolve the applicable pending D-gate decisions (including D4 destination mapping and any content or preservation decisions the operation depends on). `locked-files-guard` approval is still required for changes.
 - S-document refactoring: `locked-files-guard` approval required (AGENTS.md § 331–343)
 - N-document creation: D4 approval required (owner decision gate)
 - P-document creation: D5 approval required (preservation strategy)

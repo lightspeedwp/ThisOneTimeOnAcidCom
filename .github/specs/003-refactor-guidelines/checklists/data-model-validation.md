@@ -64,7 +64,7 @@
 
 ### N-Entity Lifecycle
 
-- [ ] **CHK206** N-document state sequence starts PROPOSED (at spec creation) and branches into two paths: APPROVED→COMPLETE or REJECTED→ARCHIVED
+- [ ] **CHK206** N-document state sequence starts PROPOSED → APPROVAL PENDING, then follows either APPROVED → CONTENT DEVELOPED → INTEGRATED → VERIFIED → COMPLETE in order or REJECTED → ARCHIVED
 - [ ] **CHK207** APPROVAL PENDING state is triggered by awaiting owner decision D4
 - [ ] **CHK208** APPROVED state requires explicit approval recorded in D4 decision
 - [ ] **CHK209** CONTENT DEVELOPED state follows approval (Phase 2 task T028–T032)
@@ -106,7 +106,7 @@
 
 - [ ] **CHK227** D1 gate blocks N-documents that make identity claims (e.g., N001–N010 "Brand Voice" category)
 - [ ] **CHK228** D2 gate blocks N-documents about publication boundaries (e.g., N031–N033 on access control)
-- [ ] **CHK229** D3 gate blocks N-documents about design (e.g., N038–N040 on design verification)
+- [ ] **CHK229** D3 gate blocks design-related N-documents within the defined N001–N033 range (design examples and palette/font references) until design authority is confirmed
 - [ ] **CHK230** D4 gate gates all N-document creation (N001–N033 pending approval)
 - [ ] **CHK231** D5 gate blocks all P-entity creation (pointers/redirects)
 
@@ -160,7 +160,7 @@
 
 ### Dependency Graph Validation
 
-- [ ] **CHK254** No cyclic dependencies exist (G1 → G2 → G1 is forbidden; G1 → G2, G2 → G1 is acceptable bidirectional reference)
+- [ ] **CHK254** No cyclic dependencies exist: G1 → G2 and G2 → G1 form the forbidden cycle G1 → G2 → G1, including when these edges are references recorded in the `dependencies` field
 - [ ] **CHK255** Gate dependencies form a DAG (directed acyclic graph): D0 does not depend on D1; D1–D6 do not depend on D0
 - [ ] **CHK256** Critical path (blocking operations) is identified: Phase 2 cannot proceed without T001–T004 (D-gate resolution)
 
@@ -170,25 +170,27 @@
 
 - [ ] **CHK257** Every G-entity (G001–G116) has a state transition path to COMPLETE state
 - [ ] **CHK258** Every S-entity (S001–S009) has a state transition path to COMPLETE state
-- [ ] **CHK259** Every N-entity (N001–N033) has either APPROVED→COMPLETE or REJECTED→ARCHIVED path
+- [ ] **CHK259** Every N-entity (N001–N033) has a full approved or rejected lifecycle path as specified in CHK206
 - [ ] **CHK260** No entity is left undefined or orphaned at end of Phase 3
 
 ---
 
 ## Data Model Completeness Summary
 
-**Validated Dimensions:**
-- ✅ All entity types are fully defined with required fields
-- ✅ State transitions are unidirectional and verifiable
-- ✅ Relationships capture consolidation, references, and redirects
-- ✅ Gate dependencies are documented and enforced
-- ✅ Inventory counts are reconciled and verified
-- ✅ Consistency rules prevent invalid states
-- ✅ Verification checksums enable validation
-- ✅ No entity is orphaned or undefined
+**Validation Results: Pending**
+- [ ] Pending validation: All entity types are fully defined with required fields
+- [ ] Pending validation: State transitions are unidirectional and verifiable
+- [ ] Pending validation: Relationships capture consolidation, references, and redirects
+- [ ] Pending validation: Gate dependencies are documented and enforced
+- [ ] Pending validation: Inventory counts are reconciled and verified
+- [ ] Pending validation: Consistency rules prevent invalid states
+- [ ] Pending validation: Verification checksums enable validation
+- [ ] Pending validation: No entity is orphaned or undefined
 
-**Blockers Identified:** (List any findings that prevent Phase 2 start)
-- [ ] None — Data model is complete
+**Blockers Identified:**
+- [ ] Validation remains pending: all CHK items above are unchecked; Phase 2 readiness has not been established.
+- [ ] Unresolved protected-path scope conflict: `.github/PROTECTED_FILES.txt` and the local approval checker include all of `.github/`, while the workflow contract lists narrower paths and omits `.github/specs/`. The feature approval contract also treats S002–S009 as protected, beyond the canonical list's explicit S-path coverage. Reconcile these scopes with the owner before claiming consistency or an exemption; retain existing approval requirements. See [research § 2](../research.md#2-protected-files-governance).
+- [ ] Owner decisions D1–D6 and D8 remain pending and block Phase 2.
 
 **Recommended Improvements:** (List items for future enhancement; do not block Phase 2)
 - [ ] Complete baseline observation comparison (noted as pending in spec.md)
@@ -197,10 +199,10 @@
 ---
 
 **Checklist Status:**
-- **Completeness:** ___ of 85 items verified
-- **Blocking Issues:** ___ (0 acceptable for Phase 2 start)
+- **Completeness:** 0 of 85 items verified — pending
+- **Blocking Issues:** Unresolved — see blockers above; further assessment pending
 - **Non-Blocking Recommendations:** ___ (logged for future reference)
-- **Approved for Phase 2:** ☐ Yes  ☐ No  ☐ Conditional (see blockers)
+- **Approved for Phase 2:** No — pending validation, scope reconciliation, and owner decisions
 
 **Reviewer:** ________________________  **Date:** __________
 

@@ -25,9 +25,9 @@ created: "2026-10-25"
 
 ---
 
-## Phase 1: Planning & Specification ✅ COMPLETE
+## Phase 1: Planning & Specification ✅ DESIGN ARTEFACTS COMPLETE
 
-**Status**: Gate resolution, specification documents, and validation complete.
+**Status**: Phase 1 design artefacts (specification, data model, contracts, checklists, quickstart) are complete. Gate resolution (D1–D6, D8) and validation remain pending.
 
 - [x] Created spec.md with requirements, scope, and decision gates (D0–D8)
 - [x] Created plan.md with implementation roadmap
@@ -41,14 +41,14 @@ created: "2026-10-25"
 
 ## Phase 2: Implementation 🔄 BLOCKED
 
-**Blocking Condition**: Owner decisions on D1–D6, D8 must be recorded in `checklists/requirements.md` lines 30–43 before Phase 2 starts.
+**Blocking Condition**: Owner decisions on D1–D6, D8 must be recorded in `checklists/requirements.md` under their respective gate headings (### D1: through ### D8:) before Phase 2 starts. Use `grep "^### D[1-8]:" checklists/requirements.md` to verify all gates have RESOLVED status.
 
 **Pre-Implementation Verification** (Complete before any tasks):
 
 - [ ] **T001** Confirm all owner decisions (D0–D8) recorded with evidence in `checklists/requirements.md`
 - [ ] **T002** Verify source hashes: Compare 116 guidelines against baseline commit `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9`
 - [ ] **T003** Validate branch `docs/spec-003-guidelines-reconcile` is clean and up-to-date with `develop`
-- [ ] **T004** [P] Run Phase 1 validation script: `cd .github/specs/003-refactor-guidelines && bash ./quickstart.md`
+- [ ] **T004** [P] Prepare the repository-local `validate-phase1.sh` script as described in `quickstart.md`, then run it from the repository root: `cd .github/specs/003-refactor-guidelines && bash ./validate-phase1.sh`
 
 ---
 
@@ -188,15 +188,16 @@ created: "2026-10-25"
 
 ### Pointer Validation & Creation
 
-- [ ] **T033** [P] For each G-document moved/consolidated per D5:
-  - Create pointer file at old path per `contracts/pointer-redirect-contract.md` Type 3
-  - Pointer includes: archived status, reason, link to new location
-  - Example format in `guidelines/old-name.md` → points to `guidelines/new-location/name.md`
+- [ ] **T033** [P] For each G-document moved/consolidated per D4 pointer strategy/destinations and D5 preservation decisions:
+  - Create a pointer at the old path per `contracts/pointer-redirect-contract.md`, selecting Type 1 (Path Relocation) for moves or Type 2 (Consolidation) for consolidations
+  - Type 1 includes: original title, relocation notice, `New location` relative link, `Why`, `When`, updated-content link, and historical note
+  - Type 2 includes: original title, consolidation notice, `Updated guideline` relative link, `What changed` (related topic and date), `See Also` links, and read-only archive note; all consolidated old paths link to the same destination
+  - Record P-entity fields: `old_path`, `new_path`, `redirect_type` (`moved` for relocation or `merged` for consolidation), `status`, `created_timestamp`, and assigned `id`; deploy only after the destination exists and is verified
 
 - [ ] **T034** [P] Validate all pointers:
   - Check destination exists and is accessible
   - Verify markdown syntax and link format
-  - Confirm "Current guidance" link is exact and working
+  - Confirm the selected type's destination link (`New location` for Type 1 or `Updated guideline` for Type 2) is exact, relative, and working
   - Use validation script: `npm run validate:links -- guidelines/`
 
 ---
@@ -288,11 +289,11 @@ created: "2026-10-25"
 
 1. **T001–T004**: Pre-implementation verification (MUST complete before any other Phase 2 tasks)
 2. **T005–T018**: S-document edits (can start after T001–T004)
-3. **T019–T027**: G-document edits (can start in parallel with S-docs after T001–T004)
+3. **T019–T027**: G-document edits (must start after T018 completion; can run in parallel with T005–T017 S-docs)
 4. **T028–T032**: N-document creation (blocked on D4; can start after T001–T004 if D4 approved)
 5. **T033–T034**: Pointer operations (can start once G-docs or N-docs are moved)
 6. **T035–T037**: Link validation (can start once all consolidations complete)
-7. **T038–T040**: Design verification (can start in parallel with link validation)
+7. **T038–T040**: Design verification (must start after T037 completion; cannot run in parallel with link validation)
 8. **T041–T043**: Verification & handoff (final phase; must complete all above tasks)
 
 ### Parallel Opportunities
