@@ -42,8 +42,8 @@ fi
 echo "✓ Checking decision gates..."
 GATE_ERRORS=0
 
-# Check D0 and D7 are RESOLVED in requirements.md
-for gate in D0 D7; do
+# Check all D0–D8 gates are RESOLVED in requirements.md
+for gate in D0 D1 D2 D3 D4 D5 D6 D7 D8; do
   if grep -E "^### $gate:" "checklists/requirements.md" >/dev/null 2>&1; then
     if grep -A 1 "^### $gate:" "checklists/requirements.md" | grep -q "RESOLVED"; then
       echo "  ✓ $gate: RESOLVED"
@@ -57,16 +57,6 @@ for gate in D0 D7; do
   fi
 done
 
-# Check D1–D6 and D8 are PENDING in research.md
-for gate in D1 D2 D3 D4 D5 D6 D8; do
-  if grep -E "^### Gate $gate:" research.md >/dev/null 2>&1; then
-    echo "  ✓ $gate: PENDING"
-  else
-    echo "  ✗ ERROR: $gate is not documented in research.md" >&2
-    GATE_ERRORS=$((GATE_ERRORS + 1))
-  fi
-done
-
 if [ "$GATE_ERRORS" -gt 0 ]; then
   echo "  ✗ ERROR: $GATE_ERRORS gate(s) are not in expected state" >&2
   exit 1
@@ -74,6 +64,16 @@ fi
 
 # 4. Contract completeness
 echo "✓ Validating contracts..."
+MISSING_CONTRACTS=0
+for contract in guideline-interface.md approval-process.md pointer-redirect-contract.md; do
+  if ! test -f "contracts/$contract"; then
+    echo "  ✗ ERROR: Missing required contract: contracts/$contract" >&2
+    MISSING_CONTRACTS=$((MISSING_CONTRACTS + 1))
+  fi
+done
+if [ "$MISSING_CONTRACTS" -gt 0 ]; then
+  exit 1
+fi
 CONTRACT_COUNT=$(find contracts -name "*.md" -type f 2>/dev/null | wc -l)
 if [ "$CONTRACT_COUNT" -eq 3 ]; then
   echo "  ✓ Contracts defined: $CONTRACT_COUNT (expected: 3)"
@@ -93,4 +93,4 @@ echo "  ✓ All required contracts present"
 
 echo ""
 echo "✅ Phase 1 Validation PASSED"
-echo "📋 Next step: Resolve owner gates (D1–D8) and proceed to Phase 2"
+echo "📋 All owner gates (D0–D8) are RESOLVED. Phase 2 implementation blocked on 5 guidance items: D4.a, D4.b, D5.a, D5.b, D6"

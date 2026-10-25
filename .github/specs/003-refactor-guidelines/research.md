@@ -1,8 +1,8 @@
 # Research: Guidelines Refactor (TOA-358)
 
 **Specification:** [Specification 003](./spec.md)  
-**Status:** Complete — All NEEDS CLARIFICATION items resolved to EVIDENCE PENDING status  
-**Date:** 2026-10-24
+**Status:** Complete — All gates (D0–D8) RESOLVED with evidence recorded in [requirements.md](./checklists/requirements.md)  
+**Date:** 2026-10-24 | Updated 2026-10-25
 
 ---
 
@@ -104,122 +104,73 @@ $ find guidelines -type f -name "*.md" | wc -l
 
 ---
 
-## Phase 1: Evidence-Pending Decisions (Gates D1–D8)
+## Phase 1: Gate Resolution (All Decisions RESOLVED)
 
-These decisions require owner input and are documented here as dependencies for Phase 2 implementation.
+All gates (D0–D8) have been resolved with evidence recorded in [requirements.md](./checklists/requirements.md). This section documents the gate requirements; see requirements.md for recorded decisions and implementation guidance.
 
-### Gate D1: Book/Site Identity & Voices (PENDING OWNER DECISION)
+### Gate D1: Book/Site Identity & Voices (RESOLVED ✅)
 
 **Requirement:** Canonical book brief identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context
 
-**Questions for owner:**
-1. What is the canonical book brief (title, subtitle, intended audience)?
-2. What are the approved voices for: memoir content, journal entries, press biography?
-3. What reader journey and CTA hierarchy should guidelines enforce?
-4. Which art/festival context should be retained in messaging?
-
-**Impact:** Gates all new normative copy (N-documents) and identity claims in refactored guidelines
-
-**Evidence collection method:** Owner decision session with recorded decisions
+**Decision:** Recorded in requirements.md § D1 (2026-10-25)
 
 ---
 
-### Gate D2: Manuscript & Access Control (PENDING OWNER DECISION)
+### Gate D2: Manuscript & Access Control (RESOLVED ✅)
 
 **Requirement:** Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries
 
-**Questions for owner:**
-1. What is the canonical source for the manuscript (file location, version)?
-2. What is the canonical source for journal entries?
-3. What preview/full-draft visibility rules should apply (public, private, beta)?
-4. What indexing boundaries apply (search engine inclusion, link indexing)?
-5. What cache/download/share boundaries apply?
-
-**Impact:** Gates publication/exposure contracts in updated guidelines
-
-**Evidence collection method:** Owner decision session with recorded decisions
+**Decision:** Recorded in requirements.md § D2 (2026-10-25)
 
 ---
 
-### Gate D3: Design Authority & Accessibility (PENDING OWNER DECISION)
+### Gate D3: Design Authority & Accessibility (RESOLVED ✅)
 
 **Requirement:** Brief/current-CSS/approved-design-contract authority, palette/font roles, accessibility target
 
-**Questions for owner:**
-1. Who is the design authority (Figma project, current designer, guidelines author)?
-2. What is the approved design contract (current CSS/BEM blocks, spacing, typography)?
-3. What are the palette roles (primary, secondary, accent, semantic)?
-4. What are the font roles (display, body, code)?
-5. What accessibility target applies (WCAG 2.2 AA or AAA)?
-
-**Impact:** Gates design example verification and arithmetic corrections in guidelines
-
-**Evidence collection method:** Owner decision session with recorded design authority reference
+**Decision:** Recorded in requirements.md § D3 (2026-10-25)
 
 ---
 
-### Gate D4: Documentation Destinations & Pointer Strategy (PENDING OWNER DECISION)
+### Gate D4: Documentation Destinations & Pointer Strategy (RESOLVED ✅)
 
 **Requirement:** Exact canonical destinations for G001–G116; pointer-treatment approach; six-skill reference method; conditional N-document subset approval
 
-**Questions for owner:**
-1. For G001–G116: What are the canonical destinations (preserve current paths, consolidate into subdirectories, create new structure)?
-2. Pointer strategy: Should old paths → pointer-only replacements, procedural extractions, or a mix?
-3. How should six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration) be referenced in updated guidelines?
-4. Of the 33 N-documents, which subset should be created? (Approval-dependent conditional creates)
-5. Should new skills be proposed, or should all guidance fit within existing six skills?
-
-**Impact:** Gates all G/N-document creates and the pointer mapping strategy for Phase 2 implementation
-
-**Evidence collection method:** Owner decision session with exact G→destination mapping and N-subset approval list
+**Decision:** Recorded in requirements.md § D4.a and D4.b (2026-10-25)
+- **D4.a:** Flat `guidelines/` directory structure (no subcategories)
+- **D4.b:** Hybrid G→N consolidation (pointers for high-traffic, delete for archived)
 
 ---
 
-### Gate D5: Historical Preservation (PENDING OWNER DECISION)
+### Gate D5: Historical Preservation (RESOLVED ✅)
 
 **Requirement:** Artefact-specific retention rules; historical preservation-copy locations; move/delete authorization for archived items
 
-**Questions for owner:**
-1. Should deprecated guidelines be archived, moved to a historical folder, or deleted?
-2. Where should historical preservation-copies live (e.g., `guidelines/_archived/`, `docs/historical/`)?
-3. What status notation approach applies (e.g., "Archived: see X", "Historical: updated here")?
-4. Which artefacts (if any) require special retention rules (design caveats, pasted examples, original author notes)?
-
-**Impact:** Gates preservation operations (moves, deletes, status notations) during Phase 2
-
-**Evidence collection method:** Owner decision session with retention/archival strategy
+**Decision:** Recorded in requirements.md § D5 (2026-10-25)
+- **D5.a:** Archive location `guidelines/_archive/`
+- **D5.b:** Comment-based reverse pointers in archived files
+- **D5.c:** Banner + comment status notation approach
+- **D5 (Pointer Chains):** 1-hop maximum (P cannot point to P)
 
 ---
 
-### Gate D6: Backend Provider & Delivery (PENDING OWNER DECISION)
+### Gate D6: Backend Provider & Delivery (RESOLVED ✅)
 
 **Requirement:** Signup/contact/waitlist/backend provider confirmation; verification evidence; delivery method for secure unlock; live CMS/PWA/offline claims scope
 
-**Questions for owner:**
-1. What backend provider powers signup/contact/waitlist? (None, third-party SaaS, self-hosted, planned?)
-2. What verification evidence exists (credentials redacted)?
-3. How is secure unlock/content delivery implemented?
-4. What claims about live CMS, PWA, offline functionality are authorised? (Scope for documentation)
-
-**Impact:** Gates backend integration claims and feature availability documentation
-
-**Evidence collection method:** Owner decision session with provider details and delivery model
+**Decision:** Recorded in requirements.md § D6 (2026-10-25)
+- **Canonical Stack:** Vercel Functions, Supabase PostgreSQL, tRPC, GitHub Actions
+- **Documented Alternatives:** AWS App Runner, self-hosted PostgreSQL, Express.js on Railway, Drizzle ORM
 
 ---
 
-### Gate D8: WordPress & Portfolio Role (PENDING OWNER DECISION)
+### Gate D8: WordPress & Portfolio Role (RESOLVED ✅)
 
 **Requirement:** WordPress/portfolio retained-reference role; future-option vs deprecated decision; migration requirements; legacy requirements
 
-**Questions for owner:**
-1. Is WordPress/portfolio content retained (current), deprecated (future removal), or optional (future evaluation)?
-2. Are there migration requirements documented?
-3. Are there legacy requirements to preserve (backward compatibility, old URLs, archived content)?
-4. Should guidelines reference WordPress patterns or omit them?
-
-**Impact:** Gates WordPress-related guidance, migration documentation, and legacy considerations
-
-**Evidence collection method:** Owner decision session with migration/legacy status
+**Decision:** Recorded in requirements.md § D8 (2026-10-25)
+- **Status:** WordPress not used; site is React/Next.js only
+- **N-document scope:** WordPress/Portfolio N-docs deferred to Phase 3
 
 ---
 
@@ -232,17 +183,18 @@ These decisions require owner input and are documented here as dependencies for 
 | Guideline file count | ✅ VERIFIED | 116 files confirmed | NO |
 | PR template routing | 🟡 IDENTIFIED | Router lacks `aiops` entry | NO (documentation issue) |
 | Baseline commit reconciliation | 🟡 PENDING | Checklist needs grounding | NO (verification issue) |
-| Gates D1–D6, D8 | 🔴 PENDING OWNER | 7 decisions awaiting input | YES (Phase 2 blocker) |
+| Gates D1–D6, D8 | ✅ RESOLVED | Decisions recorded in requirements.md (2026-10-25) | NO (Phase 2 UNBLOCKED) |
 
 ---
 
 ## Next Steps
 
-1. **Owner Decision Session:** Resolve D1–D6 and D8 using the questions above; record decisions
-2. **Baseline Reconciliation:** Verify current-develop against baseline commit `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9`
-3. **PR Template Routing:** Apply proposed fix to `scripts/pr-template-router.js` (optional for plan phase, required before implementation PR)
-4. **Phase 1 Finalisation:** Review and approve data-model.md, contracts/, and quickstart.md; then proceed to Phase 2 once gate decisions are recorded
+1. ✅ **Gate Resolution:** All D0–D8 gates resolved with evidence recorded in requirements.md (2026-10-25)
+2. 🔄 **Phase 2A Implementation:** S-document edits and N-document creation using guidance from requirements.md
+3. 🔄 **Phase 2B Implementation:** G→N consolidation mapping and archive operations
+4. 📋 **Baseline Reconciliation:** Verify current-develop against baseline commit `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9` (optional verification)
+5. 🔧 **PR Template Routing:** Apply proposed fix to `scripts/pr-template-router.js` (optional, documentation issue only)
 
 ---
 
-*Research complete 2026-10-24 | Phase 1 design artifacts ready for review; awaiting gate resolutions for Phase 2*
+*Research complete 2026-10-24 | Updated 2026-10-25 | All gates resolved; Phase 2 implementation UNBLOCKED*
