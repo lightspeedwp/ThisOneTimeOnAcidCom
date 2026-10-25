@@ -64,7 +64,7 @@
 - [x] WordPress & Portfolio (N030–N033): **None approved** — All 4 deferred to Phase 3; WordPress not used (D8); portfolio guidance pending tech stack confirmation
 - [x] Directory structure: N-documents live in `guidelines/` directory (same as G-documents)
 - [x] Subfolder organization: **DECIDED** — Flat structure (`guidelines/`) to keep status quo; no reorganization overhead
-- [x] Inventory accounting: Planning inventory = 116 G + 9 S + 29 approved N (154 tracked entities); final active-document count determined by Phase 2A consolidation manifest after moves, archives, and pointer operations recorded
+- [x] Inventory accounting: Tracked entities = 116 G + 9 S + 33 N (158 total); scope includes all N001–N033 with N030–N033 deferred; final active-document count determined by Phase 2A consolidation manifest after moves, archives, and pointer operations recorded
 - [x] G→N consolidation: **DECIDED** — Hybrid approach: pointers for high-traffic guidelines (Contributing, Accessibility, Design Tokens), preservation in `guidelines/_archive/` for archived guidelines per D5; document per-guideline mapping
 - [x] Supporting skills: Six existing skills (branch-validation, changelog, labeling, test, validate, workflow-orchestration) remain unchanged
 
