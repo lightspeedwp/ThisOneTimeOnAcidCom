@@ -89,7 +89,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "@types/jest": "^30.0.0",
     "@vitejs/plugin-react": "4.7.0",
-    "@vitest/coverage-v8": "1.6.1",
+    "@vitest/coverage-v8": "5.0.5",
     "bats": "^1.11.0",
     "glob": "13.0.6",
     "gray-matter": "^4.0.3",
