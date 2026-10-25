@@ -892,10 +892,10 @@ available to all team members
 
 | Scenario | Expected suggested template | Expected label | Test PR and observed result |
 |----------|-----------------------------|----------------|-----------------------------|
-| `feat/*` | `pr_feature.md` | `type:feature` | Not recorded; verification pending |
-| `fix/*` | `pr_bug.md` | `type:bug` | Not recorded; verification pending |
-| `docs/*` | `pr_documentation.md` | `type:documentation` | Not recorded; verification pending |
-| Unmatched prefix | `pr_default.md` | `type:maintenance` | Not recorded; verification pending |
+| `feat/*` | `pr_feature.md` | `type:feature` | [PR #483](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/483) ✅ |
+| `fix/*` | `pr_bug.md` | `type:bug` | [PR #484](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/484) ✅ |
+| `docs/*` | `pr_documentation.md` | `type:documentation` | [PR #485](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485) ✅ |
+| Unmatched prefix | `pr_default.md` | `type:maintenance` | [PR #488](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/488) ✅ |
 
 - Record each test PR URL, routing comment and applied label before completing T060. T035 also requires explicit named-template selection precedence and preservation of contributor content.
 - Mark: T035 complete only after the required PR evidence is recorded; T060 remains unchecked while that evidence is unavailable.
