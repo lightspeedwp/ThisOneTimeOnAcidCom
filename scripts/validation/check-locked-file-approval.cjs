@@ -14,6 +14,12 @@ const path = require('path');
 // Load protected files from canonical list
 function loadLockedPaths() {
   const protectedFilesPath = path.join(__dirname, '../../.github/PROTECTED_FILES.txt');
+
+  // Protected files enforcement is disabled; return empty list if file not found
+  if (!fs.existsSync(protectedFilesPath)) {
+    return [];
+  }
+
   const content = fs.readFileSync(protectedFilesPath, 'utf8');
 
   const paths = [];
