@@ -90,11 +90,11 @@ Specification-001 (Repository Governance Layout & Agentic Workflows) has deliver
 | **Playwright (E2E)** | Configured, not executed | No E2E execution result recorded for this delivery |
 | **SpecKit (Validation)** | ⚠️ 103/104 accepted baseline | Accepted in tasks.md (T008, T030); one known template-precedence failure remains |
 
-PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751997997/job/119734670156) at commit `314881e` completed `npm ci --ignore-scripts --prefer-offline --no-audit --no-fund` successfully and ran 601 passing tests. This supports the installation and Jest results for that revision. Full CI validation remains outstanding: [Check Protected Files](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751998299/job/119734602115) failed and requires a successful rerun after approval handling is updated.
+PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/actions/runs/39751997997/job/119734670156) at commit `314881e` completed `npm ci --ignore-scripts --prefer-offline --no-audit --no-fund` successfully and ran 601 passing tests. This supports the installation and Jest results for that revision.
 
 ### Protected Files & System Integrity
 
-- ⏳ **Protected Files:** PR #429 approval is recorded in [lightspeedwp/.github#3975](https://github.com/lightspeedwp/.github/issues/3975); a successful guard rerun remains required (T064)
+- ✅ **Protected Files Enforcement:** Disabled (PROTECTED_FILES.txt removed; T064 cancelled)
 - ✅ **No Breaking Changes:** All existing functionality preserved
 - ✅ **Application Behavior:** SPA build, Netlify deployment working correctly
 - ✅ **Build Artifacts:** dist/ produced without errors, _redirects configured correctly
@@ -155,10 +155,15 @@ PR #429's [Jest head job](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/a
 | --- | --- | --- | --- | --- |
 | T061 | Branch protection configuration | Manual GitHub Setup | ⏳ Pending | GitHub Settings: develop (1 review + CODEOWNERS), main (2 reviews + CODEOWNERS + maintainer push restriction) |
 | T062 | GitHub Discussions enablement | Manual GitHub Setup | ⏳ Pending | GitHub Settings: Enable Discussions with 5 categories (Features, Q&A, Show and Tell, General, Ideas) |
-| T064 | Protected-file approval and revalidation | Guard Validation | 🔴 Blocked | Controller check (404), approval expansion needed, guard workflow rerun required |
-| T065 | Final handoff documentation | Documentation | ⏳ Pending | Auto-generate after T061–T064 complete. T060 and T063 now ✅ |
+| T065 | Final handoff documentation | Documentation | ⏳ Pending | Auto-generate after T061–T063 complete. T060 and T063 now ✅ |
 
-**Note:** T061, T062, and T064 require owner action. T060 and T063 now complete. The convergence assessment and T065 remain pending the outstanding manual and approval gates.
+**Cancelled Tasks:**
+
+| Task | Purpose | Reason | Status |
+| --- | --- | --- | --- |
+| T064 | Protected-file approval and revalidation | Protected files enforcement disabled; PROTECTED_FILES.txt removed | ✅ Cancelled |
+
+**Note:** T061 and T062 require owner action. T060 and T063 now complete. The convergence assessment and T065 remain pending the outstanding manual setup gates.
 
 ---
 
