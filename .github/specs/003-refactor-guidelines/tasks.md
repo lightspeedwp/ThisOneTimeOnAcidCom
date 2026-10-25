@@ -172,6 +172,18 @@ created: "2026-10-25"
   - Categorize: Approved (create), Pointer-only (create redirect), Deferred (skip in Phase 2)
 - [ ] **T029** [P] Create N-document specification per approved subset: For each approved N-doc, create outline in temporary file with structure (title, purpose, required sections)
 
+### N-Document Approval & Planning (In Progress)
+
+- [x] **T028** Extract N-document approval list from D4 decision in `checklists/requirements.md`
+  - ✅ N-document list verified: 29 approved for Phase 2 (N001-N029)
+  - ✅ Categorized: Reference (N001-N005), Organization (N006-N018), Patterns (N019-N022), Pages (N023-N025), Reports (N026-N029)
+  - ✅ Consolidation Manifest available: `CONSOLIDATION-MANIFEST.md` provides detailed G-to-N mapping, pointer strategy, and destination paths
+  - ✅ Mapping verified: All 29 N-documents have clear purposes, related G-documents, and pointer strategies
+  - Status: Ready to proceed with N-document creation (T030)
+  - Verification completed: 2026-10-25 23:45 UTC
+
+- [ ] **T029** [P] Create N-document specification per approved subset: For each approved N-doc, create outline in temporary file with structure (title, purpose, required sections)
+
 ### N-Document Creation (Conditional)
 
 **Only execute if D4 approves; otherwise skip to T031:**
