@@ -369,10 +369,11 @@ prove these reader behaviours or editorial readiness.
 
 ## Review report reconciliation
 
-The supporting report `2026-10-24-thisonetimeonacid-plan-review.md` reviewed
-revision `6b3b76baa955acdfaee0d5e4aef39e099b4b083e`. This replacement draft
-uses the newer verified revision stated above and reconciles its applicable
-findings as follows:
+The supporting review for this reconciliation is documented in
+[TOA-369](https://linear.app/lightspeedwp/issue/TOA-369/docs-plan-remove-obsolete-assumptions-and-refresh-retained-guidance),
+which reviewed revision `6b3b76baa955acdfaee0d5e4aef39e099b4b083e`. This
+replacement draft uses the newer verified revision stated above and reconciles
+its applicable findings as follows:
 
 - **PLAN-07:** explains the absent discovery path without implying that documentation changes integrate the root manuscript.
 - **PLAN-08:** distinguishes existing prose from authorship, editorial approval and publication readiness.
