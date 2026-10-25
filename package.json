@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react-dom": "19.3.1",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
     "@mui/icons-material": "7.3.5",
@@ -99,7 +99,7 @@
     "markdownlint-cli2": "^0.23.3",
     "path": "0.12.7",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.3.1",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.1.12",
     "tsx": "^4.23.15",
@@ -110,7 +110,7 @@
   },
   "peerDependencies": {
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "19.3.1"
   },
   "peerDependenciesMeta": {
     "react": {
