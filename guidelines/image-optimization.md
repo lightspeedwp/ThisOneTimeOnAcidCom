@@ -1,143 +1,28 @@
-# Image Optimization System
+# Image Optimization (Consolidated → Media Guidelines)
 
-**Version:** 1.0.0
-**Created:** February 2026
-
-The Ash Shaw Portfolio uses a hybrid image optimization strategy designed for a
-static environment (Figma Make/Netlify) where server-side image processing (like
-Next.js Image Optimization) is unavailable at runtime.
-
-The system combines **build-time asset generation** with **client-side runtime
-optimization** as a fallback.
+> ⚠️ **CONSOLIDATED** · This guideline has been merged into **[Media Guidelines](guidelines/media-guidelines.md)**.
 
 ---
 
-## 1. Components & Utilities
+## Migration Notice
 
-### `<OptimizedImage>` Component
+As of Specification 003 (Guidelines Refactor, 2026-10-25), Image Optimization guidance has been consolidated into **[Media Guidelines](guidelines/media-guidelines.md)**.
 
-The primary interface for rendering images. It is a drop-in replacement for
-`<img>`.
-
-```tsx
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
-
-// Basic usage with preset (recommended)
-<OptimizedImage
-  src={myImage}
-  alt="Description"
-  preset="thumbnail"
-/>
-
-// Manual configuration
-<OptimizedImage
-  src={heroImg}
-  alt="Hero"
-  maxWidth={1440}
-  quality={0.85}
-  format="image/webp"
-/>
-
-```text
-
-### Presets
-
-Presets define standard sizes and compression levels for different contexts.
-Using presets ensures consistency and simplifies usage.
-
-| Preset | Max Width | Quality | Usage |
-|--------|-----------|---------|-------|
-| `sticker` | 320px | 0.70 | Decorative elements, icons |
-| `thumbnail` | 480px | 0.78 | Card thumbnails, avatars |
-| `content` | 800px | 0.82 | Inline blog images, standard photos |
-| `gallery` | 1200px | 0.88 | Portfolio detail main images |
-| `hero` | 1440px | 0.85 | Full-width banners |
-| `lightbox` | 1920px | 0.90 | Full-screen viewing |
-
-### Hook: `useOptimizedImage`
-
-For cases where you need an optimized URL string (e.g., `background-image` in
-CSS), use the hook.
-
-```tsx
-const { src, loading } = useOptimizedImage({
-  src: rawImage,
-  preset: 'thumbnail'
-});
-
-return <div style={{ backgroundImage: `url(${src})` }} />;
-
-```text
+### What Changed
+- **Consolidated into:** Media Guidelines
+- **Migration date:** 2026-10-25
+- **Pointer type:** Type 2 (Consolidation)
+- **Status:** This file preserved as redirect for external references
 
 ---
 
-## 2. Optimization Strategy
+## Where to Find This Content
 
-### Priority 1: Build-Time Optimization (Manifest Lookup)
+All guidance is now in: **[Media Guidelines](guidelines/media-guidelines.md)**
 
-At build time (or via `npm run optimize-images`), the project scans for assets
-and generates optimized WebP variants. These are cataloged in
-`/utils/imageManifest.ts`.
-
-When `<OptimizedImage>` mounts:
-
-1. It checks the manifest for a matching entry (Src + Preset).
-
-1. If found, it immediately uses the pre-generated asset path.
-
-1. It applies `srcSet` attributes if available for responsive sizing.
-
-1. **Pros:** Instant loading, zero runtime CPU cost, optimal caching.
-
-### Priority 2: Runtime Optimization (Canvas API)
-
-If no pre-optimized asset is found (e.g., dynamic content, missing manifest
-entry):
-
-1. The component loads the original image into an HTML5 Canvas.
-
-1. It resizes the image to the target dimensions.
-
-1. It exports a `blob:` URL (WebP or JPEG).
-
-1. **Pros:** Works for any image source, no build step required.
-
-1. **Cons:** Slight delay on first load, uses client CPU/Memory.
-
-### Priority 3: External URL Passthrough
-
-For external URLs (e.g., Unsplash, Cloudinary), the component skips optimization
-to avoid CORS issues and double-compression. It renders the `src` directly.
+See `guidelines/_archive/ARCHIVE-INDEX.md` for version history and related archived documents.
 
 ---
 
-## 3. Build Script
-
-The project includes a Node.js script to generate optimized assets.
-
-```bash
-npm run optimize-images
-
-```text
-
-This script:
-
-1. Scans `figma:asset` imports (mock implementation in this environment).
-
-1. Uses `sharp` to resize and compress images.
-
-1. Outputs files to `/public/optimized/`.
-
-1. Updates `/utils/imageManifest.ts` with the new mappings.
-
----
-
-## 4. Best Practices
-
-1. **Use presets:** Avoid manual `maxWidth` unless absolutely necessary.
-
-1. **Lazy Load:** The component defaults to `loading="lazy"`. Only disable for LCP (Largest Contentful Paint) images like the Hero.
-
-1. **Alt Text:** Provide descriptive `alt` text.
-
-1. **Aspect Ratio:** The optimization preserves the original aspect ratio. Use CSS `object-fit: cover` on the component to enforce container shapes.
+*Pointer file created 2026-10-25 per Specification 003 Phase 2D (T033–T034)*  
+*Part of Guidelines Refactor consolidation strategy (D4.b, D5 preservation)*
