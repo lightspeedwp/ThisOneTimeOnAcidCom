@@ -15,7 +15,7 @@ created: "2026-10-24"
 
 ## Overview
 
-Consolidate and refactor 116 existing guideline documents plus 33 conditional new documentation to establish canonical book/site instructions following the bounded memoir/creative-life-guide brief, with non-destructive consolidation and existing-skill integration.
+Consolidate and refactor 116 existing guideline documents plus 29 approved new documents (Phase 2) and 4 deferred new documents (Phase 3) to establish canonical book/site instructions following the bounded memoir/creative-life-guide brief, with non-destructive consolidation and existing-skill integration.
 
 ## Requirements
 
@@ -40,11 +40,11 @@ Consolidate and refactor 116 existing guideline documents plus 33 conditional ne
 | **D7** | Verified final branch/reuse scope, manual template/label handling | Branch selection, PR metadata | ✅ RESOLVED (`docs/spec-003-guidelines-reconcile`) |
 | **D8** | WordPress/portfolio retained-reference vs future-option role | Migration/legacy requirements | 🔄 PENDING |
 
-D0 confirms the current approval requirement, not approval to remove it.
-The canonical [protected-file list](../../PROTECTED_FILES.txt) includes `.github/`;
-`locked-files-guard` requires approval before merging those changes. Any policy
-change requires a recorded authorised decision under the
-[constitution amendment process](../../../.specify/memory/constitution.md#amendment-process).
+**D0 Resolution:** Decision gate RESOLVED. The existing protected-file approval policy (requiring `locked-files-guard` approval for `.github/` and protected paths) remains in force. This is a policy decision (no simplification).
+
+**Procedural Requirement for Phase 2:** S-documents (AGENTS.md, CONTRIBUTING.md, `.claude/skills/*`) are protected files and require formal approval before PR merge. This is a *workflow gate*, not a *decision gate*. See tasks.md T001.4 for pre-implementation approval readiness check.
+
+See [constitution amendment process](../../../.specify/memory/constitution.md#amendment-process) for policy change procedures.
 
 ### Acceptance Criteria (Target State)
 
@@ -88,17 +88,22 @@ both contain 116 files; comparison with the observation baseline remains pending
 - `AGENTS.md`
 - `CONTRIBUTING.md`
 
-### Proposed New Documents (33 conditional)
+### Proposed New Documents (33 total; 29 Phase 2, 4 Phase 3)
 
-**Categories:**
+**Phase 2 Scope (N001–N029):**
 - Reference/diagnostics (5): CSS, media, component docs
 - Design inspiration (1): Neon palettes
-- WordPress migration (2): Block patterns, decision model
 - Guidelines organization (13): Accessibility, architecture, content model, etc.
 - Pages (3): README, book-home, sitemap
 - Patterns (4): Book cards, hero, proposition, journal preview
-- Reports/archived (4): Accessibility, performance, dark-mode, nova-news
+- Reports/archived (3): Accessibility, performance, dark-mode
+
+**Phase 3 Deferred (N030–N033, per D8 decision):**
+- WordPress migration (2): Block patterns, decision model
+- Reports/archived (1): nova-news
 - Platform/service (1): PWA
+
+**Rationale:** Approved in D4; WordPress content deferred to Phase 3 per D8 decision (WordPress not in active use).
 
 ## Success Criteria (Target State)
 
@@ -115,15 +120,23 @@ These outcomes remain unverified while owner gates and implementation are pendin
 9. [ ] No unapproved file moves/deletes; all changes reviewable
 10. [ ] Final handoff report with coverage manifest, verification register, open decisions
 
-## Open Questions
+## Resolved Decisions (D0–D8)
 
-1. What are the canonical book brief identity markers and approved voices (D1)?
-2. What are the manuscript visibility/indexing/cache boundaries (D2)?
-3. Who owns design authority and what's the current CSS/palette/font strategy (D3)?
-4. For the 33 N-docs: are these pointer-only replacements or full new guides (D4)?
-5. Where should historical copies of deprecated guides be preserved (D5)?
-6. What backend/provider owns signup/waitlist functionality (D6)?
-7. Is WordPress portfolio content retained or deprecated (D8)?
+All owner decisions have been recorded and approved as of 2026-10-25.
+See [checklists/requirements.md § Resolved Decisions](./checklists/requirements.md#resolved-decisions) 
+for complete decision statements, evidence, and Phase 2 implementation guidance.
+
+**Decision Cross-Reference:**
+
+| Question | Decision | Answer | Evidence |
+|----------|----------|--------|----------|
+| Canonical book identity & voices | D1 | Balanced Hybrid (Professional + conversational) | requirements.md § D1 |
+| Manuscript visibility & boundaries | D2 | Mixed publication model; no hard separation | requirements.md § D2 |
+| Design authority & accessibility | D3 | Ash Shaw; WCAG 2.2 AAA target | requirements.md § D3 |
+| N-doc scope & pointer strategy | D4 | Hybrid consolidation; 29 approved Phase 2, 4 deferred Phase 3 | requirements.md § D4 |
+| Historical preservation approach | D5 | Archive in `guidelines/_archive/`; Type 3 pointer constraints | requirements.md § D5 |
+| Backend stack & signup | D6 | Vercel Functions + Supabase PostgreSQL + tRPC | requirements.md § D6 |
+| WordPress role & legacy content | D8 | Not in active use; 4 N-docs deferred to Phase 3 | requirements.md § D8 |
 
 ## Next Steps
 
