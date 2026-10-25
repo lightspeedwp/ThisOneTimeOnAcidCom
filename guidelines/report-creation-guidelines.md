@@ -18,7 +18,7 @@ project.
 
 ### Report Storage Location
 
-## All reports MUST be stored in `/reports/`
+## Store all reports in `/reports/`
 
 ```text
 /reports/
@@ -50,7 +50,7 @@ project.
 
 ### Required YAML Frontmatter
 
-## Every report file MUST start with YAML frontmatter
+## Include YAML frontmatter at the beginning of every report file
 
 ```yaml
 ---
@@ -305,7 +305,7 @@ Link to consolidated task list
 
 ### Executive Summary Requirements
 
-## Every report MUST start with an executive summary
+## Start every report with an executive summary
 
 ```markdown
 
@@ -336,7 +336,7 @@ Link to consolidated task list
 
 ### Code Examples Format
 
-## All code examples MUST include
+## Code examples should include
 
 1. File path
 
@@ -485,7 +485,7 @@ draft → complete → archived
 
 ### Linking to Related Files
 
-## All reports MUST link to
+## Reports should link to
 
 1. The prompt that generated them
 
