@@ -183,19 +183,17 @@ const heroData = cmsData ? cmsData.hero : homepageHero;
 
 ## 📚 How to Use This Guide
 
-**IMPORTANT:** Before using ANY component, you MUST read its specific guideline
-file. This overview helps you discover what's available, but the
-component-specific files contain critical implementation details.
+This overview helps you discover components and understand the system. For implementation details, refer to each component's specific guideline file.
 
-### Reading Order
+### Recommended Workflow
 
-1. ✅ Read this overview to understand the component system
+1. ✅ Review this overview to understand the component system
 
 1. ✅ Find the component you need in the tables below
 
-1. ✅ Read that component's specific guideline file BEFORE using it
+1. ✅ Check that component's guideline file for implementation details
 
-1. ✅ Follow the styling requirements in the component guide
+1. ✅ Follow the styling guidelines in the component documentation
 
 ---
 
@@ -217,9 +215,9 @@ component-specific files contain critical implementation details.
 
 ## Component Philosophy
 
-### Always Prefer Components
+### Use Design System Components
 
-✅ **CORRECT:** Use design system components
+✅ **Recommended:** Use design system components
 
 ```tsx
 <Logo size="md" />
@@ -236,9 +234,9 @@ component-specific files contain critical implementation details.
 
 ```text
 
-### Explicit Styling Required
+### Component Styling
 
-Every component must be styled explicitly with guidelines-compliant classes:
+Components generally use explicit, guidelines-compliant classes:
 
 ```tsx
 // ✅ CORRECT - Fully styled
@@ -649,11 +647,11 @@ mt-fluid-lg">
 
 ---
 
-## Styling Requirements
+## Styling Guidance
 
-### Typography Styling (REQUIRED)
+### Typography Styling
 
-All text must use explicit typography classes:
+Use explicit typography classes for consistent text styling:
 
 ```tsx
 // Headings
@@ -674,9 +672,9 @@ leading-relaxed">
 
 ```text
 
-### Button Styling (REQUIRED)
+### Button Styling
 
-All buttons must use complete styling:
+Buttons use complete styling patterns for consistency:
 
 ```tsx
 // Primary CTA
@@ -699,9 +697,9 @@ focus:outline-none focus:ring-4 focus:ring-teal-200 focus:ring-opacity-50">
 
 ```text
 
-### Card Styling (REQUIRED)
+### Card Styling
 
-All cards must use complete styling:
+Cards use complete styling for visual consistency:
 
 ```tsx
 <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-card-responsive
