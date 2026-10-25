@@ -2,7 +2,7 @@
 title: "Tasks: Guidelines Refactor (TOA-358)"
 spec_id: "003"
 feature: "guidelines-refactor"
-status: "Phase 2 Implementation (Blocked on Owner Decisions)"
+status: "Phase 2 Implementation (Blocked on Implementation Guidance)"
 created: "2026-10-25"
 ---
 
@@ -10,7 +10,7 @@ created: "2026-10-25"
 
 **Specification**: [spec.md](./spec.md) | **Plan**: [plan.md](./plan.md) | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
 
-**Status**: Phase 2 Implementation — **BLOCKED** until owner decisions on D1–D6, D8 are recorded in requirements.md
+**Status**: Phase 2 Implementation — **BLOCKED** until implementation guidance on 5 items (D4.a, D4.b, D5.a, D5.b, D6) is provided. Owner decisions D0–D8 are already RESOLVED and recorded in requirements.md
 
 **Total Tasks**: 43 (across Phases 2 & 3)
 
@@ -27,7 +27,7 @@ created: "2026-10-25"
 
 ## Phase 1: Planning & Specification ✅ DESIGN ARTEFACTS COMPLETE
 
-**Status**: Phase 1 design artefacts (specification, data model, contracts, checklists, quickstart) are complete. Gate resolution (D1–D6, D8) and validation remain pending.
+**Status**: Phase 1 design artefacts (specification, data model, contracts, checklists, quickstart) are complete. All 8 decision gates (D0–D8) are RESOLVED and recorded in requirements.md with evidence.
 
 - [x] Created spec.md with requirements, scope, and decision gates (D0–D8)
 - [x] Created plan.md with implementation roadmap

@@ -108,7 +108,7 @@ $ find guidelines -type f -name "*.md" | wc -l
 
 These decisions require owner input and are documented here as dependencies for Phase 2 implementation.
 
-### Gate D1: Book/Site Identity & Voices (PENDING OWNER DECISION)
+### Gate D1: Book/Site Identity & Voices (RESOLVED)
 
 **Requirement:** Canonical book brief identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context
 
@@ -124,7 +124,7 @@ These decisions require owner input and are documented here as dependencies for 
 
 ---
 
-### Gate D2: Manuscript & Access Control (PENDING OWNER DECISION)
+### Gate D2: Manuscript & Access Control (RESOLVED)
 
 **Requirement:** Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries
 
@@ -141,7 +141,7 @@ These decisions require owner input and are documented here as dependencies for 
 
 ---
 
-### Gate D3: Design Authority & Accessibility (PENDING OWNER DECISION)
+### Gate D3: Design Authority & Accessibility (RESOLVED)
 
 **Requirement:** Brief/current-CSS/approved-design-contract authority, palette/font roles, accessibility target
 
@@ -158,7 +158,7 @@ These decisions require owner input and are documented here as dependencies for 
 
 ---
 
-### Gate D4: Documentation Destinations & Pointer Strategy (PENDING OWNER DECISION)
+### Gate D4: Documentation Destinations & Pointer Strategy (RESOLVED)
 
 **Requirement:** Exact canonical destinations for G001–G116; pointer-treatment approach; six-skill reference method; conditional N-document subset approval
 
@@ -175,7 +175,7 @@ These decisions require owner input and are documented here as dependencies for 
 
 ---
 
-### Gate D5: Historical Preservation (PENDING OWNER DECISION)
+### Gate D5: Historical Preservation (RESOLVED)
 
 **Requirement:** Artefact-specific retention rules; historical preservation-copy locations; move/delete authorization for archived items
 
@@ -191,7 +191,7 @@ These decisions require owner input and are documented here as dependencies for 
 
 ---
 
-### Gate D6: Backend Provider & Delivery (PENDING OWNER DECISION)
+### Gate D6: Backend Provider & Delivery (RESOLVED)
 
 **Requirement:** Signup/contact/waitlist/backend provider confirmation; verification evidence; delivery method for secure unlock; live CMS/PWA/offline claims scope
 
@@ -207,7 +207,7 @@ These decisions require owner input and are documented here as dependencies for 
 
 ---
 
-### Gate D8: WordPress & Portfolio Role (PENDING OWNER DECISION)
+### Gate D8: WordPress & Portfolio Role (RESOLVED)
 
 **Requirement:** WordPress/portfolio retained-reference role; future-option vs deprecated decision; migration requirements; legacy requirements
 

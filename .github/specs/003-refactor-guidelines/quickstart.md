@@ -255,25 +255,31 @@ The script:
 
 ---
 
-## Checklist: Ready for Gate Resolution?
+## Checklist: Phase 1 Complete — Ready for Implementation Guidance?
 
-Use this checklist to confirm Phase 1 is complete and ready for owner gate resolution:
+Use this checklist to confirm Phase 1 is complete and identify what blocks Phase 2 implementation:
 
-- [ ] **Specification**: spec.md exists and is marked "Draft"
-- [ ] **Research**: research.md exists; all NEEDS CLARIFICATION → PENDING OWNER DECISION
-- [ ] **Data Model**: data-model.md exists; entities match repository (116 G, 9 S, 33 N)
-- [ ] **Contracts**: All 3 contracts present (guideline-interface, approval-process, pointer-redirect)
-- [ ] **Gates**: requirements.md documents all 8 gates (D0–D8)
-- [ ] **Status**: D0, D7 RESOLVED; D1–D6, D8 PENDING (awaiting owner decisions)
-- [ ] **Cross-References**: All internal links valid; no broken references
-- [ ] **Constitution**: research.md confirms COMPLIANT with all 7 principles
+- [x] **Specification**: spec.md exists and is marked "Draft"
+- [x] **Research**: research.md exists; all gates marked RESOLVED with owner decisions recorded
+- [x] **Data Model**: data-model.md exists; entities match repository (116 G, 9 S, 33 N)
+- [x] **Contracts**: All 3 contracts present (guideline-interface, approval-process, pointer-redirect)
+- [x] **Gates**: requirements.md documents all 8 gates (D0–D8) as RESOLVED with evidence
+- [x] **Status**: D0–D8 all RESOLVED (owner decisions recorded 2026-10-25)
+- [x] **Cross-References**: All internal links valid; no broken references
+- [x] **Constitution**: research.md confirms COMPLIANT with all 7 principles
 
-**When all boxes are checked,** Phase 1 is complete. Then proceed with:
+**Phase 1 is COMPLETE.** All owner decisions (D0–D8) are RESOLVED and recorded. Phase 2 remains **BLOCKED** pending 5 implementation guidance items:
 
-1. **Owner Decision Session** — Resolve D1–D6, D8 with recorded decisions (gates to Phase 2)
-2. **Update requirements.md** — Record decisions and approval evidence
-3. **Generate tasks.md** — Decompose Phase 2 implementation into actionable tasks
-4. **Phase 2 Implementation** — Execute per plan.md (requires gate resolution)
+1. **D4.a: Guidelines folder structure** — Should `guidelines/` be flat or categorized (`guidelines/{category}/`)?
+2. **D4.b: G→N consolidation mapping** — Per-guideline decision: which become pointers vs. deleted?
+3. **D5.a: Pointer chain depth confirmation** — Is 1-hop maximum acceptable?
+4. **D5.b: Archive location and reverse-link policy** — Directory structure and reverse-link format?
+5. **D6: Backend provider stack specification** — Serverless, managed DB, API services, deployment platform?
+
+When guidance is provided:
+
+1. **Record guidance** — Update requirements.md with answers to D4.a, D4.b, D5.a, D5.b, D6
+2. **Phase 2 Implementation** — Execute per plan.md with clear guidance recorded
 
 ---
 
