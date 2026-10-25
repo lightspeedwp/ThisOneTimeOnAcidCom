@@ -123,13 +123,24 @@ All gates D0–D8 are resolved. Decision evidence and implementation guidance re
 - **D7 Branch:** `docs/spec-003-phase2-implementation` (Phase 2 implementation branch)
 - **Historical branch:** `docs/spec-003-guidelines-reconcile` (Phase 1 planning branch, superseded)
 
-## Next Steps
+## Phase 2 Implementation Steps
 
-1. **Implementation Plan:** Execute Phase 2 tasks per [the existing plan](./plan.md) and [task list](./tasks.md)
-2. **Implementation Plan:** Update [the existing plan](./plan.md) with exact source→destination mapping
-3. **Task Breakdown:** Generate `tasks.md` with verifiable steps
-4. **Quality Checklist:** Complete [the existing requirements checklist](./checklists/requirements.md)
-5. **Implementation:** Execute within approved scope; validate at each checkpoint
+**Phase 2A: Protected-File Edits** (Tasks T005–T017)
+1. Review `locked-files-guard` approval process
+2. Edit 9 supporting documents (.claude/skills, AGENTS.md, CONTRIBUTING.md) with approval
+3. Complete protected-file edits per approval gate T017
+
+**Phase 2B: Guideline Document Edits** (Tasks T019–T027)
+1. Execute 116 G-document category-based edits (T019–T026)
+2. Complete pointer validation (T028–T032)
+3. Validate all 129 internal reference candidates
+
+**Phase 2C: Conditional N-Document Creation** (Tasks N001–N033)
+1. Create approved N-documents per D4 decision
+2. Resolve dependencies per approval status
+3. Integrate new documents with existing guidelines
+
+See [plan.md](./plan.md) and [tasks.md](./tasks.md) for full task breakdown and acceptance criteria.
 
 ---
 
