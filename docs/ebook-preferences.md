@@ -1,42 +1,70 @@
-# Ebook Preferences & Settings
+# Ebook preferences and settings
 
-## Overview
+Source review: 24 October 2026, revision
+`3f583002482d80ffd1910676bcf7c63e13989b20`.
+This guide describes inspected source, not a new browser or persistence test.
 
-The ebook reader allows users to configure their reading experience. These
-preferences are managed in `/utils/ebookPreferences.ts`.
+## Storage contract
 
-## Stored Configurations
+The service is [ebookPreferences.ts](../src/app/utils/ebookPreferences.ts).
+Keep its existing keys unchanged; no storage migration is proposed.
 
-1. **Font Size**:
+| Setting | localStorage key | Values | Default |
+|---|---|---|---|
+| Reading position | `ash-ebook-position` | Page index stored as a string | `0` |
+| Font size | `ash-ebook-font-size` | `small`, `medium`, `large`, `x-large` | `medium` |
+| Minimal mode | `ash-ebook-minimal-mode` | Strings `true` or `false` | `false` |
+| Reader theme | `ash-ebook-theme` | `light`, `dark`, `system` | `system` |
+| Fullscreen preference | `ash-ebook-fullscreen-pref` | Strings `true` or `false` | `false` |
+| Paging effect | `ash-ebook-paging-effect` | `slide`, `3d-flip`, `fade`, `none` | `3d-flip` |
 
-   - Stored in `localStorage` under `ash*ebook*font_size`.
-   - Options: `'small'`, `'normal'`, `'large'`, `'xlarge'`.
-   - Default: `'normal'`.
-   - Mapped to a CSS custom property `--ebook-font-scale` dynamically.
+## Service API
 
-1. **Minimal Mode**:
+| Setting | Read | Write |
+|---|---|---|
+| Reading position | `readSavedPage(maxIndex)` | `savePage(pageIndex)` |
+| Font size | `readFontSize()` | `saveFontSize(size)` |
+| Minimal mode | `readMinimalMode()` | `saveMinimalMode(enabled)` |
+| Reader theme | `readTheme()` | `saveTheme(theme)` |
+| Fullscreen preference | `readFullscreenPref()` | `saveFullscreenPref(enabled)` |
+| Paging effect | `readPagingEffect()` | `savePagingEffect(effect)` |
 
-   - Stored in `localStorage` under `ash*ebook*minimal_mode`.
-   - A boolean value toggling the distraction-free UI.
-   - Default: `false`.
-   - Adds the `.ebook-reader--minimal` BEM modifier.
+`readSavedPage(maxIndex)` parses the stored value in base 10. It returns `0`
+when the value is missing, cannot be parsed, is negative, exceeds `maxIndex`
+or storage access throws. Boolean readers return `true` only for `'true'`.
 
-1. **Paging Effect**:
+`readAllPreferences()` reads all six settings but uses `999` as its page limit;
+it does not receive the current book length.
 
-   - Stored in `localStorage` under `ash*ebook*paging_effect`.
-   - Options: `'slide'`, `'fade'`, `'none'`.
-   - Default: `'slide'`.
-   - Adjusts the animation state during page transition.
+`clearAllPreferences()` attempts to remove these six keys, including reading
+position. Do not use it as routine troubleshooting. Storage errors are caught:
+reads fall back and failed writes are silent, so persistence is not guaranteed.
 
-1. **Saved Page**:
+## Current reader integration
 
-   - Stored in `localStorage` under `ash*ebook*saved_page`.
-   - Stores the last read `currentPage` integer.
-   - Falls back to `0` if not present.
+[EbookPage.tsx](../src/app/components/pages/about/EbookPage.tsx) reads and
+persists position, font size, minimal mode and paging effect. Its initial
+position read uses the static book length; later pagination changes adjust
+the current position.
 
-## Implementation Details
+`FONT_SIZE_SCALE` maps `small`, `medium`, `large` and `x-large` to
+`0.875`, `1`, `1.125` and `1.25`. The reader applies the scale through
+`--ebook-font-scale`. Minimal mode adds `.ebook-reader--minimal`.
 
-The `ebookPreferences.ts` utility exports read and write functions for each
-setting. The `EbookPage.tsx` component synchronizes these values to state on
-initial render and updates `localStorage` within `useEffect` hooks whenever a
-preference is changed by the user.
+The page manages fullscreen through component state and the browser
+Fullscreen API, not the service's fullscreen preference. It does not call the
+service's reader-theme functions.
+
+## Reader theme versus site controls
+
+The service's `ash-ebook-theme` is separate from the site key `theme`.
+
+The header renders `ThemeToggleES5.tsx`, which maintains independent light/dark
+state. The footer renders `ThemeSwitcher.tsx`, which uses `ThemeProvider.tsx`
+context. The reviewed application entry does not mount that provider; its hook
+defines a fallback value and no-op setter when context is absent.
+
+Do not describe these controllers as one synchronised preference system or
+assume the footer reflects the header. See
+[theme troubleshooting](dark-mode-troubleshooting.md) for source tracing and
+read-only diagnostics. Controller reconciliation requires separate approval.
