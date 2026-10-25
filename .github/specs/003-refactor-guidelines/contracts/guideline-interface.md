@@ -169,13 +169,18 @@ All guidelines MUST maintain:
 
 **Verification Method:**
 ```bash
-# Before merge, validate guideline structure:
+# Before merge, validate guideline structure and links:
+# 1. Verify all guideline files have required frontmatter
 find guidelines -name "*.md" -type f | while read file; do
-  # Check for valid frontmatter structure
   head -10 "$file" | grep -q "^---" || echo "WARN: $file missing frontmatter"
 done
-# Note: npm run journal:check-links validates content/journal/ only, not guidelines/
-# Manual review: verify all cross-references in guidelines/ resolve correctly
+
+# 2. Run guidelines link checker (validates guidelines/ directory)
+npm run guidelines:check-links
+# Note: npm run journal:check-links validates content/journal/ only
+# Use npm run guidelines:check-links to verify all cross-references in guidelines/ resolve
+
+# 3. Manual review: verify cross-references and refactored pointers
 ```
 
 ---

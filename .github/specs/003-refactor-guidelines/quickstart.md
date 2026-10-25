@@ -17,7 +17,7 @@ It is NOT a step-by-step implementation guide. For implementation details, see [
 ## Prerequisites
 
 - [ ] Git repository cloned: `lightspeedwp/ThisOneTimeOnAcidCom`
-- [ ] Branch: `docs/spec-003-guidelines-reconcile` (validated)
+- [ ] Branch: `aiops/refactor-guidelines` (validated)
 - [ ] All Phase 1 design artifacts generated (this directory)
 - [ ] Ready for owner decision session on D1–D8 gates
 
