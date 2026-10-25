@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Dependabot native auto-merge configuration** — Removed the native `auto-merge` configuration from `.github/dependabot.yml`. This property is no longer part of Dependabot's schema; automatic merging is now handled centrally by the `dependabot-auto-merge.yml` workflow
 
+**Specification 003: Guidelines Refactor (TOA-358)**
+
+- **Gate resolution D1–D8** — Recorded owner decisions for Guidelines Refactor specification: (D1) Balanced hybrid voice profile with 116 guidelines aligned; (D2) Hybrid publication boundaries with mixed content states; (D3) WCAG 2.2 AAA accessibility target with Ash Shaw as design authority; (D4) 29 of 33 N-documents approved for Phase 2 (N031–N033 deferred to Phase 3 per D8) with hybrid G→N consolidation strategy; (D5) Type 1/2/3 pointer strategy approved; (D6) Hybrid backend integration approach; (D8) WordPress out of scope (React/Next.js only). All decisions recorded in `.github/specs/003-refactor-guidelines/checklists/requirements.md` with evidence links. Phase 2 implementation blocked pending guidance on: (1) subfolder structure for guidelines/ (D4.a), (2) G→N consolidation mapping (D4.b), (3) pointer chain depth confirmation—currently 1-hop maximum per contract, user to confirm acceptable (D5.a), (4) archive location and reverse-link policy (D5.b), and (5) backend provider stack specification (D6)
+
 ### Fixed
 
 - **Dependabot schema validation** — Removed unsupported `auto-merge` properties from `.github/dependabot.yml` that were causing CI validation failures. The `auto-merge` property is no longer part of Dependabot's schema; native auto-merge functionality has been replaced with the centralized `dependabot-auto-merge.yml` workflow
