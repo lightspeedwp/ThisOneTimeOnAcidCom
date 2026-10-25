@@ -213,7 +213,8 @@
 5. ✅ D6: Backend provider stack — Canonical (Vercel/Supabase/tRPC) + documented alternatives
 
 ### Per-Operation Approval
-- [ ] S001–S009: Protected-file edits scoped and approved
+- [x] **T017 `locked-files-guard` approval:** ✅ **APPROVED** (2026-10-25) — User approved all S-document edits under protected-file policy. Phase 2B now unblocked.
+- [x] S001–S009: Protected-file edits scoped and approved (committed T018)
 - [ ] G001–G116: Destination mapping confirmed and approved
 - [ ] N001–N033: Approved subset identified with dependencies
 - [ ] Pointer strategy: old paths → new locations mapped and validated
@@ -284,11 +285,11 @@
 - [x] **Phase 2A Status: READY** — All 5 implementation guidance items provided (2026-10-25)
 - [x] Implementation guidance recorded: D4.a, D4.b, D5, D6 guidance decisions documented in requirements.md
 - [x] Phase 2A ready to begin: S-document edits, N-document creation, consolidation manifest generation
-- [x] **Phase 2B Status: BLOCKED** — Pending T017 `locked-files-guard` approval before G-document edits can proceed
+- [x] **Phase 2B Status: UNBLOCKED** ✅ — T017 `locked-files-guard` approval APPROVED (2026-10-25); G-document edits can now proceed
 - [x] PR review ready: Gates documented; implementation guidance provided
 - [x] Plan: Executable; guidance resolution complete
-- [x] Tasks: Ready (unblocked by guidance decisions; Phase 2B blocked by T017 approval gate)
-- [ ] Implementation: Ready to start Phase 2A (S-doc edits, N-doc creation); Phase 2B awaits T017 approval
+- [x] Tasks: Ready (unblocked by guidance decisions; T017 approval recorded 2026-10-25)
+- [x] Implementation: Ready to start Phase 2A (S-doc edits, N-doc creation); Phase 2B unblocked (G-doc edits ready)
 - [ ] Verification: Scheduled post-implementation
 
 ---
