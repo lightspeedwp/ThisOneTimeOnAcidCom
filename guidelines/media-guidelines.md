@@ -52,7 +52,7 @@ Reference: `guidelines/media-guidelines.md`
 
 ## OptimizedImage Component
 
-The `OptimizedImage` component provides automatic responsive image optimization with WebP support, lazy loading, and preset dimensions.
+The `OptimizedImage` component provides automatic responsive image optimisation with WebP support, lazy loading, and preset dimensions.
 
 ### Component API
 
@@ -64,8 +64,7 @@ interface OptimizedImageProps {
   width?: number;        // Fixed width (px)
   height?: number;       // Fixed height (px)
   className?: string;    // Additional CSS classes
-  lazy?: boolean;        // Lazy load (default: true)
-  priority?: boolean;    // Disable lazy loading for critical images
+  loading?: 'lazy' | 'eager';  // Native loading attribute (default: 'lazy')
 }
 ```
 
@@ -81,7 +80,7 @@ interface OptimizedImageProps {
 ### Usage Example
 
 ```jsx
-import { OptimizedImage } from '@/components/OptimizedImage';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 
 export default function Portfolio() {
   return (
@@ -89,7 +88,7 @@ export default function Portfolio() {
       src="/images/festival-photo.jpg"
       alt="Koh Phangan Festival makeup"
       preset="portfolio"
-      lazy={true}
+      loading="lazy"
     />
   );
 }
@@ -100,12 +99,14 @@ export default function Portfolio() {
 For advanced use cases, use the `useOptimizedImage` hook to manage image loading state:
 
 ```typescript
-const { isLoaded, error } = useOptimizedImage(imageSrc);
+const { src, loading, error, result } = useOptimizedImage({ assetPath: 'toa-heroImage1' });
 ```
 
 **Hook returns:**
-- `isLoaded`: Boolean indicating if image has loaded
-- `error`: Error object if loading failed (null on success)
+- `src`: String containing the optimised image URL (available when loaded)
+- `loading`: Boolean indicating if image is currently loading
+- `error`: Boolean indicating if loading failed
+- `result`: ImageExportResult object with full metadata (dimensions, format, etc.)
 
 ---
 

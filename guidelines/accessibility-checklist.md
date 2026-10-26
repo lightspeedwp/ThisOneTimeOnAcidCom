@@ -199,14 +199,17 @@ export function useReducedMotion() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => {
       setPrefersReducedMotion(e.matches);
     };
 
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
   }, []);
 
   return prefersReducedMotion;
@@ -276,8 +279,8 @@ Use browser tools to catch:
 ## 6. Related Documentation
 
 - **Accessibility Recipes:** `guidelines/accessibility-recipes.md` (detailed WCAG patterns)
-- **Interaction Accessibility:** `guidelines/accessibility-checklist.md` (keyboard & ARIA)
-- **Prefers Reduced Motion:** `guidelines/accessibility-checklist.md` (motion handling)
+- **Interaction Accessibility:** `guidelines/interactions-accessibility.md` (keyboard & ARIA)
+- **Prefers Reduced Motion:** `guidelines/prefers-reduced-motion.md` (motion handling)
 - **Accessibility Audit Report:** [Archived report pointer](./_archive/accessibility-report-pointer.md), listed in the [archive index](./_archive/ARCHIVE-INDEX.md) (Feb 2025 findings)
 
 ---
@@ -304,9 +307,8 @@ Before merging any feature:
 This N-document (N002) consolidates content from and maintains cross-references to the following G-documents per the guidelines refactor (Specification 003):
 
 - **Guidelines Preserved (Type 2 Consolidation):** Old files consolidated here
-  - `guidelines/accessibility-report-feb-2025.md` → content integrated; archive pointer maintained
-  - `guidelines/accessibility-checklist.md` → reference maintained
-  - `guidelines/accessibility-checklist.md` → reference maintained
+  - `guidelines/interactions-accessibility.md` → content integrated; pointer maintained
+  - `guidelines/prefers-reduced-motion.md` → content integrated; pointer maintained
 
 All original files accessible as pointers to this canonical reference.
 
