@@ -147,31 +147,39 @@ Grid that automatically fits items based on minimum width:
 
 ### Pattern 3: Masonry Grid
 
-Staggered grid layout (like Pinterest):
+Staggered layout using CSS columns. Each item's height follows its content;
+`break-inside: avoid` keeps each card together. Items flow down each column
+before continuing in the next, so use this when column reading order is suitable.
 
 ```css
-/* Masonry Grid using CSS Grid */
+/* Content-height masonry using CSS columns */
 .masonry-grid {
   /* Mobile: Single column */
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--wp--preset--spacing--20);
+  column-count: 1;
+  column-gap: var(--wp--preset--spacing--20);
+  --masonry-item-gap: var(--wp--preset--spacing--20);
+}
+
+.masonry-grid > * {
+  break-inside: avoid;
+  margin-block-end: var(--masonry-item-gap);
 }
 
 @media (min-width: 640px) {
   .masonry-grid {
-    /* Tablet: 2 columns with auto-fit rows */
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: auto;
-    gap: var(--wp--preset--spacing--30);
+    /* Tablet: 2 columns with independent item heights */
+    column-count: 2;
+    column-gap: var(--wp--preset--spacing--30);
+    --masonry-item-gap: var(--wp--preset--spacing--30);
   }
 }
 
 @media (min-width: 1024px) {
   .masonry-grid {
     /* Desktop: 3 columns */
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--wp--preset--spacing--40);
+    column-count: 3;
+    column-gap: var(--wp--preset--spacing--40);
+    --masonry-item-gap: var(--wp--preset--spacing--40);
   }
 }
 ```
@@ -901,8 +909,8 @@ Desktop (1024px+):
 **Maintained By:** Ash Shaw Portfolio Team
 
 **Related Documentation:**
-- [Breakpoints System](../responsive/breakpoints-system.md) - Complete breakpoint reference
-- [Spacing Adjustments](../responsive/spacing-adjustments.md) - Responsive spacing patterns
-- [Typography Scaling](../responsive/typography-scaling.md) - Text scaling across devices
+- [Breakpoints System](./responsive/breakpoints-system.md) - Complete breakpoint reference
+- [Spacing Adjustments](./responsive/spacing-adjustments.md) - Responsive spacing patterns
+- [Typography Scaling](./responsive/typography-scaling.md) - Text scaling across devices
 
 **Consolidation Note:** This N-document consolidates content from `guidelines/responsive/layout-patterns.md` per Specification 003 (Phase 2D, non-destructive consolidation). Original layout patterns are preserved as Type 2 consolidation pointer.

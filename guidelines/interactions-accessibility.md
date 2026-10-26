@@ -6,7 +6,7 @@
 
 ## Migration Notice
 
-As of Specification 003 (Guidelines Refactor, 2026-10-25), Interactions Accessibility guidance has been consolidated into **[Accessibility Checklist](guidelines/accessibility-checklist.md)**.
+As of Specification 003 (Guidelines Refactor, 2026-10-25), Interactions Accessibility guidance has been consolidated into **[Accessibility Checklist](accessibility-checklist.md)**.
 
 ### What Changed
 - **Consolidated into:** Accessibility Checklist

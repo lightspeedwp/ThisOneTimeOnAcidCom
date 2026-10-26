@@ -1,12 +1,12 @@
 # Sitemap (Consolidated → Sitemap & Navigation Structure)
 
-> ⚠️ **CONSOLIDATED** · This guideline has been merged into **[Sitemap & Navigation Structure](../sitemap-navigation.md)**.
+> ⚠️ **CONSOLIDATED** · This guideline has been merged into **[Sitemap & Navigation Structure](sitemap-navigation.md)**.
 
 ---
 
 ## Migration Notice
 
-As of Specification 003 (Guidelines Refactor, 2026-10-25), sitemap and navigation guidance has been consolidated into **[Sitemap & Navigation Structure](../sitemap-navigation.md)** (N025).
+As of Specification 003 (Guidelines Refactor, 2026-10-25), sitemap and navigation guidance has been consolidated into **[Sitemap & Navigation Structure](sitemap-navigation.md)** (N025).
 
 ### What Changed
 - **Consolidated into:** Sitemap & Navigation Structure (N025)
@@ -18,7 +18,7 @@ As of Specification 003 (Guidelines Refactor, 2026-10-25), sitemap and navigatio
 
 ## Where to Find This Content
 
-All guidance is now in: **[Sitemap & Navigation Structure](../sitemap-navigation.md)**
+All guidance is now in: **[Sitemap & Navigation Structure](sitemap-navigation.md)**
 
 See `guidelines/_archive/ARCHIVE-INDEX.md` for version history and related archived documents.
 

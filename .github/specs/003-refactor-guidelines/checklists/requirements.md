@@ -3,11 +3,11 @@
 **Feature**: [Specification 003](../spec.md) · [Implementation plan](../plan.md)
 
 **Owner Sign-Off Required:** Before implementation begins  
-**Updated:** 2026-10-25
+**Updated:** 2026-10-26
 
 ---
 
-## Phase 1: Gate Resolution PENDING
+## Phase 1: Gate Resolution RESOLVED
 
 ### D0: Protected-File Process (RESOLVED)
 - [x] Existing approval requirement confirmed in [the protected-file list](../../../PROTECTED_FILES.txt), including `.github/`
@@ -221,52 +221,46 @@
 
 ## Phase 4: Verification & Quality PENDING
 
-### Coverage Manifest ✅ COMPLETE
+### Coverage Manifest — RECONCILIATION PENDING (T067)
 
-**Final Coverage Manifest: 154 Documents (116 G + 9 S + 29 N)**
+**Phase 2 coverage target: 154 tracked entities (116 G + 9 S + 29 N)**
+
+Pointer files at baseline G-paths are included in the 116 G-documents. They
+record a disposition of an existing G-entity, not an additional coverage row.
+Any pointer at an approved N-path is included in the 29 N-entities. Pointer
+operations and final active/archive/file counts must be reconciled separately.
 
 #### G-Documents Summary (116 Guidelines)
-- ✅ All 116 G-documents accounted for
-- ✅ Operation breakdown: 35+ edited (D1/D3), ~20 pointers (Type 1/2), ~8 archived (Type 3), ~62 reference (unchanged)
-- ✅ Consolidated-old-paths: 51 fixed in T065 (commit 48391f3) pointing to N-document destinations
-- ✅ Hash validation complete: 52 modified (D1 softening + D3 design updates), 64 unchanged
+- Recorded inventory: 116 baseline G-entities; per-document dispositions still require reconciliation
+- Consolidated-old-path remediation: 51 broken references initially identified; T065 records 197 reference updates across 56 files (commit 48391f3)
+- Recorded hash comparison: 52 modified, 64 unchanged; this does not by itself verify preservation or pointer correctness
 
 #### S-Documents Summary (9 Supporting Files)
-- [x] S001–S009: All 9 protected files present (D0 approval authority retained)
-- [x] Edited with D1/D3 changes while preserving existing content and safeguards
-- [x] Approval evidence: locked-files-guard process followed; changes documented
+- [ ] S001–S009: Confirm protected-file edits and approval evidence under D0
 
-#### N-Documents Summary (29 Consolidated Guides)
-- [x] N001–N029: All 29 approved N-documents created per D4 decision
-- [x] Reference (N001–N005): Design Tokens, Accessibility, CSS, Media, Components
-- [x] Organization (N006–N018): Brand Voice, Publishing, Recipes, Responsive, Data, Taxonomy, Typography, Spacing, Colors, Interactions, Testing, Performance, Backend
-- [x] Patterns (N019–N022): Book Cards, Hero, Proposition, Journal
-- [x] Pages (N023–N025): Getting Started, Homepage, Sitemap
-- [x] Reports (N026–N029): Accessibility Report (archive), Performance Report (archive), Dark Mode Report (archive), Archive Index
-- [x] All N-documents verified to exist in guidelines/ or guidelines/_archive/
+#### N-Documents Summary (29 Approved Guides)
+- [ ] N001–N029: Reconcile each approved destination and operation with the manifest
+- N030–N033 remain deferred to Phase 3 per D4/D8 and are excluded from the Phase 2 total
 
-#### Consolidation Operations Reconciled
-- ✅ Type 1 (Relocation) pointers: ~8 files pointing to new N-document destinations
-- ✅ Type 2 (Consolidation) pointers: ~12 files with multiple G-docs → single N-doc destination
-- ✅ Type 3 (Archival) pointers: ~4 deprecated/out-of-scope files in guidelines/_archive/
-- ✅ Reference (Keep): ~62 G-documents remain standalone in guidelines/ (components, templates, sections, mobile guides, overviews, troubleshooting)
+#### Total Accountability Target
 
-#### Total Accountability
-
-| Category | Baseline | Created | Archived | Pointers | Reference | Total |
-|---|---|---|---|---|---|---|
-| G-Documents | 116 | 0 | 5 | 20 | 91 | **116** ✅ |
-| S-Documents | 9 | 0 | 0 | 0 | 9 | **9** ✅ |
-| N-Documents | 0 | 29 | 0 | 0 | 0 | **29** ✅ |
-| **TOTAL** | **125** | **29** | **5** | **20** | **100** | **154** ✅ |
+| Category | Coverage Rows | Pointer Accounting |
+|---|---|---|
+| G-Documents | 116 | Baseline G-path pointers included in these rows |
+| S-Documents | 9 | No additional pointer rows |
+| N-Documents | 29 | Approved N-path pointers included in these rows |
+| **TOTAL** | **154** | **116 + 9 + 29; pointers are not added again** |
 
 **Coverage Verification:**
-- ✅ All 116 G-documents accounted for (no unauthorized deletions)
-- ✅ All 9 S-documents present and edited per D0 approval
-- ✅ All 29 N-documents created per D4 decision
-- ✅ Consolidation manifest reconciled with Phase 2 implementation results
-- ✅ Coverage: 100% (154/154 documents; 116+9+29 tracked entities)
-- ✅ Ready for Phase 3 verification
+- [ ] Complete the ID/path/operation/destination/status reconciliation required by T067
+- [ ] Verify all G-entities are preserved and all S-file approvals recorded
+- [ ] Validate N-destinations, pointer destinations, one-hop chains, and archive reverse links
+- [ ] Reconcile active, archived, and pointer counts against the baseline without double-counting
+
+The existing `consolidation-manifest-inventory.md` contains 105 operational
+groupings, including wildcards and pending entries; it is not a verified
+154-row document manifest. Earlier approximate operation counts overlapped and
+do not establish coverage completion.
 
 ### Link & Anchor Validation
 - [ ] 129 internal reference candidates classified (defect vs working)
@@ -312,76 +306,76 @@
 - [x] Commits to preservation rules (Type 1/2/3 pointers; 1-hop limit; hybrid archival)
 
 ### Quality Owner
-- [x] Verification register complete with evidence
-- [x] All manual checks documented
-- [x] No runtime claims without verification method noted
-- [x] Coverage manifest accurate and reconciled
-- [x] Blockers/deferred items clearly identified
+- [ ] Verification register complete with evidence
+- [ ] All manual checks documented
+- [ ] No runtime claims without verification method noted
+- [ ] Coverage manifest accurate and reconciled
+- [x] Blockers/deferred items clearly identified below
 
-### Verification Register (10 Requirements — All PASS)
+### Verification Register (10 Requirements — Final Verification Pending)
 
-**[✅ PASS]** 1. All 8 gates (D0–D8) resolved with evidence
-- Source: checklists/requirements.md § Resolved Decisions (D0–D8)
-- Evidence: All 8 decision statements documented with evidence references (spec.md § Key Gates table, updated 2026-10-25)
-- Status: PASS
+**[✅ PASS]** 1. All 9 gates (D0–D8) resolved with evidence
+- Source: This checklist § Phase 1 (D0–D8); spec.md § Key Gates
+- Evidence: D0 retains the existing protected-file policy; eight owner decisions (D1–D8) are recorded with decision references dated 2026-10-25
+- Status: PASS (decision resolution only; operation approvals remain required)
 
-**[✅ PASS]** 2. 116 G-documents preservation validated (no unauthorized deletes)
-- Source: T067 Coverage Manifest § G-document Inventory
-- Evidence: Baseline 116 tracked and on-disk verified; 0 deletes authorized; 20 relocations per pointer strategy; 91 reference (unchanged); 5 archived per D5
-- Status: PASS
+**[PENDING]** 2. 116 G-documents preservation validated (no unauthorized deletes)
+- Source: T067; Phase 4 § Preservation Audit
+- Evidence required: Per-document dispositions and preservation checks; prior inventory/hash summaries do not establish safeguard preservation
+- Status: PENDING
 
-**[✅ PASS]** 3. 9 S-documents edited and approved (locked-files-guard evidence)
-- Source: T067 Coverage Manifest § S-document Inventory
-- Evidence: All 9 protected files present; edited per D1/D3 while preserving safeguards; locked-files-guard approval workflow documented
-- Status: PASS
+**[PENDING]** 3. 9 S-documents edited and approved (locked-files-guard evidence)
+- Source: D0; Phase 3 § Per-Operation Approval; T067
+- Evidence required: Protected-file approval records; presence of the files or a documented workflow alone is insufficient
+- Status: PENDING
 
-**[✅ PASS]** 4. 29 N-documents created per D4 approval
-- Source: spec.md § Proposed New Documents; D4 Decision § Hybrid consolidation
-- Evidence: 29 Phase 2 approved documented (5 reference + 13 organization + 4 patterns + 3 pages + 4 reports); 4 Phase 3 deferred (WordPress per D8)
-- Status: PASS
+**[PENDING]** 4. 29 N-documents created per D4 approval
+- Source: D4 Decision; T067
+- Evidence required: Reconcile all approved N-destinations and operations in the per-document manifest
+- Status: PENDING
 
-**[✅ PASS]** 5. 26 pointer files created and validated per D4/D5 strategy
-- Source: T067 Coverage Manifest § Pointer File Inventory
-- Evidence: Type 1/2/3 pointers mapped; chain depth = 1 hop max; reverse-link comments added to archived files per D5.b/D5.c
-- Status: PASS
+**[PENDING]** 5. 26 reported pointer files validated per D4/D5 strategy
+- Source: T033–T034; T067; pointer-redirect-contract.md
+- Evidence required: Verify each destination, one-hop chain, preservation, and archive reverse link; pointer creation alone is insufficient
+- Status: PENDING
 
-**[✅ PASS]** 6. Coverage manifest complete (154 rows: 116+9+29+26/2)
-- Source: T067 Output § Coverage Manifest
-- Evidence: 116 G-docs + 9 S-docs + 29 N-docs + ~13 pointer entries = 154 total rows; all paths validated against spec § Source Inventory
-- Status: PASS
+**[PENDING]** 6. Coverage manifest complete (154 rows: 116 + 9 + 29)
+- Source: T067; Phase 4 § Coverage Manifest
+- Evidence: Expected breakdown is 116 G-docs (including pointers at baseline G-paths) + 9 S-docs + 29 N-docs = 154 tracked entities. Pointer operations add no coverage rows; per-document reconciliation remains outstanding
+- Status: PENDING
 
-**[✅ PASS]** 7. All internal links validated/fixed
-- Source: T068 Skill Validation § Pointer Validation Exercise
-- Evidence: 129 internal reference candidates checked; 0 broken links detected; Type 1/2/3 chains verified for 1-hop max; archive cross-references validated
-- Status: PASS
+**[PENDING]** 7. All internal links validated/fixed
+- Source: T035–T037; T065; Phase 4 § Link & Anchor Validation
+- Evidence: T065 records 197 consolidation reference updates across 56 files after 51 initially identified defects. Broader reference/anchor verification and correction evidence remains outstanding; this is not a zero-broken-links result
+- Status: PENDING
 
-**[✅ PASS]** 8. Design examples verified; literal corrections documented
-- Source: spec.md § D3 (Design Authority); T068 Skill Validation § Design Examples Exercise
-- Evidence: Design authority (Ash Shaw) confirmed; accessibility target (WCAG 2.2 AAA) validated; typography/spacing examples verified against design tokens; no literal corrections required
-- Status: PASS
+**[PENDING]** 8. Design examples verified; literal corrections documented
+- Source: D3; T038–T040/T066; Phase 4 § Design Example Verification
+- Evidence required: Literal token, typography, spacing, formula, and accessibility-example checks. Authority and target decisions alone do not verify the examples
+- Status: PENDING
 
-**[✅ PASS]** 9. Six existing skills statically exercised in draft/report/denied scenarios
-- Source: T068 Skill Validation (tasks.md T068 marked complete)
-- Evidence: branch-validation, changelog, labeling, test, validate, workflow-orchestration — all 6 skills passed static exercise suite (draft/report/denied scenarios)
-- Status: PASS
+**[PENDING]** 9. Six existing skills statically exercised in draft/report/denied scenarios
+- Source: T042/T068; Phase 4 § Skill Exercise Validation
+- Evidence: T068 cites `T068-skill-validation-report.md`, which is absent from the checkout. The recorded 6/6 skills and 29/29 path claims cannot be verified without the report; rerun or restore the evidence
+- Status: PENDING
 
-**[✅ PASS]** 10. No unrelated changes in governance config files
-- Source: git status check (pre-commit validation)
-- Evidence: .github/dependabot.yml, .github/mergify.yml, CHANGELOG.md unchanged; scope boundary validated per Constitution § Repository Governance
-- Status: PASS
+**[PENDING]** 10. No unrelated changes in governance config files
+- Source: Phase 2 § Source State Verification
+- Evidence required: Baseline comparison for `.github/dependabot.yml`, `.github/mergify.yml`, and `CHANGELOG.md`; an isolated clean working-tree check does not establish branch-wide scope
+- Status: PENDING
 
-### Ready for Phase 2 Implementation
+### Phase 2 Decision Readiness and Verification Status
 - [x] Spec: Gates resolved (D0, D1–D8 recorded 2026-10-25)
-- [x] Owner decisions: All 8 gates documented with rationale and evidence
-- [x] **Phase 2 Status: UNBLOCKED** — All 5 implementation guidance items provided (2026-10-25)
+- [x] Owner decisions: All 8 decisions (D1–D8) documented with rationale and evidence; D0 policy retained
+- [x] **Phase 2 Decision Status: UNBLOCKED** — All 5 implementation guidance items provided (2026-10-25); operation approvals and verification remain required
 - [x] Implementation guidance recorded: D4.a, D4.b, D5, D6 guidance decisions documented in requirements.md
-- [x] Phase 2A ready to begin: S-document edits, N-document creation, consolidation manifest generation
-- [x] Phase 2B ready to proceed: G→N mapping, pointer/archive decisions, approved exceptions recorded in Phase 2A manifest before implementation
-- [x] PR review ready: Gates documented; implementation guidance provided
+- [ ] Phase 2A operation readiness: Confirm S-document approval evidence and reconcile approved N-destinations in the manifest
+- [ ] Phase 2B operation readiness: Verify per-document G→N mapping, pointer/archive dispositions, and any approved exceptions in the manifest
+- [ ] PR review ready: Complete Phase 4 verification and T069 handoff evidence
 - [x] Plan: Executable; guidance resolution complete
 - [x] Tasks: Ready (unblocked by guidance decisions)
-- [x] Implementation: T067–T068 complete; evidence consolidated; **✅ READY FOR MERGE**
-- [x] Verification: Phase 2 complete; all 10 Final Sign-Off requirements verified and passing
+- [ ] Implementation: T067 reconciliation and T068 skill evidence remain outstanding; T069 sign-off is pending
+- [ ] Verification: Complete all Phase 4 checks and required tasks before declaring merge readiness
 
 ---
 
@@ -389,22 +383,21 @@
 
 | Component | Status | Blocker | Next Step |
 | --- | --- | --- | --- |
-| Gates D0–D8 | ✅ All 8 resolved | None — all gates documented with decisions and implementation guidance | Phase 2 implementation ready |
-| Source validation | ✅ Complete | None | Proceed to Phase 2A/2B |
-| Implementation | ✅ T067–T068 Complete | None — all evidence consolidated; ready for PR review | Create draft PR for merge |
-| Verification | ✅ Phase 2 Complete | None — all 10 Final Sign-Off requirements verified | **✅ READY FOR MERGE** |
+| Gates D0–D8 | ✅ All 9 resolved | Operation approvals remain subject to D0 | Retain decision references and approval policy |
+| Source validation | PENDING | Phase 2 baseline/scope checks remain unchecked | Record baseline comparison evidence |
+| Implementation | PARTIAL | T037 broader links, T066 design checks, T067 reconciliation, and T068 evidence outstanding | Complete verification and record results |
+| Verification | PENDING | Phase 4 checks and T069 sign-off incomplete | Complete checks, draft PR body, and record owner approval |
 
 **Phase 2 Implementation Summary:**
-- ✅ All 8 decision gates (D0–D8) resolved with evidence
-- ✅ Coverage manifest complete: 116 G-documents + 9 S-documents + 29 N-documents + 26 pointers = 154 total rows
-- ✅ All internal links validated (129 reference candidates checked; 0 broken links)
-- ✅ All 6 existing skills validated in draft/report/denied scenarios
-- ✅ Design examples verified (Ash Shaw authority; WCAG 2.2 AAA target)
-- ✅ No unrelated changes in governance files
-- ✅ Non-destructive consolidation confirmed (Type 1/2/3 pointers; 1-hop max; `guidelines/_archive/` preservation)
+- ✅ All 9 gates (D0–D8) resolved; eight owner decisions are D1–D8
+- Coverage target: 116 G-documents (including baseline G-path pointers) + 9 S-documents + 29 N-documents = 154 tracked entities; T067 reconciliation pending
+- Consolidation remediation: T065 records 197 reference updates across 56 files from 51 initially identified defects; full link verification pending under T037
+- Six-skill exercise evidence pending under T068; cited report absent
+- Design verification pending under T066; preservation and scope checks remain unchecked
+- T069 remains open: sign-off evidence, draft PR body, and owner approval are required
 
-**Final Sign-Off:** ✅ **READY FOR MERGE**
+**Final Sign-Off:** **PENDING — NOT READY FOR MERGE**
 
 ---
 
-*Updated 2026-10-26 | Phase 2 Implementation Complete | Branch: docs/spec-003-phase2-implementation*
+*Updated 2026-10-26 | Phase 2 Verification Pending | Branch: docs/spec-003-phase2-implementation*

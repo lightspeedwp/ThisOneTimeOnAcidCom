@@ -6,7 +6,7 @@
 
 ## Migration Notice
 
-As of Specification 003 (Guidelines Refactor, 2026-10-25), Dark Mode Implementation guidance has been consolidated into **[CSS Architecture Reference](guidelines/css-architecture-reference.md)**.
+As of Specification 003 (Guidelines Refactor, 2026-10-25), Dark Mode Implementation guidance has been consolidated into **[CSS Architecture Reference](css-architecture-reference.md)**.
 
 ### What Changed
 - **Consolidated into:** CSS Architecture Reference

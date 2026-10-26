@@ -18,7 +18,12 @@ As of Specification 003 (Guidelines Refactor, 2026-10-25), Image Optimization gu
 
 ## Where to Find This Content
 
-All guidance is now in: **[Media Guidelines](media-guidelines.md)**
+Canonical image optimization guidance is in **[Media Guidelines](media-guidelines.md#optimizedimage-component)**:
+
+- [OptimizedImage API](media-guidelines.md#component-api) and [preset table](media-guidelines.md#preset-dimensions)
+- [useOptimizedImage hook](media-guidelines.md#useoptimizedimage-hook)
+- [Runtime and manifest strategy](media-guidelines.md#optimization-strategy)
+- [optimize-images script contract and current limitations](media-guidelines.md#build-script-contract)
 
 See `guidelines/_archive/ARCHIVE-INDEX.md` for version history and related archived documents.
 

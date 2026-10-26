@@ -1,6 +1,6 @@
 # Accessibility Audit Report (N026)
 
-**Date:** October 2025  
+**Date:** 2026-10-25\
 **Scope:** Full site accessibility compliance audit (WCAG 2.2 AAA)  
 **Authority:** Ash Shaw (Design Authority per D3)  
 **Status:** Audit Complete — Remediation Plan Active

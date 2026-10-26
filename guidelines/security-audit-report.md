@@ -1,6 +1,6 @@
 # Security Audit Report
 
-**Date:** October 2025  
+**Date:** 2026-10-25\
 **Scope:** Full site security audit (OWASP Top 10, dependency scanning, data protection)  
 **Authority:** Security Team  
 **Status:** Audit Complete — Remediation Plan Active

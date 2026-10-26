@@ -52,60 +52,122 @@ Reference: `guidelines/media-guidelines.md`
 
 ## OptimizedImage Component
 
-The `OptimizedImage` component provides automatic responsive image optimization with WebP support, lazy loading, and preset dimensions.
+Canonical image optimization guidance consolidated from `image-optimization.md`.
+The component, presets, and hook below match the current source; the build-time
+strategy describes the intended integration and its present limitations.
 
 ### Component API
 
+Source: [OptimizedImage.tsx](../src/app/components/ui/OptimizedImage.tsx).
+The component accepts native image attributes (including `loading`, `sizes`,
+`width`, `height`, and `className`) plus these optimization options:
+
 ```typescript
-interface OptimizedImageProps {
-  src: string;           // Image source path
-  alt: string;           // Accessibility alt text (required)
-  preset?: 'hero' | 'portfolio' | 'thumbnail' | 'gallery';
-  width?: number;        // Fixed width (px)
-  height?: number;       // Fixed height (px)
-  className?: string;    // Additional CSS classes
-  lazy?: boolean;        // Lazy load (default: true)
-  priority?: boolean;    // Disable lazy loading for critical images
+interface OptimizedImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+  src: string;
+  alt: string;
+  preset?: 'sticker' | 'thumbnail' | 'content' | 'gallery' | 'hero' | 'lightbox';
+  maxWidth?: number;     // Default: preset value, otherwise 1200px
+  maxHeight?: number;    // Optional height limit
+  quality?: number;      // 0–1; default: preset value, otherwise 0.82
+  format?: 'image/webp' | 'image/jpeg' | 'image/png'; // Default: WebP
+  showPlaceholder?: boolean; // Default: true
+  onOptimized?: (result: OptimizedResult) => void;
 }
 ```
+
+`OptimizedResult` contains `url`, `width`, `height`, `sizeBytes`, and `format`;
+see [imageOptimizer.ts](../src/app/utils/imageOptimizer.ts). Explicit optimization
+options override preset values. Images are downsized with their aspect ratio
+preserved, never enlarged. Use CSS `object-fit: cover` for cropped containers.
 
 ### Preset Dimensions
 
-| Preset | Width | Height | Use Case |
-|--------|-------|--------|----------|
-| `hero` | 1920px | 600px | Homepage hero, full-width banner |
-| `portfolio` | 800px | 600px | Portfolio card, gallery display |
-| `thumbnail` | 300px | 300px | Small previews, icon-sized images |
-| `gallery` | 1200px | 800px | Gallery grid, expanded view |
+All presets use WebP. Source: `IMAGE_PRESETS` in
+[imageOptimizer.ts](../src/app/utils/imageOptimizer.ts).
+
+| Preset | Max Width | Quality | Usage |
+|--------|-----------|---------|-------|
+| `sticker` | 320px | 0.70 | Decorative elements, icons |
+| `thumbnail` | 480px | 0.78 | Card thumbnails, avatars |
+| `content` | 800px | 0.82 | Inline blog images, standard photos |
+| `gallery` | 1200px | 0.88 | Portfolio detail main images |
+| `hero` | 1440px | 0.85 | Full-width banners |
+| `lightbox` | 1920px | 0.90 | Full-screen viewing |
 
 ### Usage Example
 
-```jsx
-import { OptimizedImage } from '@/components/OptimizedImage';
+```tsx
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 
-export default function Portfolio() {
-  return (
-    <OptimizedImage
-      src="/images/festival-photo.jpg"
-      alt="Koh Phangan Festival makeup"
-      preset="portfolio"
-      lazy={true}
-    />
-  );
-}
+<OptimizedImage
+  src="/images/festival-photo.jpg"
+  alt="Koh Phangan Festival makeup"
+  preset="thumbnail"
+/>
+
+<OptimizedImage
+  src="/images/hero.jpg"
+  alt="Festival makeup detail"
+  maxWidth={1440}
+  quality={0.85}
+  format="image/webp"
+  loading="eager"
+/>
 ```
+
+Prefer presets for consistent dimensions and compression. Lazy loading is the
+default; use `loading="eager"` for critical LCP images. Provide descriptive alt text.
 
 ### useOptimizedImage Hook
 
-For advanced use cases, use the `useOptimizedImage` hook to manage image loading state:
+Source: [useOptimizedImage.ts](../src/app/hooks/useOptimizedImage.ts).
+For an optimized URL (for example, a CSS background), pass the original source
+and options as separate arguments:
 
-```typescript
-const { isLoaded, error } = useOptimizedImage(imageSrc);
+```tsx
+import { useOptimizedImage } from '@/hooks/useOptimizedImage';
+
+const { src, loading, error, result } = useOptimizedImage(rawImage, {
+  preset: 'thumbnail'
+});
 ```
 
-**Hook returns:**
-- `isLoaded`: Boolean indicating if image has loaded
-- `error`: Error object if loading failed (null on success)
+The hook accepts the optimization options in `OptimizeOptions`, plus `preset`
+and `skip`. It returns the optimized `src` (original while loading or on failure),
+`loading`, a boolean `error`, and `result` (`OptimizedResult` or `null`).
+It uses the runtime optimizer directly, without the component's manifest lookup.
+
+### Optimization Strategy
+
+1. **External URL passthrough:** The component and hook render HTTP(S) URLs
+   directly to avoid Canvas CORS failures and double compression.
+2. **Build-time manifest lookup:** For local sources with a preset, the component
+   first calls `lookupOptimizedAsset` in
+   [imageManifest.ts](../src/app/utils/imageManifest.ts). Entries are keyed by
+   source asset ID and preset, with `path`, `width`, optional `height`, `size`,
+   and `srcSet`. A match supplies the generated asset and optional responsive
+   `srcSet`, avoiding Canvas work. The current manifest is empty by default;
+   `registerOptimizedAsset` supports manual entries.
+3. **Runtime fallback:** Without a manifest match, the component uses the Canvas
+   API to resize and export a cached WebP/JPEG/PNG blob URL. This requires client
+   CPU and memory and may delay the first render. If optimization fails, it uses
+   the original source. The hook also supports explicit bypass with `skip`.
+
+### Build Script Contract
+
+The preserved build-time design is: scan extracted `figma:asset` sources, use
+`sharp` to generate preset WebP variants under `public/optimized/`, and produce
+source-ID/preset mappings for the manifest utility.
+
+Current source: [optimize-images.ts](../src/app/scripts/optimize-images.ts).
+It is a template: asset discovery, processing, and manifest writing are commented
+out. Its proposed JSON destination is `utils/imageManifest.json` relative to the
+working directory; [imageManifest.ts](../src/app/utils/imageManifest.ts) does not
+import that JSON yet. Asset extraction and manifest integration remain required
+before build-time generation is available. `npm run optimize-images` was the
+original intended command, but [package.json](../package.json) defines no such
+script. No automatic generation or manifest update is currently guaranteed.
 
 ---
 
