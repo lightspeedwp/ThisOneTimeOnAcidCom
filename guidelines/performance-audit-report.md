@@ -39,8 +39,7 @@ Core Web Vitals targets aligned with Google performance standards:
 
 1. **Third-Party Scripts**: Analytics and tracking add ~200ms; consider async loading
 2. **Bundle Size**: Total JS ~45KB (gzipped); acceptable but monitor growth
-3. **Database Queries**: Supabase queries average 120ms; consider caching strategy
-4. **Image Sizes**: Average image 85KB; verify responsive delivery
+3. **Image Sizes**: Average image 85KB; verify responsive delivery
 
 ---
 

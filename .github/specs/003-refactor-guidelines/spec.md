@@ -2,13 +2,13 @@
 spec_id: "003"
 feature: "guidelines-refactor"
 issue: "TOA-358"
-status: "draft"
+status: "implemented"
 created: "2026-10-24"
 ---
 
 # Specification 003: Refactor Guidelines (TOA-358)
 
-**Status:** Draft  
+**Status:** Implemented  
 **Issue:** [TOA-358](https://linear.app/lightspeedwp/issue/TOA-358) | [GitHub #416](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/416)  
 **Branch:** `docs/spec-003-guidelines-reconcile`\
 **Created:** 2026-10-24
