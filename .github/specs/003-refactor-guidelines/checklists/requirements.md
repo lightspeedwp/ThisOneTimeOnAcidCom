@@ -252,6 +252,7 @@
 - ✅ Reference (Keep): ~62 G-documents remain standalone in guidelines/ (components, templates, sections, mobile guides, overviews, troubleshooting)
 
 #### Total Accountability
+
 | Category | Baseline | Created | Archived | Pointers | Reference | Total |
 |---|---|---|---|---|---|---|
 | G-Documents | 116 | 0 | 5 | 20 | 91 | **116** ✅ |
