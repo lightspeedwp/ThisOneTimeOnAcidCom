@@ -258,7 +258,7 @@ operations and final active/archive/file counts must be reconciled separately.
 - [ ] Reconcile active, archived, and pointer counts against the baseline without double-counting
 
 The existing `consolidation-manifest-inventory.md` contains 105 operational
-groupings, including wildcards and pending entries; it is not a verified
+groupings, including multiple source paths per group and pending entries; it is not a verified
 154-row document manifest. Earlier approximate operation counts overlapped and
 do not establish coverage completion.
 

@@ -52,6 +52,8 @@ Reference: `guidelines/media-guidelines.md`
 
 ## OptimizedImage Component
 
+The `OptimizedImage` component provides automatic responsive image optimisation with WebP support, lazy loading, and preset dimensions.
+
 Canonical image optimization guidance consolidated from `image-optimization.md`.
 The component, presets, and hook below match the current source; the build-time
 strategy describes the intended integration and its present limitations.
@@ -67,6 +69,10 @@ interface OptimizedImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElem
   src: string;
   alt: string;
   preset?: 'sticker' | 'thumbnail' | 'content' | 'gallery' | 'hero' | 'lightbox';
+  width?: number;        // Native image width (px)
+  height?: number;       // Native image height (px)
+  className?: string;    // Additional CSS classes
+  loading?: 'lazy' | 'eager'; // Native loading attribute; default: 'lazy'
   maxWidth?: number;     // Default: preset value, otherwise 1200px
   maxHeight?: number;    // Optional height limit
   quality?: number;      // 0–1; default: preset value, otherwise 0.82
@@ -82,6 +88,8 @@ options override preset values. Images are downsized with their aspect ratio
 preserved, never enlarged. Use CSS `object-fit: cover` for cropped containers.
 
 ### Preset Dimensions
+
+Presets limit output width while preserving aspect ratio; they do not set a fixed height.
 
 All presets use WebP. Source: `IMAGE_PRESETS` in
 [imageOptimizer.ts](../src/app/utils/imageOptimizer.ts).
@@ -103,7 +111,8 @@ import { OptimizedImage } from '@/components/ui/OptimizedImage';
 <OptimizedImage
   src="/images/festival-photo.jpg"
   alt="Koh Phangan Festival makeup"
-  preset="thumbnail"
+  preset="content"
+  loading="lazy"
 />
 
 <OptimizedImage
@@ -134,9 +143,14 @@ const { src, loading, error, result } = useOptimizedImage(rawImage, {
 ```
 
 The hook accepts the optimization options in `OptimizeOptions`, plus `preset`
-and `skip`. It returns the optimized `src` (original while loading or on failure),
-`loading`, a boolean `error`, and `result` (`OptimizedResult` or `null`).
-It uses the runtime optimizer directly, without the component's manifest lookup.
+and `skip`. It uses the runtime optimizer directly, without the component's
+manifest lookup.
+
+**Hook returns:**
+- `src`: Optimised image URL, or the original source while loading or after an error
+- `loading`: Boolean indicating whether optimisation is in progress
+- `error`: Boolean indicating whether optimisation failed
+- `result`: Full optimisation result, or `null` while loading or after an error; also `null` when optimisation is skipped
 
 ### Optimization Strategy
 
