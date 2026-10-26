@@ -2,21 +2,27 @@
 
 **Total Entries: 105**
 
+## Overview
+
+The 105 entries below represent operational consolidation groupings, not individual documents. This inventory tracks how 116 G-documents (Guidelines), 9 S-documents (Supporting), and 29 N-documents (Canonical References) are processed, mapped, and consolidated across the system.
+
+**Related Documentation:** For complete document tracking across all 154 documents (116 G + 9 S + 29 N + ~26 pointers), see [`checklists/requirements.md` § Coverage Manifest](./checklists/requirements.md#coverage-manifest).
+
 | ID | Source Path | Type | N-Document | Operation | Destination | Status |
 |:---:|---|:---:|:---:|---|---|:---:|
 |   1 | `N001` | N-Doc | N001 | Create | guidelines/design-tokens-reference.md | Pending |
-|   2 | `guidelines/design-tokens/design-syste...` | G-Doc | N001 | Integrate | N001 | Pending |
+|   2 | `guidelines/design-tokens/design-system-reference.md` | G-Doc | N001 | Integrate | N001 | Pending |
 |   3 | `guidelines/design-tokens/colors.md` | G-Doc | N001 | Reference | N001 | Pending |
 |   4 | `guidelines/design-tokens/typography.md` | G-Doc | N001 | Reference | N001 | Pending |
 |   5 | `guidelines/design-tokens/spacing.md` | G-Doc | N001 | Reference | N001 | Pending |
 |   6 | `guidelines/design-tokens/animations.md` | G-Doc | N001 | Reference | N001 | Pending |
 |   7 | `guidelines/design-tokens/neon-colors.md` | G-Doc | N001 | Reference | N001 | Pending |
 |   8 | `guidelines/design-tokens/neon-system.md` | G-Doc | N001 | Reference | N001 | Pending |
-|   9 | `guidelines/design-tokens/light-dark-m...` | G-Doc | N001 | Reference | N001 | Pending |
+|   9 | `guidelines/design-tokens/light-dark-mode.md` | G-Doc | N001 | Reference | N001 | Pending |
 |  10 | `guidelines/design-tokens/iconography.md` | G-Doc | N001 | Reference | N001 | Pending |
-|  11 | `guidelines/design-tokens/portfolio-de...` | G-Doc | N001 | Reference | N001 | Pending |
+|  11 | `guidelines/design-tokens/portfolio-design-tokens.md` | G-Doc | N001 | Reference | N001 | Pending |
 |  12 | `N002` | N-Doc | N002 | Create | guidelines/accessibility-checklist.md | Pending |
-|  13 | `guidelines/accessibility-report-feb-2...` | G-Doc | N002 | Consolidate | N002 | Archive |
+|  13 | `guidelines/accessibility-audit-report.md` | G-Doc | N002 | Consolidate | N002 | Archive |
 |  14 | `guidelines/interactions-accessibility.md` | G-Doc | N002 | Reference | N002 | Pending |
 |  15 | `guidelines/prefers-reduced-motion.md` | G-Doc | N002 | Reference | N002 | Pending |
 |  16 | `N003` | N-Doc | N003 | Create | guidelines/css-architecture-reference.md | Pending |
@@ -39,12 +45,12 @@
 |  33 | `guidelines/prefers-reduced-motion.md` | G-Doc | N008 | Reference | N008 | Pending |
 |  34 | `N009` | N-Doc | N009 | Create | guidelines/responsive-design.md | Pending |
 |  35 | `guidelines/responsive/README.md` | G-Doc | N009 | Consolidate | N009 | Pending |
-|  36 | `guidelines/responsive/breakpoints-sys...` | G-Doc | N009 | Reference | N009 | Pending |
+|  36 | `guidelines/responsive/breakpoints-system.md` | G-Doc | N009 | Reference | N009 | Pending |
 |  37 | `guidelines/responsive/layout-patterns.md` | G-Doc | N009 | Reference | N009 | Pending |
-|  38 | `guidelines/responsive/typography-scal...` | G-Doc | N009 | Reference | N009 | Pending |
-|  39 | `guidelines/responsive/spacing-adjustm...` | G-Doc | N009 | Reference | N009 | Pending |
-|  40 | `guidelines/responsive/interaction-mod...` | G-Doc | N009 | Reference | N009 | Pending |
-|  41 | `guidelines/responsive/navigation-resp...` | G-Doc | N009 | Reference | N009 | Pending |
+|  38 | `guidelines/responsive/typography-scaling.md` | G-Doc | N009 | Reference | N009 | Pending |
+|  39 | `guidelines/responsive/spacing-adjustments.md` | G-Doc | N009 | Reference | N009 | Pending |
+|  40 | `guidelines/responsive/interaction-modes.md` | G-Doc | N009 | Reference | N009 | Pending |
+|  41 | `guidelines/responsive/navigation-responsive.md` | G-Doc | N009 | Reference | N009 | Pending |
 |  42 | `N010` | N-Doc | N010 | Create | guidelines/data-architecture.md | Pending |
 |  43 | `guidelines/data-models.md` | G-Doc | N010 | Consolidate | N010 | Pending |
 |  44 | `guidelines/ARCHITECTURE.md` | G-Doc | N010 | Consolidate | N010 | Pending |
@@ -60,15 +66,15 @@
 |  54 | `guidelines/prefers-reduced-motion.md` | G-Doc | N015 | Consolidate | N015 | Pending |
 |  55 | `N016` | N-Doc | N016 | Create | guidelines/testing-strategy.md | Pending |
 |  56 | `N017` | N-Doc | N017 | Update | guidelines/performance-optimization.md | Pending |
-|  57 | `guidelines/performance-optimization-r...` | G-Doc | N017 | Archive | N017 | Archive |
+|  57 | `guidelines/performance-optimization-report.md` | G-Doc | N017 | Archive | N017 | Archive |
 |  58 | `guidelines/image-optimization.md` | G-Doc | N017 | Reference | N017 | Pending |
 |  59 | `guidelines/mobile/performance.md` | G-Doc | N017 | Reference | N017 | Pending |
 |  60 | `N018` | N-Doc | N018 | Create | guidelines/backend-integration.md | Pending |
 |  61 | `N019` | N-Doc | N019 | Create | guidelines/patterns-book-cards.md | Pending |
 |  62 | `guidelines/components/BlogCard.md` | G-Doc | N019 | Reference | N019 | Pending |
 |  63 | `guidelines/components/PortfolioCard.md` | G-Doc | N019 | Reference | N019 | Pending |
-|  64 | `guidelines/patterns/CardGridWithFilte...` | G-Doc | N019 | Reference | N019 | Pending |
-|  65 | `guidelines/sections/ThreeColumnPortfo...` | G-Doc | N019 | Reference | N019 | Pending |
+|  64 | `guidelines/patterns/CardGridWithFilters.md` | G-Doc | N019 | Reference | N019 | Pending |
+|  65 | `guidelines/sections/ThreeColumnPortfolioSection.md` | G-Doc | N019 | Reference | N019 | Pending |
 |  66 | `N020` | N-Doc | N020 | Create | guidelines/patterns-hero.md | Pending |
 |  67 | `guidelines/components/HeroSection.md` | G-Doc | N020 | Reference | N020 | Pending |
 |  68 | `guidelines/sections/HeroSection.md` | G-Doc | N020 | Reference | N020 | Pending |
@@ -76,7 +82,7 @@
 |  70 | `guidelines/sections/WhySection.md` | G-Doc | N021 | Reference | N021 | Pending |
 |  71 | `N022` | N-Doc | N022 | Create | guidelines/patterns-journal-preview.md | Pending |
 |  72 | `guidelines/components/SectionCard.md` | G-Doc | N022 | Reference | N022 | Pending |
-|  73 | `guidelines/sections/BlogPreviewSectio...` | G-Doc | N022 | Reference | N022 | Pending |
+|  73 | `guidelines/sections/BlogPreviewSection.md` | G-Doc | N022 | Reference | N022 | Pending |
 |  74 | `guidelines/sections/FeaturedSection.md` | G-Doc | N022 | Reference | N022 | Pending |
 |  75 | `guidelines/overview-blog-filtering.md` | G-Doc | N022 | Reference | N022 | Pending |
 |  76 | `N023` | N-Doc | N023 | Update | guidelines/getting-started.md | Pending |
@@ -90,9 +96,9 @@
 |  84 | `guidelines/sitemap-routes.md` | G-Doc | N025 | Consolidate | N025 | Pending |
 |  85 | `guidelines/pages/sitemap-page.md` | G-Doc | N025 | Reference | N025 | Pending |
 |  86 | `N026` | N-Doc | N026 | Archive | guidelines/_archive/accessibility-report-pointer.md | Archive |
-|  87 | `guidelines/accessibility-report-feb-2...` | G-Doc | N026 | Archive | N026 | Archive |
+|  87 | `guidelines/accessibility-audit-report.md` | G-Doc | N026 | Archive | N026 | Archive |
 |  88 | `N027` | N-Doc | N027 | Archive | guidelines/_archive/performance-report-pointer.md | Archive |
-|  89 | `guidelines/performance-optimization-r...` | G-Doc | N027 | Archive | N027 | Archive |
+|  89 | `guidelines/performance-optimization-report.md` | G-Doc | N027 | Archive | N027 | Archive |
 |  90 | `N028` | N-Doc | N028 | Archive | guidelines/_archive/dark-mode-report-pointer.md | Archive |
 |  91 | `guidelines/dark-mode-lessons-learned.md` | G-Doc | N028 | Archive | N028 | Archive |
 |  92 | `guidelines/nova-news-dark-mode.md` | G-Doc | N028 | Archive | N028 | Archive |
