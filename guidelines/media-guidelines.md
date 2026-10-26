@@ -52,7 +52,7 @@ Reference: `guidelines/media-guidelines.md`
 
 ## OptimizedImage Component
 
-The `OptimizedImage` component provides automatic responsive image optimization with WebP support, lazy loading, and preset dimensions.
+The `OptimizedImage` component provides automatic responsive image optimisation with WebP support, lazy loading, and preset dimensions.
 
 ### Component API
 
@@ -60,36 +60,43 @@ The `OptimizedImage` component provides automatic responsive image optimization 
 interface OptimizedImageProps {
   src: string;           // Image source path
   alt: string;           // Accessibility alt text (required)
-  preset?: 'hero' | 'portfolio' | 'thumbnail' | 'gallery';
+  preset?: 'sticker' | 'thumbnail' | 'content' | 'hero' | 'gallery' | 'lightbox';
   width?: number;        // Fixed width (px)
   height?: number;       // Fixed height (px)
   className?: string;    // Additional CSS classes
-  lazy?: boolean;        // Lazy load (default: true)
-  priority?: boolean;    // Disable lazy loading for critical images
+  loading?: 'lazy' | 'eager'; // Native loading attribute (default: 'lazy'); use 'eager' for critical images
+  maxWidth?: number;     // Maximum optimised width (px)
+  maxHeight?: number;    // Maximum optimised height (px)
+  quality?: number;      // Compression quality (0–1)
+  format?: 'image/webp' | 'image/jpeg' | 'image/png';
 }
 ```
 
-### Preset Dimensions
+### Preset Maximum Widths
 
-| Preset | Width | Height | Use Case |
-|--------|-------|--------|----------|
-| `hero` | 1920px | 600px | Homepage hero, full-width banner |
-| `portfolio` | 800px | 600px | Portfolio card, gallery display |
-| `thumbnail` | 300px | 300px | Small previews, icon-sized images |
-| `gallery` | 1200px | 800px | Gallery grid, expanded view |
+Presets limit output width while preserving aspect ratio; they do not set a fixed height.
+
+| Preset | Maximum Width | Use Case |
+|--------|---------------|----------|
+| `sticker` | 320px | Small decorative graphics |
+| `thumbnail` | 480px | Thumbnails and cards |
+| `content` | 800px | Standard content images |
+| `hero` | 1440px | Homepage hero, full-width banner |
+| `gallery` | 1200px | Gallery grid, expanded view |
+| `lightbox` | 1920px | Full-screen lightbox |
 
 ### Usage Example
 
 ```jsx
-import { OptimizedImage } from '@/components/OptimizedImage';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 
 export default function Portfolio() {
   return (
     <OptimizedImage
       src="/images/festival-photo.jpg"
       alt="Koh Phangan Festival makeup"
-      preset="portfolio"
-      lazy={true}
+      preset="content"
+      loading="lazy"
     />
   );
 }
@@ -100,12 +107,14 @@ export default function Portfolio() {
 For advanced use cases, use the `useOptimizedImage` hook to manage image loading state:
 
 ```typescript
-const { isLoaded, error } = useOptimizedImage(imageSrc);
+const { src, loading, error, result } = useOptimizedImage(imageSrc);
 ```
 
 **Hook returns:**
-- `isLoaded`: Boolean indicating if image has loaded
-- `error`: Error object if loading failed (null on success)
+- `src`: Optimised image URL, or the original source while loading or after an error
+- `loading`: Boolean indicating whether optimisation is in progress
+- `error`: Boolean indicating whether optimisation failed
+- `result`: Full optimisation result, or `null` while loading or after an error; also `null` when optimisation is skipped
 
 ---
 

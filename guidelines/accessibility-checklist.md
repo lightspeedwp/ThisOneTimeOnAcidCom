@@ -195,7 +195,10 @@ Respond to real-time changes in the user's motion preference (OS settings change
 import { useEffect, useState } from 'react';
 
 export function useReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -205,8 +208,13 @@ export function useReducedMotion() {
       setPrefersReducedMotion(e.matches);
     };
 
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
   }, []);
 
   return prefersReducedMotion;
@@ -215,7 +223,7 @@ export function useReducedMotion() {
 
 **Key points:**
 - Detect via `prefers-reduced-motion: reduce` media query
-- Listen for changes using `addEventListener`
+- Listen for changes using `addEventListener`, with `addListener` as a fallback
 - Update component state when user changes OS settings
 - Apply CSS transitions or skip animations based on preference
 
