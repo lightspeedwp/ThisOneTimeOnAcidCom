@@ -187,7 +187,7 @@
 ### Scope Integrity
 - [x] 116 G-rows inventoried (baseline preserved; 90 modified per D1/D3, 26 unchanged)
 - [x] 9 S-rows inventoried (3 core files modified: AGENTS.md, CONTRIBUTING.md, .claude/skills/INVENTORY.md; approval T017–T018 recorded)
-- [ ] 33 N-rows inventoried (28–29 created per D4 approval; 1 TBD; AWAITING reconciliation per T041)
+- [ ] 33 N-rows inventoried (29 approved created Phase 2 per D4; 4 deferred Phase 3 per D8; verified per T041 manifest)
 - [x] Archive operations complete (7 files in guidelines/_archive/: 3 WordPress + 3 pointers + 1 index)
 - [x] No unauthorized file deletions (3 WordPress files intentionally moved to archive per D8)
 - [x] Original design caveat and context preserved in specification artifacts
