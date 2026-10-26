@@ -80,7 +80,7 @@ Progressive grid that scales from 1 column → 2 columns → 3 columns:
 
 **Visual Progression:**
 
-```
+```text
 Mobile (< 768px):
 ┌─────────────────┐
 │   Portfolio 1   │
@@ -609,7 +609,7 @@ Content that breaks out of main container:
 
 **Visual Layout:**
 
-```
+```text
 Desktop (1024px+):
 ┌─────────────┬─────┐
 │             │  2  │
