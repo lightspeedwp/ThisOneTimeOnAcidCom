@@ -164,7 +164,67 @@ Actionable accessibility checklist for ensuring WCAG 2.2 AAA compliance across a
 
 ### Reduced Motion Support
 
-Reference: `guidelines/prefers-reduced-motion.md` for comprehensive implementation guide.
+#### useReducedMotion Hook
+
+Use the `useReducedMotion` hook to detect and respond to the user's motion preference:
+
+```typescript
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+
+export function AnimatedCard() {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <div
+      style={{
+        transition: prefersReducedMotion ? 'none' : 'transform 300ms ease-out',
+        transform: 'translateY(0)',
+      }}
+    >
+      Content
+    </div>
+  );
+}
+```
+
+#### Live Preference Change Handling
+
+Respond to real-time changes in the user's motion preference (OS settings changed mid-session):
+
+```typescript
+import { useEffect, useState } from 'react';
+
+export function useReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
+  }, []);
+
+  return prefersReducedMotion;
+}
+```
+
+**Key points:**
+- Detect via `prefers-reduced-motion: reduce` media query
+- Listen for changes using `addEventListener`, with `addListener` as a fallback
+- Update component state when user changes OS settings
+- Apply CSS transitions or skip animations based on preference
 
 ---
 
@@ -246,8 +306,21 @@ Before merging any feature:
 
 ---
 
+## Consolidated G-Document References
+
+This N-document (N002) consolidates content from and maintains cross-references to the following G-documents per the guidelines refactor (Specification 003):
+
+- **Guidelines Preserved (Type 2 Consolidation):** Old files consolidated here
+  - `guidelines/interactions-accessibility.md` → content integrated; pointer maintained
+  - `guidelines/prefers-reduced-motion.md` → content integrated; pointer maintained
+
+All original files accessible as pointers to this canonical reference.
+
+---
+
 **Last Updated:** 2026-10-25  
 **Maintained by:** Ash Shaw Portfolio Team  
 **Canonical Reference:** Yes  
-**Compliance Level:** WCAG 2.2 AAA
+**Compliance Level:** WCAG 2.2 AAA  
+**N-Document ID:** N002 (Specification 003 - Guidelines Refactor)
 

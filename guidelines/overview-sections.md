@@ -289,7 +289,7 @@ files:
 - **[overview-blocks.md](./overview-blocks.md)** - Block patterns
 - **[overview-patterns.md](./overview-patterns.md)** - Design patterns
 - **[overview-components.md](./overview-components.md)** - Component library
-- **[design-tokens/spacing.md](./design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
 
 ---
 

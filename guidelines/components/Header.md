@@ -677,8 +677,8 @@ useEffect(() => {
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[SITEMAP.md](../SITEMAP.md)** - Site navigation structure
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
 
 ---
 

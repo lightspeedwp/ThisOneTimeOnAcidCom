@@ -10,7 +10,7 @@ Block for paginating large content lists with page numbers and navigation.
 ## Related Documentation
 
 - **[overview-blocks.md](../overview-blocks.md)** - Block patterns
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing
 
 ---
 

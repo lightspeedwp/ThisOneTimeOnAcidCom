@@ -539,10 +539,10 @@ When CSS isn't working as expected:
 ## Related Documentation
 
 - [Guidelines.md](../Guidelines.md) - Main guidelines
-- [dark-mode-implementation.md](../dark-mode-implementation.md) - Dark mode guide
-- [design-tokens/spacing.md](../design-tokens/spacing.md) - Spacing system
-- [design-tokens/colors.md](../design-tokens/colors.md) - Color palette
-- [design-tokens/typography.md](../design-tokens/typography.md) - Typography scale
+- [css-architecture-reference.md](./css-architecture-reference.md) - Dark mode guide
+- [design-tokens-reference.md](./design-tokens-reference.md) - Spacing system
+- [design-tokens-reference.md](./design-tokens-reference.md) - Color palette
+- [design-tokens-reference.md](./design-tokens-reference.md) - Typography scale
 
 ---
 

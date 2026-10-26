@@ -901,7 +901,7 @@ useEffect(() => {
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 
 ---
 

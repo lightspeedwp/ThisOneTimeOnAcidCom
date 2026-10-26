@@ -51,7 +51,7 @@ The primary brand palette consists of neon colors optimized for dark mode displa
 
 ### Dark Mode Palette
 
-All colors have dark mode variants. See `guidelines/design-tokens/light-dark-mode.md` for complete dark mode implementation.
+All colors have dark mode variants. See `guidelines/design-tokens-reference.md` for complete dark mode implementation.
 
 ---
 
@@ -69,7 +69,7 @@ Spacing values use an 8px base unit, with `xs` (4px) as a half-step:
 | 2xl | 48px | Page sections |
 | 3xl | 64px | Major layout breaks |
 
-Reference: `guidelines/design-tokens/spacing.md`
+Reference: `guidelines/design-tokens-reference.md`
 
 ---
 
@@ -86,7 +86,7 @@ Font stack: `Inter`, `system-ui`, `-apple-system`, sans-serif
 | body | 16px | 1.6 | Regular (400) | Body text |
 | sm | 14px | 1.5 | Regular (400) | Captions, small text |
 
-Reference: `guidelines/design-tokens/typography.md`
+Reference: `guidelines/design-tokens-reference.md`
 
 ---
 
@@ -101,7 +101,7 @@ Key animation timing values:
 | slow | 500ms | ease-out | Deliberate reveals |
 | verySlow | 1000ms | ease-out | Entrance animations |
 
-Reference: `guidelines/design-tokens/animations.md`
+Reference: `guidelines/design-tokens-reference.md`
 
 ---
 
@@ -109,11 +109,11 @@ Reference: `guidelines/design-tokens/animations.md`
 
 ### Icon Sets
 
-1. **Interface Icons** (`guidelines/icons/interface.md`)
+1. **Interface Icons** (`guidelines/media-guidelines.md`)
    - Navigation, UI controls, status indicators
    - 24px and 32px sizes
 
-2. **Travel & Portfolio Icons** (`guidelines/icons/travel.md`)
+2. **Travel & Portfolio Icons** (`guidelines/media-guidelines.md`)
    - Festival locations, travel themes
    - Thematic icons for portfolio items
 
@@ -151,14 +151,14 @@ Design tokens are implemented as CSS custom properties in your theme:
 
 ### Related Guidelines
 
-- **Color Palette:** `guidelines/design-tokens/colors.md`
-- **Typography Detailed:** `guidelines/design-tokens/typography.md`
-- **Spacing Detailed:** `guidelines/design-tokens/spacing.md`
-- **Animations Detailed:** `guidelines/design-tokens/animations.md`
-- **Neon System:** `guidelines/design-tokens/neon-system.md`
-- **Light/Dark Mode:** `guidelines/design-tokens/light-dark-mode.md`
-- **Iconography Detailed:** `guidelines/design-tokens/iconography.md`
-- **Portfolio Tokens:** `guidelines/design-tokens/portfolio-design-tokens.md`
+- **Color Palette:** `guidelines/design-tokens-reference.md`
+- **Typography Detailed:** `guidelines/design-tokens-reference.md`
+- **Spacing Detailed:** `guidelines/design-tokens-reference.md`
+- **Animations Detailed:** `guidelines/design-tokens-reference.md`
+- **Neon System:** `guidelines/design-tokens-reference.md`
+- **Light/Dark Mode:** `guidelines/design-tokens-reference.md`
+- **Iconography Detailed:** `guidelines/design-tokens-reference.md`
+- **Portfolio Tokens:** `guidelines/design-tokens-reference.md`
 
 ---
 
@@ -204,7 +204,27 @@ Design tokens are implemented as CSS custom properties in your theme:
 
 ---
 
+## Consolidated G-Document References
+
+This N-document (N001) consolidates content from and maintains cross-references to the following G-documents per the guidelines refactor (Specification 003):
+
+- **Guidelines Preserved (Type 1 Relocation):** Old design-tokens/* files redirect here
+  - `guidelines/design-tokens-reference.md` → reference maintained
+  - `guidelines/design-tokens-reference.md` → reference maintained
+  - `guidelines/design-tokens-reference.md` → reference maintained
+  - `guidelines/design-tokens-reference.md` → reference maintained
+  - `guidelines/design-tokens-reference.md` → reference maintained
+  - `guidelines/design-tokens-reference.md` → reference maintained
+  - `guidelines/design-tokens-reference.md` → reference maintained
+  - `guidelines/design-tokens-reference.md` → reference maintained
+  - `guidelines/design-tokens-reference.md` → reference maintained
+
+All original files accessible as pointers to this canonical reference.
+
+---
+
 **Last Updated:** 2026-10-25  
 **Maintained by:** Ash Shaw Portfolio Team  
-**Canonical Reference:** Yes
+**Canonical Reference:** Yes  
+**N-Document ID:** N001 (Specification 003 - Guidelines Refactor)
 

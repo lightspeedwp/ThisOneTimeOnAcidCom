@@ -405,8 +405,8 @@ function BreadcrumbsWithSchema({ items }: Props) {
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[SITEMAP.md](../SITEMAP.md)** - Site navigation structure
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
-- **[design-tokens/typography.md](../design-tokens/typography.md)** - Typography scale
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Typography scale
 
 ---
 

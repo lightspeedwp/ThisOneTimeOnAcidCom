@@ -11,7 +11,7 @@ Site footer with contact form, social links, and navigation.
 
 - **[overview-parts.md](../overview-parts.md)** - Template parts system
 - **[components/Footer.md](../components/Footer.md)** - Footer component documentation
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing
 
 ---
 

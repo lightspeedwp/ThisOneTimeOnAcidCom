@@ -754,7 +754,7 @@ width** within padding, not 100vw.
 
 - **[mobile/spacing.md](./spacing.md)** - Spacing system
 - **[mobile/typography.md](./typography.md)** - Text sizing
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Button colors
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Button colors
 
 ---
 

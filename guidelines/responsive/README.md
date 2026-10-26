@@ -426,10 +426,10 @@ Use this checklist when building responsive components:
 
 ### Design Tokens
 
-- [Spacing Scale](../design-tokens/spacing.md) - WordPress spacing scale (10-100)
-- [Typography Scale](../design-tokens/typography.md) - WordPress font sizes (100-900)
-- [Animation Durations](../design-tokens/animations.md) - Animation timing system
-- [Colors](../design-tokens/colors.md) - Color palette and gradients
+- [Spacing Scale](./design-tokens-reference.md) - WordPress spacing scale (10-100)
+- [Typography Scale](./design-tokens-reference.md) - WordPress font sizes (100-900)
+- [Animation Durations](./design-tokens-reference.md) - Animation timing system
+- [Colors](./design-tokens-reference.md) - Color palette and gradients
 
 ### Component Guidelines
 
@@ -439,7 +439,7 @@ Use this checklist when building responsive components:
 
 ### Accessibility
 
-- [Interactions & Accessibility](../interactions-accessibility.md) - Touch, hover, keyboard patterns
+- [Interactions & Accessibility](./accessibility-checklist.md) - Touch, hover, keyboard patterns
 
 ---
 
