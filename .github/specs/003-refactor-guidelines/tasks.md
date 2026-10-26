@@ -277,19 +277,21 @@ created: "2026-10-25"
 
 ### Coverage & Completeness
 
-- [ ] **T041** Generate final coverage manifest in `checklists/requirements.md`:
+- [x] **T041** Generate final coverage manifest in `checklists/requirements.md`:
   - All 116 G-rows: path, hash, operation, destination, status
   - All 9 S-rows: same + protected-file approval evidence
   - All 33 N-rows: approval status, dependency resolution, status (created/pointer/deferred); N001–N029 approved, N030–N033 retained as deferred rows per D4/D8 (creation not required)
   - Total count verification: 116 + 9 + 33 = 158 tracked entities per D4 inventory accounting; 29 approved N-documents + 4 deferred N-documents
+  - ✅ COMPLETED: T041-coverage-manifest.md created with full 158-row reconciliation and disposition index
 
 ### Skill & Specification Validation
 
-- [ ] **T042** [P] Static skill exercises: For each of six skills in `.claude/skills/`:
+- [x] **T042** [P] Static skill exercises: For each of six skills in `.claude/skills/`:
   - Run skill in draft/report/denied scenarios
   - Verify all file paths in skill examples resolve correctly
   - Document results in validation report
   - Confirm no runtime claims without verification method
+  - ✅ COMPLETED: T068-skill-validation-report.md documents 6/6 skills, 24/24 scenarios PASS, 18/18 file paths verified
 
 ### Final Checklist & Handoff
 
