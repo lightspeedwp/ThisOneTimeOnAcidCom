@@ -1,12 +1,12 @@
 # Image Optimization (Consolidated → Media Guidelines)
 
-> ⚠️ **CONSOLIDATED** · This guideline has been merged into **[Media Guidelines](guidelines/media-guidelines.md)**.
+> ⚠️ **CONSOLIDATED** · This guideline has been merged into **[Media Guidelines](media-guidelines.md)**.
 
 ---
 
 ## Migration Notice
 
-As of Specification 003 (Guidelines Refactor, 2026-10-25), Image Optimization guidance has been consolidated into **[Media Guidelines](guidelines/media-guidelines.md)**.
+As of Specification 003 (Guidelines Refactor, 2026-10-25), Image Optimization guidance has been consolidated into **[Media Guidelines](media-guidelines.md)**.
 
 ### What Changed
 - **Consolidated into:** Media Guidelines
@@ -18,7 +18,7 @@ As of Specification 003 (Guidelines Refactor, 2026-10-25), Image Optimization gu
 
 ## Where to Find This Content
 
-All guidance is now in: **[Media Guidelines](guidelines/media-guidelines.md)**
+All guidance is now in: **[Media Guidelines](media-guidelines.md)**
 
 See `guidelines/_archive/ARCHIVE-INDEX.md` for version history and related archived documents.
 

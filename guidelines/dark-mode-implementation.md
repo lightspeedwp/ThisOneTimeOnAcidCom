@@ -1,6 +1,6 @@
 # Dark Mode Implementation (Consolidated → CSS Architecture Reference)
 
-> ⚠️ **CONSOLIDATED** · This guideline has been merged into **[CSS Architecture Reference](guidelines/css-architecture-reference.md)**.
+> ⚠️ **CONSOLIDATED** · This guideline has been merged into **[CSS Architecture Reference](css-architecture-reference.md)**.
 
 ---
 
@@ -18,7 +18,7 @@ As of Specification 003 (Guidelines Refactor, 2026-10-25), Dark Mode Implementat
 
 ## Where to Find This Content
 
-All guidance is now in: **[CSS Architecture Reference](guidelines/css-architecture-reference.md)**
+All guidance is now in: **[CSS Architecture Reference](css-architecture-reference.md)**
 
 See `guidelines/_archive/ARCHIVE-INDEX.md` for version history and related archived documents.
 

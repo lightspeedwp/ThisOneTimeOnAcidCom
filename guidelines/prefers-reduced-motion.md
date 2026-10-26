@@ -1,12 +1,12 @@
 # Prefers Reduced Motion (Consolidated → Accessibility Checklist)
 
-> ⚠️ **CONSOLIDATED** · This guideline has been merged into **[Accessibility Checklist](guidelines/accessibility-checklist.md)**.
+> ⚠️ **CONSOLIDATED** · This guideline has been merged into **[Accessibility Checklist](accessibility-checklist.md)**.
 
 ---
 
 ## Migration Notice
 
-As of Specification 003 (Guidelines Refactor, 2026-10-25), Prefers Reduced Motion guidance has been consolidated into **[Accessibility Checklist](guidelines/accessibility-checklist.md)**.
+As of Specification 003 (Guidelines Refactor, 2026-10-25), Prefers Reduced Motion guidance has been consolidated into **[Accessibility Checklist](accessibility-checklist.md)**.
 
 ### What Changed
 - **Consolidated into:** Accessibility Checklist
@@ -18,7 +18,7 @@ As of Specification 003 (Guidelines Refactor, 2026-10-25), Prefers Reduced Motio
 
 ## Where to Find This Content
 
-All guidance is now in: **[Accessibility Checklist](guidelines/accessibility-checklist.md)**
+All guidance is now in: **[Accessibility Checklist](accessibility-checklist.md)**
 
 See `guidelines/_archive/ARCHIVE-INDEX.md` for version history and related archived documents.
 
