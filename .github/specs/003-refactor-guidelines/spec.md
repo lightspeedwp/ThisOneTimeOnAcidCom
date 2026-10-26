@@ -31,14 +31,14 @@ Consolidate and refactor 116 existing guideline documents plus 29 approved new d
 | Gate | Decision | Impact | Status |
 | --- | --- | --- | --- |
 | **D0** | Retain the existing protected-file approval requirement; no policy simplification is authorised | Protected edits, including all changes under `.github/` | ✅ RESOLVED (existing policy retained) |
-| **D1** | Canonical book/site identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context | New normative copy, identity claims | 🔄 PENDING |
-| **D2** | Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries | Publication/exposure contracts | 🔄 PENDING |
-| **D3** | Brief/current-CSS/approved-design-contract authority, palette/font roles, accessibility target | Design authority; arithmetic/sample corrections | 🔄 PENDING |
-| **D4** | Exact canonical destinations/pointer treatment, six-skill reference approach | Conditional N creates, pointer-only replacement, extraction | 🔄 PENDING |
-| **D5** | Artefact-specific retention and historical preservation-copy locations | Historical-copy operations | 🔄 PENDING |
-| **D6** | Signup/contact/waitlist/backend provider and verification | Delivery, secure unlock, CMS claims | 🔄 PENDING |
+| **D1** | Canonical book/site identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context | New normative copy, identity claims | ✅ RESOLVED (Balanced Hybrid voice) |
+| **D2** | Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries | Publication/exposure contracts | ✅ RESOLVED (Mixed publication model) |
+| **D3** | Brief/current-CSS/approved-design-contract authority, palette/font roles, accessibility target | Design authority; arithmetic/sample corrections | ✅ RESOLVED (Ash Shaw; WCAG 2.2 AAA) |
+| **D4** | Exact canonical destinations/pointer treatment, six-skill reference approach | Conditional N creates, pointer-only replacement, extraction | ✅ RESOLVED (Hybrid consolidation; 29 Phase 2, 4 Phase 3) |
+| **D5** | Artefact-specific retention and historical preservation-copy locations | Historical-copy operations | ✅ RESOLVED (Archive in `guidelines/_archive/`; Type 3 pointers) |
+| **D6** | Signup/contact/waitlist/backend provider and verification | Delivery, secure unlock, CMS claims | ✅ RESOLVED (Vercel Functions + Supabase + tRPC) |
 | **D7** | Verified final branch/reuse scope, manual template/label handling | Branch selection, PR metadata | ✅ RESOLVED (`docs/spec-003-guidelines-reconcile`) |
-| **D8** | WordPress/portfolio retained-reference vs future-option role | Migration/legacy requirements | 🔄 PENDING |
+| **D8** | WordPress/portfolio retained-reference vs future-option role | Migration/legacy requirements | ✅ RESOLVED (Not in active use; 4 N-docs deferred to Phase 3) |
 
 **D0 Resolution:** Decision gate RESOLVED. The existing protected-file approval policy (requiring `locked-files-guard` approval for `.github/` and protected paths) remains in force. This is a policy decision (no simplification).
 
@@ -138,13 +138,22 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
 | Backend stack & signup | D6 | Vercel Functions + Supabase PostgreSQL + tRPC | requirements.md § D6 |
 | WordPress role & legacy content | D8 | Not in active use; 4 N-docs deferred to Phase 3 | requirements.md § D8 |
 
+## Clarifications
+
+### Session 2026-10-26
+
+- Q: Which of the eight owner decisions (D1–D8) in the spec remain genuinely unresolved and require owner input before Phase 2 implementation can proceed? → A: All decisions (D0–D8) are now resolved; update the spec to confirm final statuses and record evidence.
+
+**Integration:** Updated Key Gates table to mark all decisions (D1–D8) as ✅ RESOLVED with evidence references from checklists/requirements.md (D1–D8 decision statements).
+
 ## Next Steps
 
-1. **Owner Decision Session:** Use [the plan](./plan.md) and [requirements checklist](./checklists/requirements.md) to resolve D1–D6 and D8 with focused evidence; retain D0 and D7 resolutions
-2. **Implementation Plan:** Update [the existing plan](./plan.md) with exact source→destination mapping
-3. **Task Breakdown:** Generate `tasks.md` with verifiable steps
+1. **Specification Validation:** All decision gates (D0–D8) now resolved and documented
+2. **Implementation Plan:** Review [the existing plan](./plan.md) with exact source→destination mapping
+3. **Task Breakdown:** All tasks generated in `tasks.md` with verifiable steps
 4. **Quality Checklist:** Complete [the existing requirements checklist](./checklists/requirements.md)
 5. **Implementation:** Execute within approved scope; validate at each checkpoint
+6. **Final Sign-Off:** Complete T069 checklist with full evidence coverage for PR review
 
 ---
 
