@@ -11,18 +11,18 @@
 
 Full accessibility audit of this-one-time-on-acid.com completed 2026-10-25 against WCAG 2.2 AAA Level standards. The site demonstrates strong foundational accessibility with targeted improvements recommended for full AAA compliance.
 
-### Overall Rating: **AAA-Ready** (with noted enhancements)
+### Overall Rating: **WCAG AA Compliant** — Enhancements in Progress for AAA Level
 
 | Category | Status | Notes |
 |----------|--------|-------|
-| **Color Contrast** | ✅ PASS | All text meets WCAG AAA contrast ratios |
-| **Keyboard Navigation** | ✅ PASS | Full keyboard access; focus indicators visible |
-| **Screen Reader Compat** | ✅ PASS | Semantic HTML; ARIA labels present |
+| **Color Contrast** | ✅ PASS | Meets WCAG AA standards; AAA enhancement in progress |
+| **Keyboard Navigation** | ⏳ PARTIAL | Focus trap handling in modals needs improvement |
+| **Screen Reader Compat** | ⏳ PARTIAL | ARIA live regions for dynamic content needed |
 | **Motion/Animation** | ✅ PASS | `prefers-reduced-motion` respected |
 | **Form Accessibility** | ✅ PASS | Labels, error messages, validation clear |
-| **Image Alt Text** | 🟡 PARTIAL | 92% coverage; decorative images properly marked |
+| **Image Alt Text** | 🟡 PARTIAL | 92% coverage; remaining 8% to be completed |
 | **Heading Hierarchy** | ✅ PASS | Logical H1–H6 structure throughout |
-| **Link Purpose** | ✅ PASS | All links have descriptive text |
+| **Link Purpose** | 🟡 PARTIAL | Icon-only buttons need text labels or title attributes |
 
 ---
 
@@ -56,10 +56,14 @@ Full accessibility audit of this-one-time-on-acid.com completed 2026-10-25 again
 
 ## Remediation Timeline
 
-- ✅ Critical issues: Resolved (2026-10-25)
-- ⏳ High priority: In progress (target: 2026-11-15)
+- ⏳ WCAG AA Foundation: Complete (2026-10-25)
+- ⏳ High priority (AAA enhancements): In progress (target: 2026-11-15)
+  - Focus trap handling in modals
+  - ARIA live regions for dynamic content
+  - Icon-only button text labels
 - 📋 Medium priority: Scheduled (target: 2026-12-15)
-- 🔮 Enhancement: Future (post-v1.0)
+  - Remaining 8% alt text coverage
+- 🔮 Future: Post-v1.0 enhancements
 
 ---
 

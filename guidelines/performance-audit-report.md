@@ -11,15 +11,17 @@
 
 Comprehensive performance audit of this-one-time-on-acid.com completed 2026-10-25. The site demonstrates excellent Core Web Vitals performance with opportunities for further optimization in asset delivery and third-party dependencies.
 
-### Overall Rating: **Excellent (Green)** — 95/100 Lighthouse Score
+### Performance Targets
 
-| Metric | Target | Current | Status |
-|--------|--------|---------|--------|
-| **LCP** (Largest Contentful Paint) | <2.5s | 1.8s | ✅ GOOD |
-| **FID** (First Input Delay) | <100ms | 45ms | ✅ GOOD |
-| **CLS** (Cumulative Layout Shift) | <0.1 | 0.05 | ✅ GOOD |
-| **TTFB** (Time to First Byte) | <600ms | 120ms | ✅ GOOD |
-| **FCP** (First Contentful Paint) | <1.8s | 1.2s | ✅ GOOD |
+Core Web Vitals targets aligned with Google performance standards:
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| **LCP** (Largest Contentful Paint) | <2.5s | Measured via Vercel Analytics |
+| **FID** (First Input Delay) | <100ms | Real-user data only |
+| **CLS** (Cumulative Layout Shift) | <0.1 | Layout stability target |
+| **TTFB** (Time to First Byte) | <600ms | Edge caching in place |
+| **FCP** (First Contentful Paint) | <1.8s | Synthetic testing baseline |
 
 ---
 
@@ -56,10 +58,10 @@ Comprehensive performance audit of this-one-time-on-acid.com completed 2026-10-2
 
 ## Testing Methodology
 
-- **Automated**: Lighthouse CI (weekly), Web Vitals (real-user monitoring)
-- **Synthetic**: Simulated 4G throttling, 3G throttling (Chrome DevTools)
-- **Real-User**: Core Web Vitals data from Google Search Console
-- **Standards**: Google Core Web Vitals, Lighthouse scoring
+- **Automated**: Lighthouse CI, Web Vitals monitoring (where available)
+- **Synthetic**: Simulated network conditions (Chrome DevTools, Lighthouse)
+- **Real-User**: Analytics via Vercel monitoring dashboard
+- **Standards**: Google Core Web Vitals guidelines, Lighthouse scoring
 
 ---
 
@@ -81,4 +83,4 @@ Comprehensive performance audit of this-one-time-on-acid.com completed 2026-10-2
 ---
 
 **Next Review:** 2026-12-15  
-**Monitoring:** Continuous (Vercel Analytics + Google Search Console)
+**Monitoring:** Continuous via Vercel Analytics dashboard
