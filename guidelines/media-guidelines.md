@@ -50,6 +50,65 @@ Reference: `guidelines/media-guidelines.md`
 
 ---
 
+## OptimizedImage Component
+
+The `OptimizedImage` component provides automatic responsive image optimization with WebP support, lazy loading, and preset dimensions.
+
+### Component API
+
+```typescript
+interface OptimizedImageProps {
+  src: string;           // Image source path
+  alt: string;           // Accessibility alt text (required)
+  preset?: 'hero' | 'portfolio' | 'thumbnail' | 'gallery';
+  width?: number;        // Fixed width (px)
+  height?: number;       // Fixed height (px)
+  className?: string;    // Additional CSS classes
+  lazy?: boolean;        // Lazy load (default: true)
+  priority?: boolean;    // Disable lazy loading for critical images
+}
+```
+
+### Preset Dimensions
+
+| Preset | Width | Height | Use Case |
+|--------|-------|--------|----------|
+| `hero` | 1920px | 600px | Homepage hero, full-width banner |
+| `portfolio` | 800px | 600px | Portfolio card, gallery display |
+| `thumbnail` | 300px | 300px | Small previews, icon-sized images |
+| `gallery` | 1200px | 800px | Gallery grid, expanded view |
+
+### Usage Example
+
+```jsx
+import { OptimizedImage } from '@/components/OptimizedImage';
+
+export default function Portfolio() {
+  return (
+    <OptimizedImage
+      src="/images/festival-photo.jpg"
+      alt="Koh Phangan Festival makeup"
+      preset="portfolio"
+      lazy={true}
+    />
+  );
+}
+```
+
+### useOptimizedImage Hook
+
+For advanced use cases, use the `useOptimizedImage` hook to manage image loading state:
+
+```typescript
+const { isLoaded, error } = useOptimizedImage(imageSrc);
+```
+
+**Hook returns:**
+- `isLoaded`: Boolean indicating if image has loaded
+- `error`: Error object if loading failed (null on success)
+
+---
+
 ## Iconography
 
 ### Icon Sets

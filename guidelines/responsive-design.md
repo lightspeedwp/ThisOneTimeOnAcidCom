@@ -25,13 +25,14 @@ Comprehensive responsive layout patterns showing how grid, flexbox, and containe
 
 ## Breakpoint System
 
-| Name | Min Width | Use Case |
-|------|-----------|----------|
-| Mobile | 0px | Phone devices |
-| Tablet | 768px | Tablets, small laptops |
-| Desktop | 1024px | Standard desktops |
-| Wide | 1440px | Large monitors |
-| XL | 1536px | Extra large displays |
+| Name | Size | Use Case |
+|------|------|----------|
+| mobile | < 640px | Mobile phones |
+| tablet | 640px ≤ width < 1024px | Tablets, small laptops |
+| desktop | 1024px ≤ width < 1536px | Desktops |
+| wide | ≥ 1536px | Large monitors |
+
+**Standard Reference:** See [CSS Architecture Reference § Responsive Breakpoints](css-architecture-reference.md#4-responsive-breakpoints) for canonical breakpoint definitions.
 
 ---
 
@@ -51,7 +52,7 @@ Progressive grid that scales from 1 column → 2 columns → 3 columns:
   padding: var(--wp--preset--spacing--20);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .portfolio-grid {
     /* Tablet: 2 columns */
     grid-template-columns: repeat(2, 1fr);
@@ -69,7 +70,7 @@ Progressive grid that scales from 1 column → 2 columns → 3 columns:
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1536px) {
   .portfolio-grid {
     /* XL Desktop: 4 columns */
     grid-template-columns: repeat(4, 1fr);
@@ -81,7 +82,7 @@ Progressive grid that scales from 1 column → 2 columns → 3 columns:
 **Visual Progression:**
 
 ```text
-Mobile (< 768px):
+Mobile (< 640px):
 ┌─────────────────┐
 │   Portfolio 1   │
 ├─────────────────┤
@@ -90,7 +91,7 @@ Mobile (< 768px):
 │   Portfolio 3   │
 └─────────────────┘
 
-Tablet (768px - 1023px):
+Tablet (640px - 1023px):
 ┌─────────┬─────────┐
 │  Port 1 │  Port 2 │
 ├─────────┼─────────┤
@@ -120,7 +121,7 @@ Grid that automatically fits items based on minimum width:
   padding: var(--wp--preset--spacing--20);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .blog-grid {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: var(--wp--preset--spacing--40);
@@ -157,18 +158,12 @@ Staggered grid layout (like Pinterest):
   gap: var(--wp--preset--spacing--20);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .masonry-grid {
-    /* Tablet: 2 columns with dense packing */
+    /* Tablet: 2 columns with auto-fit rows */
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 10px;
-    grid-auto-flow: dense;
+    grid-auto-rows: auto;
     gap: var(--wp--preset--spacing--30);
-  }
-  
-  .masonry-grid > * {
-    /* Items span based on content height */
-    grid-row: span var(--row-span, 10);
   }
 }
 
@@ -187,7 +182,7 @@ Staggered grid layout (like Pinterest):
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 <ResponsiveMasonry
-  columnsCountBreakPoints={{ 350: 1, 768: 2, 1024: 3, 1440: 4 }}
+  columnsCountBreakPoints={{ 350: 1, 640: 2, 1024: 3, 1536: 4 }}
 >
   <Masonry gutter="var(--wp--preset--spacing--30)">
     {portfolioItems.map((item) => (
@@ -215,7 +210,7 @@ Converts from vertical stack to horizontal row:
   padding: var(--wp--preset--spacing--20);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .feature-section {
     /* Tablet: Still stacked but more space */
     gap: var(--wp--preset--spacing--40);
@@ -249,7 +244,7 @@ Items wrap to new rows as needed:
   padding: var(--wp--preset--spacing--20);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .tag-list {
     gap: var(--wp--preset--spacing--20);
     padding: var(--wp--preset--spacing--40);
@@ -319,7 +314,7 @@ Main content with fixed-width sidebar:
   padding-inline: var(--wp--preset--spacing--20);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .section-container {
     /* Tablet: Constrained width */
     max-width: 720px;
@@ -336,7 +331,7 @@ Main content with fixed-width sidebar:
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1536px) {
   .section-container {
     /* XL Desktop: Maximum width */
     max-width: 1600px;
@@ -366,7 +361,7 @@ Content that breaks out of main container:
   margin-right: calc(50% - 50vw);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .main-container {
     padding-inline: var(--wp--preset--spacing--40);
   }
@@ -414,7 +409,7 @@ Content that breaks out of main container:
   max-width: 600px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .hero-centered {
     padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
     gap: var(--wp--preset--spacing--40);
@@ -459,7 +454,7 @@ Content that breaks out of main container:
   order: 1; /* Image first on mobile */
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .hero-split {
     gap: var(--wp--preset--spacing--50);
     padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
@@ -508,7 +503,7 @@ Content that breaks out of main container:
   max-width: 600px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .hero-fullscreen {
     padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
   }
@@ -540,7 +535,7 @@ Content that breaks out of main container:
   gap: var(--wp--preset--spacing--10);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .gallery-grid {
     /* Tablet: 3 columns */
     grid-template-columns: repeat(3, 1fr);
@@ -556,7 +551,7 @@ Content that breaks out of main container:
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1536px) {
   .gallery-grid {
     /* XL Desktop: 5 columns */
     grid-template-columns: repeat(5, 1fr);
@@ -582,7 +577,7 @@ Content that breaks out of main container:
 }
 
 /* Tablet: Featured item spans 2 rows */
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .gallery-featured {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--wp--preset--spacing--30);
@@ -642,7 +637,7 @@ Desktop (1024px+):
   gap: var(--wp--preset--spacing--20);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .blog-list {
     gap: var(--wp--preset--spacing--50);
     padding: var(--wp--preset--spacing--40);
@@ -686,7 +681,7 @@ Desktop (1024px+):
   padding: var(--wp--preset--spacing--20);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .blog-grid {
     /* Tablet: 2 columns */
     grid-template-columns: repeat(2, 1fr);
@@ -746,7 +741,7 @@ Desktop (1024px+):
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1536px) {
   .content-sidebar {
     width: 400px;
   }
@@ -775,7 +770,7 @@ Desktop (1024px+):
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1536px) {
   .two-sidebar-layout {
     grid-template-columns: 300px 1fr 300px;
   }
@@ -799,7 +794,7 @@ Desktop (1024px+):
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .site-header {
     padding: var(--wp--preset--spacing--30);
   }
@@ -842,7 +837,7 @@ Desktop (1024px+):
 1. **Use mobile-first approach**
    ```css
    .component { /* Mobile styles */ }
-   @media (min-width: 768px) { /* Tablet */ }
+   @media (min-width: 640px) { /* Tablet */ }
    @media (min-width: 1024px) { /* Desktop */ }
    ```
 
@@ -887,7 +882,7 @@ Desktop (1024px+):
    @media (min-width: 642px) { }
    
    /* ✅ GOOD */
-   @media (min-width: 768px) { }
+   @media (min-width: 640px) { }
    ```
 
 3. **Don't forget min-width: 0 for flex items**

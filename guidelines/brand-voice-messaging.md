@@ -57,7 +57,7 @@ The original file is accessible as a pointer to this canonical reference.
 
 ## Related Documentation
 
-See `guidelines/voice-and-tone.md` for detailed examples and archived reference.
+**Pointer File:** `guidelines/voice-and-tone.md` — Type 1 relocation pointer with quick navigation to voice principles, tone variations, and messaging framework sections.
 
 ---
 

@@ -140,9 +140,68 @@ Block, Element, Modifier (BEM) naming convention ensures predictable, maintainab
 }
 ```
 
+### Dark Mode Preference Detection
+
+Detect and respond to user's system-level dark mode preference:
+
+```javascript
+// Detect system preference
+const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// Listen for preference changes (e.g., user switches in OS settings)
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  const isDark = e.matches;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  updateThemeUI(isDark);
+});
+```
+
+### Dark Mode Storage (localStorage)
+
+Persist user's explicit dark mode toggle in localStorage:
+
+```javascript
+// Store user preference
+const setThemePreference = (isDark) => {
+  localStorage.setItem('theme-preference', isDark ? 'dark' : 'light');
+  document.documentElement.classList.toggle('dark', isDark);
+};
+
+// Load saved preference on page load
+const loadThemePreference = () => {
+  const saved = localStorage.getItem('theme-preference');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = saved ? saved === 'dark' : prefersDark;
+  setThemePreference(isDark);
+};
+
+// Call on mount
+loadThemePreference();
+```
+
+### Common Dark Mode Issues
+
+**Issue: `.bg-card:hover` forces black background in light mode**
+
+See `guidelines/troubleshooting/css-issues.md § Issue 1` for diagnosis and fix.
+
+**Solution:**
+
+```css
+/* ✅ CORRECT - Separate light and dark hover states */
+.bg-card:hover {
+  background-color: #f9fafb;  /* Light gray for light mode */
+}
+
+.dark .bg-card:hover {
+  background-color: #000000;  /* Black for dark mode */
+}
+```
+
 ### Related Guidance
 
-- **Dark Mode Lessons Learned:** `guidelines/css-architecture-reference.md`
+- **CSS Issues & Troubleshooting:** `guidelines/troubleshooting/css-issues.md`
+- **Dark Mode Lessons Learned:** `guidelines/dark-mode-lessons-learned.md`
 - **Light/Dark Mode Tokens:** `guidelines/design-tokens-reference.md`
 
 ---

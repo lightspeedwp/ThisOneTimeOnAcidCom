@@ -1,8 +1,10 @@
 # 🦅 Headless WordPress Migration Guide
 
+> ⚠️ **ARCHIVED** · WordPress migration is out of scope per Decision Gate D8 (Guidelines Refactor, Specification 003). This guide is preserved for reference only.
+
 **Version:** 1.1.0 (Dual Mode Enabled)
 **Date:** February 21, 2026
-**Status:** Ready for Implementation
+**Status:** Archived (Out of Scope)
 
 This guide details the process of migrating the Ash Shaw Makeup Portfolio from
 its current "Mock Data" architecture to a **Headless WordPress** backend.

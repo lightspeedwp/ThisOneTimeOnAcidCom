@@ -164,7 +164,60 @@ Actionable accessibility checklist for ensuring WCAG 2.2 AAA compliance across a
 
 ### Reduced Motion Support
 
-Reference: `guidelines/accessibility-checklist.md` for comprehensive implementation guide.
+#### useReducedMotion Hook
+
+Use the `useReducedMotion` hook to detect and respond to the user's motion preference:
+
+```typescript
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+
+export function AnimatedCard() {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <div
+      style={{
+        transition: prefersReducedMotion ? 'none' : 'transform 300ms ease-out',
+        transform: 'translateY(0)',
+      }}
+    >
+      Content
+    </div>
+  );
+}
+```
+
+#### Live Preference Change Handling
+
+Respond to real-time changes in the user's motion preference (OS settings changed mid-session):
+
+```typescript
+import { useEffect, useState } from 'react';
+
+export function useReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  return prefersReducedMotion;
+}
+```
+
+**Key points:**
+- Detect via `prefers-reduced-motion: reduce` media query
+- Listen for changes using `addEventListener`
+- Update component state when user changes OS settings
+- Apply CSS transitions or skip animations based on preference
 
 ---
 
