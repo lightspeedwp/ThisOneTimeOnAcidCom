@@ -1,4 +1,4 @@
-# Security Audit Report (N028)
+# Security Audit Report
 
 **Date:** October 2025  
 **Scope:** Full site security audit (OWASP Top 10, dependency scanning, data protection)  

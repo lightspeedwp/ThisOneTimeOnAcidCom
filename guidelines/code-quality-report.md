@@ -1,4 +1,4 @@
-# Code Quality Report (N029)
+# Code Quality Report
 
 **Date:** October 2025  
 **Scope:** Full site codebase quality assessment (testing, coverage, complexity, maintainability)  
