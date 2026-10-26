@@ -10,7 +10,7 @@ Block for displaying portfolio entry previews with images and metadata.
 ## Related Documentation
 
 - **[overview-blocks.md](../overview-blocks.md)** - Block patterns
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing
 - **[Lightbox.md](./Lightbox.md)** - Lightbox integration
 
 ---

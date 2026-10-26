@@ -683,8 +683,8 @@ focus:ring-opacity-50 rounded-full"
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 
 ---
 

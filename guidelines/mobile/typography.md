@@ -820,7 +820,7 @@ Test on:
 
 ## Related Documentation
 
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Full typography system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Full typography system
 - **[mobile/forms.md](./forms.md)** - Mobile form patterns
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 

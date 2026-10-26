@@ -848,8 +848,8 @@ Differences:
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system overview
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 
 ---
 
@@ -868,9 +868,9 @@ Differences:
 
 ### Design Tokens (1)
 
-- **[colors.md](./design-tokens-reference.md)** - Color system and gradients
-- **[spacing.md](./design-tokens-reference.md)** - Icon spacing guidelines
-- **[typography.md](./design-tokens-reference.md)** - Pairing text with icons
+- **[colors.md](../design-tokens-reference.md)** - Color system and gradients
+- **[spacing.md](../design-tokens-reference.md)** - Icon spacing guidelines
+- **[typography.md](../design-tokens-reference.md)** - Pairing text with icons
 
 ---
 

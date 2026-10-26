@@ -641,8 +641,8 @@ p-fluid-md                         // Card padding
 - **[overview-sections.md](../overview-sections.md)** - Section system overview
 - **[BlogCard.md](../components/BlogCard.md)** - Card component details (BlogPostCard)
 - **[ReadMoreButton.md](../components/ReadMoreButton.md)** - Read more button
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing tokens
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing tokens
 
 ---
 

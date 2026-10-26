@@ -554,9 +554,9 @@ const [lightbox, setLightbox] = useState({ isOpen: false, ... });
 
 - **[overview-sections.md](../overview-sections.md)** - Section system overview
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Typography scale
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing tokens
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Typography scale
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing tokens
 
 ---
 

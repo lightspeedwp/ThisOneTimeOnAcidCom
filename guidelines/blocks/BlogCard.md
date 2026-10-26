@@ -240,8 +240,8 @@ className="
 ## Related Documentation
 
 - **[overview-blocks.md](../overview-blocks.md)** - Block system
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Colors
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Colors
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing
 
 ---
 

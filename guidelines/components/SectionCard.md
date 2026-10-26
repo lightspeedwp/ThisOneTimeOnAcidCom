@@ -243,7 +243,7 @@ When implementing SectionCard with dark mode:
 
 ### Related Documentation
 
-- **[colors.md](./design-tokens-reference.md)** - Complete color palette for both themes
+- **[colors.md](../design-tokens-reference.md)** - Complete color palette for both themes
 - **[css-architecture-reference.md](./css-architecture-reference.md)** - Full dark mode guide
 - **[component-dark-mode.md](../component-dark-mode.md)** - Component-specific patterns
 
@@ -381,8 +381,8 @@ focus:ring-opacity-50"
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
 
 ---
 

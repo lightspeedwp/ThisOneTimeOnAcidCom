@@ -102,7 +102,7 @@ Each portfolio entry displays as a card:
 
 - **[overview-sections.md](../overview-sections.md)** - Section system
 - **[PortfolioCard.md](../blocks/PortfolioCard.md)** - Card component
-- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing tokens
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing tokens
 
 ---
 
