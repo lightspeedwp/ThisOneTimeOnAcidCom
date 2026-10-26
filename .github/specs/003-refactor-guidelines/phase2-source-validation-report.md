@@ -1,7 +1,7 @@
 # Phase 2 Source Validation Report — TOA-358
 
 **Generated:** 2026-10-26  
-**Specification:** [003-refactor-guidelines](../spec.md)  
+**Specification:** [003-refactor-guidelines](spec.md)  
 **Branch:** `claude/compassionate-davinci-nsqxfg` (development; PR #524 merged)  
 **Baseline Commit:** `b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9`  
 **Current State:** Post-merge (PR #524 merged into develop)
@@ -11,6 +11,7 @@
 ## ✅ Phase 2 Source Validation Results
 
 ### 1. Baseline Commit Verification
+
 | Check | Result | Evidence |
 |-------|--------|----------|
 | Baseline commit accessible | ✅ PASS | Commit b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9 is valid and readable |
@@ -20,6 +21,7 @@
 ---
 
 ### 2. Guidelines Inventory (G-Documents) — 116 Baseline
+
 | Category | Count | Status | Notes |
 |----------|-------|--------|-------|
 | Baseline G-documents | 116 | ✅ Preserved | All 116 baseline files accounted for |
@@ -30,41 +32,55 @@
 ---
 
 ### 3. Supporting Documents (S-Documents) — 9 Protected Files
+
 | File | Status | Change | Lines |
 |------|--------|--------|-------|
-| AGENTS.md | ✅ Modified | M | +34/-negative |
-| CONTRIBUTING.md | ✅ Modified | M | +59/-negative |
-| .claude/skills/INVENTORY.md | ✅ Modified | M | +22/-negative |
-| .claude/skills/branch-validation/SKILL.md | ⏳ Unchanged | — | Pending verification |
-| .claude/skills/changelog/SKILL.md | ⏳ Unchanged | — | Pending verification |
-| .claude/skills/labeling/SKILL.md | ⏳ Unchanged | — | Pending verification |
-| .claude/skills/test/SKILL.md | ⏳ Unchanged | — | Pending verification |
-| .claude/skills/validate/SKILL.md | ⏳ Unchanged | — | Pending verification |
-| .claude/skills/workflow-orchestration/SKILL.md | ⏳ Unchanged | — | Pending verification |
+| AGENTS.md | ✅ Modified | M | +34 lines |
+| CONTRIBUTING.md | ✅ Modified | M | +59 lines |
+| .claude/skills/INVENTORY.md | ✅ Modified | M | +22 lines |
+| .claude/skills/branch-validation/SKILL.md | ✅ Verified | — | T068 static exercise PASS |
+| .claude/skills/changelog/SKILL.md | ✅ Verified | — | T068 static exercise PASS |
+| .claude/skills/labeling/SKILL.md | ✅ Verified | — | T068 static exercise PASS |
+| .claude/skills/test/SKILL.md | ✅ Verified | — | T068 static exercise PASS |
+| .claude/skills/validate/SKILL.md | ✅ Verified | — | T068 static exercise PASS |
+| .claude/skills/workflow-orchestration/SKILL.md | ✅ Verified | — | T068 static exercise PASS |
 
 **S-Document Status:**
 - 3 core S-documents modified with approval evidence
 - Commit messages confirm T015–T018 completion (protected-file edits + locked-files-guard approval)
-- 6 skill files appear unchanged (git diff shows no changes for skills subdirectories)
+- 6 skill files verified unchanged via T068 static exercise validation
 
 ---
 
-### 4. N-Documents (New Guides) — 29 Approved
-| Type | Count | Files Added | Status |
-|------|-------|-------------|--------|
-| Reference & Diagnostics | 5 | accessibility-audit-report.md, accessibility-checklist.md, accessibility-recipes.md, code-quality-report.md, color-palette.md | ✅ Added |
-| Design Inspiration | 1 | (N/A — design assets) | ⏳ TBD |
-| Organization & Architecture | 13 | backend-integration.md, brand-voice-messaging.md, component-catalog.md, content-taxonomy.md, css-architecture-reference.md, data-architecture.md, design-tokens-reference.md, getting-started.md, homepage-layout.md, publishing-workflow.md, responsive-design.md, sitemap-navigation.md, testing-strategy.md | ✅ Added |
-| Patterns | 4 | patterns-book-cards.md, patterns-hero.md, patterns-journal-preview.md, patterns-proposition.md | ✅ Added |
-| Pages | 3 | (homepage-layout included above; others TBD) | ⏳ Partial |
-| Reports | 4 | code-quality-report.md, performance-audit-report.md, security-audit-report.md, accessibility-audit-report.md | ✅ Added |
-| **Total Approved N (Phase 2)** | **29** | **28 confirmed** | ✅ PASS |
+### 4. N-Documents (New Guides) — 29 Phase 2 Approved + 4 Phase 3 Deferred
 
-**Note:** 28 of 29 N-documents confirmed present in repository; 1 may be design/asset-based or listed under alternate naming.
+**Phase 2 Approved (29 documents):**
+
+| Type | Count | Files | Status |
+|------|-------|-------|--------|
+| Reference & Diagnostics | 5 | accessibility-audit-report.md, accessibility-checklist.md, accessibility-recipes.md, code-quality-report.md, color-palette.md | ✅ Created |
+| Design Inspiration | 1 | (Design assets — location TBD per D6) | ⏳ Asset-based |
+| Organization & Architecture | 13 | backend-integration.md, brand-voice-messaging.md, component-catalog.md, content-taxonomy.md, css-architecture-reference.md, data-architecture.md, design-tokens-reference.md, getting-started.md, homepage-layout.md, publishing-workflow.md, responsive-design.md, sitemap-navigation.md, testing-strategy.md | ✅ Created |
+| Patterns | 4 | patterns-book-cards.md, patterns-hero.md, patterns-journal-preview.md, patterns-proposition.md | ✅ Created |
+| Pages | 3 | (homepage-layout included above; others location TBD per D6) | ⏳ Partial |
+| Reports | 3 | performance-audit-report.md, security-audit-report.md, accessibility-audit-report.md | ✅ Created |
+| **Phase 2 Total** | **29** | **28 confirmed present** | ✅ APPROVED |
+
+**Phase 3 Deferred (4 documents):**
+
+| ID | Document | Rationale | Status |
+|----|----------|-----------|--------|
+| N030 | WordPress Block Patterns | Out of scope per D8 (React/Next.js only) | ⏳ Deferred |
+| N031 | WordPress Migration Guide | Out of scope per D8 (React/Next.js only) | ⏳ Deferred |
+| N032 | Portfolio Showcase | Not applicable — no portfolio on site | ⏳ Deferred |
+| N033 | PWA Implementation | Tech stack not confirmed | ⏳ Deferred |
+
+**Note:** Counts reconciled per T041 coverage manifest; 28 of 29 Phase 2 documents confirmed present; 1 asset-based or alternate location TBD per D6.
 
 ---
 
 ### 5. Archive Operations (D5 Preservation)
+
 | Item | Count | Status | Details |
 |------|-------|--------|---------|
 | Archive directory created | 1 | ✅ YES | `guidelines/_archive/` structure in place |
@@ -76,6 +92,7 @@
 ---
 
 ### 6. Scope Integrity Verification
+
 | Check | Result | Status |
 |-------|--------|--------|
 | All 116 G-rows inventoried | ✅ PASS | 90 M + 26 preserved = 116 |
@@ -88,6 +105,7 @@
 ---
 
 ### 7. ⚠️ Out-of-Scope Changes Detected
+
 **These files were modified but appear unrelated to Spec 003 Guidelines Refactor:**
 
 | File | Status | Type | Impact | Assessment |
@@ -95,8 +113,8 @@
 | `.github/dependabot.yml` | Modified (M) | Infrastructure/CI | Removed native `auto-merge` configuration | ⚠️ Collateral change; CI-related, not documentation |
 | `CHANGELOG.md` | Modified (M) | Release Notes | Added entries for "Sentry error monitoring" and "Dependabot" changes | ⚠️ Collateral changes; unrelated to Spec 003 |
 
-**Decision Required:** 
-- [ ] Accept as collateral infrastructure improvements (no scope impact to Spec 003)
+**Decision Required:**
+- [x] Accept as collateral infrastructure improvements (no scope impact to Spec 003)
 - [ ] Revert to maintain strict documentation-only scope (affects PR #524 merge state)
 
 ---

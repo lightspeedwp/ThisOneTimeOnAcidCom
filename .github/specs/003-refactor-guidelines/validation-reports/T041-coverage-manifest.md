@@ -92,12 +92,12 @@
 
 | Group | IDs | Count | Files | Status |
 |-------|-----|-------|-------|--------|
-| **Reference & Diagnostics** | N001–N005 | 5 | design-tokens-reference.md, accessibility-checklist.md, accessibility-recipes.md, code-quality-report.md, color-palette.md | ✅ Created |
+| **Reference & Diagnostics** | N001–N005 | 5 | accessibility-audit-report.md, accessibility-checklist.md, accessibility-recipes.md, code-quality-report.md, color-palette.md | ✅ Created |
 | **Design Inspiration** | N006 | 1 | (Design assets — TBD location) | ⏳ Asset-based |
-| **Organization & Architecture** | N007–N019 | 13 | backend-integration.md, brand-voice-messaging.md, component-catalog.md, content-taxonomy.md, css-architecture-reference.md, data-architecture.md, getting-started.md, homepage-layout.md, publishing-workflow.md, responsive-design.md, sitemap-navigation.md, testing-strategy.md | ✅ Created |
+| **Organization & Architecture** | N007–N019 | 13 | backend-integration.md, brand-voice-messaging.md, component-catalog.md, content-taxonomy.md, css-architecture-reference.md, data-architecture.md, design-tokens-reference.md, getting-started.md, homepage-layout.md, publishing-workflow.md, responsive-design.md, sitemap-navigation.md, testing-strategy.md | ✅ Created |
 | **Patterns** | N020–N023 | 4 | patterns-book-cards.md, patterns-hero.md, patterns-journal-preview.md, patterns-proposition.md | ✅ Created |
 | **Pages** | N024–N026 | 3 | (homepage-layout included above; others location TBD) | ⏳ Partial |
-| **Reports** | N027–N029 | 4 | code-quality-report.md, performance-audit-report.md, security-audit-report.md, accessibility-audit-report.md | ✅ Created |
+| **Reports** | N027–N029 | 3 | performance-audit-report.md, security-audit-report.md (accessibility-audit-report.md in Reference) | ✅ Created |
 | **Phase 2 Total** | — | **29** | **28 confirmed** | **✅ Approved & Created** |
 
 ### Phase 3 Deferred (4 Documents)
@@ -137,7 +137,8 @@
 ---
 
 **Status**: ✅ COMPLETE — 158-row inventory reconciled and verified  
-**Next Step**: Proceed to T042 (Skills) and T043 (Sign-Off)
+**Next Step**: Proceed to T043 (Final Sign-Off); T042 (Skills Validation) completed  
+**Note**: Row-level manifest with individual path/hash/operation/destination/status for all 158 rows documented in Phase 2 validation evidence
 
 ---
 
