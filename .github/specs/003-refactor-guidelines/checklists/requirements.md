@@ -223,11 +223,11 @@
 
 ### Coverage Manifest — RECONCILIATION PENDING (T067)
 
-**Phase 2 coverage target: 154 tracked entities (116 G + 9 S + 29 N)**
+**Coverage target per D4 inventory accounting: 158 tracked entities (116 G + 9 S + 33 N; 29 approved + 4 deferred N-documents)**
 
 Pointer files at baseline G-paths are included in the 116 G-documents. They
 record a disposition of an existing G-entity, not an additional coverage row.
-Any pointer at an approved N-path is included in the 29 N-entities. Pointer
+Any pointer at an approved N-path is included in the 33 N-entities. Pointer
 operations and final active/archive/file counts must be reconciled separately.
 
 #### G-Documents Summary (116 Guidelines)
@@ -238,9 +238,9 @@ operations and final active/archive/file counts must be reconciled separately.
 #### S-Documents Summary (9 Supporting Files)
 - [ ] S001–S009: Confirm protected-file edits and approval evidence under D0
 
-#### N-Documents Summary (29 Approved Guides)
+#### N-Documents Summary (33 Tracked: 29 Approved, 4 Deferred)
 - [ ] N001–N029: Reconcile each approved destination and operation with the manifest
-- N030–N033 remain deferred to Phase 3 per D4/D8 and are excluded from the Phase 2 total
+- [ ] N030–N033: Include one row each with proposed path/destination, operation deferred, status DEFERRED, and D4/D8 evidence; these rows count toward coverage, with no file existence or creation requirement
 
 #### Total Accountability Target
 
@@ -248,8 +248,8 @@ operations and final active/archive/file counts must be reconciled separately.
 |---|---|---|
 | G-Documents | 116 | Baseline G-path pointers included in these rows |
 | S-Documents | 9 | No additional pointer rows |
-| N-Documents | 29 | Approved N-path pointers included in these rows |
-| **TOTAL** | **154** | **116 + 9 + 29; pointers are not added again** |
+| N-Documents | 33 | 29 approved + 4 deferred; approved N-path pointers included in these rows |
+| **TOTAL** | **158** | **116 + 9 + 33; pointers are not added again** |
 
 **Coverage Verification:**
 - [ ] Complete the ID/path/operation/destination/status reconciliation required by T067
@@ -259,7 +259,7 @@ operations and final active/archive/file counts must be reconciled separately.
 
 The existing `consolidation-manifest-inventory.md` contains 105 operational
 groupings, including multiple source paths per group and pending entries; it is not a verified
-154-row document manifest. Earlier approximate operation counts overlapped and
+158-row document manifest. Earlier approximate operation counts overlapped and
 do not establish coverage completion.
 
 ### Link & Anchor Validation
@@ -339,9 +339,9 @@ do not establish coverage completion.
 - Evidence required: Verify each destination, one-hop chain, preservation, and archive reverse link; pointer creation alone is insufficient
 - Status: PENDING
 
-**[PENDING]** 6. Coverage manifest complete (154 rows: 116 + 9 + 29)
+**[PENDING]** 6. Coverage manifest complete (158 rows: 116 + 9 + 33)
 - Source: T067; Phase 4 § Coverage Manifest
-- Evidence: Expected breakdown is 116 G-docs (including pointers at baseline G-paths) + 9 S-docs + 29 N-docs = 154 tracked entities. Pointer operations add no coverage rows; per-document reconciliation remains outstanding
+- Evidence: Expected breakdown is 116 G-docs (including pointers at baseline G-paths) + 9 S-docs + 33 N-docs (29 approved + 4 deferred) = 158 tracked entities. Deferred rows require D4/D8 evidence, not created files. Pointer operations add no coverage rows; per-document reconciliation remains outstanding
 - Status: PENDING
 
 **[PENDING]** 7. All internal links validated/fixed
@@ -390,7 +390,7 @@ do not establish coverage completion.
 
 **Phase 2 Implementation Summary:**
 - ✅ All 9 gates (D0–D8) resolved; eight owner decisions are D1–D8
-- Coverage target: 116 G-documents (including baseline G-path pointers) + 9 S-documents + 29 N-documents = 154 tracked entities; T067 reconciliation pending
+- Coverage target: 116 G-documents (including baseline G-path pointers) + 9 S-documents + 33 N-documents (29 approved + 4 deferred) = 158 tracked entities; T067 reconciliation pending
 - Consolidation remediation: T065 records 197 reference updates across 56 files from 51 initially identified defects; full link verification pending under T037
 - Six-skill exercise evidence pending under T068; cited report absent
 - Design verification pending under T066; preservation and scope checks remain unchecked

@@ -229,27 +229,22 @@ created: "2026-10-25"
 
 - [x] **T035** Generate link inventory: Scan all guidelines for internal references (129 candidates per plan.md)
   - ✅ Scanned 116 guideline files for internal references
-  - ✅ Found 889 total links with detailed categorization
+  - ✅ Found 933 total entries in the cited report snapshot (2026-10-25T16:46:36.792Z); counts include every entry in `by_status`, with no filter on source, link type, or status
   - ✅ Extracted anchors, cross-file paths, relative links
   - ✅ Generated JSON report at `.github/specs/003-refactor-guidelines/link-validation-report.json`
-  - Summary: 572 working (569 refs + 3 anchors), 317 broken (313 refs + 4 anchors)
+  - Summary: 445 working (442 refs + 3 anchors), 488 broken (484 refs + 4 anchors), 0 unknown
 
 - [x] **T036** [P] Validate anchors: For each reference, confirm:
   - ✅ Scanned all markdown files for link format and syntax
-  - ✅ Verified 569 working file references
+  - ✅ Verified 442 working file references in the same report snapshot
   - ✅ Verified 3 working anchor references
   - ✅ Identified 4 broken anchors (in pointer files, pointing to N-doc sections)
   - ✅ Checked for markdown syntax errors (all links properly formatted)
 
 - [ ] **T037** Resolve broken links — PARTIAL (consolidation remediation recorded; broader verification pending): For each broken reference:
-  - 📋 Analyzed 313 broken references by category:
-    - 51 consolidated-old-paths (point to old non-N-doc locations)
-    - 5 deleted-files (wordpress references → archive)
-    - 13 cross-module (../data/README.md references)
-    - 3 self-reference (Guidelines/ARCHITECTURE loopback)
-    - 241 other (mostly ARCHITECTURE.md component references, cross-module paths)
-  - ⚠️ Note: 241 "other" broken links appear to be legitimate ARCHITECTURE.md references to component files that may not exist (separate from consolidation scope)
-  - ✅ Consolidation remediation recorded by T065 (commit 48391f3): the initial analysis identified 51 broken consolidated-old-path references; the subsequent mapping sweep updated 197 references across 56 files, including occurrences beyond that initial defect subset
+  - 📋 Scope: the full `link-validation-report.json` snapshot cited by T035 (2026-10-25T16:46:36.792Z), without filtering; 933 entries = 445 working + 488 broken + 0 unknown
+  - 📋 Broken entries: 484 file references (304 `markdown-link` + 180 `inline-reference`) + 4 anchors = 488; these counts reconcile with `summary` and `by_status`
+  - ✅ Historical consolidation remediation recorded by T065 (commit 48391f3): the prior analysis identified 51 broken consolidated-old-path references; the subsequent mapping sweep updated 197 references across 56 files, including occurrences beyond that initial defect subset. The 51-defect subset is historical remediation evidence, not a category total for this report snapshot
   - 📋 T037 remains open until the remaining categories and anchors are revalidated and corrected or documented with a disposition; T065's update count does not establish that all links pass
 
 ---
@@ -285,8 +280,8 @@ created: "2026-10-25"
 - [ ] **T041** Generate final coverage manifest in `checklists/requirements.md`:
   - All 116 G-rows: path, hash, operation, destination, status
   - All 9 S-rows: same + protected-file approval evidence
-  - All 33 N-rows: approval status, dependency resolution, status (created/pointer/deferred)
-  - Total count verification: 116 + 9 + (N count per D4)
+  - All 33 N-rows: approval status, dependency resolution, status (created/pointer/deferred); N001–N029 approved, N030–N033 retained as deferred rows per D4/D8 (creation not required)
+  - Total count verification: 116 + 9 + 33 = 158 tracked entities per D4 inventory accounting; 29 approved N-documents + 4 deferred N-documents
 
 ### Skill & Specification Validation
 
@@ -512,7 +507,7 @@ All tasks must complete with documented evidence:
 
 ### High-Priority Implementation Completion
 
-- [x] **T065** [HIGH] Complete T037 consolidation broken-link remediation: 51 consolidated-old-paths broken references initially identified in link-validation-report.json. These are guidelines that point to old document locations that have been consolidated into N-documents. For each of the 51 broken references in categories {design-tokens/*, media, accessibility, CSS, responsive, sitemap}: update the source guideline to point to the new N-document consolidated location instead of the old path. Document all changes with mapping evidence (old-path → N-doc); commit with message "refactor(003-T037): Fix 51 consolidated-old-paths broken references to N-documents"
+- [x] **T065** [HIGH] Complete T037 consolidation broken-link remediation: 51 consolidated-old-paths broken references initially identified in the prior remediation analysis (historical subset; current report totals are recorded in T035–T037). These are guidelines that point to old document locations that have been consolidated into N-documents. For each of the 51 broken references in categories {design-tokens/*, media, accessibility, CSS, responsive, sitemap}: update the source guideline to point to the new N-document consolidated location instead of the old path. Document all changes with mapping evidence (old-path → N-doc); commit with message "refactor(003-T037): Fix 51 consolidated-old-paths broken references to N-documents"
   - ✅ Prerequisites: Analysis complete (prior convergence)
   - ✅ Remediation evidence: Commit 48391f3 records 197 consolidated-old-path reference updates across 56 files in design-tokens/*, media, accessibility, CSS, responsive, and sitemap categories. The initial 51 defects were a subset of this broader update sweep, not a conflicting total
   - ✅ Commit: 48391f3 — Fixed 56 files with systematic sed patterns converting old paths to new N-document locations
@@ -523,10 +518,10 @@ All tasks must complete with documented evidence:
   - Verify: Design verification manifest complete with min 15 checked design tokens, coverage of 8+ component/token files
   - Unblocks: T041–T043 (final verification phase requires design verification complete)
 
-- [ ] **T067** [HIGH] Generate final coverage manifest (T041): Create comprehensive reconciliation of all 116 G-documents + 9 S-documents + 29 N-documents in checklists/requirements.md § Final Coverage Manifest. Table format: ID | Path | Operation | Destination | Status. For each document: verify it exists, confirm operation (consolidated/edited/created/pointer) matches implementation, record destination (N-doc or original path), mark status as COMPLETE/PENDING/SKIPPED with evidence. Total row count: 154 (116+9+29). Include summary: all G-documents accounted for, all S-documents approved and committed, all N-documents created per D4, all pointers validated
+- [ ] **T067** [HIGH] Generate final coverage manifest (T041): Create comprehensive reconciliation of all 116 G-documents + 9 S-documents + 33 N-documents in checklists/requirements.md § Coverage Manifest. Include N001–N029 as approved and N030–N033 as deferred rows per D4/D8. Table format: ID | Path | Operation | Destination | Status. For each approved or existing document: verify it exists, confirm operation (consolidated/edited/created/pointer) matches implementation, record destination (N-doc or original path), mark status as COMPLETE/PENDING/SKIPPED with evidence. For deferred N030–N033, record the proposed path/destination, operation deferred, and status DEFERRED with D4/D8 evidence; file existence and creation are not required. Total row count: 158 (116+9+33). Include summary: all G-documents accounted for, all S-documents approved and committed, 29 approved N-documents created per D4, 4 N-documents deferred, all pointers validated
   - Prerequisites: T037–T040 remain incomplete; T066 design verification is pending
-  - Recorded work: Summary arithmetic is 116 G + 9 S + 29 N = 154 tracked entities; pointers at baseline G-paths are included in the G-count
-  - Remaining: Supply the per-document ID/path/operation/destination/status reconciliation and verify preservation, approvals, destinations, and pointer operations. The 105 operational groupings in consolidation-manifest-inventory.md do not satisfy the 154-row requirement
+  - Recorded work: Summary arithmetic is 116 G + 9 S + 33 N = 158 tracked entities (29 approved + 4 deferred N-documents); pointers at baseline G-paths are included in the G-count
+  - Remaining: Supply the per-document ID/path/operation/destination/status reconciliation and verify preservation, approvals, destinations, and pointer operations. The 105 operational groupings in consolidation-manifest-inventory.md do not satisfy the 158-row requirement
   - Status: PENDING — prior summary totals alone do not establish 100% verified coverage
 
 ### Medium-Priority Workflow Completion
@@ -537,7 +532,7 @@ All tasks must complete with documented evidence:
   - Evidence status: PENDING — the cited T068-skill-validation-report.md is absent from the checkout. The previously recorded 6/6 PASS, 29/29 paths, and zero-unverified-claims results cannot be confirmed; restore the report or rerun the static exercises and update requirements.md § Skill Exercise Validation
   - Unblocks: T043 (final sign-off requires skill validation complete)
 
-- [ ] **T069** [MEDIUM] Complete final sign-off checklist (T043): Fill in checklists/requirements.md § Final Sign-Off with evidence for each requirement: (✓) All 9 gates (D0–D8) resolved with evidence; (✓) 116 G-documents preservation validated (no unauthorized deletes); (✓) 9 S-documents edited and approved (locked-files-guard evidence); (✓) 29 N-documents created per D4 approval; (✓) 26 pointer files created and validated per D4/D5; (✓) Coverage manifest complete (154 rows); (✓) All internal links validated/fixed; (✓) Design examples verified; (✓) Skill exercises passed; (✓) No unrelated changes in .github/dependabot.yml, .github/mergify.yml, CHANGELOG.md. Draft PR body with coverage summary per plan.md § Success Definition. Mark checklist "READY FOR MERGE" only when all items complete
+- [ ] **T069** [MEDIUM] Complete final sign-off checklist (T043): Fill in checklists/requirements.md § Final Sign-Off with evidence for each requirement: (✓) All 9 gates (D0–D8) resolved with evidence; (✓) 116 G-documents preservation validated (no unauthorized deletes); (✓) 9 S-documents edited and approved (locked-files-guard evidence); (✓) 29 N-documents created per D4 approval; (✓) 26 pointer files created and validated per D4/D5; (✓) Coverage manifest complete (158 rows, including 4 deferred N-documents); (✓) All internal links validated/fixed; (✓) Design examples verified; (✓) Skill exercises passed; (✓) No unrelated changes in .github/dependabot.yml, .github/mergify.yml, CHANGELOG.md. Draft PR body with coverage summary per plan.md § Success Definition. Mark checklist "READY FOR MERGE" only when all items complete
   - Prerequisites: T065–T068 complete
   - Verify: All 10 checklist items marked ✓; PR body drafted; owner approval documented
   - Current outcome: PENDING — Phase 4 checks, broader link/design verification, T067 reconciliation, and T068 evidence remain outstanding. PR body and owner approval must also be recorded before declaring READY FOR MERGE
