@@ -140,7 +140,7 @@
 
 ### G-Documents: Root-Level Guidelines (G001–G037, 37 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G001 | accessibility-focused-design.md | guidelines/ | Preserved | guidelines/accessibility-focused-design.md | ✅ Complete | b7c3c44 |
 | G002 | brand-voice-principles.md | guidelines/ | Modified | guidelines/brand-voice-principles.md | ✅ Complete | b7c3c44 |
@@ -182,7 +182,7 @@
 
 ### G-Documents: blocks/ (G038–G041, 4 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G038 | block-template-guide.md | guidelines/blocks/ | Preserved | guidelines/blocks/block-template-guide.md | ✅ Complete | b7c3c44 |
 | G039 | custom-blocks.md | guidelines/blocks/ | Preserved | guidelines/blocks/custom-blocks.md | ✅ Complete | b7c3c44 |
@@ -191,7 +191,7 @@
 
 ### G-Documents: components/ (G042–G075, 34 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G042 | button.md | guidelines/components/ | Preserved | guidelines/components/button.md | ✅ Complete | b7c3c44 |
 | G043 | card.md | guidelines/components/ | Preserved | guidelines/components/card.md | ✅ Complete | b7c3c44 |
@@ -230,7 +230,7 @@
 
 ### G-Documents: design-tokens/ (G076–G085, 10 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G076 | colors.md | guidelines/design-tokens/ | Preserved | guidelines/design-tokens/colors.md | ✅ Complete | b7c3c44 |
 | G077 | spacing.md | guidelines/design-tokens/ | Preserved | guidelines/design-tokens/spacing.md | ✅ Complete | b7c3c44 |
@@ -245,14 +245,14 @@
 
 ### G-Documents: icons/ (G086–G087, 2 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G086 | icon-usage.md | guidelines/icons/ | Preserved | guidelines/icons/icon-usage.md | ✅ Complete | b7c3c44 |
 | G087 | README.md | guidelines/icons/ | Preserved | guidelines/icons/README.md | ✅ Complete | b7c3c44 |
 
 ### G-Documents: mobile/ (G088–G094, 7 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G088 | touch-targets.md | guidelines/mobile/ | Preserved | guidelines/mobile/touch-targets.md | ✅ Complete | b7c3c44 |
 | G089 | mobile-navigation.md | guidelines/mobile/ | Preserved | guidelines/mobile/mobile-navigation.md | ✅ Complete | b7c3c44 |
@@ -264,13 +264,13 @@
 
 ### G-Documents: pages/ (G095, 1 file)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G095 | page-templates.md | guidelines/pages/ | Preserved | guidelines/pages/page-templates.md | ✅ Complete | b7c3c44 |
 
 ### G-Documents: parts/ (G096–G098, 3 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G096 | footer.md | guidelines/parts/ | Preserved | guidelines/parts/footer.md | ✅ Complete | b7c3c44 |
 | G097 | header.md | guidelines/parts/ | Preserved | guidelines/parts/header.md | ✅ Complete | b7c3c44 |
@@ -278,13 +278,13 @@
 
 ### G-Documents: patterns/ (G099, 1 file)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G099 | design-patterns.md | guidelines/patterns/ | Preserved | guidelines/patterns/design-patterns.md | ✅ Complete | b7c3c44 |
 
 ### G-Documents: responsive/ (G100–G106, 7 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G100 | breakpoint-strategy.md | guidelines/responsive/ | Preserved | guidelines/responsive/breakpoint-strategy.md | ✅ Complete | b7c3c44 |
 | G101 | fluid-typography.md | guidelines/responsive/ | Preserved | guidelines/responsive/fluid-typography.md | ✅ Complete | b7c3c44 |
@@ -296,7 +296,7 @@
 
 ### G-Documents: sections/ (G107–G112, 6 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G107 | hero-section.md | guidelines/sections/ | Preserved | guidelines/sections/hero-section.md | ✅ Complete | b7c3c44 |
 | G108 | feature-section.md | guidelines/sections/ | Preserved | guidelines/sections/feature-section.md | ✅ Complete | b7c3c44 |
@@ -307,13 +307,13 @@
 
 ### G-Documents: templates/ (G113, 1 file)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G113 | page-template-system.md | guidelines/templates/ | Preserved | guidelines/templates/page-template-system.md | ✅ Complete | b7c3c44 |
 
 ### G-Documents: troubleshooting/ (G114–G116, 3 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | G114 | common-issues.md | guidelines/troubleshooting/ | Preserved | guidelines/troubleshooting/common-issues.md | ✅ Complete | b7c3c44 |
 | G115 | performance-troubleshooting.md | guidelines/troubleshooting/ | Preserved | guidelines/troubleshooting/performance-troubleshooting.md | ✅ Complete | b7c3c44 |
@@ -321,7 +321,7 @@
 
 ### S-Documents: Protected Files (S001–S009, 9 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | S001 | AGENTS.md | ./ | Modified | ./AGENTS.md | ✅ Complete | b7c3c44 |
 | S002 | CONTRIBUTING.md | ./ | Modified | ./CONTRIBUTING.md | ✅ Complete | b7c3c44 |
@@ -335,7 +335,7 @@
 
 ### N-Documents: Phase 2 Approved (N001–N029, 29 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit |
 |----|------|------|-----------|-------------|--------|------|
 | N001 | accessibility-audit-report.md | docs/ | Created | docs/accessibility-audit-report.md | ✅ Complete | — |
 | N002 | accessibility-checklist.md | docs/ | Created | docs/accessibility-checklist.md | ✅ Complete | — |
@@ -369,7 +369,7 @@
 
 ### N-Documents: Phase 3 Deferred (N030–N033, 4 files)
 
-| ID | File | Path | Operation | Destination | Status | Hash | Rationale |
+| ID | File | Path | Operation | Destination | Status | Baseline Commit | Rationale |
 |----|------|------|-----------|-------------|--------|------|-----------|
 | N030 | WordPress Block Patterns | guidelines/_archive/ | Deferred | guidelines/_archive/wordpress-block-patterns.md | ⏳ Deferred | — | Out of scope per D8 (React/Next.js only) |
 | N031 | WordPress Migration Guide | guidelines/_archive/ | Deferred | guidelines/_archive/wordpress-migration-guide.md | ⏳ Deferred | — | Out of scope per D8 (React/Next.js only) |
@@ -378,9 +378,9 @@
 
 ---
 
-**Status**: ✅ COMPLETE — 158-row inventory reconciled and verified  
-**Next Step**: Proceed to T043 (Final Sign-Off); T042 (Skills Validation) completed  
-**Note**: Row-level manifest with individual path/hash/operation/destination/status for all 158 rows now documented above
+**Status**: ⏳ PENDING VERIFICATION — 158-row inventory structure complete; awaiting task.md reconciliation  
+**Prerequisite**: T067 final manifest completion (tasks.md:523) and T068 skill validation (tasks.md:531) must be marked complete in tasks.md with supporting evidence in requirements.md before advancing to T043  
+**Note**: Row-level manifest with path/operation/destination/status for all 158 rows (116 G + 9 S + 33 N) documented above; Baseline Commit column references b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9 as the reference point for all entity preservation checks
 
 ---
 
