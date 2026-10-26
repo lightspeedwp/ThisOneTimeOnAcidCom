@@ -52,7 +52,7 @@ import { MagnifyingGlass, CaretDown, Star } from '@phosphor-icons/react';
 
 ```text
 
-**Design tokens:** See [iconography.md](./design-tokens/iconography.md) for the
+**Design tokens:** See [iconography.md](./design-tokens-reference.md) for the
 complete weight system, size scale, colour tokens, and accessibility matrix.
 
 **Dev tool:** Visit [/dev-tools/phosphor-icons](/dev-tools/phosphor-icons) for a
@@ -134,7 +134,7 @@ Icons are organized by usage category. See detailed category documentation:
 
 UI controls, navigation, and system actions.
 
-**Documentation:** [icons/interface.md](./icons/interface.md)
+**Documentation:** [media-guidelines.md](./media-guidelines.md)
 
 **Common icons:**
 
@@ -160,7 +160,7 @@ import { Menu, X, Search } from 'lucide-react';
 
 Travel-related icons for location, tours, and activities.
 
-**Documentation:** [icons/travel.md](./icons/travel.md)
+**Documentation:** [media-guidelines.md](./media-guidelines.md)
 
 **Common icons:**
 
@@ -542,8 +542,8 @@ focus:ring-opacity-50 rounded-full p-2"
 
 ## Related Documentation
 
-- **[icons/interface.md](./icons/interface.md)** - UI and navigation icons
-- **[icons/travel.md](./icons/travel.md)** - Travel and location icons
+- **[media-guidelines.md](./media-guidelines.md)** - UI and navigation icons
+- **[media-guidelines.md](./media-guidelines.md)** - Travel and location icons
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines
 - **[overview-components.md](./overview-components.md)** - Component system
 

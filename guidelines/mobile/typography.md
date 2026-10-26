@@ -138,7 +138,7 @@ widths:
 
 ### Mobile-First Fluid Sizes
 
-Use the fluid typography tokens from `design-tokens/typography.md`:
+Use the fluid typography tokens from `design-tokens-reference.md`:
 
 ```tsx
 // Hero Titles - Mobile to Desktop
@@ -820,7 +820,7 @@ Test on:
 
 ## Related Documentation
 
-- **[design-tokens/typography.md](../design-tokens/typography.md)** - Full typography system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Full typography system
 - **[mobile/forms.md](./forms.md)** - Mobile form patterns
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 

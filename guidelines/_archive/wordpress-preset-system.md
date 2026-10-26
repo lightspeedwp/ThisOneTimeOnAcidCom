@@ -688,9 +688,9 @@ border-[width:var(--wp--custom--border-width--200)]">
 
 ## Related Documentation
 
-- **[colors.md](./design-tokens/colors.md)** - Complete color system
-- **[typography.md](./design-tokens/typography.md)** - Typography scale and hierarchy
-- **[spacing.md](./design-tokens/spacing.md)** - Spacing patterns and usage
+- **[colors.md](./design-tokens-reference.md)** - Complete color system
+- **[typography.md](./design-tokens-reference.md)** - Typography scale and hierarchy
+- **[spacing.md](./design-tokens-reference.md)** - Spacing patterns and usage
 - **[Guidelines.md](./Guidelines.md)** - Main design system guidelines
 
 ---
@@ -698,3 +698,4 @@ border-[width:var(--wp--custom--border-width--200)]">
 **Last Updated:** January 2025
 **Version:** 1.0.0
 **Maintained by:** Ash Shaw Portfolio Team
+<!-- Archived: wordpress-preset-system.md - Out of scope per D8 (WordPress not used in this site) -->

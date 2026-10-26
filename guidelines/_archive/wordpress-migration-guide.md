@@ -1,8 +1,10 @@
 # 🦅 Headless WordPress Migration Guide
 
+> ⚠️ **ARCHIVED** · WordPress migration is out of scope per Decision Gate D8 (Guidelines Refactor, Specification 003). This guide is preserved for reference only.
+
 **Version:** 1.1.0 (Dual Mode Enabled)
 **Date:** February 21, 2026
-**Status:** Ready for Implementation
+**Status:** Archived (Out of Scope)
 
 This guide details the process of migrating the Ash Shaw Makeup Portfolio from
 its current "Mock Data" architecture to a **Headless WordPress** backend.
@@ -163,3 +165,4 @@ No code changes are required in components. `BlogPage.tsx` and
 
 *   **CORS Error:** Install the "WP GraphQL CORS" or similar plugin on WordPress to allow requests from `localhost:5173`.
 *   **Images not loading:** Ensure the imported images are publicly accessible.
+<!-- Archived: wordpress-migration-guide.md - Out of scope per D8 (WordPress not used in this site) -->

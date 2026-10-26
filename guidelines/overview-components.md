@@ -797,9 +797,9 @@ Before using any component, read its specific guideline file:
 
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines document
 - **[overview-icons.md](./overview-icons.md)** - Icon system and verification
-- **[design-tokens/colors.md](./design-tokens/colors.md)** - Color system
-- **[design-tokens/typography.md](./design-tokens/typography.md)** - Typography scale
-- **[design-tokens/spacing.md](./design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Typography scale
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
 
 ---
 
@@ -1126,9 +1126,9 @@ When refactoring a large component, follow this checklist:
 
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines document
 - **[overview-icons.md](./overview-icons.md)** - Icon system and verification
-- **[design-tokens/colors.md](./design-tokens/colors.md)** - Color system
-- **[design-tokens/typography.md](./design-tokens/typography.md)** - Typography scale
-- **[design-tokens/spacing.md](./design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Typography scale
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
 
 ---
 

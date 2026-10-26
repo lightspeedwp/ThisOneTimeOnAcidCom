@@ -33,8 +33,8 @@ Detailed implementation patterns for advanced accessibility compliance.
 
 ## Related Documentation
 
-- `guidelines/interactions-accessibility.md`
-- `guidelines/prefers-reduced-motion.md`
+- `guidelines/accessibility-checklist.md`
+- `guidelines/accessibility-checklist.md`
 
 ---
 

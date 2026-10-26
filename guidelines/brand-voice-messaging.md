@@ -46,12 +46,22 @@ Makeup artistry meets technical innovation for transformative portfolio experien
 
 ---
 
+## Consolidated G-Document References
+
+This N-document (N006) consolidates content from and maintains cross-references to the following G-documents per the guidelines refactor (Specification 003):
+
+- **Guidelines Preserved (Type 1 Relocation):** Old files redirect here
+  - `guidelines/voice-and-tone.md` → content integrated; pointer maintained
+
+The original file is accessible as a pointer to this canonical reference.
+
 ## Related Documentation
 
-See `guidelines/voice-and-tone.md` for detailed examples and archived reference.
+**Pointer File:** `guidelines/voice-and-tone.md` — Type 1 relocation pointer with quick navigation to voice principles, tone variations, and messaging framework sections.
 
 ---
 
 **Last Updated:** 2026-10-25  
-**Canonical Reference:** Yes
+**Canonical Reference:** Yes  
+**N-Document ID:** N006 (Specification 003 - Guidelines Refactor)
 

@@ -41,22 +41,22 @@ Here's a recommended reading order to understand the design system:
 
 #### Step 3: Read Design Tokens
 
-1. **[design-tokens/neon-colors.md](./design-tokens/neon-colors.md)** - Neon vs Atomic Black color system (PRIMARY) — 33 curated palettes with interface inspiration
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Neon vs Atomic Black color system (PRIMARY) — 33 curated palettes with interface inspiration
 
-1. **[design-tokens/animations.md](./design-tokens/animations.md)** - Complete animation system (26 keyframes)
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Complete animation system (26 keyframes)
 
-1. **[design-tokens/colors.md](./design-tokens/colors.md)** - Legacy color reference
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Legacy color reference
 
-1. **[design-tokens/typography.md](./design-tokens/typography.md)** - Typography hierarchy
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Typography hierarchy
 
-1. **[design-tokens/spacing.md](./design-tokens/spacing.md)** - Spacing system
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
 
 #### Step 4: Understand Data System
 15. **[Data System Documentation](./data-models.md)** - Data model definitions and centralized content management
 
 #### Step 5: Read Theme Documentation
 
-1. **[dark-mode-implementation.md](./dark-mode-implementation.md)** - Complete dark mode implementation
+1. **[css-architecture-reference.md](./css-architecture-reference.md)** - Complete dark mode implementation
 
 1. **[component-dark-mode.md](./component-dark-mode.md)** - Component-specific theme patterns
 
@@ -97,7 +97,7 @@ guidelines/
 │
 ├── search-system.md               - Global search system
 ├── pwa-implementation.md          - Progressive Web App features
-├── dark-mode-implementation.md    - Dark mode implementation
+├── css-architecture-reference.md    - Dark mode implementation
 ├── component-dark-mode.md         - Component theme patterns
 ├── css-architecture.md            - CSS system documentation
 ├── data-models.md                 - Data model definitions
@@ -184,11 +184,11 @@ guidelines/
 
 | File | Purpose | Coverage |
 |------|---------|----------|
-| **[neon-colors.md](./design-tokens/neon-colors.md)** | Neon color system | 8 neon colors, atomic black, gradients |
-| **[animations.md](./design-tokens/animations.md)** | Animation system | 26 keyframes, reduced motion |
-| **[colors.md](./design-tokens/colors.md)** | Legacy colors | Semantic tokens reference |
-| **[typography.md](./design-tokens/typography.md)** | Typography | Fluid scale, font families |
-| **[spacing.md](./design-tokens/spacing.md)** | Spacing | Fluid scale, component utilities |
+| **[neon-colors.md](./design-tokens-reference.md)** | Neon color system | 8 neon colors, atomic black, gradients |
+| **[animations.md](./design-tokens-reference.md)** | Animation system | 26 keyframes, reduced motion |
+| **[colors.md](./design-tokens-reference.md)** | Legacy colors | Semantic tokens reference |
+| **[typography.md](./design-tokens-reference.md)** | Typography | Fluid scale, font families |
+| **[spacing.md](./design-tokens-reference.md)** | Spacing | Fluid scale, component utilities |
 
 ---
 

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Specification 003 documentation finalization** — Resolved markdown linting errors (MD009 trailing whitespace) in spec.md and checklists/requirements.md for Phase 2 guidelines refactor implementation (PR #524)
+
 ### Added
 
 - **Sentry error monitoring** — Added `@sentry/react` and `@sentry/vite-plugin` with `src/instrument.ts` (errors, tracing, session replay with text masked), a `Sentry.ErrorBoundary` around the app, and route-based tracing via `wrapCreateBrowserRouterV7`. Source maps are uploaded at build time and then deleted from `dist/` only when `SENTRY_AUTH_TOKEN` is set. The root `netlify.toml` returns 404 for `/*.map` regardless of whether the token is set. New env vars `VITE_SENTRY_DSN`, `SENTRY_ORG`, `SENTRY_PROJECT` and `SENTRY_AUTH_TOKEN` are documented in `.env.example`
