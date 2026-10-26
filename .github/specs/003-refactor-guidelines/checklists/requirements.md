@@ -229,11 +229,11 @@
 
 ## Phase 4: Verification & Quality PENDING
 
-### Coverage Manifest — ✅ COMPLETE (T041, T067)
+### Coverage Manifest — PENDING (T041, T067)
 
 **Coverage target per D4 inventory accounting: 158 tracked entities (116 G + 9 S + 33 N; 29 approved + 4 deferred N-documents)**
 
-**Evidence**: See [T041-coverage-manifest.md](../validation-reports/T041-coverage-manifest.md) for complete 158-row reconciliation
+**Evidence**: See [T041-coverage-manifest.md](../validation-reports/T041-coverage-manifest.md) for current 158-row observations; preservation, approvals and pointer verification remain pending
 
 Pointer files at baseline G-paths are included in the 116 G-documents. They
 record a disposition of an existing G-entity, not an additional coverage row.
@@ -243,7 +243,7 @@ operations and final active/archive/file counts must be reconciled separately.
 #### G-Documents Summary (116 Guidelines)
 - Recorded inventory: 116 baseline G-entities; per-document dispositions still require reconciliation
 - Consolidated-old-path remediation: 51 broken references initially identified; T065 records 197 reference updates across 56 files (commit 48391f3)
-- Recorded hash comparison: 52 modified, 64 unchanged; this does not by itself verify preservation or pointer correctness
+- Current baseline comparison: 90 changed at original paths, 23 unchanged, 3 original paths absent with archive copies present; preservation and pointer correctness remain pending
 
 #### S-Documents Summary (9 Supporting Files)
 - [ ] S001–S009: Confirm protected-file edits and approval evidence under D0
@@ -287,17 +287,17 @@ do not establish coverage completion.
 - [ ] Reduced-motion examples validated
 - [ ] Formula/input/threshold evidence documented per example
 
-### Skill Exercise Validation — ✅ COMPLETE (T042, T068)
-- [x] branch-validation: Supports all branch patterns in docs — ✅ PASS
-- [x] changelog: Integration with existing change tracking — ✅ PASS
-- [x] labeling: Label definitions reference verified — ✅ PASS
-- [x] test: Test scenario coverage (draft/report/denied/missing-policy) — ✅ PASS
-- [x] validate: Validation checks execute without side effects — ✅ PASS
-- [x] workflow-orchestration: Workflow references intact and functional — ✅ PASS
+### Skill Exercise Validation — PENDING (T042, T068)
+- [ ] branch-validation: Capture draft/report/permission-denied evidence and resolve example paths
+- [ ] changelog: Capture draft/report/permission-denied evidence and resolve example paths
+- [ ] labeling: Capture draft/report/permission-denied evidence and resolve example paths
+- [ ] test: Capture draft/report/permission-denied evidence and resolve example paths
+- [ ] validate: Capture draft/report/permission-denied evidence and resolve example paths
+- [ ] workflow-orchestration: Capture draft/report/permission-denied evidence and resolve example paths
 
-**Evidence**: See [T068-skill-validation-report.md](../validation-reports/T068-skill-validation-report.md) for full exercise results
+**Evidence**: [T068-skill-validation-report.md](../validation-reports/T068-skill-validation-report.md) records source inspection, a reproducible lexical path scan and unresolved references; the former 24/24 scenario and 18/18 path PASS claims are unsupported.
 
-**Methods:** Static code review; no actual label/workflow changes, no PR creation
+**Methods:** Static source inspection and filesystem presence checks only; no test execution or captured skill scenario results.
 
 ### Preservation Audit
 - [ ] No files moved without explicit approval
@@ -318,10 +318,10 @@ do not establish coverage completion.
 - [x] Commits to preservation rules (Type 1/2/3 pointers; 1-hop limit; hybrid archival)
 
 ### Quality Owner
-- [x] Verification register substantially complete with evidence (T041 ✅ + T068 ✅)
-- [x] All manual checks documented (T042–T043 skill exercises and coverage validated)
+- [ ] Verification register complete with evidence (T041/T067 and T042/T068 pending)
+- [ ] All manual checks documented (T042–T043 evidence pending)
 - [x] No runtime claims without verification method noted (T068 verification scope clarified)
-- [x] Coverage manifest accurate and reconciled (T041 row-level manifest complete with all 158 rows)
+- [ ] Coverage manifest verified (158 observed rows recorded; preservation, approvals and pointer checks pending)
 - [x] Blockers/deferred items clearly identified below
 
 ### Verification Register (10 Requirements — Final Verification Pending)
@@ -331,30 +331,30 @@ do not establish coverage completion.
 - Evidence: D0 retains the existing protected-file policy; eight owner decisions (D1–D8) are recorded with decision references dated 2026-10-25
 - Status: PASS (decision resolution only; operation approvals remain required)
 
-**[✅ PASS]** 2. 116 G-documents preservation validated (no unauthorized deletes)
+**[PENDING]** 2. 116 G-documents preservation validated (no unauthorized deletes)
 - Source: T041, T067; Phase 4 § Preservation Audit
-- Evidence: [T041-coverage-manifest.md](../validation-reports/T041-coverage-manifest.md) reconciles all 116 G-entities by disposition (26 unchanged + 90 modified = 116); no unauthorized deletes; 7 archived files per D5
-- Status: PASS
+- Evidence: [T041-coverage-manifest.md](../validation-reports/T041-coverage-manifest.md) records 90 changed original paths, 23 unchanged and 3 archive candidates; content preservation and operation approvals remain unverified
+- Status: PENDING
 
-**[✅ PASS]** 3. 9 S-documents edited and approved (locked-files-guard evidence)
+**[PENDING]** 3. 9 S-documents edited and approved (locked-files-guard evidence)
 - Source: D0; Phase 3 § Per-Operation Approval; T017–T018
-- Evidence: AGENTS.md (+34 lines), CONTRIBUTING.md (+59 lines), .claude/skills/INVENTORY.md (+22 lines) modified with approval T017–T018 recorded; 6 skill files verified unchanged per locked-files-guard policy
-- Status: PASS
+- Evidence: T041 records all nine readable paths and current hashes; source presence and task references do not establish D0 approval or preservation of unique content
+- Status: PENDING
 
-**[✅ PASS]** 4. 29 N-documents created per D4 approval
+**[PENDING]** 4. 29 N-documents created per D4 approval
 - Source: D4 Decision; T041, T067
-- Evidence: [T041-coverage-manifest.md](../validation-reports/T041-coverage-manifest.md) § N-Documents reconciles all 29 approved N-docs (28 confirmed created + 1 asset-based); all destinations verified
-- Status: PASS
+- Evidence: All 29 canonical destinations exist, including an existing G-file updated under N017 and three archive pointers; content, dependencies and pointer verification remain pending
+- Status: PENDING
 
 **[PENDING]** 5. 26 reported pointer files validated per D4/D5 strategy
 - Source: T033–T034; T067; pointer-redirect-contract.md
 - Evidence required: Verify each destination, one-hop chain, preservation, and archive reverse link; pointer creation alone is insufficient
 - Status: PENDING
 
-**[✅ PASS]** 6. Coverage manifest complete (158 rows: 116 + 9 + 33)
+**[PENDING]** 6. Coverage manifest complete (158 rows: 116 + 9 + 33)
 - Source: T041, T067; Phase 4 § Coverage Manifest
-- Evidence: [T041-coverage-manifest.md](../validation-reports/T041-coverage-manifest.md) provides complete 158-row reconciliation: 116 G-docs (90 modified + 26 unchanged) + 9 S-docs (3 modified + 6 verified) + 33 N-docs (29 approved + 4 deferred with D4/D8 evidence). Deferred rows documented with rationale; pointer operations mapped; total inventory verified
-- Status: PASS
+- Evidence: [T041-coverage-manifest.md](../validation-reports/T041-coverage-manifest.md) records 158 distinct IDs with paths, current hashes, observed operations, destinations and statuses (154 PENDING + 4 DEFERRED); this inventory does not establish verified preservation, protected-file approvals or pointer correctness
+- Status: PENDING — complete the unchecked T067 coverage checks above
 
 **[PENDING]** 7. All internal links validated/fixed
 - Source: T035–T037; T065; Phase 4 § Link & Anchor Validation
@@ -366,10 +366,10 @@ do not establish coverage completion.
 - Evidence required: Literal token, typography, spacing, formula, and accessibility-example checks. Authority and target decisions alone do not verify the examples
 - Status: PENDING
 
-**[✅ PASS]** 9. Six existing skills statically exercised in draft/report/denied scenarios
+**[PENDING]** 9. Six existing skills statically exercised in draft/report/denied scenarios
 - Source: T042/T068; Phase 4 § Skill Exercise Validation
-- Evidence: [T068-skill-validation-report.md](../validation-reports/T068-skill-validation-report.md) documents all 6 skills exercised in draft/report/denied scenarios; 24/24 scenarios pass ✅; all 18 file paths verified ✅; no runtime claims without verification methods
-- Status: PASS
+- Evidence: [T068-skill-validation-report.md](../validation-reports/T068-skill-validation-report.md) records six sources inspected and lexical path results; scenario execution and exhaustive example-path verification remain pending, with no supported 24/24 or 18/18 PASS result
+- Status: PENDING
 
 **[✅ PASS]** 10. No unauthorized changes in governance config files
 - Source: Phase 2 § Source State Verification; phase2-source-validation-report.md § Out-of-Scope Changes
@@ -402,14 +402,14 @@ do not establish coverage completion.
 
 **Phase 2 Implementation Summary:**
 - ✅ All 9 gates (D0–D8) resolved; eight owner decisions are D1–D8
-- Coverage target: 116 G-documents (including baseline G-path pointers) + 9 S-documents + 33 N-documents (29 approved + 4 deferred) = 158 tracked entities ✅ T041 COMPLETE with row-level manifest
+- Coverage target: 116 G-documents (including baseline G-path pointers) + 9 S-documents + 33 N-documents (29 approved + 4 deferred) = 158 tracked entities; T041 records the rows, while T067 verification remains PENDING
 - Consolidation remediation: T065 records 197 reference updates across 56 files from 51 initially identified defects; full link verification pending under T037
-- Six-skill exercise evidence ✅ T068 COMPLETE; all scenarios pass (draft/report/denied/missing-policy); verification method reconciled to document static analysis + Jest test results
+- Six skill sources inspected and lexical path scan recorded; T042/T068 remain PENDING for scenario and example-path verification; no Jest pass claimed
 - Design verification pending under T039; preservation and scope checks remain to validate
 - Final sign-off documentation: draft PR body and owner approval required for T043
 
-**Final Sign-Off:** **SUBSTANTIALLY COMPLETE — 9 of 10 requirements documented** — T041 row-level manifest and T068 verification complete; Phase 2E/F prerequisites remain (pointer validation T033–T034, link validation T037, design verification T039–T040)
+**Final Sign-Off:** **PENDING** — T041/T067 preservation, approval and pointer checks, T042/T068 skill evidence, broader links/design verification and T069 owner sign-off remain outstanding.
 
 ---
 
-*Updated 2026-10-26 (T041 row-level manifest + T068 verification clarification complete) | Phase 2 Implementation 85% Complete | Major CI blockers resolved; Phase 2E/F and Phase 3 next | Branch: docs/spec-003-finalization*
+*Updated 2026-10-26 (coverage observations and static skill evidence reconciled; final verification pending) | Branch: docs/spec-003-finalization*

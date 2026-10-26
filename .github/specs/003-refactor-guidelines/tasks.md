@@ -277,21 +277,21 @@ created: "2026-10-25"
 
 ### Coverage & Completeness
 
-- [x] **T041** Generate final coverage manifest in `checklists/requirements.md`:
+- [ ] **T041** Generate final coverage manifest in `checklists/requirements.md`:
   - All 116 G-rows: path, hash, operation, destination, status
   - All 9 S-rows: same + protected-file approval evidence
   - All 33 N-rows: approval status, dependency resolution, status (created/pointer/deferred); N001–N029 approved, N030–N033 retained as deferred rows per D4/D8 (creation not required)
   - Total count verification: 116 + 9 + 33 = 158 tracked entities per D4 inventory accounting; 29 approved N-documents + 4 deferred N-documents
-  - ✅ COMPLETED: T041-coverage-manifest.md created with full 158-row reconciliation and disposition index
+  - Evidence recorded: T041-coverage-manifest.md lists 158 rows with current hashes and observed operations; preservation, protected-file approval and pointer checks remain PENDING under T067
 
 ### Skill & Specification Validation
 
-- [x] **T042** [P] Static skill exercises: For each of six skills in `.claude/skills/`:
+- [ ] **T042** [P] Static skill exercises: For each of six skills in `.claude/skills/`:
   - Run skill in draft/report/denied scenarios
   - Verify all file paths in skill examples resolve correctly
   - Document results in validation report
   - Confirm no runtime claims without verification method
-  - ✅ COMPLETED: T068-skill-validation-report.md documents 6/6 skills, 24/24 scenarios PASS, 18/18 file paths verified
+  - Evidence recorded: T068-skill-validation-report.md documents source inspection and a reproducible lexical path scan; draft/report/permission-denied results and exhaustive path verification remain PENDING
 
 ### Final Checklist & Handoff
 
@@ -523,7 +523,7 @@ All tasks must complete with documented evidence:
 - [ ] **T067** [HIGH] Generate final coverage manifest (T041): Create comprehensive reconciliation of all 116 G-documents + 9 S-documents + 33 N-documents in checklists/requirements.md § Coverage Manifest. Include N001–N029 as approved and N030–N033 as deferred rows per D4/D8. Table format: ID | Path | Operation | Destination | Status. For each approved or existing document: verify it exists, confirm operation (consolidated/edited/created/pointer) matches implementation, record destination (N-doc or original path), mark status as COMPLETE/PENDING/SKIPPED with evidence. For deferred N030–N033, record the proposed path/destination, operation deferred, and status DEFERRED with D4/D8 evidence; file existence and creation are not required. Total row count: 158 (116+9+33). Include summary: all G-documents accounted for, all S-documents approved and committed, 29 approved N-documents created per D4, 4 N-documents deferred, all pointers validated
   - Prerequisites: T037–T040 remain incomplete; T066 design verification is pending
   - Recorded work: Summary arithmetic is 116 G + 9 S + 33 N = 158 tracked entities (29 approved + 4 deferred N-documents); pointers at baseline G-paths are included in the G-count
-  - Remaining: Supply the per-document ID/path/operation/destination/status reconciliation and verify preservation, approvals, destinations, and pointer operations. The 105 operational groupings in consolidation-manifest-inventory.md do not satisfy the 158-row requirement
+  - Row observations: T041-coverage-manifest.md now records 158 distinct IDs, paths, hashes, observed operations, destinations and statuses. Remaining: verify preservation, approvals, N-content/dependencies and pointer operations; reconcile final active/archive/pointer counts. The 105 operational groupings in consolidation-manifest-inventory.md do not independently satisfy the 158-row requirement
   - Status: PENDING — prior summary totals alone do not establish 100% verified coverage
 
 ### Medium-Priority Workflow Completion
@@ -531,7 +531,7 @@ All tasks must complete with documented evidence:
 - [ ] **T068** [MEDIUM] Validate static skill exercises (T042): For each of six skills in .claude/skills/ (branch-validation, changelog, labeling, test, validate, workflow-orchestration): Run skill in draft scenario (expected: proposal with file paths resolved correctly); run skill in report scenario (expected: summary with example paths working); run skill in denied scenario (expected: graceful handling of permission denial). Document all results in validation report. Verify all file paths in skill examples resolve to actual files in repository; confirm no runtime claims without verification method; document results in checklists/requirements.md § Skill Validation
   - Prerequisites: T037–T040 complete
   - Verify: Each of 6 skills has documented draft/report/denied results and resolved file-path references
-  - Evidence status: PENDING — the cited T068-skill-validation-report.md is absent from the checkout. The previously recorded 6/6 PASS, 29/29 paths, and zero-unverified-claims results cannot be confirmed; restore the report or rerun the static exercises and update requirements.md § Skill Exercise Validation
+  - Evidence status: PENDING — T068-skill-validation-report.md is present and records source inspection plus a reproducible lexical path scan. Prior scenario/path PASS totals have no captured supporting output; required draft/report/permission-denied results and exhaustive example-path verification remain outstanding
   - Unblocks: T043 (final sign-off requires skill validation complete)
 
 - [ ] **T069** [MEDIUM] Complete final sign-off checklist (T043): Fill in checklists/requirements.md § Final Sign-Off with evidence for each requirement: (✓) All 9 gates (D0–D8) resolved with evidence; (✓) 116 G-documents preservation validated (no unauthorized deletes); (✓) 9 S-documents edited and approved (locked-files-guard evidence); (✓) 29 N-documents created per D4 approval; (✓) 26 pointer files created and validated per D4/D5; (✓) Coverage manifest complete (158 rows, including 4 deferred N-documents); (✓) All internal links validated/fixed; (✓) Design examples verified; (✓) Skill exercises passed; (✓) No unrelated changes in .github/dependabot.yml, .github/mergify.yml, CHANGELOG.md. Draft PR body with coverage summary per plan.md § Success Definition. Mark checklist "READY FOR MERGE" only when all items complete
