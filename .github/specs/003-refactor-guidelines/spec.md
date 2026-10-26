@@ -123,7 +123,7 @@ These outcomes remain unverified while owner gates and implementation are pendin
 ## Resolved Decisions (D0–D8)
 
 All owner decisions have been recorded and approved as of 2026-10-25.
-See [checklists/requirements.md § Resolved Decisions](./checklists/requirements.md#resolved-decisions) 
+See [checklists/requirements.md § Resolved Decisions](./checklists/requirements.md#resolved-decisions)
 for complete decision statements, evidence, and Phase 2 implementation guidance.
 
 **Decision Cross-Reference:**
