@@ -142,9 +142,16 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
 
 ### Session 2026-10-26
 
-- Q: Which of the eight owner decisions (D1–D8) in the spec remain genuinely unresolved and require owner input before Phase 2 implementation can proceed? → A: All decisions (D0–D8) are now resolved; update the spec to confirm final statuses and record evidence.
+- **Q1:** Which of the eight owner decisions (D1–D8) in the spec remain genuinely unresolved and require owner input before Phase 2 implementation can proceed? → **A:** All decisions (D0–D8) are now resolved; update the spec to confirm final statuses and record evidence.
+  - **Integration:** Updated Key Gates table to mark all decisions (D1–D8) as ✅ RESOLVED with evidence references from checklists/requirements.md (D1–D8 decision statements).
 
-**Integration:** Updated Key Gates table to mark all decisions (D1–D8) as ✅ RESOLVED with evidence references from checklists/requirements.md (D1–D8 decision statements).
+- **Q2:** Are there any remaining ambiguities about the pointer strategy (Type 1/2/3), archive directory structure (`guidelines/_archive/`), or edge cases in the consolidation approach that need clarification before Phase 2 final sign-off? → **A:** No remaining ambiguities—the hybrid consolidation strategy (Type 1/2/3 pointers, 1-hop chain depth limit, comment-based reverse links, archive directory structure) is fully defined and ready for implementation validation.
+  - **Integration:** Confirmed D4/D5 implementation guidance is complete and documented in checklists/requirements.md. No spec changes required; consolidation strategy is actionable.
+
+- **Q3:** Are all ten requirements for the Final Sign-Off checklist (checklists/requirements.md § Final Sign-Off) clear and achievable with the current evidence already generated (T067 manifest, T068 skill validation)? → **A:** Yes—all evidence is already in place from T067–T068; T069 is a consolidation exercise to fill in the checklist with references to existing documentation and mark "READY FOR MERGE" when complete.
+  - **Integration:** No spec changes required; Final Sign-Off checklist is actionable with existing evidence. T069 can proceed immediately.
+
+**Clarification Status:** ✅ COMPLETE — All critical ambiguities resolved. Specification is ready for Phase 2 implementation completion (T069).
 
 ## Next Steps
 
