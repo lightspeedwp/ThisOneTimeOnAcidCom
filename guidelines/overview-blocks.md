@@ -3,7 +3,7 @@
 **Version:** 4.0.0
 **Last Updated:** January 2025
 
-WordPress-aligned block patterns for the Ash Shaw Portfolio.
+WordPress-aligned block patterns for the This One Time On Acid Portfolio.
 
 ## Purpose
 
@@ -45,7 +45,7 @@ Section (Layout container)
 
 ## Block Types
 
-The Ash Shaw portfolio uses **8 primary block types** organized by category.
+The This One Time On Acid portfolio uses **8 primary block types** organized by category.
 Each has detailed implementation guidelines.
 
 ### Content Blocks
@@ -121,7 +121,7 @@ className="
 
 ## WordPress Block Alignment
 
-| Ash Shaw Block | WordPress Block | Purpose |
+| This One Time On Acid Block | WordPress Block | Purpose |
 |---------------|-----------------|---------|
 | `PortfolioCard` | `core/post-template` item | Portfolio entry card |
 | `BlogCard` | `core/post-template` item | Blog post card |

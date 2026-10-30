@@ -6,7 +6,7 @@
 **Date:** February 21, 2026
 **Status:** Archived (Out of Scope)
 
-This guide details the process of migrating the Ash Shaw Makeup Portfolio from
+This guide details the process of migrating the This One Time On Acid from
 its current "Mock Data" architecture to a **Headless WordPress** backend.
 
 ---

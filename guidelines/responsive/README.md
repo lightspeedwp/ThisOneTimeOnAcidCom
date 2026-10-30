@@ -4,7 +4,7 @@
 **Last Updated:** January 2025
 **WordPress Block Theme Compatible:** ✅
 
-Complete responsive design system for the Ash Shaw Makeup Portfolio, providing
+Complete responsive design system for the This One Time On Acid, providing
 unified guidance for mobile, tablet, and desktop experiences.
 
 ## 🎯 Overview
@@ -563,6 +563,6 @@ This responsive system provides:
 
 **Version:** 5.0.0 (Unified Responsive System)
 **Last Updated:** January 2025
-**Maintained By:** Ash Shaw Portfolio Team
+**Maintained By:** This One Time On Acid Portfolio Team
 
 **Questions?** Refer to specific pattern guides or component documentation.

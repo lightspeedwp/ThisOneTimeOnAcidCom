@@ -3,7 +3,7 @@
 **Version:** 4.0.0
 **Last Updated:** January 2025
 
-WordPress-aligned template parts for the Ash Shaw Portfolio.
+WordPress-aligned template parts for the This One Time On Acid Portfolio.
 
 ## Purpose
 
@@ -45,7 +45,7 @@ Template (Page)
 
 ## Part Categories
 
-The Ash Shaw portfolio uses **7 template parts** organized by category. Each has
+The This One Time On Acid portfolio uses **7 template parts** organized by category. Each has
 detailed implementation guidelines.
 
 ### Global Parts
@@ -147,7 +147,7 @@ mb-fluid-2xl">
     {/* Copyright */}
 <div className="border-t border-gray-300 pt-6 text-center text-sm
 text-gray-600">
-      © 2025 Ash Shaw. All rights reserved.
+      © 2025 This One Time On Acid. All rights reserved.
     </div>
   </div>
 </footer>
@@ -194,7 +194,7 @@ shadow-2xl">
 
 ## WordPress Template Part Alignment
 
-| Ash Shaw Part | WordPress Template Part | File |
+| This One Time On Acid Part | WordPress Template Part | File |
 |--------------|------------------------|------|
 | `Header` | `header.html` | `Header.tsx` |
 | `Footer` | `footer.html` | `Footer.tsx` |
@@ -208,7 +208,7 @@ shadow-2xl">
 // WordPress: Template part
 <?php block*template*part('header'); ?>
 
-// Ash Shaw: React component
+// This One Time On Acid: React component
 <Header currentPage={page} setCurrentPage={navigate} />
 
 ```text

@@ -1,7 +1,7 @@
 # Component System Overview
 
 This document provides a comprehensive overview of all components available in
-the Ash Shaw Makeup Portfolio design system, including a **React Component
+the This One Time On Acid design system, including a **React Component
 Architecture Diagram** and **Data Layer Integration**. Prefer custom components
 over generic HTML elements to maintain consistency and leverage existing patterns.
 
@@ -501,7 +501,7 @@ import { ScrollDownArrow } from './components/ui/ScrollDownArrow';
 function HeroSection() {
   return (
     <HeroLayout
-      title="Hi, I'm Ash Shaw"
+      title="Hi, I'm This One Time On Acid"
       subtitle="Makeup Artist & Creative"
       backgroundImage="hero-bg.jpg"
     >

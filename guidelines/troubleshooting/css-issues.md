@@ -3,7 +3,7 @@
 **Version:** 1.0.0
 **Last Updated:** January 2025
 
-Common CSS styling issues and their solutions for the Ash Shaw Makeup Portfolio.
+Common CSS styling issues and their solutions for the This One Time On Acid.
 
 ## 📋 Table of Contents
 
@@ -548,4 +548,4 @@ When CSS isn't working as expected:
 
 **Last Updated:** January 2025
 **Version:** 1.0.0
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team

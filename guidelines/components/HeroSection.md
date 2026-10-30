@@ -34,7 +34,7 @@ flowchart TD
     C --> E[homepageHeroImages array]
 
     D --> F[Extract Content]
-    F --> F1[title: 'Ash Shaw']
+    F --> F1[title: 'This One Time On Acid']
     F --> F2[subtitle: 'Makeup Artist']
     F --> F3[tagline: 'Makeup that shines...']
     F --> F4[CTAs: primaryCTA, secondaryCTA]
@@ -209,7 +209,7 @@ flowchart TD
 import { HeroSection } from './components/sections/HeroSection';
 
 <HeroSection
-  title="Ash Shaw"
+  title="This One Time On Acid"
   subtitle="Makeup Artist"
   tagline="Makeup that shines with colour, energy, and connection."
 />
@@ -220,7 +220,7 @@ import { HeroSection } from './components/sections/HeroSection';
 
 ```tsx
 <HeroSection
-  title="Ash Shaw"
+  title="This One Time On Acid"
   subtitle="Makeup Artist"
   tagline="Makeup that shines with colour, energy, and connection."
   primaryCTA={{
@@ -239,7 +239,7 @@ import { HeroSection } from './components/sections/HeroSection';
 
 ```tsx
 <HeroSection
-  title="Ash Shaw"
+  title="This One Time On Acid"
   subtitle="UV & Neon Makeup Artist"
   tagline="Creating stunning looks for festivals, editorials, and special events."
   backgroundImage="/images/hero-festival-makeup.jpg"
@@ -544,7 +544,7 @@ function HomePage() {
   return (
     <>
       <HeroSection
-        title="Ash Shaw"
+        title="This One Time On Acid"
         subtitle="Makeup Artist"
         tagline="Makeup that shines with colour, energy, and connection."
         primaryCTA={{
@@ -569,7 +569,7 @@ function HomePage() {
 
 ```tsx
 <HeroSection
-  title="Ash Shaw"
+  title="This One Time On Acid"
   subtitle="UV & Neon Makeup Artist"
   tagline="Creating stunning looks for festivals, editorials, and special events."
   backgroundImage="/images/hero-festival-makeup.jpg"
@@ -601,7 +601,7 @@ function HomePage() {
 <HeroSection
   title="About Me"
   subtitle="My Journey"
-tagline="From passion to profession - discover how makeup artistry became my
+tagline="From passion to profession - discover how creative storytellerry became my
 calling."
   height="large"
   alignment="left"
@@ -677,7 +677,7 @@ import Particles from 'react-particles';
 ```tsx
 <section className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50
 to-blue-100">
-  <HeroSection title="Ash Shaw" />
+  <HeroSection title="This One Time On Acid" />
 </section>
 
 ```text
@@ -690,10 +690,10 @@ to-blue-100">
     <div>
 <h1 className="text-hero-h1 font-title font-bold
 text-gradient-pink-purple-blue">
-        Ash Shaw
+        This One Time On Acid
       </h1>
       <p className="text-body-guideline font-body text-gray-700 mt-fluid-md">
-        UV & neon makeup artist specialising in creative and festival looks
+        UV & neon creative storyteller specialising in creative and festival looks
       </p>
     </div>
   </div>
@@ -746,7 +746,7 @@ focus:ring-opacity-50"
 {backgroundImage && (
   <div
     role="img"
-    aria-label="Hero background image showing makeup artistry"
+    aria-label="Hero background image showing creative storytellerry"
     className="absolute inset-0 bg-cover bg-center"
     style={{ backgroundImage: `url(${backgroundImage})` }}
   />

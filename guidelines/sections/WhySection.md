@@ -529,7 +529,7 @@ className="w-full sm:w-auto"
 
 ```text
 
-### Ash Shaw WhySection
+### This One Time On Acid WhySection
 
 ```tsx
 <section className="bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50

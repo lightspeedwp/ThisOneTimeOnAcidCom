@@ -1,6 +1,6 @@
 # Icon System Guide
 
-Complete guide to using icons in the Ash Shaw Makeup Portfolio project.
+Complete guide to using icons in the This One Time On Acid project.
 Verify icons exist before using them.
 
 **Version:** 5.0.0
