@@ -8,7 +8,7 @@
 
 ## Welcome to the Portfolio
 
-First-time contributor guide and quick-start navigation for the Ash Shaw Makeup Portfolio design system.
+First-time contributor guide and quick-start navigation for the This One Time On Acid design system.
 
 ---
 

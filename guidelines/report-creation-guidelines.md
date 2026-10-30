@@ -9,7 +9,7 @@ version: "1.0.0"
 # Report Creation Guidelines
 
 This document defines the standards and conventions for creating audit reports,
-analysis findings, and documentation within the Ash Shaw Makeup Portfolio
+analysis findings, and documentation within the This One Time On Acid
 project.
 
 ---

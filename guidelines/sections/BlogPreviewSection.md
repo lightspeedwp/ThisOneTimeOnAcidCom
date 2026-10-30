@@ -131,7 +131,7 @@ className="
   max-w-2xl                                        // 672px max-width
   mx-auto
 ">
-Insights, stories, and tips from my journey in makeup artistry, festivals, and
+Insights, stories, and tips from my journey in creative storytellerry, festivals, and
 creative exploration.
 </p>
 
@@ -613,7 +613,7 @@ p-fluid-md                         // Card padding
 
 ```text
 
-### Ash Shaw BlogPreviewSection
+### This One Time On Acid BlogPreviewSection
 
 ```tsx
 <section className="bg-white py-section px-fluid-md">

@@ -218,7 +218,7 @@ sm:items-center gap-4 mb-fluid-lg">
         <div>
           <h2 className="text-section-h2 font-heading font-semibold mb-2">Portfolio</h2>
           <p className="text-body-guideline font-body text-gray-600">
-            Explore my makeup artistry work
+            Explore my creative storytellerry work
           </p>
         </div>
 

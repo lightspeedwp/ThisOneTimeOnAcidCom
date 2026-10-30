@@ -11,7 +11,7 @@ The HeroSection is the **primary landing area** that establishes brand identity
 and sets the visual tone for the entire site. It combines:
 
 - Brand messaging and tagline
-- Artistic image mosaic showcasing makeup work
+- Artistic image mosaic showcasing memorable moments
 - Interactive elements with lightbox functionality
 - Floating decorative elements (gradient orbs)
 
@@ -147,7 +147,7 @@ Three floating orbs with different colors, sizes, and animation delays:
   text-gradient-pink-purple-blue             // Brand gradient text
   mb-fluid-xl
 ">
-  Hi, I'm Ash Shaw.
+  Welcome to This One Time On Acid.
 </p>
 
 ```text
@@ -163,10 +163,10 @@ Three floating orbs with different colors, sizes, and animation delays:
   leading-tight
   mb-fluid-xl
 ">
-  Makeup that shines with{" "}
-  <em className="italic text-gradient-pink-purple-blue">colour</em>,{" "}
-  <em className="italic text-gradient-pink-purple-blue">energy</em>, and{" "}
-  <em className="italic text-gradient-blue-teal-green">connection</em>.
+  Stories of adventure, transformation, and{" "}
+  <em className="italic text-gradient-pink-purple-blue">connection</em> across{" "}
+  <em className="italic text-gradient-pink-purple-blue">time</em>, place, and{" "}
+  <em className="italic text-gradient-blue-teal-green">experience</em>.
 </h1>
 
 ```text
@@ -188,7 +188,7 @@ Three floating orbs with different colors, sizes, and animation delays:
   leading-relaxed
   mb-fluid-xl
 ">
-  Makeup is my art, my joy, and my way of bringing people together...
+  A memoir exploring the profound connections formed at the intersection of art, adventure, and discovery...
 </p>
 
 ```text
@@ -202,7 +202,7 @@ Three floating orbs with different colors, sizes, and animation delays:
   font-medium
   text-gradient-pink-purple-blue
 ">
-  ✨ This portfolio is a growing collection of that journey.
+  ✨ This memoir is a growing collection of that journey.
 </p>
 
 ```text
@@ -534,7 +534,7 @@ const [lightbox, setLightbox] = useState({ isOpen: false, ... });
 
 ```text
 
-### Ash Shaw HeroSection
+### This One Time On Acid HeroSection
 
 ```tsx
 <section className="relative bg-gradient-to-br from-pink-50...">

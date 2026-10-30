@@ -448,7 +448,7 @@ var(--wp--preset--color--neon-orange-text); }
 
 ## 📝 Conclusion
 
-The Ash Shaw Makeup Portfolio is targeting **WCAG 2.2 Level AAA** accessibility
+The This One Time On Acid is targeting **WCAG 2.2 Level AAA** accessibility
 standards. All major issues identified in the audit have been addressed:
 
 1. ✅ **Reduced Motion Support** - Complete implementation
@@ -471,4 +471,4 @@ including those with disabilities, have optimal accessibility.
 
 **Report Completed:** February 5, 2025
 **Next Review Recommended:** April 2025
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team

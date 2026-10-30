@@ -653,7 +653,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 // ✅ CORRECT
 <img
   src={image}
-  alt={`${entry.title} - ${entry.category} makeup portfolio`}
+  alt={`${entry.title} - ${entry.category} creative portfolio`}
 />
 
 ```text
