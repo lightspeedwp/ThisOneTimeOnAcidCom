@@ -97,7 +97,7 @@ Create product requirements and specifications for portfolio site features and u
 - Design system implications  
 - Performance impacts
 - SEO considerations
-- Accessibility requirements (WCAG 2.2 compliance)
+- Accessibility requirements (WCAG 2.2 Level AA minimum, testing whole site)
 - Mobile-responsive design needs
 - Page load optimization
 
@@ -180,9 +180,9 @@ Agent:
 
 ## Resources
 
-- **PRD Skill**: `~/.claude/skills/prd/` - Full PRD generation capability
-- **SPEC.md**: Detailed PRD specification and quality standards
-- **QUICKSTART.md**: Quick reference for common PRD scenarios
+- **PRD Skill**: Consolidated PRD Skill v2.0.1 - Full PRD generation capability (system-installed)
+- **Skill Documentation**: Available in the `/skills/prd-agent/` installation directory
+- **Specification**: [.agents/roles/prd-agent.md](.) - This agent definition with linked resources
 
 ---
 
