@@ -1,7 +1,7 @@
-# Ash Shaw Makeup Portfolio - Guidelines Directory
+# This One Time On Acid - Guidelines Directory
 
-**Welcome to the comprehensive design system guidelines for the Ash Shaw Makeup
-Portfolio project.**
+**Welcome to the comprehensive design system guidelines for This One Time On Acid,
+a memoir and creative-life-guide project.**
 
 This directory contains all the documentation needed to build and maintain the
 portfolio using Figma Make's AI-powered development environment.

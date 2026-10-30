@@ -586,7 +586,7 @@ md:px-8">
   <div className="max-w-7xl mx-auto h-full flex items-center justify-center">
     <div className="text-center space-y-6 sm:space-y-8">
       <h1 className="text-hero-h1 mb-fluid-md">
-        Ash Shaw
+        This One Time On Acid
       </h1>
       <p className="text-body-guideline max-w-2xl mx-auto px-4">
         Makeup that shines with colour, energy, and connection.

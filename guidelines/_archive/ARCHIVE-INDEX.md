@@ -3,7 +3,7 @@
 **Version:** 1.0.0  
 **Status:** Archive Reference  
 **Last Updated:** 2026-10-25  
-**Part of:** Ash Shaw Makeup Portfolio Design System
+**Part of:** This One Time On Acid Design System
 
 ---
 
@@ -120,6 +120,6 @@ Example: Looking for color guidance?
 ---
 
 **Last Updated:** 2026-10-25  
-**Maintained by:** Ash Shaw Portfolio Team  
+**Maintained by:** This One Time On Acid Portfolio Team  
 **Authority:** Specification 003, Phase 2D (T034)  
 **N-Document ID:** N029 (Guidelines Refactor Archive Index)

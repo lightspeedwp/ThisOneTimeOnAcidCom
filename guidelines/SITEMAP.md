@@ -482,4 +482,4 @@ Features:
 ---
 
 **Last Updated:** February 2026
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team

@@ -1,4 +1,4 @@
-# Ash Shaw Portfolio - Component Architecture & Taxonomy
+# This One Time On Acid Portfolio - Component Architecture & Taxonomy
 
 **Version:** 4.0.0
 **Last Updated:** February 2026
@@ -25,7 +25,7 @@
 
 ### Component Organization Philosophy
 
-The Ash Shaw portfolio follows a **WordPress block theme-inspired** architecture
+The This One Time On Acid portfolio follows a **WordPress block theme-inspired** architecture
 with components organized by their **purpose and role** rather than their
 technical implementation.
 
@@ -470,7 +470,7 @@ Integrates [MobileMenu](./MobileMenu.md) for mobile navigation.
 
 ### Conceptual Mapping
 
-| WordPress | Ash Shaw | Code Location | Documentation |
+| WordPress | This One Time On Acid | Code Location | Documentation |
 |-----------|----------|---------------|---------------|
 | `template` | Template | `/components/pages/` | `/guidelines/templates/` |
 | `template-part` | Part | `/components/common/` | `/guidelines/parts/` |
@@ -586,7 +586,7 @@ part conceptually)
 
 **Last Updated:** February 2026
 **Version:** 4.0.0
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team
 
 For questions about component organization, refer to this document or the main
 [Guidelines.md](./Guidelines.md).

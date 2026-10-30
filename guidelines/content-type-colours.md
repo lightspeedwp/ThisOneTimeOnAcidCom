@@ -8,7 +8,7 @@
 
 ## Overview
 
-Every content type in the Ash Shaw portfolio has an assigned neon colour used
+Every content type in the This One Time On Acid portfolio has an assigned neon colour used
 consistently across card accents, badges, tab indicators, FAQ sections, specimen
 pages, timeline markers, and all other content-type-aware UI components.
 

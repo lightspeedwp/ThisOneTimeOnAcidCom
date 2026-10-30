@@ -3,7 +3,7 @@
 **Version:** 1.0.0  
 **Status:** Canonical Reference  
 **Last Updated:** 2026-10-25  
-**Part of:** Ash Shaw Makeup Portfolio Design System
+**Part of:** This One Time On Acid Design System
 
 ---
 
@@ -224,7 +224,7 @@ All original files accessible as pointers to this canonical reference.
 ---
 
 **Last Updated:** 2026-10-25  
-**Maintained by:** Ash Shaw Portfolio Team  
+**Maintained by:** This One Time On Acid Portfolio Team  
 **Canonical Reference:** Yes  
 **N-Document ID:** N001 (Specification 003 - Guidelines Refactor)
 

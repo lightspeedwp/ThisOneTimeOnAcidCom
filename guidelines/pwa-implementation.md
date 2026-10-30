@@ -1,4 +1,4 @@
-# PWA Implementation Guide - Ash Shaw Makeup Portfolio
+# PWA Implementation Guide - This One Time On Acid
 
 **Version:** 1.0.0
 **Last Updated:** February 5, 2025
@@ -8,7 +8,7 @@
 
 ## 📋 Overview
 
-The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App
+The This One Time On Acid is now a fully functional **Progressive Web App
 (PWA)** with offline support, installability, and native app-like features.
 
 ### ✨ Key Features
@@ -69,8 +69,8 @@ ash-shaw-makeup-portfolio/
 
 ```json
 {
-  "name": "Ash Shaw Makeup Artist Portfolio",
-  "short_name": "Ash Shaw",
+  "name": "This One Time On Acid Makeup Artist Portfolio",
+  "short_name": "This One Time On Acid",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0F0F0F",
@@ -310,7 +310,7 @@ All animations respect `prefers-reduced-motion`:
 
 1. Look for install icon in address bar
 
-1. Click "Install Ash Shaw"
+1. Click "Install This One Time On Acid"
 
 1. App opens in standalone window
 
@@ -668,7 +668,7 @@ registration.addEventListener('updatefound', () => {
 
 **Implemented:** February 5, 2025
 **Status:** Production-Ready
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team
 
 ## Need Help
 

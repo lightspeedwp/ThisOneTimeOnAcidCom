@@ -144,7 +144,7 @@ Use the fluid typography tokens from `design-tokens-reference.md`:
 // Hero Titles - Mobile to Desktop
 <h1 className="text-hero-h1">
   {/* clamp(2.25rem, 6vw, 7.5rem) → 36px to 120px */}
-  Ash Shaw
+  This One Time On Acid
 </h1>
 
 // Section Headings
@@ -214,7 +214,7 @@ Use the fluid typography tokens from `design-tokens-reference.md`:
 <section className="min-h-screen flex items-center justify-center">
   <h1 className="text-[8vh] min-text-4xl max-text-8xl">
     {/* Scales with viewport height */}
-    Ash Shaw
+    This One Time On Acid
   </h1>
 </section>
 
@@ -322,7 +322,7 @@ h1, h2, h3 {
   leading-tight         /* 1.25 line height */
   tracking-tight        /* Tighter letter spacing */
 ">
-  Ash Shaw
+  This One Time On Acid
 </h1>
 
 // H2 - Section Title
@@ -597,7 +597,7 @@ function HeroSection() {
           tracking-tight
           mb-4
         ">
-          Ash Shaw
+          This One Time On Acid
         </h1>
 
         {/* Tagline */}

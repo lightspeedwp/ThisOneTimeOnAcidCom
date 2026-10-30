@@ -9,7 +9,7 @@ version: "1.0.0"
 # Prompt Creation Guidelines
 
 This document defines the standards and conventions for creating AI prompts for
-auditing, analysis, and task automation within the Ash Shaw Makeup Portfolio
+auditing, analysis, and task automation within the This One Time On Acid
 project.
 
 ---

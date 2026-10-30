@@ -3,12 +3,12 @@
 **Version:** 4.0.0
 **Last Updated:** January 2025
 
-The Logo component displays the Ash Shaw brand logo with responsive sizing,
+The Logo component displays the This One Time On Acid brand logo with responsive sizing,
 animations, and proper accessibility features.
 
 ## Purpose
 
-Display the Ash Shaw brand logo consistently across the site with:
+Display the This One Time On Acid brand logo consistently across the site with:
 
 - Responsive sizing for different contexts
 - Hover animations and gradient effects
@@ -139,7 +139,7 @@ import { Logo } from './components/common/Logo';
     className="mb-4"
   />
   <p className="text-body-guideline font-body">
-    Makeup that shines with colour, energy, and connection.
+    Stories of adventure, discovery, and creative transformation.
   </p>
 </footer>
 
@@ -175,7 +175,7 @@ interface LogoProps {
   /**
 
    * Accessibility label (auto-generated if not provided)
-   * @default "Ash Shaw - Makeup Artist, navigate to homepage"
+   * @default "This One Time On Acid, navigate to homepage"
    */
   ariaLabel?: string;
 }
@@ -260,7 +260,7 @@ flowchart LR
 The logo uses the brand typography system:
 
 ```tsx
-<span className="font-heading font-semibold">Ash Shaw</span>
+<span className="font-heading font-semibold">This One Time On Acid</span>
 
 ```text
 
@@ -339,7 +339,7 @@ py-4 px-6 shadow-sm">
 className="cursor-pointer text-gray-800 hover:text-gradient-pink-purple-blue
 transition-colors duration-300 focus:outline-none focus:ring-4
 focus:ring-pink-200 rounded-lg"
-          ariaLabel="Ash Shaw logo, click to navigate to homepage"
+          ariaLabel="This One Time On Acid logo, click to navigate to homepage"
         />
 
         <nav>{/* Navigation menu */}</nav>
@@ -365,7 +365,7 @@ function Footer() {
         />
 
         <p className="text-body-guideline font-body text-gray-300 mb-4">
-          Makeup that shines with colour, energy, and connection.
+          Stories of adventure, discovery, and creative transformation.
         </p>
 
         {/* Contact and social links */}
@@ -389,7 +389,7 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           size="lg"
           onClick={onClose}
           className="mb-8 text-gradient-pink-purple-blue cursor-pointer"
-          ariaLabel="Ash Shaw logo, click to close menu"
+          ariaLabel="This One Time On Acid logo, click to close menu"
         />
 
         <nav className="flex flex-col gap-6">
@@ -438,12 +438,12 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 
 ```tsx
 // Proper ARIA labeling
-<Logo ariaLabel="Ash Shaw Makeup Artist, navigate to homepage" />
+<Logo ariaLabel="This One Time On Acid, navigate to homepage" />
 
 // In header context
 <header role="banner">
   <Logo
-    ariaLabel="Ash Shaw logo, click to return to homepage"
+    ariaLabel="This One Time On Acid logo, click to return to homepage"
     onClick={navigateHome}
   />
 </header>

@@ -504,7 +504,7 @@ backgroundGradient={{
         max-w-2xl
         mx-auto
       ">
-        Three core reasons that drive my passion for makeup artistry
+        Three core reasons that drive my passion for creative storytellerry
       </p>
     </div>
   }
@@ -693,7 +693,7 @@ mb-fluid-sm">
   gap="lg"
   padding="2xl"
 >
-  <TeamMemberCard name="Ash Shaw" role="Lead Artist" />
+  <TeamMemberCard name="This One Time On Acid" role="Lead Artist" />
   <TeamMemberCard name="Artist 2" role="Makeup Artist" />
   <TeamMemberCard name="Artist 3" role="Hair Stylist" />
 </ThreeColumnLayout>

@@ -47,7 +47,7 @@ Email)
     alt External Link (_blank)
         S->>B: Open in new tab
         B->>E: Navigate to Instagram
-        E-->>U: Show Ash Shaw profile ✅
+        E-->>U: Show This One Time On Acid profile ✅
     else Email Link (_self)
         S->>B: Open default mail app
         B-->>U: Compose email to ashley@ashshaw.makeup ✅
@@ -505,7 +505,7 @@ items-start gap-3'}
             href={social.url}
             target={platform !== 'email' ? '_blank' : undefined}
             rel={platform !== 'email' ? 'noopener noreferrer' : undefined}
-            aria-label={`Visit Ash Shaw on ${social.label}`}
+            aria-label={`Visit This One Time On Acid on ${social.label}`}
             className={`
               flex items-center gap-2
               transition-all duration-300
@@ -561,7 +561,7 @@ rounded-lg p-1
 <section className="py-section text-center">
 <h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue
 mb-fluid-md">
-    Ash Shaw
+    This One Time On Acid
   </h1>
 
   <p className="text-fluid-lg font-body text-gray-700 mb-fluid-lg">
@@ -694,7 +694,7 @@ group-hover:scale-100 transition-transform duration-300" />
   href={url}
   target="_blank"
   rel="noopener noreferrer"
-  aria-label="Visit Ash Shaw on Instagram (opens in new tab)"
+  aria-label="Visit This One Time On Acid on Instagram (opens in new tab)"
 >
   <InstagramLogo />
 </a>
@@ -772,7 +772,7 @@ focus:ring-opacity-50 rounded-lg p-2"
 
 ```tsx
 // ✅ CORRECT - Clear labels
-<a href={instagramUrl} aria-label="Visit Ash Shaw on Instagram">
+<a href={instagramUrl} aria-label="Visit This One Time On Acid on Instagram">
   <InstagramLogo />
 </a>
 
@@ -808,7 +808,7 @@ focus:ring-opacity-50 rounded-lg p-2"
 
 ### Instagram
 
-- Primary platform for makeup artists
+- Primary platform for creative storytellers
 - Use InstagramLogo icon from @phosphor-icons/react
 - Link to profile: `https://instagram.com/username`
 

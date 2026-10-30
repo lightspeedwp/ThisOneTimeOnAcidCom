@@ -3,7 +3,7 @@
 **Version:** 4.0.0
 **Last Updated:** January 2025
 
-Reusable design patterns and compositions for the Ash Shaw Portfolio.
+Reusable design patterns and compositions for the This One Time On Acid.
 
 ## Purpose
 
@@ -45,7 +45,7 @@ Pattern (Solution)
 
 ## Pattern Categories
 
-The Ash Shaw portfolio uses **12 primary patterns** organized by category. Each
+The This One Time On Acid memoir uses **12 primary patterns** organized by category. Each
 has detailed implementation guidelines.
 
 ### Layout Patterns
@@ -187,7 +187,7 @@ to-blue-50 py-fluid-3xl px-fluid-md">
 
 ## WordPress Pattern Alignment
 
-| Ash Shaw Pattern | WordPress Pattern | Purpose |
+| This One Time On Acid Pattern | WordPress Pattern | Purpose |
 |-----------------|-------------------|---------|
 | `HeroWithCTA` | Hero pattern | Landing area with CTA |
 | `CardGridWithFilters` | Query Loop | Filterable content |
