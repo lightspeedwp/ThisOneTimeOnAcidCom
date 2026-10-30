@@ -495,6 +495,13 @@ All tasks must complete with documented evidence:
 - [ ] **T060** [HIGH] Validate N018 mapping status: CONSOLIDATION-MANIFEST.md defines N018 as **Backend Stack & Integration Patterns** — Canonical backend stack (Vercel/Supabase/tRPC), API patterns, deployment workflow, and alternatives (internal reference per D6). Create specification outline per manifest definition; document any related G-document mappings from existing backend documentation; mark status as "Approved" in CONSOLIDATION-MANIFEST.md per D4 authority
 - [ ] **T061** [HIGH] Record Phase 4 severity audit: Actual task totals are 1 CRITICAL (T044), 8 HIGH (T045–T052), and 2 MEDIUM (T053–T054), matching the declared summary. Retain the existing severity labels for T044–T054; document audit results in convergence sign-off
 
+### Critical Identity Contradiction
+
+- [ ] **T055** [HIGH] Remediate identity contradiction: Update all guidelines references from "Ash Shaw Makeup Portfolio" to site's actual identity per D1 (Balanced Hybrid voice for "This One Time On Acid" memoir/creative-life-guide). Affects 66+ files including README.md header, Logo.md aria-label, component documentation. Search for: `Ash Shaw Makeup`, `makeup portfolio`, `makeup artist` references in guidelines/ and remove/replace with memoir/creative-life-guide identity context. Commit: `refactor(003-identity): Align guidelines with established site identity per D1 decision`
+  - Files affected: README.md, Logo.md, PortfolioCard.md, report-creation-guidelines.md, and ~63 others
+  - Priority: Must complete before PR merge to ensure consistent brand messaging
+  - Evidence: D1 decision recorded in checklists/requirements.md; identity contradiction identified in convergence assessment (2026-10-30)
+
 ### Medium-Priority Workflow Gaps
 
 - [ ] **T062** [MEDIUM] Address T023 file count inconsistency: T023 summary reports "25+ guidelines" updated for WCAG 2.2 AAA but completion note shows "21 files". Audit WCAG updates across guidelines/; count actual files modified; reconcile discrepancy with commit 64a4649 evidence; update T023 completion notes with accurate file count and list
