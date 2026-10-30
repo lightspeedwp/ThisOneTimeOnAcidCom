@@ -16,7 +16,7 @@ proposals retain the destinations and N032 portfolio/N033 PWA labels recorded
 in remote commit `7c7cc7d5be3562be9981373ef4ec2d13ddadcceb`; the conflicting
 operational-manifest labels are recorded below for T067 reconciliation.
 
-SHA-256 values describe current file bytes, including resolved skill symlinks.
+**Current SHA-256 column**: Contains individual per-file SHA-256 hashes (not baseline commit). SHA-256 values describe current file bytes, including resolved skill symlinks.
 For the three absent G-paths, the hash describes the named archive copy. For
 pointers, the hash describes the source pointer; Destination is its first banner
 link, resolved relative to that file. These observations do not verify content
