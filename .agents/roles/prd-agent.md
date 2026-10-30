@@ -97,13 +97,12 @@ Create product requirements and specifications for portfolio site features and u
 - Design system implications  
 - Performance impacts
 - SEO considerations
-- Accessibility requirements (WCAG 2.2 Level AA minimum, testing whole site)
+- Accessibility requirements (WCAG 2.2 Level AAA minimum, testing whole site)
 - Mobile-responsive design needs
 - Page load optimization
 
 ## Technology Integration
 
-- WordPress theme and plugin requirements
 - Headless CMS considerations
 - Static site generation options
 - API integration needs
