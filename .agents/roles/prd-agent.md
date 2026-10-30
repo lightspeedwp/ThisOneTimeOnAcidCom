@@ -179,9 +179,8 @@ Agent:
 
 ## Resources
 
-- **PRD Skill**: Consolidated PRD Skill v2.0.1 - Full PRD generation capability (system-installed)
-- **Skill Documentation**: Available in the `/skills/prd-agent/` installation directory
-- **Specification**: [.agents/roles/prd-agent.md](.) - This agent definition with linked resources
+- **PRD Skill, SPEC.md, and QUICKSTART.md**: These resources are not currently present in `.agents/skills/`.
+- **Role definition**: [prd-agent.md](prd-agent.md) - This agent definition.
 
 ---
 
