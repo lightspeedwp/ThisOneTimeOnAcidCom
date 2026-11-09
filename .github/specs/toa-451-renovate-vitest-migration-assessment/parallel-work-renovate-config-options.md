@@ -282,6 +282,8 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
 }
 ```
 
+**⚠️ BLOCKING ISSUE:** The preset paths (`renovate-presets/renovate`, etc.) must be published in `lightspeedwp/.github` repository before this configuration can be deployed. As of now, the upstream repo has no root `renovate.json` or preset directory. **Action Required:** Either (1) publish the presets to `lightspeedwp/.github` on the develop branch, or (2) change the preset reference to an approved preset that is already available upstream. See Part 4 (Blocking: Upstream Preset Availability) for details.
+
 **Pros:**
 - Modular: Org presets can be mixed/matched per repo
 - Flexible: Each repo composes its own config from org building blocks

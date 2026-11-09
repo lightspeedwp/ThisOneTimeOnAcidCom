@@ -35,17 +35,19 @@ Vitest 5.0.5 includes the native JSON reporter.
 **Step 2:** No changes to `vitest.config.ts`
 The existing configuration already supports JSON output via the command-line `--reporter=json` flag.
 
-**Step 3:** Update CI command (`.github/workflows/tests.yml`)
+**Step 3:** Update CI command (`.github/workflows/tests.yml`) — Dual-runner during cutover
 
-Replace Jest invocation:
+**On base (contains jest.mock() calls — use Jest):**
 ```bash
 npx jest --config jest.config.js --ci --json --outputFile=jest-report.json
 ```
 
-With Vitest:
+**On head (Vitest mocks rewrites — use Vitest):**
 ```bash
-npx vitest run --config vitest.config.ts --reporter=json --outputFile=jest-report.json
+npx vitest run --config vitest.config.ts --reporter=json --outputFile=vitest-report.json
 ```
+
+**Why dual runners:** Base revision still contains `jest.mock()` calls which Vitest cannot resolve. Running Vitest on base produces suite failures that are not representative of jest-formatted tests, masking real regressions in head.
 
 **Step 4:** Capture Vitest exit status and account for unhandled errors
 The comparison script `scripts/validation/compare-jest-failures.cjs` works unchanged because Vitest 5.0.5's built-in JSON reporter outputs the same `testResults` and `assertionResults` structure as Jest. However, the JSON reporter does not include unhandled run errors in its per-file results. Update the CI workflow to:
@@ -167,13 +169,13 @@ The built-in `--reporter=json` flag outputs the same `testResults` and `assertio
 
 ### Why This Works
 
-Vitest 5.0.5 native JSON reporter outputs identical schema to Jest:
+Vitest 5.0.5 native JSON reporter outputs compatible schema to Jest:
 - `testResults[]` array per file
-- `assertionResults[]` array per test
-- `numFailingTests` count per file
-- Same failure message structure
+- `assertionResults[]` array per test (both runners have this)
+- Vitest omits `numFailingTests` per-file; Jest includes it
+- Comparison script uses `assertionResults` fallback to count failures, so difference is handled
 
-The existing comparison script requires zero changes.
+The existing comparison script requires zero changes (it already handles both formats via assertion-level fallback).
 - `@vitest/reporters` is immature or undocumented
 - We want maximum control & predictability
 

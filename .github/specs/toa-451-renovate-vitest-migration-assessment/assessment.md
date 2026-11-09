@@ -267,6 +267,7 @@ Jest report (excerpt):
 Vitest report (excerpt):
 ```json
 {
+  "success": true,
   "testResults": [
     {
       "name": "/path/to/test.ts",
@@ -281,7 +282,7 @@ Vitest report (excerpt):
 }
 ```
 
-**Change Required:** None. Vitest 5.0.5's built-in JSON reporter (`--reporter=json`) outputs the same `testResults` and `assertionResults` structure as Jest. The existing `compare-jest-failures.cjs` can parse both formats without modification.
+**Key Difference:** Vitest omits `numFailingTests` from per-file entries; it only includes `success` at root level. The comparison script reads `assertionResults` to count failures, so this difference does not break comparison. The existing `compare-jest-failures.cjs` can parse both formats using its assertion-level fallback logic.
 
 ### CI Workflow Impact
 
@@ -322,7 +323,7 @@ Vitest report (excerpt):
 
 | Scenario | Action | Reversibility |
 |----------|--------|----------------|
-| Vitest tests fail | Restore Jest-based test files and `vi.*` mocks back to `jest.*` equivalents; restore Jest and @swc/jest dependencies; restore `test` script in package.json; re-enable Jest configuration in CI | ✓ Complete |
+| Vitest tests fail | **Restore all Phase 2 changes (comprehensive rollback):** (1) Restore Jest-based test files by reverting vi.* mock rewrites to jest.* equivalents across scripts/**/*.test.js and scripts/lib/**/*.test.js; (2) Restore jest and @swc/jest dependencies via `npm install jest @swc/jest`; (3) Restore npm scripts: `test`, `test:watch`, `test:coverage` to original Jest commands in package.json; (4) Restore jest.config.js configuration; (5) Re-enable Jest in CI by reverting `.github/workflows/tests.yml` to Jest runner; (6) Delete vitest.config.ts if added; (7) Verify all Jest-based tests run and pass with `npm test` | ✓ Complete |
 | Mock rewrites incomplete | Keep Jest; pause Vitest work; revert test file changes | ✓ Complete |
 | Coverage gap revealed | Investigate diff; may indicate bug or coverage loss | Case-by-case |
 | CI comparison breaks | Revert reporter config; restore previous comparison script | ✓ Complete |

@@ -513,13 +513,19 @@ EXIT_CODE=0
 npx vitest run --reporter=json --outputFile=jest-report.json || EXIT_CODE=$?
 
 # Always proceed to comparison step (upload reports even if tests fail)
-node scripts/validation/compare-jest-failures.cjs jest-report-head/jest-report.json jest-report-base/jest-report.json
+node scripts/validation/compare-jest-failures.cjs \
+  --head jest-report-head/jest-report.json --head-root "$(pwd)" \
+  --base jest-report-base/jest-report.json --base-root "$(pwd)"
+COMPARISON_STATUS=$?
 
 # Fail if: runner crashed ($EXIT_CODE != 0) AND no failures detected (regression)
-if [ $EXIT_CODE -ne 0 ] && ! grep -q '"numFailingTests": [^0]' jest-report-head/jest-report.json; then
-  echo "Unhandled Vitest error detected"
+if [ $EXIT_CODE -ne 0 ] && [ $COMPARISON_STATUS -eq 0 ]; then
+  echo "::error::Unhandled test runner error detected; no test failures to explain it"
   exit 1
 fi
+
+# Fail if comparison itself failed
+exit $COMPARISON_STATUS
 ```
 
 **If reverting back (deprecated Option 2 reference):**
@@ -577,20 +583,28 @@ Update `.github/workflows/tests.yml`:
 ```yaml
 # Replace Jest section with:
 - name: Run Vitest (Head/Base)
+  id: vitest-run
   run: |
-    EXIT_CODE=0
-    npx vitest run --config vitest.config.ts --reporter=json --outputFile=jest-report.json || EXIT_CODE=$?
+    TEST_EXIT_CODE=0
+    npx vitest run --config vitest.config.ts --reporter=json --outputFile=jest-report.json || TEST_EXIT_CODE=$?
+    echo "test_exit_code=${TEST_EXIT_CODE}" >> "$GITHUB_OUTPUT"
   continue-on-error: true  # Always proceed to comparison step
 
 - name: Compare Vitest Results
   if: always()  # Run even if Vitest failed
+  id: compare
   run: |
-    node scripts/validation/compare-jest-failures.cjs jest-report-head/jest-report.json jest-report-base/jest-report.json || true
+    node scripts/validation/compare-jest-failures.cjs \
+      --head jest-report-head/jest-report.json --head-root "$(pwd)" \
+      --base jest-report-base/jest-report.json --base-root "$(pwd)"
+  continue-on-error: true  # Capture exit status for next step
   
 - name: Check for Unhandled Errors
   if: always()
   run: |
-    if [ "${VITEST_EXIT_CODE}" -ne 0 ] && ! grep -q '"numFailingTests": [^0]' jest-report-head/jest-report.json; then
+    TEST_EXIT=${{ steps.vitest-run.outputs.test_exit_code }}
+    COMPARE_EXIT=${{ steps.compare.outcome == 'failure' && '1' || '0' }}
+    if [ "${TEST_EXIT}" -ne 0 ] && [ "${COMPARE_EXIT}" -eq 0 ]; then
       echo "Unhandled Vitest error: runner crashed but no failures detected"
       exit 1
     fi

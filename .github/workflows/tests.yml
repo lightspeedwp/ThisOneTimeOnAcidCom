@@ -99,18 +99,28 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Vitest
+      - name: Run tests (Jest on base, Vitest on head during cutover)
         env:
           EVENT_NAME: ${{ github.event_name }}
+          TARGET: ${{ matrix.target }}
         run: |
-          # Failing tests are expected on develop; the compare job decides.
-          # A missing or invalid report fails closed there.
-          vitest_status=0
-          npx vitest run --reporter=json --outputFile=jest-report.json --coverage=false || vitest_status=$?
-          jq -r '"suites=\(.numTotalTestSuites) failed_suites=\(.numFailedTestSuites) tests=\(.numTotalTests) failed=\(.numFailedTests)"' \
-            jest-report.json 2>/dev/null || echo "::warning::No Vitest report was written"
+          # During Jest-to-Vitest cutover: base contains jest.mock() calls,
+          # head contains vi.* mocks. Use Jest baseline to ensure head comparison
+          # is valid. Once base catches up, simplify to Vitest everywhere.
+          test_status=0
+
+          if [ "$TARGET" = "base" ]; then
+            # Base revision still has jest.mock() — must run Jest
+            npx jest --config jest.config.js --ci --json --outputFile=jest-report.json || test_status=$?
+          else
+            # Head revision has vi.* mocks — run Vitest
+            npx vitest run --reporter=json --outputFile=jest-report.json --coverage=false || test_status=$?
+          fi
+
+          jq -r '"suites=\(.numTotalTestSuites // .testResults | length) failed=\(.numFailedTests // 0)"' \
+            jest-report.json 2>/dev/null || echo "::warning::No test report was written"
           if [ "$EVENT_NAME" = "workflow_dispatch" ] \
-            && { [ "$vitest_status" -ne 0 ] || [ ! -s jest-report.json ]; }; then
+            && { [ "$test_status" -ne 0 ] || [ ! -s jest-report.json ]; }; then
             exit 1
           fi
 
