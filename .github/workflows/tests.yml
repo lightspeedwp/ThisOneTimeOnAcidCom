@@ -122,13 +122,16 @@ jobs:
           num_failed=$(jq '.numFailedTests // 0' jest-report.json 2>/dev/null || echo 0)
           echo "Test summary: suites=${num_suites} failed=${num_failed}"
 
-          # Fail if:
-          # 1. Test runner crashed ($test_status != 0) AND
-          #    - Explicit failure requested (workflow_dispatch), OR
-          #    - No report generated, OR
-          #    - Suite discovered no tests
-          if [ "$test_status" -ne 0 ] && { [ "$EVENT_NAME" = "workflow_dispatch" ] || [ ! -s jest-report.json ] || [ "$num_suites" -eq 0 ]; }; then
-            echo "::error::Test runner failed or no tests discovered"
+          # Always fail if no tests discovered, even if runner succeeded
+          # (Vitest can exit 0 with empty testResults array)
+          if [ "$num_suites" -eq 0 ]; then
+            echo "::error::No tests discovered"
+            exit 1
+          fi
+
+          # Fail if test runner crashed on explicit request or no report generated
+          if [ "$test_status" -ne 0 ] && { [ "$EVENT_NAME" = "workflow_dispatch" ] || [ ! -s jest-report.json ]; }; then
+            echo "::error::Test runner failed"
             exit 1
           fi
 
