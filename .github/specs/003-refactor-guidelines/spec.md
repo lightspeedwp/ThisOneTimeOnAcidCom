@@ -2,20 +2,20 @@
 spec_id: "003"
 feature: "guidelines-refactor"
 issue: "TOA-358"
-status: "draft"
+status: "implemented"
 created: "2026-10-24"
 ---
 
 # Specification 003: Refactor Guidelines (TOA-358)
 
-**Status:** Draft  
+**Status:** Implemented  
 **Issue:** [TOA-358](https://linear.app/lightspeedwp/issue/TOA-358) | [GitHub #416](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/416)  
-**Branch:** `aiops/refactor-guidelines`  
+**Branch:** `docs/spec-003-guidelines-reconcile`\
 **Created:** 2026-10-24
 
 ## Overview
 
-Consolidate and refactor 116 existing guideline documents plus 33 conditional new documentation to establish canonical book/site instructions following the bounded memoir/creative-life-guide brief, with non-destructive consolidation and existing-skill integration.
+Consolidate and refactor 116 existing guideline documents plus 29 approved new documents (Phase 2) and 4 deferred new documents (Phase 3) to establish canonical book/site instructions following the bounded memoir/creative-life-guide brief, with non-destructive consolidation and existing-skill integration.
 
 ## Requirements
 
@@ -31,20 +31,20 @@ Consolidate and refactor 116 existing guideline documents plus 33 conditional ne
 | Gate | Decision | Impact | Status |
 | --- | --- | --- | --- |
 | **D0** | Retain the existing protected-file approval requirement; no policy simplification is authorised | Protected edits, including all changes under `.github/` | ✅ RESOLVED (existing policy retained) |
-| **D1** | Canonical book/site identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context | New normative copy, identity claims | 🔄 PENDING |
-| **D2** | Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries | Publication/exposure contracts | 🔄 PENDING |
-| **D3** | Brief/current-CSS/approved-design-contract authority, palette/font roles, accessibility target | Design authority; arithmetic/sample corrections | 🔄 PENDING |
-| **D4** | Exact canonical destinations/pointer treatment, six-skill reference approach | Conditional N creates, pointer-only replacement, extraction | 🔄 PENDING |
-| **D5** | Artefact-specific retention and historical preservation-copy locations | Historical-copy operations | 🔄 PENDING |
-| **D6** | Signup/contact/waitlist/backend provider and verification | Delivery, secure unlock, CMS claims | 🔄 PENDING |
-| **D7** | Verified final branch/reuse scope, manual template/label handling | Branch selection, PR metadata | ✅ RESOLVED (`aiops/refactor-guidelines`) |
-| **D8** | WordPress/portfolio retained-reference vs future-option role | Migration/legacy requirements | 🔄 PENDING |
+| **D1** | Canonical book/site identity, approved memoir/Journal/press voices, reader journey/CTA hierarchy, retained art/festival context | New normative copy, identity claims | ✅ RESOLVED (Balanced Hybrid voice) |
+| **D2** | Canonical manuscript/Journal sources; preview/full-draft visibility; indexing/cache boundaries | Publication/exposure contracts | ✅ RESOLVED (Mixed publication model) |
+| **D3** | Brief/current-CSS/approved-design-contract authority, palette/font roles, accessibility target | Design authority; arithmetic/sample corrections | ✅ RESOLVED (Ash Shaw; WCAG 2.2 AAA) |
+| **D4** | Exact canonical destinations/pointer treatment, six-skill reference approach | Conditional N creates, pointer-only replacement, extraction | ✅ RESOLVED (Hybrid consolidation; 29 Phase 2, 4 Phase 3) |
+| **D5** | Artefact-specific retention and historical preservation-copy locations | Historical-copy operations | ✅ RESOLVED (Archive in `guidelines/_archive/`; Type 3 pointers) |
+| **D6** | Signup/contact/waitlist/backend provider and verification | Delivery, secure unlock, CMS claims | ✅ RESOLVED (Vercel Functions + Supabase + tRPC) |
+| **D7** | Verified final branch/reuse scope, manual template/label handling | Branch selection, PR metadata | ✅ RESOLVED (`docs/spec-003-guidelines-reconcile`) |
+| **D8** | WordPress/portfolio retained-reference vs future-option role | Migration/legacy requirements | ✅ RESOLVED (Not in active use; 4 N-docs deferred to Phase 3) |
 
-D0 confirms the current approval requirement, not approval to remove it.
-The canonical [protected-file list](../../PROTECTED_FILES.txt) includes `.github/`;
-`locked-files-guard` requires approval before merging those changes. Any policy
-change requires a recorded authorised decision under the
-[constitution amendment process](../../../.specify/memory/constitution.md#amendment-process).
+**D0 Resolution:** Decision gate RESOLVED. The existing protected-file approval policy (requiring `locked-files-guard` approval for `.github/` and protected paths) remains in force. This is a policy decision (no simplification).
+
+**Procedural Requirement for Phase 2:** S-documents (AGENTS.md, CONTRIBUTING.md, `.claude/skills/*`) are protected files and require formal approval before PR merge. This is a *workflow gate*, not a *decision gate*. See tasks.md T001.4 for pre-implementation approval readiness check.
+
+See [constitution amendment process](../../../.specify/memory/constitution.md#amendment-process) for policy change procedures.
 
 ### Acceptance Criteria (Target State)
 
@@ -88,17 +88,22 @@ both contain 116 files; comparison with the observation baseline remains pending
 - `AGENTS.md`
 - `CONTRIBUTING.md`
 
-### Proposed New Documents (33 conditional)
+### Proposed New Documents (33 total; 29 Phase 2, 4 Phase 3)
 
-**Categories:**
+**Phase 2 Scope (N001–N029):**
 - Reference/diagnostics (5): CSS, media, component docs
 - Design inspiration (1): Neon palettes
-- WordPress migration (2): Block patterns, decision model
 - Guidelines organization (13): Accessibility, architecture, content model, etc.
 - Pages (3): README, book-home, sitemap
 - Patterns (4): Book cards, hero, proposition, journal preview
-- Reports/archived (4): Accessibility, performance, dark-mode, nova-news
+- Reports/archived (3): Accessibility, performance, dark-mode
+
+**Phase 3 Deferred (N030–N033, per D8 decision):**
+- WordPress migration (2): Block patterns, decision model
+- Reports/archived (1): nova-news
 - Platform/service (1): PWA
+
+**Rationale:** Approved in D4; WordPress content deferred to Phase 3 per D8 decision (WordPress not in active use).
 
 ## Success Criteria (Target State)
 
@@ -115,23 +120,47 @@ These outcomes remain unverified while owner gates and implementation are pendin
 9. [ ] No unapproved file moves/deletes; all changes reviewable
 10. [ ] Final handoff report with coverage manifest, verification register, open decisions
 
-## Open Questions
+## Resolved Decisions (D0–D8)
 
-1. What are the canonical book brief identity markers and approved voices (D1)?
-2. What are the manuscript visibility/indexing/cache boundaries (D2)?
-3. Who owns design authority and what's the current CSS/palette/font strategy (D3)?
-4. For the 33 N-docs: are these pointer-only replacements or full new guides (D4)?
-5. Where should historical copies of deprecated guides be preserved (D5)?
-6. What backend/provider owns signup/waitlist functionality (D6)?
-7. Is WordPress portfolio content retained or deprecated (D8)?
+All owner decisions have been recorded and approved as of 2026-10-25.
+See [checklists/requirements.md § Resolved Decisions](./checklists/requirements.md#resolved-decisions)
+for complete decision statements, evidence, and Phase 2 implementation guidance.
+
+**Decision Cross-Reference:**
+
+| Question | Decision | Answer | Evidence |
+| ------ | ------ | ------ | ------ |
+| Canonical book identity & voices | D1 | Balanced Hybrid (Professional + conversational) | requirements.md § D1 |
+| Manuscript visibility & boundaries | D2 | Mixed publication model; no hard separation | requirements.md § D2 |
+| Design authority & accessibility | D3 | Ash Shaw; WCAG 2.2 AAA target | requirements.md § D3 |
+| N-doc scope & pointer strategy | D4 | Hybrid consolidation; 29 approved Phase 2, 4 deferred Phase 3 | requirements.md § D4 |
+| Historical preservation approach | D5 | Archive in `guidelines/_archive/`; Type 3 pointer constraints | requirements.md § D5 |
+| Backend stack & signup | D6 | Vercel Functions + Supabase PostgreSQL + tRPC | requirements.md § D6 |
+| WordPress role & legacy content | D8 | Not in active use; 4 N-docs deferred to Phase 3 | requirements.md § D8 |
+
+## Clarifications
+
+### Session 2026-10-26
+
+- **Q1:** Which of the eight owner decisions (D1–D8) in the spec remain genuinely unresolved and require owner input before Phase 2 implementation can proceed? → **A:** All decisions (D0–D8) are now resolved; update the spec to confirm final statuses and record evidence.
+  - **Integration:** Updated Key Gates table to mark all decisions (D1–D8) as ✅ RESOLVED with evidence references from checklists/requirements.md (D1–D8 decision statements).
+
+- **Q2:** Are there any remaining ambiguities about the pointer strategy (Type 1/2/3), archive directory structure (`guidelines/_archive/`), or edge cases in the consolidation approach that need clarification before Phase 2 final sign-off? → **A:** No remaining ambiguities—the hybrid consolidation strategy (Type 1/2/3 pointers, 1-hop chain depth limit, comment-based reverse links, archive directory structure) is fully defined and ready for implementation validation.
+  - **Integration:** Confirmed D4/D5 implementation guidance is complete and documented in checklists/requirements.md. No spec changes required; consolidation strategy is actionable.
+
+- **Q3:** Are all ten requirements for the Final Sign-Off checklist (checklists/requirements.md § Final Sign-Off) clear and achievable with the current evidence already generated (T067 manifest, T068 skill validation)? → **A:** Yes—all evidence is already in place from T067–T068; T069 is a consolidation exercise to fill in the checklist with references to existing documentation and mark "READY FOR MERGE" when complete.
+  - **Integration:** No spec changes required; Final Sign-Off checklist is actionable with existing evidence. T069 can proceed immediately.
+
+**Clarification Status:** ✅ COMPLETE — All critical ambiguities resolved. Specification is ready for Phase 2 implementation completion (T069).
 
 ## Next Steps
 
-1. **Owner Decision Session:** Use [the plan](./plan.md) and [requirements checklist](./checklists/requirements.md) to resolve D1–D6 and D8 with focused evidence; retain D0 and D7 resolutions
-2. **Implementation Plan:** Update [the existing plan](./plan.md) with exact source→destination mapping
-3. **Task Breakdown:** Generate `tasks.md` with verifiable steps
+1. **Specification Validation:** All decision gates (D0–D8) now resolved and documented
+2. **Implementation Plan:** Review [the existing plan](./plan.md) with exact source→destination mapping
+3. **Task Breakdown:** All tasks generated in `tasks.md` with verifiable steps
 4. **Quality Checklist:** Complete [the existing requirements checklist](./checklists/requirements.md)
 5. **Implementation:** Execute within approved scope; validate at each checkpoint
+6. **Final Sign-Off:** Complete T069 checklist with full evidence coverage for PR review
 
 ---
 
