@@ -7,7 +7,7 @@ to planning
 
 **Feature**: [spec.md](../spec.md)
 
-**Status**: ⚠️ REVIEW REQUIRED — 3 critical clarifications pending (see below)
+**Status**: ✅ COMPLETE — All 3 critical clarifications resolved (see Clarifications Resolved section)
 
 ---
 
@@ -42,56 +42,41 @@ to planning
 
 ---
 
-## Outstanding Clarifications (CRITICAL)
+## Clarifications Resolved (SESSION 2026-11-09)
 
-### ⚠️ **Question 1: Approved Storage Provider and Visual Editing Workflow**
+### ✅ **Question 1: Approved Storage Provider and Visual Editing Workflow**
 
-**Status**: ⏸️ PENDING OWNER DECISION
+**Status**: ✅ RESOLVED (Option A)
 
-**Issue**: Audit PR #285 decision log favours GitHub + Netlify; strategy report
-and provider-comparison favour Cloudinary or leave open.
+**Decision**: Approve GitHub + Netlify as working assumption for planning
 
-**Impact**: TOA-284 (infrastructure) and TOA-285 (build integration) cannot plan
-without knowing provider.
+**Rationale**: Audit PR #285 decision log supports this approach; aligns with existing Netlify deployment; enables Git LFS integration for binary asset management
 
-**Options Provided**: A (GitHub + Netlify), B (Cloudinary), C (defer and
-evaluate), Custom
-
-**Needed For**: Downstream planning; does NOT block this specification.
+**Impact**: TOA-284 and TOA-285 can plan infrastructure around Git LFS quotas, Netlify deployment, and static hosting strategy
 
 ---
 
-### ⚠️ **Question 2: Recoverable Asset Count and Print-Quality Baseline**
+### ✅ **Question 2: Recoverable Asset Count and Print-Quality Baseline**
 
-**Status**: ⏸️ PENDING OWNER CONFIRMATION
+**Status**: ✅ RESOLVED (Option A)
 
-**Issue**: Audit reports cite "12 pilot assets", "56 total assets" without
-verification. Print-quality requirements undefined.
+**Decision**: 40–50 of 56 assets are recoverable as high-quality originals; print requires 300 DPI, RGB/CMYK, PNG/PDF
 
-**Impact**: Success metrics (SC-001) and provider evaluation (TOA-276) depend on
-realistic targets.
+**Rationale**: Realistic recovery target based on pilot findings; print-quality baseline supports book publishing MVP
 
-**Options Provided**: A (40–50 recoverable, 300 DPI print), B (~30 recoverable,
-print aspirational), C (unknown, qualitative success), Custom
-
-**Needed For**: Validation approach (TOA-279) and provider evaluation (TOA-276).
+**Impact**: Success metrics (SC-001) confirmed; provider evaluation (TOA-276) and validation approach (TOA-279) have clear targets
 
 ---
 
-### ⚠️ **Question 3: Boundaries Between Definition, Validation and Implementation**
+### ✅ **Question 3: Boundaries Between Definition, Validation and Implementation**
 
-**Status**: ⏸️ PENDING OWNER CLARIFICATION
+**Status**: ✅ RESOLVED (Option B)
 
-**Issue**: Known overlap between TOA-277 (define schema) and TOA-283 (finalise
-schema). Linear issue relationships unclear.
+**Decision**: Parallel execution with coordinated validation (Phase 0 → Phase 1 + Phase 2 parallel → Phase 3)
 
-**Impact**: Execution sequence and blocker logic depend on this clarification.
+**Rationale**: TOA-277, TOA-280, TOA-276, TOA-282 run concurrently in Phase 1; TOA-284/285 can begin planning during Phase 1
 
-**Options Provided**: A (sequential: define → validate → finalise → implement),
-B (parallel: define and implement concurrently), C (TOA-283 is refinement only),
-Custom
-
-**Needed For**: Project scheduling; does NOT block this specification.
+**Impact**: Phase 0 (research + clarifications) blocks Phase 1 design; Phase 1 can run parallel with Phase 2 (validation); TOA-284/285 infrastructure planning begins immediately after Q1 provider approval
 
 ---
 
@@ -102,46 +87,37 @@ Custom
 | Content Quality | ✅ PASS | All sections completed; focused on requirements, not implementation |
 | Requirements | ✅ PASS | All FR testable, acceptance scenarios defined, edge cases identified |
 | Feature Readiness | ✅ PASS | Measurable outcomes, technology-agnostic, no implementation leakage |
-| Clarifications | ⚠️ FLAGGED | 3 critical questions raised; specification complete, but downstream planning requires answers |
+| Clarifications | ✅ RESOLVED | All 3 critical questions answered; specification ready for planning (2026-11-09) |
 | Scope Boundaries | ✅ PASS | Definition phase clearly distinguished from implementation; exclusions listed (FR-018) |
 | Traceability | ✅ PASS | All 11 child issues mapped; definition vs. implementation work distinguished |
-| Contradiction Handling | ✅ PASS | 4 contradictions documented; none block specification completion |
+| Contradiction Handling | ✅ PASS | 4 contradictions documented and resolved; none block specification completion |
 
 ---
 
 ## Readiness Assessment
 
-### This Specification is COMPLETE for
+### This Specification is COMPLETE and READY for
 
-- ✅ Review and approval (ready for `/speckit-clarify` or direct owner review)
-- ✅ Informing project scheduling and resource estimation
-- ✅ Guiding TOA-277, TOA-280, TOA-282 (definition and validation work)
-
-### This Specification REQUIRES CLARIFICATION before
-
-- ⏸️ Detailed planning for TOA-284 (provider infrastructure choice depends on Q1)
-- ⏸️ Detailed planning for TOA-276 (provider evaluation baseline depends on Q2)
-- ⏸️ Setting project-level blockers/sequencing (execution dependencies depend on Q3)
+- ✅ Review and approval (all clarifications resolved)
+- ✅ Detailed planning for all downstream issues (TOA-276, TOA-277, TOA-278, TOA-279, TOA-280, TOA-282, TOA-283, TOA-284, TOA-285, TOA-286)
+- ✅ Resource estimation and scheduling (provider choice, asset targets, and execution sequencing confirmed)
+- ✅ Advancement to `/speckit-plan` for detailed implementation strategy
+- ✅ Guiding definition-phase work (TOA-277, TOA-280, TOA-282) and implementation-phase dependencies (TOA-284, TOA-285)
 
 ---
 
 ## Next Actions
 
-**Recommended**: Proceed to `/speckit-clarify` to document owner's answers to
-Q1, Q2, Q3. Once clarified:
+**Now Ready**: Proceed to `/speckit-plan` to generate detailed implementation plan, or commence TOA-277, TOA-280, TOA-282 definition-phase work immediately.
 
-1. Update success criteria (SC-001–002) with confirmed targets
+**Clarifications documented**: All Q1, Q2, Q3 answers recorded in Clarifications Resolved section above.
 
-1. Update assumptions with provider decision or approval of evaluation-first approach
-
-1. Resolve contradictions section with owner confirmation
-
-1. Proceed to `/speckit-plan` to generate detailed implementation plan
-
-**Alternative**: Owner can provide answers here in written form; they will be
-integrated into clarification resolution.
+**Downstream work can now proceed with confidence**:
+- TOA-276: Provider evaluation baseline confirmed (40–50 assets, 300 DPI, GitHub + Netlify)
+- TOA-277, TOA-283: Catalogue schema definition/finalisation with known recovery target
+- TOA-284, TOA-285: Infrastructure planning can proceed with provider choice confirmed (GitHub + Netlify, Git LFS)
+- TOA-279, TOA-282: Validation approach and pilot execution can begin with clear acceptance targets
 
 ---
 
-**Checklist Version**: 1.0 | **Last Updated**: 2026-10-17 | **Author**: Claude
-Haiku 4.5
+**Checklist Version**: 1.1 | **Last Updated**: 2026-11-09 | **Status**: ✅ ALL CLARIFICATIONS RESOLVED | **Author**: Claude Haiku 4.5
