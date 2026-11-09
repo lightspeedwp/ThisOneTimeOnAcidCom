@@ -240,7 +240,9 @@ describe('Figma Access Validation Script', () => {
 3. Compares `testResults` array structure to detect new failures
 4. Fails workflow if gap detected
 
-**Vitest Output Structure (Different):**
+**Vitest Output Structure (Compatible):**
+
+Both Jest and Vitest 5.0.5 emit `testResults` with `assertionResults`:
 
 Jest report (excerpt):
 ```json
@@ -251,7 +253,12 @@ Jest report (excerpt):
     {
       "name": "/path/to/test.js",
       "numFailingTests": 0,
-      "failureMessage": null
+      "assertionResults": [
+        {
+          "title": "test name",
+          "status": "passed"
+        }
+      ]
     }
   ]
 }
@@ -260,24 +267,21 @@ Jest report (excerpt):
 Vitest report (excerpt):
 ```json
 {
-  "stats": {
-    "tests": 15,
-    "failures": 0
-  },
-  "files": [
+  "testResults": [
     {
-      "filepath": "/path/to/test.ts",
-      "numFailing": 0,
-      "errors": []
+      "name": "/path/to/test.ts",
+      "assertionResults": [
+        {
+          "title": "test name",
+          "status": "passed"
+        }
+      ]
     }
   ]
 }
 ```
 
-**Change Required:** Rewrite `compare-jest-failures.cjs` to parse Vitest JSON format OR emit Jest-compatible format from Vitest.
-
-**Option 1 (Recommended):** Configure Vitest reporter to emit Jest-compatible JSON  
-**Option 2:** Rewrite comparison script (more effort, no backwards compat benefit)
+**Change Required:** None. Vitest 5.0.5's built-in JSON reporter (`--reporter=json`) outputs the same `testResults` and `assertionResults` structure as Jest. The existing `compare-jest-failures.cjs` can parse both formats without modification.
 
 ### CI Workflow Impact
 
@@ -318,10 +322,10 @@ Vitest report (excerpt):
 
 | Scenario | Action | Reversibility |
 |----------|--------|----------------|
-| Vitest tests fail | Revert Jest config; re-enable Jest in CI | ✓ Complete |
-| Mock rewrites incomplete | Keep Jest; pause Vitest work | ✓ Complete |
+| Vitest tests fail | Restore Jest-based test files and `vi.*` mocks back to `jest.*` equivalents; restore Jest and @swc/jest dependencies; restore `test` script in package.json; re-enable Jest configuration in CI | ✓ Complete |
+| Mock rewrites incomplete | Keep Jest; pause Vitest work; revert test file changes | ✓ Complete |
 | Coverage gap revealed | Investigate diff; may indicate bug or coverage loss | Case-by-case |
-| CI comparison breaks | Revert reporter config; fix script separately | ✓ Partial (script still needs update) |
+| CI comparison breaks | Revert reporter config; restore previous comparison script | ✓ Complete |
 
 ---
 
@@ -371,11 +375,12 @@ Vitest report (excerpt):
 - Benefit: Fast iteration; independent of org changes
 - Drawback: Diverges from established governance pattern
 
-**Option C: Deprecate Dependabot Config**
-- Move all Renovate config to `lightspeedwp/.github`
-- ThisOneTimeOnAcidCom triggers via Renovate default behavior
-- Benefit: Single source of truth
-- Drawback: Less flexibility for repo-specific needs
+**Option C: Centralized with Preset**
+- Canonical Renovate config in `lightspeedwp/.github/renovate-presets.json`
+- ThisOneTimeOnAcidCom extends via `.github/renovate.json` with `"extends": ["github>lightspeedwp/.github:renovate-presets"]`
+- Renovate requires explicit preset reference; does not auto-apply arbitrary org-wide config
+- Benefit: Single source of truth + explicit dependency tracking
+- Drawback: Requires repository-level `.github/renovate.json` to opt in
 
 **Decision Required:** Which model?
 

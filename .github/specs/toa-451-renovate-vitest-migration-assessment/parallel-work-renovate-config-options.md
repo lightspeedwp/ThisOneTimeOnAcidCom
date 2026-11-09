@@ -55,47 +55,42 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
-    "schedule:weekly"
+    "config:base"
   ],
-  "targetBranch": "develop",
   "baseBranches": ["develop"],
   "schedule": [
     "before 3am on Monday"
   ],
   "timezone": "Africa/Johannesburg",
-  "grouping": {
-    "default": true,
-    "minor": {
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
       "groupName": "dependencies (minor/patch)",
       "groupSlug": "minor-patch",
-      "updateTypes": ["minor", "patch"]
+      "extends": ["schedule:weekly"]
     },
-    "major": {
+    {
+      "matchUpdateTypes": ["major"],
       "groupName": "dependencies (major)",
-      "groupSlug": "major"
+      "groupSlug": "major",
+      "extends": ["schedule:weekly"]
+    },
+    {
+      "matchDatasources": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "CI/CD (minor/patch)",
+      "groupSlug": "ci-minor-patch",
+      "extends": ["schedule:weekly"]
+    },
+    {
+      "matchDatasources": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "CI/CD (major)",
+      "groupSlug": "ci-major",
+      "extends": ["schedule:weekly"]
     }
-  },
-  "github-actions": {
-    "enabled": true,
-    "extends": [
-      "schedule:weekly"
-    ],
-    "grouping": {
-      "default": true,
-      "minor": {
-        "groupName": "CI/CD (minor/patch)",
-        "groupSlug": "ci-minor-patch",
-        "updateTypes": ["minor", "patch"]
-      },
-      "major": {
-        "groupName": "CI/CD (major)",
-        "groupSlug": "ci-major"
-      }
-    }
-  },
+  ],
   "prConcurrentLimit": 10,
-  "prCreationLimit": 10,
   "semanticCommits": "enabled",
   "semanticCommitType": "deps",
   "commitMessagePrefix": "chore(deps):"
@@ -124,10 +119,8 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
-    "schedule:weekly"
+    "config:base"
   ],
-  "targetBranch": "develop",
   "baseBranches": ["develop"],
   "schedule": [
     "before 3am on Monday"
@@ -138,22 +131,41 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
     "area:ci"
   ],
   "prConcurrentLimit": 10,
-  "prCreationLimit": 10,
   "semanticCommits": "enabled",
   "semanticCommitType": "deps",
   "commitMessagePrefix": "chore(deps):",
-  "grouping": {
-    "default": true,
-    "minor": {
+  "packageRules": [
+    {
+      "matchDatasources": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
       "groupName": "dependencies (minor/patch)",
       "groupSlug": "minor-patch",
-      "updateTypes": ["minor", "patch"]
+      "minimumReleaseAge": "3 days",
+      "extends": ["schedule:weekly"]
     },
-    "major": {
+    {
+      "matchDatasources": ["npm"],
+      "matchUpdateTypes": ["major"],
       "groupName": "dependencies (major)",
-      "groupSlug": "major"
+      "groupSlug": "major",
+      "minimumReleaseAge": "7 days",
+      "extends": ["schedule:weekly"]
+    },
+    {
+      "matchDatasources": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "CI/CD (minor/patch)",
+      "groupSlug": "ci-minor-patch",
+      "extends": ["schedule:weekly"]
+    },
+    {
+      "matchDatasources": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "CI/CD (major)",
+      "groupSlug": "ci-major",
+      "extends": ["schedule:weekly"]
     }
-  },
+  ],
   "npm": {
     "enabled": true,
     "postUpdateOptions": [
@@ -213,39 +225,40 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
     "timezone": "Africa/Johannesburg"
   },
   "npm-grouping": {
-    "npm": {
-      "postUpdateOptions": [
-        "npmDedupe"
-      ],
-      "grouping": {
-        "default": true,
-        "minor": {
-          "groupName": "dependencies (minor/patch)",
-          "groupSlug": "minor-patch",
-          "updateTypes": ["minor", "patch"]
-        },
-        "major": {
-          "groupName": "dependencies (major)",
-          "groupSlug": "major"
-        }
+    "packageRules": [
+      {
+        "matchDatasources": ["npm"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "dependencies (minor/patch)",
+        "groupSlug": "minor-patch",
+        "minimumReleaseAge": "3 days",
+        "postUpdateOptions": ["npmDedupe"]
+      },
+      {
+        "matchDatasources": ["npm"],
+        "matchUpdateTypes": ["major"],
+        "groupName": "dependencies (major)",
+        "groupSlug": "major",
+        "minimumReleaseAge": "7 days",
+        "postUpdateOptions": ["npmDedupe"]
       }
-    }
+    ]
   },
   "ci-grouping": {
-    "github-actions": {
-      "grouping": {
-        "default": true,
-        "minor": {
-          "groupName": "CI/CD (minor/patch)",
-          "groupSlug": "ci-minor-patch",
-          "updateTypes": ["minor", "patch"]
-        },
-        "major": {
-          "groupName": "CI/CD (major)",
-          "groupSlug": "ci-major"
-        }
+    "packageRules": [
+      {
+        "matchDatasources": ["github-actions"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "CI/CD (minor/patch)",
+        "groupSlug": "ci-minor-patch"
+      },
+      {
+        "matchDatasources": ["github-actions"],
+        "matchUpdateTypes": ["major"],
+        "groupName": "CI/CD (major)",
+        "groupSlug": "ci-major"
       }
-    }
+    ]
   }
 }
 ```
@@ -255,19 +268,17 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
 ```json
 {
   "extends": [
-    "github>lightspeedwp/.github:renovate-presets.renovate",
-    "github>lightspeedwp/.github:renovate-presets.schedule-weekly-sast",
-    "github>lightspeedwp/.github:renovate-presets.npm-grouping",
-    "github>lightspeedwp/.github:renovate-presets.ci-grouping"
+    "github>lightspeedwp/.github:renovate-presets/renovate",
+    "github>lightspeedwp/.github:renovate-presets/schedule-weekly-sast",
+    "github>lightspeedwp/.github:renovate-presets/npm-grouping",
+    "github>lightspeedwp/.github:renovate-presets/ci-grouping"
   ],
-  "targetBranch": "develop",
   "baseBranches": ["develop"],
+  "prConcurrentLimit": 10,
   "labels": [
     "area:dependencies",
     "area:ci"
-  ],
-  "prConcurrentLimit": 10,
-  "prCreationLimit": 10
+  ]
 }
 ```
 

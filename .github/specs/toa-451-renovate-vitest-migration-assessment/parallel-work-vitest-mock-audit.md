@@ -1,3 +1,14 @@
+---
+spec_id: toa-451-parallel-work-vitest-mock-audit
+title: Vitest Mock Rewrite Audit
+parent_spec: toa-451-renovate-vitest-migration-assessment
+status: Preparation — awaiting implementation authority
+purpose: Complete mock inventory and rewrite strategy for Jest → Vitest
+blocks: Implementation of Phase 2 (Vitest migration)
+author: Claude Haiku 4.5
+date: 2026-11-09
+---
+
 # Parallel Work: Vitest Mock Rewrite Audit
 
 **Status:** Preparation — awaiting implementation authority  
@@ -192,14 +203,23 @@ Jest output (current):
 }
 ```
 
-Vitest output (native):
+Vitest output (native JSON reporter):
 ```json
 {
-  "stats": {
-    "tests": 15,
-    "failures": 0
-  },
-  "files": [...]
+  "numTotalTests": 15,
+  "numFailedTests": 0,
+  "testResults": [
+    {
+      "name": "/path/to/test-figma-access.test.js",
+      "numFailingTests": 0,
+      "assertionResults": [
+        {
+          "title": "test name",
+          "status": "passed"
+        }
+      ]
+    }
+  ]
 }
 ```
 

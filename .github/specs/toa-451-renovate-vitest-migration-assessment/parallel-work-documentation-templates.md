@@ -325,6 +325,8 @@ npx vitest --trace-on
 git checkout -b renovate/enable-renovate develop
 # Copy config from Option A/B/C
 cp [config] .github/renovate.json
+# Stage the new file
+git add .github/renovate.json
 git commit -m "chore: add Renovate configuration (Option [A/B/C])"
 git push -u origin renovate/enable-renovate
 ```
@@ -417,10 +419,17 @@ Once validation passes:
 ## Rollback (If Needed)
 
 **If excessive PRs created (>20):**
-1. Disable bot: Remove `.github/renovate.json`
+1. Disable Renovate explicitly:
+   - Option A: Add `"enabled": false` to `.github/renovate.json` and commit
+   - Option B: Uninstall Renovate app from `lightspeedwp` org (GitHub Settings)
 2. Close open Renovate PRs
 3. Investigate config (too broad grouping?)
-4. Re-enable with corrected config
+4. Restore Dependabot:
+   - Restore `.github/dependabot.yml` from `git show HEAD~1:.github/dependabot.yml`
+   - Commit and push
+5. Re-enable Renovate with corrected config (if proceeding with migration)
+
+**Note:** Removing `.github/renovate.json` alone does NOT disable an enrolled Renovate app; it may trigger re-onboarding. Use `"enabled": false` or uninstall the app.
 
 **Recovery time: 1–2 hours**
 
@@ -466,7 +475,7 @@ Once validation passes:
 - [ ] Mock rewrite strategy reviewed: [link to audit]
 - [ ] CI reporter strategy decided: [Option 1 or 2]
 - [ ] All Jest tests passing locally & in CI
-- [ ] Branch ready: `vitest/migrate-from-jest`
+- [ ] Branch ready: `migrate/toa-451-vitest`
 - [ ] Team notified of migration timeline
 
 ## Implementation Steps
@@ -477,7 +486,7 @@ Once validation passes:
 [Reference: parallel-work-vitest-mock-audit.md]
 
 ```bash
-git checkout -b vitest/migrate-from-jest develop
+git checkout -b migrate/toa-451-vitest develop
 
 # Edit: scripts/__tests__/test-figma-access.test.js
 # Replace: process.env handling with vi.stubEnv()
@@ -489,19 +498,31 @@ npx vitest run scripts/__tests__/test-figma-access.test.js
 ```
 
 ### Step 2: Implement CI Reporter Strategy
-**Time: 1–2 hours**
+**Time: 30 minutes**
 
 [Reference: parallel-work-ci-reporter-strategy.md]
 
-**If Option 1 (Jest-compat reporter):**
+**Use built-in JSON reporter (recommended):**
 ```bash
-npm install --save-dev @vitest/reporters
-# Update vitest.config.ts with JestReporter
-# Update .github/workflows/tests.yml command
-npx vitest run --reporter=jest --outputFile=jest-report.json
+# No additional dependencies or config changes needed
+# Update .github/workflows/tests.yml command only
+npx vitest run --reporter=json --outputFile=jest-report.json
+
+# Capture exit status for unhandled error detection
+EXIT_CODE=0
+npx vitest run --reporter=json --outputFile=jest-report.json || EXIT_CODE=$?
+
+# Always proceed to comparison step (upload reports even if tests fail)
+node scripts/validation/compare-jest-failures.cjs jest-report-head/jest-report.json jest-report-base/jest-report.json
+
+# Fail if: runner crashed ($EXIT_CODE != 0) AND no failures detected (regression)
+if [ $EXIT_CODE -ne 0 ] && ! grep -q '"numFailingTests": [^0]' jest-report-head/jest-report.json; then
+  echo "Unhandled Vitest error detected"
+  exit 1
+fi
 ```
 
-**If Option 2 (Rewrite script):**
+**If reverting back (deprecated Option 2 reference):**
 ```bash
 # Update scripts/validation/compare-jest-failures.cjs
 # Add format detection & dual parsers
@@ -555,16 +576,30 @@ Update `.github/workflows/tests.yml`:
 
 ```yaml
 # Replace Jest section with:
-- name: Run Vitest
+- name: Run Vitest (Head/Base)
   run: |
-    npx vitest run --config vitest.config.ts --reporter=json --outputFile=jest-report.json
-    # (or --reporter=jest if using Option 1 reporter)
+    EXIT_CODE=0
+    npx vitest run --config vitest.config.ts --reporter=json --outputFile=jest-report.json || EXIT_CODE=$?
+  continue-on-error: true  # Always proceed to comparison step
+
+- name: Compare Vitest Results
+  if: always()  # Run even if Vitest failed
+  run: |
+    node scripts/validation/compare-jest-failures.cjs jest-report-head/jest-report.json jest-report-base/jest-report.json || true
+  
+- name: Check for Unhandled Errors
+  if: always()
+  run: |
+    if [ "${VITEST_EXIT_CODE}" -ne 0 ] && ! grep -q '"numFailingTests": [^0]' jest-report-head/jest-report.json; then
+      echo "Unhandled Vitest error: runner crashed but no failures detected"
+      exit 1
+    fi
 ```
 
 ### Step 6: Test on PR
 **Time: Continuous during PR review**
 
-- [ ] Create PR: `vitest/migrate-from-jest`
+- [ ] Create PR: `migrate/toa-451-vitest`
 - [ ] CI passes: Jest comparison script works with Vitest output
 - [ ] No test failures introduced
 - [ ] Coverage maintained or improved
