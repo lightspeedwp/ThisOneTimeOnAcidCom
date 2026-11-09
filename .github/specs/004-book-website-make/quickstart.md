@@ -20,29 +20,36 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 ## Approval Prerequisites
 
-### Gate 1: User Reviews Blocking Decisions (YOUR ACTION)
+### Gate 1: User Reviews Blocking Decisions ✅ COMPLETE
 
-**What to review**: Research.md contains 7 blocking decisions with options for each.
+**Status**: All 7 blocking decisions APPROVED (2026-11-09)
 
-**Your task**: 
-1. Open `.github/specs/004-book-website-make/research.md`
-2. For each decision, select the option that best matches your intent
-3. Record your selections in the blocking decision matrix below
-4. Confirm with the development team
+**What was reviewed**: Research.md contains 7 blocking decisions with options for each.
 
-**Blocking Decisions to Make**:
+**Selections recorded**: All decisions approved with recommended options (see matrix below).
+
+**Blocking Decisions**:
 
 | Decision | Your Selection | Status |
 |----------|----------------|--------|
-| 1. Recovery-first race condition (Options: A/B/C/D) | [ ] | PENDING |
-| 2. Recovery lifetime eligibility (Options: A/B/C/D) | [ ] | PENDING |
-| 3. Code expiry start time (Options: A/B/C) | [ ] | PENDING |
-| 4. Email service provider (Options: A/B/C/D) | [ ] | PENDING |
-| 5. Manuscript publication readiness (Options: A/B/C) | [ ] | PENDING |
-| 6. Newsletter destination (Options: A/B/C/D) | [ ] | PENDING |
-| 7. Route enforcement verification (Options: A/B/C/D) | [ ] | PENDING |
+| 1. Recovery-first race condition (Options: A/B/C/D) | ✅ A | APPROVED |
+| 2. Recovery lifetime eligibility (Options: A/B/C/D) | ✅ A | APPROVED |
+| 3. Code expiry start time (Options: A/B/C) | ✅ A | APPROVED |
+| 4. Email service provider (Options: A/B/C/D) | ✅ B | APPROVED |
+| 5. Manuscript publication readiness (Options: A/B/C) | ✅ A | APPROVED |
+| 6. Newsletter destination (Options: A/B/C/D) | ✅ B | APPROVED |
+| 7. Route enforcement verification (Options: A/B/C/D) | ✅ A | APPROVED |
 
-**Once complete**: Proceed to Gate 2.
+**Gate 1 Resolution**:
+- ✅ Decision 1 (Recovery race): A—Recovery takes precedence
+- ✅ Decision 2 (Recovery lifetime): A—30-day rolling window
+- ✅ Decision 3 (Code expiry): A—From generation
+- ✅ Decision 4 (Email provider): B—SendGrid
+- ✅ Decision 5 (Manuscript status): A—Approved & available
+- ✅ Decision 6 (Newsletter destination): B—External provider signup
+- ✅ Decision 7 (Route enforcement): A—All three methods (Meta tags + Robots.txt + Sitemap.xml)
+
+**Impact**: Prompts 3B and 3C are now unblocked with clear specifications. Proceed to Gate 2.
 
 ---
 
