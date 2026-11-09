@@ -133,32 +133,36 @@ describe('test-server-handler', () => {
       expect(typeof requestHandler).toBe('function');
     });
 
-    it('should serve existing files', (done) => {
-      const requestHandler = handler.createRequestHandler(tempDir);
-      const mockReq = { url: '/test.txt' };
-      const mockRes = {
-        writeHead: vi.fn(),
-        end: vi.fn((data) => {
-          expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
-          done();
-        }),
-      };
+    it('should serve existing files', () => {
+      return new Promise((resolve) => {
+        const requestHandler = handler.createRequestHandler(tempDir);
+        const mockReq = { url: '/test.txt' };
+        const mockRes = {
+          writeHead: vi.fn(),
+          end: vi.fn((data) => {
+            expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
+            resolve();
+          }),
+        };
 
-      requestHandler(mockReq, mockRes);
+        requestHandler(mockReq, mockRes);
+      });
     });
 
-    it('should serve files from subdirectories', (done) => {
-      const requestHandler = handler.createRequestHandler(tempDir);
-      const mockReq = { url: '/js/app.js' };
-      const mockRes = {
-        writeHead: vi.fn(),
-        end: vi.fn((data) => {
-          expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
-          done();
-        }),
-      };
+    it('should serve files from subdirectories', () => {
+      return new Promise((resolve) => {
+        const requestHandler = handler.createRequestHandler(tempDir);
+        const mockReq = { url: '/js/app.js' };
+        const mockRes = {
+          writeHead: vi.fn(),
+          end: vi.fn((data) => {
+            expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
+            resolve();
+          }),
+        };
 
-      requestHandler(mockReq, mockRes);
+        requestHandler(mockReq, mockRes);
+      });
     });
 
     it('should serve index.html for directory requests', () => {
