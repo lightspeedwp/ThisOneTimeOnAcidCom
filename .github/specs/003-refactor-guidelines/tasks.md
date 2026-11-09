@@ -60,6 +60,33 @@ T038–T043 (Design verification & sign-off)
 
 ---
 
+## S-DOCUMENT STATUS INVENTORY (Analysis 2026-11-09)
+
+**Summary:** 9 supporting documents across 3 categories. Current status: 4 COMPLETE (T015–T018), 5 PENDING (T008–T014).
+
+| S-ID | File | Category | Task(s) | Status | Notes |
+|------|------|----------|---------|--------|-------|
+| S001 | `.claude/skills/INVENTORY.md` | Skill Records | T008 | ⏳ PENDING | Skill inventory update — awaiting consolidation manifest |
+| S002 | `.claude/skills/branch-validation/SKILL.md` | Skill Records | T009 | ⏳ PENDING | Branch validation rules — preserve existing logic |
+| S003 | `.claude/skills/changelog/SKILL.md` | Skill Records | T010 | ⏳ PENDING | Changelog format spec — update examples per D1 |
+| S004 | `.claude/skills/labeling/SKILL.md` | Skill Records | T011 | ⏳ PENDING | Label taxonomy — reconcile with governance config |
+| S005 | `.claude/skills/test/SKILL.md` | Skill Records | T012 | ⏳ PENDING | Test patterns — update references per D4 |
+| S006 | `.claude/skills/validate/SKILL.md` | Skill Records | T013 | ⏳ PENDING | Validation rules — update paths per consolidation |
+| S007 | `.claude/skills/workflow-orchestration/SKILL.md` | Skill Records | T014 | ⏳ PENDING | Workflow patterns — update dependencies per D5 |
+| S008 | `AGENTS.md` | Governance Docs | T015 | ✅ COMPLETE | Agent role descriptions updated; governance sections preserved (D0) |
+| S009 | `CONTRIBUTING.md` | Governance Docs | T016 | ✅ COMPLETE | Contributor guidelines updated; branch patterns and rules preserved (D0) |
+
+**Approval & Commit Status:**
+- T017: ✅ COMPLETE — `locked-files-guard` approval obtained for all S-document edits (D0 authority confirmed)
+- T018: ✅ COMPLETE — Staged and committed: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"`
+
+**Blocking Items:**
+- S001–S007 skill document edits await consolidation manifest completion (T024–T027 G-to-N mapping completion)
+- Skill updates must not exceed scope: preserve existing validation logic, policy rules, and test patterns
+- After S001–S007 completion, final commit must include all 9 S-documents together per D0 approval gate
+
+---
+
 ## Phase 1: Planning & Specification ✅ DESIGN ARTEFACTS COMPLETE
 
 **Status**: Phase 1 design artefacts (specification, data model, contracts, checklists, quickstart) are complete. All 8 decision gates (D0–D8) are RESOLVED and recorded in requirements.md with evidence.

@@ -11,7 +11,7 @@ last_updated: "2026-11-09"
 
 **Status:** Implemented  
 **Issue:** [TOA-358](https://linear.app/lightspeedwp/issue/TOA-358) | [GitHub #416](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/416)  
-**Branch:** `docs/spec-003-guidelines-reconcile`\
+**Branch:** `docs/spec-003-phase2-implementation` (Phase 2 implementation branch; Phase 1 planning branch was `docs/spec-003-guidelines-reconcile`, superseded)\
 **Created:** 2026-10-24
 
 ## Overview
