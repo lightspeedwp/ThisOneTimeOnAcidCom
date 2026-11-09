@@ -46,7 +46,7 @@
 
 **Acceptance Scenarios**:
 
-1. **Given** approved design baseline (typography, colors, both themes), **When** Prompt 2A is executed, **Then** CSS variables or design-token file is exported matching exact approved values
+1. **Given** approved design baseline (typography, colors, both themes), **When** Prompt 2A is executed, **Then** both CSS variables and JSON design-token files are exported matching exact approved values
 
 2. **Given** unapproved candidates R3, T1, RT2, C1, **When** Prompt 2A is executed, **Then** these candidates are NOT present in exported tokens
 
@@ -71,7 +71,7 @@
 
 1. **Given** approved form explanation ("We'll email you..."), **When** Prompt 3A is executed, **Then** this exact text appears in generated design spec with no modifications
 
-2. **Given** unresolved code-expiry timing (CC-05), **When** Prompt 3C is executed, **Then** timer messaging uses placeholder wording, not specific "10 minutes from X" claims
+2. **Given** Prompt 1 navigation preview, **When** review begins, **Then** it includes: before/after navigation structure, numbered list of implementation steps, 2–3 bullet points documenting non-changes, and acceptance criteria
 
 3. **Given** separate newsletter decision, **When** Prompt 3A is executed, **Then** newsletter CTA is in separate section with explicit non-subscription statement
 
@@ -138,11 +138,11 @@
 ### Functional Requirements
 
 - **FR-001**: System MUST analyze all six source specification files from content/book/ directory and identify version differences, gaps, and conflicts
-- **FR-002**: System MUST reconcile version mismatches (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0) without silently combining incompatible revisions
+- **FR-002**: System MUST reconcile version mismatches (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0) using precedence rule: newer version takes precedence; all conflicts documented in research.md with explicit rationale
 - **FR-003**: System MUST prepare exact Prompt 1 (navigation exposure) as executable Figma Make specification with before/after structure and acceptance criteria
 - **FR-004**: System MUST prepare exact Prompts 2A (design baseline), 2B (navigation design), and 3A (reader access copy) as complete, unexecuted specifications
 - **FR-005**: System MUST identify and document Prompts 3B (recovery flows) and 3C (error states) as blocked, listing prerequisite decisions for each
-- **FR-006**: System MUST create comprehensive blocking decision matrix identifying 7+ critical gaps (manuscript, provider, recovery race, expiry timing, recovery lifetime, newsletter destination, route enforcement)
+- **FR-006**: System MUST create comprehensive blocking decision matrix identifying all 7 critical gaps: recovery-first race condition, recovery lifetime eligibility, code expiry start time, email service provider selection, manuscript publication readiness, newsletter destination, and route enforcement verification
 - **FR-007**: System MUST preserve all approval boundaries, distinguishing approved elements (navigation intent, design baseline, access policy framework) from unapproved candidates (R3, T1, RT2, C1)
 - **FR-008**: System MUST document all user-editable decisions required before each prompt can be executed (recovery-first race, recovery lifetime, code expiry start time, manuscript status, email provider, newsletter destination)
 - **FR-009**: System MUST generate specification documentation that is completely implementation-agnostic (no code, no commits, no deployments, no file writes beyond this spec folder)
@@ -164,8 +164,8 @@
 ### Measurable Outcomes
 
 - **SC-001**: All six source files are retrieved and analyzed; version reconciliation is documented with zero silent merges (100% reconciliation coverage)
-- **SC-002**: Exact Prompt 1 preview includes all four elements: before/after navigation structure, implementation steps, acceptance criteria, and non-changes list
-- **SC-003**: Exact Prompts 2A, 2B, 3A are 95%+ complete specifications (missing only user decisions on blocked prerequisites, not missing core content)
+- **SC-002**: Exact Prompt 1 preview includes all four elements: before/after navigation structure, numbered list of implementation steps (file/component changes), acceptance criteria, and 2–3 bullet points describing non-changes
+- **SC-003**: Exact Prompts 2A, 2B, 3A are 95%+ complete specifications (missing only user decisions on blocked prerequisites, not missing core content); Prompt 2A exports both CSS variables (`.css` with custom properties) and JSON design tokens for full design-system coverage
 - **SC-004**: All blocking decisions are identified and presented with specific options (3+ options per decision with impact assessment) before user approval
 - **SC-005**: Zero implementation code generated; zero commits created; zero deployments executed; 100% documentation-only until explicit user approval for implementation phase
 - **SC-006**: Complete documentation package includes blocking decision matrix, source inventory, version reconciliation, and decision-routing plan
@@ -179,7 +179,7 @@
 - **User Context**: Ash (project owner) and development team will review and approve this documentation package before any implementation proceeds
 - **Source Files**: All six specification files (01–06) in content/book/ directory are authoritative and will not change during this preflight phase
 - **Design Baseline Approval**: Space Grotesk headings, Inter body/UI, 9-color palette (both themes) are locked and require no changes during preflight
-- **Blocking Decisions**: Recovery-first race, recovery lifetime, code expiry start time, manuscript status, email provider, and newsletter destination are genuinely open and require user input
+- **Blocking Decisions**: All 7 decisions are genuinely open and require user input: recovery-first race condition (A/B/C/D), recovery lifetime eligibility (A/B/C/D), code expiry start time (A/B/C), email service provider (A/B/C/D), manuscript publication readiness (A/B/C), newsletter destination (A/B/C/D), and route enforcement verification (A/B/C/D)
 - **Implementation Timing**: This spec prepares documentation only; no actual implementation, Figma Make execution, or deployment occurs until separate approval
 - **Figma Make Environment**: Make environment exists and is operational; prompts can be executed once unblocked and approved (readiness verification deferred to implementation phase)
 - **Newsletter Integration**: Newsletter service (Brevo or alternative) will be selected separately; copy and mechanics are placeholders in this spec
@@ -219,6 +219,17 @@ Once approved, the next phase will include:
 6. **Prompt 3C Partial Preview** — Error states (awaiting CC-05 expiry decision)
 7. **Blocking Decision Matrix** — All unresolved decisions with options
 8. **Implementation Prerequisites Checklist** — What must be decided before code phase
+
+---
+
+## Clarifications
+
+### Session 2026-11-09
+
+- Q: Should Prompt 2A export CSS variables, JSON design tokens, or both? → A: Both CSS and JSON for dual format support
+- Q: When source files contradict, which version takes precedence? → A: Newer version; all conflicts documented in research.md with rationale
+- Q: What should Prompt 1 preview "implementation steps" and "non-changes list" contain? → A: Numbered list of file/component changes; 2–3 bullet points describing preserved behavior
+- Q: Are all 7 blocking decisions valid, or is the count 6? → A: Confirm all 7 are valid blockers; plan.md updated to list all 7 explicitly
 
 ---
 
