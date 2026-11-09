@@ -53,45 +53,36 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 ---
 
-### Gate 2: Design System Baseline Approval (YOUR ACTION)
+### Gate 2: Design System Baseline Approval ✅ COMPLETE
 
-**What to review**: Approved design elements (Space Grotesk, Inter, 9-color palette)
+**Status**: Design baseline APPROVED (2026-11-09)
 
-**Your task**:
-1. Confirm Space Grotesk headings, Inter body/UI fonts are locked
-2. Confirm 9-color palette (light + dark themes) is final
-3. Confirm component styles are approved (Button, Card, Navigation, etc.)
-4. Check that unapproved candidates (R3, T1, RT2, C1) are documented as "not included"
+**What was reviewed**: Approved design elements (Space Grotesk, Inter, 9-color palette)
 
-**Validation Checklist**:
-- [ ] Typography: Space Grotesk (headings), Inter (body/UI)
-- [ ] Colors: 9 named colors, light + dark themes defined
-- [ ] Components: All baseline styles approved
-- [ ] Candidates: R3, T1, RT2, C1 listed as unapproved (preserved for future)
+**Approvals recorded**:
+- ✅ Typography: Space Grotesk (headings), Inter (body/UI) locked
+- ✅ Colors: 9 named colors, light + dark themes finalized
+- ✅ Components: All baseline styles approved (Button, Card, Navigation, Form, etc.)
+- ✅ Candidates: R3, T1, RT2, C1 documented as "not included"
 
-**Once complete**: Proceed to Gate 3.
+**Impact**: Prompts 2A (Design Baseline Export) and 2B (Navigation Design Specification) are now unblocked and ready for execution. Proceed to Gate 3.
 
 ---
 
-### Gate 3: Preflight Analysis Sign-Off (YOUR ACTION)
+### Gate 3: Preflight Analysis Sign-Off ✅ COMPLETE
 
-**What to review**: Complete documentation package is ready for design system export
+**Status**: Preflight analysis APPROVED (2026-11-09)
 
-**Your task**:
-1. Verify all six source files (01-06) are analyzed
-2. Confirm version differences are documented with material-effect assessment
-3. Check that exact Prompt previews (1, 2A, 2B, 3A) are complete
-4. Confirm blocking Prompts (3B, 3C) explain their prerequisites
-5. Validate blocking decision matrix is present and options documented
+**What was reviewed**: Complete documentation package readiness for implementation phase
 
-**Sign-Off Checklist**:
-- [ ] All six source files analyzed (content/book/01-06)
-- [ ] Version reconciliation documented (02, 03, 05 version updates tracked)
-- [ ] Prompt previews generated (1, 2A, 2B, 3A)
-- [ ] Blocking Prompts marked "BLOCKED" with prerequisites
-- [ ] Approval boundaries explicit (approved ✓, unapproved ~, unresolved ❌)
+**Approvals recorded**:
+- ✅ All six source files analyzed (content/book/01-06)
+- ✅ Version reconciliation documented (02: v1.0.3→v1.0.4, 03: v1.2.2→v1.3.0, 05: v1.7.0→v1.9.0)
+- ✅ Prompt previews complete (1, 2A, 2B, 3A)
+- ✅ Blocking Prompts marked "BLOCKED" with prerequisites documented (3B, 3C)
+- ✅ Approval boundaries explicit (approved ✓, unapproved ~, resolved ✅)
 
-**Once complete**: Design system export can proceed.
+**Impact**: All six Figma Make Prompts (1, 2A, 2B, 3A, 3B, 3C) are now unblocked and ready for execution. Full specification package is ready for implementation phase authorization.
 
 ---
 
@@ -215,55 +206,51 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 ---
 
-## Blocked Prompts (Waiting for Decision Resolution)
+## Previously Blocked Prompts (Now Unblocked) ✅
 
-### Prompt 3B: Recovery Flows
+### Prompt 3B: Recovery Flows ✅ UNBLOCKED
 
 **Purpose**: Specify recovery flow when readers attempt to regain access via previous verified session
 
-**Status**: ❌ BLOCKED
+**Status**: ✅ UNBLOCKED (all prerequisites resolved)
 
-**Blocking Decisions** (must be resolved first):
-- [ ] Decision 1: Recovery-first race condition (what if both recovery + fresh verification happen simultaneously?)
-- [ ] Decision 2: Recovery lifetime eligibility (how long is recovery valid?)
+**Blocking Decisions** (now resolved):
+- ✅ Decision 1: Recovery-first race condition — **A** (Recovery takes precedence)
+- ✅ Decision 2: Recovery lifetime eligibility — **A** (30-day rolling window)
 
-**Why blocked**: Recovery flow specification depends on race condition resolution and session lifetime policy. Cannot finalize error handling or success criteria until these decisions are made.
-
-**When unblocked** (after Decisions 1 & 2 are resolved):
-1. Update `contracts/prompt-3b-recovery-flows.md` with selected decision options
+**Ready to execute**:
+1. Update `contracts/prompt-3b-recovery-flows.md` with selected decision options (A & A)
 2. Run Figma Make with updated specification
 3. Generate recovery flow design with appropriate error handling
 
-**Expected Output** (once unblocked):
+**Expected Output**:
 - Recovery initiation flow (detect previous session, attempt recovery)
 - Recovery success state (reader regains access without re-verification)
-- Recovery failure states (session expired, session invalid, race condition handled)
+- Recovery failure states (session expired, session invalid, race condition handled per Decision 1)
 - Fallback to fresh verification (if recovery unavailable)
 
 ---
 
-### Prompt 3C: Error States
+### Prompt 3C: Error States ✅ UNBLOCKED
 
 **Purpose**: Specify all error states and error messaging for reader access flow
 
-**Status**: ❌ BLOCKED (partially: can generate some error states, but code-expiry messaging blocked)
+**Status**: ✅ UNBLOCKED (all prerequisites resolved)
 
-**Blocking Decision** (must be resolved first):
-- [ ] Decision 3: Code expiry start time (from generation? receipt? page load?)
+**Blocking Decision** (now resolved):
+- ✅ Decision 3: Code expiry start time — **A** (From generation)
 
-**Why blocked**: Error message for expired code must state exact expiry timing (e.g., "Code expired 10 minutes after generation" vs. "10 minutes from email receipt"). Cannot finalize messaging until Decision 3 is resolved.
-
-**When unblocked** (after Decision 3 is resolved):
-1. Update `contracts/prompt-3c-error-states.md` with selected decision option
+**Ready to execute**:
+1. Update `contracts/prompt-3c-error-states.md` with selected decision option (A)
 2. Run Figma Make with updated specification
 3. Generate error state designs for all failure scenarios
 
-**Expected Output** (once unblocked):
+**Expected Output**:
 - Invalid code error (wrong characters, mistyped)
-- Expired code error (message reflects Decision 3 timing choice)
+- Expired code error (message: code expires 10 minutes from generation per Decision 3)
 - Rate-limited error (too many failed attempts)
 - Server error state (email delivery failure, verification server unavailable)
-- Session conflict error (if race condition occurs per Decision 1)
+- Session conflict error (resolved per Decision 1 Recovery-first option)
 
 ---
 
