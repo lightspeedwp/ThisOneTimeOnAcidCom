@@ -27,8 +27,9 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import { execFileSync } from 'child_process';
+import { vi } from 'vitest';
 
-jest.mock('child_process');
+vi.mock('child_process');
 
 // ============================================================================
 // Helpers for testing
@@ -351,7 +352,7 @@ describe('buildExcludeRegex', () => {
   });
 
   it('handles invalid regex patterns', () => {
-    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+    const consoleSpy = vi.spyOn(console, 'warn').mockImplementation();
     const regex = buildExcludeRegex({ excludePatterns: '[invalid(', verbose: false });
 
     expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Invalid --excludePatterns regex'));
@@ -1092,7 +1093,7 @@ describe('Report formatting', () => {
 
 describe('getRemoteBranches', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     execFileSync.mockReset();
   });
 
@@ -1270,8 +1271,8 @@ describe('CLI Argument Parsing - parseBool', () => {
 
 describe('Logging Functions', () => {
   beforeEach(() => {
-    jest.spyOn(console, 'log').mockImplementation();
-    jest.spyOn(console, 'error').mockImplementation();
+    vi.spyOn(console, 'log').mockImplementation();
+    vi.spyOn(console, 'error').mockImplementation();
   });
 
   afterEach(() => {
@@ -1327,7 +1328,7 @@ describe('Logging Functions', () => {
 
   describe('logError', () => {
     it('calls log with error level', () => {
-      jest.spyOn(console, 'log').mockImplementation();
+      vi.spyOn(console, 'log').mockImplementation();
       logError('Error message');
       expect(console.log).toHaveBeenCalledWith(expect.stringContaining('❌'));
       expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Error message'));
@@ -1473,8 +1474,8 @@ describe('Error handling and edge cases', () => {
   });
 
   it('logs error messages with and without verbose', () => {
-    const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const consoleSpy = vi.spyOn(console, 'log').mockImplementation();
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation();
 
     logError('Test message', new Error('Details'), false);
     expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('❌'));
@@ -1705,8 +1706,8 @@ describe('Argument validation edge cases', () => {
 
 describe('Verbose logging edge cases', () => {
   beforeEach(() => {
-    jest.spyOn(console, 'log').mockImplementation();
-    jest.spyOn(console, 'error').mockImplementation();
+    vi.spyOn(console, 'log').mockImplementation();
+    vi.spyOn(console, 'error').mockImplementation();
   });
 
   afterEach(() => {
@@ -1728,7 +1729,7 @@ describe('Verbose logging edge cases', () => {
     logError('Error occurred', error, false);
     expect(console.error).not.toHaveBeenCalled();
 
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     logError('Error occurred', error, true);
     expect(console.error).toHaveBeenCalled();
   });
@@ -1807,9 +1808,9 @@ describe('validateEnvironment', () => {
   let originalProcessExit;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     originalProcessExit = process.exit;
-    process.exit = jest.fn();
+    process.exit = vi.fn();
   });
 
   afterEach(() => {
@@ -1884,12 +1885,12 @@ describe('main function', () => {
   let tempDir;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     originalProcessExit = process.exit;
     originalLog = console.log;
-    process.exit = jest.fn();
-    consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
-    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    process.exit = vi.fn();
+    consoleLogSpy = vi.spyOn(console, 'log').mockImplementation();
+    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation();
     tempDir = createTempReportDir();
   });
 
@@ -1996,9 +1997,9 @@ describe('Guard check and error handler', () => {
   let consoleErrorSpy;
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    process.exit = jest.fn();
-    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    vi.clearAllMocks();
+    process.exit = vi.fn();
+    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation();
   });
 
   afterEach(() => {
@@ -2008,7 +2009,7 @@ describe('Guard check and error handler', () => {
 
   it('catches errors from main and logs them', async () => {
     const testError = new Error('Test error message');
-    const mockMain = jest.fn().mockRejectedValue(testError);
+    const mockMain = vi.fn().mockRejectedValue(testError);
 
     try {
       await mockMain();

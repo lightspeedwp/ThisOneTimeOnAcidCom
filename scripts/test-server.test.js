@@ -7,6 +7,7 @@ import fs from 'fs';
 import os from 'os';
 import { startServer } from './test-server.js';
 import { handleFileRead, createRequestHandler } from './lib/test-server-handler.js';
+import { vi } from 'vitest';
 
 describe('test-server', () => {
   describe('startServer', () => {
@@ -37,7 +38,7 @@ describe('test-server', () => {
       try {
         const handler = createRequestHandler(tmpDir);
         const req = { url: '/' };
-        const res = { writeHead: jest.fn(), end: jest.fn() };
+        const res = { writeHead: vi.fn(), end: vi.fn() };
 
         expect(() => {
           handler(req, res);
@@ -50,7 +51,7 @@ describe('test-server', () => {
 
   describe('handleFileRead', () => {
     it('handles successful file reads', () => {
-      const res = { writeHead: jest.fn(), end: jest.fn() };
+      const res = { writeHead: vi.fn(), end: vi.fn() };
       const data = Buffer.from('<html></html>');
 
       handleFileRead('test.html', null, data, res);
@@ -60,7 +61,7 @@ describe('test-server', () => {
     });
 
     it('handles file read errors', () => {
-      const res = { writeHead: jest.fn(), end: jest.fn() };
+      const res = { writeHead: vi.fn(), end: vi.fn() };
       const error = new Error('File not found');
 
       handleFileRead('test.html', error, null, res);
@@ -70,7 +71,7 @@ describe('test-server', () => {
     });
 
     it('sets correct content type for HTML files', () => {
-      const res = { writeHead: jest.fn(), end: jest.fn() };
+      const res = { writeHead: vi.fn(), end: vi.fn() };
       const data = Buffer.from('<html></html>');
 
       handleFileRead('index.html', null, data, res);
@@ -79,7 +80,7 @@ describe('test-server', () => {
     });
 
     it('sets correct content type for CSS files', () => {
-      const res = { writeHead: jest.fn(), end: jest.fn() };
+      const res = { writeHead: vi.fn(), end: vi.fn() };
       const data = Buffer.from('body {}');
 
       handleFileRead('style.css', null, data, res);
@@ -88,7 +89,7 @@ describe('test-server', () => {
     });
 
     it('sets correct content type for JavaScript files', () => {
-      const res = { writeHead: jest.fn(), end: jest.fn() };
+      const res = { writeHead: vi.fn(), end: vi.fn() };
       const data = Buffer.from('console.log("test");');
 
       handleFileRead('app.js', null, data, res);
@@ -97,7 +98,7 @@ describe('test-server', () => {
     });
 
     it('sets correct content type for JSON files', () => {
-      const res = { writeHead: jest.fn(), end: jest.fn() };
+      const res = { writeHead: vi.fn(), end: vi.fn() };
       const data = Buffer.from('{}');
 
       handleFileRead('data.json', null, data, res);
@@ -106,7 +107,7 @@ describe('test-server', () => {
     });
 
     it('defaults to application/octet-stream for unknown types', () => {
-      const res = { writeHead: jest.fn(), end: jest.fn() };
+      const res = { writeHead: vi.fn(), end: vi.fn() };
       const data = Buffer.from('binary data');
 
       handleFileRead('file.unknown', null, data, res);

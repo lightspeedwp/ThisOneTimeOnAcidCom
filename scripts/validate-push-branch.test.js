@@ -15,6 +15,7 @@ import {
 import { Readable } from 'stream';
 import childProcess from 'child_process';
 import * as fs from 'fs';
+import { vi } from 'vitest';
 
 describe('validate-push-branch', () => {
 
@@ -217,7 +218,7 @@ describe('validate-push-branch', () => {
   describe('processPushLines', () => {
     test('resolves and validates the current branch for a HEAD push', () => {
       const currentBranch = 'feat/current-branch';
-      const symbolicRef = jest.spyOn(childProcess, 'execSync')
+      const symbolicRef = vi.spyOn(childProcess, 'execSync')
         .mockReturnValue(`refs/heads/${currentBranch}\n`);
 
       try {
@@ -673,7 +674,7 @@ describe('validate-push-branch', () => {
     });
 
     test('resolveHeadRef catches error and returns null when git symbolic-ref fails', () => {
-      const mock = jest.spyOn(childProcess, 'execSync')
+      const mock = vi.spyOn(childProcess, 'execSync')
         .mockImplementationOnce(() => {
           throw new Error('fatal: not a git repository');
         });
@@ -687,7 +688,7 @@ describe('validate-push-branch', () => {
     });
 
     test('processPushLines skips HEAD when resolveHeadRef returns null', () => {
-      const mock = jest.spyOn(childProcess, 'execSync')
+      const mock = vi.spyOn(childProcess, 'execSync')
         .mockImplementationOnce(() => {
           throw new Error('detached HEAD');
         });
@@ -705,7 +706,7 @@ describe('validate-push-branch', () => {
     });
 
     test('processPushLines skips non-refs/heads/ refs after HEAD resolution', () => {
-      const mock = jest.spyOn(childProcess, 'execSync')
+      const mock = vi.spyOn(childProcess, 'execSync')
         .mockReturnValueOnce('refs/tags/v1.0.0\n');
 
       try {
@@ -720,7 +721,7 @@ describe('validate-push-branch', () => {
     });
 
     test('getCurrentBranch returns null when in detached HEAD', () => {
-      const mock = jest.spyOn(childProcess, 'execSync')
+      const mock = vi.spyOn(childProcess, 'execSync')
         .mockReturnValueOnce('HEAD\n');
 
       try {
@@ -732,7 +733,7 @@ describe('validate-push-branch', () => {
     });
 
     test('processPushLines handles mixed push with valid and HEAD refs', () => {
-      const execMock = jest.spyOn(childProcess, 'execSync')
+      const execMock = vi.spyOn(childProcess, 'execSync')
         .mockImplementation((cmd) => {
           if (cmd.includes('symbolic-ref')) {
             throw new Error('detached HEAD');
@@ -756,7 +757,7 @@ describe('validate-push-branch', () => {
     });
 
     test('processPushLines validates HEAD ref when it resolves successfully', () => {
-      const execMock = jest.spyOn(childProcess, 'execSync')
+      const execMock = vi.spyOn(childProcess, 'execSync')
         .mockReturnValueOnce('refs/heads/claude/bad-branch\n');
 
       try {

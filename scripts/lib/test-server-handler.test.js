@@ -7,14 +7,15 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import * as handler from './test-server-handler.js';
+import { vi } from 'vitest';
 
 describe('test-server-handler', () => {
   let mockRes;
 
   beforeEach(() => {
     mockRes = {
-      writeHead: jest.fn(),
-      end: jest.fn(),
+      writeHead: vi.fn(),
+      end: vi.fn(),
     };
   });
 
@@ -137,8 +138,8 @@ describe('test-server-handler', () => {
       const requestHandler = handler.createRequestHandler(tempDir);
       const mockReq = { url: '/test.txt' };
       const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
+        writeHead: vi.fn(),
+        end: vi.fn((data) => {
           expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
           done();
         }),
@@ -151,8 +152,8 @@ describe('test-server-handler', () => {
       const requestHandler = handler.createRequestHandler(tempDir);
       const mockReq = { url: '/js/app.js' };
       const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
+        writeHead: vi.fn(),
+        end: vi.fn((data) => {
           expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
           done();
         }),
@@ -165,8 +166,8 @@ describe('test-server-handler', () => {
       const requestHandler = handler.createRequestHandler(tempDir);
       const mockReq = { url: '/' };
       const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
+        writeHead: vi.fn(),
+        end: vi.fn((data) => {
           expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
           done();
         }),
@@ -179,8 +180,8 @@ describe('test-server-handler', () => {
       const requestHandler = handler.createRequestHandler(tempDir);
       const mockReq = { url: '/nonexistent/route' };
       const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
+        writeHead: vi.fn(),
+        end: vi.fn((data) => {
           expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
           done();
         }),
@@ -193,8 +194,8 @@ describe('test-server-handler', () => {
       const requestHandler = handler.createRequestHandler(tempDir);
       const mockReq = { url: '/../../../etc/passwd' };
       const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((msg) => {
+        writeHead: vi.fn(),
+        end: vi.fn((msg) => {
           expect(mockRes.writeHead).toHaveBeenCalledWith(403);
           expect(msg).toBe('Forbidden');
           done();
@@ -208,8 +209,8 @@ describe('test-server-handler', () => {
       const requestHandler = handler.createRequestHandler(tempDir);
       const mockReq = { url: '/etc/passwd' };
       const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((msg) => {
+        writeHead: vi.fn(),
+        end: vi.fn((msg) => {
           // This should fall back to index.html, not fail with 403
           // because /etc/passwd doesn't exist so it serves index.html
           expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
@@ -225,8 +226,8 @@ describe('test-server-handler', () => {
       const requestHandler = handler.createRequestHandler(tempDir);
       const mockReq = { url: '/js' };
       const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
+        writeHead: vi.fn(),
+        end: vi.fn((data) => {
           expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
           done();
         }),

@@ -1,6 +1,6 @@
 name: Tests
 
-# Runs the Jest suite on every PR and fails only on failures the PR
+# Runs the Vitest suite on every PR and fails only on failures the PR
 # introduces: develop still carries known failures (#3472), so the head and
 # base are tested in parallel and compared. Once #3472 clears the baseline,
 # this can gate on zero failures instead (#3479).
@@ -65,8 +65,8 @@ jobs:
           fi
           echo "docs_only=$docs_only" >> "$GITHUB_OUTPUT"
 
-  jest:
-    name: Jest (${{ matrix.target }})
+  vitest:
+    name: Vitest (${{ matrix.target }})
     needs: scope
     if: needs.scope.outputs.docs_only != 'true'
     runs-on: ubuntu-latest
@@ -99,19 +99,18 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Jest
+      - name: Run Vitest
         env:
           EVENT_NAME: ${{ github.event_name }}
         run: |
           # Failing tests are expected on develop; the compare job decides.
           # A missing or invalid report fails closed there.
-          jest_status=0
-          npx jest --config jest.config.js --ci --coverage=false \
-            --json --outputFile=jest-report.json || jest_status=$?
+          vitest_status=0
+          npx vitest run --reporter=json --outputFile=jest-report.json --coverage=false || vitest_status=$?
           jq -r '"suites=\(.numTotalTestSuites) failed_suites=\(.numFailedTestSuites) tests=\(.numTotalTests) failed=\(.numFailedTests)"' \
-            jest-report.json 2>/dev/null || echo "::warning::No Jest report was written"
+            jest-report.json 2>/dev/null || echo "::warning::No Vitest report was written"
           if [ "$EVENT_NAME" = "workflow_dispatch" ] \
-            && { [ "$jest_status" -ne 0 ] || [ ! -s jest-report.json ]; }; then
+            && { [ "$vitest_status" -ne 0 ] || [ ! -s jest-report.json ]; }; then
             exit 1
           fi
 
@@ -121,21 +120,21 @@ jobs:
           # until that is fixed.
           dirty=$(git status --porcelain -- . ':!jest-report.json')
           if [ -n "$dirty" ]; then
-            echo "::warning::Jest modified the working tree (#3482):"
+            echo "::warning::Vitest modified the working tree (#3482):"
             printf '%s\n' "$dirty"
           fi
 
       - name: Upload report
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: jest-report-${{ matrix.target }}
+          name: vitest-report-${{ matrix.target }}
           path: jest-report.json
           if-no-files-found: ignore
           retention-days: 7
 
   compare:
     name: No new test failures
-    needs: [scope, jest]
+    needs: [scope, vitest]
     if: always() && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -143,7 +142,7 @@ jobs:
       - name: Report documentation-only skip
         if: needs.scope.outputs.docs_only == 'true'
         run: |
-          echo "Documentation-only pull request; Jest comparison skipped." >> "$GITHUB_STEP_SUMMARY"
+          echo "Documentation-only pull request; Vitest comparison skipped." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Checkout comparison script
         if: needs.scope.outputs.docs_only != 'true'
@@ -157,7 +156,7 @@ jobs:
         if: needs.scope.outputs.docs_only != 'true'
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          pattern: jest-report-*
+          pattern: vitest-report-*
           path: reports
 
       - name: Compare head with base
@@ -165,8 +164,8 @@ jobs:
         run: |
           set -o pipefail
           for target in head base; do
-            if ! jq -e '.testResults | type == "array"' "reports/jest-report-$target/jest-report.json" >/dev/null 2>&1; then
-              echo "::error::Missing or invalid Jest report for $target; failing closed."
+            if ! jq -e '.testResults | type == "array"' "reports/vitest-report-$target/jest-report.json" >/dev/null 2>&1; then
+              echo "::error::Missing or invalid Vitest report for $target; failing closed."
               exit 1
             fi
           done
@@ -176,8 +175,8 @@ jobs:
           # summary below.
           set +e
           node scripts/validation/compare-jest-failures.cjs \
-            --head reports/jest-report-head/jest-report.json --head-root "$GITHUB_WORKSPACE" \
-            --base reports/jest-report-base/jest-report.json --base-root "$GITHUB_WORKSPACE" \
+            --head reports/vitest-report-head/jest-report.json --head-root "$GITHUB_WORKSPACE" \
+            --base reports/vitest-report-base/jest-report.json --base-root "$GITHUB_WORKSPACE" \
             | tee comparison.txt
           status=${PIPESTATUS[0]}
           set -e
