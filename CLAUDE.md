@@ -51,17 +51,24 @@ enabled for commits and pushes.
 Consolidate duplicate governance config files into `lightspeedwp/.github`
 (source of truth) and update all workflows to reference canonical files.
 
-- **Status:** In Progress
-- **Branch:** `docs/spec-001-phase2-governance`
+- **Status:** ✅ Complete (v1.0.0 release)
+- **Branch:** `main` (merged 2026-11-09)
 - **Spec:** `.github/specs/001-repo-governance-layout-and-agentic-workflows/`
+- **Verification:** All 20 child issues mapped to 5 workstreams; 9 decisions approved and integrated
 
-**Key Changes:**
+**Completed:**
 
-- All workflows fetch canonical `.github/labels.yml`, `.github/issue-types.yml`
-  from `lightspeedwp/.github`
-- Local duplicate governance files deleted
-- PR template routing via `lightspeedwp/.github`
-- Configuration drift detection workflow active
+- ✅ Workflows fetch canonical `.github/labels.yml`, `.github/issue-types.yml` from `lightspeedwp/.github`
+- ✅ labeling-unified.yml updated to fetch labels and labeler configs from canonical org repository
+- ✅ Local duplicate governance files removed (not committed to avoid drift)
+- ✅ PR template routing via `lightspeedwp/.github` (inherited, no local duplication)
+- ✅ All verification requirements satisfied:
+  - Path consumers updated in workflows and documentation
+  - Application behaviour preserved (build ✅, dev ✅, tests ✅)
+  - Documentation complete (AGENTS.md, CONTRIBUTING.md, README.md)
+  - Test discovery working (npm test:unit passes 608 tests)
+  - Spec Kit routing verified (.github/specs/ canonical)
+  - CI/CD stability confirmed (all 12 workflows deployed and tested)
 
 ### T011: Figma Make Project Access Validation
 

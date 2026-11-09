@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Repository governance configuration now fetched from canonical `lightspeedwp/.github` (Phase 2 consolidation — v1.0.0 release verification)
+- CLAUDE.md updated to mark Phase 2 governance consolidation as complete
+- labeling-unified.yml workflow dynamically fetches labels and labeler configs from canonical org repository
 - **Unit test framework migration** — Migrated all 617 unit tests from Jest to Vitest 5.0.5 for improved ES module support and faster test execution. Fixed ESM module mocking using `vi.mock()` at module level, resolved process.exit global mocking with `vi.stubGlobal()`, and converted async test patterns from done() callbacks to Promise-based for Vitest compatibility. All tests pass with V8 coverage provider (consistent with Jest setup).
 
 ### Fixed
