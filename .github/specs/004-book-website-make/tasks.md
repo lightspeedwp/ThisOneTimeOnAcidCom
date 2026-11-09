@@ -395,3 +395,36 @@ Phase 1 (Setup) ──┐
 ✋ **Documentation-Only Delivery**: This task breakdown generates specification documentation for Figma Make prompt execution. No code is written, no commits are created, no pushes occur during task execution. All deliverables remain in `.github/specs/004-book-website-make/` pending explicit approval and implementation-phase authorization.
 
 **Version**: 1.0.0 | **Status**: Draft (pending approval) | **Created**: 2026-11-09
+
+---
+
+## Phase 8: Convergence (Validation & Documentation Completeness)
+
+Validation and verification tasks to close gaps identified between specification requirements and current task coverage. All tasks are verification/documentation tasks, not implementation. Run after Phase 7 completion before final user approval.
+
+| Task ID | [P] | Description | File Path | Dependencies |
+|---------|-----|-------------|-----------|--------------|
+| T052 | | Create version reconciliation artifact documenting all source file versions and differences per FR-002 precedence rule | `.github/specs/004-book-website-make/version-reconciliation.md` | T007, T010 |
+| T053 | | Generate and document exact Prompt 1 preview (before/after navigation structure, numbered implementation steps, acceptance criteria, non-changes list) per SC-002 | `.github/specs/004-book-website-make/contracts/prompt-1-exact-preview.md` | T020 |
+| T054 | | Validate all Prompt previews against completeness checklist (Prompts 1, 2A, 2B, 3A include all required elements; 95%+ completeness) per SC-002/SC-003 | `.github/specs/004-book-website-make/checklists/prompt-preview-validation.md` | T053, T021, T022, T023 |
+| T055 | | Audit and mark all approval boundaries in spec, plan, tasks, and contracts using standard notation (approved ✓, unapproved ~, unresolved ❌) per SC-007 | `.github/specs/004-book-website-make/approval-boundaries.md` | All phases 1-7 |
+| T056 | | Create source file inventory with versions, update timestamps, and reconciliation status for all 6 source files (content/book/01-06) per FR-001 | `.github/specs/004-book-website-make/source-file-inventory.md` | T007 |
+| T057 | | Validate all 7 blocking decisions have 3+ options documented with impact assessment in decision matrix per SC-004 | `.github/specs/004-book-website-make/checklists/blocking-decisions-validation.md` | T010 |
+| T058 | | Audit prompt contracts (3B, 3C) to ensure user-editable decisions are clearly marked and all options visible to reader per FR-008 | `.github/specs/004-book-website-make/contracts/blocking-decisions-audit.md` | contracts/prompt-3b-recovery-flows.md, contracts/prompt-3c-error-states.md |
+| T059 | | Add pre-approval reconciliation validation step: confirm zero version merge conflicts, all decisions documented, all previews validated, all boundaries marked | `.github/specs/004-book-website-make/checklists/pre-approval-validation.md` | T052–T058 |
+
+**Gate**: All 8 validation tasks must pass and deliverables must be reviewed before proceeding to implementation phase authorization.
+
+**Acceptance Criteria**:
+- ✅ Version reconciliation artifact created with all 6 source files analyzed
+- ✅ Prompt 1 exact preview generated and validated against SC-002
+- ✅ All 4 unblocked prompt previews validated for completeness (95%+ minimum)
+- ✅ All approval boundaries marked and auditable across all artifacts
+- ✅ Source file inventory created with versions and timestamps
+- ✅ All 7 blocking decisions validated for 3+ documented options
+- ✅ Prompt contracts audited for user-decision clarity
+- ✅ Pre-approval checklist completed with zero unresolved validation gaps
+
+---
+
+**Version**: 1.0.1 | **Status**: Phase 8 Convergence Appended | **Updated**: 2026-11-09
