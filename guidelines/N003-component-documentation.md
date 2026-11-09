@@ -16,7 +16,7 @@ This is the canonical reference for all React/Next.js components used throughout
 - Mobile responsiveness
 - Performance considerations
 
-**Related Guidelines:** See `components/` directory for individual component guidelines; see [N001: Design Token Reference](#) for styling tokens.
+**Related Guidelines:** See `components/` directory for individual component guidelines; see N001: Design Token Reference for styling tokens.
 
 ---
 
@@ -95,7 +95,7 @@ interface ComponentProps {
   // Event handlers
   onClick?: (event: React.MouseEvent) => void;
 }
-```
+```typescript
 
 ### 2. Usage Example
 
@@ -105,7 +105,7 @@ interface ComponentProps {
   variant="primary"
   onClick={() => console.log('clicked')}
 />
-```
+```typescript
 
 ### 3. Visual States
 
@@ -223,13 +223,13 @@ All components support dark mode via CSS variables:
 
 ## Related Resources
 
-- See [N002: Accessibility Checklist](#) for component a11y requirements
-- See [N001: Design Token Reference](#) for component styling
-- See [N009: Responsive Design Patterns](#) for responsive breakpoints
+- See N002: Accessibility Checklist for component a11y requirements
+- See N001: Design Token Reference for component styling
+- See N009: Responsive Design Patterns for responsive breakpoints
 - See `components/` directory for individual component guides
 
 ---
 
 **Authority:** D4 (N-Document Approvals) | D3 (Design Authority)  
 **Last Updated:** 2026-11-09  
-**Related:** [N001: Design Token Reference](#) · [N002: Accessibility Checklist](#) · [N004: CSS & Styling Guide](#)
+**Related:** N001: Design Token Reference · N002: Accessibility Checklist · N004: CSS & Styling Guide

@@ -16,7 +16,7 @@ This guide documents the canonical design tokens used throughout This One Time O
 - Animation and transition tokens
 - Responsive breakpoints
 
-**Related Guidelines:** See `design-tokens/` directory for individual token files; also see [N009: Responsive Design Patterns](#) for breakpoint usage.
+**Related Guidelines:** See `design-tokens/` directory for individual token files; also see N009: Responsive Design Patterns for breakpoint usage.
 
 ---
 
@@ -50,7 +50,7 @@ This guide documents the canonical design tokens used throughout This One Time O
 ## Spacing Scale
 
 | Token | Value | Usage |
-|-------|-------|-------|
+| ------- | ------- | ------- |
 | `xs` | 0.25rem (4px) | Micro spacing, icon gaps |
 | `sm` | 0.5rem (8px) | Small gaps, padding |
 | `md` | 1rem (16px) | Standard padding, margins |
@@ -70,8 +70,9 @@ This guide documents the canonical design tokens used throughout This One Time O
 - **Mono:** [Font Family] (weight: 400, code blocks)
 
 ### Scale
+
 | Role | Size | Line Height | Weight | Usage |
-|------|------|-------------|--------|-------|
+| ------ | ------ | ------------- | -------- | ------- |
 | H1 | 2.5rem | 1.2 | 700 | Page title |
 | H2 | 2rem | 1.3 | 600 | Section heading |
 | H3 | 1.5rem | 1.4 | 600 | Subsection |
@@ -89,7 +90,7 @@ shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
 shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
 shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
-```
+```typescript
 
 ---
 
@@ -112,7 +113,7 @@ shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
 | `desktop` | 1025px–1440px | Desktops |
 | `wide` | 1441px+ | Large screens |
 
-See [N009: Responsive Design Patterns](#) for media query usage.
+See N009: Responsive Design Patterns for media query usage.
 
 ---
 
@@ -135,4 +136,4 @@ See [N009: Responsive Design Patterns](#) for media query usage.
 
 **Authority:** D4 (N-Document Approvals) | D3 (Design Authority)  
 **Last Updated:** 2026-11-09  
-**Related:** [N002: Accessibility Checklist](#) · [N003: Component Documentation](#) · [N009: Responsive Patterns](#)
+**Related:** N002: Accessibility Checklist · N003: Component Documentation · N009: Responsive Patterns

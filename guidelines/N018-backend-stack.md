@@ -12,7 +12,7 @@ Define backend architecture, infrastructure choices, and integration patterns fo
 ## Technology Stack
 
 | Layer | Technology | Purpose |
-|-------|-----------|---------|
+| ------- | ----------- | --------- |
 | Frontend | Next.js 14+ (App Router) | React framework with SSR/SSG |
 | API | tRPC | Type-safe RPC between client and server |
 | Compute | Vercel Functions | Serverless API endpoints |
@@ -23,7 +23,7 @@ Define backend architecture, infrastructure choices, and integration patterns fo
 
 ## Architecture Overview
 
-```
+```typescript
 ┌─────────────────────────┐
 │   Next.js Client App    │
 │  (App Router + React)   │
@@ -40,7 +40,7 @@ Define backend architecture, infrastructure choices, and integration patterns fo
 │  Supabase PostgreSQL    │
 │  (Managed Database)     │
 └─────────────────────────┘
-```
+```typescript
 
 ## Vercel Functions
 
@@ -55,7 +55,7 @@ export default trpcNext.createNextApiHandler({
   router: appRouter,
   createContext: createTRPCContext,
 });
-```
+```typescript
 
 ### Environment Variables
 
@@ -64,7 +64,7 @@ DATABASE_URL=postgresql://user:pass@db.supabase.co/db
 NEXT_PUBLIC_API_URL=https://app.example.com
 SUPABASE_URL=https://xyz.supabase.co
 SUPABASE_KEY=public-anon-key
-```
+```typescript
 
 ## Supabase Integration
 
@@ -87,7 +87,7 @@ const { data, error } = await supabase.auth.signUp({
 // 2. Session stored in HTTP-only cookie via Supabase client
 // 3. tRPC middleware validates session on protected procedures
 // 4. Automatic token refresh before expiration
-```
+```typescript
 
 ### File Storage
 
@@ -101,7 +101,7 @@ const { data, error } = await supabase.storage
 const publicUrl = supabase.storage
   .from('book-covers')
   .getPublicUrl(`${bookId}/cover.jpg`).data.publicUrl;
-```
+```typescript
 
 ## Prisma ORM
 
@@ -124,7 +124,7 @@ model Chapter {
   book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId String
 }
-```
+```typescript
 
 ### Database Queries
 
@@ -146,7 +146,7 @@ const books = await prisma.book.findMany({
   orderBy: { published: 'desc' },
   take: 10,
 });
-```
+```typescript
 
 ## tRPC Procedures
 
@@ -163,7 +163,7 @@ export const bookRouter = router({
       });
     }),
 });
-```
+```typescript
 
 ### Protected Mutation
 
@@ -180,7 +180,7 @@ export const protectedRouter = router({
       });
     }),
 });
-```
+```typescript
 
 ## Error Handling
 
@@ -201,7 +201,7 @@ throw new TRPCError({
     code: 'NOT_FOUND',
   }
 }
-```
+```typescript
 
 ## Deployment
 
@@ -216,7 +216,7 @@ git push origin feat/my-feature  # Auto-deploys to preview URL
 
 # Production deployment
 git push origin main             # Deploys to production
-```
+```typescript
 
 ### Database Migrations
 
@@ -226,7 +226,7 @@ npx prisma migrate dev --name add_chapters
 
 # Apply to production
 npx prisma migrate deploy
-```
+```typescript
 
 ## Performance & Scaling
 

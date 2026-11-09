@@ -19,7 +19,7 @@ Provide the canonical README landing page that introduces ThisOneTimeOnAcidCom t
 A Memoir of Music, Psychedelics, and Transformation
 
 **[Read the Book] [Learn About Festival] [Join Community]**
-```
+```typescript
 
 ### Value Proposition Section
 
@@ -40,7 +40,7 @@ of psychedelic experience, festival culture, and personal growth.
 Thoughtful reflection on meaning-making, consciousness, and
 what it means to seek authenticity. Relevant whether experienced
 or curious about psychedelics.
-```
+```typescript
 
 ### Featured Content
 
@@ -50,7 +50,7 @@ or curious about psychedelics.
 [Journal Preview Card]
 [Journal Preview Card]
 [Journal Preview Card]
-```
+```typescript
 
 ### Book Overview
 
@@ -70,7 +70,7 @@ Ideal for readers seeking:
 - Reflection on consciousness and meaning
 
 **[Read the Full Story] [About the Author]**
-```
+```typescript
 
 ### Reading Guide
 
@@ -93,7 +93,7 @@ Ideal for readers seeking:
 - [Read Journal] — Reflections and behind-the-scenes
 - [About the Author] — Author bio and context
 - [FAQ] — Common questions answered
-```
+```typescript
 
 ## Responsive Design
 
@@ -177,7 +177,7 @@ Ideal for readers seeking:
   "description": "A memoir of music, psychedelics, and transformation"
 }
 </script>
-```
+```typescript
 
 ## Accessibility Standards (D3: WCAG 2.2 AAA)
 

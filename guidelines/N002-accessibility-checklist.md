@@ -15,7 +15,7 @@ This checklist ensures all content and components meet WCAG 2.2 Level AAA access
 - Robust: Compatible with assistive technologies
 
 **Compliance Target:** Level AAA (enhanced accessibility)  
-**Related Guidelines:** See [N011: Accessibility Standards](#) for detailed implementation patterns.
+**Related Guidelines:** See N011: Accessibility Standards for detailed implementation patterns.
 
 ---
 
@@ -184,4 +184,4 @@ This checklist ensures all content and components meet WCAG 2.2 Level AAA access
 
 **Authority:** D4 (N-Document Approvals) | D3 (WCAG 2.2 AAA target)  
 **Last Updated:** 2026-11-09  
-**Related:** [N011: Accessibility Standards](#) · [N001: Design Token Reference](#) · [N003: Component Documentation](#)
+**Related:** N011: Accessibility Standards · N001: Design Token Reference · N003: Component Documentation

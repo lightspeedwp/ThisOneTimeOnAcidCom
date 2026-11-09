@@ -15,7 +15,7 @@ Document performance targets, measurement methodology, and optimization strategi
 Target: Achieve "GOOD" status across all three Core Web Vitals for 75th percentile of users.
 
 | Metric | Target | "Good" Range | "Needs Work" |
-|--------|--------|--------------|-------------|
+| -------- | -------- | -------------- | ------------- |
 | **LCP** (Largest Contentful Paint) | ≤2.5s | 0-2.5s | >4.0s |
 | **INP** (Interaction to Next Paint) | ≤200ms | 0-200ms | >500ms |
 | **CLS** (Cumulative Layout Shift) | ≤0.1 | 0-0.1 | >0.25 |
@@ -24,7 +24,7 @@ Target: Achieve "GOOD" status across all three Core Web Vitals for 75th percenti
 
 ### Homepage (N023: README)
 
-```
+```typescript
 LCP: ≤2.5s
 - Hero image optimized: <200KB (WebP)
 - No render-blocking resources
@@ -39,11 +39,11 @@ CLS: ≤0.05
 - Hero image dimensions known (prevent shift)
 - All fonts have size-adjust property
 - Form fields don't shift on input focus
-```
+```typescript
 
 ### Book Home (N024: Book Home)
 
-```
+```typescript
 LCP: ≤2.5s
 - Chapter list server-rendered
 - Cover image loaded early
@@ -58,11 +58,11 @@ CLS: ≤0.1
 - Book metadata card dimensions fixed
 - Chapter grid gaps consistent
 - No delayed content loading
-```
+```typescript
 
 ### Book Chapter
 
-```
+```typescript
 LCP: ≤2.5s
 - Chapter content streamed
 - Font preloaded
@@ -77,7 +77,7 @@ CLS: ≤0.05
 - Text line height stable
 - Images have aspect-ratio property
 - No sidebar collapse without height reservation
-```
+```typescript
 
 ## Measurement Methodology
 
@@ -91,7 +91,7 @@ npx lighthouse https://example.com --output=json
 # LCP: 2100ms (GOOD)
 # FID: 45ms (GOOD)
 # CLS: 0.08 (GOOD)
-```
+```typescript
 
 ### Field Measurement (Real User Data)
 
@@ -102,7 +102,7 @@ import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
 getCLS(console.log);  // CLS score
 getLCP(console.log);  // LCP score
 getFID(console.log);  // FID score
-```
+```typescript
 
 ### Automation (GitHub Actions)
 
@@ -112,77 +112,77 @@ npm run lighthouse:ci
 
 # Monitors performance across commits
 # Alerts on regressions >5%
-```
+```typescript
 
 ## Optimization Strategies
 
 ### Image Optimization (N012: Performance Optimization)
 
-```
+```typescript
 ✅ Use next/image for automatic optimization
 ✅ Serve modern formats: WebP, AVIF with fallbacks
 ✅ Implement responsive images with srcset
 ✅ Lazy load below-the-fold images
 ✅ Target: Hero <200KB, thumbnails <50KB
 ✅ Use image CDN for delivery (Vercel CDN built-in)
-```
+```typescript
 
 ### JavaScript Optimization
 
-```
+```typescript
 ✅ Code-split by route with dynamic imports
 ✅ Tree-shake unused dependencies
 ✅ Lazy load non-critical third-party scripts
 ✅ Use async/defer for script loading
 ✅ Target: Initial JS <150KB (gzipped)
 ✅ Monitor bundle size with bundlesize
-```
+```typescript
 
 ### CSS Optimization
 
-```
+```typescript
 ✅ Inline critical CSS above fold
 ✅ Defer non-critical CSS with media queries
 ✅ Use CSS variables for theming (no CSS-in-JS)
 ✅ Minimize CSS through BEM modularity
 ✅ Purge unused styles (CSS modules)
 ✅ Use CSS Grid/Flexbox (no float hacks)
-```
+```typescript
 
 ### Font Loading (N012)
 
-```
+```typescript
 ✅ Use font-display: swap for custom fonts
 ✅ Preload critical font files
 ✅ Subset fonts (Latin only by default)
 ✅ Avoid @import (use link preload)
 ✅ Limit to 2-3 font families
 ✅ Use system fonts for fallback
-```
+```typescript
 
 ## Performance Budget
 
 ### Bundle Size Limits
 
-```
+```typescript
 | Resource | Limit | Current | Trend |
 |----------|-------|---------|-------|
 | JS       | 150KB | TBD     | Monitor |
 | CSS      | 50KB  | TBD     | Monitor |
 | Images   | 500KB | TBD     | Monitor |
 | Total    | 800KB | TBD     | Monitor |
-```
+```typescript
 
 ### Runtime Performance
 
-```
+```typescript
 | Metric | Budget | Target |
 |--------|--------|--------|
 | Long Tasks (>50ms) | 0 | Eliminate |
 | Main Thread Time | <4s | Keep <3s |
 | Time to Interactive | <5s | Keep <3s |
 | Speedindex | <5s | Keep <3s |
-```
+```typescript
 
 ## Testing Scenarios
 
@@ -196,7 +196,7 @@ Steps:
 4. Wait for results
 5. Review scores for LCP, CLS, INP
 6. Check opportunities and diagnostics
-```
+```typescript
 
 ### Web Vitals Monitoring
 
@@ -215,18 +215,18 @@ getLCP((metric) => {
     console.warn('LCP threshold exceeded:', metric);
   }
 });
-```
+```typescript
 
 ### Network Throttling Test
 
-```
+```typescript
 Steps:
 1. Chrome DevTools → Network tab
 2. Set throttle to "Fast 3G"
 3. Reload page
 4. Observe LCP, FID, CLS values
 5. Verify still meet targets at reduced speed
-```
+```typescript
 
 ## Monitoring & Alerts
 
@@ -245,7 +245,7 @@ Steps:
 - CLS >0.15: Flag in PR review
 - INP >300ms: Monitor, assess on mobile
 - Bundle size +10KB: Request in PR
-```
+```typescript
 
 ## Phase 2 Performance Goals
 

@@ -13,7 +13,7 @@ Define the Journal Preview component pattern for displaying journal entries in l
 
 The Journal Preview displays entry metadata and excerpt with progressive content revelation:
 
-```
+```typescript
 ┌──────────────────────────────────────┐
 │ Date: Nov 9, 2024                    │  ← Metadata
 │ Author: Ashley                       │
@@ -28,7 +28,7 @@ The Journal Preview displays entry metadata and excerpt with progressive content
 │          [Read Full Entry]            │  ← CTA
 │          [Save to Journal]            │
 └──────────────────────────────────────┘
-```
+```typescript
 
 ## Component Anatomy
 
@@ -47,7 +47,7 @@ The Journal Preview displays entry metadata and excerpt with progressive content
 
 ### Desktop (1025px+)
 
-```
+```typescript
 ┌─────────────────────────────────────────┐
 │ Nov 9 | ⏱️ 4 min | 🔒 Private           │
 │                                         │
@@ -58,11 +58,11 @@ The Journal Preview displays entry metadata and excerpt with progressive content
 │                                         │
 │ [Read Full Entry]  [Save]  [Share]      │
 └─────────────────────────────────────────┘
-```
+```typescript
 
 ### Mobile (320px-640px)
 
-```
+```typescript
 ┌──────────────────┐
 │ Nov 9 | 4 min    │
 │ 🔒 Private       │
@@ -77,7 +77,7 @@ The Journal Preview displays entry metadata and excerpt with progressive content
 │ [Read More]      │
 │ [Save]           │
 └──────────────────┘
-```
+```typescript
 
 ## Component Structure
 
@@ -97,7 +97,7 @@ interface JournalPreviewProps {
   showActions?: boolean;       // Show save/share buttons
   compact?: boolean;           // Minimal info variant
 }
-```
+```typescript
 
 ## Content Variants
 
@@ -179,7 +179,7 @@ interface JournalPreviewProps {
 .journal-preview__actions { }
 .journal-preview--compact { }
 .journal-preview--featured { }
-```
+```typescript
 
 ## States & Interactions
 
@@ -215,7 +215,7 @@ interface JournalPreviewProps {
   visibility: 'private',
   category: 'Reflection',
 }
-```
+```typescript
 
 ### Dynamic Metadata
 
@@ -226,7 +226,7 @@ interface JournalPreviewProps {
   commentCount: 3,
   lastModified: '2 hours ago',
 }
-```
+```typescript
 
 ## Performance Considerations
 
@@ -254,7 +254,7 @@ export function JournalArchive({ entries }: { entries: JournalEntry[] }) {
     </div>
   );
 }
-```
+```typescript
 
 ## Testing Strategy
 

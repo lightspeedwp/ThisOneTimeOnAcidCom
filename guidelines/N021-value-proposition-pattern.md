@@ -13,7 +13,7 @@ Define the Value Proposition section pattern for communicating core benefits and
 
 The Value Proposition displays 3-4 key benefits in a grid with icons and descriptions:
 
-```
+```typescript
 ┌────────────────────────────────────┐
 │   Why Read This One Time On Acid?  │
 ├────────────────────────────────────┤
@@ -30,7 +30,7 @@ The Value Proposition displays 3-4 key benefits in a grid with icons and descrip
 │          [Learn More]
 │
 └────────────────────────────────────┘
-```
+```typescript
 
 ## Section Anatomy
 
@@ -48,7 +48,7 @@ The Value Proposition displays 3-4 key benefits in a grid with icons and descrip
 
 ### Desktop (1025px+)
 
-```
+```typescript
 ┌────────────────────────────────────┐
 │ Heading                            │
 │                                    │
@@ -58,11 +58,11 @@ The Value Proposition displays 3-4 key benefits in a grid with icons and descrip
 │                                    │
 │           [CTA Button]             │
 └────────────────────────────────────┘
-```
+```typescript
 
 ### Tablet (641px-1024px)
 
-```
+```typescript
 ┌──────────────────────┐
 │ Heading              │
 │                      │
@@ -76,11 +76,11 @@ The Value Proposition displays 3-4 key benefits in a grid with icons and descrip
 │                      │
 │      [CTA Button]    │
 └──────────────────────┘
-```
+```typescript
 
 ### Mobile (320px-640px)
 
-```
+```typescript
 ┌──────────┐
 │ Heading  │
 │          │
@@ -94,7 +94,7 @@ The Value Proposition displays 3-4 key benefits in a grid with icons and descrip
 │          │
 │  [CTA]   │
 └──────────┘
-```
+```typescript
 
 ## Component Structure
 
@@ -114,7 +114,7 @@ interface ValuePropositionProps {
     href: string;
   };
 }
-```
+```typescript
 
 ## Voice & Messaging
 
@@ -154,7 +154,7 @@ and personal transformation.
 Thoughtful reflection on psychedelic experience, festival
 culture, and what it means to seek meaning. Relevant whether
 you're experienced or curious.
-```
+```typescript
 
 ## Visual Specifications
 
@@ -192,7 +192,7 @@ you're experienced or curious.
 .benefit-card__title { }
 .benefit-card__description { }
 .value-proposition__cta { }
-```
+```typescript
 
 ## Accessibility Features
 
@@ -261,7 +261,7 @@ export function HomePage() {
     />
   );
 }
-```
+```typescript
 
 ## Testing Strategy
 

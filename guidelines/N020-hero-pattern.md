@@ -13,7 +13,7 @@ Define the Hero section pattern for page entry points, establishing visual hiera
 
 The Hero section spans full viewport width with immersive imagery and clear value proposition:
 
-```
+```typescript
 ┌─────────────────────────────────────────┐
 │                                         │
 │  Background: Jungle Festival Image      │  ← Hero Image (full bleed)
@@ -26,7 +26,7 @@ The Hero section spans full viewport width with immersive imagery and clear valu
 │                                         │
 │                                         │
 └─────────────────────────────────────────┘
-```
+```typescript
 
 ## Hero Anatomy
 
@@ -42,7 +42,7 @@ The Hero section spans full viewport width with immersive imagery and clear valu
 
 ### Desktop (1025px+)
 
-```
+```typescript
 ┌──────────────────────────────────┐
 │ Hero Image                       │
 │                                  │
@@ -51,11 +51,11 @@ The Hero section spans full viewport width with immersive imagery and clear valu
 │       [CTA] [Secondary]          │
 │                                  │
 └──────────────────────────────────┘
-```
+```typescript
 
 ### Mobile (320px-640px)
 
-```
+```typescript
 ┌──────────┐
 │ Hero Img │
 │          │
@@ -68,7 +68,7 @@ The Hero section spans full viewport width with immersive imagery and clear valu
 │ [Sec]    │
 │          │
 └──────────┘
-```
+```typescript
 
 ## Component Structure
 
@@ -88,7 +88,7 @@ interface HeroProps {
   };
   overlay?: 'dark' | 'light'; // Overlay intensity
 }
-```
+```typescript
 
 ## Accessibility Features
 
@@ -127,7 +127,7 @@ interface HeroProps {
     rgba(0, 0, 0, 0.2) 100%
   );
 }
-```
+```typescript
 
 ## CSS Classes (BEM)
 
@@ -143,7 +143,7 @@ interface HeroProps {
 .hero__cta { }
 .hero--dark-overlay { }
 .hero--light-overlay { }
-```
+```typescript
 
 ## States & Interactions
 
@@ -194,7 +194,7 @@ export default function HomePage() {
     </>
   );
 }
-```
+```typescript
 
 ## Testing Strategy
 

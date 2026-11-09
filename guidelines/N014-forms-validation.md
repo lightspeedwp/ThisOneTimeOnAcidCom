@@ -38,7 +38,7 @@ const contactSchema = z.object({
 });
 
 type ContactForm = z.infer<typeof contactSchema>;
-```
+```typescript
 
 ## Error Handling
 
@@ -61,7 +61,7 @@ type ContactForm = z.infer<typeof contactSchema>;
   },
   message: 'Please check the highlighted fields',
 }
-```
+```typescript
 
 ## Accessibility Requirements
 
@@ -82,7 +82,7 @@ type ContactForm = z.infer<typeof contactSchema>;
 - Message: textarea, required, min 10 chars, max 1000 chars
 - reCAPTCHA v3 (silent verification)
 - Submit button: "Send Message"
-```
+```typescript
 
 ### Newsletter Signup
 
@@ -91,7 +91,7 @@ type ContactForm = z.infer<typeof contactSchema>;
 - Checkbox: "I consent to receive updates"
 - Submit: "Subscribe"
 - Post-submit: Success message with email confirmation
-```
+```typescript
 
 ## See Also
 

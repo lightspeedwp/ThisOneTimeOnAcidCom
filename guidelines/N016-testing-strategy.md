@@ -11,11 +11,11 @@ Define testing approach across unit, integration, and end-to-end testing for Thi
 
 ## Testing Pyramid
 
-```
+```typescript
         E2E (Playwright)          5-10% of tests
       Integration Tests           20-30% of tests
     Unit Tests (Jest)            60-70% of tests
-```
+```typescript
 
 ## Unit Tests (Jest with @swc/core)
 
@@ -35,7 +35,7 @@ describe('BookService', () => {
     });
   });
 });
-```
+```typescript
 
 ### Coverage Targets
 
@@ -51,7 +51,7 @@ npm test                                    # Run all tests
 npm test -- --watch                         # Watch mode
 npm test -- --coverage                      # Coverage report
 npm test -- scripts/_tests_/test-*.js      # Run specific test file
-```
+```typescript
 
 ## Integration Tests
 
@@ -67,7 +67,7 @@ describe('book.getById', () => {
     expect(book.author).toBeDefined();
   });
 });
-```
+```typescript
 
 ### Database Testing
 
@@ -93,14 +93,14 @@ test('user can read a book and add to journal', async ({ page }) => {
   await page.click('a[href="/journal"]');
   await expect(page).toHaveURL('/journal');
 });
-```
+```typescript
 
 ### Running Playwright Tests
 
 ```bash
 npm test -- --grep "playwright" # Run only E2E tests
 npx playwright show-report      # View test report
-```
+```typescript
 
 ## Shell Script Testing (Bats)
 
@@ -116,7 +116,7 @@ npx playwright show-report      # View test report
 @test "build output contains bundle.js" {
   [ -f dist/bundle.js ]
 }
-```
+```typescript
 
 ## Test Scenarios
 

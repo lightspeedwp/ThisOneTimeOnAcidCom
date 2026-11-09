@@ -14,13 +14,13 @@ Document the continuous deployment pipeline for ThisOneTimeOnAcidCom, including 
 
 ### Environment Strategy
 
-```
+```typescript
 ┌──────────────┐       ┌──────────────┐       ┌──────────────┐
 │   Local      │  →   │   Staging    │  →   │  Production  │
 │   Dev        │       │   Preview    │       │   Main       │
 │   (Sqlite)   │       │   (Supabase) │       │   (Netlify)  │
 └──────────────┘       └──────────────┘       └──────────────┘
-```
+```typescript
 
 ### Environments
 
@@ -51,7 +51,7 @@ npm test -- --coverage
 
 # 5. Build verification
 npm run build
-```
+```typescript
 
 ### Deployment Stages
 
@@ -70,7 +70,7 @@ git push -u origin feat/my-feature
 
 # GitHub Actions: Linting, type checking, tests
 # ✅ All checks pass → Preview URL generated
-```
+```typescript
 
 #### Stage 2: Feature Branch → Staging (develop)
 
@@ -82,7 +82,7 @@ git push -u origin feat/my-feature
 
 # Gate: All tests must pass
 # Deployment time: <2 minutes
-```
+```typescript
 
 #### Stage 3: Staging (develop) → Production (main)
 
@@ -100,7 +100,7 @@ git push -u origin feat/my-feature
 
 # After merge: automatic production deployment
 # Deployment time: <5 minutes
-```
+```typescript
 
 ## CI/CD Configuration (GitHub Actions)
 
@@ -150,7 +150,7 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-```
+```typescript
 
 ## Database Migrations
 
@@ -166,7 +166,7 @@ npx prisma migrate deploy --skip-generate
 # Production (before deployment)
 npx prisma migrate deploy
 npx prisma db seed  # Optional: seed production data
-```
+```typescript
 
 ### Migration Safety
 
@@ -185,7 +185,7 @@ npx prisma db seed  # Optional: seed production data
 DATABASE_URL=file:./dev.db
 NEXT_PUBLIC_API_URL=http://localhost:3000
 NODE_ENV=development
-```
+```typescript
 
 ### Staging (.env.staging via Vercel)
 
@@ -195,7 +195,7 @@ NEXT_PUBLIC_API_URL=https://staging.example.com
 SUPABASE_URL=https://staging.supabase.co
 SUPABASE_KEY=staging-key
 NODE_ENV=staging
-```
+```typescript
 
 ### Production (.env.production via Vercel)
 
@@ -205,7 +205,7 @@ NEXT_PUBLIC_API_URL=https://thisonetonacid.com
 SUPABASE_URL=https://prod.supabase.co
 SUPABASE_KEY=prod-key
 NODE_ENV=production
-```
+```typescript
 
 ## Deployment Checklist
 
@@ -239,7 +239,7 @@ NODE_ENV=production
 import * as Sentry from "@sentry/nextjs";
 
 Sentry.captureException(error);
-```
+```typescript
 
 ### Performance Monitoring
 
@@ -250,7 +250,7 @@ import { getCLS, getLCP, getINP } from 'web-vitals';
 getCLS(metric => console.log(metric));
 getLCP(metric => console.log(metric));
 getINP(metric => console.log(metric));
-```
+```typescript
 
 ### Application Health Checks
 
@@ -274,7 +274,7 @@ git push origin main
 
 # Vercel automatically re-deploys previous commit
 # ETA: 5 minutes
-```
+```typescript
 
 ### Full Rollback (Database involved)
 
@@ -296,19 +296,19 @@ npx prisma migrate resolve --rolled-back <migration-name>
 # - Plan fix
 # - Test on staging
 # - Redeploy
-```
+```typescript
 
 ## Release Process
 
 ### Semantic Versioning
 
-```
+```typescript
 1.2.3
 ↑ ↑ ↑
 | | └─ Patch (bug fixes): increment last
 | └─── Minor (features): increment middle, reset patch
 └───── Major (breaking): increment first, reset others
-```
+```typescript
 
 ### Release Checklist
 

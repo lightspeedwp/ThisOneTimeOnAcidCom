@@ -13,7 +13,7 @@ Define the reusable Book Card component pattern for displaying book previews in 
 
 The Book Card displays a book with visual hierarchy:
 
-```
+```typescript
 ┌─────────────────────┐
 │   Cover Image       │  ← Responsive aspect ratio 2:3
 │   (Lazy-loaded)     │
@@ -29,7 +29,7 @@ The Book Card displays a book with visual hierarchy:
 │ [Add to List]       │  ← Call-to-action
 │ [Share]             │
 └─────────────────────┘
-```
+```typescript
 
 ## Component Structure
 
@@ -51,7 +51,7 @@ interface BookCardProps {
 export function BookCard({ book, variant = 'grid' }: BookCardProps) {
   // Component implementation
 }
-```
+```typescript
 
 ## Responsive Behavior
 
@@ -104,7 +104,7 @@ export function BookCard({ book, variant = 'grid' }: BookCardProps) {
 .book-card__rating { }
 .book-card__actions { }
 .book-card--variant-list { }
-```
+```typescript
 
 ## Integration Points
 
@@ -127,7 +127,7 @@ export function BookGrid({ books }: { books: Book[] }) {
     </div>
   );
 }
-```
+```typescript
 
 ## Testing Strategy
 

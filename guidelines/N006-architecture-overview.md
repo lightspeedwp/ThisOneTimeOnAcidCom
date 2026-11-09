@@ -41,7 +41,7 @@
 
 ## Architecture Diagram
 
-```
+```typescript
 Client (Browser)
   ↓
   [Next.js Frontend - React/TypeScript/Tailwind]
@@ -67,7 +67,7 @@ Client (Browser)
   ├─ Email (SendGrid/Resend)
   ├─ Payments (Stripe)
   └─ Analytics (PostHog)
-```
+```typescript
 
 ---
 
@@ -84,7 +84,7 @@ Client (Browser)
 
 ## Related Documentation
 
-See [N018: Backend Stack & Integration Patterns](#) for detailed backend architecture.
+See N018: Backend Stack & Integration Patterns for detailed backend architecture.
 
 ---
 

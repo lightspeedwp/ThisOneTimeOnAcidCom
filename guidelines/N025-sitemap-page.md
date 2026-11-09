@@ -55,13 +55,13 @@ Navigate ThisOneTimeOnAcidCom by section or search by keyword.
 **Developer Resources**
 - [API Documentation] (if public)
 - [GitHub Repository] (if applicable)
-```
+```typescript
 
 ## URL Structure Map
 
 ### Primary Routes
 
-```
+```typescript
 /                              # Homepage (README)
 /book                          # Book Home
 /book/[chapter-number]         # Individual chapter
@@ -71,11 +71,11 @@ Navigate ThisOneTimeOnAcidCom by section or search by keyword.
 /contact                       # Contact form
 /sitemap                       # This page (HTML)
 /sitemap.xml                   # XML sitemap
-```
+```typescript
 
 ### Nested Navigation
 
-```
+```typescript
 /account/                      # Account hub (authenticated)
   /account/reading-list        # Saved books
   /account/bookmarks           # Saved passages
@@ -90,7 +90,7 @@ Navigate ThisOneTimeOnAcidCom by section or search by keyword.
 /search/                       # Search results
   /search?q=keyword            # Query parameter
   /search?filter=journal       # Filter by content type
-```
+```typescript
 
 ## XML Sitemap Structure
 
@@ -136,7 +136,7 @@ Navigate ThisOneTimeOnAcidCom by section or search by keyword.
     <priority>0.3</priority>
   </url>
 </urlset>
-```
+```typescript
 
 ## Dynamic Sitemap Generation
 
@@ -188,7 +188,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 }
-```
+```typescript
 
 ## Sitemap Best Practices
 
@@ -259,14 +259,14 @@ Disallow: /admin/
 Disallow: /api/
 
 Sitemap: https://example.com/sitemap.xml
-```
+```typescript
 
 ### Head Tags
 
 ```html
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <link rel="canonical" href="https://example.com">
-```
+```typescript
 
 ### Search Console Submission
 

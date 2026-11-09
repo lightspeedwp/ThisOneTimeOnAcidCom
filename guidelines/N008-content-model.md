@@ -36,7 +36,7 @@
 ## Content Types
 
 | Type | Purpose | Fields | Publish? |
-|------|---------|--------|----------|
+| ------ | --------- | -------- | ---------- |
 | **Blog Post** | Article/story | Title, Body, Tags | Yes |
 | **Page** | Static content | Title, Body | Yes |
 | **Journal Entry** | Personal reflection | Title, Body, Date | Yes |
@@ -75,10 +75,10 @@ model Tag {
   name String @unique
   posts Post[]
 }
-```
+```typescript
 
 ---
 
 **Authority:** D4 (N-Document Approvals)  
 **Last Updated:** 2026-11-09  
-**Related:** [N007: Publishing Workflow](#) · [N018: Backend Stack](#)
+**Related:** N007: Publishing Workflow · N018: Backend Stack

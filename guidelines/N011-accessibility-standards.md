@@ -63,10 +63,10 @@
 - [ ] Alt text for all images
 - [ ] Captions for video
 
-See [N002: Accessibility Checklist](#) for full checklist.
+See N002: Accessibility Checklist for full checklist.
 
 ---
 
 **Authority:** D4 (N-Document Approvals) | D3 (WCAG 2.2 AAA)  
 **Last Updated:** 2026-11-09  
-**Related:** [N002: Accessibility Checklist](#) · [N001: Design Token Reference](#)
+**Related:** N002: Accessibility Checklist · N001: Design Token Reference

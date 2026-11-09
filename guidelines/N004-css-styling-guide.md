@@ -15,7 +15,7 @@ CSS architecture for This One Time On Acid follows utility-first principles with
 - Dark mode via CSS variables
 - Responsive design with mobile-first approach
 
-**Related Guidelines:** See [N001: Design Token Reference](#) for color/spacing tokens; see [N009: Responsive Design Patterns](#) for breakpoints.
+**Related Guidelines:** See N001: Design Token Reference for color/spacing tokens; see N009: Responsive Design Patterns for breakpoints.
 
 ---
 
@@ -32,7 +32,7 @@ CSS architecture for This One Time On Acid follows utility-first principles with
     <p className="text-gray-600">Description</p>
   </div>
 </div>
-```
+```typescript
 
 ### Common Patterns
 
@@ -52,7 +52,7 @@ CSS architecture for This One Time On Acid follows utility-first principles with
 
 // Centering
 <div className="flex items-center justify-center h-screen">Content</div>
-```
+```typescript
 
 #### Responsive Design
 ```jsx
@@ -67,7 +67,7 @@ CSS architecture for This One Time On Acid follows utility-first principles with
   <div>Item 2</div>
   <div>Item 3</div>
 </div>
-```
+```typescript
 
 #### Dark Mode
 ```jsx
@@ -75,7 +75,7 @@ CSS architecture for This One Time On Acid follows utility-first principles with
 <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
   Content automatically switches in dark mode
 </div>
-```
+```typescript
 
 ---
 
@@ -110,7 +110,7 @@ All design tokens defined in `src/styles/default-shadcn-theme.css`:
     --color-secondary: #[hex];
   }
 }
-```
+```typescript
 
 ### Usage in CSS
 
@@ -120,7 +120,7 @@ All design tokens defined in `src/styles/default-shadcn-theme.css`:
   padding: var(--spacing-md) var(--spacing-lg);
   font-family: var(--font-family-body);
 }
-```
+```typescript
 
 ### Usage in Tailwind Config
 
@@ -138,7 +138,7 @@ module.exports = {
     },
   },
 }
-```
+```typescript
 
 ---
 
@@ -165,7 +165,7 @@ For custom components that need class names beyond Tailwind utilities:
   <!-- Element with Modifier: .card__button -->
   <button class="card__button card__button--primary">Action</button>
 </div>
-```
+```typescript
 
 ### CSS Implementation
 
@@ -206,7 +206,7 @@ For custom components that need class names beyond Tailwind utilities:
   background: var(--color-secondary);
   color: white;
 }
-```
+```typescript
 
 ### BEM Advantages
 - Clear hierarchy and relationships
@@ -234,7 +234,7 @@ For custom components that need class names beyond Tailwind utilities:
 <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
   Responsive Heading
 </h1>
-```
+```typescript
 
 Renders as:
 - Mobile (0px): 1.25rem (20px)
@@ -272,7 +272,7 @@ Renders as:
     transition: none !important;
   }
 }
-```
+```typescript
 
 ---
 
@@ -294,7 +294,7 @@ body {
     color: #f0f0f0;
   }
 }
-```
+```typescript
 
 ### High Contrast Support
 
@@ -306,7 +306,7 @@ body {
     color: #fff;
   }
 }
-```
+```typescript
 
 ### Reduced Motion
 
@@ -318,7 +318,7 @@ body {
     transition: none !important;
   }
 }
-```
+```typescript
 
 ---
 
@@ -370,4 +370,4 @@ body {
 
 **Authority:** D4 (N-Document Approvals) | D3 (Design Authority)  
 **Last Updated:** 2026-11-09  
-**Related:** [N001: Design Token Reference](#) · [N009: Responsive Design Patterns](#) · [N002: Accessibility Checklist](#)
+**Related:** N001: Design Token Reference · N009: Responsive Design Patterns · N002: Accessibility Checklist

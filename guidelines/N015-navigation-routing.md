@@ -22,7 +22,7 @@ Define navigation patterns, URL structure, and routing conventions for ThisOneTi
 /about                         # About page
 /contact                       # Contact form
 /sitemap                       # Sitemap page
-```
+```typescript
 
 ### Query Parameters
 
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }) {
     },
   };
 }
-```
+```typescript
 
 ### Nested Layouts
 
@@ -63,7 +63,7 @@ app/
     layout.tsx            # Journal section layout
     [slug]/
       page.tsx            # Journal entry
-```
+```typescript
 
 ## Client-Side Navigation
 
@@ -79,7 +79,7 @@ import Link from 'next/link';
 <Link href="/about" className={isActive ? 'active' : ''}>
   About
 </Link>
-```
+```typescript
 
 ### useRouter Hook
 
@@ -94,7 +94,7 @@ router.replace('/login');
 
 // Refresh: revalidate data
 router.refresh();
-```
+```typescript
 
 ## Accessibility Requirements
 
@@ -126,7 +126,7 @@ export default function NotFound() {
     </div>
   );
 }
-```
+```typescript
 
 ### Redirect Handling
 
@@ -136,7 +136,7 @@ import { redirect } from 'next/navigation';
 if (!session) {
   redirect('/login?from=' + pathname);
 }
-```
+```typescript
 
 ## See Also
 

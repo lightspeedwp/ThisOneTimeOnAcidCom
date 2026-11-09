@@ -57,7 +57,7 @@ const { data, isLoading } = trpc.useTRPCQuery(['book.getById', bookId]);
 const { mutate } = trpc.useTRPCMutation('book.update', {
   onSuccess: () => trpc.invalidateQueries(['book.list']),
 });
-```
+```typescript
 
 ## State Boundaries
 

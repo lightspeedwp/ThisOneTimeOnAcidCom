@@ -11,7 +11,7 @@
 Mobile-first approach: base styles for mobile, override at breakpoints.
 
 | Breakpoint | Width | Device | Strategy |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Mobile | 320–640px | Phones | Base styles; 1-column layout |
 | Tablet | 641–1024px | Tablets | 2-column; larger touch targets |
 | Desktop | 1025–1440px | Desktops | 3+ columns; hover states |
@@ -42,7 +42,7 @@ body { font-size: 16px; padding: 1rem; }
 @media (orientation: landscape) {
   .mobile-hero { display: none; }
 }
-```
+```typescript
 
 ## Responsive Patterns
 
@@ -53,7 +53,7 @@ body { font-size: 16px; padding: 1rem; }
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
   {items.map(item => <Card key={item.id} {...item} />)}
 </div>
-```
+```typescript
 
 ### Navigation
 
@@ -65,7 +65,7 @@ body { font-size: 16px; padding: 1rem; }
     <li><Link href="/">Home</Link></li>
   </ul>
 </nav>
-```
+```typescript
 
 ### Hero Section
 
@@ -76,7 +76,7 @@ body { font-size: 16px; padding: 1rem; }
     Responsive Hero
   </h1>
 </div>
-```
+```typescript
 
 ---
 
@@ -96,10 +96,10 @@ a:focus-visible { outline: 2px solid blue; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; }
 }
-```
+```typescript
 
 ---
 
 **Authority:** D4 (N-Document Approvals)  
 **Last Updated:** 2026-11-09  
-**Related:** [N001: Design Token Reference](#) · [N004: CSS & Styling Guide](#)
+**Related:** N001: Design Token Reference · N004: CSS & Styling Guide

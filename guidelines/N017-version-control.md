@@ -13,9 +13,9 @@ Define Git workflow, branch naming conventions, commit standards, and pull reque
 
 ### Pattern
 
-```
+```typescript
 {type}/{scope}-{title}
-```
+```typescript
 
 ### Types
 
@@ -29,14 +29,14 @@ Define Git workflow, branch naming conventions, commit standards, and pull reque
 
 ### Examples
 
-```
+```typescript
 feat/book-detail-page          # New feature: book detail page
 fix/form-validation-error      # Bug fix: form validation
 docs/spec-001-governance       # Documentation: governance spec
 refactor/state-management      # Refactoring: state management
 test/book-service-coverage     # Test: increase coverage
 perf/image-optimization        # Performance: optimize images
-```
+```typescript
 
 ### Forbidden Prefixes
 
@@ -49,24 +49,24 @@ perf/image-optimization        # Performance: optimize images
 ```bash
 npm run validate:branch-name              # Validate current branch
 npm run validate:branch-name -- --branch feat/my-feature  # Validate specific branch
-```
+```typescript
 
 ## Commit Message Format
 
 ### Structure
 
-```
+```typescript
 {type}({scope}): {subject} — {brief rationale}
 
 {detailed explanation if needed}
 
 Relates to: TOA-{issue_number}
 Co-Authored-By: {contributor} <email>
-```
+```typescript
 
 ### Example
 
-```
+```typescript
 feat(book): Add book detail page with related recommendations
 
 Implements the book detail page showing full book information,
@@ -74,7 +74,7 @@ chapter preview, and related book recommendations based on genre.
 
 Relates to: TOA-123
 Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
-```
+```typescript
 
 ## Pull Request Workflow
 
@@ -101,7 +101,7 @@ Brief description of changes
 ## Related Issues
 Closes #123
 Relates to: TOA-456
-```
+```typescript
 
 ## Commit Best Practices
 
@@ -113,7 +113,7 @@ Relates to: TOA-456
 
 ### Commit Types
 
-```
+```typescript
 feat:     Add new feature
 fix:      Fix bug
 docs:     Documentation changes
@@ -122,7 +122,7 @@ refactor: Refactor existing code
 test:     Test additions/updates
 perf:     Performance improvements
 chore:    Maintenance, dependencies
-```
+```typescript
 
 ### Avoiding Issues
 
@@ -159,7 +159,7 @@ git checkout feat/my-feature
 git rebase origin/develop          # Rebase to keep history clean
 git push --force-with-lease        # Safe force push
 # Create PR and merge via GitHub UI
-```
+```typescript
 
 ### Develop → Main (Release)
 
@@ -169,7 +169,7 @@ git checkout main
 git merge --no-ff origin/develop   # Merge commit for release history
 git tag v1.2.3                     # Tag the release
 git push origin main --tags
-```
+```typescript
 
 ## Lefthook Pre-Commit Hooks
 
@@ -190,7 +190,7 @@ Bypass with caution: `git commit --no-verify` (not recommended)
 ```bash
 git restore path/to/file           # Discard uncommitted changes
 git restore --staged path/to/file  # Unstage a file
-```
+```typescript
 
 ### After Commit
 
@@ -198,7 +198,7 @@ git restore --staged path/to/file  # Unstage a file
 git revert HEAD                    # Create new commit that undoes last commit
 git reset --soft HEAD~1            # Undo last commit, keep changes staged
 git reset --hard HEAD~1            # Undo last commit, discard changes
-```
+```typescript
 
 ## See Also
 

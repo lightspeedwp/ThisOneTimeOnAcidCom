@@ -16,7 +16,7 @@ Media optimization strategy for This One Time On Acid:
 - Performance budgets and monitoring
 - Lazy loading and progressive enhancement
 
-**Related Guidelines:** See [N001: Design Token Reference](#) for visual style; see [N012: Performance Guidelines](#) for Core Web Vitals targets.
+**Related Guidelines:** See N001: Design Token Reference for visual style; see N012: Performance Guidelines for Core Web Vitals targets.
 
 ---
 
@@ -25,7 +25,7 @@ Media optimization strategy for This One Time On Acid:
 ### Format Selection Guide
 
 | Format | Best For | Pros | Cons |
-|--------|----------|------|------|
+| -------- | ---------- | ------ | ------ |
 | **WebP** | Modern browsers (90%+ support) | 25-35% smaller than JPEG/PNG | No IE11 support |
 | **AVIF** | Future standard (new browsers) | 50%+ smaller than JPEG | Limited browser support (≈80%) |
 | **JPEG** | Photographs, fallback | Universal support, small size | Lossy compression, no transparency |
@@ -35,7 +35,7 @@ Media optimization strategy for This One Time On Acid:
 
 ### Recommended Format Strategy
 
-```
+```typescript
 Photograph/Complex Image:
   Primary: AVIF (modern browsers)
   Fallback: WebP (modern browsers)
@@ -49,7 +49,7 @@ Animation:
   Primary: MP4 video (small, efficient)
   Fallback: WebP animation (if needed)
   Avoid: GIF (use MP4 instead)
-```
+```typescript
 
 ---
 
@@ -72,7 +72,7 @@ Animation:
   sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 800px"
   alt="Description"
 />
-```
+```typescript
 
 ### `<picture>` Element (Format Selection)
 
@@ -85,7 +85,7 @@ Animation:
   <!-- Fallback: JPEG -->
   <img src="photo.jpg" alt="Description" />
 </picture>
-```
+```typescript
 
 ### Responsive Images with Format Selection
 
@@ -110,7 +110,7 @@ Animation:
     alt="Hero"
   />
 </picture>
-```
+```typescript
 
 ---
 
@@ -142,7 +142,7 @@ avifenc --quality 75 photo.jpg photo.avif
 
 # Batch processing
 for f in *.jpg; do cwebp -quality 80 "$f" -o "${f%.jpg}.webp"; done
-```
+```typescript
 
 ---
 
@@ -161,7 +161,7 @@ for f in *.jpg; do cwebp -quality 80 "$f" -o "${f%.jpg}.webp"; done
   loading="lazy"
   alt="Lazy loaded responsive"
 />
-```
+```typescript
 
 ### Intersection Observer API
 
@@ -181,7 +181,7 @@ const imageObserver = new IntersectionObserver((entries, observer) => {
 });
 
 images.forEach(img => imageObserver.observe(img));
-```
+```typescript
 
 ### React Component Example
 
@@ -197,7 +197,7 @@ import Image from 'next/image';
   loading="lazy"
   quality={80}
 />
-```
+```typescript
 
 ---
 
@@ -205,23 +205,23 @@ import Image from 'next/image';
 
 ### CloudFlare CDN Setup
 
-```
+```typescript
 1. Add site to Cloudflare
 2. Enable Image Optimization in Cache Rules
 3. Set browser cache TTL: 1 month
 4. Set Cache Everything for images
 5. Enable WebP conversion (Automatic Platform Optimization)
 6. Monitor performance in Analytics
-```
+```typescript
 
 ### Image CDN Headers
 
-```
+```typescript
 Cache-Control: public, max-age=31536000
 Content-Type: image/webp
 Vary: Accept-Encoding
 ETag: "abc123"
-```
+```typescript
 
 ---
 
@@ -247,7 +247,7 @@ npx lighthouse https://site.com --output-path report.html
 
 # WebPageTest analysis
 # Visit https://webpagetest.org and enter URL
-```
+```typescript
 
 ---
 
@@ -255,7 +255,7 @@ npx lighthouse https://site.com --output-path report.html
 
 ### Build Process
 
-```
+```typescript
 Source Images (src/assets/)
   ↓
 [Resize for responsive breakpoints]
@@ -271,7 +271,7 @@ Optimized Images (public/images/)
 CDN Upload
   ↓
 Serve via CDN (optimized-cdn-url.com/...)
-```
+```typescript
 
 ### Automation Script
 
@@ -297,7 +297,7 @@ for img in src/assets/*.jpg; do
   cwebp -quality 85 "public/images/${base}-1200.jpg" -o "public/images/${base}-1200.webp"
   avifenc --quality 80 "$img" "public/images/${base}-1200.avif"
 done
-```
+```typescript
 
 ---
 
@@ -321,7 +321,7 @@ done
 <div id="diagram-description">
   [Detailed description of diagram components and relationships]
 </div>
-```
+```typescript
 
 ### Loading States
 
@@ -334,7 +334,7 @@ done
   alt="Photo"
   loading="lazy"
 />
-```
+```typescript
 
 ---
 
@@ -362,4 +362,4 @@ done
 
 **Authority:** D4 (N-Document Approvals) | D3 (Design Authority)  
 **Last Updated:** 2026-11-09  
-**Related:** [N001: Design Token Reference](#) · [N012: Performance Guidelines](#) · [N009: Responsive Design Patterns](#)
+**Related:** N001: Design Token Reference · N012: Performance Guidelines · N009: Responsive Design Patterns

@@ -24,7 +24,7 @@ body {
     color: #f5f5f5;
   }
 }
-```
+```typescript
 
 ## CSS Variables Strategy
 
@@ -48,7 +48,7 @@ body {
   color: var(--color-text);
   border-color: var(--color-border);
 }
-```
+```typescript
 
 ## Component Support
 
@@ -58,7 +58,7 @@ All components must support dark mode:
 <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
   Content automatically switches
 </div>
-```
+```typescript
 
 ## Contrast Verification
 
@@ -68,4 +68,4 @@ All color pairs must maintain 7:1 contrast in both light and dark modes (AAA).
 
 **Authority:** D4 (N-Document Approvals) | D3 (WCAG 2.2 AAA)  
 **Last Updated:** 2026-11-09  
-**Related:** [N001: Design Token Reference](#) · [N002: Accessibility Checklist](#)
+**Related:** N001: Design Token Reference · N002: Accessibility Checklist

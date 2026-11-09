@@ -22,7 +22,7 @@ const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 @media (prefers-color-scheme: dark) {
   // Dark mode styles
 }
-```
+```typescript
 
 ### Storage Strategy
 
@@ -32,7 +32,7 @@ localStorage.setItem('theme', 'dark'); // 'light', 'dark', or 'system'
 
 // Apply theme class to document element
 document.documentElement.setAttribute('data-theme', theme);
-```
+```typescript
 
 ### CSS Variables Implementation (N010)
 
@@ -68,7 +68,7 @@ document.documentElement.setAttribute('data-theme', theme);
   --color-border: #404040;
   --color-accent: #66b3ff;
 }
-```
+```typescript
 
 ## Component Dark Mode Status
 
@@ -123,7 +123,7 @@ document.documentElement.setAttribute('data-theme', theme);
 /* Borders & Dividers */
 --color-border: #e0e0e0;        /* Border color */
 --color-divider: #f0f0f0;       /* Divider color */
-```
+```typescript
 
 ### Dark Mode Palette
 
@@ -147,27 +147,27 @@ document.documentElement.setAttribute('data-theme', theme);
 /* Borders & Dividers */
 --color-border: #404040;        /* Border color */
 --color-divider: #2a2a2a;       /* Divider color */
-```
+```typescript
 
 ## Contrast Compliance (D3: WCAG 2.2 AAA)
 
 ### Light Mode Contrast Ratios
 
-```
+```typescript
 Text (primary): #1a1a1a on #ffffff = 18.5:1 ✅ (AAA)
 Text (secondary): #666666 on #ffffff = 5.3:1 ✅ (AAA)
 Accent: #0066cc on #ffffff = 8.6:1 ✅ (AAA)
 Border: #e0e0e0 on #ffffff = 1.1:1 ⚠️ (decorative only)
-```
+```typescript
 
 ### Dark Mode Contrast Ratios
 
-```
+```typescript
 Text (primary): #ffffff on #1a1a1a = 18.5:1 ✅ (AAA)
 Text (secondary): #cccccc on #1a1a1a = 10.7:1 ✅ (AAA)
 Accent: #66b3ff on #1a1a1a = 8.5:1 ✅ (AAA)
 Border: #404040 on #1a1a1a = 4.8:1 ✅ (AAA)
-```
+```typescript
 
 ## Testing Checklist
 
@@ -214,7 +214,7 @@ Border: #404040 on #1a1a1a = 4.8:1 ✅ (AAA)
   <svg><!-- Sun icon --></svg>
   <span class="sr-only">Current theme: light</span>
 </button>
-```
+```typescript
 
 ### JavaScript Handler
 
@@ -229,7 +229,7 @@ function toggleTheme() {
   // Announce change to screen readers
   announce(`Theme changed to ${next} mode`);
 }
-```
+```typescript
 
 ## Transition Animation
 
@@ -245,7 +245,7 @@ function toggleTheme() {
 .image {
   transition: none; /* No transition for images */
 }
-```
+```typescript
 
 ## Common Dark Mode Pitfalls
 
@@ -278,7 +278,7 @@ function toggleTheme() {
   const theme = localStorage.getItem('theme') || 'system';
   document.documentElement.setAttribute('data-theme', theme);
 </script>
-```
+```typescript
 
 ### Minimize CSS Duplication
 
@@ -290,7 +290,7 @@ function toggleTheme() {
   color: var(--color-text-primary);
   border: 1px solid var(--color-border);
 }
-```
+```typescript
 
 ## Monitoring
 
@@ -310,7 +310,7 @@ trackEvent('theme_toggle', {
   to: newTheme,
   manual: true,
 });
-```
+```typescript
 
 ## Phase 2 Implementation Status
 

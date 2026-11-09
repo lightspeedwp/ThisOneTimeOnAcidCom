@@ -22,7 +22,7 @@ By Ashley | Published November 2024
 **Progress: 45% Complete (Chapter 8 of 15)**
 
 [Resume Reading] [Start from Beginning] [Add to Reading List]
-```
+```typescript
 
 ### Book Overview
 
@@ -41,7 +41,7 @@ experience at an international music festival in Thailand.
 - Music and altered states
 
 **Word Count:** 52,000 | **Estimated Reading Time:** 6-8 hours
-```
+```typescript
 
 ### Table of Contents
 
@@ -61,20 +61,20 @@ Chapters 6-10: The journey, peaks and valleys, insights
 Chapters 11-15: Return, reflection, transformation
 
 [View Detailed Table of Contents]
-```
+```typescript
 
 ### Chapter Grid
 
 Grid view with chapter cards:
 
-```
+```typescript
 ┌──────────────┬──────────────┬──────────────┐
 │ Ch. 1        │ Ch. 2        │ Ch. 3        │
 │ Arrival      │ The Scene    │ Jungle Night │
 │ 8 pages      │ 12 pages     │ 14 pages     │
 │ [Read]       │ [Read]       │ [Read]       │
 └──────────────┴──────────────┴──────────────┘
-```
+```typescript
 
 ### Reading Progress
 
@@ -89,7 +89,7 @@ Grid view with chapter cards:
 ✓ Ch. 1-7: Complete
 ⟳ Ch. 8: In Progress (47% done)
 ○ Ch. 9-15: Not started
-```
+```typescript
 
 ### Reader Reviews (Optional)
 
@@ -101,7 +101,7 @@ Grid view with chapter cards:
 [Review 3 from reader]
 
 [Read All Reviews] [Write a Review]
-```
+```typescript
 
 ### Related Content
 
@@ -114,7 +114,7 @@ or additional perspective on book chapters.
 [Journal Preview] [Journal Preview] [Journal Preview]
 
 [Read Full Journal]
-```
+```typescript
 
 ## Responsive Behavior
 
@@ -158,7 +158,7 @@ interface BookMetadata {
   currentChapter: number;
   totalChapters: number;
 }
-```
+```typescript
 
 ### Chapter Card
 
@@ -171,7 +171,7 @@ interface ChapterCard {
   readingTime: number;
   lastRead?: Date;
 }
-```
+```typescript
 
 ## Accessibility Features (D3: WCAG 2.2 AAA)
 
@@ -189,13 +189,13 @@ interface ChapterCard {
 
 ### Primary Navigation
 
-```
+```typescript
 [Home] [Book] [Journal] [About] [Contact]
                 ↓
           [Reading Progress]
           [Chapter Grid]
           [Related Content]
-```
+```typescript
 
 ### Chapter Reading
 
@@ -243,7 +243,7 @@ interface ChapterCard {
   }
 }
 </script>
-```
+```typescript
 
 ## Content Sections
 
