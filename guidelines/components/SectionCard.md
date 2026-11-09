@@ -129,12 +129,12 @@ dark:border-purple-700       /* Solid purple borders */
 
 ### Accessibility Compliance
 
-## WCAG 2.1 AA Standards
+## WCAG 2.2 AAA Standards
 
 **Light Mode:**
 
 - Heading contrast: 7.02:1 (AAA ✅)
-- Body text contrast: 4.83:1 (AA ✅)
+- Body text contrast: 4.83:1 (AA ✅ — below AAA's 7:1 requirement for normal text)
 - Interactive elements: 4.5:1+ (AA ✅)
 
 **Dark Mode:**
@@ -243,8 +243,8 @@ When implementing SectionCard with dark mode:
 
 ### Related Documentation
 
-- **[colors.md](../design-tokens/colors.md)** - Complete color palette for both themes
-- **[dark-mode-implementation.md](../dark-mode-implementation.md)** - Full dark mode guide
+- **[colors.md](../design-tokens-reference.md)** - Complete color palette for both themes
+- **[css-architecture-reference.md](./css-architecture-reference.md)** - Full dark mode guide
 - **[component-dark-mode.md](../component-dark-mode.md)** - Component-specific patterns
 
 ---
@@ -381,8 +381,8 @@ focus:ring-opacity-50"
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
 
 ---
 

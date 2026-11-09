@@ -13,7 +13,7 @@ Provide consistent site-wide navigation with:
 - Desktop horizontal navigation
 - Mobile hamburger menu
 - Active page indication
-- Accessibility compliance (WCAG 2.1 AA)
+- Accessibility compliance (WCAG 2.2 AAA)
 - Sticky positioning for easy access
 - Focus management and keyboard navigation
 
@@ -677,8 +677,8 @@ useEffect(() => {
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[SITEMAP.md](../SITEMAP.md)** - Site navigation structure
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
 
 ---
 

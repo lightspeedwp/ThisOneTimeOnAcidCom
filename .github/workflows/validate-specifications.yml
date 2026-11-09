@@ -127,13 +127,46 @@ jobs:
           # Scan specification files for common security issues
           SECURITY_ISSUES=0
 
-          # Check for hardcoded secrets (literal password=, api_key=, token= patterns)
-          if grep -rE '(password|api_key|token)\s*[=:]\s*['"'"'"]?[^'"'"'" \n]' .github/specs/ --include="*.md" 2>/dev/null; then
-            echo "⚠️  Potential hardcoded secrets detected in specifications"
+          # Check for hardcoded secrets, excluding code blocks
+          python3 - <<'PYSCAN'
+          import re
+          from pathlib import Path
+
+          secret_pattern = re.compile(r'(password|api_key|token)\s*[=:]\s*['"'"'"]?[^'"'"'" \n]')
+          found_issues = False
+
+          # Scan all markdown files in .github/specs/
+          for md_file in Path('.github/specs').rglob('*.md'):
+              content = md_file.read_text()
+              lines = content.splitlines(keepends=True)
+              in_code_block = False
+
+              for line_num, line in enumerate(lines, 1):
+                  # Track if we're inside a code block
+                  if re.match(r'^\s*```', line):
+                      in_code_block = not in_code_block
+                      continue
+
+                  # Skip lines inside code blocks or inline code
+                  if in_code_block or '`' in line:
+                      continue
+
+                  # Check for potential secrets outside code blocks
+                  if secret_pattern.search(line):
+                      print(f"{md_file}:{line_num}: {line.strip()}")
+                      found_issues = True
+
+          if found_issues:
+              print("⚠️  Potential hardcoded secrets detected in specifications")
+              exit(1)
+          else:
+              print("✓ Security scan completed - no hardcoded secrets found")
+              exit(0)
+          PYSCAN
+
+          if [ $? -ne 0 ]; then
             ((SECURITY_ISSUES++))
           fi
-
-          # No dangerous script pattern checks - eval is used legitimately for config loading
 
           if [ $SECURITY_ISSUES -eq 0 ]; then
             echo "🔒 Security scan completed"

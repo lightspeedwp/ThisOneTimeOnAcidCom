@@ -97,3 +97,4 @@ Maps to `BlogPreviewSection.tsx`.
 1.  **Lock Templates:** Use full-site editing templates (`templates/index.html`) to enforce the layout.
 
 1.  **ACF Blocks:** For complex interactive components (like the "Neon vs Atomic Black" toggle or 3D books), wrap the React code in a custom ACF Block or use a Headless approach where WP just serves the JSON data.
+<!-- Archived: wordpress-block-patterns.md - Out of scope per D8 (WordPress not used in this site) -->

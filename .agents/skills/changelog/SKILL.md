@@ -120,6 +120,7 @@ https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/releases/tag/v1.0.0
 - [Semantic Versioning](https://semver.org/)
 - `CHANGELOG.md` – This project's changelog
 - `.agents/roles/changelog-agent.md` – Changelog management agent
+- `.github/specs/003-refactor-guidelines/spec.md` – Guidelines Refactor specification (consolidation entries)
 
 ---
 

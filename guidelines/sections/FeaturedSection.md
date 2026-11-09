@@ -134,7 +134,7 @@ className="
   max-w-2xl                                        // 672px max-width
   mx-auto
 ">
-Explore my latest makeup artistry from festivals, events, and creative
+Explore my latest creative storytellerry from festivals, events, and creative
 collaborations.
 </p>
 
@@ -500,7 +500,7 @@ mt-fluid-xl                        // Button margin
 
 ```text
 
-### Ash Shaw FeaturedSection
+### This One Time On Acid FeaturedSection
 
 ```tsx
 <section className="bg-gradient-to-br from-pink-100 to-purple-100 py-section
@@ -525,8 +525,8 @@ px-fluid-md">
 - **[overview-sections.md](../overview-sections.md)** - Section system overview
 - **[SliderCard.md](../components/SliderCard.md)** - Card component details
 - **[Lightbox.md](../blocks/Lightbox.md)** - Lightbox modal (EnhancedLightbox component)
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing tokens
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing tokens
 
 ---
 

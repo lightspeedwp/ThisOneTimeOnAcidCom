@@ -38,7 +38,7 @@ import { ScrollDownArrow } from './components/ui/ScrollDownArrow';
 function HeroSection() {
   return (
     <HeroLayout
-      title="Hi, I'm Ash Shaw"
+      title="Hi, I'm This One Time On Acid"
       subtitle="Makeup Artist & Creative"
     >
 <p className="text-body-guideline font-body text-center lg:text-left
@@ -246,7 +246,7 @@ justify-center bg-gradient-to-br from-purple-50 to-pink-50">
       <div className="text-center max-w-4xl px-6">
 <h1 className="text-hero-h1 font-title font-bold text-gradient-pink-purple-blue
 mb-fluid-md">
-          Hi, I'm Ash Shaw
+          Hi, I'm This One Time On Acid
         </h1>
 
         <p className="text-body-guideline font-body text-gray-700 mb-fluid-lg">
@@ -333,7 +333,7 @@ focus:ring-opacity-50 rounded-full p-2"
 // Proper ARIA labeling
 <ScrollDownArrow
   targetId="content"
-  ariaLabel="Scroll down to view featured makeup portfolio"
+  ariaLabel="Scroll down to view featured creative portfolio"
 />
 
 // With hidden text for screen readers
@@ -517,7 +517,7 @@ export function ScrollDownArrow({
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 
 ---
 

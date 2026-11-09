@@ -529,7 +529,7 @@ className="w-full sm:w-auto"
 
 ```text
 
-### Ash Shaw WhySection
+### This One Time On Acid WhySection
 
 ```tsx
 <section className="bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50
@@ -557,8 +557,8 @@ py-section px-fluid-md">
 - **[overview-sections.md](../overview-sections.md)** - Section system overview
 - **[ThreeColumnLayout.md](./ThreeColumnLayout.md)** - Layout wrapper component
 - **[ColorfulIcons.md](../components/ColorfulIcons.md)** - Custom icon components
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing tokens
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing tokens
 
 ---
 

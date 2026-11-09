@@ -5,6 +5,16 @@ All notable changes to the Ash Shaw Makeup Portfolio will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-11-09
+
+### Fixed
+
+- **Build configuration** — Removed conflicting Tailwind CSS plugin from vite.config.ts that was causing develop branch build failure
+- **Specification 003 Phase 3 verification documentation** — Updated T041 coverage manifest with complete 158-row reconciliation (116 G + 9 S + 33 N documents with proposed paths/destinations for deferred N030-N033 rows), normalized status values to T067 contract format (COMPLETE, PENDING, DEFERRED), and added D4/D8 decision citations. Created T068-path-scan.txt with reproducible static lexical path scan of all skill references. Updated requirements.md to reflect accurate validation state (T068 marked PENDING pending scenario exercise evidence). Phase 3 verification checkpoint documentation now complete.
+- **Specification 003 documentation finalization** — Resolved markdown linting errors (MD009 trailing whitespace) in spec.md and checklists/requirements.md for Phase 2 guidelines refactor implementation (PR #524)
+
+### Added
+
 ## [Unreleased]
 
 ### Added
@@ -26,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Specification 003: Guidelines Refactor (TOA-358)**
 
 - **Gate resolution D1–D8** — Recorded owner decisions for Guidelines Refactor specification: (D1) Balanced hybrid voice profile with 116 guidelines aligned; (D2) Hybrid publication boundaries with mixed content states; (D3) WCAG 2.2 AAA accessibility target with Ash Shaw as design authority; (D4) 29 of 33 N-documents approved for Phase 2 (N031–N033 deferred to Phase 3 per D8) with hybrid G→N consolidation strategy; (D5) Type 1/2/3 pointer strategy approved; (D6) Hybrid backend integration approach; (D8) WordPress out of scope (React/Next.js only). All decisions recorded in `.github/specs/003-refactor-guidelines/checklists/requirements.md` with evidence links. Phase 2 implementation blocked pending guidance on: (1) subfolder structure for guidelines/ (D4.a), (2) G→N consolidation mapping (D4.b), (3) pointer chain depth confirmation—currently 1-hop maximum per contract, user to confirm acceptable (D5.a), (4) archive location and reverse-link policy (D5.b), and (5) backend provider stack specification (D6)
+- **Phase 2 readiness validation** — Completed hash baseline verification for all 116 guidelines with reproducible evidence: `T021-baseline.sha256` manifest recorded with SHA-256 hashes for all 116 Markdown files, validation commands added to `T021-hash-validation.md` for reproducibility, specification coherence verified across `spec.md`, `tasks.md`, and `requirements.md`. Phase 2B remains blocked pending `locked-files-guard` approval (T017 gate) before beginning 116 guideline document edits
 
 ### Fixed
 
@@ -343,9 +354,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Theme file integration** — Extended components CSS automatically imported in `/styles/globals.css` alongside core dark theme
 - **Production-ready** — All components tested for cross-browser compatibility, keyboard navigation, screen reader support, and mobile responsiveness
 
-- **Light mode theme system** with comprehensive WCAG 2.2 accessibility compliance (100% AA, 92% AAA)
+- **Light mode theme system** targeting WCAG 2.2 accessibility compliance (verification in progress)
 - **ThemeToggleES5 component** (`/components/common/ThemeToggleES5.tsx`) — ES5-compliant theme toggle with sun/moon icons, keyboard accessibility (Enter/Space), localStorage persistence, and system preference detection
-- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; WCAG AAA compliant text (16.1:1 contrast)
+- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; high contrast text (16.1:1 contrast ratio achieved)
 - **Dark theme CSS** (`/styles/themes/dark.css`) — Existing dark mode formalized as separate theme file
 - **Enhanced ebook reader contrast** (`/styles/blocks/ebook-enhanced-contrast.css`) — Mobile readability improvements: body text contrast increased from 3.2:1 to 9.5:1 (dark mode) and 16.1:1 (light mode); heading contrast 12.6:1 (dark) and 21:1 (light)
 - **Theme toggle integration in Header** — ThemeToggleES5 component added to desktop header actions area
@@ -383,7 +394,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - BlogPage (v1.5.0) — Header boot → filters (0.4s)
   - ContactPage (v1.4.0) — Header boot → form grid (0.5s)
   - AnimationShowcasePage (v1.0.0) — Interactive demos at `/dev/animations`
-- **Accessibility:** 100% WCAG AAA compliant with full `prefers-reduced-motion` support
+- **Accessibility:** WCAG 2.2 AAA target with full `prefers-reduced-motion` support (verification in progress)
 - **Performance:** CSS-only animations (60fps, zero JavaScript overhead, +0.6KB minified)
 - **Documentation:**
   - Updated `/guidelines/Guidelines.md` to v8.4.0 with Animation System Implementation section
@@ -515,9 +526,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Theme file integration** — Extended components CSS automatically imported in `/styles/globals.css` alongside core dark theme
 - **Production-ready** — All components tested for cross-browser compatibility, keyboard navigation, screen reader support, and mobile responsiveness
 
-- **Light mode theme system** with comprehensive WCAG 2.2 accessibility compliance (100% AA, 92% AAA)
+- **Light mode theme system** targeting WCAG 2.2 accessibility compliance (verification in progress)
 - **ThemeToggleES5 component** (`/components/common/ThemeToggleES5.tsx`) — ES5-compliant theme toggle with sun/moon icons, keyboard accessibility (Enter/Space), localStorage persistence, and system preference detection
-- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; WCAG AAA compliant text (16.1:1 contrast)
+- **Light theme CSS** (`/styles/themes/light.css`) — Complete inverted color palette with darkened neon colors for readability on white backgrounds; high contrast text (16.1:1 contrast ratio achieved)
 - **Dark theme CSS** (`/styles/themes/dark.css`) — Existing dark mode formalized as separate theme file
 - **Enhanced ebook reader contrast** (`/styles/blocks/ebook-enhanced-contrast.css`) — Mobile readability improvements: body text contrast increased from 3.2:1 to 9.5:1 (dark mode) and 16.1:1 (light mode); heading contrast 12.6:1 (dark) and 21:1 (light)
 - **Theme toggle integration in Header** — ThemeToggleES5 component added to desktop header actions area
@@ -626,7 +637,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Incorrect default state** — Fixed `ThemeToggleES5` component default from `false` (light mode) to `true` (dark mode) to restore original neon aesthetic as default
   - **Full dark mode restoration** — Added all 8 neon colors at maximum brightness, atomic black backgrounds (#0F0F0F), high-contrast text (14.8:1 to 20.6:1 ratios), ebook reader dark mode (9.5:1 to 12.6:1 contrast), and comprehensive component styling for header, footer, buttons, cards, forms, links, code blocks, tables, scrollbar, modals, and text selection
   - **Theme persistence working** — Verified localStorage saves user preference and restores on page reload
-  - **WCAG compliance maintained** — Both modes achieve 100% WCAG 2.2 Level AA compliance (dark mode: 92% AAA, light mode: 100% AAA)
+  - **WCAG compliance targeted** — Both modes target WCAG 2.2 Level AA/AAA compliance (dark mode: 92% AAA verified; light mode verification in progress)
 
   **Build Error — Data URIs:**
   - **Bundler incompatibility fixed** — Commented out SVG grain texture data URIs in `/styles/globals.css` and `/styles/blocks/sitemap-page.css` (Figma Make bundler treats `url("data:image/...")` as npm package imports, causing HTTP 400 errors)

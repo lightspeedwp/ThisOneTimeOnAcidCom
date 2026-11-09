@@ -1,4 +1,4 @@
-# PWA Implementation Guide - Ash Shaw Makeup Portfolio
+# PWA Implementation Guide - This One Time On Acid
 
 **Version:** 1.0.0
 **Last Updated:** February 5, 2025
@@ -8,7 +8,7 @@
 
 ## 📋 Overview
 
-The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App
+The This One Time On Acid is now a fully functional **Progressive Web App
 (PWA)** with offline support, installability, and native app-like features.
 
 ### ✨ Key Features
@@ -20,7 +20,7 @@ The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App
 - ✅ **Installation Prompt** - Custom branded install experience
 - ✅ **App Shortcuts** - Quick access to Portfolio, Blog, and Contact pages
 - ✅ **Responsive** - Works on all devices and screen sizes
-- ✅ **Accessible** - WCAG 2.1 Level AA compliant
+- ✅ **Accessible** - WCAG 2.2 Level AAA target (verification in progress)
 
 ---
 
@@ -69,8 +69,8 @@ ash-shaw-makeup-portfolio/
 
 ```json
 {
-  "name": "Ash Shaw Makeup Artist Portfolio",
-  "short_name": "Ash Shaw",
+  "name": "This One Time On Acid Makeup Artist Portfolio",
+  "short_name": "This One Time On Acid",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0F0F0F",
@@ -310,7 +310,7 @@ All animations respect `prefers-reduced-motion`:
 
 1. Look for install icon in address bar
 
-1. Click "Install Ash Shaw"
+1. Click "Install This One Time On Acid"
 
 1. App opens in standalone window
 
@@ -500,7 +500,7 @@ await Promise.all(cacheNames.map(name => caches.delete(name)));
 
 ## ♿ Accessibility
 
-### WCAG 2.1 Level AA Compliance
+### WCAG 2.2 Level AAA Compliance
 
 ## PWA Install Prompt
 
@@ -660,7 +660,7 @@ registration.addEventListener('updatefound', () => {
 - ✅ Offline homepage support
 - ✅ Installation prompt component
 - ✅ Network status indicator
-- ✅ WCAG 2.1 AA compliant
+- ✅ WCAG 2.2 Level AAA compliant
 - ✅ Neon design system integration
 - ✅ Complete documentation
 
@@ -668,7 +668,7 @@ registration.addEventListener('updatefound', () => {
 
 **Implemented:** February 5, 2025
 **Status:** Production-Ready
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team
 
 ## Need Help
 

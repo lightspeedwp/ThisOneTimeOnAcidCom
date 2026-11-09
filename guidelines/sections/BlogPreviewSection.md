@@ -131,7 +131,7 @@ className="
   max-w-2xl                                        // 672px max-width
   mx-auto
 ">
-Insights, stories, and tips from my journey in makeup artistry, festivals, and
+Insights, stories, and tips from my journey in creative storytellerry, festivals, and
 creative exploration.
 </p>
 
@@ -613,7 +613,7 @@ p-fluid-md                         // Card padding
 
 ```text
 
-### Ash Shaw BlogPreviewSection
+### This One Time On Acid BlogPreviewSection
 
 ```tsx
 <section className="bg-white py-section px-fluid-md">
@@ -641,8 +641,8 @@ p-fluid-md                         // Card padding
 - **[overview-sections.md](../overview-sections.md)** - Section system overview
 - **[BlogCard.md](../components/BlogCard.md)** - Card component details (BlogPostCard)
 - **[ReadMoreButton.md](../components/ReadMoreButton.md)** - Read more button
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing tokens
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing tokens
 
 ---
 

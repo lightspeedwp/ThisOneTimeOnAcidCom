@@ -28,7 +28,7 @@ Every changelog must start with this exact header block:
 
 # Changelog
 
-All notable changes to the Ash Shaw Makeup Portfolio will be documented in this
+All notable changes to the This One Time On Acid will be documented in this
 file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
@@ -74,7 +74,7 @@ Group changes under these headings only. Use **exactly** these names:
 
 ### The `[Unreleased]` Section
 
-Always maintain an `[Unreleased]` section at the top of the changelog:
+Maintain an `[Unreleased]` section at the top of the changelog:
 
 ```markdown
 
@@ -163,7 +163,7 @@ changelog entry must be created.
 | **Never delete** | `CHANGELOG.md` is a protected root file — it must always exist |
 | **Never move** | It must remain at `/CHANGELOG.md` (project root) |
 | **Never rename** | The filename must always be `CHANGELOG.md` |
-| **Always update** | Every version bump must have a corresponding changelog entry |
+| **Update** | Every version bump should have a corresponding changelog entry |
 | **Append only** | Never remove or rewrite historical entries (corrections are acceptable) |
 
 ---

@@ -11,8 +11,9 @@ styling rules
 ## 1. Architecture Overview
 
 This project uses a **strict Semantic BEM (Block Element Modifier)** CSS
-architecture. Tailwind utility classes are **forbidden**. All styles are defined
-in dedicated CSS files within `/styles/`.
+architecture. Define all styles in dedicated CSS files within `/styles/` rather
+than Tailwind utility classes. This approach maintains consistency and
+architectural clarity.
 
 ### File Structure
 
@@ -72,7 +73,7 @@ independently loaded by the component that uses it.
 
 - **One CSS file per component/page** - e.g., `blog-page.css` for `BlogPage.tsx`
 - **No circular imports** - block files do NOT import `globals.css` (it's already loaded)
-- **No `@apply`** - Tailwind's `@apply` directive is forbidden
+- **No `@apply`** - Avoid Tailwind's `@apply` directive; use semantic BEM classes instead
 - **No `@import` in block files** - all tokens are available globally from `globals.css`
 
 ---
@@ -137,7 +138,7 @@ All dark mode styles use the `.dark` class selector on the `<html>` element:
 
 ### Rules
 
-- Every visible component **must** have a `.dark` variant
+- Provide `.dark` variants for all visible components for consistent dark mode support
 - Use `.dark .block` selector (space between `.dark` and the block)
 - Text colours use `-text` suffix tokens: `--neon-purple-text` (accessible in light), `--neon-purple` (bright in dark)
 - The `.dark` class is toggled on `<html>` by `ThemeToggle.tsx`
@@ -146,7 +147,7 @@ All dark mode styles use the `.dark` class selector on the `<html>` element:
 
 ## 5. Design Token Usage
 
-### Always Use Tokens
+### Use Design Tokens
 
 | Property | Token Pattern | Example |
 |----------|--------------|---------|
@@ -159,7 +160,7 @@ All dark mode styles use the `.dark` class selector on the `<html>` element:
 | Gradient | `--wp--preset--gradient--*` | `var(--wp--preset--gradient--cyberpunk)` |
 | Z-index | `--wp--preset--z-index--*` | `var(--wp--preset--z-index--header)` |
 
-### Never Hardcode
+### Avoid Hardcoding Values
 
 ```css
 /* BAD - hardcoded values */

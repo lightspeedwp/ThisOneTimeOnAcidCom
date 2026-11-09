@@ -80,7 +80,7 @@ Optimize images for mobile devices with:
   "
   sizes="100vw"
   src="/images/hero-tablet.webp"
-  alt="Ash Shaw makeup artist hero"
+  alt="This One Time On Acid creative storyteller hero"
   className="w-full h-auto"
 />
 
@@ -106,7 +106,7 @@ Optimize images for mobile devices with:
   {/* Desktop: Landscape */}
   <img
     src="/images/landscape-desktop.webp"
-    alt="Festival makeup portfolio"
+    alt="Festival creative portfolio"
     className="w-full h-auto"
   />
 </picture>
@@ -297,7 +297,7 @@ function HeroSection() {
             /hero-desktop-2560w.webp 2560w
           "
           sizes="100vw"
-          alt="Ash Shaw makeup artistry"
+          alt="This One Time On Acid creative storytellerry"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
           fetchpriority="high"
@@ -312,7 +312,7 @@ to-white" />
       <div className="relative z-10 flex items-center justify-center h-full px-6">
 <h1 className="text-4xl md:text-6xl font-title font-bold text-white
 text-center">
-          Ash Shaw
+          This One Time On Acid
         </h1>
       </div>
     </section>

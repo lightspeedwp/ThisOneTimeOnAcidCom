@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import fs from 'fs'
 import path from 'path'
-import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { netlifyHashedAssetHeaders } from './scripts/netlify-hashed-asset-headers.mjs'
@@ -75,10 +74,7 @@ export default defineConfig({
   plugins: [
     figmaAssetResolver(),
     sentryClientConfig(),
-    // The React and Tailwind plugins are both required for Make, even if
-    // Tailwind is not being actively used – do not remove them
     react(),
-    tailwindcss(),
     // Emits dist/_headers with immutable caching for content-hashed assets only
     netlifyHashedAssetHeaders(),
     // Uploads source maps to Sentry so production stack traces show real

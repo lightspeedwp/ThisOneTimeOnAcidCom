@@ -26,7 +26,7 @@ import { PullQuote } from '../../ui/PullQuote';
 
 <PullQuote
   quote="The kid who was made to feel small now makes other people feel radiant."
-  author="Ash Shaw"
+  author="This One Time On Acid"
   variant="center"
   neonColor="pink"
 />
@@ -64,7 +64,7 @@ component.
 - Uses semantic `<blockquote>` element
 - Decorative quotation mark is `aria-hidden="true"`
 - Author attribution uses `<cite>` element
-- WCAG AA color contrast in both light and dark modes
+- WCAG 2.2 AAA color contrast in both light and dark modes
 
 ## Migration from Manual Blockquotes
 

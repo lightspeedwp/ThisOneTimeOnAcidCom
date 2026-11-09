@@ -340,6 +340,7 @@ Invalid branch names cause:
 - `docs/BRANCH*NAMING*LOCAL.md` – Local developer quick reference
 - `scripts/validate-branch-name.js` – Validation script
 - `CONTRIBUTING.md` – Contribution workflow
+- `.github/specs/003-refactor-guidelines/spec.md` – Guidelines Refactor specification (uses `docs/spec-003-*` branches)
 
 ---
 

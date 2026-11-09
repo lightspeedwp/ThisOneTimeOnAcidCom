@@ -17,7 +17,7 @@ Provide modal dialog functionality with:
 - Customizable content and actions
 - Multiple size variants
 - Scroll handling for long content
-- WCAG 2.1 AA compliance
+- WCAG 2.2 AAA compliance
 
 ---
 
@@ -901,7 +901,7 @@ useEffect(() => {
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 
 ---
 

@@ -31,7 +31,7 @@ All Ebook styles use strict BEM and are split into specific files within
 - `ebook-navigation.css`: `.ebook-nav`, `.ebook-nav__button`.
 - `ebook-page-types.css`: `.ebook-page_*title`, `.ebook-page*_paragraph`.
 
-## Accessibility (WCAG 2.1 AA)
+## Accessibility (WCAG 2.2 AAA)
 
 - Uses `role="main"` and `role="region"` for key structural boundaries.
 - Uses `aria-live="polite"` on the reader region so screen readers announce page changes.

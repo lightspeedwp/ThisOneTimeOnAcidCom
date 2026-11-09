@@ -158,6 +158,7 @@ meta:has-pr
 - `CONTRIBUTING.md` → Label prefix requirements (repository-root-relative)
 - `.github/workflows/labeling-unified.yml` – existing read-only evidence of upstream label loading; do not modify protected automation
 - [GitHub Labeling](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels) – GitHub docs
+- `.github/specs/003-refactor-guidelines/spec.md` – Guidelines Refactor specification (labeling strategy for consolidation PRs)
 
 ---
 

@@ -1,7 +1,7 @@
 # Quickstart: Validate the Guidelines Refactor
 
 **Specification:** [Specification 003](./spec.md)  
-**Status:** Phase 1 Design Complete  
+**Status:** Phase 1 Design Complete\
 **Date:** 2026-10-24
 
 ---
@@ -17,7 +17,7 @@ It is NOT a step-by-step implementation guide. For implementation details, see [
 ## Prerequisites
 
 - [ ] Git repository cloned: `lightspeedwp/ThisOneTimeOnAcidCom`
-- [ ] Branch: `docs/spec-003-guidelines-reconcile` (validated)
+- [ ] Branch: `docs/spec-003-phase2-implementation` (validated)
 - [ ] All Phase 1 design artifacts generated (this directory)
 - [ ] Ready for owner decision session on D1–D8 gates
 

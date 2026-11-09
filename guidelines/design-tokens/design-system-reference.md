@@ -2,7 +2,7 @@
 
 **Version:** 9.0.0
 **Last Updated:** March 7, 2026
-**Project:** Ash Shaw Makeup Portfolio
+**Project:** This One Time On Acid
 
 ---
 
@@ -28,8 +28,8 @@
 
 ### Philosophy: Neon vs Atomic Black
 
-The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** visual
-identity that reflects the vibrant, energetic nature of makeup artistry and
+The This One Time On Acid uses a bold **Neon vs Atomic Black** visual
+identity that reflects the vibrant, energetic nature of creative storytellerry and
 Berlin techno culture.
 
 **Core Principle:** Pair neon colors against very dark backgrounds like
@@ -168,7 +168,7 @@ Turquoise `#2BD9C6`, Soft Navy Blue `#43318F`
 
 **Colors:** Deep Black `#040203`, Electric Green `#73EB1E`, Valentine `#EB1F5B`,
 Marine Blue `#157FD1`
-**Use Cases:** Editorial photography, makeup portfolios
+**Use Cases:** Editorial photography, creative portfolios
 **Mood:** Tribal, artistic, cultural
 
 #### Palette 8: Neon Gradient
@@ -430,8 +430,8 @@ Creates fluid, liquid motion.
 
 **Text Contrast:**
 
-- Never put thin white text directly over bright yellow or green gradients
-- Use dark overlay or keep text bold and black for readability
+- Avoid placing thin white text directly over bright yellow or green gradients — it reduces readability
+- Use a dark overlay or keep text bold and black for better contrast
 
 **Glow Animation:**
 
@@ -580,7 +580,7 @@ animations must respect `prefers-reduced-motion`.**
 
    - Spin, Float, Bounce, Swing
 
-**Full documentation:** See `/guidelines/design-tokens/animations.md`
+**Full documentation:** See `/guidelines/design-tokens-reference.md`
 
 ---
 
@@ -603,7 +603,7 @@ animations must respect `prefers-reduced-motion`.**
 
 ```text
 
-**Coding Standards:** See `/guidelines/prefers-reduced-motion.md` for complete
+**Coding Standards:** See `/guidelines/accessibility-checklist.md` for complete
 implementation guide.
 
 ---
@@ -685,7 +685,7 @@ body.light-mode .component {
 
 ## Full documentation
 
-- See `/guidelines/dark-mode-implementation.md` for complete system
+- See `/guidelines/css-architecture-reference.md` for complete system
 - See `/guidelines/component-dark-mode.md` for component-specific patterns
 
 ---
@@ -717,16 +717,16 @@ body.light-mode .component {
 
 **Color Contrast:**
 
-- Body text: 4.5:1 minimum (WCAG AA)
-- Dark mode achieves 7:1+ (WCAG AAA)
-- Always test neon colors against backgrounds
+- Body text: 7:1 minimum (WCAG 2.2 AAA)
+- Dark mode achieves 7:1+ (WCAG 2.2 AAA)
+- Test neon colors against backgrounds
 
 **Reduced Motion:**
 
 - All animations must have `prefers-reduced-motion` fallbacks
 - No motion for users who request reduced motion
 
-**Full compliance:** WCAG 2.1 Level AA — See
+**Full compliance:** WCAG 2.2 Level AAA — See
 `/guidelines/accessibility-report-feb-2025.md`
 
 ---
@@ -776,8 +776,8 @@ var(--wp--preset--spacing--80)  /* 80px */
 
 ---
 
-**This is a living document. Always verify token values in `/styles/globals.css`
+**This is a living document. Verify token values in `/styles/globals.css`
 for the most up-to-date implementation.**
 
 **Last Updated:** March 7, 2026
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team

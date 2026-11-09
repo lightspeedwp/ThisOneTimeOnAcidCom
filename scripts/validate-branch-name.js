@@ -70,7 +70,19 @@ function checkForbiddenPrefix(branch) {
   return null;
 }
 
+const BASE_BRANCHES = ['main', 'develop', 'staging', 'production'];
+
 function checkExemptions(branch) {
+  if (BASE_BRANCHES.includes(branch)) {
+    return new ValidationResult(
+      true,
+      branch,
+      `✅ Branch '${branch}' is a protected base branch and is exempt from naming conventions.`,
+      'exemption',
+      { pattern: 'base-branch', exemption: true }
+    );
+  }
+
   if (PATTERNS.dependabot.test(branch)) {
     return new ValidationResult(
       true,

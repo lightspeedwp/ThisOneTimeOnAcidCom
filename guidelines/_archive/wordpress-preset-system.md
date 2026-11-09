@@ -4,7 +4,7 @@
 **Last Updated:** January 2025
 
 Complete guide to the WordPress theme.json-aligned design token system for the
-Ash Shaw Makeup Portfolio.
+This One Time On Acid.
 
 ## 📋 Table of Contents
 
@@ -36,7 +36,7 @@ Ash Shaw Makeup Portfolio.
 
 ### Why WordPress Alignment
 
-The Ash Shaw Makeup Portfolio now follows WordPress theme.json preset standards
+The This One Time On Acid now follows WordPress theme.json preset standards
 to provide:
 
 - **Single Source of Truth:** Predictable, token-based design system
@@ -151,7 +151,7 @@ Shared label set for numeric scales:
 
 ### Current Color Scheme (Preserved)
 
-The existing Ash Shaw color palette remains unchanged:
+The existing This One Time On Acid color palette remains unchanged:
 
 **Brand Gradients:**
 
@@ -688,13 +688,14 @@ border-[width:var(--wp--custom--border-width--200)]">
 
 ## Related Documentation
 
-- **[colors.md](./design-tokens/colors.md)** - Complete color system
-- **[typography.md](./design-tokens/typography.md)** - Typography scale and hierarchy
-- **[spacing.md](./design-tokens/spacing.md)** - Spacing patterns and usage
+- **[colors.md](./design-tokens-reference.md)** - Complete color system
+- **[typography.md](./design-tokens-reference.md)** - Typography scale and hierarchy
+- **[spacing.md](./design-tokens-reference.md)** - Spacing patterns and usage
 - **[Guidelines.md](./Guidelines.md)** - Main design system guidelines
 
 ---
 
 **Last Updated:** January 2025
 **Version:** 1.0.0
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team
+<!-- Archived: wordpress-preset-system.md - Out of scope per D8 (WordPress not used in this site) -->

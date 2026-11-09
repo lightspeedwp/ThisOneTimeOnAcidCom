@@ -218,7 +218,7 @@ sm:items-center gap-4 mb-fluid-lg">
         <div>
           <h2 className="text-section-h2 font-heading font-semibold mb-2">Portfolio</h2>
           <p className="text-body-guideline font-body text-gray-600">
-            Explore my makeup artistry work
+            Explore my creative storytellerry work
           </p>
         </div>
 
@@ -518,7 +518,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 // ❌ WRONG - Layout switcher exists but doesn't affect content
 <LayoutSwitcher value={layout} onChange={setLayout} />
 <div className="grid grid-cols-3">
-  {/* Always grid, never list */}
+  {/* Grid layout, not list */}
 </div>
 
 ```text
@@ -550,6 +550,6 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 
 ---

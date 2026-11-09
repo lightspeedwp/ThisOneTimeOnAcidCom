@@ -238,7 +238,7 @@ onClick={() => onImageClick(currentIndex)}   // Open lightbox
 - Active dot is wider (w-6 vs w-2)
 - Inactive dots semi-transparent
 - Click to jump to specific image
-- Always visible (mobile + desktop)
+- Visible on mobile and desktop
 
 ---
 
