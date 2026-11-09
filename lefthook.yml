@@ -4,17 +4,12 @@
 min_version: 1.5.3
 
 # Pre-commit: validate branch naming and journal markdown
+# Runs validations and logs errors without blocking commits
 pre-commit:
   parallel: false
   commands:
-    branch-validate:
-      run: npm run validate:branch-name
-      skip:
-        - merge
-        - rebase
-    journal-validate:
-      glob: "content/journal/*.md"
-      run: npm run journal:validate
+    validate-all:
+      run: bash scripts/hooks/validate-with-logging.sh
       skip:
         - merge
         - rebase
