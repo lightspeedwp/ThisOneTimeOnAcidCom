@@ -12,12 +12,13 @@ import {
   getLastCommitAuthor,
   getLastCommitHash
 } from './git-merge-utils.js';
+import { vi } from 'vitest';
 
-jest.mock('child_process');
+vi.mock('child_process');
 
 describe('Git Merge Utilities', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     execFileSync.mockReset();
     spawnSync.mockReset();
   });

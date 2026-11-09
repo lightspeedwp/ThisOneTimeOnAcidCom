@@ -5,12 +5,13 @@
 
 import { execFileSync, spawnSync } from 'child_process';
 import * as gitUtils from './lib/git-merge-utils.js';
+import { vi } from 'vitest';
 
-jest.mock('child_process');
+vi.mock('child_process');
 
 describe('git-merge-utils', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('getBaseRef', () => {

@@ -18,9 +18,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+
 - Repository governance configuration now fetched from canonical `lightspeedwp/.github` (Phase 2 consolidation — v1.0.0 release verification)
 - CLAUDE.md updated to mark Phase 2 governance consolidation as complete
 - labeling-unified.yml workflow dynamically fetches labels and labeler configs from canonical org repository
+- **Unit test framework migration** — Migrated all 617 unit tests from Jest to Vitest 5.0.5 for improved ES module support and faster test execution. Fixed ESM module mocking using `vi.mock()` at module level, resolved process.exit global mocking with `vi.stubGlobal()`, and converted async test patterns from done() callbacks to Promise-based for Vitest compatibility. All tests pass with V8 coverage provider (consistent with Jest setup).
+
+### Fixed
+
+- **Specification 003 Phase 3 verification documentation** — Updated T041 coverage manifest with complete 158-row reconciliation (116 G + 9 S + 33 N documents with proposed paths/destinations for deferred N030-N033 rows), normalized status values to T067 contract format (COMPLETE, PENDING, DEFERRED), and added D4/D8 decision citations. Created T068-path-scan.txt with reproducible static lexical path scan of all skill references. Updated requirements.md to reflect accurate validation state (T068 marked PENDING pending scenario exercise evidence). Phase 3 verification checkpoint documentation now complete.
+- **Specification 003 documentation finalization** — Resolved markdown linting errors (MD009 trailing whitespace) in spec.md and checklists/requirements.md for Phase 2 guidelines refactor implementation (PR #524)
+
+### Added
+
+- **Sentry error monitoring** — Added `@sentry/react` and `@sentry/vite-plugin` with `src/instrument.ts` (errors, tracing, session replay with text masked), a `Sentry.ErrorBoundary` around the app, and route-based tracing via `wrapCreateBrowserRouterV7`. Source maps are uploaded at build time and then deleted from `dist/` only when `SENTRY_AUTH_TOKEN` is set. The root `netlify.toml` returns 404 for `/*.map` regardless of whether the token is set. New env vars `VITE_SENTRY_DSN`, `SENTRY_ORG`, `SENTRY_PROJECT` and `SENTRY_AUTH_TOKEN` are documented in `.env.example`
+
+**Agent and Workflow Orchestration Documentation**
+
+- **Agent inventory and workflow registry** — Added `.claude/agents/INVENTORY.md` documenting 20 agents with their capabilities, workflows, and shared tools; consolidated from scattered agent documentation for centralized reference
+- **Workflow orchestration skill** — Added `.claude/skills/workflow-orchestration/SKILL.md` defining audit, report generation, task tracking, and archival procedures with metadata requirements and file location standards
+- **Platform assessment guide** — Added `docs/ANTHROPIC_PLATFORMS.md` evaluating seven Anthropic platforms with current status, priorities, and roadmap for platform selection decisions
+- **Protected files guidance** — Added `.github/PROTECTED_FILES.txt` documenting canonical governance files and change request process for labels, issue types, and PR templates
+- **SpecKit configuration** — Added `.specify/init-options.json` setting feature directory to `.github/specs` for specification-first workflow
+
+### Removed
+
+- **Dependabot native auto-merge configuration** — Removed the native `auto-merge` configuration from `.github/dependabot.yml`. This property is no longer part of Dependabot's schema; automatic merging is now handled centrally by the `dependabot-auto-merge.yml` workflow
+
+**Specification 003: Guidelines Refactor (TOA-358)**
+
+- **Gate resolution D1–D8** — Recorded owner decisions for Guidelines Refactor specification: (D1) Balanced hybrid voice profile with 116 guidelines aligned; (D2) Hybrid publication boundaries with mixed content states; (D3) WCAG 2.2 AAA accessibility target with Ash Shaw as design authority; (D4) 29 of 33 N-documents approved for Phase 2 (N031–N033 deferred to Phase 3 per D8) with hybrid G→N consolidation strategy; (D5) Type 1/2/3 pointer strategy approved; (D6) Hybrid backend integration approach; (D8) WordPress out of scope (React/Next.js only). All decisions recorded in `.github/specs/003-refactor-guidelines/checklists/requirements.md` with evidence links. Phase 2 implementation blocked pending guidance on: (1) subfolder structure for guidelines/ (D4.a), (2) G→N consolidation mapping (D4.b), (3) pointer chain depth confirmation—currently 1-hop maximum per contract, user to confirm acceptable (D5.a), (4) archive location and reverse-link policy (D5.b), and (5) backend provider stack specification (D6)
+- **Phase 2 readiness validation** — Completed hash baseline verification for all 116 guidelines with reproducible evidence: `T021-baseline.sha256` manifest recorded with SHA-256 hashes for all 116 Markdown files, validation commands added to `T021-hash-validation.md` for reproducibility, specification coherence verified across `spec.md`, `tasks.md`, and `requirements.md`. Phase 2B remains blocked pending `locked-files-guard` approval (T017 gate) before beginning 116 guideline document edits
 
 ### Fixed
 
