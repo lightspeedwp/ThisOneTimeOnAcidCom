@@ -8,7 +8,6 @@ name: Claude Guard Tests
 on:
   pull_request:
     branches:
-      - develop
       - main
   # The documentation tells Owners to add this check to the required status
   # checks, and the rulesets carry a merge-queue rule. A check that only runs on
@@ -17,7 +16,6 @@ on:
   # batch enters the queue, which is where the check has to be reported.
   merge_group:
     branches:
-      - develop
       - main
 
 # Read-only: the tests only read the checkout and spawn local processes.

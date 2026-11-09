@@ -5,10 +5,29 @@ All notable changes to the Ash Shaw Makeup Portfolio will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.0] - 2026-11-09
 
 ### Fixed
 
+- **Build configuration** — Removed conflicting Tailwind CSS plugin from vite.config.ts that was causing develop branch build failure
+- **Specification 003 Phase 3 verification documentation** — Updated T041 coverage manifest with complete 158-row reconciliation (116 G + 9 S + 33 N documents with proposed paths/destinations for deferred N030-N033 rows), normalized status values to T067 contract format (COMPLETE, PENDING, DEFERRED), and added D4/D8 decision citations. Created T068-path-scan.txt with reproducible static lexical path scan of all skill references. Updated requirements.md to reflect accurate validation state (T068 marked PENDING pending scenario exercise evidence). Phase 3 verification checkpoint documentation now complete.
+- **Specification 003 documentation finalization** — Resolved markdown linting errors (MD009 trailing whitespace) in spec.md and checklists/requirements.md for Phase 2 guidelines refactor implementation (PR #524)
+
+### Added
+
+## [Unreleased]
+
+### Changed
+
+- Repository governance configuration now fetched from canonical `lightspeedwp/.github` (Phase 2 consolidation — v1.0.0 release verification)
+- CLAUDE.md updated to mark Phase 2 governance consolidation as complete
+- labeling-unified.yml workflow dynamically fetches labels and labeler configs from canonical org repository
+- **Unit test framework migration** — Migrated all 617 unit tests from Jest to Vitest 5.0.5 for improved ES module support and faster test execution. Fixed ESM module mocking using `vi.mock()` at module level, resolved process.exit global mocking with `vi.stubGlobal()`, and converted async test patterns from done() callbacks to Promise-based for Vitest compatibility. All tests pass with V8 coverage provider (consistent with Jest setup).
+- **Lefthook pre-commit and pre-push validation** — Configured hooks to log validation errors instead of blocking commits and pushes. Added wrapper scripts (`scripts/hooks/validate-with-logging.sh` and `scripts/hooks/validate-push-with-logging.sh`) that run all validations with timestamps logged to `logs/` directory. Both hooks exit successfully (exit 0) to allow Figma Make and other automation to proceed. Validation feedback is logged but non-destructive, enabling asynchronous review of issues without blocking workflow
+
+### Fixed
+
+- **Specification 003 Phase 3 verification documentation** — Updated T041 coverage manifest with complete 158-row reconciliation (116 G + 9 S + 33 N documents with proposed paths/destinations for deferred N030-N033 rows), normalized status values to T067 contract format (COMPLETE, PENDING, DEFERRED), and added D4/D8 decision citations. Created T068-path-scan.txt with reproducible static lexical path scan of all skill references. Updated requirements.md to reflect accurate validation state (T068 marked PENDING pending scenario exercise evidence). Phase 3 verification checkpoint documentation now complete.
 - **Specification 003 documentation finalization** — Resolved markdown linting errors (MD009 trailing whitespace) in spec.md and checklists/requirements.md for Phase 2 guidelines refactor implementation (PR #524)
 
 ### Added

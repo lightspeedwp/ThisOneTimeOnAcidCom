@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-25\
 **Scope:** Full site accessibility compliance audit (WCAG 2.2 AAA)  
-**Authority:** Ash Shaw (Design Authority per D3)  
+**Authority:** This One Time On Acid (Design Authority per D3)  
 **Status:** Audit Complete — Remediation Plan Active
 
 ---
@@ -76,4 +76,4 @@ Full accessibility audit of this-one-time-on-acid.com completed 2026-10-25 again
 ---
 
 **Next Review:** 2026-12-15  
-**Maintained by:** Ash Shaw (Design Authority)
+**Maintained by:** This One Time On Acid (Design Authority)

@@ -3,7 +3,7 @@
 **Version:** 7.0.0
 **Last Updated:** February 2026
 
-Complete blog filtering, search, and pagination system for the Ash Shaw
+Complete blog filtering, search, and pagination system for the This One Time On Acid
 Portfolio.
 
 ## Purpose

@@ -3,7 +3,7 @@
 **Version:** 4.0.0
 **Last Updated:** January 2025
 
-WordPress-aligned section patterns for the Ash Shaw Portfolio.
+WordPress-aligned section patterns for the This One Time On Acid.
 
 ## Purpose
 
@@ -42,7 +42,7 @@ Template (Page)
 
 ## Section Types
 
-The Ash Shaw portfolio uses **10 section types** organized by purpose. Each has
+The This One Time On Acid memoir uses **10 section types** organized by purpose. Each has
 detailed implementation guidelines.
 
 ### Content Sections
@@ -192,7 +192,7 @@ className="bg-black/50"
 
 ### Core Blocks Equivalent
 
-| Ash Shaw Section | WordPress Block | Purpose |
+| This One Time On Acid Section | WordPress Block | Purpose |
 |-----------------|-----------------|---------|
 | `HeroSection` | `core/cover` | Hero with background image/gradient |
 | `FeaturedSection` | `core/query` | Post/portfolio grid display |

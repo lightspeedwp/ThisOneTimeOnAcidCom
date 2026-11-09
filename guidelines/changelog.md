@@ -28,7 +28,7 @@ Every changelog must start with this exact header block:
 
 # Changelog
 
-All notable changes to the Ash Shaw Makeup Portfolio will be documented in this
+All notable changes to the This One Time On Acid will be documented in this
 file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),

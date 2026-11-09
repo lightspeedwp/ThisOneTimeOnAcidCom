@@ -4,7 +4,7 @@
 **Status:** Canonical Reference  
 **Last Updated:** 2026-10-25  
 **WCAG Reference:** WCAG 2.2 Level AAA  
-**Part of:** Ash Shaw Makeup Portfolio Design System
+**Part of:** This One Time On Acid Design System
 
 ---
 
@@ -319,7 +319,7 @@ All original files accessible as pointers to this canonical reference.
 ---
 
 **Last Updated:** 2026-10-25  
-**Maintained by:** Ash Shaw Portfolio Team  
+**Maintained by:** This One Time On Acid Portfolio Team  
 **Canonical Reference:** Yes  
 **Compliance Level:** WCAG 2.2 AAA  
 **N-Document ID:** N002 (Specification 003 - Guidelines Refactor)

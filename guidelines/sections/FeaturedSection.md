@@ -134,7 +134,7 @@ className="
   max-w-2xl                                        // 672px max-width
   mx-auto
 ">
-Explore my latest makeup artistry from festivals, events, and creative
+Explore my latest creative storytellerry from festivals, events, and creative
 collaborations.
 </p>
 
@@ -500,7 +500,7 @@ mt-fluid-xl                        // Button margin
 
 ```text
 
-### Ash Shaw FeaturedSection
+### This One Time On Acid FeaturedSection
 
 ```tsx
 <section className="bg-gradient-to-br from-pink-100 to-purple-100 py-section

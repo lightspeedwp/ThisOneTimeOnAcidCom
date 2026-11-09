@@ -53,7 +53,7 @@ Use this skill when:
 
 **Start here:** What are you doing?
 
-```
+```text
 Are you running an audit/investigation?
 ├─ YES → Continue below
 └─ NO → This skill may not apply; check specific domain skills
@@ -261,7 +261,7 @@ Single-file audits must also register their task lists in the master tracker for
 
 **Naming convention:** Lowercase, hyphens, descriptive folder
 
-```
+```text
 /prompts/modern-react-migration/           ← folder name
 ├── 00-ORCHESTRATOR.md                     ← always named 00-ORCHESTRATOR.md
 ├── 01-es5-react-audit.md                  ← sub-prompts numbered 01, 02, 03...
@@ -513,7 +513,7 @@ After task list entries have been in "Archived" section for 30 additional days (
 - Reason: (e.g., "Archived after 60-day retention period")
 
 **Example tombstone entry:**
-```
+```markdown
 | `/tasks/css-audit-tasks.md` | `/tasks/archived/css-audit-tasks.md` | **Deleted** | 2026-12-21 | Archived after 60-day retention |
 ```
 
@@ -525,7 +525,7 @@ After task list entries have been in "Archived" section for 30 additional days (
 
 ### Rule 1: Never Delete `/tasks/task-list.md`
 
-```
+```bash
 🚫 FORBIDDEN:
 rm /tasks/task-list.md
 git rm /tasks/task-list.md

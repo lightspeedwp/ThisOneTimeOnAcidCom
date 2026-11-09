@@ -2,7 +2,7 @@
 
 **Version:** 9.0.0
 **Last Updated:** March 7, 2026
-**Project:** Ash Shaw Makeup Portfolio
+**Project:** This One Time On Acid
 
 ---
 
@@ -28,8 +28,8 @@
 
 ### Philosophy: Neon vs Atomic Black
 
-The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** visual
-identity that reflects the vibrant, energetic nature of makeup artistry and
+The This One Time On Acid uses a bold **Neon vs Atomic Black** visual
+identity that reflects the vibrant, energetic nature of creative storytellerry and
 Berlin techno culture.
 
 **Core Principle:** Pair neon colors against very dark backgrounds like
@@ -168,7 +168,7 @@ Turquoise `#2BD9C6`, Soft Navy Blue `#43318F`
 
 **Colors:** Deep Black `#040203`, Electric Green `#73EB1E`, Valentine `#EB1F5B`,
 Marine Blue `#157FD1`
-**Use Cases:** Editorial photography, makeup portfolios
+**Use Cases:** Editorial photography, creative portfolios
 **Mood:** Tribal, artistic, cultural
 
 #### Palette 8: Neon Gradient
@@ -780,4 +780,4 @@ var(--wp--preset--spacing--80)  /* 80px */
 for the most up-to-date implementation.**
 
 **Last Updated:** March 7, 2026
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team

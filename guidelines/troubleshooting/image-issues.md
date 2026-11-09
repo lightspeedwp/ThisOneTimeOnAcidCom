@@ -481,7 +481,7 @@ If you must use Unsplash, use simple queries:
 
 ```tsx
 // ✅ CORRECT - Broad, simple queries
-const img1 = await unsplash_tool({ query: "makeup artist" });
+const img1 = await unsplash_tool({ query: "creative storyteller" });
 const img2 = await unsplash_tool({ query: "festival makeup" });
 const img3 = await unsplash_tool({ query: "colorful eyeshadow" });
 

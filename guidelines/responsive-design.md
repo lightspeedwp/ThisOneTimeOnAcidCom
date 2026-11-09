@@ -906,7 +906,7 @@ Desktop (1024px+):
 
 **Version:** 5.0.0 (Consolidated Layout Patterns + Breakpoint System)  
 **Last Updated:** 2026-10-25  
-**Maintained By:** Ash Shaw Portfolio Team
+**Maintained By:** This One Time On Acid Portfolio Team
 
 **Related Documentation:**
 - [Breakpoints System](./responsive/breakpoints-system.md) - Complete breakpoint reference

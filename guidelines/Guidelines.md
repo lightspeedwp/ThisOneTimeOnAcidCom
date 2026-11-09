@@ -1,14 +1,14 @@
-title: "Ash Shaw Makeup Portfolio – Design & Development Guidelines"
+title: "This One Time On Acid – Design & Development Guidelines"
 filename: "/guidelines/Guidelines.md"
 created: "2025-11-01"
 modified: "2026-03-12"
 version: "8.4.0"
 ---
 
-# 🎨 Ash Shaw Makeup Portfolio – Design & Development Guidelines
+# 🎨 This One Time On Acid – Design & Development Guidelines
 
 This document defines the core design, development, and technical guidelines for
-building and maintaining the Ash Shaw Makeup Portfolio in **Figma Make**. It
+building and maintaining This One Time On Acid (a memoir and creative-life-guide project) in **Figma Make**. It
 serves as the entry point to a comprehensive design system with detailed
 documentation organized in separate files.
 
@@ -577,8 +577,8 @@ is feature-complete.
 ### 🌟 Neon vs Atomic Black Visual Identity
 
 **Design Philosophy:**
-The Ash Shaw Makeup Portfolio uses a bold **Neon vs Atomic Black** design system
-that reflects the vibrant, energetic nature of makeup artistry.
+The This One Time On Acid uses a bold **Neon vs Atomic Black** design system
+that reflects the vibrant, energetic nature of creative storytellerry.
 
 **Core Elements:**
 
@@ -853,7 +853,7 @@ if (import.meta.env.DEV) {
 ---
 
 **Last Updated:** February 2026
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team
 
 ## Need Help
 

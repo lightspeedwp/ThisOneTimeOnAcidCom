@@ -26,7 +26,7 @@ import { PullQuote } from '../../ui/PullQuote';
 
 <PullQuote
   quote="The kid who was made to feel small now makes other people feel radiant."
-  author="Ash Shaw"
+  author="This One Time On Acid"
   variant="center"
   neonColor="pink"
 />

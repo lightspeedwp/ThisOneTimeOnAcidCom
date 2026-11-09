@@ -451,7 +451,7 @@ function HeroSection() {
         </div>
 
         <h1 className="text-hero-h1 font-title font-bold text-white mb-fluid-md">
-          Ash Shaw Makeup
+          This One Time On Acid Makeup
         </h1>
 
         <p className="text-section-h3 font-body text-white/90">

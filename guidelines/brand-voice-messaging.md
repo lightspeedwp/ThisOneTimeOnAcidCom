@@ -3,7 +3,7 @@
 **Version:** 1.0.0  
 **Status:** Canonical Reference  
 **Last Updated:** 2026-10-25  
-**Part of:** Ash Shaw Makeup Portfolio
+**Part of:** This One Time On Acid
 
 ---
 

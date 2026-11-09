@@ -32,7 +32,7 @@ value used in components must be imported from these files - never hardcoded.
       index.ts            # Barrel export
       featured.ts         # Featured portfolio entries
       festivals.ts        # Festival portfolio entries
-      uv-makeup.ts        # UV makeup portfolio entries
+      uv-makeup.ts        # UV creative portfolio entries
       nail-art.ts         # Nail art portfolio entries
       thailand.ts         # Thailand portfolio entries
       swiss-festivals.ts  # Swiss festival entries
