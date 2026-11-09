@@ -26,7 +26,7 @@ import { REASON_CODES, PROTECTED_BRANCHES, AVG_STORAGE_BYTES_PER_COMMIT } from '
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
-import { execFileSync } from 'child_process';
+import { execFileSync, spawnSync } from 'child_process';
 import { vi } from 'vitest';
 
 vi.mock('child_process');
@@ -1804,17 +1804,16 @@ describe('Storage calculation', () => {
 });
 
 describe('validateEnvironment', () => {
-  const { spawnSync } = require('child_process');
-  let originalProcessExit;
-
   beforeEach(() => {
     vi.clearAllMocks();
-    originalProcessExit = process.exit;
-    process.exit = vi.fn();
+    vi.stubGlobal('process', {
+      ...process,
+      exit: vi.fn()
+    });
   });
 
   afterEach(() => {
-    process.exit = originalProcessExit;
+    vi.unstubAllGlobals();
   });
 
   it('validates git repository successfully', () => {
@@ -1880,23 +1879,22 @@ describe('validateEnvironment', () => {
 });
 
 describe('main function', () => {
-  const { spawnSync } = require('child_process');
-  let originalProcessExit, originalLog, consoleLogSpy, consoleErrorSpy;
+  let consoleLogSpy, consoleErrorSpy;
   let tempDir;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    originalProcessExit = process.exit;
-    originalLog = console.log;
-    process.exit = vi.fn();
+    vi.stubGlobal('process', {
+      ...process,
+      exit: vi.fn()
+    });
     consoleLogSpy = vi.spyOn(console, 'log').mockImplementation();
     consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation();
     tempDir = createTempReportDir();
   });
 
   afterEach(() => {
-    process.exit = originalProcessExit;
-    console.log = originalLog;
+    vi.unstubAllGlobals();
     consoleLogSpy.mockRestore();
     consoleErrorSpy.mockRestore();
     if (tempDir) cleanupTempDir(tempDir);
@@ -1993,17 +1991,19 @@ describe('Invalid inactiveDays handling', () => {
 });
 
 describe('Guard check and error handler', () => {
-  const originalExit = process.exit;
   let consoleErrorSpy;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    process.exit = vi.fn();
+    vi.stubGlobal('process', {
+      ...process,
+      exit: vi.fn()
+    });
     consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation();
   });
 
   afterEach(() => {
-    process.exit = originalExit;
+    vi.unstubAllGlobals();
     consoleErrorSpy.mockRestore();
   });
 

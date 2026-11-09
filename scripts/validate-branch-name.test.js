@@ -561,14 +561,18 @@ describe('Branch Name Validation', () => {
 
     beforeEach(() => {
       execSync.mockReset();
-      vi.spyOn(process, 'exit').mockImplementation();
+      vi.stubGlobal('process', {
+        ...process,
+        exit: vi.fn(),
+        argv: process.argv
+      });
       vi.spyOn(console, 'log').mockImplementation();
       vi.spyOn(console, 'error').mockImplementation();
     });
 
     afterEach(() => {
       process.argv = originalArgv;
-      process.exit.mockRestore();
+      vi.unstubAllGlobals();
       console.log.mockRestore();
       console.error.mockRestore();
     });
