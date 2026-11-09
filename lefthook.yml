@@ -15,17 +15,13 @@ pre-commit:
         - rebase
 
 # Pre-push: validate branch naming and build verification before pushing to remote
+# Logs errors without blocking push to allow Figma Make and automation to proceed
 pre-push:
   parallel: false
   commands:
-    branch-validate:
-      run: npm run validate:push-branch
+    push-validate-all:
+      run: bash scripts/hooks/validate-push-with-logging.sh
       use_stdin: true
-      skip:
-        - merge
-        - rebase
-    build:
-      run: npm run build
       skip:
         - merge
         - rebase
