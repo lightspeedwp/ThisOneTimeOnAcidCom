@@ -255,7 +255,7 @@ operations and final active/archive/file counts must be reconciled separately.
 #### Total Accountability Target
 
 | Category | Coverage Rows | Pointer Accounting |
-| --- | --- | --- |
+|---|---|---|
 | G-Documents | 116 | Baseline G-path pointers included in these rows |
 | S-Documents | 9 | No additional pointer rows |
 | N-Documents | 33 | 29 approved + 4 deferred; approved N-path pointers included in these rows |

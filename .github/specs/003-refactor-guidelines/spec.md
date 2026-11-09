@@ -129,7 +129,7 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
 **Decision Cross-Reference:**
 
 | Question | Decision | Answer | Evidence |
-| ------ | ------ | ------ | ------ |
+|----------|----------|--------|----------|
 | Canonical book identity & voices | D1 | Balanced Hybrid (Professional + conversational) | requirements.md § D1 |
 | Manuscript visibility & boundaries | D2 | Mixed publication model; no hard separation | requirements.md § D2 |
 | Design authority & accessibility | D3 | Ash Shaw; WCAG 2.2 AAA target | requirements.md § D3 |
