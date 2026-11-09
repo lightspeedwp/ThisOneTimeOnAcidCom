@@ -23,6 +23,41 @@ created: "2026-10-25"
 - **[Phase]**: Phase 2 (Implementation) or Phase 3 (Verification)
 - All tasks include exact file paths and success criteria
 
+## ⚠️ EXECUTION ORDER ENFORCEMENT (Analysis 2026-11-09)
+
+**CRITICAL VIOLATION IDENTIFIED:** T022 (copy alignment edits) was executed OUT OF SEQUENCE before required prerequisite tasks:
+- ❌ T001–T004 (pre-implementation verification) — NOT COMPLETED BEFORE T022
+- ❌ T005–T007 (S-doc setup) — NOT COMPLETED BEFORE T022
+- ❌ T008–T014 (S-doc edits) — NOT COMPLETED BEFORE T022
+- ❌ T019–T021 (G-doc inventory validation) — NOT COMPLETED BEFORE T022
+
+**Consequence:** Breaks approval evidence trail; Phase 2 execution integrity compromised.
+
+**FROZEN EXECUTION ORDER (Must be strict):**
+```
+T001–T004 (Pre-verification) 
+  ↓ (GATE: All gates resolved)
+T005–T007 (S-doc setup)
+  ↓ (GATE: Setup complete)
+T008–T018 (S-doc edits + commit)
+  ↓ (GATE: S-docs approved & committed)
+T019–T021 (G-doc inventory)
+  ↓ (GATE: 116 guidelines verified)
+T022–T027 (G-doc edits)
+  ↓ (GATE: G-to-N mapping complete per D4.b)
+T028–T032 (N-doc creation)
+  ↓ (GATE: All N-docs created & verified)
+T033–T037 (Pointers & link validation)
+  ↓ (GATE: All links working)
+T038–T043 (Design verification & sign-off)
+```
+
+**Checkpoint Validation Required:** Before committing any Phase 2 changes, verify:
+- [ ] All prerequisite tasks in strict order completed
+- [ ] Decision gates (D0–D8) documented in checklists/requirements.md
+- [ ] No task skipped or executed out-of-order
+- [ ] Commit history shows task sequence (no interleaved work)
+
 ---
 
 ## Phase 1: Planning & Specification ✅ DESIGN ARTEFACTS COMPLETE
