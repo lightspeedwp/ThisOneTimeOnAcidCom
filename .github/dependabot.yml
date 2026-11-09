@@ -1,33 +1,17 @@
 version: 2
 
-# Dependabot configuration for ThisOneTimeOnAcidCom
+# DEPRECATED: Dependabot has been replaced by Renovate.
 #
-# NOTE: npm configuration is contingent on resolving the package-manager
-# conflict documented in AGENTS.md (Unresolved decision #1). README recommends
-# pnpm, but CONTRIBUTING.md, AGENTS.md and Netlify build command use npm.
-# See https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/306#L1
+# This file is retained for reference only. Renovate configuration is now
+# managed in .github/renovate.json, which extends the canonical configuration
+# from lightspeedwp/.github/renovate.json.
 #
-# If pnpm is confirmed as authoritative, replace the npm section below with:
+# Migration completed: 2026-11-09
+# See: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/TOA-451
 #
-#   - package-ecosystem: npm
-#     directory: "/"
-#     target-branch: develop
-#     schedule:
-#       interval: weekly
-#       day: monday
-#       time: "03:00"
-#       timezone: Africa/Johannesburg
-#     groups:
-#       npm-minor-patch:
-#         update-types:
-#           - minor
-#           - patch
-#     open-pull-requests-limit: 10
-#     labels:
-#       - area:dependencies
-#
+# Dependabot has been disabled below. No further updates are created.
 
-updates:
+updates: []
   # GitHub Actions — minor and patch grouped; major separate, daily
   - package-ecosystem: github-actions
     directory: "/"

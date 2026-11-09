@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "github>lightspeedwp/.github:renovate",
+    "config:base"
+  ],
+  "labels": [
+    "area:dependencies",
+    "area:ci"
+  ],
+  "npm": {
+    "postUpdateOptions": [
+      "npmDedupe"
+    ]
+  }
+}
