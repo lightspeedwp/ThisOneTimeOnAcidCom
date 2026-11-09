@@ -10,7 +10,7 @@ on:
       - 'tests/bash/**'
   push:
     branches:
-      - develop
+      - main
     paths:
       - '.github/specs/**'
       - '.github/workflows/validate-specifications.yml'
@@ -104,7 +104,7 @@ jobs:
           # fails on pre-existing debt in unrelated skill and plugin docs,
           # which this check must not gate on.
           mapfile -t CHANGED_MD < <(git diff --name-only --diff-filter=ACMR \
-            "$(git merge-base HEAD origin/develop)" HEAD -- '*.md' '*.mdx' \
+            "$(git merge-base HEAD origin/main)" HEAD -- '*.md' '*.mdx' \
             | while IFS= read -r file; do
                 [ -f "$file" ] && printf '%s\n' "$file"
               done)
