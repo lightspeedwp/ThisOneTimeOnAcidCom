@@ -21,7 +21,7 @@ Audit scope: Core pages and components (N023-N025 pages, N019-N022 patterns)
 ### Perceivable
 
 | Criterion | Status | Notes |
-|-----------|--------|-------|
+| ----------- | -------- | ------- |
 | 1.1.1 Non-text Content (A) | ✅ Planned | All images have descriptive alt text |
 | 1.3.1 Info and Relationships (A) | ✅ Planned | Semantic HTML, proper heading hierarchy |
 | 1.4.3 Contrast (Minimum) (AA) | ✅ Planned | 4.5:1 ratio for normal text, 3:1 for large text |
@@ -31,7 +31,7 @@ Audit scope: Core pages and components (N023-N025 pages, N019-N022 patterns)
 ### Operable
 
 | Criterion | Status | Notes |
-|-----------|--------|-------|
+| ----------- | -------- | ------- |
 | 2.1.1 Keyboard (A) | ✅ Planned | All functionality keyboard accessible |
 | 2.1.2 No Keyboard Trap (A) | ✅ Planned | Focus can leave all elements |
 | 2.4.3 Focus Order (A) | ✅ Planned | Focus order is logical |
@@ -41,7 +41,7 @@ Audit scope: Core pages and components (N023-N025 pages, N019-N022 patterns)
 ### Understandable
 
 | Criterion | Status | Notes |
-|-----------|--------|-------|
+| ----------- | -------- | ------- |
 | 3.1.1 Language of Page (A) | ✅ Planned | `<html lang="en">` specified |
 | 3.2.1 On Focus (A) | ✅ Planned | No unexpected focus behavior |
 | 3.3.4 Error Prevention (AA) | ✅ Planned | Form submissions reversible |
@@ -49,7 +49,7 @@ Audit scope: Core pages and components (N023-N025 pages, N019-N022 patterns)
 ### Robust
 
 | Criterion | Status | Notes |
-|-----------|--------|-------|
+| ----------- | -------- | ------- |
 | 4.1.2 Name, Role, Value (A) | ✅ Planned | Accessible labels, roles, states |
 | 4.1.3 Status Messages (AAA) | ✅ Planned | Status updates announced via aria-live |
 
@@ -59,49 +59,49 @@ Audit scope: Core pages and components (N023-N025 pages, N019-N022 patterns)
 
 **Status:** Designed for AAA Compliance
 
-```
+```typescript
 ✅ Image alt text: Descriptive scene description
 ✅ Heading hierarchy: h1 for main headline
 ✅ Text contrast: 7:1 (AAA) on overlay
 ✅ Keyboard: All buttons focusable and operable
 ✅ Focus indicator: Visible on CTA buttons
-```
+```typescript
 
 ### N019: Book Card Pattern
 
 **Status:** Designed for AAA Compliance
 
-```
+```typescript
 ✅ Image alt text: "{title} cover by {author}"
 ✅ Rating as text: "4.5 out of 5 stars"
 ✅ Keyboard navigation: All buttons accessible
 ✅ Focus order: Logical left-to-right, top-to-bottom
 ✅ Touch target: Buttons ≥44px (desktop), ≥48px (mobile)
-```
+```typescript
 
 ### N021: Value Proposition Pattern
 
 **Status:** Designed for AAA Compliance
 
-```
+```typescript
 ✅ Heading hierarchy: h2 for section, h3 for benefits
 ✅ Text contrast: 7:1 (AAA)
 ✅ Icon alt text: aria-label or inline description
 ✅ Focus order: Logical card traversal
 ✅ No color-only meaning: Icons + text labels
-```
+```typescript
 
 ### N023: README Page
 
 **Status:** Designed for AAA Compliance
 
-```
+```typescript
 ✅ Skip link: "Skip to main content"
 ✅ Semantic HTML: nav, main, article landmarks
 ✅ Heading hierarchy: h1 (page), h2 (sections), h3 (cards)
 ✅ Form validation: Error messages linked via aria-describedby
 ✅ Screen reader: Descriptive link text, no "click here"
-```
+```typescript
 
 ## Testing Methodology
 
@@ -116,7 +116,7 @@ npx axe-core --include accessibility-patterns
 
 # WAVE browser extension validation
 # (Manual testing in browser)
-```
+```typescript
 
 ### Manual Testing
 
@@ -150,7 +150,7 @@ All components designed to WCAG 2.2 AAA standards. Remediation happens during im
 
 ### Keyboard Navigation Test
 
-```
+```typescript
 Steps:
 1. Unplug mouse / disable trackpad
 2. Use Tab to navigate all interactive elements
@@ -159,11 +159,11 @@ Steps:
 5. Use arrow keys for carousel/tab navigation
 6. Verify focus is always visible
 7. Verify focus order is logical
-```
+```typescript
 
 ### Screen Reader Test (NVDA/JAWS)
 
-```
+```typescript
 Steps:
 1. Enable screen reader
 2. Navigate page with arrow keys
@@ -172,11 +172,11 @@ Steps:
 5. Verify form labels are associated
 6. Verify skip links work
 7. Verify landmark regions announced
-```
+```typescript
 
 ### Color Contrast Test
 
-```
+```typescript
 Steps:
 1. Use WebAIM Contrast Checker
 2. Test all text colors against backgrounds
@@ -184,7 +184,7 @@ Steps:
 4. Verify ≥7:1 for AAA (normal text)
 5. Verify ≥4.5:1 for large text
 6. Test in light and dark modes
-```
+```typescript
 
 ## Ongoing Compliance
 
