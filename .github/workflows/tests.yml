@@ -117,10 +117,18 @@ jobs:
             npx vitest run --reporter=json --outputFile=jest-report.json --coverage=false || test_status=$?
           fi
 
-          jq -r '"suites=\(.numTotalTestSuites // .testResults | length) failed=\(.numFailedTests // 0)"' \
-            jest-report.json 2>/dev/null || echo "::warning::No test report was written"
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] \
-            && { [ "$test_status" -ne 0 ] || [ ! -s jest-report.json ]; }; then
+          # Report summary and detect empty suites
+          num_suites=$(jq '.numTotalTestSuites // (.testResults | length)' jest-report.json 2>/dev/null || echo 0)
+          num_failed=$(jq '.numFailedTests // 0' jest-report.json 2>/dev/null || echo 0)
+          echo "Test summary: suites=${num_suites} failed=${num_failed}"
+
+          # Fail if:
+          # 1. Test runner crashed ($test_status != 0) AND
+          #    - Explicit failure requested (workflow_dispatch), OR
+          #    - No report generated, OR
+          #    - Suite discovered no tests
+          if [ "$test_status" -ne 0 ] && { [ "$EVENT_NAME" = "workflow_dispatch" ] || [ ! -s jest-report.json ] || [ "$num_suites" -eq 0 ]; }; then
+            echo "::error::Test runner failed or no tests discovered"
             exit 1
           fi
 
