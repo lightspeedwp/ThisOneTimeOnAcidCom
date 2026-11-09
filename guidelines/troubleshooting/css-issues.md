@@ -3,7 +3,7 @@
 **Version:** 1.0.0
 **Last Updated:** January 2025
 
-Common CSS styling issues and their solutions for the Ash Shaw Makeup Portfolio.
+Common CSS styling issues and their solutions for the This One Time On Acid.
 
 ## 📋 Table of Contents
 
@@ -141,7 +141,7 @@ Using mid-tone purple colors that don't have enough contrast.
   Hard to read text
 </p>
 
-// ✅ CORRECT - High contrast (passes WCAG AA)
+// ✅ CORRECT - High contrast (passes WCAG 2.2 AAA)
 <p className="text-gray-700 dark:text-purple-100">
   Readable text
 </p>
@@ -159,7 +159,7 @@ Using mid-tone purple colors that don't have enough contrast.
 
 1. Use Chrome DevTools Lighthouse
 
-1. Check for WCAG 2.1 AA compliance (4.5:1 minimum)
+1. Check for WCAG 2.2 AAA compliance (7:1 minimum)
 
 1. Test with actual users in both modes
 
@@ -281,7 +281,7 @@ Using fixed font sizes instead of fluid typography classes.
 
 **When to Use:**
 
-- Always use fluid classes for headings
+- Use fluid classes for headings
 - Use fluid classes for body text in hero/large sections
 - Can use fixed sizes for small UI elements (buttons, labels)
 
@@ -429,7 +429,7 @@ If you discover a CSS issue:
 
 ```text
 
-1. **Always include dark mode variants**
+1. **Include dark mode variants**
 
    ```tsx
    <div className="bg-white dark:bg-purple-900">
@@ -539,13 +539,13 @@ When CSS isn't working as expected:
 ## Related Documentation
 
 - [Guidelines.md](../Guidelines.md) - Main guidelines
-- [dark-mode-implementation.md](../dark-mode-implementation.md) - Dark mode guide
-- [design-tokens/spacing.md](../design-tokens/spacing.md) - Spacing system
-- [design-tokens/colors.md](../design-tokens/colors.md) - Color palette
-- [design-tokens/typography.md](../design-tokens/typography.md) - Typography scale
+- [css-architecture-reference.md](./css-architecture-reference.md) - Dark mode guide
+- [design-tokens-reference.md](./design-tokens-reference.md) - Spacing system
+- [design-tokens-reference.md](./design-tokens-reference.md) - Color palette
+- [design-tokens-reference.md](./design-tokens-reference.md) - Typography scale
 
 ---
 
 **Last Updated:** January 2025
 **Version:** 1.0.0
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team

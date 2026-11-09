@@ -1,6 +1,9 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
+import * as Sentry from "@sentry/react";
 import { RootLayout } from "./components/common/RootLayout";
+
+var sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouterV7(createBrowserRouter);
 
 function lazyPage(loader: () => Promise<any>, name: string) {
   return lazy(() => loader().then((m) => ({ default: m[name] })));
@@ -51,4 +54,4 @@ var routeConfig = [
   }
 ];
 
-export var router = createBrowserRouter(routeConfig);
+export var router = sentryCreateBrowserRouter(routeConfig);

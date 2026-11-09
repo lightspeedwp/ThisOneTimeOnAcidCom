@@ -1,129 +1,52 @@
-# Sub-audit 7: Ebook enrichment & chapter connections
+# Manuscript enrichment evidence and editorial review
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Report:** `/reports/content-expansion-phase8/07-ebook-enrichment.md`
+## 1. Objective
 
----
+Assess current manuscript structure and editorial opportunities without inventing memoir or expanding to a numeric quota.
 
-## Objective
+## 2. Inputs and scope
 
-Extend the ebook with new chapters based on topics that don't have dedicated
-coverage yet. Polish existing unfinished/rough chapters to match the quality of
-the best chapters. Strengthen cross-chapter narrative connections so the book
-reads as a cohesive story, not disconnected essays.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current content/data/type inventories, registered routes and author-approved sources. Confirm scope before assessing historical expansion requests; do not use their target totals as present facts.
 
-## Current state
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-**File:** `/data/mock/pages/ebook-pages.ts`
+## 3. Audit steps
 
-- 82 pages across 20 chapters + 2 appendices
-- Part 1: The foundations (chapters 1–5)
-- Part 2: The art (chapters 6–10)
-- Part 3: The life (chapters 11–15)
-- Part 4: The future (chapters 16–20)
-- Appendix A: The stock phrases
-- Appendix B: The tribes
+1. Census actual front matter, parts, chapters, back matter and appendices from authoritative manuscript sources. Reconcile historical claims of 82, 107 or other totals and reader-derived pages by definition; do not enforce contradictory arithmetic.
 
----
+2. Assess dedication, epigraph, contents, foreword, narrative hooks/closings, transitions, repetition and cross-chapter threads. Check current outline and source support before proposing any addition or reordering.
 
-## Step 1: Identify and polish rough chapters
+3. Preserve useful historical topic questions: Paarl/ADHD, cycling, Vortex/Solipse, costumes, LightSpeed, islands, Six Cats, Berlin/bicycle/UV experiences, pilgrimage/freedom and cumulative-effect threads; tribes, afterword, biography and back cover. These are editorial leads, not permission to assert lived events.
 
-Scan every chapter for:
+4. Assess proposed chapters 21–24 and ambidextrous kit, AI and grading material only against the current outline and author evidence. No automatic chapter creation, padding, invented sensory scenes, quotations or emotional recollections.
 
-1. **Incomplete sections** — Chapters that end abruptly or have placeholder-quality content
+5. Check manuscript-to-reader dependencies with the canonical ebook audit, including numbering, TOC/ordering and page assembly. Unicode handling depends on file type and consumer; do not force escaped text into ordinary Markdown.
 
-1. **Disconnected anecdotes** — Stories added in Phase 7 that aren't woven into the narrative flow
+6. Return an editorial/source matrix, supported exact excerpts when requested and unresolved author decisions. Do not write manuscript, mock data, routes or reader configuration.
 
-1. **Voice inconsistencies** — Sections that read like reference material instead of memoir prose
+## 4. Missing evidence and permission boundaries
 
-1. **Missing transitions** — Chapters that don't flow naturally from the previous one
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-1. **Repetition** — Stories or phrases duplicated across chapters (some was fixed in Phase 7 P2 polish, but check for remaining issues)
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-### Polish priorities
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-- Each chapter should have a strong opening line (hook the reader)
-- Each chapter should have a reflective closing paragraph (land the lesson)
-- Anecdotes should serve the chapter's theme, not just fill space
-- Cross-references to other chapters should feel organic ("This connects to what happened at Solipse — but that's Chapter 5's story")
+## 5. Success criteria
 
----
+- [ ] Each factual/content proposal has provenance, relevance and a verified current destination.
+- [ ] Historical quotas and invented metadata are not substituted for genuine source material.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-## Step 2: Add new chapters
+## 6. Report output
 
-Based on ebook content gaps and the brief's suggestions, create new chapters for
-these topics:
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-### Proposed new chapters
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-| Chapter | Title (sentence case) | Part | Topic |
-|---|---|---|---|
-| 21 | "The ambidextrous artist" | Part 2 (The art) | How and why Ash learned to paint with both hands. The ADHD connection. The festival necessity. The technique development. |
-| 22 | "The festival kit" | Part 3 (The life) | Everything that goes on the bike. The evolution of the kit over years. The checklist system. The philosophy of travelling light. |
-| 23 | "The AI workflow" | Part 4 (The future) | How AI transformed LightSpeed and Ash's creative process. GitHub Copilot, ChatGPT, Claude, MCP. The mentoring of the team. |
-| 24 | "The grading system" | Appendix C | Six Cats grading: Quads, Topshelf, Standard, Preground, Budget. The craft of cultivation. |
+## 7. Revision provenance
 
-### Content sourcing for new chapters
-
-- **Ambidextrous painting:** `/docs/website-content.md` (ADHD section — "Adapting to chaos isn't a learned skill for ADHD brains; it's native"), ebook Part 2 existing content
-- **Festival kit:** `/docs/website-content.md` (cycling section — touring kit, packing checklist system, 40kg bike), ebook Chapter 9 (cycling)
-- **AI workflow:** `/docs/website-content.md` (LightSpeed AI & Modern Workflow section, internship program, team mentoring)
-- **Grading system:** `/docs/website-content.md` (Six Cats grading system — Quads through Budget blend)
-
-### Chapter structure template
-
-Each new chapter should have:
-
-- 3–5 pages (consistent with existing chapter lengths)
-- Strong opening hook (first line grabs attention)
-- 2–3 anecdotes woven into the theme
-- Cross-references to related chapters
-- Reflective closing that connects to the book's central thesis ("The cumulative effect")
-
----
-
-## Step 3: Strengthen cross-chapter connections
-
-Build a narrative thread map showing how chapters connect. Then add organic
-cross-references.
-
-### Connection examples
-
-- Ch 1 (The first drop) → Ch 21 (Ambidextrous artist): "The hands that first picked up paint in Chapter 1 would learn to work together in ways I never expected"
-- Ch 3 (Berlin calling) → Ch 22 (Festival kit): "Berlin taught me to travel light — the kit evolved from there"
-- Ch 9 (Two wheels) → Ch 22 (Festival kit): "The bike dictates the kit. Everything must fit in the panniers"
-- Ch 16 (The WordPress journey) → Ch 23 (AI workflow): "The tools changed, but the philosophy didn't — build it right, build it once"
-- Ch 15 (Six Cats) → Ch 24 (Grading system): "The craft isn't just in the growing — it's in knowing what you've grown"
-
-### Implementation
-
-- Add 1–2 subtle cross-reference lines per chapter where natural
-- Never force connections — if it doesn't flow, don't add it
-- Use callbacks: "Remember the loaded bike from Chapter 9? That's where this story starts..."
-
----
-
-## Step 4: Update metadata
-
-After adding new chapters:
-
-1. Update page numbers across ALL chapters
-
-1. Update the table of contents / chapter index
-
-1. Update any chapter count references in the ebook UI data
-
-1. Verify total page count
-
----
-
-## Output
-
-- **Report:** `/reports/content-expansion-phase8/07-ebook-enrichment.md` with:
-- Rough chapters identified and polish changes made
-- New chapters created (title, page count, part assignment)
-- Cross-chapter connections added (source → target, line added)
-- Updated total: chapters, pages, parts
-- Any content gaps remaining for future phases
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-expansion-phase8/07-ebook-enrichment.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

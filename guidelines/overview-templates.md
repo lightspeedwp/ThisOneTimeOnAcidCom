@@ -3,7 +3,7 @@
 **Version:** 4.0.0
 **Last Updated:** January 2025
 
-WordPress-aligned page templates for the Ash Shaw Portfolio.
+WordPress-aligned page templates for the This One Time On Acid.
 
 ## Purpose
 
@@ -145,7 +145,7 @@ Template (Full Page)
 
 ## Template Categories
 
-The Ash Shaw portfolio uses **7 page templates** organized by category. Each has
+The This One Time On Acid portfolio uses **7 page templates** organized by category. Each has
 detailed implementation guidelines.
 
 ### Marketing Pages
@@ -198,7 +198,7 @@ export function PageTemplate({ setCurrentPage }: Props) {
 
 ## WordPress Template Alignment
 
-| Ash Shaw Template | WordPress Template | Purpose |
+| This One Time On Acid Template | WordPress Template | Purpose |
 |------------------|-------------------|---------|
 | `HomePage.tsx` | `front-page.html` | Home/landing page |
 | `AboutPage.tsx` | `page-about.html` | About page |

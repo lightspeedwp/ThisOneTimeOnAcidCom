@@ -6,8 +6,43 @@ organisation-wide guidance first:
 [lightspeedwp/.github/CLAUDE.md](https://github.com/lightspeedwp/.github/blob/develop/CLAUDE.md)
 > -
 [lightspeedwp/.github/AGENTS.md](https://github.com/lightspeedwp/.github/blob/develop/AGENTS.md)
-> - [Repository Root AGENTS.md](../../AGENTS.md) — Follow these rules for all
+> - [Repository Root AGENTS.md](AGENTS.md) — Follow these rules for all
 work in this session
+
+## Shared custom skills and roles
+
+Custom skills in `.claude/skills/` link to `.agents/skills/`. Native agent
+files in `.claude/agents/` load the canonical instructions in `.agents/roles/`.
+Edit the shared source for behaviour changes. Keep Spec Kit-generated skills
+in their existing locations. See `.agents/README.md` for the layout.
+
+## Dependency loading and verification limits
+
+The twenty native adapters read their shared role from the repository root;
+eight relevant roles now explicitly load required or conditional skills before
+action. STOP for missing required sources. Skill loading does not approve
+repair, installing dependencies, committing, remote changes or deployment.
+
+Preserve all six individual Claude skill symlinks and the ten installer-owned
+Claude Spec Kit skill files. Do not replace the whole skills directory with a
+symlink or point generated Claude skills at Codex-generated files. Keep native
+slash-command syntax and argument handling. Frontmatter and prose budgets do
+not establish permission equivalence with other clients.
+
+Workflow safety sections describe instruction contracts, not host-enforced
+write guards. Analyze/converge use non-persisting prerequisite resolution;
+converge appends only an approved block after snapshot/branch/path revalidation.
+See `.agents/README.md` for runtime and executable-enforcement limits.
+
+## Branch check before work
+
+Follow `AGENTS.md` → **Branch check before every task** before editing files,
+including when invoking Spec Kit skills. Use Ash's exact supplied or approved
+branch name, validate it before creation and validate the checked-out branch
+before edits. Read `.agents/skills/branch-validation/SKILL.md` and
+`.agents/roles/branches-agent.md`; do not create agent/session branch names or
+put unrelated work on the current branch. Keep the existing Lefthook checks
+enabled for commits and pushes.
 
 ## 🎯 Active Initiatives
 

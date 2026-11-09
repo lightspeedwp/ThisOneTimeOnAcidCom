@@ -1,7 +1,7 @@
 # Icon System Guide
 
-Complete guide to using icons in the Ash Shaw Makeup Portfolio project.
-**CRITICAL:** Always verify icons exist before using them!
+Complete guide to using icons in the This One Time On Acid project.
+Verify icons exist before using them.
 
 **Version:** 5.0.0
 **Last Updated:** March 2026
@@ -52,7 +52,7 @@ import { MagnifyingGlass, CaretDown, Star } from '@phosphor-icons/react';
 
 ```text
 
-**Design tokens:** See [iconography.md](./design-tokens/iconography.md) for the
+**Design tokens:** See [iconography.md](./design-tokens-reference.md) for the
 complete weight system, size scale, colour tokens, and accessibility matrix.
 
 **Dev tool:** Visit [/dev-tools/phosphor-icons](/dev-tools/phosphor-icons) for a
@@ -66,9 +66,7 @@ live side-by-side comparison of all Lucide → Phosphor icon mappings.
 
 ## Icon Verification Process
 
-### ⚠️ CRITICAL: Always Verify Icons Before Using
-
-**NEVER assume an icon exists.** Always follow this verification process:
+Verify that icons exist before using them. Here's the verification process:
 
 ### Step 1: Search Lucide Documentation
 
@@ -136,7 +134,7 @@ Icons are organized by usage category. See detailed category documentation:
 
 UI controls, navigation, and system actions.
 
-**Documentation:** [icons/interface.md](./icons/interface.md)
+**Documentation:** [media-guidelines.md](./media-guidelines.md)
 
 **Common icons:**
 
@@ -162,7 +160,7 @@ import { Menu, X, Search } from 'lucide-react';
 
 Travel-related icons for location, tours, and activities.
 
-**Documentation:** [icons/travel.md](./icons/travel.md)
+**Documentation:** [media-guidelines.md](./media-guidelines.md)
 
 **Common icons:**
 
@@ -370,7 +368,7 @@ import { Makeup, Lipstick, Eyeshadow } from 'lucide-react';
 
 ```text
 
-**Solution:** Always verify icons exist. Use alternatives:
+**Solution:** Verify icons exist. Use alternatives:
 
 ```tsx
 // ✅ CORRECT - Use verified alternatives
@@ -402,7 +400,7 @@ import { ArrowUp, Menu } from 'lucide-react';
 
 ```text
 
-**Solution:** Always specify explicit size:
+**Solution:** Specify explicit size:
 
 ```tsx
 // ✅ CORRECT - Explicit sizing
@@ -420,7 +418,7 @@ import { ArrowUp, Menu } from 'lucide-react';
 
 ```text
 
-**Solution:** Always include aria-label for icon-only buttons:
+**Solution:** Include aria-label for icon-only buttons:
 
 ```tsx
 // ✅ CORRECT - Accessible
@@ -544,8 +542,8 @@ focus:ring-opacity-50 rounded-full p-2"
 
 ## Related Documentation
 
-- **[icons/interface.md](./icons/interface.md)** - UI and navigation icons
-- **[icons/travel.md](./icons/travel.md)** - Travel and location icons
+- **[media-guidelines.md](./media-guidelines.md)** - UI and navigation icons
+- **[media-guidelines.md](./media-guidelines.md)** - Travel and location icons
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines
 - **[overview-components.md](./overview-components.md)** - Component system
 

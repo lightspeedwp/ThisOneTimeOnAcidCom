@@ -34,6 +34,13 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Never serve source maps. Backstop for Sentry's post-upload cleanup
+# (vite.config.ts) in case it doesn't run, e.g. a build without
+# SENTRY_AUTH_TOKEN. Edge functions run before redirects and static files.
+[[edge_functions]]
+  function = "deny-source-maps"
+  pattern = "^/.*\\.map$"
+
 # SPA fallback for React Router. Not forced, so existing files are served as-is.
 [[redirects]]
   from = "/*"

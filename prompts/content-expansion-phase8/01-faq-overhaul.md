@@ -1,171 +1,50 @@
-# Sub-audit 1: FAQ overhaul
+# Book-site contextual FAQ assessment
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Report:** `/reports/content-expansion-phase8/01-faq-overhaul.md`
+## 1. Objective
 
----
+Assess current FAQ coverage and provenance without imposing a FAQ quota or reconstructing portfolio pages.
 
-## Objective
+## 2. Inputs and scope
 
-Complete overhaul of the FAQ system: audit existing FAQs for accuracy and
-guideline violations, add per-item FAQs to every content item across all content
-types, create new page-level FAQ groups for pages that don't have them yet, and
-ensure the FAQ aggregate page includes all groups.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current content/data/type inventories, registered routes and author-approved sources. Confirm scope before assessing historical expansion requests; do not use their target totals as present facts.
 
-## Step 1: Audit existing FAQs
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-**Files to audit:**
+## 3. Audit steps
 
-- `/data/mock/sections/faq.ts` — Global FAQs (6) + page groups (7: home, about, portfolio, blog, videos, podcasts, contact)
+1. Inventory current FAQ data/types/components, IDs, consumers, search/aggregate counts and rendered contexts. Check uniqueness and actual data shape; absence from an old page inventory does not establish missing content.
 
-## Check each FAQ for
+2. Assess useful book/draft/reader, author, waitlist, event, speaking and media/contact questions against documented user needs. Legacy portfolio, sticker and makeup-safety topics require a current relevant context and credible evidence; do not add unsupported health/safety advice.
 
-1. **Factual accuracy** — Cross-reference against `/docs/website-content.md` and ebook content
+3. Check contextual placement, concise answers, links, duplicate/conflicting answers, accordion semantics, keyboard/focus and visible states. Preserve the existing FAQ-graphics assessment: inspect current `src/app/data/mock/images/sticker-graphics.ts`, `src/app/components/sections/FaqSection.tsx` and actual FAQ consumers; verify whether image props/rendering support the existing sticker assets, and record each current page/FAQ section → graphic assignment or an explicit unassigned/unknown state. Trace actual exports, protected image sources and current registered contexts rather than inventing props, assignments, assets or routes. If current book-site relevance or the continued purpose of an existing assignment is unresolved, flag the specific requirement for owner decision and retain its assessment in the report; do not silently cancel it. Historical two-/three-FAQ-per-item requirements are not a publishing quota.
 
-1. **Sentence case** — All questions and answers must use sentence case for headings/titles
+4. Check factual freshness and source/author approval; distinguish current capability from planned functionality. No invented dates, costs, contact promises or reader access guarantees.
 
-1. **He/him pronouns** — Ash is male, no "they" or "she"
+5. Return exact supported FAQ proposals and metadata/consumer impacts. No new page, sticker asset, data rewrite or schema extension is authorised.
 
-1. **Location accuracy** — Cape Town (Woodstock), Berlin (May seasonal), Koh Phangan (Sep–Nov), international festivals
+## 4. Missing evidence and permission boundaries
 
-1. **Non-commercial language** — No "Book Now", "pricing", "services". This is a personal art project.
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-1. **Voice consistency** — Warm, personal, authentic. Not corporate or marketing-speak.
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-1. **Stale content** — Any references to outdated information (e.g., wrong team count, wrong dates)
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-1. **Content depth** — Answers should be substantive (2–4 sentences minimum), not one-liners
+## 5. Success criteria
 
-**Report format:**
+- [ ] Each factual/content proposal has provenance, relevance and a verified current destination.
+- [ ] Historical quotas and invented metadata are not substituted for genuine source material.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-```text
+## 6. Report output
 
-| FAQ ID | Issue | Severity | Fix |
-|---|---|---|---|
-| collaborations | Outdated team reference | Medium | Update to reflect 2026 data |
-```text
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
----
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-## Step 2: Add per-item FAQs to ALL existing content
+## 7. Revision provenance
 
-All content types already have the `faqs` field in their TypeScript interfaces:
-
-- `BlogPost.faqs` — `/data/types/blog.ts:122`
-- `Video.faqs` — `/data/types/videos.ts:27`
-- `Podcast.faqs` — `/data/types/podcast.ts:23`
-- `PortfolioEntry.faqs` — `/data/types/portfolio.ts:97`
-- `Event` — via `editions[].faqs` or top-level FAQ section (check `/data/types/events.ts`)
-
-## For each content item, add 2–3 contextual FAQs
-
-### Blog post FAQ examples
-
-```typescript
-faqs: [
-  {
-    id: 'uv-safety-berlin',
-    question: "Are UV paints safe for skin?",
-answer: "Yes — Ash uses only professional-grade, skin-safe UV reactive paints
-designed for body art. They're water-based, non-toxic, and wash off easily."
-  },
-  {
-    id: 'uv-where-buy',
-    question: "Where can I get UV paints?",
-answer: "Ash doesn't sell products — this is a personal art project. However, he
-recommends researching professional-grade UV body paints from reputable art
-supply stores."
-  }
-]
-
-```text
-
-### Portfolio entry FAQ examples
-
-```typescript
-faqs: [
-  {
-    id: 'origin-2026-how-long',
-    question: "How long did this makeup take?",
-answer: "Most festival face paintings take 5–15 minutes depending on complexity.
-Ash works fast and ambidextrously, so even detailed designs happen in the flow
-of the party."
-  }
-]
-
-```text
-
-## Rules for per-item FAQs
-
-- Each FAQ `id` must be globally unique (prefix with content type and slug, e.g., `blog-uv-berlin-q1`)
-- Questions should be things a reader would naturally ask about THAT specific piece of content
-- Answers must be factually accurate and cross-referenced against source materials
-- Never include commercial/booking/pricing language
-- Sentence case for all text
-- 2–3 FAQs per item minimum
-
----
-
-## Step 3: Create new page-level FAQ groups
-
-Currently missing FAQ groups for these pages:
-
-| Page | pageId | Suggested FAQ topics |
-|---|---|---|
-| Stickers | `stickers` | What are the stickers? How are they made? Can I get one? |
-| Ebook | `ebook` | What's the ebook about? How many chapters? Is it free? When is the book coming? |
-| Events | `events` | How are events listed? Does Ash attend every year? How does he get there? |
-| Dev tools | `dev-tools` | What are the dev tools? Who are they for? Can I use them? |
-| Gear | `gear` | What's in Ash's kit? What camera does he use? What brushes? |
-| Press / Media | `press` | How to credit Ash's work? Media kit availability? Interview requests? |
-| Feedback | `feedback` | Are these real testimonials? How can I leave feedback? |
-| History | `history` | How long has Ash been painting? When did he start? What's the timeline? |
-
-**Add each group to the `pageFaqGroups` array in `/data/mock/sections/faq.ts`.**
-
-**Update `CATEGORY_LABELS` in `FaqAggregatePage.tsx`** to include the new page
-IDs.
-
----
-
-## Step 4: Verify sticker images in FAQ sections
-
-Per the brief: "all pages should have FAQ sections with square images I uploaded
-to assets and defined in the stickers data file."
-
-**Action:**
-
-1. Check `/data/mock/images/sticker-graphics.ts` for available sticker images
-
-1. Verify that each page's FAQ section component (`FaqSection`) supports sticker image display
-
-1. If sticker images need to be passed to FAQ sections, check how `FaqSection` currently works and whether it accepts an image prop
-
-1. Document which sticker graphic is assigned to which page's FAQ section
-
----
-
-## Step 5: Update FAQ aggregate page
-
-After adding all new FAQ groups:
-
-1. Verify all new `pageId` values are included in `CATEGORY_LABELS` in `FaqAggregatePage.tsx`
-
-1. Test that the category filter shows all groups
-
-1. Verify search works across new FAQs
-
-1. Count total FAQs and update any UI that displays counts
-
----
-
-## Output
-
-- **Report:** `/reports/content-expansion-phase8/01-faq-overhaul.md` with:
-- Audit findings table (existing FAQ issues)
-- List of all per-item FAQs added (by content type and count)
-- New page-level FAQ groups created
-- Sticker image assignments
-- Total FAQ count (before and after)
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-expansion-phase8/01-faq-overhaul.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

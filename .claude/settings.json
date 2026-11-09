@@ -27,5 +27,5 @@
       "reasoning_effort": "medium"
     }
   },
-  "notes": "Shared repository settings. Do NOT commit credentials or personal paths. Use .claude/settings.local.json for machine-specific overrides."
+  "notes": "Shared custom skills are in .agents/skills (linked from .claude/skills). Agent adapters load .agents/roles. Do not commit credentials or personal paths; use .claude/settings.local.json for machine-specific overrides."
 }

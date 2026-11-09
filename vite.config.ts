@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { netlifyHashedAssetHeaders } from './scripts/netlify-hashed-asset-headers.mjs'
 
 const MISSING_ASSET_PREFIX = '\0figma-missing-asset:'
@@ -45,19 +46,26 @@ function figmaAssetResolver() {
   }
 }
 
-/**
- * Vite plugin that marks React and React-DOM as external modules.
- * Prevents Vite from bundling React separately; relies on Make's runtime to provide React globals.
- * Pre-enforced to run before other plugins for correct module resolution.
- */
-function resolveReactExternals() {
+// Keep environment access in the build configuration: the Make bundler cannot
+// safely read import.meta.env in application modules. Expose only public values.
+function sentryClientConfig() {
+  var clientConfig;
   return {
-    name: 'resolve-react-externals',
-    enforce: 'pre',
+    name: 'sentry-client-config',
+    configResolved(config) {
+      clientConfig = {
+        dsn: config.env.VITE_SENTRY_DSN,
+        environment: config.mode,
+        tracesSampleRate: config.isProduction ? 0.2 : 1.0,
+        development: !config.isProduction,
+      };
+    },
     resolveId(id) {
-      // Mark React modules as resolved externals to prevent warning errors
-      if (id.startsWith('react') || id.includes('react-dom')) {
-        return { id, external: true };
+      if (id === 'virtual:sentry-config') return '\0virtual:sentry-config';
+    },
+    load(id) {
+      if (id === '\0virtual:sentry-config') {
+        return 'export var sentryConfig = ' + JSON.stringify(clientConfig) + ';';
       }
     },
   };
@@ -66,25 +74,28 @@ function resolveReactExternals() {
 export default defineConfig({
   plugins: [
     figmaAssetResolver(),
-    resolveReactExternals(),
+    sentryClientConfig(),
     // The React and Tailwind plugins are both required for Make, even if
     // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
     // Emits dist/_headers with immutable caching for content-hashed assets only
     netlifyHashedAssetHeaders(),
+    // Uploads source maps to Sentry so production stack traces show real
+    // source, then deletes them from dist/ so they're never served publicly
+    // (a Netlify edge function also denies .map requests). No-ops locally when
+    // SENTRY_AUTH_TOKEN is unset.
+    sentryVitePlugin({
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      sourcemaps: {
+        filesToDeleteAfterUpload: ['./dist/**/*.map'],
+      },
+    }),
   ],
   build: {
-    rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime', /^react\/.*/],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          'react/jsx-runtime': 'React',
-        },
-      },
-    },
+    sourcemap: 'hidden',
   },
   resolve: {
     alias: {

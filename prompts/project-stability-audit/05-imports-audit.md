@@ -1,185 +1,52 @@
-# Sub-audit 5 — TS and TSX imports
+# Book-site import and dependency integrity review
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Report:** `/reports/project-stability-audit/05-imports-audit.md`
+## 1. Objective
 
----
+Assess current import resolution and dependency evidence without treating regex searches as a complete graph.
 
-## Context
+## 2. Inputs and scope
 
-Import errors are the most common cause of build failures and blank-screen
-renders in the Figma Make bundler. A single unresolved import silently breaks
-the entire component tree. This audit systematically verifies every import
-statement in the codebase.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current repository instructions, actual source/configuration/manifest, approved scope and relevant existing work. Confirm paths and scripts against the inspected revision; no implied command execution.
 
-## Step 1 — Unresolved import detection
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-For each `.tsx` and `.ts` file in the project, verify every `import` statement
-resolves to an existing file or installed package:
+## 3. Audit steps
 
-## Directories to scan
+1. Inventory static imports, re-exports, type-only imports, dynamic imports, import.meta.glob patterns, CSS side effects, asset references, aliases and route/lazy-loading consumers. Record scope and unresolved computed paths. Check actual use of every named, default, namespace and type-only imported symbol in its value/type context. Identify repeated imports from the same resolved module and distinguish legitimate separate type/value or side-effect declarations from redundant duplicates. Return evidence tables with file/line, symbol or module, usage/duplicate evidence, legitimate exception, uncertainty and the smallest proposed correction. CSS side-effect imports may serve global, theme or dynamically selected consumers; absence of a local symbol or JSX class is not proof they are unused. Do not remove, merge or sort imports automatically.
 
-- `/components/` (all subdirectories)
-- `/hooks/`
-- `/utils/`
-- `/lib/`
-- `/data/` (all subdirectories)
-- `/App.tsx`, `/main.tsx`, `/routes.ts`
+2. Check relative/alias paths, case sensitivity, extensions, actual export shape, package exports and runtime/bundler context. Node built-ins in scripts and browser imports have different constraints; do not conflate them.
 
-**Checks per file:**
+3. Check current package declarations/lockfile, peer/optional dependencies, script/config/parser consumers and documentation before suggesting an unused dependency. No direct import is not proof a package is removable.
 
-- [ ] Relative imports (`./`, `../`) — does the target file exist?
-- [ ] Barrel imports (`from '../data/mock'`) — does the barrel `index.ts` export the requested symbol?
-- [ ] Package imports (`from 'react'`, `from 'react-router'`) — is the package in `package.json`?
-- [ ] CSS imports (`import '../styles/blocks/...'`) — does the CSS file exist?
-- [ ] Asset imports (`from 'figma:asset/...'`) — is the asset path valid?
-- [ ] SVG imports (`from './imports/svg-...'`) — does the SVG file exist?
+4. Assess cycles by actual runtime/type/initialisation impact; a cycle or barrel is not automatically a defect. Check CSS import ordering and protected asset/stub consumers before proposals.
 
-**Output:** Table of all unresolved imports with file path, line number, and
-target.
+5. Assess documented import ordering/type conventions with accepted exceptions. Preserve image sources and shared wrappers; no automatic import sorting, package removal or guessed module replacement.
 
----
+6. Return exact resolution/consumer evidence, limitations of any static search and proposed fixes/retest needs. Do not run source scripts, install dependencies or alter imports.
 
-## Step 2 — Circular dependency detection
+## 4. Missing evidence and permission boundaries
 
-Map the import graph and identify circular chains:
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-1. Build a dependency graph: for each file, list all files it imports
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-1. Walk the graph depth-first to detect cycles
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-1. Record each cycle chain (e.g., `A.tsx → B.tsx → C.tsx → A.tsx`)
+## 5. Success criteria
 
-## Common circular dependency patterns to check
+- [ ] The complete in-scope inventory, consumers and protected exceptions are recorded.
+- [ ] Each proposed change preserves actual contracts and has evidence, dependencies and verification needs.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-- Component A imports Component B which imports Component A
-- Utility imports a hook that imports the same utility
-- Data file imports a type that imports the same data file
-- Router imports a page that imports router utilities
+## 6. Report output
 
-**Output:** List of circular dependency chains (or "None found").
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
----
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-## Step 3 — Unused import detection
+## 7. Revision provenance
 
-For each file, verify every imported symbol is actually used:
-
-- [ ] Named imports: is every `{ Foo, Bar }` used in JSX or code body?
-- [ ] Default imports: is the default import used?
-- [ ] Namespace imports (`import * as X`) — are any properties of X accessed?
-- [ ] Type-only imports (`import type { ... }`) — are they used in type annotations?
-- [ ] CSS side-effect imports (`import './styles/...'`) — are BEM classes from that CSS file used in the component's JSX `className` attributes?
-
-**Output:** Table of unused imports with file path, imported symbol, and
-recommendation (remove).
-
----
-
-## Step 4 — Duplicate import detection
-
-Check for files that import the same module multiple times:
-
-```tsx
-// BAD: Duplicate import
-import { Foo } from './utils';
-import { Bar } from './utils';  // Should be merged with line above
-
-// GOOD: Single import
-import { Foo, Bar } from './utils';
-
-```text
-
-**Output:** List of duplicate imports with file path and line numbers.
-
----
-
-## Step 5 — Import order verification
-
-Verify import statements follow the project convention:
-
-1. **CSS imports** (side-effect) — first
-
-1. **React/framework imports** — second
-
-1. **Third-party package imports** — third
-
-1. **Project utility/hook imports** — fourth
-
-1. **Component imports** — fifth
-
-1. **Data/type imports** — sixth
-
-1. **Asset imports** (images, SVGs) — last
-
-**Note:** This is a guideline check, not a strict enforcement. Flag files with
-significantly disordered imports.
-
----
-
-## Step 6 — Bundler-forbidden patterns in imports
-
-Search for patterns that break the Figma Make bundler:
-
-- [ ] `import.meta.env` — completely forbidden
-- [ ] Optional chaining in import paths — forbidden
-- [ ] Dynamic `import()` with template literals — may break
-- [ ] Re-exports with `export * from` that create deep chains — may cause memory issues
-- [ ] Barrel files that re-export very large modules — may exceed memory
-
----
-
-## Step 7 — Package version check
-
-Compare `import` package names against `package.json`:
-
-- [ ] Every imported package exists in `dependencies` or `devDependencies`
-- [ ] No packages are in `package.json` but never imported (unused packages)
-- [ ] Check for known incompatible package versions (react-router-dom vs react-router, etc.)
-
----
-
-## Output format
-
-```markdown
-
-## Unresolved imports
-
-| File | Line | Import target | Issue |
-|---|---|---|---|
-| `/components/pages/...` | 5 | `../missing/file` | File does not exist |
-
-## Circular dependencies
-
-| Chain | Files involved |
-|---|---|
-| None found | — |
-
-## Unused imports
-
-| File | Symbol | Type | Recommendation |
-|---|---|---|---|
-| `BlogPage.tsx` | `useState` | Named | Remove |
-
-## Duplicate imports
-
-| File | Module | Lines |
-|---|---|---|
-
-## Import order issues
-
-| File | Issue |
-|---|---|
-
-## Bundler-forbidden patterns
-
-| File | Line | Pattern | Fix |
-|---|---|---|---|
-
-## Package health
-
-| Package | In package.json | Imported | Status |
-|---|---|---|---|
-```text
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/project-stability-audit/05-imports-audit.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

@@ -1,208 +1,56 @@
-# Content expansion phase 8 — orchestrator
+**Originally created:** March 4, 2026
 
-**Created:** March 4, 2026
-**Version:** 1.0.0
-**Scope:** Blog expansion, podcast transcripts, event creation, portfolio
-polish, video expansion, FAQ overhaul, ebook enrichment
-**Source brief:** `/imports/content-expansion-prompt.md`
+**Historical source brief:** `/imports/content-expansion-prompt.md`
 
----
+**Original version:** 1.0.0
 
-## Overview
+# Book-site content evidence review coordinator
 
-Phase 8 is the largest content expansion to date, covering 8 sub-audits across
-all content types. The primary goals are:
+## 1. Objective
 
-1. **Blog** — Polish existing 35 posts and expand to 50 total, backdated logically from 2019–2026
+Coordinate the seven active Phase 8 reviews, retaining the portfolio-polish hold and historical compatibility entry points.
 
-1. **Podcasts** — Polish existing 8 episodes, expand to 15 with full transcripts
+## 2. Inputs and scope
 
-1. **Events** — Add 4+ real festivals (Organik, NOG, Moov, Little Forest) plus additional historical events
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
-1. **Portfolio** — Polish text/descriptions only (NO new entries, NO new images)
+Inputs: sibling 01 FAQ, 02 Journal, 03 podcast, 04 events, 06 video, 07 manuscript and 08 author prompts. Sibling 05-portfolio-polish.md is held; the hyphenated phase-8 paths are compatibility notices, not additional work.
 
-1. **Videos** — Polish existing 11 and expand with new entries
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-1. **FAQs** — Complete overhaul: audit existing, add per-item FAQs to every post/video/podcast/portfolio/event entry, add new page-level FAQ groups, update aggregate page
+## 3. Audit steps
 
-1. **Ebook** — Extend with new chapters/topics and polish unfinished sections
+1. Record current content/source/type/route inventories and factual gaps before proposing any expansion. Historical totals for posts, episodes, events, videos, chapters and subpages are not current census results.
 
-1. **About sub-pages** — New pages based on ebook content that doesn't have dedicated pages yet
+2. Assess each active child only within explicitly requested scope. Carry source/consent decisions across FAQ, Journal, media, event, manuscript and author contexts to avoid contradictory claims or duplicate content.
 
----
+3. Preserve held child 05 unchanged; do not infer it is cancelled or completed. Do not recreate legacy portfolio/about/dev-tools routes, fabricate dates/metrics/transcripts or replace existing images.
 
-## Critical rules (MUST READ)
+4. Deduplicate the hyphenated video/ebook/about prompts through their canonical links; retain their unique useful requirements in the canonical review rather than executing both versions.
 
-Before executing ANY sub-audit, read and internalise:
+5. Return one coordinated report of candidates, sources, dependencies, held decisions and review readiness. No automatic data/schema edits, content generation, task creation, report persistence or status updates.
 
-- **[Guidelines.md](../../guidelines/Guidelines.md)** — Bundler constraints, BEM-only styling, sentence case, image protection
-- **[Data System README](../../data/README.md)** — Mock data conventions and barrel export patterns
-- **Sentence case** — ALL titles, headings, and labels in sentence case
-- **He/him pronouns** — Ash is male
-- **No Tailwind** — All styling via BEM classes in `/styles/blocks/`
-- **No arrow functions, no destructuring, no optional chaining, no template literals** in `.tsx` files
-- **Image protection** — NEVER replace existing `figma:asset/` imports or Unsplash images. Use `unsplash_tool` for NEW images only.
-- **No hardcoded content** — All text must live in `/data/mock/` files
-- **Bundler safety** — Use `var` declarations, explicit null checks, `grab()`/`arrayGet()`/`setProp()` helpers from `/lib/router.tsx`
-- **Locations** — Cape Town (Woodstock), Berlin (May), Koh Phangan (Sep–Nov), international festivals
-- **NOT commercial** — Personal art project, no booking/pricing/services language
-- **Proper nouns** — Ash, Berlin, Cape Town, Koh Phangan, LightSpeed, Six Cats, AfricaBurn, Vortex, Origin, Solipse, WordCamp, BarCamp stay capitalised
+## 4. Missing evidence and permission boundaries
 
-### Content source materials
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-Always cross-reference these for accuracy and voice:
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-- `/docs/website-content.md` — Comprehensive reference doc (book concept, Six Cats, LightSpeed, identity, education, fitness, philosophy, partners, travel)
-- `/data/mock/pages/ebook-pages.ts` — Full 82-page ebook content
-- `/data/mock/pages/about-subpages.ts` — 21 about sub-page data
-- `/data/mock/blog/posts.ts` + `/data/mock/blog/posts-timeline.ts` — Existing 35 blog posts
-- `/data/mock/podcasts/episodes.ts` — Existing 8 podcast episodes
-- `/data/mock/events/origin-festival.ts` — Event data structure reference
-- `/data/mock/sections/faq.ts` — Existing FAQ data
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
----
+## 5. Success criteria
 
-## Sub-audits
+- [ ] All seven active children, held child 05 and three historical aliases are accounted for.
+- [ ] Counts are measured and unknowns preserved; no claimed batch completion or automatic publication.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-Execute in order. Each sub-audit gets its own report in
-`/reports/content-expansion-phase8/`.
+## 6. Report output
 
-### Sub-audit 1: FAQ overhaul
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-**Prompt:** [01-faq-overhaul.md](./01-faq-overhaul.md)
-**Report:** `/reports/content-expansion-phase8/01-faq-overhaul.md`
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-### Sub-audit 2: Blog expansion (35 → 50 posts)
+## 7. Revision provenance
 
-**Prompt:** [02-blog-expansion.md](./02-blog-expansion.md)
-**Report:** `/reports/content-expansion-phase8/02-blog-expansion.md`
-
-### Sub-audit 3: Podcast expansion (8 → 15 episodes with transcripts)
-
-**Prompt:** [03-podcast-expansion.md](./03-podcast-expansion.md)
-**Report:** `/reports/content-expansion-phase8/03-podcast-expansion.md`
-
-### Sub-audit 4: Event creation (1 → 5+ events)
-
-**Prompt:** [04-event-creation.md](./04-event-creation.md)
-**Report:** `/reports/content-expansion-phase8/04-event-creation.md`
-
-### Sub-audit 5: Portfolio text polish
-
-**Prompt:** [05-portfolio-polish.md](./05-portfolio-polish.md)
-**Report:** `/reports/content-expansion-phase8/05-portfolio-polish.md`
-
-### Sub-audit 6: Video expansion
-
-**Prompt:** [06-video-expansion.md](./06-video-expansion.md)
-**Report:** `/reports/content-expansion-phase8/06-video-expansion.md`
-
-### Sub-audit 7: Ebook enrichment & chapter connections
-
-**Prompt:** [07-ebook-enrichment.md](./07-ebook-enrichment.md)
-**Report:** `/reports/content-expansion-phase8/07-ebook-enrichment.md`
-
-### Sub-audit 8: New about sub-pages
-
-**Prompt:** [08-about-subpages.md](./08-about-subpages.md)
-**Report:** `/reports/content-expansion-phase8/08-about-subpages.md`
-
----
-
-## Execution sequence
-
-```text
-Phase 8 Execution Order
-━━━━━━━━━━━━━━━━━━━━━━
-
-1. FAQ Overhaul (Sub-audit 1)
-   ├── Audit existing FAQs for accuracy/guideline violations
-├── Add per-item FAQs to ALL existing blog posts, videos, podcasts, portfolio
-entries
-├── Create FAQ groups for missing pages (stickers, ebook, events, dev-tools,
-gear, press)
-   └── Update FaqAggregatePage categories if needed
-
-1. Blog Expansion (Sub-audit 2)
-   ├── Polish all 35 existing posts (voice, accuracy, Unsplash images)
-   ├── Create 15 new posts (total: 50), backdated 2019–2026
-   ├── Add per-item FAQs to each new post (2–3 per post)
-   └── Update barrel exports and category/tag counts
-
-1. Podcast Expansion (Sub-audit 3)
-   ├── Polish 8 existing episodes (voice, descriptions)
-   ├── Create 7 new episodes (total: 15)
-   ├── Write full transcripts for ALL 15 episodes
-   ├── Add per-item FAQs to each episode (2–3 per episode)
-   └── Update barrel exports and category/tag counts
-
-1. Event Creation (Sub-audit 4)
-   ├── Create event data for: Organik, NOG, Moov, Little Forest
-├── Create additional historical events (Vortex, AfricaBurn, Alien Safari,
-Shankra, etc.)
-   ├── Add per-item FAQs to each event
-   ├── Register events in barrel export
-   └── Create event page FAQ group in faq.ts
-
-1. Portfolio Polish (Sub-audit 5)
-   ├── Polish descriptions and content fields for all 42 entries
-   ├── Add per-item FAQs to all entries (2–3 per entry)
-   ├── Fix any sentence case or voice violations
-   └── DO NOT add new entries or change images
-
-1. Video Expansion (Sub-audit 6)
-   ├── Polish 11 existing videos
-   ├── Create new video entries
-   ├── Add per-item FAQs to all entries
-   └── Update barrel exports and category/tag counts
-
-1. Ebook Enrichment (Sub-audit 7)
-   ├── Polish unfinished/rough chapters
-├── Add new chapters: Ambidextrous painting, Festival kit, AI workflow, Grading
-system
-   ├── Strengthen cross-chapter narrative connections
-   └── Update page numbers and TOC
-
-1. About Sub-pages (Sub-audit 8)
-├── Create new data files for: Ambidextrous Technique, Festival Kit, AI
-Workflow, Grading System
-   ├── Assess ADHD page completeness
-   ├── Consider individual cat profile pages
-   └── Register routes and update navigation data
-
-```text
-
----
-
-## Deliverables
-
-After all 8 sub-audits are complete:
-
-1. **Reports** — One report per sub-audit in `/reports/content-expansion-phase8/`
-
-1. **Task list** — `/tasks/content-expansion-phase8-tasks.md`
-
-1. **Master task list** — Update `/tasks/master-task-list.md` with new entry
-
-1. **General task list** — Add Phase 8 summary to `/tasks/task-list.md`
-
-1. **CHANGELOG** — Update `/CHANGELOG.md` with [8.3.0] release (or appropriate version)
-
-1. **Data README** — Update `/data/README.md` with new counts if significant
-
----
-
-## Content targets (summary)
-
-| Content type | Current | Target | Action |
-|---|---|---|---|
-| Blog posts | 35 | 50 | Polish existing + 15 new |
-| Podcasts | 8 | 15 | Polish existing + 7 new + ALL transcripts |
-| Events | 1 | 5+ | 4 confirmed + historical events |
-| Portfolio | 42 | 42 | Text polish only (no new entries) |
-| Videos | 11 | 15+ | Polish existing + new entries |
-| Stickers | 40 | 40 | No changes |
-| FAQ page groups | 7 | 10+ | Add stickers, ebook, events, gear, press |
-| Per-item FAQs | ~partial | ALL items | Every post/video/podcast/portfolio/event gets 2–3 FAQs |
-| Ebook chapters | 20 | 24+ | 4+ new chapters |
-| About sub-pages | 21 | 25+ | 4+ new pages |
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/content-expansion-phase8/orchestrator.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

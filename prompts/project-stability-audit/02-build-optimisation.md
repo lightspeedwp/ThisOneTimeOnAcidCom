@@ -1,163 +1,52 @@
-# Sub-audit 2 — Build optimisation
+# Book-site build, size and memory investigation
 
-**Parent:** [orchestrator.md](./orchestrator.md)
-**Report:** `/reports/project-stability-audit/02-build-optimisation.md`
+## 1. Objective
 
----
+Identify measured build/resource issues and safe investigation proposals without implementing optimisations.
 
-## Context
+## 2. Inputs and scope
 
-The Figma Make bundler has memory limits. Large files, orphaned code, and
-inefficient imports inflate the bundle and can cause build failures or
-blank-screen renders. This audit identifies oversized files, dead code, and
-establishes size guidelines.
+[repository instructions](../../AGENTS.md); [guideline reading order](../../guidelines/README.md); [book brief](../../content/book/this-one-time-on-acid-brief.md); [registered routes](../../src/app/routes.ts); [package manifest](../../package.json).
 
----
+Inputs: current repository instructions, actual source/configuration/manifest, approved scope and relevant existing work. Confirm paths and scripts against the inspected revision; no implied command execution.
 
-## Step 1 — File size inventory
+Read current evidence before following historical path examples. This is a React/TypeScript/Vite book website, not a WordPress runtime or makeup-portfolio rebuild. Retain sourced memoir material without restoring its former page architecture.
 
-Scan every directory and record file sizes. Flag files exceeding these
-thresholds:
+## 3. Audit steps
 
-| File type | Warning threshold | Critical threshold |
-|---|---|---|
-| `.tsx` component | 300 lines | 500 lines |
-| `.ts` data file | 200 lines | 400 lines |
-| `.ts` utility/hook | 200 lines | 400 lines |
-| `.css` stylesheet | 500 lines | 1000 lines |
-| `.md` documentation | 300 lines | 600 lines |
+1. Inventory current manifest/scripts, configuration, dependency/asset/source-size evidence and build outputs only if available. Record environment, revision and whether commands actually ran; do not execute source scripts merely to populate a report.
 
-## Directories to scan
+2. Distinguish source line count, source bytes, emitted bundle bytes, compressed transfer, runtime heap, DOM count and build memory. No one measure proves another; historical limits or large files are investigation signals, not defects by definition.
 
-- `/components/` (all subdirectories)
-- `/data/mock/` (all subdirectories)
-- `/data/types/`
-- `/hooks/`
-- `/utils/`
-- `/lib/`
-- `/styles/` (all subdirectories)
+3. Assess actual import graph, dynamic loading/chunk boundaries, duplicated dependencies/assets, caches and expensive render paths where evidence exists. Missing static imports alone do not prove unused code or a safe package removal.
 
-**Output:** Table of all files exceeding warning threshold, sorted by size
-descending.
+4. For files above historical 400-line or other thresholds, assess meaningful module/component/data/CSS boundaries, dependency cycles, import updates and cascade/order effects. No mandatory splitting or claimed savings without comparison measurements.
 
----
+5. Coordinate orphan/retention/utility/SVG recommendations with ../general-codebase-audit.md through its canonical path; protected manuscript, images, stubs and reports remain intact.
 
-## Step 2 — Orphaned file detection
+6. Return measured baseline and precise investigation/optimisation candidates, confounders, verification commands that actually exist, dependencies and rollback. No install/build/test/cache/config/source changes or permanent guideline updates without separate approval.
 
-For each file type, check if the file is imported by any other file in the
-project:
+## 4. Missing evidence and permission boundaries
 
-### Components (`.tsx`)
+If a required source, current requirement, environment or permission is unavailable, identify the affected check and stop that part; do not fabricate a substitute or silently broaden scope. Treat historical totals and completion statements as reported evidence, not current results.
 
-- [ ] Scan `/components/pages/` — Is every page component referenced in `/routes.ts`?
-- [ ] Scan `/components/sections/` — Is every section component imported by a page?
-- [ ] Scan `/components/ui/` — Is every UI component imported by a section or page?
-- [ ] Scan `/components/common/` — Is every common component imported somewhere?
+Default to read-only assessment. A request to edit or review this prompt does not authorise its underlying task. Do not edit application files, manuscript, images, guidelines, configuration, trackers or Linear records; execute commands, publish, archive or delete only under separately explicit authorisation. Never use age, zero imports or route absence alone as deletion approval. Preserve protected files and existing image sources.
 
-### Hooks (`.ts`)
+Use UK English and sentence case while preserving exact quotations and proper nouns. Use he/him for Ash; do not alter other people’s pronouns. Do not invent dates, authors, social accounts, quotes, testimonials, transcripts, counts, progress, performance savings or duration estimates.
 
-- [ ] Scan `/hooks/` — Is every hook imported by at least one component?
+## 5. Success criteria
 
-### Utilities (`.ts`)
+- [ ] The complete in-scope inventory, consumers and protected exceptions are recorded.
+- [ ] Each proposed change preserves actual contracts and has evidence, dependencies and verification needs.
+- [ ] Coverage, exclusions and source revisions are recorded; planned, static and executed checks are distinct.
+- [ ] Proposed changes and unresolved decisions are presented for approval; no implementation or publication is implied.
 
-- [ ] Scan `/utils/` — Is every utility imported by at least one file?
+## 6. Report output
 
-### Data files (`.ts`)
+Return Markdown containing scope/revision, inspected inventory, evidence-linked findings, accepted exceptions, proposed actions and limitations. Record each finding’s path and lines, expected versus observed behaviour, impact, uncertainty and verification needed. Mark checks passed, failed, blocked, not tested or not applicable from evidence; never prefill results.
 
-- [ ] Scan `/data/mock/` — Is every data file imported (directly or via barrel export)?
-- [ ] Scan `/data/types/` — Is every type file imported by a data file or component?
+Drafts stay in the response unless a destination is explicitly approved. If repository report persistence is separately requested, propose a relevant root `reports/{topic}/` path and exact content first; task lists and tracker changes require their own approval. Do not overwrite historical reports, mark work complete automatically or move prompts to `.github/prompts/`.
 
-### CSS files (`.css`)
+## 7. Revision provenance
 
-- [ ] Scan `/styles/blocks/` — Is every CSS file imported by a component or `globals.css`?
-- [ ] Scan `/styles/tokens/` — Is every token CSS file imported by `globals.css`?
-- [ ] Scan `/styles/components/` — Is every CSS file imported by its component?
-
-### Library files (`.tsx`, `.ts`)
-
-- [ ] Scan `/lib/` — Is every export consumed by at least one file?
-
-**Output:** Orphaned files table with recommendation (delete / keep with
-rationale).
-
----
-
-## Step 3 — Build optimisation guidelines
-
-Create guidelines at `/guidelines/build-optimisation.md` covering:
-
-### File size limits
-
-- Recommended maximum sizes per file type (from the thresholds above)
-- How the Figma Make bundler handles large files
-- Symptoms of exceeding memory limits (build failure, blank screen, partial render)
-
-### Splitting large components
-
-1. Extract sub-components into the same directory
-
-1. Co-locate styles (one CSS block file per component)
-
-1. Extract data transformations into utility functions
-
-1. Extract complex hooks into `/hooks/`
-
-1. Maximum JSX depth: 4 levels of nesting before extracting
-
-### Splitting large data files
-
-1. One file per content domain (e.g., `blog/posts.ts`, `blog/categories.ts`)
-
-1. When a data file exceeds 200 lines, split by logical grouping:
-
-   - By content type (posts vs categories vs tags)
-   - By date range (e.g., `posts-2024.ts`, `posts-2025.ts`)
-   - By content section (e.g., `ebook/part-1.ts`, `ebook/part-2.ts`)
-1. Always maintain a barrel `index.ts` that re-exports all splits
-
-1. Update the barrel export EVERY time you add a new file
-
-### Splitting large CSS files
-
-1. One block CSS file per component (BEM block = one file)
-
-1. When a block file exceeds 500 lines, split by concern:
-
-   - Base styles: `{block}.css`
-   - Responsive overrides: `{block}-responsive.css`
-   - Theme variants: `{block}-theme.css`
-1. Import all splits from the component or from `globals.css`
-
-### Import hygiene checklist (for new components)
-
-- [ ] Import your CSS file at the top
-- [ ] Import data from `/data/mock/` (never hardcode content)
-- [ ] Import types from `/data/types/`
-- [ ] Import hooks from `/hooks/`
-- [ ] Import icons from the current icon system
-- [ ] Verify all imports resolve before committing
-- [ ] Remove any unused imports
-
----
-
-## Output format
-
-```markdown
-
-## File size inventory
-
-| File | Lines | Threshold | Status |
-|---|---|---|---|
-| `/components/pages/...` | 650 | 500 (Critical) | OVER |
-
-## Orphaned files
-
-| File | Type | Imported by | Recommendation |
-|---|---|---|---|
-| `/components/ui/...` | Component | None | Delete |
-
-## Guidelines
-
-[Draft of `/guidelines/build-optimisation.md`]
-
-```text
+[Original prompt at the reviewed baseline](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/3f583002482d80ffd1910676bcf7c63e13989b20/prompts/project-stability-audit/02-build-optimisation.md). The original remains historical evidence, not additional execution instructions. Proposed replacement prepared on 24 October 2026; refresh the revision/date and seek renewed approval for material changes before application.

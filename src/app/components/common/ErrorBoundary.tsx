@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import * as Sentry from '@sentry/react';
 import { Warning, ArrowsClockwise } from '@phosphor-icons/react';
 
 // Bundler workaround: import.meta.env is forbidden, use direct false for production safety
@@ -185,6 +186,13 @@ export class ErrorBoundary extends React.Component {
     this.setState({
       error,
       errorInfo,
+    });
+
+    // Report to Sentry here: this boundary catches page errors before the
+    // outer Sentry.ErrorBoundary in main.tsx can see them. Filtered noise
+    // (extensions, timeouts) returned above and is intentionally not reported.
+    Sentry.captureException(error, {
+      contexts: { react: { componentStack: errorInfo.componentStack } },
     });
 
     var propsTyped = this.props as ErrorBoundaryProps;

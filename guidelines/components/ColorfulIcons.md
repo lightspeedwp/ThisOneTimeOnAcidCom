@@ -451,7 +451,7 @@ function HeroSection() {
         </div>
 
         <h1 className="text-hero-h1 font-title font-bold text-white mb-fluid-md">
-          Ash Shaw Makeup
+          This One Time On Acid Makeup
         </h1>
 
         <p className="text-section-h3 font-body text-white/90">
@@ -643,7 +643,7 @@ function GrowthTimeline() {
 **Key Points:**
 
 - Icons are decorative, not semantic
-- Always pair with visible text
+- Pair with visible text
 - Text provides meaning, icon adds visual interest
 - Use `aria-hidden="true"` if icon is purely decorative
 
@@ -672,7 +672,7 @@ Icons are non-interactive by default:
 
 ### Color Contrast
 
-All icons meet WCAG 2.1 AA standards:
+All icons meet WCAG 2.2 AAA standards:
 
 - ✅ Multiple colors ensure visibility
 - ✅ Gradients provide depth without losing contrast
@@ -719,7 +719,7 @@ All icons meet WCAG 2.1 AA standards:
 ### ✅ DO
 
 ```tsx
-// ✅ Always pair icons with descriptive text
+// ✅ Pair icons with descriptive text
 <div>
   <ShineIcon size="lg" />
   <h3>Make People Shine</h3>
@@ -848,8 +848,8 @@ Differences:
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system overview
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 
 ---
 
@@ -868,9 +868,9 @@ Differences:
 
 ### Design Tokens (1)
 
-- **[colors.md](../design-tokens/colors.md)** - Color system and gradients
-- **[spacing.md](../design-tokens/spacing.md)** - Icon spacing guidelines
-- **[typography.md](../design-tokens/typography.md)** - Pairing text with icons
+- **[colors.md](../design-tokens-reference.md)** - Color system and gradients
+- **[spacing.md](../design-tokens-reference.md)** - Icon spacing guidelines
+- **[typography.md](../design-tokens-reference.md)** - Pairing text with icons
 
 ---
 

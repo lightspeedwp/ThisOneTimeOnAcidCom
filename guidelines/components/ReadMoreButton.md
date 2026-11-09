@@ -13,7 +13,7 @@ Provide progressive content disclosure with:
 - Expand/collapse functionality
 - Smooth height animations
 - Customizable expand/collapse text
-- WCAG 2.1 AA compliance with proper ARIA labels
+- WCAG 2.2 AAA compliance with proper ARIA labels
 - Keyboard navigation support
 - Visual state indication
 

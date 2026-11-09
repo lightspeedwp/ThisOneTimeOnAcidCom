@@ -1,46 +1,40 @@
-# ThisOneTimeOnAcid — Workspace Rules
+# Gemini project setup
 
-## Project Overview
+The project settings load `AGENTS.md` and `GEMINI.md` context files. The root
+`AGENTS.md` is the authoritative repository instruction file; follow its
+**Branch check before every task** before editing files or running Spec Kit.
 
-This is a React + Vite + TailwindCSS v4 web application. It uses TypeScript,
-Radix UI primitives, shadcn/ui patterns, and Motion (Framer Motion) for
-animations.
+Use npm and Node.js 24+. Follow semantic BEM CSS and the documented guidelines
+reading order. Preserve the protected assets and files listed in `AGENTS.md`.
 
-## Tech Stack
+Spec Kit's Gemini commands live in `.gemini/commands/`. Invoke them in Gemini
+chat with dotted names such as `/speckit.specify`, `/speckit.plan`,
+`/speckit.tasks` and `/speckit.implement`. Shared configuration lives in
+`.specify/`; Gemini remains the default integration alongside Codex and Claude
+Code. See `.codex/README.md` for integration maintenance and branch checks.
 
-- **Framework**: React 18 + Vite 6
-- **Styling**: TailwindCSS v4 (`@tailwindcss/vite` plugin)
-- **UI Components**: Radix UI primitives, shadcn/ui patterns, Lucide icons, Phosphor icons
-- **Animation**: Motion (Framer Motion)
-- **Routing**: React Router v7
-- **Build**: Vite with Figma asset resolver plugin
-- **Package Manager**: pnpm
+Spec Kit feature directory numbering is independent of Git branch naming.
+Use only Ash's supplied or approved branch name and validate the checked-out
+branch with `npm run validate:branch-name` before writing files.
 
-## Path Aliases
+Shared custom skills are discovered in `.agents/skills/`. Native Gemini agent
+files in `.gemini/agents/` load canonical role instructions from `.agents/roles/`.
+See `.agents/README.md` for the shared layout and maintenance rules.
 
-- `@` → `./src/app`
+## Shared dependencies and workflow limits
 
-## Development Commands
+Native adapter → `.agents/roles/<name>.md` → operation-specific
+`.agents/skills/<name>/SKILL.md` is an explicit read chain from the repository
+root. STOP if required instructions are unavailable; loading them grants no
+extra permission. Keep native dotted Spec Kit commands and generated ownership.
 
-- `pnpm dev` — start dev server
-- `pnpm build` — production build
-- `pnpm journal:parse` — parse journal markdown content
-- `pnpm journal:validate` — validate journal markdown
-- `pnpm journal:check-links` — check journal link integrity
+Gemini 0.41.2 supports `skills.disabled`, but isolating the ten shared
+Codex-generated Spec Kit skills remains blocked on a trusted, authorised smoke
+test. No disabled-name list or trust change has been applied. The six custom
+sources and ten native commands stay in place.
 
-## Coding Conventions
-
-- Use TypeScript for all new code
-- Follow existing component patterns in `src/app`
-- Use Radix UI + shadcn/ui patterns for new components
-- Use semantic BEM classes from `styles/globals.css`; do not use Tailwind utilities or inline styles.
-- Use Motion for animations
-- Prefer named exports for components
-- Keep components focused and composable
-
-## Spec Kit Integration
-
-- Spec Kit is installed with the Gemini integration
-- Use `/speckit.*` commands for spec-driven development workflows
-- Specs, plans, and tasks are stored in `.specify/`
-- Constitution template is in `.specify/memory/constitution.md`
+Follow each workflow's leading branch, destination, operation and hook gates.
+Analyze/converge resolve prerequisites with `SPECIFY_FEATURE_NO_PERSIST=1`;
+analysis is read-only and convergence appends only an approved block against
+an unchanged snapshot. Instructions and structural checks are not proof of
+host-enforced permissions. See `.agents/README.md` for outstanding limits.

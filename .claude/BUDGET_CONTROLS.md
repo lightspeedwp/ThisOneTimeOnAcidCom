@@ -461,8 +461,8 @@ Total: 200k (all accounted for)
 
 ## References
 
-- `.claude/agents/INVENTORY.md` — Agent specifications and budget requirements
-- `.claude/skills/INVENTORY.md` — Skill execution environment and budget impact
+- `.agents/roles/INVENTORY.md` — Agent specifications and budget requirements
+- `.agents/skills/INVENTORY.md` — Skill execution environment and budget impact
 - `.claude/SKILL_ROUTING.md` — When to use which execution mode (affects budget)
 - `.claude/GOVERNANCE.md` — Owner approval process for budget overrides
 - [`.github/AGENTS.md`](../../.github/AGENTS.md) — Org-wide agent governance rules

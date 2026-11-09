@@ -84,7 +84,7 @@ etc.)
 
 ### Agent Type Reference
 
-See `.claude/agents/INVENTORY.md` for complete agent specifications. Quick
+See `.agents/roles/INVENTORY.md` for complete agent specifications. Quick
 reference:
 
 | Agent | Purpose | Input | Output | Best For |
@@ -449,8 +449,8 @@ If you believe a governance rule needs changing:
 
 ## References
 
-- `.claude/agents/INVENTORY.md` — Complete agent specifications
-- `.claude/skills/INVENTORY.md` — Skill specifications and routing
+- `.agents/roles/INVENTORY.md` — Complete agent specifications
+- `.agents/skills/INVENTORY.md` — Skill specifications and routing
 - `.claude/BUDGET_CONTROLS.md` — Budget enforcement mechanisms
 - `.claude/SKILL_ROUTING.md` — Execution environment decisions
 - `.github/CLAUDE.md` — Repository-specific rules
