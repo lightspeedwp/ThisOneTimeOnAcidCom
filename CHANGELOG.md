@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CLAUDE.md updated to mark Phase 2 governance consolidation as complete
 - labeling-unified.yml workflow dynamically fetches labels and labeler configs from canonical org repository
 - **Unit test framework migration** — Migrated all 617 unit tests from Jest to Vitest 5.0.5 for improved ES module support and faster test execution. Fixed ESM module mocking using `vi.mock()` at module level, resolved process.exit global mocking with `vi.stubGlobal()`, and converted async test patterns from done() callbacks to Promise-based for Vitest compatibility. All tests pass with V8 coverage provider (consistent with Jest setup).
+- **Lefthook pre-commit and pre-push validation** — Configured hooks to log validation errors instead of blocking commits and pushes. Added wrapper scripts (`scripts/hooks/validate-with-logging.sh` and `scripts/hooks/validate-push-with-logging.sh`) that run all validations with timestamps logged to `logs/` directory. Both hooks exit successfully (exit 0) to allow Figma Make and other automation to proceed. Validation feedback is logged but non-destructive, enabling asynchronous review of issues without blocking workflow
 
 ### Fixed
 
