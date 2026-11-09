@@ -10,7 +10,7 @@
 ## Executive Summary
 
 | Metric | Count | Details |
-|--------|-------|---------|
+| -------- | ------- | --------- |
 | **G-Documents (Baseline)** | 116 | All preserved per D0 |
 | **S-Documents (Supporting)** | 9 | Protected files; approval T017 |
 | **N-Documents (Phase 2 Approved)** | 29 | N001–N029 per D4 |
@@ -26,7 +26,7 @@
 ### Reference & Diagnostics (N001–N005)
 
 | ID | Title | Purpose | G-Doc Mapping | Status |
-|---|-------|---------|---------------|--------|
+| --- | ------- | --------- | --------------- | -------- |
 | **N001** | Design Token Reference | Comprehensive reference for color palette, spacing scales, typography | Design-tokens guidelines | ✅ Approved |
 | **N002** | Accessibility Checklist | WCAG 2.2 AAA compliance guide; audit checklist | Accessibility guidelines + Components | ✅ Approved |
 | **N003** | Component Documentation | Living component library reference | Components/ directory | ✅ Approved |
@@ -36,7 +36,7 @@
 ### Guidelines Organization (N006–N018)
 
 | ID | Title | Purpose | G-Doc Mapping | Pointer Type |
-|---|-------|---------|---------------|--------------|
+| --- | ------- | --------- | --------------- | -------------- |
 | **N006** | Architecture Overview | System design, tech stack decisions | Architecture | Type 1 |
 | **N007** | Publishing Workflow & Boundaries | Manuscript status, publication model, editorial workflow (D2 ref) | Publishing guidelines | Type 1 |
 | **N008** | Content Model & Structure | Data structure for posts, pages, collections | Content guidelines | Type 2 |
@@ -54,7 +54,7 @@
 ### Patterns (N019–N022)
 
 | ID | Title | Purpose | G-Doc Mapping | Status |
-|---|-------|---------|---------------|--------|
+| --- | ------- | --------- | --------------- | -------- |
 | **N019** | Book Card Component Pattern | Reusable card component for book/article | Components/BookCard | ✅ Approved |
 | **N020** | Hero Section Pattern | Homepage hero layout; image optimization | Sections/Hero | ✅ Approved |
 | **N021** | Value Proposition Pattern | Feature/benefit messaging layout | Sections/Proposition | ✅ Approved |
@@ -63,7 +63,7 @@
 ### Pages (N023–N025)
 
 | ID | Title | Purpose | G-Doc Mapping | Status |
-|---|-------|---------|---------------|--------|
+| --- | ------- | --------- | --------------- | -------- |
 | **N023** | README.md Guide | Repository overview, setup, contribution links | Root README | ✅ Approved |
 | **N024** | Book Home Page Guide | Site homepage structure, hero, CTA | Pages/BookHome | ✅ Approved |
 | **N025** | Sitemap & Information Architecture | Complete site structure map | Pages/Sitemap | ✅ Approved |
@@ -71,7 +71,7 @@
 ### Reports & Archived (N026–N029)
 
 | ID | Title | Purpose | G-Doc Mapping | Status |
-|---|-------|---------|---------------|--------|
+| --- | ------- | --------- | --------------- | -------- |
 | **N026** | Accessibility Audit Report | WCAG 2.2 compliance status; remediation plan | Reports/Accessibility | ✅ Approved |
 | **N027** | Performance Audit Report | Core Web Vitals baseline; optimization roadmap | Reports/Performance | ✅ Approved |
 | **N028** | Dark Mode Implementation Status | Feature status, browser support matrix | Reports/DarkMode | ✅ Approved |
@@ -85,7 +85,7 @@
 **Rationale:** WordPress not in active stack; deferred for Phase 3 if tech stack changes
 
 | ID | Title | Purpose | Status |
-|---|-------|---------|--------|
+| --- | ------- | --------- | -------- |
 | **N030** | WordPress Block Patterns | Custom block development for WordPress | 🔄 DEFERRED (Phase 3) |
 | **N031** | WordPress Integration Decision Model | When to migrate existing content to WordPress | 🔄 DEFERRED (Phase 3) |
 | **N032** | Portfolio Showcase Patterns | Portfolio gallery, project cards, filtering | 🔄 DEFERRED (Phase 3) |
@@ -100,7 +100,7 @@
 **Policy:** Guidelines frequently referenced (>5 internal links or external mentions) get consolidated into N-documents with pointer files at original locations.
 
 | G-Document | Consolidated Into | Pointer Type | Rationale |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `Contributing.md` | N017 (Git Workflow) | Type 1 | Central contribution hub; high traffic |
 | `ACCESSIBILITY.md` | N011 (Accessibility Standards) | Type 1 | Key reference; frequently updated |
 | `design-tokens/*` | N001 (Design Token Reference) | Type 2 | Consolidate all token files |
@@ -121,7 +121,7 @@
 **Policy:** Deprecated, out-of-scope, or superseded guidelines moved to `guidelines/_archive/` with Type 3 comment-based pointers.
 
 | G-Document | Reason | Archive Destination | Replacement N-Doc |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `wordpress-*.md` | Not in active stack (D8) | `_archive/wordpress-block-patterns.md` | N030 (Phase 3) |
 | `portfolio-*.md` | Out of scope (D8) | `_archive/portfolio-legacy.md` | N032 (Phase 3) |
 | `nova-news-*.md` | Out of scope | `_archive/nova-news-integration.md` | N033 (Phase 3) |
@@ -139,7 +139,7 @@
 **Policy:** Guidelines with no D1/D3/D5 dependencies remain in place unchanged.
 
 | Count | Category | Examples | Status |
-|---|---|---|---|
+| ------ | ------ | ------ | ------ |
 | **~26** | Core patterns (no edit needed) | `sections/`, `blocks/`, `templates/` | ✅ VERIFIED UNCHANGED |
 | **~64** | Modified per D1 (voice softening) | All reference files needing copy alignment | ✅ EDITED (T023 complete) |
 | **~21** | Modified per D3 (WCAG updates) | Accessibility files, component docs | ✅ EDITED (T023 complete) |
@@ -188,7 +188,7 @@
 ## Decision Evidence & Authority
 
 | Decision | Authority | Evidence | Status |
-|---|---|---|---|
+| ------ | ------ | ------ | ------ |
 | **D4.b** (G→N Mapping) | Owner | checklists/requirements.md § D4 | ✅ Recorded 2026-10-25 |
 | **D5** (Pointer Strategy) | Owner | checklists/requirements.md § D5 | ✅ Recorded 2026-10-25 |
 | **D5.a** (Archive Location) | D5 implementation | `guidelines/_archive/` directory | ✅ Approved |
