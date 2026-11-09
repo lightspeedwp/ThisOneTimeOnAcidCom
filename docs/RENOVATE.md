@@ -83,13 +83,28 @@ Renovate has replaced Dependabot for automated dependency and GitHub Actions upd
 
 ### Temporarily Pause Renovate
 
-Add to `.github/renovate.json`:
+⚠️ **Warning: Destructive operation**
+
+Adding `"enabled": false` to `.github/renovate.json` will:
+- **Close all open Renovate PRs**
+- **Delete all Renovate branches** (cleanup phase)
+- Stop future dependency updates
+
+This is NOT a simple pause — it cleans up in-progress work. Use only if you want to completely stop Renovate activity.
+
 ```json
 {
   "extends": ["github>lightspeedwp/.github:renovate"],
   "enabled": false
 }
 ```
+
+**To cleanly pause** without destroying branches:
+1. Leave `enabled: true`
+2. Set schedule to pause period: `"schedule": ["after 9999-01-01"]` (never runs)
+3. Restore normal schedule when ready to resume
+
+**To permanently disable Renovate:** Use both `enabled: false` AND remove the Renovate app from repository settings.
 
 ### Pinning a Version
 
@@ -100,7 +115,7 @@ npm ci  # updates lock file
 git commit -m "deps: pin package-name to X.Y.Z"
 ```
 
-Renovate will not suggest newer versions until the pin is removed.
+**Note:** Pinning in `package-lock.json` does NOT freeze the version in `package.json`. Renovate will still propose newer versions if they satisfy the range in `package.json` (e.g., `^1.0.0` allows `1.5.0`). To truly freeze, edit `package.json` to exact version without range operators: `"1.0.0"` instead of `"^1.0.0"`.
 
 ### Overriding Org Policy (Rarely Needed)
 
@@ -131,12 +146,13 @@ Add to `.github/renovate.json` to override org defaults:
 {
   "packageRules": [
     {
-      "matchPackageName": "package-name",
+      "matchPackageNames": ["package-name"],
       "schedule": ["before 6am on Monday"]
     }
   ]
 }
 ```
+(Use `matchPackageNames` with an array, not `matchPackageName`)
 
 ---
 

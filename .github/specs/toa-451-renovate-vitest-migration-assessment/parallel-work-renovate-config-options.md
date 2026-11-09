@@ -76,14 +76,14 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
       "extends": ["schedule:weekly"]
     },
     {
-      "matchDatasources": ["github-actions"],
+      "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "CI/CD (minor/patch)",
       "groupSlug": "ci-minor-patch",
       "extends": ["schedule:weekly"]
     },
     {
-      "matchDatasources": ["github-actions"],
+      "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major"],
       "groupName": "CI/CD (major)",
       "groupSlug": "ci-major",
@@ -152,14 +152,14 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
       "extends": ["schedule:weekly"]
     },
     {
-      "matchDatasources": ["github-actions"],
+      "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "CI/CD (minor/patch)",
       "groupSlug": "ci-minor-patch",
       "extends": ["schedule:weekly"]
     },
     {
-      "matchDatasources": ["github-actions"],
+      "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major"],
       "groupName": "CI/CD (major)",
       "groupSlug": "ci-major",
@@ -247,13 +247,13 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
   "ci-grouping": {
     "packageRules": [
       {
-        "matchDatasources": ["github-actions"],
+        "matchManagers": ["github-actions"],
         "matchUpdateTypes": ["minor", "patch"],
         "groupName": "CI/CD (minor/patch)",
         "groupSlug": "ci-minor-patch"
       },
       {
-        "matchDatasources": ["github-actions"],
+        "matchManagers": ["github-actions"],
         "matchUpdateTypes": ["major"],
         "groupName": "CI/CD (major)",
         "groupSlug": "ci-major"

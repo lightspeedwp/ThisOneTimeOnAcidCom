@@ -172,8 +172,9 @@ npx vitest run scripts/cleanup-branches.test.js
 
 ### Run tests matching a pattern
 ```bash
-npx vitest run -- --grep "branch validation"
+npx vitest run -t "branch validation"
 ```
+(Use `-t` or `--testNamePattern`; Vitest does not support `--grep`)
 
 ---
 
@@ -250,8 +251,8 @@ A: Use `vi.stubEnv()` instead of direct `process.env` assignment:
 vi.stubEnv('NODE_ENV', 'test');
 ```
 
-**Q: Want to use Jest config file**  
-A: Vitest can read `jest.config.js` if present, but `vitest.config.ts` takes precedence.
+**Q: Want to use Jest config?**  
+A: Vitest does not read `jest.config.js`. Use `vitest.config.ts` (or `vitest.config.js`) for Vitest-specific configuration. If migrating from Jest, rewrite relevant options into Vitest's config format.
 
 ---
 
