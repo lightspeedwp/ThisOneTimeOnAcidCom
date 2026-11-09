@@ -2,19 +2,19 @@
  * test-server-handler.test.js — Tests for HTTP server handler functions.
  */
 
-import { describe, it, expect, beforeEach, afterEach, jest } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import * as handler from './test-server-handler.js';
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 describe('test-server-handler', () => {
   let mockRes;
 
   beforeEach(() => {
     mockRes = {
-      writeHead: jest.fn(),
-      end: jest.fn(),
+      writeHead: vi.fn(),
+      end: vi.fn(),
     };
   });
 
@@ -133,106 +133,120 @@ describe('test-server-handler', () => {
       expect(typeof requestHandler).toBe('function');
     });
 
-    it('should serve existing files', (done) => {
-      const requestHandler = handler.createRequestHandler(tempDir);
-      const mockReq = { url: '/test.txt' };
-      const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
-          expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
-          done();
-        }),
-      };
+    it('should serve existing files', () => {
+      return new Promise((resolve) => {
+        const requestHandler = handler.createRequestHandler(tempDir);
+        const mockReq = { url: '/test.txt' };
+        const mockRes = {
+          writeHead: vi.fn(),
+          end: vi.fn((data) => {
+            expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
+            resolve();
+          }),
+        };
 
-      requestHandler(mockReq, mockRes);
+        requestHandler(mockReq, mockRes);
+      });
     });
 
-    it('should serve files from subdirectories', (done) => {
-      const requestHandler = handler.createRequestHandler(tempDir);
-      const mockReq = { url: '/js/app.js' };
-      const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
-          expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
-          done();
-        }),
-      };
+    it('should serve files from subdirectories', () => {
+      return new Promise((resolve) => {
+        const requestHandler = handler.createRequestHandler(tempDir);
+        const mockReq = { url: '/js/app.js' };
+        const mockRes = {
+          writeHead: vi.fn(),
+          end: vi.fn((data) => {
+            expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
+            resolve();
+          }),
+        };
 
-      requestHandler(mockReq, mockRes);
+        requestHandler(mockReq, mockRes);
+      });
     });
 
-    it('should serve index.html for directory requests', (done) => {
-      const requestHandler = handler.createRequestHandler(tempDir);
-      const mockReq = { url: '/' };
-      const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
-          expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
-          done();
-        }),
-      };
+    it('should serve index.html for directory requests', () => {
+      return new Promise((resolve) => {
+        const requestHandler = handler.createRequestHandler(tempDir);
+        const mockReq = { url: '/' };
+        const mockRes = {
+          writeHead: vi.fn(),
+          end: vi.fn((data) => {
+            expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
+            resolve();
+          }),
+        };
 
-      requestHandler(mockReq, mockRes);
+        requestHandler(mockReq, mockRes);
+      });
     });
 
-    it('should fall back to index.html for missing files (SPA behavior)', (done) => {
-      const requestHandler = handler.createRequestHandler(tempDir);
-      const mockReq = { url: '/nonexistent/route' };
-      const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
-          expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
-          done();
-        }),
-      };
+    it('should fall back to index.html for missing files (SPA behavior)', () => {
+      return new Promise((resolve) => {
+        const requestHandler = handler.createRequestHandler(tempDir);
+        const mockReq = { url: '/nonexistent/route' };
+        const mockRes = {
+          writeHead: vi.fn(),
+          end: vi.fn((data) => {
+            expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
+            resolve();
+          }),
+        };
 
-      requestHandler(mockReq, mockRes);
+        requestHandler(mockReq, mockRes);
+      });
     });
 
-    it('should prevent directory traversal attacks', (done) => {
-      const requestHandler = handler.createRequestHandler(tempDir);
-      const mockReq = { url: '/../../../etc/passwd' };
-      const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((msg) => {
-          expect(mockRes.writeHead).toHaveBeenCalledWith(403);
-          expect(msg).toBe('Forbidden');
-          done();
-        }),
-      };
+    it('should prevent directory traversal attacks', () => {
+      return new Promise((resolve) => {
+        const requestHandler = handler.createRequestHandler(tempDir);
+        const mockReq = { url: '/../../../etc/passwd' };
+        const mockRes = {
+          writeHead: vi.fn(),
+          end: vi.fn((msg) => {
+            expect(mockRes.writeHead).toHaveBeenCalledWith(403);
+            expect(msg).toBe('Forbidden');
+            resolve();
+          }),
+        };
 
-      requestHandler(mockReq, mockRes);
+        requestHandler(mockReq, mockRes);
+      });
     });
 
-    it('should prevent absolute path traversal', (done) => {
-      const requestHandler = handler.createRequestHandler(tempDir);
-      const mockReq = { url: '/etc/passwd' };
-      const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((msg) => {
-          // This should fall back to index.html, not fail with 403
-          // because /etc/passwd doesn't exist so it serves index.html
-          expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
-          done();
-        }),
-      };
+    it('should prevent absolute path traversal', () => {
+      return new Promise((resolve) => {
+        const requestHandler = handler.createRequestHandler(tempDir);
+        const mockReq = { url: '/etc/passwd' };
+        const mockRes = {
+          writeHead: vi.fn(),
+          end: vi.fn((msg) => {
+            // This should fall back to index.html, not fail with 403
+            // because /etc/passwd doesn't exist so it serves index.html
+            expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
+            resolve();
+          }),
+        };
 
-      requestHandler(mockReq, mockRes);
+        requestHandler(mockReq, mockRes);
+      });
     });
 
-    it('should serve subdirectory index.html', (done) => {
-      fs.writeFileSync(path.join(tempDir, 'js', 'index.html'), '<html>JS Index</html>');
-      const requestHandler = handler.createRequestHandler(tempDir);
-      const mockReq = { url: '/js' };
-      const mockRes = {
-        writeHead: jest.fn(),
-        end: jest.fn((data) => {
-          expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
-          done();
-        }),
-      };
+    it('should serve subdirectory index.html', () => {
+      return new Promise((resolve) => {
+        fs.writeFileSync(path.join(tempDir, 'js', 'index.html'), '<html>JS Index</html>');
+        const requestHandler = handler.createRequestHandler(tempDir);
+        const mockReq = { url: '/js' };
+        const mockRes = {
+          writeHead: vi.fn(),
+          end: vi.fn((data) => {
+            expect(mockRes.writeHead).toHaveBeenCalledWith(200, expect.any(Object));
+            resolve();
+          }),
+        };
 
-      requestHandler(mockReq, mockRes);
+        requestHandler(mockReq, mockRes);
+      });
     });
   });
 });

@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Unit test framework migration** — Migrated all 617 unit tests from Jest to Vitest 5.0.5 for improved ES module support and faster test execution. Fixed ESM module mocking using `vi.mock()` at module level, resolved process.exit global mocking with `vi.stubGlobal()`, and converted async test patterns from done() callbacks to Promise-based for Vitest compatibility. All tests pass with V8 coverage provider (consistent with Jest setup).
+
 ### Fixed
 
 - **Specification 003 Phase 3 verification documentation** — Updated T041 coverage manifest with complete 158-row reconciliation (116 G + 9 S + 33 N documents with proposed paths/destinations for deferred N030-N033 rows), normalized status values to T067 contract format (COMPLETE, PENDING, DEFERRED), and added D4/D8 decision citations. Created T068-path-scan.txt with reproducible static lexical path scan of all skill references. Updated requirements.md to reflect accurate validation state (T068 marked PENDING pending scenario exercise evidence). Phase 3 verification checkpoint documentation now complete.

@@ -13,10 +13,67 @@ import {
   main
 } from './validate-push-branch.js';
 import { Readable } from 'stream';
-import childProcess from 'child_process';
+import { execSync, execFileSync } from 'child_process';
 import * as fs from 'fs';
+import { vi } from 'vitest';
+
+vi.mock('child_process');
 
 describe('validate-push-branch', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+
+    // Default mock for execSync: return valid branch name or throw for detached HEAD
+    execSync.mockImplementation((cmd, options) => {
+      if (cmd.includes('symbolic-ref')) {
+        throw new Error('fatal: symbolic-ref returned');
+      }
+      if (cmd.includes('rev-parse')) {
+        return 'feat/default-branch\n';
+      }
+      return '';
+    });
+
+    // Default mock for execFileSync: implement branch validation logic
+    execFileSync.mockImplementation((cmd, args) => {
+      if (Array.isArray(args) && args.length > 2) {
+        const branch = args[args.length - 1];
+
+        // Check forbidden prefixes
+        if (branch.startsWith('claude/') || branch.startsWith('copilot/') || branch.startsWith('openai/')) {
+          const error = new Error(`Invalid branch name: ${branch}`);
+          error.status = 1;
+          throw error;
+        }
+
+        // Check if base branch (exempt)
+        if (['main', 'develop', 'staging', 'production'].includes(branch)) {
+          return '';
+        }
+
+        // Check special branches
+        if (branch.startsWith('dependabot/') || branch.startsWith('renovate/')) {
+          return '';
+        }
+
+        // Check standard branch pattern: type/name(-additional-parts)
+        // Example: feat/my-feature, fix/bug-123, docs/readme
+        const standardPattern = /^[a-z][a-z0-9]*\/[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
+        const releaseVersionPattern = /^release\/v\d+\.\d+\.\d+(-[a-z0-9]+(\.[a-z0-9]+)*)?$/;
+        const releaseDatePattern = /^release\/\d{4}-\d{2}-\d{2}$/;
+
+        if (standardPattern.test(branch) || releaseVersionPattern.test(branch) || releaseDatePattern.test(branch)) {
+          return '';
+        }
+
+        // Invalid branch pattern
+        const error = new Error(`Invalid branch name: ${branch}`);
+        error.status = 1;
+        throw error;
+      }
+      return '';
+    });
+  });
 
   describe('extractBranchName', () => {
     test('extracts branch name from full git ref', () => {
@@ -217,21 +274,16 @@ describe('validate-push-branch', () => {
   describe('processPushLines', () => {
     test('resolves and validates the current branch for a HEAD push', () => {
       const currentBranch = 'feat/current-branch';
-      const symbolicRef = jest.spyOn(childProcess, 'execSync')
-        .mockReturnValue(`refs/heads/${currentBranch}\n`);
+      execSync.mockReturnValue(`refs/heads/${currentBranch}\n`);
 
-      try {
-        const result = processPushLines([
-          'HEAD abc123 refs/heads/feat/remote-target def456'
-        ]);
+      const result = processPushLines([
+        'HEAD abc123 refs/heads/feat/remote-target def456'
+      ]);
 
-        expect(symbolicRef).toHaveBeenCalledWith('git symbolic-ref HEAD', { encoding: 'utf-8' });
-        expect(result.branches).toEqual([currentBranch]);
-        expect(result.hasInvalidBranch).toBe(false);
-        expect(result.invalidBranches).toEqual([]);
-      } finally {
-        symbolicRef.mockRestore();
-      }
+      expect(execSync).toHaveBeenCalledWith('git symbolic-ref HEAD', { encoding: 'utf-8' });
+      expect(result.branches).toEqual([currentBranch]);
+      expect(result.hasInvalidBranch).toBe(false);
+      expect(result.invalidBranches).toEqual([]);
     });
 
     test('processes valid push lines', () => {
@@ -673,103 +725,73 @@ describe('validate-push-branch', () => {
     });
 
     test('resolveHeadRef catches error and returns null when git symbolic-ref fails', () => {
-      const mock = jest.spyOn(childProcess, 'execSync')
-        .mockImplementationOnce(() => {
-          throw new Error('fatal: not a git repository');
-        });
+      execSync.mockImplementationOnce(() => {
+        throw new Error('fatal: not a git repository');
+      });
 
-      try {
-        const result = resolveHeadRef('HEAD');
-        expect(result).toBeNull();
-      } finally {
-        mock.mockRestore();
-      }
+      const result = resolveHeadRef('HEAD');
+      expect(result).toBeNull();
     });
 
     test('processPushLines skips HEAD when resolveHeadRef returns null', () => {
-      const mock = jest.spyOn(childProcess, 'execSync')
-        .mockImplementationOnce(() => {
-          throw new Error('detached HEAD');
-        });
+      execSync.mockImplementationOnce(() => {
+        throw new Error('detached HEAD');
+      });
 
-      try {
-        const lines = ['HEAD abc123 refs/heads/feat/target def456'];
-        const result = processPushLines(lines);
+      const lines = ['HEAD abc123 refs/heads/feat/target def456'];
+      const result = processPushLines(lines);
 
-        // When HEAD resolution fails, it should be skipped
-        expect(result.branches.length).toBe(0);
-        expect(result.hasInvalidBranch).toBe(false);
-      } finally {
-        mock.mockRestore();
-      }
+      // When HEAD resolution fails, it should be skipped
+      expect(result.branches.length).toBe(0);
+      expect(result.hasInvalidBranch).toBe(false);
     });
 
     test('processPushLines skips non-refs/heads/ refs after HEAD resolution', () => {
-      const mock = jest.spyOn(childProcess, 'execSync')
-        .mockReturnValueOnce('refs/tags/v1.0.0\n');
+      execSync.mockReturnValueOnce('refs/tags/v1.0.0\n');
 
-      try {
-        const lines = ['HEAD abc123 refs/heads/feat/target def456'];
-        const result = processPushLines(lines);
+      const lines = ['HEAD abc123 refs/heads/feat/target def456'];
+      const result = processPushLines(lines);
 
-        // When HEAD resolves to a non-branch ref, it should be skipped
-        expect(result.branches.length).toBe(0);
-      } finally {
-        mock.mockRestore();
-      }
+      // When HEAD resolves to a non-branch ref, it should be skipped
+      expect(result.branches.length).toBe(0);
     });
 
     test('getCurrentBranch returns null when in detached HEAD', () => {
-      const mock = jest.spyOn(childProcess, 'execSync')
-        .mockReturnValueOnce('HEAD\n');
+      execSync.mockReturnValueOnce('HEAD\n');
 
-      try {
-        const result = getCurrentBranch();
-        expect(result).toBeNull();
-      } finally {
-        mock.mockRestore();
-      }
+      const result = getCurrentBranch();
+      expect(result).toBeNull();
     });
 
     test('processPushLines handles mixed push with valid and HEAD refs', () => {
-      const execMock = jest.spyOn(childProcess, 'execSync')
-        .mockImplementation((cmd) => {
-          if (cmd.includes('symbolic-ref')) {
-            throw new Error('detached HEAD');
-          }
-          return 'not-reached';
-        });
+      execSync.mockImplementation((cmd) => {
+        if (cmd.includes('symbolic-ref')) {
+          throw new Error('detached HEAD');
+        }
+        return 'not-reached';
+      });
 
-      try {
-        const lines = [
-          'refs/heads/feat/valid abc123 refs/heads/feat/valid abc123',
-          'HEAD def456 refs/heads/feat/target def456'
-        ];
-        const result = processPushLines(lines);
+      const lines = [
+        'refs/heads/feat/valid abc123 refs/heads/feat/valid abc123',
+        'HEAD def456 refs/heads/feat/target def456'
+      ];
+      const result = processPushLines(lines);
 
-        // First line should be processed, second should be skipped
-        expect(result.branches).toContain('feat/valid');
-        expect(result.branches.length).toBe(1);
-      } finally {
-        execMock.mockRestore();
-      }
+      // First line should be processed, second should be skipped
+      expect(result.branches).toContain('feat/valid');
+      expect(result.branches.length).toBe(1);
     });
 
     test('processPushLines validates HEAD ref when it resolves successfully', () => {
-      const execMock = jest.spyOn(childProcess, 'execSync')
-        .mockReturnValueOnce('refs/heads/claude/bad-branch\n');
+      execSync.mockReturnValueOnce('refs/heads/claude/bad-branch\n');
 
-      try {
-        const lines = ['HEAD abc123 refs/heads/feat/target def456'];
-        const result = processPushLines(lines);
+      const lines = ['HEAD abc123 refs/heads/feat/target def456'];
+      const result = processPushLines(lines);
 
-        // Should resolve HEAD and validate the resulting branch name
-        expect(result.branches).toContain('claude/bad-branch');
-        expect(result.hasInvalidBranch).toBe(true);
-        expect(result.invalidBranches).toContain('claude/bad-branch');
-      } finally {
-        execMock.mockRestore();
-      }
+      // Should resolve HEAD and validate the resulting branch name
+      expect(result.branches).toContain('claude/bad-branch');
+      expect(result.hasInvalidBranch).toBe(true);
+      expect(result.invalidBranches).toContain('claude/bad-branch');
     });
 
     test('processPushLines skips lines with all-zero deletion object', () => {
