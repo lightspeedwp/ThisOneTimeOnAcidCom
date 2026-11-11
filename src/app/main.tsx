@@ -1,6 +1,6 @@
 /**
- * @fileoverview Main entry point for the Ash Shaw Makeup Portfolio application
- * Bootstraps React app with proper error handling and performance monitoring
+ * @fileoverview Nested legacy bootstrap for the Ash Shaw Makeup Portfolio
+ * application. Root index.html loads src/main.tsx instead.
  * 
  * @author Ash Shaw Portfolio Team
  * @version 1.2.0 - Bundler-safe: guarded import.meta.env access
@@ -19,7 +19,8 @@ import { registerServiceWorker } from './utils/pwaService';
 
 // import.meta.env access completely removed — proven unreliable in this bundler
 
-// Initialize aggressive extension error suppression immediately
+// Initialise the existing extension suppression utility. This does not prove
+// that extensions are suppressed in every environment.
 initializeExtensionErrorSuppression();
 
 // Ensure we have a root element
@@ -29,7 +30,8 @@ if (!rootElement) {
   throw new Error('Root element not found. Make sure you have a div with id="root" in your HTML.');
 }
 
-// Create React root and render the application
+// Render App inside the existing wrappers; this is not a guarantee of complete
+// error isolation.
 var root = ReactDOM.createRoot(rootElement);
 
 root.render(
@@ -48,7 +50,8 @@ root.render(
   )
 );
 
-// Register PWA service worker for offline functionality
+// Attempt service-worker registration after window load when supported; this
+// does not prove offline or PWA readiness.
 var hasServiceWorker = 'serviceWorker' in navigator;
 if (hasServiceWorker) {
   window.addEventListener('load', function onWindowLoad() {

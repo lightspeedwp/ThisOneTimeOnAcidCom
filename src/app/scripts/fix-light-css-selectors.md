@@ -1,57 +1,26 @@
-# Script: Remove All body:not(.dark) Selectors from light.css
+# Historical note: light CSS selectors
 
-**Purpose:** Remove all `body:not(.dark)` selectors that cause light mode styles
-to leak into dark mode.
+This note records a historical, unvalidated transformation proposal. It is not
+a current instruction and must not be executed without separate approval.
 
-**Pattern to Remove:**
+The historical claim was that `body:not(.dark)` selectors could leak light
+styles into dark mode. The historical report counted **73+** instances.
 
-```css
-/* WRONG - Remove all instances of this pattern */
-:root:not(.dark) .element,
-body:not(.dark) .element {
-  /* styles */
-}
-
-```text
-
-**Replace With:**
+Historical before/after example:
 
 ```css
-/* CORRECT - Use only :root:not(.dark) */
-:root:not(.dark) .element {
-  /* styles */
-}
-
-```text
-
-**Total Instances to Fix:** 73+
-
-**Method:**
-Since find/replace in CSS requires preserving the styles and only removing the
-selector, I'll need to manually remove each `body:not(.dark)` line while keeping
-the `:root:not(.dark)` version.
-
-**Pattern:**
-
-1. Find: `:root:not(.dark) SELECTOR,\nbody:not(.dark) SELECTOR {`
-
-1. Replace: `:root:not(.dark) SELECTOR {`
-
-**Example:**
-
-```css
-/* Before */
+/* Before: historical example */
 :root:not(.dark) .header,
 body:not(.dark) .header {
   background: pink;
 }
 
-/* After */
+/* After: historical example */
 :root:not(.dark) .header {
   background: pink;
 }
+```
 
-```text
-
-**Note:** This is a manual refactoring task due to the variable nature of
-selectors.
+The examples and count are retained for reports that reference this note. They
+are historical claims, not a fresh diagnosis or a directive to alter
+`light.css`.
