@@ -2,15 +2,15 @@
 spec_id: "003"
 feature: "guidelines-refactor"
 issue: "TOA-358"
-status: "implemented"
+status: "phase-2-in-progress"
 created: "2026-10-24"
 ---
 
 # Specification 003: Refactor Guidelines (TOA-358)
 
-**Status:** Implemented  
+**Status:** Phase 2 In Progress  
 **Issue:** [TOA-358](https://linear.app/lightspeedwp/issue/TOA-358) | [GitHub #416](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/416)  
-**Branch:** `docs/spec-003-guidelines-reconcile`\
+**Branch:** `docs/spec-003-phase2-implementation`  
 **Created:** 2026-10-24
 
 ## Overview
@@ -166,6 +166,9 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
 
 - Q: T069 Final Sign-Off gate—manual review, automated CI, or both for "READY FOR MERGE"? → A: Both—manual sign-off confirms quality intent, automated CI verifies no regressions.
   - **Integration:** T069 completion gate clarified: manual human verification + CI green required before marking READY FOR MERGE.
+
+- Q: Should spec status field reflect current work state (e.g., `phase-2-in-progress`) or remain `implemented` (spec-only)? → A: Update to `phase-2-in-progress`—reflects actual implementation state; readers see work is ongoing.
+  - **Integration:** Spec front-matter status updated to `phase-2-in-progress` to indicate Phase 2 implementation is actively underway.
 
 ## Next Steps
 
