@@ -164,6 +164,9 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
 - Q: How are S-document approvals (per D0's "locked-files-guard" requirement) tracked and verified at PR merge time? → A: GitHub CODEOWNERS file with standard code-owner review requirement (automatic tracking, merge-time verification).
   - **Integration:** D0 approval mechanism clarified: S-documents (.claude/skills/*, AGENTS.md, CONTRIBUTING.md) require GitHub code-owner review via CODEOWNERS, automatically enforced at merge.
 
+- Q: T069 Final Sign-Off gate—manual review, automated CI, or both for "READY FOR MERGE"? → A: Both—manual sign-off confirms quality intent, automated CI verifies no regressions.
+  - **Integration:** T069 completion gate clarified: manual human verification + CI green required before marking READY FOR MERGE.
+
 ## Next Steps
 
 1. **Specification Validation:** All decision gates (D0–D8) now resolved and documented
