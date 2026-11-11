@@ -28,12 +28,12 @@ Design exact email verification copy, form wording, error messages, and newslett
 ### 1. Email Copy (Approved Source: 06-website-reading-prd.md v1.1.1)
 
 #### Email Subject
-```
+```text
 Your reading code for ThisOneTimeOnAcidCom
-```
+```text
 
 #### Email Body
-```
+```text
 Hi [Reader],
 
 We've sent you a 10-minute access code below. Enter it on the website to start reading.
@@ -45,12 +45,12 @@ This code expires [based on Decision 3: from generation / receipt / page load].
 Questions? Reply to this email.
 
 — The ThisOneTimeOnAcidCom Team
-```
+```text
 
 #### Email Footer
-```
+```text
 You received this because you requested reading access. [Newsletter Signup Link - see below]
-```
+```text
 
 **Key Details**:
 - All copy is exact—no modifications without approval

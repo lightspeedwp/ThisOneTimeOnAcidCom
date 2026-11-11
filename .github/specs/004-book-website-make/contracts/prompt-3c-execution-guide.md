@@ -68,25 +68,25 @@ From 06-website-reading-prd.md (v1.1.1):
 5. Update acceptance criteria with decision-specific requirements
 
 **Example (if Decision 3=A, "From Generation")**:
-```
+```text
 Expiry Clock Starts: When code is generated in backend
 Expiry Window: 10 minutes
 Expired Error Message: "Code expired. Generated [X minutes ago]. Request a new code."
 User Guidance: User sees clear timing reference; understands email delay isn't problem
-```
+```text
 
 ### Phase 2: Design Error State 1 — Invalid Code
 
 **Trigger**: User enters wrong characters (not a valid code format)
 
 **User Experience**:
-```
+```text
 Form displays:
   Label: "Enter your code"
   Input: [XXX-XXX] (with invalid entry attempt)
   Error message: "Invalid code. Please check and try again."
   Button: "Verify Access" (disabled)
-```
+```text
 
 **Design Specifications**:
 
@@ -123,25 +123,25 @@ Form displays:
 **Decision 3 Impact** (select based on resolved option):
 
 #### If Decision 3=A (From Generation):
-```
+```text
 Error Message: "Code expired. Generated [X minutes ago]. Request a new code."
 Additional Info: Show generation timestamp if available
 User Guidance: Clear technical explanation; implies email delivery wasn't the problem
-```
+```text
 
 #### If Decision 3=B (From Receipt):
-```
+```text
 Error Message: "Code expired. Email received [X minutes ago]. Request a new code."
 Additional Info: Estimated receipt time
 User Guidance: Accounts for email delivery variability; user-focused
-```
+```text
 
 #### If Decision 3=C (From Page Load):
-```
+```text
 Error Message: "Code expired. Please request a new code and enter it within 10 minutes."
 Additional Info: Refresh/reload instruction
 User Guidance: No timing details; clear next steps
-```
+```text
 
 **Design Specifications**:
 
@@ -178,7 +178,7 @@ User Guidance: No timing details; clear next steps
 **Trigger**: User exceeded retry attempts (e.g., 5+ failed codes)
 
 **User Experience**:
-```
+```text
 Form displays:
   Label: "Enter your code"
   Input: [disabled] (read-only)
@@ -186,7 +186,7 @@ Form displays:
   Countdown timer: 15:00 ↓ 14:59 ↓ 14:58... (updates in real-time)
   Button: "Verify Access" (disabled)
   Secondary button: "Request New Code" (enabled)
-```
+```text
 
 **Design Specifications**:
 
@@ -235,14 +235,14 @@ Form displays:
 **Trigger**: Backend service unavailable or verification service fails
 
 **User Experience**:
-```
+```text
 Form displays:
   Label: "Enter your code"
   Input: [XXXXXX] (disabled for retry)
   Error message: "We're having trouble verifying your code. Please try again in a moment."
   Button 1: "Try Again" (enabled, blue)
   Button 2: "Request New Code" (enabled, secondary style)
-```
+```text
 
 **Design Specifications**:
 
@@ -285,22 +285,22 @@ Form displays:
 **Pending Decision 1 Options**:
 
 #### If Decision 1=A (Recovery Takes Precedence):
-```
+```text
 Form behavior: Email entry form closes; shows recovery message instead
 Message: "Access being restored from previous session. Please wait..."
 Form: Hidden/replaced with recovery UI
 User action: Wait for auto-redirect to content (no form interaction)
-```
+```text
 
 #### If Decision 1=D (User Chooses Explicitly):
-```
+```text
 Form behavior: Both email entry and recovery buttons shown
 Message: "Restore access from previous session or use new code?"
 Buttons: 
   - "Restore Previous Session" 
   - "Request New Code"
 User action: Click preferred option
-```
+```text
 
 **Design Specifications** (Common to all Decision 1 options):
 

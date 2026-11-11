@@ -19,6 +19,7 @@
 ## Specification Approval Map (spec.md)
 
 ### Section 1: Purpose & Context
+
 | Item | Status | Evidence | Notes |
 |------|--------|----------|-------|
 | Feature scope (Figma Make prompt pack) | ✓ | Spec 1.0.0, FR-001 through FR-010 | Locked; no changes during preflight |
@@ -26,6 +27,7 @@
 | Source verification authority (6 source files) | ✓ | Spec 1.0.0, Specification Notes | All 6 files analyzed and reconciled |
 
 ### Section 2: User Stories (US1–US4)
+
 | Story | Status | Evidence | Approval Notes |
 |-------|--------|----------|-----------------|
 | **US1: Design Hand-off (P1)** | ✓ | Spec lines 13–26; SC-001 | Approved baseline locked: Space Grotesk, Inter, 9-color palette |
@@ -34,6 +36,7 @@
 | **US4: Documentation Completeness (P1)** | ✓ | Spec lines 83–106; SC-001 | Pre-approval workflow approved |
 
 ### Section 3: Functional Requirements (FR-001 through FR-010)
+
 | Requirement | Status | Evidence | Approval Notes |
 |-------------|--------|----------|-----------------|
 | **FR-001**: Analyze 6 source files | ✓ | Completed; version-reconciliation.md generated | All files retrieved, versions extracted |
@@ -48,6 +51,7 @@
 | **FR-010**: Prepare package for approval | ✓ | Convergence Phase 8 tasks T052–T059 output | All artifacts prepared pre-approval |
 
 ### Section 4: Success Criteria (SC-001 through SC-008)
+
 | Criterion | Status | Evidence | Approval Notes |
 |-----------|--------|----------|-----------------|
 | **SC-001**: Source file analysis complete | ✓ | version-reconciliation.md; 6 files with versions | Zero silent merges; all conflicts documented |

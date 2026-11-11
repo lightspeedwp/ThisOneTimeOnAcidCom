@@ -263,7 +263,7 @@
 
 ## Dependencies & Execution Order
 
-```
+```text
 Phase 1 (Setup) ──┐
                   ├──> Phase 2 (Decisions & Gates) ──┐
                   │                                  ├──> Phase 6 (Approval Gates)
@@ -273,7 +273,7 @@ Phase 1 (Setup) ──┐
                   │                                  │
                   └──> Phase 5 (Recovery/Errors) ────┘
                        (BLOCKED: Decisions 1–3)
-```
+```text
 
 ### Critical Path (Blocking Dependencies)
 
