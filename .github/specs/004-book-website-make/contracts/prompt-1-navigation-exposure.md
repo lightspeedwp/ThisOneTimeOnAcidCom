@@ -29,12 +29,10 @@ From 03-author-decisions-launch-scope.md (v1.3.0):
 - Public sitemap includes: /home, /about, /book, /contact, ...
 - Navigation component displays: /home, /about, /book, /contact (Speaking/Events/Media hidden)
 - Route enforcement for /speaking, /events, /media:
-  - Option A (Recommended): Meta tags + Robots.txt + Sitemap.xml exclusion
-  - Option B (Alternative): Robots.txt only
-  - Option C (Alternative): Meta tags only
-  - Option D (Alternative): Sitemap.xml filtering only
+  - ✅ **Selected: Option A (Recommended)**: Meta tags + Robots.txt + Sitemap.xml exclusion
+  - (Alternative options available if different enforcement method chosen)
   
-  *(Selected from Blocking Decision 7: Route Enforcement Verification)*
+  *(Blocking Decision 7: Route Enforcement Verification — Option A Selected)*
 
 **No Changes To**:
 - Functionality (routes remain accessible, not deleted)

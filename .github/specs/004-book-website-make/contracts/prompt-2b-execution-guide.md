@@ -39,10 +39,10 @@ Design the complete navigation component with all interactive states (default, h
 - Links displayed inline, left-aligned
 - Each link has spacing between
 
-**States**:
-- **Default**: Text color = Primary (#1a1a1a light / #ffffff dark)
-- **Hover**: Text color = Accent (#e8d4b8 light / #d4a574 dark)
-- **Active**: Text color = Accent, bold weight (600 instead of 400)
+**States** (Approved Baseline):
+- **Default**: Text color = Primary (#0B0B10 light / #F6F2EB dark)
+- **Hover**: Text color = Accent (#FF3AAE hot pink — same in both themes)
+- **Active**: Text color = Accent (#FF3AAE hot pink), bold weight (600 instead of 400)
 
 **Typography**:
 - Font: Inter
@@ -54,12 +54,12 @@ Design the complete navigation component with all interactive states (default, h
 ┌─────────────────────────────────────────┐
 │ Home    About    Book    Contact        │
 │ ^^^^
-│ default state (charcoal #1a1a1a)
+│ default state (dark #0B0B10 / cream #F6F2EB)
 │
 │         ^^^^^^
-│         hover state (tan #e8d4b8)
+│         hover state (hot pink #FF3AAE)
 │
-│ Book (bold, accent color)
+│ Book (bold, hot pink accent #FF3AAE)
 │ ^^^^ active state
 └─────────────────────────────────────────┘
 ```text

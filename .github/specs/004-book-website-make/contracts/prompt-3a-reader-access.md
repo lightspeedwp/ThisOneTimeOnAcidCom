@@ -1,6 +1,6 @@
 # Figma Make Prompt 3A: Reader Access Copy & Forms
 
-**Status**: ✅ UNBLOCKED (waiting for Decisions 3, 4, 5, 6)  
+**Status**: ❌ BLOCKED (waiting for Decisions 3, 4, 5, 6)  
 **Priority**: P1  
 **Prompt ID**: 3A  
 **Type**: reader-access
@@ -13,7 +13,7 @@
 
 Generate exact email verification copy, form wording, error messages, and newsletter CTA specifications—separate newsletter signup from reading verification per approved decision.
 
-### Email Copy (Approved Source: 06-website-reading-prd.md v1.1.1)
+### Email Copy (Approved Source: `content/book/06-website-reading-prd.md` v1.1.1)
 
 **Email Subject**:
 "Your reading code for ThisOneTimeOnAcidCom"
@@ -104,9 +104,10 @@ Questions? Reply to this email.
 
 ### Reference Documents
 
-- Source: 06-website-reading-prd.md (v1.1.1)
-- Reader Access Policy: 06-website-reading-prd.md (10-minute codes, 30-day device lifecycle)
-- Design Baseline: 04-design-brief.md (typography, colors)
+- Source: `content/book/06-website-reading-prd.md` (v1.1.1) — Website reading experience requirements
+- Reader Access Policy: `content/book/06-website-reading-prd.md` (10-minute codes, 30-day device lifecycle)
+- Design Baseline: `content/book/04-design-brief.md` (typography, colors)
+- Related: `.github/specs/004-book-website-make/references/10-toa-prd-website-reading-experience.md` (launch requirements)
 
 ### Dependencies
 
