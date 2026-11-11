@@ -274,10 +274,31 @@ All of these must be true when complete:
   --font-body: 'Inter';
   --font-ui: 'Inter';
   
+  /* Typography Sizes (px) */
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-h3: 24px;
+  --font-size-h2: 32px;
+  --font-size-h1: 40px;
+  --font-size-hero: 48px;
+  
+  /* Typography Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
   /* Accents (same in both themes) */
   --color-accent-pink: #FF3AAE;
   --color-accent-yellow: #F4FF3C;
   --color-accent-purple: #8A63FF;
+  
+  /* Component States */
+  --state-hover-opacity: 0.8;
+  --state-active-opacity: 0.7;
+  --state-disabled-opacity: 0.5;
+  --state-focus-ring: 2px solid var(--color-accent-purple);
 }
 
 /* Light Theme */

@@ -73,8 +73,8 @@ Per spec requirement: "Space Grotesk headings, Inter body/UI, 9-color palette (b
 |---------|--------|-------|--------|-------|
 | **Heading Font** | ✓ | Space Grotesk (600, 700 weight; 24–48px) | 04-design-brief.md v1.1.2 | Locked; no alternatives |
 | **Body/UI Font** | ✓ | Inter (400–600 weight; 12–18px) | 04-design-brief.md v1.1.2 | Locked; no alternatives |
-| **Light Theme Colors** | ✓ | 9-color palette (charcoal, white, tan, green, gold, maroon, grays) | 04-design-brief.md v1.1.2 | Exact hex values locked |
-| **Dark Theme Colors** | ✓ | 9-color palette variants (white, charcoal, tan, green, gold, red, grays) | 04-design-brief.md v1.1.2 | Exact hex values locked |
+| **Light Theme Colors** | ~ | 9-color palette mapping | 04-design-brief.md v1.1.2 | Light-theme semantic mapping unresolved; reconciliation with dark baseline pending |
+| **Dark Theme Colors** | ✓ | 9-color palette: #0B0B10, #12121A, #171722, #F6F2EB, #CFC7BB, #9C9488, #FF3AAE, #F4FF3C, #8A63FF (charcoal, dark-charcoal, darker-charcoal, cream, tan-light, tan-dark, pink, yellow, violet) | 04-design-brief.md v1.1.2 lines 170 | Exact hex values locked; semantic naming per brief |
 | **Component Library** | ✓ | Button, Card, Navigation, Form Input, Reader Access Form | 04-design-brief.md v1.1.2 | All components locked |
 
 ---

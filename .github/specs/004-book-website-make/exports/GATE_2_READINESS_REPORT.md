@@ -1,7 +1,7 @@
 # Gate 2 Readiness Report: Spec 004 — Book Website Figma Make
 
 **Date**: 2026-11-11  
-**Status**: 🟢 **READY FOR APPROVAL**  
+**Status**: 🟡 **PENDING APPROVAL**  
 **Branch**: `docs/book-website-make-spec`  
 **Commits**: 2 critical fixes + 1 reference consolidation
 
@@ -9,10 +9,10 @@
 
 ## Executive Summary
 
-Spec 004 has successfully resolved all 4 critical blockers identified in the audit. All contract files are now internally consistent, reference documents are properly consolidated, and the design baseline is correctly specified with approved colors and typography.
+Spec 004 has successfully resolved all 4 critical blockers identified in the audit. All contract files are now internally consistent, reference documents are properly consolidated, and the design baseline is correctly specified with approved colors and typography. Design baseline specification is complete and ready for formal sign-off.
 
 **Gate 2 Requirement**: Design baseline approval (typography, colors, component styles)  
-**Gate 2 Status**: ✅ **APPROVED** — Ready for sign-off
+**Gate 2 Status**: ⏳ **PENDING** — Awaiting formal sign-off from Ash
 
 ---
 
@@ -148,15 +148,17 @@ All contract files now reference the canonical document location:
 
 ## Recommendation
 
-✅ **APPROVE FOR GATE 2**
+⏳ **READY FOR GATE 2 SIGN-OFF**
 
-All requirements for Gate 2 (Design Baseline Approval) are satisfied:
+All requirements for Gate 2 (Design Baseline Approval) specification are satisfied:
 1. Design tokens match approved baseline exactly (no drift)
 2. Typography includes Space Grotesk and Inter with exact weights/sizes
-3. All 9 colors exported for both light and dark themes
+3. All 9 colors defined in approved baseline for both light and dark themes
 4. Unapproved candidates (R3, T1, RT2, C1) explicitly excluded
 5. Component styles defined for Button, Card, Navigation, Form
 6. Contracts are valid and consistent
+
+**NOTE**: Design baseline specification is documented and ready for review. Actual CSS/JSON exports and component implementations remain pending. No Figma Make prompts have been executed; contracts are proposals awaiting execution approval after sign-off.
 
 ---
 

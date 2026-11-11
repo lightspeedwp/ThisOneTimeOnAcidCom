@@ -101,8 +101,8 @@ This document records the final decisions for all 7 blocking decisions, approved
 **User Decision**: ✅ Approved - Option C (2026-11-11)
 
 **Critical Status**:
-- Website officially launches: **January 2027**
-- Manuscript timeline: In development, will be ready for e-reader by website launch
+- Website launch target: **January 2027** (unapproved)
+- Manuscript timeline: In development, expected ready for e-reader by website launch
 - **Impact**: Prompts 3A (reader access copy), 3B (recovery flows), 3C (error states) REMAIN BLOCKED
 - Placeholder messaging required for Prompt 3A until manuscript is approved
 

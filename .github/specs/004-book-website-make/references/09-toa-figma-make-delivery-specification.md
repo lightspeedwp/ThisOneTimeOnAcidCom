@@ -422,14 +422,14 @@ PHASE 2 — COMPLETE FILE PREVIEW; STILL NO WRITES
 Use the attached main-based delivery specification as a candidate,
 not proof of approval.
 
-Propose this feature directory:
+Feature directory already exists:
 .github/specs/004-book-website-make/
 
-004 is not reserved. Check for collisions or an existing equivalent.
-If occupied or overlapping, report the evidence and propose a revised
-destination; do not overwrite or create a duplicate specification.
+Reuse this existing directory. Do not propose an alternative destination
+or create a duplicate specification directory. Consolidate all Figma Make
+work under this canonical location to avoid splitting work across directories.
 
-Prepare the COMPLETE contents of:
+Ensure the COMPLETE contents of:
 spec.md
 plan.md
 tasks.md

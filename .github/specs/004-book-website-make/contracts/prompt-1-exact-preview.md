@@ -163,16 +163,19 @@ Once Blocking Decision 7 is selected, the following exact text will be submitted
 Figma Make Prompt 1 (Navigation Exposure) — For Execution Post Decision-7-Resolution
 
 Goal:
-Update the book website navigation component to hide Speaking, Events, and Media routes from the public navigation menu and search-engine discovery, while preserving them as internally accessible noindex pages.
+Update the book website navigation component to hide Speaking, Events, and Media routes from the public navigation menu, footer links, HTML sitemap, and search-engine discovery, while preserving them as internally accessible noindex pages.
 
 Changes:
 - Remove Speaking, Events, Media links from visible navigation menu
+- Remove Speaking, Events, Media links from footer navigation
+- Remove Speaking, Events, Media entries from HTML sitemap (sitemap.xml)
 - Add noindex meta tag to hidden route pages
 - Apply search engine enforcement per Decision 7: [SELECTED OPTION]
 - Preserve Home, About, Book, Contact as visible navigation items
+- Preserve direct URL access to hidden routes (retained for internal reference without public promotion)
 
 Acceptance Criteria:
-CR-1.1 through CR-1.10 (see section 3 above)
+CR-1.1 through CR-1.10 (see section 3 above); CR-1.11: Footer links verified removed; CR-1.12: HTML sitemap excludes hidden routes
 
 Reference:
 - Author Decision: 03-author-decisions-launch-scope.md v1.3.0

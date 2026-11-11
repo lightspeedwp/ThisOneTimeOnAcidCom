@@ -232,9 +232,10 @@ Once approved, the next phase will include:
 
 **Implications**:
 - ✅ Prompts 1, 2A, 2B ready for immediate Figma Make execution
-- ✅ Prompt 3A ready for execution (with manuscript placeholder text)
-- ✅ Prompts 3B, 3C ready for execution
+- ⚠️ Prompt 3A marked ready but stage assignment unresolved (conflicts with master execution contract stage assignments)
+- ⚠️ Prompts 3B, 3C marked ready but stage assignments unresolved; verify intended stage IDs before execution
 - ⚠️ Prompt 3A success copy will need refresh once manuscript is approved (late January 2027)
+- **ACTION REQUIRED**: Reconcile stage IDs (3A-3C) between spec.md (current reader access focus) and master execution contract (podcast data/routing/playback focus) before marking prompts ready
 
 ---
 
