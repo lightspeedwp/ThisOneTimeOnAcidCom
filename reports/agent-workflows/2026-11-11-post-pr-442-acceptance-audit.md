@@ -23,6 +23,16 @@ Checked 11 November 2026 against fetched origin/main `f6a83750306b36eef3b9199bcb
 - PR #442's configuration, instruction contracts, shared layout, report and root-file relocations are merged. The remaining executable/client acceptance has not been completed in the inspected source or records.
 - A fresh full Spec Kit run still yields 154 passes and one template-path failure. Gemini remains untrusted with no generated-skill isolation applied.
 - Ash clarified main-only workflow and intentionally non-blocking Git validation. The follow-up must reconcile stale instructions, not restore removed branch protection or blocking hooks.
+- TOA-451 remains the planning/evidence record for the Jest-to-Vitest migration, while TOA-453 is the implementation record. The current package already exposes Vitest scripts and dependencies but still retains Jest packages and historical configuration consumers; migration is not complete.
+
+## Ash's numbered answers incorporated into the handoff
+
+1. Use `main` as the base and an explicitly approved implementation branch; do not use `develop`, restore branch protection or make Git hooks blocking.
+2. Implement executable Spec Kit helper/path safeguards with configured-root support and canonical containment before writes.
+3. Verify hook ordering/failure handling, Analyze no-write behaviour and Converge confirmation/snapshot/clean-result behaviour through controlled tests.
+4. Preserve shared skills and native adapters; verify Codex, Claude and Gemini discovery/runtime without changing trust or credentials automatically.
+5. Use Vitest as the current test runner, fix the template-path failure, run current suites and record evidence rather than relying on historical Jest results.
+6. Save dated reports/tasks, publish a new PR against `main`, and leave record mutations and protected-file changes separately authorised.
 
 ## Owner decisions recorded today
 
@@ -41,6 +51,7 @@ Main is the current base for Netlify/Figma Make work; do not use develop as a wo
 | Gemini isolation | skills.enabled true; no skills.disabled. Gemini 0.41.2 still reports untrusted folder, skips project agents and disables project hooks during skills list. | Still blocked on authorised trust/runtime path; do not change personal trust to pass. |
 | Three-client role loading / missing-source stops | No new recorded representative native execution evidence located. Tests cover source references and links. | Remains unverified, not proven broken. |
 | Template precedence failure | Fresh full suite reproduces custom//templates/plan-template.md mismatch. Suite source unchanged since c3ca303. | Still unresolved; fix underlying path join. |
+| Jest-to-Vitest migration (TOA-451/TOA-453) | `package.json` currently uses Vitest scripts and retains Vitest dependencies, but also retains Jest, `@swc/jest`, Jest environment/types and lockfile packages. Migration acceptance still requires discovery, transforms, mocks, snapshots, coverage, reporting and CI consumer review. | Still unresolved: complete TOA-453 using TOA-451's evidence; preserve Node/Bats/Playwright and document rollback. |
 | Migration references | workflow-orchestration still contains absent-template copy instructions near lines 101/166 despite inline alternatives later, plus a misresolved ../guidelines backend link introduced by the D6 addition. | Still needs a complete verified-link pass. Preserve adopted D3–D6 content. |
 | Upgrades | Historical non-forced upgrade refusal evidence is retained; not re-executed in this audit. | Re-test after follow-up changes; do not claim fresh successful upgrade. |
 | Record reconciliation | GitHub #445 remains Open (updated 24 October 05:25 UTC), TOA-365 remains In Progress (updated 24 October 10:05 UTC); descriptions/checklists remain earlier proposals. | Prepare corrections after implementation; no record mutations made. |
@@ -65,6 +76,8 @@ PR #586 intentionally changed local hooks; current AGENTS wording claiming block
 - Exact proposed and checked-out documentation branch validators pass. No unit/build/e2e suites, live writing hooks, native model tasks, trust changes or upgrade tests were run for this audit.
 
 Raw temporary logs are not committed and are not required to reproduce the documented checks. Old 601-test/Jest results are historical; package.json now uses Vitest and adds test:native. Do not run Jest's --runInBand against Vitest or call skipped CI coverage.
+
+TOA-451/TOA-453 are the authoritative migration references: unit, watch and coverage commands must use Vitest; CI/reporting consumers and superseded Jest configuration/dependencies require explicit review before removal.
 
 ## Next work
 

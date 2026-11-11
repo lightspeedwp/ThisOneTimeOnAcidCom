@@ -24,6 +24,7 @@ Status: implementation not started. Documentation baseline: origin/main f6a83750
 - [x] Confirm unchanged unchecked helper paths/hardcoded configured root and absent Gemini isolation.
 - [x] Recheck Gemini trust blockage and demonstrate hook status/logging behaviour in disposable fixtures.
 - [x] Record Ash's main-based workflow and intentional removal of protections; prepare new-chat implementation prompt.
+- [x] Add Ash's numbered answers and current Vitest migration scope to the implementation handoff.
 
 ## Implementation and evidence, dependency order
 
@@ -33,6 +34,8 @@ Status: implementation not started. Documentation baseline: origin/main f6a83750
 - [ ] Approve concrete helper/caller/test file plan; add failing tests for configured nested roots, canonical components, traversal/sibling-prefix/external paths and ancestor/artefact/state symlinks, no writes on rejection and branch/context failures.
 - [ ] Implement minimal shared path resolution and effect-boundary validation in existing Spec Kit helpers; use configured root consistently; keep spec numbering independent of Git; preserve compatibility and original manifests.
 - [ ] Repair underlying preset-template path join; preserve precedence and exact content; make full 155-test baseline green without skips/weakened assertions.
+- [ ] Complete TOA-453 using TOA-451's evidence: migrate unit/watch/coverage commands to Vitest, verify discovery parity, transforms, mocks/imports, snapshots, coverage/reporting and CI consumers, remove superseded Jest configuration/dependencies only after consumer review, and record rollback criteria.
+- [ ] Preserve and verify native Node, Bats and Playwright testing during the Jest-to-Vitest migration; document intentional discovery/coverage differences and exact check-name changes.
 - [ ] Test actual hook dispatch outcomes/approved target transitions through controlled interfaces; no failed/cancelled/unconfirmed hook can produce downstream writes.
 - [ ] Demonstrate Analyze no core writes and Converge assessment no state writes, exact approved append/prefix preservation, unchanged clean result, missing confirmation and stale-snapshot rejection; independent writing-hook authority.
 - [ ] Complete missing reference repairs and check all shared sources after D3–D6 changes, without removing newer skills or inventing template resources.

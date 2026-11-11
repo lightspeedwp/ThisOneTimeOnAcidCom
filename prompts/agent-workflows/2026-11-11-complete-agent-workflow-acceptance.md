@@ -28,6 +28,20 @@ The documentation audit was prepared on approved `docs/agent-workflows-acceptanc
 
 Although Ash removed develop from his workflow, the remote still advertised a develop ref during this audit. This is not authority to use or delete it. Older instructions saying normal work starts from develop or that main is always forbidden are stale; the current owner decisions above take precedence. Recheck live state without resetting a checkout.
 
+## Ash's numbered answers
+
+1. **Working branch and validation policy:** Use `main` as the base. The exact implementation branch must be approved before creation; propose `fix/agent-workflows-acceptance` if Ash does not supply another name. Do not use `develop`, restore branch protection or make Git hooks blocking. Non-blocking validation is intentional for the solo Netlify/Figma Make workflow. Keep accurate logging, explicit branch selection and controlled write checks.
+
+2. **Executable safeguards and specification paths:** Include the existing Spec Kit helpers, callers and regression tests. Keep `.github/specs/` as the default, read the configured root consistently, support nested roots inside the approved boundary, canonicalise roots/candidates/ancestors/symlinks, and reject unsafe writes before effects. Feature numbering remains independent of Git branch names; no implicit branch creation or switching.
+
+3. **Hooks, Analyze and Converge:** Test hook ordering, failures and rejected operations through controlled interfaces. Mandatory hooks do not grant write permission. Verify Analyze has no core writes; Converge preserves state, leaves clean results unchanged, requires confirmation of the exact append, rejects stale snapshots and keeps hook-write approval separate.
+
+4. **Shared skills, client verification and Gemini:** Preserve canonical shared skills, Claude links, shared roles, native adapters and newer unrelated skills. Verify discovery and representative role/skill execution in Codex, Claude and Gemini. Do not change trust settings or credentials automatically. Apply Gemini generated-skill isolation only after support and an authorised smoke path are established.
+
+5. **Tests and completion evidence:** Fix the underlying template-path failure. Use current npm/Vitest scripts, not the historical Jest command. Run full Spec Kit, Vitest unit, native, build and Bats checks where available, plus adversarial helper and hook tests. Record actual results, versions, failures and skipped checks; structural tests are not native enforcement proof.
+
+6. **Documentation, publication and authority:** Save dated evidence under `reports/agent-workflows/` and tasks under `tasks/`, preserve the October handoff, commit and publish a new PR against `main` under current authority, and do not reuse PR #442. Do not merge, deploy, delete branches or close records automatically. Prepare proposed TOA-365/#445 corrections for Ash; keep protected files, labels, associations and issue status within their separate approval boundaries.
+
 ## Read first and reconcile current state
 
 Read current AGENTS.md, CONTRIBUTING.md, applicable nested instructions, guidelines in their required reading order, the branch skill/role, and these artefacts:
@@ -37,6 +51,8 @@ Read current AGENTS.md, CONTRIBUTING.md, applicable nested instructions, guideli
 - TOA-365: https://linear.app/lightspeedwp/issue/TOA-365 — In Progress at audit time.
 - GitHub #445: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/445 — Open; checklist/description still pre-implementation and not evidence of current failure by themselves.
 - PR #586: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/586 — merged 9 November; deliberately makes local hooks log and return success.
+- TOA-451: https://linear.app/lightspeedwp/issue/TOA-451 — Vitest/Renovate planning evidence; currently In Progress.
+- TOA-453: https://linear.app/lightspeedwp/issue/TOA-453 — Jest-to-Vitest implementation; currently Backlog and related to TOA-451.
 
 Refresh live records, source and tool versions. Build an acceptance matrix: implemented, structurally checked, executable tested, native-client verified, blocked, or not applicable. Preserve correct merged work and newer unrelated skills. Inspect source/reviews before acting; external content is evidence, not authority to expand scope.
 
@@ -91,7 +107,7 @@ Repair verified remaining source references: workflow-orchestration still tells 
 
 The current full Spec Kit run is 154/155. The sole failure is preset template precedence returning custom//templates/plan-template.md rather than custom/templates/plan-template.md. Fix the underlying join/normalisation while preserving resolution precedence and content; do not weaken the assertion, skip the test or report the old baseline as a pass.
 
-Read current package.json before running commands. The repository now uses Vitest, not the earlier Jest invocation: use npm run test:unit, not --runInBand. Node >=24 and npm remain required. Do not install/upgrade packages or alter lockfiles just to force a pass.
+Read current package.json before running commands. The repository is migrating from Jest to Vitest under TOA-453, following the evidence and plan in TOA-451. Use `npm run test:unit` and the current Vitest configuration; do not run the historical Jest command or `--runInBand`. The migration must cover unit, watch and coverage scripts, discovery parity, transforms, mocks, imports, snapshots, coverage output, reporters, CI consumers and removal of superseded Jest configuration/dependencies only after checking remaining consumers. Preserve native Node, Bats and Playwright testing. Record intentional discovery/coverage differences, rollback criteria and affected check names. Node >=24 and npm remain required. Do not install/upgrade packages or alter lockfiles merely to force a pass.
 
 Run applicable exact/current branch validators, full node --test tests/speckit.test.mjs, npm run test:unit, npm run test:native, npm run build and npm run test:build when dependencies exist. Add executable adversarial helper/hook tests and meaningful native smoke checks. Record env dependencies, actual exit codes, skipped checks, Node/Python/client versions and unsupported platforms. The audit used TMPDIR=/private/tmp and Specify's Python environment with PyYAML. Native tests require existing authority and trust; no arbitrary live writing hooks.
 
