@@ -2,7 +2,7 @@
 
 **Status:** Configuration merged to `main` on 2026-11-09. Enrolment, preset resolution and operation are **not yet verified** — see [Verification status](#verification-status) ([TOA-454](https://linear.app/lightspeedwp/issue/TOA-454)).
 **Replaces:** Dependabot version updates on `main`
-**Evidence date:** 2026-11-11, inspected at `main` revision `472ce58`
+**Evidence date:** 2026-11-11, inspected at `main` revision `0b70838`
 
 ---
 
@@ -181,7 +181,10 @@ Recorded on 2026-11-11:
 
 None of the options below has been exercised in this repository. Confirm the
 behaviour against the [Renovate documentation](https://docs.renovatebot.com)
-for the version the organisation runs before relying on it.
+for the version the organisation runs before relying on it. Check the
+effective settings for this repository (inherited presets, organisation-level
+configuration and any `packageRules` overrides can change the defaults
+documented below).
 
 | Option | How | Who |
 | --- | --- | --- |
