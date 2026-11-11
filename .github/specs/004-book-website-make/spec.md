@@ -4,28 +4,9 @@
 
 **Created**: 2026-11-09
 
-**Status**: Clarified — Ready for Approval (2026-11-11)
+**Status**: Ready for Figma Make Execution (All blocking decisions approved)
 
 **Input**: Complete staged Figma Make prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval.
-
----
-
-## Clarifications
-
-### Session 2026-11-11
-
-**Clarification Assessment**: No critical functional ambiguities detected. Specification is comprehensive and well-structured with all requirements documented.
-
-**Documented Blocking Decisions** (intentional, not ambiguities—resolved during user approval phase):
-- Recovery-first race condition handling
-- Recovery lifetime eligibility  
-- Code expiry start time (generation vs. receipt vs. page load)
-- Email service provider selection
-- Manuscript publication readiness
-- Newsletter destination/signup link
-- Route enforcement verification for /speaking, /events, /media
-
-**Specification Status**: ✅ Ready for Approval. Four unblocked executable prompts (1, 2A, 2B, 3A) ready for user approval. Prompts 3B/3C blocked pending the 7 documented decisions. Proceed to approval workflow.
 
 ---
 
@@ -219,6 +200,28 @@ Once approved, the next phase will include:
 6. **Prompt 3C Partial Preview** — Error states (awaiting CC-05 expiry decision)
 7. **Blocking Decision Matrix** — All unresolved decisions with options
 8. **Implementation Prerequisites Checklist** — What must be decided before code phase
+
+---
+
+## Blocking Decisions — Approved (2026-11-11)
+
+**Status**: ✅ All 7 blocking decisions approved by product owner (Ash)
+
+| # | Decision | Resolution | Execution Impact |
+|---|----------|-----------|---|
+| 1 | Recovery-first race condition | Option A: Recovery takes precedence | Unblocks Prompt 3B (recovery flows) |
+| 2 | Recovery lifetime eligibility | Option A: 30-day rolling window | Unblocks Prompt 3B (session state management) |
+| 3 | Code expiry start time | Option A: From code generation | Unblocks Prompts 3A (copy), 3C (errors) |
+| 4 | Email service provider | SendGrid (API key + SMTP) | Unblocks Prompt 3A (email template) |
+| 5 | Manuscript publication readiness | ❌ Not yet approved (draft by 2026-01-31) | Prompt 3A uses placeholder messaging; re-finalize once approved |
+| 6 | Newsletter destination | Brevo (external signup link) | Unblocks Prompt 3A (newsletter CTA) |
+| 7 | Route enforcement verification | Option A: Meta tags + Robots.txt + Sitemap | Unblocks Prompt 1 (validation documentation) |
+
+**Implications**:
+- ✅ Prompts 1, 2A, 2B ready for immediate Figma Make execution
+- ✅ Prompt 3A ready for execution (with manuscript placeholder text)
+- ✅ Prompts 3B, 3C ready for execution
+- ⚠️ Prompt 3A success copy will need refresh once manuscript is approved (late January)
 
 ---
 

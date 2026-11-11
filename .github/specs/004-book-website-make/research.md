@@ -27,7 +27,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | Last-writer-wins (request timestamp order) | Simple implementation; unpredictable UX; may lose user-initiated recovery |
 | D | Require explicit user choice before attempting either path | Clearest intent capture; adds friction to UX; delays access by 1+ clicks |
 
-**Decision**: Awaiting user input from blocking decision matrix in spec.md
+**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
 
 **Impact on Prompt 3B**: Recovery flows specification (Prompt 3B) cannot be finalized until this race condition is documented. Error handling and success criteria depend on the chosen resolution strategy.
 
@@ -48,7 +48,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | No expiry—recovery sessions valid indefinitely | Maximum UX convenience; highest security risk; may conflict with data retention policy |
 | D | Configurable per-reader basis (support override) | Flexibility for special cases; added complexity; support burden |
 
-**Decision**: Awaiting user input from blocking decision matrix in spec.md
+**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
 
 **Impact on Prompt 3B**: Recovery flows specification depends on session lifetime for state management, cleanup schedules, and error messaging when recovery expires.
 
@@ -68,7 +68,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | B | From email receipt (configurable by email provider) | Fairest to reader (delay not their fault); requires email provider cooperation; unpredictable for readers without receipt timestamp |
 | C | From verification page load (most lenient) | Maximizes UX; reader sees full 10 minutes; expiry can stretch to 10+ minutes with network delays; least secure |
 
-**Decision**: Awaiting user input from blocking decision matrix in spec.md
+**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
 
 **Impact on Prompts 3A & 3C**: 
 - Prompt 3A (reader access copy) requires exact timer messaging ("Code expires in 10 minutes from generation" vs. "10 minutes from when you received this email")
@@ -91,7 +91,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | Mailgun | Powerful API; strong developers; less newsletter-focused |
 | D | Other (AWS SES, Postmark, etc.) | Varies; requires evaluation |
 
-**Decision**: Awaiting user input from blocking decision matrix in spec.md
+**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
 
 **Impact on Prompt 3A**: Email template specification (subject line, body copy, footer branding) must match chosen provider's template syntax and capabilities. Newsletter integration points must align with provider's consent/preference handling.
 
@@ -111,7 +111,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | B | Manuscript approved but not yet formatted for web delivery | Requires formatting/export pipeline before integration; delays access feature |
 | C | Manuscript not yet approved | Access feature cannot launch; requires separate approval gate |
 
-**Decision**: Awaiting user input from blocking decision matrix in spec.md
+**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
 
 **Impact on Prompt 3A**: Reader access copy must reference actual manuscript content (e.g., "Access all 12 chapters" vs. "Access selected chapters"). Content delivery mechanism and availability timeframe depend on manuscript readiness status.
 
@@ -132,7 +132,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | Separate signup form component (post-verification) | Higher friction; newsletter signup becomes second step; clearer intent capture |
 | D | No "Sign up" link—newsletter managed separately | Simplest implementation; loses reader opportunity; newsletter signup independent |
 
-**Decision**: Awaiting user input from blocking decision matrix in spec.md
+**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
 
 **Impact on Prompt 3A**: Copy specification must reflect chosen pattern. Form layout and post-verification flow depend on whether newsletter signup happens inline or externally.
 
@@ -153,7 +153,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | Meta tags only (x-robots-tag in response headers) | Flexible; can vary per request; not visible in sitemap |
 | D | Sitemap.xml filtering only | Works for sitemaps; doesn't prevent indexing if URL is discovered elsewhere |
 
-**Decision**: Awaiting user input from blocking decision matrix in spec.md
+**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
 
 **Impact on Prompt 1** (and verification): Navigation exposure specification (Prompt 1) must document exact enforcement strategy. Implementation validation requires confirmation that /speaking, /events, /media are not published to search engines.
 
@@ -161,31 +161,39 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 
 ## Blocking Decision Summary
 
-| # | Decision | Status | Impact |
-|---|----------|--------|--------|
-| 1 | Recovery-first race condition | BLOCKED | Prompt 3B (recovery flows) |
-| 2 | Recovery lifetime eligibility | BLOCKED | Prompt 3B (session state) |
-| 3 | Code expiry start time | BLOCKED | Prompts 3A (copy), 3C (errors) |
-| 4 | Email service provider | BLOCKED | Prompt 3A (email integration) |
-| 5 | Manuscript publication readiness | BLOCKED | Prompt 3A (content messaging) |
-| 6 | Newsletter destination | BLOCKED | Prompt 3A (signup link) |
-| 7 | Route enforcement verification | BLOCKED | Prompt 1 (navigation validation) |
+| # | Decision | Status | Decision | Impact |
+|---|----------|--------|---|---|
+| 1 | Recovery-first race condition | ✅ APPROVED | Option A (Recovery precedence) | Prompt 3B (recovery flows) |
+| 2 | Recovery lifetime eligibility | ✅ APPROVED | Option A (30-day rolling window) | Prompt 3B (session state) |
+| 3 | Code expiry start time | ✅ APPROVED | Option A (From code generation) | Prompts 3A (copy), 3C (errors) |
+| 4 | Email service provider | ✅ APPROVED | SendGrid (API key + SMTP) | Prompt 3A (email integration) |
+| 5 | Manuscript publication readiness | ✅ DECIDED | Option C (Not yet approved — Draft by Jan 31) | Prompt 3A (content messaging) |
+| 6 | Newsletter destination | ✅ APPROVED | Brevo (external signup link) | Prompt 3A (signup link) |
+| 7 | Route enforcement verification | ✅ APPROVED | Option A (Meta + Robots + Sitemap) | Prompt 1 (navigation validation) |
 
-**Unblocked Prompts** (ready for execution once blocking decisions are resolved):
-- ✅ Prompt 1 (Navigation Exposure) — Waiting for Decision 7 (route enforcement verification)
-- ✅ Prompt 2A (Design System Baseline) — No blocking decisions
-- ✅ Prompt 2B (Navigation Design) — No blocking decisions
-- ✅ Prompt 3A (Reader Access Copy) — Waiting for Decisions 3, 4, 5, 6
-
-**Blocked Prompts**:
-- ❌ Prompt 3B (Recovery Flows) — Waiting for Decisions 1, 2
-- ❌ Prompt 3C (Error States) — Waiting for Decision 3
+**Execution Status** (all decisions resolved):
+- ✅ Prompt 1 (Navigation Exposure) — Ready for execution (Decision 7 resolved)
+- ✅ Prompt 2A (Design System Baseline) — Ready for execution (no blocking decisions)
+- ✅ Prompt 2B (Navigation Design) — Ready for execution (no blocking decisions)
+- ✅ Prompt 3A (Reader Access Copy) — Ready for execution (Decisions 3, 4, 5, 6 resolved — uses placeholder messaging for manuscript until approved)
+- ⏳ Prompt 3B (Recovery Flows) — Ready for execution (Decisions 1, 2 resolved)
+- ⏳ Prompt 3C (Error States) — Ready for execution (Decision 3 resolved)
 
 ---
 
-## Next Steps
+## Status Update (2026-11-11)
 
-1. User reviews blocking decisions and selects options for each decision
-2. Update blocking decision matrix in spec.md with user selections
-3. Generate exact Prompt previews for 3B (recovery flows) and 3C (error states)
-4. Proceed to implementation planning with all seven decisions resolved
+✅ **All 7 blocking decisions have been resolved by user:**
+
+1. Recovery-first race: **Option A** (Recovery takes precedence)
+2. Recovery lifetime: **Option A** (30-day rolling window)
+3. Code expiry start: **Option A** (From code generation)
+4. Email service provider: **SendGrid** (API key + SMTP)
+5. Manuscript status: **Not yet approved** (Draft ready by 2026-01-31 — using placeholder copy for now)
+6. Newsletter destination: **Brevo** (External signup link)
+7. Route enforcement: **Option A** (Meta tags + Robots.txt + Sitemap.xml)
+
+**Next Steps**:
+1. ✅ All Prompts (1, 2A, 2B, 3A, 3B, 3C) now unblocked and ready for Figma Make execution
+2. ✅ Prompt 3A uses placeholder messaging for manuscript content until approved
+3. ✅ Proceed to Figma Make execution phase with all decisions locked in
