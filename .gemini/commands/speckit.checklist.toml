@@ -50,7 +50,7 @@ Read `.agents/skills/branch-validation/SKILL.md` and require the user's exact
 approved task branch. Validate its name with
 `npm run validate:branch-name -- --branch <approved-name>` and the actual
 checked-out branch with `npm run validate:branch-name`. STOP on missing approval,
-validation failure, `main`, `develop`, detached HEAD, or a branch mismatch.
+validation failure, `main`, detached HEAD, or a branch mismatch.
 Recheck after hooks and immediately before writes. Skill discovery, branch
 approval and operation approval are separate: explicit approval of the relevant
 file-writing operation is required; do not infer it from automatic invocation.
