@@ -71,7 +71,11 @@ Dark-first palette with preserved light support:
 - `--color-accent-pink: #FF3AAE`
 - `--color-accent-yellow: #F4FF3C`
 - `--color-accent-purple: #8A63FF`
-- Component-specific variables (button-bg, card-border, etc.)
+- Component-specific variables:
+  - Button: `--button-bg-primary`, `--button-text-primary`, `--button-bg-secondary`, `--button-text-secondary`, `--button-bg-disabled`, `--button-text-disabled`
+  - Card: `--card-bg`, `--card-border`, `--card-shadow`
+  - Navigation: `--nav-link-color`, `--nav-link-color-hover`, `--nav-link-color-active`, `--nav-underline-active`
+  - Form Input: `--form-input-bg`, `--form-input-border`, `--form-input-border-focused`, `--form-input-text`, `--form-input-error-border`, `--form-input-error-text`, `--form-input-placeholder`
 
 ### Figma Make Instructions
 
@@ -93,6 +97,10 @@ Dark-first palette with preserved light support:
 ✅ **CR-2A.4**: Unapproved candidates (R3, T1, RT2, C1) are NOT in exported tokens
 
 ✅ **CR-2A.5**: Component styles exported (Button, Card, Navigation, Form) with all states
+- Button: primary (light/dark), secondary (light/dark), disabled
+- Card: default, hover shadow variants
+- Navigation: link default, hover, active, underline indicator
+- Form Input: default, focused (border color change), error state, placeholder text
 
 ✅ **CR-2A.6**: File is valid CSS or JSON (parseable by build tools)
 

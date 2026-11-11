@@ -46,7 +46,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --font-heading-sizes: 24px, 32px, 40px, 48px;
 --font-body-sizes: 14px, 16px, 18px;
 --font-ui-sizes: 12px, 14px, 16px;
-```text
+```
 
 ### 2. Extract Colors (Light Theme — Approved Baseline)
 
@@ -74,7 +74,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --color-accent-purple: #8A63FF;
 --color-dark-support-1: #12121A;
 --color-dark-support-2: #171722;
-```text
+```
 
 ### 3. Extract Colors (Dark Theme — Approved Baseline)
 
@@ -102,7 +102,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --color-accent-purple: #8A63FF;
 --color-light-support-1: #9C9488;
 --color-light-support-2: #171722;
-```text
+```
 
 ### 4. Extract Component Styles
 
@@ -121,7 +121,9 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --button-text-primary-dark: #ffffff;
 --button-bg-secondary-dark: var(--color-secondary-bg-dark);
 --button-text-secondary-dark: var(--color-primary-text-dark);
-```text
+--button-bg-disabled: #9C9488;
+--button-text-disabled: #CFC7BB;
+```
 
 **Card Component** (Approved Baseline):
 ```css
@@ -136,7 +138,8 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --card-bg-dark: var(--color-secondary-bg-dark);
 --card-border-dark: 1px solid var(--color-dark-support-2);
 --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-```text
+--card-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+```
 
 **Navigation Component** (Approved Baseline):
 ```css
@@ -151,7 +154,8 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --nav-link-color-dark: var(--color-primary-text-dark);
 --nav-link-color-hover-dark: var(--color-accent-pink);
 --nav-link-color-active-dark: var(--color-accent-pink);
-```text
+--nav-underline-active: 2px solid var(--color-accent-pink);
+```
 
 **Form Input Component** (Approved Baseline):
 ```css
@@ -168,7 +172,10 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --form-input-border-dark: 1px solid var(--color-secondary-bg-dark);
 --form-input-border-focused-dark: 2px solid var(--color-accent-pink);
 --form-input-text-dark: var(--color-primary-text-dark);
-```text
+--form-input-error-border: 2px solid #FF6B6B;
+--form-input-error-text: #FF6B6B;
+--form-input-placeholder: #9C9488;
+```
 
 ---
 
@@ -185,9 +192,9 @@ All of these must be true when complete:
 - Inter body: weights 400, 500; sizes 14px, 16px, 18px
 - Inter UI: weights 500, 600; sizes 12px, 14px, 16px
 
-✅ **CR-2A.3**: All 18 color variables exported
-- 9 colors for light theme (Primary, Secondary, Accent, Success, Warning, Error, Neutral-light, Neutral-dark, Border)
-- 9 colors for dark theme (same categories with dark variants)
+✅ **CR-2A.3**: All 18 color variables exported with proper reconciliation
+- 9 colors for light theme: Primary text (#0B0B10), Primary bg (#F6F2EB), Secondary text (#9C9488), Secondary bg (#CFC7BB), Hot Pink (#FF3AAE), Electric Yellow (#F4FF3C), Purple (#8A63FF), Dark Support 1 (#12121A), Dark Support 2 (#171722)
+- 9 colors for dark theme (same colors, swapped context per theme design)
 
 ✅ **CR-2A.4**: Unapproved candidates are NOT included
 - ❌ R3 (Responsive Typography)
@@ -296,7 +303,7 @@ All of these must be true when complete:
     --color-light-support-2: #171722;
   }
 }
-```text
+```
 
 **Option B: JSON Design Tokens (.json)** (Approved Baseline)
 ```json
@@ -355,7 +362,7 @@ All of these must be true when complete:
     "formInput": { "approvedUse": "Warm neutrals for borders, pink for focus" }
   }
 }
-```text
+```
 
 ### Phase 4: Validation
 
