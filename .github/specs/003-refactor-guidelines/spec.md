@@ -113,7 +113,7 @@ These outcomes remain unverified while owner gates and implementation are pendin
 2. [ ] Original file hashes validated; current state vs observation documented
 3. [ ] S001–S009 protected-file edits scoped and dependencies mapped
 4. [ ] D0–D8 decisions recorded with evidence
-5. [ ] Pointer/anchor validation completed for all 129 internal reference candidates
+5. [ ] Pointer/anchor validation completed for all 129 internal reference candidates (T050: each fixed link resolves to an existing N-document or preserved G-document; archived references include relocation notes)
 6. [ ] Design/typography/spacing examples verified; literal corrections documented
 7. [ ] Six existing skills statically exercised in draft/report/denied scenarios
 8. [ ] Non-destructive consolidation confirmed; old paths mapped to new
@@ -152,6 +152,11 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
   - **Integration:** No spec changes required; Final Sign-Off checklist is actionable with existing evidence. T069 can proceed immediately.
 
 **Clarification Status:** ✅ COMPLETE — All critical ambiguities resolved. Specification is ready for Phase 2 implementation completion (T069).
+
+### Session 2026-11-11
+
+- Q: What defines successful "link remediation" for T050—what must be true for a broken link to count as fixed? → A: The link must resolve to an existing N-document or preserved G-document AND any inline references (to archived content) must include a note explaining the relocation.
+  - **Integration:** Updated Success Criteria item 5 to clarify acceptance for T050 link validation work.
 
 ## Next Steps
 
