@@ -1,0 +1,10 @@
+name: linear-ticket-ready
+description: Test presenting next steps when a Linear ticket research phase is complete and the scope is clear. Verify the skill presents 1–3 concrete, non-execution options and does not perform any action.
+expected_behavior: |
+  The skill should identify that the next decision is "what phase comes after research?" and present options such as:
+  - Draft acceptance criteria (deepens scope understanding)
+  - Summarise open decisions (identifies blockers)
+  - Move to In Progress (starts implementation)
+
+  Output should be in JSON format (Claude Code) or numbered list (Claude.ai).
+  The skill must NOT change the ticket status, assign the ticket, or execute any action.

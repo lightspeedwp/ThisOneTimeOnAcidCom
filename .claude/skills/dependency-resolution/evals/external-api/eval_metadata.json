@@ -1,0 +1,20 @@
+{
+  "name": "external-api",
+  "description": "Third-party API documentation delayed. Blocking implementation. Need to assess workarounds or escalation.",
+  "skill": "dependency-resolution",
+  "blocker_type": "External API",
+  "expected_behavior": "Present options: mock API, early access request, alternative provider, scope reduction. Reference timeline impact.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "Blocker has definite timeline (2 weeks)",
+    "Project deadline is at risk if blocker slips further",
+    "Multiple workaround options exist"
+  ],
+  "success_indicators": [
+    "Blocker is clearly stated (Stripe API docs, 2-week delay)",
+    "Timeline risk is highlighted (Q1 deadline jeopardy)",
+    "Options include: mock API, early access, alternative, scope reduction",
+    "Trade-offs are surfaced (mock API cost, alternative provider cost, scope reduction impact)",
+    "No commitment to timeline without addressing blocker"
+  ]
+}

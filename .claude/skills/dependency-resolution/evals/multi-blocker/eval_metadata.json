@@ -1,0 +1,22 @@
+{
+  "name": "multi-blocker",
+  "description": "Multiple external blockers with unclear ownership. Need to prioritise and develop unblocking strategy.",
+  "skill": "dependency-resolution",
+  "blocker_type": "Multiple blockers",
+  "expected_behavior": "Present options: create ownership map, identify critical path, escalate, parallel workarounds. Help prioritise.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "Multiple blockers (3+) exist simultaneously",
+    "Ownership is unclear (who to talk to?)",
+    "Timeline pressure (deadline at risk)",
+    "Blockers may have dependencies (some block others)"
+  ],
+  "success_indicators": [
+    "Multiple blockers acknowledged (Stripe API, Legal, Analytics)",
+    "Ownership unclear is stated as a problem",
+    "Options include: ownership map, critical path, escalation",
+    "RACI matrix option presented",
+    "Suggestion to prioritise one blocker (not all at once)",
+    "Timeline risk is highlighted"
+  ]
+}

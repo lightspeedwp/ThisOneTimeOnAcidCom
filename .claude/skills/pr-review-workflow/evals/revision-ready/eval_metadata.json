@@ -1,0 +1,19 @@
+{
+  "name": "revision-ready",
+  "description": "Author has pushed revisions addressing feedback. Reviewer is ready to re-check. Skill should present approval decision options.",
+  "skill": "pr-review-workflow",
+  "review_state": "Author revised, ready for re-review",
+  "expected_behavior": "Present options: approve, request minor changes, or continue discussion. Reference feedback that was addressed.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "Revisions appear complete and correct",
+    "Revisions are 90% good but one detail is unclear",
+    "New concern emerges during re-review"
+  ],
+  "success_indicators": [
+    "Options include: approve, minor changes, discuss",
+    "Feedback points are acknowledged (what was addressed)",
+    "No approval issued (only options presented)",
+    "Approval criteria are clear"
+  ]
+}

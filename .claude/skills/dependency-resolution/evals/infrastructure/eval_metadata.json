@@ -1,0 +1,22 @@
+{
+  "name": "infrastructure",
+  "description": "Staging environment down for 2 weeks. Blocking integration testing. Need alternatives or escalation.",
+  "skill": "dependency-resolution",
+  "blocker_type": "Infrastructure",
+  "expected_behavior": "Present options: wait and adjust timeline, escalate, rent temporary, local simulation. Reference testing risks.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "Infrastructure is down with known ETA",
+    "Testing requirements are critical for shipping",
+    "Workarounds exist with cost/effort trade-offs",
+    "Timeline is constrained"
+  ],
+  "success_indicators": [
+    "Blocker is stated (staging down, 2-week ETA)",
+    "Testing risk is highlighted (what happens without staging tests?)",
+    "Options include: wait, escalate, rent temporary, local simulation",
+    "Cost/effort estimates included",
+    "Decision criteria surfaced (speed vs. cost vs. quality)",
+    "No commitment to ship without addressing testing needs"
+  ]
+}

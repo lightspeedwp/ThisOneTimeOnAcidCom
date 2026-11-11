@@ -1,0 +1,19 @@
+{
+  "name": "conflict",
+  "description": "Multiple reviewers disagree. One approved, one requested changes. Need to resolve disagreement.",
+  "skill": "pr-review-workflow",
+  "review_state": "Multiple reviewers, conflicting feedback",
+  "expected_behavior": "Present options for resolving disagreement: clarify priority, author chooses, escalate. Frame as trade-off.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "Both reviewers are right; it's a legitimate trade-off",
+    "Disagreement is about priority, not correctness",
+    "Need tiebreaker or shared understanding"
+  ],
+  "success_indicators": [
+    "Both positions acknowledged as valid",
+    "Disagreement framed as trade-off (not conflict)",
+    "Options include: clarify, author decides, escalate",
+    "No forced decision or approval"
+  ]
+}
