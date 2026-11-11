@@ -971,8 +971,8 @@
   ],
   "recommendations": [
     "1. Template placeholders like {topic}, {name} need to be filled in or links removed",
-    "2. References to /data/, /reports/, /dev-tools/ may need those directories/files created",
-    "3. Missing files like FILE*STRUCTURE.md, ContactForm.md should be created or referenced from N-documents",
+    "2. References to /data/ should be corrected to point to src/app/data/ (existing documentation location) before creating new directories. Keep the centralised data system under src/app/data/mock/ in view for UI and component content",
+    "3. Missing genuine documents like ContactForm.md should be created or referenced from N-documents; template placeholders should not be preserved as document names",
     "4. Broken anchors need corresponding headings added to target documents",
     "5. External references (tsx files) may need to be replaced with N-document pointers"
   ]
