@@ -13,7 +13,7 @@
 
 Generate exact email verification copy, form wording, error messages, and newsletter CTA specifications—separate newsletter signup from reading verification per approved decision.
 
-### Email Copy (Approved Source: `content/book/06-website-reading-prd.md` v1.1.1)
+### Email Copy (Approved Source: `.github/specs/004-book-website-make/references/06-website-reading-prd.md` v1.1.1)
 
 **Email Subject**:
 "Your reading code for ThisOneTimeOnAcidCom"
@@ -104,10 +104,10 @@ Questions? Reply to this email.
 
 ### Reference Documents
 
-- Source: `content/book/06-website-reading-prd.md` (v1.1.1) — Website reading experience requirements
-- Reader Access Policy: `content/book/06-website-reading-prd.md` (10-minute codes, 30-day device lifecycle)
-- Design Baseline: `content/book/04-design-brief.md` (typography, colors)
-- Related: `.github/specs/004-book-website-make/references/10-toa-prd-website-reading-experience.md` (launch requirements)
+- Source: `.github/specs/004-book-website-make/references/06-website-reading-prd.md` (v1.1.1) — Website reading experience requirements
+- Reader Access Policy: `.github/specs/004-book-website-make/references/06-website-reading-prd.md` (10-minute codes, 30-day device lifecycle)
+- Design Baseline: `.github/specs/004-book-website-make/references/04-design-brief.md` (typography, colors)
+- Launch Requirements: `.github/specs/004-book-website-make/references/10-toa-prd-website-reading-experience.md`
 
 ### Dependencies
 

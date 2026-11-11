@@ -113,8 +113,8 @@ Dark-first palette with preserved light support:
 
 ### Reference Documents
 
-- Design Baseline: 04-design-brief.md (v1.1.2)
-- Design Register: 05-design-reader-decision-register.md (v1.9.0)
+- Design Baseline: `.github/specs/004-book-website-make/references/04-design-brief.md` (v1.1.2)
+- Design Register: `.github/specs/004-book-website-make/references/05-design-reader-decision-register.md` (v1.9.0)
 - Candidates documented but not approved
 
 ### Dependencies

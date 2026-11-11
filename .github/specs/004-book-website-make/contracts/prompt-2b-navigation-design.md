@@ -66,8 +66,8 @@ Generate exact navigation component design with all states (default, hover, acti
 
 ### Reference Documents
 
-- Design Baseline: 04-design-brief.md (v1.1.2)
-- Navigation Hidden Routes: Prompt 1 (Speech, Events, Media not included)
+- Design Baseline: `.github/specs/004-book-website-make/references/04-design-brief.md` (v1.1.2)
+- Navigation Hidden Routes: Prompt 1 (Speaking, Events, Media not included)
 
 ---
 

@@ -15,7 +15,7 @@ Update the navigation component to hide Speaking, Events, and Media routes from 
 
 ### Context
 
-From 03-author-decisions-launch-scope.md (v1.3.0):
+From `.github/specs/004-book-website-make/references/03-author-decisions-launch-scope.md` (v1.3.0):
 > "Speaking/Events/Media are approved as design baseline for site architecture but excluded from public navigation and sitemap per author direction. These routes preserve internal documentation but are not discoverable via search engines."
 
 ### Exact Changes
