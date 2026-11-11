@@ -1,4 +1,34 @@
-/** Build the reader page model from the approved manuscript directories. */
+/**
+ * Loads book content from the runtime glob /src/content/book/**\/*.md via
+ * Vite's import.meta.glob. This is distinct from root content/book/; the
+ * inspected runtime source directory was absent.
+ * Edit runtime markdown files to change the book's text, add/remove chapters,
+ * or restructure parts. The reader rebuilds BookPage[] from those files.
+ *
+ * File naming convention:
+ *   00-front-matter/    - cover, title, dedication, epigraph, foreword
+ *   01-part-1-[n]/      - part title + chapters (prefix number = reading order)
+ *   02-part-2-[n]/
+ *   03-part-3-[n]/
+ *   04-part-4-[n]/
+ *   05-back-matter/     - afterword, appendices, about-author, back-cover
+ *
+ * Chapter file frontmatter fields:
+ *   type: chapter | part-title | cover | inside-front | title | dedication |
+ *         epigraph | foreword | afterword | appendix | appendix-divider |
+ *         about-author | back-cover
+ *   chapter: <number>       (chapter files only)
+ *   part:    <number>       (chapter + part-title files)
+ *   startPage: <number>     (chapter files - first reader page for this chapter)
+ *   pageNumber: <number>    (all other types)
+ *   title:    "..."
+ *   subtitle: "..."
+ *   appendixId: a | b | ...  (appendix files only)
+ *
+ * Page breaks within a chapter or appendix body are marked with a `---` separator
+ * on its own line between blank lines. Each resulting block becomes one reader page.
+ */
+
 import type { BookPage } from '../data/mock/pages/ebook/types';
 import {
   BOOK_SOURCE_GLOBS,
