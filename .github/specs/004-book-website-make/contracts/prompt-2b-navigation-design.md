@@ -24,8 +24,8 @@ Generate exact navigation component design with all states (default, hover, acti
 
 **Desktop (≥1024px)**:
 - Default: Links in horizontal menu bar
-- Hover: Text color changes to accent (#e8d4b8 light / #d4a574 dark)
-- Active: Current page link bold, accent color
+- Hover: Text color changes to accent (#FF3AAE hot pink — same in both themes)
+- Active: Current page link bold, accent color (#FF3AAE hot pink)
 
 **Tablet (768-1023px)**:
 - Same as desktop with possible wrapping
@@ -42,7 +42,7 @@ Generate exact navigation component design with all states (default, hover, acti
 1. Create or update Navigation component with 4 visible links
 2. Add state variations (default, hover, active) for each breakpoint
 3. Use approved typography (Inter for links)
-4. Use approved colors (primary text, accent on hover/active)
+4. Use approved colors (primary text, #FF3AAE hot pink accent on hover/active)
 5. Document responsive breakpoints (1024px, 768px)
 6. Export component states for implementation
 
@@ -66,8 +66,8 @@ Generate exact navigation component design with all states (default, hover, acti
 
 ### Reference Documents
 
-- Design Baseline: 04-design-brief.md (v1.1.2)
-- Navigation Hidden Routes: Prompt 1 (Speech, Events, Media not included)
+- Design Baseline: `.github/specs/004-book-website-make/references/04-design-brief.md` (v1.1.2)
+- Navigation Hidden Routes: Prompt 1 (Speaking, Events, Media not included)
 
 ---
 
