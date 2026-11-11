@@ -423,7 +423,7 @@ Branch 'feat/your-feature-name' matches the repository branching strategy.
 
 ### 2. Making changes
 
-1. Create a branch from an up-to-date `develop` (the repository's default
+1. Create a branch from an up-to-date `main` (the repository's default
    branch).
 
 1. Read the relevant guidelines **before** coding.
@@ -642,38 +642,22 @@ This repository defines branch protection rules to maintain code quality and
 prevent accidental changes to critical branches. The owner must confirm their
 enforcement in GitHub Settings after completing [T061](#key-governance-decisions).
 
-#### `develop` Branch
+#### `main` Branch
 
-The `develop` branch is the integration branch for feature work:
+The `main` branch is the canonical integration and deployment branch:
 
 - **Require pull request reviews:** 1 approval required
 - **Require CODEOWNERS review:** All changes affecting CODEOWNERS areas require approval
 - **Require status checks to pass:** The following checks must pass before merge:
   - `Jest (head)` — Jest unit tests on current branch
-  - `Jest (base)` — Jest unit tests on base branch (develop)
+  - `Jest (base)` — Jest unit tests on base branch (main)
   - `Specification Validation` — SpecKit specification validation
   - `Lint GitHub Actions Workflows` — YAML linting for workflows
   - `Tests / No new test failures` — Jest unit tests
 - **Require branches to be up to date:** Head branch must be up-to-date with base before merge
 - **Allow force pushes:** Disabled (rewriting history is not permitted)
 
-#### `main` Branch
-
-The `main` branch is the production release branch:
-
-- **Require pull request reviews:** 2 approvals required
-- **Require CODEOWNERS review:** All changes require approval
-- **Require status checks to pass:** Same checks as `develop`:
-  - `Jest (head)` — Jest unit tests on current branch
-  - `Jest (base)` — Jest unit tests on base branch (main)
-  - `Specification Validation` — SpecKit specification validation
-  - `Lint GitHub Actions Workflows` — YAML linting for workflows
-  - `Tests / No new test failures` — Jest unit tests
-- **Restrict who can push:** Only @ashley (maintainer) can push directly
-- **Allow force pushes:** Disabled (rewriting history is not permitted)
-
-**Merging to main:** Only release commits are merged from `develop` to `main`.
-All work flows through `develop` first.
+**Base branch policy:** All feature work branches derive from `main`. Merged PRs integrate back into `main`. Figma Make and Netlify default to `main`, making it the canonical source of truth.
 
 > **Status:** These rules are documented but not yet enforced. They will be
 > activated in GitHub Settings as part of T061 configuration.

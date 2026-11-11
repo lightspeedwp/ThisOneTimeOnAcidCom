@@ -19,7 +19,7 @@ branch switching, feature-state persistence or remote changes. A separately
 approved writing hook must satisfy the branch gate before it runs: inspect
 status, preserve work, validate the exact approved target name and the actual
 checked-out branch, and STOP on missing approval, validation failure, `main`,
-`develop`, detached HEAD or branch mismatch. Keep such operations outside the
+detached HEAD or branch mismatch. Keep such operations outside the
 analysis core; skill loading does not grant their approval.
 
 ### Path boundary before effects

@@ -22,7 +22,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 Inspect `git status --short` and `git branch --show-current`; preserve unrelated
 work. Read `.agents/skills/branch-validation/SKILL.md`. Validate the safe current
-branch with `npm run validate:branch-name`. STOP on `main`, `develop`, detached HEAD,
+branch with `npm run validate:branch-name`. STOP on `main`, detached HEAD,
 validation failure or missing approval of the exact target task branch. Validate
 that approved target independently with
 `npm run validate:branch-name -- --branch <approved-name>`.
@@ -156,7 +156,7 @@ Given that feature description, do this:
 
 2. **Branch validation and approval** (required before Step 3; branch creation via hook is optional):
 
-   Inspect `git status --short` and `git branch --show-current` and run `npm run validate:branch-name` on the actual checked-out branch. Require that it is the exact task branch supplied or approved by the user. STOP on validation failure, `main`, `develop`, detached HEAD, or missing approval. This gate applies even when no hook exists or no hook ran; until it passes, do not write `.github/specs/` or `.specify/feature.json`. If a pre-hook ran, also require its confirmed success before proceeding to Step 3.
+   Inspect `git status --short` and `git branch --show-current` and run `npm run validate:branch-name` on the actual checked-out branch. Require that it is the exact task branch supplied or approved by the user. STOP on validation failure, `main`, detached HEAD, or missing approval. This gate applies even when no hook exists or no hook ran; until it passes, do not write `.github/specs/` or `.specify/feature.json`. If a pre-hook ran, also require its confirmed success before proceeding to Step 3.
 
    If an authorised branch-only `before_specify` hook ran successfully, it may report `BRANCH_NAME` and `FEATURE_NUM`; verify actual checkout independently. Other pre-hooks do not imply a branch transition. The branch name does **not** dictate the spec directory name.
 

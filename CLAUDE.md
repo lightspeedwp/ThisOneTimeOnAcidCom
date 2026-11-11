@@ -54,6 +54,7 @@ Consolidate duplicate governance config files into `lightspeedwp/.github`
 - **Status:** ✅ Complete (v1.0.0 release)
 - **Branch:** `main` (merged 2026-11-09)
 - **Spec:** `.github/specs/001-repo-governance-layout-and-agentic-workflows/`
+- **Base Branch Policy:** All work branches derive from `main` (repository default). Figma Make and Netlify default to `main`, making it the canonical source for all feature and integration work.
 - **Verification:** All 20 child issues mapped to 5 workstreams; 9 decisions approved and integrated
 
 **Completed:**
@@ -62,6 +63,7 @@ Consolidate duplicate governance config files into `lightspeedwp/.github`
 - ✅ labeling-unified.yml updated to fetch labels and labeler configs from canonical org repository
 - ✅ Local duplicate governance files removed (not committed to avoid drift)
 - ✅ PR template routing via `lightspeedwp/.github` (inherited, no local duplication)
+- ✅ Branch strategy updated: all feature work derives from `main` (no develop branch)
 - ✅ All verification requirements satisfied:
   - Path consumers updated in workflows and documentation
   - Application behaviour preserved (build ✅, dev ✅, tests ✅)
@@ -254,10 +256,10 @@ This ensures:
 
 ### Phase 2 Progress
 
-- ✅ PR #334 merged into `develop`
+- ✅ PR #334 merged into `main`
 - ✅ Labeling workflow updated to fetch canonical configs
 - ✅ Figma API tests added (15 passing tests)
-- 🔄 Draft PR #338 pending CI completion
+- ✅ Branch strategy updated: all feature work now derives from `main`
 
 ## 📚 Related Documentation
 
