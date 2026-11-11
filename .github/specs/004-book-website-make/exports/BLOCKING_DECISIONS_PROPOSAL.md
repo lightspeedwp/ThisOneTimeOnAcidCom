@@ -1,20 +1,23 @@
-# Blocking Decisions Proposal: Gate 1 Resolution
+# Blocking Decisions Resolution: Gate 1 APPROVED
 
 **Date**: 2026-11-11  
-**Status**: Awaiting User Approval  
-**Context**: 7 blocking decisions proposed for Spec 004 Book Website Figma Make Prompt Pack
+**Status**: ✅ USER DECISIONS RECEIVED AND DOCUMENTED  
+**Context**: 7 blocking decisions for Spec 004 Book Website Figma Make Prompt Pack
 
 ---
 
 ## Summary
 
-This document proposes answers to all 7 blocking decisions based on:
-- Research recommendations documented in `research.md`
-- Best practices for reader access systems
-- Alignment with project goals (book website, reader verification, design system)
-- UX/security/maintainability trade-offs
+This document records the final decisions for all 7 blocking decisions, approved by Ash on 2026-11-11.
 
-**Please review each proposal and approve, modify, or reject.**
+**⚠️ CRITICAL DECISION**: Decision 5 (Manuscript Publication Readiness) → **Option C (NOT APPROVED)**
+- Website launches January 2026
+- Manuscript in development, will be ready for e-reader by launch
+- **Impact**: Blocks Prompt 3A (reader access copy) from final generation; placeholder copy needed
+- Prompts 1, 2A, 2B remain unblocked and executable
+- Prompts 3A, 3B, 3C remain blocked pending manuscript approval
+
+**Other Decisions**: All approved with one hybrid approach (Decision 4: SendGrid + Brevo dual solution)
 
 ---
 
@@ -22,20 +25,13 @@ This document proposes answers to all 7 blocking decisions based on:
 
 **Question**: What happens if both recovery and fresh verification occur simultaneously?
 
-### Recommendation: **OPTION A** ✅
+### **DECISION: OPTION A** ✅ APPROVED
 
 > **Recovery always takes precedence; cancel fresh verification if recovery succeeds**
 
-**Rationale**:
-- Prioritizes existing verified readers (better UX)
-- Minimal state complexity (easier implementation)
-- Matches user intent: if they have a previous verified session, reuse it
-- Reduces unnecessary email sends
-- Most conservative approach (doesn't surprise users)
+**User Approval**: ✅ Approved (2026-11-11)
 
 **Impact**: Prompt 3B will document recovery flows with race-condition handling favoring recovery path.
-
-**Approval**: [ ] Approve | [ ] Modify (propose alternative) | [ ] Reject
 
 ---
 
@@ -43,20 +39,13 @@ This document proposes answers to all 7 blocking decisions based on:
 
 **Question**: How long is a confirmed redemption eligible for recovery access?
 
-### Recommendation: **OPTION A** ✅
+### **DECISION: OPTION A** ✅ APPROVED
 
 > **30-day rolling window from last successful recovery action**
 
-**Rationale**:
-- Matches device lifecycle assumption (30 days referenced in spec)
-- Balances security with UX (doesn't force re-verification too quickly)
-- Rolling window is forgiving (active readers stay verified)
-- Simple expiry logic (no hard boundaries)
-- Aligns with common session management patterns
+**User Approval**: ✅ Approved (2026-11-11)
 
 **Impact**: Prompt 3B recovery flows will implement 30-day rolling session window with automatic cleanup.
-
-**Approval**: [ ] Approve | [ ] Modify (propose alternative) | [ ] Reject
 
 ---
 
@@ -64,52 +53,36 @@ This document proposes answers to all 7 blocking decisions based on:
 
 **Question**: When does a 10-minute verification code expiry clock start?
 
-### Recommendation: **OPTION A** ✅
+### **DECISION: OPTION A** ✅ APPROVED
 
 > **From code generation (most strict)**
 
-**Rationale**:
-- Consistent server-side timing (no dependencies on email delivery)
-- Predictable security window (no surprises from email delays)
-- Simpler to implement and verify
-- Readers see realistic countdown (~9 min after email receipt, accounting for delivery delay)
-- Standard approach for security codes (matches industry practice)
-
-**Trade-off**: Readers experience slightly shorter effective window if email is delayed, but this is security-justified.
+**User Approval**: ✅ Approved (2026-11-11)
 
 **Impact**: 
 - Prompt 3A copy specifies: "Code expires 10 minutes from when it was generated"
 - Prompt 3C error states document: "Code expired — it was valid for 10 minutes from generation"
 
-**Approval**: [ ] Approve | [ ] Modify (propose alternative) | [ ] Reject
-
 ---
 
 ## Decision 4: Email Service Provider Selection
 
-**Question**: Which email service provider handles verification code delivery?
+**Question**: Which email service provider(s) will handle verification code delivery?
 
-### Recommendation: **OPTION B** ✅
+### **DECISION: HYBRID APPROACH** ✅ APPROVED
 
-> **SendGrid (industry standard)**
+> **SendGrid for SMTP (verification code forms) + Brevo for newsletter sending and subscription management**
 
-**Rationale**:
-- Excellent documentation and developer experience
-- Robust, reliable API (strong uptime reputation)
-- Industry standard (easy to hire for, find solutions)
-- Strong template support for branded emails
-- Good rate limits and compliance features
-- Newsletter integration possible (though Brevo may be slightly better)
+**User Approval**: ✅ Approved - Hybrid solution (2026-11-11)
 
-**Alternative considered**: Brevo (Option A)
-- ✅ Better newsletter integration
-- ✅ Lower cost
-- ❌ Smaller ecosystem
-- Recommendation: SendGrid for primary email service; consider Brevo for newsletter separate from verification
+**Implementation Strategy**:
+- **SendGrid**: SMTP provider for verification code email delivery (used by verification forms)
+- **Brevo**: Newsletter campaign sending and subscription list management (separate system)
+- **Rationale**: Separates concerns; SendGrid for transactional email (security-critical), Brevo for marketing/newsletter workflows
 
-**Impact**: Prompt 3A email template will use SendGrid template syntax and API patterns.
-
-**Approval**: [ ] Approve | [ ] Modify (propose alternative) | [ ] Reject
+**Impact**: 
+- Prompt 3A email template uses SendGrid SMTP for verification codes
+- Newsletter signup (Decision 6) uses Brevo for subscription management
 
 ---
 
@@ -117,52 +90,45 @@ This document proposes answers to all 7 blocking decisions based on:
 
 **Question**: Is the manuscript approved and available for verified reader access?
 
-### Recommendation: **OPTION A** ✅
+### **DECISION: OPTION C** ❌ NOT APPROVED (In Development)
 
-> **Manuscript approved and available; ready for integration**
+> **Manuscript not yet approved; in development, targeting January 2026 launch**
 
-**Rationale**:
-- Unblocks the reader access feature immediately
-- Assumes manuscript is already in your possession and approved
-- Aligns with stated scope (book website) that would have manuscript available
-- Avoids dependency on separate manuscript approval process
-- Enables concurrent development of access system
+**User Decision**: ✅ Approved - Option C (2026-11-11)
 
-**Note**: If manuscript is *not* available, propose **OPTION B** instead (requires formatting pipeline first).
+**Critical Status**:
+- Website officially launches: **January 2026**
+- Manuscript timeline: In development, will be ready for e-reader by website launch
+- **Impact**: Prompts 3A (reader access copy), 3B (recovery flows), 3C (error states) REMAIN BLOCKED
+- Placeholder messaging required for Prompt 3A until manuscript is approved
 
-**Impact**: 
-- Prompt 3A copy references actual manuscript access (e.g., "Access all chapters")
-- Content delivery mechanism must be in place or created in parallel
-
-**Approval**: [ ] Approve OPTION A (manuscript ready) | [ ] Choose OPTION B (formatting needed) | [ ] Choose OPTION C (not approved)
+**Blocking Effect**:
+- **Prompts 1, 2A, 2B**: ✅ Executable (navigation, design system, component design)
+- **Prompts 3A, 3B, 3C**: ❌ Blocked pending manuscript approval (expected late January 2026)
+- Re-finalization of access copy will be required once manuscript is approved for e-reader
 
 ---
 
 ## Decision 6: Newsletter Destination (Sign-Up Link)
 
-**Question**: Where does "Sign up for newsletter" link direct?
+**Question**: Where does "Sign up for newsletter" link direct and which provider manages subscriptions?
 
-### Recommendation: **OPTION B** ✅
+### **DECISION: BREVO** ✅ APPROVED
 
-> **Link to external newsletter provider signup page**
+> **Brevo for newsletter sending and subscription list management**
 
-**Rationale**:
-- Proven, familiar pattern (users know what to expect)
-- Separates concerns (newsletter is separate from reader access)
-- Newsletter provider handles consent/preferences directly
-- Simplest implementation (no server-side form needed)
-- Clear intent capture (users explicitly choose to sign up)
-- Avoids newsletter integration complexity in access flow
+**User Decision**: ✅ Approved - Brevo (2026-11-11)
 
-**Trade-off**: Users must visit external page; captures no additional data in reader access form.
+**Implementation**:
+- Newsletter signup link directs to Brevo external signup page
+- Brevo manages subscription list, campaigns, and newsletter delivery
+- Newsletter provider: **Brevo** (consistent with Decision 4 hybrid approach)
+- Separates newsletter concerns from verification code delivery (SendGrid handles verification)
 
 **Impact**: 
-- Prompt 3A copy: "Sign up for our newsletter" button links to external signup URL
+- Prompt 3A copy: "Sign up for our newsletter" button links to external Brevo signup URL
 - Post-verification flow stays focused on reader access, not newsletter enrollment
-
-**Newsletter provider**: (To be determined separately) — could be SendGrid, Brevo, or other.
-
-**Approval**: [ ] Approve | [ ] Modify (propose alternative) | [ ] Reject
+- Newsletter management integrated with decision 4 email strategy
 
 ---
 
@@ -170,89 +136,105 @@ This document proposes answers to all 7 blocking decisions based on:
 
 **Question**: How is sitemap/noindex enforcement verified for /speaking, /events, /media routes?
 
-### Recommendation: **OPTION A** ✅
+### **DECISION: OPTION A** ✅ APPROVED
 
 > **Meta tags + Robots.txt + Sitemap.xml exclusion**
 
-**Rationale**:
-- Comprehensive coverage (multiple signals to search engines)
-- Redundancy (if one mechanism fails, others provide backup)
-- Verifiable at deploy time (can check each signal)
-- Best practice for preventing search engine indexing
-- Clear documentation for implementers
+**User Approval**: ✅ Approved (2026-11-11)
 
-**Implementation approach**:
+**Implementation Strategy**:
 1. **Meta tags**: `<meta name="robots" content="noindex, nofollow">` in HTML `<head>`
 2. **Robots.txt**: `Disallow: /speaking`, `Disallow: /events`, `Disallow: /media`
 3. **Sitemap.xml**: Exclude these routes entirely from sitemap
 
 **Impact**: 
-- Prompt 1 navigation specification will document exact enforcement mechanism
-- Deployment checklist must verify all three signals are in place
-- QA can test with search engine crawlers (Google Search Console simulation)
-
-**Approval**: [ ] Approve | [ ] Modify (propose alternative) | [ ] Reject
-
----
-
-## Summary Table: Proposed Decisions
-
-| # | Decision | Recommendation | Status | Blocks |
-|---|----------|-----------------|--------|--------|
-| 1 | Recovery-first race | **Option A** (recovery priority) | ✅ Proposed | Prompt 3B |
-| 2 | Recovery lifetime | **Option A** (30-day rolling) | ✅ Proposed | Prompt 3B |
-| 3 | Code expiry timing | **Option A** (from generation) | ✅ Proposed | Prompts 3A, 3C |
-| 4 | Email provider | **Option B** (SendGrid) | ✅ Proposed | Prompt 3A |
-| 5 | Manuscript ready | **Option A** (approved & available) | ✅ Proposed | Prompt 3A |
-| 6 | Newsletter link | **Option B** (external signup) | ✅ Proposed | Prompt 3A |
-| 7 | Route enforcement | **Option A** (meta + robots + sitemap) | ✅ Proposed | Prompt 1 |
+- Prompt 1 navigation specification documents exact enforcement mechanism
+- Deployment checklist verifies all three signals are in place
+- QA tests with search engine crawlers (Google Search Console simulation)
+- Comprehensive redundancy ensures SEO compliance
 
 ---
 
-## Next Steps After Approval
+## Summary Table: Approved Decisions
 
-Once you approve (or modify) these decisions:
-
-1. **Gate 1 ✅ Complete**
-   - All 7 blocking decisions resolved
-   - Document selections in `exports/decisions-matrix.md`
-
-2. **Generate Blocked Prompts** (now possible)
-   - Prompt 1: Navigation Exposure (full spec with route enforcement details)
-   - Prompt 3A: Reader Access Copy (final copy with code expiry messaging, newsletter link)
-   - Prompt 3B: Recovery Flows (race condition handling documented)
-   - Prompt 3C: Error States (code expiry error messages)
-
-3. **Gate 2 Approval** (Design Baseline)
-   - Review and approve design tokens
-   - Confirm unapproved candidates excluded
-
-4. **Gate 3 Sign-Off** (Readiness)
-   - Preflight complete
-   - Project owner approval
-
-5. **Execute Figma Make Prompts**
-   - All 6 prompts executable
-   - Generate design system exports
-   - Prepare for implementation
+| # | Decision | Selection | Status | Impact |
+|---|----------|-----------|--------|--------|
+| 1 | Recovery-first race | **Option A** (recovery priority) | ✅ APPROVED | Unblocks Prompt 3B |
+| 2 | Recovery lifetime | **Option A** (30-day rolling) | ✅ APPROVED | Unblocks Prompt 3B |
+| 3 | Code expiry timing | **Option A** (from generation) | ✅ APPROVED | Unblocks Prompts 3A, 3C |
+| 4 | Email provider | **Hybrid** (SendGrid + Brevo) | ✅ APPROVED | Unblocks Prompt 3A |
+| 5 | Manuscript ready | **Option C** (NOT APPROVED) | ❌ BLOCKS | **BLOCKS Prompts 3A, 3B, 3C** |
+| 6 | Newsletter link | **Brevo** (external signup) | ✅ APPROVED | Unblocks Prompt 3A (newsletter) |
+| 7 | Route enforcement | **Option A** (meta + robots + sitemap) | ✅ APPROVED | Unblocks Prompt 1 |
 
 ---
 
-## Your Input Needed
+## Prompt Execution Status
 
-**Please indicate your approval for each decision**:
+**✅ UNBLOCKED & EXECUTABLE** (All prerequisites resolved):
+- **Prompt 1**: Navigation Exposure (/speaking, /events, /media hidden from sitemap)
+- **Prompt 2A**: Design Baseline (typography, colors, components)
+- **Prompt 2B**: Navigation Design (component specifications)
 
-- [ ] **Decision 1**: Approve Option A | Propose different option: ___________
-- [ ] **Decision 2**: Approve Option A | Propose different option: ___________
-- [ ] **Decision 3**: Approve Option A | Propose different option: ___________
-- [ ] **Decision 4**: Approve Option B (SendGrid) | Propose different: ___________
-- [ ] **Decision 5**: Approve Option A (manuscript ready) | Propose different: ___________
-- [ ] **Decision 6**: Approve Option B (external signup) | Propose different: ___________
-- [ ] **Decision 7**: Approve Option A (meta + robots + sitemap) | Propose different: ___________
-
-**Comments or concerns**:
-_________________________________________________
+**⚠️ PARTIALLY BLOCKED** (Awaiting manuscript approval):
+- **Prompt 3A**: Reader Access Copy (BLOCKED — placeholder messaging until manuscript approved)
+- **Prompt 3B**: Recovery Flows (decisions 1–2 resolved ✅, but dependent on 3A messaging)
+- **Prompt 3C**: Error States (decision 3 resolved ✅, but dependent on 3A messaging)
 
 ---
 
-**Once approved, these decisions unblock Prompts 1, 3A, 3B, and 3C for generation. Ready to proceed? ✅**
+## Next Steps: Gate 1 ✅ COMPLETE
+
+**✅ Gate 1 Complete** — All 7 blocking decisions documented and approved by Ash (2026-11-11)
+
+### Immediate Actions
+
+**Generate Unblocked Prompts** (Ready NOW):
+- ✅ **Prompt 1**: Navigation Exposure (route enforcement via meta tags + robots.txt + sitemap)
+- ✅ **Prompt 2A**: Design Baseline (Space Grotesk, Inter, 9-color palette, both themes)
+- ✅ **Prompt 2B**: Navigation Design (component styles and states)
+
+**Defer Manuscript-Dependent Prompts**:
+- ⏸️ **Prompt 3A**: Reader Access Copy (use placeholder messaging until manuscript approved)
+- ⏸️ **Prompt 3B**: Recovery Flows (blocked on 3A messaging)
+- ⏸️ **Prompt 3C**: Error States (blocked on 3A messaging)
+
+### Gate 2 Approval (Design Baseline)
+After unblocked prompts are generated:
+1. Review and approve design tokens from Prompt 2A
+2. Confirm unapproved candidates (R3, T1, RT2, C1) are excluded
+3. Sign off on navigation and component design
+
+### Manuscript Approval Workflow (Late January 2026)
+When manuscript is approved for e-reader:
+1. Regenerate Prompt 3A with final copy (not placeholder)
+2. Complete Prompts 3B and 3C based on final 3A messaging
+3. Re-approve reader access and error states
+
+### Gate 3 Sign-Off (Readiness)
+After all prompts are generated:
+1. Preflight analysis complete
+2. Project owner approval
+3. Ready for implementation
+
+---
+
+## ✅ USER DECISIONS RECORDED
+
+**All 7 blocking decisions received and documented** (2026-11-11):
+
+- [x] **Decision 1**: ✅ Option A (recovery-first race condition)
+- [x] **Decision 2**: ✅ Option A (30-day rolling recovery lifetime)
+- [x] **Decision 3**: ✅ Option A (code expiry from generation)
+- [x] **Decision 4**: ✅ **Hybrid** (SendGrid SMTP + Brevo newsletters)
+- [x] **Decision 5**: ❌ **Option C** (manuscript NOT approved — in development, January launch)
+- [x] **Decision 6**: ✅ Brevo (newsletter subscriptions)
+- [x] **Decision 7**: ✅ Option A (meta tags + robots.txt + sitemap)
+
+---
+
+## Status: Gate 1 APPROVED ✅
+
+**Ready for**: 
+- Immediate execution: Prompts 1, 2A, 2B
+- Deferred execution: Prompts 3A, 3B, 3C (awaiting manuscript approval, late January 2026)
