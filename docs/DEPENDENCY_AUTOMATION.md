@@ -2,6 +2,14 @@
 
 ThisOneTimeOnAcidCom, October 2026
 
+> **Superseded for `main` (2026-11-11).** This guide describes the October 2026
+> Dependabot and Mergify setup. `.github/dependabot.yml` has since been removed
+> from `main`, no Mergify configuration is tracked there, and the repository's
+> default branch is now `main`. The file remains on `develop`. For the current
+> updater configuration, its verification status and recovery steps, see the
+> [Renovate Configuration Guide](./RENOVATE.md). The content below is kept as
+> historical reference and must not be read as current behaviour.
+
 ## Overview
 
 Dependabot and Mergify have been configured for dependency automation on the

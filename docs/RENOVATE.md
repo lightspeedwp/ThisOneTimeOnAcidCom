@@ -1,24 +1,52 @@
 # Renovate Configuration Guide
 
-**Status:** Configuration merged 2026-11-09; enrolment, preset resolution and operation unverified ([TOA-454](https://linear.app/lightspeedwp/issue/TOA-454))  
-**Replaces:** Dependabot  
-**Architecture:** Centralized governance model (Option A)
+**Status:** Configuration merged to `main` on 2026-11-09. Enrolment, preset resolution and operation are **not yet verified** — see [Verification status](#verification-status) ([TOA-454](https://linear.app/lightspeedwp/issue/TOA-454)).
+**Replaces:** Dependabot version updates on `main`
+**Evidence date:** 2026-11-11, inspected at `main` revision `472ce58`
 
 ---
 
 ## Overview
 
-Renovate has replaced Dependabot for automated dependency and GitHub Actions updates. The configuration follows a centralized governance model where:
+A Renovate configuration has replaced the tracked Dependabot configuration on
+`main`. This guide separates what the repository actually configures from what
+has only been intended or assumed, so that nobody relies on behaviour that has
+not been observed.
 
-- **Local config** is `.github/renovate.json`. It extends `github>lightspeedwp/.github:renovate`, which Renovate resolves to `renovate.json` at the root of that repository's default branch
-- **Shared preset not found:** no such file was tracked at `lightspeedwp/.github` `develop` revision `b63f9bb` (11 November 2026). Runtime resolution has not been observed
-- Until that preset exists and resolves, no organisation-wide policy is inherited
+- **Local configuration:** `.github/renovate.json` (this repository).
+- **Shared preset:** the local configuration references
+  `github>lightspeedwp/.github:renovate`. Renovate resolves that reference to a
+  `renovate.json` file at the root of the default branch of
+  `lightspeedwp/.github`. No such file was tracked there when inspected
+  (default branch `develop` at `b63f9bb`, 2026-11-11). Whether the reference
+  resolves at runtime has not been observed.
+- **`develop` branch:** the migration is on `main` only. `develop` still carries
+  `.github/dependabot.yml` and has no Renovate configuration.
+
+---
+
+## Verification status
+
+| Area | State | Notes |
+| --- | --- | --- |
+| Local configuration present on `main` | Verified | `.github/renovate.json` |
+| Dependabot configuration removed from `main` | Verified | Still present on `develop` |
+| Shared preset source | Not found | No Renovate preset file on the shared default branch |
+| Runtime preset resolution and inherited policy | Unverified | No Renovate run or log has been observed |
+| Renovate enrolment and repository access | Unverified | Needs confirmation by an organisation administrator |
+| Renovate-authored pull requests, issues or dashboard | None observed | No `renovate/*` branch exists |
+| Dependency pull request checks for Renovate | Configured, never executed | See [Pull request routing](#pull-request-routing) |
+| Security-update continuity | Unverified | See [Security updates](#security-updates) |
+| Pause and recovery procedures | Not exercised | See [Pausing Renovate](#pausing-renovate) and [Recovery](#recovery) |
+
+Do not treat the migration as operationally accepted until the unverified rows
+have evidence.
 
 ---
 
 ## Configuration
 
-### ThisOneTimeOnAcidCom Settings (`.github/renovate.json`)
+### Local settings (`.github/renovate.json`)
 
 ```json
 {
@@ -38,113 +66,155 @@ Renovate has replaced Dependabot for automated dependency and GitHub Actions upd
 }
 ```
 
-**Key behaviors:**
-- Extends centralized config from `lightspeedwp/.github:renovate`
-- Labels PRs with `area:dependencies` and `area:ci`
-- Runs `npm dedupe` after updates
+What this file sets directly:
 
-### Intended shared policy (not evidenced as in effect)
+- Extends the shared preset reference described above and Renovate's built-in
+  `config:base` preset.
+- Labels Renovate pull requests with `area:dependencies` and `area:ci`. Both
+  labels exist in the organisation's canonical label set.
+- Runs `npm dedupe` after npm updates.
 
-These values were planned for a shared preset that was not found at the
-inspected source. They are not verified as applied to this repository.
+Known issue: Renovate's configuration validator reports that `config:base` has
+been renamed and should be migrated to `config:recommended`. Any change to this
+file is tracked separately from this guide.
 
-- **Schedule:** Weekly, Monday 03:00 SAST (Africa/Johannesburg timezone)
-- **Target branch:** `develop` (superseded: this repository works from `main`, and `dependency-validation.yml` triggers only on `main`/`master`)
-- **Grouping:**
-  - Minor + patch updates grouped together
-  - Major updates separate
-  - GitHub Actions grouped separately from npm
-- **Limits:** Max 10 open PRs per ecosystem
-- **Semantic commits:** Enabled (`deps` type)
-- **Security updates:** Prioritized automatically
+### Policy that is not configured locally
 
----
+The local file sets **no** schedule, target branch, grouping, pull request
+limit, commit convention, cooldown or vulnerability-alert behaviour. Earlier
+versions of this guide listed the following as inherited from the shared
+preset. They are intentions only: no inspected source defines them.
 
-## Workflow
+- Weekly schedule (Monday 03:00, Africa/Johannesburg)
+- Grouped minor and patch updates, separate major updates
+- GitHub Actions grouped separately from npm
+- Maximum of 10 open pull requests per ecosystem
+- Semantic commits using the `deps` type
+- Prioritised security updates
 
-### Creating Dependency Update PRs
+Until a shared preset is published or these settings are added locally,
+expect Renovate's defaults from `config:base` for anything not listed under
+"Local settings".
 
-1. Renovate runs on schedule (weekly Monday 03:00 SAST)
-2. Creates separate PRs for:
-   - `dependencies (minor/patch)` — grouped npm minor/patch
-   - `dependencies (major)` — npm major versions
-   - `CI/CD (minor/patch)` — grouped GitHub Actions minor/patch
-   - `CI/CD (major)` — GitHub Actions major versions
-3. All PRs labeled with `area:dependencies`, `area:ci`
-4. Security updates created immediately (not on schedule)
+### Target branch
 
-### Reviewing PRs
-
-1. Check the PR title and linked issues
-2. Review the changelog (Renovate includes links)
-3. Run `npm test` locally if major version upgrade
-4. Approve and merge when ready
+No `baseBranches` setting is configured, so Renovate targets the repository's
+default branch, which is `main`. Earlier versions of this guide named
+`develop`; that was incorrect for the current repository.
 
 ---
 
-## Managing Updates
+## Expected bot identity
 
-### Temporarily Pause Renovate
+The centrally managed `dependency-automation.yml` workflow lists
+`lightspeed-renovate[bot]` as its approved Renovate actor. That indicates an
+organisation-operated Renovate app rather than the public hosted Renovate app.
 
-⚠️ **Warning: Destructive operation**
+- Installation of that app on this repository has not been confirmed.
+- Run logs are held wherever the organisation operates Renovate. The hosted
+  dashboard at `app.renovatebot.com` only applies to the public hosted app and
+  may show nothing for this repository.
 
-Adding `"enabled": false` to `.github/renovate.json` will:
-- **Close all open Renovate PRs**
-- **Delete all Renovate branches** (cleanup phase)
-- Stop future dependency updates
+---
 
-This is NOT a simple pause — it cleans up in-progress work. Use only if you want to completely stop Renovate activity.
+## Pull request routing
 
-```json
-{
-  "extends": ["github>lightspeedwp/.github:renovate"],
-  "enabled": false
-}
-```
+Routing below is read from the workflow files. No Renovate pull request has
+exercised it yet.
 
-**To cleanly pause** without destroying branches:
-1. Leave `enabled: true`
-2. Set schedule to pause period: `"schedule": ["after 9999-01-01"]` (never runs)
-3. Restore normal schedule when ready to resume
+- `dependency-validation.yml` runs for pull requests into `main` or `master`
+  whose branch starts with `renovate/`, `deps/` or `dependabot/`.
+- Renovate pull requests are routed to the self-hosted
+  `dependency-ci-ephemeral` runner group. Dependabot pull requests use a
+  GitHub-hosted runner instead. Availability of the self-hosted group for this
+  repository has not been confirmed.
+- `dependency-automation.yml` (the managed merge sweep) refuses to act on
+  public repositories. This repository is public, so dependency pull requests
+  are **not** merged automatically here. Review and merge them manually.
+- Both workflows are managed centrally by
+  `lightspeedwp/dependency-merge-controller`. Do not edit them locally; local
+  edits are reverted.
+- `renovate/*` branches are exempt from the branch naming pattern.
 
-**To permanently disable Renovate:** Use both `enabled: false` AND remove the Renovate app from repository settings.
+### Reviewing dependency pull requests
 
-### Pinning a Version
+1. Check the pull request title, labels and changed files.
+2. Read the linked release notes or changelog.
+3. Confirm the repository's checks have completed. Run `npm test` locally for
+   major version upgrades.
+4. Approve and merge manually when ready.
 
-Renovate respects `package-lock.json`. To pin a dependency:
+---
+
+## Security updates
+
+Security-update continuity has not been verified.
+
+- The local Renovate configuration contains no vulnerability-alert settings.
+- Dependabot **alerts** and **security updates** are repository settings. They
+  are independent of `.github/dependabot.yml`, so removing that file does not
+  by itself switch them off, and does not prove they are on. An administrator
+  must confirm their state in the repository's security settings.
+- Dependabot **version updates** on `main` stopped when the configuration file
+  was removed. The last recorded version-update runs were on 2026-11-09.
+
+---
+
+## Existing Dependabot pull requests
+
+Recorded on 2026-11-11:
+
+- No Dependabot pull request is open.
+- Pull requests #582 and #577 were closed unmerged on 2026-11-09 when their
+  base branch was deleted. #570 and #385 were closed unmerged earlier.
+- Two Dependabot branches remain on the remote:
+  `dependabot/github_actions/develop/github-actions-minor-patch-ea21aa6b1c` and
+  `dependabot/npm_and_yarn/develop/vitejs/plugin-react-6.1.2`. Their removal is
+  a maintainer decision.
+
+---
+
+## Managing updates
+
+### Pausing Renovate
+
+None of the options below has been exercised in this repository. Confirm the
+behaviour against the [Renovate documentation](https://docs.renovatebot.com)
+for the version the organisation runs before relying on it.
+
+| Option | How | Who |
+| --- | --- | --- |
+| Require approval for every update | Add `"dependencyDashboardApproval": true` to `.github/renovate.json`. Renovate then waits for approval in its Dependency Dashboard issue before creating pull requests. | Maintainer, via pull request |
+| Restrict the schedule | Add a valid `schedule` value, for example `["before 4am on Monday"]`, to narrow when Renovate may act. | Maintainer, via pull request |
+| Disable for this repository | Add `"enabled": false` to `.github/renovate.json`. Check the effect on already-open Renovate pull requests and branches first. | Maintainer, via pull request |
+| Remove repository access | Remove this repository from the Renovate app's installation. | Organisation administrator only |
+
+An earlier version of this guide recommended `"schedule": ["after
+9999-01-01"]` as a clean pause. That is not valid Renovate schedule syntax
+and must not be used.
+
+### Pinning a version
+
+To hold a dependency at one version, set an exact version (no `^` or `~`) in
+`package.json`, then refresh the lock file:
+
 ```bash
-npm install package-name@desired-version
-npm ci  # updates lock file
-git commit -m "deps: pin package-name to X.Y.Z"
+npm install package-name@1.2.3 --save-exact
 ```
 
-**Note:** Pinning in `package-lock.json` does NOT freeze the version in `package.json`. Renovate will still propose newer versions if they satisfy the range in `package.json` (e.g., `^1.0.0` allows `1.5.0`). To truly freeze, edit `package.json` to exact version without range operators: `"1.0.0"` instead of `"^1.0.0"`.
+A version held only in `package-lock.json` is not a pin: Renovate can still
+propose newer versions that satisfy the range in `package.json`.
 
-### Overriding Org Policy (Rarely Needed)
+### Ignoring a dependency
 
-Add to `.github/renovate.json` to override org defaults:
 ```json
 {
-  "extends": ["github>lightspeedwp/.github:renovate"],
-  "schedule": ["before 6am on Monday"],
-  "prCreationLimit": 5
+  "ignoreDeps": ["package-name"]
 }
 ```
 
----
+### Different rules for one package
 
-## Troubleshooting
-
-**Q: Renovate PRs aren't being created**  
-- Check that the Renovate GitHub App is installed and active (Settings → Integrations & applications)
-- Check that `.github/renovate.json` is valid JSON
-- Review Renovate's logs: https://app.renovatebot.com
-
-**Q: A PR keeps reopening after I close it**  
-- Add `"ignoreDeps": ["package-name"]` to `.github/renovate.json` to permanently ignore it
-
-**Q: I want different update frequency for one package**  
-- Add a package rule:
 ```json
 {
   "packageRules": [
@@ -155,18 +225,77 @@ Add to `.github/renovate.json` to override org defaults:
   ]
 }
 ```
-(Use `matchPackageNames` with an array, not `matchPackageName`)
+
+Use `matchPackageNames` with an array, not `matchPackageName`.
 
 ---
 
-## Related Documentation
+## Recovery
 
-- **Governance Model:** See CLAUDE.md → "Phase 2: Repository Restructuring"
-- **org-wide policy:** `lightspeedwp/.github/renovate.json`
-- **Issue (TOA-451):** https://linear.app/lightspeedwp/issue/TOA-451
-- **Renovate Docs:** https://docs.renovatebot.com
+These steps describe how to return to a known state. They change repository
+files only, through a reviewed pull request. They have not been rehearsed.
+
+### Revert the Renovate configuration
+
+1. Create a branch from `main` and revert the change that added
+   `.github/renovate.json`, or delete the file.
+2. Open a pull request and merge it after review.
+3. Close any open Renovate pull requests manually if Renovate does not.
+
+### Fall back to Dependabot version updates
+
+1. Restore `.github/dependabot.yml` from the copy still tracked on `develop`:
+
+   ```bash
+   git fetch origin develop
+   git checkout origin/develop -- .github/dependabot.yml
+   ```
+
+2. Review the restored file before committing. It targets `develop`; adjust the
+   target branch to `main` if version updates should run against the default
+   branch.
+3. Do not run both tools against the same ecosystem. Remove or disable the
+   Renovate configuration in the same pull request.
+
+### Actions that need an administrator
+
+Installing, suspending or removing the Renovate app, changing its repository
+access, and changing Dependabot alert or security-update settings are
+administrative actions. They are outside the scope of a repository pull
+request.
 
 ---
 
-**Maintainer:** Claude Haiku 4.5  
-**Last Updated:** 2026-11-09
+## Troubleshooting
+
+**Renovate pull requests are not being created**
+
+- Confirm with an organisation administrator that the Renovate app is
+  installed and has access to this repository.
+- Ask for the latest Renovate run log for this repository. An unresolved
+  preset reference normally stops Renovate before it creates any pull request.
+- Check `.github/renovate.json` with Renovate's validator:
+
+  ```bash
+  npx --yes --package renovate -- renovate-config-validator .github/renovate.json
+  ```
+
+**A pull request keeps reopening after it is closed**
+
+- Add the package to `ignoreDeps` as shown above.
+
+---
+
+## Related documentation
+
+- [Dependency Automation guide](./DEPENDENCY_AUTOMATION.md) — historical
+  Dependabot and Mergify setup, superseded by this guide for `main`
+- `.github/renovate.json` — local configuration
+- `.github/workflows/dependency-validation.yml` and
+  `.github/workflows/dependency-automation.yml` — centrally managed workflows
+- [Renovate documentation](https://docs.renovatebot.com)
+
+---
+
+**Maintainer:** Repository owner (see `.github/CODEOWNERS`)
+**Last updated:** 2026-11-11
