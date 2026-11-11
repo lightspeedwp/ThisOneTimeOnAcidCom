@@ -1,5 +1,11 @@
-# 🦅 Headless WordPress Migration Guide
+<!-- Type 3 (Archival) Pointer -->
+<!-- Original: Guidelines/wordpress-migration-guide.md -->
+<!-- Reason: WordPress not in active stack (D8) -->
+<!-- Archived into: guidelines/_archive/wordpress-migration-guide.md -->
+<!-- Replacement: N030 (WordPress Integration) - Phase 3 -->
+<!-- Authority: D5.c (Status Notation), D8 (WordPress Scope) -->
 
+<<<<<<< HEAD:guidelines/_archive/wordpress-migration-guide.md
 > ⚠️ **ARCHIVED** · WordPress migration is out of scope per Decision Gate D8 (Guidelines Refactor, Specification 003). This guide is preserved for reference only.
 
 **Version:** 1.1.0 (Dual Mode Enabled)
@@ -166,3 +172,12 @@ No code changes are required in components. `BlogPage.tsx` and
 *   **CORS Error:** Install the "WP GraphQL CORS" or similar plugin on WordPress to allow requests from `localhost:5173`.
 *   **Images not loading:** Ensure the imported images are publicly accessible.
 <!-- Archived: wordpress-migration-guide.md - Out of scope per D8 (WordPress not used in this site) -->
+=======
+> ⚠️ **ARCHIVED** · This guideline has been consolidated into the Phase 3 roadmap. WordPress is not part of the active tech stack. See [N030: WordPress Integration Decision Model](../N030-wordpress-integration-decision.md) for future reference.
+
+This document is archived. For the current active stack (React/Next.js), see the main guidelines.
+
+---
+<!-- Consolidated into: ../N030-wordpress-integration-decision.md -->
+*Archived: 2026-11-11 | Type 3 Archival | D5 Authority | D8: WordPress deferred*
+>>>>>>> 38f1962 (feat(003-T049-Phase2-3): Complete pointer operations (Type 2 & Type 3)):guidelines/wordpress-migration-guide.md
