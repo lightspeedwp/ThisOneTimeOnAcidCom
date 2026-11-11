@@ -46,7 +46,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --font-heading-sizes: 24px, 32px, 40px, 48px;
 --font-body-sizes: 14px, 16px, 18px;
 --font-ui-sizes: 12px, 14px, 16px;
-```
+```text
 
 ### 2. Extract Colors (Light Theme)
 
@@ -74,7 +74,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --color-neutral-light-light: #f5f5f5;
 --color-neutral-dark-light: #666666;
 --color-border-light: #cccccc;
-```
+```text
 
 ### 3. Extract Colors (Dark Theme)
 
@@ -102,7 +102,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --color-neutral-light-dark: #333333;
 --color-neutral-dark-dark: #cccccc;
 --color-border-dark: #444444;
-```
+```text
 
 ### 4. Extract Component Styles
 
@@ -116,7 +116,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --button-text-disabled: var(--color-neutral-dark-light);
 --button-border-radius: 4px;
 --button-padding: 12px 24px;
-```
+```text
 
 **Card Component**:
 ```css
@@ -125,7 +125,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --card-border-radius: 8px;
 --card-padding: 16px;
 --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-```
+```text
 
 **Navigation Component**:
 ```css
@@ -134,7 +134,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --nav-link-color-active: var(--color-accent-light);
 --nav-link-font: var(--font-ui);
 --nav-link-font-weight: 500;
-```
+```text
 
 **Form Input Component**:
 ```css
@@ -144,7 +144,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --form-input-border-error: 2px solid var(--color-error-light);
 --form-input-padding: 8px 12px;
 --form-input-border-radius: 4px;
-```
+```text
 
 ---
 
@@ -260,7 +260,7 @@ All of these must be true when complete:
     /* ... all 9 dark colors ... */
   }
 }
-```
+```text
 
 **Option B: JSON Design Tokens (.json)**
 ```json
@@ -301,7 +301,7 @@ All of these must be true when complete:
     "formInput": { /* ... */ }
   }
 }
-```
+```text
 
 ### Phase 4: Validation
 

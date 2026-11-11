@@ -44,7 +44,7 @@ This document records the final decisions for all 7 blocking decisions, approved
 ### **DECISION: OPTION A** ✅ APPROVED
 
 > **30-day device lifecycle from initial verification, with session refresh on recovery**
-> 
+>
 > **Policy**: Sessions remain valid for 30 days from initial device verification. Successful recovery actions reset the session timer but cannot extend the absolute 30-day device expiry. Upon reaching day 30 from initial verification, user must re-verify via email, regardless of recovery activity.
 
 **User Approval**: ✅ Approved (2026-11-11)
@@ -154,7 +154,7 @@ This document records the final decisions for all 7 blocking decisions, approved
 3. **Robots.txt**: Do NOT use Disallow for these routes; allow crawling so meta tags are visible
 
    OR alternatively:
-   
+
    Use **only** Robots.txt `Disallow` rules and skip meta tags (routes won't appear in search results, but won't be crawled at all)
 
 **Selected approach**: Meta tags + Sitemap exclusion (allows crawlers to verify noindex, doesn't prevent external linking to these pages)

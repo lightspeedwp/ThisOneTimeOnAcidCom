@@ -45,17 +45,17 @@ Apply **all three enforcement methods** for /speaking, /events, /media:
 Add to page header:
 ```html
 <meta name="robots" content="noindex, follow">
-```
+```text
 This tells search engines: "Don't index this page, but follow links from it."
 
 #### B. Robots.txt Rules
 Add to robots.txt:
-```
+```text
 User-agent: *
 Disallow: /speaking
 Disallow: /events
 Disallow: /media
-```
+```text
 This tells crawlers: "Don't crawl these routes."
 
 #### C. Sitemap.xml Exclusion
