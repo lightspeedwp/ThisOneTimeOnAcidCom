@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Link validation & remediation reports** (T050) — Added comprehensive link validation analysis for guidelines documentation. Generated `link-validation-report.json` (888 internal links inventory with working/broken/unknown status) and `link-remediation-report.json` (categorized analysis with remediation strategy per spec 003 T050)
 - **Sentry error monitoring** — Added `@sentry/react` and `@sentry/vite-plugin` with `src/instrument.ts` (errors, tracing, session replay with text masked), a `Sentry.ErrorBoundary` around the app, and route-based tracing via `wrapCreateBrowserRouterV7`. Source maps are uploaded at build time and then deleted from `dist/` only when `SENTRY_AUTH_TOKEN` is set. The root `netlify.toml` returns 404 for `/*.map` regardless of whether the token is set. New env vars `VITE_SENTRY_DSN`, `SENTRY_ORG`, `SENTRY_PROJECT` and `SENTRY_AUTH_TOKEN` are documented in `.env.example`
 
 **Agent and Workflow Orchestration Documentation**
