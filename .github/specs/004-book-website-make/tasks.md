@@ -263,7 +263,7 @@
 
 ## Dependencies & Execution Order
 
-```
+```text
 Phase 1 (Setup) ──┐
                   ├──> Phase 2 (Decisions & Gates) ──┐
                   │                                  ├──> Phase 6 (Approval Gates)

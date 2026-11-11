@@ -57,7 +57,7 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 
 ### Documentation (this feature)
 
-```
+```text
 .github/specs/004-book-website-make/
 ├── spec.md                              # Feature specification (223 lines, complete)
 ├── plan.md                              # This file (implementation plan)
@@ -79,7 +79,7 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 
 **Project Type: Documentation-only specification**
 
-```
+```text
 content/book/
 ├── 01-book-website-specification.md     # Master execution contract (v1.0.0)
 ├── 02-companion-session-plan.md         # Preparation queue (v1.0.4)

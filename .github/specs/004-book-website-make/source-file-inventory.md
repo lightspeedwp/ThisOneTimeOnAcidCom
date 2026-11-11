@@ -259,7 +259,7 @@ Complete documentation of six specification files from `content/book/` directory
 
 ## File Interdependencies
 
-```
+```text
 File 01 (Master Specification)
   ├─ References File 02 (Companion Plan)
   ├─ References File 03 (Author Scope Decisions)
