@@ -161,6 +161,9 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
 - Q: If `/speckit-converge` finds gaps beyond the 43 planned tasks, should those become Phase 3 deferred work or T069 blockers? → A: Phase 3 work—discover gaps during convergence, address them before merge (sequential Phase 3 tasks), do not defer indefinitely.
   - **Integration:** Clarified that convergence gaps trigger immediate Phase 3 task creation (T070+) to be handled sequentially before PR completion, not deferred to "later".
 
+- Q: How are S-document approvals (per D0's "locked-files-guard" requirement) tracked and verified at PR merge time? → A: GitHub CODEOWNERS file with standard code-owner review requirement (automatic tracking, merge-time verification).
+  - **Integration:** D0 approval mechanism clarified: S-documents (.claude/skills/*, AGENTS.md, CONTRIBUTING.md) require GitHub code-owner review via CODEOWNERS, automatically enforced at merge.
+
 ## Next Steps
 
 1. **Specification Validation:** All decision gates (D0–D8) now resolved and documented
