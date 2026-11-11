@@ -1,7 +1,7 @@
 # Research: Blocking Decisions Analysis
 
-**Feature**: Book Website Figma Make Prompt Pack (004)  
-**Date**: 2026-11-09  
+**Feature**: Book Website Figma Make Prompt Pack (004)
+**Date**: 2026-11-09
 **Status**: Research Phase Complete
 
 ---
@@ -70,7 +70,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 
 **Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
 
-**Impact on Prompts 3A & 3C**: 
+**Impact on Prompts 3A & 3C**:
 - Prompt 3A (reader access copy) requires exact timer messaging ("Code expires in 10 minutes from generation" vs. "10 minutes from when you received this email")
 - Prompt 3C (error states) error handling for expired codes depends on start time and how to communicate expiry reason to reader
 
