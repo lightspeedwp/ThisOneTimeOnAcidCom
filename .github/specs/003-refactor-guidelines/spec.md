@@ -4,6 +4,7 @@ feature: "guidelines-refactor"
 issue: "TOA-358"
 status: "phase-2-in-progress"
 created: "2026-10-24"
+last_updated: "2026-11-09"
 ---
 
 # Specification 003: Refactor Guidelines (TOA-358)
@@ -146,7 +147,7 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
   - **Integration:** Updated Key Gates table to mark all decisions (D1–D8) as ✅ RESOLVED with evidence references from checklists/requirements.md (D1–D8 decision statements).
 
 - **Q2:** Are there any remaining ambiguities about the pointer strategy (Type 1/2/3), archive directory structure (`guidelines/_archive/`), or edge cases in the consolidation approach that need clarification before Phase 2 final sign-off? → **A:** No remaining ambiguities—the hybrid consolidation strategy (Type 1/2/3 pointers, 1-hop chain depth limit, comment-based reverse links, archive directory structure) is fully defined and ready for implementation validation.
-  - **Integration:** Confirmed D4/D5 implementation guidance is complete and documented in checklists/requirements.md. No spec changes required; consolidation strategy is actionable.
+  - **Integration:** Confirmed D4/D5 implementation guidance is complete and documented in checklists/requirements.md. See [CONSOLIDATION-MANIFEST.md](./CONSOLIDATION-MANIFEST.md) for explicit G→N document mapping (N001–N029 reference, organization, patterns, pages, reports). Consolidation strategy is actionable.
 
 - **Q3:** Are all ten requirements for the Final Sign-Off checklist (checklists/requirements.md § Final Sign-Off) clear and achievable with the current evidence already generated (T067 manifest, T068 skill validation)? → **A:** Yes—all evidence is already in place from T067–T068; T069 is a consolidation exercise to fill in the checklist with references to existing documentation and mark "READY FOR MERGE" when complete.
   - **Integration:** No spec changes required; Final Sign-Off checklist is actionable with existing evidence. T069 can proceed immediately.
