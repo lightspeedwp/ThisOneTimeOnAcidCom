@@ -22,6 +22,40 @@ the `dependency-merge-controller` workflow.
 - Keep workflows minimal; prefer repository-level scripts over workflow logic
 - Test workflow syntax with [`workflow-validator`](https://github.com/lightspeedwp/workflow-validator) before committing
 
+## Direct configuration files
+
+Disposition manifest for files directly inside `.github/`, inspected at `main`
+revision `472ce58` on 11 November 2026
+([TOA-261](https://linear.app/lightspeedwp/issue/TOA-261)). Declared
+configuration is not evidence that a service is enrolled or a protection is
+enforced.
+
+### Local files
+
+| File | Disposition | Actual consumer | Dependencies | Maintenance |
+|------|-------------|-----------------|--------------|-------------|
+| `CODEOWNERS` | Adapt (local) | GitHub review routing; `dependency-automation.yml` refuses pull requests that touch it | A resolvable owner handle and branch protection (neither verified) | Repository owner; owner handle needs confirmation |
+| `renovate.json` | Adapt; correction deferred | Renovate, if enrolled (unverified). No workflow or script reads it | Shared preset `github>lightspeedwp/.github:renovate` (source file not found at shared `develop` revision `b63f9bb`); built-in `config:base` | Local file: repository owner. Preset: shared-repository maintainers. Operational acceptance: [TOA-454](https://linear.app/lightspeedwp/issue/TOA-454) |
+| `GOVERNANCE.md` | Adapt (local document) | Readers only; cited by `VALIDATION.md`, `BUDGET_CONTROLS.md` and `.claude/` documents | `.github/scripts/verify-single-source.sh` | Repository owner |
+| `VALIDATION.md` | Defer | Readers only; cited by `.github/docs/PHASE-2-4-STATUS.md` | The workflows it describes | Repository owner |
+| `BUDGET_CONTROLS.md` | Defer | Readers only; cited by `.claude/` and `.agents/` documents. No automated enforcement found | None | Repository owner |
+
+### Shared reference files
+
+Files directly inside the shared
+[`lightspeedwp/.github`](https://github.com/lightspeedwp/.github/tree/develop/.github)
+`.github/` directory, classified for this repository.
+
+| Shared file | Disposition | Note |
+|-------------|-------------|------|
+| `labeler.yml` | Reuse | Fetched at runtime by `labeling-unified.yml`; no local copy |
+| `PULL_REQUEST_TEMPLATE/config.yml` | Reuse | Fetched at runtime by `pr-template-routing.yml`; folder-owned |
+| `labels.yml`, `issue-types.yml`, `branch-labels.yml` | Omit locally | Local copies are forbidden by `drift-detection.yml` |
+| `dependabot.yml`, `mergify.yml` | Omit | Superseded by the Renovate decision; absent on `main` |
+| `README.md` | Omit | This guide serves that role |
+| `PROTECTED_FILES.txt` | Omit | Owner direction, 25 October 2026; do not restore |
+| `branch-types.yml`, `changelog-rules.yml`, `footers.yml`, `issue-fields.yml`, `label-governance-policy.yml`, `project-routes.yml`, `config.yml`, `funding.yml`, `SAVED_REPLIES.md`, `custom-instructions.md`, `chatmodes.md`, `VERSION`, `CHANGELOG_CONTRIBUTOR_CHECKLIST.md` | Omit | No local consumer found |
+
 ---
 
 ## Community Resources (Inherited from Organisation)
@@ -173,6 +207,8 @@ Key items:
 | `.gemini/` configuration | Managed integration | See Gemini docs |
 | Repository labels | Managed separately in repository | Use org label definitions as reference |
 | Community templates | Inherited from org | Inherit unless customisation needed |
+| `.github/renovate.json` | Repository owner (local file) | Shared preset: `lightspeedwp/.github`; acceptance: TOA-454 |
+| `.github/CODEOWNERS` | Repository owner | Owner handle and applied protection unverified |
 
 ---
 
@@ -187,5 +223,5 @@ Key items:
 
 ---
 
-**Last updated:** 16 October 2026 · **Status:** Governance audit in progress
+**Last updated:** 11 November 2026 · **Status:** Governance audit in progress
 (epic [TOA-241](https://linear.app/lightspeedwp/issue/TOA-241))

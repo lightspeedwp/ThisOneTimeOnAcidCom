@@ -74,29 +74,22 @@ Consolidate duplicate governance config files into `lightspeedwp/.github`
 
 ### T011: Figma Make Project Access Validation
 
-Validate Figma API connectivity and recover media library assets via Figma Make.
+**Status:** ✅ Complete (Deferred)
 
-- **Status:** In Progress
-- **Script:** `scripts/test-figma-access.js`
-- **Tests:** `scripts/_*tests*_/test-figma-access.test.js` (15 tests, all
-  passing)
-- **Environment Variables:**
-- `FIGMA*API*TOKEN` — Figma API personal access token
-- `FIGMA*MAKE*FILE_KEY` — Figma Make project file key
-- `FIGMA*TEAM*ID` — Figma team ID
-- `FIGMA*EXPORT*FORMAT` — Export format (default: `png`)
-- `FIGMA*EXPORT*SCALE` — Export scale multiplier (default: `2`)
+**Finding:** Figma Make project contains assets from ashshaw.makeup site only. ThisOneTimeOnAcidCom website currently has no images and does not require asset extraction at this time.
 
-**Pilot Assets:**
+**Investigation Summary:**
+- Figma API connectivity tested and validated (17/17 unit tests passing)
+- Token authentication issues resolved (API access confirmed)
+- Figma Make API access restrictions identified (400/403 errors on file endpoints)
+- Manual review of Figma assets confirms they belong to ashshaw.makeup, not ThisOneTimeOnAcidCom
+- ES module compatibility added to test script for Node.js execution
+- **Conclusion:** Asset extraction deferred until ThisOneTimeOnAcidCom requires image assets
 
-- `toa-heroImage1` (CRITICAL) — Homepage Hero
-- `toa-jungleImage1` (HIGH) — Festival Portfolio - Jungle Festival Koh Phangan
-
-## Extraction Time Estimates
-
-- 10 assets (pilot): ~7 seconds (0.12 minutes, rounds to 0)
-- 56 assets (full batch): ~42 seconds (0.7 minutes, rounds to 1)
-- 100 assets: ~65 seconds (1.08 minutes, rounds to 1)
+**Artifacts:**
+- `scripts/test-figma-access.js` — Validation script (ready for future use, ES module compatible)
+- `scripts/__tests__/test-figma-access.test.js` — 17 passing unit tests
+- `scripts/.github/reports/toa-media-library/T011-figma-access-test.json` — Test reports
 
 ## 🌳 Repository Structure
 
