@@ -501,7 +501,10 @@ Show:
 - Whether a commit/push to main could trigger deployment.
 
 Do not change the seven source documents, AGENTS.md, governance,
-catalogues, .specify/feature.json, application files or master task lists.
+catalogues, application files or master task lists.
+
+Separately preview any required .specify/feature.json change to record
+the full selected feature directory.
 
 Do not reserve a feature number by running a helper.
 
