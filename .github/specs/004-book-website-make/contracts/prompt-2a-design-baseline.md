@@ -20,27 +20,33 @@ Export design-system baseline (approved typography, colors, component styles) as
 - Body: Inter (weights: 400, 500; sizes: 14px, 16px, 18px)
 - UI: Inter (weights: 500, 600; sizes: 12px, 14px, 16px)
 
-**Colors (Light Theme)**:
-1. Primary: #1a1a1a (charcoal)
-2. Secondary: #ffffff (white)
-3. Accent: #e8d4b8 (tan)
-4. Success: #2d5016 (green)
-5. Warning: #b8860b (gold)
-6. Error: #8b0000 (maroon)
-7. Neutral-light: #f5f5f5 (light gray)
-8. Neutral-dark: #666666 (dark gray)
-9. Border: #cccccc (medium gray)
+**Colors (Approved Baseline — Design Brief v1.1.2)**:
 
-**Colors (Dark Theme)**:
-1. Primary: #ffffff (white)
-2. Secondary: #1a1a1a (charcoal)
-3. Accent: #d4a574 (tan variant)
-4. Success: #90ee90 (light green)
-5. Warning: #ffd700 (gold variant)
-6. Error: #ff6b6b (light red)
-7. Neutral-light: #333333 (dark gray)
-8. Neutral-dark: #cccccc (light gray)
-9. Border: #444444 (medium gray variant)
+Dark-first palette with preserved light support:
+
+1. Deepest Dark: #0B0B10 (primary dark background)
+2. Dark Purple-Black: #12121A (secondary dark background)
+3. Lighter Dark: #171722 (tertiary dark background)
+4. Warm Cream: #F6F2EB (primary light background / dark theme text)
+5. Warm Tan: #CFC7BB (secondary light / neutral warm)
+6. Warm Brown: #9C9488 (tertiary light / warm neutral)
+7. Hot Pink Accent: #FF3AAE (interactive accent, both themes)
+8. Electric Yellow Accent: #F4FF3C (highlight accent, both themes)
+9. Purple Accent: #8A63FF (tertiary accent, both themes)
+
+**Dark Theme Mapping**:
+- Primary (text): #F6F2EB (warm cream on #0B0B10)
+- Primary (background): #0B0B10
+- Secondary (text): #CFC7BB (warm tan)
+- Secondary (background): #12121A
+- Accents: #FF3AAE, #F4FF3C, #8A63FF
+
+**Light Theme Mapping**:
+- Primary (text): #0B0B10 (dark text)
+- Primary (background): #F6F2EB (warm cream background)
+- Secondary (text): #9C9488 (warm brown)
+- Secondary (background): #CFC7BB (warm tan background)
+- Accents: #FF3AAE, #F4FF3C, #8A63FF
 
 **Components**:
 - Button (primary, secondary, disabled states)
@@ -53,12 +59,18 @@ Export design-system baseline (approved typography, colors, component styles) as
 
 **Export Format**: CSS variables file (tokens.css) or design-token JSON
 
-**Variables to Export**:
+**Variables to Export** (Approved Baseline):
 - `--font-heading: 'Space Grotesk'`
 - `--font-body: 'Inter'`
-- `--color-primary-light: #1a1a1a`
-- `--color-primary-dark: #ffffff`
-- [9 colors × 2 themes = 18 color variables]
+- `--color-deepest-dark: #0B0B10`
+- `--color-dark-purple: #12121A`
+- `--color-lighter-dark: #171722`
+- `--color-warm-cream: #F6F2EB`
+- `--color-warm-tan: #CFC7BB`
+- `--color-warm-brown: #9C9488`
+- `--color-accent-pink: #FF3AAE`
+- `--color-accent-yellow: #F4FF3C`
+- `--color-accent-purple: #8A63FF`
 - Component-specific variables (button-bg, card-border, etc.)
 
 ### Figma Make Instructions

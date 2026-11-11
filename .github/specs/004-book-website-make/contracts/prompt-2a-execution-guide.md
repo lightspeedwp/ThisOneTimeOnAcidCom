@@ -48,102 +48,126 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --font-ui-sizes: 12px, 14px, 16px;
 ```text
 
-### 2. Extract Colors (Light Theme)
+### 2. Extract Colors (Light Theme — Approved Baseline)
 
 | # | Name | Color | Hex | Usage |
 |---|------|-------|-----|-------|
-| 1 | Primary | Charcoal | #1a1a1a | Text, foreground |
-| 2 | Secondary | White | #ffffff | Background, contrast |
-| 3 | Accent | Tan | #e8d4b8 | Highlights, CTAs |
-| 4 | Success | Green | #2d5016 | Success states |
-| 5 | Warning | Gold | #b8860b | Warnings, alerts |
-| 6 | Error | Maroon | #8b0000 | Error states |
-| 7 | Neutral-light | Light Gray | #f5f5f5 | Light backgrounds |
-| 8 | Neutral-dark | Dark Gray | #666666 | Secondary text |
-| 9 | Border | Medium Gray | #cccccc | Borders, dividers |
+| 1 | Primary (Text) | Deepest Dark | #0B0B10 | Text, foreground |
+| 2 | Primary (Background) | Warm Cream | #F6F2EB | Background, contrast |
+| 3 | Secondary (Text) | Warm Brown | #9C9488 | Secondary text |
+| 4 | Secondary (Background) | Warm Tan | #CFC7BB | Secondary background |
+| 5 | Accent | Hot Pink | #FF3AAE | Highlights, CTAs |
+| 6 | Accent | Electric Yellow | #F4FF3C | Highlights, labels |
+| 7 | Accent | Purple | #8A63FF | Tertiary accents |
+| 8 | Dark Support | Dark Purple-Black | #12121A | Elevated surfaces |
+| 9 | Dark Support | Lighter Dark | #171722 | Alternative dark |
 
-**Export as CSS Variables**:
+**Export as CSS Variables** (Approved Baseline):
 ```css
 /* Light Theme */
---color-primary-light: #1a1a1a;
---color-secondary-light: #ffffff;
---color-accent-light: #e8d4b8;
---color-success-light: #2d5016;
---color-warning-light: #b8860b;
---color-error-light: #8b0000;
---color-neutral-light-light: #f5f5f5;
---color-neutral-dark-light: #666666;
---color-border-light: #cccccc;
+--color-primary-text-light: #0B0B10;
+--color-primary-bg-light: #F6F2EB;
+--color-secondary-text-light: #9C9488;
+--color-secondary-bg-light: #CFC7BB;
+--color-accent-pink: #FF3AAE;
+--color-accent-yellow: #F4FF3C;
+--color-accent-purple: #8A63FF;
+--color-dark-support-1: #12121A;
+--color-dark-support-2: #171722;
 ```text
 
-### 3. Extract Colors (Dark Theme)
+### 3. Extract Colors (Dark Theme — Approved Baseline)
 
 | # | Name | Color | Hex | Usage |
 |---|------|-------|-----|-------|
-| 1 | Primary | White | #ffffff | Text, foreground |
-| 2 | Secondary | Charcoal | #1a1a1a | Background, contrast |
-| 3 | Accent | Tan Variant | #d4a574 | Highlights, CTAs |
-| 4 | Success | Light Green | #90ee90 | Success states |
-| 5 | Warning | Gold Variant | #ffd700 | Warnings, alerts |
-| 6 | Error | Light Red | #ff6b6b | Error states |
-| 7 | Neutral-light | Dark Gray | #333333 | Light backgrounds |
-| 8 | Neutral-dark | Light Gray | #cccccc | Secondary text |
-| 9 | Border | Medium Gray Variant | #444444 | Borders, dividers |
+| 1 | Primary (Text) | Warm Cream | #F6F2EB | Text, foreground |
+| 2 | Primary (Background) | Deepest Dark | #0B0B10 | Background, contrast |
+| 3 | Secondary (Text) | Warm Tan | #CFC7BB | Secondary text |
+| 4 | Secondary (Background) | Dark Purple-Black | #12121A | Secondary background |
+| 5 | Accent | Hot Pink | #FF3AAE | Highlights, CTAs |
+| 6 | Accent | Electric Yellow | #F4FF3C | Highlights, labels |
+| 7 | Accent | Purple | #8A63FF | Tertiary accents |
+| 8 | Light Support | Warm Brown | #9C9488 | Tertiary text |
+| 9 | Light Support | Lighter Dark | #171722 | Alternative dark background |
 
-**Export as CSS Variables**:
+**Export as CSS Variables** (Approved Baseline):
 ```css
 /* Dark Theme */
---color-primary-dark: #ffffff;
---color-secondary-dark: #1a1a1a;
---color-accent-dark: #d4a574;
---color-success-dark: #90ee90;
---color-warning-dark: #ffd700;
---color-error-dark: #ff6b6b;
---color-neutral-light-dark: #333333;
---color-neutral-dark-dark: #cccccc;
---color-border-dark: #444444;
+--color-primary-text-dark: #F6F2EB;
+--color-primary-bg-dark: #0B0B10;
+--color-secondary-text-dark: #CFC7BB;
+--color-secondary-bg-dark: #12121A;
+--color-accent-pink: #FF3AAE;
+--color-accent-yellow: #F4FF3C;
+--color-accent-purple: #8A63FF;
+--color-light-support-1: #9C9488;
+--color-light-support-2: #171722;
 ```text
 
 ### 4. Extract Component Styles
 
-**Button Component**:
+**Button Component** (Approved Baseline):
 ```css
---button-bg-primary: var(--color-primary-light);
---button-text-primary: var(--color-secondary-light);
---button-bg-secondary: var(--color-secondary-light);
---button-text-secondary: var(--color-primary-light);
---button-bg-disabled: var(--color-neutral-light-light);
---button-text-disabled: var(--color-neutral-dark-light);
---button-border-radius: 4px;
+/* Light Theme */
+--button-bg-primary-light: var(--color-accent-pink);
+--button-text-primary-light: #ffffff;
+--button-bg-secondary-light: var(--color-secondary-bg-light);
+--button-text-secondary-light: var(--color-primary-text-light);
+--button-border-radius: 8px;
 --button-padding: 12px 24px;
+
+/* Dark Theme */
+--button-bg-primary-dark: var(--color-accent-pink);
+--button-text-primary-dark: #ffffff;
+--button-bg-secondary-dark: var(--color-secondary-bg-dark);
+--button-text-secondary-dark: var(--color-primary-text-dark);
 ```text
 
-**Card Component**:
+**Card Component** (Approved Baseline):
 ```css
---card-bg: var(--color-secondary-light);
---card-border: 1px solid var(--color-border-light);
+/* Light Theme */
+--card-bg-light: var(--color-primary-bg-light);
+--card-border-light: 1px solid var(--color-secondary-bg-light);
 --card-border-radius: 8px;
 --card-padding: 16px;
---card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+--card-shadow: 0 2px 8px rgba(11, 11, 16, 0.1);
+
+/* Dark Theme */
+--card-bg-dark: var(--color-secondary-bg-dark);
+--card-border-dark: 1px solid var(--color-dark-support-2);
+--card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 ```text
 
-**Navigation Component**:
+**Navigation Component** (Approved Baseline):
 ```css
---nav-link-color: var(--color-primary-light);
---nav-link-color-hover: var(--color-accent-light);
---nav-link-color-active: var(--color-accent-light);
+/* Light Theme */
+--nav-link-color-light: var(--color-primary-text-light);
+--nav-link-color-hover-light: var(--color-accent-pink);
+--nav-link-color-active-light: var(--color-accent-pink);
 --nav-link-font: var(--font-ui);
 --nav-link-font-weight: 500;
+
+/* Dark Theme */
+--nav-link-color-dark: var(--color-primary-text-dark);
+--nav-link-color-hover-dark: var(--color-accent-pink);
+--nav-link-color-active-dark: var(--color-accent-pink);
 ```text
 
-**Form Input Component**:
+**Form Input Component** (Approved Baseline):
 ```css
---form-input-bg: var(--color-secondary-light);
---form-input-border: 1px solid var(--color-border-light);
---form-input-border-focused: 2px solid var(--color-accent-light);
---form-input-border-error: 2px solid var(--color-error-light);
---form-input-padding: 8px 12px;
---form-input-border-radius: 4px;
+/* Light Theme */
+--form-input-bg-light: var(--color-primary-bg-light);
+--form-input-border-light: 1px solid var(--color-secondary-bg-light);
+--form-input-border-focused-light: 2px solid var(--color-accent-pink);
+--form-input-text-light: var(--color-primary-text-light);
+--form-input-padding: 12px;
+--form-input-border-radius: 6px;
+
+/* Dark Theme */
+--form-input-bg-dark: var(--color-primary-bg-dark);
+--form-input-border-dark: 1px solid var(--color-secondary-bg-dark);
+--form-input-border-focused-dark: 2px solid var(--color-accent-pink);
+--form-input-text-dark: var(--color-primary-text-dark);
 ```text
 
 ---
@@ -195,76 +219,94 @@ All of these must be true when complete:
    - Form Input component(s)
 3. Verify each component uses the approved baseline fonts and colors
 
-### Phase 2: Extract Values
+### Phase 2: Extract Values (Approved Baseline)
 
 1. **From Button components**:
-   - Note primary button background color: #1a1a1a (light theme)
-   - Note primary button text color: #ffffff (light theme)
-   - Note disabled state colors
+   - Note primary button background color: #FF3AAE (hot pink accent)
+   - Note primary button text color: #FFFFFF (white)
+   - Note secondary button uses theme colors (#F6F2EB light / #0B0B10 dark)
    - Record all state variations
 
 2. **From Card components**:
-   - Note background color: #ffffff
-   - Note border color: #cccccc
+   - Note light theme background color: #F6F2EB
+   - Note dark theme background color: #0B0B10 or #12121A
+   - Note border color uses warm neutrals (#CFC7BB light / #12121A dark)
    - Note shadow/elevation
 
 3. **From Navigation component**:
-   - Note link color: #1a1a1a (default)
-   - Note hover color: #e8d4b8 (accent)
-   - Note active color: #e8d4b8 (accent)
+   - Note link color (light): #0B0B10 (default)
+   - Note link color (dark): #F6F2EB (default)
+   - Note hover color: #FF3AAE (hot pink accent, both themes)
+   - Note active color: #FF3AAE (hot pink accent, both themes)
 
 4. **From Form Input component**:
-   - Note input background: #ffffff
-   - Note border color: #cccccc
-   - Note focused border color
-   - Note error state colors
+   - Note light theme background: #F6F2EB (warm cream)
+   - Note dark theme background: #0B0B10 (deepest dark)
+   - Note border colors use warm neutrals (#CFC7BB light / #12121A dark)
+   - Note focused border: #FF3AAE (hot pink accent, both themes)
 
 5. **Typography throughout**:
-   - Verify Space Grotesk usage in headings
-   - Verify Inter usage in body and UI
+   - Verify Space Grotesk usage in headings (weights: 600, 700; sizes: 24px, 32px, 40px, 48px)
+   - Verify Inter usage in body and UI (body weights: 400, 500; UI weights: 500, 600)
    - Record exact font weights and sizes
 
 ### Phase 3: Generate Tokens File
 
-**Option A: CSS Variables (.css)**
+**Option A: CSS Variables (.css)** (Approved Baseline)
 ```css
 /* Design System Baseline Tokens
- * Generated from Figma (Date: 2026-11-09)
- * Approved baseline version: Design System v1.0
- * Approval date: 2026-11-09
+ * Generated from Figma (Date: 2026-11-11)
+ * Approved baseline version: Design Brief v1.1.2
+ * Approval date: 2026-11-04 (Asia/Bangkok)
+ * Approved palette: #0B0B10, #12121A, #171722, #F6F2EB, #CFC7BB, #9C9488, #FF3AAE, #F4FF3C, #8A63FF
  */
 
-/* Typography */
+/* Shared/Universal Typography */
 :root {
   --font-heading: 'Space Grotesk';
   --font-body: 'Inter';
   --font-ui: 'Inter';
   
-  /* ... complete token list ... */
+  /* Accents (same in both themes) */
+  --color-accent-pink: #FF3AAE;
+  --color-accent-yellow: #F4FF3C;
+  --color-accent-purple: #8A63FF;
 }
 
 /* Light Theme */
 @media (prefers-color-scheme: light) {
   :root {
-    --color-primary: #1a1a1a;
-    --color-secondary: #ffffff;
-    /* ... all 9 light colors ... */
+    --color-primary-text: #0B0B10;
+    --color-primary-bg: #F6F2EB;
+    --color-secondary-text: #9C9488;
+    --color-secondary-bg: #CFC7BB;
+    --color-dark-support-1: #12121A;
+    --color-dark-support-2: #171722;
   }
 }
 
 /* Dark Theme */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-primary: #ffffff;
-    --color-secondary: #1a1a1a;
-    /* ... all 9 dark colors ... */
+    --color-primary-text: #F6F2EB;
+    --color-primary-bg: #0B0B10;
+    --color-secondary-text: #CFC7BB;
+    --color-secondary-bg: #12121A;
+    --color-light-support-1: #9C9488;
+    --color-light-support-2: #171722;
   }
 }
 ```text
 
-**Option B: JSON Design Tokens (.json)**
+**Option B: JSON Design Tokens (.json)** (Approved Baseline)
 ```json
 {
+  "meta": {
+    "approvedDate": "2026-11-04",
+    "approvedBy": "Ash",
+    "approvedLocation": "Asia/Bangkok",
+    "sourceDocument": "Design Brief v1.1.2"
+  },
   "typography": {
     "heading": {
       "font": "Space Grotesk",
@@ -283,22 +325,34 @@ All of these must be true when complete:
     }
   },
   "colors": {
+    "approvedPalette": ["#0B0B10", "#12121A", "#171722", "#F6F2EB", "#CFC7BB", "#9C9488", "#FF3AAE", "#F4FF3C", "#8A63FF"],
+    "accents": {
+      "pink": "#FF3AAE",
+      "yellow": "#F4FF3C",
+      "purple": "#8A63FF"
+    },
     "light": {
-      "primary": "#1a1a1a",
-      "secondary": "#ffffff",
-      /* ... all 9 colors ... */
+      "primaryText": "#0B0B10",
+      "primaryBg": "#F6F2EB",
+      "secondaryText": "#9C9488",
+      "secondaryBg": "#CFC7BB",
+      "darkSupport1": "#12121A",
+      "darkSupport2": "#171722"
     },
     "dark": {
-      "primary": "#ffffff",
-      "secondary": "#1a1a1a",
-      /* ... all 9 colors ... */
+      "primaryText": "#F6F2EB",
+      "primaryBg": "#0B0B10",
+      "secondaryText": "#CFC7BB",
+      "secondaryBg": "#12121A",
+      "lightSupport1": "#9C9488",
+      "lightSupport2": "#171722"
     }
   },
   "components": {
-    "button": { /* ... */ },
-    "card": { /* ... */ },
-    "navigation": { /* ... */ },
-    "formInput": { /* ... */ }
+    "button": { "approvedUse": "Hot pink #FF3AAE for primary actions" },
+    "card": { "approvedUse": "Warm cream light / deepest dark for dark theme" },
+    "navigation": { "approvedUse": "Hot pink #FF3AAE hover/active states" },
+    "formInput": { "approvedUse": "Warm neutrals for borders, pink for focus" }
   }
 }
 ```text
