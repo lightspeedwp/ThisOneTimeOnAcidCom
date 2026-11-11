@@ -158,6 +158,9 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
 - Q: What defines successful "link remediation" for T050—what must be true for a broken link to count as fixed? → A: The link must resolve to an existing N-document or preserved G-document AND any inline references (to archived content) must include a note explaining the relocation.
   - **Integration:** Updated Success Criteria item 5 to clarify acceptance for T050 link validation work.
 
+- Q: If `/speckit-converge` finds gaps beyond the 43 planned tasks, should those become Phase 3 deferred work or T069 blockers? → A: Phase 3 work—discover gaps during convergence, address them before merge (sequential Phase 3 tasks), do not defer indefinitely.
+  - **Integration:** Clarified that convergence gaps trigger immediate Phase 3 task creation (T070+) to be handled sequentially before PR completion, not deferred to "later".
+
 ## Next Steps
 
 1. **Specification Validation:** All decision gates (D0–D8) now resolved and documented
