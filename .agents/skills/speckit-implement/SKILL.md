@@ -21,7 +21,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 **Branch-safety gate (before hooks or any file-writing commands)**:
 - Inspect `git status --short` and `git branch --show-current` from the repository root; preserve unrelated uncommitted work.
 - Follow `AGENTS.md`, `.agents/skills/branch-validation/SKILL.md`, and `.agents/roles/branches-agent.md`. Use only the exact task branch the user supplied or approved; an unrelated valid branch is insufficient.
-- Run `npm run validate:branch-name` on the checked-out branch. STOP on validation failure, `main`, `develop`, or detached HEAD (an empty branch name), before invoking hooks or writing files.
+- Run `npm run validate:branch-name` on the checked-out branch. STOP on validation failure, `main`, or detached HEAD (an empty branch name), before invoking hooks or writing files.
 - If a branch must be created or switched, obtain approval for the exact name and validate it with `npm run validate:branch-name -- --branch <approved-name>` first. Recheck the checked-out branch before writes. Feature numbers and hook output never replace approval or validation.
 
 **Check for extension hooks (before implementation)**:

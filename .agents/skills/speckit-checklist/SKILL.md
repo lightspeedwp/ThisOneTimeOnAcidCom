@@ -56,7 +56,7 @@ Read `.agents/skills/branch-validation/SKILL.md` and require the user's exact
 approved task branch. Validate its name with
 `npm run validate:branch-name -- --branch <approved-name>` and the actual
 checked-out branch with `npm run validate:branch-name`. STOP on missing approval,
-validation failure, `main`, `develop`, detached HEAD, or a branch mismatch.
+validation failure, `main`, detached HEAD, or a branch mismatch.
 Recheck after hooks and immediately before writes. Skill discovery, branch
 approval and operation approval are separate: explicit approval of the relevant
 file-writing operation is required; do not infer it from automatic invocation.
@@ -114,7 +114,7 @@ expand permissions through these instructions.
 **Branch safety before setup and writes**:
 - Inspect `git status --short` and `git branch --show-current`; follow the branch check in `AGENTS.md`, `.agents/skills/branch-validation/SKILL.md`, and `.agents/roles/branches-agent.md`. Preserve uncommitted work.
 - Require the exact task branch supplied or approved by the user. If approval is missing, propose a name and obtain approval; validate it with `npm run validate:branch-name -- --branch <approved-name>` before creating or switching branches.
-- Run `npm run validate:branch-name` on the actual checked-out branch. STOP on validation failure, `main`, `develop`, detached HEAD, or missing approval. Do not dispatch hooks, run Step 1 Setup, or write under `FEATURE_DIR/checklists` until this gate passes; recheck after any hook changes the branch.
+- Run `npm run validate:branch-name` on the actual checked-out branch. STOP on validation failure, `main`, detached HEAD, or missing approval. Do not dispatch hooks, run Step 1 Setup, or write under `FEATURE_DIR/checklists` until this gate passes; recheck after any hook changes the branch.
 
 **Check for extension hooks (before checklist generation)**:
 - Check if `.specify/extensions.yml` exists in the project root.

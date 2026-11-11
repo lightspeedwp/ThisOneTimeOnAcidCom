@@ -1,0 +1,19 @@
+{
+  "name": "ci-failure",
+  "description": "CI/tests are failing after revision. Unclear if real bug or infrastructure flake. Skill should present investigation and decision options.",
+  "skill": "pr-review-workflow",
+  "review_state": "CI/test failure, investigation needed",
+  "expected_behavior": "Present options: investigate, fix if real bug, approve conditionally if flaky. Distinguish real vs. flaky.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "Flaky test unrelated to changes",
+    "Real bug revealed by test",
+    "CI infrastructure issue (not code issue)"
+  ],
+  "success_indicators": [
+    "Investigation-first approach",
+    "Options distinguish between real bug and flake",
+    "Conditional approval option is presented",
+    "No approval or merge issued"
+  ]
+}

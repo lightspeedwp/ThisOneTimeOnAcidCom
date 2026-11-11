@@ -1,0 +1,19 @@
+{
+  "name": "feedback-received",
+  "description": "PR has initial feedback from reviewer. Author hasn't responded yet. Skill should present options for next steps without executing.",
+  "skill": "pr-review-workflow",
+  "review_state": "Feedback received, awaiting revision",
+  "expected_behavior": "Present options: author revises, discussion continues, or escalate. Reference specific feedback points.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "Author hasn't responded; unclear if they'll revise",
+    "Feedback is critical (production safety)",
+    "Feedback is clear and specific"
+  ],
+  "success_indicators": [
+    "Options distinguish between revise/discuss/escalate",
+    "Specific feedback is referenced (error handling, testing)",
+    "No code changes suggested",
+    "No approval or merge suggested"
+  ]
+}

@@ -1,6 +1,10 @@
 /**
  * @fileoverview Centralised search service
- * Searches across all content types: blog, portfolio, videos, podcasts, pages
+ * Searches the retained blogPosts and allPortfolioWork collections.
+ * Results use /blog/:slug and /portfolio/:slug destinations. These are not
+ * explicit routes in the current book-site route configuration, and the
+ * service does not search manuscript/journal content, videos, podcasts or
+ * static pages.
  *
  * BUNDLER SAFETY: No optional chaining (?.) or nullish coalescing (??)
  *

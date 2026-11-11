@@ -44,7 +44,7 @@ remote mutations, releases and deployment still require their own authority.
 
 ## Release Checklist
 
-- [ ] All PRs merged to develop
+- [ ] All PRs merged to main
 - [ ] CHANGELOG.md updated with release entries
 - [ ] Version number updated in package.json
 - [ ] npm run build succeeds

@@ -1,11 +1,15 @@
-# Content-type neon colour legend
+<!-- Type 2 (Consolidation) Pointer -->
+<!-- Original: Guidelines/content-type-colours.md -->
+<!-- Consolidated into: N008 (Content Model & Structure) -->
+<!-- Authority: D4.b, D5 Pointer Strategy -->
 
-**Version:** 1.0.0
-**Created:** March 6, 2026
-**Data source:** `/data/mock/ui/content-type-colours.ts`
+> 🔄 **This content has been consolidated.** See [Content Model & Structure](./N008-content-model-structure.md) for data structure guidelines for posts, pages, and collections.
+
+For complete content structure guidance, data models, and content type definitions, refer to **N008: Content Model & Structure**.
 
 ---
 
+<<<<<<< HEAD
 ## Overview
 
 Every content type in the This One Time On Acid portfolio has an assigned neon colour used
@@ -119,3 +123,6 @@ When styling content-type-aware components, use the modifier segment:
 1. **Dark mode safe** — All neon colours are designed for dark (atomic black) backgrounds; use the accessible text variants from `neon-colors.md` for light mode
 
 1. **New content types** — If a new content type is added, assign a colour from the 8 available neons and add it to `content-type-colours.ts` first
+=======
+*Pointer created: 2026-11-11 | Type 2 Consolidation | D5 Authority*
+>>>>>>> 38f1962 (feat(003-T049-Phase2-3): Complete pointer operations (Type 2 & Type 3))

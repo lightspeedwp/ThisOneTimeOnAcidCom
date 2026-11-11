@@ -1,0 +1,22 @@
+{
+  "name": "team-dependency",
+  "description": "Another team's deliverable (analytics pipeline) delayed. Blocking mobile payment implementation. Need collaborative approach.",
+  "skill": "dependency-resolution",
+  "blocker_type": "Team dependency",
+  "expected_behavior": "Present options: negotiate interim version, mock data, parallel work, escalate. Maintain inter-team collaboration.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "Another team controls the blocking deliverable",
+    "Timeline slip already occurred (2 weeks → 3 weeks)",
+    "Workarounds exist (mock data, parallel work)",
+    "Inter-team dynamics matter"
+  ],
+  "success_indicators": [
+    "Blocker is stated (analytics pipeline, 3-week ETA, was 2 weeks)",
+    "Timeline impact highlighted (ship date at risk)",
+    "Options include: negotiate interim, mock, parallel, escalate",
+    "Integration costs mentioned (1 day to swap real data)",
+    "Collaborative tone (don't blame the other team)",
+    "Escalation path is collaborative (talk to tech lead first)"
+  ]
+}

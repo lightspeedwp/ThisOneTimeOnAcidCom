@@ -180,9 +180,8 @@ Example:
 
 ### 4. Recommend Base Branch
 
-- For most work: `develop`
-- For production hotfixes: `main`
-- For release prep: `develop` → `main` after testing
+- For all work: `main` (the repository's default and deployment branch)
+- Figma Make and Netlify default to `main`, making it the canonical source for all feature and integration work
 
 ### 5. Provide Safe Branch Operations (No Destructive Actions)
 
@@ -224,15 +223,15 @@ If the working tree has uncommitted changes:
 
 **Agent:**
 
-1. Reads current state: on `develop`, working tree clean
+1. Reads current state: on `main`, working tree clean
 
 1. Recommends: `feat/user-preferences-panel`
 
    - Type: `feat` (new feature)
-   - Base: `develop`
-1. Asks: "Ready to create `feat/user-preferences-panel` from `develop`?"
+   - Base: `main`
+1. Asks: "Ready to create `feat/user-preferences-panel` from `main`?"
 
-1. On approval, creates: `git checkout -b feat/user-preferences-panel origin/develop`
+1. On approval, creates: `git checkout -b feat/user-preferences-panel origin/main`
 
 ### Example 2: Bug Fix with Uncommitted Work
 
@@ -240,7 +239,7 @@ If the working tree has uncommitted changes:
 
 **Agent:**
 
-1. Reads current state: on `develop`, has 2 modified files
+1. Reads current state: on `main`, has 2 modified files
 
 1. Asks: "You have uncommitted changes. Would you like to:
 
@@ -250,7 +249,7 @@ If the working tree has uncommitted changes:
 1. If user chooses A:
 
    - Runs: `git stash`
-   - Creates: `git checkout -b fix/validation-error origin/develop`
+   - Creates: `git checkout -b fix/validation-error origin/main`
    - Shows: `git stash pop` to recover changes after switching
 1. If user chooses B:
 

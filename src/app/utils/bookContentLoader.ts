@@ -1,7 +1,9 @@
 /**
- * Loads book content from /src/content/book/**\/*.md files via Vite's import.meta.glob.
- * Edit the markdown files in src/content/book/ to change the book's text, add/remove chapters,
- * or restructure parts. The reader automatically rebuilds the BookPage[] array from those files.
+ * Loads book content from the runtime glob /src/content/book/**\/*.md via
+ * Vite's import.meta.glob. This is distinct from root content/book/; the
+ * inspected runtime source directory was absent.
+ * Edit runtime markdown files to change the book's text, add/remove chapters,
+ * or restructure parts. The reader rebuilds BookPage[] from those files.
  *
  * File naming convention:
  *   00-front-matter/    - cover, title, dedication, epigraph, foreword

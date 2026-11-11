@@ -1,0 +1,10 @@
+name: code-review-architecture
+description: Test presenting next steps when an architectural decision is unresolved in a code review. Verify the skill offers paths to decision (benchmark, second opinion, etc.) without committing to either approach or changing the PR.
+expected_behavior: |
+  The skill should recognize that the next decision is "which architectural approach?" and present options such as:
+  - Draft a comparison document (clarifies trade-offs)
+  - Request a second opinion from a team lead (escalates decision)
+  - Run a spike / benchmark (gathers data)
+
+  Output should be in JSON format (Claude Code) or numbered list (Claude.ai).
+  The skill must NOT modify the PR, approve changes, or execute implementation.

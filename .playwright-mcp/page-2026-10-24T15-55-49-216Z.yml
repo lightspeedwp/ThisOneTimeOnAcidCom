@@ -1,0 +1,85 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - link "Skip to main content" [ref=e4] [cursor=pointer]:
+      - /url: "#main-content"
+    - status [ref=e5]:
+      - generic [ref=e6]: Back online
+    - generic "Status announcements" [ref=e10]
+    - generic "Form submission status" [ref=e11]
+    - banner [ref=e12]:
+      - link "This one time on acid - Homepage" [ref=e14] [cursor=pointer]:
+        - /url: /
+        - text: This one time on acid...
+      - generic [ref=e15]:
+        - button "Switch to light mode" [ref=e16] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e17]: ☾
+        - button "Disable cursor effects" [pressed] [ref=e19] [cursor=pointer]: "[ ✦ ]"
+        - button "Open menu" [ref=e20] [cursor=pointer]: "[ ≡ ] Menu"
+    - main [ref=e21]:
+      - status "Loading page" [ref=e22]
+    - contentinfo [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - button "Return to home page" [ref=e27] [cursor=pointer]: This one time on acid...
+            - paragraph [ref=e28]: A hybrid memoir and creative-life guide about dancefloors, difference, freedom, and becoming fully yourself.
+          - navigation "The Book" [ref=e29]:
+            - heading "The Book" [level=3] [ref=e30]
+            - list [ref=e31]:
+              - listitem [ref=e32]:
+                - button "Home" [ref=e33] [cursor=pointer]
+              - listitem [ref=e34]:
+                - button "The Book" [ref=e35] [cursor=pointer]
+              - listitem [ref=e36]:
+                - button "Read the Draft" [ref=e37] [cursor=pointer]
+              - listitem [ref=e38]:
+                - button "Waitlist" [ref=e39] [cursor=pointer]
+          - navigation "Author & Press" [ref=e40]:
+            - heading "Author & Press" [level=3] [ref=e41]
+            - list [ref=e42]:
+              - listitem [ref=e43]:
+                - button "About Ash" [ref=e44] [cursor=pointer]
+              - listitem [ref=e45]:
+                - button "Speaking & Workshops" [ref=e46] [cursor=pointer]
+              - listitem [ref=e47]:
+                - button "Events" [ref=e48] [cursor=pointer]
+              - listitem [ref=e49]:
+                - button "Media & Press" [ref=e50] [cursor=pointer]
+              - listitem [ref=e51]:
+                - button "Contact" [ref=e52] [cursor=pointer]
+          - navigation "Content" [ref=e53]:
+            - heading "Content" [level=3] [ref=e54]
+            - list [ref=e55]:
+              - listitem [ref=e56]:
+                - button "Journal" [ref=e57] [cursor=pointer]
+          - navigation "Discover" [ref=e58]:
+            - heading "Discover" [level=3] [ref=e59]
+            - list [ref=e60]:
+              - listitem [ref=e61]:
+                - button "Search" [ref=e62] [cursor=pointer]
+        - generic [ref=e63]:
+          - generic [ref=e64]: © 2026 Ash Shaw. All Rights Reserved.
+          - generic [ref=e66]:
+            - generic [ref=e67]:
+              - button "Light mode" [ref=e68] [cursor=pointer]
+              - button "Dark mode" [ref=e71] [cursor=pointer]
+              - button "Brutalist mode" [ref=e74] [cursor=pointer]
+            - generic [ref=e77]:
+              - link "Follow Ash Shaw on Instagram" [ref=e78] [cursor=pointer]:
+                - /url: https://instagram.com/feedmymedia
+              - link "Message Ash Shaw on WhatsApp" [ref=e81] [cursor=pointer]:
+                - /url: https://wa.me/27845656767
+              - link "Connect with Ash Shaw on Facebook" [ref=e84] [cursor=pointer]:
+                - /url: https://facebook.com/ashshaw
+              - link "Professional network with Ash Shaw on LinkedIn" [ref=e87] [cursor=pointer]:
+                - /url: https://linkedin.com/in/ashshaw
+              - link "Watch Ash Shaw on YouTube" [ref=e90] [cursor=pointer]:
+                - /url: https://youtube.com/@ashshaw.makeup
+              - link "Email Ash Shaw" [ref=e93] [cursor=pointer]:
+                - /url: mailto:hello@ashshaw.makeup
+            - button "Copy page link" [ref=e97]
+          - generic [ref=e100]:
+            - button "Privacy Policy" [ref=e101]
+            - button "Terms of Service" [ref=e102]
+  - iframe [ref=e104]:
+    - alert [ref=f1e1]

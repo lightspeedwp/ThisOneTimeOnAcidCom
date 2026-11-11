@@ -1,0 +1,10 @@
+name: research-findings-ready
+description: Test presenting next steps when research/analysis is complete and findings are documented. Verify the skill offers paths forward (create summary for stakeholders, file action items, share results) without executing any action.
+expected_behavior: |
+  The skill should recognize that the next decision is "how to act on findings?" and present options such as:
+  - Prepare a stakeholder summary (preps for communication)
+  - Create action items from findings (turns findings into work)
+  - Schedule a team sync (enables discussion before action)
+
+  Output should be in JSON format (Claude Code) or numbered list (Claude.ai).
+  The skill must NOT file issues, send messages, schedule meetings, or change any records.
