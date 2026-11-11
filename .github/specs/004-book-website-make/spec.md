@@ -4,9 +4,28 @@
 
 **Created**: 2026-11-09
 
-**Status**: Draft
+**Status**: Clarified — Ready for Approval (2026-11-11)
 
 **Input**: Complete staged Figma Make prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval.
+
+---
+
+## Clarifications
+
+### Session 2026-11-11
+
+**Clarification Assessment**: No critical functional ambiguities detected. Specification is comprehensive and well-structured with all requirements documented.
+
+**Documented Blocking Decisions** (intentional, not ambiguities—resolved during user approval phase):
+- Recovery-first race condition handling
+- Recovery lifetime eligibility  
+- Code expiry start time (generation vs. receipt vs. page load)
+- Email service provider selection
+- Manuscript publication readiness
+- Newsletter destination/signup link
+- Route enforcement verification for /speaking, /events, /media
+
+**Specification Status**: ✅ Ready for Approval. Four unblocked executable prompts (1, 2A, 2B, 3A) ready for user approval. Prompts 3B/3C blocked pending the 7 documented decisions. Proceed to approval workflow.
 
 ---
 
