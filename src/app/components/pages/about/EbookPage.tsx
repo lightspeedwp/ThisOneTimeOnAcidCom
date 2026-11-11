@@ -26,8 +26,10 @@ import { pageSEO } from '../../../data/mock/seo';
 import { Breadcrumbs } from '../../ui/Breadcrumbs';
 import { EbookSettingsModal } from '../../ui/EbookSettingsModal';
 import {
-  readSavedPage,
+  readSavedPosition,
   savePage,
+  savePosition,
+  positionForPage,
   readFontSize,
   saveFontSize,
   readMinimalMode,
@@ -181,11 +183,28 @@ export function EbookPage() {
 
   /* ── Primary state: single-page index (source of truth) ── */
   // Use static bookPages.length for initial clamp — corrected by effect below
-  var [currentPage, setCurrentPage] = useState(function () { return readSavedPage(bookPages.length - 1); });
+  var [currentPage, setCurrentPage] = useState(function () { return readSavedPosition(bookPages); });
   var flipStateInit: 'idle' | 'forward' | 'backward' | 'fade' = 'idle';
   var [flipState, setFlipState] = useState(flipStateInit);
   var [swipeOffset, setSwipeOffset] = useState(0);
   var [isAnimating, setIsAnimating] = useState(false);
+
+  /* Keep the same manuscript paragraph when pagination changes after a resize or font change. */
+  var previousPagesRef = useRef(dynamicPages);
+  useEffect(function () {
+    var previousPage = previousPagesRef.current[currentPage];
+    if (previousPage && previousPage.sourceId && previousPage.paragraphStart != null) {
+      var previousParagraph = previousPage.paragraphStart;
+      for (var i = 0; i < dynamicPages.length; i++) {
+        var candidate = dynamicPages[i];
+        if (candidate.sourceId === previousPage.sourceId && (candidate.paragraphStart || 0) <= previousParagraph) {
+          if (i !== currentPage) setCurrentPage(i);
+          break;
+        }
+      }
+    }
+    previousPagesRef.current = dynamicPages;
+  }, [dynamicPages]);
 
   /* ── Clamp currentPage when dynamic pagination changes total page count ── */
   useEffect(function () {
@@ -294,6 +313,8 @@ export function EbookPage() {
   /* ── Persist reading position ── */
   useEffect(function () {
     savePage(currentPage);
+    var position = positionForPage(dynamicPages[currentPage]);
+    if (position) savePosition(position);
   }, [currentPage]);
 
   /* ── Derived spread index ── */
@@ -615,7 +636,7 @@ export function EbookPage() {
   /* ── Single-page neighbours for peek effect ── */
   const prevPage = currentPage > 0 ? dynamicPages[currentPage - 1] : null;
   const nextPage = currentPage < totalPages - 1 ? dynamicPages[currentPage + 1] : null;
-  const activePage = dynamicPages[currentPage];
+  const activePage = dynamicPages[currentPage] || null;
 
   /* ── Current chapter index (for drawer active state) ── */
   const currentChapterIdx = React.useMemo(function () {
@@ -745,9 +766,13 @@ export function EbookPage() {
 
             {/* Current page */}
             <div
-              className={'ebook-reader__single-page ebook-reader__single-page--current ' + pageTypeClass(activePage)}
+              className={'ebook-reader__single-page ebook-reader__single-page--current ' + (activePage ? pageTypeClass(activePage) : '')}
             >
-              <PageContent page={activePage} />
+              {activePage ? <PageContent page={activePage} /> : (
+                <div className="ebook-reader__page-inner" role="status">
+                  This reader has no available manuscript pages.
+                </div>
+              )}
             </div>
 
             {/* Next page (off-screen right) */}
