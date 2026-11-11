@@ -1,7 +1,7 @@
 # Blocking Decisions Resolution: Gate 1 APPROVED
 
-**Date**: 2026-11-11  
-**Status**: ✅ USER DECISIONS RECEIVED AND DOCUMENTED  
+**Date**: 2026-11-11
+**Status**: ✅ USER DECISIONS RECEIVED AND DOCUMENTED
 **Context**: 7 blocking decisions for Spec 004 Book Website Figma Make Prompt Pack
 
 ---
@@ -59,7 +59,7 @@ This document records the final decisions for all 7 blocking decisions, approved
 
 **User Approval**: ✅ Approved (2026-11-11)
 
-**Impact**: 
+**Impact**:
 - Prompt 3A copy specifies: "Code expires 10 minutes from when it was generated"
 - Prompt 3C error states document: "Code expired — it was valid for 10 minutes from generation"
 
@@ -80,7 +80,7 @@ This document records the final decisions for all 7 blocking decisions, approved
 - **Brevo**: Newsletter campaign sending and subscription list management (separate system)
 - **Rationale**: Separates concerns; SendGrid for transactional email (security-critical), Brevo for marketing/newsletter workflows
 
-**Impact**: 
+**Impact**:
 - Prompt 3A email template uses SendGrid SMTP for verification codes
 - Newsletter signup (Decision 6) uses Brevo for subscription management
 
@@ -125,7 +125,7 @@ This document records the final decisions for all 7 blocking decisions, approved
 - Newsletter provider: **Brevo** (consistent with Decision 4 hybrid approach)
 - Separates newsletter concerns from verification code delivery (SendGrid handles verification)
 
-**Impact**: 
+**Impact**:
 - Prompt 3A copy: "Sign up for our newsletter" button links to external Brevo signup URL
 - Post-verification flow stays focused on reader access, not newsletter enrollment
 - Newsletter management integrated with decision 4 email strategy
@@ -147,7 +147,7 @@ This document records the final decisions for all 7 blocking decisions, approved
 2. **Robots.txt**: `Disallow: /speaking`, `Disallow: /events`, `Disallow: /media`
 3. **Sitemap.xml**: Exclude these routes entirely from sitemap
 
-**Impact**: 
+**Impact**:
 - Prompt 1 navigation specification documents exact enforcement mechanism
 - Deployment checklist verifies all three signals are in place
 - QA tests with search engine crawlers (Google Search Console simulation)
@@ -235,6 +235,6 @@ After all prompts are generated:
 
 ## Status: Gate 1 APPROVED ✅
 
-**Ready for**: 
+**Ready for**:
 - Immediate execution: Prompts 1, 2A, 2B
 - Deferred execution: Prompts 3A, 3B, 3C (awaiting manuscript approval, late January 2026)

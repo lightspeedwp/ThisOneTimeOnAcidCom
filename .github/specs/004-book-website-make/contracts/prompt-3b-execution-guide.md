@@ -196,7 +196,7 @@ We found your previous access. You can:
 ### Phase 4: Design Recovery Flow Diagram
 
 1. Create flowchart showing decision tree:
-   ```
+   ```text
    User visits content page
        ↓
    System checks device storage
@@ -246,7 +246,7 @@ When recovery is unavailable, document the fallback process:
 
 1. **Fallback Trigger**: Recovery fails for any reason
 2. **Fallback Action**: Return to email entry form (Prompt 3A)
-3. **User Communication**: 
+3. **User Communication**:
    - Show clear message explaining why recovery isn't available
    - Provide friction-free path to fresh verification
    - Reassure user that email will be sent shortly

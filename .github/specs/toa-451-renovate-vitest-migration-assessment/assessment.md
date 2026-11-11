@@ -1,9 +1,9 @@
 # TOA-451: Renovate and Vitest Migration Assessment & Plan
 
-**Repository:** `lightspeedwp/ThisOneTimeOnAcidCom`  
-**Revision:** `df7073174f3aef9fec29a9d00f6052b15277c899` (develop)  
-**Assessment Date:** 2026-11-09  
-**Requested by:** Ash Shaw  
+**Repository:** `lightspeedwp/ThisOneTimeOnAcidCom`
+**Revision:** `df7073174f3aef9fec29a9d00f6052b15277c899` (develop)
+**Assessment Date:** 2026-11-09
+**Requested by:** Ash Shaw
 **Planning Status:** Research & Analysis (No Implementation Authorized)
 
 ---
@@ -301,7 +301,7 @@ Vitest report (excerpt):
 
 **Finding:** Current Jest config does NOT discover app tests (only `/scripts` and `/tests`).
 
-**Decision Required:** 
+**Decision Required:**
 - **Option A:** Keep scope as-is (scripts/tests only) — minimal change
 - **Option B:** Add app tests to Vitest discovery — expansion of coverage
 
@@ -509,7 +509,7 @@ Vitest report (excerpt):
 
 ### Dependabot → Renovate Verification (Pre-Cutover)
 
-```
+```text
 Pre-Check Checklist
 ├─ [ ] Renovate app installed in org
 ├─ [ ] Renovate config drafted & reviewed
@@ -526,7 +526,7 @@ Pre-Check Checklist
 
 ### Jest → Vitest Verification (Pre-Cutover)
 
-```
+```text
 Pre-Check Checklist
 ├─ [ ] All Jest tests discovered by Vitest (`vitest list`)
 ├─ [ ] All previously passing tests still pass
@@ -626,8 +626,8 @@ Pre-Check Checklist
 
 ---
 
-**Assessment prepared by:** Claude Haiku 4.5  
-**Session:** https://claude.ai/code/session_01CADHZfTEPLsEZgzEHpU8Bv  
-**Date:** 2026-11-09  
-**Repository:** lightspeedwp/ThisOneTimeOnAcidCom  
+**Assessment prepared by:** Claude Haiku 4.5
+**Session:** https://claude.ai/code/session_01CADHZfTEPLsEZgzEHpU8Bv
+**Date:** 2026-11-09
+**Repository:** lightspeedwp/ThisOneTimeOnAcidCom
 **Revision:** df7073174f3aef9fec29a9d00f6052b15277c899
