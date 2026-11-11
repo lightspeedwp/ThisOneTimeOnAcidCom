@@ -106,10 +106,10 @@ Before editing files or running a workflow that writes files:
 4. Validate the proposed name with
    `npm run validate:branch-name -- --branch <approved-name>` before creation,
    then run `npm run validate:branch-name` on the checked-out branch before
-   edits. Stop on failure. Do not edit on `main`, `develop` or detached HEAD.
+   edits. Stop on failure. Do not edit on `main` or detached HEAD.
 5. Preserve uncommitted work when switching. Never stash, discard, rename or
    delete branches without authorisation. Use the branch agent's base-branch
-   policy (`develop` for normal work, `main` for hotfixes).
+   policy: all work branches derive from `main` (the repository's default and deployment branch).
 
 The deterministic authority is `scripts/validate-branch-name.js`. The existing
 Lefthook pre-commit and pre-push checks provide local enforcement; ensure hooks
