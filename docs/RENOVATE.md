@@ -92,9 +92,10 @@ preset. They are intentions only: no inspected source defines them.
 - Semantic commits using the `deps` type
 - Prioritised security updates
 
-Until a shared preset is published or these settings are added locally,
-expect Renovate's defaults from `config:base` for anything not listed under
-"Local settings".
+Renovate's defaults from `config:base` cover anything not listed under "Local
+settings", but only once the whole configuration resolves. If the shared
+preset reference cannot be resolved, Renovate normally stops before applying
+any settings, so no defaults take effect and no pull requests are created.
 
 ### Target branch
 
@@ -184,8 +185,8 @@ for the version the organisation runs before relying on it.
 
 | Option | How | Who |
 | --- | --- | --- |
-| Require approval for every update | Add `"dependencyDashboardApproval": true` to `.github/renovate.json`. Renovate then waits for approval in its Dependency Dashboard issue before creating pull requests. | Maintainer, via pull request |
-| Restrict the schedule | Add a valid `schedule` value, for example `["before 4am on Monday"]`, to narrow when Renovate may act. | Maintainer, via pull request |
+| Require approval for every update | Add `"dependencyDashboardApproval": true` to `.github/renovate.json`. Renovate then waits for approval in its Dependency Dashboard issue before creating pull requests. By default, vulnerability remediation pull requests do not wait for that approval. | Maintainer, via pull request |
+| Restrict the schedule | Add a valid `schedule` value, for example `["before 4am on Monday"]`, to narrow when Renovate may act. By default, branches that already exist can still be updated outside the schedule. | Maintainer, via pull request |
 | Disable for this repository | Add `"enabled": false` to `.github/renovate.json`. Check the effect on already-open Renovate pull requests and branches first. | Maintainer, via pull request |
 | Remove repository access | Remove this repository from the Renovate app's installation. | Organisation administrator only |
 
