@@ -1,6 +1,6 @@
 # Renovate Configuration Guide
 
-**Status:** Phase 1 Implementation Complete (2026-11-09)  
+**Status:** Configuration merged 2026-11-09; enrolment, preset resolution and operation unverified ([TOA-454](https://linear.app/lightspeedwp/issue/TOA-454))  
 **Replaces:** Dependabot  
 **Architecture:** Centralized governance model (Option A)
 
@@ -10,9 +10,9 @@
 
 Renovate has replaced Dependabot for automated dependency and GitHub Actions updates. The configuration follows a centralized governance model where:
 
-- **Canonical config** lives in `lightspeedwp/.github/renovate.json` (org-wide policy)
-- **ThisOneTimeOnAcidCom** extends and overrides via `.github/renovate.json`
-- All org-wide policy changes cascade automatically to this repo
+- **Local config** is `.github/renovate.json`. It extends `github>lightspeedwp/.github:renovate`, which Renovate resolves to `renovate.json` at the root of that repository's default branch
+- **Shared preset not found:** no such file was tracked at `lightspeedwp/.github` `develop` revision `b63f9bb` (11 November 2026). Runtime resolution has not been observed
+- Until that preset exists and resolves, no organisation-wide policy is inherited
 
 ---
 
@@ -43,10 +43,13 @@ Renovate has replaced Dependabot for automated dependency and GitHub Actions upd
 - Labels PRs with `area:dependencies` and `area:ci`
 - Runs `npm dedupe` after updates
 
-### Inherited from lightspeedwp/.github
+### Intended shared policy (not evidenced as in effect)
+
+These values were planned for a shared preset that was not found at the
+inspected source. They are not verified as applied to this repository.
 
 - **Schedule:** Weekly, Monday 03:00 SAST (Africa/Johannesburg timezone)
-- **Target branch:** `develop`
+- **Target branch:** `develop` (superseded: this repository works from `main`, and `dependency-validation.yml` triggers only on `main`/`master`)
 - **Grouping:**
   - Minor + patch updates grouped together
   - Major updates separate
