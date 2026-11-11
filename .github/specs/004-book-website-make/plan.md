@@ -57,7 +57,7 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 
 ### Documentation (this feature)
 
-```text
+```
 .github/specs/004-book-website-make/
 ├── spec.md                              # Feature specification (223 lines, complete)
 ├── plan.md                              # This file (implementation plan)
@@ -73,13 +73,13 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 │   └── prompt-3c-error-states.md
 ├── checklists/requirements.md           # Quality validation (all items passing)
 └── tasks.md                             # Phase 2 output (/speckit.tasks command)
-```text
+```
 
 ### Source Code (repository root)
 
 **Project Type: Documentation-only specification**
 
-```text
+```
 content/book/
 ├── 01-book-website-specification.md     # Master execution contract (v1.0.0)
 ├── 02-companion-session-plan.md         # Preparation queue (v1.0.4)
@@ -87,7 +87,7 @@ content/book/
 ├── 04-design-brief.md                   # Design requirements (v1.1.2)
 ├── 05-design-reader-decision-register.md # Design tracking (v1.9.0)
 └── 06-website-reading-prd.md            # Product requirements (v1.1.1)
-```text
+```
 
 **Structure Decision**: Documentation-only package. No code structure required. Source specifications analyzed, reconciled, and staged for Figma Make execution. All deliverables remain in `.github/specs/004-book-website-make/` with no backend/frontend splits or implementation code paths.
 

@@ -259,7 +259,7 @@ Complete documentation of six specification files from `content/book/` directory
 
 ## File Interdependencies
 
-```text
+```
 File 01 (Master Specification)
   ├─ References File 02 (Companion Plan)
   ├─ References File 03 (Author Scope Decisions)
@@ -278,7 +278,7 @@ File 05 (Decision Register) ← AUTHORITATIVE CURRENT SOURCE
   ├─ Builds on File 04 (Design Brief)
   ├─ Incorporates File 03 (Author Decisions)
   └─ Supersedes File 06 (Provisional Draft)
-```text
+```
 
 ---
 

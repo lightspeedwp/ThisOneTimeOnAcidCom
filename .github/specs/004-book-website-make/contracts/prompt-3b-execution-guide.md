@@ -82,12 +82,12 @@ From 06-website-reading-prd.md (v1.1.1):
 5. Finalize acceptance criteria with decision-specific requirements
 
 **Example (if Decision 1=A, Decision 2=A)**:
-```text
+```
 Recovery Strategy: Recovery takes precedence over fresh verification
 Session Lifetime: 30-day device lifecycle (full window)
 Race Condition Resolution: Cancel fresh verification request, restore from previous session
 Error Messaging: "Access restored from previous session" (no email sent)
-```text
+```
 
 ### Phase 2: Design Recovery Success Path
 
@@ -120,14 +120,14 @@ Error Messaging: "Access restored from previous session" (no email sent)
 **Trigger**: Device session exists but exceeds recovery lifetime window
 
 **Example messaging** (if Decision 2=A):
-```text
+```
 Session Expired
 
 Your previous access has expired (30 days). 
 Please verify your email to continue reading.
 
 [Request New Code] button
-```text
+```
 
 **Design**:
 - Display expired message with clear explanation
@@ -141,14 +141,14 @@ Please verify your email to continue reading.
 **Trigger**: Device session exists but validation fails
 
 **Messaging**:
-```text
+```
 Access Unavailable
 
 We couldn't restore your previous session. 
 Please verify your email to continue reading.
 
 [Request New Code] button
-```text
+```
 
 **Design**:
 - Warning/error styling (border + icon)
@@ -162,11 +162,11 @@ Please verify your email to continue reading.
 **Trigger**: System detects simultaneous recovery + fresh verification attempt
 
 **Messaging**:
-```text
+```
 Restoring Access...
 
 Using your previous session instead of requesting a new code.
-```text
+```
 
 **Design**:
 - Show loading spinner
@@ -177,7 +177,7 @@ Using your previous session instead of requesting a new code.
 **Example: If Decision 1=D (User Chooses Explicitly)**:
 
 **Messaging**:
-```text
+```
 Restore Access from Previous Session?
 
 We found your previous access. You can:
@@ -185,7 +185,7 @@ We found your previous access. You can:
 [Restore from Previous Session] — Use your existing access
 [Request New Code]             — Get a new verification code
 
-```text
+```
 
 **Design**:
 - Two clearly-labeled buttons

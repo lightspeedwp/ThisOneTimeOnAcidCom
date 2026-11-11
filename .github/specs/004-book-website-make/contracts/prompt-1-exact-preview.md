@@ -10,7 +10,7 @@
 ## 1. Before/After Navigation Structure
 
 ### BEFORE
-```text
+```
 Public Sitemap & Navigation Menu
 ├── /home (Home)
 ├── /about (About)
@@ -23,10 +23,10 @@ Public Sitemap & Navigation Menu
 Meta: <meta name="robots" content="index, follow">
 Robots.txt: Disallow: (none for these routes)
 Sitemap: All routes included
-```text
+```
 
 ### AFTER
-```text
+```
 Public Sitemap & Navigation Menu
 ├── /home (Home)
 ├── /about (About)
@@ -43,7 +43,7 @@ Option A (Recommended): Meta tags + Robots.txt + Sitemap exclusion
 Option B: Robots.txt only
 Option C: Meta tags only
 Option D: Sitemap.xml filtering only
-```text
+```
 
 ---
 
@@ -159,7 +159,7 @@ This prompt depends on **Blocking Decision 7: Route Enforcement Verification**.
 
 Once Blocking Decision 7 is selected, the following exact text will be submitted to Figma Make:
 
-```text
+```
 Figma Make Prompt 1 (Navigation Exposure) — For Execution Post Decision-7-Resolution
 
 Goal:
@@ -178,7 +178,7 @@ Reference:
 - Author Decision: 03-author-decisions-launch-scope.md v1.3.0
 - Design Baseline: 04-design-brief.md v1.1.2
 - Blocking Decision 7 Selection: [TO BE FILLED]
-```text
+```
 
 ---
 

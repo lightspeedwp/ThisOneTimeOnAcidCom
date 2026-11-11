@@ -48,9 +48,9 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | No expiry—recovery sessions valid indefinitely | Maximum UX convenience; highest security risk; may conflict with data retention policy |
 | D | Configurable per-reader basis (support override) | Flexibility for special cases; added complexity; support burden |
 
-**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
+**Decision**: ✅ APPROVED — Option A (30-day device lifecycle with recovery session refresh; absolute 30-day expiry enforced regardless of recovery activity)
 
-**Impact on Prompt 3B**: Recovery flows specification depends on session lifetime for state management, cleanup schedules, and error messaging when recovery expires.
+**Impact on Prompt 3B**: Recovery flows specification depends on absolute device expiry for state management, cleanup schedules, and error messaging when device lifecycle expires.
 
 ---
 
@@ -68,7 +68,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | B | From email receipt (configurable by email provider) | Fairest to reader (delay not their fault); requires email provider cooperation; unpredictable for readers without receipt timestamp |
 | C | From verification page load (most lenient) | Maximizes UX; reader sees full 10 minutes; expiry can stretch to 10+ minutes with network delays; least secure |
 
-**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
+**Decision**: ✅ APPROVED — Option A (From code generation; most strict)
 
 **Impact on Prompts 3A & 3C**:
 - Prompt 3A (reader access copy) requires exact timer messaging ("Code expires in 10 minutes from generation" vs. "10 minutes from when you received this email")
@@ -91,9 +91,9 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | Mailgun | Powerful API; strong developers; less newsletter-focused |
 | D | Other (AWS SES, Postmark, etc.) | Varies; requires evaluation |
 
-**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
+**Decision**: ✅ APPROVED — Hybrid (SendGrid for transactional email + Brevo for newsletters)
 
-**Impact on Prompt 3A**: Email template specification (subject line, body copy, footer branding) must match chosen provider's template syntax and capabilities. Newsletter integration points must align with provider's consent/preference handling.
+**Impact on Prompt 3A**: Email template specification (subject line, body copy, footer branding) must match SendGrid's SMTP template syntax. Newsletter link must direct to Brevo signup URL per Decision 6.
 
 ---
 
@@ -107,11 +107,11 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 
 | Option | Description | Trade-offs |
 |--------|-------------|-----------|
-| **A (Recommended)** | Manuscript approved and available; ready for integration | Unblocks access implementation; requires manuscript delivery mechanism in place |
+| A | Manuscript approved and available; ready for integration | Unblocks access implementation; requires manuscript delivery mechanism in place |
 | B | Manuscript approved but not yet formatted for web delivery | Requires formatting/export pipeline before integration; delays access feature |
-| C | Manuscript not yet approved | Access feature cannot launch; requires separate approval gate |
+| **C (Selected)** | Manuscript not yet approved | Access feature cannot launch; requires separate approval gate |
 
-**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
+**Decision**: ❌ Option C (NOT APPROVED) — Manuscript in development, targeting approval by January 2027 launch
 
 **Impact on Prompt 3A**: Reader access copy must reference actual manuscript content (e.g., "Access all 12 chapters" vs. "Access selected chapters"). Content delivery mechanism and availability timeframe depend on manuscript readiness status.
 
@@ -132,9 +132,9 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | Separate signup form component (post-verification) | Higher friction; newsletter signup becomes second step; clearer intent capture |
 | D | No "Sign up" link—newsletter managed separately | Simplest implementation; loses reader opportunity; newsletter signup independent |
 
-**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
+**Decision**: ✅ APPROVED — Brevo (external signup page)
 
-**Impact on Prompt 3A**: Copy specification must reflect chosen pattern. Form layout and post-verification flow depend on whether newsletter signup happens inline or externally.
+**Impact on Prompt 3A**: Copy specification must link to Brevo newsletter signup URL. Form layout and post-verification flow include external link to newsletter subscription.
 
 ---
 
@@ -153,7 +153,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | Meta tags only (x-robots-tag in response headers) | Flexible; can vary per request; not visible in sitemap |
 | D | Sitemap.xml filtering only | Works for sitemaps; doesn't prevent indexing if URL is discovered elsewhere |
 
-**Decision**: ✅ APPROVED — Option A (Recovery takes precedence; cancel fresh verification if recovery succeeds)
+**Decision**: ✅ APPROVED — Option A (Meta tags + Sitemap exclusion; avoid conflicting Robots.txt Disallow rules)
 
 **Impact on Prompt 1** (and verification): Navigation exposure specification (Prompt 1) must document exact enforcement strategy. Implementation validation requires confirmation that /speaking, /events, /media are not published to search engines.
 

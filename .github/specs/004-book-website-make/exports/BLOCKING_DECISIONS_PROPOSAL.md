@@ -10,8 +10,10 @@
 
 This document records the final decisions for all 7 blocking decisions, approved by Ash on 2026-11-11.
 
+**Timeline Note**: Website launch date is January 2027 (not 2026); manuscript in development, targeting availability by launch date.
+
 **⚠️ CRITICAL DECISION**: Decision 5 (Manuscript Publication Readiness) → **Option C (NOT APPROVED)**
-- Website launches January 2026
+- Website launches January 2027
 - Manuscript in development, will be ready for e-reader by launch
 - **Impact**: Blocks Prompt 3A (reader access copy) from final generation; placeholder copy needed
 - Prompts 1, 2A, 2B remain unblocked and executable
@@ -41,11 +43,13 @@ This document records the final decisions for all 7 blocking decisions, approved
 
 ### **DECISION: OPTION A** ✅ APPROVED
 
-> **30-day rolling window from last successful recovery action**
+> **30-day device lifecycle from initial verification, with session refresh on recovery**
+> 
+> **Policy**: Sessions remain valid for 30 days from initial device verification. Successful recovery actions reset the session timer but cannot extend the absolute 30-day device expiry. Upon reaching day 30 from initial verification, user must re-verify via email, regardless of recovery activity.
 
 **User Approval**: ✅ Approved (2026-11-11)
 
-**Impact**: Prompt 3B recovery flows will implement 30-day rolling session window with automatic cleanup.
+**Impact**: Prompt 3B recovery flows will enforce absolute 30-day device expiry alongside recovery session refreshes. Users cannot extend access beyond 30 days from initial verification through recovery alone.
 
 ---
 
@@ -92,19 +96,19 @@ This document records the final decisions for all 7 blocking decisions, approved
 
 ### **DECISION: OPTION C** ❌ NOT APPROVED (In Development)
 
-> **Manuscript not yet approved; in development, targeting January 2026 launch**
+> **Manuscript not yet approved; in development, targeting January 2027 launch**
 
 **User Decision**: ✅ Approved - Option C (2026-11-11)
 
 **Critical Status**:
-- Website officially launches: **January 2026**
+- Website officially launches: **January 2027**
 - Manuscript timeline: In development, will be ready for e-reader by website launch
 - **Impact**: Prompts 3A (reader access copy), 3B (recovery flows), 3C (error states) REMAIN BLOCKED
 - Placeholder messaging required for Prompt 3A until manuscript is approved
 
 **Blocking Effect**:
 - **Prompts 1, 2A, 2B**: ✅ Executable (navigation, design system, component design)
-- **Prompts 3A, 3B, 3C**: ❌ Blocked pending manuscript approval (expected late January 2026)
+- **Prompts 3A, 3B, 3C**: ❌ Blocked pending manuscript approval (expected late January 2027)
 - Re-finalization of access copy will be required once manuscript is approved for e-reader
 
 ---
@@ -143,15 +147,23 @@ This document records the final decisions for all 7 blocking decisions, approved
 **User Approval**: ✅ Approved (2026-11-11)
 
 **Implementation Strategy**:
-1. **Meta tags**: `<meta name="robots" content="noindex, nofollow">` in HTML `<head>`
-2. **Robots.txt**: `Disallow: /speaking`, `Disallow: /events`, `Disallow: /media`
-3. **Sitemap.xml**: Exclude these routes entirely from sitemap
+> **Clarification**: Robots.txt Disallow rules prevent crawlers from fetching pages, making noindex tags unreachable. The correct approach:
+
+1. **Meta tags (Primary)**: `<meta name="robots" content="noindex, nofollow">` in HTML `<head>`
+2. **Sitemap.xml**: Exclude /speaking, /events, /media routes entirely
+3. **Robots.txt**: Do NOT use Disallow for these routes; allow crawling so meta tags are visible
+
+   OR alternatively:
+   
+   Use **only** Robots.txt `Disallow` rules and skip meta tags (routes won't appear in search results, but won't be crawled at all)
+
+**Selected approach**: Meta tags + Sitemap exclusion (allows crawlers to verify noindex, doesn't prevent external linking to these pages)
 
 **Impact**:
 - Prompt 1 navigation specification documents exact enforcement mechanism
-- Deployment checklist verifies all three signals are in place
+- Deployment checklist verifies meta tags are served and routes excluded from sitemap
 - QA tests with search engine crawlers (Google Search Console simulation)
-- Comprehensive redundancy ensures SEO compliance
+- Clear enforcement strategy prevents conflicting directives
 
 ---
 
@@ -205,7 +217,7 @@ After unblocked prompts are generated:
 2. Confirm unapproved candidates (R3, T1, RT2, C1) are excluded
 3. Sign off on navigation and component design
 
-### Manuscript Approval Workflow (Late January 2026)
+### Manuscript Approval Workflow (Late January 2027)
 When manuscript is approved for e-reader:
 1. Regenerate Prompt 3A with final copy (not placeholder)
 2. Complete Prompts 3B and 3C based on final 3A messaging
@@ -237,4 +249,4 @@ After all prompts are generated:
 
 **Ready for**:
 - Immediate execution: Prompts 1, 2A, 2B
-- Deferred execution: Prompts 3A, 3B, 3C (awaiting manuscript approval, late January 2026)
+- Deferred execution: Prompts 3A, 3B, 3C (awaiting manuscript approval, late January 2027)

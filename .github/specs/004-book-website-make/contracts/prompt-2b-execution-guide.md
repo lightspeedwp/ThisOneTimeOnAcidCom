@@ -50,7 +50,7 @@ Design the complete navigation component with all interactive states (default, h
 - Size: 16px
 
 **Example Visuals**:
-```text
+```
 ┌─────────────────────────────────────────┐
 │ Home    About    Book    Contact        │
 │ ^^^^
@@ -62,7 +62,7 @@ Design the complete navigation component with all interactive states (default, h
 │ Book (bold, accent color)
 │ ^^^^ active state
 └─────────────────────────────────────────┘
-```text
+```
 
 ### 3. Tablet Design (768-1023px)
 
@@ -115,7 +115,7 @@ Design the complete navigation component with all interactive states (default, h
 - Size: 16px (or 18px for better mobile touch targets)
 
 **Example Visuals**:
-```text
+```
 CLOSED:                    OPEN:
 ┌─────────────────────┐   ┌─────────────────────────┐
 │              [≡]    │   │ ✕                       │
@@ -127,7 +127,7 @@ CLOSED:                    OPEN:
 │                     │   │                         │
 └─────────────────────┘   └─────────────────────────┘
                           (semi-transparent backdrop behind)
-```text
+```
 
 ---
 
