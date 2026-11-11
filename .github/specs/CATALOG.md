@@ -9,8 +9,10 @@ ThisOneTimeOnAcidCom repository governance and feature development.
 
 | ID | Feature | Title | Status | Owner | Created | Updated | Link |
 |---|---|---|---|---|---|---|---|
-| 001 | repo-governance-toa-241 | Repository Governance, Layout and Agentic Workflows | Implementation | @ashley | 2026-10-17 | 2026-10-17 | [.github/specs/001-repo-governance-layout-and-agentic-workflows/](./001-repo-governance-layout-and-agentic-workflows/) |
+| 001 | repo-governance-toa-241 | Repository Governance, Layout and Agentic Workflows | Complete | @ashley | 2026-10-17 | 2026-11-09 | [.github/specs/001-repo-governance-layout-and-agentic-workflows/](./001-repo-governance-layout-and-agentic-workflows/) |
 | 002 | media-library | TOA Media Library Strategy and Asset Recovery | Draft | @ashley | 2026-10-17 | 2026-10-18 | [.github/specs/002-media-library/](./002-media-library/) |
+| 003 | guidelines-refactor | Guidelines Refactor (TOA-358) | Implemented | @ashley | 2026-10-24 | 2026-10-24 | [.github/specs/003-refactor-guidelines/](./003-refactor-guidelines/) |
+| 004 | book-website-make | Book Website Figma Make Prompt Pack | Draft | @ashley | 2026-11-09 | 2026-11-09 | [.github/specs/004-book-website-make/](./004-book-website-make/) |
 
 ---
 
@@ -36,7 +38,7 @@ structure:
 ```text
 
 **Numbering:** Specifications are numbered sequentially (001, 002, 003…) in the
-order they are created. The next new specification will be 003.
+order they are created. The next new specification will be 005.
 
 ---
 
@@ -86,5 +88,5 @@ catalog, moving the row to an "Archived Specifications" section below.
 
 ---
 
-*Last updated: 2026-10-18*
-*Next specification number: 003*
+*Last updated: 2026-11-09*
+*Next specification number: 005*

@@ -34,7 +34,7 @@ name: dependency validation
 
 on:
   pull_request:
-    branches: [main, master, develop]
+    branches: [main, master]
 
 permissions:
   contents: read

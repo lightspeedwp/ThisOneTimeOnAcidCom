@@ -2,7 +2,7 @@ name: Labeling • Unified
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [main]
     types: [opened, edited, synchronize, reopened, ready_for_review, labeled, unlabeled]
   # Issues and discussions react to content, not label changes (#3531): a
   # bulk relabel queued ~660 runs, and each re-applied default labels from

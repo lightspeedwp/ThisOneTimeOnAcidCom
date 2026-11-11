@@ -2,7 +2,7 @@ name: Workflow Lint
 
 on:
   push:
-    branches: [develop, main]
+    branches: [main]
     paths:
       - '.github/workflows/*.yml'
       - '.github/workflows/*.yaml'

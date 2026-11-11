@@ -14,7 +14,7 @@ name: Changelog • Unified
 
 on:
   pull_request:
-    branches: [develop, main]
+    branches: [main]
     types: [opened, synchronize, reopened, edited, ready_for_review, closed, labeled, unlabeled]
 
 concurrency:
@@ -483,7 +483,7 @@ jobs:
 
   sync:
     name: Auto-sync merged entries
-    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: false  # Disabled: develop branch deleted; changelog syncing no longer needed
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
