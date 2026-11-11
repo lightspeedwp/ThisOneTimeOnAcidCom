@@ -213,7 +213,7 @@ Once approved, the next phase will include:
 | 2 | Recovery lifetime eligibility | Option A: 30-day rolling window | Unblocks Prompt 3B (session state management) |
 | 3 | Code expiry start time | Option A: From code generation | Unblocks Prompts 3A (copy), 3C (errors) |
 | 4 | Email service provider | SendGrid (API key + SMTP) | Unblocks Prompt 3A (email template) |
-| 5 | Manuscript publication readiness | ❌ Not yet approved (draft by 2026-01-31) | Prompt 3A uses placeholder messaging; re-finalize once approved |
+| 5 | Manuscript publication readiness | ❌ Not yet approved (draft by 2027-01-31) | Prompt 3A uses placeholder messaging; re-finalize once approved |
 | 6 | Newsletter destination | Brevo (external signup link) | Unblocks Prompt 3A (newsletter CTA) |
 | 7 | Route enforcement verification | Option A: Meta tags + Robots.txt + Sitemap | Unblocks Prompt 1 (validation documentation) |
 
@@ -221,7 +221,7 @@ Once approved, the next phase will include:
 - ✅ Prompts 1, 2A, 2B ready for immediate Figma Make execution
 - ✅ Prompt 3A ready for execution (with manuscript placeholder text)
 - ✅ Prompts 3B, 3C ready for execution
-- ⚠️ Prompt 3A success copy will need refresh once manuscript is approved (late January)
+- ⚠️ Prompt 3A success copy will need refresh once manuscript is approved (late January 2027)
 
 ---
 

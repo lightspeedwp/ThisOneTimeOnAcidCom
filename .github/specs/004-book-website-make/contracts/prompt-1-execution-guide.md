@@ -44,9 +44,9 @@ Apply **all three enforcement methods** for /speaking, /events, /media:
 #### A. Meta Tags (on each hidden route page)
 Add to page header:
 ```html
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="noindex, nofollow">
 ```text
-This tells search engines: "Don't index this page, but follow links from it."
+This tells search engines: "Don't index this page and don't follow links from it."
 
 #### B. Robots.txt Rules
 Add to robots.txt:
@@ -84,7 +84,7 @@ All of these must be true when complete:
 - Marked with noindex meta tags
 
 ✅ **CR-1.3**: All three enforcement methods are applied:
-- ✓ Meta tag: `<meta name="robots" content="noindex, follow">`
+- ✓ Meta tag: `<meta name="robots" content="noindex, nofollow">`
 - ✓ Robots.txt: Disallow /speaking, /events, /media
 - ✓ Sitemap.xml: Excludes /speaking, /events, /media
 
@@ -127,7 +127,7 @@ All of these must be true when complete:
 ### Phase 2: Route Enforcement Implementation
 
 1. **Meta Tag Application**:
-   - Add `<meta name="robots" content="noindex, follow">` to:
+   - Add `<meta name="robots" content="noindex, nofollow">` to:
      - /speaking page header
      - /events page header
      - /media page header

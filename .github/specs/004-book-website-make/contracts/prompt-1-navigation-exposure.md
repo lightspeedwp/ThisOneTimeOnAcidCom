@@ -67,7 +67,7 @@ From 03-author-decisions-launch-scope.md (v1.3.0):
 2. **Remove links** for /speaking, /events, /media from navigation menu
 3. **Preserve route pages** (/speaking, /events, /media) with noindex metadata
 4. **Document enforcement strategy** for each route (based on Decision 7 selection):
-   - Add Meta tag: `<meta name="robots" content="noindex, follow">`
+   - Add Meta tag: `<meta name="robots" content="noindex, nofollow">`
    - Add Robots.txt rule: `Disallow: /speaking` (per option selected)
    - Update sitemap.xml to exclude /speaking, /events, /media (per option selected)
 5. **Generate before/after comparison** showing navigation structure change

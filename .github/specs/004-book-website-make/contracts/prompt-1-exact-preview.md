@@ -34,9 +34,9 @@ Public Sitemap & Navigation Menu
 └── /contact (Contact)
 
 Hidden Routes (accessible but not in menu):
-├── /speaking (Meta: noindex, follow)
-├── /events (Meta: noindex, follow)
-└── /media (Meta: noindex, follow)
+├── /speaking (Meta: noindex, nofollow)
+├── /events (Meta: noindex, nofollow)
+└── /media (Meta: noindex, nofollow)
 
 Enforcement Strategy (Blocking Decision 7 — pending selection):
 Option A (Recommended): Meta tags + Robots.txt + Sitemap exclusion
@@ -77,7 +77,7 @@ Option D: Sitemap.xml filtering only
 ### Phase B: Route Enforcement Configuration
 
 7. **Preserve route pages** at `/speaking`, `/events`, `/media` with noindex metadata:
-   - Add Meta tag to each page: `<meta name="robots" content="noindex, follow">`
+   - Add Meta tag to each page: `<meta name="robots" content="noindex, nofollow">`
    - Keep internal documentation accessible at these paths
 
 8. **Apply enforcement strategy** (pending Blocking Decision 7 selection):
@@ -116,7 +116,7 @@ All criteria must be met before marking Prompt 1 complete (CR = Component Requir
 
 **Route Enforcement**:
 - ✅ **CR-1.4**: Enforcement strategy selected from Blocking Decision 7 is clearly documented and applied (Option A/B/C/D)
-- ✅ **CR-1.5**: Hidden routes have Meta tag `<meta name="robots" content="noindex, follow">` added (if Meta enforcement selected)
+- ✅ **CR-1.5**: Hidden routes have Meta tag `<meta name="robots" content="noindex, nofollow">` added (if Meta enforcement selected)
 - ✅ **CR-1.6**: Robots.txt rules added for hidden routes (if Option A or B selected): `Disallow: /speaking`, `Disallow: /events`, `Disallow: /media`
 - ✅ **CR-1.7**: Sitemap.xml excludes hidden routes (if Option A or D selected)
 
