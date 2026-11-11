@@ -10,6 +10,19 @@
 
 ---
 
+## Source Documents
+
+All six authoritative source documents are available in the [`references/`](./references/) folder:
+
+- **[01-book-website-specification.md](./references/01-book-website-specification.md)** — Master execution contract (v1.0.0)
+- **[02-companion-session-plan.md](./references/02-companion-session-plan.md)** — Companion session plan (v1.0.4)
+- **[03-author-decisions-launch-scope.md](./references/03-author-decisions-launch-scope.md)** — Author decisions and scope (v1.3.0)
+- **[04-design-brief.md](./references/04-design-brief.md)** — Design brief and baseline (v1.1.2)
+- **[05-design-reader-decision-register.md](./references/05-design-reader-decision-register.md)** — Decision register (v1.9.0)
+- **[06-website-reading-prd.md](./references/06-website-reading-prd.md)** — Product requirements (v1.1.1)
+
+---
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Design Specification Hand-off (Priority: P1)
