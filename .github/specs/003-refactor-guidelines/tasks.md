@@ -707,5 +707,29 @@ All T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
 
 ---
 
-*Generated: 2026-10-25 (Phase 6 Convergence); Updated: 2026-11-12 (Phase 7 Content Audit & CodeRabbit Remediation)*  
+*Generated: 2026-10-25 (Phase 6 Convergence); Updated: 2026-11-12 (Phase 8 Convergence)*  
 *Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-guidelines-reconcile` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
+
+---
+
+## Phase 8: Convergence (Merge Conflict & Data Integrity) 📊
+
+**Purpose**: Address merge conflict markers in guideline files and duplicate task ID discovered during convergence assessment (2026-11-12).
+
+**Status**: 2 actionable findings (1 CRITICAL, 1 MEDIUM). T074 must resolve before any further guideline edits.
+
+### Critical Blockers
+
+- [ ] **T074** [CRITICAL] Resolve merge conflict markers in 12 guideline files per Constitution II, spec preservation rules (contradicts)
+  - **Files**: `guidelines/data-models.md`, `guidelines/dark-mode-implementation.md`, `guidelines/content-type-colours.md`, `guidelines/_archive/wordpress-migration-guide.md`, `guidelines/_archive/wordpress-preset-system.md`, `guidelines/_archive/wordpress-block-patterns.md`, `guidelines/nova-news-dark-mode.md`, `guidelines/image-optimization.md`, `guidelines/performance-optimization.md`, `guidelines/ARCHITECTURE.md`, `guidelines/css-architecture.md`, `guidelines/pwa-implementation.md`
+  - **Origin**: T049 pointer operations (commits ed06602, 2c3b0f5, 38f1962) introduced merge conflict markers that were never resolved
+  - **Action**: For each file, inspect both sides of the conflict marker, choose the correct resolution (typically the pointer version for archival files, the content version for active files), remove all `<<<<<<<`, `=======`, `>>>>>>>` markers
+  - **Acceptance**: `find guidelines -name "*.md" -exec grep -l "<<<<<<" {} \;` returns zero files
+
+### Data Integrity
+
+- [ ] **T075** [MEDIUM] Fix duplicate T055 task ID in tasks.md per internal consistency (contradicts)
+  - **Location**: `.github/specs/003-refactor-guidelines/tasks.md` Phase 5
+  - **Issue**: Two tasks share ID T055 — line 549 (execution order violation, unchecked) and line 562 (identity contradiction, checked)
+  - **Action**: Renumber the second T055 (identity contradiction) to T055b or the next available sequential ID; update any cross-references
+  - **Acceptance**: `grep -c "T055" tasks.md` returns exactly 1 unique task definition
