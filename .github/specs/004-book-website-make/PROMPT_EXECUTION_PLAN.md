@@ -233,7 +233,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 ## Decision Map: What Blocks What
 
-```
+```text
 ┌─────────────────────────────────────────┐
 │  UNBLOCKED (Ready Now)                  │
 ├─────────────────────────────────────────┤
@@ -287,7 +287,7 @@ Decision 5 (Manuscript publication readiness)
 Decision 6 (Newsletter destination)
 ├── Blocks: Prompt 3A execution
 └── Affects: Signup link integration
-```
+```text
 
 ---
 
@@ -295,7 +295,7 @@ Decision 6 (Newsletter destination)
 
 ### Immediate (Phase A — Gate 2 Approved)
 
-```
+```text
 Step 1: Execute Prompt 1
         → Navigation Exposure
         → Output: Updated navigation component (hidden routes)
@@ -311,7 +311,7 @@ Step 3: Execute Prompt 2B
         → Output: Navigation component design with states
         → Input: Prompt 1 output (visible items list)
         → Dependency: Can run in parallel with 2A; ideally after 1
-```
+```text
 
 **Timeline for Phase A**: ~20–30 minutes (3 unblocked prompts executed in sequence/parallel)
 
@@ -319,7 +319,7 @@ Step 3: Execute Prompt 2B
 
 ### Deferred (Phase B — Awaiting Decisions)
 
-```
+```text
 DECISION RESOLUTION PRIORITY:
 
 Recommended Order:
@@ -351,7 +351,7 @@ Step 6: Execute Prompt 3C
         → Error States
         → Dependencies: Decision 3 resolved (for code-expiry)
         → Input: Patterns from Prompts 3A & 3B
-```
+```text
 
 **Timeline for Phase B**: TBD (depends on decision resolution timeline)
 

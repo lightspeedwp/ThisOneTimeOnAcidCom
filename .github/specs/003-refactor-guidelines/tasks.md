@@ -34,7 +34,7 @@ created: "2026-10-25"
 **Consequence:** Breaks approval evidence trail; Phase 2 execution integrity compromised.
 
 **FROZEN EXECUTION ORDER (Must be strict):**
-```
+```text
 T001–T004 (Pre-verification) 
   ↓ (GATE: All gates resolved)
 T005–T007 (S-doc setup)
