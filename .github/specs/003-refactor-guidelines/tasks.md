@@ -12,7 +12,7 @@ created: "2026-10-25"
 
 **Status**: Phase 2 Implementation — **UNBLOCKED** (2026-10-25). All owner decisions D0–D8 RESOLVED; implementation guidance provided (requirements.md § D4.a, D4.b, D5.a, D5.b, D5.c, D5.d, D6). Pre-implementation verification (T001–T004) required before task execution.
 
-**Total Tasks**: 43 (across Phases 2 & 3)
+**Total Tasks**: 47 (across Phases 2–7; T001–T069 original + T070–T073 remediation)
 
 ---
 
@@ -612,5 +612,102 @@ All tasks must complete with documented evidence:
 
 ---
 
-*Generated: 2026-10-25 (Phase 6 Convergence)*  
+## Phase 7: Content Audit & CodeRabbit Remediation 📋
+
+**Purpose**: Address ashshaw.makeup/portfolio branding references in guidelines and resolve unaddressed CodeRabbit feedback from PR #588. Coordination point with TOA-367 (docs/ folder cleanup).
+
+**Status**: Audit COMPLETE (2026-11-12). 4 remediation tasks identified. Blocked on T070 completion before T071–T073.
+
+**Context**: PR #591 (clarifications) and PR #588 (analysis) both merged to main on 2026-11-11. CodeRabbit flagged moderate-risk issues on #588 that were merged unaddressed. This phase remediates those findings alongside a content audit of the guidelines/ folder.
+
+### Content Remediation
+
+- [ ] **T070** [HIGH] Audit & remediate ashshaw.makeup and portfolio branding references in `guidelines/`
+  - **Scope**: Full `guidelines/` directory (68+ files affected)
+  - **Category A — Remove ashshaw.makeup domain/email** (3 files, 10 refs):
+    - `components/Footer.md` (lines 209, 213, 320, 321, 435): Remove `ashley@ashshaw.makeup` email and mailto links
+    - `components/SocialLinks.md` (lines 53, 209, 416, 473): Remove `mailto:ashley@ashshaw.makeup` references
+    - `components/Breadcrumbs.md` (line 383): Replace `https://ashshaw.makeup` in JSON-LD schema
+  - **Category B — Remove ashshawmakeup social handles** (1 file, 10 refs):
+    - `components/SocialLinks.md` (lines 205–207, 278, 286, 392–404, 449–461): Replace `instagram.com/ashshawmakeup`, `facebook.com/ashshawmakeup`, `tiktok.com/@ashshawmakeup`, `twitter.com/ashshawmakeup` with placeholder social config
+  - **Category C — Generalise makeup identity language** (40+ files, 120+ refs):
+    - Replace "Makeup Artist" → "Creative Artist" or site-appropriate identity
+    - Replace "Makeup that shines with colour, energy, and connection" → site-appropriate tagline
+    - Replace "Why I Do Makeup" → "Why I Create" or similar
+    - Replace "Festival Makeup" / "Wedding Makeup" / "UV Makeup" → creative content categories
+    - Replace "ash-shaw-makeup-portfolio/" → project directory name
+    - Replace "This One Time On Acid Makeup" → "This One Time On Acid"
+    - Key files: HeroSection.md, WhySection.md, Footer.md, ScrollDownArrow.md, ThreeColumnLayout.md, brand-voice-messaging.md, component-dark-mode.md, mobile/*.md, Guidelines.md, pwa-implementation.md
+  - **Category D — Assess "portfolio" term usage** (50+ files, 150+ refs):
+    - D1 (generalise): Descriptive uses — "portfolio work", "portfolio updates", "portfolio site" → "creative work", "content updates", "site"
+    - D2 (preserve): Code identifiers — `portfolioEntries`, `PortfolioCard`, `/portfolio` route — preserve if codebase uses these terms; note for future codebase alignment
+  - **Coordination**: Apply same generalisation patterns as TOA-367 (docs/ folder); share findings
+  - **Acceptance**: Zero `ashley@ashshaw.makeup` or `ashshaw.makeup` domain refs remain; zero `ashshawmakeup` social handles remain; "makeup" identity language generalised to match site brief (memoir/creative-life-guide); "portfolio" terms assessed with clear preserve/generalise disposition
+
+- [ ] **T071** [MEDIUM] Fix specification-validation markdown lint errors (MD060)
+  - **Scope**: 3 files in `guidelines/`, 24 MD060 errors total
+  - **File 1**: `guidelines/_archive/wordpress-block-patterns.md` (line 83)
+    - Change `|-----------------|----------------|-------|` to `| --- | --- | --- |`
+  - **File 2**: `guidelines/content-type-colours.md` (line 27)
+    - Change `|---|---|---|---|---|---|` to `| --- | --- | --- | --- | --- | --- |`
+  - **File 3**: `guidelines/nova-news-dark-mode.md` (line 20)
+    - Change `|---------|-----------|-----------|` to `| --- | --- | --- |`
+  - **Verification**: `npx markdownlint-cli2 <file>` reports zero errors for each file
+  - **Acceptance**: All 3 files pass markdownlint-cli2 with zero MD060 errors
+
+### Specification Integrity
+
+- [ ] **T072** [MEDIUM] Reconcile task sequencing and execution order contradictions in `tasks.md`
+  - **Scope**: `.github/specs/003-refactor-guidelines/tasks.md`
+  - **Issue**: Three contradictory execution models coexist:
+    1. Header says "sequential execution order" (T001–T043)
+    2. `[P]` markers throughout indicate parallel-eligible tasks
+    3. "FROZEN EXECUTION ORDER" block (line 37) is strict sequential
+    4. "Parallel Opportunities" section (line 389) lists parallel possibilities
+    5. "Critical Path" (line 377) allows T028–T032 after T001–T004, skipping S-docs
+  - **Action**:
+    - [ ] Audit each task dependency statement for accuracy
+    - [ ] Clarify header: "sequential with parallel opportunities" or similar
+    - [ ] Ensure FROZEN EXECUTION ORDER, Critical Path, and Parallel Opportunities sections are internally consistent
+    - [ ] Add a dependency graph or clarify that `[P]` tasks run in parallel only within their phase gate
+    - [ ] Document that FROZEN ORDER is the canonical authority; other sections are supplementary guidance
+  - **Acceptance**: No contradictions between sequential/parallel markers; single canonical execution order documented; task ordering is internally consistent
+
+- [ ] **T073** [MEDIUM] Verify and align status claims and approval gates
+  - **Scope**: `spec.md` (status field), `tasks.md` (T043 completion claim), `checklists/requirements.md` (approval evidence)
+  - **Issue 1**: T043 is marked `[x]` COMPLETE with "Ready for review and merge" and "All 10 verification requirements PASS" — but prerequisite tasks T037, T038–T040, T041–T042, T046–T048, T050–T051, T055–T069 remain open/pending
+  - **Issue 2**: T043 completion claims must be traceable to actual evidence
+  - **Action**:
+    - [ ] Review T043 completion evidence in `checklists/requirements.md` § Final Sign-Off
+    - [ ] Verify each of the 10 claimed "PASS" items has supporting evidence links
+    - [ ] If evidence is missing, revert T043 to unchecked `[ ]` and document what's outstanding
+    - [ ] Ensure spec.md status field (`phase-2-in-progress`) accurately reflects actual implementation state
+    - [ ] Add evidence links where claims exist without traceability
+  - **Acceptance**: Every status claim in spec.md and tasks.md is backed by traceable evidence; T043 status accurately reflects prerequisite completion; no misleading readiness signals
+
+### Phase 7 Dependencies
+
+```
+T070 (Content remediation — HIGH priority, largest scope)
+  ↓
+T071 (Lint fixes — can run in parallel with T070)
+  ↓
+T072 (Task sequencing — can run after T070/T071, or in parallel)
+T073 (Status verification — can run after T070/T071, or in parallel)
+  ↓
+All T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
+```
+
+### Coordination with TOA-367
+
+| Aspect | Spec 003 (T070) | TOA-367 |
+| --- | --- | --- |
+| **Directory** | `guidelines/` | `docs/` |
+| **Scope** | 68+ files with branding refs | 133 files under docs/ |
+| **Shared patterns** | `ashley@ashshaw.makeup` → remove; `ashshaw.makeup` → remove; "Makeup Artist" → generalise; "portfolio" → assess per context |
+| **Consistency rules** | Portfolio → Content/Gallery (context-dependent); Makeup tips → Creative content; Portfolio updates → Content updates |
+
+---
+
+*Generated: 2026-10-25 (Phase 6 Convergence); Updated: 2026-11-12 (Phase 7 Content Audit & CodeRabbit Remediation)*  
 *Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-guidelines-reconcile` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
