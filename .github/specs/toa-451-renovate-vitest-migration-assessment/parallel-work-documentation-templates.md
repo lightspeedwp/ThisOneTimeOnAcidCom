@@ -212,7 +212,7 @@ spy.mockRestore();
 ### API Differences
 
 | Jest | Vitest | Notes |
-|------|--------|-------|
+| ------ | -------- | ------- |
 | `jest.fn()` | `vi.fn()` | Drop-in replacement |
 | `jest.mock()` | `vi.mock()` | Similar API |
 | `jest.spyOn()` | `vi.spyOn()` | Drop-in replacement |

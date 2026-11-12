@@ -28,7 +28,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 ### Repository Context
 
 | Aspect | Finding |
-|--------|---------|
+| -------- | --------- |
 | **Node.js** | 24 LTS (pinned: `.nvmrc`, `package.json` engines) |
 | **Package Manager** | **npm** (primary); README suggests pnpm (unresolved — see Issue #306) |
 | **ESM Support** | Native ESM (`"type": "module"`) |
@@ -39,7 +39,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 #### Unit Testing (Jest)
 
 | Component | Configuration | Evidence |
-|-----------|----------------|----------|
+| ----------- | ---------------- | ---------- |
 | **Runner** | Jest ^30.5.2 | `package.json`, line 96 |
 | **Transform** | @swc/jest ^0.2.39 | `jest.config.js`, line 4 |
 | **Test Discovery** | `**/scripts/**/*.test.js`<br/>`**/tests/**/*.test.js` | `jest.config.js`, lines 7–10 |
@@ -51,7 +51,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 #### Vitest: Partial Installation
 
 | Component | Status | Evidence |
-|-----------|--------|----------|
+| ----------- | -------- | ---------- |
 | **Package** | vitest ^5.0.5 | `package.json`, line 108 |
 | **Coverage** | @vitest/coverage-v8 5.0.5 | `package.json`, line 92 |
 | **Configuration** | `vitest.config.ts` exists | File inspected |
@@ -62,7 +62,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 #### Dependency Updates (Dependabot)
 
 | Setting | Value | Note |
-|---------|-------|------|
+| --------- | ------- | ------ |
 | **Version** | Config v2 | `.github/dependabot.yml`, line 1 |
 | **Updates Configured** | GitHub Actions (daily), npm (weekly) | Lines 30–71 |
 | **Target Branch** | `develop` | Lines 34, 54 |
@@ -75,7 +75,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 #### CI Test Workflow
 
 | Stage | Behavior | Evidence |
-|-------|----------|----------|
+| ------- | ---------- | ---------- |
 | **Scope Detection** | Skips Jest for docs-only PRs | `.github/workflows/tests.yml`, lines 39–66 |
 | **Parallel Jest** | Runs on head (PR merge) and base (PR target) | Lines 74–117 |
 | **JSON Reports** | Both generate `jest-report.json` with `testResults` array | Line 110 |
@@ -90,7 +90,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 ### Capabilities Comparison
 
 | Capability | Dependabot | Renovate | Parity? | Notes |
-|-----------|-----------|----------|--------|-------|
+| ----------- | ----------- | ---------- | -------- | ------- |
 | **npm Updates** | ✓ | ✓ | ✓ | Both support |
 | **GitHub Actions Updates** | ✓ | ✓ | ✓ | Both support |
 | **Update Grouping** | Semver (minor/major) | Semver + regex + custom | **Renovate >** | More flexible |
@@ -139,7 +139,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 ### Verification Gates (Renovate)
 
 | Gate | Criterion | Pass/Fail | Evidence |
-|------|-----------|-----------|----------|
+| ------ | ----------- | ----------- | ---------- |
 | **Bot installed** | Renovate app active in org | ? | Unverified |
 | **Test run** | Renovate creates first PR set | TBD | Requires execution authority |
 | **PR labeling** | PRs carry `area:dependencies` + `area:ci` | TBD | Requires execution + review |
@@ -149,7 +149,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 ### Recovery & Rollback
 
 | Scenario | Action | Reversibility |
-|----------|--------|----------------|
+| ---------- | -------- | ---------------- |
 | Renovate creates excessive PRs | Close PRs; reconfigure grouping; disable bot | ✓ Complete |
 | Runner quota exceeded | Reduce grouping; limit open PRs | ✓ Complete |
 | Renovate enrolment fails | Re-enable Dependabot; request app installation | ✓ Complete |
@@ -162,7 +162,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 ### Test Coverage Breakdown
 
 | Suite | Runner | Files | Discovery | Status |
-|-------|--------|-------|-----------|--------|
+| ------- | -------- | ------- | ----------- | -------- |
 | **Unit (scripts)** | Jest | `scripts/__tests__/*.test.js` | Jest pattern only | Active |
 | **Unit (tests)** | Jest | `tests/**/*.test.js` | Jest pattern only | Active |
 | **Native Node** | `node --test` | `tests/*.test.mjs` | Via `npm run test:native` | Active |
@@ -177,7 +177,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 #### Configuration
 
 | Aspect | Jest | Vitest | Compatibility | Action |
-|--------|------|--------|----------------|--------|
+| -------- | ------ | -------- | ---------------- | -------- |
 | **Transform** | @swc/jest | Vitest native (esbuild/swc) | ~✓ | Vitest faster; no config needed |
 | **Module Extensions** | Declared in config | Auto-detected | ✓ | Remove redundant list |
 | **Globals** | Off by default | On by default | **DIFF** | Enable in Jest for parity |
@@ -189,7 +189,7 @@ This assessment evaluates replacing **Dependabot with Renovate** and **Jest with
 #### Test Code Changes
 
 | Jest Feature | Vitest Equivalent | Status | Notes |
-|-------------|------------------|--------|-------|
+| ------------- | ------------------ | -------- | ------- |
 | `describe()`, `test()`, `expect()` | Same API | ✓ | 100% compatible |
 | `beforeEach()`, `afterEach()` | Same API | ✓ | 100% compatible |
 | `jest.fn()` mocks | `vi.fn()` | **Requires rewrite** | Search/replace possible |
@@ -214,7 +214,7 @@ describe('Figma Access Validation Script', () => {
 #### Coverage Continuity
 
 | Metric | Jest | Vitest | Status |
-|--------|------|--------|--------|
+| -------- | ------ | -------- | -------- |
 | **Scope** | `scripts/` only; excludes tests | Same | ✓ |
 | **Format** | JSON array | JSON object | **CHANGE** |
 | **Merge Strategy** | N/A (single run) | N/A (single run) | ✓ |
@@ -225,7 +225,7 @@ describe('Figma Access Validation Script', () => {
 **File:** `scripts/__tests__/test-figma-access.test.js`
 
 | Pattern | Type | Vitest Support |
-|---------|------|----------------|
+| --------- | ------ | ---------------- |
 | `process.env` read/write (lines 13–20) | Environment variable stubbing | ✓ via `vi.stubEnv()` |
 | `beforeEach` state reset | Hook + object spread | ✓ No change needed |
 | No `jest.mock()` or `jest.spyOn()` | (N/A) | N/A |
@@ -287,7 +287,7 @@ Vitest report (excerpt):
 ### CI Workflow Impact
 
 | Stage | Current | Vitest Transition | Impact |
-|-------|---------|------------------|--------|
+| ------- | --------- | ------------------ | -------- |
 | **Jest invocation** | `npx jest --config jest.config.js --ci --json --outputFile=jest-report.json` | `npx vitest run --config vitest.config.ts --reporter=json --outputFile=jest-report.json` | JSON reporter must match Jest format or comparison breaks |
 | **Report name** | `jest-report-{head,base}` | Keep same name | ✓ No workflow change |
 | **Script** | `compare-jest-failures.cjs` | Needs updates | Update required |
@@ -310,7 +310,7 @@ Vitest report (excerpt):
 ### Verification Gates (Vitest)
 
 | Gate | Criterion | Pass/Fail | Evidence |
-|------|-----------|-----------|----------|
+| ------ | ----------- | ----------- | ---------- |
 | **Config works** | Vitest runs locally: `npx vitest run --config vitest.config.ts` | TBD | Requires execution |
 | **Test discovery** | All Jest tests found by Vitest | TBD | Requires execution |
 | **Mock compatibility** | Jest mocks rewritten as `vi.*` equivalents | TBD | Requires code audit + rewrite |
@@ -322,7 +322,7 @@ Vitest report (excerpt):
 ### Recovery & Rollback
 
 | Scenario | Action | Reversibility |
-|----------|--------|----------------|
+| ---------- | -------- | ---------------- |
 | Vitest tests fail | **Restore all Phase 2 changes (comprehensive rollback):** (1) Restore Jest-based test files by reverting vi.* mock rewrites to jest.* equivalents across scripts/**/*.test.js and scripts/lib/**/*.test.js; (2) Restore jest and @swc/jest dependencies via `npm install jest @swc/jest`; (3) Restore npm scripts: `test`, `test:watch`, `test:coverage` to original Jest commands in package.json; (4) Restore jest.config.js configuration; (5) Re-enable Jest in CI by reverting `.github/workflows/tests.yml` to Jest runner; (6) Delete vitest.config.ts if added; (7) Verify all Jest-based tests run and pass with `npm test` | ✓ Complete |
 | Mock rewrites incomplete | Keep Jest; pause Vitest work; revert test file changes | ✓ Complete |
 | Coverage gap revealed | Investigate diff; may indicate bug or coverage loss | Case-by-case |
@@ -335,7 +335,7 @@ Vitest report (excerpt):
 **Issue:** `.github/dependabot.yml` (lines 8–28) documents active conflict.
 
 | Source | Claim |
-|--------|-------|
+| -------- | ------- |
 | CONTRIBUTING.md | "npm is the only supported package manager" |
 | README | "use pnpm" (referenced in config comment) |
 | AGENTS.md | Issue #306 lists as "Unresolved decision #1" |
@@ -404,7 +404,7 @@ Vitest report (excerpt):
 ### Dependabot → Renovate: Risk Matrix
 
 | Risk | Likelihood | Impact | Mitigation |
-|------|-----------|--------|-----------|
+| ------ | ----------- | -------- | ----------- |
 | Excessive PR volume | Medium | High (CI throttling, review burden) | Pre-configure grouping; start with limited schedule |
 | Overlapping PRs | Medium | Medium (merge conflicts, confusion) | Disable Dependabot before Renovate starts |
 | Permissions insufficient | Low | High (no PRs created at all) | Pre-verify app installation & permissions |
@@ -416,7 +416,7 @@ Vitest report (excerpt):
 ### Jest → Vitest: Risk Matrix
 
 | Risk | Likelihood | Impact | Mitigation |
-|------|-----------|--------|-----------|
+| ------ | ----------- | -------- | ----------- |
 | Test discovery gap | Low | High (silent failures) | Run both in parallel; compare counts |
 | Mock rewrite incomplete | Medium | High (false passes) | Code review + audit all `vi.*` calls |
 | Coverage drop | Medium | Medium (quality metric loss) | Compare V8 output before/after |
@@ -432,7 +432,7 @@ Vitest report (excerpt):
 ### Phase 1: Renovate (Estimated Effort)
 
 | Task | Effort | Duration | Dependency |
-|------|--------|----------|------------|
+| ------ | -------- | ---------- | ------------ |
 | Verify Renovate app installed | Low | 15 min | None |
 | Draft central config (Option TBD) | Medium | 1–2 hr | Governance decision |
 | Create test PR (limited schedule) | Low | 30 min | Config approved |
@@ -444,7 +444,7 @@ Vitest report (excerpt):
 ### Phase 2: Vitest (Estimated Effort)
 
 | Task | Effort | Duration | Dependency |
-|------|--------|----------|------------|
+| ------ | -------- | ---------- | ------------ |
 | Audit Jest-specific mocks | Low | 1–2 hr | Code read |
 | Rewrite mocks as `vi.*` equivalents | Medium | 2–4 hr | Audit complete |
 | Add npm script: `test:unit:vitest` | Low | 15 min | Mock rewrites done |
@@ -496,7 +496,7 @@ Vitest report (excerpt):
 ### Unverified Findings
 
 | Finding | Verification Method | Notes |
-|---------|-------------------|-------|
+| --------- | ------------------- | ------- |
 | Renovate bot installed | Check `lightspeedwp` app installations | Needed before Phase 1 |
 | Current Jest test pass rate | Run `npm run test:unit` | Establishes baseline; Phase 2 gating |
 | Open Dependabot PRs count | GitHub API or dashboard | Affects migration timeline |
