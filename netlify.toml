@@ -41,11 +41,8 @@
   function = "deny-source-maps"
   pattern = "^/.*\\.map$"
 
-# SPA fallback for React Router. Not forced, so existing files are served as-is.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# SPA redirect rules are defined in public/_redirects instead to avoid
+# configuration conflicts with the _redirects file that Netlify copies to dist/
 
 # Optimize images
 [build.processing]
