@@ -180,7 +180,7 @@ All of these must be true when complete:
 ## Reference Documents
 
 | Document | Version | Purpose |
-|----------|---------|---------|
+| ---------- | --------- | --------- |
 | 03-author-decisions-launch-scope.md | v1.3.0 | Source for Speaking/Events/Media exclusion |
 | 04-design-brief.md | v1.1.2 | Design baseline & responsive breakpoints |
 | 06-website-reading-prd.md | v1.1.1 | Implementation guidance |

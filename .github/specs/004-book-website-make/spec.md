@@ -221,7 +221,7 @@ Once approved, the next phase will include:
 **Status**: ✅ All 7 blocking decisions approved by product owner (Ash)
 
 | # | Decision | Resolution | Execution Impact |
-|---|----------|-----------|---|
+| --- | ---------- | ----------- | --- |
 | 1 | Recovery-first race condition | Option A: Recovery takes precedence | Unblocks Prompt 3B (recovery flows) |
 | 2 | Recovery lifetime eligibility | Option A: 30-day rolling window | Unblocks Prompt 3B (session state management) |
 | 3 | Code expiry start time | Option A: From code generation | Unblocks Prompts 3A (copy), 3C (errors) |

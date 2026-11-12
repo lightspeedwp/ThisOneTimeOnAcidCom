@@ -14,7 +14,7 @@
 This prompt is BLOCKED and cannot be fully executed until the following decision is made:
 
 | Decision | Options | Status |
-|----------|---------|--------|
+| ---------- | --------- | -------- |
 | **Decision 3** | Code expiry start time (Options A/B/C): When does 10-minute code expiry clock start? From generation / receipt / page load? | **PENDING** |
 
 See `research.md` for detailed analysis of this decision.

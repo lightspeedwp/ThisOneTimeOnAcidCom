@@ -27,7 +27,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 **Approved Typography**:
 
 | Category | Font | Weights | Sizes | Usage |
-|----------|------|---------|-------|-------|
+| ---------- | ------ | --------- | ------- | ------- |
 | Headings | Space Grotesk | 600, 700 | 24px, 32px, 40px, 48px | H1–H4 tags |
 | Body | Inter | 400, 500 | 14px, 16px, 18px | Paragraphs, body text |
 | UI | Inter | 500, 600 | 12px, 14px, 16px | Labels, buttons, form text |
@@ -51,7 +51,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 ### 2. Extract Colors (Light Theme — Approved Baseline)
 
 | # | Name | Color | Hex | Usage |
-|---|------|-------|-----|-------|
+| --- | ------ | ------- | ----- | ------- |
 | 1 | Primary (Text) | Deepest Dark | #0B0B10 | Text, foreground |
 | 2 | Primary (Background) | Warm Cream | #F6F2EB | Background, contrast |
 | 3 | Secondary (Text) | Warm Brown | #9C9488 | Secondary text |
@@ -79,7 +79,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 ### 3. Extract Colors (Dark Theme — Approved Baseline)
 
 | # | Name | Color | Hex | Usage |
-|---|------|-------|-----|-------|
+| --- | ------ | ------- | ----- | ------- |
 | 1 | Primary (Text) | Warm Cream | #F6F2EB | Text, foreground |
 | 2 | Primary (Background) | Deepest Dark | #0B0B10 | Background, contrast |
 | 3 | Secondary (Text) | Warm Tan | #CFC7BB | Secondary text |

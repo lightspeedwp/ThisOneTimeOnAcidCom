@@ -83,7 +83,7 @@ to planning
 ## Validation Summary
 
 | Category | Status | Notes |
-|---|---|---|
+| --- | --- | --- |
 | Content Quality | ✅ PASS | All sections completed; focused on requirements, not implementation |
 | Requirements | ✅ PASS | All FR testable, acceptance scenarios defined, edge cases identified |
 | Feature Readiness | ✅ PASS | Measurable outcomes, technology-agnostic, no implementation leakage |

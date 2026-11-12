@@ -436,7 +436,7 @@ requirements)
 ## Workstream Coverage Matrix
 
 | Issue | Title | Blocking | Decision(s) | Status |
-|-------|-------|----------|-------------|--------|
+| ------- | ------- | ---------- | ------------- | -------- |
 | TOA-242 | Build, lint & test CI | TOA-260, TOA-262 | TEST-001, NODE-001 | Blocked on approval |
 | TOA-243 | Read-only documentation validation | TOA-261 | GH-001 | Blocked on approval |
 | TOA-244 | Workflow syntax & static validation | TOA-261 | GH-001 | Blocked on approval |
@@ -802,7 +802,7 @@ components for utility classes; update guidelines.
 ## Document History
 
 | Date | Version | Author | Status |
-|------|---------|--------|--------|
+| ------ | --------- | -------- | -------- |
 | 2026-10-17 | 1.0 | Claude (speckit-specify) | Specification (pre-planning) |
 
 ---

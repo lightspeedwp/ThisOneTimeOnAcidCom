@@ -11,7 +11,7 @@
 Six specification files from `content/book/` analyzed for version consistency and conflict resolution.
 
 | File | Current Version | Last Revised | Status | Precedence |
-|------|-----------------|--------------|--------|-----------|
+| ------ | ----------------- | -------------- | -------- | ----------- |
 | 01-book-website-specification.md | v1.0.0 | 2026-11-09 | ✓ Current | Base (v1.0.0) |
 | 02-companion-session-plan.md | v1.0.4 | 2026-11-09 | ✓ Current | Updated (v1.0.4) |
 | 03-author-decisions-launch-scope.md | v1.3.0 | 2026-11-09 | ✓ Current | Updated (v1.3.0) |
@@ -24,7 +24,7 @@ Six specification files from `content/book/` analyzed for version consistency an
 ## Version Reconciliation Matrix
 
 | Category | File 01 (v1.0.0) | File 02 (v1.0.4) | File 03 (v1.3.0) | File 04 (v1.1.2) | File 05 (v1.9.0) | File 06 (v1.1.1) | Precedence Winner | Rationale |
-|----------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|------------------|-----------|
+| ---------- | ----------------- | ----------------- | ----------------- | ----------------- | ----------------- | ----------------- | ------------------ | ----------- |
 | **Navigation Exposure** | Base spec | Companion plan | Author decisions | Design brief | Decision register | PRD | **File 05 (v1.9.0)** | Highest version; most recent decision register (2026-11-09) |
 | **Design Baseline** | Base spec | Plan reference | Scope statement | **Design brief** | Design register | PRD reference | **File 04 (v1.1.2)** | Explicit design requirements document (latest revision 2026-11-08) |
 | **Reader Access Policy** | Base spec | Plan reference | Author scope | Brief reference | **Decision register** | PRD baseline | **File 05 (v1.9.0)** | Latest decision register with verified reader policy (v1.9.0, 2026-11-09) |
@@ -93,7 +93,7 @@ Per FR-002, the following are locked and require no changes during preflight:
 ## Reconciliation Summary
 
 | Metric | Result |
-|--------|--------|
+| -------- | -------- |
 | **Total Source Files** | 6 files analyzed |
 | **Files Current (within 24h)** | 5 files (83%) |
 | **Files Older (>24h)** | 1 file (17%): File 06 v1.1.1, 5 days old |

@@ -21,7 +21,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 **Options**:
 
 | Option | Description | Trade-offs |
-|--------|-------------|-----------|
+| -------- | ------------- | ----------- |
 | **A (Recommended)** | Recovery always takes precedence; cancel fresh verification if recovery succeeds | Prioritizes already-verified readers; minimal state complexity; matches user intent (reuse existing access) |
 | B | Fresh verification always takes precedence; invalidate recovery attempt | Ensures latest verification; higher security posture; confusing UX for users expecting recovery to work |
 | C | Last-writer-wins (request timestamp order) | Simple implementation; unpredictable UX; may lose user-initiated recovery |
@@ -42,7 +42,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 **Options**:
 
 | Option | Description | Trade-offs |
-|--------|-------------|-----------|
+| -------- | ------------- | ----------- |
 | **A (Recommended)** | 30-day rolling window from last successful recovery action | Matches device lifecycle (30 days); balances security with UX; simple expiry logic |
 | B | 30-day fixed window from initial verification (no rolling) | Simpler implementation; forces re-verification at hard boundary; less forgiving of inactive readers |
 | C | No expiry—recovery sessions valid indefinitely | Maximum UX convenience; highest security risk; may conflict with data retention policy |
@@ -63,7 +63,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 **Options**:
 
 | Option | Description | Trade-ties |
-|--------|-------------|-----------|
+| -------- | ------------- | ----------- |
 | **A (Recommended)** | From code generation (most strict) | Consistent server-side timing; predictable security window; readers see countdown as ~9 min after email receipt |
 | B | From email receipt (configurable by email provider) | Fairest to reader (delay not their fault); requires email provider cooperation; unpredictable for readers without receipt timestamp |
 | C | From verification page load (most lenient) | Maximizes UX; reader sees full 10 minutes; expiry can stretch to 10+ minutes with network delays; least secure |
@@ -85,7 +85,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 **Options**:
 
 | Option | Description | Trade-offs |
-|--------|-------------|-----------|
+| -------- | ------------- | ----------- |
 | A | Brevo (formerly Sendinblue) | Strong newsletter integration; good deliverability; familiar to team |
 | **B (Recommended)** | SendGrid (industry standard) | Excellent documentation; robust API; strong reputation; higher cost |
 | C | Mailgun | Powerful API; strong developers; less newsletter-focused |
@@ -106,7 +106,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 **Options**:
 
 | Option | Description | Trade-offs |
-|--------|-------------|-----------|
+| -------- | ------------- | ----------- |
 | A | Manuscript approved and available; ready for integration | Unblocks access implementation; requires manuscript delivery mechanism in place |
 | B | Manuscript approved but not yet formatted for web delivery | Requires formatting/export pipeline before integration; delays access feature |
 | **C (Selected)** | Manuscript not yet approved | Access feature cannot launch; requires separate approval gate |
@@ -126,7 +126,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 **Options**:
 
 | Option | Description | Trade-offs |
-|--------|-------------|-----------|
+| -------- | ------------- | ----------- |
 | A | Inline consent form (on same page as reader access) | Seamless UX; captures consent server-side; requires newsletter integration |
 | **B (Recommended)** | Link to external newsletter provider signup page | Proven pattern; delegated consent handling; readers control subscription directly |
 | C | Separate signup form component (post-verification) | Higher friction; newsletter signup becomes second step; clearer intent capture |
@@ -147,7 +147,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 **Options**:
 
 | Option | Description | Trade-ties |
-|--------|-------------|-----------|
+| -------- | ------------- | ----------- |
 | **A (Recommended)** | Meta tags + Robots.txt + Sitemap.xml exclusion | Comprehensive coverage; multiple signal to search engines; verifiable at deploy time |
 | B | Robots.txt only | Standard method; simpler to implement; less comprehensive (Meta tags still visible in HTML) |
 | C | Meta tags only (x-robots-tag in response headers) | Flexible; can vary per request; not visible in sitemap |
@@ -162,7 +162,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 ## Blocking Decision Summary
 
 | # | Decision | Status | Decision | Impact |
-|---|----------|--------|---|---|
+| --- | ---------- | -------- | --- | --- |
 | 1 | Recovery-first race condition | ✅ APPROVED | Option A (Recovery precedence) | Prompt 3B (recovery flows) |
 | 2 | Recovery lifetime eligibility | ✅ APPROVED | Option A (30-day rolling window) | Prompt 3B (session state) |
 | 3 | Code expiry start time | ✅ APPROVED | Option A (From code generation) | Prompts 3A (copy), 3C (errors) |

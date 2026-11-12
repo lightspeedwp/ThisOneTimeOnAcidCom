@@ -32,7 +32,7 @@ Design all error state designs and messaging for reader access flow, with code-e
 **Options Under Review**:
 
 | Option | Expiry Timing | User Message | Implication |
-|--------|---------------|--------------|-------------|
+| -------- | --------------- | -------------- | ------------- |
 | **A: From Generation** | 10 min from when code is generated in backend | "Code expired. Generated [X minutes ago]." | User sees exact generation time; clear but technical |
 | **B: From Receipt** | 10 min from when email is received (uncertain timing) | "Code expired. Email received [X minutes ago]." | Accounts for delivery delays; more user-focused |
 | **C: From Page Load** | 10 min from when user loads verification page | "Code expired. Please request a new one." | Simplest messaging; no timing explanation needed |
@@ -345,7 +345,7 @@ User action: Click preferred option
 Document all 5 error states with user guidance:
 
 | Error | Trigger | Message | User Action | Fallback |
-|-------|---------|---------|-------------|----------|
+| ------- | --------- | --------- | ------------- | ---------- |
 | Invalid Code | Wrong characters | "Invalid code. Check and try again." | Correct input & retry | N/A |
 | Code Expired | 10+ minutes passed | (Decision 3 option) | "Request New Code" | Email entry form |
 | Rate Limited | 5+ failed attempts | "Too many attempts. Try again in 15:00." | Wait 15 min or new code | Request new code |

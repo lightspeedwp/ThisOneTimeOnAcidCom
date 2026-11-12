@@ -31,7 +31,7 @@ This guide walks through the approval and execution flow for the Figma Make prom
 **Blocking Decisions**:
 
 | Decision | Your Selection | Status |
-|----------|----------------|--------|
+| ---------- | ---------------- | -------- |
 | 1. Recovery-first race condition (Options: A/B/C/D) | ✅ A | APPROVED |
 | 2. Recovery lifetime eligibility (Options: A/B/C/D) | ✅ A | APPROVED |
 | 3. Code expiry start time (Options: A/B/C) | ✅ A | APPROVED |
@@ -345,7 +345,7 @@ Once all blocking decisions are resolved:
 ### Timeline Example
 
 | Step | Decision | Owner | Timeline |
-|------|----------|-------|----------|
+| ------ | ---------- | ------- | ---------- |
 | 1 | Gates 1-3 complete (your input) | You | This week |
 | 2 | Prompts 1, 2A, 2B, 3A ready to execute | Dev team | Next week |
 | 3 | Prompts 3B, 3C unblocked (if decisions made) | You | After Gate 1 |

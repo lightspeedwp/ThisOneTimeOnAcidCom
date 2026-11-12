@@ -65,7 +65,7 @@ T038–T043 (Design verification & sign-off)
 **Summary:** 9 supporting documents across 3 categories. Current status: 4 COMPLETE (T015–T018), 5 PENDING (T008–T014).
 
 | S-ID | File | Category | Task(s) | Status | Notes |
-|------|------|----------|---------|--------|-------|
+| ------ | ------ | ---------- | --------- | -------- | ------- |
 | S001 | `.claude/skills/INVENTORY.md` | Skill Records | T008 | ⏳ PENDING | Skill inventory update — awaiting consolidation manifest |
 | S002 | `.claude/skills/branch-validation/SKILL.md` | Skill Records | T009 | ⏳ PENDING | Branch validation rules — preserve existing logic |
 | S003 | `.claude/skills/changelog/SKILL.md` | Skill Records | T010 | ⏳ PENDING | Changelog format spec — update examples per D1 |

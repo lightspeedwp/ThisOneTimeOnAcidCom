@@ -142,7 +142,7 @@ All criteria must be met before marking Prompt 1 complete (CR = Component Requir
 This prompt depends on **Blocking Decision 7: Route Enforcement Verification**.
 
 | Decision | Options | Status | Impact on Prompt 1 |
-|----------|---------|--------|-------------------|
+| ---------- | --------- | -------- | ------------------- |
 | **Decision 7** | Route Enforcement: Meta / Robots.txt / Sitemap / Combined | **PENDING** | Determines which enforcement method(s) are implemented for hidden routes |
 
 **Blocking Decision 7 Options**:
@@ -190,7 +190,7 @@ Reference:
 Before submitting Prompt 1 to Figma Make, verify:
 
 | Item | Status | Notes |
-|------|--------|-------|
+| ------ | -------- | ------- |
 | Before/after navigation structure | ✅ Documented | Section 1 complete |
 | Numbered implementation steps (14 steps) | ✅ Documented | Section 2 complete |
 | All acceptance criteria defined | ✅ Documented | Section 3: CR-1.1 through CR-1.10 |

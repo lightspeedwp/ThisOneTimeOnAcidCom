@@ -24,7 +24,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 ## Phase 8 Convergence Artifact Validation Matrix
 
 | Task | Artifact | Validation | Status | Evidence |
-|------|----------|-----------|--------|----------|
+| ------ | ---------- | ----------- | -------- | ---------- |
 | **T052** | version-reconciliation.md | FR-002 compliance | ✅ PASS | All 6 files reconciled; File 05 v1.9.0 authoritative; zero critical conflicts |
 | **T053** | prompt-1-exact-preview.md | SC-002 compliance | ✅ PASS | 100% complete; 4 required elements: before/after, 14 steps, 10 criteria, 3 non-changes |
 | **T054** | prompt-preview-validation.md | SC-003 compliance | ✅ PASS | All 4 prompts ≥95% average; P1: 100%, P2A: 89%, P2B: 100%, P3A: 91% |
@@ -40,7 +40,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 ### 1. Version Reconciliation & Conflict Analysis
 
 | Check | Status | Evidence | Notes |
-|-------|--------|----------|-------|
+| ------- | -------- | ---------- | ------- |
 | **All 6 source files analyzed** | ✅ | source-file-inventory.md (complete audit) | Files 01–06 from content/book/ directory |
 | **Version precedence rule applied** | ✅ | version-reconciliation.md (SemVer rule) | File 05 v1.9.0 (highest) authoritative for decisions |
 | **Zero critical conflicts** | ✅ | version-reconciliation.md (conflict matrix) | File 06 v1.1.1 superseded by File 05 v1.9.0 (resolved) |
@@ -54,7 +54,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 ### 2. Blocking Decisions Completeness
 
 | Decision | Options | Status | Prompts Blocked | Evidence |
-|----------|---------|--------|-----------------|----------|
+| ---------- | --------- | -------- | ----------------- | ---------- |
 | **1. Recovery-first race** | 4 (A/B/C/D) | PENDING | Prompt 3B | blocking-decisions-validation.md Decision 1 |
 | **2. Recovery lifetime** | 4 (A/B/C/D) | PENDING | Prompt 3B | blocking-decisions-validation.md Decision 2 |
 | **3. Code expiry start** | 3 (A/B/C) | PENDING | Prompts 3A/3C | blocking-decisions-validation.md Decision 3 |
@@ -70,7 +70,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 ### 3. Blocking Decisions Audit (Contracts Clarity)
 
 | Prompt | Blocking Decisions | Options Visible | Unblocking Procedure | FR-008 Status |
-|--------|-------------------|-----------------|---------------------|---------------|
+| -------- | ------------------- | ----------------- | --------------------- | --------------- |
 | **Prompt 3B** (Recovery Flows) | 2 (Decisions 1, 2) | ✅ A/B/C/D shown | ✅ 4-step procedure documented | ✅ **PASS** |
 | **Prompt 3C** (Error States) | 1 (Decision 3) | ✅ A/B/C shown | ✅ 4-step procedure documented | ✅ **PASS** |
 
@@ -81,7 +81,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 ### 4. Prompt Readiness Validation
 
 | Prompt | Completeness | Status | Blockers | Approval Boundary |
-|--------|-------------|--------|----------|------------------|
+| -------- | ------------- | -------- | ---------- | ------------------ |
 | **Prompt 1** (Navigation) | 100% | ✅ READY | Decision 7 (placeholder) | ✓ APPROVED (with placeholder) |
 | **Prompt 2A** (Design Baseline) | 89% | ✅ READY | None | ✓ APPROVED |
 | **Prompt 2B** (Navigation Design) | 100% | ✅ READY | None (soft: Prompt 1 first) | ✓ APPROVED |
@@ -96,7 +96,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 ### 5. Approval Boundaries Verification
 
 | Category | Marked | Status | Evidence |
-|----------|--------|--------|----------|
+| ---------- | -------- | -------- | ---------- |
 | **Approved Elements** | ✅ | ✓ Locked | Design baseline (Space Grotesk/Inter/9-color), User stories (US1–US4), Requirements (FR-001–FR-010), Criteria (SC-001–SC-008) |
 | **Unapproved Candidates** | ✅ | ~ Listed | Design candidates (R3, T1, RT2, C1) all marked unapproved in decision register |
 | **Unresolved Decisions** | ✅ | ❌ Documented | 7 blocking decisions with options A/B/C/D mapped to prompts |
@@ -109,7 +109,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 ### 6. Documentation Completeness Summary
 
 | Artifact | Created | Lines | Purpose | Status |
-|----------|---------|-------|---------|--------|
+| ---------- | --------- | ------- | --------- | -------- |
 | version-reconciliation.md | T052 | 311 | Version analysis & SemVer precedence | ✅ COMPLETE |
 | prompt-1-exact-preview.md | T053 | 287 | Exact Prompt 1 with before/after & steps | ✅ COMPLETE |
 | prompt-preview-validation.md | T054 | 169 | Completeness validation for all prompts | ✅ COMPLETE |
@@ -131,7 +131,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 #### ✅ YES — Unblocked Prompts (Immediate Execution)
 
 | Prompt | Action | Timeline |
-|--------|--------|----------|
+| -------- | -------- | ---------- |
 | **Prompt 2A** (Design Baseline) | Execute immediately | No dependencies |
 | **Prompt 2B** (Navigation Design) | Execute immediately (or after Prompt 1) | Soft dependency on Prompt 1 navigation items |
 | **Prompt 1** (Navigation Exposure) | Execute immediately after Decision 7 selection | Requires Decision 7 option (Route enforcement) |
@@ -142,7 +142,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 #### ⏸️ BLOCKED — Prompts 3B & 3C (Post-Decision Execution)
 
 | Prompt | Blocking Decisions | Unblocking Timeline |
-|--------|-------------------|---------------------|
+| -------- | ------------------- | --------------------- |
 | **Prompt 3B** | Decisions 1 & 2 | After user selects both options |
 | **Prompt 3C** | Decision 3 | After user selects option |
 
@@ -165,7 +165,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 ## SC-008 Compliance Verification
 
 | Requirement | Evidence | Status |
-|-------------|----------|--------|
+| ------------- | ---------- | -------- |
 | **All artifacts validated** | T052–T058 output (7 validation artifacts) | ✅ PASS |
 | **Zero unresolved conflicts** | version-reconciliation.md (conflict analysis) | ✅ PASS |
 | **Decisions documented** | blocking-decisions-validation.md (7 decisions, 23 options) | ✅ PASS |

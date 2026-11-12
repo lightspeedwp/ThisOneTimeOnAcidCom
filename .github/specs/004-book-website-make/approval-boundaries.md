@@ -9,7 +9,7 @@
 ## Standard Notation
 
 | Symbol | Meaning | Applies To | Example |
-|--------|---------|-----------|---------|
+| -------- | --------- | ----------- | --------- |
 | ✓ | **Approved** | Specifications, decisions, design choices that have explicit approval evidence | ✓ Space Grotesk typography approved |
 | ~ | **Unapproved Candidate** | Proposed alternatives, design candidates, options not selected | ~ Candidate R3: responsive typography (alternative, not approved) |
 | ❌ | **Unresolved Decision** | Open questions, pending user selections, gates awaiting input | ❌ Decision 1: Recovery-first race condition (awaiting selection) |
@@ -21,7 +21,7 @@
 ### Section 1: Purpose & Context
 
 | Item | Status | Evidence | Notes |
-|------|--------|----------|-------|
+| ------ | -------- | ---------- | ------- |
 | Feature scope (Figma Make prompt pack) | ✓ | Spec 1.0.0, FR-001 through FR-010 | Locked; no changes during preflight |
 | Documentation-only delivery model | ✓ | Spec requirement FR-009: "completely implementation-agnostic" | Zero code, commits, deployments until approval |
 | Source verification authority (6 source files) | ✓ | Spec 1.0.0, Specification Notes | All 6 files analyzed and reconciled |
@@ -29,7 +29,7 @@
 ### Section 2: User Stories (US1–US4)
 
 | Story | Status | Evidence | Approval Notes |
-|-------|--------|----------|-----------------|
+| ------- | -------- | ---------- | ----------------- |
 | **US1: Design Hand-off (P1)** | ✓ | Spec lines 13–26; SC-001 | Approved baseline locked: Space Grotesk, Inter, 9-color palette |
 | **US2: Reader Access Journey (P1)** | ✓ | Spec lines 28–59; SC-001 | Copy, form wording, error states approved |
 | **US3: Implementation Readiness (P2)** | ✓ | Spec lines 61–81; SC-001 | Blocking decisions framework approved |
@@ -38,7 +38,7 @@
 ### Section 3: Functional Requirements (FR-001 through FR-010)
 
 | Requirement | Status | Evidence | Approval Notes |
-|-------------|--------|----------|-----------------|
+| ------------- | -------- | ---------- | ----------------- |
 | **FR-001**: Analyze 6 source files | ✓ | Completed; version-reconciliation.md generated | All files retrieved, versions extracted |
 | **FR-002**: Reconcile version mismatches | ✓ | version-reconciliation.md (T052 output) | Newer version precedence rule applied |
 | **FR-003**: Prepare exact Prompt 1 | ✓ | prompt-1-exact-preview.md (T053 output) | Before/after, steps, criteria, non-changes |
@@ -53,7 +53,7 @@
 ### Section 4: Success Criteria (SC-001 through SC-008)
 
 | Criterion | Status | Evidence | Approval Notes |
-|-----------|--------|----------|-----------------|
+| ----------- | -------- | ---------- | ----------------- |
 | **SC-001**: Source file analysis complete | ✓ | version-reconciliation.md; 6 files with versions | Zero silent merges; all conflicts documented |
 | **SC-002**: Prompt 1 exact preview | ✓ | prompt-1-exact-preview.md (100% complete) | All 4 required elements present |
 | **SC-003**: Prompts 2A, 2B, 3A complete | ✓ | prompt-preview-validation.md (95%+ threshold) | CSS + JSON formats for 2A; all 3 ≥89% |
@@ -70,7 +70,7 @@
 Per spec requirement: "Space Grotesk headings, Inter body/UI, 9-color palette (both themes) are locked."
 
 | Element | Status | Value | Source | Notes |
-|---------|--------|-------|--------|-------|
+| --------- | -------- | ------- | -------- | ------- |
 | **Heading Font** | ✓ | Space Grotesk (600, 700 weight; 24–48px) | 04-design-brief.md v1.1.2 | Locked; no alternatives |
 | **Body/UI Font** | ✓ | Inter (400–600 weight; 12–18px) | 04-design-brief.md v1.1.2 | Locked; no alternatives |
 | **Light Theme Colors** | ~ | 9-color palette mapping | 04-design-brief.md v1.1.2 | Light-theme semantic mapping unresolved; reconciliation with dark baseline pending |
@@ -84,7 +84,7 @@ Per spec requirement: "Space Grotesk headings, Inter body/UI, 9-color palette (b
 Per spec requirement: "Unapproved candidates R3, T1, RT2, C1 listed separately with explicit non-approval notation."
 
 | Candidate | ID | Category | Status | Evidence | Notes |
-|-----------|-----|----------|--------|----------|-------|
+| ----------- | ----- | ---------- | -------- | ---------- | ------- |
 | **Responsive Typography** | ~ R3 | Typography | ~ UNAPPROVED | 05-design-reader-decision-register.md v1.9.0 | Alternative responsive typography; not selected |
 | **Additional Typography** | ~ T1 | Typography | ~ UNAPPROVED | 05-design-reader-decision-register.md v1.9.0 | Additional font option; not selected |
 | **Reader Controls** | ~ RT2 | Reader Experience | ~ UNAPPROVED | 05-design-reader-decision-register.md v1.9.0 | Advanced reader control panel; not in baseline |
@@ -99,7 +99,7 @@ Per spec requirement: "Unapproved candidates R3, T1, RT2, C1 listed separately w
 Per spec requirement: "All 7 blocking decisions documented with options, awaiting user selection."
 
 | Decision | ID | Status | Options | Prompts Blocked | Evidence |
-|----------|-----|--------|---------|-----------------|----------|
+| ---------- | ----- | -------- | --------- | ----------------- | ---------- |
 | **Recovery-first race condition** | ❌ 1 | PENDING | A/B/C/D (4 options) | Prompt 3B | research.md (Decision 1, lines 15–32) |
 | **Recovery lifetime eligibility** | ❌ 2 | PENDING | A/B/C/D (4 options) | Prompt 3B | research.md (Decision 2, lines 36–50) |
 | **Code expiry start time** | ❌ 3 | PENDING | A/B/C (3 options) | Prompt 3C | research.md (Decision 3) |
@@ -115,7 +115,7 @@ Per spec requirement: "All 7 blocking decisions documented with options, awaitin
 ## Prompt Approval Map
 
 | Prompt | Status | Approval Evidence | Blockers | Ready for Figma Make |
-|--------|--------|-------------------|----------|-------------------|
+| -------- | -------- | ------------------- | ---------- | ------------------- |
 | **Prompt 1** (Navigation) | ✓ READY | prompt-1-exact-preview.md; all 4 elements complete | ❌ Decision 7 (Route Enforcement) | YES (placeholder) |
 | **Prompt 2A** (Design Baseline) | ✓ READY | prompt-2a-design-baseline.md; CSS + JSON formats | None | YES |
 | **Prompt 2B** (Navigation Design) | ✓ READY | prompt-2b-navigation-design.md; 100% complete | None | YES |
@@ -191,7 +191,7 @@ Per spec requirement: "All 7 blocking decisions documented with options, awaitin
 ## Convergence Phase 8 Artifacts (Generated in This Cycle)
 
 | Artifact | Created | Status | Boundaries Marked |
-|----------|---------|--------|-------------------|
+| ---------- | --------- | -------- | ------------------- |
 | version-reconciliation.md (T052) | ✅ | ✓ APPROVED | Version differences documented; precedence applied |
 | prompt-1-exact-preview.md (T053) | ✅ | ✓ READY | Decision 7 placeholder marked ❌ |
 | prompt-preview-validation.md (T054) | ✅ | ✓ PASS | All 4 prompts ≥89% complete; blockers noted |
@@ -206,7 +206,7 @@ Per spec requirement: "All 7 blocking decisions documented with options, awaitin
 ## Approval Boundary Compliance (SC-007 Verification)
 
 | Requirement | Status | Evidence | Notes |
-|-------------|--------|----------|-------|
+| ------------- | -------- | ---------- | ------- |
 | All approved elements explicitly marked ✓ | ✓ | User stories, requirements, success criteria, design baseline all marked | Comprehensive coverage |
 | All unapproved candidates explicitly marked ~ | ✓ | Design candidates R3, T1, RT2, C1 listed with ~ notation | No silent approvals |
 | All unresolved decisions explicitly marked ❌ | ✓ | 7 blocking decisions listed with ❌, options documented, gates identified | Zero ambiguous items |

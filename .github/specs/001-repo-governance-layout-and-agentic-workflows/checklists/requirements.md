@@ -87,7 +87,7 @@
 ### Child Issue Coverage (20 issues)
 
 | Issue | Workstream | Mapped to Requirements | Status |
-|-------|-----------|------------------------|--------|
+| ------- | ----------- | ------------------------ | -------- |
 | TOA-242 | Workstream: TOA-260 | R6.1–R6.4 | ✅ Covered |
 | TOA-243 | Workstream: TOA-261 | R6.2 (evaluation) | ✅ Covered |
 | TOA-244 | Workstream: TOA-261 | R6.2 (validation) | ✅ Covered |
@@ -114,7 +114,7 @@
 ### Approved Decisions Integration
 
 | Decision ID | Decision | Status | Requirement(s) |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | SPEC-001 | `.github/specs/` canonical | Approved 17 Oct 2026 | R1.2, R9.1 |
 | TEST-001 | Jest ESM with @swc/core | Approved 17 Oct 2026 | R4.1 |
 | TEST-002 | Accept 103/104 baseline | Approved 17 Oct 2026 | R4.2 |

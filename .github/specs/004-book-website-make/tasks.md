@@ -344,7 +344,7 @@ Phase 1 (Setup) ──┐
 ## Task Count Summary
 
 | Phase | Tasks | Story | Count | Status |
-|-------|-------|-------|-------|--------|
+| ------- | ------- | ------- | ------- | -------- |
 | 1 (Setup) | T001–T004 | — | 4 | Ready |
 | 2 (Foundational) | T005–T014 | — | 10 | Ready (blocks phase 3–5) |
 | 3 (Design Baseline) | T015–T021 | US1 | 7 | Ready after T014 |
@@ -403,7 +403,7 @@ Phase 1 (Setup) ──┐
 Validation and verification tasks to close gaps identified between specification requirements and current task coverage. All tasks are verification/documentation tasks, not implementation. Run after Phase 7 completion before final user approval.
 
 | Task ID | [P] | Description | File Path | Dependencies |
-|---------|-----|-------------|-----------|--------------|
+| --------- | ----- | ------------- | ----------- | -------------- |
 | ✅ T052 | | Create version reconciliation artifact documenting all source file versions and differences per FR-002 precedence rule | `.github/specs/004-book-website-make/version-reconciliation.md` | T007, T010 |
 | ✅ T053 | | Generate and document exact Prompt 1 preview (before/after navigation structure, numbered implementation steps, acceptance criteria, non-changes list) per SC-002 | `.github/specs/004-book-website-make/contracts/prompt-1-exact-preview.md` | T020 |
 | ⏳ T054 | | Validate all Prompt previews against completeness checklist (Prompts 1, 2A, 2B, 3A include all required elements; 95%+ completeness) per SC-002/SC-003 | `.github/specs/004-book-website-make/checklists/prompt-preview-validation.md` | T053, T021, T022, T023 |

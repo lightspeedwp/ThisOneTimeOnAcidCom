@@ -14,7 +14,7 @@
 This prompt is BLOCKED and cannot be executed until the following decisions are made:
 
 | Decision | Options | Status |
-|----------|---------|--------|
+| ---------- | --------- | -------- |
 | **Decision 1** | Recovery-first race condition (Options A/B/C/D): What if both recovery and fresh verification occur simultaneously? | **PENDING** |
 | **Decision 2** | Recovery lifetime eligibility (Options A/B/C/D): How long is confirmed redemption eligible for recovery access? | **PENDING** |
 

@@ -307,17 +307,17 @@ Example:
 
 ## Summary Table
 
-| Gate   | Status        | Owner Input Required                    | Evidence Link                                                    |
+| Gate | Status | Owner Input Required | Evidence Link |
 | ------ | ------------- | --------------------------------------- | ---------------------------------------------------------------- |
-| **D0** | ✅ RESOLVED   | No                                      | Protected-file policy retained                                   |
-| **D1** | 🔄 PENDING    | Voice & identity decisions              | [Record above]                                                   |
-| **D2** | 🔄 PENDING    | Publication boundaries                  | [Record above]                                                   |
-| **D3** | 🔄 PENDING    | Design authority & accessibility        | [Record above]                                                   |
-| **D4** | 🔄 PENDING    | N-doc approvals, G→N mapping & skills   | [Record above] — **CRITICAL**                                    |
-| **D5** | 🔄 PENDING    | Pointer strategy & archive approach     | [Record above]                                                   |
-| **D6** | 🔄 PENDING    | Backend tech stack & integration docs   | [Record above]                                                   |
-| **D7** | ✅ RESOLVED   | No                                      | Branch: `docs/spec-003-phase2-implementation`                    |
-| **D8** | 🔄 PENDING    | WordPress presence & portfolio guidance | [Record above]                                                   |
+| **D0** | ✅ RESOLVED | No | Protected-file policy retained |
+| **D1** | 🔄 PENDING | Voice & identity decisions | [Record above] |
+| **D2** | 🔄 PENDING | Publication boundaries | [Record above] |
+| **D3** | 🔄 PENDING | Design authority & accessibility | [Record above] |
+| **D4** | 🔄 PENDING | N-doc approvals, G→N mapping & skills | [Record above] — **CRITICAL** |
+| **D5** | 🔄 PENDING | Pointer strategy & archive approach | [Record above] |
+| **D6** | 🔄 PENDING | Backend tech stack & integration docs | [Record above] |
+| **D7** | ✅ RESOLVED | No | Branch: `docs/spec-003-phase2-implementation` |
+| **D8** | 🔄 PENDING | WordPress presence & portfolio guidance | [Record above] |
 
 ---
 

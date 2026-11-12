@@ -60,22 +60,22 @@ material).
 **Attributes**:
 
 | Attribute | Type | Required? | Constraints | Notes | FR-Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | `asset_id` | String | **Required** | Non-empty, unique, no provider-specific paths | Stable identifier; independent of storage location | FR-002 |
-| `original*or*derivative` | Enum | **Required** | "original" \| "derivative" \| "variant" | Distinguishes originals from rendered/scaled copies | FR-003 |
+| `original*or*derivative` | Enum | **Required** | "original" \ | "derivative" \ | "variant" | Distinguishes originals from rendered/scaled copies | FR-003 |
 | `provenance` | String | **Required** | Marked "unknown" if source cannot be verified | e.g. "Figma file X, page Y, exported 2026-10-17"; "manual upload by user Z"; "archive scan" | FR-001 |
 | `format` | Enum (Array) | **Required** | PNG, SVG, JPEG, PDF, GIF, WebP, others | Primary and secondary formats (e.g. original SVG + exported PNG) | FR-004, FR-006 |
 | `dimensions` | Object or null | **Required** | `{ width, height, unit }` or null if unknown | Unit: "px" (pixels), "in" (inches for print), "mm" (millimetres) | FR-004 |
-| `print_suitable` | Boolean or null | **Required** | true \| false \| null (unknown) | Assesses print suitability; true means asset meets 300 DPI minimum, RGB/CMYK colour space, and supported format (PNG/PDF/TIFF). null if unknown. | FR-004 |
+| `print_suitable` | Boolean or null | **Required** | true \ | false \ | null (unknown) | Assesses print suitability; true means asset meets 300 DPI minimum, RGB/CMYK colour space, and supported format (PNG/PDF/TIFF). null if unknown. | FR-004 |
 | `print_notes` | String | Optional | Freeform | Resolution, colour space (RGB/CMYK), format constraints, etc. | FR-004 |
 | `usages` | Array<String> | Optional | Freeform contexts | e.g. "website hero", "book chapter 3", "social media thumbnail", "email header" | FR-006 |
 | `alt_text` | String | Optional | Marked "unknown" or "unrecoverable" if not found | Accessibility description; max 125 characters recommended | FR-006 |
 | `caption` | String | Optional | Marked "unknown" if not available | Human-readable label; max 255 characters | FR-006 |
 | `credits` | String | Optional | Marked "unknown" or "unrecoverable"; never fabricated | Creator, artist, photographer, or source attribution | FR-006, FR-008 |
 | `rights_notes` | String | Optional | Marked "unknown" or "unrecoverable"; never fabricated | Licencing, usage restrictions, copyright, or verification status | FR-006, FR-008 |
-| `recovery*status` | Enum | **Required** | "not*attempted" \| "recovered" \| "partial*recovery" \| "manual*export_required" \| "unrecoverable" | See Recovery Status Enum | FR-005, FR-015 |
+| `recovery*status` | Enum | **Required** | "not*attempted" \ | "recovered" \ | "partial*recovery" \ | "manual*export_required" \ | "unrecoverable" | See Recovery Status Enum | FR-005, FR-015 |
 | `recovery_notes` | String | Optional | Freeform | Reason for partial or failed recovery; impact on catalogue/validation | FR-005 |
-| `recovery*method` | Enum or null | **Required** | null before any recovery attempt; "figma*extraction" \| "manual*export" \| "archive*scan" \| "other" when recovery has been attempted | Method actually attempted or used to obtain the asset; never a planned method | FR-001, FR-005 |
+| `recovery*method` | Enum or null | **Required** | null before any recovery attempt; "figma*extraction" \ | "manual*export" \ | "archive*scan" \ | "other" when recovery has been attempted | Method actually attempted or used to obtain the asset; never a planned method | FR-001, FR-005 |
 | `created_at` | ISO 8601 Timestamp | **Required** | Automatic; time when asset was catalogued | Not the asset's creation date, but when it was recovered | FR-006 |
 | `updated_at` | ISO 8601 Timestamp | **Required** | Automatic; time of last modification | Updates when metadata is verified or corrected | FR-006 |
 
@@ -189,14 +189,14 @@ target*reference, relationship*type)` — must be unique. When
 **Attributes**:
 
 | Attribute | Type | Required? | Constraints | Notes | FR-Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | `source*asset*id` | String (FK) | **Required** | Must exist in Asset table | Asset that is the origin or parent | FR-007 |
-| `target_type` | Enum | **Required** | "asset" \| "context" | Whether target is an Asset or a usage context (e.g. website page) | FR-007 |
+| `target_type` | Enum | **Required** | "asset" \ | "context" | Whether target is an Asset or a usage context (e.g. website page) | FR-007 |
 | `target*asset*id` | String (FK) | Conditional | Required if `target*type="asset"`; must exist in Asset table; cannot equal source*asset_id | Asset that derives from or relates to the source | FR-007 |
 | `target*reference` | String | Conditional | Required if `target*type="context"`; e.g. URL, page ID, publication identifier | Reference for non-asset targets (e.g. website page URL) | FR-007 |
-| `relationship*type` | Enum | **Required** | "derived*from" \| "variant*of" \| "used*in" \| "replaced_by" | Type of relationship; see enum | FR-007 |
+| `relationship*type` | Enum | **Required** | "derived*from" \ | "variant*of" \ | "used*in" \ | "replaced_by" | Type of relationship; see enum | FR-007 |
 | `notes` | String | Optional | Freeform; max 512 characters | e.g. "scaled 50% for web", "colour mode changed RGB→CMYK", "superseded by redesign v2" | FR-007 |
-| `verified` | Boolean | Optional | true \| false | Whether relationship has been validated or is inferred | FR-007 |
+| `verified` | Boolean | Optional | true \ | false | Whether relationship has been validated or is inferred | FR-007 |
 | `created_at` | ISO 8601 Timestamp | **Required** | Automatic | When relationship was recorded | — |
 | `updated_at` | ISO 8601 Timestamp | **Required** | Automatic | When relationship was last modified | — |
 
@@ -257,23 +257,23 @@ criteria.
 **Attributes**:
 
 | Attribute | Type | Required? | Constraints | Notes | FR-Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | `name` | String | **Required** | Non-empty; unique | e.g. "GitHub + Netlify", "Cloudinary", "Amazon S3 + CloudFront" | FR-010 |
 | `asset_limit` | String or Number | Optional | Freeform or numeric | e.g. "unlimited", "1000 files", "100 GB", "1 TB" | FR-010, FR-011 |
 | `cost_model` | String | **Required** | Freeform; quoted from pricing page | e.g. "Free tier (5 GB)", "per-month subscription ($X)", "per-asset ($Y)", "tiered by usage" | FR-010, FR-011 |
 | `formats_supported` | Array<String> | **Required** | List of file format enums | e.g. ["PNG", "JPEG", "SVG", "PDF"] | FR-010 |
 | `max*file*size` | String | **Required** | e.g. "100 MB", "1 GB", "unlimited" | Maximum size of single asset upload | FR-010 |
-| `api_available` | Boolean | **Required** | true \| false | Whether provider offers API for programmatic upload/retrieval | FR-010 |
+| `api_available` | Boolean | **Required** | true \ | false | Whether provider offers API for programmatic upload/retrieval | FR-010 |
 | `api_url` | String | Optional | URL to API documentation | Link to provider's API docs (if available) | FR-010 |
-| `visual*editing*ui` | Boolean | **Required** | true \| false | Whether provider offers visual editing/tagging interface | — |
+| `visual*editing*ui` | Boolean | **Required** | true \ | false | Whether provider offers visual editing/tagging interface | — |
 | `visual*editing*notes` | String | Optional | Freeform | e.g. "web UI only", "native apps for Mac/Win", "basic crop/resize", "full design suite" | — |
-| `batch_processing` | Boolean | **Required** | true \| false | Batch upload/export capability | FR-010 |
+| `batch_processing` | Boolean | **Required** | true \ | false | Batch upload/export capability | FR-010 |
 | `print*quality*support` | String | **Required** | Freeform; quoted from documentation | Supported formats for print (PDF, TIFF, etc.) and resolution limits | FR-013 |
 | `concurrent_users` | String or Number | Optional | e.g. "1", "5", "unlimited", or "not specified" | Simultaneous editor limit | FR-011 |
-| `integration_complexity` | Enum | Optional | "low" \| "medium" \| "high" \| "unknown" | Estimated effort to integrate with build/publish pipeline | FR-011 |
+| `integration_complexity` | Enum | Optional | "low" \ | "medium" \ | "high" \ | "unknown" | Estimated effort to integrate with build/publish pipeline | FR-011 |
 | `notes` | String | Optional | Freeform | Additional evaluation comments, caveats, or risk factors | — |
 | `last_evaluated` | ISO 8601 Date | Optional | Date of most recent evaluation | — | FR-010 |
-| `evaluation*status` | Enum | Optional | "pending" \| "in*progress" \| "complete" \| "rejected" | Track evaluation workflow state | FR-012 |
+| `evaluation*status` | Enum | Optional | "pending" \ | "in*progress" \ | "complete" \ | "rejected" | Track evaluation workflow state | FR-012 |
 
 **Enums**:
 
@@ -330,12 +330,12 @@ detection, metadata completeness, format validation).
 **Attributes**:
 
 | Attribute | Type | Required? | Constraints | Notes | FR-Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | `id` | String (UUID or ID) | **Required** | Unique; auto-generated | Primary key for audit trail | — |
 | `asset_id` | String (FK) | **Required** | Must exist in Asset table | Asset being validated | FR-014, FR-015 |
-| `check*type` | Enum | **Required** | "visual*comparison" \| "broken*reference" \| "metadata*completeness" \| "format_validation" | Type of validation performed | FR-014, FR-015 |
-| `status` | Enum | **Required** | "pass" \| "fail" \| "partial" \| "unverifiable" | Validation outcome | FR-014, FR-015 |
-| `severity` | Enum | **Required** | "critical" \| "high" \| "low" | Impact of finding; gates on "critical" | FR-014 |
+| `check*type` | Enum | **Required** | "visual*comparison" \ | "broken*reference" \ | "metadata*completeness" \ | "format_validation" | Type of validation performed | FR-014, FR-015 |
+| `status` | Enum | **Required** | "pass" \ | "fail" \ | "partial" \ | "unverifiable" | Validation outcome | FR-014, FR-015 |
+| `severity` | Enum | **Required** | "critical" \ | "high" \ | "low" | Impact of finding; gates on "critical" | FR-014 |
 | `details` | String | **Required** | Freeform; descriptive | Specific finding; e.g. "visual degradation in JPEG conversion", "alt text missing", "broken reference to /assets/old-hero.png" | FR-014, FR-015 |
 | `recovery*note` | String | Optional | Freeform | Impact on asset's recovery*status or next steps | FR-014 |
 | `reference_evidence` | Array<String> | Optional | URLs or file paths | Links to original website, Figma, or repository for comparison | FR-014 |

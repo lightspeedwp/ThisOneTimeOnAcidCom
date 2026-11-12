@@ -136,7 +136,7 @@ CLOSED:                    OPEN:
 ### Color Palette (Approved)
 
 | Property | Light Theme | Dark Theme |
-|----------|-------------|-----------|
+| ---------- | ------------- | ----------- |
 | Primary Text | #1a1a1a | #ffffff |
 | Accent (hover/active) | #e8d4b8 | #d4a574 |
 | Backdrop Overlay | rgba(0,0,0,0.5) | rgba(0,0,0,0.7) |
@@ -144,7 +144,7 @@ CLOSED:                    OPEN:
 ### Responsive Breakpoints
 
 | Breakpoint | Width Range | Layout | Behavior |
-|-----------|-------------|--------|----------|
+| ----------- | ------------- | -------- | ---------- |
 | Desktop | ≥1024px | Horizontal menu | All links visible |
 | Tablet | 768-1023px | Horizontal menu | All links visible |
 | Mobile | <768px | Hamburger + drawer | Links hidden until toggled |
@@ -152,7 +152,7 @@ CLOSED:                    OPEN:
 ### Typography
 
 | Element | Font | Weight | Size | Color |
-|---------|------|--------|------|-------|
+| --------- | ------ | -------- | ------ | ------- |
 | Nav Link (default) | Inter | 400 | 16px | Primary |
 | Nav Link (hover) | Inter | 400 | 16px | Accent |
 | Nav Link (active) | Inter | 600 | 16px | Accent |

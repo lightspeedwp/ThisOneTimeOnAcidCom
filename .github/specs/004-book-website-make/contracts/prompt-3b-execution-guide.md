@@ -32,7 +32,7 @@ Design recovery flow specification documenting how readers regain access via pre
 **Options Under Review**:
 
 | Option | Behavior | Trade-off |
-|--------|----------|-----------|
+| -------- | ---------- | ----------- |
 | **A: Recovery Precedence** | Recovery takes priority; cancel fresh verification request | ✅ Better UX (fewer emails sent); ⚠️ Fresh code abandoned without warning |
 | **B: Verification Precedence** | Fresh verification takes priority; invalidate recovery attempt | ✅ Guarantees fresh code; ⚠️ May send unnecessary email |
 | **C: Last-Writer-Wins** | Whichever completes last (timestamp order) succeeds | ✅ Deterministic; ⚠️ User may see unexpected result |
@@ -48,7 +48,7 @@ Design recovery flow specification documenting how readers regain access via pre
 **Options Under Review**:
 
 | Option | Recovery Window | Rationale |
-|--------|-----------------|-----------|
+| -------- | ----------------- | ----------- |
 | **A: 30-day device lifecycle** | Full 30 days from initial verification | Aligns with policy; user expects consistent experience |
 | **B: 7-day rolling refresh** | 7 days, extends on each access | Balances security (refreshes token) with UX |
 | **C: Single session only** | Only within same calendar day (24 hours) | Most conservative; requires daily verification |
@@ -235,7 +235,7 @@ We found your previous access. You can:
 Create error message specification table:
 
 | Recovery Failure | Error Message | User Action | Fallback |
-|------------------|---------------|-------------|----------|
+| ------------------ | --------------- | ------------- | ---------- |
 | Session Expired | (Decision 2-based) | Click "Request New Code" | Email entry form |
 | Session Invalid | "Access Unavailable. Verify email to continue." | Click "Request New Code" | Email entry form |
 | Race Condition | (Decision 1-based) | (Decision 1-based) | (Decision 1-based) |

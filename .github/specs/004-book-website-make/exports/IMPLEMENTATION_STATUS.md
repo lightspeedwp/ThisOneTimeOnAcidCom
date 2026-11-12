@@ -125,7 +125,7 @@ This specification is now **ready to proceed to the approval workflow** (Approva
 ## 📊 Specification Metrics
 
 | Metric | Value |
-|--------|-------|
+| -------- | ------- |
 | Lines of Specification | 1,654 |
 | User Stories | 4 (P1: 3, P2: 1) |
 | Functional Requirements | 10 |

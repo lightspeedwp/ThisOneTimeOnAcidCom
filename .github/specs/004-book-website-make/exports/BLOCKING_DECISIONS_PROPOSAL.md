@@ -170,7 +170,7 @@ This document records the final decisions for all 7 blocking decisions, approved
 ## Summary Table: Approved Decisions
 
 | # | Decision | Selection | Status | Impact |
-|---|----------|-----------|--------|--------|
+| --- | ---------- | ----------- | -------- | -------- |
 | 1 | Recovery-first race | **Option A** (recovery priority) | ✅ APPROVED | Unblocks Prompt 3B |
 | 2 | Recovery lifetime | **Option A** (30-day rolling) | ✅ APPROVED | Unblocks Prompt 3B |
 | 3 | Code expiry timing | **Option A** (from generation) | ✅ APPROVED | Unblocks Prompts 3A, 3C |

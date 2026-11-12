@@ -148,7 +148,7 @@ You received this because you requested reading access. [Newsletter Signup Link 
 ### Color Palette (From Prompt 2A Baseline)
 
 | Property | Light Theme | Dark Theme |
-|----------|-------------|-----------|
+| ---------- | ------------- | ----------- |
 | Primary Text | #1a1a1a | #ffffff |
 | Secondary Text | #666666 | #cccccc |
 | Neutral Light | #f5f5f5 | #333333 |
@@ -161,7 +161,7 @@ You received this because you requested reading access. [Newsletter Signup Link 
 ### Typography (From Prompt 2A Baseline)
 
 | Element | Font | Weight | Size |
-|---------|------|--------|------|
+| --------- | ------ | -------- | ------ |
 | Label | Inter | 500 | 14px |
 | Input/Placeholder | Inter | 400 | 14px |
 | Help text | Inter | 400 | 12px |
@@ -171,7 +171,7 @@ You received this because you requested reading access. [Newsletter Signup Link 
 ### Form Input Styling
 
 | Property | Light Theme | Dark Theme |
-|----------|-------------|-----------|
+| ---------- | ------------- | ----------- |
 | Background | #ffffff | #1a1a1a |
 | Border (default) | #cccccc | #444444 |
 | Border (focused) | #e8d4b8 | #d4a574 |

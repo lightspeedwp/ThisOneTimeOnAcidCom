@@ -66,7 +66,7 @@ Spec 004 has successfully resolved all 4 critical blockers identified in the aud
 All contract files now reference the canonical document location:
 
 | Document | Previous Path | New Path |
-|----------|---------------|----------|
+| ---------- | --------------- | ---------- |
 | Design Brief | `content/book/04-design-brief.md` | `.github/specs/004-book-website-make/references/04-design-brief.md` |
 | Design Register | `content/book/05-design-reader-decision-register.md` | `.github/specs/004-book-website-make/references/05-design-reader-decision-register.md` |
 | Reading PRD | `content/book/06-website-reading-prd.md` | `.github/specs/004-book-website-make/references/06-website-reading-prd.md` |
@@ -85,7 +85,7 @@ All contract files now reference the canonical document location:
 ### Design Baseline Requirements
 
 | Criterion | Status | Evidence |
-|-----------|--------|----------|
+| ----------- | -------- | ---------- |
 | **Typography Approved** | ✅ PASS | Space Grotesk (headings: 600, 700; 24-48px) + Inter (body/UI: 400-600; 12-18px) |
 | **Color Palette Approved** | ✅ PASS | 9-color palette: #0B0B10, #12121A, #171722, #F6F2EB, #CFC7BB, #9C9488, #FF3AAE, #F4FF3C, #8A63FF |
 | **Unapproved Candidates Excluded** | ✅ PASS | R3, T1, RT2, C1 explicitly listed as NOT included |
@@ -136,7 +136,7 @@ All contract files now reference the canonical document location:
 ## Quality Assurance Checklist
 
 | Item | Status | Notes |
-|------|--------|-------|
+| ------ | -------- | ------- |
 | All 4 critical issues resolved | ✅ PASS | Color palette, blocking status, references, decision clarity |
 | Contracts internally consistent | ✅ PASS | No conflicting color values or reference paths |
 | Design baseline matches approved spec | ✅ PASS | Typography and palette align with Design Brief v1.1.2 |

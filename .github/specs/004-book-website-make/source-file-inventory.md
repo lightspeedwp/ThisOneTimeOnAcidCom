@@ -11,7 +11,7 @@
 Complete documentation of six specification files from `content/book/` directory that serve as authoritative sources for the Figma Make prompt pack feature.
 
 | File ID | Document Name | Current Version | Status | Recency | Evidence |
-|---------|---------------|-----------------|--------|---------|----------|
+| --------- | --------------- | ----------------- | -------- | --------- | ---------- |
 | **01** | Book Website Figma Make specification and prompt pack | v1.0.0 | ✓ CURRENT | 2026-11-09 | Master execution contract |
 | **02** | Figma Make companion session plan | v1.0.4 | ✓ CURRENT | 2026-11-09 | Companion planning document |
 | **03** | Book website brief — author decisions and launch scope | v1.3.0 | ✓ CURRENT | 2026-11-09 | Scope and author decisions |
@@ -211,7 +211,7 @@ Complete documentation of six specification files from `content/book/` directory
 **Application**:
 
 | Topic | File 01 | File 02 | File 03 | File 04 | File 05 | File 06 | Winner | Rationale |
-|-------|---------|---------|---------|---------|---------|---------|--------|-----------|
+| ------- | --------- | --------- | --------- | --------- | --------- | --------- | -------- | ----------- |
 | **Design Baseline** | Reference | Reference | Reference | v1.1.2 | v1.9.0 | v1.1.1 | **File 04/05** | File 04 is specification authority; File 05 is most current (v1.9.0) confirmation |
 | **Reader Access Policy** | Framework | Reference | Scope | Reference | v1.9.0 | v1.1.1 | **File 05** | v1.9.0 (current) vs v1.1.1 (5 days old) |
 | **Navigation Exposure** | Staging | Proposal | **v1.3.0 Decisions** | Reference | v1.9.0 | Reference | **File 03** | Author decisions are authoritative; File 05 confirms (v1.9.0) |
@@ -220,7 +220,7 @@ Complete documentation of six specification files from `content/book/` directory
 ### Conflicts Identified
 
 | Conflict | Files Involved | Resolution | Impact |
-|----------|----------------|-----------|--------|
+| ---------- | ---------------- | ----------- | -------- |
 | **Version Age (File 06)** | File 06 (v1.1.1, 2026-11-04) vs Files 01/02/03/05 (2026-11-09) | File 05 (v1.9.0) takes precedence per SemVer rule | Low impact; File 06 marked as provisional draft; recommendations for v1.2.0 update noted |
 | **Reader Access Details** | File 02 (companion plan) vs File 05 (decision register) | File 05 (v1.9.0, most current) authoritative | Low impact; File 02 is companion planning, not authoritative |
 | **Scope Specification** | File 03 (v1.3.0 author decisions) vs File 06 (v1.1.1 scope) | File 03 (newer) takes precedence for scope decisions | Low impact; File 06 is provisional draft; File 03 reflects latest author decisions (27 Oct, 3 Nov 2026) |
@@ -232,7 +232,7 @@ Complete documentation of six specification files from `content/book/` directory
 ## Timestamps & File Tracking
 
 | File | Created | Last Revised | Age (days) | Recency Status |
-|------|---------|--------------|-----------|----------------|
+| ------ | --------- | -------------- | ----------- | ---------------- |
 | 01-book-website-specification.md | Unknown | 2026-11-09 | Current | ✓ Current (today) |
 | 02-companion-session-plan.md | Unknown | 2026-11-09 | Current | ✓ Current (today) |
 | 03-author-decisions-launch-scope.md | Unknown | 2026-11-09 | Current | ✓ Current (today) |
@@ -247,7 +247,7 @@ Complete documentation of six specification files from `content/book/` directory
 ## Authority Matrix
 
 | File | Primary Authority | Secondary Authority | Use Case | Precedence |
-|------|-------------------|---------------------|----------|-----------|
+| ------ | ------------------- | --------------------- | ---------- | ----------- |
 | **01** | Ash (author) | Specification author | Master execution contract | Highest (orchestrates all prompts) |
 | **02** | Planning team | Ash | Companion session planning | Supporting (complements File 01) |
 | **03** | Ash (author decisions) | Scope team | Launch scope definition | Authoritative (author decisions) |
@@ -285,7 +285,7 @@ File 05 (Decision Register) ← AUTHORITATIVE CURRENT SOURCE
 ## Inventory Compliance (FR-001)
 
 | Requirement | Status | Evidence | Notes |
-|-------------|--------|----------|-------|
+| ------------- | -------- | ---------- | ------- |
 | All 6 source files analyzed | ✓ | Detailed file records above (01–06) | Complete |
 | Versions extracted | ✓ | Version column: v1.0.0, v1.0.4, v1.3.0, v1.1.2, v1.9.0, v1.1.1 | All versions documented |
 | Update timestamps documented | ✓ | Last Revised column: dates range 2026-11-04 to 2026-11-09 | Complete timestamp audit |

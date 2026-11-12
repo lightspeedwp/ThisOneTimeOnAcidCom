@@ -11,7 +11,7 @@
 Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unblocked and ready to execute immediately**. Three are **blocked by pending user decisions**.
 
 | Phase | Prompts | Status |
-|-------|---------|--------|
+| ------- | --------- | -------- |
 | **Phase A: Unblocked** | Prompts 1, 2A, 2B | ✅ Ready to Execute |
 | **Phase B: Blocked** | Prompts 3A, 3B, 3C | ⏳ Awaiting Decisions |
 
@@ -121,7 +121,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 **Blocking Decisions**:
 
 | Decision | Question | Options | Impact |
-|----------|----------|---------|--------|
+| ---------- | ---------- | --------- | -------- |
 | **3** | Code expiry start time | A: from generation<br>B: from receipt<br>C: from page load | Determines error messaging ("Code expired. [timing message].") |
 | **4** | Email service provider | A–D: Selection required | Affects template syntax and capabilities |
 | **5** | Manuscript publication readiness | A–C: Selection required | Affects confirmation messaging (when book is available for reading) |
@@ -161,7 +161,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 **Blocking Decisions**:
 
 | Decision | Question | Options | Impact |
-|----------|----------|---------|--------|
+| ---------- | ---------- | --------- | -------- |
 | **1** | Recovery-first race condition | A: Recovery takes precedence<br>B: Fresh verification first<br>C: Last-writer-wins<br>D: User chooses | Determines conflict resolution when recovery and fresh verification race |
 | **2** | Recovery lifetime eligibility | A–C: Selection required | Determines how long a recovery code remains valid and when session validation occurs |
 
@@ -199,7 +199,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 **Blocking Decision**:
 
 | Decision | Question | Options | Impact |
-|----------|----------|---------|--------|
+| ---------- | ---------- | --------- | -------- |
 | **3** | Code expiry start time | A: from generation<br>B: from receipt<br>C: from page load | Determines exact code-expiry error message wording |
 
 **What CAN Proceed Without Decision 3**:

@@ -26,7 +26,7 @@ Each blocking decision MUST have:
 **Completeness Audit**:
 
 | Element | Required | Present | Evidence | ✓ |
-|---------|----------|---------|----------|---|
+| --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "What happens if both recovery and fresh verification occur simultaneously?" | ✓ |
 | Rationale | ✓ | ✓ | Reader access policy allows two paths; race condition exists if both triggered | ✓ |
 | Option Count | ✓ (3+) | ✓ (4 options) | A (Recovery priority), B (Fresh priority), C (Last-writer-wins), D (User choice) | ✓ |
@@ -45,7 +45,7 @@ Each blocking decision MUST have:
 **Completeness Audit**:
 
 | Element | Required | Present | Evidence | ✓ |
-|---------|----------|---------|----------|---|
+| --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "How long is a confirmed redemption eligible for recovery access?" | ✓ |
 | Rationale | ✓ | ✓ | Recovery lifetime determines session expiry; affects renewal before expiration | ✓ |
 | Option Count | ✓ (3+) | ✓ (4 options) | A (30-day rolling), B (30-day fixed), C (No expiry), D (Configurable) | ✓ |
@@ -64,7 +64,7 @@ Each blocking decision MUST have:
 **Completeness Audit**:
 
 | Element | Required | Present | Evidence | ✓ |
-|---------|----------|---------|----------|---|
+| --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "When does a 10-minute verification code expiry clock start?" | ✓ |
 | Rationale | ✓ | ✓ | Start point ambiguous: generation vs. receipt vs. page load; affects UX/security/error messaging | ✓ |
 | Option Count | ✓ (3+) | ✓ (3 options) | A (Generation), B (Receipt), C (Page load) | ✓ |
@@ -83,7 +83,7 @@ Each blocking decision MUST have:
 **Completeness Audit**:
 
 | Element | Required | Present | Evidence | ✓ |
-|---------|----------|---------|----------|---|
+| --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "Which email service provider will handle verification code delivery?" | ✓ |
 | Rationale | ✓ | ✓ | Provider choice affects API capabilities, rate limits, deliverability, newsletter integration, complexity | ✓ |
 | Option Count | ✓ (3+) | ✓ (4 options) | A (Brevo), B (SendGrid), C (Mailgun), D (Other: AWS SES, Postmark, etc.) | ✓ |
@@ -102,7 +102,7 @@ Each blocking decision MUST have:
 **Completeness Audit**:
 
 | Element | Required | Present | Evidence | ✓ |
-|---------|----------|---------|----------|---|
+| --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "Is the manuscript approved and available for verified reader access?" | ✓ |
 | Rationale | ✓ | ✓ | Manuscript availability status unknown; implementation cannot proceed without confirmation | ✓ |
 | Option Count | ✓ (3+) | ✓ (3 options) | A (Approved & available), B (Approved but not formatted), C (Not approved) | ✓ |
@@ -121,7 +121,7 @@ Each blocking decision MUST have:
 **Completeness Audit**:
 
 | Element | Required | Present | Evidence | ✓ |
-|---------|----------|---------|----------|---|
+| --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "Where does \"Sign up for newsletter\" link direct?" | ✓ |
 | Rationale | ✓ | ✓ | Newsletter signup is separate from reading verification; destination (inline/external/separate/none) unspecified | ✓ |
 | Option Count | ✓ (3+) | ✓ (4 options) | A (Inline form), B (External link), C (Separate form), D (No link) | ✓ |
@@ -140,7 +140,7 @@ Each blocking decision MUST have:
 **Completeness Audit**:
 
 | Element | Required | Present | Evidence | ✓ |
-|---------|----------|---------|----------|---|
+| --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "How is sitemap/noindex enforcement verified for /speaking, /events, /media routes?" | ✓ |
 | Rationale | ✓ | ✓ | Verification method and enforcement mechanism unspecified (robots.txt vs. sitemap vs. meta tags) | ✓ |
 | Option Count | ✓ (3+) | ✓ (4 options) | A (Meta + Robots.txt + Sitemap), B (Robots.txt only), C (Meta tags only), D (Sitemap only) | ✓ |
@@ -155,7 +155,7 @@ Each blocking decision MUST have:
 ## Summary: All 7 Blocking Decisions Validation
 
 | # | Decision | Status | Option Count | Impact Documented | Trade-offs Clear | Validation Result |
-|---|----------|--------|---------------|-------------------|------------------|-------------------|
+| --- | ---------- | -------- | --------------- | ------------------- | ------------------ | ------------------- |
 | 1 | Recovery-first race | PENDING | 4 options (A/B/C/D) | ✓ Prompt 3B | ✓ Comprehensive | ✅ PASS |
 | 2 | Recovery lifetime | PENDING | 4 options (A/B/C/D) | ✓ Prompt 3B state | ✓ Security/UX trade-offs | ✅ PASS |
 | 3 | Code expiry start | PENDING | 3 options (A/B/C) | ✓ Prompts 3A & 3C | ✓ Timing/security | ✅ PASS |
@@ -180,7 +180,7 @@ Each blocking decision MUST have:
 **User Decision Points** (awaiting selection):
 
 | Decision | Impact on Prompts | User Action Required | Reference |
-|----------|-------------------|----------------------|-----------|
+| ---------- | ------------------- | ---------------------- | ----------- |
 | ❌ 1 Recovery-first race | Prompt 3B (recovery flows) | Select A/B/C/D (4 options) | research.md Decision 1 |
 | ❌ 2 Recovery lifetime | Prompt 3B (session state) | Select A/B/C/D (4 options) | research.md Decision 2 |
 | ❌ 3 Code expiry start | Prompts 3A/3C (timing/errors) | Select A/B/C (3 options) | research.md Decision 3 |

@@ -9,7 +9,7 @@
 ## Completeness Scoring Rubric
 
 | Score Range | Rating | Status | Definition |
-|-------------|--------|--------|-----------|
+| ------------- | -------- | -------- | ----------- |
 | 95–100% | ✅ COMPLETE | Pass | All core elements present; minor placeholder text acceptable (e.g., "Decision X selection pending") |
 | 85–94% | ⚠️ PARTIAL | Review | Major sections present; some acceptance criteria incomplete; blockers identified |
 | <85% | ❌ INCOMPLETE | Fail | Fundamental sections missing; cannot execute; requires rework |
@@ -26,7 +26,7 @@
 ### Completeness Audit
 
 | Element | Required | Present | Evidence | Score |
-|---------|----------|---------|----------|-------|
+| --------- | ---------- | --------- | ---------- | ------- |
 | **Goal & Purpose** | ✓ | ✓ | "Update book website navigation to hide Speaking, Events, Media..." | ✓ |
 | **Before/After Structure** | ✓ | ✓ | Section 1 diagrams navigation before (7 items) and after (4 items) | ✓ |
 | **Numbered Implementation Steps** | ✓ | ✓ | Section 2: 14 sequential steps (Phases A/B/C) with exact file references | ✓ |
@@ -50,7 +50,7 @@
 ### Completeness Audit
 
 | Element | Required | Present | Evidence | Score |
-|---------|----------|---------|----------|-------|
+| --------- | ---------- | --------- | ---------- | ------- |
 | **Goal & Purpose** | ✓ | ✓ | "Export design-system baseline (typography, colors, components) as CSS variables or design-token file" | ✓ |
 | **Approved Baseline** | ✓ | ✓ | Typography (Space Grotesk/Inter) + Colors (9-color palette × 2 themes) + Components (5 listed) | ✓ |
 | **Exact Export Formats** | ✓ | ✓ | Specifies CSS variables file (tokens.css) AND design-token JSON format (dual export per SC-003) | ✓ |
@@ -76,7 +76,7 @@
 ### Completeness Audit
 
 | Element | Required | Present | Evidence | Score |
-|---------|----------|---------|----------|-------|
+| --------- | ---------- | --------- | ---------- | ------- |
 | **Goal & Purpose** | ✓ | ✓ | "Generate exact navigation component design with all states (default, hover, active, mobile)" | ✓ |
 | **Visible Navigation Items** | ✓ | ✓ | Home, About, Book, Contact (4 items, post-Prompt-1 state) | ✓ |
 | **Component States** | ✓ | ✓ | Desktop, Tablet, Mobile with specific states (default, hover, active) | ✓ |
@@ -102,7 +102,7 @@
 ### Completeness Audit
 
 | Element | Required | Present | Evidence | Score |
-|---------|----------|---------|----------|-------|
+| --------- | ---------- | --------- | ---------- | ------- |
 | **Goal & Purpose** | ✓ | ✓ | "Generate exact email verification copy, form wording, error messages, newsletter CTA" | ✓ |
 | **Email Template** | ✓ | ✓ | Subject, body, footer all specified with exact copy (Decision 3 placeholder for expiry timing) | ✓ |
 | **Email Entry Form** | ✓ | ✓ | Label, placeholder, button, help text, error state all documented | ✓ |
@@ -126,7 +126,7 @@
 ## Summary: All Unblocked Prompts Completeness
 
 | Prompt | File | Completeness | Status | Ready for Figma Make | Blockers |
-|--------|------|-------------|--------|--------------------|-|
+| -------- | ------ | ------------- | -------- | -------------------- | - |
 | **Prompt 1** | prompt-1-exact-preview.md | 100% | ✅ PASS | ✅ YES | Decision 7 (Route Enforcement) |
 | **Prompt 2A** | prompt-2a-design-baseline.md | ~89% | ⚠️ ACCEPTABLE | ✅ YES | None (CSS + JSON export ready) |
 | **Prompt 2B** | prompt-2b-navigation-design.md | 100% | ✅ PASS | ✅ YES | None (depends on Prompt 1) |
@@ -145,7 +145,7 @@
 ## Blocked Prompts (For Reference)
 
 | Prompt | File | Status | Blocking Decisions |
-|--------|------|--------|-------------------|
+| -------- | ------ | -------- | ------------------- |
 | **Prompt 3B** | prompt-3b-recovery-flows.md | ❌ BLOCKED | Decision 1, Decision 2 |
 | **Prompt 3C** | prompt-3c-error-states.md | ❌ BLOCKED | Decision 3 (partial) |
 
