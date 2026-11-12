@@ -12,6 +12,14 @@
 
 Provide truthful, secure access to the complete shorter website edition after server-authorised email verification. Newsletter consent remains separate and optional.
 
+## Clarifications
+
+Answers below are Ash's selected directions. They do not approve implementation, provider selection, publication or deployment.
+
+### Session 2026-11-12
+
+- Q: Where should the server-side check that a reader has verified their email run, given the site is a static app hosted on Netlify? → A: Netlify Functions on the existing host issue and check codes and serve protected chapters (Option A).
+
 ## Scope
 
 Email and code forms, delivery copy, verification, expiry, recovery, renewal, revocation, sign-out, session lifetime, error states, separate newsletter consent, provider and manuscript dependencies, and reconciliation of the six 004 reader-access contracts.
@@ -20,7 +28,7 @@ Exclude podcast work, theme/style-guide/navigation work, indexing, manuscript re
 
 ## Requirements
 
-- RA-001: Only valid server-authorised verified-email access may read the website edition or direct chapter URLs.
+- RA-001: Only valid server-authorised verified-email access may read the website edition or direct chapter URLs. Selected direction: authorisation, code issue/verification and protected chapter delivery run in Netlify Functions on the existing host; protected content is not included in the static bundle. Supabase remains excluded.
 - RA-002: Codes are emailed, single-use and invalid after consumption or expiry.
 - RA-003: The ten-minute policy is recorded; its authoritative start event and mechanics remain unresolved.
 - RA-004: Returning access is device/profile-scoped and ends on sign-out, revocation, storage clearance or approved expiry; new devices require reverification.
