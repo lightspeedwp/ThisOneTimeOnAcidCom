@@ -21,6 +21,7 @@ Answers below are Ash's selected directions. They do not approve implementation,
 - Q: Where should the server-side check that a reader has verified their email run, given the site is a static app hosted on Netlify? → A: Netlify Functions on the existing host issue and check codes and serve protected chapters (Option A).
 - Q: When does a code's ten-minute validity start? → A: When the Netlify Function creates the code; visitor wording says "within 10 minutes of requesting it" (Option A).
 - Q: Should returning access have an overall time limit across renewals? → A: No overall limit; each fresh-code renewal allows up to 30 days and may repeat without a ceiling (Option A).
+- Q: If a reader's earlier sign-in is recovered while they are also requesting a new code, should the new-code request carry on without disturbing the recovered session? → A: Yes; the new-code request continues, the recovered session is kept and finishing the new code is optional (Option A; confirms the Linear v1.13.0 selection in the repository).
 
 ## Scope
 
@@ -38,7 +39,7 @@ Exclude podcast work, theme/style-guide/navigation work, indexing, manuscript re
 - RA-006: Access records contain only necessary email, verification status, internal ID and lifecycle timestamps; delete after twelve months without authenticated use. Provider logs/backups remain separate.
 - RA-007: Newsletter signup is separate, optional and independently consented.
 - RA-008: Feedback distinguishes pending, receipt, delivery uncertainty, verified access, invalid, expired, used, limited, provider-failure and unavailable-content states.
-- RA-009: Recovery, renewal and concurrent redemption preserve authorised sessions and prevent duplicate effects.
+- RA-009: Recovery, renewal and concurrent redemption preserve authorised sessions and prevent duplicate effects. When matching recovery establishes a session first, a competing fresh-code request continues without ending that session and the reader may choose not to finish it. Recovery duration, start event, linked-tab identity and uncertain-outcome handling remain unresolved.
 - RA-010: Manuscript availability requires an approved edition manifest, source revisions, rights, credits and publication approval.
 - RA-011: Historical 004 identifiers and reviewer markers remain source-qualified and unchanged.
 - RA-012: Every implementation stage requires an exact preview, approval, fresh baseline, bounded path check, read-back and evidence.
@@ -49,7 +50,7 @@ Given a reader requests a code and submits the current code before authoritative
 
 Given a submission, delivery or thank-you page occurs without verification, when feedback is shown, then it does not claim access or subscription.
 
-Given matching recovery succeeds first during competing fresh verification, then the fresh request continues without disrupting recovery; completion remains optional.
+Given matching recovery succeeds first during competing fresh verification, then the fresh request continues without disrupting recovery; completion remains optional. (Confirmed by Ash in Clarifications 2026-11-12.)
 
 Given recovery is absent, invalid, revoked, expired or uncertain, then the system falls back to fresh verification without guessing.
 
