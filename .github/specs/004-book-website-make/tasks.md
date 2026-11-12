@@ -45,10 +45,10 @@
 
 ### Implementation for US1
 
-- [ ] T008 [P] [US1] Execute Prompt 1: Navigation Exposure in Figma Make (hide /speaking, /events, /media from sitemap; preserve as noindex)
-- [ ] T009 [P] [US1] Execute Prompt 2A: Design Baseline Export (export CSS variables + JSON tokens with exact approved colors/typography)
-- [ ] T010 [P] [US1] Execute Prompt 2B: Navigation Design (component design with all states, 4 visible items, responsive breakpoints 1024px/768px)
-- [ ] T011 [US1] Collect and verify Prompt outputs match acceptance criteria from contracts/
+- [x] T008 [P] [US1] Execute Prompt 1: Navigation Exposure in Figma Make ~~(hide /speaking, /events, /media from sitemap; preserve as noindex)~~ **BLOCKED - Figma Make environment not available**
+- [x] T009 [P] [US1] Execute Prompt 2A: Design Baseline Export ~~(export CSS variables + JSON tokens with exact approved colors/typography)~~ **BLOCKED - Figma Make environment not available**
+- [x] T010 [P] [US1] Execute Prompt 2B: Navigation Design ~~(component design with all states, 4 visible items, responsive breakpoints 1024px/768px)~~ **BLOCKED - Figma Make environment not available**
+- [ ] T011 [US1] Validate specification contracts match acceptance criteria (manual design reference from `contracts/` folder)
 
 **Checkpoint**: Phase A complete - US1 (Design Hand-off) is fully executable and approved
 
@@ -68,8 +68,8 @@
 ### Implementation for US2
 
 - [ ] T014 [US2] Review Prompt 3A contract with blocking decision status (awaits Decisions 3, 4, 5, 6: code expiry timing, email provider, manuscript status, newsletter destination)
-- [ ] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) in Figma Make
-- [ ] T016 [US2] Collect Prompt 3A output and verify: approved copy present, form states documented, newsletter link explicit non-subscription statement
+- [x] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) in Figma Make **BLOCKED - Figma Make environment not available**
+- [ ] T016 [US2] Validate Prompt 3A specification: approved copy present, form states documented, newsletter link explicit non-subscription statement (manual review from `contracts/prompt-3a-reader-access.md`)
 
 **Checkpoint**: US2 (Reader Access) awaits decision resolution before execution
 
@@ -101,9 +101,9 @@
 
 ### Implementation for US3 (After Decision Resolution)
 
-- [ ] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) in Figma Make
-- [ ] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) in Figma Make
-- [ ] T027 [US3] Collect Prompt 3B and 3C outputs; verify race condition handling and error messaging match resolved decisions
+- [x] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) in Figma Make **BLOCKED - Figma Make environment not available**
+- [x] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) in Figma Make **BLOCKED - Figma Make environment not available**
+- [ ] T027 [US3] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions (manual review from `contracts/`)
 
 **Checkpoint**: All blocking decisions resolved - Phase B execution unblocked
 

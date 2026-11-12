@@ -197,3 +197,32 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 1. ✅ All Prompts (1, 2A, 2B, 3A, 3B, 3C) now unblocked and ready for Figma Make execution
 2. ✅ Prompt 3A uses placeholder messaging for manuscript content until approved
 3. ✅ Proceed to Figma Make execution phase with all decisions locked in
+
+---
+
+## Implementation Constraint: Figma Make Environment Access
+
+**Decision Point** (2026-11-12): Will Figma Make environment (file key, API token, workspace) be used to execute prompts and export design assets?
+
+**Decision**: ❌ **NO** — Figma Make environment will NOT be used for asset exports.
+
+**Impact**:
+- **Blocked Tasks**: T008, T009, T010 (Prompt 1, 2A, 2B execution in Figma Make)
+- **Blocked Tasks**: T015, T025, T026 (Prompt 3A, 3B, 3C execution)
+- **Phase A Status**: Design hand-off prompts cannot be executed via Figma Make
+- **Phase B Status**: Reader access and recovery flow prompts cannot be executed via Figma Make
+- **Implementation Path**: Prompts exist as exact specifications in `contracts/` folder; manual Figma design work or alternative execution path required
+
+**Revised Workflow**:
+1. ✅ Gate 2 approval (T001-T004) — Design baseline confirmed
+2. ✅ Specification validation (T005-T007, T012-T013, T017-T018) — Contract review only
+3. ❌ **SKIPPED**: Figma Make prompt execution (T008-T010, T015, T025-T026)
+4. ✅ Decision resolution (T019-T024) — Proceeds independently
+5. ✅ Documentation packaging (T028-T034) — Specifications ready for alternative execution
+6. ✅ Polish & validation (T035-T038) — Cross-cutting checks
+
+**Alternative Execution Path**:
+- Prompt specifications in `contracts/` are ready for manual Figma design work
+- Exact previews can be generated manually by design team
+- Design team references contracts/ for exact component names, states, acceptance criteria
+- No automated Figma Make execution path available
