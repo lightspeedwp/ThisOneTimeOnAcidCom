@@ -22,6 +22,7 @@ Answers below are Ash's selected directions. They do not approve implementation,
 - Q: When does a code's ten-minute validity start? → A: When the Netlify Function creates the code; visitor wording says "within 10 minutes of requesting it" (Option A).
 - Q: Should returning access have an overall time limit across renewals? → A: No overall limit; each fresh-code renewal allows up to 30 days and may repeat without a ceiling (Option A).
 - Q: If a reader's earlier sign-in is recovered while they are also requesting a new code, should the new-code request carry on without disturbing the recovered session? → A: Yes; the new-code request continues, the recovered session is kept and finishing the new code is optional (Option A; confirms the Linear v1.13.0 selection in the repository).
+- Q: How many wrong guesses should a reader get on one code before it stops working and they must request a new one? → A: Six-digit code; 5 wrong attempts, then the code stops working (Option A).
 
 ## Scope
 
@@ -32,13 +33,13 @@ Exclude podcast work, theme/style-guide/navigation work, indexing, manuscript re
 ## Requirements
 
 - RA-001: Only valid server-authorised verified-email access may read the website edition or direct chapter URLs. Selected direction: authorisation, code issue/verification and protected chapter delivery run in Netlify Functions on the existing host; protected content is not included in the static bundle. Supabase remains excluded.
-- RA-002: Codes are emailed, single-use and invalid after consumption or expiry.
+- RA-002: Codes are six-digit, emailed, single-use and invalid after consumption, expiry or the fifth wrong attempt; the reader must then request a new code. Resend cooldown and per-email/per-network request limits remain unresolved.
 - RA-003: A code expires ten minutes after the Netlify Function creates it; that server-recorded creation time is the authoritative start event. Visitor wording must say "within 10 minutes of requesting it" and must not imply ten minutes from email receipt. Resend, attempt and rate mechanics remain unresolved.
 - RA-004: Returning access is device/profile-scoped and ends on sign-out, revocation, storage clearance or approved expiry; new devices require reverification. Each successful fresh-code verification or renewal grants up to thirty days on that device/profile; renewals may repeat with no overall ceiling. The exact duration within that thirty-day limit remains unresolved.
 - RA-005: Browser credentials contain no email; sign-out invalidates server access.
 - RA-006: Access records contain only necessary email, verification status, internal ID and lifecycle timestamps; delete after twelve months without authenticated use. Provider logs/backups remain separate.
 - RA-007: Newsletter signup is separate, optional and independently consented.
-- RA-008: Feedback distinguishes pending, receipt, delivery uncertainty, verified access, invalid, expired, used, limited, provider-failure and unavailable-content states.
+- RA-008: Feedback distinguishes pending, receipt, delivery uncertainty, verified access, invalid, expired, used, limited, provider-failure and unavailable-content states. "Limited" covers a code stopped after five wrong attempts and any request limit once decided.
 - RA-009: Recovery, renewal and concurrent redemption preserve authorised sessions and prevent duplicate effects. When matching recovery establishes a session first, a competing fresh-code request continues without ending that session and the reader may choose not to finish it. Recovery duration, start event, linked-tab identity and uncertain-outcome handling remain unresolved.
 - RA-010: Manuscript availability requires an approved edition manifest, source revisions, rights, credits and publication approval.
 - RA-011: Historical 004 identifiers and reviewer markers remain source-qualified and unchanged.
