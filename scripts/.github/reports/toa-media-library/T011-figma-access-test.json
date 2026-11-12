@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-11-12T19:47:45.241Z",
+  "tests": [
+    {
+      "name": "Authentication (GET /v1/me)",
+      "status": "FAIL",
+      "error": "Unexpected status 401"
+    },
+    {
+      "name": "Make Project Access (GET /v1/files/{fileKey})",
+      "status": "FAIL",
+      "error": "Unexpected status 403: Unknown error"
+    },
+    {
+      "name": "Asset Node Fetch (GET /v1/files/{fileKey}/nodes)",
+      "status": "FAIL",
+      "error": "Unexpected status 403"
+    },
+    {
+      "name": "Asset Export (GET /v1/files/{fileKey}/images)",
+      "status": "FAIL",
+      "error": "Unexpected status 401: Token has expired"
+    },
+    {
+      "name": "Rate Limiting Analysis",
+      "status": "PASS",
+      "details": {
+        "requestsSuccessful": 0,
+        "avgResponseTime": 106,
+        "rateLimitInfo": {}
+      }
+    }
+  ],
+  "metrics": {
+    "totalRequests": 7,
+    "successfulRequests": 0,
+    "failedRequests": 4,
+    "totalResponseTime": 784,
+    "avgResponseTime": 112
+  },
+  "errors": [
+    "Authentication failed: Unexpected status 401",
+    "Make project access failed: Unexpected status 403: Unknown error",
+    "Asset node fetch failed: Unexpected status 403",
+    "Asset export test failed: Unexpected status 401: Token has expired"
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 4,
+    "skipped": 0
+  },
+  "extraction": {
+    "avgApiResponseTime": 112,
+    "estimatedPerAsset": 612,
+    "totalPhase2Estimate": {
+      "56-assets": "1 minutes",
+      "10-assets-pilot": "0 minutes"
+    }
+  }
+}
