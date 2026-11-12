@@ -1,53 +1,263 @@
 # Tasks: Book Website Figma Make Prompt Pack
 
-**Feature**: Documentation-only specification package with staged Figma Make prompts  
-**Spec Directory**: `.github/specs/004-book-website-make/`  
-**Branch**: `docs/book-website-make-spec`  
-**Created**: 2026-11-09  
-**Input**: Design documents from `.github/specs/004-book-website-make/` (spec.md, plan.md, research.md, data-model.md, quickstart.md, contracts/)
+**Input**: Design documents from `.github/specs/004-book-website-make/`
 
-**Prerequisites**: spec.md (required), plan.md (required), research.md, data-model.md, contracts/, quickstart.md
+**Prerequisites**: `spec.md` (requirements), `plan.md` (tech approach), `PROMPT_EXECUTION_PLAN.md` (phase roadmap), `GATE_2_SIGN_OFF_SUMMARY.md` (approval checklist)
 
-**Tests**: No automated tests requested. Validation is manual review against acceptance criteria and approval gates.
+**Deliverable**: Exact Figma Make prompts (Prompts 1, 2A, 2B, 3A unblocked; Prompts 3B, 3C blocked pending decisions); zero code, zero commits, zero deployments
 
-**Organization**: Tasks organized by user story to enable independent documentation, approval, and Figma Make execution.
+**Organization**: Tasks organized by user story (4 stories from spec.md) + decision resolution + execution phases
 
 ---
 
-## Format: `[TaskID] [P?] [Story] Description`
+## Format: `[ID] [P?] [Story] Description`
 
-- **[P]**: Can run in parallel (different concerns, no dependencies)
-- **[Story]**: Which user story this task belongs to (US1, US2, US3, US4)
-- File paths included in all descriptions
-
----
-
-## Phase 1: Setup & Initialization
-
-**Purpose**: Project documentation readiness and artifact validation
-
-- [ ] T001 Confirm all design documents exist in `.github/specs/004-book-website-make/`: spec.md, plan.md, research.md, data-model.md, quickstart.md, contracts/
-- [ ] T002 Validate .specify/feature.json persists feature directory reference: `.github/specs/004-book-website-make`
-- [ ] T003 Verify constitution.md governance principles align with feature constraints in plan.md
-- [ ] T004 Confirm branch `docs/book-website-make-spec` is checked out and `npm run validate:branch-name` passes
+- **[P]**: Can run in parallel (independent workflows, different decision owners)
+- **[Story]**: Which user story (US1, US2, US3, US4)
+- **File paths**: All contracts/ and prompt specifications referenced
 
 ---
 
-## Phase 2: Foundational Prerequisites (Blocking Decisions & Approval Gates)
+## Phase 1: Gate 2 Approval & Environment Validation
 
-**Purpose**: Document all blocking decisions and establish approval gate prerequisites
+**Purpose**: Secure design baseline approval and Figma Make environment readiness
 
-**⚠️ CRITICAL**: Phases 3–5 cannot proceed until approval gates are completed
+- [ ] T001 Review GATE_2_SIGN_OFF_SUMMARY.md with Ash (project owner)
+- [ ] T002 Confirm design baseline locked: Space Grotesk, Inter, 9-color palette (check `.github/specs/004-book-website-make/exports/GATE_2_SIGN_OFF_SUMMARY.md`)
+- [ ] T003 Validate Figma Make environment access: file key, API token, workspace ready (or mark blocked if unavailable)
+- [ ] T004 [P] Verify all 4 critical fixes from Gate 2 audit (Prompt 2B colors #FF3AAE, Prompt 3A status, reference paths, Decision 7 clarity)
 
-- [ ] T005 Extract Decision 1 options from research.md (recovery-first race condition A/B/C/D) → document in `.github/specs/004-book-website-make/exports/decisions-pending.md`
-- [ ] T006 Extract Decision 2 options from research.md (recovery lifetime eligibility A/B/C/D) → document in exports/decisions-pending.md
-- [ ] T007 Extract Decision 3 options from research.md (code expiry start time A/B/C) → document in exports/decisions-pending.md
-- [ ] T008 Extract Decision 4 options from research.md (email service provider A/B/C/D) → document in exports/decisions-pending.md
-- [ ] T009 Extract Decision 5 options from research.md (manuscript publication readiness A/B/C) → document in exports/decisions-pending.md
-- [ ] T010 Extract Decision 6 options from research.md (newsletter destination A/B/C/D) → document in exports/decisions-pending.md
-- [ ] T011 Extract Decision 7 options from research.md (route enforcement verification A/B/C/D) → document in exports/decisions-pending.md
-- [ ] T012 [P] Map all 7 blocking decisions to Figma Make prompts in contracts/ directory (which prompts depend on each decision)
-- [ ] T013 Create blocking-decisions-matrix.md in `.github/specs/004-book-website-make/exports/` with all decisions, options, and impact assessment
+**Checkpoint**: Gate 2 approval confirmed - ready for Phase A execution
+
+---
+
+## Phase 2: User Story 1 - Design Specification Hand-off (P1) 🎯 CRITICAL PATH
+
+**Goal**: Complete, exact Figma Make prompts establishing authoritative design baseline
+
+**Independent Test**: Each prompt references approved design elements and is executable without implementation guesswork
+
+### Tests for US1
+
+- [ ] T005 [US1] Validate Prompt 1 preview includes: before/after navigation, numbered implementation steps, non-changes list, acceptance criteria (`contracts/prompt-1-navigation-exposure.md`)
+- [ ] T006 [US1] Validate Prompt 2A exports both CSS variables and JSON design tokens matching 9-color approved baseline (`contracts/prompt-2a-design-baseline.md`)
+- [ ] T007 [US1] Validate Prompt 2B navigation component shows 4 visible items with #FF3AAE hover/active state in all responsive breakpoints (`contracts/prompt-2b-navigation-design.md`)
+
+### Implementation for US1
+
+- [ ] T008 [P] [US1] Execute Prompt 1: Navigation Exposure in Figma Make (hide /speaking, /events, /media from sitemap; preserve as noindex)
+- [ ] T009 [P] [US1] Execute Prompt 2A: Design Baseline Export (export CSS variables + JSON tokens with exact approved colors/typography)
+- [ ] T010 [P] [US1] Execute Prompt 2B: Navigation Design (component design with all states, 4 visible items, responsive breakpoints 1024px/768px)
+- [ ] T011 [US1] Collect and verify Prompt outputs match acceptance criteria from contracts/
+
+**Checkpoint**: Phase A complete - US1 (Design Hand-off) is fully executable and approved
+
+---
+
+## Phase 3: User Story 2 - Reader Access Journey Definition (P1)
+
+**Goal**: Exact copy, form wording, and error-state specifications for email-code verification journey
+
+**Independent Test**: Copy text matches approved source, form states documented, error messages distinguish failure scenarios, newsletter separate from verification, no false success claims
+
+### Tests for US2
+
+- [ ] T012 [US2] Validate Prompt 3A preview: form explanation copy, error messages, newsletter CTA in separate section (`contracts/prompt-3a-reader-access.md`)
+- [ ] T013 [US2] Confirm all form states designed: default, focused, error, loading, success (verify no hardcoded copy differs from approved source)
+
+### Implementation for US2
+
+- [ ] T014 [US2] Review Prompt 3A contract with blocking decision status (awaits Decisions 3, 4, 5, 6: code expiry timing, email provider, manuscript status, newsletter destination)
+- [ ] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) in Figma Make
+- [ ] T016 [US2] Collect Prompt 3A output and verify: approved copy present, form states documented, newsletter link explicit non-subscription statement
+
+**Checkpoint**: US2 (Reader Access) awaits decision resolution before execution
+
+**BLOCKED BY**: Decisions 3 (code expiry start time), 4 (email provider), 5 (manuscript status), 6 (newsletter destination)
+
+---
+
+## Phase 4: User Story 3 - Implementation Readiness & Blocking Decisions (P2)
+
+**Goal**: Documented blocking decisions and prerequisites so development knows what gates progress
+
+**Independent Test**: All 7 blocking decisions listed with options, each identifies impact if unresolved, resolved decisions marked with dates, risk assessment complete
+
+### Tests for US3
+
+- [ ] T017 [US3] Validate blocking decision matrix: all 7 decisions present with 3+ options each, prerequisites documented (`research.md` and `contracts/blocking-decisions-audit.md`)
+- [ ] T018 [US3] Confirm Prompts 3B and 3C marked "BLOCKED" with specific prerequisite decisions listed
+
+### Decision Resolution for US3 (Parallel Track)
+
+**Timeline**: 4–6 hours for decisions + clarification
+
+- [ ] T019 [P] [US3] **Decision 1 (Recovery-first race condition)**: Clarify with Ash: when recovery and fresh verification race, which takes precedence? Options: A (recovery first), B (fresh first), C (last-writer-wins), D (user chooses). Update `research.md` with chosen option
+- [ ] T020 [P] [US3] **Decision 2 (Recovery lifetime eligibility)**: Clarify with Ash: how long is recovery code valid? Options: 24h, 7d, 30d. Update `research.md`
+- [ ] T021 [P] [US3] **Decision 3 (Code expiry start time)**: Clarify with product lead: from code generation? receipt? page load? Options: A (generation), B (receipt), C (page load). Update `research.md`
+- [ ] T022 [P] [US3] **Decision 4 (Email service provider)**: Clarify with tech lead: SendGrid or Brevo? API/SMTP availability? Update `research.md`
+- [ ] T023 [P] [US3] **Decision 5 (Manuscript publication readiness)**: Clarify with author: when is manuscript approved & available for readers? Draft timeline: 2027-01-31. Update `research.md` with status
+- [ ] T024 [P] [US3] **Decision 6 (Newsletter destination)**: Clarify with product: Brevo signup link or other service? Update `research.md`
+
+### Implementation for US3 (After Decision Resolution)
+
+- [ ] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) in Figma Make
+- [ ] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) in Figma Make
+- [ ] T027 [US3] Collect Prompt 3B and 3C outputs; verify race condition handling and error messaging match resolved decisions
+
+**Checkpoint**: All blocking decisions resolved - Phase B execution unblocked
+
+**BLOCKED BY**: Decisions 1, 2, 3, 4, 5, 6 (parallel resolution track)
+
+---
+
+## Phase 5: User Story 4 - Documentation-Only Workflow Completion (P1)
+
+**Goal**: Complete documentation package ready for approval; no code, commits, or deployments
+
+**Independent Test**: All six source files analyzed, gaps documented, previews exact, package submittable without implementation
+
+### Tests for US4
+
+- [ ] T028 [US4] Validate all six source files analyzed with version reconciliation (01-06 with versions and conflicts documented in `research.md`)
+- [ ] T029 [US4] Confirm exact previews generated for Prompts 1, 2A, 2B, 3A (ready-state summary in `PROMPT_EXECUTION_PLAN.md`)
+- [ ] T030 [US4] Verify blocked prompts (3B, 3C) explicitly marked with prerequisite decisions listed
+- [ ] T031 [US4] Confirm zero code generated, zero commits created beyond spec folder, zero deployments triggered
+
+### Approval Workflow for US4
+
+- [ ] T032 [US4] Package review: verify `.github/specs/004-book-website-make/` contains all required artifacts
+  - ✓ spec.md (requirements + user stories)
+  - ✓ plan.md (technical approach)
+  - ✓ research.md (decisions + reconciliation)
+  - ✓ data-model.md (entities, fields)
+  - ✓ contracts/ (6 prompt specifications)
+  - ✓ quickstart.md (validation scenarios)
+  - ✓ PROMPT_EXECUTION_PLAN.md (phase roadmap)
+  - ✓ GATE_2_SIGN_OFF_SUMMARY.md (approval checklist)
+  - ✓ GATE_2_READINESS_REPORT.md (technical validation)
+
+- [ ] T033 [US4] Prepare for user approval: Ash reviews complete documentation package against `01-book-website-specification.md` master contract
+- [ ] T034 [US4] Collect approval sign-off: Ash confirms design baseline locked, Phase A ready, decision timeline acceptable
+
+**Checkpoint**: Documentation package complete and approved - implementation pre-reqs satisfied
+
+---
+
+## Phase 6: Polish & Post-Gate 2 Validation
+
+**Purpose**: Cross-cutting validation before Phase A/B execution begins
+
+- [ ] T035 [P] Validate all contract files use consistent terminology (Specification File, Design Baseline, Blocking Decision, Figma Make Prompt)
+- [ ] T036 [P] Run `npm test` validation suite (if exists) on spec documents
+- [ ] T037 Run final checklist: no TODO markers, all decisions documented or blocked, no implementation code present
+- [ ] T038 Archive Gate 2 sign-off as reference for Phase B decision resolution timeline
+
+**Checkpoint**: Documentation validated - ready for Figma Make execution
+
+---
+
+## Dependencies & Execution Order
+
+### Phase Dependencies
+
+- **Gate 2 Approval (Phase 1)**: No dependencies - prerequisite for all work
+- **US1 (Phase 2)**: Depends on Gate 2 - can start immediately after approval
+- **US2 (Phase 3)**: Depends on Gate 2 + US1 foundation - can run after Phase 1
+- **US3 Decision Resolution (Phase 4)**: Parallel to US1/US2 execution - 6 decisions resolved in parallel
+- **US4 Documentation (Phase 5)**: Can run parallel to US1/US2/US3
+- **Polish (Phase 6)**: Depends on all user stories being documented and approved
+
+### Within Each User Story
+
+**US1**: Tests (T005-007) → Execution (T008-010) → Verification (T011)
+**US2**: Tests (T012-013) → Await decisions → Execution (T015) → Verification (T016)
+**US3**: Tests (T017-018) → Decisions (T019-024 parallel) → Execution (T025-026) → Verification (T027)
+**US4**: Tests (T028-031) → Approval workflow (T032-034)
+
+### Parallel Opportunities
+
+**Phase 1 (Gate 2)**:
+- T002, T003 can run in parallel (design review + environment check)
+- T004 can run anytime once Gate 2 summary reviewed
+
+**Phase 2 (US1)**:
+- T008, T009, T010 can execute in parallel (3 unblocked prompts, different files)
+
+**Phase 3 (US2)**:
+- Awaiting Decisions 3, 4, 5, 6 from Phase 4
+
+**Phase 4 (US3)**:
+- T019-024: All 6 decisions can be clarified in parallel (different decision owners)
+- T025-026: Can execute once respective decisions resolved
+
+**Phase 5 (US4)**:
+- T032-034 can run in parallel with other phases (validation + approval workflow)
+
+---
+
+## Implementation Strategy
+
+### MVP Scope: Phase A Execution Only
+
+**Stop-point after US1 delivery**:
+
+1. ✅ Gate 2 approval (Phase 1)
+2. ✅ Execute Prompts 1, 2A, 2B (Phase 2 - US1)
+3. ✅ Validate outputs match contracts
+4. **STOP** - Phase A complete, ready for design-system export
+
+**Timeline**: ~1 hour (3 unblocked prompts × 10-15 min each + review)
+
+---
+
+### Incremental Delivery: Phase A → Phase B
+
+**After US1 ready**:
+
+1. **Phase A MVP**: Prompts 1, 2A, 2B executed and validated (US1)
+2. **Parallel decision resolution**: Decisions 1–6 clarified (US3)
+3. **Phase B extension**: Once decisions resolved, execute Prompts 3A, 3B, 3C (US2, US3)
+4. **Full package approval**: Complete documentation with Phase A+B outputs (US4)
+
+**Timeline**: 
+- Phase A: 1 hour
+- Decisions: 4–6 hours (parallel with US1 validation)
+- Phase B: 1 hour (once decisions resolved)
+- Total: 6–8 hours
+
+---
+
+### Parallel Team Strategy
+
+With multiple reviewers:
+
+1. **Person A** (Design Lead): Gate 2 review (T001-004) → Validate US1 outputs (T005-007)
+2. **Person B** (Product Owner): Clarify Decisions 1, 2, 5 (T019, T020, T023)
+3. **Person C** (Tech Lead): Clarify Decisions 3, 4, 6 (T021, T022, T024)
+4. **Person D** (Project Coordinator): Package review and approval workflow (T032-034)
+
+All groups proceed in parallel; Phase B execution begins once decisions land.
+
+---
+
+## Notes
+
+- **[P] markers**: Parallel execution within phase (independent owners/files)
+- **[Story] labels**: Traceability to spec.md user stories
+- **No code**: All tasks are documentation, approval, or Figma Make execution
+- **Version tracking**: Reference reconciliation in `research.md` (all source file versions documented)
+- **Stop points**: Gate 2 (US1/MVP) or Full Package (US1+US2+US3+US4)
+- **Blocking checklist**: US3 decision resolution gates US2 Phase B prompts (3B, 3C)
+
+---
+
+## Success Criteria per User Story
+
+- **US1 (Design Hand-off)**: All 3 Phase A prompts executable and validated ✅
+- **US2 (Reader Access)**: Prompt 3A awaiting 4 decisions; executable once decisions resolved ⏳
+- **US3 (Implementation Readiness)**: All 7 decisions clarified and documented ⏳
+- **US4 (Documentation Completion)**: Complete package submitted for user approval ✅
 - [ ] T014 Prepare Approval Gate 1 summary in quickstart.md: "All 7 decisions ready for user selection" with links to research.md decision options
 
 **Checkpoint**: Approval Gate 1 prerequisites documented and ready for user approval
