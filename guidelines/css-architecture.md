@@ -1,13 +1,15 @@
-# CSS Architecture Guide
+<!-- Type 1 (Relocation) Pointer -->
+<!-- Original: Guidelines/css-architecture.md -->
+<!-- Consolidated into: N004 (CSS & Styling Guide) -->
+<!-- Authority: D4.b, D5 Pointer Strategy -->
 
-**Version:** 1.0.0
-**Last Updated:** February 2026
-**Last Reviewed:** February 21, 2026
-**Purpose:** Document the BEM architecture, file structure, import system, and
-styling rules
+> 🔄 **This content has been consolidated.** See [CSS & Styling Guide](./N004-css-styling-guide.md) for CSS patterns, utility-first approach, and BEM conventions.
+
+For complete styling guidance, CSS architecture patterns, and design token implementations, refer to **N004: CSS & Styling Guide**.
 
 ---
 
+<<<<<<< HEAD
 ## 1. Architecture Overview
 
 This project uses a **strict Semantic BEM (Block Element Modifier)** CSS
@@ -266,3 +268,6 @@ Defined in `:root` of `globals.css`:
 ---
 
 **Last Updated:** February 2026
+=======
+*Pointer created: 2026-11-11 | Type 1 Relocation | D5 Authority*
+>>>>>>> 2c3b0f5 (feat(003-T049-Phase1): Create Type 1 (Relocation) pointers for high-traffic G-documents)
