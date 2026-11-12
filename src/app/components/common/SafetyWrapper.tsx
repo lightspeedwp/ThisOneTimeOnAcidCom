@@ -1,9 +1,8 @@
 /**
  * @fileoverview SafetyWrapper component for Ash Shaw Makeup Portfolio
  *
- * Thin wrapper that catches synchronous render errors caused by third-party
- * browser extensions. Works alongside the ErrorBoundary and extensionErrorSuppressor 
- * for defence-in-depth.
+ * Thin wrapper that renders a div with the safety-wrapper class around its
+ * children. It is not an error boundary and does not catch render errors.
  *
  * @author Ash Shaw Portfolio Team
  * @version 1.0.0
@@ -18,9 +17,8 @@ interface SafetyWrapperProps {
 }
 
 /**
- * SafetyWrapper - Lightweight error-boundary wrapper for extension quirks.
- * Renders children unchanged; exists so that main.tsx's import resolves
- * locally instead of falling through to esm.sh.
+ * SafetyWrapper - Lightweight wrapper for compatibility with the nested
+ * bootstrap. It renders children unchanged and does not isolate errors.
  */
 export function SafetyWrapper(props: SafetyWrapperProps) {
   var children = props.children;

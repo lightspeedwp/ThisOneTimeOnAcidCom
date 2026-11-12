@@ -1,8 +1,13 @@
-# WordPress-Aligned Preset System
+<!-- Type 3 (Archival) Pointer -->
+<!-- Original: Guidelines/wordpress-preset-system.md -->
+<!-- Reason: WordPress not in active stack (D8) -->
+<!-- Archived into: guidelines/_archive/wordpress-preset-system.md -->
+<!-- Replacement: N030 (WordPress Block Patterns) - Phase 3 -->
+<!-- Authority: D5.c (Status Notation), D8 (WordPress Scope) -->
 
-**Version:** 1.0.0
-**Last Updated:** January 2025
+> ⚠️ **ARCHIVED** · This guideline has been consolidated into the Phase 3 roadmap. WordPress is not part of the active tech stack.
 
+<<<<<<< HEAD:guidelines/_archive/wordpress-preset-system.md
 Complete guide to the WordPress theme.json-aligned design token system for the
 This One Time On Acid.
 
@@ -699,3 +704,10 @@ border-[width:var(--wp--custom--border-width--200)]">
 **Version:** 1.0.0
 **Maintained by:** This One Time On Acid Portfolio Team
 <!-- Archived: wordpress-preset-system.md - Out of scope per D8 (WordPress not used in this site) -->
+=======
+This document is archived. For the current active stack (React/Next.js), see the main guidelines in the parent directory.
+
+---
+<!-- Consolidated into: ../N030-wordpress-block-patterns.md -->
+*Archived: 2026-11-11 | Type 3 Archival | D5 Authority | D8: WordPress deferred*
+>>>>>>> 38f1962 (feat(003-T049-Phase2-3): Complete pointer operations (Type 2 & Type 3)):guidelines/wordpress-preset-system.md

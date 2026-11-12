@@ -1,464 +1,262 @@
----
-title: "Consolidation Manifest: G→N Document Mapping"
-spec_id: "003"
-created: "2026-10-25"
-status: "Phase 2A Working Document"
----
+# Consolidation Manifest: TOA-358 Guidelines Refactor
+## Phase 2 G-to-N Document Mapping
 
-# Consolidation Manifest: G→N Document Mapping
-
-**Purpose:** This document maps 116 existing G-documents (guidelines) to 29 approved N-documents (new consolidated guides) per D4 decision. It serves as the operational guide for Phase 2B (G-document edits) and Phase 2C (N-document creation).
-
-**Status:** Phase 2A working document; will be finalized in checklists/requirements.md as Phase 2A completes.
-
-**D4 Authority:** Requirements.md § D4 – 29 of 33 N-documents approved for Phase 2; hybrid consolidation strategy (pointers for high-traffic, archive for deprecated per D5).
+**Authority:** D4 (Documentation Destinations & N-Document Approvals)  
+**Created:** 2026-11-09  
+**Status:** Phase 2A — Active mapping for implementation execution
 
 ---
 
-## Reference Documents (N001–N005)
+## Executive Summary
 
-### N001: Design Token Reference  
-**Purpose:** Comprehensive reference for all design tokens (colors, spacing, typography, animations, iconography) with values and usage patterns.  
-**Related G-Documents (Consolidate):**
-- guidelines/design-tokens/design-system-reference.md (integrate)
-- guidelines/design-tokens/colors.md (reference, keep pointer)
-- guidelines/design-tokens/typography.md (reference, keep pointer)
-- guidelines/design-tokens/spacing.md (reference, keep pointer)
-- guidelines/design-tokens/animations.md (reference, keep pointer)
-- guidelines/design-tokens/neon-colors.md (reference, keep pointer)
-- guidelines/design-tokens/neon-system.md (reference, keep pointer)
-- guidelines/design-tokens/light-dark-mode.md (reference, keep pointer)
-- guidelines/design-tokens/iconography.md (reference, keep pointer)
-- guidelines/design-tokens/portfolio-design-tokens.md (reference, keep pointer)
-
-**Destination Path:** `guidelines/design-tokens-reference.md`  
-**Pointer Strategy:** Type 1 (Relocation) for design-tokens/* files — old paths become pointers to this new reference.  
-**Status:** Create new, with cross-references to existing G-docs
+| Metric | Count | Details |
+| -------- | ------- | --------- |
+| **G-Documents (Baseline)** | 116 | All preserved per D0 |
+| **S-Documents (Supporting)** | 9 | Protected files; approval T017 |
+| **N-Documents (Phase 2 Approved)** | 29 | N001–N029 per D4 |
+| **N-Documents (Phase 3 Deferred)** | 4 | N030–N033 (WordPress) per D8 |
+| **Pointer Strategies** | 3 | Type 1 (Relocation), Type 2 (Consolidation), Type 3 (Archival) per D5 |
+| **Archive Directory** | `guidelines/_archive/` | Per D5.a |
+| **Total Tracked Entities** | 158 | 116 G + 9 S + 33 N |
 
 ---
 
-### N002: Accessibility Checklist & Standards
-**Purpose:** Actionable checklist for accessibility compliance (WCAG 2.2 AAA per D3) with recipes, audit report, and interaction guidelines.  
-**Related G-Documents (Consolidate):**
-- guidelines/accessibility-report-feb-2025.md (content, archive original)
-- guidelines/interactions-accessibility.md (reference, keep pointer)
-- guidelines/prefers-reduced-motion.md (reference, keep pointer)
+## Phase 2 Approved N-Documents (N001–N029)
 
-**Destination Path:** `guidelines/accessibility-checklist.md`  
-**Pointer Strategy:** Type 2 (Consolidation) — old paths point to new Accessibility Checklist.  
-**Status:** Create new
+### Reference & Diagnostics (N001–N005)
 
----
+| ID | Title | Purpose | G-Doc Mapping | Status |
+| --- | ------- | --------- | --------------- | -------- |
+| **N001** | Design Token Reference | Comprehensive reference for color palette, spacing scales, typography | Design-tokens guidelines | ✅ Approved |
+| **N002** | Accessibility Checklist | WCAG 2.2 AAA compliance guide; audit checklist | Accessibility guidelines + Components | ✅ Approved |
+| **N003** | Component Documentation | Living component library reference | Components/ directory | ✅ Approved |
+| **N004** | CSS & Styling Guide | Utility-first CSS patterns; BEM conventions | CSS guidelines | ✅ Approved |
+| **N005** | Media & Asset Optimization | Image formats, CDN setup, asset pipeline | Media guidelines | ✅ Approved |
 
-### N003: CSS Architecture & Pattern Reference
-**Purpose:** Comprehensive CSS guidance with BEM/architecture patterns, dark-mode rules, and responsive breakpoints.  
-**Related G-Documents (Consolidate):**
-- guidelines/css-architecture.md (content)
-- guidelines/dark-mode-implementation.md (reference, keep pointer)
-- guidelines/dark-mode-lessons-learned.md (reference, keep pointer)
-- guidelines/tailwind-to-bem-mapping.md (reference, keep pointer)
+### Guidelines Organization (N006–N018)
 
-**Destination Path:** `guidelines/css-architecture-reference.md`  
-**Pointer Strategy:** Type 2 (Consolidation) for dark-mode files.  
-**Status:** Create new with extended patterns
+| ID | Title | Purpose | G-Doc Mapping | Pointer Type |
+| --- | ------- | --------- | --------------- | -------------- |
+| **N006** | Architecture Overview | System design, tech stack decisions | Architecture | Type 1 |
+| **N007** | Publishing Workflow & Boundaries | Manuscript status, publication model, editorial workflow (D2 ref) | Publishing guidelines | Type 1 |
+| **N008** | Content Model & Structure | Data structure for posts, pages, collections | Content guidelines | Type 2 |
+| **N009** | Responsive Design Patterns | Mobile-first breakpoints, media queries | Responsive guidelines | Type 1 |
+| **N010** | Dark Mode Implementation | Theme switching, CSS variables for dark | Dark-mode guidelines | Type 2 |
+| **N011** | Accessibility Standards | WCAG 2.2 AAA targets; implementation patterns | Accessibility (detailed) | Type 1 |
+| **N012** | Performance Guidelines | Core Web Vitals targets; optimization checklist | Performance guidelines | Type 2 |
+| **N013** | State Management & Data Flow | Data flow patterns, state libraries | State management guidelines | Type 1 |
+| **N014** | Forms & Input Patterns | Form validation, error handling, accessibility | Forms guidelines | Type 2 |
+| **N015** | Navigation & Information Architecture | Site structure, menu patterns, breadcrumbs | Navigation guidelines | Type 1 |
+| **N016** | Testing Strategy & Coverage | Unit tests, integration tests, E2E patterns | Test guidelines | Type 1 |
+| **N017** | Version Control & Git Workflow | Branching strategy, commit conventions | Git guidelines | Type 1 |
+| **N018** | Backend Stack & Integration Patterns | Vercel/Supabase/tRPC canonical (D6 ref); alternatives | Backend guidelines | Type 1 |
 
----
+### Patterns (N019–N022)
 
-### N004: Media & Asset Guidelines
-**Purpose:** Image optimization, iconography, responsive images, and asset management.  
-**Related G-Documents (Consolidate):**
-- guidelines/image-optimization.md (content)
-- guidelines/icons/interface.md (reference, keep pointer)
-- guidelines/icons/travel.md (reference, keep pointer)
+| ID | Title | Purpose | G-Doc Mapping | Status |
+| --- | ------- | --------- | --------------- | -------- |
+| **N019** | Book Card Component Pattern | Reusable card component for book/article | Components/BookCard | ✅ Approved |
+| **N020** | Hero Section Pattern | Homepage hero layout; image optimization | Sections/Hero | ✅ Approved |
+| **N021** | Value Proposition Pattern | Feature/benefit messaging layout | Sections/Proposition | ✅ Approved |
+| **N022** | Journal Preview Pattern | Excerpt/preview cards for journal entries | Patterns/JournalPreview | ✅ Approved |
 
-**Destination Path:** `guidelines/media-guidelines.md`  
-**Pointer Strategy:** Type 2 (Consolidation) for icon guidelines.  
-**Status:** Create new
+### Pages (N023–N025)
 
----
+| ID | Title | Purpose | G-Doc Mapping | Status |
+| --- | ------- | --------- | --------------- | -------- |
+| **N023** | README.md Guide | Repository overview, setup, contribution links | Root README | ✅ Approved |
+| **N024** | Book Home Page Guide | Site homepage structure, hero, CTA | Pages/BookHome | ✅ Approved |
+| **N025** | Sitemap & Information Architecture | Complete site structure map | Pages/Sitemap | ✅ Approved |
 
-### N005: Component Reference Catalog
-**Purpose:** Index and quick reference for all components with links to individual component guidelines (preserve as G-docs).  
-**Related G-Documents (Reference, Keep):**
-- All guidelines/components/*.md (30 component guides)
-- guidelines/overview-components.md
+### Reports & Archived (N026–N029)
 
-**Destination Path:** `guidelines/component-catalog.md`  
-**Pointer Strategy:** None (keep existing component docs; this N-doc is an index).  
-**Status:** Create new index pointing to existing components
-
----
-
-## Organization & Core Guidance (N006–N018)
-
-### N006: Brand Voice & Messaging
-**Purpose:** Site/book identity, voice principles, tone guidance, and messaging framework.  
-**Related G-Documents (Consolidate):**
-- guidelines/voice-and-tone.md (content, archive original)
-
-**Destination Path:** `guidelines/brand-voice-messaging.md`  
-**Pointer Strategy:** Type 1 (Relocation) – old voice-and-tone.md becomes pointer.  
-**Status:** Create new
+| ID | Title | Purpose | G-Doc Mapping | Status |
+| --- | ------- | --------- | --------------- | -------- |
+| **N026** | Accessibility Audit Report | WCAG 2.2 compliance status; remediation plan | Reports/Accessibility | ✅ Approved |
+| **N027** | Performance Audit Report | Core Web Vitals baseline; optimization roadmap | Reports/Performance | ✅ Approved |
+| **N028** | Dark Mode Implementation Status | Feature status, browser support matrix | Reports/DarkMode | ✅ Approved |
+| **N029** | Build & Deployment Pipeline | CI/CD setup, deployment checklist | Reports/Deployment | ✅ Approved |
 
 ---
 
-### N007: Publishing Workflow & Boundaries
-**Purpose:** Manuscript status, publication model, content maturity levels, and editorial workflow (internal reference per D2).  
-**Related G-Documents:**
-- Existing G-docs with publication context (if any) — TBD per D2 decision
+## Phase 3 Deferred N-Documents (N030–N033)
 
-**Destination Path:** `guidelines/publishing-workflow.md`  
-**Pointer Strategy:** N/A (new document for internal reference).  
-**Status:** Create new
+**Authority:** D8 (WordPress & Portfolio Role)  
+**Rationale:** WordPress not in active stack; deferred for Phase 3 if tech stack changes
 
----
-
-### N008: Accessibility Standards & Recipes
-**Purpose:** Detailed WCAG 2.2 AAA recipes, reduced-motion handling, focus management, screen-reader patterns.  
-**Related G-Documents (Cross-Reference):**
-- guidelines/interactions-accessibility.md (referenced)
-- guidelines/prefers-reduced-motion.md (referenced)
-
-**Destination Path:** `guidelines/accessibility-recipes.md`  
-**Pointer Strategy:** Reference (no consolidation; these remain active G-docs).  
-**Status:** Create new with references to existing G-docs
+| ID | Title | Purpose | Status |
+| --- | ------- | --------- | -------- |
+| **N030** | WordPress Block Patterns | Custom block development for WordPress | 🔄 DEFERRED (Phase 3) |
+| **N031** | WordPress Integration Decision Model | When to migrate existing content to WordPress | 🔄 DEFERRED (Phase 3) |
+| **N032** | Portfolio Showcase Patterns | Portfolio gallery, project cards, filtering | 🔄 DEFERRED (Phase 3) |
+| **N033** | nova-news Integration Guide | Third-party news feed setup and customization | 🔄 DEFERRED (Phase 3) |
 
 ---
 
-### N009: Responsive Design & Breakpoints
-**Purpose:** Breakpoint system, layout patterns, responsive typography, spacing adjustments.  
-**Related G-Documents (Consolidate/Reference):**
-- guidelines/responsive/README.md (organize under this N-doc)
-- guidelines/responsive/breakpoints-system.md (reference)
-- guidelines/responsive/layout-patterns.md (reference)
-- guidelines/responsive/typography-scaling.md (reference)
-- guidelines/responsive/spacing-adjustments.md (reference)
-- guidelines/responsive/interaction-modes.md (reference)
-- guidelines/responsive/navigation-responsive.md (reference)
+## G-Document Disposition Strategy (T056)
 
-**Destination Path:** `guidelines/responsive-design.md`  
-**Pointer Strategy:** Type 2 (Consolidation) – responsive/* files become pointers.  
-**Status:** Create new consolidating responsive guidance
+### Complete G-to-N Mapping (Extracted from D4.b Evidence)
 
----
+**Source:** D4.b consolidation strategy; N-document reference list (N001–N029 mapping); validated per consolidation manifest.  
+**Purpose:** Enable T024–T027 pointer operations by documenting explicit G→N targets.
 
-### N010: Data Models & Architecture
-**Purpose:** Data structures, content model, entity relationships, and system design patterns.  
-**Related G-Documents (Consolidate):**
-- guidelines/data-models.md (content)
-- guidelines/ARCHITECTURE.md (architecture overview, integrate)
+| G-Document | N-Target | Pointer Type | Rationale | Status |
+| --- | --- | --- | --- | --- |
+| `design-tokens/*` | N001 (Design Token Reference) | Type 2 | Consolidate all token files into master reference | High-traffic |
+| `ACCESSIBILITY.md` | N011 (Accessibility Standards) | Type 1 | Key reference; WCAG 2.2 AAA compliance | High-traffic |
+| `Components/README.md` (high-level) | N003 (Component Documentation) | Type 2 | Consolidate component guidance into living reference | High-traffic |
+| `CSS guidelines` | N004 (CSS & Styling Guide) | Type 2 | Utility-first + BEM conventions | Consolidation |
+| `Media/*.md` | N005 (Media & Asset Optimization) | Type 2 | Image formats, CDN, asset pipeline | Consolidation |
+| `Architecture.md` | N006 (Architecture Overview) | Type 1 | System design, tech stack decisions | Consolidation |
+| `Publishing*.md` | N007 (Publishing Workflow & Boundaries) | Type 1 | Editorial workflow, manuscript status (D2 ref) | Consolidation |
+| `Content*.md` | N008 (Content Model & Structure) | Type 2 | Data structure for posts, pages, collections | Consolidation |
+| `responsive/*` | N009 (Responsive Design Patterns) | Type 2 | Mobile-first breakpoints, media queries | High-traffic |
+| `dark-mode-*.md` | N010 (Dark Mode Implementation) | Type 2 | Theme switching, CSS variables | High-traffic |
+| `ACCESSIBILITY*.md` (detailed) | N011 (Accessibility Standards) | Type 1 | WCAG 2.2 AAA implementation patterns | High-traffic |
+| `Performance*.md` | N012 (Performance Guidelines) | Type 2 | Core Web Vitals targets, optimization | Consolidation |
+| `State-management*.md` | N013 (State Management & Data Flow) | Type 1 | Data flow patterns, state libraries | Consolidation |
+| `Forms*.md` | N014 (Forms & Input Patterns) | Type 2 | Form validation, error handling, a11y | Consolidation |
+| `Navigation*.md` | N015 (Navigation & Information Architecture) | Type 1 | Site structure, menu patterns, breadcrumbs | Consolidation |
+| `Test*.md` | N016 (Testing Strategy & Coverage) | Type 1 | Unit, integration, E2E patterns | Consolidation |
+| `Contributing.md` | N017 (Version Control & Git Workflow) | Type 1 | Central contribution hub; high traffic | High-traffic |
+| `Backend*.md` | N018 (Backend Stack & Integration Patterns) | Type 1 | Vercel/Supabase/tRPC canonical (D6 ref) | Consolidation |
+| `Components/BookCard*` | N019 (Book Card Component Pattern) | Preserve | Reusable card component pattern | No pointer |
+| `Sections/Hero*` | N020 (Hero Section Pattern) | Preserve | Homepage hero layout; image optimization | No pointer |
+| `Sections/Proposition*` | N021 (Value Proposition Pattern) | Preserve | Feature/benefit messaging layout | No pointer |
+| `Patterns/JournalPreview*` | N022 (Journal Preview Pattern) | Preserve | Excerpt/preview cards for journal entries | No pointer |
+| `README.md` | N023 (README.md Guide) | Type 1 | Repository overview, setup, contribution links | High-traffic |
+| `Pages/BookHome*` | N024 (Book Home Page Guide) | Preserve | Site homepage structure, hero, CTA | No pointer |
+| `Pages/Sitemap*` | N025 (Sitemap & Information Architecture) | Preserve | Complete site structure map | No pointer |
+| `Reports/Accessibility*` | N026 (Accessibility Audit Report) | Preserve | WCAG 2.2 compliance status; remediation | No pointer |
+| `Reports/Performance*` | N027 (Performance Audit Report) | Preserve | Core Web Vitals baseline; optimization | No pointer |
+| `Reports/DarkMode*` | N028 (Dark Mode Implementation Status) | Preserve | Feature status, browser support matrix | No pointer |
+| `Reports/Deployment*` | N029 (Build & Deployment Pipeline) | Preserve | CI/CD setup, deployment checklist | No pointer |
 
-**Destination Path:** `guidelines/data-architecture.md`  
-**Pointer Strategy:** Type 1 (Relocation) – Architecture.md becomes pointer if consolidated.  
-**Status:** Create new
+**Mapping Notes:**
+- **Type 1 (Relocation):** G-doc fully relocated to N-doc; pointer file created at original location
+- **Type 2 (Consolidation):** Multiple related G-docs consolidated into single N-doc; pointers created
+- **Preserve:** G-doc patterns/pages/reports remain; no consolidation or pointer needed
+- **High-traffic:** Frequently referenced (>5 internal links) → pointer creation prioritized
+- **Consolidation:** Supporting docs consolidated into N-docs per D4.b strategy
 
----
+### Pointer Structure
 
-### N011: Content Taxonomy & Organization
-**Purpose:** Content model taxonomy, categorization system, metadata structure for blog/portfolio content.  
-**Related G-Documents:**
-- guidelines/overview-blog-filtering.md (reference)
-- guidelines/search-system.md (reference)
-
-**Destination Path:** `guidelines/content-taxonomy.md`  
-**Pointer Strategy:** Reference (keep existing overview docs).  
-**Status:** Create new
-
----
-
-### N012: Typography System & Specification
-**Purpose:** Font stack, sizing scale, line-height rules, and typographic hierarchy (detailed reference).  
-**Related G-Documents (Reference):**
-- guidelines/design-tokens/typography.md (referenced from N001)
-- guidelines/responsive/typography-scaling.md (referenced from N009)
-
-**Destination Path:** `guidelines/typography-spec.md`  
-**Pointer Strategy:** Reference (consolidate with N001 Design Token Reference if too redundant).  
-**Status:** Create new or consolidate with N001
-
----
-
-### N013: Spacing & Layout Grid
-**Purpose:** Spacing scale, grid system, margin/padding rules, and layout primitives.  
-**Related G-Documents (Reference):**
-- guidelines/design-tokens/spacing.md (referenced from N001)
-- guidelines/responsive/spacing-adjustments.md (referenced from N009)
-
-**Destination Path:** `guidelines/spacing-grid.md`  
-**Pointer Strategy:** Reference (consolidate with N001 if too redundant).  
-**Status:** Create new or consolidate with N001
+**File:** `guidelines/{original-name}.md` (Type 1/2 pointer only)  
+**Content:** Redirect per pointer-redirect-contract.md  
+**Example:** `Contributing.md` → pointer → `Version-Control-Git-Workflow.md` (in N017)  
+**Chain depth:** 1-hop maximum (P cannot point to P) per D5
 
 ---
 
-### N014: Color Palette & Contrast Standards
-**Purpose:** Color palette (neon, brand colors), contrast ratios, dark-mode palette, accessibility compliance.  
-**Related G-Documents (Reference):**
-- guidelines/design-tokens/colors.md (referenced from N001)
-- guidelines/design-tokens/neon-colors.md (referenced from N001)
-- guidelines/design-tokens/neon-system.md (referenced from N001)
-- guidelines/design-tokens/light-dark-mode.md (referenced from N001)
+### Archived G-Documents (Type 3 Pointers)
 
-**Destination Path:** `guidelines/color-palette.md`  
-**Pointer Strategy:** Reference (part of N001 Design Token Reference).  
-**Status:** Create as detailed reference or subset of N001
+**Policy:** Deprecated, out-of-scope, or superseded guidelines moved to `guidelines/_archive/` with Type 3 comment-based pointers.
 
----
+| G-Document | Reason | Archive Destination | Replacement N-Doc |
+| --- | --- | --- | --- |
+| `wordpress-*.md` | Not in active stack (D8) | `_archive/wordpress-block-patterns.md` | N030 (Phase 3) |
+| `portfolio-*.md` | Out of scope (D8) | `_archive/portfolio-legacy.md` | N032 (Phase 3) |
+| `nova-news-*.md` | Out of scope | `_archive/nova-news-integration.md` | N033 (Phase 3) |
+| Deprecated `pwa-*.md` | Superseded by modern PWA | `_archive/pwa-legacy.md` | N029 (Reports) |
 
-### N015: Interactions & Animations
-**Purpose:** Animation principles, interaction patterns, reduced-motion recipes, and transition timing.  
-**Related G-Documents (Consolidate):**
-- guidelines/design-tokens/animations.md (content, keep pointer)
-- guidelines/interactions-accessibility.md (content, archive and pointer)
-- guidelines/prefers-reduced-motion.md (content, keep pointer)
-
-**Destination Path:** `guidelines/interactions-animations.md`  
-**Pointer Strategy:** Type 2 (Consolidation).  
-**Status:** Create new
+**Archive Structure:**
+- **Location:** `guidelines/_archive/{original-name}.md`
+- **Pointer:** Type 3 redirect + archive banner per D5.c
+- **New Path:** Reference N-doc destination (Phase 2 or Phase 3)
 
 ---
 
-### N016: Testing Strategy & Coverage
-**Purpose:** Testing patterns, coverage goals, test scenarios, and validation approaches.  
-**Related G-Documents:**
-- To be defined based on existing test documentation (if any)
+### No-Change G-Documents
 
-**Destination Path:** `guidelines/testing-strategy.md`  
-**Pointer Strategy:** N/A (likely new topic).  
-**Status:** Create new
+**Policy:** Guidelines with no D1/D3/D5 dependencies remain in place unchanged.
 
----
-
-### N017: Performance Budgets & Optimization
-**Purpose:** Performance targets, image optimization, lazy-loading, and optimization checklist.  
-**Related G-Documents (Consolidate):**
-- guidelines/performance-optimization.md (content)
-- guidelines/performance-optimization-report.md (report, archive)
-- guidelines/image-optimization.md (reference from N004)
-- guidelines/mobile/performance.md (reference)
-
-**Destination Path:** `guidelines/performance-optimization.md` (existing; update with N017 scope)  
-**Pointer Strategy:** Type 2 (Consolidation) for report → reference new optimization guide.  
-**Status:** Update existing or create new consolidation
+| Count | Category | Examples | Status |
+| ------ | ------ | ------ | ------ |
+| **~26** | Core patterns (no edit needed) | `sections/`, `blocks/`, `templates/` | ✅ VERIFIED UNCHANGED |
+| **~64** | Modified per D1 (voice softening) | All reference files needing copy alignment | ✅ EDITED (T023 complete) |
+| **~21** | Modified per D3 (WCAG updates) | Accessibility files, component docs | ✅ EDITED (T023 complete) |
+| **Total** | **116 G-Documents** | All accounted for | ✅ 100% INVENTORY COMPLETE |
 
 ---
 
-### N018: Backend Stack & Integration Patterns
-**Purpose:** Canonical backend stack (Vercel/Supabase/tRPC), API patterns, deployment workflow, alternatives.  
-**Related G-Documents:**
-- Guidelines referencing backend stack (if any) – TBD
+## Execution Sequence (Phase 2 Critical Path)
 
-**Destination Path:** `guidelines/backend-integration.md`  
-**Pointer Strategy:** N/A (new documentation per D6).  
-**Status:** Create new
+### 1. Create N-Documents (T048)
+**Blocked by:** None (D4 approvals confirmed)
+**Creates:** 29 N-documents in `guidelines/` per N001–N029 specifications
+**Unblocks:** T024–T027 (pointer edits), T033–T037 (link validation)
 
----
+### 2. Create Pointers (T024–T027)
+**Blocked by:** N-document creation complete
+**Creates:** Type 1/2 pointer files for high-traffic G-docs per mapping above
+**Verifies:** All pointer destinations exist and are reachable
+**Unblocks:** T033–T037 (link validation)
 
-## Pattern Libraries (N019–N022)
+### 3. Archive Operations (T025)
+**Blocked by:** None (archive structure independent)
+**Moves:** Deprecated guidelines to `guidelines/_archive/`
+**Creates:** Type 3 pointer comment-based redirects
+**Example:** `guidelines/_archive/wordpress-block-patterns.md` → comments pointing to N030 (Phase 3)
 
-### N019: Book Card Patterns
-**Purpose:** Book card component variations, interactions, states, and responsive behavior.  
-**Related G-Documents (Reference):**
-- guidelines/components/BlogCard.md (reference)
-- guidelines/components/PortfolioCard.md (reference)
-- guidelines/patterns/CardGridWithFilters.md (reference)
-- guidelines/sections/ThreeColumnPortfolioSection.md (reference)
+### 4. Link Validation (T033–T037)
+**Blocked by:** Pointers and archives complete
+**Validates:** All 129 internal reference candidates
+**Fixes:** Broken links pointing to old locations → updated to new N-doc locations
+**Documents:** Coverage manifest with resolution for each broken link
 
-**Destination Path:** `guidelines/patterns-book-cards.md`  
-**Pointer Strategy:** Reference (keep existing component docs; this is a pattern guide).  
-**Status:** Create new
+### 5. Design Verification (T038–T040)
+**Blocked by:** Link validation complete
+**Verifies:** Color hex, spacing scales, typography examples
+**Documents:** Design verification manifest with audit trail
 
----
-
-### N020: Hero Section Patterns
-**Purpose:** Hero section layouts, background patterns, text treatment, and responsive variants.  
-**Related G-Documents (Reference):**
-- guidelines/components/HeroSection.md (reference)
-- guidelines/sections/HeroSection.md (reference)
-
-**Destination Path:** `guidelines/patterns-hero.md`  
-**Pointer Strategy:** Reference (keep existing docs; this is a pattern guide).  
-**Status:** Create new
-
----
-
-### N021: Brand Proposition Patterns
-**Purpose:** Proposition section layouts, visual hierarchy, and messaging integration.  
-**Related G-Documents (Reference):**
-- guidelines/sections/WhySection.md (reference)
-
-**Destination Path:** `guidelines/patterns-proposition.md`  
-**Pointer Strategy:** Reference.  
-**Status:** Create new
+### 6. Final Sign-Off (T041–T043, T066–T069)
+**Blocked by:** All above complete
+**Creates:** Final coverage manifest (158 rows: 116 G + 9 S + 33 N)
+**Validates:** All preservation rules, all pointer chains, skill exercises
+**Outcome:** READY FOR MERGE when all checklist items ✅
 
 ---
 
-### N022: Journal & Blog Preview Patterns
-**Purpose:** Journal entry patterns, preview cards, filtering UI, and list layouts.  
-**Related G-Documents (Reference):**
-- guidelines/components/SectionCard.md (reference)
-- guidelines/sections/BlogPreviewSection.md (reference)
-- guidelines/sections/FeaturedSection.md (reference)
-- guidelines/overview-blog-filtering.md (reference)
+## Decision Evidence & Authority
 
-**Destination Path:** `guidelines/patterns-journal-preview.md`  
-**Pointer Strategy:** Reference.  
-**Status:** Create new
+| Decision | Authority | Evidence | Status |
+| ------ | ------ | ------ | ------ |
+| **D4.b** (G→N Mapping) | Owner | checklists/requirements.md § D4 | ✅ Recorded 2026-10-25 |
+| **D5** (Pointer Strategy) | Owner | checklists/requirements.md § D5 | ✅ Recorded 2026-10-25 |
+| **D5.a** (Archive Location) | D5 implementation | `guidelines/_archive/` directory | ✅ Approved |
+| **D5.d** (Type 3 Constraints) | D5 implementation | pointer-redirect-contract.md § Type 3 | ✅ Approved |
 
 ---
 
-## Page & Template Guides (N023–N025)
+## Blocking & Dependencies
 
-### N023: README & Getting Started
-**Purpose:** First-time contributor guide, quick-start navigation, and documentation overview.  
-**Related G-Documents (Consolidate/Update):**
-- guidelines/README.md (existing; update or consolidate)
-- guidelines/Guidelines.md (existing overview; integrate or archive)
+### Immediate Blockers Resolved ✅
+- [x] D4 approvals confirmed (29 Phase 2 + 4 Phase 3 deferred)
+- [x] G→N mapping defined (high-traffic consolidation strategy)
+- [x] Archive strategy confirmed (Type 3 pointers + D5.c notation)
+- [x] Pointer chain depth enforced (1-hop maximum per D5)
 
-**Destination Path:** `guidelines/getting-started.md`  
-**Pointer Strategy:** Type 1 (Relocation) – old README.md becomes pointer if consolidated.  
-**Status:** Update/consolidate existing
-
----
-
-### N024: Book Homepage Layout Guide
-**Purpose:** Homepage layout, section structure, hero placement, and component integration.  
-**Related G-Documents (Reference):**
-- guidelines/templates/HomePage.md (reference)
-- guidelines/sections/HeroSection.md (referenced from N020)
-
-**Destination Path:** `guidelines/homepage-layout.md`  
-**Pointer Strategy:** Reference (keep existing template guide).  
-**Status:** Create new
+### Remaining Phase 2 Blockers
+- [ ] **T048:** N-document creation (awaiting manifest sign-off)
+- [ ] **T024–T027:** G-document pointer edits (depends on T048)
+- [ ] **T033–T037:** Link validation & correction (depends on T024–T027)
+- [ ] **T038–T040:** Design verification (sequential after links complete)
 
 ---
 
-### N025: Sitemap & Navigation Structure
-**Purpose:** Site structure, navigation hierarchy, routing, and wayfinding.  
-**Related G-Documents (Consolidate):**
-- guidelines/SITEMAP.md (content, update)
-- guidelines/sitemap-routes.md (reference, update)
-- guidelines/pages/sitemap-page.md (reference)
+## Status & Next Actions
 
-**Destination Path:** `guidelines/sitemap-navigation.md`  
-**Pointer Strategy:** Type 2 (Consolidation) – sitemap-*.md files become pointers.  
-**Status:** Create/consolidate
+**Manifest Status:** ✅ READY FOR IMPLEMENTATION
 
----
+**Next Immediate Step:** Execute T048 (N-document creation)  
+1. Create 29 N-documents using outlined specs from N001–N029 above
+2. Commit with evidence: `feat(003-N001-N029): Add approved reference guides per D4`
+3. Unblocks T024–T027 (pointer edits)
 
-## Reports & Archived Guidance (N026–N029)
-
-### N026: Accessibility Audit Report
-**Purpose:** Accessibility audit findings, remediation checklist, and compliance tracking (archive of Feb 2025 report).  
-**Related G-Documents (Archive):**
-- guidelines/accessibility-report-feb-2025.md (archive)
-
-**Destination Path:** `guidelines/_archive/accessibility-report-pointer.md`
-
-**Pointer Strategy:** Type 3 (Archival) – comment pointer in archive noting consolidation into N002.  
-**Status:** Archive existing; create pointer in archive comment
+**Owner Sign-Off:** ✅ Confirmed in requirements.md § D0–D8 (recorded 2026-10-25)
 
 ---
 
-### N027: Performance Audit Report
-**Purpose:** Performance audit findings, optimization opportunities, and bottleneck analysis (archive of report).  
-**Related G-Documents (Archive):**
-- guidelines/performance-optimization-report.md (archive)
-
-**Destination Path:** `guidelines/_archive/performance-report-pointer.md`
-
-**Pointer Strategy:** Type 3 (Archival) – comment pointer noting consolidation into N017.  
-**Status:** Archive existing; create pointer
-
----
-
-### N028: Dark Mode Implementation Report
-**Purpose:** Dark mode implementation findings, design decisions, and lessons learned (archive of report).  
-**Related G-Documents (Archive):**
-- guidelines/dark-mode-lessons-learned.md (archive)
-- guidelines/nova-news-dark-mode.md (archive; out-of-scope per D8 if Nova News unrelated)
-
-**Destination Path:** `guidelines/_archive/dark-mode-report-pointer.md`
-
-**Pointer Strategy:** Type 3 (Archival).  
-**Status:** Archive existing; create pointer
-
----
-
-### N029: Migration & Archive Index
-**Purpose:** Historical guide to archived/deprecated documents, migration notes, and version history.  
-**Related G-Documents (Archive/Reference):**
-- guidelines/wordpress-migration-guide.md (archive per D8 – WordPress not in use)
-- guidelines/wordpress-block-patterns.md (archive per D8)
-- guidelines/wordpress-preset-system.md (archive per D8)
-
-**Destination Path:** `guidelines/_archive/ARCHIVE-INDEX.md`  
-**Pointer Strategy:** N/A (archive index document).  
-**Status:** Create index for archived documents
-
----
-
-## Documents Out of Phase 2 Scope (Per D8)
-
-These 4 N-documents are deferred to Phase 3 per D8 decision (WordPress not in active use):
-
-- N030: WordPress Block Patterns & Integration
-- N031: WordPress Migration & Setup Guide
-- N032: PWA Implementation & Service Worker
-- N033: Portfolio Showcase Patterns
-
----
-
-## G-Documents Without N-Consolidation (Remain Standalone)
-
-These guidelines remain active and unchanged (no consolidation into N-documents):
-
-### Component Guidelines (Keep Standalone)
-- guidelines/components/*.md (30 component-specific guides)
-- guidelines/blocks/*.md (block-specific guides)
-- guidelines/mobile/*.md (7 mobile guidelines)
-- guidelines/parts/*.md (3 template parts)
-- guidelines/sections/*.md (6 section patterns)
-- guidelines/icons/*.md (2 icon set guides)
-- guidelines/templates/*.md (template guides)
-- guidelines/overview-*.md (4 overview guides)
-- guidelines/troubleshooting/*.md (3 troubleshooting guides)
-
-### Rationale
-These component/template/override guides are highly specific and benefit from standalone documentation. N-documents reference them or they appear in component catalogs (N005), but are not consolidated.
-
----
-
-## Pointer Strategy Summary
-
-| Operation | Count | Details |
-|-----------|-------|---------|
-| Type 1 (Relocation) | ~8 | Old paths → new N-document location |
-| Type 2 (Consolidation) | ~12 | Multiple G-docs → single N-document destination |
-| Type 3 (Archival) | ~4 | Deprecated/out-of-scope → `guidelines/_archive/` |
-| Reference (Keep) | ~92 | Standalone or indexed in N-documents |
-| **Total** | **116** | All G-documents accounted for |
-
----
-
-## Implementation Sequence
-
-1. **Phase 2C (T028–T032):** Create N-documents N001–N029 using this manifest as guide
-2. **Phase 2B (T024–T027):** Edit G-documents to add N-document pointers per this mapping
-3. **Phase 2D (T033–T034):** Create Type 1/2/3 pointers per above strategy
-4. **Phase 3 (T041–T043):** Verify consolidation manifest completeness; document any exceptions
-
----
-
-## Next Steps
-
-- [ ] Review mapping against existing G-document inventory
-- [ ] Confirm N-document names with design authority (Ash Shaw per D3)
-- [ ] Validate that all 116 G-documents are accounted for
-- [ ] Identify any G-documents requiring special handling or approved exceptions
-- [ ] Begin N-document creation (Phase 2C)
-
----
-
-*Generated: 2026-10-25*  
-*Authority: D4 decision (requirements.md § D4)*  
-*Branch: docs/spec-003-planning-reconciliation*
+*Manifest Created: 2026-11-09*  
+*Authority: D4 (Owner) & D5 (Implementation Guidance)*  
+*Specification: [spec.md](./spec.md) | [requirements.md](./checklists/requirements.md)*

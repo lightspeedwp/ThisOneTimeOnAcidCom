@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 # PWA Implementation Guide - This One Time On Acid
+=======
+<!-- Type 3 (Archival) Pointer -->
+<!-- Original: Guidelines/pwa-implementation.md -->
+<!-- Reason: PWA guidance superseded by modern alternatives; out of scope -->
+<!-- Archived into: guidelines/_archive/pwa-legacy.md -->
+<!-- Authority: D5.c (Status Notation), D5 (Archival Strategy) -->
+>>>>>>> 38f1962 (feat(003-T049-Phase2-3): Complete pointer operations (Type 2 & Type 3))
 
-**Version:** 1.0.0
-**Last Updated:** February 5, 2025
-**Status:** ✅ Complete and Production-Ready
+> ⚠️ **ARCHIVED** · Progressive Web App implementation guidance has been superseded. See archive for historical reference.
+
+For current deployment and performance guidance, refer to the active guidelines.
 
 ---
+<<<<<<< HEAD
 
 ## 📋 Overview
 
@@ -676,3 +685,7 @@ registration.addEventListener('updatefound', () => {
 - Service worker not registering? → Check HTTPS requirement
 - Offline mode not working? → Verify cache configuration
 - Icons not showing? → Generate all required sizes
+=======
+<!-- Archived into: ./_archive/pwa-legacy.md -->
+*Archived: 2026-11-11 | Type 3 Archival | D5 Authority*
+>>>>>>> 38f1962 (feat(003-T049-Phase2-3): Complete pointer operations (Type 2 & Type 3))
