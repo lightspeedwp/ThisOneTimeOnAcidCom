@@ -4,7 +4,7 @@
 
 **Created**: 2026-10-17
 
-**Status**: Draft — Awaiting clarifications on critical decisions
+**Status**: Clarified — Ready for Planning (2026-11-09)
 
 **Input**: User request: "Draft the TOA media-library specification using GitHub
 Spec Kit. Repository: lightspeedwp/ThisOneTimeOnAcidCom. Requested feature
@@ -396,7 +396,21 @@ Captures findings from validation runs.
 
 ---
 
-## Clarification Questions — CRITICAL DECISIONS REQUIRED
+## Clarifications
+
+### Session 2026-11-09
+
+- Q: Which storage provider and visual editing workflow are approved for planning? → A: GitHub + Netlify (Option A)
+- Q: What is the realistic count of recoverable assets and minimum print-quality baseline? → A: 40–50 of 56 assets, 300 DPI, RGB/CMYK, PNG/PDF (Option A)
+- Q: What is the intended sequence between definition, validation, and implementation phases? → A: Parallel execution with coordinated validation (Option B)
+
+**Specification Status After Clarifications**: ✅ READY FOR PLANNING
+
+All critical ambiguities resolved. Proceed to `/speckit-plan` for detailed implementation strategy.
+
+---
+
+## Clarification Questions — HISTORICAL (ALL RESOLVED)
 
 These questions must be answered to resolve specification ambiguities that
 impact downstream work. Recommended answers are provided; owner confirmation is
@@ -598,22 +612,22 @@ refine based on validation).
 
 ## Next Steps
 
-### When Specification is Ready for Planning
+### Specification is READY for Planning
 
-Once the three clarification questions above are answered, proceed to:
+All three critical clarification questions have been answered (Session 2026-11-09). Proceed to:
 
-1. **`/speckit-clarify`** — Document owner's answers and resolve any follow-up
-   ambiguities
+1. **✅ COMPLETED** — `/speckit-clarify` — All critical ambiguities resolved (Q1: GitHub + Netlify, Q2: 40–50 assets @ 300 DPI, Q3: parallel execution)
 
-1. **`/speckit-plan`** — Generate implementation plan and research tasks
+2. **NEXT** — `/speckit-plan` — Generate implementation plan, architecture, and research tasks
 
-1. **`/speckit-tasks`** — Decompose into actionable tasks
+3. **THEN** — `/speckit-tasks` — Decompose into actionable task breakdown
 
-### Do NOT Proceed Until
+### Downstream work can begin immediately
 
-- [ ] Provider choice or evaluation approval is confirmed (Q1)
-- [ ] Asset recovery target is verified (Q2)
-- [ ] Implementation-phase sequencing is clarified (Q3)
+- ✅ TOA-276 (Provider evaluation) — Baseline confirmed
+- ✅ TOA-277, TOA-283 (Catalogue schema) — Recovery target confirmed
+- ✅ TOA-284, TOA-285 (Infrastructure) — Provider choice confirmed (GitHub + Netlify)
+- ✅ TOA-279, TOA-282 (Validation) — Acceptance targets defined
 
 ---
 
@@ -659,5 +673,4 @@ Once the three clarification questions above are answered, proceed to:
 
 ---
 
-**Version**: 1.0-draft | **Created**: 2026-10-17 | **Status**: Awaiting
-clarifications Q1, Q2, Q3
+**Version**: 1.1-clarified | **Created**: 2026-10-17 | **Clarified**: 2026-11-09 | **Status**: Ready for Planning

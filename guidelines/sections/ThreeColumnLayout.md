@@ -472,8 +472,8 @@ backgroundGradient={{
 
 ## Decorative Element Styling
 
-- Always wrapped in `pointer-events-none` container
-- Always includes `aria-hidden="true"` for accessibility
+- Wrapped in `pointer-events-none` container
+- Includes `aria-hidden="true"` for accessibility
 - Positioned with `absolute`
 - Uses low opacity (20-30%) for subtle effect
 - Uses `blur-3xl` for soft appearance
@@ -504,7 +504,7 @@ backgroundGradient={{
         max-w-2xl
         mx-auto
       ">
-        Three core reasons that drive my passion for makeup artistry
+        Three core reasons that drive my passion for creative storytellerry
       </p>
     </div>
   }
@@ -693,7 +693,7 @@ mb-fluid-sm">
   gap="lg"
   padding="2xl"
 >
-  <TeamMemberCard name="Ash Shaw" role="Lead Artist" />
+  <TeamMemberCard name="This One Time On Acid" role="Lead Artist" />
   <TeamMemberCard name="Artist 2" role="Makeup Artist" />
   <TeamMemberCard name="Artist 3" role="Hair Stylist" />
 </ThreeColumnLayout>
@@ -963,9 +963,9 @@ Differences:
 
 ### Design Tokens (1)
 
-- **[spacing.md](../design-tokens/spacing.md)** - Fluid spacing scale
-- **[colors.md](../design-tokens/colors.md)** - Color system and gradients
-- **[typography.md](../design-tokens/typography.md)** - Typography scale
+- **[spacing.md](../design-tokens-reference.md)** - Fluid spacing scale
+- **[colors.md](../design-tokens-reference.md)** - Color system and gradients
+- **[typography.md](../design-tokens-reference.md)** - Typography scale
 
 ---
 

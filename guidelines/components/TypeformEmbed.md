@@ -13,7 +13,7 @@ whitelisting Typeform domains in extension detection utilities. See
 
 ## Overview
 
-The `TypeformEmbed` component integrates Typeform forms into the Ash Shaw
+The `TypeformEmbed` component integrates Typeform forms into the This One Time On Acid
 portfolio with full light/dark mode support and Semantic BEM styling. It
 provides a seamless embedded form experience that matches the portfolio's "Neon
 vs Atomic Black" design system.
@@ -468,5 +468,5 @@ Before deployment, verify:
 ---
 
 **Last Updated:** February 2025
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Team
 **Dependencies:** Typeform Embed SDK (`embed.typeform.com/next/embed.js`)

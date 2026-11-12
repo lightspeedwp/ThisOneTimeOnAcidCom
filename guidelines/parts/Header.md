@@ -11,7 +11,7 @@ Site header with logo, navigation, and mobile menu.
 
 - **[overview-parts.md](../overview-parts.md)** - Template parts system
 - **[components/Header.md](../components/Header.md)** - Header component documentation
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing
 
 ---
 

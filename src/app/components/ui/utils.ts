@@ -1,7 +1,8 @@
 /**
  * @fileoverview Utility functions for className manipulation and styling
- * Provides a cn (className) utility function for combining and deduplicating
- * CSS classes using a zero-dependency inline implementation.
+ * Provides a cn (className) utility function for combining CSS class values
+ * using a zero-dependency inline implementation. It does not deduplicate
+ * class names.
  * 
  * Replaces the external `clsx` package to eliminate a potential esm.sh
  * resolution issue that may have caused the async_hooks runtime error.
@@ -46,7 +47,8 @@ function toClassString(val: ClassValue): string {
 }
 
 /**
- * Utility function to combine and deduplicate CSS class names
+ * Utility function to combine CSS class values. Class names are concatenated;
+ * duplicate names are not removed.
  * 
  * Zero-dependency replacement for clsx. Combines multiple class values.
  * 

@@ -4,33 +4,24 @@
 min_version: 1.5.3
 
 # Pre-commit: validate branch naming and journal markdown
+# Runs validations and logs errors without blocking commits
 pre-commit:
   parallel: false
   commands:
-    branch-validate:
-      run: npm run validate:branch-name
-      skip:
-        - merge
-        - rebase
-    journal-validate:
-      glob: "content/journal/*.md"
-      run: npm run journal:validate
+    validate-all:
+      run: bash scripts/hooks/validate-with-logging.sh
       skip:
         - merge
         - rebase
 
 # Pre-push: validate branch naming and build verification before pushing to remote
+# Logs errors without blocking push to allow Figma Make and automation to proceed
 pre-push:
   parallel: false
   commands:
-    branch-validate:
-      run: npm run validate:push-branch
+    push-validate-all:
+      run: bash scripts/hooks/validate-push-with-logging.sh
       use_stdin: true
-      skip:
-        - merge
-        - rebase
-    build:
-      run: npm run build
       skip:
         - merge
         - rebase

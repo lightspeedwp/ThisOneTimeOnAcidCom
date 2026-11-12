@@ -224,7 +224,7 @@ transition-colors"
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-fluid-sm font-body text-gray-400 text-center md:text-left">
-              © {currentYear} Ash Shaw. All rights reserved.
+              © {currentYear} This One Time On Acid. All rights reserved.
             </p>
 
             <div className="flex gap-6">
@@ -266,7 +266,7 @@ transition-colors"
     <SocialLinks className="justify-center mb-fluid-md" />
 
     <p className="text-fluid-sm font-body text-gray-400">
-      © 2025 Ash Shaw. All rights reserved.
+      © 2025 This One Time On Acid. All rights reserved.
     </p>
   </div>
 </footer>
@@ -421,7 +421,7 @@ hover:scale-105 transition-all">
 ```tsx
 // ❌ WRONG - No way to contact
 <footer>
-  <p>© 2025 Ash Shaw</p>
+  <p>© 2025 This One Time On Acid</p>
 </footer>
 
 ```text
@@ -556,8 +556,8 @@ stateDiagram-v2
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 - **[overview-components.md](../overview-components.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
-- **[design-tokens/colors.md](../design-tokens/colors.md)** - Color system
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 
 ---
 

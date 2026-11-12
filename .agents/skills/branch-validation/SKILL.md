@@ -288,13 +288,13 @@ git push -u origin new-name
 
 ```bash
 
-# 1. Fetch latest develop branch
+# 1. Fetch latest main branch
 
-git fetch origin develop
+git fetch origin main
 
 # 2. Create feature branch with correct name
 
-git checkout -b feat/your-feature origin/develop
+git checkout -b feat/your-feature origin/main
 
 # 3. Make changes and commit
 
@@ -340,6 +340,7 @@ Invalid branch names cause:
 - `docs/BRANCH*NAMING*LOCAL.md` – Local developer quick reference
 - `scripts/validate-branch-name.js` – Validation script
 - `CONTRIBUTING.md` – Contribution workflow
+- `.github/specs/003-refactor-guidelines/spec.md` – Guidelines Refactor specification (uses `docs/spec-003-*` branches)
 
 ---
 

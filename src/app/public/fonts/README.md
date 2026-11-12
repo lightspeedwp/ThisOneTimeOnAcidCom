@@ -1,31 +1,12 @@
-# Self-Hosted Fonts for Ash Shaw Portfolio
+# Font status note
 
-This directory contains the self-hosted woff2 font files for optimal performance
-and consistency.
+This nested directory currently contains this README only. The previously
+advertised Playfair Display, Inter and Righteous WOFF2 files were not present
+in the inspected source tree.
 
-## Font Files Structure
+`src/styles/fonts.css` declares a remote Google Fonts import for DM Sans and
+JetBrains Mono. A CSS declaration does not establish successful browser
+fetching or rendering.
 
-```text
-fonts/
-├── playfair-display/
-│   ├── playfair-display-regular.woff2
-│   ├── playfair-display-medium.woff2
-│   ├── playfair-display-semibold.woff2
-│   ├── playfair-display-bold.woff2
-│   └── playfair-display-bold-italic.woff2
-├── inter/
-│   ├── inter-light.woff2
-│   ├── inter-regular.woff2
-│   ├── inter-medium.woff2
-│   ├── inter-semibold.woff2
-│   └── inter-bold.woff2
-└── righteous/
-    └── righteous-regular.woff2
-
-```text
-
-## Download Instructions
-
-See `/FONT*DOWNLOAD*GUIDE.md` for the exact Google Fonts URLs to download.
-
-After downloading, place the files in the appropriate folders above.
+Self-hosting remains undecided. Do not download fonts, add assets, change font
+loading or alter publication as part of this note.

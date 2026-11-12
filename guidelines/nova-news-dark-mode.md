@@ -1,13 +1,16 @@
-# Nova News Dark Mode Implementation Guide
+<!-- Type 3 (Archival) Pointer -->
+<!-- Original: Guidelines/nova-news-dark-mode.md -->
+<!-- Reason: nova-news integration not in active scope (D8) -->
+<!-- Archived into: guidelines/_archive/nova-news-dark-mode.md -->
+<!-- Replacement: N033 (nova-news Integration Guide) - Phase 3 -->
+<!-- Authority: D5.c (Status Notation), D8 (Portfolio/nova-news scope) -->
 
-**Version:** 1.0.0
-**Project:** Nova News (Book Website)
-**Last Updated:** March 12, 2026
+> ⚠️ **ARCHIVED** · nova-news integration guidance is out of scope for Phase 2. See [N033: nova-news Integration Guide](../N033-nova-news-integration.md) for Phase 3 reference.
 
-Quick reference guide for implementing and maintaining dark mode across the Nova
-News website with neon pink and yellow accents on atomic black backgrounds.
+This document is archived. For dark mode guidance, see [N010: Dark Mode Implementation](./N010-dark-mode-implementation.md).
 
 ---
+<<<<<<< HEAD
 
 ## 🎯 Quick Start
 
@@ -41,7 +44,7 @@ imported last in `globals.css` to ensure proper cascade.
 
 /* ... all component styles ... */
 
-/* Dark Mode - MUST BE LAST */
+/* Dark Mode - Place last for proper precedence */
 @import './blocks/book-dark-mode.css';
 
 ```text
@@ -50,7 +53,7 @@ imported last in `globals.css` to ensure proper cascade.
 
 ## 🎨 Selector Pattern (CRITICAL)
 
-## Always use BOTH `.dark` and `body.dark` selectors
+## Use BOTH `.dark` and `body.dark` selectors
 
 ```css
 /* ✅ CORRECT - Catches all theme toggle scenarios */
@@ -487,11 +490,15 @@ All pages have dark mode implemented:
 
 ## 📚 Related Documentation
 
-- **[dark-mode-lessons-learned.md](./dark-mode-lessons-learned.md)** - Detailed lessons from implementing dark mode (70+ hours of experience)
-- **[design-tokens/neon-colors.md](./design-tokens/neon-colors.md)** - Complete neon color system reference
+- **[css-architecture-reference.md](./css-architecture-reference.md)** - Detailed lessons from implementing dark mode (70+ hours of experience)
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Complete neon color system reference
 - **[/styles/blocks/book-dark-mode.css](../styles/blocks/book-dark-mode.css)** - Master dark mode CSS file
 
 ---
 
 **Last Updated:** March 12, 2026
 **Maintained By:** Nova News Development Team
+=======
+<!-- Consolidated into: ../N033-nova-news-integration.md -->
+*Archived: 2026-11-11 | Type 3 Archival | D5 Authority | D8: nova-news deferred*
+>>>>>>> 38f1962 (feat(003-T049-Phase2-3): Complete pointer operations (Type 2 & Type 3))

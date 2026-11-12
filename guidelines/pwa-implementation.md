@@ -1,14 +1,23 @@
-# PWA Implementation Guide - Ash Shaw Makeup Portfolio
+<<<<<<< HEAD
+# PWA Implementation Guide - This One Time On Acid
+=======
+<!-- Type 3 (Archival) Pointer -->
+<!-- Original: Guidelines/pwa-implementation.md -->
+<!-- Reason: PWA guidance superseded by modern alternatives; out of scope -->
+<!-- Archived into: guidelines/_archive/pwa-legacy.md -->
+<!-- Authority: D5.c (Status Notation), D5 (Archival Strategy) -->
+>>>>>>> 38f1962 (feat(003-T049-Phase2-3): Complete pointer operations (Type 2 & Type 3))
 
-**Version:** 1.0.0
-**Last Updated:** February 5, 2025
-**Status:** ✅ Complete and Production-Ready
+> ⚠️ **ARCHIVED** · Progressive Web App implementation guidance has been superseded. See archive for historical reference.
+
+For current deployment and performance guidance, refer to the active guidelines.
 
 ---
+<<<<<<< HEAD
 
 ## 📋 Overview
 
-The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App
+The This One Time On Acid is now a fully functional **Progressive Web App
 (PWA)** with offline support, installability, and native app-like features.
 
 ### ✨ Key Features
@@ -20,7 +29,7 @@ The Ash Shaw Makeup Portfolio is now a fully functional **Progressive Web App
 - ✅ **Installation Prompt** - Custom branded install experience
 - ✅ **App Shortcuts** - Quick access to Portfolio, Blog, and Contact pages
 - ✅ **Responsive** - Works on all devices and screen sizes
-- ✅ **Accessible** - WCAG 2.1 Level AA compliant
+- ✅ **Accessible** - WCAG 2.2 Level AAA target (verification in progress)
 
 ---
 
@@ -69,8 +78,8 @@ ash-shaw-makeup-portfolio/
 
 ```json
 {
-  "name": "Ash Shaw Makeup Artist Portfolio",
-  "short_name": "Ash Shaw",
+  "name": "This One Time On Acid Makeup Artist Portfolio",
+  "short_name": "This One Time On Acid",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0F0F0F",
@@ -310,7 +319,7 @@ All animations respect `prefers-reduced-motion`:
 
 1. Look for install icon in address bar
 
-1. Click "Install Ash Shaw"
+1. Click "Install This One Time On Acid"
 
 1. App opens in standalone window
 
@@ -500,7 +509,7 @@ await Promise.all(cacheNames.map(name => caches.delete(name)));
 
 ## ♿ Accessibility
 
-### WCAG 2.1 Level AA Compliance
+### WCAG 2.2 Level AAA Compliance
 
 ## PWA Install Prompt
 
@@ -660,7 +669,7 @@ registration.addEventListener('updatefound', () => {
 - ✅ Offline homepage support
 - ✅ Installation prompt component
 - ✅ Network status indicator
-- ✅ WCAG 2.1 AA compliant
+- ✅ WCAG 2.2 Level AAA compliant
 - ✅ Neon design system integration
 - ✅ Complete documentation
 
@@ -668,7 +677,7 @@ registration.addEventListener('updatefound', () => {
 
 **Implemented:** February 5, 2025
 **Status:** Production-Ready
-**Maintained by:** Ash Shaw Portfolio Team
+**Maintained by:** This One Time On Acid Portfolio Team
 
 ## Need Help
 
@@ -676,3 +685,7 @@ registration.addEventListener('updatefound', () => {
 - Service worker not registering? → Check HTTPS requirement
 - Offline mode not working? → Verify cache configuration
 - Icons not showing? → Generate all required sizes
+=======
+<!-- Archived into: ./_archive/pwa-legacy.md -->
+*Archived: 2026-11-11 | Type 3 Archival | D5 Authority*
+>>>>>>> 38f1962 (feat(003-T049-Phase2-3): Complete pointer operations (Type 2 & Type 3))

@@ -1,7 +1,7 @@
-# Ash Shaw Makeup Portfolio - Guidelines Directory
+# This One Time On Acid - Guidelines Directory
 
-**Welcome to the comprehensive design system guidelines for the Ash Shaw Makeup
-Portfolio project.**
+**Welcome to the comprehensive design system guidelines for This One Time On Acid,
+a memoir and creative-life-guide project.**
 
 This directory contains all the documentation needed to build and maintain the
 portfolio using Figma Make's AI-powered development environment.
@@ -15,15 +15,15 @@ portfolio using Figma Make's AI-powered development environment.
 
 ### For AI Agents (Figma Make)
 
-Follow this **exact reading order** to understand the design system:
+Here's a recommended reading order to understand the design system:
 
-#### Step 1: Start Here (REQUIRED)
+#### Step 1: Start Here
 
-1. **[Guidelines.md](./Guidelines.md)** - Read this FIRST for project overview and critical rules
+1. **[Guidelines.md](./Guidelines.md)** - Project overview and key architectural decisions
 
 1. **[voice-and-tone.md](./voice-and-tone.md)** - Brand voice and writing guidelines
 
-#### Step 2: Read Overviews (REQUIRED)
+#### Step 2: Read Overviews
 
 1. **[overview-components.md](./overview-components.md)** - Complete component system overview
 
@@ -39,30 +39,30 @@ Follow this **exact reading order** to understand the design system:
 
 1. **[overview-templates.md](./overview-templates.md)** - Page templates
 
-#### Step 3: Read Design Tokens (REQUIRED)
+#### Step 3: Read Design Tokens
 
-1. **[design-tokens/neon-colors.md](./design-tokens/neon-colors.md)** - Neon vs Atomic Black color system (PRIMARY) — 33 curated palettes with interface inspiration
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Neon vs Atomic Black color system (PRIMARY) — 33 curated palettes with interface inspiration
 
-1. **[design-tokens/animations.md](./design-tokens/animations.md)** - Complete animation system (26 keyframes)
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Complete animation system (26 keyframes)
 
-1. **[design-tokens/colors.md](./design-tokens/colors.md)** - Legacy color reference
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Legacy color reference
 
-1. **[design-tokens/typography.md](./design-tokens/typography.md)** - Typography hierarchy
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Typography hierarchy
 
-1. **[design-tokens/spacing.md](./design-tokens/spacing.md)** - Spacing system
+1. **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
 
-#### Step 4: Understand Data System (REQUIRED)
+#### Step 4: Understand Data System
 15. **[Data System Documentation](./data-models.md)** - Data model definitions and centralized content management
 
-#### Step 5: Read Theme Documentation (REQUIRED)
+#### Step 5: Read Theme Documentation
 
-1. **[dark-mode-implementation.md](./dark-mode-implementation.md)** - Complete dark mode implementation
+1. **[css-architecture-reference.md](./css-architecture-reference.md)** - Complete dark mode implementation
 
 1. **[component-dark-mode.md](./component-dark-mode.md)** - Component-specific theme patterns
 
-#### Step 6: Read Component Guidelines BEFORE Using
+#### Step 6: Component Guidelines
 
-1. Before using ANY component, read its specific file in **[components/](./components/)**
+When using a component, review its specific file in **[components/](./components/)**
 
 #### Step 7: Mobile Guidelines (If Building Mobile Features)
 
@@ -97,11 +97,11 @@ guidelines/
 │
 ├── search-system.md               - Global search system
 ├── pwa-implementation.md          - Progressive Web App features
-├── dark-mode-implementation.md    - Dark mode implementation
+├── css-architecture-reference.md    - Dark mode implementation
 ├── component-dark-mode.md         - Component theme patterns
 ├── css-architecture.md            - CSS system documentation
 ├── data-models.md                 - Data model definitions
-├── accessibility-report-feb-2025.md - WCAG AA compliance report
+├── accessibility-report-feb-2025.md - WCAG 2.2 AAA compliance report
 │
 ├── components/                    - Component-specific guides (24 files)
 │   ├── Logo.md
@@ -184,11 +184,11 @@ guidelines/
 
 | File | Purpose | Coverage |
 |------|---------|----------|
-| **[neon-colors.md](./design-tokens/neon-colors.md)** | Neon color system | 8 neon colors, atomic black, gradients |
-| **[animations.md](./design-tokens/animations.md)** | Animation system | 26 keyframes, reduced motion |
-| **[colors.md](./design-tokens/colors.md)** | Legacy colors | Semantic tokens reference |
-| **[typography.md](./design-tokens/typography.md)** | Typography | Fluid scale, font families |
-| **[spacing.md](./design-tokens/spacing.md)** | Spacing | Fluid scale, component utilities |
+| **[neon-colors.md](./design-tokens-reference.md)** | Neon color system | 8 neon colors, atomic black, gradients |
+| **[animations.md](./design-tokens-reference.md)** | Animation system | 26 keyframes, reduced motion |
+| **[colors.md](./design-tokens-reference.md)** | Legacy colors | Semantic tokens reference |
+| **[typography.md](./design-tokens-reference.md)** | Typography | Fluid scale, font families |
+| **[spacing.md](./design-tokens-reference.md)** | Spacing | Fluid scale, component utilities |
 
 ---
 
@@ -216,8 +216,8 @@ guidelines/
 
 ## Adding Icons
 
-- Check [overview-icons.md](./overview-icons.md) for verification process
-- Never assume an icon exists — verify first
+- Check [overview-icons.md](./overview-icons.md) for available icons
+- Verify an icon is available before using it
 
 ## Testing Accessibility
 

@@ -1,381 +1,187 @@
-# Testing Guide
+# Testing guide
 
-This guide covers all testing infrastructure in ThisOneTimeOnAcidCom: unit
-tests, build verification, end-to-end tests, and specification regression
-testing.
+Original documentation review: 24 October 2026, revision
+`3f583002482d80ffd1910676bcf7c63e13989b20`.
+Command-sequence amendment checked against develop revision
+`f99275b085cffd209b9bd42f6e463c0af643099a`.
+Commands below describe available procedures, not checks executed for this
+review. Dependency installation and test execution require their own authority
+and may write files.
 
-## Quick Start
+## Defined commands
 
-Run all test suites:
+| Purpose | Command | Configuration or behaviour |
+|---|---|---|
+| Unit tests | `npm run test:unit` | Jest, `jest.config.js` |
+| Native tests | `npm run test:native` | Node test runner: `tests/sentry.test.mjs`, `tests/source-maps.test.mjs` |
+| Unit watch mode | `npm run test:unit:watch` | Jest watch mode |
+| Unit coverage | `npm run test:unit:coverage` | Jest coverage configuration |
+| Build verification | `npm run test:build` | Production build, then `bats tests/build.bats` |
+| E2E tests | `npm run test:e2e` | Playwright, `playwright.config.ts` |
+| E2E debug mode | `npm run test:e2e:debug` | Playwright inspector |
+| E2E UI mode | `npm run test:e2e:ui` | Playwright UI |
+| Spec Kit regression | `node --test tests/speckit.test.mjs` | Separate Node test-runner suite |
 
-```bash
-npm test
+`npm test` chains unit, native, build and E2E commands with `&&`. A failure
+stops later suites. It does not include the separate Spec Kit suite or every
+test file in the repository.
 
-```text
+`package.json` defines no `lint`, `typecheck`, `type-check`, `verify` or
+`format` script. References to those commands in root guidance are conflicting
+documentation, not executable validation instructions.
 
-Run individual test suites:
+## Jest discovery and module limits
 
-```bash
-npm run test:unit        # Jest unit tests
-npm run test:build       # Bats build verification
-npm run test:e2e         # Playwright end-to-end tests
+`jest.config.js` discovers:
 
-```text
+- `**/scripts/**/*.test.js`
+- `**/tests/**/*.test.js`
 
-## Test Infrastructure Overview
+Its transform matches `.js` and `.jsx` files and delegates to `@swc/jest`.
+Listing TypeScript extensions in `moduleFileExtensions` does not add TypeScript
+test discovery or transformation.
 
-| Suite | Tool | Command | Purpose | Status |
-|-------|------|---------|---------|--------|
-| Unit tests | Jest ESM | `npm run test:unit` | Component logic, utilities, scripts | ✅ 588/588 pass |
-| Build verification | Bats | `npm run test:build` | Bundle integrity, output files, routing | ✅ 12/12 pass |
-| E2E tests | Playwright | `npm run test:e2e` | Browser interactions, full app flows | ⏳ Ready (no tests yet) |
-| Spec Kit regression | Node test runner | `node --test tests/speckit.test.mjs` | Spec Kit pipeline validation | ⚠️ 103/104 (approved baseline) |
+Vitest has separate `.test.ts` and `.test.js` patterns in `vitest.config.ts`,
+but no npm script. That configuration is not used by `npm run test:unit`.
 
-## Unit Tests (Jest ESM)
+Vite's `@` alias points to `src/app`; Jest has no corresponding
+`moduleNameMapper`. Do not assume alias imports, dynamic imports, top-level
+await or a particular ESM/CommonJS case work merely because a transformer is
+declared. Inspect the configuration and record the relevant executed test.
 
-Jest is configured with ESM support via `@swc/core`, enabling modern JavaScript
-test syntax.
+Coverage configuration collects JavaScript under `scripts/`, excluding test
+files. It does not establish whole-application coverage.
 
-### Running Unit Tests
+## Build verification and side effects
 
-```bash
+`tests/build.bats` checks the build command, output directory and HTML file,
+a regular readable `public/_redirects` containing the expected rule, copied
+redirects, an assets directory and at least one JavaScript file.
 
-# Run all unit tests once
+Its coverage is narrower than some names suggest:
 
-npm run test:unit
+- The CSS-labelled check only asserts that `dist/assets` is a directory.
+- The warnings-labelled check only asserts that output exists.
+- It does not establish complete output cleanliness, deployed routing,
+  cache headers or absence of regressions.
 
-# Watch mode (re-run on file changes)
+The suite's setup removes an existing `dist/`, and a test rebuilds it.
+The npm script also builds before invoking Bats. Neither invocation is a
+read-only inspection of an existing build.
 
-npm run test:unit:watch
+For a failed assertion, distinguish build failure from output-contract failure.
+Inspect actual output and whether redirects are regular files; do not
+automatically change build or hosting configuration.
 
-# Coverage report
+## Playwright setup and server
 
-npm run test:unit:coverage
-
-```text
-
-### Test Files
-
-Unit tests are located throughout the codebase using the `.test.js` or
-`.test.ts` extension:
-
-- `scripts/**/*.test.js` – Build and validation script tests
-- `scripts/_*tests*_/**/*.test.js` – Grouped test files
-- `tests/contracts/**/*.test.js` – Contract validation tests
-
-### ESM Support
-
-Jest is configured to transform ES modules automatically:
-
-```typescript
-// ✅ Modern syntax works
-import { helperFunction } from "@/lib/helpers";
-const result = await asyncFunction();
-
-// ✅ Dynamic imports
-const module = await import("./dynamic-module.js");
-
-// ✅ Top-level await
-await setupDatabase();
-
-```text
-
-### Common Issues
-
-**Issue**: Tests fail with "Cannot find module"
-
-**Solution**: Verify the module is exported and the import path is correct. Jest
-resolves paths relative to the source file.
-
-**Issue**: ESM import of CommonJS module fails
-
-**Solution**: Use dynamic import or configure `jest.config.js` to handle the
-specific module type.
-
-## Build Verification (Bats)
-
-Bats is a Bash testing framework that validates the build output without running
-the app.
-
-### Running Build Tests
-
-```bash
-
-# Run build and verify output
-
-npm run test:build
-
-```text
-
-This command:
-
-1. Runs `npm run build` (production build via Vite)
-
-1. Runs `tests/build.bats` to validate output
-
-### What Build Tests Check
-
-- ✅ Build succeeds without errors
-- ✅ `dist/` directory created
-- ✅ `dist/index.html` exists
-- ✅ `public/*redirects` copied to `dist/*redirects` (SPA routing)
-- ✅ CSS assets compiled and bundled
-- ✅ JavaScript bundles created
-- ✅ Build output is clean (no unexpected files)
-
-### Viewing Build Tests
-
-```bash
-cat tests/build.bats
-
-```text
-
-### Common Issues (1)
-
-**Issue**: Build test fails with "dist directory not created"
-
-**Solution**: Check `npm run build` output for errors. Fix the build issue, then
-re-run `npm run test:build`.
-
-**Issue**: Redirect rules not copied to dist
-
-**Solution**: Verify `public/_redirects` is a file (not a directory) and Vite is
-configured to copy the `public/` directory.
-
-## End-to-End Tests (Playwright)
-
-Playwright enables browser-based testing of the full application. Setup is
-required before running tests.
-
-### Installing Browsers
-
-First-time setup — install Playwright browsers separately:
+After an authorised installation of locked dependencies, browser setup is
+separate:
 
 ```bash
 npx playwright install
+```
 
-```text
+Configured projects use Chromium, Firefox and WebKit, including mobile profiles.
+WebKit coverage is not proof that Safari itself was tested.
+The test scripts do not install browsers; record downloads and operating-system
+setup failures separately.
 
-This installs Playwright browsers (Chromium, Firefox, Safari) needed for running
-tests.
+Tests belong in `e2e/`, including `e2e/routing.spec.ts`, not `tests/e2e/`.
+Existing tests use relative navigation such as `page.goto('/journal')`.
 
-### Running E2E Tests
+The configured base URL is `http://localhost:3000`. Playwright's `webServer`
+builds the site and starts `node scripts/test-server.js`; a separate Vite server
+on port 5173 is not required. Outside CI, an existing server may be reused.
+The test server defaults to 3000 but honours `PORT`; any override must agree
+with Playwright's configured URL.
 
-```bash
+For server errors, inspect build and startup output. For port conflicts,
+identify the process and its owner before stopping it; do not kill every
+process matching a port. For timeouts, inspect the route, element and trace
+before changing waits or timeouts.
 
-# Run all e2e tests
+Local server results do not validate Netlify's deployed routing or headers.
 
-npm run test:e2e
+## Spec Kit regression
 
-# Debug mode (open inspector)
+The separately invoked suite concerns specification numbering, pipeline
+behaviour, template selection and path resolution. A test's existence does not
+establish that its assertions pass or that all workflows are covered.
 
-npm run test:e2e:debug
+Earlier guidance reported 103 passing tests and one template-resolution failure,
+104 total, rounded to 99%. It called the failure approved and non-critical.
+No linked acceptance decision or current impact assessment was established in
+this review. Known failure is not automatically accepted failure.
 
-# UI mode (visual test runner)
+## CI configuration
 
-npm run test:e2e:ui
+At the reviewed revision:
 
-```text
+- `tests.yml` runs Jest for PR head and base and compares reports through
+  `No new test failures`. Qualifying documentation-only PRs skip that comparison.
+  It does not run the build or E2E suite.
+- `claude-guard-tests.yml` handles PR and merge-group events for `develop`
+  and `main`. It conditionally runs contract tests and may skip for irrelevant
+  changes or absent designated test files.
 
-### Writing E2E Tests
+A successful comparison does not prove zero existing failures. A successful
+conditional job does not prove tests executed. Inspect actual reports and
+skip reasons. Workflow definitions alone do not establish live required checks
+or merge readiness.
 
-E2E tests go in `tests/e2e/` and follow Playwright conventions:
+## Dependency and module troubleshooting
 
-```typescript
-// tests/e2e/homepage.spec.ts
-import { test, expect } from '@playwright/test';
+For a missing module, inspect the import, declared dependency and installation
+error before modifying files.
 
-test('homepage loads and displays title', async ({ page }) => {
-  await page.goto('http://localhost:5173');
-  await expect(page).toHaveTitle(/Ash Shaw/);
-});
-
-test('navigation menu works', async ({ page }) => {
-  await page.goto('http://localhost:5173');
-  await page.click('nav a[href="/about"]');
-  await expect(page).toHaveURL(/about/);
-});
-
-```text
-
-### Common Issues (2)
-
-**Issue**: "Playwright browsers not installed" error
-
-**Solution**: Run `npm run test:e2e` once to install browsers, then run again.
-
-**Issue**: Tests fail with "target page, context or browser has been closed"
-
-**Solution**: Ensure the dev server is running (`npm run dev`) or configure
-Playwright to start the server automatically.
-
-**Issue**: Timeouts waiting for elements
-
-**Solution**: Increase timeout in Playwright config or use `waitForNavigation()`
-explicitly.
-
-## Spec Kit Regression Testing
-
-The Spec Kit pipeline (create → plan → tasks) is validated by a regression test
-suite.
-
-### Running Spec Kit Tests
+For a separately authorised reinstall:
 
 ```bash
-node --test tests/speckit.test.mjs
-
-```text
-
-### Current Baseline
-
-- ✅ **103 passing tests** – All core Spec Kit workflows working
-- ⚠️ **1 failing test** – Template resolution edge case (approved to accept)
-- **Total**: 104 tests, 99% pass rate
-
-The failing test is a known, non-critical edge case in template precedence
-resolution and does not affect feature specification workflows.
-
-### Test Coverage
-
-The regression test suite validates:
-
-- Specification creation and numbering
-- Plan generation from specifications
-- Task decomposition and dependency ordering
-- Template routing and selection
-- Path resolution for feature directories
-
-## Running All Tests Together
-
-```bash
-npm test
-
-```text
-
-This runs all three suites in sequence:
-
-1. Jest unit tests (`npm run test:unit`)
-
-1. Build verification (`npm run test:build`)
-
-1. Playwright e2e tests (`npm run test:e2e`)
-
-**Expected output**: All suites pass (or e2e tests may require browser setup on
-first run).
-
-## CI/CD Integration
-
-Tests are integrated into GitHub Actions workflows:
-
-- **`tests.yml`** – Runs unit and build verification tests on every PR
-- **`claude-guard-tests.yml`** – Runs Claude agent validation tests
-- E2E tests are manual or triggered on release branches (optional)
-
-All checks must pass before merging to `develop`.
-
-## Performance & Optimization
-
-### Unit Test Performance
-
-Jest discovers and runs 588 tests in ~5 seconds.
-
-**Optimization tips**:
-
-- Use `npm run test:unit:watch` during development
-- Run focused tests with `jest -t "test name"` to avoid full suite
-- Check `jest --coverage` for untested code paths
-
-### Build Test Performance
-
-Bats tests run after production build (~5 seconds total).
-
-**Optimization tips**:
-
-- Run `npm run build` alone to check build performance
-- Run `tests/build.bats` separately if build succeeds but tests fail
-
-### E2E Test Performance
-
-Playwright tests are slower due to browser startup and interaction simulation.
-
-**Optimization tips**:
-
-- Use `--workers=1` to run tests sequentially (faster for small suites)
-- Use `--headed` mode to watch tests execute
-- Group related tests into single files to reduce browser startup overhead
-
-## Troubleshooting
-
-### All Tests Fail with "Cannot find module"
-
-**Cause**: Dependencies not installed or lockfile out of sync
-
-**Fix**:
-
-```bash
-rm -rf node_modules package-lock.json
 npm ci
+```
 
-```text
+Preserve `package-lock.json`. `npm ci` replaces the dependency installation
+using that lockfile and runs the configured postinstall hook, which installs
+Lefthook. If manifest and lockfile disagree, record the error and request a
+reviewed dependency correction rather than deleting the lockfile.
 
-### Jest Tests Fail with ESM Error
+For transformation errors, inspect `jest.config.js` and `@swc/jest` settings.
+Do not change runner configuration or substitute another runner without
+separate scope.
 
-**Cause**: Module transformation issue
+## Historical provenance and result recording
 
-**Fix**: Verify `jest.config.js` has `@swc/core` configured:
+The original guide was dated 19 October 2026, attributed maintenance to
+repository governance and referenced TOA-260. It reported:
 
-```bash
-cat jest.config.js | grep -i swc
+- 588/588 unit tests and approximately five seconds for Jest
+- 12/12 build tests and approximately five seconds including the build
+- The 103/104 Spec Kit result described above
+- E2E infrastructure as ready but without tests
 
-```text
+These are historical claims, not current results or reliable performance
+benchmarks. `e2e/routing.spec.ts` exists at the reviewed revision.
+Earlier assurances about TypeScript discovery, module syntax, comprehensive
+output checks and all suites passing have been replaced by the scoped
+configuration descriptions above.
 
-### Build Tests Fail but `npm run build` Succeeds
+For each new authorised run, record revision, command, environment, complete
+output, exit code, suite counts and any later suites not run. Keep passed,
+failed, skipped, unavailable and not run distinct. Worker count, headed mode
+and test grouping are choices, not verified speed improvements.
 
-**Cause**: Output validation issue (e.g., wrong file format)
+## References
 
-**Fix**:
-
-```bash
-
-# Inspect build output
-
-ls -la dist/
-file dist/index.html
-
-```text
-
-### E2E Tests Won't Start
-
-**Cause**: Dev server not running or port in use
-
-**Fix**:
-
-```bash
-
-# Kill any existing process on port 5173
-
-lsof -ti:5173 | xargs kill -9
-
-# Start dev server in another terminal
-
-npm run dev
-
-# Then run e2e tests
-
-npm run test:e2e
-
-```text
-
-## Related Documentation
-
-- [CONTRIBUTING.md](../CONTRIBUTING.md) – Contributor workflow and validation checklist
-- [guidelines/Guidelines.md](../guidelines/Guidelines.md) – Code standards and testing conventions
-- [.github/specs/CATALOG.md](../.github/specs/CATALOG.md) – Specification documentation
-- [Playwright Documentation](https://playwright.dev) – E2E testing reference
-- [Jest Documentation](https://jestjs.io) – Unit testing reference
-- [Bats Documentation](https://bats-core.readthedocs.io) – Bash testing reference
-
----
-
-**Last updated**: 2026-10-19 | **Maintained by**: Repository governance
-(TOA-260)
+- [Package scripts](../package.json)
+- [Contributor workflow](../CONTRIBUTING.md)
+- [Repository guidelines](../guidelines/Guidelines.md)
+- [Specification catalogue](../.github/specs/CATALOG.md)
+- [Jest configuration](../jest.config.js)
+- [Playwright configuration](../playwright.config.ts)
+- [Build assertions](../tests/build.bats)
+- [CI workflow](../.github/workflows/tests.yml)
+- [Claude guard workflow](../.github/workflows/claude-guard-tests.yml)
+- [Playwright documentation](https://playwright.dev)
+- [Jest documentation](https://jestjs.io)
+- [Bats documentation](https://bats-core.readthedocs.io)

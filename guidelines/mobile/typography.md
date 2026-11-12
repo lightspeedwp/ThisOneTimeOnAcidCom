@@ -138,13 +138,13 @@ widths:
 
 ### Mobile-First Fluid Sizes
 
-Use the fluid typography tokens from `design-tokens/typography.md`:
+Use the fluid typography tokens from `design-tokens-reference.md`:
 
 ```tsx
 // Hero Titles - Mobile to Desktop
 <h1 className="text-hero-h1">
   {/* clamp(2.25rem, 6vw, 7.5rem) → 36px to 120px */}
-  Ash Shaw
+  This One Time On Acid
 </h1>
 
 // Section Headings
@@ -214,7 +214,7 @@ Use the fluid typography tokens from `design-tokens/typography.md`:
 <section className="min-h-screen flex items-center justify-center">
   <h1 className="text-[8vh] min-text-4xl max-text-8xl">
     {/* Scales with viewport height */}
-    Ash Shaw
+    This One Time On Acid
   </h1>
 </section>
 
@@ -322,7 +322,7 @@ h1, h2, h3 {
   leading-tight         /* 1.25 line height */
   tracking-tight        /* Tighter letter spacing */
 ">
-  Ash Shaw
+  This One Time On Acid
 </h1>
 
 // H2 - Section Title
@@ -597,7 +597,7 @@ function HeroSection() {
           tracking-tight
           mb-4
         ">
-          Ash Shaw
+          This One Time On Acid
         </h1>
 
         {/* Tagline */}
@@ -719,13 +719,13 @@ function HeroSection() {
 
 // ✅ CORRECT - High contrast
 <p className="text-gray-700">
-  {/* WCAG AA: 4.5:1 minimum */}
+  {/* WCAG 2.2 AAA: 7:1 minimum for body text */}
   Easy to read
 </p>
 
 // Headings need higher contrast
 <h2 className="text-gray-900">
-  {/* WCAG AAA: 7:1 for headings */}
+  {/* WCAG 2.2 AAA: 7:1 minimum for all text */}
   High contrast heading
 </h2>
 
@@ -820,7 +820,7 @@ Test on:
 
 ## Related Documentation
 
-- **[design-tokens/typography.md](../design-tokens/typography.md)** - Full typography system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Full typography system
 - **[mobile/forms.md](./forms.md)** - Mobile form patterns
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
 

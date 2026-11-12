@@ -278,7 +278,7 @@ lg:gap-8">
 
 // Full viewport hero
 <section className="min-h-screen">
-  {/* Always 100vh */}
+  {/* Full viewport height */}
 </section>
 
 // Safe area for mobile (accounting for browser chrome)
@@ -586,7 +586,7 @@ md:px-8">
   <div className="max-w-7xl mx-auto h-full flex items-center justify-center">
     <div className="text-center space-y-6 sm:space-y-8">
       <h1 className="text-hero-h1 mb-fluid-md">
-        Ash Shaw
+        This One Time On Acid
       </h1>
       <p className="text-body-guideline max-w-2xl mx-auto px-4">
         Makeup that shines with colour, energy, and connection.
@@ -677,7 +677,7 @@ Test on these viewport widths:
 
 - **[mobile/typography.md](./typography.md)** - Typography scaling
 - **[mobile/buttons.md](./buttons.md)** - Button spacing and sizing
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Full spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Full spacing system
 
 ---
 

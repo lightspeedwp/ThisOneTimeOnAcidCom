@@ -4,7 +4,7 @@
 **Last Updated:** January 2025
 **WordPress Block Theme Compatible:** ✅
 
-Complete responsive design system for the Ash Shaw Makeup Portfolio, providing
+Complete responsive design system for the This One Time On Acid, providing
 unified guidance for mobile, tablet, and desktop experiences.
 
 ## 🎯 Overview
@@ -204,7 +204,7 @@ Touch vs Hover vs Keyboard interaction patterns.
 
 ### 1. Mobile-First Approach
 
-Always start with mobile styles, then enhance for larger screens:
+Start with mobile styles, then enhance for larger screens:
 
 ```css
 /* ✅ GOOD - Mobile first */
@@ -314,7 +314,7 @@ Let content determine breakpoints, not devices:
 
 ### 4. Touch vs Hover Detection
 
-Always detect interaction capability, don't assume:
+Detect interaction capability; don't assume:
 
 ```css
 /* Base: Works for both touch and hover */
@@ -426,10 +426,10 @@ Use this checklist when building responsive components:
 
 ### Design Tokens
 
-- [Spacing Scale](../design-tokens/spacing.md) - WordPress spacing scale (10-100)
-- [Typography Scale](../design-tokens/typography.md) - WordPress font sizes (100-900)
-- [Animation Durations](../design-tokens/animations.md) - Animation timing system
-- [Colors](../design-tokens/colors.md) - Color palette and gradients
+- [Spacing Scale](./design-tokens-reference.md) - WordPress spacing scale (10-100)
+- [Typography Scale](./design-tokens-reference.md) - WordPress font sizes (100-900)
+- [Animation Durations](./design-tokens-reference.md) - Animation timing system
+- [Colors](./design-tokens-reference.md) - Color palette and gradients
 
 ### Component Guidelines
 
@@ -439,7 +439,7 @@ Use this checklist when building responsive components:
 
 ### Accessibility
 
-- [Interactions & Accessibility](../interactions-accessibility.md) - Touch, hover, keyboard patterns
+- [Interactions & Accessibility](./accessibility-checklist.md) - Touch, hover, keyboard patterns
 
 ---
 
@@ -563,6 +563,6 @@ This responsive system provides:
 
 **Version:** 5.0.0 (Unified Responsive System)
 **Last Updated:** January 2025
-**Maintained By:** Ash Shaw Portfolio Team
+**Maintained By:** This One Time On Acid Portfolio Team
 
 **Questions?** Refer to specific pattern guides or component documentation.

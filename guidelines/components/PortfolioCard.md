@@ -653,7 +653,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 // ✅ CORRECT
 <img
   src={image}
-  alt={`${entry.title} - ${entry.category} makeup portfolio`}
+  alt={`${entry.title} - ${entry.category} creative portfolio`}
 />
 
 ```text
@@ -695,7 +695,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 - **[CMS Field Mapping](../../docs/cms-field-mapping.md)** - CMS setup
 - **[Data System](../../data/README.md)** - Mock data system
 - **[overview-components.md](../overview-components.md)** - Component architecture
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing system
+- **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 
 ---

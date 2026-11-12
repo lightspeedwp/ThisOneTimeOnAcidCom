@@ -28,6 +28,17 @@ This skill consolidates guidance from:
 
 ---
 
+## Backend Stack Reference (D6 Decision)
+
+**Canonical Stack (D6, 2026-10-25):** Deployment workflows reference this stack:
+- **Serverless:** Vercel Functions (AWS Lambda runtime)
+- **Database:** Supabase PostgreSQL
+- **API Layer:** tRPC with Next.js API routes
+- **Deployment:** Vercel + GitHub Actions (source of truth)
+- **ORM:** Prisma
+
+See [Backend Integration & Deployment](../guidelines/backend-integration-deployment.md) for canonical stack + documented alternatives per D6 decision.
+
 ## When to Use
 
 Use this skill when:
@@ -36,12 +47,13 @@ Use this skill when:
 - ✅ Creating a task list from audit results
 - ✅ Archiving completed work
 - ✅ Running multi-step orchestrator audits
+- ✅ Documenting deployment workflows (reference canonical stack per D6)
 
 ## Workflow Decision Tree
 
 **Start here:** What are you doing?
 
-```
+```text
 Are you running an audit/investigation?
 ├─ YES → Continue below
 └─ NO → This skill may not apply; check specific domain skills
@@ -249,7 +261,7 @@ Single-file audits must also register their task lists in the master tracker for
 
 **Naming convention:** Lowercase, hyphens, descriptive folder
 
-```
+```text
 /prompts/modern-react-migration/           ← folder name
 ├── 00-ORCHESTRATOR.md                     ← always named 00-ORCHESTRATOR.md
 ├── 01-es5-react-audit.md                  ← sub-prompts numbered 01, 02, 03...
@@ -501,7 +513,7 @@ After task list entries have been in "Archived" section for 30 additional days (
 - Reason: (e.g., "Archived after 60-day retention period")
 
 **Example tombstone entry:**
-```
+```markdown
 | `/tasks/css-audit-tasks.md` | `/tasks/archived/css-audit-tasks.md` | **Deleted** | 2026-12-21 | Archived after 60-day retention |
 ```
 
@@ -513,7 +525,7 @@ After task list entries have been in "Archived" section for 30 additional days (
 
 ### Rule 1: Never Delete `/tasks/task-list.md`
 
-```
+```bash
 🚫 FORBIDDEN:
 rm /tasks/task-list.md
 git rm /tasks/task-list.md
@@ -669,6 +681,7 @@ related_tasks: "/tasks/{topic}-tasks.md"
 - `guidelines/Guidelines.md` § "Default AI Workflow" — High-level workflow
 - `guidelines/Guidelines.md` § "Mandatory Folder Conventions" — Folder rules
 - `guidelines/Guidelines.md` § "Task list management conventions" — Archiving process
+- `.github/specs/003-refactor-guidelines/spec.md` – Guidelines Refactor specification (consolidation updates to guidelines/)
 
 **Related skills:**
 - `/bem-css-compliance` — For CSS audits

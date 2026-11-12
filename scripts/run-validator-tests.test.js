@@ -3,6 +3,7 @@
  */
 
 import { createResultsStructure, processAllTestCases, outputTestResults, TEST_CASES, EXPECTED_RESULTS, runTest, main } from './run-validator-tests.js';
+import { vi } from 'vitest';
 
 describe('run-validator-tests', () => {
   describe('test case organization', () => {
@@ -274,7 +275,7 @@ describe('run-validator-tests', () => {
     let executeCase;
 
     beforeEach(() => {
-      executeCase = jest.fn((branch, expectedType) => ({
+      executeCase = vi.fn((branch, expectedType) => ({
         branch,
         passed: true,
         output: '',
@@ -420,7 +421,7 @@ describe('run-validator-tests', () => {
       // Capture console.log calls
       const logs = [];
       const originalLog = console.log;
-      console.log = jest.fn((...args) => {
+      console.log = vi.fn((...args) => {
         logs.push(args.join(' '));
       });
 
@@ -474,7 +475,7 @@ describe('run-validator-tests', () => {
     });
 
     test('processAllTestCases handles category with no failures', () => {
-      const executeCase = jest.fn(() => ({ passed: true, exitCode: 0 }));
+      const executeCase = vi.fn(() => ({ passed: true, exitCode: 0 }));
       const testCases = { 'AllPass': ['feat/a', 'fix/b'] };
       const expectedResults = { 'AllPass': 'valid' };
       const { results } = processAllTestCases(testCases, expectedResults, executeCase);
@@ -483,7 +484,7 @@ describe('run-validator-tests', () => {
     });
 
     test('processAllTestCases aggregates multiple failed cases', () => {
-      const executeCase = jest.fn()
+      const executeCase = vi.fn()
         .mockReturnValueOnce({ passed: false, exitCode: 1 })
         .mockReturnValueOnce({ passed: false, exitCode: 1 })
         .mockReturnValueOnce({ passed: true, exitCode: 0 });
@@ -501,7 +502,7 @@ describe('run-validator-tests', () => {
     });
 
     test('processAllTestCases handles test with error status not equal to 1', () => {
-      const executeCase = jest.fn()
+      const executeCase = vi.fn()
         .mockReturnValueOnce({ passed: false, exitCode: 2 })
         .mockReturnValueOnce({ passed: true, exitCode: 0 });
       const testCases = { 'WithError': ['feat/test', 'feat/other'] };
@@ -519,11 +520,11 @@ describe('run-validator-tests', () => {
       const originalLog = console.log;
 
       try {
-        process.stdout.write = jest.fn((...args) => {
+        process.stdout.write = vi.fn((...args) => {
           logs.push(args[0]);
         });
 
-        console.log = jest.fn();
+        console.log = vi.fn();
 
         outputTestResults(results, categoryResults);
 
@@ -551,12 +552,12 @@ describe('run-validator-tests', () => {
       originalLog = console.log;
       consoleLogs = [];
 
-      process.exit = jest.fn();
-      console.log = jest.fn((...args) => consoleLogs.push(args.join(' ')));
-      fsWriteFileSyncSpy = jest.spyOn(require('fs'), 'writeFileSync').mockImplementation(() => {});
+      process.exit = vi.fn();
+      console.log = vi.fn((...args) => consoleLogs.push(args.join(' ')));
+      fsWriteFileSyncSpy = vi.spyOn(require('fs'), 'writeFileSync').mockImplementation(() => {});
 
       // Mock executor returns all tests as passed to avoid subprocess launches
-      executeCase = jest.fn(branch => ({
+      executeCase = vi.fn(branch => ({
         passed: true,
         output: '',
         exitCode: 0,

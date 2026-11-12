@@ -57,7 +57,7 @@ All classes are defined in `/styles/blocks/about-subpage.css`:
 
 ## Pages Using This Component
 
-1. BioPage — "Quick facts about Ash Shaw"
+1. BioPage — "Quick facts about This One Time On Acid"
 
 1. AdhdPage — "ADHD quick facts"
 

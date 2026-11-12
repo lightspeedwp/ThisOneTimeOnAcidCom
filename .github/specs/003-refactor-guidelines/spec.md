@@ -2,15 +2,16 @@
 spec_id: "003"
 feature: "guidelines-refactor"
 issue: "TOA-358"
-status: "implemented"
+status: "phase-2-in-progress"
 created: "2026-10-24"
+last_updated: "2026-11-09"
 ---
 
 # Specification 003: Refactor Guidelines (TOA-358)
 
-**Status:** Implemented  
+**Status:** Phase 2 In Progress  
 **Issue:** [TOA-358](https://linear.app/lightspeedwp/issue/TOA-358) | [GitHub #416](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/issues/416)  
-**Branch:** `docs/spec-003-guidelines-reconcile`\
+**Branch:** `docs/spec-003-phase2-implementation`  
 **Created:** 2026-10-24
 
 ## Overview
@@ -113,7 +114,7 @@ These outcomes remain unverified while owner gates and implementation are pendin
 2. [ ] Original file hashes validated; current state vs observation documented
 3. [ ] S001–S009 protected-file edits scoped and dependencies mapped
 4. [ ] D0–D8 decisions recorded with evidence
-5. [ ] Pointer/anchor validation completed for all 129 internal reference candidates
+5. [ ] Pointer/anchor validation completed for all 129 internal reference candidates (T050: each fixed link resolves to an existing N-document or preserved G-document; archived references include relocation notes)
 6. [ ] Design/typography/spacing examples verified; literal corrections documented
 7. [ ] Six existing skills statically exercised in draft/report/denied scenarios
 8. [ ] Non-destructive consolidation confirmed; old paths mapped to new
@@ -146,12 +147,29 @@ for complete decision statements, evidence, and Phase 2 implementation guidance.
   - **Integration:** Updated Key Gates table to mark all decisions (D1–D8) as ✅ RESOLVED with evidence references from checklists/requirements.md (D1–D8 decision statements).
 
 - **Q2:** Are there any remaining ambiguities about the pointer strategy (Type 1/2/3), archive directory structure (`guidelines/_archive/`), or edge cases in the consolidation approach that need clarification before Phase 2 final sign-off? → **A:** No remaining ambiguities—the hybrid consolidation strategy (Type 1/2/3 pointers, 1-hop chain depth limit, comment-based reverse links, archive directory structure) is fully defined and ready for implementation validation.
-  - **Integration:** Confirmed D4/D5 implementation guidance is complete and documented in checklists/requirements.md. No spec changes required; consolidation strategy is actionable.
+  - **Integration:** Confirmed D4/D5 implementation guidance is complete and documented in checklists/requirements.md. See [CONSOLIDATION-MANIFEST.md](./CONSOLIDATION-MANIFEST.md) for explicit G→N document mapping (N001–N029 reference, organization, patterns, pages, reports). Consolidation strategy is actionable.
 
 - **Q3:** Are all ten requirements for the Final Sign-Off checklist (checklists/requirements.md § Final Sign-Off) clear and achievable with the current evidence already generated (T067 manifest, T068 skill validation)? → **A:** Yes—all evidence is already in place from T067–T068; T069 is a consolidation exercise to fill in the checklist with references to existing documentation and mark "READY FOR MERGE" when complete.
   - **Integration:** No spec changes required; Final Sign-Off checklist is actionable with existing evidence. T069 can proceed immediately.
 
 **Clarification Status:** ✅ COMPLETE — All critical ambiguities resolved. Specification is ready for Phase 2 implementation completion (T069).
+
+### Session 2026-11-11
+
+- Q: What defines successful "link remediation" for T050—what must be true for a broken link to count as fixed? → A: The link must resolve to an existing N-document or preserved G-document AND any inline references (to archived content) must include a note explaining the relocation.
+  - **Integration:** Updated Success Criteria item 5 to clarify acceptance for T050 link validation work.
+
+- Q: If `/speckit-converge` finds gaps beyond the 43 planned tasks, should those become Phase 3 deferred work or T069 blockers? → A: Phase 3 work—discover gaps during convergence, address them before merge (sequential Phase 3 tasks), do not defer indefinitely.
+  - **Integration:** Clarified that convergence gaps trigger immediate Phase 3 task creation (T070+) to be handled sequentially before PR completion, not deferred to "later".
+
+- Q: How are S-document approvals (per D0's "locked-files-guard" requirement) tracked and verified at PR merge time? → A: GitHub CODEOWNERS file with standard code-owner review requirement (automatic tracking, merge-time verification).
+  - **Integration:** D0 approval mechanism clarified: S-documents (.claude/skills/*, AGENTS.md, CONTRIBUTING.md) require GitHub code-owner review via CODEOWNERS, automatically enforced at merge.
+
+- Q: T069 Final Sign-Off gate—manual review, automated CI, or both for "READY FOR MERGE"? → A: Both—manual sign-off confirms quality intent, automated CI verifies no regressions.
+  - **Integration:** T069 completion gate clarified: manual human verification + CI green required before marking READY FOR MERGE.
+
+- Q: Should spec status field reflect current work state (e.g., `phase-2-in-progress`) or remain `implemented` (spec-only)? → A: Update to `phase-2-in-progress`—reflects actual implementation state; readers see work is ongoing.
+  - **Integration:** Spec front-matter status updated to `phase-2-in-progress` to indicate Phase 2 implementation is actively underway.
 
 ## Next Steps
 

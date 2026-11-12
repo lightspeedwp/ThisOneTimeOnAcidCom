@@ -42,6 +42,7 @@ files define their own reading order, so follow that rather than inventing one:
 
 - **[guidelines/design-tokens/](guidelines/design-tokens/)** — colours,
   typography, spacing and animations
+- **[Design Token Reference](guidelines/design-token-reference.md)** (D4 Decision) — approved token taxonomy, naming conventions, and component usage patterns per Ash Shaw's design system
 - **[guidelines/dark-mode-implementation.md](guidelines/dark-mode-implementation.md)**
   — light/dark theme system
 - **[guidelines/component-dark-mode.md](guidelines/component-dark-mode.md)** —
@@ -66,7 +67,7 @@ files define their own reading order, so follow that rather than inventing one:
 artefacts under `.github/specs/<NNN-short-name>/`, never a root `specs/` folder.
 Read `.specify/init-options.json` → `specifyFeatureDirectory` as the repository's
 spec root (`.github/specs`). Scan that directory for existing feature numbers;
-`001` and `002` already exist, so the next sequential feature is `003`. Reuse
+`001`, `002`, and `003` (Guidelines Refactor — TOA-358) already exist. Reuse
 the appropriate existing directory when continuing a feature. Persist the full
 feature directory in `.specify/feature.json` so downstream commands resolve the
 same location. Root `specs/` defaults in upstream documentation do not override
@@ -105,10 +106,10 @@ Before editing files or running a workflow that writes files:
 4. Validate the proposed name with
    `npm run validate:branch-name -- --branch <approved-name>` before creation,
    then run `npm run validate:branch-name` on the checked-out branch before
-   edits. Stop on failure. Do not edit on `main`, `develop` or detached HEAD.
+   edits. Stop on failure. Do not edit on `main` or detached HEAD.
 5. Preserve uncommitted work when switching. Never stash, discard, rename or
    delete branches without authorisation. Use the branch agent's base-branch
-   policy (`develop` for normal work, `main` for hotfixes).
+   policy: all work branches derive from `main` (the repository's default and deployment branch).
 
 The deterministic authority is `scripts/validate-branch-name.js`. The existing
 Lefthook pre-commit and pre-push checks provide local enforcement; ensure hooks
@@ -149,9 +150,18 @@ repository they map as follows:
 | Icons | Phosphor, Lucide | `package.json` |
 | Animation | Motion | `package.json` |
 | Routing | React Router v7 | `package.json` |
-| Data | Static mock data — no backend, no Supabase | `src/app/data/` |
-| Hosting | Netlify (static SPA) | Netlify site build settings |
+| Data | Static mock data (current); canonical backend stack defined below | `src/app/data/` |
+| Hosting | Netlify (static SPA, current deployment) | Netlify site build settings |
 | Package manager | **npm** (npm-only) | `package-lock.json`, no pnpm/yarn lockfiles, Netlify build command |
+
+**Canonical Backend Stack (D6 Decision):** For future integration, the approved backend architecture is:
+- **Serverless:** Vercel Functions (AWS Lambda runtime, auto-scaling)
+- **Database:** Supabase PostgreSQL (managed, real-time subscriptions)
+- **API Layer:** tRPC with Next.js API routes (type-safe RPCs)
+- **Deployment:** Vercel + GitHub Actions (continuous deployment)
+- **ORM:** Prisma (type-safe database access)
+
+See [Backend Integration & Deployment](guidelines/backend-integration-deployment.md) for canonical stack, documented alternatives, and integration patterns per D6 decision.
 
 ### Package manager
 
@@ -288,6 +298,21 @@ validation you did not perform.**
 
 ---
 
+## Design authority and accessibility
+
+**Design Authority:** Ash Shaw (site designer). All design decisions, visual hierarchy, and component specifications are subject to Ash's approval.
+
+**Accessibility Target (D3 Decision):** All user-facing work must validate **WCAG 2.2 AAA compliance** (not the industry-standard AA). This applies to:
+- Keyboard navigation on all interactive elements
+- Screen reader announcements and semantic HTML
+- Color contrast (7:1 for normal text, 4.5:1 for large text)
+- Form labels, error messages, and focus management
+- Touch targets and responsive behavior on all viewports
+
+See [Accessibility Checklist](guidelines/accessibility-checklist.md) for detailed WCAG 2.2 AAA requirements per D3 decision.
+
+---
+
 ## Critical safeguards
 
 ### Bundler compatibility (Figma Make)
@@ -326,7 +351,7 @@ import from it, never suggest Supabase integration, and always dismiss the
   entries and articles reside in `content/`
 - **Sentence case** for all headings, titles, labels and navigation
 - **Pronouns:** Ash uses he/him exclusively
-- **Voice:** follow [guidelines/voice-and-tone.md](guidelines/voice-and-tone.md)
+- **Voice:** Follow [guidelines/voice-and-tone.md](guidelines/voice-and-tone.md) and [Brand Voice & Messaging](guidelines/brand-voice-messaging.md) (D1 Decision: Balanced Hybrid tone — professional yet conversational). All copy balances authority with accessibility; soften absolutes in user-facing writing; use encouraging, conversational language while preserving clarity
 
 ### Protected and locked files
 
@@ -340,6 +365,7 @@ Do not modify these without explicit owner instruction:
 - `.github/workflows/*` — centrally managed by
   `lightspeedwp/dependency-merge-controller`, and local edits are reverted
 - `tasks/task-list.md` — never delete it
+- `guidelines/_archive/` — historical copies of consolidated guidelines (per D5 decision). Do not delete; see [Archive Strategy](guidelines/archive-strategy.md)
 
 ---
 

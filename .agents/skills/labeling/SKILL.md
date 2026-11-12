@@ -154,10 +154,11 @@ meta:has-pr
 
 ## References
 
-- [Canonical organisation labels](https://github.com/lightspeedwp/.github/blob/develop/.github/labels.yml) – verified upstream authority; no local copy is assumed
+- [Canonical organisation labels](https://github.com/lightspeedwp/.github/blob/main/.github/labels.yml) – verified upstream authority; no local copy is assumed
 - `CONTRIBUTING.md` → Label prefix requirements (repository-root-relative)
 - `.github/workflows/labeling-unified.yml` – existing read-only evidence of upstream label loading; do not modify protected automation
 - [GitHub Labeling](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels) – GitHub docs
+- `.github/specs/003-refactor-guidelines/spec.md` – Guidelines Refactor specification (labeling strategy for consolidation PRs)
 
 ---
 

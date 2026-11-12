@@ -1,11 +1,15 @@
-# Data Models Reference
+<!-- Type 2 (Consolidation) Pointer -->
+<!-- Original: Guidelines/data-models.md -->
+<!-- Consolidated into: N008 (Content Model & Structure) -->
+<!-- Authority: D4.b, D5 Pointer Strategy -->
 
-**Version:** 1.0.0
-**Last Updated:** February 2026
-**Purpose:** Document all TypeScript interfaces used in the mock data system
+> 🔄 **This content has been consolidated.** See [Content Model & Structure](./N008-content-model-structure.md) for data structure guidelines for posts, pages, and collections.
+
+For complete data model documentation and content structure patterns, refer to **N008: Content Model & Structure**.
 
 ---
 
+<<<<<<< HEAD
 ## 1. Overview
 
 All content is stored as TypeScript mock data in `/data/mock/`. Types are
@@ -32,7 +36,7 @@ value used in components must be imported from these files - never hardcoded.
       index.ts            # Barrel export
       featured.ts         # Featured portfolio entries
       festivals.ts        # Festival portfolio entries
-      uv-makeup.ts        # UV makeup portfolio entries
+      uv-makeup.ts        # UV creative portfolio entries
       nail-art.ts         # Nail art portfolio entries
       thailand.ts         # Thailand portfolio entries
       swiss-festivals.ts  # Swiss festival entries
@@ -269,3 +273,6 @@ Video ──────────> string (category)
 ---
 
 **Last Updated:** February 2026
+=======
+*Pointer created: 2026-11-11 | Type 2 Consolidation | D5 Authority*
+>>>>>>> 38f1962 (feat(003-T049-Phase2-3): Complete pointer operations (Type 2 & Type 3))

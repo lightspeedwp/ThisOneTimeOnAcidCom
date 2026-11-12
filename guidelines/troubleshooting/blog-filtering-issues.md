@@ -1033,5 +1033,5 @@ function BlogPage() {
 
 ---
 
-**Pro Tip:** Always reset `currentPage` to 1 when filters change to avoid
+**Pro Tip:** Reset `currentPage` to 1 when filters change to avoid
 showing empty pages!

@@ -1,0 +1,19 @@
+{
+  "name": "approval-ready",
+  "description": "All feedback addressed, CI passing, no concerns remaining. Reviewer ready to make approval decision.",
+  "skill": "pr-review-workflow",
+  "review_state": "All feedback addressed, approval pending",
+  "expected_behavior": "Present approval decision options: approve cleanly, approve + document follow-ups, or hold.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "Code is ready; no outstanding concerns",
+    "Code is ready but has minor tech debt",
+    "Code is ready but depends on further monitoring"
+  ],
+  "success_indicators": [
+    "Options include: approve, approve + follow-ups, hold",
+    "Acknowledges all feedback is resolved",
+    "Examples of follow-ups provided",
+    "No approval issued (only options presented)"
+  ]
+}

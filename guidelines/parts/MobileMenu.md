@@ -11,7 +11,7 @@ Responsive mobile navigation menu with slide-in animation.
 
 - **[overview-parts.md](../overview-parts.md)** - Template parts system
 - **[components/Header.md](../components/Header.md)** - Header integration
-- **[design-tokens/spacing.md](../design-tokens/spacing.md)** - Spacing
+- **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing
 
 ---
 

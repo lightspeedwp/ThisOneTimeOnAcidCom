@@ -16,8 +16,9 @@ import {
   main
 } from './validate-branch-name.js';
 import { execSync } from 'child_process';
+import { vi } from 'vitest';
 
-jest.mock('child_process');
+vi.mock('child_process');
 
 describe('Branch Name Validation', () => {
   describe('Valid Branches - Standard Pattern', () => {
@@ -488,7 +489,7 @@ describe('Branch Name Validation', () => {
 
   describe('Utility Functions - getCurrentBranch', () => {
     beforeEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
       execSync.mockReset();
     });
 
@@ -560,14 +561,18 @@ describe('Branch Name Validation', () => {
 
     beforeEach(() => {
       execSync.mockReset();
-      jest.spyOn(process, 'exit').mockImplementation();
-      jest.spyOn(console, 'log').mockImplementation();
-      jest.spyOn(console, 'error').mockImplementation();
+      vi.stubGlobal('process', {
+        ...process,
+        exit: vi.fn(),
+        argv: process.argv
+      });
+      vi.spyOn(console, 'log').mockImplementation();
+      vi.spyOn(console, 'error').mockImplementation();
     });
 
     afterEach(() => {
       process.argv = originalArgv;
-      process.exit.mockRestore();
+      vi.unstubAllGlobals();
       console.log.mockRestore();
       console.error.mockRestore();
     });

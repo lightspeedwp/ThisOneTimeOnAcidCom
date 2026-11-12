@@ -1,0 +1,22 @@
+{
+  "name": "external-decision",
+  "description": "Waiting on external approval (legal review). Blocking implementation. Deadline pressure. Need to assess options without bypassing approval.",
+  "skill": "dependency-resolution",
+  "blocker_type": "External decision",
+  "expected_behavior": "Present options: interim policy, expedited review, assumption-based, defer. Reference compliance risk and trade-offs.",
+  "test_type": "decision-point",
+  "scenarios": [
+    "External blocker is approval-gated (legal review)",
+    "No clear ETA for approval",
+    "Deadline pressure (Q1 deadline)",
+    "Compliance implications (can't bypass)"
+  ],
+  "success_indicators": [
+    "Blocker is stated (legal review, no ETA)",
+    "Timeline risk is highlighted (Q1 deadline jeopardy)",
+    "Options include: interim policy, expedited, assumptions, defer",
+    "Trade-offs are surfaced (interim = limited scope, assumptions = revision risk)",
+    "Compliance risk is acknowledged",
+    "No suggestion to bypass approval"
+  ]
+}

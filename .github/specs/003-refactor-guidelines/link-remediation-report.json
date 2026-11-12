@@ -1,0 +1,979 @@
+{
+  "timestamp": "2026-11-11T06:14:38.408Z",
+  "summary": {
+    "total": 156,
+    "fixed": 0,
+    "needsReview": 156
+  },
+  "fixed": [],
+  "needsManualReview": [
+    {
+      "file": "guidelines/ARCHITECTURE.md",
+      "line": 338,
+      "url": "../components/Logo.md",
+      "reason": "Target file does not exist"
+    },
+    {
+      "file": "guidelines/ARCHITECTURE.md",
+      "line": 444,
+      "url": "../components/Logo.md",
+      "reason": "Target file does not exist"
+    },
+    {
+      "file": "guidelines/ARCHITECTURE.md",
+      "line": 448,
+      "url": "./Lightbox.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/Lightbox.md"
+    },
+    {
+      "file": "guidelines/ARCHITECTURE.md",
+      "line": 452,
+      "url": "./MobileMenu.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/MobileMenu.md"
+    },
+    {
+      "file": "guidelines/ARCHITECTURE.md",
+      "line": 506,
+      "url": "../components/Logo.md",
+      "reason": "Target file does not exist"
+    },
+    {
+      "file": "guidelines/ARCHITECTURE.md",
+      "line": 509,
+      "url": "../../components/common/Logo.tsx",
+      "reason": "Target file does not exist"
+    },
+    {
+      "file": "guidelines/Guidelines.md",
+      "line": 268,
+      "url": "../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/Guidelines.md",
+      "line": 297,
+      "url": "../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/README.md",
+      "line": 178,
+      "url": "../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/SITEMAP.md",
+      "line": 23,
+      "url": "#seo--meta",
+      "reason": "Anchor not found - heading may need to be added or link updated"
+    },
+    {
+      "file": "guidelines/blocks/Lightbox.md",
+      "line": 701,
+      "url": "../patterns/ModalLightbox.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/ModalLightbox.md"
+    },
+    {
+      "file": "guidelines/components/BlogCard.md",
+      "line": 50,
+      "url": "../../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/components/BlogCard.md",
+      "line": 954,
+      "url": "../../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/components/BlogCard.md",
+      "line": 958,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/CategoryFilter.md",
+      "line": 685,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/ColorfulIcons.md",
+      "line": 850,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/Footer.md",
+      "line": 558,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/Header.md",
+      "line": 678,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/HeroSection.md",
+      "line": 814,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/ImageGallery.md",
+      "line": 1074,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/LayoutSwitcher.md",
+      "line": 541,
+      "url": "../ui/PortfolioCard.tsx",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/ui/PortfolioCard.tsx"
+    },
+    {
+      "file": "guidelines/components/LayoutSwitcher.md",
+      "line": 542,
+      "url": "../ui/BlogCard.tsx",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/ui/BlogCard.tsx"
+    },
+    {
+      "file": "guidelines/components/LayoutSwitcher.md",
+      "line": 543,
+      "url": "../ui/SearchBar.tsx",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/ui/SearchBar.tsx"
+    },
+    {
+      "file": "guidelines/components/LayoutSwitcher.md",
+      "line": 552,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/Lightbox.md",
+      "line": 1163,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/LoadingSpinner.md",
+      "line": 687,
+      "url": "./ContactForm.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/components/ContactForm.md"
+    },
+    {
+      "file": "guidelines/components/LoadingSpinner.md",
+      "line": 695,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/Logo.md",
+      "line": 511,
+      "url": "../common/Header.tsx",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/common/Header.tsx"
+    },
+    {
+      "file": "guidelines/components/Logo.md",
+      "line": 512,
+      "url": "../common/Footer.tsx",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/common/Footer.tsx"
+    },
+    {
+      "file": "guidelines/components/Logo.md",
+      "line": 513,
+      "url": "../common/SocialLinks.tsx",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/common/SocialLinks.tsx"
+    },
+    {
+      "file": "guidelines/components/Logo.md",
+      "line": 521,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/Modal.md",
+      "line": 894,
+      "url": "./ContactForm.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/components/ContactForm.md"
+    },
+    {
+      "file": "guidelines/components/Modal.md",
+      "line": 903,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/Pagination.md",
+      "line": 836,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/PortfolioCard.md",
+      "line": 49,
+      "url": "../../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/components/PortfolioCard.md",
+      "line": 685,
+      "url": "./PortfolioLightbox.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/components/PortfolioLightbox.md"
+    },
+    {
+      "file": "guidelines/components/PortfolioCard.md",
+      "line": 696,
+      "url": "../../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/components/PortfolioCard.md",
+      "line": 699,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/ReadMoreButton.md",
+      "line": 572,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/ScrollDownArrow.md",
+      "line": 509,
+      "url": "../sections/HeroLayout.tsx",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/HeroLayout.tsx"
+    },
+    {
+      "file": "guidelines/components/ScrollDownArrow.md",
+      "line": 510,
+      "url": "../sections/HeroSection.tsx",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/HeroSection.tsx"
+    },
+    {
+      "file": "guidelines/components/ScrollDownArrow.md",
+      "line": 519,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/SearchBar.md",
+      "line": 693,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/SectionCard.md",
+      "line": 383,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/ShareComponent.md",
+      "line": 653,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/SliderCard.md",
+      "line": 558,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/SocialLinks.md",
+      "line": 294,
+      "url": "../../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/components/SocialLinks.md",
+      "line": 845,
+      "url": "./ContactForm.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/components/ContactForm.md"
+    },
+    {
+      "file": "guidelines/components/SocialLinks.md",
+      "line": 853,
+      "url": "../../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/components/SocialLinks.md",
+      "line": 857,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/Tag.md",
+      "line": 736,
+      "url": "../FILE*STRUCTURE.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/components/TypeformEmbed.md",
+      "line": 10,
+      "url": "/TYPEFORM*ERROR*FIX.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/TYPEFORM*ERROR*FIX.md"
+    },
+    {
+      "file": "guidelines/design-tokens/animations.md",
+      "line": 166,
+      "url": "#loading-states",
+      "reason": "Anchor not found - heading may need to be added or link updated"
+    },
+    {
+      "file": "guidelines/design-tokens/iconography.md",
+      "line": 308,
+      "url": "../../reports/phosphor-migration/full-audit-report.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/design-tokens/iconography.md",
+      "line": 309,
+      "url": "/dev-tools/phosphor-icons",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/dev-tools/phosphor-icons"
+    },
+    {
+      "file": "guidelines/design-tokens/iconography.md",
+      "line": 319,
+      "url": "../../tasks/phosphor-migration-tasks.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/tasks/phosphor-migration-tasks.md"
+    },
+    {
+      "file": "guidelines/interactions-accessibility.md",
+      "line": 30,
+      "url": "#interactive-components",
+      "reason": "Anchor not found - heading may need to be added or link updated"
+    },
+    {
+      "file": "guidelines/mobile/forms.md",
+      "line": 772,
+      "url": "../components/ContactForm.md",
+      "reason": "Target file does not exist"
+    },
+    {
+      "file": "guidelines/nova-news-dark-mode.md",
+      "line": 492,
+      "url": "../styles/blocks/book-dark-mode.css",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/styles/blocks/book-dark-mode.css"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 57,
+      "url": "./blocks/SectionCard.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/SectionCard.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 58,
+      "url": "./blocks/TestimonialCard.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/TestimonialCard.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 64,
+      "url": "./blocks/ImageGallery.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/ImageGallery.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 71,
+      "url": "./blocks/CategoryFilter.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/CategoryFilter.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 72,
+      "url": "./blocks/ShareComponent.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/ShareComponent.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 74,
+      "url": "./blocks/SearchBar.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/SearchBar.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 192,
+      "url": "./blocks/SectionCard.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/SectionCard.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 193,
+      "url": "./blocks/TestimonialCard.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/TestimonialCard.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 197,
+      "url": "./blocks/ImageGallery.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/ImageGallery.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 202,
+      "url": "./blocks/CategoryFilter.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/CategoryFilter.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 203,
+      "url": "./blocks/ShareComponent.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/ShareComponent.md"
+    },
+    {
+      "file": "guidelines/overview-blocks.md",
+      "line": 205,
+      "url": "./blocks/SearchBar.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/blocks/SearchBar.md"
+    },
+    {
+      "file": "guidelines/overview-blog-filtering.md",
+      "line": 868,
+      "url": "../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/overview-components.md",
+      "line": 179,
+      "url": "../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/overview-components.md",
+      "line": 268,
+      "url": "./components/ScrollBackToTop.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/components/ScrollBackToTop.md"
+    },
+    {
+      "file": "guidelines/overview-components.md",
+      "line": 311,
+      "url": "./components/ScrollBackToTop.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/components/ScrollBackToTop.md"
+    },
+    {
+      "file": "guidelines/overview-components.md",
+      "line": 784,
+      "url": "./components/ScrollBackToTop.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/components/ScrollBackToTop.md"
+    },
+    {
+      "file": "guidelines/overview-icons.md",
+      "line": 58,
+      "url": "/dev-tools/phosphor-icons",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/dev-tools/phosphor-icons"
+    },
+    {
+      "file": "guidelines/overview-icons.md",
+      "line": 63,
+      "url": "../tasks/phosphor-migration-tasks.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/tasks/phosphor-migration-tasks.md"
+    },
+    {
+      "file": "guidelines/overview-parts.md",
+      "line": 67,
+      "url": "./parts/Breadcrumbs.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/parts/Breadcrumbs.md"
+    },
+    {
+      "file": "guidelines/overview-parts.md",
+      "line": 68,
+      "url": "./parts/SocialLinks.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/parts/SocialLinks.md"
+    },
+    {
+      "file": "guidelines/overview-parts.md",
+      "line": 76,
+      "url": "./parts/ErrorBoundary.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/parts/ErrorBoundary.md"
+    },
+    {
+      "file": "guidelines/overview-parts.md",
+      "line": 77,
+      "url": "./parts/SkipLinks.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/parts/SkipLinks.md"
+    },
+    {
+      "file": "guidelines/overview-parts.md",
+      "line": 270,
+      "url": "./parts/Breadcrumbs.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/parts/Breadcrumbs.md"
+    },
+    {
+      "file": "guidelines/overview-parts.md",
+      "line": 271,
+      "url": "./parts/SocialLinks.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/parts/SocialLinks.md"
+    },
+    {
+      "file": "guidelines/overview-parts.md",
+      "line": 275,
+      "url": "./parts/ErrorBoundary.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/parts/ErrorBoundary.md"
+    },
+    {
+      "file": "guidelines/overview-parts.md",
+      "line": 276,
+      "url": "./parts/SkipLinks.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/parts/SkipLinks.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 55,
+      "url": "./patterns/HeroWithCTA.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/HeroWithCTA.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 56,
+      "url": "./patterns/TwoColumnSplit.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/TwoColumnSplit.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 57,
+      "url": "./patterns/MasonryGallery.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/MasonryGallery.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 63,
+      "url": "./patterns/DesktopMobileNav.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/DesktopMobileNav.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 64,
+      "url": "./patterns/StickyHeader.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/StickyHeader.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 65,
+      "url": "./patterns/Breadcrumbs.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/Breadcrumbs.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 72,
+      "url": "./patterns/BlogPostLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/BlogPostLayout.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 73,
+      "url": "./patterns/TimelineDisplay.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/TimelineDisplay.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 79,
+      "url": "./patterns/ModalLightbox.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/ModalLightbox.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 80,
+      "url": "./patterns/FormWithValidation.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/FormWithValidation.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 81,
+      "url": "./patterns/InfiniteScroll.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/InfiniteScroll.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 261,
+      "url": "./patterns/HeroWithCTA.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/HeroWithCTA.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 262,
+      "url": "./patterns/TwoColumnSplit.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/TwoColumnSplit.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 263,
+      "url": "./patterns/MasonryGallery.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/MasonryGallery.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 267,
+      "url": "./patterns/DesktopMobileNav.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/DesktopMobileNav.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 268,
+      "url": "./patterns/StickyHeader.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/StickyHeader.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 269,
+      "url": "./patterns/Breadcrumbs.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/Breadcrumbs.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 274,
+      "url": "./patterns/BlogPostLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/BlogPostLayout.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 275,
+      "url": "./patterns/TimelineDisplay.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/TimelineDisplay.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 279,
+      "url": "./patterns/ModalLightbox.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/ModalLightbox.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 280,
+      "url": "./patterns/FormWithValidation.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/FormWithValidation.md"
+    },
+    {
+      "file": "guidelines/overview-patterns.md",
+      "line": 281,
+      "url": "./patterns/InfiniteScroll.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/patterns/InfiniteScroll.md"
+    },
+    {
+      "file": "guidelines/overview-sections.md",
+      "line": 56,
+      "url": "./sections/FusionNailsSection.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/FusionNailsSection.md"
+    },
+    {
+      "file": "guidelines/overview-sections.md",
+      "line": 63,
+      "url": "./sections/HeroLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/HeroLayout.md"
+    },
+    {
+      "file": "guidelines/overview-sections.md",
+      "line": 64,
+      "url": "./sections/OneColumnLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/OneColumnLayout.md"
+    },
+    {
+      "file": "guidelines/overview-sections.md",
+      "line": 65,
+      "url": "./sections/TwoColumnLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/TwoColumnLayout.md"
+    },
+    {
+      "file": "guidelines/overview-sections.md",
+      "line": 274,
+      "url": "./sections/FusionNailsSection.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/FusionNailsSection.md"
+    },
+    {
+      "file": "guidelines/overview-sections.md",
+      "line": 279,
+      "url": "./sections/HeroLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/HeroLayout.md"
+    },
+    {
+      "file": "guidelines/overview-sections.md",
+      "line": 280,
+      "url": "./sections/OneColumnLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/OneColumnLayout.md"
+    },
+    {
+      "file": "guidelines/overview-sections.md",
+      "line": 281,
+      "url": "./sections/TwoColumnLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/TwoColumnLayout.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 156,
+      "url": "./templates/AboutPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/AboutPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 162,
+      "url": "./templates/PortfolioMainPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/PortfolioMainPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 163,
+      "url": "./templates/PortfolioDetailPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/PortfolioDetailPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 164,
+      "url": "./templates/BlogPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/BlogPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 165,
+      "url": "./templates/BlogPostPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/BlogPostPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 171,
+      "url": "./templates/404Page.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/404Page.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 260,
+      "url": "./templates/AboutPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/AboutPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 264,
+      "url": "./templates/PortfolioMainPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/PortfolioMainPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 265,
+      "url": "./templates/PortfolioDetailPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/PortfolioDetailPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 266,
+      "url": "./templates/BlogPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/BlogPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 267,
+      "url": "./templates/BlogPostPage.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/BlogPostPage.md"
+    },
+    {
+      "file": "guidelines/overview-templates.md",
+      "line": 271,
+      "url": "./templates/404Page.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/templates/404Page.md"
+    },
+    {
+      "file": "guidelines/performance-optimization.md",
+      "line": 13,
+      "url": "#code-splitting--lazy-loading",
+      "reason": "Anchor not found - heading may need to be added or link updated"
+    },
+    {
+      "file": "guidelines/performance-optimization.md",
+      "line": 23,
+      "url": "#performance-monitoring",
+      "reason": "Anchor not found - heading may need to be added or link updated"
+    },
+    {
+      "file": "guidelines/performance-optimization.md",
+      "line": 802,
+      "url": "./contentful-integration.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/contentful-integration.md"
+    },
+    {
+      "file": "guidelines/performance-optimization.md",
+      "line": 803,
+      "url": "../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/prefers-reduced-motion.md",
+      "line": 14,
+      "url": "#2-css-usage--syntax",
+      "reason": "Anchor not found - heading may need to be added or link updated"
+    },
+    {
+      "file": "guidelines/prompt-creation-guidelines.md",
+      "line": 443,
+      "url": "../guidelines/wordpress-fse-patterns.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/wordpress-fse-patterns.md"
+    },
+    {
+      "file": "guidelines/prompt-creation-guidelines.md",
+      "line": 455,
+      "url": "./01-es5-react-audit.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/01-es5-react-audit.md"
+    },
+    {
+      "file": "guidelines/prompt-creation-guidelines.md",
+      "line": 457,
+      "url": "./02-tailwind-violations.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/02-tailwind-violations.md"
+    },
+    {
+      "file": "guidelines/prompt-creation-guidelines.md",
+      "line": 459,
+      "url": "./03-wordpress-css-alignment.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/03-wordpress-css-alignment.md"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 507,
+      "url": "../guidelines/react-best-practices-es5.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/react-best-practices-es5.md"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 650,
+      "url": "link",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/link"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 651,
+      "url": "link",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/link"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 652,
+      "url": "link",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/link"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 680,
+      "url": "./01-report.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/01-report.md"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 682,
+      "url": "./02-report.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/02-report.md"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 684,
+      "url": "./03-report.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/03-report.md"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 712,
+      "url": "../../tasks/{topic}-tasks.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 721,
+      "url": "../../prompts/{topic}/01-{name}.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/report-creation-guidelines.md",
+      "line": 722,
+      "url": "../../prompts/{topic}/02-{name}.md",
+      "reason": "Template placeholder or missing reference documentation file",
+      "action": "Manual review needed"
+    },
+    {
+      "file": "guidelines/responsive/README.md",
+      "line": 438,
+      "url": "../components/HeroLayout.md",
+      "reason": "Target file does not exist"
+    },
+    {
+      "file": "guidelines/responsive/interaction-modes.md",
+      "line": 1076,
+      "url": "./breakpoints.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/responsive/breakpoints.md"
+    },
+    {
+      "file": "guidelines/responsive/spacing-adjustments.md",
+      "line": 25,
+      "url": "#grid--gap-patterns",
+      "reason": "Anchor not found - heading may need to be added or link updated"
+    },
+    {
+      "file": "guidelines/responsive/spacing-adjustments.md",
+      "line": 861,
+      "url": "./breakpoints.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/responsive/breakpoints.md"
+    },
+    {
+      "file": "guidelines/responsive/typography-scaling.md",
+      "line": 703,
+      "url": "./breakpoints.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/responsive/breakpoints.md"
+    },
+    {
+      "file": "guidelines/sections/ThreeColumnLayout.md",
+      "line": 954,
+      "url": "./OneColumnLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/OneColumnLayout.md"
+    },
+    {
+      "file": "guidelines/sections/ThreeColumnLayout.md",
+      "line": 955,
+      "url": "./TwoColumnLayout.md",
+      "reason": "File not found: /home/user/ThisOneTimeOnAcidCom/guidelines/sections/TwoColumnLayout.md"
+    },
+    {
+      "file": "guidelines/troubleshooting/image-issues.md",
+      "line": 874,
+      "url": "../../data/README.md",
+      "reason": "References external directory that doesn't exist - may need to create or remove"
+    },
+    {
+      "file": "guidelines/troubleshooting/image-issues.md",
+      "line": 876,
+      "url": "../components/figma/ImageWithFallback.tsx",
+      "reason": "Target file does not exist"
+    }
+  ],
+  "recommendations": [
+    "1. Template placeholders like {topic}, {name} need to be filled in or links removed",
+    "2. References to /data/ should be corrected to point to src/app/data/ (existing documentation location) before creating new directories. Keep the centralised data system under src/app/data/mock/ in view for UI and component content",
+    "3. Missing genuine documents like ContactForm.md should be created or referenced from N-documents; template placeholders should not be preserved as document names",
+    "4. Broken anchors need corresponding headings added to target documents",
+    "5. External references (tsx files) may need to be replaced with N-document pointers"
+  ]
+}

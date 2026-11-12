@@ -1,0 +1,145 @@
+Static lexical path scan; repository root; no referenced commands executed.
+Revision: 4d643768551e7e18c75ae7831be2917da4026c90
+
+SOURCE .claude/skills/branch-validation/SKILL.md
+Resolved SHA-256: eec2d6edc2204638600c5da2b50f4f4536baaf3eb1dd46fee19784d9812dfaee
+12	AGENTS.md	EXISTS: AGENTS.md
+13,339	.agents/roles/branches-agent.md	EXISTS: .agents/roles/branches-agent.md
+16,153,163,167,232,305,341	scripts/validate-branch-name.js	EXISTS: scripts/validate-branch-name.js
+60	docs/component-guide	NONPATH (framework, branch example or sed expression)
+97	docs/component-documentation	NONPATH (framework, branch example or sed expression)
+206	.git/hooks/pre-push	EXISTS: .git/hooks/pre-push
+337	.github/CLAUDE.md	MISSING: .github/CLAUDE.md
+338	.github/docs/BRANCHING_STRATEGY.md	MISSING: .github/docs/BRANCHING_STRATEGY.md
+340	docs/BRANCH*NAMING*LOCAL.md	GLOB (1 matches): docs/BRANCH*NAMING*LOCAL.md
+342	CONTRIBUTING.md	EXISTS: CONTRIBUTING.md
+343	.github/specs/003-refactor-guidelines/spec.md	EXISTS: .github/specs/003-refactor-guidelines/spec.md
+343	docs/spec-003-*	NONPATH (framework, branch example or sed expression)
+COUNTS {'EXISTS': 6, 'GLOB': 1, 'MISSING': 2, 'NONPATH': 3}
+
+SOURCE .claude/skills/changelog/SKILL.md
+Resolved SHA-256: 09ed655ce7aa4ab2633512a9303c4247dfd79a862de814bad94c6da07d1a092f
+3,21,121	CHANGELOG.md	EXISTS: CHANGELOG.md
+122	.agents/roles/changelog-agent.md	EXISTS: .agents/roles/changelog-agent.md
+123	.github/specs/003-refactor-guidelines/spec.md	EXISTS: .github/specs/003-refactor-guidelines/spec.md
+COUNTS {'EXISTS': 3}
+
+SOURCE .claude/skills/labeling/SKILL.md
+Resolved SHA-256: 24ade0e716ade16b9ab9c3e8b71cd8e113cc81d8f401db299c8c8308d7eb67eb
+73	CHANGELOG.md	EXISTS: CHANGELOG.md
+158	CONTRIBUTING.md	EXISTS: CONTRIBUTING.md
+159	.github/workflows/labeling-unified.yml	EXISTS: .github/workflows/labeling-unified.yml
+161	.github/specs/003-refactor-guidelines/spec.md	EXISTS: .github/specs/003-refactor-guidelines/spec.md
+COUNTS {'EXISTS': 4}
+
+SOURCE .claude/skills/test/SKILL.md
+Resolved SHA-256: 1740aabb7cde2879c41d121d2c981d7e29e128ba31b44d8298e0a6e618a7e7c3
+19,30	package.json	EXISTS: package.json
+45	src/_*tests*_/	GLOB (1 matches): src/_*tests*_/
+45	*.test.ts	GLOB (0 matches): *.test.ts
+51	tests/build.bats	EXISTS: tests/build.bats
+58	e2e/routing.spec.ts	EXISTS: e2e/routing.spec.ts
+83	../guidelines/accessibility-checklist.md	MISSING: .claude/skills/guidelines/accessibility-checklist.md
+113	guidelines/Guidelines.md	EXISTS: guidelines/Guidelines.md
+114	CONTRIBUTING.md	EXISTS: CONTRIBUTING.md
+118	../../../docs/TESTING.md	EXISTS: docs/TESTING.md
+118	docs/TESTING.md	EXISTS: docs/TESTING.md
+119	../validate/SKILL.md	EXISTS: .claude/skills/validate/SKILL.md
+120	.github/specs/003-refactor-guidelines/spec.md	EXISTS: .github/specs/003-refactor-guidelines/spec.md
+COUNTS {'EXISTS': 9, 'GLOB': 2, 'MISSING': 1}
+
+SOURCE .claude/skills/validate/SKILL.md
+Resolved SHA-256: 328cac6f08dd82fd30239f052a5f75194cc098867923edcdf64011ef3c8304e6
+20	package.json	EXISTS: package.json
+31,130	docs/TESTING.md	EXISTS: docs/TESTING.md
+62	dist/	MISSING: dist/
+72	CHANGELOG.md	EXISTS: CHANGELOG.md
+115	Guidelines.md	MISSING: Guidelines.md
+125	docs/component-guide	NONPATH (framework, branch example or sed expression)
+130	../../../docs/TESTING.md	EXISTS: docs/TESTING.md
+131	../branch-validation/SKILL.md	EXISTS: .claude/skills/branch-validation/SKILL.md
+132	guidelines/Guidelines.md	EXISTS: guidelines/Guidelines.md
+133	CONTRIBUTING.md	EXISTS: CONTRIBUTING.md
+134	.github/specs/003-refactor-guidelines/spec.md	EXISTS: .github/specs/003-refactor-guidelines/spec.md
+COUNTS {'EXISTS': 8, 'MISSING': 2, 'NONPATH': 1}
+
+SOURCE .claude/skills/workflow-orchestration/SKILL.md
+Resolved SHA-256: b5b8827d9d48aed8d595be32b4d46eab4f60cc14fd72661b5e9e8f482bdf3ff6
+25,681,682,683	guidelines/Guidelines.md	EXISTS: guidelines/Guidelines.md
+26,594,634,655,679	guidelines/prompt-creation-guidelines.md	EXISTS: guidelines/prompt-creation-guidelines.md
+27,614,680	guidelines/report-creation-guidelines.md	EXISTS: guidelines/report-creation-guidelines.md
+36	Next.js	NONPATH (framework, branch example or sed expression)
+40	../guidelines/backend-integration-deployment.md	MISSING: .claude/skills/guidelines/backend-integration-deployment.md
+75,88,160,188,601,626,645,697	/prompts/{topic}.md	TEMPLATE (requires instantiation)
+78	css-audit.md	MISSING: css-audit.md
+79	accessibility-violations-audit.md	MISSING: accessibility-violations-audit.md
+80	Audit.md	MISSING: Audit.md
+81	css_audit.md	MISSING: css_audit.md
+94,148,155,189,246,607,621,646,701	/reports/{topic}/report.md	TEMPLATE (requires instantiation)
+95,161,177,184,240,245,290,406,413,425,494,509,546,608,627,641,670,702	/tasks/{topic}-tasks.md	TEMPLATE (requires instantiation)
+97,191,648	/guidelines/{guideline}.md	TEMPLATE (requires instantiation)
+101,594	templates/prompt-frontmatter-single.yml	MISSING: templates/prompt-frontmatter-single.yml
+120,213	/styles/blocks/	MISSING: styles/blocks/
+124	src/styles/blocks/*.css	GLOB (101 matches): src/styles/blocks/*.css
+126	archived/	MISSING: archived/
+139,230,579	/reports/css-audit/report.md	MISSING: reports/css-audit/report.md
+166,614	templates/report-frontmatter-single.yml	MISSING: templates/report-frontmatter-single.yml
+217	hero.css	MISSING: hero.css
+217	hero-hero.css	MISSING: hero-hero.css
+218	blog-card.css	MISSING: blog-card.css
+219	Hero.tsx	MISSING: Hero.tsx
+223	Guidelines.md	MISSING: Guidelines.md
+244,412,427,432,478,492,497,508	/tasks/master-task-list.md	EXISTS: tasks/master-task-list.md
+260	/prompts/{topic}/	TEMPLATE (requires instantiation)
+265	/prompts/modern-react-migration/	EXISTS: prompts/modern-react-migration/
+266,266,697	00-ORCHESTRATOR.md	MISSING: 00-ORCHESTRATOR.md
+267,315	01-es5-react-audit.md	MISSING: 01-es5-react-audit.md
+268,319	02-tailwind-violations-audit.md	MISSING: 02-tailwind-violations-audit.md
+269,322	03-css-architecture-alignment.md	MISSING: 03-css-architecture-alignment.md
+270,326	04-component-structure-audit.md	MISSING: 04-component-structure-audit.md
+275,282,365,662	/prompts/{topic}/00-ORCHESTRATOR.md	TEMPLATE (requires instantiation)
+289,414	/reports/YYYY-MM-DD-{topic}/	TEMPLATE (requires instantiation)
+328	mock/	MISSING: mock/
+346	/reports/YYYY-MM-DD-modern-react-migration/	TEMPLATE (requires instantiation)
+347	/tasks/modern-react-migration-tasks.md	EXISTS: tasks/modern-react-migration-tasks.md
+352,359,388	/prompts/{topic}/01-{title}.md	TEMPLATE (requires instantiation)
+352	/prompts/{topic}/02-{title}.md	TEMPLATE (requires instantiation)
+366,376,383	/reports/YYYY-MM-DD-{topic}/01-{title}.md	TEMPLATE (requires instantiation)
+389,396	/reports/YYYY-MM-DD-{topic}/00-CONSOLIDATED.md	TEMPLATE (requires instantiation)
+430	/tasks/{topic}-orchestration-tasks.md	TEMPLATE (requires instantiation)
+434,497,526,530,531	/tasks/task-list.md	EXISTS: tasks/task-list.md
+464,470	/s/	NONPATH (framework, branch example or sed expression)
+464	./reports/{topic}/report.md	TEMPLATE (requires instantiation)
+465	./reports/{topic}/report.md.bak	TEMPLATE (requires instantiation)
+466	./reports/{topic}/	TEMPLATE (requires instantiation)
+466	./reports/archived/{topic}/	TEMPLATE (requires instantiation)
+469	./reports/YYYY-MM-DD-{topic}/*.md	TEMPLATE (requires instantiation)
+473	./reports/YYYY-MM-DD-{topic}/	TEMPLATE (requires instantiation)
+473	./reports/archived/YYYY-MM-DD-{topic}/	TEMPLATE (requires instantiation)
+484,487	./tasks/{topic}-tasks.md	TEMPLATE (requires instantiation)
+484,487	./tasks/archived/{topic}-tasks.md	TEMPLATE (requires instantiation)
+494,506,510	/tasks/archived/{topic}-tasks.md	TEMPLATE (requires instantiation)
+501,578,585	/prompts/	EXISTS: prompts/
+517,580	/tasks/css-audit-tasks.md	MISSING: tasks/css-audit-tasks.md
+517	/tasks/archived/css-audit-tasks.md	MISSING: tasks/archived/css-audit-tasks.md
+539	task-list.md	MISSING: task-list.md
+549	/tasks/{topic}-part-1.md	TEMPLATE (requires instantiation)
+549	/tasks/{topic}-part-2.md	TEMPLATE (requires instantiation)
+550	/tasks/{topic}.md	TEMPLATE (requires instantiation)
+550	/tasks/{topic}-followup.md	TEMPLATE (requires instantiation)
+578	/prompts/css-audit.md	MISSING: prompts/css-audit.md
+579,584,586	/reports/	EXISTS: reports/
+579	/reports/2026-10-22-css-audit/	MISSING: reports/2026-10-22-css-audit/
+580	/tasks/	EXISTS: tasks/
+581	/reports/archived/	EXISTS: reports/archived/
+581	/tasks/archived/	EXISTS: tasks/archived/
+581	/reports/archived/2026-02-01-old-audit/	MISSING: reports/archived/2026-02-01-old-audit/
+584	/docs/	EXISTS: docs/
+634	templates/task-frontmatter.yml	MISSING: templates/task-frontmatter.yml
+655	templates/orchestrator-frontmatter.yml	MISSING: templates/orchestrator-frontmatter.yml
+669	/reports/2026-10-22-{topic}/	TEMPLATE (requires instantiation)
+684	.github/specs/003-refactor-guidelines/spec.md	EXISTS: .github/specs/003-refactor-guidelines/spec.md
+684	guidelines/	EXISTS: guidelines/
+COUNTS {'EXISTS': 15, 'GLOB': 1, 'MISSING': 29, 'NONPATH': 2, 'TEMPLATE': 28}
+
+TOTAL {'EXISTS': 45, 'GLOB': 4, 'MISSING': 34, 'NONPATH': 6, 'TEMPLATE': 28}
