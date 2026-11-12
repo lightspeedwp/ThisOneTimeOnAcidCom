@@ -1,7 +1,7 @@
 # Reader access specification
 
 | Field | Value |
-|---|---|
+| --- | --- |
 | Proposed path | .github/specs/005-reader-access/ |
 | Status | Draft documentation package; implementation not authorised |
 | Owner | Ash; This One Time on Acid personal book project |
@@ -19,6 +19,7 @@ Answers below are Ash's selected directions. They do not approve implementation,
 ### Session 2026-11-12
 
 - Q: Where should the server-side check that a reader has verified their email run, given the site is a static app hosted on Netlify? → A: Netlify Functions on the existing host issue and check codes and serve protected chapters (Option A).
+- Q: When does a code's ten-minute validity start? → A: When the Netlify Function creates the code; visitor wording says "within 10 minutes of requesting it" (Option A).
 
 ## Scope
 
@@ -30,7 +31,7 @@ Exclude podcast work, theme/style-guide/navigation work, indexing, manuscript re
 
 - RA-001: Only valid server-authorised verified-email access may read the website edition or direct chapter URLs. Selected direction: authorisation, code issue/verification and protected chapter delivery run in Netlify Functions on the existing host; protected content is not included in the static bundle. Supabase remains excluded.
 - RA-002: Codes are emailed, single-use and invalid after consumption or expiry.
-- RA-003: The ten-minute policy is recorded; its authoritative start event and mechanics remain unresolved.
+- RA-003: A code expires ten minutes after the Netlify Function creates it; that server-recorded creation time is the authoritative start event. Visitor wording must say "within 10 minutes of requesting it" and must not imply ten minutes from email receipt. Resend, attempt and rate mechanics remain unresolved.
 - RA-004: Returning access is device/profile-scoped and ends on sign-out, revocation, storage clearance or approved expiry; new devices require reverification.
 - RA-005: Browser credentials contain no email; sign-out invalidates server access.
 - RA-006: Access records contain only necessary email, verification status, internal ID and lifecycle timestamps; delete after twelve months without authenticated use. Provider logs/backups remain separate.
