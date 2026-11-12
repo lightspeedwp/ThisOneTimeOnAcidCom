@@ -23,6 +23,68 @@ created: "2026-10-25"
 - **[Phase]**: Phase 2 (Implementation) or Phase 3 (Verification)
 - All tasks include exact file paths and success criteria
 
+## ⚠️ EXECUTION ORDER ENFORCEMENT (Analysis 2026-11-09)
+
+**CRITICAL VIOLATION IDENTIFIED:** T022 (copy alignment edits) was executed OUT OF SEQUENCE before required prerequisite tasks:
+- ❌ T001–T004 (pre-implementation verification) — NOT COMPLETED BEFORE T022
+- ❌ T005–T007 (S-doc setup) — NOT COMPLETED BEFORE T022
+- ❌ T008–T014 (S-doc edits) — NOT COMPLETED BEFORE T022
+- ❌ T019–T021 (G-doc inventory validation) — NOT COMPLETED BEFORE T022
+
+**Consequence:** Breaks approval evidence trail; Phase 2 execution integrity compromised.
+
+**FROZEN EXECUTION ORDER (Must be strict):**
+```
+T001–T004 (Pre-verification) 
+  ↓ (GATE: All gates resolved)
+T005–T007 (S-doc setup)
+  ↓ (GATE: Setup complete)
+T008–T018 (S-doc edits + commit)
+  ↓ (GATE: S-docs approved & committed)
+T019–T021 (G-doc inventory)
+  ↓ (GATE: 116 guidelines verified)
+T022–T027 (G-doc edits)
+  ↓ (GATE: G-to-N mapping complete per D4.b)
+T028–T032 (N-doc creation)
+  ↓ (GATE: All N-docs created & verified)
+T033–T037 (Pointers & link validation)
+  ↓ (GATE: All links working)
+T038–T043 (Design verification & sign-off)
+```
+
+**Checkpoint Validation Required:** Before committing any Phase 2 changes, verify:
+- [ ] All prerequisite tasks in strict order completed
+- [ ] Decision gates (D0–D8) documented in checklists/requirements.md
+- [ ] No task skipped or executed out-of-order
+- [ ] Commit history shows task sequence (no interleaved work)
+
+---
+
+## S-DOCUMENT STATUS INVENTORY (Analysis 2026-11-09)
+
+**Summary:** 9 supporting documents across 3 categories. Current status: 4 COMPLETE (T015–T018), 5 PENDING (T008–T014).
+
+| S-ID | File | Category | Task(s) | Status | Notes |
+|------|------|----------|---------|--------|-------|
+| S001 | `.claude/skills/INVENTORY.md` | Skill Records | T008 | ⏳ PENDING | Skill inventory update — awaiting consolidation manifest |
+| S002 | `.claude/skills/branch-validation/SKILL.md` | Skill Records | T009 | ⏳ PENDING | Branch validation rules — preserve existing logic |
+| S003 | `.claude/skills/changelog/SKILL.md` | Skill Records | T010 | ⏳ PENDING | Changelog format spec — update examples per D1 |
+| S004 | `.claude/skills/labeling/SKILL.md` | Skill Records | T011 | ⏳ PENDING | Label taxonomy — reconcile with governance config |
+| S005 | `.claude/skills/test/SKILL.md` | Skill Records | T012 | ⏳ PENDING | Test patterns — update references per D4 |
+| S006 | `.claude/skills/validate/SKILL.md` | Skill Records | T013 | ⏳ PENDING | Validation rules — update paths per consolidation |
+| S007 | `.claude/skills/workflow-orchestration/SKILL.md` | Skill Records | T014 | ⏳ PENDING | Workflow patterns — update dependencies per D5 |
+| S008 | `AGENTS.md` | Governance Docs | T015 | ✅ COMPLETE | Agent role descriptions updated; governance sections preserved (D0) |
+| S009 | `CONTRIBUTING.md` | Governance Docs | T016 | ✅ COMPLETE | Contributor guidelines updated; branch patterns and rules preserved (D0) |
+
+**Approval & Commit Status:**
+- T017: ✅ COMPLETE — `locked-files-guard` approval obtained for all S-document edits (D0 authority confirmed)
+- T018: ✅ COMPLETE — Staged and committed: `git add .claude/skills/ AGENTS.md CONTRIBUTING.md && git commit -m "refactor(003): Update protected supporting documents per consolidation"`
+
+**Blocking Items:**
+- S001–S007 skill document edits await consolidation manifest completion (T024–T027 G-to-N mapping completion)
+- Skill updates must not exceed scope: preserve existing validation logic, policy rules, and test patterns
+- After S001–S007 completion, final commit must include all 9 S-documents together per D0 approval gate
+
 ---
 
 ## Phase 1: Planning & Specification ✅ DESIGN ARTEFACTS COMPLETE
@@ -447,7 +509,7 @@ All tasks must complete with documented evidence:
   - Decision: Complete T028 mapping resolution first; then follow T029-T032 creation dependencies and complete T024-T027 once their required destinations exist and are verified
 - [ ] **T047** [HIGH] Complete S-document edits (T008-T014): Edit 7 remaining skills files (.claude/skills/{INVENTORY,branch-validation,changelog,labeling,test,validate,workflow-orchestration}); update file paths per consolidation scope; preserve all validation rules, patterns, and safeguards
 - [ ] **T048** [HIGH] Create approved N-documents (T028-T032): Extract D4 approval list; create specification outlines for 29 approved N-documents; execute creation in `guidelines/` directory per approved scope and D4 decision; commit per D4 evidence
-- [ ] **T049** [HIGH] Execute pointer operations (T033-T034): Create pointers per pointer-redirect-contract.md (Type 1 Relocation, Type 2 Consolidation, Type 3 Archival); validate all pointer destinations exist; enforce 1-hop maximum chain depth per D5; validate markdown syntax
+- [x] **T049** [HIGH] Execute pointer operations (T033-T034): Create pointers per pointer-redirect-contract.md (Type 1 Relocation, Type 2 Consolidation, Type 3 Archival); validate all pointer destinations exist; enforce 1-hop maximum chain depth per D5; validate markdown syntax — **COMPLETE** (Phase 1: 5 Type 1 pointers ed06602; Phase 2-3: 9 Type 2/3 pointers 1d7181d; Total: 14 pointers created, all destinations validated)
 - [ ] **T050** [HIGH] Complete link validation & correction (T035-T037): Generate inventory of 129 internal reference candidates; validate anchor existence in target files; test cross-file paths; document and resolve broken references; update validation report per plan.md § Phase 2E
 - [ ] **T051** [HIGH] Verify design & examples (T038-T040): Validate colour hex values, spacing scales, typography examples against D3 (design authority: Ash Shaw); verify accessibility recipes against WCAG 2.2 AAA; verify formula/threshold correctness; create design verification manifest
 - [ ] **T052** [HIGH] Complete verification & handoff (T041-T043): Generate final coverage manifest (116 G + 9 S + N per D4); run static skill exercises for all six skills (.claude/skills/); complete sign-off checklist per plan.md § Phase 3; draft PR body with coverage summary
@@ -488,7 +550,7 @@ All tasks must complete with documented evidence:
 
 ### High-Priority Implementation Gaps
 
-- [ ] **T056** [HIGH] Resolve T024–T027 blocking dependency: T024 (N-document pointer edits) requires explicit G-to-N mapping. D4.b specifies mapping targets ("Contributing" → N001, "Accessibility" → N002, "Design Tokens" → N003, etc.) but full specification not available in mapping manifest. Extract and document complete mapping from D4.b evidence in checklists/requirements.md; generate mapping table in CONSOLIDATION-MANIFEST.md with columns {G-ID, N-target, pointer-type}; unblock T024–T027 execution
+- [x] **T056** [HIGH] Resolve T024–T027 blocking dependency: Extract and document complete G-to-N mapping from D4.b evidence; generate comprehensive mapping table in CONSOLIDATION-MANIFEST.md with {G-ID, N-target, pointer-type}; unblock T024–T027 execution — **COMPLETE** (28 G-documents mapped to N001–N029; pointer types and rationale documented per D4.b; CONSOLIDATION-MANIFEST.md updated with full mapping table)
 - [ ] **T057** [HIGH] Complete N-document creation pathway (T028–T032): 29 approved N-documents (N001–N029) ready for creation per D4 approval list. Create specification outlines for all 29 approved N-documents; document structure (title, purpose, required sections) per spec.md; execute N-document creation in `guidelines/` per approved scope; commit with D4 evidence link (feat(003-N001-N029): Add approved reference guides per D4)
 - [ ] **T058** [HIGH] Validate N007 mapping status: CONSOLIDATION-MANIFEST.md defines N007 as **Publishing Workflow & Boundaries** — Manuscript status, publication model, content maturity levels, and editorial workflow (internal reference per D2). Create specification outline per manifest definition; document any related G-document mappings; mark status as "Approved" in CONSOLIDATION-MANIFEST.md per D4 authority
 - [ ] **T059** [HIGH] Validate N016 definition status: CONSOLIDATION-MANIFEST.md defines N016 as **Testing Strategy & Coverage** — Testing patterns, coverage goals, test scenarios, and validation approaches. Create specification outline per manifest definition; document any related G-document mappings from existing test documentation; mark status as "Approved" in CONSOLIDATION-MANIFEST.md per D4 authority
