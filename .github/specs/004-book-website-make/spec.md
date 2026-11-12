@@ -23,6 +23,20 @@ All six authoritative source documents are available in the [`references/`](./re
 
 ---
 
+## Gate 2 Readiness Review
+
+**Status**: ⏳ Pending Gate 2 Approval (as of 2026-11-12)
+
+All critical design baseline requirements have been verified and documented:
+
+- **[GATE_2_READINESS_REPORT.md](./exports/GATE_2_READINESS_REPORT.md)** — Comprehensive technical readiness report (195 lines; all 4 critical fixes verified; design baseline locked)
+- **[GATE_2_SIGN_OFF_SUMMARY.md](./exports/GATE_2_SIGN_OFF_SUMMARY.md)** — Executive approval summary for project owner (Ash); ready for sign-off
+- **[PROMPT_EXECUTION_PLAN.md](./PROMPT_EXECUTION_PLAN.md)** — Phase A & B execution roadmap; 3 unblocked prompts ready, 3 blocked by decisions
+
+**Gate 2 Approval Checklist**: See GATE_2_SIGN_OFF_SUMMARY.md for full approval criteria and timeline.
+
+---
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Design Specification Hand-off (Priority: P1)
