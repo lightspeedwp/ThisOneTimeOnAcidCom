@@ -616,7 +616,7 @@ All tasks must complete with documented evidence:
 
 **Purpose**: Address ashshaw.makeup/portfolio branding references in guidelines and resolve unaddressed CodeRabbit feedback from PR #588. Coordination point with TOA-367 (docs/ folder cleanup).
 
-**Status**: Audit COMPLETE (2026-11-12). 4 remediation tasks identified. Blocked on T070 completion before T071–T073.
+**Status**: Audit COMPLETE (2026-11-12). 4 remediation tasks identified. T070–T073 can execute in parallel; T070 is highest priority (largest scope).
 
 **Context**: PR #591 (clarifications) and PR #588 (analysis) both merged to main on 2026-11-11. CodeRabbit flagged moderate-risk issues on #588 that were merged unaddressed. This phase remediates those findings alongside a content audit of the guidelines/ folder.
 
@@ -688,12 +688,10 @@ All tasks must complete with documented evidence:
 ### Phase 7 Dependencies
 
 ```text
-T070 (Content remediation — HIGH priority, largest scope)
-  ↓
-T071 (Lint fixes — can run in parallel with T070)
-  ↓
-T072 (Task sequencing — can run after T070/T071, or in parallel)
-T073 (Status verification — can run after T070/T071, or in parallel)
+T070 (Content remediation — HIGH priority, largest scope)  [P]
+T071 (Lint fixes — independent, parallel)                  [P]
+T072 (Task sequencing — independent, parallel)             [P]
+T073 (Status verification — independent, parallel)         [P]
   ↓
 All T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
 ```
