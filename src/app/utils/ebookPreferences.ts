@@ -11,8 +11,11 @@
  * @version 1.0.0
  */
 
+import type { BookPage } from '../data/mock/pages/ebook/types';
+
 const STORAGE_KEYS = {
   PAGE: 'ash-ebook-position',
+  POSITION: 'ash-ebook-position-v2',
   FONT_SIZE: 'ash-ebook-font-size',
   MINIMAL_MODE: 'ash-ebook-minimal-mode',
   THEME: 'ash-ebook-theme',
@@ -31,6 +34,11 @@ export interface EbookPreferences {
   theme: ThemePreference;
   fullscreenPref: boolean;
   pagingEffect: PagingEffect;
+}
+
+export interface ReadingPosition {
+  sourceId: string;
+  paragraphIndex: number;
 }
 
 const DEFAULT_PREFERENCES: EbookPreferences = {
@@ -65,6 +73,51 @@ export function readSavedPage(maxIndex: number): number {
   } catch {
     return 0;
   }
+}
+
+/** Resolve a saved manuscript location against the current pagination. */
+export function readSavedPosition(pages: BookPage[]): number {
+  var legacyPage = 0;
+  try {
+    var stored = localStorage.getItem(STORAGE_KEYS.POSITION);
+    if (stored !== null) {
+      var position = JSON.parse(stored) as Partial<ReadingPosition>;
+      if (typeof position.sourceId === 'string' && Number.isInteger(position.paragraphIndex) && position.paragraphIndex >= 0) {
+        var matched = findPageForPosition(pages, position);
+        if (matched >= 0) return matched;
+      }
+    }
+    var legacy = localStorage.getItem(STORAGE_KEYS.PAGE);
+    if (legacy !== null) {
+      var parsed = parseInt(legacy, 10);
+      if (Number.isInteger(parsed) && parsed >= 0) legacyPage = Math.min(parsed, Math.max(pages.length - 1, 0));
+    }
+  } catch {
+    return 0;
+  }
+  return legacyPage;
+}
+
+export function findPageForPosition(pages: BookPage[], position: ReadingPosition): number {
+  var match = -1;
+  for (var i = 0; i < pages.length; i++) {
+    var page = pages[i];
+    if (page.sourceId === position.sourceId && page.paragraphStart != null && page.paragraphStart <= position.paragraphIndex) match = i;
+  }
+  return match;
+}
+
+export function savePosition(position: ReadingPosition): void {
+  try {
+    localStorage.setItem(STORAGE_KEYS.POSITION, JSON.stringify(position));
+  } catch {
+    // Storage unavailable or full; the reader remains usable for this session.
+  }
+}
+
+export function positionForPage(page: BookPage | undefined): ReadingPosition | null {
+  if (!page || !page.sourceId || page.paragraphStart == null) return null;
+  return { sourceId: page.sourceId, paragraphIndex: page.paragraphStart };
 }
 
 /**
@@ -222,6 +275,7 @@ export function readAllPreferences(): EbookPreferences {
 export function clearAllPreferences(): void {
   try {
     localStorage.removeItem(STORAGE_KEYS.PAGE);
+    localStorage.removeItem(STORAGE_KEYS.POSITION);
     localStorage.removeItem(STORAGE_KEYS.FONT_SIZE);
     localStorage.removeItem(STORAGE_KEYS.MINIMAL_MODE);
     localStorage.removeItem(STORAGE_KEYS.THEME);
