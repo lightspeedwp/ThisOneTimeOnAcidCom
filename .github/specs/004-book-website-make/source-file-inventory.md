@@ -162,7 +162,7 @@ Complete documentation of six specification files from `content/book/` directory
 - 5. Validation summary
 
 **Reconciliation Status**: ✓ AUTHORITATIVE DECISION REGISTER  
-**Highest Version in Set**: v1.9.0 (highest SemVer across all 6 files)  
+**Highest Version Number in Set**: v1.9.0 (File 05). Version numbers belong to separate documents and do not rank one document above another.  
 **Conflicts with Other Files**: None (File 05 is authoritative for design decisions and candidates)
 
 **Special Status**: This file is the authoritative source for:
@@ -195,8 +195,8 @@ Complete documentation of six specification files from `content/book/` directory
 - 3. Access policy specifications
 - 4. Reader journey documentation
 
-**Reconciliation Status**: ⚠️ OLDER (5 days old; superseded by File 05 v1.9.0)  
-**Version Precedence**: File 05 (v1.9.0, 2026-11-09) takes precedence for reader access policy decisions  
+**Reconciliation Status**: ⚠️ OLDER (last revised 5 days before the other files; provisional draft)  
+**Topic Precedence**: File 05 (decision register) takes precedence for reader access policy decisions because it is the decision register for that topic, not because of its version number  
 **Conflicts with File 05**: File 06 marked "provisional draft"; File 05 is more current decision source  
 **Recommendation**: File 06 should be updated to v1.2.0 or v2.0.0 post-feature to reflect all decisions
 
@@ -206,7 +206,7 @@ Complete documentation of six specification files from `content/book/` directory
 
 ### Version Precedence Rule (FR-002)
 
-**Rule**: Newer version takes precedence; all conflicts documented with explicit rationale.
+**Rule**: Within a single document, the newer revision takes precedence over its earlier revisions (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0). Across different documents, version numbers are independent and are not compared; authority is assigned per topic as shown below. All conflicts are documented with explicit rationale.
 
 **Application**:
 
@@ -221,11 +221,18 @@ Complete documentation of six specification files from `content/book/` directory
 
 | Conflict | Files Involved | Resolution | Impact |
 | ---------- | ---------------- | ----------- | -------- |
-| **Version Age (File 06)** | File 06 (v1.1.1, 2026-11-04) vs Files 01/02/03/05 (2026-11-09) | File 05 (v1.9.0) takes precedence per SemVer rule | Low impact; File 06 marked as provisional draft; recommendations for v1.2.0 update noted |
+| **Version Age (File 06)** | File 06 (v1.1.1, 2026-11-04) vs Files 01/02/03/05 (2026-11-09) | File 05 takes precedence for reader access policy as the decision register (topic authority, not version number) | Low impact; File 06 marked as provisional draft; recommendations for v1.2.0 update noted |
 | **Reader Access Details** | File 02 (companion plan) vs File 05 (decision register) | File 05 (v1.9.0, most current) authoritative | Low impact; File 02 is companion planning, not authoritative |
-| **Scope Specification** | File 03 (v1.3.0 author decisions) vs File 06 (v1.1.1 scope) | File 03 (newer) takes precedence for scope decisions | Low impact; File 06 is provisional draft; File 03 reflects latest author decisions (27 Oct, 3 Nov 2026) |
+| **Scope Specification** | File 03 (v1.3.0 author decisions) vs File 06 (v1.1.1 scope) | File 03 takes precedence for scope decisions as the author-decisions record | Low impact; File 06 is provisional draft; File 03 reflects latest author decisions (27 Oct, 3 Nov 2026) |
 
-**Conflict Resolution Summary**: ✓ **ZERO CRITICAL CONFLICTS** — All differences resolved via version precedence rule. File 05 (v1.9.0) is authoritative when any conflict arises.
+**Conflict Resolution Summary**: No critical conflicts identified. Each conflict above is resolved by topic authority, not by comparing version numbers across documents:
+
+- **Reader access policy and recovery**: File 05 (decision register).
+- **Navigation exposure and launch scope**: File 03 (author decisions), consistent with the precedence table above.
+- **Design baseline**: File 04 (design brief), with File 05 distinguishing approved values from unapproved candidates.
+- **Revisions of the same document**: the newer revision applies (see `version-reconciliation.md` for the FR-002 revision assessments).
+
+No single file is authoritative for every conflict. A recorded-version discrepancy for File 03 (recorded as v1.2.1 in Files 01 and 02; FR-002 names v1.2.2) remains open in `version-reconciliation.md`.
 
 ---
 
@@ -253,7 +260,7 @@ Complete documentation of six specification files from `content/book/` directory
 | **03** | Ash (author decisions) | Scope team | Launch scope definition | Authoritative (author decisions) |
 | **04** | Ash (design authority) | Design team | Design baseline specification | Locked (no changes during preflight) |
 | **05** | Ash (decision authority) | Design team | Current decision register | Highest version (v1.9.0); overrides others |
-| **06** | Ash (project lead) | Product team | Product requirements | Supporting (provisional draft; superseded by File 05) |
+| **06** | Ash (project lead) | Product team | Product requirements | Supporting (provisional draft; File 05 governs reader access policy) |
 
 ---
 
@@ -292,7 +299,7 @@ File 05 (Decision Register) ← AUTHORITATIVE CURRENT SOURCE
 | Reconciliation status recorded | ✓ | Reconciliation Status column shows ✓ AUTHORITATIVE or ⚠️ OLDER | Clear status notation |
 | Authority documented | ✓ | Authority Matrix section shows primary/secondary authorities | Role clarity |
 | Conflicts identified | ✓ | Conflicts Identified table shows zero critical conflicts | Transparent conflict analysis |
-| Precedence rule applied | ✓ | Version Precedence Rule section documents SemVer application | Rule followed per FR-002 |
+| Precedence rule applied | ✓ | Version Precedence Rule section documents within-document revision precedence and per-topic authority | Rule followed per FR-002 |
 
 **FR-001 Compliance**: ✅ **PASS** — All six source files analyzed, versions extracted, timestamps documented, reconciliation status recorded.
 

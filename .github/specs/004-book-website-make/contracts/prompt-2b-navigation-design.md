@@ -24,7 +24,7 @@ Generate exact navigation component design with all states (default, hover, acti
 
 **Desktop (≥1024px)**:
 - Default: Links in horizontal menu bar
-- Hover: Text color changes to accent (#FF3AAE hot pink — same in both themes)
+- Hover: Text color changes to accent (#FF3AAE hot pink — same in both themes) and the link gains underline emphasis, so colour is not the only state cue
 - Active: Current page link bold, accent color (#FF3AAE hot pink)
 
 **Tablet (768-1023px)**:
@@ -42,7 +42,7 @@ Generate exact navigation component design with all states (default, hover, acti
 1. Create or update Navigation component with 4 visible links
 2. Add state variations (default, hover, active) for each breakpoint
 3. Use approved typography (Inter for links)
-4. Use approved colors (primary text, #FF3AAE hot pink accent on hover/active)
+4. Use approved colors (primary text, #FF3AAE hot pink accent on hover/active) and add underline emphasis to the hover state
 5. Document responsive breakpoints (1024px, 768px)
 6. Export component states for implementation
 
@@ -50,7 +50,7 @@ Generate exact navigation component design with all states (default, hover, acti
 
 ✅ **CR-2B.1**: Navigation displays only approved visible items (4 links)
 
-✅ **CR-2B.2**: All states (default, hover, active) properly styled with approved colors
+✅ **CR-2B.2**: All states (default, hover, active) properly styled with approved colors; hover adds underline emphasis and remains distinguishable without relying on colour alone (per `references/05-design-reader-decision-register.md`, Hover emphasis and Inline links)
 
 ✅ **CR-2B.3**: Responsive behavior correct (horizontal desktop, hamburger mobile)
 
@@ -79,5 +79,6 @@ Generate exact navigation component design with all states (default, hover, acti
 - [ ] Responsive design for 3 breakpoints (desktop, tablet, mobile)
 - [ ] Typography: Inter font applied
 - [ ] Colors: Approved palette used (primary + accent)
+- [ ] Hover state has underline emphasis and is distinguishable without colour (for example, in a greyscale check)
 - [ ] Mobile drawer documented and designed
 - [ ] All acceptance criteria met

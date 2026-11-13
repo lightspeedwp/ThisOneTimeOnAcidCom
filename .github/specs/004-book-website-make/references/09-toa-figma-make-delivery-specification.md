@@ -520,7 +520,8 @@ and scoped main exception:
 
 - Re-read current files and source baseline.
 - Stop on material changes for a revised preview.
-- Save only the approved planning files.
+- Save only the approved planning files and any separately previewed
+  and approved .specify/feature.json change.
 - Apply the approved actual-save-date rule.
 - Read back and compare every saved file.
 - Report any discrepancy without silently repairing it.
