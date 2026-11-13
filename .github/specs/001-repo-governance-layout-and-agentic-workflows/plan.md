@@ -158,7 +158,7 @@ and targeting different branches.
 ### Active PRs
 
 | PR | Branch | Base | Status | Content | Merge Blocker |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | #301 | `feat/governance-decisions-implement` | `develop` | ⏳ Open (not draft) | Foundation: CODEOWNERS, branch protection, Node.js pinning, Jest ESM fix, Tailwind removal | **Merge conflicts** + acceptance criteria unchecked |
 | #318 | `claude/cool-keller-y1ebyr` | `main` | ❌ DRAFT, **WRONG BASE** | Phase 1 workflows (8 workflows, 39,080 additions) | Targets `main` instead of `develop`; superseded by #319 |
 | #319 | `feat/phase1-governance-workflows` | `develop` | ⏳ DRAFT | Phase 1 workflows (8 workflows, 1,919 additions) + lefthook | **9 workflow implementation errors** (see below) |
@@ -201,8 +201,8 @@ Failing to resolve these errors will break CI for all subsequent PRs.
 The 9 Phase 1 workflows require corrections before CI passes:
 
 | Workflow | Error | Severity | Fix |
-|----------|-------|----------|-----|
-| `lint.yml` | `\|\| true` contradicts `continue-on-error: true` | **HIGH** | Remove `\|\| true` operators; let `continue-on-error` handle flow control |
+| ---------- | ------- | ---------- | ----- |
+| `lint.yml` | `\ | \ | true` contradicts `continue-on-error: true` | **HIGH** | Remove `\ | \ | true` operators; let `continue-on-error` handle flow control |
 | `tests.yml` | `continue-on-error: true` suppresses Jest/Playwright failures | **CRITICAL** | Remove `continue-on-error` from Jest and browser-install steps |
 | `documentation.yml` | References missing npm scripts (`lint:md`, `validate:frontmatter`) | **HIGH** | Verify scripts exist in package.json OR replace with direct commands |
 | `workflow-lint.yml` | Python YAML validation assumes PyYAML installed | **HIGH** | Add `python3 -m pip install pyyaml` before validation |
@@ -225,6 +225,6 @@ After PRs merge:
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
+| ----------- | ------------ | ------------------------------------- |
 | [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
 | [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |

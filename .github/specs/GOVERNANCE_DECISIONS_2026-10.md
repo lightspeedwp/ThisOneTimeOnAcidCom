@@ -506,7 +506,7 @@ delegation for components.
 ## Summary Table
 
 | ID | Decision | Recommendation | Owner Approval |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | PKG-001 | Package manager | npm-only (A) | [ ] |
 | NODE-001 | Node.js version | Pin to Node 24 (B) | [ ] |
 | TEST-001 | Jest ESM | Enable Jest ESM mode (B) | [ ] |
@@ -534,7 +534,7 @@ delegation for components.
 ## Workstream Dependencies
 
 | Workstream | Blocking Decisions | Status |
-|---|---|---|
+| --- | --- | --- |
 | TOA-260 (Testing) | TEST-001, TEST-002 | Blocked on owner approval |
 | TOA-261 (.github) | GH-001, GH-002, GH-003 | Blocked on owner approval |
 | TOA-262 (Config) | PKG-001, NODE-001, STYLE-001 | Blocked on owner approval |

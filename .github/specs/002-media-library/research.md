@@ -33,7 +33,7 @@ alternative), or should evaluation precede approval?
 **Options Provided**:
 
 | Option | Decision | Downstream Impact |
-|--------|----------|------------------|
+| -------- | ---------- | ------------------ |
 | A | Approve GitHub + Netlify as working assumption | TOA-284 and TOA-285 can plan Git LFS, Netlify integration, static hosting |
 | B | Approve Cloudinary as working assumption | TOA-284 and TOA-285 must plan Cloudinary API, hosted editing UI, CDN |
 | C | Defer choice; proceed with evaluation (TOA-276 first) | TOA-284/285 remain blocked until TOA-276 completes; recovery/validation work proceeds independently |
@@ -80,7 +80,7 @@ minimum print-quality requirements?
 **Options Provided**:
 
 | Option | Decision | Success Metric Impact |
-|--------|----------|----------------------|
+| -------- | ---------- | ---------------------- |
 | A | 40–50 of 56 recoverable as high-quality originals; print requires 300 DPI, RGB/CMYK, PNG/PDF | SC-001 targets 40–50; provider must support print formats |
 | B | ~30 of 56 recoverable; many exist only as low-res web renderings; print aspirational | SC-001 targets ~30; provider must support print formats but recovery constraint |
 | C | Recovery percentage is unknown; define success as "recover what is possible, document what is not" | SC-001 qualitative; provider choice less constrained by print |
@@ -132,7 +132,7 @@ extend TOA-277 (define schema), or are they distinct phases?
 **Options Provided**:
 
 | Option | Decision | Project Sequencing |
-|--------|----------|------------------|
+| -------- | ---------- | ------------------ |
 | A | Sequential: define (TOA-277) → validate (TOA-282) → finalise (TOA-283) → implement (TOA-284/285) | TOA-283 is blocker for TOA-284/285; high safety, lower speed |
 | B | Parallel: define (TOA-277) and implement (TOA-284 planning) concurrently; validate (TOA-282) parallel to both | Fast execution; rework risk if validation finds schema issues |
 | C | TOA-283 is refinement only (not blocker); TOA-284/285 can start after TOA-277 | Medium speed/safety balance; TOA-283 polishes, doesn't gate |

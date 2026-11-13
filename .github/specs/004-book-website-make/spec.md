@@ -4,28 +4,42 @@
 
 **Created**: 2026-11-09
 
-**Status**: Clarified — Ready for Approval (2026-11-11)
+**Status**: Documentation complete; execution **not authorised**. The seven blocking decisions are recorded, but the following gates remain open:
+
+- Exact editable Make revision/source snapshot and parity evidence (not confirmed)
+- Available credits and approved generation scope (not confirmed)
+- Explicit authority to resume each paused implementation stage (not given)
+- Reader-access work (Prompts 3A–3C) has moved to [Spec 005](../005-reader-access/spec.md) and is no longer executed from this specification (see Blocking Decisions below)
+- Chapter publication: each chapter or addendum needs Ash's approval before it is published (Decision 5, revised 2026-11-13)
 
 **Input**: Complete staged Figma Make prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval.
 
 ---
 
-## Clarifications
+## Source Documents
 
-### Session 2026-11-11
+All six authoritative source documents are available in the [`references/`](./references/) folder:
 
-**Clarification Assessment**: No critical functional ambiguities detected. Specification is comprehensive and well-structured with all requirements documented.
+- **[01-book-website-specification.md](./references/01-book-website-specification.md)** — Master execution contract (v1.0.0)
+- **[02-companion-session-plan.md](./references/02-companion-session-plan.md)** — Companion session plan (v1.0.4)
+- **[03-author-decisions-launch-scope.md](./references/03-author-decisions-launch-scope.md)** — Author decisions and scope (v1.3.0)
+- **[04-design-brief.md](./references/04-design-brief.md)** — Design brief and baseline (v1.1.2)
+- **[05-design-reader-decision-register.md](./references/05-design-reader-decision-register.md)** — Decision register (v1.9.0)
+- **[06-website-reading-prd.md](./references/06-website-reading-prd.md)** — Product requirements (v1.1.1)
 
-**Documented Blocking Decisions** (intentional, not ambiguities—resolved during user approval phase):
-- Recovery-first race condition handling
-- Recovery lifetime eligibility  
-- Code expiry start time (generation vs. receipt vs. page load)
-- Email service provider selection
-- Manuscript publication readiness
-- Newsletter destination/signup link
-- Route enforcement verification for /speaking, /events, /media
+---
 
-**Specification Status**: ✅ Ready for Approval. Four unblocked executable prompts (1, 2A, 2B, 3A) ready for user approval. Prompts 3B/3C blocked pending the 7 documented decisions. Proceed to approval workflow.
+## Gate 2 Readiness Review
+
+**Status**: ⏳ Pending Gate 2 Approval (as of 2026-11-12)
+
+All critical design baseline requirements have been verified and documented:
+
+- **[GATE_2_READINESS_REPORT.md](./exports/GATE_2_READINESS_REPORT.md)** — Comprehensive technical readiness report (195 lines; all 4 critical fixes verified; design baseline locked)
+- **[GATE_2_SIGN_OFF_SUMMARY.md](./exports/GATE_2_SIGN_OFF_SUMMARY.md)** — Executive approval summary for project owner (Ash); ready for sign-off
+- **[PROMPT_EXECUTION_PLAN.md](./PROMPT_EXECUTION_PLAN.md)** — Phase A & B execution roadmap; 3 unblocked prompts ready, 3 blocked by decisions
+
+**Gate 2 Approval Checklist**: See GATE_2_SIGN_OFF_SUMMARY.md for full approval criteria and timeline.
 
 ---
 
@@ -46,7 +60,7 @@
 
 **Acceptance Scenarios**:
 
-1. **Given** approved design baseline (typography, colors, both themes), **When** Prompt 2A is executed, **Then** CSS variables or design-token file is exported matching exact approved values
+1. **Given** approved design baseline (typography, colors, both themes), **When** Prompt 2A is executed, **Then** both CSS variables and JSON design-token files are exported matching exact approved values
 
 2. **Given** unapproved candidates R3, T1, RT2, C1, **When** Prompt 2A is executed, **Then** these candidates are NOT present in exported tokens
 
@@ -71,7 +85,7 @@
 
 1. **Given** approved form explanation ("We'll email you..."), **When** Prompt 3A is executed, **Then** this exact text appears in generated design spec with no modifications
 
-2. **Given** unresolved code-expiry timing (CC-05), **When** Prompt 3C is executed, **Then** timer messaging uses placeholder wording, not specific "10 minutes from X" claims
+2. **Given** Prompt 1 navigation preview, **When** review begins, **Then** it includes: before/after navigation structure, numbered list of implementation steps, 2–3 bullet points documenting non-changes, and acceptance criteria
 
 3. **Given** separate newsletter decision, **When** Prompt 3A is executed, **Then** newsletter CTA is in separate section with explicit non-subscription statement
 
@@ -138,11 +152,11 @@
 ### Functional Requirements
 
 - **FR-001**: System MUST analyze all six source specification files from content/book/ directory and identify version differences, gaps, and conflicts
-- **FR-002**: System MUST reconcile version mismatches (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0) without silently combining incompatible revisions
+- **FR-002**: System MUST reconcile version mismatches (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0) using precedence rule: newer version takes precedence; all conflicts documented in research.md with explicit rationale
 - **FR-003**: System MUST prepare exact Prompt 1 (navigation exposure) as executable Figma Make specification with before/after structure and acceptance criteria
 - **FR-004**: System MUST prepare exact Prompts 2A (design baseline), 2B (navigation design), and 3A (reader access copy) as complete, unexecuted specifications
 - **FR-005**: System MUST identify and document Prompts 3B (recovery flows) and 3C (error states) as blocked, listing prerequisite decisions for each
-- **FR-006**: System MUST create comprehensive blocking decision matrix identifying 7+ critical gaps (manuscript, provider, recovery race, expiry timing, recovery lifetime, newsletter destination, route enforcement)
+- **FR-006**: System MUST create comprehensive blocking decision matrix identifying all 7 critical gaps: recovery-first race condition, recovery lifetime eligibility, code expiry start time, email service provider selection, manuscript publication readiness, newsletter destination, and route enforcement verification
 - **FR-007**: System MUST preserve all approval boundaries, distinguishing approved elements (navigation intent, design baseline, access policy framework) from unapproved candidates (R3, T1, RT2, C1)
 - **FR-008**: System MUST document all user-editable decisions required before each prompt can be executed (recovery-first race, recovery lifetime, code expiry start time, manuscript status, email provider, newsletter destination)
 - **FR-009**: System MUST generate specification documentation that is completely implementation-agnostic (no code, no commits, no deployments, no file writes beyond this spec folder)
@@ -164,8 +178,8 @@
 ### Measurable Outcomes
 
 - **SC-001**: All six source files are retrieved and analyzed; version reconciliation is documented with zero silent merges (100% reconciliation coverage)
-- **SC-002**: Exact Prompt 1 preview includes all four elements: before/after navigation structure, implementation steps, acceptance criteria, and non-changes list
-- **SC-003**: Exact Prompts 2A, 2B, 3A are 95%+ complete specifications (missing only user decisions on blocked prerequisites, not missing core content)
+- **SC-002**: Exact Prompt 1 preview includes all four elements: before/after navigation structure, numbered list of implementation steps (file/component changes), acceptance criteria, and 2–3 bullet points describing non-changes
+- **SC-003**: Exact Prompts 2A, 2B, 3A are 95%+ complete specifications (missing only user decisions on blocked prerequisites, not missing core content); Prompt 2A exports both CSS variables (`.css` with custom properties) and JSON design tokens for full design-system coverage
 - **SC-004**: All blocking decisions are identified and presented with specific options (3+ options per decision with impact assessment) before user approval
 - **SC-005**: Zero implementation code generated; zero commits created; zero deployments executed; 100% documentation-only until explicit user approval for implementation phase
 - **SC-006**: Complete documentation package includes blocking decision matrix, source inventory, version reconciliation, and decision-routing plan
@@ -179,7 +193,7 @@
 - **User Context**: Ash (project owner) and development team will review and approve this documentation package before any implementation proceeds
 - **Source Files**: All six specification files (01–06) in content/book/ directory are authoritative and will not change during this preflight phase
 - **Design Baseline Approval**: Space Grotesk headings, Inter body/UI, 9-color palette (both themes) are locked and require no changes during preflight
-- **Blocking Decisions**: Recovery-first race, recovery lifetime, code expiry start time, manuscript status, email provider, and newsletter destination are genuinely open and require user input
+- **Blocking Decisions**: All 7 decisions are genuinely open and require user input: recovery-first race condition (A/B/C/D), recovery lifetime eligibility (A/B/C/D), code expiry start time (A/B/C), email service provider (A/B/C/D), manuscript publication readiness (A/B/C), newsletter destination (A/B/C/D), and route enforcement verification (A/B/C/D)
 - **Implementation Timing**: This spec prepares documentation only; no actual implementation, Figma Make execution, or deployment occurs until separate approval
 - **Figma Make Environment**: Make environment exists and is operational; prompts can be executed once unblocked and approved (readiness verification deferred to implementation phase)
 - **Newsletter Integration**: Newsletter service (Brevo or alternative) will be selected separately; copy and mechanics are placeholders in this spec
@@ -219,6 +233,49 @@ Once approved, the next phase will include:
 6. **Prompt 3C Partial Preview** — Error states (awaiting CC-05 expiry decision)
 7. **Blocking Decision Matrix** — All unresolved decisions with options
 8. **Implementation Prerequisites Checklist** — What must be decided before code phase
+
+---
+
+## Blocking Decisions — Approved (2026-11-11)
+
+**Status**: ✅ All 7 blocking decisions approved by product owner (Ash)
+
+| # | Decision | Resolution | Execution Impact |
+| --- | ---------- | ----------- | --- |
+| 1 | Recovery-first race condition | Option A: Recovery takes precedence | Decision resolved for Prompt 3B (execution deferred — manuscript gate) |
+| 2 | Recovery lifetime eligibility | Option A: session refresh on recovery; absolute expiry 30 days after initial verification | Decision resolved for Prompt 3B (execution deferred — manuscript gate) |
+| 3 | Code expiry start time | Option A: From code generation | Decision resolved for Prompts 3A, 3C (execution deferred — manuscript gate) |
+| 4 | Email service provider | Hybrid: SendGrid (transactional) + Brevo (newsletter) | Decision resolved for Prompt 3A (execution deferred — manuscript gate) |
+| 5 | Manuscript publication readiness | ✅ Revised 2026-11-13: early release — build reader screens now; chapters and addendums published individually once Ash approves each | No longer gates the reader screens; per-chapter approval gates publication |
+| 6 | Newsletter destination | Brevo (external signup link) | Decision resolved for Prompt 3A (execution deferred — manuscript gate) |
+| 7 | Route enforcement verification | Option A: noindex meta tags + sitemap exclusion; no robots.txt Disallow | Decision resolved for Prompt 1 |
+
+**Implications**:
+
+- Prompts 1, 2A, 2B have no outstanding blocking decisions; execution still requires the status gates listed at the top of this document
+- ➡️ Prompts 3A, 3B, 3C (reader access, recovery, errors) are **handed over to Spec 005**. Decisions 1–6 recorded here are inputs to Spec 005, which owns their execution, stages and dependencies
+- Decision 5 revised by Ash on 2026-11-13: **early release**. Build all reader screens and functionality now; publish chapters and addendums one at a time as Ash approves each. The website edition is shorter than the printed book and will be offered for sale via the website at a later stage. Full-manuscript approval no longer gates the reader screens; each chapter still needs Ash's approval before it is published. Ash is moving the root `content/` folder to `src/content/`.
+
+**Stage ID conflict (resolved 2026-11-13)**:
+
+| Stage ID | This specification (Spec 004) | Master execution contract ([01](./references/01-book-website-specification.md) §8–§10) |
+| --- | --- | --- |
+| 3A | Reader access copy and forms | Podcast decisions and data contract |
+| 3B | Recovery flows | Podcast routing and archive/detail experience |
+| 3C | Error states | Genuine accessible playback |
+
+The two documents use the same IDs for different work. Resolution: stage IDs 3A–3C belong to the master execution contract (podcast work). Reader-access work (historically Spec 004 Prompts 3A–3C) is now owned by [Spec 005 — reader access](../005-reader-access/spec.md), which defines its own flow, stages and dependencies. The Spec 004 identifiers are kept unchanged as historical references (Spec 005 RA-011).
+
+---
+
+## Clarifications
+
+### Session 2026-11-09
+
+- Q: Should Prompt 2A export CSS variables, JSON design tokens, or both? → A: Both CSS and JSON for dual format support
+- Q: When source files contradict, which version takes precedence? → A: Newer version; all conflicts documented in research.md with rationale
+- Q: What should Prompt 1 preview "implementation steps" and "non-changes list" contain? → A: Numbered list of file/component changes; 2–3 bullet points describing preserved behavior
+- Q: Are all 7 blocking decisions valid, or is the count 6? → A: Confirm all 7 are valid blockers; plan.md updated to list all 7 explicitly
 
 ---
 

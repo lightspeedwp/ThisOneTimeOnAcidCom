@@ -300,7 +300,7 @@ Each option below is a complete, ready-to-implement Renovate configuration corre
 ## Decision Matrix
 
 | Factor | Option A | Option B | Option C |
-|--------|----------|----------|----------|
+| -------- | ---------- | ---------- | ---------- |
 | **Setup complexity** | Medium | Low | High |
 | **Org alignment** | ✅ Best | ❌ Diverges | ✅ Good |
 | **Flexibility** | ✅ Good | ✅ Best | ✅ Good |

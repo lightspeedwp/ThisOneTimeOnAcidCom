@@ -18,7 +18,7 @@ TOA-358 (Guidelines Refactor) contains **3 CRITICAL**, **7 HIGH**, and **1 MEDIU
 ## Findings Table
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
-|---|----------|----------|-------------|---------|----------------|
+| --- | ---------- | ---------- | ------------- | --------- | ---------------- |
 | F1 | Inconsistency | CRITICAL | spec.md line 5, plan.md line 3, tasks.md line 13 | Status field conflict: spec.md="Implemented" (2026-10-24), plan.md="Draft", tasks.md="Phase 2 Implementation (Unblocked)". Implementation has NOT completed, contradicting spec status. | Update spec.md status to "Draft" or "In Progress" and timestamp to current date. Clarify which artifact is authoritative for status tracking. |
 | F2 | Inconsistency | CRITICAL | tasks.md T024-T027, T046, T056 | G-to-N Mapping Blocking: D4.b specifies "high-traffic" guidelines consolidation targets but complete mapping not provided. T024-T027 (N-document pointer edits) explicitly documented as "BLOCKED on D4.b mapping". Cannot proceed with Phase 2B without full mapping table. | Extract D4.b mapping evidence from checklists/requirements.md; create explicit table: {G-ID, N-target, pointer-type}. Document which G-documents (e.g., Contributing, Accessibility, Design Tokens) map to which N-documents (N001–N029). Unblock T024-T027. |
 | F3 | Inconsistency | CRITICAL | tasks.md T053, T055, T022 | Task Execution Order Violation: T022 (copy alignment edits) completed out-of-sequence BEFORE prerequisite tasks T001-T004 (pre-verification), T005-T007 (setup), and T008-T014 (S-doc edits). Breaks approval evidence trail and gate compliance. T053 documents violation, T055 requires remediation. | Establish immutable execution-order validation in future convergence runs. Document T022's out-of-sequence execution in convergence sign-off with timestamp and evidence. Update phase 2 execution order to be strictly enforced. Add checkpoint validation before committing changes. |
@@ -36,7 +36,7 @@ TOA-358 (Guidelines Refactor) contains **3 CRITICAL**, **7 HIGH**, and **1 MEDIU
 ## Coverage Summary Table
 
 | Requirement/Phase | Defined? | Has Tasks? | Task IDs | Notes |
-|------------------|----------|-----------|----------|-------|
+| ------------------ | ---------- | ----------- | ---------- | ------- |
 | D0 (Protected Files) | ✓ | ✓ | T005-T018 | RESOLVED; existing policy retained. S-documents (9 files) task coverage: T008-T016. Status inconsistent (T015-T016 complete, T008-T014 pending). |
 | D1 (Book Identity) | ✓ | ✓ | T022 | RESOLVED; T022 (copy alignment) marked complete but executed out-of-sequence before prerequisites (F3). |
 | D2 (Manuscript Visibility) | ✓ | Partial | N/A in tasks | RESOLVED in spec but not explicitly mapped to implementation tasks. Implicit in N007 (T058 pending). |
@@ -84,7 +84,7 @@ All 43 Phase 2 tasks + 26 Phase 4-6 convergence tasks are explicitly traceable t
 ## Metrics
 
 | Metric | Count | Notes |
-|--------|-------|-------|
+| -------- | ------- | ------- |
 | **Total Documented Requirements** | 8 decision gates (D0–D8) | All marked RESOLVED in spec.md § Key Gates table |
 | **Total Success Criteria** | 10 (spec.md line 49–56) | 9 currently [ ] incomplete, 1 [x] specification complete |
 | **Total Tasks** | 69 (43 Phase 2 + 26 convergence) | Phases expanded from planned 3 to actual 6 during convergence discovery |

@@ -1,7 +1,7 @@
 # Reader access specification
 
 | Field | Value |
-|---|---|
+| --- | --- |
 | Proposed path | .github/specs/005-reader-access/ |
 | Status | Draft documentation package; implementation not authorised |
 | Owner | Ash; This One Time on Acid personal book project |

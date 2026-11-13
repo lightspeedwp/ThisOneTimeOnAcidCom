@@ -260,7 +260,7 @@ inputs, and outputs.
 ### API Layers Used
 
 | Agent | Claude API | Tool Runner | Managed Agents | Prompt Caching | Tool Use | MCP |
-|-------|-----------|------------|----------------|----------------|----------|-----|
+| ------- | ----------- | ------------ | ---------------- | ---------------- | ---------- | ----- |
 | speckit-specify | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ |
 | speckit-clarify | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ |
 | speckit-plan | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ |
@@ -276,7 +276,7 @@ inputs, and outputs.
 ### Token Budgets
 
 | Agent Class | Typical Budget | Hard Limit (Q3) | Context Window |
-|-------------|----------------|-----------------|-----------------|
+| ------------- | ---------------- | ----------------- | ----------------- |
 | Spec Kit agents | 25–60k | 100k | 200k (claude-opus-5-5) |
 | GitHub agents | 5–20k | 50k | 100k (claude-sonnet-5-5) |
 | Agentic workflow | 12–30k | 75k | 100k (claude-sonnet-5-5) |

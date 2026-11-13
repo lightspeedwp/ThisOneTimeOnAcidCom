@@ -32,7 +32,7 @@ enforcement).
 **Entity**: `GovernanceDecision`
 
 | Field | Type | Constraints | Notes |
-|-------|------|-------------|-------|
+| ------- | ------ | ------------- | ------- |
 | `decision_id` | string | SPEC-001, TEST-001, TEST-002, GH-001, GH-002, GH-003, PKG-001, NODE-001, STYLE-001 | Approved decisions only |
 | `category` | enum | SPEC, TEST, GH, PKG, NODE, STYLE | 6 values total |
 | `status` | enum | ratified / pending | Must be ratified before implementation |
@@ -55,7 +55,7 @@ enforcement).
 **Entity**: `RepositoryPath`
 
 | Field | Type | Constraints | Notes |
-|-------|------|-------------|-------|
+| ------- | ------ | ------------- | ------- |
 | `path` | string | absolute from repo root | e.g., `.github/workflows/` |
 | `type` | enum | config, source, generated, protected, ignored | Path classification |
 | `consumers` | array | list of workflows/agents/scripts that read/write | Dependency map |
@@ -84,7 +84,7 @@ dist/                          [protected: false] Build output (gitignored)
 **Entity**: `GitHubActionsWorkflow`
 
 | Field | Type | Constraints | Notes |
-|-------|------|-------------|-------|
+| ------- | ------ | ------------- | ------- |
 | `workflow_id` | string | lint.yml, tests.yml, etc. | Filename without path |
 | `category` | enum | implementation / evaluation / deferred | Execution model |
 | `status` | enum | active / inactive / manual | Triggered by (push, PR, manual dispatch) |
@@ -116,7 +116,7 @@ dist/                          [protected: false] Build output (gitignored)
 **Entity**: `GitHubLabel`
 
 | Field | Type | Constraints | Notes |
-|-------|------|-------------|-------|
+| ------- | ------ | ------------- | ------- |
 | `label_id` | string | type:feature, status:in-progress, etc. | Family-prefixed required |
 | `family` | string | type, status, area, priority, meta | Prefix category |
 | `color` | hex | #RRGGBB | Visual identifier in GitHub UI |
@@ -136,7 +136,7 @@ dist/                          [protected: false] Build output (gitignored)
 **Entity**: `PRTemplate`
 
 | Field | Type | Constraints | Notes |
-|-------|------|-------------|-------|
+| ------- | ------ | ------------- | ------- |
 | `template*id` | string | pr*feature.md, pr_bugfix.md, etc. | Filename |
 | `branch_prefix` | string | feat/, fix/, docs/, etc. | Routing rule (Q2 clarification) |
 | `sections` | array | Summary, Test plan, etc. | Required form sections |
@@ -148,7 +148,7 @@ dist/                          [protected: false] Build output (gitignored)
 **Entity**: `DiscussionTemplate`
 
 | Field | Type | Constraints | Notes |
-|-------|------|-------------|-------|
+| ------- | ------ | ------------- | ------- |
 | `template_id` | string | feature-request, q-and-a, show-and-tell, ideas | Category type |
 | `category` | string | Feature request, Q&A, Show & tell, Ideas | Workflow category |
 | `description` | string | max 300 chars | When to use this template |
@@ -160,7 +160,7 @@ dist/                          [protected: false] Build output (gitignored)
 **Entity**: `AgentSpec`
 
 | Field | Type | Constraints | Notes |
-|-------|------|-------------|-------|
+| ------- | ------ | ------------- | ------- |
 | `agent_id` | string | speckit-clarify, speckit-plan, branch-validation | Unique agent name |
 | `purpose` | string | max 250 chars | What the agent does |
 | `tools` | array | [Read, Edit, Bash, Artifact, etc.] | Tool access list |

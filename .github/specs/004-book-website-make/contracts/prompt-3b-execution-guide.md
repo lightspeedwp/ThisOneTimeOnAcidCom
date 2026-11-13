@@ -1,6 +1,6 @@
 # Figma Make Prompt 3B: Recovery Flows — Execution Guide
 
-**Status**: ❌ BLOCKED — Awaiting Decisions 1 & 2  
+**Status**: ➡️ HANDED OVER — reader-access work now continues in [Spec 005](../../005-reader-access/spec.md), which owns its flow, stages and dependencies. Decision 5 was revised on 2026-11-13 (early release; chapters published individually once Ash approves each), so manuscript approval no longer gates these screens. This contract is kept as a source record for Spec 005.
 **Scope**: Recovery flow specification and session restoration designs  
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Dependencies**: Prompt 3A (Reader Access Copy & Forms) — Provides form baseline
@@ -32,13 +32,13 @@ Design recovery flow specification documenting how readers regain access via pre
 **Options Under Review**:
 
 | Option | Behavior | Trade-off |
-|--------|----------|-----------|
+| -------- | ---------- | ----------- |
 | **A: Recovery Precedence** | Recovery takes priority; cancel fresh verification request | ✅ Better UX (fewer emails sent); ⚠️ Fresh code abandoned without warning |
 | **B: Verification Precedence** | Fresh verification takes priority; invalidate recovery attempt | ✅ Guarantees fresh code; ⚠️ May send unnecessary email |
 | **C: Last-Writer-Wins** | Whichever completes last (timestamp order) succeeds | ✅ Deterministic; ⚠️ User may see unexpected result |
 | **D: User Chooses Explicitly** | Show dialog: "Restore from previous session or use new code?" | ✅ Full user control; ⚠️ Extra interaction required |
 
-**Status**: ⏳ PENDING — See `research.md` for detailed analysis
+**Status**: ✅ APPROVED — Option A (recovery precedence; fresh verification cancelled when recovery succeeds). See `research.md`
 
 ### Decision 2: Recovery Lifetime Eligibility
 **Question**: How long is confirmed redemption eligible for recovery access?
@@ -48,13 +48,13 @@ Design recovery flow specification documenting how readers regain access via pre
 **Options Under Review**:
 
 | Option | Recovery Window | Rationale |
-|--------|-----------------|-----------|
+| -------- | ----------------- | ----------- |
 | **A: 30-day device lifecycle** | Full 30 days from initial verification | Aligns with policy; user expects consistent experience |
 | **B: 7-day rolling refresh** | 7 days, extends on each access | Balances security (refreshes token) with UX |
 | **C: Single session only** | Only within same calendar day (24 hours) | Most conservative; requires daily verification |
 | **D: Custom window (configurable)** | Admin-controlled TTL for sessions | Flexible; adds operational complexity |
 
-**Status**: ⏳ PENDING — See `research.md` for detailed analysis
+**Status**: ✅ APPROVED — Option A (session refresh on recovery; absolute expiry 30 days after initial verification — recovery cannot extend access beyond it). See `research.md`
 
 ---
 
@@ -82,12 +82,12 @@ From 06-website-reading-prd.md (v1.1.1):
 5. Finalize acceptance criteria with decision-specific requirements
 
 **Example (if Decision 1=A, Decision 2=A)**:
-```
+```text
 Recovery Strategy: Recovery takes precedence over fresh verification
 Session Lifetime: 30-day device lifecycle (full window)
 Race Condition Resolution: Cancel fresh verification request, restore from previous session
 Error Messaging: "Access restored from previous session" (no email sent)
-```
+```text
 
 ### Phase 2: Design Recovery Success Path
 
@@ -120,14 +120,14 @@ Error Messaging: "Access restored from previous session" (no email sent)
 **Trigger**: Device session exists but exceeds recovery lifetime window
 
 **Example messaging** (if Decision 2=A):
-```
+```text
 Session Expired
 
 Your previous access has expired (30 days). 
 Please verify your email to continue reading.
 
 [Request New Code] button
-```
+```text
 
 **Design**:
 - Display expired message with clear explanation
@@ -141,14 +141,14 @@ Please verify your email to continue reading.
 **Trigger**: Device session exists but validation fails
 
 **Messaging**:
-```
+```text
 Access Unavailable
 
 We couldn't restore your previous session. 
 Please verify your email to continue reading.
 
 [Request New Code] button
-```
+```text
 
 **Design**:
 - Warning/error styling (border + icon)
@@ -162,11 +162,11 @@ Please verify your email to continue reading.
 **Trigger**: System detects simultaneous recovery + fresh verification attempt
 
 **Messaging**:
-```
+```text
 Restoring Access...
 
 Using your previous session instead of requesting a new code.
-```
+```text
 
 **Design**:
 - Show loading spinner
@@ -177,7 +177,7 @@ Using your previous session instead of requesting a new code.
 **Example: If Decision 1=D (User Chooses Explicitly)**:
 
 **Messaging**:
-```
+```text
 Restore Access from Previous Session?
 
 We found your previous access. You can:
@@ -185,7 +185,7 @@ We found your previous access. You can:
 [Restore from Previous Session] — Use your existing access
 [Request New Code]             — Get a new verification code
 
-```
+```text
 
 **Design**:
 - Two clearly-labeled buttons
@@ -196,7 +196,7 @@ We found your previous access. You can:
 ### Phase 4: Design Recovery Flow Diagram
 
 1. Create flowchart showing decision tree:
-   ```
+   ```text
    User visits content page
        ↓
    System checks device storage
@@ -235,7 +235,7 @@ We found your previous access. You can:
 Create error message specification table:
 
 | Recovery Failure | Error Message | User Action | Fallback |
-|------------------|---------------|-------------|----------|
+| ------------------ | --------------- | ------------- | ---------- |
 | Session Expired | (Decision 2-based) | Click "Request New Code" | Email entry form |
 | Session Invalid | "Access Unavailable. Verify email to continue." | Click "Request New Code" | Email entry form |
 | Race Condition | (Decision 1-based) | (Decision 1-based) | (Decision 1-based) |
@@ -246,7 +246,7 @@ When recovery is unavailable, document the fallback process:
 
 1. **Fallback Trigger**: Recovery fails for any reason
 2. **Fallback Action**: Return to email entry form (Prompt 3A)
-3. **User Communication**: 
+3. **User Communication**:
    - Show clear message explaining why recovery isn't available
    - Provide friction-free path to fresh verification
    - Reassure user that email will be sent shortly
@@ -336,11 +336,11 @@ When recovery is unavailable, document the fallback process:
 
 ## Blocking Status
 
-🔴 **CANNOT PROCEED** until both decisions are made:
-- Decision 1: Recovery-First Race Condition (PENDING)
-- Decision 2: Recovery Lifetime Eligibility (PENDING)
+✅ Decisions resolved:
+- Decision 1: Recovery-First Race Condition — Option A
+- Decision 2: Recovery Lifetime Eligibility — Option A (absolute 30-day expiry)
 
-❌ **Do not attempt to execute this prompt until Decisions 1 & 2 are resolved.**
+⏸️ **Deferred**: do not execute this prompt until the manuscript is approved (Decision 5) and the execution gates in [spec.md](../spec.md) are cleared.
 
 ---
 

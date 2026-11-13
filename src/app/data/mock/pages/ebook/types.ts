@@ -22,6 +22,10 @@ export type BookPageType =
 export interface BookPage {
   id: string;
   type: BookPageType;
+  /** Stable manuscript source path, independent of pagination and viewport. */
+  sourceId?: string;
+  /** Zero-based paragraph offset within sourceId for continuity remapping. */
+  paragraphStart?: number;
   /** Displayed in footer area */
   pageNumber?: number;
   /** Chapter number (chapter pages only) */
