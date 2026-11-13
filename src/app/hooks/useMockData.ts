@@ -1,8 +1,8 @@
 /**
- * @fileoverview Mock Contentful hooks (CMS integration removed)
- * These hooks now return mock data from /data/mock instead of fetching from Contentful.
+ * @fileoverview Specialised local-data hooks in hooks/useMockData
+ * These hooks return local data rather than a generic useMockData export.
  * 
- * @module hooks/useContentful
+ * @module hooks/useMockData
  */
 
 import { useState, useEffect } from 'react';

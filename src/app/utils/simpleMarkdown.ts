@@ -3,7 +3,7 @@
  * Handles basic markdown features used in blog posts
  * 
  * Supported features:
- * - Headers (h2-h6) - H1s are stripped to avoid duplication
+ * - Headers (h2-h4); h1 lines are skipped and h5/h6 are not headings
  * - Bold (**text**)
  * - Italic (*text*)
  * - Unordered lists (- item or * item)
@@ -31,7 +31,7 @@ export function markdownToHtml(markdown: string): string {
       continue;
     }
 
-    // Headers - Skip H1 (#) to prevent duplicate titles
+    // Headers: parse h2-h4; skip h1 and leave h5/h6 as ordinary text
     if (line.startsWith('# ')) {
       // Skip H1
       if (inList) { processedHtml += `</${listType}>`; inList = false; }

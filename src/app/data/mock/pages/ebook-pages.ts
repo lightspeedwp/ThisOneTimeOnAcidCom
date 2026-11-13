@@ -1,10 +1,9 @@
 /**
  * @fileoverview Barrel for eBook page data.
  *
- * Content is now sourced from Markdown files in src/content/book/.
- * Edit those files directly to change book text, add/remove chapters, or restructure parts.
- * The TypeScript modules in src/app/data/mock/pages/ebook/ are kept as fallback reference
- * but are no longer the active source of truth.
+ * The barrel re-exports loader output and its page types. The retained
+ * TypeScript chapters under mock/pages/ebook/ are reference material; neither
+ * this barrel nor the loader falls back to those chapters.
  *
  * @module data/mock/pages/ebook-pages
  * @version 4.0.0

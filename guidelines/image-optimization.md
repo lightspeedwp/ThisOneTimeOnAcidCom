@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Image Optimization (Consolidated → Media Guidelines)
 
 > ⚠️ **CONSOLIDATED** · This guideline has been merged into **[Media Guidelines](media-guidelines.md)**.
@@ -31,3 +32,17 @@ See `guidelines/_archive/ARCHIVE-INDEX.md` for version history and related archi
 
 *Pointer file created 2026-10-25 per Specification 003 Phase 2D (T033–T034)*  
 *Part of Guidelines Refactor consolidation strategy (D4.b, D5 preservation)*
+=======
+<!-- Type 1 (Relocation) Pointer -->
+<!-- Original: Guidelines/image-optimization.md -->
+<!-- Consolidated into: N005 (Media & Asset Optimization) -->
+<!-- Authority: D4.b, D5 Pointer Strategy -->
+
+> 🔄 **This content has been consolidated.** See [Media & Asset Optimization](./N005-media-asset-optimization.md) for image formats, CDN setup, and asset pipeline guidance.
+
+For complete media optimization, image format guidelines, and CDN configuration, refer to **N005: Media & Asset Optimization**.
+
+---
+
+*Pointer created: 2026-11-11 | Type 1 Relocation | D5 Authority*
+>>>>>>> 2c3b0f5 (feat(003-T049-Phase1): Create Type 1 (Relocation) pointers for high-traffic G-documents)

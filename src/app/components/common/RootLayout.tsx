@@ -1,13 +1,13 @@
 /**
  * @fileoverview Root layout component for Ash Shaw Makeup Portfolio
  * 
- * Provides the shared application shell including:
- * - Header navigation (all pages)
- * - Footer (all pages)
- * - PWA install prompt and offline indicator
- * - Screen reader live regions
- * - Scroll restoration on route change
- * - Focus management for accessibility
+ * Provides the observed book-site route shell including Header and Footer,
+ * automatic breadcrumbs, modal context, Suspense loading, an ErrorBoundary
+ * around the routed outlet, PWA/offline indicators, live regions, route-change
+ * scroll reset, a main-content focus attempt, reduced-motion-aware scanning,
+ * cursor and touch effects, a keyboard Easter egg and timed skip-link hiding.
+ * Rendering these components does not establish accessibility conformance or
+ * PWA readiness.
  * 
  * @author Ash Shaw Portfolio Team
  * @version 1.1.0 - SEO centralised via setSEO utility
@@ -169,7 +169,8 @@ export function RootLayout() {
   }, []);
 
   /**
-   * Hide third-party skip links injected by browser extensions
+   * Hide matching skip-link text. The selectors/text do not establish that
+   * matching elements originated from extensions.
    */
   useEffect(function() {
     var hideSpecificSkipLinks = function() {

@@ -1,12 +1,19 @@
+<<<<<<< HEAD
 # This One Time On Acid Portfolio - Component Architecture & Taxonomy
+=======
+<!-- Type 1 (Relocation) Pointer -->
+<!-- Original: Guidelines/ARCHITECTURE.md -->
+<!-- Consolidated into: N006 (Architecture Overview) -->
+<!-- Authority: D4.b, D5 Pointer Strategy -->
+>>>>>>> 2c3b0f5 (feat(003-T049-Phase1): Create Type 1 (Relocation) pointers for high-traffic G-documents)
 
-**Version:** 4.0.0
-**Last Updated:** February 2026
-**Last Reviewed:** February 21, 2026
-**Purpose:** Clarify component organization, file locations, and taxonomy
+> 🔄 **This content has been consolidated.** See [Architecture Overview](./N006-architecture-overview.md) for updated system design, tech stack decisions, and architectural patterns.
+
+For complete architecture guidance, component design patterns, and technology stack information, refer to **N006: Architecture Overview**.
 
 ---
 
+<<<<<<< HEAD
 ## 📚 Table of Contents
 
 1. [Architecture Overview](#architecture-overview)
@@ -590,3 +597,6 @@ part conceptually)
 
 For questions about component organization, refer to this document or the main
 [Guidelines.md](./Guidelines.md).
+=======
+*Pointer created: 2026-11-11 | Type 1 Relocation | D5 Authority*
+>>>>>>> 2c3b0f5 (feat(003-T049-Phase1): Create Type 1 (Relocation) pointers for high-traffic G-documents)

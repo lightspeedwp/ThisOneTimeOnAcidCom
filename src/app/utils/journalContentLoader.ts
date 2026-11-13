@@ -1,5 +1,8 @@
 /**
- * @fileoverview Vite runtime loader for journal-content/*.md files.
+ * @fileoverview Vite runtime loader for /journal-content/**\/*.md files.
+ * This is distinct from root content/journal/, which was absent in the
+ * inspected checkout. Routed book-site journal pages separately consume
+ * mock/journal-posts.ts summaries.
  *
  * Uses import.meta.glob to load all markdown files at build time.
  * Parses frontmatter with a lightweight hand-rolled parser extended to handle
