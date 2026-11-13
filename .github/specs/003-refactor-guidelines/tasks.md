@@ -720,7 +720,7 @@ All T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
 
 ### Critical Blockers
 
-- [ ] **T074** [CRITICAL] Resolve merge conflict markers in 12 guideline files per Constitution II, spec preservation rules (contradicts)
+- [x] **T074** [CRITICAL] Resolve merge conflict markers in 12 guideline files per Constitution II, spec preservation rules (contradicts) — **COMPLETE** (all 12 files resolved: pointer version retained for each; `find guidelines -name "*.md" -exec grep -l "<<<<<<" {} \;` returns zero files)
   - **Files**: `guidelines/data-models.md`, `guidelines/dark-mode-implementation.md`, `guidelines/content-type-colours.md`, `guidelines/_archive/wordpress-migration-guide.md`, `guidelines/_archive/wordpress-preset-system.md`, `guidelines/_archive/wordpress-block-patterns.md`, `guidelines/nova-news-dark-mode.md`, `guidelines/image-optimization.md`, `guidelines/performance-optimization.md`, `guidelines/ARCHITECTURE.md`, `guidelines/css-architecture.md`, `guidelines/pwa-implementation.md`
   - **Origin**: T049 pointer operations (commits ed06602, 2c3b0f5, 38f1962) introduced merge conflict markers that were never resolved
   - **Action**: For each file, inspect both sides of the conflict marker, choose the correct resolution (typically the pointer version for archival files, the content version for active files), remove all `<<<<<<<`, `=======`, `>>>>>>>` markers
@@ -728,7 +728,7 @@ All T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
 
 ### Data Integrity
 
-- [ ] **T075** [MEDIUM] Fix duplicate T055 task ID in tasks.md per internal consistency (contradicts)
+- [x] **T075** [MEDIUM] Fix duplicate T055 task ID in tasks.md per internal consistency (contradicts) — **COMPLETE** (second T055 already renumbered to T055b at line 562; T055 canonical unchecked task at line 549 is unique)
   - **Location**: `.github/specs/003-refactor-guidelines/tasks.md` Phase 5
   - **Issue**: Two tasks shared ID T055 — line 549 (execution order violation, unchecked) and line 562 (identity contradiction, checked)
   - **Action**: Renumber the second T055 (identity contradiction) to T055b or the next available sequential ID; update any cross-references
