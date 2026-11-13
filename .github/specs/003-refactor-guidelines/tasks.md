@@ -688,12 +688,14 @@ All tasks must complete with documented evidence:
 ### Phase 7 Dependencies
 
 ```text
+T074 (Conflict resolution — prerequisite for guideline edits)
+  ↓
 T070 (Content remediation — HIGH priority, largest scope)  [P]
 T071 (Lint fixes — independent, parallel)                  [P]
 T072 (Task sequencing — independent, parallel)             [P]
 T073 (Status verification — independent, parallel)         [P]
   ↓
-All T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
+T001–T004 complete, T074 resolved, and T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
 ```
 
 ### Coordination with TOA-367
@@ -733,4 +735,4 @@ All T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
   - **Issue**: Two tasks shared ID T055 — line 549 (execution order violation, unchecked) and line 562 (identity contradiction, checked)
   - **Action**: Renumber the second T055 (identity contradiction) to T055b or the next available sequential ID; update any cross-references
   - **Resolution**: Second T055 (identity contradiction, checked) renumbered to T055b; range references T055–T064 remain valid (T055 is the canonical unchecked task, T055b is a variant within the range)
-  - **Acceptance**: `grep -c "T055" tasks.md` returns exactly 1 unique task definition
+  - **Acceptance**: `grep -cP '^\- \[[ x]\] \*\*T055\*\*' tasks.md` returns exactly 1 unique task definition (excludes T055b and cross-references)
