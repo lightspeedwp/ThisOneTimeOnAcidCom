@@ -1,6 +1,6 @@
 # Figma Make Prompt 3A: Reader Access Copy & Forms — Execution Guide
 
-**Status**: ✅ UNBLOCKED (waiting for Decisions 3, 4, 5, 6)  
+**Status**: ⏸️ DEFERRED — Decisions 3, 4 and 6 approved; Decision 5 decided (manuscript not yet approved). Placeholder messaging only until manuscript approval and the execution gates in [spec.md](../spec.md)  
 **Scope**: Email verification copy, form wording, error messages, newsletter CTA  
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Dependencies**: Prompt 2A (Design System Baseline) — Uses exported typography and colors
@@ -470,12 +470,12 @@ When Prompt 3A execution is complete, provide:
 
 ---
 
-## Blocking Decisions (Must Be Resolved Before Implementation)
+## Decision Status
 
-- **Decision 3**: Code expiry start time (affects error messaging) — ⏳ PENDING DECISION
-- **Decision 4**: Email service provider (affects template syntax/capabilities) — ⏳ PENDING DECISION
-- **Decision 5**: Manuscript publication readiness (affects confirmation messaging) — ⏳ PENDING DECISION
-- **Decision 6**: Newsletter destination (affects signup link) — ⏳ PENDING DECISION
+- **Decision 3**: Code expiry start time — ✅ Option A (from code generation)
+- **Decision 4**: Email service provider — ✅ Hybrid (SendGrid for verification email; Brevo for newsletter)
+- **Decision 5**: Manuscript publication readiness — ❌ Option C (not yet approved; blocks final execution)
+- **Decision 6**: Newsletter destination — ✅ Brevo external signup link
 
 **Impact**: These decisions determine:
 - Exact error message text for expired codes

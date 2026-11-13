@@ -1,6 +1,6 @@
 # Figma Make Prompt 3A: Reader Access Copy & Forms
 
-**Status**: ❌ BLOCKED (waiting for Decisions 3, 4, 5, 6)  
+**Status**: ⏸️ DEFERRED — Decisions 3, 4 and 6 approved and Decision 5 decided (manuscript not yet approved). Placeholder messaging only; final execution waits for manuscript approval. This status does not imply manuscript publication is approved.  
 **Priority**: P1  
 **Prompt ID**: 3A  
 **Type**: reader-access
@@ -13,7 +13,9 @@
 
 Generate exact email verification copy, form wording, error messages, and newsletter CTA specifications—separate newsletter signup from reading verification per approved decision.
 
-### Email Copy (Approved Source: `.github/specs/004-book-website-make/references/06-website-reading-prd.md` v1.1.1)
+### Email Copy (⏳ PENDING APPROVAL — no approved verbatim source)
+
+No approved source currently contains the verbatim email subject and body below. [06-website-reading-prd.md](../references/06-website-reading-prd.md) (v1.1.1) defines the access policy (single-use, ten-minute codes) but not this wording, and [05-design-reader-decision-register.md](../references/05-design-reader-decision-register.md) approves only the "Send a reading code" action wording. Treat the subject and body as **draft copy pending Ash's approval**; CR-3A.1 and task T022 cannot pass until an approved source containing the exact wording is recorded here.
 
 **Email Subject**:
 "Your reading code for ThisOneTimeOnAcidCom"
@@ -25,7 +27,7 @@ We've sent you a 10-minute access code below. Enter it on the website to start r
 
 **Your Code: XXXXXX**
 
-This code expires [based on Decision 3: from generation / receipt / page load].
+This code expires 10 minutes after it was generated.
 
 Questions? Reply to this email.
 
@@ -49,9 +51,9 @@ Questions? Reply to this email.
 - Button: "Verify Access"
 - Help text: "Check your email for your 10-minute code"
 - States: default, focused, error, loading
-- Error messages (based on Decision 3 expiry timing):
+- Error messages (Decision 3: expiry runs from code generation):
   - "Invalid code" (wrong characters)
-  - "Code expired [decision-based message]"
+  - "Code expired — it was valid for 10 minutes from when it was generated"
   - "Rate limited: Too many failed attempts"
 
 **Success State**:
@@ -65,7 +67,7 @@ Questions? Reply to this email.
 - Heading: "Stay Updated"
 - Copy: "Join our newsletter for book updates (optional)."
 - Link text: "Sign up" (or "Learn more" / "Subscribe")
-- Link destination: [Decision 6 selected option]
+- Link destination: Brevo external newsletter signup page (Decision 6); exact URL to be supplied
 - Important: Explicitly state "This is separate from reading access. Uncheck to read without subscribing."
 
 ### Figma Make Instructions
@@ -79,13 +81,13 @@ Questions? Reply to this email.
 
 ### Acceptance Criteria
 
-✅ **CR-3A.1**: Email copy matches approved source exactly (no modifications)
+⏳ **CR-3A.1**: Email copy matches an approved source exactly (no modifications) — pending: no approved verbatim source recorded yet
 
 ✅ **CR-3A.2**: All form states designed (default, focused, error, loading, success)
 
 ✅ **CR-3A.3**: Error messages distinguish failure scenarios (invalid, expired, rate-limited)
 
-✅ **CR-3A.4**: Code expiry messaging reflects Decision 3 selection (timing clarity)
+✅ **CR-3A.4**: Code expiry messaging reflects Decision 3 (10 minutes from code generation)
 
 ✅ **CR-3A.5**: Newsletter CTA in separate section (NOT mixed with verification)
 
@@ -95,12 +97,12 @@ Questions? Reply to this email.
 
 ✅ **CR-3A.8**: All help text and labels match approved source
 
-### Blocking Decisions (Must Be Resolved First)
+### Decisions Applied
 
-- Decision 3: Code expiry start time (affects error messaging)
-- Decision 4: Email service provider (affects template syntax/capabilities)
-- Decision 5: Manuscript publication readiness (affects confirmation messaging)
-- Decision 6: Newsletter destination (affects signup link)
+- Decision 3: ✅ Option A — expiry from code generation (applied to email and error copy)
+- Decision 4: ✅ Hybrid — SendGrid for verification email; Brevo for newsletter
+- Decision 5: ❌ Option C — manuscript not yet approved; confirmation messaging stays placeholder and final execution is deferred
+- Decision 6: ✅ Brevo external signup link
 
 ### Reference Documents
 
@@ -112,7 +114,7 @@ Questions? Reply to this email.
 ### Dependencies
 
 - Prompt 2A (Design System Baseline) — Uses exported typography and colors
-- Decisions 3, 4, 5, 6 resolved
+- Decisions 3, 4 and 6 applied; manuscript approval (Decision 5) outstanding
 
 ### Next Prompts
 

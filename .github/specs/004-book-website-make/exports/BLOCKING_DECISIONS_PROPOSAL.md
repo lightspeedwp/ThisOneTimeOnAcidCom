@@ -10,11 +10,11 @@
 
 This document records the final decisions for all 7 blocking decisions, approved by Ash on 2026-11-11.
 
-**Timeline Note**: Website launch date is January 2027 (not 2026); manuscript in development, targeting availability by launch date.
+**Timeline Note**: 27 January 2027 is the author's stated launch intention, recorded as **unapproved** in [reference 03](../references/03-author-decisions-launch-scope.md); it is not an approved launch date. The manuscript is in development. No manuscript approval date has been set; Ash must confirm one, and it must fall before any approved launch date.
 
 **⚠️ CRITICAL DECISION**: Decision 5 (Manuscript Publication Readiness) → **Option C (NOT APPROVED)**
-- Website launches January 2027
-- Manuscript in development, will be ready for e-reader by launch
+- Website launch target: 27 January 2027 (unapproved intention, not an approved launch date)
+- Manuscript in development; approval date not yet set (owner: Ash)
 - **Impact**: Blocks Prompt 3A (reader access copy) from final generation; placeholder copy needed
 - Prompts 1, 2A, 2B remain unblocked and executable
 - Prompts 3A, 3B, 3C remain blocked pending manuscript approval
@@ -96,19 +96,19 @@ This document records the final decisions for all 7 blocking decisions, approved
 
 ### **DECISION: OPTION C** ❌ NOT APPROVED (In Development)
 
-> **Manuscript not yet approved; in development, targeting January 2027 launch**
+> **Manuscript not yet approved; in development. The unapproved launch intention is 27 January 2027.**
 
 **User Decision**: ✅ Approved - Option C (2026-11-11)
 
 **Critical Status**:
-- Website launch target: **January 2027** (unapproved)
-- Manuscript timeline: In development, expected ready for e-reader by website launch
+- Website launch target: **27 January 2027** (unapproved intention; not an approved launch date)
+- Manuscript timeline: In development; approval date not yet set. Ash must confirm a manuscript approval date that precedes any approved launch date
 - **Impact**: Prompts 3A (reader access copy), 3B (recovery flows), 3C (error states) REMAIN BLOCKED
 - Placeholder messaging required for Prompt 3A until manuscript is approved
 
 **Blocking Effect**:
 - **Prompts 1, 2A, 2B**: ✅ Executable (navigation, design system, component design)
-- **Prompts 3A, 3B, 3C**: ❌ Blocked pending manuscript approval (expected late January 2027)
+- **Prompts 3A, 3B, 3C**: ❌ Blocked pending manuscript approval (approval date to be confirmed by Ash)
 - Re-finalization of access copy will be required once manuscript is approved for e-reader
 
 ---
@@ -142,7 +142,7 @@ This document records the final decisions for all 7 blocking decisions, approved
 
 ### **DECISION: OPTION A** ✅ APPROVED
 
-> **Meta tags + Robots.txt + Sitemap.xml exclusion**
+> **Meta tags + Sitemap.xml exclusion (no robots.txt `Disallow` rules for these routes)**
 
 **User Approval**: ✅ Approved (2026-11-11)
 
@@ -151,13 +151,15 @@ This document records the final decisions for all 7 blocking decisions, approved
 
 1. **Meta tags (Primary)**: `<meta name="robots" content="noindex, nofollow">` in HTML `<head>`
 2. **Sitemap.xml**: Exclude /speaking, /events, /media routes entirely
-3. **Robots.txt**: Do NOT use Disallow for these routes; allow crawling so meta tags are visible
+3. **Robots.txt**: Do NOT add `Disallow` rules for these routes; crawlers must be able to fetch the pages to see the noindex directive
 
-   OR alternatively:
+**Selected approach**: Meta tags + Sitemap exclusion. Crawlers can fetch the routes and read the noindex directive; external links to these pages are not prevented. A robots.txt-only approach is rejected because it would hide the noindex directive and does not reliably remove URLs discovered elsewhere.
 
-   Use **only** Robots.txt `Disallow` rules and skip meta tags (routes won't appear in search results, but won't be crawled at all)
+**Acceptance criteria**:
 
-**Selected approach**: Meta tags + Sitemap exclusion (allows crawlers to verify noindex, doesn't prevent external linking to these pages)
+- Each of /speaking, /events and /media serves `noindex` in its HTML `<head>`
+- None of the three routes appears in sitemap.xml
+- robots.txt contains no `Disallow` rule matching any of the three routes
 
 **Impact**:
 - Prompt 1 navigation specification documents exact enforcement mechanism
@@ -172,12 +174,12 @@ This document records the final decisions for all 7 blocking decisions, approved
 | # | Decision | Selection | Status | Impact |
 | --- | ---------- | ----------- | -------- | -------- |
 | 1 | Recovery-first race | **Option A** (recovery priority) | ✅ APPROVED | Unblocks Prompt 3B |
-| 2 | Recovery lifetime | **Option A** (30-day rolling) | ✅ APPROVED | Unblocks Prompt 3B |
+| 2 | Recovery lifetime | **Option A** (30-day absolute expiry from initial verification) | ✅ APPROVED | Unblocks Prompt 3B |
 | 3 | Code expiry timing | **Option A** (from generation) | ✅ APPROVED | Unblocks Prompts 3A, 3C |
 | 4 | Email provider | **Hybrid** (SendGrid + Brevo) | ✅ APPROVED | Unblocks Prompt 3A |
 | 5 | Manuscript ready | **Option C** (NOT APPROVED) | ❌ BLOCKS | **BLOCKS Prompts 3A, 3B, 3C** |
 | 6 | Newsletter link | **Brevo** (external signup) | ✅ APPROVED | Unblocks Prompt 3A (newsletter) |
-| 7 | Route enforcement | **Option A** (meta + robots + sitemap) | ✅ APPROVED | Unblocks Prompt 1 |
+| 7 | Route enforcement | **Option A** (noindex meta + sitemap exclusion; no robots.txt Disallow) | ✅ APPROVED | Unblocks Prompt 1 |
 
 ---
 
@@ -202,7 +204,7 @@ This document records the final decisions for all 7 blocking decisions, approved
 ### Immediate Actions
 
 **Generate Unblocked Prompts** (Ready NOW):
-- ✅ **Prompt 1**: Navigation Exposure (route enforcement via meta tags + robots.txt + sitemap)
+- ✅ **Prompt 1**: Navigation Exposure (route enforcement via noindex meta tags + sitemap exclusion; no robots.txt Disallow)
 - ✅ **Prompt 2A**: Design Baseline (Space Grotesk, Inter, 9-color palette, both themes)
 - ✅ **Prompt 2B**: Navigation Design (component styles and states)
 
@@ -217,7 +219,7 @@ After unblocked prompts are generated:
 2. Confirm unapproved candidates (R3, T1, RT2, C1) are excluded
 3. Sign off on navigation and component design
 
-### Manuscript Approval Workflow (Late January 2027)
+### Manuscript Approval Workflow (Date To Be Confirmed)
 When manuscript is approved for e-reader:
 1. Regenerate Prompt 3A with final copy (not placeholder)
 2. Complete Prompts 3B and 3C based on final 3A messaging
@@ -236,12 +238,12 @@ After all prompts are generated:
 **All 7 blocking decisions received and documented** (2026-11-11):
 
 - [x] **Decision 1**: ✅ Option A (recovery-first race condition)
-- [x] **Decision 2**: ✅ Option A (30-day rolling recovery lifetime)
+- [x] **Decision 2**: ✅ Option A (30-day recovery lifetime; absolute expiry 30 days after initial verification)
 - [x] **Decision 3**: ✅ Option A (code expiry from generation)
 - [x] **Decision 4**: ✅ **Hybrid** (SendGrid SMTP + Brevo newsletters)
-- [x] **Decision 5**: ❌ **Option C** (manuscript NOT approved — in development, January launch)
+- [x] **Decision 5**: ❌ **Option C** (manuscript NOT approved — in development; 27 January 2027 launch intention unapproved)
 - [x] **Decision 6**: ✅ Brevo (newsletter subscriptions)
-- [x] **Decision 7**: ✅ Option A (meta tags + robots.txt + sitemap)
+- [x] **Decision 7**: ✅ Option A (noindex meta tags + sitemap exclusion; no robots.txt Disallow)
 
 ---
 
@@ -249,4 +251,4 @@ After all prompts are generated:
 
 **Ready for**:
 - Immediate execution: Prompts 1, 2A, 2B
-- Deferred execution: Prompts 3A, 3B, 3C (awaiting manuscript approval, late January 2027)
+- Deferred execution: Prompts 3A, 3B, 3C (awaiting manuscript approval; approval date to be confirmed by Ash)

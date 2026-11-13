@@ -43,7 +43,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 
 | Option | Description | Trade-offs |
 | -------- | ------------- | ----------- |
-| **A (Recommended)** | 30-day rolling window from last successful recovery action | Matches device lifecycle (30 days); balances security with UX; simple expiry logic |
+| **A (Recommended)** | 30-day eligibility with session refresh on recovery; absolute expiry 30 days after initial verification | Matches device lifecycle (30 days); balances security with UX; the rolling refresh cannot extend access beyond the absolute limit |
 | B | 30-day fixed window from initial verification (no rolling) | Simpler implementation; forces re-verification at hard boundary; less forgiving of inactive readers |
 | C | No expiry—recovery sessions valid indefinitely | Maximum UX convenience; highest security risk; may conflict with data retention policy |
 | D | Configurable per-reader basis (support override) | Flexibility for special cases; added complexity; support burden |
@@ -111,7 +111,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | B | Manuscript approved but not yet formatted for web delivery | Requires formatting/export pipeline before integration; delays access feature |
 | **C (Selected)** | Manuscript not yet approved | Access feature cannot launch; requires separate approval gate |
 
-**Decision**: ❌ Option C (NOT APPROVED) — Manuscript in development, targeting approval by January 2027 launch
+**Decision**: ❌ Option C (NOT APPROVED) — Manuscript in development. 27 January 2027 is an unapproved launch intention ([reference 03](./references/03-author-decisions-launch-scope.md)); the manuscript approval date is to be confirmed by Ash
 
 **Impact on Prompt 3A**: Reader access copy must reference actual manuscript content (e.g., "Access all 12 chapters" vs. "Access selected chapters"). Content delivery mechanism and availability timeframe depend on manuscript readiness status.
 
@@ -142,20 +142,20 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 
 **Decision Point**: How is sitemap/noindex enforcement verified for /speaking, /events, /media routes?
 
-**Rationale**: Design specification documents that Speaking, Events, and Media should be hidden from the public sitemap (noindex, sitemap exclusion). However, the verification method and enforcement mechanism are unspecified. Options include robots.txt rules, sitemap.xml filtering, or Meta tag verification.
+**Rationale**: Design specification documents that Speaking, Events, and Media should be hidden from the public sitemap (noindex, sitemap exclusion). However, the verification method and enforcement mechanism were unspecified. Options considered included robots.txt rules, sitemap.xml filtering, or Meta tag verification. Robots.txt `Disallow` rules stop crawlers fetching a page, so they would hide a noindex directive and must not be combined with it.
 
 **Options**:
 
 | Option | Description | Trade-ties |
 | -------- | ------------- | ----------- |
-| **A (Recommended)** | Meta tags + Robots.txt + Sitemap.xml exclusion | Comprehensive coverage; multiple signal to search engines; verifiable at deploy time |
+| **A (Recommended)** | Noindex meta tags + Sitemap.xml exclusion; no robots.txt `Disallow` for these routes | Crawlers can fetch the pages and read noindex; sitemap stays clean; verifiable at deploy time |
 | B | Robots.txt only | Standard method; simpler to implement; less comprehensive (Meta tags still visible in HTML) |
 | C | Meta tags only (x-robots-tag in response headers) | Flexible; can vary per request; not visible in sitemap |
 | D | Sitemap.xml filtering only | Works for sitemaps; doesn't prevent indexing if URL is discovered elsewhere |
 
 **Decision**: ✅ APPROVED — Option A (Meta tags + Sitemap exclusion; avoid conflicting Robots.txt Disallow rules)
 
-**Impact on Prompt 1** (and verification): Navigation exposure specification (Prompt 1) must document exact enforcement strategy. Implementation validation requires confirmation that /speaking, /events, /media are not published to search engines.
+**Impact on Prompt 1** (and verification): Prompt 1 must require a `noindex` robots meta tag on /speaking, /events and /media, exclude all three from sitemap.xml, and add no robots.txt `Disallow` rule for them. Validation confirms all three conditions.
 
 ---
 
@@ -164,20 +164,21 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | # | Decision | Status | Decision | Impact |
 | --- | ---------- | -------- | --- | --- |
 | 1 | Recovery-first race condition | ✅ APPROVED | Option A (Recovery precedence) | Prompt 3B (recovery flows) |
-| 2 | Recovery lifetime eligibility | ✅ APPROVED | Option A (30-day rolling window) | Prompt 3B (session state) |
+| 2 | Recovery lifetime eligibility | ✅ APPROVED | Option A (session refresh on recovery; absolute expiry 30 days after initial verification) | Prompt 3B (session state) |
 | 3 | Code expiry start time | ✅ APPROVED | Option A (From code generation) | Prompts 3A (copy), 3C (errors) |
 | 4 | Email service provider | ✅ APPROVED | SendGrid (API key + SMTP) | Prompt 3A (email integration) |
-| 5 | Manuscript publication readiness | ✅ DECIDED | Option C (Not yet approved — Draft by Jan 31) | Prompt 3A (content messaging) |
+| 5 | Manuscript publication readiness | ✅ DECIDED | Option C (Not yet approved; approval date to be confirmed) | Prompts 3A–3C (deferred until approval) |
 | 6 | Newsletter destination | ✅ APPROVED | Brevo (external signup link) | Prompt 3A (signup link) |
-| 7 | Route enforcement verification | ✅ APPROVED | Option A (Meta + Robots + Sitemap) | Prompt 1 (navigation validation) |
+| 7 | Route enforcement verification | ✅ APPROVED | Option A (noindex meta + sitemap exclusion; no robots.txt Disallow) | Prompt 1 (navigation validation) |
 
-**Execution Status** (all decisions resolved):
-- ✅ Prompt 1 (Navigation Exposure) — Ready for execution (Decision 7 resolved)
-- ✅ Prompt 2A (Design System Baseline) — Ready for execution (no blocking decisions)
-- ✅ Prompt 2B (Navigation Design) — Ready for execution (no blocking decisions)
-- ✅ Prompt 3A (Reader Access Copy) — Ready for execution (Decisions 3, 4, 5, 6 resolved — uses placeholder messaging for manuscript until approved)
-- ⏳ Prompt 3B (Recovery Flows) — Ready for execution (Decisions 1, 2 resolved)
-- ⏳ Prompt 3C (Error States) — Ready for execution (Decision 3 resolved)
+**Execution Status** (decisions recorded; execution still requires separate authorisation — see [spec.md](./spec.md) status gates):
+
+- ✅ Prompt 1 (Navigation Exposure) — Decision 7 resolved; contracts updated to the approved enforcement method
+- ✅ Prompt 2A (Design System Baseline) — No blocking decisions
+- ✅ Prompt 2B (Navigation Design) — No blocking decisions
+- ⏸️ Prompt 3A (Reader Access Copy) — Decisions 3, 4 and 6 applied; deferred until manuscript approval (Decision 5). Placeholder messaging only in the meantime
+- ⏸️ Prompt 3B (Recovery Flows) — Decisions 1 and 2 applied to the contract; deferred until manuscript approval
+- ⏸️ Prompt 3C (Error States) — Decision 3 applied to the contract; deferred until manuscript approval
 
 ---
 
@@ -186,17 +187,18 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 ✅ **All 7 blocking decisions have been resolved by user:**
 
 1. Recovery-first race: **Option A** (Recovery takes precedence)
-2. Recovery lifetime: **Option A** (30-day rolling window)
+2. Recovery lifetime: **Option A** (session refresh on recovery; absolute expiry 30 days after initial verification — recovery cannot extend access beyond that limit)
 3. Code expiry start: **Option A** (From code generation)
 4. Email service provider: **SendGrid** (API key + SMTP)
-5. Manuscript status: **Not yet approved** (Draft ready by 2026-01-31 — using placeholder copy for now)
+5. Manuscript status: **Not yet approved** (target: January 2027; exact approval date to be confirmed by Ash — using placeholder copy for now)
 6. Newsletter destination: **Brevo** (External signup link)
-7. Route enforcement: **Option A** (Meta tags + Robots.txt + Sitemap.xml)
+7. Route enforcement: **Option A** (noindex meta tags + sitemap.xml exclusion; no robots.txt Disallow)
 
 **Next Steps**:
-1. ✅ All Prompts (1, 2A, 2B, 3A, 3B, 3C) now unblocked and ready for Figma Make execution
-2. ✅ Prompt 3A uses placeholder messaging for manuscript content until approved
-3. ✅ Proceed to Figma Make execution phase with all decisions locked in
+
+1. Prompts 1, 2A and 2B have no outstanding blocking decisions; execution still requires the authorisation gates recorded in [spec.md](./spec.md)
+2. ⏸️ Prompts 3A, 3B and 3C remain deferred until the manuscript is approved (Decision 5)
+3. Prompt 3A may use placeholder messaging for manuscript content in the meantime; final copy follows manuscript approval
 
 ---
 

@@ -4,7 +4,13 @@
 
 **Created**: 2026-11-09
 
-**Status**: Ready for Figma Make Execution (All blocking decisions approved)
+**Status**: Documentation complete; execution **not authorised**. The seven blocking decisions are recorded, but the following gates remain open:
+
+- Exact editable Make revision/source snapshot and parity evidence (not confirmed)
+- Available credits and approved generation scope (not confirmed)
+- Explicit authority to resume each paused implementation stage (not given)
+- Manuscript approval (Decision 5 — not approved); Prompts 3A–3C stay deferred until it is approved, as recorded in [BLOCKING_DECISIONS_PROPOSAL.md](./exports/BLOCKING_DECISIONS_PROPOSAL.md)
+- Stage ID mapping for Prompts 3A–3C against the master execution contract (unresolved — see Blocking Decisions below)
 
 **Input**: Complete staged Figma Make prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval.
 
@@ -236,20 +242,29 @@ Once approved, the next phase will include:
 
 | # | Decision | Resolution | Execution Impact |
 | --- | ---------- | ----------- | --- |
-| 1 | Recovery-first race condition | Option A: Recovery takes precedence | Unblocks Prompt 3B (recovery flows) |
-| 2 | Recovery lifetime eligibility | Option A: 30-day rolling window | Unblocks Prompt 3B (session state management) |
-| 3 | Code expiry start time | Option A: From code generation | Unblocks Prompts 3A (copy), 3C (errors) |
-| 4 | Email service provider | SendGrid (API key + SMTP) | Unblocks Prompt 3A (email template) |
-| 5 | Manuscript publication readiness | ❌ Not yet approved (draft by 2027-01-31) | Prompt 3A uses placeholder messaging; re-finalize once approved |
-| 6 | Newsletter destination | Brevo (external signup link) | Unblocks Prompt 3A (newsletter CTA) |
-| 7 | Route enforcement verification | Option A: Meta tags + Robots.txt + Sitemap | Unblocks Prompt 1 (validation documentation) |
+| 1 | Recovery-first race condition | Option A: Recovery takes precedence | Decision resolved for Prompt 3B (execution deferred — manuscript gate) |
+| 2 | Recovery lifetime eligibility | Option A: session refresh on recovery; absolute expiry 30 days after initial verification | Decision resolved for Prompt 3B (execution deferred — manuscript gate) |
+| 3 | Code expiry start time | Option A: From code generation | Decision resolved for Prompts 3A, 3C (execution deferred — manuscript gate) |
+| 4 | Email service provider | Hybrid: SendGrid (transactional) + Brevo (newsletter) | Decision resolved for Prompt 3A (execution deferred — manuscript gate) |
+| 5 | Manuscript publication readiness | ❌ Not yet approved (approval date to be confirmed by Ash) | Blocks execution of Prompts 3A–3C; Prompt 3A may use placeholder messaging only |
+| 6 | Newsletter destination | Brevo (external signup link) | Decision resolved for Prompt 3A (execution deferred — manuscript gate) |
+| 7 | Route enforcement verification | Option A: noindex meta tags + sitemap exclusion; no robots.txt Disallow | Decision resolved for Prompt 1 |
 
 **Implications**:
-- ✅ Prompts 1, 2A, 2B ready for immediate Figma Make execution
-- ⚠️ Prompt 3A marked ready but stage assignment unresolved (conflicts with master execution contract stage assignments)
-- ⚠️ Prompts 3B, 3C marked ready but stage assignments unresolved; verify intended stage IDs before execution
-- ⚠️ Prompt 3A success copy will need refresh once manuscript is approved (late January 2027)
-- **ACTION REQUIRED**: Reconcile stage IDs (3A-3C) between spec.md (current reader access focus) and master execution contract (podcast data/routing/playback focus) before marking prompts ready
+
+- Prompts 1, 2A, 2B have no outstanding blocking decisions; execution still requires the status gates listed at the top of this document
+- ❌ Prompts 3A, 3B, 3C are **not ready**: they remain deferred until manuscript approval, and their stage IDs are unresolved
+- ⚠️ Prompt 3A success copy will need refresh once the manuscript is approved (approval date to be confirmed by Ash)
+
+**Stage ID conflict (unresolved)**:
+
+| Stage ID | This specification (Spec 004) | Master execution contract ([01](./references/01-book-website-specification.md) §8–§10) |
+| --- | --- | --- |
+| 3A | Reader access copy and forms | Podcast decisions and data contract |
+| 3B | Recovery flows | Podcast routing and archive/detail experience |
+| 3C | Error states | Genuine accessible playback |
+
+The two documents use the same IDs for different work. Ash must confirm a mapping (for example, renumbering the Spec 004 reader-access prompts or recording them as a separate stage sequence with their own dependencies) before any of Prompts 3A–3C is marked ready.
 
 ---
 

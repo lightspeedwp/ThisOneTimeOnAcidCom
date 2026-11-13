@@ -1,6 +1,6 @@
 # Figma Make Prompt 1: Navigation Exposure — Execution Guide
 
-**Status**: ✅ UNBLOCKED & READY TO EXECUTE  
+**Status**: Decision 7 applied; execution still requires the gates in [spec.md](../spec.md)  
 **Scope**: Update navigation component to hide Speaking, Events, and Media routes from public sitemap  
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Decision Dependency**: Blocking Decision 7 (Route Enforcement Verification) → **Selected Option A** ✅
@@ -12,7 +12,7 @@
 Update the ThisOneTimeOnAcidCom Figma navigation component to:
 - Remove /speaking, /events, /media from the visible navigation menu
 - Keep these routes accessible internally (accessible at URLs, but not discoverable via search)
-- Apply route enforcement using **Option A** (Meta tags + Robots.txt + Sitemap.xml exclusion)
+- Apply route enforcement using **Option A** (noindex meta tags + sitemap.xml exclusion; no robots.txt `Disallow`)
 - Preserve responsive navigation states across desktop, tablet, and mobile
 
 **Outcome**: Navigation component shows only 4 visible items (Home, About, Book, Contact) while hidden routes remain accessible with noindex enforcement.
@@ -39,24 +39,17 @@ Update the ThisOneTimeOnAcidCom Figma navigation component to:
 
 ### 2. Implement Route Enforcement (Decision 7 Option A)
 
-Apply **all three enforcement methods** for /speaking, /events, /media:
+Apply **both enforcement methods** for /speaking, /events, /media, and keep robots.txt free of `Disallow` rules for them:
 
 #### A. Meta Tags (on each hidden route page)
 Add to page header:
 ```html
 <meta name="robots" content="noindex, nofollow">
-```text
+```
 This tells search engines: "Don't index this page and don't follow links from it."
 
-#### B. Robots.txt Rules
-Add to robots.txt:
-```text
-User-agent: *
-Disallow: /speaking
-Disallow: /events
-Disallow: /media
-```text
-This tells crawlers: "Don't crawl these routes."
+#### B. Robots.txt (no change for these routes)
+Do **not** add `Disallow` rules for /speaking, /events or /media. A `Disallow` rule stops crawlers fetching the page, so they would never see the noindex directive.
 
 #### C. Sitemap.xml Exclusion
 Remove these entries from sitemap.xml:
@@ -83,10 +76,10 @@ All of these must be true when complete:
 - Still accessible at their URLs (not deleted)
 - Marked with noindex meta tags
 
-✅ **CR-1.3**: All three enforcement methods are applied:
+✅ **CR-1.3**: The approved enforcement method is applied:
 - ✓ Meta tag: `<meta name="robots" content="noindex, nofollow">`
-- ✓ Robots.txt: Disallow /speaking, /events, /media
 - ✓ Sitemap.xml: Excludes /speaking, /events, /media
+- ✓ Robots.txt: No `Disallow` rule matches /speaking, /events or /media
 
 ✅ **CR-1.4**: Responsive design preserved for:
 - Desktop navigation (horizontal menu)
@@ -132,13 +125,8 @@ All of these must be true when complete:
      - /events page header
      - /media page header
 
-2. **Robots.txt Update**:
-   - Add three Disallow rules:
-     ```
-     Disallow: /speaking
-     Disallow: /events
-     Disallow: /media
-     ```
+2. **Robots.txt Check**:
+   - Confirm robots.txt has no `Disallow` rule for /speaking, /events or /media (do not add any)
 
 3. **Sitemap.xml Update**:
    - Remove three `<loc>` entries:
@@ -151,7 +139,7 @@ All of these must be true when complete:
 1. ✅ Confirm navigation menu shows only 4 items (Home, About, Book, Contact)
 2. ✅ Verify /speaking, /events, /media are still accessible at their URLs
 3. ✅ Verify noindex meta tags present on hidden pages
-4. ✅ Verify Robots.txt has three Disallow rules
+4. ✅ Verify robots.txt has no Disallow rules for the three hidden routes
 5. ✅ Verify Sitemap.xml excludes three hidden routes
 6. ✅ Test responsive states (desktop/tablet/mobile navigation)
 7. ✅ Generate before/after comparison
@@ -184,7 +172,7 @@ All of these must be true when complete:
 | 03-author-decisions-launch-scope.md | v1.3.0 | Source for Speaking/Events/Media exclusion |
 | 04-design-brief.md | v1.1.2 | Design baseline & responsive breakpoints |
 | 06-website-reading-prd.md | v1.1.1 | Implementation guidance |
-| Blocking Decision 7 | Resolved → Option A | Route enforcement method (Meta + Robots.txt + Sitemap.xml) |
+| Blocking Decision 7 | Resolved → Option A | Route enforcement method (noindex meta + sitemap.xml exclusion; no robots.txt Disallow) |
 
 ---
 
@@ -198,7 +186,7 @@ When Prompt 1 execution is complete, provide:
 
 2. **Route Enforcement Rules**
    - Meta tags documented for each hidden route
-   - Robots.txt rules listed
+   - Robots.txt confirmed free of Disallow rules for hidden routes
    - Sitemap.xml entries identified for removal
 
 3. **Before/After Comparison**
@@ -216,7 +204,7 @@ When Prompt 1 execution is complete, provide:
 
 ✅ **Prompt 1 is complete when**:
 - Navigation component updated in Figma (4 visible items)
-- All three enforcement methods applied (meta tags + robots.txt + sitemap.xml)
+- Approved enforcement applied (noindex meta tags + sitemap.xml exclusion; no robots.txt Disallow)
 - Before/after comparison generated
 - All acceptance criteria (CR-1.1 through CR-1.6) verified
 - No unintended side effects (other navigation items intact)

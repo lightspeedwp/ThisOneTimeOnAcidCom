@@ -64,7 +64,7 @@
 
 **Completeness Score**: 8/9 elements = **~89%** ⚠️ **ACCEPTABLE** (minor gaps in acceptance criteria tail section and error handling)
 
-**Ready for Execution**: YES — All core requirements present. Missing acceptance criteria tail and error handling are low-impact (can be added in implementation phase).
+**Ready for Execution**: NO — ~89% is below the SC-003 95% per-prompt threshold. Complete the missing acceptance-criteria tail and error handling, or reassess, before execution.
 
 ---
 
@@ -119,18 +119,20 @@
 
 **Blocker Notes**: Depends on Decisions 3, 4, 5, 6 for final values. Placeholders documented and ready for substitution.
 
-**Ready for Execution**: YES — All core requirements present. Decision placeholders clearly marked and mapped.
+**Ready for Execution**: PLACEHOLDER ONLY — core requirements present and decision placeholders mapped, but ~91% is below the SC-003 95% threshold and final execution is deferred until the manuscript is approved (Decision 5) and the conflicting manuscript-approval records are reconciled.
 
 ---
 
 ## Summary: All Unblocked Prompts Completeness
 
-| Prompt | File | Completeness | Status | Ready for Figma Make | Blockers |
-| -------- | ------ | ------------- | -------- | -------------------- | - |
-| **Prompt 1** | prompt-1-exact-preview.md | 100% | ✅ PASS | ✅ YES | Decision 7 (Route Enforcement) |
-| **Prompt 2A** | prompt-2a-design-baseline.md | ~89% | ⚠️ ACCEPTABLE | ✅ YES | None (CSS + JSON export ready) |
-| **Prompt 2B** | prompt-2b-navigation-design.md | 100% | ✅ PASS | ✅ YES | None (depends on Prompt 1) |
-| **Prompt 3A** | prompt-3a-reader-access.md | ~91% | ⚠️ ACCEPTABLE | ✅ YES | Decisions 3, 4, 5, 6 |
+| Prompt | File | Completeness | Status | Placeholder readiness | Final execution readiness | Blockers |
+| -------- | ------ | ------------- | -------- | -------------------- | - | - |
+| **Prompt 1** | prompt-1-exact-preview.md | 100% | ✅ PASS | n/a | ❌ NOT READY until the approved Decision 7 method is applied in the Prompt 1 contracts and re-validated | Decision 7 application; [spec.md](../spec.md) status gates |
+| **Prompt 2A** | prompt-2a-design-baseline.md | ~89% | ❌ BELOW SC-003 | n/a | ❌ NOT READY | Completeness below 95% |
+| **Prompt 2B** | prompt-2b-navigation-design.md | 100% | ✅ PASS | n/a | ❌ NOT READY | Depends on Prompt 1; [spec.md](../spec.md) status gates |
+| **Prompt 3A** | prompt-3a-reader-access.md | ~91% | ❌ BELOW SC-003 | ⚠️ Placeholder copy only | ❌ NOT READY | Decision 5 (manuscript approval); conflicting manuscript-approval records must be reconciled; completeness below 95% |
+
+Placeholder readiness means the prompt can be reviewed with placeholder copy; it does not authorise final execution.
 
 **Overall Completeness**: SC-003 requires ≥95% per prompt (not average)
 - Prompt 1: 100% ✅
@@ -155,19 +157,20 @@
 
 ## Validation Result
 
-✅ **ALL UNBLOCKED PROMPTS VALIDATED**
+❌ **SC-003 NOT MET** — the completeness gate fails per prompt
 
-**Completeness Criteria Met**:
+**Completeness Criteria**:
+
 - ✅ Prompt 1 (Exact Preview): 100% complete with before/after structure, 14-step implementation plan, 10 acceptance criteria, 3-bullet non-changes list
-- ✅ Prompt 2A (Design Baseline): CSS variables AND JSON design-token formats both specified; ~89% completeness (acceptable threshold)
+- ❌ Prompt 2A (Design Baseline): CSS variables AND JSON design-token formats both specified; ~89% completeness — below the 95% per-prompt threshold
 - ✅ Prompt 2B (Navigation Design): 100% complete with all states, responsive breakpoints, and mobile interactions
-- ✅ Prompt 3A (Reader Access): ~91% complete with email, forms, success state, and separate newsletter CTA (acceptable threshold)
+- ❌ Prompt 3A (Reader Access): ~91% complete with email, forms, success state, and separate newsletter CTA — below the 95% per-prompt threshold
 
 **SC-002 Compliance**: ✅ All unblocked prompt previews include required elements (before/after structure, numbered steps, acceptance criteria, non-changes)
 
-**SC-003 Compliance**: ✅ Prompt 2A specifies BOTH CSS variables AND JSON design-token formats for full design-system coverage
+**SC-003 Compliance**: ❌ Not met. Prompt 2A specifies both CSS variables and JSON design-token formats, but Prompts 2A and 3A must each reach at least 95% (or be reassessed) before this criterion passes. Averaging across prompts does not satisfy SC-003.
 
-**Ready for Next Phase**: ✅ YES — Proceed to T055 (approval boundaries audit)
+**Ready for Next Phase**: ❌ NO — complete or reassess Prompts 2A and 3A before T054 can pass
 
 ---
 

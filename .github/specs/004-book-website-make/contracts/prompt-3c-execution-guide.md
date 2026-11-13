@@ -1,6 +1,6 @@
 # Figma Make Prompt 3C: Error States — Execution Guide
 
-**Status**: ❌ BLOCKED — Awaiting Decision 3 (partially blocked by Decision 1)  
+**Status**: ⏸️ DEFERRED — Decisions 3 and 1 approved (Option A each); execution waits for manuscript approval and the execution gates in [spec.md](../spec.md)  
 **Scope**: Error state designs and messaging for reader access flow  
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Dependencies**: Prompt 3A (Reader Access Copy & Forms) — Provides form baseline
@@ -37,10 +37,10 @@ Design all error state designs and messaging for reader access flow, with code-e
 | **B: From Receipt** | 10 min from when email is received (uncertain timing) | "Code expired. Email received [X minutes ago]." | Accounts for delivery delays; more user-focused |
 | **C: From Page Load** | 10 min from when user loads verification page | "Code expired. Please request a new one." | Simplest messaging; no timing explanation needed |
 
-**Status**: ⏳ PENDING — See `research.md` for detailed analysis
+**Status**: ✅ APPROVED — Option A (expiry from code generation). Use: "Code expired — it was valid for 10 minutes from when it was generated." See `research.md`
 
 ### Decision 1: Recovery-First Race Condition (Affects Error 5)
-**Note**: Decision 1 (from Prompt 3B) impacts the "Session Conflict Error" state. Until both decisions are resolved, Errors 1-4 can be designed, but Error 5 may need adjustment.
+**Note**: Decision 1 is approved as Option A (recovery takes precedence); Error 5 follows that rule.
 
 ---
 
@@ -457,13 +457,11 @@ Document all 5 error states with user guidance:
 
 ## Blocking Status
 
-🔴 **CANNOT PROCEED FULLY** until Decision 3 is made:
-- Decision 3: Code Expiry Start Time (PENDING)
+✅ Decisions resolved:
+- Decision 3: Code Expiry Start Time — Option A (from generation)
+- Decision 1: Recovery-First Race Condition — Option A (applies to Error 5)
 
-🟡 **PARTIALLY BLOCKED**:
-- Error 5 (Session Conflict) awaits Decision 1 from Prompt 3B
-
-❌ **Do not attempt to execute this prompt until Decision 3 is resolved.**
+⏸️ **Deferred**: do not execute this prompt until the manuscript is approved (Decision 5) and the execution gates in [spec.md](../spec.md) are cleared.
 
 ---
 

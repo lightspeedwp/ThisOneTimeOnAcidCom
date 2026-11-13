@@ -1,6 +1,6 @@
 # Figma Make Prompt 3B: Recovery Flows — Execution Guide
 
-**Status**: ❌ BLOCKED — Awaiting Decisions 1 & 2  
+**Status**: ⏸️ DEFERRED — Decisions 1 & 2 approved (Option A each); execution waits for manuscript approval and the execution gates in [spec.md](../spec.md)  
 **Scope**: Recovery flow specification and session restoration designs  
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Dependencies**: Prompt 3A (Reader Access Copy & Forms) — Provides form baseline
@@ -38,7 +38,7 @@ Design recovery flow specification documenting how readers regain access via pre
 | **C: Last-Writer-Wins** | Whichever completes last (timestamp order) succeeds | ✅ Deterministic; ⚠️ User may see unexpected result |
 | **D: User Chooses Explicitly** | Show dialog: "Restore from previous session or use new code?" | ✅ Full user control; ⚠️ Extra interaction required |
 
-**Status**: ⏳ PENDING — See `research.md` for detailed analysis
+**Status**: ✅ APPROVED — Option A (recovery precedence; fresh verification cancelled when recovery succeeds). See `research.md`
 
 ### Decision 2: Recovery Lifetime Eligibility
 **Question**: How long is confirmed redemption eligible for recovery access?
@@ -54,7 +54,7 @@ Design recovery flow specification documenting how readers regain access via pre
 | **C: Single session only** | Only within same calendar day (24 hours) | Most conservative; requires daily verification |
 | **D: Custom window (configurable)** | Admin-controlled TTL for sessions | Flexible; adds operational complexity |
 
-**Status**: ⏳ PENDING — See `research.md` for detailed analysis
+**Status**: ✅ APPROVED — Option A (session refresh on recovery; absolute expiry 30 days after initial verification — recovery cannot extend access beyond it). See `research.md`
 
 ---
 
@@ -336,11 +336,11 @@ When recovery is unavailable, document the fallback process:
 
 ## Blocking Status
 
-🔴 **CANNOT PROCEED** until both decisions are made:
-- Decision 1: Recovery-First Race Condition (PENDING)
-- Decision 2: Recovery Lifetime Eligibility (PENDING)
+✅ Decisions resolved:
+- Decision 1: Recovery-First Race Condition — Option A
+- Decision 2: Recovery Lifetime Eligibility — Option A (absolute 30-day expiry)
 
-❌ **Do not attempt to execute this prompt until Decisions 1 & 2 are resolved.**
+⏸️ **Deferred**: do not execute this prompt until the manuscript is approved (Decision 5) and the execution gates in [spec.md](../spec.md) are cleared.
 
 ---
 
