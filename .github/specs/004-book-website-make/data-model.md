@@ -181,7 +181,7 @@
 
 ## Key Relationships
 
-```
+```text
 SpecificationFile (01-06)
   ├── contains → DesignBaseline
   ├── contains → DesignCandidate (R3, T1, RT2, C1)
@@ -201,7 +201,7 @@ FigmaMakePrompt
 
 PreflightAnalysis
   └── synthesizes → all other entities (source state + approval boundaries)
-```
+```text
 
 ---
 
@@ -209,58 +209,58 @@ PreflightAnalysis
 
 ### BlockingDecision State Machine
 
-```
+```text
 PENDING
   └─ on decision made → RESOLVED (once decision field populated)
        └─ on implementation → CLOSED (after Prompt execution)
-```
+```text
 
 ### FigmaMakePrompt State Machine
 
-```
+```text
 UNBLOCKED (if no blocking decisions)
   └─ on execution approved → EXECUTING → COMPLETED
 
 BLOCKED (if any blocking decision PENDING)
   └─ on all blocking decisions RESOLVED → UNBLOCKED
        └─ on execution approved → EXECUTING → COMPLETED
-```
+```text
 
 ### PreflightAnalysis State Machine
 
-```
+```text
 DRAFT (analysis in progress)
   └─ on all items documented → READY_FOR_REVIEW
        └─ on user approval → APPROVED
             └─ on implementation phase start → IN_EXECUTION
-```
+```text
 
 ---
 
 ## Validation Queries
 
 **All Figma Make Prompts ready for execution?**
-```
+```text
 SELECT * FROM FigmaMakePrompt WHERE status = 'unblocked'
 Expected: 4 results (Prompts 1, 2A, 2B, 3A)
-```
+```text
 
 **All blocking decisions resolved?**
-```
+```text
 SELECT * FROM BlockingDecision WHERE decision = 'PENDING'
 Expected: 0 results (none resolved until user input)
-```
+```text
 
 **Design baseline complete?**
-```
+```text
 SELECT * FROM DesignBaseline WHERE colors_light_theme.size == 9 
   AND colors_dark_theme.size == 9 
   AND typography_headings IS NOT NULL
 Expected: 1 result (single baseline entity)
-```
+```text
 
 **Unapproved candidates preserved?**
-```
+```text
 SELECT * FROM DesignCandidate WHERE approval_status = 'unapproved'
 Expected: 4 results (R3, T1, RT2, C1)
-```
+```text

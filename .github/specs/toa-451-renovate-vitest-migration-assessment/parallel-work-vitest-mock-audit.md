@@ -35,7 +35,7 @@ All Jest mocks found are straightforward and have direct Vitest equivalents.
 **Mocks used:**
 
 | Line(s) | Jest Pattern | Type | Vitest Equivalent | Rewrite Effort |
-|---------|--------------|------|-------------------|---|
+| --------- | -------------- | ------ | ------------------- | --- |
 | 13–16 | `process.env` (direct read/write) | Environment access | `vi.stubEnv()` | Low |
 | 11–21 | `beforeEach()` with state reset | Test hook | `beforeEach()` (same) | None |
 | 8 | `execSync` import | Native Node import | (no change) | None |
@@ -175,7 +175,7 @@ export default defineConfig({
 ## Coverage Continuity Check
 
 | Metric | Jest Current | Vitest (Expected) | Status |
-|--------|--------------|-------------------|--------|
+| -------- | -------------- | ------------------- | -------- |
 | **Scope** | `scripts/**/*.js` | `scripts/**/*.{ts,js}` | ✅ Expanded (TS support) |
 | **Files covered** | `test-figma-access.test.js` | Same | ✅ Same |
 | **Reporters** | JSON (default Jest) | text/json/html | ✅ More output options |
@@ -242,7 +242,7 @@ Vitest output (native JSON reporter):
 ## Risk Assessment
 
 | Risk | Likelihood | Severity | Mitigation |
-|------|-----------|----------|-----------|
+| ------ | ----------- | ---------- | ----------- |
 | Environment stubbing doesn't work | Low | Medium | Test locally first; fallback to wholesale env replacement |
 | Vitest discovery misses test file | Very Low | High | Verify `vitest list` shows the file |
 | Coverage drop after migration | Low | Medium | Compare V8 reports; investigate gaps |

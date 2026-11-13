@@ -891,7 +891,7 @@ available to all team members
 - `.github/workflows/pr-template-routing.yml` defines the expected mappings below; configuration inspection does not establish observed PR results.
 
 | Scenario | Expected suggested template | Expected label | Test PR | Observed routing comment | Applied label |
-|----------|-----------------------------|----------------|---------|--------------------------|---------------|
+| ---------- | ----------------------------- | ---------------- | --------- | -------------------------- | --------------- |
 | `feat/*` | `pr_feature.md` | `type:feature` | [PR #483](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/483) | [Suggests `pr_feature.md`](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/483#issuecomment-6386930297) | `type:feature` ✅ |
 | `fix/*` | `pr_bug.md` | `type:bug` | [PR #484](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/484) | [Suggests `pr_bug.md`](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/484#issuecomment-6386933126) | `type:bug` ✅ |
 | `docs/*` | `pr_documentation.md` | `type:documentation` | [PR #485](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485) | [Suggests `pr_documentation.md`](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/485#issuecomment-6386934580) | `type:documentation` ✅ |

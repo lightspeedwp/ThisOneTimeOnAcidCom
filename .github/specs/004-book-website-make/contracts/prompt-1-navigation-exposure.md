@@ -15,7 +15,7 @@ Update the navigation component to hide Speaking, Events, and Media routes from 
 
 ### Context
 
-From 03-author-decisions-launch-scope.md (v1.3.0):
+From `.github/specs/004-book-website-make/references/03-author-decisions-launch-scope.md` (v1.3.0):
 > "Speaking/Events/Media are approved as design baseline for site architecture but excluded from public navigation and sitemap per author direction. These routes preserve internal documentation but are not discoverable via search engines."
 
 ### Exact Changes
@@ -29,12 +29,10 @@ From 03-author-decisions-launch-scope.md (v1.3.0):
 - Public sitemap includes: /home, /about, /book, /contact, ...
 - Navigation component displays: /home, /about, /book, /contact (Speaking/Events/Media hidden)
 - Route enforcement for /speaking, /events, /media:
-  - Option A (Recommended): Meta tags + Robots.txt + Sitemap.xml exclusion
-  - Option B (Alternative): Robots.txt only
-  - Option C (Alternative): Meta tags only
-  - Option D (Alternative): Sitemap.xml filtering only
+  - ✅ **Selected: Option A (Recommended)**: Meta tags + Robots.txt + Sitemap.xml exclusion
+  - (Alternative options available if different enforcement method chosen)
   
-  *(Selected from Blocking Decision 7: Route Enforcement Verification)*
+  *(Blocking Decision 7: Route Enforcement Verification — Option A Selected)*
 
 **No Changes To**:
 - Functionality (routes remain accessible, not deleted)
@@ -67,7 +65,7 @@ From 03-author-decisions-launch-scope.md (v1.3.0):
 2. **Remove links** for /speaking, /events, /media from navigation menu
 3. **Preserve route pages** (/speaking, /events, /media) with noindex metadata
 4. **Document enforcement strategy** for each route (based on Decision 7 selection):
-   - Add Meta tag: `<meta name="robots" content="noindex, follow">`
+   - Add Meta tag: `<meta name="robots" content="noindex, nofollow">`
    - Add Robots.txt rule: `Disallow: /speaking` (per option selected)
    - Update sitemap.xml to exclude /speaking, /events, /media (per option selected)
 5. **Generate before/after comparison** showing navigation structure change

@@ -1,57 +1,60 @@
 {
-  "timestamp": "2026-11-12T19:47:45.241Z",
+  "timestamp": "2026-11-12T03:36:54.614Z",
   "tests": [
     {
       "name": "Authentication (GET /v1/me)",
-      "status": "FAIL",
-      "error": "Unexpected status 401"
+      "status": "PASS",
+      "details": {
+        "userId": "1203324778200605196",
+        "email": "accounts@lsdev.biz",
+        "responseTime": 172
+      }
     },
     {
       "name": "Make Project Access (GET /v1/files/{fileKey})",
       "status": "FAIL",
-      "error": "Unexpected status 403: Unknown error"
+      "error": "Unexpected status 400: Unknown error"
     },
     {
       "name": "Asset Node Fetch (GET /v1/files/{fileKey}/nodes)",
       "status": "FAIL",
-      "error": "Unexpected status 403"
+      "error": "Unexpected status 400"
     },
     {
       "name": "Asset Export (GET /v1/files/{fileKey}/images)",
       "status": "FAIL",
-      "error": "Unexpected status 401: Token has expired"
+      "error": "Unexpected status 200: undefined"
     },
     {
       "name": "Rate Limiting Analysis",
       "status": "PASS",
       "details": {
-        "requestsSuccessful": 0,
-        "avgResponseTime": 106,
+        "requestsSuccessful": 3,
+        "avgResponseTime": 167,
         "rateLimitInfo": {}
       }
     }
   ],
   "metrics": {
     "totalRequests": 7,
-    "successfulRequests": 0,
-    "failedRequests": 4,
-    "totalResponseTime": 784,
-    "avgResponseTime": 112
+    "successfulRequests": 4,
+    "failedRequests": 3,
+    "totalResponseTime": 3199,
+    "avgResponseTime": 457
   },
   "errors": [
-    "Authentication failed: Unexpected status 401",
-    "Make project access failed: Unexpected status 403: Unknown error",
-    "Asset node fetch failed: Unexpected status 403",
-    "Asset export test failed: Unexpected status 401: Token has expired"
+    "Make project access failed: Unexpected status 400: Unknown error",
+    "Asset node fetch failed: Unexpected status 400",
+    "Asset export test failed: Unexpected status 200: undefined"
   ],
   "summary": {
-    "passed": 1,
-    "failed": 4,
+    "passed": 2,
+    "failed": 3,
     "skipped": 0
   },
   "extraction": {
-    "avgApiResponseTime": 112,
-    "estimatedPerAsset": 612,
+    "avgApiResponseTime": 457,
+    "estimatedPerAsset": 957,
     "totalPhase2Estimate": {
       "56-assets": "1 minutes",
       "10-assets-pilot": "0 minutes"
