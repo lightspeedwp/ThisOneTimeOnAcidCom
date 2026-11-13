@@ -39,10 +39,10 @@ Design the complete navigation component with all interactive states (default, h
 - Links displayed inline, left-aligned
 - Each link has spacing between
 
-**States**:
-- **Default**: Text color = Primary (#1a1a1a light / #ffffff dark)
-- **Hover**: Text color = Accent (#e8d4b8 light / #d4a574 dark)
-- **Active**: Text color = Accent, bold weight (600 instead of 400)
+**States** (Approved Baseline):
+- **Default**: Text color = Primary (#0B0B10 light / #F6F2EB dark)
+- **Hover**: Text color = Accent (#FF3AAE hot pink — same in both themes) plus underline emphasis (non-colour cue; colour must not be the only state cue)
+- **Active**: Text color = Accent (#FF3AAE hot pink), bold weight (600 instead of 400)
 
 **Typography**:
 - Font: Inter
@@ -50,19 +50,19 @@ Design the complete navigation component with all interactive states (default, h
 - Size: 16px
 
 **Example Visuals**:
-```
+```text
 ┌─────────────────────────────────────────┐
 │ Home    About    Book    Contact        │
 │ ^^^^
-│ default state (charcoal #1a1a1a)
+│ default state (dark #0B0B10 / cream #F6F2EB)
 │
 │         ^^^^^^
-│         hover state (tan #e8d4b8)
+│         hover state (hot pink #FF3AAE)
 │
-│ Book (bold, accent color)
+│ Book (bold, hot pink accent #FF3AAE)
 │ ^^^^ active state
 └─────────────────────────────────────────┘
-```
+```text
 
 ### 3. Tablet Design (768-1023px)
 
@@ -115,7 +115,7 @@ Design the complete navigation component with all interactive states (default, h
 - Size: 16px (or 18px for better mobile touch targets)
 
 **Example Visuals**:
-```
+```text
 CLOSED:                    OPEN:
 ┌─────────────────────┐   ┌─────────────────────────┐
 │              [≡]    │   │ ✕                       │
@@ -127,7 +127,7 @@ CLOSED:                    OPEN:
 │                     │   │                         │
 └─────────────────────┘   └─────────────────────────┘
                           (semi-transparent backdrop behind)
-```
+```text
 
 ---
 
@@ -136,15 +136,15 @@ CLOSED:                    OPEN:
 ### Color Palette (Approved)
 
 | Property | Light Theme | Dark Theme |
-|----------|-------------|-----------|
-| Primary Text | #1a1a1a | #ffffff |
-| Accent (hover/active) | #e8d4b8 | #d4a574 |
+| ---------- | ------------- | ----------- |
+| Primary Text | #0B0B10 | #F6F2EB |
+| Accent (hover/active) | #FF3AAE | #FF3AAE |
 | Backdrop Overlay | rgba(0,0,0,0.5) | rgba(0,0,0,0.7) |
 
 ### Responsive Breakpoints
 
 | Breakpoint | Width Range | Layout | Behavior |
-|-----------|-------------|--------|----------|
+| ----------- | ------------- | -------- | ---------- |
 | Desktop | ≥1024px | Horizontal menu | All links visible |
 | Tablet | 768-1023px | Horizontal menu | All links visible |
 | Mobile | <768px | Hamburger + drawer | Links hidden until toggled |
@@ -152,9 +152,9 @@ CLOSED:                    OPEN:
 ### Typography
 
 | Element | Font | Weight | Size | Color |
-|---------|------|--------|------|-------|
+| --------- | ------ | -------- | ------ | ------- |
 | Nav Link (default) | Inter | 400 | 16px | Primary |
-| Nav Link (hover) | Inter | 400 | 16px | Accent |
+| Nav Link (hover) | Inter | 400 | 16px | Accent + underline |
 | Nav Link (active) | Inter | 600 | 16px | Accent |
 | Hamburger Icon | — | — | 24px | Primary |
 
@@ -170,8 +170,9 @@ All of these must be true when complete:
 - ✗ No other routes
 
 ✅ **CR-2B.2**: All states properly styled with approved colors
-- Default: Primary color (#1a1a1a light or #ffffff dark)
-- Hover: Accent color (#e8d4b8 light or #d4a574 dark)
+- Default: Primary color (#0B0B10 light or #F6F2EB dark)
+- Hover: Accent color (#FF3AAE, both themes) plus underline emphasis
+- Hover remains distinguishable without relying on colour alone (underline visible in greyscale review)
 - Active: Accent color + bold weight (600)
 
 ✅ **CR-2B.3**: Responsive behavior correct
@@ -210,23 +211,24 @@ All of these must be true when complete:
    - Contact
 4. Set layout to horizontal (flex row)
 5. Apply typography: Inter, 16px, weight 400
-6. Set default text color to Primary (#1a1a1a for light theme)
+6. Set default text color to Primary (#0B0B10 light / #F6F2EB dark)
 7. Add spacing between links (e.g., 24px margin-right)
 
 ### Phase 2: Create Desktop States
 
 1. **Default state**:
-   - Text color: Primary (#1a1a1a)
+   - Text color: Primary (#0B0B10 light / #F6F2EB dark)
    - Weight: 400
    - Create component instance or variant
 
 2. **Hover state**:
-   - Text color: Accent (#e8d4b8)
+   - Text color: Accent (#FF3AAE)
+   - Underline emphasis (non-colour cue)
    - Weight: 400
    - Create as separate variant
 
 3. **Active state**:
-   - Text color: Accent (#e8d4b8)
+   - Text color: Accent (#FF3AAE)
    - Weight: 600 (bold)
    - Create as separate variant
 
@@ -244,12 +246,12 @@ All of these must be true when complete:
 1. **Closed State**:
    - Display only hamburger icon (≡) in top-right
    - Icon size: 24px
-   - Icon color: Primary (#1a1a1a)
+   - Icon color: Primary (#0B0B10 light / #F6F2EB dark)
 
 2. **Drawer Component**:
    - Create full-height slide-out drawer
    - Width: 80-90% of screen (or fixed width like 320px)
-   - Background: Secondary (#ffffff light / #1a1a1a dark)
+   - Background: Secondary surface (#12121A dark; light-theme surface mapping pending approval — keep the existing light surface)
    - Shadow/elevation for depth
 
 3. **Links in Drawer**:
@@ -283,14 +285,14 @@ All of these must be true when complete:
 3. Add notes for developers:
    - "All links use Inter font"
    - "Active link is bold (weight 600)"
-   - "Hover color is accent: #e8d4b8 (light) / #d4a574 (dark)"
+   - "Hover is accent #FF3AAE (both themes) plus underline emphasis"
 
 ### Phase 6: Apply Dark Theme
 
 1. Create dark theme variant (if not already using theme-based colors)
 2. Dark theme colors:
-   - Primary text: #ffffff
-   - Accent: #d4a574
+   - Primary text: #F6F2EB
+   - Accent: #FF3AAE
    - Backdrop: rgba(0,0,0,0.7)
 3. Apply to all states and breakpoints
 
@@ -305,7 +307,8 @@ All of these must be true when complete:
 7. ✅ All breakpoints labeled (1024px, 768px)
 8. ✅ Correct typography (Inter, 16px)
 9. ✅ Correct colors (primary + accent)
-10. ✅ Interactions documented
+10. ✅ Hover has underline emphasis and is distinguishable without colour alone
+11. ✅ Interactions documented
 
 ---
 

@@ -1,83 +1,83 @@
 # Figma Make Prompt 3C: Error States
 
-**Status**: ❌ BLOCKED (partially: code-expiry messaging blocked)  
+**Status**: ➡️ HANDED OVER — reader-access work now continues in [Spec 005](../../005-reader-access/spec.md), which owns its flow, stages and dependencies. Decision 5 was revised on 2026-11-13 (early release; chapters published individually once Ash approves each), so manuscript approval no longer gates these screens. This contract is kept as a source record for Spec 005.
 **Priority**: P2  
 **Prompt ID**: 3C  
 **Type**: error-states
 
 ---
 
-## Specification (Template—Awaiting Decision Resolution)
+## Specification
 
-### Blocking Decision (MUST Be Resolved First)
+### Decisions Applied
 
-This prompt is BLOCKED and cannot be fully executed until the following decision is made:
+| Decision | Selected outcome | Status |
+| ---------- | --------- | -------- |
+| **Decision 3** | Code expiry start time — **Option A**: the 10-minute expiry runs from code generation | ✅ APPROVED (2026-11-11) |
+| **Decision 1** | Recovery-first race condition — **Option A**: recovery takes precedence (used for the session-conflict state) | ✅ APPROVED (2026-11-11) |
+| **Decision 5** | Manuscript publication readiness — **Option C**: not yet approved | ❌ Blocks execution |
 
-| Decision | Options | Status |
-|----------|---------|--------|
-| **Decision 3** | Code expiry start time (Options A/B/C): When does 10-minute code expiry clock start? From generation / receipt / page load? | **PENDING** |
-
-See `research.md` for detailed analysis of this decision.
-
-**Other error states** (invalid code, rate-limited, server error, session conflict from Decision 1) can be generated once Decision 3 is resolved.
+See [research.md](../research.md) for the decision records.
 
 ---
 
-## Goal (Pending Decision 3 Resolution)
+## Goal
 
-Generate all error state designs and messaging for reader access flow, with code-expiry message reflecting Decision 3 selection (from generation / receipt / page load).
+Generate all error state designs and messaging for the reader access flow, with code-expiry messaging stating that codes expire 10 minutes after generation.
 
-### Error States to Generate (Pending Decision 3)
+### Error States to Generate
 
 **1. Invalid Code Error**
+
 - Message: "Invalid code. Please check and try again."
-- State: Form displays error border/color, error text below input
+- State: Form displays error border/colour, error text below input
 - Action: User can retry (form remains open)
 
-**2. Code Expired Error** (Depends on Decision 3)
-- Message options (based on Decision 3):
-  - Option A (from generation): "Code expired. Generation time was [X minutes ago]."
-  - Option B (from receipt): "Code expired. Email received [X minutes ago]."
-  - Option C (from page load): "Code expired. Please check your email for a new one."
-- State: Form displays error state, suggests requesting new code
+**2. Code Expired Error** (Decision 3, Option A)
+
+- Message: "Code expired — it was valid for 10 minutes from when it was generated."
+- State: Form displays error state, suggests requesting a new code
 - Action: Link to "Request new code" triggers fresh email entry
 
 **3. Rate Limited Error**
+
 - Message: "Too many failed attempts. Please try again in 15 minutes."
 - State: Form disabled, countdown timer shown
 - Action: User waits for cooldown, form re-enables
 
 **4. Server Error State**
+
 - Message: "We're having trouble verifying your code. Please try again in a moment."
 - State: Form input disabled, retry button enabled
 - Action: User can retry or request new code
 
-**5. Session Conflict Error** (Depends on Decision 1 recovery race)
+**5. Session Conflict Error** (Decision 1, Option A)
+
 - Message: "Access being restored from previous session. Please wait..."
-- State: Form shows loading indicator
-- Action: Auto-redirect when session recovery completes or fails
+- State: Form shows loading indicator; recovery takes precedence over the pending fresh verification
+- Action: Auto-redirect when session recovery completes; if recovery fails, the fresh verification continues
 
 ---
 
-## When Unblocked (After Decision 3 Resolved)
+## Execution Steps (After Manuscript Approval)
 
-1. Update this prompt with Decision 3 selected option
-2. Generate complete error state designs for all 5 error scenarios
-3. Write exact error messages using Decision 3 timing language
-4. Design error state form styling (borders, text color, icons)
+1. Confirm this contract still matches the recorded decisions
+2. Generate error state designs for all 5 error scenarios
+3. Use the exact error messages above
+4. Design error state form styling (borders, text colour, icons)
 5. Document user actions for each error (retry, request new code, wait)
 
-### Acceptance Criteria Template (Awaiting Decision 3)
+### Acceptance Criteria
 
 ✅ **CR-3C.1**: All 5 error states designed (invalid, expired, rate-limited, server, session-conflict)
 
-✅ **CR-3C.2**: Code expiry message reflects Decision 3 selection (clear timing explanation)
+✅ **CR-3C.2**: Code expiry message states that the code was valid for 10 minutes from generation (Decision 3)
 
 ✅ **CR-3C.3**: Error messages distinguish failure reasons (user-error vs. timing vs. rate-limit vs. server)
 
 ✅ **CR-3C.4**: Each error state includes user action (retry, wait, request new code)
 
-✅ **CR-3C.5**: Form styling consistent with approved design baseline (colors, typography)
+✅ **CR-3C.5**: Form styling consistent with approved design baseline (colours, typography)
 
 ✅ **CR-3C.6**: Help text clearly explains what went wrong and what user should do
 
@@ -89,27 +89,15 @@ Generate all error state designs and messaging for reader access flow, with code
 
 ## Reference Documents
 
-- Code Expiry Analysis: research.md (Decision 3 detailed with options A/B/C)
+- Code expiry decision: research.md (Decision 3)
 - Reader Access Form: Prompt 3A (form baseline for error states)
 - Design Baseline: 04-design-brief.md (v1.1.2)
 
 ### Dependencies
 
 - Prompt 3A (Reader Access Copy & Forms) — Provides form baseline
-- Decision 3 (Code Expiry Start Time) — Must be resolved first for accurate expiry messaging
+- Manuscript approval (Decision 5) — Must be recorded before execution
 
 ---
 
-## Unblocking Process
-
-**Step 1**: User selects option for Decision 3 in research.md
-
-**Step 2**: Update this prompt with selected decision option
-
-**Step 3**: Generate complete error state specification with Decision 3 messaging
-
-**Step 4**: Execute with Figma Make to generate error state designs
-
----
-
-**Do not attempt to generate this prompt until Decision 3 is resolved.**
+**Do not execute this prompt until the manuscript is approved and the execution gates in [spec.md](../spec.md) are cleared.**

@@ -3,7 +3,7 @@
 This is a source-qualified crosswalk, not a move manifest.
 
 | Historical source | 005 responsibility | Treatment |
-|---|---|---|
+| --- | --- | --- |
 | 004/contracts/prompt-3a-reader-access.md | RA-001–RA-008 | Referenced; retained in 004 |
 | 004/contracts/prompt-3a-execution-guide.md | RA-001–RA-008 | Referenced; repeated criteria remain qualified |
 | 004/contracts/prompt-3b-recovery-flows.md | RA-004, RA-009 | Referenced; current Linear selections require reconciliation |

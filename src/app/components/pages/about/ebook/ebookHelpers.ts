@@ -6,6 +6,7 @@
 import { useState, useEffect, useLayoutEffect } from 'react';
 import type { BookPage } from '../../../../data/mock/pages/ebook-pages';
 import { bookPages, SPLITTABLE_TYPES } from '../../../../data/mock/pages/ebook-pages';
+import { syncTocPageReferences } from '../../../../utils/bookContentLoader';
 import { ebookUI } from '../../../../data/mock/ui/ebook';
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -153,6 +154,7 @@ export interface Spread {
 
 export function buildSpreads(pages: BookPage[]): Spread[] {
   var spreads: Spread[] = [];
+  if (pages.length === 0) return [{ left: null, right: null }];
   spreads.push({ left: null, right: pages[0] });
   for (var i = 1; i < pages.length; i += 2) {
     spreads.push({
@@ -260,6 +262,7 @@ function heightSplit(rawPages: BookPage[], probe: HTMLElement, availableHeight: 
     var currentParas: string[] = [];
     var currentHeight = 0;
     var chunkIdx = 0;
+    var chunkStart = 0;
 
     for (var k = 0; k < page.paragraphs.length; k++) {
       var gap = currentParas.length > 0 ? PROBE_PARA_GAP : 0;
@@ -269,6 +272,8 @@ function heightSplit(rawPages: BookPage[], probe: HTMLElement, availableHeight: 
         result.push({
           id: chunkIdx === 0 ? page.id : page.id + '-p' + (chunkIdx + 1),
           type: page.type,
+          sourceId: page.sourceId,
+          paragraphStart: (page.paragraphStart || 0) + chunkStart,
           pageNumber: page.pageNumber,
           chapter: page.chapter,
           part: page.part,
@@ -279,6 +284,7 @@ function heightSplit(rawPages: BookPage[], probe: HTMLElement, availableHeight: 
         currentParas = [page.paragraphs[k]];
         currentHeight = paraHeights[k];
         chunkIdx++;
+        chunkStart = k;
       } else {
         currentParas.push(page.paragraphs[k]);
         currentHeight += ph;
@@ -289,6 +295,8 @@ function heightSplit(rawPages: BookPage[], probe: HTMLElement, availableHeight: 
       result.push({
         id: chunkIdx === 0 ? page.id : page.id + '-p' + (chunkIdx + 1),
         type: page.type,
+        sourceId: page.sourceId,
+        paragraphStart: (page.paragraphStart || 0) + chunkStart,
         pageNumber: page.pageNumber,
         chapter: page.chapter,
         part: page.part,
@@ -322,7 +330,7 @@ export function useDynamicPagination(
   useLayoutEffect(function () {
     if (!probeEl || availableHeight <= 0) return;
     var measured = heightSplit(rawPages, probeEl, availableHeight);
-    setPages(measured);
+    setPages(syncTocPageReferences(measured));
   }, [rawPages, probeEl, availableHeight, fontSizeDep]);
 
   return pages;

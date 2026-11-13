@@ -8,7 +8,7 @@ ThisOneTimeOnAcidCom repository governance and feature development.
 ## Active Specifications
 
 | ID | Feature | Title | Status | Owner | Created | Updated | Link |
-|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | 001 | repo-governance-toa-241 | Repository Governance, Layout and Agentic Workflows | Complete | @ashley | 2026-10-17 | 2026-11-09 | [.github/specs/001-repo-governance-layout-and-agentic-workflows/](./001-repo-governance-layout-and-agentic-workflows/) |
 | 002 | media-library | TOA Media Library Strategy and Asset Recovery | Draft | @ashley | 2026-10-17 | 2026-10-18 | [.github/specs/002-media-library/](./002-media-library/) |
 | 003 | guidelines-refactor | Guidelines Refactor (TOA-358) | Implemented | @ashley | 2026-10-24 | 2026-10-24 | [.github/specs/003-refactor-guidelines/](./003-refactor-guidelines/) |
