@@ -93,26 +93,58 @@
 
 ---
 
-## G-Document Disposition Strategy
+## G-Document Disposition Strategy (T056)
 
-### High-Traffic G-Documents → Pointers (Type 1/2)
+### Complete G-to-N Mapping (Extracted from D4.b Evidence)
 
-**Policy:** Guidelines frequently referenced (>5 internal links or external mentions) get consolidated into N-documents with pointer files at original locations.
+**Source:** D4.b consolidation strategy; N-document reference list (N001–N029 mapping); validated per consolidation manifest.  
+**Purpose:** Enable T024–T027 pointer operations by documenting explicit G→N targets.
 
-| G-Document | Consolidated Into | Pointer Type | Rationale |
-| --- | --- | --- | --- |
-| `Contributing.md` | N017 (Git Workflow) | Type 1 | Central contribution hub; high traffic |
-| `ACCESSIBILITY.md` | N011 (Accessibility Standards) | Type 1 | Key reference; frequently updated |
-| `design-tokens/*` | N001 (Design Token Reference) | Type 2 | Consolidate all token files |
-| `responsive/` | N009 (Responsive Patterns) | Type 2 | Consolidate responsive guidelines |
-| `dark-mode-*.md` | N010 (Dark Mode) | Type 2 | Consolidate dark mode implementation |
-| `components/` (high-level) | N003 (Component Documentation) | Type 2 | Consolidate component guidance |
-| `pages/README.md` | N023 (README Guide) | Type 1 | Site navigation hub |
+| G-Document | N-Target | Pointer Type | Rationale | Status |
+| --- | --- | --- | --- | --- |
+| `design-tokens/*` | N001 (Design Token Reference) | Type 2 | Consolidate all token files into master reference | High-traffic |
+| `ACCESSIBILITY.md` | N011 (Accessibility Standards) | Type 1 | Key reference; WCAG 2.2 AAA compliance | High-traffic |
+| `Components/README.md` (high-level) | N003 (Component Documentation) | Type 2 | Consolidate component guidance into living reference | High-traffic |
+| `CSS guidelines` | N004 (CSS & Styling Guide) | Type 2 | Utility-first + BEM conventions | Consolidation |
+| `Media/*.md` | N005 (Media & Asset Optimization) | Type 2 | Image formats, CDN, asset pipeline | Consolidation |
+| `Architecture.md` | N006 (Architecture Overview) | Type 1 | System design, tech stack decisions | Consolidation |
+| `Publishing*.md` | N007 (Publishing Workflow & Boundaries) | Type 1 | Editorial workflow, manuscript status (D2 ref) | Consolidation |
+| `Content*.md` | N008 (Content Model & Structure) | Type 2 | Data structure for posts, pages, collections | Consolidation |
+| `responsive/*` | N009 (Responsive Design Patterns) | Type 2 | Mobile-first breakpoints, media queries | High-traffic |
+| `dark-mode-*.md` | N010 (Dark Mode Implementation) | Type 2 | Theme switching, CSS variables | High-traffic |
+| `ACCESSIBILITY*.md` (detailed) | N011 (Accessibility Standards) | Type 1 | WCAG 2.2 AAA implementation patterns | High-traffic |
+| `Performance*.md` | N012 (Performance Guidelines) | Type 2 | Core Web Vitals targets, optimization | Consolidation |
+| `State-management*.md` | N013 (State Management & Data Flow) | Type 1 | Data flow patterns, state libraries | Consolidation |
+| `Forms*.md` | N014 (Forms & Input Patterns) | Type 2 | Form validation, error handling, a11y | Consolidation |
+| `Navigation*.md` | N015 (Navigation & Information Architecture) | Type 1 | Site structure, menu patterns, breadcrumbs | Consolidation |
+| `Test*.md` | N016 (Testing Strategy & Coverage) | Type 1 | Unit, integration, E2E patterns | Consolidation |
+| `Contributing.md` | N017 (Version Control & Git Workflow) | Type 1 | Central contribution hub; high traffic | High-traffic |
+| `Backend*.md` | N018 (Backend Stack & Integration Patterns) | Type 1 | Vercel/Supabase/tRPC canonical (D6 ref) | Consolidation |
+| `Components/BookCard*` | N019 (Book Card Component Pattern) | Preserve | Reusable card component pattern | No pointer |
+| `Sections/Hero*` | N020 (Hero Section Pattern) | Preserve | Homepage hero layout; image optimization | No pointer |
+| `Sections/Proposition*` | N021 (Value Proposition Pattern) | Preserve | Feature/benefit messaging layout | No pointer |
+| `Patterns/JournalPreview*` | N022 (Journal Preview Pattern) | Preserve | Excerpt/preview cards for journal entries | No pointer |
+| `README.md` | N023 (README.md Guide) | Type 1 | Repository overview, setup, contribution links | High-traffic |
+| `Pages/BookHome*` | N024 (Book Home Page Guide) | Preserve | Site homepage structure, hero, CTA | No pointer |
+| `Pages/Sitemap*` | N025 (Sitemap & Information Architecture) | Preserve | Complete site structure map | No pointer |
+| `Reports/Accessibility*` | N026 (Accessibility Audit Report) | Preserve | WCAG 2.2 compliance status; remediation | No pointer |
+| `Reports/Performance*` | N027 (Performance Audit Report) | Preserve | Core Web Vitals baseline; optimization | No pointer |
+| `Reports/DarkMode*` | N028 (Dark Mode Implementation Status) | Preserve | Feature status, browser support matrix | No pointer |
+| `Reports/Deployment*` | N029 (Build & Deployment Pipeline) | Preserve | CI/CD setup, deployment checklist | No pointer |
 
-**Pointer Structure:**
-- **File:** `guidelines/{original-name}.md`
-- **Content:** Type 1/2 redirect per pointer-redirect-contract.md
-- **Example:** `Contributing.md` → pointer → `Brand-Voice-Contributing.md` (in N017)
+**Mapping Notes:**
+- **Type 1 (Relocation):** G-doc fully relocated to N-doc; pointer file created at original location
+- **Type 2 (Consolidation):** Multiple related G-docs consolidated into single N-doc; pointers created
+- **Preserve:** G-doc patterns/pages/reports remain; no consolidation or pointer needed
+- **High-traffic:** Frequently referenced (>5 internal links) → pointer creation prioritized
+- **Consolidation:** Supporting docs consolidated into N-docs per D4.b strategy
+
+### Pointer Structure
+
+**File:** `guidelines/{original-name}.md` (Type 1/2 pointer only)  
+**Content:** Redirect per pointer-redirect-contract.md  
+**Example:** `Contributing.md` → pointer → `Version-Control-Git-Workflow.md` (in N017)  
+**Chain depth:** 1-hop maximum (P cannot point to P) per D5
 
 ---
 
