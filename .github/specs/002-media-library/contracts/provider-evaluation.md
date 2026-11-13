@@ -25,7 +25,7 @@ Evaluate actual pricing, not free-tier assumptions. Quote from current
 documentation.
 
 | Criterion | What to Assess | Evidence Source | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Pricing Structure** | Free tier, per-asset, per-month, tiered by usage, or fixed | Current pricing page (dated) | Never assume free tier applies to production (FR-011) |
 | **Estimated Monthly Cost** | Based on 56 recovered assets, 40–50 high-res originals (Q2 resolution); data egress/API calls | Provider pricing calculator with real numbers | Document all assumptions (storage size, API calls, concurrent users) |
 | **Cost Scalability** | How cost changes with volume (linear, step function, unlimited) | Pricing documentation | Estimate cost at 2x, 5x, 10x current asset count |
@@ -37,7 +37,7 @@ documentation.
 Verify advertised limits against real-world constraints.
 
 | Criterion | What to Assess | Evidence Source | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Maximum Assets** | Number of files or storage quota | Documentation; API limits | Confirm limit covers 56 recovered assets + future growth |
 | **Maximum File Size** | Largest single asset upload | Documentation; API specification | Verify against print-quality assets (high-res TIFF, PDF) |
 | **Storage Quota** | Total storage GB/TB limit | Pricing page | Calculate: (56 assets × avg file size) + margin for variants |
@@ -49,7 +49,7 @@ Verify advertised limits against real-world constraints.
 Verify support for all required formats, especially print.
 
 | Criterion | What to Assess | Evidence Source | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Web Formats** | PNG, JPEG, WebP, SVG, GIF support | Supported formats list | Test upload and retrieval of each format |
 | **Print Formats** | PDF, TIFF, EPS support and quality preservation | Documentation and real-world testing | Critical per Q2 resolution (300 DPI, RGB/CMYK, PNG/PDF) |
 | **Format Validation** | Does provider validate or corrupt formats on upload? | Upload 3–5 test files per format; verify MD5 hash or visual inspection | Ensure no lossy compression or format conversion |
@@ -61,7 +61,7 @@ Verify support for all required formats, especially print.
 Evaluate visual editing and asset management UI/UX.
 
 | Criterion | What to Assess | Evidence Source | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Visual Editing Interface** | Web UI, native app, or API-only | Supported platforms; feature demo | Can content team edit/tag assets post-migration? |
 | **Editing Capabilities** | Crop, resize, colour adjust, watermark, filter | Visual editing UI documentation | Scope for typical publishing workflow (e.g., social media variants) |
 | **Tagging and Metadata** | Custom fields, searchability, bulk tagging | API documentation; UI walkthrough | How does team organize and find recovered assets? |
@@ -74,7 +74,7 @@ Evaluate visual editing and asset management UI/UX.
 Assess programmatic access for automation and integration.
 
 | Criterion | What to Assess | Evidence Source | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **API Availability** | Is there a documented API? | API documentation URL | Required for automated recovery and reference migration (TOA-285) |
 | **API Endpoints** | Upload, download, list, delete, update metadata | API specification | Confirm all operations needed for recovery workflow |
 | **Rate Limits** | Requests per second, per hour; quota for trial/free tier | API documentation | Can we batch-migrate 56 assets without hitting limits? |
@@ -87,7 +87,7 @@ Assess programmatic access for automation and integration.
 Verify provider support for print workflows (300 DPI, RGB/CMYK, PNG/PDF per Q2).
 
 | Criterion | What to Assess | Evidence Source | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **High-Resolution Support** | Can provider store and deliver files at 300+ DPI? | Documentation; test upload of 300 DPI TIFF | Print quality depends on full-resolution delivery |
 | **Colour Space Preservation** | RGB and CMYK colour spaces preserved during storage/delivery? | Technical documentation; colour profile test | Print requires storage and retrieval of colour profiles; RGB-to-CMYK conversion fidelity depends on print profile used |
 | **Format Compatibility** | PDF and TIFF delivery without quality loss? | Technical documentation; test delivery | Print PDF must retain embedded fonts and vector graphics |
@@ -99,7 +99,7 @@ Verify provider support for print workflows (300 DPI, RGB/CMYK, PNG/PDF per Q2).
 Estimate effort to integrate provider with website build and publish pipeline.
 
 | Criterion | What to Assess | Evidence Source | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Build System Integration** | Does provider integrate with Vite, Netlify, or standard build tools? | Documentation; third-party integrations list | Relevant for TOA-285 (automated reference migration) |
 | **Plugin/SDK Availability** | Official SDKs for JavaScript, Python, etc.? | GitHub repos; npm/PyPI packages | Reduces custom integration work |
 | **Authentication Complexity** | How complex is auth setup for automated workflows? | Documentation; API examples | Service account setup, token management, etc. |
@@ -181,7 +181,7 @@ Create provider comparison matrix (see below) with:
 **Evaluator**: [Name]
 
 | Criterion | Assessment | Evidence / Finding | Risk Flag |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Pricing Model** | Free/Paid; $ per month at scale | [Finding] | Red/Yellow/Green |
 | **Asset Limit** | [Number] assets or [Size] GB | [Finding] | — |
 | **Max File Size** | [Size] per file | [Finding] | — |
@@ -206,7 +206,7 @@ Create provider comparison matrix (see below) with:
 Create one row per candidate provider:
 
 | Provider | Cost/Month (56 assets) | Asset Limit | Print Support | API | Integration Effort | Recommendation | Risk Flags |
-|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | GitHub + Netlify | $[Cost] | $[Limit] | ✓/✗ | ✓/✗ | Low/Med/High | [Decision] | [Flags] |
 | Cloudinary | $[Cost] | $[Limit] | ✓/✗ | ✓/✗ | Low/Med/High | [Decision] | [Flags] |
 | [Other] | $[Cost] | $[Limit] | ✓/✗ | ✓/✗ | Low/Med/High | [Decision] | [Flags] |

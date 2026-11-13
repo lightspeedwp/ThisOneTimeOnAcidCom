@@ -3,7 +3,7 @@
 All checks are Not run.
 
 | Check | Evidence required | Authority |
-|---|---|---|
+| --- | --- | --- |
 | Source parity | Re-read 005, 004, current main and Make snapshot | Read-only |
 | Canonical containment | Resolve root, ancestors, symlinks and artefact links | Required before later writes |
 | Identifier traceability | Verify every RA origin and 004 source-qualified reference | Documentation review |

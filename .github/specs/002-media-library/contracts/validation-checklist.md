@@ -32,7 +32,7 @@ Verify recovered assets match originals in quality, format, and visual fidelity.
 **Test Cases**:
 
 | Asset Type | Comparison Method | Pass Criteria | Severity if Fail |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **SVG Vector Logo** | Original Figma file vs. Figma Make recovered SVG | Paths intact, no distortion, colour/stroke preserved | Critical |
 | **PNG Web Export** | Website screenshot vs. Recovered PNG | Pixel dimensions match, no visual degradation, colour accuracy | High |
 | **Print-Quality TIFF** | Original archive scan vs. Recovered TIFF | Resolution ≥300 DPI, colour space (RGB/CMYK) preserved, no compression artefacts | Critical if print MVP |
@@ -76,7 +76,7 @@ to valid recovered asset IDs.
 **Test Cases**:
 
 | Context | Old Reference | Recovery Action | Validation Pass Criterion |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Website HTML** | `<img src="/assets/old-hero.png">` | Map to new asset ID (e.g. `asset*figma*hero_001`) | New reference exists and asset is recovered |
 | **Figma File** | Placed image on design page | Replace with recovered asset from catalogue | Reference resolves to recovered asset |
 | **Markdown Docs** | `![Alt](../assets/diagram.png)` | Map to catalogue asset ID | Reference is valid in final catalogue |
@@ -117,7 +117,7 @@ unknown/unrecoverable (non-invention rule per FR-008).
 **Test Cases**:
 
 | Field | Required? | Pass Criteria | Fail Example |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `asset*id` | **Yes** | Non-empty, unique, valid format | `asset*id` is null or duplicated |
 | `provenance` | **Yes** | Explicit source (never blank); mark "unknown" if unverifiable | `provenance` says "unknown" but no reasoning in recovery_notes |
 | `format` | **Yes** | ≥1 format; valid enum (PNG, SVG, etc.) | `format` is empty array or invalid |
@@ -159,7 +159,7 @@ Verify file format integrity and compatibility.
 **Test Cases**:
 
 | Format | Validation Check | Pass Criterion | Severity |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **SVG** | Parse XML; validate viewBox, path elements; check for embedded fonts | Parses without error; viewBox present; fonts embedded or accessible | High |
 | **PNG** | Verify PNG header; check dimensions; validate colour space (RGB/Indexed) | File opens in image viewer; dimensions ≥200×200 px; colour space matches metadata | High |
 | **PDF** | Verify PDF header; check embedded fonts and images; validate page count | File opens in PDF reader; fonts subset or embedded; images render | Critical if print |
