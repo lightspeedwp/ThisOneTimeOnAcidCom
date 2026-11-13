@@ -12,7 +12,7 @@ created: "2026-10-25"
 
 **Status**: Phase 2 Implementation — **UNBLOCKED** (2026-10-25). All owner decisions D0–D8 RESOLVED; implementation guidance provided (requirements.md § D4.a, D4.b, D5.a, D5.b, D5.c, D5.d, D6). Pre-implementation verification (T001–T004) required before task execution.
 
-**Total Tasks**: 43 (across Phases 2 & 3)
+**Total Tasks**: 47 (across Phases 2–7; T001–T069 original + T070–T073 remediation)
 
 ---
 
@@ -559,7 +559,7 @@ All tasks must complete with documented evidence:
 
 ### Critical Identity Contradiction
 
-- [x] **T055** [HIGH] Remediate identity contradiction: Update all guidelines references from "Ash Shaw Makeup Portfolio" to site's actual identity per D1 (Balanced Hybrid voice for "This One Time On Acid" memoir/creative-life-guide). Affects 66+ files including README.md header, Logo.md aria-label, component documentation. Search for: `Ash Shaw Makeup`, `makeup portfolio`, `makeup artist` references in guidelines/ and remove/replace with memoir/creative-life-guide identity context. Commit: `refactor(003-identity): Align guidelines with established site identity per D1 decision`
+- [x] **T055b** [HIGH] Remediate identity contradiction: Update all guidelines references from "Ash Shaw Makeup Portfolio" to site's actual identity per D1 (Balanced Hybrid voice for "This One Time On Acid" memoir/creative-life-guide). Affects 66+ files including README.md header, Logo.md aria-label, component documentation. Search for: `Ash Shaw Makeup`, `makeup portfolio`, `makeup artist` references in guidelines/ and remove/replace with memoir/creative-life-guide identity context. Commit: `refactor(003-identity): Align guidelines with established site identity per D1 decision`
   - Files affected: README.md, Logo.md, PortfolioCard.md, report-creation-guidelines.md, and ~63 others
   - Priority: Must complete before PR merge to ensure consistent brand messaging
   - Evidence: D1 decision recorded in checklists/requirements.md; identity contradiction identified in convergence assessment (2026-10-30)
@@ -612,5 +612,127 @@ All tasks must complete with documented evidence:
 
 ---
 
-*Generated: 2026-10-25 (Phase 6 Convergence)*  
+## Phase 7: Content Audit & CodeRabbit Remediation 📋
+
+**Purpose**: Address ashshaw.makeup/portfolio branding references in guidelines and resolve unaddressed CodeRabbit feedback from PR #588. Coordination point with TOA-367 (docs/ folder cleanup).
+
+**Status**: Audit COMPLETE (2026-11-12). 4 remediation tasks identified. T070–T073 can execute in parallel; T070 is highest priority (largest scope).
+
+**Context**: PR #591 (clarifications) and PR #588 (analysis) both merged to main on 2026-11-11. CodeRabbit flagged moderate-risk issues on #588 that were merged unaddressed. This phase remediates those findings alongside a content audit of the guidelines/ folder.
+
+### Content Remediation
+
+- [ ] **T070** [HIGH] Audit & remediate ashshaw.makeup and portfolio branding references in `guidelines/`
+  - **Scope**: Full `guidelines/` directory (68+ files affected)
+  - **Category A — Remove ashshaw.makeup domain/email** (3 files, 10 refs):
+    - `components/Footer.md` (lines 209, 213, 320, 321, 435): Remove `ashley@ashshaw.makeup` email and mailto links
+    - `components/SocialLinks.md` (lines 53, 209, 416, 473): Remove `mailto:ashley@ashshaw.makeup` references
+    - `components/Breadcrumbs.md` (line 383): Replace `https://ashshaw.makeup` in JSON-LD schema
+  - **Category B — Remove ashshawmakeup social handles** (1 file, 10 refs):
+    - `components/SocialLinks.md` (lines 205–207, 278, 286, 392–404, 449–461): Replace `instagram.com/ashshawmakeup`, `facebook.com/ashshawmakeup`, `tiktok.com/@ashshawmakeup`, `twitter.com/ashshawmakeup` with placeholder social config
+  - **Category C — Generalise makeup identity language** (40+ files, 120+ refs):
+    - Replace "Makeup Artist" → "Creative Artist" or site-appropriate identity
+    - Replace "Makeup that shines with colour, energy, and connection" → site-appropriate tagline
+    - Replace "Why I Do Makeup" → "Why I Create" or similar
+    - Replace "Festival Makeup" / "Wedding Makeup" / "UV Makeup" → creative content categories
+    - Replace "ash-shaw-makeup-portfolio/" → project directory name
+    - Replace "This One Time On Acid Makeup" → "This One Time On Acid"
+    - Key files: HeroSection.md, WhySection.md, Footer.md, ScrollDownArrow.md, ThreeColumnLayout.md, brand-voice-messaging.md, component-dark-mode.md, mobile/*.md, Guidelines.md, pwa-implementation.md
+  - **Category D — Assess "portfolio" term usage** (50+ files, 150+ refs):
+    - D1 (generalise): Descriptive uses — "portfolio work", "portfolio updates", "portfolio site" → "creative work", "content updates", "site"
+    - D2 (preserve): Code identifiers — `portfolioEntries`, `PortfolioCard`, `/portfolio` route — preserve if codebase uses these terms; note for future codebase alignment
+  - **Coordination**: Apply same generalisation patterns as TOA-367 (docs/ folder); share findings
+  - **Acceptance**: Zero `ashley@ashshaw.makeup` or `ashshaw.makeup` domain refs remain; zero `ashshawmakeup` social handles remain; "makeup" identity language generalised to match site brief (memoir/creative-life-guide); "portfolio" terms assessed with clear preserve/generalise disposition
+
+- [ ] **T071** [MEDIUM] Fix specification-validation markdown lint errors (MD060)
+  - **Scope**: 3 files in `guidelines/`, 24 MD060 errors total
+  - **File 1**: `guidelines/_archive/wordpress-block-patterns.md` (line 83)
+    - Change `|-----------------|----------------|-------|` to `| --- | --- | --- |`
+  - **File 2**: `guidelines/content-type-colours.md` (line 27)
+    - Change `|---|---|---|---|---|---|` to `| --- | --- | --- | --- | --- | --- |`
+  - **File 3**: `guidelines/nova-news-dark-mode.md` (line 20)
+    - Change `|---------|-----------|-----------|` to `| --- | --- | --- |`
+  - **Verification**: `npx markdownlint-cli2 <file>` reports zero errors for each file
+  - **Acceptance**: All 3 files pass markdownlint-cli2 with zero MD060 errors
+
+### Specification Integrity
+
+- [ ] **T072** [MEDIUM] Reconcile task sequencing and execution order contradictions in `tasks.md`
+  - **Scope**: `.github/specs/003-refactor-guidelines/tasks.md`
+  - **Issue**: Three contradictory execution models coexist:
+    1. Header says "sequential execution order" (T001–T043)
+    2. `[P]` markers throughout indicate parallel-eligible tasks
+    3. "FROZEN EXECUTION ORDER" block (line 37) is strict sequential
+    4. "Parallel Opportunities" section (line 389) lists parallel possibilities
+    5. "Critical Path" (line 377) allows T028–T032 after T001–T004, skipping S-docs
+  - **Action**:
+    - [ ] Audit each task dependency statement for accuracy
+    - [ ] Clarify header: "sequential with parallel opportunities" or similar
+    - [ ] Ensure FROZEN EXECUTION ORDER, Critical Path, and Parallel Opportunities sections are internally consistent
+    - [ ] Add a dependency graph or clarify that `[P]` tasks run in parallel only within their phase gate
+    - [ ] Document that FROZEN ORDER is the canonical authority; other sections are supplementary guidance
+  - **Acceptance**: No contradictions between sequential/parallel markers; single canonical execution order documented; task ordering is internally consistent
+
+- [ ] **T073** [MEDIUM] Verify and align status claims and approval gates
+  - **Scope**: `spec.md` (status field), `tasks.md` (T043 completion claim), `checklists/requirements.md` (approval evidence)
+  - **Issue 1**: T043 is marked `[x]` COMPLETE with "Ready for review and merge" and "All 10 verification requirements PASS" — but prerequisite tasks T037, T038–T040, T041–T042, T046–T048, T050–T051, T055–T069 remain open/pending
+  - **Issue 2**: T043 completion claims must be traceable to actual evidence
+  - **Action**:
+    - [ ] Review T043 completion evidence in `checklists/requirements.md` § Final Sign-Off
+    - [ ] Verify each of the 10 claimed "PASS" items has supporting evidence links
+    - [ ] If evidence is missing, revert T043 to unchecked `[ ]` and document what's outstanding
+    - [ ] Ensure spec.md status field (`phase-2-in-progress`) accurately reflects actual implementation state
+    - [ ] Add evidence links where claims exist without traceability
+  - **Acceptance**: Every status claim in spec.md and tasks.md is backed by traceable evidence; T043 status accurately reflects prerequisite completion; no misleading readiness signals
+
+### Phase 7 Dependencies
+
+```text
+T074 (Conflict resolution — prerequisite for guideline edits)
+  ↓
+T070 (Content remediation — HIGH priority, largest scope)  [P]
+T071 (Lint fixes — independent, parallel)                  [P]
+T072 (Task sequencing — independent, parallel)             [P]
+T073 (Status verification — independent, parallel)         [P]
+  ↓
+T001–T004 complete, T074 resolved, and T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
+```
+
+### Coordination with TOA-367
+
+| Aspect | Spec 003 (T070) | TOA-367 |
+| --- | --- | --- |
+| **Directory** | `guidelines/` | `docs/` |
+| **Scope** | 68+ files with branding refs | 133 files under docs/ |
+| **Shared patterns** | `ashley@ashshaw.makeup` → remove; `ashshaw.makeup` → remove; "Makeup Artist" → generalise; "portfolio" → assess per context |
+| **Consistency rules** | Portfolio → Content/Gallery (context-dependent); Makeup tips → Creative content; Portfolio updates → Content updates |
+
+---
+
+*Generated: 2026-10-25 (Phase 6 Convergence); Updated: 2026-11-12 (Phase 8 Convergence)*  
 *Specification**: [spec.md](./spec.md) | **Branch**: `docs/spec-003-guidelines-reconcile` | **Checklist**: [checklists/requirements.md](./checklists/requirements.md)
+
+---
+
+## Phase 8: Convergence (Merge Conflict & Data Integrity) 📊
+
+**Purpose**: Address merge conflict markers in guideline files and duplicate task ID discovered during convergence assessment (2026-11-12).
+
+**Status**: 2 actionable findings (1 CRITICAL, 1 MEDIUM). T074 must resolve before any further guideline edits.
+
+### Critical Blockers
+
+- [x] **T074** [CRITICAL] Resolve merge conflict markers in 12 guideline files per Constitution II, spec preservation rules (contradicts) — **COMPLETE** (all 12 files resolved: pointer version retained for each; `find guidelines -name "*.md" -exec grep -l "<<<<<<" {} \;` returns zero files)
+  - **Files**: `guidelines/data-models.md`, `guidelines/dark-mode-implementation.md`, `guidelines/content-type-colours.md`, `guidelines/_archive/wordpress-migration-guide.md`, `guidelines/_archive/wordpress-preset-system.md`, `guidelines/_archive/wordpress-block-patterns.md`, `guidelines/nova-news-dark-mode.md`, `guidelines/image-optimization.md`, `guidelines/performance-optimization.md`, `guidelines/ARCHITECTURE.md`, `guidelines/css-architecture.md`, `guidelines/pwa-implementation.md`
+  - **Origin**: T049 pointer operations (commits ed06602, 2c3b0f5, 38f1962) introduced merge conflict markers that were never resolved
+  - **Action**: For each file, inspect both sides of the conflict marker, choose the correct resolution (typically the pointer version for archival files, the content version for active files), remove all `<<<<<<<`, `=======`, `>>>>>>>` markers
+  - **Acceptance**: `find guidelines -name "*.md" -exec grep -l "<<<<<<" {} \;` returns zero files
+
+### Data Integrity
+
+- [x] **T075** [MEDIUM] Fix duplicate T055 task ID in tasks.md per internal consistency (contradicts) — **COMPLETE** (second T055 already renumbered to T055b at line 562; T055 canonical unchecked task at line 549 is unique)
+  - **Location**: `.github/specs/003-refactor-guidelines/tasks.md` Phase 5
+  - **Issue**: Two tasks shared ID T055 — line 549 (execution order violation, unchecked) and line 562 (identity contradiction, checked)
+  - **Action**: Renumber the second T055 (identity contradiction) to T055b or the next available sequential ID; update any cross-references
+  - **Resolution**: Second T055 (identity contradiction, checked) renumbered to T055b; range references T055–T064 remain valid (T055 is the canonical unchecked task, T055b is a variant within the range)
+  - **Acceptance**: `grep -cP '^\- \[[ x]\] \*\*T055\*\*' tasks.md` returns exactly 1 unique task definition (excludes T055b and cross-references)
