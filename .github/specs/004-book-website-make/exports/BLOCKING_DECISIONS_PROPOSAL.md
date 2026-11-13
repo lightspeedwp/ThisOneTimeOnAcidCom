@@ -92,6 +92,8 @@ This document records the final decisions for all 7 blocking decisions, approved
 
 ## Decision 5: Manuscript Publication Readiness
 
+> **Revised 2026-11-13**: Decision 5 revised by Ash on 2026-11-13: **early release**. Build all reader screens and functionality now; publish chapters and addendums one at a time as Ash approves each. The website edition is shorter than the printed book and will be offered for sale via the website at a later stage. Full-manuscript approval no longer gates the reader screens; each chapter still needs Ash's approval before it is published. Ash is moving the root `content/` folder to `src/content/`. Reader-access work (historically Spec 004 Prompts 3A–3C) is now owned by [Spec 005 — reader access](../../005-reader-access/spec.md), which defines its own flow, stages and dependencies. The original record below is kept for history.
+
 **Question**: Is the manuscript approved and available for verified reader access?
 
 ### **DECISION: OPTION C** ❌ NOT APPROVED (In Development)

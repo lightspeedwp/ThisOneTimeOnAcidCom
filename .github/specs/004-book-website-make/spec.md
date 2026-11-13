@@ -9,8 +9,8 @@
 - Exact editable Make revision/source snapshot and parity evidence (not confirmed)
 - Available credits and approved generation scope (not confirmed)
 - Explicit authority to resume each paused implementation stage (not given)
-- Manuscript approval (Decision 5 — not approved); Prompts 3A–3C stay deferred until it is approved, as recorded in [BLOCKING_DECISIONS_PROPOSAL.md](./exports/BLOCKING_DECISIONS_PROPOSAL.md)
-- Stage ID mapping for Prompts 3A–3C against the master execution contract (unresolved — see Blocking Decisions below)
+- Reader-access work (Prompts 3A–3C) has moved to [Spec 005](../005-reader-access/spec.md) and is no longer executed from this specification (see Blocking Decisions below)
+- Chapter publication: each chapter or addendum needs Ash's approval before it is published (Decision 5, revised 2026-11-13)
 
 **Input**: Complete staged Figma Make prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval.
 
@@ -246,17 +246,17 @@ Once approved, the next phase will include:
 | 2 | Recovery lifetime eligibility | Option A: session refresh on recovery; absolute expiry 30 days after initial verification | Decision resolved for Prompt 3B (execution deferred — manuscript gate) |
 | 3 | Code expiry start time | Option A: From code generation | Decision resolved for Prompts 3A, 3C (execution deferred — manuscript gate) |
 | 4 | Email service provider | Hybrid: SendGrid (transactional) + Brevo (newsletter) | Decision resolved for Prompt 3A (execution deferred — manuscript gate) |
-| 5 | Manuscript publication readiness | ❌ Not yet approved (approval date to be confirmed by Ash) | Blocks execution of Prompts 3A–3C; Prompt 3A may use placeholder messaging only |
+| 5 | Manuscript publication readiness | ✅ Revised 2026-11-13: early release — build reader screens now; chapters and addendums published individually once Ash approves each | No longer gates the reader screens; per-chapter approval gates publication |
 | 6 | Newsletter destination | Brevo (external signup link) | Decision resolved for Prompt 3A (execution deferred — manuscript gate) |
 | 7 | Route enforcement verification | Option A: noindex meta tags + sitemap exclusion; no robots.txt Disallow | Decision resolved for Prompt 1 |
 
 **Implications**:
 
 - Prompts 1, 2A, 2B have no outstanding blocking decisions; execution still requires the status gates listed at the top of this document
-- ❌ Prompts 3A, 3B, 3C are **not ready**: they remain deferred until manuscript approval, and their stage IDs are unresolved
-- ⚠️ Prompt 3A success copy will need refresh once the manuscript is approved (approval date to be confirmed by Ash)
+- ➡️ Prompts 3A, 3B, 3C (reader access, recovery, errors) are **handed over to Spec 005**. Decisions 1–6 recorded here are inputs to Spec 005, which owns their execution, stages and dependencies
+- Decision 5 revised by Ash on 2026-11-13: **early release**. Build all reader screens and functionality now; publish chapters and addendums one at a time as Ash approves each. The website edition is shorter than the printed book and will be offered for sale via the website at a later stage. Full-manuscript approval no longer gates the reader screens; each chapter still needs Ash's approval before it is published. Ash is moving the root `content/` folder to `src/content/`.
 
-**Stage ID conflict (unresolved)**:
+**Stage ID conflict (resolved 2026-11-13)**:
 
 | Stage ID | This specification (Spec 004) | Master execution contract ([01](./references/01-book-website-specification.md) §8–§10) |
 | --- | --- | --- |
@@ -264,7 +264,7 @@ Once approved, the next phase will include:
 | 3B | Recovery flows | Podcast routing and archive/detail experience |
 | 3C | Error states | Genuine accessible playback |
 
-The two documents use the same IDs for different work. Ash must confirm a mapping (for example, renumbering the Spec 004 reader-access prompts or recording them as a separate stage sequence with their own dependencies) before any of Prompts 3A–3C is marked ready.
+The two documents use the same IDs for different work. Resolution: stage IDs 3A–3C belong to the master execution contract (podcast work). Reader-access work (historically Spec 004 Prompts 3A–3C) is now owned by [Spec 005 — reader access](../005-reader-access/spec.md), which defines its own flow, stages and dependencies. The Spec 004 identifiers are kept unchanged as historical references (Spec 005 RA-011).
 
 ---
 

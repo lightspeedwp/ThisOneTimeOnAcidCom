@@ -113,6 +113,8 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 
 **Decision**: ❌ Option C (NOT APPROVED) — Manuscript in development. 27 January 2027 is an unapproved launch intention ([reference 03](./references/03-author-decisions-launch-scope.md)); the manuscript approval date is to be confirmed by Ash
 
+**Revised decision (2026-11-13)**: Decision 5 revised by Ash on 2026-11-13: **early release**. Build all reader screens and functionality now; publish chapters and addendums one at a time as Ash approves each. The website edition is shorter than the printed book and will be offered for sale via the website at a later stage. Full-manuscript approval no longer gates the reader screens; each chapter still needs Ash's approval before it is published. Ash is moving the root `content/` folder to `src/content/`.
+
 **Impact on Prompt 3A**: Reader access copy must reference actual manuscript content (e.g., "Access all 12 chapters" vs. "Access selected chapters"). Content delivery mechanism and availability timeframe depend on manuscript readiness status.
 
 ---
@@ -176,9 +178,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 - ✅ Prompt 1 (Navigation Exposure) — Decision 7 resolved; contracts updated to the approved enforcement method
 - ✅ Prompt 2A (Design System Baseline) — No blocking decisions
 - ✅ Prompt 2B (Navigation Design) — No blocking decisions
-- ⏸️ Prompt 3A (Reader Access Copy) — Decisions 3, 4 and 6 applied; deferred until manuscript approval (Decision 5). Placeholder messaging only in the meantime
-- ⏸️ Prompt 3B (Recovery Flows) — Decisions 1 and 2 applied to the contract; deferred until manuscript approval
-- ⏸️ Prompt 3C (Error States) — Decision 3 applied to the contract; deferred until manuscript approval
+- ➡️ Prompts 3A, 3B, 3C (reader access, recovery, errors) — decisions applied; handed over to [Spec 005](../005-reader-access/spec.md), which owns their execution and dependencies
 
 ---
 
@@ -197,8 +197,8 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 **Next Steps**:
 
 1. Prompts 1, 2A and 2B have no outstanding blocking decisions; execution still requires the authorisation gates recorded in [spec.md](./spec.md)
-2. ⏸️ Prompts 3A, 3B and 3C remain deferred until the manuscript is approved (Decision 5)
-3. Prompt 3A may use placeholder messaging for manuscript content in the meantime; final copy follows manuscript approval
+2. ➡️ Reader-access work (Prompts 3A–3C) continues in [Spec 005](../005-reader-access/spec.md)
+3. Decision 5 revised 2026-11-13: early release — reader screens are built now and chapters are published individually once Ash approves each
 
 ---
 

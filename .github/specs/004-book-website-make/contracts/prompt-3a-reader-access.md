@@ -1,6 +1,6 @@
 # Figma Make Prompt 3A: Reader Access Copy & Forms
 
-**Status**: ⏸️ DEFERRED — Decisions 3, 4 and 6 approved and Decision 5 decided (manuscript not yet approved). Placeholder messaging only; final execution waits for manuscript approval. This status does not imply manuscript publication is approved.  
+**Status**: ➡️ HANDED OVER — reader-access work now continues in [Spec 005](../../005-reader-access/spec.md), which owns its flow, stages and dependencies. Decision 5 was revised on 2026-11-13 (early release; chapters published individually once Ash approves each), so manuscript approval no longer gates these screens. This contract is kept as a source record for Spec 005.
 **Priority**: P1  
 **Prompt ID**: 3A  
 **Type**: reader-access
@@ -13,28 +13,41 @@
 
 Generate exact email verification copy, form wording, error messages, and newsletter CTA specifications—separate newsletter signup from reading verification per approved decision.
 
-### Email Copy (⏳ PENDING APPROVAL — no approved verbatim source)
+### Email Copy (✅ APPROVED by Ash, 2026-11-13)
 
-No approved source currently contains the verbatim email subject and body below. [06-website-reading-prd.md](../references/06-website-reading-prd.md) (v1.1.1) defines the access policy (single-use, ten-minute codes) but not this wording, and [05-design-reader-decision-register.md](../references/05-design-reader-decision-register.md) approves only the "Send a reading code" action wording. Treat the subject and body as **draft copy pending Ash's approval**; CR-3A.1 and task T022 cannot pass until an approved source containing the exact wording is recorded here.
+Ash approved this wording on 2026-11-13 by choosing the edited draft. It replaces the earlier draft, which said "sent you a 10-minute access code" and was signed "The ThisOneTimeOnAcidCom Team". The ten-minute expiry follows Decision 3 (timed from when the code is generated and sent). This approval is the source for CR-3A.1 and task T022; Spec 005 takes it forward.
 
 **Email Subject**:
-"Your reading code for ThisOneTimeOnAcidCom"
+
+```text
+Your reading code
+```
 
 **Email Body**:
-"Hi [Reader],
 
-We've sent you a 10-minute access code below. Enter it on the website to start reading.
+```text
+Hi,
 
-**Your Code: XXXXXX**
+Here's your reading code for This One Time On Acid:
 
-This code expires 10 minutes after it was generated.
+    [CODE]
 
-Questions? Reply to this email.
+Enter it on the site to start reading.
+It works once and expires 10 minutes after it was sent.
 
-— The ThisOneTimeOnAcidCom Team"
+Didn't ask for this? You can ignore this email.
+
+— Ash
+```
 
 **Footer**:
-"You received this because you requested reading access. [Newsletter Signup Link - see below]"
+
+```text
+You're getting this because you asked for reading access. Want updates?
+[Join the newsletter]
+```
+
+`[CODE]` is the six-digit single-use code. `[Join the newsletter]` links to the Brevo sign-up page (Decision 6) and is optional; requesting a code never subscribes the reader.
 
 ### Form Specification
 
@@ -81,7 +94,7 @@ Questions? Reply to this email.
 
 ### Acceptance Criteria
 
-⏳ **CR-3A.1**: Email copy matches an approved source exactly (no modifications) — pending: no approved verbatim source recorded yet
+✅ **CR-3A.1**: Email copy matches the wording Ash approved on 2026-11-13 (Email Copy section above) exactly
 
 ✅ **CR-3A.2**: All form states designed (default, focused, error, loading, success)
 

@@ -1,6 +1,6 @@
 # Figma Make Prompt 3A: Reader Access Copy & Forms — Execution Guide
 
-**Status**: ⏸️ DEFERRED — Decisions 3, 4 and 6 approved; Decision 5 decided (manuscript not yet approved). Placeholder messaging only until manuscript approval and the execution gates in [spec.md](../spec.md)  
+**Status**: ➡️ HANDED OVER — reader-access work now continues in [Spec 005](../../005-reader-access/spec.md), which owns its flow, stages and dependencies. Decision 5 was revised on 2026-11-13 (early release; chapters published individually once Ash approves each), so manuscript approval no longer gates these screens. This contract is kept as a source record for Spec 005.
 **Scope**: Email verification copy, form wording, error messages, newsletter CTA  
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Dependencies**: Prompt 2A (Design System Baseline) — Uses exported typography and colors
@@ -25,39 +25,44 @@ Design exact email verification copy, form wording, error messages, and newslett
 
 ## The Work
 
-### 1. Email Copy (Approved Source: 06-website-reading-prd.md v1.1.1)
+### 1. Email Copy (Approved by Ash, 2026-11-13 — see [prompt-3a-reader-access.md](./prompt-3a-reader-access.md))
 
 #### Email Subject
+
 ```text
-Your reading code for ThisOneTimeOnAcidCom
-```text
+Your reading code
+```
 
 #### Email Body
+
 ```text
-Hi [Reader],
+Hi,
 
-We've sent you a 10-minute access code below. Enter it on the website to start reading.
+Here's your reading code for This One Time On Acid:
 
-**Your Code: XXXXXX**
+    [CODE]
 
-This code expires [based on Decision 3: from generation / receipt / page load].
+Enter it on the site to start reading.
+It works once and expires 10 minutes after it was sent.
 
-Questions? Reply to this email.
+Didn't ask for this? You can ignore this email.
 
-— The ThisOneTimeOnAcidCom Team
-```text
+— Ash
+```
 
 #### Email Footer
+
 ```text
-You received this because you requested reading access. [Newsletter Signup Link - see below]
-```text
+You're getting this because you asked for reading access. Want updates?
+[Join the newsletter]
+```
 
 **Key Details**:
+
 - All copy is exact—no modifications without approval
-- [Reader] placeholder for recipient's name/email
-- Code is 6 characters (uppercase)
-- Expiry timing depends on Decision 3 (TBD: generation time, receipt time, or page load time)
-- Footer links to newsletter section (NOT mixing with verification)
+- `[CODE]` is the six-digit single-use code
+- Expiry runs 10 minutes from when the code is generated and sent (Decision 3, Option A)
+- Footer links to the Brevo newsletter sign-up (Decision 6) and never mixes with verification
 
 ### 2. Form Specification
 
@@ -185,8 +190,8 @@ You received this because you requested reading access. [Newsletter Signup Link 
 
 All of these must be true when complete:
 
-✅ **CR-3A.1**: Email copy matches approved source exactly (no modifications)
-- Subject line verbatim: "Your reading code for ThisOneTimeOnAcidCom"
+✅ **CR-3A.1**: Email copy matches the wording Ash approved on 2026-11-13 exactly (no modifications)
+- Subject line verbatim: "Your reading code"
 - Body copy exactly as specified (including placeholder format)
 - Footer copy exactly as specified
 
@@ -240,21 +245,21 @@ All of these must be true when complete:
    - Space: 16px below header
 
 5. Create email body:
-   - Greeting: "Hi [Reader],"
-   - Body text: "We've sent you a 10-minute access code below. Enter it on the website to start reading."
+   - Greeting: "Hi,"
+   - Body text: "Here's your reading code for This One Time On Acid:"
    - Space: 16px
-   - Code display (highlighted/emphasized):
-     - "**Your Code: XXXXXX**"
+   - Code display (highlighted/emphasized): "[CODE]"
      - Apply accent background or bold styling
      - Space: 16px
-   - Expiry text: "This code expires [based on Decision 3: from generation / receipt / page load]."
+   - Instruction: "Enter it on the site to start reading."
+   - Expiry text: "It works once and expires 10 minutes after it was sent."
    - Space: 16px
-   - Support text: "Questions? Reply to this email."
+   - Safety text: "Didn't ask for this? You can ignore this email."
    - Space: 16px
-   - Closing: "— The ThisOneTimeOnAcidCom Team"
+   - Closing: "— Ash"
 
 6. Create email footer:
-   - Footer text: "You received this because you requested reading access. [Newsletter Signup Link]"
+   - Footer text: "You're getting this because you asked for reading access. Want updates? [Join the newsletter]"
    - Font: Inter, 12px, neutral-dark color
    - Link color: Accent color
 

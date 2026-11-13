@@ -12,7 +12,7 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 1. **Approval Prerequisites** — What must happen before Prompts can execute
 2. **Unblocked Prompts** — No outstanding blocking decisions (Prompts 1, 2A, 2B); execution still requires the gates in [spec.md](./spec.md)
-3. **Deferred Prompts** — Decisions applied but deferred until manuscript approval (Prompts 3A, 3B, 3C)
+3. **Handed-over Prompts** — Prompts 3A, 3B, 3C (reader access) now continue in [Spec 005](../005-reader-access/spec.md). Decision 5 revised 2026-11-13: early release, with chapters published individually once approved
 4. **Validation Scenarios** — Runnable checks to confirm feature works
 5. **Decision Routing** — Where to go to resolve blocking decisions
 
@@ -207,7 +207,9 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 ---
 
-## Deferred Prompts (Decisions Applied; Awaiting Manuscript Approval)
+## Handed-over Prompts (Reader Access — now in Spec 005)
+
+> Reader-access work (historically Spec 004 Prompts 3A–3C) is now owned by [Spec 005 — reader access](../005-reader-access/spec.md), which defines its own flow, stages and dependencies. The notes below are kept for history.
 
 ### Prompt 3B: Recovery Flows ⏸️ DEFERRED
 

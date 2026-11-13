@@ -1,6 +1,6 @@
 # Figma Make Prompt 3B: Recovery Flows
 
-**Status**: ⏸️ DEFERRED — Decisions 1 and 2 approved and applied below; execution waits for manuscript approval (Decision 5) and the execution gates in [spec.md](../spec.md)  
+**Status**: ➡️ HANDED OVER — reader-access work now continues in [Spec 005](../../005-reader-access/spec.md), which owns its flow, stages and dependencies. Decision 5 was revised on 2026-11-13 (early release; chapters published individually once Ash approves each), so manuscript approval no longer gates these screens. This contract is kept as a source record for Spec 005.
 **Priority**: P2  
 **Prompt ID**: 3B  
 **Type**: recovery-flows

@@ -1,6 +1,6 @@
 # Figma Make Prompt 3B: Recovery Flows — Execution Guide
 
-**Status**: ⏸️ DEFERRED — Decisions 1 & 2 approved (Option A each); execution waits for manuscript approval and the execution gates in [spec.md](../spec.md)  
+**Status**: ➡️ HANDED OVER — reader-access work now continues in [Spec 005](../../005-reader-access/spec.md), which owns its flow, stages and dependencies. Decision 5 was revised on 2026-11-13 (early release; chapters published individually once Ash approves each), so manuscript approval no longer gates these screens. This contract is kept as a source record for Spec 005.
 **Scope**: Recovery flow specification and session restoration designs  
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Dependencies**: Prompt 3A (Reader Access Copy & Forms) — Provides form baseline

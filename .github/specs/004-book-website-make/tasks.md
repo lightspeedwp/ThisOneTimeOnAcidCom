@@ -319,14 +319,14 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 **Implementation Tasks**:
 
-- [ ] T022 [P] [US2] Read contracts/prompt-3a-reader-access.md and extract email copy section → confirm it is marked pending approval; neither 06-website-reading-prd.md nor 05-design-reader-decision-register.md holds verbatim copy, so obtain approved wording before treating it as final
+- [ ] T022 [P] [US2] Read contracts/prompt-3a-reader-access.md and extract email copy section → confirm it matches the wording Ash approved on 2026-11-13 (recorded in that contract) exactly
 - [ ] T023 [P] [US2] Read contracts/prompt-3a-reader-access.md and document all form states: email entry form, code entry form, success state
 - [ ] T024 [P] [US2] Read contracts/prompt-3c-error-states.md (blocked) and extract planned error messages (5 scenarios: invalid, expired, rate-limited, server, session-conflict)
 - [ ] T025 [P] [US2] Read contracts/prompt-1-navigation-exposure.md and document navigation changes (4 visible links, no /speaking /events /media)
 - [ ] T026 [P] [US2] Read contracts/prompt-2b-navigation-design.md and document navigation component states and responsive behavior
 - [ ] T027 [US2] Create reader-access-copy.md in `.github/specs/004-book-website-make/exports/` documenting:
-  - Email subject: "Your reading code for ThisOneTimeOnAcidCom"
-  - Email body: exact copy per 06-website-reading-prd.md (no modifications)
+  - Email subject: "Your reading code"
+  - Email body: exact copy approved by Ash on 2026-11-13 (see contracts/prompt-3a-reader-access.md; no modifications)
   - Email footer: newsletter signup link info
   - Form labels and placeholders (email entry: "you@example.com", code entry: "XXXXXX")
   - Help text: "We'll email you a 10-minute code. No subscription required."
