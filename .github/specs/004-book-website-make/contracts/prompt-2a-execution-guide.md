@@ -11,7 +11,7 @@
 
 Export the approved design system baseline into a machine-readable format (CSS variables or JSON tokens) that development teams can import directly into the codebase.
 
-**Deliverable**: A single tokens file (`.css` or `.json`) containing:
+**Deliverable**: Two tokens files — a CSS custom-properties file (`.css`) and a JSON design-tokens file (`.json`) — with matching values, each containing:
 - Typography specifications (Space Grotesk headings, Inter body/UI)
 - 18 color variables (9 colors × 2 themes: light + dark)
 - Component style definitions (Button, Card, Navigation, Form)
@@ -48,7 +48,9 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --font-ui-sizes: 12px, 14px, 16px;
 ```
 
-### 2. Extract Colors (Light Theme — Approved Baseline)
+### 2. Extract Colors (Light Theme — Existing Light Support, Mapping Pending Approval)
+
+The palette values are approved; the light-theme role mapping below preserves existing light support and is **not** an approved semantic mapping. Flag it as pending approval in the export.
 
 | # | Name | Color | Hex | Usage |
 | --- | ------ | ------- | ----- | ------- |
@@ -62,7 +64,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 | 8 | Dark Support | Dark Purple-Black | #12121A | Elevated surfaces |
 | 9 | Dark Support | Lighter Dark | #171722 | Alternative dark |
 
-**Export as CSS Variables** (Approved Baseline):
+**Export as CSS Variables** (light mapping pending approval):
 ```css
 /* Light Theme */
 --color-primary-text-light: #0B0B10;
@@ -110,7 +112,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 ```css
 /* Light Theme */
 --button-bg-primary-light: var(--color-accent-pink);
---button-text-primary-light: #ffffff;
+--button-text-primary-light: #ffffff; /* existing light support; pending approval */
 --button-bg-secondary-light: var(--color-secondary-bg-light);
 --button-text-secondary-light: var(--color-primary-text-light);
 --button-border-radius: 8px;
@@ -118,11 +120,20 @@ Export the approved design system baseline into a machine-readable format (CSS v
 
 /* Dark Theme */
 --button-bg-primary-dark: var(--color-accent-pink);
---button-text-primary-dark: #ffffff;
+--button-text-primary-dark: #0B0B10; /* approved label on #FF3AAE */
+--button-bg-primary-hover-dark: #FF67C0;
+--button-bg-primary-pressed-dark: #E82D98;
+--button-border-secondary-dark: 1px solid #9C9488;
+--button-bg-secondary-hover-dark: #171722;
+--button-border-secondary-hover-dark: 1px solid #CFC7BB;
+--button-bg-secondary-pressed-dark: #0B0B10;
+--button-border-secondary-pressed-dark: 1px solid #F6F2EB;
 --button-bg-secondary-dark: var(--color-secondary-bg-dark);
 --button-text-secondary-dark: var(--color-primary-text-dark);
---button-bg-disabled: #9C9488;
---button-text-disabled: #CFC7BB;
+--button-bg-disabled-dark: #171722;
+--button-text-disabled-dark: #9C9488;
+--button-border-disabled-dark: 1px solid #3A3545; /* no blanket opacity reduction */
+/* Light disabled values: unresolved — do not invent */
 ```
 
 **Card Component** (Approved Baseline):
@@ -136,7 +147,7 @@ Export the approved design system baseline into a machine-readable format (CSS v
 
 /* Dark Theme */
 --card-bg-dark: var(--color-secondary-bg-dark);
---card-border-dark: 1px solid var(--color-dark-support-2);
+--card-border-dark: 1px solid var(--color-light-support-2);
 --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 --card-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 ```
@@ -167,15 +178,27 @@ Export the approved design system baseline into a machine-readable format (CSS v
 --form-input-padding: 12px;
 --form-input-border-radius: 6px;
 
-/* Dark Theme */
+/* Dark Theme (CR-2A.5 approved dark interaction choices, subject to the stated checks) */
 --form-input-bg-dark: var(--color-primary-bg-dark);
---form-input-border-dark: 1px solid var(--color-secondary-bg-dark);
---form-input-border-focused-dark: 2px solid var(--color-accent-pink);
+--form-input-border-dark: 1px solid #9C9488; /* registered control border */
 --form-input-text-dark: var(--color-primary-text-dark);
---form-input-error-border: 2px solid #FF6B6B;
---form-input-error-text: #FF6B6B;
---form-input-placeholder: #9C9488;
+--form-input-placeholder-dark: #9C9488;
+/* Focus: yellow outline; width/offset are candidates subject to checks */
+--form-input-focus-outline-colour-dark: #F4FF3C;
+--form-input-focus-outline-width-dark: 3px;  /* candidate — subject to checks */
+--form-input-focus-outline-offset-dark: 3px; /* candidate — subject to checks */
+/* Dark separator "where needed": value unresolved — subject to checks */
+--form-input-disabled-text-dark: #9C9488;
+--form-input-disabled-bg-dark: #171722;
+--form-input-disabled-border-dark: 1px solid #3A3545; /* no blanket opacity reduction */
+--form-input-error-dark: #FF8FA3;   /* text/icon/outline on secondary surface or panel */
+--form-input-warning-dark: #F4FF3C; /* on dark surfaces */
+--form-input-success-dark: #8DE0B2; /* confirmed outcomes only */
 ```
+
+**Non-colour cue (required)**: error, warning, success, disabled and focus states must each carry a non-colour cue (for example an icon, text label or outline change). Colour must not be the only state cue (design register, Dark interaction choices).
+
+**Light-theme form states**: focused, disabled, error, warning and success light values are **unresolved**. Do not invent them; preserve existing light support and flag them as pending.
 
 ---
 
@@ -230,7 +253,7 @@ All of these must be true when complete:
 
 1. **From Button components**:
    - Note primary button background color: #FF3AAE (hot pink accent)
-   - Note primary button text color: #FFFFFF (white)
+   - Note primary button text color (dark theme): #0B0B10 on #FF3AAE (approved); light-theme label is existing light support, pending approval
    - Note secondary button uses theme colors (#F6F2EB light / #0B0B10 dark)
    - Record all state variations
 
@@ -249,11 +272,12 @@ All of these must be true when complete:
 4. **From Form Input component**:
    - Note light theme background: #F6F2EB (warm cream)
    - Note dark theme background: #0B0B10 (deepest dark)
-   - Note border colors use warm neutrals (#CFC7BB light / #12121A dark)
-   - Note focused border: #FF3AAE (hot pink accent, both themes)
+   - Note dark border: #9C9488 (registered control border); light border is existing light support, pending approval
+   - Note dark focus: #F4FF3C yellow outline (candidate 3px width, 3px offset and any dark separator remain subject to checks); light focus treatment unresolved
+   - Note dark disabled/error/warning/success values per the Form Input Component section, each with a non-colour cue
 
 5. **Typography throughout**:
-   - Verify Space Grotesk usage in headings (weights: 600, 700; sizes: 24px, 32px, 40px, 48px)
+   - Verify Space Grotesk usage in headings (weights: 600, 700) against the approved size ranges by role: hero 48–80px, section 32–48px, card 20–24px
    - Verify Inter usage in body and UI (body weights: 400, 500; UI weights: 500, 600)
    - Record exact font weights and sizes
 
@@ -294,11 +318,10 @@ All of these must be true when complete:
   --color-accent-yellow: #F4FF3C;
   --color-accent-purple: #8A63FF;
   
-  /* Component States */
-  --state-hover-opacity: 0.8;
-  --state-active-opacity: 0.7;
-  --state-disabled-opacity: 0.5;
-  --state-focus-ring: 2px solid var(--color-accent-purple);
+  /* Component States (dark interaction choices; no blanket opacity reduction) */
+  --state-focus-colour: #F4FF3C;
+  --state-focus-outline-width: 3px;  /* candidate — subject to checks */
+  --state-focus-outline-offset: 3px; /* candidate — subject to checks */
 }
 
 /* Light Theme */
@@ -377,17 +400,55 @@ All of these must be true when complete:
     }
   },
   "components": {
-    "button": { "approvedUse": "Hot pink #FF3AAE for primary actions" },
-    "card": { "approvedUse": "Warm cream light / deepest dark for dark theme" },
-    "navigation": { "approvedUse": "Hot pink #FF3AAE hover/active states" },
-    "formInput": { "approvedUse": "Warm neutrals for borders, pink for focus" }
+    "button": {
+      "dark": {
+        "primary": {
+          "default": { "bg": "#FF3AAE", "text": "#0B0B10" },
+          "hover": { "bg": "#FF67C0", "text": "#0B0B10" },
+          "pressed": { "bg": "#E82D98", "text": "#0B0B10" }
+        },
+        "secondary": {
+          "default": { "bg": "#12121A", "text": "#F6F2EB", "border": "#9C9488" },
+          "hover": { "bg": "#171722", "text": "#F6F2EB", "border": "#CFC7BB" },
+          "pressed": { "bg": "#0B0B10", "text": "#F6F2EB", "border": "#F6F2EB" }
+        },
+        "disabled": { "bg": "#171722", "text": "#9C9488", "border": "#3A3545" }
+      },
+      "light": { "status": "pending-approval" }
+    },
+    "card": {
+      "dark": {
+        "default": { "bg": "#12121A", "border": "#171722", "shadow": "0 2px 8px rgba(0, 0, 0, 0.3)" },
+        "hover": { "shadow": "0 4px 12px rgba(0, 0, 0, 0.5)" }
+      },
+      "light": { "status": "pending-approval" }
+    },
+    "navigation": {
+      "dark": {
+        "default": { "text": "#F6F2EB" },
+        "hover": { "text": "#FF3AAE", "underline": true },
+        "active": { "text": "#FF3AAE", "underline": "2px solid #FF3AAE" }
+      },
+      "light": { "status": "pending-approval" }
+    },
+    "formInput": {
+      "dark": {
+        "default": { "bg": "#0B0B10", "text": "#F6F2EB", "border": "#9C9488", "placeholder": "#9C9488" },
+        "focus": { "outlineColour": "#F4FF3C", "outlineWidth": "3px", "outlineOffset": "3px", "outlineStatus": "candidate-subject-to-checks" },
+        "disabled": { "bg": "#171722", "text": "#9C9488", "border": "#3A3545" },
+        "error": { "colour": "#FF8FA3", "nonColourCue": "required" },
+        "warning": { "colour": "#F4FF3C", "nonColourCue": "required" },
+        "success": { "colour": "#8DE0B2", "nonColourCue": "required" }
+      },
+      "light": { "status": "pending-approval" }
+    }
   }
 }
 ```
 
 ### Phase 4: Validation
 
-1. ✅ File generated and valid (CSS or JSON)
+1. ✅ Both files generated and valid (CSS and JSON, values matching)
 2. ✅ All typography values present and correct
 3. ✅ All 18 color variables exported
 4. ✅ All component styles included
@@ -408,7 +469,7 @@ All of these must be true when complete:
 
 When Prompt 2A execution is complete, provide:
 
-1. **Tokens File** (`.css` or `.json`)
+1. **Tokens Files** (`.css` and `.json`)
    - All typography specifications
    - All 18 color variables (light + dark)
    - All component style definitions
@@ -429,7 +490,7 @@ When Prompt 2A execution is complete, provide:
 ## Success Definition
 
 ✅ **Prompt 2A is complete when**:
-- Tokens file generated (CSS or JSON format)
+- Tokens files generated (CSS and JSON formats)
 - All approved values extracted (typography + colors + components)
 - All unapproved candidates explicitly excluded
 - File is valid and can be imported by build tools

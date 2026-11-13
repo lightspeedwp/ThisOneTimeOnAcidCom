@@ -150,10 +150,10 @@ All contract files now reference the canonical document location:
 
 ⏳ **READY FOR GATE 2 SIGN-OFF**
 
-All requirements for Gate 2 (Design Baseline Approval) specification are satisfied:
-1. Design tokens match approved baseline exactly (no drift)
-2. Typography includes Space Grotesk and Inter with exact weights/sizes
-3. All 9 colors defined in approved baseline for both light and dark themes
+Gate 2 (Design Baseline Approval) specification status — specification items only; no token files exist yet:
+1. Design token export and no-drift validation — ⏳ **pending** (no CSS/JSON token files have been generated; validation cannot run until they exist)
+2. Typography includes Space Grotesk and Inter with exact weights/sizes (specified in contracts)
+3. Approved nine-colour palette specified; dark-theme role mapping specified; light-theme mapping pending approval; theme exports and their validation ⏳ **pending**
 4. Unapproved candidates (R3, T1, RT2, C1) explicitly excluded
 5. Component styles defined for Button, Card, Navigation, Form
 6. Contracts are valid and consistent
