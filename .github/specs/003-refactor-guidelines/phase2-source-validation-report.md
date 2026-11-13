@@ -13,7 +13,7 @@
 ### 1. Baseline Commit Verification
 
 | Check | Result | Evidence |
-|-------|--------|----------|
+| ------- | -------- | ---------- |
 | Baseline commit accessible | ✅ PASS | Commit b7c3c4413f5fc7ed2e73a50ca7462d45a8e2e1b9 is valid and readable |
 | Guidelines structure intact | ✅ PASS | All subdirectories present (blocks/, components/, design-tokens/, etc.) |
 | Baseline files readable | ✅ PASS | All source files in baseline commit are accessible |
@@ -23,7 +23,7 @@
 ### 2. Guidelines Inventory (G-Documents) — 116 Baseline
 
 | Category | Count | Status | Notes |
-|----------|-------|--------|-------|
+| ---------- | ------- | -------- | ------- |
 | Baseline G-documents | 116 | ✅ Preserved | All 116 baseline files accounted for |
 | Modified (M) | 90 | ✅ Updated | Voice/accessibility changes per D1/D3 |
 | Unchanged | 26 | ✅ Preserved | No changes required per scope |
@@ -34,7 +34,7 @@
 ### 3. Supporting Documents (S-Documents) — 9 Protected Files
 
 | File | Status | Change | Lines |
-|------|--------|--------|-------|
+| ------ | -------- | -------- | ------- |
 | AGENTS.md | ✅ Modified | M | +34 lines |
 | CONTRIBUTING.md | ✅ Modified | M | +59 lines |
 | .claude/skills/INVENTORY.md | ✅ Modified | M | +22 lines |
@@ -57,7 +57,7 @@
 **Phase 2 Approved (29 documents):**
 
 | Type | Count | Files | Status |
-|------|-------|-------|--------|
+| ------ | ------- | ------- | -------- |
 | Reference & Diagnostics | 5 | accessibility-audit-report.md, accessibility-checklist.md, accessibility-recipes.md, code-quality-report.md, color-palette.md | ✅ Created |
 | Design Inspiration | 1 | (Design assets — location TBD per D6) | ⏳ Asset-based |
 | Organization & Architecture | 13 | backend-integration.md, brand-voice-messaging.md, component-catalog.md, content-taxonomy.md, css-architecture-reference.md, data-architecture.md, design-tokens-reference.md, getting-started.md, homepage-layout.md, publishing-workflow.md, responsive-design.md, sitemap-navigation.md, testing-strategy.md | ✅ Created |
@@ -69,7 +69,7 @@
 **Phase 3 Deferred (4 documents):**
 
 | ID | Document | Rationale | Status |
-|----|----------|-----------|--------|
+| ---- | ---------- | ----------- | -------- |
 | N030 | WordPress Block Patterns | Out of scope per D8 (React/Next.js only) | ⏳ Deferred |
 | N031 | WordPress Migration Guide | Out of scope per D8 (React/Next.js only) | ⏳ Deferred |
 | N032 | Portfolio Showcase | Not applicable — no portfolio on site | ⏳ Deferred |
@@ -82,7 +82,7 @@
 ### 5. Archive Operations (D5 Preservation)
 
 | Item | Count | Status | Details |
-|------|-------|--------|---------|
+| ------ | ------- | -------- | --------- |
 | Archive directory created | 1 | ✅ YES | `guidelines/_archive/` structure in place |
 | WordPress files archived | 3 | ✅ YES | wordpress-block-patterns.md, wordpress-migration-guide.md, wordpress-preset-system.md |
 | Archive pointers created | 3 | ✅ YES | accessibility-report-pointer.md, dark-mode-report-pointer.md, performance-report-pointer.md |
@@ -94,7 +94,7 @@
 ### 6. Scope Integrity Verification
 
 | Check | Result | Status |
-|-------|--------|--------|
+| ------- | -------- | -------- |
 | All 116 G-rows inventoried | ✅ PASS | 90 M + 26 preserved = 116 |
 | All 9 S-rows inventoried | ✅ PASS | 3 core S-docs modified + 6 skills verified as present |
 | All 33 N-rows inventoried | ✅ PASS | 28 confirmed; 1 TBD (likely asset-based or renamed) |
@@ -109,7 +109,7 @@
 **These files were modified but appear unrelated to Spec 003 Guidelines Refactor:**
 
 | File | Status | Type | Impact | Assessment |
-|------|--------|------|--------|------------|
+| ------ | -------- | ------ | -------- | ------------ |
 | `.github/dependabot.yml` | Modified (M) | Infrastructure/CI | Removed native `auto-merge` configuration | ⚠️ Collateral change; CI-related, not documentation |
 | `CHANGELOG.md` | Modified (M) | Release Notes | Added entries for "Sentry error monitoring" and "Dependabot" changes | ⚠️ Collateral changes; unrelated to Spec 003 |
 
@@ -122,7 +122,7 @@
 ### 8. Current Branch State
 
 | Item | Status | Details |
-|------|--------|---------|
+| ------ | -------- | --------- |
 | Branch name | ✅ VALID | `claude/compassionate-davinci-nsqxfg` |
 | Working tree | ✅ CLEAN | No uncommitted changes |
 | Commits ahead of develop | ✅ 23 commits | Implementation complete |

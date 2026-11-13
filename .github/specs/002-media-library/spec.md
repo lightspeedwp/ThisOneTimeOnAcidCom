@@ -430,7 +430,7 @@ close TOA-276 evaluation; it informs estimation and dependencies.)
 **Suggested Answers**:
 
 | Option | Decision | Implications |
-|--------|----------|--------------|
+| -------- | ---------- | -------------- |
 | A | Approve GitHub + Netlify (per audit decision log) as working assumption for planning | TOA-284 and TOA-285 can assume Git LFS, Netlify build integration, static hosting constraints |
 | B | Approve Cloudinary (per strategy and provider-comparison reports) as working assumption | TOA-284 and TOA-285 must plan for Cloudinary API, hosted editing UI, CDN delivery |
 | C | Defer provider choice; proceed with evaluation per TOA-276 and recommend later | TOA-284 and TOA-285 remain blocked until TOA-276 completes; recovery and catalogue work proceed independently |
@@ -461,7 +461,7 @@ format, colour space)?
 **Suggested Answers**:
 
 | Option | Decision | Implications |
-|--------|----------|--------------|
+| -------- | ---------- | -------------- |
 | A | 40–50 of 56 assets are recoverable as high-quality originals; print requires 300 DPI, RGB/CMYK, PNG/PDF | Extraction and validation can assume high recovery rate; provider must support print formats |
 | B | ~30 of 56 assets are recoverable; many exist only as low-resolution web renderings; print is aspirational, not requirement | Recovery effort increases for manual export; provider choice less constrained by print support |
 | C | Recovery percentage is unknown; define success as "recover what is possible, document what is not" and assess print suitability after recovery | Recovery metrics are qualitative; validation focuses on quality, not quantity |
@@ -496,7 +496,7 @@ blocked until TOA-282/283 complete?
 **Suggested Answers**:
 
 | Option | Decision | Implications |
-|--------|----------|--------------|
+| -------- | ---------- | -------------- |
 | A | TOA-277 → TOA-282/283 → TOA-284/285/286; TOA-283 extends TOA-277 based on validation findings | Definition and validation are sequential; implementation begins only after validation complete |
 | B | TOA-277 and TOA-283 are parallel (define now, refine later); TOA-284 can start before TOA-283 closes | Faster parallelisation; risk of rework if validation findings contradict TOA-277 |
 | C | TOA-277 is complete specification; TOA-283 is implementation optimisation only; no blocker relationship | Implementation can start after TOA-277; TOA-283 is a refinement task, not a gate |
@@ -523,7 +523,7 @@ blocked until TOA-282/283 complete?
 ### Definition Phase (this specification covers)
 
 | Requirement | Linear Issue(s) | Relationship |
-|---|---|---|
+| --- | --- | --- |
 | **Recovery Requirements (FR-001–005)** | TOA-8, TOA-280, TOA-282 | TOA-8 initiates Figma artwork restoration (read-only); TOA-280 evaluates extraction capability; TOA-282 validates pilot recovery quality |
 | **Catalogue Schema (FR-006–009)** | TOA-277, TOA-283 | TOA-277 defines initial schema; TOA-283 finalises schema based on validation findings |
 | **Reference Migration Workflow (FR-002, FR-007, FR-014, FR-016)** | TOA-278 | Design deduplication, reference mappings, verification and rollback; follows catalogue schema and storage provider decisions |
@@ -534,7 +534,7 @@ blocked until TOA-282/283 complete?
 ### Implementation Phase (NOT this specification)
 
 | Requirement | Linear Issue(s) | Scope |
-|---|---|---|
+| --- | --- | --- |
 | **Provider Approval & Infrastructure** | TOA-284 | After TOA-276 evaluation and provider decision: Git LFS, Netlify config, storage quotas |
 | **Build Integration & Pipeline** | TOA-285 | Responsive images, reference migration, build-system integration, deployment |
 | **Operational Handover** | TOA-286 | Runbook, training, rollback procedures, sign-off |

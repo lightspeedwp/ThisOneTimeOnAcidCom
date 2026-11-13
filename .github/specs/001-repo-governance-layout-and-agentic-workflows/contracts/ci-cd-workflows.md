@@ -216,7 +216,7 @@ gates that downstream workflows depend on.
 ## Workflow Activation Status
 
 | Workflow | Status | Trigger | Blocking | Executes By Default |
-|----------|--------|---------|----------|---------------------|
+| ---------- | -------- | --------- | ---------- | --------------------- |
 | lint.yml | Implementation | push, pull_request | YES | ✅ Always |
 | tests.yml | Implementation | push, pull_request | YES | ✅ Always |
 | documentation.yml | Implementation | push, pull_request | YES | ✅ Always |

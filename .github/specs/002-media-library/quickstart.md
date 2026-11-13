@@ -847,7 +847,7 @@ echo "Figma source attribution:"
 
 jq '.assets[] |= if .asset*id == "asset*figma*hero*001" then
 .credits = "Design by Ash Shaw, verified 2026-10-17; owned by ThisOneTimeOnAcid"
-|
+|  |
   .rights_notes = "Copyright verified; no external claim" |
   .updated_at = "2026-10-17T16:00:00Z"
 else . end' ./pilot-batch-recovered.json > ./pilot-batch-recovered-updated.json
@@ -884,7 +884,7 @@ catalogue can be updated and version tracked per operational runbook
 ## Validation Summary
 
 | Scenario | User Story | Objective | Result |
-|----------|-----------|-----------|--------|
+| ---------- | ----------- | ----------- | -------- |
 | 1 | US2 | Catalogue schema validates pilot assets | ✓ PASS |
 | 2 | US2 | Asset relationships modelled correctly | ✓ PASS |
 | 3 | US4 | Broken-reference detection identifies unmapped paths | ✓ PASS |

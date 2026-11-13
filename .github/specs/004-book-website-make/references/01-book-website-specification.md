@@ -24,7 +24,7 @@ This is Ash’s personal book project. Do not introduce LightSpeed contributors,
 
 ### Recorded sources
 
-* [Book website brief — author decisions and launch scope](https://linear.app/lightspeedwp/document/book-website-brief-author-decisions-and-launch-scope-8d63b8dda8d8) — inspected version **1.2.1**, revised 8 November 2026: book-first scope, launch inventory, editorial boundaries and continuing pause.
+* [Book website brief — author decisions and launch scope](https://linear.app/lightspeedwp/document/book-website-brief-author-decisions-and-launch-scope-8d63b8dda8d8) — inspected version **1.2.1**, revised 8 November 2026 (historical inspection; superseded — FR-002 reconciles File 03 from v1.2.2 to the current v1.3.0, see [version reconciliation](../version-reconciliation.md)): book-first scope, launch inventory, editorial boundaries and continuing pause.
 * [Design brief — Book website and verified reading experience](https://linear.app/lightspeedwp/document/design-brief-book-website-and-verified-reading-experience-26b0558529b0) — inspected version **1.1.2**, revised 8 November 2026: design requirements, approved foundations, theme preservation and acceptance boundaries.
 * [Book website — Design and reader decision register](https://linear.app/lightspeedwp/document/book-website-design-and-reader-decision-register-be84aedd1a47) — inspected version **1.7.0**: approved design choices, unresolved mappings and unapproved candidates.
 * [Repository baseline](<https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/tree/84242de7857e1ec03742e20aaaf1df469f44355f>).
