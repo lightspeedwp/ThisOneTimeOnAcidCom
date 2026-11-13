@@ -115,7 +115,7 @@ The proposed waitlist phrase “first notice when pre-orders open” requires re
 
 ## Launch-page inventory
 
-| **Page** | **Direction and purpose** |  |
+| **Page** | **Direction and purpose** | |
 | -- | -- | -- |
 | **Home** | Launch. Introduce the book and provide a clear reading entry point | [https://thisonetimeonacid.com/](<https://thisonetimeonacid.com/>) |
 | **The book** | Launch. Explain themes, the website-specific manuscript, draft status and carefully qualified future-edition plans | [https://thisonetimeonacid.com/the-book](<https://thisonetimeonacid.com/the-book>) |

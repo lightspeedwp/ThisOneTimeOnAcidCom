@@ -20,27 +20,31 @@ Export design-system baseline (approved typography, colors, component styles) as
 - Body: Inter (weights: 400, 500; sizes: 14px, 16px, 18px)
 - UI: Inter (weights: 500, 600; sizes: 12px, 14px, 16px)
 
-**Colors (Light Theme)**:
-1. Primary: #1a1a1a (charcoal)
-2. Secondary: #ffffff (white)
-3. Accent: #e8d4b8 (tan)
-4. Success: #2d5016 (green)
-5. Warning: #b8860b (gold)
-6. Error: #8b0000 (maroon)
-7. Neutral-light: #f5f5f5 (light gray)
-8. Neutral-dark: #666666 (dark gray)
-9. Border: #cccccc (medium gray)
+**Colors (Approved Baseline — Design Brief v1.1.2)**:
 
-**Colors (Dark Theme)**:
-1. Primary: #ffffff (white)
-2. Secondary: #1a1a1a (charcoal)
-3. Accent: #d4a574 (tan variant)
-4. Success: #90ee90 (light green)
-5. Warning: #ffd700 (gold variant)
-6. Error: #ff6b6b (light red)
-7. Neutral-light: #333333 (dark gray)
-8. Neutral-dark: #cccccc (light gray)
-9. Border: #444444 (medium gray variant)
+Dark-first palette with preserved light support:
+
+1. Deepest Dark: #0B0B10 (primary dark background)
+2. Dark Purple-Black: #12121A (secondary dark background)
+3. Lighter Dark: #171722 (tertiary dark background)
+4. Warm Cream: #F6F2EB (primary light background / dark theme text)
+5. Warm Tan: #CFC7BB (secondary light / neutral warm)
+6. Warm Brown: #9C9488 (tertiary light / warm neutral)
+7. Hot Pink Accent: #FF3AAE (interactive accent, both themes)
+8. Electric Yellow Accent: #F4FF3C (highlight accent, both themes)
+9. Purple Accent: #8A63FF (tertiary accent, both themes)
+
+**Dark Theme Mapping**:
+- Primary (text): #F6F2EB (warm cream on #0B0B10)
+- Primary (background): #0B0B10
+- Secondary (text): #CFC7BB (warm tan)
+- Secondary (background): #12121A
+- Accents: #FF3AAE, #F4FF3C, #8A63FF
+
+**Light Theme Mapping** (⏳ pending approval):
+- Existing light support, theme switching and saved-light preferences are preserved.
+- Light-theme semantic role assignments are **not approved**. The design register records light design as unresolved (`references/05-design-reader-decision-register.md`, Theme scope), so no light role mapping is specified here.
+- Approved palette values above remain unchanged; approval of the palette does not approve a light-theme mapping.
 
 **Components**:
 - Button (primary, secondary, disabled states)
@@ -53,13 +57,27 @@ Export design-system baseline (approved typography, colors, component styles) as
 
 **Export Format**: CSS variables file (tokens.css) or design-token JSON
 
-**Variables to Export**:
+**Variables to Export** (Approved Baseline):
 - `--font-heading: 'Space Grotesk'`
 - `--font-body: 'Inter'`
-- `--color-primary-light: #1a1a1a`
-- `--color-primary-dark: #ffffff`
-- [9 colors × 2 themes = 18 color variables]
-- Component-specific variables (button-bg, card-border, etc.)
+- Shared palette primitives (nine approved values, defined once):
+- `--color-deepest-dark: #0B0B10`
+- `--color-dark-purple: #12121A`
+- `--color-lighter-dark: #171722`
+- `--color-warm-cream: #F6F2EB`
+- `--color-warm-tan: #CFC7BB`
+- `--color-warm-brown: #9C9488`
+- `--color-accent-pink: #FF3AAE`
+- `--color-accent-yellow: #F4FF3C`
+- `--color-accent-purple: #8A63FF`
+- Theme-specific colour variables (18 in total, nine per theme), each referencing a shared primitive:
+  - Dark theme (nine): `--color-primary-text-dark`, `--color-primary-bg-dark`, `--color-secondary-text-dark`, `--color-secondary-bg-dark`, `--color-tertiary-text-dark`, `--color-panel-dark`, `--color-accent-pink-dark`, `--color-accent-yellow-dark`, `--color-accent-purple-dark`, mapped to the approved dark roles in the design register
+  - Light theme (nine): the same nine role names with a `-light` suffix, preserving the existing light-support values; their role mapping is **pending approval** and must be flagged as such in the export
+- Component-specific variables:
+  - Button: `--button-bg-primary`, `--button-text-primary`, `--button-bg-secondary`, `--button-text-secondary`, `--button-bg-disabled`, `--button-text-disabled`
+  - Card: `--card-bg`, `--card-border`, `--card-shadow`
+  - Navigation: `--nav-link-color`, `--nav-link-color-hover`, `--nav-link-color-active`, `--nav-underline-active`
+  - Form Input: `--form-input-bg`, `--form-input-border`, `--form-input-border-focused`, `--form-input-text`, `--form-input-error-border`, `--form-input-error-text`, `--form-input-placeholder`
 
 ### Figma Make Instructions
 
@@ -67,7 +85,7 @@ Export design-system baseline (approved typography, colors, component styles) as
 2. Extract typography values (Space Grotesk and Inter specifications)
 3. Extract color values for light and dark themes
 4. Generate CSS variable file with clear naming: `--{component}-{property}-{state}`
-5. Export as `.css` or `.json` format (project-dependent)
+5. Export both formats: a CSS custom-properties file (`.css`) and a JSON design-tokens file (`.json`), with matching values
 6. Include comment header documenting baseline version and approval date
 
 ### Acceptance Criteria
@@ -76,13 +94,17 @@ Export design-system baseline (approved typography, colors, component styles) as
 
 ✅ **CR-2A.2**: Typography includes Space Grotesk (headings) and Inter (body/UI) with exact weights/sizes
 
-✅ **CR-2A.3**: Colors: all 9 colors exported for light theme, all 9 for dark theme
+✅ **CR-2A.3**: Colours: nine shared palette primitives, plus nine theme-specific variables for the dark theme (approved roles) and nine for the light theme (existing light support, mapping pending approval) — 18 theme-specific variables in total
 
 ✅ **CR-2A.4**: Unapproved candidates (R3, T1, RT2, C1) are NOT in exported tokens
 
 ✅ **CR-2A.5**: Component styles exported (Button, Card, Navigation, Form) with all states
+- Button: primary (light/dark), secondary (light/dark), disabled
+- Card: default, hover shadow variants
+- Navigation: link default, hover, active, underline indicator
+- Form Input: default, focused (border color change), error state, placeholder text
 
-✅ **CR-2A.6**: File is valid CSS or JSON (parseable by build tools)
+✅ **CR-2A.6**: Both files are valid — the CSS file and the JSON file each parse with build tools, and their values match
 
 ### Unapproved Candidates (Explicitly NOT Included)
 
@@ -93,8 +115,8 @@ Export design-system baseline (approved typography, colors, component styles) as
 
 ### Reference Documents
 
-- Design Baseline: 04-design-brief.md (v1.1.2)
-- Design Register: 05-design-reader-decision-register.md (v1.9.0)
+- Design Baseline: `.github/specs/004-book-website-make/references/04-design-brief.md` (v1.1.2)
+- Design Register: `.github/specs/004-book-website-make/references/05-design-reader-decision-register.md` (v1.9.0)
 - Candidates documented but not approved
 
 ### Dependencies
@@ -112,7 +134,7 @@ Export design-system baseline (approved typography, colors, component styles) as
 
 - [ ] CSS/JSON file generated and valid
 - [ ] All typography values correct (Space Grotesk headings, Inter body/UI)
-- [ ] All 18 color variables exported (9 light + 9 dark)
+- [ ] Nine shared palette primitives plus all 18 theme-specific colour variables exported (9 light + 9 dark); light mapping flagged as pending approval
 - [ ] Unapproved candidates confirmed absent
 - [ ] Component styles exported (Button, Card, Navigation, Form)
 - [ ] Build succeeds with imported tokens (no syntax errors)

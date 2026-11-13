@@ -212,7 +212,7 @@ spy.mockRestore();
 ### API Differences
 
 | Jest | Vitest | Notes |
-|------|--------|-------|
+| ------ | -------- | ------- |
 | `jest.fn()` | `vi.fn()` | Drop-in replacement |
 | `jest.mock()` | `vi.mock()` | Similar API |
 | `jest.spyOn()` | `vi.spyOn()` | Drop-in replacement |
@@ -287,7 +287,6 @@ npx vitest --trace-on
 - [Vi API Reference](https://vitest.dev/api/vi)
 - [Configuration Reference](../vitest.config.ts)
 - [TOA-451: Vitest Migration Assessment](../.github/specs/toa-451-renovate-vitest-migration-assessment/assessment.md)
-```
 
 **Fill-in checklist:**
 - [ ] Coverage baseline metrics
@@ -449,7 +448,6 @@ Once validation passes:
 
 - [Configuration Selected](./parallel-work-renovate-config-options.md)
 - [Assessment & Risk Analysis](./assessment.md)
-```
 
 **Fill-in checklist:**
 - [ ] Org admin contact details
@@ -675,7 +673,6 @@ Verify on `develop`:
 - [Mock Audit & Rewrite Strategy](./parallel-work-vitest-mock-audit.md)
 - [CI Reporter Strategy](./parallel-work-ci-reporter-strategy.md)
 - [Assessment & Risk Analysis](./assessment.md)
-```
 
 **Fill-in checklist:**
 - [ ] Team notification template

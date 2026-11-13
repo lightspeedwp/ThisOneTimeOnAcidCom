@@ -1,6 +1,6 @@
 # Figma Make Prompt 3C: Error States — Execution Guide
 
-**Status**: ❌ BLOCKED — Awaiting Decision 3 (partially blocked by Decision 1)  
+**Status**: ➡️ HANDED OVER — reader-access work now continues in [Spec 005](../../005-reader-access/spec.md), which owns its flow, stages and dependencies. Decision 5 was revised on 2026-11-13 (early release; chapters published individually once Ash approves each), so manuscript approval no longer gates these screens. This contract is kept as a source record for Spec 005.
 **Scope**: Error state designs and messaging for reader access flow  
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Dependencies**: Prompt 3A (Reader Access Copy & Forms) — Provides form baseline
@@ -32,15 +32,15 @@ Design all error state designs and messaging for reader access flow, with code-e
 **Options Under Review**:
 
 | Option | Expiry Timing | User Message | Implication |
-|--------|---------------|--------------|-------------|
+| -------- | --------------- | -------------- | ------------- |
 | **A: From Generation** | 10 min from when code is generated in backend | "Code expired. Generated [X minutes ago]." | User sees exact generation time; clear but technical |
 | **B: From Receipt** | 10 min from when email is received (uncertain timing) | "Code expired. Email received [X minutes ago]." | Accounts for delivery delays; more user-focused |
 | **C: From Page Load** | 10 min from when user loads verification page | "Code expired. Please request a new one." | Simplest messaging; no timing explanation needed |
 
-**Status**: ⏳ PENDING — See `research.md` for detailed analysis
+**Status**: ✅ APPROVED — Option A (expiry from code generation). Use: "Code expired — it was valid for 10 minutes from when it was generated." See `research.md`
 
 ### Decision 1: Recovery-First Race Condition (Affects Error 5)
-**Note**: Decision 1 (from Prompt 3B) impacts the "Session Conflict Error" state. Until both decisions are resolved, Errors 1-4 can be designed, but Error 5 may need adjustment.
+**Note**: Decision 1 is approved as Option A (recovery takes precedence); Error 5 follows that rule.
 
 ---
 
@@ -68,25 +68,25 @@ From 06-website-reading-prd.md (v1.1.1):
 5. Update acceptance criteria with decision-specific requirements
 
 **Example (if Decision 3=A, "From Generation")**:
-```
+```text
 Expiry Clock Starts: When code is generated in backend
 Expiry Window: 10 minutes
 Expired Error Message: "Code expired. Generated [X minutes ago]. Request a new code."
 User Guidance: User sees clear timing reference; understands email delay isn't problem
-```
+```text
 
 ### Phase 2: Design Error State 1 — Invalid Code
 
 **Trigger**: User enters wrong characters (not a valid code format)
 
 **User Experience**:
-```
+```text
 Form displays:
   Label: "Enter your code"
   Input: [XXX-XXX] (with invalid entry attempt)
   Error message: "Invalid code. Please check and try again."
   Button: "Verify Access" (disabled)
-```
+```text
 
 **Design Specifications**:
 
@@ -123,25 +123,25 @@ Form displays:
 **Decision 3 Impact** (select based on resolved option):
 
 #### If Decision 3=A (From Generation):
-```
+```text
 Error Message: "Code expired. Generated [X minutes ago]. Request a new code."
 Additional Info: Show generation timestamp if available
 User Guidance: Clear technical explanation; implies email delivery wasn't the problem
-```
+```text
 
 #### If Decision 3=B (From Receipt):
-```
+```text
 Error Message: "Code expired. Email received [X minutes ago]. Request a new code."
 Additional Info: Estimated receipt time
 User Guidance: Accounts for email delivery variability; user-focused
-```
+```text
 
 #### If Decision 3=C (From Page Load):
-```
+```text
 Error Message: "Code expired. Please request a new code and enter it within 10 minutes."
 Additional Info: Refresh/reload instruction
 User Guidance: No timing details; clear next steps
-```
+```text
 
 **Design Specifications**:
 
@@ -178,7 +178,7 @@ User Guidance: No timing details; clear next steps
 **Trigger**: User exceeded retry attempts (e.g., 5+ failed codes)
 
 **User Experience**:
-```
+```text
 Form displays:
   Label: "Enter your code"
   Input: [disabled] (read-only)
@@ -186,7 +186,7 @@ Form displays:
   Countdown timer: 15:00 ↓ 14:59 ↓ 14:58... (updates in real-time)
   Button: "Verify Access" (disabled)
   Secondary button: "Request New Code" (enabled)
-```
+```text
 
 **Design Specifications**:
 
@@ -235,14 +235,14 @@ Form displays:
 **Trigger**: Backend service unavailable or verification service fails
 
 **User Experience**:
-```
+```text
 Form displays:
   Label: "Enter your code"
   Input: [XXXXXX] (disabled for retry)
   Error message: "We're having trouble verifying your code. Please try again in a moment."
   Button 1: "Try Again" (enabled, blue)
   Button 2: "Request New Code" (enabled, secondary style)
-```
+```text
 
 **Design Specifications**:
 
@@ -285,22 +285,22 @@ Form displays:
 **Pending Decision 1 Options**:
 
 #### If Decision 1=A (Recovery Takes Precedence):
-```
+```text
 Form behavior: Email entry form closes; shows recovery message instead
 Message: "Access being restored from previous session. Please wait..."
 Form: Hidden/replaced with recovery UI
 User action: Wait for auto-redirect to content (no form interaction)
-```
+```text
 
 #### If Decision 1=D (User Chooses Explicitly):
-```
+```text
 Form behavior: Both email entry and recovery buttons shown
 Message: "Restore access from previous session or use new code?"
 Buttons: 
   - "Restore Previous Session" 
   - "Request New Code"
 User action: Click preferred option
-```
+```text
 
 **Design Specifications** (Common to all Decision 1 options):
 
@@ -345,7 +345,7 @@ User action: Click preferred option
 Document all 5 error states with user guidance:
 
 | Error | Trigger | Message | User Action | Fallback |
-|-------|---------|---------|-------------|----------|
+| ------- | --------- | --------- | ------------- | ---------- |
 | Invalid Code | Wrong characters | "Invalid code. Check and try again." | Correct input & retry | N/A |
 | Code Expired | 10+ minutes passed | (Decision 3 option) | "Request New Code" | Email entry form |
 | Rate Limited | 5+ failed attempts | "Too many attempts. Try again in 15:00." | Wait 15 min or new code | Request new code |
@@ -457,13 +457,11 @@ Document all 5 error states with user guidance:
 
 ## Blocking Status
 
-🔴 **CANNOT PROCEED FULLY** until Decision 3 is made:
-- Decision 3: Code Expiry Start Time (PENDING)
+✅ Decisions resolved:
+- Decision 3: Code Expiry Start Time — Option A (from generation)
+- Decision 1: Recovery-First Race Condition — Option A (applies to Error 5)
 
-🟡 **PARTIALLY BLOCKED**:
-- Error 5 (Session Conflict) awaits Decision 1 from Prompt 3B
-
-❌ **Do not attempt to execute this prompt until Decision 3 is resolved.**
+⏸️ **Deferred**: do not execute this prompt until the manuscript is approved (Decision 5) and the execution gates in [spec.md](../spec.md) are cleared.
 
 ---
 

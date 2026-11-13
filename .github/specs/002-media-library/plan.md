@@ -142,7 +142,7 @@ is a template (not yet filled with project principles).
 **Definition/Validation Phase** (this plan):
 
 | Phase | Deliverable | Location | Purpose | Consumed By |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Phase 0** | `research.md` | `.github/specs/002-media-library/` | Resolve 3 clarifications (Q1, Q2, Q3); document decision rationale | Phase 1 design |
 | **Phase 1** | `data-model.md` | `.github/specs/002-media-library/` | Asset and relationship entity definitions; metadata schema | TOA-283, TOA-277 |
 | **Phase 1** | `contracts/catalogue-schema.json` | `.github/specs/002-media-library/contracts/` | JSON schema for asset metadata validation | TOA-284, TOA-285, storage provider |
@@ -432,7 +432,7 @@ input.
 ## Complexity Tracking
 
 | Decision Point | Complexity | Why Critical | Owner Sign-Off |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Q1: Provider Choice | MEDIUM | Drives infrastructure (TOA-284) and build integration (TOA-285) architecture | YES — must decide or approve evaluation-first |
 | Q2: Asset Recovery Baseline | MEDIUM | Informs success metrics, validation scope, effort estimation | YES — must confirm realistic targets |
 | Q3: Implementation Sequencing | MEDIUM | Determines project schedule, blocker logic, risk tolerance for parallel work | YES — must clarify definition→validate→implement flow |
@@ -448,7 +448,7 @@ feature's requirements.
 ## Execution Summary
 
 | Phase | Duration | Inputs | Outputs | Gate |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Phase 0 (Research)** | 2–3 days | Spec with 3 clarifications | `research.md` with decisions resolved | Clarifications resolved; owner confirms answers |
 | **Phase 1 (Design)** | 3–5 days | `research.md`; spec data entities | `data-model.md`, `contracts/*`, `quickstart.md` | All downstream issues have inputs; gates re-checked |
 | **Phase 2 (Tasks)** | Separate | Phase 1 design outputs | `tasks.md` with actionable tasks | /speckit.tasks command (NOT part of this plan) |
@@ -469,6 +469,6 @@ Phase 0 research execution
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
+| ----------- | ------------ | ------------------------------------- |
 | [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
 | [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |

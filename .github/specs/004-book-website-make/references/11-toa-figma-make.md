@@ -2,11 +2,11 @@ Start with Prompt 0 only. This is a read-only preflight for Ash’s personal boo
 
 Read these six attached Markdown files completely:
 
-1. 01-book-website-specification.md  
-2. 02-companion-session-plan.md  
-3. 03-author-decisions-launch-scope.md  
-4. 04-design-brief.md  
-5. 05-design-reader-decision-register.md  
+1. 01-book-website-specification.md
+2. 02-companion-session-plan.md
+3. 03-author-decisions-launch-scope.md
+4. 04-design-brief.md
+5. 05-design-reader-decision-register.md
 6. 06-website-reading-prd.md
 
 First confirm which attachments you can read, their recorded titles and versions, and any missing or truncated content. Do not infer contents from filenames or claim access to linked Linear documents.
@@ -15,11 +15,11 @@ The specification governs the staged workflow, approval gates and manual GitHub 
 
 Last verified versions were:
 
-- Specification: 1.0.0  
-- Companion: 1.0.3  
-- Author brief: 1.2.2  
-- Design brief: 1.1.2  
-- Decision register: 1.7.0  
+- Specification: 1.0.0
+- Companion: 1.0.3
+- Author brief: 1.2.2
+- Design brief: 1.1.2
+- Decision register: 1.7.0
 - PRD: 1.1.1
 
 If an attachment differs, report the difference and its material effect before relying on it. Do not silently combine incompatible revisions.
@@ -34,10 +34,10 @@ Do not assume repository access, synchronisation or Make parity. If applicable r
 
 Return in your response only:
 
-1. Attachment/source inventory and access gaps.  
-2. Make/repository parity findings and coverage limits.  
-3. A proposed Spec Kit-style specification, dependency-ordered plan and tasks.  
-4. Exact proposed file paths and operations, distinguishing verified paths from unresolved counterparts.  
+1. Attachment/source inventory and access gaps.
+2. Make/repository parity findings and coverage limits.
+3. A proposed Spec Kit-style specification, dependency-ordered plan and tasks.
+4. Exact proposed file paths and operations, distinguishing verified paths from unresolved counterparts.
 5. Preservation requirements, blocking decisions and the next approval gate.
 
 Preserve the existing nine-section /style-guide, Space Grotesk headings, Inter body/UI, approved palette, light support and saved-light preferences.
@@ -81,21 +81,21 @@ I did not access or claim access to any linked Linear document. The historical c
 
 Completely read:
 
-- `AGENTS.md`  
-- `guidelines/Guidelines.md` — title: **Ash Shaw Makeup Portfolio – Design & Development Guidelines**, version **8.4.0**  
-- `package.json`  
-- `src/main.tsx`  
-- `src/app/App.tsx`  
-- `src/app/routes.ts`  
-- `src/app/components/common/RootLayout.tsx`  
-- `src/app/components/pages/StyleGuidePage.tsx`  
-- `src/app/content/book/this-one-time-on-acid-brief.md`  
-- `src/styles/fonts.css`  
-- `src/styles/theme.css`  
-- `src/styles/index.css`  
-- `vite.figma.config.ts`  
-- `.git/HEAD`  
-- `.git/refs/heads/main`  
+- `AGENTS.md`
+- `guidelines/Guidelines.md` — title: **Ash Shaw Makeup Portfolio – Design & Development Guidelines**, version **8.4.0**
+- `package.json`
+- `src/main.tsx`
+- `src/app/App.tsx`
+- `src/app/routes.ts`
+- `src/app/components/common/RootLayout.tsx`
+- `src/app/components/pages/StyleGuidePage.tsx`
+- `src/app/content/book/this-one-time-on-acid-brief.md`
+- `src/styles/fonts.css`
+- `src/styles/theme.css`
+- `src/styles/index.css`
+- `vite.figma.config.ts`
+- `.git/HEAD`
+- `.git/refs/heads/main`
 - `.git/config`
 
 Directory inventories were also readable for relevant project, content, component, style, and public-asset locations.
@@ -108,12 +108,12 @@ The local book brief is an implementation brief, not a verified counterpart of a
 
 ### **Revision and repository evidence**
 
-- Current local branch: `main`  
-- Current local revision reference: `3fe4bbfc7f71255be7f0ef61291ad3e8257992c4`  
-- Recorded comparison baseline: `lightspeedwp/ThisOneTimeOnAcidCom` at `84242de7857e1ec03742e20aaaf1df469f44355f`  
-- Result: the revision identifiers differ.  
-- The configured local `origin` is a Figma-managed Make repository URL, not the named GitHub repository.  
-- Git ancestry, synchronization state, changed-file coverage, and content parity were not established because Prompt 0 prohibits commands and Git operations.  
+- Current local branch: `main`
+- Current local revision reference: `3fe4bbfc7f71255be7f0ef61291ad3e8257992c4`
+- Recorded comparison baseline: `lightspeedwp/ThisOneTimeOnAcidCom` at `84242de7857e1ec03742e20aaaf1df469f44355f`
+- Result: the revision identifiers differ.
+- The configured local `origin` is a Figma-managed Make repository URL, not the named GitHub repository.
+- Git ancestry, synchronization state, changed-file coverage, and content parity were not established because Prompt 0 prohibits commands and Git operations.
 - The GitHub repository itself was not accessed. The recorded baseline cannot be treated as present, ancestral, or synchronized.
 
 A renewed baseline check is required immediately before any later authorized change. Any material difference requires renewed review.
@@ -134,11 +134,11 @@ The active application router is:
 
 The main editable application tree appears to be:
 
-- `src/app/components/`  
-- `src/app/data/`  
-- `src/app/content/`  
-- `src/styles/`  
-- `src/content/`  
+- `src/app/components/`
+- `src/app/data/`
+- `src/app/content/`
+- `src/styles/`
+- `src/content/`
 - `src/app/public/`
 
 There is a second, nested legacy-looking application structure under `src/app/`. Its provenance and relationship to the recorded GitHub baseline remain unverified.
@@ -147,42 +147,42 @@ There is a second, nested legacy-looking application structure under `src/app/`.
 
 Verified routes include:
 
-- `/`  
-- `/the-book`  
-- `/read-the-draft`  
-- `/read-the-book`  
-- `/about-ash`  
-- `/waitlist`  
-- `/journal`  
-- `/journal/:slug`  
-- `/events`  
-- `/speaking`  
-- `/contact`  
-- `/media`  
-- `/sitemap`  
-- `/style-guide`  
+- `/`
+- `/the-book`
+- `/read-the-draft`
+- `/read-the-book`
+- `/about-ash`
+- `/waitlist`
+- `/journal`
+- `/journal/:slug`
+- `/events`
+- `/speaking`
+- `/contact`
+- `/media`
+- `/sitemap`
+- `/style-guide`
 - `/thank-you`
 
 The retained direct URLs for Speaking/workshops, Events, and Media/press therefore exist locally as `/speaking`, `/events`, and `/media`. Their navigation/footer visibility and `noindex` behavior were not comprehensively verified.
 
 The human-facing `/sitemap` route exists. Its future treatment remains unresolved and must not be decided from local implementation alone. It must remain distinct from:
 
-- `src/app/public/sitemap.xml`  
-- `src/app/public/robots.txt`  
-- page-level `noindex` implementation  
+- `src/app/public/sitemap.xml`
+- `src/app/public/robots.txt`
+- page-level `noindex` implementation
 - Google-removal submission and verification
 
 ### **Preservation and parity observations**
 
-- `/style-guide` currently contains nine numbered sections.  
-- Its content still identifies the system as “Nova News” and documents older visual tokens. That is evidence of local inconsistency, not authority to rewrite it.  
-- `src/styles/fonts.css` currently declares DM Sans and JetBrains Mono.  
-- The local style-guide page mentions Space Grotesk and Space Mono.  
-- The local book brief recommends Space Grotesk for headings and Inter for body/UI.  
-- Because the governing attachments are unavailable, the authoritative typography wiring cannot yet be reconciled. Future work must preserve Space Grotesk headings and Inter body/UI as instructed.  
-- The local book brief records the book palette, but this does not prove it is the approved current palette from the inaccessible design sources.  
-- Dark and light tokens exist in `src/styles/theme.css`, but `src/styles/index.css` imports `default_theme.css` and `globals.css`, not `theme.css` directly. Complete active-theme wiring and saved-light preference behavior were not established.  
-- Podcast content directories exist, but source, routing, hosting, audio, equivalent-text, rights, credits, and episode scope were not verified.  
+- `/style-guide` currently contains nine numbered sections.
+- Its content still identifies the system as “Nova News” and documents older visual tokens. That is evidence of local inconsistency, not authority to rewrite it.
+- `src/styles/fonts.css` currently declares DM Sans and JetBrains Mono.
+- The local style-guide page mentions Space Grotesk and Space Mono.
+- The local book brief recommends Space Grotesk for headings and Inter for body/UI.
+- Because the governing attachments are unavailable, the authoritative typography wiring cannot yet be reconciled. Future work must preserve Space Grotesk headings and Inter body/UI as instructed.
+- The local book brief records the book palette, but this does not prove it is the approved current palette from the inaccessible design sources.
+- Dark and light tokens exist in `src/styles/theme.css`, but `src/styles/index.css` imports `default_theme.css` and `globals.css`, not `theme.css` directly. Complete active-theme wiring and saved-light preference behavior were not established.
+- Podcast content directories exist, but source, routing, hosting, audio, equivalent-text, rights, credits, and episode scope were not verified.
 - Available Make/Figma credits are not directly verifiable from the permitted reads and are therefore **unknown**.
 
 ---
@@ -199,139 +199,139 @@ Reconcile the current Make project with the approved book-website sources while 
 
 #### **In scope for later authorized stages**
 
-1. Establish source-of-truth versions and decision provenance.  
-2. Compare the exact Make revision with the approved GitHub baseline.  
-3. Produce a bounded preview before each implementation stage.  
-4. Preserve and reconcile:  
-   - nine-section `/style-guide`  
-   - Space Grotesk headings  
-   - Inter body/UI  
-   - approved palette  
-   - light-mode support  
-   - saved light preference  
-5. Preserve direct public access to:  
-   - `/speaking`  
-   - `/events`  
-   - `/media`  
-6. Apply the approved no-menu/footer-link and `noindex` direction to those retained pages only after source confirmation.  
-7. Keep the human sitemap decision unresolved until explicitly approved.  
-8. Treat XML sitemap, robots directives, page-level `noindex`, and Google-removal verification as separate deliverables.  
-9. Resolve podcast requirements independently:  
-   - canonical source  
-   - route placement  
-   - hosting and delivery  
-   - audio behavior  
-   - equivalent text/transcript  
-   - rights  
-   - credits  
-   - approved episode count  
+1. Establish source-of-truth versions and decision provenance.
+2. Compare the exact Make revision with the approved GitHub baseline.
+3. Produce a bounded preview before each implementation stage.
+4. Preserve and reconcile:
+   - nine-section `/style-guide`
+   - Space Grotesk headings
+   - Inter body/UI
+   - approved palette
+   - light-mode support
+   - saved light preference
+5. Preserve direct public access to:
+   - `/speaking`
+   - `/events`
+   - `/media`
+6. Apply the approved no-menu/footer-link and `noindex` direction to those retained pages only after source confirmation.
+7. Keep the human sitemap decision unresolved until explicitly approved.
+8. Treat XML sitemap, robots directives, page-level `noindex`, and Google-removal verification as separate deliverables.
+9. Resolve podcast requirements independently:
+   - canonical source
+   - route placement
+   - hosting and delivery
+   - audio behavior
+   - equivalent text/transcript
+   - rights
+   - credits
+   - approved episode count
 10. Preserve all accessibility, responsive, reduced-motion, and content requirements established by the governing documents.
 
 #### **Explicit exclusions until approved**
 
-- No implementation.  
-- No document saving.  
-- No code, design, content, route, metadata, robots, sitemap, or theme changes.  
-- No additional podcast episodes.  
-- No inferred approval for R3, T1, RT2, or C1.  
-- No use of a saved proposal as evidence that the proposal was approved.  
-- No publishing, deployment, Linear changes, or automated GitHub checkpoint.  
+- No implementation.
+- No document saving.
+- No code, design, content, route, metadata, robots, sitemap, or theme changes.
+- No additional podcast episodes.
+- No inferred approval for R3, T1, RT2, or C1.
+- No use of a saved proposal as evidence that the proposal was approved.
+- No publishing, deployment, Linear changes, or automated GitHub checkpoint.
 - No silent reconciliation of incompatible document revisions.
 
 #### **Acceptance criteria for future stages**
 
-- Every change traces to an accessible approved source or a newly recorded explicit decision.  
-- Exact preview supplied before each bounded stage.  
-- Explicit approval received for that exact stage.  
-- Baseline rechecked immediately before editing.  
-- Material drift triggers renewed review.  
-- Ash reviews, commits, and pushes at each required manual checkpoint.  
-- Work stops until Ash confirms the checkpoint and explicitly requests continuation.  
-- Retained routes remain directly addressable.  
-- Human sitemap status remains unchanged unless separately decided.  
+- Every change traces to an accessible approved source or a newly recorded explicit decision.
+- Exact preview supplied before each bounded stage.
+- Explicit approval received for that exact stage.
+- Baseline rechecked immediately before editing.
+- Material drift triggers renewed review.
+- Ash reviews, commits, and pushes at each required manual checkpoint.
+- Work stops until Ash confirms the checkpoint and explicitly requests continuation.
+- Retained routes remain directly addressable.
+- Human sitemap status remains unchanged unless separately decided.
 - Podcast behavior contains no invented content, rights, credits, hosting, or approvals.
 
 ### **Dependency-ordered plan**
 
-1. **Source recovery and validation**  
-     
-   - Obtain all six complete Markdown files.  
-   - Verify internal titles, versions, modification records, truncation, links, and embedded future-stage prompts.  
-   - Classify historical references separately from current-version claims.  
+1. **Source recovery and validation**
+
+   - Obtain all six complete Markdown files.
+   - Verify internal titles, versions, modification records, truncation, links, and embedded future-stage prompts.
+   - Classify historical references separately from current-version claims.
    - Record conflicts without merging them.
 
-   
 
-2. **Approval and provenance matrix**  
-     
-   - Extract every stage, gate, manual checkpoint, proposal, approval, and unresolved decision.  
-   - Explicitly retain R3, T1, RT2, and C1 as unapproved.  
+
+2. **Approval and provenance matrix**
+
+   - Extract every stage, gate, manual checkpoint, proposal, approval, and unresolved decision.
+   - Explicitly retain R3, T1, RT2, and C1 as unapproved.
    - Identify any proposal whose original approval provenance is absent.
 
-   
 
-3. **Baseline reconciliation**  
-     
-   - Recheck the Make revision.  
-   - Obtain read access to the named GitHub repository and exact baseline commit.  
-   - Compare the baseline with Make without assuming synchronization or ancestry.  
+
+3. **Baseline reconciliation**
+
+   - Recheck the Make revision.
+   - Obtain read access to the named GitHub repository and exact baseline commit.
+   - Compare the baseline with Make without assuming synchronization or ancestry.
    - Identify files that are equal, changed, Make-only, repository-only, or unresolved.
 
-   
 
-4. **Current-state functional map**  
-     
-   - Map routes, header/footer links, theme persistence, typography, palette, style guide, metadata, robots, XML sitemap, human sitemap, podcast content, and reading flow.  
+
+4. **Current-state functional map**
+
+   - Map routes, header/footer links, theme persistence, typography, palette, style guide, metadata, robots, XML sitemap, human sitemap, podcast content, and reading flow.
    - Separate active source files from migrated or legacy counterparts.
 
-   
 
-5. **Decision closure**  
-     
-   - Resolve only decisions required by the next bounded stage.  
-   - Keep the human sitemap conflict open until explicitly decided.  
+
+5. **Decision closure**
+
+   - Resolve only decisions required by the next bounded stage.
+   - Keep the human sitemap conflict open until explicitly decided.
    - Produce a podcast decision matrix without requiring additional episodes.
 
-   
 
-6. **Exact staged preview**  
-     
-   - Show the exact files, operations, rendered effects, metadata changes, migration effects, and exclusions for the next stage.  
+
+6. **Exact staged preview**
+
+   - Show the exact files, operations, rendered effects, metadata changes, migration effects, and exclusions for the next stage.
    - Reconfirm baseline and document versions.
 
-   
 
-7. **Bounded implementation**  
-     
-   - Proceed only after explicit approval for that preview and separate authority to resume.  
-   - Verify behavior using the repository-prescribed checks.  
+
+7. **Bounded implementation**
+
+   - Proceed only after explicit approval for that preview and separate authority to resume.
+   - Verify behavior using the repository-prescribed checks.
    - Stop at the specification’s next gate.
 
-   
 
-8. **Manual checkpoint**  
-     
-   - Ash reviews, commits, and pushes.  
+
+8. **Manual checkpoint**
+
+   - Ash reviews, commits, and pushes.
    - Stop until Ash confirms completion and explicitly requests continuation.
 
 ### **Proposed tasks**
 
-- [ ] Supply and verify all six governing Markdown attachments.  
-- [ ] Record exact titles, versions, completeness, and revision differences.  
-- [ ] Extract the specification’s complete stage/gate/checkpoint sequence.  
-- [ ] Build an approval-provenance table, including R3, T1, RT2, and C1.  
-- [ ] Obtain read access to the named GitHub repository and baseline commit.  
-- [ ] Recheck Make revision and compare it with the baseline.  
-- [ ] Identify authoritative versus migrated/legacy source trees.  
-- [ ] Audit active typography wiring for Space Grotesk and Inter.  
-- [ ] Audit approved palette implementation.  
-- [ ] Audit light support and saved-light preference behavior.  
-- [ ] Confirm all nine `/style-guide` sections and determine approved content updates.  
-- [ ] Confirm header/footer treatment for `/speaking`, `/events`, and `/media`.  
-- [ ] Map page-level `noindex` separately from robots and XML sitemap behavior.  
-- [ ] Record the human-facing sitemap conflict without resolving it.  
-- [ ] Build the podcast source/routing/hosting/audio/text/rights/credits matrix.  
-- [ ] Produce the next bounded exact preview.  
+- [ ] Supply and verify all six governing Markdown attachments.
+- [ ] Record exact titles, versions, completeness, and revision differences.
+- [ ] Extract the specification’s complete stage/gate/checkpoint sequence.
+- [ ] Build an approval-provenance table, including R3, T1, RT2, and C1.
+- [ ] Obtain read access to the named GitHub repository and baseline commit.
+- [ ] Recheck Make revision and compare it with the baseline.
+- [ ] Identify authoritative versus migrated/legacy source trees.
+- [ ] Audit active typography wiring for Space Grotesk and Inter.
+- [ ] Audit approved palette implementation.
+- [ ] Audit light support and saved-light preference behavior.
+- [ ] Confirm all nine `/style-guide` sections and determine approved content updates.
+- [ ] Confirm header/footer treatment for `/speaking`, `/events`, and `/media`.
+- [ ] Map page-level `noindex` separately from robots and XML sitemap behavior.
+- [ ] Record the human-facing sitemap conflict without resolving it.
+- [ ] Build the podcast source/routing/hosting/audio/text/rights/credits matrix.
+- [ ] Produce the next bounded exact preview.
 - [ ] Request explicit stage approval and separate authority to resume.
 
 ---
@@ -372,12 +372,12 @@ No operations are authorized now.
 
 These are proposed destinations under the repository’s documented folder conventions, not existing verified counterparts and not authorized for creation now:
 
-- `prompts/book-website/orchestrator.md` — proposed create  
-- `prompts/book-website/01-source-and-baseline-preflight.md` — proposed create  
-- `reports/book-website-preflight/source-inventory.md` — proposed create  
-- `reports/book-website-preflight/parity-report.md` — proposed create  
-- `reports/book-website-preflight/decision-and-approval-matrix.md` — proposed create  
-- `tasks/book-website-staged-implementation.md` — proposed create  
+- `prompts/book-website/orchestrator.md` — proposed create
+- `prompts/book-website/01-source-and-baseline-preflight.md` — proposed create
+- `reports/book-website-preflight/source-inventory.md` — proposed create
+- `reports/book-website-preflight/parity-report.md` — proposed create
+- `reports/book-website-preflight/decision-and-approval-matrix.md` — proposed create
+- `tasks/book-website-staged-implementation.md` — proposed create
 - `tasks/master-task-list.md` — proposed update only if it exists at implementation time
 
 The governing specification may prescribe different paths or artifact names. Those instructions must be read before adopting these proposals.
@@ -386,14 +386,14 @@ The governing specification may prescribe different paths or artifact names. Tho
 
 Exact source counterparts cannot be named until supplied:
 
-- Full specification v1.0.0  
-- Full companion v1.0.3  
-- Full author brief v1.2.2  
-- Full design brief v1.1.2  
-- Full decision register v1.7.0  
-- Full PRD v1.1.1  
-- Any materially linked Linear passage cited as normative  
-- Readable repository tree at `lightspeedwp/ThisOneTimeOnAcidCom`  
+- Full specification v1.0.0
+- Full companion v1.0.3
+- Full author brief v1.2.2
+- Full design brief v1.1.2
+- Full decision register v1.7.0
+- Full PRD v1.1.1
+- Any materially linked Linear passage cited as normative
+- Readable repository tree at `lightspeedwp/ThisOneTimeOnAcidCom`
 - Exact contents of baseline commit `84242de7857e1ec03742e20aaaf1df469f44355f`
 
 ---
@@ -402,38 +402,38 @@ Exact source counterparts cannot be named until supplied:
 
 ### **Preservation requirements**
 
-- Preserve the existing nine-section `/style-guide`.  
-- Preserve Space Grotesk for headings and Inter for body/UI.  
-- Preserve the approved palette once verified from governing sources.  
-- Preserve light-mode support and saved-light preference behavior.  
-- Preserve direct public URLs for:  
-  - `/speaking`  
-  - `/events`  
-  - `/media`  
-- Preserve their recorded no-menu/footer-link and `noindex` direction, subject to verification against the complete specification.  
-- Do not conflate:  
-  - human-facing sitemap  
-  - XML sitemap  
-  - robots directives  
-  - page-level `noindex`  
-  - Google-removal verification  
-- Preserve historical version references as snapshot references, not current-version claims.  
-- Keep R3, T1, RT2, and C1 unapproved.  
-- Do not treat saving as approval or reconstruct missing approval provenance.  
-- Keep podcast source, route, hosting, audio, equivalent text, rights, credits, and episode scope explicit.  
-- Do not invent or require additional podcast episodes.  
-- Preserve every gate and manual checkpoint in the specification once accessible.  
+- Preserve the existing nine-section `/style-guide`.
+- Preserve Space Grotesk for headings and Inter for body/UI.
+- Preserve the approved palette once verified from governing sources.
+- Preserve light-mode support and saved-light preference behavior.
+- Preserve direct public URLs for:
+  - `/speaking`
+  - `/events`
+  - `/media`
+- Preserve their recorded no-menu/footer-link and `noindex` direction, subject to verification against the complete specification.
+- Do not conflate:
+  - human-facing sitemap
+  - XML sitemap
+  - robots directives
+  - page-level `noindex`
+  - Google-removal verification
+- Preserve historical version references as snapshot references, not current-version claims.
+- Keep R3, T1, RT2, and C1 unapproved.
+- Do not treat saving as approval or reconstruct missing approval provenance.
+- Keep podcast source, route, hosting, audio, equivalent text, rights, credits, and episode scope explicit.
+- Do not invent or require additional podcast episodes.
+- Preserve every gate and manual checkpoint in the specification once accessible.
 - Recheck the baseline immediately before any later change.
 
 ### **Blocking decisions and evidence gaps**
 
-1. All six governing attachments are inaccessible.  
-2. Their exact titles, versions, completeness, and compatibility cannot be verified.  
-3. The specification’s actual stage and gate sequence is unavailable.  
-4. The human-facing sitemap conflict cannot be characterized from source text.  
-5. GitHub baseline content and Make parity are unverified.  
-6. Typography and theme sources conflict locally and require authoritative reconciliation.  
-7. Podcast provenance and publication permissions are unknown.  
+1. All six governing attachments are inaccessible.
+2. Their exact titles, versions, completeness, and compatibility cannot be verified.
+3. The specification’s actual stage and gate sequence is unavailable.
+4. The human-facing sitemap conflict cannot be characterized from source text.
+5. GitHub baseline content and Make parity are unverified.
+6. Typography and theme sources conflict locally and require authoritative reconciliation.
+7. Podcast provenance and publication permissions are unknown.
 8. Available credits are unknown.
 
 ### **Next approval gate**
@@ -442,20 +442,20 @@ The next gate is **source-complete Prompt 0 review**, not implementation.
 
 Required input:
 
-- Supply the six complete Markdown files through readable workspace/session paths.  
-- If linked Linear material is normative, supply the exact cited passage as text or Markdown.  
+- Supply the six complete Markdown files through readable workspace/session paths.
+- If linked Linear material is normative, supply the exact cited passage as text or Markdown.
 - If repository parity is required, provide readable access to the named repository at the recorded baseline.
 
 After those sources are read completely, the correct next output is a revised Prompt 0 inventory, conflict report, and bounded specification/plan. Implementation remains paused until an exact preview, explicit approval for that bounded stage, and separate authority to resume are provided.
 
 I uploaded the the brief files:
 
-- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/01-book-website-specification.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/01-book-website-specification.md)  
-- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/02-companion-session-plan.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/02-companion-session-plan.md)  
-- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/03-author-decisions-launch-scope.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/03-author-decisions-launch-scope.md)  
-- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/04-design-brief.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/04-design-brief.md)  
-- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/05-design-reader-decision-register.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/05-design-reader-decision-register.md)  
-- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/06-website-reading-prd.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/06-website-reading-prd.md)  
+- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/01-book-website-specification.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/01-book-website-specification.md)
+- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/02-companion-session-plan.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/02-companion-session-plan.md)
+- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/03-author-decisions-launch-scope.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/03-author-decisions-launch-scope.md)
+- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/04-design-brief.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/04-design-brief.md)
+- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/05-design-reader-decision-register.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/05-design-reader-decision-register.md)
+- [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/06-website-reading-prd.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/06-website-reading-prd.md)
 - [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/this-one-time-on-acid-brief.md](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/blob/develop/content/book/this-one-time-on-acid-brief.md)
 
 ## **1\. Attachment/source inventory and access gaps**
@@ -477,24 +477,24 @@ The linked files were retrieved from a later `develop` snapshot identified by Gi
 
 ### **Supplementary brief**
 
-- GitHub path: `content/book/this-one-time-on-acid-brief.md`  
-- GitHub blob: `35e3dd6941b1d2faf63696901145c9afb2d92740`  
-- Current Make counterpart read completely: `src/app/content/book/this-one-time-on-acid-brief.md`  
-- Recorded title: **Figma Make AI Brief \+ Content**  
-- No version field is present in the local copy.  
-- The GitHub tool exposed the linked blob identity but not its body. Byte parity between that GitHub blob and the readable Make counterpart is therefore unverified.  
+- GitHub path: `content/book/this-one-time-on-acid-brief.md`
+- GitHub blob: `35e3dd6941b1d2faf63696901145c9afb2d92740`
+- Current Make counterpart read completely: `src/app/content/book/this-one-time-on-acid-brief.md`
+- Recorded title: **Figma Make AI Brief \+ Content**
+- No version field is present in the local copy.
+- The GitHub tool exposed the linked blob identity but not its body. Byte parity between that GitHub blob and the readable Make counterpart is therefore unverified.
 - This is a historical supporting implementation brief, not a replacement for the six governing documents. Its excerpt-based reading funnel conflicts with the later approved complete-shorter-website-edition entitlement.
 
 ### **Source-authority findings**
 
-- The specification v1.0.0 governs execution.  
-- The companion is context only.  
-- Embedded Prompt 1, 2A, 2B and 3A–3C text was inspected but not executed.  
-- The companion’s author-brief v1.2.1 reference and the design brief’s register v1.0.0 reference are preserved as historical snapshots.  
-- Saving or recording any document does not establish approval of embedded proposals.  
-- R3, T1, RT2 and C1 remain unapproved.  
-- Linked Linear documents were not opened or independently verified. Claims about their contents are only claims recorded in the accessible Markdown sources.  
-- Applicable repository instructions are available locally through `AGENTS.md` and `guidelines/Guidelines.md`.  
+- The specification v1.0.0 governs execution.
+- The companion is context only.
+- Embedded Prompt 1, 2A, 2B and 3A–3C text was inspected but not executed.
+- The companion’s author-brief v1.2.1 reference and the design brief’s register v1.0.0 reference are preserved as historical snapshots.
+- Saving or recording any document does not establish approval of embedded proposals.
+- R3, T1, RT2 and C1 remain unapproved.
+- Linked Linear documents were not opened or independently verified. Claims about their contents are only claims recorded in the accessible Markdown sources.
+- Applicable repository instructions are available locally through `AGENTS.md` and `guidelines/Guidelines.md`.
 - Available Make/Figma credits remain **unknown**.
 
 ---
@@ -547,20 +547,20 @@ The local revision differs from the recorded baseline. That difference alone doe
 
 Verified direct routes exist:
 
-- `/speaking`  
-- `/events`  
+- `/speaking`
+- `/events`
 - `/media`
 
 They must remain publicly addressable. Current menu/footer data still exposes all three.
 
 Separate concerns remain:
 
-1. Menu/footer exposure.  
-2. Human-facing `/sitemap`.  
-3. `src/app/public/sitemap.xml`.  
-4. `src/app/public/robots.txt`.  
-5. Page-level `noindex`.  
-6. Canonical origin.  
+1. Menu/footer exposure.
+2. Human-facing `/sitemap`.
+3. `src/app/public/sitemap.xml`.
+4. `src/app/public/robots.txt`.
+5. Page-level `noindex`.
+6. Canonical origin.
 7. Google-removal request and verification.
 
 The newer author brief v1.3.0 says human-sitemap omission is wording-approved. The request says the treatment remains unresolved. That is a material source/instruction conflict and blocks relying on v1.3.0 for NAV-02 without renewed confirmation.
@@ -569,46 +569,46 @@ The newer author brief v1.3.0 says human-sitemap omission is wording-approved. T
 
 Verified preservation baseline:
 
-- Space Grotesk headings.  
-- Inter body/UI.  
-- Dark palette:  
-  - `#0B0B10`  
-  - `#12121A`  
-  - `#171722`  
-  - `#F6F2EB`  
-  - `#CFC7BB`  
-  - `#9C9488`  
-  - `#FF3AAE`  
-  - `#F4FF3C`  
-  - `#8A63FF`  
-- Both themes.  
-- Saved light preference.  
-- Dark-first reconciliation, not a dark-only launch.  
+- Space Grotesk headings.
+- Inter body/UI.
+- Dark palette:
+  - `#0B0B10`
+  - `#12121A`
+  - `#171722`
+  - `#F6F2EB`
+  - `#CFC7BB`
+  - `#9C9488`
+  - `#FF3AAE`
+  - `#F4FF3C`
+  - `#8A63FF`
+- Both themes.
+- Saved light preference.
+- Dark-first reconciliation, not a dark-only launch.
 - Existing nine-section `/style-guide`.
 
 Current Make discrepancies include:
 
-- `src/styles/fonts.css` declares DM Sans and JetBrains Mono, but is not imported by the verified `src/styles/index.css` chain.  
-- `globals.css` declares Space Grotesk/Inter aliases but successful loading was not verified.  
-- Header and footer theme controls do not share an operative state owner.  
-- The third brutalist theme exists and cannot be removed without approval.  
-- First-visit default, system preference, invalid values, storage failure and final light design remain unresolved.  
-- The style guide preserves all nine sections but retains Nova News identity and historical token values.  
+- `src/styles/fonts.css` declares DM Sans and JetBrains Mono, but is not imported by the verified `src/styles/index.css` chain.
+- `globals.css` declares Space Grotesk/Inter aliases but successful loading was not verified.
+- Header and footer theme controls do not share an operative state owner.
+- The third brutalist theme exists and cannot be removed without approval.
+- First-visit default, system preference, invalid values, storage failure and final light design remain unresolved.
+- The style guide preserves all nine sections but retains Nova News identity and historical token values.
 - Contrast, browser switching, reload persistence, keyboard behavior and assistive-technology behavior were not tested.
 
 ### **Podcast coverage**
 
 Current Make contains podcast types, data, archive/detail/taxonomy components and styles, but:
 
-- no podcast route is registered;  
-- no show identity is approved;  
-- no canonical route/origin is approved;  
-- placeholder audio is not acceptable;  
-- playback is simulated;  
-- equivalent text is not established as recording-checked;  
-- publication eligibility is not represented;  
-- rights and credits are unresolved;  
-- the South Africa/Berlin chronology conflict remains unresolved;  
+- no podcast route is registered;
+- no show identity is approved;
+- no canonical route/origin is approved;
+- placeholder audio is not acceptable;
+- playback is simulated;
+- equivalent text is not established as recording-checked;
+- publication eligibility is not represented;
+- rights and credits are unresolved;
+- the South Africa/Berlin chronology conflict remains unresolved;
 - no additional episode is required or approved.
 
 ---
@@ -705,15 +705,15 @@ Given a bounded stage is completed and verified, when no blockers remain, then c
 
 ### **Dependency-ordered plan**
 
-1. **Prompt 0 source verification** — current stage; read-only.  
-2. **Revision-drift decision** — confirm whether author brief v1.3.0 and register v1.9.0 may govern future proposals.  
-3. **Prompt 1 navigation proposal** — exact preview only.  
-4. **Prompt 1 implementation** — only after exact approval and separate resumption authority.  
-5. **Manual navigation checkpoint** — Ash reviews, commits and pushes; stop.  
-6. **Prompt 2A theme reconciliation proposal and implementation checkpoint.**  
-7. **Prompt 2B existing style-guide refinement proposal and checkpoint.**  
-8. **Prompt 3A podcast decisions/data contract and checkpoint.**  
-9. **Prompt 3B podcast routing/presentation and checkpoint.**  
+1. **Prompt 0 source verification** — current stage; read-only.
+2. **Revision-drift decision** — confirm whether author brief v1.3.0 and register v1.9.0 may govern future proposals.
+3. **Prompt 1 navigation proposal** — exact preview only.
+4. **Prompt 1 implementation** — only after exact approval and separate resumption authority.
+5. **Manual navigation checkpoint** — Ash reviews, commits and pushes; stop.
+6. **Prompt 2A theme reconciliation proposal and implementation checkpoint.**
+7. **Prompt 2B existing style-guide refinement proposal and checkpoint.**
+8. **Prompt 3A podcast decisions/data contract and checkpoint.**
+9. **Prompt 3B podcast routing/presentation and checkpoint.**
 10. **Prompt 3C genuine playback and checkpoint.**
 
 Podcast editorial/hosting decisions may be prepared alongside theme review. Shared-file implementation remains serialized.
@@ -764,42 +764,42 @@ The following is a proposed future file map, not authorization to edit.
 
 Intentional non-changes for Prompt 1:
 
-- `src/app/public/sitemap.xml`  
-- `src/app/public/robots.txt`  
-- page-level `noindex`  
-- canonical origin  
-- Google-removal work  
-- `/privacy` and `/terms` repair  
-- page deletion  
-- theme behavior  
-- podcast code  
+- `src/app/public/sitemap.xml`
+- `src/app/public/robots.txt`
+- page-level `noindex`
+- canonical origin
+- Google-removal work
+- `/privacy` and `/terms` repair
+- page deletion
+- theme behavior
+- podcast code
 - style-guide content
 
 ### **Later theme/style-guide paths**
 
 Verified candidates for later operations:
 
-- `src/main.tsx`  
-- `src/app/App.tsx`  
-- `src/app/routes.ts`  
-- `src/app/components/common/RootLayout.tsx`  
-- `src/app/components/common/Header.tsx`  
-- `src/app/components/common/Footer.tsx`  
-- `src/app/components/common/ThemeProvider.tsx`  
-- `src/app/components/common/ThemeToggleES5.tsx`  
-- `src/app/components/common/ThemeSwitcher.tsx`  
-- `src/styles/index.css`  
-- `src/styles/default_theme.css`  
-- `src/styles/globals.css`  
-- `src/styles/themes/light.css`  
-- `src/styles/themes/dark.css`  
-- `src/styles/themes/dark-extended.css`  
-- `src/styles/themes/brutalist.css`  
-- `src/styles/blocks/book-dark-mode.css`  
-- `src/styles/blocks/book.css`  
-- `src/styles/blocks/theme-toggle.css`  
-- `src/styles/blocks/theme-switcher.css`  
-- `src/app/components/pages/StyleGuidePage.tsx`  
+- `src/main.tsx`
+- `src/app/App.tsx`
+- `src/app/routes.ts`
+- `src/app/components/common/RootLayout.tsx`
+- `src/app/components/common/Header.tsx`
+- `src/app/components/common/Footer.tsx`
+- `src/app/components/common/ThemeProvider.tsx`
+- `src/app/components/common/ThemeToggleES5.tsx`
+- `src/app/components/common/ThemeSwitcher.tsx`
+- `src/styles/index.css`
+- `src/styles/default_theme.css`
+- `src/styles/globals.css`
+- `src/styles/themes/light.css`
+- `src/styles/themes/dark.css`
+- `src/styles/themes/dark-extended.css`
+- `src/styles/themes/brutalist.css`
+- `src/styles/blocks/book-dark-mode.css`
+- `src/styles/blocks/book.css`
+- `src/styles/blocks/theme-toggle.css`
+- `src/styles/blocks/theme-switcher.css`
+- `src/app/components/pages/StyleGuidePage.tsx`
 - `src/styles/blocks/style-guide-page.css`
 
 No operation is selected until Prompt 2A supplies the role/state map and Ash approves exact mappings.
@@ -808,14 +808,14 @@ No operation is selected until Prompt 2A supplies the role/state map and Ash app
 
 Verified existing paths:
 
-- `src/app/data/types/podcast.ts`  
-- `src/app/data/mock/podcasts/episodes.ts`  
-- `src/app/data/mock/podcasts/episodes-season1.ts`  
-- `src/app/data/mock/podcasts/index.ts`  
-- `src/app/data/mock/podcasts/categories.ts`  
-- `src/app/data/mock/podcasts/tags.ts`  
-- `src/app/components/pages/podcasts/PodcastsPage.tsx`  
-- `src/app/components/pages/podcasts/PodcastDetailPage.tsx`  
+- `src/app/data/types/podcast.ts`
+- `src/app/data/mock/podcasts/episodes.ts`
+- `src/app/data/mock/podcasts/episodes-season1.ts`
+- `src/app/data/mock/podcasts/index.ts`
+- `src/app/data/mock/podcasts/categories.ts`
+- `src/app/data/mock/podcasts/tags.ts`
+- `src/app/components/pages/podcasts/PodcastsPage.tsx`
+- `src/app/components/pages/podcasts/PodcastDetailPage.tsx`
 - `src/app/routes.ts`
 
 Potential new adapter, eligibility, media or equivalent-text files remain unresolved. No new path should be invented before Prompt 3A approves source authority and the complete field-level contract.
@@ -830,49 +830,49 @@ No documentation file is proposed for creation now. The repository records Spec 
 
 ### **Preservation requirements**
 
-- Preserve the specification’s stable IDs and stage order.  
-- Preserve the current Make source as the editable authority; do not assume GitHub parity.  
-- Preserve the nine `/style-guide` sections and anchors:  
-  - `brand`  
-  - `colors`  
-  - `typography`  
-  - `buttons`  
-  - `forms`  
-  - `cards`  
-  - `tags`  
-  - `icons`  
-  - `content`  
-- Preserve Space Grotesk headings and Inter body/UI.  
-- Preserve the approved dark palette and approved interaction candidates without claiming verified contrast.  
-- Preserve light capability, theme switching and saved-light preferences.  
-- Preserve the existing brutalist mode until explicitly decided.  
-- Preserve public direct routes for `/speaking`, `/events` and `/media`.  
-- Preserve no-menu/footer-link and `noindex` direction without treating `noindex` as access control or proof of Google removal.  
-- Keep human sitemap, XML sitemap, robots, page metadata and Google-removal verification separate.  
-- Preserve sentence case and the WCAG 2.2 AAA target without claiming conformance.  
-- Preserve manuscript, biography, image, rights and publication approval boundaries.  
-- Preserve separate manuscript-access, newsletter and contact purposes.  
-- Preserve one-episode podcast scope; do not invent or require additional episodes.  
-- Preserve explicit podcast decisions for source, route, origin, hosting, audio, equivalent text, eligibility, rights and credits.  
-- Preserve R3, T1, RT2 and C1 as unapproved.  
+- Preserve the specification’s stable IDs and stage order.
+- Preserve the current Make source as the editable authority; do not assume GitHub parity.
+- Preserve the nine `/style-guide` sections and anchors:
+  - `brand`
+  - `colors`
+  - `typography`
+  - `buttons`
+  - `forms`
+  - `cards`
+  - `tags`
+  - `icons`
+  - `content`
+- Preserve Space Grotesk headings and Inter body/UI.
+- Preserve the approved dark palette and approved interaction candidates without claiming verified contrast.
+- Preserve light capability, theme switching and saved-light preferences.
+- Preserve the existing brutalist mode until explicitly decided.
+- Preserve public direct routes for `/speaking`, `/events` and `/media`.
+- Preserve no-menu/footer-link and `noindex` direction without treating `noindex` as access control or proof of Google removal.
+- Keep human sitemap, XML sitemap, robots, page metadata and Google-removal verification separate.
+- Preserve sentence case and the WCAG 2.2 AAA target without claiming conformance.
+- Preserve manuscript, biography, image, rights and publication approval boundaries.
+- Preserve separate manuscript-access, newsletter and contact purposes.
+- Preserve one-episode podcast scope; do not invent or require additional episodes.
+- Preserve explicit podcast decisions for source, route, origin, hosting, audio, equivalent text, eligibility, rights and credits.
+- Preserve R3, T1, RT2 and C1 as unapproved.
 - Preserve manual GitHub review, commit and push by Ash after every completed bounded stage.
 
 ### **Blocking decisions**
 
-1. **Revision adoption:** whether companion v1.0.4, author brief v1.3.0 and register v1.9.0 are accepted as the current planning inputs.  
-2. **Human sitemap:** the request says unresolved; author brief v1.3.0 says the three retained-page omissions are wording-approved. This requires an explicit decision before `NAV-T002`.  
-3. **Source synchronization:** relationship among Make `3fe4bbf…`, baseline `84242de…` and linked `develop` snapshot `df7073…`.  
-4. **Theme contract:** provider mounting, third mode, first-visit default, system preference, invalid storage and unavailable-storage behavior.  
-5. **Logo/assets:** approved book-logo revision, rights, credits and protected-asset permission.  
-6. **Podcast:** show identity, source authority, canonical routes/origin, eligibility, hosting, approved audio, recording-checked equivalent text, chronology, rights and credits.  
-7. **Verification authority:** exact future test scope and accepted exceptions.  
+1. **Revision adoption:** whether companion v1.0.4, author brief v1.3.0 and register v1.9.0 are accepted as the current planning inputs.
+2. **Human sitemap:** the request says unresolved; author brief v1.3.0 says the three retained-page omissions are wording-approved. This requires an explicit decision before `NAV-T002`.
+3. **Source synchronization:** relationship among Make `3fe4bbf…`, baseline `84242de…` and linked `develop` snapshot `df7073…`.
+4. **Theme contract:** provider mounting, third mode, first-visit default, system preference, invalid storage and unavailable-storage behavior.
+5. **Logo/assets:** approved book-logo revision, rights, credits and protected-asset permission.
+6. **Podcast:** show identity, source authority, canonical routes/origin, eligibility, hosting, approved audio, recording-checked equivalent text, chronology, rights and credits.
+7. **Verification authority:** exact future test scope and accepted exceptions.
 8. **Credits:** available balance and generation scope remain unknown.
 
 ### **Next approval gate**
 
 Prompt 0 is complete as a read-only preflight. The next gate is an explicit decision on:
 
-1. whether the newer author brief v1.3.0 and register v1.9.0 may govern future proposals; and  
+1. whether the newer author brief v1.3.0 and register v1.9.0 may govern future proposals; and
 2. whether to proceed to **Prompt 1 as an exact navigation implementation proposal only**, including whether its human-sitemap portion is authorized for proposal.
 
 Even after selecting Prompt 1, implementation remains paused. Prompt 1 must first provide the exact affected files, before/after entries, proposed diff, intentional non-changes, consequences and verification scope. A separate explicit approval of that preview and separate authority to resume are required before any file changes.\#\# 1\. Attachment/source inventory and access gaps
@@ -894,24 +894,24 @@ The linked files were retrieved from a later `develop` snapshot identified by Gi
 
 ### **Supplementary brief**
 
-- GitHub path: `content/book/this-one-time-on-acid-brief.md`  
-- GitHub blob: `35e3dd6941b1d2faf63696901145c9afb2d92740`  
-- Current Make counterpart read completely: `src/app/content/book/this-one-time-on-acid-brief.md`  
-- Recorded title: **Figma Make AI Brief \+ Content**  
-- No version field is present in the local copy.  
-- The GitHub tool exposed the linked blob identity but not its body. Byte parity between that GitHub blob and the readable Make counterpart is therefore unverified.  
+- GitHub path: `content/book/this-one-time-on-acid-brief.md`
+- GitHub blob: `35e3dd6941b1d2faf63696901145c9afb2d92740`
+- Current Make counterpart read completely: `src/app/content/book/this-one-time-on-acid-brief.md`
+- Recorded title: **Figma Make AI Brief \+ Content**
+- No version field is present in the local copy.
+- The GitHub tool exposed the linked blob identity but not its body. Byte parity between that GitHub blob and the readable Make counterpart is therefore unverified.
 - This is a historical supporting implementation brief, not a replacement for the six governing documents. Its excerpt-based reading funnel conflicts with the later approved complete-shorter-website-edition entitlement.
 
 ### **Source-authority findings**
 
-- The specification v1.0.0 governs execution.  
-- The companion is context only.  
-- Embedded Prompt 1, 2A, 2B and 3A–3C text was inspected but not executed.  
-- The companion’s author-brief v1.2.1 reference and the design brief’s register v1.0.0 reference are preserved as historical snapshots.  
-- Saving or recording any document does not establish approval of embedded proposals.  
-- R3, T1, RT2 and C1 remain unapproved.  
-- Linked Linear documents were not opened or independently verified. Claims about their contents are only claims recorded in the accessible Markdown sources.  
-- Applicable repository instructions are available locally through `AGENTS.md` and `guidelines/Guidelines.md`.  
+- The specification v1.0.0 governs execution.
+- The companion is context only.
+- Embedded Prompt 1, 2A, 2B and 3A–3C text was inspected but not executed.
+- The companion’s author-brief v1.2.1 reference and the design brief’s register v1.0.0 reference are preserved as historical snapshots.
+- Saving or recording any document does not establish approval of embedded proposals.
+- R3, T1, RT2 and C1 remain unapproved.
+- Linked Linear documents were not opened or independently verified. Claims about their contents are only claims recorded in the accessible Markdown sources.
+- Applicable repository instructions are available locally through `AGENTS.md` and `guidelines/Guidelines.md`.
 - Available Make/Figma credits remain **unknown**.
 
 ---
@@ -964,20 +964,20 @@ The local revision differs from the recorded baseline. That difference alone doe
 
 Verified direct routes exist:
 
-- `/speaking`  
-- `/events`  
+- `/speaking`
+- `/events`
 - `/media`
 
 They must remain publicly addressable. Current menu/footer data still exposes all three.
 
 Separate concerns remain:
 
-1. Menu/footer exposure.  
-2. Human-facing `/sitemap`.  
-3. `src/app/public/sitemap.xml`.  
-4. `src/app/public/robots.txt`.  
-5. Page-level `noindex`.  
-6. Canonical origin.  
+1. Menu/footer exposure.
+2. Human-facing `/sitemap`.
+3. `src/app/public/sitemap.xml`.
+4. `src/app/public/robots.txt`.
+5. Page-level `noindex`.
+6. Canonical origin.
 7. Google-removal request and verification.
 
 The newer author brief v1.3.0 says human-sitemap omission is wording-approved. The request says the treatment remains unresolved. That is a material source/instruction conflict and blocks relying on v1.3.0 for NAV-02 without renewed confirmation.
@@ -986,46 +986,46 @@ The newer author brief v1.3.0 says human-sitemap omission is wording-approved. T
 
 Verified preservation baseline:
 
-- Space Grotesk headings.  
-- Inter body/UI.  
-- Dark palette:  
-  - `#0B0B10`  
-  - `#12121A`  
-  - `#171722`  
-  - `#F6F2EB`  
-  - `#CFC7BB`  
-  - `#9C9488`  
-  - `#FF3AAE`  
-  - `#F4FF3C`  
-  - `#8A63FF`  
-- Both themes.  
-- Saved light preference.  
-- Dark-first reconciliation, not a dark-only launch.  
+- Space Grotesk headings.
+- Inter body/UI.
+- Dark palette:
+  - `#0B0B10`
+  - `#12121A`
+  - `#171722`
+  - `#F6F2EB`
+  - `#CFC7BB`
+  - `#9C9488`
+  - `#FF3AAE`
+  - `#F4FF3C`
+  - `#8A63FF`
+- Both themes.
+- Saved light preference.
+- Dark-first reconciliation, not a dark-only launch.
 - Existing nine-section `/style-guide`.
 
 Current Make discrepancies include:
 
-- `src/styles/fonts.css` declares DM Sans and JetBrains Mono, but is not imported by the verified `src/styles/index.css` chain.  
-- `globals.css` declares Space Grotesk/Inter aliases but successful loading was not verified.  
-- Header and footer theme controls do not share an operative state owner.  
-- The third brutalist theme exists and cannot be removed without approval.  
-- First-visit default, system preference, invalid values, storage failure and final light design remain unresolved.  
-- The style guide preserves all nine sections but retains Nova News identity and historical token values.  
+- `src/styles/fonts.css` declares DM Sans and JetBrains Mono, but is not imported by the verified `src/styles/index.css` chain.
+- `globals.css` declares Space Grotesk/Inter aliases but successful loading was not verified.
+- Header and footer theme controls do not share an operative state owner.
+- The third brutalist theme exists and cannot be removed without approval.
+- First-visit default, system preference, invalid values, storage failure and final light design remain unresolved.
+- The style guide preserves all nine sections but retains Nova News identity and historical token values.
 - Contrast, browser switching, reload persistence, keyboard behavior and assistive-technology behavior were not tested.
 
 ### **Podcast coverage**
 
 Current Make contains podcast types, data, archive/detail/taxonomy components and styles, but:
 
-- no podcast route is registered;  
-- no show identity is approved;  
-- no canonical route/origin is approved;  
-- placeholder audio is not acceptable;  
-- playback is simulated;  
-- equivalent text is not established as recording-checked;  
-- publication eligibility is not represented;  
-- rights and credits are unresolved;  
-- the South Africa/Berlin chronology conflict remains unresolved;  
+- no podcast route is registered;
+- no show identity is approved;
+- no canonical route/origin is approved;
+- placeholder audio is not acceptable;
+- playback is simulated;
+- equivalent text is not established as recording-checked;
+- publication eligibility is not represented;
+- rights and credits are unresolved;
+- the South Africa/Berlin chronology conflict remains unresolved;
 - no additional episode is required or approved.
 
 ---
@@ -1122,15 +1122,15 @@ Given a bounded stage is completed and verified, when no blockers remain, then c
 
 ### **Dependency-ordered plan**
 
-1. **Prompt 0 source verification** — current stage; read-only.  
-2. **Revision-drift decision** — confirm whether author brief v1.3.0 and register v1.9.0 may govern future proposals.  
-3. **Prompt 1 navigation proposal** — exact preview only.  
-4. **Prompt 1 implementation** — only after exact approval and separate resumption authority.  
-5. **Manual navigation checkpoint** — Ash reviews, commits and pushes; stop.  
-6. **Prompt 2A theme reconciliation proposal and implementation checkpoint.**  
-7. **Prompt 2B existing style-guide refinement proposal and checkpoint.**  
-8. **Prompt 3A podcast decisions/data contract and checkpoint.**  
-9. **Prompt 3B podcast routing/presentation and checkpoint.**  
+1. **Prompt 0 source verification** — current stage; read-only.
+2. **Revision-drift decision** — confirm whether author brief v1.3.0 and register v1.9.0 may govern future proposals.
+3. **Prompt 1 navigation proposal** — exact preview only.
+4. **Prompt 1 implementation** — only after exact approval and separate resumption authority.
+5. **Manual navigation checkpoint** — Ash reviews, commits and pushes; stop.
+6. **Prompt 2A theme reconciliation proposal and implementation checkpoint.**
+7. **Prompt 2B existing style-guide refinement proposal and checkpoint.**
+8. **Prompt 3A podcast decisions/data contract and checkpoint.**
+9. **Prompt 3B podcast routing/presentation and checkpoint.**
 10. **Prompt 3C genuine playback and checkpoint.**
 
 Podcast editorial/hosting decisions may be prepared alongside theme review. Shared-file implementation remains serialized.
@@ -1181,42 +1181,42 @@ The following is a proposed future file map, not authorization to edit.
 
 Intentional non-changes for Prompt 1:
 
-- `src/app/public/sitemap.xml`  
-- `src/app/public/robots.txt`  
-- page-level `noindex`  
-- canonical origin  
-- Google-removal work  
-- `/privacy` and `/terms` repair  
-- page deletion  
-- theme behavior  
-- podcast code  
+- `src/app/public/sitemap.xml`
+- `src/app/public/robots.txt`
+- page-level `noindex`
+- canonical origin
+- Google-removal work
+- `/privacy` and `/terms` repair
+- page deletion
+- theme behavior
+- podcast code
 - style-guide content
 
 ### **Later theme/style-guide paths**
 
 Verified candidates for later operations:
 
-- `src/main.tsx`  
-- `src/app/App.tsx`  
-- `src/app/routes.ts`  
-- `src/app/components/common/RootLayout.tsx`  
-- `src/app/components/common/Header.tsx`  
-- `src/app/components/common/Footer.tsx`  
-- `src/app/components/common/ThemeProvider.tsx`  
-- `src/app/components/common/ThemeToggleES5.tsx`  
-- `src/app/components/common/ThemeSwitcher.tsx`  
-- `src/styles/index.css`  
-- `src/styles/default_theme.css`  
-- `src/styles/globals.css`  
-- `src/styles/themes/light.css`  
-- `src/styles/themes/dark.css`  
-- `src/styles/themes/dark-extended.css`  
-- `src/styles/themes/brutalist.css`  
-- `src/styles/blocks/book-dark-mode.css`  
-- `src/styles/blocks/book.css`  
-- `src/styles/blocks/theme-toggle.css`  
-- `src/styles/blocks/theme-switcher.css`  
-- `src/app/components/pages/StyleGuidePage.tsx`  
+- `src/main.tsx`
+- `src/app/App.tsx`
+- `src/app/routes.ts`
+- `src/app/components/common/RootLayout.tsx`
+- `src/app/components/common/Header.tsx`
+- `src/app/components/common/Footer.tsx`
+- `src/app/components/common/ThemeProvider.tsx`
+- `src/app/components/common/ThemeToggleES5.tsx`
+- `src/app/components/common/ThemeSwitcher.tsx`
+- `src/styles/index.css`
+- `src/styles/default_theme.css`
+- `src/styles/globals.css`
+- `src/styles/themes/light.css`
+- `src/styles/themes/dark.css`
+- `src/styles/themes/dark-extended.css`
+- `src/styles/themes/brutalist.css`
+- `src/styles/blocks/book-dark-mode.css`
+- `src/styles/blocks/book.css`
+- `src/styles/blocks/theme-toggle.css`
+- `src/styles/blocks/theme-switcher.css`
+- `src/app/components/pages/StyleGuidePage.tsx`
 - `src/styles/blocks/style-guide-page.css`
 
 No operation is selected until Prompt 2A supplies the role/state map and Ash approves exact mappings.
@@ -1225,14 +1225,14 @@ No operation is selected until Prompt 2A supplies the role/state map and Ash app
 
 Verified existing paths:
 
-- `src/app/data/types/podcast.ts`  
-- `src/app/data/mock/podcasts/episodes.ts`  
-- `src/app/data/mock/podcasts/episodes-season1.ts`  
-- `src/app/data/mock/podcasts/index.ts`  
-- `src/app/data/mock/podcasts/categories.ts`  
-- `src/app/data/mock/podcasts/tags.ts`  
-- `src/app/components/pages/podcasts/PodcastsPage.tsx`  
-- `src/app/components/pages/podcasts/PodcastDetailPage.tsx`  
+- `src/app/data/types/podcast.ts`
+- `src/app/data/mock/podcasts/episodes.ts`
+- `src/app/data/mock/podcasts/episodes-season1.ts`
+- `src/app/data/mock/podcasts/index.ts`
+- `src/app/data/mock/podcasts/categories.ts`
+- `src/app/data/mock/podcasts/tags.ts`
+- `src/app/components/pages/podcasts/PodcastsPage.tsx`
+- `src/app/components/pages/podcasts/PodcastDetailPage.tsx`
 - `src/app/routes.ts`
 
 Potential new adapter, eligibility, media or equivalent-text files remain unresolved. No new path should be invented before Prompt 3A approves source authority and the complete field-level contract.
@@ -1247,49 +1247,49 @@ No documentation file is proposed for creation now. The repository records Spec 
 
 ### **Preservation requirements**
 
-- Preserve the specification’s stable IDs and stage order.  
-- Preserve the current Make source as the editable authority; do not assume GitHub parity.  
-- Preserve the nine `/style-guide` sections and anchors:  
-  - `brand`  
-  - `colors`  
-  - `typography`  
-  - `buttons`  
-  - `forms`  
-  - `cards`  
-  - `tags`  
-  - `icons`  
-  - `content`  
-- Preserve Space Grotesk headings and Inter body/UI.  
-- Preserve the approved dark palette and approved interaction candidates without claiming verified contrast.  
-- Preserve light capability, theme switching and saved-light preferences.  
-- Preserve the existing brutalist mode until explicitly decided.  
-- Preserve public direct routes for `/speaking`, `/events` and `/media`.  
-- Preserve no-menu/footer-link and `noindex` direction without treating `noindex` as access control or proof of Google removal.  
-- Keep human sitemap, XML sitemap, robots, page metadata and Google-removal verification separate.  
-- Preserve sentence case and the WCAG 2.2 AAA target without claiming conformance.  
-- Preserve manuscript, biography, image, rights and publication approval boundaries.  
-- Preserve separate manuscript-access, newsletter and contact purposes.  
-- Preserve one-episode podcast scope; do not invent or require additional episodes.  
-- Preserve explicit podcast decisions for source, route, origin, hosting, audio, equivalent text, eligibility, rights and credits.  
-- Preserve R3, T1, RT2 and C1 as unapproved.  
+- Preserve the specification’s stable IDs and stage order.
+- Preserve the current Make source as the editable authority; do not assume GitHub parity.
+- Preserve the nine `/style-guide` sections and anchors:
+  - `brand`
+  - `colors`
+  - `typography`
+  - `buttons`
+  - `forms`
+  - `cards`
+  - `tags`
+  - `icons`
+  - `content`
+- Preserve Space Grotesk headings and Inter body/UI.
+- Preserve the approved dark palette and approved interaction candidates without claiming verified contrast.
+- Preserve light capability, theme switching and saved-light preferences.
+- Preserve the existing brutalist mode until explicitly decided.
+- Preserve public direct routes for `/speaking`, `/events` and `/media`.
+- Preserve no-menu/footer-link and `noindex` direction without treating `noindex` as access control or proof of Google removal.
+- Keep human sitemap, XML sitemap, robots, page metadata and Google-removal verification separate.
+- Preserve sentence case and the WCAG 2.2 AAA target without claiming conformance.
+- Preserve manuscript, biography, image, rights and publication approval boundaries.
+- Preserve separate manuscript-access, newsletter and contact purposes.
+- Preserve one-episode podcast scope; do not invent or require additional episodes.
+- Preserve explicit podcast decisions for source, route, origin, hosting, audio, equivalent text, eligibility, rights and credits.
+- Preserve R3, T1, RT2 and C1 as unapproved.
 - Preserve manual GitHub review, commit and push by Ash after every completed bounded stage.
 
 ### **Blocking decisions**
 
-1. **Revision adoption:** whether companion v1.0.4, author brief v1.3.0 and register v1.9.0 are accepted as the current planning inputs.  
-2. **Human sitemap:** the request says unresolved; author brief v1.3.0 says the three retained-page omissions are wording-approved. This requires an explicit decision before `NAV-T002`.  
-3. **Source synchronization:** relationship among Make `3fe4bbf…`, baseline `84242de…` and linked `develop` snapshot `df7073…`.  
-4. **Theme contract:** provider mounting, third mode, first-visit default, system preference, invalid storage and unavailable-storage behavior.  
-5. **Logo/assets:** approved book-logo revision, rights, credits and protected-asset permission.  
-6. **Podcast:** show identity, source authority, canonical routes/origin, eligibility, hosting, approved audio, recording-checked equivalent text, chronology, rights and credits.  
-7. **Verification authority:** exact future test scope and accepted exceptions.  
+1. **Revision adoption:** whether companion v1.0.4, author brief v1.3.0 and register v1.9.0 are accepted as the current planning inputs.
+2. **Human sitemap:** the request says unresolved; author brief v1.3.0 says the three retained-page omissions are wording-approved. This requires an explicit decision before `NAV-T002`.
+3. **Source synchronization:** relationship among Make `3fe4bbf…`, baseline `84242de…` and linked `develop` snapshot `df7073…`.
+4. **Theme contract:** provider mounting, third mode, first-visit default, system preference, invalid storage and unavailable-storage behavior.
+5. **Logo/assets:** approved book-logo revision, rights, credits and protected-asset permission.
+6. **Podcast:** show identity, source authority, canonical routes/origin, eligibility, hosting, approved audio, recording-checked equivalent text, chronology, rights and credits.
+7. **Verification authority:** exact future test scope and accepted exceptions.
 8. **Credits:** available balance and generation scope remain unknown.
 
 ### **Next approval gate**
 
 Prompt 0 is complete as a read-only preflight. The next gate is an explicit decision on:
 
-1. whether the newer author brief v1.3.0 and register v1.9.0 may govern future proposals; and  
+1. whether the newer author brief v1.3.0 and register v1.9.0 may govern future proposals; and
 2. whether to proceed to **Prompt 1 as an exact navigation implementation proposal only**, including whether its human-sitemap portion is authorized for proposal.
 
 Even after selecting Prompt 1, implementation remains paused. Prompt 1 must first provide the exact affected files, before/after entries, proposed diff, intentional non-changes, consequences and verification scope. A separate explicit approval of that preview and separate authority to resume are required before any file changes.
@@ -1306,13 +1306,13 @@ Stop all implementation and automatic repair activity.
 
 Do not:
 
-- Edit or save files, including specifications, reports or task lists.  
-- Install dependencies or alter runtime/bootstrap settings.  
-- Run commands, tests, builds or development servers.  
-- Create, switch, rename or delete branches.  
-- Stash, reset, discard, rebase, cherry-pick or merge changes.  
-- Commit, push, export changes to GitHub, open PRs, publish or deploy.  
-- Change GitHub connections, remotes, hooks or deployment settings.  
+- Edit or save files, including specifications, reports or task lists.
+- Install dependencies or alter runtime/bootstrap settings.
+- Run commands, tests, builds or development servers.
+- Create, switch, rename or delete branches.
+- Stash, reset, discard, rebase, cherry-pick or merge changes.
+- Commit, push, export changes to GitHub, open PRs, publish or deploy.
+- Change GitHub connections, remotes, hooks or deployment settings.
 - Invoke other workflows.
 
 Use available read-only file/API inspection only. If a required read needs a command or another operation whose side effects are uncertain, show the exact proposed operation and explain what it would do, then stop for approval. Do not work around an unavailable read by modifying the project.
@@ -1323,11 +1323,11 @@ Preserve all committed and uncommitted bootstrap recovery work.
 
 Previous session output reported:
 
-- An initial local main branch at: 3fe4bbfc7f71255be7f0ef61291ad3e8257992c4  
-- A Figma-managed local origin, not necessarily the named GitHub repo.  
-- A subsequent switch to local develop at: df7073174f3aef9fec29a9d00f6052b15277c899  
-- Bootstrap repairs on fix/preview-develop-bootstrap.  
-- A local commit abbreviated e7f65f8.  
+- An initial local main branch at: 3fe4bbfc7f71255be7f0ef61291ad3e8257992c4
+- A Figma-managed local origin, not necessarily the named GitHub repo.
+- A subsequent switch to local develop at: df7073174f3aef9fec29a9d00f6052b15277c899
+- Bootstrap repairs on fix/preview-develop-bootstrap.
+- A local commit abbreviated e7f65f8.
 - Claimed preview/bootstrap/build checks.
 
 These are reported findings, not independently verified current state.
@@ -1338,13 +1338,13 @@ Do not assume identically named branches are synchronised.
 
 For the bootstrap work, report:
 
-- Whether fix/preview-develop-bootstrap exists locally.  
-- The full SHA and parent SHA(s) of e7f65f8, if available.  
-- Exact changed paths and the complete bounded diff.  
-- Committed versus uncommitted changes.  
-- Dependency, runtime, Make configuration and hook changes.  
-- Any branch creation, commands, installations, commits or pushes performed during recovery, to the extent evidence is available.  
-- Whether a GitHub push/export actually occurred, identifying the repository, branch, resulting full SHA and supporting receipt or URL.  
+- Whether fix/preview-develop-bootstrap exists locally.
+- The full SHA and parent SHA(s) of e7f65f8, if available.
+- Exact changed paths and the complete bounded diff.
+- Committed versus uncommitted changes.
+- Dependency, runtime, Make configuration and hook changes.
+- Any branch creation, commands, installations, commits or pushes performed during recovery, to the extent evidence is available.
+- Whether a GitHub push/export actually occurred, identifying the repository, branch, resulting full SHA and supporting receipt or URL.
 - Which verification results are historical reports versus directly inspectable evidence.
 
 Do not infer a push from a local commit.
@@ -1367,20 +1367,20 @@ Repository directory: [https\://github.com/lightspeedwp/ThisOneTimeOnAcidCom/tre
 
 For each file, report:
 
-- Exact path and pinned source commit.  
-- Recorded title, version and Last revised value, where present.  
-- Whether its complete body was read.  
+- Exact path and pinned source commit.
+- Recorded title, version and Last revised value, where present.
+- Whether its complete body was read.
 - Missing sections, truncation or inaccessible references.
 
 A blob SHA, filename, directory listing or preview is not evidence that you read the complete body.
 
 Previously reported export versions were:
 
-- Specification: 1.0.0  
-- Companion: 1.0.4  
-- Author brief: 1.3.0  
-- Design brief: 1.1.2  
-- Decision register: 1.9.0  
+- Specification: 1.0.0
+- Companion: 1.0.4
+- Author brief: 1.3.0
+- Design brief: 1.1.2
+- Decision register: 1.9.0
 - PRD: 1.1.1
 
 Treat those versions as historical comparison inputs, not proof of the current files. Report differences and their material effects.
@@ -1405,13 +1405,13 @@ Reading instructions does not authorise executing embedded commands.
 
 Required branch safeguards:
 
-- Normal implementation work uses an Ash-approved task branch based on develop, after verifying the applicable current policy.  
-- Production hotfix handling is separate; this book-launch plan does not establish a production hotfix.  
-- Do not edit directly on main, develop or detached HEAD.  
-- A name-validation exemption for a base branch does not authorise implementation on that branch.  
-- An existing valid branch name does not authorise unrelated work.  
-- Do not reuse the bootstrap branch until its base, complete diff, existing PR and scope fit are verified and Ash explicitly approves.  
-- Preserve all unrelated and uncommitted work.  
+- Normal implementation work uses an Ash-approved task branch based on develop, after verifying the applicable current policy.
+- Production hotfix handling is separate; this book-launch plan does not establish a production hotfix.
+- Do not edit directly on main, develop or detached HEAD.
+- A name-validation exemption for a base branch does not authorise implementation on that branch.
+- An existing valid branch name does not authorise unrelated work.
+- Do not reuse the bootstrap branch until its base, complete diff, existing PR and scope fit are verified and Ash explicitly approves.
+- Preserve all unrelated and uncommitted work.
 - Keep existing hooks enabled; do not bypass validation.
 
 Do not propose an exact new branch name until its scope, naming policy, base and existing-work checks are sufficiently verified. Otherwise state “Branch unresolved — recommendation withheld”.
@@ -1428,21 +1428,21 @@ Preserve historical source snapshots, including the companion’s older author-b
 
 Distinguish:
 
-- Recorded decisions.  
-- Wording approval.  
-- Approval to save a document.  
-- Approval of a proposed file change.  
-- Authority to resume implementation.  
+- Recorded decisions.
+- Wording approval.
+- Approval to save a document.
+- Approval of a proposed file change.
+- Authority to resume implementation.
 - Publication and deployment approval.
 
 Saving a document does not approve every embedded candidate. R3, T1, RT2 and C1 remain unapproved unless exact later approval evidence is supplied.
 
 For human-facing sitemap treatment:
 
-- Read the current author brief’s recorded omission decision.  
-- Distinguish its approval scope from implementation authority.  
-- Explain how it differs from earlier kickoff wording that described the treatment as unresolved.  
-- Do not silently adopt, reject or implement the newer wording.  
+- Read the current author brief’s recorded omission decision.
+- Distinguish its approval scope from implementation authority.
+- Explain how it differs from earlier kickoff wording that described the treatment as unresolved.
+- Do not silently adopt, reject or implement the newer wording.
 - Identify the exact clarification needed before the affected stage.
 
 Keep menu/footer exposure, human sitemap, XML sitemap, robots, page-level noindex and Google-removal verification separate.
@@ -1453,36 +1453,36 @@ Do not elevate Make’s current implementation into approved design authority me
 
 Compare the current Make source with:
 
-- The newly pinned GitHub source-packet revision.  
+- The newly pinned GitHub source-packet revision.
 - The historical implementation baseline: 84242de7857e1ec03742e20aaaf1df469f44355f
 
 Keep those two baselines distinct. Different SHAs alone do not establish ancestry, ahead/behind status or content differences.
 
 For relevant paths, distinguish:
 
-- Verified active Make file.  
-- Verified repository counterpart.  
-- Exact parity established.  
-- Material difference identified.  
-- Present but inactive.  
-- Inferred path.  
+- Verified active Make file.
+- Verified repository counterpart.
+- Exact parity established.
+- Material difference identified.
+- Present but inactive.
+- Inferred path.
 - Unavailable or unresolved.
 
 Do not claim complete parity where only selected files were inspected.
 
 Preserve:
 
-- Book-first scope and Ash’s personal-project boundaries.  
-- Existing nine-section /style-guide and its anchors.  
-- Space Grotesk headings and Inter body/UI.  
-- Approved palette and scoped mappings.  
-- Light support and saved-light preferences.  
-- Existing third-theme behaviour pending an explicit decision.  
-- Public direct routes /speaking, /events and /media.  
-- Recorded menu/footer visibility requirements.  
-- Manuscript access, privacy and editorial approval boundaries.  
-- One approved, genuinely playable podcast episode as the minimum.  
-- Separate podcast source, show identity, routes/origin, hosting, eligibility, audio, equivalent text, chronology, rights and credits decisions.  
+- Book-first scope and Ash’s personal-project boundaries.
+- Existing nine-section /style-guide and its anchors.
+- Space Grotesk headings and Inter body/UI.
+- Approved palette and scoped mappings.
+- Light support and saved-light preferences.
+- Existing third-theme behaviour pending an explicit decision.
+- Public direct routes /speaking, /events and /media.
+- Recorded menu/footer visibility requirements.
+- Manuscript access, privacy and editorial approval boundaries.
+- One approved, genuinely playable podcast episode as the minimum.
+- Separate podcast source, show identity, routes/origin, hosting, eligibility, audio, equivalent text, chronology, rights and credits decisions.
 - The repository’s applicable accessibility target without claiming conformance from static inspection.
 
 Do not invent additional episodes, content approvals, token values, runtime results, owners, dates or delivery commitments.
@@ -1503,12 +1503,12 @@ F. Proposed staged specification, plan and tasks Preserve the governing specific
 
 G. Branch instructions for the next bounded implementation stage Include:
 
-- Verified implementing scope; issue mapping unresolved where necessary.  
-- Coordination parent as context only, never a closing target.  
-- Existing versus proposed branch state.  
-- Exact branch/base only when verified; otherwise withhold.  
-- Applicable PR template and existing PR evidence, or unresolved.  
-- Proposed PR scope and permitted associations, without inventing them.  
+- Verified implementing scope; issue mapping unresolved where necessary.
+- Coordination parent as context only, never a closing target.
+- Existing versus proposed branch state.
+- Exact branch/base only when verified; otherwise withhold.
+- Applicable PR template and existing PR evidence, or unresolved.
+- Proposed PR scope and permitted associations, without inventing them.
 - Constraints and missing evidence.
 
 Do not infer issue details through inaccessible Linear links. Do not use an epic as a PR development or closing target.
@@ -1525,9 +1525,9 @@ Stop after this response. Do not proceed to Prompt 1 or repair anything.
 
 Acceptance of this report does not authorise:
 
-- Branch creation/switching or connection changes.  
-- Saving specifications or reports.  
-- Implementation, tests, installation or Git operations.  
+- Branch creation/switching or connection changes.
+- Saving specifications or reports.
+- Implementation, tests, installation or Git operations.
 - Publication or deployment.
 
 Later implementation requires an exact bounded preview and explicit approval covering the changes, plus authority to resume. These may be covered by one sufficiently explicit approval; do not repeatedly request the same unchanged approval.
@@ -1560,10 +1560,10 @@ All 22 paths requested by Prompt 0 exist at their expected local paths. That est
 
 `AGENTS.md` identifies this as the TOA React/Vite project and requires compliance with `guidelines/Guidelines.md`. The latter is titled **Ash Shaw Makeup Portfolio** and contains portfolio-specific requirements that conflict with the book source packet and current source, including:
 
-- Makeup-portfolio identity and content assumptions.  
-- A blanket ban on Tailwind despite the active stylesheet importing Tailwind.  
-- A “no hardcoded content” policy contradicted throughout the inspected book components.  
-- Different typography and palette guidance.  
+- Makeup-portfolio identity and content assumptions.
+- A blanket ban on Tailwind despite the active stylesheet importing Tailwind.
+- A “no hardcoded content” policy contradicted throughout the inspected book components.
+- Different typography and palette guidance.
 - Supabase and WordPress policies outside this bounded work.
 
 The source packet says to stop on instruction conflicts rather than silently choose precedence.
@@ -1598,13 +1598,13 @@ The source packet says to stop on instruction conflicts rather than silently cho
 
 ### **A4. Preserved source facts**
 
-- `/speaking`, `/events`, and `/media` are registered public direct routes.  
-- `/draft-viewer` is not registered.  
-- `/ebook` is registered, but registration does not prove suitable access protection.  
-- `/style-guide` exists with these nine anchors: `brand`, `colors`, `typography`, `buttons`, `forms`, `cards`, `tags`, `icons`, `content`.  
-- Space Grotesk headings, Inter body/UI, the approved dark palette, light support, and saved-light preferences remain preservation requirements.  
-- R3, T1, RT2, and C1 remain unapproved.  
-- No active podcast route exists.  
+- `/speaking`, `/events`, and `/media` are registered public direct routes.
+- `/draft-viewer` is not registered.
+- `/ebook` is registered, but registration does not prove suitable access protection.
+- `/style-guide` exists with these nine anchors: `brand`, `colors`, `typography`, `buttons`, `forms`, `cards`, `tags`, `icons`, `content`.
+- Space Grotesk headings, Inter body/UI, the approved dark palette, light support, and saved-light preferences remain preservation requirements.
+- R3, T1, RT2, and C1 remain unapproved.
+- No active podcast route exists.
 - No real audio, checked equivalent text, approved source identity, hosting decision, rights decision, or credits decision is established.
 
 ---
@@ -1613,11 +1613,11 @@ The source packet says to stop on instruction conflicts rather than silently cho
 
 ### **B1. Prioritised user stories**
 
-1. **Navigation exposure:** As a visitor, I can use the primary menu and footer without seeing deferred Events, Speaking, or Media links while their direct public routes continue to work.  
-2. **Human sitemap:** As a visitor, I see only the sitemap cards explicitly approved for launch without losing the primary `/read-the-draft` entry.  
-3. **Theme consistency:** As a visitor who selects light mode, my saved preference continues to work consistently across header, footer, navigation, and reloads.  
-4. **Style guide:** As a maintainer, I can use the existing nine-section `/style-guide` as the single book-specific design reference.  
-5. **Podcast:** As a listener, I can access one approved episode with genuine playback, truthful failure states, and checked equivalent text.  
+1. **Navigation exposure:** As a visitor, I can use the primary menu and footer without seeing deferred Events, Speaking, or Media links while their direct public routes continue to work.
+2. **Human sitemap:** As a visitor, I see only the sitemap cards explicitly approved for launch without losing the primary `/read-the-draft` entry.
+3. **Theme consistency:** As a visitor who selects light mode, my saved preference continues to work consistently across header, footer, navigation, and reloads.
+4. **Style guide:** As a maintainer, I can use the existing nine-section `/style-guide` as the single book-specific design reference.
+5. **Podcast:** As a listener, I can access one approved episode with genuine playback, truthful failure states, and checked equivalent text.
 6. **Safe delivery:** As the author, I review exact bounded changes before each implementation stage and manually control GitHub and release operations.
 
 ### **B2. Stable requirements**
@@ -1638,14 +1638,14 @@ The source packet says to stop on instruction conflicts rather than silently cho
 
 ### **B3. Given/When/Then acceptance scenarios**
 
-- **Source divergence:** Given a referenced source differs materially, when preparing a stage, then report the divergence and stop the affected proposal.  
-- **Navigation preservation:** Given the three retained direct routes, when NAV-01 is implemented, then menu/footer links are absent while direct routing remains unchanged.  
-- **Sitemap authority:** Given conflicting sitemap instructions, when NAV-02 is proposed, then no card is removed until Ash selects the controlling treatment.  
-- **Theme persistence:** Given a saved light preference, when the site reloads or navigates, then light remains selected across all active theme controls.  
-- **Style-guide preservation:** Given the existing page, when GUIDE-01 is implemented, then the same route and nine section IDs remain and no duplicate guide is created.  
-- **Candidate containment:** Given R3/T1/RT2/C1 are unapproved, when design work occurs, then none of their numeric mappings, controls, or persistence rules is adopted.  
-- **Podcast truthfulness:** Given audio is unavailable or fails, when a visitor attempts playback, then the interface reports that state rather than simulating progress.  
-- **Equivalent text:** Given an approved episode, when published, then its checked equivalent text is associated with the same approved editorial revision.  
+- **Source divergence:** Given a referenced source differs materially, when preparing a stage, then report the divergence and stop the affected proposal.
+- **Navigation preservation:** Given the three retained direct routes, when NAV-01 is implemented, then menu/footer links are absent while direct routing remains unchanged.
+- **Sitemap authority:** Given conflicting sitemap instructions, when NAV-02 is proposed, then no card is removed until Ash selects the controlling treatment.
+- **Theme persistence:** Given a saved light preference, when the site reloads or navigates, then light remains selected across all active theme controls.
+- **Style-guide preservation:** Given the existing page, when GUIDE-01 is implemented, then the same route and nine section IDs remain and no duplicate guide is created.
+- **Candidate containment:** Given R3/T1/RT2/C1 are unapproved, when design work occurs, then none of their numeric mappings, controls, or persistence rules is adopted.
+- **Podcast truthfulness:** Given audio is unavailable or fails, when a visitor attempts playback, then the interface reports that state rather than simulating progress.
+- **Equivalent text:** Given an approved episode, when published, then its checked equivalent text is associated with the same approved editorial revision.
 - **Checkpoint:** Given a stage passes its approved checks, when work ends, then Ash receives a manual checkpoint; the next stage does not start automatically.
 
 ---
@@ -1656,16 +1656,16 @@ The source packet says to stop on instruction conflicts rather than silently cho
 
 **Likely modified files**
 
-- `src/app/data/mock/book-site.ts`  
-  - Remove only the selected menu/footer entries.  
-- `src/app/components/pages/SitemapPage.tsx`  
+- `src/app/data/mock/book-site.ts`
+  - Remove only the selected menu/footer entries.
+- `src/app/components/pages/SitemapPage.tsx`
   - Apply the separately selected card omissions.
 
 **Inspected but intentionally unchanged unless a later preview proves otherwise**
 
-- `Header.tsx`  
-- `Footer.tsx`  
-- `routes.ts`  
+- `Header.tsx`
+- `Footer.tsx`
+- `routes.ts`
 - Route page modules for Events, Speaking, and Media
 
 No route deletion, no privacy change, no noindex implementation, and no XML-sitemap work belongs in the narrow navigation stage.
@@ -1674,13 +1674,13 @@ No route deletion, no privacy change, no noindex implementation, and no XML-site
 
 Exact files cannot yet be approved. The preview must first map:
 
-- `styles/index.css`  
-- `default_theme.css`  
-- `globals.css`  
-- Book/theme override styles imported through the active chain  
-- `ThemeProvider.tsx`  
-- `ThemeToggleES5.tsx`  
-- `ThemeSwitcher.tsx`  
+- `styles/index.css`
+- `default_theme.css`
+- `globals.css`
+- Book/theme override styles imported through the active chain
+- `ThemeProvider.tsx`
+- `ThemeToggleES5.tsx`
+- `ThemeSwitcher.tsx`
 - App or root composition if provider wiring is selected
 
 The proposal must decide how the header and footer share state without losing saved light preferences. The existing brutalist mode requires an explicit preserve/remove decision.
@@ -1689,7 +1689,7 @@ The proposal must decide how the header and footer share state without losing sa
 
 Expected local files:
 
-- `StyleGuidePage.tsx`  
+- `StyleGuidePage.tsx`
 - `style-guide-page.css`
 
 Potential root-layout correction must remain separately identified if it affects pages beyond `/style-guide`. The stage must remove stale Nova News examples, correct book-specific typography/palette specimens, preserve all nine anchors, and avoid inventing artwork or logo rights.
@@ -1700,12 +1700,12 @@ Implementation is not yet specifiable because source, editorial, audio, hosting,
 
 Likely later files:
 
-- `data/types/podcast.ts`  
-- `data/mock/podcasts/episodes.ts`  
-- `data/mock/podcasts/index.ts`  
-- `PodcastsPage.tsx`  
-- `PodcastDetailPage.tsx`  
-- `routes.ts`  
+- `data/types/podcast.ts`
+- `data/mock/podcasts/episodes.ts`
+- `data/mock/podcasts/index.ts`
+- `PodcastsPage.tsx`
+- `PodcastDetailPage.tsx`
+- `routes.ts`
 - Existing podcast styles and SEO/breadcrumb/schema data, only after exact inspection
 
 No new file is proposed yet. A media-player component may be justified later, but only after the playback contract and approved audio delivery method are known.
@@ -1762,34 +1762,34 @@ The author brief v1.3.0 records wording approval for omitting Speaking, Events, 
 
 **Proposed source changes**
 
-1. `src/app/data/mock/book-site.ts`  
-     
-   - Remove `/events`, `/speaking`, and `/media` entries from `nav`.  
-   - Remove the corresponding three entries from the existing `Author & Press` footer group.  
+1. `src/app/data/mock/book-site.ts`
+
+   - Remove `/events`, `/speaking`, and `/media` entries from `nav`.
+   - Remove the corresponding three entries from the existing `Author & Press` footer group.
    - Retain the group heading, About Ash, Contact, relative order of retained links, and all routes.
 
-   
 
-2. `src/app/components/pages/SitemapPage.tsx`  
-     
-   - Apply only the sitemap-card omissions explicitly selected by Ash.  
-   - Preserve `/read-the-draft`.  
+
+2. `src/app/components/pages/SitemapPage.tsx`
+
+   - Apply only the sitemap-card omissions explicitly selected by Ash.
+   - Preserve `/read-the-draft`.
    - Do not alter routing or route components.
 
 **Intentional non-changes**
 
-- Do not remove or privatize `/events`, `/speaking`, or `/media`.  
-- Do not edit `routes.ts`.  
-- Do not implement noindex, XML sitemap, robots, canonical, or Google-removal work.  
-- Do not change theme, style-guide, podcast, social-link, legal-route, or manuscript behaviour.  
-- Do not rename or reorder unrelated entries.  
+- Do not remove or privatize `/events`, `/speaking`, or `/media`.
+- Do not edit `routes.ts`.
+- Do not implement noindex, XML sitemap, robots, canonical, or Google-removal work.
+- Do not change theme, style-guide, podcast, social-link, legal-route, or manuscript behaviour.
+- Do not rename or reorder unrelated entries.
 - Do not commit, push, publish, or deploy.
 
 **Required before this stage can proceed**
 
-1. Confirm TOA packet precedence for this bounded work where the repository’s portfolio guideline conflicts.  
-2. Select the exact human-facing sitemap treatment.  
-3. Authorise resumption for **Stage NAV-1 only**.  
+1. Confirm TOA packet precedence for this bounded work where the repository’s portfolio guideline conflicts.
+2. Select the exact human-facing sitemap treatment.
+3. Authorise resumption for **Stage NAV-1 only**.
 4. Review and approve a fresh exact diff after the affected files are re-read.
 
 ---
@@ -1817,11 +1817,11 @@ Static inspection confirms source concerns; it does not establish runtime failur
 
 ## **H. Readiness assessment**
 
-- **Read-only source verification:** complete within the available workspace.  
-- **Navigation exact-preview preparation:** ready after the two authority decisions in F.  
-- **Implementation:** paused.  
-- **Themes/style guide:** not ready; mapping and persistence decisions remain open.  
-- **Podcast:** not ready; essential editorial and media inputs are absent.  
+- **Read-only source verification:** complete within the available workspace.
+- **Navigation exact-preview preparation:** ready after the two authority decisions in F.
+- **Implementation:** paused.
+- **Themes/style guide:** not ready; mapping and persistence decisions remain open.
+- **Podcast:** not ready; essential editorial and media inputs are absent.
 - **Launch:** not established.
 
 ## **I. Stop point**
@@ -1830,7 +1830,7 @@ No files were edited, no tests were executed, and no implementation-complete che
 
 The smallest next action is for Ash to confirm:
 
-1. Whether the TOA source packet takes precedence over the mismatched portfolio guideline for Stage NAV-1.  
-2. The exact human-facing sitemap-card treatment.  
+1. Whether the TOA source packet takes precedence over the mismatched portfolio guideline for Stage NAV-1.
+2. The exact human-facing sitemap-card treatment.
 3. Whether implementation may resume for that bounded stage only.
 

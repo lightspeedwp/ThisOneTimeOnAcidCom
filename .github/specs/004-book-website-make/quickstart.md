@@ -11,8 +11,8 @@
 This guide walks through the approval and execution flow for the Figma Make prompt pack. It documents:
 
 1. **Approval Prerequisites** — What must happen before Prompts can execute
-2. **Unblocked Prompts** — Ready to execute immediately (Prompts 1, 2A, 2B, 3A)
-3. **Blocked Prompts** — Waiting for decision resolution (Prompts 3B, 3C)
+2. **Unblocked Prompts** — No outstanding blocking decisions (Prompts 1, 2A, 2B); execution still requires the gates in [spec.md](./spec.md)
+3. **Handed-over Prompts** — Prompts 3A, 3B, 3C (reader access) now continue in [Spec 005](../005-reader-access/spec.md). Decision 5 revised 2026-11-13: early release, with chapters published individually once approved
 4. **Validation Scenarios** — Runnable checks to confirm feature works
 5. **Decision Routing** — Where to go to resolve blocking decisions
 
@@ -31,31 +31,31 @@ This guide walks through the approval and execution flow for the Figma Make prom
 **Blocking Decisions**:
 
 | Decision | Your Selection | Status |
-|----------|----------------|--------|
+| ---------- | ---------------- | -------- |
 | 1. Recovery-first race condition (Options: A/B/C/D) | ✅ A | APPROVED |
 | 2. Recovery lifetime eligibility (Options: A/B/C/D) | ✅ A | APPROVED |
 | 3. Code expiry start time (Options: A/B/C) | ✅ A | APPROVED |
-| 4. Email service provider (Options: A/B/C/D) | ✅ B | APPROVED |
-| 5. Manuscript publication readiness (Options: A/B/C) | ✅ A | APPROVED |
+| 4. Email service provider (Options: A/B/C/D) | ✅ Hybrid (SendGrid + Brevo) | APPROVED |
+| 5. Manuscript publication readiness (Options: A/B/C) | ❌ C (not yet approved) | DECIDED — blocks Prompts 3A–3C |
 | 6. Newsletter destination (Options: A/B/C/D) | ✅ B | APPROVED |
 | 7. Route enforcement verification (Options: A/B/C/D) | ✅ A | APPROVED |
 
 **Gate 1 Resolution**:
 - ✅ Decision 1 (Recovery race): A—Recovery takes precedence
-- ✅ Decision 2 (Recovery lifetime): A—30-day rolling window
+- ✅ Decision 2 (Recovery lifetime): A—session refresh on recovery; absolute expiry 30 days after initial verification
 - ✅ Decision 3 (Code expiry): A—From generation
-- ✅ Decision 4 (Email provider): B—SendGrid
-- ✅ Decision 5 (Manuscript status): A—Approved & available
-- ✅ Decision 6 (Newsletter destination): B—External provider signup
-- ✅ Decision 7 (Route enforcement): A—All three methods (Meta tags + Robots.txt + Sitemap.xml)
+- ✅ Decision 4 (Email provider): Hybrid—SendGrid (transactional) + Brevo (newsletter)
+- ❌ Decision 5 (Manuscript status): C—Not yet approved; approval date to be confirmed by Ash
+- ✅ Decision 6 (Newsletter destination): B—Brevo external signup
+- ✅ Decision 7 (Route enforcement): A—noindex meta tags + sitemap.xml exclusion; no robots.txt Disallow
 
-**Impact**: Prompts 3B and 3C are now unblocked with clear specifications. Proceed to Gate 2.
+**Impact**: Decisions for Prompts 3B and 3C are recorded, but Prompts 3A, 3B and 3C remain deferred until the manuscript is approved (Decision 5). Proceed to Gate 2.
 
 ---
 
-### Gate 2: Design System Baseline Approval ✅ COMPLETE
+### Gate 2: Design System Baseline Approval ⏳ PENDING SIGN-OFF
 
-**Status**: Design baseline APPROVED (2026-11-09)
+**Status**: Design baseline reviewed 2026-11-09; final Gate 2 sign-off pending (light-theme mapping and token exports still pending — see `exports/GATE_2_READINESS_REPORT.md`)
 
 **What was reviewed**: Approved design elements (Space Grotesk, Inter, 9-color palette)
 
@@ -82,7 +82,7 @@ This guide walks through the approval and execution flow for the Figma Make prom
 - ✅ Blocking Prompts marked "BLOCKED" with prerequisites documented (3B, 3C)
 - ✅ Approval boundaries explicit (approved ✓, unapproved ~, resolved ✅)
 
-**Impact**: All six Figma Make Prompts (1, 2A, 2B, 3A, 3B, 3C) are now unblocked and ready for execution. Full specification package is ready for implementation phase authorization.
+**Impact**: Prompts 1, 2A and 2B have no outstanding blocking decisions. Prompts 3A, 3B and 3C remain deferred until manuscript approval. Execution of any prompt still requires the gates listed in [spec.md](./spec.md).
 
 ---
 
@@ -92,7 +92,7 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 **Purpose**: Specify which navigation items should be hidden from public sitemap
 
-**Status**: ✅ UNBLOCKED (waiting only for Gate 7 decision: route enforcement verification)
+**Status**: ✅ Decision 7 resolved (Option A); execution requires the gates in [spec.md](./spec.md)
 
 **Prerequisites**:
 - [ ] Gate 1 complete (Blocking Decision 7 selected)
@@ -103,12 +103,12 @@ This guide walks through the approval and execution flow for the Figma Make prom
 2. Generate updated navigation component with /speaking, /events, /media hidden from sitemap
 3. Verify acceptance criteria match output:
    - Navigation component includes only approved visible items
-   - Meta tags + Robots.txt + Sitemap.xml exclusion rules implemented
-   - Route enforcement matches selected option from Blocking Decision 7
+   - Noindex meta tags and sitemap.xml exclusion implemented; no robots.txt Disallow rules for the hidden routes
+   - Route enforcement matches Blocking Decision 7 Option A
 
 **Expected Output**:
 - Updated navigation component in Figma
-- Robots.txt and sitemap.xml rules documented
+- Noindex meta tags and sitemap.xml exclusions documented
 - Before/after comparison showing hidden routes
 
 **Validation**: Run Playwright test to verify /speaking, /events, /media return 200 but have noindex meta tags
@@ -176,10 +176,11 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 **Purpose**: Specify exact email verification copy, form wording, and error messages
 
-**Status**: ✅ UNBLOCKED (waiting for Gates 1, 3, 4, 5, 6 decisions)
+**Status**: ⏸️ DEFERRED — Decisions 3, 4 and 6 applied; final execution waits for manuscript approval (Decision 5). Placeholder messaging only in the meantime
 
 **Prerequisites**:
 - [ ] Gate 1 complete (Decisions 3, 4, 5, 6 selected)
+- [ ] Manuscript approved (Decision 5)
 - [ ] Gate 2 complete (Design baseline approved)
 
 **When you execute Prompt 3A**:
@@ -206,9 +207,11 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 ---
 
-## Previously Blocked Prompts (Now Unblocked) ✅
+## Handed-over Prompts (Reader Access — now in Spec 005)
 
-### Prompt 3B: Recovery Flows ✅ UNBLOCKED
+> Reader-access work (historically Spec 004 Prompts 3A–3C) is now owned by [Spec 005 — reader access](../005-reader-access/spec.md), which defines its own flow, stages and dependencies. The notes below are kept for history.
+
+### Prompt 3B: Recovery Flows ⏸️ DEFERRED
 
 **Purpose**: Specify recovery flow when readers attempt to regain access via previous verified session
 
@@ -216,11 +219,11 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 **Blocking Decisions** (now resolved):
 - ✅ Decision 1: Recovery-first race condition — **A** (Recovery takes precedence)
-- ✅ Decision 2: Recovery lifetime eligibility — **A** (30-day rolling window)
+- ✅ Decision 2: Recovery lifetime eligibility — **A** (session refresh on recovery; absolute expiry 30 days after initial verification)
 
-**Ready to execute**:
-1. Update `contracts/prompt-3b-recovery-flows.md` with selected decision options (A & A)
-2. Run Figma Make with updated specification
+**When the manuscript is approved**:
+1. Confirm `contracts/prompt-3b-recovery-flows.md` reflects the selected options (A & A)
+2. Run Figma Make with the specification
 3. Generate recovery flow design with appropriate error handling
 
 **Expected Output**:
@@ -231,7 +234,7 @@ This guide walks through the approval and execution flow for the Figma Make prom
 
 ---
 
-### Prompt 3C: Error States ✅ UNBLOCKED
+### Prompt 3C: Error States ⏸️ DEFERRED
 
 **Purpose**: Specify all error states and error messaging for reader access flow
 
@@ -240,9 +243,9 @@ This guide walks through the approval and execution flow for the Figma Make prom
 **Blocking Decision** (now resolved):
 - ✅ Decision 3: Code expiry start time — **A** (From generation)
 
-**Ready to execute**:
-1. Update `contracts/prompt-3c-error-states.md` with selected decision option (A)
-2. Run Figma Make with updated specification
+**When the manuscript is approved**:
+1. Confirm `contracts/prompt-3c-error-states.md` reflects the selected option (A)
+2. Run Figma Make with the specification
 3. Generate error state designs for all failure scenarios
 
 **Expected Output**:
@@ -263,13 +266,13 @@ This guide walks through the approval and execution flow for the Figma Make prom
 **Test Steps**:
 1. Open generated navigation component in Figma
 2. Confirm /speaking, /events, /media routes are hidden from visible navigation
-3. Check Robots.txt rules: verify User-agent rules exclude /speaking, /events, /media
+3. Check robots.txt: verify there are no Disallow rules for /speaking, /events, /media
 4. Check sitemap.xml: verify hidden routes are excluded from sitemap
 5. Check Meta tags: verify `<meta name="robots" content="noindex">` on hidden pages
 
 **Pass Criteria**:
 - ✅ Navigation component shows only approved visible items
-- ✅ Robots.txt includes rules for /speaking, /events, /media
+- ✅ robots.txt has no Disallow rules for /speaking, /events, /media
 - ✅ Sitemap.xml excludes /speaking, /events, /media
 - ✅ Meta tags match enforcement strategy from Decision 7
 
@@ -345,10 +348,10 @@ Once all blocking decisions are resolved:
 ### Timeline Example
 
 | Step | Decision | Owner | Timeline |
-|------|----------|-------|----------|
+| ------ | ---------- | ------- | ---------- |
 | 1 | Gates 1-3 complete (your input) | You | This week |
-| 2 | Prompts 1, 2A, 2B, 3A ready to execute | Dev team | Next week |
-| 3 | Prompts 3B, 3C unblocked (if decisions made) | You | After Gate 1 |
+| 2 | Prompts 1, 2A, 2B ready to execute (once spec.md gates clear) | Dev team | Next week |
+| 3 | Prompts 3A, 3B, 3C released | You | After manuscript approval (date to be confirmed) |
 | 4 | Full prompt pack ready for implementation | Dev team | 2–3 weeks |
 
 ---
@@ -364,9 +367,9 @@ Once all blocking decisions are resolved:
 
 ### After Gates Complete
 
-5. **Execute Prompts 1, 2A, 2B, 3A** — Generate design-system exports and navigation specs
+5. **Execute Prompts 1, 2A, 2B** — Generate design-system exports and navigation specs
 6. **Validate each Prompt output** — Run validation scenarios (above)
-7. **Plan Prompts 3B, 3C** — Once blocking decisions are resolved
+7. **Execute Prompts 3A, 3B, 3C** — Once the manuscript is approved
 
 ### Implementation Phase (After All Prompts Ready)
 
@@ -384,4 +387,4 @@ Refer to:
 - **Exact prompts**: See `contracts/prompt-*.md` files for complete specifications
 - **Acceptance criteria**: Embedded in each contract file
 
-**Ready to proceed?** Complete the three gates above, then the development team can execute Prompts 1, 2A, 2B, 3A immediately.
+**Ready to proceed?** Complete the three gates above and the execution gates in [spec.md](./spec.md); then Prompts 1, 2A and 2B can be executed. Prompts 3A–3C wait for manuscript approval.
