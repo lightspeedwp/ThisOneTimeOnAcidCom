@@ -559,7 +559,7 @@ All tasks must complete with documented evidence:
 
 ### Critical Identity Contradiction
 
-- [x] **T055** [HIGH] Remediate identity contradiction: Update all guidelines references from "Ash Shaw Makeup Portfolio" to site's actual identity per D1 (Balanced Hybrid voice for "This One Time On Acid" memoir/creative-life-guide). Affects 66+ files including README.md header, Logo.md aria-label, component documentation. Search for: `Ash Shaw Makeup`, `makeup portfolio`, `makeup artist` references in guidelines/ and remove/replace with memoir/creative-life-guide identity context. Commit: `refactor(003-identity): Align guidelines with established site identity per D1 decision`
+- [x] **T055b** [HIGH] Remediate identity contradiction: Update all guidelines references from "Ash Shaw Makeup Portfolio" to site's actual identity per D1 (Balanced Hybrid voice for "This One Time On Acid" memoir/creative-life-guide). Affects 66+ files including README.md header, Logo.md aria-label, component documentation. Search for: `Ash Shaw Makeup`, `makeup portfolio`, `makeup artist` references in guidelines/ and remove/replace with memoir/creative-life-guide identity context. Commit: `refactor(003-identity): Align guidelines with established site identity per D1 decision`
   - Files affected: README.md, Logo.md, PortfolioCard.md, report-creation-guidelines.md, and ~63 others
   - Priority: Must complete before PR merge to ensure consistent brand messaging
   - Evidence: D1 decision recorded in checklists/requirements.md; identity contradiction identified in convergence assessment (2026-10-30)
@@ -730,6 +730,7 @@ All T070–T073 complete → Spec 003 Phase 2 READY FOR IMPLEMENTATION
 
 - [ ] **T075** [MEDIUM] Fix duplicate T055 task ID in tasks.md per internal consistency (contradicts)
   - **Location**: `.github/specs/003-refactor-guidelines/tasks.md` Phase 5
-  - **Issue**: Two tasks share ID T055 — line 549 (execution order violation, unchecked) and line 562 (identity contradiction, checked)
+  - **Issue**: Two tasks shared ID T055 — line 549 (execution order violation, unchecked) and line 562 (identity contradiction, checked)
   - **Action**: Renumber the second T055 (identity contradiction) to T055b or the next available sequential ID; update any cross-references
+  - **Resolution**: Second T055 (identity contradiction, checked) renumbered to T055b; range references T055–T064 remain valid (T055 is the canonical unchecked task, T055b is a variant within the range)
   - **Acceptance**: `grep -c "T055" tasks.md` returns exactly 1 unique task definition
