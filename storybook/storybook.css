@@ -1,0 +1,47 @@
+.storybook-canvas {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+.storybook-eyebrow {
+  color: var(--wp--preset--color--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.storybook-token-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin-top: 2rem;
+}
+
+.storybook-token {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem;
+  border: 1px solid var(--wp--preset--color--neutral-300);
+  border-radius: var(--wp--preset--border-radius--md);
+}
+
+.storybook-token code {
+  overflow-wrap: anywhere;
+  font-size: 0.75rem;
+}
+
+.storybook-note {
+  margin-top: 2rem;
+  color: var(--wp--preset--color--neutral-600);
+  font-size: 0.875rem;
+}
+
+/* Keep the review fixture inside the viewport so the production list can scroll. */
+.storybook-chapter-nav-frame {
+  min-width: 0;
+}
+
+.dark .storybook-note {
+  color: var(--wp--preset--color--neutral-300);
+}
