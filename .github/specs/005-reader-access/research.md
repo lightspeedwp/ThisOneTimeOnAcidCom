@@ -26,8 +26,9 @@ No provider, network, runtime or deployment check was run for this research.
 ## R-03 Protected edition source and delivery
 
 - **Status**: Owner decision (decision 2) with a technical constraint
-- **Decision (constraint)**: The protected edition must be readable only by the chapter function. It must not be matched by `import.meta.glob` in `src/app/utils/bookContentLoader.ts`, which eagerly bundles `/src/content/book/**/*.md` into the client.
-- **Proposed option**: keep the approved edition under `content/` (constitution IV) and ship it to the function as server-only files.
+- **Decision (constraint)**: The protected edition must be readable only by the chapter function. It must not be matched by the eager `import.meta.glob` in `src/app/utils/bookContentLoader.ts`, which bundles every file matched by `BOOK_SOURCE_GLOBS` into the client.
+- **Current state (static inspection at `d3b0694`)**: `content/` has moved to `src/content/` (PR #608). `BOOK_SOURCE_GLOBS` in `src/app/utils/bookContentSource.ts` now matches only `/src/content/book/<dir>/*.md` for the six chapter directories (`00-front-matter` … `05-back-matter`), so the planning documents at the `src/content/book/` root are excluded, but the manuscript chapters in those directories are bundled.
+- **Proposed option**: keep the approved edition in a server-only location that no client glob matches, and ship it to the chapter function as function-only files. The exact location is an owner decision (decision 11); constitution IV still names `content/` as the home for editorial content.
 - **Alternatives considered**: storing chapters in the blob store (adds a publish step); keeping chapters in the client bundle behind UI gating (rejected: violates RA-001).
 - **Owner input needed**: edition manifest, source revision, rights, credits and publication approval (RA-010).
 
@@ -36,14 +37,16 @@ No provider, network, runtime or deployment check was run for this research.
 - **Status**: Finding — must be addressed by an implementation stage
 - **Evidence (static inspection at `3b37b82`)**: route `ebook` → `EbookPage` reads `bookPages` from `bookContentLoader`; register v1.9.0 records `BookHomePage` and `WaitlistPage` handlers that navigate to `/ebook` or `/thank-you` without any request; `ThankYouPage` claims access without verification.
 - **Decision**: protected reading must fetch through the chapter function; acknowledgement pages must use neutral wording until verification succeeds (RA-008, register direction "Truthful form feedback").
-- **Not established**: runtime behaviour; whether `/src/content/book` is populated in any deployed build.
+- **Update at `d3b0694`**: `src/content/book/` is now populated with the manuscript chapters, and route `ebook` still reads them through `bookContentLoader`, so they are part of the static client bundle and readable without verification. Under the 2026-11-13 early-release decision, chapters are published one at a time as Ash approves each; the bundled set should be limited to approved chapters until the chapter function exists.
+- **Not established**: runtime behaviour; which build is deployed to production.
 
 ## R-05 Code format and verification attempts
 
-- **Status**: Owner decision (decision 7)
-- **Proposed**: six-digit numeric code; stored hashed; a code is invalidated after a small fixed number of wrong attempts; resend creates a new code and invalidates the previous one.
-- **Rationale**: Short numeric codes suit mobile entry; attempt limits keep guessing odds low within the ten-minute window.
-- **Open**: exact attempt limit, resend cooldown and per-email/per-IP request limits; the "limited" feedback state (RA-008) depends on these.
+- **Status**: Selected direction (Clarifications Q5) for format and attempts; owner decision (decision 7) for the rest
+- **Decision**: six-digit numeric code, stored hashed; it stops working after five wrong attempts and the reader must request a new code.
+- **Proposed**: resend creates a new code and invalidates the previous one.
+- **Rationale**: Short numeric codes suit mobile entry; five attempts leave roughly a 1-in-200,000 guessing chance per code.
+- **Open**: resend cooldown and per-email/per-network request limits.
 
 ## R-06 Code validity start
 
@@ -66,9 +69,9 @@ No provider, network, runtime or deployment check was run for this research.
 
 ## R-09 Recovery and concurrent verification
 
-- **Status**: Owner decision — deferred (clarify Question 4 not answered)
-- **Recorded source**: Linear v1.13.0 says a competing fresh-code request continues when matching recovery succeeds first, completion optional. Repository register 05 v1.9.0 still lists the race as unresolved.
-- **Open**: confirmation of that rule, recovery duration and start, session identity across linked tabs, and uncertain-outcome handling (decisions 4 and 6).
+- **Status**: Selected direction (Clarifications Q4) for the recovery-first race; owner decision (decisions 4 and 6) for the rest
+- **Decision**: when matching recovery establishes a session first, a competing fresh-code request continues without ending it, and finishing the new code is optional. This confirms the Linear v1.13.0 selection in the repository; register 05 v1.9.0 predates it.
+- **Open**: recovery duration and start, session identity across linked tabs, and uncertain-outcome handling.
 
 ## R-10 Email provider
 
