@@ -139,6 +139,15 @@ Existing IDs and meanings are kept.
 
 ---
 
+## Phase 8: Convergence
+
+Specification convergence and blockers identified during review and implementation discovery.
+
+- [ ] RA-T053 CRITICAL: Resolve the Constitution IV content location — editorial content now lives in `src/content/` (PR #608) while constitution v1.0.0 names `content/`; amend `.specify/memory/constitution.md` through its amendment process or record an approved exception per Constitution IV. This blocks RA-T028 (edition location) and R-03 (protected-edition storage). Maps RA-012/Constitution IV.
+- [ ] RA-T054 Limit the book sources bundled by `src/app/utils/bookContentLoader.ts` to the chapters Ash has approved for early release; restrict `BOOK_SOURCE_DIRECTORIES` in `src/app/utils/bookContentSource.ts` and the files under `src/content/book/` until RA-T035/RA-T037 serve chapters through the chapter function per RA-001, SC-004. Maps RA-001/SC-004.
+
+---
+
 ## Retired IDs
 
 RA-T010–RA-T016 from the previous task list are retired and not reused.
