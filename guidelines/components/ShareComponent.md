@@ -534,11 +534,11 @@ transition-colors ${className}`}
 
 ```tsx
 <div className="flex items-center justify-between">
-  <h2>Festival Makeup 2024</h2>
+  <h2>Festival Creative 2024</h2>
 
   <ShareComponent
     variant="dropdown"
-    title="Festival Makeup 2024"
+    title="Festival Creative 2024"
     url={portfolioUrl}
     description="Vibrant festival makeup with UV accents"
   />
@@ -648,7 +648,7 @@ setTimeout(() => setShowCopiedFeedback(false), 2000);
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[overview-components.md](../overview-components.md)** - Component system
+- **[overview-components.md](./N005-component-catalog.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 
