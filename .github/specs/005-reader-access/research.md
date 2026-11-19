@@ -36,8 +36,8 @@ No provider, network, runtime or deployment check was run for this research.
 
 - **Status**: Finding — must be addressed by an implementation stage
 - **Evidence (static inspection at `3b37b82`)**: route `ebook` → `EbookPage` reads `bookPages` from `bookContentLoader`; register v1.9.0 records `BookHomePage` and `WaitlistPage` handlers that navigate to `/ebook` or `/thank-you` without any request; `ThankYouPage` claims access without verification.
-- **Decision**: protected reading must fetch through the chapter function; acknowledgement pages must use neutral wording until verification succeeds (RA-008, register direction "Truthful form feedback").
-- **Update at `d3b0694`**: `src/content/book/` is now populated with the manuscript chapters, and route `ebook` still reads them through `bookContentLoader`, so they are part of the static client bundle and readable without verification. Under the 2026-11-13 early-release decision, chapters are published one at a time as Ash approves each; the bundled set should be limited to approved chapters until the chapter function exists.
+- **Decision**: protected reading must fetch through the chapter function; acknowledgement pages must use neutral wording until verification succeeds (RA-008, register direction "Truthful form feedback"). **No protected chapters should be bundled into the public client bundle**; they must be served exclusively through the chapter function once verification succeeds (RA-001, SC-004).
+- **Update at `d3b0694`**: `src/content/book/` is now populated with the manuscript chapters, and route `ebook` still reads them through `bookContentLoader`, so they are part of the static client bundle and readable without verification. All bundled chapters must be stored in a server-only location not matched by `BOOK_SOURCE_GLOBS` until the chapter function (RA-035/RA-037) exists to serve them securely.
 - **Not established**: runtime behaviour; which build is deployed to production.
 
 ## R-05 Code format and verification attempts
@@ -71,6 +71,8 @@ No provider, network, runtime or deployment check was run for this research.
 
 - **Status**: Selected direction (Clarifications Q4) for the recovery-first race; owner decision (decisions 4 and 6) for the rest
 - **Decision**: when matching recovery establishes a session first, a competing fresh-code request continues without ending it, and finishing the new code is optional. This confirms the Linear v1.13.0 selection in the repository; register 05 v1.9.0 predates it.
+- **Rationale**: Recovery-first prevents readers from losing access when two tabs race to verify. If recovery wins, the reader gains a session immediately (better UX); if a fresh code finishes later, the same session extends, so there is no duplicate. This avoids session conflicts and respects the existing Linear v1.13.0 decision.
+- **Alternatives considered**: Fresh-code-first (simpler logic, but loses recovery sessions if a competing fresh code wins); mutual exclusion (requires coordination on the reader record, adding latency); sequential race detection (more complex, same outcome as recovery-first).
 - **Open**: recovery duration and start, session identity across linked tabs, and uncertain-outcome handling.
 
 ## R-10 Email provider

@@ -49,7 +49,9 @@ Ash's selected directions from the `/speckit-clarify` session, recorded in full 
 8. Newsletter destination, double opt-in, consent wording and deletion.
 9. Privacy reviewer, notice, support-access disclosure and deletion procedure.
 10. Deployment trigger and production authority. Evidence so far: branch pushes build Vercel previews through its GitHub app, and `netlify.toml` configures Netlify; which host serves production is not established.
-11. Storage for codes, reader records and sessions (research R-02), and where the protected edition is kept so it is not bundled (R-03). Server-side location selected by Q1; storage and edition location open.
+11. ~~Storage for codes, reader records and sessions (research R-02), and where the protected edition is kept so it is not bundled (R-03).~~ **RESOLVED (2026-11-19):**
+    - **Constitution IV content location**: Approve amendment to Constitution IV to reflect `src/content/` as canonical (confirmed in-place by PR #608; this is the correct location). Amend `.specify/memory/constitution.md` per Constitution Amendment process.
+    - **Protected edition storage**: Store in `netlify/functions/protected-content/` as server-only location; impossible to bundle via client globs. Approved chapters remain in `src/content/book/` and bundled by `bookContentLoader`. Edition served exclusively through chapter function (RA-035/RA-T037).
 
 ## Approval distinctions
 
