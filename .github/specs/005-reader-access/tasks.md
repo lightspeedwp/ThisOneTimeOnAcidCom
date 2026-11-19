@@ -200,3 +200,10 @@ RA-T044 ThankYouPage.tsx  |  RA-T045 WaitlistPage.tsx
 2. MVP: Phases 1–3 (US1) as successive approved stages; preview with placeholder chapters only.
 3. Add US2, then US3; US4 only after the recovery rules are decided.
 4. Stop at the manual GitHub checkpoint after each stage. Nothing here authorises provisioning, publication or deployment.
+
+---
+
+## Phase 8: Convergence
+
+- [ ] RA-T053 CRITICAL: Resolve the Constitution IV content location — editorial content now lives in src/content/ (PR #608) while constitution v1.0.0 names content/; amend .specify/memory/constitution.md through its amendment process or record an approved exception per Constitution IV (contradicts)
+- [ ] RA-T054 Limit the book sources bundled by src/app/utils/bookContentLoader.ts to the chapters Ash has approved for early release (restrict BOOK_SOURCE_DIRECTORIES in src/app/utils/bookContentSource.ts or the files under src/content/book/) until RA-T035/RA-T037 serve chapters through the chapter function per RA-001, SC-004 (contradicts)
