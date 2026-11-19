@@ -409,11 +409,11 @@ function CollaborationForm() {
       background-image-select-arrow
     "
   >
-    <option value="">Select a service</option>
-    <option value="festival">Festival Creative</option>
-    <option value="editorial">Editorial Shoot</option>
-    <option value="wedding">Wedding Creative</option>
-    <option value="special-event">Special Event</option>
+    <option value="">Select a category</option>
+    <option value="festival">Vibrant Moments</option>
+    <option value="editorial">Visual Stories</option>
+    <option value="wedding">Personal Projects</option>
+    <option value="special-event">Collaborative Work</option>
   </select>
 </div>
 
@@ -441,10 +441,10 @@ function ServiceSelector() {
   const [selected, setSelected] = useState('');
 
   const services = [
-    { id: 'festival', label: 'Festival Creative', icon: Sparkles },
-    { id: 'editorial', label: 'Editorial Shoot', icon: Camera },
-    { id: 'wedding', label: 'Wedding Creative', icon: Heart },
-    { id: 'special', label: 'Special Event', icon: Calendar }
+    { id: 'festival', label: 'Vibrant Moments', icon: Sparkles },
+    { id: 'editorial', label: 'Visual Stories', icon: Camera },
+    { id: 'wedding', label: 'Personal Projects', icon: Heart },
+    { id: 'special', label: 'Collaborative Work', icon: Calendar }
   ];
 
   return (
