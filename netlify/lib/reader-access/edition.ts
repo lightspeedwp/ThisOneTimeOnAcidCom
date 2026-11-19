@@ -1,6 +1,13 @@
 // Edition manifest and content delivery
 // Reads approved chapter list from manifest
 // Returns 'content unavailable' for chapters not in approved set
+// Supports content versioning per chapter
+
+export interface ChapterVersion {
+  version: string;
+  releasedAt: string;
+  hash?: string; // content hash for change detection
+}
 
 export interface Chapter {
   id: string;
@@ -9,12 +16,21 @@ export interface Chapter {
   approvedAt?: string;
   wordCount?: number;
   estimatedReadTime?: number; // minutes
+  status?: 'draft' | 'review' | 'approved' | 'published';
+  versions?: ChapterVersion[];
+  currentVersion?: string;
 }
 
 export interface EditionManifest {
   title: string;
   createdAt: string;
+  version?: string; // edition version
   chapters: Chapter[];
+  metadata?: {
+    totalChapters: number;
+    approvedChapters: number;
+    lastUpdated: string;
+  };
 }
 
 // In-memory default manifest for development
@@ -37,6 +53,7 @@ export class EditionReader {
 
   constructor(manifest?: EditionManifest) {
     this.manifest = manifest || DEFAULT_MANIFEST;
+    this.updateMetadata();
   }
 
   static fromJSON(json: string): EditionReader {
@@ -46,6 +63,19 @@ export class EditionReader {
     } catch {
       return new EditionReader();
     }
+  }
+
+  private updateMetadata(): void {
+    if (!this.manifest.metadata) {
+      this.manifest.metadata = {
+        totalChapters: 0,
+        approvedChapters: 0,
+        lastUpdated: new Date().toISOString(),
+      };
+    }
+    this.manifest.metadata.totalChapters = this.manifest.chapters.length;
+    this.manifest.metadata.approvedChapters = this.manifest.chapters.filter(c => c.approved).length;
+    this.manifest.metadata.lastUpdated = new Date().toISOString();
   }
 
   isChapterApproved(chapterId: string): boolean {
@@ -59,6 +89,20 @@ export class EditionReader {
 
   getApprovedChapters(): Chapter[] {
     return this.manifest.chapters.filter(c => c.approved);
+  }
+
+  getChaptersByStatus(status: 'draft' | 'review' | 'approved' | 'published'): Chapter[] {
+    return this.manifest.chapters.filter(c => c.status === status);
+  }
+
+  getChapterVersions(chapterId: string): ChapterVersion[] {
+    const chapter = this.getChapter(chapterId);
+    return chapter?.versions ?? [];
+  }
+
+  getCurrentVersion(chapterId: string): string {
+    const chapter = this.getChapter(chapterId);
+    return chapter?.currentVersion ?? '1.0.0';
   }
 
   listChapters(): Chapter[] {
