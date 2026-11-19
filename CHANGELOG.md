@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Specification 005 Phase 1: Reader-Access Infrastructure** — Added Netlify Functions directory structure for reader verification flow with 5 function handlers (code-request, verify, chapter, session, retention) and 6 shared library modules (Blobs adapter, code generation, session cookies, Mailgun integration, edition manifest, response formatting). Added Mailgun.js and Netlify Blobs dependencies. Created comprehensive mock data layer with all 10 reader-visible states and UI copy, ready for Phase 2 implementation.
+- **Specification 005 Phase 2: Foundational Layer** — Implemented core abstractions for reader-access feature: storage adapter using Netlify Blobs for atomic code and session operations, scrypt-based verification code generation with 6-digit 10-minute expiry, device session lifecycle with 30-day expiry and renewal, Mailgun SMTP integration with error classification (retriable vs permanent), chapter manifest reader with approval status tracking, and JSON response builders for all reader states. Added form-data dependency for Mailgun.js integration.
 
 ### Changed
 
