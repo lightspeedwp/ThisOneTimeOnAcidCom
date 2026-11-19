@@ -1,7 +1,22 @@
 // Recovery contract tests (RA-T048)
 // Verify recovery attempt creation, expiry, and race handling
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+
+// Mock store for Netlify Blobs (runs outside Netlify environment)
+const mockStore = new Map<string, string>();
+
+// Mock Netlify Blobs since tests run outside Netlify environment
+vi.mock('@netlify/blobs', () => ({
+  get: vi.fn(async (key: string) => mockStore.get(key) ?? null),
+  put: vi.fn(async (key: string, value: string) => {
+    mockStore.set(key, value);
+  }),
+  delete: vi.fn(async (key: string) => {
+    mockStore.delete(key);
+  }),
+}));
+
 import { storeRecoveryAttempt, getRecoveryAttempt, deleteRecoveryAttempt, updateRecoverySession } from '../lib/reader-access/store';
 import type { StoredRecoveryAttempt } from '../lib/reader-access/store';
 
@@ -10,6 +25,16 @@ describe('Recovery Contract Tests (RA-T048)', () => {
   const recoveryId = 'recovery-test-123';
   const readerId = Buffer.from('test@example.com').toString('base64');
   const sessionId = 'session-abc123';
+
+  beforeEach(() => {
+    // Clear mock store before each test to prevent test pollution
+    mockStore.clear();
+  });
+
+  afterEach(() => {
+    // Clean up after each test
+    mockStore.clear();
+  });
 
   describe('Recovery attempt creation', () => {
     it('should create a recovery attempt on code consumption', async () => {
