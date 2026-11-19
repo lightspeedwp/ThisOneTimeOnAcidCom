@@ -79,11 +79,11 @@ PR marked ready for review by Ash on 2026-11-18 at 17:56:17Z. CodeRabbit (CHILL 
 **Relationship:** docs/reader-access-alignment is ahead of main by the alignment commits; PR #611 is a draft merge proposal.
 
 **Snapshots (from previous converge run):**
-- Spec hash: `162bc3b89cb9284a…` (at `/tmp/claude-0/-home-user-ThisOneTimeOnAcidCom/0222fe63-d935-5a4f-a433-04392917a614/scratchpad/converge-snapshot.txt`)
+- Spec hash: `162bc3b89cb9284a…` (Session 2026-11-19 05:58Z)
 - Plan hash: `5ff89d862001bf86…`
 - Tasks hash: `e913fa937d2554c0…`
 
-Recheck these before writing if you proceed to Phase 8 append.
+Before appending Phase 8, run `/speckit-converge` again to obtain fresh snapshots and compare hashes to detect intervening changes. If snapshots are unavailable, re-run the converge and obtain Ash's re-confirmation before writing.
 
 ---
 
@@ -115,7 +115,7 @@ Recheck these before writing if you proceed to Phase 8 append.
 - **Ash's decisions are binding.** Do not infer approval from earlier messages; ask for explicit "yes/no."
 - **Snapshots matter.** Before appending Phase 8 to tasks.md, re-read the snapshots and compare hashes to detect intervening changes.
 - **Attribution required.** Any commit must end with:
-  ```
+  ```text
   Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
   Claude-Session: https://claude.ai/code/session_01CADHZfK8UtRaefpnLuSnoW
   ```
@@ -138,7 +138,7 @@ Recheck these before writing if you proceed to Phase 8 append.
    - Explicit approval for Phase 8 append? (or recommend Path A: fix CodeRabbit findings first)
    - If Path A: approve the four CodeRabbit fixes? (esp. clarify decision 11 vs. Constitution IV)
 3. **Execute chosen path** (A or B above).
-4. **Lint:** `npm run validate:branch-name && npm run format` (or project's lint command).
+4. **Lint:** `npm run validate:branch-name && npx markdownlint-cli2 ".github/specs/005-reader-access/**/*.md" --fix`.
 5. **Commit & push:** Use required attribution; `git push -u origin docs/reader-access-alignment`.
 6. **Watch PR #611:** CodeRabbit review should update; CI may resolve or remain red on configs.
 
