@@ -50,7 +50,7 @@ Email)
         E-->>U: Show This One Time On Acid profile ✅
     else Email Link (_self)
         S->>B: Open default mail app
-        B-->>U: Compose email to ashley@ashshaw.makeup ✅
+        B-->>U: Compose email to contact@thisonetimeonacid.com ✅
     end
 
 ```text
@@ -202,11 +202,11 @@ The project includes **5 social media platforms**:
 
 | Platform | Icon | URL | Priority | Target |
 |----------|------|-----|----------|--------|
-| **Instagram** | `Instagram` | `https://instagram.com/ashshawmakeup` | Primary | `_blank` |
-| **Facebook** | `Facebook` | `https://facebook.com/ashshawmakeup` | Secondary | `_blank` |
-| **TikTok** | `Music` | `https://tiktok.com/@ashshawmakeup` | Secondary | `_blank` |
+| **Instagram** | `Instagram` | `https://instagram.com/thisonetimeonacid` | Primary | `_blank` |
+| **Facebook** | `Facebook` | `https://facebook.com/thisonetimeonacid` | Secondary | `_blank` |
+| **TikTok** | `Music` | `https://tiktok.com/@thisonetimeonacid` | Secondary | `_blank` |
 | **LinkedIn** | `LinkedinLogo` | `https://linkedin.com/in/ashshaw` | Tertiary | `_blank` |
-| **Email** | `Mail` | `mailto:ashley@ashshaw.makeup` | Contact | - |
+| **Email** | `Mail` | `mailto:contact@thisonetimeonacid.com` | Contact | - |
 
 **Note:** LinkedIn uses the `LinkedinLogo` icon from @phosphor-icons/react
 (verified).
@@ -275,7 +275,7 @@ focus:outline-none focus:ring-2 focus:ring-pink-200 rounded-lg p-2"
 export const socialLinks: SocialLink[] = [
   {
     platform: 'instagram',
-    url: 'https://instagram.com/ashshawmakeup',
+    url: 'https://instagram.com/thisonetimeonacid',
     icon: 'Instagram',
     label: 'Follow us on Instagram',
     primary: true
@@ -283,7 +283,7 @@ export const socialLinks: SocialLink[] = [
   // Add new platform
   {
     platform: 'twitter',
-    url: 'https://twitter.com/ashshawmakeup',
+    url: 'https://twitter.com/thisonetimeonacid',
     icon: 'Twitter',
     label: 'Follow us on Twitter'
   }
@@ -389,19 +389,19 @@ type SocialPlatform = 'instagram' | 'facebook' | 'tiktok' | 'linkedin' |
 ```typescript
 const SOCIAL_LINKS = {
   instagram: {
-    url: 'https://instagram.com/ashshawmakeup',
+    url: 'https://instagram.com/thisonetimeonacid',
     label: 'Instagram',
     icon: InstagramLogo,
     color: 'text-pink-600 hover:text-pink-700'
   },
   facebook: {
-    url: 'https://facebook.com/ashshawmakeup',
+    url: 'https://facebook.com/thisonetimeonacid',
     label: 'Facebook',
     icon: FacebookLogo,
     color: 'text-blue-600 hover:text-blue-700'
   },
   tiktok: {
-    url: 'https://tiktok.com/@ashshawmakeup',
+    url: 'https://tiktok.com/@thisonetimeonacid',
     label: 'TikTok',
     icon: MusicNotes, // TikTok icon alternative
     color: 'text-gray-900 hover:text-pink-500'
@@ -413,7 +413,7 @@ const SOCIAL_LINKS = {
     color: 'text-blue-600 hover:text-blue-700'
   },
   email: {
-    url: 'mailto:ashley@ashshaw.makeup',
+    url: 'mailto:contact@thisonetimeonacid.com',
     label: 'Email',
     icon: Envelope,
     color: 'text-gray-600 hover:text-pink-500'
@@ -446,19 +446,19 @@ type SocialPlatform = 'instagram' | 'facebook' | 'tiktok' | 'linkedin' |
 
 const SOCIAL_LINKS = {
   instagram: {
-    url: 'https://instagram.com/ashshawmakeup',
+    url: 'https://instagram.com/thisonetimeonacid',
     label: 'Instagram',
     icon: InstagramLogo,
     color: 'text-pink-600 hover:text-pink-700'
   },
   facebook: {
-    url: 'https://facebook.com/ashshawmakeup',
+    url: 'https://facebook.com/thisonetimeonacid',
     label: 'Facebook',
     icon: FacebookLogo,
     color: 'text-blue-600 hover:text-blue-700'
   },
   tiktok: {
-    url: 'https://tiktok.com/@ashshawmakeup',
+    url: 'https://tiktok.com/@thisonetimeonacid',
     label: 'TikTok',
     icon: MusicNotes,
     color: 'text-gray-900 hover:text-pink-500'
@@ -470,7 +470,7 @@ const SOCIAL_LINKS = {
     color: 'text-blue-600 hover:text-blue-700'
   },
   email: {
-    url: 'mailto:ashley@ashshaw.makeup',
+    url: 'mailto:contact@thisonetimeonacid.com',
     label: 'Email',
     icon: Envelope,
     color: 'text-gray-600 hover:text-pink-500'
@@ -565,7 +565,7 @@ mb-fluid-md">
   </h1>
 
   <p className="text-fluid-lg font-body text-gray-700 mb-fluid-lg">
-    Makeup Artist | Brisbane, Australia
+    Creative Artist | Brisbane, Australia
   </p>
 
   <SocialLinks
@@ -851,7 +851,7 @@ focus:ring-opacity-50 rounded-lg p-2"
 
 - **[Guidelines.md](../Guidelines.md)** - Main project guidelines
 - **[Data System](../../data/README.md)** - Mock data system guide
-- **[overview-components.md](../overview-components.md)** - Component architecture
+- **[overview-components.md](./N005-component-catalog.md)** - Component architecture
 - **[overview-icons.md](../overview-icons.md)** - Icon verification process
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
