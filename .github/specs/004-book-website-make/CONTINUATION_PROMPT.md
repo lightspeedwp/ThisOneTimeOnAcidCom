@@ -53,7 +53,7 @@ This ThisOneTimeOnAcidCom repository is working on **Spec 004: Book Website Figm
 **Priority Order**:
 1. **CRITICAL** (T060-T062, T069): Resolve contradictions from Linear sync
    - T060: Replace Decision 7 stale wording across 5 files
-   - T061: Reword "Ready to Execute" claims 
+   - T061: Reword "Ready to Execute" claims
    - T062: Record resolved Decisions 1-7 and handover
    - T069: Update spec.md and plan.md to resolved state
 
