@@ -24,10 +24,20 @@ export interface StoredSession {
   renewedAt: string;
 }
 
+export interface StoredRecoveryAttempt {
+  recoveryId: string;
+  readerId: string;
+  initiatedAt: string;
+  expiresAt: string;
+  createdSessionId?: string;
+  raceOutcome?: 'recovery_first' | 'code_first' | 'concurrent';
+}
+
 // Namespace keys to avoid collisions across features
 const KEYS = {
   code: (email: string) => `code:${email}`,
   session: (sessionId: string) => `session:${sessionId}`,
+  recovery: (recoveryId: string) => `recovery:${recoveryId}`,
 };
 
 // Store a verification code with attempt tracking
@@ -87,4 +97,42 @@ export async function renewSession(sessionId: string): Promise<StoredSession | n
 export async function deleteSession(sessionId: string): Promise<void> {
   const key = KEYS.session(sessionId);
   await store.delete(key);
+}
+
+// Store a recovery attempt (RA-T048)
+export async function storeRecoveryAttempt(
+  recovery: StoredRecoveryAttempt
+): Promise<void> {
+  const key = KEYS.recovery(recovery.recoveryId);
+  await put(key, JSON.stringify(recovery));
+}
+
+// Retrieve a recovery attempt
+export async function getRecoveryAttempt(
+  recoveryId: string
+): Promise<StoredRecoveryAttempt | null> {
+  const key = KEYS.recovery(recoveryId);
+  const data = await get(key);
+  if (!data) return null;
+  return JSON.parse(data) as StoredRecoveryAttempt;
+}
+
+// Update recovery attempt with session ID after recovery succeeds
+export async function updateRecoverySession(
+  recoveryId: string,
+  sessionId: string,
+  raceOutcome: 'recovery_first' | 'code_first' | 'concurrent'
+): Promise<StoredRecoveryAttempt | null> {
+  const recovery = await getRecoveryAttempt(recoveryId);
+  if (!recovery) return null;
+  recovery.createdSessionId = sessionId;
+  recovery.raceOutcome = raceOutcome;
+  await put(KEYS.recovery(recoveryId), JSON.stringify(recovery));
+  return recovery;
+}
+
+// Delete a recovery attempt after it's been used or expired
+export async function deleteRecoveryAttempt(recoveryId: string): Promise<void> {
+  const key = KEYS.recovery(recoveryId);
+  await blobDelete(key);
 }

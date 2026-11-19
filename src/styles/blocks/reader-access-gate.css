@@ -1,0 +1,220 @@
+/**
+ * Reader Access Gate Styles
+ *
+ * Container for reader authentication and chapter display
+ */
+
+.reader-access-gate {
+  min-height: 400px;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.reader-access-gate--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: var(--color-text-secondary, #666);
+  font-size: 1.1rem;
+}
+
+/* Request access state: show form */
+.reader-access-gate--request {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 60vh;
+  justify-content: center;
+}
+
+.reader-access-gate--request .reader-access-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Content state: show chapter */
+.reader-access-gate--content {
+  padding: 2rem 0;
+}
+
+.reader-access-gate__article {
+  line-height: 1.8;
+  color: var(--color-text, #000);
+  font-size: 1.1rem;
+}
+
+.reader-access-gate__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.reader-access-gate__body {
+  margin: 0;
+}
+
+.reader-access-gate__body p {
+  margin-bottom: 1.5rem;
+}
+
+.reader-access-gate__body h2,
+.reader-access-gate__body h3,
+.reader-access-gate__body h4 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.reader-access-gate__body h2 {
+  font-size: 1.5rem;
+}
+
+.reader-access-gate__body h3 {
+  font-size: 1.3rem;
+}
+
+.reader-access-gate__body blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--color-border, #ddd);
+  font-style: italic;
+  color: var(--color-text-secondary, #666);
+}
+
+.reader-access-gate__body ol,
+.reader-access-gate__body ul {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.reader-access-gate__body li {
+  margin-bottom: 0.75rem;
+}
+
+/* Error states: content-unavailable, provider-failure, etc */
+.reader-access-gate--content-unavailable,
+.reader-access-gate--provider-failure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.reader-access-gate__state {
+  text-align: center;
+  max-width: 500px;
+  padding: 2rem;
+}
+
+.reader-access-gate__state-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.reader-access-gate__state-message {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary, #666);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.reader-access-gate__action {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--color-focus, #0066cc);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.reader-access-gate__action:hover {
+  background-color: #0052a3;
+}
+
+.reader-access-gate__error {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: var(--color-error, #d32f2f);
+  background-color: rgba(211, 47, 47, 0.08);
+  border: 1px solid var(--color-error, #d32f2f);
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .reader-access-gate__error {
+    background-color: rgba(255, 107, 107, 0.08);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .reader-access-gate {
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+  }
+
+  .reader-access-gate__title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .reader-access-gate__article {
+    font-size: 1rem;
+  }
+
+  .reader-access-gate__body {
+    font-size: 1rem;
+  }
+
+  .reader-access-gate--request {
+    padding: 1.5rem;
+  }
+
+  .reader-access-gate__state {
+    padding: 1.5rem;
+  }
+
+  .reader-access-gate__state-title {
+    font-size: 1.3rem;
+  }
+
+  .reader-access-gate__state-message {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reader-access-gate {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  .reader-access-gate__title {
+    font-size: 1.3rem;
+  }
+
+  .reader-access-gate__article {
+    font-size: 0.95rem;
+  }
+
+  .reader-access-gate__state {
+    padding: 1rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .reader-access-gate {
+    --color-text: var(--color-text-primary-dark, #fff);
+    --color-text-secondary: var(--color-text-secondary-dark, #aaa);
+    --color-border: var(--color-border-dark, #444);
+  }
+}
