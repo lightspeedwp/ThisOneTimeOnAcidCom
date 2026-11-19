@@ -62,7 +62,7 @@ export function createVerificationCode(): VerificationCode {
 }
 
 export function isCodeExpired(expiresAt: string): boolean {
-  return new Date() > new Date(expiresAt);
+  return new Date() >= new Date(expiresAt);
 }
 
 export function isCodeLimited(attemptCount: number, maxAttempts: number = MAX_ATTEMPTS): boolean {

@@ -42,6 +42,7 @@ export default async function handler(
     // Store code
     await storeCode(email, {
       codeHash: verificationCode.codeHash,
+      salt: verificationCode.salt,
       createdAt: verificationCode.createdAt,
       expiresAt: verificationCode.expiresAt,
       attemptCount: verificationCode.attemptCount,

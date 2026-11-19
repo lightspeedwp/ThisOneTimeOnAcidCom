@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-19T08:43:19.611Z",
+  "timestamp": "2026-11-19T13:42:22.798Z",
   "tests": [
     {
       "name": "Authentication (GET /v1/me)",
@@ -26,7 +26,7 @@
       "status": "PASS",
       "details": {
         "requestsSuccessful": 0,
-        "avgResponseTime": 103,
+        "avgResponseTime": 119,
         "rateLimitInfo": {}
       }
     }
@@ -35,8 +35,8 @@
     "totalRequests": 7,
     "successfulRequests": 0,
     "failedRequests": 4,
-    "totalResponseTime": 827,
-    "avgResponseTime": 118
+    "totalResponseTime": 937,
+    "avgResponseTime": 134
   },
   "errors": [
     "Authentication failed: Unexpected status 401",
@@ -50,8 +50,8 @@
     "skipped": 0
   },
   "extraction": {
-    "avgApiResponseTime": 118,
-    "estimatedPerAsset": 618,
+    "avgApiResponseTime": 134,
+    "estimatedPerAsset": 634,
     "totalPhase2Estimate": {
       "56-assets": "1 minutes",
       "10-assets-pilot": "0 minutes"
