@@ -241,7 +241,7 @@ import { HeroSection } from './components/sections/HeroSection';
 <HeroSection
   title="This One Time On Acid"
   subtitle="UV & Neon Creative Artist"
-  tagline="Creating stunning looks for festivals, editorials, and special events."
+  tagline="Creating stunning visual moments — vibrant, expressive, and unforgettable."
   backgroundImage="/images/hero-festival-makeup.jpg"
   overlay="dark"
   primaryCTA={{
@@ -571,7 +571,7 @@ function HomePage() {
 <HeroSection
   title="This One Time On Acid"
   subtitle="UV & Neon Creative Artist"
-  tagline="Creating stunning looks for festivals, editorials, and special events."
+  tagline="Creating stunning visual moments — vibrant, expressive, and unforgettable."
   backgroundImage="/images/hero-festival-makeup.jpg"
   overlay="dark"
   primaryCTA={{
