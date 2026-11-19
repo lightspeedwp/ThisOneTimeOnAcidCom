@@ -553,7 +553,7 @@ useEffect(() => {
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[overview-components.md](../overview-components.md)** - Component system
+- **[overview-components.md](./N005-component-catalog.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[Lightbox.md](./Lightbox.md)** - Image lightbox component

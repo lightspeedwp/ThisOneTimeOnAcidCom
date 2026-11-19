@@ -851,7 +851,7 @@ focus:ring-opacity-50 rounded-lg p-2"
 
 - **[Guidelines.md](../Guidelines.md)** - Main project guidelines
 - **[Data System](../../data/README.md)** - Mock data system guide
-- **[overview-components.md](../overview-components.md)** - Component architecture
+- **[overview-components.md](./N005-component-catalog.md)** - Component architecture
 - **[overview-icons.md](../overview-icons.md)** - Icon verification process
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization

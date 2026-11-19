@@ -952,7 +952,7 @@ sequenceDiagram
 - **[Guidelines.md](../Guidelines.md)** - Main project guidelines
 - **[CMS Field Mapping](../../docs/cms-field-mapping.md)** - CMS setup
 - **[Data System Documentation](../../data/README.md)** - Mock data system
-- **[overview-components.md](../overview-components.md)** - Component architecture
+- **[overview-components.md](./N005-component-catalog.md)** - Component architecture
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Typography scale
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization

@@ -694,7 +694,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 - **[Guidelines.md](../Guidelines.md)** - Main project guidelines
 - **[CMS Field Mapping](../../docs/cms-field-mapping.md)** - CMS setup
 - **[Data System](../../data/README.md)** - Mock data system
-- **[overview-components.md](../overview-components.md)** - Component architecture
+- **[overview-components.md](./N005-component-catalog.md)** - Component architecture
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 
