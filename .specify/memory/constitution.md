@@ -1,10 +1,9 @@
 <!-- SYNC IMPACT REPORT
-Version change: [unfilled template] → 1.0.0 (MAJOR: first ratified constitution)
-Modified principles: N/A (initial ratification of 5 core principles)
-Added sections: Governance Amendment Procedure
+Version change: 1.0.0 → 1.0.1 (PATCH: Principle IV location clarification)
+Modified principles: IV (Protected Content & Data Rules) — editorial content location updated from `content/` to `src/content/` to reflect PR #608 move
+Added sections: None
 Removed sections: None
-Follow-up TODOs: Node.js 24 pinning confirmation (approved in TOA-241,
-implementation pending)
+Follow-up TODOs: None
 -->
 
 # ThisOneTimeOnAcidCom Constitution
@@ -61,7 +60,7 @@ Content architecture separates UI configuration from editorial material:
 
 - **Mock Data Authority**: All UI strings, navigation labels, page metadata and component configuration come from `src/app/data/mock/` (centralised data layer)
 - **No Hardcoded Content**: Zero hardcoded UI strings or labels; all derive from mock data objects
-- **Editorial Content**: Book chapters, journal entries, articles and manuscript content live in `content/` (separated from application code)
+- **Editorial Content**: Book chapters, journal entries, articles and manuscript content live in `src/content/` (separated from application code, co-located with application source per structural convention)
 - **Image Protection**: Never replace existing `figma:asset/` imports or logo files; use `ImageWithFallback.tsx` for new images
 - **Supabase Non-Use**: `src/app/utils/supabase/` is a system artifact—never import from it, never suggest integration
 
@@ -148,8 +147,9 @@ this constitution. When they conflict with each other, AGENTS.md → guidelines/
 
 | Version | Date | Amendment | Approved By |
 |---------|------|-----------|-------------|
-| 1.0.0 | 2026-10-17 | Initial ratification: 7 core principles, Spec Kit workflow, bundler safeguards, governance rules. Basis: TOA-241 (Repository Governance) and established repository practices from AGENTS.md, guidelines/, CONTRIBUTING.md. | @ashley (pending) |
+| 1.0.1 | 2026-11-19 | Principle IV (Protected Content & Data Rules): Editorial content location updated to `src/content/` per PR #608. Reflects constitution amendment decision 11 from Spec 005 reader-access convergence. | @ashley |
+| 1.0.0 | 2026-10-17 | Initial ratification: 7 core principles, Spec Kit workflow, bundler safeguards, governance rules. Basis: TOA-241 (Repository Governance) and established repository practices from AGENTS.md, guidelines/, CONTRIBUTING.md. | @ashley |
 
 ---
 
-**Version**: 1.0.0 | **Ratified**: 2026-10-17 | **Last Amended**: 2026-10-17
+**Version**: 1.0.1 | **Ratified**: 2026-10-17 | **Last Amended**: 2026-11-19
