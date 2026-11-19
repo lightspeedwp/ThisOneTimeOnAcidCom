@@ -1,46 +1,77 @@
 // POST /api/reader/code-requests
 // Create verification code and send via email
 // Resend invalidates previous code for same email
-// RA-T033: Implements code creation with server-time creation_at per RA-003
 
-import { createVerificationCode } from '../lib/reader-access/codes';
+import { createJsonResponse, responses } from '../lib/reader-access/responses';
+import { createVerificationCode, generateCode } from '../lib/reader-access/codes';
 import { storeCode, deleteCode } from '../lib/reader-access/store';
-import { sendVerificationEmail } from '../lib/reader-access/mailer';
-import { jsonResponse } from '../lib/reader-access/responses';
+import { MailgunMailer } from '../lib/reader-access/mailer';
 
-interface CodeRequestBody {
-  email: string;
-}
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default async function handler(req: Request): Promise<Response> {
+export default async function handler(
+  req: Request
+): Promise<Response> {
   if (req.method !== 'POST') {
-    return jsonResponse({ state: 'invalid-method' }, 405);
+    return new Response('{"state":"provider-failure"}', { status: 405, headers: { 'Content-Type': 'application/json' } });
   }
 
   try {
-    const body = (await req.json()) as CodeRequestBody;
-    const { email } = body;
+    // Parse request body
+    const body = await req.json();
+    const { email } = body as Record<string, unknown>;
 
-    if (!email || typeof email !== 'string' || !email.includes('@')) {
-      return jsonResponse({ state: 'invalid-email' }, 400);
+    // Validate email
+    if (!email || typeof email !== 'string') {
+      return createJsonResponse(responses.invalid(), 400);
     }
 
-    // RA-003: Invalidate previous code on resend
-    await deleteCode(email);
+    if (!EMAIL_REGEX.test(email)) {
+      return createJsonResponse(responses.invalid(), 400);
+    }
 
-    // RA-002: Create six-digit code with 10-minute expiry
+    // Delete previous code for this email (recovery: invalidate old)
+    await deleteCode(email).catch(() => {
+      // Ignore deletion errors
+    });
+
+    // Create new verification code
+    const code = generateCode();
     const verificationCode = createVerificationCode();
-    await storeCode(email, verificationCode);
 
-    // Send via Mailgun (Decision 1 approved)
-    try {
-      await sendVerificationEmail(email, verificationCode);
-      return jsonResponse({ state: 'request-received' }, 202);
-    } catch (mailError) {
-      // RA-003: Distinguish delivery uncertainty from complete failure
-      return jsonResponse({ state: 'delivery-uncertain' }, 202);
+    // Store code
+    await storeCode(email, {
+      codeHash: verificationCode.codeHash,
+      createdAt: verificationCode.createdAt,
+      expiresAt: verificationCode.expiresAt,
+      attemptCount: verificationCode.attemptCount,
+      maxAttempts: verificationCode.maxAttempts,
+    });
+
+    // Send via Mailgun
+    const mailer = new MailgunMailer({
+      apiKey: process.env.MAILGUN_API_KEY || '',
+      domain: process.env.MAILGUN_DOMAIN || '',
+      fromAddress: process.env.MAILGUN_FROM || 'noreply@thisonetimeonacidcom.com',
+    });
+
+    const emailResult = await mailer.sendVerificationCode(email, code, '10 minutes');
+
+    // Return response based on email result
+    if (emailResult.status === 'accepted') {
+      return createJsonResponse(
+        responses.received(verificationCode.expiresAt),
+        202
+      );
+    } else if (emailResult.status === 'uncertain') {
+      return createJsonResponse(responses.uncertain(), 502);
+    } else {
+      return createJsonResponse(responses.invalid(), 400);
     }
-  } catch (error) {
-    return jsonResponse({ state: 'provider-failure' }, 502);
+  } catch (err) {
+    if (err instanceof SyntaxError) {
+      return createJsonResponse(responses.invalid(), 400);
+    }
+    return createJsonResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 502);
   }
 }

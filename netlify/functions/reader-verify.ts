@@ -1,91 +1,132 @@
 // POST /api/reader/verifications
 // Verify code (atomic consume); create/update session
 // Recovery-first: if recovery succeeds first, fresh code continues
-// RA-T034: Atomic code verification, session creation, 30d renewal per RA-004 & RA-T007 approval
 
-import { randomUUID } from 'crypto';
+import { createJsonResponse, responses } from '../lib/reader-access/responses';
 import { verifyCode, isCodeExpired, isCodeLimited } from '../lib/reader-access/codes';
-import { getCode, deleteCode, storeSession, renewSession } from '../lib/reader-access/store';
-import { createSessionCookie, formatSessionCookie, SESSION_COOKIE_NAME, SESSION_MAX_AGE_SECONDS } from '../lib/reader-access/session-cookie';
-import { jsonResponse } from '../lib/reader-access/responses';
+import {
+  getCode,
+  deleteCode,
+  storeSession,
+  incrementCodeAttempts,
+  getSession,
+  renewSession,
+} from '../lib/reader-access/store';
+import {
+  generateSessionId,
+  createSessionCookie,
+  formatSessionCookie,
+  parseSessionCookie,
+} from '../lib/reader-access/session-cookie';
 
-interface VerifyRequestBody {
-  email: string;
-  code: string;
-}
+const CODE_REGEX = /^\d{6}$/;
 
-export default async function handler(req: Request): Promise<Response> {
+export default async function handler(
+  req: Request
+): Promise<Response> {
   if (req.method !== 'POST') {
-    return jsonResponse({ state: 'invalid-method' }, 405);
+    return new Response('{"state":"provider-failure"}', { status: 405, headers: { 'Content-Type': 'application/json' } });
   }
 
   try {
-    const body = (await req.json()) as VerifyRequestBody;
-    const { email, code } = body;
+    // Parse request body
+    const body = await req.json();
+    const { email, code } = body as Record<string, unknown>;
 
-    if (!email || !code) {
-      return jsonResponse({ state: 'code-invalid' }, 400);
+    // Validate inputs
+    if (!email || typeof email !== 'string') {
+      return createJsonResponse(responses.invalid(), 400);
     }
 
-    // RA-002/RA-003: Retrieve stored code
+    if (!code || typeof code !== 'string' || !CODE_REGEX.test(code)) {
+      return createJsonResponse(responses.invalid(), 400);
+    }
+
+    // Retrieve stored code
     const storedCode = await getCode(email);
     if (!storedCode) {
-      return jsonResponse({ state: 'code-invalid' }, 400);
+      return createJsonResponse(responses.invalid(), 400);
     }
 
-    // RA-003: Check expiry (10 minutes from creation per Q2)
+    // Check if expired
     if (isCodeExpired(storedCode.expiresAt)) {
-      await deleteCode(email);
-      return jsonResponse({ state: 'code-expired' }, 410);
+      return createJsonResponse(responses.expired(), 410);
     }
 
-    // RA-002: Check attempt limit (5 max per Q5)
+    // Check if already limited (too many attempts)
     if (isCodeLimited(storedCode.attemptCount, storedCode.maxAttempts)) {
-      await deleteCode(email);
-      return jsonResponse({ state: 'limited' }, 429);
+      return createJsonResponse(responses.used(), 410);
     }
 
-    // RA-002: Verify code (constant-time, never reveal email existence)
-    if (!verifyCode(code, storedCode.codeHash, storedCode.salt)) {
-      storedCode.attemptCount += 1;
-      if (storedCode.attemptCount >= storedCode.maxAttempts) {
-        await deleteCode(email);
-        return jsonResponse({ state: 'limited' }, 429);
-      }
-      return jsonResponse({ state: 'code-invalid' }, 400);
+    // Verify code hash
+    const isValid = verifyCode(code, storedCode.codeHash, storedCode.salt);
+
+    if (!isValid) {
+      // Increment attempt count
+      await incrementCodeAttempts(email);
+      return createJsonResponse(responses.invalid(), 400);
     }
 
-    // RA-004: Successful verification — create session
-    const sessionId = randomUUID();
+    // Code is valid: check for existing session and renew, or create new
     const now = new Date();
-
-    // RA-T007 approved: 30-day session duration
     const expiresAt = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-    // RA-006: Create reader access record (email, verification, timestamps)
-    // Delete after 12 months without authenticated use (per RA-006)
-    const session = {
-      sessionId,
-      email,
-      createdAt: now.toISOString(),
-      expiresAt: expiresAt.toISOString(),
-      lastAuthenticatedAt: now.toISOString(),
-      deleteAfter: new Date(now.getTime() + 12 * 30 * 24 * 60 * 60 * 1000).toISOString(),
-    };
+    // RA-T041: Check if user has active session in browser cookie
+    // If so, renew it; otherwise create new session
+    const cookieHeader = req.headers.get('cookie');
+    const existingSessionId = parseSessionCookie(cookieHeader);
+    let sessionId = existingSessionId;
+    let isRenewal = false;
 
-    await storeSession(session as any);
+    if (existingSessionId) {
+      // Check if session is still valid
+      const existingSession = await getSession(existingSessionId);
+      if (existingSession && new Date(existingSession.expiresAt) > new Date()) {
+        // Renew existing session
+        isRenewal = true;
+        const renewedSession = await renewSession(existingSessionId);
+        if (renewedSession) {
+          sessionId = existingSessionId;
+          // Use the renewed expiry
+          expiresAt.setTime(new Date(renewedSession.expiresAt).getTime());
+        }
+      }
+    }
 
-    // RA-005: Set HttpOnly, Secure, SameSite cookie
-    const response = jsonResponse({ state: 'verified' }, 200);
-    const cookie = createSessionCookie(sessionId);
-    const setCookieHeader = formatSessionCookie(cookie);
-    response.headers.set('Set-Cookie', setCookieHeader);
+    // If no renewal, create new session
+    if (!isRenewal) {
+      sessionId = generateSessionId();
+      await storeSession({
+        sessionId,
+        deviceId: '', // Can be populated from request fingerprinting if needed
+        chapterId: '',
+        createdAt: now.toISOString(),
+        expiresAt: expiresAt.toISOString(),
+        renewedAt: now.toISOString(),
+      });
+    }
 
-    // RA-002: Consume code atomically
-    await deleteCode(email);
+    // Delete code (recovery: if this fails, session was already created)
+    await deleteCode(email).catch(() => {
+      // Ignore deletion errors (recovery-first)
+    });
+
+    // Create/update session cookie
+    const sessionCookie = createSessionCookie(sessionId);
+    const sessionCookieHeader = formatSessionCookie(sessionCookie);
+
+    // Return 200 with response and Set-Cookie header
+    const response = createJsonResponse(
+      responses.verified(sessionId, expiresAt.toISOString()),
+      200
+    );
+    response.headers.set('Set-Cookie', sessionCookieHeader);
 
     return response;
-  } catch (error) {
-    return jsonResponse({ state: 'provider-failure' }, 502);
+  } catch (err) {
+    if (err instanceof SyntaxError) {
+      return createJsonResponse(responses.invalid(), 400);
+    }
+    return createJsonResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 502);
   }
 }
