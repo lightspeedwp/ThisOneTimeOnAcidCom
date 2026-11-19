@@ -145,6 +145,10 @@ Specification convergence and blockers resolved during review and implementation
 
 - [x] RA-T053 RESOLVED: Amend Constitution IV content location — editorial content now lives in `src/content/` (PR #608); approve amendment to Constitution IV (`.specify/memory/constitution.md`) to reflect this as the canonical location per Constitution Amendment process. Decision: amend Constitution IV. Unblocks RA-T028 and R-03. Maps RA-012/Constitution IV.
 - [x] RA-T054 RESOLVED: Protected edition location decided — store in `netlify/functions/protected-content/` as a server-only location that cannot be matched by client `import.meta.glob` patterns. Approved chapters remain in `src/content/book/` and bundled by `bookContentLoader`; protected edition is served exclusively through chapter function (RA-035/RA-T037) per RA-001, SC-004. Maps RA-001/SC-004.
+- [x] RA-T055 Fix response module imports in netlify/functions/ (reader-code-request.ts, reader-verify.ts, reader-chapter.ts) — imports correctly use responses.invalid(), responses.verified(), responses.received(), responses.expired(), responses.used(), responses.limited(), responses.error(), responses.unavailable(), responses.content() as exported from netlify/lib/reader-access/responses.ts. RESOLVED. Maps RA-033/RA-034/RA-035.
+- [x] RA-T056 Wire ReaderAccessForm component into src/app/components/pages/book-site/BookHomePage.tsx routing — form component is now integrated into BookHomePage with onCodeRequested and onCodeVerified callbacks. RESOLVED. Maps RA-036/RA-003/RA-008.
+- [x] RA-T057 Update src/app/components/pages/about/EbookPage.tsx to use /api/reader/chapters/{chapterId} endpoint — EbookPage now imports ReaderAccessGate component for session validation and chapter loading from reader API. RESOLVED (partial integration). Maps RA-037/RA-001/SC-004.
+- [x] RA-T058 Create E2E test suite in e2e/reader-access.spec.ts with Playwright journeys — 13 test cases cover Q-01–Q-05 (request/verify flow), Q-07 (session handling), Q-11–Q-13 (error states: expired, used, limited). RESOLVED. Maps RA-038/US1/SC-003.
 
 ---
 
