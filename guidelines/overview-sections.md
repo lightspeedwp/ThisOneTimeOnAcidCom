@@ -288,7 +288,7 @@ files:
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines
 - **[overview-blocks.md](./overview-blocks.md)** - Block patterns
 - **[overview-patterns.md](./overview-patterns.md)** - Design patterns
-- **[overview-components.md](./overview-components.md)** - Component library
+- **[overview-components.md](./N005-component-catalog.md)** - Component library
 - **[design-tokens-reference.md](./design-tokens-reference.md)** - Spacing system
 
 ---
