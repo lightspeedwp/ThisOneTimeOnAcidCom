@@ -69,7 +69,7 @@
 - [ ] T014 [US1] Generate exact preview for Prompt 1: Navigate to contracts/prompt-1-*.md and confirm before/after navigation structure, numbered implementation steps, acceptance criteria match spec.md scenario 1
 - [ ] T015 [US1] Verify Prompt 1 scope: Speaking/Events/Media hidden, noindex meta tags + sitemap.xml exclusion per route-enforcement-verification decision (Decision 7)
 - [ ] T016 [US1] Generate exact preview for Prompt 2A: Verify CSS variables and JSON tokens match 9-color palette + typography baseline per spec.md scenario 1
-- [ ] T017 [US1] Verify Prompt 2A scope: Both unapproved candidates excluded (R3, T1, RT2, C1) per spec.md scenario 2
+- [ ] T017 [US1] Verify Prompt 2A scope: All unapproved candidates excluded (R3, T1, RT2, C1) per spec.md scenario 2
 - [ ] T018 [US1] Generate exact preview for Prompt 2B: Verify navigation component with 4 visible items, #FF3AAE hover/active, responsive breakpoints per data-model.md
 - [ ] T019 [US1] Compile acceptance criteria for Prompts 1–2B: each with specific measurable outcomes, verifiable against Figma output
 
@@ -183,12 +183,20 @@
 
 **Within US1**:
 - T011–T013: Prompt contract validation (3 independent contracts) → all [P]
+- T014–T019: Prompt generation tasks (sequential per story)
+
+**Within US3**:
 - T020–T026: Blocking decision documentation (7 independent decisions) → all [P]
+- T027–T029: Blocking decision matrix and implementation guidance (sequential)
 
 **Within US4**:
 - T030–T032: Documentation compilation (3 independent documents) → all [P]
 - T033–T036: Documentation validation (4 independent validations) → can be sequential per document
+- T037–T040: Specification quality sign-off (sequential validation)
+
+**Within Phase 6**:
 - T041–T043: Polish tasks (3 independent checks) → all [P]
+- T044–T045: Boundary verification and final package (sequential)
 
 ---
 
