@@ -398,7 +398,7 @@ expanding content, always write headings in sentence case.
 ### File Organization (February 2026)
 
 ```text
-ash-shaw-makeup-portfolio/
+this-one-time-on-acid-com/
 ├── 📄 App.tsx                         # Main application router
 ├── 📄 main.tsx                        # React entry point
 ├── 📄 index.html                      # HTML template
