@@ -56,11 +56,33 @@ Returning access for one browser profile (RA-004, RA-005).
 `expires_at` resets) → `ended`. A new device or profile, or cleared storage, has
 no session and needs fresh verification.
 
-## RecoveryAttempt — deferred
+## RecoveryAttempt
 
-Recovery after confirmed redemption but incomplete session establishment
-(register v1.8.0 candidate). Fields, lifetime, identity across linked tabs and
-race handling are *open* (research R-09). Not modelled until decided.
+Recovery after confirmed redemption but incomplete session establishment (RA-009, register v1.8.0 candidate).
+
+| Field | Notes |
+| --- | --- |
+| `recovery_id` | Opaque random identifier |
+| `reader_id` | Links to ReaderAccessRecord; set when recovery is initiated |
+| `initiated_at` | Timestamp when recovery attempt is created; starts the recovery window |
+| `expires_at` | `initiated_at` + recovery duration; *open* decision 4 (duration and triggering event) |
+| `state` | `initiated` → `succeeded` (session established) \| `abandoned` (new fresh code consumed) \| `expired` |
+| `created_session_id` | Session ID if recovery succeeds; null until success |
+| `race_outcome` | `recovery_first` \| `code_first` \| `concurrent` (for logging; *open* decision 6 details) |
+
+**State transitions** (recovery-first race settled by Q4):
+1. Recovery initiated when verification code is consumed
+2. If recovery succeeds before timeout: `initiated` → `succeeded` (session created immediately)
+3. If competing fresh code finishes during recovery window: 
+   - Code continues without ending recovery
+   - Finishing code extends the same recovered session (`expires_at` reset)
+   - New session is NOT created; recovery session is reused (avoids duplicates)
+4. If recovery timeout expires unused: `initiated` → `expired`
+5. If reader starts fresh verification elsewhere: competing recovery is abandoned
+
+**Open decisions**:
+- Decision 4: exact recovery duration, start event (confirmed redemption time + N minutes?), and session identity storage fallback
+- Decision 6: detailed concurrency ordering for three-way race (recovery, new code, sign-out)
 
 ## EditionManifest
 
