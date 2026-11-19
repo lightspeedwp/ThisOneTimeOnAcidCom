@@ -638,3 +638,21 @@ Validation and verification tasks to close gaps identified between specification
 ---
 
 **Version**: 1.0.1 | **Status**: Phase 8 Convergence Appended | **Updated**: 2026-11-09
+
+## Phase 9: Convergence
+
+- [ ] T060 Replace stale Decision 7 wording (robots.txt `Disallow`) with noindex meta tags plus sitemap exclusion in contracts/prompt-1-navigation-exposure.md, PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md, exports/GATE_2_READINESS_REPORT.md and checklists/blocking-decisions-validation.md per FR-003 (contradicts)
+- [ ] T061 Reword "Ready to Execute"/"executable" claims in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md as gated by the open spec.md Status gates per FR-010 (contradicts)
+- [ ] T062 Record resolved Decisions 1–7 and the Prompt 3A–3C handover to Spec 005 in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md per spec.md Implications (contradicts)
+- [ ] T063 Raise Prompt 2A preview completeness to at least 95% and re-score it in checklists/prompt-preview-validation.md. Record an SC-003 scope change for the Prompt 3A handover only after Ash's explicit approval of that change is recorded. Until then, keep the SC-003 95% gate in force (partial)
+- [ ] T064 [US1] Create exports/design-baseline-validation.md, exports/navigation-specification.md and exports/design-baseline-acceptance-report.md, or record their approved descoping, per US1/AC1 (should be completed in Phase 3: User Story 1 — Design Specification Hand-off)
+- [ ] T065 [US4] Create exports/decisions-selected.md, exports/implementation-readiness-checklist.md, exports/preflight-analysis-final.md and exports/workflow-completion-report.md, or record pointers to existing artefacts that cover them, per US4 (should be completed in Phase 6: User Story 4 — Documentation-Only Workflow Completion)
+- [ ] T066 Close Prompt 3A–3C tasks and resolved decision-clarification tasks (T012–T024, T027–T038, excluding T025–T026 which remain open for navigation checks) with a handover or resolution note per spec.md Implications (contradicts)
+- [ ] T067 Disambiguate the duplicate T014–T038 task sets and repoint Phase 8 dependencies in tasks.md per Constitution I (contradicts)
+- [ ] T068 Mark the Phase 8 "zero unresolved validation gaps" acceptance item unmet until T059 completes per Phase 8 acceptance (contradicts)
+- [ ] T069 Update spec.md Assumptions, Deliverables and Next Steps and plan.md Summary and Technical Context to the resolved, handed-over state per FR-006 (contradicts)
+- [ ] T070 Replace `content/book/0N` source paths with `references/0N-*.md` across spec.md, plan.md, data-model.md, quickstart.md, source-file-inventory.md, version-reconciliation.md and checklists per FR-001 (contradicts)
+- [ ] T071 Replace non-baseline colours (#1a1a1a, #d4a574, #ff6b6b, #8b0000) in data-model.md, exports/GATE_2_READINESS_REPORT.md and the Prompt 3A/3C guides, or mark them superseded, per plan: approved palette (contradicts)
+- [ ] T072 Relabel Decision 2 Option A as session refresh with absolute 30-day expiry in contracts/prompt-3b-execution-guide.md and checklists/blocking-decisions-validation.md per Decision 2 (partial)
+- [ ] T073 Restate or close T045–T047 against the merged PR #589 state per plan: verification (partial)
+- [ ] T074 Justify the staged/ directory in plan.md or archive it per plan: project structure (unrequested)
