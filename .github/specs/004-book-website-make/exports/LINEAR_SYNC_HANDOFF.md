@@ -10,7 +10,7 @@
 
 ## Instructions for the Linear agent
 
-1. Read each target document in Linear before changing it. If its current version or text no longer matches the "Expected current" values below, stop and report the difference instead of applying the patch.
+1. Read each target document in Linear before changing it. If its current version or text no longer matches the "Expected current" values below, stop and report the difference instead of applying the patch. For A2 (companion session plan), also re-read its governing specification (the [author brief](https://linear.app/lightspeedwp/document/toa-book-website-brief-author-decisions-and-launch-scope-8d63b8dda8d8)) before making any corrections. If either the companion or its governing specification has materially changed from its recorded baseline, stop and report the conflict instead of applying the patch; require a revised proposal and fresh approval before proceeding.
 2. Show Ash the exact change for each document and save it only after Ash approves that document. These documents record that saving does not authorise implementation, and that any correction needs an exact preview and explicit approval.
 3. Apply only the edits listed. Keep all other content, links, mentions and changelog history unchanged.
 4. Use the actual save date in Asia/Bangkok for "Last revised" and the changelog row. The dates below assume 2026-11-18.
@@ -31,7 +31,7 @@ Both documents record the author brief ([TOA - Book website brief — author dec
 | --- | --- | --- |
 | 1 | `\| Version \| 1.0.0 \|` | `\| Version \| 1.0.1 \|` |
 | 2 | `\| Last revised \| 2026-11-09 (Asia/Bangkok) \|` | `\| Last revised \| 2026-11-18 (Asia/Bangkok) \|` |
-| 3 | `revised 8 November 2026: book-first scope, launch inventory, editorial boundaries and continuing pause.` | `revised 8 November 2026: book-first scope, launch inventory, editorial boundaries and continuing pause. Superseded: the brief is now v1.3.0 (v1.2.2, 9 November 2026, reconciled retained-page inventory, indexing and hand-off wording). Recheck before use.` |
+| 3 | `revised 8 November 2026: book-first scope, launch inventory, editorial boundaries and continuing pause.` | `revised 8 November 2026: book-first scope, launch inventory, editorial boundaries and continuing pause. Superseded: the brief is now v1.3.0 (v1.2.2, 9 November 2026, reconciled retained-page inventory, indexing and hand-off wording). **Before use: re-read the [author brief](https://linear.app/lightspeedwp/document/toa-book-website-brief-author-decisions-and-launch-scope-8d63b8dda8d8) immediately. If its version has changed, revise this proposal and obtain fresh approval before proceeding.** |
 
 Changelog: add this row above the `1.0.0` row:
 
@@ -49,7 +49,7 @@ Changelog: add this row above the `1.0.0` row:
 | --- | --- | --- |
 | 1 | `\| Version \| 1.0.4 \|` | `\| Version \| 1.0.5 \|` |
 | 2 | `\| Last revised \| 2026-11-09 (Asia/Bangkok) \|` | `\| Last revised \| 2026-11-18 (Asia/Bangkok) \|` |
-| 3 | `\| v1.2.1; updated 8 November 2026 \|` | `\| v1.2.1; updated 8 November 2026 (superseded: now v1.3.0; v1.2.2 on 9 November reconciled retained-page inventory, indexing and hand-off wording) \|` |
+| 3 | `\| v1.2.1; updated 8 November 2026 \|` | `\| v1.2.1; updated 8 November 2026 (superseded: now v1.3.0; v1.2.2 on 9 November reconciled retained-page inventory, indexing and hand-off wording). **Before use: re-read the [author brief](https://linear.app/lightspeedwp/document/toa-book-website-brief-author-decisions-and-launch-scope-8d63b8dda8d8) immediately. If its version has changed, revise this proposal and obtain fresh approval before proceeding.** \|` |
 | 4 | Review and approval row beginning `\| Previous saved revision \| 1.0.3;` | `\| Previous saved revision \| 1.0.4; records DR-03 audit provenance, requirement wording and unresolved applicability \|` |
 | 5 | Review and approval row beginning `\| Current document revision \| 1.0.4;` | `\| Current document revision \| 1.0.5; records that the inspected author brief v1.2.1 is superseded by v1.3.0. Saving does not establish earlier approval provenance, policy adoption, prompt-transfer readiness or implementation authority \|` |
 
