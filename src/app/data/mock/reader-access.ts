@@ -77,8 +77,9 @@ export const readerAccessCopy = {
 // Export individual state copy for components
 export const getReaderStateCopy = (state: string) => {
   const stateKey = state
-    .replace(/-/g, '')
-    .replace(/^(.)/, (c) => c.toLowerCase());
+    .split('-')
+    .map((word, i) => i === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
   return (
     readerAccessCopy.states[stateKey as keyof typeof readerAccessCopy.states] || {
       title: 'Error',

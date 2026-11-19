@@ -2,6 +2,8 @@
 // Six-digit numeric codes; stored hashed
 // Expire after 10 minutes; five wrong attempts to limit guessing
 
+import { randomInt } from 'crypto';
+
 export interface VerificationCode {
   code_hash: string; // Salted hash; plain code never stored
   created_at: string; // ISO timestamp
@@ -11,8 +13,8 @@ export interface VerificationCode {
 }
 
 export function generateCode(): string {
-  // Generate 6-digit numeric code
-  return Math.floor(Math.random() * 1000000)
+  // Generate 6-digit numeric code using cryptographically secure randomness
+  return randomInt(0, 1000000)
     .toString()
     .padStart(6, '0');
 }
