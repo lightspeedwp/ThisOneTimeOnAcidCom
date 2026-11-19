@@ -1,250 +1,247 @@
-/* Reader Access Form — Email verification flow for protected chapters */
+/**
+ * Reader Access Form Styles
+ *
+ * BEM Block: reader-access-form
+ * Elements:
+ *   - __fieldset: form fieldset
+ *   - __legend: fieldset legend
+ *   - __group: label + input group
+ *   - __label: form label
+ *   - __input: text/email input
+ *   - __timer: countdown timer display
+ *   - __error: error message
+ *   - __actions: button group
+ *   - __submit: primary submit button
+ *   - __link: secondary action button
+ *
+ * Modifiers:
+ *   - --verify: verify code state (enter-code)
+ */
 
 .reader-access-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  padding: var(--spacing-lg, 2rem);
-  background: var(--color-background-elevated, #fff);
-  border-radius: var(--border-radius-lg, 0.5rem);
-  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
+  --color-text: var(--color-text-primary, #000);
+  --color-text-secondary: var(--color-text-secondary, #666);
+  --color-border: var(--color-border-light, #ddd);
+  --color-background: var(--color-background-light, #fafafa);
+  --color-error: var(--color-error, #d32f2f);
+  --color-focus: var(--color-focus, #0066cc);
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
 }
 
-.reader-access-form__container {
-  width: 100%;
-  max-width: 400px;
+@media (prefers-color-scheme: dark) {
+  .reader-access-form {
+    --color-text: var(--color-text-primary-dark, #fff);
+    --color-text-secondary: var(--color-text-secondary-dark, #aaa);
+    --color-border: var(--color-border-dark, #444);
+    --color-background: var(--color-background-dark, #1a1a1a);
+    --color-error: var(--color-error-dark, #ff6b6b);
+  }
 }
 
-.reader-access-form__form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md, 1rem);
+.reader-access-form {
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--color-text);
 }
 
-.reader-access-form__title {
-  font-size: 1.5rem;
+.reader-access-form__fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reader-access-form__legend {
+  font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color-text-primary, #000);
-  margin: 0;
-  margin-bottom: var(--spacing-xs, 0.5rem);
+  line-height: 1.4;
+  margin-bottom: var(--space-md);
+  padding: 0;
 }
 
-.reader-access-form__description {
-  font-size: 0.95rem;
-  color: var(--color-text-secondary, #666);
-  margin: 0;
-  margin-bottom: var(--spacing-md, 1rem);
-  line-height: 1.5;
-}
-
-.reader-access-form__field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs, 0.5rem);
+.reader-access-form__group {
+  margin-bottom: var(--space-md);
 }
 
 .reader-access-form__label {
+  display: block;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--color-text-primary, #000);
-  display: block;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
 }
 
 .reader-access-form__input {
-  padding: var(--spacing-sm, 0.75rem);
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
   font-size: 1rem;
-  border: 1px solid var(--color-border, #ddd);
-  border-radius: var(--border-radius-md, 0.375rem);
-  background: var(--color-background, #fff);
-  color: var(--color-text-primary, #000);
   font-family: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  box-sizing: border-box;
+}
+
+.reader-access-form__input:hover:not(:disabled) {
+  border-color: var(--color-text-secondary);
 }
 
 .reader-access-form__input:focus {
   outline: none;
-  border-color: var(--color-primary, #0066cc);
+  border-color: var(--color-focus);
   box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
 }
 
 .reader-access-form__input:disabled {
-  background: var(--color-background-disabled, #f5f5f5);
-  color: var(--color-text-disabled, #999);
+  background-color: var(--color-border);
+  color: var(--color-text-secondary);
   cursor: not-allowed;
 }
 
+/* Code input: monospace, centered for 6-digit display */
 .reader-access-form__input--code {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
   letter-spacing: 0.25em;
   text-align: center;
-  font-family: 'Monaco', 'Courier New', monospace;
+  max-width: 200px;
 }
 
-.reader-access-form__error {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs, 0.5rem);
-  padding: var(--spacing-sm, 0.75rem);
-  background: var(--color-error-bg, #fee);
-  color: var(--color-error, #c33);
-  border-radius: var(--border-radius-sm, 0.25rem);
-  font-size: 0.95rem;
+.reader-access-form__timer {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-sm);
   line-height: 1.4;
 }
 
-.reader-access-form__button {
-  padding: var(--spacing-sm, 0.75rem) var(--spacing-md, 1rem);
-  font-size: 1rem;
-  font-weight: 500;
-  color: #fff;
-  background: var(--color-primary, #0066cc);
-  border: none;
-  border-radius: var(--border-radius-md, 0.375rem);
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.reader-access-form__button:hover:not(:disabled) {
-  background: var(--color-primary-hover, #0052a3);
-}
-
-.reader-access-form__button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.reader-access-form__button-secondary {
-  padding: var(--spacing-sm, 0.75rem) var(--spacing-md, 1rem);
+.reader-access-form__error {
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
   font-size: 0.95rem;
-  color: var(--color-text-primary, #000);
-  background: var(--color-background-secondary, #f5f5f5);
-  border: 1px solid var(--color-border, #ddd);
-  border-radius: var(--border-radius-md, 0.375rem);
+  color: var(--color-error);
+  background-color: rgba(211, 47, 47, 0.08);
+  border: 1px solid var(--color-error);
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .reader-access-form__error {
+    background-color: rgba(255, 107, 107, 0.08);
+  }
+}
+
+.reader-access-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+  margin-top: var(--space-lg);
+}
+
+.reader-access-form__submit {
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--color-focus);
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 150ms ease, opacity 150ms ease;
+  line-height: 1.4;
 }
 
-.reader-access-form__button-secondary:hover:not(:disabled) {
-  background: var(--color-background-tertiary, #efefef);
+.reader-access-form__submit:hover:not(:disabled) {
+  background-color: #0052a3;
 }
 
-.reader-access-form__button-secondary:disabled {
-  opacity: 0.6;
+.reader-access-form__submit:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.3);
+}
+
+.reader-access-form__submit:active:not(:disabled) {
+  opacity: 0.9;
+}
+
+.reader-access-form__submit:disabled {
+  background-color: var(--color-border);
+  color: var(--color-text-secondary);
   cursor: not-allowed;
 }
 
-.reader-access-form--verified {
-  min-height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Secondary action button (request new code, resend, etc.) */
+.reader-access-form__link {
+  padding: var(--space-sm) 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-focus);
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  transition: border-color 150ms ease, color 150ms ease;
+  line-height: 1.4;
 }
 
-.reader-access-form__success {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-md, 1rem);
+.reader-access-form__link:hover:not(:disabled) {
+  color: #0052a3;
+  border-bottom-color: #0052a3;
 }
 
-.reader-access-form__success svg {
-  color: var(--color-success, #2d862d);
-  animation: slideInScale 0.3s ease-out;
+.reader-access-form__link:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.3);
+  border-radius: 2px;
 }
 
-.reader-access-form__success h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-text-primary, #000);
-  margin: 0;
+.reader-access-form__link:disabled {
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
 }
 
-.reader-access-form__success p {
-  font-size: 1rem;
-  color: var(--color-text-secondary, #666);
-  margin: 0;
-}
-
-@keyframes slideInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .reader-access-form {
-    background: var(--color-background-elevated, #1a1a1a);
-  }
-
-  .reader-access-form__title {
-    color: var(--color-text-primary, #fff);
-  }
-
-  .reader-access-form__description {
-    color: var(--color-text-secondary, #bbb);
-  }
-
-  .reader-access-form__label {
-    color: var(--color-text-primary, #fff);
-  }
-
-  .reader-access-form__input {
-    background: var(--color-background, #2a2a2a);
-    color: var(--color-text-primary, #fff);
-    border-color: var(--color-border, #444);
-  }
-
-  .reader-access-form__input:disabled {
-    background: var(--color-background-disabled, #333);
-    color: var(--color-text-disabled, #666);
-  }
-
-  .reader-access-form__error {
-    background: rgba(204, 51, 51, 0.1);
-    color: var(--color-error, #ff7777);
-  }
-
-  .reader-access-form__button-secondary {
-    color: var(--color-text-primary, #fff);
-    background: var(--color-background-secondary, #333);
-    border-color: var(--color-border, #444);
-  }
-
-  .reader-access-form__button-secondary:hover:not(:disabled) {
-    background: var(--color-background-tertiary, #444);
-  }
-
-  .reader-access-form__success h3 {
-    color: var(--color-text-primary, #fff);
-  }
-
-  .reader-access-form__success p {
-    color: var(--color-text-secondary, #bbb);
-  }
-}
-
-/* Responsive */
+/* Responsive adjustments */
 @media (max-width: 640px) {
-  .reader-access-form {
-    min-height: 300px;
-    padding: var(--spacing-md, 1rem);
-  }
-
-  .reader-access-form__title {
-    font-size: 1.25rem;
+  .reader-access-form__legend {
+    font-size: 1.1rem;
   }
 
   .reader-access-form__input {
-    padding: var(--spacing-sm, 0.75rem);
-    font-size: 16px; /* Prevent zoom on iOS */
+    font-size: 16px; /* Prevent zoom on mobile */
   }
+
+  .reader-access-form__input--code {
+    max-width: 100%;
+  }
+
+  .reader-access-form__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .reader-access-form__submit {
+    width: 100%;
+  }
+
+  .reader-access-form__link {
+    text-align: center;
+  }
+}
+
+/* Verify state: may have different styling */
+.reader-access-form--verify {
+  /* Base styling applies; can add verify-specific overrides here if needed */
+}
+
+/* Focus visible for keyboard navigation */
+.reader-access-form__input:focus-visible,
+.reader-access-form__submit:focus-visible,
+.reader-access-form__link:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }
