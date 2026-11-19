@@ -17,8 +17,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Specification 005 Phase 1: Reader-Access Infrastructure** — Added Netlify Functions directory structure for reader verification flow with 5 function handlers (code-request, verify, chapter, session, retention) and 6 shared library modules (Blobs adapter, code generation, session cookies, Mailgun integration, edition manifest, response formatting). Added Mailgun.js and Netlify Blobs dependencies. Created comprehensive mock data layer with all 10 reader-visible states and UI copy, ready for Phase 2 implementation.
+- **Specification 005 Phase 2: Foundational Layer** — Implemented core abstractions for reader-access feature: storage adapter using Netlify Blobs for atomic code and session operations, scrypt-based verification code generation with 6-digit 10-minute expiry, device session lifecycle with 30-day expiry and renewal, Mailgun SMTP integration with error classification (retriable vs permanent), chapter manifest reader with approval status tracking, and JSON response builders for all reader states. Added form-data dependency for Mailgun.js integration.
+
 ### Changed
 
+- **Reader access: Restricted chapter bundling** (RA-T054) — Temporarily set `BOOK_SOURCE_DIRECTORIES` to empty array to prevent protected chapters from being bundled in the client. Chapters are now served exclusively through `/api/reader/chapters/{chapterId}` pending implementation of server-side delivery (RA-T035/RA-T037). Satisfies RA-001 (verified access only) and SC-004 (authorization required for direct chapter access).
+- **Constitution Amendment v1.0.1** — Updated Principle IV (Protected Content & Data Rules) to reflect `src/content/` as canonical editorial content location per PR #608. Aligns repository practice with governance framework.
 - Repository governance configuration now fetched from canonical `lightspeedwp/.github` (Phase 2 consolidation — v1.0.0 release verification)
 - CLAUDE.md updated to mark Phase 2 governance consolidation as complete
 - labeling-unified.yml workflow dynamically fetches labels and labeler configs from canonical org repository
@@ -27,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Corrupted package-lock.json** — The merge in `161ed46` truncated `package-lock.json` into invalid JSON, so `npm ci` failed with `EUSAGE` in every workflow. Regenerated the lockfile from the last valid copy (`7db390c`) with `npm install --package-lock-only --ignore-scripts`; `package.json` is unchanged.
 - **CI: Removed unused Playwright browser install from Vitest job** — The `Install Playwright browsers` step in `tests.yml` stalled on the runner's apt mirror (~20 s per package, 49 packages), causing both matrix jobs to time out at 20 minutes and the "No new test failures" comparison to fail closed. The Vitest suite runs in a plain Node environment and needs no browser binaries. Removing the step unblocks the Tests workflow without affecting test coverage.
 - **Netlify deployment configuration** — Removed duplicate `public/_redirects` file that conflicted with redirect rules defined in `netlify.toml`, resolving validation failures for header rules, redirect rules, and pages changed checks
 - **Specification documentation markdown linting** — Resolved all markdown linting errors (MD040 fenced code block language specification, MD060 table column spacing) across 52 specification files through comprehensive normalization of code blocks and table formatting

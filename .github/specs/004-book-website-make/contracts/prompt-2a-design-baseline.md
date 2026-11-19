@@ -106,6 +106,16 @@ Dark-first palette with preserved light support:
 
 ✅ **CR-2A.6**: Both files are valid — the CSS file and the JSON file each parse with build tools, and their values match
 
+### Error Handling
+
+**If export fails or values conflict**:
+- ❌ **Missing component**: Verify component exists in Figma file; regenerate
+- ❌ **Colour mismatch**: Check against Design Brief v1.1.2; flag discrepancy with ⚠️ notation
+- ❌ **Invalid token format**: Verify CSS variable naming follows `--{category}-{name}` pattern
+- ❌ **JSON syntax error**: Validate JSON structure before delivery; fix and re-export
+- ❌ **Missing theme variant**: Ensure both light and dark theme variables present (or flag as pending)
+- **Resolution**: Document error with notation, re-verify baseline, regenerate and re-export
+
 ### Unapproved Candidates (Explicitly NOT Included)
 
 - R3 (Responsive Typography) — Unapproved ~

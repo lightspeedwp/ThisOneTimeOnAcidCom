@@ -29,10 +29,10 @@ From `.github/specs/004-book-website-make/references/03-author-decisions-launch-
 - Public sitemap includes: /home, /about, /book, /contact, ...
 - Navigation component displays: /home, /about, /book, /contact (Speaking/Events/Media hidden)
 - Route enforcement for /speaking, /events, /media:
-  - ✅ **Selected: Option A (Recommended)**: Meta tags + Robots.txt + Sitemap.xml exclusion
+  - ✅ **Selected: Option A (Recommended)**: Noindex meta tags (primary) + Sitemap.xml exclusion (primary) + Robots.txt (optional)
   - (Alternative options available if different enforcement method chosen)
   
-  *(Blocking Decision 7: Route Enforcement Verification — Option A Selected)*
+  *(Blocking Decision 7: Route Enforcement Verification — Option A Selected — Noindex meta tags and sitemap exclusion are primary mechanisms; robots.txt is optional)*
 
 **No Changes To**:
 - Functionality (routes remain accessible, not deleted)
@@ -65,9 +65,9 @@ From `.github/specs/004-book-website-make/references/03-author-decisions-launch-
 2. **Remove links** for /speaking, /events, /media from navigation menu
 3. **Preserve route pages** (/speaking, /events, /media) with noindex metadata
 4. **Document enforcement strategy** for each route (based on Decision 7 selection):
-   - Add Meta tag: `<meta name="robots" content="noindex, nofollow">`
-   - Add Robots.txt rule: `Disallow: /speaking` (per option selected)
-   - Update sitemap.xml to exclude /speaking, /events, /media (per option selected)
+   - Add Meta tag (primary): `<meta name="robots" content="noindex, nofollow">`
+   - Update sitemap.xml (primary): Exclude /speaking, /events, /media (per option selected)
+   - Add Robots.txt rule (optional): `Disallow: /speaking` (secondary mechanism if needed)
 5. **Generate before/after comparison** showing navigation structure change
 
 ### Acceptance Criteria

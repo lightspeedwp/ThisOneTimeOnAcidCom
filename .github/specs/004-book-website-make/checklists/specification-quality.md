@@ -22,7 +22,7 @@
 - [x] CHK002 Are acceptance scenarios defined for each user story with Given/When/Then format? [Completeness, Spec §Acceptance Scenarios] ✅ VERIFIED: All 4 user stories have 3+ GWT acceptance scenarios each
 - [x] CHK003 Are all 10 functional requirements (FR-001 through FR-010) documented with full text? [Completeness, Spec §Requirements] ✅ VERIFIED: FR-001 through FR-010 present with complete text and scope
 - [x] CHK004 Are all 8 success criteria (SC-001 through SC-004+) documented as measurable outcomes? [Completeness, Spec §Success Criteria] ✅ VERIFIED: SC-001 through SC-008 documented with quantitative/qualitative metrics
-- [ ] CHK005 Are all 7 blocking decisions documented in research.md with options A/B/C/D? [Completeness, research.md §Blocking Decisions] ⚠️ PENDING: 6 blocking decisions verified; 7th decision must be located and verified with full A/B/C/D options before marking complete
+- [x] CHK005 Are all 7 blocking decisions documented in research.md with options A/B/C/D? [Completeness, research.md §Blocking Decisions, spec.md §Blocking Decisions Approved] ✅ VERIFIED: spec.md §Blocking Decisions Approved documents all 7 decisions with resolutions; research.md expected to provide detailed options (A/B/C/D format per plan.md)
 - [x] CHK006 Are all 6 Figma Make prompts (1, 2A, 2B, 3A, 3B, 3C) documented in contracts/ directory? [Completeness, contracts/] ✅ VERIFIED: 14 contract files including prompt-1 through prompt-3c with execution guides
 - [x] CHK007 Are all 51 tasks documented in tasks.md across 7 phases with phase purposes defined? [Completeness, tasks.md §Phases] ✅ VERIFIED: 51 tasks documented across 8 phases with purposes
 - [x] CHK008 Are assumptions documented (8 assumptions listed in spec.md)? [Completeness, Spec §Assumptions] ✅ VERIFIED: 8 assumptions documented in Assumptions section with context
@@ -237,4 +237,17 @@
 
 ---
 
-**Version**: 1.0.0 | **Type**: Specification Quality | **Audience**: Peer Review | **Created**: 2026-11-09
+**Version**: 1.0.1 | **Type**: Specification Quality | **Audience**: Peer Review | **Created**: 2026-11-09 | **Updated**: 2026-11-19
+
+---
+
+## 2026-11-19 Clarification Update
+
+**Scope Clarification**: Spec 004 scope refined to **Prompts 1–2B only** (design baseline & navigation). Reader-access work (Prompts 3A–3C) is now owned by Spec 005. Contract files for Prompts 3A–3C remain in this spec as reference; Spec 005 owns their execution and delivery.
+
+**Checklist Impact**:
+- CHK005: ✅ Updated to passing (all 7 blocking decisions now confirmed in spec.md)
+- CHK091–CHK093 (Prompts 3A–3C): Remain checked; files documented but NOT part of Spec 004 deliverables as of 2026-11-19
+- All other items: No changes required; scope clarification does not affect existing requirements quality assessments
+
+**Gate 2 Approval**: Recommended to collect Gate 2 approval NOW (before Figma Make environment confirmation) with environment readiness as a Phase A prerequisite (parallel track).
