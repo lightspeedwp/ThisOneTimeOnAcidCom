@@ -3,7 +3,7 @@
 // Maps RA-002/RA-009
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import * as blobsModule from '@netlify/blobs';
+import { getStore } from '@netlify/blobs';
 import {
   storeCode,
   getCode,
@@ -18,11 +18,20 @@ import {
 } from '../../netlify/lib/reader-access/store';
 
 // Mock Netlify Blobs
-vi.mock('@netlify/blobs', () => ({
-  get: vi.fn(),
-  put: vi.fn(),
-  delete: vi.fn(),
-}));
+vi.mock('@netlify/blobs', () => {
+  const mockStore = {
+    get: vi.fn(),
+    set: vi.fn(),
+    delete: vi.fn(),
+  };
+  return {
+    getStore: vi.fn(() => mockStore),
+  };
+});
+
+// Get the mocked store for assertions
+const getMockedStore = () => (getStore as any)();
+
 
 describe('store adapter', () => {
   const mockEmail = 'test@example.com';
@@ -42,39 +51,39 @@ describe('store adapter', () => {
   describe('Code storage', () => {
     it('stores code with email key', async () => {
       await storeCode(mockEmail, mockCode);
-      expect(blobsModule.put).toHaveBeenCalledWith(`code:${mockEmail}`, JSON.stringify(mockCode));
+      expect(getMockedStore().set).toHaveBeenCalledWith(`code:${mockEmail}`, JSON.stringify(mockCode));
     });
 
     it('retrieves stored code', async () => {
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(JSON.stringify(mockCode));
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(JSON.stringify(mockCode));
       const code = await getCode(mockEmail);
       expect(code).toEqual(mockCode);
-      expect(blobsModule.get).toHaveBeenCalledWith(`code:${mockEmail}`);
+      expect(getMockedStore().get).toHaveBeenCalledWith(`code:${mockEmail}`);
     });
 
     it('returns null for non-existent code', async () => {
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(null);
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(null);
       const code = await getCode(mockEmail);
       expect(code).toBeNull();
     });
 
     it('deletes code by email', async () => {
       await deleteCode(mockEmail);
-      expect(blobsModule.delete).toHaveBeenCalledWith(`code:${mockEmail}`);
+      expect(getMockedStore().delete).toHaveBeenCalledWith(`code:${mockEmail}`);
     });
 
     it('increments attempt count', async () => {
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(JSON.stringify(mockCode));
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(JSON.stringify(mockCode));
       const updated = await incrementCodeAttempts(mockEmail);
       expect(updated?.attemptCount).toBe(1);
-      expect(blobsModule.put).toHaveBeenCalledWith(
+      expect(getMockedStore().set).toHaveBeenCalledWith(
         `code:${mockEmail}`,
         JSON.stringify({ ...mockCode, attemptCount: 1 })
       );
     });
 
     it('returns null when incrementing non-existent code', async () => {
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(null);
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(null);
       const result = await incrementCodeAttempts(mockEmail);
       expect(result).toBeNull();
     });
@@ -93,25 +102,25 @@ describe('store adapter', () => {
 
     it('stores session with sessionId key', async () => {
       await storeSession(mockSession);
-      expect(blobsModule.put).toHaveBeenCalledWith(`session:${mockSessionId}`, JSON.stringify(mockSession));
+      expect(getMockedStore().set).toHaveBeenCalledWith(`session:${mockSessionId}`, JSON.stringify(mockSession));
     });
 
     it('retrieves stored session', async () => {
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(JSON.stringify(mockSession));
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(JSON.stringify(mockSession));
       const session = await getSession(mockSessionId);
       expect(session).toEqual(mockSession);
-      expect(blobsModule.get).toHaveBeenCalledWith(`session:${mockSessionId}`);
+      expect(getMockedStore().get).toHaveBeenCalledWith(`session:${mockSessionId}`);
     });
 
     it('returns null for non-existent session', async () => {
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(null);
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(null);
       const session = await getSession(mockSessionId);
       expect(session).toBeNull();
     });
 
     it('deletes session by sessionId', async () => {
       await deleteSession(mockSessionId);
-      expect(blobsModule.delete).toHaveBeenCalledWith(`session:${mockSessionId}`);
+      expect(getMockedStore().delete).toHaveBeenCalledWith(`session:${mockSessionId}`);
     });
 
     it('renews session and updates expiresAt to 30 days from now', async () => {
@@ -121,7 +130,7 @@ describe('store adapter', () => {
         expiresAt: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
       };
 
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(JSON.stringify(soonExpiringSession));
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(JSON.stringify(soonExpiringSession));
       const renewed = await renewSession(mockSessionId);
 
       expect(renewed).toBeDefined();
@@ -140,7 +149,7 @@ describe('store adapter', () => {
     });
 
     it('returns null when renewing non-existent session', async () => {
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(null);
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(null);
       const result = await renewSession(mockSessionId);
       expect(result).toBeNull();
     });
@@ -149,12 +158,12 @@ describe('store adapter', () => {
   describe('Atomic consume-once semantics', () => {
     it('single code consumption prevents replay (RA-002)', async () => {
       // First retrieval succeeds
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(JSON.stringify(mockCode));
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(JSON.stringify(mockCode));
       const code1 = await getCode(mockEmail);
       expect(code1).toEqual(mockCode);
 
       // After delete, retrieval returns null
-      vi.mocked(blobsModule.get).mockResolvedValueOnce(null);
+      vi.mocked(getMockedStore().get).mockResolvedValueOnce(null);
       await deleteCode(mockEmail);
       const code2 = await getCode(mockEmail);
       expect(code2).toBeNull();
@@ -164,14 +173,14 @@ describe('store adapter', () => {
       // Both delete calls should succeed independently
       await deleteCode(mockEmail);
       await deleteCode(mockEmail);
-      expect(blobsModule.delete).toHaveBeenCalledTimes(2);
+      expect(getMockedStore().delete).toHaveBeenCalledTimes(2);
     });
   });
 
   describe('Key namespacing', () => {
     it('uses code: prefix for code keys', async () => {
       await storeCode(mockEmail, mockCode);
-      const calls = vi.mocked(blobsModule.put).mock.calls;
+      const calls = vi.mocked(getMockedStore().set).mock.calls;
       expect(calls[0][0]).toMatch(/^code:/);
     });
 
@@ -184,19 +193,19 @@ describe('store adapter', () => {
         chapterId: 'ch1',
       } as any;
       await storeSession(session);
-      const calls = vi.mocked(blobsModule.put).mock.calls;
+      const calls = vi.mocked(getMockedStore().set).mock.calls;
       expect(calls[0][0]).toMatch(/^session:/);
     });
 
     it('prevents key collision between code and session', async () => {
       const email = 'test@example.com';
       await storeCode(email, mockCode);
-      const codeKey = vi.mocked(blobsModule.put).mock.calls[0][0];
+      const codeKey = vi.mocked(getMockedStore().set).mock.calls[0][0];
 
       const sessionId = 'sess-123';
       const session: StoredSession = { ...mockCode, sessionId, deviceId: 'dev1', chapterId: 'ch1' } as any;
       await storeSession(session);
-      const sessionKey = vi.mocked(blobsModule.put).mock.calls[1][0];
+      const sessionKey = vi.mocked(getMockedStore().set).mock.calls[1][0];
 
       expect(codeKey).not.toBe(sessionKey);
     });
