@@ -716,7 +716,7 @@ dark:text-purple-100">
 ## Related Documentation
 
 - **[colors.md](./design-tokens-reference.md)** - Complete color palette
-- **[css-architecture-reference.md](./css-architecture-reference.md)** - Implementation guide
+- **[css-architecture-reference.md](../N003-css-architecture-reference.md)** - Implementation guide
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines
 
 ---
