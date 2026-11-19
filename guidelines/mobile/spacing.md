@@ -589,7 +589,7 @@ md:px-8">
         This One Time On Acid
       </h1>
       <p className="text-body-guideline max-w-2xl mx-auto px-4">
-        Makeup that shines with colour, energy, and connection.
+        Creative work that shines with colour, energy, and connection.
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center mt-fluid-lg">
         <button>Explore Portfolio</button>

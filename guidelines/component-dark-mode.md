@@ -3,7 +3,7 @@
 **Version:** 1.0.0
 **Last Updated:** January 2025
 
-Component-by-component dark mode styling reference for the This One Time On Acid Makeup
+Component-by-component dark mode styling reference for the This One Time On Acid
 Portfolio.
 
 ## 📋 Table of Contents
@@ -642,7 +642,7 @@ dark:text-purple-100 mb-fluid-md">
 <div className="border-t border-gray-200 dark:border-purple-800 mt-fluid-xl
 pt-fluid-lg">
       <p className="text-center text-gray-500 dark:text-purple-400 text-fluid-sm">
-        © 2025 This One Time On Acid Makeup
+        © 2025 This One Time On Acid
       </p>
     </div>
   </div>
@@ -677,7 +677,7 @@ pt-fluid-lg">
     {/* SVG with dark mode enhancements */}
     <img
       src={logoSvg}
-      alt="This One Time On Acid Makeup Logo"
+      alt="This One Time On Acid Logo"
       className="h-12 w-auto transition-all duration-300
         dark:brightness-130 dark:saturate-140 dark:contrast-110
         dark:drop-shadow-[0*0*8px_rgba(168,85,247,0.4)]

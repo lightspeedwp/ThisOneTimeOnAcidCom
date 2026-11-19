@@ -40,10 +40,10 @@ This specification package provides:
    - State transitions documented (Pending → Resolved → Implemented)
 
 5. **Figma Make Prompt Contracts** (contracts/ — 14 files)
-   - Prompt 1: Navigation Exposure (unblocked, executable)
-   - Prompt 2A: Design Baseline (unblocked, executable)
-   - Prompt 2B: Navigation Design (unblocked, executable)
-   - Prompt 3A: Reader Access (unblocked, executable)
+   - Prompt 1: Navigation Exposure (unblocked, gated by Phase A Status)
+   - Prompt 2A: Design Baseline (unblocked, gated by Phase A Status)
+   - Prompt 2B: Navigation Design (unblocked, gated by Phase A Status)
+   - Prompt 3A: Reader Access (unblocked, gated by Phase A Status)
    - Prompt 3B: Recovery Flows (blocked pending Decisions 1–2)
    - Prompt 3C: Error States (blocked pending Decision 3)
    - Plus 8 execution guides and validation documents
@@ -69,7 +69,7 @@ This specification package provides:
 - ✅ Clear blocking decision matrix with prerequisites for implementation
 - ✅ Complete design baseline and navigation specifications
 - ✅ Reader access copy, form specifications, and error handling
-- ✅ 4 unblocked executable prompts (1, 2A, 2B, 3A) ready for generation
+- ✅ 4 unblocked prompts (1, 2A, 2B, 3A) gated by Phase A Status for generation
 - ✅ 2 blocked prompts (3B, 3C) with clear prerequisites documented
 
 **What This Specification Is NOT**:

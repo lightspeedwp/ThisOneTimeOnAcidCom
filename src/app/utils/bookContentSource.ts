@@ -1,11 +1,8 @@
-export const BOOK_SOURCE_DIRECTORIES = [
-  '00-front-matter',
-  '01-part-1-early-life',
-  '02-part-2-carefree-20s',
-  '03-part-3-nomadic-life',
-  '04-part-4-re-emergence',
-  '05-back-matter',
-] as const;
+// RA-T054: Temporarily restricted to empty array.
+// Protected chapters are served exclusively through /api/reader/chapters/{chapterId}
+// once RA-T035 (chapter function) and RA-T037 (reader endpoint routing) are ready.
+// See .github/specs/005-reader-access/PHASE-8-CONTINUATION.md for implementation strategy.
+export const BOOK_SOURCE_DIRECTORIES = [] as const;
 
 export const BOOK_SOURCE_GLOBS = BOOK_SOURCE_DIRECTORIES.map(function (directory) {
   return '/src/content/book/' + directory + '/*.md';

@@ -70,7 +70,7 @@ sequenceDiagram
     participant P as Page
 
     Note over B: Current: /blog/category/festival-makeup
-    B-->>U: Display: Home › Blog › Festival Makeup
+    B-->>U: Display: Home › Blog › Festival Creative
 
     U->>B: Click "Blog" link
     B->>B: Extract href="/blog"
@@ -143,7 +143,7 @@ import { Breadcrumbs } from './components/ui/Breadcrumbs';
   items={[
     { label: 'Home', href: '/' },
     { label: 'Portfolio', href: '/portfolio' },
-    { label: 'Festival Makeup' }
+    { label: 'Festival Creative' }
   ]}
 />
 
@@ -380,7 +380,7 @@ function BreadcrumbsWithSchema({ items }: Props) {
       "@type": "ListItem",
       "position": index + 1,
       "name": item.label,
-      "item": `https://ashshaw.makeup${item.href || ''}`
+      "item": `https://thisonetimeonacid.com${item.href || ''}`
     }))
   };
 
@@ -403,7 +403,7 @@ function BreadcrumbsWithSchema({ items }: Props) {
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[overview-components.md](../overview-components.md)** - Component system
+- **[overview-components.md](./N005-component-catalog.md)** - Component system
 - **[SITEMAP.md](../SITEMAP.md)** - Site navigation structure
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Typography scale

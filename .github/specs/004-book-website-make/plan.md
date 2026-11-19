@@ -24,18 +24,18 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 
 **Figma Make Integration**: Staged Prompt execution (Prompts 0–3C) with approval gates between stages; Prompts 1, 2A, 2B, 3A approved for execution; Prompts 3B, 3C blocked pending decision resolution
 
-**Blocking Decisions** (7 total, preventing Prompt 3B/3C execution):
-- Recovery-first race condition handling (NEEDS CLARIFICATION)
-- Recovery lifetime eligibility (NEEDS CLARIFICATION)
-- Code expiry start time (from generation? receipt? load?) (NEEDS CLARIFICATION)
-- Email service provider selection (NEEDS CLARIFICATION)
-- Manuscript publication readiness (NEEDS CLARIFICATION)
-- Newsletter destination/signup link (NEEDS CLARIFICATION)
-- Route enforcement verification for /speaking, /events, /media (NEEDS CLARIFICATION)
+**Blocking Decisions** (7 total, all APPROVED 2026-11-13):
+- ✅ Recovery-first race condition handling → Option A: Recovery takes precedence
+- ✅ Recovery lifetime eligibility → Option A: 30-day absolute expiry + session refresh on recovery
+- ✅ Code expiry start time → Option A: From code generation
+- ✅ Email service provider → Hybrid: SendGrid (transactional) + Brevo (newsletter)
+- ✅ Manuscript publication readiness → Early release: build screens now; chapters published individually as Ash approves
+- ✅ Newsletter destination → Brevo (external signup link)
+- ✅ Route enforcement verification → Option A: noindex meta tags + sitemap exclusion
 
-**Target Output**: Figma Make-ready specifications with exact component names, acceptance criteria, and error-state handling for design-system export
+**Target Output**: Figma Make-ready specifications (Prompts 1–2B) with exact component names, acceptance criteria, and design-system export guidance. Reader-access work (Prompts 3A–3C) handed to Spec 005.
 
-**Scale/Scope**: 4 executable prompts, 2 blocked prompts, 7 blocking decisions, 10 functional requirements, 8 success criteria, 8 assumptions, 4 edge cases
+**Scale/Scope**: 3 executable prompts (1, 2A, 2B), 7 approved blocking decisions, 10 functional requirements, 8 success criteria, 8 assumptions, 4 edge cases
 
 ## Constitution Check
 

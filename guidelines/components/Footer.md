@@ -77,7 +77,7 @@ import { SocialLinks } from './SocialLinks';
   <Logo size="md" className="mb-fluid-md" />
 
   <p className="text-fluid-base font-body text-gray-300 max-w-md">
-    Makeup that shines with colour, energy, and connection.
+    Creative work that shines with colour, energy, and connection.
   </p>
 </div>
 
@@ -117,7 +117,7 @@ export function Footer({
               />
 
               <p className="text-fluid-base font-body text-gray-300 mb-fluid-md">
-                Makeup that shines with colour, energy, and connection.
+                Creative work that shines with colour, energy, and connection.
               </p>
 
               <SocialLinks
@@ -180,7 +180,7 @@ transition-colors"
 
               <ul className="space-y-3">
                 <li className="text-fluid-base font-body text-gray-300">
-                  Festival Makeup
+                  Festival Creative
                 </li>
                 <li className="text-fluid-base font-body text-gray-300">
                   Editorial Shoots
@@ -206,11 +206,11 @@ transition-colors"
                 </li>
                 <li>
                   <a
-                    href="mailto:ashley@ashshaw.makeup"
+                    href="mailto:contact@thisonetimeonacid.com"
 className="text-fluid-base font-body text-gray-300 hover:text-pink-400
 transition-colors"
                   >
-                    ashley@ashshaw.makeup
+                    Get in Touch
                   </a>
                 </li>
               </ul>
@@ -282,7 +282,7 @@ transition-colors"
     <div>
       <Logo size="md" className="text-white mb-fluid-md" />
       <p className="text-body-guideline font-body text-gray-300 mb-fluid-md">
-        Makeup that shines with colour, energy, and connection.
+        Creative work that shines with colour, energy, and connection.
       </p>
       <SocialLinks />
     </div>
@@ -317,8 +317,8 @@ transition-colors"
   </nav>
 
   <address>
-    <a href="mailto:ashley@ashshaw.makeup">
-      ashley@ashshaw.makeup
+    <a href="mailto:contact@thisonetimeonacid.com">
+      Get in Touch
     </a>
   </address>
 </footer>
@@ -368,7 +368,7 @@ focus:ring-opacity-50 rounded"
     </h3>
 
     <p className="text-body-guideline font-body text-gray-300 mb-fluid-md">
-      Get the latest makeup tips and portfolio updates
+      Get the latest creative content and updates
     </p>
 
     <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
@@ -432,7 +432,7 @@ hover:scale-105 transition-all">
 // ✅ CORRECT - Clear contact options
 <footer>
   <SocialLinks />
-  <a href="mailto:ashley@ashshaw.makeup">Email</a>
+  <a href="mailto:contact@thisonetimeonacid.com">Email</a>
 </footer>
 
 ```text
@@ -554,7 +554,7 @@ stateDiagram-v2
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[overview-components.md](../overview-components.md)** - Component system
+- **[overview-components.md](./N005-component-catalog.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system

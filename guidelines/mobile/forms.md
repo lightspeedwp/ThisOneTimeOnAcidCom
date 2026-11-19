@@ -410,9 +410,9 @@ function CollaborationForm() {
     "
   >
     <option value="">Select a service</option>
-    <option value="festival">Festival Makeup</option>
+    <option value="festival">Festival Creative</option>
     <option value="editorial">Editorial Shoot</option>
-    <option value="wedding">Wedding Makeup</option>
+    <option value="wedding">Wedding Creative</option>
     <option value="special-event">Special Event</option>
   </select>
 </div>
@@ -441,9 +441,9 @@ function ServiceSelector() {
   const [selected, setSelected] = useState('');
 
   const services = [
-    { id: 'festival', label: 'Festival Makeup', icon: Sparkles },
+    { id: 'festival', label: 'Festival Creative', icon: Sparkles },
     { id: 'editorial', label: 'Editorial Shoot', icon: Camera },
-    { id: 'wedding', label: 'Wedding Makeup', icon: Heart },
+    { id: 'wedding', label: 'Wedding Creative', icon: Heart },
     { id: 'special', label: 'Special Event', icon: Calendar }
   ];
 
