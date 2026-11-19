@@ -639,58 +639,20 @@ Validation and verification tasks to close gaps identified between specification
 
 **Version**: 1.0.1 | **Status**: Phase 8 Convergence Appended | **Updated**: 2026-11-09
 
----
+## Phase 9: Convergence
 
-## Phase 9: Final Convergence & Merge Readiness
-
-Validation, remediation, and closure tasks addressing critical findings from specification analysis before PR merge. All tasks are documentation/verification only; no code changes.
-
-### Critical Path Blockers
-
-| Task ID | [P] | Description | File Path | Dependencies | Status |
-| --------- | ----- | ------------- | ----------- | -------------- | -------- |
-| ⏳ T060 | | Verify Decision 7 implementation: robots.txt/noindex/sitemap-exclusion for /speaking, /events, /media routes; confirm meta tags + sitemap.xml exclude these paths per requirement Decision 7 | `.github/specs/004-book-website-make/decisions/decision-7-route-enforcement.md` | T048–T051 (Phase 7 complete) | PENDING |
-| ⏳ T061 | | Audit "Ready to Execute" claims in spec/plan/tasks; verify each claim aligns with blocking decision status and task completion; resolve terminology drift between "Ready to Execute", "Ready for Approval", "Blocked" | `.github/specs/004-book-website-make/approval-audit-ready-to-execute.md` | T048–T059 | PENDING |
-| ⏳ T062 | | Verify Phase B decisions (B1–B5 from spec.md lines 67–73) are documented in contracts and decision matrix; confirm reader-access ownership transfer to Spec 005 is recorded | `.github/specs/004-book-website-make/phase-b-decisions-audit.md` | T005–T014, T048 | PENDING |
-| ⏳ T063 | | Create decision-to-prompt traceability matrix: map each of 7 blocking decisions to which prompts they block (3B/3C most affected); document resolution path for each | `.github/specs/004-book-website-make/decision-to-prompt-traceability.md` | T005–T014, T031–T038 | PENDING |
-| ⏳ T064 | | Validate T007/T056 included explicit version checks for all 6 source files (02 v1.0.4, 03 v1.3.0, 05 v1.9.0, etc.); confirm version-reconciliation.md documents precedence rule application | `.github/specs/004-book-website-make/version-reconciliation.md` | T052, T056 | PENDING |
-
-### Specification Completeness Remediations
-
-| Task ID | [P] | Description | File Path | Dependencies | Status |
-| --------- | ----- | ------------- | ----------- | -------------- | -------- |
-| ⏳ T065 | | Increase Prompt 2A completeness from ~89% to 95%+: add missing CSS variable format specs, JSON token naming conventions, file output location, design-token coverage checklist | `.github/specs/004-book-website-make/contracts/prompt-2a-design-baseline.md` | T006, T021 | PENDING |
-| ⏳ T066 | | Increase Prompt 3A completeness from ~91% to 95%+: add form validation specs, error state messaging completeness, newsletter consent mechanics, email-service integration points | `.github/specs/004-book-website-make/contracts/prompt-3a-reader-access.md` | T023 | PENDING |
-| ⏳ T067 | | Document missing exports specifications: file naming conventions, folder locations, delivery format (CSS, JSON, Figma tokens format), integration points for /src/styles | `.github/specs/004-book-website-make/exports/DESIGN_EXPORTS_SPECIFICATION.md` | T006, T021, T065–T066 | PENDING |
-| ⏳ T068 | | Audit Prompt 2A for completeness: verify CSS custom-properties syntax, JSON design-tokens structure matches Figma Make export format, all 9 colors mapped (light + dark themes) | `.github/specs/004-book-website-make/checklists/prompt-2a-completeness-audit.md` | T065 | PENDING |
-| ⏳ T069 | | Verify approval-boundaries.md notation consistency: check all items use standard notation (✓ approved, ~ unapproved, ❌ unresolved); no ambiguous or missing boundary markers | `.github/specs/004-book-website-make/approval-boundaries.md` | T055 | PENDING |
-
-### Gate & Integration Tasks
-
-| Task ID | [P] | Description | File Path | Dependencies | Status |
-| --------- | ----- | ------------- | ----------- | -------------- | -------- |
-| ⏳ T070 | | Resolve T054 completeness gate: audit tasks T065–T068 results; confirm Prompts 2A and 3A reach 95%+ completeness threshold, OR explicitly revise acceptance criteria with stakeholder approval | `.github/specs/004-book-website-make/checklists/prompt-preview-validation.md` | T065–T068 | PENDING |
-| ⏳ T071 | | Align terminology across artifacts: standardize "Ready to Execute", "Ready for Approval", "Blocked" usage; update spec/plan/tasks to use consistent phrasing; resolve gate numbering (Gate 1 vs Gate 2) mismatch | `.github/specs/004-book-website-make/terminology-alignment.md` | T061 | PENDING |
-| ⏳ T072 | | Create Linear sync hand-off document for PR #589 changes: map spec 004 decisions (B1–B5) to Linear issues; prepare update guidance for author brief, design register, PRD if versions changed | `.github/specs/004-book-website-make/exports/LINEAR_SYNC_HANDOFF.md` | T062, T048 | IN PROGRESS (PR #610) |
-| ⏳ T073 | | Final specification artifact readiness review: verify spec.md, plan.md, tasks.md, all contracts, and exports are complete, internally consistent, and require zero implementation code | `.github/specs/004-book-website-make/FINAL_READINESS_CHECKLIST.md` | T061–T072 | PENDING |
-| ⏳ T074 | | Mark Phase 9 convergence complete: confirm all T060–T073 results are documented, no blocking issues remain, and PR #610 is ready to merge with both lockfile fix and specification convergence addressed | `.github/specs/004-book-website-make/PHASE_9_CONVERGENCE_COMPLETE.md` | T060–T073 | PENDING |
-
-**Gate**: All Phase 9 tasks must complete before PR #610 merge. Resolution of T060–T074 certifies specification artifact readiness and convergence closure.
-
-**Acceptance Criteria**:
-- ✅ Decision 7 route enforcement verified
-- ✅ "Ready to Execute" claims audited against blocking decisions
-- ✅ Phase B decisions documented and traced
-- ✅ Decision-to-prompt traceability matrix created
-- ✅ Version validation confirmed for all 6 source files
-- ✅ Prompts 2A and 3A completeness increased to 95%+
-- ✅ Exports specification documented with file naming and locations
-- ✅ Approval boundaries notation consistent across artifacts
-- ✅ T054 completeness gate resolved (gate unmet → remediated)
-- ✅ Terminology standardized across all artifacts
-- ✅ Linear sync hand-off document prepared
-- ✅ Final readiness checklist verified
-
----
-
-**Version**: 1.0.2 | **Status**: Phase 9 Final Convergence Appended | **Updated**: 2026-11-19
+- [ ] T060 Replace stale Decision 7 wording (robots.txt `Disallow`) with noindex meta tags plus sitemap exclusion in contracts/prompt-1-navigation-exposure.md, PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md, exports/GATE_2_READINESS_REPORT.md and checklists/blocking-decisions-validation.md per FR-003 (contradicts)
+- [ ] T061 Reword "Ready to Execute"/"executable" claims in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md as gated by the open spec.md Status gates per FR-010 (contradicts)
+- [ ] T062 Record resolved Decisions 1–7 and the Prompt 3A–3C handover to Spec 005 in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md per spec.md Implications (contradicts)
+- [ ] T063 Raise Prompt 2A preview completeness to at least 95% and re-score it in checklists/prompt-preview-validation.md; record an approved SC-003 scope change for the Prompt 3A handover per SC-003 (partial)
+- [ ] T064 Create exports/design-baseline-validation.md, exports/navigation-specification.md and exports/design-baseline-acceptance-report.md, or record their approved descoping, per US1/AC1 (missing)
+- [ ] T065 Create exports/decisions-selected.md, exports/implementation-readiness-checklist.md, exports/preflight-analysis-final.md and exports/workflow-completion-report.md, or record pointers to existing artefacts that cover them, per US4 (missing)
+- [ ] T066 Close Prompt 3A–3C tasks and resolved decision-clarification tasks (T012–T027, second-list T022–T038) with a handover or resolution note per spec.md Implications (contradicts)
+- [ ] T067 Disambiguate the duplicate T014–T038 task sets and repoint Phase 8 dependencies in tasks.md per Constitution I (contradicts)
+- [ ] T068 Mark the Phase 8 "zero unresolved validation gaps" acceptance item unmet until T059 completes per Phase 8 acceptance (contradicts)
+- [ ] T069 Update spec.md Assumptions, Deliverables and Next Steps and plan.md Summary and Technical Context to the resolved, handed-over state per FR-006 (contradicts)
+- [ ] T070 Replace `content/book/0N` source paths with `references/0N-*.md` across spec.md, plan.md, data-model.md, quickstart.md, source-file-inventory.md, version-reconciliation.md and checklists per FR-001 (contradicts)
+- [ ] T071 Replace non-baseline colours (#1a1a1a, #d4a574, #ff6b6b, #8b0000) in data-model.md, exports/GATE_2_READINESS_REPORT.md and the Prompt 3A/3C guides, or mark them superseded, per plan: approved palette (contradicts)
+- [ ] T072 Relabel Decision 2 Option A as session refresh with absolute 30-day expiry in contracts/prompt-3b-execution-guide.md and checklists/blocking-decisions-validation.md per Decision 2 (partial)
+- [ ] T073 Restate or close T045–T047 against the merged PR #589 state per plan: verification (partial)
+- [ ] T074 Justify the staged/ directory in plan.md or archive it per plan: project structure (unrequested)
