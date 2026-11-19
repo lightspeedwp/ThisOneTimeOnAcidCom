@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Specification 005 Phase 1: Reader-Access Infrastructure** — Added Netlify Functions directory structure for reader verification flow with 5 function handlers (code-request, verify, chapter, session, retention) and 6 shared library modules (Blobs adapter, code generation, session cookies, Mailgun integration, edition manifest, response formatting). Added Mailgun.js and Netlify Blobs dependencies. Created comprehensive mock data layer with all 10 reader-visible states and UI copy, ready for Phase 2 implementation.
+
 ### Changed
 
 - **Reader access: Restricted chapter bundling** (RA-T054) — Temporarily set `BOOK_SOURCE_DIRECTORIES` to empty array to prevent protected chapters from being bundled in the client. Chapters are now served exclusively through `/api/reader/chapters/{chapterId}` pending implementation of server-side delivery (RA-T035/RA-T037). Satisfies RA-001 (verified access only) and SC-004 (authorization required for direct chapter access).
