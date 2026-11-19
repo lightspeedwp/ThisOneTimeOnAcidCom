@@ -92,7 +92,7 @@
 ## Implementation Quality Metrics
 
 | Metric | Phase 6 | Phase 7 (Target) |
-|--------|---------|------------------|
+| --- | --- | --- |
 | Unit Tests Passing | 737 | ✅ 737 |
 | Contract Tests | 8/8 recovery | 9/9 retention |
 | E2E Tests Defined | 4/4 | (pending) |

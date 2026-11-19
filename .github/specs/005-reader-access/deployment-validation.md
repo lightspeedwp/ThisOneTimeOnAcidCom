@@ -94,7 +94,7 @@ Evidence:
 **Configuration:** Lines 18-24 in netlify.toml
 
 | Header | Value | Purpose |
-|--------|-------|---------|
+| --- | --- | --- |
 | X-Content-Type-Options | nosniff | Prevents MIME type sniffing |
 | Referrer-Policy | strict-origin-when-cross-origin | Privacy-aware referrer handling |
 | X-Frame-Options | DENY | Prevents clickjacking; disables embedding |

@@ -109,7 +109,7 @@ Phase 7 completes the Reader Access feature by:
 ### Deliverables Completed
 
 | Task | Status | Evidence |
-|------|--------|----------|
+| --- | --- | --- |
 | **RA-T049** | ✅ Complete | [accessibility-audit.md](./accessibility-audit.md) — Code review, 5 findings, 0 blockers |
 | **RA-T050** | ✅ Complete | `netlify/functions/reader-retention.ts` — 9/9 tests passing |
 | **RA-T051** | ✅ Complete | [verification.md](./verification.md) — Stage readback documented |

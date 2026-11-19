@@ -28,7 +28,7 @@ Reader Access components demonstrate strong semantic HTML structure and keyboard
 - **Label Association:** All inputs have `<label>` with `htmlFor` matching input `id`
 - **Form State:** Clear state machine (request-code → enter-code)
 - **Error Handling:** Error messages use `role="alert"` for immediate screen reader announcement
-- **Input Attributes:** 
+- **Input Attributes:**
   - Email input: `type="email"` for semantic validation
   - Code input: `inputMode="numeric"` for mobile keyboards
   - Both have appropriate `disabled` states during loading
@@ -82,7 +82,7 @@ Reader Access components demonstrate strong semantic HTML structure and keyboard
 ### reader-access-form.css
 
 #### Strengths ✅
-- **Focus States:** 
+- **Focus States:**
   - Input focus: `box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1)` with blue border
   - Button focus: `box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.3)` - visible outline
   - `:focus-visible` selector for keyboard-only focus (line 242-247)
@@ -133,7 +133,7 @@ Reader Access components demonstrate strong semantic HTML structure and keyboard
 All 10 reader-visible states from `reader-access.ts` have been implemented in `ReaderAccessForm.tsx` and use consistent messaging. No additional a11y issues beyond the form component itself.
 
 | State | Copy Clarity | A11y Notes |
-|-------|-------------|-----------|
+| --- | --- | --- |
 | request-pending | ✅ Clear | "Sending code..." state |
 | request-received | ✅ Clear | "Check your email within 10 minutes" |
 | delivery-uncertain | ✅ Clear | "Email may be delayed" |
