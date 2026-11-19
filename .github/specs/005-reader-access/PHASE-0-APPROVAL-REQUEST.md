@@ -21,10 +21,20 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 - ✅ Storage: Netlify Blobs for codes/records + `netlify/functions/protected-content/` for edition
 - ✅ Newsletter: Brevo (double opt-in via workflows)
 - ✅ Code format: 6-digit, single-use, 5 wrong attempts, 10-minute expiry
-- ✅ Session: HttpOnly cookie, opaque token, device-scoped
+- ⏳ Session: HttpOnly cookie, opaque token, device-scoped (pending owner approval; session identity and storage fallback also open)
 - ✅ Renewal: up to 30 days per fresh-code, repeatable with no ceiling
 - ✅ Recovery: recovery-first race (recovery session wins, fresh request continues)
 - ✅ Constitution: v1.0.1 amended (editorial content = `src/content/`)
+
+---
+
+## Links to Related Specifications and Dependencies
+
+- **Governing Specification**: [RA-010 Requirement](spec.md#requirement-ra-010-manuscript-availability) (edition manifest, source revision, rights, credits, publication approval)
+- **Decision Records**: [decisions.md](decisions.md) (unresolved items 2, 4, 5, 6, 7, 9; resolved items 1, 8, 11)
+- **Research & Rationale**: [research.md](research.md) (R-01 through R-12: alternatives considered for each decision)
+- **Phase Breakdown**: [tasks.md](tasks.md) (Phase 0–8 implementation sequence; Phase 1–7 blocked by RA-T006, RA-T007, RA-T009)
+- **Specification**: [spec.md](spec.md) (requirements SC-001 through SC-010, acceptance criteria, verification)
 
 ---
 
@@ -36,7 +46,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 
 **Current State**:
 - Book chapters currently live in `src/content/book/01-part-1-early-life/`, `02-part-2-carefree-20s/`, etc. (6 directories).
-- These are bundled into the client via `bookContentLoader.ts` and are publicly readable.
+- These directories exist but are temporarily excluded from the client bundle (BOOK_SOURCE_DIRECTORIES is empty; no chapters are currently bundled via `bookContentLoader.ts`).
 - Decision 11 (resolved 2026-11-19): protected edition will be stored in `netlify/functions/protected-content/` (server-only, not bundled).
 
 **What needs approval**:
@@ -95,7 +105,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 - Renewal duration: **30 days** (matches recovery upper bound; simpler logic)
 - Recovery duration: **30 days from last authentication** (matches renewal; consistent user model)
 - Resend cooldown: **60 seconds** (prevents accidental/spam resends; common pattern)
-- Request-rate limits: **10 codes per email per day** (rate-limits abuse; allows ~1 weekly reader)
+- Request-rate limits: **10 codes per email per day** + **50 codes per network per day** (per-email rate-limits individual address abuse; per-network prevents bulk attacks)
 - Revocation: **User-initiated via sign-out only** (simpler; sign-out already clears server session)
 
 | Sub-Option | Rationale |
@@ -125,7 +135,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 **Current State**:
 - Constitution IV requires privacy review (not explicitly stated, but operator transparency is a safeguard)
 - Brevo (newsletter) has its own privacy/deletion workflow; reader-access storage is separate
-- Mailgun provides 30-day transactional logs (standard retention); beyond that is storage, which we control
+- Mailgun retention: at least 30 days for paid accounts, at least 2 days for free (per documentation). Verify applicable plan, delivery status reporting, log retention, and backup schedules before using in privacy notice
 
 **What needs approval**:
 
@@ -141,8 +151,8 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 - **Privacy reviewer**: Ash (you have product authority; external review can follow at launch)
 - **Notice wording**: Draft at RA-T021; Ash approves before Phase 1 ships
 - **Data controller**: Ash/This One Time (the book project)
-- **Support access**: Audit log only (read-only access to debug, logged)
-- **Deletion**: Automated Netlify Blobs cleanup after 12 months (no auth in past 365d); Brevo newsletter deletion is separate
+- **Support access**: Ash is the sole authorized internal operator for manuscript-access and reader-record access; all access is logged in audit trail for compliance verification
+- **Deletion**: Scheduled application cleanup after 12 months (checks last authenticated-use timestamp, deletes inactive records, revokes future access); Brevo newsletter deletion is separate
 
 | Sub-Option | Trade-off |
 | --- | --- |
@@ -177,7 +187,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 
 | Task | Category | Current State | Decision Needed |
 | --- | --- | --- | --- |
-| **RA-T006** | Manuscript | Chapters in `src/content/book/`; will move to `netlify/functions/protected-content/` | Edition manifest (list of approved chapters) + source revision |
+| **RA-T006** | Manuscript | Chapters in `src/content/book/`; will move to `netlify/functions/protected-content/` | Edition manifest, source revision, rights, credits, publication authority |
 | **RA-T007a** | Renewal duration | Up to 30d decided; exact amount open | 30d (recommended) or other (12d, 14d, 20d, 28d?) |
 | **RA-T007b** | Recovery duration | No decision yet | 30d from last auth (recommended) or other? |
 | **RA-T007c** | Resend cooldown | No decision yet | 60s (recommended) or other? |
@@ -193,8 +203,8 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 
 **To unblock Phase 1**, please provide approval/decisions for:
 
-1. **RA-T006**: Edition manifest (chapter list) + source revision
-2. **RA-T007**: Renewal/recovery duration, resend cooldown, rate limit, revocation (or accept recommended defaults)
+1. **RA-T006**: Edition manifest (chapter list), source revision, rights, credits, publication authority
+2. **RA-T007**: Renewal/recovery duration, resend cooldown, per-email and per-network rate limits, revocation (or accept recommended defaults)
 3. **RA-T009**: Privacy reviewer, support-access policy, deletion procedure (or accept recommended defaults)
 
 **Once approved**:
@@ -216,16 +226,19 @@ If you approve the recommendations:
 ```yaml
 RA-T006: Edition manifest = {approved chapter list}
          Source revision = {git commit/branch}
+         Rights = {author, copyright, third-party}
+         Credits = {contributors, sources}
+         Publication authority = {who approves, staged release workflow}
 
 RA-T007: Renewal duration = 30 days
          Recovery duration = 30 days from last authentication
          Resend cooldown = 60 seconds
-         Request-rate limit = 10 codes per email per 24h
+         Request-rate limit = 10 codes per email per 24h + 50 per network per 24h
          Revocation = User-initiated via sign-out only
 
 RA-T009: Privacy reviewer = Ash (product owner)
-         Support access = Read-only via audit log
-         Deletion procedure = Automated Netlify Blobs TTL (12 months no-auth)
+         Support access = Ash sole authorized operator; all access logged
+         Deletion procedure = Scheduled application cleanup (check last auth, delete 12m inactive, revoke access)
 ```
 
 ---
