@@ -42,7 +42,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 **What needs approval**:
 
 | Item | Decision Needed | Impact on Phase 1–7 |
-|------|---|---|
+| --- | --- | --- |
 | **Edition manifest** | Which chapters/sections comprise the "complete shorter website edition"? | Phase 2 (RA-T027 reads manifest) + Phase 3 (RA-T035 serves chapters) |
 | **Manuscript source revision** | Exact Git commit/branch + which files are authoritative? | Baseline for all chapter bundling decisions |
 | **Rights & credits** | Author, copyright, any third-party content rights? | RA-010 requirement; delivery must be truthful |
@@ -84,7 +84,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 **Still Unresolved**:
 
 | Item | Decision Needed | Affects |
-|------|---|---|
+| --- | --- | --- |
 | **Renewal duration** | Exactly how many days within the 30-day upper bound? (e.g., 28d, 30d) | RA-T034, RA-T041 (renew logic) + user experience (session persistence) |
 | **Recovery duration & start** | How long does a recovered session last? When does the timer start? (e.g., 7d from last auth, 30d from first recovery, no limit?) | RA-T048 (recovery implementation) + Phase 6 testability |
 | **Resend cooldown** | Minimum time between requesting new codes? (e.g., no cooldown, 60s, 5m) | Abuse control; Phase 1 (RA-T020 adds Mailgun SDK) |
@@ -99,7 +99,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 - Revocation: **User-initiated via sign-out only** (simpler; sign-out already clears server session)
 
 | Sub-Option | Rationale |
-|---|---|
+| --- | --- |
 | **A1 (Lenient)** | Longer durations (30d renewal + 30d recovery); higher rate limit (20/day); manual admin revocation available | Pro: User-friendly; Con: Higher operational/security burden |
 | **A2 (Balanced)** | 30d + 30d; 10/day; sign-out only (Recommended) | Pro: Clear, low-ops, familiar model; Con: No manual revocation if abuse detected |
 | **A3 (Strict)** | 14d renewal; 7d recovery; 5/day; admin revocation required | Pro: Stricter abuse controls; Con: Frequent re-auth friction |
@@ -130,7 +130,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 **What needs approval**:
 
 | Item | Decision Needed | Consequence |
-|------|---|---|
+| --- | --- | --- |
 | **Privacy reviewer** | Who reviews the privacy notice for accuracy and compliance? (e.g., Ash, external legal counsel, internal privacy team) | Phase 1 (RA-T021 visitor copy) must include the reviewed notice |
 | **Privacy notice** | Exact wording disclosed to readers (e.g., "Your email and access history are stored for 12 months and then deleted" + data controller, processor, rights disclosure) | RA-008 (feedback states); RA-T036 (form UI) |
 | **Data controller & processor** | Who is responsible for the data? (Ash/This One Time = controller; Netlify/Mailgun = processors) | Privacy notice must name them per GDPR/privacy law |
@@ -145,7 +145,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 - **Deletion**: Automated Netlify Blobs cleanup after 12 months (no auth in past 365d); Brevo newsletter deletion is separate
 
 | Sub-Option | Trade-off |
-|---|---|
+| --- | --- |
 | **A1 (Lightweight)** | Ash reviews notice; support access logged; automated deletion | Pro: Moves fast; Con: Requires audit logging setup (small effort) |
 | **A2 (Formal)** | External legal review; strict support access (admin only, Ash approval per access); manual deletion audit | Pro: Higher compliance confidence; Con: Slower to launch, higher ops burden |
 
@@ -176,7 +176,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 ## Summary Table: What Needs Your Decision
 
 | Task | Category | Current State | Decision Needed |
-|------|----------|---|---|
+| --- | --- | --- | --- |
 | **RA-T006** | Manuscript | Chapters in `src/content/book/`; will move to `netlify/functions/protected-content/` | Edition manifest (list of approved chapters) + source revision |
 | **RA-T007a** | Renewal duration | Up to 30d decided; exact amount open | 30d (recommended) or other (12d, 14d, 20d, 28d?) |
 | **RA-T007b** | Recovery duration | No decision yet | 30d from last auth (recommended) or other? |
@@ -213,7 +213,7 @@ Phase 8 Convergence is complete: Constitution Amendment (RA-T053) ✓ and chapte
 
 If you approve the recommendations:
 
-```
+```yaml
 RA-T006: Edition manifest = {approved chapter list}
          Source revision = {git commit/branch}
 
