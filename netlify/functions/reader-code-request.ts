@@ -2,89 +2,76 @@
 // Create verification code and send via email
 // Resend invalidates previous code for same email
 
-import { createVerificationCode } from '../lib/reader-access/codes';
-import { storeCode, getCode } from '../lib/reader-access/store';
-import { sendCode } from '../lib/reader-access/mailer';
-import { rateLimit, requestReceived, providerFailure, limitedResponse } from '../lib/reader-access/responses';
+import { createJsonResponse, responses } from '../lib/reader-access/responses';
+import { createVerificationCode, generateCode } from '../lib/reader-access/codes';
+import { storeCode, deleteCode } from '../lib/reader-access/store';
+import { MailgunMailer } from '../lib/reader-access/mailer';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const RATE_LIMIT_PER_EMAIL = 10; // codes/day per email
-const RATE_LIMIT_PER_IP = 50; // codes/day per IP
 
 export default async function handler(
   req: Request
 ): Promise<Response> {
   if (req.method !== 'POST') {
-    return new Response('Method not allowed', { status: 405 });
+    return new Response('{"state":"provider-failure"}', { status: 405, headers: { 'Content-Type': 'application/json' } });
   }
 
   try {
-    // Parse and validate email
-    const body = await req.json() as { email?: string };
-    const { email } = body;
+    // Parse request body
+    const body = await req.json();
+    const { email } = body as Record<string, unknown>;
 
-    if (!email || typeof email !== 'string' || !EMAIL_REGEX.test(email)) {
-      return rateLimit(400, {
-        state: 'invalid-email',
-        message: 'Please provide a valid email address.',
-      });
+    // Validate email
+    if (!email || typeof email !== 'string') {
+      return createJsonResponse(responses.invalid(), 400);
     }
 
-    // Check rate limit per email (TODO: implement IP-based limiting in future)
-    const existingCode = await getCode(email);
-    if (existingCode) {
-      const now = new Date();
-      const createdAt = new Date(existingCode.createdAt);
-      const hoursSinceCreated = (now.getTime() - createdAt.getTime()) / (1000 * 60 * 60);
-
-      // If code is less than 24 hours old, increment attempt counter
-      // For MVP: simple check; production would aggregate over 24h window
-      if (hoursSinceCreated < 24) {
-        // Rate limit exceeded (simplified: reject if code exists)
-        // In production: check cumulative count across all codes for email in 24h
-        return limitedResponse(429, {
-          state: 'limited',
-          message: 'Too many code requests. Please try again later.',
-        });
-      }
+    if (!EMAIL_REGEX.test(email)) {
+      return createJsonResponse(responses.invalid(), 400);
     }
 
-    // Generate and store new code
-    const code = createVerificationCode();
-    await storeCode(email, code);
+    // Delete previous code for this email (recovery: invalidate old)
+    await deleteCode(email).catch(() => {
+      // Ignore deletion errors
+    });
+
+    // Create new verification code
+    const code = generateCode();
+    const verificationCode = createVerificationCode();
+
+    // Store code
+    await storeCode(email, {
+      codeHash: verificationCode.codeHash,
+      createdAt: verificationCode.createdAt,
+      expiresAt: verificationCode.expiresAt,
+      attemptCount: verificationCode.attemptCount,
+      maxAttempts: verificationCode.maxAttempts,
+    });
 
     // Send via Mailgun
-    try {
-      await sendCode(email, code);
-    } catch (error) {
-      // Provider failure: distinguish "accepted for sending" from connection error
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const mailer = new MailgunMailer({
+      apiKey: process.env.MAILGUN_API_KEY || '',
+      domain: process.env.MAILGUN_DOMAIN || '',
+      fromAddress: process.env.MAILGUN_FROM || 'noreply@thisonetimeonacidcom.com',
+    });
 
-      if (errorMessage.includes('ECONNREFUSED') || errorMessage.includes('ENOTFOUND')) {
-        // Connection refused: provider is down
-        return providerFailure(502, {
-          state: 'provider-failure',
-          message: 'Service temporarily unavailable. Please try again.',
-        });
-      }
+    const emailResult = await mailer.sendVerificationCode(email, code, '10 minutes');
 
-      // Other error: might be validation error, treat as provider failure
-      return providerFailure(502, {
-        state: 'provider-failure',
-        message: 'Email service error. Please try again.',
-      });
+    // Return response based on email result
+    if (emailResult.status === 'accepted') {
+      return createJsonResponse(
+        responses.received(verificationCode.expiresAt),
+        202
+      );
+    } else if (emailResult.status === 'uncertain') {
+      return createJsonResponse(responses.uncertain(), 502);
+    } else {
+      return createJsonResponse(responses.invalid(), 400);
     }
-
-    // Success: code sent
-    return requestReceived(202, {
-      state: 'request-received',
-      message: 'Code sent. Check your email within 10 minutes.',
-    });
-  } catch (error) {
-    // Unexpected error
-    return providerFailure(500, {
-      state: 'provider-failure',
-      message: 'An unexpected error occurred.',
-    });
+  } catch (err) {
+    if (err instanceof SyntaxError) {
+      return createJsonResponse(responses.invalid(), 400);
+    }
+    return createJsonResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 502);
   }
 }
