@@ -8,17 +8,19 @@ Based on Spec 005 RA-T047–RA-T056
 
 ## Implementation (Content Pipeline)
 
-- [ ] RA-T047 [P] Extend `netlify/lib/reader-access/edition.ts` with chapter metadata
-  - [ ] Edition manifest schema for chapters
-  - [ ] Chapter metadata (title, word count, estimated read time, approval status)
-  - [ ] Content versioning support
-  - [ ] Export chapter list by status
+- [x] RA-T047 [P] Extend `netlify/lib/reader-access/edition.ts` with chapter metadata
+  - [x] Edition manifest schema for chapters
+  - [x] Chapter metadata (title, word count, estimated read time, approval status)
+  - [x] Content versioning support
+  - [x] Export chapter list by status
+  - ✅ 14 contract tests passing
 
-- [ ] RA-T048 [P] Create `netlify/functions/reader-chapter-content.ts`
-  - [ ] GET `/api/reader/chapters/{chapterId}/content` endpoint
-  - [ ] Content delivery with security validation
-  - [ ] Response format: HTML/Markdown with metadata
-  - [ ] Cache-Control headers
+- [x] RA-T048 [P] Create `netlify/functions/reader-chapter-content.ts`
+  - [x] GET `/api/reader/chapters/{chapterId}/content` endpoint
+  - [x] Content delivery with security validation
+  - [x] Response format: HTML/Markdown with metadata
+  - [x] Cache-Control headers
+  - ✅ 14 contract tests passing
 
 - [ ] RA-T049 [P] Create `netlify/functions/reader-chapters-list.ts`
   - [ ] GET `/api/reader/chapters?status=approved` endpoint
