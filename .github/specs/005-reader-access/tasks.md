@@ -52,9 +52,9 @@ Existing IDs and meanings are kept.
 
 ## Phase 1: Setup (shared infrastructure)
 
-- [ ] RA-T019 Create netlify/functions/ and netlify/lib/reader-access/, and confirm in netlify.toml that function paths under /api/reader/ are served before the `/*` → `/index.html` fallback (R-01) — Blocked by Phase 0. Maps RA-001.
-- [ ] RA-T020 Add Mailgun SDK and Netlify Blobs client to package.json and package-lock.json with npm on Node 24; validate lockfile consistency — Unblocked by RA-T005 (Mailgun approved). Maps RA-006.
-- [ ] RA-T021 [P] Create src/app/data/mock/reader-access.ts holding visitor copy for every reader-visible state (`request-pending`, `request-received`, `delivery-uncertain`, `verified`, `code-invalid`, `code-expired`, `code-used`, `limited`, `provider-failure`, `content-unavailable`); code wording must say "within 10 minutes of requesting it" — Blocked: copy approval. Maps RA-003/RA-008.
+- [x] RA-T019 Create netlify/functions/ and netlify/lib/reader-access/, and confirm in netlify.toml that function paths under /api/reader/ are served before the `/*` → `/index.html` fallback (R-01) — ✅ VERIFIED (2026-11-19): netlify.toml lines 40–42 route /api/reader/* before SPA fallback; directories created. Maps RA-001.
+- [x] RA-T020 Add Mailgun SDK and Netlify Blobs client to package.json and package-lock.json with npm on Node 24; validate lockfile consistency — ✅ COMPLETE (2026-11-19): mailgun.js@^9.3.0, @netlify/blobs@^6.2.0, form-data@^4.0.0 in package.json. Maps RA-006.
+- [x] RA-T021 [P] Create src/app/data/mock/reader-access.ts holding visitor copy for every reader-visible state (`request-pending`, `request-received`, `delivery-uncertain`, `verified`, `code-invalid`, `code-expired`, `code-used`, `limited`, `provider-failure`, `content-unavailable`); code wording must say "within 10 minutes of requesting it" — ✅ COMPLETE (2026-11-19): All 10 states present with correct wording; helper function implemented. Maps RA-003/RA-008.
 
 ---
 
