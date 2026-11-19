@@ -52,7 +52,7 @@ PR #610 has been successfully merged to main. The Phase 9 Convergence block for 
 
 ### If continuing Phase 9 task execution:
 
-1. **Verify pre-requisites**: Confirm all Phase 1–8 tasks are marked complete in tasks.md
+1. **Verify pre-requisites**: Check that Phase 1–8 completion is on track. Phase 9 remediation tasks (T063) can run before Phase 8 is complete to help close T054.
 2. **Execute T060–T074 in sequence**: Follow Phase 9 convergence order (see tasks.md dependencies)
 3. **Gate T063 on Ash's approval**: Do not record SC-003 scope change until Ash's explicit approval is documented
 4. **Verify T025–T026 exclusion**: Confirm T066 closure includes only T012–T024, T027–T038
@@ -106,7 +106,7 @@ git checkout -b task/spec-004-phase9-execution origin/main
 git checkout main
 
 # 2. View Phase 9 tasks
-cat .github/specs/004-book-website-make/tasks.md | grep -A 2 "^## Phase 9"
+cat .github/specs/004-book-website-make/tasks.md | sed -n '/^## Phase 9/,/^## Phase 10\|^---/p'
 
 # 3. Check linear sync handoff
 cat .github/specs/004-book-website-make/exports/LINEAR_SYNC_HANDOFF.md
@@ -116,7 +116,7 @@ cat .github/specs/004-book-website-make/exports/LINEAR_SYNC_HANDOFF.md
 
 ## Blockers & Dependencies
 
-- **T063 gate**: Requires Ash's recorded approval of SC-003 scope change before execution
+- **T063 Prompt 3A gate**: Requires Ash's recorded approval of SC-003 scope change. Prompt 2A completeness work (T054 support) proceeds without approval.
 - **T025–T026 closure**: Must remain open until navigation documentation checks are complete
 - **Phase 9 prerequisite**: All Phase 1–8 tasks must be completed before Phase 9 execution begins
 
@@ -126,7 +126,7 @@ cat .github/specs/004-book-website-make/exports/LINEAR_SYNC_HANDOFF.md
 
 1. **Should Phase 9 task execution begin?** (Requires Phase 1–8 completion validation)
 2. **Has Ash approved the SC-003 scope change for T063?** (Blocks T063 execution)
-3. **Are T025–T026 navigation checks complete?** (Blocks T066 closure)
+3. **Are T025–T026 navigation checks complete?** (Keep open independently; T066 closes other specified tasks)
 4. **Any new specifications or features to plan?** (Determine next branch and workflow)
 
 ---
