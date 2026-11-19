@@ -12,8 +12,8 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 | Phase | Prompts | Status |
 | ------- | --------- | -------- |
-| **Phase A: Unblocked** | Prompts 1, 2A, 2B | ✅ Ready to Execute |
-| **Phase B: Blocked** | Prompts 3A, 3B, 3C | ⏳ Awaiting Decisions |
+| **Phase A: Unblocked** | Prompts 1, 2A, 2B | ⏳ Pending approval (Gate 2 Approval) |
+| **Phase B: Handed to Spec 005** | Prompts 3A, 3B, 3C | 🔄 Ready for Spec 005 handoff |
 
 ---
 
@@ -68,7 +68,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 - ✅ Component styles defined for Button, Card, Navigation, Form
 - ✅ File is valid CSS or JSON
 
-**Ready for Execution**: Yes — No blocking decisions.
+**Ready for Execution**: Pending approval (gated by Gate 2 Approval; no blocking decisions remain).
 
 ---
 
@@ -103,18 +103,18 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 - ✅ Mobile drawer overlay documented
 - ✅ All breakpoints specified (1024px, 768px)
 
-**Ready for Execution**: Yes — No blocking decisions.
+**Ready for Execution**: Pending approval (gated by Gate 2 Approval; no blocking decisions remain). Run after Prompt 1 so the navigation design uses the updated baseline.
 
 ---
 
-## Phase B: Blocked Prompts (Awaiting Decisions)
+## Phase B: Handed to Spec 005
 
 ### Prompt 3A: Reader Access Copy & Forms ⏳
 
-**Status**: ❌ BLOCKED  
+**Status**: 🔄 Handed to Spec 005  
 **File**: `.github/specs/004-book-website-make/contracts/prompt-3a-reader-access.md`  
 **Priority**: P1  
-**Dependency**: Decisions 3, 4, 5, 6 (all required before execution)
+**Dependency**: Handed to Spec 005 for Decisions 3, 4, 5, 6 (specification-unblocked; execution pending approval)
 
 **Goal**: Generate exact email verification copy, form wording, error messages, and newsletter CTA specifications.
 
@@ -151,10 +151,10 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 ### Prompt 3B: Recovery Flows ⏳
 
-**Status**: ❌ BLOCKED  
+**Status**: 🔄 Handed to Spec 005  
 **File**: `.github/specs/004-book-website-make/contracts/prompt-3b-recovery-flows.md`  
 **Priority**: P1  
-**Dependency**: Decisions 1, 2 (both required before execution)
+**Dependency**: Handed to Spec 005 for Decisions 1, 2 (specification-unblocked; execution pending approval)
 
 **Goal**: Generate reader recovery flow specifications (password resets, account recovery, session management).
 
@@ -189,10 +189,10 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 ### Prompt 3C: Error States ⏳
 
-**Status**: ❌ BLOCKED (Partially)  
+**Status**: 🔄 Handed to Spec 005  
 **File**: `.github/specs/004-book-website-make/contracts/prompt-3c-error-states.md`  
 **Priority**: P1  
-**Dependency**: Decision 3 (required for code-expiry messaging; other errors can proceed after Decision 3)
+**Dependency**: Handed to Spec 005 for Decision 3 (specification-unblocked; execution pending approval)
 
 **Goal**: Generate error state designs and messaging for code verification, recovery, and session errors.
 

@@ -16,7 +16,7 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 
 **Project Type**: Documentation-only specification package (no code generation, no deployment)
 
-**Source Files**: Six specification files in content/book/ (01-book-website-specification.md, 02-companion-session-plan.md, 03-author-decisions-launch-scope.md, 04-design-brief.md, 05-design-reader-decision-register.md, 06-website-reading-prd.md) with version tracking and reconciliation
+**Source Files**: Six specification files in `.github/specs/004-book-website-make/references/` (01-book-website-specification.md, 02-companion-session-plan.md, 03-author-decisions-launch-scope.md, 04-design-brief.md, 05-design-reader-decision-register.md, 06-website-reading-prd.md) with version tracking and reconciliation
 
 **Design System**: Space Grotesk headings, Inter body/UI, 9-color palette (light & dark themes)
 
@@ -82,7 +82,7 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 **Project Type: Documentation-only specification**
 
 ```text
-content/book/
+.github/specs/004-book-website-make/references/
 ├── 01-book-website-specification.md     # Master execution contract (v1.0.0)
 ├── 02-companion-session-plan.md         # Preparation queue (v1.0.4)
 ├── 03-author-decisions-launch-scope.md  # Author decisions (v1.3.0)

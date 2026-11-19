@@ -78,6 +78,7 @@ From `.github/specs/004-book-website-make/references/03-author-decisions-launch-
 ✅ **CR-1.3**: Enforcement strategy matches Blocking Decision 7 Option A (Noindex meta tags + Sitemap exclusion):
 - Noindex meta tags present on /speaking, /events, /media pages
 - Sitemap.xml excludes /speaking, /events, /media
+- robots.txt does NOT disallow /speaking, /events, /media (must allow crawlers to fetch noindex tags)
 
 ✅ **CR-1.4**: Responsive navigation design preserved for desktop, tablet, mobile breakpoints
 

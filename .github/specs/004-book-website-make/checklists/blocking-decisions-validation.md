@@ -169,9 +169,9 @@ Each blocking decision MUST have:
 - ✅ All 7 decisions have 3+ options (range: 3–4 options per decision)
 - ✅ All 7 decisions have clear impact assessment for downstream prompts
 - ✅ All 7 decisions have comprehensive trade-offs documented
-- ✅ All 7 decisions marked with clear status (PENDING, awaiting user input)
+- ✅ All 7 decisions marked with clear status (6 PENDING, 1 RESOLVED)
 
-**SC-004 Compliance**: ✅ **PASS** — All blocking decisions identified, presented with 3+ options each, with impact assessment before user approval.
+**SC-004 Compliance**: ✅ **PASS** — All blocking decisions identified, presented with 3+ options each, with impact assessment before user approval. Decision 7 (Route Enforcement) resolved to Option A.
 
 ---
 

@@ -33,12 +33,14 @@ This ThisOneTimeOnAcidCom repository is working on **Spec 004: Book Website Figm
 
 ### Current State
 
-**Files Modified**:
-- `.github/specs/004-book-website-make/contracts/prompt-1-navigation-exposure.md` (1/5 files for T060 updated)
+**Completed Phase 9 Tasks** (4 total):
+- ✅ T060: Decision 7 wording fixed across 5 files
+- ✅ T061: Readiness claims updated with approval gate
+- ✅ T062: Resolved decisions and handover documented
+- ✅ T070: Source file paths consolidated to references/
 
-**Remaining Phase 9 Tasks** (15 total):
-- T060 (4 more files): PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md, exports/GATE_2_READINESS_REPORT.md, checklists/blocking-decisions-validation.md
-- T061-T074: Path updates, version updates, artifact creation, task disambiguation
+**Remaining Phase 9 Tasks** (11 total):
+- T063-T069, T071-T074: Path updates, version updates, artifact creation, task disambiguation, Spec 005 handoff
 
 **Branch Status**:
 - Branch: `docs/spec-004-linear-sync-handoff`
@@ -155,8 +157,8 @@ After completing all Phase 9 tasks:
 ## Questions or Issues
 
 If you encounter blockers during Phase 9 execution:
-- Check the specific task description in tasks.md (T060-T074)
-- Reference LINEAR_SYNC_HANDOFF.md for exact changes needed
+- Check the specific task description in tasks.md (T063-T074 — remaining tasks)
+- Review the decision records in checklists/blocking-decisions-validation.md for context
 - Run `/speckit-analyze` to verify spec/plan alignment
 - Run `/speckit-converge` to validate before each commit
 

@@ -151,7 +151,7 @@ All critical design baseline requirements have been verified and documented:
 
 ### Functional Requirements
 
-- **FR-001**: System MUST analyze all six source specification files from content/book/ directory and identify version differences, gaps, and conflicts
+- **FR-001**: System MUST analyze all six source specification files from `.github/specs/004-book-website-make/references/` directory and identify version differences, gaps, and conflicts
 - **FR-002**: System MUST reconcile version mismatches (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0) using precedence rule: newer version takes precedence; all conflicts documented in research.md with explicit rationale
 - **FR-003**: System MUST prepare exact Prompt 1 (navigation exposure) as executable Figma Make specification with before/after structure and acceptance criteria
 - **FR-004**: System MUST prepare exact Prompts 2A (design baseline), 2B (navigation design), and 3A (reader access copy) as complete, unexecuted specifications
@@ -164,7 +164,7 @@ All critical design baseline requirements have been verified and documented:
 
 ### Key Entities
 
-- **Specification File**: One of six source files (01–06) in content/book/ directory; has version, approval status, content sections, and cross-references to Linear issues
+- **Specification File**: One of six source files (01–06) in `.github/specs/004-book-website-make/references/` directory; has version, approval status, content sections, and cross-references to Linear issues
 - **Design Baseline**: Approved set of typography (Space Grotesk/Inter), colors (9-named-palette, both themes), component styles, and theme states
 - **Design Candidate**: Unapproved design proposal (R3 responsive typography, T1 additional typography, RT2 reader controls, C1 continuity) with full specification but no approval
 - **Blocking Decision**: Unresolved choice that prevents one or more prompts from being executed (recovery-first race, recovery lifetime, code expiry timing, etc.)
@@ -191,7 +191,7 @@ All critical design baseline requirements have been verified and documented:
 ## Assumptions
 
 - **User Context**: Ash (project owner) and development team will review and approve this documentation package before any implementation proceeds
-- **Source Files**: All six specification files (01–06) in content/book/ directory are authoritative and will not change during this preflight phase
+- **Source Files**: All six specification files (01–06) in `.github/specs/004-book-website-make/references/` directory are authoritative and will not change during this preflight phase
 - **Design Baseline Approval**: Space Grotesk headings, Inter body/UI, 9-color palette (both themes) are locked and require no changes during preflight
 - **Blocking Decisions**: All 7 decisions are genuinely open and require user input: recovery-first race condition (A/B/C/D), recovery lifetime eligibility (A/B/C/D), code expiry start time (A/B/C), email service provider (A/B/C/D), manuscript publication readiness (A/B/C), newsletter destination (A/B/C/D), and route enforcement verification (A/B/C/D)
 - **Implementation Timing**: This spec prepares documentation only; no actual implementation, Figma Make execution, or deployment occurs until separate approval
@@ -207,12 +207,12 @@ All critical design baseline requirements have been verified and documented:
 
 This specification is derived from comprehensive analysis of:
 
-1. `content/book/01-book-website-specification.md` (v1.0.0) — Master execution contract
-2. `content/book/02-companion-session-plan.md` (v1.0.4) — Preparation queue
-3. `content/book/03-author-decisions-launch-scope.md` (v1.3.0) — Author decisions & scope
-4. `content/book/04-design-brief.md` (v1.1.2) — Design requirements & baseline
-5. `content/book/05-design-reader-decision-register.md` (v1.9.0) — Design tracking & candidates
-6. `content/book/06-website-reading-prd.md` (v1.1.1) — Product requirements & access policy
+1. `.github/specs/004-book-website-make/references/01-book-website-specification.md` (v1.0.0) — Master execution contract
+2. `.github/specs/004-book-website-make/references/02-companion-session-plan.md` (v1.0.4) — Preparation queue
+3. `.github/specs/004-book-website-make/references/03-author-decisions-launch-scope.md` (v1.3.0) — Author decisions & scope
+4. `.github/specs/004-book-website-make/references/04-design-brief.md` (v1.1.2) — Design requirements & baseline
+5. `.github/specs/004-book-website-make/references/05-design-reader-decision-register.md` (v1.9.0) — Design tracking & candidates
+6. `.github/specs/004-book-website-make/references/06-website-reading-prd.md` (v1.1.1) — Product requirements & access policy
 
 ### Cross-References
 
