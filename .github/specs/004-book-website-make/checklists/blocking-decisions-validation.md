@@ -142,13 +142,13 @@ Each blocking decision MUST have:
 | Element | Required | Present | Evidence | ✓ |
 | --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "How is sitemap/noindex enforcement verified for /speaking, /events, /media routes?" | ✓ |
-| Rationale | ✓ | ✓ | Verification method and enforcement mechanism unspecified (robots.txt vs. sitemap vs. meta tags) | ✓ |
-| Option Count | ✓ (3+) | ✓ (4 options) | A (Meta + Robots.txt + Sitemap), B (Robots.txt only), C (Meta tags only), D (Sitemap only) | ✓ |
+| Rationale | ✓ | ✓ | Verification method and enforcement mechanism clarified (noindex meta tags + sitemap vs. robots.txt-only vs. meta-tags-only vs. sitemap-only) | ✓ |
+| Option Count | ✓ (3+) | ✓ (4 options) | A (Noindex meta tags + Sitemap), B (Robots.txt only), C (Meta tags only), D (Sitemap only) | ✓ |
 | Option Descriptions | ✓ | ✓ | All 4 options with coverage/simplicity/verification trade-offs | ✓ |
 | Impact Assessment | ✓ | ✓ | "Navigation exposure specification (Prompt 1) must document exact enforcement strategy. Implementation validation requires confirmation that routes are not published to search engines" | ✓ |
-| Decision Status | ✓ | ✓ | "Awaiting user input from blocking decision matrix in spec.md" | ✓ |
+| Decision Status | ✓ | ✓ | "✅ RESOLVED: Option A (Noindex meta tags + Sitemap exclusion) selected per Prompt 1 contract" | ✓ |
 
-**Decision 7 Validation**: ✅ **PASS** (4/4 options, clear impact on Prompt 1 route enforcement specification)
+**Decision 7 Validation**: ✅ **PASS** (4/4 options, clear impact on Prompt 1 route enforcement specification, **RESOLVED to Option A**)
 
 ---
 
@@ -162,7 +162,7 @@ Each blocking decision MUST have:
 | 4 | Email provider | PENDING | 4 options (A/B/C/D) | ✓ Prompt 3A email | ✓ Cost/integration | ✅ PASS |
 | 5 | Manuscript ready | PENDING | 3 options (A/B/C) | ✓ Prompt 3A content | ✓ Readiness/timeline | ✅ PASS |
 | 6 | Newsletter link | PENDING | 4 options (A/B/C/D) | ✓ Prompt 3A form | ✓ UX/friction | ✅ PASS |
-| 7 | Route enforcement | PENDING | 4 options (A/B/C/D) | ✓ Prompt 1 verification | ✓ Coverage/complexity | ✅ PASS |
+| 7 | Route enforcement | ✅ RESOLVED (Option A) | 4 options (A/B/C/D) | ✓ Prompt 1 verification | ✓ Coverage/complexity | ✅ PASS |
 
 **Overall Results**:
 - ✅ All 7 decisions documented
@@ -187,7 +187,7 @@ Each blocking decision MUST have:
 | ❌ 4 Email provider | Prompt 3A (email integration) | Select A/B/C/D (4 options) | research.md Decision 4 |
 | ❌ 5 Manuscript ready | Prompt 3A (content messaging) | Select A/B/C (3 options) | research.md Decision 5 |
 | ❌ 6 Newsletter link | Prompt 3A (form layout) | Select A/B/C/D (4 options) | research.md Decision 6 |
-| ❌ 7 Route enforcement | Prompt 1 (verification method) | Select A/B/C/D (4 options) | research.md Decision 7 |
+| ✅ 7 Route enforcement | Prompt 1 (verification method) | ✅ RESOLVED: Option A selected | research.md Decision 7 |
 
 ---
 

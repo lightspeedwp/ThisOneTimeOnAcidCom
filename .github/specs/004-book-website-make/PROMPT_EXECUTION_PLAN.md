@@ -29,14 +29,14 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 **Goal**: Update navigation component to hide Speaking, Events, and Media routes from public sitemap while preserving them as noindex pages.
 
 **Decision Status**:
-- ✅ **Decision 7**: Route Enforcement Verification — **SELECTED: Option A (Meta tags + Robots.txt + Sitemap)**
+- ✅ **Decision 7**: Route Enforcement Verification — **SELECTED: Option A (Noindex meta tags + Sitemap exclusion)**
   - Explicitly documented in contract (lines 28–36)
-  - Enforcement strategy confirmed
+  - Enforcement strategy confirmed: Noindex meta tags (primary), Sitemap exclusion (primary)
 
 **Acceptance Criteria**:
 - ✅ Navigation component shows only 4 visible links (Home, About, Book, Contact)
 - ✅ Hidden routes (/speaking, /events, /media) remain accessible but not indexed
-- ✅ Enforcement strategy matches Option A (meta tags + robots.txt + sitemap exclusion)
+- ✅ Enforcement strategy matches Option A (noindex meta tags + sitemap exclusion)
 - ✅ Responsive design preserved (desktop, tablet, mobile)
 
 **Ready for Execution**: Yes — No blocking decisions remain.
