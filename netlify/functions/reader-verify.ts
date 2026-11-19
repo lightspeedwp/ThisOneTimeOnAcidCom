@@ -9,11 +9,14 @@ import {
   deleteCode,
   storeSession,
   incrementCodeAttempts,
+  getSession,
+  renewSession,
 } from '../lib/reader-access/store';
 import {
   generateSessionId,
   createSessionCookie,
   formatSessionCookie,
+  parseSessionCookie,
 } from '../lib/reader-access/session-cookie';
 
 const CODE_REGEX = /^\d{6}$/;
@@ -64,36 +67,60 @@ export default async function handler(
       return createJsonResponse(responses.invalid(), 400);
     }
 
-    // Code is valid: create session and delete code atomically
-    // Recovery-first: create session first, then delete code
-    const sessionId = generateSessionId();
+    // Code is valid: check for existing session and renew, or create new
     const now = new Date();
     const expiresAt = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-    await storeSession({
-      sessionId,
-      deviceId: '', // Can be populated from request fingerprinting if needed
-      chapterId: '',
-      createdAt: now.toISOString(),
-      expiresAt: expiresAt.toISOString(),
-      renewedAt: now.toISOString(),
-    });
+    // RA-T041: Check if user has active session in browser cookie
+    // If so, renew it; otherwise create new session
+    const cookieHeader = req.headers.get('cookie');
+    const existingSessionId = parseSessionCookie(cookieHeader);
+    let sessionId = existingSessionId;
+    let isRenewal = false;
+
+    if (existingSessionId) {
+      // Check if session is still valid
+      const existingSession = await getSession(existingSessionId);
+      if (existingSession && new Date(existingSession.expiresAt) > new Date()) {
+        // Renew existing session
+        isRenewal = true;
+        const renewedSession = await renewSession(existingSessionId);
+        if (renewedSession) {
+          sessionId = existingSessionId;
+          // Use the renewed expiry
+          expiresAt.setTime(new Date(renewedSession.expiresAt).getTime());
+        }
+      }
+    }
+
+    // If no renewal, create new session
+    if (!isRenewal) {
+      sessionId = generateSessionId();
+      await storeSession({
+        sessionId,
+        deviceId: '', // Can be populated from request fingerprinting if needed
+        chapterId: '',
+        createdAt: now.toISOString(),
+        expiresAt: expiresAt.toISOString(),
+        renewedAt: now.toISOString(),
+      });
+    }
 
     // Delete code (recovery: if this fails, session was already created)
     await deleteCode(email).catch(() => {
       // Ignore deletion errors (recovery-first)
     });
 
-    // Create session cookie
+    // Create/update session cookie
     const sessionCookie = createSessionCookie(sessionId);
-    const cookieHeader = formatSessionCookie(sessionCookie);
+    const sessionCookieHeader = formatSessionCookie(sessionCookie);
 
     // Return 200 with response and Set-Cookie header
     const response = createJsonResponse(
       responses.verified(sessionId, expiresAt.toISOString()),
       200
     );
-    response.headers.set('Set-Cookie', cookieHeader);
+    response.headers.set('Set-Cookie', sessionCookieHeader);
 
     return response;
   } catch (err) {
