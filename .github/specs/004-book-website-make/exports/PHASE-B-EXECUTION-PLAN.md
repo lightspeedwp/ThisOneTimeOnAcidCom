@@ -21,7 +21,7 @@
 ### Prompt 3A: Reader Access Copy & Forms
 
 | Criterion | Status | Details |
-|-----------|--------|---------|
+| --- | --- | --- |
 | **Email Copy** | ✅ Approved | Ash approved 2026-11-13; exact wording locked |
 | **Form Specification** | ✅ Complete | Email entry, code entry, success state all defined |
 | **Error Messages** | ✅ Complete | Invalid, expired, rate-limited all specified |
@@ -37,7 +37,7 @@
 ### Prompt 3B: Recovery Flows
 
 | Criterion | Status | Details |
-|-----------|--------|---------|
+| --- | --- | --- |
 | **Flow Definition** | ✅ Complete | 3 paths: success, expired, invalid |
 | **Race Condition** | ✅ Approved | Decision 1 Option A (recovery precedence) |
 | **Session Lifetime** | ✅ Approved | Decision 2 Option A (30-day absolute expiry) |
@@ -52,7 +52,7 @@
 ### Prompt 3C: Error States
 
 | Criterion | Status | Details |
-|-----------|--------|---------|
+| --- | --- | --- |
 | **5 Error States** | ✅ Complete | Invalid, expired, rate-limited, server, session-conflict |
 | **Expiry Messaging** | ✅ Approved | Decision 3 Option A (from code generation) |
 | **Race Condition** | ✅ Approved | Decision 1 Option A (recovery state) |
@@ -93,7 +93,7 @@
 ### Phase B Part 1: Figma Make Prompt Generation (45–60 minutes)
 
 | Prompt | Timeline | Dependencies |
-|--------|----------|--------------|
+| --- | --- | --- |
 | **3A** (Reader Access Copy) | 15–20 min | Decisions 3, 4, 5, 6 (all ✅) |
 | **3B** (Recovery Flows) | 15–20 min | Decisions 1, 2, 5 (all ✅) |
 | **3C** (Error States) | 15–20 min | Decisions 3, 1, 5 (all ✅) |

@@ -20,7 +20,7 @@ Figma Make automated execution is **NOT available**. The prompts below specify e
 ### Design Components to Create
 
 | Component | States | Reference |
-|-----------|--------|-----------|
+| --- | --- | --- |
 | Email Template Mockup | (single) | Copy approved by Ash 2026-11-13 |
 | Email Entry Form | default, focused, error | Label + placeholder specified |
 | Code Entry Form | default, focused, error, loading, success | 6-char input with states |
@@ -32,7 +32,7 @@ Figma Make automated execution is **NOT available**. The prompts below specify e
 **Email Subject**: `Your reading code`
 
 **Email Body**:
-```
+```text
 Hi,
 
 Here's your reading code for This One Time On Acid:
@@ -92,7 +92,7 @@ Didn't ask for this? You can ignore this email.
 ### Design Components to Create
 
 | Component | States | Reference |
-|-----------|--------|-----------|
+| --- | --- | --- |
 | Recovery Success | (single) | "Access restored from previous session" |
 | Session Expired | (single) | "Session expired — 30 days elapsed" |
 | Invalid Session | (single) | "Session invalid — requires re-verification" |
@@ -126,7 +126,7 @@ Didn't ask for this? You can ignore this email.
 ### Decision Integration
 
 | Decision | Applied To | Details |
-|----------|-----------|---------|
+| --- | --- | --- |
 | **Decision 1** | Race condition handling | Recovery takes precedence; cancel fresh verification if recovery succeeds |
 | **Decision 2** | Session lifetime | 30-day absolute expiry from initial verification; recovery refreshes cannot extend it |
 | **Decision 5** | Manuscript scenario | Integrates with Chapter 1 live; other chapters pending approval |
@@ -149,7 +149,7 @@ Didn't ask for this? You can ignore this email.
 ### Design Components to Create
 
 | Error Type | Form State | Message |
-|-----------|-----------|---------|
+| --- | --- | --- |
 | **Invalid Code** | Error border + text | "Invalid code. Please check and try again." |
 | **Code Expired** | Error border + text | "Code expired — it was valid for 10 minutes from when it was generated." |
 | **Rate Limited** | Disabled + timer | "Too many failed attempts. Please try again in 15 minutes." |
@@ -205,7 +205,7 @@ Didn't ask for this? You can ignore this email.
 ## Execution Timeline
 
 | Phase | Prompt | Timeline | Designer |
-|-------|--------|----------|----------|
+| --- | --- | --- | --- |
 | **A** | 3A: Reader Access Copy & Forms | 15–20 min | [Assign] |
 | **A** | 3B: Recovery Flows | 15–20 min | [Assign] (can run parallel) |
 | **A** | 3C: Error States | 15–20 min | [Assign] (can run parallel) |
