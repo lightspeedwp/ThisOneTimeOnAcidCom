@@ -61,7 +61,7 @@ Content architecture separates UI configuration from editorial material:
 
 - **Mock Data Authority**: All UI strings, navigation labels, page metadata and component configuration come from `src/app/data/mock/` (centralised data layer)
 - **No Hardcoded Content**: Zero hardcoded UI strings or labels; all derive from mock data objects
-- **Editorial Content**: Book chapters, journal entries, articles and manuscript content live in `content/` (separated from application code)
+- **Editorial Content**: Book chapters, journal entries, articles and manuscript content live in `src/content/` (separated from application code, integrated with src/ per PR #608)
 - **Image Protection**: Never replace existing `figma:asset/` imports or logo files; use `ImageWithFallback.tsx` for new images
 - **Supabase Non-Use**: `src/app/utils/supabase/` is a system artifact—never import from it, never suggest integration
 
