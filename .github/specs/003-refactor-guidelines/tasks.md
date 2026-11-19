@@ -398,18 +398,18 @@ T038–T043 (Design verification & sign-off)
 
 **⚠️ CONSTRAINT:** All parallelism listed below applies ONLY within phase gates and DOES NOT override the FROZEN EXECUTION ORDER. Sequential gates must complete before the next phase begins. `[P]` markers in task lists indicate tasks eligible for parallel execution within their phase gate only.
 
-**Within Phase 2A** (S-documents, after T001–T004): 
+**Within Phase 2A** (S-documents, after T001–T004):
 - T008–T016 can run in parallel (different files; all must complete before T019)
 
-**Within Phase 2B** (G-documents, after T018): 
+**Within Phase 2B** (G-documents, after T018):
 - T019–T021 (inventory validation) must complete first
 - T022–T026 (edit operations per category) can run in parallel, but all must complete before T028
 
-**Within Phase 2C** (N-documents, after T027 and D4 approval): 
+**Within Phase 2C** (N-documents, after T027 and D4 approval):
 - After T028 resolves the complete G-to-N mapping, T029 outlines for different N-docs can run in parallel with T030 creation of N-docs whose outlines are complete
 - All N-docs must be created before T033
 
-**Within Phase 2D–E** (Pointers & validation, after N-doc creation): 
+**Within Phase 2D–E** (Pointers & validation, after N-doc creation):
 - T033–T034 (pointer operations) must complete before T035
 - T035–T037 (link validation) can partially overlap within this gate, but all must complete before T038
 
@@ -695,7 +695,7 @@ All tasks must complete with documented evidence:
     - [x] Ensured FROZEN EXECUTION ORDER, Critical Path, and Parallel Opportunities sections are internally consistent (all sequential gates enforced; parallelism constrained to within-gate only)
     - [x] Clarified that `[P]` tasks run in parallel only within their phase gate (Parallel Opportunities section updated with explicit constraint note)
     - [x] Documented that FROZEN ORDER is canonical authority (added in lines 26 and 384–392)
-  - **Acceptance Criteria Met**: 
+  - **Acceptance Criteria Met**:
     - ✅ No contradictions between sequential/parallel markers
     - ✅ Single canonical execution order documented (FROZEN ORDER with Critical Path as dependency explanation)
     - ✅ Task ordering is internally consistent across all sections

@@ -13,7 +13,7 @@ Stacks vertically on mobile with image first.
 ## Props
 
 | Prop | Type | Default | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `imageUrl` | `string` | *required* | Image source URL |
 | `imageAlt` | `string` | *required* | Alt text for the image (required for accessibility) |
 | `imageSide` | `'left'` \| `'right'` | `'left'` | Which side the image appears on (desktop) |

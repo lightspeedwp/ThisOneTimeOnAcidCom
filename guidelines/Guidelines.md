@@ -57,7 +57,7 @@ re-run for ongoing maintenance.
 **Other `.md` files generally belong in the appropriate folder:**
 
 | Content Type | Required Location |
-|---|---|
+| --- | --- |
 | Project documentation, quick references, guides | `/docs/` |
 | Design & development guidelines | `/guidelines/` |
 | AI prompt files | `/prompts/` |
@@ -76,7 +76,7 @@ Store prompts, reports, and task lists in these designated folders rather than p
 **Quick Reference:**
 
 | Folder | Purpose |
-|---|---|
+| --- | --- |
 | `/prompts/` | All prompt files for AI-assisted tasks |
 | `/reports/` | All audit findings, analysis results, reports |
 | `/tasks/` | All task lists and checklists; `/tasks/task-list.md` is the persistent master |
@@ -102,7 +102,7 @@ Store prompts, reports, and task lists in these designated folders rather than p
 The Figma Make bundler has some known syntax incompatibilities. **To ensure compatibility, use these workarounds:**
 
 | Forbidden Syntax | Required Workaround |
-|---|---|
+| --- | --- |
 | Optional chaining (`?.`) | Explicit null checks (`if (x != null)`) |
 | Nullish coalescing (`??`) | Explicit if/else with null checks |
 | `import.meta.env` | Completely removed — proven unreliable |
