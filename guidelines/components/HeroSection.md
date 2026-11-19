@@ -35,7 +35,7 @@ flowchart TD
 
     D --> F[Extract Content]
     F --> F1[title: 'This One Time On Acid']
-    F --> F2[subtitle: 'Makeup Artist']
+    F --> F2[subtitle: 'Creative Artist']
     F --> F3[tagline: 'Makeup that shines...']
     F --> F4[CTAs: primaryCTA, secondaryCTA]
 
@@ -210,8 +210,8 @@ import { HeroSection } from './components/sections/HeroSection';
 
 <HeroSection
   title="This One Time On Acid"
-  subtitle="Makeup Artist"
-  tagline="Makeup that shines with colour, energy, and connection."
+  subtitle="Creative Artist"
+  tagline="Creative work that shines with colour, energy, and connection."
 />
 
 ```text
@@ -221,8 +221,8 @@ import { HeroSection } from './components/sections/HeroSection';
 ```tsx
 <HeroSection
   title="This One Time On Acid"
-  subtitle="Makeup Artist"
-  tagline="Makeup that shines with colour, energy, and connection."
+  subtitle="Creative Artist"
+  tagline="Creative work that shines with colour, energy, and connection."
   primaryCTA={{
     text: 'Explore Portfolio',
     onClick: () => navigate('/portfolio')
@@ -240,7 +240,7 @@ import { HeroSection } from './components/sections/HeroSection';
 ```tsx
 <HeroSection
   title="This One Time On Acid"
-  subtitle="UV & Neon Makeup Artist"
+  subtitle="UV & Neon Creative Artist"
   tagline="Creating stunning looks for festivals, editorials, and special events."
   backgroundImage="/images/hero-festival-makeup.jpg"
   overlay="dark"
@@ -545,8 +545,8 @@ function HomePage() {
     <>
       <HeroSection
         title="This One Time On Acid"
-        subtitle="Makeup Artist"
-        tagline="Makeup that shines with colour, energy, and connection."
+        subtitle="Creative Artist"
+        tagline="Creative work that shines with colour, energy, and connection."
         primaryCTA={{
           text: 'View Portfolio',
           onClick: () => navigate('/portfolio')
@@ -570,7 +570,7 @@ function HomePage() {
 ```tsx
 <HeroSection
   title="This One Time On Acid"
-  subtitle="UV & Neon Makeup Artist"
+  subtitle="UV & Neon Creative Artist"
   tagline="Creating stunning looks for festivals, editorials, and special events."
   backgroundImage="/images/hero-festival-makeup.jpg"
   overlay="dark"
@@ -810,7 +810,7 @@ focus:ring-opacity-50"
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[overview-components.md](../overview-components.md)** - Component system
+- **[overview-components.md](./N005-component-catalog.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Typography scale
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
