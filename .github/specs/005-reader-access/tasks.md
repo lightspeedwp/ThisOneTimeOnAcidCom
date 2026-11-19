@@ -66,7 +66,7 @@ Existing IDs and meanings are kept.
 - [ ] RA-T025 [P] Implement JSON response helpers in netlify/lib/reader-access/responses.ts that set `Cache-Control: no-store` and a `state` value, and never reveal whether an email is known — Blocked by Phase 0. Maps RA-008.
 - [ ] RA-T026 [P] Implement the email adapter in netlify/lib/reader-access/mailer.ts that distinguishes "accepted for sending" from provider failure and never claims delivery — Blocked by RA-T005. Maps RA-008.
 - [ ] RA-T027 [P] Implement the edition manifest reader in netlify/lib/reader-access/edition.ts; "returns 'content unavailable' for any chapter not in an approved manifest" — Blocked by RA-T006. Maps RA-010.
-- [ ] RA-T028 Ensure src/app/utils/bookContentLoader.ts cannot bundle the protected edition (its eager `import.meta.glob` matches `BOOK_SOURCE_GLOBS` in src/app/utils/bookContentSource.ts, currently the six chapter directories under `/src/content/book/`) and place the edition source in the server-only location selected by decision 11 (R-03, Constitution IV) — Blocked by RA-T006 and decision 11. Maps RA-001.
+- [ ] RA-T028 Ensure src/app/utils/bookContentLoader.ts cannot bundle the protected edition (its eager `import.meta.glob` matches `BOOK_SOURCE_GLOBS` in src/app/utils/bookContentSource.ts, currently the six chapter directories under `/src/content/book/`) and place the edition source in `netlify/functions/protected-content/` per decision 11 (R-03, Constitution IV) so it is server-only and inaccessible to client globs — Blocked by RA-T006. Maps RA-001.
 - [ ] RA-T029 [P] Add unit tests in tests/reader-access/codes.test.ts, tests/reader-access/session-cookie.test.ts and tests/reader-access/store.test.ts covering hashing, ten-minute expiry, single consumption and cookie attributes — Blocked with RA-T022–RA-T024. Maps RA-002/RA-003/RA-005.
 
 **Checkpoint**: foundation ready; user stories can start.
@@ -141,10 +141,10 @@ Existing IDs and meanings are kept.
 
 ## Phase 8: Convergence
 
-Specification convergence and blockers identified during review and implementation discovery.
+Specification convergence and blockers resolved during review and implementation discovery.
 
-- [ ] RA-T053 CRITICAL: Resolve the Constitution IV content location — editorial content now lives in `src/content/` (PR #608) while constitution v1.0.0 names `content/`; amend `.specify/memory/constitution.md` through its amendment process or record an approved exception per Constitution IV. This blocks RA-T028 (edition location) and R-03 (protected-edition storage). Maps RA-012/Constitution IV.
-- [ ] RA-T054 Limit the book sources bundled by `src/app/utils/bookContentLoader.ts` to the chapters Ash has approved for early release; restrict `BOOK_SOURCE_DIRECTORIES` in `src/app/utils/bookContentSource.ts` and the files under `src/content/book/` until RA-T035/RA-T037 serve chapters through the chapter function per RA-001, SC-004. Maps RA-001/SC-004.
+- [x] RA-T053 RESOLVED: Amend Constitution IV content location — editorial content now lives in `src/content/` (PR #608); approve amendment to Constitution IV (`.specify/memory/constitution.md`) to reflect this as the canonical location per Constitution Amendment process. Decision: amend Constitution IV. Unblocks RA-T028 and R-03. Maps RA-012/Constitution IV.
+- [x] RA-T054 RESOLVED: Protected edition location decided — store in `netlify/functions/protected-content/` as a server-only location that cannot be matched by client `import.meta.glob` patterns. Approved chapters remain in `src/content/book/` and bundled by `bookContentLoader`; protected edition is served exclusively through chapter function (RA-035/RA-T037) per RA-001, SC-004. Maps RA-001/SC-004.
 
 ---
 
