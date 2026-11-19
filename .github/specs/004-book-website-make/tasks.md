@@ -26,11 +26,11 @@
 
 **Purpose**: Foundation for specification work - verify source files, baseline design system, and blocking decisions
 
-- [ ] T001 Review and validate all six source files (01-06) in content/book/ with version reconciliation per research.md
-- [ ] T002 Confirm design baseline locked: Space Grotesk, Inter, 9-color palette (light & dark themes) in design-brief.md
-- [ ] T003 [P] Verify all 7 blocking decisions approved and documented in research.md with implementation rationale
-- [ ] T004 [P] Create approval tracking matrix showing Gate 1, Gate 2, Gate 3 readiness status per quickstart.md
-- [ ] T005 Establish documentation-only boundary: confirm zero code, zero commits, zero deployments beyond this spec folder
+- [x] T001 Review and validate all six source files (01-06) in content/book/ with version reconciliation per research.md
+- [x] T002 Confirm design baseline locked: Space Grotesk, Inter, 9-color palette (light & dark themes) in design-brief.md
+- [x] T003 [P] Verify all 7 blocking decisions approved and documented in research.md with implementation rationale
+- [x] T004 [P] Create approval tracking matrix showing Gate 1, Gate 2, Gate 3 readiness status per quickstart.md
+- [x] T005 Establish documentation-only boundary: confirm zero code, zero commits, zero deployments beyond this spec folder
 
 **Checkpoint**: Foundation ready - all prerequisites validated, no unresolved blockers for Prompts 1–2B
 
