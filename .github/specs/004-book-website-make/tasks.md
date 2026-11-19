@@ -637,4 +637,20 @@ Validation and verification tasks to close gaps identified between specification
 
 ---
 
-**Version**: 1.0.1 | **Status**: Phase 8 Convergence Appended | **Updated**: 2026-11-09
+## Phase 9: Convergence Closure & Spec 005 Handover
+
+Finalize Phase 8 scope updates, document SC-003 approval, and prepare Spec 004 for merge to main with Spec 005 handover package.
+
+- [ ] T066 Update Phase 8 T054 acceptance criteria to reflect approved SC-003 scope: Prompts 1, 2A, 2B ≥95% (3A handed to Spec 005) per approval 2026-11-19
+- [ ] T067 Document SC-003 scope change in spec.md Assumptions section with link to approval decision (SC-003_SCOPE_CHANGE_PROPOSAL.md)
+- [ ] T068 Create Spec 005 handover artifact documenting: Prompt 3A contract, Decisions 1–6 status, Phase B readiness (3 prompts, 3 decisions)
+- [ ] T069 Validate all 20+ specification artifacts present and version-locked for Spec 004 Phase 9 sign-off
+- [ ] T070 Mark Phase 8 T054 and T059 complete: scope-updated acceptance criteria now met
+- [ ] T071 Generate final PR description and commit message for merge to main
+- [ ] T072 Verify build passes and branch validation succeeds before merge
+- [ ] T073 Merge PR #622 to main branch, close Phase 9 Convergence
+- [ ] T074 Initialize Spec 005 Phase 1 (Decision Resolution) with 2026-12-15 target completion
+
+---
+
+**Version**: 1.0.2 | **Status**: Phase 9 Convergence Appended | **Updated**: 2026-11-19
