@@ -73,7 +73,7 @@ Recovery after confirmed redemption but incomplete session establishment (RA-009
 **State transitions** (recovery-first race settled by Q4):
 1. Recovery initiated when verification code is consumed
 2. If recovery succeeds before timeout: `initiated` → `succeeded` (session created immediately)
-3. If competing fresh code finishes during recovery window: 
+3. If competing fresh code finishes during recovery window:
    - Code continues without ending recovery
    - Finishing code extends the same recovered session (`expires_at` reset)
    - New session is NOT created; recovery session is reused (avoids duplicates)

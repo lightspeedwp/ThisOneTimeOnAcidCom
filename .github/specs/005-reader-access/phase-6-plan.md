@@ -14,10 +14,10 @@ After a reader successfully redeems a verification code but loses connectivity b
 
 ## Decision Dependencies
 
-| Decision | Topic | Status | Impact on Phase 6 |
-|----------|-------|--------|-------------------|
-| 4 | Recovery duration, start event, session identity fallback | **Open** | Exact timeout and triggering event RA-T048 |
-| 6 | Concurrency ordering, duplicate effects, revocation | **Partial** (Q4 recovery-first race settled) | Race handling strategy; full ordering in RA-T048 |
+|Decision|Topic|Status|Impact|
+|--------|-----|------|------|
+|4|Recovery duration, start event, session identity fallback|**Open**|Exact timeout for RA-T048|
+|6|Concurrency ordering, duplicate effects, revocation|**Partial** (Q4 settled)|Race handling in RA-T048|
 
 **Q4 settled**: When matching recovery succeeds first, a competing fresh-code request continues without ending it.
 
