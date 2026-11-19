@@ -39,7 +39,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 - ✅ Enforcement strategy matches Option A (noindex meta tags + sitemap exclusion)
 - ✅ Responsive design preserved (desktop, tablet, mobile)
 
-**Ready for Execution**: Yes — No blocking decisions remain.
+**Ready for Execution**: Pending approval (gated by Gate 2 Approval; no blocking decisions remain)
 
 ---
 
