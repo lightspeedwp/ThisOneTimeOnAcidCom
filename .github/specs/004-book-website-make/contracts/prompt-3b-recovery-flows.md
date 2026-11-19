@@ -15,7 +15,7 @@
 | ---------- | --------- | -------- |
 | **Decision 1** | Recovery-first race condition — **Option A**: recovery takes precedence; cancel fresh verification if recovery succeeds | ✅ APPROVED (2026-11-11) |
 | **Decision 2** | Recovery lifetime eligibility — **Option A**: successful recovery refreshes the session, but access has an absolute expiry 30 days after initial verification; recovery cannot extend access beyond that limit | ✅ APPROVED (2026-11-11) |
-| **Decision 5** | Manuscript publication readiness — **Option C**: not yet approved | ❌ Blocks execution |
+| **Decision 5** | Manuscript publication readiness — **Early Release**: Chapter 1 approved; other chapters pending approval but ready for e-reader development | ✅ APPROVED (2026-11-19) |
 
 See [research.md](../research.md) and [BLOCKING_DECISIONS_PROPOSAL.md](../exports/BLOCKING_DECISIONS_PROPOSAL.md) for the decision records.
 
@@ -54,12 +54,15 @@ Generate the recovery flow specification documenting how readers regain access v
 
 ---
 
-## Execution Steps (After Manuscript Approval)
+## Execution Steps (Decision 5 Approved — 2026-11-19)
 
-1. Confirm this contract still matches the recorded decisions
+**Manuscript Status**: Chapter 1 approved & available; other chapters pending approval but ready for e-reader development
+
+1. Confirm this contract matches the recorded decisions (all 3 now approved)
 2. Design all recovery states (success, session-expired, invalid, race-condition)
 3. Document error messaging for each recovery failure scenario
 4. Create a recovery flow diagram showing the decision tree
+5. Ensure recovery flow integrates with e-reader chapter availability (Chapter 1 live, others pending)
 
 ### Acceptance Criteria
 

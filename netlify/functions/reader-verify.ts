@@ -11,6 +11,7 @@ import {
   incrementCodeAttempts,
   getSession,
   renewSession,
+  storeRecoveryAttempt,
 } from '../lib/reader-access/store';
 import {
   generateSessionId,
@@ -18,6 +19,10 @@ import {
   formatSessionCookie,
   parseSessionCookie,
 } from '../lib/reader-access/session-cookie';
+
+const RECOVERY_WINDOW_HOURS = 4;
+const generateRecoveryId = () => Math.random().toString(36).substring(2, 15);
+const getReaderId = (email: string) => Buffer.from(email).toString('base64');
 
 const CODE_REGEX = /^\d{6}$/;
 
@@ -109,6 +114,24 @@ export default async function handler(
     // Delete code (recovery: if this fails, session was already created)
     await deleteCode(email).catch(() => {
       // Ignore deletion errors (recovery-first)
+    });
+
+    // Create recovery attempt (RA-T048)
+    // Recovery window: 4 hours from code consumed time
+    const recoveryId = generateRecoveryId();
+    const readerId = getReaderId(email);
+    const recoveryExpiresAt = new Date(now.getTime() + RECOVERY_WINDOW_HOURS * 60 * 60 * 1000);
+
+    await storeRecoveryAttempt({
+      recoveryId,
+      readerId,
+      initiatedAt: now.toISOString(),
+      expiresAt: recoveryExpiresAt.toISOString(),
+      createdSessionId: sessionId,
+      raceOutcome: isRenewal ? 'renewal' : 'fresh',
+    }).catch(() => {
+      // If recovery attempt fails to store, session is still valid
+      // User can verify again if needed
     });
 
     // Create/update session cookie
