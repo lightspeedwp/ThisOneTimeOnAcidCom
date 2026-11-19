@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Specification 005 Phase 1: Reader-Access Infrastructure** — Added Netlify Functions directory structure for reader verification flow with 5 function handlers (code-request, verify, chapter, session, retention) and 6 shared library modules (Blobs adapter, code generation, session cookies, Mailgun integration, edition manifest, response formatting). Added Mailgun.js and Netlify Blobs dependencies. Created comprehensive mock data layer with all 10 reader-visible states and UI copy, ready for Phase 2 implementation.
+
 ### Changed
 
 - Repository governance configuration now fetched from canonical `lightspeedwp/.github` (Phase 2 consolidation — v1.0.0 release verification)
