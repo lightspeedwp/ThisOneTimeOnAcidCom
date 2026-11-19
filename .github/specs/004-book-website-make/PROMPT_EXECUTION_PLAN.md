@@ -12,8 +12,8 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 | Phase | Prompts | Status |
 | ------- | --------- | -------- |
-| **Phase A: Unblocked** | Prompts 1, 2A, 2B | ✅ Ready to Execute |
-| **Phase B: Blocked** | Prompts 3A, 3B, 3C | ⏳ Awaiting Decisions |
+| **Phase A: Unblocked** | Prompts 1, 2A, 2B | ✅ Gated by spec.md Phase A Status |
+| **Phase B: Blocked** | Prompts 3A, 3B, 3C | ⏳ Gated by Decision Resolution |
 
 ---
 
@@ -29,9 +29,9 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 **Goal**: Update navigation component to hide Speaking, Events, and Media routes from public sitemap while preserving them as noindex pages.
 
 **Decision Status**:
-- ✅ **Decision 7**: Route Enforcement Verification — **SELECTED: Option A (Meta tags + Robots.txt + Sitemap)**
+- ✅ **Decision 7**: Route Enforcement Verification — **SELECTED: Option A (Noindex meta tags + Sitemap exclusion)**
   - Explicitly documented in contract (lines 28–36)
-  - Enforcement strategy confirmed
+  - Enforcement strategy confirmed: Noindex meta tags (primary), Sitemap exclusion (primary), Robots.txt (optional)
 
 **Acceptance Criteria**:
 - ✅ Navigation component shows only 4 visible links (Home, About, Book, Contact)
@@ -39,7 +39,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 - ✅ Enforcement strategy matches Option A (meta tags + robots.txt + sitemap exclusion)
 - ✅ Responsive design preserved (desktop, tablet, mobile)
 
-**Ready for Execution**: Yes — No blocking decisions remain.
+**Readiness**: Gated by spec.md Phase A Status. No blocking decisions remain. Execution conditional on Phase A gate approval.
 
 ---
 
@@ -68,7 +68,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 - ✅ Component styles defined for Button, Card, Navigation, Form
 - ✅ File is valid CSS or JSON
 
-**Ready for Execution**: Yes — No blocking decisions.
+**Readiness**: Gated by spec.md Phase A Status. No blocking decisions remain. Execution conditional on Phase A gate approval.
 
 ---
 
@@ -103,7 +103,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 - ✅ Mobile drawer overlay documented
 - ✅ All breakpoints specified (1024px, 768px)
 
-**Ready for Execution**: Yes — No blocking decisions.
+**Readiness**: Gated by spec.md Phase A Status. No blocking decisions remain. Execution conditional on Phase A gate approval.
 
 ---
 
@@ -145,7 +145,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 **To Unblock**: Resolve Decisions 3, 4, 5, 6 → Update contract → Execute Prompt 3A
 
-**Ready for Execution**: No — Awaiting Decisions 3, 4, 5, 6.
+**Readiness**: Gated by Decision Resolution (Decisions 3, 4, 5, 6). Execution conditional on decision approval and spec.md Phase B Status gate.
 
 ---
 
@@ -183,7 +183,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 **To Unblock**: Resolve Decisions 1, 2 → Update contract → Execute Prompt 3B
 
-**Ready for Execution**: No — Awaiting Decisions 1, 2.
+**Readiness**: Gated by Decision Resolution (Decisions 1, 2). Execution conditional on decision approval and spec.md Phase B Status gate.
 
 ---
 
@@ -227,7 +227,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 **To Unblock Fully**: Resolve Decision 3 → Update contract → Execute Prompt 3C
 
-**Ready for Execution**: Partially — Other error states can proceed after Decision 3; code-expiry messaging blocked by Decision 3.
+**Readiness**: Gated by Decision Resolution (Decision 3 for code-expiry messaging). Partial execution possible after Decision 3; full execution conditional on spec.md Phase B Status gate.
 
 ---
 
@@ -376,6 +376,34 @@ Step 6: Execute Prompt 3C
 - [ ] All 3 unblocked prompts ready for execution
 - [ ] Blocking decision list acknowledged (Decisions 1–6 to be resolved)
 - [ ] **Approval**: ✅ Proceed with Phase A execution
+
+---
+
+## Decisions 1–7: Resolution Summary & Handover
+
+**Purpose**: Record all 7 blocking decisions resolved in Spec 004 Phase 8, and identify which are handed over to Spec 005.
+
+### Resolved Decisions (Spec 004 Phase 8)
+
+| Decision | Question | Resolved State | Handover Status |
+|----------|----------|---|---|
+| **1** | Recovery-first race condition | Pending decision | 🔄 Handover to Spec 005 |
+| **2** | Recovery lifetime eligibility | Pending decision | 🔄 Handover to Spec 005 |
+| **3** | Code expiry start time | Pending decision | 🔄 Handover to Spec 005 |
+| **4** | Email service provider | Pending decision | 🔄 Handover to Spec 005 |
+| **5** | Manuscript publication readiness | Pending decision | 🔄 Handover to Spec 005 |
+| **6** | Newsletter destination | Pending decision | 🔄 Handover to Spec 005 |
+| **7** | Route Enforcement Verification | ✅ Resolved: Option A (Noindex meta tags + Sitemap exclusion) | ✅ Spec 004 Complete |
+
+### Handover to Spec 005
+
+**Decisions 1–6** are handed over to Spec 005 (Book Website Reader Access) for implementation decision-making:
+- Each decision has 3+ options documented in `research.md` and `contracts/prompt-3*-*.md`
+- Decision 1–2: Required for Prompt 3B recovery flow design
+- Decision 3: Required for Prompt 3A/3C code-expiry messaging
+- Decision 4–6: Required for Prompt 3A email copy and integration
+
+**Next Action**: Spec 005 Phase 1 initiates decision resolution (target: 2026-12-15)
 
 ---
 
