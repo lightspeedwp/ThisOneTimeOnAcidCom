@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Reader access: Restricted chapter bundling** (RA-T054) — Temporarily set `BOOK_SOURCE_DIRECTORIES` to empty array to prevent protected chapters from being bundled in the client. Chapters are now served exclusively through `/api/reader/chapters/{chapterId}` pending implementation of server-side delivery (RA-T035/RA-T037). Satisfies RA-001 (verified access only) and SC-004 (authorization required for direct chapter access).
+- **Constitution Amendment v1.0.1** — Updated Principle IV (Protected Content & Data Rules) to reflect `src/content/` as canonical editorial content location per PR #608. Aligns repository practice with governance framework.
 - Repository governance configuration now fetched from canonical `lightspeedwp/.github` (Phase 2 consolidation — v1.0.0 release verification)
 - CLAUDE.md updated to mark Phase 2 governance consolidation as complete
 - labeling-unified.yml workflow dynamically fetches labels and labeler configs from canonical org repository
