@@ -122,7 +122,7 @@ FR-002 names no revision change for these files. File 06 remains a provisional d
 - ✅ Precedence rule applied within each document's revision history
 - ✅ Conflicts documented with explicit rationale
 - ✅ File 03 recorded-version discrepancy annotated in local Files 01 and 02
-- ⬜ File 03 recorded-version discrepancy (v1.2.1 vs v1.2.2) corrected in upstream source documents
+- ⬜ File 03 recorded-version discrepancy (v1.2.1 vs v1.2.2) corrected in upstream source documents — patches prepared in [LINEAR_SYNC_HANDOFF.md](./exports/LINEAR_SYNC_HANDOFF.md)
 - ⬜ Prompt contracts updated for the material effects above
 
 **Reconciliation Recorded**: 2026-11-09 (revised 2026-11-13) | **Created by**: Convergence Phase 8 (T052)

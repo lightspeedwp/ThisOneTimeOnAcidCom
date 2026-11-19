@@ -37,23 +37,23 @@ plan's implementation gate fails until RA-T005–RA-T009 are resolved.
 Existing IDs and meanings are kept.
 
 - [ ] RA-T001 Re-read main, destination availability and canonical containment for .github/specs/005-reader-access/ — Planned. Maps RA-011/RA-012.
-- [ ] RA-T002 Reconcile 004 with Linear register v1.13.0 and content/book/05-design-reader-decision-register.md — Planned. Maps RA-011.
+- [ ] RA-T002 Reconcile 004 with Linear register v1.13.0 and src/content/book/05-design-reader-decision-register.md — Planned. Maps RA-011.
 - [ ] RA-T003 Reconcile all six .github/specs/004-book-website-make/contracts/prompt-3* files as one group, preserving repeated IDs — Planned. Maps RA-011.
 - [ ] RA-T004 Establish current Make/repository parity or record the smallest missing evidence in .github/specs/005-reader-access/sources.md — Planned. Maps RA-012.
-- [ ] RA-T005 Resolve email provider, transactional sending and provider retention/deletion (research R-10) and storage choice (R-02) — Blocked: owner decision. Maps RA-003/RA-006.
-- [ ] RA-T006 Confirm edition manifest, manuscript availability, rights, credits and publication authority (R-03) — Blocked: owner decision. Maps RA-010.
-- [ ] RA-T007 Select recovery duration/start, exact renewal duration within thirty days, concurrency and recovery-race rule, revocation, code format and attempt/rate limits (R-05, R-08, R-09). Expiry start was settled by Clarifications Q2 and the renewal ceiling by Q3 — Blocked: owner decision. Maps RA-003/RA-004/RA-009.
-- [ ] RA-T008 Confirm newsletter destination, double opt-in, wording and deletion (R-11) — Blocked: owner decision. Maps RA-007.
-- [ ] RA-T009 Confirm privacy notice, reviewer, operator and deletion procedure — Blocked: owner decision. Maps RA-006.
+- [x] RA-T005 `src/content/book/05-design-reader-decision-register.md`: Resolve email provider, transactional sending and provider retention/deletion (research R-10) and storage choice (R-02) — **RESOLVED (2026-11-19):** Mailgun for transactional SMTP; Netlify Blobs for storage (R-02). Maps RA-003/RA-006.
+- [ ] RA-T006 `src/content/book/05-design-reader-decision-register.md`: Confirm edition manifest, manuscript availability, rights, credits and publication authority (R-03) — Blocked: owner decision. Maps RA-010.
+- [ ] RA-T007 `src/content/book/05-design-reader-decision-register.md`: Select recovery duration/start, exact renewal duration within thirty days, concurrency beyond the recovery-first race, revocation, resend cooldown and request limits (R-05, R-08, R-09). Already settled by Clarifications: expiry start (Q2), no renewal ceiling (Q3), recovery-first race (Q4), six-digit codes with five attempts (Q5) — Blocked: owner decision. Maps RA-003/RA-004/RA-009.
+- [x] RA-T008 `src/content/book/05-design-reader-decision-register.md`: Confirm newsletter destination, double opt-in, wording and deletion (R-11) — **RESOLVED (2026-11-19):** Brevo for list subscriptions; double opt-in via Brevo workflows. Wording and deletion procedure deferred to implementation. Maps RA-007.
+- [ ] RA-T009 `src/content/book/05-design-reader-decision-register.md`: Confirm privacy notice, reviewer, operator and deletion procedure — Blocked: owner decision. Maps RA-006.
 - [ ] RA-T017 Run the Spec Kit regression baseline for feature 005 (constitution I/VII) and record the result in .github/specs/005-reader-access/verification.md — Planned; running commands needs separate approval. Maps RA-012.
-- [ ] RA-T018 Align .github/specs/005-reader-access/decisions.md and crosswalk.md with Clarifications Q1–Q3 and plan findings (decision 3 settled, renewal ceiling settled, Netlify Functions direction, 3A guide colours carry no authority) — Planned; needs Ash's approval of exact wording. Maps RA-011.
+- [ ] RA-T018 Align .github/specs/005-reader-access/decisions.md, crosswalk.md, research.md, tasks.md and plan.md with Clarifications Q1–Q5 and the `src/content/` move (decision 3 settled, renewal ceiling, race and attempt limit settled, Netlify Functions direction, 3A guide colours carry no authority, current bundling state) — Implemented on branch docs/reader-access-alignment; awaiting Ash's review. Maps RA-011.
 
 ---
 
 ## Phase 1: Setup (shared infrastructure)
 
 - [ ] RA-T019 Create netlify/functions/ and netlify/lib/reader-access/, and confirm in netlify.toml that function paths under /api/reader/ are served before the `/*` → `/index.html` fallback (R-01) — Blocked by Phase 0. Maps RA-001.
-- [ ] RA-T020 Add only the approved function and email-provider dependencies to package.json and package-lock.json with npm on Node 24 — Blocked by RA-T005. Maps RA-006.
+- [ ] RA-T020 Add Mailgun SDK and Netlify Blobs client to package.json and package-lock.json with npm on Node 24; validate lockfile consistency — Unblocked by RA-T005 (Mailgun approved). Maps RA-006.
 - [ ] RA-T021 [P] Create src/app/data/mock/reader-access.ts holding visitor copy for every reader-visible state (`request-pending`, `request-received`, `delivery-uncertain`, `verified`, `code-invalid`, `code-expired`, `code-used`, `limited`, `provider-failure`, `content-unavailable`); code wording must say "within 10 minutes of requesting it" — Blocked: copy approval. Maps RA-003/RA-008.
 
 ---
@@ -66,7 +66,7 @@ Existing IDs and meanings are kept.
 - [ ] RA-T025 [P] Implement JSON response helpers in netlify/lib/reader-access/responses.ts that set `Cache-Control: no-store` and a `state` value, and never reveal whether an email is known — Blocked by Phase 0. Maps RA-008.
 - [ ] RA-T026 [P] Implement the email adapter in netlify/lib/reader-access/mailer.ts that distinguishes "accepted for sending" from provider failure and never claims delivery — Blocked by RA-T005. Maps RA-008.
 - [ ] RA-T027 [P] Implement the edition manifest reader in netlify/lib/reader-access/edition.ts; "returns 'content unavailable' for any chapter not in an approved manifest" — Blocked by RA-T006. Maps RA-010.
-- [ ] RA-T028 Ensure src/app/utils/bookContentLoader.ts cannot bundle the protected edition (its eager `import.meta.glob` covers `/src/content/book/**/*.md`) and place the edition source per R-03 — Blocked by RA-T006. Maps RA-001.
+- [ ] RA-T028 Ensure src/app/utils/bookContentLoader.ts cannot bundle the protected edition (its eager `import.meta.glob` matches `BOOK_SOURCE_GLOBS` in src/app/utils/bookContentSource.ts, currently the six chapter directories under `/src/content/book/`) and place the edition source in `netlify/functions/protected-content/` per decision 11 (R-03, Constitution IV) so it is server-only and inaccessible to client globs — Blocked by RA-T006. Maps RA-001.
 - [ ] RA-T029 [P] Add unit tests in tests/reader-access/codes.test.ts, tests/reader-access/session-cookie.test.ts and tests/reader-access/store.test.ts covering hashing, ten-minute expiry, single consumption and cookie attributes — Blocked with RA-T022–RA-T024. Maps RA-002/RA-003/RA-005.
 
 **Checkpoint**: foundation ready; user stories can start.
@@ -123,7 +123,7 @@ Existing IDs and meanings are kept.
 
 ## Phase 6: User Story 4 — Recovery after incomplete session (P3)
 
-**Blocked until RA-T007 settles the recovery rules (research R-09; clarify Question 4 unanswered).**
+**Blocked until RA-T007 settles recovery duration, start and linked-tab identity (research R-09). The recovery-first race is settled by Clarifications Q4.**
 
 - [ ] RA-T047 [US4] Add the RecoveryAttempt entity and its state transitions to .github/specs/005-reader-access/data-model.md and the recovery responses to contracts/reader-access-functions.md — Blocked by RA-T007. Maps RA-009.
 - [ ] RA-T048 [US4] Implement the decided recovery path in netlify/functions/reader-verify.ts with tests in tests/reader-access/recovery.test.ts — Blocked by RA-T047. Maps RA-009.
@@ -136,6 +136,15 @@ Existing IDs and meanings are kept.
 - [ ] RA-T050 [P] Implement deletion of ReaderAccessRecord entries past `delete_after` in netlify/functions/reader-retention.ts as a scheduled function — Blocked by RA-T009. Maps RA-006.
 - [ ] RA-T051 Read back each saved stage and record actual results, revision and environment in .github/specs/005-reader-access/verification.md — Planned per stage. Maps RA-012/SC-007.
 - [ ] RA-T052 Establish which host serves production (Netlify via netlify.toml or the Vercel GitHub app) and whether a push to main deploys, before any manual push (research R-12) — Planned. Maps RA-012.
+
+---
+
+## Phase 8: Convergence
+
+Specification convergence and blockers resolved during review and implementation discovery.
+
+- [x] RA-T053 RESOLVED: Amend Constitution IV content location — editorial content now lives in `src/content/` (PR #608); approve amendment to Constitution IV (`.specify/memory/constitution.md`) to reflect this as the canonical location per Constitution Amendment process. Decision: amend Constitution IV. Unblocks RA-T028 and R-03. Maps RA-012/Constitution IV.
+- [x] RA-T054 RESOLVED: Protected edition location decided — store in `netlify/functions/protected-content/` as a server-only location that cannot be matched by client `import.meta.glob` patterns. Approved chapters remain in `src/content/book/` and bundled by `bookContentLoader`; protected edition is served exclusively through chapter function (RA-035/RA-T037) per RA-001, SC-004. Maps RA-001/SC-004.
 
 ---
 
@@ -191,3 +200,10 @@ RA-T044 ThankYouPage.tsx  |  RA-T045 WaitlistPage.tsx
 2. MVP: Phases 1–3 (US1) as successive approved stages; preview with placeholder chapters only.
 3. Add US2, then US3; US4 only after the recovery rules are decided.
 4. Stop at the manual GitHub checkpoint after each stage. Nothing here authorises provisioning, publication or deployment.
+
+---
+
+## Phase 8: Convergence
+
+- [ ] RA-T053 CRITICAL: Resolve the Constitution IV content location — editorial content now lives in src/content/ (PR #608) while constitution v1.0.0 names content/; amend .specify/memory/constitution.md through its amendment process or record an approved exception per Constitution IV (contradicts)
+- [ ] RA-T054 Limit the book sources bundled by src/app/utils/bookContentLoader.ts to the chapters Ash has approved for early release (restrict BOOK_SOURCE_DIRECTORIES in src/app/utils/bookContentSource.ts or the files under src/content/book/) until RA-T035/RA-T037 serve chapters through the chapter function per RA-001, SC-004 (contradicts)

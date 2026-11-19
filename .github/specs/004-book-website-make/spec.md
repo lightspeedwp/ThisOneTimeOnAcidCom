@@ -223,16 +223,15 @@ This specification is derived from comprehensive analysis of:
 
 ### Deliverables for This Spec
 
-Once approved, the next phase will include:
+**Scope Clarification (2026-11-19)**: Spec 004 covers **Prompts 1–2B only** (design baseline & navigation). Reader-access work (Prompts 3A–3C) is owned by [Spec 005 — reader access](../005-reader-access/spec.md).
+
+Once approved, Phase A will include:
 
 1. **Prompt 1 Exact Preview** — Navigation exposure (Speaking/Events/Media hidden)
 2. **Prompt 2A Exact Preview** — Design-system baseline confirmation
 3. **Prompt 2B Exact Preview** — Navigation component design spec
-4. **Prompt 3A Exact Preview** — Reader access email/code copy and forms
-5. **Prompt 3B Blocked Preview** — Recovery flows (awaiting 3 decisions)
-6. **Prompt 3C Partial Preview** — Error states (awaiting CC-05 expiry decision)
-7. **Blocking Decision Matrix** — All unresolved decisions with options
-8. **Implementation Prerequisites Checklist** — What must be decided before code phase
+4. **Blocking Decision Matrix** — All 7 decisions APPROVED with implementation rationale
+5. **Implementation Prerequisites Checklist** — Figma Make environment readiness & Phase A gate conditions
 
 ---
 
@@ -276,6 +275,12 @@ The two documents use the same IDs for different work. Resolution: stage IDs 3A�
 - Q: When source files contradict, which version takes precedence? → A: Newer version; all conflicts documented in research.md with rationale
 - Q: What should Prompt 1 preview "implementation steps" and "non-changes list" contain? → A: Numbered list of file/component changes; 2–3 bullet points describing preserved behavior
 - Q: Are all 7 blocking decisions valid, or is the count 6? → A: Confirm all 7 are valid blockers; plan.md updated to list all 7 explicitly
+
+### Session 2026-11-19 (Decision Clarification Phase)
+
+- Q: Which document is authoritative for decision status—spec or plan? → A: spec.md is authoritative; all 7 decisions APPROVED (2026-11-13); plan.md updated to reflect approved status
+- Q: Should Spec 004 document Prompts 3B/3C or stop at Prompt 2B? → A: Spec 004 stops at Prompt 2B (navigation design); Spec 005 owns all reader-access work (Prompts 3A–3C)
+- Q: When should Gate 2 approval be collected—before or after Figma Make environment confirmation? → A: Approve Gate 2 NOW; Figma Make environment readiness is a Phase A prerequisite (parallel track)
 
 ---
 
