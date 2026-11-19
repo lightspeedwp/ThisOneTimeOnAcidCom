@@ -6,6 +6,7 @@ import { get, put, delete as blobDelete } from '@netlify/blobs';
 
 export interface StoredCode {
   codeHash: string;
+  salt: string;
   createdAt: string;
   expiresAt: string;
   attemptCount: number;

@@ -3,7 +3,7 @@
 // Use edition manifest and session validation
 // RA-T035: Chapter delivery with manifest verification per RA-001, RA-010 & SC-004
 
-import { getSessionFromCookie } from '../lib/reader-access/session-cookie';
+import { parseSessionCookie } from '../lib/reader-access/session-cookie';
 import { getSession } from '../lib/reader-access/store';
 import { getApprovedChapters, loadChapterContent } from '../lib/reader-access/edition';
 import { jsonResponse } from '../lib/reader-access/responses';
@@ -18,7 +18,8 @@ export default async function handler(
 
   try {
     // Extract session ID from HttpOnly cookie (RA-005)
-    const sessionId = getSessionFromCookie(req);
+    const cookieHeader = req.headers.get('cookie');
+    const sessionId = parseSessionCookie(cookieHeader);
     if (!sessionId) {
       return jsonResponse({ state: 'request-pending' }, 401);
     }

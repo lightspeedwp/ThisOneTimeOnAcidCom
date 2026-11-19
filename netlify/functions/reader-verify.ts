@@ -6,7 +6,7 @@
 import { randomUUID } from 'crypto';
 import { verifyCode, isCodeExpired, isCodeLimited } from '../lib/reader-access/codes';
 import { getCode, deleteCode, storeSession, renewSession } from '../lib/reader-access/store';
-import { setSessionCookie } from '../lib/reader-access/session-cookie';
+import { createSessionCookie, formatSessionCookie, SESSION_COOKIE_NAME, SESSION_MAX_AGE_SECONDS } from '../lib/reader-access/session-cookie';
 import { jsonResponse } from '../lib/reader-access/responses';
 
 interface VerifyRequestBody {
@@ -77,7 +77,9 @@ export default async function handler(req: Request): Promise<Response> {
 
     // RA-005: Set HttpOnly, Secure, SameSite cookie
     const response = jsonResponse({ state: 'verified' }, 200);
-    setSessionCookie(response, sessionId);
+    const cookie = createSessionCookie(sessionId);
+    const setCookieHeader = formatSessionCookie(cookie);
+    response.headers.set('Set-Cookie', setCookieHeader);
 
     // RA-002: Consume code atomically
     await deleteCode(email);
