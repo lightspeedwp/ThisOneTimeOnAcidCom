@@ -22,11 +22,12 @@ Based on Spec 005 RA-T047–RA-T056
   - [x] Cache-Control headers
   - ✅ 14 contract tests passing
 
-- [ ] RA-T049 [P] Create `netlify/functions/reader-chapters-list.ts`
-  - [ ] GET `/api/reader/chapters?status=approved` endpoint
-  - [ ] Chapter listing with availability status
-  - [ ] Pagination support
-  - [ ] Filtering by status
+- [x] RA-T049 [P] Create `netlify/functions/reader-chapters-list.ts`
+  - [x] GET `/api/reader/chapters?status=approved` endpoint
+  - [x] Chapter listing with availability status
+  - [x] Pagination support
+  - [x] Filtering by status
+  - ✅ 16 contract tests passing
 
 - [ ] RA-T050 [P] Create `netlify/lib/reader-access/progress.ts`
   - [ ] Track reader progress per chapter (page position, completion %)
