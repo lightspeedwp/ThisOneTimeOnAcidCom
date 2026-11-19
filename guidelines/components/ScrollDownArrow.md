@@ -39,11 +39,11 @@ function HeroSection() {
   return (
     <HeroLayout
       title="Hi, I'm This One Time On Acid"
-      subtitle="Makeup Artist & Creative"
+      subtitle="Creative Artist & Creative"
     >
 <p className="text-body-guideline font-body text-center lg:text-left
 mb-fluid-lg">
-        Makeup that shines with colour, energy, and connection.
+        Creative work that shines with colour, energy, and connection.
       </p>
 
       <div className="flex justify-center lg:justify-start gap-4 mb-8">
@@ -250,7 +250,7 @@ mb-fluid-md">
         </h1>
 
         <p className="text-body-guideline font-body text-gray-700 mb-fluid-lg">
-          Makeup that shines with colour, energy, and connection.
+          Creative work that shines with colour, energy, and connection.
         </p>
 
         <div className="flex justify-center gap-4 mb-12">

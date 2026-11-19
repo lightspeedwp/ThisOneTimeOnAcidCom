@@ -534,11 +534,11 @@ transition-colors ${className}`}
 
 ```tsx
 <div className="flex items-center justify-between">
-  <h2>Festival Makeup 2024</h2>
+  <h2>Festival Creative 2024</h2>
 
   <ShareComponent
     variant="dropdown"
-    title="Festival Makeup 2024"
+    title="Festival Creative 2024"
     url={portfolioUrl}
     description="Vibrant festival makeup with UV accents"
   />

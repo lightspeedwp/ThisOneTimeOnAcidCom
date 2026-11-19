@@ -109,7 +109,7 @@ User Input → State Update → Filter Chain → Display Results
 │  ─────────────────────────                                      │
 │  blogPosts (5 total posts)                                      │
 │  ↓                                                               │
-│  [Post 1: Festival Makeup]                                      │
+│  [Post 1: Festival Creative]                                      │
 │  [Post 2: Bridal Guide]                                         │
 │  [Post 3: Product Review]                                       │
 │  [Post 4: Tips & Tricks]                                        │
@@ -122,7 +122,7 @@ User Input → State Update → Filter Chain → Display Results
 │  ↓                                                               │
 │  Example: category = 'tutorials'                                │
 │  Result: 2 posts                                                │
-│  [Post 1: Festival Makeup]                                      │
+│  [Post 1: Festival Creative]                                      │
 │  [Post 4: Tips & Tricks]                                        │
 │                                                                  │
 │  STEP 3: Search Filter                                          │
@@ -136,7 +136,7 @@ User Input → State Update → Filter Chain → Display Results
 │  ↓                                                               │
 │  Example: searchQuery = 'festival'                              │
 │  Result: 1 post                                                 │
-│  [Post 1: Festival Makeup]                                      │
+│  [Post 1: Festival Creative]                                      │
 │                                                                  │
 │  STEP 4: Tag Filter                                             │
 │  ─────────────────────────                                      │
@@ -149,7 +149,7 @@ User Input → State Update → Filter Chain → Display Results
 │  ↓                                                               │
 │  Example: selectedTags = ['glitter']                            │
 │  Result: 1 post (already filtered)                              │
-│  [Post 1: Festival Makeup]                                      │
+│  [Post 1: Festival Creative]                                      │
 │                                                                  │
 │  STEP 5: Sort                                                    │
 │  ─────────────────────────                                      │
@@ -159,7 +159,7 @@ User Input → State Update → Filter Chain → Display Results
 │  })                                                             │
 │  ↓                                                               │
 │  Result: 1 post (sorted)                                        │
-│  [Post 1: Festival Makeup]                                      │
+│  [Post 1: Festival Creative]                                      │
 │                                                                  │
 │  STEP 6: Paginate                                               │
 │  ─────────────────────────                                      │
@@ -169,7 +169,7 @@ User Input → State Update → Filter Chain → Display Results
 │  ↓                                                               │
 │  Example: page 1, 9 posts per page                              │
 │  Result: 1 post                                                 │
-│  [Post 1: Festival Makeup]                                      │
+│  [Post 1: Festival Creative]                                      │
 │                                                                  │
 │  STEP 7: Render Results                                         │
 │  ─────────────────────────                                      │
@@ -851,7 +851,7 @@ sequenceDiagram
 
     P->>R: Render 1 post
 
-    R->>U: Display "Festival Makeup Guide"
+    R->>U: Display "Festival Creative Guide"
 
     Note over R: Shows: "1 post found"
 

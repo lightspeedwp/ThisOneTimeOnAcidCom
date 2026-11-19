@@ -453,7 +453,7 @@ useEffect(() => {
 ```tsx
 <SliderCard
   data={{
-    title: "Festival Makeup",
+    title: "Festival Creative",
     description: "Vibrant festival look with UV reactive elements",
     category: "Festival",
     image: "/img/festival-1.jpg",  // Single image (legacy)

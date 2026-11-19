@@ -22,7 +22,7 @@ values. It combines:
 
 ```tsx
 <ThreeColumnLayout
-  title="Why I Do Makeup"
+  title="Why I Create"
   subtitle="Description text"
   backgroundGradient="from-purple-50 via-pink-50 to-orange-50"
   decorativeElements={<>/* Gradient blur orbs */</>}
@@ -104,7 +104,7 @@ className="
   text-center
   mb-fluid-md
 ">
-  Why I Do Makeup
+  Why I Create
 </h2>
 
 ```text
@@ -372,7 +372,7 @@ Custom icons may include:
 
 ```tsx
 <section aria-labelledby="why-heading">
-  <h2 id="why-heading">Why I Do Makeup</h2>
+  <h2 id="why-heading">Why I Create</h2>
   <div className="grid">
     <article>                      {/* Each card is an article */}
       <h3>Card Title</h3>
@@ -468,7 +468,7 @@ from-blue-400 to-teal-500          /* Bottom-right orb */
 ```tsx
 // ✅ Use ThreeColumnLayout wrapper
 <ThreeColumnLayout
-  title="Why I Do Makeup"
+  title="Why I Create"
   subtitle="Description"
   backgroundGradient="from-purple-50 via-pink-50 to-orange-50"
 >
@@ -535,7 +535,7 @@ className="w-full sm:w-auto"
 <section className="bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50
 py-section px-fluid-md">
   <div className="max-w-7xl mx-auto">
-    <h2>Why I Do Makeup</h2>
+    <h2>Why I Create</h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-fluid-lg">
       {reasons.map(reason => (
         <article className="bg-white/80 backdrop-blur-sm p-fluid-md">

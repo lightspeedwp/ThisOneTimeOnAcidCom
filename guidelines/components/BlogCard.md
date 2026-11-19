@@ -170,7 +170,7 @@ import type { BlogPost, BlogCategory } from '@/data/types/blog';
 import { searchPosts } from '@/data/mock/blog';
 
 // Search across title, excerpt, content, tags
-const results = searchPosts('makeup tips');
+const results = searchPosts('creative content');
 
 ```text
 

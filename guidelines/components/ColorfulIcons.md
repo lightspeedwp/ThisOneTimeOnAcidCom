@@ -378,7 +378,7 @@ is essential to excellence.'
 
   return (
     <ThreeColumnLayout
-      header={<h2>Why I Do Makeup</h2>}
+      header={<h2>Why I Create</h2>}
       gap="lg"
     >
       {reasons.map((reason, index) => (
@@ -451,7 +451,7 @@ function HeroSection() {
         </div>
 
         <h1 className="text-hero-h1 font-title font-bold text-white mb-fluid-md">
-          This One Time On Acid Makeup
+          This One Time On Acid
         </h1>
 
         <p className="text-section-h3 font-body text-white/90">

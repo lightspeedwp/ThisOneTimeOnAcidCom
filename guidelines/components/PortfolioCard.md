@@ -88,7 +88,7 @@ export function PortfolioSection() {
 
 - ✅ **43 complete portfolio entries**
 - ✅ **19 real Figma assets** integrated
-- ✅ **6 categories** (Thailand, Festivals, UV Makeup, Nails, Bridal, Editorial)
+- ✅ **6 categories** (Thailand, Festivals, UV Creative, Nails, Bridal, Editorial)
 - ✅ **Rich metadata** (dates, locations, tags)
 - ✅ **Located in:** `/data/mock/portfolio/`
 
