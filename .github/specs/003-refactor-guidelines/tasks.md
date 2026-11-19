@@ -413,7 +413,7 @@ T038–T043 (Design verification & sign-off)
 - T033–T034 (pointer operations) must complete before T035
 - T035–T037 (link validation) can partially overlap within this gate, but all must complete before T038
 
-**Within Phase 3** (Verification, after T037): 
+**Within Phase 3** (Verification, after T037):
 - T038–T040 (design verification) can run in parallel
 - T041–T043 (final handoff) must follow T038–T040 completion
 
