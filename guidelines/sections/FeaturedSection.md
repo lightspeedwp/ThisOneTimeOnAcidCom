@@ -134,8 +134,7 @@ className="
   max-w-2xl                                        // 672px max-width
   mx-auto
 ">
-Explore my latest creative storytellerry from festivals, events, and creative
-collaborations.
+Explore my latest creative work from vibrant moments and collaborative projects.
 </p>
 
 ```text

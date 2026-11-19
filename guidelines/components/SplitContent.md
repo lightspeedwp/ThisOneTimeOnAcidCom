@@ -27,7 +27,7 @@ import { SplitContent } from '../../sections/SplitContent';
 
 <SplitContent
   imageUrl={uvArtImage}
-  imageAlt="Ash painting at a festival under UV light"
+  imageAlt="Creating vibrant visual art with bold colors and experimental techniques"
   imageSide="left"
   variant="even"
 >

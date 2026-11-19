@@ -693,7 +693,7 @@ text-gradient-pink-purple-blue">
         This One Time On Acid
       </h1>
       <p className="text-body-guideline font-body text-gray-700 mt-fluid-md">
-        UV & neon creative storyteller specialising in creative and festival looks
+        Creative artist exploring bold colors, experimental techniques, and vibrant visual storytelling
       </p>
     </div>
   </div>
