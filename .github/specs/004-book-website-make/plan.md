@@ -10,7 +10,7 @@
 
 Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website redesign, prepared as documentation-only package with exact previews for approval. The feature delivers four unblocked executable prompts (Prompt 1: navigation exposure, Prompt 2A: design-system baseline, Prompt 2B: navigation design, Prompt 3A: reader access copy & forms) and two blocked prompts (Prompts 3B/3C) pending prerequisite blocking decisions. No implementation code is generated; the deliverable is documentation ready for design-system export and component generation via Figma Make.
 
-**Technical Approach**: Preflight analysis of six source specification files (content/book/01-06) with version reconciliation, approval boundary documentation, and exact Prompt preview generation. Three staged gates prevent unblocked prompt execution: (1) blocking decision resolution, (2) user design approval, (3) implementation authorization.
+**Technical Approach**: Preflight analysis of six source specification files (references/01-06) with version reconciliation, approval boundary documentation, and exact Prompt preview generation. Three staged gates prevent unblocked prompt execution: (1) blocking decision resolution, (2) user design approval, (3) implementation authorization.
 
 ## Technical Context
 

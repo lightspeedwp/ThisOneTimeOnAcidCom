@@ -25,7 +25,7 @@ Complete documentation of six specification files from `content/book/` directory
 
 ### File 01: Book Website Figma Make Specification and Prompt Pack
 
-**File Path**: `content/book/01-book-website-specification.md`  
+**File Path**: `references/01-book-website-specification.md`  
 **Version**: 1.0.0  
 **Last Revised**: 2026-11-09 (Asia/Bangkok)  
 **Document Status**: Draft specification and prompts — stage execution separately approval-gated  
@@ -53,7 +53,7 @@ Complete documentation of six specification files from `content/book/` directory
 
 ### File 02: Figma Make Companion Session Plan
 
-**File Path**: `content/book/02-companion-session-plan.md`  
+**File Path**: `references/02-companion-session-plan.md`  
 **Version**: 1.0.4  
 **Last Revised**: 2026-11-09 (Asia/Bangkok)  
 **Document Status**: Working draft — companion planning only; implementation paused  
@@ -81,7 +81,7 @@ Complete documentation of six specification files from `content/book/` directory
 
 ### File 03: Book Website Brief — Author Decisions and Launch Scope
 
-**File Path**: `content/book/03-author-decisions-launch-scope.md`  
+**File Path**: `references/03-author-decisions-launch-scope.md`  
 **Version**: 1.3.0  
 **Last Revised**: 2026-11-09 (Asia/Bangkok)  
 **Document Status**: Planning document — implementation, editorial completion and launch readiness not established  
@@ -109,7 +109,7 @@ Complete documentation of six specification files from `content/book/` directory
 
 ### File 04: Design Brief — Book Website and Verified Reading Experience
 
-**File Path**: `content/book/04-design-brief.md`  
+**File Path**: `references/04-design-brief.md`  
 **Version**: 1.1.2  
 **Last Revised**: 2026-11-08 (Asia/Bangkok)  
 **Document Status**: Brief content approved for recording — design deliverables, acceptance and implementation not authorised  
@@ -140,7 +140,7 @@ Complete documentation of six specification files from `content/book/` directory
 
 ### File 05: Design and Reader Decision Register
 
-**File Path**: `content/book/05-design-reader-decision-register.md`  
+**File Path**: `references/05-design-reader-decision-register.md`  
 **Version**: 1.9.0  
 **Last Revised**: 2026-11-09 (Asia/Bangkok)  
 **Document Status**: Decision register draft; candidate specifications remain unapproved  
@@ -175,7 +175,7 @@ Complete documentation of six specification files from `content/book/` directory
 
 ### File 06: PRD — Website and Reading Experience
 
-**File Path**: `content/book/06-website-reading-prd.md`  
+**File Path**: `references/06-website-reading-prd.md`  
 **Version**: 1.1.1  
 **Last Revised**: 2026-11-04 (Asia/Bangkok)  
 **Document Status**: Provisional draft; needs substantial revision; not implementation- or launch-ready  

@@ -651,7 +651,7 @@ Validation and verification tasks to close gaps identified between specification
 - [ ] T067 Disambiguate the duplicate T014–T038 task sets and repoint Phase 8 dependencies in tasks.md per Constitution I (contradicts)
 - [ ] T068 Mark the Phase 8 "zero unresolved validation gaps" acceptance item unmet until T059 completes per Phase 8 acceptance (contradicts)
 - [ ] T069 Update spec.md Assumptions, Deliverables and Next Steps and plan.md Summary and Technical Context to the resolved, handed-over state per FR-006 (contradicts)
-- [ ] T070 Replace `content/book/0N` source paths with `references/0N-*.md` across spec.md, plan.md, data-model.md, quickstart.md, source-file-inventory.md, version-reconciliation.md and checklists per FR-001 (contradicts)
+- [x] T070 Replace `content/book/0N` source paths with `references/0N-*.md` across spec.md, plan.md, data-model.md, quickstart.md, source-file-inventory.md, version-reconciliation.md and checklists per FR-001 (contradicts)
 - [ ] T071 Replace non-baseline colours (#1a1a1a, #d4a574, #ff6b6b, #8b0000) in data-model.md, exports/GATE_2_READINESS_REPORT.md and the Prompt 3A/3C guides, or mark them superseded, per plan: approved palette (contradicts)
 - [ ] T072 Relabel Decision 2 Option A as session refresh with absolute 30-day expiry in contracts/prompt-3b-execution-guide.md and checklists/blocking-decisions-validation.md per Decision 2 (partial)
 - [ ] T073 Restate or close T045–T047 against the merged PR #589 state per plan: verification (partial)
