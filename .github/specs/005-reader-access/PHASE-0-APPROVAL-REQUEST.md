@@ -243,4 +243,35 @@ RA-T009: Privacy reviewer = Ash (product owner)
 
 ---
 
-**Ready to review.** Please respond with decisions or confirmations, and Phase 1 implementation can begin immediately.
+## Phase 0 Owner Approvals (Recorded 2026-11-19)
+
+**Approved by**: @ashley
+
+**RA-T006: Edition Manuscript & Publication Authority** ✅
+- Edition manifest: Chapters 1-4 (01-part-1-early-life through 04-part-4-contentment)
+- Source revision: main branch
+- Rights: Author: Ash Shaw | Copyright: 2026 This One Time | Third-party: None
+- Publication authority: Ash approves each chapter; staged chapter releases
+
+**RA-T007: Recovery & Renewal Mechanics + Abuse Controls** ✅
+- Renewal duration: 30 days
+- Recovery duration: 30 days from last authentication
+- Resend cooldown: 60 seconds
+- Per-email rate limit: 10 codes per 24h
+- Per-network rate limit: 50 codes per 24h
+- Revocation: User-initiated via sign-out only
+
+**RA-T009: Privacy Notice, Reviewer, Operator & Deletion** ✅
+- Privacy reviewer: Ash (product owner)
+- Privacy notice: Draft at RA-T021; Ash approves before Phase 1 ships
+- Data controller: This One Time (Ash/book project)
+- Support access: Ash sole authorized operator; all access logged in audit trail
+- Deletion procedure: Scheduled application cleanup (check last auth timestamp, delete records inactive 12 months, revoke future access)
+
+**Phase 0 Status**: ✅ COMPLETE — All three blocking decisions approved.
+
+**Next Step**: Phase 1 implementation begins immediately. RA-T006, RA-T007, RA-T009 marked complete. Phases 1–7 unblocked.
+
+---
+
+**Phase 1 Ready to Start.** Implementation can begin immediately.
