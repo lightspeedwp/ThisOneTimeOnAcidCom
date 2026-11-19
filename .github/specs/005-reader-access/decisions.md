@@ -39,14 +39,14 @@ Ash's selected directions from the `/speckit-clarify` session, recorded in full 
 
 ## Unresolved decisions
 
-1. Provider and transactional email, capabilities and retention.
+1. ~~Provider and transactional email, capabilities and retention.~~ **RESOLVED (2026-11-19):** Mailgun for transactional SMTP; capabilities include delivery status reporting (RA-008); retention per standard 30-day logs.
 2. Edition manifest, manuscript availability, rights, credits and publication approval.
 3. ~~Expiry authoritative event and user-visible timing.~~ Settled by Clarifications Q2.
 4. Recovery duration, start event, session identity and storage fallback. (Recovery-first race settled by Q4.)
 5. Exact renewal duration within the thirty-day upper bound. (No overall ceiling, per Q3.)
 6. Concurrency ordering, duplicate effects, revocation and sign-out. (Recovery-first race settled by Q4.)
 7. Resend and request-rate controls. (Attempt limit settled by Q5: five wrong attempts per six-digit code.)
-8. Newsletter destination, double opt-in, consent wording and deletion.
+8. ~~Newsletter destination, double opt-in, consent wording and deletion.~~ **RESOLVED (2026-11-19):** Brevo for list subscriptions; double opt-in via Brevo workflows; wording and deletion procedure deferred to implementation.
 9. Privacy reviewer, notice, support-access disclosure and deletion procedure.
 10. Deployment trigger and production authority. Evidence so far: branch pushes build Vercel previews through its GitHub app, and `netlify.toml` configures Netlify; which host serves production is not established.
 11. ~~Storage for codes, reader records and sessions (research R-02), and where the protected edition is kept so it is not bundled (R-03).~~ **RESOLVED (2026-11-19):**
