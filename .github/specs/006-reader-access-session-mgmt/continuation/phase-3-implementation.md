@@ -123,7 +123,7 @@ Implement Phase 3: Reader Access Session Management — Full user journey implem
 ### Next Steps
 
 1. **Generate implementation tasks**
-   ```
+```text
    /speckit-tasks
    ```
 

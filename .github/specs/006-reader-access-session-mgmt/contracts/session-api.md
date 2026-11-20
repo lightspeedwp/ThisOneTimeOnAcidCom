@@ -95,7 +95,7 @@ Set-Cookie: sessionToken=<uuid>; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age
 
 ### Request
 
-```
+```text
 GET /api/reader/chapter/01-part-1
 Cookie: sessionToken=<uuid>
 ```
@@ -110,7 +110,7 @@ Cookie: sessionToken=<uuid>
 
 ### Response (200 OK - Valid Session)
 
-```
+```text
 HTTP/1.1 200 OK
 X-Session-Valid: true
 X-Session-Expires: 2026-12-19T14:00:00Z
@@ -120,7 +120,7 @@ X-Session-Expires: 2026-12-19T14:00:00Z
 
 ### Error Response (401 Unauthorized)
 
-```
+```text
 HTTP/1.1 401 Unauthorized
 Set-Cookie: sessionToken=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0
 
@@ -163,14 +163,14 @@ const isTokenValid = constantTimeEqual(
 
 Implicit in chapter access (no explicit renewal endpoint)
 
-```
+```text
 GET /api/reader/chapter/01-part-1
 Cookie: sessionToken=<uuid>
 ```
 
 ### Renewal Logic
 
-```
+```text
 On successful session validation:
   renewedAt ← now
   expiresAt ← now + 30 days
@@ -180,7 +180,7 @@ On successful session validation:
 
 ### Response Headers
 
-```
+```text
 X-Session-Renewed: true
 X-Session-New-Expiry: 2026-12-19T14:00:00Z
 ```
@@ -201,14 +201,14 @@ X-Session-New-Expiry: 2026-12-19T14:00:00Z
 
 ### Request
 
-```
+```text
 POST /api/reader/session/logout
 Cookie: sessionToken=<uuid>
 ```
 
 ### Response (200 OK)
 
-```
+```text
 HTTP/1.1 200 OK
 Set-Cookie: sessionToken=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0
 
@@ -242,7 +242,7 @@ Set-Cookie: sessionToken=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0
 
 **When**: Before creating new session
 
-```
+```text
 activeDeviceCount = count sessions where email = X AND status = "active"
 if activeDeviceCount >= concurrentDeviceLimit:
   return 409 Conflict
@@ -260,7 +260,7 @@ if activeDeviceCount >= concurrentDeviceLimit:
 
 **Function**: `netlify/functions/reader-device-logout.ts`
 
-```
+```text
 POST /api/reader/device/:deviceId/logout
 {
   "email": "reader@example.com",
@@ -304,7 +304,7 @@ All errors follow consistent format:
 
 ### SessionToken Cookie
 
-```
+```text
 Name: sessionToken
 Value: UUID/ULID (cryptographically random, 32+ bytes)
 HttpOnly: true (JavaScript cannot access)

@@ -318,7 +318,7 @@
       "status": "logged_out",
       "message": "Session terminated. You have been signed out."
     }
-    ```
+```text
   - Response includes Set-Cookie: sessionToken=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0
 - [ ] T060 [US5] Add logout logging in `reader-session-logout.ts`:
   - Log: "Session logout: email, terminatedAt, ipAddress"
