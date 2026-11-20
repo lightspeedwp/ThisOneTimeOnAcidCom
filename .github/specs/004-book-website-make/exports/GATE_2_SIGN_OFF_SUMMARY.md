@@ -20,7 +20,7 @@ Spec 004 (Book Website Figma Make) has completed Gate 2 readiness review. All cr
 All 4 critical blockers identified in the audit have been resolved and verified in the spec:
 
 | Issue | Fix | File | Status |
-|-------|-----|------|--------|
+| --- | --- | --- | --- |
 | **Prompt 2B Colors** | Updated hover/active to #FF3AAE (hot pink) | `prompt-2b-navigation-design.md` | ✅ Fixed |
 | **Prompt 3A Status** | Corrected to BLOCKED (waiting for Decisions 3,4,5,6) | `prompt-3a-reader-access.md` | ✅ Fixed |
 | **Reference Paths** | Consolidated to `.github/specs/004-book-website-make/references/` | 4 contract files | ✅ Fixed |
@@ -99,7 +99,7 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 ### Immediate Priority (for Phase B unblocking)
 
 | Decision | Question | Impact | Est. Time | Owner |
-|----------|----------|--------|-----------|-------|
+| --- | --- | --- | --- | --- |
 | **Decision 3** | Code expiry start time (from generation / receipt / page load) | Affects error messages in Prompts 3A & 3C | 1 hour | Project |
 | **Decision 1** | Recovery-first race condition | Affects Prompt 3B; influences Prompt 3C | 1–2 hours | Project |
 | **Decision 2** | Recovery lifetime eligibility | Affects Prompt 3B; depends on Decision 1 | 1–2 hours | Project |
@@ -107,7 +107,7 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 ### Extended Priority (email & service integration)
 
 | Decision | Question | Impact | Est. Time | Owner |
-|----------|----------|--------|-----------|-------|
+| --- | --- | --- | --- | --- |
 | **Decision 4** | Email service provider | Affects Prompt 3A template syntax | 1–2 hours | Tech/Eng |
 | **Decision 5** | Manuscript publication readiness | Affects confirmation messaging | 30–60 min | Author |
 | **Decision 6** | Newsletter destination | Affects signup integration | 1 hour | Product |
