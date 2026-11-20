@@ -79,7 +79,7 @@
 
 **What to do** (varies by decision):
 
-**If Option A**: 
+**If Option A**:
 - Create `exports/READINESS_MANIFEST.md` listing all readiness outputs
 - Keep existing checklists; add reference to Spec 005 reader readiness
 
@@ -191,14 +191,15 @@
    - Update project structure diagram to show 3A–3C removed
 
 3. **Add handover table** to both:
-   | Item | Owner (Spec 004) | Owner (Spec 005) | Note |
-   | --- | --- | --- | --- |
-   | Prompt 1 (Navigation) | ✅ | — | Design baseline |
-   | Prompt 2A (Design System) | ✅ | — | Design baseline |
-   | Prompt 2B (Navigation Design) | ✅ | — | Design baseline |
-   | Prompt 3A (Reader Copy) | — | ✅ | Moved 2026-11-13 |
-   | Prompt 3B (Recovery) | — | ✅ | Moved 2026-11-13 |
-   | Prompt 3C (Error States) | — | ✅ | Moved 2026-11-13 |
+
+| Item | Owner (Spec 004) | Owner (Spec 005) | Note |
+| --- | --- | --- | --- |
+| Prompt 1 (Navigation) | ✅ | — | Design baseline |
+| Prompt 2A (Design System) | ✅ | — | Design baseline |
+| Prompt 2B (Navigation Design) | ✅ | — | Design baseline |
+| Prompt 3A (Reader Copy) | — | ✅ | Moved 2026-11-13 |
+| Prompt 3B (Recovery) | — | ✅ | Moved 2026-11-13 |
+| Prompt 3C (Error States) | — | ✅ | Moved 2026-11-13 |
 
 **Deliverable**: Updated spec.md and plan.md with handover clarity + ownership table  
 **Effort**: 1 hour  

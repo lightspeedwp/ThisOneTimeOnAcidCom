@@ -99,6 +99,8 @@
 
 ## Directory Purpose Guide
 
+<!-- markdownlint-disable MD060 -->
+
 | Directory | Purpose | Contents | Status |
 |-----------|---------|----------|--------|
 | `contracts/` | Figma Make prompt specifications (input) | Prompt 1–3C contract definitions | Reference (reader-access moved to Spec 005) |
@@ -106,6 +108,8 @@
 | `references/` | Source specification documents | Six specification files (01–06) with versions | Read-only reference |
 | `staged/` | Interim Figma Make outputs and drafts | Historical drafts from initial analysis; regenerated prompt outputs before finalization | Available for future regeneration; retained for reference |
 | `checklists/` | Quality validation and approval tracking | Pre-approval, specification-quality, prompt-preview checklists | Reference |
+
+<!-- markdownlint-enable MD060 -->
 
 **Note**: The `staged/` folder contains historical drafts from initial analysis (Nov 9) and is retained for reference only and future Figma Make regeneration. Authoritative versions are in the root directory (spec.md, plan.md, tasks.md, exports/) with all Phase 9 convergence updates applied.
 

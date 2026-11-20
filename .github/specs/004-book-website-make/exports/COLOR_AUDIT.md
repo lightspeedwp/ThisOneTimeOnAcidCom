@@ -9,6 +9,8 @@
 
 ## Approved Baseline (9 Colors)
 
+<!-- markdownlint-disable MD060 -->
+
 | Primitive | Hex Value | Usage | Theme(s) | Status |
 |-----------|-----------|-------|----------|--------|
 | Deepest Dark | #0B0B10 | Primary dark background | Dark | ✅ Baseline |
@@ -20,6 +22,8 @@
 | Hot Pink Accent | #FF3AAE | Interactive accent (hover, active) | Both | ✅ Baseline |
 | Electric Yellow Accent | #F4FF3C | Highlight accent | Both | ✅ Baseline |
 | Purple Accent | #8A63FF | Tertiary accent | Both | ✅ Baseline |
+
+<!-- markdownlint-enable MD060 -->
 
 ---
 
@@ -38,6 +42,8 @@
 
 ### Colors Found in Specifications
 
+<!-- markdownlint-disable MD060 -->
+
 | File | Color | Usage | Verification | Status |
 |------|-------|-------|--------------|--------|
 | contracts/prompt-2a-design-baseline.md | #0B0B10 | Deepest Dark | Baseline primitive ✅ | ✅ OK |
@@ -53,9 +59,13 @@
 | exports/design-tokens.json | All 9 baseline | Complete palette + themes | All baseline ✅ | ✅ OK |
 | exports/design-tokens.css | All 9 baseline | Complete palette + themes | All baseline ✅ | ✅ OK |
 
+<!-- markdownlint-enable MD060 -->
+
 ### Unapproved Candidates (Explicitly Absent)
 
 ✅ **Confirmed not used anywhere in Spec 004:**
+
+<!-- markdownlint-disable MD060 -->
 
 | Candidate | Description | Status |
 |-----------|-------------|--------|
@@ -63,6 +73,8 @@
 | T1 | Additional Typography | ✅ Absent |
 | RT2 | Reader Typography Controls | ✅ Absent |
 | C1 | Reader Continuity/Progress Tracking | ✅ Absent |
+
+<!-- markdownlint-enable MD060 -->
 
 ---
 

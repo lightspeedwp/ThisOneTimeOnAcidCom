@@ -17,6 +17,8 @@
 
 ## Migrated Files
 
+<!-- markdownlint-disable MD060 -->
+
 | Old Path | New Path | File | Status |
 |----------|----------|------|--------|
 | `content/book/01-book-website-specification.md` | `.github/specs/004-book-website-make/references/01-book-website-specification.md` | Master execution contract | ✅ Migrated |
@@ -26,11 +28,15 @@
 | `content/book/05-design-reader-decision-register.md` | `.github/specs/004-book-website-make/references/05-design-reader-decision-register.md` | Decision register | ✅ Migrated |
 | `content/book/06-website-reading-prd.md` | `.github/specs/004-book-website-make/references/06-website-reading-prd.md` | Product requirements | ✅ Migrated |
 
+<!-- markdownlint-enable MD060 -->
+
 ---
 
 ## Reference Path Updates
 
 ### Files Updated
+
+<!-- markdownlint-disable MD060 -->
 
 | File | Old References | New References | Status |
 |------|-----------------|-----------------|--------|
@@ -40,6 +46,8 @@
 | `checklists/pre-approval-reconciliation-validation.md` | `content/book/` | `references/` | ✅ Updated |
 | `exports/GATE_2_READINESS_REPORT.md` | `content/book/` | `references/` | ✅ Updated |
 | References in contracts/ | Minimum refs (mostly relative) | No changes required | ✅ OK |
+
+<!-- markdownlint-enable MD060 -->
 
 ### Sample Updates
 

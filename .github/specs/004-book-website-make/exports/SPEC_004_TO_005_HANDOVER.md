@@ -17,6 +17,8 @@ Spec 004 completes design specification and hand-off to Spec 005 for reader-acce
 
 ### Tasks Moved
 
+<!-- markdownlint-disable MD060 -->
+
 | Task ID | Original | Description | New Owner | Note |
 |---------|----------|-------------|-----------|------|
 | T014 | Spec 004 | Review Prompt 3A contract | Spec 005 | Decision blocking resolved |
@@ -25,6 +27,8 @@ Spec 004 completes design specification and hand-off to Spec 005 for reader-acce
 | T025 | Spec 004 | Execute Prompt 3B (recovery flows) | Spec 005 | Depends on Decisions 1–2 ✅ |
 | T026 | Spec 004 | Execute Prompt 3C (error states) | Spec 005 | Depends on Decision 3 ✅ |
 | T027 | Spec 004 | Validate Prompts 3B/3C | Spec 005 | Verification after execution |
+
+<!-- markdownlint-enable MD060 -->
 
 ### Contracts Transferred
 
@@ -41,6 +45,9 @@ Spec 004 completes design specification and hand-off to Spec 005 for reader-acce
 ### Decisions Transferred
 
 **Decision Ownership**:
+
+<!-- markdownlint-disable MD060 -->
+
 | Decision | Blocking | Status | Owner | Note |
 |----------|----------|--------|-------|------|
 | **Decision 1** | Race condition handling | ✅ Resolved | Spec 004 | Used by Spec 005 |
@@ -50,6 +57,8 @@ Spec 004 completes design specification and hand-off to Spec 005 for reader-acce
 | **Decision 5** | Manuscript readiness (early release) | ✅ Resolved | Ash | Shared with Spec 005 |
 | **Decision 6** | Newsletter destination | ⏳ Pending | Spec 005 | To be resolved by Spec 005 |
 | **Decision 7** | Route enforcement (meta tags + robots + sitemap) | ✅ Resolved | Spec 004 | Remains with design |
+
+<!-- markdownlint-enable MD060 -->
 
 ### Reference Documents
 
@@ -103,6 +112,8 @@ Reader-access reference documents remain available for Spec 005:
 
 ## Timeline
 
+<!-- markdownlint-disable MD060 -->
+
 | Date | Event | Owner |
 |------|-------|-------|
 | 2026-11-09 | Spec 004 research & decisions begun | Spec 004 |
@@ -110,6 +121,8 @@ Reader-access reference documents remain available for Spec 005:
 | 2026-11-13 | Reader-access work formally moved to Spec 005 | Spec 004 |
 | 2026-11-20 | Phase 9 convergence: handover document prepared | Spec 004 |
 | 2026-11-20+ | Spec 005 execution (Figma Make Prompts 3A–3C) | Spec 005 |
+
+<!-- markdownlint-enable MD060 -->
 
 ---
 
