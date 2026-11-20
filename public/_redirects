@@ -1,5 +1,9 @@
 /api/reader/code-requests    /.netlify/functions/reader-code-request    200
 /api/reader/verifications    /.netlify/functions/reader-verify    200
-/api/reader/chapters/:id    /.netlify/functions/reader-chapter/:id    200
+/api/reader/chapters        /.netlify/functions/reader-chapters-list    200
+/api/reader/chapters/:chapterId/content    /.netlify/functions/reader-chapter-content/:chapterId    200
+/api/reader/progress        /.netlify/functions/reader-progress    200
+/api/reader/analytics       /.netlify/functions/reader-analytics    200
+/api/reader/bookmarks       /.netlify/functions/reader-bookmarks    200
 /api/reader/session    /.netlify/functions/reader-session    200
 /*    /index.html   200

@@ -4,7 +4,7 @@
 
 import { getStore } from '@netlify/blobs';
 
-const store = getStore({ consistency: 'strong' });
+const store = getStore({ name: 'reader-access', consistency: 'strong' });
 
 export interface StoredCode {
   codeHash: string;
