@@ -14,7 +14,7 @@ Comprehensive code quality audit of this-one-time-on-acid.com completed 2026-10-
 ### Overall Rating: **A** (85/100) — Production Ready
 
 | Metric | Target | Current | Status |
-|--------|--------|---------|--------|
+| ------ | ------ | ------- | ------ |
 | **Test Coverage** | >75% | 82% | ✅ GOOD |
 | **Type Coverage** | >90% | 95% | ✅ EXCELLENT |
 | **Cyclomatic Complexity** | <5 | 3.2 avg | ✅ GOOD |
@@ -49,7 +49,7 @@ Comprehensive code quality audit of this-one-time-on-acid.com completed 2026-10-
 ## Test Coverage Breakdown
 
 | Category | Coverage | Trend | Notes |
-|----------|----------|-------|-------|
+| -------- | -------- | ----- | ----- |
 | **Unit Tests** | 88% | ↗ | Growing; strong coverage |
 | **Integration Tests** | 76% | → | Stable; baseline maintained |
 | **E2E Tests** | 35% | ↗ | Priority area; improving |
@@ -62,7 +62,7 @@ Comprehensive code quality audit of this-one-time-on-acid.com completed 2026-10-
 ### Complexity Analysis
 
 | Component | Complexity | Rating | Action |
-|---|---|---|---|
+| - | - | - | - |
 | hooks/useMediaLibrary | 8.2 | 🔴 High | Refactor: split into smaller hooks |
 | services/figmaService | 6.1 | 🟡 Medium | Review: consider service separation |
 | components/Hero | 5.8 | 🟡 Medium | Monitor: refactor if grows further |
@@ -84,7 +84,7 @@ Comprehensive code quality audit of this-one-time-on-acid.com completed 2026-10-
 ## Documentation Status
 
 | Area | Coverage | Status |
-|------|----------|--------|
+| ---- | -------- | ------ |
 | **Architecture** | 90% | ✅ Complete |
 | **API Docs** | 85% | 🟡 85% (12 endpoints need detail) |
 | **Component Props** | 100% | ✅ Complete |

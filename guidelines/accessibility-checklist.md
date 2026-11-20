@@ -77,7 +77,7 @@ Actionable accessibility checklist for ensuring WCAG 2.2 AAA compliance across a
 ### Accessibility Tiers
 
 | Level | Target | Standard | Scope |
-|-------|--------|----------|-------|
+| ----- | ------ | -------- | ----- |
 | **A** | Minimum | Basic accessibility | Not sufficient for this project |
 | **AA** | Standard | Industry standard | Minimum baseline (not our target) |
 | **AAA** | Enhanced | Strict compliance | **✓ Our Target Standard** |
@@ -270,7 +270,7 @@ Use browser tools to catch:
 ## 5. Common Issues & Fixes
 
 | Issue | WCAG Criterion | Fix |
-|-------|---|---|
+| ----- | - | - |
 | Missing alt text on images | 1.1.1 | Add descriptive alt text for meaningful images; use alt="" for decorative images |
 | Insufficient color contrast | 1.4.6 | Increase text size or darken color; use contrasted text overlay on images |
 | No visible focus indicator | 2.4.7 | Add `outline: 3px solid; outline-offset: 2px;` to `:focus-visible` |

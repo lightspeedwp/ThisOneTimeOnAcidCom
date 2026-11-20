@@ -9,9 +9,9 @@
 
 ## Executive Summary
 
-Spec 004 (Book Website Figma Make) has completed Gate 2 readiness review. All critical fixes have been verified, design baseline is locked, and Phase A (3 unblocked prompts) is ready to execute immediately upon your approval.
+Spec 004 (Book Website Figma Make) has completed Gate 2 readiness review. All critical fixes have been verified, design baseline is locked, and Phase A (3 specification-complete prompts) has no blocking decisions. **Execution requires satisfying 5 status gates** (see spec.md Status section): Make revision parity, available credits, explicit resume authority, reader-access handover to Spec 005, per-chapter publication approval.
 
-**Recommendation:** ✅ **APPROVE FOR GATE 2** — Proceed with Phase A execution.
+**Recommendation:** ✅ **APPROVE FOR GATE 2** — Specification is complete. Phase A execution requires satisfying 5 status gates (see spec.md Status section); upon approval, await satisfaction of those gates before proceeding with execution.
 
 ---
 
@@ -20,11 +20,11 @@ Spec 004 (Book Website Figma Make) has completed Gate 2 readiness review. All cr
 All 4 critical blockers identified in the audit have been resolved and verified in the spec:
 
 | Issue | Fix | File | Status |
-|-------|-----|------|--------|
+| --- | --- | --- | --- |
 | **Prompt 2B Colors** | Updated hover/active to #FF3AAE (hot pink) | `prompt-2b-navigation-design.md` | ✅ Fixed |
 | **Prompt 3A Status** | Corrected to BLOCKED (waiting for Decisions 3,4,5,6) | `prompt-3a-reader-access.md` | ✅ Fixed |
 | **Reference Paths** | Consolidated to `.github/specs/004-book-website-make/references/` | 4 contract files | ✅ Fixed |
-| **Decision 7 Clarity** | "Selected: Option A (Meta tags + Robots.txt + Sitemap)" | `prompt-1-navigation-exposure.md` | ✅ Fixed |
+| **Decision 7 Clarity** | "Selected: Option A (Meta tags + Sitemap exclusion; no robots.txt Disallow)" | `prompt-1-navigation-exposure.md` | ✅ Fixed |
 
 **Verification:** All fixes cross-referenced against Design Brief v1.1.2 and blocking decision audit.
 
@@ -65,14 +65,14 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 
 ---
 
-## 3. Phase A Ready to Execute ✅
+## 3. Phase A: Specification Complete ✅
 
-**Three prompts are unblocked and ready for immediate execution:**
+**Three prompts are specification-complete (no blocking decisions); execution gated by spec.md Status gates (5 open):**
 
 ### Prompt 1: Navigation Exposure ✅
 - **Status:** ✅ UNBLOCKED
 - **Goal:** Hide /speaking, /events, /media from public sitemap; preserve as noindex pages
-- **Decision 7:** Selected — Option A (Meta tags + Robots.txt + Sitemap)
+- **Decision 7:** Selected — Option A (Meta tags + Sitemap exclusion; no robots.txt Disallow)
 - **Timeline:** 5–10 minutes
 
 ### Prompt 2A: Design Baseline Export ✅
@@ -99,7 +99,7 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 ### Immediate Priority (for Phase B unblocking)
 
 | Decision | Question | Impact | Est. Time | Owner |
-|----------|----------|--------|-----------|-------|
+| --- | --- | --- | --- | --- |
 | **Decision 3** | Code expiry start time (from generation / receipt / page load) | Affects error messages in Prompts 3A & 3C | 1 hour | Project |
 | **Decision 1** | Recovery-first race condition | Affects Prompt 3B; influences Prompt 3C | 1–2 hours | Project |
 | **Decision 2** | Recovery lifetime eligibility | Affects Prompt 3B; depends on Decision 1 | 1–2 hours | Project |
@@ -107,7 +107,7 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 ### Extended Priority (email & service integration)
 
 | Decision | Question | Impact | Est. Time | Owner |
-|----------|----------|--------|-----------|-------|
+| --- | --- | --- | --- | --- |
 | **Decision 4** | Email service provider | Affects Prompt 3A template syntax | 1–2 hours | Tech/Eng |
 | **Decision 5** | Manuscript publication readiness | Affects confirmation messaging | 30–60 min | Author |
 | **Decision 6** | Newsletter destination | Affects signup integration | 1 hour | Product |
@@ -122,6 +122,26 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 
 ---
 
+## ✅ All Blocking Decisions Resolved (as of 2026-11-13)
+
+All 7 blocking decisions have been resolved by Ash:
+
+| # | Decision | Resolution | Spec 004 Status |
+| --- | ---------- | ------------ | ----------------- |
+| 1 | Recovery-first race | ✅ Option A approved | Handed to Spec 005 |
+| 2 | Recovery lifetime | ✅ Option A approved | Handed to Spec 005 |
+| 3 | Code expiry start | ✅ Option A approved | Handed to Spec 005 |
+| 4 | Email service | ✅ Hybrid (SendGrid + Brevo) | Handed to Spec 005 |
+| 5 | Manuscript readiness | ✅ Early release model (revised 2026-11-13) | Handed to Spec 005 |
+| 6 | Newsletter link | ✅ Brevo (external signup) | Handed to Spec 005 |
+| 7 | Route enforcement | ✅ Option A (meta tags + sitemap; no robots.txt Disallow) | Spec 004: Prompt 1 |
+
+**Reader Access Work Transferred to Spec 005**: Prompts 3A (Reader Access), 3B (Recovery Flows), and 3C (Error States) ownership and execution now belong to [Spec 005](../005-reader-access/spec.md). All blocking decisions for these prompts are documented and resolved in Spec 005.
+
+**Spec 004 Remaining Scope**: Prompts 1 (Navigation), 2A (Design Baseline), and 2B (Navigation Design) remain under Spec 004 ownership. All 7 decisions have been recorded; execution authorization requires satisfying 5 status gates (see spec.md Status section).
+
+---
+
 ## Gate 2 Checklist: Ready for Approval
 
 Before proceeding, confirm:
@@ -130,7 +150,7 @@ Before proceeding, confirm:
 - [ ] All 4 critical fixes verified in spec
 - [ ] Gate 2 Readiness Report reviewed (`.github/specs/004-book-website-make/exports/GATE_2_READINESS_REPORT.md`)
 - [ ] Design baseline locked (9-color palette, typography, components)
-- [ ] Phase A ready (Prompts 1, 2A, 2B can execute immediately)
+- [ ] Phase A specification complete (Prompts 1, 2A, 2B have no blocking decisions; execution gated by spec.md Status gates)
 - [ ] Blocking decision process understood (Decisions 1–6 to be resolved separately)
 - [ ] Figma Make access confirmed (file key, API token, workspace ready)
 

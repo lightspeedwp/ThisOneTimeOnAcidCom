@@ -51,7 +51,7 @@ has detailed implementation guidelines.
 ### Layout Patterns
 
 | Pattern | Purpose | Guideline File |
-|---------|---------|---------------|
+| ------- | ------- | ------------- |
 | **HeroWithCTA** | Hero section with call-to-action | [patterns/HeroWithCTA.md](./patterns/HeroWithCTA.md) |
 | **TwoColumnSplit** | Side-by-side content layout | [patterns/TwoColumnSplit.md](./patterns/TwoColumnSplit.md) |
 | **MasonryGallery** | Variable-height image grid | [patterns/MasonryGallery.md](./patterns/MasonryGallery.md) |
@@ -59,7 +59,7 @@ has detailed implementation guidelines.
 ### Navigation Patterns
 
 | Pattern | Purpose | Guideline File |
-|---------|---------|---------------|
+| ------- | ------- | ------------- |
 | **DesktopMobileNav** | Responsive navigation | [patterns/DesktopMobileNav.md](./patterns/DesktopMobileNav.md) |
 | **StickyHeader** | Fixed header on scroll | [patterns/StickyHeader.md](./patterns/StickyHeader.md) |
 | **Breadcrumbs** | Hierarchical navigation | [patterns/Breadcrumbs.md](./patterns/Breadcrumbs.md) |
@@ -67,7 +67,7 @@ has detailed implementation guidelines.
 ### Content Patterns
 
 | Pattern | Purpose | Guideline File |
-|---------|---------|---------------|
+| ------- | ------- | ------------- |
 | **CardGridWithFilters** | Filterable content grid | [patterns/CardGridWithFilters.md](./patterns/CardGridWithFilters.md) |
 | **BlogPostLayout** | Article detail view | [patterns/BlogPostLayout.md](./patterns/BlogPostLayout.md) |
 | **TimelineDisplay** | Chronological events | [patterns/TimelineDisplay.md](./patterns/TimelineDisplay.md) |
@@ -75,7 +75,7 @@ has detailed implementation guidelines.
 ### Interaction Patterns
 
 | Pattern | Purpose | Guideline File |
-|---------|---------|---------------|
+| ------- | ------- | ------------- |
 | **ModalLightbox** | Full-screen overlay | [patterns/ModalLightbox.md](./patterns/ModalLightbox.md) |
 | **FormWithValidation** | Input with real-time validation | [patterns/FormWithValidation.md](./patterns/FormWithValidation.md) |
 | **InfiniteScroll** | Lazy-load content | [patterns/InfiniteScroll.md](./patterns/InfiniteScroll.md) |
@@ -188,7 +188,7 @@ to-blue-50 py-fluid-3xl px-fluid-md">
 ## WordPress Pattern Alignment
 
 | This One Time On Acid Pattern | WordPress Pattern | Purpose |
-|-----------------|-------------------|---------|
+| --------------- | ----------------- | ------- |
 | `HeroWithCTA` | Hero pattern | Landing area with CTA |
 | `CardGridWithFilters` | Query Loop | Filterable content |
 | `ModalLightbox` | Modal pattern | Overlay content |
@@ -287,7 +287,7 @@ For detailed implementation of each pattern, see the specific guideline files:
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines
 - **[overview-sections.md](./overview-sections.md)** - Section patterns
 - **[overview-blocks.md](./overview-blocks.md)** - Content blocks
-- **[overview-components.md](./overview-components.md)** - UI components
+- **[overview-components.md](./N005-component-catalog.md)** - UI components
 
 ---
 

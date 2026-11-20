@@ -732,7 +732,7 @@ Use for: Neutral tags, inactive states, default
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[overview-components.md](../overview-components.md)** - Component system
+- **[overview-components.md](./N005-component-catalog.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Typography scale

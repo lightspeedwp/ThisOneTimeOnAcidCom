@@ -35,7 +35,7 @@ flowchart TD
 
     D --> F[Extract Content]
     F --> F1[title: 'This One Time On Acid']
-    F --> F2[subtitle: 'Makeup Artist']
+    F --> F2[subtitle: 'Creative Artist']
     F --> F3[tagline: 'Makeup that shines...']
     F --> F4[CTAs: primaryCTA, secondaryCTA]
 
@@ -210,8 +210,8 @@ import { HeroSection } from './components/sections/HeroSection';
 
 <HeroSection
   title="This One Time On Acid"
-  subtitle="Makeup Artist"
-  tagline="Makeup that shines with colour, energy, and connection."
+  subtitle="Creative Artist"
+  tagline="Creative work that shines with colour, energy, and connection."
 />
 
 ```text
@@ -221,8 +221,8 @@ import { HeroSection } from './components/sections/HeroSection';
 ```tsx
 <HeroSection
   title="This One Time On Acid"
-  subtitle="Makeup Artist"
-  tagline="Makeup that shines with colour, energy, and connection."
+  subtitle="Creative Artist"
+  tagline="Creative work that shines with colour, energy, and connection."
   primaryCTA={{
     text: 'Explore Portfolio',
     onClick: () => navigate('/portfolio')
@@ -240,8 +240,8 @@ import { HeroSection } from './components/sections/HeroSection';
 ```tsx
 <HeroSection
   title="This One Time On Acid"
-  subtitle="UV & Neon Makeup Artist"
-  tagline="Creating stunning looks for festivals, editorials, and special events."
+  subtitle="UV & Neon Creative Artist"
+  tagline="Creating stunning visual moments — vibrant, expressive, and unforgettable."
   backgroundImage="/images/hero-festival-makeup.jpg"
   overlay="dark"
   primaryCTA={{
@@ -545,8 +545,8 @@ function HomePage() {
     <>
       <HeroSection
         title="This One Time On Acid"
-        subtitle="Makeup Artist"
-        tagline="Makeup that shines with colour, energy, and connection."
+        subtitle="Creative Artist"
+        tagline="Creative work that shines with colour, energy, and connection."
         primaryCTA={{
           text: 'View Portfolio',
           onClick: () => navigate('/portfolio')
@@ -570,8 +570,8 @@ function HomePage() {
 ```tsx
 <HeroSection
   title="This One Time On Acid"
-  subtitle="UV & Neon Makeup Artist"
-  tagline="Creating stunning looks for festivals, editorials, and special events."
+  subtitle="UV & Neon Creative Artist"
+  tagline="Creating stunning visual moments — vibrant, expressive, and unforgettable."
   backgroundImage="/images/hero-festival-makeup.jpg"
   overlay="dark"
   primaryCTA={{
@@ -693,7 +693,7 @@ text-gradient-pink-purple-blue">
         This One Time On Acid
       </h1>
       <p className="text-body-guideline font-body text-gray-700 mt-fluid-md">
-        UV & neon creative storyteller specialising in creative and festival looks
+        Creative artist exploring bold colors, experimental techniques, and vibrant visual storytelling
       </p>
     </div>
   </div>
@@ -810,7 +810,7 @@ focus:ring-opacity-50"
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[overview-components.md](../overview-components.md)** - Component system
+- **[overview-components.md](./N005-component-catalog.md)** - Component system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Typography scale
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Color system

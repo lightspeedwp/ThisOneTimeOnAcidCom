@@ -49,7 +49,7 @@ newsletter, purpose-limited records and no launch offline manuscript access.
 | I Specification-first | spec, plan, research, data-model, contracts and quickstart exist; tasks.md exists (hand-authored). Spec Kit regression baseline for feature 005 not run | Pass for design artefacts; regression Not run |
 | II Governance | Documentation only; no workflow, protected-file, catalogue or `.specify/feature.json` change | Pass |
 | III Figma Make bundler | Client changes (forms, states, reader) must avoid `?.`, `??`, `import.meta.env`, nested ternaries and `for...of`. Function code runs server-side, outside the Make bundle, but should follow the same rules to stay reviewable | Applies at implementation; Not run |
-| IV Content and data | UI strings belong in `src/app/data/mock/`; manuscript belongs in `content/`; Supabase excluded. Adding server functions changes the "static mock data" description — owner direction recorded (Clarifications Q1); see Complexity Tracking. `bookContentLoader.ts` eagerly bundles `/src/content/book/**/*.md` into the client — incompatible with protected delivery if used for the edition | Conditional pass — risk R-04 |
+| IV Content and data | UI strings belong in `src/app/data/mock/`; Supabase excluded. The constitution names `content/` for editorial content, but Ash moved it to `src/content/` (PR #608); the constitution text has not been amended. Adding server functions changes the "static mock data" description — owner direction recorded (Clarifications Q1); see Complexity Tracking. `bookContentLoader.ts` eagerly bundles the six chapter directories matched by `BOOK_SOURCE_GLOBS` into the client — incompatible with protected delivery for the edition | Conditional pass — risks R-03, R-04; constitution wording mismatch |
 | V BEM-only CSS | Reader-access forms and states styled in `src/styles/blocks/` | Applies at implementation; Not run |
 | VI Package/runtime | npm only, Node 24. Any function or email-provider dependency needs separate npm/lockfile review | Pass for design; dependencies NEEDS CLARIFICATION |
 | VII Testing | Function unit tests (Vitest/Jest), Playwright access journeys and CI gating required before merge of any implementation stage | Planned; Not run |
@@ -110,7 +110,7 @@ src/app/
 ├── components/pages/about/EbookPage.tsx   # existing reader; must fetch from reader-chapter
 └── utils/bookContentLoader.ts        # existing eager glob; must not load protected edition
 src/styles/blocks/                    # BEM blocks for forms and states
-content/                              # edition source location — Owner decision (R-03)
+src/content/book/                     # current manuscript location (moved from content/ in PR #608); protected edition location — Owner decision (R-03)
 tests/ and colocated tests            # Vitest/Jest units; Playwright journeys
 ```
 

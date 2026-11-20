@@ -36,7 +36,7 @@ project.
 ### Naming Conventions
 
 | Prompt Type | Naming Convention | Example |
-|-------------|-------------------|---------|
+| ----------- | ----------------- | ------- |
 | **Single-file prompt** | `{topic}.md` | `css-audit.md` |
 | **Orchestrator folder** | `{topic}/` | `modern-react-migration/` |
 | **Orchestrator file** | `00-ORCHESTRATOR.md` | `00-ORCHESTRATOR.md` |
@@ -76,7 +76,7 @@ related_tasks: "/tasks/{topic}-tasks.md"  # Task list file
 ### YAML Field Definitions
 
 | Field | Required | Description | Example |
-|-------|----------|-------------|---------|
+| ----- | -------- | ----------- | ------- |
 | `title` | ✅ YES | Human-readable prompt title | "ES5 React Best Practices Audit" |
 | `filename` | ✅ YES | Absolute path to this file | "/prompts/modern-react-migration/01-es5-audit.md" |
 | `created` | ✅ YES | ISO date of creation | "2026-03-11" |
@@ -440,7 +440,6 @@ This audit enforces the standards defined in:
 
 - [BEM CSS Architecture](../guidelines/css-architecture.md)
 - [Component Guidelines](../guidelines/overview-components.md)
-- [WordPress FSE Patterns](../guidelines/wordpress-fse-patterns.md)
 
 ```text
 
