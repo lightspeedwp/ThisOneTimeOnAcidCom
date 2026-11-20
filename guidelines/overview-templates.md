@@ -151,14 +151,14 @@ detailed implementation guidelines.
 ### Marketing Pages
 
 | Template | Purpose | Guideline File |
-|----------|---------|---------------|
+| -------- | ------- | ------------- |
 | **HomePage** | Main landing page | [templates/HomePage.md](./templates/HomePage.md) |
 | **AboutPage** | Biography and philosophy | [templates/AboutPage.md](./templates/AboutPage.md) |
 
 ### Content Pages
 
 | Template | Purpose | Guideline File |
-|----------|---------|---------------|
+| -------- | ------- | ------------- |
 | **PortfolioMainPage** | Portfolio archive grid | [templates/PortfolioMainPage.md](./templates/PortfolioMainPage.md) |
 | **PortfolioDetailPage** | Single portfolio entry | [templates/PortfolioDetailPage.md](./templates/PortfolioDetailPage.md) |
 | **BlogPage** | Blog archive with filters | [templates/BlogPage.md](./templates/BlogPage.md) |
@@ -167,7 +167,7 @@ detailed implementation guidelines.
 ### Utility Pages
 
 | Template | Purpose | Guideline File |
-|----------|---------|---------------|
+| -------- | ------- | ------------- |
 | **404Page** | Error page | [templates/404Page.md](./templates/404Page.md) |
 
 ---
@@ -199,7 +199,7 @@ export function PageTemplate({ setCurrentPage }: Props) {
 ## WordPress Template Alignment
 
 | This One Time On Acid Template | WordPress Template | Purpose |
-|------------------|-------------------|---------|
+| ---------------- | ----------------- | ------- |
 | `HomePage.tsx` | `front-page.html` | Home/landing page |
 | `AboutPage.tsx` | `page-about.html` | About page |
 | `PortfolioMainPage.tsx` | `archive-portfolio.html` | Portfolio archive |

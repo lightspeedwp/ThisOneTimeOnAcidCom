@@ -38,7 +38,7 @@ especially on mobile devices.
 ## Duplicates Identified
 
 | Animation | Occurrences | Files |
-|-----------|-------------|-------|
+| --------- | ----------- | ----- |
 | `@keyframes spin` | 4× | countdown.css, skeleton.css, home-page.css, contact-form.css |
 | `@keyframes pulse` | 3× | blog-preview.css, about-page.css, data-display.css |
 | `@keyframes float` | 3× | globals.css, about-page.css, contact-page.css |
@@ -335,7 +335,7 @@ Add mobile-specific optimizations:
 ## 📈 Expected Performance Improvements
 
 | Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
+| ------ | ------ | ----- | ----------- |
 | **CSS Bundle Size** | 180KB | 163KB | -9.4% (17KB) |
 | **Keyframe Definitions** | 47 | 32 | -31.9% |
 | **Mobile Animation FPS** | 30-45 | 50-60 | +33% |

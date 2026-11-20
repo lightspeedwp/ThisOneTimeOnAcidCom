@@ -9,7 +9,7 @@
 ## Animation Timing
 
 | Name | Duration | Easing |
-|------|----------|--------|
+| ---- | -------- | ------ |
 | Fast | 150ms | ease-out |
 | Normal | 300ms | ease-in-out |
 | Slow | 500ms | ease-out |

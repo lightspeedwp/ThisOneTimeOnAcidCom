@@ -59,7 +59,7 @@ From `.github/specs/004-book-website-make/references/03-author-decisions-launch-
   - Tablet (768-1023px): Horizontal menu with possible wrapping
   - Mobile (<768px): Hamburger menu, all visible links in drawer
 
-### Figma Make Instructions
+### Figma Make Instructions (Deprecated)
 
 1. **Locate navigation component** in Figma file
 2. **Remove links** for /speaking, /events, /media from navigation menu
@@ -69,6 +69,59 @@ From `.github/specs/004-book-website-make/references/03-author-decisions-launch-
    - Update sitemap.xml to exclude /speaking, /events, /media
    - Do NOT use robots.txt `Disallow` rules (conflicting approach; noindex meta tags and sitemap exclusion are sufficient)
 5. **Generate before/after comparison** showing navigation structure change
+
+---
+
+## Claude Execution
+
+### Input Specification
+
+Claude receives:
+- Current navigation structure (4 visible + 3 hidden routes)
+- Decision 7 approval: Option A (meta tags + sitemap exclusion)
+- Design baseline context (responsive breakpoints, component structure)
+- Route enforcement requirements (noindex, sitemap exclusion)
+
+### Output Specification
+
+Claude produces a **Markdown spec document** containing:
+
+1. **Enforcement Strategy Summary** (2–3 paragraphs)
+   - Decision 7 implementation (Option A selected)
+   - Meta tag approach
+   - Sitemap configuration
+   - robots.txt guidance (explicitly stating no Disallow needed)
+
+2. **Navigation Component Changes** (structured table)
+   - Before/after route visibility
+   - Responsive states (desktop, tablet, mobile)
+   - Hidden routes with enforcement details
+
+3. **Implementation Checklist** (markdown checklist)
+   - [ ] Add `<meta name="robots" content="noindex">` to /speaking page template
+   - [ ] Add `<meta name="robots" content="noindex">` to /events page template
+   - [ ] Add `<meta name="robots" content="noindex">` to /media page template
+   - [ ] Update sitemap.xml — exclude /speaking, /events, /media
+   - [ ] Verify navigation component renders only 4 visible links
+   - [ ] Test mobile responsive view (hamburger menu includes only 4 items)
+   - [ ] Verify routes still accessible at /speaking, /events, /media (noindex, not 404)
+   - [ ] No robots.txt `Disallow` rules added for these routes
+
+4. **Validation Criteria** (reference back to acceptance criteria CR-1.1 through CR-1.6)
+   - Links to each criterion with pass/fail indicator
+
+5. **Example Output** (code blocks for reference)
+   - Example `<meta>` tag for noindex pages
+   - Example sitemap exclusion XML
+   - Navigation component state matrix (desktop/tablet/mobile)
+
+### Validation Criteria
+
+✅ Markdown spec is complete and valid  
+✅ All acceptance criteria (CR-1.1 through CR-1.6) explicitly addressed  
+✅ Navigation enforcement matches Decision 7 Option A  
+✅ No robots.txt `Disallow` rules suggested  
+✅ Implementation checklist is developer-ready  
 
 ### Acceptance Criteria
 

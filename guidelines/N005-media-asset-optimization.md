@@ -119,7 +119,7 @@ Animation:
 ### Compression Targets
 
 | Image Type | Target Size | Tool |
-|---|---|---|
+| - | - | - |
 | Thumbnail | < 10 KB | TinyPNG, ImageOptim |
 | Hero Image | < 100 KB | ImageMagick, ffmpeg |
 | Full-width | < 200 KB | ImageMagick, Squoosh |
@@ -230,7 +230,7 @@ ETag: "abc123"
 ### Image Size Targets
 
 | Page Type | Total Image Size | Per Image | Constraint |
-|---|---|---|---|
+| - | - | - | - |
 | Mobile Home | < 500 KB | Hero: < 100 KB | LCP < 2.5s |
 | Desktop Home | < 1 MB | Hero: < 200 KB | LCP < 2.5s |
 | Article | < 2 MB | Article images: < 200 KB | LCP < 2.5s |

@@ -33,7 +33,7 @@ The Journal Preview displays entry metadata and excerpt with progressive content
 ## Component Anatomy
 
 | Element | Purpose | Display |
-|---------|---------|---------|
+| ------- | ------- | ------- |
 | Publish Date | Chronological context | "Nov 9, 2024" or "2 days ago" |
 | Category/Tag | Content classification | Badge or inline label |
 | Entry Title | Headline | h3, truncate to 1-2 lines |
@@ -126,7 +126,7 @@ interface JournalPreviewProps {
 ## Visibility Indicators (D2: Mixed Publication Model)
 
 | Visibility | Icon | Meaning | Audience |
-|-----------|------|---------|----------|
+| --------- | ---- | ------- | -------- |
 | Private | 🔒 | Author only | Self-reflection, drafts |
 | Shared | 👥 | Selected readers | Invited friends, supporters |
 | Public | 🌐 | Everyone | Published, canonical entries |

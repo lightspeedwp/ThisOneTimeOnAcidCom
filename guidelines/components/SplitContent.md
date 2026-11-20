@@ -13,7 +13,7 @@ Stacks vertically on mobile with image first.
 ## Props
 
 | Prop | Type | Default | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `imageUrl` | `string` | *required* | Image source URL |
 | `imageAlt` | `string` | *required* | Alt text for the image (required for accessibility) |
 | `imageSide` | `'left'` \| `'right'` | `'left'` | Which side the image appears on (desktop) |
@@ -27,7 +27,7 @@ import { SplitContent } from '../../sections/SplitContent';
 
 <SplitContent
   imageUrl={uvArtImage}
-  imageAlt="Ash painting at a festival under UV light"
+  imageAlt="Creating vibrant visual art with bold colors and experimental techniques"
   imageSide="left"
   variant="even"
 >
