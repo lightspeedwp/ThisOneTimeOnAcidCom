@@ -398,7 +398,7 @@ export const blogPosts = [
   {
     id: 1,
     category: 'festival',  // lowercase
-    title: 'Festival Makeup Tips'
+    title: 'Festival Creative Tips'
   }
 ];
 
@@ -697,7 +697,7 @@ useEffect(() => {
 export const blogPost = {
   id: 1,
   tags: ['festival', 'glitter', 'uv'],  // Array
-  title: 'Festival Makeup'
+  title: 'Festival Creative'
 };
 
 // ❌ WRONG - String instead of array

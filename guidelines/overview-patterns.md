@@ -287,7 +287,7 @@ For detailed implementation of each pattern, see the specific guideline files:
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines
 - **[overview-sections.md](./overview-sections.md)** - Section patterns
 - **[overview-blocks.md](./overview-blocks.md)** - Content blocks
-- **[overview-components.md](./overview-components.md)** - UI components
+- **[overview-components.md](./N005-component-catalog.md)** - UI components
 
 ---
 
