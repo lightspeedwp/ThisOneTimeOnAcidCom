@@ -8,15 +8,15 @@
 
 ## Summary
 
-Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website redesign, prepared as documentation-only package with exact previews for approval. The feature delivers four unblocked executable prompts (Prompt 1: navigation exposure, Prompt 2A: design-system baseline, Prompt 2B: navigation design, Prompt 3A: reader access copy & forms) and two blocked prompts (Prompts 3B/3C) pending prerequisite blocking decisions. No implementation code is generated; the deliverable is documentation ready for design-system export and component generation via Figma Make.
+✅ **Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website redesign**, prepared as documentation-only package with exact previews **ready for approval**. The feature delivers **three unblocked executable prompts** (Prompt 1: navigation exposure, Prompt 2A: design-system baseline, Prompt 2B: navigation design) with **all 7 blocking decisions RESOLVED** (2026-11-13). Reader-access work (Prompts 3A–3C) handed to **Spec 005**. No implementation code is generated; the deliverable is documentation ready for design-system export and component generation via Figma Make.
 
-**Technical Approach**: Preflight analysis of six source specification files (content/book/01-06) with version reconciliation, approval boundary documentation, and exact Prompt preview generation. Three staged gates prevent unblocked prompt execution: (1) blocking decision resolution, (2) user design approval, (3) implementation authorization.
+**Technical Approach**: Preflight analysis of six source specification files (references/01-06) with version reconciliation, approval boundary documentation, and exact Prompt preview generation. Three staged gates prevent unblocked prompt execution: (1) blocking decision resolution, (2) user design approval, (3) implementation authorization.
 
 ## Technical Context
 
 **Project Type**: Documentation-only specification package (no code generation, no deployment)
 
-**Source Files**: Six specification files in content/book/ (01-book-website-specification.md, 02-companion-session-plan.md, 03-author-decisions-launch-scope.md, 04-design-brief.md, 05-design-reader-decision-register.md, 06-website-reading-prd.md) with version tracking and reconciliation
+**Source Files**: Six specification files in `.github/specs/004-book-website-make/references/` (01-book-website-specification.md, 02-companion-session-plan.md, 03-author-decisions-launch-scope.md, 04-design-brief.md, 05-design-reader-decision-register.md, 06-website-reading-prd.md) with version tracking and reconciliation
 
 **Design System**: Space Grotesk headings, Inter body/UI, 9-color palette (light & dark themes)
 
@@ -24,14 +24,14 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 
 **Figma Make Integration**: Staged Prompt execution (Prompts 0–3C) with approval gates between stages; Prompts 1, 2A, 2B, 3A approved for execution; Prompts 3B, 3C blocked pending decision resolution
 
-**Blocking Decisions** (7 total, all APPROVED 2026-11-13):
-- ✅ Recovery-first race condition handling → Option A: Recovery takes precedence
-- ✅ Recovery lifetime eligibility → Option A: 30-day absolute expiry + session refresh on recovery
-- ✅ Code expiry start time → Option A: From code generation
-- ✅ Email service provider → Hybrid: SendGrid (transactional) + Brevo (newsletter)
-- ✅ Manuscript publication readiness → Early release: build screens now; chapters published individually as Ash approves
-- ✅ Newsletter destination → Brevo (external signup link)
-- ✅ Route enforcement verification → Option A: noindex meta tags + sitemap exclusion
+**Blocking Decisions** (7 total, **ALL RESOLVED & APPROVED 2026-11-13**):
+- ✅ **Decision 1**: Recovery-first race condition → **Option A**: Recovery takes precedence
+- ✅ **Decision 2**: Recovery lifetime eligibility → **Option A**: 30-day absolute expiry + session refresh on recovery
+- ✅ **Decision 3**: Code expiry start time → **Option A**: From code generation
+- ✅ **Decision 4**: Email service provider → **Hybrid**: SendGrid (transactional) + Brevo (newsletter)
+- ✅ **Decision 5**: Manuscript publication readiness → **Early release**: Build screens now; chapters published individually as Ash approves
+- ✅ **Decision 6**: Newsletter destination → **Brevo**: External signup link
+- ✅ **Decision 7**: Route enforcement verification → **Option A**: Noindex meta tags + sitemap exclusion
 
 **Target Output**: Figma Make-ready specifications (Prompts 1–2B) with exact component names, acceptance criteria, and design-system export guidance. Reader-access work (Prompts 3A–3C) handed to Spec 005.
 
@@ -82,7 +82,7 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 **Project Type: Documentation-only specification**
 
 ```text
-content/book/
+.github/specs/004-book-website-make/references/
 ├── 01-book-website-specification.md     # Master execution contract (v1.0.0)
 ├── 02-companion-session-plan.md         # Preparation queue (v1.0.4)
 ├── 03-author-decisions-launch-scope.md  # Author decisions (v1.3.0)
@@ -92,6 +92,8 @@ content/book/
 ```
 
 **Structure Decision**: Documentation-only package. No code structure required. Source specifications analyzed, reconciled, and staged for Figma Make execution. All deliverables remain in `.github/specs/004-book-website-make/` with no backend/frontend splits or implementation code paths.
+
+**Note on `staged/` directory**: Contains historical drafts and earlier specification versions from initial analysis (Nov 9). Authoritative versions are in the root directory (spec.md, plan.md, tasks.md, etc.) with all Phase 9 convergence updates applied. The `staged/` folder is retained for reference only and is not part of active execution.
 
 ## Complexity Tracking
 

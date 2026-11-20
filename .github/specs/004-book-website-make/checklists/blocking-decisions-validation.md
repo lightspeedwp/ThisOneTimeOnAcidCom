@@ -143,7 +143,7 @@ Each blocking decision MUST have:
 | --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "How is sitemap/noindex enforcement verified for /speaking, /events, /media routes?" | ✓ |
 | Rationale | ✓ | ✓ | Verification method and enforcement mechanism unspecified (robots.txt vs. sitemap vs. meta tags) | ✓ |
-| Option Count | ✓ (3+) | ✓ (4 options) | A (Noindex meta + Sitemap, optional Robots.txt), B (Robots.txt only), C (Meta tags only), D (Sitemap only) | ✓ |
+| Option Count | ✓ (3+) | ✓ (4 options) | A (Meta tags + Sitemap exclusion; no robots.txt Disallow), B (Robots.txt only), C (Meta tags only), D (Sitemap only) | ✓ |
 | Option Descriptions | ✓ | ✓ | All 4 options with coverage/simplicity/verification trade-offs | ✓ |
 | Impact Assessment | ✓ | ✓ | "Navigation exposure specification (Prompt 1) must document exact enforcement strategy. Implementation validation requires confirmation that routes are not published to search engines" | ✓ |
 | Decision Status | ✓ | ✓ | "Awaiting user input from blocking decision matrix in spec.md" | ✓ |

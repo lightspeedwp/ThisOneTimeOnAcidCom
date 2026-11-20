@@ -12,7 +12,7 @@
 
 Spec 004 identifies **7 blocking decisions** required for Figma Make prompt execution. Decision 7 (Route Enforcement Verification) is **resolved in Spec 004**. Decisions 1–6 are **documented and handed over to Spec 005** for resolution during Phase 1 readiness planning.
 
-**Timeline**: 
+**Timeline**:
 - Spec 004: Decision 7 resolved (Phase 8 Complete)
 - Spec 005: Decisions 1–6 resolution target 2026-12-15
 
@@ -46,7 +46,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 ### Overview Table
 
 | Decision # | Question | Options | Impact Scope | Blocking | Handover Status |
-|----------|----------|---------|---|---|---|
+| ---------- | ---------- | --------- | --- | --- | --- |
 | **1** | Recovery-first race condition | A, B, C, D (4 options) | Prompt 3B, Prompt 3C (partial) | Decisions 1 & 2 unblock Prompt 3B | 🔄 Spec 005 |
 | **2** | Recovery lifetime eligibility | A, B, C (3 options) | Prompt 3B, session lifecycle | Decisions 1 & 2 unblock Prompt 3B | 🔄 Spec 005 |
 | **3** | Code expiry start time | A, B, C (3 options) | Prompt 3A, Prompt 3C (error msg) | Decision 3 unblocks Prompts 3A/3C | 🔄 Spec 005 |
@@ -212,7 +212,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 ### Spec 004 Status
 
 | Decision | Status | Action | Timeline |
-|----------|--------|--------|----------|
+| ---------- | -------- | -------- | ---------- |
 | **1–6** | ⏳ PENDING | Handover to Spec 005 Phase 1 | 2026-11-21 (Spec 005 start) |
 | **7** | ✅ RESOLVED | No further action | Complete |
 
