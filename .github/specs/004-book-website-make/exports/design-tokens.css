@@ -1,141 +1,257 @@
 /**
- * Design System Baseline Tokens — Dark Theme & Primitives
- * Generated: 2026-11-20
- * Source: Prompt 2A — Design System Baseline Export
- * Baseline: Design Brief v1.1.2
- * Approval: Gate 2 Readiness Complete (dark theme + nine primitives)
+ * Design Baseline Tokens — This One Time on Acid (book website)
  *
- * Dark theme: Approved and ready for implementation.
- * Light theme: Mapping defined below; approval status documented separately.
- * See design-tokens.json for light-theme approval status and metadata.
+ * Source:     Prompt 2A — Design System Baseline Export (SC-004 Claude direct execution)
+ * Baseline:   Design Brief v1.1.2; Design Register v1.9.0
+ * Generated:  2026-11-20
+ * Approval:   Gate 2 sign-off — typography, nine primitives and dark-theme roles APPROVED
+ * Pending:    Light-theme role mapping — NOT APPROVED (existing light support preserved)
+ * Companion:  design-tokens.json (same values); prompt-2a-design-baseline-output.md (validation)
+ *
+ * Theme selection matches the site's existing toggle (ThemeToggleES5):
+ *   - Dark is the default (dark-first). No class or attribute is required.
+ *   - Light applies only when <html data-theme="light"> is set by a saved preference.
+ *   - prefers-color-scheme is deliberately NOT used, so saved preferences always win.
+ *
+ * Every colour below resolves to one of the nine approved primitives. No other hex
+ * values appear in this file except the shadow rgba() values, which derive from them.
  */
 
 :root {
-  /* ===== TYPOGRAPHY ===== */
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-ui: 'Inter', sans-serif;
+  /* ===== TYPOGRAPHY — families ===== */
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-ui: "Inter", system-ui, sans-serif;
 
-  /* ===== SHARED PALETTE PRIMITIVES ===== */
-  /* Nine approved colors — single source of truth */
-  --color-deepest-dark: #0B0B10;
-  --color-dark-purple: #12121A;
+  /* ===== TYPOGRAPHY — heading scale (Space Grotesk) ===== */
+  --font-heading-weight-600: 600;
+  --font-heading-weight-700: 700;
+  --font-heading-size-24: 24px;
+  --font-heading-size-32: 32px;
+  --font-heading-size-40: 40px;
+  --font-heading-size-48: 48px;
+
+  /* ===== TYPOGRAPHY — body scale (Inter) ===== */
+  --font-body-weight-400: 400;
+  --font-body-weight-500: 500;
+  --font-body-size-14: 14px;
+  --font-body-size-16: 16px;
+  --font-body-size-18: 18px;
+
+  /* ===== TYPOGRAPHY — UI scale (Inter) ===== */
+  --font-ui-weight-500: 500;
+  --font-ui-weight-600: 600;
+  --font-ui-size-12: 12px;
+  --font-ui-size-14: 14px;
+  --font-ui-size-16: 16px;
+
+  /* ===== SHARED PALETTE PRIMITIVES (9, approved) ===== */
+  --color-deepest-dark: #0b0b10;
+  --color-dark-purple: #12121a;
   --color-lighter-dark: #171722;
-  --color-warm-cream: #F6F2EB;
-  --color-warm-tan: #CFC7BB;
-  --color-warm-brown: #9C9488;
-  --color-accent-pink: #FF3AAE;
-  --color-accent-yellow: #F4FF3C;
-  --color-accent-purple: #8A63FF;
+  --color-warm-cream: #f6f2eb;
+  --color-warm-tan: #cfc7bb;
+  --color-warm-brown: #9c9488;
+  --color-accent-pink: #ff3aae;
+  --color-accent-yellow: #f4ff3c;
+  --color-accent-purple: #8a63ff;
 
-  /* ===== DARK THEME (APPROVED) ===== */
-  --color-primary-text-dark: #F6F2EB;
-  --color-primary-bg-dark: #0B0B10;
-  --color-secondary-text-dark: #CFC7BB;
-  --color-secondary-bg-dark: #12121A;
-  --color-tertiary-text-dark: #9C9488;
-  --color-panel-dark: #171722;
-  --color-accent-pink-dark: #FF3AAE;
-  --color-accent-yellow-dark: #F4FF3C;
-  --color-accent-purple-dark: #8A63FF;
+  /* ===== DARK THEME ROLES (9, approved) ===== */
+  --color-primary-text-dark: var(--color-warm-cream);
+  --color-primary-bg-dark: var(--color-deepest-dark);
+  --color-secondary-text-dark: var(--color-warm-tan);
+  --color-secondary-bg-dark: var(--color-dark-purple);
+  --color-tertiary-text-dark: var(--color-warm-brown);
+  --color-panel-dark: var(--color-lighter-dark);
+  --color-accent-pink-dark: var(--color-accent-pink);
+  --color-accent-yellow-dark: var(--color-accent-yellow);
+  --color-accent-purple-dark: var(--color-accent-purple);
 
-  /* ===== LIGHT THEME (EXISTING SUPPORT, MAPPING PENDING APPROVAL) ===== */
-  /* Light theme role mapping is not approved. These values preserve existing light support. */
-  --color-primary-text-light: #0B0B10;
-  --color-primary-bg-light: #F6F2EB;
-  --color-secondary-text-light: #171722;
-  --color-secondary-bg-light: #CFC7BB;
-  --color-tertiary-text-light: #5C5248; /* WCAG AAA: 7:1 contrast; darker warm brown */
-  --color-panel-light: #F6F2EB;
-  --color-accent-pink-light: #FF3AAE;
-  --color-accent-yellow-light: #F4FF3C;
-  --color-accent-purple-light: #8A63FF;
+  /* ===== LIGHT THEME ROLES (9, ⚠️ PENDING APPROVAL) ===== */
+  /* Preserves existing light support. Role mapping is not approved.
+     ⚠️ Tertiary text uses lighter-dark because warm-brown is 2.69:1 on cream (fails AA). */
+  --color-primary-text-light: var(--color-deepest-dark);
+  --color-primary-bg-light: var(--color-warm-cream);
+  --color-secondary-text-light: var(--color-dark-purple);
+  --color-secondary-bg-light: var(--color-warm-tan);
+  --color-tertiary-text-light: var(--color-lighter-dark);
+  --color-panel-light: var(--color-warm-cream);
+  --color-accent-pink-light: var(--color-accent-pink);
+  --color-accent-yellow-light: var(--color-accent-yellow);
+  --color-accent-purple-light: var(--color-accent-purple);
 
-  /* ===== BUTTON COMPONENT ===== */
-  --button-bg-primary-dark: #FF3AAE;
-  --button-text-primary-dark: #0B0B10;
-  --button-bg-primary-light: #FF3AAE;
-  --button-text-primary-light: #0B0B10; /* WCAG AAA: 7:1 contrast with #FF3AAE */
+  /* ===== BUTTON — dark ===== */
+  --button-bg-primary-dark: var(--color-accent-pink);
+  --button-text-primary-dark: var(--color-deepest-dark);
+  --button-bg-secondary-dark: var(--color-lighter-dark);
+  --button-text-secondary-dark: var(--color-warm-cream);
+  --button-border-secondary-dark: var(--color-warm-brown);
+  --button-bg-disabled-dark: var(--color-dark-purple);
+  --button-text-disabled-dark: var(--color-warm-brown);
 
-  --button-bg-secondary-dark: #171722;
-  --button-text-secondary-dark: #F6F2EB;
-  --button-bg-secondary-light: #CFC7BB;
-  --button-text-secondary-light: #0B0B10;
+  /* ===== BUTTON — light (⚠️ pending) ===== */
+  --button-bg-primary-light: var(--color-accent-pink);
+  --button-text-primary-light: var(--color-deepest-dark);
+  --button-bg-secondary-light: var(--color-warm-tan);
+  --button-text-secondary-light: var(--color-deepest-dark);
+  --button-border-secondary-light: var(--color-lighter-dark);
+  --button-bg-disabled-light: var(--color-warm-tan);
+  --button-text-disabled-light: var(--color-warm-brown);
 
-  --button-bg-disabled-dark: #12121A;
-  --button-text-disabled-dark: #9C9488;
-  --button-bg-disabled-light: #CFC7BB;
-  --button-text-disabled-light: #9C9488;
-
-  /* ===== CARD COMPONENT ===== */
-  --card-bg-dark: #12121A;
-  --card-border-dark: #171722;
+  /* ===== CARD — dark ===== */
+  --card-bg-dark: var(--color-dark-purple);
+  --card-border-dark: var(--color-lighter-dark);
+  --card-border-hover-dark: var(--color-accent-pink);
   --card-shadow-dark: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --card-shadow-hover-dark: 0 4px 12px rgba(255, 58, 174, 0.1);
+  --card-shadow-hover-dark: 0 4px 12px rgba(255, 58, 174, 0.15);
 
-  --card-bg-light: #F6F2EB;
-  --card-border-light: #CFC7BB;
-  --card-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --card-shadow-hover-light: 0 4px 12px rgba(255, 58, 174, 0.1);
+  /* ===== CARD — light (⚠️ pending) ===== */
+  --card-bg-light: var(--color-warm-cream);
+  --card-border-light: var(--color-warm-tan);
+  --card-border-hover-light: var(--color-lighter-dark);
+  --card-shadow-light: 0 2px 8px rgba(11, 11, 16, 0.1);
+  --card-shadow-hover-light: 0 4px 12px rgba(11, 11, 16, 0.18);
 
-  /* ===== NAVIGATION COMPONENT ===== */
-  --nav-link-color-dark: #F6F2EB;
-  --nav-link-color-hover-dark: #FF3AAE;
-  --nav-link-color-active-dark: #FF3AAE;
-  --nav-underline-active-dark: #FF3AAE;
+  /* ===== NAVIGATION — shared ===== */
+  --nav-underline-thickness: 2px;
+  --nav-underline-offset: 6px;
+  --nav-focus-ring-width: 2px;
+  --nav-focus-ring-offset: 3px;
+  --nav-transition: 200ms ease;
 
-  --nav-link-color-light: #0B0B10;
-  --nav-link-color-hover-light: #FF3AAE;
-  --nav-link-color-active-light: #FF3AAE;
-  --nav-underline-active-light: #FF3AAE;
+  /* ===== NAVIGATION — dark ===== */
+  --nav-link-color-dark: var(--color-warm-cream);
+  /* Pink text is 6.05:1 on deepest (below the AAA 7:1 target). Hover/active keep cream
+     text and signal state with the pink underline and weight. */
+  --nav-link-color-hover-dark: var(--color-warm-cream);
+  --nav-link-color-active-dark: var(--color-warm-cream);
+  --nav-underline-active-dark: var(--color-accent-pink);
+  --nav-focus-ring-dark: var(--color-accent-pink);
+  --nav-surface-dark: var(--color-deepest-dark);
+  --nav-overlay-bg-dark: rgba(11, 11, 16, 0.7);
 
-  /* ===== FORM INPUT COMPONENT ===== */
-  --form-input-bg-dark: #0B0B10;
-  --form-input-border-dark: #171722;
-  --form-input-border-focused-dark: #FF3AAE;
-  --form-input-text-dark: #F6F2EB;
-  --form-input-error-border-dark: #FF3AAE;
-  --form-input-error-text-dark: #FF3AAE;
-  --form-input-placeholder-dark: #9C9488;
+  /* ===== NAVIGATION — light (⚠️ pending) ===== */
+  /* ⚠️ Pink text is 2.91:1 on cream (fails AA). Light hover/active keep dark text and
+     signal state with the underline and weight, not colour. */
+  --nav-link-color-light: var(--color-deepest-dark);
+  --nav-link-color-hover-light: var(--color-deepest-dark);
+  --nav-link-color-active-light: var(--color-deepest-dark);
+  --nav-underline-active-light: var(--color-accent-pink);
+  --nav-focus-ring-light: var(--color-deepest-dark);
+  --nav-surface-light: var(--color-warm-cream);
+  --nav-overlay-bg-light: rgba(11, 11, 16, 0.5);
 
-  --form-input-bg-light: #F6F2EB;
-  --form-input-border-light: #CFC7BB;
-  --form-input-border-focused-light: #FF3AAE;
-  --form-input-text-light: #0B0B10;
-  --form-input-error-border-light: #FF3AAE;
-  --form-input-error-text-light: #C4005E; /* WCAG AAA: 7:1 contrast; darker pink */
-  --form-input-placeholder-light: #5C5248; /* WCAG AAA: 7:1 contrast; matches tertiary-text-light */
+  /* ===== FORM INPUT — dark ===== */
+  /* Border uses warm-brown (5.93:1 on the input fill) to meet WCAG 1.4.11 (3:1). */
+  --form-input-bg-dark: var(--color-lighter-dark);
+  --form-input-border-dark: var(--color-warm-brown);
+  --form-input-border-focused-dark: var(--color-accent-pink);
+  --form-input-text-dark: var(--color-warm-cream);
+  --form-input-error-border-dark: var(--color-accent-pink);
+  --form-input-error-text-dark: var(--color-accent-pink);
+  /* Placeholder: 10.61:1 on the input fill (AAA). */
+  --form-input-placeholder-dark: var(--color-warm-tan);
+
+  /* ===== FORM INPUT — light (⚠️ pending) ===== */
+  /* ⚠️ No on-palette pink passes AA as text on cream; error text uses deepest-dark
+     and relies on the error icon and message. Placeholder uses lighter-dark (15.92:1, AAA). */
+  --form-input-bg-light: var(--color-warm-cream);
+  --form-input-border-light: var(--color-lighter-dark);
+  --form-input-border-focused-light: var(--color-accent-purple);
+  --form-input-text-light: var(--color-deepest-dark);
+  --form-input-error-border-light: var(--color-accent-pink);
+  --form-input-error-text-light: var(--color-deepest-dark);
+  --form-input-placeholder-light: var(--color-lighter-dark);
 }
 
-/* ===== THEME SWITCHING ===== */
-/* Prefer dark theme by default */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --font-current: var(--font-body);
-    --color-primary-text: var(--color-primary-text-dark);
-    --color-primary-bg: var(--color-primary-bg-dark);
-    --color-secondary-text: var(--color-secondary-text-dark);
-    --color-secondary-bg: var(--color-secondary-bg-dark);
-    --button-bg-primary: var(--button-bg-primary-dark);
-    --button-text-primary: var(--button-text-primary-dark);
-  }
+/* ===== ACTIVE ALIASES — dark (default) =====
+   Components consume these unsuffixed names (contract naming). */
+:root {
+  color-scheme: dark;
+
+  --color-primary-text: var(--color-primary-text-dark);
+  --color-primary-bg: var(--color-primary-bg-dark);
+  --color-secondary-text: var(--color-secondary-text-dark);
+  --color-secondary-bg: var(--color-secondary-bg-dark);
+  --color-tertiary-text: var(--color-tertiary-text-dark);
+  --color-panel: var(--color-panel-dark);
+
+  --button-bg-primary: var(--button-bg-primary-dark);
+  --button-text-primary: var(--button-text-primary-dark);
+  --button-bg-secondary: var(--button-bg-secondary-dark);
+  --button-text-secondary: var(--button-text-secondary-dark);
+  --button-border-secondary: var(--button-border-secondary-dark);
+  --button-bg-disabled: var(--button-bg-disabled-dark);
+  --button-text-disabled: var(--button-text-disabled-dark);
+
+  --card-bg: var(--card-bg-dark);
+  --card-border: var(--card-border-dark);
+  --card-border-hover: var(--card-border-hover-dark);
+  --card-shadow: var(--card-shadow-dark);
+  --card-shadow-hover: var(--card-shadow-hover-dark);
+
+  --nav-link-color: var(--nav-link-color-dark);
+  --nav-link-color-hover: var(--nav-link-color-hover-dark);
+  --nav-link-color-active: var(--nav-link-color-active-dark);
+  --nav-underline-active: var(--nav-underline-active-dark);
+  --nav-focus-ring: var(--nav-focus-ring-dark);
+  --nav-surface: var(--nav-surface-dark);
+  --nav-overlay-bg: var(--nav-overlay-bg-dark);
+
+  --form-input-bg: var(--form-input-bg-dark);
+  --form-input-border: var(--form-input-border-dark);
+  --form-input-border-focused: var(--form-input-border-focused-dark);
+  --form-input-text: var(--form-input-text-dark);
+  --form-input-error-border: var(--form-input-error-border-dark);
+  --form-input-error-text: var(--form-input-error-text-dark);
+  --form-input-placeholder: var(--form-input-placeholder-dark);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-primary-text: var(--color-primary-text-light);
-    --color-primary-bg: var(--color-primary-bg-light);
-    --color-secondary-text: var(--color-secondary-text-light);
-    --color-secondary-bg: var(--color-secondary-bg-light);
-    --button-bg-primary: var(--button-bg-primary-light);
-    --button-text-primary: var(--button-text-primary-light);
-  }
+/* ===== ACTIVE ALIASES — light (⚠️ pending; saved preference only) ===== */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-primary-text: var(--color-primary-text-light);
+  --color-primary-bg: var(--color-primary-bg-light);
+  --color-secondary-text: var(--color-secondary-text-light);
+  --color-secondary-bg: var(--color-secondary-bg-light);
+  --color-tertiary-text: var(--color-tertiary-text-light);
+  --color-panel: var(--color-panel-light);
+
+  --button-bg-primary: var(--button-bg-primary-light);
+  --button-text-primary: var(--button-text-primary-light);
+  --button-bg-secondary: var(--button-bg-secondary-light);
+  --button-text-secondary: var(--button-text-secondary-light);
+  --button-border-secondary: var(--button-border-secondary-light);
+  --button-bg-disabled: var(--button-bg-disabled-light);
+  --button-text-disabled: var(--button-text-disabled-light);
+
+  --card-bg: var(--card-bg-light);
+  --card-border: var(--card-border-light);
+  --card-border-hover: var(--card-border-hover-light);
+  --card-shadow: var(--card-shadow-light);
+  --card-shadow-hover: var(--card-shadow-hover-light);
+
+  --nav-link-color: var(--nav-link-color-light);
+  --nav-link-color-hover: var(--nav-link-color-hover-light);
+  --nav-link-color-active: var(--nav-link-color-active-light);
+  --nav-underline-active: var(--nav-underline-active-light);
+  --nav-focus-ring: var(--nav-focus-ring-light);
+  --nav-surface: var(--nav-surface-light);
+  --nav-overlay-bg: var(--nav-overlay-bg-light);
+
+  --form-input-bg: var(--form-input-bg-light);
+  --form-input-border: var(--form-input-border-light);
+  --form-input-border-focused: var(--form-input-border-focused-light);
+  --form-input-text: var(--form-input-text-light);
+  --form-input-error-border: var(--form-input-error-border-light);
+  --form-input-error-text: var(--form-input-error-text-light);
+  --form-input-placeholder: var(--form-input-placeholder-light);
 }
 
-/* ===== UNAPPROVED CANDIDATES ===== */
-/* The following are explicitly NOT defined and remain unapproved:
-   - R3: Responsive Typography
-   - T1: Additional Typography
-   - RT2: Reader Typography Controls
-   - C1: Reader Continuity/Progress Tracking
+/* ===== UNAPPROVED CANDIDATES — intentionally absent =====
+   R3  Responsive typography (no clamp()/fluid sizes defined)
+   T1  Additional typography
+   RT2 Reader typography controls
+   C1  Reader continuity / progress tracking
 */

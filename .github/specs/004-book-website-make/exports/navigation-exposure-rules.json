@@ -1,0 +1,170 @@
+{
+  "metadata": {
+    "prompt": "1",
+    "name": "Navigation Exposure Rules",
+    "generated": "2026-11-20",
+    "executionModel": "SC-004 Claude direct execution",
+    "decision7": "Option A",
+    "authority": [
+      "references/03-author-decisions-launch-scope.md v1.3.0",
+      "references/02-companion-session-plan.md WP-02",
+      "contracts/prompt-1-navigation-exposure.md"
+    ],
+    "implementationAuthorised": false
+  },
+  "retainedHiddenRoutes": [
+    {
+      "path": "/speaking",
+      "component": "SpeakingWorkshopsPage",
+      "routeRegistered": true,
+      "publiclyAccessible": true,
+      "menu": "remove",
+      "footer": "remove",
+      "htmlSitemap": "omit",
+      "xmlSitemap": "exclude",
+      "robotsDirective": "noindex, nofollow",
+      "headerPatterns": ["/speaking", "/speaking/*"]
+    },
+    {
+      "path": "/events",
+      "component": "EventsPage",
+      "routeRegistered": true,
+      "publiclyAccessible": true,
+      "menu": "remove",
+      "footer": "remove",
+      "htmlSitemap": "omit",
+      "xmlSitemap": "exclude",
+      "robotsDirective": "noindex, nofollow",
+      "headerPatterns": ["/events", "/events/*"]
+    },
+    {
+      "path": "/media",
+      "component": "MediaPressPage",
+      "routeRegistered": true,
+      "publiclyAccessible": true,
+      "menu": "remove",
+      "footer": "remove",
+      "htmlSitemap": "omit",
+      "xmlSitemap": "exclude",
+      "robotsDirective": "noindex, nofollow",
+      "headerPatterns": ["/media", "/media/*"]
+    }
+  ],
+  "menu": {
+    "source": "src/app/data/mock/book-site.ts#bookSiteData.nav",
+    "before": [
+      { "label": "Home", "href": "/" },
+      { "label": "The Book", "href": "/the-book" },
+      { "label": "Read the Draft", "href": "/read-the-draft" },
+      { "label": "About Ash", "href": "/about-ash" },
+      { "label": "Journal", "href": "/journal" },
+      { "label": "Events", "href": "/events" },
+      { "label": "Speaking", "href": "/speaking" },
+      { "label": "Media", "href": "/media" },
+      { "label": "Contact", "href": "/contact" },
+      { "label": "Waitlist", "href": "/waitlist" },
+      { "label": "Search", "href": "/search" }
+    ],
+    "after": [
+      { "label": "Home", "href": "/" },
+      { "label": "The Book", "href": "/the-book" },
+      { "label": "Read the Draft", "href": "/read-the-draft" },
+      { "label": "About Ash", "href": "/about-ash" },
+      { "label": "Journal", "href": "/journal" },
+      { "label": "Contact", "href": "/contact" },
+      { "label": "Waitlist", "href": "/waitlist" },
+      { "label": "Search", "href": "/search" }
+    ]
+  },
+  "footer": {
+    "source": "src/app/data/mock/book-site.ts#bookSiteData.footerGroups",
+    "changedGroup": "Author & Press",
+    "headingPreserved": true,
+    "before": [
+      { "label": "About Ash", "href": "/about-ash" },
+      { "label": "Speaking & Workshops", "href": "/speaking" },
+      { "label": "Events", "href": "/events" },
+      { "label": "Media & Press", "href": "/media" },
+      { "label": "Contact", "href": "/contact" }
+    ],
+    "after": [
+      { "label": "About Ash", "href": "/about-ash" },
+      { "label": "Contact", "href": "/contact" }
+    ]
+  },
+  "htmlSitemap": {
+    "source": "src/app/components/pages/SitemapPage.tsx#bookPages",
+    "omit": ["/events", "/speaking", "/media", "/thank-you", "/style-guide"],
+    "withhold": ["/draft-viewer", "/ebook"],
+    "retain": [
+      "/",
+      "/the-book",
+      "/read-the-draft",
+      "/about-ash",
+      "/waitlist",
+      "/journal",
+      "/contact",
+      "/sitemap"
+    ]
+  },
+  "xmlSitemap": {
+    "source": "public/sitemap.xml",
+    "origin": "https://ashshaw.com",
+    "remove": ["/events", "/speaking", "/media"],
+    "after": [
+      "/",
+      "/the-book",
+      "/ebook",
+      "/about-ash",
+      "/journal",
+      "/contact",
+      "/waitlist"
+    ]
+  },
+  "robotsTxt": {
+    "source": "public/robots.txt",
+    "change": "none",
+    "addDisallow": false,
+    "reason": "A Disallow rule stops crawlers fetching the page, so they cannot read its noindex directive."
+  },
+  "noindexDelivery": {
+    "httpHeader": {
+      "file": "netlify.toml",
+      "header": "X-Robots-Tag",
+      "value": "noindex, nofollow",
+      "priority": "primary"
+    },
+    "metaTag": {
+      "file": "src/app/utils/seo.ts",
+      "field": "SEOData.robots",
+      "resetWhenOmitted": true,
+      "priority": "in-page"
+    }
+  },
+  "conflicts": [
+    {
+      "id": "C1-1",
+      "summary": "Contract paths /about and /book do not exist; real paths are /about-ash and /the-book."
+    },
+    {
+      "id": "C1-2",
+      "summary": "Contract 4-item menu conflicts with CR-1.5 and WP-02; 8-item result applied."
+    },
+    {
+      "id": "C1-3",
+      "summary": "robots.txt Disallow would block noindex discovery; not used."
+    },
+    {
+      "id": "C1-4",
+      "summary": "Sitemap and robots.txt use the ashshaw.com origin; canonical origin is a separate decision."
+    },
+    {
+      "id": "C1-5",
+      "summary": "/ebook exposure unresolved; left in XML sitemap, withheld from HTML sitemap."
+    },
+    {
+      "id": "C1-6",
+      "summary": "navigation-specification.md uses non-existent routes; superseded."
+    }
+  ]
+}
