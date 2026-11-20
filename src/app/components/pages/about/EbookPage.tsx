@@ -57,7 +57,7 @@ import {
 import { PageContent } from './ebook/EbookPageContent';
 import { EbookDrawer } from './ebook/EbookDrawer';
 import { EbookReaderNav } from './ebook/EbookReaderNav';
-import { ReaderAccessForm } from './ebook/ReaderAccessForm';
+import { ReaderAccessGate } from './ReaderAccessGate';
 
 import '../../../../styles/blocks/ebook-base.css';
 import '../../../../styles/blocks/ebook-navigation.css';
