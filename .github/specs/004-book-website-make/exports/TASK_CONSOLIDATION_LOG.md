@@ -3,7 +3,14 @@
 **Date**: 2026-11-20  
 **Phase**: 9 Convergence (T067)  
 **Scope**: Task list reconciliation after Spec 005 handover  
-**Status**: Consolidation complete
+**Status**: Duplicate IDs resolved 2026-11-20 (tasks.md T075)
+
+
+> **Update (Phase 9 reconciliation, 2026-11-20)**: The duplicates went further than T025–T027. `tasks.md` held two full task breakdowns, so **every** ID from T014 to T038 appeared twice. Resolution, with no tasks merged:
+> - The active SC-004 breakdown keeps T001–T038. The handover table below and `research.md` refer to these IDs
+> - The original v1.0.0 breakdown (2026-11-09) is renumbered T114–T151 (+100). T101–T113 were removed in an earlier rewrite and survive only as Phase 8 dependency IDs (text in git `e316aaf`)
+> - Phase 8 dependencies are repointed: T052 → T107/T110, T053 → T120, T054 → T121/T122/T123, T056 → T107, T057 → T110
+> - See the "Task ID scheme" section at the top of `tasks.md`
 
 ---
 

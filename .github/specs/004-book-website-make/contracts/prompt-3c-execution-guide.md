@@ -5,6 +5,9 @@
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Dependencies**: Prompt 3A (Reader Access Copy & Forms) — Provides form baseline
 
+> ⚠️ **Colour values superseded (Phase 9 reconciliation, 2026-11-20)**: hex values in this guide that are not in the approved 9-colour baseline (for example `#1a1a1a`, `#ffffff`, `#e8d4b8`, `#d4a574`, `#8b0000`, `#ff6b6b`, `#666666`, `#cccccc`) come from an early draft. Do not use them. Use the baseline tokens in [`exports/design-tokens.json`](../exports/design-tokens.json) instead. Error states use `errorBorder*` / `errorText*` (`#FF3AAE`; light-theme text `#C4005E`); surfaces and text use the baseline primitives. Spec 005 owns this contract and must confirm any success, warning or error colour that has no baseline token.
+
+
 ---
 
 ## Executive Summary

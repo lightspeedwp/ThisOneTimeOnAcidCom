@@ -180,7 +180,7 @@ Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documen
 
 - **SC-001**: All six source files are retrieved and analyzed; version reconciliation is documented with zero silent merges (100% reconciliation coverage)
 - **SC-002**: Exact Prompt 1 preview includes all four elements: before/after navigation structure, numbered list of implementation steps (file/component changes), acceptance criteria, and 2–3 bullet points describing non-changes
-- **SC-003**: Exact Prompts 2A, 2B, 3A are 95%+ complete specifications (missing only user decisions on blocked prerequisites, not missing core content); Prompt 2A exports both CSS variables (`.css` with custom properties) and JSON design tokens for full design-system coverage
+- **SC-003** *(revised 2026-11-19, see [SC-003 scope change](./exports/SC-003_SCOPE_CHANGE_PROPOSAL.md))*: Exact Prompts 1, 2A and 2B are each 95%+ complete specifications. Prompt 3A moved to [Spec 005](../005-reader-access/spec.md). *Originally: Prompts 2A, 2B, 3A* (missing only user decisions on blocked prerequisites, not missing core content); Prompt 2A exports both CSS variables (`.css` with custom properties) and JSON design tokens for full design-system coverage
 - **SC-004**: All blocking decisions are identified and presented with specific options (3+ options per decision with impact assessment) before user approval
 - **SC-005**: Zero implementation code generated; zero commits created; zero deployments executed; 100% documentation-only until explicit user approval for implementation phase
 - **SC-006**: Complete documentation package includes blocking decision matrix, source inventory, version reconciliation, and decision-routing plan
@@ -196,14 +196,15 @@ Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documen
 - **Design Baseline Approval**: Space Grotesk headings, Inter body/UI, 9-color palette (both themes) are locked and require no changes during preflight
 - **Blocking Decisions**: ✅ ALL 7 decisions **RESOLVED** (2026-11-13):
   - Recovery-first race: **Option A** (Recovery takes precedence)
-  - Recovery lifetime: **Option A** (30-day absolute expiry + session refresh)
+  - Recovery lifetime: **Option A** (session refresh with absolute 30-day expiry)
   - Code expiry start: **Option A** (From code generation)
-  - Email provider: **Hybrid** (SendGrid transactional + Brevo newsletter)
+  - Email provider: **Hybrid** (Brevo newsletter + transactional SMTP). *Superseded 2026-11-19 in Spec 005: Mailgun for transactional SMTP (see `exports/GATE_3_FINAL_SIGN_OFF.md`)*
   - Manuscript readiness: **Early release** (Build screens now; chapters as approved)
   - Newsletter destination: **Brevo** (External signup link)
   - Route enforcement: **Option A** (Noindex meta tags + sitemap exclusion)
 - **Implementation Timing**: This spec prepares documentation only; no actual implementation, Figma Make execution, or deployment occurs until separate approval
-- **Figma Make Environment**: Make environment exists and is operational; prompts can be executed once unblocked and approved (readiness verification deferred to implementation phase)
+- **Execution Environment** *(SC-004, approved 2026-11-20)*: Claude carries out Prompts 1, 2A and 2B directly. Figma Make is deprecated and no Make environment is needed. See [SC-004](./exports/SC-004_EXECUTION_MODEL_PIVOT.md)
+- **Scope (SC-003, approved 2026-11-19)**: Spec 004 covers Prompts 1, 2A and 2B only. Prompts 3A–3C and reader-access decisions belong to [Spec 005](../005-reader-access/spec.md) (see [handover](./exports/SPEC_004_TO_005_HANDOVER.md)). The SC-003 completeness threshold (≥95% per prompt) applies to Prompts 1, 2A and 2B
 - **Newsletter Integration**: Newsletter service (Brevo or alternative) will be selected separately; copy and mechanics are placeholders in this spec
 - **Reader Access Provider**: Email service and manuscript-delivery mechanism will be confirmed separately; specifications reference generic "email service" and "verified access" without provider detail
 

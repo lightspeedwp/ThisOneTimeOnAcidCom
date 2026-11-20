@@ -10,6 +10,23 @@
 
 ---
 
+## Task ID scheme (Phase 9 reconciliation, 2026-11-20)
+
+This file holds two task breakdowns. Until 2026-11-20 they shared the IDs T014–T038, so a reference to "T020" or "T022" was ambiguous. Each task now has a unique ID. No tasks were merged and no descriptions changed.
+
+| ID range | Breakdown | Where | Notes |
+| -------- | --------- | ----- | ----- |
+| T001–T038 (plus T001b) | Active breakdown, rewritten for SC-004 Claude direct execution | "Phase 1: Gate 2 & SC-004 Approval" to "Phase 6: Polish & Post-Gate 2 Validation" | IDs unchanged. `exports/SPEC_004_TO_005_HANDOVER.md` and `research.md` refer to these IDs |
+| T114–T151 | Original v1.0.0 breakdown (2026-11-09) | "Legacy breakdown" section | Renumbered from T014–T051 by adding 100. Phase 8 dependencies point here |
+| T101–T113 | Original v1.0.0 Phase 1–2 tasks | Not in this file | Removed during the SC-004 rewrite. Text is in git history (commit `e316aaf`). Only the IDs survive, as Phase 8 dependencies |
+| T052–T059 | Phase 8 convergence | "Phase 8" | Dependencies repointed to T1xx where they meant the original breakdown |
+| T066–T074 | Phase 9 closure | "Phase 9" | Closed or carried forward in the reconciliation pass |
+| T075–T084 | Phase 9 reconciliation | "Phase 9 Reconciliation" | This pass |
+
+The continuation documents in `continuations/` (archived) used their own T060–T074 numbering. They are mapped to these IDs in the "Phase 9 Reconciliation" section.
+
+---
+
 ## Format: `[ID] [P?] [Story] Description`
 
 - **[P]**: Can run in parallel (independent workflows, different decision owners)
@@ -73,14 +90,16 @@
 
 ### Tests for US2
 
-- [ ] T012 [US2] Validate Prompt 3A preview: form explanation copy, error messages, newsletter CTA in separate section (`contracts/prompt-3a-reader-access.md`)
-- [ ] T013 [US2] Confirm all form states designed: default, focused, error, loading, success (verify no hardcoded copy differs from approved source)
+> **Handed over to Spec 005 (2026-11-13)**: Phase 3 (T012–T016) covers Prompt 3A, which [Spec 005](../005-reader-access/spec.md) now owns. See `exports/SPEC_004_TO_005_HANDOVER.md`. These tasks stay open here as a record; they will not be done in Spec 004.
+
+- [ ] T012 [US2] Validate Prompt 3A preview: form explanation copy, error messages, newsletter CTA in separate section (`contracts/prompt-3a-reader-access.md`) — **MOVED_TO_SPEC_005**
+- [ ] T013 [US2] Confirm all form states designed: default, focused, error, loading, success (verify no hardcoded copy differs from approved source) — **MOVED_TO_SPEC_005**
 
 ### Implementation for US2 (Claude Direct Execution — SC-004 approved)
 
-- [ ] T014 [US2] Review Prompt 3A contract with blocking decision status (awaits Decisions 3, 4, 5, 6: code expiry timing, email provider, manuscript status, newsletter destination)
-- [ ] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) via Claude ~~(Figma Make)~~ (produce form specification + email template + error message matrix)
-- [ ] T016 [US2] Validate Prompt 3A specification: approved copy present, form states documented, newsletter link explicit non-subscription statement (manual review from `contracts/prompt-3a-reader-access.md`)
+- [ ] T014 [US2] Review Prompt 3A contract with blocking decision status (awaits Decisions 3, 4, 5, 6: code expiry timing, email provider, manuscript status, newsletter destination) — **MOVED_TO_SPEC_005**
+- [ ] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) via Claude ~~(Figma Make)~~ (produce form specification + email template + error message matrix) — **MOVED_TO_SPEC_005**
+- [ ] T016 [US2] Validate Prompt 3A specification: approved copy present, form states documented, newsletter link explicit non-subscription statement (manual review from `contracts/prompt-3a-reader-access.md`) — **MOVED_TO_SPEC_005**
 
 **Checkpoint**: US2 (Reader Access) awaits decision resolution before execution
 
@@ -103,18 +122,20 @@
 
 **Timeline**: 4–6 hours for decisions + clarification
 
-- [ ] T019 [P] [US3] **Decision 1 (Recovery-first race condition)**: Clarify with Ash: when recovery and fresh verification race, which takes precedence? Options: A (recovery first), B (fresh first), C (last-writer-wins), D (user chooses). Update `research.md` with chosen option
-- [ ] T020 [P] [US3] **Decision 2 (Recovery lifetime eligibility)**: Clarify with Ash: how long is recovery code valid? Options: 24h, 7d, 30d. Update `research.md`
-- [ ] T021 [P] [US3] **Decision 3 (Code expiry start time)**: Clarify with product lead: from code generation? receipt? page load? Options: A (generation), B (receipt), C (page load). Update `research.md`
-- [ ] T022 [P] [US3] **Decision 4 (Email service provider)**: Clarify with tech lead: SendGrid or Brevo? API/SMTP availability? Update `research.md`
-- [ ] T023 [P] [US3] **Decision 5 (Manuscript publication readiness)**: Clarify with author: when is manuscript approved & available for readers? Draft timeline: 2027-01-31. Update `research.md` with status
-- [ ] T024 [P] [US3] **Decision 6 (Newsletter destination)**: Clarify with product: Brevo signup link or other service? Update `research.md`
+> **Resolved 2026-11-13**: Ash selected options for all seven decisions. See `exports/decisions-selected.md` and `research.md`. T019 and T021–T024 are closed. T020 (Decision 2) is closed for Spec 004 with Option A, which is now labelled "session refresh with absolute 30-day expiry". Whether that interacts with repeated renewal is a Spec 005 question; `exports/GATE_3_FINAL_SIGN_OFF.md` marks it ⏳ PARTIAL.
+
+- [x] T019 [P] [US3] **Decision 1 (Recovery-first race condition)**: Clarify with Ash: when recovery and fresh verification race, which takes precedence? Options: A (recovery first), B (fresh first), C (last-writer-wins), D (user chooses). Update `research.md` with chosen option — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [x] T020 [P] [US3] **Decision 2 (Recovery lifetime eligibility)**: Clarify with Ash: how long is recovery code valid? Options: 24h, 7d, 30d. Update `research.md` — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [x] T021 [P] [US3] **Decision 3 (Code expiry start time)**: Clarify with product lead: from code generation? receipt? page load? Options: A (generation), B (receipt), C (page load). Update `research.md` — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [x] T022 [P] [US3] **Decision 4 (Email service provider)**: Clarify with tech lead: SendGrid or Brevo? API/SMTP availability? Update `research.md` — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [x] T023 [P] [US3] **Decision 5 (Manuscript publication readiness)**: Clarify with author: when is manuscript approved & available for readers? Draft timeline: 2027-01-31. Update `research.md` with status — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [x] T024 [P] [US3] **Decision 6 (Newsletter destination)**: Clarify with product: Brevo signup link or other service? Update `research.md` — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
 
 ### Implementation for US3 (Claude Direct Execution — SC-004 approved; after Decision Resolution)
 
-- [ ] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) via Claude ~~(Figma Make)~~ (produce recovery state matrix + error handling spec)
-- [ ] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) via Claude ~~(Figma Make)~~ (produce error message matrix + timeout handling spec)
-- [ ] T027 [US3] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions (manual review from `contracts/`)
+- [ ] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) via Claude ~~(Figma Make)~~ (produce recovery state matrix + error handling spec) — **MOVED_TO_SPEC_005**
+- [ ] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) via Claude ~~(Figma Make)~~ (produce error message matrix + timeout handling spec) — **MOVED_TO_SPEC_005**
+- [ ] T027 [US3] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions (manual review from `contracts/`) — **MOVED_TO_SPEC_005**
 
 **Checkpoint**: All blocking decisions resolved - Phase B execution unblocked
 
@@ -269,7 +290,14 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 - **US2 (Reader Access)**: Prompt 3A awaiting 4 decisions; executable once decisions resolved ⏳
 - **US3 (Implementation Readiness)**: All 7 decisions clarified and documented ⏳
 - **US4 (Documentation Completion)**: Complete package submitted for user approval ✅
-- [ ] T014 Prepare Approval Gate 1 summary in quickstart.md: "All 7 decisions ready for user selection" with links to research.md decision options
+
+---
+
+## Legacy breakdown: original v1.0.0 task list (2026-11-09), renumbered T1xx
+
+> These are the original tasks from 2026-11-09, renumbered by adding 100 (T014 → T114 and so on) on 2026-11-20 to remove duplicate IDs. Phase 8 dependencies refer to this list. Tasks T101–T113 are not in this file; see the "Task ID scheme" section at the top.
+
+- [ ] T114 Prepare Approval Gate 1 summary in quickstart.md: "All 7 decisions ready for user selection" with links to research.md decision options
 
 **Checkpoint**: Approval Gate 1 prerequisites documented and ready for user approval
 
@@ -289,22 +317,22 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 **Implementation Tasks**:
 
-- [ ] T015 [P] [US1] Read contracts/prompt-2a-design-baseline.md and validate all typography specifications match 04-design-brief.md v1.1.2
-- [ ] T016 [P] [US1] Read contracts/prompt-2a-design-baseline.md and validate all color specifications match approved palette (9 light + 9 dark)
-- [ ] T017 [P] [US1] Read contracts/prompt-1-navigation-exposure.md and validate navigation structure matches 03-author-decisions-launch-scope.md (hidden: Speaking, Events, Media)
-- [ ] T018 [P] [US1] Read contracts/prompt-2b-navigation-design.md and document all navigation states (default, hover, active, mobile, tablet, desktop)
-- [ ] T019 [US1] Create design-baseline-validation.md in `.github/specs/004-book-website-make/exports/` documenting:
+- [ ] T115 [P] [US1] Read contracts/prompt-2a-design-baseline.md and validate all typography specifications match 04-design-brief.md v1.1.2
+- [ ] T116 [P] [US1] Read contracts/prompt-2a-design-baseline.md and validate all color specifications match approved palette (9 light + 9 dark)
+- [ ] T117 [P] [US1] Read contracts/prompt-1-navigation-exposure.md and validate navigation structure matches 03-author-decisions-launch-scope.md (hidden: Speaking, Events, Media)
+- [ ] T118 [P] [US1] Read contracts/prompt-2b-navigation-design.md and document all navigation states (default, hover, active, mobile, tablet, desktop)
+- [x] T119 [US1] Create design-baseline-validation.md in `.github/specs/004-book-website-make/exports/` documenting: — ✅ file exists in `exports/` (verified 2026-11-20)
   - All typography tokens extracted
   - All color tokens extracted (with hex values)
   - All component styles specified (Button, Card, Navigation, Form)
   - All states rendered (default, focused, error, loading, success)
   - Unapproved candidates listed separately: R3, T1, RT2, C1
-- [ ] T020 [US1] Create navigation-specification.md in `.github/specs/004-book-website-make/exports/` documenting:
+- [x] T120 [US1] Create navigation-specification.md in `.github/specs/004-book-website-make/exports/` documenting: — ✅ file exists in `exports/` (verified 2026-11-20)
   - Visible items: Home, About, Book, Contact
   - Hidden items: Speaking, Events, Media (not in sitemap)
   - All responsive breakpoints: desktop (≥1024px), tablet (768–1023px), mobile (<768px)
   - Mobile drawer interaction and overlay behavior
-- [ ] T021 [US1] Create design-baseline-acceptance-report.md in `.github/specs/004-book-website-make/exports/` with CR-2A.1 through CR-2A.6 validation results:
+- [x] T121 [US1] Create design-baseline-acceptance-report.md in `.github/specs/004-book-website-make/exports/` with CR-2A.1 through CR-2A.6 validation results: — ✅ file exists in `exports/` (verified 2026-11-20)
   - CR-2A.1: Exported tokens match exactly approved baseline values
   - CR-2A.2: Typography includes Space Grotesk and Inter with exact weights/sizes
   - CR-2A.3: Colors all 9 exported for light theme, all 9 for dark theme
@@ -318,6 +346,8 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 ## Phase 4: User Story 2 — Reader Access Journey Definition (P1)
 
+> **Handed over to Spec 005 (2026-11-13)**: T122–T124 and T127–T130 cover Prompt 3A reader access, which Spec 005 owns. T125–T126 (navigation, Prompts 1 and 2B) stay in Spec 004 scope.
+
 **Goal**: Document and prepare for export of email verification copy, form specifications, and error messaging (4 unblocked prompts: 1, 2B, 3A)
 
 **Independent Test Criteria**:
@@ -330,31 +360,31 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 **Implementation Tasks**:
 
-- [ ] T022 [P] [US2] Read contracts/prompt-3a-reader-access.md and extract email copy section → confirm it matches the wording Ash approved on 2026-11-13 (recorded in that contract) exactly
-- [ ] T023 [P] [US2] Read contracts/prompt-3a-reader-access.md and document all form states: email entry form, code entry form, success state
-- [ ] T024 [P] [US2] Read contracts/prompt-3c-error-states.md (blocked) and extract planned error messages (5 scenarios: invalid, expired, rate-limited, server, session-conflict)
-- [ ] T025 [P] [US2] Read contracts/prompt-1-navigation-exposure.md and document navigation changes (4 visible links, no /speaking /events /media)
-- [ ] T026 [P] [US2] Read contracts/prompt-2b-navigation-design.md and document navigation component states and responsive behavior
-- [ ] T027 [US2] Create reader-access-copy.md in `.github/specs/004-book-website-make/exports/` documenting:
+- [ ] T122 [P] [US2] Read contracts/prompt-3a-reader-access.md and extract email copy section → confirm it matches the wording Ash approved on 2026-11-13 (recorded in that contract) exactly
+- [ ] T123 [P] [US2] Read contracts/prompt-3a-reader-access.md and document all form states: email entry form, code entry form, success state
+- [ ] T124 [P] [US2] Read contracts/prompt-3c-error-states.md (blocked) and extract planned error messages (5 scenarios: invalid, expired, rate-limited, server, session-conflict)
+- [ ] T125 [P] [US2] Read contracts/prompt-1-navigation-exposure.md and document navigation changes (4 visible links, no /speaking /events /media)
+- [ ] T126 [P] [US2] Read contracts/prompt-2b-navigation-design.md and document navigation component states and responsive behavior
+- [ ] T127 [US2] Create reader-access-copy.md in `.github/specs/004-book-website-make/exports/` documenting:
   - Email subject: "Your reading code"
   - Email body: exact copy approved by Ash on 2026-11-13 (see contracts/prompt-3a-reader-access.md; no modifications)
   - Email footer: newsletter signup link info
   - Form labels and placeholders (email entry: "you@example.com", code entry: "XXXXXX")
   - Help text: "We'll email you a 10-minute code. No subscription required."
-- [ ] T028 [US2] Create form-states-specification.md in `.github/specs/004-book-website-make/exports/` documenting:
+- [ ] T128 [US2] Create form-states-specification.md in `.github/specs/004-book-website-make/exports/` documenting:
   - Email entry form: default, focused, error, loading states
   - Code entry form: default, focused, error, loading, success states
   - Success message: "Access confirmed. You can now read."
   - Error states: invalid code, code expired, rate limited, server error, session conflict
   - All states documented with visual specifications (border color, text color, icons)
-- [ ] T029 [US2] Create newsletter-specification.md in `.github/specs/004-book-website-make/exports/` documenting:
+- [ ] T129 [US2] Create newsletter-specification.md in `.github/specs/004-book-website-make/exports/` documenting:
   - Newsletter CTA section separate from reader access form
   - Heading: "Stay Updated"
   - Copy: "Join our newsletter for book updates (optional)."
   - Link text: "Sign up" or "Learn more" or "Subscribe"
   - REQUIRED: Explicitly states "This is separate from reading access. Uncheck to read without subscribing."
   - Newsletter link destination: [Decision 6 selection pending]
-- [ ] T030 [US2] Create reader-access-acceptance-report.md in `.github/specs/004-book-website-make/exports/` with CR-3A.1 through CR-3A.8 validation results:
+- [ ] T130 [US2] Create reader-access-acceptance-report.md in `.github/specs/004-book-website-make/exports/` with CR-3A.1 through CR-3A.8 validation results:
   - CR-3A.1: Email copy matches approved source exactly
   - CR-3A.2: All form states designed (default, focused, error, loading, success)
   - CR-3A.3: Error messages distinguish failure scenarios (invalid, expired, rate-limited, server, session-conflict)
@@ -370,6 +400,8 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 ## Phase 5: User Story 3 — Recovery Flows & Error Handling (P1 → BLOCKED)
 
+> **Handed over to Spec 005 (2026-11-13)**: Prompts 3B and 3C belong to [Spec 005](../005-reader-access/spec.md). T131–T133 are closed because the decisions were made. T134–T138 stay open here as a record only.
+
 **Goal**: Document recovery flow specification and error states (2 blocked prompts: 3B partial, 3C). **BLOCKED** pending Decisions 1, 2, 3 resolution.
 
 **Blocking Dependencies**:
@@ -379,20 +411,20 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 **Implementation Tasks** (deferred until decisions resolved):
 
-- [ ] T031 [BLOCKED] [US3] Await user selection of Decision 1 (recovery-first race condition options A/B/C/D) in Approval Gate 1
-- [ ] T032 [BLOCKED] [US3] Await user selection of Decision 2 (recovery lifetime eligibility options A/B/C/D) in Approval Gate 1
-- [ ] T033 [BLOCKED] [US3] Await user selection of Decision 3 (code expiry start time options A/B/C) in Approval Gate 1
-- [ ] T034 [US3] Once Decision 1 resolved: read contracts/prompt-3b-recovery-flows.md and update with Decision 1 selection → generate recovery-flow-specification.md
-- [ ] T035 [US3] Once Decision 2 resolved: read contracts/prompt-3b-recovery-flows.md and update with Decision 2 selection → append to recovery-flow-specification.md
-- [ ] T036 [US3] Once Decision 3 resolved: read contracts/prompt-3c-error-states.md and update with Decision 3 selection → generate error-states-specification.md with exact expiry messaging
-- [ ] T037 [US3] Create recovery-flows-acceptance-report.md in `.github/specs/004-book-website-make/exports/` with CR-3B.1 through CR-3B.6 validation results (post-decision):
+- [x] T131 ~~[BLOCKED]~~ [US3] Await user selection of Decision 1 (recovery-first race condition options A/B/C/D) in Approval Gate 1 — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [x] T132 ~~[BLOCKED]~~ [US3] Await user selection of Decision 2 (recovery lifetime eligibility options A/B/C/D) in Approval Gate 1 — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [x] T133 ~~[BLOCKED]~~ [US3] Await user selection of Decision 3 (code expiry start time options A/B/C) in Approval Gate 1 — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [ ] T134 [US3] Once Decision 1 resolved: read contracts/prompt-3b-recovery-flows.md and update with Decision 1 selection → generate recovery-flow-specification.md
+- [ ] T135 [US3] Once Decision 2 resolved: read contracts/prompt-3b-recovery-flows.md and update with Decision 2 selection → append to recovery-flow-specification.md
+- [ ] T136 [US3] Once Decision 3 resolved: read contracts/prompt-3c-error-states.md and update with Decision 3 selection → generate error-states-specification.md with exact expiry messaging
+- [ ] T137 [US3] Create recovery-flows-acceptance-report.md in `.github/specs/004-book-website-make/exports/` with CR-3B.1 through CR-3B.6 validation results (post-decision):
   - CR-3B.1: Recovery flow follows Decision 1 race-condition strategy (selected option)
   - CR-3B.2: Session lifetime enforcement matches Decision 2 selection
   - CR-3B.3: All recovery failure states designed (expired, invalid, race-condition)
   - CR-3B.4: Error messages clearly explain recovery failure reason
   - CR-3B.5: Recovery success path matches reader access policy (10-min codes, 30-day device lifecycle)
   - CR-3B.6: Fallback to fresh email verification documented when recovery unavailable
-- [ ] T038 [US3] Create error-states-acceptance-report.md in `.github/specs/004-book-website-make/exports/` with CR-3C.1 through CR-3C.8 validation results (post-decision):
+- [ ] T138 [US3] Create error-states-acceptance-report.md in `.github/specs/004-book-website-make/exports/` with CR-3C.1 through CR-3C.8 validation results (post-decision):
   - CR-3C.1: All 5 error states designed (invalid, expired, rate-limited, server, session-conflict)
   - CR-3C.2: Code expiry message reflects Decision 3 selection (timing explanation)
   - CR-3C.3: Error messages distinguish failure reasons (user-error vs. timing vs. rate-limit vs. server)
@@ -418,9 +450,9 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 **Implementation Tasks**:
 
-- [ ] T039 [P] [US4] Prepare Approval Gate 2 summary in quickstart.md: "Design baseline approved for export" with checklist of approved elements (Space Grotesk, Inter, 9-color palette, navigation, access policy)
-- [ ] T040 [P] [US4] Prepare Approval Gate 3 summary in quickstart.md: "Preflight analysis complete and ready for implementation team" with links to all validation reports
-- [ ] T041 [US4] Document all Approval Gate 1 decisions (7 selected options) in `.github/specs/004-book-website-make/exports/decisions-selected.md` with:
+- [ ] T139 [P] [US4] Prepare Approval Gate 2 summary in quickstart.md: "Design baseline approved for export" with checklist of approved elements (Space Grotesk, Inter, 9-color palette, navigation, access policy)
+- [ ] T140 [P] [US4] Prepare Approval Gate 3 summary in quickstart.md: "Preflight analysis complete and ready for implementation team" with links to all validation reports
+- [x] T141 [US4] Document all Approval Gate 1 decisions (7 selected options) in `.github/specs/004-book-website-make/exports/decisions-selected.md` with: — ✅ file exists in `exports/` (verified 2026-11-20)
   - Decision 1 selection and rationale
   - Decision 2 selection and rationale
   - Decision 3 selection and rationale
@@ -428,7 +460,7 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
   - Decision 5 selection and rationale (manuscript status)
   - Decision 6 selection and rationale (newsletter destination)
   - Decision 7 selection and rationale (route enforcement)
-- [ ] T042 [US4] Create implementation-readiness-checklist.md in `.github/specs/004-book-website-make/exports/` documenting:
+- [x] T142 [US4] Create implementation-readiness-checklist.md in `.github/specs/004-book-website-make/exports/` documenting: — ✅ file exists in `exports/` (verified 2026-11-20)
   - ✓ Prompt 1 (Navigation Exposure): Ready for execution
   - ✓ Prompt 2A (Design Baseline): Ready for execution
   - ✓ Prompt 2B (Navigation Design): Ready for execution
@@ -439,7 +471,7 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
   - Blocking decision resolution status: All 7 decisions resolved
   - Implementation team readiness: Yes
   - Handoff checklist: All artifacts staged
-- [ ] T043 [US4] Create preflight-analysis-final.md in `.github/specs/004-book-website-make/exports/` summarizing:
+- [x] T143 [US4] Create preflight-analysis-final.md in `.github/specs/004-book-website-make/exports/` summarizing: — ✅ file exists in `exports/` (verified 2026-11-20)
   - All 6 source files analyzed (01-06 from content/book/)
   - Version reconciliation completed (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0)
   - All gaps and conflicts documented
@@ -447,7 +479,7 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
   - Approval gate sign-offs: Gate 1 (decisions), Gate 2 (design), Gate 3 (readiness)
   - Implementation team readiness assessment: Ready to proceed
   - No code changes, commits, or deployments performed
-- [ ] T044 [US4] Create workflow-completion-report.md in `.github/specs/004-book-website-make/exports/` documenting:
+- [x] T144 [US4] Create workflow-completion-report.md in `.github/specs/004-book-website-make/exports/` documenting: — ✅ file exists in `exports/` (verified 2026-11-20)
   - Status: Documentation-only workflow COMPLETE
   - All 4 specification user stories (US1–US4) completed
   - All artifacts generated: spec.md, plan.md, research.md, data-model.md, quickstart.md, contracts/
@@ -455,9 +487,9 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
   - Approval gates completed: Gate 1 (decisions), Gate 2 (design), Gate 3 (readiness)
   - Ready for implementation phase authorization
   - Next step: Implementation team begins Figma Make prompt execution per quickstart.md
-- [ ] T045 [US4] Verify branch `docs/book-website-make-spec` has zero code changes (documentation only)
-- [ ] T046 [US4] Verify no commits created (documentation staged, not committed, pending approval)
-- [ ] T047 [US4] Verify `.specify/feature.json` persists feature directory (ready for implementation phase)
+- [x] ~~T145 [US4] Verify branch `docs/book-website-make-spec` has zero code changes (documentation only)~~ — **SUPERSEDED** (Phase 9 reconciliation): spec work merged to `main` through PRs #622, #630 and #639, so the "no commits" and `docs/book-website-make-spec` branch checks no longer apply. Documentation-only scope is now enforced by spec.md Status gates and PR review
+- [x] ~~T146 [US4] Verify no commits created (documentation staged, not committed, pending approval)~~ — **SUPERSEDED** (Phase 9 reconciliation): spec work merged to `main` through PRs #622, #630 and #639, so the "no commits" and `docs/book-website-make-spec` branch checks no longer apply. Documentation-only scope is now enforced by spec.md Status gates and PR review
+- [x] ~~T147 [US4] Verify `.specify/feature.json` persists feature directory (ready for implementation phase)~~ — **SUPERSEDED** (Phase 9 reconciliation): spec work merged to `main` through PRs #622, #630 and #639, so the "no commits" and `docs/book-website-make-spec` branch checks no longer apply. Documentation-only scope is now enforced by spec.md Status gates and PR review
 
 **Checkpoint**: Documentation-only workflow complete. All artifacts staged for approval. No code changes.
 
@@ -467,14 +499,14 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 **Purpose**: Final validation and handoff preparation
 
-- [ ] T048 Validate all task descriptions reference correct file paths in `.github/specs/004-book-website-make/` or `exports/`
-- [ ] T049 Verify all acceptance criteria (CR-2A, CR-3A, CR-3B, CR-3C) are documented in corresponding validation reports
-- [ ] T050 Confirm all approval gates are documented: Gate 1 (decisions), Gate 2 (design baseline), Gate 3 (readiness)
-- [ ] T051 Create TASKS_COMPLETION_REPORT.md documenting:
+- [ ] T148 Validate all task descriptions reference correct file paths in `.github/specs/004-book-website-make/` or `exports/`
+- [ ] T149 Verify all acceptance criteria (CR-2A, CR-3A, CR-3B, CR-3C) are documented in corresponding validation reports
+- [ ] T150 Confirm all approval gates are documented: Gate 1 (decisions), Gate 2 (design baseline), Gate 3 (readiness)
+- [ ] T151 Create TASKS_COMPLETION_REPORT.md documenting:
   - Total tasks: 51
   - By user story: US1 (7 tasks), US2 (9 tasks), US3 (8 blocked/deferred), US4 (9 tasks), Setup/Polish (9 tasks)
-  - Blocking tasks: T031–T033 (await decision resolution), T034–T036 (blocked until decisions selected)
-  - Parallel opportunities: T005–T011, T015–T018, T022–T026, T039–T040
+  - Blocking tasks: T131–T133 (await decision resolution), T134–T136 (blocked until decisions selected)
+  - Parallel opportunities: T105–T111, T115–T118, T122–T126, T139–T140
   - Approval gates status: Gate 1 (pending), Gate 2 (pending), Gate 3 (pending)
   - Implementation readiness: Ready upon Gate approvals
   - No code changes: 0 commits, 0 pushes, 0 deployments performed
@@ -498,51 +530,51 @@ Phase 1 (Setup) ──┐
 
 ### Critical Path (Blocking Dependencies)
 
-1. **T001–T014** (Phase 1–2): Setup and extract blocking decisions
-2. **T031–T033** (Phase 5): **BLOCKED** awaiting Approval Gate 1 (user selections)
+1. **T101–T114** (Phase 1–2): Setup and extract blocking decisions
+2. **T131–T133** (Phase 5): **BLOCKED** awaiting Approval Gate 1 (user selections)
 3. Once Gate 1 approved:
-   - **T015–T021** (Phase 3): Execute in parallel
-   - **T022–T030** (Phase 4): Execute in parallel
-   - **T034–T038** (Phase 5): Execute in parallel
-4. **T039–T047** (Phase 6): Complete Approval Gates 2–3, prepare handoff
-5. **T048–T051** (Phase 7): Final validation
+   - **T115–T121** (Phase 3): Execute in parallel
+   - **T122–T130** (Phase 4): Execute in parallel
+   - **T134–T138** (Phase 5): Execute in parallel
+4. **T139–T147** (Phase 6): Complete Approval Gates 2–3, prepare handoff
+5. **T148–T151** (Phase 7): Final validation
 
 ### Parallel Execution Opportunities
 
 **Phase 1–2 (Sequential, blocking)**:
-- T005–T011: Extract all 7 blocking decisions (can parallelize reading from research.md)
+- T105–T111: Extract all 7 blocking decisions (can parallelize reading from research.md)
 
 **Phase 3 (Fully Parallel, no dependencies)**:
-- T015–T018: Read and validate design specifications (4 contract files in parallel)
-- T019–T021: Generate design reports (depend on T015–T018)
+- T115–T118: Read and validate design specifications (4 contract files in parallel)
+- T119–T121: Generate design reports (depend on T115–T118)
 
 **Phase 4 (Fully Parallel, no dependencies)**:
-- T022–T026: Read and validate reader access specifications (5 tasks in parallel)
-- T027–T030: Generate reader access reports (depend on T022–T026)
+- T122–T126: Read and validate reader access specifications (5 tasks in parallel)
+- T127–T130: Generate reader access reports (depend on T122–T126)
 
 **Phase 5 (Blocked until decisions)**:
-- T031–T033: Blocked on Approval Gate 1
-- T034–T038: Depend on decision selections (can parallelize Prompts 3B/3C work)
+- T131–T133: Blocked on Approval Gate 1
+- T134–T138: Depend on decision selections (can parallelize Prompts 3B/3C work)
 
 **Phase 6 (Sequential, depends on Phases 3–5)**:
-- T039–T040: Prepare gates (can parallelize)
-- T041–T047: Generate readiness docs (sequential)
+- T139–T140: Prepare gates (can parallelize)
+- T141–T147: Generate readiness docs (sequential)
 
 ### Recommended Team Approach
 
 **Fully Sequential (single contributor)**:
-1. T001–T014 (setup, extract decisions)
+1. T101–T114 (setup, extract decisions)
 2. Wait for Approval Gate 1
-3. T015–T030 (phases 3–4)
-4. T034–T038 (phase 5, once decisions available)
-5. T039–T051 (phases 6–7)
+3. T115–T130 (phases 3–4)
+4. T134–T138 (phase 5, once decisions available)
+5. T139–T151 (phases 6–7)
 
 **Parallel (multiple contributors)**:
-1. Contributor A: T001–T014, then T015–T021 (design baseline)
-2. Contributor B: T022–T030 (reader access) [can start after T001–T014]
+1. Contributor A: T101–T114, then T115–T121 (design baseline)
+2. Contributor B: T122–T130 (reader access) [can start after T101–T114]
 3. Once Approval Gate 1 approved:
-4. Contributor C: T034–T038 (recovery flows / error states)
-5. All: T039–T051 (final gates and handoff)
+4. Contributor C: T134–T138 (recovery flows / error states)
+5. All: T139–T151 (final gates and handoff)
 
 ---
 
@@ -550,9 +582,9 @@ Phase 1 (Setup) ──┐
 
 ✅ **Checklist Format**: All tasks follow `- [ ] [TaskID] [P?] [Story?] Description with file path`
 
-✅ **Task IDs**: T001–T051, sequential in execution order
+✅ **Task IDs**: T101–T151, sequential in execution order
 
-✅ **Parallelizable Markers**: [P] on tasks with independent concerns (T005–T011, T015–T018, T022–T026, T039–T040)
+✅ **Parallelizable Markers**: [P] on tasks with independent concerns (T105–T111, T115–T118, T122–T126, T139–T140)
 
 ✅ **Story Labels**: [US1]–[US4] on all Phase 3–6 user story tasks; no labels on setup/polish phases
 
@@ -566,13 +598,13 @@ Phase 1 (Setup) ──┐
 
 | Phase | Tasks | Story | Count | Status |
 | ------- | ------- | ------- | ------- | -------- |
-| 1 (Setup) | T001–T004 | — | 4 | Ready |
-| 2 (Foundational) | T005–T014 | — | 10 | Ready (blocks phase 3–5) |
-| 3 (Design Baseline) | T015–T021 | US1 | 7 | Ready after T014 |
-| 4 (Reader Access) | T022–T030 | US2 | 9 | Ready after T014 |
-| 5 (Recovery/Errors) | T031–T038 | US3 | 8 | Blocked: T031–T033 await Gate 1 |
-| 6 (Readiness) | T039–T047 | US4 | 9 | Ready after phases 3–5 |
-| 7 (Polish) | T048–T051 | — | 4 | Ready after phase 6 |
+| 1 (Setup) | T101–T104 | — | 4 | Ready |
+| 2 (Foundational) | T105–T114 | — | 10 | Ready (blocks phase 3–5) |
+| 3 (Design Baseline) | T115–T121 | US1 | 7 | Ready after T114 |
+| 4 (Reader Access) | T122–T130 | US2 | 9 | Ready after T114 |
+| 5 (Recovery/Errors) | T131–T138 | US3 | 8 | Blocked: T131–T133 await Gate 1 |
+| 6 (Readiness) | T139–T147 | US4 | 9 | Ready after phases 3–5 |
+| 7 (Polish) | T148–T151 | — | 4 | Ready after phase 6 |
 | **TOTAL** | | | **51 tasks** | |
 
 **By User Story**:
@@ -581,9 +613,9 @@ Phase 1 (Setup) ──┐
 - **US3 (Recovery/Errors)**: 8 tasks (P1→deferred) — Blocked until Decisions 1–3
 - **US4 (Readiness)**: 9 tasks (P1) — Ready after US1–US3
 
-**Parallelizable**: 11 tasks [P] across phases (T005–T011: decisions; T015–T018: design; T022–T026: reader access; T039–T040: gates)
+**Parallelizable**: 11 tasks [P] across phases (T105–T111: decisions; T115–T118: design; T122–T126: reader access; T139–T140: gates)
 
-**Blocked**: 3 tasks (T031–T033) awaiting Approval Gate 1 user selection
+**Blocked**: 3 tasks (T131–T133) awaiting Approval Gate 1 user selection
 
 ---
 
@@ -604,12 +636,12 @@ Phase 1 (Setup) ──┐
 ## Next Steps
 
 1. **Review this tasks.md** — Approve structure or request changes
-2. **Complete Approval Gate 1** — Select options for 7 blocking decisions (T031–T033)
-3. **Execute Phase 3** (T015–T021) — Generate design baseline documentation
-4. **Execute Phase 4** (T022–T030) — Generate reader access documentation
-5. **Execute Phase 5** (T034–T038) — Generate recovery/error documentation (post-decisions)
-6. **Execute Phase 6** (T039–T047) — Complete approval gates and handoff
-7. **Execute Phase 7** (T048–T051) — Final validation and report
+2. **Complete Approval Gate 1** — Select options for 7 blocking decisions (T131–T133)
+3. **Execute Phase 3** (T115–T121) — Generate design baseline documentation
+4. **Execute Phase 4** (T122–T130) — Generate reader access documentation
+5. **Execute Phase 5** (T134–T138) — Generate recovery/error documentation (post-decisions)
+6. **Execute Phase 6** (T139–T147) — Complete approval gates and handoff
+7. **Execute Phase 7** (T148–T151) — Final validation and report
 
 ---
 
@@ -625,26 +657,26 @@ Validation and verification tasks to close gaps identified between specification
 
 | Task ID | [P] | Description | File Path | Dependencies |
 | --------- | ----- | ------------- | ----------- | -------------- |
-| ✅ T052 | | Create version reconciliation artifact documenting all source file versions and differences per FR-002 precedence rule | `.github/specs/004-book-website-make/version-reconciliation.md` | T007, T010 |
-| ✅ T053 | | Generate and document exact Prompt 1 preview (before/after navigation structure, numbered implementation steps, acceptance criteria, non-changes list) per SC-002 | `.github/specs/004-book-website-make/contracts/prompt-1-exact-preview.md` | T020 |
-| ⏳ T054 | | Validate all Prompt previews against completeness checklist (Prompts 1, 2A, 2B, 3A include all required elements; 95%+ completeness) per SC-002/SC-003. **Gate unmet**: Prompt 2A (~89%) and Prompt 3A (~91%) must each reach at least 95% before T054 is marked complete, unless an approved change revises the threshold | `.github/specs/004-book-website-make/checklists/prompt-preview-validation.md` | T053, T021, T022, T023 |
+| ✅ T052 | | Create version reconciliation artifact documenting all source file versions and differences per FR-002 precedence rule | `.github/specs/004-book-website-make/version-reconciliation.md` | T107, T110 (legacy Phase 2 decision-extraction tasks; see Task ID scheme) |
+| ✅ T053 | | Generate and document exact Prompt 1 preview (before/after navigation structure, numbered implementation steps, acceptance criteria, non-changes list) per SC-002 | `.github/specs/004-book-website-make/contracts/prompt-1-exact-preview.md` | T120 |
+| ✅ T054 | | Validate all Prompt previews against completeness checklist per SC-002/SC-003. **Revised scope (SC-003, approved 2026-11-19)**: each of Prompts 1, 2A and 2B must reach ≥95%. Prompt 3A (~91%) is handed to Spec 005. **Met 2026-11-20**: P1 100%, P2A 95%, P2B 100% | `.github/specs/004-book-website-make/checklists/prompt-preview-validation.md` | T053, T121, T122, T123 (T122–T123 are Prompt 3A and now belong to Spec 005) |
 | ✅ T055 | | Audit and mark all approval boundaries in spec, plan, tasks, and contracts using standard notation (approved ✓, unapproved ~, unresolved ❌) per SC-007 | `.github/specs/004-book-website-make/approval-boundaries.md` | All phases 1-7 |
-| ✅ T056 | | Create source file inventory with versions, update timestamps, and reconciliation status for all 6 source files (content/book/01-06) per FR-001 | `.github/specs/004-book-website-make/source-file-inventory.md` | T007 |
-| ✅ T057 | | Validate all 7 blocking decisions have 3+ options documented with impact assessment in decision matrix per SC-004 | `.github/specs/004-book-website-make/checklists/blocking-decisions-validation.md` | T010 |
+| ✅ T056 | | Create source file inventory with versions, update timestamps, and reconciliation status for all 6 source files (`references/01`–`06`, formerly `content/book/`) per FR-001 | `.github/specs/004-book-website-make/source-file-inventory.md` | T107 |
+| ✅ T057 | | Validate all 7 blocking decisions have 3+ options documented with impact assessment in decision matrix per SC-004 | `.github/specs/004-book-website-make/checklists/blocking-decisions-validation.md` | T110 |
 | ✅ T058 | | Audit prompt contracts (3B, 3C) to ensure user-editable decisions are clearly marked and all options visible to reader per FR-008 | `.github/specs/004-book-website-make/contracts/blocking-decisions-audit.md` | contracts/prompt-3b-recovery-flows.md, contracts/prompt-3c-error-states.md |
-| ⏳ T059 | | (Blocked: T054 completeness gate unmet.) Add pre-approval reconciliation validation step: confirm zero version merge conflicts, all decisions documented, all previews validated, all boundaries marked | `.github/specs/004-book-website-make/checklists/pre-approval-reconciliation-validation.md` | T052–T058 |
+| ✅ T059 | | (Unblocked 2026-11-20 when T054 was met under the revised SC-003 scope. Re-validated after the Phase 9 reconciliation fixed paths, colours and Decision 2 wording.) Add pre-approval reconciliation validation step: confirm zero version merge conflicts, all decisions documented, all previews validated, all boundaries marked | `.github/specs/004-book-website-make/checklists/pre-approval-reconciliation-validation.md` | T052–T058 |
 
 **Gate**: All 8 validation tasks must pass and deliverables must be reviewed before proceeding to implementation phase authorization.
 
 **Acceptance Criteria**:
 - ✅ Version reconciliation artifact created with all 6 source files analyzed
 - ✅ Prompt 1 exact preview generated and validated against SC-002
-- ❌ All 4 unblocked prompt previews validated for completeness (95%+ minimum) — **not met**: Prompts 2A (~89%) and 3A (~91%) are below the per-prompt threshold
+- ✅ All Spec 004 prompt previews (1, 2A, 2B) validated at ≥95% each, under the revised SC-003 scope approved 2026-11-19. Prompt 3A (~91%) is handed to Spec 005
 - ✅ All approval boundaries marked and auditable across all artifacts
 - ✅ Source file inventory created with versions and timestamps
 - ✅ All 7 blocking decisions validated for 3+ documented options
 - ✅ Prompt contracts audited for user-decision clarity
-- ✅ Pre-approval checklist completed with zero unresolved validation gaps
+- ✅ Pre-approval checklist completed with zero unresolved validation gaps. This was ticked too early, while T054 and T059 were still open. It is valid again from 2026-11-20, after T054 was met and T075–T081 closed the remaining path, colour and wording gaps
 
 ---
 
@@ -652,16 +684,51 @@ Validation and verification tasks to close gaps identified between specification
 
 Finalize Phase 8 scope updates, document SC-003 approval, and prepare Spec 004 for merge to main with Spec 005 handover package.
 
-- [ ] T066 Update Phase 8 T054 acceptance criteria to reflect approved SC-003 scope: Prompts 1, 2A, 2B ≥95% (3A handed to Spec 005) per approval 2026-11-19
-- [ ] T067 Document SC-003 scope change in spec.md Assumptions section with link to approval decision (SC-003_SCOPE_CHANGE_PROPOSAL.md)
-- [ ] T068 Create Spec 005 handover artifact documenting: Prompt 3A contract, Decisions 1–6 status, Phase B readiness (3 prompts, 3 decisions)
-- [ ] T069 Validate all 20+ specification artifacts present and version-locked for Spec 004 Phase 9 sign-off
-- [ ] T070 Mark Phase 8 T054 and T059 complete: scope-updated acceptance criteria now met
-- [ ] T071 Generate final PR description and commit message for merge to main
-- [ ] T072 Verify build passes and branch validation succeeds before merge
-- [ ] T073 Merge PR #622 to main branch, close Phase 9 Convergence
-- [ ] T074 Initialize Spec 005 Phase 1 (Decision Resolution) with 2026-12-15 target completion
+- [x] T066 Update Phase 8 T054 acceptance criteria to reflect approved SC-003 scope: Prompts 1, 2A, 2B ≥95% (3A handed to Spec 005) per approval 2026-11-19 — ✅ done in the Phase 9 reconciliation
+- [x] T067 Document SC-003 scope change in spec.md Assumptions section with link to approval decision (SC-003_SCOPE_CHANGE_PROPOSAL.md) — ✅ done in the Phase 9 reconciliation (spec.md SC-003 and Assumptions)
+- [x] T068 Create Spec 005 handover artifact documenting: Prompt 3A contract, Decisions 1–6 status, Phase B readiness (3 prompts, 3 decisions) — ✅ `exports/SPEC_004_TO_005_HANDOVER.md`
+- [ ] T069 Validate all 20+ specification artifacts present and version-locked for Spec 004 Phase 9 sign-off — ⏳ open: artifacts exist, but nothing yet records a version-lock. Needs Ash to sign off on spec.md Status
+- [x] T070 Mark Phase 8 T054 and T059 complete: scope-updated acceptance criteria now met — ✅ done in the Phase 9 reconciliation
+- [x] ~~T071 Generate final PR description and commit message for merge to main~~ — **SUPERSEDED**: PR #622 merged (`19da240`)
+- [x] ~~T072 Verify build passes and branch validation succeeds before merge~~ — **SUPERSEDED**: PR #622 merged. The reconciliation PR runs the same checks
+- [x] T073 Merge PR #622 to main branch, close Phase 9 Convergence — ✅ merged (`19da240`)
+- [x] ~~T074 Initialize Spec 005 Phase 1 (Decision Resolution) with 2026-12-15 target completion~~ — **MOVED_TO_SPEC_005**: `../005-reader-access/tasks.md` Phase 0 (RA-T001–RA-T009) owns decision resolution
 
 ---
 
-**Version**: 1.0.2 | **Status**: Phase 9 Convergence Appended | **Updated**: 2026-11-19
+## Phase 9 Reconciliation (2026-11-20)
+
+The three continuation documents in `continuations/` described a T060–T074 set that never matched this file. Most of that work merged through PRs #630 and #639, but some exports said work was finished when it was not. This pass checks the repository state and closes what is still open.
+
+- [x] T075 Remove duplicate task IDs (T014–T038): renumber the legacy breakdown to T1xx, add the Task ID scheme section, and repoint Phase 8 dependencies, `approval-boundaries.md` and `codebase-consistency-crosswalk.md`
+- [x] T076 Replace remaining `content/book/` source paths with `references/` (data-model.md, source-file-inventory.md, version-reconciliation.md, checklists). Historical "moved from" notes are kept
+- [x] T077 Mark non-baseline colours (#1a1a1a, #d4a574, #ff6b6b, #8b0000 and related) as superseded in the Prompt 3A/3C execution guides (owned by Spec 005; an error/state colour needs a design decision there). Replace the example in data-model.md with a baseline value
+- [x] T078 Use the research.md label for Decision 2 Option A ("session refresh with absolute 30-day expiry") in the prompt-3b execution guide, prompt-3b recovery flows contract, research.md and blocking-decisions-validation checklist
+- [x] T079 Correct `exports/COLOR_AUDIT.md`, `exports/PATH_MIGRATION_LOG.md` and `exports/TASK_CONSOLIDATION_LOG.md`, which said work was complete when it was not
+- [x] T080 Close or supersede legacy T145–T147 (formerly T045–T047). They checked a branch and a "no commits" rule that merged work has replaced
+- [x] T081 Fix the stale T054 row (P2A 89%, passing on average) in `checklists/pre-approval-reconciliation-validation.md`
+- [x] T082 Update `plan.md` note on `staged/` to say Figma Make is deprecated (SC-004)
+- [x] T083 Add a superseded notice to the files in `continuations/` and point to this section
+- [ ] T084 Ash: confirm spec.md Status sign-off and version-lock (unblocks T069)
+
+### Continuation document IDs mapped to this file
+
+| Continuation ID | Topic | Status / where |
+| --------------- | ----- | -------------- |
+| T060–T062 | Decision 7 wording, readiness claims, handover | ✅ PR #630 |
+| T063 | Prompt 2A ≥95% | ✅ `checklists/prompt-preview-validation.md` (P2A 95%) → T054 |
+| T064 | Design exports | ✅ T119–T121 |
+| T065 | Readiness exports | ✅ T141–T144 |
+| T066 | Close Prompt 3A–3C tasks | ✅ T012–T016, T025–T027, T122–T138 marked moved to Spec 005 |
+| T067 | Task disambiguation | ✅ T075 |
+| T068 | Phase 8 "zero gaps" | ✅ T070, T081 |
+| T069 | spec.md / plan.md state | ✅ PR #639 (SC-004), T067, T082 |
+| T070 | Paths | ✅ T076 |
+| T071 | Colours | ✅ T077 |
+| T072 | Decision 2 label | ✅ T078 |
+| T073 | T045–T047 | ✅ T080 |
+| T074 | `staged/` | ✅ plan.md (PR #639) and T082 |
+
+---
+
+**Version**: 1.1.0 | **Status**: Phase 9 Reconciled | **Updated**: 2026-11-20

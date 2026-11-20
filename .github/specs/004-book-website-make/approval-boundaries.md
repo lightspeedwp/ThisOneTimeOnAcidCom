@@ -184,7 +184,7 @@ Per spec requirement: "All 7 blocking decisions documented with options, awaitin
 - **Purpose**: Task breakdown across 7 phases (now 8 with convergence)
 - **Approval Status**: ✓ PHASE 1–7 APPROVED; Phase 8 convergence appended
 - **Boundaries**: User story phases marked [US1], [US2], [US3], [US4]; phases marked with completion dependencies
-- **Blockers**: T031–T033 marked as "Blocked: awaiting Approval Gate 1" (now superseded by convergence analysis)
+- **Blockers**: T131–T133 (legacy breakdown; formerly T031–T033) marked as "Blocked: awaiting Approval Gate 1" (now superseded by convergence analysis)
 
 ---
 

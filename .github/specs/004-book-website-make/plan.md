@@ -117,12 +117,12 @@
 | `contracts/` | Figma Make prompt specifications (input) | Prompt 1–3C contract definitions | Reference (reader-access moved to Spec 005) |
 | `exports/` | Final approved artifacts (output) | Design tokens, checklists, handoff docs | Active |
 | `references/` | Source specification documents | Six specification files (01–06) with versions | Read-only reference |
-| `staged/` | Interim Figma Make outputs and drafts | Historical drafts from initial analysis; regenerated prompt outputs before finalization | Available for future regeneration; retained for reference |
+| `staged/` | Interim prompt drafts (historical) | Historical drafts from initial analysis (Nov 9) | Frozen, for reference only. Not authoritative |
 | `checklists/` | Quality validation and approval tracking | Pre-approval, specification-quality, prompt-preview checklists | Reference |
 
 <!-- markdownlint-enable MD060 -->
 
-**Note**: The `staged/` folder contains historical drafts from initial analysis (Nov 9) and is retained for reference only and future Figma Make regeneration. Authoritative versions are in the root directory (spec.md, plan.md, tasks.md, exports/) with all Phase 9 convergence updates applied.
+**Note**: The `staged/` folder contains historical drafts from initial analysis (Nov 9) and is retained for reference only. Figma Make is deprecated (SC-004, 2026-11-20), so these drafts will not be regenerated; do not edit them. `continuations/` is archived in the same way (superseded session hand-off prompts). Authoritative versions are in the root directory (spec.md, plan.md, tasks.md, exports/) with all Phase 9 convergence updates applied.
 
 ## Complexity Tracking
 

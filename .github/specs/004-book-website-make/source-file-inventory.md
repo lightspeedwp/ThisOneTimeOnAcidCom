@@ -8,7 +8,7 @@
 
 ## Inventory Overview
 
-Complete documentation of six specification files from `content/book/` directory that serve as authoritative sources for the Figma Make prompt pack feature.
+Complete documentation of six specification files in `references/` (moved from `content/book/` in Phase 9) that serve as authoritative sources for the Figma Make prompt pack feature.
 
 | File ID | Document Name | Current Version | Status | Recency | Evidence |
 | --------- | --------------- | ----------------- | -------- | --------- | ---------- |

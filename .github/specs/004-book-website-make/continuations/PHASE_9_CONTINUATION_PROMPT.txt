@@ -1,3 +1,7 @@
+SUPERSEDED - archived 2026-11-20 (Phase 9 reconciliation). DO NOT RUN.
+Task IDs here never matched tasks.md; work merged via PRs #630 and #639.
+Current state and ID mapping: ../tasks.md -> "Phase 9 Reconciliation".
+
 Phase 9 Convergence Continuation — Execute Tasks T063–T074
 (SC-004 Claude Direct Execution Model)
 

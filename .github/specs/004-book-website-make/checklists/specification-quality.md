@@ -136,7 +136,7 @@
 
 - [x] CHK061 Are all 8 assumptions documented (users have email, source files are authoritative, etc.)? [Completeness, Spec §Assumptions] ✅ VERIFIED: Spec §Assumptions lists 8 assumptions with full context (User Context, Source Files, Design Baseline, Blocking Decisions, Implementation Timing, Figma Make Environment, Newsletter Integration, Reader Access Provider)
 - [x] CHK062 Is each assumption validated or marked for later validation? [Clarity, Spec §Assumptions] ✅ VERIFIED: Each assumption is documented with validation context; Assumptions marked as "will be confirmed separately" or "aligns with existing decisions" where applicable
-- [x] CHK063 Are source file references clear (6 files in content/book/ with versions v1.0.0–v1.9.0)? [Traceability, plan.md §Source Files] ✅ VERIFIED: plan.md §Source Files lists all 6 source files (01–06) in content/book/ with exact versions: v1.0.0–v1.9.0 range documented
+- [x] CHK063 Are source file references clear (6 files in `references/`, formerly `content/book/`, with versions v1.0.0–v1.9.0)? [Traceability, plan.md §Source Files] ✅ VERIFIED: plan.md §Source Files lists all 6 source files (01–06), now in `references/`, with exact versions: v1.0.0–v1.9.0 range documented
 - [x] CHK064 Are Linear issue references documented (TOA-446, TOA-445, TOA-441, etc.)? [Traceability, Spec] ✅ VERIFIED: Spec §Specification Notes §Cross-References documents Linear Issues: TOA-446, TOA-445, TOA-441, TOA-309, TOA-310, TOA-311, TOA-90, TOA-420
 - [x] CHK065 Is the governance framework referenced (constitution.md § principles applied)? [Traceability, plan.md §Constitution Check] ✅ VERIFIED: plan.md §Constitution Check explicitly references ".specify/memory/constitution.md § principles" and documents gate status "All checks pass. No violations."
 - [x] CHK066 Are spec sections cross-referenced (e.g., Spec §FR-001 links to affected tasks)? [Traceability, cross-reference check] ✅ VERIFIED: Specification uses consistent cross-reference style (Spec §FR-001, Spec §SC-001, etc.); tasks.md references back to user stories and requirements
@@ -186,7 +186,7 @@
 
 **Purpose**: Are version differences documented without silent merges?
 
-- [x] CHK085 Are all 6 source files listed with versions (01 v1.0.0, 02 v1.0.4, 03 v1.3.0, 04 v1.1.2, 05 v1.9.0, 06 v1.1.1)? [Completeness, plan.md §Source Files] ✅ VERIFIED: plan.md §Source Files lists all 6 source files in content/book/ with exact versions: 01(v1.0.0), 02(v1.0.4), 03(v1.3.0), 04(v1.1.2), 05(v1.9.0), 06(v1.1.1)
+- [x] CHK085 Are all 6 source files listed with versions (01 v1.0.0, 02 v1.0.4, 03 v1.3.0, 04 v1.1.2, 05 v1.9.0, 06 v1.1.1)? [Completeness, plan.md §Source Files] ✅ VERIFIED: plan.md §Source Files lists all 6 source files, now in `references/`, with exact versions: 01(v1.0.0), 02(v1.0.4), 03(v1.3.0), 04(v1.1.2), 05(v1.9.0), 06(v1.1.1)
 - [x] CHK086 Are version differences documented (02: v1.0.3→v1.0.4, 03: v1.2.2→v1.3.0, 05: v1.7.0→v1.9.0)? [Traceability, Spec §FR-002] ✅ VERIFIED: Spec §FR-002 states "System MUST reconcile version mismatches (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0) without silently combining incompatible revisions"
 - [x] CHK087 Is each version difference assessed for material impact? [Clarity, reconciliation notes] ✅ VERIFIED: plan.md §Technical Context notes version tracking and reconciliation; Spec §FR-002 requires version difference assessment with "material-effect assessment"
 

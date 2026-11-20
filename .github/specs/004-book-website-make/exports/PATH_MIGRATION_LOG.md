@@ -3,7 +3,17 @@
 **Date**: 2026-11-20  
 **Phase**: 9 Convergence (T070)  
 **Migration**: `content/book/` paths → `.github/specs/004-book-website-make/references/`  
-**Status**: Verification complete; no broken links remain
+**Status**: Corrected 2026-11-20. Spec 004 working files are now migrated; references in source and history files are kept on purpose
+
+
+> **Correction (Phase 9 reconciliation, 2026-11-20)**: When this log was first written, `content/book/` paths were still in `data-model.md` (2), `source-file-inventory.md`, `version-reconciliation.md`, `checklists/pre-approval-reconciliation-validation.md` and `checklists/specification-quality.md` (2). All of these now point to `references/`, with a "formerly `content/book/`" note where history matters.
+>
+> Kept on purpose:
+> - `references/*`: verbatim copies of source documents. Several point at real manuscript paths under `content/book/` (for example chapter files), which still exist
+> - `staged/*`: historical drafts
+> - `exports/GATE_2_READINESS_REPORT.md`: old → new mapping table
+> - `plan.md`: the "moved from" note
+> - Legacy task T143 description in `tasks.md`: task descriptions are not edited
 
 ---
 
