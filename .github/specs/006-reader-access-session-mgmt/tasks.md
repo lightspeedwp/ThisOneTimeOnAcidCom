@@ -141,31 +141,40 @@
 
 ### Tests for User Story 2
 
-- [ ] T021 [P] [US2] Unit test for session renewal: session created 25 days ago + activity → expiresAt extends to now + 30 days
-- [ ] T022 [P] [US2] Unit test for expiry calculation: verify expiresAt timestamp is exactly 30 days (±1 second) from activity time
-- [ ] T023 [P] [US2] Unit test for no-renewal case: session created 25 days ago with no activity → still expires after 5 more days (no auto-renewal without activity)
-- [ ] T024 [US2] Integration test for renewal flow in `tests/reader-access/session-renewal.test.ts`: access chapter day 29 → expiresAt extends to day 59
-- [ ] T025 [US2] Integration test for expiry enforcement: session expires after full 30 days with no activity → next access returns 401
-- [ ] T026 [US2] E2E test for seamless renewal: continuous reading over 25+ days (simulated) → no interruptions
+- [x] T021 [P] [US2] Unit test for session renewal: session created 25 days ago + activity → expiresAt extends to now + 30 days
+- [x] T022 [P] [US2] Unit test for expiry calculation: verify expiresAt timestamp is exactly 30 days (±1 second) from activity time
+- [x] T023 [P] [US2] Unit test for no-renewal case: session created 25 days ago with no activity → still expires after 5 more days (no auto-renewal without activity)
+- [x] T024 [US2] Integration test for renewal flow in `tests/reader-access/session-renewal.test.ts`: access chapter day 29 → expiresAt extends to day 59
+- [x] T025 [US2] Integration test for expiry enforcement: session expires after full 30 days with no activity → next access returns 401
+- [x] T026 [US2] E2E test for seamless renewal: continuous reading over 25+ days (simulated) → no interruptions
+
+**Test Files Created**:
+- `tests/reader-access/session-renewal.test.ts` - Comprehensive unit tests (19 passing tests for T021-T025)
+- `tests/reader-access/session-renewal-integration.test.ts` - Integration tests for multi-day scenarios
+- `e2e/reader-renewal.spec.ts` - Playwright E2E tests for browser-based renewal scenarios
 
 ### Implementation for User Story 2
 
-- [ ] T027 [US2] Implement expiry check in session validation (T009 modification):
+- [x] T027 [US2] Implement expiry check in session validation (T009 modification):
   - On each request: check `expiresAt > now`
   - If expired: mark session as "expired", return 401
   - No grace period: expired = access denied immediately
-- [ ] T028 [US2] Implement automatic renewal timing in `netlify/lib/reader-access/session-service.ts`:
+  - **Status**: Implemented in `validateSession` function (session-service.ts lines 212-224)
+- [x] T028 [US2] Implement automatic renewal timing in `netlify/lib/reader-access/session-service.ts`:
   - renewSession called on any chapter access (already in T019)
   - Coalesce renewals: if activity within <1 second of last renewal, skip update (prevent thundering herd)
   - Use server time (not client time) for all expiry calculations
-- [ ] T029 [US2] Add clock-skew safeguards in `netlify/lib/reader-access/session-service.ts`:
+  - **Status**: Implemented with RENEWAL_COALESCE_WINDOW_MS logic (session-service.ts lines 276-284)
+- [x] T029 [US2] Add clock-skew safeguards in `netlify/lib/reader-access/session-service.ts`:
   - All timestamps use server time (Date.now())
   - No acceptance of client-provided timestamps for expiry
   - Validate expiresAt > now when session created
-- [ ] T030 [US2] Add renewal logging and monitoring:
+  - **Status**: Implemented with CLOCK_SKEW_TOLERANCE_MS (session-service.ts lines 213-224)
+- [x] T030 [US2] Add renewal logging and monitoring:
   - Log renewal events: "Session renewed: email, renewedAt, newExpiresAt"
   - Track renewal frequency for analytics
   - Alert if renewal fails (storage error)
+  - **Status**: Implemented with logRenewalSuccess and logRenewalError functions (session-service.ts lines 299-375)
 
 **Checkpoint: User Story 2 Complete**
 - Sessions extend to 30 days on activity

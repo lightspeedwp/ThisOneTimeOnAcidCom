@@ -139,6 +139,9 @@ describe('E2E: Seamless Session Renewal Over 25+ Simulated Days - T026', () => {
         expect(properties.isExpired).toBe(false);
         expect(properties.isTerminated).toBe(false);
 
+        // Wait longer than coalesce window to ensure renewal happens
+        await new Promise((resolve) => setTimeout(resolve, 1100));
+
         // Renew
         currentSession = await renewSession(testEmail, currentSession.deviceId);
       }
@@ -146,8 +149,9 @@ describe('E2E: Seamless Session Renewal Over 25+ Simulated Days - T026', () => {
       // createdAt should never change
       expect(currentSession.createdAt).toBe(session.createdAt);
 
-      // renewedAt should be updated
+      // renewedAt should be updated (after last renewal)
       const renewedAt = new Date(currentSession.renewedAt);
+      // After multiple checkpoint renewals, should be > createdAt
       expect(renewedAt.getTime()).toBeGreaterThan(createdAt.getTime());
 
       // expiresAt should be extended
