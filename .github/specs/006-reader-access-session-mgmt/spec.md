@@ -134,6 +134,8 @@ Reader can explicitly sign out, terminating their session immediately. System al
 - **FR-008**: System MUST prevent session reuse after expiry (no grace period—expired session = access denied)
 - **FR-009**: System MUST handle concurrent requests from same reader without race conditions or double-counting activity
 - **FR-010**: System MUST support session renewal across page reloads and new browser tabs within the same device
+- **FR-011**: System MUST rate-limit session creation to prevent abuse (max 5 attempts per email per 15 minutes; return 429 Too Many Requests on excess)
+- **FR-012**: System MUST log all session lifecycle events (created, renewed, terminated) with timestamp, email, deviceId, and event type for audit trail and operational visibility
 
 ### Key Entities *(include if feature involves data)*
 
@@ -156,8 +158,10 @@ Reader can explicitly sign out, terminating their session immediately. System al
 - **SC-004**: Concurrent device limit is enforced with 100% accuracy (no overflow past configured limit)
 - **SC-005**: Expired sessions are denied access 100% of the time (zero grace period, zero expired-token bypasses)
 - **SC-006**: Reader sign-out terminates session within 100ms and subsequent requests are rejected
-- **SC-007**: Session activity events are logged 100% of the time with accurate timestamps
+- **SC-007**: Session activity events are logged 100% of the time with accurate timestamps (createdAt, renewedAt, terminatedAt, eventType)
 - **SC-008**: System handles 1000 concurrent readers with multiple active sessions each without degradation
+- **SC-009**: Rate limiting enforced: session creation requests > 5 per email per 15 minutes are rejected with 429 (zero false positives)
+- **SC-010**: All session events appear in audit log within 500ms of occurrence (creation, renewal, termination, errors)
 
 ## Assumptions
 
@@ -165,7 +169,7 @@ Reader can explicitly sign out, terminating their session immediately. System al
 - Session storage uses Netlify Blobs with strong consistency guarantees (from Phase 2 implementation)
 - Readers access via browser with cookie support enabled (session cookies are primary mechanism)
 - Device fingerprinting uses combination of User-Agent + IP + device characteristics (not invasive biometrics)
-- Concurrent device limit is configurable and defaults to 2-3 devices per reader (not enforced at system level, configurable)
+- Concurrent device limit is configurable and defaults to 2 devices per reader (readers can hold active sessions on phone + tablet; upgradeable via settings)
 - Session renewal happens passively on activity; no explicit "extend session" button required
 - Security-first means: HttpOnly cookies (no JavaScript access), Secure flag (HTTPS only), SameSite=Lax (CSRF protection)
 - Readers can have multiple overlapping active sessions (one per device) up to configured limit
