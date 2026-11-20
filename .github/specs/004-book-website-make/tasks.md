@@ -78,13 +78,15 @@
 
 ### Implementation for US2 (Claude Direct Execution — SC-004 approved)
 
-- [ ] T014 [US2] Review Prompt 3A contract with blocking decision status (awaits Decisions 3, 4, 5, 6: code expiry timing, email provider, manuscript status, newsletter destination)
-- [ ] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) via Claude ~~(Figma Make)~~ (produce form specification + email template + error message matrix)
-- [ ] T016 [US2] Validate Prompt 3A specification: approved copy present, form states documented, newsletter link explicit non-subscription statement (manual review from `contracts/prompt-3a-reader-access.md`)
+⚠️ **MOVED TO SPEC 005** (2026-11-13): Reader access specification and execution now owned by [Spec 005 — Reader Access](../005-reader-access/spec.md)
 
-**Checkpoint**: US2 (Reader Access) awaits decision resolution before execution
+- [ ] T014 [US2] ~~Review Prompt 3A contract~~ **→ MOVED TO SPEC_005** | Reference only: `contracts/prompt-3a-reader-access.md` available in Spec 004
+- [ ] T015 [US2] ~~Execute Prompt 3A (reader access copy & forms)~~ **→ MOVED TO SPEC_005** | Figma Make execution now Spec 005's responsibility
+- [ ] T016 [US2] ~~Validate Prompt 3A specification~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
 
-**BLOCKED BY**: Decisions 3 (code expiry start time), 4 (email provider), 5 (manuscript status), 6 (newsletter destination)
+**Checkpoint**: US2 (Reader Access) → Spec 005 responsibility. Contracts remain for reference.
+
+**See**: [Spec 004 → Spec 005 Handover](./exports/SPEC_004_TO_005_HANDOVER.md) for details
 
 ---
 
@@ -112,13 +114,19 @@
 
 ### Implementation for US3 (Claude Direct Execution — SC-004 approved; after Decision Resolution)
 
-- [ ] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) via Claude ~~(Figma Make)~~ (produce recovery state matrix + error handling spec)
-- [ ] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) via Claude ~~(Figma Make)~~ (produce error message matrix + timeout handling spec)
-- [ ] T027 [US3] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions (manual review from `contracts/`)
+⚠️ **MOVED TO SPEC 005** (2026-11-13): Recovery flows and error states execution now owned by [Spec 005 — Reader Access](../005-reader-access/spec.md). Decisions 1–2 (recovery race & lifetime) and Decision 3 (code expiry) remain open in Spec 005 — do not mark these tasks complete until Spec 005 resolves those decisions.
 
-**Checkpoint**: All blocking decisions resolved - Phase B execution unblocked
+- [ ] T025 [US3] [SPEC 005 OWNER] Once Decisions 1 & 2 resolved in Spec 005: Execute Prompt 3B (recovery flows)
+- [ ] T026 [US3] [SPEC 005 OWNER] Once Decision 3 resolved in Spec 005: Execute Prompt 3C (error states, code-expiry messaging)
+- [ ] T027 [US3] [SPEC 005 OWNER] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions
 
-**BLOCKED BY**: Decisions 1, 2, 3, 4, 5, 6 (parallel resolution track)
+- [ ] T025 [US3] ~~Execute Prompt 3B (recovery flows)~~ **→ MOVED TO SPEC_005** | Decisions 1–2 ✅ resolved; Spec 005 owns execution
+- [ ] T026 [US3] ~~Execute Prompt 3C (error states)~~ **→ MOVED TO SPEC_005** | Decisions 1–3 ✅ resolved; Spec 005 owns execution
+- [ ] T027 [US3] ~~Validate Prompt 3B/3C~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
+
+**Checkpoint**: All blocking decisions resolved ✅ — Phase B responsibility → Spec 005
+
+**See**: [Spec 004 → Spec 005 Handover](./exports/SPEC_004_TO_005_HANDOVER.md) for details
 
 ---
 

@@ -70,26 +70,25 @@ All critical design baseline requirements have been verified and documented:
 
 ---
 
-### User Story 2 - Reader Access Journey Definition (Priority: P1)
+### User Story 2 - Reader Access Journey Definition — ✅ MOVED TO SPEC 005
 
+⚠️ **Status Change (2026-11-13)**: Reader access specification and execution (User Story 2, Prompts 3A–3C) is now owned by **[Spec 005 — Reader Access](../005-reader-access/spec.md)**.
+
+Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documented here for historical reference and master-contract traceability, but their implementation is Spec 005's responsibility.
+
+**Previous intention** (before handover):  
 **As** a reader verification designer, **I want** exact copy, form wording, and error-state specifications for email-code verification **so that** the reader access journey can be implemented with consistent, approved messaging.
 
-**Why this priority**: Reader access is core functionality. Approved copy must be precise and legally sound (no false success claims, truthful about limitations). Without this specification, implementation risks claims that don't match capability.
-
-**Independent Test**: Can be tested by verifying:
-- All copy text is extracted and matches approved source
-- Form states (default, focused, error, loading) are documented
-- Error messages distinguish between different failure scenarios
-- Newsletter action remains separate from reading verification
-- No success claims are made without server confirmation
-
-**Acceptance Scenarios**:
-
-1. **Given** approved form explanation ("We'll email you..."), **When** Prompt 3A is executed, **Then** this exact text appears in generated design spec with no modifications
-
-2. **Given** Prompt 1 navigation preview, **When** review begins, **Then** it includes: before/after navigation structure, numbered list of implementation steps, 2–3 bullet points documenting non-changes, and acceptance criteria
-
-3. **Given** separate newsletter decision, **When** Prompt 3A is executed, **Then** newsletter CTA is in separate section with explicit non-subscription statement
+**Handoff notes**:
+- Contracts remain available in `contracts/prompt-3a-reader-access.md`, `contracts/prompt-3b-recovery-flows.md`, `contracts/prompt-3c-error-states.md` for reference
+- Decision mapping:
+  - Email provider (Spec 004 Decision 4) → Spec 005 item 1
+  - Manuscript status (Spec 004 Decision 5) → Spec 005 item 2
+  - Code expiry (Spec 004 Decision 3) → Spec 005 item 3
+  - Newsletter destination (Spec 004 Decision 6) → Spec 005 item 8
+  - See [Spec 005 decisions](../005-reader-access/decisions.md) for full tracking
+- Decision 7 (route enforcement) stays with Spec 004 design
+- Timeline for Spec 005 completion documented in [Spec 005 spec](../005-reader-access/spec.md)
 
 ---
 
