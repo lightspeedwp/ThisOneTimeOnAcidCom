@@ -166,7 +166,7 @@ export function clearSessionCookie(): string {
  * const noToken = parseSessionCookie('other=value');
  * // => null
  */
-export function parseSessionCookie(cookieHeader: string | undefined): string | null {
+export function parseSessionCookie(cookieHeader: string | null | undefined): string | null {
   if (!cookieHeader) {
     return null;
   }
@@ -209,9 +209,13 @@ export function parseSessionCookie(cookieHeader: string | undefined): string | n
  * }
  */
 export function getSessionTokenFromHeaders(
-  headers: Record<string, string | string[] | undefined>
+  headers: Headers | Record<string, string | string[] | undefined>
 ): string | null {
-  const cookieHeader = headers['cookie'];
+  // Accept a Fetch API Headers object (Netlify Functions v2) or a plain record
+  const cookieHeader =
+    typeof (headers as Headers).get === 'function'
+      ? (headers as Headers).get('cookie') ?? undefined
+      : (headers as Record<string, string | string[] | undefined>)['cookie'];
 
   if (!cookieHeader) {
     return null;

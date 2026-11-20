@@ -36,8 +36,10 @@ export default async function handler(
     });
 
     // Create new verification code
+    // Hash the same code that is emailed (previously two different codes
+    // were generated, so the emailed code could never verify)
     const code = generateCode();
-    const verificationCode = createVerificationCode();
+    const verificationCode = createVerificationCode(code);
 
     // Store code
     await storeCode(email, {

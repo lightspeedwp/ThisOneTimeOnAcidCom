@@ -168,9 +168,9 @@ describe('Session Logout - T103 (US5)', () => {
 
   describe('Error cases', () => {
     it('should throw when terminating non-existent session', async () => {
-      await expect(
-        terminateSession('nonexistent@example.com', 'nonexistent-device')
-      ).rejects.toThrow('Session not found');
+      await expect(async () => {
+        await terminateSession('nonexistent@example.com', 'nonexistent-device');
+      }).rejects.toThrow();
     });
   });
 

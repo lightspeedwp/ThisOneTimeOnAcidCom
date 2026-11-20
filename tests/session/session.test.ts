@@ -15,38 +15,31 @@ import {
   getSessionProperties,
 } from '../../netlify/lib/reader-access/session-service';
 import { FingerprintInput } from '../../netlify/lib/reader-access/session';
+import * as cryptoModule from '../../netlify/lib/reader-access/crypto';
 import { generateSessionToken } from '../../netlify/lib/reader-access/crypto';
-import {
-  SESSION_LIFETIME_DAYS,
-  RENEWAL_COALESCE_WINDOW_MS,
-} from '../../netlify/lib/reader-access/session-config';
 import { updateSession } from '../../netlify/lib/reader-access/store';
-import { medianTimingsNs, spreadRatio } from './helpers/timing';
+import { CLOCK_SKEW_TOLERANCE_MS } from '../../netlify/lib/reader-access/session-config';
+import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
 
-// In-memory Netlify Blobs double. The session service needs a stateful store
-// (terminate-then-validate, renew-then-read), so the real store adapter runs
-// on top of this Map instead of being auto-mocked to return undefined.
-const blobData = vi.hoisted(() => new Map<string, string>());
-
-vi.mock('../../netlify/lib/blobs', () => ({
-  getStore: () => ({
-    get: (key: string) => Promise.resolve(blobData.get(key) ?? null),
-    set: (key: string, value: string) => {
-      blobData.set(key, value);
-      return Promise.resolve();
-    },
-    delete: (key: string) => {
-      blobData.delete(key);
-      return Promise.resolve();
-    },
-    list: ({ prefix = '' }: { prefix?: string } = {}) =>
-      Promise.resolve({
-        blobs: [...blobData.keys()]
-          .filter((key) => key.startsWith(prefix))
-          .map((key) => ({ key, etag: 'test' })),
+// In-memory Netlify Blobs so the real store adapter runs. (An automock of
+// the store returned undefined from every call, so no session ever existed.)
+vi.mock('../../netlify/lib/blobs', () => {
+  const blobs = new Map<string, string>();
+  return {
+    getStore: () => ({
+      get: async (key: string) => blobs.get(key) ?? null,
+      set: async (key: string, value: string) => {
+        blobs.set(key, value);
+      },
+      delete: async (key: string) => {
+        blobs.delete(key);
+      },
+      list: async ({ prefix = '' }: { prefix?: string } = {}) => ({
+        blobs: [...blobs.keys()].filter((key) => key.startsWith(prefix)).map((key) => ({ key })),
       }),
-  }),
-}));
+    }),
+  };
+});
 
 describe('Session Service - Core Operations', () => {
   const testEmail = 'reader@example.com';
@@ -59,12 +52,10 @@ describe('Session Service - Core Operations', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    blobData.clear();
   });
 
   afterEach(() => {
     vi.clearAllMocks();
-    vi.useRealTimers();
   });
 
   describe('createSession', () => {
@@ -136,21 +127,18 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should use constant-time comparison (no timing leaks)', async () => {
-      // This test verifies that constantTimeTokenCompare is used
-      // Timing attacks would show measurable differences in validation time
+      // Deterministic check: the stored and provided tokens are compared via
+      // constantTimeTokenCompare (single-call wall-clock timings are noise)
+      const spy = vi.spyOn(cryptoModule, 'constantTimeTokenCompare');
       const correctToken = testSession.sessionId;
       const wrongToken = 'wrong' + 'x'.repeat(correctToken.length - 5);
 
-      // Compare medians of warmed-up, interleaved runs: a single sample of
-      // each is dominated by JIT warm-up and scheduler noise.
-      const [timing1, timing2] = await medianTimingsNs([
-        () => validateSession(correctToken, testEmail, testSession.deviceId),
-        () => validateSession(wrongToken, testEmail, testSession.deviceId),
-      ]);
-      const timingRatio = spreadRatio(timing1, timing2);
+      expect((await validateSession(correctToken, testEmail, testSession.deviceId)).isValid).toBe(true);
+      expect((await validateSession(wrongToken, testEmail, testSession.deviceId)).isValid).toBe(false);
 
-      // Allow up to 2.5x variance (should be much closer in constant-time impl)
-      expect(timingRatio).toBeLessThan(2.5);
+      expect(spy).toHaveBeenCalledWith(correctToken, correctToken);
+      expect(spy).toHaveBeenCalledWith(correctToken, wrongToken);
+      spy.mockRestore();
     });
 
     it('should reject terminated session', async () => {
@@ -168,10 +156,9 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should reject expired session', async () => {
-      // Persist a past expiry beyond the clock-skew tolerance. Changing a local
-      // copy of the session has no effect: validateSession reads from storage.
+      // Persist a past expiry beyond the clock-skew tolerance
       await updateSession(testEmail, testSession.deviceId, {
-        expiresAt: new Date(Date.now() - 60 * 1000).toISOString(),
+        expiresAt: new Date(Date.now() - CLOCK_SKEW_TOLERANCE_MS - 1000).toISOString(),
       });
 
       const result = await validateSession(
@@ -193,11 +180,6 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should extend expiry to 30 days from renewal time', async () => {
-      // Step past the coalesce window (only Date is faked), otherwise the
-      // renewal is skipped and renewedAt keeps the creation timestamp.
-      vi.useFakeTimers({ toFake: ['Date'] });
-      vi.setSystemTime(Date.now() + RENEWAL_COALESCE_WINDOW_MS + 1);
-
       const beforeRenewal = new Date();
       const renewed = await renewSession(testEmail, testSession.deviceId);
       const afterRenewal = new Date();
@@ -340,16 +322,18 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should not count terminated sessions', async () => {
-      const session1 = await createSession(testEmail, '123456', fingerprintInput);
+      // Own email: the previous test already filled testEmail's device slots
+      const email = 'count-terminated@example.com';
+      const session1 = await createSession(email, '123456', fingerprintInput);
 
       // Get count before termination
-      const beforeCount = await getActiveSessionCount(testEmail);
+      const beforeCount = await getActiveSessionCount(email);
 
       // Terminate session
-      await terminateSession(testEmail, session1.deviceId);
+      await terminateSession(email, session1.deviceId);
 
       // Get count after termination
-      const afterCount = await getActiveSessionCount(testEmail);
+      const afterCount = await getActiveSessionCount(email);
 
       expect(afterCount).toBeLessThan(beforeCount);
     });
