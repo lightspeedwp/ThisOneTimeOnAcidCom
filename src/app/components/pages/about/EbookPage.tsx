@@ -57,6 +57,7 @@ import {
 import { PageContent } from './ebook/EbookPageContent';
 import { EbookDrawer } from './ebook/EbookDrawer';
 import { EbookReaderNav } from './ebook/EbookReaderNav';
+import { ReaderAccessGate } from './ReaderAccessGate';
 
 import '../../../../styles/blocks/ebook-base.css';
 import '../../../../styles/blocks/ebook-navigation.css';
@@ -253,6 +254,10 @@ export function EbookPage() {
 
   /* ── Paging effect state ── */
   const [pagingEffect, setPagingEffect] = useState(function () { return readPagingEffect(); });
+
+  /* ── Reader session state (for access control) ── */
+  const [readerSessionId, setReaderSessionId] = useState<string | null>(null);
+  const [showAccessForm, setShowAccessForm] = useState(true); // Show form by default for MVP
 
   /* ── Apply font size to CSS custom properties ── */
   useEffect(function () {
@@ -719,6 +724,21 @@ export function EbookPage() {
             <Breadcrumbs items={breadcrumbs} centered />
           </div>
         </header>
+      )}
+
+      {/* ── Reader Access Form (MVP: show for protected chapters) ── */}
+      {showAccessForm && !readerSessionId && (
+        <section className="ebook-reader__access-section" style={{ padding: '2rem' }}>
+          <ReaderAccessForm
+            onVerified={(sessionId) => {
+              setReaderSessionId(sessionId);
+              setShowAccessForm(false);
+            }}
+            onError={(error) => {
+              console.error('Access error:', error);
+            }}
+          />
+        </section>
       )}
 
       {/* ── Fullscreen Close Button ── */}
