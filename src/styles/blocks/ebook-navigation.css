@@ -192,6 +192,27 @@
   color: var(--wp--preset--color--neutral-400);
 }
 
+/* ── Session status and sign-out (RA-T042) ── */
+.ebook-reader__session-status {
+  font-family: var(--wp--preset--font-family--brand-body);
+  font-size: clamp(0.65rem, 0.55rem + 0.25vw, 0.8rem);
+  color: var(--wp--preset--color--neutral-600);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--wp--preset--border-radius--small);
+  background: rgba(0, 0, 0, 0.03);
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.dark .ebook-reader__session-status {
+  color: var(--wp--preset--color--neutral-300);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ebook-reader__nav-btn--signout:disabled {
+  opacity: 0.6;
+}
+
 /* ══════════════════════════════════════
    READING PROGRESS BAR
    ══════════════════════════════════════ */

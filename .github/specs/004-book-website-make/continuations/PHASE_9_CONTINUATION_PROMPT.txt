@@ -1,0 +1,42 @@
+Phase 9 Convergence Continuation — Execute Tasks T063–T074
+(SC-004 Claude Direct Execution Model)
+
+Branch: docs/spec-004-phase9-remaining (create from main)
+Context: Phase 9 Convergence T060–T062 complete (PR #630). 12 tasks remain.
+Execution Model: Claude Direct Execution (SC-004 approved 2026-11-20) — not Figma Make
+
+Completed T060–T062:
+✅ Decision 7 route enforcement wording corrected
+✅ Execution authorization gates clarified (gated by 5 spec.md status conditions)
+✅ All 7 blocking decisions documented; Spec 005 handover recorded
+
+NEW: SC-004 Execution Model Pivot (approved 2026-11-20):
+✅ Prompts 1, 2A, 2B now execute via Claude Direct Execution model
+✅ Deliverables: Markdown specs, JSON tokens, TypeScript/CSS code (not Figma canvas)
+✅ Contracts updated with Claude execution specifications and output validation
+
+Remaining Tasks (T063–T074):
+• T063: Raise Prompt 2A preview completeness to ≥95%, verify Claude output format in contract
+• T064: Create design export artifacts (or record descoping): design-baseline-validation.md, navigation-specification.md, design-baseline-acceptance-report.md
+• T065: Create implementation readiness validation: decisions-selected.md, implementation-readiness-checklist.md, preflight-analysis-final.md, workflow-completion-report.md
+• T066: Close Prompt 3A–3C tasks (T012–T027, T022–T038) with handover notes to Spec 005
+• T067: Disambiguate duplicate T014–T038 task sets; map each Phase 8 dependency explicitly (preserve dependencies without Claude execution replacements)
+• T068: Mark Phase 8 "zero gaps" acceptance item unmet (pending T067 completion)
+• T069: Update spec.md and plan.md to reflect SC-004 Claude execution model (Figma Make deprecated)
+• T070: Replace content/book/0N paths with references/0N paths across spec/plan/data-model/quickstart/source-file-inventory/version-reconciliation/checklists
+• T071: Replace non-baseline colours (#1a1a1a, #d4a574, #ff6b6b, #8b0000) or mark superseded in contracts
+• T072: Relabel Decision 2 Option A as "session refresh with absolute 30-day expiry" in prompt-3b and blocking-decisions-validation checklist
+• T073: Restate or close T045–T047 against PR #589 decisions
+• T074: Justify staged/ directory in plan.md or archive it
+
+Execute with: /speckit-implement or manually per task
+
+Reference docs:
+- Full details: .github/specs/004-book-website-make/continuations/PHASE_9_REMAINING_TASKS_T063_T074.md
+- SC-004 Execution Model Pivot: .github/specs/004-book-website-make/exports/SC-004_EXECUTION_MODEL_PIVOT.md
+- Claude execution contracts: Prompts 1, 2A, 2B in contracts/ folder with output specifications
+- Completed work: PR #630 (https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/630)
+- Decisions reference: .github/specs/004-book-website-make/checklists/blocking-decisions-validation.md
+
+After T074 complete: Commit to docs/spec-004-phase9-remaining, push, create draft PR.
+NOTE: Phase A execution (Prompts 1, 2A, 2B via Claude) now follows SC-004 model.

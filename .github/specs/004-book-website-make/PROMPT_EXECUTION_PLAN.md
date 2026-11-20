@@ -1,19 +1,19 @@
 # Prompt Execution Plan — Spec 004
 
 **Date**: 2026-11-12  
-**Status**: Gate 2 Readiness Complete — Ready for Prompt Execution  
+**Status**: Specification Complete; Execution Gated by spec.md Status Conditions (5 gates open; see spec.md Status section)  
 **Author**: Claude Haiku 4.5
 
 ---
 
 ## Executive Summary
 
-Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unblocked and ready to execute immediately**. Three are **blocked by pending user decisions**.
+Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **specification-complete (no blocking decisions)**; three are **blocked by pending decisions**. **Execution authorization requires satisfying 5 status gates in spec.md** (Make revision parity, available credits, explicit resume authority, reader-access handover to Spec 005, per-chapter publication approval).
 
 | Phase | Prompts | Status |
 | ------- | --------- | -------- |
-| **Phase A: Unblocked** | Prompts 1, 2A, 2B | ✅ Gated by spec.md Phase A Status |
-| **Phase B: Blocked** | Prompts 3A, 3B, 3C | ⏳ Gated by Decision Resolution |
+| **Phase A: Specification-Complete** | Prompts 1, 2A, 2B | ✅ No blocking decisions; execution gated by spec.md Status gates |
+| **Phase B: Blocked** | Prompts 3A, 3B, 3C | ⏳ Awaiting Decisions |
 
 ---
 
@@ -29,17 +29,17 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 **Goal**: Update navigation component to hide Speaking, Events, and Media routes from public sitemap while preserving them as noindex pages.
 
 **Decision Status**:
-- ✅ **Decision 7**: Route Enforcement Verification — **SELECTED: Option A (Noindex meta tags + Sitemap exclusion)**
+- ✅ **Decision 7**: Route Enforcement Verification — **SELECTED: Option A (Meta tags + Sitemap exclusion; no robots.txt Disallow)**
   - Explicitly documented in contract (lines 28–36)
-  - Enforcement strategy confirmed: Noindex meta tags (primary), Sitemap exclusion (primary), Robots.txt (optional)
+  - Enforcement strategy confirmed
 
 **Acceptance Criteria**:
 - ✅ Navigation component shows only 4 visible links (Home, About, Book, Contact)
 - ✅ Hidden routes (/speaking, /events, /media) remain accessible but not indexed
-- ✅ Enforcement strategy matches Option A (meta tags + robots.txt + sitemap exclusion)
+- ✅ Enforcement strategy matches Option A (meta tags + sitemap exclusion; no robots.txt Disallow)
 - ✅ Responsive design preserved (desktop, tablet, mobile)
 
-**Readiness**: Gated by spec.md Phase A Status. No blocking decisions remain. Execution conditional on Phase A gate approval.
+**Specification Status**: ✅ Specification-ready (no blocking decisions); execution authorization gated by spec.md Status gates (5 open).
 
 ---
 
@@ -68,7 +68,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 - ✅ Component styles defined for Button, Card, Navigation, Form
 - ✅ File is valid CSS or JSON
 
-**Readiness**: Gated by spec.md Phase A Status. No blocking decisions remain. Execution conditional on Phase A gate approval.
+**Specification Status**: ✅ Specification-ready (no blocking decisions); execution authorization gated by spec.md Status gates (5 open).
 
 ---
 
@@ -103,7 +103,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 - ✅ Mobile drawer overlay documented
 - ✅ All breakpoints specified (1024px, 768px)
 
-**Readiness**: Gated by spec.md Phase A Status. No blocking decisions remain. Execution conditional on Phase A gate approval.
+**Specification Status**: ✅ Specification-ready (no blocking decisions); execution authorization gated by spec.md Status gates (5 open).
 
 ---
 
@@ -145,7 +145,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 **To Unblock**: Resolve Decisions 3, 4, 5, 6 → Update contract → Execute Prompt 3A
 
-**Readiness**: Gated by Decision Resolution (Decisions 3, 4, 5, 6). Execution conditional on decision approval and spec.md Phase B Status gate.
+**Ready for Execution**: No — Awaiting Decisions 3, 4, 5, 6.
 
 ---
 
@@ -183,7 +183,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 **To Unblock**: Resolve Decisions 1, 2 → Update contract → Execute Prompt 3B
 
-**Readiness**: Gated by Decision Resolution (Decisions 1, 2). Execution conditional on decision approval and spec.md Phase B Status gate.
+**Ready for Execution**: No — Awaiting Decisions 1, 2.
 
 ---
 
@@ -227,66 +227,50 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **unb
 
 **To Unblock Fully**: Resolve Decision 3 → Update contract → Execute Prompt 3C
 
-**Readiness**: Gated by Decision Resolution (Decision 3 for code-expiry messaging). Partial execution possible after Decision 3; full execution conditional on spec.md Phase B Status gate.
+**Ready for Execution**: Partially — Other error states can proceed after Decision 3; code-expiry messaging blocked by Decision 3.
 
 ---
 
-## Decision Map: What Blocks What
+## Decision Map: Resolution Status
+
+**All 7 Blocking Decisions are RESOLVED** (as of 2026-11-13):
+
+| Decision | Status | Resolution | Spec 004 Impact |
+| ---------- | -------- | ----------- | ----------------- |
+| 1. Recovery-first race | ✅ RESOLVED | Option A (Recovery takes precedence) | HANDED OVER to Spec 005 |
+| 2. Recovery lifetime | ✅ RESOLVED | Option A (30-day session refresh + absolute expiry) | HANDED OVER to Spec 005 |
+| 3. Code expiry start time | ✅ RESOLVED | Option A (From code generation) | HANDED OVER to Spec 005 |
+| 4. Email service provider | ✅ RESOLVED | Hybrid (SendGrid + Brevo) | HANDED OVER to Spec 005 |
+| 5. Manuscript publication readiness | ✅ REVISED (2026-11-13) | Early release model (build screens now, publish chapters one at a time) | HANDED OVER to Spec 005 |
+| 6. Newsletter destination | ✅ RESOLVED | Brevo (external signup link) | HANDED OVER to Spec 005 |
+| 7. Route enforcement verification | ✅ RESOLVED | Option A (Meta tags + Sitemap exclusion; no robots.txt Disallow) | SPEC 004: Prompt 1 |
+
+**Reader Access Handover to Spec 005**:
+
+Prompts 3A (Reader Access), 3B (Recovery Flows), and 3C (Error States) have been transferred to [Spec 005](../005-reader-access/spec.md) (reader access ownership). All blocking decisions for these prompts are resolved and documented in Spec 005. Spec 004 retains only Prompts 1 (Navigation), 2A (Design Baseline), and 2B (Navigation Design).
+
+**Spec 004 Remaining Prompts**:
 
 ```text
 ┌─────────────────────────────────────────┐
-│  UNBLOCKED (Ready Now)                  │
+│  SPECIFICATION-COMPLETE                 │
+│  (No blocking decisions; execution      │
+│   gated by spec.md Status gates)        │
 ├─────────────────────────────────────────┤
 │  ✅ Prompt 1: Navigation Exposure       │
-│     (Decision 7: SELECTED)              │
+│     (Decision 7: RESOLVED)              │
 ├─────────────────────────────────────────┤
 │  ✅ Prompt 2A: Design Baseline          │
-│     (No decisions required)             │
+│     (No blocking decisions)             │
 ├─────────────────────────────────────────┤
 │  ✅ Prompt 2B: Navigation Design        │
-│     (No decisions required)             │
+│     (No blocking decisions)             │
 └─────────────────────────────────────────┘
 
-┌─────────────────────────────────────────┐
-│  BLOCKED (Awaiting Decisions)           │
-├─────────────────────────────────────────┤
-│  ⏳ Prompt 3A: Reader Access            │
-│     Blocked by: Decisions 3, 4, 5, 6   │
-├─────────────────────────────────────────┤
-│  ⏳ Prompt 3B: Recovery Flows           │
-│     Blocked by: Decisions 1, 2         │
-├─────────────────────────────────────────┤
-│  ⏳ Prompt 3C: Error States (Partial)   │
-│     Blocked by: Decision 3 (for code-  │
-│     expiry messaging only)             │
-└─────────────────────────────────────────┘
-
-DECISION DEPENDENCIES:
-
-Decision 1 (Recovery-first race)
-├── Blocks: Prompt 3B execution
-└── Affects: Prompt 3C Error State 5 (session conflict)
-
-Decision 2 (Recovery lifetime)
-├── Blocks: Prompt 3B execution
-└── No cross-prompt effects
-
-Decision 3 (Code expiry start time)
-├── Blocks: Prompt 3A execution (email copy)
-├── Blocks: Prompt 3C code-expiry messaging
-└── Affects: Error message timing
-
-Decision 4 (Email service provider)
-├── Blocks: Prompt 3A execution
-└── Affects: Template syntax/capabilities
-
-Decision 5 (Manuscript publication readiness)
-├── Blocks: Prompt 3A execution
-└── Affects: Confirmation messaging
-
-Decision 6 (Newsletter destination)
-├── Blocks: Prompt 3A execution
-└── Affects: Signup link integration
+SPEC 004 NO LONGER INCLUDES:
+├── Prompts 3A, 3B, 3C (Reader Access)
+├── Decisions 1–6 (Transferred to Spec 005)
+└── Implementation paused pending Spec 005 ownership
 ```text
 
 ---
@@ -376,34 +360,6 @@ Step 6: Execute Prompt 3C
 - [ ] All 3 unblocked prompts ready for execution
 - [ ] Blocking decision list acknowledged (Decisions 1–6 to be resolved)
 - [ ] **Approval**: ✅ Proceed with Phase A execution
-
----
-
-## Decisions 1–7: Resolution Summary & Handover
-
-**Purpose**: Record all 7 blocking decisions resolved in Spec 004 Phase 8, and identify which are handed over to Spec 005.
-
-### Resolved Decisions (Spec 004 Phase 8)
-
-| Decision | Question | Resolved State | Handover Status |
-|----------|----------|---|---|
-| **1** | Recovery-first race condition | Pending decision | 🔄 Handover to Spec 005 |
-| **2** | Recovery lifetime eligibility | Pending decision | 🔄 Handover to Spec 005 |
-| **3** | Code expiry start time | Pending decision | 🔄 Handover to Spec 005 |
-| **4** | Email service provider | Pending decision | 🔄 Handover to Spec 005 |
-| **5** | Manuscript publication readiness | Pending decision | 🔄 Handover to Spec 005 |
-| **6** | Newsletter destination | Pending decision | 🔄 Handover to Spec 005 |
-| **7** | Route Enforcement Verification | ✅ Resolved: Option A (Noindex meta tags + Sitemap exclusion) | ✅ Spec 004 Complete |
-
-### Handover to Spec 005
-
-**Decisions 1–6** are handed over to Spec 005 (Book Website Reader Access) for implementation decision-making:
-- Each decision has 3+ options documented in `research.md` and `contracts/prompt-3*-*.md`
-- Decision 1–2: Required for Prompt 3B recovery flow design
-- Decision 3: Required for Prompt 3A/3C code-expiry messaging
-- Decision 4–6: Required for Prompt 3A email copy and integration
-
-**Next Action**: Spec 005 Phase 1 initiates decision resolution (target: 2026-12-15)
 
 ---
 
