@@ -15,11 +15,31 @@ import {
   getSessionProperties,
 } from '../../netlify/lib/reader-access/session-service';
 import { FingerprintInput } from '../../netlify/lib/reader-access/session';
+import * as cryptoModule from '../../netlify/lib/reader-access/crypto';
 import { generateSessionToken } from '../../netlify/lib/reader-access/crypto';
+import { updateSession } from '../../netlify/lib/reader-access/store';
+import { CLOCK_SKEW_TOLERANCE_MS } from '../../netlify/lib/reader-access/session-config';
 import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
 
-// Mock store operations
-vi.mock('../../netlify/lib/reader-access/store');
+// In-memory Netlify Blobs so the real store adapter runs. (An automock of
+// the store returned undefined from every call, so no session ever existed.)
+vi.mock('../../netlify/lib/blobs', () => {
+  const blobs = new Map<string, string>();
+  return {
+    getStore: () => ({
+      get: async (key: string) => blobs.get(key) ?? null,
+      set: async (key: string, value: string) => {
+        blobs.set(key, value);
+      },
+      delete: async (key: string) => {
+        blobs.delete(key);
+      },
+      list: async ({ prefix = '' }: { prefix?: string } = {}) => ({
+        blobs: [...blobs.keys()].filter((key) => key.startsWith(prefix)).map((key) => ({ key })),
+      }),
+    }),
+  };
+});
 
 describe('Session Service - Core Operations', () => {
   const testEmail = 'reader@example.com';
@@ -107,27 +127,18 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should use constant-time comparison (no timing leaks)', async () => {
-      // This test verifies that constantTimeTokenCompare is used
-      // Timing attacks would show measurable differences in validation time
+      // Deterministic check: the stored and provided tokens are compared via
+      // constantTimeTokenCompare (single-call wall-clock timings are noise)
+      const spy = vi.spyOn(cryptoModule, 'constantTimeTokenCompare');
       const correctToken = testSession.sessionId;
       const wrongToken = 'wrong' + 'x'.repeat(correctToken.length - 5);
 
-      const start1 = process.hrtime.bigint();
-      await validateSession(correctToken, testEmail, testSession.deviceId);
-      const end1 = process.hrtime.bigint();
+      expect((await validateSession(correctToken, testEmail, testSession.deviceId)).isValid).toBe(true);
+      expect((await validateSession(wrongToken, testEmail, testSession.deviceId)).isValid).toBe(false);
 
-      const start2 = process.hrtime.bigint();
-      await validateSession(wrongToken, testEmail, testSession.deviceId);
-      const end2 = process.hrtime.bigint();
-
-      // Timing should be similar (constant-time)
-      // Note: This is a statistical test; exact timing varies by CPU
-      const timing1 = Number(end1 - start1);
-      const timing2 = Number(end2 - start2);
-      const timingRatio = Math.max(timing1, timing2) / Math.min(timing1, timing2);
-
-      // Allow up to 2x variance (should be much closer in constant-time impl)
-      expect(timingRatio).toBeLessThan(2.5);
+      expect(spy).toHaveBeenCalledWith(correctToken, correctToken);
+      expect(spy).toHaveBeenCalledWith(correctToken, wrongToken);
+      spy.mockRestore();
     });
 
     it('should reject terminated session', async () => {
@@ -145,14 +156,13 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should reject expired session', async () => {
-      // Create session with past expiry
-      const expiredSession = {
-        ...testSession,
-        expiresAt: new Date(Date.now() - 1000).toISOString(),
-      };
+      // Persist a past expiry beyond the clock-skew tolerance
+      await updateSession(testEmail, testSession.deviceId, {
+        expiresAt: new Date(Date.now() - CLOCK_SKEW_TOLERANCE_MS - 1000).toISOString(),
+      });
 
       const result = await validateSession(
-        expiredSession.sessionId,
+        testSession.sessionId,
         testEmail,
         testSession.deviceId
       );
@@ -312,16 +322,18 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should not count terminated sessions', async () => {
-      const session1 = await createSession(testEmail, '123456', fingerprintInput);
+      // Own email: the previous test already filled testEmail's device slots
+      const email = 'count-terminated@example.com';
+      const session1 = await createSession(email, '123456', fingerprintInput);
 
       // Get count before termination
-      const beforeCount = await getActiveSessionCount(testEmail);
+      const beforeCount = await getActiveSessionCount(email);
 
       // Terminate session
-      await terminateSession(testEmail, session1.deviceId);
+      await terminateSession(email, session1.deviceId);
 
       // Get count after termination
-      const afterCount = await getActiveSessionCount(testEmail);
+      const afterCount = await getActiveSessionCount(email);
 
       expect(afterCount).toBeLessThan(beforeCount);
     });

@@ -62,9 +62,39 @@ import {
  * );
  * // => { sessionId: 'token...', email: '...', expiresAt: '2026-12-20T...', ... }
  */
+/**
+ * Per-email creation queue. createSession counts active sessions and then
+ * writes, so concurrent calls for one email could all pass the device-limit
+ * check. Chaining them closes that race within one function instance.
+ *
+ * Limitation: Netlify Blobs offers no compare-and-swap through this adapter,
+ * so two separate function instances can still race. A conditional write
+ * (ETag onlyIfMatch on a per-email counter) would be needed to close that.
+ */
+const creationQueues = new Map<string, Promise<unknown>>();
+
+function serialiseByEmail<T>(email: string, task: () => Promise<T>): Promise<T> {
+  const key = email.trim().toLowerCase();
+  const previous = creationQueues.get(key) ?? Promise.resolve();
+  const run = previous.then(task, task);
+  const settled = run.catch(() => undefined);
+  creationQueues.set(key, settled);
+  settled.then(() => {
+    if (creationQueues.get(key) === settled) creationQueues.delete(key);
+  });
+  return run;
+}
+
 export async function createSession(
   email: string,
   verificationCode: string,
+  deviceFingerprint: FingerprintInput
+): Promise<Session> {
+  return serialiseByEmail(email, () => createSessionUnserialised(email, deviceFingerprint));
+}
+
+async function createSessionUnserialised(
+  email: string,
   deviceFingerprint: FingerprintInput
 ): Promise<Session> {
   // TODO: T006a - Validate verification code (Phase 2 integration)
