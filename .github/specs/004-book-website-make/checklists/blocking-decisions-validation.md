@@ -48,7 +48,7 @@ Each blocking decision MUST have:
 | --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "How long is a confirmed redemption eligible for recovery access?" | ✓ |
 | Rationale | ✓ | ✓ | Recovery lifetime determines session expiry; affects renewal before expiration | ✓ |
-| Option Count | ✓ (3+) | ✓ (4 options) | A (30-day rolling), B (30-day fixed), C (No expiry), D (Configurable) | ✓ |
+| Option Count | ✓ (3+) | ✓ (4 options) | A (**Session refresh with 30-day absolute expiry**), B (30-day fixed), C (No expiry), D (Configurable) | ✓ |
 | Option Descriptions | ✓ | ✓ | All 4 options with security/UX trade-offs documented | ✓ |
 | Impact Assessment | ✓ | ✓ | "Recovery flows specification depends on session lifetime for state management, cleanup schedules, and error messaging" | ✓ |
 | Decision Status | ✓ | ✓ | "Awaiting user input from blocking decision matrix in spec.md" | ✓ |

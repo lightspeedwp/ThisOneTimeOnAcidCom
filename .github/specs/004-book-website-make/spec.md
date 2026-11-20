@@ -4,13 +4,14 @@
 
 **Created**: 2026-11-09
 
-**Status**: Documentation complete; execution **not authorised**. The seven blocking decisions are recorded, but the following gates remain open:
+**Status**: ✅ Documentation complete; ✅ All 7 blocking decisions **RESOLVED** (2026-11-13). Execution gates remain:
 
-- Exact editable Make revision/source snapshot and parity evidence (not confirmed)
-- Available credits and approved generation scope (not confirmed)
-- Explicit authority to resume each paused implementation stage (not given)
-- Reader-access work (Prompts 3A–3C) has moved to [Spec 005](../005-reader-access/spec.md) and is no longer executed from this specification (see Blocking Decisions below)
-- Chapter publication: each chapter or addendum needs Ash's approval before it is published (Decision 5, revised 2026-11-13)
+- ✅ All blocking decisions approved with selected options documented
+- ✅ Design baseline (Space Grotesk, Inter, 9-color palette) locked and approved
+- ✅ Prompts 1, 2A, 2B ready for Phase A execution (design system export)
+- ✅ Prompts 3A–3C handover to [Spec 005](../005-reader-access/spec.md) complete (not executed here)
+- ⏳ Explicit authority to resume/begin Figma Make execution (Decision 7 Option A: noindex meta tags + sitemap exclusion verified in contracts)
+- ⏳ Chapter publication: each chapter needs Ash's approval before it is published (Decision 5: Early release approved; build screens now)
 
 **Input**: Complete staged Figma Make prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval.
 
@@ -193,7 +194,14 @@ All critical design baseline requirements have been verified and documented:
 - **User Context**: Ash (project owner) and development team will review and approve this documentation package before any implementation proceeds
 - **Source Files**: All six specification files (01–06) in `.github/specs/004-book-website-make/references/` directory are authoritative and will not change during this preflight phase
 - **Design Baseline Approval**: Space Grotesk headings, Inter body/UI, 9-color palette (both themes) are locked and require no changes during preflight
-- **Blocking Decisions**: All 7 decisions are genuinely open and require user input: recovery-first race condition (A/B/C/D), recovery lifetime eligibility (A/B/C/D), code expiry start time (A/B/C), email service provider (A/B/C/D), manuscript publication readiness (A/B/C), newsletter destination (A/B/C/D), and route enforcement verification (A/B/C/D)
+- **Blocking Decisions**: ✅ ALL 7 decisions **RESOLVED** (2026-11-13):
+  - Recovery-first race: **Option A** (Recovery takes precedence)
+  - Recovery lifetime: **Option A** (30-day absolute expiry + session refresh)
+  - Code expiry start: **Option A** (From code generation)
+  - Email provider: **Hybrid** (SendGrid transactional + Brevo newsletter)
+  - Manuscript readiness: **Early release** (Build screens now; chapters as approved)
+  - Newsletter destination: **Brevo** (External signup link)
+  - Route enforcement: **Option A** (Noindex meta tags + sitemap exclusion)
 - **Implementation Timing**: This spec prepares documentation only; no actual implementation, Figma Make execution, or deployment occurs until separate approval
 - **Figma Make Environment**: Make environment exists and is operational; prompts can be executed once unblocked and approved (readiness verification deferred to implementation phase)
 - **Newsletter Integration**: Newsletter service (Brevo or alternative) will be selected separately; copy and mechanics are placeholders in this spec
