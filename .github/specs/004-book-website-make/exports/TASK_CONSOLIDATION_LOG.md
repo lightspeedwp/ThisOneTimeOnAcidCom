@@ -21,7 +21,7 @@ These 6 tasks represent reader-access work now owned by Spec 005. Spec 004 task 
 
 **Analysis scope**: T014–T038 (all tasks in original range)
 
-✅ **Finding**: No duplicate or overlapping task definitions found within Spec 004 task list.
+⚠️ **Finding**: Task IDs T025–T027 are reused. Lines 108–110 of `tasks.md` hold the tasks moved to Spec 005. Lines 329–331 hold active US2 tasks. T067 remains open to disambiguate these sets.
 
 Each remaining task has distinct scope:
 - Design baseline (Prompts 1–2B): Owned by Spec 004

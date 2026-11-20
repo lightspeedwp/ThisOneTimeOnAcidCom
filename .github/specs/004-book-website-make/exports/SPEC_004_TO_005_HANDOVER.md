@@ -9,7 +9,7 @@
 
 ## Summary
 
-Spec 004 completes design specification and hand-off to Spec 005 for reader-access implementation. Stage IDs 3A–3C (reader access, recovery flows, error states) transition from Spec 004 responsibility to [Spec 005 — Reader Access](../005-reader-access/spec.md) full ownership.
+Spec 004 completes design specification and hand-off to Spec 005 for reader-access implementation. Stage IDs 3A–3C (reader access, recovery flows, error states) transition from Spec 004 responsibility to [Spec 005 — Reader Access](../../005-reader-access/spec.md) full ownership.
 
 ---
 
@@ -139,7 +139,7 @@ Reader-access reference documents remain available for Spec 005:
 ## References
 
 - **Spec 004**: [.github/specs/004-book-website-make/spec.md](../spec.md)
-- **Spec 005**: [.github/specs/005-reader-access/spec.md](../005-reader-access/spec.md)
+- **Spec 005**: [.github/specs/005-reader-access/spec.md](../../005-reader-access/spec.md)
 - **Decisions**: [Spec 004 research.md](../research.md)
 - **Contracts**: [Spec 004 contracts/](../contracts/)
 

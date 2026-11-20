@@ -22,11 +22,11 @@ Specification 004 (Book Website Figma Make Prompt Pack) is **READY FOR IMPLEMENT
 **All 7 blocking decisions resolved** (2026-11-11)
 
 | Decision | Your Selection | Status |
-|----------|---|---|
+| --- | --- | --- |
 | 1. Recovery-first race condition | Option A: Recovery precedence | ✅ APPROVED |
-| 2. Recovery lifetime eligibility | Option A: 30-day session refresh | ✅ APPROVED |
+| 2. Recovery lifetime eligibility | Option A: 30-day absolute expiry (no extension); Spec 005 permits repeated renewal | ⏳ PARTIAL |
 | 3. Code expiry start time | Option A: From code generation | ✅ APPROVED |
-| 4. Email service provider | SendGrid (transactional) + Brevo (newsletters) | ✅ APPROVED |
+| 4. Email service provider | Mailgun (transactional SMTP, resolved 2026-11-19 in Spec 005) + Brevo (newsletter) | ✅ APPROVED |
 | 5. Manuscript publication readiness | Not yet approved (Jan 2027 target) | ✅ DECIDED |
 | 6. Newsletter destination | Brevo external signup link | ✅ APPROVED |
 | 7. Route enforcement verification | Option A: noindex meta + sitemap exclusion | ✅ APPROVED |
@@ -37,7 +37,7 @@ Specification 004 (Book Website Figma Make Prompt Pack) is **READY FOR IMPLEMENT
 
 ### ✅ Gate 2: Design Baseline Approval — COMPLETE
 
-**Design system locked and approved** (2026-11-09)
+**Design system approved for the dark theme and primitives** (2026-11-09). The light mapping remains `PENDING_APPROVAL`.
 
 **Typography**:
 - Headings: Space Grotesk (weights: 600, 700; sizes: 24–48px)
@@ -72,7 +72,9 @@ Specification 004 (Book Website Figma Make Prompt Pack) is **READY FOR IMPLEMENT
 
 ### ✅ Gate 3: Readiness Analysis — COMPLETE
 
-**All readiness criteria satisfied** (2026-11-20)
+**Readiness criteria substantially met, with two open verification tasks** (2026-11-20)
+- T063: Prompt 2A verification (target ≥95% coverage, currently 89%)
+- T071: Non-baseline color review (currently pending resolution)
 
 **Specification Completeness**:
 - ✅ All 4 user stories documented (US1–US4)
@@ -104,7 +106,7 @@ Specification 004 (Book Website Figma Make Prompt Pack) is **READY FOR IMPLEMENT
 ### Core Documentation
 
 | Document | Status | Purpose |
-|----------|--------|---------|
+| --- | --- | --- |
 | **spec.md** | ✅ Complete | 21,408 bytes — Complete specification with requirements, success criteria, edge cases, assumptions |
 | **plan.md** | ✅ Complete | 7,828 bytes — Technical approach, design system, source files, architecture |
 | **research.md** | ✅ Complete | 7,595 bytes — Blocking decision analysis (7 decisions, all resolved) |
@@ -114,7 +116,7 @@ Specification 004 (Book Website Figma Make Prompt Pack) is **READY FOR IMPLEMENT
 ### Prompt Specifications (14 contract files)
 
 | Prompt | Status | Completeness | Blocking |
-|--------|--------|--------------|----------|
+| --- | --- | --- | --- |
 | **1: Navigation Exposure** | ✅ Ready | 100% | None |
 | **2A: Design Baseline** | ✅ Ready | 100% | None |
 | **2B: Navigation Design** | ✅ Ready | 100% | None |
@@ -130,7 +132,7 @@ Specification 004 (Book Website Figma Make Prompt Pack) is **READY FOR IMPLEMENT
 ### Export & Validation Reports
 
 | Report | Purpose | Status |
-|--------|---------|--------|
+| --- | --- | --- |
 | **GATE_2_SIGN_OFF_SUMMARY.md** | Design baseline approval summary | ✅ Complete |
 | **GATE_2_READINESS_REPORT.md** | Technical readiness validation | ✅ Complete |
 | **design-baseline-validation.md** | Design system approval | ✅ Complete |
@@ -148,7 +150,7 @@ Specification 004 (Book Website Figma Make Prompt Pack) is **READY FOR IMPLEMENT
 ### Phase A: Unblocked Prompts (Ready Now)
 
 | Prompt | Timeline | Deliverable |
-|--------|----------|-------------|
+| --- | --- | --- |
 | Prompt 1 (Navigation Exposure) | 5–10 min | Updated navigation component |
 | Prompt 2A (Design Baseline Export) | 10–15 min | CSS variables + JSON tokens |
 | Prompt 2B (Navigation Design) | 10–15 min | Component design with states |
@@ -157,7 +159,7 @@ Specification 004 (Book Website Figma Make Prompt Pack) is **READY FOR IMPLEMENT
 ### Phase B: Blocked Prompts (Post-Decisions)
 
 | Prompt | Timeline | Deliverable |
-|--------|----------|-------------|
+| --- | --- | --- |
 | Prompt 3A (Reader Access) | 15–20 min | Form copy + error messaging |
 | Prompt 3B (Recovery Flows) | 15–20 min | Recovery flow design |
 | Prompt 3C (Error States) | 10–15 min | Error state specifications |
@@ -180,14 +182,14 @@ Before implementation authorization, confirm:
 
 ### Approval Gates
 - [x] Gate 1: All blocking decisions approved
-- [x] Gate 2: Design baseline locked and approved
-- [x] Gate 3: Readiness analysis complete
+- [x] Gate 2: Design baseline approved for the dark theme and primitives; light mapping pending approval
+- [x] Gate 3: Readiness analysis complete (with T063/T071 open)
 
 ### Blocking Decisions
 - [x] Decision 1 (Recovery race): Option A selected ✅
-- [x] Decision 2 (Recovery lifetime): Option A selected ✅
+- [x] Decision 2 (Recovery lifetime): Option A (30-day absolute expiry); Spec 005 permits renewal ⏳ PARTIAL
 - [x] Decision 3 (Code expiry): Option A selected ✅
-- [x] Decision 4 (Email provider): SendGrid + Brevo ✅
+- [x] Decision 4 (Email provider): Mailgun (transactional, Spec 005) + Brevo (newsletter) ✅
 - [x] Decision 5 (Manuscript status): Jan 2027 target ✅
 - [x] Decision 6 (Newsletter): Brevo external link ✅
 - [x] Decision 7 (Route enforcement): Option A selected ✅
@@ -228,7 +230,7 @@ Before implementation authorization, confirm:
 Upon approval of this sign-off, the implementation team is authorized to:
 
 1. **Phase A Execution**: Execute Prompts 1, 2A, 2B in Figma Make
-2. **Phase B Execution**: Execute Prompts 3A, 3B, 3C once blocking decisions are confirmed
+2. **Phase B Execution**: Owned and executed by Spec 005. Prompts 3A, 3B, 3C execute only under Spec 005's approval and gates
 3. **Asset Delivery**: Export design tokens, component styles, navigation specifications
 4. **Handoff**: Deliver outputs to development team for integration
 
@@ -236,7 +238,7 @@ Upon approval of this sign-off, the implementation team is authorized to:
 1. ✅ Project owner signs off Gate 3 (this document)
 2. ⏳ Implementation team executes Phase A prompts (Figma Make)
 3. ⏳ Blocking decisions implemented in codebase
-4. ⏳ Implementation team executes Phase B prompts
+4. ⏳ Spec 005 executes Phase B prompts under its approval gates
 5. ⏳ Design assets integrated into production build
 
 ---

@@ -160,11 +160,11 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 
 ### Gate 1: Blocking Decisions ⏳
 
-**Status**: 1 of 7 selected (Decision 7)
+**Status**: 6 of 7 selected/resolved (Decisions 1–6 resolved per Spec 005 handover, Decision 7 from Spec 004)
 
-**Prerequisite**: All 7 decisions selected + user input documented
+**Prerequisite**: Decision 4 resolved in Spec 005 on 2026-11-19 (Mailgun for transactional, Brevo for newsletter)
 
-**Action Required**: User completes selections for Decisions 1–6
+**Action Required**: None for Spec 004; Spec 005 owns remaining decisions
 
 **Reference**: decisions-selected.md
 
@@ -257,7 +257,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 
 ### Implementation Team Readiness ✅
 
-- [x] Design baseline locked and approved
+- [x] Design baseline approved for the dark theme and primitives; light mapping pending approval
 - [x] Blocking decisions documented with options
 - [x] Figma Make prompts staged with execution guides
 - [x] Approval gates defined and documented
@@ -280,7 +280,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 5. ⏳ Project owner signs off Gate 3 (final readiness approval)
 6. ⏳ Implementation team executes Phase A prompts (Figma Make)
 7. ⏳ Blocking decisions implemented
-8. ⏳ Implementation team executes Phase B prompts
+8. ⏳ Spec 005 executes Phase B prompts under its approval gates
 
 ---
 
@@ -290,7 +290,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 
 - **Documentation**: Complete and comprehensive
 - **Validation**: All reports generated and reviewed
-- **Approval Gates**: 2 of 3 complete (Gate 1 pending decisions, Gate 3 pending sign-off)
+- **Approval Gates**: 1 of 3 complete (Gate 2 approved for dark theme + primitives; Gate 1/3 pending with T063/T071 open)
 - **Implementation Readiness**: Phase A unblocked (Prompts 1, 2A, 2B); Phase B blocked pending decisions
 
 **Cost**: Zero code, zero commits, zero deployments (documentation-only package)
