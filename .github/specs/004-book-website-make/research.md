@@ -43,7 +43,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 
 | Option | Description | Trade-offs |
 | -------- | ------------- | ----------- |
-| **A (Recommended)** | 30-day eligibility with session refresh on recovery; absolute expiry 30 days after initial verification | Matches device lifecycle (30 days); balances security with UX; the rolling refresh cannot extend access beyond the absolute limit |
+| **A (Recommended)** | Session refresh with absolute 30-day expiry: recovery extends current session, but no fresh access is granted beyond 30 days from initial verification | Matches device lifecycle (30 days); balances security with UX; the session refresh resets the inactivity clock but cannot extend access beyond the absolute 30-day boundary |
 | B | 30-day fixed window from initial verification (no rolling) | Simpler implementation; forces re-verification at hard boundary; less forgiving of inactive readers |
 | C | No expiry—recovery sessions valid indefinitely | Maximum UX convenience; highest security risk; may conflict with data retention policy |
 | D | Configurable per-reader basis (support override) | Flexibility for special cases; added complexity; support burden |

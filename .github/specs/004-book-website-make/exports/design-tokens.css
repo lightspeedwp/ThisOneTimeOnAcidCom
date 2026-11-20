@@ -1,0 +1,141 @@
+/**
+ * Design System Baseline Tokens
+ * Generated: 2026-11-20
+ * Source: Prompt 2A — Design System Baseline Export
+ * Baseline: Design Brief v1.1.2
+ * Approval: Gate 2 Readiness Complete
+ *
+ * This file contains the approved typography, color palette, and component styles.
+ * All values match the design baseline documented in references/04-design-brief.md
+ * Unapproved candidates (R3, T1, RT2, C1) are explicitly excluded.
+ */
+
+:root {
+  /* ===== TYPOGRAPHY ===== */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-ui: 'Inter', sans-serif;
+
+  /* ===== SHARED PALETTE PRIMITIVES ===== */
+  /* Nine approved colors — single source of truth */
+  --color-deepest-dark: #0B0B10;
+  --color-dark-purple: #12121A;
+  --color-lighter-dark: #171722;
+  --color-warm-cream: #F6F2EB;
+  --color-warm-tan: #CFC7BB;
+  --color-warm-brown: #9C9488;
+  --color-accent-pink: #FF3AAE;
+  --color-accent-yellow: #F4FF3C;
+  --color-accent-purple: #8A63FF;
+
+  /* ===== DARK THEME (APPROVED) ===== */
+  --color-primary-text-dark: #F6F2EB;
+  --color-primary-bg-dark: #0B0B10;
+  --color-secondary-text-dark: #CFC7BB;
+  --color-secondary-bg-dark: #12121A;
+  --color-tertiary-text-dark: #9C9488;
+  --color-panel-dark: #171722;
+  --color-accent-pink-dark: #FF3AAE;
+  --color-accent-yellow-dark: #F4FF3C;
+  --color-accent-purple-dark: #8A63FF;
+
+  /* ===== LIGHT THEME (EXISTING SUPPORT, MAPPING PENDING APPROVAL) ===== */
+  /* Light theme role mapping is not approved. These values preserve existing light support. */
+  --color-primary-text-light: #0B0B10;
+  --color-primary-bg-light: #F6F2EB;
+  --color-secondary-text-light: #171722;
+  --color-secondary-bg-light: #CFC7BB;
+  --color-tertiary-text-light: #9C9488;
+  --color-panel-light: #F6F2EB;
+  --color-accent-pink-light: #FF3AAE;
+  --color-accent-yellow-light: #F4FF3C;
+  --color-accent-purple-light: #8A63FF;
+
+  /* ===== BUTTON COMPONENT ===== */
+  --button-bg-primary-dark: #FF3AAE;
+  --button-text-primary-dark: #0B0B10;
+  --button-bg-primary-light: #FF3AAE;
+  --button-text-primary-light: #F6F2EB;
+
+  --button-bg-secondary-dark: #171722;
+  --button-text-secondary-dark: #F6F2EB;
+  --button-bg-secondary-light: #CFC7BB;
+  --button-text-secondary-light: #0B0B10;
+
+  --button-bg-disabled-dark: #12121A;
+  --button-text-disabled-dark: #9C9488;
+  --button-bg-disabled-light: #CFC7BB;
+  --button-text-disabled-light: #9C9488;
+
+  /* ===== CARD COMPONENT ===== */
+  --card-bg-dark: #12121A;
+  --card-border-dark: #171722;
+  --card-shadow-dark: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover-dark: 0 4px 12px rgba(255, 58, 174, 0.1);
+
+  --card-bg-light: #F6F2EB;
+  --card-border-light: #CFC7BB;
+  --card-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover-light: 0 4px 12px rgba(255, 58, 174, 0.1);
+
+  /* ===== NAVIGATION COMPONENT ===== */
+  --nav-link-color-dark: #F6F2EB;
+  --nav-link-color-hover-dark: #FF3AAE;
+  --nav-link-color-active-dark: #FF3AAE;
+  --nav-underline-active-dark: #FF3AAE;
+
+  --nav-link-color-light: #0B0B10;
+  --nav-link-color-hover-light: #FF3AAE;
+  --nav-link-color-active-light: #FF3AAE;
+  --nav-underline-active-light: #FF3AAE;
+
+  /* ===== FORM INPUT COMPONENT ===== */
+  --form-input-bg-dark: #0B0B10;
+  --form-input-border-dark: #171722;
+  --form-input-border-focused-dark: #FF3AAE;
+  --form-input-text-dark: #F6F2EB;
+  --form-input-error-border-dark: #FF3AAE;
+  --form-input-error-text-dark: #FF3AAE;
+  --form-input-placeholder-dark: #9C9488;
+
+  --form-input-bg-light: #F6F2EB;
+  --form-input-border-light: #CFC7BB;
+  --form-input-border-focused-light: #FF3AAE;
+  --form-input-text-light: #0B0B10;
+  --form-input-error-border-light: #FF3AAE;
+  --form-input-error-text-light: #FF3AAE;
+  --form-input-placeholder-light: #9C9488;
+}
+
+/* ===== THEME SWITCHING ===== */
+/* Prefer dark theme by default */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --font-current: var(--font-body);
+    --color-primary-text: var(--color-primary-text-dark);
+    --color-primary-bg: var(--color-primary-bg-dark);
+    --color-secondary-text: var(--color-secondary-text-dark);
+    --color-secondary-bg: var(--color-secondary-bg-dark);
+    --button-bg-primary: var(--button-bg-primary-dark);
+    --button-text-primary: var(--button-text-primary-dark);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-primary-text: var(--color-primary-text-light);
+    --color-primary-bg: var(--color-primary-bg-light);
+    --color-secondary-text: var(--color-secondary-text-light);
+    --color-secondary-bg: var(--color-secondary-bg-light);
+    --button-bg-primary: var(--button-bg-primary-light);
+    --button-text-primary: var(--button-text-primary-light);
+  }
+}
+
+/* ===== UNAPPROVED CANDIDATES ===== */
+/* The following are explicitly NOT defined and remain unapproved:
+   - R3: Responsive Typography
+   - T1: Additional Typography
+   - RT2: Reader Typography Controls
+   - C1: Reader Continuity/Progress Tracking
+*/

@@ -81,8 +81,10 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 
 **Project Type: Documentation-only specification**
 
+**Reference specifications moved from `content/book/` to `references/`** (Phase 9, T070):
+
 ```text
-content/book/
+.github/specs/004-book-website-make/references/
 ├── 01-book-website-specification.md     # Master execution contract (v1.0.0)
 ├── 02-companion-session-plan.md         # Preparation queue (v1.0.4)
 ├── 03-author-decisions-launch-scope.md  # Author decisions (v1.3.0)
@@ -92,6 +94,18 @@ content/book/
 ```
 
 **Structure Decision**: Documentation-only package. No code structure required. Source specifications analyzed, reconciled, and staged for Figma Make execution. All deliverables remain in `.github/specs/004-book-website-make/` with no backend/frontend splits or implementation code paths.
+
+---
+
+## Directory Purpose Guide
+
+| Directory | Purpose | Contents | Status |
+|-----------|---------|----------|--------|
+| `contracts/` | Figma Make prompt specifications (input) | Prompt 1–3C contract definitions | Reference (reader-access moved to Spec 005) |
+| `exports/` | Final approved artifacts (output) | Design tokens, checklists, handoff docs | Active |
+| `references/` | Source specification documents | Six specification files (01–06) with versions | Read-only reference |
+| `staged/` | Interim Figma Make outputs and drafts | Regenerated prompt outputs before finalization | Available for future regeneration |
+| `checklists/` | Quality validation and approval tracking | Pre-approval, specification-quality, prompt-preview checklists | Reference |
 
 ## Complexity Tracking
 
