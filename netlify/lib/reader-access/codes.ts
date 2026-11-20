@@ -2,9 +2,10 @@
 // Six-digit numeric codes; stored hashed
 // Expire after 10 minutes; five wrong attempts to limit guessing
 
-import { randomInt, scryptSync, randomBytes } from 'crypto';
+import { randomInt, scryptSync, randomBytes, randomUUID, timingSafeEqual } from 'crypto';
 
 export interface VerificationCode {
+  codeId: string; // Unique id for the consume-once marker
   codeHash: string; // Salted hash; plain code never stored
   salt: string; // Base64-encoded salt for validation
   createdAt: string; // ISO timestamp
@@ -41,17 +42,23 @@ export function verifyCode(plainCode: string, storedHash: string, salt: string):
   // Recalculate hash with same salt and compare (constant-time comparison)
   const saltBuffer = Buffer.from(salt, 'base64');
   const { hash } = hashCode(plainCode, saltBuffer);
-  return hash === storedHash;
+  const actual = Buffer.from(hash, 'base64');
+  const expected = Buffer.from(storedHash, 'base64');
+  return actual.length === expected.length && timingSafeEqual(actual, expected);
 }
 
-export function createVerificationCode(): VerificationCode {
-  const plainCode = generateCode();
+/**
+ * Build the stored record for a code. Pass the plain code that is emailed to
+ * the reader; otherwise a new one is generated and the caller cannot send it.
+ */
+export function createVerificationCode(plainCode: string = generateCode()): VerificationCode {
   const salt = randomBytes(SALT_BYTES);
   const { hash } = hashCode(plainCode, salt);
   const now = new Date();
   const expiresAt = new Date(now.getTime() + CODE_EXPIRY_MINUTES * 60 * 1000);
 
   return {
+    codeId: randomUUID(),
     codeHash: hash,
     salt: salt.toString('base64'),
     createdAt: now.toISOString(),

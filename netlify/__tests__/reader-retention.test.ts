@@ -9,25 +9,25 @@ import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 const mockBlobStore = new Map<string, string>();
 const mockDeletedKeys = new Set<string>();
 
-vi.mock('@netlify/blobs', () => ({
-  list: vi.fn(async ({ prefix }: { prefix: string }) => {
-    const keys = Array.from(mockBlobStore.keys()).filter((k) =>
-      k.startsWith(prefix)
-    );
-    return {
-      blobs: keys.map((key) => ({ key })),
-    };
-  }),
-  get: vi.fn(async (key: string) => mockBlobStore.get(key) ?? null),
-  delete: vi.fn(async (key: string) => {
-    mockBlobStore.delete(key);
-    mockDeletedKeys.add(key);
-  }),
-}));
+vi.mock('@netlify/blobs', () => {
+  const store = {
+    list: vi.fn(async ({ prefix }: { prefix: string }) => ({
+      blobs: Array.from(mockBlobStore.keys())
+        .filter((k) => k.startsWith(prefix))
+        .map((key) => ({ key })),
+    })),
+    get: vi.fn(async (key: string) => mockBlobStore.get(key) ?? null),
+    delete: vi.fn(async (key: string) => {
+      mockBlobStore.delete(key);
+      mockDeletedKeys.add(key);
+    }),
+  };
+  return { getStore: vi.fn(() => store) };
+});
 
 import handler from '../functions/reader-retention';
 
-describe.skip('Reader Retention Tests (RA-T050)', () => {
+describe('Reader Retention Tests (RA-T050)', () => {
   beforeEach(() => {
     mockBlobStore.clear();
     mockDeletedKeys.clear();

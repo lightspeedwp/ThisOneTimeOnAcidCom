@@ -3,7 +3,7 @@
 // Use edition manifest and session validation
 
 import { createJsonResponse, responses, createResponse } from '../lib/reader-access/responses';
-import { getSession, renewSession } from '../lib/reader-access/store';
+import { getAccessSession, renewAccessSession } from '../lib/reader-access/code-store';
 import { parseSessionCookie, formatSessionCookie, createSessionCookie } from '../lib/reader-access/session-cookie';
 import { EditionReader } from '../lib/reader-access/edition';
 
@@ -27,21 +27,21 @@ export default async function handler(
 
     // Parse session cookie
     const cookieHeader = req.headers.get('cookie');
-    const sessionId = parseSessionCookie(cookieHeader);
+    const sessionId = parseSessionCookie(cookieHeader ?? undefined);
 
     if (!sessionId) {
-      return createJsonResponse(responses.invalid(), 401);
+      return createJsonResponse(responses.pending(), 401);
     }
 
     // Retrieve session
-    const session = await getSession(sessionId);
+    const session = await getAccessSession(sessionId);
     if (!session) {
-      return createJsonResponse(responses.invalid(), 401);
+      return createJsonResponse(responses.pending(), 401);
     }
 
     // Check if expired
     if (new Date(session.expiresAt) < new Date()) {
-      return createJsonResponse(responses.invalid(), 401);
+      return createJsonResponse(responses.pending(), 401);
     }
 
     // Load manifest and verify chapter is approved
@@ -73,7 +73,7 @@ export default async function handler(
     const content = `<html><body><h1>${reader.getChapter(chapterId)?.title}</h1><p>Chapter content here...</p></body></html>`;
 
     // Renew session
-    const renewedSession = await renewSession(sessionId);
+    const renewedSession = await renewAccessSession(sessionId);
     if (!renewedSession) {
       return createJsonResponse(responses.error('Failed to renew session'), 503);
     }
@@ -97,6 +97,6 @@ export default async function handler(
 
     return response;
   } catch (err) {
-    return createJsonResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 503);
+    return createJsonResponse(responses.error('Chapter is unavailable'), 503);
   }
 }

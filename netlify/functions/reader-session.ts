@@ -2,7 +2,7 @@
 // DELETE /api/reader/session — Sign out (end session, clear cookie)
 
 import { createJsonResponse, createSecureSessionResponse, responses } from '../lib/reader-access/responses';
-import { getSession, deleteSession } from '../lib/reader-access/store';
+import { getAccessSession, deleteAccessSession } from '../lib/reader-access/code-store';
 import {
   parseSessionCookie,
   SESSION_COOKIE_NAME,
@@ -15,14 +15,14 @@ export default async function handler(
     if (req.method === 'GET') {
       // Parse session cookie
       const cookieHeader = req.headers.get('cookie');
-      const sessionId = parseSessionCookie(cookieHeader);
+      const sessionId = parseSessionCookie(cookieHeader ?? undefined);
 
       if (!sessionId) {
         return createSecureSessionResponse(responses.invalid(), 401);
       }
 
       // Retrieve session
-      const session = await getSession(sessionId);
+      const session = await getAccessSession(sessionId);
       if (!session) {
         return createSecureSessionResponse(responses.invalid(), 401);
       }
@@ -36,7 +36,6 @@ export default async function handler(
       return createSecureSessionResponse(
         {
           state: 'verified',
-          sessionId,
           expiresAt: session.expiresAt,
           renewedAt: session.renewedAt,
         },
@@ -45,11 +44,11 @@ export default async function handler(
     } else if (req.method === 'DELETE') {
       // Parse session cookie (may not exist)
       const cookieHeader = req.headers.get('cookie');
-      const sessionId = parseSessionCookie(cookieHeader);
+      const sessionId = parseSessionCookie(cookieHeader ?? undefined);
 
       // Delete session if exists (recovery: ignore errors)
       if (sessionId) {
-        await deleteSession(sessionId).catch(() => {
+        await deleteAccessSession(sessionId).catch(() => {
           // Ignore deletion errors (idempotent)
         });
       }
@@ -76,6 +75,6 @@ export default async function handler(
     });
     return errorResponse;
   } catch (err) {
-    return createSecureSessionResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 503);
+    return createSecureSessionResponse(responses.error('Session status is unavailable'), 503);
   }
 }

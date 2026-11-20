@@ -1,19 +1,19 @@
 // POST /api/reader/verifications
-// Verify code (atomic consume); create/update session
-// Recovery-first: if recovery succeeds first, fresh code continues
-// Rate limiting: 5 verification attempts per email per minute
+// Verify a code, consume it atomically, then start or renew a session.
+// Contract: .github/specs/005-reader-access/contracts/reader-access-functions.md
 
-import { createJsonResponse, createSecureSessionResponse, responses } from '../lib/reader-access/responses';
+import { createHash, randomBytes } from 'crypto';
+import { createSecureSessionResponse, responses } from '../lib/reader-access/responses';
 import { verifyCode, isCodeExpired, isCodeLimited } from '../lib/reader-access/codes';
 import {
   getCode,
-  deleteCode,
-  storeSession,
+  consumeCode,
   incrementCodeAttempts,
-  getSession,
-  renewSession,
+  getAccessSession,
+  renewAccessSession,
+  storeAccessSession,
   storeRecoveryAttempt,
-} from '../lib/reader-access/store';
+} from '../lib/reader-access/code-store';
 import {
   generateSessionId,
   createSessionCookie,
@@ -23,152 +23,109 @@ import {
 import { checkRateLimit, resetRateLimit, RATE_LIMIT_PRESETS } from '../lib/reader-access/rate-limiter';
 
 const RECOVERY_WINDOW_HOURS = 4;
-const generateRecoveryId = () => Math.random().toString(36).substring(2, 15);
-const getReaderId = (email: string) => Buffer.from(email).toString('base64');
-
+const SESSION_DAYS = 30;
 const CODE_REGEX = /^\d{6}$/;
 
-export default async function handler(
-  req: Request
-): Promise<Response> {
+/** One-way reader identifier; the plain email is never stored with a session. */
+export function getReaderId(email: string): string {
+  return createHash('sha256').update(email.trim().toLowerCase()).digest('hex');
+}
+
+function respond(body: Parameters<typeof createSecureSessionResponse>[0], status: number) {
+  return createSecureSessionResponse(body, status);
+}
+
+export default async function handler(req: Request): Promise<Response> {
   if (req.method !== 'POST') {
-    return new Response('{"state":"provider-failure"}', { status: 405, headers: { 'Content-Type': 'application/json' } });
+    return respond(responses.error('Method not allowed'), 405);
+  }
+
+  let email: unknown;
+  let code: unknown;
+  try {
+    ({ email, code } = (await req.json()) as Record<string, unknown>);
+  } catch {
+    return respond(responses.invalid(), 400);
+  }
+
+  if (typeof email !== 'string' || !email) {
+    return respond(responses.invalid(), 400);
+  }
+  if (typeof code !== 'string' || !CODE_REGEX.test(code)) {
+    return respond(responses.invalid(), 400);
   }
 
   try {
-    // Parse request body
-    const body = await req.json();
-    const { email, code } = body as Record<string, unknown>;
-
-    // Validate inputs
-    if (!email || typeof email !== 'string') {
-      return createSecureSessionResponse(responses.invalid(), 400);
-    }
-
-    if (!code || typeof code !== 'string' || !CODE_REGEX.test(code)) {
-      return createSecureSessionResponse(responses.invalid(), 400);
-    }
-
-    // T066: Check rate limiting (5 attempts per email per minute)
-    const rateLimitResult = checkRateLimit(email, RATE_LIMIT_PRESETS.EMAIL_VERIFICATION);
-    if (rateLimitResult.isLimited) {
-      // Return 429 Too Many Requests
-      const response = new Response(
-        JSON.stringify(responses.limited()),
-        { status: 429 }
-      );
-      response.headers.set('Retry-After', rateLimitResult.resetAfterSeconds.toString());
-      response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
-      response.headers.set('X-Content-Type-Options', 'nosniff');
+    const rateLimit = checkRateLimit(email, RATE_LIMIT_PRESETS.EMAIL_VERIFICATION);
+    if (rateLimit.isLimited) {
+      const response = respond(responses.limited(), 429);
+      response.headers.set('Retry-After', rateLimit.resetAfterSeconds.toString());
       return response;
     }
 
-    // Retrieve stored code
     const storedCode = await getCode(email);
     if (!storedCode) {
-      return createSecureSessionResponse(responses.invalid(), 400);
+      return respond(responses.invalid(), 400);
     }
-
-    // Check if expired
     if (isCodeExpired(storedCode.expiresAt)) {
-      return createSecureSessionResponse(responses.expired(), 410);
+      return respond(responses.expired(), 410);
     }
-
-    // Check if already limited (too many attempts)
     if (isCodeLimited(storedCode.attemptCount, storedCode.maxAttempts)) {
-      return createSecureSessionResponse(responses.used(), 410);
+      return respond(responses.limited(), 429);
     }
 
-    // Verify code hash
-    const isValid = verifyCode(code, storedCode.codeHash, storedCode.salt);
-
-    if (!isValid) {
-      // Increment attempt count
+    if (!verifyCode(code, storedCode.codeHash, storedCode.salt)) {
       await incrementCodeAttempts(email);
-      return createSecureSessionResponse(responses.invalid(), 400);
+      return respond(responses.invalid(), 400);
     }
 
-    // T066: Reset rate limit on successful verification
+    // RA-002: exactly one concurrent submission of a code may succeed.
+    if (!(await consumeCode(email, storedCode.codeId))) {
+      return respond(responses.used(), 410);
+    }
+
     resetRateLimit(email, RATE_LIMIT_PRESETS.EMAIL_VERIFICATION.keyPrefix);
 
-    // Code is valid: check for existing session and renew, or create new
     const now = new Date();
-    const expiresAt = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+    const readerId = getReaderId(email);
 
-    // RA-T041: Check if user has active session in browser cookie
-    // If so, renew it; otherwise create new session
-    const cookieHeader = req.headers.get('cookie');
-    const existingSessionId = parseSessionCookie(cookieHeader);
-    let sessionId = existingSessionId;
-    let isRenewal = false;
+    // RA-T041: a fresh code on a browser with an active session renews it.
+    const existingSessionId = parseSessionCookie(req.headers.get('cookie') ?? undefined);
+    const existing = existingSessionId ? await getAccessSession(existingSessionId) : null;
+    const renewed =
+      existing && existing.readerId === readerId ? await renewAccessSession(existing.sessionId) : null;
 
-    if (existingSessionId) {
-      // Check if session is still valid
-      const existingSession = await getSession(existingSessionId);
-      if (existingSession && new Date(existingSession.expiresAt) > new Date()) {
-        // Renew existing session
-        isRenewal = true;
-        const renewedSession = await renewSession(existingSessionId);
-        if (renewedSession) {
-          sessionId = existingSessionId;
-          // Use the renewed expiry
-          expiresAt.setTime(new Date(renewedSession.expiresAt).getTime());
-        }
-      }
-    }
-
-    // If no renewal, create new session
-    if (!isRenewal) {
+    let sessionId: string;
+    let expiresAt: string;
+    if (renewed) {
+      sessionId = renewed.sessionId;
+      expiresAt = renewed.expiresAt;
+    } else {
       sessionId = generateSessionId();
-      await storeSession({
+      expiresAt = new Date(now.getTime() + SESSION_DAYS * 24 * 60 * 60 * 1000).toISOString();
+      await storeAccessSession({
         sessionId,
-        deviceId: '', // Can be populated from request fingerprinting if needed
-        chapterId: '',
+        readerId,
         createdAt: now.toISOString(),
-        expiresAt: expiresAt.toISOString(),
+        expiresAt,
         renewedAt: now.toISOString(),
       });
     }
 
-    // Delete code (recovery: if this fails, session was already created)
-    await deleteCode(email).catch(() => {
-      // Ignore deletion errors (recovery-first)
-    });
-
-    // Create recovery attempt (RA-T048)
-    // Recovery window: 4 hours from code consumed time
-    const recoveryId = generateRecoveryId();
-    const readerId = getReaderId(email);
-    const recoveryExpiresAt = new Date(now.getTime() + RECOVERY_WINDOW_HOURS * 60 * 60 * 1000);
-
+    // RA-T048: record the recovery window. Failure here must not undo access.
     await storeRecoveryAttempt({
-      recoveryId,
+      recoveryId: randomBytes(16).toString('hex'),
       readerId,
       initiatedAt: now.toISOString(),
-      expiresAt: recoveryExpiresAt.toISOString(),
+      expiresAt: new Date(now.getTime() + RECOVERY_WINDOW_HOURS * 60 * 60 * 1000).toISOString(),
       createdSessionId: sessionId,
-      raceOutcome: isRenewal ? 'renewal' : 'fresh',
-    }).catch(() => {
-      // If recovery attempt fails to store, session is still valid
-      // User can verify again if needed
-    });
+      raceOutcome: renewed ? 'renewal' : 'fresh',
+    }).catch(() => undefined);
 
-    // Create/update session cookie
-    const sessionCookie = createSessionCookie(sessionId);
-    const sessionCookieHeader = formatSessionCookie(sessionCookie);
-
-    // Return 200 with response and Set-Cookie header (with security headers)
-    const response = createSecureSessionResponse(
-      responses.verified(sessionId, expiresAt.toISOString()),
-      200
-    );
-    response.headers.set('Set-Cookie', sessionCookieHeader);
-
+    const response = respond(responses.verified(sessionId, expiresAt), 200);
+    response.headers.set('Set-Cookie', formatSessionCookie(createSessionCookie(sessionId)));
     return response;
-  } catch (err) {
-    if (err instanceof SyntaxError) {
-      return createSecureSessionResponse(responses.invalid(), 400);
-    }
-    return createSecureSessionResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 502);
+  } catch {
+    return respond(responses.error('Verification is unavailable'), 502);
   }
 }

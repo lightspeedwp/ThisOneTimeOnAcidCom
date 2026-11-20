@@ -44,10 +44,33 @@
   to = "/.netlify/functions/reader-chapters-list"
   status = 200
 
-# Phase 6: Chapter content delivery
+# Phase 6: Chapter content delivery (must precede /chapters/:chapterId)
 [[redirects]]
-  from = "/api/reader/chapters/*"
-  to = "/.netlify/functions/reader-chapter-content/:splat"
+  from = "/api/reader/chapters/:chapterId/content"
+  to = "/.netlify/functions/reader-chapter-content"
+  status = 200
+
+# Spec 005: protected chapter for a verified session (RA-T035)
+[[redirects]]
+  from = "/api/reader/chapters/:chapterId"
+  to = "/.netlify/functions/reader-chapter"
+  status = 200
+
+# Spec 005: the API path and the function file name differ, so the
+# reader-:splat catch-all below cannot reach these three.
+[[redirects]]
+  from = "/api/reader/code-requests"
+  to = "/.netlify/functions/reader-code-request"
+  status = 200
+
+[[redirects]]
+  from = "/api/reader/verifications"
+  to = "/.netlify/functions/reader-verify"
+  status = 200
+
+[[redirects]]
+  from = "/api/reader/session"
+  to = "/.netlify/functions/reader-session"
   status = 200
 
 # Phase 6: Reading progress

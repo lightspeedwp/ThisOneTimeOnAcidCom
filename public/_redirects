@@ -2,6 +2,7 @@
 /api/reader/verifications    /.netlify/functions/reader-verify    200
 /api/reader/chapters        /.netlify/functions/reader-chapters-list    200
 /api/reader/chapters/:chapterId/content    /.netlify/functions/reader-chapter-content/:chapterId    200
+/api/reader/chapters/:chapterId    /.netlify/functions/reader-chapter    200
 /api/reader/progress        /.netlify/functions/reader-progress    200
 /api/reader/analytics       /.netlify/functions/reader-analytics    200
 /api/reader/bookmarks       /.netlify/functions/reader-bookmarks    200
