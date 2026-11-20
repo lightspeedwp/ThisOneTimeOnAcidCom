@@ -462,8 +462,17 @@ do not establish coverage completion.
 - **Status:** 0 corrections required; all examples accurate
 - **Evidence:** [T066-design-verification-report.md](../validation-reports/T066-design-verification-report.md)
 
+✅ **T067** — Final coverage manifest (COMPLETE 2026-11-20)
+- **Total entities tracked:** 158 rows (116 G + 9 S + 33 N)
+- **G-Documents:** 116 accounted for (90 active + 26 archived/pointer) ✅
+- **S-Documents:** 9 approved and committed per D0 ✅
+- **N-Documents:** 29 approved + 4 deferred (D4/D8 evidence recorded) ✅
+- **Pointer operations:** 26 pointers validated (T033–T034) ✅
+- **Consolidation references:** 197 updates across 56 files (T065) ✅
+- **Status:** 100% coverage, 0 missing entities
+- **Evidence:** [T067-coverage-manifest.md](../validation-reports/T067-coverage-manifest.md)
+
 **Remaining Phase 6 Tasks:**
-- T067: Final coverage manifest (158-row reconciliation)
 - T068: Skill validation (6 skills draft/report/denied scenarios)
 - T069: Final sign-off checklist completion
 
