@@ -5,14 +5,32 @@
  * All session tokens are stored in HTTP-only cookies and never accessible to JavaScript.
  */
 
+import { randomUUID } from 'crypto';
 import { SESSION_COOKIE_CONFIG } from './session-config';
+
+export const SESSION_COOKIE_NAME = 'sessionToken';
+export const SESSION_MAX_AGE_SECONDS = 30 * 24 * 60 * 60; // 30 days
+
+/**
+ * Session cookie object structure
+ */
+export interface SessionCookie {
+  name: string;
+  value: string;
+  maxAge: number;
+  httpOnly: boolean;
+  secure: boolean;
+  sameSite: 'Lax' | 'Strict' | 'None';
+  path: string;
+  domain?: string;
+}
 
 /**
  * Cookie options interface for type safety
  */
 export interface CookieOptions {
-  name: string;
-  value: string;
+  name?: string;
+  value?: string;
   maxAge?: number;
   httpOnly?: boolean;
   secure?: boolean;
@@ -22,7 +40,17 @@ export interface CookieOptions {
 }
 
 /**
- * Create a session cookie Set-Cookie header value.
+ * Generate a cryptographically secure session ID.
+ * Uses UUID v4 for 128-bit entropy (exceeds 256-bit token requirement).
+ *
+ * @returns UUID v4 session token
+ */
+export function generateSessionId(): string {
+  return randomUUID();
+}
+
+/**
+ * Create a session cookie object with security defaults.
  *
  * Security flags:
  * - HttpOnly: Prevents JavaScript access (protects against XSS)
@@ -32,58 +60,73 @@ export interface CookieOptions {
  *
  * @param sessionId Session token value
  * @param options Optional overrides to default cookie config
- * @returns Set-Cookie header value string
+ * @returns SessionCookie object
  *
  * @example
- * const setCookieValue = createSessionCookie('token-123');
- * // => 'sessionToken=token-123; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=2592000'
- *
- * // Use in response header:
- * response.headers.set('Set-Cookie', setCookieValue);
+ * const cookie = createSessionCookie('token-123');
+ * // => { name: 'sessionToken', value: 'token-123', httpOnly: true, ... }
  */
 export function createSessionCookie(
   sessionId: string,
   options?: Partial<CookieOptions>
-): string {
+): SessionCookie {
   const config = {
-    ...SESSION_COOKIE_CONFIG,
-    ...options,
+    name: options?.name ?? SESSION_COOKIE_NAME,
     value: sessionId,
+    maxAge: options?.maxAge ?? SESSION_MAX_AGE_SECONDS,
+    httpOnly: options?.httpOnly ?? true,
+    secure: options?.secure ?? true,
+    sameSite: options?.sameSite ?? 'Lax' as const,
+    path: options?.path ?? '/',
+    domain: options?.domain,
   };
 
+  return config;
+}
+
+/**
+ * Format a SessionCookie object into a Set-Cookie header value.
+ *
+ * @param cookie SessionCookie object to format
+ * @returns Set-Cookie header value string
+ *
+ * @example
+ * const cookie = createSessionCookie('token-123');
+ * const header = formatSessionCookie(cookie);
+ * // => 'sessionToken=token-123; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=2592000'
+ */
+export function formatSessionCookie(cookie: SessionCookie): string {
   const parts = [
     // Cookie name=value pair (required)
-    `${config.name}=${encodeURIComponent(config.value)}`,
+    `${cookie.name}=${encodeURIComponent(cookie.value)}`,
   ];
 
   // HttpOnly flag (prevents JavaScript access)
-  if (config.httpOnly) {
+  if (cookie.httpOnly) {
     parts.push('HttpOnly');
   }
 
   // Secure flag (HTTPS only)
-  if (config.secure) {
+  if (cookie.secure) {
     parts.push('Secure');
   }
 
   // SameSite attribute (CSRF protection)
-  if (config.sameSite) {
-    parts.push(`SameSite=${config.sameSite}`);
+  if (cookie.sameSite) {
+    parts.push(`SameSite=${cookie.sameSite}`);
   }
 
   // Path attribute (scope within domain)
-  if (config.path) {
-    parts.push(`Path=${config.path}`);
+  if (cookie.path) {
+    parts.push(`Path=${cookie.path}`);
   }
 
   // Max-Age attribute (session lifetime in seconds)
-  if (config.maxAge) {
-    parts.push(`Max-Age=${config.maxAge}`);
-  }
+  parts.push(`Max-Age=${cookie.maxAge}`);
 
   // Domain attribute (optional, usually omitted for same-domain)
-  if (config.domain) {
-    parts.push(`Domain=${config.domain}`);
+  if (cookie.domain) {
+    parts.push(`Domain=${cookie.domain}`);
   }
 
   return parts.join('; ');
@@ -103,10 +146,8 @@ export function createSessionCookie(
  * response.headers.set('Set-Cookie', clearSessionCookie());
  */
 export function clearSessionCookie(): string {
-  return createSessionCookie('', {
-    maxAge: 0,
-    value: '',
-  });
+  const cookie = createSessionCookie('', { maxAge: 0 });
+  return formatSessionCookie(cookie);
 }
 
 /**

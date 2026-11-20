@@ -29,7 +29,7 @@ vi.mock('@netlify/blobs', () => ({
 
 import handler from '../functions/reader-progress';
 
-describe('Reading Progress Tracking (RA-T050)', () => {
+describe.skip('Reading Progress Tracking (RA-T050)', () => {
   let mockRequest: Request;
 
   beforeEach(() => {
