@@ -73,9 +73,9 @@ The continuation documents in `continuations/` (archived) used their own T060–
 
 ### Implementation for US1 (Claude Direct Execution — SC-004 approved)
 
-- [ ] T008 [P] [US1] Execute Prompt 1: Navigation Exposure via Claude ~~(Figma Make)~~ (produce navigation enforcement spec + implementation checklist; validate against acceptance criteria)
-- [ ] T009 [P] [US1] Execute Prompt 2A: Design Baseline Export via Claude ~~(Figma Make)~~ (export CSS variables + JSON tokens; validate both files parse correctly)
-- [ ] T010 [P] [US1] Execute Prompt 2B: Navigation Design via Claude ~~(Figma Make)~~ (produce TypeScript component spec + responsive CSS + accessibility checklist)
+- [x] T008 [P] [US1] Execute Prompt 1: Navigation Exposure via Claude ~~(Figma Make)~~ (produce navigation enforcement spec + implementation checklist; validate against acceptance criteria)
+- [x] T009 [P] [US1] Execute Prompt 2A: Design Baseline Export via Claude ~~(Figma Make)~~ (export CSS variables + JSON tokens; validate both files parse correctly)
+- [x] T010 [P] [US1] Execute Prompt 2B: Navigation Design via Claude ~~(Figma Make)~~ (produce TypeScript component spec + responsive CSS + accessibility checklist) — ✅ T008–T010 delivered in PR #648; see `exports/PHASE_2_EXECUTION_LOG.md` (owner decisions still open there, e.g. menu size)
 - [ ] T011 [US1] Validate specification contracts match acceptance criteria (manual design reference from `contracts/` folder)
 
 **Checkpoint**: Phase A complete - US1 (Design Hand-off) is fully executable and approved

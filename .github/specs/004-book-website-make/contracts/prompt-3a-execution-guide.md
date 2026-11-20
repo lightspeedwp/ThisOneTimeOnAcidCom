@@ -5,7 +5,7 @@
 **Approval Gate**: Gates 1, 2 ✅ COMPLETE  
 **Dependencies**: Prompt 2A (Design System Baseline) — Uses exported typography and colors
 
-> ⚠️ **Colour values superseded (Phase 9 reconciliation, 2026-11-20)**: hex values in this guide that are not in the approved 9-colour baseline (for example `#1a1a1a`, `#ffffff`, `#e8d4b8`, `#d4a574`, `#8b0000`, `#ff6b6b`, `#666666`, `#cccccc`) come from an early draft. Do not use them. Use the baseline tokens in [`exports/design-tokens.json`](../exports/design-tokens.json) instead. Error states use `errorBorder*` / `errorText*` (`#FF3AAE`; light-theme text `#C4005E`); surfaces and text use the baseline primitives. Spec 005 owns this contract and must confirm any success, warning or error colour that has no baseline token.
+> ⚠️ **Colour values superseded (Phase 9 reconciliation, 2026-11-20)**: hex values in this guide that are not in the approved 9-colour baseline (for example `#1a1a1a`, `#ffffff`, `#e8d4b8`, `#d4a574`, `#8b0000`, `#ff6b6b`, `#666666`, `#cccccc`) come from an early draft. Do not use them. Use the baseline tokens in [`exports/design-tokens.json`](../exports/design-tokens.json) instead. For form states, use `form-input.dark` / `form-input.light` (design-tokens v2.0.0): `bg`, `border`, `border-focused`, `error-border` (`#FF3AAE`) and `error-text` (`#FF3AAE` dark, `#0B0B10` light). Spec 005 owns this contract and must confirm any success, warning or error colour that has no baseline token.
 
 
 ---
