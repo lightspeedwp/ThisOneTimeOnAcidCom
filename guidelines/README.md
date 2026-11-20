@@ -155,7 +155,7 @@ guidelines/
 ├── troubleshooting/               - Common issue resolutions
 └── reports/                       - Historical implementation reports
 
-```text
+```
 
 ---
 
