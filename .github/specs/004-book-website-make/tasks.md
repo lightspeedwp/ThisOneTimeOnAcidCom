@@ -641,9 +641,9 @@ Validation and verification tasks to close gaps identified between specification
 
 ## Phase 9: Convergence
 
-- [ ] T060 Replace stale Decision 7 wording (robots.txt `Disallow`) with noindex meta tags plus sitemap exclusion in contracts/prompt-1-navigation-exposure.md, PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md, exports/GATE_2_READINESS_REPORT.md and checklists/blocking-decisions-validation.md per FR-003 (contradicts)
-- [ ] T061 Reword "Ready to Execute"/"executable" claims in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md as gated by the open spec.md Status gates per FR-010 (contradicts)
-- [ ] T062 Record resolved Decisions 1–7 and the Prompt 3A–3C handover to Spec 005 in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md per spec.md Implications (contradicts)
+- [x] T060 Replace stale Decision 7 wording (robots.txt `Disallow`) with noindex meta tags plus sitemap exclusion in contracts/prompt-1-navigation-exposure.md, PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md, exports/GATE_2_READINESS_REPORT.md and checklists/blocking-decisions-validation.md per FR-003 (contradicts)
+- [x] T061 Reword "Ready to Execute"/"executable" claims in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md as gated by the open spec.md Status gates per FR-010 (contradicts)
+- [x] T062 Record resolved Decisions 1–7 and the Prompt 3A–3C handover to Spec 005 in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md per spec.md Implications (contradicts)
 - [ ] T063 Raise Prompt 2A preview completeness to at least 95% and re-score it in checklists/prompt-preview-validation.md; record an approved SC-003 scope change for the Prompt 3A handover per SC-003 (partial)
 - [ ] T064 Create exports/design-baseline-validation.md, exports/navigation-specification.md and exports/design-baseline-acceptance-report.md, or record their approved descoping, per US1/AC1 (missing)
 - [ ] T065 Create exports/decisions-selected.md, exports/implementation-readiness-checklist.md, exports/preflight-analysis-final.md and exports/workflow-completion-report.md, or record pointers to existing artefacts that cover them, per US4 (missing)

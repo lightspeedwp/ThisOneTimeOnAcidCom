@@ -64,10 +64,10 @@ From `.github/specs/004-book-website-make/references/03-author-decisions-launch-
 1. **Locate navigation component** in Figma file
 2. **Remove links** for /speaking, /events, /media from navigation menu
 3. **Preserve route pages** (/speaking, /events, /media) with noindex metadata
-4. **Document enforcement strategy** for each route (based on Decision 7 selection):
-   - Add Meta tag: `<meta name="robots" content="noindex, nofollow">`
-   - Add Robots.txt rule: `Disallow: /speaking` (per option selected)
-   - Update sitemap.xml to exclude /speaking, /events, /media (per option selected)
+4. **Document enforcement strategy** for each route (based on Decision 7 selection — Option A approved):
+   - Add Meta tag: `<meta name="robots" content="noindex">`
+   - Update sitemap.xml to exclude /speaking, /events, /media
+   - Do NOT use robots.txt `Disallow` rules (conflicting approach; noindex meta tags and sitemap exclusion are sufficient)
 5. **Generate before/after comparison** showing navigation structure change
 
 ### Acceptance Criteria
@@ -76,10 +76,10 @@ From `.github/specs/004-book-website-make/references/03-author-decisions-launch-
 
 ✅ **CR-1.2**: Speaking, Events, Media routes are hidden from navigation menu but pages remain accessible at /speaking, /events, /media
 
-✅ **CR-1.3**: Enforcement strategy matches selected option from Blocking Decision 7:
-- Meta tags present on hidden pages
-- Robots.txt rules documented (if Option A or B selected)
-- Sitemap.xml excludes /speaking, /events, /media (if Option A or D selected)
+✅ **CR-1.3**: Enforcement strategy matches Blocking Decision 7 Option A (approved):
+- Meta tags `<meta name="robots" content="noindex">` present on /speaking, /events, /media
+- Sitemap.xml explicitly excludes /speaking, /events, /media
+- No robots.txt `Disallow` rules for these routes (would hide noindex directive)
 
 ✅ **CR-1.4**: Responsive navigation design preserved for desktop, tablet, mobile breakpoints
 
