@@ -69,6 +69,18 @@ export interface SessionValidationResult {
 
   /** HTTP status code for response */
   statusCode: number;
+
+  /** Activity summary for logging (T039) */
+  activitySummary?: {
+    /** Session creation timestamp */
+    createdAt?: string;
+    /** Most recent activity/renewal timestamp */
+    renewedAt?: string;
+    /** Session termination timestamp (null if active) */
+    terminatedAt?: string | null;
+    /** Current session status */
+    status?: SessionStatus;
+  };
 }
 
 /**

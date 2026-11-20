@@ -223,11 +223,17 @@ export async function validateSession(
     };
   }
 
-  // Session is valid!
+  // Session is valid! Include activity summary (T039)
   return {
     isValid: true,
     session,
     statusCode: 200,
+    activitySummary: {
+      createdAt: session.createdAt,
+      renewedAt: session.renewedAt,
+      terminatedAt: session.terminatedAt,
+      status: session.status,
+    },
   };
 }
 
@@ -241,6 +247,7 @@ export async function validateSession(
  * 4. Update: renewedAt = now, expiresAt = now + 30 days
  * 5. Store atomically in Blobs
  * 6. Return updated session
+ * 7. Log renewal event for analytics and monitoring
  *
  * @param email Reader's email
  * @param deviceId Device fingerprint
@@ -256,7 +263,15 @@ export async function validateSession(
  */
 export async function renewSession(email: string, deviceId: string): Promise<Session> {
   // Step 1: Lookup existing session
-  const existing = await getSession(email, deviceId);
+  let existing: Session | null;
+  try {
+    existing = await getSession(email, deviceId);
+  } catch (error) {
+    // Log storage error for monitoring
+    logRenewalError(email, deviceId, 'storage_error', error);
+    throw error;
+  }
+
   if (!existing) {
     throw new Error(`Session not found for ${email}/${deviceId}`);
   }
@@ -280,18 +295,109 @@ export async function renewSession(email: string, deviceId: string): Promise<Ses
   if (timeSinceLastRenewal < RENEWAL_COALESCE_WINDOW_MS) {
     // Skip update, just return current session
     // This prevents multiple rapid renewals in concurrent requests
+    // No logging needed for coalesced renewals
     return existing;
   }
 
-  // Step 4: Update timestamps
+  // Step 4: Update timestamps (use server time only, no client timestamps)
   const newExpiresAt = new Date(now.getTime() + SESSION_LIFETIME_DAYS * 24 * 60 * 60 * 1000);
 
-  const updated = await updateSession(email, deviceId, {
-    renewedAt: now.toISOString(),
-    expiresAt: newExpiresAt.toISOString(),
-  });
+  let updated: Session;
+  try {
+    updated = await updateSession(email, deviceId, {
+      renewedAt: now.toISOString(),
+      expiresAt: newExpiresAt.toISOString(),
+    });
+  } catch (error) {
+    // Log renewal failure for alerts
+    logRenewalError(email, deviceId, 'update_failed', error);
+    throw error;
+  }
+
+  // Step 7: Log successful renewal event for analytics
+  logRenewalSuccess(email, deviceId, now.toISOString(), newExpiresAt.toISOString());
 
   return updated;
+}
+
+/**
+ * Log successful session renewal event.
+ * Used for analytics tracking and monitoring.
+ *
+ * @param email Reader's email
+ * @param deviceId Device fingerprint
+ * @param renewedAt Renewal timestamp
+ * @param expiresAt New expiry timestamp
+ */
+function logRenewalSuccess(email: string, deviceId: string, renewedAt: string, expiresAt: string) {
+  // Log renewal event: "Session renewed: email, renewedAt, newExpiresAt"
+  console.log('SESSION_RENEWAL_SUCCESS', {
+    email: email,
+    deviceId: deviceId.substring(0, 8) + '...', // Mask device ID for privacy
+    renewedAt: renewedAt,
+    expiresAt: expiresAt,
+    timestamp: new Date().toISOString(),
+  });
+
+  // Track renewal frequency for analytics
+  // This can be used to understand engagement patterns
+  if (typeof process !== 'undefined' && process.env.ENABLE_RENEWAL_METRICS === 'true') {
+    trackRenewalMetric(email);
+  }
+}
+
+/**
+ * Log session renewal error.
+ * Used for alerting on failures.
+ *
+ * @param email Reader's email
+ * @param deviceId Device fingerprint
+ * @param errorCode Type of error (storage_error, update_failed, etc.)
+ * @param error The error object
+ */
+function logRenewalError(email: string, deviceId: string, errorCode: string, error: any) {
+  // Log renewal failure: "Session renewal failed: email, errorCode"
+  console.error('SESSION_RENEWAL_ERROR', {
+    email: email,
+    deviceId: deviceId.substring(0, 8) + '...', // Mask device ID for privacy
+    errorCode: errorCode,
+    message: error?.message || 'Unknown error',
+    timestamp: new Date().toISOString(),
+  });
+
+  // Alert on failures (this would integrate with monitoring/alerting system)
+  if (typeof process !== 'undefined' && process.env.ENABLE_RENEWAL_ALERTS === 'true') {
+    alertRenewalFailure(email, errorCode);
+  }
+}
+
+/**
+ * Track renewal metrics for analytics.
+ * This would typically send data to analytics system.
+ *
+ * @param email Reader's email
+ */
+function trackRenewalMetric(email: string) {
+  // This is a placeholder for metrics tracking
+  // In production, this would send to analytics backend
+  if (typeof console !== 'undefined' && console.debug) {
+    console.debug('RENEWAL_METRIC: Session renewed for', email);
+  }
+}
+
+/**
+ * Alert on renewal failure.
+ * This would typically integrate with monitoring/alerting system.
+ *
+ * @param email Reader's email
+ * @param errorCode Type of error
+ */
+function alertRenewalFailure(email: string, errorCode: string) {
+  // This is a placeholder for alerting
+  // In production, this would trigger monitoring alerts
+  if (typeof console !== 'undefined' && console.error) {
+    console.error('RENEWAL_FAILURE_ALERT: Failed to renew session for', email, 'reason:', errorCode);
+  }
 }
 
 /**

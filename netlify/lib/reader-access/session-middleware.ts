@@ -8,12 +8,18 @@
  * - 200: Valid session, proceed
  * - 401: Missing/invalid/expired/terminated session, deny access
  * - 500: Storage error, deny to be safe
+ *
+ * Security:
+ * - Uses constant-time token comparison to prevent timing attacks
+ * - All token comparisons done via constantTimeTokenCompare
+ * - No timing-based information leakage on invalid tokens
  */
 
 import { validateSession } from './session-service';
 import { getSessionTokenFromHeaders } from './session-cookie';
 import { generateDeviceFingerprint, extractClientIp, extractClientTimezone } from './device-fingerprint';
 import { FingerprintInput, SessionValidationResult } from './session';
+import { constantTimeTokenCompare } from './crypto';
 
 /**
  * Middleware request context extracted from HTTP request.

@@ -1,8 +1,9 @@
 // POST /api/reader/verifications
 // Verify code (atomic consume); create/update session
 // Recovery-first: if recovery succeeds first, fresh code continues
+// Rate limiting: 5 verification attempts per email per minute
 
-import { createJsonResponse, responses } from '../lib/reader-access/responses';
+import { createJsonResponse, createSecureSessionResponse, responses } from '../lib/reader-access/responses';
 import { verifyCode, isCodeExpired, isCodeLimited } from '../lib/reader-access/codes';
 import {
   getCode,
@@ -19,6 +20,7 @@ import {
   formatSessionCookie,
   parseSessionCookie,
 } from '../lib/reader-access/session-cookie';
+import { checkRateLimit, resetRateLimit, RATE_LIMIT_PRESETS } from '../lib/reader-access/rate-limiter';
 
 const RECOVERY_WINDOW_HOURS = 4;
 const generateRecoveryId = () => Math.random().toString(36).substring(2, 15);
@@ -40,27 +42,41 @@ export default async function handler(
 
     // Validate inputs
     if (!email || typeof email !== 'string') {
-      return createJsonResponse(responses.invalid(), 400);
+      return createSecureSessionResponse(responses.invalid(), 400);
     }
 
     if (!code || typeof code !== 'string' || !CODE_REGEX.test(code)) {
-      return createJsonResponse(responses.invalid(), 400);
+      return createSecureSessionResponse(responses.invalid(), 400);
+    }
+
+    // T066: Check rate limiting (5 attempts per email per minute)
+    const rateLimitResult = checkRateLimit(email, RATE_LIMIT_PRESETS.EMAIL_VERIFICATION);
+    if (rateLimitResult.isLimited) {
+      // Return 429 Too Many Requests
+      const response = new Response(
+        JSON.stringify(responses.limited()),
+        { status: 429 }
+      );
+      response.headers.set('Retry-After', rateLimitResult.resetAfterSeconds.toString());
+      response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+      response.headers.set('X-Content-Type-Options', 'nosniff');
+      return response;
     }
 
     // Retrieve stored code
     const storedCode = await getCode(email);
     if (!storedCode) {
-      return createJsonResponse(responses.invalid(), 400);
+      return createSecureSessionResponse(responses.invalid(), 400);
     }
 
     // Check if expired
     if (isCodeExpired(storedCode.expiresAt)) {
-      return createJsonResponse(responses.expired(), 410);
+      return createSecureSessionResponse(responses.expired(), 410);
     }
 
     // Check if already limited (too many attempts)
     if (isCodeLimited(storedCode.attemptCount, storedCode.maxAttempts)) {
-      return createJsonResponse(responses.used(), 410);
+      return createSecureSessionResponse(responses.used(), 410);
     }
 
     // Verify code hash
@@ -69,8 +85,11 @@ export default async function handler(
     if (!isValid) {
       // Increment attempt count
       await incrementCodeAttempts(email);
-      return createJsonResponse(responses.invalid(), 400);
+      return createSecureSessionResponse(responses.invalid(), 400);
     }
+
+    // T066: Reset rate limit on successful verification
+    resetRateLimit(email, RATE_LIMIT_PRESETS.EMAIL_VERIFICATION.keyPrefix);
 
     // Code is valid: check for existing session and renew, or create new
     const now = new Date();
@@ -138,8 +157,8 @@ export default async function handler(
     const sessionCookie = createSessionCookie(sessionId);
     const sessionCookieHeader = formatSessionCookie(sessionCookie);
 
-    // Return 200 with response and Set-Cookie header
-    const response = createJsonResponse(
+    // Return 200 with response and Set-Cookie header (with security headers)
+    const response = createSecureSessionResponse(
       responses.verified(sessionId, expiresAt.toISOString()),
       200
     );
@@ -148,8 +167,8 @@ export default async function handler(
     return response;
   } catch (err) {
     if (err instanceof SyntaxError) {
-      return createJsonResponse(responses.invalid(), 400);
+      return createSecureSessionResponse(responses.invalid(), 400);
     }
-    return createJsonResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 502);
+    return createSecureSessionResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 502);
   }
 }
