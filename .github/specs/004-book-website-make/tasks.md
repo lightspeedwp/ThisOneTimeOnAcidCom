@@ -114,13 +114,11 @@
 
 ### Implementation for US3 (Claude Direct Execution — SC-004 approved; after Decision Resolution)
 
-<<<<<<< HEAD
-⚠️ **MOVED TO SPEC 005** (2026-11-13): Recovery flows and error states execution now owned by [Spec 005 — Reader Access](../005-reader-access/spec.md)
-=======
-- [ ] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) via Claude ~~(Figma Make)~~ (produce recovery state matrix + error handling spec)
-- [ ] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) via Claude ~~(Figma Make)~~ (produce error message matrix + timeout handling spec)
-- [ ] T027 [US3] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions (manual review from `contracts/`)
->>>>>>> origin/main
+⚠️ **MOVED TO SPEC 005** (2026-11-13): Recovery flows and error states execution now owned by [Spec 005 — Reader Access](../005-reader-access/spec.md). Decisions 1–2 (recovery race & lifetime) and Decision 3 (code expiry) remain open in Spec 005 — do not mark these tasks complete until Spec 005 resolves those decisions.
+
+- [ ] T025 [US3] [SPEC 005 OWNER] Once Decisions 1 & 2 resolved in Spec 005: Execute Prompt 3B (recovery flows)
+- [ ] T026 [US3] [SPEC 005 OWNER] Once Decision 3 resolved in Spec 005: Execute Prompt 3C (error states, code-expiry messaging)
+- [ ] T027 [US3] [SPEC 005 OWNER] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions
 
 - [ ] T025 [US3] ~~Execute Prompt 3B (recovery flows)~~ **→ MOVED TO SPEC_005** | Decisions 1–2 ✅ resolved; Spec 005 owns execution
 - [ ] T026 [US3] ~~Execute Prompt 3C (error states)~~ **→ MOVED TO SPEC_005** | Decisions 1–3 ✅ resolved; Spec 005 owns execution
