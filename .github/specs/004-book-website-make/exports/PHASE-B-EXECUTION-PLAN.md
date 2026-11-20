@@ -29,8 +29,8 @@
 | **Decision Integration** | ✅ Ready | Decisions 3, 4, 5, 6 all applied |
 | **Manuscript Ref** | ✅ Updated | "Chapter 1 and selected chapters" copy (early release) |
 
-**Figma Make Execution**: Design email template, entry forms, error states, success confirmation  
-**Timeline**: 15–20 minutes (all copy approved)
+**Spec 005 Handoff**: Email template specs, form wording, error messages handed to Spec 005 implementation  
+**Status**: ✅ All specifications complete; ready for Spec 005 implementation
 
 ---
 
@@ -44,8 +44,8 @@
 | **Error Handling** | ✅ Complete | All failure scenarios documented |
 | **Manuscript Scenario** | ✅ Updated | Recovery flow integrates with Chapter 1 live model |
 
-**Figma Make Execution**: Design recovery states, session-expired error, race-condition handling  
-**Timeline**: 15–20 minutes (all decisions resolved)
+**Spec 005 Handoff**: Recovery flow specs, session handling, error scenarios handed to Spec 005 implementation  
+**Status**: ✅ All specifications complete; ready for Spec 005 implementation
 
 ---
 
@@ -59,8 +59,8 @@
 | **User Actions** | ✅ Complete | Retry, request new code, wait logic all defined |
 | **Styling** | ✅ Complete | Error borders, text color, icons per design baseline |
 
-**Figma Make Execution**: Design all 5 error state form variants with messaging  
-**Timeline**: 15–20 minutes (all decisions resolved)
+**Spec 005 Handoff**: Error state specs with Decision 3 messaging handed to Spec 005 implementation  
+**Status**: ✅ All specifications complete; ready for Spec 005 implementation
 
 ---
 
@@ -90,24 +90,26 @@
 
 ## Execution Sequence & Timeline
 
-### Phase B Part 1: Figma Make Prompt Generation (45–60 minutes)
+### Phase B: Spec 005 Handoff (Prompts 3A, 3B, 3C)
 
-| Prompt | Timeline | Dependencies |
+All three prompts are handed off to [Spec 005: Reader Access](../../005-reader-access/spec.md) for direct implementation:
+
+| Prompt | Specification | Handoff Status |
 | --- | --- | --- |
-| **3A** (Reader Access Copy) | 15–20 min | Decisions 3, 4, 5, 6 (all ✅) |
-| **3B** (Recovery Flows) | 15–20 min | Decisions 1, 2, 5 (all ✅) |
-| **3C** (Error States) | 15–20 min | Decisions 3, 1, 5 (all ✅) |
+| **3A** (Reader Access Copy & Forms) | prompt-3a-execution-guide.md | ✅ Handed to Spec 005 |
+| **3B** (Recovery Flows) | prompt-3b-execution-guide.md | ✅ Handed to Spec 005 |
+| **3C** (Error States) | prompt-3c-execution-guide.md | ✅ Handed to Spec 005 |
 
-**Parallel Execution**: All 3 prompts can run in parallel (no dependencies between them)  
-**Total Wall Clock**: 15–20 minutes (parallel execution)
+**Handoff Model**: All prompt specifications are source records for Spec 005, which owns the implementation flow, stages, and dependencies.  
+**Status**: All 7 blocking decisions resolved; specifications ready for implementation.
 
-### Phase B Part 2: Integration & Testing (Target: 2026-11-21)
+### Phase B Part 2: Spec 005 Implementation & Testing (Target: 2026-11-21+)
 
-1. ✅ Confirm Figma Make outputs match Spec 004 acceptance criteria (CR-3A.1 through CR-3C.5)
-2. ✅ Integrate reader-access forms into Spec 005 implementation
+1. ✅ Spec 005 owns implementation of Prompts 3A, 3B, 3C specifications
+2. ✅ Implement reader-access verification flow per Spec 005 (Netlify Functions, frontend forms)
 3. ✅ Verify e-reader chapter availability model works with Chapter 1 live + pending
-4. ✅ Test recovery flow with 30-day session lifetime
-5. ✅ Validate all error states with Decision 3 (code expiry from generation)
+4. ✅ Test recovery flow with 30-day session lifetime (Decision 2)
+5. ✅ Validate all error states with Decision 3 messaging (code expiry from generation)
 
 ---
 
@@ -124,6 +126,25 @@
 
 ## Success Criteria
 
+<<<<<<< HEAD
+- ✅ All 3 prompts (3A, 3B, 3C) specifications handed to Spec 005
+- ✅ Spec 005 implements per all acceptance criteria (CR-3A.1–3A.8, CR-3B.1–3B.6, CR-3C.1–3C.5)
+- ✅ Copy references "Chapter 1" for immediate launch scenario
+- ✅ Recovery flow integrates with 30-day device lifecycle (Decision 2)
+- ✅ Error messages reflect approved Decision 3 (expiry from code generation)
+- ✅ Newsletter CTA separate and optional (Decision 6)
+- ✅ Spec 005 owns complete reader access implementation flow
+
+---
+
+## Next Steps (After Phase B Handoff to Spec 005)
+
+1. **Spec 005 Implementation** (2026-11-21+)
+   - Implement reader access verification flow per Spec 005
+   - Build Netlify Functions for code generation, verification, session management
+   - Implement recovery flow with 30-day device lifecycle
+   - Build form UI with all error states per Decision 3
+=======
 - ✅ All 3 prompts (3A, 3B, 3C) have exact previews generated in Figma Make
 - ✅ All acceptance criteria (CR-3A.1–3A.8, CR-3B.1–3B.6, CR-3C.1–3C.5) verified
 - ✅ Copy references "Chapter 1" for immediate launch scenario
@@ -140,6 +161,7 @@
    - Implement Netlify Functions based on Prompts 3A, 3B, 3C
    - Integrate e-reader with reader-access verification
    - Publish Chapter 1 on website with reader verification gate
+>>>>>>> origin/main
 
 2. **Chapter Approval Loop** (2026-11-21+)
    - Ash approves chapters individually
@@ -147,9 +169,16 @@
    - Update e-reader with "More chapters coming" messaging
 
 3. **Phase B Completion** (2026-12-15 target)
+<<<<<<< HEAD
+   - Spec 005 implementation complete
+   - Prompts 3A, 3B, 3C fully integrated in Spec 005
+   - Reader access feature live with Chapter 1 available
+   - Recovery flow, error handling, and all decision integrations verified
+=======
    - All decision integration complete
    - Prompts 3A, 3B, 3C fully implemented in Spec 005
    - Reader access feature live with Chapter 1 available
+>>>>>>> origin/main
 
 ---
 
