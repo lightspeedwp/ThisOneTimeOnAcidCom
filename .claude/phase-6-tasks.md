@@ -29,16 +29,18 @@ Based on Spec 005 RA-T047–RA-T056
   - [x] Filtering by status
   - ✅ 16 contract tests passing
 
-- [ ] RA-T050 [P] Create `netlify/lib/reader-access/progress.ts`
-  - [ ] Track reader progress per chapter (page position, completion %)
-  - [ ] Store progress in Netlify Blobs per session
-  - [ ] Resume reading from last position
-  - [ ] Progress persistence across sessions
+- [x] RA-T050 [P] Create `netlify/lib/reader-access/progress.ts`
+  - [x] Track reader progress per chapter (page position, completion %)
+  - [x] Store progress in Netlify Blobs per session
+  - [x] Resume reading from last position
+  - [x] Progress persistence across sessions
+  - ✅ 13 contract tests passing
 
-- [ ] RA-T051 [P] Create `netlify/functions/reader-progress.ts`
-  - [ ] POST/GET endpoints for progress tracking
+- [ ] RA-T051 [P] Create `netlify/functions/reader-analytics.ts`
+  - [ ] POST endpoint for completion events
   - [ ] Record completion events (chapter finished, time spent)
-  - [ ] Aggregate reading statistics
+  - [ ] Aggregate reading statistics per session
+  - [ ] Analytics persistence in Netlify Blobs
 
 - [ ] RA-T052 [P] Create `netlify/functions/reader-bookmarks.ts`
   - [ ] Add bookmark functionality (save chapter/position)
