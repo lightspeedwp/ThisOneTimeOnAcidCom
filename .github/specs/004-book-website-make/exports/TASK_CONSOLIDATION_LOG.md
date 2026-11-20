@@ -10,6 +10,7 @@
 ## Handover Impact
 
 **Tasks moved to Spec 005** (2026-11-13):
+
 - T014–T016: Prompt 3A specification and execution tasks
 - T025–T027: Prompts 3B–3C specification and execution tasks
 
@@ -24,6 +25,7 @@ These 6 tasks represent reader-access work now owned by Spec 005. Spec 004 task 
 ⚠️ **Finding**: Task IDs T025–T027 are reused. Lines 108–110 of `tasks.md` hold the tasks moved to Spec 005. Lines 329–331 hold active US2 tasks. T067 remains open to disambiguate these sets.
 
 Each remaining task has distinct scope:
+
 - Design baseline (Prompts 1–2B): Owned by Spec 004
 - Reader access (Prompts 3A–3C): Moved to Spec 005
 - Blocking decisions: Documented in research.md (resolved)
@@ -34,6 +36,7 @@ Each remaining task has distinct scope:
 ## Task List Status
 
 **Spec 004 task ownership**:
+
 - T001–T013: Phase 1–2 design validation (design baseline)
 - T014–T016: ✅ Transferred to Spec 005
 - T017–T024: Phase 3–4 blocking decisions (resolved)
@@ -41,6 +44,7 @@ Each remaining task has distinct scope:
 - T028–T038+: Phase 5 documentation completion (complete)
 
 **Changes applied**:
+
 - Moved tasks marked as `MOVED_TO_SPEC_005` in `tasks.md` (not completed)
 - Specification maintained for historical traceability
 - No task consolidation required (clear scope separation by feature)
@@ -50,6 +54,7 @@ Each remaining task has distinct scope:
 ## Consolidation Notes
 
 The apparent "duplicate" appearance in T014–T038 arises from:
+
 1. **Specification phase tasks** (review, validate, design) for Prompts 3A–3C
 2. **Execution phase tasks** (execute, test, deploy) for Prompts 3A–3C
 

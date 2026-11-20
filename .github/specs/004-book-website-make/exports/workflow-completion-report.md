@@ -20,13 +20,13 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 
 <!-- markdownlint-disable MD060 -->
 
-| Document | Status | Purpose |
-|----------|--------|---------|
-| **spec.md** | ✅ Complete | Complete specification with 4 user stories, 10 requirements, 8 success criteria |
-| **plan.md** | ✅ Complete | Technical approach, design system, source files, architecture overview |
-| **research.md** | ✅ Complete | Blocking decision analysis (7 decisions with 3–4 options each) |
-| **data-model.md** | ✅ Complete | Entity definitions (6 entities with fields, relationships, validation) |
-| **quickstart.md** | ✅ Complete | Approval gates (Gate 1–3) with prerequisites and validation scenarios |
+| Document          | Status      | Purpose                                                                         |
+| ----------------- | ----------- | ------------------------------------------------------------------------------- |
+| **spec.md**       | ✅ Complete | Complete specification with 4 user stories, 10 requirements, 8 success criteria |
+| **plan.md**       | ✅ Complete | Technical approach, design system, source files, architecture overview          |
+| **research.md**   | ✅ Complete | Blocking decision analysis (7 decisions with 3–4 options each)                  |
+| **data-model.md** | ✅ Complete | Entity definitions (6 entities with fields, relationships, validation)          |
+| **quickstart.md** | ✅ Complete | Approval gates (Gate 1–3) with prerequisites and validation scenarios           |
 
 <!-- markdownlint-enable MD060 -->
 
@@ -34,18 +34,18 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 
 <!-- markdownlint-disable MD060 -->
 
-| Prompt | File | Status | Completeness |
-|--------|------|--------|--------------|
-| **1** | prompt-1-navigation-exposure.md | ✅ Ready | 100% (unblocked) |
-| **2A** | prompt-2a-design-baseline.md | ✅ Ready | 100% (unblocked) |
-| **2B** | prompt-2b-navigation-design.md | ✅ Ready | 100% (unblocked) |
-| **2B** | prompt-2b-execution-guide.md | ✅ Ready | 100% (supporting doc) |
-| **3A** | prompt-3a-reader-access.md | ✅ Ready | 100% (blocked: Decisions 3–6) |
-| **3B** | prompt-3b-recovery-flows.md | ✅ Ready | 100% (blocked: Decisions 1–2) |
-| **3B** | prompt-3b-execution-guide.md | ✅ Ready | 100% (supporting doc) |
-| **3C** | prompt-3c-error-states.md | ✅ Ready | 100% (blocked: Decision 3) |
-| **3C** | prompt-3c-execution-guide.md | ✅ Ready | 100% (supporting doc) |
-| **Guides** | blocking-decisions-audit.md | ✅ Ready | 100% (reference doc) |
+| Prompt     | File                            | Status   | Completeness                  |
+| ---------- | ------------------------------- | -------- | ----------------------------- |
+| **1**      | prompt-1-navigation-exposure.md | ✅ Ready | 100% (unblocked)              |
+| **2A**     | prompt-2a-design-baseline.md    | ✅ Ready | 100% (unblocked)              |
+| **2B**     | prompt-2b-navigation-design.md  | ✅ Ready | 100% (unblocked)              |
+| **2B**     | prompt-2b-execution-guide.md    | ✅ Ready | 100% (supporting doc)         |
+| **3A**     | prompt-3a-reader-access.md      | ✅ Ready | 100% (blocked: Decisions 3–6) |
+| **3B**     | prompt-3b-recovery-flows.md     | ✅ Ready | 100% (blocked: Decisions 1–2) |
+| **3B**     | prompt-3b-execution-guide.md    | ✅ Ready | 100% (supporting doc)         |
+| **3C**     | prompt-3c-error-states.md       | ✅ Ready | 100% (blocked: Decision 3)    |
+| **3C**     | prompt-3c-execution-guide.md    | ✅ Ready | 100% (supporting doc)         |
+| **Guides** | blocking-decisions-audit.md     | ✅ Ready | 100% (reference doc)          |
 
 <!-- markdownlint-enable MD060 -->
 
@@ -57,12 +57,12 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 
 <!-- markdownlint-disable MD060 -->
 
-| Report | File | Status | Purpose |
-|--------|------|--------|---------|
-| **Gate 2 Summary** | GATE_2_SIGN_OFF_SUMMARY.md | ✅ Complete | Design baseline approval summary |
-| **Gate 2 Detailed** | GATE_2_READINESS_REPORT.md | ✅ Complete | Technical readiness validation |
-| **Execution Plan** | PROMPT_EXECUTION_PLAN.md | ✅ Complete | Phase roadmap and prompt status |
-| **Blocking Decisions** | checklists/blocking-decisions-validation.md | ✅ Complete | Decision matrix validation |
+| Report                 | File                                        | Status      | Purpose                          |
+| ---------------------- | ------------------------------------------- | ----------- | -------------------------------- |
+| **Gate 2 Summary**     | GATE_2_SIGN_OFF_SUMMARY.md                  | ✅ Complete | Design baseline approval summary |
+| **Gate 2 Detailed**    | GATE_2_READINESS_REPORT.md                  | ✅ Complete | Technical readiness validation   |
+| **Execution Plan**     | PROMPT_EXECUTION_PLAN.md                    | ✅ Complete | Phase roadmap and prompt status  |
+| **Blocking Decisions** | checklists/blocking-decisions-validation.md | ✅ Complete | Decision matrix validation       |
 
 <!-- markdownlint-enable MD060 -->
 
@@ -70,12 +70,12 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 
 <!-- markdownlint-disable MD060 -->
 
-| Artifact | File | Status | Purpose |
-|----------|------|--------|---------|
-| **Decisions** | decisions-selected.md | ✅ Created | Phase 9 T061 — Document resolved decisions |
-| **Readiness** | implementation-readiness-checklist.md | ✅ Created | Phase 9 T042 — Implementation readiness validation |
-| **Preflight** | preflight-analysis-final.md | ✅ Created | Phase 9 T043 — Final preflight analysis |
-| **Design Validation** | design-baseline-validation.md | ✅ Created | Phase 9 T064 — Design baseline approval |
+| Artifact              | File                                  | Status     | Purpose                                            |
+| --------------------- | ------------------------------------- | ---------- | -------------------------------------------------- |
+| **Decisions**         | decisions-selected.md                 | ✅ Created | Phase 9 T061 — Document resolved decisions         |
+| **Readiness**         | implementation-readiness-checklist.md | ✅ Created | Phase 9 T042 — Implementation readiness validation |
+| **Preflight**         | preflight-analysis-final.md           | ✅ Created | Phase 9 T043 — Final preflight analysis            |
+| **Design Validation** | design-baseline-validation.md         | ✅ Created | Phase 9 T064 — Design baseline approval            |
 
 <!-- markdownlint-enable MD060 -->
 
@@ -95,6 +95,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 - ✅ Acceptance criteria documented
 
 **Deliverables**:
+
 - contracts/prompt-1-navigation-exposure.md
 - contracts/prompt-2a-design-baseline.md
 - contracts/prompt-2b-navigation-design.md
@@ -113,6 +114,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 - ⏳ Execution blocked by Decisions 3, 4, 5, 6
 
 **Deliverables**:
+
 - contracts/prompt-3a-reader-access.md
 - contracts/prompt-3a-execution-guide.md (supporting)
 
@@ -130,6 +132,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 - ✅ Prompts 3B/3C marked "BLOCKED" with specific prerequisites
 
 **Deliverables**:
+
 - research.md (complete blocking decision analysis)
 - contracts/prompt-3b-recovery-flows.md
 - contracts/prompt-3c-error-states.md
@@ -149,6 +152,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 - ✅ Zero code generated, zero commits created, zero deployments triggered
 
 **Verification**:
+
 - [x] No code files modified
 - [x] No commits to main branch
 - [x] No deployments triggered
@@ -177,6 +181,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 **Prerequisite**: Design tokens approved, unapproved candidates listed
 
 **Evidence**:
+
 - GATE_2_SIGN_OFF_SUMMARY.md
 - GATE_2_READINESS_REPORT.md
 - design-baseline-validation.md
@@ -190,6 +195,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 **Prerequisite**: Preflight analysis complete + signed off
 
 **Evidence**:
+
 - preflight-analysis-final.md
 - implementation-readiness-checklist.md
 
@@ -231,6 +237,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 **Working Tree**: Clean (all changes staged for commit)
 
 **Verification**:
+
 ```bash
 ✅ Branch: docs/spec-004-phase9-remaining
 ✅ Status: Documentation artifacts created
