@@ -29,10 +29,10 @@ From `.github/specs/004-book-website-make/references/03-author-decisions-launch-
 - Public sitemap includes: /home, /about, /book, /contact, ...
 - Navigation component displays: /home, /about, /book, /contact (Speaking/Events/Media hidden)
 - Route enforcement for /speaking, /events, /media:
-  - ✅ **Selected: Option A (Recommended)**: Meta tags + Robots.txt + Sitemap.xml exclusion
+  - ✅ **Selected: Option A (Recommended)**: Noindex meta tags (primary) + Sitemap.xml exclusion (primary) + Robots.txt (optional)
   - (Alternative options available if different enforcement method chosen)
   
-  *(Blocking Decision 7: Route Enforcement Verification — Option A Selected)*
+  *(Blocking Decision 7: Route Enforcement Verification — Option A Selected — Noindex meta tags and sitemap exclusion are primary mechanisms; robots.txt is optional)*
 
 **No Changes To**:
 - Functionality (routes remain accessible, not deleted)
@@ -59,69 +59,16 @@ From `.github/specs/004-book-website-make/references/03-author-decisions-launch-
   - Tablet (768-1023px): Horizontal menu with possible wrapping
   - Mobile (<768px): Hamburger menu, all visible links in drawer
 
-### Figma Make Instructions (Deprecated)
+### Figma Make Instructions
 
 1. **Locate navigation component** in Figma file
 2. **Remove links** for /speaking, /events, /media from navigation menu
 3. **Preserve route pages** (/speaking, /events, /media) with noindex metadata
-4. **Document enforcement strategy** for each route (based on Decision 7 selection — Option A approved):
-   - Add Meta tag: `<meta name="robots" content="noindex">`
-   - Update sitemap.xml to exclude /speaking, /events, /media
-   - Do NOT use robots.txt `Disallow` rules (conflicting approach; noindex meta tags and sitemap exclusion are sufficient)
+4. **Document enforcement strategy** for each route (based on Decision 7 selection):
+   - Add Meta tag (primary): `<meta name="robots" content="noindex, nofollow">`
+   - Update sitemap.xml (primary): Exclude /speaking, /events, /media (per option selected)
+   - Add Robots.txt rule (optional): `Disallow: /speaking` (secondary mechanism if needed)
 5. **Generate before/after comparison** showing navigation structure change
-
----
-
-## Claude Execution
-
-### Input Specification
-
-Claude receives:
-- Current navigation structure (4 visible + 3 hidden routes)
-- Decision 7 approval: Option A (meta tags + sitemap exclusion)
-- Design baseline context (responsive breakpoints, component structure)
-- Route enforcement requirements (noindex, sitemap exclusion)
-
-### Output Specification
-
-Claude produces a **Markdown spec document** containing:
-
-1. **Enforcement Strategy Summary** (2–3 paragraphs)
-   - Decision 7 implementation (Option A selected)
-   - Meta tag approach
-   - Sitemap configuration
-   - robots.txt guidance (explicitly stating no Disallow needed)
-
-2. **Navigation Component Changes** (structured table)
-   - Before/after route visibility
-   - Responsive states (desktop, tablet, mobile)
-   - Hidden routes with enforcement details
-
-3. **Implementation Checklist** (markdown checklist)
-   - [ ] Add `<meta name="robots" content="noindex">` to /speaking page template
-   - [ ] Add `<meta name="robots" content="noindex">` to /events page template
-   - [ ] Add `<meta name="robots" content="noindex">` to /media page template
-   - [ ] Update sitemap.xml — exclude /speaking, /events, /media
-   - [ ] Verify navigation component renders only 4 visible links
-   - [ ] Test mobile responsive view (hamburger menu includes only 4 items)
-   - [ ] Verify routes still accessible at /speaking, /events, /media (noindex, not 404)
-   - [ ] No robots.txt `Disallow` rules added for these routes
-
-4. **Validation Criteria** (reference back to acceptance criteria CR-1.1 through CR-1.6)
-   - Links to each criterion with pass/fail indicator
-
-5. **Example Output** (code blocks for reference)
-   - Example `<meta>` tag for noindex pages
-   - Example sitemap exclusion XML
-   - Navigation component state matrix (desktop/tablet/mobile)
-
-### Validation Criteria
-
-✅ Markdown spec is complete and valid  
-✅ All acceptance criteria (CR-1.1 through CR-1.6) explicitly addressed  
-✅ Navigation enforcement matches Decision 7 Option A  
-✅ No robots.txt `Disallow` rules suggested  
-✅ Implementation checklist is developer-ready  
 
 ### Acceptance Criteria
 
@@ -129,10 +76,10 @@ Claude produces a **Markdown spec document** containing:
 
 ✅ **CR-1.2**: Speaking, Events, Media routes are hidden from navigation menu but pages remain accessible at /speaking, /events, /media
 
-✅ **CR-1.3**: Enforcement strategy matches Blocking Decision 7 Option A (approved):
-- Meta tags `<meta name="robots" content="noindex">` present on /speaking, /events, /media
-- Sitemap.xml explicitly excludes /speaking, /events, /media
-- No robots.txt `Disallow` rules for these routes (would hide noindex directive)
+✅ **CR-1.3**: Enforcement strategy matches selected option from Blocking Decision 7:
+- Meta tags present on hidden pages
+- Robots.txt rules documented (if Option A or B selected)
+- Sitemap.xml excludes /speaking, /events, /media (if Option A or D selected)
 
 ✅ **CR-1.4**: Responsive navigation design preserved for desktop, tablet, mobile breakpoints
 

@@ -3,7 +3,7 @@
 **Status**: Manual Figma Design Work (Figma Make environment not automated)  
 **Date**: 2026-11-19  
 **Designer**: [Assign designer name]  
-**Timeline**: 45–60 minutes (parallel execution)  
+**Timeline**: 45–60 minutes (parallel execution)
 
 ---
 
@@ -19,20 +19,21 @@ Figma Make automated execution is **NOT available**. The prompts below specify e
 
 ### Design Components to Create
 
-| Component | States | Reference |
-| --- | --- | --- |
-| Email Template Mockup | (single) | Copy approved by Ash 2026-11-13 |
-| Email Entry Form | default, focused, error | Label + placeholder specified |
-| Code Entry Form | default, focused, error, loading, success | 6-char input with states |
-| Success Confirmation | (single) | "Access confirmed. You can now read." |
-| Newsletter CTA Section | (single) | Separate from verification, Brevo link |
+| Component              | States                                    | Reference                              |
+| ---------------------- | ----------------------------------------- | -------------------------------------- |
+| Email Template Mockup  | (single)                                  | Copy approved by Ash 2026-11-13        |
+| Email Entry Form       | default, focused, error                   | Label + placeholder specified          |
+| Code Entry Form        | default, focused, error, loading, success | 6-char input with states               |
+| Success Confirmation   | (single)                                  | "Access confirmed. You can now read."  |
+| Newsletter CTA Section | (single)                                  | Separate from verification, Brevo link |
 
 ### Exact Copy to Use
 
 **Email Subject**: `Your reading code`
 
 **Email Body**:
-```text
+
+````text
 Hi,
 
 Here's your reading code for This One Time On Acid:
@@ -47,15 +48,15 @@ Didn't ask for this? You can ignore this email.
 — Ash
 ```text
 
-**Email Form Label**: "Enter your email address"  
-**Email Form Placeholder**: "you@example.com"  
-**Email Form Button**: "Send Code"  
-**Email Form Help**: "We'll email you a 10-minute code. No subscription required."  
+**Email Form Label**: "Enter your email address"
+**Email Form Placeholder**: "you@example.com"
+**Email Form Button**: "Send Code"
+**Email Form Help**: "We'll email you a 10-minute code. No subscription required."
 **Email Form Error**: "Invalid email format"
 
-**Code Form Label**: "Enter your code"  
-**Code Form Placeholder**: "XXXXXX" (6 characters)  
-**Code Form Button**: "Verify Access"  
+**Code Form Label**: "Enter your code"
+**Code Form Placeholder**: "XXXXXX" (6 characters)
+**Code Form Button**: "Verify Access"
 **Code Form Help**: "Check your email for your 10-minute code"
 
 **Error Messages**:
@@ -63,8 +64,8 @@ Didn't ask for this? You can ignore this email.
 - "Code expired — it was valid for 10 minutes from when it was generated" (Decision 3)
 - "Rate limited: Too many failed attempts"
 
-**Success Message**: "Access confirmed. You can now read."  
-**Newsletter CTA**: "Stay Updated — Join our newsletter for book updates (optional). This is separate from reading access."  
+**Success Message**: "Access confirmed. You can now read."
+**Newsletter CTA**: "Stay Updated — Join our newsletter for book updates (optional). This is separate from reading access."
 **Newsletter Link**: Brevo external signup page (URL to be supplied by developer)
 
 ### Design Baseline to Use
@@ -232,23 +233,24 @@ Didn't ask for this? You can ignore this email.
 
 ## Decision Integration Summary
 
-✅ **Decision 1** (Recovery-first race): Error state 5 (session-conflict handling)  
-✅ **Decision 2** (Recovery lifetime): Recovery flow (30-day absolute expiry)  
-✅ **Decision 3** (Code expiry): Error state 2 message ("10 minutes from generation")  
-✅ **Decision 4** (Email provider): Prompt 3A email template (SendGrid SMTP)  
-✅ **Decision 5** (Manuscript approval): All prompts integrated with "Chapter 1 live" messaging  
-✅ **Decision 6** (Newsletter destination): Prompt 3A CTA (Brevo external link)  
+✅ **Decision 1** (Recovery-first race): Error state 5 (session-conflict handling)
+✅ **Decision 2** (Recovery lifetime): Recovery flow (30-day absolute expiry)
+✅ **Decision 3** (Code expiry): Error state 2 message ("10 minutes from generation")
+✅ **Decision 4** (Email provider): Prompt 3A email template (SendGrid SMTP)
+✅ **Decision 5** (Manuscript approval): All prompts integrated with "Chapter 1 live" messaging
+✅ **Decision 6** (Newsletter destination): Prompt 3A CTA (Brevo external link)
 
 ---
 
 ## Sign-Off
 
-**Designer Name**: ___________________  
-**Date Completed**: ___________________  
-**Acceptance Criteria**: ☐ All pass  
-**Figma Export**: ☐ Ready for development integration  
+**Designer Name**: ___________________
+**Date Completed**: ___________________
+**Acceptance Criteria**: ☐ All pass
+**Figma Export**: ☐ Ready for development integration
 
 ---
 
 **Version**: 1.0.0 | **Status**: Ready for Manual Design Work | **Date**: 2026-11-19
 
+````

@@ -22,27 +22,16 @@
 
 ---
 
-## Phase 1: Gate 2 & SC-004 Approval
+## Phase 1: Gate 2 Approval & Environment Validation
 
-**Purpose**: Secure design baseline approval and execution model approval (SC-004: Claude Direct Execution)
+**Purpose**: Secure design baseline approval and Figma Make environment readiness
 
-**Gate 2 Approval**:
 - [ ] T001 Review GATE_2_SIGN_OFF_SUMMARY.md with Ash (project owner)
 - [ ] T002 Confirm design baseline locked: Space Grotesk, Inter, 9-color palette (check `.github/specs/004-book-website-make/exports/GATE_2_SIGN_OFF_SUMMARY.md`)
+- [ ] T003 Validate Figma Make environment access: file key, API token, workspace ready (or mark blocked if unavailable)
 - [ ] T004 [P] Verify all 4 critical fixes from Gate 2 audit (Prompt 2B colors #FF3AAE, Prompt 3A status, reference paths, Decision 7 clarity)
 
-**SC-004 Approval** (Execution Model Pivot):
-- [ ] T001b **CRITICAL GATE** Review SC-004_EXECUTION_MODEL_PIVOT.md with Ash (project owner) — Claude direct execution replaces Figma Make for Prompts 1, 2A, 2B
-  - Proposal: Pivot from Figma Make to Claude direct execution
-  - Benefits: Faster iteration, version control, Spec 005 continuity
-  - Timeline: No impact (45–60 min Claude vs. 30–45 min Figma Make)
-  - Approval checkbox: [ ] ✅ **APPROVE** or [ ] ⏸️ **REQUEST CHANGES**
-  - Collect signature/timestamp from Ash
-
-**Environment Check** (Deprecated Figma requirement, kept for reference):
-- [x] T003 ~~Validate Figma Make environment access~~ **SUPERSEDED BY SC-004** — Claude execution requires no Figma environment
-
-**Checkpoint**: Gate 2 + SC-004 approval confirmed - ready for Phase A execution via Claude
+**Checkpoint**: Gate 2 approval confirmed - ready for Phase A execution
 
 ---
 
@@ -61,11 +50,11 @@
 - [ ] T006 [US1] Validate Prompt 2A exports both CSS variables and JSON design tokens matching 9-color approved baseline (`contracts/prompt-2a-design-baseline.md`)
 - [ ] T007 [US1] Validate Prompt 2B navigation component shows 4 visible items with #FF3AAE hover/active state in all responsive breakpoints (`contracts/prompt-2b-navigation-design.md`)
 
-### Implementation for US1 (Claude Direct Execution — SC-004 approved)
+### Implementation for US1
 
-- [ ] T008 [P] [US1] Execute Prompt 1: Navigation Exposure via Claude ~~(Figma Make)~~ (produce navigation enforcement spec + implementation checklist; validate against acceptance criteria)
-- [ ] T009 [P] [US1] Execute Prompt 2A: Design Baseline Export via Claude ~~(Figma Make)~~ (export CSS variables + JSON tokens; validate both files parse correctly)
-- [ ] T010 [P] [US1] Execute Prompt 2B: Navigation Design via Claude ~~(Figma Make)~~ (produce TypeScript component spec + responsive CSS + accessibility checklist)
+- [x] T008 [P] [US1] Execute Prompt 1: Navigation Exposure in Figma Make ~~(hide /speaking, /events, /media from sitemap; preserve as noindex)~~ **BLOCKED - Figma Make environment not available**
+- [x] T009 [P] [US1] Execute Prompt 2A: Design Baseline Export ~~(export CSS variables + JSON tokens with exact approved colors/typography)~~ **BLOCKED - Figma Make environment not available**
+- [x] T010 [P] [US1] Execute Prompt 2B: Navigation Design ~~(component design with all states, 4 visible items, responsive breakpoints 1024px/768px)~~ **BLOCKED - Figma Make environment not available**
 - [ ] T011 [US1] Validate specification contracts match acceptance criteria (manual design reference from `contracts/` folder)
 
 **Checkpoint**: Phase A complete - US1 (Design Hand-off) is fully executable and approved
@@ -84,32 +73,15 @@
 - [ ] T012 [P] [US1] Validate Prompt 2A (Design Baseline) contract in contracts/prompt-2a-design-baseline.md: CSS variables + JSON tokens export specs with exact approved values
 - [ ] T013 [P] [US1] Validate Prompt 2B (Navigation Design) contract in contracts/prompt-2b-navigation-design.md: component design, all states, responsive breakpoints (1024px/768px), hover/active states (#FF3AAE)
 
-<<<<<<< HEAD
-### Prompt Generation Readiness for User Story 1
-
-- [ ] T014 [US1] Generate exact preview for Prompt 1: Navigate to contracts/prompt-1-*.md and confirm before/after navigation structure, numbered implementation steps, acceptance criteria match spec.md scenario 1
-- [ ] T015 [US1] Verify Prompt 1 scope: Speaking/Events/Media hidden, noindex meta tags + sitemap.xml exclusion per route-enforcement-verification decision (Decision 7)
-- [ ] T016 [US1] Generate exact preview for Prompt 2A: Verify CSS variables and JSON tokens match 9-color palette + typography baseline per spec.md scenario 1
-- [ ] T017 [US1] Verify Prompt 2A scope: All unapproved candidates excluded (R3, T1, RT2, C1) per spec.md scenario 2
-- [ ] T018 [US1] Generate exact preview for Prompt 2B: Verify navigation component with 4 visible items, #FF3AAE hover/active, responsive breakpoints per data-model.md
-- [ ] T019 [US1] Compile acceptance criteria for Prompts 1–2B: each with specific measurable outcomes, verifiable against Figma output
-
-**Checkpoint**: Prompts 1–2B fully specified and ready for Figma Make execution
-
-**Next**: Prompts 3A–3C (reader access) → Spec 005
-=======
 ### Implementation for US2 (Claude Direct Execution — SC-004 approved)
 
-⚠️ **MOVED TO SPEC 005** (2026-11-13): Reader access specification and execution now owned by [Spec 005 — Reader Access](../005-reader-access/spec.md)
-
-- [ ] T014 [US2] ~~Review Prompt 3A contract~~ **→ MOVED TO SPEC_005** | Reference only: `contracts/prompt-3a-reader-access.md` available in Spec 004
-- [ ] T015 [US2] ~~Execute Prompt 3A (reader access copy & forms)~~ **→ MOVED TO SPEC_005** | Figma Make execution now Spec 005's responsibility
-- [ ] T016 [US2] ~~Validate Prompt 3A specification~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
+- [ ] T014 [US2] Review Prompt 3A contract with blocking decision status (awaits Decisions 3, 4, 5, 6: code expiry timing, email provider, manuscript status, newsletter destination)
+- [x] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) in Figma Make **BLOCKED - Figma Make environment not available**
+- [ ] T016 [US2] Validate Prompt 3A specification: approved copy present, form states documented, newsletter link explicit non-subscription statement (manual review from `contracts/prompt-3a-reader-access.md`)
 
 **Checkpoint**: US2 (Reader Access) → Spec 005 responsibility. Contracts remain for reference.
 
 **See**: [Spec 004 → Spec 005 Handover](./exports/SPEC_004_TO_005_HANDOVER.md) for details
->>>>>>> origin/main
 
 ---
 
@@ -135,36 +107,11 @@
 - [ ] T028 [US3] Verify decision routing: Decisions 1–6 enable Spec 005 (reader access, Prompts 3A–3C); Decision 7 enables Prompt 1 (navigation)
 - [ ] T029 [US3] Document implementation prerequisites: list what must be verified/confirmed before each prompt can execute (Figma Make environment, manuscript status, email provider confirmed, etc.)
 
-<<<<<<< HEAD
 **Checkpoint**: All blocking decisions documented with implementation guidance - development has clear visibility on decision gates and parallelization opportunities
-=======
-- [ ] T019 [P] [US3] **Decision 1 (Recovery-first race condition)**: Clarify with Ash: when recovery and fresh verification race, which takes precedence? Options: A (recovery first), B (fresh first), C (last-writer-wins), D (user chooses). Update `research.md` with chosen option
-- [ ] T020 [P] [US3] **Decision 2 (Recovery lifetime eligibility)**: Clarify with Ash: how long is recovery code valid? Options: 24h, 7d, 30d. Update `research.md`
-- [ ] T021 [P] [US3] **Decision 3 (Code expiry start time)**: Clarify with product lead: from code generation? receipt? page load? Options: A (generation), B (receipt), C (page load). Update `research.md`
-- [ ] T022 [P] [US3] **Decision 4 (Email service provider)**: Clarify with tech lead: SendGrid or Brevo? API/SMTP availability? Update `research.md`
-- [ ] T023 [P] [US3] **Decision 5 (Manuscript publication readiness)**: Clarify with author: when is manuscript approved & available for readers? Draft timeline: 2027-01-31. Update `research.md` with status
-- [ ] T024 [P] [US3] **Decision 6 (Newsletter destination)**: Clarify with product: Brevo signup link or other service? Update `research.md`
-
-### Implementation for US3 (Claude Direct Execution — SC-004 approved; after Decision Resolution)
-
-⚠️ **MOVED TO SPEC 005** (2026-11-13): Recovery flows and error states execution now owned by [Spec 005 — Reader Access](../005-reader-access/spec.md). Decisions 1–2 (recovery race & lifetime) and Decision 3 (code expiry) remain open in Spec 005 — do not mark these tasks complete until Spec 005 resolves those decisions.
-
-- [ ] T025 [US3] [SPEC 005 OWNER] Once Decisions 1 & 2 resolved in Spec 005: Execute Prompt 3B (recovery flows)
-- [ ] T026 [US3] [SPEC 005 OWNER] Once Decision 3 resolved in Spec 005: Execute Prompt 3C (error states, code-expiry messaging)
-- [ ] T027 [US3] [SPEC 005 OWNER] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions
-
-- [ ] T025 [US3] ~~Execute Prompt 3B (recovery flows)~~ **→ MOVED TO SPEC_005** | Decisions 1–2 ✅ resolved; Spec 005 owns execution
-- [ ] T026 [US3] ~~Execute Prompt 3C (error states)~~ **→ MOVED TO SPEC_005** | Decisions 1–3 ✅ resolved; Spec 005 owns execution
-- [ ] T027 [US3] ~~Validate Prompt 3B/3C~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
-
-**Checkpoint**: All blocking decisions resolved ✅ — Phase B responsibility → Spec 005
-
-**See**: [Spec 004 → Spec 005 Handover](./exports/SPEC_004_TO_005_HANDOVER.md) for details
->>>>>>> origin/main
 
 ---
 
-## Phase 5: User Story 4 - Documentation-Only Workflow Completion (Priority: P1)
+## Phase 4: User Story 3 - Implementation Readiness & Blocking Decisions (Priority: P2)
 
 **Goal**: Deliver complete documentation package ready for approval before any code/commits/deployments, with all source reconciliation, exact previews, and decision matrix included
 
@@ -308,14 +255,7 @@ With multiple people:
 
 **Total Tasks**: 45 | **Phase 1**: 5 | **Phase 2**: 5 | **Phase 3 (US1)**: 9 | **Phase 4 (US3)**: 10 | **Phase 5 (US4)**: 11 | **Phase 6**: 5
 
-<<<<<<< HEAD
 **MVP Scope**: Phases 1–3 (US1 Prompts 1–2B ready) = 19 tasks | **Full Scope**: All phases = 45 tasks
-=======
-**Checkpoint**: Approval Gate 1 prerequisites documented and ready for user approval
-
----
-
-## Phase 3: User Story 1 — Design Specification Hand-off (P1)
 
 **Goal**: Document and prepare for export of design baseline (Space Grotesk, Inter, 9-color palette) and navigation component specifications
 
@@ -688,23 +628,20 @@ Validation and verification tasks to close gaps identified between specification
 
 ---
 
-**Version**: 1.0.1 | **Status**: Phase 8 Convergence Appended | **Updated**: 2026-11-09
+## Phase 9: Convergence Closure & Spec 005 Handover
 
-## Phase 9: Convergence
+Finalize Phase 8 scope updates, document SC-003 approval, and prepare Spec 004 for merge to main with Spec 005 handover package.
 
-- [x] T060 Replace stale Decision 7 wording (robots.txt `Disallow`) with noindex meta tags plus sitemap exclusion in contracts/prompt-1-navigation-exposure.md, PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md, exports/GATE_2_READINESS_REPORT.md and checklists/blocking-decisions-validation.md per FR-003 (contradicts)
-- [x] T061 Reword "Ready to Execute"/"executable" claims in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md as gated by the open spec.md Status gates per FR-010 (contradicts)
-- [x] T062 Record resolved Decisions 1–7 and the Prompt 3A–3C handover to Spec 005 in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md per spec.md Implications (contradicts)
-- [ ] T063 Raise Prompt 2A preview completeness to at least 95% and re-score it in checklists/prompt-preview-validation.md; record an approved SC-003 scope change for the Prompt 3A handover per SC-003 (partial)
-- [ ] T064 Create exports/design-baseline-validation.md, exports/navigation-specification.md and exports/design-baseline-acceptance-report.md, or record their approved descoping, per US1/AC1 (missing)
-- [ ] T065 Create exports/decisions-selected.md, exports/implementation-readiness-checklist.md, exports/preflight-analysis-final.md and exports/workflow-completion-report.md, or record pointers to existing artefacts that cover them, per US4 (missing)
-- [ ] T066 Close Prompt 3A–3C tasks and resolved decision-clarification tasks (T012–T027, second-list T022–T038) with a handover or resolution note per spec.md Implications (contradicts)
-- [ ] T067 Disambiguate the duplicate T014–T038 task sets and repoint Phase 8 dependencies in tasks.md per Constitution I (contradicts)
-- [ ] T068 Mark the Phase 8 "zero unresolved validation gaps" acceptance item unmet until T059 completes per Phase 8 acceptance (contradicts)
-- [ ] T069 Update spec.md Assumptions, Deliverables and Next Steps and plan.md Summary and Technical Context to the resolved, handed-over state per FR-006 (contradicts)
-- [ ] T070 Replace `content/book/0N` source paths with `references/0N-*.md` across spec.md, plan.md, data-model.md, quickstart.md, source-file-inventory.md, version-reconciliation.md and checklists per FR-001 (contradicts)
-- [ ] T071 Replace non-baseline colours (#1a1a1a, #d4a574, #ff6b6b, #8b0000) in data-model.md, exports/GATE_2_READINESS_REPORT.md and the Prompt 3A/3C guides, or mark them superseded, per plan: approved palette (contradicts)
-- [ ] T072 Relabel Decision 2 Option A as session refresh with absolute 30-day expiry in contracts/prompt-3b-execution-guide.md and checklists/blocking-decisions-validation.md per Decision 2 (partial)
-- [ ] T073 Restate or close T045–T047 against the merged PR #589 state per plan: verification (partial)
-- [ ] T074 Justify the staged/ directory in plan.md or archive it per plan: project structure (unrequested)
->>>>>>> origin/main
+- [ ] T066 Update Phase 8 T054 acceptance criteria to reflect approved SC-003 scope: Prompts 1, 2A, 2B ≥95% (3A handed to Spec 005) per approval 2026-11-19
+- [ ] T067 Document SC-003 scope change in spec.md Assumptions section with link to approval decision (SC-003_SCOPE_CHANGE_PROPOSAL.md)
+- [ ] T068 Create Spec 005 handover artifact documenting: Prompt 3A contract, Decisions 1–6 status, Phase B readiness (3 prompts, 3 decisions)
+- [ ] T069 Validate all 20+ specification artifacts present and version-locked for Spec 004 Phase 9 sign-off
+- [ ] T070 Mark Phase 8 T054 and T059 complete: scope-updated acceptance criteria now met
+- [ ] T071 Generate final PR description and commit message for merge to main
+- [ ] T072 Verify build passes and branch validation succeeds before merge
+- [ ] T073 Merge PR #622 to main branch, close Phase 9 Convergence
+- [ ] T074 Initialize Spec 005 Phase 1 (Decision Resolution) with 2026-12-15 target completion
+
+---
+
+**Version**: 1.0.2 | **Status**: Phase 9 Convergence Appended | **Updated**: 2026-11-19

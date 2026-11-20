@@ -11,17 +11,17 @@
 
 <!-- markdownlint-disable MD060 -->
 
-| Primitive | Hex Value | Usage | Theme(s) | Status |
-|-----------|-----------|-------|----------|--------|
-| Deepest Dark | #0B0B10 | Primary dark background | Dark | ✅ Baseline |
-| Dark Purple-Black | #12121A | Secondary dark background | Dark | ✅ Baseline |
-| Lighter Dark | #171722 | Tertiary dark background | Dark | ✅ Baseline |
-| Warm Cream | #F6F2EB | Light text, light background | Both | ✅ Baseline |
-| Warm Tan | #CFC7BB | Secondary light/neutral | Both | ✅ Baseline |
-| Warm Brown | #9C9488 | Tertiary light/neutral | Both | ✅ Baseline |
-| Hot Pink Accent | #FF3AAE | Interactive accent (hover, active) | Both | ✅ Baseline |
-| Electric Yellow Accent | #F4FF3C | Highlight accent | Both | ✅ Baseline |
-| Purple Accent | #8A63FF | Tertiary accent | Both | ✅ Baseline |
+| Primitive              | Hex Value | Usage                              | Theme(s) | Status      |
+| ---------------------- | --------- | ---------------------------------- | -------- | ----------- |
+| Deepest Dark           | #0B0B10   | Primary dark background            | Dark     | ✅ Baseline |
+| Dark Purple-Black      | #12121A   | Secondary dark background          | Dark     | ✅ Baseline |
+| Lighter Dark           | #171722   | Tertiary dark background           | Dark     | ✅ Baseline |
+| Warm Cream             | #F6F2EB   | Light text, light background       | Both     | ✅ Baseline |
+| Warm Tan               | #CFC7BB   | Secondary light/neutral            | Both     | ✅ Baseline |
+| Warm Brown             | #9C9488   | Tertiary light/neutral             | Both     | ✅ Baseline |
+| Hot Pink Accent        | #FF3AAE   | Interactive accent (hover, active) | Both     | ✅ Baseline |
+| Electric Yellow Accent | #F4FF3C   | Highlight accent                   | Both     | ✅ Baseline |
+| Purple Accent          | #8A63FF   | Tertiary accent                    | Both     | ✅ Baseline |
 
 <!-- markdownlint-enable MD060 -->
 
@@ -32,6 +32,7 @@
 ### Files Checked
 
 ✅ Files audited (includes non-baseline colors):
+
 - `spec.md` — No color hex values (uses semantic names only)
 - `plan.md` — No color hex values
 - `research.md` — No color hex values in decision docs
@@ -47,23 +48,23 @@
 
 <!-- markdownlint-disable MD060 -->
 
-| File | Color | Usage | Verification | Status |
-|------|-------|-------|--------------|--------|
-| contracts/prompt-2a-design-baseline.md | #0B0B10 | Deepest Dark | Baseline primitive ✅ | ✅ OK |
-| contracts/prompt-2a-design-baseline.md | #12121A | Dark Purple-Black | Baseline primitive ✅ | ✅ OK |
-| contracts/prompt-2a-design-baseline.md | #171722 | Lighter Dark | Baseline primitive ✅ | ✅ OK |
-| contracts/prompt-2a-design-baseline.md | #F6F2EB | Warm Cream | Baseline primitive ✅ | ✅ OK |
-| contracts/prompt-2a-design-baseline.md | #CFC7BB | Warm Tan | Baseline primitive ✅ | ✅ OK |
-| contracts/prompt-2a-design-baseline.md | #9C9488 | Warm Brown | Baseline primitive ✅ | ✅ OK |
-| contracts/prompt-2a-design-baseline.md | #FF3AAE | Hot Pink | Baseline primitive ✅ | ✅ OK |
-| contracts/prompt-2b-navigation-design.md | #FF3AAE | Hot Pink (hover/active) | Baseline primitive ✅ | ✅ OK |
-| contracts/prompt-2b-navigation-design.md | #F4FF3C | Electric Yellow | Baseline primitive ✅ | ✅ OK |
-| contracts/prompt-2b-navigation-design.md | #8A63FF | Purple | Baseline primitive ✅ | ✅ OK |
-| exports/design-tokens.json | All 9 baseline | Complete palette + themes | All baseline ✅ | ✅ OK |
-| exports/design-tokens.css | All 9 baseline | Complete palette + themes | All baseline ✅ | ✅ OK |
-| data-model.md (lines 45–46) | #1a1a1a | Near-black (not in baseline) | Non-baseline ⚠️ | 🔄 PENDING: T071 |
-| data-model.md (lines 45–46) | #ffffff | Pure white (not in baseline) | Non-baseline ⚠️ | 🔄 PENDING: T071 |
-| tasks.md (line 659, T071) | #1a1a1a, #d4a574, #ff6b6b, #8b0000 | Marked for replacement/superseding | Non-baseline ⚠️ | 🔄 PENDING: T071 |
+| File                                     | Color                              | Usage                              | Verification          | Status           |
+| ---------------------------------------- | ---------------------------------- | ---------------------------------- | --------------------- | ---------------- |
+| contracts/prompt-2a-design-baseline.md   | #0B0B10                            | Deepest Dark                       | Baseline primitive ✅ | ✅ OK            |
+| contracts/prompt-2a-design-baseline.md   | #12121A                            | Dark Purple-Black                  | Baseline primitive ✅ | ✅ OK            |
+| contracts/prompt-2a-design-baseline.md   | #171722                            | Lighter Dark                       | Baseline primitive ✅ | ✅ OK            |
+| contracts/prompt-2a-design-baseline.md   | #F6F2EB                            | Warm Cream                         | Baseline primitive ✅ | ✅ OK            |
+| contracts/prompt-2a-design-baseline.md   | #CFC7BB                            | Warm Tan                           | Baseline primitive ✅ | ✅ OK            |
+| contracts/prompt-2a-design-baseline.md   | #9C9488                            | Warm Brown                         | Baseline primitive ✅ | ✅ OK            |
+| contracts/prompt-2a-design-baseline.md   | #FF3AAE                            | Hot Pink                           | Baseline primitive ✅ | ✅ OK            |
+| contracts/prompt-2b-navigation-design.md | #FF3AAE                            | Hot Pink (hover/active)            | Baseline primitive ✅ | ✅ OK            |
+| contracts/prompt-2b-navigation-design.md | #F4FF3C                            | Electric Yellow                    | Baseline primitive ✅ | ✅ OK            |
+| contracts/prompt-2b-navigation-design.md | #8A63FF                            | Purple                             | Baseline primitive ✅ | ✅ OK            |
+| exports/design-tokens.json               | All 9 baseline                     | Complete palette + themes          | All baseline ✅       | ✅ OK            |
+| exports/design-tokens.css                | All 9 baseline                     | Complete palette + themes          | All baseline ✅       | ✅ OK            |
+| data-model.md (lines 45–46)              | #1a1a1a                            | Near-black (not in baseline)       | Non-baseline ⚠️       | 🔄 PENDING: T071 |
+| data-model.md (lines 45–46)              | #ffffff                            | Pure white (not in baseline)       | Non-baseline ⚠️       | 🔄 PENDING: T071 |
+| tasks.md (line 659, T071)                | #1a1a1a, #d4a574, #ff6b6b, #8b0000 | Marked for replacement/superseding | Non-baseline ⚠️       | 🔄 PENDING: T071 |
 
 <!-- markdownlint-enable MD060 -->
 
@@ -73,12 +74,12 @@
 
 <!-- markdownlint-disable MD060 -->
 
-| Candidate | Description | Status |
-|-----------|-------------|--------|
-| R3 | Responsive Typography | ✅ Absent |
-| T1 | Additional Typography | ✅ Absent |
-| RT2 | Reader Typography Controls | ✅ Absent |
-| C1 | Reader Continuity/Progress Tracking | ✅ Absent |
+| Candidate | Description                         | Status    |
+| --------- | ----------------------------------- | --------- |
+| R3        | Responsive Typography               | ✅ Absent |
+| T1        | Additional Typography               | ✅ Absent |
+| RT2       | Reader Typography Controls          | ✅ Absent |
+| C1        | Reader Continuity/Progress Tracking | ✅ Absent |
 
 <!-- markdownlint-enable MD060 -->
 

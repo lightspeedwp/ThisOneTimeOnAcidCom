@@ -19,14 +19,14 @@
 
 <!-- markdownlint-disable MD060 -->
 
-| Old Path | New Path | File | Status |
-|----------|----------|------|--------|
-| `content/book/01-book-website-specification.md` | `.github/specs/004-book-website-make/references/01-book-website-specification.md` | Master execution contract | ✅ Migrated |
-| `content/book/02-companion-session-plan.md` | `.github/specs/004-book-website-make/references/02-companion-session-plan.md` | Companion session plan | ✅ Migrated |
-| `content/book/03-author-decisions-launch-scope.md` | `.github/specs/004-book-website-make/references/03-author-decisions-launch-scope.md` | Author decisions & scope | ✅ Migrated |
-| `content/book/04-design-brief.md` | `.github/specs/004-book-website-make/references/04-design-brief.md` | Design brief | ✅ Migrated |
-| `content/book/05-design-reader-decision-register.md` | `.github/specs/004-book-website-make/references/05-design-reader-decision-register.md` | Decision register | ✅ Migrated |
-| `content/book/06-website-reading-prd.md` | `.github/specs/004-book-website-make/references/06-website-reading-prd.md` | Product requirements | ✅ Migrated |
+| Old Path                                             | New Path                                                                               | File                      | Status      |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------- | ----------- |
+| `content/book/01-book-website-specification.md`      | `.github/specs/004-book-website-make/references/01-book-website-specification.md`      | Master execution contract | ✅ Migrated |
+| `content/book/02-companion-session-plan.md`          | `.github/specs/004-book-website-make/references/02-companion-session-plan.md`          | Companion session plan    | ✅ Migrated |
+| `content/book/03-author-decisions-launch-scope.md`   | `.github/specs/004-book-website-make/references/03-author-decisions-launch-scope.md`   | Author decisions & scope  | ✅ Migrated |
+| `content/book/04-design-brief.md`                    | `.github/specs/004-book-website-make/references/04-design-brief.md`                    | Design brief              | ✅ Migrated |
+| `content/book/05-design-reader-decision-register.md` | `.github/specs/004-book-website-make/references/05-design-reader-decision-register.md` | Decision register         | ✅ Migrated |
+| `content/book/06-website-reading-prd.md`             | `.github/specs/004-book-website-make/references/06-website-reading-prd.md`             | Product requirements      | ✅ Migrated |
 
 <!-- markdownlint-enable MD060 -->
 
@@ -38,25 +38,27 @@
 
 <!-- markdownlint-disable MD060 -->
 
-| File | Old References | New References | Status |
-|------|-----------------|-----------------|--------|
-| `spec.md` | `content/book/01–06` | `references/01–06` | ✅ Updated |
-| `plan.md` | `content/book/01–06` | `references/01–06` | ✅ Updated |
-| `checklists/specification-quality.md` | `content/book/` | `references/` | ✅ Updated |
-| `checklists/pre-approval-reconciliation-validation.md` | `content/book/` | `references/` | ✅ Updated |
-| `exports/GATE_2_READINESS_REPORT.md` | `content/book/` | `references/` | ✅ Updated |
-| References in contracts/ | Minimum refs (mostly relative) | No changes required | ✅ OK |
+| File                                                   | Old References                 | New References      | Status     |
+| ------------------------------------------------------ | ------------------------------ | ------------------- | ---------- |
+| `spec.md`                                              | `content/book/01–06`           | `references/01–06`  | ✅ Updated |
+| `plan.md`                                              | `content/book/01–06`           | `references/01–06`  | ✅ Updated |
+| `checklists/specification-quality.md`                  | `content/book/`                | `references/`       | ✅ Updated |
+| `checklists/pre-approval-reconciliation-validation.md` | `content/book/`                | `references/`       | ✅ Updated |
+| `exports/GATE_2_READINESS_REPORT.md`                   | `content/book/`                | `references/`       | ✅ Updated |
+| References in contracts/                               | Minimum refs (mostly relative) | No changes required | ✅ OK      |
 
 <!-- markdownlint-enable MD060 -->
 
 ### Sample Updates
 
 **Before**:
+
 ```markdown
 - **[01-book-website-specification.md](content/book/01-book-website-specification.md)** — Master execution contract (v1.0.0)
 ```
 
 **After**:
+
 ```markdown
 - **[01-book-website-specification.md](references/01-book-website-specification.md)** — Master execution contract (v1.0.0)
 ```
@@ -68,6 +70,7 @@
 ✅ **Verification method**: Manual search for `content/book/` across Spec 004 files
 
 ⚠️ **Result**: Remaining references found in:
+
 - data-model.md (lines 11, 15) — PENDING: Update to `references/`
 - version-reconciliation.md (line 11) — PENDING: Update to `references/`
 - source-file-inventory.md (line 11) — PENDING: Update to `references/`
