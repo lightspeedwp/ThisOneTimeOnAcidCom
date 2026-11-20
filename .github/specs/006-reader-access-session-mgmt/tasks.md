@@ -188,28 +188,28 @@
 
 ### Tests for User Story 3
 
-- [ ] T031 [P] [US3] Unit test for createdAt timestamp: session created with createdAt = now
-- [ ] T032 [P] [US3] Unit test for renewedAt update: renewSession sets renewedAt = now
-- [ ] T033 [P] [US3] Unit test for terminatedAt on logout: terminateSession sets terminatedAt = now
-- [ ] T034 [US3] Integration test for activity tracking: create → verify createdAt, renew → verify renewedAt updated, logout → verify terminatedAt set
-- [ ] T035 [US3] E2E test for audit trail: reader actions → all timestamps recorded in persistent storage
+- [x] T031 [P] [US3] Unit test for createdAt timestamp: session created with createdAt = now
+- [x] T032 [P] [US3] Unit test for renewedAt update: renewSession sets renewedAt = now
+- [x] T033 [P] [US3] Unit test for terminatedAt on logout: terminateSession sets terminatedAt = now
+- [x] T034 [US3] Integration test for activity tracking: create → verify createdAt, renew → verify renewedAt updated, logout → verify terminatedAt set
+- [x] T035 [US3] E2E test for audit trail: reader actions → all timestamps recorded in persistent storage
 
 ### Implementation for User Story 3
 
-- [ ] T036 [US3] Ensure createdAt set in `createSession` (T017):
+- [x] T036 [US3] Ensure createdAt set in `createSession` (T017):
   - createdAt = new Date().toISOString()
   - Stored with session in Blobs
-- [ ] T037 [US3] Ensure renewedAt updated in `renewSession` (T028):
+- [x] T037 [US3] Ensure renewedAt updated in `renewSession` (T028):
   - renewedAt = new Date().toISOString()
   - Stored atomically with expiresAt update
-- [ ] T038 [US3] Implement terminatedAt in `terminateSession`:
+- [x] T038 [US3] Implement terminatedAt in `terminateSession`:
   - terminatedAt = new Date().toISOString() on logout
   - Set status = "terminated"
   - Stored in Blobs
-- [ ] T039 [US3] Add activity tracking to session validation results:
+- [x] T039 [US3] Add activity tracking to session validation results:
   - Return createdAt, renewedAt, terminatedAt in validation response (for logging)
   - Log: "Session activity: email, createdAt, renewedAt, terminatedAt, status"
-- [ ] T040 [US3] Create session info endpoint (optional debug endpoint):
+- [x] T040 [US3] Create session info endpoint (optional debug endpoint):
   - GET `/api/reader/session/info` (admin/debug only)
   - Return: sessionId (masked), email, createdAt, renewedAt, terminatedAt, expiresAt, status
   - For validation testing and troubleshooting

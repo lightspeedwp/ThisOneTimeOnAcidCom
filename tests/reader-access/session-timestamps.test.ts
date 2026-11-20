@@ -105,8 +105,8 @@ describe('Session Timestamps - T031-T033', () => {
       const created = await createSession(testEmail, testCode, fingerprint);
       const originalRenewedAt = created.renewedAt;
 
-      // Wait a bit to ensure time difference
-      await new Promise((resolve) => setTimeout(resolve, 10));
+      // Wait longer than RENEWAL_COALESCE_WINDOW_MS (1000ms) to trigger renewal
+      await new Promise((resolve) => setTimeout(resolve, 1100));
 
       // Renew session
       const renewed = await renewSession(testEmail, created.deviceId);
@@ -132,8 +132,8 @@ describe('Session Timestamps - T031-T033', () => {
       // Create session
       const created = await createSession(testEmail, testCode, fingerprint);
 
-      // Wait a bit to ensure time difference
-      await new Promise((resolve) => setTimeout(resolve, 10));
+      // Wait longer than RENEWAL_COALESCE_WINDOW_MS (1000ms) to trigger renewal
+      await new Promise((resolve) => setTimeout(resolve, 1100));
 
       // Renew and capture time
       const beforeRenewal = new Date().getTime();
