@@ -8,6 +8,15 @@ const mockStore = new Map<string, string>();
 
 // Mock Netlify Blobs since tests run outside Netlify environment
 vi.mock('@netlify/blobs', () => ({
+  getStore: vi.fn(() => ({
+    set: async (key: string, value: string) => {
+      mockStore.set(key, value);
+    },
+    get: async (key: string) => mockStore.get(key) ?? null,
+    delete: async (key: string) => {
+      mockStore.delete(key);
+    },
+  })),
   get: vi.fn(async (key: string) => mockStore.get(key) ?? null),
   put: vi.fn(async (key: string, value: string) => {
     mockStore.set(key, value);
