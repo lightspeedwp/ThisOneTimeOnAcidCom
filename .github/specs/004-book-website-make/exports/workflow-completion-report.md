@@ -18,6 +18,8 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 
 ### Core Specification Documents ✅
 
+<!-- markdownlint-disable MD060 -->
+
 | Document | Status | Purpose |
 |----------|--------|---------|
 | **spec.md** | ✅ Complete | Complete specification with 4 user stories, 10 requirements, 8 success criteria |
@@ -26,7 +28,11 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 | **data-model.md** | ✅ Complete | Entity definitions (6 entities with fields, relationships, validation) |
 | **quickstart.md** | ✅ Complete | Approval gates (Gate 1–3) with prerequisites and validation scenarios |
 
+<!-- markdownlint-enable MD060 -->
+
 ### Prompt Contracts ✅
+
+<!-- markdownlint-disable MD060 -->
 
 | Prompt | File | Status | Completeness |
 |--------|------|--------|--------------|
@@ -41,11 +47,15 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 | **3C** | prompt-3c-execution-guide.md | ✅ Ready | 100% (supporting doc) |
 | **Guides** | blocking-decisions-audit.md | ✅ Ready | 100% (reference doc) |
 
+<!-- markdownlint-enable MD060 -->
+
 **Total**: 14 contract files  
 **All Unblocked**: 100% (Prompts 1, 2A, 2B)  
 **All Blocked**: 100% (Prompts 3A, 3B, 3C)
 
 ### Validation Reports ✅
+
+<!-- markdownlint-disable MD060 -->
 
 | Report | File | Status | Purpose |
 |--------|------|--------|---------|
@@ -54,7 +64,11 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 | **Execution Plan** | PROMPT_EXECUTION_PLAN.md | ✅ Complete | Phase roadmap and prompt status |
 | **Blocking Decisions** | checklists/blocking-decisions-validation.md | ✅ Complete | Decision matrix validation |
 
+<!-- markdownlint-enable MD060 -->
+
 ### Export Artifacts (Phase 9) ✅
+
+<!-- markdownlint-disable MD060 -->
 
 | Artifact | File | Status | Purpose |
 |----------|------|--------|---------|
@@ -62,6 +76,8 @@ Spec 004 (Book Website Figma Make Prompt Pack) documentation-only workflow is **
 | **Readiness** | implementation-readiness-checklist.md | ✅ Created | Phase 9 T042 — Implementation readiness validation |
 | **Preflight** | preflight-analysis-final.md | ✅ Created | Phase 9 T043 — Final preflight analysis |
 | **Design Validation** | design-baseline-validation.md | ✅ Created | Phase 9 T064 — Design baseline approval |
+
+<!-- markdownlint-enable MD060 -->
 
 ---
 
