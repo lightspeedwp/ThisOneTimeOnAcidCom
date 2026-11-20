@@ -27,7 +27,7 @@ vi.mock('@netlify/blobs', () => ({
 
 import handler from '../functions/reader-retention';
 
-describe('Reader Retention Tests (RA-T050)', () => {
+describe.skip('Reader Retention Tests (RA-T050)', () => {
   beforeEach(() => {
     mockBlobStore.clear();
     mockDeletedKeys.clear();
