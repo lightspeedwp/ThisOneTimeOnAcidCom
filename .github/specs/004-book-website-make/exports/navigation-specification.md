@@ -54,11 +54,11 @@ Navigation component specification for book website after route exposure (Prompt
 
 ### Desktop Navigation (≥1024px)
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │  [Logo]  Home  About  Book  Contact         [Icons] │
 └─────────────────────────────────────────────────────┘
-```
+```text
 
 **Layout**:
 - Horizontal menu bar
@@ -86,12 +86,12 @@ Navigation component specification for book website after route exposure (Prompt
 
 ### Tablet Navigation (768–1023px)
 
-```
+```text
 ┌──────────────────────────────────┐
 │  [Logo]  Home  About     [Menu▼] │
 │          Book  Contact           │
 └──────────────────────────────────┘
-```
+```text
 
 **Layout**:
 - Horizontal menu with wrapping allowed
@@ -106,7 +106,7 @@ Navigation component specification for book website after route exposure (Prompt
 
 ### Mobile Navigation (<768px)
 
-```
+```text
 ┌────────────────────────────────┐
 │  [Logo]           [☰ Hamburger]│
 ├────────────────────────────────┤
@@ -117,7 +117,7 @@ Navigation component specification for book website after route exposure (Prompt
 │ Contact                        │
 │                                │
 └────────────────────────────────┘
-```
+```text
 
 **Layout**:
 - Horizontal header with logo + hamburger icon
@@ -156,6 +156,7 @@ Navigation component specification for book website after route exposure (Prompt
 - **Alternative**: `MainNav` (if naming conflicts)
 
 ### Component Variants
+
 | Variant | Description | Use Case |
 | --------- | ------------- | ---------- |
 | `Navigation/Desktop` | Horizontal menu (≥1024px) | Desktop & wide screens |
@@ -164,7 +165,7 @@ Navigation component specification for book website after route exposure (Prompt
 | `Navigation/Mobile-Open` | Drawer open state | Mobile menu expanded |
 
 ### Component Nesting
-```
+```text
 Navigation
 ├── Logo (component or image)
 ├── NavLinks (component group)
@@ -180,7 +181,7 @@ Navigation
         │   ├── Close Button
         │   └── MobileLinks
         └── [Links with touch-target sizing]
-```
+```text
 
 ---
 
@@ -204,7 +205,7 @@ Applied to: `/speaking`, `/events`, `/media`
 
 ```html
 <meta name="robots" content="noindex, nofollow">
-```
+```text
 
 **Effect**: Search engines will not index these pages or follow their links.
 
@@ -235,7 +236,7 @@ Applied to: `/speaking`, `/events`, `/media`
 <url>
   <loc>https://example.com/contact</loc>
 </url>
-```
+```text
 
 **After (Updated Sitemap)**:
 ```xml
@@ -251,7 +252,7 @@ Applied to: `/speaking`, `/events`, `/media`
 <url>
   <loc>https://example.com/contact</loc>
 </url>
-```
+```text
 
 **Removed**: `/speaking`, `/events`, `/media`
 
@@ -261,12 +262,12 @@ Applied to: `/speaking`, `/events`, `/media`
 
 If additional enforcement needed (optional under Decision 7):
 
-```
+```text
 User-agent: *
 Disallow: /speaking
 Disallow: /events
 Disallow: /media
-```
+```text
 
 **Note**: Noindex meta tags + sitemap exclusion are sufficient; robots.txt is optional fallback.
 

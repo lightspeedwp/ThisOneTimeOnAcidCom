@@ -79,7 +79,7 @@
     /* ... etc ... */
   }
 }
-```
+```text
 
 **Result**: ✅ **PASS** — CSS variables and JSON tokens ready for export (Prompt 2A).
 

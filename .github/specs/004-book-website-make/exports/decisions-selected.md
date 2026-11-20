@@ -12,7 +12,7 @@
 
 Spec 004 identifies **7 blocking decisions** required for Figma Make prompt execution. Decision 7 (Route Enforcement Verification) is **resolved in Spec 004**. Decisions 1–6 are **documented and handed over to Spec 005** for resolution during Phase 1 readiness planning.
 
-**Timeline**: 
+**Timeline**:
 - Spec 004: Decision 7 resolved (Phase 8 Complete)
 - Spec 005: Decisions 1–6 resolution target 2026-12-15
 

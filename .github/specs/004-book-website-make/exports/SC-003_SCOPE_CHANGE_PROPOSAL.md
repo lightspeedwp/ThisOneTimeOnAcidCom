@@ -166,7 +166,7 @@
 2026-11-21: Spec 005 initialization (Phase 1 readiness + Prompt 3A)
 2026-12-15: Spec 005 Decisions 3–6 resolved (target, subject to manuscript approval)
 2026-12-15: Spec 005 Prompt 3A finalized and ready for Figma Make
-```
+```text
 
 ### If Rejected (Option A: Resolve All in Spec 004)
 
@@ -177,7 +177,7 @@
 
 2026-11-24: Spec 005 begins with Prompt 3A already delivered
 (Shorter Spec 005 timeline, but Spec 004 blocked on external decisions)
-```
+```text
 
 ---
 

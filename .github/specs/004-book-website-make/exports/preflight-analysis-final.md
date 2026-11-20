@@ -133,7 +133,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 
 ### Path to Phase A Execution (Spec 004)
 
-```
+```text
 2026-11-19: T063 Approval (SC-003 scope change)
             ↓
 2026-11-19: T063 Complete (Prompt 2A → 95%)
@@ -145,7 +145,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 2026-11-19: Execute Prompts 1, 2A, 2B in Figma Make
             ↓
 2026-11-20: Phase A Complete ✅
-```
+```text
 
 **Critical Path Duration**: ~1 day (pending SC-003 approval + Phase A gate)
 
@@ -153,7 +153,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 
 ### Path to Phase B Execution (Spec 005)
 
-```
+```text
 2026-11-21: Spec 005 initialization (Phase 1)
             ↓
 2026-12-15: Decisions 1–6 resolved (target)
@@ -165,7 +165,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 2026-12-15: Execute Prompts 3A, 3B, 3C in Figma Make
             ↓
 2026-12-16: Phase B Complete ✅
-```
+```text
 
 **Critical Path Duration**: ~26 days (decision resolution + execution)
 
