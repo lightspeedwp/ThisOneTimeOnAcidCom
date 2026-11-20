@@ -6,15 +6,10 @@ import {
 } from './bookContentSource';
 
 describe('book manuscript source model', function () {
-  it('selects only the six canonical manuscript directories', function () {
-    expect(BOOK_SOURCE_DIRECTORIES).toEqual([
-      '00-front-matter',
-      '01-part-1-early-life',
-      '02-part-2-carefree-20s',
-      '03-part-3-nomadic-life',
-      '04-part-4-re-emergence',
-      '05-back-matter',
-    ]);
+  it('temporarily restricts bundled chapters pending server-side delivery (RA-T054)', function () {
+    // Chapters are served exclusively via /api/reader/chapters/{chapterId}
+    // once RA-T035/RA-T037 (server-side delivery) are ready
+    expect(BOOK_SOURCE_DIRECTORIES).toEqual([]);
   });
 
   it('orders numeric source names deterministically', function () {

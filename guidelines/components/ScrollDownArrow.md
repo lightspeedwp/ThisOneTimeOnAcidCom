@@ -39,11 +39,11 @@ function HeroSection() {
   return (
     <HeroLayout
       title="Hi, I'm This One Time On Acid"
-      subtitle="Makeup Artist & Creative"
+      subtitle="Creative Artist & Creative"
     >
 <p className="text-body-guideline font-body text-center lg:text-left
 mb-fluid-lg">
-        Makeup that shines with colour, energy, and connection.
+        Creative work that shines with colour, energy, and connection.
       </p>
 
       <div className="flex justify-center lg:justify-start gap-4 mb-8">
@@ -250,7 +250,7 @@ mb-fluid-md">
         </h1>
 
         <p className="text-body-guideline font-body text-gray-700 mb-fluid-lg">
-          Makeup that shines with colour, energy, and connection.
+          Creative work that shines with colour, energy, and connection.
         </p>
 
         <div className="flex justify-center gap-4 mb-12">
@@ -514,7 +514,7 @@ export function ScrollDownArrow({
 ## Related Documentation
 
 - **[Guidelines.md](../Guidelines.md)** - Main guidelines
-- **[overview-components.md](../overview-components.md)** - Component system
+- **[overview-components.md](./N005-component-catalog.md)** - Component system
 - **[overview-icons.md](../overview-icons.md)** - Icon system
 - **[FILE*STRUCTURE.md](../FILE*STRUCTURE.md)** - File organization
 - **[design-tokens-reference.md](../design-tokens-reference.md)** - Spacing system
