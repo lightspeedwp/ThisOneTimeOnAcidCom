@@ -640,7 +640,7 @@ Answers establish the authority for implementation work. No task in a phase star
 ## Final Approval Checklist
 
 | Phase | Gate | Questions | Locked? | Date |
-|-------|------|-----------|---------|------|
+| --- | --- | --- | --- | --- |
 | 2 | Foundational | 2.1–2.16 | ✅ | 2026-11-20 |
 | 3 | MVP/US1 | 3.1–3.7 | ✅ | 2026-11-20 |
 | 4 | Renewal/US2 | 4.1–4.2 | ✅ | 2026-11-20 |
