@@ -61,16 +61,16 @@ export default async (req: Request, context: Context) => {
       return createErrorResponse('Unauthorized: Session expired', 401);
     }
 
-    // Check chapter approval status
-    const edition = new EditionReader();
-    if (!edition.isChapterApproved(chapterId)) {
-      return createErrorResponse('Content unavailable', 403);
-    }
-
     // Get chapter metadata
+    const edition = new EditionReader();
     const chapter = edition.getChapter(chapterId);
     if (!chapter) {
       return createErrorResponse('Chapter not found', 404);
+    }
+
+    // Check chapter approval status
+    if (!chapter.approved) {
+      return createErrorResponse('Content unavailable', 403);
     }
 
     // Get chapter content (default to markdown)

@@ -63,8 +63,12 @@ export default async (req: Request, context: Context) => {
     // Parse query parameters
     const url = new URL(req.url);
     const statusParam = url.searchParams.get('status') as 'approved' | 'published' || 'approved';
-    const page = Math.max(1, parseInt(url.searchParams.get('page') || '1', 10));
-    const limit = Math.min(50, Math.max(1, parseInt(url.searchParams.get('limit') || '10', 10)));
+
+    const rawPage = parseInt(url.searchParams.get('page') || '', 10);
+    const page = Number.isFinite(rawPage) ? Math.max(1, rawPage) : 1;
+
+    const rawLimit = parseInt(url.searchParams.get('limit') || '', 10);
+    const limit = Number.isFinite(rawLimit) ? Math.min(50, Math.max(1, rawLimit)) : 10;
 
     // Get edition and filter chapters
     const edition = new EditionReader();
