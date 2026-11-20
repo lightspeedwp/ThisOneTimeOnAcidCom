@@ -35,8 +35,40 @@
     Cache-Control = "public, max-age=0, must-revalidate"
 
 # Reader-access API routes. Functions must be served before the SPA fallback.
+# Phase 6 (Content Delivery) endpoints must be routed explicitly before the wildcard.
 # Pattern: /api/reader/* routes → netlify/functions/
-# These require function paths to precede the /* → /index.html fallback.
+
+# Phase 6: Chapter listing
+[[redirects]]
+  from = "/api/reader/chapters"
+  to = "/.netlify/functions/reader-chapters-list"
+  status = 200
+
+# Phase 6: Chapter content delivery
+[[redirects]]
+  from = "/api/reader/chapters/*"
+  to = "/.netlify/functions/reader-chapter-content/:splat"
+  status = 200
+
+# Phase 6: Reading progress
+[[redirects]]
+  from = "/api/reader/progress"
+  to = "/.netlify/functions/reader-progress"
+  status = 200
+
+# Phase 6: Analytics
+[[redirects]]
+  from = "/api/reader/analytics"
+  to = "/.netlify/functions/reader-analytics"
+  status = 200
+
+# Phase 6: Bookmarks
+[[redirects]]
+  from = "/api/reader/bookmarks"
+  to = "/.netlify/functions/reader-bookmarks"
+  status = 200
+
+# Earlier phases (code-request, verification, session)
 [[redirects]]
   from = "/api/reader/*"
   to = "/.netlify/functions/reader-:splat"
