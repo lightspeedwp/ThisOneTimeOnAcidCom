@@ -13,6 +13,7 @@
 Spec 004 identifies **7 blocking decisions** required for Figma Make prompt execution. Decision 7 (Route Enforcement Verification) is **resolved in Spec 004**. Decisions 1–6 are **documented and handed over to Spec 005** for resolution during Phase 1 readiness planning.
 
 **Timeline**:
+
 - Spec 004: Decision 7 resolved (Phase 8 Complete)
 - Spec 005: Decisions 1–6 resolution target 2026-12-15
 
@@ -29,11 +30,13 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Selection Status**: ✅ **RESOLVED** (Gate 2 Approval)
 
 **Implementation Details**:
+
 - Primary mechanism: `<meta name="robots" content="noindex, nofollow">` on hidden routes
 - Primary mechanism: Sitemap.xml excludes /speaking, /events, /media
 - Optional fallback: Robots.txt rules (if enforcement needs strengthening)
 
 **Impact on Prompts**:
+
 - **Prompt 1**: Navigation Exposure contract specifies this enforcement strategy
 - **Verification**: Decision 7 is fully documented in `contracts/prompt-1-navigation-exposure.md`
 
@@ -45,14 +48,14 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 
 ### Overview Table
 
-| Decision # | Question | Options | Impact Scope | Blocking | Handover Status |
-| ---------- | ---------- | --------- | --- | --- | --- |
-| **1** | Recovery-first race condition | A, B, C, D (4 options) | Prompt 3B, Prompt 3C (partial) | Decisions 1 & 2 unblock Prompt 3B | 🔄 Spec 005 |
-| **2** | Recovery lifetime eligibility | A, B, C (3 options) | Prompt 3B, session lifecycle | Decisions 1 & 2 unblock Prompt 3B | 🔄 Spec 005 |
-| **3** | Code expiry start time | A, B, C (3 options) | Prompt 3A, Prompt 3C (error msg) | Decision 3 unblocks Prompts 3A/3C | 🔄 Spec 005 |
-| **4** | Email service provider | A, B, C, D (4 options) | Prompt 3A template syntax | Decision 4 unblocks Prompt 3A | 🔄 Spec 005 |
-| **5** | Manuscript publication readiness | A, B, C (3 options) | Prompt 3A confirmation messaging | Decision 5 unblocks Prompt 3A | 🔄 Spec 005 |
-| **6** | Newsletter destination/signup | A, B, C, D (4 options) | Prompt 3A newsletter CTA | Decision 6 unblocks Prompt 3A | 🔄 Spec 005 |
+| Decision # | Question                         | Options                | Impact Scope                     | Blocking                          | Handover Status |
+| ---------- | -------------------------------- | ---------------------- | -------------------------------- | --------------------------------- | --------------- |
+| **1**      | Recovery-first race condition    | A, B, C, D (4 options) | Prompt 3B, Prompt 3C (partial)   | Decisions 1 & 2 unblock Prompt 3B | 🔄 Spec 005     |
+| **2**      | Recovery lifetime eligibility    | A, B, C (3 options)    | Prompt 3B, session lifecycle     | Decisions 1 & 2 unblock Prompt 3B | 🔄 Spec 005     |
+| **3**      | Code expiry start time           | A, B, C (3 options)    | Prompt 3A, Prompt 3C (error msg) | Decision 3 unblocks Prompts 3A/3C | 🔄 Spec 005     |
+| **4**      | Email service provider           | A, B, C, D (4 options) | Prompt 3A template syntax        | Decision 4 unblocks Prompt 3A     | 🔄 Spec 005     |
+| **5**      | Manuscript publication readiness | A, B, C (3 options)    | Prompt 3A confirmation messaging | Decision 5 unblocks Prompt 3A     | 🔄 Spec 005     |
+| **6**      | Newsletter destination/signup    | A, B, C, D (4 options) | Prompt 3A newsletter CTA         | Decision 6 unblocks Prompt 3A     | 🔄 Spec 005     |
 
 ---
 
@@ -61,6 +64,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Question**: When recovery and fresh verification race, which takes precedence?
 
 **Options**:
+
 - **A**: Recovery first (prioritize account recovery)
 - **B**: Fresh verification first (prioritize new account creation)
 - **C**: Last-writer-wins (last action submitted wins)
@@ -69,6 +73,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Current State**: ⏳ PENDING USER DECISION
 
 **Impact**:
+
 - Affects Prompt 3B (recovery flows design)
 - Influences Prompt 3C Error State 5 (session conflict error message)
 - Determines race condition handling strategy
@@ -85,6 +90,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Question**: How long is a recovery code valid? (Session refresh + expiry rules)
 
 **Options**:
+
 - **A**: 24 hours (session refresh + 24h absolute expiry)
 - **B**: 7 days (session refresh + 7d absolute expiry)
 - **C**: 30 days (session refresh + 30d absolute expiry)
@@ -92,6 +98,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Current State**: ⏳ PENDING USER DECISION
 
 **Impact**:
+
 - Affects Prompt 3B recovery flows (validation rules, success/error messaging)
 - Determines how long users can recover accounts after initial attempt
 - Security vs. UX tradeoff (longer = more user-friendly, shorter = more secure)
@@ -108,6 +115,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Question**: When does code expiry timer begin? (From generation? Receipt? Page load?)
 
 **Options**:
+
 - **A**: From code generation (server-side timer)
 - **B**: From code receipt (email delivery timestamp)
 - **C**: From page load (user visits verification page)
@@ -115,11 +123,13 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Current State**: ⏳ PENDING USER DECISION
 
 **Impact**:
+
 - **Prompt 3A**: Email verification copy & error messages (timing language)
 - **Prompt 3C**: Error state design for "Code expired" scenarios (messaging)
 - Determines exact error message wording for expiry notifications
 
 **Example Impact**:
+
 - If **A** (from generation): "Code expired after 10 minutes of creation"
 - If **B** (from receipt): "Code expired after 10 minutes of email delivery"
 - If **C** (from page load): "Code expired after 10 minutes of page load"
@@ -136,6 +146,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Question**: Which email service provider? (SendGrid? Brevo? AWS SES? Mailgun?)
 
 **Options**:
+
 - **A**: SendGrid (robust, well-documented)
 - **B**: Brevo (cost-effective, good for newsletters)
 - **C**: AWS SES (integrated with AWS infrastructure)
@@ -144,6 +155,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Current State**: ⏳ PENDING USER DECISION
 
 **Impact**:
+
 - **Prompt 3A**: Email template syntax and capabilities
 - Determines available email features (dynamic content, templates, tracking)
 - Affects implementation complexity and ongoing costs
@@ -161,6 +173,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Question**: When is manuscript approved & available for readers?
 
 **Options**:
+
 - **A**: Now (manuscript ready, can be published immediately)
 - **B**: 2026-12-31 (manuscript ready by end of year)
 - **C**: 2027-01-31 (manuscript ready by end of January)
@@ -168,6 +181,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Current State**: ⏳ PENDING AUTHOR APPROVAL
 
 **Impact**:
+
 - **Prompt 3A**: Confirmation messaging (when book will be available to reader)
 - Determines success state messaging ("Book will be available on [date]" vs. "Book is now available")
 - External dependency on author manuscript completion
@@ -187,6 +201,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Question**: Where should newsletter signup link point?
 
 **Options**:
+
 - **A**: Brevo signup link (direct newsletter signup)
 - **B**: Custom landing page (custom newsletter signup flow)
 - **C**: Typeform embedded form (survey + newsletter signup)
@@ -195,6 +210,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Current State**: ⏳ PENDING USER DECISION
 
 **Impact**:
+
 - **Prompt 3A**: Newsletter CTA section design (link destination, text, UX)
 - Determines whether link opens in same tab/new tab, inline form vs. external page
 - Affects reader friction & newsletter signup flow
@@ -211,14 +227,15 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 
 ### Spec 004 Status
 
-| Decision | Status | Action | Timeline |
-| ---------- | -------- | -------- | ---------- |
-| **1–6** | ⏳ PENDING | Handover to Spec 005 Phase 1 | 2026-11-21 (Spec 005 start) |
-| **7** | ✅ RESOLVED | No further action | Complete |
+| Decision | Status      | Action                       | Timeline                    |
+| -------- | ----------- | ---------------------------- | --------------------------- |
+| **1–6**  | ⏳ PENDING  | Handover to Spec 005 Phase 1 | 2026-11-21 (Spec 005 start) |
+| **7**    | ✅ RESOLVED | No further action            | Complete                    |
 
 ### Spec 005 Timeline
 
 **Phase 1 Readiness** (Target: 2026-12-15):
+
 - Decisions 1–2: Recovery race condition & lifetime (~2 hours)
 - Decision 3: Code expiry timing (~1 hour)
 - Decision 4: Email provider (~2 hours)
@@ -232,14 +249,17 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 ## Documentation References
 
 **For Decision Details**: `.github/specs/004-book-website-make/research.md`
+
 - Sections: Decision 1 through Decision 7
 - Includes: Options A–D, impact assessment, tradeoff analysis
 
 **For Decision Dependencies**: `.github/specs/004-book-website-make/PROMPT_EXECUTION_PLAN.md`
+
 - Section: Decision Map (which decisions block which prompts)
 - Recommended resolution sequence
 
 **For Decision Application**:
+
 - Prompt 3A contract (Decisions 3, 4, 5, 6)
 - Prompt 3B contract (Decisions 1, 2)
 - Prompt 3C contract (Decision 3 for code-expiry messaging)
@@ -251,6 +271,7 @@ Spec 004 identifies **7 blocking decisions** required for Figma Make prompt exec
 **Deliverable**: This document + research.md + prompt contracts with decision placeholders
 
 **Spec 005 Responsibility**:
+
 1. ✅ Review all 6 decisions and their options
 2. ✅ Gather stakeholder input (Ash, tech lead, product lead)
 3. ✅ Select option for each decision (A, B, C, or D)
@@ -272,4 +293,3 @@ Decision 7 is resolved. Decisions 1–6 are fully documented and ready for Spec 
 **Date**: 2026-11-19  
 **Task**: T065 (Phase 9 Convergence — Documentation-Only Workflow)  
 **Status**: Ready for handover to Spec 005
-
