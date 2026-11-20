@@ -502,11 +502,11 @@ function HeroSection() {
   return (
     <HeroLayout
       title="Hi, I'm This One Time On Acid"
-      subtitle="Makeup Artist & Creative"
+      subtitle="Creative Artist & Creative"
       backgroundImage="hero-bg.jpg"
     >
       <p className="text-body-guideline font-body">
-        Makeup that shines with colour, energy, and connection.
+        Creative work that shines with colour, energy, and connection.
       </p>
 
       <ScrollDownArrow targetId="featured-section" />
@@ -529,7 +529,7 @@ function ContentGrid() {
     <section className="py-section">
 <h2 className="text-section-h2 font-heading font-semibold text-center
 mb-fluid-lg">
-        Why I Do Makeup
+        Why I Create
       </h2>
 
       <ThreeColumnLayout>

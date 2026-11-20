@@ -504,8 +504,7 @@ Prompt](../prompts/modern-react-migration/01-es5-react-audit.md)
 
 ## Related Guidelines
 
-- [React Best Practices](../guidelines/react-best-practices-es5.md)
-- [Component Structure](../guidelines/overview-components.md)
+- [Component Structure](../N005-component-catalog.md)
 
 **Related Tasks:**
 

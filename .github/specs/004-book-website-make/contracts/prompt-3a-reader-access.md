@@ -114,8 +114,15 @@ You're getting this because you asked for reading access. Want updates?
 
 - Decision 3: ✅ Option A — expiry from code generation (applied to email and error copy)
 - Decision 4: ✅ Hybrid — SendGrid for verification email; Brevo for newsletter
-- Decision 5: ❌ Option C — manuscript not yet approved; confirmation messaging stays placeholder and final execution is deferred
+- Decision 5: ✅ APPROVED (Early Release) — Chapter 1 approved & available now; other chapters (.md) + front matter (cover, back, parts, index) pending individual approval but ready for e-reader development (Ash approved 2026-11-19)
 - Decision 6: ✅ Brevo external signup link
+
+**Manuscript Availability (Decision 5 — Approved 2026-11-19)**:
+- Chapter 1: ✅ Approved for immediate website & e-reader use
+- Other chapters (2–N): 📋 Pending approval, available for e-reader during development
+- Front matter (cover, back, parts, index): 📋 Pending approval, available for e-reader
+- Copy should reference "Chapter 1 and selected chapters" until more are approved
+- E-reader should display "More chapters coming as approved" messaging
 
 ### Reference Documents
 
