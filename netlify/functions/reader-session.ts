@@ -1,7 +1,7 @@
 // GET /api/reader/session — Get session status
 // DELETE /api/reader/session — Sign out (end session, clear cookie)
 
-import { createJsonResponse, responses } from '../lib/reader-access/responses';
+import { createJsonResponse, createSecureSessionResponse, responses } from '../lib/reader-access/responses';
 import { getSession, deleteSession } from '../lib/reader-access/store';
 import {
   parseSessionCookie,
@@ -18,22 +18,22 @@ export default async function handler(
       const sessionId = parseSessionCookie(cookieHeader);
 
       if (!sessionId) {
-        return createJsonResponse(responses.invalid(), 401);
+        return createSecureSessionResponse(responses.invalid(), 401);
       }
 
       // Retrieve session
       const session = await getSession(sessionId);
       if (!session) {
-        return createJsonResponse(responses.invalid(), 401);
+        return createSecureSessionResponse(responses.invalid(), 401);
       }
 
       // Check if expired
       if (new Date(session.expiresAt) < new Date()) {
-        return createJsonResponse(responses.invalid(), 401);
+        return createSecureSessionResponse(responses.invalid(), 401);
       }
 
-      // Return session details
-      return createJsonResponse(
+      // Return session details with security headers
+      return createSecureSessionResponse(
         {
           state: 'verified',
           sessionId,
@@ -54,19 +54,28 @@ export default async function handler(
         });
       }
 
-      // Clear session cookie with Max-Age=0
+      // Clear session cookie with Max-Age=0 and security headers
       const response = new Response(null, { status: 204 });
       response.headers.set(
         'Set-Cookie',
         `${SESSION_COOKIE_NAME}=; Max-Age=0; Path=/; HttpOnly; Secure; SameSite=Lax`
       );
-      response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      // Add security headers
+      response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, private');
+      response.headers.set('Pragma', 'no-cache');
+      response.headers.set('X-Content-Type-Options', 'nosniff');
+      response.headers.set('X-Frame-Options', 'DENY');
 
       return response;
     }
 
-    return new Response('{"state":"provider-failure"}', { status: 405, headers: { 'Content-Type': 'application/json' } });
+    // 405 Method Not Allowed
+    const errorResponse = new Response('{"state":"provider-failure"}', {
+      status: 405,
+      headers: { 'Content-Type': 'application/json' }
+    });
+    return errorResponse;
   } catch (err) {
-    return createJsonResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 503);
+    return createSecureSessionResponse(responses.error(err instanceof Error ? err.message : 'Unknown error'), 503);
   }
 }
