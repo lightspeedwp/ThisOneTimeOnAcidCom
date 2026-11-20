@@ -293,22 +293,22 @@
 
 ### Tests for User Story 5
 
-- [ ] T051 [P] [US5] Unit test for logout: terminateSession sets status = "terminated", terminatedAt = now
-- [ ] T052 [P] [US5] Unit test for access denial after logout: validateSession returns false for terminated session
-- [ ] T053 [P] [US5] Unit test for access denial on expiry: validateSession returns false for expired session
-- [ ] T054 [US5] Integration test for logout flow in `tests/reader-access/session-logout.test.ts`:
+- [x] T051 [P] [US5] Unit test for logout: terminateSession sets status = "terminated", terminatedAt = now
+- [x] T052 [P] [US5] Unit test for access denial after logout: validateSession returns false for terminated session
+- [x] T053 [P] [US5] Unit test for access denial on expiry: validateSession returns false for expired session
+- [x] T054 [US5] Integration test for logout flow in `tests/reader-access/session-logout-integration.test.ts`:
   - POST `/api/reader/session/logout` with valid session → 200 OK
   - Response includes Set-Cookie: sessionToken=; Max-Age=0 (clear cookie)
-- [ ] T055 [US5] Integration test for post-logout denial:
+- [x] T055 [US5] Integration test for post-logout denial:
   - Logout → then access chapter with same sessionToken → 401 Unauthorized
-- [ ] T056 [US5] Integration test for expiry denial:
+- [x] T056 [US5] Integration test for expiry denial:
   - Session with expiresAt = past → access chapter → 401 Unauthorized
-- [ ] T057 [US5] E2E test for logout: sign out button → session terminated → chapter access denied
-- [ ] T058 [US5] E2E test for timeout: idle until expiry → access denied → prompt to reverify
+- [x] T057 [US5] E2E test for logout: sign out button → session terminated → chapter access denied
+- [x] T058 [US5] E2E test for timeout: idle until expiry → access denied → prompt to reverify
 
 ### Implementation for User Story 5
 
-- [ ] T059 [US5] Implement logout endpoint in `netlify/functions/reader-session-logout.ts`:
+- [x] T059 [US5] Implement logout endpoint in `netlify/functions/reader-session-logout.ts`:
   - Accept: sessionToken from cookie (or body for testing)
   - Lookup session by token (need reverse mapping or use email from context)
   - Call: terminateSession(email, deviceId)
@@ -320,18 +320,18 @@
     }
 ```text
   - Response includes Set-Cookie: sessionToken=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0
-- [ ] T060 [US5] Add logout logging in `reader-session-logout.ts`:
+- [x] T060 [US5] Add logout logging in `reader-session-logout.ts`:
   - Log: "Session logout: email, terminatedAt, ipAddress"
   - Track logout events for analytics
-- [ ] T061 [US5] Implement no-grace-period enforcement in session validation (T009 modification):
+- [x] T061 [US5] Implement no-grace-period enforcement in session validation (T009 modification):
   - On expiry check (expiresAt ≤ now): immediately deny (no grace period)
   - Return 401 without retries
   - No "about to expire" warnings; cleaner state machine
-- [ ] T062 [US5] Add session token invalidation immediately after logout:
+- [x] T062 [US5] Add session token invalidation immediately after logout:
   - After terminateSession: session cannot be re-used
   - Next request with same token → 401
   - No session resurrection (new login required)
-- [ ] T063 [US5] Add error response standardization in `netlify/lib/reader-access/responses.ts`:
+- [x] T063 [US5] Add error response standardization in `netlify/lib/reader-access/responses.ts`:
   - Unauthorized responses: { error: "unauthorized", reason: "expired_session|terminated_session|invalid_session", action: "reverify_email" }
   - Consistent error format across all endpoints
 
