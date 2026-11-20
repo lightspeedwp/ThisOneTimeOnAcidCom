@@ -51,7 +51,7 @@ Each has detailed implementation guidelines.
 ### Content Blocks
 
 | Block | Purpose | Guideline File |
-|-------|---------|---------------|
+| ----- | ------- | ------------- |
 | **PortfolioCard** | Portfolio entry display card | [blocks/PortfolioCard.md](./blocks/PortfolioCard.md) |
 | **BlogCard** | Blog post preview card | [blocks/BlogCard.md](./blocks/BlogCard.md) |
 | **SectionCard** | Generic content card container | [blocks/SectionCard.md](./blocks/SectionCard.md) |
@@ -60,14 +60,14 @@ Each has detailed implementation guidelines.
 ### Media Blocks
 
 | Block | Purpose | Guideline File |
-|-------|---------|---------------|
+| ----- | ------- | ------------- |
 | **ImageGallery** | Multi-image grid display | [blocks/ImageGallery.md](./blocks/ImageGallery.md) |
 | **Lightbox** | Full-screen image viewer | [blocks/Lightbox.md](./blocks/Lightbox.md) |
 
 ### Interactive Blocks
 
 | Block | Purpose | Guideline File |
-|-------|---------|---------------|
+| ----- | ------- | ------------- |
 | **CategoryFilter** | Content filtering controls | [blocks/CategoryFilter.md](./blocks/CategoryFilter.md) |
 | **ShareComponent** | Social sharing buttons | [blocks/ShareComponent.md](./blocks/ShareComponent.md) |
 | **Pagination** | Page navigation controls | [blocks/Pagination.md](./blocks/Pagination.md) |
@@ -122,7 +122,7 @@ className="
 ## WordPress Block Alignment
 
 | This One Time On Acid Block | WordPress Block | Purpose |
-|---------------|-----------------|---------|
+| ------------- | --------------- | ------- |
 | `PortfolioCard` | `core/post-template` item | Portfolio entry card |
 | `BlogCard` | `core/post-template` item | Blog post card |
 | `ImageGallery` | `core/gallery` | Image grid |

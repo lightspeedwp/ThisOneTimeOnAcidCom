@@ -39,7 +39,7 @@ project.
 ### Folder Structure Rules
 
 | Scenario | Report Location | Example |
-|----------|----------------|---------|
+| -------- | -------------- | ------- |
 | **Single-file prompt** | `/reports/{topic}.md` | `/reports/css-audit.md` |
 | **Orchestrator prompt** | `/reports/{YYYY-MM-DD}-{topic}/` | `/reports/2026-03-11-modern-react-migration/` |
 | **Completed reports** | `/reports/archived/{date}-{topic}/` | `/reports/archived/2026-02-25-cleanup/` |
@@ -70,7 +70,7 @@ status: "draft" | "complete" | "archived"
 ### YAML Field Definitions
 
 | Field | Required | Description | Example |
-|-------|----------|-------------|---------|
+| ----- | -------- | ----------- | ------- |
 | `title` | ✅ YES | Human-readable report title | "ES5 React Best Practices Audit Report" |
 | `filename` | ✅ YES | Absolute path to this file | "/reports/modern-react-migration/01-es5-audit.md" |
 | `created` | ✅ YES | ISO date of creation | "2026-03-11" |
@@ -393,7 +393,7 @@ var Component = function() {
 ## Statistics (1)
 
 | Metric | Count | Percentage |
-|--------|-------|------------|
+| ------ | ----- | ---------- |
 | Total files scanned | 156 | 100% |
 | Files with issues | 42 | 27% |
 | Critical issues | 12 | 8% |
@@ -628,7 +628,7 @@ How the audit was conducted
 ## Statistics (2)
 
 | Metric | Count |
-|--------|-------|
+| ------ | ----- |
 | Total files | X |
 | Files with issues | Y |
 
@@ -685,7 +685,7 @@ High-level summary of all audits conducted
 ## Aggregate Statistics (1)
 
 | Metric | Total |
-|--------|-------|
+| ------ | ----- |
 | Total files scanned | X |
 | Total issues found | Y |
 | Critical issues | Z |

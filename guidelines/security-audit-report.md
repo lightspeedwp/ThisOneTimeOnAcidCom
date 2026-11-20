@@ -14,7 +14,7 @@ Comprehensive security audit of this-one-time-on-acid.com completed 2026-10-25. 
 ### Overall Rating: **Good** — Grade A (82/100)
 
 | Category | Status | Notes |
-|----------|--------|-------|
+| -------- | ------ | ----- |
 | **Authentication** | ⏳ PLANNED | OAuth/RBAC deferred to Phase 3 |
 | **Data Protection** | ✅ SECURE | TLS 1.3; HTTPS enforced |
 | **Injection Attacks** | ✅ PROTECTED | Input validation; React escaping |
@@ -50,7 +50,7 @@ Comprehensive security audit of this-one-time-on-acid.com completed 2026-10-25. 
 ## OWASP Top 10 Coverage
 
 | Vulnerability | Status | Mitigation |
-|---|---|---|
+| - | - | - |
 | **A01:2021 - Broken Access Control** | ⏳ | Planned for Phase 3; static site has minimal auth scope |
 | **A02:2021 - Cryptographic Failures** | ✅ | TLS 1.3; HTTPS enforced |
 | **A03:2021 - Injection** | ✅ | React escaping; input validation on forms |
@@ -67,7 +67,7 @@ Comprehensive security audit of this-one-time-on-acid.com completed 2026-10-25. 
 ## Dependency Scan Results
 
 | Dependency | Version | Status | Notes |
-|---|---|---|---|
+| - | - | - | - |
 | **Next.js** | 14.x | ✅ CURRENT | Latest LTS |
 | **React** | 18.x | ✅ CURRENT | Stable |
 | **TypeScript** | 5.x | ✅ CURRENT | Type safety |

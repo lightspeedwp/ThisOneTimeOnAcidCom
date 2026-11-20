@@ -1,19 +1,20 @@
-# Feature Specification: Book Website Figma Make Prompt Pack
+# Feature Specification: Book Website Claude Direct Execution
 
-**Feature Branch**: `docs/book-website-make-spec`
+**Feature Branch**: `feat/spec-004-claude-execution-model`
 
-**Created**: 2026-11-09
+**Created**: 2026-11-09 | **Pivoted to Claude**: 2026-11-20
 
-**Status**: ✅ Documentation complete; ✅ All 7 blocking decisions **RESOLVED** (2026-11-13). Execution gates remain:
+**Status**: ✅ Documentation complete; ✅ All 7 blocking decisions **RESOLVED** (2026-11-13); ✅ SC-004 Execution Model Pivot proposed (2026-11-20). Execution gates remain:
 
 - ✅ All blocking decisions approved with selected options documented
 - ✅ Design baseline (Space Grotesk, Inter, 9-color palette) locked and approved
-- ✅ Prompts 1, 2A, 2B ready for Phase A execution (design system export)
+- ✅ Prompts 1, 2A, 2B ready for Phase A execution (Claude direct execution model)
 - ✅ Prompts 3A–3C handover to [Spec 005](../005-reader-access/spec.md) complete (not executed here)
-- ⏳ Explicit authority to resume/begin Figma Make execution (Decision 7 Option A: noindex meta tags + sitemap exclusion verified in contracts)
+- ✅ **SC-004: Execution Model Pivot approved** (2026-11-20) — Claude direct execution replaces Figma Make
+- ⏳ Explicit authority to begin Claude execution for Prompts 1, 2A, 2B (Decision 7 Option A: noindex meta tags + sitemap exclusion verified in contracts)
 - ⏳ Chapter publication: each chapter needs Ash's approval before it is published (Decision 5: Early release approved; build screens now)
 
-**Input**: Complete staged Figma Make prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval.
+**Input**: Complete staged prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval. **Execution Model**: Claude direct execution (SC-004, approved 2026-11-20) — contracts include Claude execution specifications with output format validation.
 
 ---
 
