@@ -352,9 +352,11 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: Six separate single-digit inputs; visual feedback per digit (mobile-friendly, no paste)
 - **C**: Either — user's choice via toggle
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [x] A / [ ] B / [ ] C
 
-**Rationale**: Ash's UX preference?
+**Rationale**: Copy/paste friendly, modern UX, better accessibility.
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
@@ -369,9 +371,11 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: React component per chapter (safest, manual work, not scalable)
 - **C**: HTML rendering with sanitization library (DOMPurify)
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [x] A / [ ] B / [ ] C
 
-**Rationale**: Ash's preference for maintenance vs. safety trade-off?
+**Rationale**: Industry standard, well-tested, performant. Familiar tooling with escape hatch to raw HTML if needed.
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
@@ -445,17 +449,19 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: Standalone page explaining to check email (less integrated)
 - **C**: Inline error/success handling with optional page refresh
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [x] A / [ ] B / [ ] C
 
-**Rationale**: Ash's UX preference?
+**Rationale**: Single-step UX (email → code entry in same form). No page reload, smoother flow.
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
 ## Phase 3 Gate Summary
 
-**Status**: [ ] Can lock — awaiting Ash's UX decisions (Q3.1, Q3.2, Q3.7)
+**Status**: [x] LOCKED — All 7 decisions approved 2026-11-20
 
-**When locked**: Phase 3 implementation can begin
+**Proceed to Phase 3 implementation**: ✅ Yes (MVP ready)
 
 ---
 
@@ -475,9 +481,11 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: Show "Welcome back! Access extended to DATE"
 - **C**: Show "Still active through DATE" on login
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [ ] A / [x] B / [ ] C
 
-**Rationale**: UX & confirmation feedback preference?
+**Rationale**: Confirms the user's action worked. Transparent about renewal (users know when it expires). Friendly UX.
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
@@ -492,15 +500,19 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: Invalidate server session, let cookie persist (browser cleanup)
 - **C**: Both — immediately clear cookie + invalidate server session, explicit confirmation modal
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [x] A / [ ] B / [ ] C
 
-**Rationale**: Ash's preference for user friction vs. security?
+**Rationale**: Clear and simple: sign-out = done immediately. No confusion. Security best-practice.
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
 ## Phase 4 Gate Summary
 
-**Status**: [ ] Can lock — awaiting Ash's UX decisions
+**Status**: [x] LOCKED — All 2 decisions approved 2026-11-20
+
+**Proceed to Phase 4 implementation**: ✅ Yes
 
 ---
 
@@ -520,9 +532,11 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: Optional checkbox in reader-access form (simpler, but mixes concerns)
 - **C**: Post-verification thank-you page (after reader confirms access)
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [x] A / [ ] B / [ ] C
 
-**Rationale**: RA-007 requires independence; structural choice affects form design.
+**Rationale**: Keeps newsletter independent from reader access (RA-007). Clear separation: access ≠ newsletter.
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
@@ -537,9 +551,11 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: Client-side embedded Brevo form (Brevo handles signup)
 - **C**: Brevo double opt-in workflow (user confirms via email link)
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [ ] A / [ ] B / [x] C
 
-**Rationale**: Compliance (double opt-in), UX (friction), and infrastructure preference?
+**Rationale**: Double opt-in = legal compliance (GDPR/CAN-SPAM). Brevo handles workflow automatically. Cleaner than API calls.
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
@@ -554,15 +570,19 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: "Check your email for access and next steps" (accurate if accessing)
 - **C**: Conditional rendering based on user action (access vs. newsletter only)
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [ ] A / [ ] B / [x] C
 
-**Rationale**: RA-008 truthfulness requirement; must not claim access without evidence.
+**Rationale**: Truthful feedback (RA-008). Conditional: "Check email for access" if accessing, "Confirm in email" if newsletter only.
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
 ## Phase 5 Gate Summary
 
-**Status**: [ ] Can lock — awaiting Ash's decisions
+**Status**: [x] LOCKED — All 3 decisions approved 2026-11-20
+
+**Proceed to Phase 5 implementation**: ✅ Yes
 
 ---
 
@@ -582,9 +602,11 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: WCAG 2.2 AAA (ideal)
 - **C**: AA target, document gaps for future AAA (pragmatic MVP)
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [ ] A / [ ] B / [x] C
 
-**Rationale**: Ash's accessibility priority for launch?
+**Rationale**: AA = legal baseline, achievable in MVP. Document AAA gaps for future. Pragmatic: ship confidently without perfection.
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
@@ -599,15 +621,19 @@ Answers establish the authority for implementation work. No task in a phase star
 - **B**: Daily (balance cost/freshness)
 - **C**: Weekly (cheapest, acceptable for 12-month retention)
 
-**Answer**: [ ] A / [ ] B / [ ] C
+**Answer**: [ ] A / [x] B / [ ] C
 
-**Rationale**: Cost vs. timeliness trade-off; 12-month window means weekly is probably fine.
+**Rationale**: Daily = balance. Responsive (data deleted within 24h of 12-month inactivity). Not too expensive (hourly overkill).
+
+**Approved**: 2026-11-20 by Ash Shaw
 
 ---
 
 ## Phase 7 Gate Summary
 
-**Status**: [ ] Can lock — awaiting Ash's decisions
+**Status**: [x] LOCKED — All 2 decisions approved 2026-11-20
+
+**Proceed to Phase 7 implementation**: ✅ Yes
 
 ---
 
@@ -616,37 +642,39 @@ Answers establish the authority for implementation work. No task in a phase star
 | Phase | Gate | Questions | Locked? | Date |
 |-------|------|-----------|---------|------|
 | 2 | Foundational | 2.1–2.16 | ✅ | 2026-11-20 |
-| 3 | MVP/US1 | 3.1–3.7 | ⏳ | — |
-| 4 | Renewal/US2 | 4.1–4.2 | ⏳ | — |
-| 5 | Truthfulness/US3 | 5.1–5.3 | ⏳ | — |
+| 3 | MVP/US1 | 3.1–3.7 | ✅ | 2026-11-20 |
+| 4 | Renewal/US2 | 4.1–4.2 | ✅ | 2026-11-20 |
+| 5 | Truthfulness/US3 | 5.1–5.3 | ✅ | 2026-11-20 |
 | 6 | Recovery/US4 | Deferred (decisions already locked) | ✅ | 2026-11-19 |
-| 7 | Polish | 7.1–7.2 | ⏳ | — |
+| 7 | Polish | 7.1–7.2 | ✅ | 2026-11-20 |
 
 ---
 
-## Sign-off Template
+## 🎉 ALL GATES LOCKED — READY TO BUILD
 
-**When Ash approves answers to all open questions**:
+**Approved by**: Ash Shaw  
+**Date**: 2026-11-20  
+**Total decisions**: 25 (all approved)
 
-```
-Gate: [PHASE NAME]
-Approved by: Ash Shaw
-Date: YYYY-MM-DD
-Decision IDs locked: Q#.#, Q#.#, ...
-Status: LOCKED — Phase [N] implementation authorized
-```
-
----
-
-## Next Steps
-
-1. **Phase 2 is LOCKED** — Implementation can begin on RA-T022–T029 immediately
-2. **Share this doc with Ash** for decisions on Phase 3–7 gates
-3. **Record Ash's answers** in each `Answer:` field above
-4. **Update gate status** to [x] LOCKED when all decisions in a phase are approved
-5. **Phase gates open automatically** as answers are recorded
+**Phases ready for implementation**:
+- ✅ Phase 2 (Foundational): 16 decisions
+- ✅ Phase 3 (MVP): 7 decisions
+- ✅ Phase 4 (Renewal): 2 decisions
+- ✅ Phase 5 (Newsletter): 3 decisions
+- ✅ Phase 6 (Recovery): Deferred (decisions already locked)
+- ✅ Phase 7 (Polish): 2 decisions
 
 ---
 
-**Last updated**: 2026-11-20 by Claude  
-**Current state**: Phase 2 locked, Phases 3–7 pending Ash's decisions
+**Next Steps**
+
+1. ✅ All decision gates are **LOCKED**
+2. ✅ Implementation can begin immediately on all phases
+3. ✅ Implementation teams: start with Phase 2 (RA-T022–RA-T029)
+4. ✅ Phase 3 (MVP) unblocks when Phase 2 completes
+5. ✅ Phases 4–7 follow in sequence
+
+---
+
+**Last updated**: 2026-11-20 by Claude & Ash Shaw  
+**Current state**: ALL PHASES AUTHORIZED FOR IMPLEMENTATION ✅
