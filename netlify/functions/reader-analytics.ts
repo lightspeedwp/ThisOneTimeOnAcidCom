@@ -106,7 +106,7 @@ async function handlePostAnalytics(req: Request, sessionId: string, expiresAt: s
       event: {
         recorded: true,
         chapterId: body.chapterId,
-        timestamp: eventTimestamp,
+        timestamp: event.completedAt,
       },
       stats,
       expiresAt,
