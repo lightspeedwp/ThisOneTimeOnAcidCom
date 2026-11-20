@@ -45,7 +45,7 @@ It works once and expires 10 minutes after it was sent.
 Didn't ask for this? You can ignore this email.
 
 — Ash
-```
+```text
 
 **Email Form Label**: "Enter your email address"  
 **Email Form Placeholder**: "you@example.com"  
