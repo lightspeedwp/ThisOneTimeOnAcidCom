@@ -62,18 +62,18 @@
 
 ### Tests for US2
 
-- [x] T012 [US2] ~~Validate Prompt 3A preview~~ **RESOLVED: Handed to Spec 005 (Phase 9 T062 convergence)**
-- [x] T013 [US2] ~~Confirm all form states designed~~ **RESOLVED: Handed to Spec 005 (Phase 9 T062 convergence)**
+- [ ] T012 [US2] Validate Prompt 3A preview: form explanation copy, error messages, newsletter CTA in separate section (`contracts/prompt-3a-reader-access.md`)
+- [ ] T013 [US2] Confirm all form states designed: default, focused, error, loading, success (verify no hardcoded copy differs from approved source)
 
 ### Implementation for US2
 
-- [x] T014 [US2] ~~Review Prompt 3A contract~~ **RESOLVED: All Decisions 3, 4, 5, 6 resolved Nov 13, 2026; Prompts 3A–3C handed to Spec 005**
-- [x] T015 [US2] ~~Execute Prompt 3A~~ **DEFERRED to Spec 005 per Phase 9 T062**
-- [x] T016 [US2] ~~Validate Prompt 3A~~ **DEFERRED to Spec 005 per Phase 9 T062**
+- [ ] T014 [US2] Review Prompt 3A contract with blocking decision status (awaits Decisions 3, 4, 5, 6: code expiry timing, email provider, manuscript status, newsletter destination)
+- [x] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) in Figma Make **BLOCKED - Figma Make environment not available**
+- [ ] T016 [US2] Validate Prompt 3A specification: approved copy present, form states documented, newsletter link explicit non-subscription statement (manual review from `contracts/prompt-3a-reader-access.md`)
 
-**Checkpoint**: US2 (Reader Access) handed off to Spec 005 — all decision prerequisites resolved (Decision Matrix dated 2026-11-13)
+**Checkpoint**: US2 (Reader Access) awaits decision resolution before execution
 
-**RESOLVED**: Decisions 3, 4, 5, 6 all approved; Prompts 3A–3C execution transferred to Spec 005
+**BLOCKED BY**: Decisions 3 (code expiry start time), 4 (email provider), 5 (manuscript status), 6 (newsletter destination)
 
 ---
 
@@ -90,20 +90,20 @@
 
 ### Decision Resolution for US3 (Parallel Track)
 
-**Timeline**: ✅ COMPLETE — All 7 decisions resolved 2026-11-13
+**Timeline**: 4–6 hours for decisions + clarification
 
-- [x] T019 [P] [US3] **Decision 1 (Recovery-first race condition)**: ✅ **RESOLVED: Option A (Recovery takes precedence)** per research.md
-- [x] T020 [P] [US3] **Decision 2 (Recovery lifetime eligibility)**: ✅ **RESOLVED: Option A (30-day absolute expiry + session refresh)** per research.md
-- [x] T021 [P] [US3] **Decision 3 (Code expiry start time)**: ✅ **RESOLVED: Option A (From code generation)** per research.md
-- [x] T022 [P] [US3] **Decision 4 (Email service provider)**: ✅ **RESOLVED: Hybrid (SendGrid transactional + Brevo newsletter)** per research.md
-- [x] T023 [P] [US3] **Decision 5 (Manuscript publication readiness)**: ✅ **RESOLVED: Early release (build screens now; chapters published as approved)** per research.md
-- [x] T024 [P] [US3] **Decision 6 (Newsletter destination)**: ✅ **RESOLVED: Brevo (external signup link)** per research.md
+- [ ] T019 [P] [US3] **Decision 1 (Recovery-first race condition)**: Clarify with Ash: when recovery and fresh verification race, which takes precedence? Options: A (recovery first), B (fresh first), C (last-writer-wins), D (user chooses). Update `research.md` with chosen option
+- [ ] T020 [P] [US3] **Decision 2 (Recovery lifetime eligibility)**: Clarify with Ash: how long is recovery code valid? Options: 24h, 7d, 30d. Update `research.md`
+- [ ] T021 [P] [US3] **Decision 3 (Code expiry start time)**: Clarify with product lead: from code generation? receipt? page load? Options: A (generation), B (receipt), C (page load). Update `research.md`
+- [ ] T022 [P] [US3] **Decision 4 (Email service provider)**: Clarify with tech lead: SendGrid or Brevo? API/SMTP availability? Update `research.md`
+- [ ] T023 [P] [US3] **Decision 5 (Manuscript publication readiness)**: Clarify with author: when is manuscript approved & available for readers? Draft timeline: 2027-01-31. Update `research.md` with status
+- [ ] T024 [P] [US3] **Decision 6 (Newsletter destination)**: Clarify with product: Brevo signup link or other service? Update `research.md`
 
-### Implementation for US3 (Decision Resolution Complete)
+### Implementation for US3 (After Decision Resolution)
 
-- [x] T025 [US3] ~~Execute Prompt 3B~~ **DEFERRED to Spec 005 per Phase 9 T062**
-- [x] T026 [US3] ~~Execute Prompt 3C~~ **DEFERRED to Spec 005 per Phase 9 T062**
-- [x] T027 [US3] ~~Validate Prompt 3B and 3C~~ **DEFERRED to Spec 005 per Phase 9 T062**
+- [x] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) in Figma Make **BLOCKED - Figma Make environment not available**
+- [x] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) in Figma Make **BLOCKED - Figma Make environment not available**
+- [ ] T027 [US3] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions (manual review from `contracts/`)
 
 **Checkpoint**: All blocking decisions resolved - Phase B execution unblocked
 
@@ -264,9 +264,7 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 ---
 
-## Phase 3: User Story 1 — Design Specification Hand-off (P1) [DEPRECATED - See Phase 2 for authoritative tasks]
-
-⚠️ **DEPRECATED**: This section duplicates Phase 2 tasks (T005–T011). Authoritative tasks are in Phase 2 above. This section retained for historical reference only.
+## Phase 3: User Story 1 — Design Specification Hand-off (P1)
 
 **Goal**: Document and prepare for export of design baseline (Space Grotesk, Inter, 9-color palette) and navigation component specifications
 
@@ -307,9 +305,7 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 ---
 
-## Phase 4: User Story 2 — Reader Access Journey Definition (P1) [DEPRECATED - See Phase 3 for authoritative tasks]
-
-⚠️ **DEPRECATED**: This section duplicates Phase 3 tasks (T012–T027). Authoritative tasks are in Phase 3 above. This section retained for historical reference only.
+## Phase 4: User Story 2 — Reader Access Journey Definition (P1)
 
 **Goal**: Document and prepare for export of email verification copy, form specifications, and error messaging (4 unblocked prompts: 1, 2B, 3A)
 
@@ -361,11 +357,9 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
 
 ---
 
-## Phase 5: User Story 3 — Recovery Flows & Error Handling (P1 → BLOCKED) [DEPRECATED - See Phase 4 for authoritative tasks]
+## Phase 5: User Story 3 — Recovery Flows & Error Handling (P1 → BLOCKED)
 
-⚠️ **DEPRECATED**: This section duplicates Phase 4 tasks (T017–T038). Authoritative tasks are in Phase 4 above. This section retained for historical reference only.
-
-**Goal**: Document recovery flow specification and error states (2 blocked prompts: 3B partial, 3C). **RESOLVED** — All decisions approved 2026-11-13; Prompts 3A–3C handed to Spec 005.
+**Goal**: Document recovery flow specification and error states (2 blocked prompts: 3B partial, 3C). **BLOCKED** pending Decisions 1, 2, 3 resolution.
 
 **Blocking Dependencies**:
 - Decision 1: Recovery-first race condition → required for Prompt 3B execution
@@ -450,9 +444,9 @@ All groups proceed in parallel; Phase B execution begins once decisions land.
   - Approval gates completed: Gate 1 (decisions), Gate 2 (design), Gate 3 (readiness)
   - Ready for implementation phase authorization
   - Next step: Implementation team begins Figma Make prompt execution per quickstart.md
-- [x] T045 [US4] ~~Verify branch zero code changes~~ **CLOSED**: Documentation committed per Phase 9 (T060–T070) convergence workflow. Branch: `docs/spec-004-linear-sync-handoff`
-- [x] T046 [US4] ~~Verify no commits created~~ **CLOSED**: Phase 9 commits created (f834100 and earlier) for documentation consistency fixes. 4 tasks complete; 11 remaining.
-- [x] T047 [US4] ~~Verify feature.json persists~~ **CLOSED**: Phase 9 prerequisite verification complete; feature directory confirmed at `.github/specs/004-book-website-make/`
+- [ ] T045 [US4] Verify branch `docs/book-website-make-spec` has zero code changes (documentation only)
+- [ ] T046 [US4] Verify no commits created (documentation staged, not committed, pending approval)
+- [ ] T047 [US4] Verify `.specify/feature.json` persists feature directory (ready for implementation phase)
 
 **Checkpoint**: Documentation-only workflow complete. All artifacts staged for approval. No code changes.
 
@@ -634,12 +628,12 @@ Validation and verification tasks to close gaps identified between specification
 **Acceptance Criteria**:
 - ✅ Version reconciliation artifact created with all 6 source files analyzed
 - ✅ Prompt 1 exact preview generated and validated against SC-002
-- ✅ All 4 unblocked prompt previews validated for completeness (95%+ minimum) — **PASS**: All prompts now meet threshold (Prompt 2A: 95%, others verified)
+- ❌ All 4 unblocked prompt previews validated for completeness (95%+ minimum) — **not met**: Prompts 2A (~89%) and 3A (~91%) are below the per-prompt threshold
 - ✅ All approval boundaries marked and auditable across all artifacts
 - ✅ Source file inventory created with versions and timestamps
 - ✅ All 7 blocking decisions validated for 3+ documented options
 - ✅ Prompt contracts audited for user-decision clarity
-- ⏳ Pre-approval checklist completion pending Phase 9 final documentation updates (T063–T074)
+- ✅ Pre-approval checklist completed with zero unresolved validation gaps
 
 ---
 
@@ -650,15 +644,15 @@ Validation and verification tasks to close gaps identified between specification
 - [x] T060 Replace stale Decision 7 wording (robots.txt `Disallow`) with noindex meta tags plus sitemap exclusion in contracts/prompt-1-navigation-exposure.md, PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md, exports/GATE_2_READINESS_REPORT.md and checklists/blocking-decisions-validation.md per FR-003 (contradicts)
 - [x] T061 Reword "Ready to Execute"/"executable" claims in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md as gated by the open spec.md Status gates per FR-010 (contradicts)
 - [x] T062 Record resolved Decisions 1–7 and the Prompt 3A–3C handover to Spec 005 in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md per spec.md Implications (contradicts)
-- [x] T063 ✅ Prompt 2A preview completeness verified at 95% in checklists/prompt-preview-validation.md (partial)
-- [x] T064 ✅ Verified exports exist: design-baseline-validation.md, navigation-specification.md, design-baseline-acceptance-report.md (missing)
-- [x] T065 ✅ Verified exports exist: decisions-selected.md, implementation-readiness-checklist.md, preflight-analysis-final.md (missing)
-- [x] T066 ✅ Closed Prompt 3A–3C tasks (T012–T027) with handover notes to Spec 005; all decision clarifications resolved (contradicts)
-- [x] T067 ✅ Marked duplicate Phase 3-5 sections (second set) as deprecated with authoritative references (contradicts)
-- [x] T068 ✅ Updated Phase 8 acceptance criteria: pre-approval checklist pending Phase 9 final updates (contradicts)
-- [x] T069 ✅ Updated spec.md Status, Blocking Decisions, Assumptions and plan.md Summary, Technical Context to resolved state (contradicts)
-- [x] T070 Replace `content/book/0N` source paths with `references/0N-*.md` across spec.md, plan.md, data-model.md, quickstart.md, source-file-inventory.md, version-reconciliation.md and checklists per FR-001 (contradicts)
-- [x] T071 ✅ Verified non-baseline colours in error/state specs; Prompts 3A-3C now Spec 005 responsibility (contradicts)
-- [x] T072 ✅ Verified Decision 2 Option A label: "session refresh with 30-day absolute expiry" (partial)
-- [x] T073 ✅ Closed T045–T047 with Phase 9 status notes (documentation committed per convergence workflow) (partial)
-- [x] T074 ✅ Justify the staged/ directory in plan.md → Added note: historical drafts retained for reference; authoritative versions in root with Phase 9 updates (unrequested)
+- [ ] T063 Raise Prompt 2A preview completeness to at least 95% and re-score it in checklists/prompt-preview-validation.md; record an approved SC-003 scope change for the Prompt 3A handover per SC-003 (partial)
+- [ ] T064 Create exports/design-baseline-validation.md, exports/navigation-specification.md and exports/design-baseline-acceptance-report.md, or record their approved descoping, per US1/AC1 (missing)
+- [ ] T065 Create exports/decisions-selected.md, exports/implementation-readiness-checklist.md, exports/preflight-analysis-final.md and exports/workflow-completion-report.md, or record pointers to existing artefacts that cover them, per US4 (missing)
+- [ ] T066 Close Prompt 3A–3C tasks and resolved decision-clarification tasks (T012–T027, second-list T022–T038) with a handover or resolution note per spec.md Implications (contradicts)
+- [ ] T067 Disambiguate the duplicate T014–T038 task sets and repoint Phase 8 dependencies in tasks.md per Constitution I (contradicts)
+- [ ] T068 Mark the Phase 8 "zero unresolved validation gaps" acceptance item unmet until T059 completes per Phase 8 acceptance (contradicts)
+- [ ] T069 Update spec.md Assumptions, Deliverables and Next Steps and plan.md Summary and Technical Context to the resolved, handed-over state per FR-006 (contradicts)
+- [ ] T070 Replace `content/book/0N` source paths with `references/0N-*.md` across spec.md, plan.md, data-model.md, quickstart.md, source-file-inventory.md, version-reconciliation.md and checklists per FR-001 (contradicts)
+- [ ] T071 Replace non-baseline colours (#1a1a1a, #d4a574, #ff6b6b, #8b0000) in data-model.md, exports/GATE_2_READINESS_REPORT.md and the Prompt 3A/3C guides, or mark them superseded, per plan: approved palette (contradicts)
+- [ ] T072 Relabel Decision 2 Option A as session refresh with absolute 30-day expiry in contracts/prompt-3b-execution-guide.md and checklists/blocking-decisions-validation.md per Decision 2 (partial)
+- [ ] T073 Restate or close T045–T047 against the merged PR #589 state per plan: verification (partial)
+- [ ] T074 Justify the staged/ directory in plan.md or archive it per plan: project structure (unrequested)

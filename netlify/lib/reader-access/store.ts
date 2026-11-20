@@ -104,7 +104,7 @@ export async function storeRecoveryAttempt(
   recovery: StoredRecoveryAttempt
 ): Promise<void> {
   const key = KEYS.recovery(recovery.recoveryId);
-  await put(key, JSON.stringify(recovery));
+  await store.set(key, JSON.stringify(recovery));
 }
 
 // Retrieve a recovery attempt
@@ -112,7 +112,7 @@ export async function getRecoveryAttempt(
   recoveryId: string
 ): Promise<StoredRecoveryAttempt | null> {
   const key = KEYS.recovery(recoveryId);
-  const data = await get(key);
+  const data = await store.get(key);
   if (!data) return null;
   return JSON.parse(data) as StoredRecoveryAttempt;
 }
@@ -127,12 +127,12 @@ export async function updateRecoverySession(
   if (!recovery) return null;
   recovery.createdSessionId = sessionId;
   recovery.raceOutcome = raceOutcome;
-  await put(KEYS.recovery(recoveryId), JSON.stringify(recovery));
+  await store.set(KEYS.recovery(recoveryId), JSON.stringify(recovery));
   return recovery;
 }
 
 // Delete a recovery attempt after it's been used or expired
 export async function deleteRecoveryAttempt(recoveryId: string): Promise<void> {
   const key = KEYS.recovery(recoveryId);
-  await blobDelete(key);
+  await store.delete(key);
 }
