@@ -256,4 +256,3 @@ export async function isStorageHealthy(): Promise<boolean> {
     return false;
   }
 }
-}
