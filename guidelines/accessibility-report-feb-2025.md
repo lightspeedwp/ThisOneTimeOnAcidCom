@@ -170,7 +170,7 @@ select:focus-visible,
 ## Contrast Ratios (White Background #FFFFFF)
 
 | Color | Hex | Contrast | WCAG Level |
-|-------|-----|----------|------------|
+| ----- | --- | -------- | ---------- |
 | Neon Green Text | #008f00 | 5.2:1 | ✅ AA |
 | Neon Pink Text | #b300a4 | 5.8:1 | ✅ AA |
 | Neon Blue Text | #002db3 | 8.9:1 | ✅ AAA |
@@ -214,7 +214,7 @@ select:focus-visible,
 ## Contrast Ratios (Atomic Black #0F0F0F)
 
 | Color | Hex | Contrast | WCAG Level |
-|-------|-----|----------|------------|
+| ----- | --- | -------- | ---------- |
 | Neon Green | #39FF14 | 11.8:1 | ✅ AAA |
 | Neon Pink | #FF10F0 | 8.2:1 | ✅ AAA |
 | Neon Blue | #1F51FF | 7.9:1 | ✅ AAA |
@@ -277,7 +277,7 @@ var(--wp--preset--color--neon-orange-text); }
 ## Components Audited
 
 | Component | ARIA Support | Status |
-|-----------|-------------|--------|
+| --------- | ----------- | ------ |
 | **Header** | `aria-label`, `aria-expanded`, `aria-controls`, `aria-current` | ✅ Complete |
 | **MobileMenu** | `aria-label`, `aria-expanded`, proper focus management | ✅ Complete |
 | **TypeformEmbed** | Iframe title, proper labeling | ✅ Complete |
@@ -313,7 +313,7 @@ var(--wp--preset--color--neon-orange-text); }
 ## 📊 Accessibility Metrics - Before vs After
 
 | Category | Before | After | Improvement |
-|----------|--------|-------|-------------|
+| -------- | ------ | ----- | ----------- |
 | **Reduced Motion** | ❌ 0% | ✅ 100% | +100% |
 | **Color Contrast (Light)** | ⚠️ 60% | ✅ 100% | +40% |
 | **Color Contrast (Dark)** | ✅ 100% | ✅ 100% | Maintained |

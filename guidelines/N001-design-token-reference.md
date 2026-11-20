@@ -2,7 +2,7 @@
 
 **Purpose:** Comprehensive reference for color palette, spacing scales, typography system, and foundational design tokens.
 
-**Authority:** D4 (N-Document Approvals); D3 (Design Authority: Ash Shaw, WCAG 2.2 AAA)
+**Authority:** D4 (N-Document Approvals); D3 (Design Authority, WCAG 2.2 AAA compliance)
 
 ---
 
@@ -97,7 +97,7 @@ shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
 ## Animation Tokens
 
 | Token | Duration | Easing | Usage |
-|-------|----------|--------|-------|
+| ----- | -------- | ------ | ----- |
 | `duration-fast` | 150ms | ease-out | Micro interactions |
 | `duration-base` | 300ms | ease-out | Standard transitions |
 | `duration-slow` | 500ms | ease-out | Complex animations |
@@ -107,7 +107,7 @@ shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
 ## Responsive Breakpoints
 
 | Breakpoint | Width | Device Type |
-|---|---|---|
+| - | - | - |
 | `mobile` | 320px–640px | Small phones |
 | `tablet` | 641px–1024px | Tablets |
 | `desktop` | 1025px–1440px | Desktops |
@@ -130,7 +130,7 @@ See N009: Responsive Design Patterns for media query usage.
 - ✅ **WCAG 2.2 AAA:** All color combinations tested for contrast (minimum 4.5:1 for text)
 - ✅ **Accessibility:** Typography sizes meet minimum 16px for body text
 - ✅ **Responsive:** Spacing scale tested across all breakpoints
-- ✅ **Design Authority:** Approved by Ash Shaw (D3)
+- ✅ **Design Authority:** Approved per D3 decision gate
 
 ---
 

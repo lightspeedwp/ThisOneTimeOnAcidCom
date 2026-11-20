@@ -1,41 +1,52 @@
-# Implementation Plan: Book Website Figma Make Prompt Pack
+# Implementation Plan: Book Website Claude Direct Execution
 
-**Branch**: `docs/book-website-make-spec` | **Date**: 2026-11-09 | **Spec**: [.github/specs/004-book-website-make/spec.md](./spec.md)
+**Branch**: `feat/spec-004-claude-execution-model` | **Date**: 2026-11-09 | **Pivoted**: 2026-11-20 | **Spec**: [.github/specs/004-book-website-make/spec.md](./spec.md)
 
 **Input**: Feature specification from `.github/specs/004-book-website-make/spec.md`
 
 **Source Documents**: Reference materials available in [`./references/`](./references/) folder with complete version history and decision tracking
 
+**Execution Model**: SC-004 (Execution Model Pivot) approved 2026-11-20. Prompts 1, 2A, 2B now execute via Claude direct execution (not Figma Make).
+
 ## Summary
 
-Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website redesign, prepared as documentation-only package with exact previews for approval. The feature delivers four unblocked executable prompts (Prompt 1: navigation exposure, Prompt 2A: design-system baseline, Prompt 2B: navigation design, Prompt 3A: reader access copy & forms) and two blocked prompts (Prompts 3B/3C) pending prerequisite blocking decisions. No implementation code is generated; the deliverable is documentation ready for design-system export and component generation via Figma Make.
+✅ **Complete staged Claude-executable prompts for the ThisOneTimeOnAcidCom book website redesign**, prepared as documentation-only package with exact specifications **ready for approval**. The feature delivers **three unblocked executable prompts** (Prompt 1: navigation exposure, Prompt 2A: design-system baseline, Prompt 2B: navigation design) with **all 7 blocking decisions RESOLVED** (2026-11-13). Reader-access work (Prompts 3A–3C) handed to **Spec 005**. No implementation code is generated; the deliverable is documentation ready for Claude direct execution and component generation via TypeScript/CSS specs.
 
-**Technical Approach**: Preflight analysis of six source specification files (content/book/01-06) with version reconciliation, approval boundary documentation, and exact Prompt preview generation. Three staged gates prevent unblocked prompt execution: (1) blocking decision resolution, (2) user design approval, (3) implementation authorization.
+**Technical Approach**: Preflight analysis of six source specification files (references/01-06) with version reconciliation, approval boundary documentation, and exact Prompt specification generation. Each contract includes Claude execution specification (input format, output format, validation criteria). Three staged gates prevent unblocked prompt execution: (1) blocking decision resolution, (2) user design approval, (3) SC-004 approval & implementation authorization.
 
 ## Technical Context
 
 **Project Type**: Documentation-only specification package (no code generation, no deployment)
 
-**Source Files**: Six specification files in content/book/ (01-book-website-specification.md, 02-companion-session-plan.md, 03-author-decisions-launch-scope.md, 04-design-brief.md, 05-design-reader-decision-register.md, 06-website-reading-prd.md) with version tracking and reconciliation
+**Source Files**: Six specification files in `.github/specs/004-book-website-make/references/` (01-book-website-specification.md, 02-companion-session-plan.md, 03-author-decisions-launch-scope.md, 04-design-brief.md, 05-design-reader-decision-register.md, 06-website-reading-prd.md) with version tracking and reconciliation
 
 **Design System**: Space Grotesk headings, Inter body/UI, 9-color palette (light & dark themes)
 
 **Reader Access Policy**: 10-minute single-use verification codes, 30-day device lifecycle, purpose-limited records
 
-**Figma Make Integration**: Staged Prompt execution (Prompts 0–3C) with approval gates between stages; Prompts 1, 2A, 2B, 3A approved for execution; Prompts 3B, 3C blocked pending decision resolution
+**Execution Model** (SC-004, approved 2026-11-20):
+- **Primary**: Claude direct execution for Prompts 1, 2A, 2B
+  - Each contract includes: Input spec, output format (CSS/JSON/TypeScript), validation criteria, example output
+  - Output: Markdown specs + code/data files (not Figma canvas)
+  - Timeline: 45–60 min total (Prompts 1, 2A, 2B)
+  - Deliverable: Version-controlled, reviewable, iterable specs
+- **Deprecated**: Figma Make execution (replaced by SC-004)
+- **Staged gates**: (1) Blocking decisions resolved, (2) Design approval, (3) SC-004 approval, (4) Implementation authorization
+- **Prompts 1, 2A, 2B**: Approved for Claude execution; unblocked
+- **Prompts 3B, 3C**: Blocked pending decision resolution; same Claude execution model recommended for Spec 005
 
-**Blocking Decisions** (7 total, preventing Prompt 3B/3C execution):
-- Recovery-first race condition handling (NEEDS CLARIFICATION)
-- Recovery lifetime eligibility (NEEDS CLARIFICATION)
-- Code expiry start time (from generation? receipt? load?) (NEEDS CLARIFICATION)
-- Email service provider selection (NEEDS CLARIFICATION)
-- Manuscript publication readiness (NEEDS CLARIFICATION)
-- Newsletter destination/signup link (NEEDS CLARIFICATION)
-- Route enforcement verification for /speaking, /events, /media (NEEDS CLARIFICATION)
+**Blocking Decisions** (7 total, **ALL RESOLVED & APPROVED 2026-11-13**):
+- ✅ **Decision 1**: Recovery-first race condition → **Option A**: Recovery takes precedence
+- ✅ **Decision 2**: Recovery lifetime eligibility → **Option A**: 30-day absolute expiry + session refresh on recovery
+- ✅ **Decision 3**: Code expiry start time → **Option A**: From code generation
+- ✅ **Decision 4**: Email service provider → **Hybrid**: SendGrid (transactional) + Brevo (newsletter)
+- ✅ **Decision 5**: Manuscript publication readiness → **Early release**: Build screens now; chapters published individually as Ash approves
+- ✅ **Decision 6**: Newsletter destination → **Brevo**: External signup link
+- ✅ **Decision 7**: Route enforcement verification → **Option A**: Noindex meta tags + sitemap exclusion
 
-**Target Output**: Figma Make-ready specifications with exact component names, acceptance criteria, and error-state handling for design-system export
+**Target Output**: Claude-executable specifications (Prompts 1–2B) with exact component specs, acceptance criteria, and output format validation. Each contract includes Claude execution section (input, output, validation). Reader-access work (Prompts 3A–3C) handed to Spec 005 with same Claude execution model.
 
-**Scale/Scope**: 4 executable prompts, 2 blocked prompts, 7 blocking decisions, 10 functional requirements, 8 success criteria, 8 assumptions, 4 edge cases
+**Scale/Scope**: 3 executable prompts (1, 2A, 2B), 7 approved blocking decisions, 10 functional requirements, 8 success criteria, 8 assumptions, 4 edge cases
 
 ## Constitution Check
 
@@ -81,8 +92,10 @@ Complete staged Figma Make prompts for the ThisOneTimeOnAcidCom book website red
 
 **Project Type: Documentation-only specification**
 
+**Reference specifications moved from `content/book/` to `references/`** (Phase 9, T070):
+
 ```text
-content/book/
+.github/specs/004-book-website-make/references/
 ├── 01-book-website-specification.md     # Master execution contract (v1.0.0)
 ├── 02-companion-session-plan.md         # Preparation queue (v1.0.4)
 ├── 03-author-decisions-launch-scope.md  # Author decisions (v1.3.0)
@@ -92,6 +105,24 @@ content/book/
 ```
 
 **Structure Decision**: Documentation-only package. No code structure required. Source specifications analyzed, reconciled, and staged for Figma Make execution. All deliverables remain in `.github/specs/004-book-website-make/` with no backend/frontend splits or implementation code paths.
+
+---
+
+## Directory Purpose Guide
+
+<!-- markdownlint-disable MD060 -->
+
+| Directory | Purpose | Contents | Status |
+|-----------|---------|----------|--------|
+| `contracts/` | Figma Make prompt specifications (input) | Prompt 1–3C contract definitions | Reference (reader-access moved to Spec 005) |
+| `exports/` | Final approved artifacts (output) | Design tokens, checklists, handoff docs | Active |
+| `references/` | Source specification documents | Six specification files (01–06) with versions | Read-only reference |
+| `staged/` | Interim Figma Make outputs and drafts | Historical drafts from initial analysis; regenerated prompt outputs before finalization | Available for future regeneration; retained for reference |
+| `checklists/` | Quality validation and approval tracking | Pre-approval, specification-quality, prompt-preview checklists | Reference |
+
+<!-- markdownlint-enable MD060 -->
+
+**Note**: The `staged/` folder contains historical drafts from initial analysis (Nov 9) and is retained for reference only and future Figma Make regeneration. Authoritative versions are in the root directory (spec.md, plan.md, tasks.md, exports/) with all Phase 9 convergence updates applied.
 
 ## Complexity Tracking
 

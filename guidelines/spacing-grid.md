@@ -11,7 +11,7 @@
 8px base unit progression:
 
 | Scale | Value | Example |
-|-------|-------|---------|
+| ----- | ----- | ------- |
 | xs | 4px | Icon padding |
 | sm | 8px | Compact spacing |
 | md | 16px | Default spacing |

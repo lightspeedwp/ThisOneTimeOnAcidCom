@@ -2,6 +2,7 @@ import React from 'react';
 import { setSEO } from '../../../utils/seo';
 import { pageSEO } from '../../../data/mock/seo/pages';
 import { useNavigate } from '../../../lib/router';
+import { ReaderAccessForm } from '../../ui/ReaderAccessForm';
 
 export function BookHomePage() {
   var navigate = useNavigate();
@@ -10,14 +11,13 @@ export function BookHomePage() {
     setSEO(pageSEO.bookHome);
   }, []);
 
-  function handleUnlock(e) {
-    if (e && e.preventDefault) e.preventDefault();
-    var emailInput = e.target.querySelector('input[type="email"]');
-    if (emailInput && emailInput.value.toLowerCase() === 'hello@thisonetimeonacid.com') {
-      navigate('/ebook');
-    } else {
-      navigate('/thank-you');
-    }
+  function handleCodeRequested(email) {
+    // Code has been requested; form will transition to enter-code state
+  }
+
+  function handleCodeVerified(email, code) {
+    // Code has been verified by backend; navigate to ebook
+    navigate('/ebook');
   }
 
   function handleWaitlist() {
@@ -48,17 +48,12 @@ export function BookHomePage() {
           React.createElement("h1", { className: "heading-hero text-neon-pink entrance-stagger", style: { animationDelay: '0.2s' } }, "This one time on acid..."),
           React.createElement("h2", { className: "text-lead entrance-stagger", style: { animationDelay: '0.3s' } }, "A hybrid memoir and creative-life guide about dancefloors, difference, freedom, and becoming fully yourself."),
           React.createElement("p", { className: "text-body entrance-stagger", style: { animationDelay: '0.4s' } }, "For misfits, makers, dancers, seekers, festival people, and anyone wired a little differently."),
-          
-          React.createElement(
-            "form",
-            { className: "form form--row space-top-lg entrance-stagger", style: { animationDelay: '0.5s' }, onSubmit: handleUnlock },
-            React.createElement(
-              "div",
-              { className: "form__group" },
-              React.createElement("input", { type: "email", placeholder: "Email address", className: "form__input", required: true, "aria-label": "Email address" })
-            ),
-            React.createElement("button", { type: "submit", className: "button button--primary neon-pulse-cta" }, "Unlock the Draft")
-          ),
+
+          React.createElement(ReaderAccessForm, {
+            onCodeRequested: handleCodeRequested,
+            onCodeVerified: handleCodeVerified,
+            key: 'reader-access-form'
+          }),
           React.createElement("p", { className: "text-fine space-top-sm entrance-stagger", style: { animationDelay: '0.6s' } }, "Enter your email to read the rough draft, get chapter updates, and hear first when pre-orders open."),
           
           React.createElement(

@@ -76,7 +76,7 @@ This guide walks through the approval and execution flow for the Figma Make prom
 **What was reviewed**: Complete documentation package readiness for implementation phase
 
 **Approvals recorded**:
-- ✅ All six source files analyzed (content/book/01-06)
+- ✅ All six source files analyzed (references/01-06)
 - ✅ Version reconciliation documented (02: v1.0.3→v1.0.4, 03: v1.2.2→v1.3.0, 05: v1.7.0→v1.9.0)
 - ✅ Prompt previews complete (1, 2A, 2B, 3A)
 - ✅ Blocking Prompts marked "BLOCKED" with prerequisites documented (3B, 3C)

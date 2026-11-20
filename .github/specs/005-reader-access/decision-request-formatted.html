@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spec 005 Decision Request</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 1rem; opacity: 0.95; }
+        .batch {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .batch-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .batch-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .meta-item {
+            padding: 0.5rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+            border-left: 3px solid #667eea;
+            padding-left: 1rem;
+        }
+        .meta-label { font-weight: 600; color: #667eea; }
+        .meta-value { color: #666; }
+        .questions {
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+        .question {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .q-number {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+        .q-text {
+            font-weight: 500;
+            margin: 0.25rem 0 0.5rem 0;
+            color: #333;
+        }
+        .options {
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .option {
+            margin: 0.3rem 0;
+            padding: 0.3rem 0;
+        }
+        .locked {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+        .locked .q-text::after {
+            content: " ✓";
+            color: #28a745;
+            font-weight: bold;
+        }
+        .footer {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            margin-top: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .timeline {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .timeline-item {
+            margin: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        .cta {
+            background: #667eea;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 1rem;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        .cta:hover { background: #764ba2; }
+        .status-locked { color: #28a745; font-weight: 600; }
+        .status-pending { color: #ffc107; font-weight: 600; }
+        .total-time {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f0f4ff;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Spec 005: Reader Access</h1>
+            <p class="subtitle">Decision Request — 25 Decisions Needed to Unblock Phases 3–7</p>
+        </header>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 4px; margin-bottom: 1.5rem; border-left: 4px solid #667eea;">
+            <h2 style="color: #667eea; margin-bottom: 1rem;">Status Overview</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <strong>Phase 2 (Foundational)</strong>
+                    <p style="color: #28a745; font-weight: 600;">✅ LOCKED</p>
+                    <p style="font-size: 0.9rem; color: #666;">16 decisions finalized.<br>Ready to build.</p>
+                </div>
+                <div>
+                    <strong>Phases 3–7 (Implementation)</strong>
+                    <p style="color: #ffc107; font-weight: 600;">⏳ PENDING</p>
+                    <p style="font-size: 0.9rem; color: #666;">Awaiting your answers on<br>25 questions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BATCH 1 -->
+        <div class="batch">
+            <div class="batch-title">🎯 Batch 1: Phase 3 (MVP) — Verify & Read Online</div>
+            <div class="batch-meta">
+                <div class="meta-item">
+                    <div class="meta-label">When needed</div>
+                    <div class="meta-value">To start MVP (RA-T030–RA-T038)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Topics</div>
+                    <div class="meta-value">Code entry, rendering, rate limits</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Time estimate</div>
+                    <div class="meta-value">~10 minutes</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Impact</div>
+                    <div class="meta-value">MVP ready in 1–2 weeks</div>
+                </div>
+            </div>
+            <div class="questions">
+                <div class="question">
+                    <div class="q-number">Q3.1</div>
+                    <div class="q-text">Code entry UX: How should users enter the 6-digit code?</div>
+                    <div class="options">
+                        <div class="option">A) Single text input (paste-friendly, modern)</div>
+                        <div class="option">B) Six separate single-digit inputs (iOS-style)</div>
+                        <div class="option">C) Your preference?</div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="q-number">Q3.2</div>
+                    <div class="q-text">Chapter rendering: How should content be displayed safely?</div>
+                    <div class="options">
+                        <div class="option">A) Markdown parser (remark/rehype)</div>
+                        <div class="option">B) React component per chapter (safest)</div>
+                        <div class="option">C) Sanitized HTML (DOMPurify)</div>
+                    </div>
+                </div>
+                <div class="question locked">
+                    <div class="q-number">Q3.3–Q3.5 (Locked)</div>
+                    <div class="q-text">Rate limits confirmed: 60s resend, 10/24h per-email, 50/24h per-network</div>
+                </div>
+                <div class="question">
+                    <div class="q-number">Q3.6</div>
+                    <div class="q-text">Bundling verification: How should we verify protected chapters aren't in client?</div>
+                    <div class="options">
+                        <div class="option">A) Automated CI check only</div>
+                        <div class="option">B) Manual review only</div>
+                        <div class="option">C) Both (automated + manual)</div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="q-number">Q3.7</div>
+                    <div class="q-text">Form submission UX: After user submits email, what should they see?</div>
+                    <div class="options">
+                        <div class="option">A) Inline state changes in form</div>
+                        <div class="option">B) Separate page with instructions</div>
+                        <div class="option">C) Your preference?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BATCH 2 -->
+        <div class="batch">
+            <div class="batch-title">🔄 Batch 2: Phase 4 (Renewal) — Return, Renew, Sign Out</div>
+            <div class="batch-meta">
+                <div class="meta-item">
+                    <div class="meta-label">When needed</div>
+                    <div class="meta-value">After Phase 3 (RA-T039–RA-T043)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Topics</div>
+                    <div class="meta-value">Session renewal, sign-out UX</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Time estimate</div>
+                    <div class="meta-value">~5 minutes</div>
+                </div>
+            </div>
+            <div class="questions">
+                <div class="question">
+                    <div class="q-number">Q4.1</div>
+                    <div class="q-text">Session renewal messaging: When a returning reader codes again, what should they see?</div>
+                    <div class="options">
+                        <div class="option">A) Session extends silently (no message)</div>
+                        <div class="option">B) "Welcome back! Access extended to DATE"</div>
+                        <div class="option">C) "Still active through DATE"</div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="q-number">Q4.2</div>
+                    <div class="q-text">Sign-out behavior: What happens when user signs out?</div>
+                    <div class="options">
+                        <div class="option">A) Clear cookie immediately, invalidate server session</div>
+                        <div class="option">B) Invalidate server session, let cookie persist</div>
+                        <div class="option">C) Both + confirmation modal</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BATCH 3 -->
+        <div class="batch">
+            <div class="batch-title">📧 Batch 3: Phase 5 (Newsletter) — Truthful Feedback</div>
+            <div class="batch-meta">
+                <div class="meta-item">
+                    <div class="meta-label">When needed</div>
+                    <div class="meta-value">After Phase 3 (RA-T044–RA-T046)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Topics</div>
+                    <div class="meta-value">Brevo, newsletter, page messaging</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Time estimate</div>
+                    <div class="meta-value">~10 minutes</div>
+                </div>
+            </div>
+            <div class="questions">
+                <div class="question">
+                    <div class="q-number">Q5.1</div>
+                    <div class="q-text">Newsletter location: Where should signup appear?</div>
+                    <div class="options">
+                        <div class="option">A) Separate form in WaitlistPage</div>
+                        <div class="option">B) Optional checkbox in reader form</div>
+                        <div class="option">C) Post-verification thank-you page</div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="q-number">Q5.2</div>
+                    <div class="q-text">Brevo integration: How should newsletter signup work?</div>
+                    <div class="options">
+                        <div class="option">A) API call from Netlify Function</div>
+                        <div class="option">B) Embedded Brevo client form</div>
+                        <div class="option">C) Brevo double opt-in workflow</div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="q-number">Q5.3</div>
+                    <div class="q-text">Thank-you page messaging: What should it say currently?</div>
+                    <div class="options">
+                        <div class="option">A) Generic: "Thank you for reaching out"</div>
+                        <div class="option">B) Specific: "Check your email for access"</div>
+                        <div class="option">C) Conditional based on user action</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BATCH 4 -->
+        <div class="batch">
+            <div class="batch-title">✨ Batch 4: Phase 7 (Polish) — Accessibility & Retention</div>
+            <div class="batch-meta">
+                <div class="meta-item">
+                    <div class="meta-label">When needed</div>
+                    <div class="meta-value">After Phases 3–5 (RA-T049–RA-T052)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Topics</div>
+                    <div class="meta-value">Accessibility level, cleanup frequency</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Time estimate</div>
+                    <div class="meta-value">~5 minutes</div>
+                </div>
+            </div>
+            <div class="questions">
+                <div class="question">
+                    <div class="q-number">Q7.1</div>
+                    <div class="q-text">Accessibility conformance: Target level?</div>
+                    <div class="options">
+                        <div class="option">A) WCAG 2.2 AA (minimum legal compliance)</div>
+                        <div class="option">B) WCAG 2.2 AAA (ideal, more work)</div>
+                        <div class="option">C) AA target with documented gaps (pragmatic MVP)</div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="q-number">Q7.2</div>
+                    <div class="q-text">Retention cleanup: How often should we delete inactive records?</div>
+                    <div class="options">
+                        <div class="option">A) Hourly (most responsive)</div>
+                        <div class="option">B) Daily (balanced)</div>
+                        <div class="option">C) Weekly (cheapest)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BATCH 5 -->
+        <div class="batch">
+            <div class="batch-title">🚀 Batch 5: Blockers — Mailgun Verification</div>
+            <div class="batch-meta">
+                <div class="meta-item">
+                    <div class="meta-label">When needed</div>
+                    <div class="meta-value">Before email testing (RA-T026)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Type</div>
+                    <div class="meta-value">Confirmation (may need 2 min to check)</div>
+                </div>
+            </div>
+            <div class="questions">
+                <div class="question">
+                    <div class="q-number">Q-X1</div>
+                    <div class="q-text">Mailgun domain verification: Is thisonetimeonacid.com verified?</div>
+                    <div class="options">
+                        <div class="option">A) Yes, DNS records confirmed in Mailgun</div>
+                        <div class="option">B) No, needs DNS setup first</div>
+                        <div class="option">C) Needs confirmation (checking now)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="timeline">
+            <h2 style="color: #667eea; margin-bottom: 1rem;">📅 Phase Unlock Timeline</h2>
+            <div class="timeline-item"><span class="status-locked">✅ Phase 2</span> Locked now. Start building foundation (RA-T022–T029)</div>
+            <div class="timeline-item"><strong>Batch 1 answers</strong> → <span class="status-pending">Phase 3 MVP unlocks</span>. Forms, functions, E2E tests. MVP ready ~1–2 weeks.</div>
+            <div class="timeline-item"><strong>Batch 2 answers</strong> → <span class="status-pending">Phase 4 Renewal unlocks</span>. Session management.</div>
+            <div class="timeline-item"><strong>Batch 3 answers</strong> → <span class="status-pending">Phase 5 Newsletter unlocks</span>. Brevo integration.</div>
+            <div class="timeline-item"><strong>Batch 4 answers</strong> → <span class="status-pending">Phase 7 Polish unlocks</span>. Accessibility review.</div>
+            <div class="timeline-item"><strong>Batch 5 confirmation</strong> → Email testing can proceed.</div>
+        </div>
+
+        <div class="total-time">
+            ⏱️ <strong>Total time to answer all batches: ~32 minutes</strong><br>
+            <span style="font-size: 0.9rem; font-weight: 400;">Can answer all at once or batched over time.</span>
+        </div>
+
+        <!-- CTA -->
+        <div class="footer">
+            <h2 style="color: #333; margin-bottom: 0.5rem;">📄 How to Respond</h2>
+            <p style="margin-bottom: 1rem;">
+                Full decision document with response templates is in the repository:
+            </p>
+            <p style="font-family: monospace; background: #f5f5f5; padding: 0.5rem; border-radius: 4px; margin-bottom: 1rem;">
+                .github/specs/005-reader-access/DECISION-REQUEST.md
+            </p>
+            <p style="margin-bottom: 1rem;">
+                Each batch has a response template. Copy the template for your batch, check your selections (A/B/C), and reply.
+            </p>
+            <p style="font-size: 0.9rem; color: #666;">
+                <strong>Need clarification on any option?</strong> Raise it in the GitHub PR or document. We're here to help.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

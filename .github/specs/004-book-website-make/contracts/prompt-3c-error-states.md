@@ -15,7 +15,7 @@
 | ---------- | --------- | -------- |
 | **Decision 3** | Code expiry start time — **Option A**: the 10-minute expiry runs from code generation | ✅ APPROVED (2026-11-11) |
 | **Decision 1** | Recovery-first race condition — **Option A**: recovery takes precedence (used for the session-conflict state) | ✅ APPROVED (2026-11-11) |
-| **Decision 5** | Manuscript publication readiness — **Option C**: not yet approved | ❌ Blocks execution |
+| **Decision 5** | Manuscript publication readiness — **Early Release**: Chapter 1 approved; other chapters pending approval but ready for e-reader development | ✅ APPROVED (2026-11-19) |
 
 See [research.md](../research.md) for the decision records.
 
@@ -59,13 +59,16 @@ Generate all error state designs and messaging for the reader access flow, with 
 
 ---
 
-## Execution Steps (After Manuscript Approval)
+## Execution Steps (Decision 5 Approved — 2026-11-19)
 
-1. Confirm this contract still matches the recorded decisions
+**Manuscript Status**: Chapter 1 approved & available; other chapters pending approval but ready for e-reader development
+
+1. Confirm this contract matches the recorded decisions (all 3 now approved)
 2. Generate error state designs for all 5 error scenarios
 3. Use the exact error messages above
 4. Design error state form styling (borders, text colour, icons)
 5. Document user actions for each error (retry, request new code, wait)
+6. Ensure error states account for Chapter 1 live + other chapters pending scenario
 
 ### Acceptance Criteria
 
