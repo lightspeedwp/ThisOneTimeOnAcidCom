@@ -43,11 +43,14 @@ Based on Spec 005 RA-T047–RA-T056
   - [x] Analytics persistence in Netlify Blobs
   - ✅ 15 contract tests passing
 
-- [ ] RA-T052 [P] Create `netlify/functions/reader-bookmarks.ts`
-  - [ ] Add bookmark functionality (save chapter/position)
-  - [ ] GET/POST `/api/reader/bookmarks` endpoints
-  - [ ] Bookmark persistence per session
-  - [ ] Delete bookmarks
+- [x] RA-T052 [P] Create `netlify/functions/reader-bookmarks.ts`
+  - [x] Add bookmark functionality (save chapter/position)
+  - [x] GET/POST/DELETE `/api/reader/bookmarks` endpoints
+  - [x] Bookmark persistence per session
+  - [x] Delete bookmarks
+  - ✅ 19 contract tests passing
+
+**Phase 6 Core Complete: 77 contract tests passing** (14+14+16+13+15+19)
 
 ## Testing (Verification & Coverage)
 
