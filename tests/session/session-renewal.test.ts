@@ -5,7 +5,7 @@
  * User Story 2: 30-Day Rolling Session Renewal
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { createSession, renewSession } from '../../netlify/lib/reader-access/session-service';
 import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
 
@@ -31,8 +31,18 @@ describe('Session Renewal - T082 (US2)', () => {
     timezone: 'UTC',
   };
 
+  // Renewals inside RENEWAL_COALESCE_WINDOW_MS (1s) are intentionally
+  // skipped, so tests that expect a change step the clock past that window.
+  // Only Date is faked; real timers keep async storage calls working.
+  const stepPastCoalesceWindow = () => vi.setSystemTime(Date.now() + 2000);
+
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.useFakeTimers({ toFake: ['Date'] });
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   describe('Basic renewal', () => {
@@ -48,8 +58,7 @@ describe('Session Renewal - T082 (US2)', () => {
     it('should update renewedAt timestamp on renewal', async () => {
       const created = await createSession(testEmail, testCode, fingerprint);
 
-      // Wait a bit to ensure time difference
-      await new Promise((resolve) => setTimeout(resolve, 10));
+      stepPastCoalesceWindow();
 
       const renewed = await renewSession(testEmail, created.deviceId);
 
@@ -74,6 +83,7 @@ describe('Session Renewal - T082 (US2)', () => {
 
     it('should change expiresAt timestamp from original', async () => {
       const created = await createSession(testEmail, testCode, fingerprint);
+      stepPastCoalesceWindow();
       const renewed = await renewSession(testEmail, created.deviceId);
 
       expect(renewed.expiresAt).not.toBe(created.expiresAt);
@@ -88,10 +98,10 @@ describe('Session Renewal - T082 (US2)', () => {
       const created = await createSession(testEmail, testCode, fingerprint);
 
       const renewed1 = await renewSession(testEmail, created.deviceId);
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for coalesce window
+      stepPastCoalesceWindow();
 
       const renewed2 = await renewSession(testEmail, created.deviceId);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      stepPastCoalesceWindow();
 
       const renewed3 = await renewSession(testEmail, created.deviceId);
 
@@ -104,7 +114,7 @@ describe('Session Renewal - T082 (US2)', () => {
       const originalSessionId = created.sessionId;
 
       const renewed1 = await renewSession(testEmail, created.deviceId);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      stepPastCoalesceWindow();
 
       const renewed2 = await renewSession(testEmail, created.deviceId);
 
@@ -116,7 +126,7 @@ describe('Session Renewal - T082 (US2)', () => {
       const created = await createSession(testEmail, testCode, fingerprint);
 
       const renewed1 = await renewSession(testEmail, created.deviceId);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      stepPastCoalesceWindow();
 
       const renewed2 = await renewSession(testEmail, created.deviceId);
 
@@ -145,7 +155,7 @@ describe('Session Renewal - T082 (US2)', () => {
 
   describe('Error cases', () => {
     it('should throw when renewing non-existent session', async () => {
-      expect(async () => {
+      await expect(async () => {
         await renewSession('nonexistent@example.com', 'nonexistent-device');
       }).rejects.toThrow();
     });
@@ -157,7 +167,7 @@ describe('Session Renewal - T082 (US2)', () => {
       const created = await createSession(testEmail, testCode, fingerprint);
       await terminateSession(testEmail, created.deviceId);
 
-      expect(async () => {
+      await expect(async () => {
         await renewSession(testEmail, created.deviceId);
       }).rejects.toThrow();
     });

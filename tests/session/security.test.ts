@@ -6,7 +6,21 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { constantTimeTokenCompare, isValidSessionToken } from '../../netlify/lib/reader-access/crypto';
+import { timingSafeEqual } from 'crypto';
+import {
+  constantTimeTokenCompare,
+  isValidSessionToken,
+  generateSessionToken,
+} from '../../netlify/lib/reader-access/crypto';
+
+// Wrap timingSafeEqual in a spy (keeping the real behaviour) so the tests can
+// prove comparisons go through Node's constant-time primitive. Wall-clock
+// nanosecond timings of a single comparison are dominated by JIT and GC noise
+// and cannot assert constant-time behaviour reliably.
+vi.mock('crypto', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('crypto')>();
+  return { ...actual, timingSafeEqual: vi.fn(actual.timingSafeEqual) };
+});
 import { checkRateLimit, getRateLimitStatus, resetRateLimit, RATE_LIMIT_PRESETS } from '../../netlify/lib/reader-access/rate-limiter';
 
 describe('Session Security - Constant-Time Comparison', () => {
@@ -28,68 +42,42 @@ describe('Session Security - Constant-Time Comparison', () => {
       expect(constantTimeTokenCompare(undefined, undefined)).toBe(false);
     });
 
-    it('should handle empty string tokens', () => {
-      expect(constantTimeTokenCompare('', '')).toBe(true);
+    it('should never match empty string tokens', () => {
+      // An empty token must never authenticate, even against an empty value
+      expect(constantTimeTokenCompare('', '')).toBe(false);
       expect(constantTimeTokenCompare('', 'token')).toBe(false);
       expect(constantTimeTokenCompare('token', '')).toBe(false);
     });
 
     it('should use constant-time comparison (no timing leaks)', () => {
-      // Measure comparison time for correct vs incorrect tokens
       const correctToken = 'a'.repeat(43); // base64url token length
-      const wrongShorter = 'b'.repeat(10);
-      const wrongLonger = 'c'.repeat(100);
       const wrongSameLength = 'x'.repeat(43);
+      const spy = vi.mocked(timingSafeEqual);
+      spy.mockClear();
 
-      // Run multiple times to get statistical average
-      const iterations = 1000;
-      const timings: Record<string, number[]> = {
-        correct: [],
-        wrongShorter: [],
-        wrongLonger: [],
-        wrongSameLength: [],
-      };
+      expect(constantTimeTokenCompare(correctToken, correctToken)).toBe(true);
+      expect(constantTimeTokenCompare(correctToken, wrongSameLength)).toBe(false);
 
-      for (let i = 0; i < iterations; i++) {
-        const start1 = process.hrtime.bigint();
-        constantTimeTokenCompare(correctToken, correctToken);
-        const time1 = Number(process.hrtime.bigint() - start1);
-        timings.correct.push(time1);
-
-        const start2 = process.hrtime.bigint();
-        constantTimeTokenCompare(correctToken, wrongShorter);
-        const time2 = Number(process.hrtime.bigint() - start2);
-        timings.wrongShorter.push(time2);
-
-        const start3 = process.hrtime.bigint();
-        constantTimeTokenCompare(correctToken, wrongLonger);
-        const time3 = Number(process.hrtime.bigint() - start3);
-        timings.wrongLonger.push(time3);
-
-        const start4 = process.hrtime.bigint();
-        constantTimeTokenCompare(correctToken, wrongSameLength);
-        const time4 = Number(process.hrtime.bigint() - start4);
-        timings.wrongSameLength.push(time4);
+      // Both matching and non-matching same-length tokens are compared by
+      // timingSafeEqual over the full buffers: no early exit on content
+      expect(spy).toHaveBeenCalledTimes(2);
+      for (const [a, b] of spy.mock.calls) {
+        expect((a as Buffer).length).toBe(43);
+        expect((b as Buffer).length).toBe(43);
       }
+    });
 
-      // Calculate averages
-      const avgCorrect = timings.correct.reduce((a, b) => a + b, 0) / iterations;
-      const avgWrongSameLength =
-        timings.wrongSameLength.reduce((a, b) => a + b, 0) / iterations;
-
-      // For same-length tokens, timing should be nearly identical (constant-time)
-      const timingRatio = Math.max(avgCorrect, avgWrongSameLength) /
-        Math.min(avgCorrect, avgWrongSameLength);
-
-      // Allow up to 1.5x variance for constant-time comparison
-      expect(timingRatio).toBeLessThan(1.5);
+    it('should reject length mismatches without throwing', () => {
+      expect(constantTimeTokenCompare('a'.repeat(43), 'b'.repeat(10))).toBe(false);
+      expect(constantTimeTokenCompare('a'.repeat(43), 'c'.repeat(100))).toBe(false);
     });
   });
 
   describe('isValidSessionToken', () => {
     it('should validate correct token format', () => {
-      const validToken = 'YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXoxMjM0NTY3ODk='; // 48 chars base64
-      expect(isValidSessionToken(validToken)).toBe(true);
+      // Real tokens are unpadded base64url of 32 random bytes (43 chars)
+      expect(isValidSessionToken(generateSessionToken())).toBe(true);
+      expect(isValidSessionToken('YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXoxMjM0NTY3ODk=')).toBe(false); // '=' padding is not base64url
     });
 
     it('should reject non-string tokens', () => {
@@ -127,8 +115,11 @@ describe('Session Security - Constant-Time Comparison', () => {
 
 describe('Session Security - Rate Limiting', () => {
   beforeEach(() => {
-    // Reset rate limit store before each test
-    vi.clearAllMocks();
+    // The limiter is in-process module state: clear every identifier these
+    // tests use so attempt counts don't leak from one test into the next
+    for (const email of ['test@example.com', 'user1@example.com', 'user2@example.com']) {
+      resetRateLimit(email, RATE_LIMIT_PRESETS.SESSION_CREATION.keyPrefix);
+    }
   });
 
   describe('checkRateLimit', () => {
@@ -269,33 +260,16 @@ describe('Session Security - Rate Limiting', () => {
 
 describe('Session Security - Timing Attack Resistance', () => {
   it('should resist timing attacks on session validation', () => {
-    // Test that validation time is consistent regardless of token similarity
-    // This is implementation detail, but important for security
+    // Every same-length comparison, whatever the token length or content,
+    // must reach timingSafeEqual rather than short-circuiting in JavaScript
+    const spy = vi.mocked(timingSafeEqual);
+    spy.mockClear();
 
-    // Create many tokens and measure validation time variance
-    const tokens: string[] = [];
-    for (let i = 0; i < 20; i++) {
-      tokens.push('a'.repeat(40 + i)); // Varying lengths
+    const lengths = Array.from({ length: 20 }, (_, i) => 40 + i);
+    for (const length of lengths) {
+      expect(constantTimeTokenCompare('a'.repeat(length), 'x'.repeat(length))).toBe(false);
     }
 
-    const timings: number[] = [];
-
-    tokens.forEach(token => {
-      const start = process.hrtime.bigint();
-      // Try to compare with another token of same length
-      const reference = 'x'.repeat(token.length);
-      constantTimeTokenCompare(token, reference);
-      const duration = Number(process.hrtime.bigint() - start);
-      timings.push(duration);
-    });
-
-    // Check variance in timing (should be low for constant-time)
-    const avg = timings.reduce((a, b) => a + b, 0) / timings.length;
-    const variance = timings.reduce((sum, t) => sum + Math.pow(t - avg, 2), 0) / timings.length;
-    const stdDev = Math.sqrt(variance);
-    const coefficientOfVariation = stdDev / avg;
-
-    // For constant-time comparison, CV should be low (<0.5)
-    expect(coefficientOfVariation).toBeLessThan(0.7);
+    expect(spy).toHaveBeenCalledTimes(lengths.length);
   });
 });

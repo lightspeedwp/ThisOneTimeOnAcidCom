@@ -117,7 +117,7 @@ describe('Device Limit Enforcement - T099-T102 (US4)', () => {
       }
 
       // Next attempt should fail
-      expect(async () => {
+      await expect(async () => {
         await createSession(testEmail, testCode, devices[MAX_CONCURRENT_DEVICES]);
       }).rejects.toThrow();
     });
