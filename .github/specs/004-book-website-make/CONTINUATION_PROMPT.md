@@ -52,17 +52,17 @@
 **TODO: Ash to provide:**
 
 ### Fonts Currently Used
-```
+```text
 [Ash: What font families are on the live site? Please list actual fonts in use]
 ```
 
 ### Color Palette Currently Used
-```
+```text
 [Ash: What is the current color palette? List the hex values or color names]
 ```
 
 ### Menu Structure
-```
+```text
 [Ash: How is the navigation structured on the live site? What are the menu items and hierarchy?]
 ```
 
@@ -93,14 +93,14 @@ Blend:
 **TODO: Ash to specify preferred pattern for next session:**
 
 ### Option A: CCR Session Format (Current)
-```
+```text
 Branch name: ccr-01b4e649-64vj1f
 Pattern: ccr-{uuid}
 Benefit: Session-specific, easy tracking
 ```
 
 ### Option B: Standard Feature Branch Pattern
-```
+```text
 Branch name: feat/spec-004-phase-2-implementation
 Pattern: {type}/{scope}-{title}
 Benefit: Human-readable, follows repository conventions
