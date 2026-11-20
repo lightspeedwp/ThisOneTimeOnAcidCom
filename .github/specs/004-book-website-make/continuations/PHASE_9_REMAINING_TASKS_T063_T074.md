@@ -1,395 +1,259 @@
-# Phase 9 Convergence: Remaining Tasks T063–T074
+# Phase 9 Convergence Continuation — Tasks T063–T074
 
-**Branch**: `docs/spec-004-phase9-remaining`  
-**Completed**: PR #630 (T060–T062)  
-**Document**: Phase 9 original task plan (12 tasks T063–T074)  
-**Status**: ✅ Phase 9 Convergence Complete (Merged PR #637)  
-
----
-
-## Context: What T060–T062 Completed
-
-✅ **T060**: Decision 7 route enforcement wording corrected (meta tags, robots.txt, sitemap exclusion)  
-✅ **T061**: Execution authorization gates clarified (gated by 5 spec.md status conditions)  
-✅ **T062**: All 7 blocking decisions documented; Spec 005 handover recorded  
-
-**Key state change**: Reader-access work (Prompts 3A–3C) now owned by Spec 005; Spec 004 hands over its stage IDs to the master contract.
+**Session**: Phase 9 Convergence (Remaining)  
+**Branch**: `docs/spec-004-phase9-remaining` (create from `main`)  
+**PR Strategy**: Create single PR after all tasks complete; mark as draft if awaiting review  
+**Status**: Ready to execute T063–T074 (12 remaining tasks)  
+**Completed**: T060–T062 (PR #630 must be merged to main before creating this branch)  
+**Prerequisite**: Verify PR #630 is merged; defer branch creation if not yet landed  
+**Date**: 2026-11-20
 
 ---
 
-## Remaining Tasks: T063–T074
+## Context: What Was Completed (T060–T062)
 
-### T063: Raise Prompt 2A Preview Completeness to ≥95%
+✅ **Phase 9 Convergence Work** (3 tasks, committed to `docs/spec-004-linear-sync-handoff`):
 
-**Purpose**: Validate that Prompt 2A (Design System Baseline) meets minimum viable completeness threshold.
+1. **T060**: Decision 7 route enforcement wording corrected across 5 files
+   - Changed from: "Meta tags + Robots.txt + Sitemap"
+   - Changed to: "Meta tags + Sitemap exclusion; no robots.txt Disallow"
 
-**Current state** (from implementation-readiness-checklist.md):
-- Prompt 2A: ~89% completeness
-- Target: ≥95%
-- Gap: Error handling and CSS variable edge cases
+2. **T061**: Execution-readiness claims reworded across 3 export files
+   - Clarified: "Specification-ready (no blocking decisions); execution gated by spec.md Status gates"
+   - Documented 5 open status gates
 
-**What to do**:
-1. Read `.github/specs/004-book-website-make/contracts/prompt-2a-design-baseline.md`
-2. Identify missing sections (error scenarios, unhandled states, missing themes)
-3. Add placeholder or complete sections to reach 95%
-4. Re-score the validation checklist in `exports/implementation-readiness-checklist.md`
+3. **T062**: All 7 blocking decisions recorded; Spec 005 handover documented
+   - Decision resolutions: 1–7 all resolved (Decision 5 revised 2026-11-13)
+   - Prompts 3A–3C transferred to Spec 005 ownership
+   - Spec 004 scope: Prompts 1, 2A, 2B only
 
-**Deliverable**: Prompt 2A ≥95% complete; checklist updated with new score and date  
-**Effort**: 30 min  
-**Blocking**: No other tasks  
-
----
-
-### T064: Create Design Export Artifacts (or Record Descoping)
-
-**Purpose**: Decide whether Spec 004 owns design export artifacts or whether they belong to Spec 005.
-
-**Decision needed**:
-> **Should Spec 004 create design export outputs (CSS/JSON/Figma tokens)?**
-> - Option A: Yes — create `exports/design-tokens.json` and `exports/design-tokens.css` as reference exports from Prompt 2A
-> - Option B: No — descope; Spec 005 owns design exports; record that decision here and move on
-> - Option C: Create placeholder/stub only; full exports come from Spec 005
-
-**What to do** (varies by decision):
-
-**If Option A**: Create two files:
-- `exports/design-tokens.json` — JSON token format matching Prompt 2A approved baseline
-- `exports/design-tokens.css` — CSS variables version of same tokens
-
-**If Option B or C**: Create a note in `exports/DESCOPING_RATIONALE.md` explaining:
-- Why design exports don't stay in Spec 004
-- Where they will be generated instead
-- Link to Spec 005 ownership
-
-**Deliverable**: Either design token files OR descoping rationale; dated and signed  
-**Effort**: 1 hour (Option A) or 15 min (Option B/C)  
-**Blocking**: T065  
+**PR #630**: Phase 9 Convergence (T060–T062)  
+Link: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/630
 
 ---
 
-### T065: Create Readiness Exports (or Descope)
+## Remaining Tasks: T063–T074 (12 tasks)
 
-**Purpose**: Decide whether Spec 004 or Spec 005 owns implementation-readiness outputs.
+### Task Breakdown by Category
 
-**Decision needed**:
-> **What readiness artifacts stay in Spec 004?**
-> - Option A: Keep all (design readiness + reader access readiness) in Spec 004; create unified `READINESS_MANIFEST.md`
-> - Option B: Move reader-access readiness to Spec 005; keep only design readiness in Spec 004
-> - Option C: Create a "readiness handoff" document explaining what stays/goes where
+#### File Creation & Export Generation (T063–T065)
 
-**What to do** (varies by decision):
+**T063**: Raise Prompt 2A preview completeness to 95%+ and re-score validation
+- **Files to update/create**:
+  - `checklists/prompt-preview-validation.md` — Re-score Prompt 2A from current to ≥95%
+  - `contracts/prompt-2a-design-baseline.md` — Verify completeness (should be near 100%)
+  - Create or link approved SC-003 scope change record
+- **Acceptance**: Prompt 2A preview completeness ≥95%, re-scored in checklist
+- **Notes**: This is about documentation completeness, not code. Check what's missing from the Prompt 2A specification and ensure it's documented.
 
-**If Option A**:
-- Create `exports/READINESS_MANIFEST.md` listing all readiness outputs
-- Keep existing checklists; add reference to Spec 005 reader readiness
+**T064**: Create design export artifacts (or record descoping)
+- **Files to create or link**:
+  - `exports/design-baseline-validation.md` — Design baseline acceptance criteria validation
+  - `exports/navigation-specification.md` — Navigation component spec (from Prompt 1)
+  - `exports/design-baseline-acceptance-report.md` — Sign-off report
+- **Acceptance**: Either create all 3 exports documenting approved design baseline, or record approved descoping decision with rationale
+- **Notes**: Check if these exports should synthesize data from existing contract files or if they should reference contracts as source of truth
 
-**If Option B**:
-- Identify which checklists belong to reader access; mark for Spec 005 migration
-- Create migration document explaining the split
-- Keep design-only checklists in Spec 004
+**T065**: Create implementation readiness exports (or record descoping)
+- **Files to create or link**:
+  - `exports/decisions-selected.md` — All 7 blocking decisions in decision-register format
+  - `exports/implementation-readiness-checklist.md` — Checklist confirming all prerequisites met
+  - `exports/preflight-analysis-final.md` — Final preflight report (gate 3)
+  - `exports/workflow-completion-report.md` — Spec completion summary
+- **Acceptance**: Either create all 4 exports documenting readiness state, or record approved descoping with rationale
+- **Notes**: These may be synthesized from existing checklists and exports; check for duplication
 
-**If Option C**:
-- Create `exports/READINESS_HANDOFF.md` explaining:
-  - What's ready now (design, Prompts 1/2A/2B)
-  - What moves to Spec 005 (reader access readiness)
-  - Handoff timeline
+#### Task Structuring & Closure (T066–T067)
 
-**Deliverable**: Readiness manifest/handoff/split document with clear ownership  
-**Effort**: 1 hour  
-**Blocking**: T066, T069  
+**T066**: Close Prompt 3A–3C tasks and resolved decision-clarification tasks
+- **What to do**:
+  - In `tasks.md`: identify reader-access tasks by Phase 3 section heading (includes T014–T016) and decision-clarification tasks (Phase 4 decision resolution: lines 93–106)
+  - Mark only those as [x] or close; leave all [BLOCKED] tasks open until their decisions are recorded
+  - Add handover notes explaining transfer to Spec 005
+  - Link to Spec 005 spec.md where ownership continues
+- **Files to update**: `tasks.md`
+- **Acceptance**: All reader-access and decision-resolution tasks marked with handover notes; [BLOCKED] tasks remain open
+- **Notes**: This is about documenting why these tasks are ending; execution continues in Spec 005
 
----
+**T067**: Disambiguate duplicate T014–T038 task sets and repoint dependencies
+- **What to do**:
+  - Identify each duplicate ID and the distinct task it refers to (using list and line location, not ID range)
+  - Assign unique IDs to distinct tasks; do not merge tasks with different descriptions
+  - Repoint each Phase 8 dependency to the task it intends
+- **Files to update**: `tasks.md`, any files cross-referencing tasks
+- **Acceptance**: Identify each duplicate ID and the distinct task it refers to (by line location); assign unique IDs without merging different descriptions; repoint each Phase 8 dependency to its intended task
+- **Notes**: Identify each duplicate ID and the distinct task it refers to (by line location); assign unique IDs without merging different descriptions; repoint each Phase 8 dependency to its intended task
 
-### T066: Close Prompt 3A–3C Tasks with Handover Notes to Spec 005
+#### Status & Acceptance Gates (T068–T069)
 
-**Purpose**: Mark reader-access prompt tasks as "moved to Spec 005" with handover notes.
+**T068**: Mark Phase 8 "zero unresolved validation gaps" acceptance item unmet
+- **What to do**:
+  - Find Phase 8 completion checklist/acceptance criteria
+  - Locate "zero unresolved validation gaps" item
+  - Mark as ❌ unmet until T059 completes, per the Phase 8 acceptance in `tasks.md`
+- **Files to update**: `tasks.md` or `checklists/` file holding Phase 8 acceptance
+- **Acceptance**: Phase 8 "zero gaps" item marked unmet with condition that it remains unmet until T059 completes
+- **Notes**: This aligns the gate condition with the Phase 8 acceptance criteria in tasks.md (not dependent on T067 completion alone)
 
-**Current state**:
-- T015 (Prompt 3A execution) marked BLOCKED in tasks.md
-- T025, T026 (Prompts 3B/3C) marked BLOCKED
-- These tasks are now Spec 005 responsibility
+**T069**: Update spec.md and plan.md with resolved, handed-over state
+- **Files to update**:
+  - `spec.md` — Update Assumptions, Deliverables, Next Steps sections to reflect Spec 004 → Spec 005 handover
+  - `plan.md` — Update Summary and Technical Context with Phase 9 resolution state
+- **What to include**:
+  - Spec 004 scope is now Prompts 1, 2A, 2B only
+  - Prompts 3A–3C owned by Spec 005
+  - All 7 blocking decisions resolved (link to LINEAR_SYNC_HANDOFF.md for details)
+  - Execution gated by 5 status conditions in spec.md Status section
+- **Acceptance**: spec.md and plan.md reflect final state (handed-over, reduced scope, all decisions resolved)
+- **Notes**: This is the "as-built" documentation update
 
-**What to do**:
-1. Update `tasks.md`:
-   - Change T014–016 status from BLOCKED to MOVED_TO_SPEC_005
-   - Change T025–027 status from BLOCKED to MOVED_TO_SPEC_005
-   - Add note: "See Spec 005 (reader-access) for execution and completion"
+#### Content & Reference Updates (T070–T072)
 
-2. Create `exports/SPEC_004_TO_005_HANDOVER.md` with:
-   - Which tasks moved (T014–016, T025–027)
-   - Which contracts stay in Spec 004 (1, 2A, 2B for reference)
-   - Which contracts move to Spec 005 (3A, 3B, 3C full ownership)
-   - Timeline for Spec 005 completion
+**T070**: Replace `content/book/0N` source paths with `references/0N-*.md` paths
+- **Files to update** (search and replace across):
+  - `spec.md`
+  - `plan.md`
+  - `data-model.md`
+  - `quickstart.md`
+  - `source-file-inventory.md`
+  - `version-reconciliation.md`
+  - `checklists/` files
+- **Replace pattern**:
+  - From: `content/book/03-author-decisions-launch-scope.md`
+  - To: `.github/specs/004-book-website-make/references/03-author-decisions-launch-scope.md`
+- **Acceptance**: All references to `content/book/0N` updated to `references/0N` paths
+- **Notes**: These are repository consolidation changes; `content/book/` folder is legacy
 
-**Deliverable**: Updated tasks.md + handover document  
-**Effort**: 30 min  
-**Blocking**: T067, T069  
+**T071**: Replace non-baseline colours or mark superseded
+- **Files to check/update**:
+  - `data-model.md` — Check for #1a1a1a, #d4a574, #ff6b6b, #8b0000
+  - `exports/GATE_2_READINESS_REPORT.md` — Check colour references
+  - `contracts/prompt-3a-reader-access.md` — Reader access colour guide
+  - `contracts/prompt-3c-error-states.md` — Error state colour guide
+- **Action**: Either replace with approved 9-color palette, or add note "Superseded by [approved palette reference]"
+- **Acceptance**: No non-baseline colours remain without supersession note
+- **Notes**: The approved baseline palette is documented in `plan.md` design section
 
----
+**T072**: Relabel Decision 2 Option A as "session refresh" with 30-day expiry
+- **Files to update**:
+  - `contracts/prompt-3b-execution-guide.md` — Relabel recovery option
+  - `checklists/blocking-decisions-validation.md` — Update decision 2 option description
+- **Change from**: "30-day device lifecycle with recovery session refresh"
+- **Change to**: "Session refresh with absolute 30-day expiry (rolling refresh cannot extend beyond 30 days from initial verification)"
+- **Acceptance**: Decision 2 terminology consistent across both files
+- **Notes**: This clarifies that recovery refresh doesn't extend the absolute expiry limit
 
-### T067: Disambiguate Duplicate T014–T038 Task Sets
+#### Task Verification & Cleanup (T073–T074)
 
-**Purpose**: Identify if there are duplicate/overlapping tasks and consolidate.
+**T073**: Restate or close T045–T047 against merged PR #589 state
+- **What to do**:
+  - Find T045, T046, T047 entries in `tasks.md`
+  - Check if they're still relevant after PR #589 decisions
+  - Either restate them with updated context, or close them with resolution note
+- **Files to update**: `tasks.md`
+- **Acceptance**: T045–T047 either updated with new context or closed with rationale
+- **Notes**: These tasks were created pre-PR #589; decisions may have resolved them
 
-**Question to clarify**:
-> **Are there duplicate task definitions in tasks.md that should be consolidated?**
-
-**What to do**:
-1. Read through all of tasks.md tasks T014–T038
-2. Identify any duplicates or near-duplicates
-3. For each duplicate pair:
-   - Decide: Keep one and archive the other, or merge both into one clearer task
-   - Document the decision in `exports/TASK_CONSOLIDATION_LOG.md`
-
-4. Update task numbering if needed (or accept the gaps)
-
-**Deliverable**: Consolidated task list in tasks.md + consolidation log  
-**Effort**: 1 hour  
-**Blocking**: None (can run parallel)  
-
----
-
-### T068: Mark Phase 8 "Zero Gaps" Acceptance Item Unmet
-
-**Purpose**: Formally acknowledge that Phase 8 completion criteria for "zero gaps" was not met.
-
-**Context**: Phase 8 had an acceptance item "zero gaps in specification" that should be marked as not fully satisfied (reader-access work moved to Spec 005).
-
-**What to do**:
-1. Find Phase 8 completion checklist (likely in `exports/` or referenced in PROMPT_EXECUTION_PLAN.md)
-2. Locate the "zero gaps" acceptance criterion
-3. Mark it as:
-   - ⚠️ PARTIALLY_MET — Design baseline has zero gaps; reader access moved to Spec 005 (not a gap, a scope change)
-4. Document reason in `exports/PHASE_HISTORY.md`:
-   - What was the criterion
-   - Why it's not fully met
-   - How the scope change explains it
-
-**Deliverable**: Updated Phase 8 checklist + phase history document  
-**Effort**: 20 min  
-**Blocking**: None  
-
----
-
-### T069: Update spec.md and plan.md with Spec 004 → Spec 005 Handover State
-
-**Purpose**: Formally update the two main specification documents to reflect the reader-access handover.
-
-**Current gaps**:
-- spec.md mentions reader access but now it's Spec 005 responsibility
-- plan.md references Prompts 3A–3C but doesn't clarify they're no longer executed here
-
-**What to do**:
-1. **Update spec.md**:
-   - Find "User Story 2 - Reader Access" section
-   - Add note: `⚠️ Moved to Spec 005. Reader access specification and execution now owned by [Spec 005](../005-reader-access/spec.md). Stage IDs 3A–3C remain here for reference only.`
-   - Update Status field to clarify handover
-
-2. **Update plan.md**:
-   - Find "Figma Make Integration" section
-   - Add: `Prompts 3A–3C execution moved to Spec 005; this spec owns design baseline (Prompts 1–2B) only`
-   - Update project structure diagram to show 3A–3C removed
-
-3. **Add handover table** to both:
-
-| Item | Owner (Spec 004) | Owner (Spec 005) | Note |
-| --- | --- | --- | --- |
-| Prompt 1 (Navigation) | ✅ | — | Design baseline |
-| Prompt 2A (Design System) | ✅ | — | Design baseline |
-| Prompt 2B (Navigation Design) | ✅ | — | Design baseline |
-| Prompt 3A (Reader Copy) | — | ✅ | Moved 2026-11-13 |
-| Prompt 3B (Recovery) | — | ✅ | Moved 2026-11-13 |
-| Prompt 3C (Error States) | — | ✅ | Moved 2026-11-13 |
-
-**Deliverable**: Updated spec.md and plan.md with handover clarity + ownership table  
-**Effort**: 1 hour  
-**Blocking**: T070, T071, T072  
+**T074**: Justify `staged/` directory in `plan.md` or archive it
+- **What to do**:
+  - Either: Add documentation to `plan.md` explaining why `staged/` subdirectory exists and what belongs there
+  - Or: Move `staged/` contents to main spec directories and remove `staged/` folder
+- **Files**: `plan.md` (add justification) OR archive `staged/` folder
+- **Acceptance**: Either `staged/` is documented and justified in `plan.md`, OR it's removed and contents migrated
+- **Notes**: The `staged/` folder contains prompts that are "ready but not yet approved for execution"; either keep it with clear governance, or flatten the structure
 
 ---
 
-### T070: Replace content/book/0N Paths with references/0N Paths
+## Execution Strategy
 
-**Purpose**: Update all references from old `content/book/` file locations to new `references/` locations.
+### Branch & PR Workflow
 
-**Context**: Spec 004 moved source documents from `content/book/` to `.github/specs/004-book-website-make/references/`.
+1. **Create feature branch** from `main`:
+   ```bash
+   git checkout -b docs/spec-004-phase9-remaining main
+   ```
 
-**What to do**:
-1. Search all files in `.github/specs/004-book-website-make/` for `content/book/`
-2. For each occurrence, replace with `references/`
-   - `content/book/01-book-website-specification.md` → `references/01-book-website-specification.md`
-   - `content/book/02-companion-session-plan.md` → `references/02-companion-session-plan.md`
-   - etc.
+2. **Execute tasks T063–T074** in order (some can be parallel):
+   - **Sequential dependencies**: T066 → T067 → T068 (task structure cleanup)
+   - **Parallel-safe**: T063, T064, T065, T069, T070, T071, T072, T073, T074
 
-3. Verify no broken links remain
-4. Document the migration in `exports/PATH_MIGRATION_LOG.md`:
-   - Files moved
-   - Date of migration
-   - Verification that all references updated
+3. **Commit strategy**:
+   - One commit per task (or group of closely-related tasks)
+   - Use commit message format: `fix(spec-004): T063 — Raise Prompt 2A preview completeness to 95%+`
+   - Include task ID in commit message for traceability
 
-**Deliverable**: All paths updated + migration log  
-**Effort**: 30 min  
-**Blocking**: None  
+4. **Testing before commit**:
+   - Validate branch name: `npm run validate:branch-name`
+   - Run build check: `npm run build` (if relevant changes made)
+   - Spot-check updated files for broken links or inconsistencies
 
----
+5. **PR Creation** (after all tasks complete):
+   ```bash
+   git push -u origin docs/spec-004-phase9-remaining
+   gh pr create --draft --title "refactor(spec-004): Phase 9 Convergence (T063–T074) — file exports, task closure, and state finalization"
+   ```
 
-### T071: Replace Non-Baseline Colors or Mark Superseded
+### Key Files to Reference
 
-**Purpose**: Audit color usage and ensure only approved 9-color baseline is used (or candidates explicitly marked as unapproved).
+- **spec.md** — Current specification state; update Assumptions, Deliverables, Next Steps
+- **plan.md** — Technical context; update Summary and Technical Context sections
+- **tasks.md** — Task list; mark T063–T074 as completed; close T012–T038 with handover notes
+- **LINEAR_SYNC_HANDOFF.md** — Decisions documentation for reference
+- **references/** — Source files for content migration (T070)
+- **checklists/** — Quality validation; update as specs change
+- **contracts/** — Prompt specifications; verify completeness (T063), update colors (T071), relabel decisions (T072)
+- **exports/** — Export files to create or verify (T064, T065)
 
-**Approved baseline**:
-- #0B0B10, #12121A, #171722 (darkest)
-- #F6F2EB, #CFC7BB, #9C9488 (warm neutrals)
-- #FF3AAE, #F4FF3C, #8A63FF (accents)
+### Success Criteria
 
-**Candidates** (unapproved, must be marked):
-- R3, T1, RT2, C1 (from design brief)
-
-**What to do**:
-1. Search all spec files and contracts for color hex values
-2. For each color found:
-   - If in baseline: ✅ keep as-is
-   - If not in baseline and not a candidate: ❓ REVIEW — why is this here?
-   - If a candidate (R3/T1/RT2/C1): Mark as "UNAPPROVED — Candidate R3" (etc.)
-
-3. Create `exports/COLOR_AUDIT.md`:
-   - All colors found with locations
-   - Which are baseline, which are candidates, which are "to review"
-   - Decision on each non-baseline color
-
-**Deliverable**: Color audit + fixes (replace or mark)  
-**Effort**: 1 hour  
-**Blocking**: None  
+✅ **All 12 remaining tasks (T063–T074) completed and committed**  
+✅ **spec.md and plan.md reflect final Spec 004 state**  
+✅ **All 7 blocking decisions documented in exports**  
+✅ **Task duplication resolved (T067)**  
+✅ **Phase 8 acceptance gates updated (T068)**  
+✅ **No broken cross-references or stale paths**  
+✅ **Build succeeds after all changes**  
+✅ **PR created and ready for review**
 
 ---
 
-### T072: Relabel Decision 2 Option A as "Session Refresh with Absolute 30-Day Expiry"
+## Notes for Next Session
 
-**Purpose**: Clarify Decision 2 (recovery lifetime) selected wording.
+1. **T063–T065 may require judgment calls**: If export files would duplicate existing contract documentation, link to contracts instead of creating new files. Document this decision.
 
-**Current state**: Decision 2 (Option A selected) says "Recovery codes valid for X" but doesn't clarify the "absolute expiry" vs "sliding window" distinction.
+2. **T067 (task duplication) is critical**: This may reveal systemic issues with how tasks are numbered. Take time to understand the root cause before fixing.
 
-**What to do**:
-1. Find Decision 2 documentation in `research.md`
-2. Update Option A label from something vague to:
-   - `Option A: Session refresh with absolute 30-day expiry (no extension; fresh code required after 30 days)`
+3. **T069 is the "publication update"**: This is where Spec 004 is closed out as specification-complete-but-not-authorised-for-execution. Make sure the language is clear and final.
 
-3. Update any references to this decision in:
-   - spec.md
-   - plan.md
-   - contracts/prompt-3b-recovery-flows.md (if still referenced for context)
+4. **T070 is mechanical but comprehensive**: Use find-and-replace carefully. Verify each replacement makes sense in context.
 
-4. Verify no ambiguity remains
-
-**Deliverable**: Decision 2 wording clarified and updated everywhere  
-**Effort**: 20 min  
-**Blocking**: None  
+5. **After T074, Spec 004 should be in final state** ready for release (though not yet executable pending status gates). Consider whether a final "spec.md status = SPECIFICATION_FINAL" state needs to be declared.
 
 ---
 
-### T073: Restate or Close T045–T047 Against PR #589 Decisions
+## Commands Quick Reference
 
-**Purpose**: Review tasks T045–T047 and confirm they're addressed by PR #589 decisions.
+```bash
+# Start the branch
+git checkout -b docs/spec-004-phase9-remaining main
 
-**Context**: PR #589 made decisions (B1–B5) that may have resolved or invalidated earlier tasks T045–T047.
+# Validate branch name
+npm run validate:branch-name
 
-**What to do**:
-1. Find T045, T046, T047 in `tasks.md`
-2. For each task:
-   - Read its requirement
-   - Check if PR #589 decisions (B1–B5 in LINEAR_SYNC_HANDOFF.md) addressed it
-   - If yes: Mark task as ✅ CLOSED (satisfied by PR #589)
-   - If no: Keep task; ensure it's clear what still needs doing
-   - If changed: Restate the task with new wording
+# Build check
+npm run build
 
-3. Document the mapping in `exports/TASK_STATUS_BY_PR_589.md`:
-   - T045: Addressed by [Decision B#]
-   - T046: Addressed by [Decision B#]
-   - T047: Addressed by [Decision B#]
+# Commit a task
+git add .github/specs/004-book-website-make/
+git commit -m "fix(spec-004): T063 — Raise Prompt 2A preview completeness to 95%+"
 
-**Deliverable**: Tasks restated/closed + status document  
-**Effort**: 30 min  
-**Blocking**: None  
+# Push branch
+git push -u origin docs/spec-004-phase9-remaining
 
----
-
-### T074: Justify staged/ Directory in plan.md or Archive It
-
-**Purpose**: Clarify the purpose of the `staged/` subdirectory or archive/remove it if no longer needed.
-
-**Current state**: `.github/specs/004-book-website-make/staged/` directory exists but its purpose may be unclear.
-
-**Decision needed**:
-> **What is the `staged/` directory for, and should it stay?**
-> - Option A: Keep it; document its purpose (interim/draft files, staged Figma Make outputs?)
-> - Option B: Archive it (move to `archived/` or delete if empty)
-> - Option C: Repurpose it (rename to something clearer like `exports-draft/` or `figma-make-outputs/`)
-
-**What to do**:
-
-**If Option A (Keep)**:
-1. Document in `plan.md` under "Project Structure":
-   - What goes in `staged/`
-   - Lifecycle (interim → finalized → exported)
-   - Current contents
-
-**If Option B (Archive)**:
-1. Move `staged/` to `archived/staged-backup/` OR delete if empty
-2. Document migration in `exports/DIRECTORY_MIGRATION.md`
-
-**If Option C (Repurpose)**:
-1. Rename `staged/` to new name
-2. Update all references in plan.md, spec.md, etc.
-3. Document migration
-
-**Deliverable**: Updated plan.md with `staged/` justification/migration documented  
-**Effort**: 20 min  
-**Blocking**: None  
+# Create PR (after all tasks)
+gh pr create --draft --title "refactor(spec-004): Phase 9 Convergence (T063–T074) — file exports, task closure, and state finalization"
+```
 
 ---
 
-## Execution Order & Dependencies
-
-**Priority 1 (No dependencies)**:
-- T063 (Prompt 2A completeness)
-- T067 (Disambiguate duplicates)
-- T068 (Mark Phase 8 unmet)
-- T070 (Path migration)
-- T071 (Color audit)
-- T072 (Decision 2 wording)
-- T073 (Restate T045–T047)
-- T074 (Staged directory)
-
-**Priority 2 (Depends on decisions)**:
-- T064 (Design exports) — wait for decision
-- T065 (Readiness exports) — wait for decision
-- T066 (3A–3C handover) — depends on T064–T065 decisions
-- T069 (spec.md/plan.md update) — depends on T064–T065, T070–T072
-
-**Suggested sequence**:
-1. Run all Priority 1 tasks in parallel (8 tasks, ~4–5 hours total)
-2. Make decisions on T064–T065 (30 min discussion)
-3. Run Priority 2 tasks (2–3 hours total)
-4. Verify spec.md/plan.md consistency
-
-**Total effort**: 7–9 hours (including user decision time)
-
----
-
-## Success Criteria
-
-✅ **Phase 9 complete when**:
-1. All 12 tasks (T063–T074) marked DONE
-2. No "unresolved" or "TODO" markers remain in spec.md, plan.md, tasks.md
-3. All handover documents created (T066, T069)
-4. No broken internal links
-5. All decisions relabeled clearly (T072)
-6. Spec 005 ownership unambiguous
-
----
-
-## Notes
-
-- **Learning mode principle**: Key decisions (T064–T065, T074) are flagged for user input; I won't assume defaults.
-- **No code, commits, or deployments**: This phase is documentation-only, like all previous Spec 004 work.
-- **Handover focus**: Phase 9 emphasizes clarity for the Spec 005 reader-access team and future reference.
-
+**Next Chat Prompt**: See PHASE_9_CONTINUATION_PROMPT.txt for quick-start version.
