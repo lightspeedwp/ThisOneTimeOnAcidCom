@@ -28,17 +28,17 @@ export function ThankYouPage() {
         React.createElement(
           "div",
           { className: "hero__content" },
-          React.createElement("span", { className: "eyebrow text-neon-yellow" }, "Success"),
-          React.createElement("h1", { className: "heading-hero text-neon-pink" }, "You’re in."),
+          React.createElement("span", { className: "eyebrow text-neon-yellow" }, "Done"),
+          React.createElement("h1", { className: "heading-hero text-neon-pink" }, "Thank you."),
           React.createElement(
             "p",
             { className: "text-lead" },
-            "Thanks for joining the early readers. Your access to the rough draft starts here."
+            "Your submission has been received. To access the draft, complete the email verification on the chapter page."
           ),
           React.createElement(
             "p",
             { className: "text-body space-bottom-lg" },
-            "You’ll also receive future updates on chapter drops, launch news, events, and eventual pre-orders."
+            "Newsletter subscription is separate from reader access and requires explicit consent through double opt-in."
           ),
           
           React.createElement(

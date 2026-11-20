@@ -34,6 +34,46 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Reader-access API routes. Functions must be served before the SPA fallback.
+# Phase 6 (Content Delivery) endpoints must be routed explicitly before the wildcard.
+# Pattern: /api/reader/* routes → netlify/functions/
+
+# Phase 6: Chapter listing
+[[redirects]]
+  from = "/api/reader/chapters"
+  to = "/.netlify/functions/reader-chapters-list"
+  status = 200
+
+# Phase 6: Chapter content delivery
+[[redirects]]
+  from = "/api/reader/chapters/*"
+  to = "/.netlify/functions/reader-chapter-content/:splat"
+  status = 200
+
+# Phase 6: Reading progress
+[[redirects]]
+  from = "/api/reader/progress"
+  to = "/.netlify/functions/reader-progress"
+  status = 200
+
+# Phase 6: Analytics
+[[redirects]]
+  from = "/api/reader/analytics"
+  to = "/.netlify/functions/reader-analytics"
+  status = 200
+
+# Phase 6: Bookmarks
+[[redirects]]
+  from = "/api/reader/bookmarks"
+  to = "/.netlify/functions/reader-bookmarks"
+  status = 200
+
+# Earlier phases (code-request, verification, session)
+[[redirects]]
+  from = "/api/reader/*"
+  to = "/.netlify/functions/reader-:splat"
+  status = 200
+
 # Never serve source maps. Backstop for Sentry's post-upload cleanup
 # (vite.config.ts) in case it doesn't run, e.g. a build without
 # SENTRY_AUTH_TOKEN. Edge functions run before redirects and static files.
@@ -43,6 +83,7 @@
 
 # SPA fallback for React Router. Defined in both netlify.toml and public/_redirects
 # for deployment consistency across different hosting scenarios.
+# This redirect applies AFTER function routes, so /api/reader/* are not affected.
 [[redirects]]
   from = "/*"
   to = "/index.html"

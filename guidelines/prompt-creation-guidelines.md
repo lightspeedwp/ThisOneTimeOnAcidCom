@@ -440,7 +440,6 @@ This audit enforces the standards defined in:
 
 - [BEM CSS Architecture](../guidelines/css-architecture.md)
 - [Component Guidelines](../guidelines/overview-components.md)
-- [WordPress FSE Patterns](../guidelines/wordpress-fse-patterns.md)
 
 ```text
 

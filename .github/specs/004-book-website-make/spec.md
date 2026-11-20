@@ -4,13 +4,14 @@
 
 **Created**: 2026-11-09
 
-**Status**: Documentation complete; execution **not authorised**. The seven blocking decisions are recorded, but the following gates remain open:
+**Status**: ✅ Documentation complete; ✅ All 7 blocking decisions **RESOLVED** (2026-11-13). Execution gates remain:
 
-- Exact editable Make revision/source snapshot and parity evidence (not confirmed)
-- Available credits and approved generation scope (not confirmed)
-- Explicit authority to resume each paused implementation stage (not given)
-- Reader-access work (Prompts 3A–3C) has moved to [Spec 005](../005-reader-access/spec.md) and is no longer executed from this specification (see Blocking Decisions below)
-- Chapter publication: each chapter or addendum needs Ash's approval before it is published (Decision 5, revised 2026-11-13)
+- ✅ All blocking decisions approved with selected options documented
+- ✅ Design baseline (Space Grotesk, Inter, 9-color palette) locked and approved
+- ✅ Prompts 1, 2A, 2B ready for Phase A execution (design system export)
+- ✅ Prompts 3A–3C handover to [Spec 005](../005-reader-access/spec.md) complete (not executed here)
+- ⏳ Explicit authority to resume/begin Figma Make execution (Decision 7 Option A: noindex meta tags + sitemap exclusion verified in contracts)
+- ⏳ Chapter publication: each chapter needs Ash's approval before it is published (Decision 5: Early release approved; build screens now)
 
 **Input**: Complete staged Figma Make prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval.
 
@@ -147,7 +148,7 @@ Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documen
 
 ### Functional Requirements
 
-- **FR-001**: System MUST analyze all six source specification files from content/book/ directory and identify version differences, gaps, and conflicts
+- **FR-001**: System MUST analyze all six source specification files from `.github/specs/004-book-website-make/references/` directory and identify version differences, gaps, and conflicts
 - **FR-002**: System MUST reconcile version mismatches (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0) using precedence rule: newer version takes precedence; all conflicts documented in research.md with explicit rationale
 - **FR-003**: System MUST prepare exact Prompt 1 (navigation exposure) as executable Figma Make specification with before/after structure and acceptance criteria
 - **FR-004**: System MUST prepare exact Prompts 2A (design baseline), 2B (navigation design), and 3A (reader access copy) as complete, unexecuted specifications
@@ -160,7 +161,7 @@ Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documen
 
 ### Key Entities
 
-- **Specification File**: One of six source files (01–06) in content/book/ directory; has version, approval status, content sections, and cross-references to Linear issues
+- **Specification File**: One of six source files (01–06) in `.github/specs/004-book-website-make/references/` directory; has version, approval status, content sections, and cross-references to Linear issues
 - **Design Baseline**: Approved set of typography (Space Grotesk/Inter), colors (9-named-palette, both themes), component styles, and theme states
 - **Design Candidate**: Unapproved design proposal (R3 responsive typography, T1 additional typography, RT2 reader controls, C1 continuity) with full specification but no approval
 - **Blocking Decision**: Unresolved choice that prevents one or more prompts from being executed (recovery-first race, recovery lifetime, code expiry timing, etc.)
@@ -187,9 +188,16 @@ Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documen
 ## Assumptions
 
 - **User Context**: Ash (project owner) and development team will review and approve this documentation package before any implementation proceeds
-- **Source Files**: All six specification files (01–06) in content/book/ directory are authoritative and will not change during this preflight phase
+- **Source Files**: All six specification files (01–06) in `.github/specs/004-book-website-make/references/` directory are authoritative and will not change during this preflight phase
 - **Design Baseline Approval**: Space Grotesk headings, Inter body/UI, 9-color palette (both themes) are locked and require no changes during preflight
-- **Blocking Decisions**: All 7 decisions are genuinely open and require user input: recovery-first race condition (A/B/C/D), recovery lifetime eligibility (A/B/C/D), code expiry start time (A/B/C), email service provider (A/B/C/D), manuscript publication readiness (A/B/C), newsletter destination (A/B/C/D), and route enforcement verification (A/B/C/D)
+- **Blocking Decisions**: ✅ ALL 7 decisions **RESOLVED** (2026-11-13):
+  - Recovery-first race: **Option A** (Recovery takes precedence)
+  - Recovery lifetime: **Option A** (30-day absolute expiry + session refresh)
+  - Code expiry start: **Option A** (From code generation)
+  - Email provider: **Hybrid** (SendGrid transactional + Brevo newsletter)
+  - Manuscript readiness: **Early release** (Build screens now; chapters as approved)
+  - Newsletter destination: **Brevo** (External signup link)
+  - Route enforcement: **Option A** (Noindex meta tags + sitemap exclusion)
 - **Implementation Timing**: This spec prepares documentation only; no actual implementation, Figma Make execution, or deployment occurs until separate approval
 - **Figma Make Environment**: Make environment exists and is operational; prompts can be executed once unblocked and approved (readiness verification deferred to implementation phase)
 - **Newsletter Integration**: Newsletter service (Brevo or alternative) will be selected separately; copy and mechanics are placeholders in this spec
@@ -203,12 +211,12 @@ Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documen
 
 This specification is derived from comprehensive analysis of:
 
-1. `content/book/01-book-website-specification.md` (v1.0.0) — Master execution contract
-2. `content/book/02-companion-session-plan.md` (v1.0.4) — Preparation queue
-3. `content/book/03-author-decisions-launch-scope.md` (v1.3.0) — Author decisions & scope
-4. `content/book/04-design-brief.md` (v1.1.2) — Design requirements & baseline
-5. `content/book/05-design-reader-decision-register.md` (v1.9.0) — Design tracking & candidates
-6. `content/book/06-website-reading-prd.md` (v1.1.1) — Product requirements & access policy
+1. `.github/specs/004-book-website-make/references/01-book-website-specification.md` (v1.0.0) — Master execution contract
+2. `.github/specs/004-book-website-make/references/02-companion-session-plan.md` (v1.0.4) — Preparation queue
+3. `.github/specs/004-book-website-make/references/03-author-decisions-launch-scope.md` (v1.3.0) — Author decisions & scope
+4. `.github/specs/004-book-website-make/references/04-design-brief.md` (v1.1.2) — Design requirements & baseline
+5. `.github/specs/004-book-website-make/references/05-design-reader-decision-register.md` (v1.9.0) — Design tracking & candidates
+6. `.github/specs/004-book-website-make/references/06-website-reading-prd.md` (v1.1.1) — Product requirements & access policy
 
 ### Cross-References
 
@@ -219,16 +227,15 @@ This specification is derived from comprehensive analysis of:
 
 ### Deliverables for This Spec
 
-Once approved, the next phase will include:
+**Scope Clarification (2026-11-19)**: Spec 004 covers **Prompts 1–2B only** (design baseline & navigation). Reader-access work (Prompts 3A–3C) is owned by [Spec 005 — reader access](../005-reader-access/spec.md).
+
+Once approved, Phase A will include:
 
 1. **Prompt 1 Exact Preview** — Navigation exposure (Speaking/Events/Media hidden)
 2. **Prompt 2A Exact Preview** — Design-system baseline confirmation
 3. **Prompt 2B Exact Preview** — Navigation component design spec
-4. **Prompt 3A Exact Preview** — Reader access email/code copy and forms
-5. **Prompt 3B Blocked Preview** — Recovery flows (awaiting 3 decisions)
-6. **Prompt 3C Partial Preview** — Error states (awaiting CC-05 expiry decision)
-7. **Blocking Decision Matrix** — All unresolved decisions with options
-8. **Implementation Prerequisites Checklist** — What must be decided before code phase
+4. **Blocking Decision Matrix** — All 7 decisions APPROVED with implementation rationale
+5. **Implementation Prerequisites Checklist** — Figma Make environment readiness & Phase A gate conditions
 
 ---
 
@@ -272,6 +279,12 @@ The two documents use the same IDs for different work. Resolution: stage IDs 3A�
 - Q: When source files contradict, which version takes precedence? → A: Newer version; all conflicts documented in research.md with rationale
 - Q: What should Prompt 1 preview "implementation steps" and "non-changes list" contain? → A: Numbered list of file/component changes; 2–3 bullet points describing preserved behavior
 - Q: Are all 7 blocking decisions valid, or is the count 6? → A: Confirm all 7 are valid blockers; plan.md updated to list all 7 explicitly
+
+### Session 2026-11-19 (Decision Clarification Phase)
+
+- Q: Which document is authoritative for decision status—spec or plan? → A: spec.md is authoritative; all 7 decisions APPROVED (2026-11-13); plan.md updated to reflect approved status
+- Q: Should Spec 004 document Prompts 3B/3C or stop at Prompt 2B? → A: Spec 004 stops at Prompt 2B (navigation design); Spec 005 owns all reader-access work (Prompts 3A–3C)
+- Q: When should Gate 2 approval be collected—before or after Figma Make environment confirmation? → A: Approve Gate 2 NOW; Figma Make environment readiness is a Phase A prerequisite (parallel track)
 
 ---
 

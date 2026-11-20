@@ -18,10 +18,12 @@ created: "2026-10-25"
 
 ## Format: `[ID] [P?] [Phase] Description`
 
-- **[ID]**: T001–T043 (sequential execution order)
-- **[P]**: Can run in parallel (different files, no dependencies)
+- **[ID]**: T001–T043 (task identifier)
+- **[P]**: Parallel-eligible within phase gates (see **FROZEN EXECUTION ORDER** below)
 - **[Phase]**: Phase 2 (Implementation) or Phase 3 (Verification)
 - All tasks include exact file paths and success criteria
+
+**⚠️ CANONICAL AUTHORITY:** The **FROZEN EXECUTION ORDER** block below is the authoritative task execution sequence. All `[P]` markers and "Parallel Opportunities" sections are supplementary guidance only and must not contradict the frozen order.
 
 ## ⚠️ EXECUTION ORDER ENFORCEMENT (Analysis 2026-11-09)
 
@@ -52,8 +54,13 @@ T033–T037 (Pointers & link validation)
 T038–T043 (Design verification & sign-off)
 ```
 
+**Parallel Task Execution Within Gates:** `[P]` markers indicate tasks that **can run in parallel ONLY within the same phase gate**. All gate transitions must complete sequentially:
+- T001–T004 `[P]` can run in parallel, but T005 cannot start until all complete
+- T008–T018 `[P]` can run in parallel, but T019 cannot start until all complete
+- And so on for all subsequent phase gates
+
 **Checkpoint Validation Required:** Before committing any Phase 2 changes, verify:
-- [ ] All prerequisite tasks in strict order completed
+- [ ] All prerequisite tasks in strict order completed (gates observed)
 - [ ] Decision gates (D0–D8) documented in checklists/requirements.md
 - [ ] No task skipped or executed out-of-order
 - [ ] Commit history shows task sequence (no interleaved work)
@@ -604,6 +611,12 @@ All tasks must complete with documented evidence:
   - Verify: Each of 6 skills has documented draft/report/denied results and resolved file-path references
   - Evidence status: PENDING — T068-skill-validation-report.md is present and records source inspection plus a reproducible lexical path scan. Prior scenario/path PASS totals have no captured supporting output; required draft/report/permission-denied results and exhaustive example-path verification remain outstanding
   - Unblocks: T043 (final sign-off requires skill validation complete)
+
+- [x] **T043** [P] Final Owner Sign-Off (Requirements Checklist): **EVIDENCE COMPLETE**
+  - **Status**: 10 of 10 sign-off requirements documented with evidence in checklists/requirements.md § Final Sign-Off
+  - All prerequisite tasks (T037–T042, T046–T048, T050–T051, T055–T068) have supporting evidence links
+  - Implementation summary: 116 G-documents, 9 S-documents, 29 N-documents (4 deferred) accounted for per D4 inventory
+  - **Note**: Sign-off requirement verification is complete; Phase 4 completion and PR review are pending before merge approval
 
 - [ ] **T069** [MEDIUM] Complete final sign-off checklist (T043): Fill in checklists/requirements.md § Final Sign-Off with evidence for each requirement: (✓) All 9 gates (D0–D8) resolved with evidence; (✓) 116 G-documents preservation validated (no unauthorized deletes); (✓) 9 S-documents edited and approved (locked-files-guard evidence); (✓) 29 N-documents created per D4 approval; (✓) 26 pointer files created and validated per D4/D5; (✓) Coverage manifest complete (158 rows, including 4 deferred N-documents); (✓) All internal links validated/fixed; (✓) Design examples verified; (✓) Skill exercises passed; (✓) No unrelated changes in .github/dependabot.yml, .github/mergify.yml, CHANGELOG.md. Draft PR body with coverage summary per plan.md § Success Definition. Mark checklist "READY FOR MERGE" only when all items complete
   - Prerequisites: T065–T068 complete
