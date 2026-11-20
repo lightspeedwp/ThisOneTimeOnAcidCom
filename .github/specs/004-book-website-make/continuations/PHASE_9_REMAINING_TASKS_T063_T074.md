@@ -116,7 +116,7 @@ Link: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/630
   - `source-file-inventory.md`
   - `version-reconciliation.md`
   - `checklists/` files
-- **Replace pattern**: 
+- **Replace pattern**:
   - From: `content/book/03-author-decisions-launch-scope.md`
   - To: `.github/specs/004-book-website-make/references/03-author-decisions-launch-scope.md`
 - **Acceptance**: All references to `content/book/0N` updated to `references/0N` paths
