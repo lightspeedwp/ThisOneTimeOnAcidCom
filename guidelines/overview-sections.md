@@ -48,7 +48,7 @@ detailed implementation guidelines.
 ### Content Sections
 
 | Section | Purpose | Guideline File |
-|---------|---------|---------------|
+| ------- | ------- | ------------- |
 | **HeroSection** | Main landing area with primary message | [sections/HeroSection.md](./sections/HeroSection.md) |
 | **FeaturedSection** | Showcase highlighted portfolio work | [sections/FeaturedSection.md](./sections/FeaturedSection.md) |
 | **WhySection** | Mission and philosophy content | [sections/WhySection.md](./sections/WhySection.md) |
@@ -58,7 +58,7 @@ detailed implementation guidelines.
 ### Layout Sections
 
 | Section | Purpose | Guideline File |
-|---------|---------|---------------|
+| ------- | ------- | ------------- |
 | **ThreeColumnPortfolioSection** | Portfolio gallery grid | [sections/ThreeColumnPortfolioSection.md](./sections/ThreeColumnPortfolioSection.md) |
 | **HeroLayout** | Hero wrapper with background | [sections/HeroLayout.md](./sections/HeroLayout.md) |
 | **OneColumnLayout** | Single column content | [sections/OneColumnLayout.md](./sections/OneColumnLayout.md) |
@@ -193,7 +193,7 @@ className="bg-black/50"
 ### Core Blocks Equivalent
 
 | This One Time On Acid Section | WordPress Block | Purpose |
-|-----------------|-----------------|---------|
+| --------------- | --------------- | ------- |
 | `HeroSection` | `core/cover` | Hero with background image/gradient |
 | `FeaturedSection` | `core/query` | Post/portfolio grid display |
 | `WhySection` | `core/group` | Content group with heading |

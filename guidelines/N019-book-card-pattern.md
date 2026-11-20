@@ -56,7 +56,7 @@ export function BookCard({ book, variant = 'grid' }: BookCardProps) {
 ## Responsive Behavior
 
 | Breakpoint | Layout | Columns |
-|------------|--------|---------|
+| ---------- | ------ | ------- |
 | 320px-640px | Stack (vertical) | 1 column |
 | 641px-1024px | Grid | 2 columns |
 | 1025px-1440px | Grid | 3 columns |

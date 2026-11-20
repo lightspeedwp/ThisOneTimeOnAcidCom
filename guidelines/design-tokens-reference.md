@@ -60,7 +60,7 @@ All colors have dark mode variants. See `guidelines/design-tokens-reference.md` 
 Spacing values use an 8px base unit, with `xs` (4px) as a half-step:
 
 | Scale | Value | Use Case |
-|-------|-------|----------|
+| ----- | ----- | -------- |
 | xs | 4px | Micro-spacing (icon internal) |
 | sm | 8px | Compact spacing |
 | md | 16px | Default spacing |
@@ -78,7 +78,7 @@ Reference: `guidelines/design-tokens-reference.md`
 Font stack: `Inter`, `system-ui`, `-apple-system`, sans-serif
 
 | Level | Size | Line Height | Weight | Use Case |
-|-------|------|-------------|--------|----------|
+| ----- | ---- | ----------- | ------ | -------- |
 | h1 | 48px | 1.2 | Bold (700) | Page titles |
 | h2 | 36px | 1.3 | Semibold (600) | Section headings |
 | h3 | 28px | 1.4 | Semibold (600) | Subsections |
@@ -95,7 +95,7 @@ Reference: `guidelines/design-tokens-reference.md`
 Key animation timing values:
 
 | Name | Duration | Easing | Use Case |
-|------|----------|--------|----------|
+| ---- | -------- | ------ | -------- |
 | fast | 150ms | ease-out | Quick feedback |
 | normal | 300ms | ease-in-out | Standard transitions |
 | slow | 500ms | ease-out | Deliberate reveals |

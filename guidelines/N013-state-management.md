@@ -62,7 +62,7 @@ const { mutate } = trpc.useTRPCMutation('book.update', {
 ## State Boundaries
 
 | Layer | Technology | Scope | Lifetime |
-|-------|-----------|-------|----------|
+| ----- | --------- | ----- | -------- |
 | UI | React Context | Temporary UI state | Session |
 | Client Cache | tRPC cache | Server data copies | Until invalidation |
 | Server | Supabase Auth | User sessions | Until logout |

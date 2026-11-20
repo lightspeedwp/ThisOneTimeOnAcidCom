@@ -97,7 +97,7 @@ shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
 ## Animation Tokens
 
 | Token | Duration | Easing | Usage |
-|-------|----------|--------|-------|
+| ----- | -------- | ------ | ----- |
 | `duration-fast` | 150ms | ease-out | Micro interactions |
 | `duration-base` | 300ms | ease-out | Standard transitions |
 | `duration-slow` | 500ms | ease-out | Complex animations |
@@ -107,7 +107,7 @@ shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
 ## Responsive Breakpoints
 
 | Breakpoint | Width | Device Type |
-|---|---|---|
+| - | - | - |
 | `mobile` | 320px–640px | Small phones |
 | `tablet` | 641px–1024px | Tablets |
 | `desktop` | 1025px–1440px | Desktops |

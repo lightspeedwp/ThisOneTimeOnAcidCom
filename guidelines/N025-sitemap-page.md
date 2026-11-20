@@ -229,7 +229,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 ## Priority Guidelines
 
 | Page Type | Priority | Rationale |
-|-----------|----------|-----------|
+| --------- | -------- | --------- |
 | Homepage | 1.0 | Entry point, highest traffic |
 | Book Home | 0.9 | Primary content hub |
 | Chapters | 0.8 | Core reading content |
@@ -240,7 +240,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 ## Change Frequency Guidelines
 
 | Content Type | Frequency | Rationale |
-|--------------|-----------|-----------|
+| ------------ | --------- | --------- |
 | Homepage | weekly | News/features may update |
 | Book content | never | Static manuscript chapters |
 | Journal entries | weekly | New entries posted regularly |

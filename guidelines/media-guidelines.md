@@ -95,7 +95,7 @@ All presets use WebP. Source: `IMAGE_PRESETS` in
 [imageOptimizer.ts](../src/app/utils/imageOptimizer.ts).
 
 | Preset | Max Width | Quality | Usage |
-|--------|-----------|---------|-------|
+| ------ | --------- | ------- | ----- |
 | `sticker` | 320px | 0.70 | Decorative elements, icons |
 | `thumbnail` | 480px | 0.78 | Card thumbnails, avatars |
 | `content` | 800px | 0.82 | Inline blog images, standard photos |
