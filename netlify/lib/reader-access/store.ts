@@ -8,6 +8,7 @@
 
 import { getStore } from '../blobs'; // Phase 2 Blobs adapter
 import { Session } from './session';
+import { hashSha256, constantTimeTokenCompare } from './crypto';
 
 /**
  * Store a new session in Netlify Blobs.
@@ -35,6 +36,12 @@ export async function storeSession(session: Session): Promise<void> {
   try {
     // Store with strong consistency guarantee (Netlify Blobs default)
     await store.set(key, JSON.stringify(session));
+
+    // US1/T017: index the token so a request carrying only the cookie can
+    // resolve its session. The key holds a SHA-256 of the token, never the
+    // raw token, so a Blobs key listing cannot be replayed as a cookie.
+    const index: SessionTokenIndex = { email: session.email, deviceId: session.deviceId };
+    await store.set(buildTokenIndexKey(session.sessionId), JSON.stringify(index));
   } catch (error) {
     throw new Error(`Failed to store session for ${session.email}: ${error}`);
   }
@@ -144,6 +151,10 @@ export async function deleteSession(email: string, deviceId: string): Promise<vo
   const key = buildSessionKey(email, deviceId);
 
   try {
+    const existing = await getSession(email, deviceId);
+    if (existing) {
+      await store.delete(buildTokenIndexKey(existing.sessionId));
+    }
     await store.delete(key);
   } catch (error) {
     throw new Error(
@@ -162,9 +173,8 @@ export async function deleteSession(email: string, deviceId: string): Promise<vo
  * @param email Reader's email address
  * @returns Array of Session objects for this reader (across all devices)
  *
- * @note `@netlify/blobs` `list({ prefix })` resolves to `{ blobs, directories }`,
- *       where each blob entry carries its `key`. The prefix ends with the `:`
- *       separator, so `a@x.com` never matches `a@x.com-2`.
+ * @note This requires Blobs list() API if available.
+ *       For now, this is a placeholder; MVP may require pre-computed session counts.
  *
  * @example
  * const allSessions = await listSessionsByEmail('reader@example.com');
@@ -179,8 +189,24 @@ export async function listSessionsByEmail(email: string): Promise<Session[]> {
     // Build prefix for all sessions for this email
     const prefix = buildSessionKey(email, '');
 
-    const { blobs } = await store.list({ prefix });
-    const keys = blobs.map((blob) => blob.key);
+    // List all keys starting with prefix
+    // Note: This assumes Blobs supports list() with prefix filtering
+    // If not available, we may need to store a separate session index
+    const listed = await (store as any).list?.({ prefix });
+
+    if (!listed) {
+      // Fallback: return empty array if list() not available
+      return [];
+    }
+
+    // @netlify/blobs resolves list() to { blobs: [{ key, etag }] }; test
+    // doubles and older adapters return a plain string[]. Accept both, and
+    // re-apply the prefix in case an adapter ignores the option.
+    const keys: string[] = (
+      Array.isArray(listed)
+        ? listed
+        : (listed.blobs ?? []).map((blob: { key: string }) => blob.key)
+    ).filter((key: string) => key.startsWith(prefix));
 
     // Fetch each session in parallel
     const sessions = await Promise.all(
@@ -249,4 +275,142 @@ export async function isStorageHealthy(): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+// ---------------------------------------------------------------------------
+// Session token index (US1/T017–T018)
+// ---------------------------------------------------------------------------
+
+/** Pointer from a hashed session token to its composite session key. */
+interface SessionTokenIndex {
+  email: string;
+  deviceId: string;
+}
+
+function buildTokenIndexKey(sessionId: string): string {
+  return `session-token:${hashSha256(sessionId)}`;
+}
+
+/**
+ * Resolve a session from the opaque token held in the session cookie.
+ *
+ * Looks up the hashed-token index, loads the session it points at, then
+ * confirms the stored token matches using a constant-time comparison. A
+ * stale index entry (for example after re-verification rotated the token)
+ * resolves to null rather than to another session.
+ *
+ * @param sessionId Token from the sessionToken cookie
+ * @returns The session, or null when the token is unknown
+ */
+export async function getSessionByToken(sessionId: string): Promise<Session | null> {
+  const store = getStore();
+
+  let indexData: string | null;
+  try {
+    indexData = await store.get(buildTokenIndexKey(sessionId));
+  } catch (error) {
+    throw new Error(`Failed to resolve session token: ${error}`);
+  }
+  if (!indexData) {
+    return null;
+  }
+
+  const { email, deviceId } = JSON.parse(indexData) as SessionTokenIndex;
+  const session = await getSession(email, deviceId);
+  if (!session || !constantTimeTokenCompare(session.sessionId, sessionId)) {
+    return null;
+  }
+  return session;
+}
+
+/**
+ * Remove a token index entry without touching the session record.
+ * Used when a device's session is replaced by a fresh token.
+ */
+export async function deleteSessionTokenIndex(sessionId: string): Promise<void> {
+  const store = getStore();
+  await store.delete(buildTokenIndexKey(sessionId));
+}
+
+// ---------------------------------------------------------------------------
+// Verification codes (restored from spec 005; consumed by US1 session creation)
+// ---------------------------------------------------------------------------
+
+export interface StoredCode {
+  codeHash: string;
+  salt: string;
+  createdAt: string;
+  expiresAt: string;
+  attemptCount: number;
+  maxAttempts: number;
+}
+
+function buildCodeKey(email: string): string {
+  return `code:${email.trim().toLowerCase()}`;
+}
+
+/** Store a verification code (replaces any previous code for the email). */
+export async function storeCode(email: string, code: StoredCode): Promise<void> {
+  await getStore().set(buildCodeKey(email), JSON.stringify(code));
+}
+
+/** Retrieve a verification code without consuming it. */
+export async function getCode(email: string): Promise<StoredCode | null> {
+  const data = await getStore().get(buildCodeKey(email));
+  return data ? (JSON.parse(data) as StoredCode) : null;
+}
+
+/** Record a failed attempt against the stored code. */
+export async function incrementCodeAttempts(email: string): Promise<StoredCode | null> {
+  const code = await getCode(email);
+  if (!code) return null;
+  code.attemptCount += 1;
+  await getStore().set(buildCodeKey(email), JSON.stringify(code));
+  return code;
+}
+
+/** Delete (consume) a code after successful verification or on resend. */
+export async function deleteCode(email: string): Promise<void> {
+  await getStore().delete(buildCodeKey(email));
+}
+
+// ---------------------------------------------------------------------------
+// Recovery attempts (restored from spec 005, RA-T048)
+// ---------------------------------------------------------------------------
+
+export interface StoredRecoveryAttempt {
+  recoveryId: string;
+  readerId: string;
+  initiatedAt: string;
+  expiresAt: string;
+  createdSessionId?: string;
+  raceOutcome?: 'recovery_first' | 'code_first' | 'concurrent' | 'renewal' | 'fresh';
+}
+
+const buildRecoveryKey = (recoveryId: string) => `recovery:${recoveryId}`;
+
+export async function storeRecoveryAttempt(recovery: StoredRecoveryAttempt): Promise<void> {
+  await getStore().set(buildRecoveryKey(recovery.recoveryId), JSON.stringify(recovery));
+}
+
+export async function getRecoveryAttempt(recoveryId: string): Promise<StoredRecoveryAttempt | null> {
+  const data = await getStore().get(buildRecoveryKey(recoveryId));
+  return data ? (JSON.parse(data) as StoredRecoveryAttempt) : null;
+}
+
+export async function updateRecoverySession(
+  recoveryId: string,
+  sessionId: string,
+  raceOutcome: 'recovery_first' | 'code_first' | 'concurrent'
+): Promise<StoredRecoveryAttempt | null> {
+  const recovery = await getRecoveryAttempt(recoveryId);
+  if (!recovery) return null;
+  recovery.createdSessionId = sessionId;
+  recovery.raceOutcome = raceOutcome;
+  await getStore().set(buildRecoveryKey(recoveryId), JSON.stringify(recovery));
+  return recovery;
+}
+
+export async function deleteRecoveryAttempt(recoveryId: string): Promise<void> {
+  await getStore().delete(buildRecoveryKey(recoveryId));
 }

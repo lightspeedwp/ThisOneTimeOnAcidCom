@@ -85,16 +85,16 @@
 
 ### Tests for User Story 1
 
-- [ ] T011 [P] [US1] Unit test for `createSession` in `tests/reader-access/session.test.ts`: should create session with 30-day expiry after email verification
-- [ ] T012 [P] [US1] Unit test for session persistence across requests: same sessionId → same session retrieved
-- [ ] T013 [P] [US1] Integration test for session creation flow in `tests/reader-access/session-create.test.ts`: verify → 201 Created + HttpOnly cookie
-- [ ] T014 [US1] E2E test for chapter access in `tests/e2e/reader-access.spec.ts`: verify email → access chapter (no login prompt)
-- [ ] T015 [US1] E2E test for session persistence: open new tab → chapter accessible (session recognized)
-- [ ] T016 [US1] E2E test for page refresh: refresh page → session persists → chapter content visible
+- [x] T011 [P] [US1] Unit test for `createSession` in `tests/reader-access/session.test.ts`: should create session with 30-day expiry after email verification
+- [x] T012 [P] [US1] Unit test for session persistence across requests: same sessionId → same session retrieved
+- [x] T013 [P] [US1] Integration test for session creation flow in `tests/reader-access/session-create.test.ts`: verify → 201 Created + HttpOnly cookie
+- [x] T014 [US1] E2E test for chapter access in `tests/e2e/reader-access.spec.ts`: verify email → access chapter (no login prompt)
+- [x] T015 [US1] E2E test for session persistence: open new tab → chapter accessible (session recognized)
+- [x] T016 [US1] E2E test for page refresh: refresh page → session persists → chapter content visible
 
 ### Implementation for User Story 1
 
-- [ ] T017 Implement session creation endpoint in `netlify/functions/reader-session-create.ts`:
+- [x] T017 Implement session creation endpoint in `netlify/functions/reader-session-create.ts`:
   - Accept verified email (from Phase 2 verification flow)
   - Validate verification code (not expired, correct)
   - Mark code as consumed (atomic, no replay)
@@ -103,21 +103,28 @@
   - Set HttpOnly cookie: sessionToken=<sessionId>; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000
   - Return 201 Created
   - Error cases: 400 (invalid), 401 (verification failed), 429 (rate limit), 500 (server error)
-- [ ] T018 Modify chapter endpoint in `netlify/functions/reader-chapter.ts`:
+- [x] T018 Modify chapter endpoint in `netlify/functions/reader-chapter.ts`:
   - Add session validation middleware (from T009)
   - On valid session: proceed to return chapter content, also auto-renew session (T019 - Phase 3)
   - On invalid session (missing/expired/terminated): return 401 with Set-Cookie to clear cookie
   - Add logging: "Chapter access: email, chapterId, sessionStatus"
-- [ ] T019 Implement session auto-renewal on activity in `netlify/lib/reader-access/session-service.ts`:
+- [x] T019 Implement session auto-renewal on activity in `netlify/lib/reader-access/session-service.ts`:
   - On any chapter access with valid session: renewSession(email, deviceId)
   - Update: renewedAt = now, expiresAt = now + 30 days
   - Atomic operation (no race conditions with concurrent requests)
   - Return updated session for logging
-- [ ] T020 Add session validation tests for chapter access in `tests/reader-access/chapter-access.test.ts`:
+- [x] T020 Add session validation tests for chapter access in `tests/reader-access/chapter-access.test.ts`:
   - Valid session → 200 OK + chapter content
   - Missing cookie → 401 Unauthorized
   - Expired session → 401 Unauthorized
   - Terminated session → 401 Unauthorized
+
+**Implementation notes (2026-11-20)**:
+- T014–T016 live in `tests/reader-access/reader-access-flow.test.ts`, not `tests/e2e/reader-access.spec.ts`: files under `tests/e2e/` are collected by neither Vitest (`*.test.ts`) nor Playwright (`testDir: ./e2e`), so they would never run. The journey is driven through the real handlers (code request → verify → chapter, new tab, refresh) with only the mail provider stubbed.
+- T017 adds a hashed-token index (`session-token:<sha256>` → email + deviceId) so a request carrying only the cookie can resolve its session; the raw token never appears in a Blobs key.
+- Re-verifying on a device that already has a session rotates the token (session-fixation defence) rather than consuming another device slot.
+- `POST /api/reader/verifications` (used by the existing forms) now delegates to the same handler; the token is never returned in the body.
+- Fixed blocking defects found on the way: verification-code helpers missing from `store.ts`; the emailed code differed from the stored hash; real Blobs `list()` shape broke `listSessionsByEmail`; routes pointed at non-existent functions; `reader-chapter-content` read a `reader_session` cookie that is never set.
 
 **Checkpoint: User Story 1 Complete**
 - Reader can verify email once and access all chapters

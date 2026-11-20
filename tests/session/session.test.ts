@@ -15,20 +15,31 @@ import {
   getSessionProperties,
 } from '../../netlify/lib/reader-access/session-service';
 import { FingerprintInput } from '../../netlify/lib/reader-access/session';
+import * as cryptoModule from '../../netlify/lib/reader-access/crypto';
 import { generateSessionToken } from '../../netlify/lib/reader-access/crypto';
-import {
-  SESSION_LIFETIME_DAYS,
-  CLOCK_SKEW_TOLERANCE_MS,
-} from '../../netlify/lib/reader-access/session-config';
 import { updateSession } from '../../netlify/lib/reader-access/store';
-import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
+import { CLOCK_SKEW_TOLERANCE_MS } from '../../netlify/lib/reader-access/session-config';
+import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
 
-// Exercise the real store against an in-memory Netlify Blobs. Auto-mocking
-// the store module made every function return undefined, so createSession
-// called `.filter` on undefined.
-vi.mock('../../netlify/lib/blobs', async () =>
-  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
-);
+// In-memory Netlify Blobs so the real store adapter runs. (An automock of
+// the store returned undefined from every call, so no session ever existed.)
+vi.mock('../../netlify/lib/blobs', () => {
+  const blobs = new Map<string, string>();
+  return {
+    getStore: () => ({
+      get: async (key: string) => blobs.get(key) ?? null,
+      set: async (key: string, value: string) => {
+        blobs.set(key, value);
+      },
+      delete: async (key: string) => {
+        blobs.delete(key);
+      },
+      list: async ({ prefix = '' }: { prefix?: string } = {}) => ({
+        blobs: [...blobs.keys()].filter((key) => key.startsWith(prefix)).map((key) => ({ key })),
+      }),
+    }),
+  };
+});
 
 describe('Session Service - Core Operations', () => {
   const testEmail = 'reader@example.com';
@@ -41,7 +52,6 @@ describe('Session Service - Core Operations', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    resetInMemoryBlobStore();
   });
 
   afterEach(() => {
@@ -117,32 +127,18 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should use constant-time comparison (no timing leaks)', async () => {
-      // This test verifies that constantTimeTokenCompare is used
-      // Timing attacks would show measurable differences in validation time
+      // Deterministic check: the stored and provided tokens are compared via
+      // constantTimeTokenCompare (single-call wall-clock timings are noise)
+      const spy = vi.spyOn(cryptoModule, 'constantTimeTokenCompare');
       const correctToken = testSession.sessionId;
       const wrongToken = 'wrong' + 'x'.repeat(correctToken.length - 5);
 
-      // Median of many runs after warm-up: a single cold call mostly measures
-      // JIT compilation and timer noise rather than the comparison itself.
-      const medianValidationNs = async (token: string): Promise<number> => {
-        const timings: number[] = [];
-        for (let i = 0; i < 250; i++) {
-          const start = process.hrtime.bigint();
-          await validateSession(token, testEmail, testSession.deviceId);
-          if (i >= 50) timings.push(Number(process.hrtime.bigint() - start));
-        }
-        timings.sort((a, b) => a - b);
-        return timings[Math.floor(timings.length / 2)];
-      };
+      expect((await validateSession(correctToken, testEmail, testSession.deviceId)).isValid).toBe(true);
+      expect((await validateSession(wrongToken, testEmail, testSession.deviceId)).isValid).toBe(false);
 
-      // Timing should be similar (constant-time)
-      // Note: This is a statistical test; exact timing varies by CPU
-      const timing1 = await medianValidationNs(correctToken);
-      const timing2 = await medianValidationNs(wrongToken);
-      const timingRatio = Math.max(timing1, timing2) / Math.min(timing1, timing2);
-
-      // Allow up to 2x variance (should be much closer in constant-time impl)
-      expect(timingRatio).toBeLessThan(2.5);
+      expect(spy).toHaveBeenCalledWith(correctToken, correctToken);
+      expect(spy).toHaveBeenCalledWith(correctToken, wrongToken);
+      spy.mockRestore();
     });
 
     it('should reject terminated session', async () => {
@@ -160,7 +156,7 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should reject expired session', async () => {
-      // Persist a past expiry (beyond clock skew tolerance) so validation sees it
+      // Persist a past expiry beyond the clock-skew tolerance
       await updateSession(testEmail, testSession.deviceId, {
         expiresAt: new Date(Date.now() - CLOCK_SKEW_TOLERANCE_MS - 1000).toISOString(),
       });
@@ -202,11 +198,6 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should coalesce rapid renewals (prevent thundering herd)', async () => {
-      // Creation does not open a coalescing window, and a renewal in the same
-      // millisecond as creation is indistinguishable from none, so let the
-      // clock move before the first renewal.
-      await new Promise((resolve) => setTimeout(resolve, 10));
-
       // First renewal
       const first = await renewSession(testEmail, testSession.deviceId);
 
@@ -331,16 +322,18 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should not count terminated sessions', async () => {
-      const session1 = await createSession(testEmail, '123456', fingerprintInput);
+      // Own email: the previous test already filled testEmail's device slots
+      const email = 'count-terminated@example.com';
+      const session1 = await createSession(email, '123456', fingerprintInput);
 
       // Get count before termination
-      const beforeCount = await getActiveSessionCount(testEmail);
+      const beforeCount = await getActiveSessionCount(email);
 
       // Terminate session
-      await terminateSession(testEmail, session1.deviceId);
+      await terminateSession(email, session1.deviceId);
 
       // Get count after termination
-      const afterCount = await getActiveSessionCount(testEmail);
+      const afterCount = await getActiveSessionCount(email);
 
       expect(afterCount).toBeLessThan(beforeCount);
     });
