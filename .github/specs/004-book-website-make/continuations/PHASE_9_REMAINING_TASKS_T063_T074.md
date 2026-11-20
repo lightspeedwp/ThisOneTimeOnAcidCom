@@ -4,7 +4,8 @@
 **Branch**: `docs/spec-004-phase9-remaining` (create from `main`)  
 **PR Strategy**: Create single PR after all tasks complete; mark as draft if awaiting review  
 **Status**: Ready to execute T063–T074 (12 remaining tasks)  
-**Completed**: T060–T062 (PR #630 merged or pending)  
+**Completed**: T060–T062 (PR #630 must be merged to main before creating this branch)  
+**Prerequisite**: Verify PR #630 is merged; defer branch creation if not yet landed  
 **Date**: 2026-11-20
 
 ---
@@ -66,7 +67,7 @@ Link: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/630
 
 **T066**: Close Prompt 3A–3C tasks and resolved decision-clarification tasks
 - **What to do**:
-  - In `tasks.md`: identify reader-access tasks (Phase 3: lines 56–77) and decision-clarification tasks (Phase 4 decision resolution: lines 93–106)
+  - In `tasks.md`: identify reader-access tasks by Phase 3 section heading (includes T014–T016) and decision-clarification tasks (Phase 4 decision resolution: lines 93–106)
   - Mark only those as [x] or close; leave all [BLOCKED] tasks open until their decisions are recorded
   - Add handover notes explaining transfer to Spec 005
   - Link to Spec 005 spec.md where ownership continues
@@ -89,10 +90,10 @@ Link: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/630
 - **What to do**:
   - Find Phase 8 completion checklist/acceptance criteria
   - Locate "zero unresolved validation gaps" item
-  - Mark as ❌ unmet (since T067 reveals task duplication, Phase 8 acceptance is incomplete)
+  - Mark as ❌ unmet until T059 completes, per the Phase 8 acceptance in `tasks.md`
 - **Files to update**: `tasks.md` or `checklists/` file holding Phase 8 acceptance
-- **Acceptance**: Phase 8 "zero gaps" item marked unmet with note about T067 duplication
-- **Notes**: This acknowledges that Phase 8 completion gates are still open pending T067 resolution
+- **Acceptance**: Phase 8 "zero gaps" item marked unmet with condition that it remains unmet until T059 completes
+- **Notes**: This aligns the gate condition with the Phase 8 acceptance criteria in tasks.md (not dependent on T067 completion alone)
 
 **T069**: Update spec.md and plan.md with resolved, handed-over state
 - **Files to update**:

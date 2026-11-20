@@ -17,10 +17,10 @@ NEW: SC-004 Execution Model Pivot (approved 2026-11-20):
 
 Remaining Tasks (T063–T074):
 • T063: Raise Prompt 2A preview completeness to ≥95%, verify Claude output format in contract
-• T064: Validate Claude execution outputs for Prompt 2A: CSS variables, design token JSON, component specs
+• T064: Create design export artifacts (or record descoping): design-baseline-validation.md, navigation-specification.md, design-baseline-acceptance-report.md
 • T065: Create implementation readiness validation: decisions-selected.md, implementation-readiness-checklist.md, preflight-analysis-final.md, workflow-completion-report.md
 • T066: Close Prompt 3A–3C tasks (T012–T027, T022–T038) with handover notes to Spec 005
-• T067: Disambiguate duplicate T014–T038 task sets; repoint Phase 8 dependencies to Claude execution tasks
+• T067: Disambiguate duplicate T014–T038 task sets; map each Phase 8 dependency explicitly (preserve dependencies without Claude execution replacements)
 • T068: Mark Phase 8 "zero gaps" acceptance item unmet (pending T067 completion)
 • T069: Update spec.md and plan.md to reflect SC-004 Claude execution model (Figma Make deprecated)
 • T070: Replace content/book/0N paths with references/0N paths across spec/plan/data-model/quickstart/source-file-inventory/version-reconciliation/checklists
