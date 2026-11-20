@@ -132,7 +132,8 @@ export type DrawerEvent =
   | { readonly type: "TOGGLE" }
   | { readonly type: "ESCAPE" }
   | { readonly type: "BACKDROP_CLICK" }
-  | { readonly type: "LINK_ACTIVATED" }
+  /** samePath: the link points at the page already shown, so no route change follows. */
+  | { readonly type: "LINK_ACTIVATED"; readonly samePath: boolean }
   | { readonly type: "ROUTE_CHANGED" }
   | { readonly type: "BREAKPOINT_CHANGED"; readonly breakpoint: Breakpoint };
 
@@ -146,8 +147,11 @@ export const INITIAL_DRAWER_STATE: DrawerState = {
  *
  * - Opening moves focus to the first link.
  * - Escape, backdrop click and the toggle close the drawer and return focus to the toggle.
- * - Following a link or any route change closes without stealing focus, because
- *   RootLayout already moves focus to #main-content on navigation.
+ * - Following a link to another page, or any route change, closes without moving
+ *   focus, because RootLayout moves focus to #main-content when the pathname changes.
+ * - Following a link to the current page closes and returns focus to the toggle:
+ *   the pathname does not change, so RootLayout does not move focus, and the
+ *   focused link would otherwise disappear with the drawer.
  * - Growing past mobile closes the drawer so it cannot stay open behind the inline row.
  */
 export function drawerReducer(
@@ -165,6 +169,10 @@ export function drawerReducer(
         ? { status: "closed", focusTarget: "toggle" }
         : state;
     case "LINK_ACTIVATED":
+      if (state.status !== "open") return state;
+      return event.samePath
+        ? { status: "closed", focusTarget: "toggle" }
+        : { status: "closed", focusTarget: "none" };
     case "ROUTE_CHANGED":
       return state.status === "open"
         ? { status: "closed", focusTarget: "none" }

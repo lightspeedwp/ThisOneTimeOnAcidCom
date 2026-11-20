@@ -125,8 +125,8 @@
       },
       "dark": {
         "link-color": "#F6F2EB",
-        "link-color-hover": "#FF3AAE",
-        "link-color-active": "#FF3AAE",
+        "link-color-hover": "#F6F2EB",
+        "link-color-active": "#F6F2EB",
         "underline-active": "#FF3AAE",
         "focus-ring": "#FF3AAE",
         "surface": "#0B0B10",
@@ -150,7 +150,7 @@
         "text": "#F6F2EB",
         "error-border": "#FF3AAE",
         "error-text": "#FF3AAE",
-        "placeholder": "#9C9488"
+        "placeholder": "#CFC7BB"
       },
       "light": {
         "bg": "#F6F2EB",
@@ -159,7 +159,7 @@
         "text": "#0B0B10",
         "error-border": "#FF3AAE",
         "error-text": "#0B0B10",
-        "placeholder": "#9C9488"
+        "placeholder": "#171722"
       }
     }
   },

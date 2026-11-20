@@ -24,7 +24,7 @@ The requested handoff file `continuations/PHASE_2_HANDOFF.md` does not exist in 
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | 1 — Navigation exposure | [`prompt-1-navigation-exposure-output.md`](./prompt-1-navigation-exposure-output.md), [`navigation-exposure-rules.json`](./navigation-exposure-rules.json)                        | CR-1.1–1.6 ✅   | Before/after built from live source files; JSON parses                                                          |
 | 2A — Design baseline    | [`design-tokens.css`](./design-tokens.css), [`design-tokens.json`](./design-tokens.json) (v2.0.0), [`prompt-2a-design-baseline-output.md`](./prompt-2a-design-baseline-output.md) | CR-2A.1–2A.6 ✅ | PostCSS parse; 116 CSS↔JSON value checks, 0 mismatches; 0 off-palette hex; contrast computed for all used pairs |
-| 2B — Navigation design  | [`prompt-2b-navigation-design-output.md`](./prompt-2b-navigation-design-output.md), [`navigation-component.types.ts`](./navigation-component.types.ts)                            | CR-2B.1–2B.6 ✅ | `tsc --strict` clean; 22 behaviour assertions pass                                                              |
+| 2B — Navigation design  | [`prompt-2b-navigation-design-output.md`](./prompt-2b-navigation-design-output.md), [`navigation-component.types.ts`](./navigation-component.types.ts)                            | CR-2B.1–2B.6 ✅ | `tsc --strict` clean; 26 behaviour assertions pass                                                              |
 
 Also changed: [`navigation-specification.md`](./navigation-specification.md) now carries a superseded notice.
 
@@ -36,20 +36,22 @@ Also changed: [`navigation-specification.md`](./navigation-specification.md) now
 2. **Menu size.** The contract's 4-item menu conflicts with WP-02 and CR-1.5. The output removes only Speaking, Events and Media, leaving 8 items in their existing order. **Ash to confirm** if a 4-item menu is wanted instead.
 3. **robots.txt `Disallow` would defeat noindex.** It is deliberately not used.
 4. **Single-page-app noindex leak.** `setSEO` must reset the robots tag on pages that do not set one, or `noindex` follows the visitor to the next page. An `X-Robots-Tag` header in `netlify.toml` is specified as the primary delivery.
-5. **Earlier 2A export defects corrected:** `prefers-color-scheme` theme switching (ignores saved preferences), two off-palette colours, inaccurate "AAA 7:1" claims, a 1.11:1 input border, missing type scale.
-6. **No desktop navigation today.** The header shows one overlay menu at every width. Prompt 2B recovers an inline row at ≥768px and keeps a stateful drawer only on mobile.
+5. **AAA contrast target (`AGENTS.md` D3).** After CodeRabbit review, nav hover/active text and both placeholders were moved to AAA-passing palette colours; the remaining AAA gaps are listed as owner decisions.
+6. **Earlier 2A export defects corrected:** `prefers-color-scheme` theme switching (ignores saved preferences), two off-palette colours, inaccurate "AAA 7:1" claims, a 1.11:1 input border, missing type scale.
+7. **No desktop navigation today.** The header shows one overlay menu at every width. Prompt 2B recovers an inline row at ≥768px and keeps a stateful drawer only on mobile.
 
 ---
 
 ## Open decisions for Ash
 
-| ID            | Decision                                                                                                | Where        |
-| ------------- | ------------------------------------------------------------------------------------------------------- | ------------ |
-| C1-2 / C2B-1  | 8-item menu (recommended) or a cut to 4 items                                                           | Prompt 1 §2  |
-| C1-4          | Canonical origin (`ashshaw.com` in sitemap and robots.txt)                                              | Prompt 1 §2  |
-| C1-5          | `/ebook` exposure and XML-sitemap inclusion                                                             | Prompt 1 §2  |
-| L-1, L-2, L-3 | Light-theme placeholder, error text and tertiary text: stay on-palette or approve `#5C5248` / `#C4005E` | Prompt 2A §4 |
-| —             | Light-theme role mapping as a whole                                                                     | Prompt 2A §4 |
+| ID           | Decision                                                                                                              | Where        |
+| ------------ | --------------------------------------------------------------------------------------------------------------------- | ------------ |
+| C1-2 / C2B-1 | 8-item menu (recommended) or a cut to 4 items                                                                         | Prompt 1 §2  |
+| C1-4         | Canonical origin (`ashshaw.com` in sitemap and robots.txt)                                                            | Prompt 1 §2  |
+| C1-5         | `/ebook` exposure and XML-sitemap inclusion                                                                           | Prompt 1 §2  |
+| D-1 to D-4   | Dark-theme pairs below the AAA 7:1 target: tertiary brown, pink error text, primary button label on pink, purple text | Prompt 2A §4 |
+| L-2, L-3     | Light-theme error and tertiary text: stay on-palette or approve `#C4005E` / `#5C5248`                                 | Prompt 2A §4 |
+| —            | Light-theme role mapping as a whole                                                                                   | Prompt 2A §4 |
 
 ---
 

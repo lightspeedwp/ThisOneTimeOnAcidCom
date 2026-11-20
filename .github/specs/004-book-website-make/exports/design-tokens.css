@@ -121,8 +121,10 @@
 
   /* ===== NAVIGATION — dark ===== */
   --nav-link-color-dark: var(--color-warm-cream);
-  --nav-link-color-hover-dark: var(--color-accent-pink);
-  --nav-link-color-active-dark: var(--color-accent-pink);
+  /* Pink text is 6.05:1 on deepest (below the AAA 7:1 target). Hover/active keep cream
+     text and signal state with the pink underline and weight. */
+  --nav-link-color-hover-dark: var(--color-warm-cream);
+  --nav-link-color-active-dark: var(--color-warm-cream);
   --nav-underline-active-dark: var(--color-accent-pink);
   --nav-focus-ring-dark: var(--color-accent-pink);
   --nav-surface-dark: var(--color-deepest-dark);
@@ -147,18 +149,19 @@
   --form-input-text-dark: var(--color-warm-cream);
   --form-input-error-border-dark: var(--color-accent-pink);
   --form-input-error-text-dark: var(--color-accent-pink);
-  --form-input-placeholder-dark: var(--color-warm-brown);
+  /* Placeholder: 10.61:1 on the input fill (AAA). */
+  --form-input-placeholder-dark: var(--color-warm-tan);
 
   /* ===== FORM INPUT — light (⚠️ pending) ===== */
   /* ⚠️ No on-palette pink passes AA as text on cream; error text uses deepest-dark
-     and relies on the error icon and message. ⚠️ Placeholder warm-brown is 2.69:1. */
+     and relies on the error icon and message. Placeholder uses lighter-dark (15.92:1, AAA). */
   --form-input-bg-light: var(--color-warm-cream);
   --form-input-border-light: var(--color-lighter-dark);
   --form-input-border-focused-light: var(--color-accent-purple);
   --form-input-text-light: var(--color-deepest-dark);
   --form-input-error-border-light: var(--color-accent-pink);
   --form-input-error-text-light: var(--color-deepest-dark);
-  --form-input-placeholder-light: var(--color-warm-brown);
+  --form-input-placeholder-light: var(--color-lighter-dark);
 }
 
 /* ===== ACTIVE ALIASES — dark (default) =====

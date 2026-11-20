@@ -25,12 +25,12 @@ Only mobile carries open/closed state, so most of the header becomes simple CSS 
 
 ### Conflicts (⚠️)
 
-| ID       | Conflict                                                                                            | Resolution                                                                                                                        |
-| -------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| ⚠️ C2B-1 | The contract assumes 4 links (Home, About, Book, Contact).                                          | Use the 8 links from Prompt 1 (see Prompt 1 ⚠️ C1-2). The component is data-driven, so a later cut to 4 needs only a data change. |
-| ⚠️ C2B-2 | The contract SCSS sample uses `max-width: 768px`, which overlaps the tablet range at exactly 768px. | Use `max-width: 767.98px` for mobile and `min-width: 768px` for tablet.                                                           |
-| ⚠️ C2B-3 | The contract asks for a 3-line hamburger icon. The live header uses the visible text `[ ≡ ] Menu`.  | Keep the visible text label: it matches the brand's bracket style and is clearer than an icon alone.                              |
-| ⚠️ C2B-4 | Pink link text is 2.91:1 on the light theme's cream (fails AA).                                     | Light hover/active keep dark text; state is shown with the pink underline and weight (Prompt 2A §3).                              |
+| ID       | Conflict                                                                                                                                                | Resolution                                                                                                                                               |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ⚠️ C2B-1 | The contract assumes 4 links (Home, About, Book, Contact).                                                                                              | Use the 8 links from Prompt 1 (see Prompt 1 ⚠️ C1-2). The component is data-driven, so a later cut to 4 needs only a data change.                        |
+| ⚠️ C2B-2 | The contract SCSS sample uses `max-width: 768px`, which overlaps the tablet range at exactly 768px.                                                     | Use `max-width: 767.98px` for mobile and `min-width: 768px` for tablet.                                                                                  |
+| ⚠️ C2B-3 | The contract asks for a 3-line hamburger icon. The live header uses the visible text `[ ≡ ] Menu`.                                                      | Keep the visible text label: it matches the brand's bracket style and is clearer than an icon alone.                                                     |
+| ⚠️ C2B-4 | The contract specifies pink hover/active link text. Pink is 6.05:1 on the dark background (below the repository AAA target of 7:1) and 2.91:1 on cream. | Link text keeps the default colour in every state (cream in dark, deepest in light); the pink underline and weight show hover and active (Prompt 2A §3). |
 
 ---
 
@@ -55,7 +55,7 @@ type DrawerEvent =
   | { type: "TOGGLE" }
   | { type: "ESCAPE" }
   | { type: "BACKDROP_CLICK" }
-  | { type: "LINK_ACTIVATED" }
+  | { type: "LINK_ACTIVATED"; samePath: boolean }
   | { type: "ROUTE_CHANGED" }
   | { type: "BREAKPOINT_CHANGED"; breakpoint: Breakpoint };
 
@@ -91,16 +91,16 @@ Colours are token names from `design-tokens.css`. Dark values are approved; ligh
 | Breakpoint | State                 | Visual treatment                                                                                              | Dark                            | Light (⚠️ pending)              |
 | ---------- | --------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | ------------------------------- |
 | All        | Default               | Inter 500, 16px; no underline                                                                                 | Cream `#F6F2EB`                 | Deepest `#0B0B10`               |
-| All        | Hover                 | Colour change **and** 2px underline, 6px offset                                                               | Pink text + pink underline      | Dark text + pink underline      |
+| All        | Hover                 | 2px pink underline, 6px offset (text colour unchanged)                                                        | Cream text + pink underline     | Dark text + pink underline      |
 | All        | Focus-visible         | 2px outline, 3px offset (in addition to hover styles)                                                         | Pink ring                       | Deepest ring                    |
-| All        | Active (current page) | Weight 600 + 2px underline + `aria-current="page"`                                                            | Pink text + pink underline      | Dark text + pink underline      |
+| All        | Active (current page) | Weight 600 + 2px underline + `aria-current="page"`                                                            | Cream text + pink underline     | Dark text + pink underline      |
 | Desktop    | Layout                | Single row, 24px gap, right of logo                                                                           | —                               | —                               |
 | Tablet     | Layout                | Row below logo bar, 16px gap, may wrap                                                                        | —                               | —                               |
 | Mobile     | Closed                | Toggle `[ ≡ ] Menu`, `aria-expanded="false"`                                                                  | —                               | —                               |
 | Mobile     | Open                  | Drawer from the right, 80vw (max 320px); backdrop; links stacked; toggle `[ X ] Menu`, `aria-expanded="true"` | Surface `#0B0B10`, backdrop 70% | Surface `#F6F2EB`, backdrop 50% |
 | Mobile     | Link in drawer        | Full-width row, min-height 44px, same hover/focus/active rules                                                | —                               | —                               |
 
-Every state change is visible **without colour**: hover adds an underline, active adds weight and an underline, focus adds an outline. This meets CR-2B.2 and the design register's hover-emphasis rule.
+Every state change is visible **without relying on colour**, and link text stays at AAA contrast (17.59:1) in every state: hover adds an underline, active adds weight and an underline, focus adds an outline. This meets CR-2B.2 and the design register's hover-emphasis rule.
 
 ---
 
@@ -170,6 +170,9 @@ Uses the unsuffixed aliases from `design-tokens.css`, so theme switching needs n
     position: fixed;
     inset: 0 0 0 auto;
     width: min(80vw, 320px);
+    max-height: 100dvh; /* stays within short viewports, e.g. landscape phones */
+    overflow-y: auto; /* every link stays reachable when the list is taller than the screen */
+    padding-block: 8px; /* room for focus outlines at the scroll edges */
     background: var(--nav-surface);
     transform: translateX(100%);
     transition: transform 250ms ease;
@@ -213,18 +216,20 @@ Uses the unsuffixed aliases from `design-tokens.css`, so theme switching needs n
 
 The component dispatches `DrawerEvent`s and acts on the resulting `focusTarget`.
 
-| Trigger                                   | Event                | Result                                           |
-| ----------------------------------------- | -------------------- | ------------------------------------------------ |
-| Toggle click / Enter / Space              | `TOGGLE`             | Open → focus first link; or close → focus toggle |
-| Escape key while open                     | `ESCAPE`             | Close → focus toggle                             |
-| Backdrop click                            | `BACKDROP_CLICK`     | Close → focus toggle                             |
-| Link click                                | `LINK_ACTIVATED`     | Close; RootLayout moves focus to `#main-content` |
-| Router path change                        | `ROUTE_CHANGED`      | Close (covers back/forward)                      |
-| `matchMedia('(min-width: 768px)')` change | `BREAKPOINT_CHANGED` | Close if the layout leaves mobile                |
+| Trigger                                   | Event                                | Result                                                                    |
+| ----------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------- |
+| Toggle click / Enter / Space              | `TOGGLE`                             | Open → focus first link; or close → focus toggle                          |
+| Escape key while open                     | `ESCAPE`                             | Close → focus toggle                                                      |
+| Backdrop click                            | `BACKDROP_CLICK`                     | Close → focus toggle                                                      |
+| Link click to another page                | `LINK_ACTIVATED` (`samePath: false`) | Close; RootLayout moves focus to `#main-content`                          |
+| Link click to the current page            | `LINK_ACTIVATED` (`samePath: true`)  | Close → focus toggle (no route change, so RootLayout does not move focus) |
+| Router path change                        | `ROUTE_CHANGED`                      | Close (covers back/forward)                                               |
+| `matchMedia('(min-width: 768px)')` change | `BREAKPOINT_CHANGED`                 | Close if the layout leaves mobile                                         |
 
 While the drawer is open:
 
-- Set `inert` on `#main-content` and the footer, so Tab stays inside the header and drawer.
+- Set `inert` on `#layout-breadcrumbs`, `#main-content` and the footer, so Tab stays inside the header and drawer.
+- Remove `inert` from all of those elements when the drawer closes, whatever the reason it closed.
 - Lock page scroll (`overflow: hidden` on `<html>`), restoring it on close.
 - The backdrop is `aria-hidden="true"` and is not focusable.
 
@@ -235,13 +240,14 @@ While the drawer is open:
 - [x] One `<nav aria-label="Main navigation">` landmark wraps the list for every breakpoint (no duplicate nav for desktop and mobile)
 - [x] Link text is descriptive and unchanged from the current labels
 - [x] Hover, active and focus each have a non-colour cue (1.4.1)
-- [x] Dark link text 17.59:1; pink hover/active 6.05:1 (1.4.3)
+- [x] Link text 17.59:1 in every state, dark and light (1.4.6 AAA); pink is used only for the underline (6.05:1 dark, non-text 3:1)
 - [x] Focus ring 6.05:1 dark; deepest ring on cream 17.59:1 light (1.4.11, 2.4.7)
 - [x] Focus is not hidden by the drawer or sticky header (2.4.11): drawer moves focus inside itself
 - [x] `aria-current="page"` on the active link
 - [x] Toggle exposes `aria-expanded`, `aria-controls="mobile-menu"` and a state-specific `aria-label` (`toggleAria`)
 - [x] Escape closes and returns focus to the toggle; Tab is contained while open (`inert`)
-- [x] Drawer links and toggle are at least 44×44px (exceeds 2.5.8's 24px minimum)
+- [x] Drawer links and toggle are at least 44×44px (meets 2.5.5 AAA)
+- [x] Drawer is height-limited and scrolls, so every link stays reachable on short screens (1.4.10)
 - [x] Backdrop `aria-hidden="true"`
 - [x] Hidden routes are not rendered (not merely visually hidden)
 - [x] Reduced-motion preference removes slide and colour transitions
@@ -254,7 +260,7 @@ While the drawer is open:
 - **Do not reuse** `src/app/data/mock/ui/navigation.ts` or `ui/sitemap.ts` (WP-02: legacy sources).
 - **Existing pieces to keep**: theme toggle, cursor-effects toggle, social links in the drawer, the stretchy logo.
 - **Replace** `isCurrentPage` in `Header.tsx` with `resolveActiveHref` (fixes the `/journalism` prefix bug and the `/read-the-book` alias).
-- **Tests to add when implemented**: port the 22 assertions used to validate this spec (§8) into Vitest; add a Playwright check for Escape, focus return and Tab containment at 375px, plus inline links visible at 1024px and 1280px.
+- **Tests to add when implemented**: port the 26 assertions used to validate this spec (§8) into Vitest; add a Playwright check for Escape, focus return and Tab containment at 375px, plus inline links visible at 1024px and 1280px.
 
 ---
 
@@ -272,4 +278,4 @@ While the drawer is open:
 ### Validation run
 
 - `npx tsc --noEmit --strict --target es2019 navigation-component.types.ts` → no errors
-- A one-off in-session check (not committed) ran 22 assertions with `tsx`, covering every row of the §2 active-link table, every drawer event in §5 (plus Escape while closed), breakpoint edges (767/768/1024px), the 8-item count and the hidden-route guard → all passed
+- A one-off in-session check (not committed) ran 26 assertions with `tsx`, covering every row of the §2 active-link table, every drawer event in §5 (plus Escape while closed, and same-page link activation), breakpoint edges (767/768/1024px), the 8-item count and the hidden-route guard → all passed
