@@ -1,9 +1,9 @@
 # Implementation Plan: TOA-358 Guidelines Refactor
 
-**Status:** Draft  
-**Branch:** `docs/spec-003-phase2-implementation`\
+**Status:** Complete (Phase 6 merged 2026-11-20)
+**Branch:** `docs/spec-003-phase-6-implementation-completion` (merged to main)
 **Spec:** [Specification 003](./spec.md)
-**Timeline:** Phased (gates → planning → implementation → verification)
+**Timeline:** Phased (gates → planning → implementation → verification) ✅ ALL COMPLETE
 
 **Historical branch:** `docs/spec-003-guidelines-reconcile` (Phase 1 planning, superseded).
 
