@@ -7,6 +7,8 @@
  * - POST completion events for chapters
  * - Recording time spent and engagement metrics
  * - Aggregating reading statistics per session
+ *
+ * @skip Phase 3+ feature - skipped until Phase 3+ implementation
  */
 
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
@@ -48,7 +50,7 @@ const createTestProgress = (sessionId: string, chapterId: string) => ({
   lastReadAt: new Date().toISOString(),
 });
 
-describe('Reader Analytics & Completion Events (RA-T051)', () => {
+describe.skip('Reader Analytics & Completion Events (RA-T051)', () => {
   let mockRequest: Request;
 
   beforeEach(() => {

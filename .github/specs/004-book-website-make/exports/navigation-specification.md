@@ -21,7 +21,7 @@ Navigation component specification for book website after route exposure (Prompt
 ### Visible Navigation Items (4 Total)
 
 | Item | Route | Display Text | Icon | Priority | Mobile Menu |
-|------|-------|--------------|------|----------|------------|
+| ------ | ------- | -------------- | ------ | ---------- | ------------ |
 | **Home** | `/` | "Home" | House | P1 | ✅ Visible |
 | **About** | `/about` | "About" | Info circle | P1 | ✅ Visible |
 | **Book** | `/book` | "Book" | Book | P1 | ✅ Visible |
@@ -36,7 +36,7 @@ Navigation component specification for book website after route exposure (Prompt
 ### Hidden Navigation Items (3 Total — Still Accessible)
 
 | Item | Route | Status | Accessibility | Purpose |
-|------|-------|--------|---|---------|
+| ------ | ------- | -------- | --- | --------- |
 | **Speaking** | `/speaking` | Hidden from menu | Direct URL + internal links | Internal documentation |
 | **Events** | `/events` | Hidden from menu | Direct URL + internal links | Internal documentation |
 | **Media** | `/media` | Hidden from menu | Direct URL + internal links | Internal documentation |
@@ -54,11 +54,11 @@ Navigation component specification for book website after route exposure (Prompt
 
 ### Desktop Navigation (≥1024px)
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │  [Logo]  Home  About  Book  Contact         [Icons] │
 └─────────────────────────────────────────────────────┘
-```
+```text
 
 **Layout**:
 - Horizontal menu bar
@@ -86,12 +86,12 @@ Navigation component specification for book website after route exposure (Prompt
 
 ### Tablet Navigation (768–1023px)
 
-```
+```text
 ┌──────────────────────────────────┐
 │  [Logo]  Home  About     [Menu▼] │
 │          Book  Contact           │
 └──────────────────────────────────┘
-```
+```text
 
 **Layout**:
 - Horizontal menu with wrapping allowed
@@ -106,7 +106,7 @@ Navigation component specification for book website after route exposure (Prompt
 
 ### Mobile Navigation (<768px)
 
-```
+```text
 ┌────────────────────────────────┐
 │  [Logo]           [☰ Hamburger]│
 ├────────────────────────────────┤
@@ -117,7 +117,7 @@ Navigation component specification for book website after route exposure (Prompt
 │ Contact                        │
 │                                │
 └────────────────────────────────┘
-```
+```text
 
 **Layout**:
 - Horizontal header with logo + hamburger icon
@@ -156,15 +156,16 @@ Navigation component specification for book website after route exposure (Prompt
 - **Alternative**: `MainNav` (if naming conflicts)
 
 ### Component Variants
+
 | Variant | Description | Use Case |
-|---------|-------------|----------|
+| --------- | ------------- | ---------- |
 | `Navigation/Desktop` | Horizontal menu (≥1024px) | Desktop & wide screens |
 | `Navigation/Tablet` | Responsive wrapping (768–1023px) | Tablet & medium screens |
 | `Navigation/Mobile` | Hamburger + drawer (<768px) | Mobile & small screens |
 | `Navigation/Mobile-Open` | Drawer open state | Mobile menu expanded |
 
 ### Component Nesting
-```
+```text
 Navigation
 ├── Logo (component or image)
 ├── NavLinks (component group)
@@ -180,14 +181,14 @@ Navigation
         │   ├── Close Button
         │   └── MobileLinks
         └── [Links with touch-target sizing]
-```
+```text
 
 ---
 
 ## Acceptance Criteria Validation
 
 | Criterion | Requirement | Specification | Status |
-|-----------|------------|---|--------|
+| ----------- | ------------ | --- | -------- |
 | **AC1.1** | 4 visible items only | Home, About, Book, Contact specified | ✅ PASS |
 | **AC1.2** | Hidden routes accessible but not indexed | 3 hidden routes with noindex enforcement | ✅ PASS |
 | **AC1.3** | Responsive across 4 breakpoints | Desktop, tablet, mobile, wide all specified | ✅ PASS |
@@ -204,7 +205,7 @@ Applied to: `/speaking`, `/events`, `/media`
 
 ```html
 <meta name="robots" content="noindex, nofollow">
-```
+```text
 
 **Effect**: Search engines will not index these pages or follow their links.
 
@@ -235,7 +236,7 @@ Applied to: `/speaking`, `/events`, `/media`
 <url>
   <loc>https://example.com/contact</loc>
 </url>
-```
+```text
 
 **After (Updated Sitemap)**:
 ```xml
@@ -251,7 +252,7 @@ Applied to: `/speaking`, `/events`, `/media`
 <url>
   <loc>https://example.com/contact</loc>
 </url>
-```
+```text
 
 **Removed**: `/speaking`, `/events`, `/media`
 
@@ -261,12 +262,12 @@ Applied to: `/speaking`, `/events`, `/media`
 
 If additional enforcement needed (optional under Decision 7):
 
-```
+```text
 User-agent: *
 Disallow: /speaking
 Disallow: /events
 Disallow: /media
-```
+```text
 
 **Note**: Noindex meta tags + sitemap exclusion are sufficient; robots.txt is optional fallback.
 
