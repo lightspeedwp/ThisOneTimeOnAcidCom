@@ -16,6 +16,7 @@ import { getSession } from '../lib/reader-access/store';
 import {
   getProgress,
   calculateProgressStats,
+  recordCompletionEvent,
   ProgressStats,
 } from '../lib/reader-access/progress';
 
@@ -88,9 +89,14 @@ async function handlePostAnalytics(req: Request, sessionId: string, expiresAt: s
       return createErrorResponse('No progress found for this chapter', 404);
     }
 
-    // Record completion event (in real app, would append to event log)
-    // For MVP, we just verify the progress record exists
-    const eventTimestamp = new Date().toISOString();
+    // Record completion event
+    const event = await recordCompletionEvent(
+      sessionId,
+      body.chapterId,
+      body.timeSpent,
+      body.deviceType,
+      body.referrerSource,
+    );
 
     // Calculate updated stats for the session
     const stats = await calculateProgressStats(sessionId);

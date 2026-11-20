@@ -34,6 +34,16 @@ export interface ProgressStats {
   lastActivityAt: string; // ISO timestamp
 }
 
+export interface CompletionEvent {
+  id: string;
+  sessionId: string;
+  chapterId: string;
+  timeSpent: number;
+  completedAt: string;
+  deviceType?: string;
+  referrerSource?: string;
+}
+
 // Storage key builder
 function getProgressKey(sessionId: string, chapterId: string): string {
   return `progress:${sessionId}:${chapterId}`;
@@ -43,10 +53,54 @@ function getStatsKey(sessionId: string): string {
   return `progress-stats:${sessionId}`;
 }
 
+function getEventKey(sessionId: string, eventId: string): string {
+  return `event:${sessionId}:${eventId}`;
+}
+
+function getSessionEventsKey(sessionId: string): string {
+  return `events:${sessionId}`;
+}
+
+// Get all progress records for a session (used for aggregation)
+export async function getAllSessionProgress(sessionId: string): Promise<ReaderProgress[]> {
+  // Note: This is a simplified implementation that stores progress IDs in a list
+  // In production, would use proper querying/listing from Netlify Blobs
+  const listKey = `progress-list:${sessionId}`;
+  const listData = await store.get(listKey);
+
+  if (!listData) return [];
+
+  try {
+    const chapterIds: string[] = JSON.parse(listData);
+    const progressRecords: ReaderProgress[] = [];
+
+    for (const chapterId of chapterIds) {
+      const progress = await getProgress(sessionId, chapterId);
+      if (progress) {
+        progressRecords.push(progress);
+      }
+    }
+
+    return progressRecords;
+  } catch {
+    return [];
+  }
+}
+
 // Store or update reading progress for a chapter
 export async function saveProgress(progress: ReaderProgress): Promise<void> {
   const key = getProgressKey(progress.sessionId, progress.chapterId);
   await store.set(key, JSON.stringify(progress));
+
+  // Track this chapter in the session's progress list
+  const listKey = `progress-list:${progress.sessionId}`;
+  const listData = await store.get(listKey);
+  const chapterIds: string[] = listData ? JSON.parse(listData) : [];
+
+  if (!chapterIds.includes(progress.chapterId)) {
+    chapterIds.push(progress.chapterId);
+    await store.set(listKey, JSON.stringify(chapterIds));
+  }
 }
 
 // Retrieve reading progress for a chapter
@@ -143,17 +197,62 @@ export async function getProgressStats(sessionId: string): Promise<ProgressStats
   }
 }
 
+// Record a completion event
+export async function recordCompletionEvent(
+  sessionId: string,
+  chapterId: string,
+  timeSpent: number,
+  deviceType?: string,
+  referrerSource?: string,
+): Promise<CompletionEvent> {
+  const eventId = `evt-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  const completedAt = new Date().toISOString();
+
+  const event: CompletionEvent = {
+    id: eventId,
+    sessionId,
+    chapterId,
+    timeSpent,
+    completedAt,
+    deviceType,
+    referrerSource,
+  };
+
+  const eventKey = getEventKey(sessionId, eventId);
+  await store.set(eventKey, JSON.stringify(event));
+
+  // Add to session's event list
+  const listKey = getSessionEventsKey(sessionId);
+  const listData = await store.get(listKey);
+  const eventIds: string[] = listData ? JSON.parse(listData) : [];
+  eventIds.push(eventId);
+  await store.set(listKey, JSON.stringify(eventIds));
+
+  return event;
+}
+
 // Calculate and store session statistics
 export async function calculateProgressStats(sessionId: string): Promise<ProgressStats> {
   const now = new Date().toISOString();
 
-  // In production, would query all progress entries for the session
-  // For now, return default stats
+  // Get all progress records for this session and aggregate
+  const progressRecords = await getAllSessionProgress(sessionId);
+
+  let totalTimeSpent = 0;
+  let chaptersCompleted = 0;
+
+  for (const progress of progressRecords) {
+    totalTimeSpent += progress.timeSpent;
+    if (progress.completion === 100) {
+      chaptersCompleted++;
+    }
+  }
+
   const stats: ProgressStats = {
-    totalTimeSpent: 0,
-    chaptersStarted: 0,
-    chaptersCompleted: 0,
-    averageCompletionTime: 0,
+    totalTimeSpent,
+    chaptersStarted: progressRecords.length,
+    chaptersCompleted,
+    averageCompletionTime: progressRecords.length > 0 ? Math.round(totalTimeSpent / progressRecords.length) : 0,
     lastActivityAt: now,
   };
 
@@ -177,9 +276,3 @@ export async function markChapterComplete(sessionId: string, chapterId: string):
   return updated;
 }
 
-// Get all progress for a session
-export async function getAllSessionProgress(sessionId: string): Promise<ReaderProgress[]> {
-  // In production, would query by prefix: progress:{sessionId}:*
-  // For MVP, return empty array (pagination over all keys is expensive)
-  return [];
-}

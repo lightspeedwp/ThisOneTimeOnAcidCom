@@ -20,6 +20,7 @@ import {
   getBookmark,
   deleteBookmark,
   updateBookmark,
+  getSessionBookmarks,
   ReaderBookmark,
 } from '../lib/reader-access/bookmarks';
 
@@ -100,10 +101,11 @@ async function handleGetBookmarks(req: Request, sessionId: string, expiresAt: st
     });
   }
 
-  // Get all bookmarks for session (empty for MVP)
+  // Get all bookmarks for session
+  const bookmarks = await getSessionBookmarks(sessionId);
   const response: BookmarksResponse = {
     state: 'verified',
-    bookmarks: [],
+    bookmarks,
     expiresAt,
   };
 

@@ -28,6 +28,26 @@ vi.mock('@netlify/blobs', () => ({
 
 import handler from '../functions/reader-analytics';
 
+const createTestSession = (sessionId: string = 'valid') => ({
+  sessionId,
+  deviceId: 'test-device',
+  chapterId: 'ch-01',
+  createdAt: new Date().toISOString(),
+  expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+  renewedAt: new Date().toISOString(),
+});
+
+const createTestProgress = (sessionId: string, chapterId: string) => ({
+  sessionId,
+  chapterId,
+  position: 0,
+  completion: 0,
+  timeSpent: 0,
+  resumeCount: 0,
+  startedAt: new Date().toISOString(),
+  lastReadAt: new Date().toISOString(),
+});
+
 describe('Reader Analytics & Completion Events (RA-T051)', () => {
   let mockRequest: Request;
 
@@ -99,6 +119,12 @@ describe('Reader Analytics & Completion Events (RA-T051)', () => {
     });
 
     it('should record completion event with valid data', async () => {
+      // Seed session and progress
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+      const progress = createTestProgress('valid', 'ch-01');
+      mockStore.set('progress:valid:ch-01', JSON.stringify(progress));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-analytics', {
         method: 'POST',
         headers: {
@@ -113,16 +139,23 @@ describe('Reader Analytics & Completion Events (RA-T051)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(200);
 
-      if (response.status === 200) {
-        const body = await response.json();
-        expect(body.event).toBeDefined();
-        expect(body.event.recorded).toBe(true);
-        expect(body.event.chapterId).toBe('ch-01');
-      }
+      const body = await response.json();
+      expect(body.event).toBeDefined();
+      expect(body.event.recorded).toBe(true);
+      expect(body.event.chapterId).toBe('ch-01');
     });
 
     it('should include timestamp in completion event', async () => {
+      // Seed session and progress
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+      const progress = createTestProgress('valid', 'ch-01');
+      mockStore.set('progress:valid:ch-01', JSON.stringify(progress));
+      // Add to progress list for aggregation
+      mockStore.set('progress-list:valid', JSON.stringify(['ch-01']));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-analytics', {
         method: 'POST',
         headers: {
@@ -136,17 +169,24 @@ describe('Reader Analytics & Completion Events (RA-T051)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(200);
 
-      if (response.status === 200) {
-        const body = await response.json();
-        expect(body.event.timestamp).toBeDefined();
-        expect(typeof body.event.timestamp).toBe('string');
-      }
+      const body = await response.json();
+      expect(body.event.timestamp).toBeDefined();
+      expect(typeof body.event.timestamp).toBe('string');
     });
   });
 
   describe('Reading Statistics', () => {
     it('should aggregate reading stats', async () => {
+      // Seed session and progress
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+      const progress = createTestProgress('valid', 'ch-01');
+      mockStore.set('progress:valid:ch-01', JSON.stringify(progress));
+      // Add to progress list for aggregation
+      mockStore.set('progress-list:valid', JSON.stringify(['ch-01']));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-analytics', {
         method: 'POST',
         headers: {
@@ -160,17 +200,24 @@ describe('Reader Analytics & Completion Events (RA-T051)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(200);
 
-      if (response.status === 200) {
-        const body = await response.json();
-        expect(body.stats).toBeDefined();
-        expect(body.stats).toHaveProperty('totalTimeSpent');
-        expect(body.stats).toHaveProperty('chaptersStarted');
-        expect(body.stats).toHaveProperty('chaptersCompleted');
-      }
+      const body = await response.json();
+      expect(body.stats).toBeDefined();
+      expect(body.stats).toHaveProperty('totalTimeSpent');
+      expect(body.stats).toHaveProperty('chaptersStarted');
+      expect(body.stats).toHaveProperty('chaptersCompleted');
     });
 
     it('should include last activity timestamp', async () => {
+      // Seed session and progress
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+      const progress = createTestProgress('valid', 'ch-01');
+      mockStore.set('progress:valid:ch-01', JSON.stringify(progress));
+      // Add to progress list for aggregation
+      mockStore.set('progress-list:valid', JSON.stringify(['ch-01']));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-analytics', {
         method: 'POST',
         headers: {
@@ -184,11 +231,10 @@ describe('Reader Analytics & Completion Events (RA-T051)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(200);
 
-      if (response.status === 200) {
-        const body = await response.json();
-        expect(body.stats.lastActivityAt).toBeDefined();
-      }
+      const body = await response.json();
+      expect(body.stats.lastActivityAt).toBeDefined();
     });
   });
 

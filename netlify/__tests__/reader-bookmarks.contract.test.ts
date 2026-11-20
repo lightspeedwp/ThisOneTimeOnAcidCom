@@ -30,6 +30,15 @@ vi.mock('@netlify/blobs', () => ({
 
 import handler from '../functions/reader-bookmarks';
 
+const createTestSession = (sessionId: string = 'valid') => ({
+  sessionId,
+  deviceId: 'test-device',
+  chapterId: 'ch-01',
+  createdAt: new Date().toISOString(),
+  expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+  renewedAt: new Date().toISOString(),
+});
+
 describe('Reader Bookmarks API (RA-T052)', () => {
   let mockRequest: Request;
 
@@ -67,6 +76,10 @@ describe('Reader Bookmarks API (RA-T052)', () => {
 
   describe('GET Bookmarks', () => {
     it('should return bookmarks list', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks', {
         method: 'GET',
         headers: {
@@ -75,15 +88,45 @@ describe('Reader Bookmarks API (RA-T052)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(200);
 
-      if (response.status === 200) {
-        const body = await response.json();
-        expect(body.bookmarks).toBeDefined();
-        expect(Array.isArray(body.bookmarks)).toBe(true);
-      }
+      const body = await response.json();
+      expect(body.bookmarks).toBeDefined();
+      expect(Array.isArray(body.bookmarks)).toBe(true);
+    });
+
+    it('should return 404 for missing bookmark', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
+      mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks?bookmarkId=bm-123', {
+        method: 'GET',
+        headers: {
+          'cookie': 'reader_session=valid',
+        },
+      });
+
+      const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(404);
     });
 
     it('should retrieve specific bookmark by ID', async () => {
+      // Seed session and create a bookmark
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
+      const bookmark = {
+        id: 'bm-123',
+        sessionId: 'valid',
+        chapterId: 'ch-01',
+        position: 50,
+        title: 'Important section',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      mockStore.set('bookmark:valid:bm-123', JSON.stringify(bookmark));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks?bookmarkId=bm-123', {
         method: 'GET',
         headers: {
@@ -92,35 +135,21 @@ describe('Reader Bookmarks API (RA-T052)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(200);
 
-      // May be 200 or 404 depending on whether bookmark exists
-      expect([200, 404, 401]).toContain(response.status);
-    });
-
-    it('should include bookmark metadata', async () => {
-      mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks?bookmarkId=bm-123', {
-        method: 'GET',
-        headers: {
-          'cookie': 'reader_session=valid',
-        },
-      });
-
-      const response = await handler(mockRequest, {} as any);
-
-      if (response.status === 200) {
-        const body = await response.json();
-        if (body.bookmark) {
-          expect(body.bookmark).toHaveProperty('id');
-          expect(body.bookmark).toHaveProperty('chapterId');
-          expect(body.bookmark).toHaveProperty('createdAt');
-          expect(body.bookmark).toHaveProperty('updatedAt');
-        }
-      }
+      const body = await response.json();
+      expect(body.bookmark).toBeDefined();
+      expect(body.bookmark.id).toBe('bm-123');
+      expect(body.bookmark.chapterId).toBe('ch-01');
     });
   });
 
   describe('POST Bookmarks (Create)', () => {
     it('should create bookmark for chapter', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks', {
         method: 'POST',
         headers: {
@@ -133,16 +162,19 @@ describe('Reader Bookmarks API (RA-T052)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(201);
 
-      if (response.status === 201) {
-        const body = await response.json();
-        expect(body.bookmark).toBeDefined();
-        expect(body.bookmark.chapterId).toBe('ch-01');
-        expect(body.bookmark.id).toBeDefined();
-      }
+      const body = await response.json();
+      expect(body.bookmark).toBeDefined();
+      expect(body.bookmark.chapterId).toBe('ch-01');
+      expect(body.bookmark.id).toBeDefined();
     });
 
     it('should require chapter ID', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks', {
         method: 'POST',
         headers: {
@@ -153,10 +185,14 @@ describe('Reader Bookmarks API (RA-T052)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
-      expect([400, 401]).toContain(response.status);
+      expect(response.status).toBe(400);
     });
 
     it('should save position with bookmark', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks', {
         method: 'POST',
         headers: {
@@ -170,14 +206,17 @@ describe('Reader Bookmarks API (RA-T052)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(201);
 
-      if (response.status === 201) {
-        const body = await response.json();
-        expect(body.bookmark.position).toBe(50);
-      }
+      const body = await response.json();
+      expect(body.bookmark.position).toBe(50);
     });
 
     it('should save custom bookmark title', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks', {
         method: 'POST',
         headers: {
@@ -191,14 +230,17 @@ describe('Reader Bookmarks API (RA-T052)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(201);
 
-      if (response.status === 201) {
-        const body = await response.json();
-        expect(body.bookmark.title).toBe('Important passage');
-      }
+      const body = await response.json();
+      expect(body.bookmark.title).toBe('Important passage');
     });
 
     it('should include creation timestamp', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks', {
         method: 'POST',
         headers: {
@@ -211,52 +253,54 @@ describe('Reader Bookmarks API (RA-T052)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
+      expect(response.status).toBe(201);
 
-      if (response.status === 201) {
-        const body = await response.json();
-        expect(body.bookmark.createdAt).toBeDefined();
-        expect(body.bookmark.updatedAt).toBeDefined();
-      }
+      const body = await response.json();
+      expect(body.bookmark.createdAt).toBeDefined();
+      expect(body.bookmark.updatedAt).toBeDefined();
     });
   });
 
   describe('DELETE Bookmarks', () => {
     it('should delete bookmark', async () => {
-      // First create a bookmark
-      const createRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks', {
-        method: 'POST',
-        headers: {
-          'cookie': 'reader_session=valid',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chapterId: 'ch-01',
-        }),
-      });
+      // Seed session and create a bookmark
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
 
-      const createResponse = await handler(createRequest, {} as any);
+      const bookmarkId = 'bm-123';
+      const bookmark = {
+        id: bookmarkId,
+        sessionId: 'valid',
+        chapterId: 'ch-01',
+        position: 50,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      mockStore.set('bookmark:valid:bm-123', JSON.stringify(bookmark));
 
-      if (createResponse.status === 201) {
-        const createBody = await createResponse.json();
-        const bookmarkId = createBody.bookmark.id;
-
-        // Now delete it
-        const deleteRequest = new Request(
-          `http://localhost/.netlify/functions/reader-bookmarks/${bookmarkId}`,
-          {
-            method: 'DELETE',
-            headers: {
-              'cookie': 'reader_session=valid',
-            },
+      // Now delete it
+      const deleteRequest = new Request(
+        `http://localhost/.netlify/functions/reader-bookmarks/${bookmarkId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'cookie': 'reader_session=valid',
           },
-        );
+        },
+      );
 
-        const deleteResponse = await handler(deleteRequest, {} as any);
-        expect(deleteResponse.status).toBe(200);
-      }
+      const deleteResponse = await handler(deleteRequest, {} as any);
+      expect(deleteResponse.status).toBe(200);
+
+      // Verify it was deleted
+      expect(mockStore.get('bookmark:valid:bm-123')).toBeUndefined();
     });
 
     it('should return 404 for non-existent bookmark', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks/bm-nonexistent', {
         method: 'DELETE',
         headers: {
@@ -265,12 +309,16 @@ describe('Reader Bookmarks API (RA-T052)', () => {
       });
 
       const response = await handler(mockRequest, {} as any);
-      expect([404, 401]).toContain(response.status);
+      expect(response.status).toBe(404);
     });
   });
 
   describe('Response Format', () => {
     it('should return JSON responses', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks', {
         method: 'GET',
         headers: {
@@ -284,6 +332,10 @@ describe('Reader Bookmarks API (RA-T052)', () => {
     });
 
     it('should include session expiration', async () => {
+      // Seed session
+      const session = createTestSession('valid');
+      mockStore.set('session:valid', JSON.stringify(session));
+
       mockRequest = new Request('http://localhost/.netlify/functions/reader-bookmarks', {
         method: 'GET',
         headers: {

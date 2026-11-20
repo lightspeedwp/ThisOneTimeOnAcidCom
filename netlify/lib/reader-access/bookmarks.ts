@@ -56,6 +56,15 @@ export async function createBookmark(
   const key = getBookmarkKey(sessionId, id);
   await store.set(key, JSON.stringify(bookmark));
 
+  // Add to session's bookmark list
+  const listKey = getSessionBookmarksKey(sessionId);
+  const listData = await store.get(listKey);
+  const bookmarkIds: string[] = listData ? JSON.parse(listData) : [];
+  if (!bookmarkIds.includes(id)) {
+    bookmarkIds.push(id);
+    await store.set(listKey, JSON.stringify(bookmarkIds));
+  }
+
   return bookmark;
 }
 
@@ -75,6 +84,19 @@ export async function getBookmark(sessionId: string, bookmarkId: string): Promis
 export async function deleteBookmark(sessionId: string, bookmarkId: string): Promise<void> {
   const key = getBookmarkKey(sessionId, bookmarkId);
   await store.delete(key);
+
+  // Remove from session's bookmark list
+  const listKey = getSessionBookmarksKey(sessionId);
+  const listData = await store.get(listKey);
+  if (listData) {
+    const bookmarkIds: string[] = JSON.parse(listData);
+    const updated = bookmarkIds.filter(id => id !== bookmarkId);
+    if (updated.length > 0) {
+      await store.set(listKey, JSON.stringify(updated));
+    } else {
+      await store.delete(listKey);
+    }
+  }
 }
 
 // Update bookmark position or title
@@ -102,10 +124,26 @@ export async function updateBookmark(
 
 // Get all bookmarks for a session
 export async function getSessionBookmarks(sessionId: string): Promise<ReaderBookmark[]> {
-  // In production, would query by prefix: bookmark:{sessionId}:*
-  // For MVP, this would require pagination/listing support
-  // For now, return empty array - client maintains bookmark list
-  return [];
+  const listKey = getSessionBookmarksKey(sessionId);
+  const listData = await store.get(listKey);
+
+  if (!listData) return [];
+
+  try {
+    const bookmarkIds: string[] = JSON.parse(listData);
+    const bookmarks: ReaderBookmark[] = [];
+
+    for (const id of bookmarkIds) {
+      const bookmark = await getBookmark(sessionId, id);
+      if (bookmark) {
+        bookmarks.push(bookmark);
+      }
+    }
+
+    return bookmarks;
+  } catch {
+    return [];
+  }
 }
 
 // Check if chapter is bookmarked
