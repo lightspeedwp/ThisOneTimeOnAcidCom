@@ -66,21 +66,22 @@ Link: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/630
 
 **T066**: Close Prompt 3A–3C tasks and resolved decision-clarification tasks
 - **What to do**:
-  - Find and mark as [x] or close all T012–T027 and T022–T038 tasks (reader-access and decision-related)
+  - In `tasks.md`: identify reader-access tasks (Phase 3: lines 56–77) and decision-clarification tasks (Phase 4 decision resolution: lines 93–106)
+  - Mark only those as [x] or close; leave all [BLOCKED] tasks open until their decisions are recorded
   - Add handover notes explaining transfer to Spec 005
   - Link to Spec 005 spec.md where ownership continues
 - **Files to update**: `tasks.md`
-- **Acceptance**: All reader-access tasks (T012–T027, T022–T038, T045–T047) marked with handover notes
+- **Acceptance**: All reader-access and decision-resolution tasks marked with handover notes; [BLOCKED] tasks remain open
 - **Notes**: This is about documenting why these tasks are ending; execution continues in Spec 005
 
 **T067**: Disambiguate duplicate T014–T038 task sets and repoint dependencies
 - **What to do**:
-  - Identify and document why T014–T038 appears (should be single set)
-  - Repoint all Phase 8 dependencies that reference T014–T038 to canonical set
-  - Clean up duplicate numbering in `tasks.md`
+  - Identify each duplicate ID and the distinct task it refers to (using list and line location, not ID range)
+  - Assign unique IDs to distinct tasks; do not merge tasks with different descriptions
+  - Repoint each Phase 8 dependency to the task it intends
 - **Files to update**: `tasks.md`, any files cross-referencing tasks
-- **Acceptance**: No duplicate task numbering; all dependencies point to single canonical set
-- **Notes**: This may require comparing task lists across phases and merging duplicates
+- **Acceptance**: Each duplicate ID mapped to its distinct task with unique ID; all Phase 8 dependencies point to their intended task
+- **Notes**: Map each duplicate ID to its distinct task; assign unique IDs without merging different work; repoint each Phase 8 dependency to its intended task
 
 #### Status & Acceptance Gates (T068–T069)
 

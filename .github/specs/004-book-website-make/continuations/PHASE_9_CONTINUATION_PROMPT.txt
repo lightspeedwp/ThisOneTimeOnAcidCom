@@ -27,6 +27,6 @@ Execute with: /speckit-implement or manually per task
 Reference docs:
 - Full details: .github/specs/004-book-website-make/continuations/PHASE_9_REMAINING_TASKS_T063_T074.md
 - Completed work: PR #630 (https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/630)
-- Decisions reference: exports/LINEAR_SYNC_HANDOFF.md
+- Decisions reference: .github/specs/004-book-website-make/checklists/blocking-decisions-validation.md
 
 After T074 complete: Commit to docs/spec-004-phase9-remaining, push, create draft PR.
