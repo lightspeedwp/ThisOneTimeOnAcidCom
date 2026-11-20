@@ -11,6 +11,7 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 import {
   createSession,
   renewSession,
@@ -25,19 +26,10 @@ import {
 } from '../../netlify/lib/reader-access/session-config';
 import type { Session } from '../../netlify/lib/reader-access/session';
 
-// Mock Blobs store
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store, // Export for test access
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Session Renewal - T021-T025', () => {
   const testEmail = 'reader@example.com';
@@ -48,6 +40,8 @@ describe('Session Renewal - T021-T025', () => {
   };
 
   beforeEach(() => {
+
+    resetInMemoryBlobStore();
     vi.clearAllMocks();
   });
 

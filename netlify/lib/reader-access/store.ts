@@ -162,8 +162,9 @@ export async function deleteSession(email: string, deviceId: string): Promise<vo
  * @param email Reader's email address
  * @returns Array of Session objects for this reader (across all devices)
  *
- * @note This requires Blobs list() API if available.
- *       For now, this is a placeholder; MVP may require pre-computed session counts.
+ * @note `@netlify/blobs` `list({ prefix })` resolves to `{ blobs, directories }`,
+ *       where each blob entry carries its `key`. The prefix ends with the `:`
+ *       separator, so `a@x.com` never matches `a@x.com-2`.
  *
  * @example
  * const allSessions = await listSessionsByEmail('reader@example.com');
@@ -178,15 +179,8 @@ export async function listSessionsByEmail(email: string): Promise<Session[]> {
     // Build prefix for all sessions for this email
     const prefix = buildSessionKey(email, '');
 
-    // List all keys starting with prefix
-    // Note: This assumes Blobs supports list() with prefix filtering
-    // If not available, we may need to store a separate session index
-    const keys = await (store as any).list?.({ prefix });
-
-    if (!keys) {
-      // Fallback: return empty array if list() not available
-      return [];
-    }
+    const { blobs } = await store.list({ prefix });
+    const keys = blobs.map((blob) => blob.key);
 
     // Fetch each session in parallel
     const sessions = await Promise.all(

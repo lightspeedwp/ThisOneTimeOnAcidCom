@@ -32,6 +32,46 @@ import {
 } from './session-config';
 
 /**
+ * Whether a stored session currently holds one of the reader's device slots:
+ * not terminated and not yet past its expiry. Expired sessions keep
+ * `status: 'active'` in storage, so the expiry has to be checked here too.
+ */
+function isSessionActive(session: Session, now: Date): boolean {
+  return (
+    session.status === 'active' &&
+    session.terminatedAt === null &&
+    new Date(session.expiresAt).getTime() > now.getTime()
+  );
+}
+
+/** Tail of the pending createSession chain for each reader, keyed by email. */
+const emailLocks = new Map<string, Promise<unknown>>();
+
+/**
+ * Run `task` after every earlier task queued for the same reader has settled.
+ *
+ * This removes the check-then-write race in createSession within one function
+ * instance. It cannot coordinate separate instances: that needs conditional
+ * writes in the storage layer.
+ */
+async function withEmailLock<T>(email: string, task: () => Promise<T>): Promise<T> {
+  const key = email.toLowerCase();
+  const previous = emailLocks.get(key) ?? Promise.resolve();
+  const run = previous.then(task, task);
+  const tail = run.catch(() => undefined);
+  emailLocks.set(key, tail);
+
+  try {
+    return await run;
+  } finally {
+    // Drop the entry once nothing newer has queued behind this task.
+    if (emailLocks.get(key) === tail) {
+      emailLocks.delete(key);
+    }
+  }
+}
+
+/**
  * Create a new session after email verification.
  *
  * Steps:
@@ -71,42 +111,48 @@ export async function createSession(
   // Generate device fingerprint hash
   const deviceId = generateDeviceFingerprint(deviceFingerprint);
 
-  // Check concurrent device limit (T006b)
-  const activeSessions = await listSessionsByEmail(email);
-  const activeCount = activeSessions.filter(
-    (s) => s.status === 'active' && s.terminatedAt === null
-  ).length;
+  // Serialise check-then-write per reader so concurrent verifications in this
+  // instance cannot all pass the device-limit check before any of them writes.
+  return withEmailLock(email, async () => {
+    // Check concurrent device limit (T006b).
+    // A session on this same device is about to be replaced (same storage key),
+    // so it does not use up a slot: re-verifying on a known device never adds one.
+    const now = new Date();
+    const activeSessions = await listSessionsByEmail(email);
+    const activeCount = activeSessions.filter(
+      (s) => s.deviceId !== deviceId && isSessionActive(s, now)
+    ).length;
 
-  if (activeCount >= MAX_CONCURRENT_DEVICES) {
-    // Device limit exceeded
-    const error = new Error('Device limit exceeded');
-    (error as any).statusCode = 409;
-    (error as any).errorCode = 'device_limit_exceeded';
-    throw error;
-  }
+    if (activeCount >= MAX_CONCURRENT_DEVICES) {
+      // Device limit exceeded
+      const error = new Error('Device limit exceeded');
+      (error as any).statusCode = 409;
+      (error as any).errorCode = 'device_limit_exceeded';
+      throw error;
+    }
 
-  // Generate cryptographically secure session token
-  const sessionId = generateSessionToken();
+    // Generate cryptographically secure session token
+    const sessionId = generateSessionToken();
 
-  // Create session record with 30-day expiry
-  const now = new Date();
-  const expiresAt = new Date(now.getTime() + SESSION_LIFETIME_DAYS * 24 * 60 * 60 * 1000);
+    // Create session record with 30-day expiry
+    const expiresAt = new Date(now.getTime() + SESSION_LIFETIME_DAYS * 24 * 60 * 60 * 1000);
 
-  const session: Session = {
-    sessionId,
-    email,
-    deviceId,
-    createdAt: now.toISOString(),
-    expiresAt: expiresAt.toISOString(),
-    renewedAt: now.toISOString(),
-    terminatedAt: null,
-    status: 'active',
-  };
+    const session: Session = {
+      sessionId,
+      email,
+      deviceId,
+      createdAt: now.toISOString(),
+      expiresAt: expiresAt.toISOString(),
+      renewedAt: now.toISOString(),
+      terminatedAt: null,
+      status: 'active',
+    };
 
-  // Store in Blobs (strong consistency)
-  await storeSession(session);
+    // Store in Blobs (strong consistency)
+    await storeSession(session);
 
-  return session;
+    return session;
+  });
 }
 
 /**
@@ -214,8 +260,9 @@ export async function validateSession(
   const now = new Date();
   const timeUntilExpiry = expiresAt.getTime() - now.getTime();
 
-  if (timeUntilExpiry < -CLOCK_SKEW_TOLERANCE_MS) {
-    // Session expired (beyond clock skew tolerance)
+  if (timeUntilExpiry <= -CLOCK_SKEW_TOLERANCE_MS) {
+    // Session expired: the tolerance window is half-open, so a session that is
+    // exactly CLOCK_SKEW_TOLERANCE_MS past expiry is already rejected.
     return {
       isValid: false,
       reason: 'expired_session',
@@ -288,11 +335,15 @@ export async function renewSession(email: string, deviceId: string): Promise<Ses
     throw new Error(`Cannot renew expired session for ${email}`);
   }
 
-  // Step 3: Coalesce renewals (prevent thundering herd)
+  // Step 3: Coalesce renewals (prevent thundering herd).
+  // createSession sets renewedAt = createdAt, but creation is not a renewal:
+  // only coalesce against an earlier renewal, so the first activity after
+  // sign-in always extends the session.
   const lastRenewal = new Date(existing.renewedAt);
   const timeSinceLastRenewal = now.getTime() - lastRenewal.getTime();
+  const hasBeenRenewed = existing.renewedAt !== existing.createdAt;
 
-  if (timeSinceLastRenewal < RENEWAL_COALESCE_WINDOW_MS) {
+  if (hasBeenRenewed && timeSinceLastRenewal < RENEWAL_COALESCE_WINDOW_MS) {
     // Skip update, just return current session
     // This prevents multiple rapid renewals in concurrent requests
     // No logging needed for coalesced renewals
@@ -443,7 +494,8 @@ export async function terminateSession(email: string, deviceId: string): Promise
  */
 export async function getActiveSessionCount(email: string): Promise<number> {
   const sessions = await listSessionsByEmail(email);
-  return sessions.filter((s) => s.status === 'active' && s.terminatedAt === null).length;
+  const now = new Date();
+  return sessions.filter((s) => isSessionActive(s, now)).length;
 }
 
 /**

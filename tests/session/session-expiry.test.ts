@@ -6,21 +6,14 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 import { createSession, validateSession, renewSession } from '../../netlify/lib/reader-access/session-service';
 import { SESSION_LIFETIME_DAYS, CLOCK_SKEW_TOLERANCE_MS } from '../../netlify/lib/reader-access/session-config';
 
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store,
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Session Expiry - T083 (US2)', () => {
   const testEmail = `reader-expiry-${Date.now()}@example.com`;
@@ -33,6 +26,7 @@ describe('Session Expiry - T083 (US2)', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    resetInMemoryBlobStore();
   });
 
   describe('Expiry calculation precision', () => {
@@ -196,9 +190,11 @@ describe('Session Expiry - T083 (US2)', () => {
 
         const renewed = await renewSession(testEmail, current.deviceId);
 
-        const createdTime = new Date(renewed.createdAt).getTime();
+        // Rolling window: each renewal sets expiresAt = renewedAt + 30 days.
+        // (Measuring from createdAt grows by the elapsed time on every renewal.)
+        const renewedTime = new Date(renewed.renewedAt).getTime();
         const expiresTime = new Date(renewed.expiresAt).getTime();
-        const windowSize = expiresTime - createdTime;
+        const windowSize = expiresTime - renewedTime;
 
         // Should still be ~30 days
         expect(Math.abs(windowSize - thirtyDaysInMs)).toBeLessThan(2000);

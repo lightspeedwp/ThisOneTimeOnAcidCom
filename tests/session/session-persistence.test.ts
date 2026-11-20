@@ -6,21 +6,14 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 import { createSession, validateSession } from '../../netlify/lib/reader-access/session-service';
 import { getSession, updateSession } from '../../netlify/lib/reader-access/store';
 
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store,
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Session Persistence - T079 (US1)', () => {
   const testEmail = `reader-persist-${Date.now()}@example.com`;
@@ -33,6 +26,7 @@ describe('Session Persistence - T079 (US1)', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    resetInMemoryBlobStore();
   });
 
   describe('Session retrieval', () => {
@@ -185,9 +179,9 @@ describe('Session Persistence - T079 (US1)', () => {
     });
 
     it('should not throw on missing session', async () => {
-      expect(async () => {
-        await getSession('nonexistent@example.com', 'nonexistent-device');
-      }).not.toThrow();
+      await expect(
+        getSession('nonexistent@example.com', 'nonexistent-device')
+      ).resolves.toBeNull();
     });
   });
 });

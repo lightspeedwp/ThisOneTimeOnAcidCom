@@ -9,6 +9,32 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { constantTimeTokenCompare, isValidSessionToken } from '../../netlify/lib/reader-access/crypto';
 import { checkRateLimit, getRateLimitStatus, resetRateLimit, RATE_LIMIT_PRESETS } from '../../netlify/lib/reader-access/rate-limiter';
 
+/**
+ * Median time (ns) of one call for each function. JIT warm-up runs first, each
+ * sample times a batch of calls, and samples alternate between the functions,
+ * so timer resolution, GC pauses and bursts of load from parallel test workers
+ * affect every function equally instead of skewing one of them.
+ */
+function medianCallTimesNs(fns: Array<() => unknown>, samples = 200, batch = 50): number[] {
+  for (const fn of fns) {
+    for (let i = 0; i < samples * batch; i++) fn();
+  }
+
+  const timings: number[][] = fns.map(() => []);
+  for (let i = 0; i < samples; i++) {
+    fns.forEach((fn, index) => {
+      const start = process.hrtime.bigint();
+      for (let j = 0; j < batch; j++) fn();
+      timings[index].push(Number(process.hrtime.bigint() - start) / batch);
+    });
+  }
+
+  return timings.map((series) => {
+    series.sort((a, b) => a - b);
+    return series[Math.floor(series.length / 2)];
+  });
+}
+
 describe('Session Security - Constant-Time Comparison', () => {
   describe('constantTimeTokenCompare', () => {
     it('should return true for matching tokens', () => {
@@ -29,7 +55,9 @@ describe('Session Security - Constant-Time Comparison', () => {
     });
 
     it('should handle empty string tokens', () => {
-      expect(constantTimeTokenCompare('', '')).toBe(true);
+      // An empty token is never a valid credential, so two empty values must
+      // not "match" (a blank stored token would otherwise accept a blank cookie).
+      expect(constantTimeTokenCompare('', '')).toBe(false);
       expect(constantTimeTokenCompare('', 'token')).toBe(false);
       expect(constantTimeTokenCompare('token', '')).toBe(false);
     });
@@ -37,49 +65,17 @@ describe('Session Security - Constant-Time Comparison', () => {
     it('should use constant-time comparison (no timing leaks)', () => {
       // Measure comparison time for correct vs incorrect tokens
       const correctToken = 'a'.repeat(43); // base64url token length
-      const wrongShorter = 'b'.repeat(10);
-      const wrongLonger = 'c'.repeat(100);
       const wrongSameLength = 'x'.repeat(43);
 
-      // Run multiple times to get statistical average
-      const iterations = 1000;
-      const timings: Record<string, number[]> = {
-        correct: [],
-        wrongShorter: [],
-        wrongLonger: [],
-        wrongSameLength: [],
-      };
-
-      for (let i = 0; i < iterations; i++) {
-        const start1 = process.hrtime.bigint();
-        constantTimeTokenCompare(correctToken, correctToken);
-        const time1 = Number(process.hrtime.bigint() - start1);
-        timings.correct.push(time1);
-
-        const start2 = process.hrtime.bigint();
-        constantTimeTokenCompare(correctToken, wrongShorter);
-        const time2 = Number(process.hrtime.bigint() - start2);
-        timings.wrongShorter.push(time2);
-
-        const start3 = process.hrtime.bigint();
-        constantTimeTokenCompare(correctToken, wrongLonger);
-        const time3 = Number(process.hrtime.bigint() - start3);
-        timings.wrongLonger.push(time3);
-
-        const start4 = process.hrtime.bigint();
-        constantTimeTokenCompare(correctToken, wrongSameLength);
-        const time4 = Number(process.hrtime.bigint() - start4);
-        timings.wrongSameLength.push(time4);
-      }
-
-      // Calculate averages
-      const avgCorrect = timings.correct.reduce((a, b) => a + b, 0) / iterations;
-      const avgWrongSameLength =
-        timings.wrongSameLength.reduce((a, b) => a + b, 0) / iterations;
+      // Median per-call time after warm-up (see medianCallTimesNs)
+      const [medianCorrect, medianWrongSameLength] = medianCallTimesNs([
+        () => constantTimeTokenCompare(correctToken, correctToken),
+        () => constantTimeTokenCompare(correctToken, wrongSameLength),
+      ]);
 
       // For same-length tokens, timing should be nearly identical (constant-time)
-      const timingRatio = Math.max(avgCorrect, avgWrongSameLength) /
-        Math.min(avgCorrect, avgWrongSameLength);
+      const timingRatio = Math.max(medianCorrect, medianWrongSameLength) /
+        Math.min(medianCorrect, medianWrongSameLength);
 
       // Allow up to 1.5x variance for constant-time comparison
       expect(timingRatio).toBeLessThan(1.5);
@@ -88,7 +84,8 @@ describe('Session Security - Constant-Time Comparison', () => {
 
   describe('isValidSessionToken', () => {
     it('should validate correct token format', () => {
-      const validToken = 'YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXoxMjM0NTY3ODk='; // 48 chars base64
+      // Same shape generateSessionToken() emits: 32 random bytes, base64url, no '=' padding
+      const validToken = 'q2Zf8Jt0vXyLr5N1sA9bKc3WmE7uHdP4oGiTzQx6YlU';
       expect(isValidSessionToken(validToken)).toBe(true);
     });
 
@@ -127,8 +124,12 @@ describe('Session Security - Constant-Time Comparison', () => {
 
 describe('Session Security - Rate Limiting', () => {
   beforeEach(() => {
-    // Reset rate limit store before each test
+    // Reset the module-level rate limit store: every test reuses these identifiers
     vi.clearAllMocks();
+    const { keyPrefix } = RATE_LIMIT_PRESETS.SESSION_CREATION;
+    for (const id of ['test@example.com', 'user1@example.com', 'user2@example.com']) {
+      resetRateLimit(id, keyPrefix);
+    }
   });
 
   describe('checkRateLimit', () => {
@@ -278,16 +279,15 @@ describe('Session Security - Timing Attack Resistance', () => {
       tokens.push('a'.repeat(40 + i)); // Varying lengths
     }
 
-    const timings: number[] = [];
-
-    tokens.forEach(token => {
-      const start = process.hrtime.bigint();
-      // Try to compare with another token of same length
-      const reference = 'x'.repeat(token.length);
-      constantTimeTokenCompare(token, reference);
-      const duration = Number(process.hrtime.bigint() - start);
-      timings.push(duration);
-    });
+    // Median per-call time for each length (see medianCallTimesNs)
+    const timings: number[] = medianCallTimesNs(
+      tokens.map((token) => {
+        const reference = 'x'.repeat(token.length);
+        return () => constantTimeTokenCompare(token, reference);
+      }),
+      50,
+      50
+    );
 
     // Check variance in timing (should be low for constant-time)
     const avg = timings.reduce((a, b) => a + b, 0) / timings.length;

@@ -6,21 +6,14 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 import { createSession, terminateSession, validateSession } from '../../netlify/lib/reader-access/session-service';
 import { getSession } from '../../netlify/lib/reader-access/store';
 
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store,
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Session Logout - T103 (US5)', () => {
   const testEmail = `reader-logout-${Date.now()}@example.com`;
@@ -33,6 +26,7 @@ describe('Session Logout - T103 (US5)', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    resetInMemoryBlobStore();
   });
 
   describe('Basic termination', () => {
@@ -168,9 +162,9 @@ describe('Session Logout - T103 (US5)', () => {
 
   describe('Error cases', () => {
     it('should throw when terminating non-existent session', async () => {
-      expect(async () => {
-        await terminateSession('nonexistent@example.com', 'nonexistent-device');
-      }).rejects.toThrow();
+      await expect(
+        terminateSession('nonexistent@example.com', 'nonexistent-device')
+      ).rejects.toThrow('Session not found');
     });
   });
 

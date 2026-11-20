@@ -7,24 +7,20 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 import { createSession, validateSession, renewSession, getSessionProperties } from '../../netlify/lib/reader-access/session-service';
 import { updateSession } from '../../netlify/lib/reader-access/store';
 
-// Mock Blobs store
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store, // Export for test access
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('E2E: Seamless Session Renewal Over 25+ Simulated Days - T026', () => {
+  beforeEach(() => {
+    resetInMemoryBlobStore();
+  });
+
   const testEmail = 'reader@example.com';
   const testFingerprint = {
     userAgent: 'Mozilla/5.0...',

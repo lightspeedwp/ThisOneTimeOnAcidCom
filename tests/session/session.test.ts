@@ -16,10 +16,19 @@ import {
 } from '../../netlify/lib/reader-access/session-service';
 import { FingerprintInput } from '../../netlify/lib/reader-access/session';
 import { generateSessionToken } from '../../netlify/lib/reader-access/crypto';
-import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
+import {
+  SESSION_LIFETIME_DAYS,
+  CLOCK_SKEW_TOLERANCE_MS,
+} from '../../netlify/lib/reader-access/session-config';
+import { updateSession } from '../../netlify/lib/reader-access/store';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 
-// Mock store operations
-vi.mock('../../netlify/lib/reader-access/store');
+// Exercise the real store against an in-memory Netlify Blobs. Auto-mocking
+// the store module made every function return undefined, so createSession
+// called `.filter` on undefined.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Session Service - Core Operations', () => {
   const testEmail = 'reader@example.com';
@@ -32,6 +41,7 @@ describe('Session Service - Core Operations', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    resetInMemoryBlobStore();
   });
 
   afterEach(() => {
@@ -112,18 +122,23 @@ describe('Session Service - Core Operations', () => {
       const correctToken = testSession.sessionId;
       const wrongToken = 'wrong' + 'x'.repeat(correctToken.length - 5);
 
-      const start1 = process.hrtime.bigint();
-      await validateSession(correctToken, testEmail, testSession.deviceId);
-      const end1 = process.hrtime.bigint();
-
-      const start2 = process.hrtime.bigint();
-      await validateSession(wrongToken, testEmail, testSession.deviceId);
-      const end2 = process.hrtime.bigint();
+      // Median of many runs after warm-up: a single cold call mostly measures
+      // JIT compilation and timer noise rather than the comparison itself.
+      const medianValidationNs = async (token: string): Promise<number> => {
+        const timings: number[] = [];
+        for (let i = 0; i < 250; i++) {
+          const start = process.hrtime.bigint();
+          await validateSession(token, testEmail, testSession.deviceId);
+          if (i >= 50) timings.push(Number(process.hrtime.bigint() - start));
+        }
+        timings.sort((a, b) => a - b);
+        return timings[Math.floor(timings.length / 2)];
+      };
 
       // Timing should be similar (constant-time)
       // Note: This is a statistical test; exact timing varies by CPU
-      const timing1 = Number(end1 - start1);
-      const timing2 = Number(end2 - start2);
+      const timing1 = await medianValidationNs(correctToken);
+      const timing2 = await medianValidationNs(wrongToken);
       const timingRatio = Math.max(timing1, timing2) / Math.min(timing1, timing2);
 
       // Allow up to 2x variance (should be much closer in constant-time impl)
@@ -145,14 +160,13 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should reject expired session', async () => {
-      // Create session with past expiry
-      const expiredSession = {
-        ...testSession,
-        expiresAt: new Date(Date.now() - 1000).toISOString(),
-      };
+      // Persist a past expiry (beyond clock skew tolerance) so validation sees it
+      await updateSession(testEmail, testSession.deviceId, {
+        expiresAt: new Date(Date.now() - CLOCK_SKEW_TOLERANCE_MS - 1000).toISOString(),
+      });
 
       const result = await validateSession(
-        expiredSession.sessionId,
+        testSession.sessionId,
         testEmail,
         testSession.deviceId
       );
@@ -188,6 +202,11 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should coalesce rapid renewals (prevent thundering herd)', async () => {
+      // Creation does not open a coalescing window, and a renewal in the same
+      // millisecond as creation is indistinguishable from none, so let the
+      // clock move before the first renewal.
+      await new Promise((resolve) => setTimeout(resolve, 10));
+
       // First renewal
       const first = await renewSession(testEmail, testSession.deviceId);
 

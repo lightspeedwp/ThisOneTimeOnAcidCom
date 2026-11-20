@@ -14,11 +14,20 @@
 
 import { getStore as getNetlifyStore } from '@netlify/blobs';
 
+/**
+ * Shape returned by `Store.list()` in `@netlify/blobs` (non-paginated).
+ * `list()` resolves to an object of entries, not to an array of keys.
+ */
+export interface BlobListResult {
+  blobs: Array<{ key: string; etag: string }>;
+  directories: string[];
+}
+
 export interface BlobStore {
   set(key: string, value: string): Promise<void>;
   get(key: string): Promise<string | null>;
   delete(key: string): Promise<void>;
-  list?(options?: { prefix?: string }): Promise<string[]>;
+  list(options?: { prefix?: string }): Promise<BlobListResult>;
 }
 
 /**

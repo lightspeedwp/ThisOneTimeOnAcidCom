@@ -6,21 +6,14 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 import { createSession, renewSession } from '../../netlify/lib/reader-access/session-service';
 import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
 
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store,
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Session Renewal - T082 (US2)', () => {
   const testEmail = `reader-renew-${Date.now()}@example.com`;
@@ -33,6 +26,7 @@ describe('Session Renewal - T082 (US2)', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    resetInMemoryBlobStore();
   });
 
   describe('Basic renewal', () => {
@@ -74,6 +68,10 @@ describe('Session Renewal - T082 (US2)', () => {
 
     it('should change expiresAt timestamp from original', async () => {
       const created = await createSession(testEmail, testCode, fingerprint);
+
+      // Let the clock move so the renewed expiry can differ at ms resolution
+      await new Promise((resolve) => setTimeout(resolve, 10));
+
       const renewed = await renewSession(testEmail, created.deviceId);
 
       expect(renewed.expiresAt).not.toBe(created.expiresAt);
@@ -145,9 +143,9 @@ describe('Session Renewal - T082 (US2)', () => {
 
   describe('Error cases', () => {
     it('should throw when renewing non-existent session', async () => {
-      expect(async () => {
-        await renewSession('nonexistent@example.com', 'nonexistent-device');
-      }).rejects.toThrow();
+      await expect(
+        renewSession('nonexistent@example.com', 'nonexistent-device')
+      ).rejects.toThrow('Session not found');
     });
 
     it('should throw when renewing terminated session', async () => {
@@ -157,9 +155,9 @@ describe('Session Renewal - T082 (US2)', () => {
       const created = await createSession(testEmail, testCode, fingerprint);
       await terminateSession(testEmail, created.deviceId);
 
-      expect(async () => {
-        await renewSession(testEmail, created.deviceId);
-      }).rejects.toThrow();
+      await expect(renewSession(testEmail, created.deviceId)).rejects.toThrow(
+        'Cannot renew terminated session'
+      );
     });
   });
 

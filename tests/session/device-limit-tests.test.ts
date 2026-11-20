@@ -6,22 +6,15 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 import { createSession, getActiveSessionCount, terminateSession } from '../../netlify/lib/reader-access/session-service';
-import { listSessionsByEmail } from '../../netlify/lib/reader-access/store';
+import { listSessionsByEmail, updateSession } from '../../netlify/lib/reader-access/store';
 import { MAX_CONCURRENT_DEVICES } from '../../netlify/lib/reader-access/session-config';
 
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store,
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Device Limit Enforcement - T099-T102 (US4)', () => {
   const testEmailBase = `reader-device-limit-${Date.now()}`;
@@ -29,6 +22,7 @@ describe('Device Limit Enforcement - T099-T102 (US4)', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    resetInMemoryBlobStore();
   });
 
   describe('T099: Device counting', () => {
@@ -117,9 +111,9 @@ describe('Device Limit Enforcement - T099-T102 (US4)', () => {
       }
 
       // Next attempt should fail
-      expect(async () => {
-        await createSession(testEmail, testCode, devices[MAX_CONCURRENT_DEVICES]);
-      }).rejects.toThrow();
+      await expect(
+        createSession(testEmail, testCode, devices[MAX_CONCURRENT_DEVICES])
+      ).rejects.toThrow('Device limit exceeded');
     });
 
     it('should return 409 Conflict when limit exceeded', async () => {
@@ -239,6 +233,47 @@ describe('Device Limit Enforcement - T099-T102 (US4)', () => {
 
       const inactiveCount = await getActiveSessionCount(testEmail);
       expect(inactiveCount).toBe(1); // Count only active
+    });
+  });
+
+  describe('Re-verification and expiry', () => {
+    it('should allow re-verifying on a device that already holds a slot at the limit', async () => {
+      const testEmail = `${testEmailBase}-reverify`;
+      const device1 = { userAgent: 'Device1', ipAddress: '192.168.1.1', timezone: 'UTC' };
+      const device2 = { userAgent: 'Device2', ipAddress: '192.168.1.2', timezone: 'UTC' };
+
+      const first = await createSession(testEmail, testCode, device1);
+      await createSession(testEmail, testCode, device2);
+
+      // Same device again (e.g. cookie cleared): replaces its own session, adds no device
+      const again = await createSession(testEmail, testCode, device1);
+
+      expect(again.deviceId).toBe(first.deviceId);
+      expect(again.sessionId).not.toBe(first.sessionId);
+      expect(await getActiveSessionCount(testEmail)).toBe(MAX_CONCURRENT_DEVICES);
+    });
+
+    it('should not count expired sessions against the device limit', async () => {
+      const testEmail = `${testEmailBase}-expired-slot`;
+      const devices = Array.from({ length: MAX_CONCURRENT_DEVICES + 1 }, (_, i) => ({
+        userAgent: `Device${i + 1}`,
+        ipAddress: `192.168.1.${i + 1}`,
+        timezone: 'UTC',
+      }));
+
+      const sessions = [];
+      for (let i = 0; i < MAX_CONCURRENT_DEVICES; i++) {
+        sessions.push(await createSession(testEmail, testCode, devices[i]));
+      }
+
+      // Expiry leaves status 'active' in storage; it must still free the slot
+      await updateSession(testEmail, sessions[0].deviceId, {
+        expiresAt: new Date(Date.now() - 60_000).toISOString(),
+      });
+
+      expect(await getActiveSessionCount(testEmail)).toBe(MAX_CONCURRENT_DEVICES - 1);
+      const newSession = await createSession(testEmail, testCode, devices[MAX_CONCURRENT_DEVICES]);
+      expect(newSession.sessionId).toBeTruthy();
     });
   });
 

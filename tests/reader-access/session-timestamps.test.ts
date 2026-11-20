@@ -6,20 +6,12 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 
-// Mock Netlify environment
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store, // Export for test access
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Session Timestamps - T031-T033', () => {
   const testEmail = 'reader@example.com';
@@ -28,6 +20,8 @@ describe('Session Timestamps - T031-T033', () => {
   const testIpAddress = '192.168.1.1';
 
   beforeEach(() => {
+
+    resetInMemoryBlobStore();
     vi.clearAllMocks();
   });
 
