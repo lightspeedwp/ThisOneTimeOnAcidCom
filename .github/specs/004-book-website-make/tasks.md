@@ -67,11 +67,11 @@
 
 ### Implementation for US2
 
-⚠️ **MOVED TO SPEC 005** (2026-11-13): Reader access specification and execution now owned by [Spec 005 — Reader Access](../../005-reader-access/spec.md)
+⚠️ **MOVED TO SPEC 005** (2026-11-13): Reader access specification and execution now owned by [Spec 005 — Reader Access](../005-reader-access/spec.md)
 
-- [x] T014 [US2] ~~Review Prompt 3A contract~~ **→ MOVED TO SPEC_005** | Reference only: `contracts/prompt-3a-reader-access.md` available in Spec 004
-- [x] T015 [US2] ~~Execute Prompt 3A (reader access copy & forms)~~ **→ MOVED TO SPEC_005** | Figma Make execution now Spec 005's responsibility
-- [x] T016 [US2] ~~Validate Prompt 3A specification~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
+- [ ] T014 [US2] ~~Review Prompt 3A contract~~ **→ MOVED TO SPEC_005** | Reference only: `contracts/prompt-3a-reader-access.md` available in Spec 004
+- [ ] T015 [US2] ~~Execute Prompt 3A (reader access copy & forms)~~ **→ MOVED TO SPEC_005** | Figma Make execution now Spec 005's responsibility
+- [ ] T016 [US2] ~~Validate Prompt 3A specification~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
 
 **Checkpoint**: US2 (Reader Access) → Spec 005 responsibility. Contracts remain for reference.
 
@@ -103,11 +103,11 @@
 
 ### Implementation for US3 (After Decision Resolution)
 
-⚠️ **MOVED TO SPEC 005** (2026-11-13): Recovery flows and error states execution now owned by [Spec 005 — Reader Access](../../005-reader-access/spec.md)
+⚠️ **MOVED TO SPEC 005** (2026-11-13): Recovery flows and error states execution now owned by [Spec 005 — Reader Access](../005-reader-access/spec.md)
 
-- [x] T025 [US3] ~~Execute Prompt 3B (recovery flows)~~ **→ MOVED TO SPEC_005** | Decisions 1–2 ✅ resolved; Spec 005 owns execution
-- [x] T026 [US3] ~~Execute Prompt 3C (error states)~~ **→ MOVED TO SPEC_005** | Decisions 1–3 ✅ resolved; Spec 005 owns execution
-- [x] T027 [US3] ~~Validate Prompt 3B/3C~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
+- [ ] T025 [US3] ~~Execute Prompt 3B (recovery flows)~~ **→ MOVED TO SPEC_005** | Decisions 1–2 ✅ resolved; Spec 005 owns execution
+- [ ] T026 [US3] ~~Execute Prompt 3C (error states)~~ **→ MOVED TO SPEC_005** | Decisions 1–3 ✅ resolved; Spec 005 owns execution
+- [ ] T027 [US3] ~~Validate Prompt 3B/3C~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
 
 **Checkpoint**: All blocking decisions resolved ✅ — Phase B responsibility → Spec 005
 

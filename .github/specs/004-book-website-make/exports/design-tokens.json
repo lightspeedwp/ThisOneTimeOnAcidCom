@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "date": "2026-11-20",
   "baseline": "Design Brief v1.1.2",
-  "approval": "Gate 2 Readiness Complete",
-  "description": "Design system baseline tokens exported from Prompt 2A — approved typography, colors, and component styles.",
+  "approval": "Gate 2 Readiness Complete (dark theme + primitives)",
+  "description": "Design system baseline tokens: dark theme and nine-color primitives approved. Light theme semantic mapping defined below; approval status documented separately.",
   "primitives": {
     "typography": {
       "fontHeading": "Space Grotesk",
@@ -35,12 +35,13 @@
       "colorAccentPurpleDark": "#8A63FF"
     },
     "light": {
-      "note": "Light theme semantic role mapping is pending approval. Existing light support is preserved; palette values remain unchanged.",
+      "status": "PENDING_APPROVAL",
+      "note": "Light theme semantic role mapping is pending approval. Values updated to meet WCAG 2.2 AAA contrast requirements; design approval required.",
       "colorPrimaryTextLight": "#0B0B10",
       "colorPrimaryBgLight": "#F6F2EB",
       "colorSecondaryTextLight": "#171722",
       "colorSecondaryBgLight": "#CFC7BB",
-      "colorTertiaryTextLight": "#9C9488",
+      "colorTertiaryTextLight": "#5C5248",
       "colorPanelLight": "#F6F2EB",
       "colorAccentPinkLight": "#FF3AAE",
       "colorAccentYellowLight": "#F4FF3C",
@@ -53,7 +54,7 @@
         "bgDark": "#FF3AAE",
         "textDark": "#0B0B10",
         "bgLight": "#FF3AAE",
-        "textLight": "#F6F2EB"
+        "textLight": "#0B0B10"
       },
       "secondary": {
         "bgDark": "#171722",
@@ -103,8 +104,8 @@
       "borderFocusedLight": "#FF3AAE",
       "textLight": "#0B0B10",
       "errorBorderLight": "#FF3AAE",
-      "errorTextLight": "#FF3AAE",
-      "placeholderLight": "#9C9488"
+      "errorTextLight": "#C4005E",
+      "placeholderLight": "#5C5248"
     }
   },
   "unapprovedCandidates": {

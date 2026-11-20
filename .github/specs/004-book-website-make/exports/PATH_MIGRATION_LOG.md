@@ -65,19 +65,16 @@
 
 ## Broken Link Verification
 
-✅ **Verification method**: Manual search for `content/book/` across all Spec 004 files
+✅ **Verification method**: Manual search for `content/book/` across Spec 004 files
 
-✅ **Result**: No remaining references to `content/book/` found in:
-- spec.md ✅
-- plan.md ✅
-- research.md ✅
-- data-model.md ✅
-- contracts/*.md ✅
-- exports/*.md ✅
-- checklists/*.md ✅
-- PROMPT_EXECUTION_PLAN.md ✅
+⚠️ **Result**: Remaining references found in:
+- data-model.md (lines 11, 15) — PENDING: Update to `references/`
+- version-reconciliation.md (line 11) — PENDING: Update to `references/`
+- source-file-inventory.md (line 11) — PENDING: Update to `references/`
+- checklists/specification-quality.md (lines 139, 189) — PENDING: Update to `references/`
+- checklists/pre-approval-reconciliation-validation.md (line 44) — PENDING: Update to `references/`
 
-✅ **Status**: Zero broken links; all references updated or verified correct
+✅ **Status**: Main Spec 004 files updated; additional references in internal documentation pending T070 completion
 
 ---
 

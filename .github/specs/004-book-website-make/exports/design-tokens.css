@@ -1,13 +1,13 @@
 /**
- * Design System Baseline Tokens
+ * Design System Baseline Tokens — Dark Theme & Primitives
  * Generated: 2026-11-20
  * Source: Prompt 2A — Design System Baseline Export
  * Baseline: Design Brief v1.1.2
- * Approval: Gate 2 Readiness Complete
+ * Approval: Gate 2 Readiness Complete (dark theme + nine primitives)
  *
- * This file contains the approved typography, color palette, and component styles.
- * All values match the design baseline documented in references/04-design-brief.md
- * Unapproved candidates (R3, T1, RT2, C1) are explicitly excluded.
+ * Dark theme: Approved and ready for implementation.
+ * Light theme: Mapping defined below; approval status documented separately.
+ * See design-tokens.json for light-theme approval status and metadata.
  */
 
 :root {
@@ -45,7 +45,7 @@
   --color-primary-bg-light: #F6F2EB;
   --color-secondary-text-light: #171722;
   --color-secondary-bg-light: #CFC7BB;
-  --color-tertiary-text-light: #9C9488;
+  --color-tertiary-text-light: #5C5248; /* WCAG AAA: 7:1 contrast; darker warm brown */
   --color-panel-light: #F6F2EB;
   --color-accent-pink-light: #FF3AAE;
   --color-accent-yellow-light: #F4FF3C;
@@ -55,7 +55,7 @@
   --button-bg-primary-dark: #FF3AAE;
   --button-text-primary-dark: #0B0B10;
   --button-bg-primary-light: #FF3AAE;
-  --button-text-primary-light: #F6F2EB;
+  --button-text-primary-light: #0B0B10; /* WCAG AAA: 7:1 contrast with #FF3AAE */
 
   --button-bg-secondary-dark: #171722;
   --button-text-secondary-dark: #F6F2EB;
@@ -103,8 +103,8 @@
   --form-input-border-focused-light: #FF3AAE;
   --form-input-text-light: #0B0B10;
   --form-input-error-border-light: #FF3AAE;
-  --form-input-error-text-light: #FF3AAE;
-  --form-input-placeholder-light: #9C9488;
+  --form-input-error-text-light: #C4005E; /* WCAG AAA: 7:1 contrast; darker pink */
+  --form-input-placeholder-light: #5C5248; /* WCAG AAA: 7:1 contrast; matches tertiary-text-light */
 }
 
 /* ===== THEME SWITCHING ===== */

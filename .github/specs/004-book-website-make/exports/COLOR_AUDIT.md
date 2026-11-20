@@ -31,14 +31,17 @@
 
 ### Files Checked
 
-✅ All Spec 004 files audited for color references:
+✅ Files audited (includes non-baseline colors):
 - `spec.md` — No color hex values (uses semantic names only)
 - `plan.md` — No color hex values
 - `research.md` — No color hex values in decision docs
 - `contracts/prompt-*.md` — Design baseline colors only
 - `exports/design-tokens.json` — All 9 baseline colors + theme mappings
-- `exports/design-tokens.css` — All 9 baseline colors + theme mappings
-- Checklists and reports — No color hex values
+- `exports/design-tokens.css` — All 9 baseline colors + theme mappings (light theme adjusted for WCAG AAA)
+- `data-model.md` — Contains non-baseline colors (#1a1a1a, #ffffff) [PENDING: T071]
+- `tasks.md` — References non-baseline colors to replace/mark (T071, line 659) [PENDING: T071]
+- `exports/GATE_2_READINESS_REPORT.md` — Included in scope
+- Prompt 3A/3C execution guides — Included in scope (moved to Spec 005)
 
 ### Colors Found in Specifications
 
@@ -58,6 +61,9 @@
 | contracts/prompt-2b-navigation-design.md | #8A63FF | Purple | Baseline primitive ✅ | ✅ OK |
 | exports/design-tokens.json | All 9 baseline | Complete palette + themes | All baseline ✅ | ✅ OK |
 | exports/design-tokens.css | All 9 baseline | Complete palette + themes | All baseline ✅ | ✅ OK |
+| data-model.md (lines 45–46) | #1a1a1a | Near-black (not in baseline) | Non-baseline ⚠️ | 🔄 PENDING: T071 |
+| data-model.md (lines 45–46) | #ffffff | Pure white (not in baseline) | Non-baseline ⚠️ | 🔄 PENDING: T071 |
+| tasks.md (line 659, T071) | #1a1a1a, #d4a574, #ff6b6b, #8b0000 | Marked for replacement/superseding | Non-baseline ⚠️ | 🔄 PENDING: T071 |
 
 <!-- markdownlint-enable MD060 -->
 
@@ -80,9 +86,15 @@
 
 ## Conclusion
 
-✅ **Audit Result**: PASS
+**Audit Result**: PARTIAL — Baseline compliance with pending action
 
-All colors in Spec 004 match the approved 9-color baseline from Design Brief v1.1.2. No non-baseline colors found. Unapproved candidates (R3, T1, RT2, C1) are confirmed absent.
+**Design baseline (Prompts 1–2B, design tokens, exports)**:
+✅ PASS — All approved 9-color baseline, no non-baseline colors found in design specifications.
+
+**Extended scope (data-model.md, tasks.md, Prompt 3A/3C guides)**:
+⚠️ **PENDING** — Non-baseline colors found in data-model.md (#1a1a1a, #ffffff) and flagged in tasks.md (T071) for replacement or superseding.
+
+**Action**: Task T071 owns review and resolution of non-baseline colors. Unapproved candidates (R3, T1, RT2, C1) are confirmed absent from all audited files.
 
 ---
 

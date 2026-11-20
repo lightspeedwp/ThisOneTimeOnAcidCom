@@ -9,7 +9,7 @@
 
 ## Summary
 
-Spec 004 completes design specification and hand-off to Spec 005 for reader-access implementation. Stage IDs 3A–3C (reader access, recovery flows, error states) transition from Spec 004 responsibility to [Spec 005 — Reader Access](../../005-reader-access/spec.md) full ownership.
+Spec 004 completes design specification and hand-off to Spec 005 for reader-access implementation. Stage IDs 3A–3C (reader access, recovery flows, error states) transition from Spec 004 responsibility to [Spec 005 — Reader Access](../005-reader-access/spec.md) full ownership.
 
 ---
 
@@ -51,9 +51,9 @@ Spec 004 completes design specification and hand-off to Spec 005 for reader-acce
 | Decision | Blocking | Status | Owner | Note |
 |----------|----------|--------|-------|------|
 | **Decision 1** | Race condition handling | ✅ Resolved | Spec 004 | Used by Spec 005 |
-| **Decision 2** | Recovery lifetime (30-day absolute) | ✅ Resolved | Spec 004 | Used by Spec 005 |
+| **Decision 2** | Recovery lifetime & renewal | ⏳ Partial | Spec 004/005 | Renewal per fresh code verification (≤30d, repeatable); recovery duration/start open in Spec 005 |
 | **Decision 3** | Code expiry start time | ✅ Resolved | Spec 004 | Used by Spec 005 |
-| **Decision 4** | Email provider (SendGrid + Brevo) | ✅ Resolved | Spec 004 | Used by Spec 005 |
+| **Decision 4** | Email provider | ✅ Resolved | Spec 005 | Mailgun (resolved 2026-11-19 in Spec 005) |
 | **Decision 5** | Manuscript readiness (early release) | ✅ Resolved | Ash | Shared with Spec 005 |
 | **Decision 6** | Newsletter destination | ⏳ Pending | Spec 005 | To be resolved by Spec 005 |
 | **Decision 7** | Route enforcement (meta tags + robots + sitemap) | ✅ Resolved | Spec 004 | Remains with design |
@@ -139,7 +139,7 @@ Reader-access reference documents remain available for Spec 005:
 ## References
 
 - **Spec 004**: [.github/specs/004-book-website-make/spec.md](../spec.md)
-- **Spec 005**: [.github/specs/005-reader-access/spec.md](../../005-reader-access/spec.md)
+- **Spec 005**: [.github/specs/005-reader-access/spec.md](../005-reader-access/spec.md)
 - **Decisions**: [Spec 004 research.md](../research.md)
 - **Contracts**: [Spec 004 contracts/](../contracts/)
 

@@ -2,8 +2,8 @@
 
 **Branch**: `docs/spec-004-phase9-remaining`  
 **Completed**: PR #630 (T060–T062)  
-**Remaining**: 12 tasks (T063–T074)  
-**Status**: ⏳ In Progress  
+**Document**: Phase 9 original task plan (12 tasks T063–T074)  
+**Status**: ✅ Phase 9 Convergence Complete (Merged PR #637)  
 
 ---
 

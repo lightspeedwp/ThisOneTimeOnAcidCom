@@ -67,7 +67,8 @@ After reader-access work moved to Spec 005, Spec 004 readiness checklists should
 ✅ **Spec 004 side**:
 - [x] Design-only readiness checklists remain in place
 - [x] Reader-access items removed from scope
-- [x] Design token exports completed (Prompt 2A verification)
+- [x] Design token exports completed
+- [ ] Prompt 2A verification completed (≥95%, T063)
 - [x] Decision 1–7 documented in `research.md`
 - [x] Handover document prepared
 - [x] Spec 005 readiness scope defined (this document)
