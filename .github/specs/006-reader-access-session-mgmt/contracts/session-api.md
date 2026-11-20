@@ -376,7 +376,7 @@ Max-Age: 2592000 (30 days in seconds)
 ### Storage Schema
 
 Sessions stored in Netlify Blobs:
-```
+```text
 Key: session:${email}:${deviceId}
 Value: { sessionId, email, deviceId, createdAt, expiresAt, renewedAt, terminatedAt, status, chapterId }
 ```

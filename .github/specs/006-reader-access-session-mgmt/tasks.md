@@ -2,7 +2,7 @@
 
 **Input**: Design documents from `./.github/specs/006-reader-access-session-mgmt/`
 
-**Prerequisites**: 
+**Prerequisites**:
 - Phase 2 (email verification) implementation deployed and tested
 - plan.md (technical context: Netlify Blobs, TypeScript, Vitest)
 - spec.md (5 user stories, all with acceptance scenarios)
@@ -42,7 +42,7 @@
 **Purpose**: Core session management that blocks all user story work. MUST complete before ANY user story implementation begins.
 
 - [x] T006 Implement Session storage adapter methods in `netlify/lib/reader-access/store.ts`:
-  - `storeSession(session: Session): Promise<void>` 
+  - `storeSession(session: Session): Promise<void>`
   - `getSession(email, deviceId): Promise<Session | null>`
   - `updateSession(email, deviceId, partial): Promise<Session>`
   - `deleteSession(email, deviceId): Promise<void>`
@@ -240,7 +240,7 @@
 
 - [ ] T041 [P] [US4] Unit test for device count: query active sessions for email → returns count per device
 - [ ] T042 [P] [US4] Unit test for device limit check: activeCount < limit → allow, activeCount >= limit → deny
-- [ ] T043 [US4] Integration test for device limit enforcement in `tests/reader-access/device-limit.test.ts`: 
+- [ ] T043 [US4] Integration test for device limit enforcement in `tests/reader-access/device-limit.test.ts`:
   - Create sessions on devices 1, 2 → both succeed
   - Create session on device 3 → denied (409 Conflict)
 - [ ] T044 [US4] Integration test for device termination:
@@ -442,7 +442,7 @@ Each user story is independently testable after completion. MVP = US1 alone.
 
 ### Parallel Opportunities (with 5 developers)
 
-```
+```text
 Timeline:
 Day 1-2:   Phase 1 (Setup) [1 dev]  → Phase 2 (Foundational) [2 devs]
 Day 3-5:   US1 (Dev A)
@@ -618,7 +618,7 @@ After each phase, run quickstart.md validation scenarios:
 - **US4 Device Limits**: T095-T101 (7 tasks) — critical feature not yet implemented
 - **Security/Polish**: T109-T114, T118-T119 (10 tasks) — hardening and deployment readiness
 
-**Effort Estimate**: 
+**Effort Estimate**:
 - Tests: 15-20 hours (high impact on confidence)
 - US4 device limits: 8-12 hours (new functionality)
 - Security/documentation: 6-8 hours (quality & readiness)
