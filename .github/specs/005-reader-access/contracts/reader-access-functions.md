@@ -42,7 +42,13 @@ create a session, a reader record or a newsletter subscription.
 
 A success consumes the code atomically and starts or renews a DeviceSession for up
 to thirty days (RA-004). Concurrent submissions of the same code yield one
-success (RA-009). Recovery behaviour is deferred (research R-09).
+success (RA-009).
+
+**Recovery** (settled direction from Q4; open: exact duration and start event per decision 4):
+- When a code is consumed successfully but session establishment fails (confirmed redemption, incomplete handshake), the reader can retry on the same or a linked device within the recovery window.
+- If recovery succeeds before timeout: a session is established immediately (recovery-first).
+- If a competing fresh code is submitted during recovery: the new code continues without ending recovery; finishing the code extends the recovered session rather than creating a duplicate (Q4).
+- Recovery state and open decisions logged for future session handling (see RA-T048).
 
 ## Session status
 

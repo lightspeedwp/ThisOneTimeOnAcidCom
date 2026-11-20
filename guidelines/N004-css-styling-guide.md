@@ -221,7 +221,7 @@ For custom components that need class names beyond Tailwind utilities:
 ### Mobile-First Breakpoints
 
 | Prefix | Min Width | Use Case |
-|--------|-----------|----------|
+| ------ | --------- | -------- |
 | (none) | 0px | Mobile base styles |
 | `sm:` | 640px | Small tablets |
 | `md:` | 768px | Tablets |

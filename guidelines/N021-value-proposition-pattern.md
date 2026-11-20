@@ -35,7 +35,7 @@ The Value Proposition displays 3-4 key benefits in a grid with icons and descrip
 ## Section Anatomy
 
 | Element | Purpose | Content |
-|---------|---------|---------|
+| ------- | ------- | ------- |
 | Section Heading | Section title | "Why Read...", "Key Benefits", etc. |
 | Subheading | Context | Optional tagline or description |
 | Benefit Cards | Individual value points | 3-4 cards max |

@@ -156,7 +156,7 @@ Use the fluid typography tokens from `design-tokens-reference.md`:
 // Body Text
 <p className="text-body-guideline">
   {/* clamp(1rem, 1.5vw, 1.25rem) → 16px to 20px */}
-  Makeup that shines with colour, energy, and connection.
+  Creative work that shines with colour, energy, and connection.
 </p>
 
 // Small Text
@@ -292,7 +292,7 @@ h1, h2, h3 {
 // Tight heading line height
 <h2 className="leading-tight">
   {/* line-height: 1.25 */}
-  Festival Makeup 2024
+  Festival Creative 2024
 </h2>
 
 // Generous body text
@@ -344,7 +344,7 @@ h1, h2, h3 {
   font-heading
   font-semibold
 ">
-  Festival Makeup
+  Festival Creative
 </h3>
 
 // H4 - Subsection
@@ -433,7 +433,7 @@ text-gradient-pink-purple-blue mb-4">
       href="/festival"
       className="block py-3 px-4 text-base hover:bg-gray-50 rounded-lg"
     >
-      Festival Makeup
+      Festival Creative
     </a>
   </li>
   <li>
@@ -585,7 +585,7 @@ function HeroSection() {
           uppercase
           mb-3
         ">
-          Makeup Artist
+          Creative Artist
         </p>
 
         {/* Main Title */}
@@ -607,7 +607,7 @@ function HeroSection() {
           leading-relaxed
           max-w-2xl mx-auto
         ">
-          Makeup that shines with colour, energy, and connection.
+          Creative work that shines with colour, energy, and connection.
         </p>
       </div>
     </section>
