@@ -36,11 +36,12 @@ Based on Spec 005 RA-T047–RA-T056
   - [x] Progress persistence across sessions
   - ✅ 13 contract tests passing
 
-- [ ] RA-T051 [P] Create `netlify/functions/reader-analytics.ts`
-  - [ ] POST endpoint for completion events
-  - [ ] Record completion events (chapter finished, time spent)
-  - [ ] Aggregate reading statistics per session
-  - [ ] Analytics persistence in Netlify Blobs
+- [x] RA-T051 [P] Create `netlify/functions/reader-analytics.ts`
+  - [x] POST endpoint for completion events
+  - [x] Record completion events (chapter finished, time spent)
+  - [x] Aggregate reading statistics per session
+  - [x] Analytics persistence in Netlify Blobs
+  - ✅ 15 contract tests passing
 
 - [ ] RA-T052 [P] Create `netlify/functions/reader-bookmarks.ts`
   - [ ] Add bookmark functionality (save chapter/position)
