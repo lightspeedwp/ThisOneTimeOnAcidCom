@@ -2,7 +2,7 @@
 
 **Purpose:** Comprehensive reference for color palette, spacing scales, typography system, and foundational design tokens.
 
-**Authority:** D4 (N-Document Approvals); D3 (Design Authority: Ash Shaw, WCAG 2.2 AAA)
+**Authority:** D4 (N-Document Approvals); D3 (Design Authority, WCAG 2.2 AAA compliance)
 
 ---
 
@@ -130,7 +130,7 @@ See N009: Responsive Design Patterns for media query usage.
 - ✅ **WCAG 2.2 AAA:** All color combinations tested for contrast (minimum 4.5:1 for text)
 - ✅ **Accessibility:** Typography sizes meet minimum 16px for body text
 - ✅ **Responsive:** Spacing scale tested across all breakpoints
-- ✅ **Design Authority:** Approved by Ash Shaw (D3)
+- ✅ **Design Authority:** Approved per D3 decision gate
 
 ---
 
