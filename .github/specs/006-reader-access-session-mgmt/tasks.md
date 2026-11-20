@@ -41,29 +41,29 @@
 
 **Purpose**: Core session management that blocks all user story work. MUST complete before ANY user story implementation begins.
 
-- [ ] T006 Implement Session storage adapter methods in `netlify/lib/reader-access/store.ts`:
+- [x] T006 Implement Session storage adapter methods in `netlify/lib/reader-access/store.ts`:
   - `storeSession(session: Session): Promise<void>` 
   - `getSession(email, deviceId): Promise<Session | null>`
   - `updateSession(email, deviceId, partial): Promise<Session>`
   - `deleteSession(email, deviceId): Promise<void>`
   - Use key format: `session:${email}:${deviceId}` with strong consistency
-- [ ] T007 Implement SessionService in `netlify/lib/reader-access/session-service.ts` with methods:
+- [x] T007 Implement SessionService in `netlify/lib/reader-access/session-service.ts` with methods:
   - `createSession(email, verificationCode, deviceId): Promise<Session>` (depends on Phase 2 code validation)
   - `validateSession(sessionId): Promise<boolean>`
   - `renewSession(email, deviceId): Promise<Session>` (extend expiresAt to now + 30 days)
   - `terminateSession(email, deviceId): Promise<void>` (set terminatedAt, mark as terminated)
-- [ ] T008 Create session cookie utilities in `netlify/lib/reader-access/session-cookie.ts`:
+- [x] T008 Create session cookie utilities in `netlify/lib/reader-access/session-cookie.ts`:
   - `createSessionCookie(sessionId, options): string` (HttpOnly, Secure, SameSite=Lax flags)
   - `parseSessionCookie(request): string | null` (extract sessionId from request cookies)
   - `clearSessionCookie(): string` (Max-Age=0 to clear)
-- [ ] T009 Implement session validation middleware in `netlify/lib/reader-access/session-middleware.ts`:
+- [x] T009 Implement session validation middleware in `netlify/lib/reader-access/session-middleware.ts`:
   - Extract sessionToken from cookie
   - Validate token (not empty, correct format)
   - Lookup session in storage
   - Check expiry (expiresAt > now)
   - Check not terminated (terminatedAt === null)
   - Return validation result + session object
-- [ ] T010 [P] Create test utilities for session testing in `tests/reader-access/session-fixtures.ts`:
+- [x] T010 [P] Create test utilities for session testing in `tests/reader-access/session-fixtures.ts`:
   - Fixtures for valid sessions, expired sessions, terminated sessions
   - Utilities to create test sessions with various states
   - Mock Blobs storage if needed for unit tests
