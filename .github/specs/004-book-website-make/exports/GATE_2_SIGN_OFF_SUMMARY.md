@@ -19,12 +19,12 @@ Spec 004 (Book Website Figma Make) has completed Gate 2 readiness review. All cr
 
 All 4 critical blockers identified in the audit have been resolved and verified in the spec:
 
-| Issue | Fix | File | Status |
-| --- | --- | --- | --- |
-| **Prompt 2B Colors** | Updated hover/active to #FF3AAE (hot pink) | `prompt-2b-navigation-design.md` | ✅ Fixed |
-| **Prompt 3A Status** | Corrected to BLOCKED (waiting for Decisions 3,4,5,6) | `prompt-3a-reader-access.md` | ✅ Fixed |
-| **Reference Paths** | Consolidated to `.github/specs/004-book-website-make/references/` | 4 contract files | ✅ Fixed |
-| **Decision 7 Clarity** | "Selected: Option A (Noindex meta tags + Sitemap exclusion)" | `prompt-1-navigation-exposure.md` | ✅ Fixed |
+| Issue                  | Fix                                                               | File                              | Status   |
+| ---------------------- | ----------------------------------------------------------------- | --------------------------------- | -------- |
+| **Prompt 2B Colors**   | Updated hover/active to #FF3AAE (hot pink)                        | `prompt-2b-navigation-design.md`  | ✅ Fixed |
+| **Prompt 3A Status**   | Corrected to BLOCKED (waiting for Decisions 3,4,5,6)              | `prompt-3a-reader-access.md`      | ✅ Fixed |
+| **Reference Paths**    | Consolidated to `.github/specs/004-book-website-make/references/` | 4 contract files                  | ✅ Fixed |
+| **Decision 7 Clarity** | "Selected: Option A (Noindex meta tags + Sitemap exclusion)"      | `prompt-1-navigation-exposure.md` | ✅ Fixed |
 
 **Verification:** All fixes cross-referenced against Design Brief v1.1.2 and blocking decision audit.
 
@@ -37,10 +37,12 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 ### Design System Locked
 
 **Typography** (Final):
+
 - Headings: Space Grotesk (weights: 600, 700; sizes: 24–48px)
 - Body/UI: Inter (weights: 400–600; sizes: 12–18px)
 
 **Color Palette** (9-color approved baseline):
+
 1. #0B0B10 — Deepest dark
 2. #12121A — Dark purple-black
 3. #171722 — Lighter dark
@@ -52,12 +54,14 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 9. #8A63FF — Purple accent
 
 **Components** (All with states defined):
+
 - ✅ Button (primary, secondary, disabled)
 - ✅ Card (default, hover, active)
 - ✅ Navigation (visible items, responsive)
 - ✅ Form Input (default, focused, error)
 
 **Unapproved Candidates** (Explicitly excluded):
+
 - ❌ R3 (Responsive Typography)
 - ❌ T1 (Additional Typography)
 - ❌ RT2 (Reader Typography Controls)
@@ -70,18 +74,21 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 **Three prompts are unblocked and ready for immediate execution:**
 
 ### Prompt 1: Navigation Exposure ✅
+
 - **Status:** ✅ UNBLOCKED
 - **Goal:** Hide /speaking, /events, /media from public sitemap; preserve as noindex pages
 - **Decision 7:** Selected — Option A (Noindex meta tags + Sitemap exclusion)
 - **Timeline:** 5–10 minutes
 
 ### Prompt 2A: Design Baseline Export ✅
+
 - **Status:** ✅ UNBLOCKED
 - **Goal:** Export CSS variables/design tokens matching 9-color baseline
 - **Dependencies:** None
 - **Timeline:** 10–15 minutes
 
 ### Prompt 2B: Navigation Design ✅
+
 - **Status:** ✅ UNBLOCKED
 - **Goal:** Navigation component with 4 visible items, all states (hover, active, mobile)
 - **Color Fix Applied:** #FF3AAE accent confirmed
@@ -98,19 +105,19 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 
 ### Immediate Priority (for Phase B unblocking)
 
-| Decision | Question | Impact | Est. Time | Owner |
-| --- | --- | --- | --- | --- |
-| **Decision 3** | Code expiry start time (from generation / receipt / page load) | Affects error messages in Prompts 3A & 3C | 1 hour | Project |
-| **Decision 1** | Recovery-first race condition | Affects Prompt 3B; influences Prompt 3C | 1–2 hours | Project |
-| **Decision 2** | Recovery lifetime eligibility | Affects Prompt 3B; depends on Decision 1 | 1–2 hours | Project |
+| Decision       | Question                                                       | Impact                                    | Est. Time | Owner   |
+| -------------- | -------------------------------------------------------------- | ----------------------------------------- | --------- | ------- |
+| **Decision 3** | Code expiry start time (from generation / receipt / page load) | Affects error messages in Prompts 3A & 3C | 1 hour    | Project |
+| **Decision 1** | Recovery-first race condition                                  | Affects Prompt 3B; influences Prompt 3C   | 1–2 hours | Project |
+| **Decision 2** | Recovery lifetime eligibility                                  | Affects Prompt 3B; depends on Decision 1  | 1–2 hours | Project |
 
 ### Extended Priority (email & service integration)
 
-| Decision | Question | Impact | Est. Time | Owner |
-| --- | --- | --- | --- | --- |
-| **Decision 4** | Email service provider | Affects Prompt 3A template syntax | 1–2 hours | Tech/Eng |
-| **Decision 5** | Manuscript publication readiness | Affects confirmation messaging | 30–60 min | Author |
-| **Decision 6** | Newsletter destination | Affects signup integration | 1 hour | Product |
+| Decision       | Question                         | Impact                            | Est. Time | Owner    |
+| -------------- | -------------------------------- | --------------------------------- | --------- | -------- |
+| **Decision 4** | Email service provider           | Affects Prompt 3A template syntax | 1–2 hours | Tech/Eng |
+| **Decision 5** | Manuscript publication readiness | Affects confirmation messaging    | 30–60 min | Author   |
+| **Decision 6** | Newsletter destination           | Affects signup integration        | 1 hour    | Product  |
 
 ### Execution Sequence (Once Decisions Resolved)
 
