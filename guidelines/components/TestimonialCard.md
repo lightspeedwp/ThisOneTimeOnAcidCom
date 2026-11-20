@@ -31,7 +31,7 @@ import { TestimonialCard } from './components/ui/TestimonialCard';
 text: "Ash created the most stunning festival look! The colors were vibrant and
 lasted all day.",
     rating: 5,
-    service: "Festival Makeup"
+    service: "Festival Creative"
   }}
 />
 
@@ -46,7 +46,7 @@ lasted all day.",
     photo: "/images/clients/emma.jpg",
     text: "Professional, creative, and so talented. My wedding makeup was perfect!",
     rating: 5,
-    service: "Wedding Makeup",
+    service: "Wedding Creative",
     date: "June 2024"
   }}
 />
@@ -369,7 +369,7 @@ function TestimonialsSection() {
 text: 'Ash created the most stunning festival look! The colors were vibrant and
 lasted all day.',
       rating: 5,
-      service: 'Festival Makeup',
+      service: 'Festival Creative',
       date: 'August 2024',
       verified: true
     },

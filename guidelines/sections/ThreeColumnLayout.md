@@ -26,7 +26,7 @@ The ThreeColumnLayout is a **reusable layout wrapper** that provides:
 
 **Primary Use Cases:**
 
-- Feature showcases (Why I Do Makeup section)
+- Feature showcases (Why I Create section)
 - Service offerings with icons
 - Team member profiles
 - Product/skill highlights
@@ -45,7 +45,7 @@ import { ThreeColumnLayout } from './components/sections/ThreeColumnLayout';
     <div className="text-center mb-fluid-2xl">
 <h2 className="text-section-h2 font-heading font-bold text-gray-800
 mb-fluid-md">
-        Why I Do Makeup
+        Why I Create
       </h2>
       <p className="text-body-fluid font-body text-gray-600 max-w-2xl mx-auto">
         Three core reasons that drive my passion
@@ -495,7 +495,7 @@ backgroundGradient={{
         text-gray-800
         mb-fluid-md
       ">
-        Why I Do Makeup
+        Why I Create
       </h2>
       <p className="
         text-body-fluid
@@ -578,7 +578,7 @@ happiness.'
         <div className="text-center">
 <h2 className="text-section-h2 font-heading font-bold text-gray-800
 mb-fluid-md">
-            Why I Do Makeup
+            Why I Create
           </h2>
           <p className="text-body-fluid font-body text-gray-600 max-w-2xl mx-auto">
             Makeup artistry is more than a profession—it's my passion and purpose
@@ -650,7 +650,7 @@ mb-fluid-sm">
   gap="xl"
   padding="2xl"
 >
-  <SectionCard title="Festival Makeup" icon={<SparklesIcon />} />
+  <SectionCard title="Festival Creative" icon={<SparklesIcon />} />
   <SectionCard title="Special Events" icon={<StarIcon />} />
   <SectionCard title="Photoshoots" icon={<CameraIcon />} />
 </ThreeColumnLayout>
@@ -694,7 +694,7 @@ mb-fluid-sm">
   padding="2xl"
 >
   <TeamMemberCard name="This One Time On Acid" role="Lead Artist" />
-  <TeamMemberCard name="Artist 2" role="Makeup Artist" />
+  <TeamMemberCard name="Artist 2" role="Creative Artist" />
   <TeamMemberCard name="Artist 3" role="Hair Stylist" />
 </ThreeColumnLayout>
 

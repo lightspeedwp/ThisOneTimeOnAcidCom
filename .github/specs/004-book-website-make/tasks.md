@@ -67,13 +67,15 @@
 
 ### Implementation for US2
 
-- [ ] T014 [US2] Review Prompt 3A contract with blocking decision status (awaits Decisions 3, 4, 5, 6: code expiry timing, email provider, manuscript status, newsletter destination)
-- [x] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) in Figma Make **BLOCKED - Figma Make environment not available**
-- [ ] T016 [US2] Validate Prompt 3A specification: approved copy present, form states documented, newsletter link explicit non-subscription statement (manual review from `contracts/prompt-3a-reader-access.md`)
+⚠️ **MOVED TO SPEC 005** (2026-11-13): Reader access specification and execution now owned by [Spec 005 — Reader Access](../../005-reader-access/spec.md)
 
-**Checkpoint**: US2 (Reader Access) awaits decision resolution before execution
+- [x] T014 [US2] ~~Review Prompt 3A contract~~ **→ MOVED TO SPEC_005** | Reference only: `contracts/prompt-3a-reader-access.md` available in Spec 004
+- [x] T015 [US2] ~~Execute Prompt 3A (reader access copy & forms)~~ **→ MOVED TO SPEC_005** | Figma Make execution now Spec 005's responsibility
+- [x] T016 [US2] ~~Validate Prompt 3A specification~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
 
-**BLOCKED BY**: Decisions 3 (code expiry start time), 4 (email provider), 5 (manuscript status), 6 (newsletter destination)
+**Checkpoint**: US2 (Reader Access) → Spec 005 responsibility. Contracts remain for reference.
+
+**See**: [Spec 004 → Spec 005 Handover](./exports/SPEC_004_TO_005_HANDOVER.md) for details
 
 ---
 
@@ -101,13 +103,15 @@
 
 ### Implementation for US3 (After Decision Resolution)
 
-- [x] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) in Figma Make **BLOCKED - Figma Make environment not available**
-- [x] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) in Figma Make **BLOCKED - Figma Make environment not available**
-- [ ] T027 [US3] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions (manual review from `contracts/`)
+⚠️ **MOVED TO SPEC 005** (2026-11-13): Recovery flows and error states execution now owned by [Spec 005 — Reader Access](../../005-reader-access/spec.md)
 
-**Checkpoint**: All blocking decisions resolved - Phase B execution unblocked
+- [x] T025 [US3] ~~Execute Prompt 3B (recovery flows)~~ **→ MOVED TO SPEC_005** | Decisions 1–2 ✅ resolved; Spec 005 owns execution
+- [x] T026 [US3] ~~Execute Prompt 3C (error states)~~ **→ MOVED TO SPEC_005** | Decisions 1–3 ✅ resolved; Spec 005 owns execution
+- [x] T027 [US3] ~~Validate Prompt 3B/3C~~ **→ MOVED TO SPEC_005** | Verification after Spec 005 execution
 
-**BLOCKED BY**: Decisions 1, 2, 3, 4, 5, 6 (parallel resolution track)
+**Checkpoint**: All blocking decisions resolved ✅ — Phase B responsibility → Spec 005
+
+**See**: [Spec 004 → Spec 005 Handover](./exports/SPEC_004_TO_005_HANDOVER.md) for details
 
 ---
 
@@ -638,3 +642,21 @@ Validation and verification tasks to close gaps identified between specification
 ---
 
 **Version**: 1.0.1 | **Status**: Phase 8 Convergence Appended | **Updated**: 2026-11-09
+
+## Phase 9: Convergence
+
+- [x] T060 Replace stale Decision 7 wording (robots.txt `Disallow`) with noindex meta tags plus sitemap exclusion in contracts/prompt-1-navigation-exposure.md, PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md, exports/GATE_2_READINESS_REPORT.md and checklists/blocking-decisions-validation.md per FR-003 (contradicts)
+- [x] T061 Reword "Ready to Execute"/"executable" claims in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md as gated by the open spec.md Status gates per FR-010 (contradicts)
+- [x] T062 Record resolved Decisions 1–7 and the Prompt 3A–3C handover to Spec 005 in PROMPT_EXECUTION_PLAN.md, exports/GATE_2_SIGN_OFF_SUMMARY.md and exports/IMPLEMENTATION_STATUS.md per spec.md Implications (contradicts)
+- [ ] T063 Raise Prompt 2A preview completeness to at least 95% and re-score it in checklists/prompt-preview-validation.md; record an approved SC-003 scope change for the Prompt 3A handover per SC-003 (partial)
+- [ ] T064 Create exports/design-baseline-validation.md, exports/navigation-specification.md and exports/design-baseline-acceptance-report.md, or record their approved descoping, per US1/AC1 (missing)
+- [ ] T065 Create exports/decisions-selected.md, exports/implementation-readiness-checklist.md, exports/preflight-analysis-final.md and exports/workflow-completion-report.md, or record pointers to existing artefacts that cover them, per US4 (missing)
+- [ ] T066 Close Prompt 3A–3C tasks and resolved decision-clarification tasks (T012–T027, second-list T022–T038) with a handover or resolution note per spec.md Implications (contradicts)
+- [ ] T067 Disambiguate the duplicate T014–T038 task sets and repoint Phase 8 dependencies in tasks.md per Constitution I (contradicts)
+- [ ] T068 Mark the Phase 8 "zero unresolved validation gaps" acceptance item unmet until T059 completes per Phase 8 acceptance (contradicts)
+- [ ] T069 Update spec.md Assumptions, Deliverables and Next Steps and plan.md Summary and Technical Context to the resolved, handed-over state per FR-006 (contradicts)
+- [ ] T070 Replace `content/book/0N` source paths with `references/0N-*.md` across spec.md, plan.md, data-model.md, quickstart.md, source-file-inventory.md, version-reconciliation.md and checklists per FR-001 (contradicts)
+- [ ] T071 Replace non-baseline colours (#1a1a1a, #d4a574, #ff6b6b, #8b0000) in data-model.md, exports/GATE_2_READINESS_REPORT.md and the Prompt 3A/3C guides, or mark them superseded, per plan: approved palette (contradicts)
+- [ ] T072 Relabel Decision 2 Option A as session refresh with absolute 30-day expiry in contracts/prompt-3b-execution-guide.md and checklists/blocking-decisions-validation.md per Decision 2 (partial)
+- [ ] T073 Restate or close T045–T047 against the merged PR #589 state per plan: verification (partial)
+- [ ] T074 Justify the staged/ directory in plan.md or archive it per plan: project structure (unrequested)

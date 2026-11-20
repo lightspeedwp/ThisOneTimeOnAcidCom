@@ -54,7 +54,7 @@ Spec 004 has successfully resolved all 4 critical blockers identified in the aud
 ### 4. ✅ Prompt 1 Decision 7 Clarity — UPDATED
 **Issue**: Decision status wording was ambiguous  
 **Was**: "awaiting selection" (implied pending)  
-**Now**: "Selected: Option A (noindex meta tags + sitemap exclusion, no robots.txt Disallow)" (confirmed)  
+**Now**: "Selected: Option A (Meta tags + Sitemap exclusion; no robots.txt Disallow)" (confirmed)  
 **File Updated**: `.github/specs/004-book-website-make/contracts/prompt-1-navigation-exposure.md` (lines 28–36)
 
 **Impact**: Route enforcement strategy is explicit and verifiable

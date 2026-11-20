@@ -1,0 +1,117 @@
+{
+  "version": "1.0.0",
+  "date": "2026-11-20",
+  "baseline": "Design Brief v1.1.2",
+  "approval": "Gate 2 Readiness Complete",
+  "description": "Design system baseline tokens exported from Prompt 2A — approved typography, colors, and component styles.",
+  "primitives": {
+    "typography": {
+      "fontHeading": "Space Grotesk",
+      "fontBody": "Inter",
+      "fontUI": "Inter"
+    },
+    "colors": {
+      "colorDeepestDark": "#0B0B10",
+      "colorDarkPurple": "#12121A",
+      "colorLighterDark": "#171722",
+      "colorWarmCream": "#F6F2EB",
+      "colorWarmTan": "#CFC7BB",
+      "colorWarmBrown": "#9C9488",
+      "colorAccentPink": "#FF3AAE",
+      "colorAccentYellow": "#F4FF3C",
+      "colorAccentPurple": "#8A63FF"
+    }
+  },
+  "themes": {
+    "dark": {
+      "colorPrimaryTextDark": "#F6F2EB",
+      "colorPrimaryBgDark": "#0B0B10",
+      "colorSecondaryTextDark": "#CFC7BB",
+      "colorSecondaryBgDark": "#12121A",
+      "colorTertiaryTextDark": "#9C9488",
+      "colorPanelDark": "#171722",
+      "colorAccentPinkDark": "#FF3AAE",
+      "colorAccentYellowDark": "#F4FF3C",
+      "colorAccentPurpleDark": "#8A63FF"
+    },
+    "light": {
+      "note": "Light theme semantic role mapping is pending approval. Existing light support is preserved; palette values remain unchanged.",
+      "colorPrimaryTextLight": "#0B0B10",
+      "colorPrimaryBgLight": "#F6F2EB",
+      "colorSecondaryTextLight": "#171722",
+      "colorSecondaryBgLight": "#CFC7BB",
+      "colorTertiaryTextLight": "#9C9488",
+      "colorPanelLight": "#F6F2EB",
+      "colorAccentPinkLight": "#FF3AAE",
+      "colorAccentYellowLight": "#F4FF3C",
+      "colorAccentPurpleLight": "#8A63FF"
+    }
+  },
+  "components": {
+    "button": {
+      "primary": {
+        "bgDark": "#FF3AAE",
+        "textDark": "#0B0B10",
+        "bgLight": "#FF3AAE",
+        "textLight": "#F6F2EB"
+      },
+      "secondary": {
+        "bgDark": "#171722",
+        "textDark": "#F6F2EB",
+        "bgLight": "#CFC7BB",
+        "textLight": "#0B0B10"
+      },
+      "disabled": {
+        "bgDark": "#12121A",
+        "textDark": "#9C9488",
+        "bgLight": "#CFC7BB",
+        "textLight": "#9C9488"
+      }
+    },
+    "card": {
+      "default": {
+        "bgDark": "#12121A",
+        "borderDark": "#171722",
+        "bgLight": "#F6F2EB",
+        "borderLight": "#CFC7BB"
+      },
+      "hover": {
+        "shadowDark": "0 4px 12px rgba(255, 58, 174, 0.1)",
+        "shadowLight": "0 4px 12px rgba(255, 58, 174, 0.1)"
+      }
+    },
+    "navigation": {
+      "linkColorDark": "#F6F2EB",
+      "linkColorHoverDark": "#FF3AAE",
+      "linkColorActiveDark": "#FF3AAE",
+      "underlineActiveDark": "#FF3AAE",
+      "linkColorLight": "#0B0B10",
+      "linkColorHoverLight": "#FF3AAE",
+      "linkColorActiveLight": "#FF3AAE",
+      "underlineActiveLight": "#FF3AAE"
+    },
+    "formInput": {
+      "bgDark": "#0B0B10",
+      "borderDark": "#171722",
+      "borderFocusedDark": "#FF3AAE",
+      "textDark": "#F6F2EB",
+      "errorBorderDark": "#FF3AAE",
+      "errorTextDark": "#FF3AAE",
+      "placeholderDark": "#9C9488",
+      "bgLight": "#F6F2EB",
+      "borderLight": "#CFC7BB",
+      "borderFocusedLight": "#FF3AAE",
+      "textLight": "#0B0B10",
+      "errorBorderLight": "#FF3AAE",
+      "errorTextLight": "#FF3AAE",
+      "placeholderLight": "#9C9488"
+    }
+  },
+  "unapprovedCandidates": {
+    "note": "The following candidates are explicitly NOT included in this export and remain unapproved.",
+    "R3": "Responsive Typography — Not approved",
+    "T1": "Additional Typography — Not approved",
+    "RT2": "Reader Typography Controls — Not approved",
+    "C1": "Reader Continuity/Progress Tracking — Not approved"
+  }
+}

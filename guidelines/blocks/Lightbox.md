@@ -604,7 +604,7 @@ const openLightbox = (imageSrc: string, imageAlt: string, title: string) => {
 ```tsx
 const galleryImages = [
   { src: '/img1.jpg', alt: 'Image 1', caption: 'Festival Look' },
-  { src: '/img2.jpg', alt: 'Image 2', caption: 'UV Makeup' },
+  { src: '/img2.jpg', alt: 'Image 2', caption: 'UV Creative' },
   { src: '/img3.jpg', alt: 'Image 3', caption: 'Fusion Nails' }
 ];
 

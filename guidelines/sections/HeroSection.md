@@ -375,7 +375,7 @@ const openLightbox = (imageSrc: string, imageAlt: string, title?: string) => {
 // Usage
 onClick={() => openLightbox(
   imgHeroImage2,
-  "Thailand Festival Makeup",
+  "Thailand Festival Creative",
   "Eden Paradise"
 )}
 
@@ -411,7 +411,7 @@ transition-transform hover:scale-105  /* 5% scale increase */
 alt="Festival makeup with vibrant colors at Thailand event"
 
 // Lightbox should have proper aria-labels
-aria-label="View Thailand Festival Makeup in lightbox"
+aria-label="View Thailand Festival Creative in lightbox"
 
 ```text
 
