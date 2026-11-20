@@ -16,10 +16,37 @@ import {
 } from '../../netlify/lib/reader-access/session-service';
 import { FingerprintInput } from '../../netlify/lib/reader-access/session';
 import { generateSessionToken } from '../../netlify/lib/reader-access/crypto';
-import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
+import {
+  SESSION_LIFETIME_DAYS,
+  RENEWAL_COALESCE_WINDOW_MS,
+} from '../../netlify/lib/reader-access/session-config';
+import { updateSession } from '../../netlify/lib/reader-access/store';
+import { medianTimingsNs, spreadRatio } from './helpers/timing';
 
-// Mock store operations
-vi.mock('../../netlify/lib/reader-access/store');
+// In-memory Netlify Blobs double. The session service needs a stateful store
+// (terminate-then-validate, renew-then-read), so the real store adapter runs
+// on top of this Map instead of being auto-mocked to return undefined.
+const blobData = vi.hoisted(() => new Map<string, string>());
+
+vi.mock('../../netlify/lib/blobs', () => ({
+  getStore: () => ({
+    get: (key: string) => Promise.resolve(blobData.get(key) ?? null),
+    set: (key: string, value: string) => {
+      blobData.set(key, value);
+      return Promise.resolve();
+    },
+    delete: (key: string) => {
+      blobData.delete(key);
+      return Promise.resolve();
+    },
+    list: ({ prefix = '' }: { prefix?: string } = {}) =>
+      Promise.resolve({
+        blobs: [...blobData.keys()]
+          .filter((key) => key.startsWith(prefix))
+          .map((key) => ({ key, etag: 'test' })),
+      }),
+  }),
+}));
 
 describe('Session Service - Core Operations', () => {
   const testEmail = 'reader@example.com';
@@ -32,10 +59,12 @@ describe('Session Service - Core Operations', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    blobData.clear();
   });
 
   afterEach(() => {
     vi.clearAllMocks();
+    vi.useRealTimers();
   });
 
   describe('createSession', () => {
@@ -112,21 +141,15 @@ describe('Session Service - Core Operations', () => {
       const correctToken = testSession.sessionId;
       const wrongToken = 'wrong' + 'x'.repeat(correctToken.length - 5);
 
-      const start1 = process.hrtime.bigint();
-      await validateSession(correctToken, testEmail, testSession.deviceId);
-      const end1 = process.hrtime.bigint();
+      // Compare medians of warmed-up, interleaved runs: a single sample of
+      // each is dominated by JIT warm-up and scheduler noise.
+      const [timing1, timing2] = await medianTimingsNs([
+        () => validateSession(correctToken, testEmail, testSession.deviceId),
+        () => validateSession(wrongToken, testEmail, testSession.deviceId),
+      ]);
+      const timingRatio = spreadRatio(timing1, timing2);
 
-      const start2 = process.hrtime.bigint();
-      await validateSession(wrongToken, testEmail, testSession.deviceId);
-      const end2 = process.hrtime.bigint();
-
-      // Timing should be similar (constant-time)
-      // Note: This is a statistical test; exact timing varies by CPU
-      const timing1 = Number(end1 - start1);
-      const timing2 = Number(end2 - start2);
-      const timingRatio = Math.max(timing1, timing2) / Math.min(timing1, timing2);
-
-      // Allow up to 2x variance (should be much closer in constant-time impl)
+      // Allow up to 2.5x variance (should be much closer in constant-time impl)
       expect(timingRatio).toBeLessThan(2.5);
     });
 
@@ -145,14 +168,14 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should reject expired session', async () => {
-      // Create session with past expiry
-      const expiredSession = {
-        ...testSession,
-        expiresAt: new Date(Date.now() - 1000).toISOString(),
-      };
+      // Persist a past expiry beyond the clock-skew tolerance. Changing a local
+      // copy of the session has no effect: validateSession reads from storage.
+      await updateSession(testEmail, testSession.deviceId, {
+        expiresAt: new Date(Date.now() - 60 * 1000).toISOString(),
+      });
 
       const result = await validateSession(
-        expiredSession.sessionId,
+        testSession.sessionId,
         testEmail,
         testSession.deviceId
       );
@@ -170,6 +193,11 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should extend expiry to 30 days from renewal time', async () => {
+      // Step past the coalesce window (only Date is faked), otherwise the
+      // renewal is skipped and renewedAt keeps the creation timestamp.
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(Date.now() + RENEWAL_COALESCE_WINDOW_MS + 1);
+
       const beforeRenewal = new Date();
       const renewed = await renewSession(testEmail, testSession.deviceId);
       const afterRenewal = new Date();

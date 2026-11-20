@@ -185,9 +185,9 @@ describe('Session Persistence - T079 (US1)', () => {
     });
 
     it('should not throw on missing session', async () => {
-      expect(async () => {
-        await getSession('nonexistent@example.com', 'nonexistent-device');
-      }).not.toThrow();
+      await expect(
+        getSession('nonexistent@example.com', 'nonexistent-device')
+      ).resolves.toBeNull();
     });
   });
 });

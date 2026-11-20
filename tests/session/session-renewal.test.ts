@@ -5,9 +5,23 @@
  * User Story 2: 30-Day Rolling Session Renewal
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { createSession, renewSession } from '../../netlify/lib/reader-access/session-service';
-import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
+import {
+  SESSION_LIFETIME_DAYS,
+  RENEWAL_COALESCE_WINDOW_MS,
+} from '../../netlify/lib/reader-access/session-config';
+
+/**
+ * Move the clock past the renewal coalesce window. renewSession deliberately
+ * returns the stored session unchanged when the last renewal was less than
+ * RENEWAL_COALESCE_WINDOW_MS ago, so a renewal straight after creation is a
+ * no-op by design. Only Date is faked; timers keep running normally.
+ */
+function advancePastCoalesceWindow() {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(Date.now() + RENEWAL_COALESCE_WINDOW_MS + 1);
+}
 
 vi.mock('../../netlify/lib/blobs', () => {
   const store = new Map<string, string>();
@@ -35,6 +49,10 @@ describe('Session Renewal - T082 (US2)', () => {
     vi.clearAllMocks();
   });
 
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   describe('Basic renewal', () => {
     it('should renew active session', async () => {
       const created = await createSession(testEmail, testCode, fingerprint);
@@ -48,8 +66,8 @@ describe('Session Renewal - T082 (US2)', () => {
     it('should update renewedAt timestamp on renewal', async () => {
       const created = await createSession(testEmail, testCode, fingerprint);
 
-      // Wait a bit to ensure time difference
-      await new Promise((resolve) => setTimeout(resolve, 10));
+      // Renew after the coalesce window, otherwise the renewal is skipped
+      advancePastCoalesceWindow();
 
       const renewed = await renewSession(testEmail, created.deviceId);
 
@@ -74,6 +92,7 @@ describe('Session Renewal - T082 (US2)', () => {
 
     it('should change expiresAt timestamp from original', async () => {
       const created = await createSession(testEmail, testCode, fingerprint);
+      advancePastCoalesceWindow();
       const renewed = await renewSession(testEmail, created.deviceId);
 
       expect(renewed.expiresAt).not.toBe(created.expiresAt);
@@ -145,9 +164,9 @@ describe('Session Renewal - T082 (US2)', () => {
 
   describe('Error cases', () => {
     it('should throw when renewing non-existent session', async () => {
-      expect(async () => {
-        await renewSession('nonexistent@example.com', 'nonexistent-device');
-      }).rejects.toThrow();
+      await expect(
+        renewSession('nonexistent@example.com', 'nonexistent-device')
+      ).rejects.toThrow('Session not found');
     });
 
     it('should throw when renewing terminated session', async () => {
@@ -157,9 +176,9 @@ describe('Session Renewal - T082 (US2)', () => {
       const created = await createSession(testEmail, testCode, fingerprint);
       await terminateSession(testEmail, created.deviceId);
 
-      expect(async () => {
-        await renewSession(testEmail, created.deviceId);
-      }).rejects.toThrow();
+      await expect(renewSession(testEmail, created.deviceId)).rejects.toThrow(
+        'Cannot renew terminated session'
+      );
     });
   });
 

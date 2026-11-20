@@ -178,15 +178,20 @@ export async function listSessionsByEmail(email: string): Promise<Session[]> {
     // Build prefix for all sessions for this email
     const prefix = buildSessionKey(email, '');
 
-    // List all keys starting with prefix
-    // Note: This assumes Blobs supports list() with prefix filtering
-    // If not available, we may need to store a separate session index
-    const keys = await (store as any).list?.({ prefix });
-
-    if (!keys) {
+    // List all keys starting with prefix.
+    // Netlify Blobs resolves list() to `{ blobs: [{ key, etag }], directories }`,
+    // while simple adapters (and test doubles) may resolve to a plain string[].
+    // Normalise both shapes, then filter by prefix ourselves so an adapter that
+    // ignores the prefix option can never leak another reader's sessions into
+    // this reader's device count.
+    if (typeof store.list !== 'function') {
       // Fallback: return empty array if list() not available
       return [];
     }
+
+    const keys = extractListKeys(await store.list({ prefix })).filter((key) =>
+      key.startsWith(prefix)
+    );
 
     // Fetch each session in parallel
     const sessions = await Promise.all(
@@ -205,6 +210,27 @@ export async function listSessionsByEmail(email: string): Promise<Session[]> {
   } catch (error) {
     throw new Error(`Failed to list sessions for ${email}: ${error}`);
   }
+}
+
+/**
+ * Normalise the result of a Blobs list() call into an array of keys.
+ *
+ * @param result Either a string[] or a Netlify Blobs ListResult
+ * @returns Array of blob keys (empty for unrecognised shapes)
+ */
+function extractListKeys(result: unknown): string[] {
+  if (Array.isArray(result)) {
+    return result.filter((key): key is string => typeof key === 'string');
+  }
+
+  const blobs = (result as { blobs?: unknown } | null | undefined)?.blobs;
+  if (Array.isArray(blobs)) {
+    return blobs
+      .map((blob) => (blob as { key?: unknown } | null)?.key)
+      .filter((key): key is string => typeof key === 'string');
+  }
+
+  return [];
 }
 
 /**

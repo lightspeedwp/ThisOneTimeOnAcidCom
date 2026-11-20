@@ -18,7 +18,11 @@ export interface BlobStore {
   set(key: string, value: string): Promise<void>;
   get(key: string): Promise<string | null>;
   delete(key: string): Promise<void>;
-  list?(options?: { prefix?: string }): Promise<string[]>;
+  /**
+   * Netlify Blobs resolves to `{ blobs: [{ key, etag }], directories }`;
+   * simpler adapters may resolve to a plain array of keys.
+   */
+  list?(options?: { prefix?: string }): Promise<string[] | { blobs: { key: string }[] }>;
 }
 
 /**

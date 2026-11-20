@@ -61,6 +61,20 @@ export async function createSession(
   verificationCode: string,
   deviceFingerprint: FingerprintInput
 ): Promise<Session> {
+  // Serialise creations per reader so the device-limit check and the write
+  // happen together. Without this, concurrent requests all read the same
+  // "active count" before any of them stores a session (check-then-act race)
+  // and every one of them is allowed through.
+  return withEmailLock(email, () =>
+    createSessionUnlocked(email, verificationCode, deviceFingerprint)
+  );
+}
+
+async function createSessionUnlocked(
+  email: string,
+  verificationCode: string,
+  deviceFingerprint: FingerprintInput
+): Promise<Session> {
   // TODO: T006a - Validate verification code (Phase 2 integration)
   // - Lookup verification code in Phase 2 storage
   // - Check code not expired (< 15 minutes old)
@@ -71,10 +85,13 @@ export async function createSession(
   // Generate device fingerprint hash
   const deviceId = generateDeviceFingerprint(deviceFingerprint);
 
-  // Check concurrent device limit (T006b)
+  // Check concurrent device limit (T006b).
+  // A session for this same device is stored under the same key and is
+  // replaced by the new one, so it must not count towards the limit:
+  // re-verifying on a device the reader already uses is not a new device.
   const activeSessions = await listSessionsByEmail(email);
   const activeCount = activeSessions.filter(
-    (s) => s.status === 'active' && s.terminatedAt === null
+    (s) => s.status === 'active' && s.terminatedAt === null && s.deviceId !== deviceId
   ).length;
 
   if (activeCount >= MAX_CONCURRENT_DEVICES) {
@@ -107,6 +124,39 @@ export async function createSession(
   await storeSession(session);
 
   return session;
+}
+
+/**
+ * Pending session-creation work per reader, used by withEmailLock().
+ *
+ * This only serialises work inside one function instance. Requests handled by
+ * different instances can still race; closing that gap needs a conditional
+ * write in Blobs (or a per-reader session index guarded by an ETag).
+ */
+const emailLocks = new Map<string, Promise<unknown>>();
+
+/**
+ * Run `task` after any earlier task for the same reader has settled.
+ *
+ * @param email Reader's email (case-insensitive key)
+ * @param task Work to run while holding the reader's lock
+ * @returns The task's result
+ */
+async function withEmailLock<T>(email: string, task: () => Promise<T>): Promise<T> {
+  const key = email.toLowerCase();
+  const previous = emailLocks.get(key) ?? Promise.resolve();
+  const run = previous.catch(() => undefined).then(task);
+  const tail = run.catch(() => undefined);
+  emailLocks.set(key, tail);
+
+  try {
+    return await run;
+  } finally {
+    // Drop the entry once nothing newer has queued behind us.
+    if (emailLocks.get(key) === tail) {
+      emailLocks.delete(key);
+    }
+  }
 }
 
 /**
