@@ -81,6 +81,7 @@ Claude produces a **TypeScript component spec document** containing:
    ```
 
 2. **State & Variant Matrix** (markdown table)
+
    | Breakpoint | State | Style | Notes |
    | --- | --- | --- | --- |
    | Desktop (≥1024px) | default | Horizontal menu, Inter font, text color #F6F2EB | Links stacked horizontally |
