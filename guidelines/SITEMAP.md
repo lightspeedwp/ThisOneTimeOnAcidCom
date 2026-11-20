@@ -121,7 +121,7 @@
 All accessible from main navigation:
 
 | Page | Route | Component | Description |
-|------|-------|-----------|-------------|
+| ---- | ----- | --------- | ----------- |
 | **Home** | `/` | `HomePage` | Landing page with hero, featured work, blog preview |
 | **About** | `/about` | `AboutPage` | Journey, philosophy, skills |
 | **Portfolio** | `/portfolio` | `PortfolioMainPage` | Gallery with category filtering |
@@ -133,7 +133,7 @@ All accessible from main navigation:
 ### Detail Pages (Level 2)
 
 | Page | Route | Component | Parent |
-|------|-------|-----------|--------|
+| ---- | ----- | --------- | ------ |
 | **Blog Post** | `/blog/:slug` | `BlogPostPageRoute` | Blog |
 | **Portfolio Detail** | `/portfolio/:slug` | `PortfolioResolver` | Portfolio |
 | **Video Detail** | `/video/:slug` | `VideoDetailPage` | Videos |
@@ -142,7 +142,7 @@ All accessible from main navigation:
 ### Taxonomy Archives (Level 2)
 
 | Page | Route | Component |
-|------|-------|-----------|
+| ---- | ----- | --------- |
 | **Blog Category** | `/blog/category/:slug` | `BlogCategoryPage` |
 | **Blog Tag** | `/blog/tag/:slug` | `BlogTagPage` |
 | **Portfolio Category** | `/portfolio/category/:slug` | `PortfolioCategoryPage` |
@@ -155,7 +155,7 @@ All accessible from main navigation:
 ### Utility Pages
 
 | Page | Route | Component |
-|------|-------|-----------|
+| ---- | ----- | --------- |
 | **Search** | `/search` | `SearchResultsPage` |
 | **FAQ** | `/faq` | `FaqAggregatePage` |
 | **Feedback** | `/feedback` | `FeedbackPage` |
@@ -168,7 +168,7 @@ All accessible from main navigation:
 ### Developer Tools (24 sub-tools)
 
 | Page | Route | Component | Badge |
-|------|-------|-----------|-------|
+| ---- | ----- | --------- | ----- |
 | **Hub** | `/dev-tools` | `DevToolsPage` | — |
 | **Style Guide** | `/dev-tools/style-guide` | `StyleGuidePage` | Design System |
 | **Typography** | `/dev-tools/typography` | `TypographySpecimenPage` | Typography |
@@ -198,7 +198,7 @@ All accessible from main navigation:
 ### Error Pages
 
 | Page | Route | Component |
-|------|-------|-----------|
+| ---- | ----- | --------- |
 | **404** | `*` | `NotFoundPage` |
 
 ---
@@ -388,7 +388,7 @@ setSEO(blogPostSEO(post.title, post.excerpt));
 Provides builder functions and inject/cleanup utilities for JSON-LD schemas:
 
 | Schema Type | Pages |
-|-------------|-------|
+| ----------- | ----- |
 | `WebSite` + `SearchAction` | HomePage |
 | `Person` | HomePage, AboutPage |
 | `BlogPosting` | BlogPostPage |

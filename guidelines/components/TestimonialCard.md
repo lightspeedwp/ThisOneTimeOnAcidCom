@@ -28,10 +28,9 @@ import { TestimonialCard } from './components/ui/TestimonialCard';
 <TestimonialCard
   testimonial={{
     name: "Sarah Johnson",
-text: "Ash created the most stunning festival look! The colors were vibrant and
-lasted all day.",
+text: "Ash created something truly stunning! The colors were vibrant and left a lasting impression.",
     rating: 5,
-    service: "Festival Makeup"
+    service: "Creative Work"
   }}
 />
 
@@ -44,9 +43,9 @@ lasted all day.",
   testimonial={{
     name: "Emma Williams",
     photo: "/images/clients/emma.jpg",
-    text: "Professional, creative, and so talented. My wedding makeup was perfect!",
+    text: "Professional, creative, and so talented. The work was absolutely perfect!",
     rating: 5,
-    service: "Wedding Makeup",
+    service: "Creative Services",
     date: "June 2024"
   }}
 />
@@ -366,10 +365,9 @@ function TestimonialsSection() {
       id: '1',
       name: 'Sarah Johnson',
       photo: '/images/clients/sarah.jpg',
-text: 'Ash created the most stunning festival look! The colors were vibrant and
-lasted all day.',
+text: 'Ash created something truly stunning! The colors were vibrant and left a lasting impression.',
       rating: 5,
-      service: 'Festival Makeup',
+      service: 'Creative Work',
       date: 'August 2024',
       verified: true
     },

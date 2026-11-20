@@ -16,7 +16,7 @@ Comprehensive performance audit of this-one-time-on-acid.com completed 2026-10-2
 Core Web Vitals targets aligned with Google performance standards:
 
 | Metric | Target | Notes |
-|--------|--------|-------|
+| ------ | ------ | ----- |
 | **LCP** (Largest Contentful Paint) | <2.5s | Measured via Vercel Analytics |
 | **FID** (First Input Delay) | <100ms | Real-user data only |
 | **CLS** (Cumulative Layout Shift) | <0.1 | Layout stability target |
@@ -46,7 +46,7 @@ Core Web Vitals targets aligned with Google performance standards:
 ## Performance Budgets
 
 | Resource | Budget | Current | Headroom |
-|----------|--------|---------|----------|
+| -------- | ------ | ------- | -------- |
 | **HTML** | 50KB | 12KB | 38KB |
 | **CSS** | 30KB | 18KB | 12KB |
 | **JS** | 200KB | 45KB | 155KB |

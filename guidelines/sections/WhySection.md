@@ -22,7 +22,7 @@ values. It combines:
 
 ```tsx
 <ThreeColumnLayout
-  title="Why I Do Makeup"
+  title="Why I Create"
   subtitle="Description text"
   backgroundGradient="from-purple-50 via-pink-50 to-orange-50"
   decorativeElements={<>/* Gradient blur orbs */</>}
@@ -104,7 +104,7 @@ className="
   text-center
   mb-fluid-md
 ">
-  Why I Do Makeup
+  Why I Create
 </h2>
 
 ```text
@@ -120,8 +120,8 @@ className="
   mx-auto
   mb-fluid-2xl
 ">
-These three pillars guide everything I create — from festival glitter to bridal
-elegance.
+These three pillars guide everything I create — from vibrant moments to refined
+expression.
 </p>
 
 ```text
@@ -224,7 +224,7 @@ Each card displays a reason with custom icon:
   text-gray-600
   leading-relaxed                                  // 1.625 line-height
 ">
-When I do makeup for others, it lights them up. They feel special, happy, and
+When I create for others, it lights them up. They feel special, happy, and
 confident — and seeing that sparkle in their eyes inspires me to keep creating.
 </p>
 
@@ -290,16 +290,16 @@ creating."
   {
     icon: JoyIcon,
     title: "Brings Me Joy",
-description: "Makeup is my creative playground. Whether it's festival glitter,
-glowing UV paints, or bold eyeshadow blends, I love the process of experimenting
+description: "Creation is my playground. Whether it's vibrant colors,
+glowing experiments, or bold expressions, I love the process of experimenting
 and expressing."
   },
   {
     icon: GrowthIcon,
     title: "To Keep Growing",
 description: "Every face, every colour, every night out is a chance to evolve.
-Makeup is a journey — and I treat each session as an opportunity to learn and
-expand my artistry."
+This creative journey is a path of constant discovery — and I treat each moment as an opportunity to learn and
+expand my creativity."
   }
 ];
 
@@ -372,7 +372,7 @@ Custom icons may include:
 
 ```tsx
 <section aria-labelledby="why-heading">
-  <h2 id="why-heading">Why I Do Makeup</h2>
+  <h2 id="why-heading">Why I Create</h2>
   <div className="grid">
     <article>                      {/* Each card is an article */}
       <h3>Card Title</h3>
@@ -468,7 +468,7 @@ from-blue-400 to-teal-500          /* Bottom-right orb */
 ```tsx
 // ✅ Use ThreeColumnLayout wrapper
 <ThreeColumnLayout
-  title="Why I Do Makeup"
+  title="Why I Create"
   subtitle="Description"
   backgroundGradient="from-purple-50 via-pink-50 to-orange-50"
 >
@@ -535,7 +535,7 @@ className="w-full sm:w-auto"
 <section className="bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50
 py-section px-fluid-md">
   <div className="max-w-7xl mx-auto">
-    <h2>Why I Do Makeup</h2>
+    <h2>Why I Create</h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-fluid-lg">
       {reasons.map(reason => (
         <article className="bg-white/80 backdrop-blur-sm p-fluid-md">

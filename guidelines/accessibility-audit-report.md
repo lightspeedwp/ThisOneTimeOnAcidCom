@@ -14,7 +14,7 @@ Full accessibility audit of this-one-time-on-acid.com completed 2026-10-25 again
 ### Overall Rating: **WCAG AA Compliant** — Enhancements in Progress for AAA Level
 
 | Category | Status | Notes |
-|----------|--------|-------|
+| -------- | ------ | ----- |
 | **Color Contrast** | ✅ PASS | Meets WCAG AA standards; AAA enhancement in progress |
 | **Keyboard Navigation** | ⏳ PARTIAL | Focus trap handling in modals needs improvement |
 | **Screen Reader Compat** | ⏳ PARTIAL | ARIA live regions for dynamic content needed |

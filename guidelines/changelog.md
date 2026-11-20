@@ -57,7 +57,7 @@ Each release gets its own section with the version number and release date:
 Group changes under these headings only. Use **exactly** these names:
 
 | Category | Use For |
-|---|---|
+| - | - |
 | `### Added` | New features, new components, new pages, new data files |
 | `### Changed` | Changes to existing functionality, refactors, migrations |
 | `### Deprecated` | Features that will be removed in a future version |
@@ -103,7 +103,7 @@ Maintain an `[Unreleased]` section at the top of the changelog:
 Version numbers follow `MAJOR.MINOR.PATCH`:
 
 | Increment | When To Use | Example |
-|---|---|---|
+| - | - | - |
 | **MAJOR** (X.0.0) | Breaking changes, major architecture shifts, visual redesigns | `3.0.0` → Neon vs Atomic Black redesign |
 | **MINOR** (X.Y.0) | New features, new pages, non-breaking additions | `5.3.0` → Personal Art Project migration |
 | **PATCH** (X.Y.Z) | Bug fixes, typo corrections, minor documentation updates | `7.3.1` → Fix broken guideline link |
@@ -159,7 +159,7 @@ changelog entry must be created.
 ## Protection Rules
 
 | Rule | Detail |
-|---|---|
+| - | - |
 | **Never delete** | `CHANGELOG.md` is a protected root file — it must always exist |
 | **Never move** | It must remain at `/CHANGELOG.md` (project root) |
 | **Never rename** | The filename must always be `CHANGELOG.md` |
@@ -193,7 +193,7 @@ in the same session if the work results in a version bump.
 ## Relationship to Other Files
 
 | File | Relationship |
-|---|---|
+| - | - |
 | `/guidelines/Guidelines.md` | Version numbers are synchronised — changelog tracks guideline version history |
 | `/tasks/task-list.md` | Completed tasks may correspond to changelog entries |
 | `/reports/` | Audit findings that lead to changes should be reflected in the changelog |

@@ -26,7 +26,7 @@ Comprehensive responsive layout patterns showing how grid, flexbox, and containe
 ## Breakpoint System
 
 | Name | Size | Use Case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | mobile | < 640px | Mobile phones |
 | tablet | 640px ≤ width < 1024px | Tablets, small laptops |
 | desktop | 1024px ≤ width < 1536px | Desktops |
