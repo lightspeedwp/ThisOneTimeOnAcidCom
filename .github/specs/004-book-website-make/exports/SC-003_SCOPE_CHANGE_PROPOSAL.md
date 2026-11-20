@@ -80,7 +80,7 @@
 - Decisions 3, 4, 5, 6 resolution assigned to Spec 005 Phase 1
 - Manuscript approval (Decision 5) is external dependency on author timeline
 
-**Tradeoff**: 
+**Tradeoff**:
 - ✅ Spec 004 becomes focused: navigation exposure, design baseline, navigation design
 - ✅ Spec 005 receives "clean handoff" with Prompt 3A fully specified and decision-ready
 - ✅ No blocking on external decisions (manuscript approval)
@@ -156,7 +156,7 @@
 
 ### If Approved (Option B Recommended)
 
-```
+```text
 2026-11-19: T063 Approval Submission (this document)
 2026-11-19: Ash reviews SC-003 proposal (1–2 hours)
 2026-11-19: T063 Approved → Raise Prompt 2A to 95% (1 hour)
@@ -170,7 +170,7 @@
 
 ### If Rejected (Option A: Resolve All in Spec 004)
 
-```
+```text
 2026-11-19: T063 Re-work (resolve Decisions 3–6 or extend decision placeholders)
 2026-11-23: Prompts 2A & 3A raised to 95% (~3–4 hours additional effort)
 2026-11-23: Spec 004 Convergence Complete (delayed ~4 days)
