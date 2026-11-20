@@ -27,7 +27,7 @@ Each skill is tested in three scenarios:
 ## Skill Validation Matrix
 
 | Skill | Draft Scenario | Report Scenario | Permission Denied | File Paths | Status |
-|-------|---|---|---|---|---|
+| ----- | - | - | - | - | - |
 | branch-validation | ✅ PASS | ✅ PASS | ✅ PASS | ✅ | ✅ COMPLETE |
 | changelog | ✅ PASS | ✅ PASS | ✅ PASS | ✅ | ✅ COMPLETE |
 | labeling | ✅ PASS | ✅ PASS | ✅ PASS | ✅ | ✅ COMPLETE |
@@ -64,9 +64,9 @@ Each skill is tested in three scenarios:
 - Status: ✅ **PASS** (captured output below)
 
 **Captured Output:**
-```
+```text
 ✅ Branch 'docs/spec-003-phase-6-implementation-completion' matches the repository branching strategy.
-```
+text
 
 **Permission Denied Scenario:**
 - Expected: Skill gracefully reports it cannot create/switch branches without permission
@@ -89,12 +89,12 @@ Each skill is tested in three scenarios:
 **Draft Scenario — Propose Changelog Entry:**
 - Expected: Skill proposes new entry for [Unreleased] section
 - Example format:
-  ```
+text
   ### Added
   - Guidelines refactoring Phase 6 implementation completion
   - T066 design verification report
   - T067 coverage manifest
-  ```
+```text
 - Status: ✅ **PASS** (structure verified)
 
 **Report Scenario — Validate Changelog Structure:**
@@ -103,12 +103,12 @@ Each skill is tested in three scenarios:
 - Status: ✅ **PASS** (captured evidence)
 
 **Captured Evidence:**
-```
+text
 Structure: [Unreleased] section exists with Added/Changed/Fixed/Removed/Security subsections
 Latest release: [1.0.0] - 2026-11-09
 Format compliance: Keep a Changelog 1.1.0 ✅
 Latest entry: Reader access and specification documentation updates
-```
+text
 
 **Permission Denied Scenario:**
 - Expected: Skill reports: "Assess format without writing by default" / Cannot edit CHANGELOG.md without explicit authority
@@ -138,7 +138,7 @@ Latest entry: Reader access and specification documentation updates
 - Status: ✅ **PASS** (taxonomy documented)
 
 **Captured Evidence:**
-```
+text
 Label taxonomy verified with 6 categories:
 - Type labels (8): bug, feature, task, documentation, design, test, chore
 - Status labels (5): needs-triage, in-progress, blocked, done, on-hold  
@@ -148,7 +148,7 @@ Label taxonomy verified with 6 categories:
 Total: 28+ labels with prefix:category format ✅
 
 Label prefix enforcement: ✅ Canonical format documented per organization standards
-```
+text
 
 **Permission Denied Scenario:**
 - Expected: Skill reports: "Selecting or auditing labels is read-only" / Cannot apply labels without explicit write authority
@@ -184,14 +184,14 @@ Label prefix enforcement: ✅ Canonical format documented per organization stand
 - Status: ✅ **PARTIAL PASS** — vitest not installed in environment
 
 **Captured Evidence:**
-```
+text
 Error: sh: 1: vitest: not found
 (Skill correctly identifies missing prerequisite)
 Test runner status: Vitest 5.0.5 configured (not installed in environment)
 Test files present: ✅ src/_*tests*_/, e2e/, tests/build.bats
 Configuration: package.json has npm run scripts configured ✅
 Accessibility: Tests validate WCAG 2.2 AAA compliance per D3 decision ✅
-```
+text
 
 **Permission Denied Scenario:**
 - Expected: Skill reports: "A missing runner or browser is a reported prerequisite, not permission to install it"
@@ -224,13 +224,13 @@ Accessibility: Tests validate WCAG 2.2 AAA compliance per D3 decision ✅
 - Status: ✅ **PASS** (captured evidence)
 
 **Captured Evidence:**
-```
+text
 Dependency Check: 25+ UNMET DEPENDENCY entries (read-only assessment, no install attempted)
 Repository State: Working directory clean with only 1 modified file (T068-skill-validation-report.md)
 Branch Validation: docs/spec-003-phase-6-implementation-completion ✅ matches naming convention
 CHANGELOG.md: Present and valid ✅
 Recent commits: Proper structure (refactor/fix tags) ✅
-```
+text
 
 **Permission Denied Scenario:**
 - Expected: Skill reports: "Build/test execution requires the relevant task authorisation" / Cannot run build/install without explicit authority
@@ -265,7 +265,7 @@ Recent commits: Proper structure (refactor/fix tags) ✅
 - Status: ✅ **PASS** (workflow guidance verified)
 
 **Captured Evidence:**
-```
+text
 4-step AI-assisted workflow documented:
 1. Create prompt → Define audit scope and methodology in /prompts/{topic}.md
 2. Run audit → Execute against codebase and guidelines
@@ -279,7 +279,7 @@ Backend stack reference (D6 decision):
 
 Workflow decision tree: ✅ Documented (single-file vs orchestrator vs archiving)
 Naming conventions: ✅ Lowercase, hyphens, descriptive
-```
+text
 
 **Permission Denied Scenario:**
 - Expected: Skill gracefully indicates task creation requires explicit authority
@@ -292,7 +292,7 @@ Naming conventions: ✅ Lowercase, hyphens, descriptive
 ### Verification by Skill
 
 | Skill | Total Paths | EXISTS | GLOB | MISSING | TEMPLATE | NONPATH | Status |
-|-------|---|---|---|---|---|---|---|
+| ----- | - | - | - | - | - | - | - |
 | branch-validation | 12 | 6 ✅ | 1 ✅ | 2 | 0 | 3 | ✅ PASS |
 | changelog | 3 | 3 ✅ | 0 | 0 | 0 | 0 | ✅ PASS |
 | labeling | 4 | 4 ✅ | 0 | 0 | 0 | 0 | ✅ PASS |
@@ -315,7 +315,7 @@ Naming conventions: ✅ Lowercase, hyphens, descriptive
 ### Evidence Collection Status
 
 | Skill | Evidence Type | Status | Notes |
-|-------|---|---|---|
+| ----- | - | - | - |
 | branch-validation | Draft output | ✅ | "✅ Branch...matches the repository branching strategy." |
 | branch-validation | Report output | ✅ | Branch validation reports success per naming convention |
 | branch-validation | Denied output | ✅ | Skill respects branch protection rules |
@@ -376,7 +376,7 @@ Naming conventions: ✅ Lowercase, hyphens, descriptive
 ### Verification Results Summary
 
 | Requirement | Status | Evidence |
-|---|---|---|
+| - | - | - |
 | All 6 skills tested in draft scenario | ✅ PASS | 6/6 skills generate proposals/drafts |
 | All 6 skills tested in report scenario | ✅ PASS | 6/6 skills generate reports/summaries |
 | All 6 skills tested in denied scenario | ✅ PASS | 6/6 skills respect permission boundaries |

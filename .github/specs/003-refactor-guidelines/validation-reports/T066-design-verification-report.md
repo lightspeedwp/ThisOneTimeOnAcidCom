@@ -33,7 +33,7 @@ T066 design verification is **COMPLETE** with the following findings:
 **Primary Brand Palette - Neon System:**
 
 | Token | Hex Value | WCAG 2.2 AAA | Use Case | Status |
-|-------|-----------|--------------|----------|--------|
+| ----- | --------- | ------------ | -------- | ------ |
 | Neon Pink | `#FF006E` | ✅ Verified | Primary action, highlights | ✅ PASS |
 | Neon Cyan | `#00F5FF` | ✅ Verified | Secondary, accents | ✅ PASS |
 | Neon Yellow | `#FFFF00` | ✅ Verified | Warnings, critical attention | ✅ PASS |
@@ -43,7 +43,7 @@ T066 design verification is **COMPLETE** with the following findings:
 **Neutral Palette:**
 
 | Token | Hex Value | Contrast Ratio | Status |
-|-------|-----------|-----------------|--------|
+| ----- | --------- | --------------- | ------ |
 | Light | `#FFFFFF` | ✅ AAA | ✅ PASS |
 | Medium | `#888888` | ✅ AAA | ✅ PASS |
 | Dark | `#000000` | ✅ AAA | ✅ PASS |
@@ -64,7 +64,7 @@ T066 design verification is **COMPLETE** with the following findings:
 **Half-Step:** 4px (xs) for micro-spacing  
 
 | Scale | Value | Verification | Use Case | Status |
-|-------|-------|--------------|----------|--------|
+| ----- | ----- | ------------ | -------- | ------ |
 | xs | 4px | ✅ Confirmed | Micro-spacing (icon internal) | ✅ PASS |
 | sm | 8px | ✅ Confirmed | Compact spacing | ✅ PASS |
 | md | 16px | ✅ Confirmed | Default spacing | ✅ PASS |
@@ -88,7 +88,7 @@ T066 design verification is **COMPLETE** with the following findings:
 **Primary Font Stack:** `Inter`, `system-ui`, `-apple-system`, sans-serif  
 
 | Level | Size | Line Height | Weight | Verification | Status |
-|-------|------|-------------|--------|--------------|--------|
+| ----- | ---- | ----------- | ------ | ------------ | ------ |
 | h1 | 48px | 1.2 | Bold (700) | ✅ Confirmed | ✅ PASS |
 | h2 | 36px | 1.3 | Semibold (600) | ✅ Confirmed | ✅ PASS |
 | h3 | 28px | 1.4 | Semibold (600) | ✅ Confirmed | ✅ PASS |
@@ -122,7 +122,7 @@ HeroSection uses `clamp()` formulas verified:
 ### 4. Animation Tokens Verification
 
 | Token | Duration | Easing | Use Case | Verification | Status |
-|-------|----------|--------|----------|--------------|--------|
+| ----- | -------- | ------ | -------- | ------------ | ------ |
 | fast | 150ms | ease-out | Quick feedback | ✅ Confirmed | ✅ PASS |
 | normal | 300ms | ease-in-out | Standard transitions | ✅ Confirmed | ✅ PASS |
 | slow | 500ms | ease-out | Deliberate reveals | ✅ Confirmed | ✅ PASS |
@@ -139,7 +139,7 @@ HeroSection uses `clamp()` formulas verified:
 ## Component Verification Sampling (8+ Files)
 
 | Component File | Design Tokens Used | Colour Accuracy | Spacing Accuracy | Typography Accuracy | Status |
-|----------------|-------------------|-----------------|------------------|----------------------|--------|
+| -------------- | ----------------- | --------------- | ---------------- | -------------------- | ------ |
 | HeroSection.md | Neon Pink, Green, spacing scale, h1–body | ✅ PASS | ✅ PASS | ✅ PASS (clamp formulas verified) | ✅ PASS |
 | Footer.md | Neon Pink, Purple, neutrals, 8px grid | ✅ PASS | ✅ PASS (gap-6, gap-fluid-lg correct) | ✅ PASS | ✅ PASS |
 | SplitContent.md | Spacing scale (px, rem, %), typography | ✅ PASS | ✅ PASS (column ratios: 50/50, 60/40) | ✅ PASS | ✅ PASS |
@@ -191,21 +191,21 @@ HeroSection uses `clamp()` formulas verified:
 ### Responsive Typography Formulas
 
 **HeroSection Title Scaling:**
-```
+text
 clamp(2.25rem, 6vw, 7.5rem)
 Minimum: 36px (at 480px viewport)
 Preferred: 6% of viewport width
 Maximum: 120px (at 2000px viewport)
-```
+```text
 ✅ Verification: Mathematically correct, smooth scaling across breakpoints
 
 **Subtitle Scaling:**
-```
+text
 clamp(1.25rem, 3vw, 2rem)
 Minimum: 20px
 Preferred: 3% of viewport width
 Maximum: 32px
-```
+```text
 ✅ Verification: Scales proportionally with title
 
 **Spacing Ratios:**
@@ -240,7 +240,7 @@ Maximum: 32px
 ### Findings Summary
 
 | Category | Tokens Verified | Corrections Required | Status |
-|----------|-----------------|----------------------|--------|
+| -------- | --------------- | -------------------- | ------ |
 | Colour Tokens | 15 (brand + neutral + semantic) | 0 | ✅ PASS |
 | Spacing System | 7 scale levels | 0 | ✅ PASS |
 | Typography | 6 scale levels + responsive | 0 | ✅ PASS |

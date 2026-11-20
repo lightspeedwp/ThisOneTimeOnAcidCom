@@ -33,7 +33,7 @@
 ### Core Guidelines (10)
 
 | ID | Path | Operation | Destination | Status | Evidence |
-|----|------|-----------|-------------|--------|----------|
+| -- | ---- | --------- | ----------- | ------ | -------- |
 | G001 | guidelines/Guidelines.md | PRESERVED | Active in guidelines/ | ✅ COMPLETE | Core reference maintained |
 | G002 | guidelines/ARCHITECTURE.md | PRESERVED | Active in guidelines/ | ✅ COMPLETE | Architecture reference preserved |
 | G003 | guidelines/CONTRIBUTING.md | EDITED | Active in guidelines/ | ✅ COMPLETE | Updated per S009 (T016); committed T018 |
@@ -48,14 +48,14 @@
 ### Component Guidelines (35)
 
 | ID | Path | Operation | Destination | Status |
-|----|------|-----------|-------------|--------|
+| -- | ---- | --------- | ----------- | ------ |
 | G011–G045 | guidelines/components/*.md (35 files) | PRESERVED | Active in guidelines/components/ | ✅ COMPLETE |
 | *Examples:* | Accordion, BlogCard, Breadcrumbs, Button, Card, Carousel, Checkbox, ChapterNav, ColorfulIcons, ContentSection, EbookPage, Footer, Header, HeroSection, ImageGallery, Lightbox, LoadingSpinner, Logo, Modal, Pagination, PortfolioCard, PullQuote, RadioButton, ReadMoreButton, ScrollDownArrow, ScrollToTop, SearchBar, SectionCard, ShareComponent, SliderCard, SocialLinks, SplitContent, StatCard, Tag, TestimonialCard, Timeline, Tooltip, TypeformEmbed | PRESERVED | Active in components/ | ✅ COMPLETE |
 
 ### Design Tokens (8)
 
 | ID | Path | Operation | Destination | Status |
-|----|------|-----------|-------------|--------|
+| -- | ---- | --------- | ----------- | ------ |
 | G046 | guidelines/design-tokens/colors.md | POINTER | N001 (Design Tokens Reference) | ✅ COMPLETE |
 | G047 | guidelines/design-tokens/spacing.md | POINTER | N001 | ✅ COMPLETE |
 | G048 | guidelines/design-tokens/typography.md | POINTER | N001 | ✅ COMPLETE |
@@ -68,21 +68,21 @@
 ### Section Guidelines (15)
 
 | ID | Path | Operation | Destination | Status |
-|----|------|-----------|-------------|--------|
+| -- | ---- | --------- | ----------- | ------ |
 | G054–G068 | guidelines/sections/*.md (15 files) | PRESERVED | Active in guidelines/sections/ | ✅ COMPLETE |
 | *Examples:* | AccordionSection, AcknowledgmentsSection, BioSection, BlogGridSection, ChapterNavSection, etc. | PRESERVED | Active in sections/ | ✅ COMPLETE |
 
 ### Mobile/Responsive Guidelines (8)
 
 | ID | Path | Operation | Destination | Status |
-|----|------|-----------|-------------|--------|
+| -- | ---- | --------- | ----------- | ------ |
 | G069–G076 | guidelines/mobile/*.md (8 files) | PRESERVED | Active in guidelines/mobile/ | ✅ COMPLETE |
 | *Examples:* | forms.md, images.md, navigation.md, tap-targets.md, typography.md, etc. | PRESERVED | Active in mobile/ | ✅ COMPLETE |
 
 ### Archive & Miscellaneous (20)
 
 | ID | Path | Operation | Destination | Status |
-|----|------|-----------|-------------|--------|
+| -- | ---- | --------- | ----------- | ------ |
 | G077–G090 | guidelines/*.md (14 files) | PRESERVED/POINTER | Active in guidelines/ or pointers | ✅ COMPLETE |
 | *Examples:* | accessibility-standards.md, brand-identity.md, error-handling.md, etc. | MIXED | Preserved or consolidated | ✅ COMPLETE |
 | G091–G116 | guidelines/_archive/*.md (26 files) | ARCHIVED | _archive/ directory | ✅ COMPLETE |
@@ -99,7 +99,7 @@
 ## S-Documents Inventory (9 Total - Approved & Committed)
 
 | ID | Path | Category | Status | Evidence |
-|----|------|----------|--------|----------|
+| -- | ---- | -------- | ------ | -------- |
 | S001 | .claude/skills/INVENTORY.md | Skill Records | ✅ EDITED | Updated per consolidation; T008 |
 | S002 | .claude/skills/branch-validation/SKILL.md | Skill Records | ✅ EDITED | Validation rules preserved; T009 |
 | S003 | .claude/skills/changelog/SKILL.md | Skill Records | ✅ EDITED | Format spec updated; T010 |
@@ -123,7 +123,7 @@
 ### Reference Documents (N001–N005) — 5 Total, All Approved ✅
 
 | ID | Path | Title | Operation | Status | Evidence |
-|----|------|-------|-----------|--------|----------|
+| -- | ---- | ----- | --------- | ------ | -------- |
 | N001 | guidelines/N001-design-token-reference.md | Design Token Reference | CREATED | ✅ COMPLETE | Canonical design system reference; T029 |
 | N002 | guidelines/N002-accessibility-checklist.md | Accessibility Checklist | CREATED | ✅ COMPLETE | WCAG 2.2 AAA compliance guide; T029 |
 | N003 | guidelines/N003-component-documentation.md | Component Documentation | CREATED | ✅ COMPLETE | Component patterns and usage; T029 |
@@ -133,7 +133,7 @@
 ### Organization Documents (N006–N018) — 13 Total, All Approved ✅
 
 | ID | Title | Status | Evidence |
-|----|-------|--------|----------|
+| -- | ----- | ------ | -------- |
 | N006 | Architecture Overview | ✅ COMPLETE | T029 |
 | N007 | Publishing Workflow & Boundaries | ✅ COMPLETE | T029 |
 | N008 | Content Model & Data Structure | ✅ COMPLETE | T029 |
@@ -151,7 +151,7 @@
 ### Pattern Documents (N019–N022) — 4 Total, All Approved ✅
 
 | ID | Title | Status | Evidence |
-|----|-------|--------|----------|
+| -- | ----- | ------ | -------- |
 | N019 | Error Handling Patterns | ✅ COMPLETE | T029 |
 | N020 | Form Patterns & Best Practices | ✅ COMPLETE | T029 |
 | N021 | Modal & Overlay Patterns | ✅ COMPLETE | T029 |
@@ -160,7 +160,7 @@
 ### Page & Component Documents (N023–N025) — 3 Total, All Approved ✅
 
 | ID | Title | Status | Evidence |
-|----|-------|--------|----------|
+| -- | ----- | ------ | -------- |
 | N023 | Home Page Architecture | ✅ COMPLETE | T029 |
 | N024 | Portfolio Page Layout | ✅ COMPLETE | T029 |
 | N025 | Blog & Article Pages | ✅ COMPLETE | T029 |
@@ -168,7 +168,7 @@
 ### Reporting & Process Documents (N026–N029) — 4 Total, All Approved ✅
 
 | ID | Title | Status | Evidence |
-|----|-------|--------|----------|
+| -- | ----- | ------ | -------- |
 | N026 | Analytics & Metrics | ✅ COMPLETE | T029 |
 | N027 | Deployment Checklist | ✅ COMPLETE | T029 |
 | N028 | Performance Monitoring | ✅ COMPLETE | T029 |
@@ -177,7 +177,7 @@
 ### WordPress & Portfolio Documents (N030–N033) — 4 Total, Deferred per D4/D8 ⏳
 
 | ID | Title | Disposition | Evidence | Status |
-|----|-------|-------------|----------|--------|
+| -- | ----- | ----------- | -------- | ------ |
 | N030 | WordPress Theme Integration | DEFERRED | D4 decision (WordPress not currently used) | ⏳ PENDING |
 | N031 | WordPress Plugin Guidelines | DEFERRED | D8 decision (Phase 3 deferral approved) | ⏳ PENDING |
 | N032 | Portfolio Integration Guide | DEFERRED | Technology stack confirmation pending | ⏳ PENDING |
@@ -221,7 +221,7 @@
 ## Final Reconciliation Table (158 Rows Summary)
 
 | Category | Count | Active | Archived/Pointer | Deferred | Status |
-|----------|-------|--------|------------------|----------|--------|
+| -------- | ----- | ------ | ---------------- | -------- | ------ |
 | **G-Documents** | 116 | 90 | 26 | 0 | ✅ 100% |
 | **S-Documents** | 9 | 9 | 0 | 0 | ✅ 100% |
 | **N-Documents** | 33 | 29 | 0 | 4 | ✅ 100% |

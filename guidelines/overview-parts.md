@@ -53,7 +53,7 @@ detailed implementation guidelines.
 Appear site-wide across all pages
 
 | Part | Purpose | Guideline File |
-|------|---------|---------------|
+| ---- | ------- | ------------- |
 | **Header** | Site navigation and branding | [parts/Header.md](./parts/Header.md) |
 | **Footer** | Site-wide footer with contact form | [parts/Footer.md](./parts/Footer.md) |
 | **MobileMenu** | Full-screen mobile navigation | [parts/MobileMenu.md](./parts/MobileMenu.md) |
@@ -63,7 +63,7 @@ Appear site-wide across all pages
 Appear on specific page types
 
 | Part | Purpose | Guideline File |
-|------|---------|---------------|
+| ---- | ------- | ------------- |
 | **Breadcrumbs** | Hierarchical navigation path | [parts/Breadcrumbs.md](./parts/Breadcrumbs.md) |
 | **SocialLinks** | Social media icon links | [parts/SocialLinks.md](./parts/SocialLinks.md) |
 
@@ -72,7 +72,7 @@ Appear on specific page types
 Behind-the-scenes functionality
 
 | Part | Purpose | Guideline File |
-|------|---------|---------------|
+| ---- | ------- | ------------- |
 | **ErrorBoundary** | React error handling | [parts/ErrorBoundary.md](./parts/ErrorBoundary.md) |
 | **SkipLinks** | Accessibility shortcuts | [parts/SkipLinks.md](./parts/SkipLinks.md) |
 
@@ -195,7 +195,7 @@ shadow-2xl">
 ## WordPress Template Part Alignment
 
 | This One Time On Acid Part | WordPress Template Part | File |
-|--------------|------------------------|------|
+| ------------ | ---------------------- | ---- |
 | `Header` | `header.html` | `Header.tsx` |
 | `Footer` | `footer.html` | `Footer.tsx` |
 | `MobileMenu` | Custom navigation | `MobileMenu.tsx` |

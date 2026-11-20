@@ -75,7 +75,7 @@ document.documentElement.setAttribute('data-theme', theme);
 ### Navigation & Layout
 
 | Component | Light | Dark | Status |
-|-----------|-------|------|--------|
+| --------- | ----- | ---- | ------ |
 | Header | ✅ | ✅ | Implemented |
 | Footer | ✅ | ✅ | Implemented |
 | Sidebar | ✅ | ✅ | Implemented |
@@ -84,7 +84,7 @@ document.documentElement.setAttribute('data-theme', theme);
 ### Content Components
 
 | Component | Light | Dark | Status |
-|-----------|-------|------|--------|
+| --------- | ----- | ---- | ------ |
 | Hero Pattern (N020) | ✅ | ✅ | Planned |
 | Book Card (N019) | ✅ | ✅ | Planned |
 | Journal Preview (N022) | ✅ | ✅ | Planned |
@@ -93,7 +93,7 @@ document.documentElement.setAttribute('data-theme', theme);
 ### Form Elements
 
 | Element | Light | Dark | Status |
-|---------|-------|------|--------|
+| ------- | ----- | ---- | ------ |
 | Text input | ✅ | ✅ | Planned |
 | Textarea | ✅ | ✅ | Planned |
 | Button | ✅ | ✅ | Planned |

@@ -166,7 +166,7 @@ npm run lighthouse:ci
 
 ```typescript
 | Resource | Limit | Current | Trend |
-|----------|-------|---------|-------|
+| -------- | ----- | ------- | ----- |
 | JS       | 150KB | TBD     | Monitor |
 | CSS      | 50KB  | TBD     | Monitor |
 | Images   | 500KB | TBD     | Monitor |
@@ -177,7 +177,7 @@ npm run lighthouse:ci
 
 ```typescript
 | Metric | Budget | Target |
-|--------|--------|--------|
+| ------ | ------ | ------ |
 | Long Tasks (>50ms) | 0 | Eliminate |
 | Main Thread Time | <4s | Keep <3s |
 | Time to Interactive | <5s | Keep <3s |
