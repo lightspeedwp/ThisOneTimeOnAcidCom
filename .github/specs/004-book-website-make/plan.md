@@ -1,6 +1,6 @@
 # Implementation Plan: Book Website Claude Direct Execution
 
-**Branch**: `feat/spec-004-claude-execution-model` | **Date**: 2026-11-09 | **Pivoted**: 2026-11-20 | **Spec**: [.github/specs/004-book-website-make/spec.md](./spec.md)
+**Branch**: `main` (historical: `feat/spec-004-claude-execution-model`) | **Version**: 1.0.0 (locked, see spec.md) | **Date**: 2026-11-09 | **Pivoted**: 2026-11-20 | **Spec**: [.github/specs/004-book-website-make/spec.md](./spec.md)
 
 **Input**: Feature specification from `.github/specs/004-book-website-make/spec.md`
 

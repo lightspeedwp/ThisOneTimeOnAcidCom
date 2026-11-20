@@ -687,7 +687,7 @@ Finalize Phase 8 scope updates, document SC-003 approval, and prepare Spec 004 f
 - [x] T066 Update Phase 8 T054 acceptance criteria to reflect approved SC-003 scope: Prompts 1, 2A, 2B ≥95% (3A handed to Spec 005) per approval 2026-11-19 — ✅ done in the Phase 9 reconciliation
 - [x] T067 Document SC-003 scope change in spec.md Assumptions section with link to approval decision (SC-003_SCOPE_CHANGE_PROPOSAL.md) — ✅ done in the Phase 9 reconciliation (spec.md SC-003 and Assumptions)
 - [x] T068 Create Spec 005 handover artifact documenting: Prompt 3A contract, Decisions 1–6 status, Phase B readiness (3 prompts, 3 decisions) — ✅ `exports/SPEC_004_TO_005_HANDOVER.md`
-- [ ] T069 Validate all 20+ specification artifacts present and version-locked for Spec 004 Phase 9 sign-off — ⏳ open: artifacts exist, but nothing yet records a version-lock. Needs Ash to sign off on spec.md Status
+- [ ] T069 Validate all 20+ specification artifacts present and version-locked for Spec 004 Phase 9 sign-off — ⏳ lock method and table recorded in spec.md (2026-11-20). Tick once PR #649 merges and the lock commit is filled in
 - [x] T070 Mark Phase 8 T054 and T059 complete: scope-updated acceptance criteria now met — ✅ done in the Phase 9 reconciliation
 - [x] ~~T071 Generate final PR description and commit message for merge to main~~ — **SUPERSEDED**: PR #622 merged (`19da240`)
 - [x] ~~T072 Verify build passes and branch validation succeeds before merge~~ — **SUPERSEDED**: PR #622 merged. The reconciliation PR runs the same checks
@@ -709,7 +709,7 @@ The three continuation documents in `continuations/` described a T060–T074 set
 - [x] T081 Fix the stale T054 row (P2A 89%, passing on average) in `checklists/pre-approval-reconciliation-validation.md`
 - [x] T082 Update `plan.md` note on `staged/` to say Figma Make is deprecated (SC-004)
 - [x] T083 Add a superseded notice to the files in `continuations/` and point to this section
-- [ ] T084 Ash: confirm spec.md Status sign-off and version-lock (unblocks T069)
+- [ ] T084 Ash: confirm spec.md Status sign-off and version-lock (unblocks T069) — ⏳ Status lines corrected and deferrals recorded (owner: Ash). Tick when Ash approves the sign-off on PR #649
 
 ### Continuation document IDs mapped to this file
 
