@@ -28,7 +28,7 @@ All operations use Netlify Blobs for persistence with strong consistency.
 
 ### Request
 
-```
+```bash
 POST /api/reader/session
 Content-Type: application/json
 Cookie: (none; first request after verification)
@@ -42,7 +42,7 @@ Cookie: (none; first request after verification)
 
 ### Response (201 Created)
 
-```
+```bash
 HTTP/1.1 201 Created
 Set-Cookie: sessionToken=<uuid>; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=2592000
 
@@ -57,7 +57,7 @@ Set-Cookie: sessionToken=<uuid>; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age
 ### Error Responses
 
 | Code | Condition | Response |
-|------|-----------|----------|
+| ---- | --------- | -------- |
 | 400 | Invalid/missing email or code | `{"error": "invalid_verification"}` |
 | 401 | Verification code expired/incorrect | `{"error": "verification_failed"}` |
 | 429 | Too many session creation attempts | `{"error": "rate_limited"}` |

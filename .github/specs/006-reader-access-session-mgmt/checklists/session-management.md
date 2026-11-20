@@ -8,7 +8,7 @@
 
 **Review Ownership**: This is a reviewer-owned requirements-quality artifact. Mark `[x]` only when the reviewer determines the requirements-quality criterion is satisfied. `[x]` means requirements are clear and complete; it does NOT mean implementation is done.
 
-**Marker Semantics**: 
+**Marker Semantics**:
 - `[ ]` = Criterion requires clarification, revision, or reviewer evaluation
 - `[x]` = Criterion has been reviewed and is satisfied for requirements quality
 - `/speckit-implement` reads this checklist state; the reviewer owns all markers
