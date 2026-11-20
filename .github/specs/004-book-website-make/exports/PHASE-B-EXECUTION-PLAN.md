@@ -126,6 +126,7 @@ All three prompts are handed off to [Spec 005: Reader Access](../../005-reader-a
 
 ## Success Criteria
 
+<<<<<<< HEAD
 - ✅ All 3 prompts (3A, 3B, 3C) specifications handed to Spec 005
 - ✅ Spec 005 implements per all acceptance criteria (CR-3A.1–3A.8, CR-3B.1–3B.6, CR-3C.1–3C.5)
 - ✅ Copy references "Chapter 1" for immediate launch scenario
@@ -143,6 +144,24 @@ All three prompts are handed off to [Spec 005: Reader Access](../../005-reader-a
    - Build Netlify Functions for code generation, verification, session management
    - Implement recovery flow with 30-day device lifecycle
    - Build form UI with all error states per Decision 3
+=======
+- ✅ All 3 prompts (3A, 3B, 3C) have exact previews generated in Figma Make
+- ✅ All acceptance criteria (CR-3A.1–3A.8, CR-3B.1–3B.6, CR-3C.1–3C.5) verified
+- ✅ Copy references "Chapter 1" for immediate launch scenario
+- ✅ Recovery flow integrates with 30-day device lifecycle
+- ✅ Error messages reflect approved Decision 3 (expiry from code generation)
+- ✅ Newsletter CTA separate and optional (Decision 6)
+- ✅ Prompts handed to Spec 005 for implementation integration
+
+---
+
+## Next Steps (After Phase B Figma Make Execution)
+
+1. **Spec 005 Integration** (2026-11-21+)
+   - Implement Netlify Functions based on Prompts 3A, 3B, 3C
+   - Integrate e-reader with reader-access verification
+   - Publish Chapter 1 on website with reader verification gate
+>>>>>>> origin/main
 
 2. **Chapter Approval Loop** (2026-11-21+)
    - Ash approves chapters individually
@@ -150,10 +169,16 @@ All three prompts are handed off to [Spec 005: Reader Access](../../005-reader-a
    - Update e-reader with "More chapters coming" messaging
 
 3. **Phase B Completion** (2026-12-15 target)
+<<<<<<< HEAD
    - Spec 005 implementation complete
    - Prompts 3A, 3B, 3C fully integrated in Spec 005
    - Reader access feature live with Chapter 1 available
    - Recovery flow, error handling, and all decision integrations verified
+=======
+   - All decision integration complete
+   - Prompts 3A, 3B, 3C fully implemented in Spec 005
+   - Reader access feature live with Chapter 1 available
+>>>>>>> origin/main
 
 ---
 

@@ -1,18 +1,20 @@
-# Feature Specification: Book Website Figma Make Prompt Pack
+# Feature Specification: Book Website Claude Direct Execution
 
-**Feature Branch**: `docs/book-website-make-spec`
+**Feature Branch**: `feat/spec-004-claude-execution-model`
 
-**Created**: 2026-11-09
+**Created**: 2026-11-09 | **Pivoted to Claude**: 2026-11-20
 
-**Status**: Documentation complete; execution **not authorised**. The seven blocking decisions are recorded, but the following gates remain open:
+**Status**: ✅ Documentation complete; ✅ All 7 blocking decisions **RESOLVED** (2026-11-13); ✅ SC-004 Execution Model Pivot proposed (2026-11-20). Execution gates remain:
 
-- Exact editable Make revision/source snapshot and parity evidence (not confirmed)
-- Available credits and approved generation scope (not confirmed)
-- Explicit authority to resume each paused implementation stage (not given)
-- Reader-access work (Prompts 3A–3C) has moved to [Spec 005](../005-reader-access/spec.md) and is no longer executed from this specification (see Blocking Decisions below)
-- Chapter publication: each chapter or addendum needs Ash's approval before it is published (Decision 5, revised 2026-11-13)
+- ✅ All blocking decisions approved with selected options documented
+- ✅ Design baseline (Space Grotesk, Inter, 9-color palette) locked and approved
+- ✅ Prompts 1, 2A, 2B ready for Phase A execution (Claude direct execution model)
+- ✅ Prompts 3A–3C handover to [Spec 005](../005-reader-access/spec.md) complete (not executed here)
+- ✅ **SC-004: Execution Model Pivot approved** (2026-11-20) — Claude direct execution replaces Figma Make
+- ⏳ Explicit authority to begin Claude execution for Prompts 1, 2A, 2B (Decision 7 Option A: noindex meta tags + sitemap exclusion verified in contracts)
+- ⏳ Chapter publication: each chapter needs Ash's approval before it is published (Decision 5: Early release approved; build screens now)
 
-**Input**: Complete staged Figma Make prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval.
+**Input**: Complete staged prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval. **Execution Model**: Claude direct execution (SC-004, approved 2026-11-20) — contracts include Claude execution specifications with output format validation.
 
 ---
 
@@ -68,26 +70,25 @@ All critical design baseline requirements have been verified and documented:
 
 ---
 
-### User Story 2 - Reader Access Journey Definition (Priority: P1)
+### User Story 2 - Reader Access Journey Definition — ✅ MOVED TO SPEC 005
 
+⚠️ **Status Change (2026-11-13)**: Reader access specification and execution (User Story 2, Prompts 3A–3C) is now owned by **[Spec 005 — Reader Access](../005-reader-access/spec.md)**.
+
+Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documented here for historical reference and master-contract traceability, but their implementation is Spec 005's responsibility.
+
+**Previous intention** (before handover):  
 **As** a reader verification designer, **I want** exact copy, form wording, and error-state specifications for email-code verification **so that** the reader access journey can be implemented with consistent, approved messaging.
 
-**Why this priority**: Reader access is core functionality. Approved copy must be precise and legally sound (no false success claims, truthful about limitations). Without this specification, implementation risks claims that don't match capability.
-
-**Independent Test**: Can be tested by verifying:
-- All copy text is extracted and matches approved source
-- Form states (default, focused, error, loading) are documented
-- Error messages distinguish between different failure scenarios
-- Newsletter action remains separate from reading verification
-- No success claims are made without server confirmation
-
-**Acceptance Scenarios**:
-
-1. **Given** approved form explanation ("We'll email you..."), **When** Prompt 3A is executed, **Then** this exact text appears in generated design spec with no modifications
-
-2. **Given** Prompt 1 navigation preview, **When** review begins, **Then** it includes: before/after navigation structure, numbered list of implementation steps, 2–3 bullet points documenting non-changes, and acceptance criteria
-
-3. **Given** separate newsletter decision, **When** Prompt 3A is executed, **Then** newsletter CTA is in separate section with explicit non-subscription statement
+**Handoff notes**:
+- Contracts remain available in `contracts/prompt-3a-reader-access.md`, `contracts/prompt-3b-recovery-flows.md`, `contracts/prompt-3c-error-states.md` for reference
+- Decision mapping:
+  - Email provider (Spec 004 Decision 4) → Spec 005 item 1
+  - Manuscript status (Spec 004 Decision 5) → Spec 005 item 2
+  - Code expiry (Spec 004 Decision 3) → Spec 005 item 3
+  - Newsletter destination (Spec 004 Decision 6) → Spec 005 item 8
+  - See [Spec 005 decisions](../005-reader-access/decisions.md) for full tracking
+- Decision 7 (route enforcement) stays with Spec 004 design
+- Timeline for Spec 005 completion documented in [Spec 005 spec](../005-reader-access/spec.md)
 
 ---
 
@@ -151,7 +152,7 @@ All critical design baseline requirements have been verified and documented:
 
 ### Functional Requirements
 
-- **FR-001**: System MUST analyze all six source specification files from content/book/ directory and identify version differences, gaps, and conflicts
+- **FR-001**: System MUST analyze all six source specification files from `.github/specs/004-book-website-make/references/` directory and identify version differences, gaps, and conflicts
 - **FR-002**: System MUST reconcile version mismatches (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0) using precedence rule: newer version takes precedence; all conflicts documented in research.md with explicit rationale
 - **FR-003**: System MUST prepare exact Prompt 1 (navigation exposure) as executable Figma Make specification with before/after structure and acceptance criteria
 - **FR-004**: System MUST prepare exact Prompts 2A (design baseline), 2B (navigation design), and 3A (reader access copy) as complete, unexecuted specifications
@@ -164,7 +165,7 @@ All critical design baseline requirements have been verified and documented:
 
 ### Key Entities
 
-- **Specification File**: One of six source files (01–06) in content/book/ directory; has version, approval status, content sections, and cross-references to Linear issues
+- **Specification File**: One of six source files (01–06) in `.github/specs/004-book-website-make/references/` directory; has version, approval status, content sections, and cross-references to Linear issues
 - **Design Baseline**: Approved set of typography (Space Grotesk/Inter), colors (9-named-palette, both themes), component styles, and theme states
 - **Design Candidate**: Unapproved design proposal (R3 responsive typography, T1 additional typography, RT2 reader controls, C1 continuity) with full specification but no approval
 - **Blocking Decision**: Unresolved choice that prevents one or more prompts from being executed (recovery-first race, recovery lifetime, code expiry timing, etc.)
@@ -191,9 +192,16 @@ All critical design baseline requirements have been verified and documented:
 ## Assumptions
 
 - **User Context**: Ash (project owner) and development team will review and approve this documentation package before any implementation proceeds
-- **Source Files**: All six specification files (01–06) in content/book/ directory are authoritative and will not change during this preflight phase
+- **Source Files**: All six specification files (01–06) in `.github/specs/004-book-website-make/references/` directory are authoritative and will not change during this preflight phase
 - **Design Baseline Approval**: Space Grotesk headings, Inter body/UI, 9-color palette (both themes) are locked and require no changes during preflight
-- **Blocking Decisions**: All 7 decisions are genuinely open and require user input: recovery-first race condition (A/B/C/D), recovery lifetime eligibility (A/B/C/D), code expiry start time (A/B/C), email service provider (A/B/C/D), manuscript publication readiness (A/B/C), newsletter destination (A/B/C/D), and route enforcement verification (A/B/C/D)
+- **Blocking Decisions**: ✅ ALL 7 decisions **RESOLVED** (2026-11-13):
+  - Recovery-first race: **Option A** (Recovery takes precedence)
+  - Recovery lifetime: **Option A** (30-day absolute expiry + session refresh)
+  - Code expiry start: **Option A** (From code generation)
+  - Email provider: **Hybrid** (SendGrid transactional + Brevo newsletter)
+  - Manuscript readiness: **Early release** (Build screens now; chapters as approved)
+  - Newsletter destination: **Brevo** (External signup link)
+  - Route enforcement: **Option A** (Noindex meta tags + sitemap exclusion)
 - **Implementation Timing**: This spec prepares documentation only; no actual implementation, Figma Make execution, or deployment occurs until separate approval
 - **Figma Make Environment**: Make environment exists and is operational; prompts can be executed once unblocked and approved (readiness verification deferred to implementation phase)
 - **Newsletter Integration**: Newsletter service (Brevo or alternative) will be selected separately; copy and mechanics are placeholders in this spec
@@ -207,12 +215,12 @@ All critical design baseline requirements have been verified and documented:
 
 This specification is derived from comprehensive analysis of:
 
-1. `content/book/01-book-website-specification.md` (v1.0.0) — Master execution contract
-2. `content/book/02-companion-session-plan.md` (v1.0.4) — Preparation queue
-3. `content/book/03-author-decisions-launch-scope.md` (v1.3.0) — Author decisions & scope
-4. `content/book/04-design-brief.md` (v1.1.2) — Design requirements & baseline
-5. `content/book/05-design-reader-decision-register.md` (v1.9.0) — Design tracking & candidates
-6. `content/book/06-website-reading-prd.md` (v1.1.1) — Product requirements & access policy
+1. `.github/specs/004-book-website-make/references/01-book-website-specification.md` (v1.0.0) — Master execution contract
+2. `.github/specs/004-book-website-make/references/02-companion-session-plan.md` (v1.0.4) — Preparation queue
+3. `.github/specs/004-book-website-make/references/03-author-decisions-launch-scope.md` (v1.3.0) — Author decisions & scope
+4. `.github/specs/004-book-website-make/references/04-design-brief.md` (v1.1.2) — Design requirements & baseline
+5. `.github/specs/004-book-website-make/references/05-design-reader-decision-register.md` (v1.9.0) — Design tracking & candidates
+6. `.github/specs/004-book-website-make/references/06-website-reading-prd.md` (v1.1.1) — Product requirements & access policy
 
 ### Cross-References
 

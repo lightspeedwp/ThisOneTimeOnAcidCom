@@ -3,8 +3,8 @@
  * Extracted from EbookPage.tsx (T14).
  */
 
-import React from 'react';
-import { CaretLeft, CaretRight, List, ArrowsOut, ArrowsIn, SlidersHorizontal } from '@phosphor-icons/react';
+import React, { useState, useEffect } from 'react';
+import { CaretLeft, CaretRight, List, ArrowsOut, ArrowsIn, SlidersHorizontal, SignOut } from '@phosphor-icons/react';
 import { ebookUI } from '../../../../data/mock/ui/ebook';
 
 interface EbookReaderNavProps {
@@ -19,9 +19,50 @@ interface EbookReaderNavProps {
   onOpenDrawer: () => void;
   onToggleFullScreen: () => void;
   onOpenSettings: () => void;
+  sessionExpiresAt?: string;
+  onSignOut?: () => void;
 }
 
 export function EbookReaderNav(props: EbookReaderNavProps) {
+  const [sessionStatus, setSessionStatus] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // RA-T042: Display session expiry if available
+  useEffect(() => {
+    if (props.sessionExpiresAt) {
+      const expiresDate = new Date(props.sessionExpiresAt);
+      const now = new Date();
+      const hoursLeft = Math.round((expiresDate.getTime() - now.getTime()) / (1000 * 60 * 60));
+
+      if (hoursLeft > 24) {
+        setSessionStatus(`Access: ${Math.round(hoursLeft / 24)}d left`);
+      } else if (hoursLeft > 0) {
+        setSessionStatus(`Access: ${hoursLeft}h left`);
+      } else {
+        setSessionStatus('Access expired');
+      }
+    }
+  }, [props.sessionExpiresAt]);
+
+  const handleSignOut = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/.netlify/functions/reader-session', {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      if (res.ok) {
+        setSessionStatus(null);
+        props.onSignOut?.();
+      }
+    } catch (err) {
+      console.error('Sign out failed:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <nav className="ebook-reader__nav" aria-label={ebookUI.nav.ariaLabel}>
       <button
@@ -69,6 +110,25 @@ export function EbookReaderNav(props: EbookReaderNavProps) {
           <ArrowsOut className="ebook-reader__nav-icon" aria-hidden="true" />
         }
       </button>
+
+      {/* RA-T042: Session status and sign-out */}
+      {sessionStatus && (
+        <>
+          <span className="ebook-reader__session-status" title={sessionStatus}>
+            {sessionStatus}
+          </span>
+          <button
+            type="button"
+            className="ebook-reader__nav-btn ebook-reader__nav-btn--signout"
+            onClick={handleSignOut}
+            disabled={isLoading}
+            aria-label="Sign out"
+            title="Sign out of this session"
+          >
+            <SignOut className="ebook-reader__nav-icon" aria-hidden="true" />
+          </button>
+        </>
+      )}
 
       <button
         type="button"

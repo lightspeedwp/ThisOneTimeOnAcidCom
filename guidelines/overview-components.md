@@ -258,7 +258,7 @@ hover:shadow-xl">
 ### All Available Components (24 Total)
 
 | # | Component | Category | Guidelines File | Status |
-|---|-----------|----------|----------------|--------|
+| - | --------- | -------- | -------------- | ------ |
 | 1 | **Logo** | Brand & Identity | [Logo.md](./components/Logo.md) | ✅ Complete |
 | 2 | **Header** | Navigation | [Header.md](./components/Header.md) | ✅ Complete |
 | 3 | **Footer** | Navigation | [Footer.md](./components/Footer.md) | ✅ Complete |
@@ -293,7 +293,7 @@ hover:shadow-xl">
 Components that establish brand identity and visual consistency.
 
 | Component | Purpose | Guidelines File |
-|-----------|---------|----------------|
+| --------- | ------- | -------------- |
 | **Logo** | Site brand logo with responsive sizing and animations | [Logo.md](./components/Logo.md) |
 | **SocialLinks** | Social media icon links (Instagram, email) | [SocialLinks.md](./components/SocialLinks.md) |
 
@@ -302,7 +302,7 @@ Components that establish brand identity and visual consistency.
 Components for site navigation, page structure, and scrolling behavior.
 
 | Component | Purpose | Guidelines File |
-|-----------|---------|----------------|
+| --------- | ------- | -------------- |
 | **Header** | Main navigation with mobile hamburger menu | [Header.md](./components/Header.md) |
 | **Footer** | Footer with contact form and social links | [Footer.md](./components/Footer.md) |
 | **ScrollDownArrow** | Animated scroll indicator for hero sections | [ScrollDownArrow.md](./components/ScrollDownArrow.md) |
@@ -316,7 +316,7 @@ Components for site navigation, page structure, and scrolling behavior.
 Card components for displaying portfolio items, blog posts, and testimonials.
 
 | Component | Purpose | Guidelines File |
-|-----------|---------|----------------|
+| --------- | ------- | -------------- |
 | **PortfolioCard** | Portfolio item card with image slider | [PortfolioCard.md](./components/PortfolioCard.md) |
 | **BlogCard** | Blog post preview card with metadata | [BlogCard.md](./components/BlogCard.md) |
 | **SectionCard** | Generic content card for features/services | [SectionCard.md](./components/SectionCard.md) |
@@ -327,7 +327,7 @@ Card components for displaying portfolio items, blog posts, and testimonials.
 Components for image galleries and media viewing.
 
 | Component | Purpose | Guidelines File |
-|-----------|---------|----------------|
+| --------- | ------- | -------------- |
 | **ImageGallery** | Responsive image gallery (grid/masonry/justified) | [ImageGallery.md](./components/ImageGallery.md) |
 | **Lightbox** | Full-screen image viewer with navigation | [Lightbox.md](./components/Lightbox.md) |
 
@@ -336,7 +336,7 @@ Components for image galleries and media viewing.
 Form and search input components.
 
 | Component | Purpose | Guidelines File |
-|-----------|---------|----------------|
+| --------- | ------- | -------------- |
 | **TypeformEmbed** | Typeform integration with light/dark mode support | [TypeformEmbed.md](./components/TypeformEmbed.md) |
 | **SearchBar** | Search input with icon and clear button | [SearchBar.md](./components/SearchBar.md) |
 
@@ -345,7 +345,7 @@ Form and search input components.
 Components for filtering, expanding content, and user interactions.
 
 | Component | Purpose | Guidelines File |
-|-----------|---------|----------------|
+| --------- | ------- | -------------- |
 | **CategoryFilter** | Category/tag filtering chips | [CategoryFilter.md](./components/CategoryFilter.md) |
 | **LayoutSwitcher** | Toggle between grid and list views | [LayoutSwitcher.md](./components/LayoutSwitcher.md) |
 | **ReadMoreButton** | Expandable content toggle button | [ReadMoreButton.md](./components/ReadMoreButton.md) |
@@ -356,7 +356,7 @@ Components for filtering, expanding content, and user interactions.
 Modal dialogs, loading indicators, and tag components.
 
 | Component | Purpose | Guidelines File |
-|-----------|---------|----------------|
+| --------- | ------- | -------------- |
 | **Modal** | Dialog/modal with overlay and focus trap | [Modal.md](./components/Modal.md) |
 | **LoadingSpinner** | Loading indicator (spinner/dots/pulse/bars) | [LoadingSpinner.md](./components/LoadingSpinner.md) |
 | **Tag** | Label/badge for categories and metadata | [Tag.md](./components/Tag.md) |
@@ -816,7 +816,7 @@ Before using any component, read its specific guideline file:
 **Size Guidelines:**
 
 | Lines of Code | Action Required |
-|---------------|-----------------|
+| ------------- | --------------- |
 | 0-150 | ✅ Good size, no action needed |
 | 150-300 | ⚠️ Consider splitting if logic is complex |
 | 300-500 | 🔴 Should split into smaller components |

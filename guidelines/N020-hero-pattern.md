@@ -31,7 +31,7 @@ The Hero section spans full viewport width with immersive imagery and clear valu
 ## Hero Anatomy
 
 | Element | Purpose | Dimensions |
-|---------|---------|------------|
+| ------- | ------- | ---------- |
 | Background Image | Immersive visual | Full viewport width × 60-80vh |
 | Overlay Gradient | Ensure text readability | RGBA(0,0,0,0.4) to RGBA(0,0,0,0.2) |
 | Heading | Main value proposition | 3.5rem (desktop) / 2rem (mobile) |

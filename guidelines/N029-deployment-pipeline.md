@@ -25,7 +25,7 @@ Document the continuous deployment pipeline for ThisOneTimeOnAcidCom, including 
 ### Environments
 
 | Environment | Branch | Database | Purpose |
-|-------------|--------|----------|---------|
+| ----------- | ------ | -------- | ------- |
 | **Local** | any | SQLite (local) | Development |
 | **Staging** | `develop` | Supabase (staging) | QA testing |
 | **Preview** | `feat/*` | Supabase (staging) | PR preview |

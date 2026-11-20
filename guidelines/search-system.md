@@ -27,7 +27,7 @@ Header (SearchInput)  ──>  /search?q=...  ──>  SearchResultsPage
 ### Files
 
 | File | Purpose |
-|------|---------|
+| ---- | ------- |
 | `/utils/searchService.ts` | Core search logic; `searchAllContent()` |
 | `/data/types/search.ts` | `SearchResult`, `SearchFilters`, `SearchState` |
 | `/data/mock/ui/search.ts` | UI strings (placeholder, labels, no-results) |
@@ -46,7 +46,7 @@ Searches across all content types and returns a unified `SearchResult[]`.
 ## Fields searched per type
 
 | Type | Fields |
-|------|--------|
+| ---- | ------ |
 | Blog | `title`, `excerpt`, `tags[]`, `category` |
 | Portfolio | `title`, `description`, `tags[]`, `category` |
 | Video | `title`, `description`, `category` |
@@ -58,7 +58,7 @@ Searches across all content types and returns a unified `SearchResult[]`.
 Each field is scored 0-100 using `scoreMatch()`:
 
 | Match Type | Score |
-|------------|-------|
+| ---------- | ----- |
 | Exact match | 100 |
 | Starts with query | 80 |
 | Contains query | 60 |
@@ -97,7 +97,7 @@ results are post-filtered by category name.
 The `SearchResultsPage` syncs state to URL query parameters:
 
 | Parameter | Purpose | Example |
-|-----------|---------|---------|
+| --------- | ------- | ------- |
 | `q` | Search query | `?q=neon` |
 | `type` | Content type filter (comma-separated) | `?type=blog,portfolio` |
 | `sort` | Sort order | `?sort=recent` |

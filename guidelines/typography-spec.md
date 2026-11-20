@@ -15,7 +15,7 @@ Primary: `Inter, system-ui, -apple-system, sans-serif`
 ## Sizing Scale
 
 | Level | Size | Weight | Use |
-|-------|------|--------|-----|
+| ----- | ---- | ------ | --- |
 | H1 | 48px | 700 | Page titles |
 | H2 | 36px | 600 | Section headings |
 | Body | 16px | 400 | Body text |

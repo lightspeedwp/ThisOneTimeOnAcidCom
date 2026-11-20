@@ -57,7 +57,7 @@ re-run for ongoing maintenance.
 **Other `.md` files generally belong in the appropriate folder:**
 
 | Content Type | Required Location |
-|---|---|
+| --- | --- |
 | Project documentation, quick references, guides | `/docs/` |
 | Design & development guidelines | `/guidelines/` |
 | AI prompt files | `/prompts/` |
@@ -76,7 +76,7 @@ Store prompts, reports, and task lists in these designated folders rather than p
 **Quick Reference:**
 
 | Folder | Purpose |
-|---|---|
+| --- | --- |
 | `/prompts/` | All prompt files for AI-assisted tasks |
 | `/reports/` | All audit findings, analysis results, reports |
 | `/tasks/` | All task lists and checklists; `/tasks/task-list.md` is the persistent master |
@@ -102,7 +102,7 @@ Store prompts, reports, and task lists in these designated folders rather than p
 The Figma Make bundler has some known syntax incompatibilities. **To ensure compatibility, use these workarounds:**
 
 | Forbidden Syntax | Required Workaround |
-|---|---|
+| --- | --- |
 | Optional chaining (`?.`) | Explicit null checks (`if (x != null)`) |
 | Nullish coalescing (`??`) | Explicit if/else with null checks |
 | `import.meta.env` | Completely removed — proven unreliable |
@@ -217,7 +217,7 @@ This website is strictly a **personal art portfolio**.
 - **Pronouns:** Strict **He/Him** usage. Ash is male. (e.g., "guy with the bike", "he created").
 - **Locations:** Focus strictly on **Cape Town (home base in Woodstock, South Africa)**, **Berlin (May seasonal visits)**, **Thailand (Koh Phangan training base, Sep-Nov)**, and **International Festivals**.
 - **Yearly Cycle:** Ash follows an annual creative cycle: based in Cape Town, travels to Berlin each May for techno season, returns to South Africa in August-September (bicycle swap), relocates to Koh Phangan, Thailand (Sep-Nov) for Muay Thai training, triathlon, and remote work, then returns to Cape Town in November for South African summer festival season. This cycle fuels his creative inspiration and energy.
-- **Excluded Content:** NO weddings, NO corporate events, NO bridal makeup.
+- **Content Focus:** Vibrant creative expression, experimental visuals, personal narratives. Excludes commissioned client work and corporate sponsorships.
 
 **Migration Impact:**
 
@@ -398,7 +398,7 @@ expanding content, always write headings in sentence case.
 ### File Organization (February 2026)
 
 ```text
-ash-shaw-makeup-portfolio/
+this-one-time-on-acid-com/
 ├── 📄 App.tsx                         # Main application router
 ├── 📄 main.tsx                        # React entry point
 ├── 📄 index.html                      # HTML template

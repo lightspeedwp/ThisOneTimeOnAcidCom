@@ -164,7 +164,7 @@ guidelines/
 ### Main Guidelines
 
 | File | Purpose | Version | Status |
-|------|---------|---------|--------|
+| ---- | ------- | ------- | ------ |
 | **[Guidelines.md](./Guidelines.md)** | Main entry point, project overview | v7.0.0 | Current |
 | **[README.md](./README.md)** | This file - navigation guide | v7.0.0 | Current |
 | **[voice-and-tone.md](./voice-and-tone.md)** | Brand voice and writing guidelines | v1.0.0 | Current |
@@ -174,7 +174,7 @@ guidelines/
 ### Data & Integration Guides
 
 | File | Purpose | Version | Status |
-|------|---------|---------|--------|
+| ---- | ------- | ------- | ------ |
 | **[Data System](../data/README.md)** | Data system architecture | v2.0.0 | Current |
 | **[search-system.md](./search-system.md)** | Global search system | v1.0.0 | Current |
 | **[pwa-implementation.md](./pwa-implementation.md)** | PWA features | v1.0.0 | Current |
@@ -183,7 +183,7 @@ guidelines/
 ### Design Tokens
 
 | File | Purpose | Coverage |
-|------|---------|----------|
+| ---- | ------- | -------- |
 | **[neon-colors.md](./design-tokens-reference.md)** | Neon color system | 8 neon colors, atomic black, gradients |
 | **[animations.md](./design-tokens-reference.md)** | Animation system | 26 keyframes, reduced motion |
 | **[colors.md](./design-tokens-reference.md)** | Legacy colors | Semantic tokens reference |

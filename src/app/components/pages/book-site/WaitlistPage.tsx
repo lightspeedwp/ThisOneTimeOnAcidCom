@@ -96,8 +96,8 @@ export function WaitlistPage() {
                 React.createElement("path", { d: "M20 32 l10 10 l14 -18" })
               )
             ),
-            React.createElement("h2", { className: "heading-section waitlist-success__heading" }, "You're on the list."),
-            React.createElement("p", { className: "text-body waitlist-success__message" }, "We'll be in touch with draft updates, launch news, and event invitations.")
+            React.createElement("h2", { className: "heading-section waitlist-success__heading" }, "Thank you."),
+            React.createElement("p", { className: "text-body waitlist-success__message" }, "Your submission has been received. Newsletter subscription requires explicit consent through double opt-in and is separate from reader access.")
           )
         )
       )
@@ -121,7 +121,7 @@ export function WaitlistPage() {
           React.createElement(
             "p",
             { className: "text-lead text-neon-yellow" },
-            "Join the list for draft updates, launch news, event announcements, and first notice when pre-orders open."
+            "Join our interest list. Newsletter updates are separate and require explicit consent through double opt-in."
           ),
           
           React.createElement(
@@ -140,15 +140,15 @@ export function WaitlistPage() {
         React.createElement(
           "div",
           { className: "card card--outline-violet" },
-          React.createElement("h2", { className: "heading-card" }, "What you'll get"),
+          React.createElement("h2", { className: "heading-card" }, "Interest List Transparency"),
           React.createElement(
             "ul",
             { className: "list-bulleted text-body space-top-sm" },
-            React.createElement("li", null, "Early news on the final book"),
-            React.createElement("li", null, "Future print edition updates"),
-            React.createElement("li", null, "Invitations to talks and events"),
-            React.createElement("li", null, "New excerpts and chapter drops"),
-            React.createElement("li", null, "First notice when pre-orders open")
+            React.createElement("li", null, "Your email is kept on our interest list"),
+            React.createElement("li", null, "Newsletter communications require separate opt-in"),
+            React.createElement("li", null, "We respect your inbox and privacy"),
+            React.createElement("li", null, "Double opt-in confirmation for all emails"),
+            React.createElement("li", null, "Unsubscribe anytime — no penalties")
           )
         )
       )

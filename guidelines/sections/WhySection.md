@@ -120,8 +120,8 @@ className="
   mx-auto
   mb-fluid-2xl
 ">
-These three pillars guide everything I create — from festival glitter to bridal
-elegance.
+These three pillars guide everything I create — from vibrant moments to refined
+expression.
 </p>
 
 ```text
@@ -224,7 +224,7 @@ Each card displays a reason with custom icon:
   text-gray-600
   leading-relaxed                                  // 1.625 line-height
 ">
-When I do makeup for others, it lights them up. They feel special, happy, and
+When I create for others, it lights them up. They feel special, happy, and
 confident — and seeing that sparkle in their eyes inspires me to keep creating.
 </p>
 
@@ -290,16 +290,16 @@ creating."
   {
     icon: JoyIcon,
     title: "Brings Me Joy",
-description: "Makeup is my creative playground. Whether it's festival glitter,
-glowing UV paints, or bold eyeshadow blends, I love the process of experimenting
+description: "Creation is my playground. Whether it's vibrant colors,
+glowing experiments, or bold expressions, I love the process of experimenting
 and expressing."
   },
   {
     icon: GrowthIcon,
     title: "To Keep Growing",
 description: "Every face, every colour, every night out is a chance to evolve.
-Makeup is a journey — and I treat each session as an opportunity to learn and
-expand my artistry."
+This creative journey is a path of constant discovery — and I treat each moment as an opportunity to learn and
+expand my creativity."
   }
 ];
 

@@ -698,7 +698,7 @@ dark:text-purple-100">
 ## Quick Reference Table
 
 | Component | Light Background | Dark Background | Light Text | Dark Text |
-|-----------|-----------------|-----------------|------------|-----------|
+| --------- | --------------- | --------------- | ---------- | --------- |
 | **Pages** | `bg-white` | `dark:bg-gradient-to-br dark:from-purple-950...` | `text-gray-800` | `dark:text-purple-100` |
 | **Cards** | `bg-white/80` | `dark:bg-purple-900/50` | `text-gray-700` | `dark:text-purple-100` |
 | **Header** | `bg-white/95` | `dark:bg-purple-950/95` | `text-gray-700` | `dark:text-purple-200` |
@@ -716,7 +716,7 @@ dark:text-purple-100">
 ## Related Documentation
 
 - **[colors.md](./design-tokens-reference.md)** - Complete color palette
-- **[css-architecture-reference.md](./css-architecture-reference.md)** - Implementation guide
+- **[css-architecture-reference.md](../N003-css-architecture-reference.md)** - Implementation guide
 - **[Guidelines.md](./Guidelines.md)** - Main guidelines
 
 ---
