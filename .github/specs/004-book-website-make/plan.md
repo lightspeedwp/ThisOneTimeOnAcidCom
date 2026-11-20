@@ -92,6 +92,8 @@
 
 **Project Type: Documentation-only specification**
 
+**Reference specifications moved from `content/book/` to `references/`** (Phase 9, T070):
+
 ```text
 .github/specs/004-book-website-make/references/
 ├── 01-book-website-specification.md     # Master execution contract (v1.0.0)
@@ -104,7 +106,23 @@
 
 **Structure Decision**: Documentation-only package. No code structure required. Source specifications analyzed, reconciled, and staged for Figma Make execution. All deliverables remain in `.github/specs/004-book-website-make/` with no backend/frontend splits or implementation code paths.
 
-**Note on `staged/` directory**: Contains historical drafts and earlier specification versions from initial analysis (Nov 9). Authoritative versions are in the root directory (spec.md, plan.md, tasks.md, etc.) with all Phase 9 convergence updates applied. The `staged/` folder is retained for reference only and is not part of active execution.
+---
+
+## Directory Purpose Guide
+
+<!-- markdownlint-disable MD060 -->
+
+| Directory | Purpose | Contents | Status |
+|-----------|---------|----------|--------|
+| `contracts/` | Figma Make prompt specifications (input) | Prompt 1–3C contract definitions | Reference (reader-access moved to Spec 005) |
+| `exports/` | Final approved artifacts (output) | Design tokens, checklists, handoff docs | Active |
+| `references/` | Source specification documents | Six specification files (01–06) with versions | Read-only reference |
+| `staged/` | Interim Figma Make outputs and drafts | Historical drafts from initial analysis; regenerated prompt outputs before finalization | Available for future regeneration; retained for reference |
+| `checklists/` | Quality validation and approval tracking | Pre-approval, specification-quality, prompt-preview checklists | Reference |
+
+<!-- markdownlint-enable MD060 -->
+
+**Note**: The `staged/` folder contains historical drafts from initial analysis (Nov 9) and is retained for reference only and future Figma Make regeneration. Authoritative versions are in the root directory (spec.md, plan.md, tasks.md, exports/) with all Phase 9 convergence updates applied.
 
 ## Complexity Tracking
 
