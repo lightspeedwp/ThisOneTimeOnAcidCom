@@ -238,35 +238,35 @@
 
 ### Tests for User Story 4
 
-- [ ] T041 [P] [US4] Unit test for device count: query active sessions for email → returns count per device
-- [ ] T042 [P] [US4] Unit test for device limit check: activeCount < limit → allow, activeCount >= limit → deny
-- [ ] T043 [US4] Integration test for device limit enforcement in `tests/reader-access/device-limit.test.ts`:
+- [x] T041 [P] [US4] Unit test for device count: query active sessions for email → returns count per device
+- [x] T042 [P] [US4] Unit test for device limit check: activeCount < limit → allow, activeCount >= limit → deny
+- [x] T043 [US4] Integration test for device limit enforcement in `tests/reader-access/device-limit.test.ts`:
   - Create sessions on devices 1, 2 → both succeed
   - Create session on device 3 → denied (409 Conflict)
-- [ ] T044 [US4] Integration test for device termination:
+- [x] T044 [US4] Integration test for device termination:
   - Terminate device 1 → freed
   - Create session on device 3 → now succeeds
-- [ ] T045 [US4] E2E test for multi-device: phone → tablet → both work (within limit)
-- [ ] T046 [US4] E2E test for device overflow: 3rd device → 409 error shown to user
+- [x] T045 [US4] E2E test for multi-device: phone → tablet → both work (within limit)
+- [x] T046 [US4] E2E test for device overflow: 3rd device → 409 error shown to user
 
 ### Implementation for User Story 4
 
-- [ ] T047 [US4] Implement device fingerprinting consistency in `netlify/lib/reader-access/device-fingerprint.ts`:
+- [x] T047 [US4] Implement device fingerprinting consistency in `netlify/lib/reader-access/device-fingerprint.ts`:
   - deviceId = hash(User-Agent + IP + timezone)
   - Deterministic: same device → same deviceId every time
   - Stable: survives network switching (for a while)
-- [ ] T048 [US4] Add device limit check in `createSession` (T017 modification):
+- [x] T048 [US4] Add device limit check in `createSession` (T017 modification):
   - Query active sessions where email = X: count sessions with status = "active" and terminatedAt = null
   - If count >= MAX_CONCURRENT_DEVICES (default 2-3, configurable):
     - Return 409 Conflict
     - Response includes activeDevices count, limit, action prompt
   - Otherwise: proceed with session creation
-- [ ] T049 [US4] Implement device logout endpoint in `netlify/functions/reader-device-logout.ts`:
+- [x] T049 [US4] Implement device logout endpoint in `netlify/functions/reader-device-logout.ts`:
   - Accept: email, deviceId to terminate
   - Validate: confirmation token (sent via email or included in request)
   - Terminate session: terminateSession(email, deviceId)
   - Return 200 OK; device is now freed
-- [ ] T050 [P] [US4] Add device list endpoint (optional):
+- [x] T050 [P] [US4] Add device list endpoint (optional):
   - GET `/api/reader/devices` (authenticated)
   - Return: list of active devices with timestamps, allow device termination UI
   - For user-facing device management
