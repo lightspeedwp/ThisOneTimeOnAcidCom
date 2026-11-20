@@ -13,7 +13,7 @@
 
 import { getStore } from '@netlify/blobs';
 
-const store = getStore({ consistency: 'strong' });
+const store = getStore({ name: 'reader-progress', consistency: 'strong' });
 
 export interface ReaderProgress {
   sessionId: string;

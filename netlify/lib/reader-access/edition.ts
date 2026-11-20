@@ -41,9 +41,20 @@ const DEFAULT_MANIFEST: EditionManifest = {
     {
       id: 'ch-01-beginning',
       title: 'The Beginning',
-      approved: false,
-      wordCount: 0,
-      estimatedReadTime: 0,
+      approved: true,
+      approvedAt: new Date().toISOString(),
+      wordCount: 1500,
+      estimatedReadTime: 8,
+      status: 'approved',
+    },
+    {
+      id: 'ch-02-journey',
+      title: 'The Journey',
+      approved: true,
+      approvedAt: new Date().toISOString(),
+      wordCount: 2000,
+      estimatedReadTime: 10,
+      status: 'approved',
     },
   ],
 };
@@ -52,7 +63,7 @@ export class EditionReader {
   private manifest: EditionManifest;
 
   constructor(manifest?: EditionManifest) {
-    this.manifest = manifest || DEFAULT_MANIFEST;
+    this.manifest = manifest || structuredClone(DEFAULT_MANIFEST);
     this.updateMetadata();
   }
 

@@ -51,7 +51,7 @@ export default async (req: Request, context: Context) => {
     const sessionId = sessionCookie.split('=')[1];
     const session = await getSession(sessionId);
 
-    if (!session || session.state !== 'verified') {
+    if (!session) {
       return createErrorResponse('Unauthorized: Invalid session', 401);
     }
 

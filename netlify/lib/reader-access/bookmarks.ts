@@ -12,7 +12,7 @@
 
 import { getStore } from '@netlify/blobs';
 
-const store = getStore({ consistency: 'strong' });
+const store = getStore({ name: 'reader-bookmarks', consistency: 'strong' });
 
 export interface ReaderBookmark {
   id: string; // unique identifier

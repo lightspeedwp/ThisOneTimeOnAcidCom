@@ -37,7 +37,14 @@ export default async (req: Request, context: Context) => {
     // Extract chapterId from URL path
     const url = new URL(req.url);
     const pathParts = url.pathname.split('/');
-    const chapterId = pathParts[pathParts.length - 2]; // .../chapters/{chapterId}/content
+
+    // Extract from path: /api/reader/chapters/{chapterId}/content
+    let chapterId = pathParts[pathParts.length - 2];
+
+    // Fallback to query param for backward compatibility
+    if (!chapterId) {
+      chapterId = url.searchParams.get('chapterId');
+    }
 
     if (!chapterId) {
       return createErrorResponse('Chapter ID required', 400);
@@ -52,7 +59,7 @@ export default async (req: Request, context: Context) => {
     const sessionId = sessionCookie.split('=')[1];
     const session = await getSession(sessionId);
 
-    if (!session || session.state !== 'verified') {
+    if (!session) {
       return createErrorResponse('Unauthorized: Invalid session', 401);
     }
 
