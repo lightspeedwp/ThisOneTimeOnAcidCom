@@ -24,7 +24,7 @@ All 4 critical blockers identified in the audit have been resolved and verified 
 | **Prompt 2B Colors** | Updated hover/active to #FF3AAE (hot pink) | `prompt-2b-navigation-design.md` | ✅ Fixed |
 | **Prompt 3A Status** | Corrected to BLOCKED (waiting for Decisions 3,4,5,6) | `prompt-3a-reader-access.md` | ✅ Fixed |
 | **Reference Paths** | Consolidated to `.github/specs/004-book-website-make/references/` | 4 contract files | ✅ Fixed |
-| **Decision 7 Clarity** | "Selected: Option A (Meta tags + Robots.txt + Sitemap)" | `prompt-1-navigation-exposure.md` | ✅ Fixed |
+| **Decision 7 Clarity** | "Selected: Option A (noindex meta tags + sitemap exclusion, no robots.txt Disallow)" | `prompt-1-navigation-exposure.md` | ✅ Fixed |
 
 **Verification:** All fixes cross-referenced against Design Brief v1.1.2 and blocking decision audit.
 
@@ -72,7 +72,7 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 ### Prompt 1: Navigation Exposure ✅
 - **Status:** ✅ UNBLOCKED
 - **Goal:** Hide /speaking, /events, /media from public sitemap; preserve as noindex pages
-- **Decision 7:** Selected — Option A (Meta tags + Robots.txt + Sitemap)
+- **Decision 7:** Selected — Option A (noindex meta tags + sitemap exclusion, no robots.txt Disallow)
 - **Timeline:** 5–10 minutes
 
 ### Prompt 2A: Design Baseline Export ✅
