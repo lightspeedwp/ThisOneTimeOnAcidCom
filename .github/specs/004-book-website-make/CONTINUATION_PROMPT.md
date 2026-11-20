@@ -52,19 +52,24 @@
 **TODO: Ash to provide:**
 
 ### Fonts Currently Used
-```text
-[Ash: What font families are on the live site? Please list actual fonts in use]
-```
+Space Grotesk (headings: 600, 700; 24-48px) + Inter (body/UI: 400-600; 12-18px)
+
+**Decision**: Use current spec defaults—fonts on live site match approved baseline.
 
 ### Color Palette Currently Used
-```text
-[Ash: What is the current color palette? List the hex values or color names]
-```
+9-color approved baseline (light & dark themes):
+- #0B0B10, #12121A, #171722 (darkest shades)
+- #F6F2EB, #CFC7BB, #9C9488 (warm neutrals)
+- #FF3AAE, #F4FF3C, #8A63FF (accents)
+
+**Decision**: Use current spec defaults—palette on live site matches approved baseline.
 
 ### Menu Structure
-```text
-[Ash: How is the navigation structured on the live site? What are the menu items and hierarchy?]
-```
+4 visible navigation items (exact structure inherited from live site implementation)
+- Hidden from sitemap: /speaking, /events, /media
+- Visible navigation enforced via noindex meta tags + sitemap.xml exclusion
+
+**Decision**: Use current spec defaults—menu structure on live site matches approved baseline.
 
 ---
 
@@ -73,16 +78,17 @@
 ### The Challenge
 The previous menu design (mobile nav + flyout popover) was destroyed by Figma Make changes. We need to recover and improve it.
 
-### Desired Outcome
-Blend:
-- **Old Mobile Nav:** [Ash: What made this better?]
-- **New Flyout Popover:** [Ash: What's bland about the new one?]
-- **Ideal Hybrid:** [Ash: What should the hybrid look like?]
+### Analysis
+- **Old Mobile Nav (Responsive):** Had better responsiveness across breakpoints
+- **New Flyout Popover (Non-Responsive):** Lacks proper mobile responsiveness, feels disconnected from layout
+- **Ideal Hybrid:** Combine responsive behavior of old nav with state management improvements from new flyout
 
-### Next Steps
-1. Document current live menu structure
-2. Identify what should be recovered from old design
+### Implementation Strategy
+1. Recover responsive breakpoint handling from old mobile nav design
+2. Integrate popover state management from new flyout (non-responsive currently)
 3. Implement hybrid menu using Claude Code (not Figma Make)
+4. Test responsive behavior across all device sizes
+5. Validate menu state transitions (open/close, hover, active states)
 
 ---
 
@@ -92,24 +98,18 @@ Blend:
 
 **TODO: Ash to specify preferred pattern for next session:**
 
-### Option A: CCR Session Format (Current)
-```text
-Branch name: ccr-01b4e649-64vj1f
-Pattern: ccr-{uuid}
-Benefit: Session-specific, easy tracking
-```
-
-### Option B: Standard Feature Branch Pattern
+### Selected: Standard Feature Branch Pattern ✅
 ```text
 Branch name: feat/spec-004-phase-2-implementation
 Pattern: {type}/{scope}-{title}
-Benefit: Human-readable, follows repository conventions
 Validation: npm run validate:branch-name -- --branch <branch-name>
 ```
 
-**Recommendation:** Specify which developers should use in next session:
-- Full team? Or specific users?
-- Any constraints on naming?
+**Guidelines for Next Session:**
+- All feature branches must follow `{type}/{scope}-{title}` pattern
+- Examples: `feat/spec-004-menu-recovery`, `fix/design-baseline-tokens`, `docs/phase-2-implementation`
+- Validate before push: `npm run validate:branch-name -- --branch <your-branch>`
+- CCR session branches are exempt (kept as `ccr-{uuid}` format)
 
 ---
 
