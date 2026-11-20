@@ -29,11 +29,11 @@
 
 **Purpose**: Session management foundation built on Phase 2 implementation
 
-- [ ] T001 Extend Phase 2 storage adapter: Add session operations to `netlify/lib/reader-access/store.ts`
-- [ ] T002 Create Session entity interfaces in `netlify/lib/reader-access/session.ts` with types: sessionId, email, deviceId, createdAt, expiresAt, renewedAt, terminatedAt, status
-- [ ] T003 [P] Create constants for session config: `netlify/lib/reader-access/session-config.ts` with SESSION_LIFETIME_DAYS=30, MAX_RETRIES=5, COOKIE_NAME="sessionToken"
-- [ ] T004 [P] Create utility for device fingerprinting in `netlify/lib/reader-access/device-fingerprint.ts` using User-Agent + IP + timezone
-- [ ] T005 [P] Create utility for constant-time token comparison in `netlify/lib/reader-access/crypto.ts` to prevent timing attacks
+- [x] T001 Extend Phase 2 storage adapter: Add session operations to `netlify/lib/reader-access/store.ts`
+- [x] T002 Create Session entity interfaces in `netlify/lib/reader-access/session.ts` with types: sessionId, email, deviceId, createdAt, expiresAt, renewedAt, terminatedAt, status
+- [x] T003 [P] Create constants for session config: `netlify/lib/reader-access/session-config.ts` with SESSION_LIFETIME_DAYS=30, MAX_RETRIES=5, COOKIE_NAME="sessionToken"
+- [x] T004 [P] Create utility for device fingerprinting in `netlify/lib/reader-access/device-fingerprint.ts` using User-Agent + IP + timezone
+- [x] T005 [P] Create utility for constant-time token comparison in `netlify/lib/reader-access/crypto.ts` to prevent timing attacks
 
 ---
 
