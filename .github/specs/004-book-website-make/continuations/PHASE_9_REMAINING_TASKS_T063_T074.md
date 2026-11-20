@@ -80,8 +80,8 @@ Link: https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/630
   - Assign unique IDs to distinct tasks; do not merge tasks with different descriptions
   - Repoint each Phase 8 dependency to the task it intends
 - **Files to update**: `tasks.md`, any files cross-referencing tasks
-- **Acceptance**: Each duplicate ID mapped to its distinct task with unique ID; all Phase 8 dependencies point to their intended task
-- **Notes**: Map each duplicate ID to its distinct task; assign unique IDs without merging different work; repoint each Phase 8 dependency to its intended task
+- **Acceptance**: Identify each duplicate ID and the distinct task it refers to (by line location); assign unique IDs without merging different descriptions; repoint each Phase 8 dependency to its intended task
+- **Notes**: Identify each duplicate ID and the distinct task it refers to (by line location); assign unique IDs without merging different descriptions; repoint each Phase 8 dependency to its intended task
 
 #### Status & Acceptance Gates (T068–T069)
 
