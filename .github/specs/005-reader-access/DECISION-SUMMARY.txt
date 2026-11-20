@@ -1,0 +1,112 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║           SPEC 005: READER ACCESS — DECISION SUMMARY FOR ASH                 ║
+║                                                                              ║
+║                        🎯 25 DECISIONS NEEDED                               ║
+║                                                                              ║
+║                     Phase 2: ✅ LOCKED (Ready to build)                    ║
+║                     Phases 3–7: ⏳ PENDING (Your input)                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+WHAT'S HAPPENING
+─────────────────────────────────────────────────────────────────────────────
+Phase 2 (Foundational Infrastructure) is COMPLETE and LOCKED.
+16 implementation decisions are finalized and ready.
+
+Phases 3–7 are BLOCKED waiting for your decisions on:
+  • UX design choices (forms, messaging, navigation)
+  • Technical approach (email, rendering, cleanup)
+  • Integration details (Brevo, rate limiting, security)
+
+BATCHES: 5 Groups (Answer by phase or all at once)
+─────────────────────────────────────────────────────────────────────────────
+
+BATCH 1: Phase 3 (MVP) — 7 decisions
+  🎯 When needed: To start MVP implementation (RA-T030–RA-T038)
+  📋 Topics: Code entry, chapter rendering, rate limits, bundling
+  ⏱️  Time: ~10 min
+  📄 File: DECISION-REQUEST.md → Batch 1 Response Template
+
+BATCH 2: Phase 4 (Renewal) — 2 decisions
+  🎯 When needed: To start session renewal (RA-T039–RA-T043)
+  📋 Topics: Welcome messaging, sign-out behavior
+  ⏱️  Time: ~5 min
+  📄 File: DECISION-REQUEST.md → Batch 2 Response Template
+
+BATCH 3: Phase 5 (Newsletter) — 3 decisions
+  🎯 When needed: To separate newsletter from access (RA-T044–RA-T046)
+  📋 Topics: Form location, Brevo integration, page messaging
+  ⏱️  Time: ~10 min
+  📄 File: DECISION-REQUEST.md → Batch 3 Response Template
+
+BATCH 4: Phase 7 (Polish) — 2 decisions
+  🎯 When needed: To finalize accessibility & cleanup (RA-T049–RA-T052)
+  📋 Topics: Accessibility conformance, retention frequency
+  ⏱️  Time: ~5 min
+  📄 File: DECISION-REQUEST.md → Batch 4 Response Template
+
+BATCH 5: Blockers — 1 confirmation
+  🎯 When needed: Before email testing (RA-T026)
+  📋 Topics: Mailgun domain verification
+  ⏱️  Time: ~2 min (may need to check Mailgun)
+  📄 File: DECISION-REQUEST.md → Batch 5 Response Template
+
+HOW TO RESPOND
+─────────────────────────────────────────────────────────────────────────────
+1. Open: .github/specs/005-reader-access/DECISION-REQUEST.md
+2. Find the batch you're answering (Batch 1–5)
+3. Copy the response template for that batch
+4. Check boxes for your choices
+5. Reply in the GitHub PR or update the document
+
+YOU CAN:
+  ✅ Answer all 5 batches at once
+  ✅ Answer one batch at a time
+  ✅ Ask for clarification on any option
+  ✅ Provide rationale for your choices
+
+PHASE UNLOCK TIMELINE
+─────────────────────────────────────────────────────────────────────────────
+Phase 2: ✅ LOCKED NOW
+  → Start building foundation (RA-T022–T029)
+
+Phase 3 MVP: ⏳ Answers to Batch 1 → UNLOCK
+  → Start forms, functions, E2E tests (RA-T030–T038)
+  → MVP ready in ~1–2 weeks
+
+Phase 4 Renewal: ⏳ Answers to Batch 2 → UNLOCK
+  → Session renewal & sign-out (RA-T039–T043)
+
+Phase 5 Newsletter: ⏳ Answers to Batch 3 → UNLOCK
+  → Brevo integration, truthful feedback (RA-T044–T046)
+
+Phase 6 Recovery: ✅ Already decided (RA-T007)
+  → Implementation deferred until Phases 3–5 complete
+
+Phase 7 Polish: ⏳ Answers to Batch 4 → UNLOCK
+  → Accessibility review, retention cleanup (RA-T049–T052)
+
+Blockers: ⏳ Confirm Batch 5 → Email testing can proceed
+
+DOCUMENTS
+─────────────────────────────────────────────────────────────────────────────
+📄 DECISION-GATES.md
+   Full decision details with options & rationale
+   (~800 lines; reference when you need context)
+
+📄 DECISION-REQUEST.md
+   Shareable request with batches & templates
+   (~300 lines; use this to respond)
+
+📄 DECISION-SUMMARY.txt
+   This file; quick reference
+
+NEXT STEP
+─────────────────────────────────────────────────────────────────────────────
+👉 Open DECISION-REQUEST.md and start with Batch 1 (Phase 3 MVP)
+
+Questions? Raise them in the PR or in DECISION-REQUEST.md.
+
+═══════════════════════════════════════════════════════════════════════════════
+Last updated: 2026-11-20
+Status: Ready for Ash's decisions
+═══════════════════════════════════════════════════════════════════════════════
