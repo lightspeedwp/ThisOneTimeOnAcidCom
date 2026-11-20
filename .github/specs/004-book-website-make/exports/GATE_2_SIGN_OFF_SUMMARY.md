@@ -127,7 +127,7 @@ Gate 2 requirement: Design baseline must be locked and match approved specificat
 All 7 blocking decisions have been resolved by Ash:
 
 | # | Decision | Resolution | Spec 004 Status |
-|---|----------|------------|-----------------|
+| --- | ---------- | ------------ | ----------------- |
 | 1 | Recovery-first race | ✅ Option A approved | Handed to Spec 005 |
 | 2 | Recovery lifetime | ✅ Option A approved | Handed to Spec 005 |
 | 3 | Code expiry start | ✅ Option A approved | Handed to Spec 005 |

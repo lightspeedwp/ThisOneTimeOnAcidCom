@@ -25,7 +25,7 @@
 **Verification**:
 
 | Element | Approved | Spec 004 | Match | Evidence |
-|---------|----------|----------|-------|----------|
+| --------- | ---------- | ---------- | ------- | ---------- |
 | **Typography** | Space Grotesk + Inter | Space Grotesk + Inter | ✅ | design-baseline-validation.md §1 |
 | **Color Palette** | 9-color palette (hex) | 9-color palette (hex) | ✅ | design-baseline-validation.md §2 |
 | **Components** | Button, Card, Nav, Form | Button, Card, Nav, Form | ✅ | design-baseline-validation.md §3 |
@@ -42,7 +42,7 @@
 **Verification**:
 
 | Deliverable | Required | Present | Status |
-|------------|----------|---------|--------|
+| ------------ | ---------- | --------- | -------- |
 | **CSS Variables File** | `tokens.css` with custom properties | Specified in Prompt 2A contract | ✅ Ready |
 | **JSON Tokens File** | `design-tokens.json` with structured data | Specified in Prompt 2A contract | ✅ Ready |
 | **Light Theme Colors** | 9 colors for light background | All 9 hex values documented | ✅ Ready |
@@ -92,7 +92,7 @@
 **Verification**:
 
 | Item | Route | Present | Hidden | Status |
-|------|-------|---------|--------|--------|
+| ------ | ------- | --------- | -------- | -------- |
 | **Home** | `/` | ✅ | No | ✅ Visible |
 | **About** | `/about` | ✅ | No | ✅ Visible |
 | **Book** | `/book` | ✅ | No | ✅ Visible |
@@ -114,7 +114,7 @@
 **Verification**:
 
 | Breakpoint | Width | Navigation Type | Layout | Tested | Status |
-|-----------|-------|-----------------|--------|--------|--------|
+| ----------- | ------- | ----------------- | -------- | -------- | -------- |
 | **Mobile** | <768px | Hamburger + drawer | Slide-out menu | ✅ | ✅ |
 | **Tablet** | 768–1023px | Horizontal (wrapping) | 1–2 rows | ✅ | ✅ |
 | **Desktop** | 1024–1439px | Horizontal fixed | Single row | ✅ | ✅ |
@@ -137,7 +137,7 @@
 **Verification**:
 
 | Criterion | Requirement | Verification | Status |
-|-----------|------------|---|--------|
+| ----------- | ------------ | --- | -------- |
 | **Text Contrast** | ≥4.5:1 for normal text, ≥3:1 for large text | All 9 colors tested against backgrounds | ✅ |
 | **Touch Targets** | ≥44×44px minimum | Mobile menu items: 16px × 44px minimum | ✅ |
 | **Focus Indicators** | Visible 2px+ focus ring | All interactive elements have #FF3AAE focus ring | ✅ |
@@ -154,7 +154,7 @@
 ## Specification Completeness Check
 
 | Document | Complete | Linked | Reference | Status |
-|----------|----------|--------|-----------|--------|
+| ---------- | ---------- | -------- | ----------- | -------- |
 | **Design Baseline Validation** | ✅ 100% | navigation-spec | Locks all colors, typography | ✅ |
 | **Navigation Specification** | ✅ 100% | design-baseline-validation | Defines structure & states | ✅ |
 | **Prompt 1 Contract** | ✅ 100% | navigation-spec | Before/after & Decision 7 | ✅ |
@@ -166,7 +166,7 @@
 ## User Story Completion Summary
 
 | Phase | Task | Status | Evidence |
-|-------|------|--------|----------|
+| ------- | ------ | -------- | ---------- |
 | **Phase 1** | Gate 2 approval secured | ✅ Complete | GATE_2_SIGN_OFF_SUMMARY.md |
 | **Phase 2** | Design baseline locked | ✅ Complete | design-baseline-validation.md |
 | **Phase 2** | Navigation design spec | ✅ Complete | navigation-specification.md |

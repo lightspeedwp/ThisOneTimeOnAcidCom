@@ -20,7 +20,7 @@ Design baseline for Spec 004 has been validated against Gate 2 approval criteria
 ### Approved Typefaces
 
 | Use Case | Typeface | Weights | Sizes (px) | Status |
-|----------|----------|---------|-----------|--------|
+| ---------- | ---------- | --------- | ----------- | -------- |
 | **Headings** | Space Grotesk | 600, 700 | 24, 32, 40, 48 | ✅ Approved |
 | **Body Text** | Inter | 400, 500, 600 | 14, 16, 18 | ✅ Approved |
 | **UI Labels** | Inter | 400, 600 | 12, 14, 16 | ✅ Approved |
@@ -43,7 +43,7 @@ Design baseline for Spec 004 has been validated against Gate 2 approval criteria
 ### Approved Colors (Both Light & Dark Themes)
 
 | Color | Hex | Usage | Light Theme | Dark Theme | Status |
-|-------|-----|-------|-------------|------------|--------|
+| ------- | ----- | ------- | ------------- | ------------ | -------- |
 | **Deepest Dark** | #0B0B10 | Headings, primary text | Dark | Light accent | ✅ |
 | **Dark Purple-Black** | #12121A | Secondary text, borders | Dark | Light text | ✅ |
 | **Lighter Dark** | #171722 | Tertiary text, dividers | Dark | Light secondary | ✅ |
@@ -73,7 +73,7 @@ Design baseline for Spec 004 has been validated against Gate 2 approval criteria
 ### Approved Components
 
 | Component | States | Light Theme | Dark Theme | Validation | Status |
-|-----------|--------|-------------|------------|-----------|--------|
+| ----------- | -------- | ------------- | ------------ | ----------- | -------- |
 | **Button (Primary)** | default, hover, active, disabled, loading | ✅ | ✅ | CR-2B.1 | ✅ |
 | **Button (Secondary)** | default, hover, active, disabled, loading | ✅ | ✅ | CR-2B.1 | ✅ |
 | **Card** | default, hover, active, focus | ✅ | ✅ | CR-2B.2 | ✅ |
@@ -100,7 +100,7 @@ Design baseline for Spec 004 has been validated against Gate 2 approval criteria
 ### Approved Breakpoints
 
 | Breakpoint | Width | Device Type | Navigation | Layout | Status |
-|-----------|-------|-------------|-----------|--------|--------|
+| ----------- | ------- | ------------- | ----------- | -------- | -------- |
 | **Mobile** | <768px | Phone | Hamburger menu + drawer | Single column | ✅ |
 | **Tablet** | 768–1023px | Tablet portrait/landscape | Horizontal (wrapping) | 1–2 columns | ✅ |
 | **Desktop** | 1024–1439px | Desktop | Horizontal fixed | Multi-column | ✅ |
@@ -122,7 +122,7 @@ Design baseline for Spec 004 has been validated against Gate 2 approval criteria
 ## Acceptance Criteria Validation (US1)
 
 | Criterion | Requirement | Validation | Status |
-|-----------|------------|-----------|--------|
+| ----------- | ------------ | ----------- | -------- |
 | **AC1.1** | Design baseline matches Gate 2 approval | All typography, colors, components verified | ✅ PASS |
 | **AC1.2** | All approved colors exported to design tokens | CSS variables + JSON tokens ready | ✅ PASS |
 | **AC1.3** | Navigation component shows 4 visible items | Prompt 1 contract specifies exact items | ✅ PASS |

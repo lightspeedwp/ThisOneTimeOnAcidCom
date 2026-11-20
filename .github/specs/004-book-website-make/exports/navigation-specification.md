@@ -21,7 +21,7 @@ Navigation component specification for book website after route exposure (Prompt
 ### Visible Navigation Items (4 Total)
 
 | Item | Route | Display Text | Icon | Priority | Mobile Menu |
-|------|-------|--------------|------|----------|------------|
+| ------ | ------- | -------------- | ------ | ---------- | ------------ |
 | **Home** | `/` | "Home" | House | P1 | ✅ Visible |
 | **About** | `/about` | "About" | Info circle | P1 | ✅ Visible |
 | **Book** | `/book` | "Book" | Book | P1 | ✅ Visible |
@@ -36,7 +36,7 @@ Navigation component specification for book website after route exposure (Prompt
 ### Hidden Navigation Items (3 Total — Still Accessible)
 
 | Item | Route | Status | Accessibility | Purpose |
-|------|-------|--------|---|---------|
+| ------ | ------- | -------- | --- | --------- |
 | **Speaking** | `/speaking` | Hidden from menu | Direct URL + internal links | Internal documentation |
 | **Events** | `/events` | Hidden from menu | Direct URL + internal links | Internal documentation |
 | **Media** | `/media` | Hidden from menu | Direct URL + internal links | Internal documentation |
@@ -157,7 +157,7 @@ Navigation component specification for book website after route exposure (Prompt
 
 ### Component Variants
 | Variant | Description | Use Case |
-|---------|-------------|----------|
+| --------- | ------------- | ---------- |
 | `Navigation/Desktop` | Horizontal menu (≥1024px) | Desktop & wide screens |
 | `Navigation/Tablet` | Responsive wrapping (768–1023px) | Tablet & medium screens |
 | `Navigation/Mobile` | Hamburger + drawer (<768px) | Mobile & small screens |
@@ -187,7 +187,7 @@ Navigation
 ## Acceptance Criteria Validation
 
 | Criterion | Requirement | Specification | Status |
-|-----------|------------|---|--------|
+| ----------- | ------------ | --- | -------- |
 | **AC1.1** | 4 visible items only | Home, About, Book, Contact specified | ✅ PASS |
 | **AC1.2** | Hidden routes accessible but not indexed | 3 hidden routes with noindex enforcement | ✅ PASS |
 | **AC1.3** | Responsive across 4 breakpoints | Desktop, tablet, mobile, wide all specified | ✅ PASS |

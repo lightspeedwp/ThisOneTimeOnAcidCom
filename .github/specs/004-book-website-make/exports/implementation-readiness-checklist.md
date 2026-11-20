@@ -21,7 +21,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 ### Specification Completeness Checklist
 
 | Artifact | Required | Status | Evidence | Readiness |
-|----------|----------|--------|----------|-----------|
+| ---------- | ---------- | -------- | ---------- | ----------- |
 | ✅ **spec.md** | Requirements, user stories, acceptance criteria | Complete | 4 US, 10 FRs, 8 SCs | ✅ Ready |
 | ✅ **plan.md** | Technical approach, architecture | Complete | 3 phases, decision matrix | ✅ Ready |
 | ✅ **research.md** | Decision analysis, options | Complete | 7 decisions, A–D options | ✅ Ready |
@@ -44,7 +44,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 #### Prompt 1: Navigation Exposure
 
 | Requirement | Status | Evidence | Ready |
-|------------|--------|----------|-------|
+| ------------ | -------- | ---------- | ------- |
 | Navigation component shows 4 visible items | ✅ | navigation-specification.md | ✅ |
 | Hidden routes (/speaking, /events, /media) documented | ✅ | navigation-specification.md | ✅ |
 | Route enforcement strategy (Decision 7) specified | ✅ | prompt-1-navigation-exposure.md | ✅ |
@@ -59,7 +59,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 #### Prompt 2A: Design System Baseline Export
 
 | Requirement | Status | Evidence | Ready |
-|------------|--------|----------|-------|
+| ------------ | -------- | ---------- | ------- |
 | Design baseline (typography, colors, components) locked | ✅ | design-baseline-validation.md | ✅ |
 | CSS variables export format specified | ✅ | prompt-2a-design-baseline.md | ✅ |
 | JSON design-token format specified | ✅ | prompt-2a-design-baseline.md | ✅ |
@@ -75,7 +75,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 #### Prompt 2B: Navigation Design Specification
 
 | Requirement | Status | Evidence | Ready |
-|------------|--------|----------|-------|
+| ------------ | -------- | ---------- | ------- |
 | Navigation component design with all states | ✅ | prompt-2b-navigation-design.md | ✅ |
 | Desktop, tablet, mobile responsive designs | ✅ | navigation-specification.md | ✅ |
 | Hot pink (#FF3AAE) hover/active state | ✅ | design-baseline-validation.md | ✅ |
@@ -92,7 +92,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 #### Prompt 3A: Reader Access Copy & Forms
 
 | Requirement | Status | Evidence | Ready |
-|------------|--------|----------|-------|
+| ------------ | -------- | ---------- | ------- |
 | Email verification copy, form wording | ✅ | prompt-3a-reader-access.md | ✅ |
 | Email template, entry forms, success state | ✅ | contract | ✅ |
 | Newsletter CTA (separate section) | ✅ | contract | ✅ |
@@ -109,7 +109,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 #### Prompt 3B: Recovery Flows
 
 | Requirement | Status | Evidence | Ready |
-|------------|--------|----------|-------|
+| ------------ | -------- | ---------- | ------- |
 | Recovery flow specifications (password resets, account recovery) | ✅ | prompt-3b-recovery-flows.md | ✅ |
 | Session management strategy | ✅ | contract | ✅ |
 | Race condition handling (Decision 1) | ✅ | research.md + contract | ✅ |
@@ -125,7 +125,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 #### Prompt 3C: Error States (Partial)
 
 | Requirement | Status | Evidence | Ready |
-|-----------|--------|----------|-------|
+| ----------- | -------- | ---------- | ------- |
 | Error state designs and messaging | ✅ | prompt-3c-error-states.md | ✅ |
 | Code expiry error messaging (Decision 3) | ⏳ | Placeholder in contract | ✅ (placeholder) |
 | Invalid, rate-limited, server errors | ✅ | contract | ✅ |
@@ -140,7 +140,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 ## Decision Resolution Status
 
 | Decision | Current State | Spec 004 Action | Spec 005 Action | Status |
-|----------|---|---|---|---|
+| ---------- | --- | --- | --- | --- |
 | **1** | Pending | Documented in research.md | Resolve in Phase 1 | 🔄 Handover |
 | **2** | Pending | Documented in research.md | Resolve in Phase 1 | 🔄 Handover |
 | **3** | Pending | Documented in research.md | Resolve in Phase 1 | 🔄 Handover |
@@ -158,7 +158,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 ### SC-001: Exact Prompts 1, 2A, 2B Are 95%+ Complete
 
 | Prompt | Completeness | Specification | Status |
-|--------|---|---|---|
+| -------- | --- | --- | --- |
 | Prompt 1 | 100% | Complete, before/after documented | ✅ PASS |
 | Prompt 2A | ~89% → Target 95% | Spec ready, minor gaps (T063) | ✅ PASS (after T063) |
 | Prompt 2B | 100% | Complete with all states | ✅ PASS |
@@ -181,7 +181,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 ### SC-003: Scope (Revised — SC-003 Scope Change Proposal)
 
 | Prompt | Scope | Status | Requirement |
-|--------|-------|--------|-------------|
+| -------- | ------- | -------- | ------------- |
 | Prompt 1 | Spec 004 | ✅ | 95%+ ✅ |
 | Prompt 2A | Spec 004 | ✅ | 95%+ (after T063) ✅ |
 | Prompt 2B | Spec 004 | ✅ | 95%+ ✅ |
@@ -194,7 +194,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 ### SC-004 through SC-008: Additional Criteria
 
 | Criterion | Requirement | Verification | Status |
-|-----------|------------|---|---|
+| ----------- | ------------ | --- | --- |
 | SC-004 | Decision documentation | 7 decisions in research.md | ✅ |
 | SC-005 | Blocking matrix clear | Decision map in PROMPT_EXECUTION_PLAN.md | ✅ |
 | SC-006 | Responsive design covered | 4 breakpoints in navigation-specification.md | ✅ |
@@ -226,7 +226,7 @@ Spec 004 is **documentation-complete and ready for implementation handoff**. All
 ### Pre-Handoff Validation
 
 | Item | Status | Action | Timeline |
-|------|--------|--------|----------|
+| ------ | -------- | -------- | ---------- |
 | **Gate 2 Approval** | ✅ Complete | No action needed | Done |
 | **Design Baseline Locked** | ✅ Complete | No action needed | Done |
 | **Decision Documentation** | ✅ Complete | No action needed | Done |

@@ -29,7 +29,7 @@
 ### Current Completeness Scores (from checklists/prompt-preview-validation.md, 2026-11-09)
 
 | Prompt | Completeness | Threshold | Gap | Status |
-|--------|---|---|---|---|
+| -------- | --- | --- | --- | --- |
 | **Prompt 1** | 100% | ≥95% | +5% | ✅ PASS |
 | **Prompt 2A** | ~89% | ≥95% | -6% | ❌ FAIL |
 | **Prompt 2B** | 100% | ≥95% | +5% | ✅ PASS |

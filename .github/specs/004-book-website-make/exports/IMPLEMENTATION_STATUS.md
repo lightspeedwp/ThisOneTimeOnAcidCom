@@ -82,7 +82,7 @@ This specification package provides:
 ## ✅ All 7 Blocking Decisions Resolved (as of 2026-11-13)
 
 | Decision | Resolution | Spec 004 Impact |
-|----------|------------|-----------------|
+| ---------- | ------------ | ----------------- |
 | **Decision 1: Recovery-first race** | ✅ Option A approved (Recovery takes precedence) | Transferred to Spec 005 |
 | **Decision 2: Recovery lifetime** | ✅ Option A approved (30-day session refresh + absolute expiry) | Transferred to Spec 005 |
 | **Decision 3: Code expiry start** | ✅ Option A approved (From code generation) | Transferred to Spec 005 |

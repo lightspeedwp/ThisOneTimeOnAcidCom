@@ -236,7 +236,7 @@ Spec 004 has 6 prompts for the Book Website Figma Make workflow. Three are **spe
 **All 7 Blocking Decisions are RESOLVED** (as of 2026-11-13):
 
 | Decision | Status | Resolution | Spec 004 Impact |
-|----------|--------|-----------|-----------------|
+| ---------- | -------- | ----------- | ----------------- |
 | 1. Recovery-first race | ✅ RESOLVED | Option A (Recovery takes precedence) | HANDED OVER to Spec 005 |
 | 2. Recovery lifetime | ✅ RESOLVED | Option A (30-day session refresh + absolute expiry) | HANDED OVER to Spec 005 |
 | 3. Code expiry start time | ✅ RESOLVED | Option A (From code generation) | HANDED OVER to Spec 005 |

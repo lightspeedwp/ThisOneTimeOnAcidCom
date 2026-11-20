@@ -23,7 +23,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 ### Specification Quality
 
 | Dimension | Requirement | Status | Evidence |
-|-----------|------------|--------|----------|
+| ----------- | ------------ | -------- | ---------- |
 | **Completeness** | All sections present | ✅ 100% | spec.md (requirements), plan.md (approach), research.md (decisions) |
 | **Clarity** | All requirements measurable | ✅ 100% | 10 FRs, 8 SCs, 6 assumptions documented |
 | **Consistency** | No contradictions | ✅ 100% | Phase 9 T060–T062 resolved all conflicts |
@@ -37,7 +37,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 ### Deliverable Validation
 
 | Deliverable | Required | Complete | Verified | Ready |
-|------------|----------|----------|----------|-------|
+| ------------ | ---------- | ---------- | ---------- | ------- |
 | **spec.md** | Requirements | ✅ | AC1.1–AC1.5 met | ✅ |
 | **plan.md** | Technical approach | ✅ | 3 phases, decision matrix | ✅ |
 | **research.md** | Decision analysis | ✅ | 7 decisions, options A–D | ✅ |
@@ -56,7 +56,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 ### Decision Readiness
 
 | Decision | Status | Documentation | Handover Ready |
-|----------|--------|---|---|
+| ---------- | -------- | --- | --- |
 | **1** (Recovery-first race) | ⏳ Pending | Fully documented in research.md | ✅ |
 | **2** (Recovery lifetime) | ⏳ Pending | Fully documented in research.md | ✅ |
 | **3** (Code expiry timing) | ⏳ Pending | Fully documented in research.md | ✅ |
@@ -74,7 +74,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 #### Phase A: Ready Now
 
 | Prompt | Completeness | Status | Timeline | Execution Gate |
-|--------|---|---|---|---|
+| -------- | --- | --- | --- | --- |
 | **1** (Navigation) | 100% | ✅ Ready | 5–10 min | Phase A gate |
 | **2A** (Design baseline) | ~89%→95% | ✅ Ready* | 10–15 min | Phase A gate + T063 approval |
 | **2B** (Navigation design) | 100% | ✅ Ready | 10–15 min | Phase A gate |
@@ -89,7 +89,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 #### Phase B: Handover to Spec 005
 
 | Prompt | Completeness | Blocking Decisions | Timeline | Execution Gate |
-|--------|---|---|---|---|
+| -------- | --- | --- | --- | --- |
 | **3A** (Reader access) | ~91% (placeholder) | Decisions 3,4,5,6 | 15–20 min | Spec 005 decision resolution |
 | **3B** (Recovery flows) | ~90% (placeholder) | Decisions 1,2 | 15–20 min | Spec 005 decision resolution |
 | **3C** (Error states) | ~89% (partial) | Decision 3 (partial) | 15–20 min | Spec 005 decision resolution |
@@ -102,7 +102,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 ### Assumption Validation
 
 | Assumption | Stated In | Validation | Status |
-|-----------|----------|-----------|--------|
+| ----------- | ---------- | ----------- | -------- |
 | **Figma Make available** | spec.md, plan.md | Access verified in Gate 2 sign-off | ✅ |
 | **Typography approved** | plan.md, design-baseline | Space Grotesk + Inter locked | ✅ |
 | **9-color palette approved** | design-brief.md, baseline | All 9 colors listed, hex values exact | ✅ |
@@ -118,7 +118,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 ## Specification vs. Plan Alignment
 
 | Element | Spec.md | Plan.md | Contracts | Alignment |
-|---------|---------|---------|-----------|-----------|
+| --------- | --------- | --------- | ----------- | ----------- |
 | **User Stories** | 4 (US1–US4) | 4 stories, 3 phases | 6 prompts mapped to US | ✅ Aligned |
 | **Requirements** | 10 FRs | 10 requirements addressed | All 10 implemented in contracts | ✅ Aligned |
 | **Success Criteria** | 8 SCs | Phase gates, timelines | All 8 measurable in contracts | ✅ Aligned |
@@ -176,7 +176,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 ### Green Flags (Low Risk)
 
 | Risk | Mitigation | Status |
-|------|-----------|--------|
+| ------ | ----------- | -------- |
 | Specification ambiguity | 20+ detailed artifacts | ✅ Mitigated |
 | Design system drift | Gate 2 sign-off locked baseline | ✅ Mitigated |
 | Undefined decisions | 7 decisions fully documented | ✅ Mitigated |
@@ -190,7 +190,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 ### Yellow Flags (Medium Risk)
 
 | Risk | Likelihood | Impact | Mitigation |
-|------|-----------|--------|-----------|
+| ------ | ----------- | -------- | ----------- |
 | Manuscript approval (Decision 5) delays Phase B | Medium | Medium | External dependency; timeline known |
 | Figma Make performance on large token file | Low | Medium | Test export early in Phase A |
 | Email provider selection blocking timeline | Low | Low | 4 options pre-vetted in research.md |
@@ -225,7 +225,7 @@ Spec 004 (Book Website Figma Make Prompt Pack) is **documentation-complete, deci
 ### Spec 005 Responsibilities
 
 | Task | Owned By | Timeline | Blocking |
-|------|----------|----------|----------|
+| ------ | ---------- | ---------- | ---------- |
 | Resolve Decisions 1–2 (recovery race & lifetime) | Spec 005 (tech lead) | 2–3 hours | Prompt 3B |
 | Resolve Decisions 3–6 (timing, email, manuscript, newsletter) | Spec 005 (product + author) | 3–4 hours | Prompts 3A, 3C |
 | Update Prompts 3A, 3B, 3C with selected options | Spec 005 (documentation) | 1 hour | Execution |
