@@ -80,11 +80,14 @@ Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documen
 
 **Handoff notes**:
 - Contracts remain available in `contracts/prompt-3a-reader-access.md`, `contracts/prompt-3b-recovery-flows.md`, `contracts/prompt-3c-error-states.md` for reference
-- Decisions 3–6 (code expiry, email provider, manuscript status, newsletter destination) are tracked in [Spec 005 decisions](../005-reader-access/decisions.md)
+- Decision mapping:
+  - Email provider (Spec 004 Decision 4) → Spec 005 item 1
+  - Manuscript status (Spec 004 Decision 5) → Spec 005 item 2
+  - Code expiry (Spec 004 Decision 3) → Spec 005 item 3
+  - Newsletter destination (Spec 004 Decision 6) → Spec 005 item 8
+  - See [Spec 005 decisions](../005-reader-access/decisions.md) for full tracking
 - Decision 7 (route enforcement) stays with Spec 004 design
 - Timeline for Spec 005 completion documented in [Spec 005 spec](../005-reader-access/spec.md)
-
-3. **Given** separate newsletter decision, **When** Prompt 3A is executed, **Then** newsletter CTA is in separate section with explicit non-subscription statement
 
 ---
 
