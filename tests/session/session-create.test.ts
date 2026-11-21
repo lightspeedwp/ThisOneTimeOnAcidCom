@@ -6,23 +6,15 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 import { createSession, getActiveSessionCount } from '../../netlify/lib/reader-access/session-service';
 import { storeSession, getSession, listSessionsByEmail } from '../../netlify/lib/reader-access/store';
 import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
 
-// Mock Netlify Blobs
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store,
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Session Creation - T078 (US1)', () => {
   const testEmail = `reader-create-${Date.now()}@example.com`;
@@ -35,6 +27,7 @@ describe('Session Creation - T078 (US1)', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    resetInMemoryBlobStore();
   });
 
   describe('Session creation basics', () => {

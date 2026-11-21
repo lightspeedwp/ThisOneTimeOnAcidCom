@@ -6,20 +6,12 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 
-// Mock Netlify environment
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: () => Promise.resolve(Array.from(store.keys())),
-      store, // Export for test access
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Session Audit Trail - T034-T035', () => {
   const testEmail = 'reader@example.com';
@@ -28,6 +20,8 @@ describe('Session Audit Trail - T034-T035', () => {
   const testIpAddress = '192.168.1.1';
 
   beforeEach(() => {
+
+    resetInMemoryBlobStore();
     vi.clearAllMocks();
   });
 
@@ -213,24 +207,27 @@ describe('Session Audit Trail - T034-T035', () => {
 
       // Create session
       const created = await createSession(testEmail, testCode, fingerprint);
-      const store = getStore().store;
-      const keyAfterCreate = Array.from(store.keys())[0];
+      const store = getStore();
+      const { blobs } = await store.list({ prefix: 'session:' });
+      expect(blobs).toHaveLength(1);
+      const keyAfterCreate = blobs[0].key;
+      const readStored = async () => JSON.parse((await store.get(keyAfterCreate))!);
 
       // Verify session stored with timestamps
-      const storedAfterCreate = JSON.parse(store.get(keyAfterCreate)!);
+      const storedAfterCreate = await readStored();
       expect(storedAfterCreate.createdAt).toBe(created.createdAt);
       expect(storedAfterCreate.renewedAt).toBe(created.renewedAt);
       expect(storedAfterCreate.terminatedAt).toBeNull();
 
       // Renew and verify storage updated
       const renewed = await renewSession(testEmail, created.deviceId);
-      const storedAfterRenewal = JSON.parse(store.get(keyAfterCreate)!);
+      const storedAfterRenewal = await readStored();
       expect(storedAfterRenewal.renewedAt).toBe(renewed.renewedAt);
       expect(storedAfterRenewal.terminatedAt).toBeNull();
 
       // Terminate and verify storage updated
       await terminateSession(testEmail, created.deviceId);
-      const storedAfterTermination = JSON.parse(store.get(keyAfterCreate)!);
+      const storedAfterTermination = await readStored();
       expect(storedAfterTermination.terminatedAt).toBeTruthy();
       expect(storedAfterTermination.status).toBe('terminated');
     });

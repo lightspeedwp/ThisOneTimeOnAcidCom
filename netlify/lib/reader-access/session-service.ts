@@ -38,6 +38,19 @@ import {
 } from './session-config';
 
 /**
+ * Whether a stored session currently holds one of the reader's device slots:
+ * not terminated and not yet past its expiry. Expired sessions keep
+ * `status: 'active'` in storage, so the expiry has to be checked here too.
+ */
+function isSessionActive(session: Session, now: Date): boolean {
+  return (
+    session.status === 'active' &&
+    session.terminatedAt === null &&
+    new Date(session.expiresAt).getTime() > now.getTime()
+  );
+}
+
+/**
  * Create a new session after email verification.
  *
  * Steps:
@@ -482,7 +495,8 @@ export async function terminateSession(email: string, deviceId: string): Promise
  */
 export async function getActiveSessionCount(email: string): Promise<number> {
   const sessions = await listSessionsByEmail(email);
-  return sessions.filter((s) => s.status === 'active' && s.terminatedAt === null).length;
+  const now = new Date();
+  return sessions.filter((s) => isSessionActive(s, now)).length;
 }
 
 /**

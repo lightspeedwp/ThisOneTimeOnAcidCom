@@ -28,7 +28,7 @@ export interface BlobStore {
   set(key: string, value: string, options?: { onlyIfNew?: boolean }): Promise<BlobWriteResult | void>;
   get(key: string): Promise<string | null>;
   delete(key: string): Promise<void>;
-  list?(options?: { prefix?: string }): Promise<string[]>;
+  list(options?: { prefix?: string }): Promise<BlobListResult>;
 }
 
 /**

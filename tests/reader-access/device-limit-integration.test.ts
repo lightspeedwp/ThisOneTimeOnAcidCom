@@ -4,21 +4,12 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { resetInMemoryBlobStore } from '../helpers/in-memory-blob-store';
 
-// Mock Netlify environment
-vi.mock('../../netlify/lib/blobs', () => {
-  const store = new Map<string, string>();
-  return {
-    getStore: () => ({
-      get: (key: string) => Promise.resolve(store.get(key) || null),
-      set: (key: string, value: string) => Promise.resolve(store.set(key, value)),
-      delete: (key: string) => Promise.resolve(store.delete(key)),
-      list: ({ prefix }: { prefix: string }) =>
-        Promise.resolve(Array.from(store.keys()).filter((k) => k.startsWith(prefix))),
-      store, // Export for test access
-    }),
-  };
-});
+// In-memory Netlify Blobs that honours list({ prefix }) like the real store.
+vi.mock('../../netlify/lib/blobs', async () =>
+  (await import('../helpers/in-memory-blob-store')).inMemoryBlobsModule()
+);
 
 describe('Device Limit Integration Tests - T043 & T044', () => {
   const testEmail = 'reader@example.com';
@@ -26,13 +17,7 @@ describe('Device Limit Integration Tests - T043 & T044', () => {
 
   beforeEach(async () => {
     vi.clearAllMocks();
-
-    // Clear mock store for clean test state
-    const { getStore } = await import('../../netlify/lib/blobs');
-    const store = getStore();
-    if (store && (store as any).store) {
-      (store as any).store.clear();
-    }
+    resetInMemoryBlobStore();
   });
 
   describe('T043: Device limit enforcement workflow', () => {
