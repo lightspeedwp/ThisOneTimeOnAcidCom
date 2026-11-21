@@ -114,7 +114,7 @@
 
 | Directory | Purpose | Contents | Status |
 |-----------|---------|----------|--------|
-| `contracts/` | Figma Make prompt specifications (input) | Prompt 1–3C contract definitions | Reference (reader-access moved to Spec 005) |
+| `contracts/` | Claude Code prompt specifications (input) | Prompt 1–3C contract definitions | Reference (reader-access moved to Spec 005) |
 | `exports/` | Final approved artifacts (output) | Design tokens, checklists, handoff docs | Active |
 | `references/` | Source specification documents | Six specification files (01–06) with versions | Read-only reference |
 | `staged/` | Interim prompt drafts (historical) | Historical drafts from initial analysis (Nov 9) | Frozen, for reference only. Not authoritative |
@@ -155,6 +155,6 @@ No violations. Constitution check passes; no complexity trade-offs required.
 **Prerequisites**: research.md complete
 
 **Deliverables**:
-- **data-model.md**: Specification File, Design Baseline, Design Candidate, Blocking Decision, Figma Make Prompt, Preflight Analysis entities with fields and relationships
+- **data-model.md**: Specification File, Design Baseline, Design Candidate, Blocking Decision, Claude Code Prompt, Preflight Analysis entities with fields and relationships
 - **contracts/**: Six Figma Make prompt specifications (Prompts 1, 2A, 2B, 3A exact previews; Prompts 3B, 3C blocked with prerequisites)
 - **quickstart.md**: Approval flow, validation scenarios, and gate conditions for staged prompt execution
