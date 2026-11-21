@@ -9,10 +9,16 @@ import { Session, SessionValidationResult } from './session';
 import {
   storeSession,
   getSession,
+  getSessionByToken,
+  deleteSessionTokenIndex,
   updateSession,
   deleteSession,
   listSessionsByEmail,
+  getCode,
+  deleteCode,
+  incrementCodeAttempts,
 } from './store';
+import { verifyCode, isCodeExpired, isCodeLimited } from './codes';
 import {
   generateSessionToken,
   constantTimeTokenCompare,
@@ -56,9 +62,39 @@ import {
  * );
  * // => { sessionId: 'token...', email: '...', expiresAt: '2026-12-20T...', ... }
  */
+/**
+ * Per-email creation queue. createSession counts active sessions and then
+ * writes, so concurrent calls for one email could all pass the device-limit
+ * check. Chaining them closes that race within one function instance.
+ *
+ * Limitation: Netlify Blobs offers no compare-and-swap through this adapter,
+ * so two separate function instances can still race. A conditional write
+ * (ETag onlyIfMatch on a per-email counter) would be needed to close that.
+ */
+const creationQueues = new Map<string, Promise<unknown>>();
+
+function serialiseByEmail<T>(email: string, task: () => Promise<T>): Promise<T> {
+  const key = email.trim().toLowerCase();
+  const previous = creationQueues.get(key) ?? Promise.resolve();
+  const run = previous.then(task, task);
+  const settled = run.catch(() => undefined);
+  creationQueues.set(key, settled);
+  settled.then(() => {
+    if (creationQueues.get(key) === settled) creationQueues.delete(key);
+  });
+  return run;
+}
+
 export async function createSession(
   email: string,
   verificationCode: string,
+  deviceFingerprint: FingerprintInput
+): Promise<Session> {
+  return serialiseByEmail(email, () => createSessionUnserialised(email, deviceFingerprint));
+}
+
+async function createSessionUnserialised(
+  email: string,
   deviceFingerprint: FingerprintInput
 ): Promise<Session> {
   // TODO: T006a - Validate verification code (Phase 2 integration)
@@ -468,4 +504,156 @@ export function getSessionProperties(session: Session) {
     secondsToExpiry,
     daysSinceRenewal,
   };
+}
+
+// ---------------------------------------------------------------------------
+// User Story 1: seamless chapter access after email verification
+// ---------------------------------------------------------------------------
+
+/** Error codes from the session-api contract for session creation. */
+export type SessionCreationErrorCode =
+  | 'invalid_verification'
+  | 'verification_failed'
+  | 'device_limit_exceeded';
+
+/** Typed failure from createSessionFromVerification, carrying its HTTP status. */
+export class SessionCreationError extends Error {
+  constructor(
+    public readonly errorCode: SessionCreationErrorCode,
+    public readonly statusCode: number
+  ) {
+    super(errorCode);
+    this.name = 'SessionCreationError';
+  }
+}
+
+/**
+ * T017: Verify an emailed code and open a session for this device.
+ *
+ * 1. Look up the stored code; missing, expired or locked → 401
+ * 2. Compare the code hash; a wrong code records an attempt → 401
+ * 3. Consume the code before any session is written, so a replayed
+ *    request finds no code (Blobs has no compare-and-swap, so this is
+ *    delete-first rather than a true atomic consume)
+ * 4. If this device already has a session, rotate it: new token, old
+ *    token index removed, fresh 30-day window (no device slot consumed)
+ * 5. Otherwise create a new session, enforcing the device limit (409)
+ *
+ * @param email Reader's email (normalised to lower case)
+ * @param code Six-digit verification code
+ * @param fingerprint Request fingerprint inputs
+ * @returns The active session to set in the cookie
+ * @throws SessionCreationError for verification or device-limit failures
+ */
+export async function createSessionFromVerification(
+  email: string,
+  code: string,
+  fingerprint: FingerprintInput
+): Promise<Session> {
+  const normalisedEmail = email.trim().toLowerCase();
+
+  const stored = await getCode(normalisedEmail);
+  if (!stored || isCodeExpired(stored.expiresAt) || isCodeLimited(stored.attemptCount, stored.maxAttempts)) {
+    throw new SessionCreationError('verification_failed', 401);
+  }
+
+  if (!verifyCode(code, stored.codeHash, stored.salt)) {
+    await incrementCodeAttempts(normalisedEmail);
+    throw new SessionCreationError('verification_failed', 401);
+  }
+
+  await deleteCode(normalisedEmail);
+
+  const deviceId = generateDeviceFingerprint(fingerprint);
+  const existing = await getSession(normalisedEmail, deviceId);
+
+  if (existing && existing.terminatedAt === null) {
+    return rotateDeviceSession(existing);
+  }
+
+  try {
+    return await createSession(normalisedEmail, code, fingerprint);
+  } catch (error) {
+    if ((error as { errorCode?: string }).errorCode === 'device_limit_exceeded') {
+      throw new SessionCreationError('device_limit_exceeded', 409);
+    }
+    throw error;
+  }
+}
+
+/**
+ * Replace a device's session token after re-verification.
+ *
+ * Issuing a fresh token on every verification prevents session fixation:
+ * a token captured before the reader re-verified stops working.
+ */
+async function rotateDeviceSession(existing: Session): Promise<Session> {
+  const now = new Date();
+  const rotated: Session = {
+    ...existing,
+    sessionId: generateSessionToken(),
+    createdAt: now.toISOString(),
+    renewedAt: now.toISOString(),
+    expiresAt: new Date(now.getTime() + SESSION_LIFETIME_DAYS * 24 * 60 * 60 * 1000).toISOString(),
+    terminatedAt: null,
+    status: 'active',
+  };
+
+  await deleteSessionTokenIndex(existing.sessionId);
+  await storeSession(rotated);
+  return rotated;
+}
+
+/**
+ * T018: Validate a session using only the token from the cookie.
+ *
+ * Resolves email and deviceId through the hashed-token index, then runs the
+ * standard checks in validateSession (constant-time compare, terminated,
+ * expired with clock-skew tolerance).
+ *
+ * @param token Value of the sessionToken cookie
+ * @returns Validation result; statusCode 500 when storage is unavailable
+ */
+export async function authenticateSessionToken(
+  token: string | null | undefined
+): Promise<SessionValidationResult> {
+  if (!token) {
+    return { isValid: false, reason: 'missing_token', statusCode: 401 };
+  }
+
+  if (!isValidSessionToken(token)) {
+    return { isValid: false, reason: 'invalid_token', statusCode: 401 };
+  }
+
+  let session: Session | null;
+  try {
+    session = await getSessionByToken(token);
+  } catch {
+    return { isValid: false, reason: 'invalid_token', statusCode: 500 };
+  }
+
+  if (!session) {
+    return { isValid: false, reason: 'invalid_token', statusCode: 401 };
+  }
+
+  return validateSession(token, session.email, session.deviceId);
+}
+
+/**
+ * T019: Extend a valid session after reader activity.
+ *
+ * Delegates to renewSession (which coalesces renewals inside one second).
+ * A renewal failure must not block reading: the session is still valid for
+ * its current window, so the original session is returned and the failure
+ * is left to renewSession's error logging.
+ *
+ * @param session A session that has just passed validation
+ * @returns The renewed session, or the original one if renewal failed
+ */
+export async function renewSessionOnActivity(session: Session): Promise<Session> {
+  try {
+    return await renewSession(session.email, session.deviceId);
+  } catch {
+    return session;
+  }
 }
