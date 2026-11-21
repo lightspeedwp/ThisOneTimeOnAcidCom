@@ -95,23 +95,16 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
 
-      - name: Run tests (Jest on base, Vitest on head during cutover)
+      - name: Run tests (Vitest on head and base)
         env:
           EVENT_NAME: ${{ github.event_name }}
-          TARGET: ${{ matrix.target }}
         run: |
-          # During Jest-to-Vitest cutover: base contains jest.mock() calls,
-          # head contains vi.* mocks. Use Jest baseline to ensure head comparison
-          # is valid. Once base catches up, simplify to Vitest everywhere.
+          # Head and base must use the same runner, or the comparison job
+          # reports every failure that only one runner can see as "new".
+          # Jest's testMatch covers *.test.js only, so a Jest base never ran
+          # the TypeScript suites. The base branch now runs under Vitest.
           test_status=0
-
-          if [ "$TARGET" = "base" ]; then
-            # Base revision still has jest.mock() — must run Jest
-            npx jest --config jest.config.js --ci --json --outputFile=jest-report.json || test_status=$?
-          else
-            # Head revision has vi.* mocks — run Vitest
-            npx vitest run --reporter=json --outputFile=jest-report.json --coverage=false || test_status=$?
-          fi
+          npx vitest run --reporter=json --outputFile=jest-report.json --coverage=false || test_status=$?
 
           # Report summary and detect empty suites
           num_suites=$(jq '.numTotalTestSuites // (.testResults | length)' jest-report.json 2>/dev/null || echo 0)

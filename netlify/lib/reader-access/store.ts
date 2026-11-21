@@ -374,6 +374,34 @@ export async function deleteCode(email: string): Promise<void> {
   await getStore().delete(buildCodeKey(email));
 }
 
+/**
+ * Atomically consume a verified code (spec 005 RA-002: "consume at most
+ * once, atomically").
+ *
+ * Writes a marker keyed by a hash of the code's salted hash, which is unique
+ * per issued code, using `onlyIfNew`. Netlify Blobs applies that condition
+ * server-side, so when two requests redeem the same code at once exactly one
+ * write reports `modified: true`. The code record is then deleted.
+ *
+ * @returns true for the single caller that consumed the code, false if
+ *   another request already did
+ */
+export async function consumeCode(email: string, codeHash: string): Promise<boolean> {
+  const key = `code-consumed:${hashSha256(codeHash)}`;
+  const result = await getStore().set(
+    key,
+    JSON.stringify({ consumedAt: new Date().toISOString() }),
+    { onlyIfNew: true }
+  );
+  // @netlify/blobs 11 always returns a WriteResult; a bare mock may not.
+  if (result && result.modified === false) {
+    return false;
+  }
+  // Best effort: the marker already blocks reuse if this delete fails.
+  await deleteCode(email).catch(() => undefined);
+  return true;
+}
+
 // ---------------------------------------------------------------------------
 // Recovery attempts (restored from spec 005, RA-T048)
 // ---------------------------------------------------------------------------
