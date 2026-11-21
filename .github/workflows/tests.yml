@@ -1,7 +1,7 @@
 name: Tests
 
 # Runs the Vitest suite on every PR and fails only on failures the PR
-# introduces: develop still carries known failures (#3472), so the head and
+# introduces: main may still carry known failures (#3472), so the head and
 # base are tested in parallel and compared. Once #3472 clears the baseline,
 # this can gate on zero failures instead (#3479).
 
@@ -95,23 +95,15 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
 
-      - name: Run tests (Jest on base, Vitest on head during cutover)
+      - name: Run Vitest
         env:
           EVENT_NAME: ${{ github.event_name }}
-          TARGET: ${{ matrix.target }}
         run: |
-          # During Jest-to-Vitest cutover: base contains jest.mock() calls,
-          # head contains vi.* mocks. Use Jest baseline to ensure head comparison
-          # is valid. Once base catches up, simplify to Vitest everywhere.
+          # Head and base both run Vitest so the compare job diffs like with
+          # like. Jest only matched *.test.js, so a Jest baseline never ran
+          # the .ts suites and every head .ts failure looked new.
           test_status=0
-
-          if [ "$TARGET" = "base" ]; then
-            # Base revision still has jest.mock() — must run Jest
-            npx jest --config jest.config.js --ci --json --outputFile=jest-report.json || test_status=$?
-          else
-            # Head revision has vi.* mocks — run Vitest
-            npx vitest run --reporter=json --outputFile=jest-report.json --coverage=false || test_status=$?
-          fi
+          npx vitest run --reporter=json --outputFile=jest-report.json --coverage=false || test_status=$?
 
           # Report summary and detect empty suites
           num_suites=$(jq '.numTotalTestSuites // (.testResults | length)' jest-report.json 2>/dev/null || echo 0)
@@ -141,11 +133,19 @@ jobs:
             printf '%s\n' "$dirty"
           fi
 
+      - name: List files tracked at base
+        if: matrix.target == 'base'
+        # Lets the compare job tell a test file the PR adds (new) from one
+        # that existed at base but is missing from its report (not comparable).
+        run: git ls-files > base-files.txt
+
       - name: Upload report
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: vitest-report-${{ matrix.target }}
-          path: jest-report.json
+          path: |
+            jest-report.json
+            base-files.txt
           if-no-files-found: ignore
           retention-days: 7
 
@@ -190,10 +190,15 @@ jobs:
           # makes their test paths comparable. The default shell is
           # bash -e: suspend errexit so a non-zero result still reaches the
           # summary below.
+          base_files_args=()
+          if [ -s reports/vitest-report-base/base-files.txt ]; then
+            base_files_args=(--base-files reports/vitest-report-base/base-files.txt)
+          fi
           set +e
           node scripts/validation/compare-jest-failures.cjs \
             --head reports/vitest-report-head/jest-report.json --head-root "$GITHUB_WORKSPACE" \
             --base reports/vitest-report-base/jest-report.json --base-root "$GITHUB_WORKSPACE" \
+            "${base_files_args[@]}" \
             | tee comparison.txt
           status=${PIPESTATUS[0]}
           set -e
