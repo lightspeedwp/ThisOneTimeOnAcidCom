@@ -1,102 +1,97 @@
 // GET /api/reader/chapters/{chapterId}
-// Serve protected chapter to verified sessions
-// Use edition manifest and session validation
+// Serve a protected chapter to readers with a valid session (T018, US1).
+//
+// - Valid session   → 200 with chapter content; session renewed (T019) and
+//                     the cookie's Max-Age restarted
+// - Missing/expired/terminated/unknown session → 401 and the cookie is cleared
+// - Unapproved chapter → 404 content-unavailable
 
-import { createJsonResponse, responses, createResponse } from '../lib/reader-access/responses';
-import { getAccessSession, renewAccessSession } from '../lib/reader-access/code-store';
-import { parseSessionCookie, formatSessionCookie, createSessionCookie } from '../lib/reader-access/session-cookie';
+import { SESSION_SECURITY_HEADERS } from '../lib/reader-access/responses';
+import { authenticateRequest } from '../lib/reader-access/session-middleware';
 import { EditionReader } from '../lib/reader-access/edition';
+import { maskSensitive } from '../lib/reader-access/crypto';
 
-export default async function handler(
-  req: Request,
-  context: any
-): Promise<Response> {
+const CHAPTER_ID_REGEX = /^[a-z0-9-]{1,100}$/i;
+
+function json(body: unknown, status: number, extraHeaders: Record<string, string> = {}): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...SESSION_SECURITY_HEADERS, ...extraHeaders },
+  });
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+export default async function handler(req: Request): Promise<Response> {
   if (req.method !== 'GET') {
-    return new Response('{"state":"provider-failure"}', { status: 405, headers: { 'Content-Type': 'application/json' } });
+    return json({ state: 'provider-failure' }, 405, { Allow: 'GET' });
   }
 
   try {
-    // Extract chapterId from URL path
-    const url = new URL(req.url);
-    const pathParts = url.pathname.split('/');
-    const chapterId = pathParts[pathParts.length - 1];
+    const pathParts = new URL(req.url).pathname.split('/').filter(Boolean);
+    const chapterId = decodeURIComponent(pathParts[pathParts.length - 1] ?? '');
 
-    if (!chapterId || chapterId === 'undefined') {
-      return createJsonResponse(responses.unavailable(), 400);
+    if (!CHAPTER_ID_REGEX.test(chapterId)) {
+      return json({ state: 'content-unavailable' }, 400);
     }
 
-    // Parse session cookie
-    const cookieHeader = req.headers.get('cookie');
-    const sessionId = parseSessionCookie(cookieHeader ?? undefined);
+    const auth = await authenticateRequest(req);
 
-    if (!sessionId) {
-      return createJsonResponse(responses.pending(), 401);
-    }
-
-    // Retrieve session
-    const session = await getAccessSession(sessionId);
-    if (!session) {
-      return createJsonResponse(responses.pending(), 401);
-    }
-
-    // Check if expired
-    if (new Date(session.expiresAt) < new Date()) {
-      return createJsonResponse(responses.pending(), 401);
-    }
-
-    // Load manifest and verify chapter is approved
-    const manifest = {
-      title: 'This One Time On Acid',
-      createdAt: new Date().toISOString(),
-      chapters: [
+    if (!auth.isValid) {
+      console.log('CHAPTER_ACCESS', { chapterId, sessionStatus: auth.reason });
+      return json(
         {
-          id: 'ch-01-beginning',
-          title: 'The Beginning',
-          approved: false,
+          state: 'request-pending',
+          error: 'unauthorized',
+          reason: auth.reason,
+          action: 'reverify_email',
         },
-        {
-          id: 'ch-05-01',
-          title: 'The Exploration Begins',
-          approved: true,
-          wordCount: 2500,
-          estimatedReadTime: 12,
-        },
-      ],
-    };
-
-    const reader = new EditionReader(manifest);
-    if (!reader.isChapterApproved(chapterId)) {
-      return createJsonResponse(responses.unavailable(), 404);
+        auth.statusCode,
+        { 'Set-Cookie': auth.setCookie }
+      );
     }
 
-    // Load chapter content (placeholder for now)
-    const content = `<html><body><h1>${reader.getChapter(chapterId)?.title}</h1><p>Chapter content here...</p></body></html>`;
-
-    // Renew session
-    const renewedSession = await renewAccessSession(sessionId);
-    if (!renewedSession) {
-      return createJsonResponse(responses.error('Failed to renew session'), 503);
-    }
-
-    // Create renewed session cookie
-    const renewedCookie = createSessionCookie(sessionId);
-    const cookieHeader2 = formatSessionCookie(renewedCookie);
-
-    // Build response with content
-    const responseBody = {
-      state: 'verified',
+    const { session } = auth;
+    console.log('CHAPTER_ACCESS', {
+      email: maskSensitive(session.email),
       chapterId,
-      title: reader.getChapter(chapterId)?.title,
-      content,
-      renewedAt: renewedSession.renewedAt,
-      expiresAt: renewedSession.expiresAt,
-    };
+      sessionStatus: 'valid',
+    });
 
-    const response = createResponse(responseBody, 200);
-    response.headers.set('Set-Cookie', cookieHeader2);
+    const edition = new EditionReader();
+    const chapter = edition.getChapter(chapterId);
+    if (!chapter || !edition.isChapterApproved(chapterId)) {
+      return json({ state: 'content-unavailable' }, 404, { 'Set-Cookie': auth.setCookie });
+    }
 
-    return response;
+    // Placeholder body until chapter content is sourced from the CMS
+    const title = escapeHtml(chapter.title);
+    const content = `<h1>${title}</h1><p>Chapter content here...</p>`;
+
+    return json(
+      {
+        state: 'verified',
+        chapterId,
+        title: chapter.title,
+        content,
+        chapter: { id: chapterId, title: chapter.title, content },
+        renewedAt: session.renewedAt,
+        expiresAt: session.expiresAt,
+      },
+      200,
+      { 'Set-Cookie': auth.setCookie }
+    );
   } catch (err) {
-    return createJsonResponse(responses.error('Chapter is unavailable'), 503);
+    console.error('CHAPTER_ACCESS_ERROR', {
+      message: err instanceof Error ? err.message : 'Unknown error',
+    });
+    return json({ state: 'provider-failure' }, 503);
   }
 }

@@ -44,33 +44,16 @@
   to = "/.netlify/functions/reader-chapters-list"
   status = 200
 
-# Phase 6: Chapter content delivery (must precede /chapters/:chapterId)
+# Phase 6: Chapter content delivery (must precede the single-chapter route)
 [[redirects]]
   from = "/api/reader/chapters/:chapterId/content"
-  to = "/.netlify/functions/reader-chapter-content"
+  to = "/.netlify/functions/reader-chapter-content/:chapterId/content"
   status = 200
 
-# Spec 005: protected chapter for a verified session (RA-T035)
+# Spec 006 US1 (T018): single protected chapter with session validation
 [[redirects]]
-  from = "/api/reader/chapters/:chapterId"
-  to = "/.netlify/functions/reader-chapter"
-  status = 200
-
-# Spec 005: the API path and the function file name differ, so the
-# reader-:splat catch-all below cannot reach these three.
-[[redirects]]
-  from = "/api/reader/code-requests"
-  to = "/.netlify/functions/reader-code-request"
-  status = 200
-
-[[redirects]]
-  from = "/api/reader/verifications"
-  to = "/.netlify/functions/reader-verify"
-  status = 200
-
-[[redirects]]
-  from = "/api/reader/session"
-  to = "/.netlify/functions/reader-session"
+  from = "/api/reader/chapters/*"
+  to = "/.netlify/functions/reader-chapter/:splat"
   status = 200
 
 # Phase 6: Reading progress
@@ -91,7 +74,18 @@
   to = "/.netlify/functions/reader-bookmarks"
   status = 200
 
-# Earlier phases (code-request, verification, session)
+# Earlier phases: public paths whose names differ from their function files
+[[redirects]]
+  from = "/api/reader/code-requests"
+  to = "/.netlify/functions/reader-code-request"
+  status = 200
+
+[[redirects]]
+  from = "/api/reader/verifications"
+  to = "/.netlify/functions/reader-verify"
+  status = 200
+
+# Earlier phases (session, devices, …): /api/reader/<name> → reader-<name>
 [[redirects]]
   from = "/api/reader/*"
   to = "/.netlify/functions/reader-:splat"

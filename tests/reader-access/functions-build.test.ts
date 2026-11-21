@@ -68,7 +68,8 @@ describe('Reader API routing', () => {
     const fallback = lines.findIndex(([from]) => from === '/*');
 
     expect(chapter).toBeGreaterThanOrEqual(0);
-    expect(lines[chapter][1]).toBe('/.netlify/functions/reader-chapter');
+    // reader-chapter reads the id from the last path segment.
+    expect(lines[chapter][1]).toBe('/.netlify/functions/reader-chapter/:chapterId');
     expect(chapter).toBeLessThan(fallback);
   });
 });

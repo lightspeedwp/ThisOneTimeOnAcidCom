@@ -5,7 +5,7 @@
  * User Story 2: 30-Day Rolling Session Renewal
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { createSession, validateSession, renewSession } from '../../netlify/lib/reader-access/session-service';
 import { SESSION_LIFETIME_DAYS, CLOCK_SKEW_TOLERANCE_MS } from '../../netlify/lib/reader-access/session-config';
 
@@ -31,8 +31,17 @@ describe('Session Expiry - T083 (US2)', () => {
     timezone: 'UTC',
   };
 
+  // Renewals inside the 1s coalescing window are skipped by design, so
+  // renewal tests step a faked Date past it instead of sleeping.
+  const stepPastCoalesceWindow = () => vi.setSystemTime(Date.now() + 2000);
+
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.useFakeTimers({ toFake: ['Date'] });
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   describe('Expiry calculation precision', () => {
@@ -92,7 +101,8 @@ describe('Session Expiry - T083 (US2)', () => {
 
       // Mock an expired session by manually setting expiresAt to past
       const { updateSession } = await import('../../netlify/lib/reader-access/store');
-      const pastDate = new Date(Date.now() - 1000).toISOString(); // 1 second ago
+      // Past the clock-skew tolerance (expiry within it is still accepted)
+      const pastDate = new Date(Date.now() - CLOCK_SKEW_TOLERANCE_MS - 1000).toISOString();
       await updateSession(testEmail, session.deviceId, { expiresAt: pastDate });
 
       const result = await validateSession(session.sessionId, testEmail, session.deviceId);
@@ -133,8 +143,7 @@ describe('Session Expiry - T083 (US2)', () => {
       const session = await createSession(testEmail, testCode, fingerprint);
       const originalExpiresAt = new Date(session.expiresAt).getTime();
 
-      // Wait a bit
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      stepPastCoalesceWindow();
 
       const before = Date.now();
       const renewed = await renewSession(testEmail, session.deviceId);
@@ -192,13 +201,14 @@ describe('Session Expiry - T083 (US2)', () => {
 
       let current = session;
       for (let i = 0; i < 3; i++) {
-        await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for coalesce window
+        stepPastCoalesceWindow();
 
         const renewed = await renewSession(testEmail, current.deviceId);
 
-        const createdTime = new Date(renewed.createdAt).getTime();
+        // The rolling window runs from the latest renewal, not from creation
+        const renewedTime = new Date(renewed.renewedAt).getTime();
         const expiresTime = new Date(renewed.expiresAt).getTime();
-        const windowSize = expiresTime - createdTime;
+        const windowSize = expiresTime - renewedTime;
 
         // Should still be ~30 days
         expect(Math.abs(windowSize - thirtyDaysInMs)).toBeLessThan(2000);
