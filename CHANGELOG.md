@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Tests CI reported pre-existing failures as new** — the "No new test failures" comparison ran Jest for the base commit, which never ran TypeScript suites, so every failing `.ts` suite on head looked new (even on docs-only PRs). Both head and base now run Vitest; the comparison script labels Vitest reports correctly and reports a failing file that existed at base but is missing from the base report as "not comparable" rather than new.
 - **Reader access verification never succeeded** — the code request emailed one code but stored the hash of a different one; the stored hash now derives from the emailed code, and comparison is constant-time.
 - **Reader access endpoints crashed at runtime** — restored the verification-code and recovery storage functions removed from `store.ts`, and handled the real Netlify Blobs `list()` result shape so session creation no longer throws.
 - **Reader API routing** — `/api/reader/code-requests` and `/api/reader/verifications` now reach their functions; `/api/reader/chapters/{id}` routes to the session-validated chapter endpoint, and chapter content reads the `sessionToken` cookie the app actually sets.
