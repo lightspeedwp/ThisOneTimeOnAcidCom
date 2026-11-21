@@ -8,12 +8,12 @@
 
 ## Inventory Overview
 
-Complete documentation of six specification files in `references/` (moved from `content/book/` in Phase 9) that serve as authoritative sources for the Figma Make prompt pack feature.
+Complete documentation of six specification files in `references/` (moved from `content/book/` in Phase 9) that serve as authoritative sources for the Claude Code prompt pack feature.
 
 | File ID | Document Name | Current Version | Status | Recency | Evidence |
 | --------- | --------------- | ----------------- | -------- | --------- | ---------- |
-| **01** | Book Website Figma Make specification and prompt pack | v1.0.0 | ✓ CURRENT | 2026-11-09 | Master execution contract |
-| **02** | Figma Make companion session plan | v1.0.4 | ✓ CURRENT | 2026-11-09 | Companion planning document |
+| **01** | Book Website Claude Code specification and prompt pack | v1.0.0 | ✓ CURRENT | 2026-11-09 | Master execution contract |
+| **02** | Claude Code companion session plan | v1.0.4 | ✓ CURRENT | 2026-11-09 | Companion planning document |
 | **03** | Book website brief — author decisions and launch scope | v1.3.0 | ✓ CURRENT | 2026-11-09 | Scope and author decisions |
 | **04** | Design brief — Book website and verified reading experience | v1.1.2 | ✓ CURRENT | 2026-11-08 | Design requirements & baseline |
 | **05** | Design and reader decision register | v1.9.0 | ✓ CURRENT | 2026-11-09 | Design decisions & candidates |
@@ -23,18 +23,18 @@ Complete documentation of six specification files in `references/` (moved from `
 
 ## Detailed File Record
 
-### File 01: Book Website Figma Make Specification and Prompt Pack
+### File 01: Book Website Claude Code Specification and Prompt Pack
 
 **File Path**: `references/01-book-website-specification.md`  
 **Version**: 1.0.0  
 **Last Revised**: 2026-11-09 (Asia/Bangkok)  
 **Document Status**: Draft specification and prompts — stage execution separately approval-gated  
 **Authority**: Ash  
-**Purpose**: Master execution contract for Figma Make staged prompt pack
+**Purpose**: Master execution contract for Claude Code staged prompt pack
 
 **Content Summary**:
 - Purpose and source authority documentation
-- Four Figma Make execution stages (0–3C, approval gates between)
+- Four Claude Code execution stages (0–3C, approval gates between)
 - Specification of all 6 prompts (Prompt 0 placeholder through Prompt 3C)
 - Approval boundaries and stage gates
 - Reader access policy overview (10-minute codes, 30-day device lifecycle)
