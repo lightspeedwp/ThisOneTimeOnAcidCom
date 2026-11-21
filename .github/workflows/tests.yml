@@ -95,13 +95,14 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
 
-      - name: Run Vitest
+      - name: Run tests (Vitest on head and base)
         env:
           EVENT_NAME: ${{ github.event_name }}
         run: |
-          # Head and base both run Vitest so the compare job diffs like with
-          # like. Jest only matched *.test.js, so a Jest baseline never ran
-          # the .ts suites and every head .ts failure looked new.
+          # Head and base must use the same runner, or the comparison job
+          # reports every failure that only one runner can see as "new".
+          # Jest's testMatch covers *.test.js only, so a Jest base never ran
+          # the TypeScript suites. The base branch now runs under Vitest.
           test_status=0
           npx vitest run --reporter=json --outputFile=jest-report.json --coverage=false || test_status=$?
 
