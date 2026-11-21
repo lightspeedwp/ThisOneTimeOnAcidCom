@@ -107,10 +107,13 @@ async function createSessionUnserialised(
   // Generate device fingerprint hash
   const deviceId = generateDeviceFingerprint(deviceFingerprint);
 
-  // Check concurrent device limit (T006b)
+  // Check concurrent device limit (T006b).
+  // A session for this same device is stored under the same key and is
+  // replaced by the new one, so it must not count towards the limit:
+  // re-verifying on a device the reader already uses is not a new device.
   const activeSessions = await listSessionsByEmail(email);
   const activeCount = activeSessions.filter(
-    (s) => s.status === 'active' && s.terminatedAt === null
+    (s) => s.status === 'active' && s.terminatedAt === null && s.deviceId !== deviceId
   ).length;
 
   if (activeCount >= MAX_CONCURRENT_DEVICES) {

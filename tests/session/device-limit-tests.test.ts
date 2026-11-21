@@ -144,6 +144,29 @@ describe('Device Limit Enforcement - T099-T102 (US4)', () => {
     });
   });
 
+  describe('T100: Re-verifying on a registered device', () => {
+    it('should allow a new session on an already-registered device at the limit', async () => {
+      const testEmail = `${testEmailBase}-reverify`;
+      const devices = Array.from({ length: MAX_CONCURRENT_DEVICES }, (_, i) => ({
+        userAgent: `Device${i + 1}`,
+        ipAddress: `192.168.1.${i + 1}`,
+        timezone: 'UTC',
+      }));
+
+      const sessions = [];
+      for (const device of devices) {
+        sessions.push(await createSession(testEmail, testCode, device));
+      }
+
+      // Same device again: replaces its own session, so it is not a new device
+      const replacement = await createSession(testEmail, testCode, devices[0]);
+
+      expect(replacement.deviceId).toBe(sessions[0].deviceId);
+      expect(replacement.sessionId).not.toBe(sessions[0].sessionId);
+      expect(await getActiveSessionCount(testEmail)).toBe(MAX_CONCURRENT_DEVICES);
+    });
+  });
+
   describe('T101: Device termination and freeing slots', () => {
     it('should allow creation after terminating a device', async () => {
       const testEmail = `${testEmailBase}-free-slot`;
