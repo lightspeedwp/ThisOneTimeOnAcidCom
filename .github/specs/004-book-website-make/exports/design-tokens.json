@@ -1,118 +1,173 @@
 {
-  "version": "1.0.0",
-  "date": "2026-11-20",
-  "baseline": "Design Brief v1.1.2",
-  "approval": "Gate 2 Readiness Complete (dark theme + primitives)",
-  "description": "Design system baseline tokens: dark theme and nine-color primitives approved. Light theme semantic mapping defined below; approval status documented separately.",
-  "primitives": {
-    "typography": {
-      "fontHeading": "Space Grotesk",
-      "fontBody": "Inter",
-      "fontUI": "Inter"
+  "metadata": {
+    "name": "This One Time on Acid — design baseline tokens",
+    "version": "2.0.0",
+    "generated": "2026-11-20",
+    "source": "Prompt 2A — Design System Baseline Export (SC-004 Claude direct execution)",
+    "baseline": "Design Brief v1.1.2; Design Register v1.9.0",
+    "approval": {
+      "typography": "approved",
+      "primitives": "approved",
+      "darkTheme": "approved",
+      "lightTheme": "pending",
+      "componentMapping": "proposed"
     },
-    "colors": {
-      "colorDeepestDark": "#0B0B10",
-      "colorDarkPurple": "#12121A",
-      "colorLighterDark": "#171722",
-      "colorWarmCream": "#F6F2EB",
-      "colorWarmTan": "#CFC7BB",
-      "colorWarmBrown": "#9C9488",
-      "colorAccentPink": "#FF3AAE",
-      "colorAccentYellow": "#F4FF3C",
-      "colorAccentPurple": "#8A63FF"
+    "themeSelection": {
+      "default": "dark",
+      "lightSelector": ":root[data-theme='light']",
+      "usesPrefersColorScheme": false
+    },
+    "companion": "design-tokens.css"
+  },
+  "typography": {
+    "heading": {
+      "family": "Space Grotesk",
+      "cssVar": "--font-heading",
+      "weights": [600, 700],
+      "sizesPx": [24, 32, 40, 48]
+    },
+    "body": {
+      "family": "Inter",
+      "cssVar": "--font-body",
+      "weights": [400, 500],
+      "sizesPx": [14, 16, 18]
+    },
+    "ui": {
+      "family": "Inter",
+      "cssVar": "--font-ui",
+      "weights": [500, 600],
+      "sizesPx": [12, 14, 16]
     }
   },
-  "themes": {
-    "dark": {
-      "colorPrimaryTextDark": "#F6F2EB",
-      "colorPrimaryBgDark": "#0B0B10",
-      "colorSecondaryTextDark": "#CFC7BB",
-      "colorSecondaryBgDark": "#12121A",
-      "colorTertiaryTextDark": "#9C9488",
-      "colorPanelDark": "#171722",
-      "colorAccentPinkDark": "#FF3AAE",
-      "colorAccentYellowDark": "#F4FF3C",
-      "colorAccentPurpleDark": "#8A63FF"
+  "colors": {
+    "primitives": {
+      "deepest-dark": "#0B0B10",
+      "dark-purple": "#12121A",
+      "lighter-dark": "#171722",
+      "warm-cream": "#F6F2EB",
+      "warm-tan": "#CFC7BB",
+      "warm-brown": "#9C9488",
+      "accent-pink": "#FF3AAE",
+      "accent-yellow": "#F4FF3C",
+      "accent-purple": "#8A63FF"
     },
-    "light": {
-      "status": "PENDING_APPROVAL",
-      "note": "Light theme semantic role mapping is pending approval. Values updated to meet WCAG 2.2 AAA contrast requirements; design approval required.",
-      "colorPrimaryTextLight": "#0B0B10",
-      "colorPrimaryBgLight": "#F6F2EB",
-      "colorSecondaryTextLight": "#171722",
-      "colorSecondaryBgLight": "#CFC7BB",
-      "colorTertiaryTextLight": "#5C5248",
-      "colorPanelLight": "#F6F2EB",
-      "colorAccentPinkLight": "#FF3AAE",
-      "colorAccentYellowLight": "#F4FF3C",
-      "colorAccentPurpleLight": "#8A63FF"
+    "themes": {
+      "dark": {
+        "status": "approved",
+        "primary-text": "#F6F2EB",
+        "primary-bg": "#0B0B10",
+        "secondary-text": "#CFC7BB",
+        "secondary-bg": "#12121A",
+        "tertiary-text": "#9C9488",
+        "panel": "#171722",
+        "accent-pink": "#FF3AAE",
+        "accent-yellow": "#F4FF3C",
+        "accent-purple": "#8A63FF"
+      },
+      "light": {
+        "status": "pending",
+        "primary-text": "#0B0B10",
+        "primary-bg": "#F6F2EB",
+        "secondary-text": "#12121A",
+        "secondary-bg": "#CFC7BB",
+        "tertiary-text": "#171722",
+        "panel": "#F6F2EB",
+        "accent-pink": "#FF3AAE",
+        "accent-yellow": "#F4FF3C",
+        "accent-purple": "#8A63FF"
+      }
     }
   },
   "components": {
     "button": {
-      "primary": {
-        "bgDark": "#FF3AAE",
-        "textDark": "#0B0B10",
-        "bgLight": "#FF3AAE",
-        "textLight": "#0B0B10"
+      "dark": {
+        "bg-primary": "#FF3AAE",
+        "text-primary": "#0B0B10",
+        "bg-secondary": "#171722",
+        "text-secondary": "#F6F2EB",
+        "border-secondary": "#9C9488",
+        "bg-disabled": "#12121A",
+        "text-disabled": "#9C9488"
       },
-      "secondary": {
-        "bgDark": "#171722",
-        "textDark": "#F6F2EB",
-        "bgLight": "#CFC7BB",
-        "textLight": "#0B0B10"
-      },
-      "disabled": {
-        "bgDark": "#12121A",
-        "textDark": "#9C9488",
-        "bgLight": "#CFC7BB",
-        "textLight": "#9C9488"
+      "light": {
+        "bg-primary": "#FF3AAE",
+        "text-primary": "#0B0B10",
+        "bg-secondary": "#CFC7BB",
+        "text-secondary": "#0B0B10",
+        "border-secondary": "#171722",
+        "bg-disabled": "#CFC7BB",
+        "text-disabled": "#9C9488"
       }
     },
     "card": {
-      "default": {
-        "bgDark": "#12121A",
-        "borderDark": "#171722",
-        "bgLight": "#F6F2EB",
-        "borderLight": "#CFC7BB"
+      "dark": {
+        "bg": "#12121A",
+        "border": "#171722",
+        "border-hover": "#FF3AAE",
+        "shadow": "0 2px 8px rgba(0, 0, 0, 0.3)",
+        "shadow-hover": "0 4px 12px rgba(255, 58, 174, 0.15)"
       },
-      "hover": {
-        "shadowDark": "0 4px 12px rgba(255, 58, 174, 0.1)",
-        "shadowLight": "0 4px 12px rgba(255, 58, 174, 0.1)"
+      "light": {
+        "bg": "#F6F2EB",
+        "border": "#CFC7BB",
+        "border-hover": "#171722",
+        "shadow": "0 2px 8px rgba(11, 11, 16, 0.1)",
+        "shadow-hover": "0 4px 12px rgba(11, 11, 16, 0.18)"
       }
     },
     "navigation": {
-      "linkColorDark": "#F6F2EB",
-      "linkColorHoverDark": "#FF3AAE",
-      "linkColorActiveDark": "#FF3AAE",
-      "underlineActiveDark": "#FF3AAE",
-      "linkColorLight": "#0B0B10",
-      "linkColorHoverLight": "#FF3AAE",
-      "linkColorActiveLight": "#FF3AAE",
-      "underlineActiveLight": "#FF3AAE"
+      "shared": {
+        "underline-thickness": "2px",
+        "underline-offset": "6px",
+        "focus-ring-width": "2px",
+        "focus-ring-offset": "3px",
+        "transition": "200ms ease"
+      },
+      "dark": {
+        "link-color": "#F6F2EB",
+        "link-color-hover": "#F6F2EB",
+        "link-color-active": "#F6F2EB",
+        "underline-active": "#FF3AAE",
+        "focus-ring": "#FF3AAE",
+        "surface": "#0B0B10",
+        "overlay-bg": "rgba(11, 11, 16, 0.7)"
+      },
+      "light": {
+        "link-color": "#0B0B10",
+        "link-color-hover": "#0B0B10",
+        "link-color-active": "#0B0B10",
+        "underline-active": "#FF3AAE",
+        "focus-ring": "#0B0B10",
+        "surface": "#F6F2EB",
+        "overlay-bg": "rgba(11, 11, 16, 0.5)"
+      }
     },
-    "formInput": {
-      "bgDark": "#0B0B10",
-      "borderDark": "#171722",
-      "borderFocusedDark": "#FF3AAE",
-      "textDark": "#F6F2EB",
-      "errorBorderDark": "#FF3AAE",
-      "errorTextDark": "#FF3AAE",
-      "placeholderDark": "#9C9488",
-      "bgLight": "#F6F2EB",
-      "borderLight": "#CFC7BB",
-      "borderFocusedLight": "#FF3AAE",
-      "textLight": "#0B0B10",
-      "errorBorderLight": "#FF3AAE",
-      "errorTextLight": "#C4005E",
-      "placeholderLight": "#5C5248"
+    "form-input": {
+      "dark": {
+        "bg": "#171722",
+        "border": "#9C9488",
+        "border-focused": "#FF3AAE",
+        "text": "#F6F2EB",
+        "error-border": "#FF3AAE",
+        "error-text": "#FF3AAE",
+        "placeholder": "#CFC7BB"
+      },
+      "light": {
+        "bg": "#F6F2EB",
+        "border": "#171722",
+        "border-focused": "#8A63FF",
+        "text": "#0B0B10",
+        "error-border": "#FF3AAE",
+        "error-text": "#0B0B10",
+        "placeholder": "#171722"
+      }
     }
   },
   "unapprovedCandidates": {
-    "note": "The following candidates are explicitly NOT included in this export and remain unapproved.",
-    "R3": "Responsive Typography — Not approved",
-    "T1": "Additional Typography — Not approved",
-    "RT2": "Reader Typography Controls — Not approved",
-    "C1": "Reader Continuity/Progress Tracking — Not approved"
+    "note": "Intentionally absent from this export.",
+    "R3": "Responsive typography",
+    "T1": "Additional typography",
+    "RT2": "Reader typography controls",
+    "C1": "Reader continuity / progress tracking"
   }
 }

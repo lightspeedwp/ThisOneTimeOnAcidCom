@@ -8,7 +8,8 @@ import { Check, X } from '@phosphor-icons/react';
 import '../../../../../styles/blocks/reader-access-form.css';
 
 export interface ReaderAccessFormProps {
-  onVerified?: (sessionId: string) => void;
+  /** Called after verification with the session expiry (the token stays in an HttpOnly cookie) */
+  onVerified?: (sessionExpiresAt: string) => void;
   onError?: (error: string) => void;
 }
 
@@ -68,11 +69,13 @@ export function ReaderAccessForm({ onVerified, onError }: ReaderAccessFormProps)
         body: JSON.stringify({ email, code }),
       });
 
-      const data = (await res.json()) as { state: string; sessionId?: string };
+      const data = (await res.json()) as { state?: string; expiresAt?: string };
 
-      if (data.state === 'verified' && data.sessionId) {
+      // The session token is set as an HttpOnly cookie and never returned in
+      // the body, so success is the 201 status plus the verified state.
+      if (res.ok && data.state === 'verified') {
         setStep('verified');
-        onVerified?.(data.sessionId);
+        onVerified?.(data.expiresAt ?? 'verified');
       } else if (data.state === 'code-expired') {
         setError('Code expired. Please request a new one.');
         setStep('email');

@@ -1,5 +1,7 @@
 # Navigation Specification — Spec 004 (US1)
 
+> ⚠️ **Superseded 2026-11-20.** This file uses routes that do not exist in the app (`/about`, `/book`) and placeholder `example.com` URLs. Use [`prompt-1-navigation-exposure-output.md`](./prompt-1-navigation-exposure-output.md) for exposure rules and [`prompt-2b-navigation-design-output.md`](./prompt-2b-navigation-design-output.md) for the component design.
+
 **Date**: 2026-11-19  
 **User Story**: US1 (Design Specification Hand-off)  
 **Task**: T064 (Phase 9 Convergence)  

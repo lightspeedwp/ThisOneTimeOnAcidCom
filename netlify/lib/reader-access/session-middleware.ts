@@ -8,12 +8,32 @@
  * - 200: Valid session, proceed
  * - 401: Missing/invalid/expired/terminated session, deny access
  * - 500: Storage error, deny to be safe
+ *
+ * Security:
+ * - Uses constant-time token comparison to prevent timing attacks
+ * - All token comparisons done via constantTimeTokenCompare
+ * - No timing-based information leakage on invalid tokens
  */
 
-import { validateSession } from './session-service';
-import { getSessionTokenFromHeaders } from './session-cookie';
-import { generateDeviceFingerprint, extractClientIp, extractClientTimezone } from './device-fingerprint';
-import { FingerprintInput, SessionValidationResult } from './session';
+import {
+  validateSession,
+  authenticateSessionToken,
+  renewSessionOnActivity,
+} from './session-service';
+import {
+  getSessionTokenFromHeaders,
+  createSessionCookie,
+  formatSessionCookie,
+  clearSessionCookie,
+} from './session-cookie';
+import {
+  generateDeviceFingerprint,
+  extractClientIp,
+  extractClientTimezone,
+  FingerprintInput,
+} from './device-fingerprint';
+import { Session, SessionValidationResult } from './session';
+import { constantTimeTokenCompare } from './crypto';
 
 /**
  * Middleware request context extracted from HTTP request.
@@ -290,5 +310,71 @@ export function createErrorResponse(error: string, statusCode: number = 401) {
     error,
     action: statusCode === 401 ? 'reverify_email' : 'retry',
     statusCode,
+  };
+}
+
+/**
+ * Build fingerprint inputs from a Fetch API request.
+ * Netlify sets x-nf-client-connection-ip; x-forwarded-for is the fallback.
+ */
+export function fingerprintFromRequest(req: Request): FingerprintInput {
+  const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+  return {
+    userAgent: req.headers.get('user-agent') || 'unknown',
+    ipAddress: req.headers.get('x-nf-client-connection-ip') || forwarded || 'unknown-ip',
+    timezone: req.headers.get('x-timezone') || undefined,
+  };
+}
+
+/** Outcome of authenticateRequest for protected endpoints. */
+export type AuthenticatedRequest =
+  | {
+      isValid: true;
+      session: Session;
+      /** Set-Cookie value that restarts the browser's 30-day Max-Age */
+      setCookie: string;
+    }
+  | {
+      isValid: false;
+      statusCode: number;
+      reason: NonNullable<SessionValidationResult['reason']> | 'storage_error';
+      /** Set-Cookie value that clears the stale cookie */
+      setCookie: string;
+    };
+
+/**
+ * T018/T019: Authenticate a protected request from its session cookie.
+ *
+ * On success the session is renewed (rolling 30-day window) and a refreshed
+ * cookie is returned, so the browser-side expiry moves with the server-side
+ * one. On failure the caller should answer with statusCode and clear the
+ * cookie using setCookie.
+ *
+ * @param req Incoming request
+ * @param options.renew Set false for read-only status checks
+ */
+export async function authenticateRequest(
+  req: Request,
+  options: { renew?: boolean } = {}
+): Promise<AuthenticatedRequest> {
+  const token = getSessionTokenFromHeaders(req.headers);
+  const result = await authenticateSessionToken(token);
+
+  if (!result.isValid || !result.session) {
+    return {
+      isValid: false,
+      statusCode: result.statusCode,
+      reason: result.statusCode === 500 ? 'storage_error' : result.reason ?? 'invalid_token',
+      setCookie: clearSessionCookie(),
+    };
+  }
+
+  const session =
+    options.renew === false ? result.session : await renewSessionOnActivity(result.session);
+
+  return {
+    isValid: true,
+    session,
+    setCookie: formatSessionCookie(createSessionCookie(session.sessionId)),
   };
 }

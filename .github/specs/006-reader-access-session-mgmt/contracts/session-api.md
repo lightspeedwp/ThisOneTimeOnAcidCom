@@ -65,19 +65,23 @@ Set-Cookie: sessionToken=<uuid>; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age
 
 ### Session Creation Logic
 
-1. Validate verification code (Phase 2 storage lookup)
-2. Mark code as consumed (atomic delete)
-3. Generate `sessionId` (cryptographically secure)
-4. Create Session record (email + deviceId + 30-day expiry)
-5. Set HttpOnly cookie with sessionId
-6. Return 201 with Set-Cookie header
+1. **Rate limit check**: Count session creation attempts for email in past 15 minutes; return 429 if ≥ 5 attempts
+2. Validate verification code (Phase 2 storage lookup)
+3. Mark code as consumed (atomic delete)
+4. Generate `sessionId` (cryptographically secure)
+5. Create Session record (email + deviceId + 30-day expiry)
+6. **Log event**: Record session creation in audit log (email, sessionId, deviceId, timestamp, status)
+7. Set HttpOnly cookie with sessionId
+8. Return 201 with Set-Cookie header
 
 ### Security Notes
 
+- Rate limit: 5 attempts per email per 15-minute window (sliding window)
 - Code is consumed immediately (no reuse)
 - Session lifetime starts at creation (30 days)
 - Cookie set to HttpOnly + Secure + SameSite=Lax
 - No token in response body (cookie-only)
+- All lifecycle events logged to audit trail for compliance
 
 ---
 
@@ -91,7 +95,7 @@ Set-Cookie: sessionToken=<uuid>; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age
 
 ### Request
 
-```
+```text
 GET /api/reader/chapter/01-part-1
 Cookie: sessionToken=<uuid>
 ```
@@ -106,7 +110,7 @@ Cookie: sessionToken=<uuid>
 
 ### Response (200 OK - Valid Session)
 
-```
+```text
 HTTP/1.1 200 OK
 X-Session-Valid: true
 X-Session-Expires: 2026-12-19T14:00:00Z
@@ -116,7 +120,7 @@ X-Session-Expires: 2026-12-19T14:00:00Z
 
 ### Error Response (401 Unauthorized)
 
-```
+```text
 HTTP/1.1 401 Unauthorized
 Set-Cookie: sessionToken=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0
 
@@ -159,14 +163,14 @@ const isTokenValid = constantTimeEqual(
 
 Implicit in chapter access (no explicit renewal endpoint)
 
-```
+```text
 GET /api/reader/chapter/01-part-1
 Cookie: sessionToken=<uuid>
 ```
 
 ### Renewal Logic
 
-```
+```text
 On successful session validation:
   renewedAt ← now
   expiresAt ← now + 30 days
@@ -176,7 +180,7 @@ On successful session validation:
 
 ### Response Headers
 
-```
+```text
 X-Session-Renewed: true
 X-Session-New-Expiry: 2026-12-19T14:00:00Z
 ```
@@ -197,14 +201,14 @@ X-Session-New-Expiry: 2026-12-19T14:00:00Z
 
 ### Request
 
-```
+```text
 POST /api/reader/session/logout
 Cookie: sessionToken=<uuid>
 ```
 
 ### Response (200 OK)
 
-```
+```text
 HTTP/1.1 200 OK
 Set-Cookie: sessionToken=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0
 
@@ -238,7 +242,7 @@ Set-Cookie: sessionToken=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0
 
 **When**: Before creating new session
 
-```
+```text
 activeDeviceCount = count sessions where email = X AND status = "active"
 if activeDeviceCount >= concurrentDeviceLimit:
   return 409 Conflict
@@ -256,7 +260,7 @@ if activeDeviceCount >= concurrentDeviceLimit:
 
 **Function**: `netlify/functions/reader-device-logout.ts`
 
-```
+```text
 POST /api/reader/device/:deviceId/logout
 {
   "email": "reader@example.com",
@@ -300,7 +304,7 @@ All errors follow consistent format:
 
 ### SessionToken Cookie
 
-```
+```text
 Name: sessionToken
 Value: UUID/ULID (cryptographically random, 32+ bytes)
 HttpOnly: true (JavaScript cannot access)
@@ -372,7 +376,7 @@ Max-Age: 2592000 (30 days in seconds)
 ### Storage Schema
 
 Sessions stored in Netlify Blobs:
-```
+```text
 Key: session:${email}:${deviceId}
 Value: { sessionId, email, deviceId, createdAt, expiresAt, renewedAt, terminatedAt, status, chapterId }
 ```
@@ -384,7 +388,45 @@ Session validation must run as:
 2. OR Edge Function (fastest path; runs before origin)
 3. OR Middleware (application level)
 
+---
+
+## 12. Audit Trail & Logging
+
+**Purpose**: Record all session lifecycle events for security audit, compliance, and operational troubleshooting.
+
+### Logged Events
+
+Every session lifecycle event MUST be logged with these fields:
+
+| Event | Fields | Timing |
+|-------|--------|--------|
+| session_created | email, sessionId, deviceId, createdAt, ip_address | Immediately after session created |
+| session_renewed | email, sessionId, deviceId, renewedAt, chapterId | On each renewal (< 500ms) |
+| session_terminated | email, sessionId, deviceId, terminatedAt, reason (logout\|expired) | Immediately on logout or expiry |
+| rate_limit_exceeded | email, attempt_count, timestamp | When 5+ attempts detected |
+
+### Audit Log Storage
+
+- **Location**: Separate audit log store (Netlify Blobs, Logs, or external logging service)
+- **Retention**: Minimum 90 days for compliance
+- **Format**: JSON with ISO 8601 timestamps
+- **Latency**: Log events within 500ms of occurrence (async preferred)
+- **Queryability**: Support queries by email, sessionId, dateRange for troubleshooting
+
+### Monitoring & Alerting
+
+- Monitor rate-limit trigger frequency (alert if > 10 per hour per email)
+- Monitor session creation latency (alert if p95 > 300ms)
+- Monitor validation latency (alert if p95 > 150ms)
+- Track session renewal coalescing efficiency (% of renewals coalesced)
+
 ### Testing
+
+- Unit tests: Session creation, renewal, termination logic
+- Integration tests: Cookie handling, Blobs persistence
+- Security tests: Timing attacks, token replay, device limit enforcement
+- E2E tests: Full user flows (verify → access → logout)
+- **Audit tests**: Verify all events logged with correct fields and latency < 500ms
 
 - Unit tests: Session creation, renewal, termination logic
 - Integration tests: Cookie handling, Blobs persistence

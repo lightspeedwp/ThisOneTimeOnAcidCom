@@ -12,7 +12,7 @@
 
 import { Context } from '@netlify/functions';
 import { createJsonResponse, createErrorResponse } from '../lib/reader-access/responses';
-import { getSession } from '../lib/reader-access/store';
+import { authenticateRequest } from '../lib/reader-access/session-middleware';
 import { EditionReader } from '../lib/reader-access/edition';
 
 
@@ -50,23 +50,14 @@ export default async (req: Request, context: Context) => {
       return createErrorResponse('Chapter ID required', 400);
     }
 
-    // Verify reader session
-    const sessionCookie = req.headers.get('cookie')?.split('; ').find(c => c.startsWith('reader_session='));
-    if (!sessionCookie) {
-      return createErrorResponse('Unauthorized: No session cookie', 401);
+    // Verify reader session (sessionToken cookie → hashed-token index)
+    const auth = await authenticateRequest(req);
+    if (!auth.isValid) {
+      const response = createErrorResponse('Unauthorized: Invalid session', auth.statusCode);
+      response.headers.set('Set-Cookie', auth.setCookie);
+      return response;
     }
-
-    const sessionId = sessionCookie.split('=')[1];
-    const session = await getSession(sessionId);
-
-    if (!session) {
-      return createErrorResponse('Unauthorized: Invalid session', 401);
-    }
-
-    // Check session expiration
-    if (new Date(session.expiresAt) < new Date()) {
-      return createErrorResponse('Unauthorized: Session expired', 401);
-    }
+    const { session } = auth;
 
     // Get chapter metadata
     const edition = new EditionReader();
@@ -108,6 +99,7 @@ export default async (req: Request, context: Context) => {
       headers: {
         'Content-Type': 'application/json',
         'Cache-Control': 'private, max-age=3600',
+        'Set-Cookie': auth.setCookie,
       },
     });
   } catch (error) {

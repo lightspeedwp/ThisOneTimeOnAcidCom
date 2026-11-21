@@ -22,16 +22,27 @@
 
 ---
 
-## Phase 1: Gate 2 Approval & Environment Validation
+## Phase 1: Gate 2 & SC-004 Approval
 
-**Purpose**: Secure design baseline approval and Figma Make environment readiness
+**Purpose**: Secure design baseline approval and execution model approval (SC-004: Claude Direct Execution)
 
+**Gate 2 Approval**:
 - [ ] T001 Review GATE_2_SIGN_OFF_SUMMARY.md with Ash (project owner)
 - [ ] T002 Confirm design baseline locked: Space Grotesk, Inter, 9-color palette (check `.github/specs/004-book-website-make/exports/GATE_2_SIGN_OFF_SUMMARY.md`)
-- [ ] T003 Validate Figma Make environment access: file key, API token, workspace ready (or mark blocked if unavailable)
 - [ ] T004 [P] Verify all 4 critical fixes from Gate 2 audit (Prompt 2B colors #FF3AAE, Prompt 3A status, reference paths, Decision 7 clarity)
 
-**Checkpoint**: Gate 2 approval confirmed - ready for Phase A execution
+**SC-004 Approval** (Execution Model Pivot):
+- [ ] T001b **CRITICAL GATE** Review SC-004_EXECUTION_MODEL_PIVOT.md with Ash (project owner) — Claude direct execution replaces Figma Make for Prompts 1, 2A, 2B
+  - Proposal: Pivot from Figma Make to Claude direct execution
+  - Benefits: Faster iteration, version control, Spec 005 continuity
+  - Timeline: No impact (45–60 min Claude vs. 30–45 min Figma Make)
+  - Approval checkbox: [ ] ✅ **APPROVE** or [ ] ⏸️ **REQUEST CHANGES**
+  - Collect signature/timestamp from Ash
+
+**Environment Check** (Deprecated Figma requirement, kept for reference):
+- [x] T003 ~~Validate Figma Make environment access~~ **SUPERSEDED BY SC-004** — Claude execution requires no Figma environment
+
+**Checkpoint**: Gate 2 + SC-004 approval confirmed - ready for Phase A execution via Claude
 
 ---
 
@@ -50,11 +61,11 @@
 - [ ] T006 [US1] Validate Prompt 2A exports both CSS variables and JSON design tokens matching 9-color approved baseline (`contracts/prompt-2a-design-baseline.md`)
 - [ ] T007 [US1] Validate Prompt 2B navigation component shows 4 visible items with #FF3AAE hover/active state in all responsive breakpoints (`contracts/prompt-2b-navigation-design.md`)
 
-### Implementation for US1
+### Implementation for US1 (Claude Direct Execution — SC-004 approved)
 
-- [x] T008 [P] [US1] Execute Prompt 1: Navigation Exposure in Figma Make ~~(hide /speaking, /events, /media from sitemap; preserve as noindex)~~ **BLOCKED - Figma Make environment not available**
-- [x] T009 [P] [US1] Execute Prompt 2A: Design Baseline Export ~~(export CSS variables + JSON tokens with exact approved colors/typography)~~ **BLOCKED - Figma Make environment not available**
-- [x] T010 [P] [US1] Execute Prompt 2B: Navigation Design ~~(component design with all states, 4 visible items, responsive breakpoints 1024px/768px)~~ **BLOCKED - Figma Make environment not available**
+- [ ] T008 [P] [US1] Execute Prompt 1: Navigation Exposure via Claude ~~(Figma Make)~~ (produce navigation enforcement spec + implementation checklist; validate against acceptance criteria)
+- [ ] T009 [P] [US1] Execute Prompt 2A: Design Baseline Export via Claude ~~(Figma Make)~~ (export CSS variables + JSON tokens; validate both files parse correctly)
+- [ ] T010 [P] [US1] Execute Prompt 2B: Navigation Design via Claude ~~(Figma Make)~~ (produce TypeScript component spec + responsive CSS + accessibility checklist)
 - [ ] T011 [US1] Validate specification contracts match acceptance criteria (manual design reference from `contracts/` folder)
 
 **Checkpoint**: Phase A complete - US1 (Design Hand-off) is fully executable and approved
@@ -76,7 +87,7 @@
 ### Implementation for US2 (Claude Direct Execution — SC-004 approved)
 
 - [ ] T014 [US2] Review Prompt 3A contract with blocking decision status (awaits Decisions 3, 4, 5, 6: code expiry timing, email provider, manuscript status, newsletter destination)
-- [x] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) in Figma Make **BLOCKED - Figma Make environment not available**
+- [ ] T015 [US2] Once Decisions 3, 4, 5, 6 resolved: Execute Prompt 3A (reader access copy & forms) via Claude ~~(Figma Make)~~ (produce form specification + email template + error message matrix)
 - [ ] T016 [US2] Validate Prompt 3A specification: approved copy present, form states documented, newsletter link explicit non-subscription statement (manual review from `contracts/prompt-3a-reader-access.md`)
 
 **Checkpoint**: US2 (Reader Access) → Spec 005 responsibility. Contracts remain for reference.
@@ -108,6 +119,15 @@
 - [ ] T029 [US3] Document implementation prerequisites: list what must be verified/confirmed before each prompt can execute (Figma Make environment, manuscript status, email provider confirmed, etc.)
 
 **Checkpoint**: All blocking decisions documented with implementation guidance - development has clear visibility on decision gates and parallelization opportunities
+### Implementation for US3 (Claude Direct Execution — SC-004 approved; after Decision Resolution)
+
+- [ ] T025 [US3] Once Decisions 1 & 2 resolved: Execute Prompt 3B (recovery flows) via Claude ~~(Figma Make)~~ (produce recovery state matrix + error handling spec)
+- [ ] T026 [US3] Once Decision 3 resolved: Execute Prompt 3C (error states, code-expiry messaging) via Claude ~~(Figma Make)~~ (produce error message matrix + timeout handling spec)
+- [ ] T027 [US3] Validate Prompt 3B and 3C specifications; verify race condition handling and error messaging match resolved decisions (manual review from `contracts/`)
+
+**Checkpoint**: All blocking decisions resolved - Phase B execution unblocked
+
+**BLOCKED BY**: Decisions 1, 2, 3, 4, 5, 6 (parallel resolution track)
 
 ---
 
