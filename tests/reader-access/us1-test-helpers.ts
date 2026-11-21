@@ -13,8 +13,14 @@ export const memoryBlobs = new Map<string, string>();
 export function createMemoryStore() {
   return {
     get: async (key: string) => memoryBlobs.get(key) ?? null,
-    set: async (key: string, value: string) => {
+    // Honours onlyIfNew like Netlify Blobs: a conditional write to an
+    // existing key changes nothing and reports modified: false.
+    set: async (key: string, value: string, options?: { onlyIfNew?: boolean }) => {
+      if (options?.onlyIfNew && memoryBlobs.has(key)) {
+        return { modified: false };
+      }
       memoryBlobs.set(key, value);
+      return { modified: true };
     },
     delete: async (key: string) => {
       memoryBlobs.delete(key);
