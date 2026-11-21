@@ -27,7 +27,7 @@
 **Execution Model** (SC-004, approved 2026-11-20):
 - **Primary**: Claude direct execution for Prompts 1, 2A, 2B
   - Each contract includes: Input spec, output format (CSS/JSON/TypeScript), validation criteria, example output
-  - Output: Markdown specs + code/data files (not Figma canvas)
+  - Output: Markdown specs + code/data files (not Claude Code canvas)
   - Timeline: 45–60 min total (Prompts 1, 2A, 2B)
   - Deliverable: Version-controlled, reviewable, iterable specs
 - **Deprecated**: Figma Make execution (replaced by SC-004)
@@ -56,7 +56,7 @@
 
 ✅ **Repository Governance**: Specifications stored in `.github/specs/004-book-website-make/`; no protected files modified
 
-✅ **Bundler Compatibility**: Documentation-only package; no code syntax constraints apply. Figma Make compatibility verified via version reconciliation and prompt previewing.
+✅ **Bundler Compatibility**: Documentation-only package; no code syntax constraints apply. Claude Code compatibility verified via version reconciliation and prompt previewing.
 
 ✅ **Protected Content**: No hardcoded UI strings; all derive from design baseline and source specifications
 
@@ -77,7 +77,7 @@
 ├── research.md                          # Phase 0: blocking decision analysis
 ├── data-model.md                        # Phase 1: entities and relationships
 ├── quickstart.md                        # Phase 1: validation and approval flow
-├── contracts/                           # Phase 1: Figma Make prompt contracts
+├── contracts/                           # Phase 1: Claude Code prompt contracts
 │   ├── prompt-1-navigation-exposure.md
 │   ├── prompt-2a-design-baseline.md
 │   ├── prompt-2b-navigation-design.md
@@ -104,7 +104,7 @@
 └── 06-website-reading-prd.md            # Product requirements (v1.1.1)
 ```
 
-**Structure Decision**: Documentation-only package. No code structure required. Source specifications analyzed, reconciled, and staged for Figma Make execution. All deliverables remain in `.github/specs/004-book-website-make/` with no backend/frontend splits or implementation code paths.
+**Structure Decision**: Documentation-only package. No code structure required. Source specifications analyzed, reconciled, and staged for Claude Code execution. All deliverables remain in `.github/specs/004-book-website-make/` with no backend/frontend splits or implementation code paths.
 
 ---
 
