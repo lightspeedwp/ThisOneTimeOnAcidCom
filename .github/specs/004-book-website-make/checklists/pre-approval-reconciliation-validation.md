@@ -13,7 +13,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 
 1. ✅ **Version reconciliation** — Zero conflicts, precedence rule applied
 2. ✅ **Source file inventory** — All 6 files analyzed and reconciled
-3. ✅ **Prompt preview completeness** — All 4 unblocked prompts ≥95% complete
+3. ✅ **Prompt preview completeness** — Prompts 1, 2A, 2B each ≥95% complete (SC-003 revised; 3A handed to Spec 005)
 4. ✅ **Approval boundaries** — All elements marked (✓, ~, ❌)
 5. ✅ **Blocking decisions documentation** — All 7 decisions with 3+ options each
 6. ✅ **Blocking decisions audit** — All decisions clearly marked in contracts with options visible
@@ -27,7 +27,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 | ------ | ---------- | ----------- | -------- | ---------- |
 | **T052** | version-reconciliation.md | FR-002 compliance | ✅ PASS | All 6 files reconciled; File 05 v1.9.0 authoritative; zero critical conflicts |
 | **T053** | prompt-1-exact-preview.md | SC-002 compliance | ✅ PASS | 100% complete; 4 required elements: before/after, 14 steps, 10 criteria, 3 non-changes |
-| **T054** | prompt-preview-validation.md | SC-003 compliance | ✅ PASS | All 4 prompts ≥95% average; P1: 100%, P2A: 89%, P2B: 100%, P3A: 91% |
+| **T054** | prompt-preview-validation.md | SC-003 compliance | ✅ PASS (revised 2026-11-20) | SC-003 revised scope (approved 2026-11-19): each Spec 004 prompt ≥95%. P1: 100%, P2A: 95%, P2B: 100%. P3A (~91%) handed to Spec 005. The earlier PASS used an average that let P2A pass at 89%; that has been corrected |
 | **T055** | approval-boundaries.md | SC-007 compliance | ✅ PASS | All boundaries marked (✓/~/❌); zero ambiguous items; design baseline locked |
 | **T056** | source-file-inventory.md | FR-001 compliance | ✅ PASS | All 6 files documented with versions, timestamps, authority matrix |
 | **T057** | blocking-decisions-validation.md | SC-004 compliance | ✅ PASS | All 7 decisions documented with 3+ options (23 total); impact assessment for each |
@@ -41,7 +41,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 
 | Check | Status | Evidence | Notes |
 | ------- | -------- | ---------- | ------- |
-| **All 6 source files analyzed** | ✅ | source-file-inventory.md (complete audit) | Files 01–06 from content/book/ directory |
+| **All 6 source files analyzed** | ✅ | source-file-inventory.md (complete audit) | Files 01–06 in `references/` (formerly `content/book/`) |
 | **Version precedence rule applied** | ✅ | version-reconciliation.md (SemVer rule) | File 05 v1.9.0 (highest) authoritative for decisions |
 | **Zero critical conflicts** | ✅ | version-reconciliation.md (conflict matrix) | File 06 v1.1.1 superseded by File 05 v1.9.0 (resolved) |
 | **Timestamps documented** | ✅ | source-file-inventory.md (timestamp audit) | 5 current (2026-11-08/09), 1 older (2026-11-04) |

@@ -1,6 +1,6 @@
 # Implementation Plan: Book Website Claude Direct Execution
 
-**Branch**: `feat/spec-004-claude-execution-model` | **Date**: 2026-11-09 | **Pivoted**: 2026-11-20 | **Spec**: [.github/specs/004-book-website-make/spec.md](./spec.md)
+**Branch**: `main` (historical: `feat/spec-004-claude-execution-model`) | **Version**: 1.0.0 (locked, see spec.md) | **Date**: 2026-11-09 | **Pivoted**: 2026-11-20 | **Spec**: [.github/specs/004-book-website-make/spec.md](./spec.md)
 
 **Input**: Feature specification from `.github/specs/004-book-website-make/spec.md`
 
@@ -27,7 +27,7 @@
 **Execution Model** (SC-004, approved 2026-11-20):
 - **Primary**: Claude direct execution for Prompts 1, 2A, 2B
   - Each contract includes: Input spec, output format (CSS/JSON/TypeScript), validation criteria, example output
-  - Output: Markdown specs + code/data files (not Figma canvas)
+  - Output: Markdown specs + code/data files (not Claude Code canvas)
   - Timeline: 45–60 min total (Prompts 1, 2A, 2B)
   - Deliverable: Version-controlled, reviewable, iterable specs
 - **Deprecated**: Figma Make execution (replaced by SC-004)
@@ -56,7 +56,7 @@
 
 ✅ **Repository Governance**: Specifications stored in `.github/specs/004-book-website-make/`; no protected files modified
 
-✅ **Bundler Compatibility**: Documentation-only package; no code syntax constraints apply. Figma Make compatibility verified via version reconciliation and prompt previewing.
+✅ **Bundler Compatibility**: Documentation-only package; no code syntax constraints apply. Claude Code compatibility verified via version reconciliation and prompt previewing.
 
 ✅ **Protected Content**: No hardcoded UI strings; all derive from design baseline and source specifications
 
@@ -77,7 +77,7 @@
 ├── research.md                          # Phase 0: blocking decision analysis
 ├── data-model.md                        # Phase 1: entities and relationships
 ├── quickstart.md                        # Phase 1: validation and approval flow
-├── contracts/                           # Phase 1: Figma Make prompt contracts
+├── contracts/                           # Phase 1: Claude Code prompt contracts
 │   ├── prompt-1-navigation-exposure.md
 │   ├── prompt-2a-design-baseline.md
 │   ├── prompt-2b-navigation-design.md
@@ -104,7 +104,7 @@
 └── 06-website-reading-prd.md            # Product requirements (v1.1.1)
 ```
 
-**Structure Decision**: Documentation-only package. No code structure required. Source specifications analyzed, reconciled, and staged for Figma Make execution. All deliverables remain in `.github/specs/004-book-website-make/` with no backend/frontend splits or implementation code paths.
+**Structure Decision**: Documentation-only package. No code structure required. Source specifications analyzed, reconciled, and staged for Claude Code execution. All deliverables remain in `.github/specs/004-book-website-make/` with no backend/frontend splits or implementation code paths.
 
 ---
 
@@ -114,15 +114,15 @@
 
 | Directory | Purpose | Contents | Status |
 |-----------|---------|----------|--------|
-| `contracts/` | Figma Make prompt specifications (input) | Prompt 1–3C contract definitions | Reference (reader-access moved to Spec 005) |
+| `contracts/` | Claude Code prompt specifications (input) | Prompt 1–3C contract definitions | Reference (reader-access moved to Spec 005) |
 | `exports/` | Final approved artifacts (output) | Design tokens, checklists, handoff docs | Active |
 | `references/` | Source specification documents | Six specification files (01–06) with versions | Read-only reference |
-| `staged/` | Interim Figma Make outputs and drafts | Historical drafts from initial analysis; regenerated prompt outputs before finalization | Available for future regeneration; retained for reference |
+| `staged/` | Interim prompt drafts (historical) | Historical drafts from initial analysis (Nov 9) | Frozen, for reference only. Not authoritative |
 | `checklists/` | Quality validation and approval tracking | Pre-approval, specification-quality, prompt-preview checklists | Reference |
 
 <!-- markdownlint-enable MD060 -->
 
-**Note**: The `staged/` folder contains historical drafts from initial analysis (Nov 9) and is retained for reference only and future Figma Make regeneration. Authoritative versions are in the root directory (spec.md, plan.md, tasks.md, exports/) with all Phase 9 convergence updates applied.
+**Note**: The `staged/` folder contains historical drafts from initial analysis (Nov 9) and is retained for reference only. Figma Make is deprecated (SC-004, 2026-11-20), so these drafts will not be regenerated; do not edit them. `continuations/` is archived in the same way (superseded session hand-off prompts). Authoritative versions are in the root directory (spec.md, plan.md, tasks.md, exports/) with all Phase 9 convergence updates applied.
 
 ## Complexity Tracking
 
@@ -155,6 +155,6 @@ No violations. Constitution check passes; no complexity trade-offs required.
 **Prerequisites**: research.md complete
 
 **Deliverables**:
-- **data-model.md**: Specification File, Design Baseline, Design Candidate, Blocking Decision, Figma Make Prompt, Preflight Analysis entities with fields and relationships
+- **data-model.md**: Specification File, Design Baseline, Design Candidate, Blocking Decision, Claude Code Prompt, Preflight Analysis entities with fields and relationships
 - **contracts/**: Six Figma Make prompt specifications (Prompts 1, 2A, 2B, 3A exact previews; Prompts 3B, 3C blocked with prerequisites)
 - **quickstart.md**: Approval flow, validation scenarios, and gate conditions for staged prompt execution

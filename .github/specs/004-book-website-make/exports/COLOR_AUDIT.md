@@ -3,7 +3,14 @@
 **Date**: 2026-11-20  
 **Phase**: 9 Convergence (T071)  
 **Baseline**: Design Brief v1.1.2  
-**Status**: Audit complete — no non-baseline colors found
+**Status**: Corrected 2026-11-20. The first audit missed non-baseline colours in the Prompt 3A/3C execution guides and data-model.md
+
+
+> **Correction (Phase 9 reconciliation, 2026-11-20)**: The audit below said no non-baseline colours were found. That was wrong. It checked the 3A/3C *contracts* but not their *execution guides*.
+> - `contracts/prompt-3a-execution-guide.md`: `#1a1a1a`, `#ffffff`, `#e8d4b8`, `#d4a574`, `#8b0000`, `#ff6b6b` and other greys/status colours. **Marked superseded** with a notice pointing to `design-tokens.json` (Spec 005 owns this guide)
+> - `contracts/prompt-3c-execution-guide.md`: error colours `#8b0000` / `#ff6b6b`. **Marked superseded** in the same way
+> - `data-model.md`: example value `#1a1a1a`. **Replaced** with baseline `#F6F2EB`
+> - `exports/GATE_2_READINESS_REPORT.md`: `#d4a574` appears only as a "Was:" record of an earlier fix. **Left as history**
 
 ---
 

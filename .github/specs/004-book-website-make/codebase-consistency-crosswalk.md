@@ -99,7 +99,7 @@ the existing style guide. Derived FR-004 and associated contracts instead
 describe design-token export and navigation design.
 
 Source stages 3A–3C concern podcast data, routing and playback. Derived
-FR-004/FR-005 and T022–T038 concern reader access, recovery and error
+FR-004/FR-005 and legacy T122–T138 (formerly T022–T038; see tasks.md Task ID scheme) concern reader access, recovery and error
 documentation.
 
 Keep both meanings visible until an exact amendment is approved. Do not

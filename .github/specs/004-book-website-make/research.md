@@ -48,7 +48,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | No expiry—recovery sessions valid indefinitely | Maximum UX convenience; highest security risk; may conflict with data retention policy |
 | D | Configurable per-reader basis (support override) | Flexibility for special cases; added complexity; support burden |
 
-**Decision**: ✅ APPROVED — Option A (30-day device lifecycle with recovery session refresh; absolute 30-day expiry enforced regardless of recovery activity)
+**Decision**: ✅ APPROVED — Option A: session refresh with absolute 30-day expiry (rolling refresh cannot extend access beyond 30 days from initial verification)
 
 **Impact on Prompt 3B**: Recovery flows specification depends on absolute device expiry for state management, cleanup schedules, and error messaging when device lifecycle expires.
 
