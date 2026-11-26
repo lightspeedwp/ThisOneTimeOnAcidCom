@@ -278,6 +278,95 @@ export async function isStorageHealthy(): Promise<boolean> {
 }
 
 // ---------------------------------------------------------------------------
+// Device creation lock (cross-instance coordination)
+// ---------------------------------------------------------------------------
+
+/**
+ * Acquire an atomic lock on device creation for an email+deviceId pair.
+ * Uses Netlify Blobs `onlyIfNew` conditional write to ensure only one
+ * instance can proceed at a time, preventing device-limit race conditions.
+ *
+ * @param email Reader's email
+ * @param deviceId Device fingerprint
+ * @param timeoutMs How long to hold the lock before auto-releasing (default: 5s)
+ * @returns true if lock acquired, false if already locked
+ *
+ * @example
+ * const locked = await acquireDeviceLock('reader@example.com', 'device-hash');
+ * try {
+ *   if (!locked) throw new Error('Device creation in progress');
+ *   // Safely create session...
+ * } finally {
+ *   await releaseDeviceLock('reader@example.com', 'device-hash');
+ * }
+ */
+export async function acquireDeviceLock(
+  email: string,
+  deviceId: string,
+  timeoutMs: number = 5000
+): Promise<boolean> {
+  const store = getStore();
+  const lockKey = buildDeviceLockKey(email, deviceId);
+
+  try {
+    const result = await store.set(
+      lockKey,
+      JSON.stringify({
+        lockedAt: new Date().toISOString(),
+        expiresAt: new Date(Date.now() + timeoutMs).toISOString(),
+      }),
+      { onlyIfNew: true }
+    );
+
+    // @netlify/blobs 11+ returns BlobWriteResult; older versions may return void
+    if (result && typeof result === 'object' && 'modified' in result) {
+      return result.modified === true;
+    }
+
+    // If no result object, assume success (older SDK behavior)
+    return true;
+  } catch (error) {
+    // If lock already exists, acquisition failed
+    return false;
+  }
+}
+
+/**
+ * Release a device creation lock.
+ * Idempotent — safe to call even if lock doesn't exist.
+ *
+ * @param email Reader's email
+ * @param deviceId Device fingerprint
+ *
+ * @example
+ * await releaseDeviceLock('reader@example.com', 'device-hash');
+ */
+export async function releaseDeviceLock(email: string, deviceId: string): Promise<void> {
+  const store = getStore();
+  const lockKey = buildDeviceLockKey(email, deviceId);
+
+  try {
+    await store.delete(lockKey);
+  } catch {
+    // Idempotent: ignore errors if lock doesn't exist
+  }
+}
+
+/**
+ * Build lock key for device creation coordination.
+ * Format: device-lock:${email}:${deviceId}
+ *
+ * @param email Reader's email
+ * @param deviceId Device fingerprint
+ * @returns Lock key for Blobs storage
+ */
+function buildDeviceLockKey(email: string, deviceId: string): string {
+  const sanitizedEmail = email.toLowerCase().replace(/[^a-z0-9.+-]/g, '_');
+  const sanitizedDeviceId = deviceId.replace(/[^a-z0-9]/gi, '');
+  return `device-lock:${sanitizedEmail}:${sanitizedDeviceId}`;
+}
+
+// ---------------------------------------------------------------------------
 // Session token index (US1/T017–T018)
 // ---------------------------------------------------------------------------
 

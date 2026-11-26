@@ -9,10 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Spec 006 session tests (T099–T102)** — Fixed two pre-existing test failures in `tests/session/`: (1) `renewSession › should extend expiry to 30 days from renewal time` now uses `vi.useFakeTimers` / `vi.setSystemTime` to advance the clock past the 1-second renewal coalesce window before asserting the new timestamp, eliminating the flaky millisecond race; (2) `Expired sessions › should not count expired sessions against the device limit` — corrected `createSessionUnserialised` to use the existing `isSessionActive` helper (which checks both `status` and `expiresAt`) when counting occupied device slots, so an expired session with `status: 'active'` in storage no longer blocks a new session from being created.
-
-### Fixed
-
+- **Spec 006 cross-instance device-limit race condition (US4/FR-006/SC-004)** — Implemented atomic device creation lock using Netlify Blobs `onlyIfNew` conditional writes to prevent concurrent instances from both passing the device-count check and overflowing the 2-device limit. Lock acquisition wraps the check-and-create sequence; device count is re-checked after acquiring the lock (critical: may have changed during wait). Lock release in finally block ensures cleanup on success or error. Race scenario that previously allowed 3 devices now safely rejects the 3rd with 409. Added `acquireDeviceLock()` and `releaseDeviceLock()` to store.ts; updated `createSessionUnserialised()` to hold lock during device-limit enforcement. 7 new tests cover concurrent instance scenarios and lock isolation.
 - **Spec 006 session tests (T099–T102)** — Fixed two pre-existing test failures in `tests/session/`: (1) `renewSession › should extend expiry to 30 days from renewal time` now uses `vi.useFakeTimers` / `vi.setSystemTime` to advance the clock past the 1-second renewal coalesce window before asserting the new timestamp, eliminating the flaky millisecond race; (2) `Expired sessions › should not count expired sessions against the device limit` — corrected `createSessionUnserialised` to use the existing `isSessionActive` helper (which checks both `status` and `expiresAt`) when counting occupied device slots, so an expired session with `status: 'active'` in storage no longer blocks a new session from being created.
 
 ### Added

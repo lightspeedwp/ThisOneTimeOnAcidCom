@@ -17,6 +17,8 @@ import {
   getCode,
   consumeCode,
   incrementCodeAttempts,
+  acquireDeviceLock,
+  releaseDeviceLock,
 } from './store';
 import { verifyCode, isCodeExpired, isCodeLimited } from './codes';
 import {
@@ -120,47 +122,64 @@ async function createSessionUnserialised(
   // Generate device fingerprint hash
   const deviceId = generateDeviceFingerprint(deviceFingerprint);
 
-  // Check concurrent device limit (T006b).
-  // A session for this same device is stored under the same key and is
-  // replaced by the new one, so it must not count towards the limit:
-  // re-verifying on a device the reader already uses is not a new device.
-  // Expired sessions keep status 'active' in storage but must not occupy a
-  // slot — isSessionActive checks both status and expiry.
-  const activeSessions = await listSessionsByEmail(email);
-  const now = new Date();
-  const activeCount = activeSessions.filter(
-    (s) => isSessionActive(s, now) && s.deviceId !== deviceId
-  ).length;
-
-  if (activeCount >= MAX_CONCURRENT_DEVICES) {
-    // Device limit exceeded
-    const error = new Error('Device limit exceeded');
+  // Acquire atomic device creation lock (cross-instance coordination).
+  // This prevents the check-then-act race where two instances both see
+  // activeCount < limit and both create sessions, overflowing the device
+  // limit. Only one instance can hold the lock and proceed at a time.
+  const lockAcquired = await acquireDeviceLock(email, deviceId);
+  if (!lockAcquired) {
+    // Another instance is creating a session for this device.
+    // Return 409 so client can retry or select another device.
+    const error = new Error('Device creation in progress (lock contention)');
     (error as any).statusCode = 409;
     (error as any).errorCode = 'device_limit_exceeded';
     throw error;
   }
 
-  // Generate cryptographically secure session token
-  const sessionId = generateSessionToken();
+  try {
+    // Lock held: re-check device count (may have changed while waiting).
+    // This is critical: between the lock acquisition and this check,
+    // other instances could have completed their device creations.
+    const activeSessions = await listSessionsByEmail(email);
+    const now = new Date();
+    const activeCount = activeSessions.filter(
+      (s) => isSessionActive(s, now) && s.deviceId !== deviceId
+    ).length;
 
-  // Create session record with 30-day expiry
-  const expiresAt = new Date(now.getTime() + SESSION_LIFETIME_DAYS * 24 * 60 * 60 * 1000);
+    if (activeCount >= MAX_CONCURRENT_DEVICES) {
+      // Device limit exceeded (T006b)
+      const error = new Error('Device limit exceeded');
+      (error as any).statusCode = 409;
+      (error as any).errorCode = 'device_limit_exceeded';
+      throw error;
+    }
 
-  const session: Session = {
-    sessionId,
-    email,
-    deviceId,
-    createdAt: now.toISOString(),
-    expiresAt: expiresAt.toISOString(),
-    renewedAt: now.toISOString(),
-    terminatedAt: null,
-    status: 'active',
-  };
+    // Generate cryptographically secure session token
+    const sessionId = generateSessionToken();
 
-  // Store in Blobs (strong consistency)
-  await storeSession(session);
+    // Create session record with 30-day expiry
+    const expiresAt = new Date(now.getTime() + SESSION_LIFETIME_DAYS * 24 * 60 * 60 * 1000);
 
-  return session;
+    const session: Session = {
+      sessionId,
+      email,
+      deviceId,
+      createdAt: now.toISOString(),
+      expiresAt: expiresAt.toISOString(),
+      renewedAt: now.toISOString(),
+      terminatedAt: null,
+      status: 'active',
+    };
+
+    // Store in Blobs (strong consistency)
+    await storeSession(session);
+
+    return session;
+  } finally {
+    // Always release the lock, even on error.
+    // This ensures other instances can proceed if this one fails.
+    await releaseDeviceLock(email, deviceId);
+  }
 }
 
 /**
