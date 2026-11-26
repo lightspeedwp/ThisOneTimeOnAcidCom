@@ -35,7 +35,7 @@ This guide walks through the approval and execution flow for the Figma Make prom
 | 1. Recovery-first race condition (Options: A/B/C/D) | ✅ A | APPROVED |
 | 2. Recovery lifetime eligibility (Options: A/B/C/D) | ✅ A | APPROVED |
 | 3. Code expiry start time (Options: A/B/C) | ✅ A | APPROVED |
-| 4. Email service provider (Options: A/B/C/D) | ✅ Hybrid (SendGrid + Brevo) | APPROVED |
+| 4. Email service provider (Options: A/B/C/D) | ✅ Hybrid (SendGrid + Brevo). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)* | APPROVED |
 | 5. Manuscript publication readiness (Options: A/B/C) | ❌ C (not yet approved) | DECIDED — blocks Prompts 3A–3C |
 | 6. Newsletter destination (Options: A/B/C/D) | ✅ B | APPROVED |
 | 7. Route enforcement verification (Options: A/B/C/D) | ✅ A | APPROVED |
@@ -44,12 +44,12 @@ This guide walks through the approval and execution flow for the Figma Make prom
 - ✅ Decision 1 (Recovery race): A—Recovery takes precedence
 - ✅ Decision 2 (Recovery lifetime): A—session refresh on recovery; absolute expiry 30 days after initial verification
 - ✅ Decision 3 (Code expiry): A—From generation
-- ✅ Decision 4 (Email provider): Hybrid—SendGrid (transactional) + Brevo (newsletter)
-- ❌ Decision 5 (Manuscript status): C—Not yet approved; approval date to be confirmed by Ash
+- ✅ Decision 4 (Email provider): Hybrid—SendGrid (transactional) + Brevo (newsletter). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)*
+- ✅ Decision 5 (Manuscript status): revised 2026-11-13 — early release: build reader screens now; chapters published individually once Ash approves each. *Originally: not yet approved*
 - ✅ Decision 6 (Newsletter destination): B—Brevo external signup
 - ✅ Decision 7 (Route enforcement): A—noindex meta tags + sitemap.xml exclusion; no robots.txt Disallow
 
-**Impact**: Decisions for Prompts 3B and 3C are recorded, but Prompts 3A, 3B and 3C remain deferred until the manuscript is approved (Decision 5). Proceed to Gate 2.
+**Impact**: All decisions are recorded. Prompts 3A, 3B and 3C are handed over to [Spec 005](../005-reader-access/spec.md); full-manuscript approval no longer gates the reader screens, only the publication of each chapter. Proceed to Gate 2.
 
 ---
 

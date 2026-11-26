@@ -1,20 +1,55 @@
 # Feature Specification: Book Website Claude Direct Execution
 
-**Feature Branch**: `feat/spec-004-claude-execution-model`
+**Feature Branch**: `main` (work branches have merged; `feat/spec-004-claude-execution-model` is historical)
+
+**Version**: 1.0.0 | **Locked**: see [Sign-off decisions and version-lock](#sign-off-decisions-and-version-lock-2026-11-20)
 
 **Created**: 2026-11-09 | **Pivoted to Claude**: 2026-11-20
 
-**Status**: ✅ Documentation complete; ✅ All 7 blocking decisions **RESOLVED** (2026-11-13); ✅ SC-004 Execution Model Pivot proposed (2026-11-20). Execution gates remain:
+**Status**: ✅ Documentation complete; ✅ All 7 blocking decisions **RESOLVED** (2026-11-13); ✅ SC-004 Execution Model Pivot approved (2026-11-20); ✅ Prompts 1, 2A, 2B delivered (PR #648). Remaining gates:
 
 - ✅ All blocking decisions approved with selected options documented
-- ✅ Design baseline (Space Grotesk, Inter, 9-color palette) locked and approved
-- ✅ Prompts 1, 2A, 2B ready for Phase A execution (Claude direct execution model)
+- ✅ Design baseline (Space Grotesk, Inter, 9-color palette) locked and approved (dark theme and primitives; light-theme mapping deferred, owner Ash)
+- ✅ Prompts 1, 2A, 2B delivered as specifications via Claude direct execution in PR #648 (merged to `main` 2026-11-20). See [`exports/PHASE_2_EXECUTION_LOG.md`](./exports/PHASE_2_EXECUTION_LOG.md)
 - ✅ Prompts 3A–3C handover to [Spec 005](../005-reader-access/spec.md) complete (not executed here)
 - ✅ **SC-004: Execution Model Pivot approved** (2026-11-20) — Claude direct execution replaces Figma Make
-- ⏳ Explicit authority to begin Claude execution for Prompts 1, 2A, 2B (Decision 7 Option A: noindex meta tags + sitemap exclusion verified in contracts)
+- ⏳ Implementing the Prompt 1, 2A and 2B outputs in `src/`, `public/` and `netlify.toml` needs separate authorisation from Ash. The deferred decisions below are still open (Decision 7 Option A: noindex meta tags + sitemap exclusion, no robots.txt Disallow)
 - ⏳ Chapter publication: each chapter needs Ash's approval before it is published (Decision 5: Early release approved; build screens now)
 
 **Input**: Complete staged prompts for ThisOneTimeOnAcidCom book website, prepared as documentation-only package with exact previews for approval. **Execution Model**: Claude direct execution (SC-004, approved 2026-11-20) — contracts include Claude execution specifications with output format validation.
+
+
+---
+
+## Sign-off decisions and version-lock (2026-11-20)
+
+Recorded at Ash's request while finishing T069/T084. Each item below is deferred, not decided. Ash owns all of them.
+
+### Deferred decisions (owner: Ash)
+
+| ID | Decision | Status | Source |
+| -- | -------- | ------ | ------ |
+| C1-2 / C2B-1 | 8-item menu (recommended) or cut to 4 items | ⏸️ Deferred: nothing changes until Ash decides | `exports/PHASE_2_EXECUTION_LOG.md` |
+| — | Light-theme role mapping | ⏸️ Deferred: this sign-off covers the **dark theme and primitives only**. The light mapping stays `PENDING_APPROVAL` | `exports/prompt-2a-design-baseline-output.md` §4 |
+| C1-4 | Canonical origin (`ashshaw.com`) | ⏸️ Deferred | Prompt 1 §2 |
+| C1-5 | `/ebook` exposure and XML-sitemap inclusion | ⏸️ Deferred | Prompt 1 §2 |
+| D-1 to D-4 | Dark-theme pairs below the AAA 7:1 target | ⏸️ Deferred | Prompt 2A §4 |
+| L-2, L-3 | Light-theme error and tertiary text colours | ⏸️ Deferred (part of the light mapping) | Prompt 2A §4 |
+| Decision 2 | Interaction between Option A and repeated renewal | ⏸️ Deferred to Spec 005 | `exports/GATE_3_FINAL_SIGN_OFF.md` |
+| Decision 5 | Per-chapter publication approval | ⏸️ Ongoing: Ash approves each chapter | Status gates above |
+| Source 02 | Linear copy is v1.0.5; the repository copy in `references/` is v1.0.4 | ⏸️ Deferred: v1.0.4 is locked until the v1.0.5 text is mirrored | `references/02-companion-session-plan.md` |
+
+### Version-lock
+
+**Method**: version lines in the spec files plus this lock table. The commit that merges PR #649 becomes the lock commit. A git tag can be added later, but the files are what count. Any change to a locked item after the lock commit needs a new version and a note here.
+
+| Item | Locked version |
+| ---- | -------------- |
+| Spec package (`spec.md`, `plan.md`) | 1.0.0 |
+| `tasks.md` | 1.1.0 |
+| `references/01`–`06` | 01 v1.0.0, 02 v1.0.4, 03 v1.3.0, 04 v1.1.2, 05 v1.9.0, 06 v1.1.1 |
+| `exports/design-tokens.json` / `.css` | v2.0.0 (PR #648) |
+| Lock commit | `482da4a` (Merge PR #649, 2026-11-26 11:32:54 UTC) |
 
 ---
 
@@ -180,7 +215,7 @@ Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documen
 
 - **SC-001**: All six source files are retrieved and analyzed; version reconciliation is documented with zero silent merges (100% reconciliation coverage)
 - **SC-002**: Exact Prompt 1 preview includes all four elements: before/after navigation structure, numbered list of implementation steps (file/component changes), acceptance criteria, and 2–3 bullet points describing non-changes
-- **SC-003**: Exact Prompts 2A, 2B, 3A are 95%+ complete specifications (missing only user decisions on blocked prerequisites, not missing core content); Prompt 2A exports both CSS variables (`.css` with custom properties) and JSON design tokens for full design-system coverage
+- **SC-003** *(revised 2026-11-19, see [SC-003 scope change](./exports/SC-003_SCOPE_CHANGE_PROPOSAL.md))*: Exact Prompts 1, 2A and 2B are each 95%+ complete specifications. Prompt 3A moved to [Spec 005](../005-reader-access/spec.md). *Originally: Prompts 2A, 2B, 3A* (missing only user decisions on blocked prerequisites, not missing core content); Prompt 2A exports both CSS variables (`.css` with custom properties) and JSON design tokens for full design-system coverage
 - **SC-004**: All blocking decisions are identified and presented with specific options (3+ options per decision with impact assessment) before user approval
 - **SC-005**: Zero implementation code generated; zero commits created; zero deployments executed; 100% documentation-only until explicit user approval for implementation phase
 - **SC-006**: Complete documentation package includes blocking decision matrix, source inventory, version reconciliation, and decision-routing plan
@@ -196,14 +231,15 @@ Spec 004 no longer executes reader-access work. Stage IDs 3A–3C remain documen
 - **Design Baseline Approval**: Space Grotesk headings, Inter body/UI, 9-color palette (both themes) are locked and require no changes during preflight
 - **Blocking Decisions**: ✅ ALL 7 decisions **RESOLVED** (2026-11-13):
   - Recovery-first race: **Option A** (Recovery takes precedence)
-  - Recovery lifetime: **Option A** (30-day absolute expiry + session refresh)
+  - Recovery lifetime: **Option A** (session refresh with absolute 30-day expiry)
   - Code expiry start: **Option A** (From code generation)
-  - Email provider: **Hybrid** (SendGrid transactional + Brevo newsletter)
+  - Email provider: **Hybrid** (Brevo newsletter + transactional SMTP). *Superseded 2026-11-19 in Spec 005: Mailgun for transactional SMTP (see `exports/GATE_3_FINAL_SIGN_OFF.md`)*
   - Manuscript readiness: **Early release** (Build screens now; chapters as approved)
   - Newsletter destination: **Brevo** (External signup link)
   - Route enforcement: **Option A** (Noindex meta tags + sitemap exclusion)
 - **Implementation Timing**: This spec prepares documentation only; no actual implementation, Figma Make execution, or deployment occurs until separate approval
-- **Figma Make Environment**: Make environment exists and is operational; prompts can be executed once unblocked and approved (readiness verification deferred to implementation phase)
+- **Execution Environment** *(SC-004, approved 2026-11-20)*: Claude carries out Prompts 1, 2A and 2B directly. Figma Make is deprecated and no Make environment is needed. See [SC-004](./exports/SC-004_EXECUTION_MODEL_PIVOT.md)
+- **Scope (SC-003, approved 2026-11-19)**: Spec 004 covers Prompts 1, 2A and 2B only. Prompts 3A–3C and reader-access decisions belong to [Spec 005](../005-reader-access/spec.md) (see [handover](./exports/SPEC_004_TO_005_HANDOVER.md)). The SC-003 completeness threshold (≥95% per prompt) applies to Prompts 1, 2A and 2B
 - **Newsletter Integration**: Newsletter service (Brevo or alternative) will be selected separately; copy and mechanics are placeholders in this spec
 - **Reader Access Provider**: Email service and manuscript-delivery mechanism will be confirmed separately; specifications reference generic "email service" and "verified access" without provider detail
 
@@ -249,12 +285,12 @@ Once approved, Phase A will include:
 
 | # | Decision | Resolution | Execution Impact |
 | --- | ---------- | ----------- | --- |
-| 1 | Recovery-first race condition | Option A: Recovery takes precedence | Decision resolved for Prompt 3B (execution deferred — manuscript gate) |
-| 2 | Recovery lifetime eligibility | Option A: session refresh on recovery; absolute expiry 30 days after initial verification | Decision resolved for Prompt 3B (execution deferred — manuscript gate) |
-| 3 | Code expiry start time | Option A: From code generation | Decision resolved for Prompts 3A, 3C (execution deferred — manuscript gate) |
-| 4 | Email service provider | Hybrid: SendGrid (transactional) + Brevo (newsletter) | Decision resolved for Prompt 3A (execution deferred — manuscript gate) |
+| 1 | Recovery-first race condition | Option A: Recovery takes precedence | Decision resolved for Prompt 3B — Spec 005 owns execution |
+| 2 | Recovery lifetime eligibility | Option A: session refresh on recovery; absolute expiry 30 days after initial verification | Decision resolved for Prompt 3B — Spec 005 owns execution |
+| 3 | Code expiry start time | Option A: From code generation | Decision resolved for Prompts 3A, 3C — Spec 005 owns execution |
+| 4 | Email service provider | Hybrid: Mailgun (transactional) + Brevo (newsletter). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)* | Decision resolved for Prompt 3A; Spec 005 owns execution |
 | 5 | Manuscript publication readiness | ✅ Revised 2026-11-13: early release — build reader screens now; chapters and addendums published individually once Ash approves each | No longer gates the reader screens; per-chapter approval gates publication |
-| 6 | Newsletter destination | Brevo (external signup link) | Decision resolved for Prompt 3A (execution deferred — manuscript gate) |
+| 6 | Newsletter destination | Brevo (external signup link) | Decision resolved for Prompt 3A — Spec 005 owns execution |
 | 7 | Route enforcement verification | Option A: noindex meta tags + sitemap exclusion; no robots.txt Disallow | Decision resolved for Prompt 1 |
 
 **Implications**:
