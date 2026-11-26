@@ -180,21 +180,31 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should extend expiry to 30 days from renewal time', async () => {
-      const beforeRenewal = new Date();
-      const renewed = await renewSession(testEmail, testSession.deviceId);
-      const afterRenewal = new Date();
+      // Renewals within RENEWAL_COALESCE_WINDOW_MS (1s) of the last renewal,
+      // including the one set at creation, return the session unchanged.
+      // Step a faked Date past that window so this call really renews.
+      vi.useFakeTimers({ toFake: ['Date'] });
+      try {
+        vi.setSystemTime(Date.now() + 2000);
 
-      const renewedAt = new Date(renewed.renewedAt);
-      const expiresAt = new Date(renewed.expiresAt);
+        const beforeRenewal = new Date();
+        const renewed = await renewSession(testEmail, testSession.deviceId);
+        const afterRenewal = new Date();
 
-      // Renewed at should be close to current time
-      expect(renewedAt.getTime()).toBeGreaterThanOrEqual(beforeRenewal.getTime());
-      expect(renewedAt.getTime()).toBeLessThanOrEqual(afterRenewal.getTime());
+        const renewedAt = new Date(renewed.renewedAt);
+        const expiresAt = new Date(renewed.expiresAt);
 
-      // Expiry should be ~30 days from renewal
-      const expiryDays =
-        (expiresAt.getTime() - renewedAt.getTime()) / (1000 * 60 * 60 * 24);
-      expect(expiryDays).toBeCloseTo(SESSION_LIFETIME_DAYS, 0.1);
+        // Renewed at should be close to current time
+        expect(renewedAt.getTime()).toBeGreaterThanOrEqual(beforeRenewal.getTime());
+        expect(renewedAt.getTime()).toBeLessThanOrEqual(afterRenewal.getTime());
+
+        // Expiry should be ~30 days from renewal
+        const expiryDays =
+          (expiresAt.getTime() - renewedAt.getTime()) / (1000 * 60 * 60 * 24);
+        expect(expiryDays).toBeCloseTo(SESSION_LIFETIME_DAYS, 0.1);
+      } finally {
+        vi.useRealTimers();
+      }
     });
 
     it('should coalesce rapid renewals (prevent thundering herd)', async () => {

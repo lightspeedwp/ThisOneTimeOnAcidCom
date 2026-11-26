@@ -125,8 +125,9 @@ async function createSessionUnserialised(
   // replaced by the new one, so it must not count towards the limit:
   // re-verifying on a device the reader already uses is not a new device.
   const activeSessions = await listSessionsByEmail(email);
+  const observedAt = new Date();
   const activeCount = activeSessions.filter(
-    (s) => s.status === 'active' && s.terminatedAt === null && s.deviceId !== deviceId
+    (s) => isSessionActive(s, observedAt) && s.deviceId !== deviceId
   ).length;
 
   if (activeCount >= MAX_CONCURRENT_DEVICES) {
