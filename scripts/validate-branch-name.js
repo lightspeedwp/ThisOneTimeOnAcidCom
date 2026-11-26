@@ -17,14 +17,15 @@ const AUTHORISED_TYPES = [
   'telemetry', 'content', 'seo', 'config', 'migrate', 'qa', 'uat'
 ];
 
-const FORBIDDEN_PREFIXES = ['claude', 'copilot', 'openai'];
+const FORBIDDEN_PREFIXES = ['copilot', 'openai'];
 
 const PATTERNS = {
   standard: /^[a-z][a-z0-9]*\/[a-z][a-z0-9]*(-[a-z0-9]+)+$/,
   releaseVersioned: /^release\/v\d+\.\d+\.\d+(-[a-z0-9]+(\.[a-z0-9]+)*)?$/,
   releaseStandard: /^release\/\d{4}-\d{2}-\d{2}$/,
   dependabot: /^dependabot\/.+$/,
-  renovate: /^renovate\/.+$/
+  renovate: /^renovate\/.+$/,
+  claude: /^claude\/.+$/
 };
 
 class ValidationResult {
@@ -100,6 +101,16 @@ function checkExemptions(branch) {
       `✅ Branch '${branch}' is a valid renovate exemption.`,
       'exemption',
       { pattern: 'renovate', exemption: true }
+    );
+  }
+
+  if (PATTERNS.claude.test(branch)) {
+    return new ValidationResult(
+      true,
+      branch,
+      `✅ Branch '${branch}' is a valid Claude Code session branch.`,
+      'exemption',
+      { pattern: 'claude', exemption: true }
     );
   }
 
