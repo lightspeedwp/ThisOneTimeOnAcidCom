@@ -61,10 +61,12 @@
   --color-primary-bg-dark: var(--color-deepest-dark);
   --color-secondary-text-dark: var(--color-warm-tan);
   --color-secondary-bg-dark: var(--color-dark-purple);
-  --color-tertiary-text-dark: var(--color-warm-brown);
+  /* D-1 (owner decision 2026-11-26): tan, 11.72:1 on the page background (AAA). Hierarchy comes from size/weight. */
+  --color-tertiary-text-dark: var(--color-warm-tan);
   --color-panel-dark: var(--color-lighter-dark);
   --color-accent-pink-dark: var(--color-accent-pink);
   --color-accent-yellow-dark: var(--color-accent-yellow);
+  /* D-4 (owner decision 2026-11-26): purple is 4.96:1 — large text (24px+) and non-text only. */
   --color-accent-purple-dark: var(--color-accent-purple);
 
   /* ===== LIGHT THEME ROLES (9, ⚠️ PENDING APPROVAL) ===== */
@@ -81,8 +83,12 @@
   --color-accent-purple-light: var(--color-accent-purple);
 
   /* ===== BUTTON — dark ===== */
-  --button-bg-primary-dark: var(--color-accent-pink);
-  --button-text-primary-dark: var(--color-deepest-dark);
+  /* D-3 (owner decision 2026-11-26): dark fill, cream label (17.59:1 AAA), 2px pink border.
+     Hover uses the panel fill; a pink fill would drop the label to 6.05:1. */
+  --button-bg-primary-dark: var(--color-deepest-dark);
+  --button-bg-primary-hover-dark: var(--color-lighter-dark);
+  --button-text-primary-dark: var(--color-warm-cream);
+  --button-border-primary-dark: var(--color-accent-pink);
   --button-bg-secondary-dark: var(--color-lighter-dark);
   --button-text-secondary-dark: var(--color-warm-cream);
   --button-border-secondary-dark: var(--color-warm-brown);
@@ -90,8 +96,11 @@
   --button-text-disabled-dark: var(--color-warm-brown);
 
   /* ===== BUTTON — light (⚠️ pending) ===== */
-  --button-bg-primary-light: var(--color-accent-pink);
-  --button-text-primary-light: var(--color-deepest-dark);
+  /* D-3 applied to light: dark fill, cream label (17.59:1); pink border is decorative on cream. */
+  --button-bg-primary-light: var(--color-deepest-dark);
+  --button-bg-primary-hover-light: var(--color-lighter-dark);
+  --button-text-primary-light: var(--color-warm-cream);
+  --button-border-primary-light: var(--color-accent-pink);
   --button-bg-secondary-light: var(--color-warm-tan);
   --button-text-secondary-light: var(--color-deepest-dark);
   --button-border-secondary-light: var(--color-lighter-dark);
@@ -148,7 +157,8 @@
   --form-input-border-focused-dark: var(--color-accent-pink);
   --form-input-text-dark: var(--color-warm-cream);
   --form-input-error-border-dark: var(--color-accent-pink);
-  --form-input-error-text-dark: var(--color-accent-pink);
+  /* D-2 (owner decision 2026-11-26): cream error text (17.59:1 AAA); pink icon and border carry the cue. */
+  --form-input-error-text-dark: var(--color-warm-cream);
   /* Placeholder: 10.61:1 on the input fill (AAA). */
   --form-input-placeholder-dark: var(--color-warm-tan);
 
@@ -178,6 +188,8 @@
 
   --button-bg-primary: var(--button-bg-primary-dark);
   --button-text-primary: var(--button-text-primary-dark);
+  --button-bg-primary-hover: var(--button-bg-primary-hover-dark);
+  --button-border-primary: var(--button-border-primary-dark);
   --button-bg-secondary: var(--button-bg-secondary-dark);
   --button-text-secondary: var(--button-text-secondary-dark);
   --button-border-secondary: var(--button-border-secondary-dark);
@@ -220,6 +232,8 @@
 
   --button-bg-primary: var(--button-bg-primary-light);
   --button-text-primary: var(--button-text-primary-light);
+  --button-bg-primary-hover: var(--button-bg-primary-hover-light);
+  --button-border-primary: var(--button-border-primary-light);
   --button-bg-secondary: var(--button-bg-secondary-light);
   --button-text-secondary: var(--button-text-secondary-light);
   --button-border-secondary: var(--button-border-secondary-light);

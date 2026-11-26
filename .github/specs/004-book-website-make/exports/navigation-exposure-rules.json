@@ -10,7 +10,13 @@
       "references/02-companion-session-plan.md WP-02",
       "contracts/prompt-1-navigation-exposure.md"
     ],
-    "implementationAuthorised": false
+    "implementationAuthorised": false,
+    "ownerDecisions": {
+      "date": "2026-11-26",
+      "menuSize": 8,
+      "canonicalOrigin": "https://thisonetimeonacid.com",
+      "ebook": "hidden from both sitemaps, noindex"
+    }
   },
   "retainedHiddenRoutes": [
     {
@@ -48,32 +54,102 @@
       "xmlSitemap": "exclude",
       "robotsDirective": "noindex, nofollow",
       "headerPatterns": ["/media", "/media/*"]
+    },
+    {
+      "path": "/ebook",
+      "component": "EbookPage",
+      "routeRegistered": true,
+      "publiclyAccessible": true,
+      "menu": "not present",
+      "footer": "not present",
+      "htmlSitemap": "withhold",
+      "xmlSitemap": "exclude",
+      "robotsDirective": "noindex, nofollow",
+      "headerPatterns": ["/ebook", "/ebook/*"],
+      "reason": "owner decision 2026-11-26: until reader-access protection is confirmed"
     }
   ],
   "menu": {
     "source": "src/app/data/mock/book-site.ts#bookSiteData.nav",
     "before": [
-      { "label": "Home", "href": "/" },
-      { "label": "The Book", "href": "/the-book" },
-      { "label": "Read the Draft", "href": "/read-the-draft" },
-      { "label": "About Ash", "href": "/about-ash" },
-      { "label": "Journal", "href": "/journal" },
-      { "label": "Events", "href": "/events" },
-      { "label": "Speaking", "href": "/speaking" },
-      { "label": "Media", "href": "/media" },
-      { "label": "Contact", "href": "/contact" },
-      { "label": "Waitlist", "href": "/waitlist" },
-      { "label": "Search", "href": "/search" }
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "The Book",
+        "href": "/the-book"
+      },
+      {
+        "label": "Read the Draft",
+        "href": "/read-the-draft"
+      },
+      {
+        "label": "About Ash",
+        "href": "/about-ash"
+      },
+      {
+        "label": "Journal",
+        "href": "/journal"
+      },
+      {
+        "label": "Events",
+        "href": "/events"
+      },
+      {
+        "label": "Speaking",
+        "href": "/speaking"
+      },
+      {
+        "label": "Media",
+        "href": "/media"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact"
+      },
+      {
+        "label": "Waitlist",
+        "href": "/waitlist"
+      },
+      {
+        "label": "Search",
+        "href": "/search"
+      }
     ],
     "after": [
-      { "label": "Home", "href": "/" },
-      { "label": "The Book", "href": "/the-book" },
-      { "label": "Read the Draft", "href": "/read-the-draft" },
-      { "label": "About Ash", "href": "/about-ash" },
-      { "label": "Journal", "href": "/journal" },
-      { "label": "Contact", "href": "/contact" },
-      { "label": "Waitlist", "href": "/waitlist" },
-      { "label": "Search", "href": "/search" }
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "The Book",
+        "href": "/the-book"
+      },
+      {
+        "label": "Read the Draft",
+        "href": "/read-the-draft"
+      },
+      {
+        "label": "About Ash",
+        "href": "/about-ash"
+      },
+      {
+        "label": "Journal",
+        "href": "/journal"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact"
+      },
+      {
+        "label": "Waitlist",
+        "href": "/waitlist"
+      },
+      {
+        "label": "Search",
+        "href": "/search"
+      }
     ]
   },
   "footer": {
@@ -81,15 +157,36 @@
     "changedGroup": "Author & Press",
     "headingPreserved": true,
     "before": [
-      { "label": "About Ash", "href": "/about-ash" },
-      { "label": "Speaking & Workshops", "href": "/speaking" },
-      { "label": "Events", "href": "/events" },
-      { "label": "Media & Press", "href": "/media" },
-      { "label": "Contact", "href": "/contact" }
+      {
+        "label": "About Ash",
+        "href": "/about-ash"
+      },
+      {
+        "label": "Speaking & Workshops",
+        "href": "/speaking"
+      },
+      {
+        "label": "Events",
+        "href": "/events"
+      },
+      {
+        "label": "Media & Press",
+        "href": "/media"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact"
+      }
     ],
     "after": [
-      { "label": "About Ash", "href": "/about-ash" },
-      { "label": "Contact", "href": "/contact" }
+      {
+        "label": "About Ash",
+        "href": "/about-ash"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact"
+      }
     ]
   },
   "htmlSitemap": {
@@ -109,23 +206,25 @@
   },
   "xmlSitemap": {
     "source": "public/sitemap.xml",
-    "origin": "https://ashshaw.com",
-    "remove": ["/events", "/speaking", "/media"],
+    "origin": "https://thisonetimeonacid.com",
+    "remove": ["/events", "/speaking", "/media", "/ebook"],
     "after": [
       "/",
       "/the-book",
-      "/ebook",
       "/about-ash",
       "/journal",
       "/contact",
       "/waitlist"
-    ]
+    ],
+    "previousOrigin": "https://ashshaw.com",
+    "alsoUpdate": "src/app/public/sitemap.xml"
   },
   "robotsTxt": {
     "source": "public/robots.txt",
-    "change": "none",
+    "change": "Sitemap line only: https://thisonetimeonacid.com/sitemap.xml",
     "addDisallow": false,
-    "reason": "A Disallow rule stops crawlers fetching the page, so they cannot read its noindex directive."
+    "reason": "A Disallow rule stops crawlers fetching the page, so they cannot read its noindex directive.",
+    "files": ["public/robots.txt", "src/app/public/robots.txt"]
   },
   "noindexDelivery": {
     "httpHeader": {
@@ -148,7 +247,8 @@
     },
     {
       "id": "C1-2",
-      "summary": "Contract 4-item menu conflicts with CR-1.5 and WP-02; 8-item result applied."
+      "summary": "Contract 4-item menu conflicts with CR-1.5 and WP-02; 8-item result applied.",
+      "resolution": "Confirmed by owner 2026-11-26: 8 items"
     },
     {
       "id": "C1-3",
@@ -156,15 +256,37 @@
     },
     {
       "id": "C1-4",
-      "summary": "Sitemap and robots.txt use the ashshaw.com origin; canonical origin is a separate decision."
+      "summary": "Sitemap and robots.txt use the ashshaw.com origin; canonical origin is a separate decision.",
+      "resolution": "Resolved 2026-11-26: https://thisonetimeonacid.com"
     },
     {
       "id": "C1-5",
-      "summary": "/ebook exposure unresolved; left in XML sitemap, withheld from HTML sitemap."
+      "summary": "/ebook exposure unresolved; left in XML sitemap, withheld from HTML sitemap.",
+      "resolution": "Resolved 2026-11-26: hidden from both sitemaps, noindex"
     },
     {
       "id": "C1-6",
       "summary": "navigation-specification.md uses non-existent routes; superseded."
     }
-  ]
+  ],
+  "canonicalOrigin": {
+    "value": "https://thisonetimeonacid.com",
+    "replaces": "https://ashshaw.com",
+    "absoluteUrlCount": 46,
+    "files": [
+      "public/sitemap.xml",
+      "src/app/public/sitemap.xml",
+      "src/app/index.html",
+      "src/app/components/pages/book-site/EventsPage.tsx",
+      "src/app/components/pages/book-site/AboutAshPage.tsx",
+      "src/app/public/llms.txt",
+      "src/app/components/pages/book-site/TheBookPage.tsx",
+      "src/app/components/pages/book-site/ContactPage.tsx",
+      "src/app/components/pages/about/EbookPage.tsx",
+      "public/robots.txt",
+      "src/app/public/robots.txt",
+      "src/app/utils/schemaService.ts"
+    ],
+    "hostingOutOfScope": "custom domain, HTTPS certificate, 301 from ashshaw.com"
+  }
 }

@@ -42,16 +42,20 @@ Also changed: [`navigation-specification.md`](./navigation-specification.md) now
 
 ---
 
-## Open decisions for Ash
+## Owner decisions (recorded 2026-11-26)
 
-| ID           | Decision                                                                                                              | Where        |
-| ------------ | --------------------------------------------------------------------------------------------------------------------- | ------------ |
-| C1-2 / C2B-1 | 8-item menu (recommended) or a cut to 4 items                                                                         | Prompt 1 §2  |
-| C1-4         | Canonical origin (`ashshaw.com` in sitemap and robots.txt)                                                            | Prompt 1 §2  |
-| C1-5         | `/ebook` exposure and XML-sitemap inclusion                                                                           | Prompt 1 §2  |
-| D-1 to D-4   | Dark-theme pairs below the AAA 7:1 target: tertiary brown, pink error text, primary button label on pink, purple text | Prompt 2A §4 |
-| L-2, L-3     | Light-theme error and tertiary text: stay on-palette or approve `#C4005E` / `#5C5248`                                 | Prompt 2A §4 |
-| —            | Light-theme role mapping as a whole                                                                                   | Prompt 2A §4 |
+| ID           | Decision                                                                                        | Where         |
+| ------------ | ----------------------------------------------------------------------------------------------- | ------------- |
+| C1-2 / C2B-1 | 8-item menu, existing order                                                                     | Prompt 1 §2a  |
+| C1-4         | Canonical origin `https://thisonetimeonacid.com` (46 `ashshaw.com` URLs in 12 files to replace) | Prompt 1 §4.5 |
+| C1-5         | `/ebook` hidden from both sitemaps, `noindex` until access protection is confirmed              | Prompt 1 §2a  |
+| D-1          | Tertiary text uses tan (11.72:1)                                                                | Prompt 2A §4  |
+| D-2          | Cream error text; pink stays on the icon and border                                             | Prompt 2A §4  |
+| D-3          | Primary button: dark fill, cream label, pink border                                             | Prompt 2A §4  |
+| D-4          | Purple only for large text (24px or more) and non-text accents                                  | Prompt 2A §4  |
+| L-2, L-3     | Light theme stays on-palette (no derived colours)                                               | Prompt 2A §4  |
+
+Still open: the light-theme role mapping as a whole (`references/05-design-reader-decision-register.md`, Theme scope).
 
 ---
 
