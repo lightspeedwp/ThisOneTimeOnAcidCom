@@ -5,13 +5,19 @@
  *
  * Supports both Jest and Vitest JSON output formats. Compares test failure
  * counts between the PR head and base branch to detect if the PR introduces
- * new test failures. Known failures on develop don't block the PR, only NEW
+ * new test failures. Known failures on main don't block the PR, only NEW
  * failures introduced by the PR are reported.
  *
  * Usage:
  *   node compare-jest-failures.cjs \
  *     --head <head-report.json> --head-root <path> \
- *     --base <base-report.json> --base-root <path>
+ *     --base <base-report.json> --base-root <path> \
+ *     [--base-files <git-ls-files-at-base.txt>]
+ *
+ * When --base-files is given, a failing head file that is missing from the
+ * base report but tracked at the base commit is reported as "not comparable"
+ * rather than "new": base never ran it, so there is no baseline. A file the
+ * PR adds is not tracked at base and still counts as new.
  */
 
 const fs = require('fs');
@@ -26,7 +32,7 @@ for (let i = 0; i < args.length; i += 2) {
 }
 
 if (!opts.head || !opts.base || !['head-root', 'base-root'].every(k => opts[k])) {
-  console.error('Usage: node compare-jest-failures.cjs --head <file> --head-root <path> --base <file> --base-root <path>');
+  console.error('Usage: node compare-jest-failures.cjs --head <file> --head-root <path> --base <file> --base-root <path> [--base-files <file>]');
   process.exit(1);
 }
 
@@ -42,31 +48,49 @@ function readReport(filePath) {
 }
 
 // Detect report format: Jest vs Vitest
+//
+// Vitest's JSON reporter mirrors Jest's top-level counters (including
+// numFailedTests), so those cannot tell the formats apart. Jest alone emits
+// numRuntimeErrorTestSuites, wasInterrupted and openHandles at the top level,
+// and per-file numFailingTests in its legacy output.
 function detectFormat(report) {
   if (!report || !Array.isArray(report.testResults)) {
     return null;
   }
 
-  // Both formats have testResults array, but field names differ slightly
-  // Vitest uses 'assertionResults' for individual test results
-  // Jest uses 'numFailingTests' prominently but also 'assertionResults'
-
-  // Check first result to infer format (heuristic)
-  const firstResult = report.testResults[0];
-  if (!firstResult) return 'unknown';
-
-  // Both use assertionResults, so check other fields
-  if (firstResult.numFailingTests !== undefined || report.numFailedTests !== undefined) {
+  const jestOnlyKeys = ['numRuntimeErrorTestSuites', 'wasInterrupted', 'openHandles'];
+  if (jestOnlyKeys.some(key => key in report)) {
+    return 'jest';
+  }
+  if (report.testResults.some(result => result && result.numFailingTests !== undefined)) {
     return 'jest';
   }
 
-  // Vitest typically has 'duration' and other fields
-  if (firstResult.duration !== undefined) {
-    return 'vitest';
-  }
+  return 'vitest';
+}
 
-  // Default to jest for compatibility
-  return 'jest';
+// List every test file in a report, normalised relative to root
+function listFiles(report, root) {
+  if (!report || !Array.isArray(report.testResults)) {
+    return new Set();
+  }
+  return new Set(report.testResults.map(result => path.relative(root || '.', result.name)));
+}
+
+// Read the optional list of files tracked at the base commit (one per line,
+// relative to the repository root, as printed by `git ls-files`)
+function readFileList(filePath) {
+  if (!filePath) {
+    return null;
+  }
+  try {
+    return new Set(
+      fs.readFileSync(filePath, 'utf8').split('\n').map(line => line.trim()).filter(Boolean),
+    );
+  } catch (error) {
+    console.error(`Failed to read base file list ${filePath}: ${error.message}`);
+    process.exit(1);
+  }
 }
 
 // Count failures by test file, normalized relative to root
@@ -130,15 +154,24 @@ const baseFormat = detectFormat(baseReport);
 const headFailures = countFailures(headReport, opts['head-root']);
 const baseFailures = countFailures(baseReport, opts['base-root']);
 
-// Calculate per-file comparison: count new failures (head > base)
-const newFailuresByFile = Object.entries(headFailures).reduce((acc, [file, count]) => {
+const baseReportFiles = listFiles(baseReport, opts['base-root']);
+const baseTrackedFiles = readFileList(opts['base-files']);
+
+// Calculate per-file comparison: count new failures (head > base). A file
+// that base never reported cannot be compared if it already existed there.
+const newFailuresByFile = {};
+const notComparableByFile = {};
+Object.entries(headFailures).forEach(([file, count]) => {
+  if (!baseReportFiles.has(file) && baseTrackedFiles && baseTrackedFiles.has(file)) {
+    notComparableByFile[file] = count;
+    return;
+  }
   const baseCount = baseFailures[file] || 0;
   const newCount = Math.max(0, count - baseCount);
   if (newCount > 0) {
-    acc[file] = { head: count, base: baseCount, new: newCount };
+    newFailuresByFile[file] = { head: count, base: baseCount, new: newCount };
   }
-  return acc;
-}, {});
+});
 
 const headTotal = Object.values(headFailures).reduce((a, b) => a + b, 0);
 const baseTotal = Object.values(baseFailures).reduce((a, b) => a + b, 0);
@@ -147,6 +180,14 @@ const totalNewFailures = Object.values(newFailuresByFile).reduce((a, b) => a + b
 console.log(`Base branch failures: ${baseTotal} (${Object.keys(baseFailures).length} files) [${baseFormat}]`);
 console.log(`PR head failures: ${headTotal} (${Object.keys(headFailures).length} files) [${headFormat}]`);
 console.log(`New failures in this PR: ${totalNewFailures}`);
+
+const notComparable = Object.entries(notComparableByFile);
+if (notComparable.length > 0) {
+  console.log(`\n⚠️  ${notComparable.length} failing file(s) not comparable (exist at base but missing from the base report):`);
+  notComparable.forEach(([file, count]) => {
+    console.log(`  • ${file}: ${count} failure(s) on head`);
+  });
+}
 
 if (totalNewFailures > 0) {
   console.error(`\n❌ This PR introduces ${totalNewFailures} new test failure(s):`);

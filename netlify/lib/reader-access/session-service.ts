@@ -15,7 +15,7 @@ import {
   deleteSession,
   listSessionsByEmail,
   getCode,
-  deleteCode,
+  consumeCode,
   incrementCodeAttempts,
 } from './store';
 import { verifyCode, isCodeExpired, isCodeLimited } from './codes';
@@ -36,6 +36,19 @@ import {
   RENEWAL_COALESCE_WINDOW_MS,
   CLOCK_SKEW_TOLERANCE_MS,
 } from './session-config';
+
+/**
+ * Whether a stored session currently holds one of the reader's device slots:
+ * not terminated and not yet past its expiry. Expired sessions keep
+ * `status: 'active'` in storage, so the expiry has to be checked here too.
+ */
+function isSessionActive(session: Session, now: Date): boolean {
+  return (
+    session.status === 'active' &&
+    session.terminatedAt === null &&
+    new Date(session.expiresAt).getTime() > now.getTime()
+  );
+}
 
 /**
  * Create a new session after email verification.
@@ -482,7 +495,8 @@ export async function terminateSession(email: string, deviceId: string): Promise
  */
 export async function getActiveSessionCount(email: string): Promise<number> {
   const sessions = await listSessionsByEmail(email);
-  return sessions.filter((s) => s.status === 'active' && s.terminatedAt === null).length;
+  const now = new Date();
+  return sessions.filter((s) => isSessionActive(s, now)).length;
 }
 
 /**
@@ -535,9 +549,9 @@ export class SessionCreationError extends Error {
  *
  * 1. Look up the stored code; missing, expired or locked → 401
  * 2. Compare the code hash; a wrong code records an attempt → 401
- * 3. Consume the code before any session is written, so a replayed
- *    request finds no code (Blobs has no compare-and-swap, so this is
- *    delete-first rather than a true atomic consume)
+ * 3. Consume the code atomically before any session is written: a
+ *    conditional (onlyIfNew) marker write lets exactly one of several
+ *    concurrent requests for the same code through; the rest get 401
  * 4. If this device already has a session, rotate it: new token, old
  *    token index removed, fresh 30-day window (no device slot consumed)
  * 5. Otherwise create a new session, enforcing the device limit (409)
@@ -565,7 +579,9 @@ export async function createSessionFromVerification(
     throw new SessionCreationError('verification_failed', 401);
   }
 
-  await deleteCode(normalisedEmail);
+  if (!(await consumeCode(normalisedEmail, stored.codeHash))) {
+    throw new SessionCreationError('verification_failed', 401);
+  }
 
   const deviceId = generateDeviceFingerprint(fingerprint);
   const existing = await getSession(normalisedEmail, deviceId);

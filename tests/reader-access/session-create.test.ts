@@ -103,6 +103,19 @@ describe('T013: POST /api/reader/session', () => {
     expect(replay.status).toBe(401);
   });
 
+  it('lets exactly one of two concurrent submissions of a code succeed (RA-002)', async () => {
+    const email = uniqueEmail('t013-race');
+    const code = await seedCode(email);
+
+    const responses = await Promise.all([
+      createHandler(jsonRequest(URL_CREATE, { email, verificationCode: code })),
+      createHandler(jsonRequest(URL_CREATE, { email, verificationCode: code })),
+    ]);
+
+    expect(responses.map((r) => r.status).sort()).toEqual([201, 401]);
+    expect(await getCode(email)).toBeNull();
+  });
+
   it('returns 409 with a next action when the device limit is reached', async () => {
     const email = uniqueEmail('t013-limit');
     for (const ua of ['device-a', 'device-b']) {
