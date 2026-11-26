@@ -49,10 +49,12 @@ Design recovery flow specification documenting how readers regain access via pre
 
 | Option | Recovery Window | Rationale |
 | -------- | ----------------- | ----------- |
-| **A: 30-day device lifecycle** | Full 30 days from initial verification | Aligns with policy; user expects consistent experience |
-| **B: 7-day rolling refresh** | 7 days, extends on each access | Balances security (refreshes token) with UX |
-| **C: Single session only** | Only within same calendar day (24 hours) | Most conservative; requires daily verification |
-| **D: Custom window (configurable)** | Admin-controlled TTL for sessions | Flexible; adds operational complexity |
+| **A: Session refresh with absolute 30-day expiry** | Recovery refreshes the session, but access can never extend beyond 30 days from initial verification | Matches 30-day device lifecycle; refresh resets inactivity only |
+| **B: 30-day fixed window** | 30 days from initial verification, no refresh | Simpler; hard re-verification boundary |
+| **C: No expiry** | Recovery valid indefinitely | Maximum convenience; highest security risk |
+| **D: Configurable per reader** | Support override per reader | Flexible; adds operational and support complexity |
+
+> Options aligned with `research.md` Decision 2 (Phase 9 reconciliation, 2026-11-20). An earlier draft of this table listed different B–D options (7-day rolling, single session, admin TTL); they were never the options recorded in `research.md`.
 
 **Status**: ✅ APPROVED — Option A (session refresh on recovery; absolute expiry 30 days after initial verification — recovery cannot extend access beyond it). See `research.md`
 
@@ -84,7 +86,7 @@ From 06-website-reading-prd.md (v1.1.1):
 **Example (if Decision 1=A, Decision 2=A)**:
 ```text
 Recovery Strategy: Recovery takes precedence over fresh verification
-Session Lifetime: 30-day device lifecycle (full window)
+Session Lifetime: Session refresh with absolute 30-day expiry (refresh cannot extend beyond 30 days from initial verification)
 Race Condition Resolution: Cancel fresh verification request, restore from previous session
 Error Messaging: "Access restored from previous session" (no email sent)
 ```text

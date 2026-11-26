@@ -48,7 +48,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | No expiry—recovery sessions valid indefinitely | Maximum UX convenience; highest security risk; may conflict with data retention policy |
 | D | Configurable per-reader basis (support override) | Flexibility for special cases; added complexity; support burden |
 
-**Decision**: ✅ APPROVED — Option A (30-day device lifecycle with recovery session refresh; absolute 30-day expiry enforced regardless of recovery activity)
+**Decision**: ✅ APPROVED — Option A: session refresh with absolute 30-day expiry (rolling refresh cannot extend access beyond 30 days from initial verification)
 
 **Impact on Prompt 3B**: Recovery flows specification depends on absolute device expiry for state management, cleanup schedules, and error messaging when device lifecycle expires.
 
@@ -91,9 +91,9 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | Mailgun | Powerful API; strong developers; less newsletter-focused |
 | D | Other (AWS SES, Postmark, etc.) | Varies; requires evaluation |
 
-**Decision**: ✅ APPROVED — Hybrid (SendGrid for transactional email + Brevo for newsletters)
+**Decision**: ✅ APPROVED — Hybrid: Mailgun for transactional email + Brevo for newsletters. *Superseded 2026-11-19 in Spec 005: the original 2026-11-13 selection named SendGrid for transactional email; Mailgun replaced it (see `exports/GATE_3_FINAL_SIGN_OFF.md`).*
 
-**Impact on Prompt 3A**: Email template specification (subject line, body copy, footer branding) must match SendGrid's SMTP template syntax. Newsletter link must direct to Brevo signup URL per Decision 6.
+**Impact on Prompt 3A**: Email template specification (subject line, body copy, footer branding) must match Mailgun's template syntax; Spec 005 owns this work. Newsletter link must direct to Brevo signup URL per Decision 6.
 
 ---
 
@@ -168,7 +168,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | 1 | Recovery-first race condition | ✅ APPROVED | Option A (Recovery precedence) | Prompt 3B (recovery flows) |
 | 2 | Recovery lifetime eligibility | ✅ APPROVED | Option A (session refresh on recovery; absolute expiry 30 days after initial verification) | Prompt 3B (session state) |
 | 3 | Code expiry start time | ✅ APPROVED | Option A (From code generation) | Prompts 3A (copy), 3C (errors) |
-| 4 | Email service provider | ✅ APPROVED | SendGrid (API key + SMTP) | Prompt 3A (email integration) |
+| 4 | Email service provider | ✅ APPROVED | Hybrid: Mailgun (transactional) + Brevo (newsletter). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)* | Prompt 3A (email integration; Spec 005 owns) |
 | 5 | Manuscript publication readiness | ✅ DECIDED | Option C (Not yet approved; approval date to be confirmed) | Prompts 3A–3C (deferred until approval) |
 | 6 | Newsletter destination | ✅ APPROVED | Brevo (external signup link) | Prompt 3A (signup link) |
 | 7 | Route enforcement verification | ✅ APPROVED | Option A (noindex meta + sitemap exclusion; no robots.txt Disallow) | Prompt 1 (navigation validation) |
@@ -189,7 +189,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 1. Recovery-first race: **Option A** (Recovery takes precedence)
 2. Recovery lifetime: **Option A** (session refresh on recovery; absolute expiry 30 days after initial verification — recovery cannot extend access beyond that limit)
 3. Code expiry start: **Option A** (From code generation)
-4. Email service provider: **SendGrid** (API key + SMTP)
+4. Email service provider: **SendGrid** (API key + SMTP). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)*
 5. Manuscript status: **Not yet approved** (target: January 2027; exact approval date to be confirmed by Ash — using placeholder copy for now)
 6. Newsletter destination: **Brevo** (External signup link)
 7. Route enforcement: **Option A** (noindex meta tags + sitemap.xml exclusion; no robots.txt Disallow)

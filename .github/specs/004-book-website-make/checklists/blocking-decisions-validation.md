@@ -48,7 +48,7 @@ Each blocking decision MUST have:
 | --------- | ---------- | --------- | ---------- | --- |
 | Decision Point | ✓ | ✓ | "How long is a confirmed redemption eligible for recovery access?" | ✓ |
 | Rationale | ✓ | ✓ | Recovery lifetime determines session expiry; affects renewal before expiration | ✓ |
-| Option Count | ✓ (3+) | ✓ (4 options) | A (30-day rolling), B (30-day fixed), C (No expiry), D (Configurable) | ✓ |
+| Option Count | ✓ (3+) | ✓ (4 options) | A (session refresh with absolute 30-day expiry), B (30-day fixed), C (No expiry), D (Configurable) | ✓ |
 | Option Descriptions | ✓ | ✓ | All 4 options with security/UX trade-offs documented | ✓ |
 | Impact Assessment | ✓ | ✓ | "Recovery flows specification depends on session lifetime for state management, cleanup schedules, and error messaging" | ✓ |
 | Decision Status | ✓ | ✓ | "Awaiting user input from blocking decision matrix in spec.md" | ✓ |
@@ -177,7 +177,9 @@ Each blocking decision MUST have:
 
 ## Blocking Decision Matrix
 
-**User Decision Points** (awaiting selection):
+> **Historical snapshot (T057, 2026-11-11)**: this matrix shows the state before Ash chose. All 7 decisions were resolved on 2026-11-13; the authoritative record is [`research.md`](../research.md) (each decision's **Decision** line). Decision 2 selected Option A, "session refresh with absolute 30-day expiry". (`exports/decisions-selected.md` is a 2026-11-19 snapshot that still shows Decisions 1–6 as pending and uses different option letters, so do not use it to confirm selections.)
+
+**User Decision Points** (awaiting selection at the time):
 
 | Decision | Impact on Prompts | User Action Required | Reference |
 | ---------- | ------------------- | ---------------------- | ----------- |
