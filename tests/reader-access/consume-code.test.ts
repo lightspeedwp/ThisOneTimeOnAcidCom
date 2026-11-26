@@ -16,13 +16,14 @@ import { memoryBlobs, seedCode, uniqueEmail } from './us1-test-helpers';
 describe('consumeCode (RA-002)', () => {
   beforeEach(() => memoryBlobs.clear());
 
-  it('consumes a code once and deletes it', async () => {
+  it('consumes a code once, preventing replay', async () => {
     const email = uniqueEmail('consume');
     await seedCode(email);
     const { codeHash } = (await getCode(email))!;
 
     expect(await consumeCode(email, codeHash)).toBe(true);
-    expect(await getCode(email)).toBeNull();
+    // Code record is preserved after consumption; only the consume marker prevents reuse
+    expect(await getCode(email)).not.toBeNull();
     expect(await consumeCode(email, codeHash)).toBe(false);
   });
 

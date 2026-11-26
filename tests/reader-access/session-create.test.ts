@@ -58,7 +58,8 @@ describe('T013: POST /api/reader/session', () => {
 
     const session = await getSessionByToken(token);
     expect(session?.email).toBe(email);
-    expect(await getCode(email)).toBeNull();
+    // Code record is preserved after consumption; only the consume marker prevents reuse
+    expect(await getCode(email)).not.toBeNull();
   });
 
   it('sends no-store security headers', async () => {
@@ -116,7 +117,8 @@ describe('T013: POST /api/reader/session', () => {
     ]);
 
     expect(responses.map((r) => r.status).sort()).toEqual([200, 410]);
-    expect(await getCode(email)).toBeNull();
+    // Code record is preserved after consumption; only the consume marker prevents reuse
+    expect(await getCode(email)).not.toBeNull();
   });
 
   it('returns 409 with a next action when the device limit is reached', async () => {

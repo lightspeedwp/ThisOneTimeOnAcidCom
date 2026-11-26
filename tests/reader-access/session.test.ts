@@ -125,7 +125,8 @@ describe('US1 session service', () => {
       const session = await createSessionFromVerification(email, code, fingerprint);
 
       expect(session.email).toBe(email);
-      expect(await getCode(email)).toBeNull();
+      // Code record is preserved after consumption; only the consume marker prevents reuse
+      expect(await getCode(email)).not.toBeNull();
     });
 
     it('normalises email case and whitespace', async () => {
