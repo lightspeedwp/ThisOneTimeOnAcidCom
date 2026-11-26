@@ -55,15 +55,15 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 
 | Decision | Options | Status | Prompts Blocked | Evidence |
 | ---------- | --------- | -------- | ----------------- | ---------- |
-| **1. Recovery-first race** | 4 (A/B/C/D) | PENDING | Prompt 3B | blocking-decisions-validation.md Decision 1 |
-| **2. Recovery lifetime** | 4 (A/B/C/D) | PENDING | Prompt 3B | blocking-decisions-validation.md Decision 2 |
-| **3. Code expiry start** | 3 (A/B/C) | PENDING | Prompts 3A/3C | blocking-decisions-validation.md Decision 3 |
-| **4. Email provider** | 4 (A/B/C/D) | PENDING | Prompt 3A (partial) | blocking-decisions-validation.md Decision 4 |
-| **5. Manuscript ready** | 3 (A/B/C) | PENDING | Prompt 3A (gate) | blocking-decisions-validation.md Decision 5 |
-| **6. Newsletter link** | 4 (A/B/C/D) | PENDING | Prompt 3A | blocking-decisions-validation.md Decision 6 |
-| **7. Route enforcement** | 4 (A/B/C/D) | PENDING | Prompt 1 | blocking-decisions-validation.md Decision 7 |
+| **1. Recovery-first race** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompt 3B → Spec 005 | blocking-decisions-validation.md Decision 1 |
+| **2. Recovery lifetime** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompt 3B → Spec 005 | blocking-decisions-validation.md Decision 2 |
+| **3. Code expiry start** | 3 (A/B/C) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompts 3A/3C → Spec 005 | blocking-decisions-validation.md Decision 3 |
+| **4. Email provider** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13; Mailgun superseded SendGrid 2026-11-19 *(was PENDING)* | Prompt 3A → Spec 005 | blocking-decisions-validation.md Decision 4 |
+| **5. Manuscript ready** | 3 (A/B/C) | ✅ RESOLVED 2026-11-13: early release; per-chapter approval *(was PENDING)* | No longer gates reader screens | blocking-decisions-validation.md Decision 5 |
+| **6. Newsletter link** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompt 3A → Spec 005 | blocking-decisions-validation.md Decision 6 |
+| **7. Route enforcement** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompt 1 | blocking-decisions-validation.md Decision 7 |
 
-**Verdict**: ✅ **PASS** — All 7 decisions documented; 23 total options across decisions; all user-editable decisions identified.
+**Verdict**: ✅ **PASS** — All 7 decisions documented; 23 total options across decisions; all user-editable decisions identified. Status updated 2026-11-26: all 7 resolved on 2026-11-13 (see `research.md`); the original 2026-11-11 status was PENDING for each.
 
 ---
 

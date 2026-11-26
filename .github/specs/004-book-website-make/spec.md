@@ -285,12 +285,12 @@ Once approved, Phase A will include:
 
 | # | Decision | Resolution | Execution Impact |
 | --- | ---------- | ----------- | --- |
-| 1 | Recovery-first race condition | Option A: Recovery takes precedence | Decision resolved for Prompt 3B (execution deferred — manuscript gate) |
-| 2 | Recovery lifetime eligibility | Option A: session refresh on recovery; absolute expiry 30 days after initial verification | Decision resolved for Prompt 3B (execution deferred — manuscript gate) |
-| 3 | Code expiry start time | Option A: From code generation | Decision resolved for Prompts 3A, 3C (execution deferred — manuscript gate) |
+| 1 | Recovery-first race condition | Option A: Recovery takes precedence | Decision resolved for Prompt 3B — Spec 005 owns execution |
+| 2 | Recovery lifetime eligibility | Option A: session refresh on recovery; absolute expiry 30 days after initial verification | Decision resolved for Prompt 3B — Spec 005 owns execution |
+| 3 | Code expiry start time | Option A: From code generation | Decision resolved for Prompts 3A, 3C — Spec 005 owns execution |
 | 4 | Email service provider | Hybrid: Mailgun (transactional) + Brevo (newsletter). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)* | Decision resolved for Prompt 3A; Spec 005 owns execution |
 | 5 | Manuscript publication readiness | ✅ Revised 2026-11-13: early release — build reader screens now; chapters and addendums published individually once Ash approves each | No longer gates the reader screens; per-chapter approval gates publication |
-| 6 | Newsletter destination | Brevo (external signup link) | Decision resolved for Prompt 3A (execution deferred — manuscript gate) |
+| 6 | Newsletter destination | Brevo (external signup link) | Decision resolved for Prompt 3A — Spec 005 owns execution |
 | 7 | Route enforcement verification | Option A: noindex meta tags + sitemap exclusion; no robots.txt Disallow | Decision resolved for Prompt 1 |
 
 **Implications**:

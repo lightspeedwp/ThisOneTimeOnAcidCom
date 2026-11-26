@@ -39,7 +39,7 @@
 - ✅ **Decision 1**: Recovery-first race condition → **Option A**: Recovery takes precedence
 - ✅ **Decision 2**: Recovery lifetime eligibility → **Option A**: 30-day absolute expiry + session refresh on recovery
 - ✅ **Decision 3**: Code expiry start time → **Option A**: From code generation
-- ✅ **Decision 4**: Email service provider → **Hybrid**: SendGrid (transactional) + Brevo (newsletter)
+- ✅ **Decision 4**: Email service provider → **Hybrid**: Mailgun (transactional) + Brevo (newsletter). *Mailgun superseded the original SendGrid choice in Spec 005 on 2026-11-19*
 - ✅ **Decision 5**: Manuscript publication readiness → **Early release**: Build screens now; chapters published individually as Ash approves
 - ✅ **Decision 6**: Newsletter destination → **Brevo**: External signup link
 - ✅ **Decision 7**: Route enforcement verification → **Option A**: Noindex meta tags + sitemap exclusion
@@ -156,5 +156,5 @@ No violations. Constitution check passes; no complexity trade-offs required.
 
 **Deliverables**:
 - **data-model.md**: Specification File, Design Baseline, Design Candidate, Blocking Decision, Claude Code Prompt, Preflight Analysis entities with fields and relationships
-- **contracts/**: Six Figma Make prompt specifications (Prompts 1, 2A, 2B, 3A exact previews; Prompts 3B, 3C blocked with prerequisites)
+- **contracts/**: Six prompt specifications for Claude direct execution (SC-004). Prompts 1, 2A and 2B were delivered in PR #648; Prompts 3A, 3B and 3C are handed over to Spec 005, with their decisions resolved 2026-11-13
 - **quickstart.md**: Approval flow, validation scenarios, and gate conditions for staged prompt execution

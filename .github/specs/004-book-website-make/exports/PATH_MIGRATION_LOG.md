@@ -79,15 +79,15 @@
 
 ✅ **Verification method**: Manual search for `content/book/` across Spec 004 files
 
-⚠️ **Result**: Remaining references found in:
+✅ **Result** (updated 2026-11-26): no working Spec 004 file still points at `content/book/` as a source path. *Historical (2026-11-20): the first check found the references below pending; all were updated in the Phase 9 reconciliation (T076).*
 
-- data-model.md (lines 11, 15) — PENDING: Update to `references/`
-- version-reconciliation.md (line 11) — PENDING: Update to `references/`
-- source-file-inventory.md (line 11) — PENDING: Update to `references/`
-- checklists/specification-quality.md (lines 139, 189) — PENDING: Update to `references/`
-- checklists/pre-approval-reconciliation-validation.md (line 44) — PENDING: Update to `references/`
+- data-model.md (lines 11, 15) — ✅ updated to `references/`
+- version-reconciliation.md (line 11) — ✅ updated to `references/`
+- source-file-inventory.md (line 11) — ✅ updated to `references/`
+- checklists/specification-quality.md (lines 139, 189) — ✅ updated to `references/`
+- checklists/pre-approval-reconciliation-validation.md (line 44) — ✅ updated to `references/`
 
-✅ **Status**: Main Spec 004 files updated; additional references in internal documentation pending T070 completion
+✅ **Status**: No migration work remains. The paths kept on purpose are listed in the correction note at the top of this file
 
 ---
 

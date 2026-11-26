@@ -116,12 +116,12 @@ Per spec requirement: "All 7 blocking decisions documented with options, awaitin
 
 | Prompt | Status | Approval Evidence | Blockers | Ready for Figma Make |
 | -------- | -------- | ------------------- | ---------- | ------------------- |
-| **Prompt 1** (Navigation) | ✓ READY | prompt-1-exact-preview.md; all 4 elements complete | ❌ Decision 7 (Route Enforcement) | YES (placeholder) |
+| **Prompt 1** (Navigation) | ✓ DELIVERED (PR #648) | prompt-1-exact-preview.md; all 4 elements complete | ✓ Decision 7 resolved 2026-11-13 | Done |
 | **Prompt 2A** (Design Baseline) | ✓ READY | prompt-2a-design-baseline.md; CSS + JSON formats | None | YES |
 | **Prompt 2B** (Navigation Design) | ✓ READY | prompt-2b-navigation-design.md; 100% complete | None | YES |
-| **Prompt 3A** (Reader Access) | ✓ READY | prompt-3a-reader-access.md; 91% complete | ❌ Decisions 3, 4, 5, 6 (placeholders) | YES (placeholders) |
-| **Prompt 3B** (Recovery Flows) | ❌ BLOCKED | prompt-3b-recovery-flows.md; template only | ❌ Decisions 1, 2 (critical) | NO |
-| **Prompt 3C** (Error States) | ❌ BLOCKED | prompt-3c-error-states.md; template only | ❌ Decision 3 (critical) | NO |
+| **Prompt 3A** (Reader Access) | ➡️ Spec 005 | prompt-3a-reader-access.md; 91% complete | ✓ Decisions 3, 4, 5, 6 resolved 2026-11-13 | Spec 005 owns |
+| **Prompt 3B** (Recovery Flows) | ➡️ Spec 005 | prompt-3b-recovery-flows.md; template only | ✓ Decisions 1, 2 resolved 2026-11-13 | Spec 005 owns |
+| **Prompt 3C** (Error States) | ➡️ Spec 005 | prompt-3c-error-states.md; template only | ✓ Decision 3 resolved 2026-11-13 | Spec 005 owns |
 
 ---
 

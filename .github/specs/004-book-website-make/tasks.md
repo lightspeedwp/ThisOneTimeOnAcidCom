@@ -128,7 +128,7 @@ The continuation documents in `continuations/` (archived) used their own T060–
 - [ ] T020 [P] [US3] Update research.md with Decision 1 (Recovery-first race): Option A approved, implementation rationale, impact on Prompt 3B per spec.md blocking table
 - [ ] T021 [P] [US3] Update research.md with Decision 2 (Recovery lifetime): Option A approved (30-day absolute expiry), implementation rationale, impact on Prompt 3B
 - [ ] T022 [P] [US3] Update research.md with Decision 3 (Code expiry start time): Option A approved (from generation), implementation rationale, impact on Prompts 3A/3C per spec.md
-- [ ] T023 [P] [US3] Update research.md with Decision 4 (Email provider): Hybrid (SendGrid + Brevo) approved, implementation rationale, rate limits documented
+- [ ] T023 [P] [US3] Update research.md with Decision 4 (Email provider): Hybrid (Mailgun transactional + Brevo newsletter) approved — Mailgun superseded the original SendGrid choice in Spec 005 on 2026-11-19 — implementation rationale, rate limits documented
 - [ ] T024 [P] [US3] Update research.md with Decision 5 (Manuscript readiness): Early release decision approved 2026-11-13, chapters published individually, impact on Prompts 3A–3C → Spec 005
 - [ ] T025 [P] [US3] Update research.md with Decision 6 (Newsletter destination): Brevo external signup approved, implementation rationale, non-subscription statement required per spec.md
 - [ ] T026 [P] [US3] Update research.md with Decision 7 (Route enforcement): Option A approved (noindex + sitemap exclusion), verification method documented
@@ -715,7 +715,7 @@ Finalize Phase 8 scope updates, document SC-003 approval, and prepare Spec 004 f
 - [ ] T069 Validate all 20+ specification artifacts present and version-locked for Spec 004 Phase 9 sign-off — ⏳ lock method and table recorded in spec.md (2026-11-20). Tick once PR #649 merges and the lock commit is filled in
 - [x] T070 Mark Phase 8 T054 and T059 complete: scope-updated acceptance criteria now met — ✅ done in the Phase 9 reconciliation
 - [x] ~~T071 Generate final PR description and commit message for merge to main~~ — **SUPERSEDED**: PR #622 merged (`19da240`)
-- [x] ~~T072 Verify build passes and branch validation succeeds before merge~~ — **SUPERSEDED**: PR #622 merged. The reconciliation PR runs the same checks
+- [x] ~~T072 Verify build passes and branch validation succeeds before merge~~ — **SUPERSEDED**: PR #622 merged. The reconciliation PR runs branch validation, Markdown lint and the CI workflows; it does not run the production build locally, because it changes documentation only
 - [x] T073 Merge PR #622 to main branch, close Phase 9 Convergence — ✅ merged (`19da240`)
 - [x] ~~T074 Initialize Spec 005 Phase 1 (Decision Resolution) with 2026-12-15 target completion~~ — **MOVED_TO_SPEC_005**: `../005-reader-access/tasks.md` Phase 0 (RA-T001–RA-T009) owns decision resolution
 
