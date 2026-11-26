@@ -105,19 +105,26 @@ Where:
 
 ### ✗ Invalid Branch Names
 
-- `claude/my-feature` — FORBIDDEN prefix (reserved for Claude Code internal)
 - `copilot/fix-bug` — FORBIDDEN prefix (reserved for GitHub Copilot)
+- `openai/my-feature` — FORBIDDEN prefix (reserved for OpenAI integration)
 - `feature/dark-mode` — WRONG type (should be `feat/`)
 - `my-feature` — MISSING type
 - `feat/DarkMode` — WRONG case (should be lowercase with hyphens)
 - `feat/_dash-scope` — INVALID scope format
 - `feat/scope_title` — WRONG separator (should be hyphen, not underscore)
 
+## Allowed Special Prefixes
+
+These prefixes are automatically managed and bypass standard naming validation:
+
+- ✅ `claude/` – Claude Code session branches (auto-assigned by Claude Code environment)
+- ✅ `dependabot/` – Dependabot dependency updates (auto-managed)
+- ✅ `renovate/` – Renovate dependency updates (auto-managed)
+
 ## FORBIDDEN Prefixes
 
-These prefixes break PR template routing and automation:
+These prefixes break PR template routing and automation and must be avoided:
 
-- ❌ `claude/` – Reserved for Claude Code internal sessions
 - ❌ `copilot/` – Reserved for GitHub Copilot integration
 - ❌ `openai/` – Reserved for OpenAI integration
 
@@ -132,6 +139,10 @@ These prefixes break PR template routing and automation:
 1. Downstream CI/CD pipelines
 
 ## Exemptions
+
+### Claude Code Session Branches
+
+Branches `claude/*` are auto-assigned by Claude Code environment and bypass naming validation automatically.
 
 ### Dependabot & Renovate
 
