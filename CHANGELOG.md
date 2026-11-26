@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Spec 006 session tests (T099–T102)** — Fixed two pre-existing test failures in `tests/session/`: (1) `renewSession › should extend expiry to 30 days from renewal time` now uses `vi.useFakeTimers` / `vi.setSystemTime` to advance the clock past the 1-second renewal coalesce window before asserting the new timestamp, eliminating the flaky millisecond race; (2) `Expired sessions › should not count expired sessions against the device limit` — corrected `createSessionUnserialised` to use the existing `isSessionActive` helper (which checks both `status` and `expiresAt`) when counting occupied device slots, so an expired session with `status: 'active'` in storage no longer blocks a new session from being created.
 
+### Fixed
+
+- **Specification 005 RA-002: Code consumption atomicity** — Fixed replay test by preserving code records after consumption. The consume marker (atomic write with `onlyIfNew`) is the security-critical component that prevents reuse; code deletion is optional cleanup. Second attempts to redeem a code now correctly return 410 `code-used` instead of 400 `code-invalid`, enabling proper error classification on replay attacks. Updated 4 test assertions across 3 test files to verify code preservation.
+
 ### Added
 
 - **Specification 004 owner decisions** — Recorded the menu, canonical-domain, `/ebook` and AAA contrast decisions; design tokens v2.1.0. Documentation only; see `PHASE_2_EXECUTION_LOG.md`.

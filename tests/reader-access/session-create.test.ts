@@ -1,6 +1,7 @@
 /**
  * T013 (US1) — integration test for the session creation endpoint.
- * verify → 201 Created + HttpOnly session cookie (contracts/session-api.md §1)
+ * Implements spec 005 contract: verify → 200 OK + HttpOnly session cookie
+ * (contracts/reader-access-functions.md § Verify a code)
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
@@ -26,13 +27,13 @@ describe('T013: POST /api/reader/session', () => {
     memoryBlobs.clear();
   });
 
-  it('returns 201 with a secure HttpOnly cookie on a valid code', async () => {
+  it('returns 200 with a secure HttpOnly cookie on a valid code', async () => {
     const email = uniqueEmail('t013');
     const code = await seedCode(email);
 
     const res = await createHandler(jsonRequest(URL_CREATE, { email, verificationCode: code }));
 
-    expect(res.status).toBe(201);
+    expect(res.status).toBe(200);
     const setCookie = res.headers.get('set-cookie') ?? '';
     expect(setCookie).toMatch(/^sessionToken=[A-Za-z0-9_-]{43};/);
     expect(setCookie).toContain('Max-Age=2592000');
@@ -45,7 +46,8 @@ describe('T013: POST /api/reader/session', () => {
     const token = cookieFrom(res).split('=')[1];
     const body = await res.json();
 
-    expect(body).toMatchObject({ status: 'created', state: 'verified' });
+    expect(body).toMatchObject({ state: 'verified' });
+    expect(body).toHaveProperty('expiresAt');
     expect(JSON.stringify(body)).not.toContain(token);
   });
 
@@ -56,7 +58,8 @@ describe('T013: POST /api/reader/session', () => {
 
     const session = await getSessionByToken(token);
     expect(session?.email).toBe(email);
-    expect(await getCode(email)).toBeNull();
+    // Code record is preserved after consumption; only the consume marker prevents reuse
+    expect(await getCode(email)).not.toBeNull();
   });
 
   it('sends no-store security headers', async () => {
@@ -72,10 +75,10 @@ describe('T013: POST /api/reader/session', () => {
     ['malformed email', { email: 'not-an-email', verificationCode: '123456' }],
     ['missing code', { email: 'reader@example.com' }],
     ['non-numeric code', { email: 'reader@example.com', verificationCode: '12ab56' }],
-  ])('returns 400 invalid_verification for %s', async (_label, body) => {
+  ])('returns 400 code-invalid for %s', async (_label, body) => {
     const res = await createHandler(jsonRequest(URL_CREATE, body));
     expect(res.status).toBe(400);
-    expect(await res.json()).toEqual({ error: 'invalid_verification' });
+    expect(await res.json()).toEqual({ state: 'code-invalid' });
   });
 
   it('returns 400 for a body that is not JSON', async () => {
@@ -83,24 +86,25 @@ describe('T013: POST /api/reader/session', () => {
     expect((await createHandler(req)).status).toBe(400);
   });
 
-  it('returns 401 verification_failed for a wrong code without setting a cookie', async () => {
+  it('returns 400 code-invalid for a wrong code without setting a cookie', async () => {
     const email = uniqueEmail('t013-wrong');
     await seedCode(email, '123456');
 
     const res = await createHandler(jsonRequest(URL_CREATE, { email, verificationCode: '000000' }));
 
-    expect(res.status).toBe(401);
-    expect(await res.json()).toEqual({ error: 'verification_failed' });
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ state: 'code-invalid' });
     expect(res.headers.get('set-cookie')).toBeNull();
   });
 
-  it('returns 401 when the same code is replayed', async () => {
+  it('returns 410 code-used when the same code is replayed', async () => {
     const email = uniqueEmail('t013-replay');
     const code = await seedCode(email);
     await createHandler(jsonRequest(URL_CREATE, { email, verificationCode: code }));
 
     const replay = await createHandler(jsonRequest(URL_CREATE, { email, verificationCode: code }));
-    expect(replay.status).toBe(401);
+    expect(replay.status).toBe(410);
+    expect(await replay.json()).toEqual({ state: 'code-used' });
   });
 
   it('lets exactly one of two concurrent submissions of a code succeed (RA-002)', async () => {
@@ -112,8 +116,9 @@ describe('T013: POST /api/reader/session', () => {
       createHandler(jsonRequest(URL_CREATE, { email, verificationCode: code })),
     ]);
 
-    expect(responses.map((r) => r.status).sort()).toEqual([201, 401]);
-    expect(await getCode(email)).toBeNull();
+    expect(responses.map((r) => r.status).sort()).toEqual([200, 410]);
+    // Code record is preserved after consumption; only the consume marker prevents reuse
+    expect(await getCode(email)).not.toBeNull();
   });
 
   it('returns 409 with a next action when the device limit is reached', async () => {
@@ -128,12 +133,12 @@ describe('T013: POST /api/reader/session', () => {
 
     expect(res.status).toBe(409);
     expect(await res.json()).toEqual({
-      error: 'device_limit_exceeded',
+      state: 'device-limit-exceeded',
       action: 'select_device_to_terminate_or_reverify',
     });
   });
 
-  it('returns 429 with Retry-After after 5 attempts in the window', async () => {
+  it('returns 429 with Retry-After when code attempt limit is reached', async () => {
     const email = uniqueEmail('t013-rate');
     await seedCode(email, '123456');
     for (let i = 0; i < 5; i += 1) {
@@ -143,6 +148,7 @@ describe('T013: POST /api/reader/session', () => {
     const res = await createHandler(jsonRequest(URL_CREATE, { email, verificationCode: '123456' }));
 
     expect(res.status).toBe(429);
+    expect(await res.json()).toEqual({ state: 'limited' });
     expect(Number(res.headers.get('retry-after'))).toBeGreaterThan(0);
   });
 
@@ -151,7 +157,7 @@ describe('T013: POST /api/reader/session', () => {
     const res = await createHandler(jsonRequest(URL_CREATE, { email: uniqueEmail('t013-500'), verificationCode: '123456' }));
 
     expect(res.status).toBe(500);
-    expect(await res.json()).toEqual({ error: 'server_error' });
+    expect(await res.json()).toEqual({ state: 'server-error' });
     spy.mockRestore();
   });
 
@@ -165,13 +171,13 @@ describe('T013: POST /api/reader/session', () => {
     const res = await verifyHandler(
       jsonRequest('https://example.test/api/reader/verifications', { email, code: await seedCode(email) })
     );
-    expect(res.status).toBe(201);
+    expect(res.status).toBe(200);
     expect(res.headers.get('set-cookie')).toMatch(/^sessionToken=/);
   });
 
   it('is reachable as POST on the reader-session function', async () => {
     const email = uniqueEmail('t013-session');
     const res = await sessionHandler(jsonRequest(URL_CREATE, { email, verificationCode: await seedCode(email) }));
-    expect(res.status).toBe(201);
+    expect(res.status).toBe(200);
   });
 });

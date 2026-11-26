@@ -1,13 +1,13 @@
 /**
- * POST /api/reader/session — create a reader session after email verification
+ * POST /api/reader/verifications — verify a code and create a reader session
  *
- * T017 (US1). Contract: .github/specs/006-reader-access-session-mgmt/contracts/session-api.md §1
+ * T017 (US1). Contract: .github/specs/005-reader-access/contracts/reader-access-functions.md
  *
- * Request:  { "email": "reader@example.com", "verificationCode": "123456" }
- *           ("code" is accepted as an alias for the existing ReaderAccessForm)
- * Success:  201 Created + Set-Cookie: sessionToken=…; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000
- * Errors:   400 invalid_verification · 401 verification_failed · 409 device_limit_exceeded
- *           429 rate_limited · 500 server_error
+ * Request:  { "email": "reader@example.com", "code": "123456" } or { "verificationCode": "…" }
+ * Success:  200 OK + Set-Cookie: sessionToken=…; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000
+ *           state: "verified"
+ * Errors:   400 code-invalid · 410 code-expired · 410 code-used · 429 limited
+ *           409 device_limit_exceeded · 500 server_error
  *
  * The token travels only in the HttpOnly cookie, never in the response body.
  */
@@ -48,7 +48,7 @@ export default async function handler(req: Request): Promise<Response> {
   try {
     body = (await req.json()) as Record<string, unknown>;
   } catch {
-    return json({ error: 'invalid_verification' }, 400);
+    return json({ state: 'code-invalid' }, 400);
   }
 
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
@@ -56,12 +56,12 @@ export default async function handler(req: Request): Promise<Response> {
   const code = typeof rawCode === 'string' ? rawCode.trim() : '';
 
   if (!EMAIL_REGEX.test(email) || !CODE_REGEX.test(code)) {
-    return json({ error: 'invalid_verification' }, 400);
+    return json({ state: 'code-invalid' }, 400);
   }
 
   const rateLimit = checkRateLimit(email, SESSION_CREATE_RATE_LIMIT);
   if (rateLimit.isLimited) {
-    return json({ error: 'rate_limited' }, 429, {
+    return json({ state: 'limited' }, 429, {
       'Retry-After': String(rateLimit.resetAfterSeconds),
     });
   }
@@ -79,26 +79,34 @@ export default async function handler(req: Request): Promise<Response> {
 
     return json(
       {
-        status: 'created',
         state: 'verified',
         expiresAt: session.expiresAt,
-        message: 'Session created. Access granted to chapters.',
       },
-      201,
+      200,
       { 'Set-Cookie': formatSessionCookie(createSessionCookie(session.sessionId)) }
     );
   } catch (error) {
     if (error instanceof SessionCreationError) {
-      const body =
-        error.errorCode === 'device_limit_exceeded'
-          ? { error: error.errorCode, action: 'select_device_to_terminate_or_reverify' }
-          : { error: error.errorCode };
+      const stateMap: Record<string, string> = {
+        code_invalid: 'code-invalid',
+        code_expired: 'code-expired',
+        code_used: 'code-used',
+        limited: 'limited',
+        device_limit_exceeded: 'device-limit-exceeded',
+      };
+
+      const body: Record<string, unknown> = { state: stateMap[error.errorCode] };
+
+      if (error.errorCode === 'device_limit_exceeded') {
+        body.action = 'select_device_to_terminate_or_reverify';
+      }
+
       return json(body, error.statusCode);
     }
 
     console.error('SESSION_CREATE_ERROR', {
       message: error instanceof Error ? error.message : 'Unknown error',
     });
-    return json({ error: 'server_error' }, 500);
+    return json({ state: 'server-error' }, 500);
   }
 }

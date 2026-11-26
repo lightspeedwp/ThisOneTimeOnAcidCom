@@ -397,8 +397,9 @@ export async function consumeCode(email: string, codeHash: string): Promise<bool
   if (result && result.modified === false) {
     return false;
   }
-  // Best effort: the marker already blocks reuse if this delete fails.
-  await deleteCode(email).catch(() => undefined);
+  // The consume marker blocks reuse; code deletion is optional cleanup to free storage.
+  // Skip deletion to preserve the code record, which helps distinguish code_used from code_invalid.
+  // await deleteCode(email).catch(() => undefined);
   return true;
 }
 
