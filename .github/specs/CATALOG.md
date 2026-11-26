@@ -13,7 +13,7 @@ ThisOneTimeOnAcidCom repository governance and feature development.
 | 002 | media-library | TOA Media Library Strategy and Asset Recovery | Draft | @ashley | 2026-10-17 | 2026-10-18 | [.github/specs/002-media-library/](./002-media-library/) |
 | 003 | guidelines-refactor | Guidelines Refactor (TOA-358) | Implemented | @ashley | 2026-10-24 | 2026-10-24 | [.github/specs/003-refactor-guidelines/](./003-refactor-guidelines/) |
 | 004 | book-website-make | Book Website Figma Make Prompt Pack | Draft | @ashley | 2026-11-09 | 2026-11-09 | [.github/specs/004-book-website-make/](./004-book-website-make/) |
-| 005 | reader-access | Reader Access: Email Verification, Session Management, Recovery | Complete | @ashley | 2026-11-12 | 2026-11-19 | [.github/specs/005-reader-access/](./005-reader-access/) |
+| 005 | reader-access | Reader Access: Email Verification, Session Management, Recovery | In Progress (see tasks.md "Remaining to finish") | @ashley | 2026-11-12 | 2026-11-26 | [.github/specs/005-reader-access/](./005-reader-access/) |
 
 ---
 
