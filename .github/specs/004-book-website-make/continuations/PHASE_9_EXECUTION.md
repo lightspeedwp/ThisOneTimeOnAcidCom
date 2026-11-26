@@ -1,3 +1,5 @@
+> ⚠️ **SUPERSEDED — archived 2026-11-20 (Phase 9 reconciliation)**. Do not run this prompt. Its task IDs (T060–T074) never matched `tasks.md`, its branch names have been used already, and most of its work merged through PRs #630 and #639. For the current state, and a table mapping each continuation ID to where it was resolved, see the "Phase 9 Reconciliation" section in [`../tasks.md`](../tasks.md).
+
 # Continuation Prompt: Spec 004 Phase 9 Convergence Execution
 
 **Branch**: `docs/spec-004-linear-sync-handoff`  
