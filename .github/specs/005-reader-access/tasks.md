@@ -83,8 +83,8 @@ Existing IDs and meanings are kept.
 ### Tests for User Story 1
 
 - [ ] RA-T030 [P] [US1] Contract tests in tests/reader-access/code-request.test.ts: 202 `request-received`, 502 `provider-failure`, 429 `limited`, 400 `code-invalid`; no session, reader record or newsletter subscription created — Open (2026-11-26): tests/reader-access/code-request.test.ts does not exist; reader-code-request.ts has no contract test.
-- [ ] RA-T031 [P] [US1] Contract tests in tests/reader-access/verify.test.ts: 200 `verified` with cookie, 400 `code-invalid`, 410 `code-expired`, 410 `code-used`, 429 `limited`; two concurrent submissions of one code produce exactly one success — Partial (2026-11-26): session-create.test.ts covers success with cookie, replay and one-of-two concurrent submissions. Spec 006's contract replaced this task's states (201 `verified`, 401 `verification_failed`) — see decision 12 in decisions.md.
-- [x] RA-T032 [P] [US1] Contract tests in tests/reader-access/chapter.test.ts: 200 only with an active session and approved chapter; 401 `request-pending` with no content; 404 and 503 `content-unavailable` — Verified (2026-11-26): tests/reader-access/chapter-access.test.ts covers 200 with a valid session, 401 without one, 404 `content-unavailable` and 500 on storage failure.
+- [ ] RA-T031 [P] [US1] Contract tests in tests/reader-access/verify.test.ts: 200 `verified` with cookie, 400 `code-invalid`, 410 `code-expired`, 410 `code-used`, 429 `limited`; two concurrent submissions of one code produce exactly one success — Partial (2026-11-26): session-create.test.ts covers success with cookie, replay and one-of-two concurrent submissions. Current implementation (via spec 006) returns 201 `verified` / 401 `verification_failed` instead; which contract governs is pending decision 12 in decisions.md.
+- [ ] RA-T032 [P] [US1] Contract tests in tests/reader-access/chapter.test.ts: 200 only with an active session and approved chapter; 401 `request-pending` with no content; 404 and 503 `content-unavailable` — Partial (2026-11-26): tests/reader-access/chapter-access.test.ts covers 200 with a valid session, 401 without one, 404 `content-unavailable` and 500 on storage failure. Required 503 `content-unavailable` case is not covered.
 
 ### Implementation for User Story 1
 
@@ -146,7 +146,7 @@ Existing IDs and meanings are kept.
 Specification convergence and blockers resolved during review and implementation discovery.
 
 - [x] RA-T053 RESOLVED: Amend Constitution IV content location — editorial content now lives in `src/content/` (PR #608); approve amendment to Constitution IV (`.specify/memory/constitution.md`) to reflect this as the canonical location per Constitution Amendment process. Decision: amend Constitution IV. Unblocks RA-T028 and R-03. Maps RA-012/Constitution IV.
-- [x] RA-T054 RESOLVED: Protected edition location decided — store in `netlify/functions/protected-content/` as a server-only location that cannot be matched by client `import.meta.glob` patterns. Approved chapters remain in `src/content/book/` and bundled by `bookContentLoader`; protected edition is served exclusively through chapter function (RA-035/RA-T037) per RA-001, SC-004. Maps RA-001/SC-004.
+- [x] RA-T054 RESOLVED: Protected edition location decided — store in `netlify/functions/protected-content/` as a server-only location that cannot be matched by client `import.meta.glob` patterns. Chapters in `src/content/book/` are excluded from the client bundle (`BOOK_SOURCE_DIRECTORIES = []`); once placed in the server-only location they will be served exclusively through the chapter function (RA-035/RA-T037) per RA-001, SC-004. Maps RA-001/SC-004.
 - [x] RA-T055 Fix response module imports in netlify/functions/ (reader-code-request.ts, reader-verify.ts, reader-chapter.ts) — imports correctly use responses.invalid(), responses.verified(), responses.received(), responses.expired(), responses.used(), responses.limited(), responses.error(), responses.unavailable(), responses.content() as exported from netlify/lib/reader-access/responses.ts. RESOLVED. Maps RA-033/RA-034/RA-035.
 - [x] RA-T056 Wire ReaderAccessForm component into src/app/components/pages/book-site/BookHomePage.tsx routing — form component is now integrated into BookHomePage with onCodeRequested and onCodeVerified callbacks. RESOLVED. Maps RA-036/RA-003/RA-008.
 - [x] RA-T057 Update src/app/components/pages/about/EbookPage.tsx to use /api/reader/chapters/{chapterId} endpoint — EbookPage now imports ReaderAccessGate component for session validation and chapter loading from reader API. RESOLVED (partial integration). Maps RA-037/RA-001/SC-004.
@@ -162,12 +162,13 @@ what spec 005 still needs on top of it.
 
 **Needs Ash first**
 
-1. **Contract authority** (decision 12): spec 006's contract replaced spec
-   005's response states for verification (201 `verified`, 401
-   `verification_failed` instead of 200, 400 `code-invalid`, 410
-   `code-expired`/`code-used`, 429 `limited`). Confirm which contract governs,
-   then update [contracts/reader-access-functions.md](contracts/reader-access-functions.md)
-   or the functions to match. Blocks RA-T030 and RA-T031.
+1. **Contract authority** (decision 12): current implementation (via spec 006)
+   returns 201 `verified` / 401 `verification_failed` for verification; spec
+   005's contract specifies 200, 400 `code-invalid`, 410 `code-expired`/
+   `code-used`, 429 `limited`. Confirm which contract governs, then update
+   [contracts/reader-access-functions.md](contracts/reader-access-functions.md)
+   or the functions to match. Blocks RA-T031 only (RA-T030 covers
+   `code-requests` and is independently actionable).
 2. **Protected edition content** (RA-T028, RA-T035): place the approved
    chapters 1–4 in the server-only location from RA-T054. Until then
    reader-chapter.ts serves placeholder text.
