@@ -1,8 +1,8 @@
 {
   "metadata": {
     "name": "This One Time on Acid — design baseline tokens",
-    "version": "2.0.0",
-    "generated": "2026-11-20",
+    "version": "2.1.0",
+    "generated": "2026-11-26",
     "source": "Prompt 2A — Design System Baseline Export (SC-004 Claude direct execution)",
     "baseline": "Design Brief v1.1.2; Design Register v1.9.0",
     "approval": {
@@ -17,7 +17,15 @@
       "lightSelector": ":root[data-theme='light']",
       "usesPrefersColorScheme": false
     },
-    "companion": "design-tokens.css"
+    "companion": "design-tokens.css",
+    "ownerDecisions": {
+      "date": "2026-11-26",
+      "D-1": "tertiary text uses tan",
+      "D-2": "error text cream with pink icon/border",
+      "D-3": "primary button dark fill, cream label, pink border",
+      "D-4": "purple for large text (24px+) and non-text only",
+      "L-2/L-3": "stay on-palette"
+    }
   },
   "typography": {
     "heading": {
@@ -58,7 +66,7 @@
         "primary-bg": "#0B0B10",
         "secondary-text": "#CFC7BB",
         "secondary-bg": "#12121A",
-        "tertiary-text": "#9C9488",
+        "tertiary-text": "#CFC7BB",
         "panel": "#171722",
         "accent-pink": "#FF3AAE",
         "accent-yellow": "#F4FF3C",
@@ -81,8 +89,10 @@
   "components": {
     "button": {
       "dark": {
-        "bg-primary": "#FF3AAE",
-        "text-primary": "#0B0B10",
+        "bg-primary": "#0B0B10",
+        "bg-primary-hover": "#171722",
+        "text-primary": "#F6F2EB",
+        "border-primary": "#FF3AAE",
         "bg-secondary": "#171722",
         "text-secondary": "#F6F2EB",
         "border-secondary": "#9C9488",
@@ -90,8 +100,10 @@
         "text-disabled": "#9C9488"
       },
       "light": {
-        "bg-primary": "#FF3AAE",
-        "text-primary": "#0B0B10",
+        "bg-primary": "#0B0B10",
+        "bg-primary-hover": "#171722",
+        "text-primary": "#F6F2EB",
+        "border-primary": "#FF3AAE",
         "bg-secondary": "#CFC7BB",
         "text-secondary": "#0B0B10",
         "border-secondary": "#171722",
@@ -149,7 +161,7 @@
         "border-focused": "#FF3AAE",
         "text": "#F6F2EB",
         "error-border": "#FF3AAE",
-        "error-text": "#FF3AAE",
+        "error-text": "#F6F2EB",
         "placeholder": "#CFC7BB"
       },
       "light": {

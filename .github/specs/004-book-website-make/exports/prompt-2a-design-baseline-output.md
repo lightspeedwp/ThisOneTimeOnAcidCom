@@ -3,8 +3,8 @@
 **Date**: 2026-11-20
 **Execution model**: SC-004 (Claude direct execution)
 **Contract**: [`contracts/prompt-2a-design-baseline.md`](../contracts/prompt-2a-design-baseline.md)
-**Deliverables**: [`design-tokens.css`](./design-tokens.css), [`design-tokens.json`](./design-tokens.json) (both v2.0.0, replacing the earlier v1.0.0 export)
-**Status**: ✅ Delivered and validated. ⏳ Light-theme mapping still pending approval.
+**Deliverables**: [`design-tokens.css`](./design-tokens.css), [`design-tokens.json`](./design-tokens.json) (v2.1.0: owner decisions of 2026-11-26 applied)
+**Status**: ✅ Delivered and validated. ✅ AAA decisions D-1 to D-4 and L-1 to L-3 resolved (2026-11-26). ⏳ Overall light-theme mapping still pending approval.
 
 ---
 
@@ -53,18 +53,18 @@ Ratios computed with the WCAG relative-luminance formula. The repository target 
 
 ### Dark theme (approved)
 
-| Pair                                   | Ratio | Use                                           | Result                      |
-| -------------------------------------- | ----- | --------------------------------------------- | --------------------------- |
-| Cream `#F6F2EB` on deepest `#0B0B10`   | 17.59 | Body text; nav default, hover and active text | ✅ AAA                      |
-| Tan `#CFC7BB` on dark-purple `#12121A` | 11.13 | Secondary text                                | ✅ AAA                      |
-| Tan on `#171722` input fill            | 10.61 | Input placeholder                             | ✅ AAA                      |
-| Brown `#9C9488` on deepest             | 6.55  | Tertiary text                                 | ⚠️ AA only — D-1            |
-| Pink `#FF3AAE` on deepest              | 6.05  | Error text                                    | ⚠️ AA only — D-2            |
-| Deepest on pink                        | 6.05  | Primary button label (16px)                   | ⚠️ AA only — D-3            |
-| Purple `#8A63FF` on deepest            | 4.96  | Accent text                                   | ⚠️ Large text only — D-4    |
-| Brown border on `#171722` input fill   | 5.93  | Input boundary                                | ✅ ≥3:1                     |
-| Pink underline / focus ring on deepest | 6.05  | Nav state indicator, focus indicator          | ✅ ≥3:1                     |
-| `#171722` card border on dark-purple   | 1.05  | Card edge                                     | ℹ️ Decorative; not required |
+| Pair                                                   | Ratio         | Use                                                | Result                      |
+| ------------------------------------------------------ | ------------- | -------------------------------------------------- | --------------------------- |
+| Cream `#F6F2EB` on deepest `#0B0B10`                   | 17.59         | Body text; nav default, hover and active text      | ✅ AAA                      |
+| Tan `#CFC7BB` on dark-purple `#12121A`                 | 11.13         | Secondary text                                     | ✅ AAA                      |
+| Tan on `#171722` input fill                            | 10.61         | Input placeholder                                  | ✅ AAA                      |
+| Tan on deepest                                         | 11.72         | Tertiary text (D-1: tan)                           | ✅ AAA                      |
+| Cream on deepest                                       | 17.59         | Error text (D-2: pink stays on icon and border)    | ✅ AAA                      |
+| Cream on deepest / on `#171722` hover                  | 17.59 / 15.92 | Primary button label (D-3: dark fill, pink border) | ✅ AAA                      |
+| Purple `#8A63FF` on deepest                            | 4.96          | Large text (24px+) and non-text accents only (D-4) | ✅ AAA large text           |
+| Brown border on `#171722` input fill                   | 5.93          | Input boundary                                     | ✅ ≥3:1                     |
+| Pink underline / focus ring / button border on deepest | 6.05          | Nav state, focus, primary button border            | ✅ ≥3:1                     |
+| `#171722` card border on dark-purple                   | 1.05          | Card edge                                          | ℹ️ Decorative; not required |
 
 Navigation hover/active text was moved from pink to cream so it meets AAA. The pink underline and the heavier weight carry the state.
 
@@ -80,26 +80,19 @@ Navigation hover/active text was moved from pink to cream so it meets AAA. The p
 
 ---
 
-## 4. Decisions needed from Ash
+## 4. Owner decisions (recorded 2026-11-26)
 
-These cannot be solved inside the nine-colour palette at the AAA target.
+Ash chose the on-palette option for every AAA gap, so no new colours were added.
 
-### Dark theme (approved palette, AAA gaps)
-
-| ID     | Issue                                                                                  | Option A (stay on-palette)                                              | Option B                                                    |
-| ------ | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------- |
-| ⚠️ D-1 | Tertiary text (brown) is 6.55:1                                                        | Use tertiary text only at 24px or larger, or replace with tan (11.13:1) | Approve a lighter derived brown                             |
-| ⚠️ D-2 | Pink error text is 6.05:1                                                              | Cream error text with a pink icon and border (pink stays the cue)       | Accept AA for error text                                    |
-| ⚠️ D-3 | Primary button label is 6.05:1 on pink; no palette colour reaches 7:1 on the pink fill | Make labels large text (18.66px bold or more), which needs only 4.5:1   | Change the primary button to a dark fill with a pink border |
-| ⚠️ D-4 | Purple text is 4.96:1                                                                  | Use purple only for large text or non-text accents                      | Approve a lighter derived purple                            |
-
-### Light theme (pending)
-
-| ID     | Issue                                        | Option A (stay on-palette)                                                                                       | Option B (approve a derived value)                          |
-| ------ | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| L-1    | Placeholder text                             | **Applied:** placeholder uses `#171722` (15.92:1). Prefer no placeholder; the visible label carries the meaning. | Approve `#5C5248` (6.83:1, AA only) for a more subdued look |
-| ⚠️ L-2 | Light error text cannot be pink (2.91:1)     | Dark text plus error icon and pink border (current mapping)                                                      | Approve `#C4005E` (5.36:1, AA only)                         |
-| ⚠️ L-3 | Light tertiary text collapses into secondary | Accept reduced hierarchy (current mapping)                                                                       | Approve `#5C5248` as tertiary text (AA only)                |
+| ID  | Issue                                        | Decision                                                                                                                                                | Token change                                                                                           |
+| --- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| D-1 | Tertiary text (brown) was 6.55:1             | Use tan `#CFC7BB` (11.72:1 on the page background); hierarchy comes from size and weight                                                                | `--color-tertiary-text-dark` → warm-tan                                                                |
+| D-2 | Pink error text was 6.05:1                   | Cream error text (17.59:1); pink stays on the error icon and input border, plus `aria-invalid`                                                          | `--form-input-error-text-dark` → warm-cream                                                            |
+| D-3 | Primary button label on pink was 6.05:1      | Dark fill, cream label (17.59:1), 2px pink border. Hover uses the `#171722` panel fill (15.92:1), not a pink fill, which would drop the label to 6.05:1 | New `--button-border-primary-*` and `--button-bg-primary-hover-*`; light theme uses the same treatment |
+| D-4 | Purple text was 4.96:1                       | Purple only for large text (24px or more) and non-text accents (borders, icons, decoration)                                                             | None; usage rule documented in the CSS                                                                 |
+| L-1 | Light placeholder                            | Placeholder uses `#171722` (15.92:1); prefer no placeholder                                                                                             | None (already applied)                                                                                 |
+| L-2 | Light error text cannot be pink (2.91:1)     | Stay on-palette: dark text plus pink icon and border                                                                                                    | None (current mapping confirmed)                                                                       |
+| L-3 | Light tertiary text collapses into secondary | Stay on-palette: `#171722`, accepting less colour hierarchy                                                                                             | None (current mapping confirmed)                                                                       |
 
 The full light-theme role mapping still needs approval as recorded in `references/05-design-reader-decision-register.md` (Theme scope).
 
@@ -107,7 +100,7 @@ The full light-theme role mapping still needs approval as recorded in `reference
 
 ## 5. Component state notes
 
-- **Button**: primary, secondary (with a visible border so it does not rely on the fill alone) and disabled. Disabled text is exempt from contrast rules but must also be `disabled`/`aria-disabled`.
+- **Button**: primary (dark fill, cream label, pink border; D-3), secondary (with a visible border so it does not rely on the fill alone) and disabled. Disabled text is exempt from contrast rules but must also be `disabled`/`aria-disabled`.
 - **Card**: default and hover. Hover changes border colour _and_ shadow.
 - **Navigation**: default, hover, active, focus. Text stays cream (dark) or deepest (light) in every state; the pink underline and weight show hover and active. Consumed by Prompt 2B.
 - **Form input**: default, focused, error, placeholder. In dark, error and focus share the pink accent, so the error state **must** also carry `aria-invalid="true"`, an error icon and a text message (colour is not the only cue).

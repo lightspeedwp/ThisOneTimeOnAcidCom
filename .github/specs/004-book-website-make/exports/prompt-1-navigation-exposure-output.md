@@ -6,6 +6,7 @@
 **Machine-readable rules**: [`navigation-exposure-rules.json`](./navigation-exposure-rules.json)
 **Decision 7**: Option A (noindex meta tags and XML-sitemap exclusion are primary; robots.txt optional)
 **Status**: ✅ Specification delivered. ⏳ Repository implementation not authorised by this output.
+**Owner decisions**: Recorded 2026-11-26 (§2a). They resolve C1-2, C1-4 and C1-5.
 
 ---
 
@@ -26,14 +27,24 @@ The author decision is: keep the pages publicly accessible at their retained dir
 
 ## 2. Conflicts found (⚠️)
 
-| ID      | Conflict                                                                                                                                                                                                       | Resolution applied in this output                                                                                                                |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ⚠️ C1-1 | The contract lists 4 visible items (Home `/`, About `/about`, Book `/book`, Contact `/contact`). The app has no `/about` or `/book` route; it uses `/about-ash` and `/the-book`.                               | Use the real registered paths.                                                                                                                   |
-| ⚠️ C1-2 | The contract's 4-item list conflicts with its own CR-1.5 ("only removal of three routes") and with WP-02 ("do not rename, reorder or add unrelated entries"). The current menu has 11 entries.                 | Follow WP-02 and CR-1.5: remove exactly three entries, leaving **8 in their existing order**. A cut to 4 items needs a separate author decision. |
-| ⚠️ C1-3 | The contract offers a robots.txt `Disallow` rule as optional. A `Disallow` stops crawlers from fetching the page, so they never see its `noindex` directive, and the URL can stay indexed from external links. | **Do not add `Disallow` rules** for these three routes. Noindex plus sitemap exclusion is the complete Option A mechanism.                       |
-| ⚠️ C1-4 | The XML sitemap and robots.txt use the `ashshaw.com` origin, not a book-site origin.                                                                                                                           | Out of scope. WP-02 keeps canonical-origin changes separate. Flagged for a later decision.                                                       |
-| ⚠️ C1-5 | `/ebook` is in the XML sitemap, but its exposure, purpose and access protection are unresolved (WP-02).                                                                                                        | Out of scope for Prompt 1. Left unchanged and flagged.                                                                                           |
-| ⚠️ C1-6 | `navigation-specification.md` (2026-11-19) uses `/about`, `/book` and `example.com` URLs.                                                                                                                      | Superseded by this output; a notice was added to that file.                                                                                      |
+| ID      | Conflict                                                                                                                                                                                                       | Resolution applied in this output                                                                                             |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| ⚠️ C1-1 | The contract lists 4 visible items (Home `/`, About `/about`, Book `/book`, Contact `/contact`). The app has no `/about` or `/book` route; it uses `/about-ash` and `/the-book`.                               | Use the real registered paths.                                                                                                |
+| ⚠️ C1-2 | The contract's 4-item list conflicts with its own CR-1.5 ("only removal of three routes") and with WP-02 ("do not rename, reorder or add unrelated entries"). The current menu has 11 entries.                 | Follow WP-02 and CR-1.5: remove exactly three entries, leaving **8 in their existing order**. ✅ Confirmed by Ash 2026-11-26. |
+| ⚠️ C1-3 | The contract offers a robots.txt `Disallow` rule as optional. A `Disallow` stops crawlers from fetching the page, so they never see its `noindex` directive, and the URL can stay indexed from external links. | **Do not add `Disallow` rules** for these three routes. Noindex plus sitemap exclusion is the complete Option A mechanism.    |
+| ⚠️ C1-4 | The XML sitemap and robots.txt use the `ashshaw.com` origin, not a book-site origin.                                                                                                                           | ✅ Resolved 2026-11-26: canonical origin is `https://thisonetimeonacid.com` (§4.5).                                           |
+| ⚠️ C1-5 | `/ebook` is in the XML sitemap, but its exposure, purpose and access protection are unresolved (WP-02).                                                                                                        | ✅ Resolved 2026-11-26: remove `/ebook` from both sitemaps and apply `noindex` until reader-access protection is confirmed.   |
+| ⚠️ C1-6 | `navigation-specification.md` (2026-11-19) uses `/about`, `/book` and `example.com` URLs.                                                                                                                      | Superseded by this output; a notice was added to that file.                                                                   |
+
+---
+
+## 2a. Owner decisions (2026-11-26)
+
+| Decision         | Outcome                                                                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Menu size        | 8 items in their existing order (§3.1).                                                                                                                |
+| Canonical origin | `https://thisonetimeonacid.com` replaces `https://ashshaw.com` in the sitemap, robots.txt, canonical tags and structured data (§4.5).                  |
+| `/ebook`         | Removed from the XML and HTML sitemaps and given `noindex` until reader-access protection is confirmed. The route stays registered (§3.3, §3.4, §4.1). |
 
 ---
 
@@ -75,32 +86,36 @@ The Book, Content and Discover groups are unchanged.
 
 Per WP-02, the launch HTML sitemap omits five cards and withholds two reader cards:
 
-| Card                               | Treatment | Reason                                     |
-| ---------------------------------- | --------- | ------------------------------------------ |
-| Events → `/events`                 | Omit      | Author decision (retained, undiscoverable) |
-| Speaking & workshops → `/speaking` | Omit      | Author decision                            |
-| Media & press → `/media`           | Omit      | Author decision                            |
-| Thank you → `/thank-you`           | Omit      | Confirmation journey, not a destination    |
-| Style guide → `/style-guide`       | Omit      | Internal documentation                     |
-| Draft viewer → `/draft-viewer`     | Withhold  | Route is not registered                    |
-| Ebook reader → `/ebook`            | Withhold  | Exposure unresolved (⚠️ C1-5)              |
+| Card                               | Treatment | Reason                                                                    |
+| ---------------------------------- | --------- | ------------------------------------------------------------------------- |
+| Events → `/events`                 | Omit      | Author decision (retained, undiscoverable)                                |
+| Speaking & workshops → `/speaking` | Omit      | Author decision                                                           |
+| Media & press → `/media`           | Omit      | Author decision                                                           |
+| Thank you → `/thank-you`           | Omit      | Confirmation journey, not a destination                                   |
+| Style guide → `/style-guide`       | Omit      | Internal documentation                                                    |
+| Draft viewer → `/draft-viewer`     | Withhold  | Route is not registered                                                   |
+| Ebook reader → `/ebook`            | Withhold  | Owner decision: hidden and `noindex` until access protection is confirmed |
 
 Retained cards: Home, The book, Read the draft, About Ash, Waitlist, Journal, Contact, Sitemap.
 
 ### 3.4 XML sitemap (`public/sitemap.xml`)
 
-| Before (10 URLs)                   | After (7 URLs)                      |
-| ---------------------------------- | ----------------------------------- |
-| `https://ashshaw.com/`             | `https://ashshaw.com/`              |
-| `https://ashshaw.com/the-book`     | `https://ashshaw.com/the-book`      |
-| `https://ashshaw.com/ebook`        | `https://ashshaw.com/ebook` ⚠️ C1-5 |
-| `https://ashshaw.com/about-ash`    | `https://ashshaw.com/about-ash`     |
-| `https://ashshaw.com/journal`      | `https://ashshaw.com/journal`       |
-| **`https://ashshaw.com/events`**   | _(removed)_                         |
-| **`https://ashshaw.com/speaking`** | _(removed)_                         |
-| `https://ashshaw.com/contact`      | `https://ashshaw.com/contact`       |
-| **`https://ashshaw.com/media`**    | _(removed)_                         |
-| `https://ashshaw.com/waitlist`     | `https://ashshaw.com/waitlist`      |
+Two changes apply: three hidden routes and `/ebook` are removed, and every URL moves to the canonical origin (§4.5).
+
+| Before (10 URLs)                   | After (6 URLs)                            |
+| ---------------------------------- | ----------------------------------------- |
+| `https://ashshaw.com/`             | `https://thisonetimeonacid.com/`          |
+| `https://ashshaw.com/the-book`     | `https://thisonetimeonacid.com/the-book`  |
+| **`https://ashshaw.com/ebook`**    | _(removed — owner decision)_              |
+| `https://ashshaw.com/about-ash`    | `https://thisonetimeonacid.com/about-ash` |
+| `https://ashshaw.com/journal`      | `https://thisonetimeonacid.com/journal`   |
+| **`https://ashshaw.com/events`**   | _(removed)_                               |
+| **`https://ashshaw.com/speaking`** | _(removed)_                               |
+| `https://ashshaw.com/contact`      | `https://thisonetimeonacid.com/contact`   |
+| **`https://ashshaw.com/media`**    | _(removed)_                               |
+| `https://ashshaw.com/waitlist`     | `https://thisonetimeonacid.com/waitlist`  |
+
+The duplicate `src/app/public/sitemap.xml` needs the same changes, or should be removed if the build does not use it.
 
 ### 3.5 Routes (`src/app/routes.ts`)
 
@@ -112,7 +127,7 @@ No change. `events`, `speaking` and `media` stay registered and render their pag
 
 ### 4.1 Noindex directive — primary
 
-Directive value for all three routes: `noindex, nofollow` (contract value).
+Directive value for the three hidden routes and `/ebook`: `noindex, nofollow` (contract value).
 
 Two delivery layers are specified, because this is a client-rendered single-page app:
 
@@ -130,7 +145,7 @@ Two delivery layers are specified, because this is a client-rendered single-page
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
-# Repeat the pair for /events and /events/*, and for /media and /media/*.
+# Repeat the pair for /events, /media and /ebook (each with its /* pattern).
 ```
 
 The `/*` wildcard pairs cover nested routes such as `/events/:slug`. The site-wide `for = "/*"` security block is unaffected, because Netlify merges header blocks.
@@ -165,12 +180,30 @@ See §3.4. Remove the three `<url>` blocks; change nothing else in the file.
 
 ### 4.3 robots.txt — not used
 
-See ⚠️ C1-3. `public/robots.txt` stays unchanged. No `Disallow` rules are added for these routes.
+See ⚠️ C1-3. No `Disallow` rules are added for these routes. The only `robots.txt` change is the `Sitemap:` line, which moves to the canonical origin (§4.5).
 
 ### 4.4 What this does not do
 
 - Noindex is **not access protection**. The pages stay public by design.
 - Noindex does **not prove removal** from Google results. Removal evidence must be collected separately (e.g. Search Console URL Inspection) and recorded apart from user reports.
+
+---
+
+### 4.5 Canonical origin (owner decision 2026-11-26)
+
+The canonical origin is `https://thisonetimeonacid.com`. A repository scan found 46 absolute `ashshaw.com` URLs in 12 files (no email addresses):
+
+| File                                                                                 | URLs                                       |
+| ------------------------------------------------------------------------------------ | ------------------------------------------ |
+| `public/sitemap.xml`, `src/app/public/sitemap.xml`                                   | 10 each                                    |
+| `src/app/index.html`                                                                 | 6 (canonical, Open Graph and similar tags) |
+| `src/app/components/pages/book-site/EventsPage.tsx`, `AboutAshPage.tsx`              | 4 each                                     |
+| `src/app/public/llms.txt`                                                            | 4                                          |
+| `TheBookPage.tsx`, `ContactPage.tsx`, `src/app/components/pages/about/EbookPage.tsx` | 2 each                                     |
+| `public/robots.txt`, `src/app/public/robots.txt`                                     | 1 each (`Sitemap:` line)                   |
+| `src/app/utils/schemaService.ts`                                                     | 1 (structured-data base URL)               |
+
+Implementation should replace these with one shared origin constant rather than repeating the literal. Hosting changes (custom domain, HTTPS certificate, and a 301 redirect from `ashshaw.com` if that domain still serves the book site) are outside this repository and need separate action.
 
 ---
 
@@ -191,7 +224,10 @@ Each item needs separate authorisation before it is applied to the repository.
 - [ ] Add six `X-Robots-Tag` header blocks to `netlify.toml` (§4.1 A)
 - [ ] Add `robots` to `SEOData` with reset-on-omit behaviour (§4.1 B)
 - [ ] Set `robots` on the `pageSEO` entries for the three pages
-- [ ] Leave `public/robots.txt` and `src/app/routes.ts` unchanged
+- [ ] Remove `/ebook` from both sitemaps and add its `X-Robots-Tag` header blocks and `robots` entry
+- [ ] Replace all 46 `ashshaw.com` URLs with `https://thisonetimeonacid.com`, using one shared origin constant (§4.5)
+- [ ] Update the `Sitemap:` line in both `robots.txt` files; add no `Disallow` rules
+- [ ] Leave `src/app/routes.ts` unchanged
 - [ ] Verify: `curl -sI <origin>/speaking` returns `200` and `x-robots-tag: noindex, nofollow`
 - [ ] Verify: navigating `/media` → `/the-book` in the browser leaves no robots `noindex` on `/the-book`
 - [ ] Verify: the menu has 8 entries and the footer Author & Press group has 2 links
