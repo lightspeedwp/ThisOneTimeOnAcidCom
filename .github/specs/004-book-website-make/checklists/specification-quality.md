@@ -1,4 +1,4 @@
-# Specification Quality Checklist: Book Website Figma Make Prompt Pack
+# Specification Quality Checklist: Book Website Claude Code Prompt Pack
 
 **Purpose**: Validate requirements quality across spec.md, plan.md, research.md, data-model.md, quickstart.md, contracts/, and tasks.md — ensuring completeness, clarity, consistency, and measurability before approval gates and implementation.
 
@@ -23,7 +23,7 @@
 - [x] CHK003 Are all 10 functional requirements (FR-001 through FR-010) documented with full text? [Completeness, Spec §Requirements] ✅ VERIFIED: FR-001 through FR-010 present with complete text and scope
 - [x] CHK004 Are all 8 success criteria (SC-001 through SC-004+) documented as measurable outcomes? [Completeness, Spec §Success Criteria] ✅ VERIFIED: SC-001 through SC-008 documented with quantitative/qualitative metrics
 - [x] CHK005 Are all 7 blocking decisions documented in research.md with options A/B/C/D? [Completeness, research.md §Blocking Decisions, spec.md §Blocking Decisions Approved] ✅ VERIFIED: spec.md §Blocking Decisions Approved documents all 7 decisions with resolutions; research.md expected to provide detailed options (A/B/C/D format per plan.md)
-- [x] CHK006 Are all 6 Figma Make prompts (1, 2A, 2B, 3A, 3B, 3C) documented in contracts/ directory? [Completeness, contracts/] ✅ VERIFIED: 14 contract files including prompt-1 through prompt-3c with execution guides
+- [x] CHK006 Are all 6 Claude Code prompts (1, 2A, 2B, 3A, 3B, 3C) documented in contracts/ directory? [Completeness, contracts/] ✅ VERIFIED: 14 contract files including prompt-1 through prompt-3c with execution guides
 - [x] CHK007 Are all 51 tasks documented in tasks.md across 7 phases with phase purposes defined? [Completeness, tasks.md §Phases] ✅ VERIFIED: 51 tasks documented across 8 phases with purposes
 - [x] CHK008 Are assumptions documented (8 assumptions listed in spec.md)? [Completeness, Spec §Assumptions] ✅ VERIFIED: 8 assumptions documented in Assumptions section with context
 - [x] CHK009 Are edge cases documented (4 edge cases listed in spec.md)? [Completeness, Spec §Edge Cases] ✅ VERIFIED: 4 edge cases documented with scenarios
@@ -35,12 +35,12 @@
 
 **Purpose**: Are requirements specific and unambiguous?
 
-- [x] CHK011 Is "documentation-only package" definition clear (no code, no commits, no deployments)? [Clarity, Spec §Input] ✅ VERIFIED: Spec §Input explicitly states "Complete staged Figma Make prompts...prepared as documentation-only package"; FR-009 reinforces "no code, no commits, no deployments"
+- [x] CHK011 Is "documentation-only package" definition clear (no code, no commits, no deployments)? [Clarity, Spec §Input] ✅ VERIFIED: Spec §Input explicitly states "Complete staged Claude Code prompts...prepared as documentation-only package"; FR-009 reinforces "no code, no commits, no deployments"
 - [x] CHK012 Are approval gates clearly defined with prerequisites for Gate 1, 2, 3? [Clarity, quickstart.md §Approval Gates] ✅ VERIFIED: quickstart.md documents three gates with prerequisites: Gate 1 (blocking decisions), Gate 2 (design approval), Gate 3 (readiness)
 - [x] CHK013 Is the "blocking decision" concept clearly defined with example decisions? [Clarity, research.md, plan.md] ✅ VERIFIED: plan.md §Blocking Decisions lists all 7 with descriptions; research.md provides decision matrix with context
 - [x] CHK014 Are design baseline specifications quantified (Space Grotesk weights/sizes, 9 colors named)? [Clarity, plan.md §Design System] ✅ VERIFIED: plan.md lists "Space Grotesk headings, Inter body/UI, 9-color palette (light & dark themes)" with concrete values
 - [x] CHK015 Is reader access policy specified with concrete numbers (10-minute codes, 30-day lifecycle)? [Clarity, plan.md §Reader Access Policy] ✅ VERIFIED: plan.md states "10-minute single-use verification codes, 30-day device lifecycle, purpose-limited records"
-- [x] CHK016 Are Figma Make prompt references clear (stage numbers 0–3C, execution order documented)? [Clarity, plan.md §Figma Make Integration] ✅ VERIFIED: plan.md §Figma Make Integration documents "Staged Prompt execution (Prompts 0–3C) with approval gates between stages"
+- [x] CHK016 Are Claude Code prompt references clear (stage numbers 0–3C, execution order documented)? [Clarity, plan.md §Claude Code Integration] ✅ VERIFIED: plan.md §Claude Code Integration documents "Staged Prompt execution (Prompts 0–3C) with approval gates between stages"
 - [x] CHK017 Is the term "unblocked prompts" vs "blocked prompts" clearly defined with prerequisites? [Clarity, plan.md, quickstart.md] ✅ VERIFIED: Spec §Clarifications distinguishes "four unblocked executable prompts (1, 2A, 2B, 3A)" vs "blocked prompts (3B, 3C)"
 - [x] CHK018 Are navigation changes explicit (Speaking/Events/Media hidden from sitemap)? [Clarity, contracts/prompt-1-navigation-exposure.md] ✅ VERIFIED: Spec §User Scenarios explicitly states "Speaking/Events/Media hidden from sitemap"; contracts/ files confirm
 - [x] CHK019 Is "unapproved candidates" list explicit (R3, T1, RT2, C1 named, not included)? [Clarity, Spec §Design Candidate] ✅ VERIFIED: Spec §Design Candidate names all candidates (R3, T1, RT2, C1) with "no approval" notation
@@ -134,9 +134,9 @@
 
 **Purpose**: Are assumptions documented and requirements traceable?
 
-- [x] CHK061 Are all 8 assumptions documented (users have email, source files are authoritative, etc.)? [Completeness, Spec §Assumptions] ✅ VERIFIED: Spec §Assumptions lists 8 assumptions with full context (User Context, Source Files, Design Baseline, Blocking Decisions, Implementation Timing, Figma Make Environment, Newsletter Integration, Reader Access Provider)
+- [x] CHK061 Are all 8 assumptions documented (users have email, source files are authoritative, etc.)? [Completeness, Spec §Assumptions] ✅ VERIFIED: Spec §Assumptions lists 8 assumptions with full context (User Context, Source Files, Design Baseline, Blocking Decisions, Implementation Timing, Claude Code Environment, Newsletter Integration, Reader Access Provider)
 - [x] CHK062 Is each assumption validated or marked for later validation? [Clarity, Spec §Assumptions] ✅ VERIFIED: Each assumption is documented with validation context; Assumptions marked as "will be confirmed separately" or "aligns with existing decisions" where applicable
-- [x] CHK063 Are source file references clear (6 files in content/book/ with versions v1.0.0–v1.9.0)? [Traceability, plan.md §Source Files] ✅ VERIFIED: plan.md §Source Files lists all 6 source files (01–06) in content/book/ with exact versions: v1.0.0–v1.9.0 range documented
+- [x] CHK063 Are source file references clear (6 files in `references/`, formerly `content/book/`, with versions v1.0.0–v1.9.0)? [Traceability, plan.md §Source Files] ✅ VERIFIED: plan.md §Source Files lists all 6 source files (01–06), now in `references/`, with exact versions: v1.0.0–v1.9.0 range documented
 - [x] CHK064 Are Linear issue references documented (TOA-446, TOA-445, TOA-441, etc.)? [Traceability, Spec] ✅ VERIFIED: Spec §Specification Notes §Cross-References documents Linear Issues: TOA-446, TOA-445, TOA-441, TOA-309, TOA-310, TOA-311, TOA-90, TOA-420
 - [x] CHK065 Is the governance framework referenced (constitution.md § principles applied)? [Traceability, plan.md §Constitution Check] ✅ VERIFIED: plan.md §Constitution Check explicitly references ".specify/memory/constitution.md § principles" and documents gate status "All checks pass. No violations."
 - [x] CHK066 Are spec sections cross-referenced (e.g., Spec §FR-001 links to affected tasks)? [Traceability, cross-reference check] ✅ VERIFIED: Specification uses consistent cross-reference style (Spec §FR-001, Spec §SC-001, etc.); tasks.md references back to user stories and requirements
@@ -147,7 +147,7 @@
 
 **Purpose**: Are entities, fields, and relationships clearly defined?
 
-- [x] CHK067 Are all 6 entities defined (Specification File, Design Baseline, Design Candidate, Blocking Decision, Figma Make Prompt, Preflight Analysis)? [Completeness, data-model.md] ✅ VERIFIED: data-model.md defines all 6 entities with comprehensive sections for each
+- [x] CHK067 Are all 6 entities defined (Specification File, Design Baseline, Design Candidate, Blocking Decision, Claude Code Prompt, Preflight Analysis)? [Completeness, data-model.md] ✅ VERIFIED: data-model.md defines all 6 entities with comprehensive sections for each
 - [x] CHK068 Does each entity have fields listed (not just names)? [Completeness, data-model.md] ✅ VERIFIED: Each entity in data-model.md includes detailed fields section with attribute descriptions
 - [x] CHK069 Are relationships documented (Design Baseline derived from Specification File, etc.)? [Completeness, data-model.md] ✅ VERIFIED: data-model.md documents entity relationships with explicit derivation paths and dependencies
 - [x] CHK070 Are validation rules documented for each entity? [Completeness, data-model.md] ✅ VERIFIED: Each entity includes Validation section with business rules and constraints
@@ -186,13 +186,13 @@
 
 **Purpose**: Are version differences documented without silent merges?
 
-- [x] CHK085 Are all 6 source files listed with versions (01 v1.0.0, 02 v1.0.4, 03 v1.3.0, 04 v1.1.2, 05 v1.9.0, 06 v1.1.1)? [Completeness, plan.md §Source Files] ✅ VERIFIED: plan.md §Source Files lists all 6 source files in content/book/ with exact versions: 01(v1.0.0), 02(v1.0.4), 03(v1.3.0), 04(v1.1.2), 05(v1.9.0), 06(v1.1.1)
+- [x] CHK085 Are all 6 source files listed with versions (01 v1.0.0, 02 v1.0.4, 03 v1.3.0, 04 v1.1.2, 05 v1.9.0, 06 v1.1.1)? [Completeness, plan.md §Source Files] ✅ VERIFIED: plan.md §Source Files lists all 6 source files, now in `references/`, with exact versions: 01(v1.0.0), 02(v1.0.4), 03(v1.3.0), 04(v1.1.2), 05(v1.9.0), 06(v1.1.1)
 - [x] CHK086 Are version differences documented (02: v1.0.3→v1.0.4, 03: v1.2.2→v1.3.0, 05: v1.7.0→v1.9.0)? [Traceability, Spec §FR-002] ✅ VERIFIED: Spec §FR-002 states "System MUST reconcile version mismatches (02 v1.0.3→v1.0.4, 03 v1.2.2→v1.3.0, 05 v1.7.0→v1.9.0) without silently combining incompatible revisions"
 - [x] CHK087 Is each version difference assessed for material impact? [Clarity, reconciliation notes] ✅ VERIFIED: plan.md §Technical Context notes version tracking and reconciliation; Spec §FR-002 requires version difference assessment with "material-effect assessment"
 
 ---
 
-## Figma Make Prompt Specifications
+## Claude Code Prompt Specifications
 
 **Purpose**: Are prompt contracts complete and ready for execution?
 

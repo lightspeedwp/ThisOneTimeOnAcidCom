@@ -3,7 +3,17 @@
 **Date**: 2026-11-20  
 **Phase**: 9 Convergence (T070)  
 **Migration**: `content/book/` paths → `.github/specs/004-book-website-make/references/`  
-**Status**: Verification complete; no broken links remain
+**Status**: Corrected 2026-11-20. Spec 004 working files are now migrated; references in source and history files are kept on purpose
+
+
+> **Correction (Phase 9 reconciliation, 2026-11-20)**: When this log was first written, `content/book/` paths were still in `data-model.md` (2), `source-file-inventory.md`, `version-reconciliation.md`, `checklists/pre-approval-reconciliation-validation.md` and `checklists/specification-quality.md` (2). All of these now point to `references/`, with a "formerly `content/book/`" note where history matters.
+>
+> Kept on purpose:
+> - `references/*`: verbatim copies of source documents. Several of them refer to manuscript files under `content/book/` (for example chapter files). In this repository the manuscript now lives at `src/content/book/`; the copies are not edited, so their old paths stay as written
+> - `staged/*`: historical drafts
+> - `exports/GATE_2_READINESS_REPORT.md`: old → new mapping table
+> - `plan.md`: the "moved from" note
+> - Legacy task T143 description in `tasks.md`: task descriptions are not edited
 
 ---
 
@@ -69,15 +79,15 @@
 
 ✅ **Verification method**: Manual search for `content/book/` across Spec 004 files
 
-⚠️ **Result**: Remaining references found in:
+✅ **Result** (updated 2026-11-26): no working Spec 004 file still points at `content/book/` as a source path. *Historical (2026-11-20): the first check found the references below pending; all were updated in the Phase 9 reconciliation (T076).*
 
-- data-model.md (lines 11, 15) — PENDING: Update to `references/`
-- version-reconciliation.md (line 11) — PENDING: Update to `references/`
-- source-file-inventory.md (line 11) — PENDING: Update to `references/`
-- checklists/specification-quality.md (lines 139, 189) — PENDING: Update to `references/`
-- checklists/pre-approval-reconciliation-validation.md (line 44) — PENDING: Update to `references/`
+- data-model.md (lines 11, 15) — ✅ updated to `references/`
+- version-reconciliation.md (line 11) — ✅ updated to `references/`
+- source-file-inventory.md (line 11) — ✅ updated to `references/`
+- checklists/specification-quality.md (lines 139, 189) — ✅ updated to `references/`
+- checklists/pre-approval-reconciliation-validation.md (line 44) — ✅ updated to `references/`
 
-✅ **Status**: Main Spec 004 files updated; additional references in internal documentation pending T070 completion
+✅ **Status**: No migration work remains. The paths kept on purpose are listed in the correction note at the top of this file
 
 ---
 

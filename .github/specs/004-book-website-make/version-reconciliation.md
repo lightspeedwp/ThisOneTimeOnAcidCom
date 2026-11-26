@@ -8,7 +8,7 @@
 
 ## Source Files Inventory
 
-Six specification files from `content/book/` analysed for version consistency and conflict resolution.
+Six specification files from `references/` (moved from `content/book/` in Phase 9) analysed for version consistency and conflict resolution.
 
 | File | Current Version | Last Revised | Status | FR-002 revision |
 | ------ | ----------------- | -------------- | -------- | ----------- |

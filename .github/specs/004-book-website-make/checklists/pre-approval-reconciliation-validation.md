@@ -13,7 +13,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 
 1. ✅ **Version reconciliation** — Zero conflicts, precedence rule applied
 2. ✅ **Source file inventory** — All 6 files analyzed and reconciled
-3. ✅ **Prompt preview completeness** — All 4 unblocked prompts ≥95% complete
+3. ✅ **Prompt preview completeness** — Prompts 1, 2A, 2B each ≥95% complete (SC-003 revised; 3A handed to Spec 005)
 4. ✅ **Approval boundaries** — All elements marked (✓, ~, ❌)
 5. ✅ **Blocking decisions documentation** — All 7 decisions with 3+ options each
 6. ✅ **Blocking decisions audit** — All decisions clearly marked in contracts with options visible
@@ -27,7 +27,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 | ------ | ---------- | ----------- | -------- | ---------- |
 | **T052** | version-reconciliation.md | FR-002 compliance | ✅ PASS | All 6 files reconciled; File 05 v1.9.0 authoritative; zero critical conflicts |
 | **T053** | prompt-1-exact-preview.md | SC-002 compliance | ✅ PASS | 100% complete; 4 required elements: before/after, 14 steps, 10 criteria, 3 non-changes |
-| **T054** | prompt-preview-validation.md | SC-003 compliance | ✅ PASS | All 4 prompts ≥95% average; P1: 100%, P2A: 89%, P2B: 100%, P3A: 91% |
+| **T054** | prompt-preview-validation.md | SC-003 compliance | ✅ PASS (revised 2026-11-20) | SC-003 revised scope (approved 2026-11-19): each Spec 004 prompt ≥95%. P1: 100%, P2A: 95%, P2B: 100%. P3A (~91%) handed to Spec 005. The earlier PASS used an average that let P2A pass at 89%; that has been corrected |
 | **T055** | approval-boundaries.md | SC-007 compliance | ✅ PASS | All boundaries marked (✓/~/❌); zero ambiguous items; design baseline locked |
 | **T056** | source-file-inventory.md | FR-001 compliance | ✅ PASS | All 6 files documented with versions, timestamps, authority matrix |
 | **T057** | blocking-decisions-validation.md | SC-004 compliance | ✅ PASS | All 7 decisions documented with 3+ options (23 total); impact assessment for each |
@@ -41,7 +41,7 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 
 | Check | Status | Evidence | Notes |
 | ------- | -------- | ---------- | ------- |
-| **All 6 source files analyzed** | ✅ | source-file-inventory.md (complete audit) | Files 01–06 from content/book/ directory |
+| **All 6 source files analyzed** | ✅ | source-file-inventory.md (complete audit) | Files 01–06 in `references/` (formerly `content/book/`) |
 | **Version precedence rule applied** | ✅ | version-reconciliation.md (SemVer rule) | File 05 v1.9.0 (highest) authoritative for decisions |
 | **Zero critical conflicts** | ✅ | version-reconciliation.md (conflict matrix) | File 06 v1.1.1 superseded by File 05 v1.9.0 (resolved) |
 | **Timestamps documented** | ✅ | source-file-inventory.md (timestamp audit) | 5 current (2026-11-08/09), 1 older (2026-11-04) |
@@ -55,15 +55,15 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 
 | Decision | Options | Status | Prompts Blocked | Evidence |
 | ---------- | --------- | -------- | ----------------- | ---------- |
-| **1. Recovery-first race** | 4 (A/B/C/D) | PENDING | Prompt 3B | blocking-decisions-validation.md Decision 1 |
-| **2. Recovery lifetime** | 4 (A/B/C/D) | PENDING | Prompt 3B | blocking-decisions-validation.md Decision 2 |
-| **3. Code expiry start** | 3 (A/B/C) | PENDING | Prompts 3A/3C | blocking-decisions-validation.md Decision 3 |
-| **4. Email provider** | 4 (A/B/C/D) | PENDING | Prompt 3A (partial) | blocking-decisions-validation.md Decision 4 |
-| **5. Manuscript ready** | 3 (A/B/C) | PENDING | Prompt 3A (gate) | blocking-decisions-validation.md Decision 5 |
-| **6. Newsletter link** | 4 (A/B/C/D) | PENDING | Prompt 3A | blocking-decisions-validation.md Decision 6 |
-| **7. Route enforcement** | 4 (A/B/C/D) | PENDING | Prompt 1 | blocking-decisions-validation.md Decision 7 |
+| **1. Recovery-first race** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompt 3B → Spec 005 | blocking-decisions-validation.md Decision 1 |
+| **2. Recovery lifetime** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompt 3B → Spec 005 | blocking-decisions-validation.md Decision 2 |
+| **3. Code expiry start** | 3 (A/B/C) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompts 3A/3C → Spec 005 | blocking-decisions-validation.md Decision 3 |
+| **4. Email provider** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13; Mailgun superseded SendGrid 2026-11-19 *(was PENDING)* | Prompt 3A → Spec 005 | blocking-decisions-validation.md Decision 4 |
+| **5. Manuscript ready** | 3 (A/B/C) | ✅ RESOLVED 2026-11-13: early release; per-chapter approval *(was PENDING)* | No longer gates reader screens | blocking-decisions-validation.md Decision 5 |
+| **6. Newsletter link** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompt 3A → Spec 005 | blocking-decisions-validation.md Decision 6 |
+| **7. Route enforcement** | 4 (A/B/C/D) | ✅ RESOLVED 2026-11-13 *(was PENDING)* | Prompt 1 | blocking-decisions-validation.md Decision 7 |
 
-**Verdict**: ✅ **PASS** — All 7 decisions documented; 23 total options across decisions; all user-editable decisions identified.
+**Verdict**: ✅ **PASS** — All 7 decisions documented; 23 total options across decisions; all user-editable decisions identified. Status updated 2026-11-26: all 7 resolved on 2026-11-13 (see `research.md`); the original 2026-11-11 status was PENDING for each.
 
 ---
 
@@ -83,13 +83,13 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 | Prompt | Completeness | Status | Blockers | Approval Boundary |
 | -------- | ------------- | -------- | ---------- | ------------------ |
 | **Prompt 1** (Navigation) | 100% | ✅ READY | Decision 7 (placeholder) | ✓ APPROVED (with placeholder) |
-| **Prompt 2A** (Design Baseline) | 89% | ✅ READY | None | ✓ APPROVED |
+| **Prompt 2A** (Design Baseline) | 95% *(was 89% on 2026-11-11)* | ✅ READY | None | ✓ APPROVED |
 | **Prompt 2B** (Navigation Design) | 100% | ✅ READY | None (soft: Prompt 1 first) | ✓ APPROVED |
-| **Prompt 3A** (Reader Access) | 91% | ✅ READY | Decisions 3/4/5/6 (placeholders) | ✓ APPROVED (with placeholders) |
-| **Prompt 3B** (Recovery Flows) | Template | ❌ BLOCKED | Decisions 1, 2 | ❌ UNRESOLVED |
-| **Prompt 3C** (Error States) | Template | ❌ BLOCKED | Decision 3 | ❌ UNRESOLVED |
+| **Prompt 3A** (Reader Access) | ~91% | ➡️ Handed over to Spec 005 | Decisions 3/4/5/6 resolved 2026-11-13 | Spec 005 owns |
+| **Prompt 3B** (Recovery Flows) | Template | ➡️ Handed over to Spec 005 | Decisions 1, 2 resolved 2026-11-13 | Spec 005 owns |
+| **Prompt 3C** (Error States) | Template | ➡️ Handed over to Spec 005 | Decision 3 resolved 2026-11-13 | Spec 005 owns |
 
-**Verdict**: ✅ **PASS** — 4 unblocked prompts ready (avg 95% completeness); 2 blocked prompts with clear unblocking paths.
+**Verdict** (revised 2026-11-20): ✅ **PASS** under the revised SC-003 scope — Prompts 1, 2A and 2B each reach ≥95% (100%, 95%, 100%). Prompts 3A–3C belong to Spec 005. *Historical: the 2026-11-11 verdict passed four prompts on their 95% average while Prompt 2A was at 89%; a per-prompt threshold does not allow that.*
 
 ---
 
