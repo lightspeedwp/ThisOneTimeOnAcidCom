@@ -43,7 +43,7 @@
 - `spec.md` — No color hex values (uses semantic names only)
 - `plan.md` — No color hex values
 - `research.md` — No color hex values in decision docs
-- `contracts/prompt-*.md` — Design baseline colors only
+- `contracts/prompt-*.md` — Design baseline colors only, except `prompt-3a-execution-guide.md` and `prompt-3c-execution-guide.md`, which keep early-draft colours under a superseded notice (Spec 005 owns them; see the results table)
 - `exports/design-tokens.json` — All 9 baseline colors + theme mappings
 - `exports/design-tokens.css` — All 9 baseline colors + theme mappings (light theme adjusted for WCAG AAA)
 - `data-model.md` — ✅ Resolved 2026-11-26 (T077): examples now use baseline `#F6F2EB`. *Historical: contained `#1a1a1a` and `#ffffff`*
