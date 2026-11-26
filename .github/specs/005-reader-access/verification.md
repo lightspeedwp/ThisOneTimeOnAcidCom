@@ -1,6 +1,6 @@
 # Reader access verification
 
-**Last Updated:** 2026-11-19 (Phase 7, Stage 3)
+**Last Updated:** 2026-11-26 (read-back against `main` at `0691019`; see below)
 
 | Check | Evidence required | Status | Authority |
 | --- | --- | --- | --- |
@@ -8,12 +8,36 @@
 | Canonical containment | Resolve root, ancestors, symlinks and artefact links | ✅ | Required before later writes |
 | Identifier traceability | Verify every RA origin and 004 source-qualified reference | ✅ | Documentation review |
 | Decision consistency | Compare 005, 004 and Linear v1.13.0 | ✅ | Documentation review |
-| Protected delivery | Controlled direct chapter and public-bundle requests | 🔄 Pending E2E | Separate runtime authority |
-| Code lifecycle | Single-use, expiry, resend, limited, invalid and concurrent redemption | ✅ 737 unit tests | Separate provider/test authority |
-| Recovery | Same profile, new device, sign-out, revocation, storage clear and renewal | ✅ 8/8 contract, 4/4 E2E | Separate runtime authority |
+| Protected delivery | Controlled direct chapter and public-bundle requests | 🔄 Partial: chapters excluded from the bundle; chapter function checks the session but serves placeholder text; no E2E run | Separate runtime authority |
+| Code lifecycle | Single-use, expiry, resend, limited, invalid and concurrent redemption | ✅ Unit and contract tests pass, including one-of-two concurrent redemption (2026-11-26). The earlier "737 unit tests" figure could not be reproduced | Separate provider/test authority |
+| Recovery | Same profile, new device, sign-out, revocation, storage clear and renewal | ❌ Regressed: no function records a RecoveryAttempt since PR #653; the recovery contract test is skipped; no E2E run is recorded | Separate runtime authority |
 | Consent separation | Access never creates newsletter subscription; double opt-in/unsubscribe separate | ✅ | Separate provider authority |
 | Accessibility | ✅ Code review complete; 2 recommendations (non-blocking); AAA target | [accessibility-audit.md](./accessibility-audit.md) | Separate review authority |
-| Deployment | Infrastructure validated; main push trigger confirmed; deployment docs ready | 🔄 Pending host decision | Release authority |
+| Deployment | Infrastructure validated; main push trigger confirmed; deployment docs ready | ✅ Netlify is the production host ([deployment-validation.md](deployment-validation.md)); Vercel builds PR previews | Release authority |
+
+---
+
+## Read-back: 2026-11-26 reconciliation
+
+**Revision:** `main` at `0691019` (after PRs #652, #653 and #655)
+**Environment:** cloud container, Node 22, `npm ci` from the committed lockfile
+**Scope:** documentation only; no code changed in this read-back.
+
+| Command | Result |
+| --- | --- |
+| `npx vitest run tests/reader-access netlify/__tests__` | 23 files passed, 7 skipped; 327 tests passed, 111 skipped, 0 failed |
+| `npx vitest run` | 1099 passed, 2 failed, 111 skipped. Both failures are in spec 006 suites (`tests/session/session.test.ts` renewal timing; `tests/session/device-limit-tests.test.ts` expired-session count), not in spec 005 suites |
+
+Findings recorded in [tasks.md](tasks.md):
+
+- US1 and US2 now run on spec 006's session model; `/api/reader/verifications` is an alias of spec 006's session creation (decision 12).
+- Code consumption is atomic (`consumeCode`, Blobs `onlyIfNew`), verified by a concurrency test.
+- Chapter bodies are placeholder text; the protected edition is not yet placed (RA-T028, RA-T035).
+- No ReaderAccessRecord is written, so retention has nothing to delete (RA-T034, RA-T050).
+- The recovery path is not wired into any function (RA-T048).
+- No Playwright journey has a recorded run (RA-T038, RA-T043, RA-T046).
+
+Earlier stage read-backs below are kept as written. Where they claim recovery, test counts or Phase 3 completion, this read-back supersedes them.
 
 ---
 

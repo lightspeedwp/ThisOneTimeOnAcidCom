@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Specification 005 reconciled with the codebase** — task statuses updated to reflect main at `0691019` (35 done, 18 open); verification results corrected; unresolved verification contract recorded as decision 12; catalog status set to In Progress.
 - **CI: Vitest runs on both sides of the test comparison** — `.github/workflows/tests.yml` ran Jest on the base branch and Vitest on the PR head. Jest's `testMatch` covers `*.test.js` only, so TypeScript suites never ran on base, and any failure in them was reported as new on every PR. Base now runs Vitest too; `main` passes the full Vitest suite.
 - **Reader access: Restricted chapter bundling** (RA-T054) — Temporarily set `BOOK_SOURCE_DIRECTORIES` to empty array to prevent protected chapters from being bundled in the client. Chapters are now served exclusively through `/api/reader/chapters/{chapterId}` pending implementation of server-side delivery (RA-T035/RA-T037). Satisfies RA-001 (verified access only) and SC-004 (authorization required for direct chapter access).
 - **Constitution Amendment v1.0.1** — Updated Principle IV (Protected Content & Data Rules) to reflect `src/content/` as canonical editorial content location per PR #608. Aligns repository practice with governance framework.
