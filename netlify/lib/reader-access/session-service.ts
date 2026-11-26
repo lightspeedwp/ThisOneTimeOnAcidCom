@@ -124,10 +124,12 @@ async function createSessionUnserialised(
   // A session for this same device is stored under the same key and is
   // replaced by the new one, so it must not count towards the limit:
   // re-verifying on a device the reader already uses is not a new device.
+  // Expired sessions keep status 'active' in storage but must not occupy a
+  // slot — isSessionActive checks both status and expiry.
   const activeSessions = await listSessionsByEmail(email);
-  const observedAt = new Date();
+  const now = new Date();
   const activeCount = activeSessions.filter(
-    (s) => isSessionActive(s, observedAt) && s.deviceId !== deviceId
+    (s) => isSessionActive(s, now) && s.deviceId !== deviceId
   ).length;
 
   if (activeCount >= MAX_CONCURRENT_DEVICES) {
@@ -142,7 +144,6 @@ async function createSessionUnserialised(
   const sessionId = generateSessionToken();
 
   // Create session record with 30-day expiry
-  const now = new Date();
   const expiresAt = new Date(now.getTime() + SESSION_LIFETIME_DAYS * 24 * 60 * 60 * 1000);
 
   const session: Session = {
