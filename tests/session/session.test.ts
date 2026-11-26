@@ -3,6 +3,7 @@
  * Tests session creation, validation, renewal, and termination.
  *
  * Run with: npm test -- tests/session/session.test.ts
+ * Vitest compare job verification: 2026-11-26
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
