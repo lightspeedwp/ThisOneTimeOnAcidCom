@@ -165,26 +165,26 @@ Per spec requirement: "All 7 blocking decisions documented with options, awaitin
 - **Boundaries**: Navigation items ✓ fixed (4 items post-Prompt-1); design baseline ✓ referenced
 - **Dependency**: Prompt 1 should execute first (soft dependency, not a blocker)
 
-#### Prompt 3A: prompt-3a-reader-access.md ✓
-- **Approval Status**: ✓ SPECIFICATION APPROVED
-- **Boundaries**: ❌ Decisions 3, 4, 5, 6 pending (placeholders in spec for:email expiry, provider, manuscript readiness, newsletter link)
-- **Ready to Execute**: YES (with decision placeholders marked for substitution)
+#### Prompt 3A: prompt-3a-reader-access.md ➡️
+- **Approval Status**: ✓ SPECIFICATION APPROVED; ➡️ handed over to [Spec 005](../005-reader-access/spec.md) (2026-11-13)
+- **Boundaries**: ✓ Decisions 3, 4, 5, 6 resolved 2026-11-13 (see `research.md`). *Originally (2026-11-09): pending, with placeholders for email expiry, provider, manuscript readiness and newsletter link*
+- **Ready to Execute**: Not in Spec 004 — Spec 005 owns execution
 
-#### Prompt 3B: prompt-3b-recovery-flows.md ❌
-- **Approval Status**: ❌ BLOCKED (template only)
-- **Boundaries**: ❌ Decisions 1, 2 (critical blockers—both must be resolved before execution)
-- **Ready to Execute**: NO
+#### Prompt 3B: prompt-3b-recovery-flows.md ➡️
+- **Approval Status**: ➡️ handed over to [Spec 005](../005-reader-access/spec.md) (2026-11-13). *Originally (2026-11-09): blocked, template only*
+- **Boundaries**: ✓ Decisions 1, 2 resolved 2026-11-13 (see `research.md`). *Originally: critical blockers*
+- **Ready to Execute**: Not in Spec 004 — Spec 005 owns execution
 
-#### Prompt 3C: prompt-3c-error-states.md ❌
-- **Approval Status**: ❌ BLOCKED (template only)
-- **Boundaries**: ❌ Decision 3 (critical blocker—code expiry timing determines error messages)
-- **Ready to Execute**: NO
+#### Prompt 3C: prompt-3c-error-states.md ➡️
+- **Approval Status**: ➡️ handed over to [Spec 005](../005-reader-access/spec.md) (2026-11-13). *Originally (2026-11-09): blocked, template only*
+- **Boundaries**: ✓ Decision 3 resolved 2026-11-13 (see `research.md`). *Originally: critical blocker, because code expiry timing determines error messages*
+- **Ready to Execute**: Not in Spec 004 — Spec 005 owns execution
 
 ### tasks.md ✓
 - **Purpose**: Task breakdown across 7 phases (now 8 with convergence)
 - **Approval Status**: ✓ PHASE 1–7 APPROVED; Phase 8 convergence appended
 - **Boundaries**: User story phases marked [US1], [US2], [US3], [US4]; phases marked with completion dependencies
-- **Blockers**: T131–T133 (legacy breakdown; formerly T031–T033) marked as "Blocked: awaiting Approval Gate 1" (now superseded by convergence analysis)
+- **Blockers**: T131–T133 (legacy breakdown; formerly T031–T033) — ✅ resolved 2026-11-13 (Approval Gate 1 decisions made; see `research.md`). *Originally marked "Blocked: awaiting Approval Gate 1"*
 
 ---
 

@@ -139,12 +139,12 @@ The continuation documents in `continuations/` (archived) used their own T060–
 
 > **Resolved 2026-11-13**: Ash selected options for all seven decisions. See `exports/decisions-selected.md` and `research.md`. T019 and T021–T024 are closed. T020 (Decision 2) is closed for Spec 004 with Option A, which is now labelled "session refresh with absolute 30-day expiry". Whether that interacts with repeated renewal is a Spec 005 question; `exports/GATE_3_FINAL_SIGN_OFF.md` marks it ⏳ PARTIAL.
 
-- [x] T019 [P] [US3] **Decision 1 (Recovery-first race condition)**: Clarify with Ash: when recovery and fresh verification race, which takes precedence? Options: A (recovery first), B (fresh first), C (last-writer-wins), D (user chooses). Update `research.md` with chosen option — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
-- [x] T020 [P] [US3] **Decision 2 (Recovery lifetime eligibility)**: Clarify with Ash: how long is recovery code valid? Options: 24h, 7d, 30d. Update `research.md` — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
-- [x] T021 [P] [US3] **Decision 3 (Code expiry start time)**: Clarify with product lead: from code generation? receipt? page load? Options: A (generation), B (receipt), C (page load). Update `research.md` — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
-- [x] T022 [P] [US3] **Decision 4 (Email service provider)**: Clarify with tech lead: SendGrid or Brevo? API/SMTP availability? Update `research.md` — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
-- [x] T023 [P] [US3] **Decision 5 (Manuscript publication readiness)**: Clarify with author: when is manuscript approved & available for readers? Draft timeline: 2027-01-31. Update `research.md` with status — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
-- [x] T024 [P] [US3] **Decision 6 (Newsletter destination)**: Clarify with product: Brevo signup link or other service? Update `research.md` — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [x] T019 [P] [US3] **Decision 1 (Recovery-first race condition)**: Clarify with Ash: when recovery and fresh verification race, which takes precedence? Options: A (recovery first), B (fresh first), C (last-writer-wins), D (user chooses). Update `research.md` with chosen option — ✅ RESOLVED 2026-11-13 (`research.md`)
+- [x] T020 [P] [US3] **Decision 2 (Recovery lifetime eligibility)**: Clarify with Ash: how long is recovery code valid? Options: 24h, 7d, 30d. Update `research.md` — ✅ RESOLVED 2026-11-13 (`research.md`)
+- [x] T021 [P] [US3] **Decision 3 (Code expiry start time)**: Clarify with product lead: from code generation? receipt? page load? Options: A (generation), B (receipt), C (page load). Update `research.md` — ✅ RESOLVED 2026-11-13 (`research.md`)
+- [x] T022 [P] [US3] **Decision 4 (Email service provider)**: Clarify with tech lead: SendGrid or Brevo? API/SMTP availability? Update `research.md` — ✅ RESOLVED 2026-11-13 (`research.md`)
+- [x] T023 [P] [US3] **Decision 5 (Manuscript publication readiness)**: Clarify with author: when is manuscript approved & available for readers? Draft timeline: 2027-01-31. Update `research.md` with status — ✅ RESOLVED 2026-11-13 (`research.md`)
+- [x] T024 [P] [US3] **Decision 6 (Newsletter destination)**: Clarify with product: Brevo signup link or other service? Update `research.md` — ✅ RESOLVED 2026-11-13 (`research.md`)
 - [ ] T027 [US3] Create comprehensive blocking-decisions-audit.md documenting all 7 decisions with: option summary, resolution status, implementation impact, Prompt dependencies, rationale
 - [ ] T028 [US3] Verify decision routing: Decisions 1–6 enable Spec 005 (reader access, Prompts 3A–3C); Decision 7 enables Prompt 1 (navigation)
 - [ ] T029 [US3] Document implementation prerequisites: list what must be verified/confirmed before each prompt can execute (Figma Make environment, manuscript status, email provider confirmed, etc.)
@@ -158,7 +158,7 @@ The continuation documents in `continuations/` (archived) used their own T060–
 
 **Checkpoint**: All blocking decisions resolved - Phase B execution unblocked
 
-**BLOCKED BY**: Decisions 1, 2, 3, 4, 5, 6 (parallel resolution track)
+**BLOCKED BY**: Decisions 1, 2, 3, 4, 5, 6 (parallel resolution track) — ✅ all resolved 2026-11-13; Prompts 3B/3C moved to Spec 005
 
 ---
 
@@ -315,7 +315,7 @@ With multiple people:
 
 > These are the original tasks from 2026-11-09, renumbered by adding 100 (T014 → T114 and so on) on 2026-11-20 to remove duplicate IDs. Phase 8 dependencies refer to this list. Tasks T101–T113 are not in this file; see the "Task ID scheme" section at the top.
 
-- [ ] T114 Prepare Approval Gate 1 summary in quickstart.md: "All 7 decisions ready for user selection" with links to research.md decision options
+- [x] ~~T114 Prepare Approval Gate 1 summary in quickstart.md: "All 7 decisions ready for user selection" with links to research.md decision options~~ — **SUPERSEDED**: Approval Gate 1 resolved 2026-11-13
 **Branch**: ccr-01b4e649-64vj1f | **PR**: [#618 (Merged)](https://github.com/lightspeedwp/ThisOneTimeOnAcidCom/pull/618)
 
 **Total Tasks**: 45 | **Phase 1**: 5 | **Phase 2**: 5 | **Phase 3 (US1)**: 9 | **Phase 4 (US3)**: 10 | **Phase 5 (US4)**: 11 | **Phase 6**: 5
@@ -419,7 +419,7 @@ With multiple people:
 
 > **Handed over to Spec 005 (2026-11-13)**: Prompts 3B and 3C belong to [Spec 005](../005-reader-access/spec.md). T131–T133 are closed because the decisions were made. T134–T138 stay open here as a record only.
 
-**Goal**: Document recovery flow specification and error states (2 blocked prompts: 3B partial, 3C). **BLOCKED** pending Decisions 1, 2, 3 resolution.
+**Goal**: Document recovery flow specification and error states (2 blocked prompts: 3B partial, 3C). *Historical: BLOCKED pending Decisions 1, 2, 3 — resolved 2026-11-13.*
 
 **Blocking Dependencies**:
 - Decision 1: Recovery-first race condition → required for Prompt 3B execution
@@ -428,9 +428,9 @@ With multiple people:
 
 **Implementation Tasks** (deferred until decisions resolved):
 
-- [x] T131 ~~[BLOCKED]~~ [US3] Await user selection of Decision 1 (recovery-first race condition options A/B/C/D) in Approval Gate 1 — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
-- [x] T132 ~~[BLOCKED]~~ [US3] Await user selection of Decision 2 (recovery lifetime eligibility options A/B/C/D) in Approval Gate 1 — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
-- [x] T133 ~~[BLOCKED]~~ [US3] Await user selection of Decision 3 (code expiry start time options A/B/C) in Approval Gate 1 — ✅ RESOLVED 2026-11-13 (`exports/decisions-selected.md`)
+- [x] T131 ~~[BLOCKED]~~ [US3] Await user selection of Decision 1 (recovery-first race condition options A/B/C/D) in Approval Gate 1 — ✅ RESOLVED 2026-11-13 (`research.md`)
+- [x] T132 ~~[BLOCKED]~~ [US3] Await user selection of Decision 2 (recovery lifetime eligibility options A/B/C/D) in Approval Gate 1 — ✅ RESOLVED 2026-11-13 (`research.md`)
+- [x] T133 ~~[BLOCKED]~~ [US3] Await user selection of Decision 3 (code expiry start time options A/B/C) in Approval Gate 1 — ✅ RESOLVED 2026-11-13 (`research.md`)
 - [ ] T134 [US3] Once Decision 1 resolved: read contracts/prompt-3b-recovery-flows.md and update with Decision 1 selection → generate recovery-flow-specification.md
 - [ ] T135 [US3] Once Decision 2 resolved: read contracts/prompt-3b-recovery-flows.md and update with Decision 2 selection → append to recovery-flow-specification.md
 - [ ] T136 [US3] Once Decision 3 resolved: read contracts/prompt-3c-error-states.md and update with Decision 3 selection → generate error-states-specification.md with exact expiry messaging
@@ -469,7 +469,7 @@ With multiple people:
 
 - [ ] T139 [P] [US4] Prepare Approval Gate 2 summary in quickstart.md: "Design baseline approved for export" with checklist of approved elements (Space Grotesk, Inter, 9-color palette, navigation, access policy)
 - [ ] T140 [P] [US4] Prepare Approval Gate 3 summary in quickstart.md: "Preflight analysis complete and ready for implementation team" with links to all validation reports
-- [x] T141 [US4] Document all Approval Gate 1 decisions (7 selected options) in `.github/specs/004-book-website-make/exports/decisions-selected.md` with: — ✅ file exists in `exports/` (verified 2026-11-20)
+- [x] T141 [US4] Document all Approval Gate 1 decisions (7 selected options) in `.github/specs/004-book-website-make/exports/decisions-selected.md` with: — ✅ file exists in `exports/` (verified 2026-11-20); its decision states are a 2026-11-19 snapshot, so use `research.md` as the record of the approved options
   - Decision 1 selection and rationale
   - Decision 2 selection and rationale
   - Decision 3 selection and rationale
@@ -533,6 +533,14 @@ With multiple people:
 
 ## Dependencies & Execution Order
 
+> **Historical planning notes (legacy v1.0.0 plan, 2026-11-09).** The sections from here to "Next Steps" describe the original plan. They are kept as a record and are not an executable task list. Current status (2026-11-26):
+>
+> - T101–T113 are not in this file (removed in the SC-004 rewrite; text in git `e316aaf`). T114 is superseded.
+> - Approval Gate 1 was resolved on 2026-11-13: T131–T133 are closed (see `research.md`).
+> - Moved to Spec 005: T122–T124, T127–T130 and T134–T138. Still in Spec 004: T125–T126 (navigation).
+> - Done: T119–T121 and T141–T144. Superseded: T145–T147.
+> - The executable lists are the active breakdown ("Phase 1: Gate 2 & SC-004 Approval" onwards) and Phases 8–9.
+
 ```text
 Phase 1 (Setup) ──┐
                   ├──> Phase 2 (Decisions & Gates) ──┐
@@ -542,24 +550,24 @@ Phase 1 (Setup) ──┐
                   ├──> Phase 4 (Reader Access) ──────┤
                   │                                  │
                   └──> Phase 5 (Recovery/Errors) ────┘
-                       (BLOCKED: Decisions 1–3)
+                       (historical: BLOCKED on Decisions 1–3; resolved 2026-11-13)
 ```
 
 ### Critical Path (Blocking Dependencies)
 
-1. **T101–T114** (Phase 1–2): Setup and extract blocking decisions
-2. **T131–T133** (Phase 5): **BLOCKED** awaiting Approval Gate 1 (user selections)
-3. Once Gate 1 approved:
+1. **T101–T114** (Phase 1–2): Setup and extract blocking decisions — *historical: T101–T113 not in this file; T114 superseded*
+2. **T131–T133** (Phase 5): ✅ Approval Gate 1 resolved 2026-11-13 — *historical: was BLOCKED awaiting user selections*
+3. Gate 1 approved 2026-11-13:
    - **T115–T121** (Phase 3): Execute in parallel
    - **T122–T130** (Phase 4): Execute in parallel
-   - **T134–T138** (Phase 5): Execute in parallel
+   - **T134–T138** (Phase 5): moved to Spec 005
 4. **T139–T147** (Phase 6): Complete Approval Gates 2–3, prepare handoff
 5. **T148–T151** (Phase 7): Final validation
 
 ### Parallel Execution Opportunities
 
 **Phase 1–2 (Sequential, blocking)**:
-- T105–T111: Extract all 7 blocking decisions (can parallelize reading from research.md)
+- T105–T111: Extract all 7 blocking decisions — *historical: not in this file; decisions resolved 2026-11-13*
 
 **Phase 3 (Fully Parallel, no dependencies)**:
 - T115–T118: Read and validate design specifications (4 contract files in parallel)
@@ -569,9 +577,9 @@ Phase 1 (Setup) ──┐
 - T122–T126: Read and validate reader access specifications (5 tasks in parallel)
 - T127–T130: Generate reader access reports (depend on T122–T126)
 
-**Phase 5 (Blocked until decisions)**:
-- T131–T133: Blocked on Approval Gate 1
-- T134–T138: Depend on decision selections (can parallelize Prompts 3B/3C work)
+**Phase 5 (decisions resolved 2026-11-13)**:
+- T131–T133: ✅ resolved (Approval Gate 1)
+- T134–T138: moved to Spec 005
 
 **Phase 6 (Sequential, depends on Phases 3–5)**:
 - T139–T140: Prepare gates (can parallelize)
@@ -580,17 +588,17 @@ Phase 1 (Setup) ──┐
 ### Recommended Team Approach
 
 **Fully Sequential (single contributor)**:
-1. T101–T114 (setup, extract decisions)
-2. Wait for Approval Gate 1
-3. T115–T130 (phases 3–4)
-4. T134–T138 (phase 5, once decisions available)
+1. ~~T101–T114 (setup, extract decisions)~~ — historical; T101–T113 not in this file, T114 superseded
+2. ~~Wait for Approval Gate 1~~ — Gate 1 resolved 2026-11-13
+3. T115–T130 (phases 3–4) — T122–T124 and T127–T130 moved to Spec 005
+4. ~~T134–T138 (phase 5, once decisions available)~~ — moved to Spec 005
 5. T139–T151 (phases 6–7)
 
 **Parallel (multiple contributors)**:
-1. Contributor A: T101–T114, then T115–T121 (design baseline)
-2. Contributor B: T122–T130 (reader access) [can start after T101–T114]
-3. Once Approval Gate 1 approved:
-4. Contributor C: T134–T138 (recovery flows / error states)
+1. Contributor A: T115–T121 (design baseline) — *historical: originally after T101–T114, which are not in this file*
+2. Contributor B: T125–T126 (navigation); T122–T124 and T127–T130 moved to Spec 005
+3. Approval Gate 1 approved 2026-11-13
+4. ~~Contributor C: T134–T138 (recovery flows / error states)~~ — moved to Spec 005
 5. All: T139–T151 (final gates and handoff)
 
 ---
@@ -599,7 +607,7 @@ Phase 1 (Setup) ──┐
 
 ✅ **Checklist Format**: All tasks follow `- [ ] [TaskID] [P?] [Story?] Description with file path`
 
-✅ **Task IDs**: T101–T151, sequential in execution order
+✅ **Task IDs**: T101–T151, sequential in execution order (*T101–T113 historical, not in this file*)
 
 ✅ **Parallelizable Markers**: [P] on tasks with independent concerns (T105–T111, T115–T118, T122–T126, T139–T140)
 
@@ -615,11 +623,11 @@ Phase 1 (Setup) ──┐
 
 | Phase | Tasks | Story | Count | Status |
 | ------- | ------- | ------- | ------- | -------- |
-| 1 (Setup) | T101–T104 | — | 4 | Ready |
-| 2 (Foundational) | T105–T114 | — | 10 | Ready (blocks phase 3–5) |
+| 1 (Setup) | T101–T104 | — | 4 | Historical: not in this file |
+| 2 (Foundational) | T105–T114 | — | 10 | Historical: T105–T113 not in this file; T114 superseded |
 | 3 (Design Baseline) | T115–T121 | US1 | 7 | Ready after T114 |
 | 4 (Reader Access) | T122–T130 | US2 | 9 | Ready after T114 |
-| 5 (Recovery/Errors) | T131–T138 | US3 | 8 | Blocked: T131–T133 await Gate 1 |
+| 5 (Recovery/Errors) | T131–T138 | US3 | 8 | T131–T133 resolved 2026-11-13; T134–T138 moved to Spec 005 |
 | 6 (Readiness) | T139–T147 | US4 | 9 | Ready after phases 3–5 |
 | 7 (Polish) | T148–T151 | — | 4 | Ready after phase 6 |
 | **TOTAL** | | | **51 tasks** | |
@@ -627,12 +635,12 @@ Phase 1 (Setup) ──┐
 **By User Story**:
 - **US1 (Design Baseline)**: 7 tasks (P1) — Ready now
 - **US2 (Reader Access)**: 9 tasks (P1) — Ready now
-- **US3 (Recovery/Errors)**: 8 tasks (P1→deferred) — Blocked until Decisions 1–3
+- **US3 (Recovery/Errors)**: 8 tasks — decisions resolved 2026-11-13; remaining work moved to Spec 005
 - **US4 (Readiness)**: 9 tasks (P1) — Ready after US1–US3
 
 **Parallelizable**: 11 tasks [P] across phases (T105–T111: decisions; T115–T118: design; T122–T126: reader access; T139–T140: gates)
 
-**Blocked**: 3 tasks (T131–T133) awaiting Approval Gate 1 user selection
+**Blocked**: none — T131–T133 resolved 2026-11-13 (Approval Gate 1). *Historical: 3 tasks awaited user selection*
 
 ---
 
@@ -642,7 +650,7 @@ Phase 1 (Setup) ──┐
 ✅ **Phase 2** (Decisions): Ready now (extract and document)  
 ✅ **Phase 3** (US1): Ready now (design baseline documentation)  
 ✅ **Phase 4** (US2): Ready now (reader access documentation)  
-🔒 **Phase 5** (US3): Blocked until Decisions 1–3 resolved  
+➡️ **Phase 5** (US3): Decisions resolved 2026-11-13; remaining work moved to Spec 005  
 ✅ **Phase 6** (US4): Ready after phases 3–4  
 ✅ **Phase 7** (Polish): Ready after phase 6  
 
@@ -653,10 +661,10 @@ Phase 1 (Setup) ──┐
 ## Next Steps
 
 1. **Review this tasks.md** — Approve structure or request changes
-2. **Complete Approval Gate 1** — Select options for 7 blocking decisions (T131–T133)
+2. ~~**Complete Approval Gate 1**~~ — ✅ done 2026-11-13 (T131–T133; see `research.md`)
 3. **Execute Phase 3** (T115–T121) — Generate design baseline documentation
 4. **Execute Phase 4** (T122–T130) — Generate reader access documentation
-5. **Execute Phase 5** (T134–T138) — Generate recovery/error documentation (post-decisions)
+5. ~~**Execute Phase 5** (T134–T138)~~ — moved to Spec 005
 6. **Execute Phase 6** (T139–T147) — Complete approval gates and handoff
 7. **Execute Phase 7** (T148–T151) — Final validation and report
 
@@ -736,7 +744,7 @@ The three continuation documents in `continuations/` described a T060–T074 set
 | T063 | Prompt 2A ≥95% | ✅ `checklists/prompt-preview-validation.md` (P2A 95%) → T054 |
 | T064 | Design exports | ✅ T119–T121 |
 | T065 | Readiness exports | ✅ T141–T144 |
-| T066 | Close Prompt 3A–3C tasks | ✅ T012–T016, T025–T027, T122–T138 marked moved to Spec 005 |
+| T066 | Close Prompt 3A–3C tasks | ✅ Moved to Spec 005: T012–T016, T025–T027, T122–T124, T127–T130, T134–T138. Stay in Spec 004: T125–T126 (navigation). Closed as resolved decisions: T131–T133 |
 | T067 | Task disambiguation | ✅ T075 |
 | T068 | Phase 8 "zero gaps" | ✅ T070, T081 |
 | T069 | spec.md / plan.md state | ✅ PR #639 (SC-004), T067, T082 |

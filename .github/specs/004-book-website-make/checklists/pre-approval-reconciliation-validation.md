@@ -83,13 +83,13 @@ This final reconciliation validation spans all Phase 8 convergence outputs (T052
 | Prompt | Completeness | Status | Blockers | Approval Boundary |
 | -------- | ------------- | -------- | ---------- | ------------------ |
 | **Prompt 1** (Navigation) | 100% | ✅ READY | Decision 7 (placeholder) | ✓ APPROVED (with placeholder) |
-| **Prompt 2A** (Design Baseline) | 89% | ✅ READY | None | ✓ APPROVED |
+| **Prompt 2A** (Design Baseline) | 95% *(was 89% on 2026-11-11)* | ✅ READY | None | ✓ APPROVED |
 | **Prompt 2B** (Navigation Design) | 100% | ✅ READY | None (soft: Prompt 1 first) | ✓ APPROVED |
-| **Prompt 3A** (Reader Access) | 91% | ✅ READY | Decisions 3/4/5/6 (placeholders) | ✓ APPROVED (with placeholders) |
-| **Prompt 3B** (Recovery Flows) | Template | ❌ BLOCKED | Decisions 1, 2 | ❌ UNRESOLVED |
-| **Prompt 3C** (Error States) | Template | ❌ BLOCKED | Decision 3 | ❌ UNRESOLVED |
+| **Prompt 3A** (Reader Access) | ~91% | ➡️ Handed over to Spec 005 | Decisions 3/4/5/6 resolved 2026-11-13 | Spec 005 owns |
+| **Prompt 3B** (Recovery Flows) | Template | ➡️ Handed over to Spec 005 | Decisions 1, 2 resolved 2026-11-13 | Spec 005 owns |
+| **Prompt 3C** (Error States) | Template | ➡️ Handed over to Spec 005 | Decision 3 resolved 2026-11-13 | Spec 005 owns |
 
-**Verdict**: ✅ **PASS** — 4 unblocked prompts ready (avg 95% completeness); 2 blocked prompts with clear unblocking paths.
+**Verdict** (revised 2026-11-20): ✅ **PASS** under the revised SC-003 scope — Prompts 1, 2A and 2B each reach ≥95% (100%, 95%, 100%). Prompts 3A–3C belong to Spec 005. *Historical: the 2026-11-11 verdict passed four prompts on their 95% average while Prompt 2A was at 89%; a per-prompt threshold does not allow that.*
 
 ---
 

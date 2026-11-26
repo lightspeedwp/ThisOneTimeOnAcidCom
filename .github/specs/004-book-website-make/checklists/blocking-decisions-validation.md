@@ -177,7 +177,7 @@ Each blocking decision MUST have:
 
 ## Blocking Decision Matrix
 
-> **Historical snapshot (T057, 2026-11-11)**: this matrix shows the state before Ash chose. All 7 decisions were resolved on 2026-11-13; see [`exports/decisions-selected.md`](../exports/decisions-selected.md). Decision 2 Option A is labelled "session refresh with absolute 30-day expiry".
+> **Historical snapshot (T057, 2026-11-11)**: this matrix shows the state before Ash chose. All 7 decisions were resolved on 2026-11-13; the authoritative record is [`research.md`](../research.md) (each decision's **Decision** line). Decision 2 selected Option A, "session refresh with absolute 30-day expiry". (`exports/decisions-selected.md` is a 2026-11-19 snapshot that still shows Decisions 1–6 as pending and uses different option letters, so do not use it to confirm selections.)
 
 **User Decision Points** (awaiting selection at the time):
 

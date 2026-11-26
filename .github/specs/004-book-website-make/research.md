@@ -91,9 +91,9 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | C | Mailgun | Powerful API; strong developers; less newsletter-focused |
 | D | Other (AWS SES, Postmark, etc.) | Varies; requires evaluation |
 
-**Decision**: ✅ APPROVED — Hybrid (SendGrid for transactional email + Brevo for newsletters)
+**Decision**: ✅ APPROVED — Hybrid: Mailgun for transactional email + Brevo for newsletters. *Superseded 2026-11-19 in Spec 005: the original 2026-11-13 selection named SendGrid for transactional email; Mailgun replaced it (see `exports/GATE_3_FINAL_SIGN_OFF.md`).*
 
-**Impact on Prompt 3A**: Email template specification (subject line, body copy, footer branding) must match SendGrid's SMTP template syntax. Newsletter link must direct to Brevo signup URL per Decision 6.
+**Impact on Prompt 3A**: Email template specification (subject line, body copy, footer branding) must match Mailgun's template syntax; Spec 005 owns this work. Newsletter link must direct to Brevo signup URL per Decision 6.
 
 ---
 

@@ -42,8 +42,8 @@
 - `typography_headings`: "Space Grotesk" (font family, weights, sizes)
 - `typography_body`: "Inter" (font family, weights, sizes)
 - `typography_ui`: "Inter" (font family, weights, sizes)
-- `colors_light_theme`: map of 9 named colors (e.g., { "background": "#F6F2EB", ... } — values must come from the approved 9-colour baseline (see `exports/design-tokens.json`))
-- `colors_dark_theme`: map of 9 named colors (e.g., { "primary": "#ffffff", ... })
+- `colors_light_theme`: map of 9 named colors (e.g., { "background": "#F6F2EB", ... } — values must come from the approved 9-colour baseline). **Light-theme role mappings are pending approval** (`lightTheme: "pending"` in `exports/design-tokens.json`); only the dark theme and primitives are approved
+- `colors_dark_theme`: map of 9 named colors (e.g., { "text": "#F6F2EB", ... } — approved; see `exports/design-tokens.json`)
 - `component_styles`: map of component names → style definitions (e.g., "Button", "Card", "Navigation")
 - `theme_states`: array of ["light", "dark"]
 - `approval_date`: ISO 8601 timestamp

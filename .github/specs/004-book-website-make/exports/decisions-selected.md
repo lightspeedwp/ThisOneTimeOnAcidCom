@@ -6,6 +6,9 @@
 **Reference**: `.github/specs/004-book-website-make/research.md`  
 **Status**: ⏳ **PENDING HANDOVER TO SPEC 005**
 
+
+> ⚠️ **Superseded snapshot (noted 2026-11-26)**: this file shows Decisions 1–6 as pending, but all seven were approved on 2026-11-13. The authoritative record is [`research.md`](../research.md) (each decision's **Decision** line). The option letters below do not match `research.md` (for example, the 30-day option for Decision 2 is labelled C here and A in `research.md`). Spec 005 later replaced SendGrid with Mailgun for Decision 4.
+
 ---
 
 ## Executive Summary

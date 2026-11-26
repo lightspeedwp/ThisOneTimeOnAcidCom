@@ -9,7 +9,7 @@
 > **Correction (Phase 9 reconciliation, 2026-11-20)**: When this log was first written, `content/book/` paths were still in `data-model.md` (2), `source-file-inventory.md`, `version-reconciliation.md`, `checklists/pre-approval-reconciliation-validation.md` and `checklists/specification-quality.md` (2). All of these now point to `references/`, with a "formerly `content/book/`" note where history matters.
 >
 > Kept on purpose:
-> - `references/*`: verbatim copies of source documents. Several point at real manuscript paths under `content/book/` (for example chapter files), which still exist
+> - `references/*`: verbatim copies of source documents. Several of them refer to manuscript files under `content/book/` (for example chapter files). In this repository the manuscript now lives at `src/content/book/`; the copies are not edited, so their old paths stay as written
 > - `staged/*`: historical drafts
 > - `exports/GATE_2_READINESS_REPORT.md`: old → new mapping table
 > - `plan.md`: the "moved from" note
