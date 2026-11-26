@@ -14,11 +14,21 @@
 
 import { getStore as getNetlifyStore } from '@netlify/blobs';
 
+/** Result of a write; `modified` is false when a condition prevented it. */
+export interface BlobWriteResult {
+  modified: boolean;
+  etag?: string;
+}
+
 export interface BlobStore {
-  set(key: string, value: string): Promise<void>;
+  /**
+   * With `onlyIfNew`, Netlify Blobs applies the write only when the key does
+   * not exist yet, and reports `modified: false` otherwise.
+   */
+  set(key: string, value: string, options?: { onlyIfNew?: boolean }): Promise<BlobWriteResult | void>;
   get(key: string): Promise<string | null>;
   delete(key: string): Promise<void>;
-  list?(options?: { prefix?: string }): Promise<string[]>;
+  list(options?: { prefix?: string }): Promise<BlobListResult>;
 }
 
 /**

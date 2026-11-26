@@ -21,9 +21,12 @@ afterEach(() => {
  *   and optional statuses and assertion results.
  * @param {Array<Object>} baseFiles - Base suite fixtures in the same format.
  * @param {boolean} [rawCounts=false] - Use numeric failure counts instead of assertion results.
+ * @param {Object} [options] - Extra fixture options.
+ * @param {Object} [options.topLevel] - Extra top-level report fields per target ({ head, base }).
+ * @param {Array<string>} [options.baseTracked] - Files tracked at base, passed as --base-files.
  * @returns {import('node:child_process').SpawnSyncReturns<string>} CLI output and exit status.
  */
-function compare(headFiles, baseFiles, rawCounts = false) {
+function compare(headFiles, baseFiles, rawCounts = false, options = {}) {
   const roots = {
     head: path.join(fixtureRoot, 'head'),
     base: path.join(fixtureRoot, 'base'),
@@ -31,6 +34,7 @@ function compare(headFiles, baseFiles, rawCounts = false) {
 
   Object.entries({ head: headFiles, base: baseFiles }).forEach(([target, files]) => {
     const report = {
+      ...(options.topLevel?.[target] || {}),
       numFailedTests: files.reduce((total, file) => total + file.failures, 0),
       testResults: files.map(file => {
         const result = {
@@ -53,12 +57,20 @@ function compare(headFiles, baseFiles, rawCounts = false) {
     writeFileSync(path.join(fixtureRoot, `${target}.json`), JSON.stringify(report));
   });
 
+  const extraArgs = [];
+  if (options.baseTracked) {
+    const listPath = path.join(fixtureRoot, 'base-files.txt');
+    writeFileSync(listPath, `${options.baseTracked.join('\n')}\n`);
+    extraArgs.push('--base-files', listPath);
+  }
+
   return spawnSync(process.execPath, [
     script,
     '--head', path.join(fixtureRoot, 'head.json'),
     '--head-root', roots.head,
     '--base', path.join(fixtureRoot, 'base.json'),
     '--base-root', roots.base,
+    ...extraArgs,
   ], { encoding: 'utf8' });
 }
 
@@ -183,4 +195,88 @@ test('also compares reports containing per-file numeric failure counts', () => {
 
   expect(result.status).toBe(1);
   expect(result.stdout).toContain('New failures in this PR: 2');
+});
+
+describe('report format detection', () => {
+  const jestTopLevel = { numRuntimeErrorTestSuites: 0, wasInterrupted: false, openHandles: [] };
+
+  test('labels Vitest reports as vitest even though they carry numFailedTests', () => {
+    const files = [{ name: 'tests/existing.test.ts', failures: 1 }];
+    const result = compare(files, files);
+
+    expect(result.stdout).toMatch(/Base branch failures: .*\[vitest\]/);
+    expect(result.stdout).toMatch(/PR head failures: .*\[vitest\]/);
+  });
+
+  test('labels reports with Jest-only top-level fields as jest', () => {
+    const files = [{ name: 'tests/existing.test.js', failures: 1 }];
+    const result = compare(files, files, false, { topLevel: { base: jestTopLevel } });
+
+    expect(result.stdout).toMatch(/Base branch failures: .*\[jest\]/);
+    expect(result.stdout).toMatch(/PR head failures: .*\[vitest\]/);
+  });
+
+  test('labels legacy per-file numFailingTests reports as jest', () => {
+    const files = [{ name: 'tests/existing.test.js', failures: 1 }];
+    const result = compare(files, files, true);
+
+    expect(result.stdout).toMatch(/PR head failures: .*\[jest\]/);
+  });
+});
+
+describe('--base-files', () => {
+  test('reports a failing file that existed at base but is missing from its report as not comparable', () => {
+    const result = compare(
+      [{ name: 'tests/existing.test.ts', failures: 2 }],
+      [{ name: 'tests/other.test.ts', failures: 0 }],
+      false,
+      { baseTracked: ['tests/existing.test.ts', 'tests/other.test.ts'] },
+    );
+
+    expect(result.status).toBe(0);
+    expect(result.stdout).toContain('New failures in this PR: 0');
+    expect(result.stdout).toContain('not comparable');
+    expect(result.stdout).toContain('tests/existing.test.ts: 2 failure(s) on head');
+  });
+
+  test('still counts a failing file added by the PR as new', () => {
+    const result = compare(
+      [{ name: 'tests/added.test.ts', failures: 1 }],
+      [],
+      false,
+      { baseTracked: ['tests/existing.test.ts'] },
+    );
+
+    expect(result.status).toBe(1);
+    expect(result.stdout).toContain('New failures in this PR: 1');
+    expect(result.stdout).not.toContain('not comparable');
+  });
+
+  test('still compares a file that base reported as passing', () => {
+    const result = compare(
+      [{ name: 'tests/existing.test.ts', failures: 1 }],
+      [{ name: 'tests/existing.test.ts', failures: 0 }],
+      false,
+      { baseTracked: ['tests/existing.test.ts'] },
+    );
+
+    expect(result.status).toBe(1);
+    expect(result.stdout).toContain('New failures in this PR: 1');
+  });
+
+  test('fails when the base file list cannot be read', () => {
+    const files = [{ name: 'tests/existing.test.ts', failures: 0 }];
+    compare(files, files);
+    const result = spawnSync(process.execPath, [
+      script,
+      '--head', path.join(fixtureRoot, 'head.json'),
+      '--head-root', path.join(fixtureRoot, 'head'),
+      '--base', path.join(fixtureRoot, 'base.json'),
+      '--base-root', path.join(fixtureRoot, 'base'),
+      '--base-files', path.join(fixtureRoot, 'missing.txt'),
+    ], { encoding: 'utf8' });
+
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain('Failed to read base file list');
+  });
 });

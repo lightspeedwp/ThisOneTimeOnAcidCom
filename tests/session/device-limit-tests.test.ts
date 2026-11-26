@@ -7,7 +7,7 @@
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { createSession, getActiveSessionCount, terminateSession } from '../../netlify/lib/reader-access/session-service';
-import { listSessionsByEmail } from '../../netlify/lib/reader-access/store';
+import { listSessionsByEmail, updateSession } from '../../netlify/lib/reader-access/store';
 import { MAX_CONCURRENT_DEVICES } from '../../netlify/lib/reader-access/session-config';
 
 vi.mock('../../netlify/lib/blobs', () => {
@@ -262,6 +262,31 @@ describe('Device Limit Enforcement - T099-T102 (US4)', () => {
 
       const inactiveCount = await getActiveSessionCount(testEmail);
       expect(inactiveCount).toBe(1); // Count only active
+    });
+  });
+
+  describe('Expired sessions', () => {
+    it('should not count expired sessions against the device limit', async () => {
+      const testEmail = `${testEmailBase}-expired-slot`;
+      const devices = Array.from({ length: MAX_CONCURRENT_DEVICES + 1 }, (_, i) => ({
+        userAgent: `Device${i + 1}`,
+        ipAddress: `192.168.1.${i + 1}`,
+        timezone: 'UTC',
+      }));
+
+      const sessions = [];
+      for (let i = 0; i < MAX_CONCURRENT_DEVICES; i++) {
+        sessions.push(await createSession(testEmail, testCode, devices[i]));
+      }
+
+      // Expiry leaves status 'active' in storage; it must still free the slot
+      await updateSession(testEmail, sessions[0].deviceId, {
+        expiresAt: new Date(Date.now() - 60_000).toISOString(),
+      });
+
+      expect(await getActiveSessionCount(testEmail)).toBe(MAX_CONCURRENT_DEVICES - 1);
+      const newSession = await createSession(testEmail, testCode, devices[MAX_CONCURRENT_DEVICES]);
+      expect(newSession.sessionId).toBeTruthy();
     });
   });
 

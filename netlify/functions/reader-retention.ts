@@ -14,7 +14,10 @@
  * @handler daily scheduled background function
  */
 
-import { list, delete as deleteBlob, get } from '@netlify/blobs';
+import { getStore } from '@netlify/blobs';
+
+// Netlify scheduled function: runs once a day (RA-T050).
+export const config = { schedule: '@daily' };
 
 interface ReaderAccessRecord {
   id: string;
@@ -55,14 +58,16 @@ export default async function handler(req: Request): Promise<Response> {
     // Scan all records with prefix 'reader-access:'
     // Note: Netlify Blobs list() doesn't support filtering by value,
     // so we enumerate all and check delete_after locally
+    const store = getStore({ name: 'reader-access', consistency: 'strong' });
+
     try {
-      const { blobs } = await list({
+      const { blobs } = await store.list({
         prefix: 'reader-access:',
       });
 
       for (const blob of blobs) {
         try {
-          const recordJson = await get(blob.key);
+          const recordJson = await store.get(blob.key, { type: 'text' });
           if (!recordJson) continue;
 
           const record: ReaderAccessRecord = JSON.parse(recordJson);
@@ -70,7 +75,7 @@ export default async function handler(req: Request): Promise<Response> {
 
           // If record has passed its delete_after window, delete it
           if (deleteAfter < now) {
-            await deleteBlob(blob.key);
+            await store.delete(blob.key);
             deletedCount++;
             deletedIds.push(record.id);
           }

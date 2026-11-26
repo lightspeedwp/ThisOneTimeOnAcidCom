@@ -20,13 +20,14 @@ export interface MailerConfig {
 const DEFAULT_FROM = 'noreply@thisonetimeonacidcom.com';
 
 export class MailgunMailer {
-  private mg: ReturnType<typeof Mailgun>;
+  private mg: ReturnType<InstanceType<typeof Mailgun>['client']>;
   private domain: string;
   private fromAddress: string;
 
   constructor(config: MailerConfig) {
     const mailgun = new Mailgun(FormData);
-    this.mg = mailgun.client({ key: config.apiKey });
+    // Mailgun uses basic auth with the fixed username 'api'.
+    this.mg = mailgun.client({ username: 'api', key: config.apiKey });
     this.domain = config.domain;
     this.fromAddress = config.fromAddress || DEFAULT_FROM;
   }
