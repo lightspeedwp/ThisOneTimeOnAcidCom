@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Spec 006 session tests (T099–T102)** — Fixed two pre-existing test failures in `tests/session/`: (1) `renewSession › should extend expiry to 30 days from renewal time` now uses `vi.useFakeTimers` / `vi.setSystemTime` to advance the clock past the 1-second renewal coalesce window before asserting the new timestamp, eliminating the flaky millisecond race; (2) `Expired sessions › should not count expired sessions against the device limit` — corrected `createSessionUnserialised` to use the existing `isSessionActive` helper (which checks both `status` and `expiresAt`) when counting occupied device slots, so an expired session with `status: 'active'` in storage no longer blocks a new session from being created.
+
 ### Added
 
 - **Specification 006 User Story 1: Seamless chapter access after email verification (T011–T020)** — Added `POST /api/reader/session` (`reader-session-create.ts`) that verifies the emailed code, consumes it, and sets a 30-day HttpOnly session cookie (201, token never in the body; 400/401/409/429/500 per contract). Chapter endpoints now authenticate from the cookie alone via a hashed-token session index, renew the session on each read, and refresh the cookie's Max-Age. Re-verifying on the same device rotates the token. 63 new tests cover creation, persistence across tabs and refreshes, renewal, and 401 handling for missing, expired and terminated sessions.

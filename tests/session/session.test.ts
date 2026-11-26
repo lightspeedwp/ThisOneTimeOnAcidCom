@@ -18,8 +18,11 @@ import { FingerprintInput } from '../../netlify/lib/reader-access/session';
 import * as cryptoModule from '../../netlify/lib/reader-access/crypto';
 import { generateSessionToken } from '../../netlify/lib/reader-access/crypto';
 import { updateSession } from '../../netlify/lib/reader-access/store';
-import { CLOCK_SKEW_TOLERANCE_MS } from '../../netlify/lib/reader-access/session-config';
-import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
+import {
+  CLOCK_SKEW_TOLERANCE_MS,
+  SESSION_LIFETIME_DAYS,
+  RENEWAL_COALESCE_WINDOW_MS,
+} from '../../netlify/lib/reader-access/session-config';
 
 // In-memory Netlify Blobs so the real store adapter runs. (An automock of
 // the store returned undefined from every call, so no session ever existed.)
@@ -180,9 +183,16 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should extend expiry to 30 days from renewal time', async () => {
+      // Advance past the coalesce window so renewSession writes a new timestamp
+      // instead of returning the still-recent creation timestamp unchanged.
+      vi.useFakeTimers();
+      vi.setSystemTime(Date.now() + RENEWAL_COALESCE_WINDOW_MS + 1000);
+
       const beforeRenewal = new Date();
       const renewed = await renewSession(testEmail, testSession.deviceId);
       const afterRenewal = new Date();
+
+      vi.useRealTimers();
 
       const renewedAt = new Date(renewed.renewedAt);
       const expiresAt = new Date(renewed.expiresAt);
