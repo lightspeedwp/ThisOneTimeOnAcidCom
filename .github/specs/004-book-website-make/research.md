@@ -168,7 +168,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 | 1 | Recovery-first race condition | ✅ APPROVED | Option A (Recovery precedence) | Prompt 3B (recovery flows) |
 | 2 | Recovery lifetime eligibility | ✅ APPROVED | Option A (session refresh on recovery; absolute expiry 30 days after initial verification) | Prompt 3B (session state) |
 | 3 | Code expiry start time | ✅ APPROVED | Option A (From code generation) | Prompts 3A (copy), 3C (errors) |
-| 4 | Email service provider | ✅ APPROVED | SendGrid (API key + SMTP) | Prompt 3A (email integration) |
+| 4 | Email service provider | ✅ APPROVED | Hybrid: Mailgun (transactional) + Brevo (newsletter). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)* | Prompt 3A (email integration; Spec 005 owns) |
 | 5 | Manuscript publication readiness | ✅ DECIDED | Option C (Not yet approved; approval date to be confirmed) | Prompts 3A–3C (deferred until approval) |
 | 6 | Newsletter destination | ✅ APPROVED | Brevo (external signup link) | Prompt 3A (signup link) |
 | 7 | Route enforcement verification | ✅ APPROVED | Option A (noindex meta + sitemap exclusion; no robots.txt Disallow) | Prompt 1 (navigation validation) |
@@ -189,7 +189,7 @@ This document analyzes the seven blocking decisions that prevent Prompts 3B (rec
 1. Recovery-first race: **Option A** (Recovery takes precedence)
 2. Recovery lifetime: **Option A** (session refresh on recovery; absolute expiry 30 days after initial verification — recovery cannot extend access beyond that limit)
 3. Code expiry start: **Option A** (From code generation)
-4. Email service provider: **SendGrid** (API key + SMTP)
+4. Email service provider: **SendGrid** (API key + SMTP). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)*
 5. Manuscript status: **Not yet approved** (target: January 2027; exact approval date to be confirmed by Ash — using placeholder copy for now)
 6. Newsletter destination: **Brevo** (External signup link)
 7. Route enforcement: **Option A** (noindex meta tags + sitemap.xml exclusion; no robots.txt Disallow)

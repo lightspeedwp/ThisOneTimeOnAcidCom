@@ -35,7 +35,7 @@ This guide walks through the approval and execution flow for the Figma Make prom
 | 1. Recovery-first race condition (Options: A/B/C/D) | ✅ A | APPROVED |
 | 2. Recovery lifetime eligibility (Options: A/B/C/D) | ✅ A | APPROVED |
 | 3. Code expiry start time (Options: A/B/C) | ✅ A | APPROVED |
-| 4. Email service provider (Options: A/B/C/D) | ✅ Hybrid (SendGrid + Brevo) | APPROVED |
+| 4. Email service provider (Options: A/B/C/D) | ✅ Hybrid (SendGrid + Brevo). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)* | APPROVED |
 | 5. Manuscript publication readiness (Options: A/B/C) | ❌ C (not yet approved) | DECIDED — blocks Prompts 3A–3C |
 | 6. Newsletter destination (Options: A/B/C/D) | ✅ B | APPROVED |
 | 7. Route enforcement verification (Options: A/B/C/D) | ✅ A | APPROVED |
@@ -44,7 +44,7 @@ This guide walks through the approval and execution flow for the Figma Make prom
 - ✅ Decision 1 (Recovery race): A—Recovery takes precedence
 - ✅ Decision 2 (Recovery lifetime): A—session refresh on recovery; absolute expiry 30 days after initial verification
 - ✅ Decision 3 (Code expiry): A—From generation
-- ✅ Decision 4 (Email provider): Hybrid—SendGrid (transactional) + Brevo (newsletter)
+- ✅ Decision 4 (Email provider): Hybrid—SendGrid (transactional) + Brevo (newsletter). *Superseded 2026-11-19 in Spec 005: Mailgun replaced SendGrid for transactional email (see `exports/GATE_3_FINAL_SIGN_OFF.md`)*
 - ❌ Decision 5 (Manuscript status): C—Not yet approved; approval date to be confirmed by Ash
 - ✅ Decision 6 (Newsletter destination): B—Brevo external signup
 - ✅ Decision 7 (Route enforcement): A—noindex meta tags + sitemap.xml exclusion; no robots.txt Disallow

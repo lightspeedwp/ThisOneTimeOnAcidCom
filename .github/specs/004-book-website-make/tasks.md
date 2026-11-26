@@ -305,8 +305,8 @@ With multiple people:
 ## Success Criteria per User Story
 
 - **US1 (Design Hand-off)**: All 3 Phase A prompts executable and validated ✅
-- **US2 (Reader Access)**: Prompt 3A awaiting 4 decisions; executable once decisions resolved ⏳
-- **US3 (Implementation Readiness)**: All 7 decisions clarified and documented ⏳
+- **US2 (Reader Access)**: Decisions 3–6 resolved 2026-11-13; Prompt 3A handed over to Spec 005 ➡️ *(historical: awaiting 4 decisions)*
+- **US3 (Implementation Readiness)**: All 7 decisions clarified and documented (resolved 2026-11-13; record in `research.md`) ✅
 - **US4 (Documentation Completion)**: Complete package submitted for user approval ✅
 
 ---
