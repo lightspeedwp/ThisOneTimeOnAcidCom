@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Specification 005 RA-002: Code consumption atomicity** — Fixed replay test by preserving code records after consumption. The consume marker (atomic write with `onlyIfNew`) is the security-critical component that prevents reuse; code deletion is optional cleanup. Second attempts to redeem a code now correctly return 410 `code-used` instead of 400 `code-invalid`, enabling proper error classification on replay attacks. Updated 4 test assertions across 3 test files to verify code preservation.
+
 ### Added
 
 - **Specification 006 User Story 1: Seamless chapter access after email verification (T011–T020)** — Added `POST /api/reader/session` (`reader-session-create.ts`) that verifies the emailed code, consumes it, and sets a 30-day HttpOnly session cookie (201, token never in the body; 400/401/409/429/500 per contract). Chapter endpoints now authenticate from the cookie alone via a hashed-token session index, renew the session on each read, and refresh the cookie's Max-Age. Re-verifying on the same device rotates the token. 63 new tests cover creation, persistence across tabs and refreshes, renewal, and 401 handling for missing, expired and terminated sessions.
