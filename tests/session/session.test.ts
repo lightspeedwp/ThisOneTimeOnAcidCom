@@ -18,8 +18,11 @@ import { FingerprintInput } from '../../netlify/lib/reader-access/session';
 import * as cryptoModule from '../../netlify/lib/reader-access/crypto';
 import { generateSessionToken } from '../../netlify/lib/reader-access/crypto';
 import { updateSession } from '../../netlify/lib/reader-access/store';
-import { CLOCK_SKEW_TOLERANCE_MS } from '../../netlify/lib/reader-access/session-config';
-import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
+import {
+  CLOCK_SKEW_TOLERANCE_MS,
+  SESSION_LIFETIME_DAYS,
+  RENEWAL_COALESCE_WINDOW_MS,
+} from '../../netlify/lib/reader-access/session-config';
 
 // In-memory Netlify Blobs so the real store adapter runs. (An automock of
 // the store returned undefined from every call, so no session ever existed.)
@@ -56,6 +59,10 @@ describe('Session Service - Core Operations', () => {
 
   afterEach(() => {
     vi.clearAllMocks();
+    // Ensure timers are restored to real timers
+    if (vi.isFakeTimers()) {
+      vi.useRealTimers();
+    }
   });
 
   describe('createSession', () => {
@@ -176,10 +183,18 @@ describe('Session Service - Core Operations', () => {
     let testSession: any;
 
     beforeEach(async () => {
+      vi.useFakeTimers({ toFake: ['Date'] });
       testSession = await createSession(testEmail, '123456', fingerprintInput);
     });
 
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
     it('should extend expiry to 30 days from renewal time', async () => {
+      // Step past the renewal coalesce window (1 second) to exercise real renewal logic
+      vi.setSystemTime(Date.now() + 2000);
+
       const beforeRenewal = new Date();
       const renewed = await renewSession(testEmail, testSession.deviceId);
       const afterRenewal = new Date();
@@ -187,7 +202,7 @@ describe('Session Service - Core Operations', () => {
       const renewedAt = new Date(renewed.renewedAt);
       const expiresAt = new Date(renewed.expiresAt);
 
-      // Renewed at should be close to current time
+      // Renewed at should be close to current time (after coalesce window)
       expect(renewedAt.getTime()).toBeGreaterThanOrEqual(beforeRenewal.getTime());
       expect(renewedAt.getTime()).toBeLessThanOrEqual(afterRenewal.getTime());
 
@@ -198,16 +213,28 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should coalesce rapid renewals (prevent thundering herd)', async () => {
-      // First renewal
+      // Store the creation renewal time
+      const createdRenewedAt = new Date(testSession.renewedAt).getTime();
+      const createdExpiresAt = new Date(testSession.expiresAt).getTime();
+
+      // First renewal (should be coalesced, within 1 second of creation)
       const first = await renewSession(testEmail, testSession.deviceId);
 
-      // Immediate second renewal (within 1 second)
+      // Should return existing session without updating renewedAt
+      expect(first.sessionId).toBe(testSession.sessionId);
+      expect(new Date(first.renewedAt).getTime()).toBe(createdRenewedAt);
+      expect(new Date(first.expiresAt).getTime()).toBe(createdExpiresAt);
+
+      // Immediate second renewal (still within 1 second)
       const second = await renewSession(testEmail, testSession.deviceId);
 
-      // Should return same session without updating renewedAt
-      expect(first.sessionId).toBe(second.sessionId);
-      expect(new Date(first.expiresAt).getTime()).toBe(
-        new Date(second.expiresAt).getTime()
+      // Should still be coalesced
+      expect(second.sessionId).toBe(first.sessionId);
+      expect(new Date(second.renewedAt).getTime()).toBe(
+        new Date(first.renewedAt).getTime()
+      );
+      expect(new Date(second.expiresAt).getTime()).toBe(
+        new Date(first.expiresAt).getTime()
       );
     });
 
