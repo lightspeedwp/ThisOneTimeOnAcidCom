@@ -52,6 +52,9 @@ Ash's selected directions from the `/speckit-clarify` session, recorded in full 
 11. ~~Storage for codes, reader records and sessions (research R-02), and where the protected edition is kept so it is not bundled (R-03).~~ **RESOLVED (2026-11-19):**
     - **Constitution IV content location**: Approve amendment to Constitution IV to reflect `src/content/` as canonical (confirmed in-place by PR #608; this is the correct location). Amend `.specify/memory/constitution.md` per Constitution Amendment process.
     - **Protected edition storage**: Store in `netlify/functions/protected-content/` as server-only location; impossible to bundle via client globs. Approved chapters remain in `src/content/book/` and bundled by `bookContentLoader`. Edition served exclusively through chapter function (RA-035/RA-T037).
+12. **Contract authority for verification (raised 2026-11-26).** Spec 006 US1 (PR #653) made `POST /api/reader/verifications` an alias of spec 006's session creation, whose contract returns 201 `verified` and 401 `verification_failed`. Spec 005's [contract](contracts/reader-access-functions.md) specifies 200 `verified`, 400 `code-invalid`, 410 `code-expired` or `code-used`, and 429 `limited`. Ash to decide which contract governs; the other is then updated to match. Blocks RA-T030 and RA-T031.
+
+Item 10 note (2026-11-26): [deployment-validation.md](deployment-validation.md) records Netlify as the production host (RA-T052). The Vercel GitHub app still builds PR previews.
 
 ## Approval distinctions
 
