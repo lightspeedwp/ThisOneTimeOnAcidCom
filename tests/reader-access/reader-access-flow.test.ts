@@ -44,7 +44,7 @@ async function verifyReader(email: string): Promise<string> {
   expect(code).toMatch(/^\d{6}$/);
 
   const verified = await verifyHandler(jsonRequest(`${BASE}/api/reader/verifications`, { email, code }));
-  expect(verified.status).toBe(201);
+  expect(verified.status).toBe(200);
   return cookieFrom(verified);
 }
 
@@ -69,7 +69,8 @@ describe('US1 journey: seamless chapter access after email verification', () => 
     const wrong = sentCodes.get(email) === '000000' ? '111111' : '000000';
 
     const res = await verifyHandler(jsonRequest(`${BASE}/api/reader/verifications`, { email, code: wrong }));
-    expect(res.status).toBe(401);
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ state: 'code-invalid' });
   });
 
   it('T015: a new tab sends the same cookie and the session is recognised', async () => {

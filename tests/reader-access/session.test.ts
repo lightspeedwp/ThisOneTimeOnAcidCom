@@ -143,8 +143,8 @@ describe('US1 session service', () => {
       await createSessionFromVerification(email, code, fingerprint);
 
       await expect(createSessionFromVerification(email, code, fingerprint)).rejects.toMatchObject({
-        errorCode: 'verification_failed',
-        statusCode: 401,
+        errorCode: 'code_used',
+        statusCode: 410,
       });
     });
 
@@ -160,14 +160,20 @@ describe('US1 session service', () => {
       const email = uniqueEmail('expired-code');
       await seedCode(email, '123456', { expiresAt: new Date(Date.now() - 1000).toISOString() });
 
-      await expect(createSessionFromVerification(email, '123456', fingerprint)).rejects.toMatchObject({ statusCode: 401 });
+      await expect(createSessionFromVerification(email, '123456', fingerprint)).rejects.toMatchObject({
+        errorCode: 'code_expired',
+        statusCode: 410,
+      });
     });
 
     it('rejects a code that has hit its attempt limit', async () => {
       const email = uniqueEmail('limited');
       await seedCode(email, '123456', { attemptCount: 5 });
 
-      await expect(createSessionFromVerification(email, '123456', fingerprint)).rejects.toMatchObject({ statusCode: 401 });
+      await expect(createSessionFromVerification(email, '123456', fingerprint)).rejects.toMatchObject({
+        errorCode: 'limited',
+        statusCode: 429,
+      });
     });
 
     it('rotates the token when the same device re-verifies', async () => {

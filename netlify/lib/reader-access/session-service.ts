@@ -527,10 +527,12 @@ export function getSessionProperties(session: Session) {
 // User Story 1: seamless chapter access after email verification
 // ---------------------------------------------------------------------------
 
-/** Error codes from the session-api contract for session creation. */
+/** Error codes from spec 005 (reader-access-functions.md) verification contract. */
 export type SessionCreationErrorCode =
-  | 'invalid_verification'
-  | 'verification_failed'
+  | 'code_invalid'
+  | 'code_expired'
+  | 'code_used'
+  | 'limited'
   | 'device_limit_exceeded';
 
 /** Typed failure from createSessionFromVerification, carrying its HTTP status. */
@@ -547,11 +549,11 @@ export class SessionCreationError extends Error {
 /**
  * T017: Verify an emailed code and open a session for this device.
  *
- * 1. Look up the stored code; missing, expired or locked → 401
- * 2. Compare the code hash; a wrong code records an attempt → 401
+ * 1. Look up the stored code; missing → code_invalid; expired → code_expired; attempt-limited → limited
+ * 2. Compare the code hash; a wrong code records an attempt → code_invalid
  * 3. Consume the code atomically before any session is written: a
  *    conditional (onlyIfNew) marker write lets exactly one of several
- *    concurrent requests for the same code through; the rest get 401
+ *    concurrent requests for the same code through; the rest get code_used
  * 4. If this device already has a session, rotate it: new token, old
  *    token index removed, fresh 30-day window (no device slot consumed)
  * 5. Otherwise create a new session, enforcing the device limit (409)
@@ -560,7 +562,7 @@ export class SessionCreationError extends Error {
  * @param code Six-digit verification code
  * @param fingerprint Request fingerprint inputs
  * @returns The active session to set in the cookie
- * @throws SessionCreationError for verification or device-limit failures
+ * @throws SessionCreationError for verification or device-limit failures (spec 005 contract)
  */
 export async function createSessionFromVerification(
   email: string,
@@ -570,17 +572,29 @@ export async function createSessionFromVerification(
   const normalisedEmail = email.trim().toLowerCase();
 
   const stored = await getCode(normalisedEmail);
-  if (!stored || isCodeExpired(stored.expiresAt) || isCodeLimited(stored.attemptCount, stored.maxAttempts)) {
-    throw new SessionCreationError('verification_failed', 401);
+
+  // Step 1: Check if code exists and its state
+  if (!stored) {
+    throw new SessionCreationError('code_invalid', 400);
   }
 
+  if (isCodeExpired(stored.expiresAt)) {
+    throw new SessionCreationError('code_expired', 410);
+  }
+
+  if (isCodeLimited(stored.attemptCount, stored.maxAttempts)) {
+    throw new SessionCreationError('limited', 429);
+  }
+
+  // Step 2: Verify code hash (wrong code)
   if (!verifyCode(code, stored.codeHash, stored.salt)) {
     await incrementCodeAttempts(normalisedEmail);
-    throw new SessionCreationError('verification_failed', 401);
+    throw new SessionCreationError('code_invalid', 400);
   }
 
+  // Step 3: Consume code atomically (onlyIfNew prevents replay)
   if (!(await consumeCode(normalisedEmail, stored.codeHash))) {
-    throw new SessionCreationError('verification_failed', 401);
+    throw new SessionCreationError('code_used', 410);
   }
 
   const deviceId = generateDeviceFingerprint(fingerprint);
