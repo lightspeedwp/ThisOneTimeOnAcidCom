@@ -49,7 +49,7 @@ Recorded at Ash's request while finishing T069/T084. Each item below is deferred
 | `tasks.md` | 1.1.0 |
 | `references/01`–`06` | 01 v1.0.0, 02 v1.0.4, 03 v1.3.0, 04 v1.1.2, 05 v1.9.0, 06 v1.1.1 |
 | `exports/design-tokens.json` / `.css` | v2.0.0 (PR #648) |
-| Lock commit | *Merge commit of PR #649 (recorded after merge)* |
+| Lock commit | `482da4a` (Merge PR #649, 2026-11-26 11:32:54 UTC) |
 
 ---
 
