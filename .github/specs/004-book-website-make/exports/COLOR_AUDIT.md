@@ -3,7 +3,7 @@
 **Date**: 2026-11-20  
 **Phase**: 9 Convergence (T071)  
 **Baseline**: Design Brief v1.1.2  
-**Status**: Corrected 2026-11-20. The first audit missed non-baseline colours in the Prompt 3A/3C execution guides and data-model.md
+**Status**: Corrected 2026-11-20 (updated 2026-11-26). The first audit flagged `data-model.md` as pending but missed the non-baseline colours in the Prompt 3A/3C execution guides.
 
 
 > **Correction (Phase 9 reconciliation, 2026-11-20; updated 2026-11-26)**: An earlier version of this audit said no non-baseline colours were found. That was wrong: it checked the 3A/3C *contracts* but not their *execution guides*. The tables below show the current status, and items marked *historical* record what the first audit found.
