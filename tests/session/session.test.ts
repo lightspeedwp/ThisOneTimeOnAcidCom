@@ -19,7 +19,10 @@ import * as cryptoModule from '../../netlify/lib/reader-access/crypto';
 import { generateSessionToken } from '../../netlify/lib/reader-access/crypto';
 import { updateSession } from '../../netlify/lib/reader-access/store';
 import { CLOCK_SKEW_TOLERANCE_MS } from '../../netlify/lib/reader-access/session-config';
-import { SESSION_LIFETIME_DAYS } from '../../netlify/lib/reader-access/session-config';
+import {
+  SESSION_LIFETIME_DAYS,
+  RENEWAL_COALESCE_WINDOW_MS,
+} from '../../netlify/lib/reader-access/session-config';
 
 // In-memory Netlify Blobs so the real store adapter runs. (An automock of
 // the store returned undefined from every call, so no session ever existed.)
@@ -56,6 +59,7 @@ describe('Session Service - Core Operations', () => {
 
   afterEach(() => {
     vi.clearAllMocks();
+    vi.useRealTimers();
   });
 
   describe('createSession', () => {
@@ -180,6 +184,12 @@ describe('Session Service - Core Operations', () => {
     });
 
     it('should extend expiry to 30 days from renewal time', async () => {
+      // Step past the coalesce window (only Date is faked). Otherwise the
+      // renewal is skipped and renewedAt keeps the creation timestamp, which
+      // fails whenever the clock ticks between createSession and this line.
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(Date.now() + RENEWAL_COALESCE_WINDOW_MS + 1);
+
       const beforeRenewal = new Date();
       const renewed = await renewSession(testEmail, testSession.deviceId);
       const afterRenewal = new Date();

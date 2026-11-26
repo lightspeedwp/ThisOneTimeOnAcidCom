@@ -124,9 +124,12 @@ async function createSessionUnserialised(
   // A session for this same device is stored under the same key and is
   // replaced by the new one, so it must not count towards the limit:
   // re-verifying on a device the reader already uses is not a new device.
+  // Use isSessionActive (as getActiveSessionCount does) so expired sessions,
+  // which keep status 'active' in storage, free their slot too.
   const activeSessions = await listSessionsByEmail(email);
+  const checkedAt = new Date();
   const activeCount = activeSessions.filter(
-    (s) => s.status === 'active' && s.terminatedAt === null && s.deviceId !== deviceId
+    (s) => isSessionActive(s, checkedAt) && s.deviceId !== deviceId
   ).length;
 
   if (activeCount >= MAX_CONCURRENT_DEVICES) {
